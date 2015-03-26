@@ -14,12 +14,14 @@
   			<artifactId>slf4j-api</artifactId>
   			<version>1.7.5</version>
   			<scope>compile</scope>
+  			<optional>true</optional>
 		</dependency>
 		<dependency>
   			<groupId>org.slf4j</groupId>
   			<artifactId>slf4j-log4j12</artifactId>
   			<version>1.7.5</version>
   			<scope>compile</scope>
+  			<optional>true</optional>
 		</dependency>
 		<dependency> 
    			<groupId>javax.servlet</groupId> 
@@ -28,50 +30,60 @@
    			<scope>provided</scope> 
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>3.5.4-Final</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>3.5.4-Final</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
-		<!-- <dependency>
 		  	<groupId>org.hibernate</groupId>
 		  	<artifactId>hibernate-core</artifactId>
 		  	<version>4.3.6.Final</version>
 		  	<scope>compile</scope>
 		  	<optional>true</optional>
-		</dependency> -->
-		
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>1.0.1.Final</version>
-			<scope>compile</scope>
+		    <artifactId>hibernate-jpa-2.0-api</artifactId>
+		    <version>1.0.1.Final</version>
+		    <scope>compile</scope>
+		    <optional>true</optional>
+    	</dependency>
+    	<dependency>
+  			<groupId>org.apache.ibatis</groupId>
+  			<artifactId>ibatis-sqlmap</artifactId>
+  			<version>2.3.0</version>
+  			<scope>compile</scope>
+		    <optional>true</optional>
+		</dependency>
+		<dependency>
+  			<groupId>org.mybatis</groupId>
+  			<artifactId>mybatis</artifactId>
+  			<version>3.2.2</version>
+  			<scope>compile</scope>
+		    <optional>true</optional>
+		</dependency>
+		<dependency>
+  			<groupId>org.mybatis</groupId>
+  			<artifactId>mybatis-spring</artifactId>
+  			<version>1.2.0</version>
+  			<scope>compile</scope>
+		    <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>3.2.2.RELEASE</version>
             <scope>compile</scope>
+            <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>3.2.2.RELEASE</version>
             <scope>compile</scope>
+            <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>3.2.2.RELEASE</version>
             <scope>compile</scope>
+            <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
