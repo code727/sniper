@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年3月24日
+ * Create Date : 2015-3-24
  */
 
 package org.workin.persistence.sqlmap.dao;
