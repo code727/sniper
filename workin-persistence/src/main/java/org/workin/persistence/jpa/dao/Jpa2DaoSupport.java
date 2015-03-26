@@ -37,7 +37,7 @@ import org.workin.commons.util.StringUtils;
  */
 public abstract class Jpa2DaoSupport {
 	
-	@PersistenceContext(unitName="workin-fw")
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	public EntityManager getEntityManager() {

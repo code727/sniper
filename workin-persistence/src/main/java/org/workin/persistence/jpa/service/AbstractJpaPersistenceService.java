@@ -20,11 +20,14 @@ package org.workin.persistence.jpa.service;
 
 import java.io.Serializable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.util.ClassUtils;
 import org.workin.persistence.jpa.dao.JpaPersistenceDao;
+import org.workin.persistence.sqlmap.dao.SqlMapQuery;
 
 /**
  * @description JPA持久化服务抽象类
@@ -34,27 +37,48 @@ import org.workin.persistence.jpa.dao.JpaPersistenceDao;
 public abstract class AbstractJpaPersistenceService<T, PK extends Serializable>
 		implements JpaPersistenceService<T, PK>, InitializingBean {
 	
+	private static final Logger logger = LoggerFactory.getLogger(AbstractJpaPersistenceService.class);
+	
 	@Autowired
 	protected JpaPersistenceDao<T, PK> jpaPersistenceDao;
+	
+	@Autowired(required = false)
+	protected SqlMapQuery<T> sqlMapQuery;
 
 	@Override
 	public void setJpaPersistenceDao(JpaPersistenceDao<T, PK> jpaPersistenceDao) {
 		this.jpaPersistenceDao = jpaPersistenceDao;
 	}
-
+	
 	@Override
 	public JpaPersistenceDao<T, PK> getJpaPersistenceDao() {
 		return this.jpaPersistenceDao;
+	}
+	
+	public SqlMapQuery<T> getSqlMapQuery() {
+		return sqlMapQuery;
+	}
+
+	public void setSqlMapQuery(SqlMapQuery<T> sqlMapQuery) {
+		this.sqlMapQuery = sqlMapQuery;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (jpaPersistenceDao == null)
+		if (this.jpaPersistenceDao == null)
 			throw new BeanCreationException("JpaPersistenceDao object can not be null, please inject to spring container.");
 		
+		Class<T> entityType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 		// 将当前服务类管理的实体类型传递给持久化DAO，使DAO接口的方法能正常工作
-		this.jpaPersistenceDao.setEntityClass((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
+		this.jpaPersistenceDao.setEntityClass(entityType);
+		if (sqlMapQuery != null) {
+			// 同时开启ibatis/mybatis的查询接口，弥补JPA针对复杂查询难以处理的问题
+			sqlMapQuery.setEntityClass(entityType);
+			logger.info("Successful enable SqlMapQuery interface,implements class is :"
+					+ sqlMapQuery.getClass().getName());
+		}
+			
 	}
 
 }
