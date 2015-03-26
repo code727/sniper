@@ -267,7 +267,7 @@ public class ClassUtils {
         if (!isGenericType) {
             clazz = clazz.getSuperclass();
             if (clazz != Object.class)
-            	/* 非Object泛型类型时，则再根据此类型的超类再获取一次 */
+            	/* 非Object泛型类型时，则再根据此类型的超类获取一次 */
                 return getSuperClassGenricType(clazz, index);
             else
             	return clazz;
