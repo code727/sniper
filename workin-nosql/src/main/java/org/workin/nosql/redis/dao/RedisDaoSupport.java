@@ -1,0 +1,262 @@
+/*
+ * Copyright 2015 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * Create Date : 2015-3-26
+ */
+
+package org.workin.nosql.redis.dao;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DaoSupport;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.workin.commons.util.DateUtils;
+import org.workin.commons.util.StringUtils;
+import org.workin.nosql.redis.RedisRepository;
+import org.workin.nosql.redis.RedisRepositoryManager;
+
+/**
+ * @description Redis数据访问接口支持类
+ * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @version 1.0
+ */
+public abstract class RedisDaoSupport extends DaoSupport {
+		
+	@Autowired
+	protected RedisTemplate<?, ?> redisTemplate;
+	
+	@Autowired
+	protected RedisRepositoryManager repositoryManager;
+	
+	/** 当前库索引 */
+	private int currentIndex = 0;
+	
+	/** 全局键序列化器 */
+	private RedisSerializer<?> globalKeySerializer;
+	
+	/** 全局值序列化器 */
+	private RedisSerializer<?> globalValueSerializer;
+	
+	/** 全局哈希键序列化器 */
+	private RedisSerializer<?> globalHashKeySerializer;
+	
+	/** 全局哈希值序列化器 */
+	private RedisSerializer<?> globalHashValueSerializer;
+	
+	public RedisTemplate<?, ?> getRedisTemplate() {
+		return redisTemplate;
+	}
+
+	public void setRedisTemplate(RedisTemplate<?, ?> redisTemplate) {
+		this.redisTemplate = redisTemplate;
+	}
+
+	public RedisRepositoryManager getRepositoryManager() {
+		return repositoryManager;
+	}
+
+	public void setRepositoryManager(RedisRepositoryManager repositoryManager) {
+		this.repositoryManager = repositoryManager;
+	}
+		
+	@Override
+	protected void checkDaoConfig() throws IllegalArgumentException {
+		if (this.redisTemplate == null)
+			throw new IllegalArgumentException(
+					"RedisTemplate object can not be null, please inject to spring container.");
+		
+		if (this.repositoryManager == null)
+			throw new IllegalArgumentException(
+					"RedisRepositoryManager object can not be null, please inject to spring container.");
+		
+		this.globalKeySerializer = this.redisTemplate.getKeySerializer();
+		this.globalValueSerializer = this.redisTemplate.getValueSerializer();
+		this.globalHashKeySerializer = this.redisTemplate.getHashKeySerializer();
+		this.globalHashValueSerializer = this.redisTemplate.getHashValueSerializer();
+	}
+	
+	/**
+	 * @description 选择并连接库
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param connection
+	 * @param index
+	 * @return
+	 */
+	protected RedisRepository select(RedisConnection connection, int index) {
+		if (currentIndex != index) {
+			connection.select(index);
+			currentIndex = index;
+		}
+		return repositoryManager != null ? repositoryManager.getRepository(index) : null;
+	}
+	
+	/**
+	 * @description 设置当前库数据键的过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param connection
+	 * @param repository
+	 * @param key 数据键
+	 */
+	protected void setExpireTime(RedisConnection connection, RedisRepository repository, byte[] key) {
+		if (repository != null) {
+			String timeUnit = repository.getTimeUnit();
+			long expireTime = DateUtils.getSecond(repository.getExpireTime(), 
+					StringUtils.safeString(timeUnit).trim().toLowerCase());
+			if (expireTime > 0) 
+				connection.expire(key, expireTime);
+		}
+	}
+	
+	/** 
+	 * @description 设置当前库多个数据键的过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param connection
+	 * @param repository
+	 * @param keySet 数据键集
+	 */
+	protected void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keySet) {
+		if (repository != null) {
+			String timeUnit = repository.getTimeUnit();
+			long expireTime = DateUtils.getSecond(repository.getExpireTime(), 
+					StringUtils.safeString(timeUnit).trim().toLowerCase());
+			if (expireTime > 0) {
+				for (byte[] keyByte : keySet) 
+					connection.expire(keyByte, expireTime);
+			}
+		}
+	}
+	
+	/**
+	 * @description 选择指定索引库的键序列化器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param index
+	 * @return 
+	 */
+	protected RedisSerializer<?> selectKeySerializer(int index) {
+		if (repositoryManager != null) {
+			RedisRepository repository = repositoryManager.getRepository(index);
+			if (repository != null) {
+				RedisSerializer<?> keySerializer = repository.getKeySerializer();
+				return keySerializer != null ? keySerializer : globalKeySerializer;
+			} else
+				return globalKeySerializer;
+		} else
+			return globalKeySerializer;
+	}
+	
+	/**
+	 * @description 选择指定索引库的值序列化器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param index
+	 * @return
+	 */
+	protected RedisSerializer<?> selectValueSerializer(int index) {
+		if (repositoryManager != null) {
+			RedisRepository repository = repositoryManager.getRepository(index);
+			if (repository != null) {
+				RedisSerializer<?> valueSerializer = repository.getValueSerializer();
+				return valueSerializer != null ? valueSerializer : globalValueSerializer;
+			} else
+				return globalValueSerializer;
+		} else
+			return globalValueSerializer;
+	}
+	
+	/**
+	 * @description 选择指定索引库的哈希键序列化器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param index
+	 * @return
+	 */
+	protected RedisSerializer<?> selectHashKeySerializer(int index) {
+		if (repositoryManager != null) {
+			RedisRepository repository = repositoryManager.getRepository(index);
+			if (repository != null) {
+				RedisSerializer<?> hashKeySerializer = repository.getHashKeySerializer();
+				return hashKeySerializer != null ? hashKeySerializer : globalHashKeySerializer;
+			} else
+				return globalHashKeySerializer;
+		} else
+			return globalHashKeySerializer;
+	}
+	
+	/**
+	 * @description 选择指定索引库的哈希值序列化器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param index
+	 * @return
+	 */
+	protected RedisSerializer<?> selectHashValueSerializer(int index) {
+		if (repositoryManager != null) {
+			RedisRepository repository = repositoryManager.getRepository(index);
+			if (repository != null) {
+				RedisSerializer<?> hashValueSerializer = repository.getHashValueSerializer();
+				return hashValueSerializer != null ? hashValueSerializer : globalHashValueSerializer;
+			} else
+				return globalHashValueSerializer;
+		} else
+			return globalHashValueSerializer;
+	}
+	
+	/**
+	 * @description 将指定库的键值映射集序列化成Byte类型的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param index
+	 * @param kValues
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <K, V> Map<byte[], byte[]> serializeKeyValueToByteMap(int index, Map<K, V> kValues) {
+		RedisSerializer<K> fieldKeySerializer = (RedisSerializer<K>) selectKeySerializer(index);
+		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(index);
+		Map<byte[], byte[]> result = new HashMap<byte[], byte[]>();
+		Iterator<Entry<K, V>> iterator = kValues.entrySet().iterator();
+		while(iterator.hasNext()) {
+			Entry<K, V> entry = iterator.next();
+			result.put(fieldKeySerializer.serialize(entry.getKey()),
+					valueSerializer.serialize(entry.getValue()));
+		}
+		return result;
+	}
+	
+	/**
+	 * @description 将指定库的域值映射集序列化成Byte类型的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param index
+	 * @param fValues
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <F, V> Map<byte[], byte[]> serializeFiledValueToByteMap(int index, Map<F, V> fValues) {
+		RedisSerializer<F> fieldKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(index);
+		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(index);
+		Map<byte[], byte[]> result = new HashMap<byte[], byte[]>();
+		Iterator<Entry<F, V>> iterator = fValues.entrySet().iterator();
+		while(iterator.hasNext()) {
+			Entry<F, V> entry = iterator.next();
+			result.put(fieldKeySerializer.serialize(entry.getKey()),
+					valueSerializer.serialize(entry.getValue()));
+		}
+		return result;
+	}
+	
+}
