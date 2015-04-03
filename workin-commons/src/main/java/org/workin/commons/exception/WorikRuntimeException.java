@@ -24,9 +24,9 @@ package org.workin.commons.exception;
  * @version 1.0
  */
 public class WorikRuntimeException extends RuntimeException {
-
-	private static final long serialVersionUID = -5716193773553642413L;
 	
+	private static final long serialVersionUID = -3747309828506142444L;
+
 	public WorikRuntimeException() {
 		super();
 	}

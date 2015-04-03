@@ -25,8 +25,8 @@ package org.workin.commons.exception;
  */
 public class WorkinException extends Exception {
 
-	private static final long serialVersionUID = -6534267298840712176L;
-	
+	private static final long serialVersionUID = -4509546529648485172L;
+
 	public WorkinException() {
 		super();
 	}
