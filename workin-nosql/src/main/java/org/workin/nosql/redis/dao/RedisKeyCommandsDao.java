@@ -19,7 +19,12 @@
 package org.workin.nosql.redis.dao;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
+
+import org.springframework.data.redis.connection.DataType;
+import org.springframework.data.redis.connection.SortParameters;
 
 /**
  * @description Redis键命令行数据访问接口
@@ -59,6 +64,23 @@ public interface RedisKeyCommandsDao {
 	 * @return
 	 */
 	public <K> Set<K> keys(int dbIndex, String pattern);
+	
+	/**
+	 * @description 删除默认第0库指定的键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K> Long del(K key);
+	
+	/**
+	 * @description 删除指定库的键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @return
+	 */
+	public <K> Long del(int dbIndex, K key);
 	
 	/**
 	 * @description 删除默认第0库指定的多个键
@@ -130,6 +152,156 @@ public interface RedisKeyCommandsDao {
 	 */
 	public <K> Boolean expire(int dbIndex, K key, long seconds);
 	
+	/**
+	 * @description 设置默认第0库中指定键的过期时间戳
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param timestamp
+	 * @return
+	 */
+	public <K> Boolean expireAt(K key, long timestamp); 
 	
-
+	/**
+	 * @description 设置指定库中键的过期时间戳
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param timestamp
+	 * @return
+	 */
+	public <K> Boolean expireAt(int dbIndex, K key, long timestamp); 
+	
+	/**
+	 * @description 设置默认第0库中指定键的过期日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param date
+	 * @return
+	 */
+	public <K> Boolean expireAt(K key, Date date); 
+	
+	/**
+	 * @description 设置指定库中键的过期时间戳
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param date
+	 * @return
+	 */
+	public <K> Boolean expireAt(int dbIndex, K key, Date date); 
+		
+	/**
+	 * @description 将默认第0库的键移动到目标库
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param targetIndex
+	 * @return
+	 */
+	public <K> Boolean move(K key, int targetIndex);
+	
+	/**
+	 * @description 将指定库中的键移动到目标库
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param targetIndex
+	 * @return
+	 */
+	public <K> Boolean move(int dbIndex, K key, int targetIndex);
+	
+	/**
+	 * @description 获取默认第0库的指定键的剩余秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K> Long ttl(K key);
+	
+	/**
+	 * @description 获取指定库中的键的剩余秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @return
+	 */
+	public <K> Long ttl(int dbIndex, K key);
+	
+	/**
+	 * @description 将默认第0库的键按照指定的规则进行排序
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param params
+	 * @return
+	 */
+	public <K, V> List<V> sort(K key, SortParameters params);
+	
+	/**
+	 * @description 将指定库的键按照规则进行排序
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param params
+	 * @return
+	 */
+	public <K, V> List<V> sort(int dbIndex, K key, SortParameters params);
+	
+	/**
+	 * @description 将默认第0库的键按照指定的规则进行排序后返回存入目标键的结果个数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param params
+	 * @param targetKey
+	 * @return 
+	 */
+	public <K, V> Long sortCount(K key, SortParameters params, K targetKey);
+	
+	/**
+	 * @description 将指定库的键按照规则进行排序后返回存入目标键的结果个数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param params
+	 * @param targetKey
+	 * @return 存入目标键的结果个数
+	 */
+	public <K, V> Long sortCount(int dbIndex, K key, SortParameters params, K targetKey);
+	
+	/**
+	 * @description 将默认第0库的键按照指定的规则进行排序后返回存入目标键的结果列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param params
+	 * @param targetKey
+	 * @return 
+	 */
+	public <K, V> List<V> sortResult(K key, SortParameters params, K targetKey);
+	
+	/**
+	 * @description 将指定库的键按照规则进行排序后返回存入目标键的结果列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param params
+	 * @param targetKey
+	 * @return 存入目标键的结果个数
+	 */
+	public <K, V> List<V> sortResult(int dbIndex, K key, SortParameters params, K targetKey);
+	
+	/**
+	 * @description 获取默认第0库的键对应的值类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K> DataType type(K key);
+	
+	/**
+	 * @description 获取指定库的键对应的值类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @return
+	 */
+	public <K> DataType type(int dbIndex, K key);
+	
 }

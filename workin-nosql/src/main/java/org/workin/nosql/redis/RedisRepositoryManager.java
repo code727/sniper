@@ -44,9 +44,9 @@ public interface RedisRepositoryManager {
 	/**
 	 * @description 根据键获取映射集合里的某个库配置项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param index
+	 * @param dbIndex
 	 * @return
 	 */
-	public RedisRepository getRepository(int index);
+	public RedisRepository getRepository(int dbIndex);
 
 }

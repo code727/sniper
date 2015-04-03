@@ -44,10 +44,10 @@ public class RedisRepositoryManagerImpl implements RedisRepositoryManager {
 	}
 
 	@Override
-	public RedisRepository getRepository(int index) {
-		RedisRepository repository = repositories.get(index);
+	public RedisRepository getRepository(int dbIndex) {
+		RedisRepository repository = repositories.get(dbIndex);
 		if (repository == null)
-			logger.warn("Redis repository [index:" + index + "] configuration has not exist.Will be return null.");
+			logger.warn("Redis repository [index:" + dbIndex + "] configuration has not exist.Will be return null.");
 		return repository;
 	}
 

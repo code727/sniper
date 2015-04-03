@@ -24,6 +24,6 @@ package org.workin.nosql.redis.dao;
  * @version 1.0
  */
 public interface RedisCommandsDao extends RedisStringCommandsDao,
-		RedisHashCommandsDao, RedisListCommandsDao, RedisSetCommandsDao, RedisSortedSetCommandsDao {
+		RedisHashCommandsDao, RedisListCommandsDao, RedisSetCommandsDao, RedisSortedSetCommandsDao, RedisKeyCommandsDao {
 
 }

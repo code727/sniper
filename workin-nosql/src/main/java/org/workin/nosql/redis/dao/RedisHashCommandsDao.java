@@ -18,7 +18,10 @@
 
 package org.workin.nosql.redis.dao;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @description Redis哈希命令行数据访问接口
@@ -40,13 +43,13 @@ public interface RedisHashCommandsDao {
 	/**
 	 * @description 在指定索引库中执行hSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param index 库索引
+	 * @param dbIndex 库索引
 	 * @param key 键
 	 * @param field 域
 	 * @param value 值
 	 * @return
 	 */
-	public <K, F, V> Boolean hSet(int index, K key, F field, V value);
+	public <K, F, V> Boolean hSet(int dbIndex, K key, F field, V value);
 	
 	/**
 	 * @description 在默认第0库中执行hSetNX命令
@@ -61,13 +64,13 @@ public interface RedisHashCommandsDao {
 	/**
 	 * @description 在指定索引库中执行hSetNX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param index 库索引
+	 * @param dbIndex 库索引
 	 * @param key 键
 	 * @param field 域
 	 * @param value 值
 	 * @return
 	 */
-	public <K, F, V> Boolean hSetNX(int index, K key, F field, V value);
+	public <K, F, V> Boolean hSetNX(int dbIndex, K key, F field, V value);
 	
 	/**
 	 * @description 在默认第0库中执行hMSet命令
@@ -80,10 +83,211 @@ public interface RedisHashCommandsDao {
 	/**
 	 * @description 在指定索引库中执行hMSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param index 库索引
+	 * @param dbIndex 库索引
 	 * @param key 键
 	 * @param fValues 域-值映射集
 	 */
-	public <K, F, V> void hMSet(int index, K key, Map<F, V> fValues);
+	public <K, F, V> void hMSet(int dbIndex, K key, Map<F, V> fValues);
+	
+	/**
+	 * @description 删除默认第0库指定键对应的域值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param filed
+	 * @return
+	 */
+	public <K, F> Boolean hDel(K key, F filed);
+	
+	/**
+	 * @description 删除指定库键对应的域值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param filed
+	 * @return
+	 */
+	public <K, F> Boolean hDel(int dbIndex, K key, F filed);
+	
+	/**
+	 * @description 删除默认第0库指定键对应的多个域值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param fileds
+	 * @return
+	 */
+	public <K, F> Boolean hDel(K key, F[] fileds);
+	
+	/**
+	 * @description 删除指定库键对应的多个域值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param fileds
+	 * @return
+	 */
+	public <K, F> Boolean hDel(int dbIndex, K key, F[] fileds);
+	
+	/**
+	 * @description 删除默认第0库指定键对应的多个域值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param fileds
+	 * @return
+	 */
+	public <K, F> Boolean hDel(K key, Collection<F> fileds);
+	
+	/**
+	 * @description 删除指定库键对应的多个域值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param fileds
+	 * @return
+	 */
+	public <K, F> Boolean hDel(int dbIndex, K key, Collection<F> fileds);
+	
+	/**
+	 * @description 判断默认第0库指定键对应域是否存在
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param filed
+	 * @return
+	 */
+	public <K, F> Boolean hExists(K key, F filed);
+	
+	/**
+	 * @description 判断指定库键对应域是否存在
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param filed
+	 * @return
+	 */
+	public <K, F> Boolean hExists(int dbIndex, K key, F filed);
+	
+	/**
+	 * @description 在默认第0库中执行hGet命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param filed
+	 * @return
+	 */
+	public <K, F, V> V hGet(K key, F filed);
+	
+	/**
+	 * @description 在指定库中执行hGet命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param filed
+	 * @return
+	 */
+	public <K, F, V> V hGet(int dbIndex, K key, F filed);
+	
+	/**
+	 * @description 在默认第0库中执行hGetAll命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return 域值映射集
+	 */
+	public <K, F, V> Map<F, V> hGetAll(K key);
+	
+	/** 
+	 * @description 在指定库中执行hGetAll命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @return
+	 */
+	public <K, F, V> Map<F, V> hGetAll(int dbIndex, K key);
+	
+	/**
+	 * @description 在默认第0库中执行hKeys命令，获取键对应的所有域
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K, F> Set<F> hKeys(K key);
+	
+	/**
+	 * @description 在指定库中执行hKeys命令，获取键对应的所有域
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @return
+	 */
+	public <K, F> Set<F> hKeys(int dbIndex, K key);
+	
+	/**
+	 * @description 在默认第0库中执行hLen命令，获取键对应的域个数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K> Long hLen(K key);
+	
+	/**
+	 * @description 在指定库中执行hLen命令，获取键对应的域个数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @return
+	 */
+	public <K> Long hLen(int dbIndex, K key);
+	
+	/**
+	 * @description 在默认第0库中执行hMGet命令，获取键对应的多个域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param fields
+	 * @return
+	 */
+	public <K, F, V> List<V> hMGet(K key, F[] fields);
+	
+	/**
+	 * @description 在指定库中执行hMGet命令，获取键对应的多个域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param fields
+	 * @return
+	 */
+	public <K, F, V> List<V> hMGet(int dbIndex, K key, F[] fields);
+	
+	/**
+	 * @description 在默认第0库中执行hMGet命令，获取键对应的多个域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param fields
+	 * @return
+	 */
+	public <K, F, V> List<V> hMGet(K key, Collection<F> fields);
+	
+	/**
+	 * @description 在指定库中执行hMGet命令，获取键对应的多个域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param fields
+	 * @return
+	 */
+	public <K, F, V> List<V> hMGet(int dbIndex, K key, Collection<F> fields);
+	
+	/**
+	 * @description 在默认第0库中执行hVals命令，获取键对应的所有域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K, V> List<V> hVals(K key);
+	
+	/**
+	 * @description 在指定库中执行hMGet命令，获取键对应的所有域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @return
+	 */
+	public <K, V> List<V> hVals(int dbIndex, K key);
 
 }
