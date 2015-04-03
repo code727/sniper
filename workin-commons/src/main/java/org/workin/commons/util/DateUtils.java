@@ -121,7 +121,7 @@ public class DateUtils {
 	 * @return
 	 */
 	private static SimpleDateFormat getDateFormat(String pattern) {
-		if (StringUtils.isNotBlank(pattern))
+		if (StringUtils.isBlank(pattern))
 			pattern = DEFAULT_DATETIME_FORMAT;
 		
 		Map<String, SimpleDateFormat> formateMap = dateFormates.get();
@@ -224,6 +224,39 @@ public class DateUtils {
 	public static long stringToMillis(String dateString, String pattern) {
 		Date date = stringToDate(dateString, pattern);
 		return date != null ? date.getTime() : 0L;
+	}
+	
+	/**
+	 * @description 以默认格式将字符串转换成Unix时间戳
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dateString
+	 * @return
+	 */
+	public static long stringToUnixTimestamp(String dateString) {
+		return stringToUnixTimestamp(dateString, DEFAULT_DATETIME_FORMAT);
+	}
+	
+	/**
+	 * @description 以指定格式将字符串转换成Unix时间戳
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dateString
+	 * @param pattern
+	 * @return
+	 */
+	public static long stringToUnixTimestamp(String dateString, String pattern) {
+		return dateToUnixTimestamp(stringToDate(dateString, pattern));
+	}
+	
+	/**
+	 * @description 将指定日期转换成Unix时间戳
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @return
+	 */
+	public static long dateToUnixTimestamp(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar.getTimeInMillis()/1000;
 	}
 	
 	/**
@@ -579,11 +612,4 @@ public class DateUtils {
 		return result;
 	}
 	
-	public static void main(String[] args) {
-		Date start = new Date();
-		for (int i = 0; i < 100000; i++)
-			dateToString(new Date());
-		System.out.println(getIntervalMillis(start, new Date()));
-	}
-				
 }
