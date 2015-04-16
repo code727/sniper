@@ -149,101 +149,6 @@ public interface RedisListCommandsDao {
 	public <K, V> Long lPushX(int dbIndex, K key, V value);
 	
 	/**
-	 * @description 在默认第0库中执行rPush命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param value
-	 * @return
-	 */
-	public <K, V> Long rPush(K key, V value);
-	
-	/**
-	 * @description 在指定索引库中执行lPush命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param key
-	 * @param value
-	 * @return
-	 */
-	public <K, V> Long rPush(int dbIndex, K key, V value);
-	
-	/**
-	 * @description 在默认第0库中批量执行rPush命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param values
-	 * @return
-	 */
-	public <K, V> Long rPush(K key, V[] values);
-	
-	/**
-	 * @description 在指定索引库中批量执行rPush命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param key
-	 * @param values
-	 * @return
-	 */
-	public <K, V> Long rPush(int dbIndex, K key, V[] values);
-	
-	/**
-	 * @description 在默认第0库中批量执行rPush命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param values
-	 * @return
-	 */
-	public <K, V> Long rPush(K key, Collection<V> values);
-	
-	/**
-	 * @description 在指定索引库中批量执行lPushX命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param key
-	 * @param values
-	 * @return
-	 */
-	public <K, V> Long rPush(int dbIndex, K key, Collection<V> values);
-	
-	/**
-	 * @description 在默认第0库中执行rPushX命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param value
-	 * @return
-	 */
-	public <K, V> Long rPushX(K key, V value);
-	
-	/**
-	 * @description 在指定索引库中执行lPushX命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param key
-	 * @param value
-	 * @return
-	 */
-	public <K, V> Long rPushX(int dbIndex, K key, V value);
-	
-	/**
-	 * @description 在默认第0库中执行rPopLPush命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param srcKey
-	 * @param destKey
-	 * @return
-	 */
-	public <K, V> V rPopLPush(K srcKey, K destKey);
-	
-	/**
-	 * @description 在指定索引库中执行rPopLPush命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param srcKey
-	 * @param destKey
-	 * @return
-	 */
-	public <K, V> V rPopLPush(int dbIndex, K srcKey, K destKey);
-	
-	/**
 	 * @description 在默认第0库中执行lIndex命令，获取指定下标位对应的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -396,7 +301,102 @@ public interface RedisListCommandsDao {
 	 * @param end
 	 */
 	public <K> void lTrim(int dbIndex, K key, long begin, long end);
-
+	
+	/**
+	 * @description 在默认第0库中执行rPush命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public <K, V> Long rPush(K key, V value);
+	
+	/**
+	 * @description 在指定索引库中执行lPush命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public <K, V> Long rPush(int dbIndex, K key, V value);
+	
+	/**
+	 * @description 在默认第0库中批量执行rPush命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param values
+	 * @return
+	 */
+	public <K, V> Long rPush(K key, V[] values);
+	
+	/**
+	 * @description 在指定索引库中批量执行rPush命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param values
+	 * @return
+	 */
+	public <K, V> Long rPush(int dbIndex, K key, V[] values);
+	
+	/**
+	 * @description 在默认第0库中批量执行rPush命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param values
+	 * @return
+	 */
+	public <K, V> Long rPush(K key, Collection<V> values);
+	
+	/**
+	 * @description 在指定索引库中批量执行lPushX命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param values
+	 * @return
+	 */
+	public <K, V> Long rPush(int dbIndex, K key, Collection<V> values);
+	
+	/**
+	 * @description 在默认第0库中执行rPushX命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public <K, V> Long rPushX(K key, V value);
+	
+	/**
+	 * @description 在指定索引库中执行lPushX命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public <K, V> Long rPushX(int dbIndex, K key, V value);
+	
+	/**
+	 * @description 在默认第0库中执行rPopLPush命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param srcKey
+	 * @param destKey
+	 * @return
+	 */
+	public <K, V> V rPopLPush(K srcKey, K destKey);
+	
+	/**
+	 * @description 在指定索引库中执行rPopLPush命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param srcKey
+	 * @param destKey
+	 * @return
+	 */
+	public <K, V> V rPopLPush(int dbIndex, K srcKey, K destKey);
+	
 	/**
 	 * @description 在默认第0库中执行rPop命令，删除并返回原列表栈底的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

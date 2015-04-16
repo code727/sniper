@@ -52,589 +52,7 @@ import org.workin.nosql.redis.RedisRepository;
  * @version 1.0
  */
 public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
-
-	@Override
-	public <K, V> void set(K key, V value) {
-		set(0, key, value);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> void set(final int dbIndex, final K key, final V value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [set].");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [set].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		redisTemplate.execute(new RedisCallback<Object>() {
-			
-			@Override
-			public Object doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);
-				RedisRepository repository = select(connection, dbIndex);
-				connection.set(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
-				return null;
-			}
-		});
-	}
-
-	@Override
-	public <K, V> Boolean setNX(K key, V value) {
-		return setNX(0, key, value);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> Boolean setNX(final int dbIndex, final K key, final V value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [setNX].");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [setNX].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
-
-			@Override
-			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);	
-				RedisRepository repository = select(connection, dbIndex);
-				Boolean result = connection.setNX(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
-				return result;
-			}
-		});
-	}
 	
-	@Override
-	public <K, V> void setEx(K key, V value) {
-		setEx(0, key, value);
-	}
-
-	@Override
-	public <K, V> void setEx(int dbIndex, K key, V value) {
-		setEx(dbIndex, key, getExpireSecond(dbIndex), value);	
-	}
-
-	@Override
-	public <K, V> void setEx(K key, long seconds, V value) {
-		setEx(0, key, seconds, value);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> void setEx(final int dbIndex, final K key, final long seconds, final V value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [setEx].");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [setEx].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		redisTemplate.execute(new RedisCallback<Object>() {
-
-			@Override
-			public Object  doInRedis(RedisConnection connection) throws DataAccessException {
-				select(connection, dbIndex);
-				if (seconds > 0)
-					connection.setEx(keySerializer.serialize(key), seconds, valueSerializer.serialize(value));
-				else
-					// 秒数小于等于0时永不过期
-					connection.set(keySerializer.serialize(key), valueSerializer.serialize(value));
-				return null;
-			}
-		});
-	}
-	
-	@Override
-	public <K, V> void mSet(Map<K, V> kValues) {
-		mSet(0, kValues);
-	}
-
-	@Override
-	public <K, V> void mSet(final int dbIndex, final Map<K, V> kValues) {
-		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues),
-				"Key-value map can not be empty of command [mSet].");
-		
-		redisTemplate.execute(new RedisCallback<Object>() {
-
-			@Override
-			public Object doInRedis(RedisConnection connection) throws DataAccessException {
-				Map<byte[], byte[]> byteMap = serializeKeyValueToByteMap(dbIndex, kValues);
-				RedisRepository repository = select(connection, dbIndex);
-				connection.mSet(byteMap);
-				setExpireTime(connection, repository, byteMap.keySet());
-				return null;
-			}
-		});
-	}
-
-	@Override
-	public <K, V> void mSetNX(Map<K, V> kValues) {
-		mSetNX(0, kValues);
-	}
-
-	@Override
-	public <K, V> void mSetNX(final int dbIndex, final Map<K, V> kValues) {
-		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues),
-				"Key-value map can not be empty of command [mSetNX].");
-		
-		redisTemplate.execute(new RedisCallback<Object>() {
-
-			@Override
-			public Object doInRedis(RedisConnection connection) throws DataAccessException {
-				Map<byte[], byte[]> byteMap = serializeKeyValueToByteMap(dbIndex, kValues);
-				RedisRepository repository = select(connection, dbIndex);
-				connection.mSetNX(byteMap);
-				setExpireTime(connection, repository, byteMap.keySet());
-				return null;
-			}
-		});
-	}
-	
-	@Override
-	public <K, V> void setRange(K key, long offset, V value) {
-		setRange(0, key, offset, value);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> void setRange(final int dbIndex, final K key, final long offset, final V value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [setRange].");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [setRange].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		redisTemplate.execute(new RedisCallback<Object>() {
-
-			@Override
-			public Object doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);	
-				RedisRepository repository = select(connection, dbIndex);
-				connection.setRange(keyByte, valueSerializer.serialize(value), offset);
-				setExpireTime(connection, repository, keyByte);
-				return null;
-			}
-			
-		});
-	}
-
-	@Override
-	public <K, F, V> Boolean hSet(K key, F field, V value) {
-		return hSet(0, key, field, value);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, F, V> Boolean hSet(final int dbIndex, final K key, final F field, final V value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [hSet].");
-		AssertUtils.assertNotNull(field, "Field can not be null of command [hSet].");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [hSet].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<F> fieldKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
-
-			@Override
-			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);	
-				RedisRepository repository = select(connection, dbIndex);
-				Boolean result = connection.hSet(keyByte, fieldKeySerializer.serialize(field),
-						valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
-				return result;
-			}
-		});
-	}
-	
-	@Override
-	public <K, F, V> Boolean hSetNX(K key, F field, V value) {
-		return hSetNX(0, field, value);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, F, V> Boolean hSetNX(final int dbIndex, final K key, final F field, final V value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [hSetNX].");
-		AssertUtils.assertNotNull(field, "Field can not be null of command [hSetNX].");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [hSetNX].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<F> fieldKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
-
-			@Override
-			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);	
-				RedisRepository repository = select(connection, dbIndex);
-				Boolean result = connection.hSetNX(keyByte, fieldKeySerializer.serialize(field),
-						valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
-				return result;
-			}
-		});
-	}
-
-	@Override
-	public <K, F, V> void hMSet(K key, Map<F, V> fValues) {
-		hMSet(0, key, fValues);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, F, V> void hMSet(final int dbIndex, final K key, final Map<F, V> fValues) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [hMSet].");
-		AssertUtils.assertTrue(MapUtils.isNotEmpty(fValues),
-				"Field-value map can not be empty of command [hMSet].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		redisTemplate.execute(new RedisCallback<Object>() {
-
-			@Override
-			public Object doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);	
-				RedisRepository repository = select(connection, dbIndex);
-				connection.hMSet(keyByte, serializeFiledValueToByteMap(dbIndex, fValues));
-				setExpireTime(connection, repository, keyByte);
-				return null;
-			}
-		});
-	}
-	
-	@Override
-	public <K, V> Long lInsert(K key, Position where, V pivot, V value) {
-		return lInsert(0, key, where, pivot, value);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> Long lInsert(final int dbIndex, final K key, final Position where, final V pivot, final V value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [lInsert].");
-		AssertUtils.assertNotNull(where, "Insert postion can not be null of command [lInsert].");
-		AssertUtils.assertNotNull(pivot, "Postion value can not be null of command [lInsert].");
-		AssertUtils.assertNotNull(value, "Insert value can not be null of command [lInsert].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
-
-			@Override
-			public Long doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);
-				RedisRepository repository = select(connection, dbIndex);
-				Long result = connection.lInsert(keyByte, where,
-						valueSerializer.serialize(pivot), valueSerializer.serialize(value));
-				// 重新设置键的过期时间
-				setExpireTime(connection, repository, keyByte);
-				return result;
-			}
-		});
-	}
-	
-	@Override
-	public <K, V> void lSet(K key, long posttion, V value) {
-		lSet(0, key, posttion, value);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> void lSet(final int dbIndex, final K key, final long posttion, final V value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [lSet].");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [lSet].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		redisTemplate.execute(new RedisCallback<Object>() {
-
-			@Override
-			public Object doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);	
-				RedisRepository repository = select(connection, dbIndex);
-				connection.lSet(keyByte, posttion, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
-				return null;
-			}
-		});
-	}
-
-	@Override
-	public <K, V> Long lPush(K key, V value) {
-		return lPush(0, key, value);
-	}
-
-	@Override
-	public <K, V> Long lPush(int dbIndex, K key, V value) {
-		AssertUtils.assertNotNull(value, "Value can not be null of command [lPush].");
-		return lPush(dbIndex, key, new Object[] { value });
-	}
-	
-	@Override
-	public <K, V> Long lPush(K key, V[] values) {
-		return lPush(0, key, values);
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> Long lPush(final int dbIndex, final K key, final V[] values) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [lPush].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(values), "Values can not be empty of command [lPush].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
-
-			@Override
-			public Long doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);
-				RedisRepository repository = select(connection, dbIndex);
-				
-				long result = 0;
-				for (V value : values) 
-					result = result + NumberUtils.safeLong(connection.lPush(keyByte, valueSerializer.serialize(value)));
-				
-				setExpireTime(connection, repository, keyByte);
-				return result;
-			}
-		});
-	}
-	
-	@Override
-	public <K, V> Long lPush(K key, Collection<V> values) {
-		return lPush(0, key, values); 
-	}
-
-	@Override
-	public <K, V> Long lPush(int dbIndex, K key, Collection<V> values) {
-		return lPush(dbIndex, key, CollectionUtils.toObjectArray(values));
-	}
-
-	@Override
-	public <K, V> Long lPushX(K key, V value) {
-		return lPushX(0, key, value);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> Long lPushX(final int dbIndex, final K key, final V value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [lPushX].");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [lPushX].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
-			
-			@Override
-			public Long doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);
-				RedisRepository repository = select(connection, dbIndex);
-				Long result = connection.lPushX(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
-				return result;
-			}
-		});
-	}
-	
-	@Override
-	public <K, V> Long rPush(K key, V value) {
-		return rPush(0, key, value);
-	}
-
-	@Override
-	public <K, V> Long rPush(int dbIndex, K key, V value) {
-		AssertUtils.assertNotNull(value, "Value can not be null of command [rPush].");
-		return rPush(dbIndex, key, new Object[] { value });
-	}
-	
-	@Override
-	public <K, V> Long rPush(K key, V[] values) {
-		return rPush(0, key, values);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> Long rPush(final int dbIndex, final K key, final V[] values) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [rPush].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(values), "Values can not be empty of command [rPush].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
-
-			@Override
-			public Long doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);
-				RedisRepository repository = select(connection, dbIndex);
-				
-				long result = 0;
-				for (V value : values) 
-					result = result + NumberUtils.safeLong(connection.rPush(keyByte, valueSerializer.serialize(value)));
-				
-				setExpireTime(connection, repository, keyByte);
-				return result;
-			}
-		});
-	}
-	
-	@Override
-	public <K, V> Long rPush(K key, Collection<V> values) {
-		return rPush(0, key, values);
-	}
-
-	@Override
-	public <K, V> Long rPush(final int dbIndex, final K key, final Collection<V> values) {
-		return rPush(dbIndex, key, CollectionUtils.toObjectArray(values));
-	}
-
-	@Override
-	public <K, V> Long rPushX(K key, V value) {
-		return rPushX(0, key, value);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> Long rPushX(final int dbIndex, final K key, final V value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [rPushX].");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [rPushX].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
-			
-			@Override
-			public Long doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);
-				RedisRepository repository = select(connection, dbIndex);
-				Long result = connection.rPushX(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
-				return result;
-			}
-		});
-	}
-	
-	@Override
-	public <K, V> V rPopLPush(K srcKey, K destKey) {
-		return rPopLPush(0, srcKey, destKey);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> V rPopLPush(final int dbIndex, final K srcKey, final K destKey) {
-		AssertUtils.assertNotNull(srcKey, "Source key can not be null of command [rPopLPush].");
-		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [rPopLPush].");
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<V>() {
-
-			@Override
-			public V doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] destKeyByte = keySerializer.serialize(destKey);
-				RedisRepository repository = select(connection, dbIndex);
-				// 将源列表中最后一个元素取出后存入目标列表
-				byte[] destValueByte = connection.rPopLPush(keySerializer.serialize(srcKey), destKeyByte);
-				// 设置目标键的过期时间
-				setExpireTime(connection, repository, destKeyByte);
-				return (V) selectValueSerializer(dbIndex).deserialize(destValueByte);
-			}
-		});
-	}
-
-	@Override
-	public <K, V> Boolean sAdd(K key, V member) {
-		return sAdd(0, key, member);
-	}
-
-	@Override
-	public <K, V> Boolean sAdd(int dbIndex, K key, V member) {
-		AssertUtils.assertNotNull(member, "Member can not be null of command [sAdd].");
-		Collection<V> members = CollectionUtils.newArrayList();
-		members.add(member);
-		return sAdd(dbIndex, key, members);
-	}
-	
-	@Override
-	public <K, V> Boolean sAdd(K key, V[] members) {
-		return sAdd(0, key, members);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> Boolean sAdd(final int dbIndex, final K key, final V[] members) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [sAdd].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(members), "Members can not be empty of command [sAdd].");
-				
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
-			
-			@Override
-			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);
-				RedisRepository repository = select(connection, dbIndex);
-				
-				boolean result = true;
-				for (V member : members) 
-					result = result && connection.sAdd(keyByte, valueSerializer.serialize(member));
-				
-				setExpireTime(connection, repository, keyByte);
-				return result;
-			}
-		});
-	}
-	
-	@Override
-	public <K, V> Boolean sAdd(K key, Collection<V> members) {
-		return sAdd(0, key, members);
-	}
-
-	@Override
-	public <K, V> Boolean sAdd(int dbIndex, K key, Collection<V> members) {
-		return sAdd(dbIndex, key, CollectionUtils.toObjectArray(members));
-	}
-
-	@Override
-	public <K, V> Boolean zAdd(K key, double score, V member) {
-		return zAdd(0, key, score, member);
-	}
-
-	@Override
-	public <K, V> Boolean zAdd(int dbIndex, K key, double score, V member) {
-		AssertUtils.assertNotNull(member, "Member can not be null of command [zAdd].");
-		Map<Double, V> scoreMembers = MapUtils.newHashMap();
-		scoreMembers.put(score, member);
-		return zAdd(dbIndex, key, scoreMembers);
-	}
-
-	@Override
-	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers) {
-		return zAdd(0, key, scoreMembers);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <K, V> Boolean zAdd(final int dbIndex, final K key, final Map<Double, V> scoreMembers) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [zAdd].");
-		AssertUtils.assertTrue(MapUtils.isNotEmpty(scoreMembers), 
-				"Score-member map can not be empty of command [zAdd].");
-		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
-
-			@Override
-			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);
-				RedisRepository repository = select(connection, dbIndex);
-				Iterator<Entry<Double, V>> iterator = scoreMembers.entrySet().iterator();
-				boolean result = true;
-				while (iterator.hasNext()) {
-					Entry<Double, V> entry = iterator.next();
-					result = result && connection.zAdd(keyByte, 
-							NumberUtils.safeDouble(entry.getKey()), valueSerializer.serialize(entry.getValue()));
-				}
-				setExpireTime(connection, repository, keyByte);
-				return result;
-			}
-		});
-	}
-
 	@Override
 	public <K> Set<K> keys() {
 		return keys(0);
@@ -828,7 +246,7 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 			}
 		});
 	}
-
+	
 	@Override
 	public <K, V> List<V> sort(K key, SortParameters params) {
 		return sort(0, key, params);
@@ -927,6 +345,169 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 				select(connection, dbIndex);
 				return connection.type(keySerializer.serialize(key));
 			}
+		});
+	}
+
+	@Override
+	public <K, V> void set(K key, V value) {
+		set(0, key, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> void set(final int dbIndex, final K key, final V value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [set].");
+		AssertUtils.assertNotNull(value, "Value can not be null of command [set].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		redisTemplate.execute(new RedisCallback<Object>() {
+			
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);
+				RedisRepository repository = select(connection, dbIndex);
+				connection.set(keyByte, valueSerializer.serialize(value));
+				setExpireTime(connection, repository, keyByte);
+				return null;
+			}
+		});
+	}
+
+	@Override
+	public <K, V> Boolean setNX(K key, V value) {
+		return setNX(0, key, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Boolean setNX(final int dbIndex, final K key, final V value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [setNX].");
+		AssertUtils.assertNotNull(value, "Value can not be null of command [setNX].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Boolean>() {
+
+			@Override
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);	
+				RedisRepository repository = select(connection, dbIndex);
+				Boolean result = connection.setNX(keyByte, valueSerializer.serialize(value));
+				setExpireTime(connection, repository, keyByte);
+				return result;
+			}
+		});
+	}
+	
+	@Override
+	public <K, V> void setEx(K key, V value) {
+		setEx(0, key, value);
+	}
+
+	@Override
+	public <K, V> void setEx(int dbIndex, K key, V value) {
+		setEx(dbIndex, key, getExpireSecond(dbIndex), value);	
+	}
+
+	@Override
+	public <K, V> void setEx(K key, long seconds, V value) {
+		setEx(0, key, seconds, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> void setEx(final int dbIndex, final K key, final long seconds, final V value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [setEx].");
+		AssertUtils.assertNotNull(value, "Value can not be null of command [setEx].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		redisTemplate.execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object  doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				if (seconds > 0)
+					connection.setEx(keySerializer.serialize(key), seconds, valueSerializer.serialize(value));
+				else
+					// 秒数小于等于0时永不过期
+					connection.set(keySerializer.serialize(key), valueSerializer.serialize(value));
+				return null;
+			}
+		});
+	}
+	
+	@Override
+	public <K, V> void mSet(Map<K, V> kValues) {
+		mSet(0, kValues);
+	}
+
+	@Override
+	public <K, V> void mSet(final int dbIndex, final Map<K, V> kValues) {
+		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues),
+				"Key-value map can not be empty of command [mSet].");
+		
+		redisTemplate.execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				Map<byte[], byte[]> byteMap = serializeKeyValueToByteMap(dbIndex, kValues);
+				RedisRepository repository = select(connection, dbIndex);
+				connection.mSet(byteMap);
+				setExpireTime(connection, repository, byteMap.keySet());
+				return null;
+			}
+		});
+	}
+
+	@Override
+	public <K, V> void mSetNX(Map<K, V> kValues) {
+		mSetNX(0, kValues);
+	}
+
+	@Override
+	public <K, V> void mSetNX(final int dbIndex, final Map<K, V> kValues) {
+		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues),
+				"Key-value map can not be empty of command [mSetNX].");
+		
+		redisTemplate.execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				Map<byte[], byte[]> byteMap = serializeKeyValueToByteMap(dbIndex, kValues);
+				RedisRepository repository = select(connection, dbIndex);
+				connection.mSetNX(byteMap);
+				setExpireTime(connection, repository, byteMap.keySet());
+				return null;
+			}
+		});
+	}
+	
+	@Override
+	public <K, V> void setRange(K key, long offset, V value) {
+		setRange(0, key, offset, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> void setRange(final int dbIndex, final K key, final long offset, final V value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [setRange].");
+		AssertUtils.assertNotNull(value, "Value can not be null of command [setRange].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		redisTemplate.execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);	
+				RedisRepository repository = select(connection, dbIndex);
+				connection.setRange(keyByte, valueSerializer.serialize(value), offset);
+				setExpireTime(connection, repository, keyByte);
+				return null;
+			}
+			
 		});
 	}
 
@@ -1161,6 +742,90 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 			}
 		});
 	}
+	
+	@Override
+	public <K, F, V> Boolean hSet(K key, F field, V value) {
+		return hSet(0, key, field, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, F, V> Boolean hSet(final int dbIndex, final K key, final F field, final V value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [hSet].");
+		AssertUtils.assertNotNull(field, "Field can not be null of command [hSet].");
+		AssertUtils.assertNotNull(value, "Value can not be null of command [hSet].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<F> fieldKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Boolean>() {
+
+			@Override
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);	
+				RedisRepository repository = select(connection, dbIndex);
+				Boolean result = connection.hSet(keyByte, fieldKeySerializer.serialize(field),
+						valueSerializer.serialize(value));
+				setExpireTime(connection, repository, keyByte);
+				return result;
+			}
+		});
+	}
+	
+	@Override
+	public <K, F, V> Boolean hSetNX(K key, F field, V value) {
+		return hSetNX(0, field, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, F, V> Boolean hSetNX(final int dbIndex, final K key, final F field, final V value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [hSetNX].");
+		AssertUtils.assertNotNull(field, "Field can not be null of command [hSetNX].");
+		AssertUtils.assertNotNull(value, "Value can not be null of command [hSetNX].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<F> fieldKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Boolean>() {
+
+			@Override
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);	
+				RedisRepository repository = select(connection, dbIndex);
+				Boolean result = connection.hSetNX(keyByte, fieldKeySerializer.serialize(field),
+						valueSerializer.serialize(value));
+				setExpireTime(connection, repository, keyByte);
+				return result;
+			}
+		});
+	}
+
+	@Override
+	public <K, F, V> void hMSet(K key, Map<F, V> fValues) {
+		hMSet(0, key, fValues);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, F, V> void hMSet(final int dbIndex, final K key, final Map<F, V> fValues) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [hMSet].");
+		AssertUtils.assertTrue(MapUtils.isNotEmpty(fValues),
+				"Field-value map can not be empty of command [hMSet].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		redisTemplate.execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);	
+				RedisRepository repository = select(connection, dbIndex);
+				connection.hMSet(keyByte, serializeFiledValueToByteMap(dbIndex, fValues));
+				setExpireTime(connection, repository, keyByte);
+				return null;
+			}
+		});
+	}
 
 	@Override
 	public <K, F> Boolean hDel(K key, F filed) {
@@ -1384,7 +1049,140 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 			}
 		});
 	}
+	
+	@Override
+	public <K, V> Long lInsert(K key, Position where, V pivot, V value) {
+		return lInsert(0, key, where, pivot, value);
+	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Long lInsert(final int dbIndex, final K key, final Position where, final V pivot, final V value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [lInsert].");
+		AssertUtils.assertNotNull(where, "Insert postion can not be null of command [lInsert].");
+		AssertUtils.assertNotNull(pivot, "Postion value can not be null of command [lInsert].");
+		AssertUtils.assertNotNull(value, "Insert value can not be null of command [lInsert].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);
+				RedisRepository repository = select(connection, dbIndex);
+				Long result = connection.lInsert(keyByte, where,
+						valueSerializer.serialize(pivot), valueSerializer.serialize(value));
+				// 重新设置键的过期时间
+				setExpireTime(connection, repository, keyByte);
+				return result;
+			}
+		});
+	}
+	
+	@Override
+	public <K, V> void lSet(K key, long posttion, V value) {
+		lSet(0, key, posttion, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> void lSet(final int dbIndex, final K key, final long posttion, final V value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [lSet].");
+		AssertUtils.assertNotNull(value, "Value can not be null of command [lSet].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		redisTemplate.execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);	
+				RedisRepository repository = select(connection, dbIndex);
+				connection.lSet(keyByte, posttion, valueSerializer.serialize(value));
+				setExpireTime(connection, repository, keyByte);
+				return null;
+			}
+		});
+	}
+
+	@Override
+	public <K, V> Long lPush(K key, V value) {
+		return lPush(0, key, value);
+	}
+
+	@Override
+	public <K, V> Long lPush(int dbIndex, K key, V value) {
+		AssertUtils.assertNotNull(value, "Value can not be null of command [lPush].");
+		return lPush(dbIndex, key, new Object[] { value });
+	}
+	
+	@Override
+	public <K, V> Long lPush(K key, V[] values) {
+		return lPush(0, key, values);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Long lPush(final int dbIndex, final K key, final V[] values) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [lPush].");
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(values), "Values can not be empty of command [lPush].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);
+				RedisRepository repository = select(connection, dbIndex);
+				
+				long result = 0;
+				for (V value : values) 
+					result = result + NumberUtils.safeLong(connection.lPush(keyByte, valueSerializer.serialize(value)));
+				
+				setExpireTime(connection, repository, keyByte);
+				return result;
+			}
+		});
+	}
+	
+	@Override
+	public <K, V> Long lPush(K key, Collection<V> values) {
+		return lPush(0, key, values); 
+	}
+
+	@Override
+	public <K, V> Long lPush(int dbIndex, K key, Collection<V> values) {
+		return lPush(dbIndex, key, CollectionUtils.toObjectArray(values));
+	}
+
+	@Override
+	public <K, V> Long lPushX(K key, V value) {
+		return lPushX(0, key, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Long lPushX(final int dbIndex, final K key, final V value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [lPushX].");
+		AssertUtils.assertNotNull(value, "Value can not be null of command [lPushX].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+			
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);
+				RedisRepository repository = select(connection, dbIndex);
+				Long result = connection.lPushX(keyByte, valueSerializer.serialize(value));
+				setExpireTime(connection, repository, keyByte);
+				return result;
+			}
+		});
+	}
+	
 	@Override
 	public <K, V> V lIndex(K key, long index) {
 		return lIndex(0, key, index);
@@ -1546,6 +1344,109 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 			}
 		});
 	}
+	
+	@Override
+	public <K, V> Long rPush(K key, V value) {
+		return rPush(0, key, value);
+	}
+
+	@Override
+	public <K, V> Long rPush(int dbIndex, K key, V value) {
+		AssertUtils.assertNotNull(value, "Value can not be null of command [rPush].");
+		return rPush(dbIndex, key, new Object[] { value });
+	}
+	
+	@Override
+	public <K, V> Long rPush(K key, V[] values) {
+		return rPush(0, key, values);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Long rPush(final int dbIndex, final K key, final V[] values) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [rPush].");
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(values), "Values can not be empty of command [rPush].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);
+				RedisRepository repository = select(connection, dbIndex);
+				
+				long result = 0;
+				for (V value : values) 
+					result = result + NumberUtils.safeLong(connection.rPush(keyByte, valueSerializer.serialize(value)));
+				
+				setExpireTime(connection, repository, keyByte);
+				return result;
+			}
+		});
+	}
+	
+	@Override
+	public <K, V> Long rPush(K key, Collection<V> values) {
+		return rPush(0, key, values);
+	}
+
+	@Override
+	public <K, V> Long rPush(final int dbIndex, final K key, final Collection<V> values) {
+		return rPush(dbIndex, key, CollectionUtils.toObjectArray(values));
+	}
+
+	@Override
+	public <K, V> Long rPushX(K key, V value) {
+		return rPushX(0, key, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Long rPushX(final int dbIndex, final K key, final V value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [rPushX].");
+		AssertUtils.assertNotNull(value, "Value can not be null of command [rPushX].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+			
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);
+				RedisRepository repository = select(connection, dbIndex);
+				Long result = connection.rPushX(keyByte, valueSerializer.serialize(value));
+				setExpireTime(connection, repository, keyByte);
+				return result;
+			}
+		});
+	}
+	
+	@Override
+	public <K, V> V rPopLPush(K srcKey, K destKey) {
+		return rPopLPush(0, srcKey, destKey);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> V rPopLPush(final int dbIndex, final K srcKey, final K destKey) {
+		AssertUtils.assertNotNull(srcKey, "Source key can not be null of command [rPopLPush].");
+		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [rPopLPush].");
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<V>() {
+
+			@Override
+			public V doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] destKeyByte = keySerializer.serialize(destKey);
+				RedisRepository repository = select(connection, dbIndex);
+				// 将源列表中最后一个元素取出后存入目标列表
+				byte[] destValueByte = connection.rPopLPush(keySerializer.serialize(srcKey), destKeyByte);
+				// 设置目标键的过期时间
+				setExpireTime(connection, repository, destKeyByte);
+				return (V) selectValueSerializer(dbIndex).deserialize(destValueByte);
+			}
+		});
+	}
 
 	@Override
 	public <K, V> V rPop(K key) {
@@ -1569,6 +1470,59 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 				return valueSerializer.deserialize(valueByte);
 			}
 		});
+	}
+	
+	@Override
+	public <K, V> Boolean sAdd(K key, V member) {
+		return sAdd(0, key, member);
+	}
+
+	@Override
+	public <K, V> Boolean sAdd(int dbIndex, K key, V member) {
+		AssertUtils.assertNotNull(member, "Member can not be null of command [sAdd].");
+		Collection<V> members = CollectionUtils.newArrayList();
+		members.add(member);
+		return sAdd(dbIndex, key, members);
+	}
+	
+	@Override
+	public <K, V> Boolean sAdd(K key, V[] members) {
+		return sAdd(0, key, members);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Boolean sAdd(final int dbIndex, final K key, final V[] members) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [sAdd].");
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(members), "Members can not be empty of command [sAdd].");
+				
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Boolean>() {
+			
+			@Override
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);
+				RedisRepository repository = select(connection, dbIndex);
+				
+				boolean result = true;
+				for (V member : members) 
+					result = result && connection.sAdd(keyByte, valueSerializer.serialize(member));
+				
+				setExpireTime(connection, repository, keyByte);
+				return result;
+			}
+		});
+	}
+	
+	@Override
+	public <K, V> Boolean sAdd(K key, Collection<V> members) {
+		return sAdd(0, key, members);
+	}
+
+	@Override
+	public <K, V> Boolean sAdd(int dbIndex, K key, Collection<V> members) {
+		return sAdd(dbIndex, key, CollectionUtils.toObjectArray(members));
 	}
 
 	@Override
@@ -1956,6 +1910,52 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	@Override
 	public <K, V> Boolean sRem(int dbIndex, K key, Collection<V> members) {
 		return sRem(0, key, CollectionUtils.toObjectArray(members));
+	}
+	
+	@Override
+	public <K, V> Boolean zAdd(K key, double score, V member) {
+		return zAdd(0, key, score, member);
+	}
+
+	@Override
+	public <K, V> Boolean zAdd(int dbIndex, K key, double score, V member) {
+		AssertUtils.assertNotNull(member, "Member can not be null of command [zAdd].");
+		Map<Double, V> scoreMembers = MapUtils.newHashMap();
+		scoreMembers.put(score, member);
+		return zAdd(dbIndex, key, scoreMembers);
+	}
+
+	@Override
+	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers) {
+		return zAdd(0, key, scoreMembers);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Boolean zAdd(final int dbIndex, final K key, final Map<Double, V> scoreMembers) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [zAdd].");
+		AssertUtils.assertTrue(MapUtils.isNotEmpty(scoreMembers), 
+				"Score-member map can not be empty of command [zAdd].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Boolean>() {
+
+			@Override
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);
+				RedisRepository repository = select(connection, dbIndex);
+				Iterator<Entry<Double, V>> iterator = scoreMembers.entrySet().iterator();
+				boolean result = true;
+				while (iterator.hasNext()) {
+					Entry<Double, V> entry = iterator.next();
+					result = result && connection.zAdd(keyByte, 
+							NumberUtils.safeDouble(entry.getKey()), valueSerializer.serialize(entry.getValue()));
+				}
+				setExpireTime(connection, repository, keyByte);
+				return result;
+			}
+		});
 	}
 
 	@Override
