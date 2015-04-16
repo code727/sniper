@@ -31,6 +31,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisListCommands.Position;
+import org.springframework.data.redis.connection.RedisZSetCommands.Aggregate;
+import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 import org.springframework.data.redis.connection.SortParameters;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -1075,6 +1077,90 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 			}
 		});
 	}
+	
+	@Override
+	public <K> Long decr(K key) {
+		return decr(0, key);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Long decr(final int dbIndex, final K key) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [decr].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.decr(keySerializer.serialize(key));
+			}
+		});
+	}
+
+	@Override
+	public <K> Long decrBy(K key, long value) {
+		return decrBy(0, key, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Long decrBy(final int dbIndex, final K key, final long value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [decrBy].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.decrBy(keySerializer.serialize(key), value);
+			}
+		});
+	}
+
+	@Override
+	public <K> Long incr(K key) {
+		return incr(0, key);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Long incr(final int dbIndex, final K key) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [incr].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.incr(keySerializer.serialize(key));
+			}
+		});
+	}
+
+	@Override
+	public <K> Long incrBy(K key, long value) {
+		return incrBy(0, key, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Long incrBy(final int dbIndex, final K key, final long value) {
+		AssertUtils.assertNotNull(key, "Key can not be null of command [incrBy].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.incrBy(keySerializer.serialize(key), value);
+			}
+		});
+	}
 
 	@Override
 	public <K, F> Boolean hDel(K key, F filed) {
@@ -1372,13 +1458,13 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	}
 
 	@Override
-	public <K, V> List<V> lRange(K key, long start, long end) {
-		return lRange(0, key, start, end);
+	public <K, V> List<V> lRange(K key, long begin, long end) {
+		return lRange(0, key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> List<V> lRange(final int dbIndex, final K key, final long start, final long end) {
+	public <K, V> List<V> lRange(final int dbIndex, final K key, final long begin, final long end) {
 		if (key == null)
 			return null;
 		
@@ -1388,10 +1474,20 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 			@Override
 			public List<V> doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbIndex);	
-				List<byte[]> valueBytes = connection.lRange(keySerializer.serialize(key), start, end);
+				List<byte[]> valueBytes = connection.lRange(keySerializer.serialize(key), begin, end);
 				return deserializeValueByteToList(dbIndex, valueBytes);
 			}
 		});
+	}
+	
+	@Override
+	public <K, V> List<V> lRangeAll(K key) {
+		return lRangeAll(0, key);
+	}
+	
+	@Override
+	public <K, V> List<V> lRangeAll(int dbIndex, K key) {
+		return lRange(dbIndex, key, 0 , -1);
 	}
 
 	@Override
@@ -1530,15 +1626,15 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	}
 
 	@Override
-	public <K> Long sDiffStore(K[] keys, K destKey) {
-		return sDiffStore(0, keys, destKey);
+	public <K> Long sDiffStore(K destKey, K[] keys) {
+		return sDiffStore(0, destKey, keys);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K> Long sDiffStore(final int dbIndex, final K[] keys, final K destKey) {
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sDiffStore]");
+	public <K> Long sDiffStore(final int dbIndex, final K destKey, final K[] keys) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sDiffStore].");
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sDiffStore]");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return redisTemplate.execute(new RedisCallback<Long>() {
@@ -1555,13 +1651,13 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	}
 
 	@Override
-	public <K> Long sDiffStore(Collection<K> keys, K destKey) {
-		return sDiffStore(0, keys, destKey);
+	public <K> Long sDiffStore(K destKey, Collection<K> keys) {
+		return sDiffStore(0, destKey, keys);
 	}
 
 	@Override
-	public <K> Long sDiffStore(int dbIndex, Collection<K> keys, K destKey) {
-		return sDiffStore(dbIndex, CollectionUtils.toObjectArray(keys), destKey);
+	public <K> Long sDiffStore(int dbIndex, K destKey, Collection<K> keys) {
+		return sDiffStore(dbIndex, destKey, CollectionUtils.toObjectArray(keys));
 	}
 
 	@Override
@@ -1597,15 +1693,15 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	}
 
 	@Override
-	public <K> Long sInterStore(K[] keys, K destKey) {
-		return sInterStore(0, keys, destKey);
+	public <K> Long sInterStore(K destKey, K[] keys) {
+		return sInterStore(0, destKey, keys);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K> Long sInterStore(final int dbIndex, final K[] keys, final K destKey) {
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sInterStore]");
+	public <K> Long sInterStore(final int dbIndex, final K destKey, final K[] keys) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sInterStore].");
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sInterStore]");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return redisTemplate.execute(new RedisCallback<Long>() {
@@ -1622,13 +1718,13 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	}
 
 	@Override
-	public <K> Long sInterStore(Collection<K> keys, K destKey) {
-		return sInterStore(0, keys, destKey);
+	public <K> Long sInterStore(K destKey, Collection<K> keys) {
+		return sInterStore(0, destKey, keys);
 	}
 
 	@Override
-	public <K> Long sInterStore(int dbIndex, Collection<K> keys, K destKey) {
-		return sInterStore(dbIndex, CollectionUtils.toObjectArray(keys), destKey);
+	public <K> Long sInterStore(int dbIndex, K destKey, Collection<K> keys) {
+		return sInterStore(dbIndex, destKey, CollectionUtils.toObjectArray(keys));
 	}
 	
 	@Override
@@ -1664,15 +1760,15 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	}
 	
 	@Override
-	public <K> Long sUnionStore(K[] keys, K destKey) {
-		return sUnionStore(0, keys, destKey);
+	public <K> Long sUnionStore(K destKey, K[] keys) {
+		return sUnionStore(0, destKey, keys);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K> Long sUnionStore(final int dbIndex, final K[] keys, final K destKey) {
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sUnionStore]");
+	public <K> Long sUnionStore(final int dbIndex, final K destKey, final K[] keys) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sUnionStore].");
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sUnionStore]");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return redisTemplate.execute(new RedisCallback<Long>() {
@@ -1689,13 +1785,13 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	}
 
 	@Override
-	public <K> Long sUnionStore(Collection<K> keys, K destKey) {
-		return sUnionStore(0, keys, destKey);
+	public <K> Long sUnionStore(K destKey, Collection<K> keys) {
+		return sUnionStore(0, destKey, keys);
 	}
 
 	@Override
-	public <K> Long sUnionStore(int dbIndex, Collection<K> keys, K destKey) {
-		return sUnionStore(dbIndex, CollectionUtils.toObjectArray(keys), destKey);
+	public <K> Long sUnionStore(int dbIndex, K destKey, Collection<K> keys) {
+		return sUnionStore(dbIndex, destKey, CollectionUtils.toObjectArray(keys));
 	}
 
 	@Override
@@ -1938,5 +2034,551 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	public <K, V> Set<V> zRangeAll(int dbIndex, K key) {
 		return zRange(dbIndex, key, 0, -1);
 	}
+
+	@Override
+	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore) {
+		return zRangeByScore(0, key, minScore, maxScore);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Set<V> zRangeByScore(final int dbIndex, final K key, final double minScore, final double maxScore) {
+		if (key == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+			
+			@Override
+			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				Set<byte[]> valueBytes = connection.zRangeByScore(
+						keySerializer.serialize(key), minScore, maxScore);
+				return deserializeValueByteToSet(dbIndex, valueBytes);
+			}
+		});
+	}
+
+	@Override
+	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore,
+			long offset, long count) {
+		return zRangeByScore(0, key, minScore, maxScore, offset, count);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Set<V> zRangeByScore(final int dbIndex, final K key, final double minScore,
+			final double maxScore, final long offset, final long count) {
+		if (key == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+			
+			@Override
+			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				Set<byte[]> valueBytes = connection.zRangeByScore(
+						keySerializer.serialize(key), minScore, maxScore, offset, count);
+				return deserializeValueByteToSet(dbIndex, valueBytes);
+			}
+		});
+	}
+
+	@Override
+	public <K> Set<Tuple> zRangeByScoreWithScores(K key, double minScore, double maxScore) {
+		return zRangeByScoreWithScores(0, key, minScore, maxScore);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Set<Tuple> zRangeByScoreWithScores(final int dbIndex,
+			final K key, final double minScore, final double maxScore) {
+		if (key == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Set<Tuple>>() {
+			
+			@Override
+			public Set<Tuple> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zRangeByScoreWithScores(keySerializer.serialize(key), minScore, maxScore);
+			}
+		});
+	}
+
+	@Override
+	public <K> Set<Tuple> zRangeByScoreWithScores(K key, double minScore,
+			double maxScore, long offset, long count) {
+		return zRangeByScoreWithScores(0, key, minScore, maxScore, offset, count);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Set<Tuple> zRangeByScoreWithScores(final int dbIndex, final K key,
+			final double minScore, final double maxScore, final long offset, final long count) {
+		if (key == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Set<Tuple>>() {
+			
+			@Override
+			public Set<Tuple> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zRangeByScoreWithScores(
+						keySerializer.serialize(key), minScore, maxScore, offset, count);
+			}
+		});
+	}
+
+	@Override
+	public <K, V> Long zRank(K key, V member) {
+		return zRank(0, key, member);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Long zRank(final int dbIndex, final K key, final V member) {
+		if (key == null || member == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+			
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zRank(keySerializer.serialize(key), valueSerializer.serialize(member));
+			}
+		});
+	}
+
+	@Override
+	public <K, V> Boolean zRem(K key, V member) {
+		return zRem(0, key, member);
+	}
+
+	@Override
+	public <K, V> Boolean zRem(int dbIndex, K key, V member) {
+		return zRem(dbIndex, key, new Object[] { member });
+	}
+
+	@Override
+	public <K, V> Boolean zRem(K key, V[] members) {
+		return zRem(0, key, members);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Boolean zRem(final int dbIndex, final K key, final V[] members) {
+		if (key == null || ArrayUtils.isEmpty(members))
+			return false;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Boolean>() {
+
+			@Override
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				boolean result = true;
+				for (V member : members) 
+					result = result && connection.zRem(keySerializer.serialize(key), valueSerializer.serialize(member));
+				return result;
+			}
+		});
+	}
+
+	@Override
+	public <K, V> Boolean zRem(K key, Collection<V> members) {
+		return zRem(0, key, members);
+	}
+
+	@Override
+	public <K, V> Boolean zRem(int dbIndex, K key, Collection<V> members) {
+		return zRem(dbIndex, key, CollectionUtils.toObjectArray(members));
+	}
+
+	@Override
+	public <K> Long zRemRangeByRank(K key, long begin, long end) {
+		return zRemRangeByRank(0, key, begin, end);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Long zRemRangeByRank(final int dbIndex, final K key, final long begin, final long end) {
+		if (key == null)
+			return 0L;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);	
+				return connection.zRemRange(keySerializer.serialize(key), begin, end);
+			}
+		});
+	}
+
+	@Override
+	public <K> Long zRemRangeByScore(K key, double minScore, double maxScore) {
+		return zRemRangeByScore(0, key, minScore, maxScore);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Long zRemRangeByScore(final int dbIndex, final K key, final double minScore,
+			final double maxScore) {
+		if (key == null)
+			return 0L;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);	
+				return connection.zRemRangeByScore(keySerializer.serialize(key), minScore, maxScore);
+			}
+		});
+	}
+
+	@Override
+	public <K, V> Set<V> zRevRange(K key, long begin, long end) {
+		return zRevRange(0, key, begin, end);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Set<V> zRevRange(final int dbIndex, final K key, final long begin, final long end) {
+		if (key == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+
+			@Override
+			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				Set<byte[]> valueBytes = connection.zRevRange(keySerializer.serialize(key), begin, end);
+				return deserializeValueByteToSet(dbIndex, valueBytes);
+			}
+		});
+	}
+
+	@Override
+	public <K, V> Set<V> zRevRangeAll(K key) {
+		return zRevRangeAll(0, key);
+	}
+
+	@Override
+	public <K, V> Set<V> zRevRangeAll(int dbIndex, K key) {
+		return zRevRange(dbIndex, key, 0, -1);
+	}
+
+	@Override
+	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore) {
+		return zRevRangeByScore(0, key, minScore, maxScore);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Set<V> zRevRangeByScore(final int dbIndex, final K key,
+			final double minScore, final double maxScore) {
+		if (key == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+
+			@Override
+			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				Set<byte[]> valueBytes = connection.zRevRangeByScore(keySerializer.serialize(key), minScore, maxScore);
+				return deserializeValueByteToSet(dbIndex, valueBytes);
+			}
+		});
+	}
+
+	@Override
+	public <K> Set<Tuple> zRevRangeByScoreWithScores(K key, double minScore, double maxScore) {
+		return zRevRangeByScoreWithScores(0, key, minScore, maxScore);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Set<Tuple> zRevRangeByScoreWithScores(final int dbIndex, final K key,
+			final double minScore, final double maxScore) {
+		if (key == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Set<Tuple>>() {
+			
+			@Override
+			public Set<Tuple> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zRevRangeByScoreWithScores(
+						keySerializer.serialize(key), minScore, maxScore);
+			}
+		});
+	}
+
+	@Override
+	public <K> Set<Tuple> zRevRangeByScoreWithScores(K key, double minScore,
+			double maxScore, long offset, long count) {
+		return zRevRangeByScoreWithScores(0, key, minScore, maxScore, offset, count);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Set<Tuple> zRevRangeByScoreWithScores(final int dbIndex, final K key,
+			final double minScore, final double maxScore, final long offset, final long count) {
+		if (key == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Set<Tuple>>() {
+
+			@Override
+			public Set<Tuple> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zRevRangeByScoreWithScores(
+						keySerializer.serialize(key), minScore, maxScore, offset, count);
+			}
+		});
+	}
+
+	@Override
+	public <K, V> Long zRevRank(K key, V member) {
+		return zRevRank(0, key, member);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Long zRevRank(final int dbIndex, final K key, final V member) {
+		if (key == null || member == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+			
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zRevRank(keySerializer.serialize(key), valueSerializer.serialize(member));
+			}
+		});
+	}
+
+	@Override
+	public <K, V> Double zScore(K key, V member) {
+		return zScore(0, key, member);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Double zScore(final int dbIndex, final K key, final V member) {
+		if (key == null || member == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Double>() {
+
+			@Override
+			public Double doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zScore(keySerializer.serialize(key), valueSerializer.serialize(member));
+			}
+		});
+	}
+
+	@Override
+	public <K> Long zUnionStore(K destKey, K key) {
+		return zUnionStore(0, destKey, key);
+	}
+
+	@Override
+	public <K> Long zUnionStore(int dbIndex, K destKey, K key) {
+		AssertUtils.assertNotNull(key, "Source key can not be null of command [zUnionStore].");
+		return zUnionStore(dbIndex, destKey, new Object[] { key });
+	}
+
+	@Override
+	public <K> Long zUnionStore(K destKey, K[] keys) {
+		return zUnionStore(0, destKey, keys);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Long zUnionStore(final int dbIndex, final K destKey, final K[] keys) {
+		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zUnionStore].");
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zUnionStore].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zUnionStore(keySerializer.serialize(destKey), 
+						serializeKeysToArray(dbIndex, keys));
+			}
+		});
+	}
+
+	@Override
+	public <K> Long zUnionStore(K destKey, Collection<K> keys) {
+		return zUnionStore(0, destKey, keys);
+	}
+
+	@Override
+	public <K> Long zUnionStore(int dbIndex, K destKey, Collection<K> keys) {
+		return zUnionStore(dbIndex, destKey, CollectionUtils.toObjectArray(keys));
+	}
+
+	@Override
+	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, K[] keys) {
+		return zUnionStore(0, destKey, aggregate, weights, keys);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Long zUnionStore(final int dbIndex, final K destKey, final Aggregate aggregate,
+			final int[] weights, final K[] keys) {
+		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zUnionStore].");
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zUnionStore].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zUnionStore(keySerializer.serialize(destKey), 
+						aggregate, weights, serializeKeysToArray(dbIndex, keys));
+			}
+		});
+	}
+
+	@Override
+	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys) {
+		return zUnionStore(0, destKey, aggregate, weights, keys);
+	}
+
+	@Override
+	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate,
+			int[] weights, Collection<K> keys) {
+		return zUnionStore(dbIndex, destKey, aggregate, weights, CollectionUtils.toObjectArray(keys));
+	}
 	
+	@Override
+	public <K> Long zInterStore(K destKey, K srcKey) {
+		return zInterStore(0, destKey, srcKey);
+	}
+
+	@Override
+	public <K> Long zInterStore(int dbIndex, K destKey, K srcKey) {
+		AssertUtils.assertNotNull(srcKey, "Source key can not be null of command [zInterStore].");
+		return zInterStore(dbIndex, destKey, new Object[] {srcKey});
+	}
+
+	@Override
+	public <K> Long zInterStore(K destKey, K[] keys) {
+		return zInterStore(0, destKey, keys);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Long zInterStore(final int dbIndex, final K destKey, final K[] keys) {
+		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zInterStore].");
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zInterStore].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zInterStore(keySerializer.serialize(destKey), 
+						serializeKeysToArray(dbIndex, keys));
+			}
+		});
+	}
+
+	@Override
+	public <K> Long zInterStore(K destKey, Collection<K> keys) {
+		return zInterStore(0, destKey, keys);
+	}
+
+	@Override
+	public <K> Long zInterStore(int dbIndex, K destKey, Collection<K> keys) {
+		return zInterStore(dbIndex, destKey, CollectionUtils.toObjectArray(keys));
+	}
+
+	@Override
+	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, K[] keys) {
+		return zInterStore(0, destKey, aggregate, weights, keys);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K> Long zInterStore(final int dbIndex, final K destKey, final Aggregate aggregate,
+			final int[] weights, final K[] keys) {
+		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zInterStore].");
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zInterStore].");
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zInterStore(keySerializer.serialize(destKey), 
+						aggregate, weights, serializeKeysToArray(dbIndex, keys));
+			}
+		});
+	}
+
+	@Override
+	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys) {
+		return zInterStore(0, destKey, aggregate, weights, keys);
+	}
+
+	@Override
+	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate,
+			int[] weights, Collection<K> keys) {
+		return zInterStore(dbIndex, destKey, aggregate, weights, CollectionUtils.toObjectArray(keys));
+	}
+
+	@Override
+	public <K, V> Double zIncrBy(K key, double increment, V member) {
+		return zIncrBy(0, key, increment, member);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> Double zIncrBy(final int dbIndex, final K key, final double increment, final V member) {
+		if (key == null || member == null)
+			return null;
+		
+		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		return redisTemplate.execute(new RedisCallback<Double>() {
+
+			@Override
+			public Double doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				return connection.zIncrBy(keySerializer.serialize(key), 
+						increment, valueSerializer.serialize(member));
+			}
+		});
+	}
+
 }

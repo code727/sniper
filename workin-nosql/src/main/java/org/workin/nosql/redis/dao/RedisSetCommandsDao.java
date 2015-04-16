@@ -139,40 +139,40 @@ public interface RedisSetCommandsDao {
 	/**
 	 * @description 在默认第0库中执行sDiffStore命令，将返回的差集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sDiffStore(K[] keys, K destKey);
+	public <K> Long sDiffStore(K destKey, K[] keys);
 	
 	/**
 	 * @description 在指定索引库中执行sDiffStore命令，将返回的差集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sDiffStore(int dbIndex, K[] keys, K destKey);
+	public <K> Long sDiffStore(int dbIndex, K destKey, K[] keys);
 	
 	/**
 	 * @description 在默认第0库中执行sDiffStore命令，将返回的差集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sDiffStore(Collection<K> keys, K destKey);
+	public <K> Long sDiffStore(K destKey, Collection<K> keys);
 	
 	/**
 	 * @description 在指定索引库中执行sDiffStore命令，将返回的差集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sDiffStore(int dbIndex, Collection<K> keys, K destKey);
+	public <K> Long sDiffStore(int dbIndex, K destKey, Collection<K> keys);
 	
 	/**
 	 * @description 在默认第0库中执行sInter命令，获取多个键集之间的交集
@@ -211,40 +211,40 @@ public interface RedisSetCommandsDao {
 	/**
 	 * @description 在默认第0库中执行sInterStore命令，将返回的交集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sInterStore(K[] keys, K destKey);
+	public <K> Long sInterStore(K destKey, K[] keys);
 	
 	/**
 	 * @description 在指定索引库中执行sInterStore命令，将返回的交集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sInterStore(int dbIndex, K[] keys, K destKey);
+	public <K> Long sInterStore(int dbIndex, K destKey, K[] keys);
 	
 	/**
 	 * @description 在默认第0库中执行sInterStore命令，将返回的交集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sInterStore(Collection<K> keys, K destKey);
+	public <K> Long sInterStore(K destKey, Collection<K> keys);
 	
 	/**
 	 * @description 在指定索引库中执行sInterStore命令，将返回的交集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sInterStore(int dbIndex, Collection<K> keys, K destKey);
+	public <K> Long sInterStore(int dbIndex, K destKey, Collection<K> keys);
 	
 	/**
 	 * @description 在默认第0库中执行sUnion命令，获取多个键集之间的并集
@@ -283,40 +283,40 @@ public interface RedisSetCommandsDao {
 	/**
 	 * @description 在默认第0库中执行sUnionStore命令，将返回的并集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sUnionStore(K[] keys, K destKey);
+	public <K> Long sUnionStore(K destKey, K[] keys);
 	
 	/**
 	 * @description 在指定索引库中执行sUnionStore命令，将返回的并集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sUnionStore(int dbIndex, K[] keys, K destKey);
+	public <K> Long sUnionStore(int dbIndex, K destKey, K[] keys);
 	
 	/**
 	 * @description 在默认第0库中执行sUnionStore命令，将返回的并集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sUnionStore(Collection<K> keys, K destKey);
+	public <K> Long sUnionStore(K destKey, Collection<K> keys);
 	
 	/**
 	 * @description 在指定索引库中执行sUnionStore命令，将返回的并集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
-	 * @param keys
 	 * @param destKey
+	 * @param keys
 	 * @return
 	 */
-	public <K> Long sUnionStore(int dbIndex, Collection<K> keys, K destKey);
+	public <K> Long sUnionStore(int dbIndex, K destKey, Collection<K> keys);
 	
 	/**
 	 * @description 在默认第0库中执行sIsMember命令，判断集合键中是否存在指定的成员元素

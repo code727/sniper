@@ -275,4 +275,76 @@ public interface RedisStringCommandsDao {
 	 */
 	public <K> Long strLen(int dbIndex, K key);
 	
+	/**
+	 * @description 在默认第0库中执行decr命令，将键储存的数字值减一
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K> Long decr(K key);
+	
+	/**
+	 * @description 在指定索引库中执行decr命令，将键储存的数字值减一
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @return
+	 */
+	public <K> Long decr(int dbIndex, K key);
+	
+	/**
+	 * @description 在默认第0库中执行decrBy命令，将键储存的数字值减去指定的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public <K> Long decrBy(K key, long value);
+	
+	/**
+	 * @description 在指定索引库中执行decrBy命令，将键储存的数字值减去指定的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public <K> Long decrBy(int dbIndex, K key, long value);
+	
+	/**
+	 * @description 在默认第0库中执行incr命令，将键储存的数字值加一
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K> Long incr(K key);
+	
+	/**
+	 * @description 在指定索引库中执行incr命令，将键储存的数字值加一
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @return
+	 */
+	public <K> Long incr(int dbIndex, K key);
+	
+	/**
+	 * @description 在默认第0库中执行incrBy命令，将键储存的数字值加上指定的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public <K> Long incrBy(K key, long value);
+	
+	/**
+	 * @description 在指定索引库中执行incrBy命令，将键储存的数字值加上指定的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public <K> Long incrBy(int dbIndex, K key, long value);
+	
 }

@@ -18,8 +18,12 @@
 
 package org.workin.nosql.redis.dao;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+
+import org.springframework.data.redis.connection.RedisZSetCommands.Aggregate;
+import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 
 /**
  * @description Redis有序集合命令行数据访问接口
@@ -147,5 +151,623 @@ public interface RedisSortedSetCommandsDao {
 	 * @return
 	 */
 	public <K, V> Set<V> zRangeAll(int dbIndex, K key);
+	
+	/**
+	 * @description 在默认第0库中执行zRangeByScore命令，
+	 * 				获取有序集合在 [minScore, maxScore]区间范围内的成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore);
+	
+	/**
+	 * @description 在指定索引库中执行zRangeByScore命令，
+	 * 				获取有序集合在 [minScore, maxScore]区间范围内的成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<V> zRangeByScore(int dbIndex, K key, double minScore, double maxScore);
+	
+	/**
+	 * @description 在默认第0库中执行zRangeByScore命令，从offset开始定位，
+	 * 				获取有序集合在 [minScore, maxScore]区间范围内最多count个成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, long offset, long count);
+	
+	/**
+	 * @description 在指定索引库中执行zRangeByScore命令，从offset开始定位，
+	 * 				获取有序集合在 [minScore, maxScore]区间范围内最多count个成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param offset
+	 * @param count
+	 * @return
+	 */
+	public <K, V> Set<V> zRangeByScore(int dbIndex, K key, double minScore, double maxScore, long offset, long count);
+	
+	/**
+	 * @description 在默认第0库中执行zRangeByScore命令，
+	 * 				获取有序集合在 [minScore, maxScore]区间范围内的Tuple对象集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K> Set<Tuple> zRangeByScoreWithScores(K key, double minScore, double maxScore);
+	
+	/**
+	 * @description 在指定索引库中执行zRangeByScore命令，
+	 * 				获取有序集合在 [minScore, maxScore]区间范围内的Tuple对象集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K> Set<Tuple> zRangeByScoreWithScores(int dbIndex, K key, double minScore, double maxScore);
+	
+	/**
+	 * @description 在默认第0库中执行zRangeByScore命令，从offset开始定位，
+	 * 				获取有序集合在 [minScore, maxScore]区间范围内最多count个Tuple对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param offset
+	 * @param count
+	 * @return
+	 */
+	public <K> Set<Tuple> zRangeByScoreWithScores(K key, double minScore, double maxScore, long offset, long count);
+	
+	/**
+	 * @description 在指定索引库中执行zRangeByScore命令，从offset开始定位，
+	 * 				获取有序集合在 [minScore, maxScore]区间范围内最多count个Tuple对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K> Set<Tuple> zRangeByScoreWithScores(int dbIndex, K key, double minScore, double maxScore, long offset, long count);
 
+	/**
+	 * @description 在默认第0库中执行zRank命令，
+	 * 				获取有序键集中，指定成员按score值升序排列后的下标索引
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Long zRank(K key, V member);
+	
+	/**
+	 * @description 在指定索引库中执行zRank命令，
+	 * 				获取有序键集中，指定成员按score值升序排列后的下标索引
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Long zRank(int dbIndex, K key, V member);
+	
+	/**
+	 * @description 在默认第0库中执行zRem命令，删除指定键集中的成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Boolean zRem(K key, V member);
+	
+	/**
+	 * @description 在指定索引库中执行zRem命令，删除指定键集中的成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Boolean zRem(int dbIndex, K key, V member);
+	
+	/**
+	 * @description 在默认第0库中执行zRem命令，删除指定键集中的多个成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, V> Boolean zRem(K key, V[] members);
+	
+	/**
+	 * @description 在指定索引库中执行zRem命令，删除指定键集中的多个成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, V> Boolean zRem(int dbIndex, K key, V[] members);
+	
+	/**
+	 * @description 在默认第0库中执行zRem命令，删除指定键集中的多个成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, V> Boolean zRem(K key, Collection<V> members);
+	
+	/**
+	 * @description 在指定索引库中执行zRem命令，删除指定键集中的多个成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, V> Boolean zRem(int dbIndex, K key, Collection<V> members);
+	
+	/**
+	 * @description 在默认第0库中执行zRemRangeByRank命令，删除指定下标索引范围内的所有成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	public <K> Long zRemRangeByRank(K key, long begin, long end);
+	
+	/**
+	 * @description 在指定索引库中执行zRemRangeByRank命令，删除指定下标索引范围内的所有成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	public <K> Long zRemRangeByRank(int dbIndex, K key, long begin, long end);
+	
+	/**
+	 * @description 在默认第0库中执行zRemRangeByScore命令，删除指定排名范围内的所有成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K> Long zRemRangeByScore(K key, double minScore, double maxScore);
+	
+	/**
+	 * @description 在指定索引库中执行zRemRangeByRank命令，删除指定排名范围内的所有成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K> Long zRemRangeByScore(int dbIndex, K key, double minScore, double maxScore);
+	
+	/**
+	 * @description 在默认第0库中执行zRevRange命令，按score值降序方式返回指定键集范围内的成员集合
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRange(K key, long begin, long end);
+	
+	/**
+	 * @description 在指定索引库中执行zRevRange命令，按score值降序方式返回指定键集范围内的成员集合
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRange(int dbIndex, K key, long begin, long end);
+	
+	/**
+	 * @description 在默认第0库中执行zRevRange命令，按score值降序方式返回指定键集的所有成员集合
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeAll(K key);
+	
+	/**
+	 * @description 在指定索引库中执行zRevRange命令，按score值降序方式返回指定键集的所有成员集合
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeAll(int dbIndex, K key);
+	
+	/**
+	 * @description 在默认第0库中执行zRevRangeByScore命令，
+	 * 				按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内的所有成员集合
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore);
+	
+	/**
+	 * @description 在指定索引库中执行zRevRangeByScore命令，
+	 * 				按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内的所有成员集合
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeByScore(int dbIndex, K key, double minScore, double maxScore);
+	
+	/**
+	 * @description 在默认第0库中执行zRevRangeByScore命令，
+	 * 				按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内的Tuple对象集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K> Set<Tuple> zRevRangeByScoreWithScores(K key, double minScore, double maxScore);
+	
+	/**
+	 * @description 在指定索引库中执行zRevRangeByScore命令，
+	 * 				按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内的Tuple对象集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K> Set<Tuple> zRevRangeByScoreWithScores(int dbIndex, K key,
+			double minScore, double maxScore);
+	
+	/**
+	 * @description 在默认第0库中执行zRevRangeByScore命令，从offset开始定位，
+	 * 				按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内最多count个Tuple对象集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param offset
+	 * @param count
+	 * @return
+	 */
+	public <K> Set<Tuple> zRevRangeByScoreWithScores(K key, double minScore,
+			double maxScore, long offset, long count);
+	
+	/**
+	 * @description 在指定索引库中执行zRevRangeByScore命令，从offset开始定位，
+	 * 				按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内最多count个Tuple对象集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param offset
+	 * @param count
+	 * @return
+	 */
+	public <K> Set<Tuple> zRevRangeByScoreWithScores(int dbIndex, K key,
+			double minScore, double maxScore, long offset, long count);
+	
+	/**
+	 * @description 在默认第0库中执行zRevRank命令，
+	 * 				获取有序键集中，指定成员按score值降序排列后的下标索引
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Long zRevRank(K key, V member);
+	
+	/**
+	 * @description 在指定索引库中执行zRevRank命令，
+	 * 				获取有序键集中，指定成员按score值降序排列后的下标索引
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Long zRevRank(int dbIndex, K key, V member);
+	
+	/**
+	 * @description 在默认第0库中执行zScore命令，获取有序键集中，指定成员的score值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Double zScore(K key, V member);
+	
+	/**
+	 * @description 在指定索引库中执行zScore命令，获取有序键集中，指定成员的score值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Double zScore(int dbIndex, K key, V member);
+	
+	/**
+	 * @description 在默认第0库中执行zUnionStore命令，
+	 * 				获取指定目标键集与键集的并集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param key
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, K key);
+	
+	/**
+	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 				获取指定目标键集与键集的并集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param key
+	 * @return
+	 */
+	public <K> Long zUnionStore(int dbIndex, K destKey, K key);
+	
+	/**
+	 * @description 在默认第0库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, K[] keys);
+	
+	/**
+	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zUnionStore(int dbIndex, K destKey, K[] keys);
+	
+	/**
+	 * @description 在默认第0库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, Collection<K> keys);
+	
+	/**
+	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zUnionStore(int dbIndex, K destKey, Collection<K> keys);
+	
+	/**
+	 * @description 在默认第0库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, K[] keys);
+	
+	/**
+	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, K[] keys);
+	
+	/**
+	 * @description 在默认第0库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
+	
+	/**
+	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
+	
+	/**
+	 * @description 在默认第0库中执行zInterStore命令，
+	 * 				获取指定目标键集与键集的交集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param srcKey
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, K srcKey);
+	
+	/**
+	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 				获取指定目标键集与键集的交集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param srcKey
+	 * @return
+	 */
+	public <K> Long zInterStore(int dbIndex, K destKey, K srcKey);
+	
+	/**
+	 * @description 在默认第0库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, K[] keys);
+	
+	/**
+	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zInterStore(int dbIndex, K destKey, K[] keys);
+	
+	/**
+	 * @description 在默认第0库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, Collection<K> keys);
+	
+	/**
+	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zInterStore(int dbIndex, K destKey, Collection<K> keys);
+	
+	/**
+	 * @description 在默认第0库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, K[] keys);
+	
+	/**
+	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, K[] keys);
+	
+	/**
+	 * @description 在默认第0库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
+	
+	/**
+	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
+	
+	/**
+	 * @description 在默认第0库中执行zIncrBy命令，
+	 * 				为指定的键集成员的socre值加上(increment > 0)/减去(increment < 0)增量
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param increment
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Double zIncrBy(K key, double increment, V member);
+	
+	/**
+	 * @description 在默认第0库中执行zIncrBy命令，
+	 * 				为指定的键集成员的socre值加上(increment > 0)/减去(increment < 0)增量
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param increment
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Double zIncrBy(int dbIndex, K key, double increment, V member);
 }

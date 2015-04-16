@@ -300,22 +300,43 @@ public interface RedisListCommandsDao {
 	 * @description 在默认第0库中执行lRange命令，获取指定键列表下标在区间范围内的所有元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
-	 * @param start
+	 * @param begin
 	 * @param end
 	 * @return
 	 */
-	public <K, V> List<V> lRange(K key, long start, long end);
+	public <K, V> List<V> lRange(K key, long begin, long end);
 	
 	/**
 	 * @description 在指定索引库中执行lRange命令，获取指定键列表下标在区间范围内的所有元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param key
-	 * @param start
+	 * @param begin
 	 * @param end
 	 * @return
 	 */
-	public <K, V> List<V> lRange(int dbIndex, K key, long start, long end);
+	public <K, V> List<V> lRange(int dbIndex, K key, long begin, long end);
+	
+	/**
+	 * @description 在默认第0库中执行lRange命令，获取指定键列表中的所有元素
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	public <K, V> List<V> lRangeAll(K key);
+	
+	/**
+	 * @description 在指定索引库中执行lRange命令，获取指定键列表中的所有元素
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	public <K, V> List<V> lRangeAll(int dbIndex, K key);
 	
 	/**
 	 * @description 在默认第0库中执行lRem命令，删除键列表中count个与指定值相等的元素
