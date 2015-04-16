@@ -2565,8 +2565,8 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Double zIncrBy(final int dbIndex, final K key, final double increment, final V member) {
-		if (key == null || member == null)
-			return null;
+		AssertUtils.assertNotNull(key, "Key can not be null of command [zIncrBy].");
+		AssertUtils.assertNotNull(key, "Member can not be null of command [zIncrBy].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
