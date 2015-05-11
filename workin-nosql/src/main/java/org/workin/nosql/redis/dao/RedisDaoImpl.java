@@ -36,7 +36,7 @@ import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 import org.springframework.data.redis.connection.SortParameters;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.stereotype.Repository;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
@@ -51,6 +51,7 @@ import org.workin.nosql.redis.RedisRepository;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@Repository
 public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	
 	@Override
@@ -72,13 +73,15 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	@Override
 	public <K> Set<K> keys(final int dbIndex, final String pattern) {
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
+		
 		return redisTemplate.execute(new RedisCallback<Set<K>>() {
 			
 			@Override
 			public Set<K> doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbIndex);
-				Set<byte[]> keyBytes = connection.keys(StringUtils.isNotEmpty(pattern) ? 
-						new StringRedisSerializer().serialize(pattern) : new StringRedisSerializer().serialize("*"));
+				Set<byte[]> keyBytes = connection.keys(stringSerializer
+						.serialize(StringUtils.isNotEmpty(pattern) ? pattern : "*"));
 				Set<K> keys = new HashSet<K>();
 				for (byte[] key : keyBytes)
 					keys.add(keySerializer.deserialize(key));
@@ -319,7 +322,7 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 				Long count = connection.sort(keySerializer.serialize(key), params, targetKeyByte);
 				if (count != null && count > 0) {
 					DataType dataType = connection.type(targetKeyByte);
-					return listByDateType(dataType, connection, dbIndex, targetKeyByte);
+					return listByDataType(dataType, connection, dbIndex, targetKeyByte);
 				}
 				return null;
 			}
@@ -344,6 +347,41 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 			public DataType doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbIndex);
 				return connection.type(keySerializer.serialize(key));
+			}
+		});
+	}
+	
+	@Override
+	public <V> Set<V> values() {
+		return values(0);
+	}
+
+	@Override
+	public <V> Set<V> values(int dbIndex) {
+		return values(dbIndex, null);
+	}
+
+	@Override
+	public <V> Set<V> values(String pattern) {
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <V> Set<V> values(int dbIndex, final String pattern) {
+		final RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
+		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		
+		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+			@Override
+			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
+				// 获取匹配模式的键
+				Set<byte[]> keySet = connection.keys(stringSerializer
+						.serialize(StringUtils.isNotEmpty(pattern) ? pattern : "*"));
+				Set<V> set = CollectionUtils.newHashSet();
+				for (byte[] key : keySet)
+					set.add(valueSerializer.deserialize(connection.get(key)));
+				return set;
 			}
 		});
 	}
@@ -2577,6 +2615,69 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 				select(connection, dbIndex);
 				return connection.zIncrBy(keySerializer.serialize(key), 
 						increment, valueSerializer.serialize(member));
+			}
+		});
+	}
+
+	@Override
+	public Long dbSize() {
+		return dbSize(0);
+	}
+
+	@Override
+	public Long dbSize(int dbIndex) {
+		return redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection)
+					throws DataAccessException {
+				return connection.dbSize();
+			}
+		});
+	}
+
+	@Override
+	public void flushAll() {
+		redisTemplate.execute(new RedisCallback<Object>() {
+			
+			@Override
+			public Object doInRedis(RedisConnection connection)
+					throws DataAccessException {
+				connection.flushAll();
+				return null;
+			}
+		});
+	}
+
+	@Override
+	public void flushDb() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void flushDb(final int dbIndex) {
+		redisTemplate.execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection)
+					throws DataAccessException {
+				select(connection, dbIndex);
+				connection.flushDb();
+				return null;
+			}
+		});
+	}
+
+	@Override
+	public void shutdown() {
+		redisTemplate.execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection)
+					throws DataAccessException {
+				connection.shutdown();
+				return null;
 			}
 		});
 	}

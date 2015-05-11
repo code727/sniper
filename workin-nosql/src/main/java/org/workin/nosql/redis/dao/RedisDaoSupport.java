@@ -419,13 +419,13 @@ public abstract class RedisDaoSupport extends DaoSupport {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> listByDateType(DataType dataType,
+	protected <V> List<V> listByDataType(DataType dataType,
 			RedisConnection connection, int dbIndex, byte[] targetKey) {
 		try {
 			// 执行当前对象的xxxTypeList方法后返回结果，其中xxx表示DataType枚举的code值
 			return (List<V>) ReflectionUtils.invokeMethod(this, dataType.code() + "TypeList", 
-					new Class<?>[]{RedisConnection.class, int.class, byte[].class}, 
-					new Object[]{connection, dbIndex, targetKey});
+					new Class<?>[] { RedisConnection.class, int.class, byte[].class },
+					new Object[] { connection, dbIndex, targetKey });
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}

@@ -304,4 +304,36 @@ public interface RedisKeyCommandsDao {
 	 */
 	public <K> DataType type(int dbIndex, K key);
 	
+	/**
+	 * @description 获取默认第0库中所有键对应的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public <V> Set<V> values();
+	
+	/**
+	 * @description 获取指定库中所有键对应的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @return
+	 */
+	public <V> Set<V> values(int dbIndex);
+	
+	/**
+	 * @description 获取默认第0库中匹配模式的键对应的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pattern
+	 * @return
+	 */
+	public <V> Set<V> values(String pattern);
+	
+	/**
+	 * @description 获取指定库中匹配模式的键对应的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param pattern
+	 * @return
+	 */
+	public <V> Set<V> values(int dbIndex, String pattern);
+	
 }
