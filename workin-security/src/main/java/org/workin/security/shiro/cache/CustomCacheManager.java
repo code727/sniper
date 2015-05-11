@@ -49,7 +49,7 @@ public class CustomCacheManager implements CacheManager, Destroyable {
 	
 	@Override
 	public void destroy() throws Exception {
-		cacheRepository.destroy();
+//		cacheRepository.destroy();
 	}
 
 }
