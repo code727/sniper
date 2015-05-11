@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年5月11日
+ * Create Date : 2015-5-11
  */
 
 package org.workin.nosql.redis.dao;
