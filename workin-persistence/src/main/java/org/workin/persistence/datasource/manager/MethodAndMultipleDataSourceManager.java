@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.springframework.util.PatternMatchUtils;
+import org.workin.commons.util.MapUtils;
 import org.workin.persistence.datasource.selector.MultipleDataSourceSelector;
 
 /**
@@ -30,7 +31,7 @@ import org.workin.persistence.datasource.selector.MultipleDataSourceSelector;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MethodAndMultipDataSourceManager extends MethodAndDataSourceManager {
+public class MethodAndMultipleDataSourceManager extends MethodAndDataSourceManager {
 	
 	/** 维护方法名称模式与多个数据源名称之间的关系 */
 	private Map<String, String[]> patternAndNames;
@@ -51,7 +52,8 @@ public class MethodAndMultipDataSourceManager extends MethodAndDataSourceManager
 		
 		Iterator<Entry<String, String>> iterator = super
 				.getMethodPatternAndDataSourceName().entrySet().iterator();
-				
+		
+		this.patternAndNames = MapUtils.newHashMap();
 		while (iterator.hasNext()) {
 			Entry<String, String> entry = iterator.next();
 			this.patternAndNames.put(entry.getKey(), entry.getValue().split(","));
@@ -71,5 +73,5 @@ public class MethodAndMultipDataSourceManager extends MethodAndDataSourceManager
 		}
 		return null;
 	}
-
+	
 }
