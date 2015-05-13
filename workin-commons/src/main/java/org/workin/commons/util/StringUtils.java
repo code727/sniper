@@ -1140,7 +1140,7 @@ public class StringUtils {
 		StringBuilder result = new StringBuilder();
 		int index;
 		for (int i = 0; i < length; i++) {
-			index = (int) (Math.random() * str.length());
+			index =  NumberUtils.randomIn(str.length());
 			result.append(str.charAt(index));
 		}
 		return result.toString();
