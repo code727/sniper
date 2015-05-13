@@ -52,7 +52,7 @@ public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceAdvice {
 					+ methodName + "] not found correlative data source name.");
 		
 		MultipleDataSourceHolder.setDataSourceName(sourceName);
-		logger.info("Invoke method [" + methodName + "] of data source [" + sourceName + "].");
+		logger.debug("Invoke method [" + methodName + "] of data source [" + sourceName + "].");
 	}
 
 	/**
