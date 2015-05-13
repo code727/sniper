@@ -26,22 +26,26 @@ import org.springframework.util.PatternMatchUtils;
 import org.workin.commons.util.MapUtils;
 
 /**
- * @description 多数据源管理抽象类，主要维护方法与所选数据源之间的关系
+ * @description 方法和单数据源管理抽象类，主要维护方法名称与单个数据源之间的关系
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractMultipleDataSourceManager implements InitializingBean {
+public class MethodAndDataSourceManager implements DataSourceManager, InitializingBean {
 	
-	/** 保存方法名称模式与相关数据源名称之间的关系 */
+	/** 维护方法名称模式与数据源名称之间的关系 */
 	private Map<String, String> methodPatternAndDataSourceName;
 	
 	private Set<String> methodPattern;
-
+	
 	public void setMethodPatternAndDataSourceName(
 			Map<String, String> methodPatternAndDataSourceName) {
 		this.methodPatternAndDataSourceName = methodPatternAndDataSourceName;
 	}
 	
+	public Map<String, String> getMethodPatternAndDataSourceName() {
+		return methodPatternAndDataSourceName;
+	}
+
 	public void afterPropertiesSet() throws Exception {
 		if (MapUtils.isEmpty(methodPatternAndDataSourceName))
 			throw new IllegalArgumentException("Property 'methodPatternAndDataSourceName' is required");
@@ -55,7 +59,8 @@ public abstract class AbstractMultipleDataSourceManager implements InitializingB
 	 * @param methodPattern
 	 * @return
 	 */
-	protected String getDataSourceName(String methodMame) {
+	@Override
+	public String getDataSourceName(String methodMame) {
 		for (String pattern : this.methodPattern) {
 			if (PatternMatchUtils.simpleMatch(pattern, methodMame)) 
 				return this.methodPatternAndDataSourceName.get(pattern);
@@ -63,5 +68,5 @@ public abstract class AbstractMultipleDataSourceManager implements InitializingB
 		
 		return null;
 	}
-
+	
 }

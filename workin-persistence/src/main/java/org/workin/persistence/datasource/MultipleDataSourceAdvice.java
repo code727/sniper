@@ -22,19 +22,15 @@ import java.lang.reflect.Method;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.AopInvocationException;
-import org.springframework.aop.MethodBeforeAdvice;
-import org.springframework.aop.ThrowsAdvice;
 
 /**
- * @description 多数据源切换选择器
+ * @description 多数据源切换实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceManager implements MethodBeforeAdvice,
-		AfterReturningAdvice, ThrowsAdvice {
-	
+public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceAdvice {
+		
 	private static Logger logger = LoggerFactory.getLogger(MultipleDataSourceAdvice.class);
 	
 	/**
@@ -49,14 +45,13 @@ public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceManager 
 	public void before(Method method, Object[] args, Object target)
 			throws Throwable {
 		String methodName = method.getName();
-		String sourceName = getDataSourceName(methodName);
+		String sourceName = multipleDataSourceManager.getDataSourceName(methodName);
 		if (sourceName == null)
 			throw new AopInvocationException("Target method ["
 					+ methodName + "] not found correlative data source name.");
 		
-		logger.info("Invoke method method [" + methodName + "] of data source [" + sourceName + "].");
 		MultipleDataSourceHolder.setDataSourceName(sourceName);
-		
+		logger.info("Invoke method method [" + methodName + "] of data source [" + sourceName + "].");
 	}
 
 	/**
