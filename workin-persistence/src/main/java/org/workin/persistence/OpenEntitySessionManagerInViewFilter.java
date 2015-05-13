@@ -56,7 +56,7 @@ public class OpenEntitySessionManagerInViewFilter implements OpenEntitySessionMa
 	public void initFilterBean(String excludeSuffix, String includeSuffix) throws ServletException {
 		if (StringUtils.isNotBlank(excludeSuffix)) {
 			excludeSuffixs = excludeSuffix.split(",");
-			excludeSuffixs = ArrayUtils.trim(excludeSuffixs);
+			excludeSuffixs = ArrayUtils.rbte(excludeSuffixs);
 			
 			if (excludeSuffixs.length == 0)
 				throw new ServletException("Exclusion suffixs can not be blank.");
@@ -70,7 +70,7 @@ public class OpenEntitySessionManagerInViewFilter implements OpenEntitySessionMa
 		
 		if (StringUtils.isNotBlank(excludeSuffix)) {
 			includeSuffixs = includeSuffix.split(",");
-			includeSuffixs = ArrayUtils.trim(includeSuffixs);
+			includeSuffixs = ArrayUtils.rbte(includeSuffixs);
 			if (includeSuffixs.length == 0)
 				throw new ServletException("Inclusion suffixs can not be blank.");
 			
