@@ -16,13 +16,14 @@
  * Create Date : 2015-5-12
  */
 
-package org.workin.persistence.datasource;
+package org.workin.persistence.datasource.advice;
 
 import java.lang.reflect.Method;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.AopInvocationException;
+import org.workin.persistence.datasource.MultipleDataSourceHolder;
 
 /**
  * @description 多数据源切换实现类
@@ -51,7 +52,7 @@ public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceAdvice {
 					+ methodName + "] not found correlative data source name.");
 		
 		MultipleDataSourceHolder.setDataSourceName(sourceName);
-		logger.info("Invoke method method [" + methodName + "] of data source [" + sourceName + "].");
+		logger.info("Invoke method [" + methodName + "] of data source [" + sourceName + "].");
 	}
 
 	/**

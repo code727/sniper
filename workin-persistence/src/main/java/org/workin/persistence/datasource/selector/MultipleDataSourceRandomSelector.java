@@ -13,24 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-5-13
+ * Create Date : 2015年5月13日
  */
 
-package org.workin.persistence.datasource;
+package org.workin.persistence.datasource.selector;
+
+import org.workin.commons.util.NumberUtils;
 
 /**
- * @description 数据源管理器接口
+ * @description 多数据源随机选择器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface DataSourceManager {
-	
-	/**
-	 * @description 根据方法名称获取对应的数据源名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param methodMame
-	 * @return
-	 */
-	public String getDataSourceName(String methodMame);
+public class MultipleDataSourceRandomSelector implements MultipleDataSourceSelector {
+
+	@Override
+	public String select(String[] sourceNames) {
+		return sourceNames[NumberUtils.randomIn(sourceNames.length)];
+	}
 
 }

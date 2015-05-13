@@ -16,12 +16,13 @@
  * Create Date : 2015-5-13
  */
 
-package org.workin.persistence.datasource;
+package org.workin.persistence.datasource.advice;
 
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.InitializingBean;
+import org.workin.persistence.datasource.manager.DataSourceManager;
 
 /**
  * @description 多数据源切换选择器抽象类

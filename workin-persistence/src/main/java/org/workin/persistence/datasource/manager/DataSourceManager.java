@@ -16,13 +16,21 @@
  * Create Date : 2015-5-13
  */
 
-package org.workin.persistence.datasource;
+package org.workin.persistence.datasource.manager;
 
 /**
- * @description 可选择的多数据源管理器
+ * @description 数据源管理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class SelectableMultipleDataSourceManager {
+public interface DataSourceManager {
+	
+	/**
+	 * @description 根据方法名称获取对应的数据源名称
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param methodMame
+	 * @return
+	 */
+	public String getDataSourceName(String methodMame);
 
 }

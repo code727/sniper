@@ -16,7 +16,7 @@
  * Create Date : 2015-5-12
  */
 
-package org.workin.persistence.datasource;
+package org.workin.persistence.datasource.manager;
 
 import java.util.Map;
 import java.util.Set;
@@ -26,7 +26,7 @@ import org.springframework.util.PatternMatchUtils;
 import org.workin.commons.util.MapUtils;
 
 /**
- * @description 方法和单数据源管理抽象类，主要维护方法名称与单个数据源之间的关系
+ * @description 方法和单数据源关系管理实现类，主要维护方法名称与单个数据源之间的关系
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -35,6 +35,7 @@ public class MethodAndDataSourceManager implements DataSourceManager, Initializi
 	/** 维护方法名称模式与数据源名称之间的关系 */
 	private Map<String, String> methodPatternAndDataSourceName;
 	
+	/** 方法名称集 */
 	private Set<String> methodPattern;
 	
 	public void setMethodPatternAndDataSourceName(
@@ -44,6 +45,10 @@ public class MethodAndDataSourceManager implements DataSourceManager, Initializi
 	
 	public Map<String, String> getMethodPatternAndDataSourceName() {
 		return methodPatternAndDataSourceName;
+	}
+	
+	public Set<String> getMethodPattern() {
+		return methodPattern;
 	}
 
 	public void afterPropertiesSet() throws Exception {
