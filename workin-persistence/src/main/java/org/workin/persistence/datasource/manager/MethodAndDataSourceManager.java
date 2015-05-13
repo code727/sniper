@@ -61,13 +61,13 @@ public class MethodAndDataSourceManager implements DataSourceManager, Initializi
 	/**
 	 * @description 根据方法名称获取匹配模式对应的数据源名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param methodPattern
+	 * @param methodName
 	 * @return
 	 */
 	@Override
-	public String getDataSourceName(String methodMame) {
+	public String getDataSourceName(String methodName) {
 		for (String pattern : this.methodPattern) {
-			if (PatternMatchUtils.simpleMatch(pattern, methodMame)) 
+			if (PatternMatchUtils.simpleMatch(pattern, methodName)) 
 				return this.methodPatternAndDataSourceName.get(pattern).trim();
 		}
 		

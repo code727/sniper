@@ -62,9 +62,9 @@ public class MethodAndMultipleDataSourceManager extends MethodAndDataSourceManag
 	}
 	
 	@Override
-	public String getDataSourceName(String methodMame) {
+	public String getDataSourceName(String methodName) {
 		for (String pattern : super.getMethodPattern()) {
-			if (PatternMatchUtils.simpleMatch(pattern, methodMame)) {
+			if (PatternMatchUtils.simpleMatch(pattern, methodName)) {
 				String[] sourceNames = this.patternAndNames.get(pattern);
 				return sourceNames.length != 1 ? this.multipleDataSourceSelector
 						.select(sourceNames) : sourceNames[0];
