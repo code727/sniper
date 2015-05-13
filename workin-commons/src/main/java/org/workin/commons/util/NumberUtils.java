@@ -130,5 +130,86 @@ public class NumberUtils {
 	public static short safeShort(Short value, short defaultValue) {
 		return value != null ? value : defaultValue;
 	}
-		
+	
+	/** 
+	 * @description 获取不为空的比特数，否则返回0
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 * @return
+	 */
+	public static byte safeByte(Byte value) {
+		return safeByte(value, (byte) 0);
+	}
+	
+	/**
+	 * @description 获取不为空的比特数，否则返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 * @param defaultValue
+	 * @return
+	 */
+	public static byte safeByte(Byte value, byte defaultValue) {
+		return value != null ? value : defaultValue;
+	}
+	
+	/**
+	 * @description 生成指定值之内的随机双精度浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param in
+	 * @return
+	 */
+	public static double randomIn(double in) {
+		return (double) (Math.random() * in);
+	}
+	
+	/**
+	 * @description 生成指定值之内的随机浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param in
+	 * @return
+	 */
+	public static float randomIn(float in) {
+		return (float) (Math.random() * in);
+	}
+	
+	/**
+	 * @description 生成指定值之内的随机整数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param in
+	 * @return
+	 */
+	public static int randomIn(int in) {
+		return (int) (Math.random() * in);
+	}
+	
+	/**
+	 * @description 生成指定值之内的随机长整数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param in
+	 * @return
+	 */
+	public static long randomIn(long in) {
+		return (long) (Math.random() * in);
+	}
+	
+	/**
+	 * @description 生成指定值之内的随机短整数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param in
+	 * @return
+	 */
+	public static short randomIn(short in) {
+		return (short) (Math.random() * in);
+	}
+	
+	/**
+	 * @description 生成指定值之内的随机比特数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param in
+	 * @return
+	 */
+	public static byte randomIn(byte in) {
+		return (byte) (Math.random() * in);
+	}
+	
 }
