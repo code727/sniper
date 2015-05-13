@@ -3579,17 +3579,14 @@ public class ArrayUtils {
 		if (isEmpty(array))
 			return array;
 		
-		int i = 0;
-		for (String e : array) {
-			if (StringUtils.isEmpty(e)) {
+		for (int i = 0; i < array.length; i++) {
+			if (StringUtils.isEmpty(array[i])) {
 				Object[] temp = remove(array, i);
 				array = new String[temp.length];
 				System.arraycopy(temp, 0, array, 0, array.length);
 				return rete(array);
-			} else {
-				array[i] = e.trim();
-				i++;
-			}
+			} else 
+				array[i] = array[i].trim();
 		}
 		return array;
 	}
@@ -3604,17 +3601,14 @@ public class ArrayUtils {
 		if (isEmpty(array))
 			return array;
 		
-		int i = 0;
-		for (String e : array) {
-			if (StringUtils.isBlank(e)) {
+		for (int i = 0; i < array.length; i++) {
+			if (StringUtils.isBlank(array[i])) {
 				Object[] temp = remove(array, i);
 				array = new String[temp.length];
 				System.arraycopy(temp, 0, array, 0, array.length);
-				return rete(array);
-			} else {
-				array[i] = e.trim();
-				i++;
-			}
+				return rbte(array);
+			} else 
+				array[i] = array[i].trim();
 		}
 		return array;
 	}
@@ -3654,5 +3648,5 @@ public class ArrayUtils {
 		}
 		return builder.toString();
 	}
-					
+						
 }
