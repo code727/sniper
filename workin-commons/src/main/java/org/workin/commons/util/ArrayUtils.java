@@ -3570,21 +3570,47 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 清除字符串数组里所有的空元素，以及各元素左右两侧的空白字符
+	 * @description 删除字符串数组里所有的空字符串元素，并且整理各元素左右两侧的空白字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
 	 */
-	public static String[] trim(String array[]) {
+	public static String[] rete(String array[]) {
 		if (isEmpty(array))
 			return array;
+		
+		int i = 0;
+		for (String e : array) {
+			if (StringUtils.isEmpty(e)) {
+				Object[] temp = remove(array, i);
+				array = new String[temp.length];
+				System.arraycopy(temp, 0, array, 0, array.length);
+				return rete(array);
+			} else {
+				array[i] = e.trim();
+				i++;
+			}
+		}
+		return array;
+	}
+	
+	/**
+	 * @description 删除字符串数组里所有的空白字符串元素，并且整理各元素左右两侧的空白字符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @return
+	 */
+	public static String[] rbte(String array[]) {
+		if (isEmpty(array))
+			return array;
+		
 		int i = 0;
 		for (String e : array) {
 			if (StringUtils.isBlank(e)) {
 				Object[] temp = remove(array, i);
 				array = new String[temp.length];
 				System.arraycopy(temp, 0, array, 0, array.length);
-				return trim(array);
+				return rete(array);
 			} else {
 				array[i] = e.trim();
 				i++;
@@ -3628,5 +3654,5 @@ public class ArrayUtils {
 		}
 		return builder.toString();
 	}
-				
+					
 }
