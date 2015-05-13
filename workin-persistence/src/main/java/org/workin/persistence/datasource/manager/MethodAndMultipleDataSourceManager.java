@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.springframework.util.PatternMatchUtils;
+import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.persistence.datasource.selector.MultipleDataSourceSelector;
 
@@ -56,21 +57,20 @@ public class MethodAndMultipleDataSourceManager extends MethodAndDataSourceManag
 		this.patternAndNames = MapUtils.newHashMap();
 		while (iterator.hasNext()) {
 			Entry<String, String> entry = iterator.next();
-			this.patternAndNames.put(entry.getKey(), entry.getValue().split(","));
+			this.patternAndNames.put(entry.getKey(), ArrayUtils.rbte(entry.getValue().split(",")));
 		}
 	}
 	
 	@Override
 	public String getDataSourceName(String methodMame) {
 		for (String pattern : super.getMethodPattern()) {
-			String[] sourceNames = null;
-			if (PatternMatchUtils.simpleMatch(pattern, methodMame)) 
-				sourceNames = this.patternAndNames.get(pattern);
-				if (sourceNames.length == 1)
-					return sourceNames[0];
-				
-				return this.multipleDataSourceSelector.select(sourceNames);
+			if (PatternMatchUtils.simpleMatch(pattern, methodMame)) {
+				String[] sourceNames = this.patternAndNames.get(pattern);
+				return sourceNames.length != 1 ? this.multipleDataSourceSelector
+						.select(sourceNames) : sourceNames[0];
+			}
 		}
+		
 		return null;
 	}
 	

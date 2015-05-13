@@ -68,7 +68,7 @@ public class MethodAndDataSourceManager implements DataSourceManager, Initializi
 	public String getDataSourceName(String methodMame) {
 		for (String pattern : this.methodPattern) {
 			if (PatternMatchUtils.simpleMatch(pattern, methodMame)) 
-				return this.methodPatternAndDataSourceName.get(pattern);
+				return this.methodPatternAndDataSourceName.get(pattern).trim();
 		}
 		
 		return null;
