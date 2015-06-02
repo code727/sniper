@@ -7,7 +7,7 @@ package org.worin.support.test;
 
 import org.junit.Test;
 import org.workin.support.context.ApplicationContext;
-import org.workin.support.util.ApplicationContextUtils;
+import org.workin.support.context.ApplicationContextUtils;
 import org.workin.test.junit.BaseTestCase;
 
 /**
@@ -19,14 +19,14 @@ public class ApplicationContextTest extends BaseTestCase {
 	
 	@Test
 	public void testThreadLocalContext() {
-		ApplicationContext<String, String> context1 = ApplicationContextUtils.getThreadLocalContext();
-		ApplicationContext<String, String> context2 = ApplicationContextUtils.getThreadLocalContext();
+		ApplicationContext<String, String> context1 = ApplicationContextUtils.newThreadLocalContext();
+		ApplicationContext<String, String> context2 = ApplicationContextUtils.newThreadLocalContext();
 		
-		String name = "my";
-		String value = "dubin";
-		context2.setAttribute(name, value);
-		assertEquals(context1.getAttribute(name), value);
-		
+		context1.setAttribute("my", "dubin");
+		System.out.println(context1.getAttribute("my"));
+		context2.setAttribute("my", "daniele");
+		System.out.println(context2.getAttribute("my"));
+		System.out.println(context1.getAttribute("my"));
 	}
 		
 }
