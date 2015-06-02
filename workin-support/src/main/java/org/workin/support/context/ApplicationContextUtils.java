@@ -16,9 +16,8 @@
  * Create Date : 2015-1-26
  */
 
-package org.workin.support.util;
+package org.workin.support.context;
 
-import org.workin.support.context.ThreadLocalContext;
 
 /**
  * @description 应用上下文工具类
@@ -28,11 +27,11 @@ import org.workin.support.context.ThreadLocalContext;
 public class ApplicationContextUtils {
 	
 	/**
-	 * @description 获取线程局部变量上下文对象
+	 * @description 创建线程局部变量上下文对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static <K,V> ThreadLocalContext<K,V> getThreadLocalContext() {
+	public static <K,V> ThreadLocalContext<K,V> newThreadLocalContext() {
 		return new ThreadLocalContext<K, V>();
 	}
 	
