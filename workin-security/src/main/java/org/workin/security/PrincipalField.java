@@ -25,11 +25,17 @@ package org.workin.security;
  */
 public class PrincipalField {
 	
+	/** 默认的用户登录名字段名称 */
+	public static final String DEFAULT_LOGINNAMEFIELD = "loginName";
+	
+	/** 默认的用户姓名字段名称 */
+	public static final String DEFAULT_USERNAMEFIELD = "userName";
+	
 	/** 用户登录名字段名称 */
-	private String loginNameField = "loginName";
+	private String loginNameField;
 	
 	/** 用户姓名字段名称 */
-	private String userNameField = "userName";
+	private String userNameField;
 
 	public String getLoginNameField() {
 		return loginNameField;

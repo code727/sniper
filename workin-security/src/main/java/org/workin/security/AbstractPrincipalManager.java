@@ -54,10 +54,10 @@ public abstract class AbstractPrincipalManager implements PrincipalManager {
 			}
 		} else {
 			try {
-				return BeanUtils.get(user, "loginName").toString();
+				return BeanUtils.get(user, PrincipalField.DEFAULT_LOGINNAMEFIELD).toString();
 			} catch (Exception e) {
-				throw new SecurityException("Login name field [loginName] "
-						+ "can not found in user class [" + user.getClass() + "].");
+				throw new SecurityException("Login name field [" 
+						+ PrincipalField.DEFAULT_LOGINNAMEFIELD + "] can not found in user class [" + user.getClass() + "].");
 			}
 		}
 	}
@@ -78,10 +78,10 @@ public abstract class AbstractPrincipalManager implements PrincipalManager {
 			}
 		} else {
 			try {
-				return BeanUtils.get(user, "userName").toString();
+				return BeanUtils.get(user, PrincipalField.DEFAULT_USERNAMEFIELD).toString();
 			} catch (Exception e) {
-				throw new SecurityException("User name field [userName] "
-						+ "can not found in user class [" + user.getClass() + "].");
+				throw new SecurityException("User name field [" 
+						+ PrincipalField.DEFAULT_USERNAMEFIELD + "] can not found in user class [" + user.getClass() + "].");
 			}
 		}
 	}

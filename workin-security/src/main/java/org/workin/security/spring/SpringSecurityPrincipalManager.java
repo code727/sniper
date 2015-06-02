@@ -18,7 +18,6 @@
 
 package org.workin.security.spring;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.workin.security.AbstractPrincipalManager;
 
 /**
@@ -28,10 +27,9 @@ import org.workin.security.AbstractPrincipalManager;
  */
 public class SpringSecurityPrincipalManager extends AbstractPrincipalManager {
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getCurrentUser() {
-		return (T) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return SpringSecurityUtils.getCurrentUser();
 	}
 
 }

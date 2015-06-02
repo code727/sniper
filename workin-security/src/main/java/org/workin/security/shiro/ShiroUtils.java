@@ -56,5 +56,15 @@ public class ShiroUtils {
 	public static void setSessionAttribute(Object key, Object value) {
 		getCurrentSession().setAttribute(key, value);
 	}
+	
+	/**
+	 * @description 获取当前用户
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T getCurrentUser() {
+		return (T) ShiroUtils.getCurrentSubject().getPrincipal();
+	}
 
 }

@@ -27,10 +27,9 @@ import org.workin.security.AbstractPrincipalManager;
  */
 public class ShiroPrincipalManager extends AbstractPrincipalManager {
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getCurrentUser() {
-		return (T) ShiroUtils.getCurrentSubject().getPrincipal();
+		return ShiroUtils.getCurrentUser();
 	}
 
 }
