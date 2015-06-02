@@ -19,7 +19,7 @@
 package org.workin.persistence;
 
 import org.workin.commons.util.StringUtils;
-import org.workin.security.SecurityManager;
+import org.workin.security.PrincipalManager;
 
 /**
  * @description 审核事件处理器抽象类
@@ -28,23 +28,23 @@ import org.workin.security.SecurityManager;
  */
 public abstract class AbstractAuditEventHandler<T> implements AuditEventHandler<T> {
 	
-	private SecurityManager securityManager;
+	private PrincipalManager pincipalManager;
 
 	@Override
 	public String getAuditorName() {
-		String userName = securityManager.getCurrentUserName();
+		String userName = pincipalManager.getCurrentLoginName();
 		if (StringUtils.isBlank(userName))
-			throw new SecurityException("Current user name is empty! Please login again.");
+			throw new SecurityException("Current user loginName is empty! Please login again.");
 		
 		return userName;
 	}
 
-	public SecurityManager getSecurityManager() {
-		return securityManager;
+	public PrincipalManager getPincipalManager() {
+		return pincipalManager;
 	}
 
-	public void setSecurityManager(SecurityManager securityManager) {
-		this.securityManager = securityManager;
+	public void setPincipalManager(PrincipalManager pincipalManager) {
+		this.pincipalManager = pincipalManager;
 	}
-
+	
 }
