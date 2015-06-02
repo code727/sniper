@@ -42,6 +42,14 @@ public class DefaultBeanReflector implements BeanReflector {
 	public DefaultBeanReflector() {
 		this.propertySeperator = ".";
 	}
+	
+	public String getPropertySeperator() {
+		return propertySeperator;
+	}
+
+	public void setPropertySeperator(String propertySeperator) {
+		this.propertySeperator = propertySeperator;
+	}
 
 	@Override
 	public String getterName(Object bean, String expression) {
