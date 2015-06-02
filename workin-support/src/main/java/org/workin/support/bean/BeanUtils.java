@@ -184,7 +184,6 @@ public class BeanUtils {
 	 */
 	public static <T> Object get(T bean, String propertyName) throws Exception {
 		return new DefaultBeanReflector().get(bean, propertyName);
-		
 	}
 		
 	/**
