@@ -13,29 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-1-27
+ * Create Date : 2015-6-2
  */
 
-package org.workin.security.spring;
-
-import org.workin.security.SecurityManager;
+package org.workin.security;
 
 /**
- * @description Spring安全管理器
+ * @description Principal域对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SpringSecurityManager implements SecurityManager {
+public class PrincipalField {
+	
+	/** 用户登录名字段名称 */
+	private String loginNameField = "loginName";
+	
+	/** 用户姓名字段名称 */
+	private String userNameField = "userName";
 
-	@Override
-	public String getCurrentUserName() {
-		return "";
+	public String getLoginNameField() {
+		return loginNameField;
 	}
 
-	@Override
-	public <T> T getCurrentUser() {
-		return null;
+	public void setLoginNameField(String loginNameField) {
+		this.loginNameField = loginNameField;
 	}
 
+	public String getUserNameField() {
+		return userNameField;
+	}
 
+	public void setUserNameField(String userNameField) {
+		this.userNameField = userNameField;
+	}
+	
 }

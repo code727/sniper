@@ -18,23 +18,19 @@
 
 package org.workin.security.shiro;
 
-import org.workin.security.SecurityManager;
+import org.workin.security.AbstractPrincipalManager;
 
 /**
- * @description Shiro安全管理器
+ * @description Shiro Principal管理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ShiroSecurityManager implements SecurityManager {
-
-	@Override
-	public String getCurrentUserName() {
-		return "";
-	}
-
+public class ShiroPrincipalManager extends AbstractPrincipalManager {
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getCurrentUser() {
-		return null;
+		return (T) ShiroUtils.getCurrentSubject().getPrincipal();
 	}
 
 }
