@@ -19,6 +19,7 @@
 package org.workin.persistence.datasource;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+import org.workin.persistence.datasource.advice.MultipleDataSourceHolder;
 
 /**
  * @description 多数据源实现类
@@ -29,7 +30,7 @@ public class MultipleDataSource extends AbstractRoutingDataSource {
 	
 	@Override
 	protected Object determineCurrentLookupKey() {
-		return MultipleDataSourceHolder.getDataSourceName();
+		return MultipleDataSourceHolder.get();
 	}
 
 }
