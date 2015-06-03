@@ -7,7 +7,7 @@ package org.worin.support.test;
 
 import org.junit.Test;
 import org.workin.support.context.ApplicationContext;
-import org.workin.support.context.ApplicationContextUtils;
+import org.workin.support.context.ApplicationContextHolder;
 import org.workin.test.junit.BaseTestCase;
 
 /**
@@ -19,8 +19,8 @@ public class ApplicationContextTest extends BaseTestCase {
 	
 	@Test
 	public void testThreadLocalContext() {
-		ApplicationContext<String, String> context1 = ApplicationContextUtils.newThreadLocalContext();
-		ApplicationContext<String, String> context2 = ApplicationContextUtils.newThreadLocalContext();
+		ApplicationContext<String, String> context1 = ApplicationContextHolder.newThreadLocalContext();
+		ApplicationContext<String, String> context2 = ApplicationContextHolder.newThreadLocalContext();
 		
 		context1.setAttribute("my", "dubin");
 		System.out.println(context1.getAttribute("my"));
