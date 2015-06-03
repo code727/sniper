@@ -22,11 +22,11 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.workin.persistence.datasource.advice.MultipleDataSourceHolder;
 
 /**
- * @description 多数据源实现类
+ * @description JDBC多数据源实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MultipleDataSource extends AbstractRoutingDataSource {
+public class JdbcMultipleDataSource extends AbstractRoutingDataSource {
 	
 	@Override
 	protected Object determineCurrentLookupKey() {
