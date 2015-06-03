@@ -99,6 +99,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
+            <artifactId>workin-support</artifactId>
+            <version>1.0.0</version>
+            <scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
             <artifactId>workin-test</artifactId>
             <version>1.0.0</version>
             <scope>test</scope>
