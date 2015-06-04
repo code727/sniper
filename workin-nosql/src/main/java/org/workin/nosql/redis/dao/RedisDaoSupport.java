@@ -26,8 +26,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.support.DaoSupport;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -39,13 +39,15 @@ import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.nosql.redis.RedisRepository;
 import org.workin.nosql.redis.RedisRepositoryManager;
+import org.workin.support.context.ApplicationContext;
+import org.workin.support.context.ThreadLocalContext;
 
 /**
  * @description Redis数据访问接口支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class RedisDaoSupport extends DaoSupport {
+public abstract class RedisDaoSupport implements InitializingBean {
 		
 	@Autowired
 	protected RedisTemplate<?, ?> redisTemplate;
@@ -53,8 +55,8 @@ public abstract class RedisDaoSupport extends DaoSupport {
 	@Autowired
 	protected RedisRepositoryManager repositoryManager;
 	
-	/** 当前库索引 */
-	private int currentdbIndex = 0;
+	/** 当前库 */
+	private ApplicationContext<String, Integer> currentDb;
 	
 	/** 全局键序列化器 */
 	private RedisSerializer<?> globalKeySerializer;
@@ -85,7 +87,7 @@ public abstract class RedisDaoSupport extends DaoSupport {
 	}
 		
 	@Override
-	protected void checkDaoConfig() throws IllegalArgumentException {
+	public void afterPropertiesSet() throws Exception {
 		if (this.redisTemplate == null)
 			throw new IllegalArgumentException(
 					"RedisTemplate object can not be null, please inject to spring container.");
@@ -98,6 +100,9 @@ public abstract class RedisDaoSupport extends DaoSupport {
 		this.globalValueSerializer = this.redisTemplate.getValueSerializer();
 		this.globalHashKeySerializer = this.redisTemplate.getHashKeySerializer();
 		this.globalHashValueSerializer = this.redisTemplate.getHashValueSerializer();
+		
+		this.currentDb = new ThreadLocalContext<String, Integer>();
+		this.currentDb.setAttribute("index", 0);
 	}
 	
 	/**
@@ -132,9 +137,9 @@ public abstract class RedisDaoSupport extends DaoSupport {
 	 * @return
 	 */
 	protected RedisRepository select(RedisConnection connection, int dbIndex) {
-		if (currentdbIndex != dbIndex) {
+		if (currentDb.getAttribute("index") != dbIndex) {
 			connection.select(dbIndex);
-			currentdbIndex = dbIndex;
+			currentDb.setAttribute("index", dbIndex);
 		}
 		return repositoryManager != null ? repositoryManager.getRepository(dbIndex) : null;
 	}
