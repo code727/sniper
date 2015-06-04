@@ -47,12 +47,12 @@ import org.workin.commons.util.StringUtils;
 import org.workin.nosql.redis.RedisRepository;
 
 /**
- * @description Redis数据访问实现类
+ * @description Redis命令行数据访问实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @Repository
-public class RedisDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
+public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
 	
 	@Override
 	public <K> Set<K> keys() {
