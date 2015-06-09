@@ -40,6 +40,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.nosql.redis.RedisRepository;
 import org.workin.nosql.redis.RedisRepositoryManager;
 import org.workin.support.context.ApplicationContext;
+import org.workin.support.context.DataSourceHolder;
 import org.workin.support.context.ThreadLocalContext;
 
 /**
@@ -102,7 +103,6 @@ public abstract class RedisDaoSupport implements InitializingBean {
 		this.globalHashValueSerializer = this.redisTemplate.getHashValueSerializer();
 		
 		this.currentDb = new ThreadLocalContext<String, Integer>();
-		this.currentDb.setAttribute("index", 0);
 	}
 	
 	/**
@@ -137,9 +137,11 @@ public abstract class RedisDaoSupport implements InitializingBean {
 	 * @return
 	 */
 	protected RedisRepository select(RedisConnection connection, int dbIndex) {
-		if (currentDb.getAttribute("index") != dbIndex) {
+		Integer currentIndex = currentDb.getAttribute(DataSourceHolder.getDataSourceName());
+		// 避免在同一个连接中重复多次选择同一个库，包括在数据源环境下
+		if (currentIndex == null || currentIndex != dbIndex) {
 			connection.select(dbIndex);
-			currentDb.setAttribute("index", dbIndex);
+			currentDb.setAttribute(DataSourceHolder.getDataSourceName(), dbIndex);
 		}
 		return repositoryManager != null ? repositoryManager.getRepository(dbIndex) : null;
 	}
