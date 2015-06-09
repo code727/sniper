@@ -34,6 +34,8 @@ import org.workin.commons.util.StringUtils;
  * @version 1.0, 2014-12-9
  */
 public class BeanUtils {
+	
+	private static final BeanReflector beanReflector = new DefaultBeanReflector();
 			
 	/**
 	 * @description 检索未定义的成员属性对应的getter方法
@@ -148,7 +150,7 @@ public class BeanUtils {
 	 * @return
 	 */
 	public static <T> String getterName(T bean, String propertyName) {
-		return new DefaultBeanReflector().getterName(bean, propertyName);
+		return beanReflector.getterName(bean, propertyName);
 	}
 	
 	/**
@@ -171,7 +173,7 @@ public class BeanUtils {
 	 * @return
 	 */
 	public static <T> String setterName(T bean, String propertyName, Class<?> parameterType) {
-		return new DefaultBeanReflector().setterName(bean, propertyName);
+		return beanReflector.setterName(bean, propertyName);
 	}
 	
 	/**
@@ -183,7 +185,7 @@ public class BeanUtils {
 	 * @throws Exception 
 	 */
 	public static <T> Object get(T bean, String propertyName) throws Exception {
-		return new DefaultBeanReflector().get(bean, propertyName);
+		return beanReflector.get(bean, propertyName);
 	}
 		
 	/**
@@ -207,7 +209,7 @@ public class BeanUtils {
 	 * @throws NoSuchMethodException 
 	 */
 	public static <T> void set(T bean, String propertyName, Class<?> parameterType, Object parameterValue) throws Exception {
-		new DefaultBeanReflector().set(bean, propertyName, parameterType, parameterValue);
+		beanReflector.set(bean, propertyName, parameterType, parameterValue);
 	}
 	
 	/**
@@ -266,7 +268,7 @@ public class BeanUtils {
 	 */
 	public static <T> T create(Class<T> clazz, Map<String, Object> propertyValues) {
 		try {
-			return new DefaultBeanReflector().create(clazz, propertyValues);
+			return beanReflector.create(clazz, propertyValues);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
