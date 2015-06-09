@@ -87,7 +87,7 @@ public class PropertyFilter implements PersistencePropertyFilter {
 			this.setOperator(operatorEnum);
 		else
 			throw new IllegalArgumentException("Unknow operator \"" + operator + 
-					"\", support operator types [" + Operator.joinName() + "].");
+					"\", support operator types [" + Operator.ALL_OPERATOR_NAME + "].");
 	}
 	
 	@Override

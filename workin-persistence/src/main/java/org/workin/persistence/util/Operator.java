@@ -59,6 +59,9 @@ public final class Operator extends AbstractEnumObject<String, String> {
 	/** LIKE运算符，右侧匹配模式"LIKE value% */
 	public static final Operator RLIKE = new Operator("RLIKE", " LIKE {value}%");
 	
+	/** 所有的运算符名 */
+	public static final String ALL_OPERATOR_NAME;
+	
 	protected Operator(String name, String value) {
 		super(name, value);
 	}
@@ -72,6 +75,13 @@ public final class Operator extends AbstractEnumObject<String, String> {
 		ENUM_GROUP.add(LIKE);
 		ENUM_GROUP.add(LLIKE);
 		ENUM_GROUP.add(RLIKE);
+		
+		StringBuilder builder = new StringBuilder();
+		for (Operator operator : ENUM_GROUP) 
+			builder.append(operator.getKey()).append(",");
+				
+		builder.deleteCharAt(builder.lastIndexOf(","));
+		ALL_OPERATOR_NAME = builder.toString();
 	}
 	
 	/**
@@ -110,19 +120,5 @@ public final class Operator extends AbstractEnumObject<String, String> {
 	public static boolean exist(String name) {
 		return get(name) != null;
 	}
-	
-	/**
-	 * @description 将所有运算符的名称连接成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public static String joinName() {
-		StringBuilder builder = new StringBuilder();
-		for (Operator operator : ENUM_GROUP) 
-			builder.append(operator.getKey()).append(",");
-				
-		builder.deleteCharAt(builder.lastIndexOf(","));
-		return builder.toString();
-	}
-	
+		
 }
