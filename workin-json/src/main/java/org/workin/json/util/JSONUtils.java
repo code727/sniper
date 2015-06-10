@@ -135,7 +135,12 @@ public class JSONUtils {
 	public static <T> T toBean(String json, Class<T> beanClass) {
 		AssertUtils.assertTrue(StringUtils.isNotBlank(json),
 				"Converted json string can not be null or empty.");
-		return (T) JSONObject.toBean(JSONObject.fromObject(json.replaceAll("\\[|\\]", "")), beanClass);
+		
+		json = json.trim();
+		if (StringUtils.startsWith(json, "[") && StringUtils.endsWith(json, "]"))
+			return toList(json, beanClass).get(0);
+		
+		return (T) JSONObject.toBean(JSONObject.fromObject(json), beanClass);
 	}
 
 }
