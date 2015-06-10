@@ -16,35 +16,36 @@
  * Create Date : 2015-1-27
  */
 
-package org.workin.persistence;
+package org.workin.persistence.handler;
 
 import org.workin.commons.util.StringUtils;
-import org.workin.security.PrincipalManager;
 
 /**
  * @description 审核事件处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractAuditEventHandler<T> implements AuditEventHandler<T> {
+public abstract class AbstractAuditEventHandler<T> implements AuditEventHandler<T>, AuditorHandler {
 	
-	private PrincipalManager pincipalManager;
-
+	/** 关联的审核者处理器 */
+	private AuditorHandler auditorHandler;
+	
 	@Override
 	public String getAuditorName() {
-		String userName = pincipalManager.getCurrentLoginName();
-		if (StringUtils.isBlank(userName))
-			throw new SecurityException("Current user loginName is empty! Please login again.");
-		
-		return userName;
+		String auditorName = auditorHandler.getAuditorName();
+		if (StringUtils.isBlank(auditorName))
+			throw new SecurityException("Current auditorName is empty!"
+					+ "Please check whether user login or correlative field is empty.");
+					
+		return auditorName;
 	}
 
-	public PrincipalManager getPincipalManager() {
-		return pincipalManager;
+	public AuditorHandler getAuditorHandler() {
+		return auditorHandler;
 	}
 
-	public void setPincipalManager(PrincipalManager pincipalManager) {
-		this.pincipalManager = pincipalManager;
+	public void setAuditorHandler(AuditorHandler auditorHandler) {
+		this.auditorHandler = auditorHandler;
 	}
 	
 }

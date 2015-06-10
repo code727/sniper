@@ -16,7 +16,7 @@
  * Create Date : 2015-1-27
  */
 
-package org.workin.persistence;
+package org.workin.persistence.handler;
 
 import java.util.Date;
 

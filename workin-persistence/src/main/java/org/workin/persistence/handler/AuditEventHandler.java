@@ -16,7 +16,7 @@
  * Create Date : 2015-1-27
  */
 
-package org.workin.persistence;
+package org.workin.persistence.handler;
 
 /**
  * @description 审核事件处理器
@@ -25,13 +25,6 @@ package org.workin.persistence;
  */
 public interface AuditEventHandler<T> {
 	
-	/**
-	 * @description 获取当前审核人名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getAuditorName();
-
 	/**
 	 * @description 实体准备进行新增操作之前触发审核操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
