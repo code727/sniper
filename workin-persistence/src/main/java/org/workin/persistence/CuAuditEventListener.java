@@ -19,9 +19,10 @@
 package org.workin.persistence;
 
 import org.workin.persistence.entity.CuAuditable;
+import org.workin.persistence.handler.AuditEventHandler;
 
 /**
- * @description 新增更新持久化事件监听器实现类
+ * @description 新增/更新审核事件监听器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
