@@ -18,7 +18,6 @@
 
 package org.workin.commons.util;
 
-import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
 
@@ -51,13 +50,13 @@ public class SystemUtils {
 			GLOBAL_PROPERTIES.put("sys.text.newline", MAC_TEXT_NEWLINE);
 		else
 			GLOBAL_PROPERTIES.put("sys.text.newline", WINDOWS_TEXT_NEWLINE);
-		try {
-			// 加载全局配置
-			PropertiesUtils.append(GLOBAL_PROPERTIES, PropertiesUtils.create(
-					ClassLoader.getSystemResourceAsStream("commons.properties")));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			// 加载全局配置
+//			PropertiesUtils.append(GLOBAL_PROPERTIES, PropertiesUtils.create(
+//					ClassLoader.getSystemResourceAsStream("commons.properties")));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	/**
