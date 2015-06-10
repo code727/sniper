@@ -36,9 +36,11 @@
 		<module>workin-commons</module>
 		<module>workin-test</module>
 		<module>workin-support</module>
+		<module>workin-json</module>
 		<module>workin-web</module>
 		<module>workin-persistence</module>
 		<module>workin-security</module>
 		<module>workin-nosql</module>
+		<module>workin-http</module>
 	</modules>
 </project>
