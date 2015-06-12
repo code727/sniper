@@ -19,6 +19,7 @@
 package org.workin.support.context;
 
 
+
 /**
  * @description 应用上下文工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -26,7 +27,9 @@ package org.workin.support.context;
  */
 public class ApplicationContextHolder {
 	
-	private static final ThreadLocal<Object> holder = new ThreadLocal<Object>(); 
+	private static final ThreadLocal<Object> holder = newThreadLocalContext();
+	
+	private static final ApplicationContext<Object, Object> map_holder = newMapThreadLocalContext();
 	
 	/**
 	 * @description 设置线程变量值
@@ -52,15 +55,55 @@ public class ApplicationContextHolder {
 	 */
 	public static void clear() {
 		holder.remove();
+		map_holder.clear();
 	}
 	
 	/**
-	 * @description 创建线程局部变量上下文对象
+	 * @description 根据名称获取线程局部变量的属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public static Object getAttribute(Object name) {
+		 return map_holder.getAttribute(name);
+	}
+	
+	/**
+	 * @description 设置线程局部变量的属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param value
+	 */
+	public static void setAttribute(Object name, Object value) {
+		map_holder.setAttribute(name, value);
+	}
+	
+	/**
+	 * @description 根据名称删除对应的局部变量属性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public Object removeAttribute(Object name) {
+		return map_holder.removeAttribute(name);
+	}
+	
+	/**
+	 * @description 创建基本的ThreadLocal上下文对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static <K,V> ThreadLocalContext<K,V> newThreadLocalContext() {
-		return new ThreadLocalContext<K, V>();
+	public static <T> ThreadLocal<T> newThreadLocalContext() {
+		return new ThreadLocal<T>();
+	}
+	
+	/**
+	 * @description 创建基于Map类型的线程局部变量
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static <K,V> MapThreadLocalContext<K,V> newMapThreadLocalContext() {
+		return new MapThreadLocalContext<K, V>();
 	}
 	
 }

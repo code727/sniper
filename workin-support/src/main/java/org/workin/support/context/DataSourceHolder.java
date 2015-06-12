@@ -18,7 +18,6 @@
 
 package org.workin.support.context;
 
-import org.workin.support.context.ApplicationContextHolder;
 
 /**
  * @description 数据源上下文工具类

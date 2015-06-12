@@ -26,7 +26,7 @@ package org.workin.support.context;
 public interface ApplicationContext<K, V> {
 	
 	/**
-	 * @description 根据名称获取上下文属性
+	 * @description 根据名称获取上下文属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -34,7 +34,7 @@ public interface ApplicationContext<K, V> {
 	public V getAttribute(K name);
 	
 	/**
-	 * @description 设置上下文属性
+	 * @description 设置上下文属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param value
