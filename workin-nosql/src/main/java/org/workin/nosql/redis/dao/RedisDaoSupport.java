@@ -40,8 +40,8 @@ import org.workin.commons.util.StringUtils;
 import org.workin.nosql.redis.RedisRepository;
 import org.workin.nosql.redis.RedisRepositoryManager;
 import org.workin.support.context.ApplicationContext;
+import org.workin.support.context.ApplicationContextHolder;
 import org.workin.support.context.DataSourceHolder;
-import org.workin.support.context.ThreadLocalContext;
 
 /**
  * @description Redis数据访问接口支持类
@@ -102,7 +102,7 @@ public abstract class RedisDaoSupport implements InitializingBean {
 		this.globalHashKeySerializer = this.redisTemplate.getHashKeySerializer();
 		this.globalHashValueSerializer = this.redisTemplate.getHashValueSerializer();
 		
-		this.currentDb = new ThreadLocalContext<String, Integer>();
+		this.currentDb = ApplicationContextHolder.newMapThreadLocalContext();
 	}
 	
 	/**

@@ -22,46 +22,56 @@ public class ApplicationContextTest extends BaseTestCase {
 		Thread thread1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("--- 线程1的执行结果如下：");
+				System.out.println("Start thread1...");
 				
 				ApplicationContext<String, String> context1 = ApplicationContextHolder.newMapThreadLocalContext();
 				ApplicationContext<String, String> context2 = ApplicationContextHolder.newMapThreadLocalContext();
 				
 				context1.setAttribute("my", "dubin");
+				assertEquals("dubin", context1.getAttribute("my"));
 				System.out.println(context1.getAttribute("my"));
 				
 				context2.setAttribute("my", "daniele");
+				assertTrue(context1.getAttribute("my").equals(context2.getAttribute("my")));
 				System.out.println(context2.getAttribute("my"));
 				System.out.println(context1.getAttribute("my"));
 				
+				assertTrue(context1.getAttribute("my").equals(ApplicationContextHolder.getAttribute("my")));
 				System.out.println(ApplicationContextHolder.getAttribute("my"));
 				
 				ApplicationContextHolder.set(new Object());
+				assertNotNull(ApplicationContextHolder.get());
 				System.out.println(ApplicationContextHolder.get());
 				
-				System.out.println("--- 线程1的执行结束！");
+				System.out.println("End thread1!");
 			}
 		});
 		
 		Thread thread2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("--- 线程2的执行结果如下：");
+				System.out.println("Start thread2...");
 				
 				ApplicationContext<String, String> context1 = ApplicationContextHolder.newMapThreadLocalContext();
 				ApplicationContext<String, String> context2 = ApplicationContextHolder.newMapThreadLocalContext();
 				
-				System.out.println(context2.getAttribute("my"));
+				assertNull(context1.getAttribute("my"));
+				assertNull(context2.getAttribute("my"));
+				assertNull(ApplicationContextHolder.getAttribute("my"));
+				assertNull(ApplicationContextHolder.get());
+				
 				System.out.println(context1.getAttribute("my"));
+				System.out.println(context2.getAttribute("my"));
 				System.out.println(ApplicationContextHolder.getAttribute("my"));
 				System.out.println(ApplicationContextHolder.get());
 				
-				System.out.println("--- 线程2的执行结束！");
+				System.out.println("End thread2!");
 			}
 		});
 		
 		thread1.start();
 		sleep(3000);
+		System.out.println("----------------------------------------");
 		thread2.start();
 	}
 		

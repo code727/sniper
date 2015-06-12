@@ -197,7 +197,6 @@ public class MessageUtils {
 	 * @param params 参数值组
 	 * @param defaultMessage 默认信息
 	 * @return 
-	 * @since social-commons1.0.0
 	 */
 	public static String getPackageMessage(Class<?> clazz, Locale locale,
 			String key, Object[] params, String defaultMessage) {
