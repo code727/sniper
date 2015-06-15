@@ -12,45 +12,31 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *  
  * Create Date : 2015-1-26
  */
 
-package org.workin.support.model.impl;
-
-import org.workin.support.model.StatefulDataResult;
+package org.workin.support.model;
 
 /**
- * @description 有状态记录的数据结果对象模型
+ * @description 有状态记录的模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class StatefulDataResultModel<T> implements StatefulDataResult<T> {
+public interface StatefulModel {
 	
-	/** 数据 */
-	private T data;
+	/**
+	 * @description 获取状态
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getStatus();
 	
-	/** 状态 */
-	private String status;
-
-	@Override
-	public T getData() {
-		return this.data;
-	}
-
-	@Override
-	public void setDate(T data) {
-		this.data = data;
-	}
-
-	@Override
-	public String getStatus() {
-		return this.status;
-	}
-
-	@Override
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
+	/**
+	 * @description 设置状态
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param status
+	 */
+	public void setStatus(String status);
+		
 }

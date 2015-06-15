@@ -18,20 +18,31 @@
 
 package org.workin.support.model.impl;
 
-import org.workin.support.model.StatefulMessageResult;
+import org.workin.support.model.GenericsDataModel;
+import org.workin.support.model.StatefulModel;
 
 /**
- * @description 有状态记录的消息结果对象模型
+ * @description 有状态记录的数据模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class StatefulMessageResultModel implements StatefulMessageResult {
+public class StatefulDataModel<T> implements GenericsDataModel<T>, StatefulModel {
+	
+	/** 数据 */
+	private T data;
 	
 	/** 状态 */
 	private String status;
-	
-	/** 消息 */
-	private String messgae;
+
+	@Override
+	public T getData() {
+		return this.data;
+	}
+
+	@Override
+	public void setDate(T data) {
+		this.data = data;
+	}
 
 	@Override
 	public String getStatus() {
@@ -41,16 +52,6 @@ public class StatefulMessageResultModel implements StatefulMessageResult {
 	@Override
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	@Override
-	public String getMessage() {
-		return this.messgae;
-	}
-
-	@Override
-	public void setMessage(String message) {
-		this.messgae = message;
 	}
 
 }

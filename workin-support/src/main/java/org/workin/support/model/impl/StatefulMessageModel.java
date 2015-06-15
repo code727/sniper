@@ -12,31 +12,46 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *  
+ * 
  * Create Date : 2015-1-26
  */
 
-package org.workin.support.model;
+package org.workin.support.model.impl;
+
+import org.workin.support.model.MessageModel;
+import org.workin.support.model.StatefulModel;
 
 /**
- * @description 有状态记录的数据结果对象接口
+ * @description 有状态记录的消息模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface StatefulDataResult<T> extends GenericsData<T> {
+public class StatefulMessageModel implements StatefulModel, MessageModel {
 	
-	/**
-	 * @description 获取状态
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getStatus();
+	/** 状态 */
+	private String status;
 	
-	/**
-	 * @description 设置状态
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param status
-	 */
-	public void setStatus(String status);
+	/** 消息 */
+	private String messgae;
+
+	@Override
+	public String getStatus() {
+		return this.status;
+	}
+
+	@Override
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Override
+	public String getMessage() {
+		return this.messgae;
+	}
+
+	@Override
+	public void setMessage(String message) {
+		this.messgae = message;
+	}
 
 }

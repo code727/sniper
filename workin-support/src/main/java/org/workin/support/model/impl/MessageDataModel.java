@@ -18,14 +18,15 @@
 
 package org.workin.support.model.impl;
 
-import org.workin.support.model.MessageDataResult;
+import org.workin.support.model.GenericsDataModel;
+import org.workin.support.model.MessageModel;
 
 /**
- * @description 有消息记录的数据结果对象模型
+ * @description 有消息记录的数据模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MessageDataResultModel<T> implements MessageDataResult<T> {
+public class MessageDataModel<T> implements MessageModel, GenericsDataModel<T> {
 	
 	/** 数据 */
 	private T data;

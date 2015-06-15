@@ -18,14 +18,14 @@
 
 package org.workin.support.model.impl;
 
-import org.workin.support.model.GenericsData;
+import org.workin.support.model.GenericsDataModel;
 
 /**
  * @description 结果对象模型，同时包含状态、消息和数据三部分
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ResultModel<T> extends StatefulMessageResultModel implements GenericsData<T> {
+public class ResultModel<T> extends StatefulMessageModel implements GenericsDataModel<T> {
 		
 	/** 数据 */
 	private T data;

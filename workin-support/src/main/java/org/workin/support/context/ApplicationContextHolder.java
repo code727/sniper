@@ -84,7 +84,7 @@ public class ApplicationContextHolder {
 	 * @param name
 	 * @return
 	 */
-	public Object removeAttribute(Object name) {
+	public static Object removeAttribute(Object name) {
 		return map_holder.removeAttribute(name);
 	}
 	

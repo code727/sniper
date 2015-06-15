@@ -19,11 +19,11 @@
 package org.workin.support.model;
 
 /**
- * @description 泛型数据对象接口
+ * @description 泛型数据模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface GenericsData<T> {
+public interface GenericsDataModel<T> {
 	
 	/**
 	 * @description 获取数据
