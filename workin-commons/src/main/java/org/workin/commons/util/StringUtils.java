@@ -1145,5 +1145,26 @@ public class StringUtils {
 		}
 		return result.toString();
 	}
+
+	/** 
+	 * @description 调用Object对象的toString()方法，为空时返回空字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 * @return 
+	 */
+	public static String toString(Object value) {
+		return toString(value, EMPTY_STRING);
+	}
+	
+	/**
+	 * @description 调用Object对象的toString()方法，为空时返回指定的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 * @param defaultStr
+	 * @return
+	 */
+	public static String toString(Object value, String defaultStr) {
+		return value != null ? value.toString() : defaultStr;
+	}
 					
 }
