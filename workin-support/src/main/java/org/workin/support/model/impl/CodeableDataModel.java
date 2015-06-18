@@ -19,20 +19,20 @@
 package org.workin.support.model.impl;
 
 import org.workin.support.model.GenericsDataModel;
-import org.workin.support.model.StatefulModel;
+import org.workin.support.model.CodeableModel;
 
 /**
- * @description 有状态记录的数据模型
+ * @description 可编码的数据对象模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class StatefulDataModel<T> implements GenericsDataModel<T>, StatefulModel {
+public class CodeableDataModel<T> implements GenericsDataModel<T>, CodeableModel {
 	
 	/** 数据 */
 	private T data;
 	
-	/** 状态 */
-	private String status;
+	/** 编码 */
+	private String code;
 
 	@Override
 	public T getData() {
@@ -45,13 +45,13 @@ public class StatefulDataModel<T> implements GenericsDataModel<T>, StatefulModel
 	}
 
 	@Override
-	public String getStatus() {
-		return this.status;
+	public String getCode() {
+		return this.code;
 	}
 
 	@Override
-	public void setStatus(String status) {
-		this.status = status;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

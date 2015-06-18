@@ -19,29 +19,29 @@
 package org.workin.support.model.impl;
 
 import org.workin.support.model.MessageModel;
-import org.workin.support.model.StatefulModel;
+import org.workin.support.model.CodeableModel;
 
 /**
- * @description 有状态记录的消息模型
+ * @description 可编码的消息对象模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class StatefulMessageModel implements StatefulModel, MessageModel {
+public class CodeableMessageModel implements CodeableModel, MessageModel {
 	
-	/** 状态 */
-	private String status;
+	/** 编码*/
+	private String code;
 	
 	/** 消息 */
 	private String messgae;
-
+	
 	@Override
-	public String getStatus() {
-		return this.status;
+	public String getCode() {
+		return this.code;
 	}
 
 	@Override
-	public void setStatus(String status) {
-		this.status = status;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Override

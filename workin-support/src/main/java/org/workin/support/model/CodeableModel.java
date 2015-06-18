@@ -19,24 +19,24 @@
 package org.workin.support.model;
 
 /**
- * @description 有状态记录的模型
+ * @description 可编码的对象模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface StatefulModel {
+public interface CodeableModel {
 	
 	/**
-	 * @description 获取状态
+	 * @description 获取编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public String getStatus();
+	public String getCode();
 	
 	/**
-	 * @description 设置状态
+	 * @description 设置编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param status
+	 * @param code
 	 */
-	public void setStatus(String status);
+	public void setCode(String code);
 		
 }
