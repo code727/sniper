@@ -16,7 +16,7 @@
  * Create Date : 2015-1-12
  */
 
-package org.workin.test.spring.junit4;
+package org.workin.test.spring;
 
 import junit.framework.Assert;
 
