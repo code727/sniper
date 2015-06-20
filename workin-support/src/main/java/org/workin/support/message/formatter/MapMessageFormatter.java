@@ -30,7 +30,7 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MapMessageFormatter extends IdentifierMessageFormatter<Map<String, Object>> {
+public class MapMessageFormatter extends PlaceholderMessageFormatter<Map<String, Object>> {
 	
 	@Override
 	public String format(String message, Map<String, Object> param) {

@@ -30,7 +30,7 @@ import org.workin.support.bean.DefaultBeanReflector;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BeanMessageFormatter extends IdentifierMessageFormatter<Object> {
+public class BeanMessageFormatter extends PlaceholderMessageFormatter<Object> {
 	
 	private BeanReflector beanReflector;
 	
