@@ -18,9 +18,10 @@
 
 package org.workin.commons.util;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,7 +32,7 @@ import java.util.regex.Pattern;
  */
 public class RegexUtils {
 	
-	private static final Map<String, String> regex;
+	public static final Map<String, String> regex;
 	
 	static {
 		regex = new HashMap<String, String>();
@@ -44,6 +45,9 @@ public class RegexUtils {
 		regex.put("ascii", "[\u0000-\u007E]+");
 		regex.put("double_byte", "[^\u0000-\u007E]+");
 		regex.put("chinese", "[\u4E00-\u9FA5]+");
+		
+		// java.text.MessageFormat所默认支持的占位符表达式
+		regex.put(MessageFormat.class.getName(), "(\\{\\d+\\})");
 	}
 	
 	/**
@@ -182,12 +186,12 @@ public class RegexUtils {
 	 * @param regex
 	 * @return
 	 */
-	public static List<String> matches(String str, String regex) {
+	public static Set<String> matches(String str, String regex) {
 		Matcher matcher = createMatcher(str, regex);
-		List<String> list = CollectionUtils.newArrayList();
+		Set<String> set = CollectionUtils.newHashSet();
 		while (matcher.find()) 
-			list.add(matcher.group());
-		return list;
+			set.add(matcher.group());
+		return set;
 	}
 	
 	/**

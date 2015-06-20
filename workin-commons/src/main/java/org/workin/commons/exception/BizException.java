@@ -23,7 +23,7 @@ package org.workin.commons.exception;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BizException extends WorikRuntimeException {
+public class BizException extends WorkinRuntimeException {
 	
 	private static final long serialVersionUID = -7058119064602809131L;
 

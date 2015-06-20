@@ -274,5 +274,25 @@ public class ClassUtils {
         }
         return (Class<?>) params[index];
     }
-					
+	
+	/**
+	 * @description 判断是否为JAVA自带类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz
+	 * @return
+	 */
+	public static boolean isJavaType(Class<?> clazz) {  
+	    return clazz != null && clazz.getClassLoader() == null;  
+	}  
+	
+	/**
+	 * @description 判断是否为JAVA自带类型的对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isJavaTypeObject(Object obj) {  
+	    return obj != null && isJavaType(obj.getClass());
+	}  
+						
 }

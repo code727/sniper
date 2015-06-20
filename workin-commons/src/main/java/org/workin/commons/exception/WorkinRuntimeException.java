@@ -23,23 +23,23 @@ package org.workin.commons.exception;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class WorikRuntimeException extends RuntimeException {
+public class WorkinRuntimeException extends RuntimeException {
 	
 	private static final long serialVersionUID = -3747309828506142444L;
 
-	public WorikRuntimeException() {
+	public WorkinRuntimeException() {
 		super();
 	}
 	
-	public WorikRuntimeException(String messgae) {
+	public WorkinRuntimeException(String messgae) {
 		super(messgae);
 	}
 	
-	public WorikRuntimeException(Throwable throwable) {
+	public WorkinRuntimeException(Throwable throwable) {
 		super(throwable);
 	}
 	
-	public WorikRuntimeException(String message, Throwable throwable) {
+	public WorkinRuntimeException(String message, Throwable throwable) {
 		super(message,throwable);
 	}
 
