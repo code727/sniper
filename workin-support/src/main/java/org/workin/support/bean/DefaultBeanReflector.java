@@ -140,7 +140,7 @@ public class DefaultBeanReflector implements BeanReflector {
 				try {
 					return ReflectionUtils.getFieldValue(bean, expression);
 				} catch (NullPointerException npe) {
-					throw new NoSuchMethodException("Unknow member propertity [" + memberName 
+					throw new NoSuchMethodException("Unknow member propertity [" + (StringUtils.isNotBlank(memberName) ? memberName : expression)  
 							+ "] value,Please ensure that this property or corresponding getter method exists");
 				}
 			}
