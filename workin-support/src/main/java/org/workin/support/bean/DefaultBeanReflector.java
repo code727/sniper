@@ -48,7 +48,8 @@ public class DefaultBeanReflector implements BeanReflector {
 	}
 
 	public void setPropertySeperator(String propertySeperator) {
-		this.propertySeperator = propertySeperator;
+		if (StringUtils.isNotBlank(propertySeperator))
+			this.propertySeperator = propertySeperator;
 	}
 
 	@Override
