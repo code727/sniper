@@ -19,7 +19,7 @@
 package org.workin.support.message.formatter;
 
 /**
- * @description 泛型参数消息格式化代理接口
+ * @description 泛型参数消息格式化处理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

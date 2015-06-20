@@ -33,7 +33,7 @@ import org.workin.support.bean.DefaultBeanReflector;
 public class BeanMessageFormatter extends IdentifierMessageFormatter<Object> {
 	
 	private BeanReflector beanReflector;
-			
+	
 	/** 属性表达式 */
 	private String expression;
 	
@@ -64,14 +64,16 @@ public class BeanMessageFormatter extends IdentifierMessageFormatter<Object> {
 	
 	@Override
 	public String format(String message, Object bean) {
-		// 获取满足正则表示的属性替换子串
-		Set<String> markSet = RegexUtils.matches(message, this.expression);
-		for (String mark : markSet) {
-			try {
-				message = StringUtils.replace(message, mark, StringUtils.toString(
-						this.beanReflector.get(bean, StringUtils.leftSubstring(mark, this.getPrefix(), this.getSuffix())), null));
-			} catch (Exception e) {
-				e.printStackTrace();
+		if (bean != null) {
+			// 获取满足正则表示的属性替换子串
+			Set<String> markSet = RegexUtils.matches(message, this.expression);
+			for (String mark : markSet) {
+				try {
+					message = StringUtils.replace(message, mark, StringUtils.toString(
+							this.beanReflector.get(bean, StringUtils.leftSubstring(mark, this.getPrefix(), this.getSuffix())), null));
+				} catch (Exception e) {
+					// 忽略异常继续处理
+				}
 			}
 		}
 		return message;

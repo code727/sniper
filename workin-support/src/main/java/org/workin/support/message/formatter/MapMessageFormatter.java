@@ -26,7 +26,7 @@ import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description Map参数消息格式化抽象类
+ * @description Map参数消息格式化处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
