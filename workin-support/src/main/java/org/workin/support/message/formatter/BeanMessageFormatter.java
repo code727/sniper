@@ -20,7 +20,7 @@ package org.workin.support.message.formatter;
 
 import java.util.Set;
 
-import org.workin.commons.util.RegexUtils;
+import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.support.bean.BeanReflector;
 import org.workin.support.bean.DefaultBeanReflector;
@@ -33,44 +33,21 @@ import org.workin.support.bean.DefaultBeanReflector;
 public class BeanMessageFormatter extends PlaceholderMessageFormatter<Object> {
 	
 	private BeanReflector beanReflector;
-	
-	/** 属性表达式 */
-	private String expression;
-	
+		
 	public BeanMessageFormatter() {
 		this.beanReflector = new DefaultBeanReflector();
-		this.formatExpression();
 	}
-	
-	public void setPrefix(String prefix) {
-		super.setPrefix(prefix);
-		formatExpression();
-	}
-
-	public void setSuffix(String suffix) {
-		super.setPrefix(suffix);
-		formatExpression();
-	}
-	
-	/**
-	 * @description 格式化属性表达式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	public void formatExpression() {
-		this.expression = "(\\" + this.getPrefix() + "\\w+[ " + 
-				((DefaultBeanReflector)this.beanReflector).getPropertySeperator() + 
-					"\\w+]*\\" + this.getSuffix() + ")";
-	}
-	
+			
 	@Override
 	public String format(String message, Object bean) {
 		if (bean != null) {
 			// 获取满足正则表示的属性替换子串
-			Set<String> markSet = RegexUtils.matches(message, this.expression);
+			Set<String> markSet = CollectionUtils.newHashSet(StringUtils
+					.leftSubstringAll(message, this.getPrefix(), this.getSuffix()));
 			for (String mark : markSet) {
 				try {
-					message = StringUtils.replace(message, mark, StringUtils.toString(
-							this.beanReflector.get(bean, StringUtils.leftSubstring(mark, this.getPrefix(), this.getSuffix())), null));
+					message = StringUtils.replace(message, this.getPrefix() + mark + this.getSuffix(), 
+							StringUtils.toString(this.beanReflector.get(bean, mark), null));
 				} catch (Exception e) {
 					// 忽略异常继续处理
 				}
@@ -78,5 +55,5 @@ public class BeanMessageFormatter extends PlaceholderMessageFormatter<Object> {
 		}
 		return message;
 	}
-		
+	
 }
