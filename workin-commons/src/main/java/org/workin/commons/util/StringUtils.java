@@ -146,6 +146,16 @@ public class StringUtils {
 	}
 	
 	/**
+	 * @description 获取字符串的长度
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static int length(String str) {
+		return str != null ? str.length() : 0;
+	}
+	
+	/**
 	 * @description 选择是否按照忽略大小写的方式从指定的起始位开始检索第一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param str
@@ -527,7 +537,6 @@ public class StringUtils {
 	 * @return 
 	 */
 	public static String beforeSuffix(String str, String suffix, boolean ignoreCase) {
-		
 		if (isEmpty(str) || isEmpty(suffix))
 			return str;
 		
@@ -684,7 +693,6 @@ public class StringUtils {
 	 * @return 
 	 */
 	public static String beforeLast(String str, String mark, boolean ignoreCase) {
-		
 		if (isEmpty(str) || isEmpty(mark))
 			return str;
 		
@@ -769,18 +777,94 @@ public class StringUtils {
 	public static String leftSubstring(String str, String start, String end, boolean ignoreCase) {
 		int startIndex = indexOf(str, start, 0, ignoreCase);
 		if (startIndex > -1) {
+			// 开始截取字符的起始位置
 			startIndex = startIndex + start.length();
-			if (isEmpty(end))
-				return str.substring(startIndex, str.length());
+			if (end == null)
+				return EMPTY_STRING;
+			else if (end.length() == 0)
+				return str.substring(startIndex);
 			else {
-				int endIndex = indexOf(str.substring(startIndex), end, 0, ignoreCase);
+				str = str.substring(startIndex);
+				int endIndex = indexOf(str, end, 0, ignoreCase);
 				if (endIndex > -1) {
-					endIndex = endIndex + startIndex;
-					return str.substring(startIndex, endIndex);
+					return str.substring(0, endIndex);
 				}
 			}
 		} 
 		return EMPTY_STRING;
+	}
+	
+	/**
+	 * @description 从左至右截取所有起始字符串之间的子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param start 从左至右的开始标记
+	 * @param end 从左至右的结束标记
+	 * @return
+	 */
+	public static List<String> leftSubstringAll(String str, String start, String end) {
+		return leftSubstringAll(str, start, end, false);
+	}
+	
+	/**
+	 * @description 按忽略大小写的方式，从左至右截取所有起始字符串之间的子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static List<String> leftSubstringAllIgnoreCase(String str, String start, String end) {
+		return leftSubstringAll(str, start, end, true);
+	}
+	
+	/**
+	 * @description 选择是否按忽略大小写的方式从左至右截取所有起始字符串之间的子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param start
+	 * @param end
+	 * @param ignoreCase
+	 * @return
+	 */
+	public static List<String> leftSubstringAll(String str, String start, String end, boolean ignoreCase) {
+		List<String> list = new ArrayList<String>();
+		int startIndex = 0;
+		int endIndex;
+		startIndex = indexOf(str, start, startIndex, ignoreCase);
+		if (startIndex > -1) {
+			startIndex = startIndex + start.length();
+			if (end == null)
+				return list;
+			else if (end.length() == 0) {
+				list.add(str.substring(startIndex));
+				return list;
+			} else {
+				endIndex = indexOf(str, end, startIndex, ignoreCase);
+				if (endIndex > -1) {
+					list.add(str.substring(startIndex, endIndex));
+					// 为下面的循环检索更新起始索引
+					startIndex = endIndex + end.length();
+				} else
+					return list;
+				
+				do {
+					startIndex = indexOf(str, start, startIndex, ignoreCase);
+					if (startIndex > -1) {
+						startIndex = startIndex + start.length();
+						endIndex = indexOf(str, end, startIndex, ignoreCase);
+						if (endIndex > -1) {
+							list.add(str.substring(startIndex, endIndex));
+							// 下一次循环的起始位置
+							startIndex = endIndex + end.length();
+						} else
+							break;
+					} else
+						break;
+				} while (true);
+			}
+		}
+		return list;
 	}
 	
 	/**
@@ -811,25 +895,53 @@ public class StringUtils {
 	 * @description 选择是否按忽略大小写的方式从右至左截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
-	 * @param start 从右至左的开始标记
-	 * @param end 从右至左的结束标记
+	 * @param start 从左至右的开始标记
+	 * @param end 从左至右的结束标记
 	 * @param ignoreCase
 	 * @return
 	 */
 	public static String rightSubstring(String str, String start, String end, boolean ignoreCase) {
-		int endIndex = lastIndexOf(str, start, ignoreCase);
+		int endIndex = lastIndexOf(str, end, ignoreCase);
 		if (endIndex > -1) {
-			if (isEmpty(end))
+			if (isEmpty(start)) 
 				return str.substring(0, endIndex);
 			else {
-				int startIndex = lastIndexOf(str.substring(0, endIndex), end);
+				int startIndex = lastIndexOf(str, start, ignoreCase);
 				if (startIndex > -1) {
-					startIndex = startIndex + end.length();
+					startIndex = startIndex + start.length();
 					return str.substring(startIndex, endIndex);
 				}
 			}
 		}
 		return EMPTY_STRING;
+	}
+	
+	public static List<String> rightSubstringAll(String str, String start, String end) {
+		return rightSubstringAll(str, start, end, false);
+	}
+	
+	public static List<String> rightSubstringAllIgnoreCase(String str, String start, String end) {
+		return rightSubstringAll(str, start, end, true);
+	}
+	
+	public static List<String> rightSubstringAll(String str, String start, String end, boolean ignoreCase) {
+		List<String> list = new ArrayList<String>();
+		int startIndex = length(str);
+		int endIndex;
+		if (startIndex > 0) {
+			do {
+				endIndex = lastIndexOf(str, end, startIndex, ignoreCase);
+				if (endIndex > -1) {
+					startIndex = lastIndexOf(str, start, startIndex - start.length(), ignoreCase);
+					if (startIndex > -1) {
+						list.add(str.substring(startIndex + start.length(), endIndex));
+					} else
+						break;
+				} else
+					break;
+			} while (true);
+		} 
+		return list;
 	}
 			
 	/**
@@ -1166,5 +1278,21 @@ public class StringUtils {
 	public static String toString(Object value, String defaultStr) {
 		return value != null ? value.toString() : defaultStr;
 	}
-					
+	
+	public static void main(String[] args) {
+//		String message = "{start}" + "This result code is {code},data is {data}.This result code is {code},"
+//				+ "data is {data}.This result code is {code},data is {data}.This result code is {code},data is {data}"
+//				+ "{end}  sssssssaa";
+		String message = "{1}{2}";
+		System.out.println(leftSubstring(message, "{", "}"));
+		System.out.println(leftSubstringAll(message, "{", "}"));
+//		System.out.println(rightSubstring(message, "", ""));
+//		System.out.println(rightSubstringAll(message, "", ""));
+//		Date start = new Date();
+//		for (int i = 0 ; i< 100000; i++)
+//			rightSubstringAll(message, "{", "}");
+//		System.out.println(DateUtils.getIntervalMillis(start, new Date()));
+		
+	}
+						
 }
