@@ -76,9 +76,4 @@ public class AdaptiveMessageFormatter implements MessageFormatter<Object> {
 		return this.beanMessageFormatter.format(message, param);
 	}
 	
-	public static void main(String[] args) {
-		
-		
-	}
-
 }
