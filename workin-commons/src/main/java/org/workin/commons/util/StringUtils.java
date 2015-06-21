@@ -146,16 +146,6 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 获取字符串的长度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param str
-	 * @return
-	 */
-	public static int length(String str) {
-		return str != null ? str.length() : 0;
-	}
-	
-	/**
 	 * @description 选择是否按照忽略大小写的方式从指定的起始位开始检索第一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param str
@@ -167,24 +157,28 @@ public class StringUtils {
 	public static int indexOf(String str, String mark, int start, boolean ignoreCase) {
 		if (str == null || mark == null)
 			return -1;
-					
-		if (start < 0)
-			start = 0;
+		
+		/* 以判断是否忽略大小写进行不同的实现，因为两种方式存在性能差异 */
+		if (ignoreCase) {
+			if (start < 0)
+				start = 0;
+				
+			int markLength = mark.length();
+			// 最大检索次数
+			int maxSearchCount = str.length() - markLength + 1;
+			if (start > maxSearchCount)
+				return -1;
+
+			if (markLength == 0)
+				return start;
+
+			for (int i = start; i < maxSearchCount; i++)
+				if (str.regionMatches(ignoreCase, i, mark, 0, markLength))
+					return i;
 			
-		int markLength = mark.length();
-		// 最大检索次数
-		int maxSearchCount = str.length() - markLength + 1;
-		if (start > maxSearchCount)
 			return -1;
-
-		if (markLength == 0)
-			return start;
-
-		for (int i = start; i < maxSearchCount; i++)
-			if (str.regionMatches(ignoreCase, i, mark, 0, markLength))
-				return i;
-
-		return -1;
+		} else 
+			return str.indexOf(mark, start);
 	}
 	
 	/**
@@ -195,7 +189,7 @@ public class StringUtils {
 	 * @return 
 	 */
 	public static int lastIndexOf(String str, String mark) {
-		return lastIndexOf(str, mark, -1, false);
+		return lastIndexOf(str, mark, length(str), false);
 	}
 	
 	/**
@@ -217,7 +211,7 @@ public class StringUtils {
 	 * @return 
 	 */
 	public static int lastIndexOfIgnoreCase(String str, String mark) {
-		return lastIndexOf(str, mark, -1, true);
+		return lastIndexOf(str, mark, length(str), true);
 	}
 	
 	/**
@@ -241,7 +235,7 @@ public class StringUtils {
 	 * @return
 	 */
 	public static int lastIndexOf(String str, String mark, boolean ignoreCase) {
-		return lastIndexOf(str, mark, -1, ignoreCase);
+		return lastIndexOf(str, mark, length(str), ignoreCase);
 	}
 	
 	/**
@@ -257,27 +251,28 @@ public class StringUtils {
 		if (str == null || mark == null)
 			return -1;
 		
-		int length = str.length();
-		if (start < 0)
-			start = length;
-		
-		int markLength = mark.length();
-		// 开始检索的最大索引值
-		if (start > length - markLength)
-			start = length - markLength;
+		/* 以判断是否忽略大小写进行不同的实现，因为两种方式存在性能差异 */
+		if (ignoreCase) {
+			int length = str.length();
+			int markLength = mark.length();
+			// 开始检索的最大索引值
+			if (start > length - markLength)
+				start = length - markLength;
 
-		if (start < 0)
+			if (start < 0)
+				return -1;
+
+			if (markLength == 0) 
+				return start;
+
+			// 从最大索引处开始反向检索
+			for (int i = start; i > -1; i--)
+				if (str.regionMatches(ignoreCase, i, mark, 0, markLength))
+					return i;
+
 			return -1;
-
-		if (markLength == 0) 
-			return start;
-
-		// 从最大索引处开始反向检索
-		for (int i = start; i > -1; i--)
-			if (str.regionMatches(ignoreCase, i, mark, 0, markLength))
-				return i;
-
-		return -1;
+		} else
+			return str.lastIndexOf(mark, start);
 	}
 	
 	/**
@@ -725,8 +720,8 @@ public class StringUtils {
 	/**
 	 * @description 选择是否按忽略大小写的方式获取最后一个标记之后的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
-	 * @param str
-	 * @param mark
+	 * @param str 开始标记
+	 * @param mark 结束标记
 	 * @param ignoreCase
 	 * @return 
 	 */
@@ -745,8 +740,8 @@ public class StringUtils {
 	 * @description 从左至右截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
-	 * @param start 从左至右的开始标记
-	 * @param end 从左至右的结束标记
+	 * @param start 开始标记
+	 * @param end 结束标记
 	 * @return
 	 */
 	public static String leftSubstring(String str, String start, String end) {		
@@ -757,8 +752,8 @@ public class StringUtils {
 	 * @description 按忽略大小写的方式，从左至右截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
-	 * @param start 从左至右的开始标记
-	 * @param end 从左至右的结束标记
+	 * @param start 开始标记
+	 * @param end 结束标记
 	 * @return
 	 */
 	public static String leftSubstringIgnoreCase(String str, String start, String end) {
@@ -769,37 +764,31 @@ public class StringUtils {
 	 * @description 选择是否按忽略大小写的方式从左至右截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
-	 * @param start 从左至右的开始标记
-	 * @param end 从左至右的结束标记
+	 * @param start 开始标记
+	 * @param end 结束标记
 	 * @param ignoreCase
 	 * @return
 	 */
 	public static String leftSubstring(String str, String start, String end, boolean ignoreCase) {
+		if (isEmpty(start) || isEmpty(end))
+			return str == null ? str : EMPTY_STRING;
+		
 		int startIndex = indexOf(str, start, 0, ignoreCase);
 		if (startIndex > -1) {
-			// 开始截取字符的起始位置
 			startIndex = startIndex + start.length();
-			if (end == null)
-				return EMPTY_STRING;
-			else if (end.length() == 0)
-				return str.substring(startIndex);
-			else {
-				str = str.substring(startIndex);
-				int endIndex = indexOf(str, end, 0, ignoreCase);
-				if (endIndex > -1) {
-					return str.substring(0, endIndex);
-				}
-			}
+			int endIndex = indexOfIgnoreCase(str, end, startIndex);
+			if (endIndex > -1)
+				return str.substring(startIndex, endIndex);
 		} 
-		return EMPTY_STRING;
+		return null;
 	}
 	
 	/**
 	 * @description 从左至右截取所有起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
-	 * @param start 从左至右的开始标记
-	 * @param end 从左至右的结束标记
+	 * @param start 开始标记
+	 * @param end 结束标记
 	 * @return
 	 */
 	public static List<String> leftSubstringAll(String str, String start, String end) {
@@ -810,8 +799,8 @@ public class StringUtils {
 	 * @description 按忽略大小写的方式，从左至右截取所有起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
-	 * @param start
-	 * @param end
+	 * @param start 开始标记
+	 * @param end 结束标记
 	 * @return
 	 */
 	public static List<String> leftSubstringAllIgnoreCase(String str, String start, String end) {
@@ -822,48 +811,33 @@ public class StringUtils {
 	 * @description 选择是否按忽略大小写的方式从左至右截取所有起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
-	 * @param start
-	 * @param end
+	 * @param start 开始标记
+	 * @param end 结束标记
 	 * @param ignoreCase
 	 * @return
 	 */
 	public static List<String> leftSubstringAll(String str, String start, String end, boolean ignoreCase) {
 		List<String> list = new ArrayList<String>();
+		if (isBlank(start) || isBlank(end))
+			return list;
+		
 		int startIndex = 0;
 		int endIndex;
-		startIndex = indexOf(str, start, startIndex, ignoreCase);
-		if (startIndex > -1) {
-			startIndex = startIndex + start.length();
-			if (end == null)
-				return list;
-			else if (end.length() == 0) {
-				list.add(str.substring(startIndex));
-				return list;
-			} else {
+		do {
+			startIndex = indexOf(str, start, startIndex, ignoreCase);
+			if (startIndex > -1) {
+				startIndex = startIndex + start.length();
 				endIndex = indexOf(str, end, startIndex, ignoreCase);
 				if (endIndex > -1) {
 					list.add(str.substring(startIndex, endIndex));
-					// 为下面的循环检索更新起始索引
+					// 更新下一次循环的起始位置
 					startIndex = endIndex + end.length();
 				} else
-					return list;
-				
-				do {
-					startIndex = indexOf(str, start, startIndex, ignoreCase);
-					if (startIndex > -1) {
-						startIndex = startIndex + start.length();
-						endIndex = indexOf(str, end, startIndex, ignoreCase);
-						if (endIndex > -1) {
-							list.add(str.substring(startIndex, endIndex));
-							// 下一次循环的起始位置
-							startIndex = endIndex + end.length();
-						} else
-							break;
-					} else
-						break;
-				} while (true);
-			}
-		}
+					break;
+			} else
+				break;
+		} while (true);
+		
 		return list;
 	}
 	
@@ -871,8 +845,8 @@ public class StringUtils {
 	 * @description 从右至左截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
-	 * @param start 从右至左的开始标记
-	 * @param end 从右至左的结束标记
+	 * @param start 开始标记
+	 * @param end 结束标记
 	 * @return
 	 */
 	public static String rightSubstring(String str, String start, String end) {
@@ -883,8 +857,8 @@ public class StringUtils {
 	 * @description 按忽略大小写的方式从右至左截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
-	 * @param start 从右至左的开始标记
-	 * @param end 从右至左的结束标记
+	 * @param start 开始标记
+	 * @param end 结束标记
 	 * @return
 	 */
 	public static String rightSubstringIgnoreCase(String str, String start, String end) {
@@ -895,37 +869,64 @@ public class StringUtils {
 	 * @description 选择是否按忽略大小写的方式从右至左截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
-	 * @param start 从左至右的开始标记
-	 * @param end 从左至右的结束标记
+	 * @param start 开始标记
+	 * @param end 结束标记
 	 * @param ignoreCase
 	 * @return
 	 */
 	public static String rightSubstring(String str, String start, String end, boolean ignoreCase) {
+		if (isEmpty(start) || isEmpty(end))
+			return str == null ? str : EMPTY_STRING;
+		
 		int endIndex = lastIndexOf(str, end, ignoreCase);
 		if (endIndex > -1) {
-			if (isEmpty(start)) 
-				return str.substring(0, endIndex);
-			else {
-				int startIndex = lastIndexOf(str, start, ignoreCase);
-				if (startIndex > -1) {
-					startIndex = startIndex + start.length();
-					return str.substring(startIndex, endIndex);
-				}
+			int startIndex = lastIndexOf(str, start, ignoreCase);
+			if (startIndex > -1) {
+				startIndex = startIndex + start.length();
+				return str.substring(startIndex, endIndex);
 			}
 		}
-		return EMPTY_STRING;
+		return null;
 	}
 	
+	/**
+	 * @description 从右至左截取所有起始字符串之间的子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param start 开始标记
+	 * @param end 结束标记
+	 * @return
+	 */
 	public static List<String> rightSubstringAll(String str, String start, String end) {
 		return rightSubstringAll(str, start, end, false);
 	}
 	
+	/**
+	 * @description 按忽略大小写的方式从右至左截取所有起始字符串之间的子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param start 开始标记
+	 * @param end 结束标记
+	 * @return
+	 */
 	public static List<String> rightSubstringAllIgnoreCase(String str, String start, String end) {
 		return rightSubstringAll(str, start, end, true);
 	}
 	
+	/**
+	 * @description 选择是否按忽略大小写的方式从右至左截取所有起始字符串之间的子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param start 开始标记
+	 * @param end 结束标记
+	 * @param ignoreCase
+	 * @return
+	 */
 	public static List<String> rightSubstringAll(String str, String start, String end, boolean ignoreCase) {
 		List<String> list = new ArrayList<String>();
+		if (isBlank(start) || isBlank(end))
+			return list;
+		
 		int startIndex = length(str);
 		int endIndex;
 		if (startIndex > 0) {
@@ -941,6 +942,7 @@ public class StringUtils {
 					break;
 			} while (true);
 		} 
+		
 		return list;
 	}
 			
@@ -1279,20 +1281,24 @@ public class StringUtils {
 		return value != null ? value.toString() : defaultStr;
 	}
 	
-	public static void main(String[] args) {
-//		String message = "{start}" + "This result code is {code},data is {data}.This result code is {code},"
-//				+ "data is {data}.This result code is {code},data is {data}.This result code is {code},data is {data}"
-//				+ "{end}  sssssssaa";
-		String message = "{1}{2}";
-		System.out.println(leftSubstring(message, "{", "}"));
-		System.out.println(leftSubstringAll(message, "{", "}"));
-//		System.out.println(rightSubstring(message, "", ""));
-//		System.out.println(rightSubstringAll(message, "", ""));
-//		Date start = new Date();
-//		for (int i = 0 ; i< 100000; i++)
-//			rightSubstringAll(message, "{", "}");
-//		System.out.println(DateUtils.getIntervalMillis(start, new Date()));
-		
+	/**
+	 * @description 获取字符串的长度
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static int length(String str) {
+		return str != null ? str.length() : 0;
 	}
-						
+	
+	/**
+	 * @description 倒置字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static String reverse(String str) {
+		return length(str) > 1 ? new StringBuffer(str).reverse().toString() : str;
+	}
+							
 }
