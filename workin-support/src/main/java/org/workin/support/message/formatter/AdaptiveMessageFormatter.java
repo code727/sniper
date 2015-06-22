@@ -29,7 +29,8 @@ import org.workin.commons.util.RegexUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class AdaptiveMessageFormatter implements MessageFormatter<Object> {
+public class AdaptiveMessageFormatter extends
+		PlaceholderMessageFormatter<Object> implements MessageFormatter<Object> {
 	
 	private MessageFormatter<Object> jdkMessageFormatter = new JdkMessageFormatter();
 	
@@ -45,18 +46,42 @@ public class AdaptiveMessageFormatter implements MessageFormatter<Object> {
 		return this.mapMessageFormatter;
 	}
 
-	public void setMapMessageFormatter(
-			MessageFormatter<Map<String, Object>> mapMessageFormatter) {
-		this.mapMessageFormatter = mapMessageFormatter;
+	public void setMapMessageFormatter(MessageFormatter<Map<String, Object>> mapMessageFormatter) {
+		if (this.mapMessageFormatter != null)
+			this.mapMessageFormatter = mapMessageFormatter;
 	}
 
 	public MessageFormatter<Object> getBeanMessageFormatter() {
 		return this.beanMessageFormatter;
 	}
 
-	public void setBeanMessageFormatter(
-			MessageFormatter<Object> beanMessageFormatter) {
-		this.beanMessageFormatter = beanMessageFormatter;
+	public void setBeanMessageFormatter(MessageFormatter<Object> beanMessageFormatter) {
+		if (this.beanMessageFormatter != null)
+			this.beanMessageFormatter = beanMessageFormatter;
+	}
+	
+	@Override
+	public void setPrefix(String prefix) {
+		
+		if (this.mapMessageFormatter instanceof PlaceholderMessageFormatter)
+			((PlaceholderMessageFormatter<Map<String, Object>>) this.mapMessageFormatter).setPrefix(prefix);
+		
+		if (this.beanMessageFormatter instanceof PlaceholderMessageFormatter)
+			((PlaceholderMessageFormatter<Object>) this.beanMessageFormatter).setPrefix(prefix);
+		
+		super.setPrefix(prefix);
+	}
+	
+	@Override
+	public void setSuffix(String suffix) {
+		
+		if (this.mapMessageFormatter instanceof PlaceholderMessageFormatter)
+			((PlaceholderMessageFormatter<Map<String, Object>>) this.mapMessageFormatter).setSuffix(suffix);
+		
+		if (this.beanMessageFormatter instanceof PlaceholderMessageFormatter)
+			((PlaceholderMessageFormatter<Object>) this.beanMessageFormatter).setSuffix(suffix);
+		
+		super.setSuffix(suffix);
 	}
 
 	@SuppressWarnings("unchecked")
