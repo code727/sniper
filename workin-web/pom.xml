@@ -46,6 +46,11 @@
 			<artifactId>workin-support</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-spring</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 
 </project>
