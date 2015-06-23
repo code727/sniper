@@ -13,25 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-6-11
+ * Create Date : 2015-6-19
  */
 
 package org.workin.web;
 
-import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * @description Servlet环境下本地化消息解析器接口
+ * @description Web工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface LocaleMessageResolver extends MessageResolver {
+public class WebUtils {
 	
-	/**
-	 * @description 获取当前Locale对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Locale getLocale();
+	/** HttpServletRequest对象的属性名 */
+	public static final String HTTP_SERVLET_REQUEST_NAME = HttpServletRequest.class.getName();
+	
+	/** HttpServletResponse对象的属性名 */
+	public static final String HTTP_SERVLET_RESPONSE_NAME = HttpServletResponse.class.getName();
+	
+	/** HttpSession对象的属性名 */
+	public static final String HTTP_SESSION_NAME = HttpSession.class.getName();
 	
 }
