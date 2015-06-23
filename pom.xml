@@ -42,5 +42,6 @@
 		<module>workin-security</module>
 		<module>workin-nosql</module>
 		<module>workin-http</module>
+		<module>workin-spring</module>
 	</modules>
 </project>
