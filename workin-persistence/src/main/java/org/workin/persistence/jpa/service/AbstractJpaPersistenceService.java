@@ -75,7 +75,7 @@ public abstract class AbstractJpaPersistenceService<T, PK extends Serializable>
 		if (sqlMapQuery != null) {
 			// 同时开启ibatis/mybatis的查询接口，弥补JPA针对复杂查询难以处理的问题
 			sqlMapQuery.setEntityClass(entityType);
-			logger.info("Successful enable SqlMapQuery interface,implements class is :"
+			logger.info("Successful enable SqlMapQuery interface,implements class is:"
 					+ sqlMapQuery.getClass().getName());
 		}
 			

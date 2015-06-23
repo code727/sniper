@@ -60,7 +60,7 @@ public class WebContextHelper {
 		} else 
 			request = requestAttributes.getRequest();
 		
-		return null;
+		return request;
 	}
 	
 	/**

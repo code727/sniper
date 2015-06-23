@@ -60,7 +60,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	
 	@Override
 	public HttpServletRequest getHttpServletRequest() {
-		return WebContextHelper.getHttpServletRequest();
+		return this.messageResolver.getHttpServletRequest();
 	}
 
 	@Override
