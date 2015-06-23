@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年6月23日
+ * Create Date : 2015-6-23
  */
 
 package org.workin.web.spring;
@@ -61,11 +61,10 @@ public class WebAppContextMessageReslover implements WebAppContextMessageResolve
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (this.localeResolver == null)
-			throw new IllegalArgumentException("");
+			throw new IllegalArgumentException("Property 'localeResolver' is required");
 		
 		if (this.messageSource == null)
-			throw new IllegalArgumentException("");
-		
+			throw new IllegalArgumentException("Property 'messageSource' is required");
 	}
 
 	@Override
