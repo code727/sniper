@@ -38,10 +38,10 @@ public class FileFilterTest extends BaseTestCase {
 		filter.doFileter();
 		List<File> files = filter.list();
 		if (CollectionUtils.isNotEmpty(files)) {
-			logger.info("File name filter list not empty.Start assertion.");
+			System.out.println("File name filter list not empty.Start assertion.");
 			for (File file : files) 
 				assertTrue(StringUtils.indexOfIgnoreCase(file.getName(), filter.getFilterValue()) > -1);	
-			logger.info("File name filter assertion end.");
+			System.out.println("File name filter assertion end.");
 		}
 	}
 	
@@ -57,10 +57,10 @@ public class FileFilterTest extends BaseTestCase {
 		filter.doFileter();
 		List<File> files = filter.list();
 		if (CollectionUtils.isNotEmpty(files)) {
-			logger.info("File type filter list not empty.Start assertion.");
+			System.out.println("File type filter list not empty.Start assertion.");
 			for (File file : files) 
 				assertTrue(StringUtils.endsWithIgnoreCase(file.getName(), filter.getFilterValue()));	
-			logger.info("File type filter assertion end.");
+			System.out.println("File type filter assertion end.");
 		}
 	}
 	
@@ -80,12 +80,12 @@ public class FileFilterTest extends BaseTestCase {
 		filter.doFileter();
 		List<File> files = filter.list();
 		if (CollectionUtils.isNotEmpty(files)) {
-			logger.info("File size filter list not empty.Start assertion.");
+			System.out.println("File size filter list not empty.Start assertion.");
 			for (File file : files) {
 				assertTrue(file.isFile());	
 				System.out.println(file + "length:" + file.length());
 			}
-			logger.info("File size filter assertion end.");
+			System.out.println("File size filter assertion end.");
 		}
 	}
 	
@@ -106,10 +106,10 @@ public class FileFilterTest extends BaseTestCase {
 		filter.doFileter();
 		List<File> files = filter.list();
 		if (CollectionUtils.isNotEmpty(files)) {
-			logger.info("File lastModified filter list not empty.Start assertion.");
+			System.out.println("File lastModified filter list not empty.Start assertion.");
 			for (File file : files) 
 				assertTrue(file.lastModified() < currentMillis);
-			logger.info("File lastModified filter assertion end.");
+			System.out.println("File lastModified filter assertion end.");
 		}
 	}
 	
