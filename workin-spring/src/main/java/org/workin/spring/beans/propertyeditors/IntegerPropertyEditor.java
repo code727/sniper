@@ -13,21 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-6-16
+ * Create Date : 2015年6月16日
  */
 
-package org.workin.spring.beans;
+package org.workin.spring.beans.propertyeditors;
 
 /**
- * @description 比特数属性编辑器
+ * @description 整型数字属性编辑器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BytePropertyEditor extends NumberPropertyEditor {
+public class IntegerPropertyEditor extends NumberPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return new Byte(text);
+		return new Integer(text);
 	}
-
+	
 }

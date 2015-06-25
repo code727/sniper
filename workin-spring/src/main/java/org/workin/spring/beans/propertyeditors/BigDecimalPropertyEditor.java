@@ -16,20 +16,20 @@
  * Create Date : 2015-6-17
  */
 
-package org.workin.spring.beans;
+package org.workin.spring.beans.propertyeditors;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 /**
- * @description BigInteger属性编辑器
+ * @description BigDecimal属性编辑器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BigIntegerPropertyEditor extends NumberPropertyEditor {
+public class BigDecimalPropertyEditor extends NumberPropertyEditor {
 
 	@Override
 	protected Object handleText(String text) {
-		return new BigInteger(text);
+		return new BigDecimal(text);
 	}
 
 }

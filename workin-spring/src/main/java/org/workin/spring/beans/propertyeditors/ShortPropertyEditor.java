@@ -16,18 +16,18 @@
  * Create Date : 2015-6-16
  */
 
-package org.workin.spring.beans;
+package org.workin.spring.beans.propertyeditors;
 
 /**
- * @description 长整型属性编辑器
+ * @description 短整型数字属性编辑器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class LongPropertyEditor extends NumberPropertyEditor {
+public class ShortPropertyEditor extends NumberPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return new Double(text);
+		return new Short(text);
 	}
 
 }

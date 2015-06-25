@@ -16,18 +16,18 @@
  * Create Date : 2015-6-16
  */
 
-package org.workin.spring.beans;
+package org.workin.spring.beans.propertyeditors;
 
 /**
- * @description 单精度浮点数属性编辑器
+ * @description 双精度浮点数属性编辑器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FloatPropertyEditor extends NumberPropertyEditor {
+public class DoublePropertyEditor extends NumberPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return new Float(text);
+		return new Double(text);
 	}
-
+	
 }

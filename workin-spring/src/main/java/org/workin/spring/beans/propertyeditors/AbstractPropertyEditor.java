@@ -16,7 +16,7 @@
  * Create Date : 2015-6-16
  */
 
-package org.workin.spring.beans;
+package org.workin.spring.beans.propertyeditors;
 
 import java.beans.PropertyEditor;
 import java.beans.PropertyEditorSupport;
