@@ -27,6 +27,10 @@ import org.workin.commons.util.StringUtils;
  */
 public abstract class NumberPropertyEditor extends AbstractPropertyEditor {
 	
+	public NumberPropertyEditor() {
+		this.defaultValue = "0";
+	}
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// 当不允许为空而默认数字字符串为空白字符串时，则抛出异常

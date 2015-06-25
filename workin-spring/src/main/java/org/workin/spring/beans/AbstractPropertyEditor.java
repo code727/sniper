@@ -32,10 +32,10 @@ public abstract class AbstractPropertyEditor extends PropertyEditorSupport
 		implements PropertyEditor, InitializingBean {
 	
 	/** 是否允许为空 */
-	private boolean allowEmpty;
+	private boolean allowEmpty = true;
 	
 	/** 不允许为空时指定的默认值 */
-	private String defaultValue;
+	protected String defaultValue;
 
 	public boolean isAllowEmpty() {
 		return allowEmpty;
