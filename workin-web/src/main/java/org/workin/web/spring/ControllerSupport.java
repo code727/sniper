@@ -18,6 +18,7 @@
 
 package org.workin.web.spring;
 
+import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,9 +29,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.spring.beans.IntegerPropertyEditor;
+import org.workin.spring.beans.propertyeditors.DatePropertyEditor;
 import org.workin.support.message.resolver.MessageResolver;
 import org.workin.support.model.MessageModel;
 import org.workin.web.ServletAware;
@@ -45,7 +47,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 		
 	@Autowired
 	private WebAppContextMessageResolver messageResolver;
-	
+			
 	public WebAppContextMessageResolver getMessageResolver() {
 		return messageResolver;
 	}
@@ -131,7 +133,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	}
 		
 	/**
-	 * @description 在绑定表单之前，先注册列表中的若干属性编辑器
+	 * @description 在绑定表单之前，统一的进行绑定属性编辑器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param binder
@@ -139,20 +141,16 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	 */
 	@InitBinder  
     protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-		IntegerPropertyEditor integerPropertyEditor = new IntegerPropertyEditor();
-		integerPropertyEditor.setAllowEmpty(false);
-		integerPropertyEditor.setDefaultValue("1");
-		binder.registerCustomEditor(Integer.class, new IntegerPropertyEditor());
-//		if (MapUtils.isNotEmpty(this.propertyEdities)) {
-//			Iterator<Entry<String, PropertyEditor>> pes = this.propertyEdities.entrySet().iterator();
-//			while (pes.hasNext()) {
-//				Entry<String, PropertyEditor> pe = pes.next();
-//				String classStr = pe.getKey();
-//				if (StringUtils.isNotBlank(classStr)) {
-//					binder.registerCustomEditor(Class.forName(classStr.trim()), pe.getValue());
-//				}
-//			}
-//		}
+		binder.registerCustomEditor(Date.class, new DatePropertyEditor(DateUtils.DEFAULT_DATETIME_FORMAT));
+		overrideInitBinder(request, binder);
     } 
-		
+	
+	/**
+	 * @description 覆盖默认的初始化绑定操作
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param request
+	 * @param binder
+	 */
+	protected void overrideInitBinder(HttpServletRequest request, ServletRequestDataBinder binder) {}
+	
 }

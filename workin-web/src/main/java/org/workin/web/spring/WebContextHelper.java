@@ -97,7 +97,7 @@ public class WebContextHelper {
 	 */
 	public static HttpSession getHttpSession(boolean create) {
 		HttpServletRequest request = getHttpServletRequest();
-		return request != null ? request.getSession(create) : null;
+		return request != null ? WebUtils.getSession(request, create) : null;
 	}
 	
 }
