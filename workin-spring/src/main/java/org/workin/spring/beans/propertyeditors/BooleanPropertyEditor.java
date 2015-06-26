@@ -23,7 +23,7 @@ package org.workin.spring.beans.propertyeditors;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BooleanPropertyEditor extends AbstractPropertyEditor {
+public class BooleanPropertyEditor extends StringPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {

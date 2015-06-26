@@ -22,20 +22,21 @@ import java.beans.PropertyEditor;
 import java.beans.PropertyEditorSupport;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.workin.commons.util.StringUtils;
 
 /**
- * @description 属性编辑器抽象类
+ * @description 字符串属性编辑器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractPropertyEditor extends PropertyEditorSupport
+public class StringPropertyEditor extends PropertyEditorSupport
 		implements PropertyEditor, InitializingBean {
 	
-	/** 是否允许为空 */
-	private boolean allowEmpty = true;
+	/** 是否允许为空，默认为不允许 */
+	private boolean allowEmpty;
 	
 	/** 不允许为空时指定的默认值 */
-	protected String defaultValue;
+	private String defaultValue = StringUtils.EMPTY_STRING;
 
 	public boolean isAllowEmpty() {
 		return allowEmpty;
@@ -56,29 +57,31 @@ public abstract class AbstractPropertyEditor extends PropertyEditorSupport
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// 当不允许为空而默认值为空时，则抛出异常
-		if (!this.allowEmpty && this.defaultValue == null)
+		if (!this.isAllowEmpty() && this.getDefaultValue() == null)
 			throw new IllegalArgumentException(
-					"Default value can not be null when 'allowEmpty' is false.");
+					"Default value can not be empty when 'allowEmpty' is false.");
 	}
 	
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
-		if (text != null)
+		if (!StringUtils.isEmpty(text))
 			setValue(handleText(text));
 		else {
-			if (!this.allowEmpty)
-				setValue(this.defaultValue);
+			if (!this.isAllowEmpty())
+				setValue(handleText(this.getDefaultValue()));
 			else
 				setValue(text);
 		}
 	}
 
 	/**
-	 * @description 处理文本，并返回处理后的结果
+	 * @description 非空文本的处理方法，返回处理后的结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param text
 	 * @return
 	 */
-	protected abstract Object handleText(String text);
+	protected Object handleText(String text) {
+		return text;
+	}
 
 }

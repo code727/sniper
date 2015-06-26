@@ -21,22 +21,21 @@ package org.workin.spring.beans.propertyeditors;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 数字属性编辑器
+ * @description 数字属性编辑器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class NumberPropertyEditor extends AbstractPropertyEditor {
+public abstract class NumberPropertyEditor extends StringPropertyEditor {
 	
 	public NumberPropertyEditor() {
-		this.defaultValue = "0";
+		this.setDefaultValue("0");
 	}
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		// 当不允许为空而默认数字字符串为空白字符串时，则抛出异常
 		if (!this.isAllowEmpty() && StringUtils.isBlank(this.getDefaultValue()))
 			throw new IllegalArgumentException(
-					"Default value can not be null or blank when 'allowEmpty' is false.");
+					"Default value can not be blank when 'allowEmpty' is false.");
 	}
 	
 	@Override
@@ -45,12 +44,10 @@ public abstract class NumberPropertyEditor extends AbstractPropertyEditor {
 			setValue(handleText(text));
 		else {
 			if (!this.isAllowEmpty())
-				setValue(this.getDefaultValue());
-			else
-				setValue(text);
+				setValue(handleText(this.getDefaultValue()));
 		}
 	}
-		
+	
 	@Override
 	public String getAsText() {
 		return StringUtils.toString(this.getValue()).trim();
