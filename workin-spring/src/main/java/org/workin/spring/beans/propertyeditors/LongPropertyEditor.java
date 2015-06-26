@@ -29,5 +29,5 @@ public class LongPropertyEditor extends NumberPropertyEditor {
 	protected Object handleText(String text) {
 		return new Double(text);
 	}
-
+	
 }

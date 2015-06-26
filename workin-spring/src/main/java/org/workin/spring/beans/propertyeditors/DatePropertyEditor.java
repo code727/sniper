@@ -33,6 +33,10 @@ public class DatePropertyEditor extends StringPropertyEditor {
 	/** 能处理的日期格式 */
 	private String pattern;
 	
+	public DatePropertyEditor(String pattern) {
+		this.pattern = pattern;
+	}
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (!this.isAllowEmpty() && StringUtils.isBlank(this.getDefaultValue()))
