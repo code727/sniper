@@ -34,17 +34,8 @@ public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceAdvice {
 		
 	private static Logger logger = LoggerFactory.getLogger(MultipleDataSourceAdvice.class);
 	
-	/**
-	 * @description 目标方法执行之前调用
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param method
-	 * @param args
-	 * @param target
-	 * @throws Throwable 
-	 */
 	@Override
-	public void before(Method method, Object[] args, Object target)
-			throws Throwable {
+	protected void doBeforeTask(Method method, Object[] args, Object target) {
 		String methodName = method.getName();
 		String sourceName = multipleDataSourceManager.getDataSourceName(methodName);
 		if (sourceName == null)
@@ -52,32 +43,14 @@ public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceAdvice {
 					+ methodName + "] not found correlative data source name.");
 		
 		DataSourceHolder.setDataSourceName(sourceName);
-		logger.debug("Invoke method [" + methodName + "] of data source [" + sourceName + "].");
+		logger.info("Invoke method [" + methodName + "] of data source [" + sourceName + "].");
+		
 	}
-
-	/**
-	 * @description 目标方法执行之后调用
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param returnValue
-	 * @param method
-	 * @param args
-	 * @param target
-	 * @throws Throwable
-	 */
+	
 	@Override
-	public void afterReturning(Object returnValue, Method method,
+	protected void doAfterReturningTask(Object returnValue, Method method,
 			Object[] args, Object target) throws Throwable {
 		DataSourceHolder.clear();
 	}
 	
-	/**
-	 * @description 目标方法出现异常后调用
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param e
-	 * @throws Throwable
-	 */
-	public void afterThrowing(Exception e) throws Throwable {  
-		throw new Exception(e);
-	}
-
 }

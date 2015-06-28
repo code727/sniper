@@ -18,19 +18,15 @@
 
 package org.workin.persistence.datasource.advice;
 
-import org.springframework.aop.AfterReturningAdvice;
-import org.springframework.aop.MethodBeforeAdvice;
-import org.springframework.aop.ThrowsAdvice;
-import org.springframework.beans.factory.InitializingBean;
 import org.workin.persistence.datasource.manager.DataSourceManager;
+import org.workin.spring.aop.MatchableMethodAroundAdvice;
 
 /**
  * @description 多数据源切换选择器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractMultipleDataSourceAdvice implements MethodBeforeAdvice,
-	AfterReturningAdvice, ThrowsAdvice, InitializingBean {
+public abstract class AbstractMultipleDataSourceAdvice extends MatchableMethodAroundAdvice {
 	
 	/** 多数据源管理器 */
 	protected DataSourceManager multipleDataSourceManager;
