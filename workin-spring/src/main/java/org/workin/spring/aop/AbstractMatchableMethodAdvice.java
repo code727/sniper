@@ -24,6 +24,7 @@ import java.util.Set;
 
 import org.springframework.util.PatternMatchUtils;
 import org.workin.commons.util.CollectionUtils;
+import org.workin.support.context.ApplicationContextHolder;
 
 /**
  * @description 可设置匹配模式的方法拦截切面抽象类
@@ -35,14 +36,8 @@ public abstract class AbstractMatchableMethodAdvice implements MatchableMethodAd
 	/** 方法名称模式集 */
 	private Set<String> namePatterns;
 	
-	/** 全部匹配的标识符 */
-	private String matchAll;
-	
-	private boolean match;
-	
-	/** 标识是否已做过模式匹配检测 */
-	private boolean doMatch;
-
+	private static String ADVICE_MATCH = "advice_match";
+			
 	public Set<String> getNamePatterns() {
 		return namePatterns;
 	}
@@ -51,17 +46,6 @@ public abstract class AbstractMatchableMethodAdvice implements MatchableMethodAd
 		this.namePatterns = namePatterns;
 	}
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		if (CollectionUtils.isNotEmpty(this.namePatterns)) {
-			if (this.namePatterns.contains("*")) {
-				this.matchAll = "*";
-				this.namePatterns.remove("*");
-			}
-		} else
-			this.matchAll = "*";
-	}
-	
 	/**
 	 * @description 检测当前方法是否匹配于模式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -69,23 +53,34 @@ public abstract class AbstractMatchableMethodAdvice implements MatchableMethodAd
 	 * @return
 	 */
 	protected boolean checkMatch(Method method) {
-		if (!this.doMatch) {
-			if (this.matchAll != null) {
-				this.match = true;
-			} else {
-				Iterator<String> iterator = this.namePatterns.iterator();
-				while (iterator.hasNext()) {
-					String pattern = iterator.next();
-					if (PatternMatchUtils.simpleMatch(pattern, method.getName())) {
-						this.match = true;
-						break;
+		/* 同一个方法第一次被拦截时的检测 */
+		if (ApplicationContextHolder.getAttribute(ADVICE_MATCH) == null) {
+			if (CollectionUtils.isNotEmpty(this.namePatterns)) {
+				if (this.namePatterns.contains("*")) {
+					this.namePatterns.remove("*");
+					ApplicationContextHolder.setAttribute(ADVICE_MATCH, true);
+					return true;
+				} else {
+					Iterator<String> iterator = this.namePatterns.iterator();
+					while (iterator.hasNext()) {
+						String pattern = iterator.next();
+						if (PatternMatchUtils.simpleMatch(pattern, method.getName())) {
+							ApplicationContextHolder.setAttribute(ADVICE_MATCH, true);
+							return true;
+						}
 					}
+					ApplicationContextHolder.setAttribute(ADVICE_MATCH, false);
+					return false;
 				}
-			} 
-			this.doMatch = true;
-		}
-		
-		return this.match;
+			} else {
+				ApplicationContextHolder.setAttribute(ADVICE_MATCH, true);
+				return true;
+			}
+		} 
+		else
+			/* 同一个方法第n+1次被拦截时的检测，例如：
+			 * 环绕型拦截切面执行afterReturning()方法时则直接返回第一次执行before()方式时的检测结果 */
+			return (boolean) ApplicationContextHolder.getAttribute(ADVICE_MATCH);
 	}
-
+	
 }

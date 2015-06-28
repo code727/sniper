@@ -22,7 +22,6 @@ import java.lang.reflect.Method;
 
 import org.springframework.aop.MethodBeforeAdvice;
 
-
 /**
  * @description 前置型方法拦截切面抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -34,9 +33,9 @@ public abstract class MatchableMethodBeforeAdvice extends
 	@Override
 	public void before(Method method, Object[] args, Object target)
 			throws Throwable {
+		
 		if (super.checkMatch(method))
 			doBeforeTask(method, args, target);
-		
 	}
 	
 	/**

@@ -43,5 +43,13 @@ public interface MatchableMethodAdvice extends ThrowsAdvice, InitializingBean {
 	 * @return
 	 */
 	public Set<String> getNamePatterns();
+	
+	/**
+	 * @description 目标方法出现异常后被拦截处理的方法
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param e
+	 * @throws Throwable
+	 */
+	public void afterThrowing(Exception e) throws Throwable; 
 
 }
