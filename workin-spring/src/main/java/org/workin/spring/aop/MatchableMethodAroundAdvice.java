@@ -20,24 +20,31 @@ package org.workin.spring.aop;
 
 import java.lang.reflect.Method;
 
-import org.springframework.aop.AfterReturningAdvice;
+import org.springframework.aop.MethodBeforeAdvice;
 
 /**
  * @description 环绕型方法拦截切面抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class MatchableMethodAroundAdvice extends MatchableMethodBeforeAdvice implements AfterReturningAdvice{
-		
+public abstract class MatchableMethodAroundAdvice extends MatchableMethodAfterAdvice implements MethodBeforeAdvice {
+
 	@Override
-	public void afterReturning(Object returnValue, Method method,
-			Object[] args, Object target) throws Throwable {
+	public void before(Method method, Object[] args, Object target)
+			throws Throwable {
 		
 		if (super.checkMatch(method))
-			doAfterReturningTask(returnValue, method, args, target);
+			doBeforeTask(method, args, target);
+		
 	}
 	
-	protected abstract void doAfterReturningTask(Object returnValue, Method method,
-			Object[] args, Object target) throws Throwable;
+	/**
+	 * @description 执行前置拦截任务
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param method
+	 * @param args
+	 * @param target
+	 */
+	protected abstract void doBeforeTask(Method method, Object[] args, Object target);		
 
 }

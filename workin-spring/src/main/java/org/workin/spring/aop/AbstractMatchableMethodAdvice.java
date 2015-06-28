@@ -36,7 +36,7 @@ public abstract class AbstractMatchableMethodAdvice implements MatchableMethodAd
 	/** 方法名称模式集 */
 	private Set<String> namePatterns;
 	
-	private static String ADVICE_MATCH = "advice_match";
+	protected static String ADVICE_MATCH = "advice_match";
 			
 	public Set<String> getNamePatterns() {
 		return namePatterns;
@@ -45,7 +45,12 @@ public abstract class AbstractMatchableMethodAdvice implements MatchableMethodAd
 	public void setNamePatterns(Set<String> namePatterns) {
 		this.namePatterns = namePatterns;
 	}
-
+	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		
+	}
+	
 	/**
 	 * @description 检测当前方法是否匹配于模式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -56,8 +61,8 @@ public abstract class AbstractMatchableMethodAdvice implements MatchableMethodAd
 		/* 同一个方法第一次被拦截时的检测 */
 		if (ApplicationContextHolder.getAttribute(ADVICE_MATCH) == null) {
 			if (CollectionUtils.isNotEmpty(this.namePatterns)) {
+				// 配置有"*"号时，则所有方法都需要拦截处理
 				if (this.namePatterns.contains("*")) {
-					this.namePatterns.remove("*");
 					ApplicationContextHolder.setAttribute(ADVICE_MATCH, true);
 					return true;
 				} else {
@@ -81,6 +86,11 @@ public abstract class AbstractMatchableMethodAdvice implements MatchableMethodAd
 			/* 同一个方法第n+1次被拦截时的检测，例如：
 			 * 环绕型拦截切面执行afterReturning()方法时则直接返回第一次执行before()方式时的检测结果 */
 			return (boolean) ApplicationContextHolder.getAttribute(ADVICE_MATCH);
+	}
+
+	@Override
+	public void afterThrowing(Exception e) throws Throwable {
+		throw new Exception(e);
 	}
 	
 }
