@@ -33,6 +33,8 @@ import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.spring.beans.propertyeditors.DatePropertyEditor;
+import org.workin.spring.beans.propertyeditors.StringBufferPropertyEditor;
+import org.workin.spring.beans.propertyeditors.StringBuilderPropertyEditor;
 import org.workin.support.message.resolver.MessageResolver;
 import org.workin.support.model.MessageModel;
 import org.workin.web.ServletAware;
@@ -133,7 +135,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	}
 		
 	/**
-	 * @description 在绑定表单之前，统一的进行绑定属性编辑器
+	 * @description 在绑定表单之前，统一的进行初始化绑定操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param binder
@@ -142,6 +144,8 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	@InitBinder  
     protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
 		binder.registerCustomEditor(Date.class, new DatePropertyEditor(DateUtils.DEFAULT_DATETIME_FORMAT));
+		binder.registerCustomEditor(StringBuffer.class, new StringBufferPropertyEditor());
+		binder.registerCustomEditor(StringBuilder.class, new StringBuilderPropertyEditor());
 		overrideInitBinder(request, binder);
     } 
 	
