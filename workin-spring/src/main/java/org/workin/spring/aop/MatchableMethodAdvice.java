@@ -24,11 +24,11 @@ import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * @description 可设置匹配模式的拦截切面接口
+ * @description 可设置匹配模式的方法拦截切面接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface MatchableAdvice extends ThrowsAdvice, InitializingBean {
+public interface MatchableMethodAdvice extends ThrowsAdvice, InitializingBean {
 	
 	/**
 	 * @description 设置需要被拦截处理的方法名称模式集

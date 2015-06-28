@@ -27,7 +27,7 @@ import org.springframework.aop.AfterReturningAdvice;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class MatchableMethodAfterAdvice extends AbstractMatchableAdvice implements AfterReturningAdvice {
+public abstract class MatchableMethodAfterAdvice extends AbstractMatchableMethodAdvice implements AfterReturningAdvice {
 
 	@Override
 	public void afterReturning(Object returnValue, Method method,

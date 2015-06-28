@@ -29,7 +29,7 @@ import org.springframework.aop.MethodBeforeAdvice;
  * @version 1.0
  */
 public abstract class MatchableMethodBeforeAdvice extends
-		AbstractMatchableAdvice implements MethodBeforeAdvice {
+		AbstractMatchableMethodAdvice implements MethodBeforeAdvice {
 
 	@Override
 	public void before(Method method, Object[] args, Object target)

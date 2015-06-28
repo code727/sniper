@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年6月28日
+ * Create Date : 2015-6-28
  */
 
 package org.workin.spring.aop;
@@ -26,11 +26,11 @@ import org.springframework.util.PatternMatchUtils;
 import org.workin.commons.util.CollectionUtils;
 
 /**
- * @description
+ * @description 可设置匹配模式的方法拦截切面抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractMatchableAdvice implements MatchableAdvice {
+public abstract class AbstractMatchableMethodAdvice implements MatchableMethodAdvice {
 	
 	/** 方法名称模式集 */
 	private Set<String> namePatterns;
