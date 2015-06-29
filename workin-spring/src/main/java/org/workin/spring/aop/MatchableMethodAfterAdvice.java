@@ -34,8 +34,8 @@ public abstract class MatchableMethodAfterAdvice extends AbstractMatchableMethod
 	public void afterReturning(Object returnValue, Method method,
 			Object[] args, Object target) throws Throwable {
 		
-		if (checkMatch(method)) 
-			doAfterReturningTask(returnValue, method, args, target);
+		if (super.checkMatch(method)) 
+			this.doAfterReturningTask(returnValue, method, args, target);
 		
 		ApplicationContextHolder.removeAttribute(ADVICE_MATCH);
 	}

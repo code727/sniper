@@ -18,44 +18,21 @@
 
 package org.workin.support.context;
 
-
-
 /**
  * @description 应用上下文工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class ApplicationContextHolder {
-	
-	private static final ThreadLocal<Object> holder = newThreadLocalContext();
-	
-	private static final ApplicationContext<Object, Object> map_holder = newMapThreadLocalContext();
-	
-	/**
-	 * @description 设置线程变量值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param value
-	 */
-	public static void set(Object value) {
-		holder.set(value);
-	}
-	
-	/**
-	 * @description 获取线程变量值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public static Object get() {
-		return holder.get();
-	}
+		
+	private static final ApplicationContext<Object, Object> holder = newMapThreadLocalContext();
 	
 	/**
 	 * @description 清除上下文
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public static void clear() {
-		holder.remove();
-		map_holder.clear();
+		holder.clear();
 	}
 	
 	/**
@@ -65,7 +42,7 @@ public class ApplicationContextHolder {
 	 * @return
 	 */
 	public static Object getAttribute(Object name) {
-		 return map_holder.getAttribute(name);
+		 return holder.getAttribute(name);
 	}
 	
 	/**
@@ -75,7 +52,7 @@ public class ApplicationContextHolder {
 	 * @param value
 	 */
 	public static void setAttribute(Object name, Object value) {
-		map_holder.setAttribute(name, value);
+		holder.setAttribute(name, value);
 	}
 	
 	/**
@@ -85,18 +62,9 @@ public class ApplicationContextHolder {
 	 * @return
 	 */
 	public static Object removeAttribute(Object name) {
-		return map_holder.removeAttribute(name);
+		return holder.removeAttribute(name);
 	}
-	
-	/**
-	 * @description 创建基本的ThreadLocal上下文对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public static <T> ThreadLocal<T> newThreadLocalContext() {
-		return new ThreadLocal<T>();
-	}
-	
+		
 	/**
 	 * @description 创建基于Map类型的线程局部变量
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

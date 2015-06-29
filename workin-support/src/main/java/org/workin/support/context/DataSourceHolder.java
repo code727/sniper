@@ -18,21 +18,22 @@
 
 package org.workin.support.context;
 
-
 /**
  * @description 数据源上下文工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class DataSourceHolder extends ApplicationContextHolder {
-    
+	
+	public static final String CURRENT_DATASOURCE_NAME = "current_datasource_name";
+	
 	/**
 	 * @description 设置数据源标识到线程上下文变量中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 */
     public static void setDataSourceName(String name){  
-       set(name);
+       setAttribute(CURRENT_DATASOURCE_NAME, name);
     }  
       
     /**
@@ -41,7 +42,7 @@ public class DataSourceHolder extends ApplicationContextHolder {
      * @return
      */
     public static String getDataSourceName() {  
-        return (String) get();
+        return (String) getAttribute(CURRENT_DATASOURCE_NAME);
     }  
                 
 }
