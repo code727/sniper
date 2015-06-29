@@ -30,7 +30,7 @@ public class JdbcMultipleDataSource extends AbstractRoutingDataSource {
 	
 	@Override
 	protected Object determineCurrentLookupKey() {
-		return DataSourceHolder.get();
+		return DataSourceHolder.getDataSourceName();
 	}
 
 }

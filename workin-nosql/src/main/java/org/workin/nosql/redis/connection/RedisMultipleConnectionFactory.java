@@ -29,7 +29,7 @@ public class RedisMultipleConnectionFactory extends AbstractRoutingConnectionFac
 
 	@Override
 	protected Object determineCurrentLookupKey() {
-		return DataSourceHolder.get();
+		return DataSourceHolder.getDataSourceName();
 	}
 
 }

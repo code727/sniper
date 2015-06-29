@@ -39,9 +39,6 @@ public class ApplicationContextTest extends BaseTestCase {
 				assertTrue(context1.getAttribute("my").equals(ApplicationContextHolder.getAttribute("my")));
 				System.out.println(ApplicationContextHolder.getAttribute("my"));
 				
-				ApplicationContextHolder.set(new Object());
-				assertNotNull(ApplicationContextHolder.get());
-				System.out.println(ApplicationContextHolder.get());
 				
 				System.out.println("End thread1!");
 			}
@@ -58,12 +55,10 @@ public class ApplicationContextTest extends BaseTestCase {
 				assertNull(context1.getAttribute("my"));
 				assertNull(context2.getAttribute("my"));
 				assertNull(ApplicationContextHolder.getAttribute("my"));
-				assertNull(ApplicationContextHolder.get());
 				
 				System.out.println(context1.getAttribute("my"));
 				System.out.println(context2.getAttribute("my"));
 				System.out.println(ApplicationContextHolder.getAttribute("my"));
-				System.out.println(ApplicationContextHolder.get());
 				
 				System.out.println("End thread2!");
 			}
