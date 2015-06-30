@@ -18,6 +18,7 @@
 
 package org.workin.trace.domain;
 
+import java.lang.reflect.Method;
 import java.util.Date;
 
 import org.workin.persistence.entity.IdEntity;
@@ -31,6 +32,11 @@ public class BehaviorPerformance extends IdEntity<Long> {
 
 	private static final long serialVersionUID = 7351758236037660629L;
 	
+	private transient Method method;
+	
+	/** 方法所在包全限定名 */
+	private String declaringClass;
+	
 	/** 方法名称 */
 	private String methodName;
 	
@@ -42,6 +48,22 @@ public class BehaviorPerformance extends IdEntity<Long> {
 	
 	/** 耗时(毫秒) */
 	private long elapsedTime;
+	
+	public Method getMethod() {
+		return method;
+	}
+
+	public void setMethod(Method method) {
+		this.method = method;
+	}
+
+	public String getDeclaringClass() {
+		return declaringClass;
+	}
+
+	public void setDeclaringClass(String declaringClass) {
+		this.declaringClass = declaringClass;
+	}
 
 	public String getMethodName() {
 		return methodName;

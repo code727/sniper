@@ -31,13 +31,24 @@ import org.workin.trace.domain.BehaviorPerformance;
 public class BehaviorPerformanceLoggerService implements BehaviorPerformanceService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BehaviorPerformanceLoggerService.class);
+	
+	private static final String message = new StringBuffer()
+		.append("\n").append("--------------- Successful get behavior performance ---------------").append("\n")
+		.append("declaringClass:{}").append("\n")
+		.append("methodName:{}").append("\n")
+		.append("startTime:{}").append("\n")
+		.append("endTime:{}").append("\n")
+		.append("elapsedTime:{}ms").append("\n")
+		.toString();
+			
 
 	@Override
 	public void store(BehaviorPerformance behaviorPerformance) {
-		logger.info("Success get behavior performance:"
-				+ "[methodName:{},startTime:{},endTime:{},elapsedTime:{}ms].", 
-				behaviorPerformance.getMethodName(), DateUtils.dateToString(behaviorPerformance.getStartTime()),
-				DateUtils.dateToString(behaviorPerformance.getEndTime()), behaviorPerformance.getElapsedTime());
+		logger.info(message, behaviorPerformance.getDeclaringClass(), 
+				behaviorPerformance.getMethodName(),
+				DateUtils.dateToString(behaviorPerformance.getStartTime()),
+				DateUtils.dateToString(behaviorPerformance.getEndTime()),
+				behaviorPerformance.getElapsedTime());
 	}
 
 }

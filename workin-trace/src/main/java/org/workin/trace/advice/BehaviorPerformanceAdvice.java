@@ -20,6 +20,7 @@ package org.workin.trace.advice;
 
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.Stack;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,26 +58,38 @@ public class BehaviorPerformanceAdvice extends MatchableMethodAroundAdvice {
 		}
 	}
 		
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void doBeforeTask(Method method, Object[] args, Object target) {
-		Date startTime = new Date();
+		
+		if (ApplicationContextHolder.getAttribute(BEHAVIOR_PERFORMANCE) == null)
+			ApplicationContextHolder.setAttribute(BEHAVIOR_PERFORMANCE, new Stack<BehaviorPerformance>());
+		
 		BehaviorPerformance behaviorPerformance = new BehaviorPerformance();
+		behaviorPerformance.setMethod(method);
+		behaviorPerformance.setDeclaringClass(method.getDeclaringClass().getName());
 		behaviorPerformance.setMethodName(method.getName());
-		behaviorPerformance.setStartTime(startTime);
-		ApplicationContextHolder.setAttribute(BEHAVIOR_PERFORMANCE, behaviorPerformance);
+		behaviorPerformance.setStartTime(new Date());
+		
+		((Stack<BehaviorPerformance>) ApplicationContextHolder
+				.getAttribute(BEHAVIOR_PERFORMANCE)).add(behaviorPerformance);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void doAfterReturningTask(Object returnValue, Method method,
 			Object[] args, Object target) throws Throwable {
-		Date endTime = new Date();
-		BehaviorPerformance behaviorPerformance = (BehaviorPerformance) ApplicationContextHolder
-				.getAttribute(BEHAVIOR_PERFORMANCE);
-		behaviorPerformance.setEndTime(endTime);
-		behaviorPerformance.setElapsedTime(DateUtils.getIntervalMillis(
-				behaviorPerformance.getEndTime(), behaviorPerformance.getStartTime()));
 		
-		behaviorPerformanceService.store(behaviorPerformance);
+		// 从堆栈里取出最近一个被doBeforeTask()处理的方法BehaviorPerformance对象，可保证总是先得到最里层的方法
+		BehaviorPerformance behaviorPerformance = ((Stack<BehaviorPerformance>) ApplicationContextHolder
+				.getAttribute(BEHAVIOR_PERFORMANCE)).pop();
+		
+		if (method == behaviorPerformance.getMethod()) {
+			behaviorPerformance.setEndTime(new Date());
+			behaviorPerformance.setElapsedTime(DateUtils.getIntervalMillis(
+					behaviorPerformance.getEndTime(), behaviorPerformance.getStartTime()));
+			behaviorPerformanceService.store(behaviorPerformance);
+		}
 	}
 
 }
