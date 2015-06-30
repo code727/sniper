@@ -13,6 +13,14 @@
 			<groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>3.2.2.RELEASE</version>
+            <scope>compile</scope>
+            <optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>3.2.2.RELEASE</version>
+            <scope>compile</scope>
             <optional>true</optional>
 		</dependency>
 		<dependency>
@@ -24,12 +32,6 @@
 			<groupId>org.workin</groupId>
 			<artifactId>workin-support</artifactId>
 			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.workin</groupId>
-			<artifactId>workin-test</artifactId>
-			<version>1.0.0</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

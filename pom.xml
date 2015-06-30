@@ -43,5 +43,6 @@
 		<module>workin-nosql</module>
 		<module>workin-http</module>
 		<module>workin-spring</module>
+		<module>workin-trace</module>
 	</modules>
 </project>
