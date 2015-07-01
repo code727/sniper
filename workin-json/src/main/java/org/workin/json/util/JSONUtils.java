@@ -21,6 +21,7 @@ package org.workin.json.util;
 import java.util.Collection;
 import java.util.List;
 
+import net.sf.ezmorph.Morpher;
 import net.sf.ezmorph.MorpherRegistry;
 import net.sf.ezmorph.object.DateMorpher;
 import net.sf.json.JSONArray;
@@ -39,12 +40,33 @@ import org.workin.commons.util.StringUtils;
  */
 public class JSONUtils {
 	
+	private static MorpherRegistry morpherRegistry;
+	
 	static {
-		MorpherRegistry morpherRegistry = net.sf.json.util.JSONUtils.getMorpherRegistry();
+		morpherRegistry = net.sf.json.util.JSONUtils.getMorpherRegistry();
 		morpherRegistry.registerMorpher(new DateMorpher(new String[] {
 				DateUtils.DEFAULT_DATETIME_FORMAT, DateUtils.DEFAULT_DATE_FORMAT
 			}
 		)); 
+	}
+	
+	/**
+	 * @description 注册全局的Morpher
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param morpher
+	 */
+	public static void registerMorpher(Morpher morpher) {
+		if (morpher != null)
+			morpherRegistry.registerMorpher(morpher);
+	}
+	
+	/**
+	 * @description 注册全局的DateMorpher
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dateMorpher
+	 */
+	public static void registerDateMorpher(DateMorpher dateMorpher) {
+		registerMorpher(dateMorpher);
 	}
 	
 	/**
