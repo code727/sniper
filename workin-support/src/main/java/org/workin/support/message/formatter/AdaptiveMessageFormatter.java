@@ -91,13 +91,19 @@ public class AdaptiveMessageFormatter extends
 			if (param instanceof Map)
 				// 参数为java.util.Map对象时，则用Map参数消息格式化处理器处理
 				return this.mapMessageFormatter.format(message, (Map<String, Object>) param);
-			else if (RegexUtils.has(message, RegexUtils.regex.get(MessageFormat.class.getName())))
+			
+			if (RegexUtils.has(message, RegexUtils.regex.get(MessageFormat.class.getName())))
 				/* 参数为其余JAVA类型对象，并且消息中包含java.text.MessageFormat能处理的{0}...{9}占位符时，
 				 * 则用JDK原生态消息格式化处理器处理 */
 				return this.jdkMessageFormatter.format(message, param);
-		} 
+		} else {
+			/* 参数为自定义类型对象，并且消息中包含java.text.MessageFormat能处理的{0}...{9}占位符时，
+			 * 则同样用JDK原生态消息格式化处理器处理 */
+			if (RegexUtils.has(message, RegexUtils.regex.get(MessageFormat.class.getName())))
+				return this.jdkMessageFormatter.format(message, param);
+		}
 		
-		// 参数为非JAVA类型的参数对象时，则一律用Bean对象消息格式化处理器处理
+		// 剩余情况则一律用Bean对象消息格式化处理器处理
 		return this.beanMessageFormatter.format(message, param);
 	}
 	

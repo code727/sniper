@@ -18,6 +18,7 @@
 
 package org.worin.support.test;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ public class AdaptiveMessageFormatterTest extends BaseTestCase {
 		map.put("1", "workin test_001");
 	}
 	
-	@Test
+//	@Test
 	public void testFormat1() {
 		String message1 = "This result code is {code}, data is {data}";
 		String result = formatter.format(message1, model);
@@ -60,7 +61,7 @@ public class AdaptiveMessageFormatterTest extends BaseTestCase {
 		System.out.println(result);
 	}
 	
-	@Test
+//	@Test
 	public void testFormat2() {
 		String message2 = "This result code is {0}, data is {1}";
 		String result = formatter.format(message2, map);
@@ -69,7 +70,7 @@ public class AdaptiveMessageFormatterTest extends BaseTestCase {
 		System.out.println(result);
 	}
 	
-	@Test
+//	@Test
 	public void testFormat3() {
 		formatter.setPrefix("#{");
 		formatter.setSuffix("}#");
@@ -85,9 +86,9 @@ public class AdaptiveMessageFormatterTest extends BaseTestCase {
 		String message = "This result code is {0}, data is {1}";
 		String result = formatter.format(message, model);
 		
-		assertEquals(message, result);
-		System.out.println("Can not format when message contains number placeholder "
-				+ "and parameter is a java bean.");
+		assertTrue(!message.equals(result));
+		assertTrue(MessageFormat.format(message, model).equals(result));
+		System.out.println(result);
 	}
 	
 }
