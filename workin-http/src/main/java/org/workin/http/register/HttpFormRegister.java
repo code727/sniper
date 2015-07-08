@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.workin.http.HttpForm;
+import org.workin.http.converter.HttpFormConverter;
 
 /**
  * @description Http表单注册器接口
@@ -29,6 +30,13 @@ import org.workin.http.HttpForm;
  * @version 1.0
  */
 public interface HttpFormRegister {
+	
+	/**
+	 * @description 设置表单转换器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param converter
+	 */
+	public void setConverter(HttpFormConverter converter);
 	
 	/**
 	 * @description 设置表单映射集

@@ -102,5 +102,5 @@ public class SimpleHttpForm implements HttpForm {
 	public HttpRequestHeader getHeader() {
 		return this.header;
 	}
-
+	
 }

@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.workin.commons.util.CollectionUtils;
 import org.workin.http.HttpForm;
+import org.workin.http.converter.DefaultHttpFormConverter;
 import org.workin.http.converter.HttpFormConverter;
 
 /**
@@ -30,7 +31,7 @@ import org.workin.http.converter.HttpFormConverter;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultHttpFormRegister implements ConvertableHttpFormRegister {
+public class DefaultHttpFormRegister implements HttpFormRegister {
 	
 	/** 名称 -表单映射集 */
 	private Map<String, HttpForm> formMap;
@@ -39,7 +40,13 @@ public class DefaultHttpFormRegister implements ConvertableHttpFormRegister {
 	private Map<String, String> formUrlMap;
 	
 	/** 表单转换器 */
-	private HttpFormConverter converter;
+	private HttpFormConverter converter = new DefaultHttpFormConverter();
+	
+	@Override
+	public void setConverter(HttpFormConverter converter) {
+		if (converter != null)
+			this.converter = converter;
+	}
 
 	@Override
 	public void setFormMap(Map<String, HttpForm> formMap) {
@@ -53,12 +60,6 @@ public class DefaultHttpFormRegister implements ConvertableHttpFormRegister {
 	}
 	
 	@Override
-	public void setConverter(HttpFormConverter converter) {
-		if (converter != null)
-			this.converter = converter;
-	}
-
-	@Override
 	public HttpForm find(String name) {
 		return this.formMap != null ? this.formMap.get(name) : null;
 	}
@@ -70,14 +71,15 @@ public class DefaultHttpFormRegister implements ConvertableHttpFormRegister {
 	
 	@Override
 	public List<HttpForm> getForms() {
-		return this.formMap != null ? CollectionUtils.newArrayList(
-				this.formMap.values()) : null;
+		return this.formMap != null ? 
+				CollectionUtils.newArrayList(this.formMap.values()) : null;
+				
 	}
 
 	@Override
 	public List<String> getURL() {
-		return this.formUrlMap != null ? CollectionUtils.newArrayList(
-				this.formUrlMap.values()) : null;
+		return this.formUrlMap != null ? 
+				CollectionUtils.newArrayList(this.formUrlMap.values()) : null;
 	}
 
 }

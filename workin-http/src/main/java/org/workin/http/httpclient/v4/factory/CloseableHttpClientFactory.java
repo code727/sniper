@@ -16,17 +16,30 @@
  * Create Date : 2015-7-8
  */
 
-package org.workin.http.register;
+package org.workin.http.httpclient.v4.factory;
 
-import org.workin.http.converter.HttpFormConverter;
+import org.apache.http.conn.HttpClientConnectionManager;
+import org.apache.http.impl.client.CloseableHttpClient;
 
 /**
- * @description 可转换HTTP表单注册器
+ * @description HttpClient4.x CloseableHttpClient对象工厂接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ConvertableHttpFormRegister extends HttpFormRegister {
+public interface CloseableHttpClientFactory {
 	
-	public void setConverter(HttpFormConverter converter);
-
+	/**
+	 * @description 设置HttpClientConnectionManager对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param connectionManager
+	 */
+	public void setConnectionManager(HttpClientConnectionManager connectionManager);
+	
+	/**
+	 * @description 创建CloseableHttpClient实例
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public CloseableHttpClient create();
+	
 }

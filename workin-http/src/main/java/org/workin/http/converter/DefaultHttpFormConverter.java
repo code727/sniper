@@ -104,7 +104,7 @@ public class DefaultHttpFormConverter implements HttpFormConverter {
 	 * @param url
 	 * @param queryString
 	 */
-	public void appendQueryString(StringBuffer url, String queryString) {
+	protected void appendQueryString(StringBuffer url, String queryString) {
 		if (StringUtils.isNotBlank(queryString)) {
 			int index = url.lastIndexOf("?");
 			if (index > -1) {
