@@ -14,5 +14,41 @@
 			<artifactId>workin-commons</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+  			<groupId>org.apache.httpcomponents</groupId>
+  			<artifactId>httpclient</artifactId>
+  			<version>4.3.1</version>
+  			<optional>true</optional>
+		</dependency>
+		<dependency>
+  			<groupId>org.apache.httpcomponents</groupId>
+  			<artifactId>httpclient-cache</artifactId>
+  			<version>4.3.1</version>
+  			<optional>true</optional>
+		</dependency>
+		<dependency>
+  			<groupId>org.apache.httpcomponents</groupId>
+  			<artifactId>httpmime</artifactId>
+  			<version>4.3.1</version>
+  			<optional>true</optional>
+		</dependency>
+		<dependency>
+  		<groupId>org.apache.httpcomponents</groupId>
+  			<artifactId>fluent-hc</artifactId>
+  			<version>4.3.1</version>
+  			<optional>true</optional>
+		</dependency>
+		<dependency>
+  			<groupId>org.codehaus.jackson</groupId>
+  			<artifactId>jackson-mapper-asl</artifactId>
+  			<version>1.9.12</version>
+  			<optional>true</optional>
+		</dependency>
 	</dependencies>
 </project>
