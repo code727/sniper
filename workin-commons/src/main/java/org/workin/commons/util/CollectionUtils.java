@@ -369,46 +369,6 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 获取两集合的并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param c1
-	 * @param c2
-	 * @return
-	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static Collection union(Collection c1, Collection c2) {
-		if (isEmpty(c1))
-			return c2;
-		if (isEmpty(c2))
-			return c1;
-		
-		List list = newArrayList(c1);
-		list.addAll(c2);
-		return list;
-	}
-	
-	/**
-	 * @description 获取两集合的交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param c1
-	 * @param c2
-	 * @return c1与 c2的交集(c1 ∩ c2)
-	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static Collection intersection(Collection c1, Collection c2) {
-		if (c1 == null)
-			return c1;
-		if (c2 == null)
-			return c2;
-		if (c1.size() == 0  && c1.size() == c2.size())
-			return c1;
-		
-		List list = newArrayList(c1);
-		list.retainAll(c2);
-		return list;
-	}
-	
-	/**
 	 * @description 获取两集合的差集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c1
@@ -417,11 +377,7 @@ public class CollectionUtils {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Collection subtract(Collection c1, Collection c2) {
-		if (c1 == null)
-			return c1;
-		if (c2 == null)
-			return null;
-		if (c1.size() == 0  && c1.size() == c2.size())
+		if (isEmpty(c1) || isEmpty(c2))
 			return c1;
 		
 		List list = newArrayList(c1);
@@ -444,10 +400,9 @@ public class CollectionUtils {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Collection complement(Collection c1, Collection c2) {
-		if (c1 == null)
-			return c1;
-		if (c2 == null)
+		if (c1 == null || c2 == null)
 			return null;
+		
 		if (c1.size() == 0  && c1.size() == c2.size())
 			return c1;
 		
@@ -517,6 +472,6 @@ public class CollectionUtils {
 		
 		return collection.toArray((T[]) Array.newInstance(componentType, collection.size()));
 	}
-			
+		
 }
 

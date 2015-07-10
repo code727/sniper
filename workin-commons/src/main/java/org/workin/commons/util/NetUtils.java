@@ -26,6 +26,8 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 /**
  * @description 网络通信工具类
@@ -222,5 +224,90 @@ public class NetUtils {
 	public static String httpPost(String url, Map<String,String> parameters, String encoding) throws IOException {
 		return httpPost(url, MapUtils.joinURLParameters(parameters), encoding);
 	}
+	
+	/**
+	 * @description  获取URL中包含协议、主机域/IP和端口号在内的Action字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 * @return
+	 */
+	public static String getActionString(String url) {
+		if (StringUtils.isBlank(url))
+			return StringUtils.EMPTY_STRING;
 		
+		url = url.trim();
+		int index = url.indexOf("?");
+		if (index < 0) 
+			return url;
+		
+		return index > 0 ? url.substring(0, index -1) : StringUtils.EMPTY_STRING;
+	}
+	
+	/**
+	 * @description 从URL的Action字符串中获取以默认前缀和后缀标识的参数名称集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 * @return
+	 */
+	public static Set<String> getActionParameterNames(String url) {
+		return getActionParameterNames(url, "{", "}");
+	}
+	
+	/**
+	 * @description 从URL的Action字符串中获取参数名称集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 * @param prefix 参数标识前缀
+	 * @param suffix 参数标识后缀
+	 * @return
+	 */
+	public static Set<String> getActionParameterNames(String url, String prefix, String suffix) {
+		Set<String> names = CollectionUtils.newHashSet();
+		String actionString = getActionString(url);
+		if (actionString.length() > 0) 
+			names.addAll(CollectionUtils.newHashSet(StringUtils.leftSubstringAll(url, prefix, suffix)));
+		return names;
+	}
+	
+	/**
+	 * @description 获取URL包含的查询字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 * @return
+	 */
+	public static String getQueryString(String url) {
+		int index;
+		if (StringUtils.isBlank(url) || (index = url.indexOf("?")) < 0)
+			return StringUtils.EMPTY_STRING;
+		
+		String queryString = url.substring(index + 1).trim();
+		if (queryString.length() > 0 && queryString.startsWith("?")) 
+			// 清除多余的
+			queryString = queryString.replaceFirst("[\\?]+", "");
+		
+		return queryString;
+	}
+	
+	/**
+	 * @description 从URL字符串中提取出所有参数名-值映射集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 * @return
+	 */
+	public static Map<String, String> getParameterMap(String url) {
+		String queryString = getQueryString(url);
+		if (queryString.length() > 0) {
+			Map<String, String> parameterMap = MapUtils.newHashMap();
+			StringTokenizer tokenizer = new StringTokenizer(queryString, "&");
+			String nameValuePair = null;
+			while (tokenizer.hasMoreElements()) {
+				nameValuePair = tokenizer.nextToken();
+				parameterMap.put(StringUtils.beforeFrist(nameValuePair, "="), 
+						StringUtils.afterFrist(nameValuePair, "="));
+			}
+			return parameterMap;
+		}
+		return null;
+	}
+			
 }

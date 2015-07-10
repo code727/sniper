@@ -13,16 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-7-8
+ * Create Date : 2015-7-9
  */
 
-package org.workin.http.httpclient;
+package org.workin.http.exception;
+
+import org.workin.commons.exception.WorkinRuntimeException;
 
 /**
- * @description HttpClient4.x工具类
+ * @description "表单未找到"运行时异常
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class HttpClientUtils {
+public class HttpFormNotFoundException extends WorkinRuntimeException {
+
+	private static final long serialVersionUID = -2895027098437321733L;
+	
+	public HttpFormNotFoundException() {
+		super();
+	}
+	
+	public HttpFormNotFoundException(String messgae) {
+		super(messgae);
+	}
+	
+	public HttpFormNotFoundException(Throwable throwable) {
+		super(throwable);
+	}
+	
+	public HttpFormNotFoundException(String message, Throwable throwable) {
+		super(message,throwable);
+	}
 
 }

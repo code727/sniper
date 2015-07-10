@@ -18,7 +18,6 @@
 
 package org.workin.http.httpclient.v4;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -31,36 +30,35 @@ import org.workin.http.HttpSender;
  */
 public class HttpClientSender implements HttpSender, InitializingBean {
 	
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		
-	}
+	private HttpClientTemplet httpClientTemplet;
 	
 	@Override
-	public <T> T request(String name) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+	public void afterPropertiesSet() throws Exception {
+		if (httpClientTemplet == null)
+			throw new IllegalArgumentException("Property 'httpClientTemplet' is required");
+	}
+	
+	public HttpClientTemplet getHttpClientTemplet() {
+		return httpClientTemplet;
+	}
+
+	public void setHttpClientTemplet(HttpClientTemplet httpClientTemplet) {
+		this.httpClientTemplet = httpClientTemplet;
 	}
 
 	@Override
-	public <T> T request(String name, Map<String, String> parameters)
-			throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+	public <T> T request(String name) throws Exception {
+		return httpClientTemplet.request(name);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param parameter
-	 * @return
-	 * @throws IOException 
-	 */
 	@Override
-	public <T> T request(String name, Object parameter) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+	public <T> T request(String name, Map<String, String> parameters) throws Exception {
+		return httpClientTemplet.request(name, parameters);
+	}
+
+	@Override
+	public <T> T request(String name, Object parameter) throws Exception {
+		return httpClientTemplet.request(name, parameter);
 	}
 
 }

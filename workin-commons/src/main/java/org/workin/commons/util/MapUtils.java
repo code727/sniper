@@ -18,6 +18,7 @@
 
 package org.workin.commons.util;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
@@ -155,7 +156,7 @@ public class MapUtils {
 	 * @param map
 	 * @return
 	 */
-	public static String joinURLParameters(Map<String, String> map) {
+	public static <V> String joinURLParameters(Map<String, V> map) {
 		return map != null ? join(map.entrySet(), "=", "&") : StringUtils.EMPTY_STRING;
 	}
 	
@@ -187,6 +188,38 @@ public class MapUtils {
 			builder.append(entry.getKey()).append(kvSeperator).append(entry.getValue());
 		}
 		return builder.toString();
+	}
+	
+	/**
+	 * @description 获取两映射键的差集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param map1
+	 * @param map2
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public static Collection keySubtract(Map map1, Map map2) {
+		if (map1 == null)
+			return null;
+		if (map2 == null)
+			return map1.keySet();
+		
+		return CollectionUtils.subtract(map1.keySet(), map2.keySet());
+	}
+	
+	/**
+	 * @description 获取两映射键的补集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param map1
+	 * @param map2
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public static Collection keyComplement(Map map1, Map map2) {
+		if (map1 == null || map2 == map1)
+			return null;
+		
+		return CollectionUtils.complement(map1.keySet(), map2.keySet());
 	}
 
 }

@@ -33,9 +33,9 @@ public interface HttpSender {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
-	 * @throws IOException
+	 * @throws Exception
 	 */
-	public <T> T request(String name) throws IOException;
+	public <T> T request(String name) throws Exception;
 	
 	/**
 	 * @description 执行指定名称且带参数的HTTP表单请求，并返回响应处理结果
@@ -43,9 +43,9 @@ public interface HttpSender {
 	 * @param name
 	 * @param parameters
 	 * @return
-	 * @throws IOException
+	 * @throws Exception
 	 */
-	public <T> T request(String name, Map<String, String> parameters) throws IOException;
+	public <T> T request(String name, Map<String, String> parameters) throws Exception;
 	
 	/**
 	 * @description 执行指定名称且带参数的HTTP表单请求，并返回响应处理结果
@@ -55,6 +55,6 @@ public interface HttpSender {
 	 * @return
 	 * @throws IOException
 	 */
-	public <T> T request(String name, Object parameter) throws IOException;
+	public <T> T request(String name, Object parameter) throws Exception;
 
 }

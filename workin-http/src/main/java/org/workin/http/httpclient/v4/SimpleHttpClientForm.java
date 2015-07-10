@@ -30,7 +30,7 @@ import org.workin.http.httpclient.v4.handler.StringResponseHandler;
  */
 public class SimpleHttpClientForm extends SimpleHttpForm implements HttpClientForm {
 	
-	/** 当前表单对应绑定的响应处理器，默认为字符串响应处理器 */
+	/** 当前表单绑定的响应处理器，默认为字符串响应处理器 */
 	private ResponseHandler<?> responseHandler = new StringResponseHandler();
 
 	@Override
