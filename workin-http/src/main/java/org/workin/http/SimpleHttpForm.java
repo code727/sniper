@@ -29,17 +29,26 @@ import org.workin.commons.util.StringUtils;
  */
 public class SimpleHttpForm implements HttpForm {
 	
+	/** 主机域/IP地址 */
 	private String host;
 	
+	/** 端口号 */
 	private int port = NetUtils.DEFAULT_PORT;
 	
+	/** Action(请求路径) */
 	private String action;
 	
+	/** 多个参数名，以逗号分隔 */
 	private String parameterNames;
 	
+	/** 请求方法 */
 	private String method;
 	
+	/** 请求头对象 */
 	private HttpRequestHeader header;
+	
+	/** 接收方能识别的字符串编码 */
+	private String encoding;
 
 	@Override
 	public void setHost(String host) {
@@ -101,6 +110,16 @@ public class SimpleHttpForm implements HttpForm {
 	@Override
 	public HttpRequestHeader getHeader() {
 		return this.header;
+	}
+
+	@Override
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
+	}
+
+	@Override
+	public String getEncoding() {
+		return this.encoding;
 	}
 	
 }

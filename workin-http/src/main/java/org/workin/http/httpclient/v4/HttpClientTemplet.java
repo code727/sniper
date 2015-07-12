@@ -19,16 +19,25 @@
 package org.workin.http.httpclient.v4;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.message.BasicNameValuePair;
+import org.workin.commons.util.CollectionUtils;
+import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.http.HttpForm;
 import org.workin.http.HttpRequestHeader;
@@ -70,7 +79,7 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	public void setResponseHandler(ResponseHandler<?> responseHandler) {
 		this.responseHandler = responseHandler;
 	}
-
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
@@ -93,7 +102,7 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	}
 
 	@Override
-	public <T> T request(String name, Map<String, String> parameters) throws Exception {
+	public <T> T request(String name, Map<String, Object> parameters) throws Exception {
 		return super.requestByName(name, parameters);
 	}
 
@@ -113,17 +122,17 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	@SuppressWarnings("unchecked")
 	protected <T> T doGetRequest(String name, Object param) throws IOException {
 		String url = this.urlFormatter.format(getFormRegister().findURL(name), param);
-		HttpGet httpget = new HttpGet(url);
+		HttpGet httpGet = new HttpGet(url);
 		HttpForm form = getFormRegister().find(name);
-		addHeader(httpget, form);
-		setConfig(httpget);
+		addHeader(httpGet, form);
+		setConfig(httpGet);
 		try {
-			return (T) httpClientFactory.create().execute(httpget, getResponseHandlerByForm(form));
+			return (T) this.httpClientFactory.create().execute(httpGet, getBoundResponseHandler(form));
 		}  catch (IOException e) {
 			throw new IOException(e);
 		} finally {
-			if (httpget != null)
-				httpget.releaseConnection();
+			if (httpGet != null)
+				httpGet.releaseConnection();
 		}
 	}
 	
@@ -135,11 +144,24 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	 * @return
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unchecked")
 	protected <T> T doPostRequest(String name, Object param) throws IOException {
 		String url = this.urlFormatter.format(getFormRegister().findURL(name), param);
 		HttpPost httpPost = new HttpPost(NetUtils.getActionString(url));
-		
-		return null;
+		HttpForm form = getFormRegister().find(name);
+		addHeader(httpPost, form);
+		setConfig(httpPost);
+		List<NameValuePair> nameValueList = buildeNameValuePairByQueryString(url);
+		try {
+			if (CollectionUtils.isNotEmpty(nameValueList))
+				httpPost.setEntity(new UrlEncodedFormEntity(nameValueList, super.getBoundEncoding(form))); 
+			return (T) this.httpClientFactory.create().execute(httpPost, getBoundResponseHandler(form));
+		}  catch (IOException e) {
+			throw new IOException(e);
+		} finally {
+			if (httpPost != null)
+				httpPost.releaseConnection();
+		}
 	}
 	
 	/**
@@ -150,8 +172,24 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	 * @return
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unchecked")
 	protected <T> T doPutRequest(String name, Object param) throws IOException {
-		return null;
+		String url = this.urlFormatter.format(getFormRegister().findURL(name), param);
+		HttpPut httpPut = new HttpPut(NetUtils.getActionString(url));
+		HttpForm form = getFormRegister().find(name);
+		addHeader(httpPut, form);
+		setConfig(httpPut);
+		List<NameValuePair> nameValueList = buildeNameValuePairByQueryString(url);
+		try {
+			if (CollectionUtils.isNotEmpty(nameValueList))
+				httpPut.setEntity(new UrlEncodedFormEntity(nameValueList, super.getBoundEncoding(form))); 
+			return (T) this.httpClientFactory.create().execute(httpPut, getBoundResponseHandler(form));
+		}  catch (IOException e) {
+			throw new IOException(e);
+		} finally {
+			if (httpPut != null)
+				httpPut.releaseConnection();
+		}
 	}
 	
 	/**
@@ -162,8 +200,21 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	 * @return
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unchecked")
 	protected <T> T doDeleteRequest(String name, Object param) throws IOException {
-		return null;
+		String url = this.urlFormatter.format(getFormRegister().findURL(name), param);
+		HttpDelete httpDelete = new HttpDelete(url);
+		HttpForm form = getFormRegister().find(name);
+		addHeader(httpDelete, form);
+		setConfig(httpDelete);
+		try {
+			return (T) this.httpClientFactory.create().execute(httpDelete, getBoundResponseHandler(form));
+		}  catch (IOException e) {
+			throw new IOException(e);
+		} finally {
+			if (httpDelete != null)
+				httpDelete.releaseConnection();
+		}
 	}
 	
 	/**
@@ -192,18 +243,37 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	}
 	
 	/**
-	 * @description 根据HttpForm表单获取相关的响应处理器
+	 * @description 获取HttpForm表单绑定的响应处理器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param form
 	 * @return
 	 */
-	protected ResponseHandler<?> getResponseHandlerByForm(HttpForm form) {
+	protected ResponseHandler<?> getBoundResponseHandler(HttpForm form) {
 		if (!(form instanceof HttpClientForm))
 			return this.responseHandler;
 		
 		HttpClientForm hcForm = (HttpClientForm) form;
 		ResponseHandler<?> responseHandler = hcForm.getResponseHandler();
 		return responseHandler != null ? responseHandler : this.responseHandler;
+	}
+	
+	/**
+	 * @description 根据url中的查询字符串构建NameValuePair对象列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 * @return
+	 */
+	protected List<NameValuePair> buildeNameValuePairByQueryString(String url) {
+		Map<String, String> parameterMap = NetUtils.getParameterMap(url);
+		List<NameValuePair> nameValueList = new ArrayList<NameValuePair>();
+		if (MapUtils.isNotEmpty(parameterMap)) {
+			Iterator<Entry<String, String>> iterator = parameterMap.entrySet().iterator();
+			if (iterator.hasNext()) {
+				Entry<String, String> parameter = iterator.next();
+				nameValueList.add(new BasicNameValuePair(parameter.getKey(), parameter.getValue()));
+			}
+		}
+		return nameValueList;
 	}
 	
 }

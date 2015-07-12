@@ -52,7 +52,7 @@ public class HttpClientSender implements HttpSender, InitializingBean {
 	}
 
 	@Override
-	public <T> T request(String name, Map<String, String> parameters) throws Exception {
+	public <T> T request(String name, Map<String, Object> parameters) throws Exception {
 		return httpClientTemplet.request(name, parameters);
 	}
 

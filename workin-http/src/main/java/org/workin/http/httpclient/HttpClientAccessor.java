@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.MapUtils;
+import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.http.HttpForm;
@@ -38,6 +39,9 @@ import org.workin.http.register.HttpFormRegister;
 public abstract class HttpClientAccessor implements InitializingBean {
 	
 	private HttpFormRegister formRegister;
+	
+	/** 全局的字符集编码，默认为UTF-8 */
+	private String encoding = MessageUtils.UTF8_ENCODING;
 	
 	/** 模板所支持的请求方法映射集 */
 	private static final Map<String, String> SUPPORT_REQUEST_METHOD;
@@ -57,7 +61,12 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	public HttpFormRegister getFormRegister() {
 		return formRegister;
 	}
-
+	
+	public void setEncoding(String encoding) {
+		if (StringUtils.isNotBlank(encoding))
+			this.encoding = encoding;
+	}
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (formRegister == null)
@@ -97,6 +106,17 @@ public abstract class HttpClientAccessor implements InitializingBean {
 			throw new NoSuchHttpMethodException(
 					"No such http method [get] in current version of workin-http framework.");
 		}
+	}
+	
+	/**
+	 * @description 获取表单绑定的字符集编码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param form
+	 * @return
+	 */
+	protected String getBoundEncoding(HttpForm form) {
+		String encoding = form.getEncoding();
+		return StringUtils.isNotBlank(encoding) ? encoding : this.encoding;
 	}
 	
 	/**

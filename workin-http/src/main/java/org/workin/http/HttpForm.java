@@ -108,4 +108,18 @@ public interface HttpForm {
 	 */
 	public HttpRequestHeader getHeader();
 	
+	/**
+	 * @description 设置字符集编码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param encoding
+	 */
+	public void setEncoding(String encoding);
+	
+	/**
+	 * @description 获取字符集编码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getEncoding();
+	
 }

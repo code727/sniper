@@ -45,7 +45,7 @@ public interface HttpSender {
 	 * @return
 	 * @throws Exception
 	 */
-	public <T> T request(String name, Map<String, String> parameters) throws Exception;
+	public <T> T request(String name, Map<String, Object> parameters) throws Exception;
 	
 	/**
 	 * @description 执行指定名称且带参数的HTTP表单请求，并返回响应处理结果
