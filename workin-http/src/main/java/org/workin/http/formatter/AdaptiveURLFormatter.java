@@ -18,7 +18,6 @@
 
 package org.workin.http.formatter;
 
-import java.net.MalformedURLException;
 import java.util.Collection;
 import java.util.Map;
 
@@ -61,14 +60,4 @@ public class AdaptiveURLFormatter extends AdaptiveMessageFormatter implements UR
 		return formatedUrl.toString();
 	}
 	
-	public static void main(String[] args) throws MalformedURLException {
-		AdaptiveURLFormatter formatter = new AdaptiveURLFormatter();
-		Map<String, Object> param = MapUtils.newHashMap();
-		param.put("model", "sport");
-		param.put("name", "dubin");
-		param.put("age", 32);
-		param.put("address", "dujiangyan");
-		System.out.println(formatter.format("http://163.com/{model}/yj", param));
-	}
-
 }
