@@ -25,6 +25,20 @@ package org.workin.http;
  */
 public interface HttpForm {
 	
+	/**
+	 * @description 判断是否为HTTPS协议的表单
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean isHttps();
+	
+	/** 
+	 * @description 设置否为HTTPS协议的表单
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param https 
+	 */
+	void setHttps(boolean https);
+	
 	/** 
 	 * @description 设置主机IP/域名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -52,6 +66,20 @@ public interface HttpForm {
 	 * @return
 	 */
 	public int getPort();
+	
+	/**
+	 * @description 设置上下文根路径
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param contextRoot
+	 */
+	public void setContextRoot(String contextRoot);
+	
+	/**
+	 * @description 获取上下文根路径
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getContextRoot();
 	
 	/**
 	 * @description 设置请求路径
@@ -121,5 +149,5 @@ public interface HttpForm {
 	 * @return
 	 */
 	public String getEncoding();
-	
+
 }

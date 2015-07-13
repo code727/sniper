@@ -50,6 +50,8 @@ public class AdaptiveURLFormatter extends AdaptiveMessageFormatter implements UR
 			if (CollectionUtils.isNotEmpty(names)) {
 				if (url.indexOf("?") < 0)
 					formatedUrl.append("?");
+				else
+					formatedUrl.append("&");
 				
 				for (String name : names) 
 					formatedUrl.append(name).append("=").append(inputParam.get(name)).append("&");

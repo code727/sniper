@@ -19,30 +19,41 @@
 package org.workin.http.httpclient.v4.factory;
 
 import org.apache.http.conn.HttpClientConnectionManager;
+import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 
 /**
- * @description 默认HttpClient4.x CloseableHttpClient对象工厂实现类
+ * @description 默认HttpClient4.x CloseableHttpClient工厂对象实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultCloseableHttpClientFactory implements CloseableHttpClientFactory {
+public class CloseableHttpClientFactoryBean implements CloseableHttpClientFactory {
+	
+	private HttpClientBuilder builder;
 	
 	private HttpClientConnectionManager connectionManager;
+		
+	private LayeredConnectionSocketFactory sslSocketFactory;
 	
-	@Override
+	public CloseableHttpClientFactoryBean() {
+		this.builder = HttpClients.custom();
+	}
+	
 	public void setConnectionManager(HttpClientConnectionManager connectionManager) {
 		this.connectionManager = connectionManager;
+		this.builder.setConnectionManager(this.connectionManager);
+	}
+
+	public void setSslSocketFactory(LayeredConnectionSocketFactory sslSocketFactory) {
+		this.sslSocketFactory = sslSocketFactory;
+		this.builder.setSSLSocketFactory(this.sslSocketFactory);
 	}
 
 	@Override
 	public CloseableHttpClient create() {
-		HttpClientBuilder builder = HttpClients.custom();
-		if (this.connectionManager != null)
-			builder.setConnectionManager(this.connectionManager);
-		return builder.build();
+		return this.builder.build();
 	}
-
+		
 }

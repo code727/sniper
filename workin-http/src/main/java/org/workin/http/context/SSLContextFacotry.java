@@ -13,25 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-7-8
+ * Create Date : 2015-7-13
  */
 
-package org.workin.http.httpclient.v4.factory;
+package org.workin.http.context;
 
-import org.apache.http.impl.client.CloseableHttpClient;
+import java.security.GeneralSecurityException;
+
+import javax.net.ssl.SSLContext;
 
 /**
- * @description HttpClient4.x CloseableHttpClient对象工厂接口
+ * @description SSL上下文工厂接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface CloseableHttpClientFactory {
-			
+public interface SSLContextFacotry {
+	
 	/**
-	 * @description 创建CloseableHttpClient实例
+	 * @description 创建SSL上下文对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
+	 * @throws GeneralSecurityException
 	 */
-	public CloseableHttpClient create();
-		
+	public SSLContext create() throws GeneralSecurityException;
+
 }

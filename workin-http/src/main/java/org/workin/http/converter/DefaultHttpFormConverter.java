@@ -35,7 +35,9 @@ import org.workin.http.handler.ParameterHandler;
  */
 public class DefaultHttpFormConverter implements HttpFormConverter {
 	
-	private static final String PROTOCOL = "http://";
+	private static final String HTTP_PROTOCOL = "http";
+	
+	private static final String HTTPS_PROTOCOL = "https";
 	
 	/** 参数处理器 */
 	private ParameterHandler parameterHandler = new DefaultParameterHandler();
@@ -73,14 +75,18 @@ public class DefaultHttpFormConverter implements HttpFormConverter {
 	 */
 	protected void appendHostAndPort(StringBuffer url, HttpForm form) {
 		String host = form.getHost().trim();
-		if (!StringUtils.startsWithIgnoreCase(host, PROTOCOL))
-			url.append(PROTOCOL);
-		
-		url.append(form.getHost().trim());
-		if (form.getPort() != NetUtils.DEFAULT_PORT)
-			url.append(":").append(form.getPort());
+		int port = form.getPort();
+		if (!form.isHttps()) {
+			url.append(HTTP_PROTOCOL).append("://").append(host);
+			if (NetUtils.isValidPort(port) && port != NetUtils.DEFAULT_HTTP_PORT)
+				url.append(":").append(port);
+		} else {
+			url.append(HTTPS_PROTOCOL).append("://").append(host);
+			if (NetUtils.isValidPort(port) && port != NetUtils.DEFAULT_HTTPS_PORT)
+				url.append(":").append(port);
+		}
 	}
-	
+		
 	/**
 	 * @description 拼接Action请求路径
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -113,7 +119,7 @@ public class DefaultHttpFormConverter implements HttpFormConverter {
 					url.append("&");
 			} else
 				url.append("?");
-			url.append(queryString.trim());
+			url.append(queryString);
 		} 
 	}
 	

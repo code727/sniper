@@ -73,7 +73,6 @@ public class DefaultHttpFormRegister implements HttpFormRegister {
 	public List<HttpForm> getForms() {
 		return this.formMap != null ? 
 				CollectionUtils.newArrayList(this.formMap.values()) : null;
-				
 	}
 
 	@Override

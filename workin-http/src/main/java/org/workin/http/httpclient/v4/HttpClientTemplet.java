@@ -34,8 +34,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.NetUtils;
@@ -46,7 +47,7 @@ import org.workin.http.formatter.AdaptiveURLFormatter;
 import org.workin.http.formatter.URLFormatter;
 import org.workin.http.httpclient.HttpClientAccessor;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactory;
-import org.workin.http.httpclient.v4.factory.DefaultCloseableHttpClientFactory;
+import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
 
 /**
  * @description HttpClient4.x模板实现类
@@ -54,6 +55,8 @@ import org.workin.http.httpclient.v4.factory.DefaultCloseableHttpClientFactory;
  * @version 1.0
  */
 public class HttpClientTemplet extends HttpClientAccessor implements HttpSender {
+	
+	private static Logger logger = LoggerFactory.getLogger(HttpClientTemplet.class);
 	
 	private CloseableHttpClientFactory httpClientFactory;
 	
@@ -84,10 +87,9 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
 		
-		if (this.httpClientFactory == null) {
-			this.httpClientFactory = new DefaultCloseableHttpClientFactory();
-			this.httpClientFactory.setConnectionManager(new PoolingHttpClientConnectionManager());
-		}
+		if (this.httpClientFactory == null) 
+			this.httpClientFactory = new CloseableHttpClientFactoryBean();
+		
 		if (this.requestConfig == null)
 			this.requestConfig = RequestConfig.custom().build();
 		
@@ -127,6 +129,7 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 		addHeader(httpGet, form);
 		setConfig(httpGet);
 		try {
+			logger.info("Request form [" + name + "] url [" + url + "] method:[GET].");
 			return (T) this.httpClientFactory.create().execute(httpGet, getBoundResponseHandler(form));
 		}  catch (IOException e) {
 			throw new IOException(e);
@@ -155,6 +158,8 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 		try {
 			if (CollectionUtils.isNotEmpty(nameValueList))
 				httpPost.setEntity(new UrlEncodedFormEntity(nameValueList, super.getBoundEncoding(form))); 
+			
+			logger.info("Request form [" + name + "] url [" + url + "] method:[POST].");
 			return (T) this.httpClientFactory.create().execute(httpPost, getBoundResponseHandler(form));
 		}  catch (IOException e) {
 			throw new IOException(e);
@@ -183,6 +188,8 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 		try {
 			if (CollectionUtils.isNotEmpty(nameValueList))
 				httpPut.setEntity(new UrlEncodedFormEntity(nameValueList, super.getBoundEncoding(form))); 
+			
+			logger.info("Request form [" + name + "] url [" + url + "] method:[PUT].");
 			return (T) this.httpClientFactory.create().execute(httpPut, getBoundResponseHandler(form));
 		}  catch (IOException e) {
 			throw new IOException(e);
@@ -208,6 +215,7 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 		addHeader(httpDelete, form);
 		setConfig(httpDelete);
 		try {
+			logger.info("Request form [" + name + "] url [" + url + "] method:[DELETE].");
 			return (T) this.httpClientFactory.create().execute(httpDelete, getBoundResponseHandler(form));
 		}  catch (IOException e) {
 			throw new IOException(e);
@@ -268,7 +276,7 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 		List<NameValuePair> nameValueList = new ArrayList<NameValuePair>();
 		if (MapUtils.isNotEmpty(parameterMap)) {
 			Iterator<Entry<String, String>> iterator = parameterMap.entrySet().iterator();
-			if (iterator.hasNext()) {
+			while (iterator.hasNext()) {
 				Entry<String, String> parameter = iterator.next();
 				nameValueList.add(new BasicNameValuePair(parameter.getKey(), parameter.getValue()));
 			}

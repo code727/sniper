@@ -39,8 +39,17 @@ public class NetUtils {
 	/** 默认超时3000毫秒 */
 	public static final int DEFAULT_TIMEOUT = 3000;
 	
-	/** 默认80端口 */
-	public static final int DEFAULT_PORT = 80;
+	/** 默认HTTP协议80端口 */
+	public static final int DEFAULT_HTTP_PORT = 80;
+	
+	/** 默认HTTPS协议443端口 */
+	public static final int DEFAULT_HTTPS_PORT = 443;
+	
+	/** 最小端口号 */
+	public static final int MIN_PORT = 0;
+	
+	/** 最大端口号 */
+	public static final int MAX_PORT = 65535;
 	
 	/**
 	 * @description 获取本机的IP地址
@@ -308,6 +317,16 @@ public class NetUtils {
 			return parameterMap;
 		}
 		return null;
+	}
+	
+	/**
+	 * @description 判断端口号是否有效
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param port
+	 * @return
+	 */
+	public static boolean isValidPort(int port) {
+		return port >= MIN_PORT && port <= MAX_PORT;
 	}
 			
 }

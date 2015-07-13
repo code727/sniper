@@ -29,11 +29,17 @@ import org.workin.commons.util.StringUtils;
  */
 public class SimpleHttpForm implements HttpForm {
 	
+	/** 标识是否为Https协议的表单 */
+	private boolean https;
+	
 	/** 主机域/IP地址 */
 	private String host;
 	
 	/** 端口号 */
-	private int port = NetUtils.DEFAULT_PORT;
+	private int port = -1;
+	
+	/** 上下文根路径 */
+	private String contextRoot;
 	
 	/** Action(请求路径) */
 	private String action;
@@ -49,6 +55,16 @@ public class SimpleHttpForm implements HttpForm {
 	
 	/** 接收方能识别的字符串编码 */
 	private String encoding;
+	
+	@Override
+	public boolean isHttps() {
+		return https;
+	}
+
+	@Override
+	public void setHttps(boolean https) {
+		this.https = https;
+	}
 
 	@Override
 	public void setHost(String host) {
@@ -63,13 +79,24 @@ public class SimpleHttpForm implements HttpForm {
 
 	@Override
 	public void setPort(int port) {
-		AssertUtils.assertTrue(port > -1 && port < 65536, "Illegal port [" + port + "],Valid scope [0-65535].");
+		AssertUtils.assertTrue(NetUtils.isValidPort(port), 
+				"Illegal port [" + port + "],Valid scope [" + NetUtils.MIN_PORT + "-" + NetUtils.MAX_PORT + "].");
 		this.port = port;
 	}
 
 	@Override
 	public int getPort() {
 		return this.port;
+	}
+	
+	@Override
+	public void setContextRoot(String contextRoot) {
+		this.contextRoot = contextRoot;
+	}
+
+	@Override
+	public String getContextRoot() {
+		return this.contextRoot;
 	}
 
 	@Override
@@ -121,5 +148,5 @@ public class SimpleHttpForm implements HttpForm {
 	public String getEncoding() {
 		return this.encoding;
 	}
-	
+
 }
