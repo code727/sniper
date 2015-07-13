@@ -60,6 +60,7 @@ public class DefaultHttpFormConverter implements HttpFormConverter {
 			String queryString = parameterHandler.formatQueryString(form);
 			url.setLength(0); 
 			appendHostAndPort(url, form);
+			appendContextRoot(url, form);
 			appendAction(url, form);
 			appendQueryString(url, queryString);
 			map.put(name, url.toString());
@@ -84,6 +85,23 @@ public class DefaultHttpFormConverter implements HttpFormConverter {
 			url.append(HTTPS_PROTOCOL).append("://").append(host);
 			if (NetUtils.isValidPort(port) && port != NetUtils.DEFAULT_HTTPS_PORT)
 				url.append(":").append(port);
+		}
+	}
+	
+	/**
+	 * @description 拼接上下文根路径
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 * @param form
+	 */
+	protected void appendContextRoot(StringBuffer url, HttpForm form) {
+		String cntextRoot = form.getContextRoot();
+		/* 添加Action请求路径 */
+		if (StringUtils.isNotBlank(cntextRoot)) {
+			cntextRoot = cntextRoot.trim();
+			if (!cntextRoot.startsWith("/"))
+				url.append("/");
+			url.append(cntextRoot);
 		}
 	}
 		
