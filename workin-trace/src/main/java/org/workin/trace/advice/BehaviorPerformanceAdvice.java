@@ -62,8 +62,12 @@ public class BehaviorPerformanceAdvice extends MatchableMethodAroundAdvice {
 	@Override
 	protected void doBeforeTask(Method method, Object[] args, Object target) {
 		
-		if (ApplicationContextHolder.getAttribute(BEHAVIOR_PERFORMANCE) == null)
-			ApplicationContextHolder.setAttribute(BEHAVIOR_PERFORMANCE, new Stack<BehaviorPerformance>());
+		Stack<BehaviorPerformance> methodStack = (Stack<BehaviorPerformance>) ApplicationContextHolder.getAttribute(BEHAVIOR_PERFORMANCE);
+		
+		if (methodStack == null) {
+			methodStack = new Stack<BehaviorPerformance>();
+			ApplicationContextHolder.setAttribute(BEHAVIOR_PERFORMANCE, methodStack);
+		}
 		
 		BehaviorPerformance behaviorPerformance = new BehaviorPerformance();
 		behaviorPerformance.setMethod(method);
@@ -71,8 +75,7 @@ public class BehaviorPerformanceAdvice extends MatchableMethodAroundAdvice {
 		behaviorPerformance.setMethodName(method.getName());
 		behaviorPerformance.setStartTime(new Date());
 		
-		((Stack<BehaviorPerformance>) ApplicationContextHolder
-				.getAttribute(BEHAVIOR_PERFORMANCE)).add(behaviorPerformance);
+		methodStack.add(behaviorPerformance);
 	}
 
 	@SuppressWarnings("unchecked")
