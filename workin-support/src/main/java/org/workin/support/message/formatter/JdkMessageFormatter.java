@@ -19,8 +19,10 @@
 package org.workin.support.message.formatter;
 
 import java.text.MessageFormat;
+import java.util.Collection;
 
 import org.workin.commons.util.ArrayUtils;
+import org.workin.commons.util.CollectionUtils;
 
 /**
  * @description JDK原生态消息格式化处理器实现类
@@ -32,7 +34,9 @@ public class JdkMessageFormatter implements MessageFormatter<Object> {
 	@Override
 	public String format(String message, Object param) {
 		if (ArrayUtils.isArray(param)) {
-			 return MessageFormat.format(message, (Object[])param);
+			return MessageFormat.format(message, (Object[]) param);
+		} else if (CollectionUtils.isCollection(param)) {
+			return format(message, CollectionUtils.toObjectArray((Collection<?>) param));
 		} else
 			return param != null ? MessageFormat.format(message, param) : message;
 	}

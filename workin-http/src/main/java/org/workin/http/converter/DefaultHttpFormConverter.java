@@ -22,11 +22,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.workin.commons.util.MapUtils;
-import org.workin.commons.util.NetUtils;
-import org.workin.commons.util.StringUtils;
 import org.workin.http.HttpForm;
-import org.workin.http.handler.DefaultParameterHandler;
-import org.workin.http.handler.ParameterHandler;
+import org.workin.http.handler.DefaultFormHandler;
+import org.workin.http.handler.FormHandler;
 
 /**
  * @description 默认HTTP表单转换器实现类
@@ -35,16 +33,12 @@ import org.workin.http.handler.ParameterHandler;
  */
 public class DefaultHttpFormConverter implements HttpFormConverter {
 	
-	private static final String HTTP_PROTOCOL = "http";
-	
-	private static final String HTTPS_PROTOCOL = "https";
-	
 	/** 参数处理器 */
-	private ParameterHandler parameterHandler = new DefaultParameterHandler();
-	
-	public void setParameterHandler(ParameterHandler parameterHandler) {
-		if (parameterHandler != null)
-			this.parameterHandler = parameterHandler;
+	private FormHandler formHandler = new DefaultFormHandler();
+
+	public void setFormHandler(FormHandler formHandler) {
+		if (this.formHandler != null)
+			this.formHandler = formHandler;
 	}
 
 	@Override
@@ -56,89 +50,11 @@ public class DefaultHttpFormConverter implements HttpFormConverter {
 		StringBuffer url = new StringBuffer();
 		Set<String> names = formMap.keySet();
 		for (String name : names) {
-			HttpForm form = formMap.get(name);
-			String queryString = parameterHandler.formatQueryString(form);
 			url.setLength(0); 
-			appendHostAndPort(url, form);
-			appendContextRoot(url, form);
-			appendAction(url, form);
-			appendQueryString(url, queryString);
+			formHandler.append(url, formMap.get(name));
 			map.put(name, url.toString());
 		}
 		return map;
 	}
-	
-	/**
-	 * @description 拼接协议、主机IP/域名和端口号
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param url
-	 * @param form
-	 */
-	protected void appendHostAndPort(StringBuffer url, HttpForm form) {
-		String host = form.getHost().trim();
-		int port = form.getPort();
-		if (!form.isHttps()) {
-			url.append(HTTP_PROTOCOL).append("://").append(host);
-			if (NetUtils.isValidPort(port) && port != NetUtils.DEFAULT_HTTP_PORT)
-				url.append(":").append(port);
-		} else {
-			url.append(HTTPS_PROTOCOL).append("://").append(host);
-			if (NetUtils.isValidPort(port) && port != NetUtils.DEFAULT_HTTPS_PORT)
-				url.append(":").append(port);
-		}
-	}
-	
-	/**
-	 * @description 拼接上下文根路径
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param url
-	 * @param form
-	 */
-	protected void appendContextRoot(StringBuffer url, HttpForm form) {
-		String cntextRoot = form.getContextRoot();
-		/* 添加Action请求路径 */
-		if (StringUtils.isNotBlank(cntextRoot)) {
-			cntextRoot = cntextRoot.trim();
-			if (!cntextRoot.startsWith("/"))
-				url.append("/");
-			url.append(cntextRoot);
-		}
-	}
 		
-	/**
-	 * @description 拼接Action请求路径
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param url
-	 * @param form
-	 */
-	protected void appendAction(StringBuffer url, HttpForm form) {
-		String action = form.getAction();
-		/* 添加Action请求路径 */
-		if (StringUtils.isNotBlank(action)) {
-			action = action.trim();
-			if (!action.startsWith("/"))
-				url.append("/");
-			url.append(action);
-		}
-	}
-	
-	/**
-	 * @description 拼接查询字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param url
-	 * @param queryString
-	 */
-	protected void appendQueryString(StringBuffer url, String queryString) {
-		if (StringUtils.isNotBlank(queryString)) {
-			int index = url.lastIndexOf("?");
-			if (index > -1) {
-				// ?号不在最后一位时，认为原字符串后面部分已有一些查询字符串存在，则需再加上一个&
-				if (index != (url.length() - 1))
-					url.append("&");
-			} else
-				url.append("?");
-			url.append(queryString);
-		} 
-	}
-	
 }

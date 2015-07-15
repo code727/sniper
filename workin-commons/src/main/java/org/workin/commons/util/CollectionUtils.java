@@ -472,6 +472,16 @@ public class CollectionUtils {
 		
 		return collection.toArray((T[]) Array.newInstance(componentType, collection.size()));
 	}
+	
+	/**
+	 * @description 判断执行对象是否为Collection接口实例
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isCollection(Object obj) {
+		return obj instanceof Collection;
+	}
 		
 }
 
