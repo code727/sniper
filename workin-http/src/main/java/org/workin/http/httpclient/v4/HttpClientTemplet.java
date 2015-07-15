@@ -44,17 +44,18 @@ import org.workin.http.HttpForm;
 import org.workin.http.HttpRequestHeader;
 import org.workin.http.HttpSender;
 import org.workin.http.formatter.AdaptiveURLFormatter;
-import org.workin.http.formatter.URLFormatter;
 import org.workin.http.httpclient.HttpClientAccessor;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactory;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
+import org.workin.support.encoder.URLEncoder;
+import org.workin.support.message.formatter.MessageFormatter;
 
 /**
  * @description HttpClient4.x模板实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class HttpClientTemplet extends HttpClientAccessor implements HttpSender {
+public final class HttpClientTemplet extends HttpClientAccessor implements HttpSender {
 	
 	private static Logger logger = LoggerFactory.getLogger(HttpClientTemplet.class);
 	
@@ -62,7 +63,10 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	
 	private RequestConfig requestConfig;
 	
-	private URLFormatter<Object> urlFormatter;
+	private MessageFormatter<Object> urlFormatter;
+	
+	/** 是否自动进行参数值编码处理 */
+	private boolean autoEncodingParameter = true;
 	
 	/** 全局的响应处理器 */
 	private ResponseHandler<?> responseHandler;
@@ -75,14 +79,18 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 		this.requestConfig = requestConfig;
 	}
 	
-	public void setUrlFormatter(URLFormatter<Object> urlFormatter) {
+	public void setUrlFormatter(MessageFormatter<Object> urlFormatter) {
 		this.urlFormatter = urlFormatter;
 	}
-	
+
 	public void setResponseHandler(ResponseHandler<?> responseHandler) {
 		this.responseHandler = responseHandler;
 	}
 	
+	public void setAutoEncodingParameter(boolean autoEncodingParameter) {
+		this.autoEncodingParameter = autoEncodingParameter;
+	}
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
@@ -93,9 +101,10 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 		if (this.requestConfig == null)
 			this.requestConfig = RequestConfig.custom().build();
 		
-		if (this.urlFormatter == null)
+		if (this.urlFormatter == null) {
 			this.urlFormatter = new AdaptiveURLFormatter();
-		
+			this.urlFormatter.setEncoder(new URLEncoder());
+		}
 	}
 	
 	@Override
@@ -119,13 +128,15 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	 * @param name
 	 * @param param
 	 * @return
-	 * @throws IOException
+	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	protected <T> T doGetRequest(String name, Object param) throws IOException {
-		String url = this.urlFormatter.format(getFormRegister().findURL(name), param);
-		HttpGet httpGet = new HttpGet(url);
+	protected <T> T doGetRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
+		String url = this.urlFormatter.format(getFormRegister().findURL(name),
+				param, autoEncodingParameter ? super.getBoundEncoding(form) : null);
+		HttpGet httpGet = new HttpGet(url);
+		
 		addHeader(httpGet, form);
 		setConfig(httpGet);
 		try {
@@ -145,13 +156,15 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	 * @param name
 	 * @param param
 	 * @return
-	 * @throws IOException
+	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	protected <T> T doPostRequest(String name, Object param) throws IOException {
-		String url = this.urlFormatter.format(getFormRegister().findURL(name), param);
-		HttpPost httpPost = new HttpPost(NetUtils.getActionString(url));
+	protected <T> T doPostRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
+		String url = this.urlFormatter.format(getFormRegister().findURL(name),
+				param, autoEncodingParameter ? super.getBoundEncoding(form) : null);
+		HttpPost httpPost = new HttpPost(NetUtils.getActionString(url));
+		
 		addHeader(httpPost, form);
 		setConfig(httpPost);
 		List<NameValuePair> nameValueList = buildeNameValuePairByQueryString(url);
@@ -175,13 +188,15 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	 * @param name
 	 * @param param
 	 * @return
-	 * @throws IOException
+	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	protected <T> T doPutRequest(String name, Object param) throws IOException {
-		String url = this.urlFormatter.format(getFormRegister().findURL(name), param);
-		HttpPut httpPut = new HttpPut(NetUtils.getActionString(url));
+	protected <T> T doPutRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
+		String url = this.urlFormatter.format(getFormRegister().findURL(name),
+				param, autoEncodingParameter ? super.getBoundEncoding(form) : null);
+		HttpPut httpPut = new HttpPut(NetUtils.getActionString(url));
+		
 		addHeader(httpPut, form);
 		setConfig(httpPut);
 		List<NameValuePair> nameValueList = buildeNameValuePairByQueryString(url);
@@ -205,13 +220,15 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 	 * @param name
 	 * @param param
 	 * @return
-	 * @throws IOException
+	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	protected <T> T doDeleteRequest(String name, Object param) throws IOException {
-		String url = this.urlFormatter.format(getFormRegister().findURL(name), param);
-		HttpDelete httpDelete = new HttpDelete(url);
+	protected <T> T doDeleteRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
+		String url = this.urlFormatter.format(getFormRegister().findURL(name),
+				param, autoEncodingParameter ? super.getBoundEncoding(form) : null);
+		HttpDelete httpDelete = new HttpDelete(url);
+		
 		addHeader(httpDelete, form);
 		setConfig(httpDelete);
 		try {
@@ -238,6 +255,9 @@ public class HttpClientTemplet extends HttpClientAccessor implements HttpSender 
 				Entry<String, Object> item = headerItem.next();
 				httpRequest.addHeader(item.getKey(), item.getKey());
 			}
+		} else {
+			httpRequest.addHeader("Content-Type", "text/html;charset=utf-8");
+			
 		}
 	}
 	

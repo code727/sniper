@@ -107,5 +107,14 @@ public class SystemUtils {
 	public static String getTextNewline() {
 		return GLOBAL_PROPERTIES.getProperty("sys.text.newline");
 	}
-					
+	
+	/**
+	 * @description 获取当前操作系统的编码集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static String getSystemEncoding() {
+		return System.getProperty("file.encoding");
+	}
+						
 }

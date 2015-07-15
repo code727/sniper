@@ -53,7 +53,7 @@ public class SimpleHttpForm implements HttpForm {
 	/** 请求头对象 */
 	private HttpRequestHeader header;
 	
-	/** 接收方能识别的字符串编码 */
+	/** 字符串编码 */
 	private String encoding;
 	
 	@Override

@@ -18,7 +18,6 @@
 
 package org.workin.http.httpclient;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -127,9 +126,9 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	 * @param name
 	 * @param param
 	 * @return
-	 * @throws IOException
+	 * @throws Exception
 	 */
-	protected abstract <T> T doGetRequest(String name, Object param) throws IOException;
+	protected abstract <T> T doGetRequest(String name, Object param) throws Exception;
 	
 	/**
 	 * @description 执行HTTP POST方法后返回结果
@@ -137,9 +136,9 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	 * @param name
 	 * @param param
 	 * @return
-	 * @throws IOException
+	 * @throws Exception
 	 */
-	protected abstract <T> T doPostRequest(String name, Object param) throws IOException;
+	protected abstract <T> T doPostRequest(String name, Object param) throws Exception;
 	
 	/**
 	 * @description 执行HTTP PUT方法后返回结果
@@ -147,9 +146,9 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	 * @param name
 	 * @param param
 	 * @return
-	 * @throws IOException
+	 * @throws Exception
 	 */
-	protected abstract <T> T doPutRequest(String name, Object param) throws IOException;
+	protected abstract <T> T doPutRequest(String name, Object param) throws Exception;
 	
 	/**
 	 * @description 执行HTTP DELETE方法后返回结果
@@ -157,8 +156,8 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	 * @param name
 	 * @param param
 	 * @return
-	 * @throws IOException
+	 * @throws Exception
 	 */
-	protected abstract <T> T doDeleteRequest(String name, Object param) throws IOException;
+	protected abstract <T> T doDeleteRequest(String name, Object param) throws Exception;
 	
 }

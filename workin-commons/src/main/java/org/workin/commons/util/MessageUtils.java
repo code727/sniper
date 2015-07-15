@@ -643,7 +643,6 @@ public class MessageUtils {
 		try {
 			return URLEncoder.encode(url, StringUtils.isNotBlank(encoding) ? encoding : UTF8_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
 			return urlEncode(url, UTF8_ENCODING);
 		}
 	}

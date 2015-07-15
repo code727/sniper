@@ -18,12 +18,14 @@
 
 package org.workin.support.message.formatter;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.support.encoder.StringEncoder;
 
 /**
  * @description Map参数消息格式化处理器实现类
@@ -33,13 +35,25 @@ import org.workin.commons.util.StringUtils;
 public class MapMessageFormatter extends PlaceholderMessageFormatter<Map<String, Object>> {
 	
 	@Override
-	public String format(String message, Map<String, Object> param) {
+	public String format(String message, Map<String, Object> param, String encoding) throws UnsupportedEncodingException {
+		StringEncoder encoder = super.getEncoder();
 		if (MapUtils.isNotEmpty(param)) {
 			Iterator<Entry<String, Object>> iterator = param.entrySet().iterator();
-			while (iterator.hasNext()) {
-				Entry<String, Object> nameValuePair = iterator.next();
-				String mark = this.getPrefix() + nameValuePair.getKey() + this.getSuffix();
-				message = StringUtils.replace(message, mark, StringUtils.toString(nameValuePair.getValue(), null)); 
+			StringBuffer mark = new StringBuffer();
+			if (encoder != null && StringUtils.isNotBlank(encoding)) {
+				while (iterator.hasNext()) {
+					Entry<String, Object> nameValuePair = iterator.next();
+					mark.setLength(0);
+					mark.append(this.getPrefix()).append(nameValuePair.getKey()).append(this.getSuffix());
+					message = StringUtils.replace(message, mark.toString(), encoder.encode(StringUtils.toString(nameValuePair.getValue()), encoding)); 
+				}
+			} else {
+				while (iterator.hasNext()) {
+					Entry<String, Object> nameValuePair = iterator.next();
+					mark.setLength(0);
+					mark.append(this.getPrefix()).append(nameValuePair.getKey()).append(this.getSuffix());
+					message = StringUtils.replace(message, mark.toString(), StringUtils.toString(nameValuePair.getValue())); 
+				}
 			}
 		}
 		return message;

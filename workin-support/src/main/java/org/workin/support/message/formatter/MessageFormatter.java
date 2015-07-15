@@ -18,6 +18,10 @@
 
 package org.workin.support.message.formatter;
 
+import java.io.UnsupportedEncodingException;
+
+import org.workin.support.encoder.StringEncoder;
+
 /**
  * @description 泛型参数消息格式化处理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -26,12 +30,36 @@ package org.workin.support.message.formatter;
 public interface MessageFormatter<T> {
 	
 	/**
-	 * @description 单参数消息格式化
+	 * @description 设置字符串编码器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param encoder
+	 */
+	public void setEncoder(StringEncoder encoder);
+	
+	/**
+	 * @description 获取字符串编码器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public StringEncoder getEncoder();
+	
+	/**
+	 * @description 参数消息格式化
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param message
 	 * @param param
 	 * @return
 	 */
 	public String format(String message, T param); 
+	
+	/**
+	 * @description 将参数进行字符串编码后格式化消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param message
+	 * @param param
+	 * @param encoding
+	 * @return
+	 */
+	public String format(String message, T param, String encoding) throws UnsupportedEncodingException; 
 	
 }

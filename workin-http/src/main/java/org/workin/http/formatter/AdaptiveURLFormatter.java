@@ -18,12 +18,15 @@
 
 package org.workin.http.formatter;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.Map;
 
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.NetUtils;
+import org.workin.commons.util.StringUtils;
+import org.workin.support.encoder.StringEncoder;
 import org.workin.support.message.formatter.AdaptiveMessageFormatter;
 
 /**
@@ -31,33 +34,42 @@ import org.workin.support.message.formatter.AdaptiveMessageFormatter;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class AdaptiveURLFormatter extends AdaptiveMessageFormatter implements URLFormatter<Object> {
+public class AdaptiveURLFormatter extends AdaptiveMessageFormatter {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public String format(String url, Object param) {
-		StringBuffer formatedUrl = new StringBuffer(super.format(url, param));
-		
+	public String format(String url, Object param, String encoding) throws UnsupportedEncodingException {
+		StringBuffer formatedUrl = new StringBuffer(super.format(url, param, encoding));
 		if (param instanceof Map) {
 			Map<String, Object> inputParam = (Map<String, Object>) param;
 			
 			/* 求输入参数分别与查询字符串以及Action字符串中查询名的交集，
 			 * 多余的参数以及对于的值则直接拼接到URL字符串后面 */
 			Collection<String> names = MapUtils.keySubtract(inputParam, NetUtils.getParameterMap(url));
-			names = CollectionUtils.subtract(names, NetUtils
-					.getActionParameterNames(NetUtils.getActionString(url), super.getPrefix(), super.getSuffix()));
+			names = CollectionUtils.subtract(names, NetUtils.getActionParameterNames(
+					NetUtils.getActionString(url), super.getPrefix(), super.getSuffix()));
+					
 			if (CollectionUtils.isNotEmpty(names)) {
 				if (url.indexOf("?") < 0)
 					formatedUrl.append("?");
 				else
 					formatedUrl.append("&");
 				
-				for (String name : names) 
-					formatedUrl.append(name).append("=").append(inputParam.get(name)).append("&");
+				StringEncoder enc = this.getEncoder();
+				if (enc != null && StringUtils.isNotBlank(encoding)) {
+					for (String name : names) 
+						formatedUrl.append(name).append("=")
+							.append(enc.encode(StringUtils.toString(inputParam.get(name)), encoding)).append("&");
+				} else {
+					for (String name : names) 
+						formatedUrl.append(name).append("=")
+							.append(StringUtils.toString(inputParam.get(name))).append("&");
+				}
 				formatedUrl.deleteCharAt(formatedUrl.lastIndexOf("&"));
 			}
 		}
 		return formatedUrl.toString();
 	}
+		
 	
 }

@@ -18,11 +18,13 @@
 
 package org.workin.support.message.formatter;
 
+import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.Map;
 
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.RegexUtils;
+import org.workin.support.encoder.StringEncoder;
 
 /**
  * @description 自适应参数对象消息格式化实现类
@@ -37,6 +39,15 @@ public class AdaptiveMessageFormatter extends
 	private MessageFormatter<Map<String, Object>> mapMessageFormatter = new MapMessageFormatter();
 	
 	private MessageFormatter<Object> beanMessageFormatter = new BeanMessageFormatter();
+	
+	@Override
+	public void setEncoder(StringEncoder encoder) {
+		super.setEncoder(encoder);
+		/* 同时将当前编码器传递给另外三个代理格式化处理器 */
+		this.jdkMessageFormatter.setEncoder(encoder);
+		this.mapMessageFormatter.setEncoder(encoder);
+		this.beanMessageFormatter.setEncoder(encoder);
+	}
 	
 	public MessageFormatter<Object> getJdkMessageFormatter() {
 		return this.jdkMessageFormatter;
@@ -84,27 +95,37 @@ public class AdaptiveMessageFormatter extends
 		super.setSuffix(suffix);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public String format(String message, Object param) {
+		String result = null;
+		try {
+			result = this.format(message, param, null);
+		} catch (UnsupportedEncodingException e) {}
+			
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public String format(String message, Object param, String encoding) throws UnsupportedEncodingException {
 		if (ClassUtils.isJavaTypeObject(param)) {
 			if (param instanceof Map)
 				// 参数为java.util.Map对象时，则用Map参数消息格式化处理器处理
-				return this.mapMessageFormatter.format(message, (Map<String, Object>) param);
+				return this.mapMessageFormatter.format(message, (Map<String, Object>) param, encoding);
 			
 			if (RegexUtils.has(message, RegexUtils.regex.get(MessageFormat.class.getName())))
 				/* 参数为其余JAVA类型对象，并且消息中包含java.text.MessageFormat能处理的{0}...{9}占位符时，
 				 * 则用JDK原生态消息格式化处理器处理 */
-				return this.jdkMessageFormatter.format(message, param);
+				return this.jdkMessageFormatter.format(message, param, encoding);
 		} else {
 			/* 参数为自定义类型对象，并且消息中包含java.text.MessageFormat能处理的{0}...{9}占位符时，
 			 * 则同样用JDK原生态消息格式化处理器处理 */
 			if (RegexUtils.has(message, RegexUtils.regex.get(MessageFormat.class.getName())))
-				return this.jdkMessageFormatter.format(message, param);
+				return this.jdkMessageFormatter.format(message, param, encoding);
 		}
 		
 		// 剩余情况则一律用Bean对象消息格式化处理器处理
-		return this.beanMessageFormatter.format(message, param);
+		return this.beanMessageFormatter.format(message, param, encoding);
 	}
 	
 }

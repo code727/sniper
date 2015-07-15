@@ -13,31 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年7月15日
+ * Create Date : 2015-7-16
  */
 
-package org.workin.support.encoder;
+package org.workin.support.message.formatter;
 
 import java.io.UnsupportedEncodingException;
 
-import org.workin.commons.util.StringUtils;
-import org.workin.support.CoderSupport;
+import org.workin.support.encoder.StringEncoder;
 
 /**
- * @description URL编码器实现类
+ * @description 可编码的消息格式化处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class URLEncoder extends CoderSupport implements StringEncoder {
-
+public abstract class EncodeableMessageFormatter<T> implements MessageFormatter<T> {
+	
+	private StringEncoder encoder;
+	
 	@Override
-	public String encode(String message) throws UnsupportedEncodingException {
-		return this.encode(message, null);
+	public void setEncoder(StringEncoder encoder) {
+		this.encoder = encoder;
 	}
-
+	
 	@Override
-	public String encode(String message, String encoding) throws UnsupportedEncodingException {
-		return java.net.URLEncoder.encode(message, StringUtils.isNotBlank(encoding) ? encoding : super.getEncoding());
+	public StringEncoder getEncoder() {
+		return this.encoder;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public String format(String message, Object param) {
+		String result = null;
+		try {
+			result = this.format(message, (T) param, null);
+		} catch (UnsupportedEncodingException e) {}
+		
+		return result;
 	}
 
 }

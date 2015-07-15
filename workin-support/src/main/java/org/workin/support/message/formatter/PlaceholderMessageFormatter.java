@@ -18,19 +18,20 @@
 
 package org.workin.support.message.formatter;
 
+
 /**
  * @description 占位符参数消息格式化处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class PlaceholderMessageFormatter<T> implements MessageFormatter<T> {
+public abstract class PlaceholderMessageFormatter<T> extends EncodeableMessageFormatter<T> {
 	
 	/** 参数化文本标识前缀 */
 	private String prefix = "{";
 	
 	/** 参数化文本标识后缀 */
 	private String suffix = "}";
-				
+		
 	public String getPrefix() {
 		return prefix;
 	}
