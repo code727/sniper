@@ -255,10 +255,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 				Entry<String, Object> item = headerItem.next();
 				httpRequest.addHeader(item.getKey(), item.getKey());
 			}
-		} else {
-			httpRequest.addHeader("Content-Type", "text/html;charset=utf-8");
-			
-		}
+		} 
 	}
 	
 	/**
