@@ -34,7 +34,7 @@ public interface StringDecoder {
 	 * @param encoding
 	 * @return
 	 */
-	public String encode(String message) throws UnsupportedEncodingException;
+	public String decode(String message) throws UnsupportedEncodingException;
 	
 	/**
 	 * @description 将消息按照指定的字符集进行解码
@@ -43,6 +43,6 @@ public interface StringDecoder {
 	 * @param encoding
 	 * @return
 	 */
-	public String encode(String message, String encoding) throws UnsupportedEncodingException;
+	public String decode(String message, String encoding) throws UnsupportedEncodingException;
 
 }

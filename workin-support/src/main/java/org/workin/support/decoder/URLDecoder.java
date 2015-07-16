@@ -30,12 +30,12 @@ import org.workin.support.CoderSupport;
 public class URLDecoder extends CoderSupport implements StringDecoder {
 
 	@Override
-	public String encode(String message) throws UnsupportedEncodingException{
-		return this.encode(message, super.getEncoding());
+	public String decode(String message) throws UnsupportedEncodingException{
+		return this.decode(message, super.getEncoding());
 	}
 
 	@Override
-	public String encode(String message, String encoding) throws UnsupportedEncodingException {
+	public String decode(String message, String encoding) throws UnsupportedEncodingException {
 		return java.net.URLDecoder.decode(message, encoding);
 	}
 
