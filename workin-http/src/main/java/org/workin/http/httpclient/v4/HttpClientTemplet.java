@@ -19,6 +19,7 @@
 package org.workin.http.httpclient.v4;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -30,10 +31,12 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +50,8 @@ import org.workin.http.formatter.AdaptiveURLFormatter;
 import org.workin.http.httpclient.HttpClientAccessor;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactory;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
-import org.workin.support.encoder.URLEncoder;
+import org.workin.http.httpclient.v4.handler.StringResponseHandler;
+import org.workin.support.encoder.RawURLEncoder;
 import org.workin.support.message.formatter.MessageFormatter;
 
 /**
@@ -103,8 +107,11 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 		
 		if (this.urlFormatter == null) {
 			this.urlFormatter = new AdaptiveURLFormatter();
-			this.urlFormatter.setEncoder(new URLEncoder());
+			this.urlFormatter.setEncoder(new RawURLEncoder());
 		}
+		
+		if (this.responseHandler == null)
+			this.responseHandler = new StringResponseHandler();
 	}
 	
 	@Override
@@ -133,10 +140,10 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	@SuppressWarnings("unchecked")
 	protected <T> T doGetRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
-		String url = this.urlFormatter.format(getFormRegister().findURL(name),
-				param, autoEncodingParameter ? super.getBoundEncoding(form) : null);
-		HttpGet httpGet = new HttpGet(url);
+		String url = this.urlFormatter.format(getFormRegister().findURL(name), param, 
+				autoEncodingParameter ? super.getBoundEncoding(form) : null);
 		
+		HttpGet httpGet = new HttpGet(url);
 		addHeader(httpGet, form);
 		setConfig(httpGet);
 		try {
@@ -161,17 +168,14 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	@SuppressWarnings("unchecked")
 	protected <T> T doPostRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
-		String url = this.urlFormatter.format(getFormRegister().findURL(name),
+		String url = this.urlFormatter.format(getFormRegister().findURL(name), 
 				param, autoEncodingParameter ? super.getBoundEncoding(form) : null);
-		HttpPost httpPost = new HttpPost(NetUtils.getActionString(url));
 		
+		HttpPost httpPost = new HttpPost(NetUtils.getActionString(url));
 		addHeader(httpPost, form);
 		setConfig(httpPost);
-		List<NameValuePair> nameValueList = buildeNameValuePairByQueryString(url);
 		try {
-			if (CollectionUtils.isNotEmpty(nameValueList))
-				httpPost.setEntity(new UrlEncodedFormEntity(nameValueList, super.getBoundEncoding(form))); 
-			
+			setRequestBody(httpPost, url, form);
 			logger.info("Request form [" + name + "] url [" + url + "] method:[POST].");
 			return (T) this.httpClientFactory.create().execute(httpPost, getBoundResponseHandler(form));
 		}  catch (IOException e) {
@@ -199,11 +203,8 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 		
 		addHeader(httpPut, form);
 		setConfig(httpPut);
-		List<NameValuePair> nameValueList = buildeNameValuePairByQueryString(url);
 		try {
-			if (CollectionUtils.isNotEmpty(nameValueList))
-				httpPut.setEntity(new UrlEncodedFormEntity(nameValueList, super.getBoundEncoding(form))); 
-			
+			setRequestBody(httpPut, url, form);
 			logger.info("Request form [" + name + "] url [" + url + "] method:[PUT].");
 			return (T) this.httpClientFactory.create().execute(httpPut, getBoundResponseHandler(form));
 		}  catch (IOException e) {
@@ -299,6 +300,24 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 			}
 		}
 		return nameValueList;
+	}
+	
+	/**
+	 * @description 设置RequestBody
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param httpRequest
+	 * @param url
+	 * @param form
+	 * @throws UnsupportedEncodingException
+	 */
+	protected void setRequestBody(HttpEntityEnclosingRequestBase httpRequest, String url, HttpForm form) throws UnsupportedEncodingException {
+		if (autoEncodingParameter) 
+			httpRequest.setEntity(new StringEntity(NetUtils.getQueryString(url)));
+		else {
+			List<NameValuePair> nameValueList = buildeNameValuePairByQueryString(url);
+			if (CollectionUtils.isNotEmpty(nameValueList)) 
+				httpRequest.setEntity(new UrlEncodedFormEntity(nameValueList, super.getBoundEncoding(form))); 
+		}
 	}
 	
 }

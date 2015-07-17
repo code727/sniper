@@ -1182,6 +1182,44 @@ public class StringUtils {
 	}
 	
 	/**
+	 * @description 整理字符串最左侧的空白字符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static String leftTrim(String str) {
+		if (isEmpty(str))
+			return str;
+		
+		char[] charArray = str.toCharArray();
+		int length = charArray.length;
+		int start = 0;
+		while ((start < length) && (charArray[start] <= ' '))
+			start++;
+		
+		return str.substring(start);
+	}
+	
+	/**
+	 * @description 整理字符串最右侧的空白字符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static String rightTrim(String str) {
+		if (isEmpty(str))
+			return str;
+		
+		char[] charArray = str.toCharArray();
+		int length = charArray.length;
+		int start = 0;
+		while ((start < length) && (charArray[length - 1] <= ' '))
+			length--;
+		
+		return str.substring(0, length);
+	}
+	
+	/**
 	 * @description 将集合中的所有元素以指定的分隔符连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param collection
@@ -1300,5 +1338,5 @@ public class StringUtils {
 	public static String reverse(String str) {
 		return length(str) > 1 ? new StringBuffer(str).reverse().toString() : str;
 	}
-							
+		
 }

@@ -27,7 +27,7 @@ import org.workin.commons.util.SystemUtils;
  */
 public abstract class CoderSupport {
 	
-	private String encoding;
+	private String encoding = SystemUtils.getSystemEncoding();
 	
 	public String getEncoding() {
 		return encoding;
@@ -35,10 +35,6 @@ public abstract class CoderSupport {
 
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
-	}
-
-	public CoderSupport() {
-		this.encoding = SystemUtils.getSystemEncoding();
 	}
 
 }

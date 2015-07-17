@@ -20,7 +20,6 @@ package org.workin.http.httpclient.v4;
 
 import org.apache.http.client.ResponseHandler;
 import org.workin.http.SimpleHttpForm;
-import org.workin.http.httpclient.v4.handler.StringResponseHandler;
 
 /**
  * @description HttpClient4.x表单实现类
@@ -30,8 +29,8 @@ import org.workin.http.httpclient.v4.handler.StringResponseHandler;
  */
 public class SimpleHttpClientForm extends SimpleHttpForm implements HttpClientForm {
 	
-	/** 当前表单绑定的响应处理器，默认为字符串响应处理器 */
-	private ResponseHandler<?> responseHandler = new StringResponseHandler();
+	/** 当前表单绑定的响应处理器 */
+	private ResponseHandler<?> responseHandler;
 
 	@Override
 	public void setResponseHandler(ResponseHandler<?> responseHandler) {

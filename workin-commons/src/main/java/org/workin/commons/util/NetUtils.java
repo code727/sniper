@@ -249,7 +249,7 @@ public class NetUtils {
 		if (index < 0) 
 			return url;
 		
-		return index > 0 ? url.substring(0, index -1) : StringUtils.EMPTY_STRING;
+		return index > -1 ? url.substring(0, index) : StringUtils.EMPTY_STRING;
 	}
 	
 	/**
@@ -289,9 +289,9 @@ public class NetUtils {
 		if (StringUtils.isBlank(url) || (index = url.indexOf("?")) < 0)
 			return StringUtils.EMPTY_STRING;
 		
-		String queryString = url.substring(index + 1).trim();
+		String queryString = StringUtils.leftTrim(url.substring(index + 1));
 		if (queryString.length() > 0 && queryString.startsWith("?")) 
-			// 清除多余的
+			// 清除多余的?
 			queryString = queryString.replaceFirst("[\\?]+", "");
 		
 		return queryString;
@@ -328,5 +328,5 @@ public class NetUtils {
 	public static boolean isValidPort(int port) {
 		return port >= MIN_PORT && port <= MAX_PORT;
 	}
-			
+		
 }
