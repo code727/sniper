@@ -18,6 +18,7 @@
 
 package org.workin.nosql.redis.dao;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,6 +31,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.workin.commons.util.CollectionUtils;
@@ -39,9 +41,6 @@ import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.nosql.redis.RedisRepository;
 import org.workin.nosql.redis.RedisRepositoryManager;
-import org.workin.support.context.ApplicationContext;
-import org.workin.support.context.ApplicationContextHolder;
-import org.workin.support.context.DataSourceHolder;
 
 /**
  * @description Redis数据访问接口支持类
@@ -49,15 +48,15 @@ import org.workin.support.context.DataSourceHolder;
  * @version 1.0
  */
 public abstract class RedisDaoSupport implements InitializingBean {
+			
+	@Autowired
+	private RedisTemplate<?, ?> redisTemplate;
+	
+	@Autowired
+	private RedisRepositoryManager repositoryManager;
 		
-	@Autowired
-	protected RedisTemplate<?, ?> redisTemplate;
-	
-	@Autowired
-	protected RedisRepositoryManager repositoryManager;
-	
-	/** 当前库 */
-	private ApplicationContext<String, Integer> currentDb;
+	/** 默认连接库索引 */
+	private int defaultDbIndex;
 	
 	/** 全局键序列化器 */
 	private RedisSerializer<?> globalKeySerializer;
@@ -97,22 +96,42 @@ public abstract class RedisDaoSupport implements InitializingBean {
 			throw new IllegalArgumentException(
 					"RedisRepositoryManager object can not be null, please inject to spring container.");
 		
+		this.setGlobalSerializers();
+		this.setDefaultDbIndex();
+	}
+	
+	/**
+	 * @description 设置若干个全局序列化器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	private void setGlobalSerializers() {
 		this.globalKeySerializer = this.redisTemplate.getKeySerializer();
 		this.globalValueSerializer = this.redisTemplate.getValueSerializer();
 		this.globalHashKeySerializer = this.redisTemplate.getHashKeySerializer();
 		this.globalHashValueSerializer = this.redisTemplate.getHashValueSerializer();
-		
-		this.currentDb = ApplicationContextHolder.newMapThreadLocalContext();
-		this.currentDb.setAttribute(DataSourceHolder.getDataSourceName(), 0);
 	}
 	
 	/**
-	 * @description 获取当前库的索引
+	 * @description 设置默认连接库索引
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @throws Exception
+	 */
+	private void setDefaultDbIndex() throws Exception {
+		RedisConnectionFactory connectionFactory = this.redisTemplate.getConnectionFactory();
+		Field dbIndex = ReflectionUtils.getField(connectionFactory, "dbIndex");
+		if (dbIndex != null)
+			this.defaultDbIndex = ReflectionUtils.getFieldValue(connectionFactory, dbIndex);
+		else
+			this.defaultDbIndex = 0;
+	}
+	
+	/**
+	 * @description 获取默认连接库的索引
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	protected int getCurrentDbIndex() {
-		return this.currentDb.getAttribute(DataSourceHolder.getDataSourceName());
+	protected int getDefaultDbIndex() {
+		return this.defaultDbIndex;
 	}
 	
 	/**
@@ -147,12 +166,8 @@ public abstract class RedisDaoSupport implements InitializingBean {
 	 * @return
 	 */
 	protected RedisRepository select(RedisConnection connection, int dbIndex) {
-		Integer currentIndex = currentDb.getAttribute(DataSourceHolder.getDataSourceName());
-		// 避免在同一个连接中重复多次选择同一个库，包括在多数据源环境下
-		if (currentIndex == null || currentIndex != dbIndex) {
+		if (dbIndex != this.defaultDbIndex)
 			connection.select(dbIndex);
-			currentDb.setAttribute(DataSourceHolder.getDataSourceName(), dbIndex);
-		}
 		return repositoryManager != null ? repositoryManager.getRepository(dbIndex) : null;
 	}
 		

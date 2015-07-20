@@ -367,23 +367,10 @@ public class ReflectionUtils {
 	 * @return
 	 * @throws Exception 
 	 */
-	public static Object getFieldValue(Object object, String fieldName) throws Exception {
+	public static <V> V getFieldValue(Object object, String fieldName) throws Exception {
 		return getFieldValue(object, getField(object, fieldName));
 	}
-	
-	/**
-	 * @description  获取当前对象指定类型的某个属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param object
-	 * @param fieldName
-	 * @param valueType
-	 * @return
-	 * @throws Exception
-	 */
-	public static <T> T getFieldValue(Object object, String fieldName, Class<T> valueType) throws Exception {
-		return getFieldValue(object, getField(object, fieldName), valueType);
-	}
-	
+		
 	/**
 	 * @description  获取当前对象某个属性的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -392,38 +379,18 @@ public class ReflectionUtils {
 	 * @return
 	 * @throws Exception 
 	 */
-	public static Object getFieldValue(Object object, Field field) throws Exception {
-		if (object == null)
-			return object;
-		
-		if (field != null) {
-			field.setAccessible(true);
-			return field.get(object);
-		} else
-			throw new NullPointerException("Target object [" + object.getClass() + "] field can not be null.");
-	}
-	
-	/**
-	 * @description 获取当前对象指定类型的某个属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param object
-	 * @param field
-	 * @param valueType
-	 * @return
-	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T getFieldValue(Object object, Field field, Class<T> valueType) throws Exception {
-		AssertUtils.assertNotNull(valueType, "value type can not be null");
+	public static <V> V getFieldValue(Object object, Field field) throws Exception {
 		if (object == null)
-			return (T) object;
+			return null;
 		
 		if (field != null) {
 			field.setAccessible(true);
-			return (T) field.get(object);
+			return (V) field.get(object);
 		} else
 			throw new NullPointerException("Target object [" + object.getClass() + "] field can not be null.");
 	}
-	
+		
 	/**
 	 * @description 设置当前对象的某个属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

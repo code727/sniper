@@ -56,7 +56,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Set<K> keys() {
-		return keys(super.getCurrentDbIndex());
+		return keys(super.getDefaultDbIndex());
 	}
 
 	@Override
@@ -66,16 +66,16 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Set<K> keys(String pattern) {
-		return keys(super.getCurrentDbIndex(), pattern);
+		return keys(super.getDefaultDbIndex(), pattern);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Set<K> keys(final int dbIndex, final String pattern) {
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
+		final RedisSerializer<String> stringSerializer = super.getRedisTemplate().getStringSerializer();
 		
-		return redisTemplate.execute(new RedisCallback<Set<K>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<K>>() {
 			
 			@Override
 			public Set<K> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -92,7 +92,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Long del(K key) {
-		return del(super.getCurrentDbIndex(), key);
+		return del(super.getDefaultDbIndex(), key);
 	}
 	
 	@Override
@@ -102,7 +102,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long del(K[] keys) {
-		return del(super.getCurrentDbIndex(), keys);
+		return del(super.getDefaultDbIndex(), keys);
 	}
 	
 	@Override
@@ -110,7 +110,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		if (ArrayUtils.isEmpty(keys))
 			return 0L;
 		
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -122,7 +122,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long del(Collection<K> keys) {
-		return del(super.getCurrentDbIndex(), keys);
+		return del(super.getDefaultDbIndex(), keys);
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Boolean exists(K key) {
-		return exists(super.getCurrentDbIndex(), key);
+		return exists(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -142,7 +142,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return false;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -154,7 +154,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Boolean expire(K key, long seconds) {
-		return expire(super.getCurrentDbIndex(), seconds);
+		return expire(super.getDefaultDbIndex(), seconds);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -164,7 +164,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return false;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -176,7 +176,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Boolean expireAt(K key, long timestamp) {
-		return expireAt(super.getCurrentDbIndex(), key, timestamp);
+		return expireAt(super.getDefaultDbIndex(), key, timestamp);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -186,7 +186,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return false;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -198,7 +198,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Boolean expireAt(K key, Date date) {
-		return expireAt(super.getCurrentDbIndex(), key, date);
+		return expireAt(super.getDefaultDbIndex(), key, date);
 	}
 
 	@Override
@@ -208,7 +208,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Boolean move(K key, int targetIndex) {
-		return move(super.getCurrentDbIndex(), key, targetIndex);
+		return move(super.getDefaultDbIndex(), key, targetIndex);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -218,7 +218,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return false;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -230,7 +230,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long ttl(K key) {
-		return ttl(super.getCurrentDbIndex(), key);
+		return ttl(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -240,7 +240,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return -2L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -252,7 +252,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> List<V> sort(K key, SortParameters params) {
-		return sort(super.getCurrentDbIndex(), key, params);
+		return sort(super.getDefaultDbIndex(), key, params);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -263,7 +263,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<List<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
 
 			@Override
 			public List<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -279,7 +279,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long sortCount(K key, SortParameters params, K targetKey) {
-		return sortCount(super.getCurrentDbIndex(), key, params, targetKey);
+		return sortCount(super.getDefaultDbIndex(), key, params, targetKey);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -290,7 +290,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertNotNull(targetKey, "Target key can not be null of command [sort].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -302,7 +302,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> List<V> sortResult(K key, SortParameters params, K targetKey) {
-		return sortResult(super.getCurrentDbIndex(), key, params, targetKey);
+		return sortResult(super.getDefaultDbIndex(), key, params, targetKey);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -313,7 +313,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertNotNull(targetKey, "Target key can not be null of command [sort].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<List<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
 
 			@Override
 			public List<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -331,7 +331,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> DataType type(K key) {
-		return type(super.getCurrentDbIndex(), key);
+		return type(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -341,7 +341,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return DataType.NONE;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<DataType>() {
+		return super.getRedisTemplate().execute(new RedisCallback<DataType>() {
 
 			@Override
 			public DataType doInRedis(RedisConnection connection) throws DataAccessException {
@@ -353,7 +353,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <V> Set<V> values() {
-		return values(super.getCurrentDbIndex());
+		return values(super.getDefaultDbIndex());
 	}
 
 	@Override
@@ -369,10 +369,10 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@SuppressWarnings("unchecked")
 	@Override
 	public <V> Set<V> values(int dbIndex, final String pattern) {
-		final RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
+		final RedisSerializer<String> stringSerializer = super.getRedisTemplate().getStringSerializer();
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
 		
-		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 			@Override
 			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
 				// 获取匹配模式的键
@@ -388,12 +388,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> void set(K key, V value) {
-		set(super.getCurrentDbIndex(), key, value);
+		set(super.getDefaultDbIndex(), key, value);
 	}
 	
 	@Override
 	public <K, V> void set(K key, V value, long expireSeconds) {
-		set(super.getCurrentDbIndex(), key, value, expireSeconds);
+		set(super.getDefaultDbIndex(), key, value, expireSeconds);
 	}
 
 	@Override
@@ -409,7 +409,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		redisTemplate.execute(new RedisCallback<Object>() {
+		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 			
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
@@ -425,12 +425,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean setNX(K key, V value) {
-		return setNX(super.getCurrentDbIndex(), key, value);
+		return setNX(super.getDefaultDbIndex(), key, value);
 	}
 	
 	@Override
 	public <K, V> Boolean setNX(K key, V value, long expireSeconds) {
-		return setNX(super.getCurrentDbIndex(), key, value, expireSeconds);
+		return setNX(super.getDefaultDbIndex(), key, value, expireSeconds);
 	}
 
 	@Override
@@ -446,7 +446,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -461,7 +461,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> void setEx(K key, V value) {
-		setEx(super.getCurrentDbIndex(), key, value);
+		setEx(super.getDefaultDbIndex(), key, value);
 	}
 
 	@Override
@@ -471,7 +471,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> void setEx(K key, long seconds, V value) {
-		setEx(super.getCurrentDbIndex(), key, seconds, value);
+		setEx(super.getDefaultDbIndex(), key, seconds, value);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -482,7 +482,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		redisTemplate.execute(new RedisCallback<Object>() {
+		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
@@ -499,12 +499,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> void mSet(Map<K, V> kValues) {
-		mSet(super.getCurrentDbIndex(), kValues);
+		mSet(super.getDefaultDbIndex(), kValues);
 	}
 	
 	@Override
 	public <K, V> void mSet(Map<K, V> kValues, long expireSeconds) {
-		mSet(super.getCurrentDbIndex(), kValues, expireSeconds);
+		mSet(super.getDefaultDbIndex(), kValues, expireSeconds);
 	}
 
 	@Override
@@ -516,7 +516,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	public <K, V> void mSet(final int dbIndex, final Map<K, V> kValues, final long expireSeconds) {
 		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues), "Key-value map can not be empty of command [mSet].");
 		
-		redisTemplate.execute(new RedisCallback<Object>() {
+		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
@@ -531,12 +531,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> void mSetNX(Map<K, V> kValues) {
-		mSetNX(super.getCurrentDbIndex(), kValues);
+		mSetNX(super.getDefaultDbIndex(), kValues);
 	}
 	
 	@Override
 	public <K, V> void mSetNX(Map<K, V> kValues, long expireSeconds) {
-		mSetNX(super.getCurrentDbIndex(), kValues, expireSeconds);
+		mSetNX(super.getDefaultDbIndex(), kValues, expireSeconds);
 	}
 
 	@Override
@@ -548,7 +548,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	public <K, V> void mSetNX(final int dbIndex, final Map<K, V> kValues, final long expireSeconds) {
 		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues), "Key-value map can not be empty of command [mSetNX].");
 		
-		redisTemplate.execute(new RedisCallback<Object>() {
+		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
@@ -563,12 +563,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> void setRange(K key, long offset, V value) {
-		setRange(super.getCurrentDbIndex(), key, offset, value);
+		setRange(super.getDefaultDbIndex(), key, offset, value);
 	}
 	
 	@Override
 	public <K, V> void setRange(K key, long offset, V value, long expireSeconds) {
-		setRange(super.getCurrentDbIndex(), key, offset, value, expireSeconds);
+		setRange(super.getDefaultDbIndex(), key, offset, value, expireSeconds);
 	}
 
 	@Override
@@ -584,7 +584,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		redisTemplate.execute(new RedisCallback<Object>() {
+		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
@@ -599,12 +599,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long append(K key, V value) {
-		return append(super.getCurrentDbIndex(), key, value);
+		return append(super.getDefaultDbIndex(), key, value);
 	}
 	
 	@Override
 	public <K, V> Long append(K key, V value, long expireSeconds) {
-		return append(super.getCurrentDbIndex(), key, value, expireSeconds);
+		return append(super.getDefaultDbIndex(), key, value, expireSeconds);
 	}
 
 	@Override
@@ -620,7 +620,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -635,7 +635,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V get(K key) {
-		return get(super.getCurrentDbIndex(), key);
+		return get(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -646,7 +646,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<V>() {
+		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
 			public V doInRedis(RedisConnection connection) throws DataAccessException {
@@ -659,7 +659,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V getRange(K key, long begin, long end) {
-		return getRange(super.getCurrentDbIndex(), key, begin, end);
+		return getRange(super.getDefaultDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -670,7 +670,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<V>() {
+		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
 			public V doInRedis(RedisConnection connection) throws DataAccessException {
@@ -683,12 +683,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V getSet(K key, V value) {
-		return getSet(super.getCurrentDbIndex(), key, value);
+		return getSet(super.getDefaultDbIndex(), key, value);
 	}
 	
 	@Override
 	public <K, V> V getSet(K key, V value, long expireSeconds) {
-		return getSet(super.getCurrentDbIndex(), key, value, expireSeconds);
+		return getSet(super.getDefaultDbIndex(), key, value, expireSeconds);
 	}
 
 	@Override
@@ -704,7 +704,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<V>() {
+		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
 			public V doInRedis(RedisConnection connection) throws DataAccessException {
@@ -719,7 +719,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> List<V> mGet(K[] keys) {
-		return mGet(super.getCurrentDbIndex(), keys);
+		return mGet(super.getDefaultDbIndex(), keys);
 	}
 
 	@Override
@@ -727,7 +727,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		if (ArrayUtils.isEmpty(keys))
 			return null;
 		
-		return redisTemplate.execute(new RedisCallback<List<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
 
 			@Override
 			public List<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -740,7 +740,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> List<V> mGet(Collection<K> keys) {
-		return mGet(super.getCurrentDbIndex(), keys);
+		return mGet(super.getDefaultDbIndex(), keys);
 	}
 
 	@Override
@@ -750,7 +750,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long strLen(K key) {
-		return strLen(super.getCurrentDbIndex(), key);
+		return strLen(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -760,7 +760,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return 0L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -772,7 +772,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Long decr(K key) {
-		return decr(super.getCurrentDbIndex(), key);
+		return decr(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -781,7 +781,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertNotNull(key, "Key can not be null of command [decr].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -793,7 +793,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long decrBy(K key, long value) {
-		return decrBy(super.getCurrentDbIndex(), key, value);
+		return decrBy(super.getDefaultDbIndex(), key, value);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -802,7 +802,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertNotNull(key, "Key can not be null of command [decrBy].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -814,7 +814,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long incr(K key) {
-		return incr(super.getCurrentDbIndex(), key);
+		return incr(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -823,7 +823,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertNotNull(key, "Key can not be null of command [incr].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -835,7 +835,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long incrBy(K key, long value) {
-		return incrBy(super.getCurrentDbIndex(), key, value);
+		return incrBy(super.getDefaultDbIndex(), key, value);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -844,7 +844,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertNotNull(key, "Key can not be null of command [incrBy].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -856,12 +856,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, F, V> Boolean hSet(K key, F field, V value) {
-		return hSet(super.getCurrentDbIndex(), key, field, value);
+		return hSet(super.getDefaultDbIndex(), key, field, value);
 	}
 	
 	@Override
 	public <K, F, V> Boolean hSet(K key, F field, V value, long expireSeconds) {
-		return hSet(super.getCurrentDbIndex(), key, field, value, expireSeconds);
+		return hSet(super.getDefaultDbIndex(), key, field, value, expireSeconds);
 	}
 
 	@Override
@@ -880,7 +880,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<F> fieldKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -896,17 +896,17 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, F, V> Boolean hSetNX(K key, F field, V value) {
-		return hSetNX(super.getCurrentDbIndex(), key, field, value);
+		return hSetNX(super.getDefaultDbIndex(), key, field, value);
 	}
 	
 	@Override
 	public <K, F, V> Boolean hSetNX(K key, F field, V value, long expireSeconds) {
-		return hSetNX(super.getCurrentDbIndex(), key, field, value, expireSeconds);
+		return hSetNX(super.getDefaultDbIndex(), key, field, value, expireSeconds);
 	}
 
 	@Override
 	public <K, F, V> Boolean hSetNX(int dbIndex, K key, F field, V value) {
-		return hSetNX(super.getCurrentDbIndex(), key, field, value, 0);
+		return hSetNX(super.getDefaultDbIndex(), key, field, value, 0);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -920,7 +920,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<F> fieldKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -936,12 +936,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F, V> void hMSet(K key, Map<F, V> fValues) {
-		hMSet(super.getCurrentDbIndex(), key, fValues);
+		hMSet(super.getDefaultDbIndex(), key, fValues);
 	}
 	
 	@Override
 	public <K, F, V> void hMSet(K key, Map<F, V> fValues, long expireSeconds) {
-		hMSet(super.getCurrentDbIndex(), key, fValues, expireSeconds);
+		hMSet(super.getDefaultDbIndex(), key, fValues, expireSeconds);
 	}
 
 	@Override
@@ -958,7 +958,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				"Field-value map can not be empty of command [hMSet].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		redisTemplate.execute(new RedisCallback<Object>() {
+		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
@@ -973,7 +973,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F> Boolean hDel(K key, F filed) {
-		return hDel(super.getCurrentDbIndex(), key, filed);
+		return hDel(super.getDefaultDbIndex(), key, filed);
 	}
 
 	@Override
@@ -997,7 +997,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<F> hashKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1013,7 +1013,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F> Boolean hDel(K key, Collection<F> fileds) {
-		return hDel(super.getCurrentDbIndex(), key, fileds);
+		return hDel(super.getDefaultDbIndex(), key, fileds);
 	}
 
 	@Override
@@ -1023,7 +1023,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F> Boolean hExists(K key, F filed) {
-		return hExists(super.getCurrentDbIndex(), key, filed);
+		return hExists(super.getDefaultDbIndex(), key, filed);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1034,7 +1034,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<F> hashKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1046,7 +1046,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F, V> V hGet(K key, F filed) {
-		return hGet(super.getCurrentDbIndex(), key, filed);
+		return hGet(super.getDefaultDbIndex(), key, filed);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1058,7 +1058,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<F> hashKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
 		final RedisSerializer<V> hashValueSerializer = (RedisSerializer<V>) selectHashValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<V>() {
+		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
 			public V doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1071,7 +1071,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F, V> Map<F, V> hGetAll(K key) {
-		return hGetAll(super.getCurrentDbIndex(), key);
+		return hGetAll(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1081,7 +1081,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Map<F, V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Map<F, V>>() {
 
 			@Override
 			public Map<F, V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1094,7 +1094,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F> Set<F> hKeys(K key) {
-		return hKeys(super.getCurrentDbIndex(), key);
+		return hKeys(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1104,7 +1104,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Set<F>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<F>>() {
 
 			@Override
 			public Set<F> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1117,7 +1117,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long hLen(K key) {
-		return hLen(super.getCurrentDbIndex(), key);
+		return hLen(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1127,7 +1127,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return 0L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1139,7 +1139,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F, V> List<V> hMGet(K key, F[] fields) {
-		return hMGet(super.getCurrentDbIndex(), key, fields);
+		return hMGet(super.getDefaultDbIndex(), key, fields);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1149,7 +1149,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<List<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
 
 			@Override
 			public List<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1163,7 +1163,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F, V> List<V> hMGet(K key, Collection<F> fields) {
-		return hMGet(super.getCurrentDbIndex(), key, fields);
+		return hMGet(super.getDefaultDbIndex(), key, fields);
 	}
 
 	@Override
@@ -1173,7 +1173,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> List<V> hVals(K key) {
-		return hVals(super.getCurrentDbIndex(), key);
+		return hVals(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1183,7 +1183,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<List<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
 
 			@Override
 			public List<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1196,12 +1196,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Long lInsert(K key, Position where, V pivot, V value) {
-		return lInsert(super.getCurrentDbIndex(), key, where, pivot, value);
+		return lInsert(super.getDefaultDbIndex(), key, where, pivot, value);
 	}
 	
 	@Override
 	public <K, V> Long lInsert(K key, Position where, V pivot, V value, long expireSeconds) {
-		return lInsert(super.getCurrentDbIndex(), key, where, pivot, value, expireSeconds);
+		return lInsert(super.getDefaultDbIndex(), key, where, pivot, value, expireSeconds);
 	}
 
 	@Override
@@ -1220,7 +1220,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1237,12 +1237,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> void lSet(K key, long posttion, V value) {
-		lSet(super.getCurrentDbIndex(), key, posttion, value);
+		lSet(super.getDefaultDbIndex(), key, posttion, value);
 	}
 	
 	@Override
 	public <K, V> void lSet(K key, long posttion, V value, long expireSeconds) {
-		lSet(super.getCurrentDbIndex(), key, posttion, value, expireSeconds);
+		lSet(super.getDefaultDbIndex(), key, posttion, value, expireSeconds);
 	}
 
 	@Override
@@ -1259,7 +1259,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		redisTemplate.execute(new RedisCallback<Object>() {
+		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1274,12 +1274,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long lPush(K key, V value) {
-		return lPush(super.getCurrentDbIndex(), key, value);
+		return lPush(super.getDefaultDbIndex(), key, value);
 	}
 	
 	@Override
 	public <K, V> Long lPush(K key, V value, long expireSeconds) {
-		return lPush(super.getCurrentDbIndex(), key, value, expireSeconds);
+		return lPush(super.getDefaultDbIndex(), key, value, expireSeconds);
 	}
 
 	@Override
@@ -1295,12 +1295,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Long lPush(K key, V[] values) {
-		return lPush(super.getCurrentDbIndex(), key, values);
+		return lPush(super.getDefaultDbIndex(), key, values);
 	}
 	
 	@Override
 	public <K, V> Long lPush(K key, V[] values, long expireSeconds) {
-		return lPush(super.getCurrentDbIndex(), key, values, expireSeconds);
+		return lPush(super.getDefaultDbIndex(), key, values, expireSeconds);
 	}
 
 	@Override
@@ -1316,7 +1316,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1335,12 +1335,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Long lPush(K key, Collection<V> values) {
-		return lPush(super.getCurrentDbIndex(), key, values); 
+		return lPush(super.getDefaultDbIndex(), key, values); 
 	}
 	
 	@Override
 	public <K, V> Long lPush(K key, Collection<V> values, long expireSeconds) {
-		return lPush(super.getCurrentDbIndex(), key, values, expireSeconds); 
+		return lPush(super.getDefaultDbIndex(), key, values, expireSeconds); 
 	}
 
 	@Override
@@ -1355,12 +1355,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long lPushX(K key, V value) {
-		return lPushX(super.getCurrentDbIndex(), key, value);
+		return lPushX(super.getDefaultDbIndex(), key, value);
 	}
 	
 	@Override
 	public <K, V> Long lPushX(K key, V value, long expireSeconds) {
-		return lPushX(super.getCurrentDbIndex(), key, value, expireSeconds);
+		return lPushX(super.getDefaultDbIndex(), key, value, expireSeconds);
 	}
 
 	@Override
@@ -1376,7 +1376,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 			
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1391,7 +1391,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> V lIndex(K key, long index) {
-		return lIndex(super.getCurrentDbIndex(), key, index);
+		return lIndex(super.getDefaultDbIndex(), key, index);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1402,7 +1402,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<V>() {
+		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
 			public V doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1416,7 +1416,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long lLen(K key) {
-		return lLen(super.getCurrentDbIndex(), key);
+		return lLen(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1426,7 +1426,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return 0L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1439,7 +1439,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V lPop(K key) {
-		return lPop(super.getCurrentDbIndex(), key);
+		return lPop(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1450,7 +1450,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<V>() {
+		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
 			public V doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1463,7 +1463,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> List<V> lRange(K key, long begin, long end) {
-		return lRange(super.getCurrentDbIndex(), key, begin, end);
+		return lRange(super.getDefaultDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1473,7 +1473,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<List<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
 
 			@Override
 			public List<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1486,7 +1486,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> List<V> lRangeAll(K key) {
-		return lRangeAll(super.getCurrentDbIndex(), key);
+		return lRangeAll(super.getDefaultDbIndex(), key);
 	}
 	
 	@Override
@@ -1496,7 +1496,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long lRem(K key, long count, V value) {
-		return lRem(super.getCurrentDbIndex(), key, count, value);
+		return lRem(super.getDefaultDbIndex(), key, count, value);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1507,7 +1507,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1520,7 +1520,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long lRemAll(K key, V value) {
-		return lRemAll(super.getCurrentDbIndex(), key, value);
+		return lRemAll(super.getDefaultDbIndex(), key, value);
 	}
 
 	@Override
@@ -1530,7 +1530,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> void lTrim(K key, long begin, long end) {
-		lTrim(super.getCurrentDbIndex(), key, begin, end);
+		lTrim(super.getDefaultDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1540,7 +1540,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		redisTemplate.execute(new RedisCallback<Object>() {
+		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1553,12 +1553,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Long rPush(K key, V value) {
-		return rPush(super.getCurrentDbIndex(), key, value);
+		return rPush(super.getDefaultDbIndex(), key, value);
 	}
 	
 	@Override
 	public <K, V> Long rPush(K key, V value, long expireSeconds) {
-		return rPush(super.getCurrentDbIndex(), key, value, expireSeconds);
+		return rPush(super.getDefaultDbIndex(), key, value, expireSeconds);
 	}
 
 	@Override
@@ -1574,12 +1574,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Long rPush(K key, V[] values) {
-		return rPush(super.getCurrentDbIndex(), key, values);
+		return rPush(super.getDefaultDbIndex(), key, values);
 	}
 	
 	@Override
 	public <K, V> Long rPush(K key, V[] values, long expireSeconds) {
-		return rPush(super.getCurrentDbIndex(), key, values, expireSeconds);
+		return rPush(super.getDefaultDbIndex(), key, values, expireSeconds);
 	}
 
 	@Override
@@ -1595,7 +1595,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1614,12 +1614,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Long rPush(K key, Collection<V> values) {
-		return rPush(super.getCurrentDbIndex(), key, values);
+		return rPush(super.getDefaultDbIndex(), key, values);
 	}
 	
 	@Override
 	public <K, V> Long rPush(K key, Collection<V> values, long expireSeconds) {
-		return rPush(super.getCurrentDbIndex(), key, values, expireSeconds);
+		return rPush(super.getDefaultDbIndex(), key, values, expireSeconds);
 	}
 	
 	@Override
@@ -1634,12 +1634,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long rPushX(K key, V value) {
-		return rPushX(super.getCurrentDbIndex(), key, value);
+		return rPushX(super.getDefaultDbIndex(), key, value);
 	}
 	
 	@Override
 	public <K, V> Long rPushX(K key, V value, long expireSeconds) {
-		return rPushX(super.getCurrentDbIndex(), key, value, expireSeconds);
+		return rPushX(super.getDefaultDbIndex(), key, value, expireSeconds);
 	}
 
 	@Override
@@ -1655,7 +1655,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 			
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1670,12 +1670,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> V rPopLPush(K srcKey, K destKey) {
-		return rPopLPush(super.getCurrentDbIndex(), srcKey, destKey);
+		return rPopLPush(super.getDefaultDbIndex(), srcKey, destKey);
 	}
 	
 	@Override
 	public <K, V> V rPopLPush(K srcKey, K destKey, long expireSeconds) {
-		return rPopLPush(super.getCurrentDbIndex(), srcKey, destKey, expireSeconds);
+		return rPopLPush(super.getDefaultDbIndex(), srcKey, destKey, expireSeconds);
 	}
 
 	@Override
@@ -1689,7 +1689,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertNotNull(srcKey, "Source key can not be null of command [rPopLPush].");
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [rPopLPush].");
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<V>() {
+		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
 			public V doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1706,7 +1706,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V rPop(K key) {
-		return rPop(super.getCurrentDbIndex(), key);
+		return rPop(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1717,7 +1717,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<V>() {
+		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
 			public V doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1730,12 +1730,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Boolean sAdd(K key, V member) {
-		return sAdd(super.getCurrentDbIndex(), key, member);
+		return sAdd(super.getDefaultDbIndex(), key, member);
 	}
 	
 	@Override
 	public <K, V> Boolean sAdd(K key, V member, long expireSeconds) {
-		return sAdd(super.getCurrentDbIndex(), key, member, expireSeconds);
+		return sAdd(super.getDefaultDbIndex(), key, member, expireSeconds);
 	}
 
 	@Override
@@ -1753,12 +1753,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Boolean sAdd(K key, V[] members) {
-		return sAdd(super.getCurrentDbIndex(), key, members);
+		return sAdd(super.getDefaultDbIndex(), key, members);
 	}
 	
 	@Override
 	public <K, V> Boolean sAdd(K key, V[] members, long expireSeconds) {
-		return sAdd(super.getCurrentDbIndex(), key, members, expireSeconds);
+		return sAdd(super.getDefaultDbIndex(), key, members, expireSeconds);
 	}
 
 	@Override
@@ -1774,7 +1774,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 			
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1793,12 +1793,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Boolean sAdd(K key, Collection<V> members) {
-		return sAdd(super.getCurrentDbIndex(), key, members);
+		return sAdd(super.getDefaultDbIndex(), key, members);
 	}
 	
 	@Override
 	public <K, V> Boolean sAdd(K key, Collection<V> members, long expireSeconds) {
-		return sAdd(super.getCurrentDbIndex(), key, members, expireSeconds);
+		return sAdd(super.getDefaultDbIndex(), key, members, expireSeconds);
 	}
 
 	@Override
@@ -1813,7 +1813,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long sCard(K key) {
-		return sCard(super.getCurrentDbIndex(), key);
+		return sCard(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1823,7 +1823,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return 0L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1835,7 +1835,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> sDiff(K[] keys) {
-		return sDiff(super.getCurrentDbIndex(), keys);
+		return sDiff(super.getDefaultDbIndex(), keys);
 	}
 
 	@Override
@@ -1843,7 +1843,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		if (ArrayUtils.isEmpty(keys))
 			return null;
 		
-		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 
 			@Override
 			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1857,7 +1857,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> sDiff(Collection<K> keys) {
-		return sDiff(super.getCurrentDbIndex(), keys);
+		return sDiff(super.getDefaultDbIndex(), keys);
 	}
 	
 	@Override
@@ -1867,12 +1867,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long sDiffStore(K destKey, K[] keys) {
-		return sDiffStore(super.getCurrentDbIndex(), destKey, keys);
+		return sDiffStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 	
 	@Override
 	public <K> Long sDiffStore(K destKey, K[] keys, long expireSeconds) {
-		return sDiffStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
+		return sDiffStore(super.getDefaultDbIndex(), destKey, keys, expireSeconds);
 	}
 
 	@Override
@@ -1887,7 +1887,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sDiffStore]");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1902,12 +1902,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long sDiffStore(K destKey, Collection<K> keys) {
-		return sDiffStore(super.getCurrentDbIndex(), destKey, keys);
+		return sDiffStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 	
 	@Override
 	public <K> Long sDiffStore(K destKey, Collection<K> keys, long expireSeconds) {
-		return sDiffStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
+		return sDiffStore(super.getDefaultDbIndex(), destKey, keys, expireSeconds);
 	}
 
 	@Override
@@ -1922,7 +1922,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> sInter(K[] keys) {
-		return sInter(super.getCurrentDbIndex(), keys);
+		return sInter(super.getDefaultDbIndex(), keys);
 	}
 
 	@Override
@@ -1930,7 +1930,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		if (ArrayUtils.isEmpty(keys))
 			return null;
 		
-		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 
 			@Override
 			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1944,7 +1944,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> sInter(Collection<K> keys) {
-		return sInter(super.getCurrentDbIndex(), keys);
+		return sInter(super.getDefaultDbIndex(), keys);
 	}
 
 	@Override
@@ -1954,12 +1954,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long sInterStore(K destKey, K[] keys) {
-		return sInterStore(super.getCurrentDbIndex(), destKey, keys);
+		return sInterStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 	
 	@Override
 	public <K> Long sInterStore(K destKey, K[] keys, long expireSeconds) {
-		return sInterStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
+		return sInterStore(super.getDefaultDbIndex(), destKey, keys, expireSeconds);
 	}
 
 	@Override
@@ -1974,7 +1974,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sInterStore]");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -1989,12 +1989,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long sInterStore(K destKey, Collection<K> keys) {
-		return sInterStore(super.getCurrentDbIndex(), destKey, keys);
+		return sInterStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 	
 	@Override
 	public <K> Long sInterStore(K destKey, Collection<K> keys, long expireSeconds) {
-		return sInterStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
+		return sInterStore(super.getDefaultDbIndex(), destKey, keys, expireSeconds);
 	}
 
 	@Override
@@ -2009,7 +2009,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Set<V> sUnion(K[] keys) {
-		return sUnion(super.getCurrentDbIndex(), keys);
+		return sUnion(super.getDefaultDbIndex(), keys);
 	}
 
 	@Override
@@ -2017,7 +2017,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		if (ArrayUtils.isEmpty(keys))
 			return null;
 		
-		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 
 			@Override
 			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2031,7 +2031,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> sUnion(Collection<K> keys) {
-		return sUnion(super.getCurrentDbIndex(), keys);
+		return sUnion(super.getDefaultDbIndex(), keys);
 	}
 
 	@Override
@@ -2041,12 +2041,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Long sUnionStore(K destKey, K[] keys) {
-		return sUnionStore(super.getCurrentDbIndex(), destKey, keys);
+		return sUnionStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 	
 	@Override
 	public <K> Long sUnionStore(K destKey, K[] keys, long expireSeconds) {
-		return sUnionStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
+		return sUnionStore(super.getDefaultDbIndex(), destKey, keys, expireSeconds);
 	}
 
 	@Override
@@ -2062,7 +2062,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sUnionStore]");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2077,12 +2077,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long sUnionStore(K destKey, Collection<K> keys) {
-		return sUnionStore(super.getCurrentDbIndex(), destKey, keys);
+		return sUnionStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 	
 	@Override
 	public <K> Long sUnionStore(K destKey, Collection<K> keys, long expireSeconds) {
-		return sUnionStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
+		return sUnionStore(super.getDefaultDbIndex(), destKey, keys, expireSeconds);
 	}
 	
 	@Override
@@ -2097,7 +2097,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean sIsMember(K key, V member) {
-		return sIsMember(super.getCurrentDbIndex(), key, member);
+		return sIsMember(super.getDefaultDbIndex(), key, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2108,7 +2108,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2120,7 +2120,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> sMembers(K key) {
-		return sMembers(super.getCurrentDbIndex(), key);
+		return sMembers(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2130,7 +2130,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 
 			@Override
 			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2143,7 +2143,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean sMove(K srcKey, K destKey, V member) {
-		return sMove(super.getCurrentDbIndex(), srcKey, destKey, member);
+		return sMove(super.getDefaultDbIndex(), srcKey, destKey, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2154,7 +2154,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2167,7 +2167,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V sPop(K key) {
-		return sPop(super.getCurrentDbIndex(), key);
+		return sPop(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2178,7 +2178,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<V>() {
+		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
 			public V doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2191,7 +2191,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V sRandMember(K key) {
-		return sRandMember(super.getCurrentDbIndex(), key);
+		return sRandMember(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2202,7 +2202,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<V>() {
+		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
 			public V doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2215,17 +2215,17 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean sRem(K key, V member) {
-		return sRem(super.getCurrentDbIndex(), key, member);
+		return sRem(super.getDefaultDbIndex(), key, member);
 	}
 
 	@Override
 	public <K, V> Boolean sRem(int dbIndex, K key, V member) {
-		return sRem(super.getCurrentDbIndex(), key, new Object[] { member });
+		return sRem(super.getDefaultDbIndex(), key, new Object[] { member });
 	}
 
 	@Override
 	public <K, V> Boolean sRem(K key, V[] members) {
-		return sRem(super.getCurrentDbIndex(), key, members);
+		return sRem(super.getDefaultDbIndex(), key, members);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2236,7 +2236,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2251,7 +2251,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean sRem(K key, Collection<V> members) {
-		return sRem(super.getCurrentDbIndex(), key, members);
+		return sRem(super.getDefaultDbIndex(), key, members);
 	}
 
 	@Override
@@ -2261,12 +2261,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Boolean zAdd(K key, double score, V member) {
-		return zAdd(super.getCurrentDbIndex(), key, score, member);
+		return zAdd(super.getDefaultDbIndex(), key, score, member);
 	}
 	
 	@Override
 	public <K, V> Boolean zAdd(K key, double score, V member, long expireSeconds) {
-		return zAdd(super.getCurrentDbIndex(), key, score, expireSeconds);
+		return zAdd(super.getDefaultDbIndex(), key, score, expireSeconds);
 	}
 
 	@Override
@@ -2284,12 +2284,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers) {
-		return zAdd(super.getCurrentDbIndex(), key, scoreMembers);
+		return zAdd(super.getDefaultDbIndex(), key, scoreMembers);
 	}
 	
 	@Override
 	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers, long expireSeconds) {
-		return zAdd(super.getCurrentDbIndex(), key, scoreMembers, expireSeconds);
+		return zAdd(super.getDefaultDbIndex(), key, scoreMembers, expireSeconds);
 	}
 
 	@Override
@@ -2306,7 +2306,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2327,7 +2327,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zCard(K key) {
-		return zCard(super.getCurrentDbIndex(), key);
+		return zCard(super.getDefaultDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2337,7 +2337,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return 0L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2349,7 +2349,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zCount(K key, double minScore, double maxScore) {
-		return zCount(super.getCurrentDbIndex(), minScore, maxScore);
+		return zCount(super.getDefaultDbIndex(), minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2359,7 +2359,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return 0L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2371,7 +2371,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRange(K key, long begin, long end) {
-		return zRange(super.getCurrentDbIndex(), key, begin, end);
+		return zRange(super.getDefaultDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2381,7 +2381,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 
 			@Override
 			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2394,7 +2394,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRangeAll(K key) {
-		return zRangeAll(super.getCurrentDbIndex(), key);
+		return zRangeAll(super.getDefaultDbIndex(), key);
 	}
 
 	@Override
@@ -2404,7 +2404,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore) {
-		return zRangeByScore(super.getCurrentDbIndex(), key, minScore, maxScore);
+		return zRangeByScore(super.getDefaultDbIndex(), key, minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2414,7 +2414,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 			
 			@Override
 			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2429,7 +2429,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore,
 			long offset, long count) {
-		return zRangeByScore(super.getCurrentDbIndex(), key, minScore, maxScore, offset, count);
+		return zRangeByScore(super.getDefaultDbIndex(), key, minScore, maxScore, offset, count);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2440,7 +2440,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 			
 			@Override
 			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2454,7 +2454,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Set<Tuple> zRangeByScoreWithScores(K key, double minScore, double maxScore) {
-		return zRangeByScoreWithScores(super.getCurrentDbIndex(), key, minScore, maxScore);
+		return zRangeByScoreWithScores(super.getDefaultDbIndex(), key, minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2465,7 +2465,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Set<Tuple>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<Tuple>>() {
 			
 			@Override
 			public Set<Tuple> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2478,7 +2478,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K> Set<Tuple> zRangeByScoreWithScores(K key, double minScore,
 			double maxScore, long offset, long count) {
-		return zRangeByScoreWithScores(super.getCurrentDbIndex(), key, minScore, maxScore, offset, count);
+		return zRangeByScoreWithScores(super.getDefaultDbIndex(), key, minScore, maxScore, offset, count);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2489,7 +2489,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Set<Tuple>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<Tuple>>() {
 			
 			@Override
 			public Set<Tuple> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2502,7 +2502,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long zRank(K key, V member) {
-		return zRank(super.getCurrentDbIndex(), key, member);
+		return zRank(super.getDefaultDbIndex(), key, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2513,7 +2513,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 			
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2525,7 +2525,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean zRem(K key, V member) {
-		return zRem(super.getCurrentDbIndex(), key, member);
+		return zRem(super.getDefaultDbIndex(), key, member);
 	}
 
 	@Override
@@ -2535,7 +2535,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean zRem(K key, V[] members) {
-		return zRem(super.getCurrentDbIndex(), key, members);
+		return zRem(super.getDefaultDbIndex(), key, members);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2546,7 +2546,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2561,7 +2561,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean zRem(K key, Collection<V> members) {
-		return zRem(super.getCurrentDbIndex(), key, members);
+		return zRem(super.getDefaultDbIndex(), key, members);
 	}
 
 	@Override
@@ -2571,7 +2571,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zRemRangeByRank(K key, long begin, long end) {
-		return zRemRangeByRank(super.getCurrentDbIndex(), key, begin, end);
+		return zRemRangeByRank(super.getDefaultDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2581,7 +2581,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return 0L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2593,7 +2593,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zRemRangeByScore(K key, double minScore, double maxScore) {
-		return zRemRangeByScore(super.getCurrentDbIndex(), key, minScore, maxScore);
+		return zRemRangeByScore(super.getDefaultDbIndex(), key, minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2604,7 +2604,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return 0L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2616,7 +2616,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRevRange(K key, long begin, long end) {
-		return zRevRange(super.getCurrentDbIndex(), key, begin, end);
+		return zRevRange(super.getDefaultDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2626,7 +2626,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 
 			@Override
 			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2639,7 +2639,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRevRangeAll(K key) {
-		return zRevRangeAll(super.getCurrentDbIndex(), key);
+		return zRevRangeAll(super.getDefaultDbIndex(), key);
 	}
 
 	@Override
@@ -2649,7 +2649,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore) {
-		return zRevRangeByScore(super.getCurrentDbIndex(), key, minScore, maxScore);
+		return zRevRangeByScore(super.getDefaultDbIndex(), key, minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2660,7 +2660,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Set<V>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 
 			@Override
 			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2673,7 +2673,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Set<Tuple> zRevRangeByScoreWithScores(K key, double minScore, double maxScore) {
-		return zRevRangeByScoreWithScores(super.getCurrentDbIndex(), key, minScore, maxScore);
+		return zRevRangeByScoreWithScores(super.getDefaultDbIndex(), key, minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2684,7 +2684,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Set<Tuple>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<Tuple>>() {
 			
 			@Override
 			public Set<Tuple> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2698,7 +2698,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K> Set<Tuple> zRevRangeByScoreWithScores(K key, double minScore,
 			double maxScore, long offset, long count) {
-		return zRevRangeByScoreWithScores(super.getCurrentDbIndex(), key, minScore, maxScore, offset, count);
+		return zRevRangeByScoreWithScores(super.getDefaultDbIndex(), key, minScore, maxScore, offset, count);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2709,7 +2709,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			return null;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Set<Tuple>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Set<Tuple>>() {
 
 			@Override
 			public Set<Tuple> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2722,7 +2722,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long zRevRank(K key, V member) {
-		return zRevRank(super.getCurrentDbIndex(), key, member);
+		return zRevRank(super.getDefaultDbIndex(), key, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2733,7 +2733,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 			
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2745,7 +2745,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Double zScore(K key, V member) {
-		return zScore(super.getCurrentDbIndex(), key, member);
+		return zScore(super.getDefaultDbIndex(), key, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2756,7 +2756,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Double>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Double>() {
 
 			@Override
 			public Double doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2768,7 +2768,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zUnionStore(K destKey, K key) {
-		return zUnionStore(super.getCurrentDbIndex(), destKey, key);
+		return zUnionStore(super.getDefaultDbIndex(), destKey, key);
 	}
 
 	@Override
@@ -2779,7 +2779,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zUnionStore(K destKey, K[] keys) {
-		return zUnionStore(super.getCurrentDbIndex(), destKey, keys);
+		return zUnionStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2789,7 +2789,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zUnionStore].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2802,7 +2802,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zUnionStore(K destKey, Collection<K> keys) {
-		return zUnionStore(super.getCurrentDbIndex(), destKey, keys);
+		return zUnionStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 
 	@Override
@@ -2812,7 +2812,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, K[] keys) {
-		return zUnionStore(super.getCurrentDbIndex(), destKey, aggregate, weights, keys);
+		return zUnionStore(super.getDefaultDbIndex(), destKey, aggregate, weights, keys);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2823,7 +2823,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zUnionStore].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2836,7 +2836,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys) {
-		return zUnionStore(super.getCurrentDbIndex(), destKey, aggregate, weights, keys);
+		return zUnionStore(super.getDefaultDbIndex(), destKey, aggregate, weights, keys);
 	}
 
 	@Override
@@ -2847,7 +2847,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Long zInterStore(K destKey, K srcKey) {
-		return zInterStore(super.getCurrentDbIndex(), destKey, srcKey);
+		return zInterStore(super.getDefaultDbIndex(), destKey, srcKey);
 	}
 
 	@Override
@@ -2858,7 +2858,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zInterStore(K destKey, K[] keys) {
-		return zInterStore(super.getCurrentDbIndex(), destKey, keys);
+		return zInterStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2868,7 +2868,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zInterStore].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2881,7 +2881,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zInterStore(K destKey, Collection<K> keys) {
-		return zInterStore(super.getCurrentDbIndex(), destKey, keys);
+		return zInterStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 
 	@Override
@@ -2891,7 +2891,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, K[] keys) {
-		return zInterStore(super.getCurrentDbIndex(), destKey, aggregate, weights, keys);
+		return zInterStore(super.getDefaultDbIndex(), destKey, aggregate, weights, keys);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2902,7 +2902,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zInterStore].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2915,7 +2915,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys) {
-		return zInterStore(super.getCurrentDbIndex(), destKey, aggregate, weights, keys);
+		return zInterStore(super.getDefaultDbIndex(), destKey, aggregate, weights, keys);
 	}
 
 	@Override
@@ -2926,7 +2926,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Double zIncrBy(K key, double increment, V member) {
-		return zIncrBy(super.getCurrentDbIndex(), key, increment, member);
+		return zIncrBy(super.getDefaultDbIndex(), key, increment, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2937,7 +2937,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return redisTemplate.execute(new RedisCallback<Double>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Double>() {
 
 			@Override
 			public Double doInRedis(RedisConnection connection) throws DataAccessException {
@@ -2950,12 +2950,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public Long dbSize() {
-		return dbSize(super.getCurrentDbIndex());
+		return dbSize(super.getDefaultDbIndex());
 	}
 
 	@Override
 	public Long dbSize(int dbIndex) {
-		return redisTemplate.execute(new RedisCallback<Long>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection)
@@ -2967,7 +2967,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public void flushAll() {
-		redisTemplate.execute(new RedisCallback<Object>() {
+		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 			
 			@Override
 			public Object doInRedis(RedisConnection connection)
@@ -2980,12 +2980,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public void flushDb() {
-		this.flushDb(super.getCurrentDbIndex());
+		this.flushDb(super.getDefaultDbIndex());
 	}
 
 	@Override
 	public void flushDb(final int dbIndex) {
-		redisTemplate.execute(new RedisCallback<Object>() {
+		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
 			public Object doInRedis(RedisConnection connection)
@@ -2999,7 +2999,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public void shutdown() {
-		redisTemplate.execute(new RedisCallback<Object>() {
+		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
 			public Object doInRedis(RedisConnection connection)
