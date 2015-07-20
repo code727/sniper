@@ -34,7 +34,7 @@ import org.springframework.data.redis.connection.SortParameters;
 public interface RedisKeyCommandsDao {
 	
 	/**
-	 * @description 获取默认第0库中所有的键
+	 * @description 获取当前库中所有的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -49,7 +49,7 @@ public interface RedisKeyCommandsDao {
 	public <K> Set<K> keys(int dbIndex);
 	
 	/**
-	 * @description 获取默认第0库中指定模式的键集
+	 * @description 获取当前库中指定模式的键集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @return
@@ -66,7 +66,7 @@ public interface RedisKeyCommandsDao {
 	public <K> Set<K> keys(int dbIndex, String pattern);
 	
 	/**
-	 * @description 删除默认第0库指定的键
+	 * @description 删除当前库指定的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -83,7 +83,7 @@ public interface RedisKeyCommandsDao {
 	public <K> Long del(int dbIndex, K key);
 	
 	/**
-	 * @description 删除默认第0库指定的多个键
+	 * @description 删除当前库指定的多个键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keys
 	 * @return
@@ -100,7 +100,7 @@ public interface RedisKeyCommandsDao {
 	public <K> Long del(int dbIndex, K[] keys);
 	
 	/**
-	 * @description 删除默认第0库指定的多个键
+	 * @description 删除当前库指定的多个键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keys
 	 * @return
@@ -117,7 +117,7 @@ public interface RedisKeyCommandsDao {
 	public <K> Long del(int dbIndex, Collection<K> keys);
 	
 	/**
-	 * @description 判断默认第0库中指定键是否存在
+	 * @description 判断当前库中指定键是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -134,7 +134,7 @@ public interface RedisKeyCommandsDao {
 	public <K> Boolean exists(int dbIndex, K key);
 	
 	/**
-	 * @description 设置默认第0库中指定键的过期秒数
+	 * @description 设置当前库中指定键的过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param seconds
@@ -153,7 +153,7 @@ public interface RedisKeyCommandsDao {
 	public <K> Boolean expire(int dbIndex, K key, long seconds);
 	
 	/**
-	 * @description 设置默认第0库中指定键的过期时间戳
+	 * @description 设置当前库中指定键的过期时间戳
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param timestamp
@@ -172,7 +172,7 @@ public interface RedisKeyCommandsDao {
 	public <K> Boolean expireAt(int dbIndex, K key, long timestamp); 
 	
 	/**
-	 * @description 设置默认第0库中指定键的过期日期
+	 * @description 设置当前库中指定键的过期日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param date
@@ -191,7 +191,7 @@ public interface RedisKeyCommandsDao {
 	public <K> Boolean expireAt(int dbIndex, K key, Date date); 
 		
 	/**
-	 * @description 将默认第0库的键移动到目标库
+	 * @description 将当前库的键移动到目标库
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param targetIndex
@@ -210,7 +210,7 @@ public interface RedisKeyCommandsDao {
 	public <K> Boolean move(int dbIndex, K key, int targetIndex);
 	
 	/**
-	 * @description 获取默认第0库的指定键的剩余秒数
+	 * @description 获取当前库的指定键的剩余秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -227,7 +227,7 @@ public interface RedisKeyCommandsDao {
 	public <K> Long ttl(int dbIndex, K key);
 	
 	/**
-	 * @description 将默认第0库的键按照指定的规则进行排序
+	 * @description 将当前库的键按照指定的规则进行排序
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param params
@@ -246,7 +246,7 @@ public interface RedisKeyCommandsDao {
 	public <K, V> List<V> sort(int dbIndex, K key, SortParameters params);
 	
 	/**
-	 * @description 将默认第0库的键按照指定的规则进行排序后返回存入目标键的结果个数
+	 * @description 将当前库的键按照指定的规则进行排序后返回存入目标键的结果个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param params
@@ -267,7 +267,7 @@ public interface RedisKeyCommandsDao {
 	public <K, V> Long sortCount(int dbIndex, K key, SortParameters params, K targetKey);
 	
 	/**
-	 * @description 将默认第0库的键按照指定的规则进行排序后返回存入目标键的结果列表
+	 * @description 将当前库的键按照指定的规则进行排序后返回存入目标键的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param params
@@ -288,7 +288,7 @@ public interface RedisKeyCommandsDao {
 	public <K, V> List<V> sortResult(int dbIndex, K key, SortParameters params, K targetKey);
 	
 	/**
-	 * @description 获取默认第0库的键对应的值类型
+	 * @description 获取当前库的键对应的值类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -305,7 +305,7 @@ public interface RedisKeyCommandsDao {
 	public <K> DataType type(int dbIndex, K key);
 	
 	/**
-	 * @description 获取默认第0库中所有键对应的值
+	 * @description 获取当前库中所有键对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -320,7 +320,7 @@ public interface RedisKeyCommandsDao {
 	public <V> Set<V> values(int dbIndex);
 	
 	/**
-	 * @description 获取默认第0库中匹配模式的键对应的值
+	 * @description 获取当前库中匹配模式的键对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @return

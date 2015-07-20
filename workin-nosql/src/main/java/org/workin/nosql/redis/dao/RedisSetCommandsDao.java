@@ -29,13 +29,23 @@ import java.util.Set;
 public interface RedisSetCommandsDao {
 	
 	/**
-	 * @description 在默认第0库中执行sAdd命令
+	 * @description 在当前库中执行sAdd命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param member
 	 * @return
 	 */
 	public <K, V> Boolean sAdd(K key, V member);
+	
+	/**
+	 * @description 在当前库中执行sAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param member
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Boolean sAdd(K key, V member, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sAdd命令
@@ -48,13 +58,34 @@ public interface RedisSetCommandsDao {
 	public <K, V> Boolean sAdd(int dbIndex, K key, V member);
 	
 	/**
-	 * @description 在默认第0库中执行sAdd命令
+	 * @description 在指定索引库中执行sAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param member
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Boolean sAdd(int dbIndex, K key, V member, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行sAdd命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param members
 	 * @return
 	 */
 	public <K, V> Boolean sAdd(K key, V[] members);
+	
+	/**
+	 * @description 在当前库中执行sAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param members
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Boolean sAdd(K key, V[] members, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sAdd命令
@@ -67,13 +98,34 @@ public interface RedisSetCommandsDao {
 	public <K, V> Boolean sAdd(int dbIndex, K key, V[] members);
 	
 	/**
-	 * @description 在默认第0库中执行sAdd命令
+	 * @description 在指定索引库中执行sAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param members
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Boolean sAdd(int dbIndex, K key, V[] members, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行sAdd命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param memberss
 	 * @return
 	 */
 	public <K, V> Boolean sAdd(K key, Collection<V> members);
+	
+	/**
+	 * @description 在当前库中执行sAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param members
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Boolean sAdd(K key, Collection<V> members, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sAdd命令
@@ -86,7 +138,18 @@ public interface RedisSetCommandsDao {
 	public <K, V> Boolean sAdd(int dbIndex, K key, Collection<V> members);
 	
 	/**
-	 * @description 在默认第0库中执行sCard命令，获取集合键对应的元素个数
+	 * @description 在指定索引库中执行sAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param members
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Boolean sAdd(int dbIndex, K key, Collection<V> members, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行sCard命令，获取集合键对应的元素个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -103,7 +166,7 @@ public interface RedisSetCommandsDao {
 	public <K> Long sCard(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行sDiff命令，获取多个键集之间的差集
+	 * @description 在当前库中执行sDiff命令，获取多个键集之间的差集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keys
 	 * @return
@@ -120,7 +183,7 @@ public interface RedisSetCommandsDao {
 	public <K, V> Set<V> sDiff(int dbIndex, K[] keys);
 	
 	/**
-	 * @description 在默认第0库中执行sDiff命令，获取多个键集之间的差集
+	 * @description 在当前库中执行sDiff命令，获取多个键集之间的差集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keys
 	 * @return
@@ -137,13 +200,24 @@ public interface RedisSetCommandsDao {
 	public <K, V> Set<V> sDiff(int dbIndex, Collection<K> keys);
 	
 	/**
-	 * @description 在默认第0库中执行sDiffStore命令，将返回的差集存入指定的目标键
+	 * @description 在当前库中执行sDiffStore命令，将返回的差集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
 	public <K> Long sDiffStore(K destKey, K[] keys);
+	
+	/**
+	 * @description 在当前库中执行sDiffStore命令，
+	 * 				将返回的差集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sDiffStore(K destKey, K[] keys, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sDiffStore命令，将返回的差集存入指定的目标键
@@ -156,13 +230,36 @@ public interface RedisSetCommandsDao {
 	public <K> Long sDiffStore(int dbIndex, K destKey, K[] keys);
 	
 	/**
-	 * @description 在默认第0库中执行sDiffStore命令，将返回的差集存入指定的目标键
+	 * @description 在指定索引库中执行sDiffStore命令，
+	 * 				将返回的差集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sDiffStore(int dbIndex, K destKey, K[] keys, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行sDiffStore命令，将返回的差集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
 	public <K> Long sDiffStore(K destKey, Collection<K> keys);
+	
+	/**
+	 * @description 在当前库中执行sDiffStore命令，
+	 * 				将返回的差集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sDiffStore(K destKey, Collection<K> keys, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sDiffStore命令，将返回的差集存入指定的目标键
@@ -175,7 +272,19 @@ public interface RedisSetCommandsDao {
 	public <K> Long sDiffStore(int dbIndex, K destKey, Collection<K> keys);
 	
 	/**
-	 * @description 在默认第0库中执行sInter命令，获取多个键集之间的交集
+	 * @description 在当前库中执行sDiffStore命令，
+	 * 				将返回的差集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sDiffStore(int dbIndex, K destKey, Collection<K> keys, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行sInter命令，获取多个键集之间的交集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keys
 	 * @return
@@ -192,7 +301,7 @@ public interface RedisSetCommandsDao {
 	public <K, V> Set<V> sInter(int dbIndex, K[] keys);
 	
 	/**
-	 * @description 在默认第0库中执行sInter命令，获取多个键集之间的交集
+	 * @description 在当前库中执行sInter命令，获取多个键集之间的交集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keys
 	 * @return
@@ -209,13 +318,24 @@ public interface RedisSetCommandsDao {
 	public <K, V> Set<V> sInter(int dbIndex, Collection<K> keys);
 	
 	/**
-	 * @description 在默认第0库中执行sInterStore命令，将返回的交集存入指定的目标键
+	 * @description 在当前库中执行sInterStore命令，将返回的交集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
 	public <K> Long sInterStore(K destKey, K[] keys);
+	
+	/**
+	 * @description 在当前库中执行sInterStore命令，
+	 * 				将返回的交集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sInterStore(K destKey, K[] keys, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sInterStore命令，将返回的交集存入指定的目标键
@@ -228,13 +348,36 @@ public interface RedisSetCommandsDao {
 	public <K> Long sInterStore(int dbIndex, K destKey, K[] keys);
 	
 	/**
-	 * @description 在默认第0库中执行sInterStore命令，将返回的交集存入指定的目标键
+	 * @description 在指定索引库中执行sInterStore命令，
+	 * 				将返回的交集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sInterStore(int dbIndex, K destKey, K[] keys, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行sInterStore命令，将返回的交集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
 	public <K> Long sInterStore(K destKey, Collection<K> keys);
+	
+	/**
+	 * @description 在当前库中执行sInterStore命令，
+	 * 				将返回的交集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sInterStore(K destKey, Collection<K> keys, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sInterStore命令，将返回的交集存入指定的目标键
@@ -247,7 +390,19 @@ public interface RedisSetCommandsDao {
 	public <K> Long sInterStore(int dbIndex, K destKey, Collection<K> keys);
 	
 	/**
-	 * @description 在默认第0库中执行sUnion命令，获取多个键集之间的并集
+	 * @description 在指定索引库中执行sInterStore命令，
+	 * 				将返回的交集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sInterStore(int dbIndex, K destKey, Collection<K> keys, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行sUnion命令，获取多个键集之间的并集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keys
 	 * @return
@@ -264,7 +419,7 @@ public interface RedisSetCommandsDao {
 	public <K, V> Set<V> sUnion(int dbIndex, K[] keys);
 	
 	/**
-	 * @description 在默认第0库中执行sInter命令，获取多个键集之间的并集
+	 * @description 在当前库中执行sInter命令，获取多个键集之间的并集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keys
 	 * @return
@@ -281,13 +436,24 @@ public interface RedisSetCommandsDao {
 	public <K, V> Set<V> sUnion(int dbIndex, Collection<K> keys);
 	
 	/**
-	 * @description 在默认第0库中执行sUnionStore命令，将返回的并集存入指定的目标键
+	 * @description 在当前库中执行sUnionStore命令，将返回的并集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
 	public <K> Long sUnionStore(K destKey, K[] keys);
+	
+	/**
+	 * @description 在当前库中执行sUnionStore命令，
+	 * 				将返回的并集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sUnionStore(K destKey, K[] keys, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sUnionStore命令，将返回的并集存入指定的目标键
@@ -300,13 +466,36 @@ public interface RedisSetCommandsDao {
 	public <K> Long sUnionStore(int dbIndex, K destKey, K[] keys);
 	
 	/**
-	 * @description 在默认第0库中执行sUnionStore命令，将返回的并集存入指定的目标键
+	 * @description 在指定索引库中执行sUnionStore命令，
+	 * 				将返回的并集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sUnionStore(int dbIndex, K destKey, K[] keys, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行sUnionStore命令，将返回的并集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
 	public <K> Long sUnionStore(K destKey, Collection<K> keys);
+	
+	/**
+	 * @description 在当前库中执行sUnionStore命令，
+	 * 				将返回的并集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sUnionStore(K destKey, Collection<K> keys, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sUnionStore命令，将返回的并集存入指定的目标键
@@ -319,7 +508,19 @@ public interface RedisSetCommandsDao {
 	public <K> Long sUnionStore(int dbIndex, K destKey, Collection<K> keys);
 	
 	/**
-	 * @description 在默认第0库中执行sIsMember命令，判断集合键中是否存在指定的成员元素
+	 * @description 在指定索引库中执行sUnionStore命令，
+	 * 				将返回的并集存入指定的目标键，并设置过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sUnionStore(int dbIndex, K destKey, Collection<K> keys, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行sIsMember命令，判断集合键中是否存在指定的成员元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param member
@@ -338,7 +539,7 @@ public interface RedisSetCommandsDao {
 	public <K, V> Boolean sIsMember(int dbIndex, K key, V member);
 	
 	/**
-	 * @description 在默认第0库中执行sMembers命令，获取集合键对应的所有成员元素
+	 * @description 在当前库中执行sMembers命令，获取集合键对应的所有成员元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -355,7 +556,7 @@ public interface RedisSetCommandsDao {
 	public <K, V> Set<V> sMembers(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行sMove命令，将源集合键指定的成员移到目标集合键中
+	 * @description 在当前库中执行sMove命令，将源集合键指定的成员移到目标集合键中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param srcKey
 	 * @param destKey
@@ -376,7 +577,7 @@ public interface RedisSetCommandsDao {
 	public <K, V> Boolean sMove(int dbIndex, K srcKey, K destKey, V member);
 	
 	/**
-	 * @description 在默认第0库中执行sPop命令，删除并返回集合键中的一个随机成员
+	 * @description 在当前库中执行sPop命令，删除并返回集合键中的一个随机成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -393,7 +594,7 @@ public interface RedisSetCommandsDao {
 	public <K, V> V sPop(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行sRandMember命令，获取集合键中的一个随机成员
+	 * @description 在当前库中执行sRandMember命令，获取集合键中的一个随机成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -410,7 +611,7 @@ public interface RedisSetCommandsDao {
 	public <K, V> V sRandMember(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行sRem命令，删除集合键中指定的一个成员
+	 * @description 在当前库中执行sRem命令，删除集合键中指定的一个成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param member
@@ -429,7 +630,7 @@ public interface RedisSetCommandsDao {
 	public <K, V> Boolean sRem(int dbIndex, K key, V member);
 	
 	/**
-	 * @description 在默认第0库中执行sRem命令，删除集合键中指定的多个成员
+	 * @description 在当前库中执行sRem命令，删除集合键中指定的多个成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param members
@@ -448,7 +649,7 @@ public interface RedisSetCommandsDao {
 	public <K, V> Boolean sRem(int dbIndex, K key, V[] members);
 	
 	/**
-	 * @description 在默认第0库中执行sRem命令，删除集合键中指定的多个成员
+	 * @description 在当前库中执行sRem命令，删除集合键中指定的多个成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param members

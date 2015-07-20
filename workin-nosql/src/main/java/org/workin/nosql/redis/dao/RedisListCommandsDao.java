@@ -31,7 +31,7 @@ import org.springframework.data.redis.connection.RedisListCommands.Position;
 public interface RedisListCommandsDao {
 	
 	/**
-	 * @description 在默认第0库中执行lInsert命令
+	 * @description 在当前库中执行lInsert命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param where
@@ -40,6 +40,18 @@ public interface RedisListCommandsDao {
 	 * @return
 	 */
 	public <K, V> Long lInsert(K key, Position where, V pivot, V value);
+	
+	/**
+	 * @description 在当前库中执行lInsert命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param where
+	 * @param pivot
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lInsert(K key, Position where, V pivot, V value, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行lInsert命令
@@ -54,13 +66,36 @@ public interface RedisListCommandsDao {
 	public <K, V> Long lInsert(int dbIndex, K key, Position where, V pivot, V value);
 	
 	/**
-	 * @description 在默认第0库中执行lSet命令
+	 * @description 在指定索引库中执行lInsert命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param where
+	 * @param pivot
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lInsert(int dbIndex, K key, Position where, V pivot, V value, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行lSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param posttion
 	 * @param value
 	 */
 	public <K, V> void lSet(K key, long posttion, V value);
+	
+	/**
+	 * @description 在当前库中执行lSet命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param posttion
+	 * @param value
+	 * @param expireSeconds
+	 */
+	public <K, V> void lSet(K key, long posttion, V value, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行lSet命令
@@ -73,13 +108,34 @@ public interface RedisListCommandsDao {
 	public <K, V> void lSet(int dbIndex, K key, long posttion, V value);
 	
 	/**
-	 * @description 在默认第0库中执行lPush命令
+	 * @description 在指定索引库中执行lSet命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param posttion
+	 * @param value
+	 * @param expireSeconds
+	 */
+	public <K, V> void lSet(int dbIndex, K key, long posttion, V value, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行lPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
 	 * @return
 	 */
 	public <K, V> Long lPush(K key, V value);
+	
+	/**
+	 * @description 在当前库中执行lPush命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lPush(K key, V value, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行lPushX命令
@@ -92,13 +148,34 @@ public interface RedisListCommandsDao {
 	public <K, V> Long lPush(int dbIndex, K key, V value);
 	
 	/**
-	 * @description 在默认第0库中批量执行lPush命令
+	 * @description 在指定索引库中执行lPushX命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lPush(int dbIndex, K key, V value, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中批量执行lPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param values
 	 * @return
 	 */
 	public <K, V> Long lPush(K key, V[] values);
+	
+	/**
+	 * @description 在当前库中批量执行lPush命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param values
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lPush(K key, V[] values, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中批量执行lPushX命令
@@ -111,13 +188,34 @@ public interface RedisListCommandsDao {
 	public <K, V> Long lPush(int dbIndex, K key, V[] values);
 	
 	/**
-	 * @description 在默认第0库中批量执行lPush命令
+	 * @description 在指定索引库中批量执行lPushX命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param values
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lPush(int dbIndex, K key, V[] values, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中批量执行lPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param values
 	 * @return
 	 */
 	public <K, V> Long lPush(K key, Collection<V> values);
+	
+	/**
+	 * @description 在指定索引库中批量执行lPushX命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param values
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lPush(K key, Collection<V> values, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中批量执行lPushX命令
@@ -130,13 +228,34 @@ public interface RedisListCommandsDao {
 	public <K, V> Long lPush(int dbIndex, K key, Collection<V> values);
 	
 	/**
-	 * @description 在默认第0库中执行lPushX命令
+	 * @description 在指定索引库中批量执行lPushX命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param values
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lPush(int dbIndex, K key, Collection<V> values, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行lPushX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
 	 * @return
 	 */
 	public <K, V> Long lPushX(K key, V value);
+	
+	/**
+	 * @description 在当前库中执行lPushX命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lPushX(K key, V value, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行lPushX命令
@@ -149,7 +268,18 @@ public interface RedisListCommandsDao {
 	public <K, V> Long lPushX(int dbIndex, K key, V value);
 	
 	/**
-	 * @description 在默认第0库中执行lIndex命令，获取指定下标位对应的元素值
+	 * @description 在当前库中执行lPushX命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lPushX(int dbIndex, K key, V value, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行lIndex命令，获取指定下标位对应的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param index
@@ -168,7 +298,7 @@ public interface RedisListCommandsDao {
 	public <K, V> V lIndex(int dbIndex, K key, long index);
 	
 	/**
-	 * @description 在默认第0库中执行lLen命令，获取指定键的元素合数
+	 * @description 在当前库中执行lLen命令，获取指定键的元素合数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -185,7 +315,7 @@ public interface RedisListCommandsDao {
 	public <K> Long lLen(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行lPop命令，删除并返回原列表栈顶的元素
+	 * @description 在当前库中执行lPop命令，删除并返回原列表栈顶的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -202,7 +332,7 @@ public interface RedisListCommandsDao {
 	public <K, V> V lPop(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行lRange命令，获取指定键列表下标在区间范围内的所有元素
+	 * @description 在当前库中执行lRange命令，获取指定键列表下标在区间范围内的所有元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -223,7 +353,7 @@ public interface RedisListCommandsDao {
 	public <K, V> List<V> lRange(int dbIndex, K key, long begin, long end);
 	
 	/**
-	 * @description 在默认第0库中执行lRange命令，获取指定键列表中的所有元素
+	 * @description 在当前库中执行lRange命令，获取指定键列表中的所有元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -244,7 +374,7 @@ public interface RedisListCommandsDao {
 	public <K, V> List<V> lRangeAll(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行lRem命令，删除键列表中count个与指定值相等的元素
+	 * @description 在当前库中执行lRem命令，删除键列表中count个与指定值相等的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param count
@@ -265,7 +395,7 @@ public interface RedisListCommandsDao {
 	public <K, V> Long lRem(int dbIndex, K key, long count, V value);
 	
 	/**
-	 * @description 在默认第0库中执行lRem命令，删除键列表中所有与指定相等的元素
+	 * @description 在当前库中执行lRem命令，删除键列表中所有与指定相等的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
@@ -284,7 +414,7 @@ public interface RedisListCommandsDao {
 	public <K, V> Long lRemAll(int dbIndex, K key, V value);
 	
 	/**
-	 * @description 在默认第0库中执行lTrim命令，删除键列表下标在区间范围外的所有子元素
+	 * @description 在当前库中执行lTrim命令，删除键列表下标在区间范围外的所有子元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -303,13 +433,23 @@ public interface RedisListCommandsDao {
 	public <K> void lTrim(int dbIndex, K key, long begin, long end);
 	
 	/**
-	 * @description 在默认第0库中执行rPush命令
+	 * @description 在当前库中执行rPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
 	 * @return
 	 */
 	public <K, V> Long rPush(K key, V value);
+	
+	/**
+	 * @description 在当前库中执行rPush命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long rPush(K key, V value, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行lPush命令
@@ -322,13 +462,34 @@ public interface RedisListCommandsDao {
 	public <K, V> Long rPush(int dbIndex, K key, V value);
 	
 	/**
-	 * @description 在默认第0库中批量执行rPush命令
+	 * @description 在当前库中执行rPush命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long rPush(int dbIndex, K key, V value, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中批量执行rPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param values
 	 * @return
 	 */
 	public <K, V> Long rPush(K key, V[] values);
+	
+	/**
+	 * @description 在当前库中批量执行rPush命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param values
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long rPush(K key, V[] values, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中批量执行rPush命令
@@ -341,7 +502,18 @@ public interface RedisListCommandsDao {
 	public <K, V> Long rPush(int dbIndex, K key, V[] values);
 	
 	/**
-	 * @description 在默认第0库中批量执行rPush命令
+	 * @description 在当前库中批量执行rPush命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param values
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long rPush(int dbIndex, K key, V[] values, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中批量执行rPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param values
@@ -350,7 +522,17 @@ public interface RedisListCommandsDao {
 	public <K, V> Long rPush(K key, Collection<V> values);
 	
 	/**
-	 * @description 在指定索引库中批量执行lPushX命令
+	 * @description 在当前库中批量执行rPush命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param values
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long rPush(K key, Collection<V> values, long expireSeconds);
+	
+	/**
+	 * @description 在指定索引库中批量执行rPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param key
@@ -360,7 +542,18 @@ public interface RedisListCommandsDao {
 	public <K, V> Long rPush(int dbIndex, K key, Collection<V> values);
 	
 	/**
-	 * @description 在默认第0库中执行rPushX命令
+	 * @description 在指定索引库中批量执行rPush命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param values
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long rPush(int dbIndex, K key, Collection<V> values, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行rPushX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
@@ -369,7 +562,17 @@ public interface RedisListCommandsDao {
 	public <K, V> Long rPushX(K key, V value);
 	
 	/**
-	 * @description 在指定索引库中执行lPushX命令
+	 * @description 在当前库中执行rPushX命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long rPushX(K key, V value, long expireSeconds);
+	
+	/**
+	 * @description 在指定索引库中执行rPushX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param key
@@ -379,13 +582,34 @@ public interface RedisListCommandsDao {
 	public <K, V> Long rPushX(int dbIndex, K key, V value);
 	
 	/**
-	 * @description 在默认第0库中执行rPopLPush命令
+	 * @description 在指定索引库中执行rPushX命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long rPushX(int dbIndex, K key, V value, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行rPopLPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param srcKey
 	 * @param destKey
 	 * @return
 	 */
 	public <K, V> V rPopLPush(K srcKey, K destKey);
+	
+	/**
+	 * @description 在当前库中执行rPopLPush命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param srcKey
+	 * @param destKey
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> V rPopLPush(K srcKey, K destKey, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行rPopLPush命令
@@ -398,7 +622,18 @@ public interface RedisListCommandsDao {
 	public <K, V> V rPopLPush(int dbIndex, K srcKey, K destKey);
 	
 	/**
-	 * @description 在默认第0库中执行rPop命令，删除并返回原列表栈底的元素
+	 * @description 在指定索引库中执行rPopLPush命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param srcKey
+	 * @param destKey
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> V rPopLPush(int dbIndex, K srcKey, K destKey, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行rPop命令，删除并返回原列表栈底的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return

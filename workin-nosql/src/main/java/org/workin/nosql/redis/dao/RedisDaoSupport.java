@@ -103,6 +103,16 @@ public abstract class RedisDaoSupport implements InitializingBean {
 		this.globalHashValueSerializer = this.redisTemplate.getHashValueSerializer();
 		
 		this.currentDb = ApplicationContextHolder.newMapThreadLocalContext();
+		this.currentDb.setAttribute(DataSourceHolder.getDataSourceName(), 0);
+	}
+	
+	/**
+	 * @description 获取当前库的索引
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	protected int getCurrentDbIndex() {
+		return this.currentDb.getAttribute(DataSourceHolder.getDataSourceName());
 	}
 	
 	/**
@@ -138,7 +148,7 @@ public abstract class RedisDaoSupport implements InitializingBean {
 	 */
 	protected RedisRepository select(RedisConnection connection, int dbIndex) {
 		Integer currentIndex = currentDb.getAttribute(DataSourceHolder.getDataSourceName());
-		// 避免在同一个连接中重复多次选择同一个库，包括在数据源环境下
+		// 避免在同一个连接中重复多次选择同一个库，包括在多数据源环境下
 		if (currentIndex == null || currentIndex != dbIndex) {
 			connection.select(dbIndex);
 			currentDb.setAttribute(DataSourceHolder.getDataSourceName(), dbIndex);
@@ -147,7 +157,7 @@ public abstract class RedisDaoSupport implements InitializingBean {
 	}
 		
 	/**
-	 * @description 设置当前库数据键的过期时间
+	 * @description 设置当前库数据键的全局过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param repository
@@ -156,15 +166,30 @@ public abstract class RedisDaoSupport implements InitializingBean {
 	protected void setExpireTime(RedisConnection connection, RedisRepository repository, byte[] key) {
 		if (repository != null) {
 			String timeUnit = repository.getTimeUnit();
-			long expireTime = DateUtils.getSecond(repository.getExpireTime(), 
+			long expireSeconds = DateUtils.getSecond(repository.getExpireTime(), 
 					StringUtils.safeString(timeUnit).trim().toLowerCase());
-			if (expireTime > 0) 
-				connection.expire(key, expireTime);
+			if (expireSeconds > 0) 
+				connection.expire(key, expireSeconds);
 		}
 	}
 	
+	/**
+	 * @description 设置当前库数据键的过期时间。当参数expireTime小于等于0时，则使用当前库设置的全局过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param connection
+	 * @param repository
+	 * @param key
+	 * @param expireSeconds
+	 */
+	protected void setExpireTime(RedisConnection connection, RedisRepository repository, byte[] key, long expireSeconds) {
+		if (expireSeconds > 0)
+			connection.expire(key, expireSeconds);
+		else
+			this.setExpireTime(connection, repository, key);
+	}
+	
 	/** 
-	 * @description 设置当前库多个数据键的过期时间
+	 * @description 设置当前库多个数据键的全局过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param repository
@@ -180,6 +205,22 @@ public abstract class RedisDaoSupport implements InitializingBean {
 					connection.expire(keyByte, expireTime);
 			}
 		}
+	}
+	
+	/**
+	 * @description 设置当前库多个数据键的过期时间。当参数expireTime小于等于0时，则使用当前库设置的全局过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param connection
+	 * @param repository
+	 * @param keySet
+	 * @param expireSeconds
+	 */
+	protected void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keySet, long expireSeconds) {
+		if (expireSeconds > 0) {
+			for (byte[] keyByte : keySet) 
+				connection.expire(keyByte, expireSeconds);
+		} else 
+			this.setExpireTime(connection, repository, keySet);
 	}
 	
 	/**

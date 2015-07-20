@@ -26,7 +26,7 @@ package org.workin.nosql.redis.dao;
 public interface RedisServerCommands {
 	
 	/**
-	 * @description 在默认第0库中执行dbSize命令，获取当前库中键的个数
+	 * @description 在当前库中执行dbSize命令，获取当前库中键的个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -47,7 +47,7 @@ public interface RedisServerCommands {
 	public void flushAll();
 	
 	/**
-	 * @description 在默认第0库中执行flushDb命令，清空当前库中的所有数据
+	 * @description 在当前库中执行flushDb命令，清空当前库中的所有数据
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public void flushDb();

@@ -31,7 +31,7 @@ import java.util.Set;
 public interface RedisHashCommandsDao {
 	
 	/**
-	 * @description 在默认第0库中执行hSet命令
+	 * @description 在当前库中执行hSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key 键
 	 * @param field 域
@@ -39,6 +39,17 @@ public interface RedisHashCommandsDao {
 	 * @return
 	 */
 	public <K, F, V> Boolean hSet(K key, F field, V value);
+	
+	/**
+	 * @description 在当前库中执行hSet命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param field
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, F, V> Boolean hSet(K key, F field, V value, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行hSet命令
@@ -52,7 +63,19 @@ public interface RedisHashCommandsDao {
 	public <K, F, V> Boolean hSet(int dbIndex, K key, F field, V value);
 	
 	/**
-	 * @description 在默认第0库中执行hSetNX命令
+	 * @description 在当前库中执行hSet命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param field
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, F, V> Boolean hSet(int dbIndex, K key, F field, V value, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行hSetNX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key 键
 	 * @param field 域
@@ -60,6 +83,17 @@ public interface RedisHashCommandsDao {
 	 * @return
 	 */
 	public <K, F, V> Boolean hSetNX(K key, F field, V value);
+	
+	/**
+	 * @description 在当前库中执行hSetNX命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param field
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, F, V> Boolean hSetNX(K key, F field, V value, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行hSetNX命令
@@ -73,12 +107,33 @@ public interface RedisHashCommandsDao {
 	public <K, F, V> Boolean hSetNX(int dbIndex, K key, F field, V value);
 	
 	/**
-	 * @description 在默认第0库中执行hMSet命令
+	 * @description 在指定索引库中执行hSetNX命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param field
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, F, V> Boolean hSetNX(int dbIndex, K key, F field, V value, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行hMSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key 键
 	 * @param fValues 域-值映射集
 	 */
 	public <K, F, V> void hMSet(K key, Map<F, V> fValues);
+	
+	/**
+	 * @description 在当前库中执行hMSet命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param fValues
+	 * @param expireSeconds
+	 */
+	public <K, F, V> void hMSet(K key, Map<F, V> fValues, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行hMSet命令
@@ -90,7 +145,17 @@ public interface RedisHashCommandsDao {
 	public <K, F, V> void hMSet(int dbIndex, K key, Map<F, V> fValues);
 	
 	/**
-	 * @description 删除默认第0库指定键对应的域值
+	 * @description 在当前库中执行hMSet命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param fValues
+	 * @param expireSeconds
+	 */
+	public <K, F, V> void hMSet(int dbIndex, K key, Map<F, V> fValues, long expireSeconds);
+	
+	/**
+	 * @description 删除当前库指定键对应的域值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param filed
@@ -109,7 +174,7 @@ public interface RedisHashCommandsDao {
 	public <K, F> Boolean hDel(int dbIndex, K key, F filed);
 	
 	/**
-	 * @description 删除默认第0库指定键对应的多个域值
+	 * @description 删除当前库指定键对应的多个域值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param fileds
@@ -128,7 +193,7 @@ public interface RedisHashCommandsDao {
 	public <K, F> Boolean hDel(int dbIndex, K key, F[] fileds);
 	
 	/**
-	 * @description 删除默认第0库指定键对应的多个域值
+	 * @description 删除当前库指定键对应的多个域值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param fileds
@@ -147,7 +212,7 @@ public interface RedisHashCommandsDao {
 	public <K, F> Boolean hDel(int dbIndex, K key, Collection<F> fileds);
 	
 	/**
-	 * @description 判断默认第0库指定键对应域是否存在
+	 * @description 判断当前库指定键对应域是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param filed
@@ -166,7 +231,7 @@ public interface RedisHashCommandsDao {
 	public <K, F> Boolean hExists(int dbIndex, K key, F filed);
 	
 	/**
-	 * @description 在默认第0库中执行hGet命令
+	 * @description 在当前库中执行hGet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param filed
@@ -185,7 +250,7 @@ public interface RedisHashCommandsDao {
 	public <K, F, V> V hGet(int dbIndex, K key, F filed);
 	
 	/**
-	 * @description 在默认第0库中执行hGetAll命令
+	 * @description 在当前库中执行hGetAll命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return 域值映射集
@@ -202,7 +267,7 @@ public interface RedisHashCommandsDao {
 	public <K, F, V> Map<F, V> hGetAll(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行hKeys命令，获取键对应的所有域
+	 * @description 在当前库中执行hKeys命令，获取键对应的所有域
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -219,7 +284,7 @@ public interface RedisHashCommandsDao {
 	public <K, F> Set<F> hKeys(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行hLen命令，获取键对应的域个数
+	 * @description 在当前库中执行hLen命令，获取键对应的域个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -236,7 +301,7 @@ public interface RedisHashCommandsDao {
 	public <K> Long hLen(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行hMGet命令，获取键对应的多个域的值
+	 * @description 在当前库中执行hMGet命令，获取键对应的多个域的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param fields
@@ -255,7 +320,7 @@ public interface RedisHashCommandsDao {
 	public <K, F, V> List<V> hMGet(int dbIndex, K key, F[] fields);
 	
 	/**
-	 * @description 在默认第0库中执行hMGet命令，获取键对应的多个域的值
+	 * @description 在当前库中执行hMGet命令，获取键对应的多个域的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param fields
@@ -274,7 +339,7 @@ public interface RedisHashCommandsDao {
 	public <K, F, V> List<V> hMGet(int dbIndex, K key, Collection<F> fields);
 	
 	/**
-	 * @description 在默认第0库中执行hVals命令，获取键对应的所有域的值
+	 * @description 在当前库中执行hVals命令，获取键对应的所有域的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return

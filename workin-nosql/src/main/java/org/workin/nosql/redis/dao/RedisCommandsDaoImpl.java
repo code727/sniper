@@ -56,7 +56,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Set<K> keys() {
-		return keys(0);
+		return keys(super.getCurrentDbIndex());
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Set<K> keys(String pattern) {
-		return keys(0, pattern);
+		return keys(super.getCurrentDbIndex(), pattern);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -92,7 +92,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Long del(K key) {
-		return del(0, key);
+		return del(super.getCurrentDbIndex(), key);
 	}
 	
 	@Override
@@ -102,7 +102,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long del(K[] keys) {
-		return del(0, keys);
+		return del(super.getCurrentDbIndex(), keys);
 	}
 	
 	@Override
@@ -122,7 +122,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long del(Collection<K> keys) {
-		return del(0, keys);
+		return del(super.getCurrentDbIndex(), keys);
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Boolean exists(K key) {
-		return exists(0, key);
+		return exists(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -154,7 +154,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Boolean expire(K key, long seconds) {
-		return expire(0, seconds);
+		return expire(super.getCurrentDbIndex(), seconds);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -176,7 +176,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Boolean expireAt(K key, long timestamp) {
-		return expireAt(0, key, timestamp);
+		return expireAt(super.getCurrentDbIndex(), key, timestamp);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -198,7 +198,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Boolean expireAt(K key, Date date) {
-		return expireAt(0, key, date);
+		return expireAt(super.getCurrentDbIndex(), key, date);
 	}
 
 	@Override
@@ -208,7 +208,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Boolean move(K key, int targetIndex) {
-		return move(0, key, targetIndex);
+		return move(super.getCurrentDbIndex(), key, targetIndex);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -230,7 +230,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long ttl(K key) {
-		return ttl(0, key);
+		return ttl(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -252,7 +252,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> List<V> sort(K key, SortParameters params) {
-		return sort(0, key, params);
+		return sort(super.getCurrentDbIndex(), key, params);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -279,7 +279,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long sortCount(K key, SortParameters params, K targetKey) {
-		return sortCount(0, key, params, targetKey);
+		return sortCount(super.getCurrentDbIndex(), key, params, targetKey);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -302,7 +302,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> List<V> sortResult(K key, SortParameters params, K targetKey) {
-		return sortResult(0, key, params, targetKey);
+		return sortResult(super.getCurrentDbIndex(), key, params, targetKey);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -331,7 +331,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> DataType type(K key) {
-		return type(0, key);
+		return type(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -353,7 +353,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <V> Set<V> values() {
-		return values(0);
+		return values(super.getCurrentDbIndex());
 	}
 
 	@Override
@@ -388,12 +388,22 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> void set(K key, V value) {
-		set(0, key, value);
+		set(super.getCurrentDbIndex(), key, value);
+	}
+	
+	@Override
+	public <K, V> void set(K key, V value, long expireSeconds) {
+		set(super.getCurrentDbIndex(), key, value, expireSeconds);
 	}
 
+	@Override
+	public <K, V> void set(int dbIndex, K key, V value) {
+		set(dbIndex, key, value, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> void set(final int dbIndex, final K key, final V value) {
+	public <K, V> void set(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [set].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [set].");
 		
@@ -406,20 +416,31 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbIndex);
 				connection.set(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return null;
 			}
 		});
+		
 	}
 
 	@Override
 	public <K, V> Boolean setNX(K key, V value) {
-		return setNX(0, key, value);
+		return setNX(super.getCurrentDbIndex(), key, value);
+	}
+	
+	@Override
+	public <K, V> Boolean setNX(K key, V value, long expireSeconds) {
+		return setNX(super.getCurrentDbIndex(), key, value, expireSeconds);
 	}
 
+	@Override
+	public <K, V> Boolean setNX(int dbIndex, K key, V value) {
+		return setNX(dbIndex, key, value, 0);
+	}	
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Boolean setNX(final int dbIndex, final K key, final V value) {
+	public <K, V> Boolean setNX(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [setNX].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [setNX].");
 		
@@ -432,7 +453,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbIndex);
 				Boolean result = connection.setNX(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return result;
 			}
 		});
@@ -440,7 +461,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> void setEx(K key, V value) {
-		setEx(0, key, value);
+		setEx(super.getCurrentDbIndex(), key, value);
 	}
 
 	@Override
@@ -450,7 +471,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> void setEx(K key, long seconds, V value) {
-		setEx(0, key, seconds, value);
+		setEx(super.getCurrentDbIndex(), key, seconds, value);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -464,7 +485,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		redisTemplate.execute(new RedisCallback<Object>() {
 
 			@Override
-			public Object  doInRedis(RedisConnection connection) throws DataAccessException {
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbIndex);
 				if (seconds > 0)
 					connection.setEx(keySerializer.serialize(key), seconds, valueSerializer.serialize(value));
@@ -478,13 +499,22 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> void mSet(Map<K, V> kValues) {
-		mSet(0, kValues);
+		mSet(super.getCurrentDbIndex(), kValues);
+	}
+	
+	@Override
+	public <K, V> void mSet(Map<K, V> kValues, long expireSeconds) {
+		mSet(super.getCurrentDbIndex(), kValues, expireSeconds);
 	}
 
 	@Override
-	public <K, V> void mSet(final int dbIndex, final Map<K, V> kValues) {
-		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues),
-				"Key-value map can not be empty of command [mSet].");
+	public <K, V> void mSet(int dbIndex, Map<K, V> kValues) {
+		mSet(dbIndex, kValues, 0);
+	}
+	
+	@Override
+	public <K, V> void mSet(final int dbIndex, final Map<K, V> kValues, final long expireSeconds) {
+		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues), "Key-value map can not be empty of command [mSet].");
 		
 		redisTemplate.execute(new RedisCallback<Object>() {
 
@@ -493,7 +523,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				Map<byte[], byte[]> byteMap = serializeKeyValueToByteMap(dbIndex, kValues);
 				RedisRepository repository = select(connection, dbIndex);
 				connection.mSet(byteMap);
-				setExpireTime(connection, repository, byteMap.keySet());
+				setExpireTime(connection, repository, byteMap.keySet(), expireSeconds);
 				return null;
 			}
 		});
@@ -501,13 +531,22 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> void mSetNX(Map<K, V> kValues) {
-		mSetNX(0, kValues);
+		mSetNX(super.getCurrentDbIndex(), kValues);
+	}
+	
+	@Override
+	public <K, V> void mSetNX(Map<K, V> kValues, long expireSeconds) {
+		mSetNX(super.getCurrentDbIndex(), kValues, expireSeconds);
 	}
 
 	@Override
-	public <K, V> void mSetNX(final int dbIndex, final Map<K, V> kValues) {
-		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues),
-				"Key-value map can not be empty of command [mSetNX].");
+	public <K, V> void mSetNX(int dbIndex, Map<K, V> kValues) {
+		mSetNX(dbIndex, kValues, 0);
+	}
+	
+	@Override
+	public <K, V> void mSetNX(final int dbIndex, final Map<K, V> kValues, final long expireSeconds) {
+		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues), "Key-value map can not be empty of command [mSetNX].");
 		
 		redisTemplate.execute(new RedisCallback<Object>() {
 
@@ -516,7 +555,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				Map<byte[], byte[]> byteMap = serializeKeyValueToByteMap(dbIndex, kValues);
 				RedisRepository repository = select(connection, dbIndex);
 				connection.mSetNX(byteMap);
-				setExpireTime(connection, repository, byteMap.keySet());
+				setExpireTime(connection, repository, byteMap.keySet(), expireSeconds);
 				return null;
 			}
 		});
@@ -524,12 +563,22 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> void setRange(K key, long offset, V value) {
-		setRange(0, key, offset, value);
+		setRange(super.getCurrentDbIndex(), key, offset, value);
+	}
+	
+	@Override
+	public <K, V> void setRange(K key, long offset, V value, long expireSeconds) {
+		setRange(super.getCurrentDbIndex(), key, offset, value, expireSeconds);
 	}
 
+	@Override
+	public <K, V> void setRange(int dbIndex, K key, long offset, V value) {
+		setRange(dbIndex, key, offset, value, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> void setRange(final int dbIndex, final K key, final long offset, final V value) {
+	public <K, V> void setRange(final int dbIndex, final K key, final long offset, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [setRange].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [setRange].");
 		
@@ -542,21 +591,30 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbIndex);
 				connection.setRange(keyByte, valueSerializer.serialize(value), offset);
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return null;
 			}
-			
 		});
 	}
 
 	@Override
 	public <K, V> Long append(K key, V value) {
-		return append(0, key, value);
+		return append(super.getCurrentDbIndex(), key, value);
+	}
+	
+	@Override
+	public <K, V> Long append(K key, V value, long expireSeconds) {
+		return append(super.getCurrentDbIndex(), key, value, expireSeconds);
 	}
 
+	@Override
+	public <K, V> Long append(int dbIndex, final K key, V value) {
+		return append(dbIndex, key, value, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Long append(final int dbIndex, final K key, final V value) {
+	public <K, V> Long append(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [append].");
 		AssertUtils.assertNotNull(key, "Value can not be null of command [append].");
 		
@@ -566,15 +624,18 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
-				select(connection, dbIndex);
-				return connection.append(keySerializer.serialize(key), valueSerializer.serialize(value));
+				byte[] keyByte = keySerializer.serialize(key);	
+				RedisRepository repository = select(connection, dbIndex);
+				Long length = connection.append(keyByte, valueSerializer.serialize(value));
+				setExpireTime(connection, repository, keyByte, expireSeconds);
+				return length;
 			}
 		});
 	}
 
 	@Override
 	public <K, V> V get(K key) {
-		return get(0, key);
+		return get(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -598,7 +659,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V getRange(K key, long begin, long end) {
-		return getRange(0, key, begin, end);
+		return getRange(super.getCurrentDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -622,12 +683,22 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V getSet(K key, V value) {
-		return getSet(0, key, value);
+		return getSet(super.getCurrentDbIndex(), key, value);
+	}
+	
+	@Override
+	public <K, V> V getSet(K key, V value, long expireSeconds) {
+		return getSet(super.getCurrentDbIndex(), key, value, expireSeconds);
 	}
 
+	@Override
+	public <K, V> V getSet(int dbIndex, K key, V value) {
+		return getSet(dbIndex, key, value, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> V getSet(final int dbIndex, final K key, final V value) {
+	public <K, V> V getSet(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		if (key == null)
 			return null;
 		
@@ -637,16 +708,18 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 			@Override
 			public V doInRedis(RedisConnection connection) throws DataAccessException {
-				select(connection, dbIndex);
+				RedisRepository repository = select(connection, dbIndex);
 				byte[] keyByte = keySerializer.serialize(key);
-				return valueSerializer.deserialize(connection.getSet(keyByte, valueSerializer.serialize(value)));
+				V result = valueSerializer.deserialize(connection.getSet(keyByte, valueSerializer.serialize(value)));
+				setExpireTime(connection, repository, keyByte, expireSeconds);
+				return result;
 			}
 		});
 	}
 	
 	@Override
 	public <K, V> List<V> mGet(K[] keys) {
-		return mGet(0, keys);
+		return mGet(super.getCurrentDbIndex(), keys);
 	}
 
 	@Override
@@ -667,7 +740,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> List<V> mGet(Collection<K> keys) {
-		return mGet(0, keys);
+		return mGet(super.getCurrentDbIndex(), keys);
 	}
 
 	@Override
@@ -677,7 +750,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long strLen(K key) {
-		return strLen(0, key);
+		return strLen(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -699,7 +772,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Long decr(K key) {
-		return decr(0, key);
+		return decr(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -720,7 +793,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long decrBy(K key, long value) {
-		return decrBy(0, key, value);
+		return decrBy(super.getCurrentDbIndex(), key, value);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -741,7 +814,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long incr(K key) {
-		return incr(0, key);
+		return incr(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -762,7 +835,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long incrBy(K key, long value) {
-		return incrBy(0, key, value);
+		return incrBy(super.getCurrentDbIndex(), key, value);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -783,12 +856,23 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, F, V> Boolean hSet(K key, F field, V value) {
-		return hSet(0, key, field, value);
+		return hSet(super.getCurrentDbIndex(), key, field, value);
+	}
+	
+	@Override
+	public <K, F, V> Boolean hSet(K key, F field, V value, long expireSeconds) {
+		return hSet(super.getCurrentDbIndex(), key, field, value, expireSeconds);
 	}
 
+	@Override
+	public <K, F, V> Boolean hSet(int dbIndex, K key, F field, V value) {
+		return hSet(dbIndex, key, field, value, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, F, V> Boolean hSet(final int dbIndex, final K key, final F field, final V value) {
+	public <K, F, V> Boolean hSet(final int dbIndex, final K key,
+			final F field, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [hSet].");
 		AssertUtils.assertNotNull(field, "Field can not be null of command [hSet].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [hSet].");
@@ -804,7 +888,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				RedisRepository repository = select(connection, dbIndex);
 				Boolean result = connection.hSet(keyByte, fieldKeySerializer.serialize(field),
 						valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return result;
 			}
 		});
@@ -812,12 +896,23 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, F, V> Boolean hSetNX(K key, F field, V value) {
-		return hSetNX(0, field, value);
+		return hSetNX(super.getCurrentDbIndex(), key, field, value);
+	}
+	
+	@Override
+	public <K, F, V> Boolean hSetNX(K key, F field, V value, long expireSeconds) {
+		return hSetNX(super.getCurrentDbIndex(), key, field, value, expireSeconds);
 	}
 
+	@Override
+	public <K, F, V> Boolean hSetNX(int dbIndex, K key, F field, V value) {
+		return hSetNX(super.getCurrentDbIndex(), key, field, value, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, F, V> Boolean hSetNX(final int dbIndex, final K key, final F field, final V value) {
+	public <K, F, V> Boolean hSetNX(final int dbIndex, final K key,
+			final F field, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [hSetNX].");
 		AssertUtils.assertNotNull(field, "Field can not be null of command [hSetNX].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [hSetNX].");
@@ -833,7 +928,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				RedisRepository repository = select(connection, dbIndex);
 				Boolean result = connection.hSetNX(keyByte, fieldKeySerializer.serialize(field),
 						valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return result;
 			}
 		});
@@ -841,14 +936,25 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F, V> void hMSet(K key, Map<F, V> fValues) {
-		hMSet(0, key, fValues);
+		hMSet(super.getCurrentDbIndex(), key, fValues);
+	}
+	
+	@Override
+	public <K, F, V> void hMSet(K key, Map<F, V> fValues, long expireSeconds) {
+		hMSet(super.getCurrentDbIndex(), key, fValues, expireSeconds);
 	}
 
+	@Override
+	public <K, F, V> void hMSet(int dbIndex, K key, Map<F, V> fValues) {
+		hMSet(dbIndex, key, fValues, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, F, V> void hMSet(final int dbIndex, final K key, final Map<F, V> fValues) {
+	public <K, F, V> void hMSet(final int dbIndex, final K key,
+			final Map<F, V> fValues, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [hMSet].");
-		AssertUtils.assertTrue(MapUtils.isNotEmpty(fValues),
+		AssertUtils.assertTrue(MapUtils.isNotEmpty(fValues), 
 				"Field-value map can not be empty of command [hMSet].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
@@ -859,7 +965,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbIndex);
 				connection.hMSet(keyByte, serializeFiledValueToByteMap(dbIndex, fValues));
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return null;
 			}
 		});
@@ -867,7 +973,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F> Boolean hDel(K key, F filed) {
-		return hDel(0, key, filed);
+		return hDel(super.getCurrentDbIndex(), key, filed);
 	}
 
 	@Override
@@ -907,7 +1013,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F> Boolean hDel(K key, Collection<F> fileds) {
-		return hDel(0, key, fileds);
+		return hDel(super.getCurrentDbIndex(), key, fileds);
 	}
 
 	@Override
@@ -917,7 +1023,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F> Boolean hExists(K key, F filed) {
-		return hExists(0, key, filed);
+		return hExists(super.getCurrentDbIndex(), key, filed);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -940,7 +1046,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F, V> V hGet(K key, F filed) {
-		return hGet(0, key, filed);
+		return hGet(super.getCurrentDbIndex(), key, filed);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -965,7 +1071,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F, V> Map<F, V> hGetAll(K key) {
-		return hGetAll(0, key);
+		return hGetAll(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -988,7 +1094,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F> Set<F> hKeys(K key) {
-		return hKeys(0, key);
+		return hKeys(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1011,7 +1117,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long hLen(K key) {
-		return hLen(0, key);
+		return hLen(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1033,7 +1139,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F, V> List<V> hMGet(K key, F[] fields) {
-		return hMGet(0, key, fields);
+		return hMGet(super.getCurrentDbIndex(), key, fields);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1057,7 +1163,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, F, V> List<V> hMGet(K key, Collection<F> fields) {
-		return hMGet(0, key, fields);
+		return hMGet(super.getCurrentDbIndex(), key, fields);
 	}
 
 	@Override
@@ -1067,7 +1173,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> List<V> hVals(K key) {
-		return hVals(0, key);
+		return hVals(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1090,12 +1196,23 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Long lInsert(K key, Position where, V pivot, V value) {
-		return lInsert(0, key, where, pivot, value);
+		return lInsert(super.getCurrentDbIndex(), key, where, pivot, value);
+	}
+	
+	@Override
+	public <K, V> Long lInsert(K key, Position where, V pivot, V value, long expireSeconds) {
+		return lInsert(super.getCurrentDbIndex(), key, where, pivot, value, expireSeconds);
 	}
 
+	@Override
+	public <K, V> Long lInsert(int dbIndex, K key, Position where, V pivot, V value) {
+		return lInsert(dbIndex, key, where, pivot, value, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Long lInsert(final int dbIndex, final K key, final Position where, final V pivot, final V value) {
+	public <K, V> Long lInsert(final int dbIndex, final K key, final Position where, final V pivot,
+			final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [lInsert].");
 		AssertUtils.assertNotNull(where, "Insert postion can not be null of command [lInsert].");
 		AssertUtils.assertNotNull(pivot, "Postion value can not be null of command [lInsert].");
@@ -1112,7 +1229,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				Long result = connection.lInsert(keyByte, where,
 						valueSerializer.serialize(pivot), valueSerializer.serialize(value));
 				// 重新设置键的过期时间
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return result;
 			}
 		});
@@ -1120,12 +1237,23 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> void lSet(K key, long posttion, V value) {
-		lSet(0, key, posttion, value);
+		lSet(super.getCurrentDbIndex(), key, posttion, value);
+	}
+	
+	@Override
+	public <K, V> void lSet(K key, long posttion, V value, long expireSeconds) {
+		lSet(super.getCurrentDbIndex(), key, posttion, value, expireSeconds);
 	}
 
+	@Override
+	public <K, V> void lSet(int dbIndex, K key, long posttion, V value) {
+		lSet(dbIndex, key, posttion, value, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> void lSet(final int dbIndex, final K key, final long posttion, final V value) {
+	public <K, V> void lSet(final int dbIndex, final K key,
+			final long posttion, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [lSet].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [lSet].");
 		
@@ -1138,7 +1266,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbIndex);
 				connection.lSet(keyByte, posttion, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return null;
 			}
 		});
@@ -1146,23 +1274,43 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long lPush(K key, V value) {
-		return lPush(0, key, value);
+		return lPush(super.getCurrentDbIndex(), key, value);
+	}
+	
+	@Override
+	public <K, V> Long lPush(K key, V value, long expireSeconds) {
+		return lPush(super.getCurrentDbIndex(), key, value, expireSeconds);
 	}
 
 	@Override
 	public <K, V> Long lPush(int dbIndex, K key, V value) {
+		return lPush(dbIndex, key, value, 0);
+	}
+	
+	@Override
+	public <K, V> Long lPush(int dbIndex, K key, V value, long expireSeconds) {
 		AssertUtils.assertNotNull(value, "Value can not be null of command [lPush].");
-		return lPush(dbIndex, key, new Object[] { value });
+		return lPush(dbIndex, key, new Object[] { value }, expireSeconds);
 	}
 	
 	@Override
 	public <K, V> Long lPush(K key, V[] values) {
-		return lPush(0, key, values);
+		return lPush(super.getCurrentDbIndex(), key, values);
+	}
+	
+	@Override
+	public <K, V> Long lPush(K key, V[] values, long expireSeconds) {
+		return lPush(super.getCurrentDbIndex(), key, values, expireSeconds);
+	}
+
+	@Override
+	public <K, V> Long lPush(int dbIndex, K key, V[] values) {
+		return lPush(dbIndex, key, values, 0);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Long lPush(final int dbIndex, final K key, final V[] values) {
+	public <K, V> Long lPush(final int dbIndex, final K key, final V[] values, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [lPush].");
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(values), "Values can not be empty of command [lPush].");
 		
@@ -1179,7 +1327,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				for (V value : values) 
 					result = result + NumberUtils.safeLong(connection.lPush(keyByte, valueSerializer.serialize(value)));
 				
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return result;
 			}
 		});
@@ -1187,22 +1335,42 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Long lPush(K key, Collection<V> values) {
-		return lPush(0, key, values); 
+		return lPush(super.getCurrentDbIndex(), key, values); 
+	}
+	
+	@Override
+	public <K, V> Long lPush(K key, Collection<V> values, long expireSeconds) {
+		return lPush(super.getCurrentDbIndex(), key, values, expireSeconds); 
 	}
 
 	@Override
 	public <K, V> Long lPush(int dbIndex, K key, Collection<V> values) {
-		return lPush(dbIndex, key, CollectionUtils.toObjectArray(values));
+		return lPush(dbIndex, key, CollectionUtils.toObjectArray(values), 0);
+	}
+	
+	@Override
+	public <K, V> Long lPush(int dbIndex, K key, Collection<V> values, long expireSeconds) {
+		return lPush(dbIndex, key, CollectionUtils.toObjectArray(values), expireSeconds);
 	}
 
 	@Override
 	public <K, V> Long lPushX(K key, V value) {
-		return lPushX(0, key, value);
+		return lPushX(super.getCurrentDbIndex(), key, value);
+	}
+	
+	@Override
+	public <K, V> Long lPushX(K key, V value, long expireSeconds) {
+		return lPushX(super.getCurrentDbIndex(), key, value, expireSeconds);
 	}
 
+	@Override
+	public <K, V> Long lPushX(int dbIndex, K key, V value) {
+		return lPushX(dbIndex, key, value, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Long lPushX(final int dbIndex, final K key, final V value) {
+	public <K, V> Long lPushX(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [lPushX].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [lPushX].");
 		
@@ -1215,7 +1383,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbIndex);
 				Long result = connection.lPushX(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return result;
 			}
 		});
@@ -1223,7 +1391,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> V lIndex(K key, long index) {
-		return lIndex(0, key, index);
+		return lIndex(super.getCurrentDbIndex(), key, index);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1248,7 +1416,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long lLen(K key) {
-		return lLen(0, key);
+		return lLen(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1271,7 +1439,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V lPop(K key) {
-		return lPop(0, key);
+		return lPop(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1295,7 +1463,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> List<V> lRange(K key, long begin, long end) {
-		return lRange(0, key, begin, end);
+		return lRange(super.getCurrentDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1318,7 +1486,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> List<V> lRangeAll(K key) {
-		return lRangeAll(0, key);
+		return lRangeAll(super.getCurrentDbIndex(), key);
 	}
 	
 	@Override
@@ -1328,7 +1496,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long lRem(K key, long count, V value) {
-		return lRem(0, key, count, value);
+		return lRem(super.getCurrentDbIndex(), key, count, value);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1352,7 +1520,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long lRemAll(K key, V value) {
-		return lRemAll(0, key, value);
+		return lRemAll(super.getCurrentDbIndex(), key, value);
 	}
 
 	@Override
@@ -1362,7 +1530,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> void lTrim(K key, long begin, long end) {
-		lTrim(0, key, begin, end);
+		lTrim(super.getCurrentDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1385,23 +1553,43 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Long rPush(K key, V value) {
-		return rPush(0, key, value);
+		return rPush(super.getCurrentDbIndex(), key, value);
+	}
+	
+	@Override
+	public <K, V> Long rPush(K key, V value, long expireSeconds) {
+		return rPush(super.getCurrentDbIndex(), key, value, expireSeconds);
 	}
 
 	@Override
 	public <K, V> Long rPush(int dbIndex, K key, V value) {
+		return rPush(dbIndex, key, value, 0);
+	}
+	
+	@Override
+	public <K, V> Long rPush(int dbIndex, K key, V value, long expireSeconds) {
 		AssertUtils.assertNotNull(value, "Value can not be null of command [rPush].");
-		return rPush(dbIndex, key, new Object[] { value });
+		return rPush(dbIndex, key, new Object[] { value }, expireSeconds);
 	}
 	
 	@Override
 	public <K, V> Long rPush(K key, V[] values) {
-		return rPush(0, key, values);
+		return rPush(super.getCurrentDbIndex(), key, values);
+	}
+	
+	@Override
+	public <K, V> Long rPush(K key, V[] values, long expireSeconds) {
+		return rPush(super.getCurrentDbIndex(), key, values, expireSeconds);
 	}
 
+	@Override
+	public <K, V> Long rPush(int dbIndex, final K key, final V[] values) {
+		return rPush(dbIndex, key, values, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Long rPush(final int dbIndex, final K key, final V[] values) {
+	public <K, V> Long rPush(final int dbIndex, final K key, final V[] values, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [rPush].");
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(values), "Values can not be empty of command [rPush].");
 		
@@ -1418,7 +1606,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				for (V value : values) 
 					result = result + NumberUtils.safeLong(connection.rPush(keyByte, valueSerializer.serialize(value)));
 				
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return result;
 			}
 		});
@@ -1426,22 +1614,42 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Long rPush(K key, Collection<V> values) {
-		return rPush(0, key, values);
+		return rPush(super.getCurrentDbIndex(), key, values);
+	}
+	
+	@Override
+	public <K, V> Long rPush(K key, Collection<V> values, long expireSeconds) {
+		return rPush(super.getCurrentDbIndex(), key, values, expireSeconds);
+	}
+	
+	@Override
+	public <K, V> Long rPush(int dbIndex, K key, Collection<V> values) {
+		return rPush(dbIndex, key, values, 0);
 	}
 
 	@Override
-	public <K, V> Long rPush(final int dbIndex, final K key, final Collection<V> values) {
-		return rPush(dbIndex, key, CollectionUtils.toObjectArray(values));
+	public <K, V> Long rPush(int dbIndex, K key, Collection<V> values, long expireSeconds) {
+		return rPush(dbIndex, key, CollectionUtils.toObjectArray(values), expireSeconds);
 	}
 
 	@Override
 	public <K, V> Long rPushX(K key, V value) {
-		return rPushX(0, key, value);
+		return rPushX(super.getCurrentDbIndex(), key, value);
+	}
+	
+	@Override
+	public <K, V> Long rPushX(K key, V value, long expireSeconds) {
+		return rPushX(super.getCurrentDbIndex(), key, value, expireSeconds);
 	}
 
+	@Override
+	public <K, V> Long rPushX(int dbIndex, K key, V value) {
+		return rPushX(dbIndex, key, value, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Long rPushX(final int dbIndex, final K key, final V value) {
+	public <K, V> Long rPushX(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [rPushX].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [rPushX].");
 		
@@ -1454,7 +1662,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbIndex);
 				Long result = connection.rPushX(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return result;
 			}
 		});
@@ -1462,12 +1670,22 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> V rPopLPush(K srcKey, K destKey) {
-		return rPopLPush(0, srcKey, destKey);
+		return rPopLPush(super.getCurrentDbIndex(), srcKey, destKey);
+	}
+	
+	@Override
+	public <K, V> V rPopLPush(K srcKey, K destKey, long expireSeconds) {
+		return rPopLPush(super.getCurrentDbIndex(), srcKey, destKey, expireSeconds);
 	}
 
+	@Override
+	public <K, V> V rPopLPush(int dbIndex, K srcKey, K destKey) {
+		return rPopLPush(dbIndex, srcKey, destKey, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> V rPopLPush(final int dbIndex, final K srcKey, final K destKey) {
+	public <K, V> V rPopLPush(final int dbIndex, final K srcKey, final K destKey, final long expireSeconds) {
 		AssertUtils.assertNotNull(srcKey, "Source key can not be null of command [rPopLPush].");
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [rPopLPush].");
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
@@ -1480,7 +1698,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				// 将源列表中最后一个元素取出后存入目标列表
 				byte[] destValueByte = connection.rPopLPush(keySerializer.serialize(srcKey), destKeyByte);
 				// 设置目标键的过期时间
-				setExpireTime(connection, repository, destKeyByte);
+				setExpireTime(connection, repository, destKeyByte, expireSeconds);
 				return (V) selectValueSerializer(dbIndex).deserialize(destValueByte);
 			}
 		});
@@ -1488,7 +1706,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V rPop(K key) {
-		return rPop(0, key);
+		return rPop(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1512,25 +1730,45 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Boolean sAdd(K key, V member) {
-		return sAdd(0, key, member);
+		return sAdd(super.getCurrentDbIndex(), key, member);
+	}
+	
+	@Override
+	public <K, V> Boolean sAdd(K key, V member, long expireSeconds) {
+		return sAdd(super.getCurrentDbIndex(), key, member, expireSeconds);
 	}
 
 	@Override
 	public <K, V> Boolean sAdd(int dbIndex, K key, V member) {
+		return sAdd(dbIndex, key, member, 0);
+	}
+	
+	@Override
+	public <K, V> Boolean sAdd(int dbIndex, K key, V member, long expireSeconds) {
 		AssertUtils.assertNotNull(member, "Member can not be null of command [sAdd].");
 		Collection<V> members = CollectionUtils.newArrayList();
 		members.add(member);
-		return sAdd(dbIndex, key, members);
+		return sAdd(dbIndex, key, members, expireSeconds);
 	}
 	
 	@Override
 	public <K, V> Boolean sAdd(K key, V[] members) {
-		return sAdd(0, key, members);
+		return sAdd(super.getCurrentDbIndex(), key, members);
+	}
+	
+	@Override
+	public <K, V> Boolean sAdd(K key, V[] members, long expireSeconds) {
+		return sAdd(super.getCurrentDbIndex(), key, members, expireSeconds);
 	}
 
+	@Override
+	public <K, V> Boolean sAdd(int dbIndex, K key, V[] members) {
+		return sAdd(dbIndex, key, members, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Boolean sAdd(final int dbIndex, final K key, final V[] members) {
+	public <K, V> Boolean sAdd(final int dbIndex, final K key, final V[] members, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [sAdd].");
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(members), "Members can not be empty of command [sAdd].");
 				
@@ -1547,7 +1785,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				for (V member : members) 
 					result = result && connection.sAdd(keyByte, valueSerializer.serialize(member));
 				
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return result;
 			}
 		});
@@ -1555,17 +1793,27 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> Boolean sAdd(K key, Collection<V> members) {
-		return sAdd(0, key, members);
+		return sAdd(super.getCurrentDbIndex(), key, members);
+	}
+	
+	@Override
+	public <K, V> Boolean sAdd(K key, Collection<V> members, long expireSeconds) {
+		return sAdd(super.getCurrentDbIndex(), key, members, expireSeconds);
 	}
 
 	@Override
 	public <K, V> Boolean sAdd(int dbIndex, K key, Collection<V> members) {
-		return sAdd(dbIndex, key, CollectionUtils.toObjectArray(members));
+		return sAdd(dbIndex, key, members, 0);
+	}
+	
+	@Override
+	public <K, V> Boolean sAdd(int dbIndex, K key, Collection<V> members, long expireSeconds) {
+		return sAdd(dbIndex, key, CollectionUtils.toObjectArray(members), expireSeconds);
 	}
 
 	@Override
 	public <K> Long sCard(K key) {
-		return sCard(0, key);
+		return sCard(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1587,7 +1835,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> sDiff(K[] keys) {
-		return sDiff(0, keys);
+		return sDiff(super.getCurrentDbIndex(), keys);
 	}
 
 	@Override
@@ -1609,9 +1857,9 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> sDiff(Collection<K> keys) {
-		return sDiff(0, keys);
+		return sDiff(super.getCurrentDbIndex(), keys);
 	}
-
+	
 	@Override
 	public <K, V> Set<V> sDiff(int dbIndex, Collection<K> keys) {
 		return sDiff(dbIndex, CollectionUtils.toObjectArray(keys));
@@ -1619,12 +1867,22 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long sDiffStore(K destKey, K[] keys) {
-		return sDiffStore(0, destKey, keys);
+		return sDiffStore(super.getCurrentDbIndex(), destKey, keys);
+	}
+	
+	@Override
+	public <K> Long sDiffStore(K destKey, K[] keys, long expireSeconds) {
+		return sDiffStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
 	}
 
+	@Override
+	public <K> Long sDiffStore(int dbIndex, K destKey, K[] keys) {
+		return sDiffStore(dbIndex, destKey, keys, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K> Long sDiffStore(final int dbIndex, final K destKey, final K[] keys) {
+	public <K> Long sDiffStore(final int dbIndex, final K destKey, final K[] keys, final long expireSeconds) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sDiffStore].");
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sDiffStore]");
 		
@@ -1636,7 +1894,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				RedisRepository repository = select(connection, dbIndex);
 				byte[] destKeyByte = keySerializer.serialize(destKey);
 				Long result = connection.sDiffStore(destKeyByte, serializeKeysToArray(dbIndex, keys));
-				setExpireTime(connection, repository, destKeyByte);	
+				setExpireTime(connection, repository, destKeyByte, expireSeconds);	
 				return result;
 			}
 		});
@@ -1644,17 +1902,27 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long sDiffStore(K destKey, Collection<K> keys) {
-		return sDiffStore(0, destKey, keys);
+		return sDiffStore(super.getCurrentDbIndex(), destKey, keys);
+	}
+	
+	@Override
+	public <K> Long sDiffStore(K destKey, Collection<K> keys, long expireSeconds) {
+		return sDiffStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
 	}
 
 	@Override
 	public <K> Long sDiffStore(int dbIndex, K destKey, Collection<K> keys) {
-		return sDiffStore(dbIndex, destKey, CollectionUtils.toObjectArray(keys));
+		return sDiffStore(dbIndex, destKey, keys, 0);
+	}
+	
+	@Override
+	public <K> Long sDiffStore(int dbIndex, K destKey, Collection<K> keys, long expireSeconds) {
+		return sDiffStore(dbIndex, destKey, CollectionUtils.toObjectArray(keys), expireSeconds);
 	}
 
 	@Override
 	public <K, V> Set<V> sInter(K[] keys) {
-		return sInter(0, keys);
+		return sInter(super.getCurrentDbIndex(), keys);
 	}
 
 	@Override
@@ -1676,7 +1944,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> sInter(Collection<K> keys) {
-		return sInter(0, keys);
+		return sInter(super.getCurrentDbIndex(), keys);
 	}
 
 	@Override
@@ -1686,12 +1954,22 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long sInterStore(K destKey, K[] keys) {
-		return sInterStore(0, destKey, keys);
+		return sInterStore(super.getCurrentDbIndex(), destKey, keys);
+	}
+	
+	@Override
+	public <K> Long sInterStore(K destKey, K[] keys, long expireSeconds) {
+		return sInterStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
 	}
 
+	@Override
+	public <K> Long sInterStore(int dbIndex, K destKey, K[] keys) {
+		return sInterStore(dbIndex, destKey, keys, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K> Long sInterStore(final int dbIndex, final K destKey, final K[] keys) {
+	public <K> Long sInterStore(final int dbIndex, final K destKey, final K[] keys, final long expireSeconds) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sInterStore].");
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sInterStore]");
 		
@@ -1703,7 +1981,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				RedisRepository repository = select(connection, dbIndex);
 				byte[] destKeyByte = keySerializer.serialize(destKey);
 				Long result = connection.sInterStore(destKeyByte, serializeKeysToArray(dbIndex, keys));
-				setExpireTime(connection, repository, destKeyByte);	
+				setExpireTime(connection, repository, destKeyByte, expireSeconds);	
 				return result;
 			}
 		});
@@ -1711,17 +1989,27 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long sInterStore(K destKey, Collection<K> keys) {
-		return sInterStore(0, destKey, keys);
+		return sInterStore(super.getCurrentDbIndex(), destKey, keys);
+	}
+	
+	@Override
+	public <K> Long sInterStore(K destKey, Collection<K> keys, long expireSeconds) {
+		return sInterStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
 	}
 
 	@Override
 	public <K> Long sInterStore(int dbIndex, K destKey, Collection<K> keys) {
-		return sInterStore(dbIndex, destKey, CollectionUtils.toObjectArray(keys));
+		return sInterStore(dbIndex, destKey, keys, 0);
+	}
+	
+	@Override
+	public <K> Long sInterStore(int dbIndex, K destKey, Collection<K> keys, long expireSeconds) {
+		return sInterStore(dbIndex, destKey, CollectionUtils.toObjectArray(keys), expireSeconds);
 	}
 	
 	@Override
 	public <K, V> Set<V> sUnion(K[] keys) {
-		return sUnion(0, keys);
+		return sUnion(super.getCurrentDbIndex(), keys);
 	}
 
 	@Override
@@ -1743,7 +2031,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> sUnion(Collection<K> keys) {
-		return sUnion(0, keys);
+		return sUnion(super.getCurrentDbIndex(), keys);
 	}
 
 	@Override
@@ -1753,12 +2041,23 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Long sUnionStore(K destKey, K[] keys) {
-		return sUnionStore(0, destKey, keys);
+		return sUnionStore(super.getCurrentDbIndex(), destKey, keys);
+	}
+	
+	@Override
+	public <K> Long sUnionStore(K destKey, K[] keys, long expireSeconds) {
+		return sUnionStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
 	}
 
+	@Override
+	public <K> Long sUnionStore(int dbIndex, K destKey, K[] keys) {
+		return sUnionStore(dbIndex, destKey, keys, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K> Long sUnionStore(final int dbIndex, final K destKey, final K[] keys) {
+	public <K> Long sUnionStore(final int dbIndex, final K destKey,
+			final K[] keys, final long expireSeconds) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sUnionStore].");
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sUnionStore]");
 		
@@ -1770,7 +2069,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				RedisRepository repository = select(connection, dbIndex);
 				byte[] destKeyByte = keySerializer.serialize(destKey);
 				Long result = connection.sUnionStore(destKeyByte, serializeKeysToArray(dbIndex, keys));
-				setExpireTime(connection, repository, destKeyByte);	
+				setExpireTime(connection, repository, destKeyByte, expireSeconds);	
 				return result;
 			}
 		});
@@ -1778,17 +2077,27 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long sUnionStore(K destKey, Collection<K> keys) {
-		return sUnionStore(0, destKey, keys);
+		return sUnionStore(super.getCurrentDbIndex(), destKey, keys);
+	}
+	
+	@Override
+	public <K> Long sUnionStore(K destKey, Collection<K> keys, long expireSeconds) {
+		return sUnionStore(super.getCurrentDbIndex(), destKey, keys, expireSeconds);
+	}
+	
+	@Override
+	public <K> Long sUnionStore(int dbIndex, K destKey, Collection<K> keys) {
+		return sUnionStore(dbIndex, destKey, keys, 0);
 	}
 
 	@Override
-	public <K> Long sUnionStore(int dbIndex, K destKey, Collection<K> keys) {
-		return sUnionStore(dbIndex, destKey, CollectionUtils.toObjectArray(keys));
+	public <K> Long sUnionStore(int dbIndex, K destKey, Collection<K> keys, long expireSeconds) {
+		return sUnionStore(dbIndex, destKey, CollectionUtils.toObjectArray(keys), expireSeconds);
 	}
 
 	@Override
 	public <K, V> Boolean sIsMember(K key, V member) {
-		return sIsMember(0, key, member);
+		return sIsMember(super.getCurrentDbIndex(), key, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1811,7 +2120,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> sMembers(K key) {
-		return sMembers(0, key);
+		return sMembers(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1834,7 +2143,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean sMove(K srcKey, K destKey, V member) {
-		return sMove(0, srcKey, destKey, member);
+		return sMove(super.getCurrentDbIndex(), srcKey, destKey, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1858,7 +2167,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V sPop(K key) {
-		return sPop(0, key);
+		return sPop(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1882,7 +2191,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> V sRandMember(K key) {
-		return sRandMember(0, key);
+		return sRandMember(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1906,17 +2215,17 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean sRem(K key, V member) {
-		return sRem(0, key, member);
+		return sRem(super.getCurrentDbIndex(), key, member);
 	}
 
 	@Override
 	public <K, V> Boolean sRem(int dbIndex, K key, V member) {
-		return sRem(0, key, new Object[] { member });
+		return sRem(super.getCurrentDbIndex(), key, new Object[] { member });
 	}
 
 	@Override
 	public <K, V> Boolean sRem(K key, V[] members) {
-		return sRem(0, key, members);
+		return sRem(super.getCurrentDbIndex(), key, members);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1942,35 +2251,55 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean sRem(K key, Collection<V> members) {
-		return sRem(0, key, members);
+		return sRem(super.getCurrentDbIndex(), key, members);
 	}
 
 	@Override
 	public <K, V> Boolean sRem(int dbIndex, K key, Collection<V> members) {
-		return sRem(0, key, CollectionUtils.toObjectArray(members));
+		return sRem(dbIndex, key, CollectionUtils.toObjectArray(members));
 	}
 	
 	@Override
 	public <K, V> Boolean zAdd(K key, double score, V member) {
-		return zAdd(0, key, score, member);
+		return zAdd(super.getCurrentDbIndex(), key, score, member);
+	}
+	
+	@Override
+	public <K, V> Boolean zAdd(K key, double score, V member, long expireSeconds) {
+		return zAdd(super.getCurrentDbIndex(), key, score, expireSeconds);
 	}
 
 	@Override
 	public <K, V> Boolean zAdd(int dbIndex, K key, double score, V member) {
+		return zAdd(dbIndex, key, score, member, 0);
+	}
+	
+	@Override
+	public <K, V> Boolean zAdd(int dbIndex, K key, double score, V member, long expireSeconds) {
 		AssertUtils.assertNotNull(member, "Member can not be null of command [zAdd].");
 		Map<Double, V> scoreMembers = MapUtils.newHashMap();
 		scoreMembers.put(score, member);
-		return zAdd(dbIndex, key, scoreMembers);
+		return zAdd(dbIndex, key, scoreMembers, expireSeconds);
 	}
 
 	@Override
 	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers) {
-		return zAdd(0, key, scoreMembers);
+		return zAdd(super.getCurrentDbIndex(), key, scoreMembers);
+	}
+	
+	@Override
+	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers, long expireSeconds) {
+		return zAdd(super.getCurrentDbIndex(), key, scoreMembers, expireSeconds);
 	}
 
+	@Override
+	public <K, V> Boolean zAdd(int dbIndex, K key, Map<Double, V> scoreMembers) {
+		return zAdd(dbIndex, key, scoreMembers, 0);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Boolean zAdd(final int dbIndex, final K key, final Map<Double, V> scoreMembers) {
+	public <K, V> Boolean zAdd(final int dbIndex, final K key, final Map<Double, V> scoreMembers, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [zAdd].");
 		AssertUtils.assertTrue(MapUtils.isNotEmpty(scoreMembers), 
 				"Score-member map can not be empty of command [zAdd].");
@@ -1990,7 +2319,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 					result = result && connection.zAdd(keyByte, 
 							NumberUtils.safeDouble(entry.getKey()), valueSerializer.serialize(entry.getValue()));
 				}
-				setExpireTime(connection, repository, keyByte);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return result;
 			}
 		});
@@ -1998,7 +2327,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zCard(K key) {
-		return zCard(0, key);
+		return zCard(super.getCurrentDbIndex(), key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2020,7 +2349,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zCount(K key, double minScore, double maxScore) {
-		return zCount(0, minScore, maxScore);
+		return zCount(super.getCurrentDbIndex(), minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2042,7 +2371,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRange(K key, long begin, long end) {
-		return zRange(0, key, begin, end);
+		return zRange(super.getCurrentDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2065,7 +2394,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRangeAll(K key) {
-		return zRangeAll(0, key);
+		return zRangeAll(super.getCurrentDbIndex(), key);
 	}
 
 	@Override
@@ -2075,7 +2404,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore) {
-		return zRangeByScore(0, key, minScore, maxScore);
+		return zRangeByScore(super.getCurrentDbIndex(), key, minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2100,7 +2429,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore,
 			long offset, long count) {
-		return zRangeByScore(0, key, minScore, maxScore, offset, count);
+		return zRangeByScore(super.getCurrentDbIndex(), key, minScore, maxScore, offset, count);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2125,7 +2454,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Set<Tuple> zRangeByScoreWithScores(K key, double minScore, double maxScore) {
-		return zRangeByScoreWithScores(0, key, minScore, maxScore);
+		return zRangeByScoreWithScores(super.getCurrentDbIndex(), key, minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2149,7 +2478,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K> Set<Tuple> zRangeByScoreWithScores(K key, double minScore,
 			double maxScore, long offset, long count) {
-		return zRangeByScoreWithScores(0, key, minScore, maxScore, offset, count);
+		return zRangeByScoreWithScores(super.getCurrentDbIndex(), key, minScore, maxScore, offset, count);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2173,7 +2502,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long zRank(K key, V member) {
-		return zRank(0, key, member);
+		return zRank(super.getCurrentDbIndex(), key, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2196,7 +2525,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean zRem(K key, V member) {
-		return zRem(0, key, member);
+		return zRem(super.getCurrentDbIndex(), key, member);
 	}
 
 	@Override
@@ -2206,7 +2535,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean zRem(K key, V[] members) {
-		return zRem(0, key, members);
+		return zRem(super.getCurrentDbIndex(), key, members);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2232,7 +2561,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Boolean zRem(K key, Collection<V> members) {
-		return zRem(0, key, members);
+		return zRem(super.getCurrentDbIndex(), key, members);
 	}
 
 	@Override
@@ -2242,7 +2571,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zRemRangeByRank(K key, long begin, long end) {
-		return zRemRangeByRank(0, key, begin, end);
+		return zRemRangeByRank(super.getCurrentDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2264,7 +2593,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zRemRangeByScore(K key, double minScore, double maxScore) {
-		return zRemRangeByScore(0, key, minScore, maxScore);
+		return zRemRangeByScore(super.getCurrentDbIndex(), key, minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2287,7 +2616,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRevRange(K key, long begin, long end) {
-		return zRevRange(0, key, begin, end);
+		return zRevRange(super.getCurrentDbIndex(), key, begin, end);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2310,7 +2639,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRevRangeAll(K key) {
-		return zRevRangeAll(0, key);
+		return zRevRangeAll(super.getCurrentDbIndex(), key);
 	}
 
 	@Override
@@ -2320,7 +2649,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore) {
-		return zRevRangeByScore(0, key, minScore, maxScore);
+		return zRevRangeByScore(super.getCurrentDbIndex(), key, minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2344,7 +2673,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Set<Tuple> zRevRangeByScoreWithScores(K key, double minScore, double maxScore) {
-		return zRevRangeByScoreWithScores(0, key, minScore, maxScore);
+		return zRevRangeByScoreWithScores(super.getCurrentDbIndex(), key, minScore, maxScore);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2369,7 +2698,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K> Set<Tuple> zRevRangeByScoreWithScores(K key, double minScore,
 			double maxScore, long offset, long count) {
-		return zRevRangeByScoreWithScores(0, key, minScore, maxScore, offset, count);
+		return zRevRangeByScoreWithScores(super.getCurrentDbIndex(), key, minScore, maxScore, offset, count);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2393,7 +2722,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Long zRevRank(K key, V member) {
-		return zRevRank(0, key, member);
+		return zRevRank(super.getCurrentDbIndex(), key, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2416,7 +2745,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Double zScore(K key, V member) {
-		return zScore(0, key, member);
+		return zScore(super.getCurrentDbIndex(), key, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2439,7 +2768,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zUnionStore(K destKey, K key) {
-		return zUnionStore(0, destKey, key);
+		return zUnionStore(super.getCurrentDbIndex(), destKey, key);
 	}
 
 	@Override
@@ -2450,7 +2779,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zUnionStore(K destKey, K[] keys) {
-		return zUnionStore(0, destKey, keys);
+		return zUnionStore(super.getCurrentDbIndex(), destKey, keys);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2473,7 +2802,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zUnionStore(K destKey, Collection<K> keys) {
-		return zUnionStore(0, destKey, keys);
+		return zUnionStore(super.getCurrentDbIndex(), destKey, keys);
 	}
 
 	@Override
@@ -2483,7 +2812,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, K[] keys) {
-		return zUnionStore(0, destKey, aggregate, weights, keys);
+		return zUnionStore(super.getCurrentDbIndex(), destKey, aggregate, weights, keys);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2507,7 +2836,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys) {
-		return zUnionStore(0, destKey, aggregate, weights, keys);
+		return zUnionStore(super.getCurrentDbIndex(), destKey, aggregate, weights, keys);
 	}
 
 	@Override
@@ -2518,7 +2847,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K> Long zInterStore(K destKey, K srcKey) {
-		return zInterStore(0, destKey, srcKey);
+		return zInterStore(super.getCurrentDbIndex(), destKey, srcKey);
 	}
 
 	@Override
@@ -2529,7 +2858,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zInterStore(K destKey, K[] keys) {
-		return zInterStore(0, destKey, keys);
+		return zInterStore(super.getCurrentDbIndex(), destKey, keys);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2552,7 +2881,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zInterStore(K destKey, Collection<K> keys) {
-		return zInterStore(0, destKey, keys);
+		return zInterStore(super.getCurrentDbIndex(), destKey, keys);
 	}
 
 	@Override
@@ -2562,7 +2891,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, K[] keys) {
-		return zInterStore(0, destKey, aggregate, weights, keys);
+		return zInterStore(super.getCurrentDbIndex(), destKey, aggregate, weights, keys);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2586,7 +2915,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys) {
-		return zInterStore(0, destKey, aggregate, weights, keys);
+		return zInterStore(super.getCurrentDbIndex(), destKey, aggregate, weights, keys);
 	}
 
 	@Override
@@ -2597,7 +2926,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public <K, V> Double zIncrBy(K key, double increment, V member) {
-		return zIncrBy(0, key, increment, member);
+		return zIncrBy(super.getCurrentDbIndex(), key, increment, member);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2621,7 +2950,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public Long dbSize() {
-		return dbSize(0);
+		return dbSize(super.getCurrentDbIndex());
 	}
 
 	@Override
@@ -2651,8 +2980,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 
 	@Override
 	public void flushDb() {
-		// TODO Auto-generated method stub
-		
+		this.flushDb(super.getCurrentDbIndex());
 	}
 
 	@Override

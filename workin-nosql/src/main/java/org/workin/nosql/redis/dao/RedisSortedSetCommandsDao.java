@@ -33,7 +33,7 @@ import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 public interface RedisSortedSetCommandsDao {
 	
 	/**
-	 * @description 在默认第0库中执行zAdd命令
+	 * @description 在当前库中执行zAdd命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param score
@@ -41,6 +41,17 @@ public interface RedisSortedSetCommandsDao {
 	 * @return
 	 */
 	public <K, V> Boolean zAdd(K key, double score, V member);
+	
+	/**
+	 * @description 在当前库中执行zAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param score
+	 * @param member
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Boolean zAdd(K key, double score, V member, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行zAdd命令
@@ -54,13 +65,35 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Boolean zAdd(int dbIndex, K key, double score, V member);
 	
 	/**
-	 * @description 在默认第0库中执行zAdd命令
+	 * @description 在指定索引库中执行zAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param score
+	 * @param member
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Boolean zAdd(int dbIndex, K key, double score, V member, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行zAdd命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param scoreMembers
 	 * @return
 	 */
 	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers);
+	
+	/**
+	 * @description 在当前库中执行zAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param scoreMembers
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行zAdd命令
@@ -73,7 +106,18 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Boolean zAdd(int dbIndex, K key, Map<Double, V> scoreMembers);
 	
 	/**
-	 * @description 在默认第0库中执行zCard命令，获取有序集合键对应的元素个数
+	 * @description 在指定索引库中执行zAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param key
+	 * @param scoreMembers
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Boolean zAdd(int dbIndex, K key, Map<Double, V> scoreMembers, long expireSeconds);
+	
+	/**
+	 * @description 在当前库中执行zCard命令，获取有序集合键对应的元素个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -90,7 +134,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zCard(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行zCount命令，获取有序集合在 (minScore, maxScore]区间范围内的成员数量
+	 * @description 在当前库中执行zCount命令，获取有序集合在 (minScore, maxScore]区间范围内的成员数量
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param minScore
@@ -111,7 +155,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zCount(int dbIndex, K key, double minScore, double maxScore);
 	
 	/**
-	 * @description 在默认第0库中执行zRange命令，获取有序集合下标在区间范围内的所有成员
+	 * @description 在当前库中执行zRange命令，获取有序集合下标在区间范围内的所有成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -132,7 +176,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Set<V> zRange(int dbIndex, K key, long begin, long end);
 	
 	/**
-	 * @description 在默认第0库中执行zRange命令，获取有序集合内的所有成员
+	 * @description 在当前库中执行zRange命令，获取有序集合内的所有成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -153,7 +197,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Set<V> zRangeAll(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行zRangeByScore命令，
+	 * @description 在当前库中执行zRangeByScore命令，
 	 * 				获取有序集合在 [minScore, maxScore]区间范围内的成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -176,7 +220,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Set<V> zRangeByScore(int dbIndex, K key, double minScore, double maxScore);
 	
 	/**
-	 * @description 在默认第0库中执行zRangeByScore命令，从offset开始定位，
+	 * @description 在当前库中执行zRangeByScore命令，从offset开始定位，
 	 * 				获取有序集合在 [minScore, maxScore]区间范围内最多count个成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -201,7 +245,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Set<V> zRangeByScore(int dbIndex, K key, double minScore, double maxScore, long offset, long count);
 	
 	/**
-	 * @description 在默认第0库中执行zRangeByScore命令，
+	 * @description 在当前库中执行zRangeByScore命令，
 	 * 				获取有序集合在 [minScore, maxScore]区间范围内的Tuple对象集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -224,7 +268,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Set<Tuple> zRangeByScoreWithScores(int dbIndex, K key, double minScore, double maxScore);
 	
 	/**
-	 * @description 在默认第0库中执行zRangeByScore命令，从offset开始定位，
+	 * @description 在当前库中执行zRangeByScore命令，从offset开始定位，
 	 * 				获取有序集合在 [minScore, maxScore]区间范围内最多count个Tuple对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -249,7 +293,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Set<Tuple> zRangeByScoreWithScores(int dbIndex, K key, double minScore, double maxScore, long offset, long count);
 
 	/**
-	 * @description 在默认第0库中执行zRank命令，
+	 * @description 在当前库中执行zRank命令，
 	 * 				获取有序键集中，指定成员按score值升序排列后的下标索引
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -270,7 +314,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Long zRank(int dbIndex, K key, V member);
 	
 	/**
-	 * @description 在默认第0库中执行zRem命令，删除指定键集中的成员
+	 * @description 在当前库中执行zRem命令，删除指定键集中的成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param member
@@ -289,7 +333,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Boolean zRem(int dbIndex, K key, V member);
 	
 	/**
-	 * @description 在默认第0库中执行zRem命令，删除指定键集中的多个成员
+	 * @description 在当前库中执行zRem命令，删除指定键集中的多个成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param members
@@ -308,7 +352,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Boolean zRem(int dbIndex, K key, V[] members);
 	
 	/**
-	 * @description 在默认第0库中执行zRem命令，删除指定键集中的多个成员
+	 * @description 在当前库中执行zRem命令，删除指定键集中的多个成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param members
@@ -327,7 +371,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Boolean zRem(int dbIndex, K key, Collection<V> members);
 	
 	/**
-	 * @description 在默认第0库中执行zRemRangeByRank命令，删除指定下标索引范围内的所有成员
+	 * @description 在当前库中执行zRemRangeByRank命令，删除指定下标索引范围内的所有成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -348,7 +392,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zRemRangeByRank(int dbIndex, K key, long begin, long end);
 	
 	/**
-	 * @description 在默认第0库中执行zRemRangeByScore命令，删除指定排名范围内的所有成员
+	 * @description 在当前库中执行zRemRangeByScore命令，删除指定排名范围内的所有成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param minScore
@@ -369,7 +413,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zRemRangeByScore(int dbIndex, K key, double minScore, double maxScore);
 	
 	/**
-	 * @description 在默认第0库中执行zRevRange命令，按score值降序方式返回指定键集范围内的成员集合
+	 * @description 在当前库中执行zRevRange命令，按score值降序方式返回指定键集范围内的成员集合
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -390,7 +434,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Set<V> zRevRange(int dbIndex, K key, long begin, long end);
 	
 	/**
-	 * @description 在默认第0库中执行zRevRange命令，按score值降序方式返回指定键集的所有成员集合
+	 * @description 在当前库中执行zRevRange命令，按score值降序方式返回指定键集的所有成员集合
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -407,7 +451,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Set<V> zRevRangeAll(int dbIndex, K key);
 	
 	/**
-	 * @description 在默认第0库中执行zRevRangeByScore命令，
+	 * @description 在当前库中执行zRevRangeByScore命令，
 	 * 				按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内的所有成员集合
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -430,7 +474,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Set<V> zRevRangeByScore(int dbIndex, K key, double minScore, double maxScore);
 	
 	/**
-	 * @description 在默认第0库中执行zRevRangeByScore命令，
+	 * @description 在当前库中执行zRevRangeByScore命令，
 	 * 				按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内的Tuple对象集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -454,7 +498,7 @@ public interface RedisSortedSetCommandsDao {
 			double minScore, double maxScore);
 	
 	/**
-	 * @description 在默认第0库中执行zRevRangeByScore命令，从offset开始定位，
+	 * @description 在当前库中执行zRevRangeByScore命令，从offset开始定位，
 	 * 				按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内最多count个Tuple对象集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -483,7 +527,7 @@ public interface RedisSortedSetCommandsDao {
 			double minScore, double maxScore, long offset, long count);
 	
 	/**
-	 * @description 在默认第0库中执行zRevRank命令，
+	 * @description 在当前库中执行zRevRank命令，
 	 * 				获取有序键集中，指定成员按score值降序排列后的下标索引
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -504,7 +548,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Long zRevRank(int dbIndex, K key, V member);
 	
 	/**
-	 * @description 在默认第0库中执行zScore命令，获取有序键集中，指定成员的score值
+	 * @description 在当前库中执行zScore命令，获取有序键集中，指定成员的score值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param member
@@ -523,7 +567,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Double zScore(int dbIndex, K key, V member);
 	
 	/**
-	 * @description 在默认第0库中执行zUnionStore命令，
+	 * @description 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -544,7 +588,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zUnionStore(int dbIndex, K destKey, K key);
 	
 	/**
-	 * @description 在默认第0库中执行zUnionStore命令，
+	 * @description 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -565,7 +609,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zUnionStore(int dbIndex, K destKey, K[] keys);
 	
 	/**
-	 * @description 在默认第0库中执行zUnionStore命令，
+	 * @description 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -586,7 +630,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zUnionStore(int dbIndex, K destKey, Collection<K> keys);
 	
 	/**
-	 * @description 在默认第0库中执行zUnionStore命令，
+	 * @description 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -611,7 +655,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
-	 * @description 在默认第0库中执行zUnionStore命令，
+	 * @description 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -636,7 +680,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
 	
 	/**
-	 * @description 在默认第0库中执行zInterStore命令，
+	 * @description 在当前库中执行zInterStore命令，
 	 * 				获取指定目标键集与键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -657,7 +701,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zInterStore(int dbIndex, K destKey, K srcKey);
 	
 	/**
-	 * @description 在默认第0库中执行zUnionStore命令，
+	 * @description 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -678,7 +722,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zInterStore(int dbIndex, K destKey, K[] keys);
 	
 	/**
-	 * @description 在默认第0库中执行zUnionStore命令，
+	 * @description 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -699,7 +743,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zInterStore(int dbIndex, K destKey, Collection<K> keys);
 	
 	/**
-	 * @description 在默认第0库中执行zUnionStore命令，
+	 * @description 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -724,7 +768,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
-	 * @description 在默认第0库中执行zUnionStore命令，
+	 * @description 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -749,7 +793,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
 	
 	/**
-	 * @description 在默认第0库中执行zIncrBy命令，
+	 * @description 在当前库中执行zIncrBy命令，
 	 * 				为指定的键集成员的socre值加上(increment > 0)/减去(increment < 0)增量
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -760,7 +804,7 @@ public interface RedisSortedSetCommandsDao {
 	public <K, V> Double zIncrBy(K key, double increment, V member);
 	
 	/**
-	 * @description 在默认第0库中执行zIncrBy命令，
+	 * @description 在当前库中执行zIncrBy命令，
 	 * 				为指定的键集成员的socre值加上(increment > 0)/减去(increment < 0)增量
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
