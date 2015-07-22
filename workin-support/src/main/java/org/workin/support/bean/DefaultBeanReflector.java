@@ -227,7 +227,6 @@ public class DefaultBeanReflector implements BeanReflector {
 					throw new NoSuchMethodException("Unknow member propertity [" + memberName 
 							+ "] value,Please ensure that this property or corresponding setter method exists");
 				}
-				
 			}
 		}
 	}
