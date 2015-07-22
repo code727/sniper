@@ -294,5 +294,18 @@ public class ClassUtils {
 	public static boolean isJavaTypeObject(Object obj) {  
 	    return obj != null && isJavaType(obj.getClass());
 	}  
+	
+	/**
+	 * @description 返回当前非Class对象的类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static Class<?> getDeclaredClass(Object object) {
+		if (object == null)
+			return null;
+		
+		return !(object instanceof Class) ? object.getClass() : (Class<?>) object;
+	}
 						
 }

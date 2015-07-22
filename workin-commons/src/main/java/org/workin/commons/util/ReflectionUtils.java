@@ -35,33 +35,23 @@ import java.util.Set;
 public class ReflectionUtils {
 	
 	/**
-	 * @description 返回当前非Class对象的类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @return
-	 */
-	private static Class<?> getCurrentClass(Object object) {
-		return !(object instanceof Class) ? object.getClass() : (Class<?>) object;
-	}
-	
-	/**
 	 * @description 获取当前对象所在类以及非Object基类中定义的所有方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @return
 	 */
 	public static List<Method> getDeclaredMethods(Object object) {
-		if (object == null)
-			return null;
-		
-		List<Method> method = CollectionUtils.newArrayList();
-		Class<?> currentClass = getCurrentClass(object);
-		while (currentClass != Object.class) {
-			// 如果当前对象所属的类不是顶层基类(Object),则获取此类以及基类中的所有方法
-			method.addAll(Arrays.asList(currentClass.getDeclaredMethods()));
-			currentClass = currentClass.getSuperclass();
+		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		if (declaredClass != null) {
+			List<Method> method = CollectionUtils.newArrayList();
+			while (declaredClass != Object.class) {
+				// 如果当前对象所属的类不是顶层基类(Object),则获取此类以及基类中的所有方法
+				method.addAll(Arrays.asList(declaredClass.getDeclaredMethods()));
+				declaredClass = declaredClass.getSuperclass();
+			}
+			return method;
 		}
-		return method;
+		return null;
 	}
 	
 	/**
@@ -90,15 +80,18 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static Method getDeclaredMethod(Object object, String methodName, Class<?>[] pTypes) {
-		if (object == null || StringUtils.isBlank(methodName))
+		if (StringUtils.isBlank(methodName))
 			return null;
 		
-		Class<?> currentClass = getCurrentClass(object);
-		while (currentClass != Object.class) {
-			try {
-				return currentClass.getDeclaredMethod(methodName.trim(), pTypes);
-			} catch (NoSuchMethodException e) {
-				currentClass = currentClass.getSuperclass();
+		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		if (declaredClass != null) {
+			methodName = methodName.trim();
+			while (declaredClass != Object.class) {
+				try {
+					return declaredClass.getDeclaredMethod(methodName, pTypes);
+				} catch (NoSuchMethodException e) {
+					declaredClass = declaredClass.getSuperclass();
+				}
 			}
 		}
 		return null;
@@ -125,15 +118,16 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static Method getMethod(Object object, String methodName, Class<?>[] pTypes) {
-		if (object == null || StringUtils.isBlank(methodName))
+		if (StringUtils.isBlank(methodName))
 			return null;
 		
-		Class<?> currentClass = getCurrentClass(object);
-		while (currentClass != null) {
+		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		while (declaredClass != null) {
+			methodName = methodName.trim();
 			try {
-				return currentClass.getDeclaredMethod(methodName.trim(), pTypes);
+				return declaredClass.getDeclaredMethod(methodName, pTypes);
 			} catch (NoSuchMethodException e) {
-				currentClass = currentClass.getSuperclass();
+				declaredClass = declaredClass.getSuperclass();
 			}
 		}
 		return null;
@@ -158,17 +152,17 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static List<Constructor<?>> getDeclaredConstructors(Object object) {
-		if (object == null)
-			return null;
-		
-		List<Constructor<?>> constructors = CollectionUtils.newArrayList();
-		Class<?> currentClass = getCurrentClass(object);
-		while (currentClass != Object.class) {
-			// 如果当前对象所属的类不是顶级基类(Object),则获取此类以及基类中的所有方法
-			constructors.addAll(Arrays.asList(currentClass.getDeclaredConstructors()));
-			currentClass = currentClass.getSuperclass();
+		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		if (declaredClass != null) {
+			List<Constructor<?>> constructors = CollectionUtils.newArrayList();
+			while (declaredClass != Object.class) {
+				// 如果当前对象所属的类不是顶级基类(Object),则获取此类以及基类中的所有方法
+				constructors.addAll(Arrays.asList(declaredClass.getDeclaredConstructors()));
+				declaredClass = declaredClass.getSuperclass();
+			}
+			return constructors;
 		}
-		return constructors;
+		return null;
 	}
 	
 	/**
@@ -196,15 +190,14 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static Constructor<?> getDeclaredConstructor(Object object, Class<?>[] pTypes) {
-		if (object == null)
-			return null;
-		
-		Class<?> currentClass = getCurrentClass(object);
-		while (currentClass != Object.class) {
-			try {
-				return currentClass.getDeclaredConstructor(pTypes);
-			} catch (NoSuchMethodException e) {
-				currentClass = currentClass.getSuperclass();
+		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		if (declaredClass != null) {
+			while (declaredClass != Object.class) {
+				try {
+					return declaredClass.getDeclaredConstructor(pTypes);
+				} catch (NoSuchMethodException e) {
+					declaredClass = declaredClass.getSuperclass();
+				}
 			}
 		}
 		return null;
@@ -229,15 +222,14 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static Constructor<?> getConstructor(Object object, Class<?>[] pTypes) {
-		if (object == null)
-			return null;
-		
-		Class<?> currentClass = getCurrentClass(object);
-		while (currentClass != null) {
-			try {
-				return currentClass.getDeclaredConstructor(pTypes);
-			} catch (NoSuchMethodException e) {
-				currentClass = currentClass.getSuperclass();
+		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		if (declaredClass != null) {
+			while (declaredClass != null) {
+				try {
+					return declaredClass.getDeclaredConstructor(pTypes);
+				} catch (NoSuchMethodException e) {
+					declaredClass = declaredClass.getSuperclass();
+				}
 			}
 		}
 		return null;
@@ -261,16 +253,16 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static List<Field> getDeclaredFields(Object object) {
-		if (object == null)
-			return null;
-		
-		List<Field> fields = CollectionUtils.newArrayList();
-		Class<?> currentClass = getCurrentClass(object);
-		while (currentClass != Object.class) {
-			fields.addAll(Arrays.asList(currentClass.getDeclaredFields()));
-			currentClass = currentClass.getSuperclass();
+		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		if (declaredClass != null) {
+			List<Field> fields = CollectionUtils.newArrayList();
+			while (declaredClass != Object.class) {
+				fields.addAll(Arrays.asList(declaredClass.getDeclaredFields()));
+				declaredClass = declaredClass.getSuperclass();
+			}
+			return fields;
 		}
-		return fields;
+		return null;
 	}
 	
 	/**
@@ -299,15 +291,18 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static Field getDeclaredField(Object object, String fieldName) {
-		if (object == null || StringUtils.isBlank(fieldName))
+		if (StringUtils.isBlank(fieldName))
 			return null;
 		
-		Class<?> currentClass = getCurrentClass(object);
-		while (currentClass != Object.class) {
-			try {
-				return currentClass.getDeclaredField(fieldName.trim());
-			} catch (NoSuchFieldException e) {
-				currentClass = currentClass.getSuperclass();
+		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		if (declaredClass != null) {
+			fieldName = fieldName.trim();
+			while (declaredClass != Object.class) {
+				try {
+					return declaredClass.getDeclaredField(fieldName);
+				} catch (NoSuchFieldException e) {
+					declaredClass = declaredClass.getSuperclass();
+				}
 			}
 		}
 		return null;
@@ -365,30 +360,49 @@ public class ReflectionUtils {
 	 * @param object
 	 * @param fieldName
 	 * @return
-	 * @throws Exception 
+	 * @throws NoSuchFieldException
 	 */
-	public static <V> V getFieldValue(Object object, String fieldName) throws Exception {
-		return getFieldValue(object, getField(object, fieldName));
-	}
+	public static <V> V getFieldValue(Object object, String fieldName) throws NoSuchFieldException {
+		Field field = getField(object, fieldName);
+		if (field == null)
+			throw new NoSuchFieldException("No such target field [" + StringUtils.safeString(fieldName) + "]," + 
+				"Please check whether invoked target and field name not be null,and ensure field are present in the current target class.");
 		
+		return getAccessibleFieldValue(object, field);
+	}
+	
 	/**
-	 * @description  获取当前对象某个属性的值
+	 * @description 获取当前对象某个属性的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param field
 	 * @return
-	 * @throws Exception 
+	 */
+	public static <V> V getFieldValue(Object object, Field field) {
+		AssertUtils.assertNotNull(object, "Target object can not be null.");
+		return getAccessibleFieldValue(object, field);
+	}
+	
+	/**
+	 * @description 获取当前对象某个被强制设置为可访问的属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param object
+	 * @param field
+	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static <V> V getFieldValue(Object object, Field field) throws Exception {
-		if (object == null)
-			return null;
+	private static <V> V getAccessibleFieldValue(Object object, Field field) {
+		AssertUtils.assertNotNull(field, "Target field can not be null.");
 		
-		if (field != null) {
-			field.setAccessible(true);
+		field.setAccessible(true);
+		try {
 			return (V) field.get(object);
-		} else
-			throw new NullPointerException("Target object [" + object.getClass() + "] field can not be null.");
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 		
 	/**
@@ -399,16 +413,13 @@ public class ReflectionUtils {
 	 * @param value
 	 * @throws NoSuchFieldException 
 	 */
-	public static void setFieldValue(Object object, String fieldName, Object value) throws Exception {
-		AssertUtils.assertNotNull(object, "Target object can not be null.");
-		AssertUtils.assertTrue(StringUtils.isNotBlank(fieldName), "Target object field name can not be null or blank.");
-		
+	public static void setFieldValue(Object object, String fieldName, Object value) throws NoSuchFieldException {
 		Field field = getField(object, fieldName);
-		if (field != null) {
-			field.setAccessible(true);
-			field.set(object, value);
-		} else
-			throw new NoSuchFieldException("No such [" + object.getClass().getName() + "] field [" + fieldName + "].");
+		if (field == null)
+			throw new NoSuchFieldException("No such target field [" + StringUtils.safeString(fieldName) + "]," + 
+				"Please check whether invoked target and field name not be null,and ensure field are present in the current target class.");
+		
+		setAccessibleFieldValue(object, field, value);
 	}
 	
 	/** 
@@ -418,11 +429,45 @@ public class ReflectionUtils {
 	 * @param fieldValues
 	 * @throws NoSuchFieldException 
 	 */
-	public static void setFieldValue(Object object, Map<String, Object> fieldValues) throws Exception {
+	public static void setFieldValue(Object object, Map<String, Object> fieldValues) throws NoSuchFieldException {
+		AssertUtils.assertTrue(MapUtils.isNotEmpty(fieldValues), "Field values map can not be empty");
+		
 		if (object != null && MapUtils.isNotEmpty(fieldValues)) {
 			Set<Entry<String, Object>> fieldValueSet = fieldValues.entrySet();
 			for (Entry<String, Object> fieldValue : fieldValueSet) 
 				setFieldValue(object, fieldValue.getKey(), fieldValue.getValue());
+		}
+	}
+	
+	/**
+	 * @description 设置当前对象的某个属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param object
+	 * @param field
+	 * @param value
+	 */
+	public static void setFieldValue(Object object, Field field, Object value) {
+		AssertUtils.assertNotNull(object, "Target object can not be null.");
+		setAccessibleFieldValue(object, field, value);
+	}
+	
+	/**
+	 * @description 设置当前对象某个被强制设置为可访问的属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param object
+	 * @param field
+	 * @param value
+	 */
+	private static void setAccessibleFieldValue(Object object, Field field, Object value) {
+		AssertUtils.assertNotNull(field, "Target field can not be null.");
+		
+		field.setAccessible(true);
+		try {
+			field.set(object, value);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -474,6 +519,7 @@ public class ReflectionUtils {
 	 */
 	public static <T> T newInstance(Class<T> c, Class<?>[] pTypes, Object[] pValue) {
 		AssertUtils.assertNotNull(c, "Can not be create instance by null class.");
+		
 		try {
 			if (ArrayUtils.isNotEmpty(pTypes)) {
 				Constructor<T> constructor = c.getDeclaredConstructor(pTypes);
@@ -515,7 +561,7 @@ public class ReflectionUtils {
 		Method method = getMethod(target, methodName, pTypes);
 		if (method == null)
 			throw new NoSuchMethodException("No such invoked target method [" + StringUtils.safeString(methodName) + "]," + 
-					"Please check whether invoked target and method name can't be null,and ensure target method exists.");
+					"Please check whether invoked target and method name not be null,and ensure method are present in the current target class.");
 		try {
 			method.setAccessible(true);
 			// 参数类型为空时，则调用目标无参数的方法，因此忽略掉传入的参数值

@@ -88,7 +88,6 @@ public class BeanUtils {
 		}
 		return null;
 	}
-	
 		
 	/**
 	 * @description 获取非boolean类型属性对应的getter方法名称
@@ -110,7 +109,6 @@ public class BeanUtils {
 	public static String getterName(String propertyName, Class<?> paramterType) {
 		return methodName(propertyName, "get", paramterType);
 	}
-	
 	
 	/**
 	 * @description 获取属性对应的setter方法名称
