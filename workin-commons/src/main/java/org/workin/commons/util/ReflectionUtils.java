@@ -20,6 +20,7 @@ package org.workin.commons.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
@@ -368,7 +369,7 @@ public class ReflectionUtils {
 			throw new NoSuchFieldException("No such target field [" + StringUtils.safeString(fieldName) + "]," + 
 				"Please check whether invoked target and field name not be null,and ensure field are present in the current target class.");
 		
-		return getAccessibleFieldValue(object, field);
+		return Supports.getAccessibleFieldValue(object, field);
 	}
 	
 	/**
@@ -380,31 +381,9 @@ public class ReflectionUtils {
 	 */
 	public static <V> V getFieldValue(Object object, Field field) {
 		AssertUtils.assertNotNull(object, "Target object can not be null.");
-		return getAccessibleFieldValue(object, field);
+		return Supports.getAccessibleFieldValue(object, field);
 	}
 	
-	/**
-	 * @description 获取当前对象某个被强制设置为可访问的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param object
-	 * @param field
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	private static <V> V getAccessibleFieldValue(Object object, Field field) {
-		AssertUtils.assertNotNull(field, "Target field can not be null.");
-		
-		field.setAccessible(true);
-		try {
-			return (V) field.get(object);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-		
 	/**
 	 * @description 设置当前对象的某个属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -419,7 +398,7 @@ public class ReflectionUtils {
 			throw new NoSuchFieldException("No such target field [" + StringUtils.safeString(fieldName) + "]," + 
 				"Please check whether invoked target and field name not be null,and ensure field are present in the current target class.");
 		
-		setAccessibleFieldValue(object, field, value);
+		Supports.setAccessibleFieldValue(object, field, value);
 	}
 	
 	/** 
@@ -448,27 +427,7 @@ public class ReflectionUtils {
 	 */
 	public static void setFieldValue(Object object, Field field, Object value) {
 		AssertUtils.assertNotNull(object, "Target object can not be null.");
-		setAccessibleFieldValue(object, field, value);
-	}
-	
-	/**
-	 * @description 设置当前对象某个被强制设置为可访问的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param object
-	 * @param field
-	 * @param value
-	 */
-	private static void setAccessibleFieldValue(Object object, Field field, Object value) {
-		AssertUtils.assertNotNull(field, "Target field can not be null.");
-		
-		field.setAccessible(true);
-		try {
-			field.set(object, value);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
+		Supports.setAccessibleFieldValue(object, field, value);
 	}
 	
 	/**
@@ -486,13 +445,13 @@ public class ReflectionUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param className
 	 * @param pTypes
-	 * @param pValue
+	 * @param pValues
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T newInstance(String className, Class<?>[] pTypes, Object[] pValue) {
+	public static <T> T newInstance(String className, Class<?>[] pTypes, Object[] pValues) {
 		try {
-			return (T) newInstance(Class.forName(className), pTypes, pValue);
+			return (T) newInstance(Class.forName(className), pTypes, pValues);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -514,17 +473,17 @@ public class ReflectionUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c
 	 * @param pTypes 构造函数中各参数对应的类型
-	 * @param pValue 构造函数中对应的参数值
+	 * @param pValues 构造函数中对应的参数值
 	 * @return
 	 */
-	public static <T> T newInstance(Class<T> c, Class<?>[] pTypes, Object[] pValue) {
+	public static <T> T newInstance(Class<T> c, Class<?>[] pTypes, Object[] pValues) {
 		AssertUtils.assertNotNull(c, "Can not be create instance by null class.");
 		
 		try {
 			if (ArrayUtils.isNotEmpty(pTypes)) {
 				Constructor<T> constructor = c.getDeclaredConstructor(pTypes);
 				constructor.setAccessible(true);
-				return constructor.newInstance(pValue);
+				return constructor.newInstance(pValues);
 			} else
 				// 参数类型为空时，则调用目标无参数的构造函数，因此忽略掉传入的参数值
 				return c.newInstance();
@@ -552,27 +511,103 @@ public class ReflectionUtils {
 	 * @param target
 	 * @param methodName
 	 * @param pTypes 方法中各参数对应的类型
-	 * @param pValue
+	 * @param pValues
 	 * @return
 	 * @throws NoSuchMethodException 
 	 */
 	public static Object invokeMethod(Object target, String methodName,
-			Class<?>[] pTypes, Object[] pValue) throws NoSuchMethodException {
+			Class<?>[] pTypes, Object[] pValues) throws NoSuchMethodException {
 		Method method = getMethod(target, methodName, pTypes);
 		if (method == null)
 			throw new NoSuchMethodException("No such invoked target method [" + StringUtils.safeString(methodName) + "]," + 
 					"Please check whether invoked target and method name not be null,and ensure method are present in the current target class.");
-		try {
-			method.setAccessible(true);
-			// 参数类型为空时，则调用目标无参数的方法，因此忽略掉传入的参数值
-			if (ArrayUtils.isEmpty(pTypes)) 
-				return method.invoke(target, new Object[] {});
-			
-			return method.invoke(target, pValue);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		return null;
+		
+		return Supports.invokeAccessibleMethod(target, method, pTypes, pValues);
 	}
+	
+	/**
+	 * @description 当前包下共享的静态反射工具支持类
+	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @version 1.0
+	 */
+	static class Supports {
+		
+		/**
+		 * @description 设置当前对象某个被强制设置为可访问的属性值
+		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @param object
+		 * @param field
+		 * @param value
+		 */
+		public static void setAccessibleFieldValue(Object object, Field field, Object value) {
+			AssertUtils.assertNotNull(field, "Target field can not be null.");
 			
+			field.setAccessible(true);
+			try {
+				field.set(object, value);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		/**
+		 * @description 获取当前对象某个被强制设置为可访问的属性值
+		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @param object
+		 * @param field
+		 * @return
+		 */
+		@SuppressWarnings("unchecked")
+		public static <V> V getAccessibleFieldValue(Object object, Field field) {
+			AssertUtils.assertNotNull(field, "Target field can not be null.");
+			
+			field.setAccessible(true);
+			try {
+				return (V) field.get(object);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		/**
+		 * @description 调用目标对象某个被强制设置为可访问的方法后返回调用结果
+		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @param target
+		 * @param method
+		 * @param pTypes
+		 * @param pValues
+		 * @return
+		 */
+		public static Object invokeAccessibleMethod(Object target, Method method, Class<?>[] pTypes, Object[] pValues) {
+			method.setAccessible(true);
+			try {
+				// 参数类型或值列表为空时，则调用目标无参数的方法
+				if (ArrayUtils.isEmpty(pTypes) || ArrayUtils.isEmpty(pValues))
+					return method.invoke(target, new Object[] {});
+				
+				int typeCount = pTypes.length;
+				int valueCount = pValues.length;
+				if (typeCount < valueCount) {
+					/* 实际的类型个数小于值列表个数时，则忽略多余的参数值 */
+					Object[] values = new Object[typeCount];
+					System.arraycopy(pValues, 0, values, 0, typeCount);
+					return method.invoke(target, values);
+				}
+				return method.invoke(target, pValues);
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
+	
 }
