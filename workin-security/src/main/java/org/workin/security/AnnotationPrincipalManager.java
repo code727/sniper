@@ -20,10 +20,10 @@ package org.workin.security;
 
 import java.lang.reflect.Field;
 
-import org.workin.commons.test.annotation.LoginName;
-import org.workin.commons.test.annotation.UserName;
 import org.workin.commons.util.AnnotationUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.security.annotation.LoginName;
+import org.workin.security.annotation.UserName;
 
 
 /**
