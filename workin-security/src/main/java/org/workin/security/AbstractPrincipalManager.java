@@ -74,7 +74,7 @@ public abstract class AbstractPrincipalManager implements PrincipalManager, Init
 			return user.toString();
 
 		try {
-			return BeanUtils.get(user, this.principalMeta.getLoginNameField()).toString();
+			return StringUtils.toString(BeanUtils.get(user, this.principalMeta.getLoginNameField()));
 		} catch (Exception e) {
 			throw new SecurityException("Can not found login name field [" 
 					+ this.principalMeta.getLoginNameField() + "] in user class [" + user.getClass() + "].");
@@ -89,7 +89,7 @@ public abstract class AbstractPrincipalManager implements PrincipalManager, Init
 			return user.toString();
 		
 		try {
-			return BeanUtils.get(user, this.principalMeta.getUserNameField()).toString();
+			return StringUtils.toString(BeanUtils.get(user, this.principalMeta.getUserNameField()));
 		} catch (Exception e) {
 			throw new SecurityException("Can not found user name field ["
 					+ this.principalMeta.getUserNameField() + "] in user class [" + user.getClass() + "].");
