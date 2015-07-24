@@ -19,7 +19,6 @@
 package org.workin.commons.test;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.workin.commons.test.annotation.Principal;
 import org.workin.commons.test.annotation.UserName;
 import org.workin.commons.test.domain.User;
@@ -56,11 +55,4 @@ public class AnnotationUtilsTest extends BaseTestCase {
 		System.out.println(AnnotationUtils.findFirstAnnotationField(user.getClass(), UserName.class));
 	}
 	
-	@Test
-	public void testGetX() {
-//		System.out.println(AnnotationUtils.getFirstAnnotationFieldValue(user, LoginName.class));
-		System.out.println(AnnotationUtils.getFirstAnnotationMethodValue(user, UserName.class));
-//		System.out.println(AnnotationUtils.getFirstAnnotationMethodValue(user, LoginName.class, new Object[]{}));
-	}
-
 }
