@@ -18,6 +18,9 @@
 
 package org.workin.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.StringUtils;
 import org.workin.support.bean.BeanUtils;
 
@@ -26,16 +29,41 @@ import org.workin.support.bean.BeanUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractPrincipalManager implements PrincipalManager {
+public abstract class AbstractPrincipalManager implements PrincipalManager, InitializingBean {
 	
-	protected PrincipalField principalField;
+	private final Logger logger;
 	
-	public PrincipalField getPrincipalField() {
-		return principalField;
+	private PrincipalMeta principalMeta;
+	
+	public AbstractPrincipalManager() {
+		this.logger = LoggerFactory.getLogger(getClass());
+	}
+	
+	public PrincipalMeta getPrincipalMeta() {
+		return principalMeta;
 	}
 
-	public void setPrincipalField(PrincipalField principalField) {
-		this.principalField = principalField;
+	public void setPrincipalMeta(PrincipalMeta principalMeta) {
+		this.principalMeta = principalMeta;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		if (this.principalMeta == null) 
+			this.principalMeta = new PrincipalMeta();
+		
+		if (StringUtils.isBlank(this.principalMeta.getLoginNameField())) {
+			this.principalMeta.setLoginNameField(PrincipalMeta.DEFAULT_LOGINNAMEFIELD);
+			logger.info("PrincipalMeta loginNameField property is blank, will be set defalut value:"
+					+ PrincipalMeta.DEFAULT_LOGINNAMEFIELD);
+		}
+		
+		if (StringUtils.isBlank(this.principalMeta.getUserNameField())) {
+			this.principalMeta.setUserNameField(PrincipalMeta.DEFAULT_USERNAMEFIELD);
+			logger.info("PrincipalMeta userNameField property is blank, will be set defalut value:"
+					+ PrincipalMeta.DEFAULT_USERNAMEFIELD);
+		}
+		
 	}
 	
 	@Override
@@ -44,21 +72,12 @@ public abstract class AbstractPrincipalManager implements PrincipalManager {
 		Object user = getCurrentUser();
 		if (user instanceof String)
 			return user.toString();
-		
-		if (hasLoginNameField()) {
-			try {
-				return BeanUtils.get(user, principalField.getLoginNameField()).toString();
-			} catch (Exception e) {
-				throw new SecurityException("Login name field ["
-						+ principalField.getLoginNameField() + "] can not found in user class [" + user.getClass() + "].");
-			}
-		} else {
-			try {
-				return BeanUtils.get(user, PrincipalField.DEFAULT_LOGINNAMEFIELD).toString();
-			} catch (Exception e) {
-				throw new SecurityException("Login name field [" 
-						+ PrincipalField.DEFAULT_LOGINNAMEFIELD + "] can not found in user class [" + user.getClass() + "].");
-			}
+
+		try {
+			return BeanUtils.get(user, this.principalMeta.getLoginNameField()).toString();
+		} catch (Exception e) {
+			throw new SecurityException("Can not found login name field [" 
+					+ this.principalMeta.getLoginNameField() + "] in user class [" + user.getClass() + "].");
 		}
 	}
 
@@ -69,20 +88,11 @@ public abstract class AbstractPrincipalManager implements PrincipalManager {
 		if (user instanceof String)
 			return user.toString();
 		
-		if (hasUserNameField()) {
-			try {
-				return BeanUtils.get(user, principalField.getUserNameField()).toString();
-			} catch (Exception e) {
-				throw new SecurityException("User name field ["
-						+ principalField.getUserNameField() + "] can not found in user class [" + user.getClass() + "].");
-			}
-		} else {
-			try {
-				return BeanUtils.get(user, PrincipalField.DEFAULT_USERNAMEFIELD).toString();
-			} catch (Exception e) {
-				throw new SecurityException("User name field [" 
-						+ PrincipalField.DEFAULT_USERNAMEFIELD + "] can not found in user class [" + user.getClass() + "].");
-			}
+		try {
+			return BeanUtils.get(user, this.principalMeta.getUserNameField()).toString();
+		} catch (Exception e) {
+			throw new SecurityException("Can not found user name field ["
+					+ this.principalMeta.getUserNameField() + "] in user class [" + user.getClass() + "].");
 		}
 	}
 	
@@ -96,23 +106,5 @@ public abstract class AbstractPrincipalManager implements PrincipalManager {
 		if (user == null)
 			throw new SecurityException("Current user is null! Please login again.");
 	}
-	
-	/**
-	 * @description 判断是否指定有登录名字段
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	protected boolean hasLoginNameField() {
-		return principalField != null && StringUtils.isNotBlank(principalField.getLoginNameField());
-	}
-	
-	/**
-	 * @description 判断是否指定有用户名字段
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	protected boolean hasUserNameField() {
-		return principalField != null && StringUtils.isNotBlank(principalField.getUserNameField());
-	}
-	
+		
 }
