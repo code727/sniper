@@ -18,14 +18,14 @@
 
 package org.workin.security.shiro;
 
-import org.workin.security.AbstractPrincipalManager;
+import org.workin.security.AnnotationPrincipalManager;
 
 /**
  * @description Shiro Principal管理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ShiroPrincipalManager extends AbstractPrincipalManager {
+public class ShiroPrincipalManager extends AnnotationPrincipalManager {
 	
 	@Override
 	public <T> T getCurrentUser() {

@@ -13,23 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-1-27
+ * Create Date : 2015-7-21
  */
 
-package org.workin.security.spring;
-
-import org.workin.security.AnnotationPrincipalManager;
+package org.workin.security;
 
 /**
- * @description Spring安全管理器
+ * @description 自定义认证/授权过滤器链管理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SpringSecurityPrincipalManager extends AnnotationPrincipalManager {
+public interface AuthFilterChainManager {
 	
-	@Override
-	public <T> T getCurrentUser() {
-		return SpringSecurityUtils.getCurrentUser();
-	}
+	/**
+	 * @description 加载过滤链中配置的认证/授权规则信息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String loadFilterChainDefinitions();
+	
+	/**
+	 * @description 重新加载过滤链中配置的认证/授权规则信息。
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	public void reloadFilterChainDefinitions();
 
 }

@@ -19,11 +19,11 @@
 package org.workin.security;
 
 /**
- * @description Principal域对象
+ * @description Principal元数据对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class PrincipalField {
+public class PrincipalMeta {
 	
 	/** 默认的用户登录名字段名称 */
 	public static final String DEFAULT_LOGINNAMEFIELD = "loginName";

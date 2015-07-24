@@ -13,23 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-1-27
+ * Create Date : 2015-7-21
  */
 
-package org.workin.security.spring;
-
-import org.workin.security.AnnotationPrincipalManager;
+package org.workin.security;
 
 /**
- * @description Spring安全管理器
+ * @description 动态认证/授权服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SpringSecurityPrincipalManager extends AnnotationPrincipalManager {
+public interface DynamicAuthService {
 	
-	@Override
-	public <T> T getCurrentUser() {
-		return SpringSecurityUtils.getCurrentUser();
-	}
 
 }
