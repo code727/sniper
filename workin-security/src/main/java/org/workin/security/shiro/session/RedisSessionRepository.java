@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年5月11日
+ * Create Date : 2015-5-11
  */
 
 package org.workin.security.shiro.session;
@@ -41,7 +41,7 @@ public class RedisSessionRepository implements SessionRepository {
 	private String prefix;
 	
 	/** 存储会话数据的库索引 */
-	private int index;
+	private int dbIndex;
 	
 	/** 标识是否自动删除 */
 	private boolean autoDelete = false;
@@ -61,12 +61,12 @@ public class RedisSessionRepository implements SessionRepository {
 		this.prefix = prefix;
 	}
 
-	public int getIndex() {
-		return index;
+	public int getDbIndex() {
+		return dbIndex;
 	}
 
-	public void setIndex(int index) {
-		this.index = index;
+	public void setDbIndex(int dbIndex) {
+		this.dbIndex = dbIndex;
 	}
 
 	public boolean isAutoDelete() {
@@ -91,7 +91,7 @@ public class RedisSessionRepository implements SessionRepository {
 			((SimpleSession)session).setStopTimestamp(null);
 		
 		String sessionId = getPrefix() + session.getId();
-		redisCommandsDao.set(index, sessionId, session);
+		redisCommandsDao.set(dbIndex, sessionId, session);
 		logger.debug("Set session id:" + sessionId);
 	}
 
@@ -99,7 +99,7 @@ public class RedisSessionRepository implements SessionRepository {
 	public void deleteSession(Serializable sessionId) {
 		if (autoDelete) {
 			String cacheSessionId = getPrefix() + sessionId;
-			redisCommandsDao.del(index, new Serializable[] { cacheSessionId });
+			redisCommandsDao.del(dbIndex, new Serializable[] { cacheSessionId });
 			logger.debug("Delete session id:" + cacheSessionId);
 		}
 	}
@@ -107,7 +107,7 @@ public class RedisSessionRepository implements SessionRepository {
 	@Override
 	public Session getSession(Serializable sessionId) {
 		String cacheSessionId = getPrefix() + sessionId;
-		Session session = redisCommandsDao.get(index, cacheSessionId);
+		Session session = redisCommandsDao.get(dbIndex, cacheSessionId);
 		logger.debug("Get session id:" + cacheSessionId);
 		return session;
 	}
@@ -115,7 +115,7 @@ public class RedisSessionRepository implements SessionRepository {
 	@Override
 	public Collection<Session> getAllSessions() {
 		String keys = getPrefix() + "*";
-		Collection<Session> sessions = redisCommandsDao.values(index, keys);
+		Collection<Session> sessions = redisCommandsDao.values(dbIndex, keys);
 		logger.debug("Get all session keys:" + keys);
 		return sessions;
 	}

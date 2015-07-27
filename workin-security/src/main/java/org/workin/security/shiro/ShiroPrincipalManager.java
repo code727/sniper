@@ -18,7 +18,7 @@
 
 package org.workin.security.shiro;
 
-import org.workin.security.AnnotationPrincipalManager;
+import org.workin.security.manager.AnnotationPrincipalManager;
 
 /**
  * @description Shiro Principal管理器

@@ -18,7 +18,7 @@
 
 package org.workin.security.spring;
 
-import org.workin.security.AnnotationPrincipalManager;
+import org.workin.security.manager.AnnotationPrincipalManager;
 
 /**
  * @description Spring安全管理器

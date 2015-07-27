@@ -19,7 +19,7 @@
 package org.workin.persistence.handler;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.workin.security.PrincipalManager;
+import org.workin.security.manager.PrincipalManager;
 
 /**
  * @description 关联Principal对象的审核者处理器抽象类
