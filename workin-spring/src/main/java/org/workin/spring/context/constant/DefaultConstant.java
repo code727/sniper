@@ -23,11 +23,8 @@ import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.MapUtils;
-import org.workin.commons.util.StringUtils;
-import org.workin.spring.puter.CoverageDulicateKeyPuter;
-import org.workin.spring.puter.DulicateKeyPuter;
-import org.workin.spring.puter.ErrorDulicateKeyPuter;
-import org.workin.spring.puter.IgnoreDulicateKeyPuter;
+import org.workin.support.puter.ErrorDulicateKeyPuter;
+import org.workin.support.puter.Puter;
 
 /**
  * @description 默认的全局应用常量配置实现类
@@ -38,20 +35,8 @@ public class DefaultConstant implements Constant, InitializingBean {
 	
 	private Map<Object, Object> constantMap;
 	
-	/** 重复键处理策略 */
-	private String dulicateStrategy;
-	
-	private Map<String, DulicateKeyPuter> puters;
-	
-	private DulicateKeyPuter currentPuter;
-		
-	public DefaultConstant() {
-		puters = MapUtils.newHashMap();
-		puters.put("error", new ErrorDulicateKeyPuter());
-		puters.put("ignore", new IgnoreDulicateKeyPuter());
-		puters.put("coverage", new CoverageDulicateKeyPuter());
-	}
-	
+	private Puter puter;
+			
 	public Map<Object, Object> getConstantMap() {
 		return constantMap;
 	}
@@ -59,26 +44,22 @@ public class DefaultConstant implements Constant, InitializingBean {
 	public void setConstantMap(Map<Object, Object> constantMap) {
 		this.constantMap = constantMap;
 	}
-
-	public String getDulicateStrategy() {
-		return dulicateStrategy;
-	}
-
-	public void setDulicateStrategy(String dulicateStrategy) {
-		this.dulicateStrategy = dulicateStrategy;
-	}
 	
+	public Puter getPuter() {
+		return puter;
+	}
+
+	public void setPuter(Puter puter) {
+		this.puter = puter;
+	}
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (this.constantMap == null)
 			this.constantMap = MapUtils.newConcurrentHashMap();
 		
-		if (StringUtils.isBlank(this.dulicateStrategy))
-			this.dulicateStrategy = "error";
-		
-		this.currentPuter = this.puters.get(this.dulicateStrategy.trim().toLowerCase());
-		if (this.currentPuter == null)
-			this.currentPuter = puters.get("error");
+		if (this.puter == null)
+			this.puter = new ErrorDulicateKeyPuter();
 	}
 
 	@Override
@@ -88,7 +69,7 @@ public class DefaultConstant implements Constant, InitializingBean {
 			this.constantMap = MapUtils.newConcurrentHashMap();
 			this.constantMap.put(key, value);
 		} else 
-			this.currentPuter.put(this.constantMap, key, value);
+			this.puter.put(this.constantMap, key, value);
 	}
 
 	@Override
