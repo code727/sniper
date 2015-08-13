@@ -44,5 +44,7 @@
 		<module>workin-http</module>
 		<module>workin-spring</module>
 		<module>workin-trace</module>
+		<module>workin-jms</module>
+		<module>workin-soap</module>
 	</modules>
 </project>
