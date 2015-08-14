@@ -24,11 +24,11 @@ import javax.jms.Message;
 import org.springframework.jms.support.converter.MessageConverter;
 
 /**
- * @description
+ * @description 默认的生产策略实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultJmsProductionModel implements JmsProductionModel {
+public class DefaultJmsProductionStrategy implements JmsProductionStrategy {
 	
 	private boolean messageIDEnabled = true;
 	

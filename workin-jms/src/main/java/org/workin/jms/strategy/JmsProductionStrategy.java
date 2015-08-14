@@ -23,11 +23,11 @@ import javax.jms.Destination;
 import org.springframework.jms.support.converter.MessageConverter;
 
 /**
- * @description JMS生产模式接口
+ * @description JMS生产策略接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JmsProductionModel {
+public interface JmsProductionStrategy {
 	
 	/**
 	 * @description 设置是否启用唯一标识来区分提供商发送的每个消息的功能
