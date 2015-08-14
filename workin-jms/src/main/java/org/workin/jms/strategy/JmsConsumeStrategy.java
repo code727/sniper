@@ -25,7 +25,7 @@ import javax.jms.MessageListener;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JmsConsumeStrategy {
+public interface JmsConsumeStrategy extends JmsSessionAccessStrategy {
 	
 	/**
 	 * @description 设置消息接收时的超时时间

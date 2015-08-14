@@ -18,8 +18,6 @@
 
 package org.workin.jms.strategy;
 
-import javax.jms.Destination;
-
 import org.springframework.jms.support.converter.MessageConverter;
 
 /**
@@ -27,7 +25,7 @@ import org.springframework.jms.support.converter.MessageConverter;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JmsProductionStrategy {
+public interface JmsProductionStrategy extends JmsSessionAccessStrategy {
 	
 	/**
 	 * @description 设置是否启用唯一标识来区分提供商发送的每个消息的功能
@@ -98,20 +96,6 @@ public interface JmsProductionStrategy {
      * @return
      */
     public long getTimeToLive();
-    
-    /**
-     * @description 设置生产者发送消息的目的地
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @param destination
-     */
-    public void setDestination(Destination destination);
-
-    /**
-     * @description 获取生产者发送消息的目的地
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @return
-     */
-    public Destination getDestination();
     
     /**
      * @description 设置发送消息时是否需要使用指定的发送模式，优先级和存活时间

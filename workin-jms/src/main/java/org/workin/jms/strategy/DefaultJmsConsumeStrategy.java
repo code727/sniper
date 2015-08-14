@@ -25,7 +25,8 @@ import javax.jms.MessageListener;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultJmsConsumeStrategy implements JmsConsumeStrategy {
+public class DefaultJmsConsumeStrategy extends DefaultJmsSessionAccessStrategy
+		implements JmsConsumeStrategy {
 	
 	private long receiveTimeout;
 	

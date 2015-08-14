@@ -49,4 +49,11 @@ public interface JmsProductionStrategiesManager {
 	 */
 	public JmsProductionStrategy getProductionStrategy(String name);
 	
+	/**
+	 * @description 获取默认的生产策略
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public JmsProductionStrategy getDefaultProductionStrategy();
+	
 }

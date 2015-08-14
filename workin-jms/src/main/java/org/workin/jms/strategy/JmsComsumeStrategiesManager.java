@@ -49,4 +49,11 @@ public interface JmsComsumeStrategiesManager {
 	 */
 	public JmsConsumeStrategy getConsumeStrategy(String name);
 	
+	/**
+	 * @description 获取默认的消费策略
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public JmsConsumeStrategy getDefaultConsumeStrategy();
+	
 }

@@ -18,17 +18,18 @@
 
 package org.workin.jms.strategy;
 
-import javax.jms.Destination;
 import javax.jms.Message;
 
 import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.jms.support.converter.SimpleMessageConverter;
 
 /**
  * @description 默认的生产策略实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultJmsProductionStrategy implements JmsProductionStrategy {
+public class DefaultJmsProductionStrategy extends
+		DefaultJmsSessionAccessStrategy implements JmsProductionStrategy {
 	
 	private boolean messageIDEnabled = true;
 	
@@ -44,10 +45,8 @@ public class DefaultJmsProductionStrategy implements JmsProductionStrategy {
 
 	private long timeToLive = Message.DEFAULT_TIME_TO_LIVE;
 	
-	private Destination destination;
+	private MessageConverter messageConverter = new SimpleMessageConverter();
 	
-	private MessageConverter messageConverter;
-
 	@Override
 	public void setMessageIDEnabled(boolean messageIDEnabled) {
 		this.messageIDEnabled = messageIDEnabled;
@@ -109,16 +108,6 @@ public class DefaultJmsProductionStrategy implements JmsProductionStrategy {
 	}
 
 	@Override
-	public void setDestination(Destination destination) {
-		this.destination = destination;
-	}
-
-	@Override
-	public Destination getDestination() {
-		return this.destination;
-	}
-
-	@Override
 	public void setExplicitQosEnabled(boolean explicitQosEnabled) {
 		this.explicitQosEnabled = explicitQosEnabled;
 	}
@@ -137,5 +126,5 @@ public class DefaultJmsProductionStrategy implements JmsProductionStrategy {
 	public MessageConverter getMessageConverter() {
 		return this.messageConverter;
 	}
-	
+
 }
