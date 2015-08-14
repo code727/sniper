@@ -19,18 +19,20 @@
 package org.workin.jms.service;
 
 /**
- * @description JMS生产者服务接口
+ * @description JMS消费者服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JmsProducerService {
+public interface ConsumerService {
 	
 	/**
-	 * @description 发送消息到指定名称的生产组
+	 * @description 接收指定名称生产组的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name 生产组名称
-	 * @param message 消息数据
+	 * @return
 	 */
-	public <T> void send(String name, T message);
+	public <T> T receive(String name);
 	
+	
+
 }

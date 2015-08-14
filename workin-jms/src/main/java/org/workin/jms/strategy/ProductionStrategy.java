@@ -18,14 +18,13 @@
 
 package org.workin.jms.strategy;
 
-import org.springframework.jms.support.converter.MessageConverter;
 
 /**
  * @description JMS生产策略接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JmsProductionStrategy extends JmsSessionAccessStrategy {
+public interface ProductionStrategy extends SharedStrategy {
 	
 	/**
 	 * @description 设置是否启用唯一标识来区分提供商发送的每个消息的功能
@@ -111,32 +110,4 @@ public interface JmsProductionStrategy extends JmsSessionAccessStrategy {
      */
     public boolean isExplicitQosEnabled();
     
-    /**
-     * @description 设置消息转换器
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @param messageConverter
-     */
-    public void setMessageConverter(MessageConverter messageConverter);
-
-    /**
-     * @description 获取消息转换器
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @return
-     */
-	public MessageConverter getMessageConverter();
-	
-	/**
-	 * @description 设置是否采用发布/订阅的方式发送消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param pubSubNoLocal
-	 */
-	public void setPubSubNoLocal(boolean pubSubNoLocal);
-	
-	/**
-	 * @description 判断是否采用发布/订阅的方式发送消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public boolean isPubSubNoLocal();
-
 }

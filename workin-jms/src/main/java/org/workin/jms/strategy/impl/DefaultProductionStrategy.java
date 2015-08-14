@@ -16,36 +16,35 @@
  * Create Date : 2015-8-13
  */
 
-package org.workin.jms.strategy;
+package org.workin.jms.strategy.impl;
 
 import javax.jms.Message;
 
-import org.springframework.jms.support.converter.MessageConverter;
-import org.springframework.jms.support.converter.SimpleMessageConverter;
+import org.workin.jms.strategy.ProductionStrategy;
 
 /**
  * @description 默认的生产策略实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultJmsProductionStrategy extends
-		DefaultJmsSessionAccessStrategy implements JmsProductionStrategy {
+public class DefaultProductionStrategy extends
+		DefaultSharedStrategy implements ProductionStrategy {
 	
+	/** 是否启用唯一标识来区分提供商发送的每个消息的功能 */
 	private boolean messageIDEnabled = true;
 	
 	private boolean messageTimestampEnabled = true;
-	
-	private boolean pubSubNoLocal = false;
-	
+		
 	private boolean explicitQosEnabled = false;
-	
+		
+	/** 转发模式 */
 	private int deliveryMode = Message.DEFAULT_DELIVERY_MODE;
 
+	/** 消息优先级 */
 	private int priority = Message.DEFAULT_PRIORITY;
 
+	/** 消息生存时间 */
 	private long timeToLive = Message.DEFAULT_TIME_TO_LIVE;
-	
-	private MessageConverter messageConverter = new SimpleMessageConverter();
 	
 	@Override
 	public void setMessageIDEnabled(boolean messageIDEnabled) {
@@ -98,16 +97,6 @@ public class DefaultJmsProductionStrategy extends
 	}
 
 	@Override
-	public void setPubSubNoLocal(boolean pubSubNoLocal) {
-		this.pubSubNoLocal = pubSubNoLocal;
-	}
-
-	@Override
-	public boolean isPubSubNoLocal() {
-		return this.pubSubNoLocal;
-	}
-
-	@Override
 	public void setExplicitQosEnabled(boolean explicitQosEnabled) {
 		this.explicitQosEnabled = explicitQosEnabled;
 	}
@@ -115,16 +104,6 @@ public class DefaultJmsProductionStrategy extends
 	@Override
 	public boolean isExplicitQosEnabled() {
 		return this.explicitQosEnabled;
-	}
-
-	@Override
-	public void setMessageConverter(MessageConverter messageConverter) {
-		this.messageConverter = messageConverter;
-	}
-
-	@Override
-	public MessageConverter getMessageConverter() {
-		return this.messageConverter;
 	}
 
 }

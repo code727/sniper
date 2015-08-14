@@ -16,44 +16,40 @@
  * Create Date : 2015-8-14
  */
 
-package org.workin.jms.strategy;
+package org.workin.jms.strategy.manager;
 
 import java.util.Map;
 
+import org.workin.jms.strategy.ConsumeStrategy;
+
 /**
- * @description Jms生产策略管理接口
+ * @description JMS消费策略管理接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JmsProductionStrategiesManager {
+public interface ComsumeStrategiesManager {
 	
 	/**
-	 * @description 设置生产策略映射集
+	 * @description 设置消费策略映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param productionStrategies
+	 * @param comsumeStrategies
 	 */
-	public void setProductionStrategies(Map<String, JmsProductionStrategy> productionStrategies);
+	public void setComsumeStrategies(Map<String, ConsumeStrategy> comsumeStrategies);
 	
 	/**
-	 * @description 获取生产策略映射集
+	 * @description 设置消费策略映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Map<String, JmsProductionStrategy> getProductionStrategies();
+	public Map<String, ConsumeStrategy> getComsumeStrategies();
 	
 	/**
-	 * @description 获取指定名称的生产策略
+	 * @description 获取指定名称的消费策略
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
 	 */
-	public JmsProductionStrategy getProductionStrategy(String name);
+	public ConsumeStrategy getConsumeStrategy(String name);
 	
-	/**
-	 * @description 获取默认的生产策略
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public JmsProductionStrategy getDefaultProductionStrategy();
 	
 }

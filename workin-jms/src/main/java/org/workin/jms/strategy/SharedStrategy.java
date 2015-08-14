@@ -13,19 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年8月14日
+ * Create Date : 2015-8-14
  */
 
 package org.workin.jms.strategy;
 
 import javax.jms.Destination;
 
+import org.springframework.jms.support.converter.MessageConverter;
+
 /**
  * @description JMS会话访问策略接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JmsSessionAccessStrategy {
+public interface SharedStrategy {
+	
+	/**
+	 * @description 设置是否采用发布/订阅方式发送或接收消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pubSubDomain
+	 */
+	public void setPubSubDomain(boolean pubSubDomain);
+	
+	/**
+	 * @description 判断是否采用发布/订阅方式发送或接收消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean isPubSubDomain();
 	
 	/**
 	 * @description 设置是否使用事务
@@ -68,5 +84,19 @@ public interface JmsSessionAccessStrategy {
      * @return
      */
     public Destination getDestination();
+    
+    /**
+     * @description 设置消息转换器
+     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @param messageConverter
+     */
+    public void setMessageConverter(MessageConverter messageConverter);
+
+    /**
+     * @description 获取消息转换器
+     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @return
+     */
+	public MessageConverter getMessageConverter();
 
 }

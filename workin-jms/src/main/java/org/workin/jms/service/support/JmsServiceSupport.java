@@ -30,10 +30,7 @@ import org.springframework.jms.core.JmsTemplate;
  * @version 1.0
  */
 public abstract class JmsServiceSupport implements InitializingBean {
-	
-	/** 默认的JMS生产策略名 */
-	public final String DEFAULT_PRODUCTION_STRATEGY_NAME = "jms_default_producer";
-	
+		
 	@Autowired
 	private JmsTemplate jmsTemplate;
 	
@@ -59,11 +56,4 @@ public abstract class JmsServiceSupport implements InitializingBean {
 	 */
 	protected abstract Destination getDestination(String name);
 	
-	/**
-	 * @description 获取默认的目的的
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	protected abstract Destination getDefaultDestination();
-
 }

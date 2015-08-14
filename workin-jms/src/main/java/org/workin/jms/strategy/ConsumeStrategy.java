@@ -13,47 +13,60 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-8-14
+ * Create Date : 2015-8-13
  */
 
 package org.workin.jms.strategy;
 
-import java.util.Map;
+import javax.jms.MessageListener;
 
 /**
- * @description JMS消费策略管理接口
+ * @description JMS消费策略接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JmsComsumeStrategiesManager {
+public interface ConsumeStrategy extends SharedStrategy {
 	
 	/**
-	 * @description 设置消费策略映射集
+	 * @description 设置是否不接收来自同一个连接的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param comsumeStrategies
+	 * @param pubSubNoLocal
 	 */
-	public void setComsumeStrategies(Map<String, JmsConsumeStrategy> comsumeStrategies);
-	
+	public void setPubSubNoLocal(boolean pubSubNoLocal);
+
 	/**
-	 * @description 设置消费策略映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Map<String, JmsConsumeStrategy> getComsumeStrategies();
-	
-	/**
-	 * @description 获取指定名称的消费策略
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @return
-	 */
-	public JmsConsumeStrategy getConsumeStrategy(String name);
-	
-	/**
-	 * @description 获取默认的消费策略
+	 * @description 判断是否不接收来自同一个连接的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public JmsConsumeStrategy getDefaultConsumeStrategy();
+	public boolean isPubSubNoLocal();
 	
+	/**
+	 * @description 设置消息接收时的超时时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param receiveTimeout
+	 */
+	public void setReceiveTimeout(long receiveTimeout);
+
+	/**
+	 * @description 获取消息接收时的超时时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public long getReceiveTimeout();
+	
+	/**
+	 * @description 设置接收消息时所用的监听器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param messageListener
+	 */
+	public void setMessageListener(MessageListener messageListener);
+	
+	/**
+	 * @description 获取接收消息时所用的监听器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public MessageListener getMessageListener();
+
 }

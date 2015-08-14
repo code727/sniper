@@ -16,26 +16,43 @@
  * Create Date : 2015-8-13
  */
 
-package org.workin.jms.strategy;
+package org.workin.jms.strategy.impl;
 
 import javax.jms.MessageListener;
+
+import org.workin.jms.strategy.ConsumeStrategy;
 
 /**
  * @description 默认的JMS消费策略实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultJmsConsumeStrategy extends DefaultJmsSessionAccessStrategy
-		implements JmsConsumeStrategy {
+public class DefaultConsumeStrategy extends DefaultSharedStrategy
+		implements ConsumeStrategy {
 	
+	/** 是否不接收来自同一个连接的消息 */
+	private boolean pubSubNoLocal = false;
+	
+	/** 接收消息的超时时间 */
 	private long receiveTimeout;
 	
+	/** 消费监听 */
 	private MessageListener messageListener;
 
 	@Override
 	public void setReceiveTimeout(long receiveTimeout) {
 		if (receiveTimeout > 0)
 			this.receiveTimeout = receiveTimeout;
+	}
+	
+	@Override
+	public void setPubSubNoLocal(boolean pubSubNoLocal) {
+		this.pubSubNoLocal = pubSubNoLocal;
+	}
+
+	@Override
+	public boolean isPubSubNoLocal() {
+		return this.pubSubNoLocal;
 	}
 
 	@Override

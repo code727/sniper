@@ -18,17 +18,18 @@
 
 package org.workin.jms.service;
 
+import org.workin.jms.service.support.ProducerServiceSupport;
+
 /**
  * @description JMS生产者服务实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JmsProducerServiceImpl implements JmsProducerService {
-
+public class ProducerServiceImpl extends ProducerServiceSupport implements ProducerService {
+	
 	@Override
 	public <T> void send(String name, T message) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

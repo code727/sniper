@@ -13,46 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-8-13
+ * Create Date : 2015-8-14
  */
 
-package org.workin.jms.strategy;
+package org.workin.jms.strategy.manager;
 
-import javax.jms.MessageListener;
+import java.util.Map;
+
+import org.workin.jms.strategy.ProductionStrategy;
 
 /**
- * @description JMS消费策略接口
+ * @description Jms生产策略管理接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JmsConsumeStrategy extends JmsSessionAccessStrategy {
+public interface ProductionStrategiesManager {
 	
 	/**
-	 * @description 设置消息接收时的超时时间
+	 * @description 设置生产策略映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param receiveTimeout
+	 * @param productionStrategies
 	 */
-	public void setReceiveTimeout(long receiveTimeout);
-
+	public void setProductionStrategies(Map<String, ProductionStrategy> productionStrategies);
+	
 	/**
-	 * @description 获取消息接收时的超时时间
+	 * @description 获取生产策略映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public long getReceiveTimeout();
+	public Map<String, ProductionStrategy> getProductionStrategies();
 	
 	/**
-	 * @description 设置接收消息时所用的监听器
+	 * @description 获取指定名称的生产策略
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param messageListener
-	 */
-	public void setMessageListener(MessageListener messageListener);
-	
-	/**
-	 * @description 获取接收消息时所用的监听器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
 	 * @return
 	 */
-	public MessageListener getMessageListener();
-
+	public ProductionStrategy getProductionStrategy(String name);
+		
 }

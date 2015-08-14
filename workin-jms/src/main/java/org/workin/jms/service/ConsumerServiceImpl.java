@@ -13,24 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-8-13
+ * Create Date : 2015-8-14
  */
 
 package org.workin.jms.service;
 
 /**
- * @description JMS消费者服务接口
+ * @description JMS消费者服务实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JmsConsumerService {
-	
-	/**
-	 * @description 接收指定名称生产组的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name 生产组名称
-	 * @return
-	 */
-	public <T> T receive(String name);
+public class ConsumerServiceImpl implements ConsumerService {
+
+	@Override
+	public <T> T receive(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

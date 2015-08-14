@@ -16,23 +16,36 @@
  * Create Date : 2015-8-14
  */
 
-package org.workin.jms.strategy;
+package org.workin.jms.strategy.impl;
 
 import javax.jms.Destination;
 import javax.jms.Session;
 
+import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.jms.support.converter.SimpleMessageConverter;
+import org.workin.jms.strategy.SharedStrategy;
+
 /**
- * @description 默认JMS会话访问策略实现类
+ * @description 默认JMS共享策略实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultJmsSessionAccessStrategy implements JmsSessionAccessStrategy {
+public class DefaultSharedStrategy implements SharedStrategy {
 	
+	/** 生产/消息目的地 */
 	private Destination destination;
 	
+	/** 是否采用发布/订阅机制 */
+	private boolean pubSubDomain;
+	
+	/** 消息确认接收方式 */
 	private int sessionAcknowledgeMode = Session.AUTO_ACKNOWLEDGE;
 	
+	/** 是否启用事务 */
 	private boolean sessionTransacted = false;
+	
+	/** 消息转换器 */
+	private MessageConverter messageConverter = new SimpleMessageConverter();
 	
 	@Override
 	public void setDestination(Destination destination) {
@@ -42,6 +55,16 @@ public class DefaultJmsSessionAccessStrategy implements JmsSessionAccessStrategy
 	@Override
 	public Destination getDestination() {
 		return this.destination;
+	}
+	
+	@Override
+	public void setPubSubDomain(boolean pubSubDomain) {
+		this.pubSubDomain = pubSubDomain;
+	}
+
+	@Override
+	public boolean isPubSubDomain() {
+		return this.pubSubDomain;
 	}
 
 	@Override
@@ -62,6 +85,16 @@ public class DefaultJmsSessionAccessStrategy implements JmsSessionAccessStrategy
 	@Override
 	public int getSessionAcknowledgeMode() {
 		return this.sessionAcknowledgeMode;
+	}
+	
+	@Override
+	public void setMessageConverter(MessageConverter messageConverter) {
+		this.messageConverter = messageConverter;
+	}
+
+	@Override
+	public MessageConverter getMessageConverter() {
+		return this.messageConverter;
 	}
 
 }
