@@ -16,11 +16,11 @@
  * Create Date : 2015-8-13
  */
 
-package org.workin.jms.strategy.impl;
+package org.workin.jms.core.strategy.impl;
 
 import javax.jms.Message;
 
-import org.workin.jms.strategy.ProductionStrategy;
+import org.workin.jms.core.strategy.ProductionStrategy;
 
 /**
  * @description 默认的生产策略实现类

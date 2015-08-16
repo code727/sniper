@@ -13,24 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-8-13
+ * Create Date : 2015-8-16
  */
 
-package org.workin.jms.service;
+package org.workin.jms.core.template;
 
 /**
- * @description JMS生产者服务接口
+ * @description 消费者服务模板
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ProducerService {
-		
-	/**
-	 * @description 以指定名称的生产策略发送消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name 生产组名称
-	 * @param message 消息数据
-	 */
-	public <T> void send(String name, T message);
-	
+public class ConsumerTemplate {
+
 }

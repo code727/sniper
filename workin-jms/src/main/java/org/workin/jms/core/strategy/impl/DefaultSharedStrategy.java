@@ -16,14 +16,15 @@
  * Create Date : 2015-8-14
  */
 
-package org.workin.jms.strategy.impl;
+package org.workin.jms.core.strategy.impl;
 
 import javax.jms.Destination;
 import javax.jms.Session;
+import javax.jms.Topic;
 
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.SimpleMessageConverter;
-import org.workin.jms.strategy.SharedStrategy;
+import org.workin.jms.core.strategy.SharedStrategy;
 
 /**
  * @description 默认JMS共享策略实现类
@@ -49,6 +50,11 @@ public class DefaultSharedStrategy implements SharedStrategy {
 	
 	@Override
 	public void setDestination(Destination destination) {
+		if (isPubSubDomain() && !(destination instanceof Topic))
+			// 当采用发布/订阅机制来生产或消费消息时，目的地必须是一个javax.jms.Topic实例
+			throw new IllegalArgumentException(
+					"Destination must be instance of javax.jms.Topic when property 'pubSubDomain' is true");
+			
 		this.destination = destination;
 	}
 

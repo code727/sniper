@@ -16,11 +16,11 @@
  * Create Date : 2015-8-14
  */
 
-package org.workin.jms.strategy.manager;
+package org.workin.jms.core.manager;
 
 import java.util.Map;
 
-import org.workin.jms.strategy.ProductionStrategy;
+import org.workin.jms.core.strategy.ProductionStrategy;
 
 /**
  * @description Jms生产策略管理接口

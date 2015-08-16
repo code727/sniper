@@ -16,7 +16,7 @@
  * Create Date : 2015-8-13
  */
 
-package org.workin.jms.strategy;
+package org.workin.jms.core.strategy;
 
 
 /**

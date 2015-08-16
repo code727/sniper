@@ -2,7 +2,6 @@ package org.workin.jms.demo.activemq;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
-import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
@@ -10,7 +9,7 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.activemq.command.ActiveMQTopic;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,13 +39,17 @@ public class JmsProducerDemo {
 			session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
 		
 			// 设置消息目的地类型（ActiveMQTopic为订阅目的地）
-			Destination destination = new ActiveMQTopic("daniele");
+			Destination destination = new ActiveMQQueue("A");
 			producer = session.createProducer(destination);
-			producer.setTimeToLive(999999);
-			producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 			TextMessage message = session.createTextMessage();
-			message.setText("Just a simaple JMS Testing.");
+			message.setText("From A message!");
 			producer.send(message);
+			
+//			destination = new ActiveMQQueue("A");
+//			producer = session.createProducer(destination);
+//			message = session.createTextMessage();
+//			message.setText("From B message!");
+//			producer.send(message);
 		} catch (JMSException e) {
 			e.printStackTrace();
 		} finally {

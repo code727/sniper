@@ -16,7 +16,7 @@
  * Create Date : 2015-8-14
  */
 
-package org.workin.jms.strategy;
+package org.workin.jms.core.strategy;
 
 import javax.jms.Destination;
 

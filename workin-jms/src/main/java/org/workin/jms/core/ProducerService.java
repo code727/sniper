@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-8-14
+ * Create Date : 2015-8-13
  */
 
-package org.workin.jms.service;
-
-import org.workin.jms.service.support.ProducerServiceSupport;
+package org.workin.jms.core;
 
 /**
- * @description JMS生产者服务实现类
+ * @description JMS生产者服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ProducerServiceImpl extends ProducerServiceSupport implements ProducerService {
-	
-	@Override
-	public <T> void send(String name, T message) {
-		// TODO Auto-generated method stub
-	}
-
+public interface ProducerService {
+		
+	/**
+	 * @description 以指定名称的生产策略发送消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name 生产组名称
+	 * @param message 消息数据
+	 */
+	public <T> void send(String name, T message);
+		
 }

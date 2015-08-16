@@ -16,11 +16,11 @@
  * Create Date : 2015-8-13
  */
 
-package org.workin.jms.strategy.impl;
+package org.workin.jms.core.strategy.impl;
 
 import javax.jms.MessageListener;
 
-import org.workin.jms.strategy.ConsumeStrategy;
+import org.workin.jms.core.strategy.ConsumeStrategy;
 
 /**
  * @description 默认的JMS消费策略实现类
