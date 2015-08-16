@@ -27,21 +27,21 @@ import org.workin.jms.core.strategy.ConsumeStrategy;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ComsumeStrategiesManager {
+public interface ConsumeStrategiesManager {
 	
 	/**
 	 * @description 设置消费策略映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param comsumeStrategies
+	 * @param strategies
 	 */
-	public void setComsumeStrategies(Map<String, ConsumeStrategy> comsumeStrategies);
+	public void setStrategies(Map<String, ConsumeStrategy> strategies);
 	
 	/**
 	 * @description 设置消费策略映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Map<String, ConsumeStrategy> getComsumeStrategies();
+	public Map<String, ConsumeStrategy> getStrategies();
 	
 	/**
 	 * @description 获取指定名称的消费策略
@@ -49,6 +49,6 @@ public interface ComsumeStrategiesManager {
 	 * @param name
 	 * @return
 	 */
-	public ConsumeStrategy getConsumeStrategy(String name);
+	public ConsumeStrategy getStrategy(String name);
 	
 }

@@ -39,7 +39,7 @@ public class ProducerTemplate extends ProducerServiceSupport implements Producer
 	
 	@Override
 	public <T> void send(String name, T message) {
-		ProductionStrategy ps = getProductionStrategy(name);
+		ProductionStrategy ps = getStrategy(name);
 		AssertUtils.assertNotNull(ps, "Can not found production strategy of [" + name + "].");
 		
 		Connection connection = null;

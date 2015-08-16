@@ -34,14 +34,14 @@ public interface ProductionStrategiesManager {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param productionStrategies
 	 */
-	public void setProductionStrategies(Map<String, ProductionStrategy> productionStrategies);
+	public void setStrategies(Map<String, ProductionStrategy> productionStrategies);
 	
 	/**
 	 * @description 获取生产策略映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Map<String, ProductionStrategy> getProductionStrategies();
+	public Map<String, ProductionStrategy> getStrategies();
 	
 	/**
 	 * @description 获取指定名称的生产策略
@@ -49,6 +49,6 @@ public interface ProductionStrategiesManager {
 	 * @param name
 	 * @return
 	 */
-	public ProductionStrategy getProductionStrategy(String name);
+	public ProductionStrategy getStrategy(String name);
 		
 }

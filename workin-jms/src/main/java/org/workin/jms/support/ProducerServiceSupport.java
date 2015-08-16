@@ -30,37 +30,37 @@ import org.workin.jms.core.manager.ProductionStrategiesManager;
 import org.workin.jms.core.strategy.ProductionStrategy;
 
 /**
- * @description 生产者事务抽象类
+ * @description 生产者服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class ProducerServiceSupport extends JmsDestinationAccessor implements
-		ProductionStrategiesManager {
-	
+public abstract class ProducerServiceSupport extends JmsDestinationAccessor
+		implements ProductionStrategiesManager {
+		
 	/** 生产策略映射集 */
-	private Map<String, ProductionStrategy> productionStrategies;
+	private Map<String, ProductionStrategy> strategies;
 	
 	@Override
-	public void setProductionStrategies(Map<String, ProductionStrategy> productionStrategies) {
-		this.productionStrategies = productionStrategies;
+	public void setStrategies(Map<String, ProductionStrategy> strategies) {
+		this.strategies = strategies;
 	}
 
 	@Override
-	public Map<String, ProductionStrategy> getProductionStrategies() {
-		return this.productionStrategies;
+	public Map<String, ProductionStrategy> getStrategies() {
+		return this.strategies;
 	}
 
 	@Override
-	public ProductionStrategy getProductionStrategy(String name) {
-		return this.productionStrategies.get(name);
+	public ProductionStrategy getStrategy(String name) {
+		return this.strategies.get(name);
 	}
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
 		
-		if (this.productionStrategies == null)
-			throw new IllegalAccessException("Property 'productionStrategies' is required.");
+		if (this.strategies == null)
+			throw new IllegalAccessException("Property 'strategies' of producer service is required.");
 	}
 	
 	@Override
@@ -70,7 +70,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor impl
 	
 	@Override
 	protected Session createSession(Connection connection, String strategyName, boolean startConnection) throws JMSException {
-		return super.createSession(connection, getProductionStrategy(strategyName), startConnection);
+		return super.createSession(connection, getStrategy(strategyName), startConnection);
 	}
 		
 	/**
@@ -81,7 +81,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor impl
 	 * @return
 	 */
 	protected MessageProducer createProducer(Session session, String strategyName) throws JMSException {
-		return createProducer(session, getProductionStrategy(strategyName));
+		return createProducer(session, getStrategy(strategyName));
 	}
 	
 	/**
@@ -106,7 +106,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor impl
 	 * @throws JMSException
 	 */
 	protected MessageProducer createProducer(Session session, String strategyName, boolean autoAssign) throws JMSException {
-		return createProducer(session, getProductionStrategy(strategyName), autoAssign);
+		return createProducer(session, getStrategy(strategyName), autoAssign);
 	}
 	
 	/**
