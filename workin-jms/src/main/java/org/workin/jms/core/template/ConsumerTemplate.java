@@ -18,11 +18,79 @@
 
 package org.workin.jms.core.template;
 
+import javax.jms.Connection;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
+import javax.jms.Session;
+
+import org.springframework.jms.connection.ConnectionFactoryUtils;
+import org.springframework.jms.support.JmsUtils;
+import org.workin.commons.util.AssertUtils;
+import org.workin.jms.core.ConsumerService;
+import org.workin.jms.core.strategy.ConsumeStrategy;
+import org.workin.jms.support.ConsumerServiceSupport;
+
 /**
  * @description 消费者服务模板
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ConsumerTemplate {
+public class ConsumerTemplate extends ConsumerServiceSupport implements ConsumerService {
+
+	@Override
+	public <T> T receive(String strategyName) {
+		return doReceive(strategyName, null, null);
+	}
+
+	@Override
+	public <T> T receive(String strategyName, String destinationName) {
+		return doReceive(strategyName, null, destinationName);
+	}
+
+	@Override
+	public <T> T receive(String strategyName, Destination destination) {
+		return doReceive(strategyName, destination, null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected <T> T doReceive(String strategyName, Destination destination, String destinationName) {
+		ConsumeStrategy cs = getStrategy(strategyName);
+		AssertUtils.assertNotNull(cs, "Can not found consume strategy of [" + strategyName + "].");
+		
+		Connection connection = null;
+		Session session = null;
+		MessageConsumer consumer = null;
+		T message = null;
+		
+		try {
+			connection = createConnection();
+			session = createSession(connection, cs, true);
+			if (destination != null)
+				consumer = createConsumer(session, cs, destination);
+			else
+				consumer = createConsumer(session, cs, destinationName);
+			
+			MessageListener listener = cs.getMessageListener();
+			if (listener != null)
+				// 异步接收
+				consumer.setMessageListener(listener);
+			else 
+				message = (T) cs.getMessageConverter().fromMessage(consumer.receive());
+			
+			if (session.getTransacted() && isSessionLocallyTransacted(session, cs))
+				JmsUtils.commitIfNecessary(session);
+			
+		} catch (JMSException e) {
+			e.printStackTrace();
+		} finally {
+			JmsUtils.closeMessageConsumer(consumer);
+			JmsUtils.closeSession(session);
+			// 只关闭而不停止连接
+			ConnectionFactoryUtils.releaseConnection(connection, getConnectionFactory(), false);
+		}
+		return message;
+	}
 
 }

@@ -18,6 +18,8 @@
 
 package org.workin.jms.core;
 
+import javax.jms.Destination;
+
 /**
  * @description JMS消费者服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -26,11 +28,29 @@ package org.workin.jms.core;
 public interface ConsumerService {
 	
 	/**
-	 * @description 接收指定名称生产组的消息
+	 * @description 按指定名称的消费策略接收消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name 生产组名称
+	 * @param strategyName 消费策略名称
 	 * @return
 	 */
-	public <T> T receive(String name);
+	public <T> T receive(String strategyName);
+	
+	/**
+	 * @description 按指定名称的消费策略接收来自目的地的消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param strategyName
+	 * @param destinationName
+	 * @return
+	 */
+	public <T> T receive(String strategyName, String destinationName);
+	
+	/**
+	 * @description 按指定名称的消费策略接收来自目的地的消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param strategyName
+	 * @param destination
+	 * @return
+	 */
+	public <T> T receive(String strategyName, Destination destination);
 
 }

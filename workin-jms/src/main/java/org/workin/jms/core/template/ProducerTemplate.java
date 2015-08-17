@@ -19,6 +19,7 @@
 package org.workin.jms.core.template;
 
 import javax.jms.Connection;
+import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
@@ -38,20 +39,41 @@ import org.workin.jms.support.ProducerServiceSupport;
 public class ProducerTemplate extends ProducerServiceSupport implements ProducerService {
 	
 	@Override
-	public <T> void send(String name, T message) {
-		ProductionStrategy ps = getStrategy(name);
-		AssertUtils.assertNotNull(ps, "Can not found production strategy of [" + name + "].");
+	public <T> void send(String strategyName, T message) {
+		doSend(strategyName, null, null, message);
+	}
+
+	@Override
+	public <T> void send(String strategyName, String destinationName, T message) {
+		doSend(strategyName, null, destinationName, message);
+	}
+
+	@Override
+	public <T> void send(String strategyName, Destination destination, T message) {
+		doSend(strategyName, destination, null, message);
+	}
+	
+	protected <T> void doSend(String strategyName, Destination destination, String destinationName, T message) {
+		ProductionStrategy ps = getStrategy(strategyName);
+		AssertUtils.assertNotNull(ps, "Can not found production strategy of [" + strategyName + "].");
 		
 		Connection connection = null;
 		Session session = null;
 		MessageProducer producer = null;
+		
 		try {
 			connection = createConnection();
 			session = createSession(connection, ps, false);
-			producer = createProducer(session, ps);
+			
+			if(destination != null)
+				producer = createProducer(session, ps, destination);
+			else
+				producer = createProducer(session, ps, destinationName);
+			
 			producer.send(ps.getMessageConverter().toMessage(message, session));
 			if (session.getTransacted() && isSessionLocallyTransacted(session, ps))
 				JmsUtils.commitIfNecessary(session);
+			
 		} catch (JMSException e) {
 			e.printStackTrace();
 		} finally {

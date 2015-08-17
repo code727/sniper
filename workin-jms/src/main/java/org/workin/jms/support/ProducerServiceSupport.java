@@ -26,6 +26,8 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 
+import org.workin.commons.util.MapUtils;
+import org.workin.commons.util.StringUtils;
 import org.workin.jms.core.manager.ProductionStrategiesManager;
 import org.workin.jms.core.strategy.ProductionStrategy;
 
@@ -59,8 +61,8 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
 		
-		if (this.strategies == null)
-			throw new IllegalAccessException("Property 'strategies' of producer service is required.");
+		if (MapUtils.isEmpty(getStrategies()))
+			throw new IllegalAccessException("Producer strategies must not be empty.");
 	}
 	
 	@Override
@@ -97,7 +99,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	}
 	
 	/**
-	 * @description
+	 * @description 根据会话和指定名称的生产策略创建生产者，并指定是否为生产者自动分配生产策略
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategyName
@@ -119,9 +121,67 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	 * @throws JMSException
 	 */
 	protected MessageProducer createProducer(Session session, ProductionStrategy strategy, boolean autoAssign) throws JMSException {
-		Destination destination = strategy.getDestination();
+		return createProducer(session, strategy, (Destination) null, autoAssign);
+	}
+	
+	/**
+	 * @description 根据会话、生产策略和目的地名称创建生产者
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @param strategy
+	 * @param destinationName
+	 * @return
+	 * @throws JMSException
+	 */
+	protected MessageProducer createProducer(Session session, ProductionStrategy strategy, String destinationName) throws JMSException {
+		return createProducer(session, strategy, destinationName, true);
+	}
+	
+	/**
+	 * @description 根据会话、生产策略和目的地名称创建生产者
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @param strategy
+	 * @param destination
+	 * @return
+	 * @throws JMSException
+	 */
+	protected MessageProducer createProducer(Session session, ProductionStrategy strategy, Destination destination) throws JMSException {
+		return createProducer(session, strategy, destination, true);
+	}
+	
+	/**
+	 * @description 根据会话、生产策略和目的地名称创建生产者，并指定是否为生产者自动分配生产策略
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @param strategy
+	 * @param destinationName
+	 * @param autoAssign
+	 * @return
+	 * @throws JMSException
+	 */
+	protected MessageProducer createProducer(Session session, ProductionStrategy strategy, String destinationName, boolean autoAssign) throws JMSException {
+		return createProducer(session, strategy, StringUtils.isNotEmpty(destinationName) ? 
+				resolveDestinationName(session, destinationName, strategy.isPubSubDomain()) : (Destination) null, autoAssign);
+	}
+	
+	/**
+	 * @description 根据会话、生产策略和目的地创建生产者，并指定是否为生产者自动分配生产策略
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @param strategy
+	 * @param destination
+	 * @param autoAssign
+	 * @return
+	 * @throws JMSException
+	 */
+	protected MessageProducer createProducer(Session session, ProductionStrategy strategy, Destination destination, boolean autoAssign) throws JMSException {
 		if (destination == null)
-			throw new IllegalArgumentException("Property destination install is required of production strategy");
+			// 优先选择传入的目的地，否则从生产策略中获取
+			destination = strategy.getDestination();
+		
+		if (destination == null)
+			throw new IllegalArgumentException("Destination must not be null.");
 		
 		MessageProducer producer = session.createProducer(destination);
 		if (autoAssign)
