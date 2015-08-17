@@ -20,7 +20,6 @@ package org.workin.jms.core.strategy.impl;
 
 import javax.jms.Destination;
 import javax.jms.Session;
-import javax.jms.Topic;
 
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.SimpleMessageConverter;
@@ -49,12 +48,7 @@ public class DefaultSharedStrategy implements SharedStrategy {
 	private MessageConverter messageConverter = new SimpleMessageConverter();
 	
 	@Override
-	public void setDestination(Destination destination) {
-		if (isPubSubDomain() && !(destination instanceof Topic))
-			// 当采用发布/订阅机制来生产或消费消息时，目的地必须是一个javax.jms.Topic实例
-			throw new IllegalArgumentException(
-					"Destination must be instance of javax.jms.Topic when property 'pubSubDomain' is true");
-			
+	public void setDestination(Destination destination) {			
 		this.destination = destination;
 	}
 
