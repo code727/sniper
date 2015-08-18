@@ -36,10 +36,7 @@ public class DefaultProductionStrategy extends
 	private boolean messageTimestampEnabled = true;
 		
 	private boolean explicitQosEnabled = false;
-		
-	/** 转发模式 */
-	private int deliveryMode = Message.DEFAULT_DELIVERY_MODE;
-
+	
 	/** 消息优先级 */
 	private int priority = Message.DEFAULT_PRIORITY;
 
@@ -64,16 +61,6 @@ public class DefaultProductionStrategy extends
 	@Override
 	public boolean isMessageTimestampEnabled() {
 		return this.messageTimestampEnabled;
-	}
-
-	@Override
-	public void setDeliveryMode(int deliveryMode) {
-		this.deliveryMode = deliveryMode;
-	}
-
-	@Override
-	public int getDeliveryMode() {
-		return this.deliveryMode;
 	}
 
 	@Override

@@ -19,6 +19,7 @@
 package org.workin.jms.core.strategy.impl;
 
 import javax.jms.Destination;
+import javax.jms.Message;
 import javax.jms.Session;
 
 import org.springframework.jms.support.converter.MessageConverter;
@@ -31,6 +32,9 @@ import org.workin.jms.core.strategy.SharedStrategy;
  * @version 1.0
  */
 public class DefaultSharedStrategy implements SharedStrategy {
+	
+	/** 转发模式 */
+	private int deliveryMode = Message.DEFAULT_DELIVERY_MODE;
 	
 	/** 生产/消息目的地 */
 	private Destination destination;
@@ -46,6 +50,16 @@ public class DefaultSharedStrategy implements SharedStrategy {
 	
 	/** 消息转换器 */
 	private MessageConverter messageConverter = new SimpleMessageConverter();
+	
+	@Override
+	public void setDeliveryMode(int deliveryMode) {
+		this.deliveryMode = deliveryMode;
+	}
+
+	@Override
+	public int getDeliveryMode() {
+		return this.deliveryMode;
+	}
 	
 	@Override
 	public void setDestination(Destination destination) {			
