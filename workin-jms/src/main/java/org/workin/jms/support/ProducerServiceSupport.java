@@ -198,9 +198,11 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	 * @throws JMSException
 	 */
 	private void assign(MessageProducer producer, ProductionStrategy strategy) throws JMSException {
-		producer.setDeliveryMode(strategy.getDeliveryMode());
-		producer.setPriority(strategy.getPriority());
-		producer.setTimeToLive(strategy.getTimeToLive());
+		if (strategy.isExplicitQosEnabled()) {
+			producer.setDeliveryMode(strategy.getDeliveryMode());
+			producer.setPriority(strategy.getPriority());
+			producer.setTimeToLive(strategy.getTimeToLive());
+		}
 		producer.setDisableMessageID(!strategy.isMessageIdEnabled());
 		producer.setDisableMessageTimestamp(!strategy.isMessageTimestampEnabled());
 	}

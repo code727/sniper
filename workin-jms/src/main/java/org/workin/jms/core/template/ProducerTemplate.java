@@ -60,17 +60,20 @@ public class ProducerTemplate extends ProducerServiceSupport implements Producer
 		Connection connection = null;
 		Session session = null;
 		MessageProducer producer = null;
-		
 		try {
 			connection = createConnection();
 			session = createSession(connection, ps, false);
-			
 			if(destination != null)
 				producer = createProducer(session, ps, destination);
 			else
 				producer = createProducer(session, ps, destinationName);
 			
-			producer.send(ps.getMessageConverter().toMessage(message, session));
+			if (ps.isExplicitQosEnabled())
+				producer.send(ps.getMessageConverter().toMessage(message, session),
+						ps.getDeliveryMode(), ps.getPriority(), ps.getTimeToLive());
+			else
+				producer.send(ps.getMessageConverter().toMessage(message, session));
+			
 			if (session.getTransacted() && isSessionLocallyTransacted(session, ps))
 				JmsUtils.commitIfNecessary(session);
 			
@@ -79,10 +82,8 @@ public class ProducerTemplate extends ProducerServiceSupport implements Producer
 		} finally {
 			JmsUtils.closeMessageProducer(producer);
 			JmsUtils.closeSession(session);
-			// 只关闭而不停止连接
 			ConnectionFactoryUtils.releaseConnection(connection, getConnectionFactory(), false);
 		}
 	}
 	
-
 }

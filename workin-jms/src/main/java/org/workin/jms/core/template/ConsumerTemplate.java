@@ -21,6 +21,7 @@ package org.workin.jms.core.template;
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
 import javax.jms.Session;
@@ -29,6 +30,7 @@ import org.springframework.jms.connection.ConnectionFactoryUtils;
 import org.springframework.jms.support.JmsUtils;
 import org.workin.commons.util.AssertUtils;
 import org.workin.jms.core.ConsumerService;
+import org.workin.jms.core.listener.ConsumeMessageListener;
 import org.workin.jms.core.strategy.ConsumeStrategy;
 import org.workin.jms.support.ConsumerServiceSupport;
 
@@ -62,22 +64,32 @@ public class ConsumerTemplate extends ConsumerServiceSupport implements Consumer
 		Connection connection = null;
 		Session session = null;
 		MessageConsumer consumer = null;
-		T message = null;
 		
+		T result = null;
+		MessageListener listener = cs.getMessageListener();
 		try {
 			connection = createConnection();
 			session = createSession(connection, cs, true);
+			
 			if (destination != null)
 				consumer = createConsumer(session, cs, destination);
 			else
 				consumer = createConsumer(session, cs, destinationName);
 			
-			MessageListener listener = cs.getMessageListener();
-			if (listener != null)
-				// 异步接收
+			if (listener != null) {
+				if (listener instanceof ConsumeMessageListener) {
+					((ConsumeMessageListener) listener).setConnection(connection);
+					((ConsumeMessageListener) listener).setSession(session);
+					((ConsumeMessageListener) listener).setConsumer(consumer);
+					((ConsumeMessageListener) listener).setStrategy(cs);
+				}
 				consumer.setMessageListener(listener);
-			else 
-				message = (T) cs.getMessageConverter().fromMessage(consumer.receive());
+			} else  {
+				Message message = consumer.receive();
+				result = (T) cs.getMessageConverter().fromMessage(consumer.receive());
+				if (session.getAcknowledgeMode() == Session.CLIENT_ACKNOWLEDGE)
+					message.acknowledge();
+			}
 			
 			if (session.getTransacted() && isSessionLocallyTransacted(session, cs))
 				JmsUtils.commitIfNecessary(session);
@@ -85,12 +97,14 @@ public class ConsumerTemplate extends ConsumerServiceSupport implements Consumer
 		} catch (JMSException e) {
 			e.printStackTrace();
 		} finally {
-			JmsUtils.closeMessageConsumer(consumer);
-			JmsUtils.closeSession(session);
-			// 只关闭而不停止连接
-			ConnectionFactoryUtils.releaseConnection(connection, getConnectionFactory(), false);
+			/* 如果是同步接收，则接收完成后立即进行关闭操作 ，否则需在消息监听器中完成 */
+			if (listener == null) {
+				JmsUtils.closeMessageConsumer(consumer);
+				JmsUtils.closeSession(session);
+				ConnectionFactoryUtils.releaseConnection(connection, getConnectionFactory(), true);
+			}
 		}
-		return message;
+		return result;
 	}
 
 }

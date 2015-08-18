@@ -99,4 +99,18 @@ public interface SharedStrategy {
      */
 	public MessageConverter getMessageConverter();
 
+	/**
+     * @description 设置消息的转发模式
+     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @param deliveryMode
+     */
+    public void setDeliveryMode(int deliveryMode);
+
+    /**
+     * @description 获取消息的转发模式
+     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @return
+     */
+    public int getDeliveryMode();
+
 }

@@ -55,20 +55,6 @@ public interface ProductionStrategy extends SharedStrategy {
     public boolean isMessageTimestampEnabled();
 
     /**
-     * @description 设置消息的转发模式
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @param deliveryMode
-     */
-    public void setDeliveryMode(int deliveryMode);
-
-    /**
-     * @description 获取消息的转发模式
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @return
-     */
-    public int getDeliveryMode();
-
-    /**
      * @description 设置消息的优先级
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
      * @param priority
