@@ -39,6 +39,9 @@ public class DefaultConsumeStrategy extends DefaultSharedStrategy
 	/** 消费监听 */
 	private MessageListener messageListener;
 
+	/** 消息选择器实现类 */
+	private String messageSelector;
+
 	@Override
 	public void setReceiveTimeout(long receiveTimeout) {
 		if (receiveTimeout > 0)
@@ -68,6 +71,16 @@ public class DefaultConsumeStrategy extends DefaultSharedStrategy
 	@Override
 	public MessageListener getMessageListener() {
 		return this.messageListener;
+	}
+
+	@Override
+	public void setMessageSelector(String messageSelector) {
+		this.messageSelector = messageSelector;
+	}
+
+	@Override
+	public String getMessageSelector() {
+		return this.messageSelector;
 	}
 
 }

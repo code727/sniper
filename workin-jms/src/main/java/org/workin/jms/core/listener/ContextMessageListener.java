@@ -23,7 +23,7 @@ import javax.jms.MessageListener;
 import javax.jms.Session;
 
 /**
- * @description
+ * @description 上下文消息监听器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

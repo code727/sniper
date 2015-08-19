@@ -45,15 +45,15 @@ public class ProducerTemplate extends ProducerServiceSupport implements Producer
 
 	@Override
 	public <T> void send(String strategyName, String destinationName, T message) {
-		doSend(strategyName, null, destinationName, message);
+		doSend(strategyName, destinationName, null, message);
 	}
 
 	@Override
 	public <T> void send(String strategyName, Destination destination, T message) {
-		doSend(strategyName, destination, null, message);
+		doSend(strategyName, null, destination, message);
 	}
 	
-	protected <T> void doSend(String strategyName, Destination destination, String destinationName, T message) {
+	protected <T> void doSend(String strategyName, String destinationName, Destination destination, T message) {
 		ProductionStrategy ps = getStrategy(strategyName);
 		AssertUtils.assertNotNull(ps, "Can not found production strategy of [" + strategyName + "].");
 		
@@ -63,18 +63,18 @@ public class ProducerTemplate extends ProducerServiceSupport implements Producer
 		try {
 			connection = createConnection();
 			session = createSession(connection, ps, false);
-			if(destination != null)
-				producer = createProducer(session, ps, destination);
-			else
-				producer = createProducer(session, ps, destinationName);
 			
-			if (ps.isExplicitQosEnabled())
-				producer.send(ps.getMessageConverter().toMessage(message, session),
-						ps.getDeliveryMode(), ps.getPriority(), ps.getTimeToLive());
+			/* 创建生产者 */
+			if(destinationName != null)
+				producer = createProducer(session, ps, destinationName);
 			else
-				producer.send(ps.getMessageConverter().toMessage(message, session));
+				producer = createProducer(session, ps, destination);
+			
+			prepare(producer, ps);
+			doSend(session, producer, message, ps);
 			
 			if (session.getTransacted() && isSessionLocallyTransacted(session, ps))
+				// 提交事务
 				JmsUtils.commitIfNecessary(session);
 			
 		} catch (JMSException e) {

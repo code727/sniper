@@ -28,6 +28,20 @@ import javax.jms.MessageListener;
 public interface ConsumeStrategy extends SharedStrategy {
 	
 	/**
+	 * @description 设置消息选择器字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param messageSelector
+	 */
+	public void setMessageSelector(String messageSelector);
+	
+	/**
+	 * @description 获取消息选择器字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getMessageSelector();
+	
+	/**
 	 * @description 设置是否不接收来自同一个连接的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pubSubNoLocal

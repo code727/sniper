@@ -52,5 +52,34 @@ public interface ConsumerService {
 	 * @return
 	 */
 	public <T> T receive(String strategyName, Destination destination);
-
+	
+	/**
+	 * @description 按指定名称的消费策略选择接收消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param strategyName
+	 * @param messageSelector
+	 * @return
+	 */
+	public <T> T receiveAndSelect(String strategyName, String messageSelector);
+	
+	/**
+	 * @description 按指定名称的消费策略选择接收来自目的地的消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param strategyName
+	 * @param destinationName
+	 * @param messageSelector
+	 * @return
+	 */
+	public <T> T receiveAndSelect(String strategyName, String destinationName, String messageSelector);
+	
+	/**
+	 * @description 按指定名称的消费策略选择接收来自目的地的消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param strategyName
+	 * @param destination
+	 * @param messageSelector
+	 * @return
+	 */
+	public <T> T receiveAndSelect(String strategyName, Destination destination, String messageSelector);
+	
 }

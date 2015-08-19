@@ -24,6 +24,8 @@ import javax.jms.Session;
 
 import org.springframework.jms.support.destination.DestinationResolver;
 import org.springframework.jms.support.destination.DynamicDestinationResolver;
+import org.workin.commons.util.StringUtils;
+import org.workin.jms.core.strategy.SharedStrategy;
 
 /**
  * @description JMS目的地访问器抽象类
@@ -44,8 +46,36 @@ public abstract class JmsDestinationAccessor extends JmsAccessor {
 		return this.destinationResolver;
 	}
 	
+	/**
+	 * @description 根据名称是否解析出一个发布/订阅域(topic)目的地对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @param destinationName
+	 * @param pubSubDomain
+	 * @return 
+	 * @throws JMSException
+	 */
 	protected Destination resolveDestinationName(Session session, String destinationName, boolean pubSubDomain) throws JMSException {
-		return getDestinationResolver().resolveDestinationName(session, destinationName, pubSubDomain);
+		return StringUtils.isNotEmpty(destinationName) ? 
+				getDestinationResolver().resolveDestinationName(session, destinationName, pubSubDomain) : null;
+	}
+	
+	/**
+	 * @description 获取必要的目的地对象，否则抛出IllegalArgumentException
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param strategy
+	 * @param destination
+	 * @return
+	 */
+	protected Destination getRequiredDestination(SharedStrategy strategy, Destination destination) {
+		if (destination == null)
+			// 优先选择传入的目的地，否则从消费策略中获取
+			destination = strategy.getDestination();
+		
+		if (destination == null)
+			throw new IllegalArgumentException("Destination must not be null.");
+		
+		return destination;
 	}
 
 }

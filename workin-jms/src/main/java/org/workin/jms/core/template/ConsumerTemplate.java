@@ -43,21 +43,36 @@ public class ConsumerTemplate extends ConsumerServiceSupport implements Consumer
 
 	@Override
 	public <T> T receive(String strategyName) {
-		return doReceive(strategyName, null, null);
+		return receive(strategyName, (Destination) null);
 	}
 
 	@Override
 	public <T> T receive(String strategyName, String destinationName) {
-		return doReceive(strategyName, null, destinationName);
+		return receiveAndSelect(strategyName, destinationName, null);
 	}
 
 	@Override
 	public <T> T receive(String strategyName, Destination destination) {
-		return doReceive(strategyName, destination, null);
+		return receiveAndSelect(strategyName, destination, null);
+	}
+
+	@Override
+	public <T> T receiveAndSelect(String strategyName, String messageSelector) {
+		return receiveAndSelect(strategyName, (Destination) null, messageSelector);
+	}
+
+	@Override
+	public <T> T receiveAndSelect(String strategyName, String destinationName, String messageSelector) {
+		return doReceive(strategyName,destinationName, null, messageSelector);
+	}
+
+	@Override
+	public <T> T receiveAndSelect(String strategyName, Destination destination, String messageSelector) {
+		return doReceive(strategyName, null, destination, messageSelector);
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected <T> T doReceive(String strategyName, Destination destination, String destinationName) {
+	protected <T> T doReceive(String strategyName, String destinationName, Destination destination, String messageSelector) {
 		ConsumeStrategy cs = getStrategy(strategyName);
 		AssertUtils.assertNotNull(cs, "Can not found consume strategy of [" + strategyName + "].");
 		
@@ -66,17 +81,19 @@ public class ConsumerTemplate extends ConsumerServiceSupport implements Consumer
 		MessageConsumer consumer = null;
 		
 		T result = null;
-		MessageListener listener = cs.getMessageListener();
 		try {
 			connection = createConnection();
 			session = createSession(connection, cs, true);
 			
-			if (destination != null)
-				consumer = createConsumer(session, cs, destination);
+			/* 创建消费者 */
+			if (destinationName != null) 
+				consumer = createSelectableConsumer(session, cs, destinationName, messageSelector);
 			else
-				consumer = createConsumer(session, cs, destinationName);
+				consumer = createSelectableConsumer(session, cs, destination, messageSelector);
 			
+			MessageListener listener = cs.getMessageListener();
 			if (listener != null) {
+				/* 绑定异步消费监听 */
 				if (listener instanceof ConsumeMessageListener) {
 					((ConsumeMessageListener) listener).setConnection(connection);
 					((ConsumeMessageListener) listener).setSession(session);
@@ -85,20 +102,22 @@ public class ConsumerTemplate extends ConsumerServiceSupport implements Consumer
 				}
 				consumer.setMessageListener(listener);
 			} else  {
+				/* 直接进行同步消费 */
 				Message message = consumer.receive();
-				result = (T) cs.getMessageConverter().fromMessage(consumer.receive());
+				result = (T) cs.getMessageConverter().fromMessage(message);
 				if (session.getAcknowledgeMode() == Session.CLIENT_ACKNOWLEDGE)
 					message.acknowledge();
 			}
 			
 			if (session.getTransacted() && isSessionLocallyTransacted(session, cs))
+				// 提交事务
 				JmsUtils.commitIfNecessary(session);
 			
 		} catch (JMSException e) {
 			e.printStackTrace();
 		} finally {
-			/* 如果是同步接收，则接收完成后立即进行关闭操作 ，否则需在消息监听器中完成 */
-			if (listener == null) {
+			/* 如果不是异步消费，则接收完成后立即进行关闭操作 ，否则需在消息监听器中完成 */
+			if (!isAsynConsume(consumer)) {
 				JmsUtils.closeMessageConsumer(consumer);
 				JmsUtils.closeSession(session);
 				ConnectionFactoryUtils.releaseConnection(connection, getConnectionFactory(), true);

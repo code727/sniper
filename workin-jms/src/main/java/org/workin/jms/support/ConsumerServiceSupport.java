@@ -39,7 +39,7 @@ import org.workin.jms.core.strategy.ConsumeStrategy;
 public abstract class ConsumerServiceSupport extends JmsDestinationAccessor implements ConsumeStrategiesManager{
 
 	private Map<String, ConsumeStrategy> strategies;
-	
+		
 	@Override
 	public void setStrategies(Map<String, ConsumeStrategy> strategies) {
 		this.strategies = strategies;
@@ -81,11 +81,11 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	 * @return
 	 */
 	protected MessageConsumer createConsumer(Session session, String strategyName) throws JMSException {
-		return createConsumer(session, getStrategy(strategyName));
+		return createConsumer(session, strategies.get(strategyName));
 	}
 	
 	/**
-	 * @description 根据会话和消费策略创建消费者
+	 * @description 根据会话和指定的消费策略创建消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -93,37 +93,37 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	 * @throws JMSException
 	 */
 	protected MessageConsumer createConsumer(Session session, ConsumeStrategy strategy) throws JMSException {
-		return createConsumer(session, strategy, true);
+		return createConsumer(session, strategy, (Destination) null);
 	}
 	
 	/**
-	 * @description 根据会话和指定名称的消费策略创建消费者，并指定是否为消费者自动分配消费策略
+	 * @description 根据会话、策略名称和目的地名称创建消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategyName
-	 * @param autoAssign
+	 * @param destinationName
 	 * @return
 	 * @throws JMSException
 	 */
-	protected MessageConsumer createConsumer(Session session, String strategyName, boolean autoAssign) throws JMSException {
-		return createConsumer(session, getStrategy(strategyName), autoAssign);
-	}
+	protected MessageConsumer createConsumer(Session session, String strategyName, String destinationName) throws JMSException {
+		return createSelectableConsumer(session, strategyName, destinationName, null);
+	}	
 	
 	/**
-	 * @description 根据会话和消费策略创建消费者，并指定是否为消费者自动分配消费策略
+	 * @description 根据会话、策略名称和目的地创建消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
-	 * @param strategy
-	 * @param autoAssign
+	 * @param strategyName
+	 * @param destination
 	 * @return
 	 * @throws JMSException
 	 */
-	protected MessageConsumer createConsumer(Session session, ConsumeStrategy strategy, boolean autoAssign) throws JMSException {
-		return createConsumer(session, strategy, (Destination) null, autoAssign);
+	protected MessageConsumer createConsumer(Session session, String strategyName, Destination destination) throws JMSException {
+		return createSelectableConsumer(session, strategyName, destination, null);
 	}
 	
 	/**
-	 * @description 根据会话、消费策略和目的地名称创建消费者
+	 * @description 根据会话、策略和目的地名称创建消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -132,11 +132,11 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	 * @throws JMSException
 	 */
 	protected MessageConsumer createConsumer(Session session, ConsumeStrategy strategy, String destinationName) throws JMSException {
-		return createConsumer(session, strategy, destinationName, true);
-	}
+		return createSelectableConsumer(session, strategy, destinationName, null);
+	}	
 	
 	/**
-	 * @description 根据会话、消费策略和目的地创建消费者
+	 * @description 根据会话、策略和目的地创建消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -145,58 +145,122 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	 * @throws JMSException
 	 */
 	protected MessageConsumer createConsumer(Session session, ConsumeStrategy strategy, Destination destination) throws JMSException {
-		return createConsumer(session, strategy, destination, true);
+		return createSelectableConsumer(session, strategy, destination, null);
 	}
 	
 	/**
-	 * @description 根据会话、消费策略和目的地名称创建消费者，并指定是否为消费者自动分配消费策略
+	 * @description 根据会话和消费策略名称创建具备选择功能的消费者
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @param strategyName
+	 * @param messageSelector
+	 * @return
+	 * @throws JMSException
+	 */
+	protected MessageConsumer createSelectableConsumer(Session session, String strategyName, String messageSelector) throws JMSException {
+		return createSelectableConsumer(session, strategyName, (Destination) null, messageSelector);
+	}
+	
+	/**
+	 * @description 根据会话和消费策略创建具备选择能力的消费者
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @param strategy
+	 * @param messageSelector
+	 * @return
+	 * @throws JMSException
+	 */
+	protected MessageConsumer createSelectableConsumer(Session session, ConsumeStrategy strategy, String messageSelector) throws JMSException {
+		return createSelectableConsumer(session, strategy, (Destination) null, messageSelector);
+	}
+	
+	/**
+	 * @description 根据会话、策略名称和目的地创建具备选择能力的消费者
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @param strategyName
+	 * @param destination
+	 * @param messageSelector
+	 * @return
+	 * @throws JMSException
+	 */
+	protected MessageConsumer createSelectableConsumer(Session session, String strategyName, Destination destination, String messageSelector) throws JMSException {
+		return createSelectableConsumer(session, strategies.get(strategyName),
+				destination, messageSelector);
+	}
+	
+	/**
+	 * @description 根据会话、策略名称和目的地名称创建具备选择能力的消费者
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @param strategyName
+	 * @param destinationName
+	 * @param messageSelector
+	 * @return
+	 * @throws JMSException
+	 */
+	protected MessageConsumer createSelectableConsumer(Session session, String strategyName, String destinationName, String messageSelector) throws JMSException {
+		return createSelectableConsumer(session, strategies.get(strategyName),
+				destinationName, messageSelector);
+	}
+	
+	/**
+	 * @description 根据会话、策略和目的地名称创建具备选择能力的消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
 	 * @param destinationName
-	 * @param autoAssign
+	 * @param messageSelector
 	 * @return
 	 * @throws JMSException
 	 */
-	protected MessageConsumer createConsumer(Session session, ConsumeStrategy strategy, String destinationName, boolean autoAssign) throws JMSException {
-		return createConsumer(session, strategy, StringUtils.isNotEmpty(destinationName) ? 
-				resolveDestinationName(session, destinationName, strategy.isPubSubDomain()) : (Destination) null, autoAssign);
+	protected MessageConsumer createSelectableConsumer(Session session, ConsumeStrategy strategy, String destinationName, String messageSelector) throws JMSException {
+		return createSelectableConsumer(session, strategy, resolveDestinationName(
+				session, destinationName, strategy.isPubSubDomain()), messageSelector);
 	}
-	
+			
 	/**
-	 * @description 根据会话、消费策略和目的地创建消费者，并指定是否为消费者自动分配消费策略
+	 * @description 根据会话、消费策略和目的地创建具备选择能力的消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
 	 * @param destination
-	 * @param autoAssign
+	 * @param messageSelector
+	 * @param autoBind
 	 * @return
 	 * @throws JMSException
 	 */
-	protected MessageConsumer createConsumer(Session session, ConsumeStrategy strategy, Destination destination, boolean autoAssign) throws JMSException {
-		if (destination == null)
-			// 优先选择传入的目的地，否则从消费策略中获取
-			destination = strategy.getDestination();
+	protected MessageConsumer createSelectableConsumer(Session session, ConsumeStrategy strategy, Destination destination, String messageSelector) throws JMSException {
+		destination = getRequiredDestination(strategy, destination);
 		
-		if (destination == null)
-			throw new IllegalArgumentException("Destination must not be null.");
+		if (StringUtils.isBlank(messageSelector))
+			// 优先选择传入的消息选择器，否则从消费策略中获取
+			messageSelector = strategy.getMessageSelector();
 		
-		MessageConsumer consumer = session.createConsumer(destination);
-		if (autoAssign)
-			assign(consumer, strategy);
-		
+		MessageConsumer consumer;
+//		if (StringUtils.isNotBlank(messageSelector)) {
+		if (strategy.isPubSubDomain())
+			consumer = session.createConsumer(destination, messageSelector, strategy.isPubSubNoLocal());
+		else
+			consumer = session.createConsumer(destination, messageSelector);
+//		} else
+//			consumer = session.createConsumer(destination);
+				
 		return consumer;
 	}
-
+				
 	/**
-	 * @description 为消费者分配消费策略
+	 * @description 判断当前消费者是否采用异步消费方式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param producer
-	 * @param strategy
-	 * @throws JMSException
+	 * @param consumer
+	 * @return
 	 */
-	private void assign(MessageConsumer consumer, ConsumeStrategy strategy) throws JMSException {
-		consumer.setMessageListener(strategy.getMessageListener());
+	protected boolean isAsynConsume(MessageConsumer consumer) {
+		try {
+			return consumer != null && consumer.getMessageListener() != null;
+		} catch (JMSException e) {
+			return false;
+		}
 	}
 
 }

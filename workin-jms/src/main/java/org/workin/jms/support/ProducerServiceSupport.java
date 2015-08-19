@@ -27,7 +27,6 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 
 import org.workin.commons.util.MapUtils;
-import org.workin.commons.util.StringUtils;
 import org.workin.jms.core.manager.ProductionStrategiesManager;
 import org.workin.jms.core.strategy.ProductionStrategy;
 
@@ -95,33 +94,33 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	 * @throws JMSException
 	 */
 	protected MessageProducer createProducer(Session session, ProductionStrategy strategy) throws JMSException {
-		return createProducer(session, strategy, true);
+		return createProducer(session, strategy, (Destination) null);
 	}
 	
 	/**
-	 * @description 根据会话和指定名称的生产策略创建生产者，并指定是否为生产者自动分配生产策略
+	 * @description 根据会话、策略名称和目的地名称创建生产者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategyName
-	 * @param autoAssign
+	 * @param destinationName
 	 * @return
 	 * @throws JMSException
 	 */
-	protected MessageProducer createProducer(Session session, String strategyName, boolean autoAssign) throws JMSException {
-		return createProducer(session, getStrategy(strategyName), autoAssign);
+	protected MessageProducer createProducer(Session session, String strategyName, String destinationName) throws JMSException {
+		return createProducer(session, strategies.get(strategyName), destinationName);
 	}
 	
 	/**
-	 * @description 根据会话和生产策略创建生产者，并指定是否为生产者自动分配生产策略
+	 * @description 根据会话、策略名称和目的地创建生产者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
-	 * @param strategy
-	 * @param autoAssign
+	 * @param strategyName
+	 * @param destination
 	 * @return
 	 * @throws JMSException
 	 */
-	protected MessageProducer createProducer(Session session, ProductionStrategy strategy, boolean autoAssign) throws JMSException {
-		return createProducer(session, strategy, (Destination) null, autoAssign);
+	protected MessageProducer createProducer(Session session, String strategyName, Destination destination) throws JMSException {
+		return createProducer(session, strategies.get(strategyName), destination);
 	}
 	
 	/**
@@ -134,11 +133,11 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	 * @throws JMSException
 	 */
 	protected MessageProducer createProducer(Session session, ProductionStrategy strategy, String destinationName) throws JMSException {
-		return createProducer(session, strategy, destinationName, true);
+		return createProducer(session, strategy, resolveDestinationName(session, destinationName, strategy.isPubSubDomain()));
 	}
 	
 	/**
-	 * @description 根据会话、生产策略和目的地名称创建生产者
+	 * @description 根据会话、生产策略和目的地创建生产者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -147,64 +146,36 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	 * @throws JMSException
 	 */
 	protected MessageProducer createProducer(Session session, ProductionStrategy strategy, Destination destination) throws JMSException {
-		return createProducer(session, strategy, destination, true);
+		return session.createProducer(getRequiredDestination(strategy, destination));
 	}
 	
 	/**
-	 * @description 根据会话、生产策略和目的地名称创建生产者，并指定是否为生产者自动分配生产策略
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param session
-	 * @param strategy
-	 * @param destinationName
-	 * @param autoAssign
-	 * @return
-	 * @throws JMSException
-	 */
-	protected MessageProducer createProducer(Session session, ProductionStrategy strategy, String destinationName, boolean autoAssign) throws JMSException {
-		return createProducer(session, strategy, StringUtils.isNotEmpty(destinationName) ? 
-				resolveDestinationName(session, destinationName, strategy.isPubSubDomain()) : (Destination) null, autoAssign);
-	}
-	
-	/**
-	 * @description 根据会话、生产策略和目的地创建生产者，并指定是否为生产者自动分配生产策略
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param session
-	 * @param strategy
-	 * @param destination
-	 * @param autoAssign
-	 * @return
-	 * @throws JMSException
-	 */
-	protected MessageProducer createProducer(Session session, ProductionStrategy strategy, Destination destination, boolean autoAssign) throws JMSException {
-		if (destination == null)
-			// 优先选择传入的目的地，否则从生产策略中获取
-			destination = strategy.getDestination();
-		
-		if (destination == null)
-			throw new IllegalArgumentException("Destination must not be null.");
-		
-		MessageProducer producer = session.createProducer(destination);
-		if (autoAssign)
-			assign(producer, strategy);
-		
-		return producer;
-	}
-	
-	/**
-	 * @description 为生产者分配生产策略
+	 * @description 准备生产
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param producer
 	 * @param strategy
 	 * @throws JMSException
 	 */
-	private void assign(MessageProducer producer, ProductionStrategy strategy) throws JMSException {
-		if (strategy.isExplicitQosEnabled()) {
-			producer.setDeliveryMode(strategy.getDeliveryMode());
-			producer.setPriority(strategy.getPriority());
-			producer.setTimeToLive(strategy.getTimeToLive());
-		}
+	protected void prepare(MessageProducer producer, ProductionStrategy strategy) throws JMSException {
 		producer.setDisableMessageID(!strategy.isMessageIdEnabled());
 		producer.setDisableMessageTimestamp(!strategy.isMessageTimestampEnabled());
+	}
+	
+	/**
+	 * @description 执行发送操作
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @param producer
+	 * @param message
+	 * @param strategy
+	 * @throws JMSException
+	 */
+	protected void doSend(Session session, MessageProducer producer, Object message, ProductionStrategy strategy) throws JMSException {
+		if (strategy.isExplicitQosEnabled())
+			producer.send(strategy.getMessageConverter().toMessage(message, session), 
+					strategy.getDeliveryMode(), strategy.getPriority(), strategy.getTimeToLive());
+		else
+			producer.send(strategy.getMessageConverter().toMessage(message, session));
 	}
 
 }
