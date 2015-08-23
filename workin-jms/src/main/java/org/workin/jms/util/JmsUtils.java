@@ -61,7 +61,7 @@ public class JmsUtils {
 	 * @throws JMSException
 	 */
 	public static void autoRollback(Session session, SharedStrategy strategy, ConnectionFactory connectionFactory) throws JMSException {
-		if (hasTransactional(session, strategy, connectionFactory) && strategy.isAutoRollback())
+		if (strategy.isAutoRollback() && hasTransactional(session, strategy, connectionFactory))
 			rollback(session);
 	}
 	

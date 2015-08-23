@@ -82,5 +82,5 @@ public interface ConsumeStrategy extends SharedStrategy {
 	 * @return
 	 */
 	public MessageListener getMessageListener();
-
+	
 }

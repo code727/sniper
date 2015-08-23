@@ -73,12 +73,16 @@ public class ProducerTemplate extends ProducerServiceSupport implements Producer
 			prepare(producer, ps);
 			doSend(session, producer, message, ps);
 			
-			if (session.getTransacted() && isSessionLocallyTransacted(session, ps))
-				// 提交事务
+			if (hasTransactional(session, ps))
 				JmsUtils.commitIfNecessary(session);
 			
 		} catch (JMSException e) {
 			e.printStackTrace();
+			try {
+				autoRollback(session, ps);
+			} catch (JMSException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			JmsUtils.closeMessageProducer(producer);
 			JmsUtils.closeSession(session);

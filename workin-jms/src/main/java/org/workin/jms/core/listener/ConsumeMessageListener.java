@@ -21,11 +21,9 @@ package org.workin.jms.core.listener;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
-import javax.jms.Session;
 
 import org.springframework.jms.connection.ConnectionFactoryUtils;
 import org.springframework.jms.support.JmsUtils;
-import org.springframework.jms.support.converter.MessageConversionException;
 import org.workin.jms.core.strategy.ConsumeStrategy;
 
 /**
@@ -63,17 +61,22 @@ public abstract class ConsumeMessageListener extends ContextMessageListener {
 			Object result = strategy.getMessageConverter().fromMessage(message);
 			doReceiveHandle(result);
 			
+			if (org.workin.jms.util.JmsUtils.hasTransactional(getSession(), strategy, getConnectionFactory()))
+				JmsUtils.commitIfNecessary(getSession());
 			/* 
 			 * 如果使用客户端自行通知，则需要在MessageListener里
 			 * 显式调用message.acknowledge()来通知服务器，服务器接收到通知后采取相应的操作。
 			 */
-			if (getSession().getAcknowledgeMode() == Session.CLIENT_ACKNOWLEDGE)
+			if (org.workin.jms.util.JmsUtils.isClientAcknowledge(getSession()))
 				message.acknowledge();
 			
-		} catch (MessageConversionException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (JMSException e) {
-			e.printStackTrace();
+			try {
+				org.workin.jms.util.JmsUtils.autoRollback(getSession(), strategy, getConnectionFactory());
+			} catch (JMSException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			JmsUtils.closeMessageConsumer(consumer);
 			JmsUtils.closeSession(getSession());
@@ -81,6 +84,6 @@ public abstract class ConsumeMessageListener extends ContextMessageListener {
 		}
 	}
 	
-	protected abstract <T> void doReceiveHandle(T message);
+	protected abstract <T> void doReceiveHandle(T message) throws Exception;
 	
 }

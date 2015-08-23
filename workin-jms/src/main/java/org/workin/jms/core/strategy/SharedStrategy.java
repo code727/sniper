@@ -113,4 +113,18 @@ public interface SharedStrategy {
      */
     public int getDeliveryMode();
 
+	/** 
+	 * @description 设置当抛出异常时，是否自动回滚事务
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param autoRollback 
+	 */
+    public void setAutoRollback(boolean autoRollback);
+
+	/** 
+	 * @description 判断当抛出异常时，是否自动回滚事务
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return 
+	 */
+    public boolean isAutoRollback();
+
 }

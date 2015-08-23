@@ -51,6 +51,9 @@ public class DefaultSharedStrategy implements SharedStrategy {
 	/** 消息转换器 */
 	private MessageConverter messageConverter = new SimpleMessageConverter();
 	
+	/** 是否自动回滚事务 */
+	private boolean autoRollback;
+	
 	@Override
 	public void setDeliveryMode(int deliveryMode) {
 		this.deliveryMode = deliveryMode;
@@ -109,6 +112,16 @@ public class DefaultSharedStrategy implements SharedStrategy {
 	@Override
 	public MessageConverter getMessageConverter() {
 		return this.messageConverter;
+	}
+
+	@Override
+	public void setAutoRollback(boolean autoRollback) {
+		this.autoRollback = autoRollback;
+	}
+
+	@Override
+	public boolean isAutoRollback() {
+		return this.autoRollback;
 	}
 
 }

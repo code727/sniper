@@ -19,6 +19,7 @@
 package org.workin.jms.core.listener;
 
 import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
 import javax.jms.MessageListener;
 import javax.jms.Session;
 
@@ -29,12 +30,23 @@ import javax.jms.Session;
  */
 public abstract class ContextMessageListener implements MessageListener {
 	
+	/** 连接工厂 */
+	private ConnectionFactory connectionFactory;
+	
 	/** 连接对象 */
 	private Connection connection;
 	
 	/** 会话对象 */
 	private Session session;
 	
+	public ConnectionFactory getConnectionFactory() {
+		return connectionFactory;
+	}
+
+	public void setConnectionFactory(ConnectionFactory connectionFactory) {
+		this.connectionFactory = connectionFactory;
+	}
+
 	public Connection getConnection() {
 		return connection;
 	}

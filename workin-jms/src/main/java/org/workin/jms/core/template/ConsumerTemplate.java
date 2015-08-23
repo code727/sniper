@@ -95,6 +95,7 @@ public class ConsumerTemplate extends ConsumerServiceSupport implements Consumer
 			if (listener != null) {
 				/* 绑定异步消费监听 */
 				if (listener instanceof ConsumeMessageListener) {
+					((ConsumeMessageListener) listener).setConnectionFactory(getConnectionFactory());
 					((ConsumeMessageListener) listener).setConnection(connection);
 					((ConsumeMessageListener) listener).setSession(session);
 					((ConsumeMessageListener) listener).setConsumer(consumer);
@@ -105,16 +106,21 @@ public class ConsumerTemplate extends ConsumerServiceSupport implements Consumer
 				/* 直接进行同步消费 */
 				Message message = consumer.receive();
 				result = (T) cs.getMessageConverter().fromMessage(message);
-				if (session.getAcknowledgeMode() == Session.CLIENT_ACKNOWLEDGE)
+				
+				if (hasTransactional(session, cs))
+					JmsUtils.commitIfNecessary(session);
+				
+				if (org.workin.jms.util.JmsUtils.isClientAcknowledge(session))
 					message.acknowledge();
 			}
-			
-			if (session.getTransacted() && isSessionLocallyTransacted(session, cs))
-				// 提交事务
-				JmsUtils.commitIfNecessary(session);
-			
 		} catch (JMSException e) {
 			e.printStackTrace();
+			if (!isAsynConsume(consumer))
+				try {
+					autoRollback(session, cs);
+				} catch (JMSException e1) {
+					e1.printStackTrace();
+				}
 		} finally {
 			/* 如果不是异步消费，则接收完成后立即进行关闭操作 ，否则需在消息监听器中完成 */
 			if (!isAsynConsume(consumer)) {

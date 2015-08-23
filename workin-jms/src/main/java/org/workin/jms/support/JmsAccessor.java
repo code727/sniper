@@ -26,6 +26,7 @@ import javax.jms.Session;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jms.connection.ConnectionFactoryUtils;
 import org.workin.jms.core.strategy.SharedStrategy;
+import org.workin.jms.util.JmsUtils;
 
 /**
  * @description JMS访问器抽象类
@@ -112,19 +113,41 @@ public abstract class JmsAccessor implements InitializingBean {
 	protected abstract Session createSession(Connection connection, String strategyName, boolean startConnection) throws JMSException;
 	
 	/**
-	 * @description 判断是否为客户端回复会话模式
+	 * @description 判断当前会话是否具备本地事务特性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
+	 * @param strategy
 	 * @return
-	 * @throws JMSException
 	 */
-	protected boolean isClientAcknowledge(Session session) throws JMSException {
-		return (session.getAcknowledgeMode() == Session.CLIENT_ACKNOWLEDGE);
-	}
-	
 	protected boolean isSessionLocallyTransacted(Session session, SharedStrategy strategy) {
 		return strategy.isSessionTransacted()
 				&& !ConnectionFactoryUtils.isSessionTransactional(session,getConnectionFactory());
+	}
+
+	/**
+	 * @description 判断会话是否具有事务性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @return
+	 */
+	protected boolean hasTransactional(Session session, SharedStrategy strategy) {
+		try {
+			return session.getTransacted() && isSessionLocallyTransacted(session, strategy);
+		} catch (JMSException e) {
+			return false;
+		}
+	}
+	
+	/**
+	 * @description 自动回滚事务
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param session
+	 * @param strategy
+	 * @throws JMSException
+	 */
+	protected void autoRollback(Session session, SharedStrategy strategy) throws JMSException {
+		if (strategy.isAutoRollback() && hasTransactional(session, strategy))
+			JmsUtils.rollback(session);
 	}
 
 }
