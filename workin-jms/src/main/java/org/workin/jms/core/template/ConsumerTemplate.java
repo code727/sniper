@@ -48,26 +48,26 @@ public class ConsumerTemplate extends ConsumerServiceSupport implements Consumer
 
 	@Override
 	public <T> T receive(String strategyName, String destinationName) {
-		return receiveAndSelect(strategyName, destinationName, null);
+		return selectReceive(strategyName, destinationName, null);
 	}
 
 	@Override
 	public <T> T receive(String strategyName, Destination destination) {
-		return receiveAndSelect(strategyName, destination, null);
+		return selectReceive(strategyName, destination, null);
 	}
 
 	@Override
-	public <T> T receiveAndSelect(String strategyName, String messageSelector) {
-		return receiveAndSelect(strategyName, (Destination) null, messageSelector);
+	public <T> T selectReceive(String strategyName, String messageSelector) {
+		return selectReceive(strategyName, (Destination) null, messageSelector);
 	}
 
 	@Override
-	public <T> T receiveAndSelect(String strategyName, String destinationName, String messageSelector) {
+	public <T> T selectReceive(String strategyName, String destinationName, String messageSelector) {
 		return doReceive(strategyName,destinationName, null, messageSelector);
 	}
 
 	@Override
-	public <T> T receiveAndSelect(String strategyName, Destination destination, String messageSelector) {
+	public <T> T selectReceive(String strategyName, Destination destination, String messageSelector) {
 		return doReceive(strategyName, null, destination, messageSelector);
 	}
 	

@@ -60,7 +60,7 @@ public interface ConsumerService {
 	 * @param messageSelector
 	 * @return
 	 */
-	public <T> T receiveAndSelect(String strategyName, String messageSelector);
+	public <T> T selectReceive(String strategyName, String messageSelector);
 	
 	/**
 	 * @description 按指定名称的消费策略选择接收来自目的地的消息
@@ -70,7 +70,7 @@ public interface ConsumerService {
 	 * @param messageSelector
 	 * @return
 	 */
-	public <T> T receiveAndSelect(String strategyName, String destinationName, String messageSelector);
+	public <T> T selectReceive(String strategyName, String destinationName, String messageSelector);
 	
 	/**
 	 * @description 按指定名称的消费策略选择接收来自目的地的消息
@@ -80,6 +80,6 @@ public interface ConsumerService {
 	 * @param messageSelector
 	 * @return
 	 */
-	public <T> T receiveAndSelect(String strategyName, Destination destination, String messageSelector);
+	public <T> T selectReceive(String strategyName, Destination destination, String messageSelector);
 	
 }

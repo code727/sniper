@@ -61,18 +61,18 @@ public class JmsTemplate extends JmsServiceSupport implements JmsService {
 	}
 
 	@Override
-	public <T> T receiveAndSelect(String strategyName, String messageSelector) {
-		return getConsumerTemplate().receiveAndSelect(strategyName, messageSelector);
+	public <T> T selectReceive(String strategyName, String messageSelector) {
+		return getConsumerTemplate().selectReceive(strategyName, messageSelector);
 	}
 
 	@Override
-	public <T> T receiveAndSelect(String strategyName, String destinationName, String messageSelector) {
-		return getConsumerTemplate().receiveAndSelect(strategyName, destinationName, messageSelector);
+	public <T> T selectReceive(String strategyName, String destinationName, String messageSelector) {
+		return getConsumerTemplate().selectReceive(strategyName, destinationName, messageSelector);
 	}
 
 	@Override
-	public <T> T receiveAndSelect(String strategyName, Destination destination, String messageSelector) {
-		return getConsumerTemplate().receiveAndSelect(strategyName, destination, messageSelector);
+	public <T> T selectReceive(String strategyName, Destination destination, String messageSelector) {
+		return getConsumerTemplate().selectReceive(strategyName, destination, messageSelector);
 	}
 	
 }
