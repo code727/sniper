@@ -19,67 +19,39 @@
 package org.workin.support.server;
 
 /**
- * @description 多地址服务器接口
+ * @description 互联网服务器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface MultiAddressServer {
+public interface InternetServer extends IntranetServer {
 		
 	/**
-	 * @description 设置内网服务地址
+	 * @description 设置互联网服务地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param intHost
+	 * @param internetHost
 	 */
-	public void setIntHost(String intHost);
-	
-	/**
-	 * @description 获取内网服务地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getIntHost();
-	
-	/**
-	 * @description 设置内网服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param intPort
-	 */
-	public void setIntPort(int intPort);
-	
-	/**
-	 * @description 获取内网服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public int getIntPort();
-	
-	/**
-	 * @description 设置外网服务地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param extHost
-	 */
-    public void setExtHost(String extHost);
+    public void setInternetHost(String internetHost);
 	
     /**
-     * @description 获取外网服务地址
+     * @description 获取互联网服务地址
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
      * @return
      */
-	public String getExtHost();
+	public String getInternetHost();
 
 	/**
-	 * @description 设置外网服务端口
+	 * @description 设置互联网服务端口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param extPort
+	 * @param internetPort
 	 */
-	public void setExtPort(int extPort);
+	public void setInternetPort(int internetPort);
 	
 	/**
-	 * @description 获取外网服务端口
+	 * @description 获取互联网服务端口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param extPort
 	 * @return
 	 */
-	public int getExtPort(int extPort);
+	public int getInternetPort(int extPort);
 	
 }
