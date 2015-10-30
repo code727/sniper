@@ -33,16 +33,7 @@ public class DefaultFormHandler implements FormHandler {
 	public void append(StringBuffer url, HttpForm form) {
 		String host = form.getHost().trim();
 		int port = form.getPort();
-		if (!form.isHttps()) {
-			url.append(HTTP_PROTOCOL).append("://").append(host);
-			if (NetUtils.isValidPort(port) && port != NetUtils.DEFAULT_HTTP_PORT)
-				url.append(":").append(port);
-		} else {
-			url.append(HTTPS_PROTOCOL).append("://").append(host);
-			if (NetUtils.isValidPort(port) && port != NetUtils.DEFAULT_HTTPS_PORT)
-				url.append(":").append(port);
-		}
-		
+		url.append(NetUtils.toURL((form.isHttps() ? NetUtils.HTTPS_PROTOCOL : NetUtils.HTTP_PROTOCOL), host, port));
 		appendContextRoot(url, form);
 		appendAction(url, form);
 		appendQueryString(url, form);

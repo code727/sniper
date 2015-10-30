@@ -27,12 +27,6 @@ import org.workin.http.HttpForm;
  */
 public interface FormHandler {
 	
-	/** HTTP协议 */
-	public static final String HTTP_PROTOCOL = "http";
-	
-	/** HTTPS协议 */
-	public static final String HTTPS_PROTOCOL = "https";
-	
 	/**
 	 * @description 将表单对象中的所有关键属性拼接到指定的URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
