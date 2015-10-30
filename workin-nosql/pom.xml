@@ -32,6 +32,33 @@
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.0.3.RELEASE</version>
 		</dependency>
+		<!-- <dependency>
+			<groupId>com.thoughtworks.proxytoys</groupId>
+			<artifactId>proxytoys</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency> -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>3.1</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.mongodb.morphia</groupId>
+			<artifactId>morphia</artifactId>
+			<version>1.0.1</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>com.thoughtworks.proxytoys</groupId>
+					<artifactId>proxytoys</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> 
 		<dependency>
 			<groupId>org.workin</groupId>
             <artifactId>workin-commons</artifactId>

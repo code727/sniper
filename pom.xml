@@ -45,6 +45,7 @@
 		<module>workin-spring</module>
 		<module>workin-trace</module>
 		<module>workin-jms</module>
-		<module>workin-soap</module>
+		<module>workin-socket</module>
+		<module>workin-fastdfs</module>
 	</modules>
 </project>
