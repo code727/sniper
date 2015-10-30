@@ -18,39 +18,15 @@
 
 package org.workin.fastdfs.node;
 
+import org.workin.support.server.IntranetServer;
+
 /**
  * @description Storage接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Storage {
+public interface Storage extends IntranetServer {
 	
-	/**
-	 * @description 设置主机服务地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param host
-	 */
-	public void setHost(String host);
 	
-	/**
-	 * @description 获取主机服务地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getHost();
-	
-	/**
-	 * @description 设置服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param port
-	 */
-	public void setPort(int port);
-	
-	/**
-	 * @description 获取服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public int getPort();
 
 }
