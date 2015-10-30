@@ -36,8 +36,11 @@ import java.util.StringTokenizer;
  */
 public class NetUtils {
 	
-	/** 默认超时3000毫秒 */
-	public static final int DEFAULT_TIMEOUT = 3000;
+	/** HTTP协议 */
+	public static final String HTTP_PROTOCOL = "http";
+	
+	/** HTTPS协议 */
+	public static final String HTTPS_PROTOCOL = "https";
 	
 	/** 默认HTTP协议80端口 */
 	public static final int DEFAULT_HTTP_PORT = 80;
@@ -50,6 +53,9 @@ public class NetUtils {
 	
 	/** 最大端口号 */
 	public static final int MAX_PORT = 65535;
+	
+	/** 默认超时3000毫秒 */
+	public static final int DEFAULT_TIMEOUT = 3000;
 	
 	/**
 	 * @description 获取本机的IP地址
@@ -328,5 +334,36 @@ public class NetUtils {
 	public static boolean isValidPort(int port) {
 		return port >= MIN_PORT && port <= MAX_PORT;
 	}
+	
+	/**
+	 * @description 根据协议、主机地址和端口号拼接转换成URL
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param protocol
+	 * @param host
+	 * @param port
+	 * @return
+	 */
+	public static String toURL(String protocol, String host, int port) {
+		protocol = StringUtils.trimToEmpty(protocol);
+		host = StringUtils.trimToEmpty(host);
+		AssertUtils.assertTrue(protocol.length() > 0, "URL protocol can not be null or empty.");
+		AssertUtils.assertTrue(host.length() > 0, "URL host can not be null or empty.");
 		
+		StringBuffer url = new StringBuffer(protocol);
+		if (!protocol.endsWith("://"))
+			url.append("://");
+		url.append(host);
+		
+		if (StringUtils.startsWithIgnoreCase(protocol, HTTPS_PROTOCOL)) {
+			if (isValidPort(port) && port != DEFAULT_HTTPS_PORT)
+				url.append(":").append(port);
+		} else if (StringUtils.startsWithIgnoreCase(protocol, HTTP_PROTOCOL)) {
+			if (isValidPort(port) && port != DEFAULT_HTTP_PORT)
+				url.append(":").append(port);
+		} else 
+			url.append(":").append(port);
+		
+		return url.toString();
+	}
+				
 }
