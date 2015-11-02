@@ -18,15 +18,21 @@
 
 package org.workin.fastdfs.node;
 
+import org.workin.commons.util.NetUtils;
+import org.workin.commons.util.StringUtils;
+import org.workin.spring.beans.CheckableInitializingBean;
+
 /**
  * @description StorageServer实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class StorageServer implements Storage {
+public class StorageServer extends CheckableInitializingBean implements Storage {
 	
+	/** StorageServer节点的内网服务地址 */
 	private String host;
 	
+	/** StorageServer节点的内网服务端口 */
 	private int port = DEFAULT_PORT;
 
 	@Override
@@ -47,6 +53,17 @@ public class StorageServer implements Storage {
 	@Override
 	public int getPort() {
 		return this.port;
+	}
+
+	@Override
+	protected void checkProperties() throws IllegalArgumentException {
+		if (StringUtils.isBlank(this.host))
+			new IllegalArgumentException("Storage server property 'host' must not be null or blank.");
+		
+		if (!NetUtils.isValidPort(this.port))
+			throw new IllegalArgumentException("Storage server property 'port' is "
+					+ this.port + ",valid range [" + NetUtils.MIN_PORT + "-"
+					+ NetUtils.MAX_PORT + "].");
 	}
 
 }
