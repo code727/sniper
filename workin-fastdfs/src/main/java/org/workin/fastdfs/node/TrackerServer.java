@@ -25,9 +25,9 @@ package org.workin.fastdfs.node;
  */
 public class TrackerServer implements Tracker {
 	
-	private String host = "127.0.0.1";
+	private String host;
 	
-	private int port = 22122;
+	private int port = DEFAULT_PORT;
 	
 	@Override
 	public void setHost(String host) {

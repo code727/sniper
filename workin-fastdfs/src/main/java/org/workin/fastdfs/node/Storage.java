@@ -27,6 +27,7 @@ import org.workin.support.server.IntranetServer;
  */
 public interface Storage extends IntranetServer {
 	
+	/** Storage默认的服务端口 */
+	public static final int DEFAULT_PORT = 23000;
 	
-
 }

@@ -27,6 +27,9 @@ import org.workin.support.server.IntranetServer;
  */
 public interface Tracker extends IntranetServer {
 	
+	/** Tracker默认的服务端口 */
+	public static final int DEFAULT_PORT = 22122;
+	
 	
 
 }
