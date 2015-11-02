@@ -54,8 +54,15 @@ public class NetUtils {
 	/** 最大端口号 */
 	public static final int MAX_PORT = 65535;
 	
-	/** 默认超时3000毫秒 */
-	public static final int DEFAULT_TIMEOUT = 3000;
+	/** 默认超时毫秒数 */
+	public static final int DEFAULT_TIMEOUT_MSEC = 3000;
+	
+	/** 默认超时秒数 */
+	public static final int DEFAULT_TIMEOUT_SEC = 3;
+	
+	/** 回送地址 */
+	public static final String LOOPBACK_ADDRESS = "127.0.0.1";
+	 
 	
 	/**
 	 * @description 获取本机的IP地址

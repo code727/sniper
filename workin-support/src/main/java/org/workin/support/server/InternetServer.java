@@ -52,6 +52,6 @@ public interface InternetServer extends IntranetServer {
 	 * @param extPort
 	 * @return
 	 */
-	public int getInternetPort(int extPort);
+	public int getInternetPort();
 	
 }
