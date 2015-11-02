@@ -78,74 +78,74 @@ public interface ClusterAccessor {
 	public Storage randomStorage(String pathPrefix);
 	
 	/**
-	 * @description 获取整个Tracker族提供的内网URL地址
+	 * @description 获取整个Tracker族提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public String getTrackerClusterIntranetUrl();
+	public String getTrackerClusterIntranetAccessURL();
 	
 	/**
-	 * @description 获取整个Tracker族提供的外网URL地址
+	 * @description 获取整个Tracker族提供的外网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public String getTrackerClusterInternetUrl();
+	public String getTrackerClusterInternetAccessURL();
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup提供的内网URL地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param pathPrefix
-	 * @return
-	 */
-	public String getStorageGroupIntranetUrl(String pathPrefix);
-	
-	/**
-	 * @description 根据路径前缀获取StorageGroup提供的外网URL地址
+	 * @description 根据路径前缀获取StorageGroup提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
 	 */
-	public String getStorageGroupInternetUrl(String pathPrefix);
+	public String getStorageGroupIntranetAccessURL(String pathPrefix);
 	
 	/**
-	 * @description 根据名称获取Tracker节点提供的内网URL地址
+	 * @description 根据路径前缀获取StorageGroup提供的外网访问URL地址
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pathPrefix
+	 * @return
+	 */
+	public String getStorageGroupInternetAccessURL(String pathPrefix);
+	
+	/**
+	 * @description 根据名称获取Tracker节点提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
 	 */
-	public String getTrackerIntranetUrl(String name);
+	public String getTrackerIntranetAccessURL(String name);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内指定索引位Storage节点提供的内网URL地址
+	 * @description 根据路径前缀获取StorageGroup内指定索引位Storage节点提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @param index
 	 * @return
 	 */
-	public String getStorageIntranetUrl(String pathPrefix, int index);
+	public String getStorageIntranetAccessURL(String pathPrefix, int index);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内第一个Storage节点提供的内网URL地址
+	 * @description 根据路径前缀获取StorageGroup内第一个Storage节点提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
 	 */
-	public String getFristStorageIntranetUrl(String pathPrefix);
+	public String getFristStorageIntranetAccessURL(String pathPrefix);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内最后一个Storage节点提供的内网URL地址
+	 * @description 根据路径前缀获取StorageGroup内最后一个Storage节点提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
 	 */
-	public String getLastStorageIntranetUrl(String pathPrefix);
+	public String getLastStorageIntranetAccessURL(String pathPrefix);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内随机的一个Storage节点提供的内网URL地址
+	 * @description 根据路径前缀获取StorageGroup内随机的一个Storage节点提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
 	 */
-	public String randomStorageIntranetUrl(String pathPrefix);
+	public String randomStorageIntranetAccessURL(String pathPrefix);
 	
 }

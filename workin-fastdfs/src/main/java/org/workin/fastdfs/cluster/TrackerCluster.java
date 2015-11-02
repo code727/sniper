@@ -29,7 +29,7 @@ import org.workin.support.server.InternetServer;
  * @version 1.0
  */
 public interface TrackerCluster extends InternetServer {
-	
+		
 	/**
 	 * @description 设置集群族内的TrackerServer映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

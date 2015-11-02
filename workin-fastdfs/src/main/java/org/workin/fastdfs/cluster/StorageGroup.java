@@ -42,6 +42,6 @@ public interface StorageGroup extends InternetServer {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Storage getStorages();
+	public List<Storage> getStorages();
 
 }

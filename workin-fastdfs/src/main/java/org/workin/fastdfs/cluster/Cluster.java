@@ -42,6 +42,20 @@ public interface Cluster extends ClusterAccessor {
 	public String getProtocol();
 	
 	/**
+	 * @description 设置Tracker和Storage集群族统一提供的访问服务端口
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param accessPort
+	 */
+	public void setAccessPort(int accessPort);
+	
+	/**
+	 * @description 获取Tracker和Storage集群族统一提供的访问服务端口
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public int getAccessPort();
+	
+	/**
 	 * @description 设置Tracker集群族
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param trackerCluster
@@ -58,9 +72,9 @@ public interface Cluster extends ClusterAccessor {
 	/**
 	 * @description 设置StorageGroup映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param groups：StorageGroup映射集，其中K表示请求路径前缀，V表示StorageGroup实例
+	 * @param storageGroups：StorageGroup映射集，其中K表示请求路径前缀，V表示StorageGroup实例
 	 */
-	public void setStorageGroups(Map<String, StorageGroup> groups);
+	public void setStorageGroups(Map<String, StorageGroup> storageGroups);
 	
 	/**
 	 * @description 获取StorageGroup映射集
