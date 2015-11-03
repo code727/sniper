@@ -168,13 +168,13 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	@Override
 	public String getStorageGroupIntranetAccessURL(String pathPrefix) {
 		return MapUtils.isNotEmpty(this.storageGroupIntranetAccessURLMap) ? 
-				this.storageGroupIntranetAccessURLMap.get(pathPrefix) : StringUtils.EMPTY_STRING;
+				this.storageGroupIntranetAccessURLMap.get(pathPrefix) : null;
 	}
 
 	@Override
 	public String getStorageGroupInternetAccessURL(String pathPrefix) {
 		return MapUtils.isNotEmpty(this.storageGroupInternetAccessURLMap) ? 
-				this.storageGroupInternetAccessURLMap.get(pathPrefix) : StringUtils.EMPTY_STRING;
+				this.storageGroupInternetAccessURLMap.get(pathPrefix) : null;
 	}
 
 	@Override
@@ -185,8 +185,7 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	@Override
 	public String getStorageIntranetAccessURL(String pathPrefix, int index) {
 		Map<Integer, String> storageGroupMap = this.storageInternetAccessURLMap.get(pathPrefix);
-		return MapUtils.isNotEmpty(storageGroupMap) ? 
-				storageGroupMap.get(index) : StringUtils.EMPTY_STRING;
+		return MapUtils.isNotEmpty(storageGroupMap) ? storageGroupMap.get(index) : null;
 	}
 
 	@Override
@@ -197,15 +196,14 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	@Override
 	public String getLastStorageIntranetAccessURL(String pathPrefix) {
 		Map<Integer, String> storageGroupMap = this.storageInternetAccessURLMap.get(pathPrefix);
-		return MapUtils.isNotEmpty(storageGroupMap) ? 
-				storageGroupMap.get(storageGroupMap.size() - 1) : StringUtils.EMPTY_STRING;
+		return MapUtils.isNotEmpty(storageGroupMap) ? storageGroupMap.get(storageGroupMap.size() - 1) : null;
 	}
 
 	@Override
 	public String randomStorageIntranetAccessURL(String pathPrefix) {
 		Map<Integer, String> storageGroupMap = this.storageInternetAccessURLMap.get(pathPrefix);
 		return MapUtils.isNotEmpty(storageGroupMap) ? 
-				storageGroupMap.get(NumberUtils.randomIn(storageGroupMap.size())) : StringUtils.EMPTY_STRING;
+				storageGroupMap.get(NumberUtils.randomIn(storageGroupMap.size())) : null;
 	}
 	
 	@Override
