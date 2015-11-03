@@ -38,10 +38,10 @@ public class DefaultTrackerCluster extends CheckableInitializingBean implements 
 	private Map<String, Tracker> trackers;
 	
 	/** 连接超时时间 */
-	private int connectTimeout = NetUtils.DEFAULT_TIMEOUT_SEC;
+	private int connectTimeout = NetUtils.DEFAULT_TIMEOUT_MSEC;
 	
 	/** 网络超时时间 */
-	private int networkTimeout = NetUtils.DEFAULT_TIMEOUT_SEC;
+	private int networkTimeout = NetUtils.DEFAULT_TIMEOUT_MSEC;
 	
 	/** 字符集编码 */
 	private String charset = MessageUtils.UTF8_ENCODING;
