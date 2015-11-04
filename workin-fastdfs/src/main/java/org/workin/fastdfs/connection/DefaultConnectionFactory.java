@@ -21,23 +21,46 @@ package org.workin.fastdfs.connection;
 import java.io.IOException;
 
 import org.csource.fastdfs.ClientGlobal;
+import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerServer;
 
 /**
- * @description 默认原生API实现的TrackerServer连接工厂
+ * @description 默认原生API实现的连接工厂
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultTrackerServerConnectionFactory implements TrackerServerConnectionFactory {
-
+public class DefaultConnectionFactory extends AbstractConnectionFactory {
+	
 	@Override
-	public TrackerServer getConnection() throws IOException {
+	public TrackerServer getTrackerServer() throws IOException {
 		return ClientGlobal.g_tracker_group.getConnection();
 	}
 
 	@Override
-	public TrackerServer getConnection(int index) throws IOException {
+	public TrackerServer getTrackerServer(int index) throws IOException {
 		return ClientGlobal.g_tracker_group.getConnection(index);
+	}
+
+	@Override
+	public StorageServer getStorageServer(TrackerServer trackerServer) throws IOException {
+		return getTrackerClient().getStoreStorage(trackerServer);
+	}
+
+	@Override
+	public StorageServer getStorageServer(TrackerServer trackerServer,
+			String groupName) throws IOException {
+		return getTrackerClient().getStoreStorage(trackerServer, groupName);
+	}
+
+	@Override
+	public void release(TrackerServer trackerServer, StorageServer storageServer) throws IOException {
+		try {
+			if (storageServer != null)
+				storageServer.close();
+		} finally {
+			if (trackerServer != null)
+				trackerServer.close();
+		}
 	}
 
 }
