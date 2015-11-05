@@ -3648,5 +3648,32 @@ public class ArrayUtils {
 		}
 		return builder.toString();
 	}
-						
+	
+	/**
+	 * @description 获取索引位对应的元素值，未获取到时默认返回null
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param index
+	 * @return
+	 */
+	public static <T> T get(T[] array, int index) {
+		return get(array, index, null);
+	}
+	
+	/**
+	 * @description 获取索引位对应的元素值，未获取到时返回指定的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param index
+	 * @param defaultValue
+	 * @return
+	 */
+	public static <T> T get(T[] array, int index, T defaultValue) {
+		int max = length(array) - 1;
+		if (max == -1 || index < 0 || index > max)
+			return defaultValue;
+		
+		return array[index];
+	}
+					
 }
