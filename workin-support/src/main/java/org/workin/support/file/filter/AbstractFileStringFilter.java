@@ -16,7 +16,7 @@
  * Create Date : 2015-1-19
  */
 
-package org.workin.support.file;
+package org.workin.support.file.filter;
 
 /**
  * @description 本地文件字符串过滤器抽象类

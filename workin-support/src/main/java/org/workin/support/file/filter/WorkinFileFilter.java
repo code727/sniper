@@ -16,7 +16,7 @@
  * Create Date : 2015-1-16
  */
 
-package org.workin.support.file;
+package org.workin.support.file.filter;
 
 import java.io.File;
 import java.io.FileFilter;

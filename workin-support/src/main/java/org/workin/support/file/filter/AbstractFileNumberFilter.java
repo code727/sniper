@@ -16,7 +16,7 @@
  * Create Date : 2015-1-20
  */
 
-package org.workin.support.file;
+package org.workin.support.file.filter;
 
 
 import org.workin.commons.enums.EnumObject;

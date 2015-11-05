@@ -16,7 +16,7 @@
  * Create Date : 2015-1-20
  */
 
-package org.workin.support.file;
+package org.workin.support.file.filter;
 
 /**
  * @description Workin框架本地文件内容过滤器

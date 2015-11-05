@@ -12,30 +12,31 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *  
- * Create Date : 2015-1-20
+ * 
+ * Create Date : 2015-1-16
  */
 
-package org.workin.support.file;
+package org.workin.support.file.filter.impl;
 
+import java.io.File;
+
+import org.workin.commons.util.StringUtils;
 
 /**
- * @description 本地文件内容过滤器
+ * @description 文件类型过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractFileContentFilter extends AbstractFileStringFilter implements WorkinFileContentFilter {
-	
-	protected String encoding;
+public class FileTypeFilter extends FileNameFilter {
 	
 	@Override
-	public void setEncoding(String encoding) {
-		this.encoding = encoding;
-	}
-	
-	@Override
-	public String getEncoding() {
-		return this.encoding;
+	public boolean accept(File target) {
+		// 不接受目录
+		if (target.isDirectory())
+			return false;
+		
+		return StringUtils.isEmpty(this.filterValue) || 
+				StringUtils.endsWith(target.getName(), filterValue, isIgnoreCase());
 	}
 
 }

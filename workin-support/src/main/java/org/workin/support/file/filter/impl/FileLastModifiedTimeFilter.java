@@ -16,29 +16,31 @@
  * Create Date : 2015-1-20
  */
 
-package org.workin.support.file.impl;
+package org.workin.support.file.filter.impl;
 
 import java.io.File;
 
-import org.workin.support.file.AbstractFileNumberFilter;
+import org.workin.support.file.filter.AbstractFileNumberFilter;
 
 /**
- * @description 文件大小过滤器
+ * @description 文件最后修改时间过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FileSizeFilter extends AbstractFileNumberFilter {
-	
+public class FileLastModifiedTimeFilter extends AbstractFileNumberFilter {
+
+	/**
+	 * @description 判断目标文件/目录的最后修改时间是否满足逻辑运算条件
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pathname
+	 * @return 
+	 */
 	@Override
 	public boolean accept(File target) {
-		// 不接受目录
-		if (target.isDirectory())
-			return false;
-		
 		if (logic == null || filterValue == null)
 			return true;
 		
-		return logic.execute(target.length(), filterValue);
+		return logic.execute(target.lastModified(), filterValue);
 	}
 
 }

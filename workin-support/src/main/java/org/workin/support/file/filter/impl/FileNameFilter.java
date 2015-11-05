@@ -13,37 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *  
- * Create Date : 2015-1-19
+ * Create Date : 2015-1-16
  */
 
-package org.workin.support.file;
+package org.workin.support.file.filter.impl;
+
+import java.io.File;
+
+
+
+
+
+import org.workin.commons.util.StringUtils;
+import org.workin.support.file.filter.AbstractFileStringFilter;
 
 /**
- * @description Workin框架本地文件数字属性值过滤器
+ * @description 文件名过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface WorkinFileNumberFilter extends WorkinFileFilter {
+public class FileNameFilter extends AbstractFileStringFilter {
 	
-	/**
-	 * @description 获取字符串过滤值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Number getFilterValue();
+	public FileNameFilter() {}
 	
-	/**
-	 * @description 设置字符串过滤值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param filterValue
-	 */
-	public void setFilterValue(Number filterValue);
-	
-	/**
-	 * @description 设置逻辑运算规则
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param operation
-	 */
-	public void setLogicOperation(String operation);
+	public FileNameFilter(String filterValue) {
+		this.filterValue = filterValue;
+	}
+		
+	@Override
+	public boolean accept(File target) {				
+		return StringUtils.isEmpty(this.filterValue)
+				|| StringUtils.indexOf(target.getName(), filterValue, ignoreCase) > -1;
+	}
 	
 }

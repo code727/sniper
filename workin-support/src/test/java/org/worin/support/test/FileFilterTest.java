@@ -11,12 +11,12 @@ import java.util.List;
 import org.junit.Test;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.support.file.WorkinFileNumberFilter;
-import org.workin.support.file.WorkinFileStringFilter;
-import org.workin.support.file.impl.FileLastModifiedTimeFilter;
-import org.workin.support.file.impl.FileNameFilter;
-import org.workin.support.file.impl.FileSizeFilter;
-import org.workin.support.file.impl.FileTypeFilter;
+import org.workin.support.file.filter.WorkinFileNumberFilter;
+import org.workin.support.file.filter.WorkinFileStringFilter;
+import org.workin.support.file.filter.impl.FileLastModifiedTimeFilter;
+import org.workin.support.file.filter.impl.FileNameFilter;
+import org.workin.support.file.filter.impl.FileSizeFilter;
+import org.workin.support.file.filter.impl.FileTypeFilter;
 import org.workin.test.junit.BaseTestCase;
 
 /**

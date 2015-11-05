@@ -12,45 +12,38 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- * Create Date : 2015-1-15
+ *  
+ * Create Date : 2015-1-19
  */
 
-package org.workin.support.file;
+package org.workin.support.file.filter;
 
 /**
- * @description Workin框架本地文件字符串值过滤器
+ * @description Workin框架本地文件数字属性值过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface WorkinFileStringFilter extends WorkinFileFilter {
+public interface WorkinFileNumberFilter extends WorkinFileFilter {
 	
 	/**
 	 * @description 获取字符串过滤值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public String getFilterValue();
+	public Number getFilterValue();
 	
 	/**
 	 * @description 设置字符串过滤值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param filterValue
 	 */
-	public void setFilterValue(String filterValue);
+	public void setFilterValue(Number filterValue);
 	
 	/**
-	 * @description 是否忽略大小写
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 * @return 
+	 * @description 设置逻辑运算规则
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param operation
 	 */
-	public boolean isIgnoreCase();
-	
-	/**
-	 * @description 设置是否忽略大小写
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 * @param ignoreCase 
-	 */
-	public void setIgnoreCase(boolean ignoreCase);
+	public void setLogicOperation(String operation);
 	
 }

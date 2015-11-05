@@ -16,7 +16,7 @@
  * Create Date : 2015-1-19
  */
 
-package org.workin.support.file.impl;
+package org.workin.support.file.filter.impl;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,10 +25,11 @@ import java.io.IOException;
 
 
 
+
 import org.workin.commons.util.IOUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.commons.util.SystemUtils;
-import org.workin.support.file.AbstractFileContentFilter;
+import org.workin.support.file.filter.AbstractFileContentFilter;
 
 /**
  * @description 文件内容过滤器
