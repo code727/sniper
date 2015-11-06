@@ -36,7 +36,7 @@ public class LocalFileSource extends AbstaractFileSource<File> {
 	}
 
 	@Override
-	public void handle() throws IOException {
+	protected void handle() throws IOException {
 		File source = getSource();
 		this.originalName = source.getName();
 		this.extName = FileUtils.getExtensionName(source);
