@@ -45,6 +45,20 @@ public interface FastDFSMeta<T> extends FileMeta<T> {
 	public String getOriginalId();
 	
 	/**
+	 * @description 设置原有的缩放资源标识
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param originalZoomId
+	 */
+	public void setOriginalZoomId(String originalZoomId);
+	
+	/**
+	 * @description 获取原有的缩放资源标识
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getOriginalZoomId();
+	
+	/**
 	 * @description 设置目标StorageServer组名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
