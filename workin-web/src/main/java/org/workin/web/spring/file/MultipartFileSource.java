@@ -36,13 +36,13 @@ public class MultipartFileSource extends AbstaractFileSource<MultipartFile> {
 	}
 
 	@Override
-	protected void handle() throws IOException {
+	public void handle() throws IOException {
 		MultipartFile source = getSource();
 		this.originalName = source.getOriginalFilename();
 		this.extName = FileUtils.getExtensionName(source.getName());
 		this.in = source.getInputStream();
 		this.bytes = new byte[this.in.available()];
-		in.read(bytes,0,bytes.length);
+		in.read(bytes, 0, bytes.length);
 	}
 
 }
