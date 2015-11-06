@@ -42,7 +42,7 @@ public class LocalFileSource extends AbstaractFileSource<File> {
 		this.extName = FileUtils.getExtensionName(source);
 		this.in = new FileInputStream(source);
 		this.bytes = new byte[this.in.available()];
-		in.read(bytes,0,bytes.length);
+		this.in.read(bytes, 0, bytes.length);
 	}
 	
 }

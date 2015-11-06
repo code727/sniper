@@ -42,7 +42,7 @@ public class MultipartFileSource extends AbstaractFileSource<MultipartFile> {
 		this.extName = FileUtils.getExtensionName(source.getName());
 		this.in = source.getInputStream();
 		this.bytes = new byte[this.in.available()];
-		in.read(bytes, 0, bytes.length);
+		this.in.read(bytes, 0, bytes.length);
 	}
 
 }
