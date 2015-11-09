@@ -57,21 +57,7 @@ public interface FastDFSMeta<T> extends FileMeta<T> {
 	 * @return
 	 */
 	public String getOriginalZoomId();
-	
-	/**
-	 * @description 设置目标StorageServer组名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param groupName
-	 */
-	public void setGroupName(String groupName);
-	
-	/**
-	 * @description 获取目标StorageServer组名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getGroupName();
-	
+		
 	/**
 	 * @description 添加目标文件元数据名值对
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

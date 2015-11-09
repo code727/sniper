@@ -41,10 +41,7 @@ public abstract class AbstractFastDFSMeta<T> extends AbstaractFileMeta<T> implem
 	
 	/** 原有的缩放资源标识 */
 	private String originalZoomId;
-	
-	/** 目标StorageServer组名称 */
-	private String groupName;
-	
+		
 	/** 目标文件元数据名值对列表 */
 	private List<NameValuePair> nameValuePaires;
 	
@@ -70,16 +67,6 @@ public abstract class AbstractFastDFSMeta<T> extends AbstaractFileMeta<T> implem
 	@Override
 	public String getOriginalZoomId() {
 		return this.originalZoomId;
-	}
-
-	@Override
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-
-	@Override
-	public String getGroupName() {
-		return this.groupName;
 	}
 
 	@Override
