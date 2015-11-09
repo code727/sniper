@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.StorageClient1;
+import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.FileUtils;
 import org.workin.commons.util.MapUtils;
@@ -45,12 +46,16 @@ import org.workin.support.multimedia.image.ImageZoomHandler;
  */
 public abstract class FastDFSSupport extends CheckableInitializingBean {
 	
+	/** FastDFS集群族对象 */
 	private Cluster cluster;
 	
+	/** 连接工厂 */
 	protected ConnectionFactory connectionFactory;
 	
+	/** 图像缩放处理器 */
 	protected ImageZoomHandler imageZoomHandler;
 	
+	/** FastDFS访问器 */
 	protected Accessor accessor;
 	
 	public Cluster getCluster() {
@@ -149,6 +154,8 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	 * @throws Exception
 	 */
 	protected <T> Map<String, Object> doSrcZoomBatchUpload(StorageClient1 storageClient, String groupName, List<FastDFSMeta<T>> metas) throws Exception { 
+		AssertUtils.assertNotNull(imageZoomHandler, "ImageZoomHandler must not be null.");
+		
 		List<ZoomResource> zoomResources = CollectionUtils.newArrayList();
 		String targetGroupName = StringUtils.trimToEmpty(groupName);
 		List<File> tempImageSources = CollectionUtils.newArrayList();
