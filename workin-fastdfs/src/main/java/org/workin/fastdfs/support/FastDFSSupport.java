@@ -29,11 +29,11 @@ import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.FileUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.fastdfs.accessor.DefaultAccessor;
+import org.workin.fastdfs.accessor.Accessor;
 import org.workin.fastdfs.cluster.Cluster;
 import org.workin.fastdfs.factory.connection.ConnectionFactory;
 import org.workin.fastdfs.meta.FastDFSMeta;
-import org.workin.fastdfs.strategies.DefaultUploadReturnStrategy;
-import org.workin.fastdfs.strategies.UploadReturnStrategy;
 import org.workin.spring.beans.CheckableInitializingBean;
 import org.workin.support.file.ZoomResource;
 import org.workin.support.multimedia.image.ImageZoomHandler;
@@ -51,7 +51,7 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	
 	protected ImageZoomHandler imageZoomHandler;
 	
-	protected UploadReturnStrategy uploadReturnStrategy;
+	protected Accessor accessor;
 	
 	public Cluster getCluster() {
 		return cluster;
@@ -77,20 +77,20 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 		this.imageZoomHandler = imageZoomHandler;
 	}
 	
-	public UploadReturnStrategy getUploadReturnStrategy() {
-		return uploadReturnStrategy;
+	public Accessor getAccessor() {
+		return accessor;
 	}
 
-	public void setUploadReturnStrategy(UploadReturnStrategy uploadReturnStrategy) {
-		this.uploadReturnStrategy = uploadReturnStrategy;
+	public void setAccessor(Accessor accessor) {
+		this.accessor = accessor;
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
 		
-		if (this.uploadReturnStrategy == null)
-			this.uploadReturnStrategy = new DefaultUploadReturnStrategy();
+		if (this.accessor == null)
+			this.accessor = new DefaultAccessor();
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 					CollectionUtils.toArray(meta.getNameValuePaires()) : null;
 			
 			/* 上传源和缩放文件后设置返回结果 */
-			String result = uploadReturnStrategy.returnResult(getCluster(), 
+			String result = accessor.getAccessabeURL(getCluster(), 
 					storageClient.upload_file1(targetGroupName, meta.getBytes(), meta.getExtName(), nameValuePaires));
 			list.add(result);
 		}
@@ -163,9 +163,9 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 			imageZoomHandler.handle(meta.getInputStream(), meta.getExtName(), tempImageSource);
 			
 			/* 上传源和缩放文件后设置返回结果 */
-			String srcURL = uploadReturnStrategy.returnResult(getCluster(), 
+			String srcURL = accessor.getAccessabeURL(getCluster(), 
 					storageClient.upload_file1(targetGroupName, meta.getBytes(), meta.getExtName(), nameValuePaires));
-			String zoomURL = uploadReturnStrategy.returnResult(getCluster(), 
+			String zoomURL = accessor.getAccessabeURL(getCluster(), 
 					storageClient.upload_file1(targetGroupName, tempImageSource.getCanonicalPath(), FileUtils.getExtensionName(tempImageSource), nameValuePaires));
 			zoomResource.setSrcURL(srcURL);
 			zoomResource.setZoomURL(zoomURL);
