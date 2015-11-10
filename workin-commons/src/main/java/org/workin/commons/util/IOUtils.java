@@ -18,6 +18,8 @@
 
 package org.workin.commons.util;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -61,6 +63,57 @@ public class IOUtils {
 	 */
 	public static char[] newCharBuffer(int bufferSize) {
 		return new char[bufferSize > 0 ? bufferSize : DEFAULT_BUFFER_SIZE];
+	}
+	
+	/**
+	 * @description 创建有默认缓冲区大小的BufferedInputStream对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param in
+	 * @return
+	 * @throws IOException
+	 */
+	public static BufferedInputStream newBufferedInputStream(InputStream in) throws IOException {
+		return newBufferedInputStream(in, DEFAULT_BUFFER_SIZE);
+	}
+	
+	/**
+	 * @description 创建有指定缓冲区大小的BufferedInputStream对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param in
+	 * @param bufferSize
+	 * @return
+	 * @throws IOException
+	 */
+	public static BufferedInputStream newBufferedInputStream(InputStream in, int bufferSize) throws IOException {
+		if (bufferSize <= 0)
+			bufferSize = DEFAULT_BUFFER_SIZE;
+		
+		return new BufferedInputStream(in, DEFAULT_BUFFER_SIZE);
+	}
+	
+	/** 
+	 * @description 创建有默认缓冲区大小的BufferedOutputStream对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param out
+	 * @return
+	 * @throws IOException
+	 */
+	public static BufferedOutputStream newBufferedOutputStream(OutputStream out) throws IOException {
+		return newBufferedOutputStream(out, DEFAULT_BUFFER_SIZE);
+	}
+	
+	/**
+	 * @description 创建有指定缓冲区大小的BufferedOutputStream对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param out
+	 * @param bufferSize
+	 * @return
+	 * @throws IOException
+	 */
+	public static BufferedOutputStream newBufferedOutputStream(OutputStream out, int bufferSize) throws IOException {
+		if (bufferSize <= 0)
+			bufferSize = DEFAULT_BUFFER_SIZE;
+		return new BufferedOutputStream(out, bufferSize);
 	}
 	
 	/**

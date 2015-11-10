@@ -212,4 +212,158 @@ public class NumberUtils {
 		return (byte) (Math.random() * in);
 	}
 	
+	/**
+	 * @description 求指定值的最小极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param d
+	 * @param limit
+	 * @return
+	 */
+	public static double minLimit(double d, double limit) {
+		return d < limit ? limit : d;
+	}
+	
+	/**
+	 * @description 求指定值的最小极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param f
+	 * @param limit
+	 * @return
+	 */
+	public static float minLimit(float f, float limit) {
+		return f < limit ? limit : f;
+	}
+	
+	/**
+	 * @description 求指定值的最小极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param i
+	 * @param limit
+	 * @return
+	 */
+	public static int minLimit(int i, int limit) {
+		return i < limit ? limit : i;
+	}
+	
+	/**
+	 * @description 求指定值的最小极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param l
+	 * @param limit
+	 * @return
+	 */
+	public static long minLimit(long l, long limit) {
+		return l < limit ? limit : l;
+	}
+	
+	/**
+	 * @description 求指定值的最小极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param s
+	 * @param limit
+	 * @return
+	 */
+	public static short minLimit(short s, short limit) {
+		return s < limit ? limit : s;
+	}
+	
+	/**
+	 * @description 求指定值的最小极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param b
+	 * @param limit
+	 * @return
+	 */
+	public static byte minLimit(byte b, byte limit) {
+		return b < limit ? limit : b;
+	}
+	
+	/**
+	 * @description 求指定值的最小极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param c
+	 * @param limit
+	 * @return
+	 */
+	public static char minLimit(char c, char limit) {
+		return c < limit ? limit : c;
+	}
+	
+	/**
+	 * @description 求指定值的最大极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param d
+	 * @param limit
+	 * @return
+	 */
+	public static double maxLimit(double d, double limit) {
+		return d > limit ? limit : d;
+	}
+	
+	/**
+	 * @description 求指定值的最大极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param f
+	 * @param limit
+	 * @return
+	 */
+	public static float maxLimit(float f, float limit) {
+		return f > limit ? limit : f;
+	}
+	
+	/**
+	 * @description 求指定值的最大极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param i
+	 * @param limit
+	 * @return
+	 */
+	public static int maxLimit(int i, int limit) {
+		return i > limit ? limit : i;
+	}
+	
+	/**
+	 * @description 求指定值的最大极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param l
+	 * @param limit
+	 * @return
+	 */
+	public static long maxLimit(long l, long limit) {
+		return l > limit ? limit : l;
+	}
+	
+	/**
+	 * @description 求指定值的最大极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param s
+	 * @param limit
+	 * @return
+	 */
+	public static short maxLimit(short s, short limit) {
+		return s > limit ? limit : s;
+	}
+	
+	/**
+	 * @description 求指定值的最大极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param b
+	 * @param limit
+	 * @return
+	 */
+	public static byte maxLimit(byte b, byte limit) {
+		return b > limit ? limit : b;
+	}
+	
+	/**
+	 * @description 求指定值的最大极限值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param c
+	 * @param limit
+	 * @return
+	 */
+	public static char maxLimit(char c, char limit) {
+		return c > limit ? limit : c;
+	}
+	
 }
