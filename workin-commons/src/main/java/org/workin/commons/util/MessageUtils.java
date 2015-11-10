@@ -48,6 +48,8 @@ public class MessageUtils {
 	/** UNICODE编码集 */
 	public static final String UNICODE_ENCODING = "UNICODE";
 	
+	public static final String ISO_8859_1 = "ISO-8859-1";
+	
 	/**
 	 * @description 获取包级别资源文件内的信息， 未获取到时返回资源项的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

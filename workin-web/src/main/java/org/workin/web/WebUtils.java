@@ -18,7 +18,14 @@
 
 package org.workin.web;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -26,6 +33,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.workin.commons.util.ArrayUtils;
+import org.workin.commons.util.AssertUtils;
+import org.workin.commons.util.FileUtils;
+import org.workin.commons.util.IOUtils;
 import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.StringUtils;
 
@@ -313,6 +324,150 @@ public class WebUtils {
 	 */
 	public static String getServletPath(HttpServletRequest request) {
 		return request.getServletPath();
+	}
+	
+	/**
+	 * @description 根据HttpServletRequest对象的头信息进行字符串编码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param request
+	 * @param str
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public static String encode(HttpServletRequest request, String str) throws UnsupportedEncodingException {
+		String agent = request.getHeader("USER-AGENT");    
+		if (agent != null && agent.indexOf("MSIE") > -1)
+			return URLEncoder.encode(str, MessageUtils.UTF8_ENCODING);
+		else
+			return new String(str.getBytes(MessageUtils.UTF8_ENCODING), MessageUtils.ISO_8859_1);
+	}
+	
+	/**
+	 * @description 下载指定URL目标的资源，写入HttpServletResponse对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	public static void download(String url, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		download(url, null, request, response);
+	}
+	
+	/**
+	 * @description 下载指定URL目标的资源，写入HttpServletResponse对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 * @param attachmentName
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	public static void download(String url, String attachmentName, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		AssertUtils.assertTrue(StringUtils.isNotBlank(url), "URL must not be null or blank.");
+		
+		// 如果传入的附件名为空，则从URL路径中获取
+		if (StringUtils.isBlank(attachmentName))
+			attachmentName = FileUtils.getName(url);
+		
+		URL target = new URL(url);
+		URLConnection conn = target.openConnection();  
+		download(conn.getInputStream(), attachmentName, request, response);
+	}
+	
+	/**
+	 * @description 下载InputStream资源，写入HttpServletResponse对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param in
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	public static void download(InputStream in, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		download(in, null, request, response);
+	}
+	
+	/**
+	 * @description 下载InputStream资源，写入HttpServletResponse对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param in
+	 * @param attachmentName
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	public static void download(InputStream in, String attachmentName, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		AssertUtils.assertNotNull(in, "InputStream object must not be null.");
+		AssertUtils.assertNotNull(request, "HttpServletRequest object must not be null.");
+		AssertUtils.assertNotNull(response, "HttpServletResponse object must not be null.");
+		
+		if (StringUtils.isNotEmpty(attachmentName))
+			response.addHeader("Content-Disposition", "attachment;filename="
+					+ WebUtils.encode(request, attachmentName));
+		
+		String contentType = FileUtils.getExtensionName(attachmentName);
+		if (StringUtils.isNotEmpty(contentType))
+			response.setContentType("application/" + contentType);
+		
+		byte[] bytes = new byte[IOUtils.DEFAULT_BUFFER_SIZE];
+		BufferedInputStream input = null;
+		BufferedOutputStream output = null;
+		try {
+			input = IOUtils.newBufferedInputStream(in);
+			output = IOUtils.newBufferedOutputStream(response.getOutputStream());
+			int i = 0;
+			/* 按块写入 */
+			while ((i = in.read(bytes)) > 0) 
+				output.write(bytes, 0, i);
+			output.flush();
+		} finally {
+			IOUtils.close(output);
+			IOUtils.close(input);
+		}
+	}
+	
+	/**
+	 * @description 下载字节数组资源，写入HttpServletResponse对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param bytes
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	public static void download(byte[] bytes, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		download(bytes, null, request, response);
+	}
+	
+	/**
+	 * @description 下载字节数组资源，写入HttpServletResponse对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param bytes
+	 * @param attachmentName
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	public static void download(byte[] bytes, String attachmentName, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(bytes), "Downloaded source bytes must not be null or empty.");
+		AssertUtils.assertNotNull(request, "HttpServletRequest object must not be null.");
+		AssertUtils.assertNotNull(response, "HttpServletResponse object must not be null.");
+		
+		if (StringUtils.isNotEmpty(attachmentName))
+			response.addHeader("Content-Disposition", "attachment;filename="
+					+ WebUtils.encode(request, attachmentName));
+		
+		String contentType = FileUtils.getExtensionName(attachmentName);
+		if (StringUtils.isNotEmpty(contentType))
+			response.setContentType("application/" + contentType);
+		
+		BufferedOutputStream out = null;
+		try {
+			out = IOUtils.newBufferedOutputStream(response.getOutputStream());
+			out.write(bytes);
+			out.flush();
+		} finally {
+			IOUtils.close(out);
+		}
 	}
 	
 }

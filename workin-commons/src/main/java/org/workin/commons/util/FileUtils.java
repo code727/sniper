@@ -52,7 +52,8 @@ public class FileUtils {
 		if (StringUtils.isBlank(filePath))
 			return StringUtils.EMPTY_STRING;
 		
-		return new File(filePath).getName();
+		String name = StringUtils.afterLast(filePath, "/");
+		return StringUtils.isNotEmpty(name) ? name : StringUtils.afterLast(filePath, "\\");
 	}
 	
 	/**

@@ -116,5 +116,14 @@ public class SystemUtils {
 	public static String getSystemEncoding() {
 		return System.getProperty("file.encoding");
 	}
+	
+	/**
+	 * @description 获取当前操作系统的临时目录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static String getTempDir() {
+		return System.getProperty(System.getProperty("java.io.tmpdir"));
+	}
 						
 }

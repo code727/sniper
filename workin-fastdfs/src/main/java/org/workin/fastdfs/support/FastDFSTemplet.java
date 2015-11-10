@@ -22,16 +22,21 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.csource.fastdfs.StorageClient1;
 import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerServer;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
+import org.workin.commons.util.FileUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.fastdfs.cluster.Cluster;
 import org.workin.fastdfs.factory.connection.ConnectionFactory;
 import org.workin.fastdfs.meta.FastDFSMeta;
 import org.workin.support.file.ZoomResource;
+import org.workin.web.WebUtils;
 
 /**
  * @description FastDFS模板实现类
@@ -219,6 +224,60 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 				return (List<ZoomResource>) map.get("zoomResources");
 			}
 		}, !deleteOriginalResource);
+	}
+
+	@Override
+	public byte[] download(final String path) throws Exception {
+		AssertUtils.assertTrue(StringUtils.isNotBlank(path), "Source path must not be null or blank.");
+		
+		return this.execute(new FastDFSCallback<byte[]>() {
+			@Override
+			public byte[] doIn(StorageClient1 storageClient) throws Exception {
+				String storagePath = getAccessor().getStoragePath(getCluster(), path);
+				return storageClient.download_file1(storagePath);
+			}
+		});
+	}
+
+	@Override
+	public String download(final String path, final String fileName) throws Exception {
+		AssertUtils.assertTrue(StringUtils.isNotBlank(path), "Source path must not be null or blank.");
+		AssertUtils.assertTrue(StringUtils.isNotBlank(fileName), "Local file name must not be null or blank.");
+		
+		return this.execute(new FastDFSCallback<String>() {
+			@Override
+			public String doIn(StorageClient1 storageClient) throws Exception {
+				String storagePath = getAccessor().getStoragePath(getCluster(), path);
+				String destName = fileName;
+				File dest = new File(destName);
+				if (dest.isDirectory())
+					// 如果下载目标是一个目录，则下载到此目录下，并且文件名称与被下载资源的名称一致
+					destName = new StringBuffer(destName).append(File.separator)
+						.append(FileUtils.getName(storagePath)).toString();
+				
+				storageClient.download_file1(storagePath, destName);
+				// 返回实际的本地目标文件名
+				return StringUtils.replace(destName, "\\", "/");
+			}
+		});
+	}
+
+	@Override
+	public void download(String path, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		this.download(path, null, request, response);
+	}
+
+	@Override
+	public void download(String path, String attachmentName,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		AssertUtils.assertTrue(StringUtils.isNotBlank(path), "Source path must not be null or blank.");
+		
+		// 如果传入的附件名为空，则从路径中获取
+		if (StringUtils.isBlank(attachmentName))
+			attachmentName = FileUtils.getName(path);
+		
+		WebUtils.download(this.download(path), attachmentName, request, response);
 	}
 
 }

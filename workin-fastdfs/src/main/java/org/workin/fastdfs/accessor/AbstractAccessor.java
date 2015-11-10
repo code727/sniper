@@ -25,7 +25,7 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractAccessor implements Accessor {
+public abstract class AbstractAccessor extends AccessorSupport {
 	
 	/**
 	 * @description 根据URL和路径包装后返回完整可访问的结果

@@ -25,14 +25,12 @@ import org.workin.fastdfs.cluster.Cluster;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultAccessor implements Accessor {
+public class DefaultAccessor extends AccessorSupport {
 
 	@Override
 	public String getAccessabeURL(Cluster cluster, String path) {
 		// 按传入的路径直接返回，严格的说此实现类返回的结果不是一个可直接访问的完整URL
 		return path;
 	}
-
-	
 
 }

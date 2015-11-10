@@ -35,5 +35,14 @@ public interface Accessor {
 	 * @return
 	 */
 	public String getAccessabeURL(Cluster cluster, String path);
+	
+	/**
+	 * @description 根据FastDFS集群族和路径获取存储路径
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param cluster
+	 * @param url
+	 * @return
+	 */
+	public String getStoragePath(Cluster cluster, String url);
 
 }

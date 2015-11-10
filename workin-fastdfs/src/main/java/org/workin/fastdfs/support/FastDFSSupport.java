@@ -30,6 +30,7 @@ import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.FileUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.commons.util.SystemUtils;
 import org.workin.fastdfs.accessor.DefaultAccessor;
 import org.workin.fastdfs.accessor.Accessor;
 import org.workin.fastdfs.cluster.Cluster;
@@ -114,7 +115,7 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	 * @return
 	 */
 	protected <T> File createTempFile(FastDFSMeta<T> meta) {
-		String tempPathName = new StringBuilder(System.getProperty("java.io.tmpdir"))
+		String tempPathName = new StringBuilder(SystemUtils.getTempDir())
 			.append(File.separator).append("temp_").append(new Date().getTime())
 			.append("_").append(meta.getOriginalName()).toString();
 		return new File(tempPathName);
@@ -155,11 +156,9 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	 */
 	protected <T> Map<String, Object> doSrcZoomBatchUpload(StorageClient1 storageClient, String groupName, List<FastDFSMeta<T>> metas) throws Exception { 
 		AssertUtils.assertNotNull(imageZoomHandler, "ImageZoomHandler must not be null.");
-		
 		List<ZoomResource> zoomResources = CollectionUtils.newArrayList();
 		String targetGroupName = StringUtils.trimToEmpty(groupName);
 		List<File> tempImageSources = CollectionUtils.newArrayList();
-		
 		for (FastDFSMeta<T> meta : metas) {
 			ZoomResource zoomResource = new ZoomResource();
 			NameValuePair[] nameValuePaires = CollectionUtils.isNotEmpty(meta.getNameValuePaires()) ? 
