@@ -18,11 +18,31 @@
 
 package org.workin.fastdfs.support;
 
+import java.util.Set;
+
+
 /**
  * @description FastDFS文件删除器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface FastDFSDeleter {
-
+	
+	/**
+	 * @description 删除指定路径的资源
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param path
+	 * @return
+	 * @throws Exception
+	 */
+	public int delete(String path) throws Exception;
+	
+	/**
+	 * @description 批量删除指定路径的资源
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pathSet
+	 * @throws Exception
+	 */
+	public void bathDelete(Set<String> pathSet) throws Exception;
+	
 }

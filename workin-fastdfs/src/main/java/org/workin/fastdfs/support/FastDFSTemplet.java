@@ -21,6 +21,7 @@ package org.workin.fastdfs.support;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -280,4 +281,30 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 		WebUtils.download(this.download(path), attachmentName, request, response);
 	}
 
+	@Override
+	public int delete(final String path) throws Exception {
+		return this.execute(new FastDFSCallback<Integer>() {
+
+			@Override
+			public Integer doIn(StorageClient1 storageClient) throws Exception {
+				String storagePath = getAccessor().getStoragePath(getCluster(), path);
+				return storageClient.delete_file1(storagePath);
+			}
+		}); 
+	}
+
+	@Override
+	public void bathDelete(final Set<String> pathSet) throws Exception {
+		this.execute(new FastDFSCallback<Object>() {
+
+			@Override
+			public Object doIn(StorageClient1 storageClient) throws Exception {
+				for (String path : pathSet) {
+					String storagePath = getAccessor().getStoragePath(getCluster(), path);
+					storageClient.delete_file1(storagePath);
+				}
+				return null;
+			}
+		});
+	}
 }

@@ -24,7 +24,7 @@ package org.workin.fastdfs.support;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface FastDFSOperations extends FastDFSUploader, FastDFSDownloader {
+public interface FastDFSOperations extends FastDFSUploader, FastDFSDownloader, FastDFSDeleter {
 	
 	/**
 	 * @description 执行回调操作
