@@ -36,7 +36,9 @@ import org.workin.commons.util.StringUtils;
 import org.workin.fastdfs.cluster.Cluster;
 import org.workin.fastdfs.factory.connection.ConnectionFactory;
 import org.workin.fastdfs.meta.FastDFSMeta;
+import org.workin.fastdfs.task.OriginalResourcesClearTask;
 import org.workin.support.file.ZoomResource;
+import org.workin.support.thread.task.FileClearTask;
 import org.workin.web.WebUtils;
 
 /**
@@ -181,15 +183,11 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 			@Override
 			public List<String> doIn(StorageClient1 storageClient) throws Exception {
 				List<String> list = doBatchUpload(storageClient, groupName, metas);
-				// TODO 后续改为用线程池来执行
-				if (deleteOriginalResource) {
-					for (FastDFSMeta<T> meta : metas) {
-						storageClient.delete_file1(meta.getOriginalId());
-					}
-				}
+				if (deleteOriginalResource) 
+					clearOriginalResources(false, metas);
 				return list;
 			}
-		}, !deleteOriginalResource);
+		});
 	}
 	
 	/**
@@ -203,6 +201,7 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	 */
 	private <T> List<ZoomResource> srcZoomBatchUpload(final String groupName, final List<FastDFSMeta<T>> metas, final boolean deleteOriginalResource) throws Exception {
 		return this.execute(groupName, new FastDFSCallback<List<ZoomResource>>() {
+			
 			@SuppressWarnings("unchecked")
 			@Override
 			public List<ZoomResource> doIn(StorageClient1 storageClient) throws Exception {
@@ -210,21 +209,40 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 				Map<String, Object> map = doSrcZoomBatchUpload(storageClient, targetGroupName, metas);
 				List<File> tempImageSources = (List<File>) map.get("tempImageSources");
 				
-				// TODO 后续改为用线程池来执行
-				if (deleteOriginalResource) {
-					for (FastDFSMeta<T> meta : metas) {
-						storageClient.delete_file1(meta.getOriginalId());
-						storageClient.delete_file1(meta.getOriginalZoomId());
-					}
-				}
+				if (deleteOriginalResource) 
+					clearOriginalResources(true, metas);
 				
-				// TODO 后续改为用线程池来执行
-				for (File tempImage : tempImageSources)
-					tempImage.delete();
-					
+				clearLocalTempFile(tempImageSources);
 				return (List<ZoomResource>) map.get("zoomResources");
 			}
-		}, !deleteOriginalResource);
+		});
+	}
+	
+	/**
+	 * @description FastDFS文件源中指定的旧资源
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clearAll
+	 * @param metas
+	 * @throws Exception 
+	 */
+	private <T> void clearOriginalResources(boolean clearAll, List<FastDFSMeta<T>> metas) throws Exception {
+		if (this.threadPoolExecutorFactoryBean != null)
+			this.threadPoolExecutorFactoryBean.getObject().execute(new OriginalResourcesClearTask<T>(clearAll, metas, this));
+		else
+			new Thread(new OriginalResourcesClearTask<T>(clearAll, metas, this)).start();
+	}
+	
+	/**
+	 * @description 清理本地临时文件
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param tempImageSources
+	 * @throws Exception 
+	 */
+	private void clearLocalTempFile(List<File> tempImageSources) throws Exception {
+		if (this.threadPoolExecutorFactoryBean != null)
+			this.threadPoolExecutorFactoryBean.getObject().execute(new FileClearTask(tempImageSources));
+		else 
+			new Thread(new FileClearTask(tempImageSources)).start();
 	}
 
 	@Override
@@ -239,7 +257,7 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 			}
 		});
 	}
-
+	
 	@Override
 	public String download(final String path, final String fileName) throws Exception {
 		AssertUtils.assertTrue(StringUtils.isNotBlank(path), "Source path must not be null or blank.");

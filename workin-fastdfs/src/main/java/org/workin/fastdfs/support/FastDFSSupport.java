@@ -25,14 +25,15 @@ import java.util.Map;
 
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.StorageClient1;
+import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.FileUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.commons.util.SystemUtils;
-import org.workin.fastdfs.accessor.DefaultAccessor;
 import org.workin.fastdfs.accessor.Accessor;
+import org.workin.fastdfs.accessor.DefaultAccessor;
 import org.workin.fastdfs.cluster.Cluster;
 import org.workin.fastdfs.factory.connection.ConnectionFactory;
 import org.workin.fastdfs.meta.FastDFSMeta;
@@ -58,6 +59,9 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	
 	/** FastDFS访问器 */
 	protected Accessor accessor;
+	
+	/** 线程池任务执行器工厂对象 */
+	protected ThreadPoolExecutorFactoryBean threadPoolExecutorFactoryBean;
 	
 	public Cluster getCluster() {
 		return cluster;
@@ -89,6 +93,15 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 
 	public void setAccessor(Accessor accessor) {
 		this.accessor = accessor;
+	}
+	
+	public ThreadPoolExecutorFactoryBean getThreadPoolExecutorFactoryBean() {
+		return threadPoolExecutorFactoryBean;
+	}
+
+	public void setThreadPoolExecutorFactoryBean(
+			ThreadPoolExecutorFactoryBean threadPoolExecutorFactoryBean) {
+		this.threadPoolExecutorFactoryBean = threadPoolExecutorFactoryBean;
 	}
 
 	@Override
