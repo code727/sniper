@@ -36,9 +36,9 @@ import org.workin.commons.util.StringUtils;
 import org.workin.fastdfs.cluster.Cluster;
 import org.workin.fastdfs.factory.connection.ConnectionFactory;
 import org.workin.fastdfs.meta.FastDFSMeta;
-import org.workin.fastdfs.task.OriginalResourcesClearTask;
+import org.workin.fastdfs.task.OriginalResourcesDeleteTask;
 import org.workin.support.file.ZoomResource;
-import org.workin.support.thread.task.FileClearTask;
+import org.workin.support.thread.task.FilesDeleteTask;
 import org.workin.web.WebUtils;
 
 /**
@@ -184,7 +184,7 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 			public List<String> doIn(StorageClient1 storageClient) throws Exception {
 				List<String> list = doBatchUpload(storageClient, groupName, metas);
 				if (deleteOriginalResource) 
-					clearOriginalResources(false, metas);
+					deleteOriginalResources(false, metas);
 				return list;
 			}
 		});
@@ -210,9 +210,9 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 				List<File> tempImageSources = (List<File>) map.get("tempImageSources");
 				
 				if (deleteOriginalResource) 
-					clearOriginalResources(true, metas);
+					deleteOriginalResources(true, metas);
 				
-				clearLocalTempFile(tempImageSources);
+				deleteTempFiles(tempImageSources);
 				return (List<ZoomResource>) map.get("zoomResources");
 			}
 		});
@@ -221,15 +221,16 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	/**
 	 * @description FastDFS文件源中指定的旧资源
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param clearAll
+	 * @param deleteAll
 	 * @param metas
 	 * @throws Exception 
 	 */
-	private <T> void clearOriginalResources(boolean clearAll, List<FastDFSMeta<T>> metas) throws Exception {
+	private <T> void deleteOriginalResources(boolean deleteAll, List<FastDFSMeta<T>> metas) throws Exception {
+		Runnable task = new OriginalResourcesDeleteTask<T>(deleteAll, metas, this);
 		if (this.threadPoolExecutorFactoryBean != null)
-			this.threadPoolExecutorFactoryBean.getObject().execute(new OriginalResourcesClearTask<T>(clearAll, metas, this));
+			this.threadPoolExecutorFactoryBean.getObject().execute(task);
 		else
-			new Thread(new OriginalResourcesClearTask<T>(clearAll, metas, this)).start();
+			new Thread(task).start();
 	}
 	
 	/**
@@ -238,11 +239,12 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	 * @param tempImageSources
 	 * @throws Exception 
 	 */
-	private void clearLocalTempFile(List<File> tempImageSources) throws Exception {
+	private void deleteTempFiles(List<File> files) throws Exception {
+		Runnable task = new FilesDeleteTask(files);
 		if (this.threadPoolExecutorFactoryBean != null)
-			this.threadPoolExecutorFactoryBean.getObject().execute(new FileClearTask(tempImageSources));
+			this.threadPoolExecutorFactoryBean.getObject().execute(task);
 		else 
-			new Thread(new FileClearTask(tempImageSources)).start();
+			new Thread(task).start();
 	}
 
 	@Override

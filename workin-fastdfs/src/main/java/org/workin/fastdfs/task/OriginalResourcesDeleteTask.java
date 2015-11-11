@@ -31,21 +31,21 @@ import org.workin.fastdfs.support.FastDFSTemplet;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class OriginalResourcesClearTask<T> implements Runnable {
+public class OriginalResourcesDeleteTask<T> implements Runnable {
 	
-	private boolean clearAll;
+	private boolean deleteAll;
 	
 	private List<FastDFSMeta<T>> metas;
 	
 	private FastDFSTemplet templet;
 	
-	public OriginalResourcesClearTask(List<FastDFSMeta<T>> metas, FastDFSTemplet templet) {
+	public OriginalResourcesDeleteTask(List<FastDFSMeta<T>> metas, FastDFSTemplet templet) {
 		this.metas = metas;
 		this.templet = templet;
 	}
 	
-	public OriginalResourcesClearTask(boolean clearAll, List<FastDFSMeta<T>> metas, FastDFSTemplet templet) {
-		this.clearAll = clearAll;
+	public OriginalResourcesDeleteTask(boolean deleteAll, List<FastDFSMeta<T>> metas, FastDFSTemplet templet) {
+		this.deleteAll = deleteAll;
 		this.metas = metas;
 		this.templet = templet;
 	}
@@ -53,7 +53,7 @@ public class OriginalResourcesClearTask<T> implements Runnable {
 	@Override
 	public void run() {
 		Set<String> pathSet = CollectionUtils.newHashSet();
-		if (this.clearAll) {
+		if (this.deleteAll) {
 			for (FastDFSMeta<T> meta : this.metas) {
 				String originalId = meta.getOriginalId();
 				String originalZoomId = meta.getOriginalId();
