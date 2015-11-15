@@ -47,5 +47,6 @@
 		<module>workin-jms</module>
 		<module>workin-socket</module>
 		<module>workin-fastdfs</module>
+		<module>workin-pay</module>
 	</modules>
 </project>
