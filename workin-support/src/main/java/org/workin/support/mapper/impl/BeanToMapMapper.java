@@ -13,16 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年11月15日
+ * Create Date : 2015-11-15
  */
 
 package org.workin.support.mapper.impl;
 
+import java.util.Map;
+
+import org.workin.commons.util.CollectionUtils;
+import org.workin.commons.util.MapUtils;
+import org.workin.support.bean.BeanUtils;
+import org.workin.support.mapper.AbstractMapper;
+import org.workin.support.mapper.ParameterRule;
+
 /**
- * @description
+ * @description Java Bean对象与Map对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BeanToMapMapper {
+public class BeanToMapMapper<T, V> extends AbstractMapper<T, Map<String,V>> {
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, V> mapping(T source) throws Exception {
+		if (source == null || CollectionUtils.isEmpty((parameterRules)))
+			return null;
+
+		Map<String, V> result = MapUtils.newHashMap();
+		for (ParameterRule rule : parameterRules) 
+			result.put(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
+
+		return result;
+	}
 
 }

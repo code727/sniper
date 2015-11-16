@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年11月13日
+ * Create Date : 2015-11-13
  */
 
 package org.workin.support.mapper;

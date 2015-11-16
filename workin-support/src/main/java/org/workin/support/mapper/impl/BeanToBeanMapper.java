@@ -24,11 +24,9 @@ import org.workin.support.mapper.AbstractBeanMapper;
 import org.workin.support.mapper.ParameterRule;
 
 /**
- * @description Java bean对象
+ * @description Java Bean对象与Java Bean对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
- * @param <R>
- * @param <T>
  */
 public class BeanToBeanMapper<T, R> extends AbstractBeanMapper<T, R> {
 
