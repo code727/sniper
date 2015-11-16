@@ -55,6 +55,14 @@ public interface Parameter<K, V> {
 	public <V1> V1 getValue(K name, Class<V1> clazz);
 	
 	/**
+	 * @description 设置参数映射
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param parameters
+	 * @return
+	 */
+	public void setParameters(Map<K, V> parameters);
+	
+	/**
 	 * @description 获取所有的参数映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
@@ -74,5 +82,18 @@ public interface Parameter<K, V> {
 	 * @return
 	 */
 	public List<V> getValues();
+	
+	/**
+	 * @description 删除指定名称的参数项
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 */
+	public void remove(K name);
+	
+	/**
+	 * @description 清除所有参数项
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	public void clear();
 
 }

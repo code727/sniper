@@ -18,9 +18,12 @@
 
 package org.workin.support.puter;
 
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.workin.commons.util.AssertUtils;
+import org.workin.commons.util.MapUtils;
 
 /**
  * @description 错误重复键处理器，当put键出现重复时将报错
@@ -30,9 +33,22 @@ import org.workin.commons.util.AssertUtils;
 public class ErrorDulicateKeyPuter implements Puter {
 
 	@Override
-	public void put(Map<Object, Object> constant, Object key, Object value) {
-		AssertUtils.assertTrue(!constant.containsKey(key), "Puted key has existing constant map.");
-		constant.put(key, value);
+	public <K, V, K1 extends K, V1 extends V> void put(Map<K, V> map, K1 key, V1 value) {
+		AssertUtils.assertTrue(!map.containsKey(key), "Dulicate map key [ " + key + "].");
+		map.put(key, value);
+	}
+
+	
+	@Override
+	public <K, V, K1 extends K, V1 extends V> void putAll(Map<K, V> map, Map<K1, V1> puted) {
+		if (MapUtils.isEmpty(puted))
+			return;
+		
+		Iterator<Entry<K1, V1>> iterator = puted.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<K1, V1> item = iterator.next();
+			this.put(map, item.getKey(), item.getValue());
+		}
 	}
 
 }

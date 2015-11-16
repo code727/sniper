@@ -33,10 +33,20 @@ import org.workin.commons.util.MapUtils;
 public class ConcurrentParameter<K, V> implements Parameter<K, V> {
 	
 	/** 参数映射集 */
-	private Map<K, V> parameters;
+	protected Map<K, V> parameters;
 	
 	public ConcurrentParameter() {
 		this.parameters = MapUtils.newConcurrentHashMap();
+	}
+	
+	@Override
+	public void setParameters(Map<K, V> parameters) {
+		this.parameters.putAll(parameters);
+	}
+
+	@Override
+	public Map<K, V> getParameters() {
+		return this.parameters;
 	}
 
 	@Override
@@ -54,12 +64,7 @@ public class ConcurrentParameter<K, V> implements Parameter<K, V> {
 	public <V1> V1 getValue(K name, Class<V1> clazz) {
 		return (V1) this.getValue(name);
 	}
-
-	@Override
-	public Map<K, V> getParameters() {
-		return this.parameters;
-	}
-
+	
 	@Override
 	public Set<K> getNames() {
 		return this.parameters.keySet();
@@ -68,6 +73,16 @@ public class ConcurrentParameter<K, V> implements Parameter<K, V> {
 	@Override
 	public List<V> getValues() {
 		return CollectionUtils.newArrayList(this.parameters.values());
+	}
+
+	@Override
+	public void remove(K name) {
+		this.parameters.remove(name);
+	}
+
+	@Override
+	public void clear() {
+		this.parameters.clear();
 	}
 
 }

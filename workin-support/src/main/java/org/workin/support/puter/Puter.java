@@ -30,10 +30,18 @@ public interface Puter {
 	/**
 	 * @description 将指定的键-值对PUT到映射集中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param constantMap
+	 * @param map
 	 * @param key
 	 * @param value
 	 */
-	public void put(Map<Object, Object> constantMap, Object key, Object value);
+	public <K, V, K1 extends K, V1 extends V> void put(Map<K, V> map, K1 key, V1 value);
+	
+	/**
+	 * @description 批量PUT到源映射集中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param map
+	 * @param puted
+	 */
+	public <K, V, K1 extends K, V1 extends V> void putAll(Map<K, V> map, Map<K1, V1> puted);
 
 }

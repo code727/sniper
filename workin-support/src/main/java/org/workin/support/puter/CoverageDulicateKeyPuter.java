@@ -20,6 +20,8 @@ package org.workin.support.puter;
 
 import java.util.Map;
 
+import org.workin.commons.util.MapUtils;
+
 /**
  * @description 覆盖重复键处理器，当put键出现重复时则直接覆盖对应的原值
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -28,8 +30,16 @@ import java.util.Map;
 public class CoverageDulicateKeyPuter implements Puter {
 
 	@Override
-	public void put(Map<Object, Object> constantMap, Object key, Object value) {
-		constantMap.put(key, value);
+	public <K, V, K1 extends K, V1 extends V> void put(Map<K, V> map, K1 key, V1 value) {
+		map.put(key, value);
+	}
+
+	@Override
+	public <K, V, K1 extends K, V1 extends V> void putAll(Map<K, V> map, Map<K1, V1> puted) {
+		if (MapUtils.isEmpty(puted))
+			return;
+		
+		map.putAll(puted);
 	}
 
 }
