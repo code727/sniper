@@ -47,7 +47,7 @@ public class Order implements Serializable {
 	private BigDecimal amount;
 	
 	/** 商品购买数 */
-	private int count = 1;
+	private int quantity = 1;
 	
 	/** 商品ID */
 	private String mercId;
@@ -101,12 +101,12 @@ public class Order implements Serializable {
 		this.amount = amount;
 	}
 
-	public int getCount() {
-		return count;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getMercId() {
