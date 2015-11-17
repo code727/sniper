@@ -23,7 +23,7 @@ package org.workin.commons.enums;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface EnumObject<K, V> {
+public interface Enums<K, V> {
 	
 	/**
 	 * @description 获取枚举键

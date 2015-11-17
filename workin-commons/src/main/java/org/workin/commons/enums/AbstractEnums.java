@@ -23,7 +23,7 @@ package org.workin.commons.enums;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractEnumObject<K, V> implements EnumObject<K, V> {
+public abstract class AbstractEnums<K, V> implements Enums<K, V> {
 	
 	/** 键 */
 	private K key;
@@ -31,7 +31,7 @@ public abstract class AbstractEnumObject<K, V> implements EnumObject<K, V> {
 	/** 值 */
 	private V value;
 	
-	protected AbstractEnumObject(K key, V value) {
+	protected AbstractEnums(K key, V value) {
 		this.key = key;
 		this.value = value;
 	}
