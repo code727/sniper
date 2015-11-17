@@ -23,20 +23,20 @@ import java.util.Locale;
 import org.workin.commons.util.MessageUtils;
 
 /**
- * @description
+ * @description 可嵌套的本地化消息枚举对象抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractLocalMappedEnums<K1, K2> extends
+public abstract class AbstractNestableLocalEnums<K1, K2> extends
 		AbstractNestableEnums<K1, K2, String> implements LocalEnums<K1> {
 
-	protected AbstractLocalMappedEnums(K1 key, Enums<K2, String> value) {
+	protected AbstractNestableLocalEnums(K1 key, Enums<K2, String> value) {
 		super(key, value);
 	}
 
 	@Override
 	public String getMessage() {
-		return this.getMessage(getValue().getValue());
+		return this.getMessage(getNestedValue(getKey()));
 	}
 
 	@Override
@@ -46,17 +46,17 @@ public abstract class AbstractLocalMappedEnums<K1, K2> extends
 
 	@Override
 	public String getMessage(Object[] params) {
-		return this.getMessage(params, getValue().getValue());
+		return this.getMessage(params, getNestedValue(getKey()));
 	}
 
 	@Override
 	public String getMessage(Object[] params, String defaultMessage) {
 		/* 先从当前类同名的配置文件中获取，未获取到时再从与当前包同名的配置文件中获取 */
 		String message = MessageUtils.getClassMessage(this.getClass(),
-				Locale.getDefault(), getValue().getValue(), params, null);
+				Locale.getDefault(), getNestedValue(getKey()), params, null);
 		
 		return message != null ? message : MessageUtils.getClassMessage(
-				this.getClass(), Locale.getDefault(), getValue().getValue(), params, defaultMessage);
+				this.getClass(), Locale.getDefault(), getNestedValue(getKey()), params, defaultMessage);
 	}
 
 }

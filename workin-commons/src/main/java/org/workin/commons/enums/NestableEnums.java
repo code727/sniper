@@ -41,6 +41,4 @@ public interface NestableEnums<K1, K2, V2> extends Enums<K1, Enums<K2, V2>>{
 	 */
 	public V2 getNestedValue(K1 key);
 	
-	
-
 }
