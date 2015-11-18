@@ -50,7 +50,7 @@ public class Payment implements Serializable {
     private Date payTime;
     
     /** 支付状态 */
-    private String status;
+    private int status;
     
     /** 支付结果信息 */
     private String message;
@@ -103,11 +103,11 @@ public class Payment implements Serializable {
 		this.payTime = payTime;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

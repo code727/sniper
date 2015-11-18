@@ -40,7 +40,7 @@ public class Order implements Serializable {
 	/** 订单编号 */
 	private String orderId;
 	
-	/** 订单支付类型 */
+	/** 选择的第三方支付类型 */
 	private int type;
 	
 	/** 交易金额 */
@@ -57,6 +57,12 @@ public class Order implements Serializable {
 	
 	/** 描述 */
 	private String description;
+	
+	/** 商品单价 */
+	private BigDecimal price;
+	
+	/** 折扣 */
+	private double discount = 1;
 	
 	/** 下单时间 */
 	private Date submitTime;
@@ -139,6 +145,22 @@ public class Order implements Serializable {
 
 	public void setSubmitTime(Date submitTime) {
 		this.submitTime = submitTime;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
 	}
 	
 }
