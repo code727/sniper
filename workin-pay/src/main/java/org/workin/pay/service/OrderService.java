@@ -36,4 +36,12 @@ public interface OrderService {
 	 */
 	public CodeMessageModel save(Order order) throws Exception;
 
+	/** 
+	 * @description 根据编号查询订单对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param orderId
+	 * @return 
+	 */
+	public Order findByOrderId(String orderId) throws Exception;
+
 }

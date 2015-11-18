@@ -137,7 +137,7 @@ public class AlipayService extends AbstractPayService {
 		if (ValidationResult.SUCCESS.getKey().equals(code)) {
 			result = updatePayment(payResponse);
 		} else {
-			/*验证未成功时，则直接返回状态码和验证信息 */
+			/* 验证未成功时，则直接返回状态码和验证信息，不做充值记录的处理 */
 			result.setCode(code);
 			result.setMessage(ThirdValidationResult.getValidationMessage(status));
 		}
@@ -157,6 +157,7 @@ public class AlipayService extends AbstractPayService {
 		CodeMessageModel result = new CodeMessageModel();
 		if (payment == null) {
 			payment = new Payment();
+			payment.setAmount(orderService.findByOrderId(orderId).getAmount());
 		}
 		payment.setOrderId(orderId);
 		payment.setThirdOrderId(payResponse.get("trade_no"));
