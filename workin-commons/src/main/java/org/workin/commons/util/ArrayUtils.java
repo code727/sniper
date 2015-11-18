@@ -3755,10 +3755,4 @@ public class ArrayUtils {
 		return array[index];
 	}
 	
-	public static void main(String[] args) {
-//		CharSequence[] array = new CharSequence[]{"123", new StringBuffer("123")};
-//		System.out.println(lastIndexOfValue(array, "123", 1));
-		System.out.println("123" == new String("123"));
-	}
-						
 }
