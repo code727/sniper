@@ -6,7 +6,7 @@
 package org.worin.support.test;
 
 import org.junit.Test;
-import org.workin.commons.enums.EnumObject;
+import org.workin.commons.enums.Enums;
 import org.workin.support.LogicOperation;
 import org.workin.support.LogicOperationEnum;
 import org.workin.test.junit.BaseTestCase;
@@ -32,7 +32,7 @@ public class LogicOperationTest extends BaseTestCase {
 	
 	@Test
 	public void testLogicOperation() {
-		EnumObject<String, LogicOperation<Object, Object>> enumObject = LogicOperationEnum.get("eq");
+		Enums<String, LogicOperation<Object, Object>> enumObject = LogicOperationEnum.get("eq");
 		LogicOperation<Object, Object> operation = enumObject.getValue();
 		assertNotNull(operation);
 		

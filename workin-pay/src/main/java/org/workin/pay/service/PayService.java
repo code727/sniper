@@ -19,8 +19,11 @@
 package org.workin.pay.service;
 
 
+import java.util.Map;
+
 import org.workin.pay.domain.Order;
 import org.workin.pay.domain.PayRequest;
+import org.workin.support.model.impl.CodeableMessageModel;
 import org.workin.support.model.impl.ResultModel;
 
 /**
@@ -31,7 +34,7 @@ import org.workin.support.model.impl.ResultModel;
 public interface PayService {
 	
 	/**
-	 * @description 根据订单创建支付结果
+	 * @description 根据订单创建支付请求数据对象模型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param order
 	 * @return
@@ -40,11 +43,15 @@ public interface PayService {
 	public ResultModel<PayRequest> create(Order order) throws Exception;
 	
 	/**
-	 * @description 根据订单创建支付请求参数项
+	 * @description 根据第三方支付系统返回的通知参数进行通知处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param order
+	 * @param payNotice
 	 * @return
+	 * @throws Exception
 	 */
-	public PayRequest createPayParameters(Order order);
-		
+	public CodeableMessageModel notify(Map<String, String> payNotice) throws Exception;
+	
+	
+	
+	
 }

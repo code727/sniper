@@ -21,46 +21,19 @@ package org.workin.pay.signature;
 import java.util.Map;
 
 /**
- * @description
+ * @description 签名接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Signature {
 	
 	/**
-	 * @description 设置签名类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param type
-	 */
-	public void setType(String type);
-	
-	/**
-	 * @description 获取签名类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getType();
-	
-	/**
-	 * @description 设置字符集编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param charset
-	 */
-	public void setCharset(String charset);
-	
-	/**
-	 * @description 获取字符集编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getCharset();
-	
-	/**
-	 * @description 根据支付参数项执行签名操作，并返回签名结果
+	 * @description 按指定的类型将支付参数项进行签名操作，并返回签名结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param payParameters
+	 * @param type
 	 * @return
 	 */
-	public String excute(Map<String, Object> payParameters);
+	public String excute(Map<String, Object> payParameters, String type);
 	
 }

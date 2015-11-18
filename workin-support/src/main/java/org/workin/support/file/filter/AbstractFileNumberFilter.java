@@ -19,7 +19,7 @@
 package org.workin.support.file.filter;
 
 
-import org.workin.commons.enums.EnumObject;
+import org.workin.commons.enums.Enums;
 import org.workin.commons.util.AssertUtils;
 import org.workin.support.LogicOperation;
 import org.workin.support.LogicOperationEnum;
@@ -51,7 +51,7 @@ public abstract class AbstractFileNumberFilter extends AbstractFileFilter implem
 
 	@Override
 	public void setLogicOperation(String operation) {
-		EnumObject<String,LogicOperation<Object, Object>> enumObject = LogicOperationEnum.get(operation);
+		Enums<String,LogicOperation<Object, Object>> enumObject = LogicOperationEnum.get(operation);
 		AssertUtils.assertNotNull(enumObject, "Invalid logic operation:" + operation);
 		this.logicOperation = operation;
 		this.logic = enumObject.getValue();

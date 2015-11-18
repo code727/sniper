@@ -21,8 +21,8 @@ package org.workin.support;
 
 import java.util.Set;
 
-import org.workin.commons.enums.AbstractEnumObject;
-import org.workin.commons.enums.EnumObject;
+import org.workin.commons.enums.AbstractEnums;
+import org.workin.commons.enums.Enums;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.ObjectUtils;
 import org.workin.commons.util.StringUtils;
@@ -32,10 +32,10 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class LogicOperationEnum extends AbstractEnumObject<String, LogicOperation<Object, Object>> {
+public final class LogicOperationEnum extends AbstractEnums<String, LogicOperation<Object, Object>> {
 	
 	/** 存放的所有枚举对象组 */
-	protected static final Set<EnumObject<String,LogicOperation<Object, Object>>> ENUM_GROUP = CollectionUtils.newHashSet();
+	protected static final Set<Enums<String,LogicOperation<Object, Object>>> ENUM_GROUP = CollectionUtils.newHashSet();
 	
 	/** 引用相等操作 */
 	public static final LogicOperationEnum REFERENCE_EQUALS = new LogicOperationEnum(
@@ -79,7 +79,7 @@ public final class LogicOperationEnum extends AbstractEnumObject<String, LogicOp
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static Set<EnumObject<String,LogicOperation<Object, Object>>> getAll() {
+	public static Set<Enums<String,LogicOperation<Object, Object>>> getAll() {
 		return ENUM_GROUP; 
 	}
 	
@@ -89,12 +89,12 @@ public final class LogicOperationEnum extends AbstractEnumObject<String, LogicOp
 	 * @param key
 	 * @return
 	 */
-	public static EnumObject<String,LogicOperation<Object, Object>> get(String key) {
+	public static Enums<String,LogicOperation<Object, Object>> get(String key) {
 		key = StringUtils.trim(key);
 		if (key != null)
 			key = key.toLowerCase();
 		
-		for (EnumObject<String,LogicOperation<Object, Object>> operation : ENUM_GROUP) {
+		for (Enums<String,LogicOperation<Object, Object>> operation : ENUM_GROUP) {
 			if (ObjectUtils.equals(operation.getKey(), key))
 				return operation;
 		}

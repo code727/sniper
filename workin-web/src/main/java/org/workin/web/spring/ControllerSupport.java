@@ -120,7 +120,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 		}
 		// 仍然获取不到时，最后从与当前类同名的配置文件中获取
 		return message != null ? message : MessageUtils
-				.getClassMessage(this.getClass(), locale, key, null, key);
+				.getClassMessage(this.getClass(), locale, key, params, key);
 	}
 	
 	/**

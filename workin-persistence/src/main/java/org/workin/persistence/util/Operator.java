@@ -20,7 +20,7 @@ package org.workin.persistence.util;
 
 import java.util.Set;
 
-import org.workin.commons.enums.AbstractEnumObject;
+import org.workin.commons.enums.AbstractEnums;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.ObjectUtils;
 import org.workin.commons.util.StringUtils;
@@ -30,7 +30,7 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class Operator extends AbstractEnumObject<String, String> {
+public final class Operator extends AbstractEnums<String, String> {
 	
 	/** 存放的所有运算枚举对象组 */
 	protected static final Set<Operator> ENUM_GROUP = CollectionUtils.newLinkedHashSet();
