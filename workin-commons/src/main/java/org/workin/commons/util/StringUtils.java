@@ -1338,83 +1338,33 @@ public class StringUtils {
 	public static String reverse(String str) {
 		return length(str) > 1 ? new StringBuffer(str).reverse().toString() : str;
 	}
-	
-	/**
-	 * @description 比较两个字符串的值是否相等
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param src
-	 * @param dest
-	 * @return
-	 */
-	public static boolean equals(String src, String dest) {
-		return src != null ? src.equals(dest) : src == dest;
-	}
-	
-	/**
-	 * @description 按忽略大小写的方式比较两个字符串的值是否相等
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param src
-	 * @param dest
-	 * @return
-	 */
-	public static boolean equalsIgnoreCase(String src, String dest) {
-		return src != null ? src.equalsIgnoreCase(dest) : src == dest;
-	}
-	
-	/**
-	 * @description 比较两个StringBuffer对象字符串的值是否相等
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param src
-	 * @param dest
-	 * @return
-	 */
-	public static boolean equals(StringBuffer src, StringBuffer dest) {
-		if (src == null || dest == null)
-			return src == dest;
 		
-		return src.toString().equals(dest.toString());
+	/**
+	 * @description 比较两个字符序列对象的值是否相等
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param s1
+	 * @param s2
+	 * @return
+	 */
+	public static boolean equals(CharSequence s1, CharSequence s2) {
+		if (s1 == null || s2 == null)
+			return s1 == s2;
+		
+		return s1.toString().equals(s2.toString());
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式比较两个StringBuffer对象字符串的值是否相等
+	 * @description 按忽略大小写的方式比较两个字符序列对象的值是否相等
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param src
-	 * @param dest
+	 * @param s1
+	 * @param s2
 	 * @return
 	 */
-	public static boolean equalsIgnoreCase(StringBuffer src, StringBuffer dest) {
-		if (src == null || dest == null)
-			return src == dest;
+	public static boolean equalsIgnoreCase(CharSequence s1, CharSequence s2) {
+		if (s1 == null || s2 == null)
+			return s1 == s2;
 		
-		return src.toString().equalsIgnoreCase(dest.toString());
+		return s1.toString().equalsIgnoreCase(s2.toString());
 	}
 	
-	/**
-	 * @description 比较两个StringBuilder对象字符串的值是否相等
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param src
-	 * @param dest
-	 * @return
-	 */
-	public static boolean equals(StringBuilder src, StringBuilder dest) {
-		if (src == null || dest == null)
-			return src == dest;
-		
-		return src.toString().equals(dest.toString());
-	}
-	
-	/**
-	 * @description 按忽略大小写的方式比较两个StringBuffer对象字符串的值是否相等
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param src
-	 * @param dest
-	 * @return
-	 */
-	public static boolean equalsIgnoreCase(StringBuilder src, StringBuilder dest) {
-		if (src == null || dest == null)
-			return src == dest;
-		
-		return src.toString().equalsIgnoreCase(dest.toString());
-	}
-		
 }

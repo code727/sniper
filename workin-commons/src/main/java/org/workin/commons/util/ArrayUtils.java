@@ -1596,7 +1596,7 @@ public class ArrayUtils {
 			int i;
 			do {
 				for (i = start++; i < length; i++) {
-					if (ObjectUtils.equals(array[i], subArray[subIndex++])) {
+					if (array[i] == subArray[subIndex++]) {
 						if (index == -1)
 							index = i;
 						
@@ -1650,11 +1650,45 @@ public class ArrayUtils {
 			start = 0;
 		if (!isArray(element)) {
 			for (int i = start; i < array.length; i++)
-				if (ObjectUtils.equals(array[i], element))
+				if (array[i] == element)
 					return i;
 		} else
 			return indexOf(array, convertWapperArray(element), start);
 		
+		return -1;
+	}
+	
+	/**
+	 * @description 获取第一个匹配值字符序列元素在数组中的下标
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param element
+	 * @return
+	 */
+	public static int indexOfValue(CharSequence[] array, CharSequence element) {
+		return indexOfValue(array, element, 0);
+	}
+	
+	/**
+	 * @description 从指定的索引位置开始获取第一个匹配元素在数组中的下标
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param element
+	 * @param start
+	 * @return
+	 */
+	public static int indexOfValue(CharSequence[] array, CharSequence element, int start) {
+		if (isEmpty(array))
+			return -1;
+		
+		if (start < 0)
+			start = 0;
+		
+		for (int i = start; i < array.length; i++) {
+			if (StringUtils.equals(array[i], element))
+				return i;
+		}
+			
 		return -1;
 	}
 	
@@ -2386,42 +2420,6 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配元素在数组中的下标
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @return
-	 */
-	public static int lastIndexOf(Object[] array, Object element) {
-		return lastIndexOf(array, element, 0);
-	}
-	
-	/**
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @param start
-	 * @return
-	 */
-	public static int lastIndexOf(Object[] array, Object element, int start) {
-		if (isEmpty(array))
-			return -1;
-		
-		if (start < 0)
-			start = 0;
-		
-		if (!isArray(element)) {
-			for (int i = (array.length - 1); i >= start; i--)
-				if (array[i] == element)
-					return i;
-		} else 
-			return lastIndexOf(array, convertWapperArray(element), start);
-		
-		return -1;
-	}
-	
-	/**
 	 * @description 获取最后一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
@@ -2464,7 +2462,7 @@ public class ArrayUtils {
 			
 			do {
 				for (i = --length; i >= start; i--) {
-					if (ObjectUtils.equals(array[i], subArray[subIndex--])) {
+					if (array[i] == subArray[subIndex--]) {
 						index = i;
 						if (subIndex < 0) 
 							break;
@@ -2487,7 +2485,77 @@ public class ArrayUtils {
 		}
 		return -1;
 	}
+	
+	/**
+	 * @description 获取最后一个匹配元素在数组中的下标
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param element
+	 * @return
+	 */
+	public static int lastIndexOf(Object[] array, Object element) {
+		return lastIndexOf(array, element, 0);
+	}
+	
+	/**
+	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param element
+	 * @param start
+	 * @return
+	 */
+	public static int lastIndexOf(Object[] array, Object element, int start) {
+		if (isEmpty(array))
+			return -1;
 		
+		if (start < 0)
+			start = 0;
+		
+		if (!isArray(element)) {
+			for (int i = (array.length - 1); i >= start; i--)
+				if (array[i] == element)
+					return i;
+		} else 
+			return lastIndexOf(array, convertWapperArray(element), start);
+		
+		return -1;
+	}
+	
+	/**
+	 * @description 获取最后一个匹配值字符序列元素在数组中的下标
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param element
+	 * @return
+	 */
+	public static int lastIndexOfValue(CharSequence[] array, CharSequence element) {
+		return lastIndexOfValue(array, element, 0);
+	}
+	
+	/**
+	 * @description 从指定的索引位置开始获取最后一个匹配值字符序列元素在数组中的下标
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param element
+	 * @param start
+	 * @return
+	 */
+	public static int lastIndexOfValue(CharSequence[] array, CharSequence element, int start) {
+		if (isEmpty(array))
+			return -1;
+		
+		if (start < 0)
+			start = 0;
+		
+		for (int i = (array.length - 1); i >= start; i--) {
+			if (StringUtils.equals(array[i], element))
+				return i;
+		}
+			
+		return -1;
+	}
+	
 	/**
 	 * @description 删除数组中指定索引位的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -3470,6 +3538,17 @@ public class ArrayUtils {
 	}
 	
 	/**
+	 * @description 判断指定的字符序列元素值是否存在于原数组中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param obj
+	 * @return
+	 */
+	public static boolean containsValue(CharSequence array[], CharSequence value) {
+		return indexOfValue(array, value) != -1;
+	}
+	
+	/**
 	 * @description 将null转换为容量为0的空数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
@@ -3675,5 +3754,11 @@ public class ArrayUtils {
 		
 		return array[index];
 	}
-					
+	
+	public static void main(String[] args) {
+//		CharSequence[] array = new CharSequence[]{"123", new StringBuffer("123")};
+//		System.out.println(lastIndexOfValue(array, "123", 1));
+		System.out.println("123" == new String("123"));
+	}
+						
 }

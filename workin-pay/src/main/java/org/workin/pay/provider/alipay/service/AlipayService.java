@@ -118,7 +118,7 @@ public class AlipayService extends AbstractPayService {
 		payParameters.put("_input_charset", inputCharset);
 		
 		PayRequest request = new PayRequest();
-		request.setUrl(MapUtils.joinURLParameters(payParameters));
+		request.setUrl(MapUtils.joinQueryString(payParameters));
 		request.setOrderId(order.getOrderId());
 		return request;
 	}

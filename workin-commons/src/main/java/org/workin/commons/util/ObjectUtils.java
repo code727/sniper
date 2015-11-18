@@ -69,7 +69,24 @@ public class ObjectUtils {
 	 * @return
 	 */
 	public static boolean equals(Object obj1, Object obj2) {
-		return obj1 != null ? obj1.equals(obj2) : obj1 == obj2;
+		if (obj1 == null || obj2 == null)
+			return obj1 == obj2;
+		
+		return obj1.equals(obj2);
+	}
+	
+	/**
+	 * @description 判断两个对象的字符串是否相等
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj1
+	 * @param obj2
+	 * @return
+	 */
+	public static boolean stringEquals(Object obj1, Object obj2) {
+		if (obj1 == null || obj2 == null)
+			return obj1 == obj2;
+		
+		return StringUtils.equals(obj1.toString(), obj2.toString());
 	}
 	
 	/**

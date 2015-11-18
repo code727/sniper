@@ -21,6 +21,7 @@ package org.workin.commons.util;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -151,13 +152,46 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 将映射集里的所有键值对元素连接成URL参数字符串
+	 * @description 将映射集里的所有键值对元素连接成URL查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @return
 	 */
-	public static <V> String joinURLParameters(Map<String, V> map) {
-		return map != null ? join(map.entrySet(), "=", "&") : StringUtils.EMPTY_STRING;
+	public static <K extends CharSequence, V> String joinQueryString(Map<K, V> map) {
+		return joinQueryString(map, null);
+	}
+	
+	/**
+	 * @description 将映射集里排除后剩余的键值对元素连接成URL查询字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param map
+	 * @param excludeNames
+	 * @return
+	 */
+	public static <K1 extends CharSequence, K2 extends CharSequence, V> String joinQueryString(Map<K1, V> map, K2[] excludeNames) {
+		if (isEmpty(map))
+			return StringUtils.EMPTY_STRING;
+		
+		StringBuilder builder = new StringBuilder();
+		
+		Set<Entry<K1, V>> entrySet = map.entrySet();
+		if (ArrayUtils.isNotEmpty(excludeNames)) {
+			Set<Entry<K1,V>> remainEntrySet = CollectionUtils.newLinkedHashSet();
+			Iterator<Entry<K1, V>> iterator = entrySet.iterator();
+			while (iterator.hasNext()) {
+				Entry<K1, V> entry = iterator.next();
+				if (!ArrayUtils.containsValue(excludeNames, entry.getKey()))
+					remainEntrySet.add(entry);
+			}
+			entrySet = remainEntrySet;
+		}
+		for (Entry<K1,V> entry : entrySet) {
+			if (builder.length() > 0)
+				builder.append("&");
+			builder.append(entry.getKey()).append("=").append(entry.getValue());
+		}
+		
+		return builder.toString();
 	}
 	
 	/**
@@ -168,26 +202,68 @@ public class MapUtils {
 	 * @param itemSeperator 键值对之间的连接符
 	 * @return
 	 */
-	public static <K,V> String join(Map<K,V> map, String kvSeperator, String itemSeperator) {
+	public static <K, V> String join(Map<K, V> map, Object kvSeperator, Object itemSeperator) {
 		return join(map.entrySet(), kvSeperator, itemSeperator);
 	}
 	
 	/**
-	 * @description 将映射集里的所有元素按各部分的连接符连接成字符串
+	 * @description 将映射集里排除后剩余的键值对元素按各部分的连接符连接成字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param map
+	 * @param kvSeperator
+	 * @param itemSeperator
+	 * @param excludeNames
+	 * @return
+	 */
+	public static <K, V> String join(Map<K, V> map, Object kvSeperator, Object itemSeperator, K[] excludeNames) {
+		return map != null ? join(map.entrySet(), kvSeperator, itemSeperator, excludeNames) : StringUtils.EMPTY_STRING;
+	}
+	
+	/**
+	 * @description 将集合里的所有Entry元素按各部分的连接符连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entrySet 映射集
 	 * @param kvSeperator 键值之间的连接符
 	 * @param itemSeperator 键值对之间的连接符
 	 * @return
 	 */
-	public static <K,V> String join(Set<Entry<K,V>> entrySet, String kvSeperator, String itemSeperator) {
-		StringBuilder builder = new StringBuilder();
-		for (Entry<K,V> entry : entrySet) {
-			if (builder.length() > 0)
-				builder.append(itemSeperator);
-			builder.append(entry.getKey()).append(kvSeperator).append(entry.getValue());
+	public static <K,V> String join(Set<Entry<K,V>> entrySet, Object kvSeperator, Object itemSeperator) {
+		return join(entrySet, kvSeperator, itemSeperator, null);
+	}
+	
+	/**
+	 * @description 将集合里排除后剩余的Entry元素按各部分的连接符连接成字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entrySet
+	 * @param kvSeperator
+	 * @param itemSeperator
+	 * @param excludeKeys
+	 * @return
+	 */
+	public static <K, V> String join(Set<Entry<K,V>> entrySet, Object kvSeperator, Object itemSeperator, K[] excludeKeys) {
+		if (CollectionUtils.isEmpty(entrySet))
+			return StringUtils.EMPTY_STRING;
+		
+		if (ArrayUtils.isNotEmpty(excludeKeys)) {
+			Iterator<Entry<K, V>> iterator = entrySet.iterator();
+			Set<Entry<K,V>> remainEntrySet = CollectionUtils.newLinkedHashSet();
+			while (iterator.hasNext()) {
+				Entry<K, V> entry = iterator.next();
+				if (!ArrayUtils.contains(excludeKeys, entry.getKey()))
+					remainEntrySet.add(entry);
+			}
+			
+			return join(remainEntrySet, kvSeperator, itemSeperator, null);
+		} else {
+			StringBuilder builder = new StringBuilder();
+			for (Entry<K,V> entry : entrySet) {
+				if (builder.length() > 0)
+					builder.append(itemSeperator);
+				builder.append(entry.getKey()).append(kvSeperator).append(entry.getValue());
+			}
+			
+			return builder.toString();
 		}
-		return builder.toString();
 	}
 	
 	/**

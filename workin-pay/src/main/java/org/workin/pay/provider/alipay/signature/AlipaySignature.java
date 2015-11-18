@@ -37,7 +37,7 @@ public class AlipaySignature implements Signature {
 		if (StringUtils.isBlank(type))
 			type = "MD5";
 		
-		return MessageUtils.encrypt(MapUtils.joinURLParameters(payParameters), type);
+		return MessageUtils.encrypt(MapUtils.joinQueryString(payParameters), type);
 	}
 
 }

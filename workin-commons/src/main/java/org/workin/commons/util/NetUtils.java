@@ -119,7 +119,7 @@ public class NetUtils {
 	 * @throws IOException
 	 */
 	public static String httpGet(String url, Map<String, String> parameters) throws IOException {
-		return httpGet(url, MapUtils.joinURLParameters(parameters), "");
+		return httpGet(url, MapUtils.joinQueryString(parameters), "");
 	}
 	
 	/**
@@ -157,7 +157,7 @@ public class NetUtils {
 	 * @throws IOException
 	 */
 	public static String httpGet(String url, Map<String,String> parameters, String encoding) throws IOException {
-		return httpGet(url, MapUtils.joinURLParameters(parameters), encoding);
+		return httpGet(url, MapUtils.joinQueryString(parameters), encoding);
 	}
 	
 	/**
@@ -192,7 +192,7 @@ public class NetUtils {
 	 * @throws IOException
 	 */
 	public static String httpPost(String url, Map<String, String> parameters) throws IOException {
-		return httpPost(url, MapUtils.joinURLParameters(parameters), "");
+		return httpPost(url, MapUtils.joinQueryString(parameters), "");
 	}
 	
 	/**
@@ -244,7 +244,7 @@ public class NetUtils {
 	 * @throws IOException
 	 */
 	public static String httpPost(String url, Map<String,String> parameters, String encoding) throws IOException {
-		return httpPost(url, MapUtils.joinURLParameters(parameters), encoding);
+		return httpPost(url, MapUtils.joinQueryString(parameters), encoding);
 	}
 	
 	/**
