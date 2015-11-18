@@ -19,7 +19,7 @@
 package org.workin.pay.service;
 
 import org.workin.pay.domain.Payment;
-import org.workin.support.model.impl.CodeableMessageModel;
+import org.workin.support.model.impl.CodeMessageModel;
 
 /**
  * @description 支付服务接口
@@ -35,7 +35,7 @@ public interface PaymentService {
 	 * @return
 	 * @throws Exception
 	 */
-	public CodeableMessageModel save(Payment payment) throws Exception;
+	public CodeMessageModel save(Payment payment) throws Exception;
 	
 	/**
 	 * @description 根据订单编号查询支付记录
@@ -52,6 +52,6 @@ public interface PaymentService {
 	 * @return
 	 * @throws Exception
 	 */
-	public CodeableMessageModel update(Payment payment) throws Exception;
+	public CodeMessageModel update(Payment payment) throws Exception;
 
 }

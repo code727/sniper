@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.workin.pay.domain.Order;
 import org.workin.pay.domain.PayRequest;
-import org.workin.support.model.impl.CodeableMessageModel;
+import org.workin.support.model.impl.CodeMessageModel;
 import org.workin.support.model.impl.ResultModel;
 
 /**
@@ -40,18 +40,15 @@ public interface PayService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ResultModel<PayRequest> create(Order order) throws Exception;
+	public ResultModel<PayRequest> createPayRequest(Order order) throws Exception;
 	
 	/**
-	 * @description 根据第三方支付系统返回的通知参数进行通知处理
+	 * @description 处理支付响应
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param payNotice
+	 * @param payResponse
 	 * @return
 	 * @throws Exception
 	 */
-	public CodeableMessageModel notify(Map<String, String> payNotice) throws Exception;
-	
-	
-	
-	
+	public CodeMessageModel handlePayResponse(Map<String, String> payResponse) throws Exception;
+		
 }

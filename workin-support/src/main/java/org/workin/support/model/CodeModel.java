@@ -12,46 +12,31 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *  
  * Create Date : 2015-1-26
  */
 
-package org.workin.support.model.impl;
-
-import org.workin.support.model.MessageModel;
-import org.workin.support.model.CodeableModel;
+package org.workin.support.model;
 
 /**
- * @description 可编码的消息对象模型
+ * @description 可编码的对象模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CodeableMessageModel implements CodeableModel, MessageModel {
+public interface CodeModel {
 	
-	/** 编码*/
-	private String code;
+	/**
+	 * @description 获取编码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getCode();
 	
-	/** 消息 */
-	private String messgae;
-	
-	@Override
-	public String getCode() {
-		return this.code;
-	}
-
-	@Override
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	@Override
-	public String getMessage() {
-		return this.messgae;
-	}
-
-	@Override
-	public void setMessage(String message) {
-		this.messgae = message;
-	}
-
+	/**
+	 * @description 设置编码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param code
+	 */
+	public void setCode(String code);
+		
 }

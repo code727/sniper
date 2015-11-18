@@ -12,31 +12,33 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *  
+ * 
  * Create Date : 2015-1-26
  */
 
-package org.workin.support.model;
+package org.workin.support.model.impl;
+
+import org.workin.support.model.AbstractCodeModel;
+import org.workin.support.model.GenericsDataModel;
 
 /**
- * @description 可编码的对象模型
+ * @description 可编码的数据对象模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface CodeableModel {
+public class CodeDataModel<T> extends AbstractCodeModel implements GenericsDataModel<T> {
 	
-	/**
-	 * @description 获取编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getCode();
+	/** 数据 */
+	private T data;
 	
-	/**
-	 * @description 设置编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param code
-	 */
-	public void setCode(String code);
-		
+	@Override
+	public T getData() {
+		return this.data;
+	}
+
+	@Override
+	public void setDate(T data) {
+		this.data = data;
+	}
+
 }

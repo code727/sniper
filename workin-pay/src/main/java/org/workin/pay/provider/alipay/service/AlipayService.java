@@ -19,6 +19,7 @@
 package org.workin.pay.provider.alipay.service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Map;
 
 import org.workin.commons.util.MapUtils;
@@ -27,8 +28,13 @@ import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.pay.domain.Order;
 import org.workin.pay.domain.PayRequest;
+import org.workin.pay.domain.Payment;
+import org.workin.pay.enums.pay.PayStatus;
+import org.workin.pay.enums.pay.ThirdPayStatus;
+import org.workin.pay.enums.validation.ThirdValidationResult;
+import org.workin.pay.enums.validation.ValidationResult;
 import org.workin.pay.service.AbstractPayService;
-import org.workin.support.model.impl.CodeableMessageModel;
+import org.workin.support.model.impl.CodeMessageModel;
 
 /**
  * @description 阿里支付服务实现类
@@ -118,13 +124,58 @@ public class AlipayService extends AbstractPayService {
 	}
 
 	@Override
-	public CodeableMessageModel notify(Map<String, String> payNotice) throws Exception {
-		// 
+	public CodeMessageModel handlePayResponse(Map<String, String> payResponse) throws Exception {
+		CodeMessageModel result = new CodeMessageModel();
 		Map<String, Object> parameters = MapUtils.newHashMap();
-		parameters.put("notify_id", payNotice.get("notify_id"));
+		parameters.put("notify_id", payResponse.get("notify_id"));
 		
-//		String httpClientTemplet.request("alipayNotify", parameters);
-		return null;
+		// 发送支付宝验证请求，并返回验证结果状态
+		String status = httpClientTemplet.request("alipayNotify", parameters);
+		// 再根据支付宝验证结果状态获取本系统的状态码
+		String code = ThirdValidationResult.getValidationResultCode(status);
+		
+		if (ValidationResult.SUCCESS.getKey().equals(code)) {
+			result = updatePayment(payResponse);
+		} else {
+			/*验证未成功时，则直接返回状态码和验证信息 */
+			result.setCode(code);
+			result.setMessage(ThirdValidationResult.getValidationMessage(status));
+		}
+		return result;
+	}
+	
+	/**
+	 * @description 根据响应参数更新充值记录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param payResponse
+	 * @return
+	 * @throws Exception
+	 */
+	protected CodeMessageModel updatePayment(Map<String, String> payResponse) throws Exception {
+		String orderId = payResponse.get("out_trade_no");
+		Payment payment = paymentService.findByOrderId(orderId);
+		CodeMessageModel result = new CodeMessageModel();
+		if (payment == null) {
+			payment = new Payment();
+		}
+		payment.setOrderId(orderId);
+		payment.setThirdOrderId(payResponse.get("trade_no"));
+		payment.setPayAmount(new BigDecimal(payResponse.get("total_fee")));
+		String thirdCode = payResponse.get("trade_status");
+		payment.setStatus(ThirdPayStatus.getPayStatusCode(thirdCode));
+		payment.setMessage(ThirdPayStatus.getPayMessage(thirdCode));
+		// 只有等交易完成后才记录支付时间
+		if (PayStatus.TRADE_FINISHED.getKey() == payment.getStatus())
+			payment.setPayTime(new Date());
+		else
+			payment.setPayTime(null);
+		
+		if (payment.getId() != null)
+			result = paymentService.update(payment);
+		else
+			result = paymentService.save(payment);
+		
+		return result;
 	}
 
 }

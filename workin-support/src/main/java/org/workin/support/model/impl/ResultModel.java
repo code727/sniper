@@ -25,7 +25,7 @@ import org.workin.support.model.GenericsDataModel;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ResultModel<T> extends CodeableMessageModel implements GenericsDataModel<T> {
+public class ResultModel<T> extends CodeMessageModel implements GenericsDataModel<T> {
 		
 	/** 数据 */
 	private T data;

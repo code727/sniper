@@ -19,7 +19,7 @@
 package org.workin.pay.service;
 
 import org.workin.pay.domain.Order;
-import org.workin.support.model.impl.CodeableMessageModel;
+import org.workin.support.model.impl.CodeMessageModel;
 
 /**
  * @description 订单服务接口
@@ -34,6 +34,6 @@ public interface OrderService {
 	 * @param order
 	 * @throws Exception
 	 */
-	public CodeableMessageModel save(Order order) throws Exception;
+	public CodeMessageModel save(Order order) throws Exception;
 
 }

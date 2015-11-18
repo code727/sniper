@@ -27,7 +27,7 @@ import org.workin.pay.signature.Signature;
 import org.workin.spring.beans.CheckableInitializingBean;
 import org.workin.spring.context.ApplicationContextParameter;
 import org.workin.support.enums.SystemStatus;
-import org.workin.support.model.impl.CodeableMessageModel;
+import org.workin.support.model.impl.CodeMessageModel;
 import org.workin.support.model.impl.ResultModel;
 
 /**
@@ -38,10 +38,10 @@ import org.workin.support.model.impl.ResultModel;
 public abstract class AbstractPayService extends CheckableInitializingBean implements PayService {
 	
 	/** 订单服务接口 */
-	private OrderService orderService;
+	protected OrderService orderService;
 	
 	/** 支付服务接口 */
-	private PaymentService paymentService;
+	protected PaymentService paymentService;
 	
 	/** 签名器 */
 	protected Signature signature;
@@ -98,11 +98,11 @@ public abstract class AbstractPayService extends CheckableInitializingBean imple
 	}
 
 	@Override
-	public ResultModel<PayRequest> create(Order order) throws Exception {
+	public ResultModel<PayRequest> createPayRequest(Order order) throws Exception {
 		ResultModel<PayRequest> resultModel = new ResultModel<PayRequest>();
 		
 		// 第一步：先保存订单记录
-		CodeableMessageModel result = orderService.save(order);
+		CodeMessageModel result = orderService.save(order);
 		if (SystemStatus.SUCCESS.getKey().equals(result.getCode())) {
 			// 第二步：订单记录保存成功后，再根据订单保存支付记录 
 			result = savePaymentByOrder(order);
@@ -122,7 +122,7 @@ public abstract class AbstractPayService extends CheckableInitializingBean imple
 		return resultModel;
 	}
 	
-	protected CodeableMessageModel savePaymentByOrder(Order order) throws Exception {
+	protected CodeMessageModel savePaymentByOrder(Order order) throws Exception {
 		Payment payment = new Payment();
 		payment.setOrderId(order.getOrderId());
 		payment.setAmount(order.getAmount());

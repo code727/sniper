@@ -12,27 +12,27 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *  
  * Create Date : 2015-1-26
  */
 
 package org.workin.support.model.impl;
 
 import org.workin.support.model.GenericsDataModel;
-import org.workin.support.model.CodeableModel;
+import org.workin.support.model.MessageModel;
 
 /**
- * @description 可编码的数据对象模型
+ * @description 有消息记录的数据模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CodeableDataModel<T> implements GenericsDataModel<T>, CodeableModel {
+public class DataMessageModel<T> implements MessageModel, GenericsDataModel<T> {
 	
 	/** 数据 */
 	private T data;
 	
-	/** 编码 */
-	private String code;
+	/** 消息 */
+	private String messgae;
 
 	@Override
 	public T getData() {
@@ -45,13 +45,13 @@ public class CodeableDataModel<T> implements GenericsDataModel<T>, CodeableModel
 	}
 
 	@Override
-	public String getCode() {
-		return this.code;
+	public String getMessage() {
+		return this.messgae;
 	}
 
 	@Override
-	public void setCode(String code) {
-		this.code = code;
+	public void setMessage(String message) {
+		this.messgae = message;
 	}
 
 }
