@@ -23,7 +23,7 @@ package org.workin.commons.enums;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface LocalEnums<K> {
+public interface LocaleEnums<K> {
 	
 	/**
 	 * @description 获取当前枚举对象值的本地化消息

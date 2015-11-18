@@ -27,10 +27,10 @@ import org.workin.commons.util.MessageUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractNestableLocalEnums<K1, K2> extends
-		AbstractNestableEnums<K1, K2, String> implements LocalEnums<K1> {
+public abstract class AbstractNestableLocaleEnums<K1, K2> extends
+		AbstractNestableEnums<K1, K2, String> implements LocaleEnums<K1> {
 
-	protected AbstractNestableLocalEnums(K1 key, Enums<K2, String> value) {
+	protected AbstractNestableLocaleEnums(K1 key, Enums<K2, String> value) {
 		super(key, value);
 	}
 

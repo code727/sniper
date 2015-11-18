@@ -28,10 +28,10 @@ import org.workin.commons.util.MessageUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractLocalEnums<K> extends AbstractEnums<K, String> implements LocalEnums<K> {
+public abstract class AbstractLocaleEnums<K> extends AbstractEnums<K, String> implements LocaleEnums<K> {
 
-	protected AbstractLocalEnums(K key, String value) {
-		super(key, value);
+	protected AbstractLocaleEnums(K key, String messageKey) {
+		super(key, messageKey);
 	}
 
 	@Override
