@@ -1023,10 +1023,41 @@ public class StringUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
 	 * @return
 	 */
-	public static String uuid() {
-		return UUID.randomUUID().toString();
+	public static String UUID() {
+		return UUID(false);
 	}
 	
+	/**
+	 * @description 生成32位UUID，并指定是否转换为全大写
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param upperCase
+	 * @return
+	 */
+	public static String UUID(boolean upperCase) {
+		String uuid = UUID.randomUUID().toString();
+		return upperCase ? uuid.toUpperCase() : uuid;
+	}
+	
+	/**
+	 * @description 生成32位无符号UUID
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static String unsignedUUID() {
+		return UUID.randomUUID().toString().replaceAll("-", "");
+	}
+	
+	/**
+	 * @description 生成32位无符号UUID，并指定是否转换为全大写
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param upperCase
+	 * @return
+	 */
+	public static String unsignedUUID(boolean upperCase) {
+		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+		return upperCase ? uuid.toUpperCase() : uuid;
+	}
+		
 	/**
 	 * @description 判断指定的标记是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
