@@ -18,8 +18,8 @@
 
 package org.workin.persistence.jpa.dao;
 
-import org.workin.persistence.pagination.PagingQuery;
-import org.workin.persistence.pagination.PagingResult;
+import org.workin.support.pagination.PagingQuery;
+import org.workin.support.pagination.PagingResult;
 
 /**
  * @description Jpa分页查询接口

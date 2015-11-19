@@ -22,9 +22,9 @@ import java.util.List;
 
 import org.workin.persistence.pagination.FilterChainPagingQuery;
 import org.workin.persistence.pagination.FilterListPagingQuery;
-import org.workin.persistence.pagination.PagingResult;
 import org.workin.persistence.util.PersistencePropertyFilter;
 import org.workin.persistence.util.PersistencePropertyFilterChain;
+import org.workin.support.pagination.PagingResult;
 
 /**
  * @description 泛型过滤器查询接口

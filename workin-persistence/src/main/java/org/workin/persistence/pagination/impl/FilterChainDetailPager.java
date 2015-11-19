@@ -20,6 +20,7 @@ package org.workin.persistence.pagination.impl;
 
 import org.workin.persistence.pagination.FilterChainPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilterChain;
+import org.workin.support.pagination.impl.DetailPager;
 
 /**
  * @description 带属性过滤器链的多功能详情分页器实现类。

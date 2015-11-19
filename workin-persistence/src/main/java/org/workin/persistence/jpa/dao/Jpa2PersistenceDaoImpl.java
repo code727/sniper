@@ -38,12 +38,12 @@ import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
 import org.workin.persistence.pagination.FilterListPagingQuery;
-import org.workin.persistence.pagination.PagingQuery;
-import org.workin.persistence.pagination.PagingResult;
-import org.workin.persistence.pagination.impl.SimplePagingResult;
 import org.workin.persistence.util.PersistencePropertyFilter;
 import org.workin.persistence.util.PersistencePropertyFilterChain;
 import org.workin.persistence.util.PersistenceUtils;
+import org.workin.support.pagination.PagingQuery;
+import org.workin.support.pagination.PagingResult;
+import org.workin.support.pagination.impl.SimplePagingResult;
 
 /**
  * @description JPA2标准的持久化实现类

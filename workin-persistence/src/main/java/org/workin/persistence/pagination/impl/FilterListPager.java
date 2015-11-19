@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
+import org.workin.support.pagination.impl.SimplePager;
 
 /**
  * @description 带属性过滤器列表的分页器实现类
