@@ -34,6 +34,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.HibernateCallback;
+import org.workin.commons.pagination.PagingResult;
+import org.workin.commons.pagination.impl.SimplePagingResult;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CollectionUtils;
@@ -46,8 +48,6 @@ import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
 import org.workin.persistence.util.PersistencePropertyFilterChain;
 import org.workin.persistence.util.PersistenceUtils;
-import org.workin.support.pagination.PagingResult;
-import org.workin.support.pagination.impl.SimplePagingResult;
 
 /**
  * @description Hibernate3持久化实现类

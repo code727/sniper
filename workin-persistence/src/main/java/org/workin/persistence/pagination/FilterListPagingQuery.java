@@ -20,8 +20,8 @@ package org.workin.persistence.pagination;
 
 import java.util.List;
 
+import org.workin.commons.pagination.PagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
-import org.workin.support.pagination.PagingQuery;
 
 /**
  * @description 带属性过滤器列表的分页查询对象

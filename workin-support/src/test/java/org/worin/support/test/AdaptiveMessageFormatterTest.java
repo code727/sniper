@@ -24,8 +24,8 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.workin.commons.model.impl.ResultModel;
 import org.workin.support.message.formatter.AdaptiveMessageFormatter;
-import org.workin.support.model.impl.ResultModel;
 import org.workin.test.junit.BaseTestCase;
 
 /**

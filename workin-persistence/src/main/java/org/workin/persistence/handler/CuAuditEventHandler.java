@@ -20,7 +20,7 @@ package org.workin.persistence.handler;
 
 import java.util.Date;
 
-import org.workin.persistence.entity.CuAuditable;
+import org.workin.commons.entity.CuAuditable;
 
 /**
  * @description 新增更新审核事件处理器实现类

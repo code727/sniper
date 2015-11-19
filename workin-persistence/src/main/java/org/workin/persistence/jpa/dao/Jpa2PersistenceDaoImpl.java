@@ -32,6 +32,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
+import org.workin.commons.pagination.PagingQuery;
+import org.workin.commons.pagination.PagingResult;
+import org.workin.commons.pagination.impl.SimplePagingResult;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ClassUtils;
@@ -41,9 +44,6 @@ import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
 import org.workin.persistence.util.PersistencePropertyFilterChain;
 import org.workin.persistence.util.PersistenceUtils;
-import org.workin.support.pagination.PagingQuery;
-import org.workin.support.pagination.PagingResult;
-import org.workin.support.pagination.impl.SimplePagingResult;
 
 /**
  * @description JPA2标准的持久化实现类

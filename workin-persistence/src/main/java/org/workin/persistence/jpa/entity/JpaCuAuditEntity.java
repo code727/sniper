@@ -26,8 +26,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
+import org.workin.commons.entity.LockableCuAuditEntity;
 import org.workin.persistence.CuAuditEventListener;
-import org.workin.persistence.entity.LockableCuAuditEntity;
 
 /**
  * @description JPA新增更新审核实体抽象类

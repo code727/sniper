@@ -21,7 +21,7 @@ package org.workin.trace.domain;
 import java.lang.reflect.Method;
 import java.util.Date;
 
-import org.workin.persistence.entity.IdEntity;
+import org.workin.commons.entity.IdEntity;
 
 /**
  * @description 性能记录对象

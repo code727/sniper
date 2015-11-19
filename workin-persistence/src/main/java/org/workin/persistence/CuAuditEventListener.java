@@ -18,7 +18,7 @@
 
 package org.workin.persistence;
 
-import org.workin.persistence.entity.CuAuditable;
+import org.workin.commons.entity.CuAuditable;
 import org.workin.persistence.handler.AuditEventHandler;
 
 /**

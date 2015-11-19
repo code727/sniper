@@ -21,10 +21,10 @@ package org.workin.pay.service;
 
 import java.util.Map;
 
+import org.workin.commons.model.impl.CodeMessageModel;
+import org.workin.commons.model.impl.ResultModel;
 import org.workin.pay.domain.Order;
 import org.workin.pay.domain.PayRequest;
-import org.workin.support.model.impl.CodeMessageModel;
-import org.workin.support.model.impl.ResultModel;
 
 /**
  * @description 支付服务类

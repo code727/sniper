@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.workin.commons.pagination.impl.DetailPager;
+import org.workin.commons.pagination.impl.SimplePager;
 import org.workin.commons.util.CollectionUtils;
-import org.workin.support.pagination.impl.DetailPager;
-import org.workin.support.pagination.impl.SimplePager;
 import org.workin.test.junit.BaseTestCase;
 
 /**

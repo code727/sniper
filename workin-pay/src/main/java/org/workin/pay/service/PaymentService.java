@@ -18,8 +18,8 @@
 
 package org.workin.pay.service;
 
+import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.pay.domain.Payment;
-import org.workin.support.model.impl.CodeMessageModel;
 
 /**
  * @description 支付服务接口

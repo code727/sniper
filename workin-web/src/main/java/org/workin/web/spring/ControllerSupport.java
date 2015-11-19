@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.workin.commons.model.MessageModel;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.StringUtils;
@@ -36,7 +37,6 @@ import org.workin.spring.beans.propertyeditors.DatePropertyEditor;
 import org.workin.spring.beans.propertyeditors.StringBufferPropertyEditor;
 import org.workin.spring.beans.propertyeditors.StringBuilderPropertyEditor;
 import org.workin.support.message.resolver.MessageResolver;
-import org.workin.support.model.MessageModel;
 import org.workin.web.ServletAware;
 import org.workin.web.WebAppContextMessageResolver;
 

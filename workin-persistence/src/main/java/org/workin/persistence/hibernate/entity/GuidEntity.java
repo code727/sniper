@@ -23,7 +23,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.workin.persistence.entity.IdEntity;
+import org.workin.commons.entity.IdEntity;
 
 /**
  * @description GUID主键类型实体抽象类

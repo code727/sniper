@@ -23,7 +23,7 @@ import java.io.Serializable;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import org.workin.persistence.entity.LockableIdEntity;
+import org.workin.commons.entity.LockableIdEntity;
 
 /**
  * @description JPA可锁定的主键ID实体抽象类

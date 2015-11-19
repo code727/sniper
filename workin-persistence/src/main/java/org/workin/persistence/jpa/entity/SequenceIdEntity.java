@@ -23,7 +23,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.workin.persistence.entity.IdEntity;
+import org.workin.commons.entity.IdEntity;
 
 /**
  * @description Sequence类型的主键ID实体抽象类
