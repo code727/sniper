@@ -18,7 +18,7 @@
 
 package org.workin.pay.service;
 
-import org.workin.commons.SystemStatus;
+import org.workin.commons.enums.category.SystemStatus;
 import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.model.impl.ResultModel;
 import org.workin.http.httpclient.v4.HttpClientTemplet;
