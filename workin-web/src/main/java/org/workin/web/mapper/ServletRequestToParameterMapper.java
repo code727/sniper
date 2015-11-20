@@ -19,11 +19,13 @@
 package org.workin.web.mapper;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletRequest;
 
 import org.workin.support.mapper.AbstractMapper;
 import org.workin.support.mapper.Mapper;
+import org.workin.support.mapper.ParameterRule;
 import org.workin.support.mapper.impl.MapToParameterMapper;
 import org.workin.support.parameter.Parameter;
 
@@ -38,6 +40,11 @@ public class ServletRequestToParameterMapper<V> extends AbstractMapper<ServletRe
 	
 	public ServletRequestToParameterMapper() {
 		this.mapper = new MapToParameterMapper<V>();
+	}
+	
+	@Override
+	public void setParameterRules(Set<ParameterRule> parameterRules) {
+		this.mapper.setParameterRules(parameterRules);
 	}
 
 	@SuppressWarnings("unchecked")

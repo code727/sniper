@@ -19,7 +19,6 @@
 package org.workin.support.mapper.impl;
 
 import org.workin.commons.util.CollectionUtils;
-import org.workin.commons.util.MapUtils;
 import org.workin.support.mapper.AbstractMapper;
 import org.workin.support.mapper.ParameterRule;
 import org.workin.support.parameter.ConcurrentParameter;
