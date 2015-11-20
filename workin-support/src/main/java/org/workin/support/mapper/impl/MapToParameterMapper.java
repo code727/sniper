@@ -37,12 +37,16 @@ public class MapToParameterMapper<V> extends
 
 	@Override
 	public Parameter<String, V> mapping(Map<String, V> source) {
-		if (MapUtils.isEmpty(source) || CollectionUtils.isEmpty((parameterRules)))
+		if (MapUtils.isEmpty(source))
 			return null;
 		
 		Parameter<String, V> parameter = new ConcurrentParameter<String, V>();
-		for (ParameterRule rule : parameterRules) 
-			parameter.add(rule.getMappedName(), source.get(rule.getOriginalName()));
+		if (CollectionUtils.isNotEmpty((parameterRules)))
+			for (ParameterRule rule : parameterRules) 
+				parameter.add(rule.getMappedName(), source.get(rule.getOriginalName()));
+		else
+			parameter.setParameters(source);
+		
 		return parameter;
 	}
 	

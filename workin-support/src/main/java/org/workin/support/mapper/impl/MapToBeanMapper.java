@@ -21,6 +21,7 @@ package org.workin.support.mapper.impl;
 import java.util.Map;
 
 import org.workin.commons.util.CollectionUtils;
+import org.workin.commons.util.MapUtils;
 import org.workin.support.bean.BeanUtils;
 import org.workin.support.mapper.AbstractBeanMapper;
 import org.workin.support.mapper.ParameterRule;
@@ -39,7 +40,7 @@ public class MapToBeanMapper<V, R> extends AbstractBeanMapper<Map<String, V>, R>
 	@Override
 	public R mapping(Map<String, V> source) throws Exception {
 		R mappedBean = createMappedBean();
-		if (mappedBean != null && CollectionUtils.isNotEmpty(parameterRules)) {
+		if (MapUtils.isNotEmpty(source) && CollectionUtils.isNotEmpty(parameterRules)) {
 			for (ParameterRule rule : parameterRules) 
 				BeanUtils.set(mappedBean, rule.getMappedName(), source.get(rule.getOriginalName()));
 		}

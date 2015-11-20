@@ -464,9 +464,10 @@ public class AnnotationUtils {
 	 * @param obj
 	 * @param annotationClass
 	 * @return
+	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	public static <A extends Annotation, V> V findFirstAnnotationFieldValue(Object obj, Class<A> annotationClass) {
+	public static <A extends Annotation, V> V findFirstAnnotationFieldValue(Object obj, Class<A> annotationClass) throws Exception {
 		Field annotationField = findFirstAnnotationField(obj, annotationClass);
 		return (V) (annotationField != null ? ReflectionUtils.getFieldValue(obj, annotationField) : null);
 	}
@@ -477,8 +478,9 @@ public class AnnotationUtils {
 	 * @param obj
 	 * @param annotationClass
 	 * @return
+	 * @throws Exception 
 	 */
-	public static <A extends Annotation, V> V invokeFirstAnnotationMethod(Object obj, Class<A> annotationClass) {
+	public static <A extends Annotation, V> V invokeFirstAnnotationMethod(Object obj, Class<A> annotationClass) throws Exception {
 		return invokeFirstAnnotationMethod(obj, annotationClass, null);
 	}
 	
@@ -489,9 +491,10 @@ public class AnnotationUtils {
 	 * @param annotationClass
 	 * @param pValues
 	 * @return
+	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	public static <A extends Annotation, V> V invokeFirstAnnotationMethod(Object obj, Class<A> annotationClass, Object[] pValues) {
+	public static <A extends Annotation, V> V invokeFirstAnnotationMethod(Object obj, Class<A> annotationClass, Object[] pValues) throws Exception {
 		Method annotationMethod = findFirstAnnotationMethod(obj, annotationClass);
 		if (annotationMethod == null)
 			return null;
@@ -505,9 +508,10 @@ public class AnnotationUtils {
 	 * @param obj
 	 * @param annotationClass
 	 * @return
+	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	public static <A extends Annotation, V> V invokeFirstAnnotationGetterMethodValue(Object obj, Class<A> annotationClass) {
+	public static <A extends Annotation, V> V invokeFirstAnnotationGetterMethodValue(Object obj, Class<A> annotationClass) throws Exception {
 		Method getterMethod = findFirstAnnotationGetterMethod(obj, annotationClass);
 		if (getterMethod == null)
 			return null;
@@ -521,8 +525,9 @@ public class AnnotationUtils {
 	 * @param obj
 	 * @param annotationClass
 	 * @param pValue
+	 * @throws Exception 
 	 */
-	public static <A extends Annotation, V> void invokeFirstAnnotationSetterMethod(Object obj, Class<A> annotationClass, V pValue) {
+	public static <A extends Annotation, V> void invokeFirstAnnotationSetterMethod(Object obj, Class<A> annotationClass, V pValue) throws Exception {
 		Method setterMethod = findFirstAnnotationGetterMethod(obj, annotationClass);
 		if (setterMethod == null)
 			return;

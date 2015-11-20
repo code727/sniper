@@ -18,6 +18,8 @@
 
 package org.workin.support.mapper.impl;
 
+import java.util.Map;
+
 import org.workin.commons.util.CollectionUtils;
 import org.workin.support.bean.BeanUtils;
 import org.workin.support.mapper.AbstractMapper;
@@ -35,12 +37,15 @@ public class BeanToParameterMapper<T, V> extends AbstractMapper<T, Parameter<Str
 	@SuppressWarnings("unchecked")
 	@Override
 	public Parameter<String, V> mapping(T source) throws Exception {
-		if (source == null || CollectionUtils.isEmpty((parameterRules)))
+		if (source == null)
 			return null;
 		
 		Parameter<String, V> parameter = new ConcurrentParameter<String, V>();
-		for (ParameterRule rule : parameterRules) 
-			parameter.add(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
+		if (CollectionUtils.isNotEmpty(parameterRules)) {
+			for (ParameterRule rule : parameterRules) 
+				parameter.add(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
+		} else
+			parameter.setParameters((Map<String, V>) BeanUtils.create(source));
 		
 		return parameter;
 	}

@@ -19,11 +19,13 @@
 package org.workin.web.mapper;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletRequest;
 
-import org.workin.support.mapper.AbstractBeanMapper;
+import org.workin.support.mapper.AbstractMapper;
 import org.workin.support.mapper.Mapper;
+import org.workin.support.mapper.ParameterRule;
 import org.workin.support.mapper.impl.MapToMapMapper;
 
 /**
@@ -31,22 +33,26 @@ import org.workin.support.mapper.impl.MapToMapMapper;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ServletRequestToMapMapper extends AbstractBeanMapper<ServletRequest, Map<String, String>> {
+public class ServletRequestToMapMapper<V> extends AbstractMapper<ServletRequest, Map<String, V>> {
 	
-	private Mapper<Map<String, String>, Map<String, String>> mapper;
+	private Mapper<Map<String, Object>, Map<String, Object>> mapper;
 
-	public ServletRequestToMapMapper(String type) {
-		super(type);
-		this.mapper = new MapToMapMapper<String>();
+	public ServletRequestToMapMapper() {
+		this.mapper = new MapToMapMapper<Object>();
+	}
+	
+	@Override
+	public void setParameterRules(Set<ParameterRule> parameterRules) {
+		this.mapper.setParameterRules(parameterRules);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, String> mapping(ServletRequest source) throws Exception {
+	public Map<String, V> mapping(ServletRequest source) throws Exception {
 		if (source == null)
 			return null;
 		
-		return mapper.mapping(source.getParameterMap());
+		return (Map<String, V>) mapper.mapping(source.getParameterMap());
 	}
 
 }

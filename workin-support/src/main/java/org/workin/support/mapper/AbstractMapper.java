@@ -27,15 +27,15 @@ import java.util.Set;
  */
 public abstract class AbstractMapper<T, R> implements Mapper<T, R> {
 	
+	/** 参数规则集 */
+	protected Set<ParameterRule> parameterRules;
+	
 	public AbstractMapper() {}
 	
 	public AbstractMapper(Set<ParameterRule> parameterRules) {
 		this.parameterRules = parameterRules;
 	}
 	
-	/** 参数规则集 */
-	protected Set<ParameterRule> parameterRules;
-
 	@Override
 	public void setParameterRules(Set<ParameterRule> parameterRules) {
 		this.parameterRules = parameterRules;

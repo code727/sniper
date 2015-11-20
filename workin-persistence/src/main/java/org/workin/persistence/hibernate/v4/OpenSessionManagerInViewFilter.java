@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 
+
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.persistence.OpenEntitySessionManagerInViewFilter;
@@ -52,7 +53,11 @@ public class OpenSessionManagerInViewFilter extends
 		if (StringUtils.isBlank(filterProxy))
 			proxy = new OpenEntitySessionManagerInViewFilter();
 		else
-			proxy = ReflectionUtils.newInstance(filterProxy.trim());
+			try {
+				proxy = ReflectionUtils.newInstance(filterProxy.trim());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		
 		String exclude = config.getInitParameter(OpenEntitySessionManagerInViewFilterProxy.EXCLUDE_SUFFIXS_NAME);
 		String include = config.getInitParameter(OpenEntitySessionManagerInViewFilterProxy.INCLUDE_SUFFIXS_NAME);

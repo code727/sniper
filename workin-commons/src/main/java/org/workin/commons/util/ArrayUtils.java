@@ -1582,7 +1582,7 @@ public class ArrayUtils {
 			start = 0;
 		if (subArray == null) {
 			for (int i = start; i < array.length; i++)
-				if (array[i] == subArray)
+				if (ObjectUtils.equals(array[i], subArray))
 					return i;
 		} else {
 			
@@ -1596,7 +1596,7 @@ public class ArrayUtils {
 			int i;
 			do {
 				for (i = start++; i < length; i++) {
-					if (array[i] == subArray[subIndex++]) {
+					if (ObjectUtils.equals(array[i], subArray[subIndex++])) {
 						if (index == -1)
 							index = i;
 						
@@ -1650,7 +1650,7 @@ public class ArrayUtils {
 			start = 0;
 		if (!isArray(element)) {
 			for (int i = start; i < array.length; i++)
-				if (array[i] == element)
+				if (ObjectUtils.equals(array[i], element))
 					return i;
 		} else
 			return indexOf(array, convertWapperArray(element), start);
@@ -2445,7 +2445,7 @@ public class ArrayUtils {
 		int length = array.length;
 		if (subArray == null) {
 			for (int i = --length; i >= start; i--) {
-				if (array[i] == subArray)
+				if (ObjectUtils.equals(array[i], subArray))
 					return i;
 			}
 		} else {
@@ -2462,7 +2462,7 @@ public class ArrayUtils {
 			
 			do {
 				for (i = --length; i >= start; i--) {
-					if (array[i] == subArray[subIndex--]) {
+					if (ObjectUtils.equals(array[i], subArray[subIndex--])) {
 						index = i;
 						if (subIndex < 0) 
 							break;
@@ -2514,7 +2514,7 @@ public class ArrayUtils {
 		
 		if (!isArray(element)) {
 			for (int i = (array.length - 1); i >= start; i--)
-				if (array[i] == element)
+				if (ObjectUtils.equals(array[i], element))
 					return i;
 		} else 
 			return lastIndexOf(array, convertWapperArray(element), start);

@@ -24,6 +24,8 @@ public class User implements Serializable {
 	private Department department;
 	
 	private User user;
+	
+	private boolean vip;
 
 	public Long getId() {
 		return id;
@@ -40,21 +42,29 @@ public class User implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 
 	public Department getDepartment() {
 		return this.department;
 	}
 	
-//	public void setDepartment(Department department) {
-//		this.department = department;
-//	}
-
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public boolean isVip() {
+		return vip;
+	}
+
+	public void setVip(boolean vip) {
+		this.vip = vip;
 	}
 
 	public int getAge() {

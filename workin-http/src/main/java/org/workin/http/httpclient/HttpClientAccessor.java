@@ -81,7 +81,7 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	 * @throws NoSuchHttpMethodException 
 	 */
 	@SuppressWarnings("unchecked")
-	protected <T> T requestByName(String name, Object param) throws NoSuchHttpMethodException {
+	protected <T> T requestByName(String name, Object param) throws Exception {
 		HttpForm form = formRegister.find(name);
 		if (form == null)
 			throw new HttpFormNotFoundException("Form [name=" + name +"] not found in register.");

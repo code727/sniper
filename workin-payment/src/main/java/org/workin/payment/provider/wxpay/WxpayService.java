@@ -41,7 +41,7 @@ public class WxpayService extends AbstractThirdPaymentService {
 	}
 
 	@Override
-	public CodeMessageModel handlePayResponse(Map<String, String> payResponse) throws Exception {
+	public CodeMessageModel handlePaymentResponse(Map<String, String> paymentResponse) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -22,7 +22,7 @@ import java.util.Map;
 
 import javax.servlet.ServletRequest;
 
-import org.workin.support.mapper.AbstractBeanMapper;
+import org.workin.support.mapper.AbstractMapper;
 import org.workin.support.mapper.Mapper;
 import org.workin.support.mapper.impl.MapToParameterMapper;
 import org.workin.support.parameter.Parameter;
@@ -32,12 +32,11 @@ import org.workin.support.parameter.Parameter;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ServletRequestToParameterMapper<V> extends AbstractBeanMapper<ServletRequest, Parameter<String, V>>{
+public class ServletRequestToParameterMapper<V> extends AbstractMapper<ServletRequest, Parameter<String, V>>{
 
 	private Mapper<Map<String, V>, Parameter<String, V>> mapper;
 	
-	public ServletRequestToParameterMapper(String type) {
-		super(type);
+	public ServletRequestToParameterMapper() {
 		this.mapper = new MapToParameterMapper<V>();
 	}
 

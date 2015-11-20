@@ -19,11 +19,13 @@
 package org.workin.web.mapper;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletRequest;
 
 import org.workin.support.mapper.AbstractBeanMapper;
 import org.workin.support.mapper.Mapper;
+import org.workin.support.mapper.ParameterRule;
 import org.workin.support.mapper.impl.MapToBeanMapper;
 
 /**
@@ -31,13 +33,18 @@ import org.workin.support.mapper.impl.MapToBeanMapper;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ServletRequestToBeanMapper<R> extends AbstractBeanMapper<ServletRequest, R> {
+public class ServletRequestToBeanMapper<V, R> extends AbstractBeanMapper<ServletRequest, R> {
 	
-	private Mapper<Map<String, Object>, R> mapper;
+	private Mapper<Map<String, V>, R> mapper;
 
 	public ServletRequestToBeanMapper(String type) {
 		super(type);
-		this.mapper = new MapToBeanMapper<Object, R>(type);
+		this.mapper = new MapToBeanMapper<V, R>(type);
+	}
+	
+	@Override
+	public void setParameterRules(Set<ParameterRule> parameterRules) {
+		this.mapper.setParameterRules(parameterRules);
 	}
 	
 	@SuppressWarnings("unchecked")

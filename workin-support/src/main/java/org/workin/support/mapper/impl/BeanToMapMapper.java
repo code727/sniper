@@ -36,13 +36,17 @@ public class BeanToMapMapper<T, V> extends AbstractMapper<T, Map<String,V>> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, V> mapping(T source) throws Exception {
-		if (source == null || CollectionUtils.isEmpty((parameterRules)))
+		if (source == null)
 			return null;
 
-		Map<String, V> result = MapUtils.newHashMap();
-		for (ParameterRule rule : parameterRules) 
-			result.put(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
-
+		Map<String, V> result = null;
+		if (CollectionUtils.isNotEmpty(parameterRules)) {
+			result = MapUtils.newHashMap();
+			for (ParameterRule rule : parameterRules) 
+				result.put(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
+		} else 
+			result = BeanUtils.create(source);
+			
 		return result;
 	}
 

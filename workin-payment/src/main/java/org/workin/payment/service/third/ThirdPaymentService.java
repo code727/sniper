@@ -45,10 +45,10 @@ public interface ThirdPaymentService {
 	/**
 	 * @description 处理支付响应
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param payResponse
+	 * @param paymentResponse
 	 * @return
 	 * @throws Exception
 	 */
-	public CodeMessageModel handlePayResponse(Map<String, String> payResponse) throws Exception;
+	public CodeMessageModel handlePaymentResponse(Map<String, String> paymentResponse) throws Exception;
 		
 }

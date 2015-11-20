@@ -13,16 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年11月15日
+ * Create Date : 2015-11-15
  */
 
 package org.workin.support.mapper.impl;
 
+import org.workin.commons.util.CollectionUtils;
+import org.workin.support.bean.BeanUtils;
+import org.workin.support.mapper.AbstractBeanMapper;
+import org.workin.support.mapper.ParameterRule;
+import org.workin.support.parameter.Parameter;
+import org.workin.support.parameter.ParameterUtils;
+
 /**
- * @description
+ * @description org.workin.support.parameter.Parameter对象与Java Bean对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ParameterToBeanMapper {
+public class ParameterToBeanMapper<V, R> extends AbstractBeanMapper<Parameter<String, V>, R> {
+
+	public ParameterToBeanMapper(String type) {
+		super(type);
+	}
+
+	@Override
+	public R mapping(Parameter<String, V> source) throws Exception {
+		R mappedBean = createMappedBean();
+		
+		if (ParameterUtils.isNotEmpty(source) && CollectionUtils.isNotEmpty(parameterRules)) {
+			for (ParameterRule rule : parameterRules) 
+				BeanUtils.set(mappedBean, rule.getMappedName(), source.getValue(rule.getOriginalName()));
+		}
+		
+		return mappedBean;
+	}
 
 }

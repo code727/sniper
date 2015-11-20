@@ -24,6 +24,7 @@ import org.workin.support.mapper.AbstractMapper;
 import org.workin.support.mapper.ParameterRule;
 import org.workin.support.parameter.ConcurrentParameter;
 import org.workin.support.parameter.Parameter;
+import org.workin.support.parameter.ParameterUtils;
 
 /**
  * @description org.workin.support.parameter.Parameter对象与org.workin.support.parameter.Parameter对象之间的映射转换
@@ -34,8 +35,7 @@ public class ParameterToParameter<V> extends AbstractMapper<Parameter<String,V>,
 
 	@Override
 	public Parameter<String, V> mapping(Parameter<String, V> source) {
-		if (source == null || MapUtils.isEmpty(source.getParameters()) || 
-				CollectionUtils.isEmpty((parameterRules)))
+		if (ParameterUtils.isEmpty(source) || CollectionUtils.isEmpty((parameterRules)))
 			return source;
 		
 		Parameter<String, V> parameter = new ConcurrentParameter<String, V>();

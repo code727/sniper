@@ -63,7 +63,7 @@ public class DefaultBeanReflector implements BeanReflector {
 			// 复合成员属性
 			Class<?> memberType = ReflectionUtils.getFieldType(bean, memberName);
 			if (memberType == null) {
-				Method getter = BeanUtils.findUndefinedGetter(bean, memberName);
+				Method getter = BeanUtils.findGetter(bean, memberName);
 				if (getter != null)
 					memberType = getter.getReturnType();
 			}
@@ -90,7 +90,7 @@ public class DefaultBeanReflector implements BeanReflector {
 			Class<?> memberType = ReflectionUtils.getFieldType(bean, memberName);
 			if (memberType == null) {
 				// 若复合成员属性未找到，则查找对应的setter方法，并将setter方法的参数类型作为复合成员来处理
-				Method setter = BeanUtils.findUndefinedSetter(bean, memberName, parameterType);
+				Method setter = BeanUtils.findSetter(bean, memberName, parameterType);
 				if (setter != null)
 					memberType = setter.getParameterTypes()[0];
 			}
@@ -163,7 +163,7 @@ public class DefaultBeanReflector implements BeanReflector {
 			Class<?> memberSetterType = ReflectionUtils.getFieldType(bean, memberName);
 			if (memberSetterType == null) {
 				/* 未从属性中获取到参数类型时，则直接获取名称为"set+属性名"的方法的参数类型 */
-				Method memberSetter = BeanUtils.findUndefinedSetter(bean, memberName, null);
+				Method memberSetter = BeanUtils.findSetter(bean, memberName, null);
 				if (memberSetter != null) 
 					memberSetterType = memberSetter.getParameterTypes()[0];
 			}
@@ -192,7 +192,7 @@ public class DefaultBeanReflector implements BeanReflector {
 			String nextMemberName = StringUtils.afterFrist(expression, this.propertySeperator);
 			if (StringUtils.isNotBlank(nextMemberName)) {
 				if (memberValue == null) {
-					/* 复合成员为空，则利用此成员的默认构造函数创建一个后，则调用此setter方法或直接对其赋值 */
+					/* 复合成员为空，则利用此成员的默认构造函数创建一个后，再调用此setter方法或直接对其赋值 */
 					memberValue = BeanUtils.create(memberSetterType);
 					try {
 						set(bean, memberName, memberSetterType, memberValue);
@@ -209,7 +209,7 @@ public class DefaultBeanReflector implements BeanReflector {
 				parameterType = ReflectionUtils.getFieldType(bean, expression);
 			if (parameterType == null) {
 				/* 如果还为空，则找到它setter方法的参数类型 */
-				Method setter = BeanUtils.findUndefinedSetter(bean, expression, null);
+				Method setter = BeanUtils.findSetter(bean, expression, null);
 				if (setter != null)
 					parameterType = setter.getParameterTypes()[0];
 				else
@@ -233,7 +233,7 @@ public class DefaultBeanReflector implements BeanReflector {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T create(String className, Map<String, Object> expressionValues) throws Exception {
+	public <T, V> T create(String className, Map<String, V> expressionValues) throws Exception {
 		try {
 			AssertUtils.assertTrue(StringUtils.isNotBlank(className), "Created bean class name can not be null or blank.");
 			return (T) create(Class.forName(className.trim()), expressionValues);
@@ -245,12 +245,12 @@ public class DefaultBeanReflector implements BeanReflector {
 
 	
 	@Override
-	public <T> T create(Class<T> clazz, Map<String, Object> expressionValues) throws Exception {
+	public <T, V> T create(Class<T> clazz, Map<String, V> expressionValues) throws Exception {
 		T bean = ReflectionUtils.newInstance(clazz);
 		if (MapUtils.isNotEmpty(expressionValues)) {
-			Set<Entry<String, Object>> propertyValue = expressionValues.entrySet();
+			Set<Entry<String, V>> propertyValue = expressionValues.entrySet();
 			String propertyName;
-			for (Entry<String, Object> pv : propertyValue) {
+			for (Entry<String, V> pv : propertyValue) {
 				propertyName = pv.getKey();
 				if (StringUtils.isNotBlank(propertyName))
 					try {
@@ -276,7 +276,7 @@ public class DefaultBeanReflector implements BeanReflector {
 		if (propertyType != null) 
 			return BeanUtils.getterName(propertyName, propertyType);
 		else {
-			Method getter = BeanUtils.findUndefinedGetter(bean, propertyName);
+			Method getter = BeanUtils.findGetter(bean, propertyName);
 			return getter != null ? getter.getName() : null;
 		}
 	}
@@ -301,7 +301,7 @@ public class DefaultBeanReflector implements BeanReflector {
 			return setter != null ? setter.getName() : null;
 		} else {
 			// 若方法参数类型仍为空，则遍历整个bean对象，找到第一个与名称一致的方法(不匹配参数类型)即可
-			Method setter = BeanUtils.findUndefinedSetter(bean, propertyName, parameterType);
+			Method setter = BeanUtils.findSetter(bean, propertyName, parameterType);
 			return setter != null ? setter.getName() : null;
 		}
 	}

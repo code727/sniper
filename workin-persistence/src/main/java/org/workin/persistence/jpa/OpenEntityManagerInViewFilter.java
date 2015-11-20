@@ -49,7 +49,11 @@ public class OpenEntityManagerInViewFilter extends
 		if (StringUtils.isBlank(filterProxy))
 			proxy = new OpenEntitySessionManagerInViewFilter();
 		else
-			proxy = ReflectionUtils.newInstance(filterProxy.trim());
+			try {
+				proxy = ReflectionUtils.newInstance(filterProxy.trim());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 		String exclude = config.getInitParameter(
 				OpenEntitySessionManagerInViewFilterProxy.EXCLUDE_SUFFIXS_NAME);

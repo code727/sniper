@@ -29,7 +29,7 @@ import org.workin.support.mapper.ParameterRule;
  * @version 1.0
  */
 public class BeanToBeanMapper<T, R> extends AbstractBeanMapper<T, R> {
-
+	
 	public BeanToBeanMapper(String type) {
 		super(type);
 	}
@@ -37,7 +37,7 @@ public class BeanToBeanMapper<T, R> extends AbstractBeanMapper<T, R> {
 	@Override
 	public R mapping(T source) throws Exception {
 		R mappedBean = createMappedBean();
-		if (mappedBean != null && CollectionUtils.isNotEmpty(parameterRules)) {
+		if (source != null && CollectionUtils.isNotEmpty(parameterRules)) {
 			for (ParameterRule rule : parameterRules) 
 				BeanUtils.set(mappedBean, rule.getMappedName(), BeanUtils.get(source, rule.getOriginalName()));
 		}

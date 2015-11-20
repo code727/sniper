@@ -489,7 +489,7 @@ public abstract class RedisDaoSupport implements InitializingBean {
 			return (List<V>) ReflectionUtils.invokeMethod(this, dataType.code() + "TypeList", 
 					new Class<?>[] { RedisConnection.class, int.class, byte[].class },
 					new Object[] { connection, dbIndex, targetKey });
-		} catch (NoSuchMethodException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

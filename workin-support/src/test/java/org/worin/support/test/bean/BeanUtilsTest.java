@@ -5,6 +5,9 @@
 
 package org.worin.support.test.bean;
 
+import java.lang.reflect.Method;
+import java.util.List;
+
 import org.junit.Test;
 import org.workin.support.bean.BeanUtils;
 
@@ -17,10 +20,20 @@ public class BeanUtilsTest {
 	
 	@Test
 	public void testInvokeMethod() throws Exception {
-		User user = new User();
+		User user = BeanUtils.create(User.class);
 		String expression = "department.";
 		BeanUtils.set(user, expression, new Department());
 		System.out.println(BeanUtils.get(user, expression));
+		
+		List<Method> methods = BeanUtils.findAllSetter(user);
+		for (Method method : methods)
+			System.out.println(method.getName());
+		
+		methods = BeanUtils.findAllGetter(user);
+		for (Method method : methods)
+			System.out.println(method.getName());
+		
+		System.out.println(BeanUtils.create(user, new String[]{"id"}));
 	}
 
 }

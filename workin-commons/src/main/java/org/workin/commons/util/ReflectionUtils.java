@@ -20,7 +20,6 @@ package org.workin.commons.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
@@ -361,9 +360,9 @@ public class ReflectionUtils {
 	 * @param object
 	 * @param fieldName
 	 * @return
-	 * @throws NoSuchFieldException
+	 * @throws Exception
 	 */
-	public static <V> V getFieldValue(Object object, String fieldName) throws NoSuchFieldException {
+	public static <V> V getFieldValue(Object object, String fieldName) throws Exception {
 		Field field = getField(object, fieldName);
 		if (field == null)
 			throw new NoSuchFieldException("No such target field [" + StringUtils.safeString(fieldName) + "]," + 
@@ -378,8 +377,9 @@ public class ReflectionUtils {
 	 * @param object
 	 * @param field
 	 * @return
+	 * @throws Exception 
 	 */
-	public static <V> V getFieldValue(Object object, Field field) {
+	public static <V> V getFieldValue(Object object, Field field) throws Exception {
 		AssertUtils.assertNotNull(object, "Target object can not be null.");
 		return Supports.getAccessibleFieldValue(object, field);
 	}
@@ -390,9 +390,9 @@ public class ReflectionUtils {
 	 * @param target
 	 * @param fieldName
 	 * @param value
-	 * @throws NoSuchFieldException 
+	 * @throws Exception 
 	 */
-	public static void setFieldValue(Object object, String fieldName, Object value) throws NoSuchFieldException {
+	public static void setFieldValue(Object object, String fieldName, Object value) throws Exception {
 		Field field = getField(object, fieldName);
 		if (field == null)
 			throw new NoSuchFieldException("No such target field [" + StringUtils.safeString(fieldName) + "]," + 
@@ -406,9 +406,9 @@ public class ReflectionUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param fieldValues
-	 * @throws NoSuchFieldException 
+	 * @throws Exception 
 	 */
-	public static void setFieldValue(Object object, Map<String, Object> fieldValues) throws NoSuchFieldException {
+	public static void setFieldValue(Object object, Map<String, Object> fieldValues) throws Exception {
 		AssertUtils.assertTrue(MapUtils.isNotEmpty(fieldValues), "Field values map can not be empty");
 		
 		if (object != null && MapUtils.isNotEmpty(fieldValues)) {
@@ -424,8 +424,9 @@ public class ReflectionUtils {
 	 * @param object
 	 * @param field
 	 * @param value
+	 * @throws Exception 
 	 */
-	public static void setFieldValue(Object object, Field field, Object value) {
+	public static void setFieldValue(Object object, Field field, Object value) throws Exception {
 		AssertUtils.assertNotNull(object, "Target object can not be null.");
 		Supports.setAccessibleFieldValue(object, field, value);
 	}
@@ -435,8 +436,9 @@ public class ReflectionUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param className
 	 * @return
+	 * @throws Exception 
 	 */
-	public static <T> T newInstance(String className) {
+	public static <T> T newInstance(String className) throws Exception {
 		return newInstance(className, null, null);
 	}
 	
@@ -447,15 +449,11 @@ public class ReflectionUtils {
 	 * @param pTypes
 	 * @param pValues
 	 * @return
+	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T newInstance(String className, Class<?>[] pTypes, Object[] pValues) {
-		try {
-			return (T) newInstance(Class.forName(className), pTypes, pValues);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public static <T> T newInstance(String className, Class<?>[] pTypes, Object[] pValues) throws Exception {
+		return (T) newInstance(Class.forName(className), pTypes, pValues);
 	}
 	
 	/**
@@ -463,8 +461,9 @@ public class ReflectionUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c
 	 * @return
+	 * @throws Exception 
 	 */
-	public static <T> T newInstance(Class<T> c) {
+	public static <T> T newInstance(Class<T> c) throws Exception {
 		return newInstance(c, null, null);
 	}
 	
@@ -476,21 +475,15 @@ public class ReflectionUtils {
 	 * @param pValues 构造函数中对应的参数值
 	 * @return
 	 */
-	public static <T> T newInstance(Class<T> c, Class<?>[] pTypes, Object[] pValues) {
+	public static <T> T newInstance(Class<T> c, Class<?>[] pTypes, Object[] pValues) throws Exception {
 		AssertUtils.assertNotNull(c, "Can not be create instance by null class.");
-		
-		try {
-			if (ArrayUtils.isNotEmpty(pTypes)) {
-				Constructor<T> constructor = c.getDeclaredConstructor(pTypes);
-				constructor.setAccessible(true);
-				return constructor.newInstance(pValues);
-			} else
-				// 参数类型为空时，则调用目标无参数的构造函数，因此忽略掉传入的参数值
-				return c.newInstance();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		return null;
+		if (ArrayUtils.isNotEmpty(pTypes)) {
+			Constructor<T> constructor = c.getDeclaredConstructor(pTypes);
+			constructor.setAccessible(true);
+			return constructor.newInstance(pValues);
+		} else
+			// 参数类型为空时，则调用目标无参数的构造函数，因此忽略掉传入的参数值
+			return c.newInstance();
 	}
 	
 	/**
@@ -499,9 +492,9 @@ public class ReflectionUtils {
 	 * @param target
 	 * @param methodName
 	 * @return
-	 * @throws NoSuchMethodException 
+	 * @throws Exception 
 	 */
-	public static Object invokeMethod(Object target, String methodName) throws NoSuchMethodException {
+	public static Object invokeMethod(Object target, String methodName) throws Exception {
 		return invokeMethod(target, methodName, null, null);
 	}
 	
@@ -513,10 +506,10 @@ public class ReflectionUtils {
 	 * @param pTypes 方法中各参数对应的类型
 	 * @param pValues
 	 * @return
-	 * @throws NoSuchMethodException 
+	 * @throws Exception 
 	 */
 	public static Object invokeMethod(Object target, String methodName,
-			Class<?>[] pTypes, Object[] pValues) throws NoSuchMethodException {
+			Class<?>[] pTypes, Object[] pValues) throws Exception {
 		Method method = getMethod(target, methodName, pTypes);
 		if (method == null)
 			throw new NoSuchMethodException("No such invoked target method [" + StringUtils.safeString(methodName) + "]," + 
@@ -538,18 +531,13 @@ public class ReflectionUtils {
 		 * @param object
 		 * @param field
 		 * @param value
+		 * @throws Exception
 		 */
-		public static void setAccessibleFieldValue(Object object, Field field, Object value) {
+		public static void setAccessibleFieldValue(Object object, Field field, Object value) throws Exception {
 			AssertUtils.assertNotNull(field, "Target field can not be null.");
 			
 			field.setAccessible(true);
-			try {
-				field.set(object, value);
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
+			field.set(object, value);
 		}
 		
 		/**
@@ -558,20 +546,14 @@ public class ReflectionUtils {
 		 * @param object
 		 * @param field
 		 * @return
+		 * @throws Exception
 		 */
 		@SuppressWarnings("unchecked")
-		public static <V> V getAccessibleFieldValue(Object object, Field field) {
+		public static <V> V getAccessibleFieldValue(Object object, Field field) throws Exception {
 			AssertUtils.assertNotNull(field, "Target field can not be null.");
 			
 			field.setAccessible(true);
-			try {
-				return (V) field.get(object);
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-			return null;
+			return (V) field.get(object);
 		}
 		
 		/**
@@ -582,31 +564,24 @@ public class ReflectionUtils {
 		 * @param pTypes
 		 * @param pValues
 		 * @return
+		 * @throws Exception
 		 */
-		public static Object invokeAccessibleMethod(Object target, Method method, Class<?>[] pTypes, Object[] pValues) {
+		public static Object invokeAccessibleMethod(Object target, Method method, Class<?>[] pTypes, Object[] pValues) throws Exception {
 			method.setAccessible(true);
-			try {
 				// 参数类型或值列表为空时，则调用目标无参数的方法
-				if (ArrayUtils.isEmpty(pTypes) || ArrayUtils.isEmpty(pValues))
-					return method.invoke(target, new Object[] {});
-				
-				int typeCount = pTypes.length;
-				int valueCount = pValues.length;
-				if (typeCount < valueCount) {
-					/* 实际的类型个数小于值列表个数时，则忽略多余的参数值 */
-					Object[] values = new Object[typeCount];
-					System.arraycopy(pValues, 0, values, 0, typeCount);
-					return method.invoke(target, values);
-				}
-				return method.invoke(target, pValues);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
+			if (ArrayUtils.isEmpty(pTypes) || ArrayUtils.isEmpty(pValues))
+				return method.invoke(target, new Object[] {});
+
+			int typeCount = pTypes.length;
+			int valueCount = pValues.length;
+			if (typeCount < valueCount) {
+				/* 实际的类型个数小于值列表个数时，则忽略多余的参数值 */
+				Object[] values = new Object[typeCount];
+				System.arraycopy(pValues, 0, values, 0, typeCount);
+				return method.invoke(target, values);
 			}
-			return null;
+			
+			return method.invoke(target, pValues);
 		}
 	}
 	

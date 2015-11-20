@@ -25,6 +25,7 @@ import org.workin.commons.util.MapUtils;
 import org.workin.support.mapper.AbstractMapper;
 import org.workin.support.mapper.ParameterRule;
 import org.workin.support.parameter.Parameter;
+import org.workin.support.parameter.ParameterUtils;
 
 /**
  * @description  org.workin.support.parameter.Parameter对象与Map对象之间的映射转换
@@ -36,13 +37,16 @@ public class ParameterToMapMapper<V> extends
 
 	@Override
 	public Map<String, V> mapping(Parameter<String, V> source) {
-		if (source == null || MapUtils.isEmpty(source.getParameters()) || 
-				CollectionUtils.isEmpty((parameterRules)))
+		if (ParameterUtils.isEmpty(source))
 			return null;
 		
-		 Map<String, V> map = MapUtils.newHashMap();
-		 for (ParameterRule rule : parameterRules) 
-			 map.put(rule.getMappedName(), source.getValue(rule.getOriginalName()));
+		 Map<String, V> map = null;
+		 if (CollectionUtils.isNotEmpty(parameterRules)) {
+			 map = MapUtils.newHashMap();
+			 for (ParameterRule rule : parameterRules) 
+				 map.put(rule.getMappedName(), source.getValue(rule.getOriginalName()));
+		 } else
+			 map = source.getParameters();
 		 
 		 return map;
 	}

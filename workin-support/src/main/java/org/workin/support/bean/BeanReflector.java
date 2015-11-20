@@ -93,7 +93,7 @@ public interface BeanReflector {
 	 * @return
 	 * @throws Exception
 	 */
-	public <T> T create(String className, Map<String, Object> expressionValues) throws Exception;
+	public <T, V> T create(String className, Map<String, V> expressionValues) throws Exception;
 	
 	/**
 	 * @description 创建Bean实例，并调用各表达式所指向的最后一个属性对应的setter方法赋值
@@ -103,6 +103,6 @@ public interface BeanReflector {
 	 * @return
 	 * @throws Exception
 	 */
-	public <T> T create(Class<T> clazz, Map<String, Object> expressionValues) throws Exception;
-
+	public <T, V> T create(Class<T> clazz, Map<String, V> expressionValues) throws Exception;
+	
 }

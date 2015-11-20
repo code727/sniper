@@ -126,10 +126,10 @@ public class AlipayService extends AbstractThirdPaymentService {
 	}
 
 	@Override
-	public CodeMessageModel handlePayResponse(Map<String, String> payResponse) throws Exception {
+	public CodeMessageModel handlePaymentResponse(Map<String, String> paymentResponse) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
 		Map<String, Object> parameters = MapUtils.newHashMap();
-		parameters.put("notify_id", payResponse.get("notify_id"));
+		parameters.put("notify_id", paymentResponse.get("notify_id"));
 		
 		// 发送支付宝验证请求，并返回验证结果状态
 		String status = httpClientTemplet.request("alipayNotify", parameters);
@@ -137,7 +137,7 @@ public class AlipayService extends AbstractThirdPaymentService {
 		String code = ThirdValidationResult.getValidationResultCode(status);
 		
 		if (ValidationResult.SUCCESS.getKey().equals(code)) {
-			result = updatePayment(payResponse);
+			result = updatePayment(paymentResponse);
 		} else {
 			/* 验证未成功时，则直接返回状态码和验证信息，不做充值记录的处理 */
 			result.setCode(code);
