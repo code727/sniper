@@ -129,9 +129,19 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	 * @param result
 	 */
 	protected void setLocaleMessage(MessageModel model) {
+		setLocaleMessage(model, null);
+	}
+	
+	/**
+	 * @description 设置消息模型对象中的本地参数化消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param model
+	 * @param params
+	 */
+	protected void setLocaleMessage(MessageModel model, Object[] params) {
 		String message = model.getMessage();
 		if (StringUtils.isNotBlank(message)) 
-			model.setMessage(getMessage(message));
+			model.setMessage(getMessage(message, params));
 	}
 		
 	/**
