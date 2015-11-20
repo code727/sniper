@@ -18,6 +18,7 @@
 
 package org.workin.payment.service.third;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.enums.category.O2OTypes;
 import org.workin.commons.enums.category.SystemStatus;
 import org.workin.commons.model.impl.CodeMessageModel;
@@ -40,9 +41,11 @@ public abstract class AbstractThirdPaymentService extends PaymentServiceSupport
 		implements ThirdPaymentService {
 	
 	/** 调用第三方接口所用到的HTTP调用模板 */
+	@Autowired
 	protected HttpClientTemplet httpClientTemplet; 
 	
 	/** 第三方应用上下文配置参数项 */
+	@Autowired
 	protected ApplicationContextParameter<Object, Object> contextParameter;
 	
 	public HttpClientTemplet getHttpClientTemplet() {
