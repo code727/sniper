@@ -13,45 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-17
+ * Create Date : 2015-11-16
  */
 
-package org.workin.payment.service;
+package org.workin.payment.service.third;
+
+
+import java.util.Map;
 
 import org.workin.commons.model.impl.CodeMessageModel;
-import org.workin.payment.domain.Payment;
+import org.workin.commons.model.impl.ResultModel;
+import org.workin.payment.domain.Order;
+import org.workin.payment.model.PaymentRequest;
 
 /**
- * @description 支付基础服务接口
+ * @description 第三方支付服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface PaymentService {
+public interface ThirdPaymentService {
+	
+	/** 
+	 * @description 根据订单创建支付请求数据对象模型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param order
+	 * @return
+	 * @throws Exception 
+	 */
+	ResultModel<PaymentRequest> createPaymentRequest(Order order) throws Exception;
 	
 	/**
-	 * @description 保存支付记录
+	 * @description 处理支付响应
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param payment
+	 * @param payResponse
 	 * @return
 	 * @throws Exception
 	 */
-	public CodeMessageModel save(Payment payment) throws Exception;
-	
-	/**
-	 * @description 根据订单编号查询支付记录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param orderId
-	 * @return
-	 */
-	public Payment findByOrderId(String orderId);
-	
-	/**
-	 * @description 更新支付记录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param payment
-	 * @return
-	 * @throws Exception
-	 */
-	public CodeMessageModel update(Payment payment) throws Exception;
-
+	public CodeMessageModel handlePayResponse(Map<String, String> payResponse) throws Exception;
+		
 }

@@ -34,7 +34,7 @@ public class Order implements Serializable {
 	/** ID标识 */
 	private Long id;
 	
-	/** 下单用户登录名 */
+	/** 下单用户的账号 */
 	private String loginName;
 	
 	/** 订单编号 */
@@ -43,7 +43,7 @@ public class Order implements Serializable {
 	/** o2o类型 */
 	private int o2oType;
 	
-	/** 选择的第三方支付类型 */
+	/** 选择的支付类型 */
 	private int type;
 	
 	/** 交易金额 */
@@ -69,6 +69,12 @@ public class Order implements Serializable {
 	
 	/** 下单时间 */
 	private Date submitTime;
+	
+	/** 针对于线下用户输入的账号 */
+	private transient String account;
+	
+	/** 针对于线下用户输入的密码 */
+	private transient String password;
 
 	public Long getId() {
 		return id;
@@ -172,6 +178,22 @@ public class Order implements Serializable {
 
 	public void setO2oType(int o2oType) {
 		this.o2oType = o2oType;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

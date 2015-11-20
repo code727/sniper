@@ -68,7 +68,7 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	 * @param thirdCode
 	 * @return
 	 */
-	public static PaymentStatus getPayStatus(String thirdCode) {
+	public static PaymentStatus getPaymentStatus(String thirdCode) {
 		return (PaymentStatus) PAY_STATUS_MAP.get(thirdCode);
 	}
 	
@@ -78,8 +78,8 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	 * @param thirdCode
 	 * @return
 	 */
-	public static int getPayStatusCode(String thirdCode) {
-		PaymentStatus payStatus = getPayStatus(thirdCode);
+	public static int getPaymentStatusCode(String thirdCode) {
+		PaymentStatus payStatus = getPaymentStatus(thirdCode);
 		return payStatus != null ? payStatus.getKey() : -1;
 	}
 	
@@ -89,8 +89,8 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	 * @param thirdPayStatuCode
 	 * @return
 	 */
-	public static String getPayMessage(String thirdCode) {
-		return getPayMessage(thirdCode, null);
+	public static String getPaymentMessage(String thirdCode) {
+		return getPaymentMessage(thirdCode, null);
 	}
 		
 	/**
@@ -100,8 +100,8 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	 * @param params
 	 * @return
 	 */
-	public static String getPayMessage(String thirdCode, Object[] params) {
-		PaymentStatus payStatus = getPayStatus(thirdCode);
+	public static String getPaymentMessage(String thirdCode, Object[] params) {
+		PaymentStatus payStatus = getPaymentStatus(thirdCode);
 		return payStatus != null ? payStatus.getMessage(params) : StringUtils.EMPTY_STRING;
 	}
 	

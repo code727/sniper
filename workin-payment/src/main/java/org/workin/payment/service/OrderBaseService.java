@@ -26,7 +26,7 @@ import org.workin.payment.domain.Order;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface OrderService {
+public interface OrderBaseService {
 	
 	/**
 	 * @description 保存订单
@@ -43,5 +43,14 @@ public interface OrderService {
 	 * @return 
 	 */
 	public Order findByOrderId(String orderId) throws Exception;
+	
+	/**
+	 * @description 获取线下充值用户的登录名
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param userAccount
+	 * @param password
+	 * @return
+	 */
+	public String findUserLoginName(String userAccount, String password);
 
 }
