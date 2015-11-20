@@ -24,11 +24,11 @@ import org.workin.commons.util.DateUtils;
 import org.workin.support.generator.adapter.MinLengthIDGeneratorAdapter;
 
 /**
- * @description 时间戳序列ID生成器
+ * @description 日期时间序列ID生成器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class TimestampIDGenerator extends MinLengthIDGeneratorAdapter {
+public class DateTimeIDGenerator extends MinLengthIDGeneratorAdapter {
 	
 	/** 序列格式 */
 	private String format = "yyyyMMddHHmmssSSS";

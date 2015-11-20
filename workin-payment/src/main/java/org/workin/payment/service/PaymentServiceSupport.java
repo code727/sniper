@@ -21,6 +21,8 @@ package org.workin.payment.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.payment.signature.Signature;
 import org.workin.spring.beans.CheckableInitializingBean;
+import org.workin.support.generator.DateTimeIDGenerator;
+import org.workin.support.generator.IDGenerator;
 
 /**
  * @description 支付服务支持抽象类
@@ -40,6 +42,9 @@ public abstract class PaymentServiceSupport extends CheckableInitializingBean {
 	/** 签名器 */
 	@Autowired(required = false)
 	protected Signature signature;
+	
+	/** 订单号生成器 */
+	protected IDGenerator orderIdGenerator;
 	
 	public OrderBaseService getOrderService() {
 		return orderService;
@@ -63,6 +68,14 @@ public abstract class PaymentServiceSupport extends CheckableInitializingBean {
 
 	public void setSignature(Signature signature) {
 		this.signature = signature;
+	}
+	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		super.afterPropertiesSet();
+		
+		if (this.orderIdGenerator == null)
+			this.orderIdGenerator = new DateTimeIDGenerator();
 	}
 	
 	protected void checkProperties() throws IllegalArgumentException {

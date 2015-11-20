@@ -18,6 +18,7 @@
 
 package org.workin.payment.enums.payment;
 
+import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
@@ -25,7 +26,7 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum PaymentTypes {
+public enum PaymentType {
 	
 	ALIPAY("AP"),
 	WXPAY("WP");
@@ -36,15 +37,15 @@ public enum PaymentTypes {
 	/** 订单编号前缀标识 */
 	private String orderSuffix;
 	
-	private PaymentTypes(String orderFlage) {
+	private PaymentType(String orderFlage) {
         this(orderFlage, true);
 	}
 	
-	private PaymentTypes(String orderFlage, boolean prefix) {
+	private PaymentType(String orderFlage, boolean prefix) {
         this((prefix ? orderFlage : null), (prefix ? null : orderFlage));
 	}
 	
-	private PaymentTypes(String orderPrefix, String orderSuffix) {
+	private PaymentType(String orderPrefix, String orderSuffix) {
         this.orderPrefix = StringUtils.safeString(orderPrefix);
         this.orderSuffix = StringUtils.safeString(orderSuffix);
 	}
@@ -83,8 +84,8 @@ public enum PaymentTypes {
 	 * @return
 	 */
 	public static String getOrderPrefix(int type) {
-		PaymentTypes[] values = PaymentTypes.values();
-		for (PaymentTypes payTypes : values) {
+		PaymentType[] values = PaymentType.values();
+		for (PaymentType payTypes : values) {
 			if (payTypes.ordinal() == type)
 				return payTypes.getOrderPrefix();
 		}
@@ -98,12 +99,32 @@ public enum PaymentTypes {
 	 * @return
 	 */
 	public static String getOrderSuffix(int type) {
-		PaymentTypes[] values = PaymentTypes.values();
-		for (PaymentTypes payTypes : values) {
+		PaymentType[] values = PaymentType.values();
+		for (PaymentType payTypes : values) {
 			if (payTypes.ordinal() == type)
 				return payTypes.getOrderSuffix();
 		}
 		return StringUtils.EMPTY_STRING;
 	}
 	
+	/**
+	 * @description 判断指定的支付类型是否有效
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param type
+	 * @return
+	 */
+	public static boolean isValid(int type) {
+		return get(type) != null;
+	}
+	
+	/**
+	 * @description 获取指定类型的对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param type
+	 * @return
+	 */
+	public static PaymentType get(int type) {
+		return ArrayUtils.get(PaymentType.values(), type);
+	}
+		
 }

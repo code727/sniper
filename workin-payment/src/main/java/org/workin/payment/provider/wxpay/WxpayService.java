@@ -33,15 +33,15 @@ import org.workin.payment.service.third.AbstractThirdPaymentService;
  */
 @Service
 public class WxpayService extends AbstractThirdPaymentService {
-
+	
 	@Override
-	public CodeMessageModel handlePayResponse(Map<String, String> payResponse) throws Exception {
+	protected PaymentRequest createPaymentParameters(Order order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected PaymentRequest createPayParameters(Order order) {
+	public CodeMessageModel handlePayResponse(Map<String, String> payResponse) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

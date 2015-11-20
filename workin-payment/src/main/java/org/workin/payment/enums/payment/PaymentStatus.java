@@ -47,7 +47,7 @@ public final class PaymentStatus extends AbstractLocaleEnums<Integer> {
 	public static final PaymentStatus TRADE_CLOSED = new PaymentStatus(4,"msg.trade_closed");
 	
 	/** 修改交易价格 */
-	public static final PaymentStatus MODIFY_TRADEBASE_TOTALFEE = new PaymentStatus(5, "msg.modify.tradebase.totalfee");
+	public static final PaymentStatus MODIFY_TRADEBASE_TOTALFEE = new PaymentStatus(5, "msg.modify_tradebase_totalfee");
 	
 
 }

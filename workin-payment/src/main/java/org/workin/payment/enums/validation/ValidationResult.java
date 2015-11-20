@@ -32,12 +32,12 @@ public final class ValidationResult extends AbstractLocaleEnums<String> {
 	}
 	
 	/** 验证无效 */
-	public static final ValidationResult INVALID = new ValidationResult("0000", "msg.pay.validation.invalid");
+	public static final ValidationResult INVALID = new ValidationResult("0000", "msg.info.payment.validation.invalid");
 	
 	/** 验证无效 */
-	public static final ValidationResult FAILED = new ValidationResult("-0001", "msg.pay.validation.failed");
+	public static final ValidationResult FAILED = new ValidationResult("-0001", "msg.info.payment.validation.failed");
 	
 	/** 验证成功 */
-	public static final ValidationResult SUCCESS = new ValidationResult("0001", "msg.pay.validation.success");
+	public static final ValidationResult SUCCESS = new ValidationResult("0001", "msg.info.payment.validation.success");
 
 }

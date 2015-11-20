@@ -28,6 +28,7 @@ import org.workin.http.httpclient.v4.HttpClientTemplet;
 import org.workin.payment.domain.Order;
 import org.workin.payment.domain.Payment;
 import org.workin.payment.enums.payment.PaymentStatus;
+import org.workin.payment.enums.payment.PaymentType;
 import org.workin.payment.model.PaymentRequest;
 import org.workin.payment.service.PaymentServiceSupport;
 import org.workin.spring.context.ApplicationContextParameter;
@@ -85,27 +86,32 @@ public abstract class AbstractThirdPaymentService extends PaymentServiceSupport
 				order.setLoginName(loginName);
 			else {
 				resultModel.setCode(SystemStatus.FAILED.getKey());
-				resultModel.setMessage("ms.account.invalid");
+				resultModel.setMessage("msg.error.invalid.payment.account");
 				return resultModel;
 			}
 		}
 		
-		// 第二步：先保存订单记录
-		CodeMessageModel result = orderService.save(order);
-		if (SystemStatus.SUCCESS.getKey().equals(result.getCode())) {
-			// 第三步：订单记录保存成功后，再根据订单保存支付记录 
-			result = savePaymentByOrder(order);
+		PaymentType paymentType = PaymentType.get(order.getType());
+		if (paymentType != null) {
+			// 第二步：验证完订单支付类型有效后，则利用生成器生成编号
+			String orderId = orderIdGenerator.generate(paymentType.getOrderPrefix(), paymentType.getOrderSuffix());
+			order.setOrderId(orderId);
+			
+			// 第三步：先保存订单记录
+			CodeMessageModel result = orderService.save(order);
 			if (SystemStatus.SUCCESS.getKey().equals(result.getCode())) {
-				/* 上述两步完成后，再根据订单记录创建支付请求后包装在返回数据对象模型中  */
-				resultModel.setCode(SystemStatus.SUCCESS.getKey());
-				resultModel.setDate(createPayParameters(order));
-			} else {
-				resultModel.setCode(SystemStatus.FAILED.getKey());
-				resultModel.setMessage(result.getMessage());
+				// 第四步：订单记录保存成功后，再根据订单保存支付记录 
+				result = savePaymentByOrder(order);
+				if (SystemStatus.SUCCESS.getKey().equals(result.getCode())) {
+					/* 正常结束之前，根据订单记录创建支付请求后包装在返回数据对象模型中  */
+					resultModel.setCode(SystemStatus.SUCCESS.getKey());
+					resultModel.setDate(createPaymentParameters(order));
+				} 
 			}
 		} else {
 			resultModel.setCode(SystemStatus.FAILED.getKey());
-			resultModel.setMessage(result.getMessage());
+			resultModel.setMessage("msg.error.invalid.payment.type");
+			return resultModel;
 		}
 		
 		return resultModel;
@@ -135,6 +141,6 @@ public abstract class AbstractThirdPaymentService extends PaymentServiceSupport
 	 * @param order
 	 * @return 
 	 */
-	protected abstract PaymentRequest createPayParameters(Order order);
+	protected abstract PaymentRequest createPaymentParameters(Order order);
 	
 }

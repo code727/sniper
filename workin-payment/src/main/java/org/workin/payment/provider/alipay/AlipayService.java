@@ -46,7 +46,7 @@ import org.workin.payment.service.third.AbstractThirdPaymentService;
 public class AlipayService extends AbstractThirdPaymentService {
 	
 	@Override
-	public PaymentRequest createPayParameters(Order order) {
+	public PaymentRequest createPaymentParameters(Order order) {
 		Map<String, Object> payParameters = MapUtils.newHashMap();
 		// 接口名称
 		payParameters.put("service", contextParameter.getValue("alipay.pay.service"));
