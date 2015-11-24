@@ -23,8 +23,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.MessageUtils;
-import org.workin.commons.util.StringUtils;
-import org.workin.payment.signature.Signature;
+import org.workin.payment.signature.AbstractSignature;
 
 /**
  * @description 支付宝签名实现类
@@ -32,14 +31,11 @@ import org.workin.payment.signature.Signature;
  * @version 1.0
  */
 @Component
-public class AlipaySignature implements Signature {
+public class AlipaySignature extends AbstractSignature {
 
 	@Override
-	public String excute(Map<String, Object> payParameters, String type) {
-		if (StringUtils.isBlank(type))
-			type = "MD5";
-		
-		return MessageUtils.encrypt(MapUtils.joinQueryString(payParameters), type);
+	public String excute(Map<String, Object> paymentParameters) {
+		return MessageUtils.encrypt(MapUtils.joinQueryString(paymentParameters), getType());
 	}
 
 }

@@ -46,7 +46,15 @@ import org.workin.payment.service.third.AbstractThirdPaymentService;
 public class AlipayService extends AbstractThirdPaymentService {
 	
 	@Override
-	public PaymentRequest createPaymentParameters(Order order) {
+	public void afterPropertiesSet() throws Exception {
+		super.afterPropertiesSet();
+		
+		if (this.signature == null)
+			this.signature = new AlipaySignature();
+	}
+	
+	@Override
+	public PaymentRequest createPaymentParameters(Order order, Map<String,String> parameters) {
 		Map<String, Object> payParameters = MapUtils.newHashMap();
 		// 接口名称
 		payParameters.put("service", contextParameter.getValue("alipay.pay.service"));
@@ -61,7 +69,7 @@ public class AlipayService extends AbstractThirdPaymentService {
 			// 卖家ID
 			payParameters.put("seller_id", contextParameter.getValue("alipay.seller.id"));
 		
-		// 通知URL
+		// 通知回调地址
 		payParameters.put("notify_url", contextParameter.getValue("alipay.notify.url"));
 		
 		String returnUrl = contextParameter.getValue("alipay.return.url", String.class);
@@ -70,7 +78,7 @@ public class AlipayService extends AbstractThirdPaymentService {
 			payParameters.put("return_url", contextParameter.getValue("alipay.return.url"));
 		
 		// 商品名称
-		payParameters.put("subject", order.getMercName());
+		payParameters.put("subject", order.getProductName());
 		// 商品描述
 		String description = order.getDescription();
 		if (StringUtils.isNotBlank(description))
@@ -103,14 +111,10 @@ public class AlipayService extends AbstractThirdPaymentService {
 		// 物流支付类型
 		payParameters.put("logistics_payment", contextParameter.getValue("alipay.logistics.payment"));
 		
-		String signType = contextParameter.getValue("alipay.sign.type", String.class);
-		if (StringUtils.isBlank(signType))
-			signType = "MD5";
-		
 		// 签名
-		payParameters.put("sign", signature.excute(payParameters, signType));
+		payParameters.put("sign", signature.excute(payParameters));
 		// 签名类型
-		payParameters.put("sign_type", signType);
+		payParameters.put("sign_type", signature.getType());
 		
 		String inputCharset = contextParameter.getValue("alipay.input.charset", String.class);
 		if (StringUtils.isBlank(inputCharset))
@@ -120,7 +124,7 @@ public class AlipayService extends AbstractThirdPaymentService {
 		payParameters.put("_input_charset", inputCharset);
 		
 		PaymentRequest request = new PaymentRequest();
-		request.setUrl(MapUtils.joinQueryString(payParameters));
+		request.setUrl(contextParameter.getValue("alipay.request.url") + "?" + MapUtils.joinQueryString(payParameters));
 		request.setOrderId(order.getOrderId());
 		return request;
 	}
@@ -153,18 +157,18 @@ public class AlipayService extends AbstractThirdPaymentService {
 	 * @return
 	 * @throws Exception
 	 */
-	protected CodeMessageModel updatePayment(Map<String, String> payResponse) throws Exception {
-		String orderId = payResponse.get("out_trade_no");
-		Payment payment = paymentService.findByOrderId(orderId);
+	protected CodeMessageModel updatePayment(Map<String, String> paymentResponse) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
+		String orderId = paymentResponse.get("out_trade_no");
+		Payment payment = paymentService.findByOrderId(orderId);
 		if (payment == null) {
 			payment = new Payment();
 			payment.setAmount(orderService.findByOrderId(orderId).getAmount());
 		}
 		payment.setOrderId(orderId);
-		payment.setThirdOrderId(payResponse.get("trade_no"));
-		payment.setPayAmount(new BigDecimal(payResponse.get("total_fee")));
-		String thirdCode = payResponse.get("trade_status");
+		payment.setThirdOrderId(paymentResponse.get("trade_no"));
+		payment.setPayAmount(new BigDecimal(paymentResponse.get("total_fee")));
+		String thirdCode = paymentResponse.get("trade_status");
 		payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(thirdCode));
 		payment.setMessage(ThirdPaymentStatus.getPaymentMessage(thirdCode));
 		// 只有等交易完成后才记录支付时间

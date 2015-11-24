@@ -34,7 +34,7 @@ public class Order implements Serializable {
 	/** ID标识 */
 	private Long id;
 	
-	/** 下单用户的账号 */
+	/** 下单用户的登录账号 */
 	private String loginName;
 	
 	/** 订单编号 */
@@ -49,22 +49,22 @@ public class Order implements Serializable {
 	/** 交易金额 */
 	private BigDecimal amount;
 	
-	/** 商品购买数 */
+	/** 商品购买数量 */
 	private int quantity = 1;
 	
-	/** 商品ID */
-	private String mercId;
+	/** 商品编号 */
+	private String productId;
 	
 	/** 商品名称 */
-	private String mercName;
+	private String productName;
 	
-	/** 描述 */
+	/** 商品描述 */
 	private String description;
 	
 	/** 商品单价 */
-	private BigDecimal price;
+	private BigDecimal price = new BigDecimal(0.01);
 	
-	/** 折扣 */
+	/** 商品折扣 */
 	private double discount = 1;
 	
 	/** 下单时间 */
@@ -124,20 +124,20 @@ public class Order implements Serializable {
 		this.quantity = quantity;
 	}
 
-	public String getMercId() {
-		return mercId;
+	public String getProductId() {
+		return productId;
 	}
 
-	public void setMercId(String mercId) {
-		this.mercId = mercId;
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
-	public String getMercName() {
-		return mercName;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setMercName(String mercName) {
-		this.mercName = mercName;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	public String getDescription() {

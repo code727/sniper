@@ -45,8 +45,11 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	public static final ThirdPaymentStatus ALIPAY_WAIT_BUYER_CONFIRM_GOODS = new ThirdPaymentStatus("WAIT_BUYER_CONFIRM_GOODS", PaymentStatus.WAIT_BUYER_CONFIRM_GOODS);
 	public static final ThirdPaymentStatus ALIPAY_TRADE_FINISHED = new ThirdPaymentStatus("TRADE_FINISHED", PaymentStatus.TRADE_FINISHED);
 	public static final ThirdPaymentStatus ALIPAY_TRADE_CLOSED = new ThirdPaymentStatus("TRADE_CLOSED", PaymentStatus.TRADE_CLOSED);
-	public static final ThirdPaymentStatus ALIPAY_MODIFY_TRADEBASE_TOTALFEE = new ThirdPaymentStatus("modify.tradeBase.totalFee", PaymentStatus.TRADE_CLOSED);
+	public static final ThirdPaymentStatus ALIPAY_MODIFY_TRADEBASE_TOTALFEE = new ThirdPaymentStatus("modify.tradeBase.totalFee", PaymentStatus.MODIFY_TRADEBASE_TOTALFEE);
 	
+	/** 微信交易状态枚举*/
+	public static final ThirdPaymentStatus WECHAT_TRADE_SUCCESS = new ThirdPaymentStatus("SUCCESS", PaymentStatus.TRADE_FINISHED);
+	public static final ThirdPaymentStatus WECHAT_TRADE_FAIL = new ThirdPaymentStatus("FAIL", PaymentStatus.TRADE_CLOSED);
 	
 	static {
 		PAY_STATUS_MAP = MapUtils.newHashMap();
@@ -59,7 +62,9 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 		PAY_STATUS_MAP.put(ALIPAY_TRADE_CLOSED.getKey(), ALIPAY_TRADE_CLOSED.getValue());
 		PAY_STATUS_MAP.put(ALIPAY_MODIFY_TRADEBASE_TOTALFEE.getKey(), ALIPAY_MODIFY_TRADEBASE_TOTALFEE.getValue());
 		
-		
+		/** 微信支付交易状态映射集 */
+		PAY_STATUS_MAP.put(WECHAT_TRADE_SUCCESS.getKey(), WECHAT_TRADE_SUCCESS.getValue());
+		PAY_STATUS_MAP.put(WECHAT_TRADE_FAIL.getKey(), WECHAT_TRADE_FAIL.getValue());
 	}
 	
 	/**

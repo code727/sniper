@@ -27,13 +27,27 @@ import java.util.Map;
  */
 public interface Signature {
 	
+	/** 
+	 * @description 设置签名类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param type
+	 */
+	public void setType(String type);
+	
+	/**
+	 * @description 获取签名类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getType();
+	
 	/**
 	 * @description 按指定的类型将支付参数项进行签名操作，并返回签名结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param payParameters
+	 * @param paymentParameters
 	 * @param type
 	 * @return
 	 */
-	public String excute(Map<String, Object> payParameters, String type);
+	public String excute(Map<String, Object> paymentParameters);
 	
 }

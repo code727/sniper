@@ -33,14 +33,15 @@ import org.workin.payment.model.PaymentRequest;
  */
 public interface ThirdPaymentService {
 	
-	/** 
-	 * @description 根据订单创建支付请求数据对象模型
+	/**
+	 * @description 根据订单和其它非订单参数项创建支付请求数据对象模型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param order
+	 * @param parameters
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	ResultModel<PaymentRequest> createPaymentRequest(Order order) throws Exception;
+	ResultModel<PaymentRequest> createPaymentRequest(Order order, Map<String,String> parameters) throws Exception;
 	
 	/**
 	 * @description 处理支付响应

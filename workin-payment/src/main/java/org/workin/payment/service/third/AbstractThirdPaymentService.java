@@ -18,6 +18,8 @@
 
 package org.workin.payment.service.third;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.enums.category.O2OTypes;
 import org.workin.commons.enums.category.SystemStatus;
@@ -75,7 +77,7 @@ public abstract class AbstractThirdPaymentService extends PaymentServiceSupport
 			throw new IllegalArgumentException("Property 'httpClientTemplet' must not be null.");
 	}
 
-	public ResultModel<PaymentRequest> createPaymentRequest(Order order) throws Exception {
+	public ResultModel<PaymentRequest> createPaymentRequest(Order order, Map<String,String> parameters) throws Exception {
 		ResultModel<PaymentRequest> resultModel = new ResultModel<PaymentRequest>();
 		
 		// 第一步：先验证支付订单的类型，如果是线下订单，则首先验证用户输入的账号密码是否有效
@@ -105,7 +107,7 @@ public abstract class AbstractThirdPaymentService extends PaymentServiceSupport
 				if (SystemStatus.SUCCESS.getKey().equals(result.getCode())) {
 					/* 正常结束之前，根据订单记录创建支付请求后包装在返回数据对象模型中  */
 					resultModel.setCode(SystemStatus.SUCCESS.getKey());
-					resultModel.setDate(createPaymentParameters(order));
+					resultModel.setDate(createPaymentParameters(order, parameters));
 				} 
 			}
 		} else {
@@ -135,12 +137,13 @@ public abstract class AbstractThirdPaymentService extends PaymentServiceSupport
 		return paymentService.save(payment);
 	}
 	
-	/** 
-	 * @description 根据订单创建第三方支付请求对象模型
+	/**
+	 * @description 根据订单和其它非订单参数项创建第三方支付请求对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param order
-	 * @return 
+	 * @param parameters
+	 * @return
 	 */
-	protected abstract PaymentRequest createPaymentParameters(Order order);
+	protected abstract PaymentRequest createPaymentParameters(Order order, Map<String,String> parameters);
 	
 }
