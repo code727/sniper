@@ -18,6 +18,8 @@
 
 package org.workin.commons.util;
 
+import java.math.BigDecimal;
+
 /**
  * @description 数字工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -366,4 +368,459 @@ public class NumberUtils {
 		return c > limit ? limit : c;
 	}
 	
+	/**
+	 * @description 判断decimal是否大于指定的双精度浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThan(BigDecimal decimal, double number) {
+		return greaterThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否大于指定的单精度浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThan(BigDecimal decimal, float number) {
+		return greaterThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否大于等于指定的整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThan(BigDecimal decimal, int number) {
+		return greaterThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否等于指定的长整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThan(BigDecimal decimal, long number) {
+		return greaterThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否大于指定的短整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThan(BigDecimal decimal, short number) {
+		return greaterThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否大于指定的比特数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThan(BigDecimal decimal, byte number) {
+		return greaterThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否大于指定的字符ASCII码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param c
+	 * @return
+	 */
+	public static boolean greaterThan(BigDecimal decimal, char c) {
+		return greaterThan(decimal, new BigDecimal(c));
+	}
+	
+	/**
+	 * @description 判断decimal1是否大于decimal2
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @return
+	 */
+	public static boolean greaterThan(BigDecimal decimal1, BigDecimal decimal2) {
+		if (decimal1 == null || decimal2 == null)
+			return false;
+		
+		return decimal1.compareTo(decimal2) == 1;
+	}
+	
+	/**
+	 * @description 判断decimal是否大于等于指定的双精度浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThanEquals(BigDecimal decimal, double number) {
+		return greaterThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否大于等于指定的单精度浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThanEquals(BigDecimal decimal, float number) {
+		return greaterThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否大于等于指定的整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThanEquals(BigDecimal decimal, int number) {
+		return greaterThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否大于等于指定的长整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThanEquals(BigDecimal decimal, long number) {
+		return greaterThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否大于等于指定的短整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThanEquals(BigDecimal decimal, short number) {
+		return greaterThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否大于等于指定的比特数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean greaterThanEquals(BigDecimal decimal, byte number) {
+		return greaterThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否大于等于指定的字符ASCII码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param c
+	 * @return
+	 */
+	public static boolean greaterThanEquals(BigDecimal decimal, char c) {
+		return greaterThanEquals(decimal, new BigDecimal(c));
+	}
+	
+	/**
+	 * @description 判断decimal1是否大于等于decimal2
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @return
+	 */
+	public static boolean greaterThanEquals(BigDecimal decimal1, BigDecimal decimal2) {
+		if (decimal1 == null || decimal2 == null)
+			return false;
+		
+		return decimal1.compareTo(decimal2) > -1;
+	}
+	
+	/**
+	 * @description 判断decimal是否小于等于指定的双精度浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThanEquals(BigDecimal decimal, double number) {
+		return lessThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于等于指定的单精度浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThanEquals(BigDecimal decimal, float number) {
+		return lessThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于等于指定的整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThanEquals(BigDecimal decimal, int number) {
+		return lessThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于等于指定的长整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThanEquals(BigDecimal decimal, long number) {
+		return lessThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于等于指定的短整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThanEquals(BigDecimal decimal, short number) {
+		return lessThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于等于指定的比特数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThanEquals(BigDecimal decimal, byte number) {
+		return lessThanEquals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于等于指定的字符ASCII码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param c
+	 * @return
+	 */
+	public static boolean lessThanEquals(BigDecimal decimal, char c) {
+		return lessThanEquals(decimal, new BigDecimal(c));
+	}
+	
+	/**
+	 * @description 判断decimal1是否小于等于decimal2
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @return
+	 */
+	public static boolean lessThanEquals(BigDecimal decimal1, BigDecimal decimal2) {
+		if (decimal1 == null || decimal2 == null)
+			return false;
+		
+		return decimal1.compareTo(decimal2) < 1;
+	}
+	
+	/**
+	 * @description 判断decimal是否小于指定的双精度浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThan(BigDecimal decimal, double number) {
+		return lessThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于指定的单精度浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThan(BigDecimal decimal, float number) {
+		return lessThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于指定的整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThan(BigDecimal decimal, int number) {
+		return lessThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于等于指定的长整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThan(BigDecimal decimal, long number) {
+		return lessThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于指定的短整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThan(BigDecimal decimal, short number) {
+		return lessThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于等于指定的比特数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean lessThan(BigDecimal decimal, byte number) {
+		return lessThan(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否小于等于指定的字符ASCII码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param c
+	 * @return
+	 */
+	public static boolean lessThan(BigDecimal decimal, char c) {
+		return lessThan(decimal, new BigDecimal(c));
+	}
+	
+	/**
+	 * @description 判断decimal1是否小于等于decimal2
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @return
+	 */
+	public static boolean lessThan(BigDecimal decimal1, BigDecimal decimal2) {
+		if (decimal1 == null || decimal2 == null)
+			return false;
+		
+		return decimal1.compareTo(decimal2) == -1;
+	}
+	
+	/**
+	 * @description 判断decimal是否等于指定的双精度浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean equals(BigDecimal decimal, double number) {
+		return equals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否等于指定的单精度浮点数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean equals(BigDecimal decimal, float number) {
+		return equals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否等于指定的整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean equals(BigDecimal decimal, int number) {
+		return equals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否等于指定的长整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean equals(BigDecimal decimal, long number) {
+		return equals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否等于指定的短整型数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean equals(BigDecimal decimal, short number) {
+		return equals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否等于指定的比特数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static boolean equals(BigDecimal decimal, byte number) {
+		return equals(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * @description 判断decimal是否等于指定的字符ASCII码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param c
+	 * @return
+	 */
+	public static boolean equals(BigDecimal decimal, char c) {
+		return equals(decimal, new BigDecimal(c));
+	}
+	
+	/**
+	 * @description 判断decimal1是否等于decimal2
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @return
+	 */
+	public static boolean equals(BigDecimal decimal1, BigDecimal decimal2) {
+		if (decimal1 == null || decimal2 == null)
+			return false;
+		
+		return decimal1.equals(decimal2);
+	}
+		
 }
