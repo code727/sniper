@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.workin.commons.model.CodeModel;
 import org.workin.commons.model.MessageModel;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MessageUtils;
@@ -143,7 +144,27 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 		if (StringUtils.isNotBlank(message)) 
 			model.setMessage(getMessage(message, params));
 	}
-		
+	
+	/**
+	 * @description 设置可编码的对象模型中的本地消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param model
+	 */
+	protected void setLocaleMessage(CodeModel model) {
+		setLocaleMessage(model, null);
+	}
+	
+	/**
+	 * @description 设置可编码的对象模型中的本地参数化消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param model
+	 * @param params
+	 */
+	protected void setLocaleMessage(CodeModel model, Object[] params) {
+		if (model instanceof MessageModel)
+			setLocaleMessage((MessageModel) model, params);
+	}
+	
 	/**
 	 * @description 在绑定表单之前，统一的进行初始化绑定操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
