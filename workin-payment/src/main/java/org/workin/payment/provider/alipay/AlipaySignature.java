@@ -19,11 +19,12 @@
 package org.workin.payment.provider.alipay;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.stereotype.Component;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.MessageUtils;
-import org.workin.payment.signature.AbstractSignature;
+import org.workin.support.security.AbstractSignature;
 
 /**
  * @description 支付宝签名实现类
@@ -34,8 +35,13 @@ import org.workin.payment.signature.AbstractSignature;
 public class AlipaySignature extends AbstractSignature {
 
 	@Override
-	public String excute(Map<String, Object> paymentParameters) {
-		return MessageUtils.encrypt(MapUtils.joinQueryString(paymentParameters), getType());
+	public String excute(Map<String, Object> paymentParameters, String sellerKey) {
+		// 按参数名升序排列
+		if (!(paymentParameters instanceof TreeMap<?, ?>))
+			paymentParameters = MapUtils.newTreeMap(paymentParameters);
+		
+		String queryString = MapUtils.joinQueryString(paymentParameters) + sellerKey;
+		return MessageUtils.encrypt(queryString, getType());
 	}
-
+	
 }

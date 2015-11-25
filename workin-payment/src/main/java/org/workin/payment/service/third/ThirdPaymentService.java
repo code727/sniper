@@ -21,10 +21,9 @@ package org.workin.payment.service.third;
 
 import java.util.Map;
 
+import org.workin.commons.model.CodeModel;
 import org.workin.commons.model.impl.CodeMessageModel;
-import org.workin.commons.model.impl.ResultModel;
 import org.workin.payment.domain.Order;
-import org.workin.payment.model.PaymentRequest;
 
 /**
  * @description 第三方支付服务接口
@@ -41,7 +40,7 @@ public interface ThirdPaymentService {
 	 * @return
 	 * @throws Exception
 	 */
-	ResultModel<PaymentRequest> createPaymentRequest(Order order, Map<String,String> parameters) throws Exception;
+	public CodeModel createPaymentRequest(Order order, Map<String,String> parameters) throws Exception;
 	
 	/**
 	 * @description 处理支付响应

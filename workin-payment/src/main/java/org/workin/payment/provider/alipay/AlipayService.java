@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.workin.commons.model.impl.CodeMessageModel;
+import org.workin.commons.model.impl.ResultModel;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.NumberUtils;
@@ -43,7 +44,7 @@ import org.workin.payment.service.third.AbstractThirdPaymentService;
  * @version 1.0
  */
 @Service
-public class AlipayService extends AbstractThirdPaymentService {
+public class AlipayService extends AbstractThirdPaymentService<PaymentRequest> {
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -54,79 +55,82 @@ public class AlipayService extends AbstractThirdPaymentService {
 	}
 	
 	@Override
-	public PaymentRequest createPaymentParameters(Order order, Map<String,String> parameters) {
-		Map<String, Object> payParameters = MapUtils.newHashMap();
+	public ResultModel<PaymentRequest> createPaymentParameters(Order order, Map<String,String> parameters) {
+		Map<String, Object> paymentParameters = MapUtils.newHashMap();
 		// 接口名称
-		payParameters.put("service", contextParameter.getValue("alipay.pay.service"));
+		paymentParameters.put("service", paymentContextParameters.getValue("alipay.pay.service"));
 		// 商户ID
-		payParameters.put("partner", contextParameter.getValue("alipay.partner"));
+		paymentParameters.put("partner", paymentContextParameters.getValue("alipay.partner"));
 		
-		String sellerEmail = contextParameter.getValue("alipay.seller.email", String.class);
+		String sellerEmail = paymentContextParameters.getValue("alipay.seller.email", String.class);
 		if (StringUtils.isNotBlank(sellerEmail)) 
 			// 卖家邮件
-			payParameters.put("seller_email", sellerEmail);
+			paymentParameters.put("seller_email", sellerEmail);
 		else 
 			// 卖家ID
-			payParameters.put("seller_id", contextParameter.getValue("alipay.seller.id"));
+			paymentParameters.put("seller_id", paymentContextParameters.getValue("alipay.seller.id"));
 		
 		// 通知回调地址
-		payParameters.put("notify_url", contextParameter.getValue("alipay.notify.url"));
+		paymentParameters.put("notify_url", paymentContextParameters.getValue("alipay.notify.url"));
 		
-		String returnUrl = contextParameter.getValue("alipay.return.url", String.class);
+		String returnUrl = paymentContextParameters.getValue("alipay.return.url", String.class);
 		if (StringUtils.isNotBlank(returnUrl))
 			// 返回URL
-			payParameters.put("return_url", contextParameter.getValue("alipay.return.url"));
+			paymentParameters.put("return_url", paymentContextParameters.getValue("alipay.return.url"));
 		
 		// 商品名称
-		payParameters.put("subject", order.getProductName());
+		paymentParameters.put("subject", order.getProductName());
 		// 商品描述
 		String description = order.getDescription();
 		if (StringUtils.isNotBlank(description))
-			payParameters.put("body", order.getDescription());
+			paymentParameters.put("body", order.getDescription());
 		
 		// 商户交易订单号
-		payParameters.put("out_trade_no", order.getOrderId());
+		paymentParameters.put("out_trade_no", order.getOrderId());
 		
 		BigDecimal amount = order.getAmount();
 		
 		if (amount != null && amount.compareTo(new BigDecimal(0)) == 1)
 			// 交易金额大于0时设置交易金额
-			payParameters.put("total_fee", amount);
+			paymentParameters.put("total_fee", amount);
 		else {
 			BigDecimal price = order.getPrice();
 			if (price == null || price.compareTo(new BigDecimal(0)) < 1)
 				// 商品单价小于等于时设置单价为0.01元
 				price = new BigDecimal(0.01);
-			payParameters.put("price", price);
+			paymentParameters.put("price", price);
 		}
 		
 		// 购买数量
-		payParameters.put("quantity", NumberUtils.minLimit(order.getQuantity(), 1));
+		paymentParameters.put("quantity", NumberUtils.minLimit(order.getQuantity(), 1));
 		// 支付类型
-		payParameters.put("payment_type", 1);
+		paymentParameters.put("payment_type", 1);
 		// 物流类型
-		payParameters.put("logistics_type", contextParameter.getValue("alipay.logistics.type"));
+		paymentParameters.put("logistics_type", paymentContextParameters.getValue("alipay.logistics.type"));
 		// 物流费用
-		payParameters.put("logistics_fee", contextParameter.getValue("alipay.logistics.fee"));
+		paymentParameters.put("logistics_fee", paymentContextParameters.getValue("alipay.logistics.fee"));
 		// 物流支付类型
-		payParameters.put("logistics_payment", contextParameter.getValue("alipay.logistics.payment"));
+		paymentParameters.put("logistics_payment", paymentContextParameters.getValue("alipay.logistics.payment"));
 		
 		// 签名
-		payParameters.put("sign", signature.excute(payParameters));
+		paymentParameters.put("sign", signature.excute(paymentParameters, ""));
 		// 签名类型
-		payParameters.put("sign_type", signature.getType());
+		paymentParameters.put("sign_type", signature.getType());
 		
-		String inputCharset = contextParameter.getValue("alipay.input.charset", String.class);
+		String inputCharset = paymentContextParameters.getValue("alipay.input.charset", String.class);
 		if (StringUtils.isBlank(inputCharset))
 			inputCharset = MessageUtils.UTF8_ENCODING;
 		
 		// 商户系统与支付宝系统交互信息时使用的编码字符集
-		payParameters.put("_input_charset", inputCharset);
+		paymentParameters.put("_input_charset", inputCharset);
 		
 		PaymentRequest request = new PaymentRequest();
-		request.setUrl(contextParameter.getValue("alipay.request.url") + "?" + MapUtils.joinQueryString(payParameters));
+		request.setUrl(paymentContextParameters.getValue("alipay.request.url") + "?" + MapUtils.joinQueryString(paymentParameters));
 		request.setOrderId(order.getOrderId());
-		return request;
+		
+		ResultModel<PaymentRequest> resultModel = new ResultModel<PaymentRequest>();
+		resultModel.setDate(request);
+		return resultModel;
 	}
 
 	@Override
@@ -136,7 +140,7 @@ public class AlipayService extends AbstractThirdPaymentService {
 		parameters.put("notify_id", paymentResponse.get("notify_id"));
 		
 		// 发送支付宝验证请求，并返回验证结果状态
-		String status = httpClientTemplet.request("alipayNotify", parameters);
+		String status = paymentHttpTemplet.request("alipayNotify", parameters);
 		// 再根据支付宝验证结果状态获取本系统的状态码
 		String code = ThirdValidationResult.getValidationResultCode(status);
 		

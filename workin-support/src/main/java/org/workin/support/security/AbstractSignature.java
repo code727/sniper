@@ -13,28 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-20
+ * Create Date : 2015-11-23
  */
 
-package org.workin.commons.enums.category;
+package org.workin.support.security;
 
-import org.workin.commons.enums.AbstractLocaleEnums;
+import org.workin.commons.util.AssertUtils;
+import org.workin.commons.util.StringUtils;
 
 /**
- * @description O2O类型枚举类
+ * @description 签名抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class O2OTypes extends AbstractLocaleEnums<Integer> {
-
-	protected O2OTypes(Integer key, String messageKey) {
-		super(key, messageKey);
+public abstract class AbstractSignature implements Signature {
+	
+	/** 签名类型 */
+	private String type = "MD5";
+	
+	public AbstractSignature(){}
+	
+	public AbstractSignature(String type) {
+		setType(type);
 	}
 	
-	/** 线上 */
-	public static final O2OTypes ONLINE = new O2OTypes(0, "ms.o2o.type.online");
-	
-	/** 线下 */
-	public static final O2OTypes OFFLINE = new O2OTypes(1, "ms.o2o.type.offline");
+	@Override
+	public void setType(String type) {
+		AssertUtils.assertTrue(StringUtils.isNotBlank(type), "Signature type must not be null or blank.");
+		this.type = type;
+	}
+
+	@Override
+	public String getType() {
+		return this.type;
+	}
 
 }

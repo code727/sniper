@@ -19,10 +19,11 @@
 package org.workin.payment.provider.wechatpay;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.MessageUtils;
-import org.workin.payment.signature.AbstractSignature;
+import org.workin.support.security.AbstractSignature;
 
 /**
  * @description 微信支付签名实现类
@@ -32,8 +33,13 @@ import org.workin.payment.signature.AbstractSignature;
 public class WechatpaySignature extends AbstractSignature {
 
 	@Override
-	public String excute(Map<String, Object> paymentParameters) {
-		return MessageUtils.encrypt(MapUtils.joinQueryString(paymentParameters), getType()).toUpperCase();
+	public String excute(Map<String, Object> paymentParameters, String sellerKey) {
+		// 按参数名升序排列
+		if (!(paymentParameters instanceof TreeMap<?, ?>))
+			paymentParameters = MapUtils.newTreeMap(paymentParameters);
+		
+		String queryString = MapUtils.joinQueryString(paymentParameters) + "&key=" + sellerKey;
+		return MessageUtils.encrypt(queryString, getType()).toUpperCase();
 	}
-
+		
 }

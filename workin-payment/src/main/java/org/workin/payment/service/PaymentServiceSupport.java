@@ -19,10 +19,10 @@
 package org.workin.payment.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.workin.payment.signature.Signature;
 import org.workin.spring.beans.CheckableInitializingBean;
 import org.workin.support.generator.DateTimeIDGenerator;
 import org.workin.support.generator.IDGenerator;
+import org.workin.support.security.Signature;
 
 /**
  * @description 支付服务支持抽象类

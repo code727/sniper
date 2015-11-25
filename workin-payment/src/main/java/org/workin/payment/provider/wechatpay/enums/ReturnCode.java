@@ -13,28 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-20
+ * Create Date : 2015-11-24
  */
 
-package org.workin.commons.enums.category;
-
-import org.workin.commons.enums.AbstractLocaleEnums;
+package org.workin.payment.provider.wechatpay.enums;
 
 /**
- * @description O2O类型枚举类
+ * @description 微信支付返回码枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class O2OTypes extends AbstractLocaleEnums<Integer> {
+public enum ReturnCode {
+	
+	SUCCESS("SUCCESS"),
+	FAIL("FAIL");
+	
+	private String code;
+	
+	private ReturnCode(String code) {
+		this.code = code;
+	}
 
-	protected O2OTypes(Integer key, String messageKey) {
-		super(key, messageKey);
+	public String getCode() {
+		return code;
 	}
 	
-	/** 线上 */
-	public static final O2OTypes ONLINE = new O2OTypes(0, "ms.o2o.type.online");
-	
-	/** 线下 */
-	public static final O2OTypes OFFLINE = new O2OTypes(1, "ms.o2o.type.offline");
+	@Override
+	public String toString() {
+		return this.getCode();
+	}
 
+	
 }

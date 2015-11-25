@@ -13,28 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-20
+ * Create Date : 2015-11-25
  */
 
-package org.workin.commons.enums.category;
-
-import org.workin.commons.enums.AbstractLocaleEnums;
+package org.workin.payment.provider.wechatpay.enums;
 
 /**
- * @description O2O类型枚举类
+ * @description 支付交易类型枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class O2OTypes extends AbstractLocaleEnums<Integer> {
-
-	protected O2OTypes(Integer key, String messageKey) {
-		super(key, messageKey);
+public enum TradeType {
+	/** 公众号支付 */
+	JSAPI("JSAPI"), 
+	/** 原生扫码支付 */
+	NATIVE("FAIL"),
+	/** APP支付 */
+	APP("APP"),
+	/** 刷卡支付 */ 
+	MICROPAY("MICROPAY");
+	
+	private String type;
+	
+	private TradeType(String type) {
+		this.type = type;
 	}
-	
-	/** 线上 */
-	public static final O2OTypes ONLINE = new O2OTypes(0, "ms.o2o.type.online");
-	
-	/** 线下 */
-	public static final O2OTypes OFFLINE = new O2OTypes(1, "ms.o2o.type.offline");
+
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public String toString() {
+		return this.getType();
+	}
 
 }

@@ -16,7 +16,7 @@
  * Create Date : 2015-11-13
  */
 
-package org.workin.payment.signature;
+package org.workin.support.security;
 
 import java.util.Map;
 
@@ -42,12 +42,12 @@ public interface Signature {
 	public String getType();
 	
 	/**
-	 * @description 按指定的类型将支付参数项进行签名操作，并返回签名结果
+	 * @description 按指定密钥将参数项进行签名处理，并返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param paymentParameters
-	 * @param type
+	 * @param parameters
+	 * @param secretKey
 	 * @return
 	 */
-	public String excute(Map<String, Object> paymentParameters);
+	public String excute(Map<String, Object> parameters, String secretKey);
 	
 }

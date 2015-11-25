@@ -34,22 +34,61 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	
 	/** 支付状态映射集 */
 	private static final Map<String, Enums<Integer, String>> PAY_STATUS_MAP;
-
+	
 	protected ThirdPaymentStatus(String key, Enums<Integer, String> value) {
 		super(key, value);
 	}
-	
+		
 	/** 支付宝交易状态枚举*/
-	public static final ThirdPaymentStatus ALIPAY_WAIT_BUYER_PAY = new ThirdPaymentStatus("WAIT_BUYER_PAY", PaymentStatus.WAIT_BUYER_PAY);
-	public static final ThirdPaymentStatus ALIPAY_WAIT_SELLER_SEND_GOODS = new ThirdPaymentStatus("WAIT_SELLER_SEND_GOODS", PaymentStatus.WAIT_SELLER_SEND_GOODS);
-	public static final ThirdPaymentStatus ALIPAY_WAIT_BUYER_CONFIRM_GOODS = new ThirdPaymentStatus("WAIT_BUYER_CONFIRM_GOODS", PaymentStatus.WAIT_BUYER_CONFIRM_GOODS);
-	public static final ThirdPaymentStatus ALIPAY_TRADE_FINISHED = new ThirdPaymentStatus("TRADE_FINISHED", PaymentStatus.TRADE_FINISHED);
-	public static final ThirdPaymentStatus ALIPAY_TRADE_CLOSED = new ThirdPaymentStatus("TRADE_CLOSED", PaymentStatus.TRADE_CLOSED);
-	public static final ThirdPaymentStatus ALIPAY_MODIFY_TRADEBASE_TOTALFEE = new ThirdPaymentStatus("modify.tradeBase.totalFee", PaymentStatus.MODIFY_TRADEBASE_TOTALFEE);
-	
+	public static final ThirdPaymentStatus ALIPAY_WAIT_BUYER_PAY = new ThirdPaymentStatus(
+			"WAIT_BUYER_PAY", PaymentStatus.WAIT_BUYER_PAY);
+	public static final ThirdPaymentStatus ALIPAY_WAIT_SELLER_SEND_GOODS = new ThirdPaymentStatus(
+			"WAIT_SELLER_SEND_GOODS", PaymentStatus.WAIT_SELLER_SEND_GOODS);
+	public static final ThirdPaymentStatus ALIPAY_WAIT_BUYER_CONFIRM_GOODS = new ThirdPaymentStatus(
+			"WAIT_BUYER_CONFIRM_GOODS", PaymentStatus.WAIT_BUYER_CONFIRM_GOODS);
+	public static final ThirdPaymentStatus ALIPAY_TRADE_FINISHED = new ThirdPaymentStatus(
+			"TRADE_FINISHED", PaymentStatus.TRADE_FINISHED);
+	public static final ThirdPaymentStatus ALIPAY_TRADE_CLOSED = new ThirdPaymentStatus(
+			"TRADE_CLOSED", PaymentStatus.TRADE_CLOSED);
+	public static final ThirdPaymentStatus ALIPAY_MODIFY_TRADEBASE_TOTALFEE = new ThirdPaymentStatus(
+			"modify.tradeBase.totalFee", PaymentStatus.MODIFY_TRADEBASE_TOTALFEE);
+			
 	/** 微信交易状态枚举*/
-	public static final ThirdPaymentStatus WECHAT_TRADE_SUCCESS = new ThirdPaymentStatus("SUCCESS", PaymentStatus.TRADE_FINISHED);
-	public static final ThirdPaymentStatus WECHAT_TRADE_FAIL = new ThirdPaymentStatus("FAIL", PaymentStatus.TRADE_CLOSED);
+	public static final ThirdPaymentStatus WECHATPAY_TRADE_SUCCESS = new ThirdPaymentStatus(
+			"SUCCESS", PaymentStatus.TRADE_FINISHED);
+	public static final ThirdPaymentStatus WECHATPAY_TRADE_FAIL = new ThirdPaymentStatus(
+			"FAIL", PaymentStatus.TRADE_CLOSED);
+	
+	public static final ThirdPaymentStatus WECHATPAY_NOAUTH = new ThirdPaymentStatus(
+			"NOAUTH", PaymentStatus.NOAUTH);
+	public static final ThirdPaymentStatus WECHATPAY_NOTENOUGH = new ThirdPaymentStatus(
+			"NOTENOUGH", PaymentStatus.NOT_SUFFICIENT_FUNDS);
+	public static final ThirdPaymentStatus WECHATPAY_ORDERPAID = new ThirdPaymentStatus(
+			"ORDERPAID", PaymentStatus.ORDER_PAID);
+	public static final ThirdPaymentStatus WECHATPAY_ORDERCLOSED = new ThirdPaymentStatus(
+			"ORDERCLOSED", PaymentStatus.ORDER_CLOSED);
+	public static final ThirdPaymentStatus WECHATPAY_SYSTEMERROR = new ThirdPaymentStatus(
+			"SYSTEMERROR", PaymentStatus.SYSTEME_RROR);
+	public static final ThirdPaymentStatus WECHATPAY_APPID_NOT_EXIST = new ThirdPaymentStatus(
+			"APPID_NOT_EXIST", PaymentStatus.LACK_PARAMS_OF);
+	public static final ThirdPaymentStatus WECHATPAY_MCHID_NOT_EXIST = new ThirdPaymentStatus(
+			"MCHID_NOT_EXIST", PaymentStatus.LACK_PARAMS_OF);
+	public static final ThirdPaymentStatus WECHATPAY_APPID_MCHID_NOT_MATCH = new ThirdPaymentStatus(
+			"APPID_MCHID_NOT_MATCH", PaymentStatus.PARAMS_NOT_MATCH);
+	public static final ThirdPaymentStatus WECHATPAY_LACK_PARAMS = new ThirdPaymentStatus(
+			"LACK_PARAMS", PaymentStatus.LACK_PARAMS);
+	public static final ThirdPaymentStatus WECHATPAY_OUT_TRADE_NO_USED = new ThirdPaymentStatus(
+			"OUT_TRADE_NO_USED", PaymentStatus.DUPLICATION_OUT_TRADE_NO);
+	public static final ThirdPaymentStatus WECHATPAY_SIGNERROR = new ThirdPaymentStatus(
+			"SIGNERROR", PaymentStatus.SIGN_ERROR);
+	public static final ThirdPaymentStatus WECHATPAY_XML_FORMAT_ERROR = new ThirdPaymentStatus(
+			"XML_FORMAT_ERROR", PaymentStatus.FORMAT_ERROR);
+	public static final ThirdPaymentStatus WECHATPAY_REQUIRE_POST_METHOD = new ThirdPaymentStatus(
+			"REQUIRE_POST_METHOD", PaymentStatus.REQUIRE_HTTP_METHOD);
+	public static final ThirdPaymentStatus WECHATPAY_POST_DATA_EMPTY = new ThirdPaymentStatus(
+			"POST_DATA_EMPTY", PaymentStatus.DATA_EMPTY);
+	public static final ThirdPaymentStatus WECHATPAY_NOT_UTF8 = new ThirdPaymentStatus(
+			"NOT_UTF8", PaymentStatus.ENCODING_ERROR);
 	
 	static {
 		PAY_STATUS_MAP = MapUtils.newHashMap();
@@ -63,8 +102,24 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 		PAY_STATUS_MAP.put(ALIPAY_MODIFY_TRADEBASE_TOTALFEE.getKey(), ALIPAY_MODIFY_TRADEBASE_TOTALFEE.getValue());
 		
 		/** 微信支付交易状态映射集 */
-		PAY_STATUS_MAP.put(WECHAT_TRADE_SUCCESS.getKey(), WECHAT_TRADE_SUCCESS.getValue());
-		PAY_STATUS_MAP.put(WECHAT_TRADE_FAIL.getKey(), WECHAT_TRADE_FAIL.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_TRADE_SUCCESS.getKey(), WECHATPAY_TRADE_SUCCESS.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_TRADE_FAIL.getKey(), WECHATPAY_TRADE_FAIL.getValue());
+		
+		PAY_STATUS_MAP.put(WECHATPAY_NOAUTH.getKey(), WECHATPAY_NOAUTH.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_NOTENOUGH.getKey(), WECHATPAY_NOTENOUGH.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_ORDERPAID.getKey(), WECHATPAY_ORDERPAID.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_ORDERCLOSED.getKey(), WECHATPAY_ORDERCLOSED.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_SYSTEMERROR.getKey(), WECHATPAY_SYSTEMERROR.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_APPID_NOT_EXIST.getKey(), WECHATPAY_APPID_NOT_EXIST.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_MCHID_NOT_EXIST.getKey(), WECHATPAY_MCHID_NOT_EXIST.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_APPID_MCHID_NOT_MATCH.getKey(), WECHATPAY_APPID_MCHID_NOT_MATCH.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_LACK_PARAMS.getKey(), WECHATPAY_LACK_PARAMS.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_OUT_TRADE_NO_USED.getKey(), WECHATPAY_OUT_TRADE_NO_USED.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_SIGNERROR.getKey(), WECHATPAY_SIGNERROR.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_XML_FORMAT_ERROR.getKey(), WECHATPAY_XML_FORMAT_ERROR.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_REQUIRE_POST_METHOD.getKey(), WECHATPAY_REQUIRE_POST_METHOD.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_POST_DATA_EMPTY.getKey(), WECHATPAY_POST_DATA_EMPTY.getValue());
+		PAY_STATUS_MAP.put(WECHATPAY_NOT_UTF8.getKey(), WECHATPAY_NOT_UTF8.getValue());
 	}
 	
 	/**
@@ -109,5 +164,5 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 		PaymentStatus payStatus = getPaymentStatus(thirdCode);
 		return payStatus != null ? payStatus.getMessage(params) : StringUtils.EMPTY_STRING;
 	}
-	
+		
 }

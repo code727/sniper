@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-20
+ * Create Date : 2015年11月25日
  */
 
 package org.workin.commons.enums.category;
@@ -21,20 +21,23 @@ package org.workin.commons.enums.category;
 import org.workin.commons.enums.AbstractLocaleEnums;
 
 /**
- * @description O2O类型枚举类
+ * @description 业务状态枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class O2OTypes extends AbstractLocaleEnums<Integer> {
+public class BizStatus extends AbstractLocaleEnums<String> {
 
-	protected O2OTypes(Integer key, String messageKey) {
-		super(key, messageKey);
+	protected BizStatus(String key, String value) {
+		super(key, value);
 	}
 	
-	/** 线上 */
-	public static final O2OTypes ONLINE = new O2OTypes(0, "ms.o2o.type.online");
+	/** 失败 */
+	public static final SystemStatus FAILED = new SystemStatus("-biz0001", "msg.biz.failed.status");
 	
-	/** 线下 */
-	public static final O2OTypes OFFLINE = new O2OTypes(1, "ms.o2o.type.offline");
+	/** 未知 */
+	public static final SystemStatus UNKNOW = new SystemStatus("biz0000", "msg.biz.unknow.status");
+	
+	/** 成功 */
+	public static final SystemStatus SUCCESS = new SystemStatus("biz0001", "msg.biz.success.status");
 
 }

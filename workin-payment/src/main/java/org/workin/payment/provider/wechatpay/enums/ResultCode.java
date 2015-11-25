@@ -13,40 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-23
+ * Create Date : 2015-11-24
  */
 
-package org.workin.payment.signature;
-
-import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.StringUtils;
-
+package org.workin.payment.provider.wechatpay.enums;
 
 /**
- * @description 签名抽象类
+ * @description 微信支付业务结果枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractSignature implements Signature {
+public enum ResultCode {
 	
-	/** 签名类型 */
-	private String type = "MD5";
+	SUCCESS("SUCCESS"),
+	FAIL("FAIL");
 	
-	public AbstractSignature(){}
+	private String code;
 	
-	public AbstractSignature(String type) {
-		setType(type);
+	private ResultCode(String code) {
+		this.code = code;
+	}
+
+	public String getCode() {
+		return code;
 	}
 	
 	@Override
-	public void setType(String type) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(type), "Signature type must not be null or blank.");
-		this.type = type;
+	public String toString() {
+		return this.getCode();
 	}
 
-	@Override
-	public String getType() {
-		return this.type;
-	}
-
+	
 }
