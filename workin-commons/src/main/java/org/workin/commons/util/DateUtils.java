@@ -128,12 +128,14 @@ public class DateUtils {
 		if (formateMap == null)
 			formateMap = MapUtils.newConcurrentHashMap();
 		
-		if (formateMap.get(pattern) == null) {
-			formateMap.put(pattern, new SimpleDateFormat(pattern));
+		SimpleDateFormat dateFormat = formateMap.get(pattern);
+		if (dateFormat == null) {
+			dateFormat = new SimpleDateFormat(pattern);
+			formateMap.put(pattern, dateFormat);
 			dateFormates.set(formateMap);
 		}
 		
-		return dateFormates.get().get(pattern);
+		return dateFormat;
 	}
 	
 	/**

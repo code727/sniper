@@ -53,7 +53,10 @@ public class FileUtils {
 			return StringUtils.EMPTY_STRING;
 		
 		String name = StringUtils.afterLast(filePath, "/");
-		return StringUtils.isNotEmpty(name) ? name : StringUtils.afterLast(filePath, "\\");
+		if (StringUtils.isEmpty(name))
+			name = StringUtils.afterLast(filePath, "\\");
+		
+		return StringUtils.isNotEmpty(name) ? name : filePath;
 	}
 	
 	/**
@@ -63,10 +66,7 @@ public class FileUtils {
 	 * @return
 	 */
 	public static String getName(File file) {
-		if (file == null)
-			return StringUtils.EMPTY_STRING;
-		
-		return file.getName();
+		return file != null ? file.getName() : StringUtils.EMPTY_STRING;
 	}
 	
 	/**

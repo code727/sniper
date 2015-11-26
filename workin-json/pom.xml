@@ -6,7 +6,7 @@
 		<artifactId>workin</artifactId>
 		<version>1.0.0</version>
 	</parent>
-	<artifactId>wokin-json</artifactId>
+	<artifactId>workin-json</artifactId>
 	
 	<dependencies>
 		<dependency>

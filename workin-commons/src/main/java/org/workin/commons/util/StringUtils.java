@@ -43,7 +43,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 判断是否为空字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
 	 */
@@ -53,7 +53,7 @@ public class StringUtils {
 
 	/**
 	 * @description 判断是否不为空字符
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
 	 */
@@ -63,7 +63,7 @@ public class StringUtils {
 
 	/**
 	 * @description 判断是否全为空白字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public class StringUtils {
 
 	/**
 	 * @description 判断是否不全为空白字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
 	 */
@@ -91,7 +91,7 @@ public class StringUtils {
 				
 	/**
 	 * @description 检索第一个标记在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @return 
@@ -102,7 +102,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 从指定的起始位开始检索第一个标记在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @return 
@@ -113,7 +113,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按照忽略大小写的方式检索第一个标记在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @return 
@@ -124,7 +124,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按照忽略大小写的方式从指定的起始位开始检索第一个标记在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @return 
@@ -147,7 +147,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 选择是否按照忽略大小写的方式从指定的起始位开始检索第一个标记在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @param start
@@ -183,7 +183,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 检索最后一个标记在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @return 
@@ -194,7 +194,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 从指定的起始位开始检索最后一个标记在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @return 
@@ -205,7 +205,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按照忽略大小写的方式检索最后一个标记在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @return 
@@ -216,7 +216,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按照忽略大小写的方式从指定的起始位开始检索最后一个标记在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @param start
@@ -240,7 +240,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 选择是否按照忽略大小写的方式从指定的起始位开始检索最后一个标记在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @param start
@@ -277,7 +277,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 判断字符串是否以指定的前缀开头
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
 	 * @return 
@@ -288,7 +288,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按忽略大小写的方式判断字符串是否以指定的前缀开头
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
 	 * @return 
@@ -299,7 +299,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 选择是否按忽略大小写的方式判断字符串是否以指定的前缀开头
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
 	 * @param ignoreCase
@@ -318,7 +318,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 判断字符串是否以指定的后缀结束
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param suffix
 	 * @return 
@@ -329,7 +329,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按忽略大小写的方式判断字符串是否以指定的后缀结束
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
 	 * @param ignoreCase
@@ -341,7 +341,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 选择是否按忽略大小写的方式判断字符串是否以指定的后缀结束
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
 	 * @param ignoreCase
@@ -361,7 +361,7 @@ public class StringUtils {
 		
 	/**
 	 * @description 获取后缀在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param suffix
 	 * @return 
@@ -372,7 +372,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按忽略大小写的方式获取后缀在字符串中的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param suffix
 	 * @return 
@@ -383,7 +383,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 选择是否按忽略大小写的方式获取指定后缀的索引位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
 	 * @param ignoreCase
@@ -400,10 +400,10 @@ public class StringUtils {
 		
 		return str.regionMatches(ignoreCase, offset, suffix, 0, suffixLength) ? offset : -1;
 	}
-
+	
 	/**
 	 * @description 字符串首字符大写
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
 	 */
@@ -413,7 +413,7 @@ public class StringUtils {
 
 	/**
 	 * @description 字符串首字符小写
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
 	 */
@@ -423,7 +423,7 @@ public class StringUtils {
 
 	/**
 	 * @description 字符串首字符大/小写
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param capitalize
 	 * @return
@@ -444,10 +444,9 @@ public class StringUtils {
 
 	/**
 	 * @description 返回不为null的字符，null返回空字符串
-	 * @author <a href="mailto:bin.du@daw.so">杜斌</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
-	 * @since social-commons1.0.0
 	 */
 	public static String safeString(String str) {
 		return str != null ? str : EMPTY_STRING ;
@@ -455,7 +454,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 去掉字符串左右两端的空白字符，null返回空字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return 
 	 */
@@ -465,7 +464,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 去掉字符串左右两端的空白字符，null不作处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return 
 	 */
@@ -475,7 +474,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 清空字符串中所有的空格、制表符和换页符等空白字符，null返回空字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
 	 */
@@ -485,7 +484,7 @@ public class StringUtils {
 		
 	/**
 	 * @description 清空字符串中所有的空格、制表符和换页符等空白字符，null不作处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return 
 	 */
@@ -501,8 +500,124 @@ public class StringUtils {
 	}
 	
 	/**
+	 * @description 获取前缀之后的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @param str
+	 * @param prefix
+	 * @return
+	 */
+	public static String afterPrefix(String str, String prefix) {
+		return afterPrefix(str, prefix, false);
+	}
+	
+	/**
+	 * @description 按忽略大小写的方式获取前缀之后的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @param str
+	 * @param prefix
+	 * @return
+	 */
+	public static String afterPrefixIgnoreCase(String str, String prefix) {
+		return afterPrefix(str, prefix, true);
+	}
+	
+	/**
+	 * @description 选择是否按忽略大小写方式获取前缀之后的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param prefix
+	 * @param ignoreCase
+	 * @return 
+	 */
+	public static String afterPrefix(String str, String prefix, boolean ignoreCase) {		
+		if (isEmpty(str) || isEmpty(prefix))
+			return str;
+		
+		return indexOf(str, prefix, 0, ignoreCase) == 0 ? str.substring(prefix.length()) : EMPTY_STRING;
+	}
+	
+	/**
+	 * @description 获取第一个标记之后的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @param str
+	 * @param mark
+	 * @return
+	 */
+	public static String afterFrist(String str, String mark) {
+		return afterFrist(str, mark, false);
+	}
+	
+	/**
+	 * @description 按忽略大小写的方式获取第一个标记之后的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @return 
+	 */
+	public static String afterFristIgnoreCase(String str, String mark) {
+		return afterFrist(str, mark, true);
+	}
+	
+	/**
+	 * @description 选择是否按按忽略大小写的方式获取第一个标记之后的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param ignoreCase
+	 * @return 
+	 */
+	public static String afterFrist(String str, String mark, boolean ignoreCase) {
+		if (isEmpty(str) || isEmpty(mark))
+			return str;
+		
+		int index = indexOf(str, mark, 0, ignoreCase);
+		return index > -1 ? str.substring(index + mark.length()) : EMPTY_STRING;
+	}
+	
+	/**
+	 * @description 获取最后一个标记之后的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @param str
+	 * @param mark
+	 * @return
+	 */
+	public static String afterLast(String str, String mark) {
+		return afterLast(str, mark, false);
+	}
+	
+	/**
+	 * @description 按忽略大小写的方式获取最后一个标记之后的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @param str
+	 * @param mark
+	 * @return
+	 */
+	public static String afterLastIgnoreCase(String str, String mark) {
+		return afterLast(str, mark, true);
+	}
+	
+	/**
+	 * @description 选择是否按忽略大小写的方式获取最后一个标记之后的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str 开始标记
+	 * @param mark 结束标记
+	 * @param ignoreCase
+	 * @return 
+	 */
+	public static String afterLast(String str, String mark, boolean ignoreCase) {
+		if (str == null)
+			return str;
+		
+		if (str.length() == 0 || isEmpty(mark))
+			return EMPTY_STRING;
+		
+		int index = lastIndexOf(str, mark, ignoreCase);
+		return index > -1 ? str.substring(index + mark.length()) : EMPTY_STRING;
+	}
+	
+	/**
 	 * @description 获取后缀之前的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param suffix
 	 * @return
@@ -513,7 +628,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按忽略大小写方式获取后缀之前的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param suffix
 	 * @return
@@ -525,7 +640,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 选择是否按忽略大小写方式获取后缀之前的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param suffix
 	 * @param ignoreCase
@@ -538,47 +653,10 @@ public class StringUtils {
 		int suffixIndex = indexOfSuffix(str, suffix, ignoreCase);
 		return suffixIndex > -1 ? str.substring(0, suffixIndex) : EMPTY_STRING;
 	}
-	
-	/**
-	 * @description 获取前缀之后的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
-	 * @param str
-	 * @param prefix
-	 * @return
-	 */
-	public static String afterPrefix(String str, String prefix) {
-		return afterPrefix(str, prefix, false);
-	}
-	
-	/**
-	 * @description 按忽略大小写的方式获取前缀之后的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
-	 * @param str
-	 * @param prefix
-	 * @return
-	 */
-	public static String afterPrefixIgnoreCase(String str, String prefix) {
-		return afterPrefix(str, prefix, true);
-	}
-	
-	/**
-	 * @description 选择是否按忽略大小写方式获取前缀之后的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
-	 * @param str
-	 * @param suffix
-	 * @param ignoreCase
-	 * @return 
-	 */
-	public static String afterPrefix(String str, String prefix, boolean ignoreCase) {		
-		if (isEmpty(str) || isEmpty(prefix))
-			return str;
-		
-		return indexOf(str, prefix, 0, ignoreCase) == 0 ? str.substring(prefix.length()) : EMPTY_STRING;
-	}
 
 	/**
 	 * @description 获取第一个标记之前的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
 	 * @return
@@ -590,7 +668,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按忽略大小写的方式获取第一个标记之前的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param part
 	 * @return
@@ -601,7 +679,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 选择是否按忽略大小写的方式获取第一个标记之前的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @param ignoreCase
@@ -619,47 +697,8 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 获取第一个标记之后的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
-	 * @param str
-	 * @param mark
-	 * @return
-	 */
-	public static String afterFrist(String str, String mark) {
-		return afterFrist(str, mark, false);
-	}
-	
-	/**
-	 * @description 按忽略大小写的方式获取第一个标记之后的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
-	 * @param str
-	 * @param mark
-	 * @return 
-	 */
-	public static String afterFristIgnoreCase(String str, String mark) {
-		return afterFrist(str, mark, true);
-	}
-	
-	/**
-	 * @description 选择是否按按忽略大小写的方式获取第一个标记之后的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
-	 * @param str
-	 * @param mark
-	 * @param ignoreCase
-	 * @return 
-	 */
-	public static String afterFrist(String str, String mark, boolean ignoreCase) {
-		
-		if (isEmpty(str) || isEmpty(mark))
-			return str;
-		
-		int index = indexOf(str, mark, 0, ignoreCase);
-		return index > -1 ? str.substring(index + mark.length()) : EMPTY_STRING;
-	}
-
-	/**
 	 * @description 获取最后一个标记之前的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
 	 * @return
@@ -670,7 +709,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按忽略大小写的方式获取最后一个标记之前的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
 	 * @return
@@ -681,7 +720,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 选择是否按忽略大小写的方式获取最后一个标记之前的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @param ignoreCase
@@ -695,47 +734,6 @@ public class StringUtils {
 		return index > 0 ? str.substring(0, index) : EMPTY_STRING;
 	}
 
-	/**
-	 * @description 获取最后一个标记之后的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
-	 * @param str
-	 * @param mark
-	 * @return
-	 */
-	public static String afterLast(String str, String mark) {
-		return afterLast(str, mark, false);
-	}
-	
-	/**
-	 * @description 按忽略大小写的方式获取最后一个标记之后的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
-	 * @param str
-	 * @param mark
-	 * @return
-	 */
-	public static String afterLastIgnoreCase(String str, String mark) {
-		return afterLast(str, mark, true);
-	}
-	
-	/**
-	 * @description 选择是否按忽略大小写的方式获取最后一个标记之后的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
-	 * @param str 开始标记
-	 * @param mark 结束标记
-	 * @param ignoreCase
-	 * @return 
-	 */
-	public static String afterLast(String str, String mark, boolean ignoreCase) {
-		if (str == null)
-			return str;
-		
-		if (str.length() == 0 || isEmpty(mark))
-			return EMPTY_STRING;
-		
-		int index = lastIndexOf(str, mark, ignoreCase);
-		return index > -1 ? str.substring(index + mark.length()) : EMPTY_STRING;
-	}
-	
 	/**
 	 * @description 从左至右截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -948,7 +946,7 @@ public class StringUtils {
 			
 	/**
 	 * @description 将字符串中的标记替换成指定的子串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
 	 * @param subStr
@@ -960,7 +958,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按照忽略大小写的方式将字符串中的标记替换成指定的子串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @param subStr
@@ -972,7 +970,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 选择是否按照忽略大小写的方式将字符串中的标记替换成指定的子串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @param subStr
@@ -998,7 +996,7 @@ public class StringUtils {
 	/**
 	 * @description 将字符串中连续多个空格、制表符和换页符等空白字符整理替换成一个空格。
 	 * 				而字符串左右两侧的空白字符则直接清除。
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
 	 */
@@ -1020,7 +1018,7 @@ public class StringUtils {
 
 	/**
 	 * @description 生成32位UUID
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @return
 	 */
 	public static String UUID() {
@@ -1094,7 +1092,7 @@ public class StringUtils {
 
 	/**
 	 * @description 统计出字符串中指定标记的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
 	 * @return
@@ -1105,7 +1103,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按忽略大小写的方式统计出字符串中指定标记的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @return 
@@ -1116,7 +1114,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 选择是否忽略大小写的方式统计出字符串中指定标记的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @param ignoreCase
@@ -1145,7 +1143,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 删除字符串中指定的子串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @return 
@@ -1156,7 +1154,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按忽略大小写的方式删除字符串中指定的子串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @return 
@@ -1167,7 +1165,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 选择是否按忽略大小写的方式除字符串中指定的子串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @param ignoreCase
@@ -1179,7 +1177,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 按指定的标记分割字符串后去空存入数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @return 
@@ -1252,7 +1250,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 将集合中的所有元素以指定的分隔符连接成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @param seperator
 	 * @return 
@@ -1273,7 +1271,7 @@ public class StringUtils {
 	
 	/**
 	 * @description 将数组中的所有元素以指定的分隔符连接成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param arry
 	 * @param seperator
 	 * @return 
