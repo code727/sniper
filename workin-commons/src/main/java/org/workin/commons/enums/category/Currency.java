@@ -195,5 +195,16 @@ public enum Currency {
 	public static String getGenericPattern() {
 		return "¤" + GENERIC.getPattern();
 	}
-		
+	
+	/**
+	 * @description 获取指定类型对应的货币全称
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param type
+	 * @return
+	 */
+	public static String getName(int type) {
+		Currency currency = get(type);
+		return currency != null ? currency.getName() : GENERIC.getName();
+	}
+			
 }
