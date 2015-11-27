@@ -85,7 +85,7 @@ public class AppWechatpayService extends AbstractThirdPaymentService<Map<String,
 				paymentParameters.put("timestamp", System.currentTimeMillis() / 1000);
 				// 签名
 //				paymentParameters.put("sign", step2Data.get(WechatpayParser.SIGN));
-				String sign = signature.excute(paymentParameters, paymentContextParameters.getValue("wechatpay.sller.key", String.class));
+				String sign = signature.excute(paymentParameters, paymentContextParameters.getValue("wechatpay.seller.key", String.class));
 				paymentParameters.put("sign", sign);
 				resultModel.setDate(paymentParameters);
 			} else if (SystemStatus.FAILED.getKey().equals(code)) {
@@ -130,7 +130,7 @@ public class AppWechatpayService extends AbstractThirdPaymentService<Map<String,
 		
 		// 统一下单请求参数项
 		Map<String, Object> requestParameters = MapUtils.newHashMap();
-		// 公众账号ID
+		// 企业公众账号ID
 		requestParameters.put("appid", paymentContextParameters.getValue("wechatpay.appid"));
 		// 商户号
 		requestParameters.put("mch_id", paymentContextParameters.getValue("wechatpay.mchid"));
@@ -144,15 +144,16 @@ public class AppWechatpayService extends AbstractThirdPaymentService<Map<String,
 			requestParameters.put("detail", order.getDescription());
 		
 		// 商户交易订单号
-		requestParameters.put("out_trade_no", order.getDescription());
+		requestParameters.put("out_trade_no", order.getOrderId());
 		
 		BigDecimal amount = order.getAmount();
 		if (amount == null || NumberUtils.lessThanEquals(amount, 0)) {
 			amount = new BigDecimal(order.getPrice().doubleValue() * order.getQuantity() * order.getDiscount());
 			requestParameters.put("total_fee", amount);
 		}
-		// 总金额
-		requestParameters.put("total_fee", amount);
+		// 总金额(单位分)
+		requestParameters.put("total_fee", (long) (amount.doubleValue() * 100));
+		
 		// 终端IP
 		requestParameters.put("spbill_create_ip", parameters.get("ip"));
 		// 通知回调地址
@@ -192,9 +193,9 @@ public class AppWechatpayService extends AbstractThirdPaymentService<Map<String,
 	protected CodeMessageModel updatePaymentWhenParseError(String thirdCode, String orderId) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
 		Payment payment = paymentService.findByOrderId(orderId);
-		if (payment == null) {
+		if (payment == null) 
 			payment = new Payment();
-		}
+		
 		payment.setOrderId(orderId);
 		/* 主要是更新支付记录的状态和消息 */
 		payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(thirdCode));

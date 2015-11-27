@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.DateUtils;
 import org.workin.support.parameter.ConcurrentParameter;
-import org.workin.support.parameter.Parameter;
 import org.workin.support.puter.ErrorDulicateKeyPuter;
 import org.workin.support.puter.Puter;
 
@@ -35,9 +34,8 @@ import org.workin.support.puter.Puter;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ApplicationContextParameter<K, V> extends
-		ConcurrentParameter<K, V> implements Parameter<K, V>, InitializingBean {
-
+public class ApplicationContextParameter<K, V> extends ConcurrentParameter<K, V> implements InitializingBean {
+		
 	private static Logger logger = LoggerFactory.getLogger(ApplicationContextParameter.class);
 	
 	private Puter puter;
