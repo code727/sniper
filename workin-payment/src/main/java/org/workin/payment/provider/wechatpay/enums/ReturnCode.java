@@ -37,11 +37,5 @@ public enum ReturnCode {
 	public String getCode() {
 		return code;
 	}
-	
-	@Override
-	public String toString() {
-		return this.getCode();
-	}
-
-	
+		
 }

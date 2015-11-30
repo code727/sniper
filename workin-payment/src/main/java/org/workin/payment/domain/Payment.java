@@ -18,21 +18,19 @@
 
 package org.workin.payment.domain;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import org.workin.commons.entity.IdEntity;
 
 /**
  * @description 支付记录实体
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Payment implements Serializable {
+public class Payment extends IdEntity<Long> {
 
 	private static final long serialVersionUID = -6480268964029291858L;
-	
-	/** ID标识 */
-	private Long id;
 	
 	/** 订单编号 */
 	private String orderId;
@@ -54,14 +52,6 @@ public class Payment implements Serializable {
     
     /** 支付结果信息 */
     private String message;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getOrderId() {
 		return orderId;

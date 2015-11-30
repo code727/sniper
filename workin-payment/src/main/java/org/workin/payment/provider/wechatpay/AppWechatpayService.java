@@ -18,23 +18,26 @@
 
 package org.workin.payment.provider.wechatpay;
 
-import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.workin.commons.enums.category.SystemStatus;
 import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.model.impl.ResultModel;
+import org.workin.commons.util.CurrencyUtils;
 import org.workin.commons.util.MapUtils;
-import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.payment.PaymentUtils;
 import org.workin.payment.domain.Order;
 import org.workin.payment.domain.Payment;
+import org.workin.payment.enums.payment.PaymentStatus;
 import org.workin.payment.enums.payment.ThirdPaymentStatus;
+import org.workin.payment.provider.wechatpay.enums.ResultCode;
 import org.workin.payment.provider.wechatpay.enums.ReturnCode;
 import org.workin.payment.provider.wechatpay.parser.DefaultWechatpayParser;
 import org.workin.payment.provider.wechatpay.parser.WechatpayParser;
-import org.workin.payment.service.third.AbstractThirdPaymentService;
+import org.workin.payment.service.AbstractWorkinPaymentService;
 
 /**
  * @description APP版微信支付服务实现类
@@ -42,7 +45,7 @@ import org.workin.payment.service.third.AbstractThirdPaymentService;
  * @version 1.0
  */
 @Service
-public class AppWechatpayService extends AbstractThirdPaymentService<Map<String, Object>> {
+public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String, Object>> {
 	
 	private WechatpayParser parser;
 	
@@ -93,7 +96,7 @@ public class AppWechatpayService extends AbstractThirdPaymentService<Map<String,
 				resultModel.setCode(code);
 				resultModel.setMessage(step2Result.getMessage());
 			} else {
-				CodeMessageModel model = updatePaymentWhenParseError(code, order.getOrderId());
+				CodeMessageModel model = updatePaymentWhenResultCodeIsFail(code, step2Result.getMessage(), order.getOrderId());
 				resultModel.setCode(model.getCode());
 				resultModel.setMessage(model.getMessage());
 			}
@@ -113,7 +116,8 @@ public class AppWechatpayService extends AbstractThirdPaymentService<Map<String,
 		else {
 			/* 交易未成功时，则直接返回处理结果，不对支付记录做任何更新操作 */
 			result.setCode(SystemStatus.FAILED.getKey());
-			result.setMessage(paymentResponse.get("return_msg"));
+			String message = paymentResponse.get("return_msg");
+			result.setMessage(StringUtils.isNotBlank(message) ? message : "msg.payment.failed");
 		}		
 		return result;
 	}
@@ -145,14 +149,10 @@ public class AppWechatpayService extends AbstractThirdPaymentService<Map<String,
 		
 		// 商户交易订单号
 		requestParameters.put("out_trade_no", order.getOrderId());
+		PaymentUtils.prepare(order);
 		
-		BigDecimal amount = order.getAmount();
-		if (amount == null || NumberUtils.lessThanEquals(amount, 0)) {
-			amount = new BigDecimal(order.getPrice().doubleValue() * order.getQuantity() * order.getDiscount());
-			requestParameters.put("total_fee", amount);
-		}
 		// 总金额(单位分)
-		requestParameters.put("total_fee", (long) (amount.doubleValue() * 100));
+		requestParameters.put("total_fee", CurrencyUtils.yuanToFen(order.getAmount()));
 		
 		// 终端IP
 		requestParameters.put("spbill_create_ip", parameters.get("ip"));
@@ -167,7 +167,7 @@ public class AppWechatpayService extends AbstractThirdPaymentService<Map<String,
 		
 		/* 签名 */
 		String sign = signature.excute(requestParameters, 
-				paymentContextParameters.getValue("wechatpay.sller.key", String.class));
+				paymentContextParameters.getValue("wechatpay.seller.key", String.class));
 		requestParameters.put("sign", sign);
 		
 		try {
@@ -186,20 +186,27 @@ public class AppWechatpayService extends AbstractThirdPaymentService<Map<String,
 	/**
 	 * @description 当解析"统一下单"结果出现业务错误时更新支付记录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param thirdCode
+	 * @param errCode
+	 * @param errMessage
 	 * @param orderId
+	 * @return
 	 * @throws Exception
 	 */
-	protected CodeMessageModel updatePaymentWhenParseError(String thirdCode, String orderId) throws Exception {
+	protected CodeMessageModel updatePaymentWhenResultCodeIsFail(String errCode, String errMessage, String orderId) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
 		Payment payment = paymentService.findByOrderId(orderId);
 		if (payment == null) 
 			payment = new Payment();
 		
 		payment.setOrderId(orderId);
-		/* 主要是更新支付记录的状态和消息 */
-		payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(thirdCode));
-		payment.setMessage(ThirdPaymentStatus.getPaymentMessage(thirdCode));
+		/* 主要是更新支付记录的状态和消息
+		 * 消息为微信支付返回的错误代码描述，如果没有则返回自定义的消息 */
+		payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(errCode));
+		if (StringUtils.isNotBlank(errMessage)) 
+			payment.setMessage(errMessage);
+		else 
+			payment.setMessage(ThirdPaymentStatus.getPaymentMessage(errCode));
+		
 		if (payment.getId() != null)
 			result = paymentService.update(payment);
 		else
@@ -217,8 +224,42 @@ public class AppWechatpayService extends AbstractThirdPaymentService<Map<String,
 			payment = new Payment();
 			payment.setAmount(orderService.findByOrderId(orderId).getAmount());
 		}
+		
 		payment.setOrderId(orderId);
 		payment.setThirdOrderId(paymentResponse.get("transaction_id"));
+		payment.setPayAmount(CurrencyUtils.fenToYuan(paymentResponse.get("total_fee")));
+		
+		String resultCode = paymentResponse.get("result_code");
+		if (ResultCode.SUCCESS.getCode().equals(resultCode)) {
+			payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(resultCode));
+			payment.setMessage(ThirdPaymentStatus.getPaymentMessage(resultCode));
+		} else {
+			String errCode = paymentResponse.get("err_code");
+			if (StringUtils.isNotBlank(errCode)) {
+				// 设置错误代码对应的支付状态
+				payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(errCode));
+				String message = paymentResponse.get("err_code_des");
+				// 设置支付消息为不为空的微信支付错误代码描述 (err_code_des)，否则，设置为自定义的失败状态对应的支付信息
+				payment.setMessage(StringUtils.isNotBlank(message) ? message : 
+				ThirdPaymentStatus.getPaymentMessage(ResultCode.FAIL.getCode()));
+			} else {
+				String thirdCode = ResultCode.FAIL.getCode();
+				payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(thirdCode));
+				payment.setMessage(ThirdPaymentStatus.getPaymentMessage(thirdCode));
+			}
+		}
+		
+		// 只有等交易完成后才记录支付时间
+		if (PaymentStatus.TRADE_FINISHED.getKey() == payment.getStatus())
+			payment.setPayTime(new Date());
+		else
+			payment.setPayTime(null);
+		
+		if (payment.getId() != null)
+			result = paymentService.update(payment);
+		else
+			result = paymentService.save(payment);
+		
 		return result;
 	}
 	

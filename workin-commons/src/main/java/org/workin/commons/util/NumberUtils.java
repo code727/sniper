@@ -19,6 +19,7 @@
 package org.workin.commons.util;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.Map;
 
@@ -183,6 +184,58 @@ public class NumberUtils {
 	 */
 	public static byte safeByte(Byte value, byte defaultValue) {
 		return value != null ? value : defaultValue;
+	}
+	
+	/**
+	 * @description 获取不为空的BigDecimal，否则返回0
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @return
+	 */
+	public static BigDecimal safeBigDecimal(BigDecimal decimal) {
+		return safeBigDecimal(decimal, new BigDecimal(0));
+	}
+	
+	/**
+	 * @description 获取不为空的BigDecimal，否则返回指定不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param defaultValue
+	 * @return
+	 */
+	public static BigDecimal safeBigDecimal(BigDecimal decimal, BigDecimal defaultValue) {
+		if (decimal == null) {
+			AssertUtils.assertNotNull(defaultValue, "Default decimal must not be null.");
+			return defaultValue;
+		}
+		
+		return decimal;
+	}
+	
+	/**
+	 * @description 获取不为空的BigInteger，否则返回0
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param integer
+	 * @return
+	 */
+	public static BigInteger safeBigInteger(BigInteger integer) {
+		return safeBigInteger(integer, new BigInteger("0"));
+	}
+	
+	/**
+	 * @description 获取不为空的BigInteger，否则返回指定不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param defaultValue
+	 * @return
+	 */
+	public static BigInteger safeBigInteger(BigInteger integer, BigInteger defaultValue) {
+		if (integer == null) {
+			AssertUtils.assertNotNull(defaultValue, "Default decimal must not be null.");
+			return defaultValue;
+		}
+		
+		return integer;
 	}
 	
 	/**

@@ -16,7 +16,7 @@
  * Create Date : 2015-11-16
  */
 
-package org.workin.payment.service.third;
+package org.workin.payment.service;
 
 import java.util.Map;
 
@@ -33,7 +33,6 @@ import org.workin.payment.domain.Order;
 import org.workin.payment.domain.Payment;
 import org.workin.payment.enums.payment.PaymentStatus;
 import org.workin.payment.enums.payment.PaymentType;
-import org.workin.payment.service.PaymentServiceSupport;
 import org.workin.spring.context.ApplicationContextParameter;
 
 /**
@@ -41,8 +40,8 @@ import org.workin.spring.context.ApplicationContextParameter;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractThirdPaymentService<T> extends PaymentServiceSupport
-		implements ThirdPaymentService {
+public abstract class AbstractWorkinPaymentService<T> extends PaymentServiceSupport
+		implements WorkinPaymentService {
 	
 	/** 支付接口HTTP调用模板 */
 	@Autowired
@@ -109,13 +108,13 @@ public abstract class AbstractThirdPaymentService<T> extends PaymentServiceSuppo
 					// 第五步：根据订单和其它非订单参数项创建第三方支付请求对象模型
 					ResultModel<T> resultModel = createPaymentParameters(order, parameters);
 					if (SystemStatus.SUCCESS.getKey().equals(resultModel.getCode())) {
-						// 第三方支付请求对象模型创建成功后，返回状态码和数据
-						CodeDataModel<Object> result = new CodeDataModel<Object>();
+						// 支付请求对象模型创建成功后，返回状态码和数据
+						CodeDataModel<T> result = new CodeDataModel<T>();
 						result.setCode(resultModel.getCode());
 						result.setDate(resultModel.getData());
 						return result;
 					} else {
-						// 第三方支付请求对象模型创建未成功时，返回创建结果状态码和消息
+						// 支付请求对象模型创建未成功时，返回创建结果状态码和消息
 						model.setCode(resultModel.getCode());
 						model.setMessage(resultModel.getMessage());
 					}

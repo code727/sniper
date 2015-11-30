@@ -18,21 +18,19 @@
 
 package org.workin.payment.domain;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import org.workin.commons.entity.IdEntity;
 
 /**
  * @description 订单实体对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Order implements Serializable {
+public class Order extends IdEntity<Long> {
 
 	private static final long serialVersionUID = -4569426721006936232L;
-	
-	/** ID标识 */
-	private Long id;
 	
 	/** 下单用户的登录账号 */
 	private String loginName;
@@ -50,7 +48,7 @@ public class Order implements Serializable {
 	private BigDecimal amount;
 	
 	/** 商品购买数量 */
-	private int quantity = 1;
+	private int quantity;
 	
 	/** 商品编号 */
 	private String productId;
@@ -62,7 +60,7 @@ public class Order implements Serializable {
 	private String description;
 	
 	/** 商品单价 */
-	private BigDecimal price = new BigDecimal(0.01);
+	private BigDecimal price;
 	
 	/** 商品折扣 */
 	private double discount = 1;
@@ -75,14 +73,6 @@ public class Order implements Serializable {
 	
 	/** 针对于线下用户输入的密码 */
 	private transient String password;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getLoginName() {
 		return loginName;

@@ -29,6 +29,7 @@ import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.payment.PaymentUtils;
 import org.workin.payment.domain.Order;
 import org.workin.payment.domain.Payment;
 import org.workin.payment.enums.payment.PaymentStatus;
@@ -36,7 +37,7 @@ import org.workin.payment.enums.payment.ThirdPaymentStatus;
 import org.workin.payment.enums.validation.ThirdValidationResult;
 import org.workin.payment.enums.validation.ValidationResult;
 import org.workin.payment.model.PaymentRequest;
-import org.workin.payment.service.third.AbstractThirdPaymentService;
+import org.workin.payment.service.AbstractWorkinPaymentService;
 
 /**
  * @description 阿里支付服务实现类
@@ -44,7 +45,7 @@ import org.workin.payment.service.third.AbstractThirdPaymentService;
  * @version 1.0
  */
 @Service
-public class AlipayService extends AbstractThirdPaymentService<PaymentRequest> {
+public class AlipayService extends AbstractWorkinPaymentService<PaymentRequest> {
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -88,13 +89,15 @@ public class AlipayService extends AbstractThirdPaymentService<PaymentRequest> {
 		// 商户交易订单号
 		paymentParameters.put("out_trade_no", order.getOrderId());
 		
-		BigDecimal amount = order.getAmount();
+		PaymentUtils.prepare(order);
 		
-		if (amount != null && amount.compareTo(new BigDecimal(0)) == 1)
+		BigDecimal amount = order.getAmount();
+		if (NumberUtils.greaterThan(amount, 0))
 			// 交易金额大于0时设置交易金额
 			paymentParameters.put("total_fee", amount);
 		else {
 			BigDecimal price = order.getPrice();
+			
 			if (price == null || price.compareTo(new BigDecimal(0)) < 1)
 				// 商品单价小于等于时设置单价为0.01元
 				price = new BigDecimal(0.01);

@@ -16,7 +16,7 @@
  * Create Date : 2015-11-16
  */
 
-package org.workin.payment.service.third;
+package org.workin.payment.service;
 
 
 import java.util.Map;
@@ -26,11 +26,11 @@ import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.payment.domain.Order;
 
 /**
- * @description 第三方支付服务接口
+ * @description Workin框架支付服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ThirdPaymentService {
+public interface WorkinPaymentService {
 	
 	/**
 	 * @description 根据订单和其它非订单参数项创建支付请求数据对象模型

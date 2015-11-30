@@ -50,10 +50,10 @@ public class DefaultWechatpayParser implements WechatpayParser {
 			Element root = document.getRootElement();
 			// 返回状态码
 			String returnCode = document.createXPath(root.getPath() + "/" + RETURN_CODE).selectSingleNode(document).getText();
-			if (ReturnCode.SUCCESS.equals(returnCode)) {
+			if (ReturnCode.SUCCESS.getCode().equals(returnCode)) {
 				// 业务结果码
 				String resultCode = document.createXPath(root.getPath() + "/" + RESULT_CODE).selectSingleNode(document).getText();
-				if (ResultCode.SUCCESS.equals(resultCode)) {
+				if (ResultCode.SUCCESS.getCode().equals(resultCode)) {
 					/* return_code 和result_code都为SUCCESS时返回必要的支付请求参数项 */
 					Map<String, Object> paymentRequestParameters = MapUtils.newHashMap();
 					
@@ -69,13 +69,28 @@ public class DefaultWechatpayParser implements WechatpayParser {
 							
 					resultModel.setDate(paymentRequestParameters);
 				} else {
-					/* result_code(业务码)未成功时，则返回错误代码 */
-					resultModel.setCode(document.createXPath(root.getPath() + "/" + ERR_CODE).selectSingleNode(document).getText());
+					// 业务结果
+					Node errCodeNode = document.createXPath(root.getPath() + "/" + ERR_CODE).selectSingleNode(document);
+					if (errCodeNode != null) {
+						// 业务错误
+						resultModel.setCode(errCodeNode.getText());
+						Node errCodeDesNode = document.createXPath(root.getPath() + "/" + ERR_CODE_DES).selectSingleNode(document);
+						if (errCodeDesNode != null)
+							resultModel.setMessage(errCodeDesNode.getText());
+					}
+					else {
+						resultModel.setCode(SystemStatus.FAILED.getKey());
+						resultModel.setMessage("msg.place.order.failed");
+					}
 				}
 			} else {
 				/* return_code未成功时，则返回失败状态，并且消息即为return_msg的值 */
 				resultModel.setCode(SystemStatus.FAILED.getKey());
-				resultModel.setMessage(document.createXPath(root.getPath() + "/" + RETURN_MSG).selectSingleNode(document).getText());
+				Node returnMsgNode = document.createXPath(root.getPath() + "/" + RETURN_MSG).selectSingleNode(document);
+				if (returnMsgNode != null)
+					resultModel.setMessage(returnMsgNode.getText());
+				else
+					resultModel.setMessage("msg.place.order.failed");
 			}
 		}  catch (DocumentException e) {
 			resultModel.setCode(SystemStatus.FAILED.getKey());
@@ -106,20 +121,32 @@ public class DefaultWechatpayParser implements WechatpayParser {
 		Map<String, Object> requiredParameters = MapUtils.newHashMap();
 		String returnCode = document.createXPath(root.getPath() + "/" + RETURN_CODE).selectSingleNode(document).getText();
 		requiredParameters.put(RETURN_CODE, returnCode);
-		if (ReturnCode.SUCCESS.equals(returnCode)) {
+		if (ReturnCode.SUCCESS.getCode().equals(returnCode)) {
+			// 公众账号ID
 			requiredParameters.put(APPID, document.createXPath(root.getPath() + "/" + APPID).selectSingleNode(document).getText());
+			// 商户号
 			requiredParameters.put(MCH_ID, document.createXPath(root.getPath() + "/" + MCH_ID).selectSingleNode(document).getText());
+			// 随机字符串
 			requiredParameters.put(NONCE_STR, document.createXPath(root.getPath() + "/" + NONCE_STR).selectSingleNode(document).getText());
+			// 签名
 			requiredParameters.put(SIGN, document.createXPath(root.getPath() + "/" + SIGN).selectSingleNode(document).getText());
+			// 业务结果
 			requiredParameters.put(RESULT_CODE, document.createXPath(root.getPath() + "/" + RESULT_CODE).selectSingleNode(document).getText());
-			
+			// 用户标识
 			requiredParameters.put(OPENID, document.createXPath(root.getPath() + "/" + OPENID).selectSingleNode(document).getText());
+			// 交易类型
 			requiredParameters.put(TRADE_TYPE, document.createXPath(root.getPath() + "/" + TRADE_TYPE).selectSingleNode(document).getText());
+			// 付款银行
 			requiredParameters.put(BANK_TYPE, document.createXPath(root.getPath() + "/" + BANK_TYPE).selectSingleNode(document).getText());
+			// 总金额
 			requiredParameters.put(TOTAL_FEE, document.createXPath(root.getPath() + "/" + TOTAL_FEE).selectSingleNode(document).getText());
+			// 现金支付金额
 			requiredParameters.put(CASH_FEE, document.createXPath(root.getPath() + "/" + CASH_FEE).selectSingleNode(document).getText());
+			// 微信支付订单号
 			requiredParameters.put(TRANSACTION_ID, document.createXPath(root.getPath() + "/" + TRANSACTION_ID).selectSingleNode(document).getText());
+			// 商户订单号
 			requiredParameters.put(OUT_TRADE_NO, document.createXPath(root.getPath() + "/" + OUT_TRADE_NO).selectSingleNode(document).getText());
+			// 支付完成时间
 			requiredParameters.put(TIME_END, document.createXPath(root.getPath() + "/" + TIME_END).selectSingleNode(document).getText());
 		}
 		return requiredParameters;
@@ -139,8 +166,10 @@ public class DefaultWechatpayParser implements WechatpayParser {
 		Node returnMsgNode = document.createXPath(root.getPath() + "/" + RETURN_MSG).selectSingleNode(document);
 		if (returnMsgNode != null)
 			unrequiredParameters.put(RETURN_MSG, returnMsgNode.getText());
+		else
+			unrequiredParameters.put(RETURN_MSG, "");
 		
-		if (ReturnCode.SUCCESS.equals(returnCode)) {
+		if (ReturnCode.SUCCESS.getCode().equals(returnCode)) {
 			// 设备号
 			Node deviceInfoNode = document.createXPath(root.getPath() + "/" + DEVICE_INFO).selectSingleNode(document);
 			if (deviceInfoNode != null)
