@@ -36,11 +36,12 @@ public interface OrderBaseService {
 	 */
 	public CodeMessageModel save(Order order) throws Exception;
 
-	/** 
+	/**
 	 * @description 根据编号查询订单对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param orderId
-	 * @return 
+	 * @return
+	 * @throws Exception
 	 */
 	public Order findByOrderId(String orderId) throws Exception;
 	
@@ -50,7 +51,8 @@ public interface OrderBaseService {
 	 * @param userAccount
 	 * @param password
 	 * @return
+	 * @throws Exception
 	 */
-	public String findUserLoginName(String userAccount, String password);
+	public String findUserLoginName(String userAccount, String password) throws Exception;
 
 }

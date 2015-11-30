@@ -36,14 +36,20 @@ public class PaymentUtils {
 	 * @param order
 	 */
 	public static void prepare(Order order) {
-		BigDecimal price = NumberUtils.safeBigDecimal(order.getPrice());
 		int quantity = NumberUtils.minLimit(order.getQuantity(), 1);
+		// 折扣限制在[0.01, 1]闭合区间
 		double discount = NumberUtils.maxLimit(NumberUtils.minLimit(order.getDiscount(), 0.01), 1);
-		order.setPrice(price);
+		BigDecimal price = NumberUtils.safeBigDecimal(order.getPrice());
+		// 单价不能小于0.01元
+		if (NumberUtils.lessThan(price, 0.01))
+			price = new BigDecimal(0.01);
+		
 		order.setQuantity(quantity);
 		order.setDiscount(discount);
+		order.setPrice(price);
 		
 		BigDecimal amount = NumberUtils.safeBigDecimal(order.getAmount());
+		// 金额为0时，则金额=单价*数量*折扣
 		if (amount.equals(0)) 
 			amount = price.multiply(new BigDecimal(quantity)).multiply(new BigDecimal(discount));
 		

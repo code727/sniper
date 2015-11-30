@@ -42,8 +42,9 @@ public interface PaymentBaseService {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param orderId
 	 * @return
+	 * @throws Exception
 	 */
-	public Payment findByOrderId(String orderId);
+	public Payment findByOrderId(String orderId) throws Exception;
 	
 	/**
 	 * @description 更新支付记录

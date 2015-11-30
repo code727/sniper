@@ -16,14 +16,14 @@
  * Create Date : 2015-11-16
  */
 
-package org.workin.payment.model;
+package org.workin.payment;
 
 /**
- * @description 支付请求对象模型
+ * @description Web版支付请求对象模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class PaymentRequest {
+public class WebPaymentRequest {
 	
 	/** 支付请求的URL地址 */
 	private String url;

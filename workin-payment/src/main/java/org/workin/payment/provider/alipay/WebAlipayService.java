@@ -30,22 +30,22 @@ import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.payment.PaymentUtils;
+import org.workin.payment.WebPaymentRequest;
 import org.workin.payment.domain.Order;
 import org.workin.payment.domain.Payment;
 import org.workin.payment.enums.payment.PaymentStatus;
 import org.workin.payment.enums.payment.ThirdPaymentStatus;
 import org.workin.payment.enums.validation.ThirdValidationResult;
 import org.workin.payment.enums.validation.ValidationResult;
-import org.workin.payment.model.PaymentRequest;
 import org.workin.payment.service.AbstractWorkinPaymentService;
 
 /**
- * @description 阿里支付服务实现类
+ * @description Web版阿里支付服务实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @Service
-public class AlipayService extends AbstractWorkinPaymentService<PaymentRequest> {
+public class WebAlipayService extends AbstractWorkinPaymentService<WebPaymentRequest> {
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -56,7 +56,7 @@ public class AlipayService extends AbstractWorkinPaymentService<PaymentRequest> 
 	}
 	
 	@Override
-	public ResultModel<PaymentRequest> createPaymentParameters(Order order, Map<String,String> parameters) {
+	public ResultModel<WebPaymentRequest> createPaymentParameters(Order order, Map<String,String> parameters) {
 		Map<String, Object> paymentParameters = MapUtils.newHashMap();
 		// 接口名称
 		paymentParameters.put("service", paymentContextParameters.getValue("alipay.pay.service"));
@@ -90,19 +90,12 @@ public class AlipayService extends AbstractWorkinPaymentService<PaymentRequest> 
 		paymentParameters.put("out_trade_no", order.getOrderId());
 		
 		PaymentUtils.prepare(order);
-		
 		BigDecimal amount = order.getAmount();
+		/* 交易金额大于0时设置交易金额参数，否则设置单价参数 */
 		if (NumberUtils.greaterThan(amount, 0))
-			// 交易金额大于0时设置交易金额
 			paymentParameters.put("total_fee", amount);
-		else {
-			BigDecimal price = order.getPrice();
-			
-			if (price == null || price.compareTo(new BigDecimal(0)) < 1)
-				// 商品单价小于等于时设置单价为0.01元
-				price = new BigDecimal(0.01);
-			paymentParameters.put("price", price);
-		}
+		else
+			paymentParameters.put("price", order.getPrice());
 		
 		// 购买数量
 		paymentParameters.put("quantity", NumberUtils.minLimit(order.getQuantity(), 1));
@@ -127,11 +120,11 @@ public class AlipayService extends AbstractWorkinPaymentService<PaymentRequest> 
 		// 商户系统与支付宝系统交互信息时使用的编码字符集
 		paymentParameters.put("_input_charset", inputCharset);
 		
-		PaymentRequest request = new PaymentRequest();
+		WebPaymentRequest request = new WebPaymentRequest();
 		request.setUrl(paymentContextParameters.getValue("alipay.request.url") + "?" + MapUtils.joinQueryString(paymentParameters));
 		request.setOrderId(order.getOrderId());
 		
-		ResultModel<PaymentRequest> resultModel = new ResultModel<PaymentRequest>();
+		ResultModel<WebPaymentRequest> resultModel = new ResultModel<WebPaymentRequest>();
 		resultModel.setDate(request);
 		return resultModel;
 	}

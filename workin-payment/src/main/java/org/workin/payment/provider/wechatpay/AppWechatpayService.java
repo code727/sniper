@@ -21,6 +21,7 @@ package org.workin.payment.provider.wechatpay;
 import java.util.Date;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.workin.commons.enums.category.SystemStatus;
 import org.workin.commons.model.impl.CodeMessageModel;
@@ -47,7 +48,9 @@ import org.workin.payment.service.AbstractWorkinPaymentService;
 @Service
 public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String, Object>> {
 	
-	private WechatpayParser parser;
+	/** 微信支付解析器 */
+	@Autowired(required = false)
+	private WechatpayParser wechatpayParser;
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -56,8 +59,8 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 		if (this.signature == null)
 			this.signature = new WechatpaySignature();
 		
-		if (this.parser == null)
-			this.parser = new DefaultWechatpayParser();
+		if (this.wechatpayParser == null)
+			this.wechatpayParser = new DefaultWechatpayParser();
 	}
 	
 	@Override
@@ -67,7 +70,7 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 		ResultModel<String> step1Result = placeOrder(order, parameters);
 		if (SystemStatus.SUCCESS.getKey().equals(step1Result.getCode())) {
 			// 第二步：下单成功后，解析出返回结果
-			ResultModel<Map<String, Object>> step2Result = parser.parsePlaceOrderResult(step1Result.getData());
+			ResultModel<Map<String, Object>> step2Result = wechatpayParser.parsePlaceOrderResult(step1Result.getData());
 			String code = step2Result.getCode();
 			/* 解析成功后，则返回支付时的必要参数项 */
 			if (SystemStatus.SUCCESS.getKey().equals(code)) {
@@ -100,7 +103,6 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 				resultModel.setCode(model.getCode());
 				resultModel.setMessage(model.getMessage());
 			}
-			
 		}
 		return resultModel;
 	}
@@ -241,7 +243,7 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 				String message = paymentResponse.get("err_code_des");
 				// 设置支付消息为不为空的微信支付错误代码描述 (err_code_des)，否则，设置为自定义的失败状态对应的支付信息
 				payment.setMessage(StringUtils.isNotBlank(message) ? message : 
-				ThirdPaymentStatus.getPaymentMessage(ResultCode.FAIL.getCode()));
+					ThirdPaymentStatus.getPaymentMessage(ResultCode.FAIL.getCode()));
 			} else {
 				String thirdCode = ResultCode.FAIL.getCode();
 				payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(thirdCode));

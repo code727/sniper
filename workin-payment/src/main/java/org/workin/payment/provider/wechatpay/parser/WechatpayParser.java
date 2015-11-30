@@ -18,18 +18,14 @@
 
 package org.workin.payment.provider.wechatpay.parser;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.workin.commons.model.impl.ResultModel;
+import org.workin.payment.PaymentParser;
 
 /**
  * @description 微信支付解析器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface WechatpayParser {
+public interface WechatpayParser extends PaymentParser {
 	
 	/** 返回状态码变量名 */
 	public static final String RETURN_CODE = "return_code";
@@ -115,20 +111,4 @@ public interface WechatpayParser {
 	/** 支付完成时间变量名 */
 	public static final String TIME_END = "time_end";
 	
-	/**
-	 * @description 解析下单结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param result
-	 * @return
-	 */
-	public ResultModel<Map<String, Object>> parsePlaceOrderResult(String result) throws Exception;
-	
-	/**
-	 * @description 从HttpServletRequest对象中解析出支付结果通用通知
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param request
-	 * @return
-	 */
-	public Map<String, Object> parseNotifyRequest(HttpServletRequest request) throws Exception;
-
 }
