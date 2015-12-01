@@ -45,6 +45,6 @@ public interface PaymentParser {
 	 * @param request
 	 * @return
 	 */
-	public Map<String, Object> parseNotifyRequest(HttpServletRequest request) throws Exception;
+	public Map<String, String> parseNotifyRequest(HttpServletRequest request) throws Exception;
 
 }

@@ -101,10 +101,10 @@ public class DefaultWechatpayParser implements WechatpayParser {
 	}
 
 	@Override
-	public Map<String, Object> parseNotifyRequest(HttpServletRequest request) throws Exception {
+	public Map<String, String> parseNotifyRequest(HttpServletRequest request) throws Exception {
 		Document document = DocumentHelper.parseText(IOUtils.read(request.getInputStream()));
 		Element root = document.getRootElement();
-		Map<String, Object> requestParameters = MapUtils.newHashMap();
+		Map<String, String> requestParameters = MapUtils.newHashMap();
 		requestParameters.putAll(parseNotifyRequiredParameters(document, root));
 		requestParameters.putAll(parseNotifyUnrequiredParameters(document, root, requestParameters.get("return_code").toString()));
 		return requestParameters;
@@ -117,8 +117,8 @@ public class DefaultWechatpayParser implements WechatpayParser {
 	 * @param root
 	 * @return
 	 */
-	protected Map<String, Object> parseNotifyRequiredParameters(Document document, Element root) {
-		Map<String, Object> requiredParameters = MapUtils.newHashMap();
+	protected Map<String, String> parseNotifyRequiredParameters(Document document, Element root) {
+		Map<String, String> requiredParameters = MapUtils.newHashMap();
 		String returnCode = document.createXPath(root.getPath() + "/" + RETURN_CODE).selectSingleNode(document).getText();
 		requiredParameters.put(RETURN_CODE, returnCode);
 		if (ReturnCode.SUCCESS.getCode().equals(returnCode)) {
@@ -159,8 +159,8 @@ public class DefaultWechatpayParser implements WechatpayParser {
 	 * @param root
 	 * @return
 	 */
-	protected Map<String, Object> parseNotifyUnrequiredParameters(Document document, Element root, String returnCode) {
-		Map<String, Object> unrequiredParameters = MapUtils.newHashMap();
+	protected Map<String, String> parseNotifyUnrequiredParameters(Document document, Element root, String returnCode) {
+		Map<String, String> unrequiredParameters = MapUtils.newHashMap();
 		
 		// 返回信息
 		Node returnMsgNode = document.createXPath(root.getPath() + "/" + RETURN_MSG).selectSingleNode(document);
