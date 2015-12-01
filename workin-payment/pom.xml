@@ -14,22 +14,6 @@
    			<version>2.5</version> 
    			<scope>provided</scope> 
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.alipay</groupId>
-		  	<artifactId>alipay-sdk-java</artifactId>
-		  	<version>20151111220054</version>
-		</dependency>
-		<dependency>
-		  	<groupId>com.alipay</groupId>
-		  	<artifactId>alipay-sdk-jdk14</artifactId>
-		  	<version>20151111220111</version>
-		</dependency>
-		<dependency>
-			<groupId>org.keycloak</groupId>
-			<artifactId>keycloak-core</artifactId>
-			<version>1.6.1.Final</version>
-		</dependency>
-		 -->
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
@@ -58,11 +42,6 @@
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-http</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.workin</groupId>
-			<artifactId>workin-json</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies>

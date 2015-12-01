@@ -159,13 +159,15 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 		// 终端IP
 		requestParameters.put("spbill_create_ip", parameters.get("ip"));
 		// 通知回调地址
-		requestParameters.put("notify_url", paymentContextParameters.getValue("wechatpay.notify.url"));
+		requestParameters.put("notify_url", paymentContextParameters.getValue("wechatpay.app.notify.url"));
 		
 		String tradeType = paymentContextParameters.getValue("wechatpay.trade.type", String.class);
 		// 交易类型
 		requestParameters.put("trade_type", tradeType);
 		if ("JSAPI".equalsIgnoreCase(tradeType))
 			requestParameters.put("openid", parameters.get("openid"));
+		else if ("NATIVE".equalsIgnoreCase(tradeType))
+			requestParameters.put("product_id", order.getProductId());
 		
 		/* 签名 */
 		String sign = signature.excute(requestParameters, 
@@ -174,7 +176,7 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 		
 		try {
 			// 调用微信支付统一下单请求
-			String xmlString = paymentHttpTemplet.request("wechatpayPlaceOrder", parameters);
+			String xmlString = paymentHttpTemplet.request("appWechatpayPlaceOrder", requestParameters);
 			resultModel.setDate(xmlString);
 		} catch (Exception e) {
 			resultModel.setCode(SystemStatus.FAILED.getKey());

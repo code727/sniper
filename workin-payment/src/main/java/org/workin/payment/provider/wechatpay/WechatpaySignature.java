@@ -38,7 +38,8 @@ public class WechatpaySignature extends AbstractSignature {
 		if (!(paymentParameters instanceof TreeMap<?, ?>))
 			paymentParameters = MapUtils.newTreeMap(paymentParameters);
 		
-		String queryString = MapUtils.joinQueryString(paymentParameters) + "&key=" + sellerKey;
+		paymentParameters.put("key", sellerKey);
+		String queryString = MapUtils.joinQueryString(paymentParameters);
 		return MessageUtils.encrypt(queryString, getType()).toUpperCase();
 	}
 		
