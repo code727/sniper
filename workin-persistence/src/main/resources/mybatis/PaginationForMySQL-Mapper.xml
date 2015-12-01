@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.workin.commons.mysql.pagination">
+
+	<!-- MySQL基本分页片段 -->
+	<sql id="limit" >
+		LIMIT #{begin}, #{pageSize}
+	</sql>
+	
+	<sql id="beginAndLimit" >
+		> #{begin} LIMIT #{pageSize}
+	</sql>
+	
+	<sql id="begin" >
+		> #{begin}
+	</sql>
+	
+	<sql id="end">
+		<![CDATA[
+			<= #{end}
+		]]>
+	</sql>
+</mapper>
