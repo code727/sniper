@@ -42,6 +42,10 @@ public class ApplicationContextParameter<K, V> extends ConcurrentParameter<K, V>
 	
 	private ParameterService parameterService;
 	
+	public ApplicationContextParameter() {
+		this.puter = new ErrorDulicateKeyPuter();
+	}
+	
 	public Puter getPuter() {
 		return puter;
 	}
@@ -61,9 +65,6 @@ public class ApplicationContextParameter<K, V> extends ConcurrentParameter<K, V>
 	@SuppressWarnings("unchecked")
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (this.puter == null)
-			this.puter = new ErrorDulicateKeyPuter();
-		
 		if (this.parameterService != null) {
 			Date start = new Date();
 			logger.info("Starting preloading application context parameters");

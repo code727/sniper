@@ -45,37 +45,37 @@ public abstract class AbstractWorkinPaymentService<T> extends PaymentServiceSupp
 	
 	/** 支付接口HTTP调用模板 */
 	@Autowired
-	protected HttpClientTemplet paymentHttpTemplet; 
+	protected HttpClientTemplet httpClientTemplet; 
 	
 	/** 支付应用上下文配置参数项 */
 	@Autowired
-	protected ApplicationContextParameter<Object, Object> paymentContextParameters;
+	protected ApplicationContextParameter<Object, Object> applicationContextParameter;
 	
-	public HttpClientTemplet getPaymentHttpTemplet() {
-		return paymentHttpTemplet;
+	public HttpClientTemplet getHttpClientTemplet() {
+		return httpClientTemplet;
 	}
 
-	public void setPaymentHttpTemplet(HttpClientTemplet paymentHttpTemplet) {
-		this.paymentHttpTemplet = paymentHttpTemplet;
+	public void setHttpClientTemplet(HttpClientTemplet httpClientTemplet) {
+		this.httpClientTemplet = httpClientTemplet;
+	}
+	
+	public ApplicationContextParameter<Object, Object> getApplicationContextParameter() {
+		return applicationContextParameter;
 	}
 
-	public ApplicationContextParameter<Object, Object> getPaymentContextParameters() {
-		return paymentContextParameters;
-	}
-
-	public void setPaymentContextParameters(
-			ApplicationContextParameter<Object, Object> paymentContextParameters) {
-		this.paymentContextParameters = paymentContextParameters;
+	public void setApplicationContextParameter(
+			ApplicationContextParameter<Object, Object> applicationContextParameter) {
+		this.applicationContextParameter = applicationContextParameter;
 	}
 
 	protected void checkProperties() throws IllegalArgumentException {
 		super.checkProperties();
 		
-		if (this.paymentContextParameters == null)
-			throw new IllegalArgumentException("Property 'paymentContextParameters' must not be null.");
+		if (this.applicationContextParameter == null)
+			throw new IllegalArgumentException("Property 'applicationContextParameter' must not be null.");
 		
-		if (this.paymentHttpTemplet == null)
-			throw new IllegalArgumentException("Property 'paymentHttpTemplet' must not be null.");
+		if (this.httpClientTemplet == null)
+			throw new IllegalArgumentException("Property 'httpClientTemplet' must not be null.");
 	}
 
 	public CodeModel createPaymentRequest(Order order, Map<String,String> parameters) throws Exception {		

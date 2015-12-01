@@ -20,6 +20,7 @@ package org.workin.payment.provider.wechatpay;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
 import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.model.impl.ResultModel;
 import org.workin.payment.WebPaymentRequest;
@@ -31,6 +32,7 @@ import org.workin.payment.service.AbstractWorkinPaymentService;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@Service
 public class WebWechatpayService extends AbstractWorkinPaymentService<WebPaymentRequest> {
 	
 	@Override

@@ -63,6 +63,14 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 			this.wechatpayParser = new DefaultWechatpayParser();
 	}
 	
+	public WechatpayParser getWechatpayParser() {
+		return wechatpayParser;
+	}
+
+	public void setWechatpayParser(WechatpayParser wechatpayParser) {
+		this.wechatpayParser = wechatpayParser;
+	}
+
 	@Override
 	protected ResultModel<Map<String, Object>> createPaymentParameters(Order order, Map<String,String> parameters) throws Exception {
 		ResultModel<Map<String, Object>> resultModel = new ResultModel<Map<String,Object>>();
@@ -77,9 +85,9 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 				Map<String, Object> step2Data = step2Result.getData();
 				Map<String, Object> paymentParameters = MapUtils.newHashMap();
 				// 公众账号ID
-				paymentParameters.put("appid", paymentContextParameters.getValue("wechatpay.appid"));
+				paymentParameters.put("appid", applicationContextParameter.getValue("wechatpay.appid"));
 				// 商户号
-				paymentParameters.put("mch_id", paymentContextParameters.getValue("wechatpay.mchid"));
+				paymentParameters.put("mch_id", applicationContextParameter.getValue("wechatpay.mchid"));
 				// 预支付交易会话ID
 				paymentParameters.put("prepayid", step2Data.get(WechatpayParser.PREPAY_ID));
 				// 扩展字段,暂填写固定值Sign=WXPay
@@ -91,7 +99,7 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 				paymentParameters.put("timestamp", System.currentTimeMillis() / 1000);
 				// 签名
 //				paymentParameters.put("sign", step2Data.get(WechatpayParser.SIGN));
-				String sign = signature.excute(paymentParameters, paymentContextParameters.getValue("wechatpay.seller.key", String.class));
+				String sign = signature.excute(paymentParameters, applicationContextParameter.getValue("wechatpay.seller.key", String.class));
 				paymentParameters.put("sign", sign);
 				resultModel.setDate(paymentParameters);
 			} else if (SystemStatus.FAILED.getKey().equals(code)) {
@@ -137,9 +145,9 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 		// 统一下单请求参数项
 		Map<String, Object> requestParameters = MapUtils.newHashMap();
 		// 企业公众账号ID
-		requestParameters.put("appid", paymentContextParameters.getValue("wechatpay.appid"));
+		requestParameters.put("appid", applicationContextParameter.getValue("wechatpay.appid"));
 		// 商户号
-		requestParameters.put("mch_id", paymentContextParameters.getValue("wechatpay.mchid"));
+		requestParameters.put("mch_id", applicationContextParameter.getValue("wechatpay.mchid"));
 		// 随机字符串，采用32位无符号全大写UUID
 		requestParameters.put("nonce_str", StringUtils.unsignedUUID(true));
 		// 商品名称
@@ -159,9 +167,9 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 		// 终端IP
 		requestParameters.put("spbill_create_ip", parameters.get("ip"));
 		// 通知回调地址
-		requestParameters.put("notify_url", paymentContextParameters.getValue("wechatpay.app.notify.url"));
+		requestParameters.put("notify_url", applicationContextParameter.getValue("wechatpay.app.notify.url"));
 		
-		String tradeType = paymentContextParameters.getValue("wechatpay.trade.type", String.class);
+		String tradeType = applicationContextParameter.getValue("wechatpay.trade.type", String.class);
 		// 交易类型
 		requestParameters.put("trade_type", tradeType);
 		if ("JSAPI".equalsIgnoreCase(tradeType))
@@ -171,12 +179,12 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 		
 		/* 签名 */
 		String sign = signature.excute(requestParameters, 
-				paymentContextParameters.getValue("wechatpay.seller.key", String.class));
+				applicationContextParameter.getValue("wechatpay.seller.key", String.class));
 		requestParameters.put("sign", sign);
 		
 		try {
 			// 调用微信支付统一下单请求
-			String xmlString = paymentHttpTemplet.request("appWechatpayPlaceOrder", requestParameters);
+			String xmlString = httpClientTemplet.request("appWechatpayPlaceOrder", requestParameters);
 			resultModel.setDate(xmlString);
 		} catch (Exception e) {
 			resultModel.setCode(SystemStatus.FAILED.getKey());

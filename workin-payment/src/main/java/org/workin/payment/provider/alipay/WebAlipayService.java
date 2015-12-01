@@ -59,25 +59,25 @@ public class WebAlipayService extends AbstractWorkinPaymentService<WebPaymentReq
 	public ResultModel<WebPaymentRequest> createPaymentParameters(Order order, Map<String,String> parameters) {
 		Map<String, Object> paymentParameters = MapUtils.newHashMap();
 		// 接口名称
-		paymentParameters.put("service", paymentContextParameters.getValue("alipay.web.pay.service"));
+		paymentParameters.put("service", applicationContextParameter.getValue("alipay.web.pay.service"));
 		// 商户ID
-		paymentParameters.put("partner", paymentContextParameters.getValue("alipay.partner"));
+		paymentParameters.put("partner", applicationContextParameter.getValue("alipay.partner"));
 		
-		String sellerEmail = paymentContextParameters.getValue("alipay.seller.email", String.class);
+		String sellerEmail = applicationContextParameter.getValue("alipay.seller.email", String.class);
 		if (StringUtils.isNotBlank(sellerEmail)) 
 			// 卖家邮件
 			paymentParameters.put("seller_email", sellerEmail);
 		else 
 			// 卖家ID
-			paymentParameters.put("seller_id", paymentContextParameters.getValue("alipay.seller.id"));
+			paymentParameters.put("seller_id", applicationContextParameter.getValue("alipay.seller.id"));
 		
 		// 通知回调地址
-		paymentParameters.put("notify_url", paymentContextParameters.getValue("alipay.web.notify.url"));
+		paymentParameters.put("notify_url", applicationContextParameter.getValue("alipay.web.notify.url"));
 		
-		String returnUrl = paymentContextParameters.getValue("alipay.web.return.url", String.class);
+		String returnUrl = applicationContextParameter.getValue("alipay.web.return.url", String.class);
 		if (StringUtils.isNotBlank(returnUrl))
 			// 返回URL
-			paymentParameters.put("return_url", paymentContextParameters.getValue("alipay.return.url"));
+			paymentParameters.put("return_url", applicationContextParameter.getValue("alipay.return.url"));
 		
 		// 商品名称
 		paymentParameters.put("subject", order.getProductName());
@@ -102,18 +102,18 @@ public class WebAlipayService extends AbstractWorkinPaymentService<WebPaymentReq
 		// 支付类型
 		paymentParameters.put("payment_type", 1);
 		// 物流类型
-		paymentParameters.put("logistics_type", paymentContextParameters.getValue("alipay.logistics.type"));
+		paymentParameters.put("logistics_type", applicationContextParameter.getValue("alipay.logistics.type"));
 		// 物流费用
-		paymentParameters.put("logistics_fee", paymentContextParameters.getValue("alipay.logistics.fee"));
+		paymentParameters.put("logistics_fee", applicationContextParameter.getValue("alipay.logistics.fee"));
 		// 物流支付类型
-		paymentParameters.put("logistics_payment", paymentContextParameters.getValue("alipay.logistics.payment"));
+		paymentParameters.put("logistics_payment", applicationContextParameter.getValue("alipay.logistics.payment"));
 		
 		// 签名
-		paymentParameters.put("sign", signature.excute(paymentParameters, paymentContextParameters.getValue("alipay.seller.key", String.class)));
+		paymentParameters.put("sign", signature.excute(paymentParameters, applicationContextParameter.getValue("alipay.seller.key", String.class)));
 		// 签名类型
 		paymentParameters.put("sign_type", signature.getType());
 		
-		String inputCharset = paymentContextParameters.getValue("alipay.input.charset", String.class);
+		String inputCharset = applicationContextParameter.getValue("alipay.input.charset", String.class);
 		if (StringUtils.isBlank(inputCharset))
 			inputCharset = MessageUtils.UTF8_ENCODING;
 		
@@ -121,7 +121,7 @@ public class WebAlipayService extends AbstractWorkinPaymentService<WebPaymentReq
 		paymentParameters.put("_input_charset", inputCharset);
 		
 		WebPaymentRequest request = new WebPaymentRequest();
-		request.setUrl(paymentContextParameters.getValue("alipay.web.pay.url") + "?" + MapUtils.joinQueryString(paymentParameters));
+		request.setUrl(applicationContextParameter.getValue("alipay.web.pay.url") + "?" + MapUtils.joinQueryString(paymentParameters));
 		request.setOrderId(order.getOrderId());
 		
 		ResultModel<WebPaymentRequest> resultModel = new ResultModel<WebPaymentRequest>();
@@ -136,7 +136,7 @@ public class WebAlipayService extends AbstractWorkinPaymentService<WebPaymentReq
 		parameters.put("notify_id", paymentResponse.get("notify_id"));
 		
 		// 发送支付宝验证请求，并返回验证结果状态
-		String status = paymentHttpTemplet.request("webAlipayNotify", parameters);
+		String status = httpClientTemplet.request("webAlipayNotifyValidation", parameters);
 		// 再根据支付宝验证结果状态获取本系统的状态码
 		String code = ThirdValidationResult.getValidationResultCode(status);
 		
