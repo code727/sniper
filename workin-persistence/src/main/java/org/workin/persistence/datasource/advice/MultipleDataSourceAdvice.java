@@ -43,7 +43,9 @@ public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceAdvice {
 					+ methodName + "] not found correlative data source name.");
 		
 		DataSourceHolder.setDataSourceName(sourceName);
-		logger.debug("Invoke method [" + methodName + "] of data source [" + sourceName + "].");
+		logger.info(new StringBuilder("Data source will be switch to [").append(sourceName)
+				.append("] before invoke [").append(method.getDeclaringClass()).append("] method [")
+				.append(methodName).append("].").toString());
 	}
 	
 	@Override
