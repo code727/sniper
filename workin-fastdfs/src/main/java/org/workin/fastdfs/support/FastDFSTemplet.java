@@ -227,8 +227,8 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	 */
 	private <T> void deleteOriginalResources(boolean deleteAll, List<FastDFSMeta<T>> metas) throws Exception {
 		Runnable task = new OriginalResourcesDeleteTask<T>(deleteAll, metas, this);
-		if (this.threadPoolExecutorFactoryBean != null)
-			this.threadPoolExecutorFactoryBean.getObject().execute(task);
+		if (this.threadPoolTaskExecutor != null)
+			this.threadPoolTaskExecutor.execute(task);
 		else
 			new Thread(task).start();
 	}
@@ -241,8 +241,8 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	 */
 	private void deleteTempFiles(List<File> files) throws Exception {
 		Runnable task = new FilesDeleteTask(files);
-		if (this.threadPoolExecutorFactoryBean != null)
-			this.threadPoolExecutorFactoryBean.getObject().execute(task);
+		if (this.threadPoolTaskExecutor != null)
+			this.threadPoolTaskExecutor.execute(task);
 		else 
 			new Thread(task).start();
 	}
