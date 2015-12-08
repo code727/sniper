@@ -28,7 +28,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -49,10 +48,8 @@ import org.workin.nosql.redis.RedisRepositoryManager;
  */
 public abstract class RedisDaoSupport implements InitializingBean {
 			
-	@Autowired
 	private RedisTemplate<?, ?> redisTemplate;
 	
-	@Autowired
 	private RedisRepositoryManager repositoryManager;
 		
 	/** 默认连接库索引 */
