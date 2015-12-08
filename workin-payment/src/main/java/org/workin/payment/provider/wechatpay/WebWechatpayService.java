@@ -25,7 +25,6 @@ import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.model.impl.ResultModel;
 import org.workin.payment.WebPaymentRequest;
 import org.workin.payment.domain.Order;
-import org.workin.payment.service.AbstractWorkinPaymentService;
 
 /**
  * @description Web版微信支付服务实现类
@@ -33,15 +32,15 @@ import org.workin.payment.service.AbstractWorkinPaymentService;
  * @version 1.0
  */
 @Service
-public class WebWechatpayService extends AbstractWorkinPaymentService<WebPaymentRequest> {
+public class WebWechatpayService extends WechatpayService<WebPaymentRequest> {
 	
 	@Override
-	protected ResultModel<WebPaymentRequest> createPaymentParameters(Order order, Map<String, String> parameters) throws Exception {
+	protected ResultModel<WebPaymentRequest> createParameters(Order order, Map<String, String> parameters) throws Exception {
 		return null;
 	}
 
 	@Override
-	public CodeMessageModel handlePaymentResponse(Map<String, String> paymentResponse) throws Exception {
+	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception {
 		return null;
 	}
 

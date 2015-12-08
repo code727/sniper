@@ -37,7 +37,6 @@ import org.workin.payment.enums.payment.PaymentStatus;
 import org.workin.payment.enums.payment.ThirdPaymentStatus;
 import org.workin.payment.enums.validation.ThirdValidationResult;
 import org.workin.payment.enums.validation.ValidationResult;
-import org.workin.payment.service.AbstractWorkinPaymentService;
 
 /**
  * @description Web版阿里支付服务实现类
@@ -45,18 +44,10 @@ import org.workin.payment.service.AbstractWorkinPaymentService;
  * @version 1.0
  */
 @Service
-public class WebAlipayService extends AbstractWorkinPaymentService<WebPaymentRequest> {
+public class WebAlipayService extends AlipayService<WebPaymentRequest> {
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
-		
-		if (this.signature == null)
-			this.signature = new AlipaySignature();
-	}
-	
-	@Override
-	public ResultModel<WebPaymentRequest> createPaymentParameters(Order order, Map<String,String> parameters) {
+	public ResultModel<WebPaymentRequest> createParameters(Order order, Map<String,String> parameters) {
 		Map<String, Object> paymentParameters = MapUtils.newHashMap();
 		// 接口名称
 		paymentParameters.put("service", paymentContextParameters.getValue("alipay.web.pay.service"));
@@ -130,10 +121,10 @@ public class WebAlipayService extends AbstractWorkinPaymentService<WebPaymentReq
 	}
 
 	@Override
-	public CodeMessageModel handlePaymentResponse(Map<String, String> paymentResponse) throws Exception {
+	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
 		Map<String, Object> parameters = MapUtils.newHashMap();
-		parameters.put("notify_id", paymentResponse.get("notify_id"));
+		parameters.put("notify_id", response.get("notify_id"));
 		
 		// 发送支付宝验证请求，并返回验证结果状态
 		String status = paymentHttpTemplet.request("webAlipayNotifyValidation", parameters);
@@ -141,7 +132,7 @@ public class WebAlipayService extends AbstractWorkinPaymentService<WebPaymentReq
 		String code = ThirdValidationResult.getValidationResultCode(status);
 		
 		if (ValidationResult.SUCCESS.getKey().equals(code)) {
-			result = updatePayment(paymentResponse);
+			result = updatePayment(response);
 		} else {
 			/* 验证未成功时，则直接返回状态码和验证信息，不做充值记录的处理 */
 			result.setCode(code);

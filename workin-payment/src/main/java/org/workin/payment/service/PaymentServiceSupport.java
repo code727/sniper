@@ -70,6 +70,14 @@ public abstract class PaymentServiceSupport extends CheckableInitializingBean {
 		this.signature = signature;
 	}
 	
+	public IDGenerator getOrderIdGenerator() {
+		return orderIdGenerator;
+	}
+
+	public void setOrderIdGenerator(IDGenerator orderIdGenerator) {
+		this.orderIdGenerator = orderIdGenerator;
+	}
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();

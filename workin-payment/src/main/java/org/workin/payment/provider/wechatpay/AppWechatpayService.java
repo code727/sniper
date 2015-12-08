@@ -21,7 +21,6 @@ package org.workin.payment.provider.wechatpay;
 import java.util.Date;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.workin.commons.enums.category.SystemStatus;
 import org.workin.commons.model.impl.CodeMessageModel;
@@ -36,9 +35,7 @@ import org.workin.payment.enums.payment.PaymentStatus;
 import org.workin.payment.enums.payment.ThirdPaymentStatus;
 import org.workin.payment.provider.wechatpay.enums.ResultCode;
 import org.workin.payment.provider.wechatpay.enums.ReturnCode;
-import org.workin.payment.provider.wechatpay.parser.DefaultWechatpayParser;
 import org.workin.payment.provider.wechatpay.parser.WechatpayParser;
-import org.workin.payment.service.AbstractWorkinPaymentService;
 
 /**
  * @description APP版微信支付服务实现类
@@ -46,33 +43,10 @@ import org.workin.payment.service.AbstractWorkinPaymentService;
  * @version 1.0
  */
 @Service
-public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String, Object>> {
-	
-	/** 微信支付解析器 */
-	@Autowired(required = false)
-	private WechatpayParser wechatpayParser;
+public class AppWechatpayService extends WechatpayService<Map<String, Object>> {
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
-		
-		if (this.signature == null)
-			this.signature = new WechatpaySignature();
-		
-		if (this.wechatpayParser == null)
-			this.wechatpayParser = new DefaultWechatpayParser();
-	}
-	
-	public WechatpayParser getWechatpayParser() {
-		return wechatpayParser;
-	}
-
-	public void setWechatpayParser(WechatpayParser wechatpayParser) {
-		this.wechatpayParser = wechatpayParser;
-	}
-
-	@Override
-	protected ResultModel<Map<String, Object>> createPaymentParameters(Order order, Map<String,String> parameters) throws Exception {
+	protected ResultModel<Map<String, Object>> createParameters(Order order, Map<String,String> parameters) throws Exception {
 		ResultModel<Map<String, Object>> resultModel = new ResultModel<Map<String,Object>>();
 		// 第一步：统一下单
 		ResultModel<String> step1Result = placeOrder(order, parameters);
@@ -116,17 +90,17 @@ public class AppWechatpayService extends AbstractWorkinPaymentService<Map<String
 	}
 
 	@Override
-	public CodeMessageModel handlePaymentResponse(Map<String, String> paymentResponse) throws Exception {
+	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
-		String returnCode = paymentResponse.get("return_code");
+		String returnCode = response.get("return_code");
 		
 		if (ReturnCode.SUCCESS.getCode().equalsIgnoreCase(returnCode)) 
 			// 交易成功时更新支付记录
-			updatePayment(paymentResponse);
+			updatePayment(response);
 		else {
 			/* 交易未成功时，则直接返回处理结果，不对支付记录做任何更新操作 */
 			result.setCode(SystemStatus.FAILED.getKey());
-			String message = paymentResponse.get("return_msg");
+			String message = response.get("return_msg");
 			result.setMessage(StringUtils.isNotBlank(message) ? message : "msg.payment.failed");
 		}		
 		return result;

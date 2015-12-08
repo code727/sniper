@@ -36,12 +36,12 @@ import org.workin.payment.enums.payment.PaymentType;
 import org.workin.spring.context.ApplicationContextParameter;
 
 /**
- * @description 第三方在线支付服务抽象类
+ * @description 支付服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractWorkinPaymentService<T> extends PaymentServiceSupport
-		implements WorkinPaymentService {
+public abstract class AbstractPaymentService<T> extends PaymentServiceSupport
+		implements PaymentService {
 	
 	/** 支付接口HTTP调用模板 */
 	@Autowired
@@ -78,7 +78,7 @@ public abstract class AbstractWorkinPaymentService<T> extends PaymentServiceSupp
 			throw new IllegalArgumentException("Property 'paymentHttpTemplet' must not be null.");
 	}
 
-	public CodeModel createPaymentRequest(Order order, Map<String,String> parameters) throws Exception {		
+	public CodeModel createRequest(Order order, Map<String,String> parameters) throws Exception {		
 		// 第一步：先验证支付订单的类型，如果是线下订单，则首先验证用户输入的账号密码是否有效
 		if (order.getO2oType() == O2OTypes.OFFLINE.getKey()) {
 			String loginName = orderService.findUserLoginName(order.getAccount(), order.getPassword());
@@ -105,8 +105,8 @@ public abstract class AbstractWorkinPaymentService<T> extends PaymentServiceSupp
 				// 第四步：订单保存成功后，再保存支付记录
 				model = savePaymentByOrder(order);
 				if (SystemStatus.SUCCESS.getKey().equals(model.getCode())) {
-					// 第五步：根据订单和其它非订单参数项创建第三方支付请求对象模型
-					ResultModel<T> resultModel = createPaymentParameters(order, parameters);
+					// 第五步：根据订单和其它非订单参数项创建支付参数对象模型
+					ResultModel<T> resultModel = createParameters(order, parameters);
 					if (SystemStatus.SUCCESS.getKey().equals(resultModel.getCode())) {
 						// 支付请求对象模型创建成功后，返回状态码和数据
 						CodeDataModel<T> result = new CodeDataModel<T>();
@@ -129,7 +129,6 @@ public abstract class AbstractWorkinPaymentService<T> extends PaymentServiceSupp
 			result.setMessage("msg.error.invalid.payment.type");
 			return result;
 		}
-			
 	}
 	
 	/**
@@ -151,12 +150,12 @@ public abstract class AbstractWorkinPaymentService<T> extends PaymentServiceSupp
 	}
 	
 	/**
-	 * @description 根据订单和其它非订单参数项创建第三方支付数据对象模型
+	 * @description 根据订单和其它非订单参数项创建支付参数对象模型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param order
 	 * @param parameters
 	 * @return
 	 */
-	protected abstract ResultModel<T> createPaymentParameters(Order order, Map<String,String> parameters) throws Exception;
+	protected abstract ResultModel<T> createParameters(Order order, Map<String,String> parameters) throws Exception;
 	
 }

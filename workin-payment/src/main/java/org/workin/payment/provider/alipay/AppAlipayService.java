@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.model.impl.ResultModel;
 import org.workin.payment.domain.Order;
-import org.workin.payment.service.AbstractWorkinPaymentService;
 
 /**
  * @description APP版阿里支付服务实现类
@@ -32,15 +31,15 @@ import org.workin.payment.service.AbstractWorkinPaymentService;
  * @version 1.0
  */
 @Service
-public class AppAlipayService extends AbstractWorkinPaymentService<Map<String, Object>> {
+public class AppAlipayService extends AlipayService<Map<String, Object>> {
 	
 	@Override
-	protected ResultModel<Map<String, Object>> createPaymentParameters(Order order, Map<String, String> parameters) throws Exception {
+	protected ResultModel<Map<String, Object>> createParameters(Order order, Map<String, String> parameters) throws Exception {
 		return null;
 	}
 
 	@Override
-	public CodeMessageModel handlePaymentResponse(Map<String, String> paymentResponse) throws Exception {
+	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception {
 		return null;
 	}
 
