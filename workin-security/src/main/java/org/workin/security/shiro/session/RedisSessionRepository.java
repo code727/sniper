@@ -25,7 +25,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.InitializingBean;
 import org.workin.nosql.redis.dao.RedisCommandsDao;
 
 /**
@@ -33,7 +33,7 @@ import org.workin.nosql.redis.dao.RedisCommandsDao;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisSessionRepository implements SessionRepository {
+public class RedisSessionRepository implements SessionRepository, InitializingBean {
 	
 	private static final Logger logger = LoggerFactory.getLogger(RedisSessionRepository.class);
 	
@@ -46,7 +46,6 @@ public class RedisSessionRepository implements SessionRepository {
 	/** 标识是否自动删除 */
 	private boolean autoDelete = false;
 	
-	@Autowired
 	private RedisCommandsDao redisCommandsDao;
 	
 	public RedisSessionRepository() {
@@ -83,6 +82,12 @@ public class RedisSessionRepository implements SessionRepository {
 
 	public void setRedisCommandsDao(RedisCommandsDao redisCommandsDao) {
 		this.redisCommandsDao = redisCommandsDao;
+	}
+	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		if (this.redisCommandsDao == null)
+			throw new IllegalArgumentException("Property 'redisCommandsDao' is required.");
 	}
 
 	@Override

@@ -23,6 +23,7 @@ import java.util.Set;
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
+import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.nosql.redis.dao.RedisCommandsDao;
 
@@ -31,7 +32,7 @@ import org.workin.nosql.redis.dao.RedisCommandsDao;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V> {
+public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V>, InitializingBean {
 	
 	/** Cache标识前缀 */
 	private String prefix;
@@ -79,6 +80,12 @@ public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V> 
 
 	public void setRedisCommandsDao(RedisCommandsDao redisCommandsDao) {
 		this.redisCommandsDao = redisCommandsDao;
+	}
+	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		if (this.redisCommandsDao == null)
+			throw new IllegalArgumentException("Property 'redisCommandsDao' is required.");
 	}
 
 	@Override
