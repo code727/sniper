@@ -18,7 +18,6 @@
 
 package org.workin.commons.model.impl;
 
-import org.workin.commons.model.AbstractCodeModel;
 import org.workin.commons.model.CodeModel;
 import org.workin.commons.model.MessageModel;
 
@@ -27,7 +26,7 @@ import org.workin.commons.model.MessageModel;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CodeMessageModel extends AbstractCodeModel implements CodeModel, MessageModel {
+public class CodeMessageModel extends StatusCodeModel implements CodeModel, MessageModel {
 	
 	/** 消息 */
 	private String messgae;

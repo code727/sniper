@@ -18,7 +18,6 @@
 
 package org.workin.commons.model.impl;
 
-import org.workin.commons.model.AbstractCodeModel;
 import org.workin.commons.model.GenericsDataModel;
 
 /**
@@ -26,7 +25,7 @@ import org.workin.commons.model.GenericsDataModel;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CodeDataModel<T> extends AbstractCodeModel implements GenericsDataModel<T> {
+public class CodeDataModel<T> extends StatusCodeModel implements GenericsDataModel<T> {
 	
 	/** 数据 */
 	private T data;
