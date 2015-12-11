@@ -13,35 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-17
+ * Create Date : 2015-12-10
  */
 
-package org.workin.payment.provider.alipay;
+package org.workin.payment.provider.alipay.signature;
 
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.springframework.stereotype.Component;
 import org.workin.commons.util.MapUtils;
-import org.workin.commons.util.MessageUtils;
-import org.workin.support.security.AbstractSignature;
+import org.workin.commons.util.SecurityUtils;
+import org.workin.support.signature.SESignature;
 
 /**
- * @description 支付宝签名实现类
+ * @description 阿里支付MD5签名实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-@Component
-public class AlipaySignature extends AbstractSignature {
+public class AlipayMD5Signature extends SESignature<Map<String, Object>> {
+	
+	public AlipayMD5Signature() {
+		setType("MD5");
+	}
 
 	@Override
-	public String excute(Map<String, Object> paymentParameters, String sellerKey) {
+	public String excute(Map<String, Object> parameters) {
 		// 按参数名升序排列
-		if (!(paymentParameters instanceof TreeMap<?, ?>))
-			paymentParameters = MapUtils.newTreeMap(paymentParameters);
+		if (!(parameters instanceof TreeMap<?, ?>))
+			parameters = MapUtils.newTreeMap(parameters);
 		
-		String queryString = MapUtils.joinQueryString(paymentParameters) + sellerKey;
-		return MessageUtils.encrypt(queryString, getType());
+		String queryString = MapUtils.joinQueryString(parameters) + getPrivateKey();
+		return SecurityUtils.md5(queryString);
 	}
-	
+
 }

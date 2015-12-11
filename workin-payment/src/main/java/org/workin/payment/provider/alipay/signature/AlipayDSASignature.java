@@ -13,26 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-12-8
+ * Create Date : 2015年12月11日
  */
 
-package org.workin.payment.provider.alipay;
+package org.workin.payment.provider.alipay.signature;
 
-import org.workin.payment.service.AbstractPaymentService;
+import java.util.Map;
+
+import org.workin.support.signature.AESignature;
 
 /**
- * @description 阿里支付服务抽象类
+ * @description 阿里支付DSA签名实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AlipayService<T> extends AbstractPaymentService<T> {
+public class AlipayDSASignature extends AESignature<Map<String, Object>> {
 	
+	public AlipayDSASignature() {
+		setType("DSA");
+	}
+
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
-		
-		if (this.signature == null)
-			this.signature = new AlipaySignature();
+	public String excute(Map<String, Object> parameters) {
+		return "";
 	}
 
 }

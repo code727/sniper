@@ -13,34 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-30
+ * Create Date : 2015-12-11
  */
 
-package org.workin.payment.provider.alipay;
+package org.workin.payment.provider.alipay.service;
 
-import java.util.Map;
-
-import org.springframework.stereotype.Service;
-import org.workin.commons.model.impl.CodeMessageModel;
-import org.workin.commons.model.impl.ResultModel;
-import org.workin.payment.domain.Order;
+import org.workin.payment.service.AbstractPaymentService;
 
 /**
- * @description APP版阿里支付服务实现类
+ * @description 阿里支付服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-@Service
-public class AppAlipayService extends AlipayService<Map<String, Object>> {
+public abstract class AlipayService<T, P> extends AbstractPaymentService<T, P> {
 	
-	@Override
-	protected ResultModel<Map<String, Object>> createParameters(Order order, Map<String, String> parameters) throws Exception {
-		return null;
-	}
-
-	@Override
-	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception {
-		return null;
-	}
+	/** APP支付所支持的签名类型组 */
+	protected static final String[] APP_SIGN_TYPES = new String[] {"RSA"};
+	
+	/** 网银支付所支持的签名类型组 */
+	protected static final String[] WEB_SIGN_TYPES = new String[] {"MD5", "RSA", "DSA"};
+	
+	/** 手机网站支付所支持的签名类型组 */
+	protected static final String[] WAP_SIGN_TYPES = new String[] {"MD5", "RSA", "DSA"};
 
 }
