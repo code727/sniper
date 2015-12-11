@@ -32,7 +32,8 @@ import org.workin.nosql.redis.dao.RedisCommandsDao;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V>, InitializingBean {
+public class RedisCacheRepository<K, V> implements CacheRepository,
+		Cache<K, V>, InitializingBean {
 	
 	/** Cache标识前缀 */
 	private String prefix;

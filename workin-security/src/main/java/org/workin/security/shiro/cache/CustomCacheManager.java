@@ -22,16 +22,15 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.util.Destroyable;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @description 自定义Cache管理实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CustomCacheManager implements CacheManager, Destroyable {
+public class CustomCacheManager implements CacheManager, Destroyable, InitializingBean {
 	
-	@Autowired
 	private CacheRepository cacheRepository;
 	
 	public CacheRepository getCacheRepository() {
@@ -40,6 +39,13 @@ public class CustomCacheManager implements CacheManager, Destroyable {
 
 	public void setCacheRepository(CacheRepository cacheRepository) {
 		this.cacheRepository = cacheRepository;
+	}
+	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		if (this.cacheRepository == null)
+			throw new IllegalArgumentException("Property 'cacheRepository' is required.");
+		
 	}
 
 	@Override

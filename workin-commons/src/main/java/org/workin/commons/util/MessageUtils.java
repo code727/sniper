@@ -21,8 +21,6 @@ package org.workin.commons.util;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -585,42 +583,6 @@ public class MessageUtils {
 			return ArrayUtils.isNotEmpty(params) ? MessageFormat.format(message, params) : message;
 			
 		return defaultMessage;
-	}
-	
-	/**
-	 * @description 加密
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param plaintext 明文
-	 * @param algorithm 加密算法名称
-	 * @return
-	 */
-	public static String encrypt(String plaintext, String algorithm) {
-		String ciphertext = null;
-		try {
-			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
-			ciphertext = new String(plaintext);
-			byte[] bytes = messageDigest.digest(ciphertext.getBytes());
-			StringBuffer buffer = new StringBuffer(bytes.length * 2);
-			for (int i = 0; i < bytes.length; i++) {
-				if ((bytes[i] & 0xff) < 0x10) 
-					buffer.append("0");
-				buffer.append(Long.toString(bytes[i] & 0xff, 16));
-			}
-			ciphertext = buffer.toString();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		return ciphertext;
-	}
-	
-	/**
-	 * @description MD5加密
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param plaintext 明文
-	 * @return
-	 */
-	public static String md5Encrypt(String plaintext) {
-		return encrypt(plaintext, "MD5");
 	}
 	
 	/**

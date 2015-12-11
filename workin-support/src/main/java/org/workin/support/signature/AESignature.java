@@ -13,39 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-23
+ * Create Date : 2015-12-10
  */
 
-package org.workin.support.security;
-
-import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.StringUtils;
+package org.workin.support.signature;
 
 /**
- * @description 签名抽象类
+ * @description 非对称加密签名接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractSignature implements Signature {
+public abstract class AESignature<T> extends SESignature<T> {
+	 
+	/** 公钥 */
+	private String publicKey;
 	
-	/** 签名类型 */
-	private String type = "MD5";
-	
-	public AbstractSignature(){}
-	
-	public AbstractSignature(String type) {
-		setType(type);
+	/**
+	 * @description 设置公钥
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param publicKey
+	 */
+	public void setPublicKey(String publicKey) {
+		this.publicKey = publicKey;
 	}
 	
-	@Override
-	public void setType(String type) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(type), "Signature type must not be null or blank.");
-		this.type = type;
+	/**
+	 * @description 获取公钥
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getPublicKey() {
+		return this.publicKey;
 	}
-
-	@Override
-	public String getType() {
-		return this.type;
-	}
-
+	
 }

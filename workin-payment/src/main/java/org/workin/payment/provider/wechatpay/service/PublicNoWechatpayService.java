@@ -13,42 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-16
+ * Create Date : 2015-11-30
  */
 
-package org.workin.payment.service;
-
+package org.workin.payment.provider.wechatpay.service;
 
 import java.util.Map;
 
-import org.workin.commons.model.CodeModel;
+import org.springframework.stereotype.Service;
 import org.workin.commons.model.impl.CodeMessageModel;
+import org.workin.commons.model.impl.ResultModel;
+import org.workin.payment.WebPaymentRequest;
 import org.workin.payment.domain.Order;
+import org.workin.support.signature.Signature;
 
 /**
- * @description 支付服务接口
+ * @description 微信公众号支付服务实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface PaymentService {
+@Service
+public class PublicNoWechatpayService extends WechatpayService<WebPaymentRequest, Map<String, Object>> {
 	
-	/**
-	 * @description 根据订单和其它非订单参数项创建支付请求数据对象模型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param order
-	 * @param parameters
-	 * @return
-	 * @throws Exception
-	 */
-	public CodeModel createRequest(Order order, Map<String, String> parameters) throws Exception;
+	@Override
+	protected Signature<Map<String, Object>> initSignature() throws Exception {
+		return null;
+	}
 	
-	/**
-	 * @description 处理支付响应
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception;
-		
+	@Override
+	protected ResultModel<WebPaymentRequest> createParameters(Order order, Map<String, String> parameters) throws Exception {
+		return null;
+	}
+
+	@Override
+	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception {
+		return null;
+	}
+
+	
+
 }

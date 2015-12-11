@@ -24,16 +24,15 @@ import java.util.Collection;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @description 自定义的Shiro会话DAO实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CustomSessionDAO extends AbstractSessionDAO {
+public class CustomSessionDAO extends AbstractSessionDAO implements InitializingBean {
 	
-	@Autowired
 	private SessionRepository sessionRepository;  
 	
 	public SessionRepository getSessionRepository() {
@@ -42,6 +41,12 @@ public class CustomSessionDAO extends AbstractSessionDAO {
 
 	public void setSessionRepository(SessionRepository sessionRepository) {
 		this.sessionRepository = sessionRepository;
+	}
+	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		if (this.sessionRepository == null)
+			throw new IllegalArgumentException("Property 'sessionRepository' is required.");
 	}
 
 	@Override

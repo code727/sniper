@@ -16,7 +16,7 @@
  * Create Date : 2015-11-30
  */
 
-package org.workin.payment.provider.wechatpay;
+package org.workin.payment.provider.wechatpay.service;
 
 import java.util.Map;
 
@@ -25,14 +25,20 @@ import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.model.impl.ResultModel;
 import org.workin.payment.WebPaymentRequest;
 import org.workin.payment.domain.Order;
+import org.workin.support.signature.Signature;
 
 /**
- * @description Web版微信支付服务实现类
+ * @description 微信扫码支付服务实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @Service
-public class WebWechatpayService extends WechatpayService<WebPaymentRequest> {
+public class ScanningWechatpayService extends WechatpayService<WebPaymentRequest, Map<String, Object>> {
+	
+	@Override
+	protected Signature<Map<String, Object>> initSignature() throws Exception {
+		return null;
+	}
 	
 	@Override
 	protected ResultModel<WebPaymentRequest> createParameters(Order order, Map<String, String> parameters) throws Exception {
@@ -43,5 +49,7 @@ public class WebWechatpayService extends WechatpayService<WebPaymentRequest> {
 	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception {
 		return null;
 	}
+
+	
 
 }

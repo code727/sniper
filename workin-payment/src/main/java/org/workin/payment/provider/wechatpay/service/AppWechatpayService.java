@@ -16,7 +16,7 @@
  * Create Date : 2015-11-20
  */
 
-package org.workin.payment.provider.wechatpay;
+package org.workin.payment.provider.wechatpay.service;
 
 import java.util.Date;
 import java.util.Map;
@@ -36,6 +36,9 @@ import org.workin.payment.enums.payment.ThirdPaymentStatus;
 import org.workin.payment.provider.wechatpay.enums.ResultCode;
 import org.workin.payment.provider.wechatpay.enums.ReturnCode;
 import org.workin.payment.provider.wechatpay.parser.WechatpayParser;
+import org.workin.payment.provider.wechatpay.signature.WechatpayMD5Signature;
+import org.workin.support.signature.SESignature;
+import org.workin.support.signature.Signature;
 
 /**
  * @description APP版微信支付服务实现类
@@ -43,25 +46,44 @@ import org.workin.payment.provider.wechatpay.parser.WechatpayParser;
  * @version 1.0
  */
 @Service
-public class AppWechatpayService extends WechatpayService<Map<String, Object>> {
+public class AppWechatpayService extends WechatpayService<Map<String, Object>, Map<String, Object>> {
 	
 	@Override
-	protected ResultModel<Map<String, Object>> createParameters(Order order, Map<String,String> parameters) throws Exception {
+	protected Signature<Map<String, Object>> initSignature() throws Exception {
+		SESignature<Map<String, Object>> signature = (SESignature<Map<String, Object>>) getSignature();
+		if (signature == null)
+			signature = new WechatpayMD5Signature();
+		
+		/* 检查/设置私钥 */
+		String privateKey = signature.getPrivateKey();
+		if (StringUtils.isBlank(privateKey)) {
+			privateKey = paymentContextParameters.getValue("wechatpay.app.privatekey", String.class);
+			if (StringUtils.isBlank(privateKey))
+				throw new IllegalArgumentException("Wechatpay app privatekey is required.");
+			signature.setPrivateKey(privateKey);
+		}
+		
+		return signature;
+	}
+	
+	@Override
+	protected ResultModel<Map<String, Object>> createParameters(Order order, Map<String, String> parameters) throws Exception {
 		ResultModel<Map<String, Object>> resultModel = new ResultModel<Map<String,Object>>();
-		// 第一步：统一下单
+		// 第一步：统一下单(在微信支付服务后台生成预支付交易单)
 		ResultModel<String> step1Result = placeOrder(order, parameters);
 		if (SystemStatus.SUCCESS.getKey().equals(step1Result.getCode())) {
 			// 第二步：下单成功后，解析出返回结果
 			ResultModel<Map<String, Object>> step2Result = wechatpayParser.parsePlaceOrderResult(step1Result.getData());
 			String code = step2Result.getCode();
+			
 			/* 解析成功后，则返回支付时的必要参数项 */
 			if (SystemStatus.SUCCESS.getKey().equals(code)) {
 				Map<String, Object> step2Data = step2Result.getData();
 				Map<String, Object> paymentParameters = MapUtils.newHashMap();
 				// 公众账号ID
-				paymentParameters.put("appid", paymentContextParameters.getValue("wechatpay.appid"));
+				paymentParameters.put("appid", paymentContextParameters.getValue("wechatpay.app.appid"));
 				// 商户号
-				paymentParameters.put("mch_id", paymentContextParameters.getValue("wechatpay.mchid"));
+				paymentParameters.put("partnerid", paymentContextParameters.getValue("wechatpay.app.mchid"));
 				// 预支付交易会话ID
 				paymentParameters.put("prepayid", step2Data.get(WechatpayParser.PREPAY_ID));
 				// 扩展字段,暂填写固定值Sign=WXPay
@@ -73,8 +95,8 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>> {
 				paymentParameters.put("timestamp", System.currentTimeMillis() / 1000);
 				// 签名
 //				paymentParameters.put("sign", step2Data.get(WechatpayParser.SIGN));
-				String sign = signature.excute(paymentParameters, paymentContextParameters.getValue("wechatpay.seller.key", String.class));
-				paymentParameters.put("sign", sign);
+				paymentParameters.put("sign", getSignature().excute(paymentParameters));
+				
 				resultModel.setDate(paymentParameters);
 			} else if (SystemStatus.FAILED.getKey().equals(code)) {
 				/* 解析失败，则直接返回第二步的状态码和消息 */
@@ -86,6 +108,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>> {
 				resultModel.setMessage(model.getMessage());
 			}
 		}
+		
 		return resultModel;
 	}
 
@@ -102,7 +125,8 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>> {
 			result.setCode(SystemStatus.FAILED.getKey());
 			String message = response.get("return_msg");
 			result.setMessage(StringUtils.isNotBlank(message) ? message : "msg.payment.failed");
-		}		
+		}	
+		
 		return result;
 	}
 	
@@ -113,15 +137,15 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>> {
 	 * @param parameters
 	 * @return
 	 */
-	protected ResultModel<String> placeOrder(Order order, Map<String,String> parameters) {
+	protected ResultModel<String> placeOrder(Order order, Map<String, String> parameters) {
 		ResultModel<String> resultModel = new ResultModel<String>();
 		
 		// 统一下单请求参数项
 		Map<String, Object> requestParameters = MapUtils.newHashMap();
 		// 企业公众账号ID
-		requestParameters.put("appid", paymentContextParameters.getValue("wechatpay.appid"));
+		requestParameters.put("appid", paymentContextParameters.getValue("wechatpay.app.appid"));
 		// 商户号
-		requestParameters.put("mch_id", paymentContextParameters.getValue("wechatpay.mchid"));
+		requestParameters.put("mch_id", paymentContextParameters.getValue("wechatpay.app.mchid"));
 		// 随机字符串，采用32位无符号全大写UUID
 		requestParameters.put("nonce_str", StringUtils.unsignedUUID(true));
 		// 商品名称
@@ -143,7 +167,8 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>> {
 		// 通知回调地址
 		requestParameters.put("notify_url", paymentContextParameters.getValue("wechatpay.app.notify.url"));
 		
-		String tradeType = paymentContextParameters.getValue("wechatpay.trade.type", String.class);
+		String tradeType = paymentContextParameters.getValue("wechatpay.app.trade.type", String.class);
+		
 		// 交易类型
 		requestParameters.put("trade_type", tradeType);
 		if ("JSAPI".equalsIgnoreCase(tradeType))
@@ -152,9 +177,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>> {
 			requestParameters.put("product_id", order.getProductId());
 		
 		/* 签名 */
-		String sign = signature.excute(requestParameters, 
-				paymentContextParameters.getValue("wechatpay.seller.key", String.class));
-		requestParameters.put("sign", sign);
+		requestParameters.put("sign", getSignature().excute(requestParameters));
 		
 		try {
 			// 调用微信支付统一下单请求
@@ -199,7 +222,6 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>> {
 			result = paymentService.save(payment);
 		
 		return result;
-		
 	}
 	
 	protected CodeMessageModel updatePayment(Map<String, String> paymentResponse) throws Exception {
@@ -248,5 +270,5 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>> {
 		
 		return result;
 	}
-	
+
 }

@@ -16,31 +16,31 @@
  * Create Date : 2015-11-23
  */
 
-package org.workin.payment.provider.wechatpay;
+package org.workin.payment.provider.wechatpay.signature;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.workin.commons.util.MapUtils;
-import org.workin.commons.util.MessageUtils;
-import org.workin.support.security.AbstractSignature;
+import org.workin.commons.util.SecurityUtils;
+import org.workin.support.signature.SESignature;
 
 /**
- * @description 微信支付签名实现类
+ * @description 微信支付MD5签名实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class WechatpaySignature extends AbstractSignature {
+public class WechatpayMD5Signature extends SESignature<Map<String, Object>> {
 
 	@Override
-	public String excute(Map<String, Object> paymentParameters, String sellerKey) {
+	public String excute(Map<String, Object> parameters) {
 		// 按参数名升序排列
-		if (!(paymentParameters instanceof TreeMap<?, ?>))
-			paymentParameters = MapUtils.newTreeMap(paymentParameters);
+		if (!(parameters instanceof TreeMap))
+			parameters = MapUtils.newTreeMap(parameters);
 		
-		paymentParameters.put("key", sellerKey);
-		String queryString = MapUtils.joinQueryString(paymentParameters);
-		return MessageUtils.encrypt(queryString, getType()).toUpperCase();
+		parameters.put("key", getPrivateKey());
+		String queryString = MapUtils.joinQueryString(parameters);
+		return SecurityUtils.digestEncryption(queryString, getType()).toUpperCase();
 	}
 		
 }

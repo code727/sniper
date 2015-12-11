@@ -13,42 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-16
+ * Create Date : 2015-12-10
  */
 
-package org.workin.payment.service;
-
-
-import java.util.Map;
-
-import org.workin.commons.model.CodeModel;
-import org.workin.commons.model.impl.CodeMessageModel;
-import org.workin.payment.domain.Order;
+package org.workin.support.signature;
 
 /**
- * @description 支付服务接口
+ * @description 对称加密签名接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface PaymentService {
+public abstract class SESignature<T> implements Signature<T> {
+	
+	/** 类型标识 */
+	private String type;
+	
+	/** 私钥 */
+	private String privateKey;
+	
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public void setType(String type) {
+		this.type = type;
+	}
 	
 	/**
-	 * @description 根据订单和其它非订单参数项创建支付请求数据对象模型
+	 * @description 设置私钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param order
-	 * @param parameters
-	 * @return
-	 * @throws Exception
+	 * @param privateKey
 	 */
-	public CodeModel createRequest(Order order, Map<String, String> parameters) throws Exception;
+	public void setPrivateKey(String privateKey) {
+		this.privateKey = privateKey;
+	}
 	
 	/**
-	 * @description 处理支付响应
+	 * @description 获取私钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param response
 	 * @return
-	 * @throws Exception
 	 */
-	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception;
-		
+	public String getPrivateKey() {
+		return this.privateKey;
+	}
+
 }

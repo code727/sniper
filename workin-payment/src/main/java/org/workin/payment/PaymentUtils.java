@@ -40,8 +40,9 @@ public class PaymentUtils {
 		// 折扣限制在[0.01, 1]闭合区间
 		double discount = NumberUtils.maxLimit(NumberUtils.minLimit(order.getDiscount(), 0.01), 1);
 		BigDecimal price = NumberUtils.safeBigDecimal(order.getPrice());
+		
 		// 单价不能小于0.01元
-		if (NumberUtils.lessThan(price, 0.01))
+		if (NumberUtils.lessThan(price, 0.01)) 
 			price = new BigDecimal(0.01);
 		
 		order.setQuantity(quantity);
@@ -49,11 +50,14 @@ public class PaymentUtils {
 		order.setPrice(price);
 		
 		BigDecimal amount = NumberUtils.safeBigDecimal(order.getAmount());
-		// 金额为0时，则金额=单价*数量*折扣
-		if (amount.equals(0)) 
-			amount = price.multiply(new BigDecimal(quantity)).multiply(new BigDecimal(discount));
+		// 应付的实际金额
+		BigDecimal payAmount = price.multiply(new BigDecimal(quantity)).multiply(new BigDecimal(discount));
 		
-		order.setAmount(amount.setScale(2));
+		// 金额小于等于0时，则金额=单价*数量*折扣
+		if (NumberUtils.lessThanEquals(amount, 0) || NumberUtils.lessThan(amount, payAmount)) 
+			amount = payAmount;
+		
+		order.setAmount(amount);
 	}
-
+	
 }

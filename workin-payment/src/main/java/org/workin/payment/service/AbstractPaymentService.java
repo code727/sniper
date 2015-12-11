@@ -20,6 +20,7 @@ package org.workin.payment.service;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.enums.category.O2OTypes;
 import org.workin.commons.enums.category.SystemStatus;
@@ -34,14 +35,16 @@ import org.workin.payment.domain.Payment;
 import org.workin.payment.enums.payment.PaymentStatus;
 import org.workin.payment.enums.payment.PaymentType;
 import org.workin.spring.context.ApplicationContextParameter;
+import org.workin.support.generator.DateTimeIDGenerator;
+import org.workin.support.generator.IDGenerator;
+import org.workin.support.signature.Signature;
 
 /**
  * @description 支付服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractPaymentService<T> extends PaymentServiceSupport
-		implements PaymentService {
+public abstract class AbstractPaymentService<T, P> implements PaymentService, InitializingBean {
 	
 	/** 支付接口HTTP调用模板 */
 	@Autowired
@@ -50,6 +53,69 @@ public abstract class AbstractPaymentService<T> extends PaymentServiceSupport
 	/** 支付应用上下文配置参数项 */
 	@Autowired
 	protected ApplicationContextParameter<Object, Object> paymentContextParameters;
+	
+	/** 订单服务接口 */
+	@Autowired
+	protected OrderBaseService orderService;
+	
+	/** 支付服务接口 */
+	@Autowired
+	protected PaymentBaseService paymentService;
+		
+	/** 签名器 */
+	private Signature<P> signature;
+	
+	/** 订单号生成器 */
+	protected IDGenerator orderIdGenerator;
+	
+	public OrderBaseService getOrderService() {
+		return orderService;
+	}
+
+	public void setOrderService(OrderBaseService orderService) {
+		this.orderService = orderService;
+	}
+	
+	public PaymentBaseService getPaymentService() {
+		return paymentService;
+	}
+
+	public void setPaymentService(PaymentBaseService paymentService) {
+		this.paymentService = paymentService;
+	}
+	
+	public Signature<P> getSignature() {
+		return signature;
+	}
+
+	public void setSignature(Signature<P> signature) {
+		this.signature = signature;
+	}
+
+	public IDGenerator getOrderIdGenerator() {
+		return orderIdGenerator;
+	}
+
+	public void setOrderIdGenerator(IDGenerator orderIdGenerator) {
+		this.orderIdGenerator = orderIdGenerator;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		if (this.orderService == null)
+			throw new IllegalArgumentException("Property 'orderService' must not be null.");
+		if (this.paymentService == null)
+			throw new IllegalArgumentException("Property 'paymentService' must not be null.");
+		if (this.paymentContextParameters == null)
+			throw new IllegalArgumentException("Property 'paymentContextParameters' must not be null.");
+		if (this.paymentHttpTemplet == null)
+			throw new IllegalArgumentException("Property 'paymentHttpTemplet' must not be null.");
+				
+		if (this.orderIdGenerator == null)
+			this.orderIdGenerator = new DateTimeIDGenerator();
+		
+		this.signature = initSignature();
+	}
 	
 	public HttpClientTemplet getPaymentHttpTemplet() {
 		return paymentHttpTemplet;
@@ -66,16 +132,6 @@ public abstract class AbstractPaymentService<T> extends PaymentServiceSupport
 	public void setPaymentContextParameters(
 			ApplicationContextParameter<Object, Object> paymentContextParameters) {
 		this.paymentContextParameters = paymentContextParameters;
-	}
-
-	protected void checkProperties() throws IllegalArgumentException {
-		super.checkProperties();
-		
-		if (this.paymentContextParameters == null)
-			throw new IllegalArgumentException("Property 'paymentContextParameters' must not be null.");
-		
-		if (this.paymentHttpTemplet == null)
-			throw new IllegalArgumentException("Property 'paymentHttpTemplet' must not be null.");
 	}
 
 	public CodeModel createRequest(Order order, Map<String,String> parameters) throws Exception {		
@@ -131,6 +187,8 @@ public abstract class AbstractPaymentService<T> extends PaymentServiceSupport
 		}
 	}
 	
+	
+	
 	/**
 	 * @description 根据订单执行支付服务的保存业务
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -149,6 +207,13 @@ public abstract class AbstractPaymentService<T> extends PaymentServiceSupport
 		return paymentService.save(payment);
 	}
 	
+	/** 
+	 * @description 初始化签名器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return 
+	 */
+	protected abstract Signature<P> initSignature() throws Exception;
+		
 	/**
 	 * @description 根据订单和其它非订单参数项创建支付参数对象模型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -156,6 +221,7 @@ public abstract class AbstractPaymentService<T> extends PaymentServiceSupport
 	 * @param parameters
 	 * @return
 	 */
-	protected abstract ResultModel<T> createParameters(Order order, Map<String,String> parameters) throws Exception;
+	protected abstract ResultModel<T> createParameters(Order order,
+			Map<String, String> parameters) throws Exception;
 	
 }

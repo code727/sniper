@@ -16,7 +16,7 @@
  * Create Date : 2015-12-8
  */
 
-package org.workin.payment.provider.wechatpay;
+package org.workin.payment.provider.wechatpay.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.payment.provider.wechatpay.parser.DefaultWechatpayParser;
@@ -28,7 +28,7 @@ import org.workin.payment.service.AbstractPaymentService;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class WechatpayService<T> extends AbstractPaymentService<T> {
+public abstract class WechatpayService<T, P> extends AbstractPaymentService<T, P> {
 	
 	/** 微信支付解析器 */
 	@Autowired(required = false)
@@ -37,10 +37,6 @@ public abstract class WechatpayService<T> extends AbstractPaymentService<T> {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
-		
-		if (this.signature == null)
-			this.signature = new WechatpaySignature();
-		
 		if (this.wechatpayParser == null)
 			this.wechatpayParser = new DefaultWechatpayParser();
 	}

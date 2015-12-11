@@ -28,8 +28,23 @@ import org.workin.commons.util.StringUtils;
  */
 public enum PaymentType {
 	
-	ALIPAY("AP"),
-	WXPAY("WP");
+	/** 阿里移动支付 */
+	ALI_MOBILE_PAYMENT("AMP"),
+	
+	/** 阿里手机网站支付 */
+	ALI_MOBILE_SITE_PAYMENT("AMSP"),
+	
+	/** 阿里网银支付 */
+	ALI_ONLINE_BANKING_PAYMENT("AOBP"),
+	
+	/** 微信公共号支付 */
+	WECHAT_PUBLIC_NO_PAYMENT("WPNP"),
+	
+	/** 微信扫码支付 */
+	WECHAT_SCANNING_CODE_PAYMENT("WSCP"),
+	
+	/** 微信APP支付 */
+	WECHAT_APP_PAYMENT("WAP");
 	
 	/** 订单编号前缀标识 */
 	private String orderPrefix;

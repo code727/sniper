@@ -16,26 +16,25 @@
  * Create Date : 2015-11-13
  */
 
-package org.workin.support.security;
+package org.workin.support.signature;
 
-import java.util.Map;
 
 /**
  * @description 签名接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Signature {
+public interface Signature<T> {
 	
-	/** 
-	 * @description 设置签名类型
+	/**
+	 * @description 设置类型标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 */
 	public void setType(String type);
 	
 	/**
-	 * @description 获取签名类型
+	 * @description 获取类型标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -48,6 +47,6 @@ public interface Signature {
 	 * @param secretKey
 	 * @return
 	 */
-	public String excute(Map<String, Object> parameters, String secretKey);
+	public String excute(T parameters);
 	
 }
