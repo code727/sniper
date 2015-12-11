@@ -19,7 +19,9 @@
 package org.workin.payment.provider.alipay.signature;
 
 import java.util.Map;
+import java.util.TreeMap;
 
+import org.workin.commons.util.MapUtils;
 import org.workin.support.signature.AESignature;
 
 /**
@@ -35,6 +37,13 @@ public class AlipayDSASignature extends AESignature<Map<String, Object>> {
 
 	@Override
 	public String excute(Map<String, Object> parameters) {
+		// 按参数名升序排列
+		if (!(parameters instanceof TreeMap))
+			parameters = MapUtils.newTreeMap(parameters);
+		
+		parameters.remove("sign_type");
+		parameters.remove("sign");
+				
 		return "";
 	}
 

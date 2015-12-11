@@ -39,9 +39,11 @@ public class AlipayMD5Signature extends SESignature<Map<String, Object>> {
 	@Override
 	public String excute(Map<String, Object> parameters) {
 		// 按参数名升序排列
-		if (!(parameters instanceof TreeMap<?, ?>))
+		if (!(parameters instanceof TreeMap))
 			parameters = MapUtils.newTreeMap(parameters);
 		
+		parameters.remove("sign_type");
+		parameters.remove("sign");
 		String queryString = MapUtils.joinQueryString(parameters) + getPrivateKey();
 		return SecurityUtils.md5(queryString);
 	}
