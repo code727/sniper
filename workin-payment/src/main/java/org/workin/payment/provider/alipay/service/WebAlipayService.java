@@ -161,10 +161,12 @@ public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<Strin
 	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
 		Map<String, String> parameters = MapUtils.newHashMap();
+		parameters.put("service", paymentContextParameters.getValue("alipay.web.validation.service", String.class));
+		parameters.put("partner", paymentContextParameters.getValue("alipay.web.partner", String.class));
 		parameters.put("notify_id", response.get("notify_id"));
 		
 		// 发送支付宝验证请求，并返回验证结果状态
-		String status = paymentHttpTemplet.request("alipayWebNotifyValidation", parameters);
+		String status = paymentHttpTemplet.request("webAlipayNotifyValidation", parameters);
 		// 再根据支付宝验证结果状态获取本系统的状态码
 		String code = ThirdValidationResult.getValidationResultCode(status);
 		

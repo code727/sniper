@@ -118,7 +118,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 		// 参数编码字符集
 		requiredParameters.put("_input_charset", inputCharset);
 		// 服务器异步通知页面路径 
-		requiredParameters.put("notify_url", paymentContextParameters.getValue("alipay.notify.url"));
+		requiredParameters.put("notify_url", paymentContextParameters.getValue("alipay.app.notify.url"));
 		// 商户网站唯一订单号
 		requiredParameters.put("out_trade_no", order.getOrderId());
 		// 商品名称
@@ -192,10 +192,12 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
 		Map<String, Object> parameters = MapUtils.newHashMap();
+		parameters.put("service", paymentContextParameters.getValue("alipay.app.validation.service", String.class));
+		parameters.put("partner", paymentContextParameters.getValue("alipay.app.partner", String.class));
 		parameters.put("notify_id", response.get("notify_id"));
 		
-		// 发送支付宝验证请求，并返回验证结果状态
-		String status = paymentHttpTemplet.request("alipayWebNotifyValidation", parameters);
+		// 发送支付宝通知验证请求，并返回验证结果状态
+		String status = paymentHttpTemplet.request("appAlipayNotifyValidation", parameters);
 		// 再根据支付宝验证结果状态获取本系统的状态码
 		String code = ThirdValidationResult.getValidationResultCode(status);
 		
