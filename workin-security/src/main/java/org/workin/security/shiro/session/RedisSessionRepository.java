@@ -42,10 +42,7 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 	
 	/** 存储会话数据的库索引 */
 	private int dbIndex;
-	
-	/** 标识是否自动删除 */
-	private boolean autoDelete = false;
-	
+		
 	private RedisCommandsDao redisCommandsDao;
 	
 	public RedisSessionRepository() {
@@ -68,14 +65,6 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 		this.dbIndex = dbIndex;
 	}
 
-	public boolean isAutoDelete() {
-		return autoDelete;
-	}
-
-	public void setAutoDelete(boolean autoDelete) {
-		this.autoDelete = autoDelete;
-	}
-
 	public RedisCommandsDao getRedisCommandsDao() {
 		return redisCommandsDao;
 	}
@@ -93,7 +82,7 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 	@Override
 	public void saveSession(Session session) {
 		if (session instanceof SimpleSession)
-			((SimpleSession)session).setStopTimestamp(null);
+			((SimpleSession) session).setStopTimestamp(null);
 		
 		String sessionId = getPrefix() + session.getId();
 		redisCommandsDao.set(dbIndex, sessionId, session);
@@ -102,11 +91,9 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 
 	@Override
 	public void deleteSession(Serializable sessionId) {
-		if (autoDelete) {
-			String cacheSessionId = getPrefix() + sessionId;
-			redisCommandsDao.del(dbIndex, new Serializable[] { cacheSessionId });
-			logger.debug("Delete session id:" + cacheSessionId);
-		}
+		String cacheSessionId = getPrefix() + sessionId;
+		redisCommandsDao.del(dbIndex, new Serializable[] { cacheSessionId });
+		logger.debug("Delete session id:" + cacheSessionId);
 	}
 
 	@Override
