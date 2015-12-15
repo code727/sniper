@@ -62,9 +62,31 @@ public class ShiroUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
+	
 	@SuppressWarnings("unchecked")
 	public static <T> T getCurrentUser() {
 		return (T) ShiroUtils.getCurrentSubject().getPrincipal();
 	}
-
+	
+	/**
+	 * @description 获取当前用户
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param userType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T getCurrentUser(Class<T> userType) {
+		return (T) ShiroUtils.getCurrentSubject().getPrincipal();
+	}
+	
+	/**
+	 * @description 注销
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	public static void logout() {
+		Subject subject = ShiroUtils.getCurrentSubject();
+		if (subject != null)
+			subject.logout();
+	}
+	
 }
