@@ -13,32 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *  
- * Create Date : 2015-2-2
+ * Create Date : 2015-1-27
  */
 
-package org.workin.persistence.hibernate.entity;
+package org.workin.persistence.jpa.entity.strategy;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.workin.persistence.jpa.entity.JpaLockableIdEntity;
+import org.workin.persistence.jpa.entity.CuAuditableEntity;
 
 /**
- * @description 可锁定的UUID2主键类型实体抽象类
+ * @description Identity主键类型的新增更新审核实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class LockableUuid2Entity extends JpaLockableIdEntity<String> {
+public abstract class IdentityCuAuditEntity extends CuAuditableEntity {
 	
 	@Id
-	@GeneratedValue(generator = "uuid2Generator")
-	@GenericGenerator(name = "uuid2Generator", strategy = "uuid2")
-	public String getId() {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Long getId() {
 		return super.getId();
 	}
-
+	
 }

@@ -13,32 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *  
- * Create Date : 2015-2-2
+ * Create Date : 2015-1-27
  */
 
-package org.workin.persistence.hibernate.entity;
+package org.workin.persistence.jpa.entity.strategy;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.workin.persistence.jpa.entity.JpaLockableIdEntity;
+import org.workin.commons.entity.Lockable;
 
 /**
- * @description 可锁定的UUID主键类型实体抽象类
+ * @description Table主键类型可锁定的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class LockableUuidEntity extends JpaLockableIdEntity<String> {
+public abstract class TableLockableIdEntity extends TableIdEntity implements Lockable {
 	
-	@Id
-	@GeneratedValue(generator = "uuidGenerator")
-	@GenericGenerator(name = "uuidGenerator", strategy = "uuid")
-	public String getId() {
-		return super.getId();
+	/** 版本号 */
+	private long version;
+	
+	@Version
+	public long getVersion() {
+		return this.version;
+	}
+	
+	@Override
+	public void setVersion(long version) {
+		this.version = version;
 	}
 
 }

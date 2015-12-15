@@ -23,16 +23,16 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.workin.persistence.jpa.entity.JpaCuAuditEntity;
+import org.workin.persistence.jpa.entity.StringCuAuditableEntity;
 
 /**
- * @description UUID主键类型的新增更新审核实体对象抽象类
+ * @description GUID主键类型的新增更新审核实体对象抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class GuidCuAuditEntity extends JpaCuAuditEntity<String> {
+public abstract class GuidCuAuditEntity extends StringCuAuditableEntity {
 	
 	@Id
 	@GeneratedValue(generator = "guidGenerator")

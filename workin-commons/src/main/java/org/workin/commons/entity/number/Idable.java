@@ -16,31 +16,30 @@
  * Create Date : 2015-1-27
  */
 
-package org.workin.commons.entity;
+package org.workin.commons.entity.number;
 
 import java.io.Serializable;
 
 
 /**
- * @description 可锁定的新增修改审核实体抽象类
- * @author <a href="mailto:code727@gmail.com">杜斌</a>
+ * @description 主键ID接口
+ * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-@SuppressWarnings("serial")
-public abstract class LockableCuAuditEntity<PK extends Serializable> extends
-		CuAuditEntity<PK> implements Lockable {
+public interface Idable extends Serializable {
 	
-	/** 版本号 */
-	private long version;
-
-	@Override
-	public long getVersion() {
-		return this.version;
-	}
-
-	@Override
-	public void setVersion(long version) {
-		this.version = version;
-	}
+	/**
+	 * @description 获取ID
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Long getId();
+	
+	/**
+	 * @description 设置ID
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 */
+	public void setId(Long id); 
 
 }

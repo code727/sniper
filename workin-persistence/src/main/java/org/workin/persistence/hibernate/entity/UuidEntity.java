@@ -23,7 +23,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.workin.commons.entity.IdEntity;
+import org.workin.commons.entity.string.StringIdEntity;
 
 /**
  * @description UUID主键类型实体抽象类
@@ -32,7 +32,7 @@ import org.workin.commons.entity.IdEntity;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class UuidEntity extends IdEntity<String> {
+public abstract class UuidEntity extends StringIdEntity {
 	
 	@Id
 	@GeneratedValue(generator = "uuidGenerator")

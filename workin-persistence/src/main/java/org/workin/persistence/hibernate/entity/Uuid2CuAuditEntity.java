@@ -23,7 +23,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.workin.persistence.jpa.entity.JpaCuAuditEntity;
+import org.workin.persistence.jpa.entity.StringCuAuditableEntity;
 
 /**
  * @description UUID2主键类型的新增更新审核实体对象抽象类
@@ -32,7 +32,7 @@ import org.workin.persistence.jpa.entity.JpaCuAuditEntity;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class Uuid2CuAuditEntity extends JpaCuAuditEntity<String> {
+public abstract class Uuid2CuAuditEntity extends StringCuAuditableEntity {
 	
 	@Id
 	@GeneratedValue(generator = "uuid2Generator")

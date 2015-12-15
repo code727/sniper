@@ -12,30 +12,38 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *  
+ * 
  * Create Date : 2015-1-27
  */
 
-package org.workin.persistence.jpa.entity;
+package org.workin.persistence.jpa.entity.strategy;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
+
+import org.workin.commons.entity.Lockable;
 
 /**
- * @description Auto类型可锁定的主键ID实体抽象类
+ * @description Identity主键类型可锁定的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class AutoLockableIdEntity extends JpaLockableIdEntity<Long> {
+public abstract class IdentityLockableIdEntity extends IdentityIdEntity implements Lockable {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
-		return super.getId();
+	/** 版本号 */
+	private long version;
+	
+	@Version
+	public long getVersion() {
+		return this.version;
 	}
 	
+	@Override
+	public void setVersion(long version) {
+		this.version = version;
+	}
+	
+
 }

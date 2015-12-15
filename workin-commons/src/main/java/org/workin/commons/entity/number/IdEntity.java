@@ -13,32 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *  
- * Create Date : 2015-2-2
+ * Create Date : 2015-1-27
  */
 
-package org.workin.persistence.hibernate.entity;
+package org.workin.commons.entity.number;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-
-import org.hibernate.annotations.GenericGenerator;
-import org.workin.persistence.jpa.entity.JpaLockableIdEntity;
+import java.io.Serializable;
 
 /**
- * @description 可锁定的GUID主键类型实体抽象类
+ * @description 主键ID实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
-@MappedSuperclass
-public abstract class LockableGuidEntity extends JpaLockableIdEntity<String> {
+public abstract class IdEntity implements Idable, Serializable {
 	
-	@Id
-	@GeneratedValue(generator = "guidGenerator")
-	@GenericGenerator(name = "guidGenerator", strategy = "guid")
-	public String getId() {
-		return super.getId();
+	/** 主键ID */
+	private Long id;
+
+	@Override
+	public Long getId() {
+		return this.id;
 	}
 
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 }

@@ -12,31 +12,32 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *  
  * Create Date : 2015-1-28
  */
 
-package org.workin.persistence.jpa.entity;
+package org.workin.persistence.jpa.entity.strategy;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.workin.commons.entity.IdEntity;
+import org.workin.commons.entity.number.IdEntity;
 
 /**
- * @description Auto类型的主键ID实体抽象类
+ * @description Table主键类型的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class AutoIdEntity extends IdEntity<Long> {
+public abstract class TableIdEntity extends IdEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	public Long getId() {
 		return super.getId();
 	}
+	
 }

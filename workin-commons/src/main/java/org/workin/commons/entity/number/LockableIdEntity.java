@@ -13,30 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-1-28
+ * Create Date : 2015-1-27
  */
 
-package org.workin.persistence.jpa.entity;
+package org.workin.commons.entity.number;
 
-import java.io.Serializable;
+import org.workin.commons.entity.Lockable;
 
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
-
-import org.workin.commons.entity.LockableIdEntity;
 
 /**
- * @description JPA可锁定的主键ID实体抽象类
+ * @description 可锁定的主键ID实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
-@MappedSuperclass
-public abstract class JpaLockableIdEntity<PK extends Serializable> extends LockableIdEntity<PK> {
+public abstract class LockableIdEntity extends IdEntity implements Lockable {
+		
+	/** 版本号 */
+	private long version;
 	
-	@Version
+	@Override
 	public long getVersion() {
-		return super.getVersion();
+		return this.version;
+	}
+	
+	@Override
+	public void setVersion(long version) {
+		this.version = version;
 	}
 
 }

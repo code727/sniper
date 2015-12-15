@@ -21,14 +21,14 @@ package org.workin.payment.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.workin.commons.entity.IdEntity;
+import org.workin.commons.entity.number.IdEntity;
 
 /**
  * @description 订单实体对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Order extends IdEntity<Long> {
+public class Order extends IdEntity {
 
 	private static final long serialVersionUID = -4569426721006936232L;
 	

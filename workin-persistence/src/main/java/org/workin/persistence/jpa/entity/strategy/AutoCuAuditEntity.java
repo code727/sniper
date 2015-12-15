@@ -16,29 +16,28 @@
  * Create Date : 2015-1-27
  */
 
-package org.workin.commons.entity;
+package org.workin.persistence.jpa.entity.strategy;
 
-import java.io.Serializable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+import org.workin.persistence.jpa.entity.CuAuditableEntity;
 
 /**
- * @description 主键ID接口
+ * @description Auto主键类型的新增更新审核实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Idable<PK extends Serializable> {
+@SuppressWarnings("serial")
+@MappedSuperclass
+public abstract class AutoCuAuditEntity extends CuAuditableEntity {
 	
-	/**
-	 * @description 获取ID
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public PK getId();
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public Long getId() {
+		return super.getId();
+	}
 	
-	/**
-	 * @description 设置ID
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
-	 */
-	public void setId(PK id); 
-
 }

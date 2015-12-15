@@ -16,26 +16,29 @@
  * Create Date : 2015-1-27
  */
 
-package org.workin.persistence.jpa.entity;
+package org.workin.commons.entity.number;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import org.workin.commons.entity.Lockable;
 
 /**
- * @description Sequence类型可锁定的主键ID实体抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @description 可锁定的新增修改审核实体抽象类
+ * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
-@MappedSuperclass
-public abstract class SequenceLockableIdEntity extends JpaLockableIdEntity<Long> {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	public Long getId() {
-		return super.getId();
+public abstract class LockableCuAuditEntity extends CuAuditEntity implements Lockable {
+		
+	/** 版本号 */
+	private long version;
+
+	@Override
+	public long getVersion() {
+		return this.version;
+	}
+
+	@Override
+	public void setVersion(long version) {
+		this.version = version;
 	}
 
 }
