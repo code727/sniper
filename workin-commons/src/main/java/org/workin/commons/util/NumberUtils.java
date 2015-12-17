@@ -931,4 +931,44 @@ public class NumberUtils {
 		return getDecimalFormat(pattern).format(number);
 	}
 	
+	/**
+	 * @description 绝对值取反
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param a
+	 * @return
+	 */
+	public static int unAbs(int a) {
+		return (a > 0) ? -a : a;
+	}
+	
+	/**
+	 * @description 绝对值取反
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param a
+	 * @return
+	 */
+	public static long unAbs(long a) {
+		return (a > 0) ? -a : a;
+	}
+	
+	/**
+	 * @description 绝对值取反
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param a
+	 * @return
+	 */
+	public static float unAbs(float a) {
+        return (a > 0.0F) ? 0.0F - a : a;
+    }
+	
+	/**
+	 * @description 绝对值取反
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param a
+	 * @return
+	 */
+	public static double unAbs(double a) {
+        return (a > 0.0D) ? 0.0D - a : a;
+    }
+		
 }

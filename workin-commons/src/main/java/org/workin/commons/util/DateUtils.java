@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.workin.commons.enums.category.astrology.Horoscope;
+
 /**
  * @description 日期时间工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -288,69 +290,205 @@ public class DateUtils {
 	/**
 	 * @description 计算两日期间隔的毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
-	 * @param start
-	 * @param end
+	 * @param when
+	 * @param then
 	 * @return 
 	 */
-	public static long getIntervalMillis(Date start, Date end) {
-		AssertUtils.assertNotNull(start, "Start date must not be null.");
-		AssertUtils.assertNotNull(end, "End date must not be null.");
-		return Math.abs(end.getTime() - start.getTime());
+	public static long getIntervalMillis(Date when, Date then) {
+		AssertUtils.assertTrue(when != null && then != null, "Date must not be null.");
+		return Math.abs(then.getTime() - when.getTime());
 	}
 	
 	/**
 	 * @description 计算两日期间隔的秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param start
-	 * @param end
+	 * @param when
+	 * @param then
 	 * @return
 	 */
-	public static long getIntervalSecond(Date start, Date end) {
-		return getIntervalMillis(start, end) / UM_MS.get("sec");
+	public static long getIntervalSecond(Date when, Date then) {
+		return getIntervalMillis(when, then) / UM_MS.get("sec");
 	}
 	
 	/**
 	 * @description 计算两日期间隔的分钟数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param start
-	 * @param end
+	 * @param when
+	 * @param then
 	 * @return
 	 */
-	public static long getIntervalMinute(Date start, Date end) {
-		return getIntervalMillis(start, end) / UM_MS.get("min");
+	public static long getIntervalMinute(Date when, Date then) {
+		return getIntervalMillis(when, then) / UM_MS.get("min");
 	}
 	
 	/**
 	 * @description 计算两日期间隔的小时数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param start
-	 * @param end
+	 * @param when
+	 * @param then
 	 * @return
 	 */
-	public static long getIntervalHour(Date start, Date end) {
-		return getIntervalMillis(start, end) / UM_MS.get("hr");
+	public static long getIntervalHour(Date when, Date then) {
+		return getIntervalMillis(when, then) / UM_MS.get("hr");
 	}
 	
 	/**
 	 * @description 计算两日期间隔的天数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param start
-	 * @param end
+	 * @param when
+	 * @param then
 	 * @return
 	 */
-	public static long getIntervalDay(Date start, Date end) {
-		return getIntervalMillis(start, end) / UM_MS.get("day");
+	public static long getIntervalDay(Date when, Date then) {
+		return getIntervalMillis(when, then) / UM_MS.get("day");
 	}
 	
 	/**
 	 * @description 计算两日期间隔的周数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param start
-	 * @param end
+	 * @param when
+	 * @param then
 	 * @return
 	 */
-	public static long getIntervalWeek(Date start, Date end) {
-		return getIntervalMillis(start, end) / UM_MS.get("w");
+	public static long getIntervalWeek(Date when, Date then) {
+		return getIntervalMillis(when, then) / UM_MS.get("w");
+	}
+	
+	/**
+	 * @description 计算两日期间隔的月数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param when
+	 * @param then
+	 * @return
+	 */
+	public static long getIntervalMonth(Date when, Date then) {
+		return getIntervalYear(when, then) / 12;
+	}
+	
+	/**
+	 * @description 计算两日期间隔的年数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param when
+	 * @param then
+	 * @return
+	 */
+	public static int getIntervalYear(Date when, Date then) {
+		AssertUtils.assertTrue(when != null && then != null, "Date must not be null.");
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(when);
+		
+		int whenYear = calendar.get(Calendar.YEAR);
+		int whenMonth = calendar.get(Calendar.MONTH) + 1;
+		int whenDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+		
+		calendar.setTime(then);
+		int thenYear = calendar.get(Calendar.YEAR);
+		int thenMonth = calendar.get(Calendar.MONTH) + 1;
+		int thenDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+		
+		int year = 0;
+		if (when.before(then)) {
+			year = thenYear - whenYear;
+			if (thenMonth <= whenMonth) {
+				if (whenMonth == thenMonth) {
+					if (thenDayOfMonth < whenDayOfMonth) 
+						year--;
+				} else 
+					year--;
+			}
+		} else {
+			year = whenYear - thenYear;
+			if (whenMonth <= thenMonth) {
+				if (whenMonth == thenMonth) {
+					if (whenDayOfMonth < thenDayOfMonth) 
+						year--;
+				} else 
+					year--;
+			}
+		}
+		return year;
+	}
+	
+	/**
+	 * @description 根据生日计算出距今的年龄
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param birthday
+	 * @return
+	 */
+	public static int getAgeByBirthday(Date birthday) {
+		Calendar calendar = Calendar.getInstance();
+		if (birthday == null || calendar.before(birthday)) 
+			return 0;
+
+		int yearNow = calendar.get(Calendar.YEAR);
+		int monthNow = calendar.get(Calendar.MONTH) + 1;
+		int dayOfMonthNow = calendar.get(Calendar.DAY_OF_MONTH);
+
+		calendar.setTime(birthday);
+		int yearBirth = calendar.get(Calendar.YEAR);
+		int monthBirth = calendar.get(Calendar.MONTH) + 1;
+		int dayOfMonthBirth = calendar.get(Calendar.DAY_OF_MONTH);
+
+		int age = yearNow - yearBirth;
+		if (monthNow <= monthBirth) {
+			if (monthNow == monthBirth) {
+				if (dayOfMonthNow < dayOfMonthBirth) 
+					age--;
+			} else {
+				age--;
+			}
+		}
+		
+		return age;
+	}
+	
+	/**
+	 * @description 根据生日获取星座
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param birthday
+	 * @return 星座类型,,从0至11依次为白羊座至双鱼座
+	 */
+	public static int getHoroscopeByBirthday(Date birthday) {
+		int type = -1; 
+		
+		if (birthday != null) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(birthday);
+			
+			int month = calendar.get(Calendar.MONTH) + 1;
+			int day = calendar.get(Calendar.DAY_OF_MONTH);
+			
+			double d = Double.valueOf(new StringBuffer(ObjectUtils.toString(month))
+					.append(".").append(day).toString());
+			
+			if (d >= 3.21 && d <= 4.19 ) {
+	            type = Horoscope.ARIES.getKey();
+	        } else if (d >= 4.20 && d <= 5.20) {
+	            type = Horoscope.TAURUS.getKey();
+	        } else if (d >= 5.21 && d <= 6.21) {
+	            type = Horoscope.GEMINI.getKey();
+	        } else if (d >= 6.22 && d <= 7.22) {
+	            type = Horoscope.CANCER.getKey();
+	        } else if (d >= 7.23 && d <= 8.22) {
+	            type = Horoscope.LEO.getKey();
+	        } else if (d >= 8.23 && d <= 9.22) {
+	            type = Horoscope.VIRGO.getKey();
+	        } else if (d >= 9.23 && d <= 10.23) {
+	            type = Horoscope.LIBRA.getKey();
+	        } else if (d >= 10.24 && d <= 11.22) {
+	            type = Horoscope.ACRAB.getKey();
+	        } else if (d >= 11.23 && d <= 12.21) {
+	            type = Horoscope.SAGITTARIUS.getKey();
+	        } else if ((d >= 12.22 && d <= 12.31) || (d >= 1.01 && d <= 1.19)) {
+	            type = Horoscope.CAPRICORN.getKey();
+	        } else if (d >= 1.20 && d <= 2.18) {
+	            type = Horoscope.AQUARIUS.getKey();
+	        } else if (d >= 2.19 && d <= 3.20) {
+	            type = Horoscope.PISCES.getKey();
+	        }
+		}
+		
+		return type;
 	}
 	
 	/**
