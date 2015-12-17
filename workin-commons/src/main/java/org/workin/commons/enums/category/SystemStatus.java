@@ -27,17 +27,17 @@ import org.workin.commons.enums.AbstractLocaleEnums;
  */
 public final class SystemStatus extends AbstractLocaleEnums<String> {
 	
-	protected SystemStatus(String key, String value) {
+	private SystemStatus(String key, String value) {
 		super(key, value);
 	}
 	
 	/** 失败 */
-	public static final SystemStatus FAILED = new SystemStatus("-0001", "msg.failed.status");
+	public static final SystemStatus FAILED = new SystemStatus("-0001", "system.status.failed");
 	
 	/** 未知 */
-	public static final SystemStatus UNKNOW = new SystemStatus("0000", "msg.unknow.status");
+	public static final SystemStatus UNKNOW = new SystemStatus("0000", "system.status.unknow");
 	
 	/** 成功 */
-	public static final SystemStatus SUCCESS = new SystemStatus("0001", "msg.success.status");
+	public static final SystemStatus SUCCESS = new SystemStatus("0001", "system.status.success");
 				
 }

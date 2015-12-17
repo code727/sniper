@@ -16,7 +16,7 @@
  * Create Date : 2015-11-20
  */
 
-package org.workin.commons.enums.category;
+package org.workin.commons.enums.category.ebusiness;
 
 import org.workin.commons.enums.AbstractLocaleEnums;
 
@@ -25,16 +25,16 @@ import org.workin.commons.enums.AbstractLocaleEnums;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class O2OTypes extends AbstractLocaleEnums<Integer> {
+public final class O2OType extends AbstractLocaleEnums<Integer> {
 
-	protected O2OTypes(Integer key, String messageKey) {
+	private O2OType(Integer key, String messageKey) {
 		super(key, messageKey);
 	}
 	
 	/** 线上 */
-	public static final O2OTypes ONLINE = new O2OTypes(0, "ms.o2o.type.online");
+	public static final O2OType ONLINE = new O2OType(0, "o2o.type.online");
 	
 	/** 线下 */
-	public static final O2OTypes OFFLINE = new O2OTypes(1, "ms.o2o.type.offline");
+	public static final O2OType OFFLINE = new O2OType(1, "o2o.type.offline");
 
 }

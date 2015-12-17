@@ -16,24 +16,24 @@
  * Create Date : 2015-11-20
  */
 
-package org.workin.commons.enums.category;
+package org.workin.commons.enums.category.terminal;
 
 import org.workin.commons.enums.AbstractLocaleEnums;
 
 /**
- * @description 设备终端类型枚举类
+ * @description 个人设备类型枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DeviceTerminal extends AbstractLocaleEnums<Integer> {
+public final class PersonalDevice extends AbstractLocaleEnums<Integer> {
 
-	protected DeviceTerminal(Integer key, String messageKey) {
+	private PersonalDevice(Integer key, String messageKey) {
 		super(key, messageKey);
 	}
 	
-	public static final DeviceTerminal PC = new DeviceTerminal(0, "ms.device.terminal.pc");
-	public static final DeviceTerminal ANDROID = new DeviceTerminal(1, "ms.device.terminal.android");
-	public static final DeviceTerminal IOS = new DeviceTerminal(2, "ms.device.terminal.ios");
-	public static final DeviceTerminal WINPHONE = new DeviceTerminal(3, "ms.device.terminal.winphone");
+	public static final PersonalDevice PC = new PersonalDevice(0, "personal.device.type.pc");
+	public static final PersonalDevice ANDROID = new PersonalDevice(1, "personal.device.type.android");
+	public static final PersonalDevice IOS = new PersonalDevice(2, "personal.device.type.ios");
+	public static final PersonalDevice WINPHONE = new PersonalDevice(3, "personal.device.type.winphone");
 
 }
