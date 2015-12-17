@@ -22,8 +22,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.workin.commons.enums.category.O2OTypes;
 import org.workin.commons.enums.category.SystemStatus;
+import org.workin.commons.enums.category.ebusiness.O2OType;
 import org.workin.commons.model.CodeModel;
 import org.workin.commons.model.impl.CodeDataModel;
 import org.workin.commons.model.impl.CodeMessageModel;
@@ -136,7 +136,7 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 
 	public CodeModel createRequest(Order order, Map<String,String> parameters) throws Exception {		
 		// 第一步：先验证支付订单的类型，如果是线下订单，则首先验证用户输入的账号密码是否有效
-		if (order.getO2oType() == O2OTypes.OFFLINE.getKey()) {
+		if (order.getO2oType() == O2OType.OFFLINE.getKey()) {
 			String loginName = orderService.findUserLoginName(order.getAccount(), order.getPassword());
 			if (StringUtils.isNotEmpty(loginName))
 				// 设置验证返回的登录名到订单中
