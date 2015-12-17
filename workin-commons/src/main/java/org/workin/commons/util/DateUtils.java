@@ -361,8 +361,9 @@ public class DateUtils {
 	 * @param then
 	 * @return
 	 */
+	@Deprecated
 	public static long getIntervalMonth(Date when, Date then) {
-		return getIntervalYear(when, then) / 12;
+		return getIntervalYear(when, then) * 12;
 	}
 	
 	/**
