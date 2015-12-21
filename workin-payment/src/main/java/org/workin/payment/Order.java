@@ -199,28 +199,28 @@ public interface Order extends Idable {
 	public void setO2oType(int o2oType);
 
 	/**
-	 * @description 获取购买数量
+	 * @description 获取针对于线下用户输入的账号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getAccount();
 
 	/**
-	 * @description 设置购买数量
+	 * @description 设置针对于线下用户输入的账号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param account
 	 */
 	public void setAccount(String account);
 
 	/**
-	 * @description 获取支付用户账号密码
+	 * @description 取针对于线下用户输入的密码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getPassword();
 
 	/**
-	 * @description 设置支付用户账号密码
+	 * @description 设置对于线下用户输入的密码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param password
 	 */

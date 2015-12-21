@@ -48,11 +48,11 @@ public interface OrderBaseService {
 	/**
 	 * @description 获取线下充值用户的登录名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param userAccount
+	 * @param account
 	 * @param password
 	 * @return
 	 * @throws Exception
 	 */
-	public String findUserLoginName(String userAccount, String password) throws Exception;
+	public String findLoginName(String account, String password) throws Exception;
 
 }

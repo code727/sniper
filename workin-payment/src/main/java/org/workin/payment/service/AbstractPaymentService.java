@@ -151,7 +151,7 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 	public CodeModel createRequest(Order order, Map<String,String> parameters) throws Exception {		
 		// 第一步：先验证支付订单的类型，如果是线下订单，则首先验证用户输入的账号密码是否有效
 		if (order.getO2oType() == O2OType.OFFLINE.getKey()) {
-			String loginName = orderService.findUserLoginName(order.getAccount(), order.getPassword());
+			String loginName = orderService.findLoginName(order.getAccount(), order.getPassword());
 			if (StringUtils.isNotEmpty(loginName))
 				// 设置验证返回的登录名到订单中
 				order.setLoginName(loginName);
