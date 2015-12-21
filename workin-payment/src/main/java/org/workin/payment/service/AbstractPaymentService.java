@@ -95,6 +95,14 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 	public void setSignature(Signature<P> signature) {
 		this.signature = signature;
 	}
+	
+	public PaymentFactory getPaymentFactory() {
+		return paymentFactory;
+	}
+
+	public void setPaymentFactory(PaymentFactory paymentFactory) {
+		this.paymentFactory = paymentFactory;
+	}
 
 	public IDGenerator getOrderIdGenerator() {
 		return orderIdGenerator;
