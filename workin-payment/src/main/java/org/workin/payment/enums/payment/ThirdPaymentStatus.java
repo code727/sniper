@@ -42,20 +42,18 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	/** 支付宝交易状态枚举*/
 	public static final ThirdPaymentStatus ALIPAY_WAIT_BUYER_PAY = new ThirdPaymentStatus(
 			"WAIT_BUYER_PAY", PaymentStatus.WAIT_BUYER_PAY);
-	public static final ThirdPaymentStatus ALIPAY_WAIT_SELLER_SEND_GOODS = new ThirdPaymentStatus(
-			"WAIT_SELLER_SEND_GOODS", PaymentStatus.WAIT_SELLER_SEND_GOODS);
-	public static final ThirdPaymentStatus ALIPAY_WAIT_BUYER_CONFIRM_GOODS = new ThirdPaymentStatus(
-			"WAIT_BUYER_CONFIRM_GOODS", PaymentStatus.WAIT_BUYER_CONFIRM_GOODS);
+	public static final ThirdPaymentStatus ALIPAY_TRADE_SUCCESS = new ThirdPaymentStatus(
+			"TRADE_SUCCESS", PaymentStatus.TRADE_SUCCESS);
 	public static final ThirdPaymentStatus ALIPAY_TRADE_FINISHED = new ThirdPaymentStatus(
 			"TRADE_FINISHED", PaymentStatus.TRADE_FINISHED);
 	public static final ThirdPaymentStatus ALIPAY_TRADE_CLOSED = new ThirdPaymentStatus(
 			"TRADE_CLOSED", PaymentStatus.TRADE_CLOSED);
-	public static final ThirdPaymentStatus ALIPAY_MODIFY_TRADEBASE_TOTALFEE = new ThirdPaymentStatus(
-			"modify.tradeBase.totalFee", PaymentStatus.MODIFY_TRADEBASE_TOTALFEE);
-			
+	public static final ThirdPaymentStatus ALIPAY_TRADE_PENDING = new ThirdPaymentStatus(
+			"TRADE_PENDING", PaymentStatus.TRADE_PENDING);
+	
 	/** 微信交易状态枚举*/
 	public static final ThirdPaymentStatus WECHATPAY_TRADE_SUCCESS = new ThirdPaymentStatus(
-			"SUCCESS", PaymentStatus.TRADE_FINISHED);
+			"SUCCESS", PaymentStatus.TRADE_SUCCESS);
 	public static final ThirdPaymentStatus WECHATPAY_TRADE_FAIL = new ThirdPaymentStatus(
 			"FAIL", PaymentStatus.TRADE_CLOSED);
 	
@@ -95,11 +93,10 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 		
 		/** 支付宝交易状态映射集 */
 		PAY_STATUS_MAP.put(ALIPAY_WAIT_BUYER_PAY.getKey(), ALIPAY_WAIT_BUYER_PAY.getValue());
-		PAY_STATUS_MAP.put(ALIPAY_WAIT_SELLER_SEND_GOODS.getKey(), ALIPAY_WAIT_SELLER_SEND_GOODS.getValue());
-		PAY_STATUS_MAP.put(ALIPAY_WAIT_BUYER_CONFIRM_GOODS.getKey(), ALIPAY_WAIT_BUYER_CONFIRM_GOODS.getValue());
+		PAY_STATUS_MAP.put(ALIPAY_TRADE_SUCCESS.getKey(), ALIPAY_TRADE_SUCCESS.getValue());
 		PAY_STATUS_MAP.put(ALIPAY_TRADE_FINISHED.getKey(), ALIPAY_TRADE_FINISHED.getValue());
 		PAY_STATUS_MAP.put(ALIPAY_TRADE_CLOSED.getKey(), ALIPAY_TRADE_CLOSED.getValue());
-		PAY_STATUS_MAP.put(ALIPAY_MODIFY_TRADEBASE_TOTALFEE.getKey(), ALIPAY_MODIFY_TRADEBASE_TOTALFEE.getValue());
+		PAY_STATUS_MAP.put(ALIPAY_TRADE_PENDING.getKey(), ALIPAY_TRADE_PENDING.getValue());
 		
 		/** 微信支付交易状态映射集 */
 		PAY_STATUS_MAP.put(WECHATPAY_TRADE_SUCCESS.getKey(), WECHATPAY_TRADE_SUCCESS.getValue());

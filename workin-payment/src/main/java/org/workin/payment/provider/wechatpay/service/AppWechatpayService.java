@@ -258,7 +258,9 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		}
 		
 		// 只有等交易完成后才记录支付时间
-		if (PaymentStatus.TRADE_FINISHED.getKey() == payment.getStatus())
+		int status = payment.getStatus();
+		if (status == PaymentStatus.TRADE_SUCCESS.getKey()
+				|| status == PaymentStatus.TRADE_FINISHED.getKey())
 			payment.setPayTime(new Date());
 		else
 			payment.setPayTime(null);

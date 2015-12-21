@@ -65,8 +65,11 @@ public abstract class AlipayService<T, P> extends AbstractPaymentService<T, P> {
 		String thirdCode = paymentResponse.get("trade_status");
 		payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(thirdCode));
 		payment.setMessage(ThirdPaymentStatus.getPaymentMessage(thirdCode));
-		// 只有等交易完成后才记录支付时间
-		if (PaymentStatus.TRADE_FINISHED.getKey() == payment.getStatus())
+		
+		int status = payment.getStatus();
+		// 只有等交易成功或完成后才记录支付时间
+		if (status == PaymentStatus.TRADE_SUCCESS.getKey()
+				|| status == PaymentStatus.TRADE_FINISHED.getKey())
 			payment.setPayTime(new Date());
 		else
 			payment.setPayTime(null);
