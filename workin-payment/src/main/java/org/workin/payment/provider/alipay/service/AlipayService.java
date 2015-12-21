@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.Map;
 
 import org.workin.commons.model.impl.CodeMessageModel;
-import org.workin.payment.domain.Payment;
+import org.workin.payment.Payment;
 import org.workin.payment.enums.payment.PaymentStatus;
 import org.workin.payment.enums.payment.ThirdPaymentStatus;
 import org.workin.payment.service.AbstractPaymentService;
@@ -56,7 +56,7 @@ public abstract class AlipayService<T, P> extends AbstractPaymentService<T, P> {
 		String orderId = paymentResponse.get("out_trade_no");
 		Payment payment = paymentService.findByOrderId(orderId);
 		if (payment == null) {
-			payment = new Payment();
+			payment = paymentFactory.create();
 			payment.setAmount(orderService.findByOrderId(orderId).getAmount());
 		}
 		payment.setOrderId(orderId);

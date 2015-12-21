@@ -28,9 +28,9 @@ import org.workin.commons.model.impl.ResultModel;
 import org.workin.commons.util.CurrencyUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.payment.Order;
+import org.workin.payment.Payment;
 import org.workin.payment.PaymentUtils;
-import org.workin.payment.domain.Order;
-import org.workin.payment.domain.Payment;
 import org.workin.payment.enums.payment.PaymentStatus;
 import org.workin.payment.enums.payment.ThirdPaymentStatus;
 import org.workin.payment.provider.wechatpay.enums.ResultCode;
@@ -205,7 +205,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		CodeMessageModel result = new CodeMessageModel();
 		Payment payment = paymentService.findByOrderId(orderId);
 		if (payment == null) 
-			payment = new Payment();
+			payment = paymentFactory.create();
 		
 		payment.setOrderId(orderId);
 		/* 主要是更新支付记录的状态和消息
@@ -229,7 +229,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		String orderId = paymentResponse.get("out_trade_no");
 		Payment payment = paymentService.findByOrderId(orderId);
 		if (payment == null) {
-			payment = new Payment();
+			payment = paymentFactory.create();
 			payment.setAmount(orderService.findByOrderId(orderId).getAmount());
 		}
 		

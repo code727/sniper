@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.workin.commons.model.CodeModel;
 import org.workin.commons.model.impl.CodeMessageModel;
-import org.workin.payment.domain.Order;
+import org.workin.payment.Order;
 
 /**
  * @description 支付服务接口

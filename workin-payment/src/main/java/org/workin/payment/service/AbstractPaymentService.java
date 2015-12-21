@@ -30,10 +30,11 @@ import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.model.impl.ResultModel;
 import org.workin.commons.util.StringUtils;
 import org.workin.http.httpclient.v4.HttpClientTemplet;
-import org.workin.payment.domain.Order;
-import org.workin.payment.domain.Payment;
+import org.workin.payment.Order;
+import org.workin.payment.Payment;
 import org.workin.payment.enums.payment.PaymentStatus;
 import org.workin.payment.enums.payment.PaymentType;
+import org.workin.payment.factory.PaymentFactory;
 import org.workin.spring.context.ApplicationContextParameter;
 import org.workin.support.generator.DateTimeIDGenerator;
 import org.workin.support.generator.IDGenerator;
@@ -61,6 +62,9 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 	/** 支付服务接口 */
 	@Autowired
 	protected PaymentBaseService paymentService;
+	
+	@Autowired
+	protected PaymentFactory paymentFactory;
 		
 	/** 签名器 */
 	private Signature<P> signature;
@@ -110,7 +114,9 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 			throw new IllegalArgumentException("Property 'paymentContextParameters' must not be null.");
 		if (this.paymentHttpTemplet == null)
 			throw new IllegalArgumentException("Property 'paymentHttpTemplet' must not be null.");
-				
+		if (this.paymentFactory == null)
+			throw new IllegalArgumentException("Property 'paymentFactory' must not be null.");
+		
 		if (this.orderIdGenerator == null)
 			this.orderIdGenerator = new DateTimeIDGenerator();
 		
@@ -187,8 +193,6 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 		}
 	}
 	
-	
-	
 	/**
 	 * @description 根据订单执行支付服务的保存业务
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -198,7 +202,7 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 	 * @throws Exception
 	 */
 	protected CodeMessageModel savePaymentByOrder(Order order) throws Exception {
-		Payment payment = new Payment();
+		Payment payment = paymentFactory.create();
 		payment.setOrderId(order.getOrderId());
 		payment.setAmount(order.getAmount());
 		// 所有支付的初始状态统一为"交易创建 "

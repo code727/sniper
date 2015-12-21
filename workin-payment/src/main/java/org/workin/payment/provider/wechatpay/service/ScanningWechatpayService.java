@@ -23,8 +23,8 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.model.impl.ResultModel;
+import org.workin.payment.Order;
 import org.workin.payment.WebPaymentRequest;
-import org.workin.payment.domain.Order;
 import org.workin.support.signature.Signature;
 
 /**

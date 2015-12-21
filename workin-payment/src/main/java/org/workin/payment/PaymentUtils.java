@@ -21,7 +21,6 @@ package org.workin.payment;
 import java.math.BigDecimal;
 
 import org.workin.commons.util.NumberUtils;
-import org.workin.payment.domain.Order;
 
 /**
  * @description 支付工具类
