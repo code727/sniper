@@ -509,6 +509,32 @@ public class CollectionUtils {
 		
 		return list.get(index);
 	}
+	
+	/**
+	 * @description 按指定的分隔符将列表中各元素连接成字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param list
+	 * @param separator
+	 * @return
+	 */
+	public static <T> String join(List<T> list, String separator) {
+		if (isEmpty(list))
+			return StringUtils.EMPTY_STRING;
+		
+		StringBuilder builder = new StringBuilder();
+		if (StringUtils.isNotEmpty(separator)) {
 			
+			int max = list.size() - 1;
+			for (int i = 0; i < max; i++)
+				builder.append(list.get(i)).append(separator);
+			
+			builder.append(list.get(max));
+		} else {
+			for (T e : list) 
+				builder.append(e);
+		}
+		return builder.toString();
+	}
+	
 }
 
