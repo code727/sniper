@@ -84,5 +84,7 @@
 		<module>workin-socket</module>
 		<module>workin-fastdfs</module>
 		<module>workin-payment</module>
+		<module>workin-captcha</module>
+		<module>workin-sms</module>
 	</modules>
 </project>
