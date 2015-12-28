@@ -1,9 +1,34 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.workin</groupId>
-    <artifactId>workin</artifactId>
-    <version>1.0.0</version>
-  </parent>
-  <artifactId>workin-sms</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.workin</groupId>
+		<artifactId>workin</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<artifactId>workin-sms</artifactId>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.aliyun</groupId>
+		  	<artifactId>taobao-sdk-java-auto</artifactId>
+		  	<version>1450195003197-20151225</version>
+		  	<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-commons</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-json</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-spring</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
 </project>
