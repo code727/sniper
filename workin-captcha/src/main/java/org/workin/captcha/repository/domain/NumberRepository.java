@@ -25,8 +25,10 @@ package org.workin.captcha.repository.domain;
  */
 public class NumberRepository extends TextRepository {
 	
+	private static final String TEXT = "0123456789";
+	
 	public NumberRepository() {
-		setContent("0123456789");
+		setContent(TEXT);
 	}
 
 }

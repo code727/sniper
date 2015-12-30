@@ -25,8 +25,10 @@ package org.workin.captcha.repository.domain;
  */
 public class LetterRepository extends TextRepository {
 	
+	private static final String TEXT = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
+	
 	public LetterRepository() {
-		setContent("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz");
+		setContent(TEXT);
 	}
 
 }
