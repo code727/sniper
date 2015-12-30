@@ -130,7 +130,7 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	protected <T> File createTempFile(FastDFSMeta<T> meta) {
 		String tempPathName = new StringBuilder(SystemUtils.getTempDir())
 			.append(File.separator).append("temp_").append(new Date().getTime())
-			.append("_").append(meta.getOriginalName()).toString();
+			.append("_").append(meta.getName()).toString();
 		return new File(tempPathName);
 	}
 	

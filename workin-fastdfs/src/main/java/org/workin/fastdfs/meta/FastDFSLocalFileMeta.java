@@ -41,7 +41,8 @@ public class FastDFSLocalFileMeta extends AbstractFastDFSMeta<File> {
 		if (this.localFileSource == null)
 			this.localFileSource = new LocalFileMeta(getSource());
 		
-		this.originalName = this.localFileSource.getOriginalName();
+		this.name = this.localFileSource.getName();
+		this.mainName = this.localFileSource.getMainName();
 		this.extName = this.localFileSource.getExtName();
 		this.in = this.localFileSource.getInputStream();
 		this.bytes = this.localFileSource.getBytes();

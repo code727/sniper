@@ -38,7 +38,8 @@ public class LocalFileMeta extends AbstaractFileMeta<File> {
 	@Override
 	protected void handle() throws IOException {
 		File source = getSource();
-		this.originalName = source.getName();
+		this.name = source.getName();
+		this.mainName = FileUtils.getMainName(source);
 		this.extName = FileUtils.getExtensionName(source);
 		this.in = new FileInputStream(source);
 		this.bytes = new byte[this.in.available()];

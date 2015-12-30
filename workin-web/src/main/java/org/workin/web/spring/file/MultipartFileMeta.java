@@ -38,8 +38,9 @@ public class MultipartFileMeta extends AbstaractFileMeta<MultipartFile> {
 	@Override
 	protected void handle() throws IOException {
 		MultipartFile source = getSource();
-		this.originalName = source.getOriginalFilename();
-		this.extName = FileUtils.getExtensionName(source.getName());
+		this.name = source.getOriginalFilename();
+		this.mainName = FileUtils.getMainName(this.name);
+		this.extName = FileUtils.getExtensionName(this.name);
 		this.in = source.getInputStream();
 		this.bytes = new byte[this.in.available()];
 		this.in.read(bytes, 0, bytes.length);

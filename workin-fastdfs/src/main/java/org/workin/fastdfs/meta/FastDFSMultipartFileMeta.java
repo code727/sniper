@@ -42,7 +42,8 @@ public class FastDFSMultipartFileMeta extends AbstractFastDFSMeta<MultipartFile>
 		if (this.multipartFileSource == null)
 			this.multipartFileSource = new MultipartFileMeta(getSource());
 		
-		this.originalName = this.multipartFileSource.getOriginalName();
+		this.name = this.multipartFileSource.getName();
+		this.mainName = this.multipartFileSource.getMainName();
 		this.extName = this.multipartFileSource.getExtName();
 		this.in = this.multipartFileSource.getInputStream();
 		this.bytes = this.multipartFileSource.getBytes();

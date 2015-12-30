@@ -34,8 +34,11 @@ public abstract class AbstaractFileMeta<T> implements FileMeta<T> {
 	/** 文件源 */
 	private T source;
 	
-	/** 原始名称 */
-	protected String originalName;
+	/** 文件名(名.扩展) */
+	protected String name;
+	
+	/** 文件名 */
+	protected String mainName;
 	
 	/** 扩展名 */
 	protected String extName;
@@ -56,12 +59,17 @@ public abstract class AbstaractFileMeta<T> implements FileMeta<T> {
 	public T getSource() {
 		return this.source;
 	}
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
 	
 	@Override
-	public String getOriginalName() {
-		return this.originalName;
+	public String getMainName() {
+		return this.mainName;
 	}
-
+	
 	@Override
 	public String getExtName() {
 		return this.extName;

@@ -36,11 +36,18 @@ public interface FileMeta<T> {
 	public T getSource();
 	
 	/**
-	 * @description 获取文件源原始名称
+	 * @description 获取文件源名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public String getOriginalName();
+	public String getName();
+	
+	/**
+	 * @description 获取文件源主名
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getMainName();
 	
 	/**
 	 * @description 获取文件源扩展名
