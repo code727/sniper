@@ -42,6 +42,7 @@ public class RegexUtils {
 		regex.put("ipv4",  "^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$");
 		regex.put("ipv6",  "^((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)::((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)$");
 		regex.put("email", "[\\w[.-]]+@[\\w[.-]]+\\.[\\w]+");
+		regex.put("mobile", "^[1][3578]\\d{9}$");
 		regex.put("ascii", "[\u0000-\u007E]+");
 		regex.put("double_byte", "[^\u0000-\u007E]+");
 		regex.put("chinese", "[\u4E00-\u9FA5]+");
@@ -140,13 +141,23 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否满足Email格式
+	 * @description 判断字符串是否为Email
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
 	 */
 	public static boolean isEmail(String str) {
 		return is(str, regex.get("email"));
+	}
+	
+	/**
+	 * @description 判断字符串是否为手机号
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isMobile(String str) {
+		return is(str, regex.get("mobile"));
 	}
 		
 	/**
@@ -208,5 +219,5 @@ public class RegexUtils {
 			count++;
 		return count;
 	}
-	
+		
 }
