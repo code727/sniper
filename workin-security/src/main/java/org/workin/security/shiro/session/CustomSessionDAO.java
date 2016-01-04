@@ -21,6 +21,8 @@ package org.workin.security.shiro.session;
 import java.io.Serializable;
 import java.util.Collection;
 
+import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.cache.CacheManagerAware;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
@@ -31,10 +33,21 @@ import org.springframework.beans.factory.InitializingBean;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CustomSessionDAO extends AbstractSessionDAO implements InitializingBean {
+public class CustomSessionDAO extends AbstractSessionDAO implements CacheManagerAware, InitializingBean {
 	
-	private SessionRepository sessionRepository;  
+	private CacheManager cacheManager;
 	
+	private SessionRepository sessionRepository; 
+	
+	@Override
+	public void setCacheManager(CacheManager cacheManager) {
+		this.cacheManager = cacheManager;
+	}
+	
+	public CacheManager getCacheManager() {
+		return cacheManager;
+	}
+
 	public SessionRepository getSessionRepository() {
 		return sessionRepository;
 	}
@@ -78,5 +91,5 @@ public class CustomSessionDAO extends AbstractSessionDAO implements Initializing
 	protected Session doReadSession(Serializable sessionId) {
 		return sessionRepository.getSession(sessionId);
 	}
-
+	
 }

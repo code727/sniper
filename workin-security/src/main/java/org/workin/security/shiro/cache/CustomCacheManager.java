@@ -55,7 +55,7 @@ public class CustomCacheManager implements CacheManager, Destroyable, Initializi
 	
 	@Override
 	public void destroy() throws Exception {
-//		cacheRepository.destroy();
+		cacheRepository.destroy();
 	}
 
 }

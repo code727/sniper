@@ -41,8 +41,8 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 	/** 名称 */
 	private String name;
 	
-	/** 存放缓存数据的库索引 */
-	private int index;
+	/** 存储缓存数据的库索引 */
+	private int dbIndex;
 	
 	/** Redis命令行Dao接口 */
 	private RedisCommandsDao redisCommandsDao;
@@ -67,12 +67,12 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 		this.name = name;
 	}
 
-	public int getIndex() {
-		return index;
+	public int getDbIndex() {
+		return dbIndex;
 	}
 
-	public void setIndex(int index) {
-		this.index = index;
+	public void setDbIndex(int dbIndex) {
+		this.dbIndex = dbIndex;
 	}
 
 	public RedisCommandsDao getRedisCommandsDao() {
@@ -91,27 +91,27 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 
 	@Override
 	public V get(K key) throws CacheException {
-		return redisCommandsDao.get(index, key);
+		return redisCommandsDao.get(dbIndex, key);
 	}
 
 	@Override
 	public V put(K key, V value) throws CacheException {
 		V v = get(key);
-		redisCommandsDao.set(index, prefixKey(key), value);
+		redisCommandsDao.set(dbIndex, prefixKey(key), value);
 		return v;
 	}
 
 	@Override
 	public V remove(K key) throws CacheException {
 		V v = get(key);
-		redisCommandsDao.del(index, key);
+		redisCommandsDao.del(dbIndex, key);
 		return v;
 	}
 
 	@Override
 	public void clear() throws CacheException {
-		Set<Object> keys = redisCommandsDao.keys(prefixKey(null) + "*");
-		redisCommandsDao.del(index, keys);
+		Set<Object> keys = redisCommandsDao.keys(dbIndex, prefixKey(null) + "*");
+		redisCommandsDao.del(dbIndex, keys);
 	}
 
 	@Override
@@ -121,12 +121,12 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 
 	@Override
 	public Set<K> keys() {
-		return redisCommandsDao.keys(prefixKey(null) + "*");
+		return redisCommandsDao.keys(dbIndex, prefixKey(null) + "*");
 	}
 
 	@Override
 	public Collection<V> values() {
-		return redisCommandsDao.values(prefixKey(null) + "*");
+		return redisCommandsDao.values(dbIndex, prefixKey(null) + "*");
 	}
 	
 	@SuppressWarnings("unchecked")
