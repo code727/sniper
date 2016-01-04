@@ -138,7 +138,7 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 
 	@Override
 	public void destroy() throws Exception {
-		redisCommandsDao.shutdown();
+//		redisCommandsDao.shutdown();
 	}
 	
 	/**
