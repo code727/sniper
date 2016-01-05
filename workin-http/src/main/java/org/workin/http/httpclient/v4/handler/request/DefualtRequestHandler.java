@@ -45,11 +45,10 @@ public class DefualtRequestHandler extends AbstractRequestHandler {
 	public void setRequestBody(HttpEntityEnclosingRequestBase httpRequest, String url, HttpForm form) throws Exception {
 		if (form.isAutoEncoding()) 
 			httpRequest.setEntity(new StringEntity(NetUtils.getQueryString(url)));
-		
 		else {
 			List<NameValuePair> nameValueList = buildeNameValuePairByQueryString(url);
 			if (CollectionUtils.isNotEmpty(nameValueList)) 
-				httpRequest.setEntity(new UrlEncodedFormEntity(nameValueList, form.getEncoding())); 
+				httpRequest.setEntity(new UrlEncodedFormEntity(nameValueList, getEncoding(form))); 
 		}
 	}
 	
