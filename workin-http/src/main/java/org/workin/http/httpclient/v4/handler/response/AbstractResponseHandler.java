@@ -26,7 +26,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.util.EntityUtils;
-import org.workin.http.httpclient.v4.handler.AbstractEncodableHandler;
+import org.workin.http.handler.AbstractEncodableHandler;
 
 /**
  * @description 响应处理器抽象类

@@ -58,6 +58,10 @@ public abstract class HttpClientAccessor implements InitializingBean {
 		this.urlFormatter = urlFormatter;
 	}
 	
+	public MessageFormatter<Object> getUrlFormatter() {
+		return urlFormatter;
+	}
+
 	public void setFormRegister(HttpFormRegister formRegister) {
 		this.formRegister = formRegister;
 	}
@@ -86,7 +90,7 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	 * @return
 	 * @throws Exception
 	 */
-	protected String format(HttpForm form, String name, Object param) throws Exception {
+	protected String formatToURL(HttpForm form, String name, Object param) throws Exception {
 		String url = getFormRegister().findURL(name);
 		url = this.urlFormatter.format(url, param, form.isAutoEncoding() ? form.getEncoding() : null);
 		return url;

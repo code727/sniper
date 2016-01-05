@@ -19,12 +19,11 @@
 package org.workin.http;
 
 import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description HTTP表单接口实现类
+ * @description HTTP表单实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -48,9 +47,6 @@ public class SimpleHttpForm implements HttpForm {
 	/** 多个参数名，以逗号分隔 */
 	private String parameterNames;
 	
-	/** 参数格式 */
-	private String parameterFormat;
-	
 	/** 请求方法 */
 	private String method;
 	
@@ -61,7 +57,7 @@ public class SimpleHttpForm implements HttpForm {
 	private boolean autoEncoding;
 	
 	/** 字符串编码 */
-	private String encoding = MessageUtils.UTF8_ENCODING;
+	private String encoding;
 	
 	@Override
 	public boolean isHttps() {
@@ -126,16 +122,6 @@ public class SimpleHttpForm implements HttpForm {
 		return this.parameterNames;
 	}
 	
-	@Override
-	public void setParameterFormat(String parameterFormat) {
-		this.parameterFormat = parameterFormat;
-	}
-
-	@Override
-	public String getParameterFormat() {
-		return this.parameterFormat;
-	}
-
 	@Override
 	public void setMethod(String method) {
 		this.method = method;

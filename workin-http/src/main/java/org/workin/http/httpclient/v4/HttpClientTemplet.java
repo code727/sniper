@@ -121,7 +121,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	@SuppressWarnings("unchecked")
 	protected <T> T doGetRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
-		String url = super.format(form, name, param);
+		String url = formatToURL(form, name, param);
 		
 		HttpGet httpGet = new HttpGet(url);
 		addHeader(httpGet, form);
@@ -148,7 +148,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	@SuppressWarnings("unchecked")
 	protected <T> T doPostRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
-		String url = super.format(form, name, param);
+		String url = formatToURL(form, name, param);
 		
 		HttpPost httpPost = new HttpPost(NetUtils.getActionString(url));
 		addHeader(httpPost, form);
@@ -176,7 +176,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	@SuppressWarnings("unchecked")
 	protected <T> T doPutRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
-		String url = super.format(form, name, param);
+		String url = formatToURL(form, name, param);
 		HttpPut httpPut = new HttpPut(NetUtils.getActionString(url));
 		
 		addHeader(httpPut, form);
@@ -204,7 +204,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	@SuppressWarnings("unchecked")
 	protected <T> T doDeleteRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
-		String url = super.format(form, name, param);
+		String url = formatToURL(form, name, param);
 		HttpDelete httpDelete = new HttpDelete(url);
 		
 		addHeader(httpDelete, form);
@@ -218,6 +218,13 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 			if (httpDelete != null)
 				httpDelete.releaseConnection();
 		}
+	}
+	
+	@Override
+	protected String formatToURL(HttpForm form, String name, Object param) throws Exception {
+		String url = getFormRegister().findURL(name);
+		url = getUrlFormatter().format(url, param, form.isAutoEncoding() ? getBoundEncoding(form) : null);
+		return url;
 	}
 	
 	/**
@@ -273,6 +280,16 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 		HttpClientForm hcForm = (HttpClientForm) form;
 		ResponseHandler<?> responseHandler = hcForm.getResponseHandler();
 		return responseHandler != null ? responseHandler : this.responseHandler;
+	}
+	
+	/**
+	 * @description 获取HttpForm表单绑定的字符集编码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param form
+	 * @return
+	 */
+	protected String getBoundEncoding(HttpForm form) {
+		return getBoundRequestHandler(form).getEncoding(form);
 	}
 		
 }
