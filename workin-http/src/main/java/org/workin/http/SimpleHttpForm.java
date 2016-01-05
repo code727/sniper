@@ -19,6 +19,7 @@
 package org.workin.http;
 
 import org.workin.commons.util.AssertUtils;
+import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.commons.util.StringUtils;
 
@@ -47,14 +48,20 @@ public class SimpleHttpForm implements HttpForm {
 	/** 多个参数名，以逗号分隔 */
 	private String parameterNames;
 	
+	/** 参数格式 */
+	private String parameterFormat;
+	
 	/** 请求方法 */
 	private String method;
 	
 	/** 请求头对象 */
 	private HttpRequestHeader header;
 	
+	/** 是否自动编码 */
+	private boolean autoEncoding;
+	
 	/** 字符串编码 */
-	private String encoding;
+	private String encoding = MessageUtils.UTF8_ENCODING;
 	
 	@Override
 	public boolean isHttps() {
@@ -118,6 +125,16 @@ public class SimpleHttpForm implements HttpForm {
 	public String getParameterNames() {
 		return this.parameterNames;
 	}
+	
+	@Override
+	public void setParameterFormat(String parameterFormat) {
+		this.parameterFormat = parameterFormat;
+	}
+
+	@Override
+	public String getParameterFormat() {
+		return this.parameterFormat;
+	}
 
 	@Override
 	public void setMethod(String method) {
@@ -137,6 +154,16 @@ public class SimpleHttpForm implements HttpForm {
 	@Override
 	public HttpRequestHeader getHeader() {
 		return this.header;
+	}
+	
+	@Override
+	public boolean isAutoEncoding() {
+		return autoEncoding;
+	}
+
+	@Override
+	public void setAutoEncoding(boolean autoEncoding) {
+		this.autoEncoding = autoEncoding;
 	}
 
 	@Override

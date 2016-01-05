@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年12月30日
+ * Create Date : 2015-12-30
  */
 
 package org.workin.captcha.generator;
@@ -29,9 +29,6 @@ import org.workin.commons.util.NumberUtils;
  * @version 1.0
  */
 public class TextCaptchaGenerator implements CaptchaGenerator {
-	
-	/** 默认的文本内容最小长度 */
-	private static final int TEXT_MIN_LENGTH = 4;
 	
 	/** 文本库 */
 	private Repository repository;

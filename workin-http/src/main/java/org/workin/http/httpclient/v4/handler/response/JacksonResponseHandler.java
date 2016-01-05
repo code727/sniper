@@ -16,7 +16,7 @@
  * Create Date : 2015-7-8
  */
 
-package org.workin.http.httpclient.v4.handler;
+package org.workin.http.httpclient.v4.handler.response;
 
 import java.io.IOException;
 

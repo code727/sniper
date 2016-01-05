@@ -16,24 +16,42 @@
  * Create Date : 2015-7-8
  */
 
-package org.workin.http.httpclient.v4.handler;
+package org.workin.http.httpclient.v4.handler.response;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.workin.commons.util.DateUtils;
+import org.workin.commons.util.StringUtils;
 
 /**
- * @description 布尔类型响应处理器
+ * @description Date类型响应处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0j
  */
-public class BooleanResponseHandler extends AbstractResponseHandler<Boolean> {
+public class DateResponseHandler extends AbstractResponseHandler<Date> {
+	
+	/** 日期格式 */
+	private String pattern;
+	
+	public String getPattern() {
+		return pattern;
+	}
+
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
+	}
 
 	@Override
-	public Boolean handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
+	public Date handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
 		String result = super.doResponse(response);
-		return result != null ? new Boolean(result) : new Boolean(super.getDefaultValue());
+		if (StringUtils.isNotBlank(result))
+			return DateUtils.stringToDate(result, this.pattern);
+		
+		String defaultValue = super.getDefaultValue();
+		return StringUtils.isNotBlank(defaultValue) ? DateUtils.stringToDate(defaultValue, this.pattern) : null;
 	}
 
 }

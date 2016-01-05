@@ -16,29 +16,24 @@
  * Create Date : 2015-7-8
  */
 
-package org.workin.http.httpclient.v4.handler;
+package org.workin.http.httpclient.v4.handler.response;
 
 import java.io.IOException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.workin.commons.util.StringUtils;
 
 /**
- * @description 长整型响应处理器实现类
+ * @description 布尔类型响应处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
- * @version 1.0
+ * @version 1.0j
  */
-public class LongResponseHandler extends AbstractResponseHandler<Long> {
+public class BooleanResponseHandler extends AbstractResponseHandler<Boolean> {
 
 	@Override
-	public Long handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
+	public Boolean handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
 		String result = super.doResponse(response);
-		if (result != null)
-			return new Long(result);
-		
-		String defaultValue = super.getDefaultValue();
-		return StringUtils.isNotBlank(defaultValue) ? new Long(defaultValue) : null;
+		return result != null ? new Boolean(result) : new Boolean(super.getDefaultValue());
 	}
 
 }

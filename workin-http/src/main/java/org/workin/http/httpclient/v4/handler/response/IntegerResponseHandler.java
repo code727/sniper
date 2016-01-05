@@ -16,42 +16,29 @@
  * Create Date : 2015-7-8
  */
 
-package org.workin.http.httpclient.v4.handler;
+package org.workin.http.httpclient.v4.handler.response;
 
 import java.io.IOException;
-import java.util.Date;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description Date类型响应处理器
+ * @description 整型响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
- * @version 1.0j
+ * @version 1.0
  */
-public class DateResponseHandler extends AbstractResponseHandler<Date> {
-	
-	/** 日期格式 */
-	private String pattern;
-	
-	public String getPattern() {
-		return pattern;
-	}
-
-	public void setPattern(String pattern) {
-		this.pattern = pattern;
-	}
+public class IntegerResponseHandler extends AbstractResponseHandler<Integer> {
 
 	@Override
-	public Date handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
+	public Integer handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
 		String result = super.doResponse(response);
-		if (StringUtils.isNotBlank(result))
-			return DateUtils.stringToDate(result, this.pattern);
+		if (result != null)
+			return new Integer(result);
 		
 		String defaultValue = super.getDefaultValue();
-		return StringUtils.isNotBlank(defaultValue) ? DateUtils.stringToDate(defaultValue, this.pattern) : null;
+		return StringUtils.isNotBlank(defaultValue) ? new Integer(defaultValue) : null;
 	}
 
 }

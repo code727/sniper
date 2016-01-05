@@ -27,6 +27,9 @@ import org.workin.captcha.repository.Repository;
  */
 public interface CaptchaGenerator {
 	
+	/** 默认的文本内容最小长度 */
+	public static final int TEXT_MIN_LENGTH = 4;
+	
 	/**
 	 * @description 设置文本库
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -61,5 +64,7 @@ public interface CaptchaGenerator {
 	 * @return
 	 */
 	public String generate();
+	
+//	public 
 
 }

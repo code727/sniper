@@ -19,6 +19,7 @@
 package org.workin.http.httpclient.v4;
 
 import org.apache.http.client.ResponseHandler;
+import org.workin.http.httpclient.v4.handler.request.RequestHandler;
 
 /**
  * @description HttpClinet4.x表单
@@ -26,6 +27,20 @@ import org.apache.http.client.ResponseHandler;
  * @version 1.0
  */
 public interface HttpClientForm {
+	
+	/**
+	 * @description 设置当前表单关联的请求处理器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param requestHandler
+	 */
+	public void setRequestHandler(RequestHandler requestHandler);
+	
+	/**
+	 * @description 获取当前表单关联的请求处理器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public RequestHandler getRequestHandler();
 	
 	/**
 	 * @description 设置当前表单关联的响应处理器

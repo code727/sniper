@@ -22,13 +22,15 @@ import java.util.Map;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.MapUtils;
-import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.http.HttpForm;
 import org.workin.http.exception.HttpFormNotFoundException;
 import org.workin.http.exception.NoSuchHttpMethodException;
+import org.workin.http.formatter.AdaptiveURLFormatter;
 import org.workin.http.register.HttpFormRegister;
+import org.workin.support.encoder.RawURLEncoder;
+import org.workin.support.message.formatter.MessageFormatter;
 
 /**
  * @description HttpClient访问器抽象类
@@ -39,9 +41,8 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	
 	private HttpFormRegister formRegister;
 	
-	/** 全局的字符集编码，默认为UTF-8 */
-	private String encoding = MessageUtils.UTF8_ENCODING;
-	
+	private MessageFormatter<Object> urlFormatter;
+		
 	/** 模板所支持的请求方法映射集 */
 	private static final Map<String, String> SUPPORT_REQUEST_METHOD;
 	
@@ -53,6 +54,10 @@ public abstract class HttpClientAccessor implements InitializingBean {
 		SUPPORT_REQUEST_METHOD.put("delete", "doDeleteRequest");
 	}
 	
+	public void setUrlFormatter(MessageFormatter<Object> urlFormatter) {
+		this.urlFormatter = urlFormatter;
+	}
+	
 	public void setFormRegister(HttpFormRegister formRegister) {
 		this.formRegister = formRegister;
 	}
@@ -61,15 +66,30 @@ public abstract class HttpClientAccessor implements InitializingBean {
 		return formRegister;
 	}
 	
-	public void setEncoding(String encoding) {
-		if (StringUtils.isNotBlank(encoding))
-			this.encoding = encoding;
-	}
-	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (formRegister == null)
 			throw new IllegalArgumentException("Property 'formRegister' is required");
+		
+		if (this.urlFormatter == null) {
+			this.urlFormatter = new AdaptiveURLFormatter();
+			this.urlFormatter.setEncoder(new RawURLEncoder());
+		}
+	}
+	
+	/**
+	 * @description 将表单对象加上请求参数后格式化成URL
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param form
+	 * @param name
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	protected String format(HttpForm form, String name, Object param) throws Exception {
+		String url = getFormRegister().findURL(name);
+		url = this.urlFormatter.format(url, param, form.isAutoEncoding() ? form.getEncoding() : null);
+		return url;
 	}
 	
 	/**
@@ -85,6 +105,7 @@ public abstract class HttpClientAccessor implements InitializingBean {
 		HttpForm form = formRegister.find(name);
 		if (form == null)
 			throw new HttpFormNotFoundException("Form [name=" + name +"] not found in register.");
+		
 		String methodName = form.getMethod();
 		if (StringUtils.isNotBlank(methodName)) {
 			String executedMethod = SUPPORT_REQUEST_METHOD.get(methodName.trim().toLowerCase());
@@ -107,17 +128,6 @@ public abstract class HttpClientAccessor implements InitializingBean {
 			throw new NoSuchHttpMethodException(
 					"No such http method [get] in current version of workin-http framework.");
 		}
-	}
-	
-	/**
-	 * @description 获取表单绑定的字符集编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param form
-	 * @return
-	 */
-	protected String getBoundEncoding(HttpForm form) {
-		String encoding = form.getEncoding();
-		return StringUtils.isNotBlank(encoding) ? encoding : this.encoding;
 	}
 	
 	/**

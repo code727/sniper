@@ -16,7 +16,7 @@
  * Create Date : 2015-7-8
  */
 
-package org.workin.http.httpclient.v4.handler;
+package org.workin.http.httpclient.v4.handler.response;
 
 import java.io.IOException;
 
@@ -26,31 +26,19 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.util.EntityUtils;
-import org.workin.commons.util.MessageUtils;
-import org.workin.commons.util.StringUtils;
+import org.workin.http.httpclient.v4.handler.AbstractEncodableHandler;
 
 /**
  * @description 响应处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractResponseHandler<T> implements ResponseHandler<T> {
-	
-	/** 响应结果的字符集编码 */
-	private String encoding = MessageUtils.UTF8_ENCODING;
+public abstract class AbstractResponseHandler<T> extends
+		AbstractEncodableHandler implements ResponseHandler<T> {
 	
 	/** 当响应结果返回为空时指定的默认值 */
 	private String defaultValue;
 
-	public String getEncoding() {
-		return encoding;
-	}
-
-	public void setEncoding(String encoding) {
-		if (StringUtils.isNotBlank(encoding))
-			this.encoding = encoding;
-	}
-	
 	public String getDefaultValue() {
 		return defaultValue;
 	}
@@ -73,7 +61,7 @@ public abstract class AbstractResponseHandler<T> implements ResponseHandler<T> {
 			EntityUtils.consume(entity);
 			throw new HttpResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase());
 		}
-		return entity != null ?  EntityUtils.toString(entity, this.encoding) : null;
+		return entity != null ?  EntityUtils.toString(entity, getEncoding()) : null;
 	}
 
 }

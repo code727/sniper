@@ -46,6 +46,7 @@ public class RegexUtils {
 		regex.put("ascii", "[\u0000-\u007E]+");
 		regex.put("double_byte", "[^\u0000-\u007E]+");
 		regex.put("chinese", "[\u4E00-\u9FA5]+");
+		regex.put("urlQueryString", "(\\w*=[^&]*&)*\\w*=\\w*");
 		
 		// java.text.MessageFormat所默认支持的占位符表达式
 		regex.put(MessageFormat.class.getName(), "(\\{\\d+\\})");
@@ -159,6 +160,16 @@ public class RegexUtils {
 	public static boolean isMobile(String str) {
 		return is(str, regex.get("mobile"));
 	}
+	
+	/**
+	 * @description 判断是否为URL查询字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isURLQueryString(String str) {
+		return is(str, regex.get("urlQueryString"));
+	}
 		
 	/**
 	 * @description 判断字符串是否有Ascii字符
@@ -188,6 +199,16 @@ public class RegexUtils {
 	 */
 	public static boolean hasDoubleByte(String str) {
 		return has(str, regex.get("double_byte"));
+	}
+	
+	/**
+	 * @description 判断是否包含有URL查询字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasURLQueryString(String str) {
+		return has(str, regex.get("urlQueryString"));
 	}
 	
 	/**

@@ -19,40 +19,29 @@
 package org.workin.http.httpclient.v4;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.workin.commons.util.CollectionUtils;
-import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.http.HttpForm;
 import org.workin.http.HttpRequestHeader;
 import org.workin.http.HttpSender;
-import org.workin.http.formatter.AdaptiveURLFormatter;
 import org.workin.http.httpclient.HttpClientAccessor;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactory;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
-import org.workin.http.httpclient.v4.handler.StringResponseHandler;
-import org.workin.support.encoder.RawURLEncoder;
-import org.workin.support.message.formatter.MessageFormatter;
+import org.workin.http.httpclient.v4.handler.request.DefualtRequestHandler;
+import org.workin.http.httpclient.v4.handler.request.RequestHandler;
+import org.workin.http.httpclient.v4.handler.response.StringResponseHandler;
 
 /**
  * @description HttpClient4.x模板实现类
@@ -67,10 +56,8 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	
 	private RequestConfig requestConfig;
 	
-	private MessageFormatter<Object> urlFormatter;
-	
-	/** 是否自动进行参数值编码处理 */
-	private boolean autoEncodingParameter = true;
+	/** 全局的请求处理器 */
+	private RequestHandler requestHandler;
 	
 	/** 全局的响应处理器 */
 	private ResponseHandler<?> responseHandler;
@@ -78,23 +65,19 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	public void setHttpClientFactory(CloseableHttpClientFactory httpClientFactory) {
 		this.httpClientFactory = httpClientFactory;
 	}
-
+	
 	public void setRequestConfig(RequestConfig requestConfig) {
 		this.requestConfig = requestConfig;
 	}
 	
-	public void setUrlFormatter(MessageFormatter<Object> urlFormatter) {
-		this.urlFormatter = urlFormatter;
+	public void setRequestHandler(RequestHandler requestHandler) {
+		this.requestHandler = requestHandler;
 	}
 
 	public void setResponseHandler(ResponseHandler<?> responseHandler) {
 		this.responseHandler = responseHandler;
 	}
 	
-	public void setAutoEncodingParameter(boolean autoEncodingParameter) {
-		this.autoEncodingParameter = autoEncodingParameter;
-	}
-
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
@@ -105,10 +88,8 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 		if (this.requestConfig == null)
 			this.requestConfig = RequestConfig.custom().build();
 		
-		if (this.urlFormatter == null) {
-			this.urlFormatter = new AdaptiveURLFormatter();
-			this.urlFormatter.setEncoder(new RawURLEncoder());
-		}
+		if (this.requestHandler == null)
+			this.requestHandler = new DefualtRequestHandler();
 		
 		if (this.responseHandler == null)
 			this.responseHandler = new StringResponseHandler();
@@ -140,8 +121,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	@SuppressWarnings("unchecked")
 	protected <T> T doGetRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
-		String url = this.urlFormatter.format(getFormRegister().findURL(name), param, 
-				autoEncodingParameter ? super.getBoundEncoding(form) : null);
+		String url = super.format(form, name, param);
 		
 		HttpGet httpGet = new HttpGet(url);
 		addHeader(httpGet, form);
@@ -168,14 +148,13 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	@SuppressWarnings("unchecked")
 	protected <T> T doPostRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
-		String url = this.urlFormatter.format(getFormRegister().findURL(name), 
-				param, autoEncodingParameter ? super.getBoundEncoding(form) : null);
+		String url = super.format(form, name, param);
 		
 		HttpPost httpPost = new HttpPost(NetUtils.getActionString(url));
 		addHeader(httpPost, form);
 		setConfig(httpPost);
 		try {
-			setRequestBody(httpPost, url, form);
+			getBoundRequestHandler(form).setRequestBody(httpPost, url, form);
 			logger.info("Request form [" + name + "] url [" + url + "] method:[POST].");
 			return (T) this.httpClientFactory.create().execute(httpPost, getBoundResponseHandler(form));
 		}  catch (IOException e) {
@@ -197,14 +176,13 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	@SuppressWarnings("unchecked")
 	protected <T> T doPutRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
-		String url = this.urlFormatter.format(getFormRegister().findURL(name),
-				param, autoEncodingParameter ? super.getBoundEncoding(form) : null);
+		String url = super.format(form, name, param);
 		HttpPut httpPut = new HttpPut(NetUtils.getActionString(url));
 		
 		addHeader(httpPut, form);
 		setConfig(httpPut);
 		try {
-			setRequestBody(httpPut, url, form);
+			getBoundRequestHandler(form).setRequestBody(httpPut, url, form);
 			logger.info("Request form [" + name + "] url [" + url + "] method:[PUT].");
 			return (T) this.httpClientFactory.create().execute(httpPut, getBoundResponseHandler(form));
 		}  catch (IOException e) {
@@ -226,8 +204,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	@SuppressWarnings("unchecked")
 	protected <T> T doDeleteRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
-		String url = this.urlFormatter.format(getFormRegister().findURL(name),
-				param, autoEncodingParameter ? super.getBoundEncoding(form) : null);
+		String url = super.format(form, name, param);
 		HttpDelete httpDelete = new HttpDelete(url);
 		
 		addHeader(httpDelete, form);
@@ -269,6 +246,21 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	}
 	
 	/**
+	 * @description 获取HttpForm表单绑定的请求处理器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param form
+	 * @return
+	 */
+	protected RequestHandler getBoundRequestHandler(HttpForm form) {
+		if (!(form instanceof HttpClientForm))
+			return this.requestHandler;
+		
+		HttpClientForm hcForm = (HttpClientForm) form;
+		RequestHandler requestHandler = hcForm.getRequestHandler();
+		return requestHandler != null ? requestHandler : this.requestHandler;
+	}
+	
+	/**
 	 * @description 获取HttpForm表单绑定的响应处理器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param form
@@ -282,42 +274,5 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 		ResponseHandler<?> responseHandler = hcForm.getResponseHandler();
 		return responseHandler != null ? responseHandler : this.responseHandler;
 	}
-	
-	/**
-	 * @description 根据url中的查询字符串构建NameValuePair对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param url
-	 * @return
-	 */
-	protected List<NameValuePair> buildeNameValuePairByQueryString(String url) {
-		Map<String, String> parameterMap = NetUtils.getParameterMap(url);
-		List<NameValuePair> nameValueList = new ArrayList<NameValuePair>();
-		if (MapUtils.isNotEmpty(parameterMap)) {
-			Iterator<Entry<String, String>> iterator = parameterMap.entrySet().iterator();
-			while (iterator.hasNext()) {
-				Entry<String, String> parameter = iterator.next();
-				nameValueList.add(new BasicNameValuePair(parameter.getKey(), parameter.getValue()));
-			}
-		}
-		return nameValueList;
-	}
-	
-	/**
-	 * @description 设置RequestBody
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param httpRequest
-	 * @param url
-	 * @param form
-	 * @throws UnsupportedEncodingException
-	 */
-	protected void setRequestBody(HttpEntityEnclosingRequestBase httpRequest, String url, HttpForm form) throws UnsupportedEncodingException {
-		if (autoEncodingParameter) 
-			httpRequest.setEntity(new StringEntity(NetUtils.getQueryString(url)));
-		else {
-			List<NameValuePair> nameValueList = buildeNameValuePairByQueryString(url);
-			if (CollectionUtils.isNotEmpty(nameValueList)) 
-				httpRequest.setEntity(new UrlEncodedFormEntity(nameValueList, super.getBoundEncoding(form))); 
-		}
-	}
-	
+		
 }

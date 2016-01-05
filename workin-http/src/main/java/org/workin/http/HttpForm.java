@@ -109,6 +109,20 @@ public interface HttpForm {
 	public String getParameterNames();
 	
 	/**
+	 * @description 设置请求参数格式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param parameterFormat
+	 */
+	public void setParameterFormat(String parameterFormat);
+	
+	/**
+	 * @description 获取请求参数格式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getParameterFormat();
+	
+	/**
 	 * @description 设置发送请求的方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param method
@@ -137,6 +151,20 @@ public interface HttpForm {
 	public HttpRequestHeader getHeader();
 	
 	/**
+	 * @description 判断表单是否自动编码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param autoEncoding
+	 */
+	public boolean isAutoEncoding();
+	
+	/**
+	 * @description 设置表单是否自动编码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param autoEncoding
+	 */
+	public void setAutoEncoding(boolean autoEncoding);
+	
+	/**
 	 * @description 设置字符集编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param encoding
@@ -149,5 +177,5 @@ public interface HttpForm {
 	 * @return
 	 */
 	public String getEncoding();
-
+	
 }

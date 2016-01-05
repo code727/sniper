@@ -298,9 +298,12 @@ public class NetUtils {
 	 * @return
 	 */
 	public static String getQueryString(String url) {
-		int index;
-		if (StringUtils.isBlank(url) || (index = url.indexOf("?")) < 0)
+		if (StringUtils.isBlank(url))
 			return StringUtils.EMPTY_STRING;
+		
+		int index = url.indexOf("?");
+		if (index < 0)
+			return RegexUtils.isURLQueryString(url) ? url : StringUtils.EMPTY_STRING;
 		
 		String queryString = StringUtils.leftTrim(url.substring(index + 1));
 		if (queryString.length() > 0 && queryString.startsWith("?")) 
@@ -309,7 +312,7 @@ public class NetUtils {
 		
 		return queryString;
 	}
-	
+		
 	/**
 	 * @description 从URL字符串中提取出所有参数名-值映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
