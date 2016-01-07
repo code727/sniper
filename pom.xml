@@ -81,7 +81,6 @@
 		<module>workin-spring</module>
 		<module>workin-trace</module>
 		<module>workin-jms</module>
-		<module>workin-socket</module>
 		<module>workin-fastdfs</module>
 		<module>workin-payment</module>
 		<module>workin-captcha</module>
