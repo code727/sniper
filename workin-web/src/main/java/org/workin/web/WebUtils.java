@@ -35,9 +35,9 @@ import javax.servlet.http.HttpSession;
 
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.AssertUtils;
+import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.FileUtils;
 import org.workin.commons.util.IOUtils;
-import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
@@ -68,7 +68,7 @@ public class WebUtils {
 		if (StringUtils.isNotBlank(encoding))
 			request.setCharacterEncoding(encoding);
 		else
-			request.setCharacterEncoding(MessageUtils.UTF8_ENCODING);
+			request.setCharacterEncoding(CodecUtils.UTF8_ENCODING);
 	}
 	
 	/**
@@ -337,9 +337,9 @@ public class WebUtils {
 	public static String encode(HttpServletRequest request, String str) throws UnsupportedEncodingException {
 		String agent = request.getHeader("USER-AGENT");    
 		if (agent != null && agent.indexOf("MSIE") > -1)
-			return URLEncoder.encode(str, MessageUtils.UTF8_ENCODING);
+			return URLEncoder.encode(str, CodecUtils.UTF8_ENCODING);
 		else
-			return new String(str.getBytes(MessageUtils.UTF8_ENCODING), MessageUtils.ISO_8859_1);
+			return new String(str.getBytes(CodecUtils.UTF8_ENCODING), CodecUtils.ISO_8859_1);
 	}
 	
 	/**

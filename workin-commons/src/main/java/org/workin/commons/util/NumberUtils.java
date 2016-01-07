@@ -36,7 +36,31 @@ public class NumberUtils {
 	/** 百分比格式 */
 	public static final String PERCENT_FORMAT = "%";
 	
+	/** 模式与格式对象关系映射集线程局部变量 */
 	private static final ThreadLocal<Map<String, DecimalFormat>> decimalFormats = new ThreadLocal<Map<String, DecimalFormat>>();
+	
+	/** 奇数映射组 */
+	private static Map<Character, Integer> ODD_NUMBERS;
+	
+	/** 偶数映射组 */
+	private static Map<Character, Integer> EVEN_NUMBERS;
+	
+	static {
+		ODD_NUMBERS = MapUtils.newHashMap();
+		EVEN_NUMBERS = MapUtils.newHashMap();
+		
+		ODD_NUMBERS.put('1', 1);
+		ODD_NUMBERS.put('3', 3);
+		ODD_NUMBERS.put('5', 5);
+		ODD_NUMBERS.put('7', 7);
+		ODD_NUMBERS.put('9', 9);
+		
+		EVEN_NUMBERS.put('0', 0);
+		EVEN_NUMBERS.put('2', 2);
+		EVEN_NUMBERS.put('4', 4);
+		EVEN_NUMBERS.put('6', 6);
+		EVEN_NUMBERS.put('8', 8);
+	}
 		
 	/**
 	 * @description 根据指定的模式在当前线程的局部变量中获取已定义的数字格式对象
@@ -44,7 +68,7 @@ public class NumberUtils {
 	 * @param pattern
 	 * @return
 	 */
-	private static DecimalFormat getDecimalFormat(String pattern) {
+	public static DecimalFormat getDecimalFormat(String pattern) {
 		Map<String, DecimalFormat> formateMap = decimalFormats.get();
 		
 		if (formateMap == null)
@@ -970,5 +994,75 @@ public class NumberUtils {
 	public static double unAbs(double a) {
         return (a > 0.0D) ? 0.0D - a : a;
     }
+	
+	/**
+	 * @description 判断是否为一个奇数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @return
+	 */
+	public static boolean isOddNumber(Number number) {
+		return number != null && isOddNumber(number.toString(), false);
+	}
+	
+	/**
+	 * @description 判断字符串表示的数字是否为一个奇数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @return
+	 */
+	public static boolean isOddNumber(String number) {
+		return isOddNumber(number, true);
+	}
+	
+	/**
+	 * @description 判断字符串表示的数字是否为一个奇数，并且选择在判断前是否校验数字的合法性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @param validation
+	 * @return
+	 */
+	private static boolean isOddNumber(String number, boolean validation) {
+		if (validation && !RegexUtils.isNumber(number))
+			return false;
 		
+		char lastNumber = number.charAt(number.length() - 1);
+		return ODD_NUMBERS.containsKey(lastNumber);
+	}
+	
+	/**
+	 * @description 判断是否为一个偶数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @return
+	 */
+	public static boolean isEvenNumber(Number number) {
+		return number != null && isEvenNumber(number.toString(), false);
+	}
+	
+	/**
+	 * @description 判断字符串表示的数字是否为一个偶数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @return
+	 */
+	public static boolean isEvenNumber(String number) {
+		return isEvenNumber(number, true);
+	}
+	
+	/**
+	 * @description 判断字符串表示的数字是否为一个偶数，并且选择在判断前是否校验数字的合法性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @param validation
+	 * @return
+	 */
+	private static boolean isEvenNumber(String number, boolean validation) {
+		if (validation && !RegexUtils.isNumber(number))
+			return false;
+		
+		char lastNumber = number.charAt(number.length() - 1);
+		return EVEN_NUMBERS.containsKey(lastNumber);
+	}
+			
 }

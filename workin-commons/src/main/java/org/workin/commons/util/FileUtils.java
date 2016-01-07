@@ -132,7 +132,7 @@ public class FileUtils {
 	 * @throws FileNotFoundException 
 	 */
 	public static String read(File file) throws IOException {
-		return read(file, MessageUtils.UTF8_ENCODING, IOUtils.DEFAULT_BUFFER_SIZE);
+		return read(file, CodecUtils.UTF8_ENCODING, IOUtils.DEFAULT_BUFFER_SIZE);
 	}
 	
 	/**
@@ -156,7 +156,7 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public static String read(File file, int bufferSize) throws IOException {
-		return read(file, MessageUtils.UTF8_ENCODING, bufferSize);
+		return read(file, CodecUtils.UTF8_ENCODING, bufferSize);
 	}
 	
 	/**
@@ -194,7 +194,7 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public static String readLine(File file, int lineNumber) throws IOException {
-		return readLine(file, lineNumber, MessageUtils.UTF8_ENCODING, IOUtils.DEFAULT_BUFFER_SIZE);
+		return readLine(file, lineNumber, CodecUtils.UTF8_ENCODING, IOUtils.DEFAULT_BUFFER_SIZE);
 	}
 	
 	/**
@@ -220,7 +220,7 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public static String readLine(File file, int lineNumber, int bufferSize) throws IOException {
-		return readLine(file, lineNumber, MessageUtils.UTF8_ENCODING, bufferSize);
+		return readLine(file, lineNumber, CodecUtils.UTF8_ENCODING, bufferSize);
 	}
 	
 	/**
@@ -263,7 +263,7 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public static String readBefore(File file, int lineNumber) throws IOException {
-		return readBefore(file, lineNumber, MessageUtils.UTF8_ENCODING, IOUtils.DEFAULT_BUFFER_SIZE);
+		return readBefore(file, lineNumber, CodecUtils.UTF8_ENCODING, IOUtils.DEFAULT_BUFFER_SIZE);
 	}
 	
 	/**
@@ -289,7 +289,7 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public static String readBefore(File file, int lineNumber, int bufferSize) throws IOException {
-		return readBefore(file, lineNumber, MessageUtils.UTF8_ENCODING, bufferSize);
+		return readBefore(file, lineNumber, CodecUtils.UTF8_ENCODING, bufferSize);
 	}
 	
 	/**
@@ -335,7 +335,7 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public static String readAfter(File file, int lineNumber) throws IOException {
-		return readAfter(file, lineNumber, MessageUtils.UTF8_ENCODING, IOUtils.DEFAULT_BUFFER_SIZE);
+		return readAfter(file, lineNumber, CodecUtils.UTF8_ENCODING, IOUtils.DEFAULT_BUFFER_SIZE);
 	}
 	
 	/**
@@ -361,7 +361,7 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public static String readAfter(File file, int lineNumber, int bufferSize) throws IOException {
-		return readAfter(file, lineNumber, MessageUtils.UTF8_ENCODING, bufferSize);
+		return readAfter(file, lineNumber, CodecUtils.UTF8_ENCODING, bufferSize);
 	}
 	
 	/**
@@ -444,7 +444,7 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public static void copy(Reader reader, File file) throws IOException {
-		copy(reader, file, MessageUtils.UTF8_ENCODING, false);
+		copy(reader, file, CodecUtils.UTF8_ENCODING, false);
 	}
 	
 	/**
@@ -645,7 +645,7 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public static void appendCopy(Reader reader, File file) throws IOException {
-		copy(reader, file, MessageUtils.UTF8_ENCODING, true);
+		copy(reader, file, CodecUtils.UTF8_ENCODING, true);
 	}
 	
 	/**

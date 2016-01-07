@@ -124,7 +124,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static BufferedReader newBufferedReader(InputStream in) throws IOException {
-		return newBufferedReader(in, MessageUtils.UTF8_ENCODING, DEFAULT_BUFFER_SIZE);
+		return newBufferedReader(in, CodecUtils.UTF8_ENCODING, DEFAULT_BUFFER_SIZE);
 	}
 	
 	/**
@@ -148,7 +148,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static BufferedReader newBufferedReader(InputStream in, int bufferSize) throws IOException {
-		return newBufferedReader(in, MessageUtils.UTF8_ENCODING, bufferSize);
+		return newBufferedReader(in, CodecUtils.UTF8_ENCODING, bufferSize);
 	}
 	
 	/**
@@ -162,7 +162,7 @@ public class IOUtils {
 	 */
 	public static BufferedReader newBufferedReader(InputStream in, String encoding, int bufferSize) throws IOException {
 		if (StringUtils.isBlank(encoding))
-			encoding = MessageUtils.UTF8_ENCODING;
+			encoding = CodecUtils.UTF8_ENCODING;
 		if (bufferSize <= 0)
 			bufferSize = DEFAULT_BUFFER_SIZE;
 		return new BufferedReader(new InputStreamReader(in, encoding), bufferSize);
@@ -252,7 +252,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static BufferedWriter newBufferedWriter(OutputStream out) throws IOException {
-		return newBufferedWriter(out, MessageUtils.UTF8_ENCODING, DEFAULT_BUFFER_SIZE);
+		return newBufferedWriter(out, CodecUtils.UTF8_ENCODING, DEFAULT_BUFFER_SIZE);
 	}
 	
 	/**
@@ -276,7 +276,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static BufferedWriter newBufferedWriter(OutputStream out, int bufferSize) throws IOException {
-		return newBufferedWriter(out, MessageUtils.UTF8_ENCODING, bufferSize);
+		return newBufferedWriter(out, CodecUtils.UTF8_ENCODING, bufferSize);
 	}
 	
 	/**
@@ -290,7 +290,7 @@ public class IOUtils {
 	 */
 	public static BufferedWriter newBufferedWriter(OutputStream out, String encoding, int bufferSize) throws IOException {
 		if (StringUtils.isBlank(encoding))
-			encoding = MessageUtils.UTF8_ENCODING;
+			encoding = CodecUtils.UTF8_ENCODING;
 		if (bufferSize <= 0)
 			bufferSize = DEFAULT_BUFFER_SIZE;
 		return new BufferedWriter(new OutputStreamWriter(out, encoding), bufferSize);
@@ -332,7 +332,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static LineNumberReader newLineNumberReader(InputStream in) throws IOException {
-		return newLineNumberReader(in, MessageUtils.UTF8_ENCODING, DEFAULT_BUFFER_SIZE);
+		return newLineNumberReader(in, CodecUtils.UTF8_ENCODING, DEFAULT_BUFFER_SIZE);
 	}
 	
 	/**
@@ -356,7 +356,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static LineNumberReader newLineNumberReader(InputStream in, int bufferSize) throws IOException {
-		return newLineNumberReader(in, MessageUtils.UTF8_ENCODING, bufferSize);
+		return newLineNumberReader(in, CodecUtils.UTF8_ENCODING, bufferSize);
 	}
 	
 	/**
@@ -370,7 +370,7 @@ public class IOUtils {
 	 */
 	public static LineNumberReader newLineNumberReader(InputStream in, String encoding, int bufferSize) throws IOException {
 		if (StringUtils.isBlank(encoding))
-			encoding = MessageUtils.UTF8_ENCODING;
+			encoding = CodecUtils.UTF8_ENCODING;
 		if (bufferSize <= 0)
 			bufferSize = DEFAULT_BUFFER_SIZE;
 		
@@ -417,7 +417,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static String read(InputStream in) throws IOException {
-		return read(newBufferedReader(in, MessageUtils.UTF8_ENCODING, DEFAULT_BUFFER_SIZE));
+		return read(newBufferedReader(in, CodecUtils.UTF8_ENCODING, DEFAULT_BUFFER_SIZE));
 	}
 	
 	/**
@@ -441,7 +441,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static String read(InputStream in, int bufferSize) throws IOException {
-		return read(newBufferedReader(in, MessageUtils.UTF8_ENCODING, bufferSize));
+		return read(newBufferedReader(in, CodecUtils.UTF8_ENCODING, bufferSize));
 	}
 	
 	/**
@@ -498,7 +498,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static List<String> readLines(InputStream in) throws IOException {
-		return readLines(in, MessageUtils.UTF8_ENCODING);
+		return readLines(in, CodecUtils.UTF8_ENCODING);
 	}
 	
 	/**
@@ -522,7 +522,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static List<String> readLines(InputStream in, int bufferSize) throws IOException {
-		return readLines(in, MessageUtils.UTF8_ENCODING, bufferSize);
+		return readLines(in, CodecUtils.UTF8_ENCODING, bufferSize);
 	}
 	
 	/**
@@ -536,7 +536,7 @@ public class IOUtils {
 	 */
 	public static List<String> readLines(InputStream in, String encoding, int bufferSize) throws IOException {
 		if (StringUtils.isBlank(encoding))
-			encoding = MessageUtils.UTF8_ENCODING;
+			encoding = CodecUtils.UTF8_ENCODING;
 				
 		return readLines(newBufferedReader(in, encoding, bufferSize));
 	}
@@ -602,7 +602,7 @@ public class IOUtils {
 	 */
 	public static void write(OutputStream out, String content, String encoding) throws IOException {
 		if (StringUtils.isBlank(encoding))
-			encoding = MessageUtils.UTF8_ENCODING;
+			encoding = CodecUtils.UTF8_ENCODING;
 		out.write(StringUtils.safeString(content).getBytes(encoding));
 	}
 	
@@ -651,7 +651,7 @@ public class IOUtils {
 	 */
 	public static void write(Writer writer, byte[] bytes, String encoding) throws IOException {
 		if (StringUtils.isBlank(encoding))
-			encoding = MessageUtils.UTF8_ENCODING;
+			encoding = CodecUtils.UTF8_ENCODING;
 		writer.write(new String(ArrayUtils.nullToEmpty(bytes), encoding));
 		writer.flush();
 	}

@@ -40,7 +40,7 @@ public class WechatpayMD5Signature extends SESignature<Map<String, Object>> {
 		
 		parameters.put("key", getPrivateKey());
 		String queryString = MapUtils.joinQueryString(parameters);
-		return SecurityUtils.digestEncryption(queryString, getType()).toUpperCase();
+		return SecurityUtils.digest(queryString, getType()).toUpperCase();
 	}
 		
 }

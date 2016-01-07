@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年12月10日
+ * Create Date : 2015-12-10
  */
 
 package org.workin.commons.util;
@@ -28,14 +28,21 @@ import java.security.NoSuchAlgorithmException;
  */
 public class SecurityUtils {
 	
+	/** MD5算法名称 */
+	public static final String MD5_ALGORITHM = "MD5";
+	
+	/** DES算法名称 */
+	public static final String DES_ALGORITHM = "DES";
+	
+	
 	/**
-	 * @description 按指定算法生成明文的摘要密文
+	 * @description 按指定算法生成明文的摘要
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext 明文
 	 * @param algorithm 摘要算法名称
 	 * @return
 	 */
-	public static String digestEncryption(String plaintext, String algorithm) {
+	public static String digest(String plaintext, String algorithm) {
 		AssertUtils.assertNotNull(plaintext, "Plaintext must not be null.");
 		AssertUtils.assertTrue(StringUtils.isNotBlank(algorithm), "Algorithm must not be null or blank.");
 		
@@ -57,23 +64,35 @@ public class SecurityUtils {
 	}
 	
 	/**
-	 * @description 生成32位全小写MD5加密信息
+	 * @description 生成32位全小写MD5摘要信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext 明文
 	 * @return
 	 */
 	public static String md5(String plaintext) {
-		return digestEncryption(plaintext, "MD5");
+		return md5(plaintext, false);
 	}
 	
 	/**
-	 * @description 生成32位全大写MD5加密信息
+	 * @description 生成32位全大写MD5摘要信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext
 	 * @return
 	 */
 	public static String md5UpperCase(String plaintext) {
-		return md5(plaintext).toUpperCase();
+		return md5(plaintext, true);
 	}
 	
+	/**
+	 * @description 选择是否按全大写的方式生成32位MD5摘要信息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param plaintext
+	 * @param upperCase
+	 * @return
+	 */
+	public static String md5(String plaintext, boolean upperCase) {
+		String ciphertext = digest(plaintext, MD5_ALGORITHM);
+		return upperCase ? ciphertext.toUpperCase() : ciphertext;
+	}
+				
 }

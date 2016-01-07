@@ -25,8 +25,8 @@ import org.springframework.stereotype.Service;
 import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.model.impl.ResultModel;
 import org.workin.commons.util.ArrayUtils;
+import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.MapUtils;
-import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.payment.Order;
@@ -143,7 +143,7 @@ public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<Strin
 		
 		String inputCharset = paymentContextParameters.getValue("alipay.web.input.charset", String.class);
 		if (StringUtils.isBlank(inputCharset))
-			inputCharset = MessageUtils.UTF8_ENCODING;
+			inputCharset = CodecUtils.UTF8_ENCODING;
 		
 		// 商户系统与支付宝系统交互信息时使用的编码字符集
 		paymentParameters.put("_input_charset", inputCharset);

@@ -20,7 +20,7 @@ package org.workin.fastdfs.cluster.impl;
 
 import java.util.Map;
 
-import org.workin.commons.util.MessageUtils;
+import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.fastdfs.cluster.TrackerCluster;
@@ -44,7 +44,7 @@ public class DefaultTrackerCluster extends CheckableInitializingBean implements 
 	private int networkTimeout = NetUtils.DEFAULT_TIMEOUT_MSEC;
 	
 	/** 字符集编码 */
-	private String charset = MessageUtils.UTF8_ENCODING;
+	private String charset = CodecUtils.UTF8_ENCODING;
 	
 	/** 是否设置HTTP安全秘钥 */
 	private boolean httpAntiStealToken;

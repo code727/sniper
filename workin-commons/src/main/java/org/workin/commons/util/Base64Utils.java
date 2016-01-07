@@ -99,13 +99,12 @@ public class Base64Utils {
      */
     public static String encode(String plaintext, String charsetName) {
     	AssertUtils.assertNotNull(plaintext, "Base64 encode plaintext must not be null.");
-    	
     	try {
-			return encode(plaintext.getBytes(StringUtils.isNotBlank(charsetName) ? charsetName : SystemUtils.getSystemEncoding()));
+			return encode(plaintext.getBytes(StringUtils.isNotBlank(charsetName) ? 
+					charsetName : CodecUtils.UTF8_ENCODING));
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			return encode(plaintext, CodecUtils.UTF8_ENCODING);
 		}
-		return null;
     }
        
     /**
@@ -115,14 +114,9 @@ public class Base64Utils {
      * @return
      */
     public static String encode(byte[] bytes) {
-    	if (bytes == null) 
-            return null;
-
-    	int length = bytes.length * EIGHTBIT;
-        if (length == 0) 
-            return StringUtils.EMPTY_STRING;
+    	AssertUtils.assertTrue(ArrayUtils.isNotEmpty(bytes), "Encode byte array must not be null or empty.");
     	
-       
+    	int length = bytes.length * EIGHTBIT;
         int fewerThan24bits = length % TWENTYFOURBITGROUP;
         int numberTriplets = length / TWENTYFOURBITGROUP;
         int numberQuartet = fewerThan24bits != 0 ? numberTriplets + 1 : numberTriplets;
@@ -199,31 +193,28 @@ public class Base64Utils {
      */
     public static String decode(String encoded, String charsetName) {
     	try {
-			return new String(decodeToByteArray(encoded), StringUtils.isNotBlank(charsetName) ? charsetName : SystemUtils.getSystemEncoding());
+			return new String(decodeToBytes(encoded), StringUtils.isNotBlank(charsetName) ? 
+					charsetName : CodecUtils.UTF8_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			return decode(encoded, CodecUtils.UTF8_ENCODING);
 		}
-    	return null;
     }
-    
+        
     /**
      * @description 将被编码的文本内容解码成字节数组
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
      * @param encoded
      * @return
      */
-    public static byte[] decodeToByteArray(String encoded) {
-        if (encoded == null) 
-            return null;
-
+    public static byte[] decodeToBytes(String encoded) {
+    	AssertUtils.assertTrue(StringUtils.isNotEmpty(encoded), "Decode string must not be null or empty.");
+    	
         char[] base64Data = encoded.toCharArray();
         int len = removeWhiteSpace(base64Data);
-        
         if (len % FOURBYTE != 0) 
             return null;
 
         int numberQuadruple = (len / FOURBYTE);
-
         if (numberQuadruple == 0)
             return new byte[0];
 
@@ -312,5 +303,5 @@ public class Base64Utils {
         }
         return newSize;
     }
-    
+        
 }

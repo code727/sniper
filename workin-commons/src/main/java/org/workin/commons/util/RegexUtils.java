@@ -34,15 +34,18 @@ public class RegexUtils {
 	
 	public static final Map<String, String> regex;
 	
+	/** 表达式与模式关系映射集线程局部变量 */
+	private static final ThreadLocal<Map<String, Pattern>> patterns = new ThreadLocal<Map<String, Pattern>>();
+	
 	static {
 		regex = new HashMap<String, String>();
 		regex.put("integer", "[+|-]?\\d+");
 		regex.put("decimal", "[+|-]?(\\d+\\.\\d+)");
 		regex.put("number",  "[+|-]?(\\d+((\\.\\d+)|d*))");
-		regex.put("ipv4",  "^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$");
-		regex.put("ipv6",  "^((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)::((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)$");
+		regex.put("ipv4",  "(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}");
+		regex.put("ipv6",  "((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)::((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)");
 		regex.put("email", "[\\w[.-]]+@[\\w[.-]]+\\.[\\w]+");
-		regex.put("mobile", "^[1][3578]\\d{9}$");
+		regex.put("mobile", "[1][3578]\\d{9}");
 		regex.put("ascii", "[\u0000-\u007E]+");
 		regex.put("double_byte", "[^\u0000-\u007E]+");
 		regex.put("chinese", "[\u4E00-\u9FA5]+");
@@ -53,6 +56,28 @@ public class RegexUtils {
 	}
 	
 	/**
+	 * @description 根据正则表达式获取对应的模式对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param regex
+	 * @return
+	 */
+	public static Pattern getPattern(String regex) {
+		Map<String, Pattern> patternMap = patterns.get();
+		if (patternMap == null)
+			patternMap = MapUtils.newConcurrentHashMap();
+		
+		Pattern pattern = patternMap.get(regex);
+		if (pattern == null) {
+			pattern = Pattern.compile(regex);
+			// 编译通过后存储此模式
+			patternMap.put(regex, pattern);
+			patterns.set(patternMap);
+		}
+		
+		return patternMap.get(regex);
+	}
+		
+	/**
 	 * @description 根据字符串和表达式创建Matcher对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
@@ -60,7 +85,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static Matcher createMatcher(String str, String regex) {
-		return Pattern.compile(regex).matcher(str);
+		return getPattern(regex).matcher(str);
 	}
 	
 	/**
@@ -74,7 +99,7 @@ public class RegexUtils {
 		if (str == null || regex == null)
 			return str == null && regex == null;
 		
-		return str.matches(regex);
+		return createMatcher(str, regex).matches();
 	}
 	
 	/**
@@ -102,6 +127,16 @@ public class RegexUtils {
 	}
 	
 	/**
+	 * @description 判断字符串中是否有整数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasInteger(String str) {
+		return has(str, regex.get("integer"));
+	}
+	
+	/**
 	 * @description 判断字符串是否为小数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
@@ -109,6 +144,16 @@ public class RegexUtils {
 	 */
 	public static boolean isDecimal(String str) {
 		return is(str, regex.get("decimal"));
+	}
+	
+	/**
+	 * @description 判断字符串中是否有小数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasDecimal(String str) {
+		return has(str, regex.get("decimal"));
 	}
 	
 	/**
@@ -122,6 +167,16 @@ public class RegexUtils {
 	}
 	
 	/**
+	 * @description 判断字符串中是否有数字
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasNumber(String str) {
+		return has(str, regex.get("number"));
+	}
+	
+	/**
 	 * @description 判断字符串是否为IPV4
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
@@ -129,6 +184,16 @@ public class RegexUtils {
 	 */
 	public static boolean isIPV4(String str) {
 		return is(str, regex.get("ipv4"));
+	}
+	
+	/**
+	 * @description 判断字符串中是否有IPV4
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasIPV4(String str) {
+		return has(str, regex.get("ipv4"));
 	}
 	
 	/**
@@ -142,6 +207,16 @@ public class RegexUtils {
 	}
 	
 	/**
+	 * @description 判断字符串中是否有IPV6
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasIPV6(String str) {
+		return has(str, regex.get("ipv6"));
+	}
+	
+	/**
 	 * @description 判断字符串是否为Email
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
@@ -149,6 +224,16 @@ public class RegexUtils {
 	 */
 	public static boolean isEmail(String str) {
 		return is(str, regex.get("email"));
+	}
+	
+	/**
+	 * @description 判断字符串中是否有Email
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasEmail(String str) {
+		return has(str, regex.get("email"));
 	}
 	
 	/**
@@ -162,6 +247,16 @@ public class RegexUtils {
 	}
 	
 	/**
+	 * @description 判断字符串中是否有手机号
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasMobile(String str) {
+		return has(str, regex.get("mobile"));
+	}
+	
+	/**
 	 * @description 判断是否为URL查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
@@ -170,15 +265,45 @@ public class RegexUtils {
 	public static boolean isURLQueryString(String str) {
 		return is(str, regex.get("urlQueryString"));
 	}
-		
+	
 	/**
-	 * @description 判断字符串是否有Ascii字符
+	 * @description 判断字符串中是否有URL查询字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasURLQueryString(String str) {
+		return has(str, regex.get("urlQueryString"));
+	}
+	
+	/**
+	 * @description 判断字符串是否全为ASCII字符组成
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isAscii(String str) {
+		return is(str, regex.get("ascii"));
+	}
+	
+	/**
+	 * @description 判断字符串中有是否有ASCII字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
 	 */
 	public static boolean hasAscii(String str) {
 		return has(str, regex.get("ascii"));
+	}
+		
+	/**
+	 * @description 判断字符串是否全为中文组成
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isChinese(String str) {
+		return is(str, regex.get("chinese"));
 	}
 	
 	/**
@@ -192,23 +317,23 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否有非Ascii的双字节字符
+	 * @description 判断字符串是否为非ASCII的双字节字符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isDoubleByte(String str) {
+		return is(str, regex.get("double_byte"));
+	}
+	
+	/**
+	 * @description 判断字符串是否有非ASCII的双字节字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
 	 */
 	public static boolean hasDoubleByte(String str) {
 		return has(str, regex.get("double_byte"));
-	}
-	
-	/**
-	 * @description 判断是否包含有URL查询字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param str
-	 * @return
-	 */
-	public static boolean hasURLQueryString(String str) {
-		return has(str, regex.get("urlQueryString"));
 	}
 	
 	/**

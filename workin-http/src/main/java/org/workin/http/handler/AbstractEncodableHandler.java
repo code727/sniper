@@ -18,7 +18,7 @@
 
 package org.workin.http.handler;
 
-import org.workin.commons.util.MessageUtils;
+import org.workin.commons.util.CodecUtils;
 
 /**
  * @description 可编码的处理器抽象类
@@ -27,7 +27,7 @@ import org.workin.commons.util.MessageUtils;
  */
 public abstract class AbstractEncodableHandler implements EncodableHandler {
 	
-	private String encoding = MessageUtils.UTF8_ENCODING;
+	private String encoding = CodecUtils.UTF8_ENCODING;
 
 	@Override
 	public String getEncoding() {

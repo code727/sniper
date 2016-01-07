@@ -18,9 +18,6 @@
 
 package org.workin.commons.util;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -33,20 +30,6 @@ import java.util.ResourceBundle;
  * @version 1.0
  */
 public class MessageUtils {
-	
-	/** UTF-8编码集 */
-	public static final String UTF8_ENCODING = "UTF-8";
-	
-	/** GBK编码集 */
-	public static final String GBK_ENCODING = "GBK";
-	
-	/** GB2312编码集 */
-	public static final String GB2312_ENCODING = "GB2312";
-	
-	/** UNICODE编码集 */
-	public static final String UNICODE_ENCODING = "UNICODE";
-	
-	public static final String ISO_8859_1 = "ISO-8859-1";
 	
 	/**
 	 * @description 获取包级别资源文件内的信息， 未获取到时返回资源项的键
@@ -585,79 +568,4 @@ public class MessageUtils {
 		return defaultMessage;
 	}
 	
-	/**
-	 * @description 将URL字符串按UTF-8编码集进行编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param url URL字符
-	 * @return
-	 */
-	public static String urlEncode(String url) {
-		return urlEncode(url, UTF8_ENCODING);
-	}
-	
-	/**
-	 * @description 将URL字符串按指定的编码集进行编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param url URL字符
-	 * @param encoding 编码集
-	 * @return
-	 */
-	public static String urlEncode(String url, String encoding) {
-		AssertUtils.assertNotNull(url, "Encoding url can not be null.");
-		try {
-			return URLEncoder.encode(url, StringUtils.isNotBlank(encoding) ? encoding : UTF8_ENCODING);
-		} catch (UnsupportedEncodingException e) {
-			return urlEncode(url, UTF8_ENCODING);
-		}
-	}
-	
-	/**
-	 * @description 将URL字符串按UTF-8编码集进行解码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param URL URL字符
-	 * @return
-	 */
-	public static String urlDecode(String url) {
-		return urlDecode(url, UTF8_ENCODING);
-	}
-	
-	/**
-	 * @description 将URL字符串按指定的编码集进行解码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param url URL字符
-	 * @param encoding 编码集
-	 * @return
-	 */
-	public static String urlDecode(String url, String encoding) {
-		AssertUtils.assertNotNull(url, "Decoding url can not be null.");
-		try {
-			return URLDecoder.decode(url, StringUtils.isNotBlank(encoding) ? encoding : UTF8_ENCODING);
-		} catch (UnsupportedEncodingException e) {
-			return urlDecode(url, UTF8_ENCODING);
-		}
-	}
-	
-	/**
-	 * @description 将字符串转换成十六进制编码表示
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param str
-	 * @return
-	 */
-	public static String toHexString(String str) {
-		if (str == null)
-			return StringUtils.EMPTY_STRING;
-		
-		StringBuilder result = new StringBuilder();
-		char c;
-		for (int i = 0; i < str.length(); i++) {
-			c = str.charAt(i);
-			if (c > 127)
-				// 只对ASCII以外的字符进行编码
-				result.append("\\u").append(Integer.toHexString(c).toUpperCase());
-			else
-				result.append(c);
-		}
-		return result.toString();
-	}
-									
 }

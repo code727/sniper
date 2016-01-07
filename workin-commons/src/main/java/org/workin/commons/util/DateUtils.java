@@ -117,12 +117,12 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 根据指定的模式在当前线程的局部变量中获取已定义的日期格式对象
+	 * @description 根据指定的模式获取日期格式对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @return
 	 */
-	private static SimpleDateFormat getDateFormat(String pattern) {
+	public static SimpleDateFormat getDateFormat(String pattern) {
 		if (StringUtils.isBlank(pattern))
 			pattern = DEFAULT_DATETIME_FORMAT;
 		
