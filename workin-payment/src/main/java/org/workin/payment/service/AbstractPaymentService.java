@@ -66,11 +66,11 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 	@Autowired
 	protected PaymentFactory paymentFactory;
 		
-	/** 签名器 */
-	private Signature<P> signature;
-	
 	/** 订单号生成器 */
 	protected IDGenerator orderIdGenerator;
+		
+	/** 签名器 */
+	private Signature<P> signature;
 	
 	public OrderBaseService getOrderService() {
 		return orderService;
@@ -127,7 +127,7 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 		
 		if (this.orderIdGenerator == null)
 			this.orderIdGenerator = new DateTimeIDGenerator();
-		
+				
 		this.signature = initSignature();
 	}
 	

@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.workin.commons.util.MapUtils;
+import org.workin.commons.util.SecurityUtils;
 import org.workin.support.signature.AESignature;
 
 /**
@@ -32,7 +33,7 @@ import org.workin.support.signature.AESignature;
 public class AlipayRSASignature extends AESignature<Map<String, Object>> {
 	
 	public AlipayRSASignature() {
-		setType("RSA");
+		setType(SecurityUtils.RSA_ALGORITHM_NAME);
 	}
 
 	@Override

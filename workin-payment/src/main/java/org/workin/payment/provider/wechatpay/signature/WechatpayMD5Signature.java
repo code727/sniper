@@ -31,6 +31,10 @@ import org.workin.support.signature.SESignature;
  * @version 1.0
  */
 public class WechatpayMD5Signature extends SESignature<Map<String, Object>> {
+	
+	public WechatpayMD5Signature() {
+		this.setType(SecurityUtils.MD5_ALGORITHM_NAME);
+	}
 
 	@Override
 	public String excute(Map<String, Object> parameters) {
@@ -38,9 +42,10 @@ public class WechatpayMD5Signature extends SESignature<Map<String, Object>> {
 		if (!(parameters instanceof TreeMap))
 			parameters = MapUtils.newTreeMap(parameters);
 		
-		parameters.put("key", getPrivateKey());
-		String queryString = MapUtils.joinQueryString(parameters);
-		return SecurityUtils.digest(queryString, getType()).toUpperCase();
+		StringBuffer queryString = new StringBuffer(MapUtils.joinQueryString(parameters));
+		// key放在所有参数的最后面
+		queryString.append("&key=").append(getPrivateKey());
+		return SecurityUtils.md5UpperCase(queryString.toString());
 	}
 		
 }

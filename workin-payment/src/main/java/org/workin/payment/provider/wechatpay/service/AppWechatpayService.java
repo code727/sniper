@@ -37,6 +37,7 @@ import org.workin.payment.provider.wechatpay.enums.ResultCode;
 import org.workin.payment.provider.wechatpay.enums.ReturnCode;
 import org.workin.payment.provider.wechatpay.parser.WechatpayParser;
 import org.workin.payment.provider.wechatpay.signature.WechatpayMD5Signature;
+import org.workin.support.encoder.StringEncoder;
 import org.workin.support.signature.SESignature;
 import org.workin.support.signature.Signature;
 
@@ -89,12 +90,10 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 				// 扩展字段,暂填写固定值Sign=WXPay
 				paymentParameters.put("package", "Sign=WXPay");
 				// 随机字符串 	
-//				paymentParameters.put("noncestr", step2Data.get(WechatpayParser.NONCE_STR));
 				paymentParameters.put("noncestr", StringUtils.unsignedUUID(true));
 				// 时间戳,东八区,自1970年1月1日 0点0分0秒以来的秒数,10位
 				paymentParameters.put("timestamp", System.currentTimeMillis() / 1000);
 				// 签名
-//				paymentParameters.put("sign", step2Data.get(WechatpayParser.SIGN));
 				paymentParameters.put("sign", getSignature().excute(paymentParameters));
 				
 				resultModel.setDate(paymentParameters);
@@ -137,8 +136,9 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 	 * @param parameters
 	 * @return
 	 */
-	protected ResultModel<String> placeOrder(Order order, Map<String, String> parameters) {
+	protected ResultModel<String> placeOrder(Order order, Map<String, String> parameters) throws Exception {
 		ResultModel<String> resultModel = new ResultModel<String>();
+		StringEncoder encoder = getPaymentHttpTemplet().getUrlFormatter().getEncoder();
 		
 		// 统一下单请求参数项
 		Map<String, Object> requestParameters = MapUtils.newHashMap();
@@ -148,12 +148,13 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		requestParameters.put("mch_id", paymentContextParameters.getValue("wechatpay.app.mchid"));
 		// 随机字符串，采用32位无符号全大写UUID
 		requestParameters.put("nonce_str", StringUtils.unsignedUUID(true));
+		
 		// 商品名称
-		requestParameters.put("body", order.getProductName());
+		requestParameters.put("body", encoder.encode(order.getProductName()));
 		// 商品描述
 		String description = order.getDescription();
 		if (StringUtils.isNotBlank(description))
-			requestParameters.put("detail", order.getDescription());
+			requestParameters.put("detail", encoder.encode(order.getDescription()));
 		
 		// 商户交易订单号
 		requestParameters.put("out_trade_no", order.getOrderId());
@@ -164,9 +165,9 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		
 		// 终端IP
 		requestParameters.put("spbill_create_ip", parameters.get("ip"));
-		// 通知回调地址
-		requestParameters.put("notify_url", paymentContextParameters.getValue("wechatpay.app.notify.url"));
 		
+		// 通知回调地址
+		requestParameters.put("notify_url", encoder.encode(paymentContextParameters.getValue("wechatpay.app.notify.url", String.class)));
 		String tradeType = paymentContextParameters.getValue("wechatpay.app.trade.type", String.class);
 		
 		// 交易类型

@@ -33,7 +33,7 @@ import org.workin.support.signature.SESignature;
 public class AlipayMD5Signature extends SESignature<Map<String, Object>> {
 	
 	public AlipayMD5Signature() {
-		setType("MD5");
+		setType(SecurityUtils.MD5_ALGORITHM_NAME);
 	}
 
 	@Override

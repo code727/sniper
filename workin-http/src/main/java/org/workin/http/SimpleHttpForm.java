@@ -54,7 +54,7 @@ public class SimpleHttpForm implements HttpForm {
 	private HttpRequestHeader header;
 	
 	/** 是否自动编码 */
-	private boolean autoEncoding;
+	private boolean autoEncoding = true;
 	
 	/** 字符串编码 */
 	private String encoding;

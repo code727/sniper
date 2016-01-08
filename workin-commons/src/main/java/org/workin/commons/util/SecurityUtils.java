@@ -29,11 +29,16 @@ import java.security.NoSuchAlgorithmException;
 public class SecurityUtils {
 	
 	/** MD5算法名称 */
-	public static final String MD5_ALGORITHM = "MD5";
+	public static final String MD5_ALGORITHM_NAME = "MD5";
 	
 	/** DES算法名称 */
-	public static final String DES_ALGORITHM = "DES";
+	public static final String DES_ALGORITHM_NAME = "DES";
 	
+	/** DSA算法名称 */
+	public static final String DSA_ALGORITHM_NAME = "DSA";
+	
+	/** RSA算法名称 */
+	public static final String RSA_ALGORITHM_NAME = "RSA";
 	
 	/**
 	 * @description 按指定算法生成明文的摘要
@@ -91,7 +96,7 @@ public class SecurityUtils {
 	 * @return
 	 */
 	public static String md5(String plaintext, boolean upperCase) {
-		String ciphertext = digest(plaintext, MD5_ALGORITHM);
+		String ciphertext = digest(plaintext, MD5_ALGORITHM_NAME);
 		return upperCase ? ciphertext.toUpperCase() : ciphertext;
 	}
 				

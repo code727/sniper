@@ -18,7 +18,7 @@
 
 package org.workin.support;
 
-import org.workin.commons.util.SystemUtils;
+import org.workin.commons.util.CodecUtils;
 
 /**
  * @description 编码/解码器支持抽象类
@@ -27,7 +27,7 @@ import org.workin.commons.util.SystemUtils;
  */
 public abstract class CoderSupport {
 	
-	private String encoding = SystemUtils.getSystemEncoding();
+	private String encoding = CodecUtils.UTF8_ENCODING;
 	
 	public String getEncoding() {
 		return encoding;
