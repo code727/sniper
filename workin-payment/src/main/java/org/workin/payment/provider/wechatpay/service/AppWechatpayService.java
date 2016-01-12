@@ -37,7 +37,6 @@ import org.workin.payment.provider.wechatpay.enums.ResultCode;
 import org.workin.payment.provider.wechatpay.enums.ReturnCode;
 import org.workin.payment.provider.wechatpay.parser.WechatpayParser;
 import org.workin.payment.provider.wechatpay.signature.WechatpayMD5Signature;
-import org.workin.support.encoder.StringEncoder;
 import org.workin.support.signature.SESignature;
 import org.workin.support.signature.Signature;
 
@@ -96,6 +95,8 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 				// 签名
 				paymentParameters.put("sign", getSignature().excute(paymentParameters));
 				
+				// 自定义的订单编号
+				paymentParameters.put("orderId", order.getOrderId());
 				resultModel.setDate(paymentParameters);
 			} else if (SystemStatus.FAILED.getKey().equals(code)) {
 				/* 解析失败，则直接返回第二步的状态码和消息 */
@@ -138,7 +139,6 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 	 */
 	protected ResultModel<String> placeOrder(Order order, Map<String, String> parameters) throws Exception {
 		ResultModel<String> resultModel = new ResultModel<String>();
-		StringEncoder encoder = getPaymentHttpTemplet().getUrlFormatter().getEncoder();
 		
 		// 统一下单请求参数项
 		Map<String, Object> requestParameters = MapUtils.newHashMap();
@@ -150,11 +150,11 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		requestParameters.put("nonce_str", StringUtils.unsignedUUID(true));
 		
 		// 商品名称
-		requestParameters.put("body", encoder.encode(order.getProductName()));
+		requestParameters.put("body", order.getProductName());
 		// 商品描述
 		String description = order.getDescription();
 		if (StringUtils.isNotBlank(description))
-			requestParameters.put("detail", encoder.encode(order.getDescription()));
+			requestParameters.put("detail", order.getDescription());
 		
 		// 商户交易订单号
 		requestParameters.put("out_trade_no", order.getOrderId());
@@ -167,7 +167,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		requestParameters.put("spbill_create_ip", parameters.get("ip"));
 		
 		// 通知回调地址
-		requestParameters.put("notify_url", encoder.encode(paymentContextParameters.getValue("wechatpay.app.notify.url", String.class)));
+		requestParameters.put("notify_url",paymentContextParameters.getValue("wechatpay.app.notify.url", String.class));
 		String tradeType = paymentContextParameters.getValue("wechatpay.app.trade.type", String.class);
 		
 		// 交易类型
@@ -260,8 +260,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		
 		// 只有等交易完成后才记录支付时间
 		int status = payment.getStatus();
-		if (status == PaymentStatus.TRADE_SUCCESS.getKey()
-				|| status == PaymentStatus.TRADE_FINISHED.getKey())
+		if (status == PaymentStatus.TRADE_SUCCESS.getKey() || status == PaymentStatus.TRADE_FINISHED.getKey())
 			payment.setPayTime(new Date());
 		else
 			payment.setPayTime(null);

@@ -49,7 +49,6 @@ public abstract class MinLengthIDGeneratorAdapter extends
 		return this.minLength;
 	}
 
-	
 	@Override
 	public void setSupply(char supply) {
 		this.supply = supply;
