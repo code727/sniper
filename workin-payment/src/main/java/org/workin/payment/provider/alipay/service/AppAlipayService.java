@@ -18,6 +18,7 @@
 
 package org.workin.payment.provider.alipay.service;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -82,14 +83,14 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 	
 	@Override
 	protected ResultModel<Map<String, Object>> createParameters(Order order, Map<String, String> parameters) throws Exception {
-		Map<String, Object> paymentParameters = MapUtils.newHashMap();
+		Map<String, Object> paymentParameters = MapUtils.newLinkedHashMap();
 		paymentParameters.putAll(createRequiredParameters(order, parameters));
 		paymentParameters.putAll(createUnrequiredParameters(order, parameters));
 		
 		Signature<Map<String, Object>> signature = getSignature();
-		// 签名
+		
+		// 签名和签名类型必须为LinkedHashMap的最后两个参数
 		paymentParameters.put("sign", signature.excute(paymentParameters));
-		// 签名类型
 		paymentParameters.put("sign_type", signature.getType());
 		
 		ResultModel<Map<String, Object>> resultModel = new ResultModel<Map<String, Object>>();
@@ -105,7 +106,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 	 * @return
 	 */
 	protected Map<String, Object> createRequiredParameters(Order order, Map<String, String> parameters) {
-		Map<String, Object> requiredParameters = MapUtils.newHashMap();
+		Map<String, Object> requiredParameters = MapUtils.newLinkedHashMap();
 		// 接口名称
 		requiredParameters.put("service", paymentContextParameters.getValue("alipay.app.pay.service"));
 		// 合作者身份ID 
@@ -130,7 +131,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 		
 		PaymentUtils.prepare(order);
 		// 总金额
-		requiredParameters.put("total_fee", order.getAmount());
+		requiredParameters.put("total_fee", order.getAmount().setScale(2, BigDecimal.ROUND_DOWN));
 		// 商品详情
 		if (StringUtils.isNotBlank(order.getDescription()))
 			requiredParameters.put("body", order.getDescription());
@@ -148,7 +149,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 	 * @return
 	 */
 	protected Map<String, Object> createUnrequiredParameters(Order order, Map<String, String> parameters) {
-		Map<String, Object> unrequiredParameters = MapUtils.newHashMap();
+		Map<String, Object> unrequiredParameters =  MapUtils.newLinkedHashMap();
 		
 		// 客户端号
 		String appId = parameters.get("app_id");
