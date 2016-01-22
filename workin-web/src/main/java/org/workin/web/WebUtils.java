@@ -74,13 +74,13 @@ public class WebUtils {
 	}
 	
 	/**
-	 * @description 设置HttpServletRequest对象的属性值
+	 * @description 设置ServletRequest对象的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param name
 	 * @param value
 	 */
-	public static void setAttribute(HttpServletRequest request, String name, Object value) {
+	public static void setAttribute(ServletRequest request, String name, Object value) {
 		if (name != null)
 			request.setAttribute(name, value);
 	}
@@ -106,42 +106,31 @@ public class WebUtils {
 	public static void setMaxInactiveInterval(HttpSession session, int sec) {
 		session.setMaxInactiveInterval(sec);
 	}
-			
+	
 	/**
-	 * @description 获取HttpServletRequest对象里的参数值
+	 * @description 获取ServletRequest对象里的参数值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param name
 	 * @return
 	 */
-	public static String getParameter(HttpServletRequest request, String name) {
+	public static String getParameter(ServletRequest request, String name) {
 		return getParameter(request, name, null);
 	}
 	
 	/**
-	 * @description 获取HttpServletRequest对象里的参数值，为空时返回指定的默认值
+	 * @description 获取ServletRequest对象里的参数值，为空时返回指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param name
 	 * @param defaultValue
 	 * @return
 	 */
-	public static String getParameter(HttpServletRequest request, String name, String defaultValue) {
+	public static String getParameter(ServletRequest request, String name, String defaultValue) {
 		String value = request.getParameter(name);
 		return value != null ? value : defaultValue;
 	}
-	
-	/**
-	 * @description 获取ServletRequest对象里所有的参数"名-值"对映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param request
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public static <K, V> Map<K, V> getParameterMap(ServletRequest request) {
-		return request.getParameterMap();
-	}
-	
+			
 	/**
 	 * @description 获取ServletRequest对象里所有的参数"名-值"字符串对映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -160,18 +149,18 @@ public class WebUtils {
 	}
 	
 	/**
-	 * @description 获取HttpServletRequest对象里的属性值
+	 * @description 获取ServletRequest对象里的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param name
 	 * @return
 	 */
-	public static <T> T getAttribute(HttpServletRequest request, String name) {
+	public static <T> T getAttribute(ServletRequest request, String name) {
 		return getAttribute(request, name, null);
 	}
 	
 	/**
-	 * @description 获取HttpServletRequest对象里的属性值，为空时返回指定的默认值
+	 * @description 获取ServletRequest对象里的属性值，为空时返回指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param name
@@ -179,7 +168,7 @@ public class WebUtils {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T getAttribute(HttpServletRequest request, String name, T defaultValue) {
+	public static <T> T getAttribute(ServletRequest request, String name, T defaultValue) {
 		T value = (T) request.getAttribute(name);
 		return value != null ? value : defaultValue;
 	}
@@ -231,12 +220,12 @@ public class WebUtils {
 	}
 	
 	/**
-	 * @description 删除HttpServletRequest对象里的指定属性
+	 * @description 删除ServletRequest对象里的指定属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param name
 	 */
-	public static void removeAttribute(HttpServletRequest request, String name) {
+	public static void removeAttribute(ServletRequest request, String name) {
 		request.removeAttribute(name);
 	}
 	
@@ -251,12 +240,12 @@ public class WebUtils {
 	}
 	
 	/**
-	 * @description 删除HttpServletRequest对象里所有的属性
+	 * @description 删除ServletRequest对象里所有的属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 */
 	@SuppressWarnings("unchecked")
-	public static void removeAll(HttpServletRequest request) {
+	public static void removeAll(ServletRequest request) {
 		Enumeration<String> names = request.getAttributeNames();
 		while (names.hasMoreElements()) {
 			request.removeAttribute(names.nextElement());
@@ -277,29 +266,18 @@ public class WebUtils {
 	}
 	
 	/**
-	 * @description 删除HttpServletRequest以及关联的HttpSession对象里所有的属性
+	 * @description 删除ServletRequest对象里所有的属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param session
 	 */
-	public static void clearAll(HttpServletRequest request) {
-		clearAll(request, null);
-	}
-	
-	/**
-	 * @description 同时删除HttpServletRequest和HttpSession对象里所有的属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param request
-	 * @param session
-	 */
-	public static void clearAll(HttpServletRequest request, HttpSession session) {
-		if (session == null) {
-			HttpSession correlative_session = request.getSession(false);
-			if (correlative_session != null)
-				removeAll(correlative_session);
-		} else
-			removeAll(session);
+	public static void clearAll(ServletRequest request) {
 		removeAll(request);
+		if (request instanceof HttpServletRequest) {
+			HttpSession session = ((HttpServletRequest) request).getSession(false);
+			if (session != null)
+				removeAll(session);
+		}
 	}
 	
 	/**
@@ -428,17 +406,12 @@ public class WebUtils {
 		if (StringUtils.isNotEmpty(contentType))
 			response.setContentType("application/" + contentType);
 		
-		byte[] bytes = new byte[IOUtils.DEFAULT_BUFFER_SIZE];
 		BufferedInputStream input = null;
 		BufferedOutputStream output = null;
 		try {
 			input = IOUtils.newBufferedInputStream(in);
 			output = IOUtils.newBufferedOutputStream(response.getOutputStream());
-			int i = 0;
-			/* 按块写入 */
-			while ((i = in.read(bytes)) > 0) 
-				output.write(bytes, 0, i);
-			output.flush();
+			IOUtils.write(input, output);
 		} finally {
 			IOUtils.close(output);
 			IOUtils.close(input);
@@ -481,9 +454,7 @@ public class WebUtils {
 		
 		BufferedOutputStream out = null;
 		try {
-			out = IOUtils.newBufferedOutputStream(response.getOutputStream());
-			out.write(bytes);
-			out.flush();
+			IOUtils.write(IOUtils.newBufferedOutputStream(response.getOutputStream()), bytes);
 		} finally {
 			IOUtils.close(out);
 		}

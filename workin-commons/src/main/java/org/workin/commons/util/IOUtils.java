@@ -579,6 +579,7 @@ public class IOUtils {
 	 */
 	public static void write(OutputStream out, byte[] bytes) throws IOException {
 		out.write(ArrayUtils.nullToEmpty(bytes));
+		out.flush();
 	}
 	
 	/**
@@ -589,7 +590,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static void write(OutputStream out, String content) throws IOException {
-		write(out, content, "");
+		write(out, content, null);
 	}
 	
 	/**
@@ -603,7 +604,8 @@ public class IOUtils {
 	public static void write(OutputStream out, String content, String encoding) throws IOException {
 		if (StringUtils.isBlank(encoding))
 			encoding = CodecUtils.UTF8_ENCODING;
-		out.write(StringUtils.safeString(content).getBytes(encoding));
+		
+		write(out, StringUtils.safeString(content).getBytes(encoding));
 	}
 	
 	/**
@@ -638,7 +640,7 @@ public class IOUtils {
 	 * @throws IOException
 	 */
 	public static void write(Writer writer, byte[] bytes) throws IOException {
-		write(writer, bytes, "");
+		write(writer, bytes, null);
 	}
 	
 	/**
@@ -652,8 +654,8 @@ public class IOUtils {
 	public static void write(Writer writer, byte[] bytes, String encoding) throws IOException {
 		if (StringUtils.isBlank(encoding))
 			encoding = CodecUtils.UTF8_ENCODING;
-		writer.write(new String(ArrayUtils.nullToEmpty(bytes), encoding));
-		writer.flush();
+		
+		write(writer, new String(ArrayUtils.nullToEmpty(bytes), encoding));
 	}
 	
 	/**
@@ -680,6 +682,8 @@ public class IOUtils {
 		int length;
 		while ((length = in.read(buffer)) > 0) 
 			out.write(buffer, 0, length);
+		
+		out.flush();
 	}
 
 	/**
@@ -804,7 +808,7 @@ public class IOUtils {
 		char[] buffer = new char[bufferSize > 0 ? bufferSize : DEFAULT_BUFFER_SIZE];
 		int length;
 		while ((length = bufferedReader.read(buffer)) > -1) {
-			bufferedWriter.write(buffer,0,length);
+			bufferedWriter.write(buffer, 0, length);
 			bufferedWriter.flush();
 		}
 	}
