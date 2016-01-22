@@ -47,46 +47,46 @@ public final class PaymentStatus extends AbstractLocaleEnums<Integer> {
 	public static final PaymentStatus TRADE_PENDING = new PaymentStatus(-2, "msg.trade_pending");
 			
 	/** 商户无此接口权限 */
-	public static final PaymentStatus NOAUTH = new PaymentStatus(-2, "msg.seller_noauth");
+	public static final PaymentStatus NOAUTH = new PaymentStatus(-3, "msg.seller_noauth");
 	
 	/** 签名错误 */
-	public static final PaymentStatus SIGN_ERROR = new PaymentStatus(-3, "msg.sign_error");
+	public static final PaymentStatus SIGN_ERROR = new PaymentStatus(-4, "msg.sign_error");
 	
 	/** 缺少XXX参数 */
-	public static final PaymentStatus LACK_PARAMS_OF = new PaymentStatus(-4, "msg.lack_params_of");
+	public static final PaymentStatus LACK_PARAMS_OF = new PaymentStatus(-5, "msg.lack_params_of");
 	
 	/** 缺少参数 */
-	public static final PaymentStatus LACK_PARAMS = new PaymentStatus(-5, "msg.lack_params");
+	public static final PaymentStatus LACK_PARAMS = new PaymentStatus(-6, "msg.lack_params");
 	
 	/** XXX和XXX参数不匹配 */
-	public static final PaymentStatus PARAMS_NOT_MATCH = new PaymentStatus(-6, "msg.params_not_match");
+	public static final PaymentStatus PARAMS_NOT_MATCH = new PaymentStatus(-7, "msg.params_not_match");
 	
 	/** 未使用HTTP XXX方法传递参数 */
-	public static final PaymentStatus REQUIRE_HTTP_METHOD = new PaymentStatus(-7, "msg.require_http_method");
+	public static final PaymentStatus REQUIRE_HTTP_METHOD = new PaymentStatus(-8, "msg.require_http_method");
 	
 	/** 编码格式错误，请使用XXX编码格式 */
-	public static final PaymentStatus ENCODING_ERROR = new PaymentStatus(-8, "msg.encoding_error");
+	public static final PaymentStatus ENCODING_ERROR = new PaymentStatus(-9, "msg.encoding_error");
 	
 	/** XXX格式错误 */
-	public static final PaymentStatus FORMAT_ERROR = new PaymentStatus(-9, "msg.format_error");
+	public static final PaymentStatus FORMAT_ERROR = new PaymentStatus(-10, "msg.format_error");
 	
 	/** 数据为空 */
-	public static final PaymentStatus DATA_EMPTY = new PaymentStatus(-10, "msg.data_empty");	
+	public static final PaymentStatus DATA_EMPTY = new PaymentStatus(-11, "msg.data_empty");	
 	
 	/** 系统错误 */
-	public static final PaymentStatus SYSTEME_RROR = new PaymentStatus(-11, "msg.system_error");
+	public static final PaymentStatus SYSTEME_RROR = new PaymentStatus(-12, "msg.system_error");
 	
 	/** 用户帐号余额不足 */
-	public static final PaymentStatus NOT_SUFFICIENT_FUNDS = new PaymentStatus(-12, "msg.user_not_sufficient_funds");
+	public static final PaymentStatus NOT_SUFFICIENT_FUNDS = new PaymentStatus(-13, "msg.user_not_sufficient_funds");
 	
 	/** 商户订单已支付 */
-	public static final PaymentStatus ORDER_PAID = new PaymentStatus(-13, "msg.order_paid");
+	public static final PaymentStatus ORDER_PAID = new PaymentStatus(-14, "msg.order_paid");
 	
 	/** 商户订单号重复 */
-	public static final PaymentStatus DUPLICATION_OUT_TRADE_NO = new PaymentStatus(-14, "msg.duplication_out_trade_no");
+	public static final PaymentStatus DUPLICATION_OUT_TRADE_NO = new PaymentStatus(-15, "msg.duplication_out_trade_no");
 	
 	/** 当前订单已关闭 */
-	public static final PaymentStatus ORDER_CLOSED = new PaymentStatus(-15, "msg.order_closed");
+	public static final PaymentStatus ORDER_CLOSED = new PaymentStatus(-16, "msg.order_closed");
 	
 	/** 其它错误 */
 	public static final PaymentStatus OTHER_ERROR = new PaymentStatus(-999, "msg.other_error");
