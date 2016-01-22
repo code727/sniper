@@ -27,19 +27,20 @@ import org.workin.support.mapper.AbstractBeanMapper;
 import org.workin.support.mapper.Mapper;
 import org.workin.support.mapper.ParameterRule;
 import org.workin.support.mapper.impl.MapToBeanMapper;
+import org.workin.web.WebUtils;
 
 /**
  * @description javax.servlet.ServletRequest对象与Java Bean对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ServletRequestToBeanMapper<V, R> extends AbstractBeanMapper<ServletRequest, R> {
+public class ServletRequestToBeanMapper<R> extends AbstractBeanMapper<ServletRequest, R> {
 	
-	private Mapper<Map<String, V>, R> mapper;
+	private Mapper<Map<String, String>, R> mapper;
 
 	public ServletRequestToBeanMapper(String type) {
 		super(type);
-		this.mapper = new MapToBeanMapper<V, R>(type);
+		this.mapper = new MapToBeanMapper<String, R>(type);
 	}
 	
 	@Override
@@ -47,13 +48,12 @@ public class ServletRequestToBeanMapper<V, R> extends AbstractBeanMapper<Servlet
 		this.mapper.setParameterRules(parameterRules);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public R mapping(ServletRequest source) throws Exception {
 		if (source == null)
 			return null;
 		
-		return mapper.mapping(source.getParameterMap());
+		return mapper.mapping(WebUtils.getParameters(source));
 	}
 
 }

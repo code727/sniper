@@ -29,6 +29,7 @@ import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,6 +39,7 @@ import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.FileUtils;
 import org.workin.commons.util.IOUtils;
+import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
@@ -130,14 +132,31 @@ public class WebUtils {
 	}
 	
 	/**
-	 * @description 获取HttpServletRequest对象里所有的参数"名-值"对映射集
+	 * @description 获取ServletRequest对象里所有的参数"名-值"对映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static <K, V> Map<K, V> getParameterMap(HttpServletRequest request) {
+	public static <K, V> Map<K, V> getParameterMap(ServletRequest request) {
 		return request.getParameterMap();
+	}
+	
+	/**
+	 * @description 获取ServletRequest对象里所有的参数"名-值"字符串对映射集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param request
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static Map<String, String> getParameters(ServletRequest request) {
+		Enumeration<String> names = request.getParameterNames();
+		Map<String, String> parameters = MapUtils.newHashMap();
+		while (names.hasMoreElements()) {
+			String name = names.nextElement();
+			parameters.put(name, ArrayUtils.get(request.getParameterValues(name), 0));
+		}
+		return parameters;
 	}
 	
 	/**

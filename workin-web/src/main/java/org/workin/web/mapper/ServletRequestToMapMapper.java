@@ -27,18 +27,19 @@ import org.workin.support.mapper.AbstractMapper;
 import org.workin.support.mapper.Mapper;
 import org.workin.support.mapper.ParameterRule;
 import org.workin.support.mapper.impl.MapToMapMapper;
+import org.workin.web.WebUtils;
 
 /**
  * @description javax.servlet.ServletRequest对象与Map对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ServletRequestToMapMapper<V> extends AbstractMapper<ServletRequest, Map<String, V>> {
+public class ServletRequestToMapMapper extends AbstractMapper<ServletRequest, Map<String, String>> {
 	
-	private Mapper<Map<String, Object>, Map<String, Object>> mapper;
+	private Mapper<Map<String, String>, Map<String, String>> mapper;
 
 	public ServletRequestToMapMapper() {
-		this.mapper = new MapToMapMapper<Object>();
+		this.mapper = new MapToMapMapper<String>();
 	}
 	
 	@Override
@@ -46,13 +47,12 @@ public class ServletRequestToMapMapper<V> extends AbstractMapper<ServletRequest,
 		this.mapper.setParameterRules(parameterRules);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, V> mapping(ServletRequest source) throws Exception {
+	public Map<String, String> mapping(ServletRequest source) throws Exception {
 		if (source == null)
 			return null;
 		
-		return (Map<String, V>) mapper.mapping(source.getParameterMap());
+		return mapper.mapping(WebUtils.getParameters(source));
 	}
 
 }

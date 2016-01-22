@@ -28,18 +28,19 @@ import org.workin.support.mapper.Mapper;
 import org.workin.support.mapper.ParameterRule;
 import org.workin.support.mapper.impl.MapToParameterMapper;
 import org.workin.support.parameter.Parameter;
+import org.workin.web.WebUtils;
 
 /**
  * @description javax.servlet.ServletRequest对象与org.workin.support.parameter.Parameter对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ServletRequestToParameterMapper<V> extends AbstractMapper<ServletRequest, Parameter<String, V>>{
+public class ServletRequestToParameterMapper extends AbstractMapper<ServletRequest, Parameter<String, String>>{
 
-	private Mapper<Map<String, V>, Parameter<String, V>> mapper;
+	private Mapper<Map<String, String>, Parameter<String, String>> mapper;
 	
 	public ServletRequestToParameterMapper() {
-		this.mapper = new MapToParameterMapper<V>();
+		this.mapper = new MapToParameterMapper<String>();
 	}
 	
 	@Override
@@ -47,13 +48,12 @@ public class ServletRequestToParameterMapper<V> extends AbstractMapper<ServletRe
 		this.mapper.setParameterRules(parameterRules);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Parameter<String, V> mapping(ServletRequest source) throws Exception {
+	public Parameter<String, String> mapping(ServletRequest source) throws Exception {
 		if (source == null)
 			return null;
 		
-		return mapper.mapping(source.getParameterMap());
+		return mapper.mapping(WebUtils.getParameters(source));
 	}
 
 }
