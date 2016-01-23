@@ -18,6 +18,7 @@
 
 package org.workin.commons.util;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -48,24 +49,40 @@ public class SecurityUtils {
 	 * @return
 	 */
 	public static String digest(String plaintext, String algorithm) {
+		return digest(plaintext, algorithm, null);
+	}
+	
+	/**
+	 * @description 按指定的字符集编码和算法生成明文的摘要
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param plaintext
+	 * @param algorithm
+	 * @param charsetName
+	 * @return
+	 */
+	public static String digest(String plaintext, String algorithm, String charsetName) {
 		AssertUtils.assertNotNull(plaintext, "Plaintext must not be null.");
 		AssertUtils.assertTrue(StringUtils.isNotBlank(algorithm), "Algorithm must not be null or blank.");
-		
-		String ciphertext = null;
+
+		String digestMessage = null;
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
-			byte[] bytes = messageDigest.digest(plaintext.getBytes());
+			byte[] bytes = messageDigest.digest(plaintext.getBytes(
+					StringUtils.isNotBlank(charsetName) ? charsetName : CodecUtils.UTF8_ENCODING));
 			StringBuffer buffer = new StringBuffer(bytes.length * 2);
 			for (int i = 0; i < bytes.length; i++) {
 				if ((bytes[i] & 0xff) < 0x10)
 					buffer.append("0");
 				buffer.append(Long.toString(bytes[i] & 0xff, 16));
 			}
-			ciphertext = buffer.toString();
+			digestMessage = buffer.toString();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			return digest(plaintext, algorithm, CodecUtils.UTF8_ENCODING);
 		}
-		return ciphertext;
+		
+		return digestMessage;
 	}
 	
 	/**
@@ -75,7 +92,18 @@ public class SecurityUtils {
 	 * @return
 	 */
 	public static String md5(String plaintext) {
-		return md5(plaintext, false);
+		return md5(plaintext, null);
+	}
+	
+	/**
+	 * @description 生成32位全小写并按指定字符集编码后的MD5摘要信息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param plaintext
+	 * @param charsetName
+	 * @return
+	 */
+	public static String md5(String plaintext, String charsetName) {
+		return md5(plaintext, charsetName, false);
 	}
 	
 	/**
@@ -85,7 +113,18 @@ public class SecurityUtils {
 	 * @return
 	 */
 	public static String md5UpperCase(String plaintext) {
-		return md5(plaintext, true);
+		return md5UpperCase(plaintext, null);
+	}
+	
+	/**
+	 * @description 生成32位全大写并按指定字符集编码后的MD5摘要信息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param plaintext
+	 * @param charsetName
+	 * @return
+	 */
+	public static String md5UpperCase(String plaintext, String charsetName) {
+		return md5(plaintext, charsetName, true);
 	}
 	
 	/**
@@ -96,8 +135,20 @@ public class SecurityUtils {
 	 * @return
 	 */
 	public static String md5(String plaintext, boolean upperCase) {
-		String ciphertext = digest(plaintext, MD5_ALGORITHM_NAME);
+		return md5(plaintext, null, upperCase);
+	}
+	
+	/**
+	 * @description 选择是否按全大写的方式生成指定字符集编码后的32位MD5摘要信息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param plaintext
+	 * @param charsetName
+	 * @param upperCase
+	 * @return
+	 */
+	public static String md5(String plaintext, String charsetName, boolean upperCase) {
+		String ciphertext = digest(plaintext, MD5_ALGORITHM_NAME, charsetName);
 		return upperCase ? ciphertext.toUpperCase() : ciphertext;
 	}
-				
+					
 }

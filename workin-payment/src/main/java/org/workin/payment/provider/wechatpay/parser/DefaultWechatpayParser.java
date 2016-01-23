@@ -211,14 +211,14 @@ public class DefaultWechatpayParser implements WechatpayParser {
 				unrequiredParameters.put(COUPON_COUNT, couponCountNode.getText());
 			
 			// 代金券或立减优惠ID 
-			Node couponId$nNode = document.createXPath(root.getPath() + "/" + COUPON_ID_$N).selectSingleNode(document);
-			if (couponId$nNode != null)
-				unrequiredParameters.put(COUPON_ID_$N, couponId$nNode.getText());
+//			Node couponId$nNode = document.createXPath(root.getPath() + "/" + COUPON_ID_$N).selectSingleNode(document);
+//			if (couponId$nNode != null)
+//				unrequiredParameters.put(COUPON_ID_$N, couponId$nNode.getText());
 			
 			// 单个代金券或立减优惠支付金额
-			Node couponFee$nNode = document.createXPath(root.getPath() + "/" + COUPON_FEE_$N).selectSingleNode(document);
-			if (couponFee$nNode != null)
-				unrequiredParameters.put(COUPON_FEE_$N, couponFee$nNode.getText());
+//			Node couponFee$nNode = document.createXPath(root.getPath() + "/" + COUPON_FEE_$N).selectSingleNode(document);
+//			if (couponFee$nNode != null)
+//				unrequiredParameters.put(COUPON_FEE_$N, couponFee$nNode.getText());
 			
 			// 商家数据包 	
 			Node attachNode = document.createXPath(root.getPath() + "/" + ATTACH).selectSingleNode(document);
