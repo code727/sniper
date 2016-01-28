@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 
+import org.workin.commons.enums.category.SystemStatus;
 import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.payment.Payment;
 import org.workin.payment.enums.payment.PaymentStatus;
@@ -54,31 +55,40 @@ public abstract class AlipayService<T, P> extends AbstractPaymentService<T, P> {
 	protected CodeMessageModel updatePayment(Map<String, String> paymentResponse) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
 		String orderId = paymentResponse.get("out_trade_no");
+		
 		Payment payment = paymentService.findByOrderId(orderId);
 		if (payment == null) {
 			payment = paymentFactory.create();
 			payment.setAmount(orderService.findByOrderId(orderId).getAmount());
 		}
+		
 		payment.setOrderId(orderId);
 		payment.setThirdOrderId(paymentResponse.get("trade_no"));
 		payment.setPayAmount(new BigDecimal(paymentResponse.get("total_fee")));
-		String thirdCode = paymentResponse.get("trade_status");
-		payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(thirdCode));
-		payment.setMessage(ThirdPaymentStatus.getPaymentMessage(thirdCode));
 		
 		int status = payment.getStatus();
-		// 只有等交易成功或完成后才记录支付时间
-		if (status == PaymentStatus.TRADE_SUCCESS.getKey()
-				|| status == PaymentStatus.TRADE_FINISHED.getKey())
-			payment.setPayTime(new Date());
-		else
-			payment.setPayTime(null);
-		
-		if (payment.getId() != null)
-			result = paymentService.update(payment);
-		else
-			result = paymentService.save(payment);
-		
+		/* 当前支付记录处于"未成功"或"未完成"时，才继续往下处理 */
+		if (status != PaymentStatus.TRADE_SUCCESS.getKey() || status != PaymentStatus.TRADE_FINISHED.getKey()) {
+			String thirdCode = paymentResponse.get("trade_status");
+			int returnStatus = ThirdPaymentStatus.getPaymentStatusCode(thirdCode);
+			
+			payment.setStatus(returnStatus);
+			payment.setMessage(ThirdPaymentStatus.getPaymentMessage(thirdCode));
+			status = payment.getStatus();
+			// 只有等交易成功或完成后才记录支付时间
+			if (status == PaymentStatus.TRADE_SUCCESS.getKey() || status == PaymentStatus.TRADE_FINISHED.getKey())
+				payment.setPayTime(new Date());
+			else
+				payment.setPayTime(null);
+			
+			if (payment.getId() != null)
+				result = paymentService.update(payment);
+			else
+				result = paymentService.save(payment);
+		} else 
+			// 不重复处理"已成功"或"已完成"的支付记录
+			result.setCode(SystemStatus.FAILED.getKey());
+				
 		return result;
 	}
 

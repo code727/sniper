@@ -228,6 +228,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 	protected CodeMessageModel updatePayment(Map<String, String> paymentResponse) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
 		String orderId = paymentResponse.get("out_trade_no");
+		
 		Payment payment = paymentService.findByOrderId(orderId);
 		if (payment == null) {
 			payment = paymentFactory.create();
@@ -238,37 +239,43 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		payment.setThirdOrderId(paymentResponse.get("transaction_id"));
 		payment.setPayAmount(CurrencyUtils.fenToYuan(paymentResponse.get("total_fee")));
 		
-		String resultCode = paymentResponse.get("result_code");
-		if (ResultCode.SUCCESS.getCode().equals(resultCode)) {
-			payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(resultCode));
-			payment.setMessage(ThirdPaymentStatus.getPaymentMessage(resultCode));
-		} else {
-			String errCode = paymentResponse.get("err_code");
-			if (StringUtils.isNotBlank(errCode)) {
-				// 设置错误代码对应的支付状态
-				payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(errCode));
-				String message = paymentResponse.get("err_code_des");
-				// 设置支付消息为不为空的微信支付错误代码描述 (err_code_des)，否则，设置为自定义的失败状态对应的支付信息
-				payment.setMessage(StringUtils.isNotBlank(message) ? message : 
-					ThirdPaymentStatus.getPaymentMessage(ResultCode.FAIL.getCode()));
-			} else {
-				String thirdCode = ResultCode.FAIL.getCode();
-				payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(thirdCode));
-				payment.setMessage(ThirdPaymentStatus.getPaymentMessage(thirdCode));
-			}
-		}
-		
-		// 只有等交易完成后才记录支付时间
 		int status = payment.getStatus();
-		if (status == PaymentStatus.TRADE_SUCCESS.getKey() || status == PaymentStatus.TRADE_FINISHED.getKey())
-			payment.setPayTime(new Date());
-		else
-			payment.setPayTime(null);
-		
-		if (payment.getId() != null)
-			result = paymentService.update(payment);
-		else
-			result = paymentService.save(payment);
+		/* 当前支付记录处于"未成功"或"未完成"时，才继续往下处理 */
+		if (status != PaymentStatus.TRADE_SUCCESS.getKey() || status != PaymentStatus.TRADE_FINISHED.getKey()) {
+			String resultCode = paymentResponse.get("result_code");
+			if (ResultCode.SUCCESS.getCode().equals(resultCode)) {
+				payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(resultCode));
+				payment.setMessage(ThirdPaymentStatus.getPaymentMessage(resultCode));
+			} else {
+				String errCode = paymentResponse.get("err_code");
+				if (StringUtils.isNotBlank(errCode)) {
+					// 设置错误代码对应的支付状态
+					payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(errCode));
+					String message = paymentResponse.get("err_code_des");
+					// 设置支付消息为不为空的微信支付错误代码描述 (err_code_des)，否则，设置为自定义的失败状态对应的支付信息
+					payment.setMessage(StringUtils.isNotBlank(message) ? message : 
+						ThirdPaymentStatus.getPaymentMessage(ResultCode.FAIL.getCode()));
+				} else {
+					String thirdCode = ResultCode.FAIL.getCode();
+					payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(thirdCode));
+					payment.setMessage(ThirdPaymentStatus.getPaymentMessage(thirdCode));
+				}
+			}
+			
+			status = payment.getStatus();
+			// 只有等交易成功或完成后才记录支付时间
+			if (status == PaymentStatus.TRADE_SUCCESS.getKey() || status == PaymentStatus.TRADE_FINISHED.getKey())
+				payment.setPayTime(new Date());
+			else
+				payment.setPayTime(null);
+			
+			if (payment.getId() != null)
+				result = paymentService.update(payment);
+			else
+				result = paymentService.save(payment);
+		}  else 
+			// 不重复处理"已成功"或"已完成"的支付记录
+			result.setCode(SystemStatus.FAILED.getKey());
 		
 		return result;
 	}
