@@ -67,8 +67,8 @@ public abstract class AlipayService<T, P> extends AbstractPaymentService<T, P> {
 		payment.setPayAmount(new BigDecimal(paymentResponse.get("total_fee")));
 		
 		int status = payment.getStatus();
-		/* 当前支付记录处于"未成功"或"未完成"时，才继续往下处理 */
-		if (status != PaymentStatus.TRADE_SUCCESS.getKey() || status != PaymentStatus.TRADE_FINISHED.getKey()) {
+		/* 当前支付记录处于"未成功"以及"未完成"时，才继续往下处理 */
+		if (status != PaymentStatus.TRADE_SUCCESS.getKey() && status != PaymentStatus.TRADE_FINISHED.getKey()) {
 			String thirdCode = paymentResponse.get("trade_status");
 			int returnStatus = ThirdPaymentStatus.getPaymentStatusCode(thirdCode);
 			

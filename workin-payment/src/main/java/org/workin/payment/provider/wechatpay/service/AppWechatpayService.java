@@ -119,7 +119,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		
 		if (ReturnCode.SUCCESS.getCode().equalsIgnoreCase(returnCode)) 
 			// 交易成功时更新支付记录
-			updatePayment(response);
+			result = updatePayment(response);
 		else {
 			/* 交易未成功时，则直接返回处理结果，不对支付记录做任何更新操作 */
 			result.setCode(SystemStatus.FAILED.getKey());
@@ -240,8 +240,8 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		payment.setPayAmount(CurrencyUtils.fenToYuan(paymentResponse.get("total_fee")));
 		
 		int status = payment.getStatus();
-		/* 当前支付记录处于"未成功"或"未完成"时，才继续往下处理 */
-		if (status != PaymentStatus.TRADE_SUCCESS.getKey() || status != PaymentStatus.TRADE_FINISHED.getKey()) {
+		/* 当前支付记录处于"未成功"以及"未完成"时，才继续往下处理 */
+		if (status != PaymentStatus.TRADE_SUCCESS.getKey() && status != PaymentStatus.TRADE_FINISHED.getKey()) {
 			String resultCode = paymentResponse.get("result_code");
 			if (ResultCode.SUCCESS.getCode().equals(resultCode)) {
 				payment.setStatus(ThirdPaymentStatus.getPaymentStatusCode(resultCode));
