@@ -506,8 +506,8 @@ public class DateUtils {
 	/**
 	 * @description 将单位时间换算成毫秒
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param time
-	 * @param um
+	 * @param time 时间
+	 * @param um 时间的单位
 	 * @return
 	 */
 	public static long getMillis(long time, String um) {
@@ -517,8 +517,8 @@ public class DateUtils {
 	/**
 	 * @description 将单位时间换算成秒
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param time
-	 * @param um
+	 * @param time 时间
+	 * @param um 时间的单位
 	 * @return
 	 */
 	public static long getSecond(long time, String um) {

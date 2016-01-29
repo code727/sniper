@@ -27,7 +27,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.util.ClassUtils;
 import org.workin.persistence.hibernate.dao.HibernatePersistenceDao;
-import org.workin.persistence.jpa.service.AbstractJpaPersistenceService;
 import org.workin.persistence.sqlmap.dao.SqlMapQuery;
 
 /**
@@ -38,7 +37,7 @@ import org.workin.persistence.sqlmap.dao.SqlMapQuery;
 public abstract class AbstractHibernatePersistenceService<T, PK extends Serializable>
 		implements HibernatePersistenceService<T, PK>, InitializingBean {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AbstractJpaPersistenceService.class);
+	private static final Logger logger = LoggerFactory.getLogger(AbstractHibernatePersistenceService.class);
 	
 	@Autowired
 	protected HibernatePersistenceDao<T, PK> hibernatePersistenceDao;

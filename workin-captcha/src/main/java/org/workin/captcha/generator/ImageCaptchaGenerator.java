@@ -18,6 +18,8 @@
 
 package org.workin.captcha.generator;
 
+import org.workin.captcha.ImageCaptcha;
+
 /**
  * @description 图片验证码生成器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -113,7 +115,11 @@ public interface ImageCaptchaGenerator extends CaptchaGenerator {
 	 */
 	public void setFontNames(String fontNames);
 	
+	/**
+	 * @description 创建图片验证码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public ImageCaptcha create();
 	
-	
-
 }

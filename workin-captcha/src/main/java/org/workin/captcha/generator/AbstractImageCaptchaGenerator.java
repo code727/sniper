@@ -18,6 +18,7 @@
 
 package org.workin.captcha.generator;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.StringUtils;
 
@@ -27,7 +28,7 @@ import org.workin.commons.util.StringUtils;
  * @version 1.0
  */
 public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
-		implements ImageCaptchaGenerator {
+		implements ImageCaptchaGenerator, InitializingBean {
 	
 	/** 高度 */
 	private int width = MIN_WIDTH;
@@ -45,13 +46,19 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	private String fontNames = DEFAULT_FONTNAMES;
 	
 	@Override
+	public void afterPropertiesSet() throws Exception {
+		this.formatWidth();
+		this.formatHeight();
+		this.formatFontSize();
+	}
+	
+	@Override
 	public int getWidth() {
 		return this.width;
 	}
 
 	@Override
 	public void setWidth(int width) {
-		AssertUtils.assertTrue(width >= MIN_WIDTH, "Captcha image width [" + width + "] must greater than equals " + MIN_WIDTH);
 		this.width = width;
 	}
 
@@ -62,7 +69,8 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 
 	@Override
 	public void setHeight(int height) {
-		AssertUtils.assertTrue(height >= MIN_HEIGHT, "Captcha image height [" + height + "] must greater than equals " + MIN_HEIGHT);
+		AssertUtils.assertTrue(height >= MIN_HEIGHT, "Captcha image height ["
+				+ height + "] must greater than equals " + MIN_HEIGHT);
 		this.height = height;
 	}
 
@@ -73,7 +81,8 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 
 	@Override
 	public void setFontSize(int fontSize) {
-		AssertUtils.assertTrue(fontSize >= MIN_FONTSIZE, "Captcha image font size [" + fontSize + "] must greater than equals " + MIN_FONTSIZE);
+		AssertUtils.assertTrue(fontSize >= MIN_FONTSIZE,
+				"Captcha image font size [" + fontSize + "] must greater than equals " + MIN_FONTSIZE);
 		this.fontSize = fontSize;
 	}
 
@@ -97,6 +106,38 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	public void setFontNames(String fontNames) {
 		if (StringUtils.isNotBlank(fontNames))
 			this.fontNames = fontNames;
+	}
+	
+	/**
+	 * @description 格式化图片宽度
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	protected void formatWidth() {
+		if (this.width < MIN_WIDTH)
+			this.setWidth(MIN_WIDTH);
+	}
+	
+	/**
+	 * @description 格式化图片高度
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	protected void formatHeight() {
+		
+		if (this.width < this.height)
+			// 如果长度比高度小，则设置高度只为宽度的1/3
+			this.setHeight(this.width / 3);
+			
+		if (this.height < MIN_HEIGHT)
+			this.setHeight(MIN_HEIGHT);
+	}
+	
+	/**
+	 * @description 格式化字体大小
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	protected void formatFontSize() {
+		// 字体为"最小宽/高值 - 边距"
+		this.setFontSize(Math.min(this.width, this.height) - TEXT_SPACING);
 	}
 
 }

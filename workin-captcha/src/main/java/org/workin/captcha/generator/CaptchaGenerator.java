@@ -18,45 +18,14 @@
 
 package org.workin.captcha.generator;
 
-import org.workin.captcha.repository.Repository;
+import org.workin.captcha.CaptchaManager;
 
 /**
  * @description 验证码生成器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface CaptchaGenerator {
-	
-	/** 默认的文本内容最小长度 */
-	public static final int TEXT_MIN_LENGTH = 4;
-	
-	/**
-	 * @description 设置文本库
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param repository
-	 */
-	public void setRepository(Repository repository);
-	
-	/**
-	 * @description 获取文本库
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Repository getRepository();
-	
-	/**
-	 * @description 设置生成的文本内容长度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param length
-	 */
-	public void setLength(int length);
-	
-	/**
-	 * @description 获取生成的文本内容长度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public int getLength();
+public interface CaptchaGenerator extends CaptchaManager {
 	
 	/**
 	 * @description 生成验证码
@@ -65,6 +34,4 @@ public interface CaptchaGenerator {
 	 */
 	public String generate();
 	
-//	public 
-
 }

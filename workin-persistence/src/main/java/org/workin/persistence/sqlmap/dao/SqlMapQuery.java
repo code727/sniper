@@ -30,7 +30,8 @@ import org.workin.persistence.GenericDao;
  */
 public interface SqlMapQuery<T> extends GenericDao<T> {
 	
-	public static final String DEFAULT_KEY_PROPERTY = "workin_kp";
+	/** 默认的结果映射集属性键的名称 */
+	public static final String DEFAULT_KEY_PROPERTY = "id";
 	
 	/**
 	 * @description 执行id对应的count语句后返回结果

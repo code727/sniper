@@ -70,14 +70,14 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 将单个Bean对象转换成JSON字符串
+	 * @description 将对象转换成JSON字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj
 	 * @return
 	 */
-	public static <T> String toString(T bean) {
-		AssertUtils.assertNotNull(bean, "Converted bean can not be null.");
-		return JSONObject.fromObject(bean).toString();
+	public static <T> String toString(T obj) {
+		AssertUtils.assertNotNull(obj, "Converted object can not be null.");
+		return JSONObject.fromObject(obj).toString();
 	}
 	
 	/**

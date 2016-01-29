@@ -19,7 +19,7 @@
 package org.workin.captcha.generator;
 
 import org.workin.captcha.repository.Repository;
-import org.workin.captcha.repository.domain.NumberRepository;
+import org.workin.captcha.repository.domain.MixedRepository;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.NumberUtils;
 
@@ -37,7 +37,7 @@ public class TextCaptchaGenerator implements CaptchaGenerator {
 	private int length = TEXT_MIN_LENGTH;
 	
 	public TextCaptchaGenerator() {
-		setRepository(new NumberRepository());
+		setRepository(new MixedRepository());
 	}
 
 	@Override
