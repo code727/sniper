@@ -20,6 +20,7 @@ package org.workin.captcha.generator;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.AssertUtils;
+import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
@@ -138,6 +139,21 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	protected void formatFontSize() {
 		// 字体为"最小宽/高值 - 边距"
 		this.setFontSize(Math.min(this.width, this.height) - TEXT_SPACING);
+	}
+	
+	/**
+	 * @description 选择文字颜色
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	protected String selectFontColor() {
+		String fontColors = this.getFontColors();
+		if (StringUtils.isNotBlank(fontColors)) {
+			String[] colors = fontColors.split(",");
+			// 随机选择一个文字颜色
+			return colors[NumberUtils.randomIn(colors.length)];
+		} else 
+			return DEFAULT_FONTCOLORS;
 	}
 
 }

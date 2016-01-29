@@ -18,16 +18,17 @@
 
 package org.workin.captcha.generator.google;
 
+import java.util.Map;
 import java.util.Properties;
 
 import org.workin.captcha.ImageCaptcha;
 import org.workin.captcha.generator.AbstractImageCaptchaGenerator;
+import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
 
 import com.google.code.kaptcha.Producer;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
-import com.google.code.kaptcha.util.Configurable;
 
 
 /**
@@ -37,36 +38,43 @@ import com.google.code.kaptcha.util.Configurable;
  */
 public class GoogleKaptchaGenerator extends AbstractImageCaptchaGenerator {
 	
-	private Producer producer;
+	/** 文字颜色与验证码对象关系映射集线程局部变量 */
+	private static final ThreadLocal<Map<String, Producer>> kaptchas = new ThreadLocal<Map<String,Producer>>();
 	
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
-		
-		if (this.producer == null) {
-			DefaultKaptcha kaptcha = new DefaultKaptcha();
-			this.producer = kaptcha;
-		}
-	}
-	
-	public Producer getProducer() {
-		return producer;
-	}
-
-	public void setProducer(Producer producer) {
-		this.producer = producer;
-	}
-
 	@Override
 	public ImageCaptcha create() {
-		if (this.producer instanceof Configurable) 
-			((Configurable)this.producer).setConfig(new Config(buildConfig()));
-		
-		ImageCaptcha captcha = new ImageCaptcha();
 		String text = super.generate();
+		ImageCaptcha captcha = new ImageCaptcha();
 		captcha.setText(text);
-		captcha.setImage(this.producer.createImage(text));
+		captcha.setImage(this.getProducer(selectFontColor()).createImage(text));
 		return captcha;
+	}
+	
+	/**
+	 * @description 获取具有指定文字颜色的验证码对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param fontColor
+	 * @return
+	 */
+	protected Producer getProducer(String fontColor) {
+		if (StringUtils.isBlank(fontColor))
+			fontColor = DEFAULT_FONTCOLORS;
+		
+		Map<String, Producer> kaptchaMap = kaptchas.get();
+		if (kaptchaMap == null)
+			kaptchaMap = MapUtils.newConcurrentHashMap();
+		
+		Producer producer = kaptchaMap.get(fontColor);
+		if (producer == null) {
+			DefaultKaptcha kaptcha = new DefaultKaptcha();
+			kaptcha.setConfig(new Config(build()));
+			producer = kaptcha;
+			// 建立文字颜色与当前验证码对象的映射关系后存入线程局部变量
+			kaptchaMap.put(kaptcha.getConfig().getProperties().getProperty("kaptcha.textproducer.font.color"), producer);
+			kaptchas.set(kaptchaMap);
+		}
+		
+		return producer;
 	}
 	
 	/**
@@ -74,7 +82,7 @@ public class GoogleKaptchaGenerator extends AbstractImageCaptchaGenerator {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	protected Properties buildConfig() {
+	protected Properties build() {
 		Properties properties = new Properties();
 		properties.setProperty("kaptcha.border", "no");
 		properties.setProperty("kaptcha.session.key", "code");
@@ -84,16 +92,9 @@ public class GoogleKaptchaGenerator extends AbstractImageCaptchaGenerator {
 		properties.setProperty("kaptcha.textproducer.font.size", String.valueOf(super.getFontSize()));
 		properties.setProperty("kaptcha.textproducer.font.names", 
 				StringUtils.isNotBlank(super.getFontNames()) ? super.getFontNames() : DEFAULT_FONTNAMES);
-						
-		String fontColors = super.getFontColors();
-		if (StringUtils.isBlank(fontColors))
-			properties.setProperty("kaptcha.textproducer.font.color", DEFAULT_FONTCOLORS);
-		else {
-			String []colors = fontColors.split(",");
-			properties.setProperty("kaptcha.textproducer.font.color", colors[(int) (Math.random() * colors.length)]);
-		}
 		
+		properties.setProperty("kaptcha.textproducer.font.color", super.selectFontColor());
 		return properties;
 	}
-
+		
 }
