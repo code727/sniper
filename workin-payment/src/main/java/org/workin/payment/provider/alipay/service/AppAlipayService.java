@@ -94,7 +94,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 		paymentParameters.put("sign_type", signature.getType());
 		
 		ResultModel<Map<String, Object>> resultModel = new ResultModel<Map<String, Object>>();
-		resultModel.setDate(paymentParameters);
+		resultModel.setData(paymentParameters);
 		return resultModel;
 	}
 	

@@ -40,7 +40,7 @@ public class DataMessageModel<T> implements MessageModel, GenericsDataModel<T> {
 	}
 
 	@Override
-	public void setDate(T data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 

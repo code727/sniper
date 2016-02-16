@@ -36,7 +36,7 @@ public class ResultModel<T> extends CodeMessageModel implements GenericsDataMode
 	}
 
 	@Override
-	public void setDate(T data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 

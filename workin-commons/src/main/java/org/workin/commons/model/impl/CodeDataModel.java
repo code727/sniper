@@ -36,7 +36,7 @@ public class CodeDataModel<T> extends StatusCodeModel implements GenericsDataMod
 	}
 
 	@Override
-	public void setDate(T data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 

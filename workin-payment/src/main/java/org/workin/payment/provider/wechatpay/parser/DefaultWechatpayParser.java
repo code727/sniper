@@ -67,7 +67,7 @@ public class DefaultWechatpayParser implements WechatpayParser {
 					if (TradeType.JSAPI.equals(tradeType))
 						paymentRequestParameters.put(CODE_URL, document.createXPath(root.getPath() + "/" + CODE_URL).selectSingleNode(document).getText());
 							
-					resultModel.setDate(paymentRequestParameters);
+					resultModel.setData(paymentRequestParameters);
 				} else {
 					// 业务结果
 					Node errCodeNode = document.createXPath(root.getPath() + "/" + ERR_CODE).selectSingleNode(document);

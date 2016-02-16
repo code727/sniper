@@ -37,6 +37,6 @@ public interface GenericsDataModel<T> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param data
 	 */
-	public void setDate(T data);
+	public void setData(T data);
 
 }

@@ -97,7 +97,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 				
 				// 自定义的订单编号
 				paymentParameters.put("orderId", order.getOrderId());
-				resultModel.setDate(paymentParameters);
+				resultModel.setData(paymentParameters);
 			} else if (SystemStatus.FAILED.getKey().equals(code)) {
 				/* 解析失败，则直接返回第二步的状态码和消息 */
 				resultModel.setCode(code);
@@ -183,7 +183,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		try {
 			// 调用微信支付统一下单请求
 			String xmlString = paymentHttpTemplet.request("appWechatpayPlaceOrder", requestParameters);
-			resultModel.setDate(xmlString);
+			resultModel.setData(xmlString);
 		} catch (Exception e) {
 			resultModel.setCode(SystemStatus.FAILED.getKey());
 			resultModel.setMessage("msg.error.call.wechatpay.placeorder.exception");

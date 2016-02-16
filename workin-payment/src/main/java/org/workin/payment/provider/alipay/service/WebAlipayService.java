@@ -153,7 +153,7 @@ public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<Strin
 		request.setOrderId(order.getOrderId());
 		
 		ResultModel<WebPaymentRequest> resultModel = new ResultModel<WebPaymentRequest>();
-		resultModel.setDate(request);
+		resultModel.setData(request);
 		return resultModel;
 	}
 

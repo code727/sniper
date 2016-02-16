@@ -44,7 +44,7 @@ public class AdaptiveMessageFormatterTest extends BaseTestCase {
 	@Before
 	public void initDate() {
 		model.setCode("0001");
-		model.setDate("workin test_001");
+		model.setData("workin test_001");
 		
 		map.put("code", "0001");
 		map.put("data", "workin test_001");

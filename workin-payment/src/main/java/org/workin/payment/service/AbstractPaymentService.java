@@ -181,7 +181,7 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 						// 支付请求对象模型创建成功后，返回状态码和数据
 						CodeDataModel<T> result = new CodeDataModel<T>();
 						result.setCode(resultModel.getCode());
-						result.setDate(resultModel.getData());
+						result.setData(resultModel.getData());
 						return result;
 					} else {
 						// 支付请求对象模型创建未成功时，返回创建结果状态码和消息
