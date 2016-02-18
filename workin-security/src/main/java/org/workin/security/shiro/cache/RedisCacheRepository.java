@@ -91,26 +91,26 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 
 	@Override
 	public V get(K key) throws CacheException {
-		return redisCommandsDao.get(dbIndex, key);
+		return redisCommandsDao.get(dbIndex, getPrefix() + key);
 	}
 
 	@Override
 	public V put(K key, V value) throws CacheException {
 		V v = get(key);
-		redisCommandsDao.set(dbIndex, prefixKey(key), value);
+		redisCommandsDao.set(dbIndex, getPrefix() + key, value);
 		return v;
 	}
 
 	@Override
 	public V remove(K key) throws CacheException {
 		V v = get(key);
-		redisCommandsDao.del(dbIndex, key);
+		redisCommandsDao.del(dbIndex, getPrefix() + key);
 		return v;
 	}
 
 	@Override
 	public void clear() throws CacheException {
-		Set<Object> keys = redisCommandsDao.keys(dbIndex, prefixKey(null) + "*");
+		Set<Object> keys = redisCommandsDao.keys(dbIndex, getPrefix() + "*");
 		redisCommandsDao.del(dbIndex, keys);
 	}
 
@@ -121,12 +121,12 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 
 	@Override
 	public Set<K> keys() {
-		return redisCommandsDao.keys(dbIndex, prefixKey(null) + "*");
+		return redisCommandsDao.keys(dbIndex, getPrefix() + "*");
 	}
 
 	@Override
 	public Collection<V> values() {
-		return redisCommandsDao.values(dbIndex, prefixKey(null) + "*");
+		return redisCommandsDao.values(dbIndex, getPrefix() + "*");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -140,17 +140,5 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 	public void destroy() throws Exception {
 //		redisCommandsDao.shutdown();
 	}
-	
-	/**
-	 * @description 根据自定义的键返回带前缀标识的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @return
-	 */
-	protected String prefixKey(K key) {
-		return new StringBuffer(prefix).append(":")
-				.append(key != null ? key : "").toString();
-	}
-
 	
 }

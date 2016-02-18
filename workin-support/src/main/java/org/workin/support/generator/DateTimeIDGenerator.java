@@ -54,13 +54,8 @@ public class DateTimeIDGenerator extends MinLengthIDGeneratorAdapter {
 
 	@Override
 	protected String generateBody() {
-		if (isAttachNanoTime()) {
-			long nanoTime = System.nanoTime(); 
-			String body = DateUtils.dateToString(new Date(), this.format);
-			// 附带上纳秒级的时间间隔
-			return body + (System.nanoTime() - nanoTime);
-		}
-		return DateUtils.dateToString(new Date(), this.format);
+		String body = DateUtils.dateToString(new Date(), this.format);
+		return isAttachNanoTime() ? body + System.nanoTime() : body;
 	}
 	
 }

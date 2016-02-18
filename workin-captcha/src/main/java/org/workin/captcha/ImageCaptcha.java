@@ -18,7 +18,7 @@
 
 package org.workin.captcha;
 
-import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 
 /**
  * @description 图片验证码对象
@@ -31,7 +31,7 @@ public class ImageCaptcha {
 	private String text;
 
 	/** 验证码图片对象 */
-	private BufferedImage image;
+	private RenderedImage image;
 
 	public String getText() {
 		return text;
@@ -41,11 +41,11 @@ public class ImageCaptcha {
 		this.text = text;
 	}
 
-	public BufferedImage getImage() {
+	public RenderedImage getImage() {
 		return image;
 	}
 
-	public void setImage(BufferedImage image) {
+	public void setImage(RenderedImage image) {
 		this.image = image;
 	}
 
