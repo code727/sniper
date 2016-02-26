@@ -24,6 +24,7 @@ import java.util.Properties;
 import org.workin.captcha.ImageCaptcha;
 import org.workin.captcha.generator.AbstractImageCaptchaGenerator;
 import org.workin.commons.util.MapUtils;
+import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
 
 import com.google.code.kaptcha.Producer;
@@ -38,16 +39,43 @@ import com.google.code.kaptcha.util.Config;
  */
 public class GoogleKaptchaGenerator extends AbstractImageCaptchaGenerator {
 	
+	/** 默认文字颜色集 */
+	public static final String DEFAULT_FONTCOLORS = "red";
+	
+	/** 默认字体集 */
+	public static final String DEFAULT_FONTNAMES = "宋体,楷体,微软雅黑";
+	
+	/** 字体颜色 */
+	private String fontColors = DEFAULT_FONTCOLORS;
+	
+	/** 字体名称 */
+	private String fontNames = DEFAULT_FONTNAMES;
+	
 	/** 文字颜色与验证码对象关系映射集线程局部变量 */
 	private static final ThreadLocal<Map<String, Producer>> kaptchas = new ThreadLocal<Map<String,Producer>>();
+	
+	public String getFontColors() {
+		return this.fontColors;
+	}
+
+	public void setFontColors(String fontColors) {
+		if (StringUtils.isNotBlank(fontColors))
+			this.fontColors = fontColors;
+	}
+
+	public String getFontNames() {
+		return this.fontNames;
+	}
+
+	public void setFontNames(String fontNames) {
+		if (StringUtils.isNotBlank(fontNames))
+			this.fontNames = fontNames;
+	}
 	
 	@Override
 	public ImageCaptcha create() {
 		String text = super.generate();
-		ImageCaptcha captcha = new ImageCaptcha();
-		captcha.setText(text);
-		captcha.setImage(this.getProducer(selectFontColor()).createImage(text));
-		return captcha;
+		return new ImageCaptcha(text, this.getProducer(selectFontColor()).createImage(text));
 	}
 	
 	/**
@@ -84,17 +112,32 @@ public class GoogleKaptchaGenerator extends AbstractImageCaptchaGenerator {
 	 */
 	protected Properties build() {
 		Properties properties = new Properties();
-		properties.setProperty("kaptcha.border", "no");
+		properties.setProperty("kaptcha.border", hasBorder() ? "yes" : "no");
 		properties.setProperty("kaptcha.session.key", "code");
 		properties.setProperty("kaptcha.textproducer.char.length", String.valueOf(super.getLength()));
 		properties.setProperty("kaptcha.image.width", String.valueOf(super.getWidth()));
 		properties.setProperty("kaptcha.image.height", String.valueOf(super.getHeight()));
-		properties.setProperty("kaptcha.textproducer.font.size", String.valueOf(super.getFontSize()));
+		properties.setProperty("kaptcha.textproducer.font.size", String.valueOf(super.getTextFontSize()));
 		properties.setProperty("kaptcha.textproducer.font.names", 
-				StringUtils.isNotBlank(super.getFontNames()) ? super.getFontNames() : DEFAULT_FONTNAMES);
+				StringUtils.isNotBlank(getFontNames()) ? getFontNames() : DEFAULT_FONTNAMES);
 		
-		properties.setProperty("kaptcha.textproducer.font.color", super.selectFontColor());
+		properties.setProperty("kaptcha.textproducer.font.color", selectFontColor());
 		return properties;
+	}
+	
+	/**
+	 * @description 选择文字颜色
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	protected String selectFontColor() {
+		String fontColors = this.getFontColors();
+		if (StringUtils.isNotBlank(fontColors)) {
+			String[] colors = fontColors.split(",");
+			// 随机选择一个文字颜色
+			return colors[NumberUtils.randomIn(colors.length)];
+		} else 
+			return DEFAULT_FONTCOLORS;
 	}
 		
 }

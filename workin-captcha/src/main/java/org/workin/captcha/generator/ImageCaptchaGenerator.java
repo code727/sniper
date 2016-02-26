@@ -28,22 +28,16 @@ import org.workin.captcha.ImageCaptcha;
 public interface ImageCaptchaGenerator extends CaptchaGenerator {
 	
 	/** 最小图片宽度 */
-	public static final int MIN_WIDTH = 150;
+	public static final int MIN_WIDTH = 72;
 	
 	/** 最小图片高度 */
-	public static final int MIN_HEIGHT = 50;
+	public static final int MIN_HEIGHT = 26;
 	
 	/** 最小字体大小 */
-	public static final int MIN_FONTSIZE = 40;
+	public static final int MIN_FONTSIZE = 1;
 	
-	/** 文字与图片边缘的间距 */
-	public static final int TEXT_SPACING = 10;
-	
-	/** 默认文字颜色集 */
-	public static final String DEFAULT_FONTCOLORS = "red";
-	
-	/** 默认字体集 */
-	public static final String DEFAULT_FONTNAMES = "宋体,楷体,微软雅黑";
+	/** 文字与图片边缘的最小间距 */
+	public static final int MIN_TEXT_SPACING = 3;
 	
 	/**
 	 * @description 获取宽度
@@ -74,46 +68,46 @@ public interface ImageCaptchaGenerator extends CaptchaGenerator {
 	public void setHeight(int height);
 
 	/**
-	 * @description 获取文字大小
+	 * @description 获取验证码文字大小
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public int getFontSize();
+	public int getTextFontSize();
 
 	/**
-	 * @description 设置文字大小
+	 * @description 设置验证码文字大小
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param fontSize
+	 * @param textFontSize
 	 */
-	public void setFontSize(int fontSize);
-
+	public void setTextFontSize(int textFontSize);
+	
 	/**
-	 * @description 获取字体颜色
+	 * @description 设置验证码文本与图片的边距
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param textSpacing
+	 */
+	public void setTextSpacing(int textSpacing);
+	
+	/**
+	 * @description 设置文字与图片的边距
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @returnWW
+	 */
+	public int getTextSpacing();
+	
+	/**
+	 * @description 设置是否需要边框样式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param border
+	 */
+	public void setBorder(boolean border);
+	
+	/**
+	 * @description 判断是否有边框样式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public String getFontColors();
-
-	/**
-	 * @description 设置字体颜色
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param fontColors
-	 */
-	public void setFontColors(String fontColors);
-
-	/**
-	 * @description 获取字体颜色
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getFontNames();
-
-	/**
-	 * @description 设置字体颜色
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param fontNames
-	 */
-	public void setFontNames(String fontNames);
+	public boolean hasBorder();
 	
 	/**
 	 * @description 创建图片验证码

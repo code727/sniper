@@ -20,8 +20,6 @@ package org.workin.captcha.generator;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.NumberUtils;
-import org.workin.commons.util.StringUtils;
 
 /**
  * @description 图片验证码生成器抽象类
@@ -32,27 +30,45 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 		implements ImageCaptchaGenerator, InitializingBean {
 	
 	/** 高度 */
-	private int width = MIN_WIDTH;
+	private int width;
 	
 	/** 宽度 */
-	private int height = MIN_HEIGHT;
+	private int height;
 	
-	/** 最小字体大小 */
-	private int fontSize = MIN_FONTSIZE;
+	/** 字体大小 */
+	private int textFontSize;
 	
-	/** 字体颜色 */
-	private String fontColors = DEFAULT_FONTCOLORS;
+	/** 字与图片边缘的间距  */
+	private int textSpacing;
 	
-	/** 字体名称 */
-	private String fontNames = DEFAULT_FONTNAMES;
+	/** 是否需要边框 */
+	private boolean border = true;
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		this.formatWidth();
 		this.formatHeight();
-		this.formatFontSize();
+		this.formatTextFontSize();
 	}
 	
+	/**
+	 * @description 初始化
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	protected void initialization() {
+		if (getWidth() <= 0)
+			setWidth(MIN_WIDTH);
+		
+		if (getHeight() <= 0)
+			setHeight(MIN_HEIGHT);
+		
+		if (getTextFontSize() <= 0)
+			setTextFontSize(MIN_FONTSIZE);
+		
+		if (getTextSpacing() <= 0)
+			setTextSpacing(MIN_TEXT_SPACING);
+	}
+
 	@Override
 	public int getWidth() {
 		return this.width;
@@ -60,6 +76,9 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 
 	@Override
 	public void setWidth(int width) {
+		AssertUtils.assertTrue(width >= MIN_WIDTH, "Captcha image width ["
+				+ width + "] must greater than equals " + MIN_WIDTH);
+		
 		this.width = width;
 	}
 
@@ -72,41 +91,44 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	public void setHeight(int height) {
 		AssertUtils.assertTrue(height >= MIN_HEIGHT, "Captcha image height ["
 				+ height + "] must greater than equals " + MIN_HEIGHT);
+		
 		this.height = height;
 	}
 
 	@Override
-	public int getFontSize() {
-		return this.fontSize;
+	public int getTextFontSize() {
+		return this.textFontSize;
 	}
 
 	@Override
-	public void setFontSize(int fontSize) {
-		AssertUtils.assertTrue(fontSize >= MIN_FONTSIZE,
-				"Captcha image font size [" + fontSize + "] must greater than equals " + MIN_FONTSIZE);
-		this.fontSize = fontSize;
+	public void setTextFontSize(int textFontSize) {
+		AssertUtils.assertTrue(textFontSize >= MIN_FONTSIZE,
+				"Captcha text font size [" + textFontSize + "] must greater than equals " + MIN_FONTSIZE);
+		
+		this.textFontSize = textFontSize;
 	}
 
 	@Override
-	public String getFontColors() {
-		return this.fontColors;
+	public void setTextSpacing(int textSpacing) {
+		AssertUtils.assertTrue(textSpacing >= MIN_TEXT_SPACING,
+				"Captcha text spacing [" + textSpacing + "] must greater than equals " + MIN_TEXT_SPACING);
+		
+		this.textSpacing = textSpacing;
 	}
 
 	@Override
-	public void setFontColors(String fontColors) {
-		if (StringUtils.isNotBlank(fontColors))
-			this.fontColors = fontColors;
+	public int getTextSpacing() {
+		return this.textSpacing;
 	}
-
+	
 	@Override
-	public String getFontNames() {
-		return this.fontNames;
+	public void setBorder(boolean border) {
+		this.border = border;
 	}
-
+	
 	@Override
-	public void setFontNames(String fontNames) {
-		if (StringUtils.isNotBlank(fontNames))
-			this.fontNames = fontNames;
+	public boolean hasBorder() {
+		return this.border;
 	}
 	
 	/**
@@ -133,27 +155,12 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	}
 	
 	/**
-	 * @description 格式化字体大小
+	 * @description 格式化验证码字体大小
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	protected void formatFontSize() {
+	protected void formatTextFontSize() {
 		// 字体为"最小宽/高值 - 边距"
-		this.setFontSize(Math.min(this.width, this.height) - TEXT_SPACING);
+		this.setTextFontSize(Math.min(this.width, this.height) - this.getTextSpacing());
 	}
 	
-	/**
-	 * @description 选择文字颜色
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	protected String selectFontColor() {
-		String fontColors = this.getFontColors();
-		if (StringUtils.isNotBlank(fontColors)) {
-			String[] colors = fontColors.split(",");
-			// 随机选择一个文字颜色
-			return colors[NumberUtils.randomIn(colors.length)];
-		} else 
-			return DEFAULT_FONTCOLORS;
-	}
-
 }

@@ -32,6 +32,13 @@ public class ImageCaptcha {
 
 	/** 验证码图片对象 */
 	private RenderedImage image;
+	
+	public ImageCaptcha() {}
+		
+	public ImageCaptcha(String text, RenderedImage image) {
+		this.text = text;
+		this.image = image;
+	}
 
 	public String getText() {
 		return text;
