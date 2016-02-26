@@ -51,24 +51,6 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 		this.formatTextFontSize();
 	}
 	
-	/**
-	 * @description 初始化
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	protected void initialization() {
-		if (getWidth() <= 0)
-			setWidth(MIN_WIDTH);
-		
-		if (getHeight() <= 0)
-			setHeight(MIN_HEIGHT);
-		
-		if (getTextFontSize() <= 0)
-			setTextFontSize(MIN_FONTSIZE);
-		
-		if (getTextSpacing() <= 0)
-			setTextSpacing(MIN_TEXT_SPACING);
-	}
-
 	@Override
 	public int getWidth() {
 		return this.width;

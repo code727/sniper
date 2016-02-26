@@ -28,10 +28,10 @@ import org.workin.captcha.ImageCaptcha;
 public interface ImageCaptchaGenerator extends CaptchaGenerator {
 	
 	/** 最小图片宽度 */
-	public static final int MIN_WIDTH = 72;
+	public static final int MIN_WIDTH = 74;
 	
 	/** 最小图片高度 */
-	public static final int MIN_HEIGHT = 26;
+	public static final int MIN_HEIGHT = 21;
 	
 	/** 最小字体大小 */
 	public static final int MIN_FONTSIZE = 1;
