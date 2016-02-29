@@ -97,10 +97,12 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 	 */
 	private void drawText(Graphics graphics, String text) {
 		int codeY = getHeight() - 5;
-		graphics.setColor(getTextColor());
 		graphics.setFont(new Font(getTextFontName(), getTextFontStyle(), getTextFontSize()));
-		for (int i = 0; i < text.length(); i++) 
+		for (int i = 0; i < text.length(); i++) {
+			/* 绘制字符以及对应的颜色 */
 			graphics.drawString(String.valueOf(text.charAt(i)), i * 16 + 5, codeY);
+			graphics.setColor(selectTextColor());
+		}
 	}
 
 }

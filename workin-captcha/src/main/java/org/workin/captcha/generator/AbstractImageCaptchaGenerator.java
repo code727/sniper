@@ -42,7 +42,11 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	private int textSpacing;
 	
 	/** 是否需要边框 */
-	private boolean border = true;
+	private boolean border;
+	
+	public AbstractImageCaptchaGenerator() {
+		this.setBorder(true);
+	}
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -118,7 +122,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	protected void formatWidth() {
-		if (this.width < MIN_WIDTH)
+		if (this.getWidth() < MIN_WIDTH)
 			this.setWidth(MIN_WIDTH);
 	}
 	
@@ -127,12 +131,14 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	protected void formatHeight() {
+		int width = this.getWidth();
+		int height = this.getHeight();
 		
-		if (this.width < this.height)
+		if (width < height)
 			// 如果长度比高度小，则设置高度只为宽度的1/3
-			this.setHeight(this.width / 3);
+			this.setHeight(width / 3);
 			
-		if (this.height < MIN_HEIGHT)
+		if (height < MIN_HEIGHT)
 			this.setHeight(MIN_HEIGHT);
 	}
 	
@@ -142,7 +148,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	 */
 	protected void formatTextFontSize() {
 		// 字体为"最小宽/高值 - 边距"
-		this.setTextFontSize(Math.min(this.width, this.height) - this.getTextSpacing());
+		this.setTextFontSize(Math.min(this.getWidth(), this.getHeight()) - this.getTextSpacing());
 	}
 	
 }
