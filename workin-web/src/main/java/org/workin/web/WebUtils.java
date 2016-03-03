@@ -98,6 +98,31 @@ public class WebUtils {
 	}
 	
 	/**
+	 * @description 设置HttpServletRequest对象相关Session的属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param request
+	 * @param name
+	 * @param value
+	 */
+	public static void setSessionAttribute(HttpServletRequest request, String name, Object value) {
+		setSessionAttribute(request, name, value, false);
+	}
+	
+	/**
+	 * @description 设置HttpServletRequest对象相关Session的属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param request
+	 * @param name
+	 * @param value
+	 * @param create
+	 */
+	public static void setSessionAttribute(HttpServletRequest request, String name, Object value, boolean create) {
+		HttpSession session = getSession(request, create);
+		if (session != null)
+			setAttribute(session, name, value);
+	}
+	
+	/**
 	 * @description 设置当前会话在多少秒无操作后处于失效状态
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
@@ -199,6 +224,33 @@ public class WebUtils {
 	}
 	
 	/**
+	 * @description 获取HttpServletRequest对象相关Session的属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param request
+	 * @param name
+	 * @return
+	 */
+	public static <T> T getSessionAttribute(HttpServletRequest request, String name) {
+		return getSessionAttribute(request, name, null);
+	}
+	
+	/**
+	 * @description 获取HttpServletRequest对象相关Session的属性值，当Session或属性值为空时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param request
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public static <T> T getSessionAttribute(HttpServletRequest request, String name, T defaultValue) {
+		HttpSession session = getSession(request);
+		if (session == null)
+			return defaultValue;
+		
+		return getAttribute(session, name, defaultValue);
+	}
+	
+	/**
 	 * @description 获取HttpSession对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
@@ -220,7 +272,28 @@ public class WebUtils {
 	}
 	
 	/**
-	 * @description 删除ServletRequest对象里的指定属性
+	 * @description 获取会话ID
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param request
+	 * @return
+	 */
+	public static String getSessionId(HttpServletRequest request) {
+		return getSessionId(request, false);
+	}
+	
+	/**
+	 * @description 获取会话ID，当Session为空时选择是否自动创建一个新对象后再返回值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param request
+	 * @param create
+	 * @return
+	 */
+	public static String getSessionId(HttpServletRequest request, boolean create) {
+		return getSession(request, create).getId();
+	}
+	
+	/**
+	 * @description 删除ServletRequest对象里的属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param name
@@ -237,6 +310,18 @@ public class WebUtils {
 	 */
 	public static void removeAttribute(HttpSession session, String name) {
 		session.removeAttribute(name);
+	}
+	
+	/**
+	 * @description 删除HttpServletRequest对象相关Session的属性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param request
+	 * @param name
+	 */
+	public static void removeSessionAttribute(HttpServletRequest request, String name) {
+		HttpSession session = getSession(request);
+		if (session != null)
+			session.removeAttribute(name);
 	}
 	
 	/**
