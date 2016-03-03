@@ -38,5 +38,11 @@
 			<artifactId>workin-commons</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-nosql</artifactId>
+			<version>1.0.0</version>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 </project>
