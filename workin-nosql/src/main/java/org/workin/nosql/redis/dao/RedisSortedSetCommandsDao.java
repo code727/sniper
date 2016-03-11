@@ -320,7 +320,7 @@ public interface RedisSortedSetCommandsDao {
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Boolean zRem(K key, V member);
+	public <K, V> Long zRem(K key, V member);
 	
 	/**
 	 * @description 在指定索引库中执行zRem命令，删除指定键集中的成员
@@ -330,7 +330,7 @@ public interface RedisSortedSetCommandsDao {
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Boolean zRem(int dbIndex, K key, V member);
+	public <K, V> Long zRem(int dbIndex, K key, V member);
 	
 	/**
 	 * @description 在当前库中执行zRem命令，删除指定键集中的多个成员
@@ -339,7 +339,7 @@ public interface RedisSortedSetCommandsDao {
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Boolean zRem(K key, V[] members);
+	public <K, V> Long zRem(K key, V[] members);
 	
 	/**
 	 * @description 在指定索引库中执行zRem命令，删除指定键集中的多个成员
@@ -349,7 +349,7 @@ public interface RedisSortedSetCommandsDao {
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Boolean zRem(int dbIndex, K key, V[] members);
+	public <K, V> Long zRem(int dbIndex, K key, V[] members);
 	
 	/**
 	 * @description 在当前库中执行zRem命令，删除指定键集中的多个成员
@@ -358,7 +358,7 @@ public interface RedisSortedSetCommandsDao {
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Boolean zRem(K key, Collection<V> members);
+	public <K, V> Long zRem(K key, Collection<V> members);
 	
 	/**
 	 * @description 在指定索引库中执行zRem命令，删除指定键集中的多个成员
@@ -368,7 +368,7 @@ public interface RedisSortedSetCommandsDao {
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Boolean zRem(int dbIndex, K key, Collection<V> members);
+	public <K, V> Long zRem(int dbIndex, K key, Collection<V> members);
 	
 	/**
 	 * @description 在当前库中执行zRemRangeByRank命令，删除指定下标索引范围内的所有成员

@@ -35,7 +35,7 @@ public interface RedisSetCommandsDao {
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(K key, V member);
+	public <K, V> Long sAdd(K key, V member);
 	
 	/**
 	 * @description 在当前库中执行sAdd命令，并设置过期秒数
@@ -45,7 +45,7 @@ public interface RedisSetCommandsDao {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(K key, V member, long expireSeconds);
+	public <K, V> Long sAdd(K key, V member, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sAdd命令
@@ -55,7 +55,7 @@ public interface RedisSetCommandsDao {
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(int dbIndex, K key, V member);
+	public <K, V> Long sAdd(int dbIndex, K key, V member);
 	
 	/**
 	 * @description 在指定索引库中执行sAdd命令，并设置过期秒数
@@ -66,7 +66,7 @@ public interface RedisSetCommandsDao {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(int dbIndex, K key, V member, long expireSeconds);
+	public <K, V> Long sAdd(int dbIndex, K key, V member, long expireSeconds);
 	
 	/**
 	 * @description 在当前库中执行sAdd命令
@@ -75,7 +75,7 @@ public interface RedisSetCommandsDao {
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(K key, V[] members);
+	public <K, V> Long sAdd(K key, V[] members);
 	
 	/**
 	 * @description 在当前库中执行sAdd命令，并设置过期秒数
@@ -85,7 +85,7 @@ public interface RedisSetCommandsDao {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(K key, V[] members, long expireSeconds);
+	public <K, V> Long sAdd(K key, V[] members, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sAdd命令
@@ -95,7 +95,7 @@ public interface RedisSetCommandsDao {
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(int dbIndex, K key, V[] members);
+	public <K, V> Long sAdd(int dbIndex, K key, V[] members);
 	
 	/**
 	 * @description 在指定索引库中执行sAdd命令，并设置过期秒数
@@ -106,7 +106,7 @@ public interface RedisSetCommandsDao {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(int dbIndex, K key, V[] members, long expireSeconds);
+	public <K, V> Long sAdd(int dbIndex, K key, V[] members, long expireSeconds);
 	
 	/**
 	 * @description 在当前库中执行sAdd命令
@@ -115,7 +115,7 @@ public interface RedisSetCommandsDao {
 	 * @param memberss
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(K key, Collection<V> members);
+	public <K, V> Long sAdd(K key, Collection<V> members);
 	
 	/**
 	 * @description 在当前库中执行sAdd命令，并设置过期秒数
@@ -125,7 +125,7 @@ public interface RedisSetCommandsDao {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(K key, Collection<V> members, long expireSeconds);
+	public <K, V> Long sAdd(K key, Collection<V> members, long expireSeconds);
 	
 	/**
 	 * @description 在指定索引库中执行sAdd命令
@@ -135,7 +135,7 @@ public interface RedisSetCommandsDao {
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(int dbIndex, K key, Collection<V> members);
+	public <K, V> Long sAdd(int dbIndex, K key, Collection<V> members);
 	
 	/**
 	 * @description 在指定索引库中执行sAdd命令，并设置过期秒数
@@ -146,7 +146,7 @@ public interface RedisSetCommandsDao {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean sAdd(int dbIndex, K key, Collection<V> members, long expireSeconds);
+	public <K, V> Long sAdd(int dbIndex, K key, Collection<V> members, long expireSeconds);
 	
 	/**
 	 * @description 在当前库中执行sCard命令，获取集合键对应的元素个数
@@ -617,7 +617,7 @@ public interface RedisSetCommandsDao {
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Boolean sRem(K key, V member);
+	public <K, V> Long sRem(K key, V member);
 	
 	/**
 	 * @description 在指定索引库中执行sRem命令，删除集合键中指定的一个成员
@@ -627,7 +627,7 @@ public interface RedisSetCommandsDao {
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Boolean sRem(int dbIndex, K key, V member);
+	public <K, V> Long sRem(int dbIndex, K key, V member);
 	
 	/**
 	 * @description 在当前库中执行sRem命令，删除集合键中指定的多个成员
@@ -636,7 +636,7 @@ public interface RedisSetCommandsDao {
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Boolean sRem(K key, V[] members);
+	public <K, V> Long sRem(K key, V[] members);
 	
 	/**
 	 * @description 在指定索引库中执行sRem命令，删除集合键中指定的多个成员
@@ -646,7 +646,7 @@ public interface RedisSetCommandsDao {
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Boolean sRem(int dbIndex, K key, V[] members);
+	public <K, V> Long sRem(int dbIndex, K key, V[] members);
 	
 	/**
 	 * @description 在当前库中执行sRem命令，删除集合键中指定的多个成员
@@ -655,7 +655,7 @@ public interface RedisSetCommandsDao {
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Boolean sRem(K key, Collection<V> members);
+	public <K, V> Long sRem(K key, Collection<V> members);
 	
 	/**
 	 * @description 在指定索引库中执行sRem命令，删除集合键中指定的多个成员
@@ -665,6 +665,6 @@ public interface RedisSetCommandsDao {
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Boolean sRem(int dbIndex, K key, Collection<V> members);
+	public <K, V> Long sRem(int dbIndex, K key, Collection<V> members);
 	
 }

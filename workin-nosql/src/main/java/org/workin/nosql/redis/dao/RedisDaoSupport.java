@@ -367,6 +367,23 @@ public abstract class RedisDaoSupport implements InitializingBean {
 	}
 	
 	/**
+	 * @description 将指定库的多个值字节序列化到Byte类型的二维数组中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param values
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <V> byte[][] serializeValuesToArray(int dbIndex, V[] values) {
+		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		List<byte[]> list = CollectionUtils.newArrayList();
+		for (V value : values)
+			list.add(valueSerializer.serialize(value));
+		
+		return CollectionUtils.toArray(list);
+	}
+	
+	/**
 	 * @description 将指定库的多个域字节序列化到Byte类型的二维数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex

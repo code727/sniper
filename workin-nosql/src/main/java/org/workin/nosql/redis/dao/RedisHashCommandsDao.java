@@ -161,7 +161,7 @@ public interface RedisHashCommandsDao {
 	 * @param filed
 	 * @return
 	 */
-	public <K, F> Boolean hDel(K key, F filed);
+	public <K, F> Long hDel(K key, F filed);
 	
 	/**
 	 * @description 删除指定库键对应的域值
@@ -171,7 +171,7 @@ public interface RedisHashCommandsDao {
 	 * @param filed
 	 * @return
 	 */
-	public <K, F> Boolean hDel(int dbIndex, K key, F filed);
+	public <K, F> Long hDel(int dbIndex, K key, F filed);
 	
 	/**
 	 * @description 删除当前库指定键对应的多个域值
@@ -180,7 +180,7 @@ public interface RedisHashCommandsDao {
 	 * @param fileds
 	 * @return
 	 */
-	public <K, F> Boolean hDel(K key, F[] fileds);
+	public <K, F> Long hDel(K key, F[] fileds);
 	
 	/**
 	 * @description 删除指定库键对应的多个域值
@@ -190,7 +190,7 @@ public interface RedisHashCommandsDao {
 	 * @param fileds
 	 * @return
 	 */
-	public <K, F> Boolean hDel(int dbIndex, K key, F[] fileds);
+	public <K, F> Long hDel(int dbIndex, K key, F[] fileds);
 	
 	/**
 	 * @description 删除当前库指定键对应的多个域值
@@ -199,7 +199,7 @@ public interface RedisHashCommandsDao {
 	 * @param fileds
 	 * @return
 	 */
-	public <K, F> Boolean hDel(K key, Collection<F> fileds);
+	public <K, F> Long hDel(K key, Collection<F> fileds);
 	
 	/**
 	 * @description 删除指定库键对应的多个域值
@@ -209,7 +209,7 @@ public interface RedisHashCommandsDao {
 	 * @param fileds
 	 * @return
 	 */
-	public <K, F> Boolean hDel(int dbIndex, K key, Collection<F> fileds);
+	public <K, F> Long hDel(int dbIndex, K key, Collection<F> fileds);
 	
 	/**
 	 * @description 判断当前库指定键对应域是否存在

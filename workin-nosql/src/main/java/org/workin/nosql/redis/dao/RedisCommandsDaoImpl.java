@@ -85,6 +85,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				Set<K> keys = new HashSet<K>();
 				for (byte[] key : keyBytes)
 					keys.add(keySerializer.deserialize(key));
+				
 				return keys;
 			}
 		});
@@ -272,6 +273,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				List<V> values = CollectionUtils.newArrayList();
 				for (byte[] bytes : byteList)
 					values.add(valueSerializer.deserialize(bytes));
+				
 				return values;
 			}
 		});
@@ -381,6 +383,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				Set<V> set = CollectionUtils.newHashSet();
 				for (byte[] key : keySet)
 					set.add(valueSerializer.deserialize(connection.get(key)));
+				
 				return set;
 			}
 		});
@@ -972,52 +975,48 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	}
 
 	@Override
-	public <K, F> Boolean hDel(K key, F filed) {
+	public <K, F> Long hDel(K key, F filed) {
 		return hDel(super.getDefaultDbIndex(), key, filed);
 	}
 
 	@Override
-	public <K, F> Boolean hDel(int dbIndex, K key, F filed) {
+	public <K, F> Long hDel(int dbIndex, K key, F filed) {
 		if (key == null || filed == null)
-			return false;
+			return 0L;
 		
 		return hDel(dbIndex, key, new Object[] { filed });
 	}
 
 	@Override
-	public <K, F> Boolean hDel(K key, F[] fileds) {
+	public <K, F> Long hDel(K key, F[] fileds) {
 		return null;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, F> Boolean hDel(final int dbIndex, final K key, final F[] fileds) {
+	public <K, F> Long hDel(final int dbIndex, final K key, final F[] fileds) {
 		if (key == null || ArrayUtils.isEmpty(fileds))
-			return false;
+			return 0L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<F> hashKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
-			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbIndex);
-				byte[] keyByte = keySerializer.serialize(key);
-				boolean result = true;
-				for (F filed : fileds) 
-					result = result && connection.hDel(keyByte, hashKeySerializer.serialize(filed));
-				return result;
+				return NumberUtils.safeLong(connection.hDel(keySerializer.serialize(key), 
+						serializeFiledsToArray(dbIndex, fileds)));
 			}
 		});
 	}
 
 	@Override
-	public <K, F> Boolean hDel(K key, Collection<F> fileds) {
+	public <K, F> Long hDel(K key, Collection<F> fileds) {
 		return hDel(super.getDefaultDbIndex(), key, fileds);
 	}
 
 	@Override
-	public <K, F> Boolean hDel(int dbIndex, K key, Collection<F> fileds) {
+	public <K, F> Long hDel(int dbIndex, K key, Collection<F> fileds) {
 		return hDel(dbIndex, key, CollectionUtils.toObjectArray(fileds));
 	}
 
@@ -1226,11 +1225,13 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbIndex);
-				Long result = connection.lInsert(keyByte, where,
-						valueSerializer.serialize(pivot), valueSerializer.serialize(value));
-				// 重新设置键的过期时间
-				setExpireTime(connection, repository, keyByte, expireSeconds);
-				return result;
+				
+				long count = NumberUtils.safeLong(connection.lInsert(keyByte, 
+						where, valueSerializer.serialize(pivot), valueSerializer.serialize(value)));
+				if (count > 0)
+					setExpireTime(connection, repository, keyByte, expireSeconds);
+				
+				return count;
 			}
 		});
 	}
@@ -1315,20 +1316,18 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(values), "Values can not be empty of command [lPush].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbIndex);
+				byte[] keyByte = keySerializer.serialize(key);
 				
-				long result = 0;
-				for (V value : values) 
-					result = result + NumberUtils.safeLong(connection.lPush(keyByte, valueSerializer.serialize(value)));
+				long count = NumberUtils.safeLong(connection.lPush(keyByte, serializeValuesToArray(dbIndex, values)));
+				if (count > 0)
+					setExpireTime(connection, repository, keyByte, expireSeconds);
 				
-				setExpireTime(connection, repository, keyByte, expireSeconds);
-				return result;
+				return count;
 			}
 		});
 	}
@@ -1382,9 +1381,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbIndex);
-				Long result = connection.lPushX(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte, expireSeconds);
-				return result;
+				
+				long count = NumberUtils.safeLong(connection.lPushX(keyByte, valueSerializer.serialize(value)));
+				if (count > 0)
+					setExpireTime(connection, repository, keyByte, expireSeconds);
+				
+				return count;
 			}
 		});
 	}
@@ -1594,7 +1596,6 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(values), "Values can not be empty of command [rPush].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -1602,12 +1603,11 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbIndex);
 				
-				long result = 0;
-				for (V value : values) 
-					result = result + NumberUtils.safeLong(connection.rPush(keyByte, valueSerializer.serialize(value)));
+				long count = NumberUtils.safeLong(connection.rPush(keyByte, serializeValuesToArray(dbIndex, values)));
+				if (count > 0)
+					setExpireTime(connection, repository, keyByte, expireSeconds);
 				
-				setExpireTime(connection, repository, keyByte, expireSeconds);
-				return result;
+				return count;
 			}
 		});
 	}
@@ -1661,9 +1661,12 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbIndex);
-				Long result = connection.rPushX(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte, expireSeconds);
-				return result;
+				
+				long count = NumberUtils.safeLong(connection.rPushX(keyByte, valueSerializer.serialize(value)));
+				if (count > 0)
+					setExpireTime(connection, repository, keyByte, expireSeconds);
+				
+				return count;
 			}
 		});
 	}
@@ -1729,22 +1732,22 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	}
 	
 	@Override
-	public <K, V> Boolean sAdd(K key, V member) {
+	public <K, V> Long sAdd(K key, V member) {
 		return sAdd(super.getDefaultDbIndex(), key, member);
 	}
 	
 	@Override
-	public <K, V> Boolean sAdd(K key, V member, long expireSeconds) {
+	public <K, V> Long sAdd(K key, V member, long expireSeconds) {
 		return sAdd(super.getDefaultDbIndex(), key, member, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Boolean sAdd(int dbIndex, K key, V member) {
+	public <K, V> Long sAdd(int dbIndex, K key, V member) {
 		return sAdd(dbIndex, key, member, 0);
 	}
 	
 	@Override
-	public <K, V> Boolean sAdd(int dbIndex, K key, V member, long expireSeconds) {
+	public <K, V> Long sAdd(int dbIndex, K key, V member, long expireSeconds) {
 		AssertUtils.assertNotNull(member, "Member can not be null of command [sAdd].");
 		Collection<V> members = CollectionUtils.newArrayList();
 		members.add(member);
@@ -1752,62 +1755,60 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	}
 	
 	@Override
-	public <K, V> Boolean sAdd(K key, V[] members) {
+	public <K, V> Long sAdd(K key, V[] members) {
 		return sAdd(super.getDefaultDbIndex(), key, members);
 	}
 	
 	@Override
-	public <K, V> Boolean sAdd(K key, V[] members, long expireSeconds) {
+	public <K, V> Long sAdd(K key, V[] members, long expireSeconds) {
 		return sAdd(super.getDefaultDbIndex(), key, members, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Boolean sAdd(int dbIndex, K key, V[] members) {
+	public <K, V> Long sAdd(int dbIndex, K key, V[] members) {
 		return sAdd(dbIndex, key, members, 0);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Boolean sAdd(final int dbIndex, final K key, final V[] members, final long expireSeconds) {
+	public <K, V> Long sAdd(final int dbIndex, final K key, final V[] members, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [sAdd].");
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(members), "Members can not be empty of command [sAdd].");
 				
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 			
 			@Override
-			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbIndex);
+				byte[] keyByte = keySerializer.serialize(key);
 				
-				boolean result = true;
-				for (V member : members) 
-					result = result && connection.sAdd(keyByte, valueSerializer.serialize(member));
+				long count = NumberUtils.safeLong(connection.sAdd(keyByte, serializeValuesToArray(dbIndex, members)));
+				if (count > 0)
+					setExpireTime(connection, repository, keyByte, expireSeconds);
 				
-				setExpireTime(connection, repository, keyByte, expireSeconds);
-				return result;
+				return count;
 			}
 		});
 	}
 	
 	@Override
-	public <K, V> Boolean sAdd(K key, Collection<V> members) {
+	public <K, V> Long sAdd(K key, Collection<V> members) {
 		return sAdd(super.getDefaultDbIndex(), key, members);
 	}
 	
 	@Override
-	public <K, V> Boolean sAdd(K key, Collection<V> members, long expireSeconds) {
+	public <K, V> Long sAdd(K key, Collection<V> members, long expireSeconds) {
 		return sAdd(super.getDefaultDbIndex(), key, members, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Boolean sAdd(int dbIndex, K key, Collection<V> members) {
+	public <K, V> Long sAdd(int dbIndex, K key, Collection<V> members) {
 		return sAdd(dbIndex, key, members, 0);
 	}
 	
 	@Override
-	public <K, V> Boolean sAdd(int dbIndex, K key, Collection<V> members, long expireSeconds) {
+	public <K, V> Long sAdd(int dbIndex, K key, Collection<V> members, long expireSeconds) {
 		return sAdd(dbIndex, key, CollectionUtils.toObjectArray(members), expireSeconds);
 	}
 
@@ -2214,48 +2215,45 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	}
 
 	@Override
-	public <K, V> Boolean sRem(K key, V member) {
+	public <K, V> Long sRem(K key, V member) {
 		return sRem(super.getDefaultDbIndex(), key, member);
 	}
 
 	@Override
-	public <K, V> Boolean sRem(int dbIndex, K key, V member) {
+	public <K, V> Long sRem(int dbIndex, K key, V member) {
 		return sRem(super.getDefaultDbIndex(), key, new Object[] { member });
 	}
 
 	@Override
-	public <K, V> Boolean sRem(K key, V[] members) {
+	public <K, V> Long sRem(K key, V[] members) {
 		return sRem(super.getDefaultDbIndex(), key, members);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Boolean sRem(final int dbIndex, final K key, final V[] members) {
+	public <K, V> Long sRem(final int dbIndex, final K key, final V[] members) {
 		if (key == null || ArrayUtils.isEmpty(members))
-			return false;
+			return 0L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
-			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbIndex);
-				boolean result = true;
-				for (V member : members) 
-					result = result && connection.sRem(keySerializer.serialize(key), valueSerializer.serialize(member));
-				return result;
+				return NumberUtils.safeLong(connection.sRem(keySerializer.serialize(key), 
+						serializeValuesToArray(dbIndex, members)));
 			}
 		});
 	}
 
 	@Override
-	public <K, V> Boolean sRem(K key, Collection<V> members) {
+	public <K, V> Long sRem(K key, Collection<V> members) {
 		return sRem(super.getDefaultDbIndex(), key, members);
 	}
 
 	@Override
-	public <K, V> Boolean sRem(int dbIndex, K key, Collection<V> members) {
+	public <K, V> Long sRem(int dbIndex, K key, Collection<V> members) {
 		return sRem(dbIndex, key, CollectionUtils.toObjectArray(members));
 	}
 	
@@ -2524,48 +2522,45 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	}
 
 	@Override
-	public <K, V> Boolean zRem(K key, V member) {
+	public <K, V> Long zRem(K key, V member) {
 		return zRem(super.getDefaultDbIndex(), key, member);
 	}
 
 	@Override
-	public <K, V> Boolean zRem(int dbIndex, K key, V member) {
+	public <K, V> Long zRem(int dbIndex, K key, V member) {
 		return zRem(dbIndex, key, new Object[] { member });
 	}
 
 	@Override
-	public <K, V> Boolean zRem(K key, V[] members) {
+	public <K, V> Long zRem(K key, V[] members) {
 		return zRem(super.getDefaultDbIndex(), key, members);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Boolean zRem(final int dbIndex, final K key, final V[] members) {
+	public <K, V> Long zRem(final int dbIndex, final K key, final V[] members) {
 		if (key == null || ArrayUtils.isEmpty(members))
-			return false;
+			return 0L;
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
-			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbIndex);
-				boolean result = true;
-				for (V member : members) 
-					result = result && connection.zRem(keySerializer.serialize(key), valueSerializer.serialize(member));
-				return result;
+				return NumberUtils.safeLong(connection.zRem(keySerializer.serialize(key), 
+						serializeValuesToArray(dbIndex, members)));
 			}
 		});
 	}
 
 	@Override
-	public <K, V> Boolean zRem(K key, Collection<V> members) {
+	public <K, V> Long zRem(K key, Collection<V> members) {
 		return zRem(super.getDefaultDbIndex(), key, members);
 	}
 
 	@Override
-	public <K, V> Boolean zRem(int dbIndex, K key, Collection<V> members) {
+	public <K, V> Long zRem(int dbIndex, K key, Collection<V> members) {
 		return zRem(dbIndex, key, CollectionUtils.toObjectArray(members));
 	}
 
