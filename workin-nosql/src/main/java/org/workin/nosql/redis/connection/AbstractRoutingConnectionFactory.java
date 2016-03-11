@@ -37,9 +37,7 @@ public abstract class AbstractRoutingConnectionFactory implements InitializingBe
 	
 	/** 当前默认使用的RedisConnectionFactory对象 */
 	private RedisConnectionFactory resolvedDefaultConnectionFactory;
-	
-	private boolean convertPipelineAndTxResults = true;
-	
+		
 	public Map<Object, RedisConnectionFactory> getTargetConnectionFactories() {
 		return targetConnectionFactories;
 	}
@@ -79,14 +77,10 @@ public abstract class AbstractRoutingConnectionFactory implements InitializingBe
 	public RedisConnection getConnection() {
 		return this.determineTargetConnectionFactory().getConnection();
 	}
-	
-	public void setConvertPipelineAndTxResults(boolean convertPipelineAndTxResults) {
-		this.convertPipelineAndTxResults = convertPipelineAndTxResults;
-	}
-	
+		
 	@Override
 	public boolean getConvertPipelineAndTxResults() {
-		return this.convertPipelineAndTxResults;
+		return this.determineTargetConnectionFactory().getConvertPipelineAndTxResults();
 	}
 	
 	/**
