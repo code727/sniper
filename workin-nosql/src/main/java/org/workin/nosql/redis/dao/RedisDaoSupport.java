@@ -338,7 +338,7 @@ public abstract class RedisDaoSupport implements InitializingBean {
 	@SuppressWarnings("unchecked")
 	protected <F, V> Map<byte[], byte[]> serializeFiledValueToByteMap(int dbIndex, Map<F, V> fValues) {
 		RedisSerializer<F> fieldKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectHashValueSerializer(dbIndex);
 		Map<byte[], byte[]> result = new HashMap<byte[], byte[]>();
 		Iterator<Entry<F, V>> iterator = fValues.entrySet().iterator();
 		while(iterator.hasNext()) {
