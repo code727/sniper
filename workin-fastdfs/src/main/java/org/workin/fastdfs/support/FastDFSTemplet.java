@@ -61,7 +61,7 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 
 	@Override
 	public <T> T execute(String groupName, FastDFSCallback<T> action) throws Exception {
-		return execute(null, action, true);
+		return execute(groupName, action, true);
 	}
 	
 	@Override
