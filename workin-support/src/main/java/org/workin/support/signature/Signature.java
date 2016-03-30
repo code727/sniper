@@ -41,7 +41,7 @@ public interface Signature<T> {
 	public String getType();
 	
 	/**
-	 * @description 按指定密钥将参数项进行签名处理，并返回结果
+	 * @description 执行签名处理，并返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameters
 	 * @param secretKey

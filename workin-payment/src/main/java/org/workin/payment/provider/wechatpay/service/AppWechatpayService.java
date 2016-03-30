@@ -37,7 +37,7 @@ import org.workin.payment.provider.wechatpay.enums.ResultCode;
 import org.workin.payment.provider.wechatpay.enums.ReturnCode;
 import org.workin.payment.provider.wechatpay.parser.WechatpayParser;
 import org.workin.payment.provider.wechatpay.signature.WechatpayMD5Signature;
-import org.workin.support.signature.SESignature;
+import org.workin.support.signature.SymmetricSignature;
 import org.workin.support.signature.Signature;
 
 /**
@@ -50,7 +50,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 	
 	@Override
 	protected Signature<Map<String, Object>> initSignature() throws Exception {
-		SESignature<Map<String, Object>> signature = (SESignature<Map<String, Object>>) getSignature();
+		SymmetricSignature<Map<String, Object>> signature = (SymmetricSignature<Map<String, Object>>) getSignature();
 		if (signature == null)
 			signature = new WechatpayMD5Signature();
 		

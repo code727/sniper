@@ -19,44 +19,31 @@
 package org.workin.support.signature;
 
 /**
- * @description 对称加密签名接口
+ * @description 非对称签名抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class SESignature<T> implements Signature<T> {
-	
-	/** 类型标识 */
-	private String type;
-	
-	/** 私钥 */
-	private String privateKey;
-	
-	@Override
-	public String getType() {
-		return type;
-	}
-
-	@Override
-	public void setType(String type) {
-		this.type = type;
-	}
+public abstract class AsymmetricSignature<T> extends SymmetricSignature<T> {
+	 
+	/** 公钥 */
+	private String publicKey;
 	
 	/**
-	 * @description 设置私钥
+	 * @description 设置公钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param privateKey
+	 * @param publicKey
 	 */
-	public void setPrivateKey(String privateKey) {
-		this.privateKey = privateKey;
+	public void setPublicKey(String publicKey) {
+		this.publicKey = publicKey;
 	}
 	
 	/**
-	 * @description 获取私钥
+	 * @description 获取公钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public String getPrivateKey() {
-		return this.privateKey;
+	public String getPublicKey() {
+		return this.publicKey;
 	}
-
+	
 }

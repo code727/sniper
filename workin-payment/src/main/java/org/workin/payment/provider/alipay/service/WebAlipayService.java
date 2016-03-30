@@ -35,8 +35,8 @@ import org.workin.payment.WebPaymentRequest;
 import org.workin.payment.enums.validation.ThirdValidationResult;
 import org.workin.payment.enums.validation.ValidationResult;
 import org.workin.payment.provider.alipay.signature.AlipayMD5Signature;
-import org.workin.support.signature.AESignature;
-import org.workin.support.signature.SESignature;
+import org.workin.support.signature.AsymmetricSignature;
+import org.workin.support.signature.SymmetricSignature;
 import org.workin.support.signature.Signature;
 
 /**
@@ -49,7 +49,7 @@ public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<Strin
 	
 	@Override
 	protected Signature<Map<String, Object>> initSignature() throws Exception {
-		SESignature<Map<String, Object>> signature = (SESignature<Map<String, Object>>) getSignature();
+		SymmetricSignature<Map<String, Object>> signature = (SymmetricSignature<Map<String, Object>>) getSignature();
 		if (signature == null)
 			signature = new AlipayMD5Signature();
 		
@@ -66,14 +66,14 @@ public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<Strin
 		}
 		
 		/* 检查/设置公钥 */
-		if (signature instanceof AESignature) {
-			String publicKey = ((AESignature<Map<String, Object>>) signature).getPublicKey();
+		if (signature instanceof AsymmetricSignature) {
+			String publicKey = ((AsymmetricSignature<Map<String, Object>>) signature).getPublicKey();
 			if (StringUtils.isBlank(publicKey)) {
 				publicKey = paymentContextParameters.getValue("alipay.web.publickey", String.class);
 				if (StringUtils.isBlank(publicKey))
 					throw new IllegalArgumentException("Alipay web publickey is required.");
 				
-				((AESignature<Map<String, Object>>) signature).setPublicKey(publicKey);
+				((AsymmetricSignature<Map<String, Object>>) signature).setPublicKey(publicKey);
 			}
 		}	
 		return signature;

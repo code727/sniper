@@ -33,7 +33,7 @@ import org.workin.payment.PaymentUtils;
 import org.workin.payment.enums.validation.ThirdValidationResult;
 import org.workin.payment.enums.validation.ValidationResult;
 import org.workin.payment.provider.alipay.signature.AlipayRSASignature;
-import org.workin.support.signature.AESignature;
+import org.workin.support.signature.AsymmetricSignature;
 import org.workin.support.signature.Signature;
 
 /**
@@ -54,11 +54,11 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 		/* 移动支付目前仅支持RSA加密签名,因此需要做如下两项检查  */
 		if (!ArrayUtils.contains(APP_SIGN_TYPES, signature.getType())) 
 			signature.setType(APP_SIGN_TYPES[0]);
-		if (!(signature instanceof AESignature))
-			throw new IllegalArgumentException("Signature must be instance of" + AESignature.class);
+		if (!(signature instanceof AsymmetricSignature))
+			throw new IllegalArgumentException("Signature must be instance of" + AsymmetricSignature.class);
 		
-		String privateKey = ((AESignature<Map<String, Object>>) signature).getPrivateKey();
-		String publicKey = ((AESignature<Map<String, Object>>) signature).getPublicKey();
+		String privateKey = ((AsymmetricSignature<Map<String, Object>>) signature).getPrivateKey();
+		String publicKey = ((AsymmetricSignature<Map<String, Object>>) signature).getPublicKey();
 		
 		/* 检查/设置私钥 */
 		if (StringUtils.isBlank(privateKey)) {
@@ -66,7 +66,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 			if (StringUtils.isBlank(privateKey))
 				throw new IllegalArgumentException("Alipay app privatekey is required.");
 			
-			((AESignature<Map<String, Object>>) signature).setPrivateKey(privateKey);
+			((AsymmetricSignature<Map<String, Object>>) signature).setPrivateKey(privateKey);
 					
 		}
 			
@@ -76,7 +76,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 			if (StringUtils.isBlank(privateKey))
 				throw new IllegalArgumentException("Alipay app publickey is required.");
 			
-			((AESignature<Map<String, Object>>) signature).setPublicKey(publicKey);
+			((AsymmetricSignature<Map<String, Object>>) signature).setPublicKey(publicKey);
 		}
 		return signature;
 	}

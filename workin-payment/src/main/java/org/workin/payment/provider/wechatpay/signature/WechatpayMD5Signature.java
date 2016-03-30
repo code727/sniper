@@ -23,14 +23,14 @@ import java.util.TreeMap;
 
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.SecurityUtils;
-import org.workin.support.signature.SESignature;
+import org.workin.support.signature.SymmetricSignature;
 
 /**
  * @description 微信支付MD5签名实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class WechatpayMD5Signature extends SESignature<Map<String, Object>> {
+public class WechatpayMD5Signature extends SymmetricSignature<Map<String, Object>> {
 	
 	public WechatpayMD5Signature() {
 		this.setType(SecurityUtils.MD5_ALGORITHM_NAME);

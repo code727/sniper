@@ -23,14 +23,14 @@ import java.util.TreeMap;
 
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.SecurityUtils;
-import org.workin.support.signature.AESignature;
+import org.workin.support.signature.AsymmetricSignature;
 
 /**
  * @description 阿里支付RSA签名实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class AlipayRSASignature extends AESignature<Map<String, Object>> {
+public class AlipayRSASignature extends AsymmetricSignature<Map<String, Object>> {
 	
 	public AlipayRSASignature() {
 		setType(SecurityUtils.RSA_ALGORITHM_NAME);
