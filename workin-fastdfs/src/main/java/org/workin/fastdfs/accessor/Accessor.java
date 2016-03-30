@@ -34,7 +34,7 @@ public interface Accessor {
 	 * @param path
 	 * @return
 	 */
-	public String getAccessabeURL(Cluster cluster, String path);
+	public String getAccessableURL(Cluster cluster, String path);
 	
 	/**
 	 * @description 根据FastDFS集群族和路径获取存储路径

@@ -33,7 +33,7 @@ import org.workin.fastdfs.cluster.StorageGroup;
 public class StorageGroupInternetAccessor extends AbstractAccessor {
 
 	@Override
-	public String getAccessabeURL(Cluster cluster, String path) {
+	public String getAccessableURL(Cluster cluster, String path) {
 		Iterator<Entry<String, StorageGroup>> iterator = cluster.getStorageGroups().entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<String, StorageGroup> groupEntry = iterator.next();

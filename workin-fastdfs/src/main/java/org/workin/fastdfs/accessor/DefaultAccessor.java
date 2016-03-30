@@ -28,7 +28,7 @@ import org.workin.fastdfs.cluster.Cluster;
 public class DefaultAccessor extends AccessorSupport {
 
 	@Override
-	public String getAccessabeURL(Cluster cluster, String path) {
+	public String getAccessableURL(Cluster cluster, String path) {
 		// 按传入的路径直接返回，严格的说此实现类返回的结果不是一个可直接访问的完整URL
 		return path;
 	}

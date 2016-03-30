@@ -28,7 +28,7 @@ import org.workin.fastdfs.cluster.Cluster;
 public class TrackerClusterInternetAccessor extends AbstractAccessor {
 
 	@Override
-	public String getAccessabeURL(Cluster cluster, String path) {
+	public String getAccessableURL(Cluster cluster, String path) {
 		return getAccessabeURL(cluster.getTrackerClusterInternetAccessURL(), path);
 	}
 

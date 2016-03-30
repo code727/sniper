@@ -151,7 +151,7 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 					CollectionUtils.toArray(meta.getNameValuePaires()) : null;
 			
 			/* 上传源和缩放文件后设置返回结果 */
-			String result = accessor.getAccessabeURL(getCluster(), 
+			String result = accessor.getAccessableURL(getCluster(), 
 					storageClient.upload_file1(targetGroupName, meta.getBytes(), meta.getExtName(), nameValuePaires));
 			list.add(result);
 		}
@@ -182,9 +182,9 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 			imageZoomHandler.handle(meta.getInputStream(), meta.getExtName(), tempImageSource);
 			
 			/* 上传源和缩放文件后设置返回结果 */
-			String srcURL = accessor.getAccessabeURL(getCluster(), 
+			String srcURL = accessor.getAccessableURL(getCluster(), 
 					storageClient.upload_file1(targetGroupName, meta.getBytes(), meta.getExtName(), nameValuePaires));
-			String zoomURL = accessor.getAccessabeURL(getCluster(), 
+			String zoomURL = accessor.getAccessableURL(getCluster(), 
 					storageClient.upload_file1(targetGroupName, tempImageSource.getCanonicalPath(), FileUtils.getExtensionName(tempImageSource), nameValuePaires));
 			zoomResource.setSrcURL(srcURL);
 			zoomResource.setZoomURL(zoomURL);
