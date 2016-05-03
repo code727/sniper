@@ -70,7 +70,7 @@ public class WebUtils {
 		if (StringUtils.isNotBlank(encoding))
 			request.setCharacterEncoding(encoding);
 		else
-			request.setCharacterEncoding(CodecUtils.UTF8_ENCODING);
+			request.setCharacterEncoding(CodecUtils.DEFAULT_ENCODING);
 	}
 	
 	/**
@@ -419,9 +419,9 @@ public class WebUtils {
 	public static String encode(HttpServletRequest request, String str) throws UnsupportedEncodingException {
 		String agent = request.getHeader("USER-AGENT");    
 		if (agent != null && agent.indexOf("MSIE") > -1)
-			return URLEncoder.encode(str, CodecUtils.UTF8_ENCODING);
+			return URLEncoder.encode(str, CodecUtils.DEFAULT_ENCODING);
 		else
-			return new String(str.getBytes(CodecUtils.UTF8_ENCODING), CodecUtils.ISO_8859_1);
+			return new String(str.getBytes(CodecUtils.DEFAULT_ENCODING), CodecUtils.ISO_8859_1);
 	}
 	
 	/**

@@ -58,13 +58,13 @@ public class CodecUtils {
 	};  
        
 	/**
-	 * @description 将URL字符串按UTF-8编码集进行编码
+	 * @description 将URL字符串按默认编码集进行编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url URL字符
 	 * @return
 	 */
 	public static String urlEncode(String url) {
-		return urlEncode(url, UTF8_ENCODING);
+		return urlEncode(url, DEFAULT_ENCODING);
 	}
 	
 	/**
@@ -76,23 +76,22 @@ public class CodecUtils {
 	 */
 	public static String urlEncode(String url, String encoding) {
 		AssertUtils.assertNotNull(url, "Encoding url can not be null.");
-		
-		
+	
 		try {
-			return URLEncoder.encode(url, StringUtils.isNotBlank(encoding) ? encoding : UTF8_ENCODING);
+			return URLEncoder.encode(url, StringUtils.isNotBlank(encoding) ? encoding : DEFAULT_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			return urlEncode(url, UTF8_ENCODING);
+			return urlEncode(url, DEFAULT_ENCODING);
 		}
 	}
 	
 	/**
-	 * @description 将URL字符串按UTF-8编码集进行解码
+	 * @description 将URL字符串按默认编码集进行解码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param URL URL字符
 	 * @return
 	 */
 	public static String urlDecode(String url) {
-		return urlDecode(url, UTF8_ENCODING);
+		return urlDecode(url, DEFAULT_ENCODING);
 	}
 	
 	/**
@@ -105,9 +104,9 @@ public class CodecUtils {
 	public static String urlDecode(String url, String encoding) {
 		AssertUtils.assertNotNull(url, "Decoding url can not be null.");
 		try {
-			return URLDecoder.decode(url, StringUtils.isNotBlank(encoding) ? encoding : UTF8_ENCODING);
+			return URLDecoder.decode(url, StringUtils.isNotBlank(encoding) ? encoding : DEFAULT_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			return urlDecode(url, UTF8_ENCODING);
+			return urlDecode(url, DEFAULT_ENCODING);
 		}
 	}
 	
@@ -191,5 +190,56 @@ public class CodecUtils {
         
         return result.toString();  
     }
-		    
+	
+	/**
+	 * @description 获取字符串文本的字节数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param text
+	 * @return
+	 */
+	public static byte[] getBytes(String text) {
+		return getBytes(text, null);
+	}
+	
+	/**
+	 * @description 获取字符串文本指定编码集后的字节数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param text
+	 * @param encoding
+	 * @return
+	 */
+	public static byte[] getBytes(String text, String encoding) {
+		try {
+			return StringUtils.isNotBlank(encoding) ? text.getBytes(encoding) : text.getBytes();
+		} catch (UnsupportedEncodingException e) {
+			return getBytes(text, DEFAULT_ENCODING);
+		}
+	}
+	
+	/**
+	 * @description 将字节数组还原成源字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param textBytes
+	 * @return
+	 */
+	public static String byteToString(byte[] textBytes) {
+		return byteToString(textBytes, null);
+	}
+	
+	/**
+	 * @description 按指定编码集将字节数组还原成源字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param textBytes
+	 * @param encoding
+	 * @return
+	 */
+	public static String byteToString(byte[] textBytes, String encoding) {
+		try {
+			return StringUtils.isNotBlank(encoding) ? new String(textBytes,
+					encoding) : new String(textBytes);
+		} catch (UnsupportedEncodingException e) {
+			return byteToString(textBytes, DEFAULT_ENCODING);
+		} 
+	}
+	
 }

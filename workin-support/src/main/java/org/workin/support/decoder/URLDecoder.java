@@ -20,14 +20,14 @@ package org.workin.support.decoder;
 
 import java.io.UnsupportedEncodingException;
 
-import org.workin.support.CoderSupport;
+import org.workin.support.codec.CodecSupport;
 
 /**
  * @description URL解码器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class URLDecoder extends CoderSupport implements StringDecoder {
+public class URLDecoder extends CodecSupport implements StringDecoder {
 
 	@Override
 	public String decode(String message) throws UnsupportedEncodingException{

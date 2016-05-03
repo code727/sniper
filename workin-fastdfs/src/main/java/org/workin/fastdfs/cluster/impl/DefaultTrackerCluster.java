@@ -44,7 +44,7 @@ public class DefaultTrackerCluster extends CheckableInitializingBean implements 
 	private int networkTimeout = NetUtils.DEFAULT_TIMEOUT_MSEC;
 	
 	/** 字符集编码 */
-	private String charset = CodecUtils.UTF8_ENCODING;
+	private String charset = CodecUtils.DEFAULT_ENCODING;
 	
 	/** 是否设置HTTP安全秘钥 */
 	private boolean httpAntiStealToken;

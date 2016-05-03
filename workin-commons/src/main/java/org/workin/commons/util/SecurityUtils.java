@@ -68,7 +68,7 @@ public class SecurityUtils {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
 			byte[] bytes = messageDigest.digest(plaintext.getBytes(
-					StringUtils.isNotBlank(charsetName) ? charsetName : CodecUtils.UTF8_ENCODING));
+					StringUtils.isNotBlank(charsetName) ? charsetName : CodecUtils.DEFAULT_ENCODING));
 			StringBuffer buffer = new StringBuffer(bytes.length * 2);
 			for (int i = 0; i < bytes.length; i++) {
 				if ((bytes[i] & 0xff) < 0x10)
@@ -79,7 +79,7 @@ public class SecurityUtils {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			return digest(plaintext, algorithm, CodecUtils.UTF8_ENCODING);
+			return digest(plaintext, algorithm, CodecUtils.DEFAULT_ENCODING);
 		}
 		
 		return digestMessage;

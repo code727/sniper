@@ -27,7 +27,7 @@ import java.security.AccessController;
 import java.util.BitSet;
 
 import org.workin.commons.util.StringUtils;
-import org.workin.support.CoderSupport;
+import org.workin.support.codec.CodecSupport;
 
 import sun.security.action.GetPropertyAction;
 
@@ -37,7 +37,7 @@ import sun.security.action.GetPropertyAction;
  * @version 1.0
  */
 @SuppressWarnings("restriction")
-public class RawURLEncoder extends CoderSupport implements StringEncoder {
+public class RawURLEncoder extends CodecSupport implements StringEncoder {
 	
 	/** 不需要参与编码的字符集 */
 	static BitSet dontNeedEncoding;

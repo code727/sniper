@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年7月15日
+ * Create Date : 2015-7-15
  */
 
 package org.workin.support.encoder;
@@ -21,14 +21,14 @@ package org.workin.support.encoder;
 import java.io.UnsupportedEncodingException;
 
 import org.workin.commons.util.StringUtils;
-import org.workin.support.CoderSupport;
+import org.workin.support.codec.CodecSupport;
 
 /**
  * @description URL编码器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class URLEncoder extends CoderSupport implements StringEncoder {
+public class URLEncoder extends CodecSupport implements StringEncoder {
 
 	@Override
 	public String encode(String message) throws UnsupportedEncodingException {

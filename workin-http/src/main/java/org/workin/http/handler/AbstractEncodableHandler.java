@@ -27,7 +27,7 @@ import org.workin.commons.util.CodecUtils;
  */
 public abstract class AbstractEncodableHandler implements EncodableHandler {
 	
-	private String encoding = CodecUtils.UTF8_ENCODING;
+	private String encoding = CodecUtils.DEFAULT_ENCODING;
 
 	@Override
 	public String getEncoding() {

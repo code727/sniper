@@ -16,7 +16,7 @@
  * Create Date : 2015-7-15
  */
 
-package org.workin.support;
+package org.workin.support.codec;
 
 import org.workin.commons.util.CodecUtils;
 
@@ -25,14 +25,16 @@ import org.workin.commons.util.CodecUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class CoderSupport {
+public abstract class CodecSupport implements Codecable {
 	
-	private String encoding = CodecUtils.UTF8_ENCODING;
+	private String encoding = CodecUtils.DEFAULT_ENCODING;
 	
+	@Override
 	public String getEncoding() {
 		return encoding;
 	}
 
+	@Override
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}

@@ -41,9 +41,9 @@ public abstract class AbstractCodec implements Codec {
 		AssertUtils.assertNotNull(plaintext, "Encode plaintext must not be null.");
     	try {
 			return encode(plaintext.getBytes(StringUtils.isNotBlank(charsetName) ? 
-					charsetName : CodecUtils.UTF8_ENCODING));
+					charsetName : CodecUtils.DEFAULT_ENCODING));
 		} catch (UnsupportedEncodingException e) {
-			return encode(plaintext, CodecUtils.UTF8_ENCODING);
+			return encode(plaintext, CodecUtils.DEFAULT_ENCODING);
 		}
 	}
 
@@ -56,9 +56,9 @@ public abstract class AbstractCodec implements Codec {
 	public String decode(String encoded, String charsetName) {
 		try {
 			return new String(decodeToBytes(encoded), StringUtils.isNotBlank(charsetName) ? 
-					charsetName : CodecUtils.UTF8_ENCODING);
+					charsetName : CodecUtils.DEFAULT_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			return decode(encoded, CodecUtils.UTF8_ENCODING);
+			return decode(encoded, CodecUtils.DEFAULT_ENCODING);
 		}
 	}
 
