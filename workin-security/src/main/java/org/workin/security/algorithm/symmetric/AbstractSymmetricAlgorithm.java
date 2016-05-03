@@ -18,9 +18,7 @@
 
 package org.workin.security.algorithm.symmetric;
 
-import java.io.UnsupportedEncodingException;
-
-import org.workin.commons.util.StringUtils;
+import org.workin.commons.util.CodecUtils;
 
 /**
  * @description 对称算法抽象类
@@ -59,12 +57,7 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm {
 		if (this.privateKey == null)
 			throw new IllegalArgumentException("Private key must not be null.");
 		
-		try {
-			return StringUtils.isNotBlank(this.encoding) ? this.privateKey
-					.getBytes(this.encoding) : this.privateKey.getBytes();
-		} catch (UnsupportedEncodingException e) {
-			return this.privateKey.getBytes();
-		}
+		return CodecUtils.getBytes(this.privateKey, this.encoding);
 	}
 
 }
