@@ -81,5 +81,11 @@
 		    <version>1.0.0</version> 
 		    <optional>true</optional>
 		</dependency>
+		<dependency>  
+			<groupId>org.workin</groupId>  
+		    <artifactId>workin-test</artifactId>  
+		    <version>1.0.0</version> 
+		    <scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
