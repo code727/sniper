@@ -50,13 +50,8 @@ public class CodecUtils {
 	public static final String ISO_8859_1 = "ISO-8859-1";
 	
 	/** 16进制码 */
-	public static char[] HEX_CODE = {
-		'0', '1', '2', '3', 
-		'4', '5', '6', '7',  
-		'8', '9', 'a', 'b', 
-		'c', 'd', 'e', 'f'
-	};  
-       
+	public static char[] HEX_CODES = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };  
+		
 	/**
 	 * @description 将URL字符串按默认编码集进行编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -192,27 +187,27 @@ public class CodecUtils {
     }
 	
 	/**
-	 * @description 获取字符串文本的字节数组
+	 * @description 获取字符串的字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param text
+	 * @param str
 	 * @return
 	 */
-	public static byte[] getBytes(String text) {
-		return getBytes(text, null);
+	public static byte[] getBytes(String str) {
+		return getBytes(str, null);
 	}
 	
 	/**
-	 * @description 获取字符串文本指定编码集后的字节数组
+	 * @description 获取字符串按指定编码集编码后的字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param text
+	 * @param str
 	 * @param encoding
 	 * @return
 	 */
-	public static byte[] getBytes(String text, String encoding) {
+	public static byte[] getBytes(String str, String encoding) {
 		try {
-			return StringUtils.isNotBlank(encoding) ? text.getBytes(encoding) : text.getBytes();
+			return StringUtils.isNotBlank(encoding) ? str.getBytes(encoding) : str.getBytes();
 		} catch (UnsupportedEncodingException e) {
-			return getBytes(text, DEFAULT_ENCODING);
+			return getBytes(str, DEFAULT_ENCODING);
 		}
 	}
 	
@@ -222,8 +217,8 @@ public class CodecUtils {
 	 * @param textBytes
 	 * @return
 	 */
-	public static String byteToString(byte[] textBytes) {
-		return byteToString(textBytes, null);
+	public static String bytesToString(byte[] textBytes) {
+		return bytesToString(textBytes, null);
 	}
 	
 	/**
@@ -233,13 +228,90 @@ public class CodecUtils {
 	 * @param encoding
 	 * @return
 	 */
-	public static String byteToString(byte[] textBytes, String encoding) {
+	public static String bytesToString(byte[] textBytes, String encoding) {
 		try {
 			return StringUtils.isNotBlank(encoding) ? new String(textBytes,
 					encoding) : new String(textBytes);
 		} catch (UnsupportedEncodingException e) {
-			return byteToString(textBytes, DEFAULT_ENCODING);
+			return bytesToString(textBytes, DEFAULT_ENCODING);
 		} 
 	}
 	
+	/**
+	 * @description 将字符串转换为16进制表现形式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static String stringToHex(String str) {
+		return stringToHex(str, null);
+	}
+	
+	/**
+	 * @description 将字符串转换为按指定编码集编码后的16进制表现形式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param encoding
+	 * @return
+	 */
+	public static String stringToHex(String str, String encoding) {
+		return bytesToHex(getBytes(str, encoding));
+	}
+	
+	/**
+	 * @description 将字节数组转换为16进制的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param bytes
+	 * @return
+	 */
+	public static String bytesToHex(byte[] bytes) {
+		StringBuilder hexString = new StringBuilder();
+		String stmp = "";
+		for (int n = 0; n < bytes.length; n++) {
+			stmp = (Integer.toHexString(bytes[n] & 0XFF));
+			if (stmp.length() == 1)
+				hexString.append("0");
+			
+			hexString.append(stmp);
+		}
+		return hexString.toString().toUpperCase();
+	}
+	
+	/**
+	 * @description 将16进制的字符串转换为字节数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param hexString
+	 * @return
+	 */
+	public static byte[] hexToBytes(String hexString) {
+		byte[] bytes = new byte[hexString.length() / 2];
+		char[] chs = hexString.toCharArray();
+		for (int i = 0, c = 0; i < chs.length; i += 2, c++) 
+			bytes[c] = (byte) (Integer.parseInt(new String(chs, i, 2), 16));
+
+		return bytes;
+	}
+	
+	/**
+	 * @description 将16进制的字符串还原成原文
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param hexString
+	 * @return
+	 */
+	public static String hexToString(String hexString) {
+		return hexToString(hexString, null);
+	}
+	
+	/**
+	 * @description 将16进制的字符串按指定的字符集编码还原成原文
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param hexString
+	 * @param encoding
+	 * @return
+	 */
+	public static String hexToString(String hexString, String encoding) {
+		byte[] bytes = hexToBytes(hexString);
+		return bytesToString(bytes, encoding);
+	}
+		
 }
