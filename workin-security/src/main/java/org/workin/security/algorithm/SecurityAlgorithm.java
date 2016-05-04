@@ -13,32 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016-5-3
+ * Create Date : 2016-5-5
  */
 
-package org.workin.security.algorithm.asymmetric;
-
-import org.workin.security.algorithm.symmetric.AbstractSymmetricAlgorithm;
+package org.workin.security.algorithm;
 
 /**
- * @description 非对称算法抽象类
+ * @description 安全算法标识接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractAsymmetricAlgorithm extends
-		AbstractSymmetricAlgorithm implements AsymmetricAlgorithm {
-	
-	/** 公钥 */
-	private String publicKey;
-	
-	@Override
-	public void setPublicKey(String publicKey) {
-		this.publicKey = publicKey;
-	}
+public interface SecurityAlgorithm extends Encryption, Decryption {
 
-	@Override
-	public String getPublicKey() {
-		return this.publicKey;
-	}
-	
 }

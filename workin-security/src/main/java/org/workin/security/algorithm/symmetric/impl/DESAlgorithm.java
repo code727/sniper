@@ -16,7 +16,7 @@
  * Create Date : 2016-5-4
  */
 
-package org.workin.security.algorithm.symmetric;
+package org.workin.security.algorithm.symmetric.impl;
 
 import java.security.SecureRandom;
 
@@ -25,36 +25,31 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
+import org.workin.security.algorithm.symmetric.AbstractSymmetricAlgorithm;
+
 /**
  * @description DES加解密算法实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DESAlgorithm extends SymmetricEncryptionAndDecryptionAlgorithm {
-	
-	private SecureRandom random;
+public class DESAlgorithm extends AbstractSymmetricAlgorithm {
 	
 	private Cipher encryptModeCipher;
 	
 	private Cipher decryptModeCipher;
 	
-	public DESAlgorithm(String privateKey) throws Exception {
-		super(privateKey);
-		init();
-	}
-	
 	protected void init() throws Exception {
-		this.random = new SecureRandom();
+		SecureRandom random = new SecureRandom();
 		
 		DESKeySpec desKey = new DESKeySpec(getPrivateKeyBytes());
 		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
 		SecretKey securekey = keyFactory.generateSecret(desKey);
 		
 		this.encryptModeCipher = Cipher.getInstance("DES");
-		this.encryptModeCipher.init(Cipher.ENCRYPT_MODE, securekey, this.random);
+		this.encryptModeCipher.init(Cipher.ENCRYPT_MODE, securekey, random);
 		
 		this.decryptModeCipher = Cipher.getInstance("DES");
-		this.decryptModeCipher.init(Cipher.DECRYPT_MODE, securekey, this.random);
+		this.decryptModeCipher.init(Cipher.DECRYPT_MODE, securekey, random);
 	}
 	
 	@Override
@@ -66,5 +61,5 @@ public class DESAlgorithm extends SymmetricEncryptionAndDecryptionAlgorithm {
 	public byte[] decryptToBytes(byte[] ciphertextBytes) throws Exception {
 		return this.decryptModeCipher.doFinal(ciphertextBytes);
 	}
-
+	
 }

@@ -18,14 +18,14 @@
 
 package org.workin.security.algorithm.symmetric;
 
-import org.workin.support.codec.Codecable;
+import org.workin.security.algorithm.SecurityAlgorithm;
 
 /**
- * @description 对称算法标识接口
+ * @description 对称算法接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SymmetricAlgorithm extends Codecable {
+public interface SymmetricAlgorithm extends SecurityAlgorithm {
 	
 	/**
 	 * @description 设置私钥

@@ -21,7 +21,7 @@ package org.workin.security.algorithm.asymmetric;
 import org.workin.security.algorithm.symmetric.SymmetricAlgorithm;
 
 /**
- * @description 非对称算法标识接口
+ * @description 非对称算法接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
