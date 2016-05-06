@@ -31,19 +31,15 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
 import org.workin.commons.util.IOUtils;
-import org.workin.security.algorithm.symmetric.AbstractSymmetricAlgorithm;
+import org.workin.security.algorithm.symmetric.CipherSymmetricAlgorithm;
 
 /**
  * @description Blowfish加解密算法实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BlowfishAlgorithm extends AbstractSymmetricAlgorithm {
+public class BlowfishAlgorithm extends CipherSymmetricAlgorithm {
 
-	private Cipher encryptModeCipher;
-
-	private Cipher decryptModeCipher;
-	
 	private byte[] bytes;
 
 	@Override
@@ -58,6 +54,7 @@ public class BlowfishAlgorithm extends AbstractSymmetricAlgorithm {
 		random.nextBytes(this.bytes);
 		IvParameterSpec spec = new IvParameterSpec(bytes);
 		
+		/* CBC模式加解密 */
 		this.encryptModeCipher = Cipher.getInstance("Blowfish/CBC/PKCS5Padding");
 		this.encryptModeCipher.init(Cipher.ENCRYPT_MODE, secretKey, spec);
 

@@ -20,8 +20,9 @@ package org.workin.security.algorithm.symmetric;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.Base64Utils;
 import org.workin.commons.util.CodecUtils;
+import org.workin.support.codec.Base64Codec;
+import org.workin.support.codec.Codec;
 
 /**
  * @description 对称算法抽象类
@@ -31,10 +32,13 @@ import org.workin.commons.util.CodecUtils;
 public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, InitializingBean {
 	
 	/** 字符集编码 */
-	protected String encoding;
+	private String encoding;
 	
 	/** 私钥 */
-	protected String privateKey;
+	private String privateKey;
+	
+	/** 加密/解密结果的编解码器 */
+	private Codec codec;
 	
 	@Override
 	public void setEncoding(String encoding) {
@@ -50,6 +54,14 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	public void setPrivateKey(String privateKey) {
 		this.privateKey = privateKey;
 	}
+	
+	public Codec getCodec() {
+		return codec;
+	}
+
+	public void setCodec(Codec codec) {
+		this.codec = codec;
+	}
 
 	@Override
 	public String getPrivateKey() {
@@ -59,18 +71,30 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		init();
+		initCodec();
+	}
+	
+	/**
+	 * @description 初始化加密/解密结果的编解码器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @throws Exception
+	 */
+	protected void initCodec() throws Exception {
+		if (this.codec == null)
+			setCodec(new Base64Codec());
 	}
 	
 	@Override
 	public String encrypt(String plaintext) throws Exception {
-//		return Base64Utils.encode(CodecUtils.bytesToHex(this.encryptToBytes(plaintext)));
-		return Base64Utils.encode(this.encryptToBytes(plaintext));
+		// 密文字节数组
+		byte[] ciphertextBytes = this.encryptToBytes(plaintext);
+		// 返回密文
+		return this.codec.encode(ciphertextBytes);
 	}
 	
 	@Override
 	public String encrypt(byte[] plaintextBytes) throws Exception {
-//		return Base64Utils.encode(CodecUtils.bytesToHex(this.encryptToBytes(plaintextBytes)));
-		return Base64Utils.encode(this.encryptToBytes(plaintextBytes));
+		return this.codec.encode(this.encryptToBytes(plaintextBytes));
 	}
 	
 	@Override
@@ -95,8 +119,8 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	@Override
 	public byte[] decryptToBytes(String ciphertext) throws Exception {
 		AssertUtils.assertNotNull(ciphertext, "Decrypted ciphertext must be not null.");
-		// 先将密文进行Base64解码后得到密文字节数组，再对其进行解密得到明文字节数组
-		return this.decryptToBytes(Base64Utils.decodeToBytes(ciphertext));
+		// 先将密文进行解码后得到密文字节数组，再对其进行解密得到明文字节数组
+		return this.decryptToBytes(this.codec.decodeToBytes(ciphertext));
 	}
 	
 	/**

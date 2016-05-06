@@ -260,6 +260,16 @@ public class CodecUtils {
 	}
 	
 	/**
+	 * @description 将字节数组转换为16进制全大写的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param bytes
+	 * @return
+	 */
+	public static String bytesToUpperHex(byte[] bytes) {
+		return bytesToHex(bytes).toUpperCase();
+	}
+	
+	/**
 	 * @description 将字节数组转换为16进制的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bytes
@@ -276,7 +286,7 @@ public class CodecUtils {
 			hexString.append(stmp);
 		}
 		
-		return hexString.toString().toUpperCase();
+		return hexString.toString();
 	}
 	
 	/**
@@ -315,5 +325,5 @@ public class CodecUtils {
 		byte[] bytes = hexToBytes(hexString);
 		return bytesToString(bytes, encoding);
 	}
-		
+	
 }

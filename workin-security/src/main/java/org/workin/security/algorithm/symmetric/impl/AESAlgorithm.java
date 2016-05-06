@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016年5月4日
+ * Create Date : 2016-5-4
  */
 
 package org.workin.security.algorithm.symmetric.impl;
@@ -25,19 +25,15 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.workin.security.algorithm.symmetric.AbstractSymmetricAlgorithm;
+import org.workin.security.algorithm.symmetric.CipherSymmetricAlgorithm;
 
 /**
  * @description AES加解密算法实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class AESAlgorithm extends AbstractSymmetricAlgorithm {
+public class AESAlgorithm extends CipherSymmetricAlgorithm {
 	
-	private Cipher encryptModeCipher;
-	
-	private Cipher decryptModeCipher;
-
 	@Override
 	protected void init() throws Exception {
 		SecureRandom random = new SecureRandom(getPrivateKeyBytes());
@@ -52,16 +48,6 @@ public class AESAlgorithm extends AbstractSymmetricAlgorithm {
 		
 		this.decryptModeCipher = Cipher.getInstance("AES");
 		this.decryptModeCipher.init(Cipher.DECRYPT_MODE, keySpec);
-	}
-
-	@Override
-	public byte[] encryptToBytes(byte[] plaintextBytes) throws Exception {
-		return this.encryptModeCipher.doFinal(plaintextBytes);
-	}
-
-	@Override
-	public byte[] decryptToBytes(byte[] ciphertextBytes) throws Exception {
-		return this.decryptModeCipher.doFinal(ciphertextBytes);
 	}
 
 }

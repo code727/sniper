@@ -18,10 +18,17 @@
 
 package org.workin.security.algorithm.test;
 
+import java.util.List;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.workin.commons.util.CollectionUtils;
 import org.workin.security.algorithm.symmetric.impl.AESAlgorithm;
 import org.workin.security.algorithm.symmetric.impl.BlowfishAlgorithm;
 import org.workin.security.algorithm.symmetric.impl.DESAlgorithm;
+import org.workin.support.codec.Base64Codec;
+import org.workin.support.codec.Codec;
+import org.workin.support.codec.CompositeCodec;
 import org.workin.test.junit.BaseTestCase;
 
 /**
@@ -35,10 +42,22 @@ public class SymmetricAlgorithmTest extends BaseTestCase {
 	
 	private String plaintext = "杜斌_dub727@163.com";
 	
+	private Codec codec;
+	
+	@Before
+	public void before() {
+		/* 依次按16进制和Base64对加密结果进行编码，解密时解码的顺序相反 */
+		List<Codec> members = CollectionUtils.newArrayList();
+//		members.add(new HexCodec());
+		members.add(new Base64Codec());
+		this.codec = new CompositeCodec(members);
+	}
+	
 	@Test
 	public void testDESAlgorithm() throws Exception {
 		DESAlgorithm desAlgorithm = new DESAlgorithm();
 		desAlgorithm.setPrivateKey(privateKey);
+		desAlgorithm.setCodec(codec);
 		desAlgorithm.afterPropertiesSet();
 		
 		String ciphertext = desAlgorithm.encrypt(plaintext);
@@ -49,10 +68,11 @@ public class SymmetricAlgorithmTest extends BaseTestCase {
 		System.out.println("DES明文:" + decryptedPlaintext);
 	}
 	
-	@Test
+//	@Test
 	public void testAESAlgorithm() throws Exception {
 		AESAlgorithm aesAlgorithm = new AESAlgorithm();
 		aesAlgorithm.setPrivateKey(privateKey);
+		aesAlgorithm.setCodec(codec);
 		aesAlgorithm.afterPropertiesSet();
 		
 		String ciphertext = aesAlgorithm.encrypt(plaintext);
@@ -66,6 +86,8 @@ public class SymmetricAlgorithmTest extends BaseTestCase {
 	@Test
 	public void testBlowfishAlgorithm() throws Exception {
 		BlowfishAlgorithm blowfishAlgorithm = new BlowfishAlgorithm();
+		blowfishAlgorithm.setPrivateKey(privateKey);
+		blowfishAlgorithm.setCodec(codec);
 		blowfishAlgorithm.afterPropertiesSet();
 		
 		String ciphertext = blowfishAlgorithm.encrypt(plaintext);

@@ -38,7 +38,7 @@ public class CodecTest extends BaseTestCase {
 	
 	private Codec codec;
 	
-	private String text = "杜斌_dub727@163.com";
+	private String text = "dub727@163.com";
 	
 	@Test
 	public void testBase64Codec() {
@@ -70,12 +70,12 @@ public class CodecTest extends BaseTestCase {
 		codecMembers.add(new Base64Codec());
 		
 		CompositeCodec compositeCodec = new CompositeCodec(codecMembers);
-		String encodedText = compositeCodec.encode(text, CodecUtils.GBK_ENCODING);
-		String decodedText = compositeCodec.decode(encodedText, CodecUtils.GBK_ENCODING);
+		String encodedText = compositeCodec.encode(text);
+		String decodedText = compositeCodec.decode(encodedText);
 		
 		assertEquals(text, decodedText);
 		System.out.println("复合编码:" + encodedText);
 		System.out.println("复合解码:" + decodedText);
 	}
-
+	
 }
