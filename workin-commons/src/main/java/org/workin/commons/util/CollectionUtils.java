@@ -511,6 +511,49 @@ public class CollectionUtils {
 	}
 	
 	/**
+	 * @description 获取列表中的第一个元素
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param list
+	 * @return
+	 */
+	public static <T> T first(List<T> list) {
+		return first(list, null);
+	}
+	
+	/**
+	 * @description 获取列表中的第一个元素，未获取到时返回指定的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param list
+	 * @param defaultValue
+	 * @return
+	 */
+	public static <T> T first(List<T> list, T defaultValue) {
+		return get(list, 0, null);
+	}
+	
+	/**
+	 * @description 获取列表中的最后一个元素
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param list
+	 * @return
+	 */
+	public static <T> T last(List<T> list) {
+		return last(list, null);
+	}
+	
+	/**
+	 * @description 获取列表中的最后一个元素，未获取到时返回指定的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param list
+	 * @param defaultValue
+	 * @return
+	 */
+	public static <T> T last(List<T> list, T defaultValue) {
+		return get(list, size(list) - 1, null);
+	}
+	
+	
+	/**
 	 * @description 按指定的分隔符将列表中各元素连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param list
