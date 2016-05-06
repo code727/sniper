@@ -109,11 +109,11 @@ public class SystemUtils {
 	}
 	
 	/**
-	 * @description 获取当前操作系统的编码集
+	 * @description 获取文件系统编码集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static String getSystemEncoding() {
+	public static String getFileEncoding() {
 		return System.getProperty("file.encoding");
 	}
 	

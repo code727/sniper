@@ -21,6 +21,7 @@ package org.workin.commons.util;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +33,7 @@ import java.util.regex.Pattern;
 public class CodecUtils {
 	
 	/** 系统默认的编码集 */
-	public static final String DEFAULT_ENCODING = SystemUtils.getSystemEncoding();
+	public static final String DEFAULT_ENCODING = Charset.defaultCharset().name();
 	
 	/** UTF-8编码集 */
 	public static final String UTF8_ENCODING = "UTF-8";
@@ -274,6 +275,7 @@ public class CodecUtils {
 			
 			hexString.append(stmp);
 		}
+		
 		return hexString.toString().toUpperCase();
 	}
 	

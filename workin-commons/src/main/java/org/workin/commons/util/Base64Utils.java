@@ -81,32 +81,32 @@ public class Base64Utils {
     }
     
     /**
-     * @description 将明文按默认字符集进行编码处理
+     * @description 将原文本按默认字符集进行编码处理
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @param plaintext
+     * @param text
      * @return
      */
-    public static String encode(String plaintext) {
-    	return encode(plaintext, null);
+    public static String encode(String text) {
+    	return encode(text, null);
     }
     
     /**
-     * @description 将明文按指定字符集格式进行编码处理
+     * @description 将原文本按指定字符集格式进行编码处理
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @param plaintext
+     * @param text
      * @param charsetName
      * @return
      */
-    public static String encode(String plaintext, String charsetName) {
-    	AssertUtils.assertNotNull(plaintext, "Base64 encode plaintext must not be null.");
+    public static String encode(String text, String charsetName) {
+    	AssertUtils.assertNotNull(text, "Base64 encode text must not be null.");
     	try {
-			return encode(plaintext.getBytes(StringUtils.isNotBlank(charsetName) ? 
+			return encode(text.getBytes(StringUtils.isNotBlank(charsetName) ? 
 					charsetName : CodecUtils.DEFAULT_ENCODING));
 		} catch (UnsupportedEncodingException e) {
-			return encode(plaintext, CodecUtils.DEFAULT_ENCODING);
+			return encode(text, CodecUtils.DEFAULT_ENCODING);
 		}
     }
-       
+    
     /**
      * @description 对字节数组进行编码处理
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -170,46 +170,46 @@ public class Base64Utils {
             encodedData[encodedIndex++] = lookUpBase64Alphabet[l << 2];
             encodedData[encodedIndex++] = PAD;
         }
-
+       
         return new String(encodedData);
     }
     
     /**
-     * @description 将被编码的文本内容解码成默认字符集的字符串
+     * @description 将被编码的文本内容按默认字符集进行解码处理
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @param encoded
+     * @param encodedText
      * @return
      */
-    public static String decode(String encoded) {
-    	return decode(encoded, null);
+    public static String decode(String encodedText) {
+    	return decode(encodedText, null);
     }
     
     /**
-     * @description 将被编码的文本内容解码成指定字符集的字符串
+     * @description 将被编码的文本内容按指定字符集进行解码处理
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @param encoded
+     * @param encodedText
      * @param charsetName
      * @return
      */
-    public static String decode(String encoded, String charsetName) {
+    public static String decode(String encodedText, String charsetName) {
     	try {
-			return new String(decodeToBytes(encoded), StringUtils.isNotBlank(charsetName) ? 
+			return new String(decodeToBytes(encodedText), StringUtils.isNotBlank(charsetName) ? 
 					charsetName : CodecUtils.DEFAULT_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			return decode(encoded, CodecUtils.DEFAULT_ENCODING);
+			return decode(encodedText, CodecUtils.DEFAULT_ENCODING);
 		}
     }
         
     /**
      * @description 将被编码的文本内容解码成字节数组
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @param encoded
+     * @param encodedText
      * @return
      */
-    public static byte[] decodeToBytes(String encoded) {
-    	AssertUtils.assertTrue(StringUtils.isNotEmpty(encoded), "Decode string must not be null or empty.");
+    public static byte[] decodeToBytes(String encodedText) {
+    	AssertUtils.assertTrue(StringUtils.isNotEmpty(encodedText), "Decode text must not be null or empty.");
     	
-        char[] base64Data = encoded.toCharArray();
+        char[] base64Data = encodedText.toCharArray();
         int len = removeWhiteSpace(base64Data);
         if (len % FOURBYTE != 0) 
             return null;
