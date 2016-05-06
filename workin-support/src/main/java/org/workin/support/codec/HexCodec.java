@@ -18,33 +18,33 @@
 
 package org.workin.support.codec;
 
-import org.workin.commons.util.Base64Utils;
+import org.workin.commons.util.CodecUtils;
 
 /**
- * @description Base64编解码处理器
+ * @description 十六进制编解码器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Base64Codec extends AbstractCodec {
+public class HexCodec extends AbstractCodec {
 
 	@Override
 	public String encode(byte[] bytes) {
-		return Base64Utils.encode(bytes);
+		return CodecUtils.bytesToHex(bytes);
 	}
 
 	@Override
 	public String encode(String text, String charsetName) {
-		return Base64Utils.encode(text, charsetName);
+		return CodecUtils.stringToHex(text, charsetName);
 	}
 
 	@Override
 	public String decode(String encodedText, String charsetName) {
-		return Base64Utils.decode(encodedText, charsetName);
+		return CodecUtils.hexToString(encodedText, charsetName);
 	}
 
 	@Override
 	public byte[] decodeToBytes(String encodedText) {
-		return Base64Utils.decodeToBytes(encodedText);
+		return CodecUtils.hexToBytes(encodedText);
 	}
 
 }

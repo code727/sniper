@@ -13,34 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016-1-8
+ * Create Date : 2016-5-6
  */
 
 package org.workin.support.codec;
 
 /**
- * @description 编解码器接口
+ * @description 编解码处理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Codec {
-	
-	/**
-	 * @description 将明文按默认字符集进行编码处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param plaintext
-	 * @return
-	 */
-	public String encode(String plaintext);
-	
-	/**
-	 * @description 将明文按指定字符集格式进行编码处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param plaintext
-	 * @param charsetName
-	 * @return
-	 */
-	public String encode(String plaintext, String charsetName);
 	
 	/**
 	 * @description 对字节数组进行编码处理
@@ -51,28 +34,45 @@ public interface Codec {
 	public String encode(byte[] bytes);
 	
 	/**
-	 * @description 将被编码的文本内容解码成默认字符集的字符串
+	 * @description 将原文本按默认字符集进行编码处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param encoded
+	 * @param text
 	 * @return
 	 */
-	public String decode(String encoded);
+	public String encode(String text);
 	
 	/**
-	 * @description 将被编码的文本内容解码成指定字符集的字符串
+	 * @description 将原文本按指定字符集格式进行编码处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param encoded
+	 * @param text
 	 * @param charsetName
 	 * @return
 	 */
-	public String decode(String encoded, String charsetName);
+	public String encode(String text, String charsetName);
+	
+	/**
+	 * @description 将被编码的文本内容按默认字符集进行解码处理
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param encodedText
+	 * @return
+	 */
+	public String decode(String encodedText);
+	
+	/**
+	 * @description 将被编码的文本内容按指定字符集进行解码处理
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param encodedText
+	 * @param charsetName
+	 * @return
+	 */
+	public String decode(String encodedText, String charsetName);
 	
 	/**
 	 * @description 将被编码的文本内容解码成字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param encoded
+	 * @param encodedText
 	 * @return
 	 */
-	public byte[] decodeToBytes(String encoded);
-
+	public byte[] decodeToBytes(String encodedText);
+	
 }

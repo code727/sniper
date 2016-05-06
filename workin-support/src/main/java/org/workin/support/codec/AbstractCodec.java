@@ -13,53 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016年1月8日
+ * Create Date : 2016-5-6
  */
 
 package org.workin.support.codec;
 
-import java.io.UnsupportedEncodingException;
-
-import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.CodecUtils;
-import org.workin.commons.util.StringUtils;
-
 /**
- * @description 编解码器抽象类
+ * @description 编解码处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public abstract class AbstractCodec implements Codec {
-
+	
 	@Override
-	public String encode(String plaintext) {
-		return encode(plaintext, null);
+	public String encode(String text) {
+		return encode(text, null);
 	}
-
+	
 	@Override
-	public String encode(String plaintext, String charsetName) {
-		AssertUtils.assertNotNull(plaintext, "Encode plaintext must not be null.");
-    	try {
-			return encode(plaintext.getBytes(StringUtils.isNotBlank(charsetName) ? 
-					charsetName : CodecUtils.DEFAULT_ENCODING));
-		} catch (UnsupportedEncodingException e) {
-			return encode(plaintext, CodecUtils.DEFAULT_ENCODING);
-		}
-	}
-
-	@Override
-	public String decode(String encoded) {
-		return decode(encoded, null);
-	}
-
-	@Override
-	public String decode(String encoded, String charsetName) {
-		try {
-			return new String(decodeToBytes(encoded), StringUtils.isNotBlank(charsetName) ? 
-					charsetName : CodecUtils.DEFAULT_ENCODING);
-		} catch (UnsupportedEncodingException e) {
-			return decode(encoded, CodecUtils.DEFAULT_ENCODING);
-		}
+	public String decode(String encodedText) {
+		return decode(encodedText, null);
 	}
 
 }
