@@ -28,6 +28,13 @@ import org.workin.security.algorithm.SecurityAlgorithm;
 public interface SymmetricAlgorithm extends SecurityAlgorithm {
 	
 	/**
+	 * @description 获取算法名称
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getAlgorithm();
+	
+	/**
 	 * @description 设置私钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param privateKey

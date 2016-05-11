@@ -38,14 +38,14 @@ public class DESAlgorithm extends CipherSymmetricAlgorithm {
 		SecureRandom random = new SecureRandom();
 		
 		DESKeySpec desKey = new DESKeySpec(getPrivateKeyBytes());
-		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(this.algorithm);
 		SecretKey securekey = keyFactory.generateSecret(desKey);
 		
 		/* 模式:ECB/填充方式:pkcs5padding */
-		this.encryptModeCipher = Cipher.getInstance("DES");
+		this.encryptModeCipher = Cipher.getInstance(this.algorithm);
 		this.encryptModeCipher.init(Cipher.ENCRYPT_MODE, securekey, random);
 		
-		this.decryptModeCipher = Cipher.getInstance("DES");
+		this.decryptModeCipher = Cipher.getInstance(this.algorithm);
 		this.decryptModeCipher.init(Cipher.DECRYPT_MODE, securekey, random);
 	}
 	

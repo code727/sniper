@@ -46,7 +46,7 @@ public class BlowfishAlgorithm extends CipherSymmetricAlgorithm {
 	protected void init() throws Exception {
 		SecureRandom random = new SecureRandom();
 		
-		KeyGenerator keyGenerator = KeyGenerator.getInstance("Blowfish");  
+		KeyGenerator keyGenerator = KeyGenerator.getInstance(this.algorithm);  
 		keyGenerator.init(128); 
 		SecretKey secretKey = keyGenerator.generateKey(); 
 		
@@ -55,10 +55,10 @@ public class BlowfishAlgorithm extends CipherSymmetricAlgorithm {
 		IvParameterSpec spec = new IvParameterSpec(bytes);
 		
 		/* CBC模式加解密 */
-		this.encryptModeCipher = Cipher.getInstance("Blowfish/CBC/PKCS5Padding");
+		this.encryptModeCipher = Cipher.getInstance(this.algorithm + "/CBC/PKCS5Padding");
 		this.encryptModeCipher.init(Cipher.ENCRYPT_MODE, secretKey, spec);
 
-		this.decryptModeCipher = Cipher.getInstance("Blowfish/CBC/PKCS5Padding");
+		this.decryptModeCipher = Cipher.getInstance(this.algorithm + "/CBC/PKCS5Padding");
 		this.decryptModeCipher.init(Cipher.DECRYPT_MODE, secretKey, spec);
 	}
 

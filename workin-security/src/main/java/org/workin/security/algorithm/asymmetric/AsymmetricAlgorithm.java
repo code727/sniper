@@ -18,6 +18,9 @@
 
 package org.workin.security.algorithm.asymmetric;
 
+import java.security.PrivateKey;
+import java.security.PublicKey;
+
 import org.workin.security.algorithm.symmetric.SymmetricAlgorithm;
 
 /**
@@ -40,5 +43,19 @@ public interface AsymmetricAlgorithm extends SymmetricAlgorithm {
 	 * @return
 	 */
 	public String getPublicKey();
+	
+	/**
+	 * @description 获取公钥接口对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public PublicKey getPublicKeyInterface();
+	
+	/**
+	 * @description 获取私钥接口对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public PrivateKey getPrivateKeyInterface();
 
 }

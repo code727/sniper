@@ -38,15 +38,15 @@ public class AESAlgorithm extends CipherSymmetricAlgorithm {
 	protected void init() throws Exception {
 		SecureRandom random = new SecureRandom(getPrivateKeyBytes());
 		
-		KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");   
+		KeyGenerator keyGenerator = KeyGenerator.getInstance(this.algorithm);   
 		keyGenerator.init(128, random); 
 		SecretKey secretKey = keyGenerator.generateKey(); 
-		SecretKeySpec keySpec = new SecretKeySpec(secretKey.getEncoded(), "AES");   
+		SecretKeySpec keySpec = new SecretKeySpec(secretKey.getEncoded(), this.algorithm);   
 		
-        this.encryptModeCipher = Cipher.getInstance("AES");
+        this.encryptModeCipher = Cipher.getInstance(this.algorithm);
 		this.encryptModeCipher.init(Cipher.ENCRYPT_MODE, keySpec);
 		
-		this.decryptModeCipher = Cipher.getInstance("AES");
+		this.decryptModeCipher = Cipher.getInstance(this.algorithm);
 		this.decryptModeCipher.init(Cipher.DECRYPT_MODE, keySpec);
 	}
 

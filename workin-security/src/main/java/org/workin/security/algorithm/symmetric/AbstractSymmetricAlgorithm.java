@@ -21,6 +21,7 @@ package org.workin.security.algorithm.symmetric;
 import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CodecUtils;
+import org.workin.commons.util.StringUtils;
 import org.workin.support.codec.Base64Codec;
 import org.workin.support.codec.Codec;
 
@@ -31,6 +32,8 @@ import org.workin.support.codec.Codec;
  */
 public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, InitializingBean {
 	
+	protected final transient String algorithm;
+	
 	/** 字符集编码 */
 	private String encoding;
 	
@@ -38,7 +41,7 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	private String privateKey;
 	
 	/** 加密/解密结果的编解码器 */
-	private Codec codec;
+	private Codec resultCodec;
 	
 	@Override
 	public void setEncoding(String encoding) {
@@ -55,12 +58,12 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 		this.privateKey = privateKey;
 	}
 	
-	public Codec getCodec() {
-		return codec;
+	public Codec getResultCodec() {
+		return resultCodec;
 	}
 
-	public void setCodec(Codec codec) {
-		this.codec = codec;
+	public void setResultCodec(Codec resultCodec) {
+		this.resultCodec = resultCodec;
 	}
 
 	@Override
@@ -68,10 +71,26 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 		return this.privateKey;
 	}
 	
+	public AbstractSymmetricAlgorithm() {
+		this(null);
+	}
+	
+	public AbstractSymmetricAlgorithm(String algorithm) {
+		if (StringUtils.isNotBlank(algorithm))
+			this.algorithm = algorithm.trim();
+		else
+			this.algorithm = StringUtils.beforeFrist(this.getClass().getSimpleName(), "Algorithm");
+	}
+	
+	public String getAlgorithm() {
+		return algorithm;
+	}
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		init();
+		/* 各初始化操作的顺序不能变 */
 		initCodec();
+		init();
 	}
 	
 	/**
@@ -80,8 +99,8 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	 * @throws Exception
 	 */
 	protected void initCodec() throws Exception {
-		if (this.codec == null)
-			setCodec(new Base64Codec());
+		if (this.resultCodec == null)
+			setResultCodec(new Base64Codec());
 	}
 	
 	@Override
@@ -89,12 +108,12 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 		// 密文字节数组
 		byte[] ciphertextBytes = this.encryptToBytes(plaintext);
 		// 返回密文
-		return this.codec.encode(ciphertextBytes);
+		return this.resultCodec.encode(ciphertextBytes);
 	}
 	
 	@Override
 	public String encrypt(byte[] plaintextBytes) throws Exception {
-		return this.codec.encode(this.encryptToBytes(plaintextBytes));
+		return this.resultCodec.encode(this.encryptToBytes(plaintextBytes));
 	}
 	
 	@Override
@@ -120,7 +139,7 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	public byte[] decryptToBytes(String ciphertext) throws Exception {
 		AssertUtils.assertNotNull(ciphertext, "Decrypted ciphertext must be not null.");
 		// 先将密文进行解码后得到密文字节数组，再对其进行解密得到明文字节数组
-		return this.decryptToBytes(this.codec.decodeToBytes(ciphertext));
+		return this.decryptToBytes(this.resultCodec.decodeToBytes(ciphertext));
 	}
 	
 	/**
@@ -132,7 +151,7 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 		if (this.privateKey == null)
 			throw new IllegalArgumentException("Private key must not be null.");
 		
-		return CodecUtils.getBytes(this.privateKey, this.encoding);
+		return CodecUtils.getBytes(getPrivateKey(), getEncoding());
 	}
 	
 	/**

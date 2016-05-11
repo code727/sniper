@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016年5月4日
+ * Create Date : 2016-5-4
  */
 
 package org.workin.security.algorithm.test;
@@ -32,7 +32,7 @@ import org.workin.support.codec.CompositeCodec;
 import org.workin.test.junit.BaseTestCase;
 
 /**
- * @description
+ * @description 对称加解密算法单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -42,7 +42,7 @@ public class SymmetricAlgorithmTest extends BaseTestCase {
 	
 	private String plaintext = "杜斌_dub727@163.com";
 	
-	private Codec codec;
+	private Codec resultCodec;
 	
 	@Before
 	public void before() {
@@ -50,14 +50,14 @@ public class SymmetricAlgorithmTest extends BaseTestCase {
 		List<Codec> members = CollectionUtils.newArrayList();
 //		members.add(new HexCodec());
 		members.add(new Base64Codec());
-		this.codec = new CompositeCodec(members);
+		this.resultCodec = new CompositeCodec(members);
 	}
 	
 	@Test
 	public void testDESAlgorithm() throws Exception {
 		DESAlgorithm desAlgorithm = new DESAlgorithm();
 		desAlgorithm.setPrivateKey(privateKey);
-		desAlgorithm.setCodec(codec);
+		desAlgorithm.setResultCodec(resultCodec);
 		desAlgorithm.afterPropertiesSet();
 		
 		String ciphertext = desAlgorithm.encrypt(plaintext);
@@ -72,7 +72,7 @@ public class SymmetricAlgorithmTest extends BaseTestCase {
 	public void testAESAlgorithm() throws Exception {
 		AESAlgorithm aesAlgorithm = new AESAlgorithm();
 		aesAlgorithm.setPrivateKey(privateKey);
-		aesAlgorithm.setCodec(codec);
+		aesAlgorithm.setResultCodec(resultCodec);
 		aesAlgorithm.afterPropertiesSet();
 		
 		String ciphertext = aesAlgorithm.encrypt(plaintext);
@@ -87,7 +87,7 @@ public class SymmetricAlgorithmTest extends BaseTestCase {
 	public void testBlowfishAlgorithm() throws Exception {
 		BlowfishAlgorithm blowfishAlgorithm = new BlowfishAlgorithm();
 		blowfishAlgorithm.setPrivateKey(privateKey);
-		blowfishAlgorithm.setCodec(codec);
+		blowfishAlgorithm.setResultCodec(resultCodec);
 		blowfishAlgorithm.afterPropertiesSet();
 		
 		String ciphertext = blowfishAlgorithm.encrypt(plaintext);
