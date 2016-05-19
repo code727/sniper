@@ -48,6 +48,9 @@ import org.workin.commons.util.StringUtils;
  * @version 1.0
  */
 public class WebUtils {
+		
+	/** 重定向URL参数名称 */
+	public static final String REDIRECT_URL_PARAMETER_NAME = "redirectUrl";
 	
 	/** HttpServletRequest对象的属性名 */
 	public static final String HTTP_SERVLET_REQUEST_NAME = HttpServletRequest.class.getName();
