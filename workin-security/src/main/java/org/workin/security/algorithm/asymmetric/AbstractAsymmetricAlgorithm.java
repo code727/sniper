@@ -22,40 +22,40 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 import org.workin.commons.util.CodecUtils;
-import org.workin.security.algorithm.symmetric.CipherSymmetricAlgorithm;
+import org.workin.security.algorithm.symmetric.AbstractSymmetricAlgorithm;
 import org.workin.support.codec.Base64Codec;
 import org.workin.support.codec.Codec;
 
 /**
  * @description 非对称算法抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public abstract class AbstractAsymmetricAlgorithm extends
-		CipherSymmetricAlgorithm implements AsymmetricAlgorithm {
-	
+		AbstractSymmetricAlgorithm implements AsymmetricAlgorithm {
+
 	/** 公钥接口对象 */
 	protected PublicKey publicKeyInterface;
-	
+
 	/** 私钥接口对象 */
 	protected PrivateKey privateKeyInterface;
-	
+
 	/** 公钥 */
 	private String publicKey;
-	
+
 	/** 公钥/私钥的编解码器 */
 	private Codec keyCodec;
-	
+
 	@Override
 	public PublicKey getPublicKeyInterface() {
 		return this.publicKeyInterface;
 	}
-	
+
 	@Override
 	public PrivateKey getPrivateKeyInterface() {
 		return this.privateKeyInterface;
 	}
-	
+
 	@Override
 	public void setPublicKey(String publicKey) {
 		this.publicKey = publicKey;
@@ -65,7 +65,7 @@ public abstract class AbstractAsymmetricAlgorithm extends
 	public String getPublicKey() {
 		return this.publicKey;
 	}
-	
+
 	public Codec getKeyCodec() {
 		return keyCodec;
 	}
@@ -73,25 +73,25 @@ public abstract class AbstractAsymmetricAlgorithm extends
 	public void setKeyCodec(Codec keyCodec) {
 		this.keyCodec = keyCodec;
 	}
-	
+
 	@Override
 	protected void initCodec() throws Exception {
 		super.initCodec();
-		
+
 		if (this.keyCodec == null)
 			setKeyCodec(new Base64Codec());
 	}
 
 	/**
 	 * @description 获取公钥的字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @return
 	 */
 	protected byte[] getPublicKeyBytes() {
 		if (this.publicKey == null)
 			throw new IllegalArgumentException("Public key must not be null.");
-		
+
 		return CodecUtils.getBytes(this.publicKey, getEncoding());
 	}
-	
+
 }

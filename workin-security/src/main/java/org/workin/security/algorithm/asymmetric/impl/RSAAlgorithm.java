@@ -26,14 +26,14 @@ import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
 
-import org.workin.security.algorithm.asymmetric.AbstractAsymmetricAlgorithm;
+import org.workin.security.algorithm.asymmetric.CipherAsymmetricAlgorithm;
 
 /**
  * @description RSA加解密算法实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  <a href="mailto:code727@gmail.com">杜斌</a>	
  * @version 1.0
  */
-public class RSAAlgorithm extends AbstractAsymmetricAlgorithm {
+public class RSAAlgorithm extends CipherAsymmetricAlgorithm {
 	
 	@Override
 	protected void init() throws Exception {
