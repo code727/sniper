@@ -77,6 +77,11 @@
 		</dependency>
 		<dependency>  
 			<groupId>org.workin</groupId>  
+		    <artifactId>workin-web</artifactId>  
+		    <version>1.0.0</version> 
+		</dependency>
+		<dependency>  
+			<groupId>org.workin</groupId>  
 		    <artifactId>workin-nosql</artifactId>  
 		    <version>1.0.0</version> 
 		    <optional>true</optional>
