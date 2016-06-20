@@ -125,47 +125,47 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	}
 
 	@Override
-	public <T> ZoomResource srcZoomUpload(FastDFSMeta<T> meta) throws Exception {
-		return srcZoomUpload(null, meta);
+	public <T> ZoomResource zoomUpload(FastDFSMeta<T> meta) throws Exception {
+		return zoomUpload(null, meta);
 	}
 
 	@Override
-	public <T> ZoomResource srcZoomUpload(String groupName, FastDFSMeta<T> meta) throws Exception {
+	public <T> ZoomResource zoomUpload(String groupName, FastDFSMeta<T> meta) throws Exception {
 		List<FastDFSMeta<T>> metas = CollectionUtils.newArrayList();
 		metas.add(meta);
-		return CollectionUtils.get(srcZoomBatchUpload(groupName, metas, false), 0);
+		return CollectionUtils.get(batchZoomUpload(groupName, metas, false), 0);
 	}
 
 	@Override
-	public <T> ZoomResource srcZoomReupload(FastDFSMeta<T> meta) throws Exception {
-		return srcZoomReupload(null, meta);
+	public <T> ZoomResource zoomReupload(FastDFSMeta<T> meta) throws Exception {
+		return zoomReupload(null, meta);
 	}
 
 	@Override
-	public <T> ZoomResource srcZoomReupload(String groupName, FastDFSMeta<T> meta) throws Exception {
+	public <T> ZoomResource zoomReupload(String groupName, FastDFSMeta<T> meta) throws Exception {
 		List<FastDFSMeta<T>> metas = CollectionUtils.newArrayList();
 		metas.add(meta);
-		return CollectionUtils.get(srcZoomBatchUpload(groupName, metas, true), 0);
+		return CollectionUtils.get(batchZoomUpload(groupName, metas, true), 0);
 	}
 
 	@Override
-	public <T> List<ZoomResource> srcZoomBatchUpload(List<FastDFSMeta<T>> metas) throws Exception {
-		return srcZoomBatchUpload(null, metas);
+	public <T> List<ZoomResource> batchZoomUpload(List<FastDFSMeta<T>> metas) throws Exception {
+		return batchZoomUpload(null, metas);
 	}
 
 	@Override
-	public <T> List<ZoomResource> srcZoomBatchUpload(String groupName, List<FastDFSMeta<T>> metas) throws Exception {
-		return srcZoomBatchUpload(groupName, metas, false);
+	public <T> List<ZoomResource> batchZoomUpload(String groupName, List<FastDFSMeta<T>> metas) throws Exception {
+		return batchZoomUpload(groupName, metas, false);
 	}
 
 	@Override
-	public <T> List<ZoomResource> srcZoomBatchReupload(List<FastDFSMeta<T>> metas) throws Exception {
-		return srcZoomBatchReupload(null, metas);
+	public <T> List<ZoomResource> batchZoomReupload(List<FastDFSMeta<T>> metas) throws Exception {
+		return batchZoomReupload(null, metas);
 	}
 
 	@Override
-	public <T> List<ZoomResource> srcZoomBatchReupload(final String groupName, final List<FastDFSMeta<T>> metas) throws Exception {
-		return srcZoomBatchUpload(groupName, metas, true);
+	public <T> List<ZoomResource> batchZoomReupload(final String groupName, final List<FastDFSMeta<T>> metas) throws Exception {
+		return batchZoomUpload(groupName, metas, true);
 	}
 	
 	/**
@@ -199,21 +199,22 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	 * @return
 	 * @throws Exception
 	 */
-	private <T> List<ZoomResource> srcZoomBatchUpload(final String groupName, final List<FastDFSMeta<T>> metas, final boolean deleteOriginalResource) throws Exception {
+	private <T> List<ZoomResource> batchZoomUpload(final String groupName, final List<FastDFSMeta<T>> metas, final boolean deleteOriginalResource) throws Exception {
 		return this.execute(groupName, new FastDFSCallback<List<ZoomResource>>() {
 			
 			@SuppressWarnings("unchecked")
 			@Override
 			public List<ZoomResource> doIn(StorageClient1 storageClient) throws Exception {
 				String targetGroupName = StringUtils.trimToEmpty(groupName);
-				Map<String, Object> map = doSrcZoomBatchUpload(storageClient, targetGroupName, metas);
-				List<File> tempImageSources = (List<File>) map.get("tempImageSources");
+				Map<String, Object> map = doBatchZoomUpload(storageClient, targetGroupName, metas);
+				
+				List<File> localTempSources = (List<File>) map.get(LOCAL_TEMPSOURCES_KEY);
 				
 				if (deleteOriginalResource) 
 					deleteOriginalResources(true, metas);
 				
-				deleteTempFiles(tempImageSources);
-				return (List<ZoomResource>) map.get("zoomResources");
+				deleteTempFiles(localTempSources);
+				return (List<ZoomResource>) map.get(LOCAL_TEMPSOURCES_KEY);
 			}
 		});
 	}
@@ -236,8 +237,8 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	/**
 	 * @description 清理本地临时文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param tempImageSources
-	 * @throws Exception 
+	 * @param files
+	 * @throws Exception
 	 */
 	private void deleteTempFiles(List<File> files) throws Exception {
 		Runnable task = new FilesDeleteTask(files);

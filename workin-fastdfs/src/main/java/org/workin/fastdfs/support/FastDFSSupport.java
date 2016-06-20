@@ -37,9 +37,9 @@ import org.workin.fastdfs.accessor.DefaultAccessor;
 import org.workin.fastdfs.cluster.Cluster;
 import org.workin.fastdfs.factory.connection.ConnectionFactory;
 import org.workin.fastdfs.meta.FastDFSMeta;
+import org.workin.image.zoom.ImageZoomHandler;
 import org.workin.spring.beans.CheckableInitializingBean;
 import org.workin.support.file.ZoomResource;
-import org.workin.support.multimedia.image.ImageZoomHandler;
 
 /**
  * @description FastDFS支持服务类
@@ -47,6 +47,12 @@ import org.workin.support.multimedia.image.ImageZoomHandler;
  * @version 1.0
  */
 public abstract class FastDFSSupport extends CheckableInitializingBean {
+	
+	/** 缩放资源标识键 */
+	protected final static String ZOOM_RESOURCES_KEY = "zoomResources";
+	
+	/** 本地临时文件资源标识键 */
+	protected final static String LOCAL_TEMPSOURCES_KEY = "localTempSources";
 	
 	/** FastDFS集群族对象 */
 	private Cluster cluster;
@@ -167,30 +173,32 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	 * @return
 	 * @throws Exception
 	 */
-	protected <T> Map<String, Object> doSrcZoomBatchUpload(StorageClient1 storageClient, String groupName, List<FastDFSMeta<T>> metas) throws Exception { 
+	protected <T> Map<String, Object> doBatchZoomUpload(StorageClient1 storageClient, String groupName, List<FastDFSMeta<T>> metas) throws Exception { 
 		AssertUtils.assertNotNull(imageZoomHandler, "ImageZoomHandler must not be null.");
+		
 		List<ZoomResource> zoomResources = CollectionUtils.newArrayList();
 		String targetGroupName = StringUtils.trimToEmpty(groupName);
-		List<File> tempImageSources = CollectionUtils.newArrayList();
+		List<File> localTempSources = CollectionUtils.newArrayList();
+		
 		for (FastDFSMeta<T> meta : metas) {
 			ZoomResource zoomResource = new ZoomResource();
 			NameValuePair[] nameValuePaires = CollectionUtils.isNotEmpty(meta.getNameValuePaires()) ? 
 					CollectionUtils.toArray(meta.getNameValuePaires()) : null;
 			
-			File tempImageSource = createTempFile(meta);
+			File localTempSource = createTempFile(meta);
 			// 将源文件缩放后生成一个新的文件资源在本地的临时目录中
-			imageZoomHandler.handle(meta.getInputStream(), meta.getExtName(), tempImageSource);
+			imageZoomHandler.handle(meta.getInputStream(), meta.getExtName(), localTempSource);
 			
 			/* 上传源和缩放文件后设置返回结果 */
 			String srcURL = accessor.getAccessableURL(getCluster(), 
 					storageClient.upload_file1(targetGroupName, meta.getBytes(), meta.getExtName(), nameValuePaires));
 			String zoomURL = accessor.getAccessableURL(getCluster(), 
-					storageClient.upload_file1(targetGroupName, tempImageSource.getCanonicalPath(), FileUtils.getExtensionName(tempImageSource), nameValuePaires));
+					storageClient.upload_file1(targetGroupName, localTempSource.getCanonicalPath(), FileUtils.getExtensionName(localTempSource), nameValuePaires));
 			zoomResource.setSrcURL(srcURL);
 			zoomResource.setZoomURL(zoomURL);
 		
 			zoomResources.add(zoomResource);
-			tempImageSources.add(tempImageSource);
+			localTempSources.add(localTempSource);
 		}
 		
 		/* 返回执行结果:
@@ -198,8 +206,8 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 		 * 2)tempImageSources:进行缩放操作时所创建的本地临时图片资源，对于上一层调用方来说，可根据此值来做本地临时文件的清理工作
 		 */
 		Map<String, Object> map = MapUtils.newHashMap();
-		map.put("zoomResources", zoomResources);
-		map.put("tempImageSources", tempImageSources);
+		map.put(ZOOM_RESOURCES_KEY, zoomResources);
+		map.put(LOCAL_TEMPSOURCES_KEY, localTempSources);
 		return map;
 	}
 	

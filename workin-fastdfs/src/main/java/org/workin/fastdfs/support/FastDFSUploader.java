@@ -103,7 +103,7 @@ public interface FastDFSUploader {
 	 * @param meta
 	 * @return
 	 */
-	public <T> ZoomResource srcZoomUpload(FastDFSMeta<T> meta) throws Exception;
+	public <T> ZoomResource zoomUpload(FastDFSMeta<T> meta) throws Exception;
 	
 	/**
 	 * @description 上传源以及缩放后的文件到指定组
@@ -112,7 +112,7 @@ public interface FastDFSUploader {
 	 * @param meta
 	 * @return
 	 */
-	public <T> ZoomResource srcZoomUpload(String groupName, FastDFSMeta<T> meta) throws Exception;
+	public <T> ZoomResource zoomUpload(String groupName, FastDFSMeta<T> meta) throws Exception;
 	
 	/**
 	 * @description 重传源以及缩放后的文件
@@ -120,7 +120,7 @@ public interface FastDFSUploader {
 	 * @param meta
 	 * @return
 	 */
-	public <T> ZoomResource srcZoomReupload(FastDFSMeta<T> meta) throws Exception;
+	public <T> ZoomResource zoomReupload(FastDFSMeta<T> meta) throws Exception;
 	
 	/**
 	 * @description 重传源以及缩放后的文件到指定组
@@ -129,7 +129,7 @@ public interface FastDFSUploader {
 	 * @param meta
 	 * @return
 	 */
-	public <T> ZoomResource srcZoomReupload(String groupName, FastDFSMeta<T> meta) throws Exception;
+	public <T> ZoomResource zoomReupload(String groupName, FastDFSMeta<T> meta) throws Exception;
 	
 	/**
 	 * @description 批量上传源以及缩放后的文件
@@ -137,7 +137,7 @@ public interface FastDFSUploader {
 	 * @param metas
 	 * @return
 	 */
-	public <T> List<ZoomResource> srcZoomBatchUpload(List<FastDFSMeta<T>> metas) throws Exception;
+	public <T> List<ZoomResource> batchZoomUpload(List<FastDFSMeta<T>> metas) throws Exception;
 	
 	/**
 	 * @description 批量上传源以及缩放后的文件到指定组
@@ -146,7 +146,7 @@ public interface FastDFSUploader {
 	 * @param metas
 	 * @return
 	 */
-	public <T> List<ZoomResource> srcZoomBatchUpload(String groupName, List<FastDFSMeta<T>> metas) throws Exception;
+	public <T> List<ZoomResource> batchZoomUpload(String groupName, List<FastDFSMeta<T>> metas) throws Exception;
 	
 	/**
 	 * @description 批量重传源以及缩放后的文件
@@ -154,7 +154,7 @@ public interface FastDFSUploader {
 	 * @param metas
 	 * @return
 	 */
-	public <T> List<ZoomResource> srcZoomBatchReupload(List<FastDFSMeta<T>> metas) throws Exception;
+	public <T> List<ZoomResource> batchZoomReupload(List<FastDFSMeta<T>> metas) throws Exception;
 	
 	/**
 	 * @description 批量重传源以及缩放后的文件到指定组
@@ -163,6 +163,6 @@ public interface FastDFSUploader {
 	 * @param metas
 	 * @return
 	 */
-	public <T> List<ZoomResource> srcZoomBatchReupload(String groupName, List<FastDFSMeta<T>> metas) throws Exception;
+	public <T> List<ZoomResource> batchZoomReupload(String groupName, List<FastDFSMeta<T>> metas) throws Exception;
 	
 }
