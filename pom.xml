@@ -85,7 +85,7 @@
 		<module>workin-payment</module>
 		<module>workin-captcha</module>
 		<module>workin-sms</module>
-		<module>workin-qrcode</module>
 		<module>workin-push</module>
+		<module>workin-image</module>
 	</modules>
 </project>
