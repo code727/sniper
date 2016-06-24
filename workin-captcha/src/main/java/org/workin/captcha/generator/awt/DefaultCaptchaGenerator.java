@@ -18,10 +18,15 @@
 
 package org.workin.captcha.generator.awt;
 
-import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.util.Random;
+
+import javax.swing.JLabel;
+
+import org.workin.captcha.manager.font.FontManager;
+import org.workin.image.layout.CaptchaImageLayout;
 
 /**
  * @description 默认的图片验证码生成器实现类
@@ -32,43 +37,45 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 
 	@Override
 	protected void draw(Graphics graphics, String text) {
+		
 		drawBackground(graphics);
-		
-		if (hasBorder())
+		drawText(graphics, text);
+
+		CaptchaImageLayout layout = getLayout();
+		if (layout.hasBorder())
 			drawBorder(graphics);
-		
-		if (hasDistracter())
+
+		if (layout.hasDistracter())
 			drawDistracter(graphics, text);
 		
-		drawText(graphics, text);
 	}
-	
+
 	/**
 	 * @description 绘制背景
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param graphics
 	 */
 	protected void drawBackground(Graphics graphics) {
-		/* 填充并设置背景颜色 */
-		graphics.fillRect(0, 0, getWidth(), getHeight());
-		graphics.setColor(getBackgroundColor());
+		CaptchaImageLayout layout = getLayout();
+		/* 设置背景颜色后填充 */
+		graphics.setColor(getBackgroundColorManager().selectColor());
+		graphics.fillRect(0, 0, layout.getWidth(), layout.getHeight());
 	}
-	
+
 	/**
 	 * @description 绘制边框
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param graphics
 	 */
 	protected void drawBorder(Graphics graphics) {
-		int height = getHeight();
+		CaptchaImageLayout layout = getLayout();
+		int height = layout.getHeight();
 		// 设置边框颜色
-		graphics.setColor(Color.LIGHT_GRAY);
-		// 边框字体样式
-		graphics.setFont(new Font(getBorderFontName(), getBorderStyle(), height - 2));
+		graphics.setColor(getBorderColorManager().selectColor());
 		// 绘制边框
-		graphics.drawRect(0, 0, getWidth() - 1, height - 1);
+		graphics.drawRect(0, 0, layout.getWidth() - 1, height - 1);
 	}
-	
+
 	/**
 	 * @description 绘制干扰项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -76,32 +83,68 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 	 * @param text
 	 */
 	protected void drawDistracter(Graphics graphics, String text) {
-		Random rand = new Random();
-		graphics.setColor(getDistracterColor());
+		CaptchaImageLayout layout = getLayout();
+		// 设置干扰项颜色
+		graphics.setColor(getDistracterColorManager().selectColor());
 		
+		int width = layout.getWidth();
+		int height = layout.getHeight();
+
 		int x;
 		int y;
-		for (int i = 0; i < text.length() * 6; i++) {
-			x = rand.nextInt(getWidth());
-			y = rand.nextInt(getHeight());
+		int multiple = Math.max(width, height) * 2;
+		Random rand = new Random();
+		for (int i = 0; i < multiple; i++) {
+			x = rand.nextInt(width);
+			y = rand.nextInt(height);
 			// 绘制1*1大小的矩形
 			graphics.drawRect(x, y, 1, 1);
 		}
 	}
-	
+
 	/** 
 	 * @description 绘制验证码文本
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param graphics
 	 * @param text 
 	 */
-	private void drawText(Graphics graphics, String text) {
-		int codeY = getHeight() - 5;
-		graphics.setFont(new Font(getTextFontName(), getTextFontStyle(), getTextFontSize()));
+	protected void drawText(Graphics graphics, String text) {
+		CaptchaImageLayout layout = getLayout();
+		FontManager textFontManager = getTextFontManager();
+		
+		Font textFont = new Font(textFontManager.selectFontName(),
+				textFontManager.selectFontStyle(), layout.getFontSize());
+		graphics.setFont(textFont);
+		
+		JLabel label = new JLabel();
+		FontMetrics fontMetrics = label.getFontMetrics(textFont);
+		
+		char currentChar;
+		int charWidth = 0;
+		int margin = layout.getMargin();
+		int textWidth = fontMetrics.stringWidth(text);
+		
+		int x;
+		if (textWidth > layout.getWidth())
+			// 文本总宽度大于图片宽度，起始坐标为0
+			x = 0;
+		else if (textWidth + margin > layout.getWidth())
+			// 文本总宽 + 设置的边距大于图片宽度，则起始坐标为"图片宽度 - 文本总宽"
+		    x = layout.getWidth() - textWidth;
+		else
+			x = margin;
+		
+		// y坐标取文本高度与图片高度之间的最小值
+		int y =  Math.min(fontMetrics.getHeight(), layout.getHeight());
 		for (int i = 0; i < text.length(); i++) {
-			/* 绘制字符以及对应的颜色 */
-			graphics.drawString(String.valueOf(text.charAt(i)), i * 16 + 5, codeY);
-			graphics.setColor(selectTextColor());
+			currentChar = text.charAt(i);
+			// 当前字符的起始横坐标为"上一个字符的起始坐标 + 上一个字符所占宽度"
+			x = x + charWidth;
+			
+			/* 绘制颜色以及对应的字符 */
+			graphics.setColor(getTextColorManager().selectColor());
+			graphics.drawString(String.valueOf(currentChar), x, y);
+			charWidth = fontMetrics.charWidth(currentChar);
 		}
 	}
 

@@ -28,13 +28,12 @@ import java.awt.image.RenderedImage;
 public interface QRCodeGenerator {
 	
 	/**
-	 * @description 根据文本内容生成二维码图片对象
+	 * @description 生成二维码图片对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param text
+	 * @param qrCode
 	 * @return
+	 * @throws Exception
 	 */
-	public RenderedImage generator(String text) throws Exception;
-	
-	
+	public RenderedImage generator(QRCode qrCode) throws Exception;
 
 }

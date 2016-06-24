@@ -18,8 +18,19 @@
 
 package org.workin.captcha.generator;
 
+import java.awt.Font;
+import java.awt.image.BufferedImage;
+
 import org.springframework.beans.factory.InitializingBean;
-import org.workin.commons.util.AssertUtils;
+import org.workin.captcha.manager.color.BackgroundColorManager;
+import org.workin.captcha.manager.color.BorderColorManager;
+import org.workin.captcha.manager.color.ColorManager;
+import org.workin.captcha.manager.color.DistracterColorManager;
+import org.workin.captcha.manager.color.TextColorManager;
+import org.workin.captcha.manager.font.FontManager;
+import org.workin.captcha.manager.font.TextFontManager;
+import org.workin.commons.util.NumberUtils;
+import org.workin.image.layout.CaptchaImageLayout;
 
 /**
  * @description 图片验证码生成器抽象类
@@ -29,126 +40,210 @@ import org.workin.commons.util.AssertUtils;
 public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 		implements ImageCaptchaGenerator, InitializingBean {
 	
-	/** 高度 */
-	private int width;
+	/** 图片类型 */
+	private int imageType = BufferedImage.TYPE_INT_RGB;
 	
-	/** 宽度 */
-	private int height;
+	/** 布局 */
+	private CaptchaImageLayout layout;
 	
-	/** 字体大小 */
-	private int textFontSize;
+	/** 背景颜色管理器 */
+	private ColorManager backgroundColorManager;
 	
-	/** 字与图片边缘的间距  */
-	private int textSpacing;
+	/** 边框颜色管理器 */
+	private ColorManager borderColorManager;
 	
-	/** 是否需要边框 */
-	private boolean border;
+	/** 干扰项颜色管理器 */
+	private ColorManager distracterColorManager;
 	
-	public AbstractImageCaptchaGenerator() {
-		this.setBorder(true);
+	/** 文本颜色管理器 */
+	private ColorManager textColorManager;
+	
+	/** 文本字体管理器 */
+	private FontManager textFontManager;
+	
+	public int getImageType() {
+		return imageType;
+	}
+
+	public void setImageType(int imageType) {
+		this.imageType = NumberUtils.minLimit(imageType, BufferedImage.TYPE_INT_RGB);
+	}
+
+	public CaptchaImageLayout getLayout() {
+		return layout;
+	}
+
+	public void setLayout(CaptchaImageLayout layout) {
+		this.layout = layout;
 	}
 	
+	public ColorManager getBackgroundColorManager() {
+		return backgroundColorManager;
+	}
+
+	public void setBackgroundColorManager(ColorManager backgroundColorManager) {
+		this.backgroundColorManager = backgroundColorManager;
+	}
+
+	public ColorManager getBorderColorManager() {
+		return borderColorManager;
+	}
+
+	public void setBorderColorManager(ColorManager borderColorManager) {
+		this.borderColorManager = borderColorManager;
+	}
+
+	public ColorManager getDistracterColorManager() {
+		return distracterColorManager;
+	}
+
+	public void setDistracterColorManager(ColorManager distracterColorManager) {
+		this.distracterColorManager = distracterColorManager;
+	}
+
+	public ColorManager getTextColorManager() {
+		return textColorManager;
+	}
+
+	public void setTextColorManager(ColorManager textColorManager) {
+		this.textColorManager = textColorManager;
+	}
+	
+	public FontManager getTextFontManager() {
+		return textFontManager;
+	}
+
+	public void setTextFontManager(FontManager textFontManager) {
+		this.textFontManager = textFontManager;
+	}
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		this.formatWidth();
-		this.formatHeight();
-		this.formatTextFontSize();
-	}
-	
-	@Override
-	public int getWidth() {
-		return this.width;
-	}
-
-	@Override
-	public void setWidth(int width) {
-		AssertUtils.assertTrue(width >= MIN_WIDTH, "Captcha image width ["
-				+ width + "] must greater than equals " + MIN_WIDTH);
 		
-		this.width = width;
-	}
-
-	@Override
-	public int getHeight() {
-		return this.height;
-	}
-
-	@Override
-	public void setHeight(int height) {
-		AssertUtils.assertTrue(height >= MIN_HEIGHT, "Captcha image height ["
-				+ height + "] must greater than equals " + MIN_HEIGHT);
+		if (this.layout == null)
+			setLayout(buildDefaultLayout());
 		
-		this.height = height;
-	}
-
-	@Override
-	public int getTextFontSize() {
-		return this.textFontSize;
-	}
-
-	@Override
-	public void setTextFontSize(int textFontSize) {
-		AssertUtils.assertTrue(textFontSize >= MIN_FONTSIZE,
-				"Captcha text font size [" + textFontSize + "] must greater than equals " + MIN_FONTSIZE);
+		initializeLayout();
 		
-		this.textFontSize = textFontSize;
-	}
-
-	@Override
-	public void setTextSpacing(int textSpacing) {
-		AssertUtils.assertTrue(textSpacing >= MIN_TEXT_SPACING,
-				"Captcha text spacing [" + textSpacing + "] must greater than equals " + MIN_TEXT_SPACING);
+		if (this.backgroundColorManager == null) 
+			setBackgroundColorManager(buildDefaultBackgroundColorManager());
 		
-		this.textSpacing = textSpacing;
-	}
-
-	@Override
-	public int getTextSpacing() {
-		return this.textSpacing;
-	}
-	
-	@Override
-	public void setBorder(boolean border) {
-		this.border = border;
-	}
-	
-	@Override
-	public boolean hasBorder() {
-		return this.border;
+		if (this.borderColorManager == null) 
+			setBorderColorManager(buildDefaultBorderColorManager());
+		
+		if (this.distracterColorManager == null)
+			setDistracterColorManager(buildDefaultDistracterColorManager());
+		
+		if (this.textColorManager == null)
+			setTextColorManager(buildDefaultTextColorManager());
+		
+		if (this.textFontManager == null)
+			setTextFontManager(buildDefaultTextFontManager());
 	}
 	
 	/**
-	 * @description 格式化图片宽度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @description 构建默认样式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
 	 */
-	protected void formatWidth() {
-		if (this.getWidth() < MIN_WIDTH)
-			this.setWidth(MIN_WIDTH);
+	protected CaptchaImageLayout buildDefaultLayout() {
+		CaptchaImageLayout layout = new CaptchaImageLayout();
+		
+		layout.setWidth(MIN_WIDTH);
+		layout.setHeight(MIN_HEIGHT);
+		layout.setMargin(MIN_MARGIN);
+		
+		layout.setBorderStyle(Font.PLAIN);
+		layout.setBorder(true);
+		
+		layout.setDistracter(true);
+		return layout;
 	}
 	
 	/**
-	 * @description 格式化图片高度
+	 * @description 构建默认的背景颜色管理器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 * @throws Exception
+	 */
+	protected ColorManager buildDefaultBackgroundColorManager() throws Exception {
+		BackgroundColorManager backgroundColorManager = new BackgroundColorManager();
+		backgroundColorManager.afterPropertiesSet();
+		return backgroundColorManager;
+	}
+	
+	/**
+	 * @description 构建默认的边框颜色管理器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 * @throws Exception
+	 */
+	protected ColorManager buildDefaultBorderColorManager() throws Exception {
+		BorderColorManager borderColorManager = new BorderColorManager();
+		borderColorManager.afterPropertiesSet();
+		return borderColorManager;
+	}
+	
+	/**
+	 * @description 构建默认的干扰项颜色管理器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 * @throws Exception
+	 */
+	protected ColorManager buildDefaultDistracterColorManager() throws Exception {
+		DistracterColorManager distracterColorManager = new DistracterColorManager();
+		distracterColorManager.afterPropertiesSet();
+		return distracterColorManager;
+	}
+	
+	/** 
+	 * @description 构建默认的文本颜色管理器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 * @throws Exception
+	 */
+	protected ColorManager buildDefaultTextColorManager() throws Exception {
+		TextColorManager textColorManager = new TextColorManager();
+		textColorManager.afterPropertiesSet();
+		return textColorManager;
+	}
+	
+	/** 
+	 * @description 构建默认的文本字体管理器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return 
+	 * @throws Exception 
+	 */
+	protected FontManager buildDefaultTextFontManager() throws Exception {
+		TextFontManager textFontManager = new TextFontManager();
+		textFontManager.afterPropertiesSet();
+		return textFontManager;
+	}
+		
+	/**
+	 * @description 初始化布局
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	protected void formatHeight() {
-		int width = this.getWidth();
-		int height = this.getHeight();
+	private void initializeLayout() {
 		
-		if (width < height)
-			// 如果长度比高度小，则设置高度只为宽度的1/3
-			this.setHeight(width / 3);
+		int fontSize = layout.getFontSize();
+		if (fontSize < MIN_FONT_SIZE) 
+			layout.setFontSize(MIN_FONT_SIZE);
 			
-		if (height < MIN_HEIGHT)
-			this.setHeight(MIN_HEIGHT);
-	}
-	
-	/**
-	 * @description 格式化验证码字体大小
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	protected void formatTextFontSize() {
-		// 字体为"最小宽/高值 - 边距"
-		this.setTextFontSize(Math.min(this.getWidth(), this.getHeight()) - this.getTextSpacing());
+		int width = layout.getWidth();
+		if (width < MIN_WIDTH) 
+			layout.setWidth(MIN_WIDTH);
+		
+		int height = layout.getHeight();
+		if (height < MIN_HEIGHT) 
+			layout.setHeight(MIN_HEIGHT);
+			
+		int margin = layout.getMargin();
+		if (margin < MIN_MARGIN) 
+			layout.setMargin(MIN_MARGIN);
+				
+		if (layout.getBorderStyle() < Font.PLAIN)
+			layout.setBorderStyle(Font.PLAIN);
 	}
 	
 }

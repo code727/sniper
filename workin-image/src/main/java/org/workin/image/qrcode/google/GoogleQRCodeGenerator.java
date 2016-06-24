@@ -26,6 +26,8 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import org.workin.commons.util.MapUtils;
+import org.workin.image.layout.QRCodeImageLayout;
+import org.workin.image.qrcode.QRCode;
 import org.workin.image.qrcode.QRCodeGenerator;
 
 import com.google.zxing.BarcodeFormat;
@@ -42,24 +44,26 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 public class GoogleQRCodeGenerator implements QRCodeGenerator {
 
 	@Override
-	public RenderedImage generator(String text) throws Exception {
+	public RenderedImage generator(QRCode qrCode) throws Exception {
 		Map<EncodeHintType, Object> hints = MapUtils.newHashMap();
 		// 设置QR二维码的纠错级别（H为最高级别）具体级别信息
 		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
 		// 设置编码方式
 		hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
-		hints.put(EncodeHintType.MAX_SIZE, 350);
-		hints.put(EncodeHintType.MIN_SIZE, 100);
+		hints.put(EncodeHintType.MAX_SIZE, 200);
+		hints.put(EncodeHintType.MIN_SIZE, 200);
+		hints.put(EncodeHintType.MARGIN, 0);
 		
 		MultiFormatWriter writer = new MultiFormatWriter();
-		BitMatrix bitMatrix = writer.encode(text, BarcodeFormat.QR_CODE, 100, 100, hints);
+		QRCodeImageLayout layout = qrCode.getLayout();
+		BitMatrix bitMatrix = writer.encode(qrCode.getText(), BarcodeFormat.QR_CODE, layout.getWidth(), layout.getHeight(), hints);
 		
 		int width = bitMatrix.getWidth();
 		int height = bitMatrix.getHeight();
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				image.setRGB(x, y, (bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF));
+				image.setRGB(x, y, (bitMatrix.get(x, y) ? layout.getContentColor() : layout.getBlankColor()));
 			}
 		}
 		return image;
@@ -67,12 +71,11 @@ public class GoogleQRCodeGenerator implements QRCodeGenerator {
 	
 	public static void main(String[] args) throws Exception {
 		GoogleQRCodeGenerator generator = new GoogleQRCodeGenerator();
-		RenderedImage image = generator.generator("http://www.163.com");
 		
+		QRCode qrCode = new QRCode();
+		qrCode.setText("http://www.163.com");
+		RenderedImage image = generator.generator(qrCode);
 		ImageIO.write(image, "PNG", new File("C:/Users/Administrator/Desktop/test.png"));
-		
-		
-		
 	}
 
 }

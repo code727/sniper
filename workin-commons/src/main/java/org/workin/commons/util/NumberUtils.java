@@ -127,9 +127,8 @@ public class NumberUtils {
 	
 	/**
 	 * @description 获取不为空的整数值，否则返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
-	 * @param defaultValue
 	 * @return 
 	 */
 	public static int safeInteger(Integer value) {
@@ -138,7 +137,7 @@ public class NumberUtils {
 	
 	/**
 	 * @description 获取不为空的整数值，否则返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @param defaultValue
 	 * @return 
