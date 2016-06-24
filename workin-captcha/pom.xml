@@ -35,7 +35,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
-			<artifactId>workin-commons</artifactId>
+			<artifactId>workin-image</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>

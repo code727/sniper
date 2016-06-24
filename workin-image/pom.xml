@@ -17,7 +17,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
-			<artifactId>workin-commons</artifactId>
+			<artifactId>workin-support</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
