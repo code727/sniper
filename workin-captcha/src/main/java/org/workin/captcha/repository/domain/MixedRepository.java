@@ -18,6 +18,8 @@
 
 package org.workin.captcha.repository.domain;
 
+import org.workin.commons.util.StringUtils;
+
 /**
  * @description 混编文本库实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -25,8 +27,14 @@ package org.workin.captcha.repository.domain;
  */
 public class MixedRepository extends TextRepository {
 	
-	public MixedRepository() {
-		setContent(new NumberRepository().getContent() + new LetterRepository().getContent());
-	}
+	private static final String[] deletedString = new String[]{"0", "o", "O", "1", "l"};
 	
+	public MixedRepository() {
+		String content = new NumberRepository().getContent() + new LetterRepository().getContent();
+		for (String ds : deletedString) 
+			content = StringUtils.delete(content, ds);
+		
+		setContent(content);
+	}
+		
 }

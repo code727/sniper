@@ -36,15 +36,15 @@ public class TextColorManager extends AbstractColorManager {
 		colors.put("0_0_0_black", Color.BLACK);
 		colors.put("0_0_255_blue", Color.BLUE);
 		colors.put("0_255_255_cyan", Color.CYAN);
-		colors.put("64_64_64_darkGray", Color.DARK_GRAY);
-		colors.put("128_128_128_gray", Color.GRAY);
+//		colors.put("64_64_64_darkGray", Color.DARK_GRAY);
+//		colors.put("128_128_128_gray", Color.GRAY);
 		colors.put("0_255_0_green", Color.GREEN);
-		colors.put("192_192_192_lightGray", Color.LIGHT_GRAY);
+//		colors.put("192_192_192_lightGray", Color.LIGHT_GRAY);
 		colors.put("255_0_255_magenta", Color.MAGENTA);
 		colors.put("255_200_0_orange", Color.ORANGE);
 		colors.put("255_175_175_pink", Color.PINK);
 		colors.put("255_0_0_red", Color.RED);
-		colors.put("255_255_0_yellow", Color.YELLOW);
+//		colors.put("255_255_0_yellow", Color.YELLOW);
 		
 		return colors;
 	}

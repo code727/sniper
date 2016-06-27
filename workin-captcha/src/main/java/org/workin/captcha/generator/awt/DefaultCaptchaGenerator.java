@@ -85,11 +85,9 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 	protected void drawDistracter(Graphics graphics, String text) {
 		CaptchaImageLayout layout = getLayout();
 		// 设置干扰项颜色
-		graphics.setColor(getDistracterColorManager().selectColor());
-		
 		int width = layout.getWidth();
 		int height = layout.getHeight();
-
+		
 		int x;
 		int y;
 		int multiple = Math.max(width, height) * 2;
@@ -97,6 +95,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 		for (int i = 0; i < multiple; i++) {
 			x = rand.nextInt(width);
 			y = rand.nextInt(height);
+			graphics.setColor(getDistracterColorManager().selectColor());
 			// 绘制1*1大小的矩形
 			graphics.drawRect(x, y, 1, 1);
 		}

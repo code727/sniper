@@ -34,10 +34,10 @@ public class BackgroundColorManager extends AbstractColorManager {
 	protected Map<String, Color> buildDefaultColors() {
 		Map<String, Color> colors = MapUtils.newHashMap();
 		colors.put("255_255_255_white", Color.WHITE);
+		colors.put("239_239_239_gray", new Color(239, 239, 239));
 		colors.put("223_223_223_gray", new Color(223, 223, 223));
+		colors.put("207_207_207_gray", new Color(207, 207, 207));
 		colors.put("191_191_191_gray", new Color(191, 191, 191));
-		colors.put("159_159_159_gray", new Color(159, 159, 159));
-		colors.put("127_127_127_gray", new Color(127, 127, 127));
 		return colors;
 	}
 
