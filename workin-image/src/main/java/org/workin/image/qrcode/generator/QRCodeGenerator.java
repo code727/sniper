@@ -16,9 +16,12 @@
  * Create Date : 2016-6-17
  */
 
-package org.workin.image.qrcode;
+package org.workin.image.qrcode.generator;
 
 import java.awt.image.RenderedImage;
+
+import org.workin.image.layout.QRCodeImageLayout;
+import org.workin.image.qrcode.QRCode;
 
 /**
  * @description 二维码生成器接口
@@ -26,6 +29,20 @@ import java.awt.image.RenderedImage;
  * @version 1.0
  */
 public interface QRCodeGenerator {
+	
+	/**
+	 * @description 设置全局样式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param layout
+	 */
+	public void setLayout(QRCodeImageLayout layout);
+	
+	/**
+	 * @description 获取全局样式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public QRCodeImageLayout getLayout();
 	
 	/**
 	 * @description 生成二维码图片对象

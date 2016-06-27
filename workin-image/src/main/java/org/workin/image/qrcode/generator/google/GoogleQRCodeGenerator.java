@@ -16,19 +16,16 @@
  * Create Date : 2016-6-17
  */
 
-package org.workin.image.qrcode.google;
+package org.workin.image.qrcode.generator.google;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.io.File;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 
 import org.workin.commons.util.MapUtils;
 import org.workin.image.layout.QRCodeImageLayout;
 import org.workin.image.qrcode.QRCode;
-import org.workin.image.qrcode.QRCodeGenerator;
+import org.workin.image.qrcode.generator.AbstractQRCodeGenerator;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -41,21 +38,16 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class GoogleQRCodeGenerator implements QRCodeGenerator {
+public class GoogleQRCodeGenerator  extends AbstractQRCodeGenerator {
+	
+	private static final ThreadLocal<Map<String, Map<EncodeHintType, Object>>> hints = new ThreadLocal<Map<String, Map<EncodeHintType, Object>>>();
 
 	@Override
-	public RenderedImage generator(QRCode qrCode) throws Exception {
-		Map<EncodeHintType, Object> hints = MapUtils.newHashMap();
-		// 设置QR二维码的纠错级别（H为最高级别）具体级别信息
-		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
-		// 设置编码方式
-		hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
-		hints.put(EncodeHintType.MAX_SIZE, 200);
-		hints.put(EncodeHintType.MIN_SIZE, 200);
-		hints.put(EncodeHintType.MARGIN, 0);
+	protected RenderedImage doCreate(QRCode qrCode) throws Exception {
+		Map<EncodeHintType, Object> hints = getHints(qrCode);
 		
-		MultiFormatWriter writer = new MultiFormatWriter();
 		QRCodeImageLayout layout = qrCode.getLayout();
+		MultiFormatWriter writer = new MultiFormatWriter();
 		BitMatrix bitMatrix = writer.encode(qrCode.getText(), BarcodeFormat.QR_CODE, layout.getWidth(), layout.getHeight(), hints);
 		
 		int width = bitMatrix.getWidth();
@@ -69,13 +61,39 @@ public class GoogleQRCodeGenerator implements QRCodeGenerator {
 		return image;
 	}
 	
-	public static void main(String[] args) throws Exception {
-		GoogleQRCodeGenerator generator = new GoogleQRCodeGenerator();
+	/**
+	 * @description 获取com.google.zxing.EncodeHintType映射配置
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param qrCode
+	 * @return
+	 */
+	protected Map<EncodeHintType, Object> getHints(QRCode qrCode) {
+		Map<String, Map<EncodeHintType, Object>> hintsMap = hints.get();
+		if (hintsMap == null)
+			hintsMap = MapUtils.newConcurrentHashMap();
 		
-		QRCode qrCode = new QRCode();
-		qrCode.setText("http://www.163.com");
-		RenderedImage image = generator.generator(qrCode);
-		ImageIO.write(image, "PNG", new File("C:/Users/Administrator/Desktop/test.png"));
+		QRCodeImageLayout layout = qrCode.getLayout();
+		StringBuffer key = new StringBuffer();
+		key.append(ErrorCorrectionLevel.H).append("_")
+				.append(qrCode.getEncoding()).append("_")
+				.append(layout.getWidth()).append("_")
+				.append(layout.getHeight()).append("_")
+				.append(layout.getMargin());
+		
+		Map<EncodeHintType, Object> hs = hintsMap.get(key);
+		if (hints == null) {
+			hs = MapUtils.newHashMap();
+			hs.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+			hs.put(EncodeHintType.CHARACTER_SET, qrCode.getEncoding());
+			hs.put(EncodeHintType.MAX_SIZE, layout.getWidth());
+			hs.put(EncodeHintType.MIN_SIZE, layout.getHeight());
+			hs.put(EncodeHintType.MARGIN, layout.getMargin());
+			
+			hintsMap.put(key.toString(), hs);
+			hints.set(hintsMap);
+		}
+		
+		return hs;
 	}
-
+	
 }

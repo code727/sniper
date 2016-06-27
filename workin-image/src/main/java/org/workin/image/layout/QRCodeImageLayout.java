@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016年6月21日
+ * Create Date : 2016-6-21
  */
 
 package org.workin.image.layout;
@@ -27,7 +27,7 @@ package org.workin.image.layout;
 public class QRCodeImageLayout extends BaseLayout {
 	
 	private static final long serialVersionUID = -8237652728083670335L;
-
+	
     private int contentColor = 0xFF000000;
     
     private int blankColor = 0xFFFFFFFF;
