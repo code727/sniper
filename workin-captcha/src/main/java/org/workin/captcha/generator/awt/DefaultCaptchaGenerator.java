@@ -26,7 +26,7 @@ import java.util.Random;
 import javax.swing.JLabel;
 
 import org.workin.captcha.manager.font.FontManager;
-import org.workin.image.layout.CaptchaImageLayout;
+import org.workin.image.layout.CaptchaLayout;
 
 /**
  * @description 默认的图片验证码生成器实现类
@@ -41,7 +41,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 		drawBackground(graphics);
 		drawText(graphics, text);
 
-		CaptchaImageLayout layout = getLayout();
+		CaptchaLayout layout = getLayout();
 		if (layout.hasBorder())
 			drawBorder(graphics);
 
@@ -56,7 +56,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 	 * @param graphics
 	 */
 	protected void drawBackground(Graphics graphics) {
-		CaptchaImageLayout layout = getLayout();
+		CaptchaLayout layout = getLayout();
 		/* 设置背景颜色后填充 */
 		graphics.setColor(getBackgroundColorManager().selectColor());
 		graphics.fillRect(0, 0, layout.getWidth(), layout.getHeight());
@@ -68,7 +68,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 	 * @param graphics
 	 */
 	protected void drawBorder(Graphics graphics) {
-		CaptchaImageLayout layout = getLayout();
+		CaptchaLayout layout = getLayout();
 		int height = layout.getHeight();
 		// 设置边框颜色
 		graphics.setColor(getBorderColorManager().selectColor());
@@ -83,7 +83,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 	 * @param text
 	 */
 	protected void drawDistracter(Graphics graphics, String text) {
-		CaptchaImageLayout layout = getLayout();
+		CaptchaLayout layout = getLayout();
 		// 设置干扰项颜色
 		int width = layout.getWidth();
 		int height = layout.getHeight();
@@ -108,7 +108,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 	 * @param text 
 	 */
 	protected void drawText(Graphics graphics, String text) {
-		CaptchaImageLayout layout = getLayout();
+		CaptchaLayout layout = getLayout();
 		FontManager textFontManager = getTextFontManager();
 		
 		Font textFont = new Font(textFontManager.selectFontName(),

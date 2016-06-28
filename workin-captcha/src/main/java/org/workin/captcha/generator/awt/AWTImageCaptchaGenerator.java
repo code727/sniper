@@ -23,7 +23,7 @@ import java.awt.image.BufferedImage;
 
 import org.workin.captcha.ImageCaptcha;
 import org.workin.captcha.generator.AbstractImageCaptchaGenerator;
-import org.workin.image.layout.CaptchaImageLayout;
+import org.workin.image.layout.CaptchaLayout;
 
 /**
  * @description AWT图片验证码生成器抽象类
@@ -34,7 +34,7 @@ public abstract class AWTImageCaptchaGenerator extends AbstractImageCaptchaGener
 	
 	@Override
 	public ImageCaptcha create() {
-		CaptchaImageLayout layout = getLayout();
+		CaptchaLayout layout = getLayout();
 		BufferedImage image = new BufferedImage(layout.getWidth(), layout.getHeight(), getImageType());
 		Graphics graphics = image.createGraphics();
 		

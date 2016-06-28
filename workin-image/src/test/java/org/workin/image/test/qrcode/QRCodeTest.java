@@ -41,7 +41,6 @@ public class QRCodeTest extends BaseTestCase {
 		qrCode.setText("http://www.163.com");
 		
 		GoogleQRCodeGenerator generator = new GoogleQRCodeGenerator();
-		generator.afterPropertiesSet();
 		RenderedImage image = generator.generator(qrCode);
 		ImageIO.write(image, "PNG", new File("C:/Users/Administrator/Desktop/test.png"));
 	}

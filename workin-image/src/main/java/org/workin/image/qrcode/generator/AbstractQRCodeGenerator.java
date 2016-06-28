@@ -20,11 +20,9 @@ package org.workin.image.qrcode.generator;
 
 import java.awt.image.RenderedImage;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.image.layout.QRCodeImageLayout;
+import org.workin.image.layout.QRCodeLayout;
 import org.workin.image.qrcode.QRCode;
 
 /**
@@ -32,58 +30,23 @@ import org.workin.image.qrcode.QRCode;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractQRCodeGenerator implements QRCodeGenerator, InitializingBean {
+public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 	
 	/** 全局样式 */
-	private QRCodeImageLayout layout;
+	private QRCodeLayout layout;
 	
-	public void setLayout(QRCodeImageLayout layout) {
+	public AbstractQRCodeGenerator() {
+		this.layout = new QRCodeLayout();
+	}
+	
+	public void setLayout(QRCodeLayout layout) {
 		this.layout = layout;
 	}
 	
-	public QRCodeImageLayout getLayout() {
+	public QRCodeLayout getLayout() {
 		return layout;
 	}
-	
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		if (this.layout == null)
-			setLayout(buildDefaultLayout());
 		
-		formatLayout();
-	}
-
-	/**
-	 * @description 构建全局默认的验证码样式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	protected QRCodeImageLayout buildDefaultLayout() {
-		QRCodeImageLayout layout = new QRCodeImageLayout();
-		layout.setWidth(100);
-		layout.setHeight(100);
-		layout.setMargin(0);
-		return layout;
-	}
-	
-	/**
-	 * @description 格式化
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	private void formatLayout() {
-		int width = NumberUtils.minLimit(layout.getWidth(), 100);
-		int height = NumberUtils.minLimit(layout.getHeight(), 100);
-		
-		int size = Math.max(width, height);
-		/* 控制验证码为一个以宽高最大尺寸为基准的正方形 */
-		layout.setWidth(size);
-		layout.setHeight(size);
-		
-		int margin = layout.getMargin();
-		if (margin < 0)
-			layout.setMargin(0);
-	}
-	
 	public RenderedImage generator(QRCode qrCode) throws Exception {
 		AssertUtils.assertTrue(StringUtils.isNotEmpty(qrCode.getText()), "QRCode text must not be null or empty.");
 		prepare(qrCode);
@@ -105,24 +68,10 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator, Initia
 	 * @param qrCode
 	 */
 	protected void prepare(QRCode qrCode) {
-		QRCodeImageLayout layout = qrCode.getLayout();
-		if (layout == null) {
-			layout = new QRCodeImageLayout();
-			qrCode.setLayout(layout);
-		}
-		
-		/* 长度不能小于全局样式的 */
-		int width = NumberUtils.minLimit(layout.getWidth(), this.getLayout().getWidth());
-		int height = NumberUtils.minLimit(layout.getHeight(), this.getLayout().getHeight());
-		
-		int size = Math.max(width, height);
-		/* 控制验证码为一个以宽高最大尺寸为基准的正方形 */
-		layout.setWidth(size);
-		layout.setHeight(size);
-		
-		// 边距也不能小于全局样式的
-		int margin = NumberUtils.minLimit(layout.getMargin(), this.getLayout().getMargin());
-		layout.setMargin(margin);
+		QRCodeLayout layout = qrCode.getLayout();
+		if (layout == null) 
+			// 将全局样式赋予当前二维码对象
+			qrCode.setLayout(getLayout());
 	}
 
 }

@@ -20,32 +20,23 @@ package org.workin.image.layout;
 
 
 /**
- * @description 二维码图片布局
+ * @description 验证码布局
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class QRCodeImageLayout extends BaseLayout {
+public class CaptchaLayout extends TextBoxLayout {
+
+	private static final long serialVersionUID = -243543766415298588L;
 	
-	private static final long serialVersionUID = -8237652728083670335L;
+	/** 是否需要干扰项 */
+	private boolean distracter = true;
 	
-    private int contentColor = 0xFF000000;
-    
-    private int blankColor = 0xFFFFFFFF;
-
-	public int getContentColor() {
-		return contentColor;
+	public boolean hasDistracter() {
+		return distracter;
 	}
 
-	public void setContentColor(int contentColor) {
-		this.contentColor = contentColor;
+	public void setDistracter(boolean distracter) {
+		this.distracter = distracter;
 	}
 
-	public int getBlankColor() {
-		return blankColor;
-	}
-
-	public void setBlankColor(int blankColor) {
-		this.blankColor = blankColor;
-	}
-	
 }

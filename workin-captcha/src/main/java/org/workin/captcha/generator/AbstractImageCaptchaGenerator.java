@@ -30,7 +30,7 @@ import org.workin.captcha.manager.color.TextColorManager;
 import org.workin.captcha.manager.font.FontManager;
 import org.workin.captcha.manager.font.TextFontManager;
 import org.workin.commons.util.NumberUtils;
-import org.workin.image.layout.CaptchaImageLayout;
+import org.workin.image.layout.CaptchaLayout;
 
 /**
  * @description 图片验证码生成器抽象类
@@ -44,7 +44,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	private int imageType = BufferedImage.TYPE_INT_RGB;
 	
 	/** 布局 */
-	private CaptchaImageLayout layout;
+	private CaptchaLayout layout;
 	
 	/** 背景颜色管理器 */
 	private ColorManager backgroundColorManager;
@@ -69,11 +69,11 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 		this.imageType = NumberUtils.minLimit(imageType, BufferedImage.TYPE_INT_RGB);
 	}
 
-	public CaptchaImageLayout getLayout() {
+	public CaptchaLayout getLayout() {
 		return layout;
 	}
 
-	public void setLayout(CaptchaImageLayout layout) {
+	public void setLayout(CaptchaLayout layout) {
 		this.layout = layout;
 	}
 	
@@ -146,8 +146,8 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	protected CaptchaImageLayout buildDefaultLayout() {
-		CaptchaImageLayout layout = new CaptchaImageLayout();
+	protected CaptchaLayout buildDefaultLayout() {
+		CaptchaLayout layout = new CaptchaLayout();
 		
 		layout.setWidth(MIN_WIDTH);
 		layout.setHeight(MIN_HEIGHT);

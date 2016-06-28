@@ -27,7 +27,7 @@ import org.workin.captcha.generator.google.manager.color.GoogleCaptchaTextColorM
 import org.workin.captcha.manager.color.ColorManager;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.image.layout.CaptchaImageLayout;
+import org.workin.image.layout.CaptchaLayout;
 
 import com.google.code.kaptcha.Producer;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -94,7 +94,7 @@ public class GoogleKaptchaGenerator extends AbstractImageCaptchaGenerator {
 	 * @return
 	 */
 	protected Properties build(String fontColor) {
-		CaptchaImageLayout layout = getLayout();
+		CaptchaLayout layout = getLayout();
 		String fontName = getTextFontManager().selectFontName();
 		
 		Properties properties = new Properties();

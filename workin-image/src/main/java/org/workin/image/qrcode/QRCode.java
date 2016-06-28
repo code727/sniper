@@ -21,7 +21,7 @@ package org.workin.image.qrcode;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
-import org.workin.image.layout.QRCodeImageLayout;
+import org.workin.image.layout.QRCodeLayout;
 import org.workin.support.codec.CodecSupport;
 
 /**
@@ -40,7 +40,7 @@ public class QRCode extends CodecSupport implements Serializable {
 	private BufferedImage logo;
 	
 	/** 图片布局 */
-	private QRCodeImageLayout layout;
+	private QRCodeLayout layout;
 
 	public String getText() {
 		return text;
@@ -58,11 +58,11 @@ public class QRCode extends CodecSupport implements Serializable {
 		this.logo = logo;
 	}
 
-	public QRCodeImageLayout getLayout() {
+	public QRCodeLayout getLayout() {
 		return layout;
 	}
 
-	public void setLayout(QRCodeImageLayout layout) {
+	public void setLayout(QRCodeLayout layout) {
 		this.layout = layout;
 	}
 	

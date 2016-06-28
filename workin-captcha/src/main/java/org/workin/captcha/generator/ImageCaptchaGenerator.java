@@ -19,7 +19,7 @@
 package org.workin.captcha.generator;
 
 import org.workin.captcha.ImageCaptcha;
-import org.workin.image.layout.CaptchaImageLayout;
+import org.workin.image.layout.CaptchaLayout;
 
 /**
  * @description 图片验证码生成器
@@ -45,14 +45,14 @@ public interface ImageCaptchaGenerator extends CaptchaGenerator {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public CaptchaImageLayout getLayout();
+	public CaptchaLayout getLayout();
 	
 	/**
 	 * @description 设置图片验证码布局
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param layout
 	 */
-	public void setLayout(CaptchaImageLayout layout);
+	public void setLayout(CaptchaLayout layout);
 		
 	/**
 	 * @description 创建图片验证码

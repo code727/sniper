@@ -20,7 +20,7 @@ package org.workin.image.qrcode.generator;
 
 import java.awt.image.RenderedImage;
 
-import org.workin.image.layout.QRCodeImageLayout;
+import org.workin.image.layout.QRCodeLayout;
 import org.workin.image.qrcode.QRCode;
 
 /**
@@ -35,14 +35,14 @@ public interface QRCodeGenerator {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param layout
 	 */
-	public void setLayout(QRCodeImageLayout layout);
+	public void setLayout(QRCodeLayout layout);
 	
 	/**
 	 * @description 获取全局样式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public QRCodeImageLayout getLayout();
+	public QRCodeLayout getLayout();
 	
 	/**
 	 * @description 生成二维码图片对象

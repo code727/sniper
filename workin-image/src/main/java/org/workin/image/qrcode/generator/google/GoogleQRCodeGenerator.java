@@ -23,7 +23,7 @@ import java.awt.image.RenderedImage;
 import java.util.Map;
 
 import org.workin.commons.util.MapUtils;
-import org.workin.image.layout.QRCodeImageLayout;
+import org.workin.image.layout.QRCodeLayout;
 import org.workin.image.qrcode.QRCode;
 import org.workin.image.qrcode.generator.AbstractQRCodeGenerator;
 
@@ -38,17 +38,18 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class GoogleQRCodeGenerator  extends AbstractQRCodeGenerator {
+public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	
 	private static final ThreadLocal<Map<String, Map<EncodeHintType, Object>>> hints = new ThreadLocal<Map<String, Map<EncodeHintType, Object>>>();
 
 	@Override
 	protected RenderedImage doCreate(QRCode qrCode) throws Exception {
-		Map<EncodeHintType, Object> hints = getHints(qrCode);
 		
-		QRCodeImageLayout layout = qrCode.getLayout();
+		QRCodeLayout layout = qrCode.getLayout();
 		MultiFormatWriter writer = new MultiFormatWriter();
-		BitMatrix bitMatrix = writer.encode(qrCode.getText(), BarcodeFormat.QR_CODE, layout.getWidth(), layout.getHeight(), hints);
+		BitMatrix bitMatrix = writer.encode(qrCode.getText(),
+				BarcodeFormat.QR_CODE, layout.getWidth(), layout.getHeight(),
+				getHints(qrCode));
 		
 		int width = bitMatrix.getWidth();
 		int height = bitMatrix.getHeight();
@@ -72,7 +73,7 @@ public class GoogleQRCodeGenerator  extends AbstractQRCodeGenerator {
 		if (hintsMap == null)
 			hintsMap = MapUtils.newConcurrentHashMap();
 		
-		QRCodeImageLayout layout = qrCode.getLayout();
+		QRCodeLayout layout = qrCode.getLayout();
 		StringBuffer key = new StringBuffer();
 		key.append(ErrorCorrectionLevel.H).append("_")
 				.append(qrCode.getEncoding()).append("_")
