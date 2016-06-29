@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016年6月21日
+ * Create Date : 2016-6-21
  */
 
 package org.workin.image.layout;
@@ -29,31 +29,9 @@ public class BaseLayout implements Serializable {
 
 	private static final long serialVersionUID = 1616689664080637930L;
 	
-	/** 宽 */
-    private int width;
-    
-    /** 高 */
-    private int height;
-    
     /** 外边距 */
     private int margin;
      
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
 	public int getMargin() {
 		return margin;
 	}

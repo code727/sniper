@@ -21,6 +21,8 @@ package org.workin.image.qrcode;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
+import org.workin.commons.util.NumberUtils;
+import org.workin.commons.util.StringUtils;
 import org.workin.image.layout.QRCodeLayout;
 import org.workin.support.codec.CodecSupport;
 
@@ -41,7 +43,13 @@ public class QRCode extends CodecSupport implements Serializable {
 	
 	/** 图片布局 */
 	private QRCodeLayout layout;
-
+	
+	/** 纠错等级 */
+	private String errorCorrectionLevel = "H";
+	
+	/** 图片类型 */
+	private int imageType = BufferedImage.TYPE_INT_RGB;
+	
 	public String getText() {
 		return text;
 	}
@@ -64,6 +72,23 @@ public class QRCode extends CodecSupport implements Serializable {
 
 	public void setLayout(QRCodeLayout layout) {
 		this.layout = layout;
+	}
+	
+	public int getImageType() {
+		return imageType;
+	}
+
+	public void setImageType(int imageType) {
+		this.imageType = NumberUtils.minLimit(imageType, BufferedImage.TYPE_INT_RGB);
+	}
+
+	public String getErrorCorrectionLevel() {
+		return errorCorrectionLevel;
+	}
+
+	public void setErrorCorrectionLevel(String errorCorrectionLevel) {
+		if (StringUtils.isNotBlank(errorCorrectionLevel))
+			this.errorCorrectionLevel = errorCorrectionLevel;
 	}
 	
 }

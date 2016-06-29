@@ -28,6 +28,12 @@ public class TextBoxLayout extends BaseLayout {
 
 	private static final long serialVersionUID = -872351049933813382L;
 	
+	/** 宽 */
+    private int width;
+    
+    /** 高 */
+    private int height;
+	
 	/** 文字大小 */
 	private int fontSize;
 			
@@ -37,6 +43,22 @@ public class TextBoxLayout extends BaseLayout {
 	/** 边框样式 */
 	private int borderStyle;
 	
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
 	public int getFontSize() {
 		return fontSize;
 	}

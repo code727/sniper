@@ -24,6 +24,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 import org.junit.Test;
+import org.workin.image.layout.QRCodeLayout;
 import org.workin.image.qrcode.QRCode;
 import org.workin.image.qrcode.generator.google.GoogleQRCodeGenerator;
 import org.workin.test.junit.BaseTestCase;
@@ -37,7 +38,11 @@ public class QRCodeTest extends BaseTestCase {
 	
 	@Test
 	public void testGoogleQRCodeGenerator() throws Exception {
+		QRCodeLayout layout = new QRCodeLayout();
+		layout.setSideLength(200);
+		layout.setMargin(-1);
 		QRCode qrCode = new QRCode();
+		qrCode.setLayout(layout);
 		qrCode.setText("http://www.163.com");
 		
 		GoogleQRCodeGenerator generator = new GoogleQRCodeGenerator();

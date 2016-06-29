@@ -18,8 +18,6 @@
 
 package org.workin.image.layout;
 
-import org.workin.commons.util.NumberUtils;
-
 /**
  * @description 二维码布局
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -29,48 +27,47 @@ public class QRCodeLayout extends BaseLayout {
 	
 	private static final long serialVersionUID = -8237652728083670335L;
 	
-	/** 最小宽高尺寸大小常量 */
-	public static final int MIN_SIZE = 50;
+	/** 最小边长常量 */
+	public static final int MIN_SIDE_LENGTH = 50;
 	
-    private int contentColor = 0xFF000000;
+	/** 边长 */
+	private int sideLength = MIN_SIDE_LENGTH;
+	
+	/** 开放颜色 */
+    private int onColor = 0xFF000000;
     
-    private int blankColor = 0xFFFFFFFF;
-    
-	public QRCodeLayout() {
-		setWidth(MIN_SIZE);
-		setHeight(MIN_SIZE);
-	}
-    
-    @Override
-    public void setWidth(int width) {
-    	super.setWidth(NumberUtils.minLimit(width, MIN_SIZE));
-    }
+    /** 关闭颜色 */
+    private int offColor = 0xFFFFFFFF;
     
     @Override
-    public void setHeight(int height) {
-    	super.setHeight(NumberUtils.minLimit(height, MIN_SIZE));
+    public void setMargin(int margin) {
+    	if (margin > 0)
+    		super.setMargin(margin);
     }
- 
-	@Override
-	public void setMargin(int margin) {
-		if (margin > 0)
-			super.setMargin(margin);
-	}
     
-	public int getContentColor() {
-		return contentColor;
+	public int getOnColor() {
+		return onColor;
 	}
 
-	public void setContentColor(int contentColor) {
-		this.contentColor = contentColor;
+	public void setOnColor(int onColor) {
+		this.onColor = onColor;
 	}
 
-	public int getBlankColor() {
-		return blankColor;
+	public int getOffColor() {
+		return offColor;
 	}
 
-	public void setBlankColor(int blankColor) {
-		this.blankColor = blankColor;
+	public void setOffColor(int offColor) {
+		this.offColor = offColor;
+	}
+
+	public int getSideLength() {
+		return sideLength;
+	}
+	
+	public void setSideLength(int sideLength) {
+		if (sideLength > MIN_SIDE_LENGTH)
+			this.sideLength = sideLength;
 	}
 		
 }
