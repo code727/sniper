@@ -18,6 +18,10 @@
 
 package org.workin.image.layout;
 
+import java.awt.Color;
+
+import org.workin.commons.util.NumberUtils;
+
 /**
  * @description 二维码布局
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -28,10 +32,16 @@ public class QRCodeLayout extends BaseLayout {
 	private static final long serialVersionUID = -8237652728083670335L;
 	
 	/** 最小边长常量 */
-	public static final int MIN_SIDE_LENGTH = 50;
+	public static final int MIN_SIDELENGTH = 50;
+	
+	/** logo图片占总宽高的最小比例 */
+	public static final double MIN_LOGOSCALE = 0.2;
+	
+	/** logo图片占总宽高的最大比例 */
+	public static final double MAX_LOGOSCALE = 0.45;
 	
 	/** 边长 */
-	private int sideLength = MIN_SIDE_LENGTH;
+	private int sideLength = MIN_SIDELENGTH;
 	
 	/** 开放颜色 */
     private int onColor = 0xFF000000;
@@ -39,10 +49,24 @@ public class QRCodeLayout extends BaseLayout {
     /** 关闭颜色 */
     private int offColor = 0xFFFFFFFF;
     
+    /** logo图片占总宽高的比例 */
+    private double logoScale = MIN_LOGOSCALE;
+    
+    /** 是否需要背景 */
+    private boolean logoBackground = true;
+    
+    /** logo背景颜色 */
+    private Color logoBackgroundColor = Color.WHITE;
+    
+    /** 是否需要背景 */
+    private boolean logoBorder = true;
+    
+    /** logo边框颜色 */
+    private Color logoBorderColor = new Color(239, 239, 239);
+    
     @Override
     public void setMargin(int margin) {
-    	if (margin > 0)
-    		super.setMargin(margin);
+    	super.setMargin(NumberUtils.minLimit(margin, 0));
     }
     
 	public int getOnColor() {
@@ -66,8 +90,49 @@ public class QRCodeLayout extends BaseLayout {
 	}
 	
 	public void setSideLength(int sideLength) {
-		if (sideLength > MIN_SIDE_LENGTH)
-			this.sideLength = sideLength;
+		this.sideLength = NumberUtils.minLimit(sideLength, MIN_SIDELENGTH);
 	}
-		
+
+	public double getLogoScale() {
+		return logoScale;
+	}
+
+	public void setLogoScale(double logoScale) {
+		this.logoScale = NumberUtils.maxLimit(NumberUtils.minLimit(logoScale, MIN_LOGOSCALE), MAX_LOGOSCALE);
+	}
+
+	public boolean hasLogoBackground() {
+		return logoBackground;
+	}
+
+	public void setLogoBackground(boolean logoBackground) {
+		this.logoBackground = logoBackground;
+	}
+
+	public Color getLogoBackgroundColor() {
+		return logoBackgroundColor;
+	}
+
+	public void setLogoBackgroundColor(Color logoBackgroundColor) {
+		if (!hasLogoBackground() || logoBackgroundColor != null)
+			this.logoBackgroundColor = logoBackgroundColor;
+	}
+
+	public boolean hasLogoBorder() {
+		return logoBorder;
+	}
+
+	public void setLogoBorder(boolean logoBorder) {
+		this.logoBorder = logoBorder;
+	}
+
+	public Color getLogoBorderColor() {
+		return logoBorderColor;
+	}
+
+	public void setLogoBorderColor(Color logoBorderColor) {
+		if (!hasLogoBorder() || logoBorderColor != null)
+			this.logoBorderColor = logoBorderColor;
+	}
+
 }

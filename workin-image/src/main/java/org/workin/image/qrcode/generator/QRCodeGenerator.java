@@ -18,7 +18,7 @@
 
 package org.workin.image.qrcode.generator;
 
-import java.awt.image.RenderedImage;
+import java.awt.image.BufferedImage;
 
 import org.workin.image.layout.QRCodeLayout;
 import org.workin.image.qrcode.QRCode;
@@ -51,6 +51,6 @@ public interface QRCodeGenerator {
 	 * @return
 	 * @throws Exception
 	 */
-	public RenderedImage generator(QRCode qrCode) throws Exception;
+	public BufferedImage generator(QRCode qrCode) throws Exception;
 
 }

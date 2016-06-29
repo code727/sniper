@@ -18,10 +18,7 @@
 
 package org.workin.image.qrcode.generator.google;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.util.Map;
 
 import org.workin.commons.util.MapUtils;
@@ -45,30 +42,16 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	private static final ThreadLocal<Map<String, Map<EncodeHintType, Object>>> hints = new ThreadLocal<Map<String, Map<EncodeHintType, Object>>>();
 
 	@Override
-	protected RenderedImage doCreate(QRCode qrCode) throws Exception {
-
+	protected BufferedImage createSourceImage(QRCode qrCode) throws Exception {
 		QRCodeLayout layout = qrCode.getLayout();
+		
 		int targetWidth = layout.getSideLength();
 		int targetHeight = layout.getSideLength();
 		
 		MultiFormatWriter writer = new MultiFormatWriter();
 		BitMatrix bitMatrix = writer.encode(qrCode.getText(), BarcodeFormat.QR_CODE, targetWidth, targetHeight, getHints(qrCode));
 		
-		BufferedImage image = drawImage(create(bitMatrix, layout.getMargin()), layout, qrCode);
-		int imageWidth = image.getWidth();
-		int imageHeight = image.getHeight();
-		
-		/* 如果生成的图片宽高小于目标，则按原图片的宽高等比放大重新生成一张与目标一致的二维码图片 */
-		if (imageWidth < targetWidth || imageHeight < targetHeight) {
-			BufferedImage newImage = new BufferedImage(targetWidth, targetHeight, image.getType());
-			
-			Graphics2D g = newImage.createGraphics();
-			g.drawImage(image.getScaledInstance(imageWidth, imageHeight, Image.SCALE_SMOOTH), 0, 0, targetWidth, targetHeight, null);
-			g.dispose();
-			image = newImage;
-		}
-		
-		return image;
+		return drawSourceImage(recreating(bitMatrix, layout.getMargin()), layout, qrCode);
 	}
 
 	/**
@@ -98,7 +81,7 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 			hs.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
 			hs.put(EncodeHintType.CHARACTER_SET, qrCode.getEncoding());
 			hs.put(EncodeHintType.MAX_SIZE, layout.getSideLength());
-			hs.put(EncodeHintType.MIN_SIZE, QRCodeLayout.MIN_SIDE_LENGTH);
+			hs.put(EncodeHintType.MIN_SIZE, QRCodeLayout.MIN_SIDELENGTH);
 			hs.put(EncodeHintType.MARGIN, layout.getMargin());
 
 			hintsMap.put(key.toString(), hs);
@@ -109,12 +92,12 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	}
 
 	/**
-	 * @description 生成一个具有指定外边距的矩阵
+	 * @description 重新生成一个具有指定外边距的矩阵对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param matrix
 	 * @param margin
 	 */
-	protected BitMatrix create(BitMatrix matrix, int margin) {
+	protected BitMatrix recreating(BitMatrix matrix, int margin) {
 		int doubleMargin = margin * 2;
 		int[] rectangle = matrix.getEnclosingRectangle(); 
 		int left = rectangle[0];
@@ -136,14 +119,14 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	}
 	
 	/**
-	 * @description 绘制二维码图片
+	 * @description 绘制二维码原图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bitMatrix
 	 * @param layout
 	 * @param qrCode
 	 * @return
 	 */
-	protected BufferedImage drawImage(BitMatrix bitMatrix, QRCodeLayout layout, QRCode qrCode) {
+	protected BufferedImage drawSourceImage(BitMatrix bitMatrix, QRCodeLayout layout, QRCode qrCode) {
 		int matrixWidth = bitMatrix.getWidth();
 		int matrixHeight = bitMatrix.getHeight();
 		
@@ -156,5 +139,5 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 				
 		return image;
 	}
-
+	
 }

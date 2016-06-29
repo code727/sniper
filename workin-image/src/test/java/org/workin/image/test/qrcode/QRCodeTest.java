@@ -39,11 +39,12 @@ public class QRCodeTest extends BaseTestCase {
 	@Test
 	public void testGoogleQRCodeGenerator() throws Exception {
 		QRCodeLayout layout = new QRCodeLayout();
-		layout.setSideLength(200);
-		layout.setMargin(-1);
+		layout.setSideLength(300);
 		QRCode qrCode = new QRCode();
+		layout.setLogoScale(0.45);
 		qrCode.setLayout(layout);
 		qrCode.setText("http://www.163.com");
+		qrCode.setLogo(ImageIO.read(new File("C:/Users/Administrator/Desktop/QQ截图20160630015924.png")));
 		
 		GoogleQRCodeGenerator generator = new GoogleQRCodeGenerator();
 		RenderedImage image = generator.generator(qrCode);

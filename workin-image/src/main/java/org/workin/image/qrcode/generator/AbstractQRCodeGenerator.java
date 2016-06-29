@@ -18,7 +18,10 @@
 
 package org.workin.image.qrcode.generator;
 
-import java.awt.image.RenderedImage;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.StringUtils;
@@ -31,47 +34,145 @@ import org.workin.image.qrcode.QRCode;
  * @version 1.0
  */
 public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
-	
+
 	/** 全局样式 */
 	private QRCodeLayout layout;
-	
+
 	public AbstractQRCodeGenerator() {
 		this.layout = new QRCodeLayout();
 	}
-	
+
 	public void setLayout(QRCodeLayout layout) {
 		this.layout = layout;
 	}
-	
+
 	public QRCodeLayout getLayout() {
 		return layout;
 	}
-		
-	public RenderedImage generator(QRCode qrCode) throws Exception {
+
+	public BufferedImage generator(QRCode qrCode) throws Exception {
 		AssertUtils.assertTrue(StringUtils.isNotEmpty(qrCode.getText()), "QRCode text must not be null or empty.");
-		prepare(qrCode);
-		return doCreate(qrCode);
+		QRCodeLayout layout = qrCode.getLayout();
+		if (layout == null) 
+			// 将全局样式赋予当前二维码对象
+			qrCode.setLayout(getLayout());
+		
+
+		BufferedImage qrcodeImage = createSourceImage(qrCode);
+		qrcodeImage = ratioSourceImage(qrcodeImage, qrCode);
+		
+		BufferedImage logo = qrCode.getLogo();
+		if (logo != null) 
+			drawLogo(qrcodeImage, ratioLogo(qrcodeImage, logo, layout), layout);
+
+		return qrcodeImage;
 	}
-	
+
 	/**
-	 * @description 创建二维码图片
+	 * @description 创建二维码原图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param qrCode
 	 * @return
 	 * @throws Exception
 	 */
-	protected abstract RenderedImage doCreate(QRCode qrCode) throws Exception;
+	protected abstract BufferedImage createSourceImage(QRCode qrCode) throws Exception;
 
 	/**
-	 * @description 准备操作
+	 * @description 等比缩放二维码原图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param qrCode
+	 * @param qrcodeImage
 	 */
-	protected void prepare(QRCode qrCode) {
+	protected BufferedImage ratioSourceImage(BufferedImage qrcodeImage, QRCode qrCode) {
 		QRCodeLayout layout = qrCode.getLayout();
-		if (layout == null) 
-			// 将全局样式赋予当前二维码对象
-			qrCode.setLayout(getLayout());
+
+		int targetWidth = layout.getSideLength();
+		int targetHeight = layout.getSideLength();
+
+		int imageWidth = qrcodeImage.getWidth();
+		int imageHeight = qrcodeImage.getHeight();
+
+		/* 如果二维码图片宽高与目标不一致，则按原宽高等比缩放重新生成一张与目标一致的二维码图片 */
+		if (imageWidth != targetWidth || imageHeight != targetHeight) {
+			BufferedImage newImage = new BufferedImage(targetWidth, targetHeight, qrcodeImage.getType());
+			Graphics2D graphics = newImage.createGraphics();
+			graphics.drawImage(qrcodeImage.getScaledInstance(imageWidth, imageHeight, Image.SCALE_SMOOTH), 0, 0, targetWidth, targetHeight, null);
+			graphics.dispose();
+			qrcodeImage = newImage;
+		}
+
+		return qrcodeImage;
+	}
+
+	/**
+	 * @description 等比缩放二维码logo图
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param qrcodeImage
+	 * @param logo
+	 * @param layout
+	 * @return
+	 */
+	private BufferedImage ratioLogo(BufferedImage qrcodeImage, BufferedImage logo, QRCodeLayout layout) {
+		int qrcodeWidth = qrcodeImage.getWidth();
+		int qrcodeHeight = qrcodeImage.getHeight();
+		
+		int logoWidth = logo.getWidth();
+		int logoHeight = logo.getHeight();
+
+		int targetWidth = (int) (qrcodeWidth * layout.getLogoScale());
+		int targetHeight = (int) (qrcodeHeight * layout.getLogoScale() * (double) logoHeight / logoWidth);
+		
+		if (logoWidth != targetWidth || logoHeight != targetHeight) {
+			/* 等比缩放logo图片到实际的宽高 */
+			BufferedImage newLogo = new BufferedImage(targetWidth, targetHeight, logo.getType());
+			Graphics2D g = newLogo.createGraphics();
+			g.drawImage(logo.getScaledInstance(logoWidth, logoHeight, Image.SCALE_SMOOTH), 0, 0, targetWidth, targetHeight, null);
+			g.dispose();
+			logo = newLogo;
+		}
+
+		return logo;
+	}
+
+	/**
+	 * @description 在二维码原图内绘制logo
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param qrcodeImage
+	 * @param logo
+	 * @param layout
+	 */
+	protected void drawLogo(BufferedImage qrcodeImage, BufferedImage logo, QRCodeLayout layout) {
+		int logoWidth = logo.getWidth();
+		int logoHeight = logo.getHeight();
+
+		int x = (qrcodeImage.getWidth() - logoWidth) / 2;
+		int y = (qrcodeImage.getHeight() - logoHeight) / 2;
+
+		Graphics2D graphics = qrcodeImage.createGraphics(); 
+		
+		int arc = 0;
+		int halfArc = 0;
+		Color backgroundColor = null;
+		if (layout.hasLogoBackground() && (backgroundColor = layout.getLogoBackgroundColor()) != null) {
+			/* 作色并绘制圆角背景 */
+			graphics.setColor(backgroundColor);
+			arc = (int) Math.ceil((double) Math.min(logoWidth, logoHeight) * 0.15);
+			halfArc = (int) Math.ceil((double)arc / 2);
+			graphics.drawRoundRect(x - halfArc, y - halfArc, logoWidth + arc, logoHeight + arc, arc, arc);
+			graphics.fillRoundRect(x - halfArc, y - halfArc, logoWidth + arc, logoHeight + arc, arc, arc);
+		} 
+		
+		Color borderColor = null;
+		if (layout.hasLogoBorder() && (borderColor = layout.getLogoBorderColor()) != null) {
+			graphics.setColor(borderColor);
+			if (arc != 0 && halfArc != 0) 
+				/* 绘制圆角biankuang */
+				graphics.drawRoundRect(x - halfArc, y - halfArc, logoWidth + arc, logoHeight + arc, arc, arc);
+			else 
+				graphics.drawRect(x - 1, y - 1, logoWidth + 1, logoHeight + 1);
+		}
+		
+		graphics.drawImage(logo, x, y, logoWidth, logoHeight, null);
+		graphics.dispose();  
 	}
 
 }

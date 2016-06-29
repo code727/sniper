@@ -198,9 +198,9 @@ public abstract class AbstractImageHandler implements ImageHandler {
 		Pixel pixel = createTragetPixel(sourceImage);
 		BufferedImage destImage = new BufferedImage(pixel.getWidth(), pixel.getHeight(), sourceImage.getType());
 		
-		Graphics2D g = destImage.createGraphics();
-		g.drawImage(handSourceImage(sourceImage, pixel), 0, 0, null);
-		g.dispose();
+		Graphics2D graphics = destImage.createGraphics();
+		graphics.drawImage(handSourceImage(sourceImage, pixel), 0, 0, null);
+		graphics.dispose();
 		return destImage;
 	}
 	
