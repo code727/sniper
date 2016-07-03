@@ -33,6 +33,8 @@ import javax.imageio.ImageIO;
 import org.workin.commons.util.FileUtils;
 import org.workin.commons.util.IOUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.image.writer.DefaultImageWriter;
+import org.workin.image.writer.ImageWriter;
 
 /**
  * @description 图片处理器抽象类
@@ -40,6 +42,23 @@ import org.workin.commons.util.StringUtils;
  * @version 1.0
  */
 public abstract class AbstractImageHandler implements ImageHandler {
+	
+	private ImageWriter imageWriter;
+	
+	public AbstractImageHandler() {
+		setImageWirter(new DefaultImageWriter());
+	}
+	
+	@Override
+	public void setImageWirter(ImageWriter imageWriter) {
+		if (imageWriter != null)
+			this.imageWriter = imageWriter;
+	}
+
+	@Override
+	public ImageWriter getImageWirter() {
+		return imageWriter;
+	}
 	
 	@Override
 	public void handle(File source) throws IOException {
@@ -61,11 +80,7 @@ public abstract class AbstractImageHandler implements ImageHandler {
 		checkSource(source);
 		
 		if (StringUtils.isBlank(formatName))
-			// 格式未指定时，则按目标文件的格式写入
-			formatName = FileUtils.getExtensionName(dest);
-
-		if (StringUtils.isBlank(formatName))
-			// 格式仍然为空时，再按原文件的格式写入
+			// 格式为空时，按原文件的格式写入
 			formatName = FileUtils.getExtensionName(source);
 
 		FileInputStream sourceIn = null;
@@ -112,7 +127,7 @@ public abstract class AbstractImageHandler implements ImageHandler {
 	public void handle(InputStream source, String formatName, File dest) throws IOException {
 		checkDestination(dest);
 		
-		if (StringUtils.isBlank(formatName)) 
+		if (StringUtils.isBlank(formatName))
 			// 格式未指定时，则按目标文件的格式写入
 			formatName = FileUtils.getExtensionName(dest);
 		
@@ -134,24 +149,7 @@ public abstract class AbstractImageHandler implements ImageHandler {
 
 	@Override
 	public void handle(InputStream source, String formatName, OutputStream dest) throws IOException {
-		BufferedImage destImage = drawHandle(source);
-		write(destImage, formatName, dest);
-	}
-	
-	/**
-	 * @description 将图像资源按照指定的格式写入到目标输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param image
-	 * @param formatName
-	 * @param dest
-	 * @throws IOException
-	 */
-	protected void write(BufferedImage image, String formatName, OutputStream dest) throws IOException {
-		if (StringUtils.isBlank(formatName))
-			formatName = "PNG";
-		
-		ImageIO.write(image, formatName.trim(), dest);
-		dest.flush();
+		imageWriter.write(drawHandle(source), formatName, dest);
 	}
 	
 	/**
@@ -162,13 +160,13 @@ public abstract class AbstractImageHandler implements ImageHandler {
 	 */
 	protected void checkSource(File source) throws IOException {
 		if (!source.exists())
-			throw new IOException("Image zoom failed, source [" + source.getAbsolutePath() + "] does not exist.");
+			throw new IOException("Source [" + source.getAbsolutePath() + "] does not exist.");
 		
 		if (source.isDirectory())
-			throw new IOException("Image zoom failed, source [" + source.getCanonicalPath() + "] is a file directory.");
+			throw new IOException("Source [" + source.getCanonicalPath() + "] is a file directory.");
 		
 		if (!source.canRead())
-			throw new IOException("Image zoom failed, source [" + source.getCanonicalPath() + "] can not read." );
+			throw new IOException("Source [" + source.getCanonicalPath() + "] can not read." );
 	}
 	
 	/**
@@ -179,19 +177,18 @@ public abstract class AbstractImageHandler implements ImageHandler {
 	 */
 	protected void checkDestination(File dest) throws IOException {
 		if (dest.isDirectory()) 
-			throw new IOException("Image zoom failed, destination [" + dest.getCanonicalPath() + "] is a file directory.");
+			throw new IOException("Destination [" + dest.getCanonicalPath() + "] is a file directory.");
 		
 		if (dest.exists() && !dest.canWrite())
-			throw new IOException("Image zoom failed, destination [" + dest.getCanonicalPath() + "] can not write." );
+			throw new IOException("Destination [" + dest.getCanonicalPath() + "] can not write." );
 	}
-	
 	
 	/**
 	 * @description 图像资源绘制处理
-	 * @author <a href="mailto:bin.du@daw.so">杜斌</a> 
-	 * @param source 图像资源
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param source
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	protected BufferedImage drawHandle(InputStream source) throws IOException {
 		BufferedImage sourceImage = ImageIO.read(source); 
@@ -223,5 +220,5 @@ public abstract class AbstractImageHandler implements ImageHandler {
 		// 保证原图在缩放时不失真
 		return sourceImage.getScaledInstance(pixel.getWidth(), pixel.getHeight(), Image.SCALE_SMOOTH);
 	}
-	
+
 }

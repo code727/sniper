@@ -111,7 +111,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 	 * @param layout
 	 * @return
 	 */
-	private BufferedImage ratioLogo(BufferedImage qrcodeImage, BufferedImage logo, QRCodeLayout layout) {
+	protected BufferedImage ratioLogo(BufferedImage qrcodeImage, BufferedImage logo, QRCodeLayout layout) {
 		int qrcodeWidth = qrcodeImage.getWidth();
 		int qrcodeHeight = qrcodeImage.getHeight();
 		
@@ -165,7 +165,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 		if (layout.hasLogoBorder() && (borderColor = layout.getLogoBorderColor()) != null) {
 			graphics.setColor(borderColor);
 			if (arc != 0 && halfArc != 0) 
-				/* 绘制圆角biankuang */
+				// 绘制圆角边框
 				graphics.drawRoundRect(x - halfArc, y - halfArc, logoWidth + arc, logoHeight + arc, arc, arc);
 			else 
 				graphics.drawRect(x - 1, y - 1, logoWidth + 1, logoHeight + 1);

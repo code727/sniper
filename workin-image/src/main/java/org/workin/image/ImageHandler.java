@@ -23,12 +23,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.workin.image.writer.ImageWriter;
+
 /**
  * @description 图片处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ImageHandler {
+	
+	/**
+	 * @description 设置图片写入器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param imageWriter
+	 */
+	public void setImageWirter(ImageWriter imageWriter);
+	
+	/**
+	 * @description 获取图片写入器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public ImageWriter getImageWirter();
 	
 	/**
 	 * @description 将本地的图片资源文件进行处理

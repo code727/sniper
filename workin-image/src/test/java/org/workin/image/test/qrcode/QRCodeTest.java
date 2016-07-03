@@ -18,8 +18,9 @@
 
 package org.workin.image.test.qrcode;
 
-import java.awt.image.RenderedImage;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -27,6 +28,8 @@ import org.junit.Test;
 import org.workin.image.layout.QRCodeLayout;
 import org.workin.image.qrcode.QRCode;
 import org.workin.image.qrcode.generator.google.GoogleQRCodeGenerator;
+import org.workin.image.writer.DefaultImageWriter;
+import org.workin.image.writer.ImageWriter;
 import org.workin.test.junit.BaseTestCase;
 
 /**
@@ -41,14 +44,16 @@ public class QRCodeTest extends BaseTestCase {
 		QRCodeLayout layout = new QRCodeLayout();
 		layout.setSideLength(300);
 		QRCode qrCode = new QRCode();
-		layout.setLogoScale(0.45);
+//		layout.setLogoScale(0.45);
 		qrCode.setLayout(layout);
 		qrCode.setText("http://www.163.com");
-		qrCode.setLogo(ImageIO.read(new File("C:/Users/Administrator/Desktop/QQ截图20160630015924.png")));
+		qrCode.setLogo(ImageIO.read(new URL("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2069251242,892993321&fm=116&gp=0.jpg").openStream()));
 		
 		GoogleQRCodeGenerator generator = new GoogleQRCodeGenerator();
-		RenderedImage image = generator.generator(qrCode);
-		ImageIO.write(image, "PNG", new File("C:/Users/Administrator/Desktop/test.png"));
+		BufferedImage image = generator.generator(qrCode);
+		
+		ImageWriter imageWriter = new DefaultImageWriter();
+		imageWriter.write(image, new File("C:/Users/Administrator/Desktop/test.png"));
 	}
 
 }

@@ -39,7 +39,7 @@ public class RatioHandlerTest extends BaseTestCase {
 	@Test
 	public void test() throws Exception {
 		RatioHandler handler = new RatioHandler();
-		handler.setMaxWidth(50);
+		handler.setMaxWidth(300);
 		handler.setMaxHeight(200);
 		
 		URL url = new URL("http://a.dangdang.com/api/data/cpx/img/39320001/1");
