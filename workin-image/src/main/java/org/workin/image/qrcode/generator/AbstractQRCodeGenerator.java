@@ -81,27 +81,6 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param qrcodeImage
 	 */
-//	protected BufferedImage ratioSourceImage(BufferedImage qrcodeImage, QRCode qrCode) {
-//		QRCodeLayout layout = qrCode.getLayout();
-//
-//		int targetWidth = layout.getSideLength();
-//		int targetHeight = layout.getSideLength();
-//
-//		int imageWidth = qrcodeImage.getWidth();
-//		int imageHeight = qrcodeImage.getHeight();
-//
-//		/* 如果二维码图片宽高与目标不一致，则按原宽高等比缩放重新生成一张与目标一致的二维码图片 */
-//		if (imageWidth != targetWidth || imageHeight != targetHeight) {
-//			BufferedImage newImage = new BufferedImage(targetWidth, targetHeight, qrcodeImage.getType());
-//			Graphics2D graphics = newImage.createGraphics();
-//			graphics.drawImage(qrcodeImage.getScaledInstance(imageWidth, imageHeight, Image.SCALE_SMOOTH), 0, 0, targetWidth, targetHeight, null);
-//			graphics.dispose();
-//			qrcodeImage = newImage;
-//		}
-//
-//		return qrcodeImage;
-//	}
-	
 	protected BufferedImage ratioSourceImage(BufferedImage qrcodeImage, QRCode qrCode) {
 		QRCodeLayout layout = qrCode.getLayout();
 
