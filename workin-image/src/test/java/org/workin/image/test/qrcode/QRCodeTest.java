@@ -44,7 +44,7 @@ public class QRCodeTest extends BaseTestCase {
 	public void testGoogleQRCodeGenerator() throws Exception {
 		QRCodeLayout layout = new QRCodeLayout();
 		layout.setSideLength(300);
-		layout.setMargin(10);
+		layout.setMargin(5);
 		QRCode qrCode = new QRCode();
 		layout.setLogoScale(0.2);
 		qrCode.setLayout(layout);
@@ -63,7 +63,7 @@ public class QRCodeTest extends BaseTestCase {
 	public void testSwetakeQRCodeGenerator() throws Exception {
 		QRCodeLayout layout = new QRCodeLayout();
 		layout.setSideLength(300);
-		layout.setMargin(10);
+		layout.setMargin(5);
 		QRCode qrCode = new QRCode();
 		layout.setLogoScale(0.2);
 		qrCode.setLayout(layout);
