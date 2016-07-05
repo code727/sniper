@@ -51,7 +51,7 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 		MultiFormatWriter writer = new MultiFormatWriter();
 		BitMatrix bitMatrix = writer.encode(qrCode.getText(), BarcodeFormat.QR_CODE, targetWidth, targetHeight, getHints(qrCode));
 		
-		return drawSourceImage(recreating(bitMatrix, qrCode), qrCode);
+		return drawSourceImage(clearDefaultMargin(bitMatrix), qrCode);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 		Map<EncodeHintType, Object> hs = hintsMap.get(key);
 		if (hs == null) {
 			hs = MapUtils.newHashMap();
-			hs.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+			hs.put(EncodeHintType.ERROR_CORRECTION, ecl);
 			hs.put(EncodeHintType.CHARACTER_SET, qrCode.getEncoding());
 			hs.put(EncodeHintType.MAX_SIZE, layout.getSideLength());
 			hs.put(EncodeHintType.MIN_SIZE, QRCodeLayout.MIN_SIDELENGTH);
@@ -92,27 +92,24 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	}
 
 	/**
-	 * @description 重新布局生成一个具有指定外边距的矩阵对象
+	 * @description 清空默认计算出的边距
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param matrix
-	 * @param qrCode
 	 * @return
 	 */
-	protected BitMatrix recreating(BitMatrix matrix, QRCode qrCode) {
-		int margin = qrCode.getLayout().getMargin();
-		int doubleMargin = margin * 2;
+	protected BitMatrix clearDefaultMargin(BitMatrix matrix) {
 		int[] rectangle = matrix.getEnclosingRectangle(); 
 		int left = rectangle[0];
 		int top = rectangle[1];
 		
-		int targetWidth = rectangle[2] + doubleMargin;
-		int targetHeight = rectangle[3] + doubleMargin;
+		int targetWidth = rectangle[2];
+		int targetHeight = rectangle[3];
 		
 		BitMatrix newMatrix = new BitMatrix(targetWidth, targetHeight);
 		newMatrix.clear();
-		for (int x = margin; x < newMatrix.getWidth() - margin; x++) { 
-			for (int y = margin; y < newMatrix.getHeight() - margin; y++) {
-				if (matrix.get(x - margin + left, y - margin + top)) {
+		for (int x = 0; x < newMatrix.getWidth(); x++) { 
+			for (int y = 0; y < newMatrix.getHeight(); y++) {
+				if (matrix.get(x + left, y + top)) {
 					newMatrix.set(x, y);
 				}
 			}
@@ -138,7 +135,8 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 				image.setRGB(x, y, (bitMatrix.get(x, y) ? layout.getOnColor() : layout.getOffColor()));
 			}
 		}
-				
+			
+		image.flush();
 		return image;
 	}
 	

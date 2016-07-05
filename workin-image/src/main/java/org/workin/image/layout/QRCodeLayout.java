@@ -52,13 +52,13 @@ public class QRCodeLayout extends BaseLayout {
     /** logo图片占总宽高的比例 */
     private double logoScale = MIN_LOGOSCALE;
     
-    /** 是否需要背景 */
+    /** logo是否需要背景 */
     private boolean logoBackground = true;
     
     /** logo背景颜色 */
     private Color logoBackgroundColor = Color.WHITE;
     
-    /** 是否需要背景 */
+    /** logo是否需要边框 */
     private boolean logoBorder = true;
     
     /** logo边框颜色 */

@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.workin.image.layout.QRCodeLayout;
 import org.workin.image.qrcode.QRCode;
 import org.workin.image.qrcode.generator.google.GoogleQRCodeGenerator;
+import org.workin.image.qrcode.generator.swetake.SwetakeQRCodeGenerator;
 import org.workin.image.writer.DefaultImageWriter;
 import org.workin.image.writer.ImageWriter;
 import org.workin.test.junit.BaseTestCase;
@@ -43,9 +44,11 @@ public class QRCodeTest extends BaseTestCase {
 	public void testGoogleQRCodeGenerator() throws Exception {
 		QRCodeLayout layout = new QRCodeLayout();
 		layout.setSideLength(300);
+		layout.setMargin(10);
 		QRCode qrCode = new QRCode();
-//		layout.setLogoScale(0.45);
+		layout.setLogoScale(0.2);
 		qrCode.setLayout(layout);
+//		qrCode.setText("https://www.baidu.com/baidu?wd=%E4%BA%8C%E7%BB%B4%E7%A0%81&tn=monline_dg&ie=utf-8");
 		qrCode.setText("http://www.163.com");
 		qrCode.setLogo(ImageIO.read(new URL("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2069251242,892993321&fm=116&gp=0.jpg").openStream()));
 		
@@ -53,7 +56,26 @@ public class QRCodeTest extends BaseTestCase {
 		BufferedImage image = generator.generator(qrCode);
 		
 		ImageWriter imageWriter = new DefaultImageWriter();
-		imageWriter.write(image, new File("C:/Users/Administrator/Desktop/test.png"));
+		imageWriter.write(image, new File("C:/Users/Administrator/Desktop/test_google.png"));
+	}
+	
+	@Test
+	public void testSwetakeQRCodeGenerator() throws Exception {
+		QRCodeLayout layout = new QRCodeLayout();
+		layout.setSideLength(300);
+		layout.setMargin(10);
+		QRCode qrCode = new QRCode();
+		layout.setLogoScale(0.2);
+		qrCode.setLayout(layout);
+//		qrCode.setText("https://www.baidu.com/baidu?wd=%E4%BA%8C%E7%BB%B4%E7%A0%81&tn=monline_dg&ie=utf-8");
+		qrCode.setText("http://www.163.com");
+		qrCode.setLogo(ImageIO.read(new URL("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2069251242,892993321&fm=116&gp=0.jpg").openStream()));
+		
+		SwetakeQRCodeGenerator generator = new SwetakeQRCodeGenerator();
+		BufferedImage image = generator.generator(qrCode);
+		
+		ImageWriter imageWriter = new DefaultImageWriter();
+		imageWriter.write(image, new File("C:/Users/Administrator/Desktop/test_swetake.png"));
 	}
 
 }
