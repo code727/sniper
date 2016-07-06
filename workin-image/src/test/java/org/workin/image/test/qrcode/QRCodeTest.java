@@ -29,6 +29,10 @@ import org.workin.image.layout.QRCodeLayout;
 import org.workin.image.qrcode.QRCode;
 import org.workin.image.qrcode.generator.google.GoogleQRCodeGenerator;
 import org.workin.image.qrcode.generator.swetake.SwetakeQRCodeGenerator;
+import org.workin.image.qrcode.parser.google.GoogleQRCodeParser;
+import org.workin.image.qrcode.parser.jp.JpQRCodeParser;
+import org.workin.image.reader.DefaultImageReader;
+import org.workin.image.reader.ImageReader;
 import org.workin.image.writer.DefaultImageWriter;
 import org.workin.image.writer.ImageWriter;
 import org.workin.test.junit.BaseTestCase;
@@ -40,7 +44,12 @@ import org.workin.test.junit.BaseTestCase;
  */
 public class QRCodeTest extends BaseTestCase {
 	
-	@Test
+	private String text = "http://www.163.com";
+	private String logoURL = "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2069251242,892993321&fm=116&gp=0.jpg";
+	private String google_qrcode = "C:/Users/Administrator/Desktop/test_google.png";
+	private String swetake_qrcode = "C:/Users/Administrator/Desktop/test_swetake.png";
+	
+//	@Test
 	public void testGoogleQRCodeGenerator() throws Exception {
 		QRCodeLayout layout = new QRCodeLayout();
 		layout.setSideLength(300);
@@ -48,18 +57,17 @@ public class QRCodeTest extends BaseTestCase {
 		QRCode qrCode = new QRCode();
 		layout.setLogoScale(0.2);
 		qrCode.setLayout(layout);
-//		qrCode.setText("https://www.baidu.com/baidu?wd=%E4%BA%8C%E7%BB%B4%E7%A0%81&tn=monline_dg&ie=utf-8");
-		qrCode.setText("http://www.163.com");
-		qrCode.setLogo(ImageIO.read(new URL("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2069251242,892993321&fm=116&gp=0.jpg").openStream()));
+		qrCode.setText(text);
+		qrCode.setLogo(ImageIO.read(new URL(logoURL).openStream()));
 		
 		GoogleQRCodeGenerator generator = new GoogleQRCodeGenerator();
 		BufferedImage image = generator.generator(qrCode);
 		
 		ImageWriter imageWriter = new DefaultImageWriter();
-		imageWriter.write(image, new File("C:/Users/Administrator/Desktop/test_google.png"));
+		imageWriter.write(image, new File(google_qrcode));
 	}
 	
-	@Test
+//	@Test
 	public void testSwetakeQRCodeGenerator() throws Exception {
 		QRCodeLayout layout = new QRCodeLayout();
 		layout.setSideLength(300);
@@ -67,15 +75,44 @@ public class QRCodeTest extends BaseTestCase {
 		QRCode qrCode = new QRCode();
 		layout.setLogoScale(0.2);
 		qrCode.setLayout(layout);
-//		qrCode.setText("https://www.baidu.com/baidu?wd=%E4%BA%8C%E7%BB%B4%E7%A0%81&tn=monline_dg&ie=utf-8");
-		qrCode.setText("http://www.163.com");
-		qrCode.setLogo(ImageIO.read(new URL("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2069251242,892993321&fm=116&gp=0.jpg").openStream()));
+		qrCode.setText(text);
+		qrCode.setLogo(ImageIO.read(new URL(logoURL).openStream()));
 		
 		SwetakeQRCodeGenerator generator = new SwetakeQRCodeGenerator();
 		BufferedImage image = generator.generator(qrCode);
 		
 		ImageWriter imageWriter = new DefaultImageWriter();
-		imageWriter.write(image, new File("C:/Users/Administrator/Desktop/test_swetake.png"));
+		imageWriter.write(image, new File(swetake_qrcode));
+	}
+	
+	@Test
+	public void testGoogleQRCodeParser() throws Exception {
+		ImageReader reader = new DefaultImageReader();
+		GoogleQRCodeParser parser = new GoogleQRCodeParser();
+		
+		String result = parser.parse(reader.read(new File(google_qrcode)));
+		System.out.println(result);
+		
+		result = parser.parse(reader.read(new File(swetake_qrcode)));
+		System.out.println(result);
+	}
+	
+	/**
+	 * @description 如果二维码图片太小，小日本的二维码解析器要报错，
+	 * 				另外还不能解析出zxing生成的二维码图片
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @throws Exception
+	 */
+	@Test
+	public void testJpQRCodeParser() throws Exception {
+		ImageReader reader = new DefaultImageReader();
+		JpQRCodeParser parser = new JpQRCodeParser();
+		
+		String result = parser.parse(reader.read(new File(swetake_qrcode)));
+		System.out.println(result);
+		
+		result = parser.parse(reader.read(new File(google_qrcode)));
+		System.out.println(result);
 	}
 
 }

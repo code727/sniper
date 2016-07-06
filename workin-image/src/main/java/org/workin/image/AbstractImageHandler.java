@@ -28,11 +28,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.imageio.ImageIO;
-
 import org.workin.commons.util.FileUtils;
 import org.workin.commons.util.IOUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.image.reader.DefaultImageReader;
+import org.workin.image.reader.ImageReader;
 import org.workin.image.writer.DefaultImageWriter;
 import org.workin.image.writer.ImageWriter;
 
@@ -43,21 +43,33 @@ import org.workin.image.writer.ImageWriter;
  */
 public abstract class AbstractImageHandler implements ImageHandler {
 	
+	private ImageReader imageReader;
+	
 	private ImageWriter imageWriter;
 	
 	public AbstractImageHandler() {
-		setImageWirter(new DefaultImageWriter());
+		setImageReader(new DefaultImageReader());
+		setImageWriter(new DefaultImageWriter());
 	}
 	
 	@Override
-	public void setImageWirter(ImageWriter imageWriter) {
-		if (imageWriter != null)
-			this.imageWriter = imageWriter;
+	public ImageReader getImageReader() {
+		return imageReader;
 	}
 
 	@Override
-	public ImageWriter getImageWirter() {
+	public void setImageReader(ImageReader imageReader) {
+		this.imageReader = imageReader;
+	}
+
+	@Override
+	public ImageWriter getImageWriter() {
 		return imageWriter;
+	}
+
+	@Override
+	public void setImageWriter(ImageWriter imageWriter) {
+		this.imageWriter = imageWriter;
 	}
 	
 	@Override
@@ -191,7 +203,7 @@ public abstract class AbstractImageHandler implements ImageHandler {
 	 * @throws IOException
 	 */
 	protected BufferedImage drawHandle(InputStream source) throws IOException {
-		BufferedImage sourceImage = ImageIO.read(source); 
+		BufferedImage sourceImage = imageReader.read(source); 
 		Pixel pixel = createTragetPixel(sourceImage);
 		BufferedImage destImage = new BufferedImage(pixel.getWidth(), pixel.getHeight(), sourceImage.getType());
 		

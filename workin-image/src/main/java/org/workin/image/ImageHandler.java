@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.workin.image.reader.ImageReader;
 import org.workin.image.writer.ImageWriter;
 
 /**
@@ -33,18 +34,32 @@ import org.workin.image.writer.ImageWriter;
 public interface ImageHandler {
 	
 	/**
+	 * @description 设置图片读取器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param imageReader
+	 */
+	public void setImageReader(ImageReader imageReader);
+	
+	/**
+	 * @description 获取图片读取器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public ImageReader getImageReader();
+	
+	/**
 	 * @description 设置图片写入器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param imageWriter
 	 */
-	public void setImageWirter(ImageWriter imageWriter);
+	public void setImageWriter(ImageWriter imageWriter);
 	
 	/**
 	 * @description 获取图片写入器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public ImageWriter getImageWirter();
+	public ImageWriter getImageWriter();
 	
 	/**
 	 * @description 将本地的图片资源文件进行处理
