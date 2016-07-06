@@ -91,14 +91,12 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 		/* 二维码图片的实际宽高 */
 		int imageWidth = qrcodeImage.getWidth();
 		int imageHeight = qrcodeImage.getHeight();
-
-		/* 如果二维码图片宽高与目标不一致，则按原宽高等比缩放重新生成一张与目标一致的二维码图片 */
-		if (imageWidth != targetWidth || imageHeight != targetHeight) {
+		
+		int margin = layout.getMargin();
+		/* 如果二维码图片宽高与目标不一致或设置有边距时，则按原宽高等比缩放重新生成一张与目标一致的二维码图片 */
+		if (imageWidth != targetWidth || imageHeight != targetHeight || margin > 0) {
 			BufferedImage newImage = new BufferedImage(targetWidth, targetHeight, qrcodeImage.getType());
 			Graphics2D graphics = newImage.createGraphics();
-			
-			int margin = layout.getMargin();
-			int doubleMargin = margin * 2;
 			if (margin > 0) {
 				/* 如果设置有边距，则先将整张图片的背景渲染成白色，
 				 * 而下面的graphics.drawImage方法则将二维码绘制在边距区域内的部分 */
@@ -106,6 +104,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 				graphics.fillRect(0, 0, targetWidth, targetHeight);
 			}
 			
+			int doubleMargin = margin * 2;
 			graphics.drawImage(qrcodeImage.getScaledInstance(imageWidth,
 					imageHeight, Image.SCALE_SMOOTH), margin, margin,
 					targetWidth - doubleMargin, targetWidth - doubleMargin, null);
@@ -140,7 +139,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 			/* 等比缩放logo图片到实际的宽高 */
 			BufferedImage newLogo = new BufferedImage(targetWidth, targetHeight, logo.getType());
 			Graphics2D graphics = newLogo.createGraphics();
-			graphics.drawImage(logo.getScaledInstance(logoWidth, logoHeight, Image.SCALE_SMOOTH), 0, 0, targetWidth, targetHeight, null);
+			graphics.drawImage(logo.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH), 0, 0, targetWidth, targetHeight, null);
 			graphics.dispose();
 			newLogo.flush();
 			logo = newLogo;
