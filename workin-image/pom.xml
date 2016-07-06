@@ -12,7 +12,13 @@
 		<dependency>
 		    <groupId>com.google.zxing</groupId>
 		    <artifactId>core</artifactId>
-		    <version>3.1.0</version>
+		    <version>3.2.1</version>
+		    <optional>true</optional>
+		</dependency>
+		<dependency>
+		    <groupId>com.google.zxing</groupId>
+		    <artifactId>javase</artifactId>
+		    <version>3.2.1</version>
 		    <optional>true</optional>
 		</dependency>
 		<dependency>
@@ -20,6 +26,12 @@
 		  	<artifactId>qrcode</artifactId>
 		  	<version>0.50beta10</version>
 		  	<optional>true</optional>
+		</dependency>
+		<dependency>
+  			<groupId>jp.sourceforge</groupId>
+  			<artifactId>qrcode</artifactId>
+  			<version>0.9</version>
+  			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
