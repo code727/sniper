@@ -40,6 +40,9 @@ public class QRCodeLayout extends BaseLayout {
 	/** logo图片占总宽高的最大比例 */
 	public static final double MAX_LOGOSCALE = 0.45;
 	
+	/** 默认边框颜色 */
+	public static final Color DEFAULT_BORDER_COLOR = new Color(215, 215, 215);
+	
 	/** 边长 */
 	private int sideLength = MIN_SIDELENGTH;
 	
@@ -58,11 +61,17 @@ public class QRCodeLayout extends BaseLayout {
     /** logo背景颜色 */
     private Color logoBackgroundColor = Color.WHITE;
     
-    /** logo是否需要边框 */
+    /** logo背景是否需要边框 */
+    private boolean logoBackgroundBorder = true;
+    
+    /** logo背景边框颜色 */
+    private Color logoBackgroundBorderColor = DEFAULT_BORDER_COLOR;
+    
+	/** logo图片是否需要边框 */
     private boolean logoBorder = true;
     
-    /** logo边框颜色 */
-    private Color logoBorderColor = new Color(239, 239, 239);
+    /** logo图片边框颜色 */
+    private Color logoBorderColor = DEFAULT_BORDER_COLOR;
     
     @Override
     public void setMargin(int margin) {
@@ -116,6 +125,22 @@ public class QRCodeLayout extends BaseLayout {
 	public void setLogoBackgroundColor(Color logoBackgroundColor) {
 		if (!hasLogoBackground() || logoBackgroundColor != null)
 			this.logoBackgroundColor = logoBackgroundColor;
+	}
+	
+	public boolean hasLogoBackgroundBorder() {
+    	return logoBackgroundBorder;
+    }
+    
+    public void setLogoBackgroundBorder(boolean logoBackgroundBorder) {
+		this.logoBackgroundBorder = logoBackgroundBorder;
+	}
+
+	public void setLogoBackgroundBorderColor(Color logoBackgroundBorderColor) {
+		this.logoBackgroundBorderColor = logoBackgroundBorderColor;
+	}
+	
+	public Color getLogoBackgroundBorderColor() {
+		return logoBackgroundBorderColor;
 	}
 
 	public boolean hasLogoBorder() {

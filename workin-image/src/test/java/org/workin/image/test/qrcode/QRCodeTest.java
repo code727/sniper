@@ -44,18 +44,18 @@ import org.workin.test.junit.BaseTestCase;
  */
 public class QRCodeTest extends BaseTestCase {
 	
-	private String text = "http://www.163.com";
-	private String logoURL = "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2069251242,892993321&fm=116&gp=0.jpg";
+	private String text = "http://www.cmge.com/";
+	private String logoURL = "http://f.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=86ac36ad10ce36d3a204843602c85dba/0824ab18972bd407e8e3198a7e899e510fb309a5.jpg";
 	private String google_qrcode = "C:/Users/Administrator/Desktop/test_google.png";
 	private String swetake_qrcode = "C:/Users/Administrator/Desktop/test_swetake.png";
 	
-//	@Test
+	@Test
 	public void testGoogleQRCodeGenerator() throws Exception {
 		QRCodeLayout layout = new QRCodeLayout();
 		layout.setSideLength(300);
 		layout.setMargin(5);
 		QRCode qrCode = new QRCode();
-		layout.setLogoScale(0.2);
+		layout.setLogoScale(0.25);
 		qrCode.setLayout(layout);
 		qrCode.setText(text);
 		qrCode.setLogo(ImageIO.read(new URL(logoURL).openStream()));
@@ -67,13 +67,13 @@ public class QRCodeTest extends BaseTestCase {
 		imageWriter.write(image, new File(google_qrcode));
 	}
 	
-//	@Test
+	@Test
 	public void testSwetakeQRCodeGenerator() throws Exception {
 		QRCodeLayout layout = new QRCodeLayout();
 		layout.setSideLength(300);
 		layout.setMargin(5);
 		QRCode qrCode = new QRCode();
-		layout.setLogoScale(0.2);
+		layout.setLogoScale(0.25);
 		qrCode.setLayout(layout);
 		qrCode.setText(text);
 		qrCode.setLogo(ImageIO.read(new URL(logoURL).openStream()));

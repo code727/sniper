@@ -161,29 +161,31 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 
 		int x = (qrcodeImage.getWidth() - logoWidth) / 2;
 		int y = (qrcodeImage.getHeight() - logoHeight) / 2;
-
+		
+		// 圆角比例 
+		double arcScale = 0.35;
+		int arc = (int) Math.ceil((double) Math.max(logoWidth, logoHeight) * arcScale);
+		int halfArc = (int) Math.ceil((double) arc / 2);
 		Graphics2D graphics = qrcodeImage.createGraphics(); 
 		
-		int arc = 0;
-		int halfArc = 0;
-		Color backgroundColor = null;
-		if (layout.hasLogoBackground() && (backgroundColor = layout.getLogoBackgroundColor()) != null) {
-			/* 作色并绘制圆角背景 */
+		/* 绘制背景(颜色)和背景的边框(颜色) */
+		Color backgroundColor = layout.getLogoBackgroundColor();
+		if (layout.hasLogoBackground() && backgroundColor != null) {
 			graphics.setColor(backgroundColor);
-			arc = (int) Math.ceil((double) Math.min(logoWidth, logoHeight) * 0.15);
-			halfArc = (int) Math.ceil((double)arc / 2);
-			graphics.drawRoundRect(x - halfArc, y - halfArc, logoWidth + arc, logoHeight + arc, arc, arc);
 			graphics.fillRoundRect(x - halfArc, y - halfArc, logoWidth + arc, logoHeight + arc, arc, arc);
+			
+			Color backgroundBorderColor = layout.getLogoBackgroundBorderColor();
+			if (layout.hasLogoBackgroundBorder() && backgroundBorderColor != null) {
+				graphics.setColor(backgroundBorderColor);
+				graphics.drawRoundRect(x - halfArc, y - halfArc, logoWidth + arc, logoHeight + arc, arc, arc);
+			}
 		} 
 		
-		Color borderColor = null;
-		if (layout.hasLogoBorder() && (borderColor = layout.getLogoBorderColor()) != null) {
+		int quarterArc = (int) Math.ceil((double) arc / 4);
+		Color borderColor = layout.getLogoBorderColor();
+		if (layout.hasLogoBorder() && borderColor != null) {
 			graphics.setColor(borderColor);
-			if (arc != 0 && halfArc != 0) 
-				// 绘制圆角边框
-				graphics.drawRoundRect(x - halfArc, y - halfArc, logoWidth + arc, logoHeight + arc, arc, arc);
-			else 
-				graphics.drawRect(x - 1, y - 1, logoWidth + 1, logoHeight + 1);
+			graphics.drawRoundRect(x - quarterArc, y - quarterArc, logoWidth + halfArc, logoHeight + halfArc, halfArc, halfArc);
 		}
 		
 		graphics.drawImage(logo, x, y, logoWidth, logoHeight, null);
