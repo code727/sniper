@@ -28,34 +28,30 @@ import org.workin.image.AbstractImageHandler;
 public abstract class AbstractStandardZoomHandler extends AbstractImageHandler
 		implements ImageZoomHandler {
 	
-	/** 最大宽度 */
-	protected int maxWidth = 50;
+	/** 目标宽度 */
+	protected int targetWidth = 50;
 	
-	/** 最大高度 */
-	protected int maxHeight = 50;
+	/** 目标高度 */
+	protected int targetHeight = 50;
 	
-	@Override
-	public int getMaxWidth() {
-		return maxWidth;
+	public int getTargetWidth() {
+		return targetWidth;
 	}
 
-	@Override
-	public void setMaxWidth(int maxWidth) {
-		if (maxWidth > 0)
-			this.maxWidth = maxWidth;
+	public void setTargetWidth(int targetWidth) {
+		if (targetWidth > 0)
+			this.targetWidth = targetWidth;
 	}
 
-	@Override
-	public int getMaxHeight() {
-		return maxHeight;
+	public int getTargetHeight() {
+		return targetHeight;
 	}
 
-	@Override
-	public void setMaxHeight(int maxHeight) {
-		if (maxHeight > 0)
-			this.maxHeight = maxHeight;
+	public void setTargetHeight(int targetHeight) {
+		if (targetHeight > 0)
+			this.targetHeight = targetHeight;
 	}
-	
+
 	/**
 	 * @description 判断是否超宽
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -63,7 +59,7 @@ public abstract class AbstractStandardZoomHandler extends AbstractImageHandler
 	 * @return
 	 */
 	protected boolean overWidth(int width) {
-		return width > maxWidth;
+		return width > targetWidth;
 	}
 	
 	/**
@@ -73,11 +69,11 @@ public abstract class AbstractStandardZoomHandler extends AbstractImageHandler
 	 * @return
 	 */
 	protected boolean overHeight(int height) {
-		return height > maxHeight;
+		return height > targetHeight;
 	}
 	
 	/**
-	 * @description 判断指定的宽高是否在最大范围区间内
+	 * @description 判断指定的宽高是否在目标范围区间内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param width
 	 * @param height

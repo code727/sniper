@@ -28,31 +28,31 @@ import org.workin.image.ImageHandler;
 public interface ImageZoomHandler extends ImageHandler {
 	
 	/**
-	 * @description 设置最大高度
+	 * @description 设置目标高度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param maxWidth
+	 * @param targetWidth
 	 */
-	public void setMaxWidth(int maxWidth);
+	public void setTargetWidth(int targetWidth);
 	
 	/**
-	 * @description 获取最大宽度
+	 * @description 获取目标高度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public int getMaxWidth();
+	public int getTargetWidth();
 	
 	/**
-	 * @description 设置最大高度
+	 * @description 设置目标高度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param maxHeight
+	 * @param targetHeight
 	 */
-	public void setMaxHeight(int maxHeight);
+	public void setTargetHeight(int targetHeight);
 	
 	/**
-	 * @description 获取最大高度
+	 * @description 获取目标高度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public int getMaxHeight();
+	public int getTargetHeight();
 	
 }

@@ -40,8 +40,8 @@ public class RatioHandler extends AbstractStandardZoomHandler {
 		if (!inRange(width, height)) {
 			
 			/* 限定被缩放的宽和高在指定的最大范围内 */
-			int ratioWidth = NumberUtils.maxLimit(width, maxWidth);
-			int ratiotHeight =  NumberUtils.maxLimit(height, maxHeight);
+			int ratioWidth = NumberUtils.maxLimit(width, targetWidth);
+			int ratiotHeight =  NumberUtils.maxLimit(height, targetHeight);
 			
 			/* 如果原图为横向的，则以宽度为准，高度为"宽度 * 高/宽比 
 			 * 否则以高度为准，宽度为"高度 * 高/宽比"*/

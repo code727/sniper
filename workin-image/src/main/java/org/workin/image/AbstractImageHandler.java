@@ -205,12 +205,15 @@ public abstract class AbstractImageHandler implements ImageHandler {
 	protected BufferedImage drawHandle(InputStream source) throws IOException {
 		BufferedImage sourceImage = imageReader.read(source); 
 		Pixel pixel = createTragetPixel(sourceImage);
-		BufferedImage destImage = new BufferedImage(pixel.getWidth(), pixel.getHeight(), sourceImage.getType());
-		
-		Graphics2D graphics = destImage.createGraphics();
-		graphics.drawImage(handSourceImage(sourceImage, pixel), 0, 0, null);
-		graphics.dispose();
-		return destImage;
+		if (sourceImage.getWidth() != pixel.getWidth() || sourceImage.getHeight() != pixel.getHeight()) {
+			BufferedImage destImage = new BufferedImage(pixel.getWidth(), pixel.getHeight(), sourceImage.getType());
+			Graphics2D graphics = destImage.createGraphics();
+			graphics.drawImage(handSourceImage(sourceImage, pixel), 0, 0, null);
+			graphics.dispose();
+			destImage.flush();
+			return destImage;
+		} else
+			return sourceImage;
 	}
 	
 	/**
