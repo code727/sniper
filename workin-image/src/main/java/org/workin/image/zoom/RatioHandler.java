@@ -25,7 +25,7 @@ import org.workin.commons.util.NumberUtils;
 import org.workin.image.Pixel;
 
 /**
- * @description 图片等比压缩处理器
+ * @description 图片等比缩放处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -35,27 +35,18 @@ public class RatioHandler extends AbstractStandardZoomHandler {
 	protected Pixel createTragetPixel(BufferedImage sourceImage) {
 		int width = sourceImage.getWidth();
 		int height = sourceImage.getHeight();
+				
+		// 原图高/宽比
+		double hwScale = (double) height / width;
+		// 原图宽/高比
+		double whScale = (double) width / height;
 		
-		/* 当原图的宽和高不在指定的范围内时，则计算出所要缩小或放大的目标像素 */
-		if (!inRange(width, height)) {
-			
-			/* 限定被缩放的宽和高在指定的最大范围内 */
-			int ratioWidth = NumberUtils.maxLimit(width, targetWidth);
-			int ratiotHeight =  NumberUtils.maxLimit(height, targetHeight);
-			
-			/* 如果原图为横向的，则以宽度为准，高度为"宽度 * 高/宽比 
-			 * 否则以高度为准，宽度为"高度 * 高/宽比"*/
-			if (ImageUtils.isLateraImage(width, height)) {
-				// 原图高/宽比
-				double hwScale = (double) height / width; 
-				width = ratioWidth;
-				height = (int) (width * hwScale);
-			} else {
-				// 原图宽/高比
-				double whScale = (double) width / height; 
-				height = ratiotHeight;
-				width = (int) (height * whScale);
-			}
+		if (ImageUtils.isLateraImage(width, height)) {
+			width = targetWidth;
+			height = (int) Math.ceil((width * hwScale));
+		} else {
+			height = targetHeight;
+			width = (int) Math.ceil((height * whScale));
 		}
 		
 		return new Pixel(NumberUtils.minLimit(width, 1), NumberUtils.minLimit(height, 1));

@@ -77,19 +77,19 @@ public class ZoomHandlerTest extends BaseTestCase {
 	public void testRatioHandler() throws Exception {
 		RatioHandler handler = new RatioHandler();
 		handler.setTargetWidth(800);
-		handler.setTargetHeight(200);
+		handler.setTargetHeight(2000);
 		
-		handler.handle(lateraImage, lateraImageFile);
-		BufferedImage destImage = ImageIO.read(lateraImageFile); 
-		
-		System.out.println("像素区间["+ handler.getTargetWidth() + "*" + handler.getTargetHeight() + "].");;
-		System.out.println("目标横向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "].");
-		
-//		handler.handle(verticalImage, verticalImageFile);
-//		destImage = ImageIO.read(verticalImageFile); 
+//		handler.handle(lateraImage, lateraImageFile);
+//		BufferedImage destImage = ImageIO.read(lateraImageFile); 
 //		
 //		System.out.println("像素区间["+ handler.getTargetWidth() + "*" + handler.getTargetHeight() + "].");;
-//		System.out.println("目标纵向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "].");
+//		System.out.println("目标横向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "].");
+		
+		handler.handle(verticalImage, verticalImageFile);
+		BufferedImage destImage = ImageIO.read(verticalImageFile); 
+		
+		System.out.println("像素区间["+ handler.getTargetWidth() + "*" + handler.getTargetHeight() + "].");;
+		System.out.println("目标纵向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "].");
 	}
 	
 
