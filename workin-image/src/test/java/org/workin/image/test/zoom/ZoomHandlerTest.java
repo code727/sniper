@@ -29,7 +29,7 @@ import javax.imageio.ImageIO;
 import org.junit.Before;
 import org.junit.Test;
 import org.workin.image.zoom.FixedZoomHandler;
-import org.workin.image.zoom.RatioHandler;
+import org.workin.image.zoom.AdaptiveRatioHandler;
 import org.workin.test.junit.BaseTestCase;
 
 /**
@@ -75,9 +75,9 @@ public class ZoomHandlerTest extends BaseTestCase {
 	
 	@Test
 	public void testRatioHandler() throws Exception {
-		RatioHandler handler = new RatioHandler();
-		handler.setTargetWidth(800);
-		handler.setTargetHeight(2000);
+		AdaptiveRatioHandler handler = new AdaptiveRatioHandler();
+		handler.setTargetWidth(1000);
+		handler.setTargetHeight(1800);
 		
 //		handler.handle(lateraImage, lateraImageFile);
 //		BufferedImage destImage = ImageIO.read(lateraImageFile); 
