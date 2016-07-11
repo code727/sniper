@@ -87,5 +87,6 @@
 		<module>workin-sms</module>
 		<module>workin-push</module>
 		<module>workin-image</module>
+		<module>workin-serialization</module>
 	</modules>
 </project>
