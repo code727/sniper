@@ -31,9 +31,36 @@ import org.workin.image.Pixel;
  */
 public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	
+	/** 是否只用于压缩处理 */
+	private boolean compressOnly;
+	
+	/**
+	 * @description 判断是否只用于压缩处理
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean isCompressOnly() {
+		return compressOnly;
+	}
+
+	/**
+	 * @description 设置是否只用于压缩处理
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param compressOnly
+	 */
+	public void setCompressOnly(boolean compressOnly) {
+		this.compressOnly = compressOnly;
+	}
+
 	@Override
 	protected Pixel createTragetPixel(BufferedImage sourceImage) {
-		return createByImageProperty(sourceImage);
+		Pixel pixel;
+		if (isCompressOnly() && inRange(sourceImage.getWidth(), sourceImage.getHeight()))
+			pixel = new Pixel(sourceImage.getWidth(), sourceImage.getHeight());
+		else
+			pixel = createByImageProperty(sourceImage);
+		
+		return pixel;
 	}
 	
 	/**
@@ -51,7 +78,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 			pixel = createByWidthPriority(width, height);
 		else
 			pixel = createByHeightPriority(width, height);
-		
+			
 		return pixel;
 	}
 	
@@ -65,6 +92,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	private Pixel createByWidthPriority(int width, int height) {
 		// 原图高/宽比
 		double hwScale = (double) height / width;
+		
 		width = targetWidth;
 		height = (int) Math.ceil((width * hwScale)) ;
 		if (overHeight(height)) {
