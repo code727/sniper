@@ -19,6 +19,7 @@
 package org.workin.json.test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -37,21 +38,25 @@ public class JSONUtilsTest extends BaseTestCase {
 	
 	@Before
 	public void init() {
+//		JSONUtils.registerJsonConfig(null);
+		
 		user.setUserName("dubin[0]");
 		user.setLoginName("daniele[1]");
+		user.setCreateTime(new Date());
 	}
 	
-//	@Test
+	@Test
 	public void testToStringAndToBean() {
 		String json = JSONUtils.toString(user);
 		System.out.println(json);
+		
 		json = "[" + json + "]";
 		user = JSONUtils.toBean(json, User.class);
 		assertEquals("dubin[0]", user.getUserName());
 		assertEquals("daniele[1]", user.getLoginName());
 	}
 	
-	@Test
+//	@Test
 	public void testToStringAndToCollection() {
 		List<User> list = new ArrayList<User>();
 		int count = 3;

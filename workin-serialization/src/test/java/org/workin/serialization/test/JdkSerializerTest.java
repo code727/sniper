@@ -20,6 +20,7 @@ package org.workin.serialization.test;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
@@ -29,7 +30,7 @@ import org.workin.serialization.jdk.JdkSerializer;
 import org.workin.serialization.test.domain.User;
 
 /**
- * @description JDK原生序列器单元测试类
+ * @description JDK原生序列器单元测试类O
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -40,7 +41,7 @@ public class JdkSerializerTest extends AbstractJdkSerializerTest {
 	@Test
 	@Override
 	public void testSerialize() throws Exception {
-		bytes = serializer.serialize(user);
+		bytes = serializer.serialize(list);
 		assertTrue(ArrayUtils.isNotEmpty(bytes));
 		
 		// 写入目标文件查看序列化结果
@@ -54,8 +55,7 @@ public class JdkSerializerTest extends AbstractJdkSerializerTest {
 		if (ArrayUtils.isEmpty(bytes))
 			testSerialize();
 		
-		User result = serializer.deserialize(bytes);
-		assertTrue(result.equals(user));
+		List<User> result = serializer.deserialize(bytes);
 		System.out.println(result);
 	}
 

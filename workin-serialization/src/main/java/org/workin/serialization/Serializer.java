@@ -27,7 +27,7 @@ package org.workin.serialization;
 public interface Serializer {
 	
 	/**
-	 * @description 将对象序列化为字节数据
+	 * @description 将数据序列化为字节数据
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param t
 	 * @return
@@ -36,7 +36,7 @@ public interface Serializer {
 	public <T> byte[] serialize(T t) throws Exception;
 	
 	/**
-	 * @description 将字节数据反序列化为对象
+	 * @description 将字节数据反序列化
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bytes
 	 * @return

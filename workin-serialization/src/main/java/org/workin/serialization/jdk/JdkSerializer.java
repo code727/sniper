@@ -32,7 +32,7 @@ import org.workin.serialization.Serializer;
  * @version 1.0
  */
 public class JdkSerializer implements Serializer {
-
+	
 	@Override
 	public <T> byte[] serialize(T t) throws Exception {
 		ByteArrayOutputStream byteArrayOutputStream = null;

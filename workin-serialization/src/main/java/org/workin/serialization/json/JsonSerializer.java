@@ -16,27 +16,43 @@
  * Create Date : 2016-7-11
  */
 
-package org.workin.serialization.protobuffer;
+package org.workin.serialization.json;
 
 import org.workin.serialization.Serializer;
 
 /**
- * @description Google Protobuffer序列器实现类
+ * @description JSON序列器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ProtobufferSerializer implements Serializer {
+public interface JsonSerializer extends Serializer {
+	
+	/**
+	 * @description 获取结果类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getTypeClass();
 
-	@Override
-	public <T> byte[] serialize(T t) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/**
+	 * @description 设置结果类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param typeClass
+	 */
+	public void setTypeClass(String typeClass);
 
-	@Override
-	public <T> T deserialize(byte[] bytes) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/**
+	 * @description 获取结果类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Class<?> getType();
 
+	/**
+	 * @description 设置结果类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param type
+	 */
+	public void setType(Class<?> type);
+	
 }

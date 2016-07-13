@@ -18,7 +18,9 @@
 
 package org.workin.json.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import net.sf.ezmorph.Morpher;
@@ -26,6 +28,8 @@ import net.sf.ezmorph.MorpherRegistry;
 import net.sf.ezmorph.object.DateMorpher;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.AssertUtils;
@@ -42,7 +46,20 @@ public class JSONUtils {
 	
 	private static MorpherRegistry morpherRegistry;
 	
+	private static JsonConfig jsonConfig;
+	
+	private static final Object lock = new Object();
+	
 	static {
+		registerDefaultMorpher();
+		registerDefaultJsonConfig();
+	}
+	
+	/**
+	 * @description 注册全局默认的Morpher
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	private static void registerDefaultMorpher() {
 		morpherRegistry = net.sf.json.util.JSONUtils.getMorpherRegistry();
 		morpherRegistry.registerMorpher(new DateMorpher(new String[] {
 				DateUtils.DEFAULT_DATETIME_FORMAT, DateUtils.DEFAULT_DATE_FORMAT
@@ -51,22 +68,50 @@ public class JSONUtils {
 	}
 	
 	/**
+	 * @description 注册全局默认的JsonConfig
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	private static void registerDefaultJsonConfig() {
+		jsonConfig = new JsonConfig();
+		final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DateUtils.DEFAULT_DATETIME_FORMAT);
+		jsonConfig.registerJsonValueProcessor(Date.class, new JsonValueProcessor(){
+			
+			@Override
+			public Object processObjectValue(String propertyName, Object date, JsonConfig cfg) {
+				return simpleDateFormat.format(date);
+			}
+
+			@Override
+			public Object processArrayValue(Object date, JsonConfig cfg) {
+				return simpleDateFormat.format(date);
+			}
+		});
+	}
+	
+	/**
 	 * @description 注册全局的Morpher
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param morpher
 	 */
 	public static void registerMorpher(Morpher morpher) {
-		if (morpher != null)
-			morpherRegistry.registerMorpher(morpher);
+		synchronized (lock) {
+			if (morpher != null)
+				morpherRegistry.registerMorpher(morpher);
+		}
 	}
 	
 	/**
-	 * @description 注册全局的DateMorpher
+	 * @description 注册全局的JsonConfig
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dateMorpher
 	 */
-	public static void registerDateMorpher(DateMorpher dateMorpher) {
-		registerMorpher(dateMorpher);
+	public static void registerJsonConfig(JsonConfig cfg) {
+		synchronized (lock) {
+			if (cfg != null)
+				jsonConfig = cfg;
+			else
+				jsonConfig = new JsonConfig();
+		}
 	}
 	
 	/**
@@ -77,7 +122,7 @@ public class JSONUtils {
 	 */
 	public static <T> String toString(T obj) {
 		AssertUtils.assertNotNull(obj, "Converted object can not be null.");
-		return JSONObject.fromObject(obj).toString();
+		return JSONObject.fromObject(obj, jsonConfig).toString();
 	}
 	
 	/**
@@ -89,7 +134,7 @@ public class JSONUtils {
 	public static <T> String toString(Collection<T> beanCollection) {
 		AssertUtils.assertTrue(CollectionUtils.isNotEmpty(beanCollection),
 				"Converted bean collection can not be null or empty.");
-		return JSONArray.fromObject(beanCollection).toString();
+		return JSONArray.fromObject(beanCollection, jsonConfig).toString();
 	}
 	
 	/**
@@ -101,7 +146,7 @@ public class JSONUtils {
 	public static <T> String toString(List<T> beanList) {
 		AssertUtils.assertTrue(CollectionUtils.isNotEmpty(beanList),
 				"Converted bean list can not be null or empty.");
-		return JSONArray.fromObject(beanList).toString();
+		return JSONArray.fromObject(beanList, jsonConfig).toString();
 	}
 	
 	/**
@@ -113,7 +158,7 @@ public class JSONUtils {
 	public static String toString(Object[] beanArray) {
 		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(beanArray),
 				"Converted bean array can not be null or empty.");
-		return JSONArray.fromObject(beanArray).toString();
+		return JSONArray.fromObject(beanArray, jsonConfig).toString();
 	}
 	
 	/**
@@ -127,7 +172,7 @@ public class JSONUtils {
 	public static <T> Collection<T> toCollection(String json, Class<T> beanClass) {
 		AssertUtils.assertTrue(StringUtils.isNotBlank(json),
 				"Converted json string can not be null or empty.");
-		JSONArray jsonArray = JSONArray.fromObject(json);
+		JSONArray jsonArray = JSONArray.fromObject(json, jsonConfig);
 		return JSONArray.toCollection(jsonArray, beanClass);
 	}
 	
@@ -142,7 +187,7 @@ public class JSONUtils {
 	public static <T> List<T> toList(String json, Class<T> beanClass) {
 		AssertUtils.assertTrue(StringUtils.isNotBlank(json),
 				"Converted json string can not be null or empty.");
-		JSONArray jsonArray = JSONArray.fromObject(json);
+		JSONArray jsonArray = JSONArray.fromObject(json, jsonConfig);
 		return (List<T>) JSONArray.toCollection(jsonArray, beanClass);
 	}
 	
@@ -162,7 +207,7 @@ public class JSONUtils {
 		if (StringUtils.startsWith(json, "[") && StringUtils.endsWith(json, "]"))
 			return toList(json, beanClass).get(0);
 		
-		return (T) JSONObject.toBean(JSONObject.fromObject(json), beanClass);
+		return (T) JSONObject.toBean(JSONObject.fromObject(json, jsonConfig), beanClass);
 	}
 
 }

@@ -1,6 +1,7 @@
 package org.workin.json.test;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
 	
@@ -9,6 +10,8 @@ public class User implements Serializable {
 	private String userName;
 	
 	private String loginName;
+	
+	private Date createTime;
 
 	public String getUserName() {
 		return this.userName;
@@ -24,6 +27,14 @@ public class User implements Serializable {
 
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 	
 }

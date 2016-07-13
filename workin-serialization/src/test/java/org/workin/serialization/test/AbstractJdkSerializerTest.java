@@ -18,7 +18,11 @@
 
 package org.workin.serialization.test;
 
+import java.util.Date;
+import java.util.List;
+
 import org.junit.Before;
+import org.workin.commons.util.CollectionUtils;
 import org.workin.serialization.test.domain.User;
 import org.workin.test.junit.BaseTestCase;
 
@@ -31,6 +35,8 @@ public abstract class AbstractJdkSerializerTest extends BaseTestCase implements 
 	
 	protected User user;
 	
+	protected List<User> list;
+	
 	protected byte[] bytes;
 	
 	@Before
@@ -42,6 +48,16 @@ public abstract class AbstractJdkSerializerTest extends BaseTestCase implements 
 		user.setGender((byte) 1);
 		user.setMarried(true);
 		user.setVision(1.0);
+		user.setCreateTime(new Date());
+		
+		list = CollectionUtils.newArrayList();
+		list.add(user);
+		for (int i = 0 ; i < 2; i++) {
+			User cloneUser = user.clone();
+			cloneUser.setId(user.getId() + i + 1);
+			list.add(cloneUser);
+		}
+			
 	}
 
 }

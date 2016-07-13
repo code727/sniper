@@ -19,13 +19,14 @@
 package org.workin.serialization.test.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @description
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class User implements Serializable {
+public class User implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -7146724311576587958L;
 	
@@ -40,6 +41,8 @@ public class User implements Serializable {
 	private boolean married;
 	
 	private double vision;
+	
+	private Date createTime;
 
 	public Long getId() {
 		return id;
@@ -89,6 +92,14 @@ public class User implements Serializable {
 		this.vision = vision;
 	}
 	
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	
 	public boolean equals(User user) {
 		if (user == null)
 			return false;
@@ -96,9 +107,9 @@ public class User implements Serializable {
 		return this.id.equals(user.getId());
 	}
 	
-	public int hashCode() {
-		return this.hashCode() * 37;
-	}
+//	public int hashCode() {
+//		return this.hashCode() * 17;
+//	}
 	
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
@@ -108,10 +119,18 @@ public class User implements Serializable {
 		.append("gender:").append(this.getGender()).append("\n")
 		.append("age:").append(this.getAge()).append("\n")
 		.append("married:").append(this.isMarried()).append("\n")
-		.append("vision:").append(this.getVision()).append("\n");
+		.append("vision:").append(this.getVision()).append("\n")
+		.append("createTime:").append(this.getCreateTime()).append("\n");
 		return buffer.toString();
 	}
 	
-	
+	@Override
+	public User clone() {
+		try {
+			return (User) super.clone();
+		} catch (CloneNotSupportedException e) {
+			return null; 
+		}
+	}
 
 }
