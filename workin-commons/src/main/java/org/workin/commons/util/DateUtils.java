@@ -205,7 +205,30 @@ public class DateUtils {
 	public static String timeToString(long time, String pattern) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(time); 
-		return dateToString(calendar.getTime(), pattern);			
+		return dateToString(calendar.getTime(), StringUtils.isNotBlank(pattern) ?
+				pattern : DEFAULT_DATETIME_FORMAT);			
+	}
+	
+	/**
+	 * @description 以默认格式将对象转换成日期字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static String objectToString(Object obj) {
+		return objectToString(obj, null);
+	}
+	
+	/**
+	 * @description 以指定格式将对象转换成日期字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param pattern
+	 * @return
+	 */
+	public static String objectToString(Object obj, String pattern) {
+		AssertUtils.assertNotNull(obj, "Object can not be null.");
+		return getDateFormat(pattern).format(obj);
 	}
 	
 	/**

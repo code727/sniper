@@ -16,9 +16,8 @@
  * Create Date : 2016-7-12
  */
 
-package org.workin.serialization.json.proxy;
+package org.workin.serialization.json.sf;
 
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
@@ -89,17 +88,16 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	 */
 	private void buildDefaultJsonConfig() {
 		this.jsonConfig = new JsonConfig();
-		final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DateUtils.DEFAULT_DATETIME_FORMAT);
 		this.jsonConfig.registerJsonValueProcessor(Date.class, new JsonValueProcessor(){
 			
 			@Override
 			public Object processObjectValue(String propertyName, Object date, JsonConfig cfg) {
-				return simpleDateFormat.format(date);
+				return DateUtils.objectToString(date);
 			}
 
 			@Override
 			public Object processArrayValue(Object date, JsonConfig cfg) {
-				return simpleDateFormat.format(date);
+				return DateUtils.objectToString(date);
 			}
 		});
 	}

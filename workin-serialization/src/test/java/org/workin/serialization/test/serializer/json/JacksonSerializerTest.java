@@ -25,7 +25,7 @@ import java.util.List;
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.IOUtils;
-import org.workin.serialization.json.proxy.JacksonSerializer;
+import org.workin.serialization.json.codehaus.JacksonSerializer;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
 /**

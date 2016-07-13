@@ -24,7 +24,7 @@ import java.io.FileOutputStream;
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.IOUtils;
-import org.workin.serialization.json.proxy.FastJsonSerializer;
+import org.workin.serialization.json.alibaba.FastJsonSerializer;
 import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 

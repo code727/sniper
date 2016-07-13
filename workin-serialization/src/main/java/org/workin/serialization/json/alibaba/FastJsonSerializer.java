@@ -16,7 +16,7 @@
  * Create Date : 2016-7-13
  */
 
-package org.workin.serialization.json.proxy;
+package org.workin.serialization.json.alibaba;
 
 import org.workin.serialization.json.AbstractJsonSerializer;
 

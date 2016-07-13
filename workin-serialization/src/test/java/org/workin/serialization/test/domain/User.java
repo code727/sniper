@@ -21,6 +21,9 @@ package org.workin.serialization.test.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.workin.serialization.json.codehaus.support.CustomDateSerializer;
+
 /**
  * @description
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -42,6 +45,7 @@ public class User implements Serializable, Cloneable {
 	
 	private double vision;
 	
+	@JsonSerialize(using = CustomDateSerializer.class)
 	private Date createTime;
 
 	public Long getId() {
