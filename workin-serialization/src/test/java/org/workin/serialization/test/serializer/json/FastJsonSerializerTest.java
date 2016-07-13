@@ -60,7 +60,7 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 		
 		// List<JavaBean>可以不用设置type，单个JavaBean则必须设置
 //		fastJsonSerializer.setType(List.class);
-		user = fastJsonSerializer.deserialize(bytes);
+		list = fastJsonSerializer.deserialize(bytes);
 		System.out.println(list);
 	}
 
