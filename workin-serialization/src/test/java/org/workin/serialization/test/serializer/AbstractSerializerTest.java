@@ -16,7 +16,7 @@
  * Create Date : 2016年7月11日
  */
 
-package org.workin.serialization.test;
+package org.workin.serialization.test.serializer;
 
 import java.util.Date;
 import java.util.List;
@@ -31,7 +31,7 @@ import org.workin.test.junit.BaseTestCase;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractJdkSerializerTest extends BaseTestCase implements SerializerTest {
+public abstract class AbstractSerializerTest extends BaseTestCase implements SerializerTest {
 	
 	protected User user;
 	

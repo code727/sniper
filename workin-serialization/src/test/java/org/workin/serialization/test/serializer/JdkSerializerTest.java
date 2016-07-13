@@ -16,7 +16,7 @@
  * Create Date : 2016-7-11
  */
 
-package org.workin.serialization.test;
+package org.workin.serialization.test.serializer;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,7 +34,7 @@ import org.workin.serialization.test.domain.User;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JdkSerializerTest extends AbstractJdkSerializerTest {
+public class JdkSerializerTest extends AbstractSerializerTest {
 	
 	private Serializer serializer = new JdkSerializer();
 	

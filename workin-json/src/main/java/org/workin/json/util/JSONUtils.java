@@ -51,15 +51,15 @@ public class JSONUtils {
 	private static final Object lock = new Object();
 	
 	static {
-		registerDefaultMorpher();
-		registerDefaultJsonConfig();
+		buildDefaultMorpher();
+		buildDefaultJsonConfig();
 	}
 	
 	/**
-	 * @description 注册全局默认的Morpher
+	 * @description 构建全局默认的Morpher
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	private static void registerDefaultMorpher() {
+	private static void buildDefaultMorpher() {
 		morpherRegistry = net.sf.json.util.JSONUtils.getMorpherRegistry();
 		morpherRegistry.registerMorpher(new DateMorpher(new String[] {
 				DateUtils.DEFAULT_DATETIME_FORMAT, DateUtils.DEFAULT_DATE_FORMAT
@@ -68,10 +68,10 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 注册全局默认的JsonConfig
+	 * @description 构建全局默认的JsonConfig
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	private static void registerDefaultJsonConfig() {
+	private static void buildDefaultJsonConfig() {
 		jsonConfig = new JsonConfig();
 		final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DateUtils.DEFAULT_DATETIME_FORMAT);
 		jsonConfig.registerJsonValueProcessor(Date.class, new JsonValueProcessor(){
@@ -101,19 +101,16 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 注册全局的JsonConfig
+	 * @description 设置全局的JsonConfig
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dateMorpher
+	 * @param jsonConfig
 	 */
-	public static void registerJsonConfig(JsonConfig cfg) {
+	public static void setJsonConfig(JsonConfig jsonConfig) {
 		synchronized (lock) {
-			if (cfg != null)
-				jsonConfig = cfg;
-			else
-				jsonConfig = new JsonConfig();
+			JSONUtils.jsonConfig = jsonConfig;
 		}
 	}
-	
+
 	/**
 	 * @description 将对象转换成JSON字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

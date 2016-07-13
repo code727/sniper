@@ -16,7 +16,7 @@
  * Create Date : 2016-7-11
  */
 
-package org.workin.serialization.test;
+package org.workin.serialization.test.serializer;
 
 
 /**

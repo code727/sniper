@@ -45,7 +45,7 @@ public class JSONUtilsTest extends BaseTestCase {
 		user.setCreateTime(new Date());
 	}
 	
-	@Test
+//	@Test
 	public void testToStringAndToBean() {
 		String json = JSONUtils.toString(user);
 		System.out.println(json);
@@ -56,7 +56,7 @@ public class JSONUtilsTest extends BaseTestCase {
 		assertEquals("daniele[1]", user.getLoginName());
 	}
 	
-//	@Test
+	@Test
 	public void testToStringAndToCollection() {
 		List<User> list = new ArrayList<User>();
 		int count = 3;

@@ -114,13 +114,13 @@ public class User implements Serializable, Cloneable {
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
 		buffer
-		.append("id:").append(this.getId()).append("\n")
-		.append("name:").append(this.getName()).append("\n")
-		.append("gender:").append(this.getGender()).append("\n")
-		.append("age:").append(this.getAge()).append("\n")
-		.append("married:").append(this.isMarried()).append("\n")
-		.append("vision:").append(this.getVision()).append("\n")
-		.append("createTime:").append(this.getCreateTime()).append("\n");
+		.append("id:").append(this.getId()).append(",")
+		.append("name:").append(this.getName()).append(",")
+		.append("gender:").append(this.getGender()).append(",")
+		.append("age:").append(this.getAge()).append(",")
+		.append("married:").append(this.isMarried()).append(",")
+		.append("vision:").append(this.getVision()).append(",")
+		.append("createTime:").append(this.getCreateTime());
 		return buffer.toString();
 	}
 	
