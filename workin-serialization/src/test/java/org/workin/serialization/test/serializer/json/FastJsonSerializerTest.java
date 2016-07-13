@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016年7月13日
+ * Create Date : 2016-7-13
  */
 
 package org.workin.serialization.test.serializer.json;
@@ -58,9 +58,9 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 			testSerialize();
 		}
 		
-		// List<JavaBean>可以不用设置type
+		// List<JavaBean>可以不用设置type，单个JavaBean则必须设置
 //		fastJsonSerializer.setType(List.class);
-		list = fastJsonSerializer.deserialize(bytes);
+		user = fastJsonSerializer.deserialize(bytes);
 		System.out.println(list);
 	}
 
