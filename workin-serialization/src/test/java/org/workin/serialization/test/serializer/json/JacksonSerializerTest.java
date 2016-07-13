@@ -20,12 +20,12 @@ package org.workin.serialization.test.serializer.json;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.List;
 
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.IOUtils;
 import org.workin.serialization.json.codehaus.JacksonSerializer;
+import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
 /**
@@ -40,7 +40,7 @@ public class JacksonSerializerTest extends AbstractSerializerTest {
 	@Override
 	@Test
 	public void testSerialize() throws Exception {
-		bytes = jacksonSerializer.serialize(list);
+		bytes = jacksonSerializer.serialize(user);
 		
 		String path = "C:/Users/Administrator/Desktop/jacksonSerializer.txt";
 		IOUtils.write(new FileOutputStream(new File(path)), bytes);
@@ -53,9 +53,10 @@ public class JacksonSerializerTest extends AbstractSerializerTest {
 			testSerialize();
 		}
 		
-		jacksonSerializer.setType(List.class);
-		list = jacksonSerializer.deserialize(bytes);
-		System.out.println(list);
+		// 但个JavaBean需要设置type，List<JavaBean>则不用
+		jacksonSerializer.setType(User.class);
+		User user = jacksonSerializer.deserialize(bytes);
+		System.out.println(user);
 	}
 
 }

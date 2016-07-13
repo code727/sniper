@@ -31,17 +31,17 @@ public interface Serializer {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param t
 	 * @return
-	 * @throws Exception
+	 * @throws SerializationException
 	 */
-	public <T> byte[] serialize(T t) throws Exception;
+	public <T> byte[] serialize(T t) throws SerializationException;
 	
 	/**
 	 * @description 将字节数据反序列化
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bytes
 	 * @return
-	 * @throws Exception
+	 * @throws SerializationException
 	 */
-	public <T> T deserialize(byte[] bytes) throws Exception;
+	public <T> T deserialize(byte[] bytes) throws SerializationException;
 
 }

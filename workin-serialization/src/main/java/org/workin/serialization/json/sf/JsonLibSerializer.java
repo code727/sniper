@@ -18,9 +18,7 @@
 
 package org.workin.serialization.json.sf;
 
-import java.util.Collection;
 import java.util.Date;
-import java.util.Map;
 
 import net.sf.ezmorph.Morpher;
 import net.sf.ezmorph.MorpherRegistry;
@@ -31,10 +29,10 @@ import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.util.JSONUtils;
 
-import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.serialization.SerializationException;
 import org.workin.serialization.json.AbstractJsonSerializer;
 
 /**
@@ -113,16 +111,17 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	}
 		
 	@Override
-	public <T> byte[] serialize(T t) throws Exception {
-		if (t instanceof Collection<?> || t instanceof Map<?, ?> || ArrayUtils.isArray(t))
-			return CodecUtils.getBytes(JSONArray.fromObject(t, getJsonConfig()).toString());
+	public <T> byte[] serialize(T t) throws SerializationException {
+		
 		
 		return CodecUtils.getBytes(JSONObject.fromObject(t, getJsonConfig()).toString(), getEncoding());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T deserialize(byte[] bytes) throws Exception {
+	public <T> T deserialize(byte[] bytes) throws SerializationException {
+		
+		
 		String jsonString = CodecUtils.bytesToString(bytes, getEncoding());
 		boolean isArray = StringUtils.startsWith(jsonString, "[") && StringUtils.endsWith(jsonString, "]");
 		if (isArray) {

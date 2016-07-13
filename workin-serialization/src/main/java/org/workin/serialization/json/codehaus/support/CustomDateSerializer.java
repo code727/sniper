@@ -26,28 +26,32 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.workin.commons.util.DateUtils;
+import org.workin.serialization.DateSerializer;
 
 /**
  * @description 自定义日期序列化器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CustomDateSerializer extends JsonSerializer<Date> {
+public class CustomDateSerializer extends JsonSerializer<Date> implements DateSerializer {
 	
-	private String pattern;
+	private String dateFormat;
 	
-	public String getPattern() {
-		return pattern;
-	}
-
-	public void setPattern(String pattern) {
-		this.pattern = pattern;
+	@Override
+	public String getDateFormat() {
+		return dateFormat;
 	}
 
 	@Override
+	public void setDateFormat(String dateFormat) {
+		this.dateFormat = dateFormat;
+	}
+	
+	@Override
 	public void serialize(Date date, JsonGenerator jgen, SerializerProvider provider) 
 			throws IOException, JsonProcessingException {
-		jgen.writeString(DateUtils.dateToString(date, pattern));  
+		
+		jgen.writeString(DateUtils.dateToString(date, getDateFormat()));  
 	}
-
+	
 }

@@ -18,6 +18,7 @@
 
 package org.workin.serialization.json;
 
+import org.workin.serialization.DateSerializer;
 import org.workin.serialization.Serializer;
 
 /**
@@ -25,7 +26,7 @@ import org.workin.serialization.Serializer;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JsonSerializer extends Serializer {
+public interface JsonSerializer extends Serializer, DateSerializer {
 	
 	/**
 	 * @description 获取结果类型
@@ -54,5 +55,5 @@ public interface JsonSerializer extends Serializer {
 	 * @param type
 	 */
 	public void setType(Class<?> type);
-	
+			
 }

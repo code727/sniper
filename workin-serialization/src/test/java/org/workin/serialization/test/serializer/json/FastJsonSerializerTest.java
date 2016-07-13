@@ -23,9 +23,9 @@ import java.io.FileOutputStream;
 
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
+import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.IOUtils;
 import org.workin.serialization.json.alibaba.FastJsonSerializer;
-import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
 /**
@@ -35,7 +35,12 @@ import org.workin.serialization.test.serializer.AbstractSerializerTest;
  */
 public class FastJsonSerializerTest extends AbstractSerializerTest {
 	
-	private FastJsonSerializer fastJsonSerializer = new FastJsonSerializer();
+	private FastJsonSerializer fastJsonSerializer;
+	
+	public FastJsonSerializerTest() {
+		this.fastJsonSerializer = new FastJsonSerializer();
+		this.fastJsonSerializer.setDateFormat(DateUtils.DEFAULT_DATETIME_FORMAT);
+	}
 
 	@Override
 	@Test
@@ -53,7 +58,8 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 			testSerialize();
 		}
 		
-		fastJsonSerializer.setType(User.class);
+		// List<JavaBean>可以不用设置type
+//		fastJsonSerializer.setType(List.class);
 		list = fastJsonSerializer.deserialize(bytes);
 		System.out.println(list);
 	}

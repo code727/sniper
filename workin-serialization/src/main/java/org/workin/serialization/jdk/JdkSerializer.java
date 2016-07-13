@@ -20,10 +20,12 @@ package org.workin.serialization.jdk;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import org.workin.commons.util.IOUtils;
+import org.workin.serialization.SerializationException;
 import org.workin.serialization.Serializer;
 
 /**
@@ -34,7 +36,7 @@ import org.workin.serialization.Serializer;
 public class JdkSerializer implements Serializer {
 	
 	@Override
-	public <T> byte[] serialize(T t) throws Exception {
+	public <T> byte[] serialize(T t) throws SerializationException {
 		ByteArrayOutputStream byteArrayOutputStream = null;
 		ObjectOutputStream objectOutputStream = null;
 		try {
@@ -44,15 +46,21 @@ public class JdkSerializer implements Serializer {
 			objectOutputStream.flush();
 			byte[] bytes = byteArrayOutputStream.toByteArray();
 			return bytes;
+		}  catch(IOException e) {
+			throw new SerializationException("Cannot serialize", e);
 		} finally {
-			IOUtils.close(objectOutputStream);
-			IOUtils.close(byteArrayOutputStream);
+			try {
+				IOUtils.close(objectOutputStream);
+				IOUtils.close(byteArrayOutputStream);
+			} catch (IOException e) {
+				throw new SerializationException("Cannot serialize", e);
+			}
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T deserialize(byte[] bytes) throws Exception {
+	public <T> T deserialize(byte[] bytes) throws SerializationException {
 		ByteArrayInputStream byteArrayInputStream = null;
 		ObjectInputStream objectInputStream = null;
 		try {
@@ -60,9 +68,15 @@ public class JdkSerializer implements Serializer {
 			objectInputStream = new ObjectInputStream(byteArrayInputStream);
 			T result = (T) objectInputStream.readObject();
 			return result;
+		} catch(Exception e) {
+			throw new SerializationException("Cannot deserialize", e);
 		} finally {
-			IOUtils.close(objectInputStream);
-			IOUtils.close(byteArrayInputStream);
+			try {
+				IOUtils.close(objectInputStream);
+				IOUtils.close(byteArrayInputStream);
+			} catch (IOException e) {
+				throw new SerializationException("Cannot deserialize", e);
+			}
 		}
 	}
 

@@ -28,8 +28,13 @@ import org.workin.support.codec.CodecSupport;
  */
 public abstract class AbstractJsonSerializer extends CodecSupport implements JsonSerializer {
 	
+	/** 序列化日期时指定的格式 */
+	private String dateFormat;
+	
+	/** 序列化结果类型字符串 */
 	private String typeClass;
 	
+	/** 序列化结果类型 */
 	private Class<?> type;
 	
 	protected AbstractJsonSerializer() {}
@@ -42,10 +47,22 @@ public abstract class AbstractJsonSerializer extends CodecSupport implements Jso
 		setTypeClass(typeClass);
 	}
 	
+	@Override
+	public String getDateFormat() {
+		return dateFormat;
+	}
+	
+	@Override
+	public void setDateFormat(String dateFormat) {
+		this.dateFormat = dateFormat;
+	}
+		
+	@Override
 	public String getTypeClass() {
 		return typeClass;
 	}
-
+	
+	@Override
 	public void setTypeClass(String typeClass) {
 		if (StringUtils.isNotBlank(typeClass) && !(typeClass.equals(this.typeClass))) {
 			this.typeClass = typeClass;

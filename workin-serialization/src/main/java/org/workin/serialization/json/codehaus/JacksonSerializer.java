@@ -19,6 +19,9 @@
 package org.workin.serialization.json.codehaus;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.workin.commons.util.DateUtils;
+import org.workin.commons.util.StringUtils;
+import org.workin.serialization.SerializationException;
 import org.workin.serialization.json.AbstractJsonSerializer;
 
 /**
@@ -29,16 +32,43 @@ import org.workin.serialization.json.AbstractJsonSerializer;
 public class JacksonSerializer extends AbstractJsonSerializer {
 	
 	private ObjectMapper objectMapper = new ObjectMapper();
+	
+	public ObjectMapper getObjectMapper() {
+		return objectMapper;
+	}
+
+	public void setObjectMapper(ObjectMapper objectMapper) {
+		if (objectMapper != null)
+			this.objectMapper = objectMapper;
+	}
+	
+	@Override
+	public void setDateFormat(String dateFormat) {
+		super.setDateFormat(dateFormat);
+		
+		if (StringUtils.isNotBlank(dateFormat))
+			this.objectMapper.setDateFormat(DateUtils.getDateFormat(dateFormat));
+		else
+			this.objectMapper.setDateFormat(null);
+	}
 
 	@Override
-	public <T> byte[] serialize(T t) throws Exception {
-		return this.objectMapper.writeValueAsBytes(t);
+	public <T> byte[] serialize(T t) throws SerializationException {
+		try {
+			return this.objectMapper.writeValueAsBytes(t);
+		} catch (Exception e) {
+			throw new SerializationException("Cannot serialize", e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T deserialize(byte[] bytes) throws Exception {
-		return (T) this.objectMapper.readValue(bytes, 0, bytes.length, getType());
+	public <T> T deserialize(byte[] bytes) throws SerializationException {
+		try {
+			return (T) this.objectMapper.readValue(bytes, 0, bytes.length, getType());
+		} catch (Exception e) {
+			throw new SerializationException("Cannot deserialize", e);
+		}
 	}
 	
 }

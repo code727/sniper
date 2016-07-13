@@ -18,7 +18,19 @@
 
 package org.workin.serialization.json.alibaba;
 
+
+import java.io.IOException;
+
+import org.workin.commons.util.CodecUtils;
+import org.workin.commons.util.IOUtils;
+import org.workin.commons.util.StringUtils;
+import org.workin.serialization.SerializationException;
 import org.workin.serialization.json.AbstractJsonSerializer;
+
+import com.alibaba.fastjson.parser.DefaultJSONParser;
+import com.alibaba.fastjson.serializer.JSONSerializer;
+import com.alibaba.fastjson.serializer.SerializeWriter;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 /**
  * @description 阿里FastJson序列化器实现类
@@ -26,17 +38,45 @@ import org.workin.serialization.json.AbstractJsonSerializer;
  * @version 1.0
  */
 public class FastJsonSerializer extends AbstractJsonSerializer {
-
+	
 	@Override
-	public <T> byte[] serialize(T t) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public <T> byte[] serialize(T t) throws SerializationException {
+		 SerializeWriter out = null;
+		 try {
+			 out = new SerializeWriter();
+			 JSONSerializer serializer = new JSONSerializer(out);
+			 
+			 String dateFormat = getDateFormat();
+			 if (StringUtils.isNotBlank(dateFormat)) {
+				 serializer.config(SerializerFeature.WriteDateUseDateFormat, true);
+				 serializer.setDateFormat(dateFormat);
+			 }
+			 
+			 serializer.write(t);
+			 
+			 byte[] bytes = out.toBytes(getEncoding());
+			 return bytes;
+		 } catch (Exception e) {
+			 throw new SerializationException("Cannot serialize", e);
+		 } finally {
+			 try {
+				IOUtils.close(out);
+			} catch (IOException e) {
+				throw new SerializationException("Cannot serialize", e);
+			}
+		 }
 	}
 
+	@SuppressWarnings({ "unchecked", "resource" })
 	@Override
-	public <T> T deserialize(byte[] bytes) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public <T> T deserialize(byte[] bytes) throws SerializationException {
+		DefaultJSONParser jsonParser = new DefaultJSONParser(CodecUtils.bytesToString(bytes, getEncoding()));
+		
+		String dateFormat = getDateFormat();
+		if (StringUtils.isNotBlank(dateFormat)) 
+			jsonParser.setDateFormat(dateFormat);
+		
+		return (T) jsonParser.parseObject(getType());
 	}
 
 }
