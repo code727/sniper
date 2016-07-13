@@ -19,10 +19,7 @@
 package org.workin.serialization.json.alibaba;
 
 
-import java.io.IOException;
-
 import org.workin.commons.util.CodecUtils;
-import org.workin.commons.util.IOUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.serialization.SerializationException;
 import org.workin.serialization.json.AbstractJsonSerializer;
@@ -59,11 +56,8 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 		 } catch (Exception e) {
 			 throw new SerializationException("Cannot serialize", e);
 		 } finally {
-			 try {
-				IOUtils.close(out);
-			} catch (IOException e) {
-				throw new SerializationException("Cannot serialize", e);
-			}
+			 if (out != null)
+				 out.close();
 		 }
 	}
 
