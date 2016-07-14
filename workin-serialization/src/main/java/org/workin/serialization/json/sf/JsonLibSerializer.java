@@ -25,13 +25,13 @@ import net.sf.ezmorph.MorpherRegistry;
 import net.sf.ezmorph.object.DateMorpher;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.util.JSONUtils;
 
 import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.DateUtils;
-import org.workin.commons.util.StringUtils;
 import org.workin.serialization.SerializationException;
 import org.workin.serialization.json.AbstractJsonSerializer;
 
@@ -90,12 +90,12 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 			
 			@Override
 			public Object processObjectValue(String propertyName, Object date, JsonConfig cfg) {
-				return DateUtils.objectToString(date);
+				return DateUtils.objectToString(date, getDateFormat());
 			}
 
 			@Override
 			public Object processArrayValue(Object date, JsonConfig cfg) {
-				return DateUtils.objectToString(date);
+				return DateUtils.objectToString(date, getDateFormat());
 			}
 		});
 	}
@@ -112,24 +112,23 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 		
 	@Override
 	public <T> byte[] serialize(T t) throws SerializationException {
-		
-		
-		return CodecUtils.getBytes(JSONObject.fromObject(t, getJsonConfig()).toString(), getEncoding());
+		return CodecUtils.getBytes(JSONSerializer.toJSON(t, getJsonConfig()).toString(), getEncoding());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T deserialize(byte[] bytes) throws SerializationException {
-		
-		
 		String jsonString = CodecUtils.bytesToString(bytes, getEncoding());
-		boolean isArray = StringUtils.startsWith(jsonString, "[") && StringUtils.endsWith(jsonString, "]");
-		if (isArray) {
+		if (isJsonArray(jsonString)) {
 			JSONArray jsonArray = JSONArray.fromObject(jsonString, getJsonConfig());
+			// 统一的转换为Collection对象
 			return (T) JSONArray.toCollection(jsonArray, getType());
+//			return (T) JSONArray.toArray(jsonArray, getType());
 		} else {
-			return (T) JSONObject.toBean(JSONObject.fromObject(jsonString, getJsonConfig()), getType());
+			JSONObject jsonObject = JSONObject.fromObject(jsonString, getJsonConfig());
+			// 转换为单个JavaBean或一个Map对象
+			return (T) JSONObject.toBean(jsonObject, getType());
 		}
 	}
-
+	
 }

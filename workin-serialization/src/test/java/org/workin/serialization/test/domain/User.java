@@ -21,6 +21,9 @@ package org.workin.serialization.test.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.workin.commons.util.CodecUtils;
+import org.workin.serialization.json.codehaus.JacksonSerializer;
+
 /**
  * @description
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -101,28 +104,8 @@ public class User implements Serializable, Cloneable {
 		this.createTime = createTime;
 	}
 	
-	public boolean equals(User user) {
-		if (user == null)
-			return false;
-		
-		return this.id.equals(user.getId());
-	}
-	
-//	public int hashCode() {
-//		return this.hashCode() * 17;
-//	}
-	
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer
-		.append("id:").append(this.getId()).append(",")
-		.append("name:").append(this.getName()).append(",")
-		.append("gender:").append(this.getGender()).append(",")
-		.append("age:").append(this.getAge()).append(",")
-		.append("married:").append(this.isMarried()).append(",")
-		.append("vision:").append(this.getVision()).append(",")
-		.append("createTime:").append(this.getCreateTime());
-		return buffer.toString();
+		return CodecUtils.bytesToString(new JacksonSerializer().serialize(this));
 	}
 	
 	@Override

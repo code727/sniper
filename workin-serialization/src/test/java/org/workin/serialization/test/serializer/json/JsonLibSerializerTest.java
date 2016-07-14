@@ -33,7 +33,7 @@ import org.workin.serialization.test.serializer.AbstractSerializerTest;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JackLibSerializerTest extends AbstractSerializerTest {
+public class JsonLibSerializerTest extends AbstractSerializerTest {
 	
 	private JsonLibSerializer jsonLibSerializer = new JsonLibSerializer();
 	

@@ -87,4 +87,14 @@ public abstract class AbstractJsonSerializer extends CodecSupport implements Jso
 		return type;
 	}
 	
+	/**
+	 * @description 从字符串中判断出是否为一个JSON数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonString
+	 * @return
+	 */
+	protected boolean isJsonArray(String jsonString) {
+		return StringUtils.startsWith(jsonString, "[") && StringUtils.endsWith(jsonString, "]");
+	}
+	
 }
