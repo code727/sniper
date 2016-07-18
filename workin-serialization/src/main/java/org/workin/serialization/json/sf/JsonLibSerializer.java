@@ -117,17 +117,17 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T deserialize(byte[] bytes) throws SerializationException {
+	public <T> T deserialize(byte[] bytes, Class<T> type) throws SerializationException {
 		String jsonString = CodecUtils.bytesToString(bytes, getEncoding());
 		if (isJsonArray(jsonString)) {
 			JSONArray jsonArray = JSONArray.fromObject(jsonString, getJsonConfig());
 			// 统一的转换为Collection对象
-			return (T) JSONArray.toCollection(jsonArray, getType());
+			return (T) JSONArray.toCollection(jsonArray, type != null ? type : getType());
 //			return (T) JSONArray.toArray(jsonArray, getType());
 		} else {
 			JSONObject jsonObject = JSONObject.fromObject(jsonString, getJsonConfig());
 			// 转换为单个JavaBean或一个Map对象
-			return (T) JSONObject.toBean(jsonObject, getType());
+			return (T) JSONObject.toBean(jsonObject, type != null ? type : getType());
 		}
 	}
 	

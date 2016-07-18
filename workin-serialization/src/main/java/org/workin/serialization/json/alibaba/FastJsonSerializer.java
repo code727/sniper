@@ -63,14 +63,14 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 
 	@SuppressWarnings({ "unchecked", "resource" })
 	@Override
-	public <T> T deserialize(byte[] bytes) throws SerializationException {
+	public <T> T deserialize(byte[] bytes, Class<T> type) throws SerializationException {
 		DefaultJSONParser jsonParser = new DefaultJSONParser(CodecUtils.bytesToString(bytes, getEncoding()));
 		
 		String dateFormat = getDateFormat();
 		if (StringUtils.isNotBlank(dateFormat)) 
 			jsonParser.setDateFormat(dateFormat);
 		
-		return (T) jsonParser.parseObject(getType());
+		return (T) jsonParser.parseObject(type != null ? type : getType());
 	}
 
 }

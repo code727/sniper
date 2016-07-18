@@ -19,14 +19,14 @@
 package org.workin.serialization.json;
 
 import org.workin.serialization.DateSerializer;
-import org.workin.serialization.Serializer;
+import org.workin.serialization.TypeSerializer;
 
 /**
  * @description JSON序列器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JsonSerializer extends Serializer, DateSerializer {
+public interface JsonSerializer extends TypeSerializer, DateSerializer {
 	
 	/**
 	 * @description 获取结果类型

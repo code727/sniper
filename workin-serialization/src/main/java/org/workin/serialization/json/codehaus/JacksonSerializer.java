@@ -63,9 +63,9 @@ public class JacksonSerializer extends AbstractJsonSerializer {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T deserialize(byte[] bytes) throws SerializationException {
+	public <T> T deserialize(byte[] bytes, Class<T> type) throws SerializationException {
 		try {
-			return (T) this.objectMapper.readValue(bytes, 0, bytes.length, getType());
+			return (T) this.objectMapper.readValue(bytes, 0, bytes.length, type != null ? type : getType());
 		} catch (Exception e) {
 			throw new SerializationException("Cannot deserialize", e);
 		}

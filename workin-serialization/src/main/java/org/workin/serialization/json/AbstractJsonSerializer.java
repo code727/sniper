@@ -19,6 +19,7 @@
 package org.workin.serialization.json;
 
 import org.workin.commons.util.StringUtils;
+import org.workin.serialization.SerializationException;
 import org.workin.support.codec.CodecSupport;
 
 /**
@@ -95,6 +96,11 @@ public abstract class AbstractJsonSerializer extends CodecSupport implements Jso
 	 */
 	protected boolean isJsonArray(String jsonString) {
 		return StringUtils.startsWith(jsonString, "[") && StringUtils.endsWith(jsonString, "]");
+	}
+	
+	@Override
+	public <T> T deserialize(byte[] bytes) throws SerializationException {
+		return deserialize(bytes, null);
 	}
 	
 }
