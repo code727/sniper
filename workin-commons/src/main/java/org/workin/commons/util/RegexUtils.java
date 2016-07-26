@@ -404,7 +404,6 @@ public class RegexUtils {
 		}
 		
 		return str;
-		
 	}
 	
 	/**
