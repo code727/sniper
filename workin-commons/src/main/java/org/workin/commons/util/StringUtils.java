@@ -1176,41 +1176,6 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按指定的标记分割字符串后去空存入数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param str
-	 * @param mark
-	 * @return 
-	 */
-	public static String[] splitTrim(String str, String mark) {
-		if (str == null)
-			return new String[0];
-		
-		if (mark == null)
-			return new String[]{str};
-		
-		List<String> list = new ArrayList<String>();
-		String element;
-		if (EMPTY_STRING.equals(mark)) {
-			int length = str.length();
-			int i = 0;
-			while (i < length) {
-				element = str.substring(i, ++i);
-				if (isNotBlank(element))
-					list.add(element.trim());
-			}
-		} else {
-			StringTokenizer tokenizer = new StringTokenizer(str, mark);
-			while (tokenizer.hasMoreElements()) {
-				element = tokenizer.nextToken();
-				if (isNotBlank(element))
-					list.add(element.trim());
-			}
-		}
-		return ((String[])list.toArray(new String[list.size()]));
-	}
-	
-	/**
 	 * @description 整理字符串最左侧的空白字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
@@ -1394,6 +1359,218 @@ public class StringUtils {
 			return s1 == s2;
 		
 		return s1.toString().equalsIgnoreCase(s2.toString());
+	}
+	
+	/**
+	 * 按指定标记将字符串分割成若干数组
+	 * @description
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @return
+	 */
+	public static String[] split(String str, String mark) {
+		return split(str, mark, 0);
+	}
+	
+	/**
+	 * @description 从指定位置开始用指定标记将字符串分割成若干数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param start
+	 * @return
+	 */
+	public static String[] split(String str, String mark, int start) {
+		return split(str, mark, start, false);
+	}
+	
+	/**
+	 * @description 以忽略大小写的方式将指定标记将字符串分割成若干数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @return
+	 */
+	public static String[] splitIgnoreCase(String str, String mark) {
+		return splitIgnoreCase(str, mark, 0);
+	}
+	
+	/**
+	 * @description 从指定位置开始以忽略大小写的方式将指定标记将字符串分割成若干数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param start
+	 * @return
+	 */
+	public static String[] splitIgnoreCase(String str, String mark, int start) {
+		return split(str, mark, start, true);
+	}
+	
+	/**
+	 * @description 选择是否按忽略大小写的方式用指定标记将字符串分割成若干数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param ignoreCase
+	 * @return
+	 */
+	public static String[] split(String str, String mark, boolean ignoreCase) {
+		return split(str, mark, 0, ignoreCase);
+	}
+	
+	/**
+	 * @description 选择是否按忽略大小写的方式从指定位置开始用指定标记将字符串分割成若干数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param start
+	 * @param ignoreCase
+	 * @return
+	 */
+	public static String[] split(String str, String mark, int start, boolean ignoreCase) {
+		if (str == null)
+			return new String[0];
+		
+		if (mark == null)
+			return new String[] { str };
+		
+		int index = 0;
+		int length = str.length();
+		int markLength = mark.length();
+		
+//		if (start >= length)
+//			start = 0;
+		
+		List<String> list = CollectionUtils.newArrayList();
+		if (markLength > 0) {
+			while (true) {
+				index = indexOf(str, mark, start, ignoreCase);
+				if (index > -1) {
+					list.add(str.substring(0, index));
+					str = str.substring(index + markLength);
+				} else {
+					list.add(str);
+					break;
+				}
+			}
+		} else {
+			for (int i = 0; i < length; i++)
+				list.add(String.valueOf(str.charAt(i)));
+		}
+		
+		return CollectionUtils.toArray(list, String.class);
+	}
+	
+	/**
+	 * @description 用指定标记将字符串分割成若干去空后的数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @return
+	 */
+	public static String[] splitTrim(String str, String mark) {
+		return splitTrim(str, mark, 0);
+	}
+	
+	/**
+	 * @description 从指定位置开始用指定标记将字符串分割成若干去空后的数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param start
+	 * @return
+	 */
+	public static String[] splitTrim(String str, String mark, int start) {
+		return splitTrim(str, mark, 0, false);
+	}
+	
+	/**
+	 * @description 以忽略大小写的方式用指定标记将字符串分割成若干去空后的数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @return
+	 */
+	public static String[] splitTrimIgnoreCase(String str, String mark) {
+		return splitTrimIgnoreCase(str, mark, 0);
+	}
+	
+	/**
+	 * @description 从指定位置开始以忽略大小写的方式用指定标记将字符串分割成若干去空后的数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param start
+	 * @return
+	 */
+	public static String[] splitTrimIgnoreCase(String str, String mark, int start) {
+		return splitTrim(str, mark, start, true);
+	}
+	
+	/**
+	 * @description 选择是否按忽略大小写的方式用指定标记将字符串分割成若干去空后的数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @return 
+	 */
+	public static String[] splitTrim(String str, String mark, boolean ignoreCase) {
+		return splitTrim(str, mark, 0, ignoreCase);
+	}
+	
+	/**
+	 * @description 选择是否按忽略大小写的方式从指定位置开始用指定标记将字符串分割成若干去空后的数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param start
+	 * @param ignoreCase
+	 * @return
+	 */
+	public static String[] splitTrim(String str, String mark, int start, boolean ignoreCase) {
+		if (isBlank(str))
+			return new String[0];
+		
+		if (mark == null)
+			return new String[] { str };
+		
+		int index = 0;
+		int length = str.length();
+		int markLength = mark.length();
+		
+//		if (start >= length)
+//			start = 0;
+		
+		List<String> list = CollectionUtils.newArrayList();
+		if (markLength > 0) {
+			String element = null;
+			while (true) {
+				index = indexOf(str, mark, start, ignoreCase);
+				if (index > -1) {
+					element = str.substring(0, index);
+					if (isNotBlank(element))
+						list.add(element);
+					
+					str = str.substring(index + markLength);
+				} else {
+					if (isNotBlank(str))
+						list.add(str);
+					
+					break;
+				}
+			}
+		} else {
+			char c;
+			for (int i = 0; i < length; i++) {
+				c = str.charAt(i);
+				if (c > ' ')
+					list.add(String.valueOf(c));
+			}
+		}
+		
+		return CollectionUtils.toArray(list, String.class);
 	}
 	
 }
