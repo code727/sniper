@@ -407,15 +407,6 @@ public class RegexUtils {
 		
 	}
 	
-	public static void main(String[] args) {
-		String test = "<link rel='dns-prefetch' href='http://img1.cache.netease.com' />"
-				  + "\n<link rel='apple-touch-icon-precomposed' href='http://img1.cache.netease.com/www/logo/logo-ipad-icon.png' >";
-		System.out.println("-----------------  原文    -----------------");
-		System.out.println(test);
-		System.out.println("-----------------  新文    -----------------");
-		System.out.println(matchesAppend(test, regex.get("url"), "<url>", "</url>"));
-	}
-	
 	/**
 	 * @description 从源字符串中提取匹配表达式的起始位置和子串映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
