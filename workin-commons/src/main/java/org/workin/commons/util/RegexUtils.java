@@ -50,6 +50,7 @@ public class RegexUtils {
 		regex.put("double_byte", "[^\u0000-\u007E]+");
 		regex.put("chinese", "[\u4E00-\u9FA5]+");
 		regex.put("urlQueryString", "(\\w*=[^&]*&)*\\w*=\\w*");
+		regex.put("url", "((h|H)(t|T)(t|T)(p|P)(s|S)?(://)|(w|W){3}[.]|(f|F)(t|T)(p|P)(://)+){1}(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*((:\\d+)?)(/(\\w+(-\\w+)*))*(\\.?(\\w)*)(\\?)?(((\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*(\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*)*(\\w*)*)");
 		
 		// java.text.MessageFormat所默认支持的占位符表达式
 		regex.put(MessageFormat.class.getName(), "(\\{\\d+\\})");
@@ -337,6 +338,26 @@ public class RegexUtils {
 	}
 	
 	/**
+	 * @description 判断是否为URL字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isURL(String str) {
+		return is(str, regex.get("url"));
+	}
+	
+	/**
+	 * @description 判断字符串中是否包含URL
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasURL(String str) {
+		return has(str, regex.get("url"));
+	}
+	
+	/**
 	 * @description 从源字符串中提取匹配表达式的子串集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
@@ -346,9 +367,71 @@ public class RegexUtils {
 	public static Set<String> matches(String str, String regex) {
 		Matcher matcher = createMatcher(str, regex);
 		Set<String> set = CollectionUtils.newHashSet();
-		while (matcher.find()) 
+		
+		while (matcher.find()) {
 			set.add(matcher.group());
+		}
+			
 		return set;
+	}
+	
+	/**
+	 * @description 统一为匹配模式的子串添加前缀和后缀
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param regex
+	 * @param prefix
+	 * @param suffix
+	 * @return
+	 */
+	public static String matchesAppend(String str, String regex, String prefix, String suffix) {
+		if (str == null || regex == null)
+			return prefix + str + suffix;
+		
+		Matcher matcher = createMatcher(str, regex);
+		
+		int beginIndex;
+		int endIndex;
+		int offset;
+		int length = (prefix != null ? prefix.length() : 4) + (suffix != null ? suffix.length() : 4);
+		for (int count = 0; matcher.find();) {
+			/* 替换文本的起始和结束索引偏移量为前后缀文本长度的第count次循环倍数 */
+			offset = length * (count++);
+			beginIndex = matcher.start() + offset;
+			endIndex = matcher.end() + offset;
+			
+			str = StringUtils.replace(str, prefix + matcher.group() + suffix, beginIndex, endIndex);
+		}
+		
+		return str;
+		
+	}
+	
+	public static void main(String[] args) {
+		String test = "<link rel='dns-prefetch' href='http://img1.cache.netease.com' />"
+				  + "\n<link rel='apple-touch-icon-precomposed' href='http://img1.cache.netease.com/www/logo/logo-ipad-icon.png' >";
+		System.out.println("-----------------  原文    -----------------");
+		System.out.println(test);
+		System.out.println("-----------------  新文    -----------------");
+		System.out.println(matchesAppend(test, regex.get("url"), "<url>", "</url>"));
+	}
+	
+	/**
+	 * @description 从源字符串中提取匹配表达式的起始位置和子串映射集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param regex
+	 * @return
+	 */
+	public static Map<Integer, String> matchedMap(String str, String regex) {
+		Matcher matcher = createMatcher(str, regex);
+		Map<Integer, String> matchedMap = MapUtils.newLinkedHashMap();
+		
+		while (matcher.find()) {
+			matchedMap.put(matcher.start(), matcher.group());
+		}
+			
+		return matchedMap;
 	}
 	
 	/**
@@ -363,6 +446,7 @@ public class RegexUtils {
 		int count = 0;
 		while (matcher.find()) 
 			count++;
+		
 		return count;
 	}
 		

@@ -943,33 +943,92 @@ public class StringUtils {
 		
 		return list;
 	}
-			
+	
+	
 	/**
-	 * @description 将字符串中的标记替换成指定的子串
+	 * @description 将字符串中的第一个标记替换成指定的子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param subStr
+	 * @return
+	 */
+	public static String replaceFirst(String str, String mark, String subStr) {
+		return replaceFirst(str, mark, subStr, false);
+	}
+	
+	/**
+	 * @description 按照忽略大小写的方式将字符串中的第一个标记替换成指定的子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param subStr
+	 * @return
+	 */
+	public static String replaceFirstIgnoreCase(String str, String mark, String subStr) {
+		return replaceFirst(str, mark, subStr, true);
+	}
+	
+	/**
+	 * @description 选择是否按照忽略大小写的方式将字符串中的第一个标记替换成指定的子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param subStr
+	 * @param ignoreCase
+	 * @return
+	 */
+	public static String replaceFirst(String str, String mark, String subStr, boolean ignoreCase) {
+		if (str == null)
+			return subStr;
+		
+		if (mark == null)
+			return str;
+		
+		int start = 0;
+		int markPos;
+		int markLength = mark.length();
+		StringBuilder result = new StringBuilder();
+		if (markLength > 0) {
+			if ((markPos = indexOf(str, mark, start, ignoreCase)) > -1) {
+				result.append(str.substring(start, markPos)).append(subStr); 
+				start = markPos + markLength;
+			}
+			result.append(str.substring(start));
+		} else {
+			/* 将第一个字符替换成子串后再拼接其后所有的原内容 */
+			result.append(subStr);
+			result.append(str.substring(1));
+		}
+		return result.toString();
+	}
+	
+	/**
+	 * @description 将字符串中的所有标记替换成指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
 	 * @param subStr
 	 * @return
 	 */
-	public static String replace(String str, String mark, String subStr) {
-		return replace(str, mark, subStr, false);
+	public static String replaceAll(String str, String mark, String subStr) {
+		return replaceAll(str, mark, subStr, false);
 	}
 	
 	/**
-	 * @description 按照忽略大小写的方式将字符串中的标记替换成指定的子串
+	 * @description 按照忽略大小写的方式将字符串中的所有标记替换成指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
 	 * @param subStr
 	 * @return 
 	 */
-	public static String replaceIgnoreCase(String str, String mark, String subStr) {
-		return replace(str, mark, subStr, true);
+	public static String replaceAllIgnoreCase(String str, String mark, String subStr) {
+		return replaceAll(str, mark, subStr, true);
 	}
 	
 	/**
-	 * @description 选择是否按照忽略大小写的方式将字符串中的标记替换成指定的子串
+	 * @description 选择是否按照忽略大小写的方式将字符串中的所有标记替换成指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -977,22 +1036,85 @@ public class StringUtils {
 	 * @param ignoreCase
 	 * @return 
 	 */
-	public static String replace(String str, String mark, String subStr, boolean ignoreCase) {
-		if (isEmpty(str) || isEmpty(mark))
+	public static String replaceAll(String str, String mark, String subStr, boolean ignoreCase) {
+		if (str == null)
+			return subStr;
+		
+		if (mark == null)
 			return str;
 		
 		int start = 0;
 		int markPos;
 		int markLength = mark.length();
 		StringBuilder result = new StringBuilder();
-		while ((markPos = indexOf(str, mark, start, ignoreCase)) > -1) {
-			result.append(str.substring(start, markPos)).append(subStr); 
-			start = markPos + markLength;
+		if (markLength > 0) {
+			while ((markPos = indexOf(str, mark, start, ignoreCase)) > -1) {
+				result.append(str.substring(start, markPos)).append(subStr); 
+				start = markPos + markLength;
+			}
+			result.append(str.substring(start));
+		} else {
+			/* 替换成length个子串 */
+			int length = str.length();
+			for (int i = 0; i < length; i++)
+				result.append(subStr);
 		}
-		result.append(str.substring(start));
 		return result.toString();
 	}
 	
+	/**
+	 * @description 将开始索引位之后的所有字符串替换成子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param subStr
+	 * @param beginIndex
+	 * @return
+	 */
+	public static String replace(String str, String subStr, int beginIndex) {
+		return replace(str, subStr, beginIndex, length(str));
+	}
+	
+	/**
+	 * @description 将开始索引和结束索引位之间的所有字符串替换成子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param subStr
+	 * @param beginIndex
+	 * @param endIndex
+	 * @return
+	 */
+	public static String replace(String str, String subStr, int beginIndex, int endIndex) {
+		if (str == null)
+			return subStr;
+		
+		beginIndex = NumberUtils.minLimit(beginIndex, 0);
+		endIndex = NumberUtils.maxLimit(endIndex, str.length());
+		if (beginIndex > endIndex) {
+			int index = beginIndex;
+			beginIndex = endIndex;
+			endIndex = index;
+		}
+		
+		StringBuilder result = new StringBuilder();
+		if (beginIndex > 0) 
+			// 未从头开始，则将头到beginIndex之间的字符串拼接上
+			result.append(str.substring(0, beginIndex));
+		
+		result.append(subStr);
+		
+		int length = str.length();
+		if (endIndex < length) 
+			// 未在末尾结束，则将endIndex到末尾之间的字符串拼接上
+			result.append(str.substring(endIndex, length));
+		
+		return result.toString();
+	}
+	
+	public static void main(String[] args) {
+		String test = "dub727@163.com";
+		System.out.println(StringUtils.replace(test, "sina.com", 7));
+	}
+		
 	/**
 	 * @description 将字符串中连续多个空格、制表符和换页符等空白字符整理替换成一个空格。
 	 * 				而字符串左右两侧的空白字符则直接清除。
@@ -1172,7 +1294,7 @@ public class StringUtils {
 	 * @return 
 	 */
 	public static String delete(String str, String mark, boolean ignoreCase) {
-		return replace(str, mark, EMPTY_STRING, ignoreCase);
+		return replaceAll(str, mark, EMPTY_STRING, ignoreCase);
 	}
 	
 	/**

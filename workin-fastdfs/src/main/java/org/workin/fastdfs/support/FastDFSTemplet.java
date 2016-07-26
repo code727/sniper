@@ -279,7 +279,7 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 				
 				storageClient.download_file1(storagePath, destName);
 				// 返回实际的本地目标文件名
-				return StringUtils.replace(destName, "\\", "/");
+				return StringUtils.replaceAll(destName, "\\", "/");
 			}
 		});
 	}
