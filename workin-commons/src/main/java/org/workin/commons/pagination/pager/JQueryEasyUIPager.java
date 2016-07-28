@@ -16,34 +16,50 @@
  * Create Date : 2015-1-14
  */
 
-package org.workin.commons.pagination;
+package org.workin.commons.pagination.pager;
+
 
 /**
- * @description 分页附加结果类
+ * @description JQuery EasyUI分页器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface PagingAdditionalResult {
+public class JQueryEasyUIPager extends SimplePager {
 	
 	/**
-	 * @description 获取当前分页结果的总页数
+	 * @description 获取每页条数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public long totalPages();
-	
+	public int getRows() {
+		return super.getPageSize();
+	}
+
 	/**
-	 * @description 获取当前分页结果从第几条记录开始
+	 * @description 设置每页条数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param rows
+	 */
+	public void setRows(int rows) {
+		super.setPageSize(rows);
+	}
+
+	/**
+	 * @description 获取当前页数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public long getFrom();
-	
+	public int getPage() {
+		return super.getCurrentPage();
+	}
+
 	/**
-	 * @description 获取当前分页结果从第几条记录结束
+	 * @description 设置当前页数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
+	 * @param page
 	 */
-	public long getTo();
+	public void setPage(int page) {
+		super.setCurrentPage(page);
+	}
 
 }

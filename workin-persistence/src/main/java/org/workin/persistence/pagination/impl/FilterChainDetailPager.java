@@ -18,7 +18,7 @@
 
 package org.workin.persistence.pagination.impl;
 
-import org.workin.commons.pagination.impl.DetailPager;
+import org.workin.commons.pagination.pager.DetailPager;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilterChain;
 

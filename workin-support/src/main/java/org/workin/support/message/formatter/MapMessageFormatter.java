@@ -45,14 +45,14 @@ public class MapMessageFormatter extends PlaceholderMessageFormatter<Map<String,
 					Entry<String, Object> nameValuePair = iterator.next();
 					mark.setLength(0);
 					mark.append(this.getPrefix()).append(nameValuePair.getKey()).append(this.getSuffix());
-					message = StringUtils.replace(message, mark.toString(), encoder.encode(StringUtils.toString(nameValuePair.getValue()), encoding)); 
+					message = StringUtils.replaceAll(message, mark.toString(), encoder.encode(StringUtils.toString(nameValuePair.getValue()), encoding)); 
 				}
 			} else {
 				while (iterator.hasNext()) {
 					Entry<String, Object> nameValuePair = iterator.next();
 					mark.setLength(0);
 					mark.append(this.getPrefix()).append(nameValuePair.getKey()).append(this.getSuffix());
-					message = StringUtils.replace(message, mark.toString(), StringUtils.toString(nameValuePair.getValue())); 
+					message = StringUtils.replaceAll(message, mark.toString(), StringUtils.toString(nameValuePair.getValue())); 
 				}
 			}
 		}

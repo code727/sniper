@@ -16,16 +16,17 @@
  * Create Date : 2015-1-14
  */
 
-package org.workin.commons.pagination.impl;
+package org.workin.commons.pagination.pager;
 
-import org.workin.commons.pagination.PagingQuery;
+import org.workin.commons.pagination.SortObject;
+import org.workin.commons.pagination.SortablePagingQuery;
 
 /**
  * @description 简单分页器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SimplePager implements PagingQuery {
+public class SimplePager implements SortablePagingQuery {
 	
 	/** 每页条数 */
 	private int pageSize = DEFAULT_PAGE_SIZE;
@@ -38,6 +39,9 @@ public class SimplePager implements PagingQuery {
 	
 	/** 结束查询的位置 */
 	private long end = START_POS;
+	
+	/** 分页排序对象 */
+	private SortObject sort;
 
 	@Override
 	public int getPageSize() {
@@ -65,9 +69,10 @@ public class SimplePager implements PagingQuery {
 	public long getBegin() {
 		// 开始位置不为默认起始位置时(例如按ID偏移进行分页时，设置此值为起始ID)，则直接返回。
 		// 否则根据当前页数和每页条数计算后返回
-		if (this.begin != START_POS && this.currentPage == DEFAULT_CURRENT_PAGE)
+//		&& this.currentPage == DEFAULT_CURRENT_PAGE
+		if (this.begin != START_POS )
 			return this.begin;
-		
+
 		return (this.currentPage -1) * this.pageSize;
 	}
 
@@ -89,6 +94,16 @@ public class SimplePager implements PagingQuery {
 	@Override
 	public void setEnd(long end) {
 		this.end = end;
+	}
+
+	@Override
+	public void setSortObject(SortObject sort) {
+		this.sort = sort;
+	}
+
+	@Override
+	public SortObject getSortObject() {
+		return sort;
 	}
 
 }

@@ -12,50 +12,37 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Create Date : 2015-1-14
  */
 
-package org.workin.commons.pagination.impl;
+package org.workin.commons.pagination.result;
 
 import java.util.List;
 
-import org.workin.commons.pagination.PagingResult;
-import org.workin.commons.util.ObjectUtils;
-
 /**
- * @description 简单分页结果实现类
+ * @description JQuery EasyUI分页结果类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SimplePagingResult<T> implements PagingResult<T> {
+public class JQueryEasyUIPagingResult<T> extends SimplePagingResult<T> {
 	
-	/** 返回的数据列表 */
-	private List<T> data;
-	
-	/** 符合分页条件的记录总数 */
-	private long total;
-
-	@Override
-	public List<T> getData() {
-		return this.data;
+	/**
+	 * @description 获取分页结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public List<T> getRows() {
+		return super.getData();
 	}
 
-	@Override
-	public void setData(List<T> data) {
-		this.data = data;
-	}
-
-	@Override
-	public long getTotal() {
-		int dataSize = ObjectUtils.count(data);
-		return this.total > dataSize ? this.total : dataSize;
-	}
-
-	@Override
-	public void setTotal(long total) {
-		if (total > 0)
-			this.total = total;
+	/**
+	 * @description 设置分页结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param rows
+	 */
+	public void setRows(List<T> rows) {
+		super.setData(rows);
 	}
 	
 }

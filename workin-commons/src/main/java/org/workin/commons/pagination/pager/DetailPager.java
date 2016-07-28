@@ -16,13 +16,15 @@
  * Create Date : 2015-1-15
  */
 
-package org.workin.commons.pagination.impl;
+package org.workin.commons.pagination.pager;
 
 import java.util.List;
 
-import org.workin.commons.pagination.PagingAdditionalResult;
-import org.workin.commons.pagination.PagingQuery;
+import org.workin.commons.pagination.PagingDetailResult;
 import org.workin.commons.pagination.PagingResult;
+import org.workin.commons.pagination.SortObject;
+import org.workin.commons.pagination.SortablePagingQuery;
+import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.CollectionUtils;
 
 /**
@@ -31,9 +33,9 @@ import org.workin.commons.util.CollectionUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DetailPager<T> implements PagingQuery, PagingResult<T>, PagingAdditionalResult {
+public class DetailPager<T> implements SortablePagingQuery, PagingDetailResult<T> {
 
-	private PagingQuery pager;
+	private SortablePagingQuery pager;
 	
 	private PagingResult<T> result;
 	
@@ -81,6 +83,16 @@ public class DetailPager<T> implements PagingQuery, PagingResult<T>, PagingAddit
 	public void setEnd(long end) {
 		this.pager.setEnd(end);
 	}
+	
+	@Override
+	public void setSortObject(SortObject sort) {
+		this.pager.setSortObject(sort);
+	}
+
+	@Override
+	public SortObject getSortObject() {
+		return this.pager.getSortObject();
+	}
 
 	@Override
 	public List<T> getData() {
@@ -114,7 +126,7 @@ public class DetailPager<T> implements PagingQuery, PagingResult<T>, PagingAddit
 	}
 
 	@Override
-	public long totalPages() {
+	public long getPages() {
 		return getTotal() / getPageSize() + (getTotal() % getPageSize() != 0 ? 1 : 0);
 	}
 

@@ -35,7 +35,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.workin.commons.pagination.PagingResult;
-import org.workin.commons.pagination.impl.SimplePagingResult;
+import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CollectionUtils;

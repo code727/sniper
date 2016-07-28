@@ -53,7 +53,7 @@ public class BeanMessageFormatter extends PlaceholderMessageFormatter<Object> {
 						expression.setLength(0);
 						expression.append(this.getPrefix()).append(mark).append(this.getSuffix());
 						try {
-							message = StringUtils.replace(message, expression.toString(), 
+							message = StringUtils.replaceAll(message, expression.toString(), 
 									encoder.encode(StringUtils.toString(this.beanReflector.get(bean, mark)), encoding)); 
 						} catch (Exception e) {} // 忽略异常继续处理
 					}
@@ -62,7 +62,7 @@ public class BeanMessageFormatter extends PlaceholderMessageFormatter<Object> {
 						expression.setLength(0);
 						expression.append(this.getPrefix()).append(mark).append(this.getSuffix());
 						try {
-							message = StringUtils.replace(message, expression.toString(),StringUtils.toString(this.beanReflector.get(bean, mark))); 
+							message = StringUtils.replaceAll(message, expression.toString(),StringUtils.toString(this.beanReflector.get(bean, mark))); 
 						} catch (Exception e) {} // 忽略异常继续处理
 					}
 				}

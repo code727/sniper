@@ -20,7 +20,7 @@ package org.workin.persistence.pagination.impl;
 
 import java.util.List;
 
-import org.workin.commons.pagination.impl.DetailPager;
+import org.workin.commons.pagination.pager.DetailPager;
 import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
 

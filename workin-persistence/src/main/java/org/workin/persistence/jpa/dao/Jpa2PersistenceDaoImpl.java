@@ -34,7 +34,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 import org.workin.commons.pagination.PagingQuery;
 import org.workin.commons.pagination.PagingResult;
-import org.workin.commons.pagination.impl.SimplePagingResult;
+import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ClassUtils;
