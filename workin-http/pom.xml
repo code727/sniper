@@ -21,7 +21,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
-			<artifactId>workin-support</artifactId>
+			<artifactId>workin-templet</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>

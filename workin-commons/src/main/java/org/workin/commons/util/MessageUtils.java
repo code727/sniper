@@ -20,6 +20,7 @@ package org.workin.commons.util;
 
 import java.text.MessageFormat;
 import java.util.Locale;
+import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -30,6 +31,35 @@ import java.util.ResourceBundle;
  * @version 1.0
  */
 public class MessageUtils {
+	
+	private static final ThreadLocal<Map<String, ResourceBundle>> resourceBundles = new ThreadLocal<Map<String, ResourceBundle>>();
+		
+	/**
+	 * @description 根据基础名称和Locale对象获取java.util.ResourceBundle对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param baseName
+	 * @param locale
+	 * @return
+	 */
+	public static ResourceBundle getResourceBundle(String baseName, Locale locale)  {
+		
+		if (locale == null)
+			locale = Locale.getDefault();
+		
+		Map<String, ResourceBundle> bundleMap = resourceBundles.get();
+		if (bundleMap == null)
+			bundleMap = MapUtils.newConcurrentHashMap();
+		
+		String key = baseName + "_" + locale;
+		ResourceBundle resourceBundle = bundleMap.get(key);
+		if (resourceBundle == null) {
+			resourceBundle = ResourceBundle.getBundle(baseName, locale);
+			bundleMap.put(key, resourceBundle);
+			resourceBundles.set(bundleMap);
+		}
+		
+		return resourceBundle;
+	}
 	
 	/**
 	 * @description 获取包级别资源文件内的信息， 未获取到时返回资源项的键
@@ -507,8 +537,7 @@ public class MessageUtils {
 		if (StringUtils.isEmpty(baseName))
 			return StringUtils.EMPTY_STRING;
 		try {
-			ResourceBundle bundle = (locale != null ? ResourceBundle.getBundle(
-					baseName, locale) : ResourceBundle.getBundle(baseName));
+			ResourceBundle bundle = getResourceBundle(baseName, locale);
 			String message = bundle.getString(StringUtils.safeString(key));
 			return ArrayUtils.isNotEmpty(params) ? MessageFormat.format(message, params) : message;
 		} catch (MissingResourceException e) {

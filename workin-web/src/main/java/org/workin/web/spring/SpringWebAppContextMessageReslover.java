@@ -27,14 +27,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.workin.web.WebAppContextMessageResolver;
+import org.workin.templet.message.resolver.AbstractMessageResolver;
+import org.workin.web.WebApplicationContextMessageResolver;
 
 /**
  * @description 基于Spring Web应用上下文环境的消息解析器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class WebAppContextMessageReslover implements WebAppContextMessageResolver, InitializingBean {
+public class SpringWebAppContextMessageReslover extends AbstractMessageResolver
+		implements WebApplicationContextMessageResolver, InitializingBean {
 	
 	@Autowired
 	private SessionLocaleResolver localeResolver;
@@ -66,40 +68,6 @@ public class WebAppContextMessageReslover implements WebAppContextMessageResolve
 		if (this.messageSource == null)
 			throw new IllegalArgumentException("Property 'messageSource' is required");
 	}
-
-	@Override
-	public String getMessage(String key) {
-		return this.getMessage(key, null, key);
-	}
-
-	@Override
-	public String getMessage(String key, String defaultMessage) {
-		return this.getMessage(key, null, defaultMessage);
-	}
-
-	@Override
-	public String getMessage(String key, Object param, String defaultMessage) {
-		return this.getMessage(key, new Object[] { param }, defaultMessage);
-	}
-
-	@Override
-	public String getMessage(String key, Object param) {
-		return this.getMessage(key, new Object[] { param }, key);
-	}
-
-	@Override
-	public String getMessage(String key, Object[] params) {
-		return this.getMessage(key, params, key);
-	}
-
-	@Override
-	public String getMessage(String key, Object[] params, String defaultMessage) {
-		try {
-			return messageSource.getMessage(key, params, this.getLocale());
-		} catch (NoSuchMessageException e) {
-			throw new NoSuchMessageException(key);
-		}
-	}
 	
 	public HttpServletRequest getHttpServletRequest() {
 		return WebContextHelper.getHttpServletRequest();
@@ -107,8 +75,18 @@ public class WebAppContextMessageReslover implements WebAppContextMessageResolve
 
 	@Override
 	public Locale getLocale() {
-		HttpServletRequest request = this.getHttpServletRequest();
+		HttpServletRequest request = getHttpServletRequest();
 		return request != null ? localeResolver.resolveLocale(request) : Locale.getDefault();
 	}
 
+	@Override
+	public String getMessage(String key, Object[] params, String defaultMessage) {
+		try {
+			return messageSource.getMessage(key, params, getLocale());
+		} catch (NoSuchMessageException e) {
+			// 未获取到消息时，将默认值作为消息返回
+			return defaultMessage;
+		}
+	}
+	
 }

@@ -26,20 +26,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.NoSuchMessageException;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.workin.commons.model.CodeModel;
 import org.workin.commons.model.MessageModel;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MessageUtils;
+import org.workin.commons.util.ObjectUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.spring.beans.propertyeditors.DatePropertyEditor;
 import org.workin.spring.beans.propertyeditors.StringBufferPropertyEditor;
 import org.workin.spring.beans.propertyeditors.StringBuilderPropertyEditor;
-import org.workin.support.message.resolver.MessageResolver;
+import org.workin.templet.message.resolver.MessageResolver;
 import org.workin.web.ServletAware;
-import org.workin.web.WebAppContextMessageResolver;
+import org.workin.web.WebApplicationContextMessageResolver;
 
 /**
  * @description SpringMVC控制器抽象类
@@ -49,13 +49,13 @@ import org.workin.web.WebAppContextMessageResolver;
 public abstract class ControllerSupport implements MessageResolver, ServletAware {
 		
 	@Autowired
-	private WebAppContextMessageResolver messageResolver;
+	private WebApplicationContextMessageResolver messageResolver;
 			
-	public WebAppContextMessageResolver getMessageResolver() {
+	public WebApplicationContextMessageResolver getMessageResolver() {
 		return messageResolver;
 	}
 
-	public void setMessageResolver(WebAppContextMessageResolver messageResolver) {
+	public void setMessageResolver(WebApplicationContextMessageResolver messageResolver) {
 		this.messageResolver = messageResolver;
 	}
 
@@ -85,43 +85,42 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 
 	@Override
 	public String getMessage(String key) {
-		return this.getMessage(key, null, key);
+		return getMessage(key, null, key);
 	}
-
+	
 	@Override
 	public String getMessage(String key, String defaultMessage) {
-		return this.getMessage(key, null, defaultMessage);
+		return getMessage(key, null, defaultMessage);
+	}
+	
+	@Override
+	public String getMessage(String key, Object param) {
+		return getMessage(key, param, key);
+	}
+	
+	@Override
+	public String getMessage(String key, Object[] params) {
+		return getMessage(key, params, key);
 	}
 
 	@Override
 	public String getMessage(String key, Object param, String defaultMessage) {
-		return this.getMessage(key, new Object[] { param }, defaultMessage);
-	}
-
-	@Override
-	public String getMessage(String key, Object param) {
-		return this.getMessage(key, new Object[] { param }, key);
-	}
-
-	@Override
-	public String getMessage(String key, Object[] params) {
-		return this.getMessage(key, params, key);
+		return getMessage(key, new Object[] { param }, defaultMessage);
 	}
 
 	@Override
 	public String getMessage(String key, Object[] params, String defaultMessage) {
 		Locale locale = this.getLocale();
-		String message = key; 
-		try {
-			// 首先从SpringMVC全局配置文件中获取消息
-			return message = messageResolver.getMessage(key, params, defaultMessage);
-		} catch (NoSuchMessageException e) {
-			// 获取不到时，从与当前包同名的配置文件中获取
-			message = MessageUtils.getPackageMessage(this.getClass(), locale, key, params, null);
+		// 首先从SpringMVC全局配置文件中获取消息
+		String message = messageResolver.getMessage(key, params, defaultMessage); 
+		if (ObjectUtils.equals(message, defaultMessage)) {
+			// 如果返回的消息与指定的默认值一致，说明没有到真正的消息，则再从与当前包同名的配置文件中获取
+			message = MessageUtils.getPackageMessage(this.getClass(), locale, key, params, defaultMessage);
 		}
-		// 仍然获取不到时，最后从与当前类同名的配置文件中获取
-		return message != null ? message : MessageUtils
-				.getClassMessage(this.getClass(), locale, key, params, key);
+		
+		// 同理，如果返回的消息与指定的默认值再次一致，则再从与当前包同名的配置文件中获取
+		return !ObjectUtils.equals(message, defaultMessage) ? message : MessageUtils
+				.getClassMessage(this.getClass(), locale, key, params, defaultMessage);
 	}
 	
 	/**

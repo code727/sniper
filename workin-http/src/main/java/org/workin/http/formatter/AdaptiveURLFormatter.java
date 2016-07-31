@@ -27,7 +27,7 @@ import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.support.encoder.StringEncoder;
-import org.workin.support.message.formatter.AdaptiveMessageFormatter;
+import org.workin.templet.message.formatter.AdaptiveMessageFormatter;
 
 /**
  * @description 自适应URL格式化处理器实现类

@@ -30,7 +30,7 @@ import org.workin.http.exception.NoSuchHttpMethodException;
 import org.workin.http.formatter.AdaptiveURLFormatter;
 import org.workin.http.register.HttpFormRegister;
 import org.workin.support.encoder.RawURLEncoder;
-import org.workin.support.message.formatter.MessageFormatter;
+import org.workin.templet.message.formatter.MessageFormatter;
 
 /**
  * @description HttpClient访问器抽象类

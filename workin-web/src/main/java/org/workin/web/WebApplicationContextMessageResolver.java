@@ -22,14 +22,14 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.workin.support.message.resolver.MessageResolver;
+import org.workin.templet.message.resolver.MessageResolver;
 
 /**
- * @description 基于Web上下文环境的消息解析器接口
+ * @description 基于Web应用上下文环境的消息解析器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface WebAppContextMessageResolver extends MessageResolver {
+public interface WebApplicationContextMessageResolver extends MessageResolver {
 	
 	/**
 	 * @description 获取当前HttpServletRequest对象

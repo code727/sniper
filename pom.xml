@@ -88,5 +88,6 @@
 		<module>workin-push</module>
 		<module>workin-image</module>
 		<module>workin-serialization</module>
+		<module>workin-templet</module>
 	</modules>
 </project>
