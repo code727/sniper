@@ -47,6 +47,10 @@ public class TempletMessageResolver extends AbstractLocaleMessageResolver {
 		this.messageFormatter = new AdaptiveMessageFormatter();
 	}
 	
+	public void setMessageService(MessageService messageService) {
+		this.messageService = messageService;
+	}
+
 	public MessageService getMessageService() {
 		return messageService;
 	}
@@ -64,7 +68,7 @@ public class TempletMessageResolver extends AbstractLocaleMessageResolver {
 	public String getMessage(String key, Locale locale, Object[] params, String defaultMessage) {
 		checkMessageService();
 		String message = this.messageService.getMessageByKey(key, locale);
-		return message != null ? this.messageFormatter.format(message, params)  : defaultMessage;
+		return message != null ? this.messageFormatter.format(message, params) : defaultMessage;
 	}
 	
 	/**

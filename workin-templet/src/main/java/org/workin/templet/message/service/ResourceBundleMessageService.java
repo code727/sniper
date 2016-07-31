@@ -19,6 +19,7 @@
 package org.workin.templet.message.service;
 
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.workin.commons.util.ArrayUtils;
@@ -32,16 +33,34 @@ import org.workin.support.context.ApplicationContextHolder;
  */
 public class ResourceBundleMessageService implements MessageService {
 	
+	/** 资源的基础名称组 */
 	private String[] baseNames;
 
+	/**
+	 * @description 设置资源的基础名称
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param baseName
+	 */
 	public void setBaseName(String baseName) {
 		this.baseNames = StringUtils.splitTrim(baseName, ",");
 	}
 	
+	/**
+	 * @description 获取资源的基础名称组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
 	public String[] getBaseNames() {
 		return baseNames;
 	}
 
+	/**
+	 * @description 根据基础名称和本地化对象获取对应的java.util.ResourceBundle对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param baseName
+	 * @param locale
+	 * @return
+	 */
 	protected ResourceBundle getResourceBundle(String baseName, Locale locale) {
 		if (locale == null)
 			locale = Locale.getDefault();
@@ -49,8 +68,11 @@ public class ResourceBundleMessageService implements MessageService {
 		String attribute = baseName + "_" + locale;
 		ResourceBundle besourceBundle = (ResourceBundle) ApplicationContextHolder.getAttribute(attribute);
 		if (besourceBundle == null) {
-			besourceBundle = ResourceBundle.getBundle(baseName, locale);
-			ApplicationContextHolder.setAttribute(attribute, besourceBundle);
+			try {
+				besourceBundle = ResourceBundle.getBundle(baseName, locale);
+				ApplicationContextHolder.setAttribute(attribute, besourceBundle);
+			} catch (MissingResourceException e) {}
+			
 		}
 		
 		return besourceBundle;
