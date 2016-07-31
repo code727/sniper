@@ -26,15 +26,15 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.util.EntityUtils;
-import org.workin.http.handler.AbstractEncodableHandler;
+import org.workin.support.codec.CodecSupport;
 
 /**
  * @description 响应处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractResponseHandler<T> extends
-		AbstractEncodableHandler implements ResponseHandler<T> {
+public abstract class AbstractResponseHandler<T> extends CodecSupport implements
+		ResponseHandler<T> {
 	
 	/** 当响应结果返回为空时指定的默认值 */
 	private String defaultValue;

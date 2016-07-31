@@ -16,11 +16,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
-			<artifactId>workin-json</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.workin</groupId>
 			<artifactId>workin-templet</artifactId>
 			<version>1.0.0</version>
 		</dependency>

@@ -20,14 +20,14 @@ package org.workin.http.httpclient.v4.handler.request;
 
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.workin.http.HttpForm;
-import org.workin.http.handler.EncodableHandler;
+import org.workin.support.codec.Codecable;
 
 /**
  * @description 请求处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface RequestHandler extends EncodableHandler {
+public interface RequestHandler extends Codecable {
 	
 	/**
 	 * @description 根据URL和表单对象设置请求体到HttpEntityEnclosingRequestBase对象

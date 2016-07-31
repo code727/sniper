@@ -45,11 +45,11 @@ public class AdaptiveURLFormatter extends AdaptiveMessageFormatter {
 			
 			/* 求输入参数分别与查询字符串以及Action字符串中查询名的交集，
 			 * 多余的参数以及对于的值则直接拼接到URL字符串后面 */
-			Collection<String> names = MapUtils.keySubtract(inputParam, NetUtils.getParameterMap(url));
-			names = CollectionUtils.subtract(names, NetUtils.getActionParameterNames(
+			Collection<String> nameSubtract = MapUtils.keySubtract(inputParam, NetUtils.getParameterMap(url));
+			nameSubtract = CollectionUtils.subtract(nameSubtract, NetUtils.getActionParameterNames(
 					NetUtils.getActionString(url), super.getPrefix(), super.getSuffix()));
 					
-			if (CollectionUtils.isNotEmpty(names)) {
+			if (CollectionUtils.isNotEmpty(nameSubtract)) {
 				if (url.indexOf("?") < 0)
 					formatedUrl.append("?");
 				else
@@ -57,11 +57,11 @@ public class AdaptiveURLFormatter extends AdaptiveMessageFormatter {
 				
 				StringEncoder enc = this.getEncoder();
 				if (enc != null && StringUtils.isNotBlank(encoding)) {
-					for (String name : names) 
+					for (String name : nameSubtract) 
 						formatedUrl.append(name).append("=")
 							.append(enc.encode(StringUtils.toString(inputParam.get(name)), encoding)).append("&");
 				} else {
-					for (String name : names) 
+					for (String name : nameSubtract) 
 						formatedUrl.append(name).append("=")
 							.append(StringUtils.toString(inputParam.get(name))).append("&");
 				}
