@@ -41,6 +41,8 @@ public class StringUtils {
 	/** 空格字符串 */
 	public static final String SPACE_STRING = " ";
 	
+	public static final String CLASSPATH = "classpath:";
+	
 	/**
 	 * @description 判断是否为空字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
