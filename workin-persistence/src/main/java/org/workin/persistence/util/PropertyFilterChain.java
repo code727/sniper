@@ -42,8 +42,9 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 	private Map<String, Predicate> groupPredicate = MapUtils.newHashMap();
 	
 	public PersistencePropertyFilterChain add(String name, PersistencePropertyFilter filter) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(name), "Property filter group name can not be null or blank.");
+		AssertUtils.assertNotBlank(name, "Property filter group name can not be null or blank.");
 		AssertUtils.assertNotNull(filter, "Property filter can not be null.");
+		
 		List<PersistencePropertyFilter> group = this.groups.get(name);
 		if (group == null)
 			group = CollectionUtils.newArrayList();
@@ -78,8 +79,9 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 	}
 	
 	public PersistencePropertyFilterChain setPredicate(String name, String predicate) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(name), "Property filter group name can not be null or blank.");
-		AssertUtils.assertTrue(StringUtils.isNotBlank(predicate), "Property filter group predicate can not be null or blank.");
+		AssertUtils.assertNotBlank(name, "Property filter group name can not be null or blank.");
+		AssertUtils.assertNotBlank(predicate, "Property filter group predicate can not be null or blank.");
+		
 		try {
 			predicate = predicate.trim();
 			this.groupPredicate.put(name, Enum.valueOf(Predicate.class, predicate.toUpperCase()));
@@ -91,8 +93,9 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 	}
 	
 	public PersistencePropertyFilterChain setPredicate(String name, Predicate predicate) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(name), "Property filter group name can not be null or blank.");
+		AssertUtils.assertNotBlank(name, "Property filter group name can not be null or blank.");
 		AssertUtils.assertNotNull(predicate, "Property filter group predicate can not be null.");
+		
 		this.groupPredicate.put(name, predicate);
 		return this;
 	}

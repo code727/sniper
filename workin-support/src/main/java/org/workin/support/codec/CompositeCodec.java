@@ -35,8 +35,7 @@ public class CompositeCodec extends AbstractCodec {
 	private List<Codec> members;
 	
 	public CompositeCodec(List<Codec> members) {
-		AssertUtils.assertTrue(CollectionUtils.isNotEmpty(members),
-				"Composite codec member must not be null or empty.");
+		AssertUtils.assertNotEmpty(members, "Composite codec member must not be null or empty.");
 		
 		this.members = members;
 	}

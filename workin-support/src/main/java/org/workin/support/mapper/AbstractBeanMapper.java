@@ -22,7 +22,6 @@ import java.util.Set;
 
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ReflectionUtils;
-import org.workin.commons.util.StringUtils;
 
 
 /**
@@ -40,7 +39,8 @@ public abstract class AbstractBeanMapper<T, R> extends AbstractMapper<T, R> {
 	}
 	
 	public AbstractBeanMapper(String type, Set<ParameterRule> parameterRules) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(type), "Mapped bean type must not be null or blank.");
+		AssertUtils.assertNotBlank(type, "Mapped bean type must not be null or blank.");
+		
 		this.type = type;
 		this.parameterRules = parameterRules;
 	}

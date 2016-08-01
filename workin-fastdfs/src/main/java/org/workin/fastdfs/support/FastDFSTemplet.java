@@ -250,7 +250,7 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 
 	@Override
 	public byte[] download(final String path) throws Exception {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(path), "Source path must not be null or blank.");
+		AssertUtils.assertNotBlank(path, "Source path must not be null or blank.");
 		
 		return this.execute(new FastDFSCallback<byte[]>() {
 			@Override
@@ -263,8 +263,8 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	
 	@Override
 	public String download(final String path, final String fileName) throws Exception {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(path), "Source path must not be null or blank.");
-		AssertUtils.assertTrue(StringUtils.isNotBlank(fileName), "Local file name must not be null or blank.");
+		AssertUtils.assertNotBlank(path, "Source path must not be null or blank.");
+		AssertUtils.assertNotBlank(fileName, "Local file name must not be null or blank.");
 		
 		return this.execute(new FastDFSCallback<String>() {
 			@Override
@@ -293,7 +293,7 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	public void download(String path, String attachmentName,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(path), "Source path must not be null or blank.");
+		AssertUtils.assertNotBlank(path, "Source path must not be null or blank.");
 		
 		// 如果传入的附件名为空，则从路径中获取
 		if (StringUtils.isBlank(attachmentName))

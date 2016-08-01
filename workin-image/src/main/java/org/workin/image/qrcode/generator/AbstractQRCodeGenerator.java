@@ -24,7 +24,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.StringUtils;
 import org.workin.image.layout.QRCodeLayout;
 import org.workin.image.qrcode.QRCode;
 
@@ -51,7 +50,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 	}
 
 	public BufferedImage generator(QRCode qrCode) throws Exception {
-		AssertUtils.assertTrue(StringUtils.isNotEmpty(qrCode.getText()), "QRCode text must not be null or empty.");
+		AssertUtils.assertNotEmpty(qrCode.getText(), "QRCode text must not be null or empty.");
 		QRCodeLayout layout = qrCode.getLayout();
 		if (layout == null) 
 			// 将全局样式赋予当前二维码对象

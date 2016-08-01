@@ -335,7 +335,8 @@ public class BeanUtils {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T, V> T create(String className, Map<String, V> propertyValues) throws Exception {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(className), "Created bean class name must not be null or blank.");
+		AssertUtils.assertNotBlank(className, "Created bean class name must not be null or blank.");
+		
 		return (T) create(Class.forName(className.trim()), propertyValues);
 	}
 	

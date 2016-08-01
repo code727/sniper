@@ -31,9 +31,7 @@ import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
-import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
 
@@ -119,6 +117,7 @@ public class JSONUtils {
 	 */
 	public static <T> String toString(T obj) {
 		AssertUtils.assertNotNull(obj, "Converted object can not be null.");
+		
 		return JSONObject.fromObject(obj, jsonConfig).toString();
 	}
 	
@@ -129,8 +128,8 @@ public class JSONUtils {
 	 * @return
 	 */
 	public static <T> String toString(Collection<T> beanCollection) {
-		AssertUtils.assertTrue(CollectionUtils.isNotEmpty(beanCollection),
-				"Converted bean collection can not be null or empty.");
+		AssertUtils.assertNotEmpty(beanCollection, "Converted bean collection can not be null or empty.");
+		
 		return JSONArray.fromObject(beanCollection, jsonConfig).toString();
 	}
 	
@@ -141,8 +140,8 @@ public class JSONUtils {
 	 * @return
 	 */
 	public static <T> String toString(List<T> beanList) {
-		AssertUtils.assertTrue(CollectionUtils.isNotEmpty(beanList),
-				"Converted bean list can not be null or empty.");
+		AssertUtils.assertNotEmpty(beanList, "Converted bean list can not be null or empty.");
+				
 		return JSONArray.fromObject(beanList, jsonConfig).toString();
 	}
 	
@@ -153,8 +152,8 @@ public class JSONUtils {
 	 * @return
 	 */
 	public static String toString(Object[] beanArray) {
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(beanArray),
-				"Converted bean array can not be null or empty.");
+		AssertUtils.assertNotEmpty(beanArray, "Converted bean array can not be null or empty.");
+				
 		return JSONArray.fromObject(beanArray, jsonConfig).toString();
 	}
 	
@@ -167,8 +166,8 @@ public class JSONUtils {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> Collection<T> toCollection(String json, Class<T> beanClass) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(json),
-				"Converted json string can not be null or empty.");
+		AssertUtils.assertNotBlank(json, "Converted json string can not be null or empty.");
+				
 		JSONArray jsonArray = JSONArray.fromObject(json, jsonConfig);
 		return JSONArray.toCollection(jsonArray, beanClass);
 	}
@@ -182,8 +181,8 @@ public class JSONUtils {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> List<T> toList(String json, Class<T> beanClass) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(json),
-				"Converted json string can not be null or empty.");
+		AssertUtils.assertNotBlank(json, "Converted json string can not be null or empty.");
+				
 		JSONArray jsonArray = JSONArray.fromObject(json, jsonConfig);
 		return (List<T>) JSONArray.toCollection(jsonArray, beanClass);
 	}
@@ -197,9 +196,8 @@ public class JSONUtils {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T toBean(String json, Class<T> beanClass) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(json),
-				"Converted json string can not be null or empty.");
-		
+		AssertUtils.assertNotBlank(json, "Converted json string can not be null or empty.");
+				
 		json = json.trim();
 		if (StringUtils.startsWith(json, "[") && StringUtils.endsWith(json, "]"))
 			return toList(json, beanClass).get(0);

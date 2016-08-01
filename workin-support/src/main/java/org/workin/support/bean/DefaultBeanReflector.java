@@ -235,7 +235,8 @@ public class DefaultBeanReflector implements BeanReflector {
 	@Override
 	public <T, V> T create(String className, Map<String, V> expressionValues) throws Exception {
 		try {
-			AssertUtils.assertTrue(StringUtils.isNotBlank(className), "Created bean class name can not be null or blank.");
+			AssertUtils.assertNotBlank(className, "Created bean class name can not be null or blank.");
+			
 			return (T) create(Class.forName(className.trim()), expressionValues);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

@@ -111,27 +111,23 @@ public abstract class HttpClientAccessor implements InitializingBean {
 			throw new HttpFormNotFoundException("Form [name=" + name +"] not found in register.");
 		
 		String methodName = form.getMethod();
+		if (StringUtils.isBlank(methodName))
+			methodName = "get";
+		
+		String executedMethod = SUPPORT_REQUEST_METHOD.get(methodName.trim().toLowerCase());
 		if (StringUtils.isNotBlank(methodName)) {
-			String executedMethod = SUPPORT_REQUEST_METHOD.get(methodName.trim().toLowerCase());
-			if (executedMethod != null) {
-				try {
-					return (T) ReflectionUtils.invokeMethod(this, executedMethod, 
-							new Class<?>[]{String.class, Object.class}, new Object[]{name, param});
-				} catch (NoSuchMethodException e) {
-					throw new NoSuchHttpMethodException(
-							"No such http method [" + methodName + "] in current version of workin-http framework.");
-				}
-			} else
-				throw new NoSuchHttpMethodException(
-						"No such http method [" + methodName + "] in current version of workin-http framework.");
-		}
-		try {
-			return (T) ReflectionUtils.invokeMethod(this, SUPPORT_REQUEST_METHOD.get("get"), 
-					new Class<?>[]{String.class, Object.class}, new Object[]{name, param});
-		} catch (NoSuchMethodException e) {
-			throw new NoSuchHttpMethodException(
-					"No such http method [get] in current version of workin-http framework.");
-		}
+			try {
+				return (T) ReflectionUtils.invokeMethod(this, executedMethod,
+						new Class<?>[] { String.class, Object.class },
+						new Object[] { name, param });
+			} catch (NoSuchMethodException e) {
+				throw new NoSuchHttpMethodException("No such http method ["
+						+ methodName + "] in current version of workin-http framework.");
+			}
+		} else
+			throw new NoSuchHttpMethodException("No such http method ["
+					+ methodName + "] in current version of workin-http framework.");
+		
 	}
 	
 	/**

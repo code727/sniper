@@ -18,6 +18,9 @@
 
 package org.workin.commons.util;
 
+import java.util.Collection;
+import java.util.Map;
+
 /**
  * @description 断言工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -132,6 +135,63 @@ public class AssertUtils {
 	 */
 	public static void assertNotBlank(String str, String message) {
 		assertTrue(StringUtils.isNotBlank(str), message);
+	}
+	
+	/**
+	 * @description 断言数组不为空
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 */
+	public static void assertNotEmpty(Object[] array) {
+		assertNotEmpty(array, "[Assertion failed] - This array argument must not be null or empty.");
+	}
+	
+	/**
+	 * @description 断言数组不为空，否则抛出自定义的异常信息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param message
+	 */
+	public static void assertNotEmpty(Object[] array, String message) {
+		assertTrue(ArrayUtils.isNotEmpty(array), message);
+	}
+	
+	/**
+	 * @description 断言集合不为空
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 */
+	public static <T> void assertNotEmpty(Collection<T> collection) {
+		assertNotEmpty(collection, "[Assertion failed] - This collection argument must not be null or empty.");
+	}
+	
+	/**
+	 * @description 断言集合不为空，否则抛出自定义的异常信息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @param message
+	 */
+	public static <T> void assertNotEmpty(Collection<T> collection, String message) {
+		assertTrue(CollectionUtils.isNotEmpty(collection), message);
+	}
+	
+	/**
+	 * @description 断言集合不为空
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param map
+	 */
+	public static <K, V> void assertNotEmpty(Map<K, V> map) {
+		assertNotEmpty(map, "[Assertion failed] - This collection argument must not be null or empty.");
+	}
+	
+	/**
+	 * @description 断言集合不为空，否则抛出自定义的异常信息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param map
+	 * @param message
+	 */
+	public static <K, V> void assertNotEmpty(Map<K, V> map, String message) {
+		assertTrue(MapUtils.isNotEmpty(map), message);
 	}
 
 }

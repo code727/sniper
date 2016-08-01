@@ -517,7 +517,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> void mSet(final int dbIndex, final Map<K, V> kValues, final long expireSeconds) {
-		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues), "Key-value map can not be empty of command [mSet].");
+		AssertUtils.assertNotEmpty(kValues, "Key-value map can not be empty of command [mSet].");
 		
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
@@ -549,7 +549,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	
 	@Override
 	public <K, V> void mSetNX(final int dbIndex, final Map<K, V> kValues, final long expireSeconds) {
-		AssertUtils.assertTrue(MapUtils.isNotEmpty(kValues), "Key-value map can not be empty of command [mSetNX].");
+		AssertUtils.assertNotEmpty(kValues, "Key-value map can not be empty of command [mSetNX].");
 		
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
@@ -957,9 +957,8 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	public <K, F, V> void hMSet(final int dbIndex, final K key,
 			final Map<F, V> fValues, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [hMSet].");
-		AssertUtils.assertTrue(MapUtils.isNotEmpty(fValues), 
-				"Field-value map can not be empty of command [hMSet].");
-		
+		AssertUtils.assertNotEmpty(fValues, "Field-value map can not be empty of command [hMSet].");
+				
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
@@ -1313,7 +1312,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K, V> Long lPush(final int dbIndex, final K key, final V[] values, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [lPush].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(values), "Values can not be empty of command [lPush].");
+		AssertUtils.assertNotEmpty(values, "Values can not be empty of command [lPush].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -1593,7 +1592,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K, V> Long rPush(final int dbIndex, final K key, final V[] values, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [rPush].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(values), "Values can not be empty of command [rPush].");
+		AssertUtils.assertNotEmpty(values, "Values can not be empty of command [rPush].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -1773,7 +1772,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K, V> Long sAdd(final int dbIndex, final K key, final V[] members, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [sAdd].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(members), "Members can not be empty of command [sAdd].");
+		AssertUtils.assertNotEmpty(members, "Members can not be empty of command [sAdd].");
 				
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -1885,7 +1884,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K> Long sDiffStore(final int dbIndex, final K destKey, final K[] keys, final long expireSeconds) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sDiffStore].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sDiffStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [sDiffStore]");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -1972,7 +1971,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K> Long sInterStore(final int dbIndex, final K destKey, final K[] keys, final long expireSeconds) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sInterStore].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sInterStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [sInterStore]");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2060,7 +2059,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	public <K> Long sUnionStore(final int dbIndex, final K destKey,
 			final K[] keys, final long expireSeconds) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sUnionStore].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [sUnionStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [sUnionStore]");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2299,8 +2298,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K, V> Boolean zAdd(final int dbIndex, final K key, final Map<Double, V> scoreMembers, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [zAdd].");
-		AssertUtils.assertTrue(MapUtils.isNotEmpty(scoreMembers), 
-				"Score-member map can not be empty of command [zAdd].");
+		AssertUtils.assertNotEmpty(scoreMembers, "Score-member map can not be empty of command [zAdd].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
@@ -2781,7 +2779,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K> Long zUnionStore(final int dbIndex, final K destKey, final K[] keys) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zUnionStore].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zUnionStore].");
+		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zUnionStore].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2815,7 +2813,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	public <K> Long zUnionStore(final int dbIndex, final K destKey, final Aggregate aggregate,
 			final int[] weights, final K[] keys) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zUnionStore].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zUnionStore].");
+		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zUnionStore].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2860,7 +2858,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	@Override
 	public <K> Long zInterStore(final int dbIndex, final K destKey, final K[] keys) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zInterStore].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zInterStore].");
+		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zInterStore].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2894,7 +2892,7 @@ public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisComman
 	public <K> Long zInterStore(final int dbIndex, final K destKey, final Aggregate aggregate,
 			final int[] weights, final K[] keys) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zInterStore].");
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(keys), "Source keys can not be empty of command [zInterStore].");
+		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zInterStore].");
 		
 		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {

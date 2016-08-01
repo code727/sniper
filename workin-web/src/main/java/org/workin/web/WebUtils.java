@@ -449,7 +449,7 @@ public class WebUtils {
 	 * @throws IOException
 	 */
 	public static void download(String url, String attachmentName, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(url), "URL must not be null or blank.");
+		AssertUtils.assertNotBlank(url, "URL must not be null or blank.");
 		
 		// 如果传入的附件名为空，则从URL路径中获取
 		if (StringUtils.isBlank(attachmentName))

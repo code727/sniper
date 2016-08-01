@@ -81,7 +81,7 @@ public class PropertyFilter implements PersistencePropertyFilter {
 	
 	@Override
 	public void setOperator(String operator) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(operator), "Property operator can not be null or blank.");
+		AssertUtils.assertNotBlank(operator, "Property operator can not be null or blank.");
 		Operator operatorEnum = Operator.get(operator);
 		if (operatorEnum != null)
 			this.setOperator(operatorEnum);

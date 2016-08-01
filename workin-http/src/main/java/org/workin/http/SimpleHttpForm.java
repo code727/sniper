@@ -20,7 +20,6 @@ package org.workin.http;
 
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.NetUtils;
-import org.workin.commons.util.StringUtils;
 
 /**
  * @description HTTP表单实现类
@@ -71,7 +70,7 @@ public class SimpleHttpForm implements HttpForm {
 
 	@Override
 	public void setHost(String host) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(host), "Host can not be null or blank.");
+		AssertUtils.assertNotBlank(host, "Host can not be null or blank.");
 		this.host = host;
 	}
 

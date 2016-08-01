@@ -196,7 +196,7 @@ public class ClassUtils {
 			return false;
 		
 		if (obj == null) 
-			return isBaseType(clazz) ? false : true;
+			return !isBaseType(clazz);
 		
 		return canCast(obj.getClass(), clazz);
 	}
@@ -212,22 +212,25 @@ public class ClassUtils {
 		if (clazz1 == null || clazz2 == null)
 			return false;
 		
-		if (clazz2 == Object.class || clazz1 == clazz2 
-				|| ArrayUtils.contains(clazz1.getInterfaces(), clazz2))
-			return true;
-		
-		if (WRAPPER_TYPES.containsKey(getCommonType(clazz1, clazz2)))
-			return true;
-		
-		Class<?> superclass = clazz1.getSuperclass(); 
-		while (superclass != null) {
-			if (superclass == clazz2)
-				return true;
-			superclass = superclass.getSuperclass();
+		boolean canCast = false;
+		if (clazz2 == Object.class || clazz1 == clazz2 || ArrayUtils.contains(clazz1.getInterfaces(), clazz2))
+			canCast = true;
+		else if (WRAPPER_TYPES.containsKey(getCommonType(clazz1, clazz2)))
+			canCast = true;
+		else {
+			Class<?> superclass = clazz1.getSuperclass(); 
+			while (superclass != null) {
+				if (superclass == clazz2) {
+					canCast = true;
+					break;
+				}
+				superclass = superclass.getSuperclass();
+			}
 		}
-		return false;
+		
+		return canCast;
 	}
-	
+		
 	/**
 	 * @description 获取指定类型的超类签名中第1个泛型类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
