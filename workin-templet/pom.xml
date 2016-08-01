@@ -10,6 +10,12 @@
 	
 	<dependencies>
 		<dependency>
+    		<groupId>org.apache.velocity</groupId>
+    		<artifactId>velocity</artifactId>
+    		<version>1.7</version>
+    		<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-support</artifactId>
 			<version>1.0.0</version>
