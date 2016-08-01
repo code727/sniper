@@ -16,7 +16,7 @@
  * Create Date : 2015-3-27
  */
 
-package org.workin.nosql.redis.dao;
+package org.workin.nosql.redis.dao.spring;
 
 import java.util.Collection;
 import java.util.Date;
@@ -45,6 +45,7 @@ import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.nosql.redis.RedisRepository;
+import org.workin.nosql.redis.dao.RedisCommandsDao;
 
 /**
  * @description Redis命令行数据访问实现类
@@ -52,7 +53,7 @@ import org.workin.nosql.redis.RedisRepository;
  * @version 1.0
  */
 @Repository
-public class RedisCommandsDaoImpl extends RedisDaoSupport implements RedisCommandsDao {
+public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements RedisCommandsDao {
 	
 	@Override
 	public <K> Set<K> keys() {
