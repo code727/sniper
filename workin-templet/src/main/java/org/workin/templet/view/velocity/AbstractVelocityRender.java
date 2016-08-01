@@ -36,18 +36,29 @@ public abstract class AbstractVelocityRender extends AbstractViewRender {
 	
 	private VelocityEngine velocityEngine;
 	
-	protected AbstractVelocityRender() {
-		this.velocityEngine = buildEngine();
+	public VelocityEngine getVelocityEngine() {
+		return velocityEngine;
 	}
-	
+
 	@Override
 	public <K, V> boolean rende(String templetName, Map<K, V> context, Writer writer) {
-		VelocityContext velocityContext = (MapUtils.isNotEmpty(context) 
-				? new VelocityContext(context) : new VelocityContext());
+		VelocityContext velocityContext;
+		if (MapUtils.isNotEmpty(context))
+			velocityContext = new VelocityContext(context);
+		else
+			velocityContext = new VelocityContext();
 				
 		StringBuilder targetName = new StringBuilder(getPrefix()).append(
 				StringUtils.trim(templetName)).append(getSuffix());
-		return velocityEngine.mergeTemplate(targetName.toString(), getEncoding(), velocityContext, writer);
+		
+		if (velocityEngine == null) {
+			synchronized(this) {
+				velocityEngine = buildEngine();
+			}
+		}
+		
+		return velocityEngine.mergeTemplate(targetName.toString(),
+				getEncoding(), velocityContext, writer);
 	}
 	
 	/**

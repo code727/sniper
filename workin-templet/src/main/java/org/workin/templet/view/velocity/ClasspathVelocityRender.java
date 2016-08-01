@@ -39,8 +39,7 @@ public class ClasspathVelocityRender extends AbstractVelocityRender {
 	protected VelocityEngine buildEngine() {
 		/* 从类路径环境中加载模板文件 */
 		Properties properties = new Properties();
-		properties.setProperty("resource.loader", "class");
-		properties.setProperty("class.resource.loader.class", ClasspathResourceLoader.class.getName());
+		properties.setProperty("file.resource.loader.class", ClasspathResourceLoader.class.getName());
 		
 		return new VelocityEngine(properties);
 	}

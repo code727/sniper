@@ -26,6 +26,8 @@ import org.junit.Test;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.templet.view.velocity.ClasspathVelocityRender;
+import org.workin.templet.view.velocity.FileVelocityRender;
+import org.workin.templet.view.velocity.PropertiesVelocityRender;
 import org.workin.test.junit.BaseTestCase;
 
 /**
@@ -35,7 +37,7 @@ import org.workin.test.junit.BaseTestCase;
  */
 public class VelocityRenderTest extends BaseTestCase {
 	
-	@Test
+//	@Test
 	public void testClasspathVelocityRender() {
 		ClasspathVelocityRender velocityRender = new ClasspathVelocityRender();
 		velocityRender.setSuffix(".html");
@@ -47,6 +49,38 @@ public class VelocityRenderTest extends BaseTestCase {
 		StringWriter writer = new StringWriter();
 		velocityRender.rende("test", context, writer);
 		System.out.println(writer.toString());
+	}
+	
+//	@Test
+	public void testFileVelocityRender() {
+		FileVelocityRender velocityRender = new FileVelocityRender();
+		velocityRender.setPrefix("C:/Users/Administrator/Desktop/vm/");
+		velocityRender.setSuffix(".html");
+		
+		Map<Object, Object> context = MapUtils.newHashMap();
+		context.put("title", FileVelocityRender.class.getName() + " - 测试页面");
+		context.put("currentTime", DateUtils.dateToString(new Date()));
+		
+		StringWriter writer = new StringWriter();
+		velocityRender.rende("test", context, writer);
+		System.out.println(writer.toString());
+	}
+	
+	@Test
+	public void testPropertiesVelocityRender() {
+		PropertiesVelocityRender velocityRender = new PropertiesVelocityRender();
+		
+		velocityRender.setPrefix("C:/Users/Administrator/Desktop/vm/");
+		velocityRender.setSuffix(".html");
+		
+		Map<Object, Object> context = MapUtils.newHashMap();
+		context.put("title", PropertiesVelocityRender.class.getName() + " - 测试页面");
+		context.put("currentTime", DateUtils.dateToString(new Date()));
+		
+		StringWriter writer = new StringWriter();
+		velocityRender.rende("test", context, writer);
+		System.out.println(writer.toString());
+		
 	}
 
 }
