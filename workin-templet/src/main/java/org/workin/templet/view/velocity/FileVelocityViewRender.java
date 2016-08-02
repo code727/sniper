@@ -21,6 +21,8 @@ package org.workin.templet.view.velocity;
 import java.util.Properties;
 
 import org.apache.velocity.app.VelocityEngine;
+import org.workin.commons.util.FileUtils;
+import org.workin.commons.util.StringUtils;
 
 /**
  * @description 文件路径Velocity视图渲染器实现类
@@ -28,13 +30,26 @@ import org.apache.velocity.app.VelocityEngine;
  * @version 1.0
  */
 public class FileVelocityViewRender extends AbstractVelocityViewRender {
+	
+	/** 是否加载相对路径下的模板文件，默认加载绝对路径下的 */
+	private boolean loadRelativePathTemplet;
+	
+	public boolean isLoadRelativePathTemplet() {
+		return loadRelativePathTemplet;
+	}
+
+	public void setLoadRelativePathTemplet(boolean loadRelativePathTemplet) {
+		this.loadRelativePathTemplet = loadRelativePathTemplet;
+	}
 
 	@Override
 	protected VelocityEngine buildEngine() {
 		Properties properties = new Properties();
-		// 设置为空，延迟到父类方法rende被调用后再加载本地模板文件路径
-		properties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, "");
-		
+		if (isLoadRelativePathTemplet()) 
+			properties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, FileUtils.EXTENSION_SEPERATOR);
+		else
+			properties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, StringUtils.EMPTY_STRING);
+			
 		return new VelocityEngine(properties);
 	}
 	

@@ -55,6 +55,7 @@ public class VelocityRenderTest extends BaseTestCase {
 //	@Test
 	public void testFileVelocityRender() throws IOException {
 		FileVelocityViewRender velocityRender = new FileVelocityViewRender();
+//		velocityRender.setLoadRelativePathTemplet(true);
 		velocityRender.setPrefix("C:/Users/Administrator/Desktop/vm/");
 		velocityRender.setSuffix(".html");
 		
@@ -70,9 +71,6 @@ public class VelocityRenderTest extends BaseTestCase {
 	@Test
 	public void testPropertiesVelocityRender() throws IOException {
 		PropertiesVelocityViewRender velocityRender = new PropertiesVelocityViewRender();
-		
-//		velocityRender.setPrefix("C:/Users/Administrator/Desktop/vm/");
-//		velocityRender.setPrefix("/");
 		velocityRender.setSuffix(".html");
 		
 		Map<Object, Object> context = MapUtils.newHashMap();
@@ -80,6 +78,8 @@ public class VelocityRenderTest extends BaseTestCase {
 		context.put("currentTime", DateUtils.dateToString(new Date()));
 		
 		StringWriter writer = new StringWriter();
+		/* 根据默认的velocity.properties配置，渲染的是当前工程根目录下的test.html，
+		 * 测试时将resources目录下的同名文件拷贝于此 */
 		velocityRender.rende("test", context, writer);
 		System.out.println(writer.toString());
 	}

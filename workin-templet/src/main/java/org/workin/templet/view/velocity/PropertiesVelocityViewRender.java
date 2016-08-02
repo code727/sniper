@@ -35,25 +35,25 @@ import org.workin.commons.util.StringUtils;
  */
 public class PropertiesVelocityViewRender extends AbstractVelocityViewRender {
 	
-	/** Properties资源路径，默认为当前workin-templet工程类路径内的velocity.properties  */
-	private String resourcePath = StringUtils.CLASSPATH + "/velocity.properties";
+	/** Properties配置路径，默认为当前workin-templet工程类路径下的velocity.properties  */
+	private String configPath = StringUtils.CLASSPATH + "/velocity.properties";
 	
-	public String getResourcePath() {
-		return resourcePath;
+	public String getConfigPath() {
+		return configPath;
 	}
 
-	public void setResourcePath(String resourcePath) {
-		this.resourcePath = resourcePath;
+	public void setConfigPath(String configPath) {
+		this.configPath = configPath;
 	}
 
 	@Override
 	protected VelocityEngine buildEngine() throws IOException {
-		String realPath = resourcePath;
+		String realPath = configPath;
 		
 		Properties properties = null;
-		if (StringUtils.indexOfIgnoreCase(resourcePath, StringUtils.CLASSPATH) > -1) {
+		if (StringUtils.hasTextIgnoreCase(configPath, StringUtils.CLASSPATH)) {
 			/* 从当前类路径中加载Properties文件 */
-			realPath = StringUtils.afterLastIgnoreCase(resourcePath, StringUtils.CLASSPATH);
+			realPath = StringUtils.afterLastIgnoreCase(configPath, StringUtils.CLASSPATH);
 
 			InputStream inputStream = this.getClass().getResourceAsStream(realPath);
 			if (inputStream != null)
