@@ -54,7 +54,8 @@ public abstract class AbstractVelocityViewRender extends AbstractViewRender {
 		
 		if (velocityEngine == null) {
 			synchronized(this) {
-				velocityEngine = buildEngine();
+				if (velocityEngine == null)
+					velocityEngine = buildEngine();
 			}
 		}
 		
