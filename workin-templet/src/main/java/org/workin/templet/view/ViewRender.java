@@ -18,6 +18,7 @@
 
 package org.workin.templet.view;
 
+import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
@@ -31,11 +32,12 @@ public interface ViewRender {
 	/**
 	 * @description 将数据渲染到指定视图模板后再由写入器输出
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param templetName 模板名称
-	 * @param context 数据上下文
-	 * @param writer 写入器对象
+	 * @param templetName
+	 * @param context
+	 * @param writer
 	 * @return
+	 * @throws IOException
 	 */
-	public <K, V> boolean rende(String templetName, Map<K,V> context, Writer writer);
+	public <K, V> boolean rende(String templetName, Map<K,V> context, Writer writer) throws IOException;
 
 }

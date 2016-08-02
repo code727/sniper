@@ -21,21 +21,27 @@ package org.workin.templet.view.velocity;
 import java.util.Properties;
 
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 /**
- * @description 文件路径Velocity视图渲染器实现类
+ * @description 类路径Velocity视图渲染器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FileVelocityRender extends AbstractVelocityRender {
-
+public class ClasspathVelocityViewRender extends AbstractVelocityViewRender {
+		
+	/**
+	 * @description 构建Velocity模板引擎
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
 	@Override
 	protected VelocityEngine buildEngine() {
+		/* 从类路径环境中加载模板文件 */
 		Properties properties = new Properties();
-		// 设置为空，延迟到父类方法rende被调用后再加载本地模板文件路径
-		properties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, "");
+		properties.setProperty("file.resource.loader.class", ClasspathResourceLoader.class.getName());
 		
 		return new VelocityEngine(properties);
 	}
-	
+
 }

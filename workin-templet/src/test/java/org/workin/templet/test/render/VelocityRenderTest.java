@@ -18,6 +18,7 @@
 
 package org.workin.templet.test.render;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Date;
 import java.util.Map;
@@ -25,9 +26,9 @@ import java.util.Map;
 import org.junit.Test;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MapUtils;
-import org.workin.templet.view.velocity.ClasspathVelocityRender;
-import org.workin.templet.view.velocity.FileVelocityRender;
-import org.workin.templet.view.velocity.PropertiesVelocityRender;
+import org.workin.templet.view.velocity.ClasspathVelocityViewRender;
+import org.workin.templet.view.velocity.FileVelocityViewRender;
+import org.workin.templet.view.velocity.PropertiesVelocityViewRender;
 import org.workin.test.junit.BaseTestCase;
 
 /**
@@ -38,12 +39,12 @@ import org.workin.test.junit.BaseTestCase;
 public class VelocityRenderTest extends BaseTestCase {
 	
 //	@Test
-	public void testClasspathVelocityRender() {
-		ClasspathVelocityRender velocityRender = new ClasspathVelocityRender();
+	public void testClasspathVelocityRender() throws IOException {
+		ClasspathVelocityViewRender velocityRender = new ClasspathVelocityViewRender();
 		velocityRender.setSuffix(".html");
 		
 		Map<Object, Object> context = MapUtils.newHashMap();
-		context.put("title", ClasspathVelocityRender.class.getName() + " - 测试页面");
+		context.put("title", ClasspathVelocityViewRender.class.getName() + " - 测试页面");
 		context.put("currentTime", DateUtils.dateToString(new Date()));
 		
 		StringWriter writer = new StringWriter();
@@ -52,13 +53,13 @@ public class VelocityRenderTest extends BaseTestCase {
 	}
 	
 //	@Test
-	public void testFileVelocityRender() {
-		FileVelocityRender velocityRender = new FileVelocityRender();
+	public void testFileVelocityRender() throws IOException {
+		FileVelocityViewRender velocityRender = new FileVelocityViewRender();
 		velocityRender.setPrefix("C:/Users/Administrator/Desktop/vm/");
 		velocityRender.setSuffix(".html");
 		
 		Map<Object, Object> context = MapUtils.newHashMap();
-		context.put("title", FileVelocityRender.class.getName() + " - 测试页面");
+		context.put("title", FileVelocityViewRender.class.getName() + " - 测试页面");
 		context.put("currentTime", DateUtils.dateToString(new Date()));
 		
 		StringWriter writer = new StringWriter();
@@ -67,20 +68,20 @@ public class VelocityRenderTest extends BaseTestCase {
 	}
 	
 	@Test
-	public void testPropertiesVelocityRender() {
-		PropertiesVelocityRender velocityRender = new PropertiesVelocityRender();
+	public void testPropertiesVelocityRender() throws IOException {
+		PropertiesVelocityViewRender velocityRender = new PropertiesVelocityViewRender();
 		
-		velocityRender.setPrefix("C:/Users/Administrator/Desktop/vm/");
+//		velocityRender.setPrefix("C:/Users/Administrator/Desktop/vm/");
+//		velocityRender.setPrefix("/");
 		velocityRender.setSuffix(".html");
 		
 		Map<Object, Object> context = MapUtils.newHashMap();
-		context.put("title", PropertiesVelocityRender.class.getName() + " - 测试页面");
+		context.put("title", PropertiesVelocityViewRender.class.getName() + " - 测试页面");
 		context.put("currentTime", DateUtils.dateToString(new Date()));
 		
 		StringWriter writer = new StringWriter();
 		velocityRender.rende("test", context, writer);
 		System.out.println(writer.toString());
-		
 	}
 
 }

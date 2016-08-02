@@ -19,6 +19,7 @@
 package org.workin.templet.view.velocity;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -28,11 +29,11 @@ import org.workin.commons.util.PropertiesUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description Properties Velocity视图渲染器实现类
+ * @description 以Properties配置为基准的Velocity视图渲染器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class PropertiesVelocityRender extends AbstractVelocityRender {
+public class PropertiesVelocityViewRender extends AbstractVelocityViewRender {
 	
 	/** Properties资源路径，默认为当前workin-templet工程类路径内的velocity.properties  */
 	private String resourcePath = StringUtils.CLASSPATH + "/velocity.properties";
@@ -46,31 +47,26 @@ public class PropertiesVelocityRender extends AbstractVelocityRender {
 	}
 
 	@Override
-	protected VelocityEngine buildEngine() {
-		VelocityEngine velocityEngine = null;
-		try {
-			Properties properties = null;
-			String realPath = resourcePath;
-			if (StringUtils.indexOfIgnoreCase(resourcePath, StringUtils.CLASSPATH) > -1) {
-				/* 从当前类路径中加载Properties文件 */
-				realPath = StringUtils.afterLastIgnoreCase(resourcePath, StringUtils.CLASSPATH);
-				
-				InputStream inputStream = this.getClass().getResourceAsStream(realPath);
-				if (inputStream != null)
-					properties = PropertiesUtils.create(inputStream);
-				else
-					throw new IllegalArgumentException("Can not be found properties file ["
-							+ realPath + "] in current class path.");
-			} else 
-				// 从当前系统的本地绝对路径中加载Properties文件 
-				properties = PropertiesUtils.create(new File(realPath));
-			
-			velocityEngine = new VelocityEngine(properties);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	protected VelocityEngine buildEngine() throws IOException {
+		String realPath = resourcePath;
 		
-		return velocityEngine;
+		Properties properties = null;
+		if (StringUtils.indexOfIgnoreCase(resourcePath, StringUtils.CLASSPATH) > -1) {
+			/* 从当前类路径中加载Properties文件 */
+			realPath = StringUtils.afterLastIgnoreCase(resourcePath, StringUtils.CLASSPATH);
+
+			InputStream inputStream = this.getClass().getResourceAsStream(realPath);
+			if (inputStream != null)
+				properties = PropertiesUtils.create(inputStream);
+			else
+				throw new FileNotFoundException("Can not be found properties file [" 
+						+ realPath + "] in current class path.");
+						
+		} else 
+			// 从当前系统的本地绝对路径中加载Properties文件 
+			properties = PropertiesUtils.create(new File(realPath));
+		
+		return new VelocityEngine(properties);
 	}
 
 }

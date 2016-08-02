@@ -18,6 +18,7 @@
 
 package org.workin.templet.view.velocity;
 
+import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ import org.workin.templet.view.AbstractViewRender;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractVelocityRender extends AbstractViewRender {
+public abstract class AbstractVelocityViewRender extends AbstractViewRender {
 	
 	private VelocityEngine velocityEngine;
 	
@@ -41,7 +42,7 @@ public abstract class AbstractVelocityRender extends AbstractViewRender {
 	}
 
 	@Override
-	public <K, V> boolean rende(String templetName, Map<K, V> context, Writer writer) {
+	public <K, V> boolean rende(String templetName, Map<K, V> context, Writer writer) throws IOException {
 		VelocityContext velocityContext;
 		if (MapUtils.isNotEmpty(context))
 			velocityContext = new VelocityContext(context);
@@ -65,7 +66,8 @@ public abstract class AbstractVelocityRender extends AbstractViewRender {
 	 * @description 构建Velocity模板引擎
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
+	 * @throws IOException
 	 */
-	protected abstract VelocityEngine buildEngine();
+	protected abstract VelocityEngine buildEngine() throws IOException;
 
 }
