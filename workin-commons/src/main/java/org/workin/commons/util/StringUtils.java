@@ -1697,4 +1697,75 @@ public class StringUtils {
 		return CollectionUtils.toArray(list, String.class);
 	}
 	
+	/**
+	 * @description 判断字符串是否有指定的文本标记
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @return
+	 */
+	public static boolean hasText(String str, String mark) {
+		return hasText(str, mark, 0);
+	}
+	
+	/**
+	 * @description 从指定的索引位置开始判断字符串是否有指定的文本标记
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param start
+	 * @return
+	 */
+	public static boolean hasText(String str, String mark, int start) {
+		return hasText(str, mark, start, false);
+	}
+	
+	/**
+	 * @description 以忽略大小写的方式,判断字符串是否有指定的文本标记
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @return
+	 */
+	public static boolean hasTextIgnoreCase(String str, String mark) {
+		return hasTextIgnoreCase(str, mark, 0);
+	}
+	
+	/**
+	 * @description 以忽略大小写的方式,从指定的索引位置开始判断字符串是否有指定的文本标记
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param start
+	 * @return
+	 */
+	public static boolean hasTextIgnoreCase(String str, String mark, int start) {
+		return hasText(str, mark, start, true);
+	}
+	
+	/**
+	 * @description 选择是否以忽略大小写的方式,判断字符串是否有指定的文本标记
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param ignoreCase
+	 * @return
+	 */
+	public static boolean hasText(String str, String mark, boolean ignoreCase) {
+		return hasText(str, mark, 0, ignoreCase);
+	}
+	
+	/**
+	 * @description 选择是否以忽略大小写的方式,从指定的索引位置开始判断字符串是否有指定的文本标记
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param start
+	 * @param ignoreCase
+	 * @return
+	 */
+	public static boolean hasText(String str, String mark, int start, boolean ignoreCase) {
+		return indexOf(str, mark, start, ignoreCase) > -1;
+	}
+	
 }
