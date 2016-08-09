@@ -19,11 +19,14 @@
 package org.workin.commons.util;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
@@ -46,6 +49,16 @@ public class MapUtils {
 	}
 	
 	/**
+	 * @description 实例化一个具有指定容量的HashMap对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <K, V> HashMap<K, V> newHashMap(int initialCapacity) {
+		return new HashMap<K, V>(initialCapacity);
+	}
+		
+	/**
 	 * @description 根据指定的映射集实例化一个HashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
@@ -65,6 +78,16 @@ public class MapUtils {
 	}
 	
 	/**
+	 * @description 实例化一个具有指定容量LinkedHashMap对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int initialCapacity) {
+		return new LinkedHashMap<K, V>(initialCapacity);
+	}
+	
+	/**
 	 * @description 根据指定的映射集实例化一个LinkedHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
@@ -75,31 +98,22 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个TreeMap对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public static <K, V> TreeMap<K, V> newTreeMap() {
-		return new TreeMap<K, V>();
-	}
-	
-	/**
-	 * @description 根据指定的映射集实例化一个TreeMap对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param map
-	 * @return
-	 */
-	public static <K, V> TreeMap<K, V> newTreeMap(Map<? extends K, ? extends V> map) {
-		return map != null ? new TreeMap<K, V>(map) : new TreeMap<K, V>();
-	}
-	
-	/**
 	 * @description 实例化一个Hashtable对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public static <K, V> Hashtable<K, V> newHashtable() {
 		return new Hashtable<K, V>();
+	}
+	
+	/**
+	 * @description 实例化一个具有指定容量Hashtable对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <K, V> Hashtable<K, V> newHashtable(int initialCapacity) {
+		return new Hashtable<K, V>(initialCapacity);
 	}
 	
 	/**
@@ -113,12 +127,61 @@ public class MapUtils {
 	}
 	
 	/**
+	 * @description 实例化一个TreeMap对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static <K, V> TreeMap<K, V> newTreeMap() {
+		return new TreeMap<K, V>();
+	}
+	
+	/**
+	 * @description 实例化一个具有指定比较器的TreeMap对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param comparator
+	 * @return
+	 */
+	public static <K, V> TreeMap<K, V> newTreeMap(Comparator<? super K> comparator) {
+		return comparator != null ? new TreeMap<K, V>(comparator) : new TreeMap<K, V>();
+	}
+	
+	/**
+	 * @description 实例化一个具有指定排序器的TreeMap对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param sortedMap
+	 * @return
+	 */
+	public static <K, V> TreeMap<K, V> newTreeMap(SortedMap<K, ? extends V> sortedMap) {
+		return sortedMap != null ? new TreeMap<K, V>(sortedMap) : new TreeMap<K, V>();
+	}
+	
+	/**
+	 * @description 根据指定的映射集实例化一个TreeMap对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param map
+	 * @return
+	 */
+	public static <K, V> TreeMap<K, V> newTreeMap(Map<? extends K, ? extends V> map) {
+		return map != null ? new TreeMap<K, V>(map) : new TreeMap<K, V>();
+	}
+	
+	/**
 	 * @description 实例化一个ConcurrentHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap() {
 		return new ConcurrentHashMap<K, V>();
+	}
+	
+	/**
+	 * @description 实例化一个具有指定容量的ConcurrentHashMap对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(int initialCapacity) {
+		return new ConcurrentHashMap<K, V>(initialCapacity);
 	}
 	
 	/**
@@ -129,6 +192,35 @@ public class MapUtils {
 	 */
 	public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(Map<? extends K, ? extends V> map) {
 		return map != null ? new ConcurrentHashMap<K, V>(map) : new ConcurrentHashMap<K, V>();
+	}
+	
+	/**
+	 * @description 实例化一个IdentityHashMap对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static <K, V> IdentityHashMap<K, V> newIdentityHashMap() {
+		return new IdentityHashMap<K, V>();
+	}
+	
+	/**
+	 * @description 实例化一个具有指定容量的IdentityHashMap对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <K, V> IdentityHashMap<K, V> newIdentityHashMap(int initialCapacity) {
+		return new IdentityHashMap<K, V>(initialCapacity);
+	}
+	
+	/**
+	 * @description 根据指定的映射集实例化一个IdentityHashMap对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param map
+	 * @return
+	 */
+	public static <K, V> IdentityHashMap<K, V> newIdentityHashMap(Map<? extends K, ? extends V> map) {
+		return map != null ? new IdentityHashMap<K, V>(map) : new IdentityHashMap<K, V>();
 	}
 		
 	/**

@@ -528,6 +528,9 @@ public class CollectionUtils {
 	 * @return
 	 */
 	public static <T> T first(List<T> list, T defaultValue) {
+		if (list instanceof LinkedList)
+			return list.size() > 0 ? ((LinkedList<T>) list).getFirst() : defaultValue;
+		
 		return get(list, 0, null);
 	}
 	
@@ -549,9 +552,11 @@ public class CollectionUtils {
 	 * @return
 	 */
 	public static <T> T last(List<T> list, T defaultValue) {
+		if (list instanceof LinkedList)
+			return list.size() > 0 ? ((LinkedList<T>) list).getLast() : defaultValue;
+		
 		return get(list, size(list) - 1, null);
 	}
-	
 	
 	/**
 	 * @description 按指定的分隔符将列表中各元素连接成字符串
