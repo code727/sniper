@@ -1112,11 +1112,6 @@ public class StringUtils {
 		return result.toString();
 	}
 	
-	public static void main(String[] args) {
-		String test = "dub727@163.com";
-		System.out.println(StringUtils.replace(test, "sina.com", 7));
-	}
-		
 	/**
 	 * @description 将字符串中连续多个空格、制表符和换页符等空白字符整理替换成一个空格。
 	 * 				而字符串左右两侧的空白字符则直接清除。
@@ -1766,6 +1761,102 @@ public class StringUtils {
 	 */
 	public static boolean hasText(String str, String mark, int start, boolean ignoreCase) {
 		return indexOf(str, mark, start, ignoreCase) > -1;
+	}
+	
+	/**
+	 * @description 从原数字的左侧（开头）增补若干个字符0，生成具有指定最小长度的新字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @param minLength
+	 * @return
+	 */
+	public static String leftSupplement(Number number, int minLength) {
+		return leftSupplement(number, '0', minLength);
+	}
+	
+	/**
+	 * @description 从原数字的左侧（开头）增补若干个指定的字符，生成具有指定最小长度的新字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @param c
+	 * @param minLength
+	 * @return
+	 */
+	public static String leftSupplement(Number number, char c, int minLength) {
+		return leftSupplement(number != null ? number.toString() : EMPTY_STRING, c, minLength);
+	}
+	
+	/**
+	 * @description 从原数字的右侧（尾部）增补若干个字符0，生成具有指定最小长度的新字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @param minLength
+	 * @return
+	 */
+	public static String rightSupplement(Number number, int minLength) {
+		return rightSupplement(number, '0', minLength);
+	}
+	
+	/**
+	 * @description 从原数字的右侧（尾部）增补若干个指定的字符，生成具有指定最小长度的新字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @param c
+	 * @param minLength
+	 * @return
+	 */
+	public static String rightSupplement(Number number, char c, int minLength) {
+		return rightSupplement(number != null ? number.toString() : EMPTY_STRING, c, minLength);
+	}
+	
+	/**
+	 * @description 从原字符串的左侧（开头）增补若干个指定的字符，生成具有指定最小长度的新字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param c
+	 * @param minLength
+	 * @return
+	 */
+	public static String leftSupplement(String str, char c, int minLength) {
+		if (str == null)
+			str = EMPTY_STRING;
+		
+		int length = str.length();
+		if (length < minLength) {
+			StringBuilder result = new StringBuilder();
+			int count = minLength - length;
+			for (int i = 0; i < count; i++)
+				result.append(c);
+			
+			return result.append(str).toString();
+		}
+		
+		return str;
+	}
+	
+	/**
+	 * @description 从原字符串的右侧（尾部）增补若干个指定的字符，生成具有指定最小长度的新字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param c
+	 * @param minLength
+	 * @return
+	 */
+	public static String rightSupplement(String str, char c, int minLength) {
+		if (str == null)
+			str = EMPTY_STRING;
+		
+		int length = str.length();
+		if (length < minLength) {
+			StringBuilder result = new StringBuilder(str);
+			int count = minLength - length;
+			for (int i = 0; i < count; i++)
+				result.append(c);
+			
+			return result.toString();
+		}
+		
+		return str;
 	}
 	
 }
