@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年12月17日
+ * Create Date : 2015-12-17
  */
 
 package org.workin.nosql.redis.serializer;
@@ -31,7 +31,9 @@ import org.workin.commons.util.ArrayUtils;
  * @description JOSN格式的redis序列化器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
+ * @see org.workin.serialization.json.codehaus.JacksonSerializer
  */
+@Deprecated
 public class JacksonJsonRedisSerializer<T> implements RedisSerializer<T> {
 	
 	public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");

@@ -18,14 +18,12 @@
 
 package org.workin.serialization;
 
-import org.springframework.core.NestedRuntimeException;
-
 /**
  * @description 序列化异常类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SerializationException extends NestedRuntimeException {
+public class SerializationException extends RuntimeException {
 	
 	private static final long serialVersionUID = 4236956157071617322L;
 

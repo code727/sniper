@@ -18,7 +18,7 @@
 
 package org.workin.nosql.redis;
 
-import org.springframework.data.redis.serializer.RedisSerializer;
+import org.workin.serialization.Serializer;
 
 /**
  * @description Redis库配置对象
@@ -37,16 +37,16 @@ public class RedisRepository {
 	private String timeUnit;
 	
 	/** 键序列化器 */
-	private RedisSerializer<?> keySerializer;
+	private Serializer keySerializer;
 	
 	/** 值序列化器 */
-	private RedisSerializer<?> valueSerializer;
+	private Serializer valueSerializer;
 	
 	/** 哈希键序列化器 */
-	private RedisSerializer<?> hashKeySerializer;
+	private Serializer hashKeySerializer;
 	
 	/** 哈希值序列化器 */
-	private RedisSerializer<?> hashValueSerializer; 
+	private Serializer hashValueSerializer; 
 
 	public String getName() {
 		return name;
@@ -72,35 +72,35 @@ public class RedisRepository {
 		this.timeUnit = timeUnit;
 	}
 
-	public RedisSerializer<?> getKeySerializer() {
+	public Serializer getKeySerializer() {
 		return keySerializer;
 	}
 
-	public void setKeySerializer(RedisSerializer<?> keySerializer) {
+	public void setKeySerializer(Serializer keySerializer) {
 		this.keySerializer = keySerializer;
 	}
 
-	public RedisSerializer<?> getValueSerializer() {
+	public Serializer getValueSerializer() {
 		return valueSerializer;
 	}
 
-	public void setValueSerializer(RedisSerializer<?> valueSerializer) {
+	public void setValueSerializer(Serializer valueSerializer) {
 		this.valueSerializer = valueSerializer;
 	}
 
-	public RedisSerializer<?> getHashKeySerializer() {
+	public Serializer getHashKeySerializer() {
 		return hashKeySerializer;
 	}
 
-	public void setHashKeySerializer(RedisSerializer<?> hashKeySerializer) {
+	public void setHashKeySerializer(Serializer hashKeySerializer) {
 		this.hashKeySerializer = hashKeySerializer;
 	}
 
-	public RedisSerializer<?> getHashValueSerializer() {
+	public Serializer getHashValueSerializer() {
 		return hashValueSerializer;
 	}
 
-	public void setHashValueSerializer(RedisSerializer<?> hashValueSerializer) {
+	public void setHashValueSerializer(Serializer hashValueSerializer) {
 		this.hashValueSerializer = hashValueSerializer;
 	}
 

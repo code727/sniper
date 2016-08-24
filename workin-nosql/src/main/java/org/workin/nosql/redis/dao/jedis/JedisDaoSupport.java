@@ -48,4 +48,16 @@ public abstract class JedisDaoSupport extends RedisDaoSupport {
 					"JedisPool object can not be null, please inject to spring container.");
 	}
 
+	@Override
+	protected void initializeDefaultDbIndex() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void initializeGlobalSerializers() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

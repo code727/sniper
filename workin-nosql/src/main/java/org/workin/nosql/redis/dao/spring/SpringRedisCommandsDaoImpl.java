@@ -35,7 +35,6 @@ import org.springframework.data.redis.connection.RedisZSetCommands.Aggregate;
 import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 import org.springframework.data.redis.connection.SortParameters;
 import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Repository;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.AssertUtils;
@@ -46,9 +45,11 @@ import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.nosql.redis.RedisRepository;
 import org.workin.nosql.redis.dao.RedisCommandsDao;
+import org.workin.serialization.Serializer;
+import org.workin.serialization.jdk.StringSerializer;
 
 /**
- * @description Redis命令行数据访问实现类
+ * @description Spring Redis命令行数据访问实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -70,22 +71,21 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return keys(super.getDefaultDbIndex(), pattern);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Set<K> keys(final int dbIndex, final String pattern) {
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<String> stringSerializer = super.getRedisTemplate().getStringSerializer();
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final StringSerializer stringSerializer = new StringSerializer();
 		
 		return super.getRedisTemplate().execute(new RedisCallback<Set<K>>() {
 			
+			@SuppressWarnings("unchecked")
 			@Override
 			public Set<K> doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbIndex);
-				Set<byte[]> keyBytes = connection.keys(stringSerializer
-						.serialize(StringUtils.isNotEmpty(pattern) ? pattern : "*"));
+				Set<byte[]> keyBytes = connection.keys(stringSerializer.serialize(StringUtils.isNotEmpty(pattern) ? pattern : "*"));
 				Set<K> keys = new HashSet<K>();
 				for (byte[] key : keyBytes)
-					keys.add(keySerializer.deserialize(key));
+					keys.add((K) keySerializer.deserialize(key));
 				
 				return keys;
 			}
@@ -137,13 +137,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return exists(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Boolean exists(final int dbIndex, final K key) {
 		if (key == null)
 			return false;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -159,13 +158,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return expire(super.getDefaultDbIndex(), seconds);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Boolean expire(final int dbIndex, final K key, final long seconds) {
 		if (key == null)
 			return false;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -181,13 +179,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return expireAt(super.getDefaultDbIndex(), key, timestamp);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Boolean expireAt(final int dbIndex, final K key, final long timestamp) {
 		if (key == null)
 			return false;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -213,13 +210,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return move(super.getDefaultDbIndex(), key, targetIndex);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Boolean move(final int dbIndex, final K key, final int targetIndex) {
 		if (key == null)
 			return false;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -235,13 +231,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return ttl(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long ttl(final int dbIndex, final K key) {
 		if (key == null)
 			return -2L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -257,23 +252,23 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sort(super.getDefaultDbIndex(), key, params);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> List<V> sort(final int dbIndex, final K key, final SortParameters params) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [sort].");
 		AssertUtils.assertNotNull(params, "Sort parameters can not be null of command [sort].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public List<V> doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbIndex);
 				List<byte[]> byteList = connection.sort(keySerializer.serialize(key), params);
 				List<V> values = CollectionUtils.newArrayList();
 				for (byte[] bytes : byteList)
-					values.add(valueSerializer.deserialize(bytes));
+					values.add((V) valueSerializer.deserialize(bytes));
 				
 				return values;
 			}
@@ -285,14 +280,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sortCount(super.getDefaultDbIndex(), key, params, targetKey);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long sortCount(final int dbIndex, final K key, final SortParameters params, final K targetKey) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [sort].");
 		AssertUtils.assertNotNull(params, "Sort parameters can not be null of command [sort].");
 		AssertUtils.assertNotNull(targetKey, "Target key can not be null of command [sort].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -308,14 +302,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sortResult(super.getDefaultDbIndex(), key, params, targetKey);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> List<V> sortResult(final int dbIndex, final K key, final SortParameters params, final K targetKey) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [sort].");	
 		AssertUtils.assertNotNull(params, "Sort parameters can not be null of command [sort].");
 		AssertUtils.assertNotNull(targetKey, "Target key can not be null of command [sort].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
 
 			@Override
@@ -337,13 +330,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return type(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> DataType type(final int dbIndex, final K key) {
 		if (key == null)
 			return DataType.NONE;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<DataType>() {
 
 			@Override
@@ -369,13 +361,14 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <V> Set<V> values(int dbIndex, final String pattern) {
-		final RedisSerializer<String> stringSerializer = super.getRedisTemplate().getStringSerializer();
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final StringSerializer stringSerializer = new StringSerializer();
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		
 		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
+			
+			@SuppressWarnings("unchecked")
 			@Override
 			public Set<V> doInRedis(RedisConnection connection) throws DataAccessException {
 				// 获取匹配模式的键
@@ -383,7 +376,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 						.serialize(StringUtils.isNotEmpty(pattern) ? pattern : "*"));
 				Set<V> set = CollectionUtils.newHashSet();
 				for (byte[] key : keySet)
-					set.add(valueSerializer.deserialize(connection.get(key)));
+					set.add((V) valueSerializer.deserialize(connection.get(key)));
 				
 				return set;
 			}
@@ -405,14 +398,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		set(dbIndex, key, value, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> void set(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [set].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [set].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 			
 			@Override
@@ -442,14 +434,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return setNX(dbIndex, key, value, 0);
 	}	
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Boolean setNX(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [setNX].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [setNX].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -478,14 +469,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		setEx(super.getDefaultDbIndex(), key, seconds, value);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> void setEx(final int dbIndex, final K key, final long seconds, final V value) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [setEx].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [setEx].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
@@ -580,14 +570,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		setRange(dbIndex, key, offset, value, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> void setRange(final int dbIndex, final K key, final long offset, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [setRange].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [setRange].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
@@ -616,14 +605,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return append(dbIndex, key, value, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long append(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [append].");
 		AssertUtils.assertNotNull(key, "Value can not be null of command [append].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -642,14 +630,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return get(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> V get(final int dbIndex, final K key) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
@@ -666,14 +653,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return getRange(super.getDefaultDbIndex(), key, begin, end);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> V getRange(final int dbIndex, final K key, final long begin, final long end) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
@@ -700,14 +686,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return getSet(dbIndex, key, value, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> V getSet(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
@@ -757,13 +742,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return strLen(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long strLen(final int dbIndex, final K key) {
 		if (key == null)
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -779,12 +763,11 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return decr(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long decr(final int dbIndex, final K key) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [decr].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -800,12 +783,11 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return decrBy(super.getDefaultDbIndex(), key, value);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long decrBy(final int dbIndex, final K key, final long value) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [decrBy].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -821,12 +803,11 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return incr(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long incr(final int dbIndex, final K key) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [incr].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -842,12 +823,11 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return incrBy(super.getDefaultDbIndex(), key, value);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long incrBy(final int dbIndex, final K key, final long value) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [incrBy].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -873,7 +853,6 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return hSet(dbIndex, key, field, value, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, F, V> Boolean hSet(final int dbIndex, final K key,
 			final F field, final V value, final long expireSeconds) {
@@ -881,9 +860,9 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		AssertUtils.assertNotNull(field, "Field can not be null of command [hSet].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [hSet].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<F> fieldKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer fieldKeySerializer = selectHashKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -913,7 +892,6 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return hSetNX(super.getDefaultDbIndex(), key, field, value, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, F, V> Boolean hSetNX(final int dbIndex, final K key,
 			final F field, final V value, final long expireSeconds) {
@@ -921,9 +899,9 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		AssertUtils.assertNotNull(field, "Field can not be null of command [hSetNX].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [hSetNX].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<F> fieldKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer fieldKeySerializer = selectHashKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -953,14 +931,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		hMSet(dbIndex, key, fValues, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, F, V> void hMSet(final int dbIndex, final K key,
 			final Map<F, V> fValues, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [hMSet].");
 		AssertUtils.assertNotEmpty(fValues, "Field-value map can not be empty of command [hMSet].");
 				
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
@@ -992,13 +969,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, F> Long hDel(final int dbIndex, final K key, final F[] fileds) {
 		if (key == null || ArrayUtils.isEmpty(fileds))
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -1025,14 +1001,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return hExists(super.getDefaultDbIndex(), key, filed);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, F> Boolean hExists(final int dbIndex, final K key, final F filed) {
 		if (key == null || filed == null)
 			return false;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<F> hashKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer hashKeySerializer = selectHashKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -1048,15 +1023,14 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return hGet(super.getDefaultDbIndex(), key, filed);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, F, V> V hGet(final int dbIndex, final K key, final F filed) {
 		if (key == null || filed == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<F> hashKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		final RedisSerializer<V> hashValueSerializer = (RedisSerializer<V>) selectHashValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer hashKeySerializer = selectHashKeySerializer(dbIndex);
+		final Serializer hashValueSerializer = selectHashValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
@@ -1073,13 +1047,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return hGetAll(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, F, V> Map<F, V> hGetAll(final int dbIndex, final K key) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Map<F, V>>() {
 
 			@Override
@@ -1096,13 +1069,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return hKeys(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, F> Set<F> hKeys(final int dbIndex, final K key) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Set<F>>() {
 
 			@Override
@@ -1119,13 +1091,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return hLen(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long hLen(final int dbIndex, final K key) {
 		if (key == null)
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -1141,13 +1112,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return hMGet(super.getDefaultDbIndex(), key, fields);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, F, V> List<V> hMGet(final int dbIndex, final K key, final F[] fields) {
 		if (key == null || ArrayUtils.isEmpty(fields))
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
 
 			@Override
@@ -1175,13 +1145,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return hVals(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> List<V> hVals(final int dbIndex, final K key) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
 
 			@Override
@@ -1208,7 +1177,6 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return lInsert(dbIndex, key, where, pivot, value, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long lInsert(final int dbIndex, final K key, final Position where, final V pivot,
 			final V value, final long expireSeconds) {
@@ -1217,8 +1185,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		AssertUtils.assertNotNull(pivot, "Postion value can not be null of command [lInsert].");
 		AssertUtils.assertNotNull(value, "Insert value can not be null of command [lInsert].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -1251,15 +1219,14 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		lSet(dbIndex, key, posttion, value, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> void lSet(final int dbIndex, final K key,
 			final long posttion, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [lSet].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [lSet].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
@@ -1309,13 +1276,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return lPush(dbIndex, key, values, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long lPush(final int dbIndex, final K key, final V[] values, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [lPush].");
 		AssertUtils.assertNotEmpty(values, "Values can not be empty of command [lPush].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -1367,14 +1333,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return lPushX(dbIndex, key, value, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long lPushX(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [lPushX].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [lPushX].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 			
 			@Override
@@ -1396,14 +1361,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return lIndex(super.getDefaultDbIndex(), key, index);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> V lIndex(final int dbIndex, final K key, final long index) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
@@ -1421,13 +1385,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return lLen(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long lLen(final int dbIndex, final K key) {
 		if (key == null)
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -1444,14 +1407,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return lPop(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> V lPop(final int dbIndex, final K key) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
@@ -1468,13 +1430,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return lRange(super.getDefaultDbIndex(), key, begin, end);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> List<V> lRange(final int dbIndex, final K key, final long begin, final long end) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
 
 			@Override
@@ -1501,14 +1462,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return lRem(super.getDefaultDbIndex(), key, count, value);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long lRem(final int dbIndex, final K key, final long count, final V value) {
 		if (key == null || value == null)
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -1535,13 +1495,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		lTrim(super.getDefaultDbIndex(), key, begin, end);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> void lTrim(final int dbIndex, final K key, final long begin, final long end) {
 		if (key == null)
 			return;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
 			@Override
@@ -1589,13 +1548,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return rPush(dbIndex, key, values, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long rPush(final int dbIndex, final K key, final V[] values, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [rPush].");
 		AssertUtils.assertNotEmpty(values, "Values can not be empty of command [rPush].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -1647,14 +1605,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return rPushX(dbIndex, key, value, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long rPushX(final int dbIndex, final K key, final V value, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [rPushX].");
 		AssertUtils.assertNotNull(value, "Value can not be null of command [rPushX].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 			
 			@Override
@@ -1691,7 +1648,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	public <K, V> V rPopLPush(final int dbIndex, final K srcKey, final K destKey, final long expireSeconds) {
 		AssertUtils.assertNotNull(srcKey, "Source key can not be null of command [rPopLPush].");
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [rPopLPush].");
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
@@ -1712,14 +1669,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return rPop(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> V rPop(final int dbIndex, final K key) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
@@ -1769,13 +1725,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sAdd(dbIndex, key, members, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long sAdd(final int dbIndex, final K key, final V[] members, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [sAdd].");
 		AssertUtils.assertNotEmpty(members, "Members can not be empty of command [sAdd].");
 				
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 			
 			@Override
@@ -1817,13 +1772,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sCard(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long sCard(final int dbIndex, final K key) {
 		if (key == null)
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -1881,13 +1835,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sDiffStore(dbIndex, destKey, keys, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long sDiffStore(final int dbIndex, final K destKey, final K[] keys, final long expireSeconds) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sDiffStore].");
 		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [sDiffStore]");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -1968,13 +1921,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sInterStore(dbIndex, destKey, keys, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long sInterStore(final int dbIndex, final K destKey, final K[] keys, final long expireSeconds) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sInterStore].");
 		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [sInterStore]");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2055,14 +2007,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sUnionStore(dbIndex, destKey, keys, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long sUnionStore(final int dbIndex, final K destKey,
 			final K[] keys, final long expireSeconds) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sUnionStore].");
 		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [sUnionStore]");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2101,14 +2052,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sIsMember(super.getDefaultDbIndex(), key, member);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Boolean sIsMember(final int dbIndex, final K key, final V member) {
 		if (key == null || member == null)
 			return false;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -2124,13 +2074,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sMembers(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Set<V> sMembers(final int dbIndex, final K key) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 
 			@Override
@@ -2147,14 +2096,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sMove(super.getDefaultDbIndex(), srcKey, destKey, member);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Boolean sMove(final int dbIndex, final K srcKey, final K destKey, final V member) {
 		if (srcKey == null || destKey == null || member == null)
 			return false;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -2171,14 +2119,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sPop(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> V sPop(final int dbIndex, final K key) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
@@ -2195,14 +2142,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sRandMember(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> V sRandMember(final int dbIndex, final K key) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
 
 			@Override
@@ -2229,13 +2175,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return sRem(super.getDefaultDbIndex(), key, members);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long sRem(final int dbIndex, final K key, final V[] members) {
 		if (key == null || ArrayUtils.isEmpty(members))
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2295,14 +2240,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zAdd(dbIndex, key, scoreMembers, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Boolean zAdd(final int dbIndex, final K key, final Map<Double, V> scoreMembers, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [zAdd].");
 		AssertUtils.assertNotEmpty(scoreMembers, "Score-member map can not be empty of command [zAdd].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -2327,13 +2271,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zCard(super.getDefaultDbIndex(), key);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long zCard(final int dbIndex, final K key) {
 		if (key == null)
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2349,13 +2292,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zCount(super.getDefaultDbIndex(), minScore, maxScore);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long zCount(final int dbIndex, final K key, final double minScore, final double maxScore) {
 		if (key == null)
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2371,13 +2313,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRange(super.getDefaultDbIndex(), key, begin, end);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Set<V> zRange(final int dbIndex, final K key, final long begin, final long end) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 
 			@Override
@@ -2404,13 +2345,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRangeByScore(super.getDefaultDbIndex(), key, minScore, maxScore);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Set<V> zRangeByScore(final int dbIndex, final K key, final double minScore, final double maxScore) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 			
 			@Override
@@ -2429,14 +2369,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRangeByScore(super.getDefaultDbIndex(), key, minScore, maxScore, offset, count);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Set<V> zRangeByScore(final int dbIndex, final K key, final double minScore,
 			final double maxScore, final long offset, final long count) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 			
 			@Override
@@ -2454,14 +2393,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRangeByScoreWithScores(super.getDefaultDbIndex(), key, minScore, maxScore);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Set<Tuple> zRangeByScoreWithScores(final int dbIndex,
 			final K key, final double minScore, final double maxScore) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Set<Tuple>>() {
 			
 			@Override
@@ -2478,14 +2416,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRangeByScoreWithScores(super.getDefaultDbIndex(), key, minScore, maxScore, offset, count);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Set<Tuple> zRangeByScoreWithScores(final int dbIndex, final K key,
 			final double minScore, final double maxScore, final long offset, final long count) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Set<Tuple>>() {
 			
 			@Override
@@ -2502,14 +2439,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRank(super.getDefaultDbIndex(), key, member);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long zRank(final int dbIndex, final K key, final V member) {
 		if (key == null || member == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 			
 			@Override
@@ -2535,13 +2471,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRem(super.getDefaultDbIndex(), key, members);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long zRem(final int dbIndex, final K key, final V[] members) {
 		if (key == null || ArrayUtils.isEmpty(members))
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2568,13 +2503,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRemRangeByRank(super.getDefaultDbIndex(), key, begin, end);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long zRemRangeByRank(final int dbIndex, final K key, final long begin, final long end) {
 		if (key == null)
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2590,14 +2524,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRemRangeByScore(super.getDefaultDbIndex(), key, minScore, maxScore);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long zRemRangeByScore(final int dbIndex, final K key, final double minScore,
 			final double maxScore) {
 		if (key == null)
 			return 0L;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2613,13 +2546,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRevRange(super.getDefaultDbIndex(), key, begin, end);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Set<V> zRevRange(final int dbIndex, final K key, final long begin, final long end) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 
 			@Override
@@ -2646,14 +2578,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRevRangeByScore(super.getDefaultDbIndex(), key, minScore, maxScore);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Set<V> zRevRangeByScore(final int dbIndex, final K key,
 			final double minScore, final double maxScore) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Set<V>>() {
 
 			@Override
@@ -2670,14 +2601,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRevRangeByScoreWithScores(super.getDefaultDbIndex(), key, minScore, maxScore);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Set<Tuple> zRevRangeByScoreWithScores(final int dbIndex, final K key,
 			final double minScore, final double maxScore) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Set<Tuple>>() {
 			
 			@Override
@@ -2695,14 +2625,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRevRangeByScoreWithScores(super.getDefaultDbIndex(), key, minScore, maxScore, offset, count);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Set<Tuple> zRevRangeByScoreWithScores(final int dbIndex, final K key,
 			final double minScore, final double maxScore, final long offset, final long count) {
 		if (key == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Set<Tuple>>() {
 
 			@Override
@@ -2719,14 +2648,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zRevRank(super.getDefaultDbIndex(), key, member);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Long zRevRank(final int dbIndex, final K key, final V member) {
 		if (key == null || member == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 			
 			@Override
@@ -2742,14 +2670,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zScore(super.getDefaultDbIndex(), key, member);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Double zScore(final int dbIndex, final K key, final V member) {
 		if (key == null || member == null)
 			return null;
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Double>() {
 
 			@Override
@@ -2776,13 +2703,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zUnionStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long zUnionStore(final int dbIndex, final K destKey, final K[] keys) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zUnionStore].");
 		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zUnionStore].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2809,14 +2735,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zUnionStore(super.getDefaultDbIndex(), destKey, aggregate, weights, keys);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long zUnionStore(final int dbIndex, final K destKey, final Aggregate aggregate,
 			final int[] weights, final K[] keys) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zUnionStore].");
 		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zUnionStore].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2855,13 +2780,12 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zInterStore(super.getDefaultDbIndex(), destKey, keys);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long zInterStore(final int dbIndex, final K destKey, final K[] keys) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zInterStore].");
 		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zInterStore].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2888,14 +2812,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zInterStore(super.getDefaultDbIndex(), destKey, aggregate, weights, keys);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K> Long zInterStore(final int dbIndex, final K destKey, final Aggregate aggregate,
 			final int[] weights, final K[] keys) {
 		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zInterStore].");
 		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zInterStore].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
 
 			@Override
@@ -2923,14 +2846,13 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 		return zIncrBy(super.getDefaultDbIndex(), key, increment, member);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Double zIncrBy(final int dbIndex, final K key, final double increment, final V member) {
 		AssertUtils.assertNotNull(key, "Key can not be null of command [zIncrBy].");
 		AssertUtils.assertNotNull(key, "Member can not be null of command [zIncrBy].");
 		
-		final RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		final RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		final Serializer valueSerializer = selectValueSerializer(dbIndex);
 		return super.getRedisTemplate().execute(new RedisCallback<Double>() {
 
 			@Override

@@ -19,12 +19,7 @@
 package org.workin.nosql.redis.dao.spring;
 
 import java.lang.reflect.Field;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.springframework.data.redis.connection.DataType;
@@ -34,11 +29,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.DateUtils;
-import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.nosql.redis.RedisRepository;
 import org.workin.nosql.redis.dao.RedisDaoSupport;
+import org.workin.nosql.redis.serializer.SpringRedisSerializerProxy;
 
 /**
  * @description Redis数据访问接口支持类
@@ -48,18 +43,6 @@ import org.workin.nosql.redis.dao.RedisDaoSupport;
 public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 			
 	private RedisTemplate<?, ?> redisTemplate;
-	
-	/** 全局键序列化器 */
-	private RedisSerializer<?> globalKeySerializer;
-	
-	/** 全局值序列化器 */
-	private RedisSerializer<?> globalValueSerializer;
-	
-	/** 全局哈希键序列化器 */
-	private RedisSerializer<?> globalHashKeySerializer;
-	
-	/** 全局哈希值序列化器 */
-	private RedisSerializer<?> globalHashValueSerializer;
 	
 	public RedisTemplate<?, ?> getRedisTemplate() {
 		return redisTemplate;
@@ -74,69 +57,35 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 		super.afterPropertiesSet();
 		
 		if (this.redisTemplate == null)
-			throw new IllegalArgumentException(
-					"RedisTemplate object can not be null, please inject to spring container.");
+			throw new IllegalArgumentException("Property 'RedisTemplate' must not be null");
 		
-		this.setGlobalSerializers();
-		this.setDefaultDbIndex();
+		this.initializeGlobalSerializers();
+		this.initializeDefaultDbIndex();
 	}
 	
-	/**
-	 * @description 设置若干个全局序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	private void setGlobalSerializers() {
-		this.globalKeySerializer = this.redisTemplate.getKeySerializer();
-		this.globalValueSerializer = this.redisTemplate.getValueSerializer();
-		this.globalHashKeySerializer = this.redisTemplate.getHashKeySerializer();
-		this.globalHashValueSerializer = this.redisTemplate.getHashValueSerializer();
+	@Override
+	protected void initializeGlobalSerializers() {
+		if (getGlobalKeySerializer() == null)
+			setGlobalKeySerializer(new SpringRedisSerializerProxy(this.redisTemplate.getKeySerializer()));
+		
+		if (getGlobalValueSerializer() == null)
+			setGlobalValueSerializer(new SpringRedisSerializerProxy(this.redisTemplate.getValueSerializer()));
+		
+		if (getGlobalHashKeySerializer() == null)
+			setGlobalHashKeySerializer(new SpringRedisSerializerProxy(this.redisTemplate.getHashKeySerializer()));
+		
+		if (getGlobalHashValueSerializer() == null)
+			setGlobalHashValueSerializer(new SpringRedisSerializerProxy(this.redisTemplate.getHashValueSerializer()));
 	}
 	
-	/**
-	 * @description 设置默认连接库索引
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @throws Exception
-	 */
-	private void setDefaultDbIndex() throws Exception {
+	@Override
+	protected void initializeDefaultDbIndex() throws Exception {
 		RedisConnectionFactory connectionFactory = this.redisTemplate.getConnectionFactory();
 		Field dbIndex = ReflectionUtils.getField(connectionFactory, "dbIndex");
 		if (dbIndex != null)
 			this.defaultDbIndex = ReflectionUtils.getFieldValue(connectionFactory, dbIndex);
 		else
 			this.defaultDbIndex = 0;
-	}
-	
-	/**
-	 * @description 获取默认连接库的索引
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	protected int getDefaultDbIndex() {
-		return this.defaultDbIndex;
-	}
-	
-	/**
-	 * @description 获取指定索引库配置对应的全局过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndx
-	 * @return
-	 */
-	protected long getExpireSecond(int dbIndx) {
-		RedisRepository repository = this.repositoryManager.getRepository(dbIndx);
-		return repository != null ? getExpireSecond(repository) : 0L;
-	}
-	
-	/**
-	 * @description 获取指定库配置对应的全局过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param repository
-	 * @return
-	 */
-	protected long getExpireSecond(RedisRepository repository) {
-		String timeUnit = repository.getTimeUnit();
-		long expireTime = DateUtils.getSecond(repository.getExpireTime(),
-				StringUtils.safeString(timeUnit).trim().toLowerCase());
-		return expireTime;
 	}
 	
 	/**
@@ -222,257 +171,6 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/**
-	 * @description 选择指定索引库的键序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @return 
-	 */
-	protected RedisSerializer<?> selectKeySerializer(int dbIndex) {
-		if (repositoryManager != null) {
-			RedisRepository repository = repositoryManager.getRepository(dbIndex);
-			if (repository != null) {
-				RedisSerializer<?> keySerializer = repository.getKeySerializer();
-				return keySerializer != null ? keySerializer : globalKeySerializer;
-			} else
-				return globalKeySerializer;
-		} else
-			return globalKeySerializer;
-	}
-	
-	/**
-	 * @description 选择指定索引库的值序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @return
-	 */
-	protected RedisSerializer<?> selectValueSerializer(int dbIndex) {
-		if (repositoryManager != null) {
-			RedisRepository repository = repositoryManager.getRepository(dbIndex);
-			if (repository != null) {
-				RedisSerializer<?> valueSerializer = repository.getValueSerializer();
-				return valueSerializer != null ? valueSerializer : globalValueSerializer;
-			} else
-				return globalValueSerializer;
-		} else
-			return globalValueSerializer;
-	}
-	
-	/**
-	 * @description 选择指定索引库的哈希键序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @return
-	 */
-	protected RedisSerializer<?> selectHashKeySerializer(int dbIndex) {
-		if (repositoryManager != null) {
-			RedisRepository repository = repositoryManager.getRepository(dbIndex);
-			if (repository != null) {
-				RedisSerializer<?> hashKeySerializer = repository.getHashKeySerializer();
-				return hashKeySerializer != null ? hashKeySerializer : globalHashKeySerializer;
-			} else
-				return globalHashKeySerializer;
-		} else
-			return globalHashKeySerializer;
-	}
-	
-	/**
-	 * @description 选择指定索引库的哈希值序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @return
-	 */
-	protected RedisSerializer<?> selectHashValueSerializer(int dbIndex) {
-		if (repositoryManager != null) {
-			RedisRepository repository = repositoryManager.getRepository(dbIndex);
-			if (repository != null) {
-				RedisSerializer<?> hashValueSerializer = repository.getHashValueSerializer();
-				return hashValueSerializer != null ? hashValueSerializer : globalHashValueSerializer;
-			} else
-				return globalHashValueSerializer;
-		} else
-			return globalHashValueSerializer;
-	}
-	
-	/**
-	 * @description 将指定库的键值映射集序列化成Byte类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param kValues
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <K, V> Map<byte[], byte[]> serializeKeyValueToByteMap(int dbIndex, Map<K, V> kValues) {
-		RedisSerializer<K> fieldKeySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		Map<byte[], byte[]> result = new HashMap<byte[], byte[]>();
-		Iterator<Entry<K, V>> iterator = kValues.entrySet().iterator();
-		while(iterator.hasNext()) {
-			Entry<K, V> entry = iterator.next();
-			result.put(fieldKeySerializer.serialize(entry.getKey()),
-					valueSerializer.serialize(entry.getValue()));
-		}
-		return result;
-	}
-	
-	/**
-	 * @description 将指定库的域值映射集序列化成Byte类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param fValues
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <F, V> Map<byte[], byte[]> serializeFiledValueToByteMap(int dbIndex, Map<F, V> fValues) {
-		RedisSerializer<F> fieldKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectHashValueSerializer(dbIndex);
-		Map<byte[], byte[]> result = new HashMap<byte[], byte[]>();
-		Iterator<Entry<F, V>> iterator = fValues.entrySet().iterator();
-		while(iterator.hasNext()) {
-			Entry<F, V> entry = iterator.next();
-			result.put(fieldKeySerializer.serialize(entry.getKey()),
-					valueSerializer.serialize(entry.getValue()));
-		}
-		return result;
-	}
-	
-	/**
-	 * @description 将指定库的多个键字节序列化到Byte类型的二维数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param keys
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <K> byte[][] serializeKeysToArray(int dbIndex, K[] keys) {
-		RedisSerializer<K> keySerializer = (RedisSerializer<K>) selectKeySerializer(dbIndex);
-		List<byte[]> list = CollectionUtils.newArrayList();
-		for (K key : keys)
-			list.add(keySerializer.serialize(key));
-		
-		return CollectionUtils.toArray(list);
-	}
-	
-	/**
-	 * @description 将指定库的多个值字节序列化到Byte类型的二维数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param values
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <V> byte[][] serializeValuesToArray(int dbIndex, V[] values) {
-		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		List<byte[]> list = CollectionUtils.newArrayList();
-		for (V value : values)
-			list.add(valueSerializer.serialize(value));
-		
-		return CollectionUtils.toArray(list);
-	}
-	
-	/**
-	 * @description 将指定库的多个域字节序列化到Byte类型的二维数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param fileds
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <F> byte[][] serializeFiledsToArray(int dbIndex, F[] fileds) {
-		RedisSerializer<F> keySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		List<byte[]> list = CollectionUtils.newArrayList();
-		for (F filed : fileds)
-			list.add(keySerializer.serialize(filed));
-		
-		return CollectionUtils.toArray(list);
-	}
-	
-	/**
-	 * @description 将指定库的多个值字节反序列化到列表中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param valueBytes
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <V> List<V> deserializeValueByteToList(int dbIndex, Collection<byte[]> valueBytes) {
-		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		List<V> list = CollectionUtils.newArrayList();
-		for (byte[] valueByte : valueBytes) 
-			list.add(valueSerializer.deserialize(valueByte));
-		return list;
-	}
-	
-	/**
-	 * @description 将指定库的多个值字节反序列化到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param valueBytes
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <V> Set<V> deserializeValueByteToSet(int dbIndex, Collection<byte[]> valueBytes) {
-		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
-		Set<V> set = CollectionUtils.newLinkedHashSet();
-		for (byte[] valueByte : valueBytes) 
-			set.add(valueSerializer.deserialize(valueByte));
-		return set;
-	}
-	
-	
-	/**
-	 * @description 将指定库的多个哈希值字节反序列化到列表中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param hashValueBytes
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <V> List<V> deserializeHashValueByteToList(int dbIndex, List<byte[]> hashValueBytes) {
-		RedisSerializer<V> hashValueSerializer = (RedisSerializer<V>) selectHashValueSerializer(dbIndex);
-		List<V> list = CollectionUtils.newArrayList();
-		for (byte[] hashValueByte : hashValueBytes) 
-			list.add(hashValueSerializer.deserialize(hashValueByte));
-		return list;
-	}
-	
-	/**
-	 * @description 将指定库的多个域值字节反序列化到映射集中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param fieldValueBytes
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <F, V> Map<F, V> deserializeFiledValueByteToMap(int dbIndex, Map<byte[], byte[]> fieldValueBytes) {
-		RedisSerializer<F> hashKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		RedisSerializer<V> hashValueSerializer = (RedisSerializer<V>) selectHashValueSerializer(dbIndex);
-		Map<F, V> map = MapUtils.newLinkedHashMap();
-		if (MapUtils.isNotEmpty(fieldValueBytes)) {
-			Set<Entry<byte[], byte[]>> entrySet = fieldValueBytes.entrySet();
-			for (Entry<byte[], byte[]> entry : entrySet) 
-				map.put(hashKeySerializer.deserialize(entry.getKey()),
-						hashValueSerializer.deserialize(entry.getValue()));
-		}
-		return map;
-	}
-	
-	/**
-	 * @description 将指定库的多个域字节反序列化到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param fieldBytes
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <F> Set<F> deserializeFiledBytesToSet(int dbIndex, Set<byte[]> fieldBytes) {
-		RedisSerializer<F> hashKeySerializer = (RedisSerializer<F>) selectHashKeySerializer(dbIndex);
-		Set<F> set = CollectionUtils.newLinkedHashSet();
-		for (byte[] fieldByte : fieldBytes) 
-			set.add(hashKeySerializer.deserialize(fieldByte));
-		return set;
-	}
-	
-	/**
 	 * @description 获取不同类型键对应的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dataType
@@ -482,8 +180,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> listByDataType(DataType dataType,
-			RedisConnection connection, int dbIndex, byte[] targetKey) {
+	protected <V> List<V> listByDataType(DataType dataType, RedisConnection connection, int dbIndex, byte[] targetKey) {
 		try {
 			// 执行当前对象的xxxTypeList方法后返回结果，其中xxx表示DataType枚举的code值
 			return (List<V>) ReflectionUtils.invokeMethod(this, dataType.code() + "TypeList", 
@@ -573,5 +270,4 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 		return deserializeHashValueByteToList(dbIndex, connection.hVals(targetKey));
 	}
 
-		
 }

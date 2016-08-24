@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016年7月12日
+ * Create Date : 2016-7-12
  */
 
 package org.workin.serialization.json;
