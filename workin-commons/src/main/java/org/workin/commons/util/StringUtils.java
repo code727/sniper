@@ -18,7 +18,6 @@
 
 package org.workin.commons.util;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -775,8 +774,10 @@ public class StringUtils {
 		
 		int startIndex = indexOf(str, start, 0, ignoreCase);
 		if (startIndex > -1) {
+			/* 从start标记处开始查找end标记 */
 			startIndex = startIndex + start.length();
 			int endIndex = indexOfIgnoreCase(str, end, startIndex);
+			
 			if (endIndex > -1)
 				return str.substring(startIndex, endIndex);
 		} 
@@ -817,22 +818,23 @@ public class StringUtils {
 	 * @return
 	 */
 	public static List<String> leftSubstringAll(String str, String start, String end, boolean ignoreCase) {
-		List<String> list = new ArrayList<String>();
+		List<String> list = CollectionUtils.newLinkedList();
 		if (isBlank(start) || isBlank(end))
 			return list;
 		
 		int startIndex = 0;
 		int endIndex;
+		int startLength = start.length();
 		do {
 			startIndex = indexOf(str, start, startIndex, ignoreCase);
 			if (startIndex > -1) {
-				startIndex = startIndex + start.length();
+				/* 从start标记处开始查找end标记 */
+				startIndex = startIndex + startLength;
 				endIndex = indexOf(str, end, startIndex, ignoreCase);
-				if (endIndex > -1) {
+				
+				if (endIndex > -1) 
 					list.add(str.substring(startIndex, endIndex));
-					// 更新下一次循环的起始位置
-					startIndex = endIndex + end.length();
-				} else
+				else
 					break;
 			} else
 				break;
@@ -880,11 +882,10 @@ public class StringUtils {
 		
 		int endIndex = lastIndexOf(str, end, ignoreCase);
 		if (endIndex > -1) {
-			int startIndex = lastIndexOf(str, start, ignoreCase);
-			if (startIndex > -1) {
-				startIndex = startIndex + start.length();
-				return str.substring(startIndex, endIndex);
-			}
+			// 从end标记处开始查询start标记
+			int startIndex = lastIndexOf(str, start, endIndex, ignoreCase);
+			if (startIndex > -1) 
+				return str.substring(startIndex + start.length(), endIndex);
 		}
 		return null;
 	}
@@ -923,25 +924,24 @@ public class StringUtils {
 	 * @return
 	 */
 	public static List<String> rightSubstringAll(String str, String start, String end, boolean ignoreCase) {
-		List<String> list = new ArrayList<String>();
+		List<String> list = CollectionUtils.newLinkedList();
 		if (isBlank(start) || isBlank(end))
 			return list;
 		
 		int startIndex = length(str);
 		int endIndex;
-		if (startIndex > 0) {
-			do {
-				endIndex = lastIndexOf(str, end, startIndex, ignoreCase);
-				if (endIndex > -1) {
-					startIndex = lastIndexOf(str, start, startIndex - start.length(), ignoreCase);
-					if (startIndex > -1) {
-						list.add(str.substring(startIndex + start.length(), endIndex));
-					} else
-						break;
-				} else
+		int startLength = start.length();
+		do {
+			endIndex = lastIndexOf(str, end, startIndex, ignoreCase);
+			if (endIndex > -1) {
+				startIndex = lastIndexOf(str, start, endIndex, ignoreCase);
+				if (startIndex > -1) 
+					list.add(str.substring(startIndex + startLength, endIndex));
+				else
 					break;
-			} while (true);
-		} 
+			} else
+				break;
+		} while (true);
 		
 		return list;
 	}
