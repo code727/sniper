@@ -24,7 +24,7 @@ import java.util.Map;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.workin.persistence.sqlmap.dao.SqlMapPersistenceDao;
+import org.workin.persistence.sqlmap.dao.SqlMapDao;
 
 /**
  * @description SQL映射持久化服务抽象类
@@ -35,16 +35,16 @@ public class AbstractSqlMapPersistenceService<T> implements
 		SqlMapPersistenceService<T>, InitializingBean {
 	
 	@Autowired
-	protected SqlMapPersistenceDao<T> sqlMapPersistenceDao;
+	protected SqlMapDao<T> sqlMapPersistenceDao;
 
 	@Override
 	public void setSqlMapPersistenceDao(
-			SqlMapPersistenceDao<T> sqlMapPersistenceDao) {
+			SqlMapDao<T> sqlMapPersistenceDao) {
 		this.sqlMapPersistenceDao = sqlMapPersistenceDao;
 	}
 
 	@Override
-	public SqlMapPersistenceDao<T> getSqlMapPersistenceDao() {
+	public SqlMapDao<T> getSqlMapPersistenceDao() {
 		return this.sqlMapPersistenceDao;
 	}
 

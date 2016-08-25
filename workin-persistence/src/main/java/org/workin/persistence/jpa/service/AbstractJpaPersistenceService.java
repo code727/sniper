@@ -26,7 +26,7 @@ import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.util.ClassUtils;
-import org.workin.persistence.jpa.dao.JpaPersistenceDao;
+import org.workin.persistence.jpa.dao.JpaDao;
 import org.workin.persistence.sqlmap.dao.SqlMapQuery;
 
 /**
@@ -40,19 +40,19 @@ public abstract class AbstractJpaPersistenceService<T, PK extends Serializable>
 	private static final Logger logger = LoggerFactory.getLogger(AbstractJpaPersistenceService.class);
 	
 	@Autowired
-	protected JpaPersistenceDao<T, PK> jpaPersistenceDao;
+	protected JpaDao<T, PK> jpaDao;
 	
 	@Autowired(required = false)
 	protected SqlMapQuery<T> sqlMapQuery;
 
 	@Override
-	public void setJpaPersistenceDao(JpaPersistenceDao<T, PK> jpaPersistenceDao) {
-		this.jpaPersistenceDao = jpaPersistenceDao;
+	public void setJpaDao(JpaDao<T, PK> jpaDao) {
+		this.jpaDao = jpaDao;
 	}
 	
 	@Override
-	public JpaPersistenceDao<T, PK> getJpaPersistenceDao() {
-		return this.jpaPersistenceDao;
+	public JpaDao<T, PK> getJpaDao() {
+		return this.jpaDao;
 	}
 	
 	public SqlMapQuery<T> getSqlMapQuery() {
@@ -66,12 +66,12 @@ public abstract class AbstractJpaPersistenceService<T, PK extends Serializable>
 	@SuppressWarnings("unchecked")
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (this.jpaPersistenceDao == null)
-			throw new BeanCreationException("JpaPersistenceDao object can not be null, please inject to spring container.");
+		if (this.jpaDao == null)
+			throw new BeanCreationException("JpaDao object can not be null, please inject to spring container.");
 		
 		Class<T> entityType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 		// 将当前服务类管理的实体类型传递给持久化DAO，使DAO接口的方法能正常工作
-		this.jpaPersistenceDao.setEntityClass(entityType);
+		this.jpaDao.setEntityClass(entityType);
 		if (sqlMapQuery != null) {
 			// 同时开启ibatis/mybatis的查询接口，弥补JPA针对复杂查询难以处理的问题
 			sqlMapQuery.setEntityClass(entityType);

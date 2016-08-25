@@ -21,7 +21,7 @@ package org.workin.persistence.sqlmap.service;
 import java.util.List;
 import java.util.Map;
 
-import org.workin.persistence.sqlmap.dao.SqlMapPersistenceDao;
+import org.workin.persistence.sqlmap.dao.SqlMapDao;
 
 /**
  * @description SQL映射持久化服务接口
@@ -35,14 +35,14 @@ public interface SqlMapPersistenceService<T> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sqlMapPersistenceDao
 	 */
-	public void setSqlMapPersistenceDao(SqlMapPersistenceDao<T> sqlMapPersistenceDao);
+	public void setSqlMapPersistenceDao(SqlMapDao<T> sqlMapPersistenceDao);
 	
 	/**
 	 * @description 获取持久化DAO接口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public SqlMapPersistenceDao<T> getSqlMapPersistenceDao();
+	public SqlMapDao<T> getSqlMapPersistenceDao();
 	
 	/**
 	 * @description 执行id对应的insert语句后返回结果

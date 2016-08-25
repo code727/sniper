@@ -26,7 +26,7 @@ import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.util.ClassUtils;
-import org.workin.persistence.hibernate.dao.HibernatePersistenceDao;
+import org.workin.persistence.hibernate.dao.HibernateDao;
 import org.workin.persistence.sqlmap.dao.SqlMapQuery;
 
 /**
@@ -40,19 +40,19 @@ public abstract class AbstractHibernatePersistenceService<T, PK extends Serializ
 	private static final Logger logger = LoggerFactory.getLogger(AbstractHibernatePersistenceService.class);
 	
 	@Autowired
-	protected HibernatePersistenceDao<T, PK> hibernatePersistenceDao;
+	protected HibernateDao<T, PK> hibernatePersistenceDao;
 	
 	@Autowired(required = false)
 	protected SqlMapQuery<T> sqlMapQuery;
 	
 	@Override
-	public HibernatePersistenceDao<T, PK> getHibernatePersistenceDao() {
+	public HibernateDao<T, PK> getHibernatePersistenceDao() {
 		return hibernatePersistenceDao;
 	}
 
 	@Override
 	public void setHibernatePersistenceDao(
-			HibernatePersistenceDao<T, PK> hibernatePersistenceDao) {
+			HibernateDao<T, PK> hibernatePersistenceDao) {
 		this.hibernatePersistenceDao = hibernatePersistenceDao;
 	}
 
@@ -69,7 +69,6 @@ public abstract class AbstractHibernatePersistenceService<T, PK extends Serializ
 	public void afterPropertiesSet() throws Exception {
 		if (hibernatePersistenceDao == null)
 			throw new BeanCreationException("HibernatePersistenceDao object can not be null, please inject to spring container.");
-		
 		
 		Class<T> entityType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 		// 将当前服务类管理的实体类型传递给持久化DAO，使DAO接口的方法能正常工作

@@ -31,52 +31,52 @@ public abstract class AbstractJpaCrudService<T, PK extends Serializable> extends
 		
 	@Override
 	public void persist(T entity) {
-		this.jpaPersistenceDao.persist(entity);
+		this.jpaDao.persist(entity);
 	}
 
 	@Override
 	public void batchPersist(List<T> entityList) {
-		this.jpaPersistenceDao.batchPersist(entityList);
+		this.jpaDao.batchPersist(entityList);
 	}
 
 	@Override
 	public T merge(T entity) {
-		return this.jpaPersistenceDao.merge(entity);
+		return this.jpaDao.merge(entity);
 	}
 
 	@Override
 	public List<T> batchMerge(List<T> entityList) {
-		return this.jpaPersistenceDao.batchMerge(entityList);
+		return this.jpaDao.batchMerge(entityList);
 	}
 
 	@Override
 	public void remove(T entity) {
-		this.jpaPersistenceDao.remove(entity);
+		this.jpaDao.remove(entity);
 	}
 
 	@Override
 	public void remove(PK primaryKey) {
-		this.jpaPersistenceDao.remove(primaryKey);
+		this.jpaDao.remove(primaryKey);
 	}
 
 	@Override
 	public void batchRemove(List<T> entityList) {
-		this.jpaPersistenceDao.batchRemove(entityList);
+		this.jpaDao.batchRemove(entityList);
 	}
 
 	@Override
 	public T findById(PK primaryKey) {
-		return this.jpaPersistenceDao.findById(primaryKey);
+		return this.jpaDao.findById(primaryKey);
 	}
 
 	@Override
 	public List<T> findAll() {
-		return this.jpaPersistenceDao.findAll();
+		return this.jpaDao.findAll();
 	}
 
 	@Override
 	public List<T> findAllDistinct() {
-		return this.jpaPersistenceDao.findAllDistinct();
+		return this.jpaDao.findAllDistinct();
 	}
 
 }

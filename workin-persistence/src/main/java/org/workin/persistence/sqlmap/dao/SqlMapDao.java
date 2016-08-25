@@ -19,11 +19,11 @@
 package org.workin.persistence.sqlmap.dao;
 
 /**
- * @description SQL映射持久化DAO接口
+ * @description SQL映射DAO接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SqlMapPersistenceDao<T> extends SqlMapQuery<T> {
+public interface SqlMapDao<T> extends SqlMapQuery<T> {
 	
 	/**
 	 * @description 执行id对应的insert语句后返回结果

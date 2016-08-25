@@ -20,7 +20,7 @@ package org.workin.persistence.hibernate.service;
 
 import java.io.Serializable;
 
-import org.workin.persistence.hibernate.dao.HibernatePersistenceDao;
+import org.workin.persistence.hibernate.dao.HibernateDao;
 
 /**
  * @description Hibernate持久化服务接口
@@ -34,13 +34,13 @@ public interface HibernatePersistenceService<T, PK extends Serializable> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param jpaPersistenceDao
 	 */
-	public void setHibernatePersistenceDao(HibernatePersistenceDao<T, PK> hibernatePersistenceDao);
+	public void setHibernatePersistenceDao(HibernateDao<T, PK> hibernatePersistenceDao);
 	
 	/**
 	 * @description 获取持久化DAO接口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public HibernatePersistenceDao<T, PK> getHibernatePersistenceDao();
+	public HibernateDao<T, PK> getHibernatePersistenceDao();
 
 }

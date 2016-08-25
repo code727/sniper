@@ -12,57 +12,118 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- * Create Date : 2015-2-3
+ *  
+ * Create Date : 2015-2-2
  */
 
 package org.workin.persistence.hibernate.dao;
 
 import java.io.Serializable;
+import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.workin.persistence.FilterQuery;
-import org.workin.persistence.GenericDao;
-import org.workin.persistence.jpa.dao.JpaNamedQuery;
-import org.workin.persistence.jpa.dao.JpaNativePersistence;
-import org.workin.persistence.jpa.dao.JpaNativeQuery;
+import org.workin.persistence.jpa.dao.JpaPersistenceDao;
 
 /**
- * @description Hibernate持久化数据访问接口
+ * @description Hibernate持久化接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface HibernatePersistenceDao<T, Pk extends Serializable> extends
-		HibernatePersistence<T, Pk>, HibernateQuery<T, Pk>,
-		JpaNamedQuery<T>, JpaNativeQuery<T>, JpaNativePersistence,
-		HibernateCriteriaQuery<T>, HibernateExampleQuery<T>, FilterQuery<T>, GenericDao<T> {
-		
-	/**
-	 * @description 设置SessionFactory对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sessionFactory
-	 */
-	public void setSessionFactory(SessionFactory sessionFactory);
+public interface HibernatePersistenceDao<T, PK extends Serializable> extends
+		JpaPersistenceDao<T, PK> { 
 	
 	/**
-	 * @description 获取SessionFactory对象
+	 * @description 根据名称持久化指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entityName
+	 * @param entity
+	 */
+	public void persist(String entityName, T entity);
+	
+	/**
+	 * @description 根据名称持久化指定的实体
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entityName
+	 * @param entityList
+	 */
+	public void batchPersist(String entityName, List<T> entityList);
+	
+	/**
+	 * @description 根据名称合并指定的实体
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entityName
+	 * @param entity
 	 * @return
 	 */
-	public SessionFactory getSessionFactory();
+	public T merge(String entityName, T entity);
+	
+	/**
+	 * @description 根据名称批量合并指定的实体
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entityName
+	 * @param entityList
+	 * @return
+	 */
+	public List<T> batchMerge(String entityName, List<T> entityList);
+	
+	/**
+	 * @description 根据名称删除指定的实体
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entityName
+	 * @param entity
+	 */
+	public void remove(String entityName, T entity);
 
-	/**
-	 * @description 打开一个新会话
+	/** 
+	 * @description 根据名称批量删除指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
+	 * @param entityName
+	 * @param entityList 
 	 */
-	public Session openSession();
+	void batchRemove(String entityName, List<T> entityList);
 	
 	/**
-	 * @description 获取当前会话
+	 * @description 新增保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
+	 * @param entity
 	 */
-	public Session getCurrentSession();
+	public PK save(T entity);
+	
+	/**
+	 * @description 根据名称新增保存实体
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entityName
+	 * @param entity
+	 */
+	public PK save(String entityName, T entity);
+	
+	/**
+	 * @description 更新保存实体
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entity
+	 */
+	public void update(T entity);
+	
+	/**
+	 * @description 根据名称更新保存实体
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entityName
+	 * @param entity
+	 */
+	public void update(String entityName, T entity);
+	
+	/**
+	 * @description 新增/更新保存实体
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entity
+	 */
+	public void saveOrUpdate(T entity);
+	
+	/**
+	 * @description 根据名称新增/更新保存实体
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entityName
+	 * @param entity
+	 */
+	public void saveOrUpdate(String entityName, T entity);
+		
 }

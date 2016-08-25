@@ -16,24 +16,22 @@
  * Create Date : 2015-2-2
  */
 
-package org.workin.persistence.hibernate.v3.dao;
+package org.workin.persistence.hibernate.v4.dao;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Projections;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.stereotype.Repository;
 import org.workin.commons.pagination.PagingResult;
 import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.AssertUtils;
@@ -42,7 +40,7 @@ import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.persistence.hibernate.dao.HibernateCriteriaQueryCallback;
 import org.workin.persistence.hibernate.dao.HibernateCriteriaQueryCallbackDao;
-import org.workin.persistence.hibernate.dao.HibernatePersistenceDao;
+import org.workin.persistence.hibernate.dao.HibernateDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
 import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
@@ -54,8 +52,9 @@ import org.workin.persistence.util.PersistenceUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
-	Hibernate3DaoSupport implements HibernatePersistenceDao<T, PK> {
+@Repository
+public class Hibernate4DaoImpl<T, PK extends Serializable> extends
+	Hibernate4DaoSupport implements HibernateDao<T, PK> {
 	
 	/** 当前DAO所关联的实体类型 */
 	private Class<T> entityClass;
@@ -81,9 +80,9 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public void persist(String entityName, T entity) {
 		if (StringUtils.isNotBlank(entityName))
-			getHibernateTemplate().persist(entityName.trim(), entity);
+			getCurrentSession().persist(entityName.trim(), entity);
 		else
-			getHibernateTemplate().persist(entity);
+			getCurrentSession().persist(entity);
 	};
 
 	@Override
@@ -93,52 +92,35 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public void batchPersist(final String entityName, final List<T> entityList) {
-		getHibernateTemplate().execute(new HibernateCallback<T>() {
-
-			@Override
-			public T doInHibernate(Session session) throws HibernateException, SQLException {
-				
-				int max = entityList.size();
-				if (StringUtils.isNotBlank(entityName)) {
-					String name = entityName.trim();
-					for (int i = 0; i < max; i++) {
-						session.persist(name, entityList.get(i));
-						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-							session.flush();
-					}
-				} else {
-					for (int i = 0; i < max; i++) {
-						session.persist(entityList.get(i));
-						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-							session.flush();
-					}
-				}
-				return null;
+		int max = entityList.size();
+		if (StringUtils.isNotBlank(entityName)) {
+			String name = entityName.trim();
+			for (int i = 0; i < max; i++) {
+				getCurrentSession().persist(name, entityList.get(i));
+				// 最大1000条记录保存一次
+				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+					getCurrentSession().flush();
 			}
-			
-		});
+		} else {
+			for (int i = 0; i < max; i++) {
+				getCurrentSession().persist(entityList.get(i));
+				// 最大1000条记录保存一次
+				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+					getCurrentSession().flush();
+			}
+		}
 	}
 
 	@Override
-	public T merge(final T entity) {
-		return getHibernateTemplate().execute(new HibernateCallback<T>() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public T doInHibernate(Session session) throws HibernateException,
-					SQLException {
-				return (T) session.merge(entity);
-			}
-		});
-//		return merge(null, entity);
+	public T merge(T entity) {
+		return merge(null, entity);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public T merge(String entityName, T entity) {
-		return StringUtils.isNotBlank(entityName) ? getHibernateTemplate()
-				.merge(entityName.trim(), entity) : getHibernateTemplate().merge(entity);
+		return (T) (StringUtils.isNotBlank(entityName) ? getCurrentSession()
+				.merge(entityName.trim(), entity) : getCurrentSession().merge(entity));
 	}
 
 	@Override
@@ -146,38 +128,33 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 		return batchMerge(null, entityList);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> batchMerge(final String entityName, final List<T> entityList) {
-		return (List<T>) getHibernateTemplate().execute(new HibernateCallback<List<T>>() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
-				List<T> list = CollectionUtils.newArrayList();
-				int max = entityList.size();
-				T entity;
-				if (StringUtils.isNotBlank(entityName)) {
-					for (int i = 0; i < max; i++) {
-						entity = entityList.get(i);
-						if (entity != null)
-							list.add((T) session.merge(entityName, entityList.get(i)));
-						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-							session.flush();
-					}
-				} else {
-					for (int i = 0; i < max; i++) {
-						entity = entityList.get(i);
-						if (entity != null)
-							list.add((T) session.merge(entityList.get(i)));
-						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-							session.flush();
-					}
-				}
-				return list;
+		int max = entityList.size();
+		List<T> list = CollectionUtils.newArrayList();
+		T entity;
+		if (StringUtils.isNotBlank(entityName)) {
+			for (int i = 0; i < max; i++) {
+				entity = entityList.get(i);
+				if (entity != null)
+					list.add((T) getCurrentSession().merge(entityName, entityList.get(i)));
+				// 最大1000条记录保存一次
+				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+					getCurrentSession().flush();
 			}
-		});
+		} else {
+			for (int i = 0; i < max; i++) {
+				entity = entityList.get(i);
+				if (entity != null)
+					list.add((T) getCurrentSession().merge(entityList.get(i)));
+				// 最大1000条记录保存一次
+				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+					getCurrentSession().flush();
+			}
+		}
+		return list;
+		
 	}
 
 	@Override
@@ -195,9 +172,9 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public void remove(String entityName, T entity) {
 		if (StringUtils.isNotBlank(entityName))
-			getHibernateTemplate().delete(entityName, entity);
+			getCurrentSession().delete(entityName, entity);
 		else
-			getHibernateTemplate().delete(entity);
+			getCurrentSession().delete(entity);
 	}
 	
 	@Override
@@ -207,49 +184,42 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public void batchRemove(final String entityName, final List<T> entityList) {
-		getHibernateTemplate().execute(new HibernateCallback<T>() {
-
-			@Override
-			public T doInHibernate(Session session) throws HibernateException, SQLException {
-				int max = entityList.size();
-				if (StringUtils.isNotBlank(entityName)) {
-					for (int i = 0; i < max; i++) {
-						session.delete(entityName, entityList.get(i));
-						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-							session.flush();
-					}
-				} else {
-					for (int i = 0; i < max; i++) {
-						session.delete(entityList.get(i));
-						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-							session.flush();
-					}
-				}
-				return null;
+		int max = entityList.size();
+		if (StringUtils.isNotBlank(entityName)) {
+			for (int i = 0; i < max; i++) {
+				getCurrentSession().delete(entityName, entityList.get(i));
+				// 最大1000条记录保存一次
+				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+					getCurrentSession().flush();
 			}
-		});
+		} else {
+			for (int i = 0; i < max; i++) {
+				getCurrentSession().delete(entityList.get(i));
+				// 最大1000条记录保存一次
+				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+					getCurrentSession().flush();
+			}
+		}
 	}
 	
 	@Override
 	public void refresh(T entity) {
-		getHibernateTemplate().refresh(entity);
+		getCurrentSession().refresh(entity);
 	}
 
 	@Override
 	public void flush() {
-		getHibernateTemplate().flush();
+		getCurrentSession().flush();
 	}
 
 	@Override
 	public void clear() {
-		getHibernateTemplate().clear();
+		getCurrentSession().clear();
 	}
 
 	@Override
 	public boolean contains(T entity) {
-		return getHibernateTemplate().contains(entity);
+		return getCurrentSession().contains(entity);
 	}
 	
 	@Override
@@ -265,29 +235,16 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public int execute(final String ql, final Object[] values) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<Integer>() {
-
-			@Override
-			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(ql);
-				setQueryParameters(query, values);
-				return query.executeUpdate();
-			}
-		});
+		Query query = getCurrentSession().createQuery(ql);
+		setQueryParameters(query, values);
+		return query.executeUpdate();
 	}
 
 	@Override
 	public int execute(final String ql, final Map<String, ?> paramMap) {
-		return getHibernateTemplate().execute(new HibernateCallback<Integer>() {
-
-			@Override
-			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(ql);
-				setQueryNamedParameters(query, paramMap);
-				return query.executeUpdate();
-			}
-		});
+		Query query = getCurrentSession().createQuery(ql);
+		setQueryNamedParameters(query, paramMap);
+		return query.executeUpdate();
 	}
 
 	@Override
@@ -298,8 +255,8 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public PK save(String entityName, T entity) {
-		return (PK) (StringUtils.isNotBlank(entityName) ? getHibernateTemplate()
-				.save(entityName, entity) : getHibernateTemplate().save(entity));
+		return (PK) (StringUtils.isNotBlank(entityName) ? getCurrentSession()
+				.save(entityName, entity) : getCurrentSession().save(entity));
 	}
 
 	@Override
@@ -310,9 +267,9 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public void update(String entityName, T entity) {
 		if (StringUtils.isNotBlank(entityName))
-			getHibernateTemplate().update(entityName, entity);
+			getCurrentSession().update(entityName, entity);
 		else
-			getHibernateTemplate().update(entity);
+			getCurrentSession().update(entity);
 	}
 
 	@Override
@@ -323,9 +280,9 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public void saveOrUpdate(String entityName, T entity) {
 		if (StringUtils.isNotBlank(entityName))
-			getHibernateTemplate().saveOrUpdate(entityName, entity);
+			getCurrentSession().saveOrUpdate(entityName, entity);
 		else
-			getHibernateTemplate().saveOrUpdate(entity);
+			getCurrentSession().saveOrUpdate(entity);
 	}
 	
 	@Override
@@ -348,36 +305,34 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 		return loadById(entityName, primaryKey, (LockMode) null);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public T loadById(String entityName, PK primaryKey, LockMode lockMode) {
-		return StringUtils.isNotBlank(entityName) ? 
-				(T) getHibernateTemplate().load(entityName.trim(), primaryKey, lockMode) :
-					getHibernateTemplate().load(this.getEntityClass(), primaryKey, lockMode);
+		return (T) (StringUtils.isNotBlank(entityName) ? 
+				getCurrentSession().load(entityName.trim(), primaryKey, lockMode) :
+					getCurrentSession().load(this.getEntityClass(), primaryKey, lockMode));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T loadById(final String entityName, final PK primaryKey, final LockOptions lockOptions) {
-		return getHibernateTemplate().execute(new HibernateCallback<T>() {
-			
-			@SuppressWarnings("unchecked")
-			@Override
-			public T doInHibernate(Session session) throws HibernateException, SQLException {
-				if (StringUtils.isNotBlank(entityName)) 
-					return (T) (lockOptions != null ? 
-							session.load(entityName.trim(), primaryKey, lockOptions) : 
-								session.load(entityName.trim(), primaryKey));
-				else
-					return (T) (lockOptions != null ? 
-							session.load(getEntityClass(), primaryKey, lockOptions) :
-								session.load(getEntityClass(), primaryKey));
-			}
-		});
+		if (StringUtils.isNotBlank(entityName)) 
+			return (T) (lockOptions != null ? 
+					getCurrentSession().load(entityName.trim(), primaryKey, lockOptions) : 
+						getCurrentSession().load(entityName.trim(), primaryKey));
+		else
+			return (T) (lockOptions != null ? 
+					getCurrentSession().load(getEntityClass(), primaryKey, lockOptions) :
+						getCurrentSession().load(getEntityClass(), primaryKey));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> loadAll() {
-		return getHibernateTemplate().loadAll(this.getEntityClass());
+		Criteria criteria = getCurrentSession().createCriteria(entityClass);
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		prepareCriteria(criteria);
+		return criteria.list();
 	}
 
 	@Override
@@ -406,31 +361,25 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 		return getById(entityName, primaryKey, (LockMode) null);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public T getById(String entityName, PK primaryKey, LockMode lockMode) {
-		return StringUtils.isNotBlank(entityName) ? 
-				(T) getHibernateTemplate().get(entityName.trim(), primaryKey, lockMode) :
-					getHibernateTemplate().get(this.getEntityClass(), primaryKey, lockMode);
+		return (T) (StringUtils.isNotBlank(entityName) ? 
+					getCurrentSession().get(entityName.trim(), primaryKey, lockMode) :
+					getCurrentSession().get(this.getEntityClass(), primaryKey, lockMode));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T getById(final String entityName, final PK primaryKey, final LockOptions lockOptions) {
-		return getHibernateTemplate().execute(new HibernateCallback<T>() {
-			
-			@SuppressWarnings("unchecked")
-			@Override
-			public T doInHibernate(Session session) throws HibernateException, SQLException {
-				if (StringUtils.isNotBlank(entityName)) 
-					return (T) (lockOptions != null ? 
-							session.get(entityName.trim(), primaryKey, lockOptions) : 
-								session.load(entityName.trim(), primaryKey));
-				else
-					return (T) (lockOptions != null ? 
-							session.get(getEntityClass(), primaryKey, lockOptions) :
-								session.load(getEntityClass(), primaryKey));
-			}
-		});
+		if (StringUtils.isNotBlank(entityName)) 
+			return (T) (lockOptions != null ? 
+					getCurrentSession().get(entityName.trim(), primaryKey, lockOptions) : 
+						getCurrentSession().load(entityName.trim(), primaryKey));
+		else
+			return (T) (lockOptions != null ? 
+					getCurrentSession().get(getEntityClass(), primaryKey, lockOptions) :
+						getCurrentSession().load(getEntityClass(), primaryKey));
 	}
 	
 	@Override
@@ -465,19 +414,12 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 		return findUniqueByQueryString(this.getEntityClass(), ql, values);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R findUniqueByQueryString(Class<R> resultClass, final String ql, final Object[] values) {
-			
-		return getHibernateTemplate().execute(new HibernateCallback<R>() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public R doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(ql);
-				setQueryParameters(query, values);
-				return (R) query.uniqueResult();
-			}
-		});
+		Query query = getCurrentSession().createQuery(ql);
+		setQueryParameters(query, values);
+		return (R) query.uniqueResult();
 	}
 
 	@Override
@@ -485,19 +427,12 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 		return findUniqueByQueryString(this.getEntityClass(), ql, paramMap); 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R findUniqueByQueryString(Class<R> resultClass, final String ql, final Map<String, ?> paramMap) {
-			
-		return getHibernateTemplate().execute(new HibernateCallback<R>() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public R doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(ql);
-				setQueryNamedParameters(query, paramMap);
-				return (R) query.uniqueResult();
-			}
-		});
+		Query query = getCurrentSession().createQuery(ql);
+		setQueryNamedParameters(query, paramMap);
+		return (R) query.uniqueResult();
 	}
 
 	@Override
@@ -549,16 +484,9 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public <R> List<R> find(Class<R> resultClass, final String ql,
 			final Object[] values, final int start, final int maxRows) {
-		
-		return getHibernateTemplate().executeFind(new HibernateCallback<List<R>>() {
-
-			@Override
-			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(ql);
-				setQueryParameters(query, values, start, maxRows);
-				return query.list();
-			}
-		});
+		Query query = getCurrentSession().createQuery(ql);
+		setQueryParameters(query, values, start, maxRows);
+		return query.list();
 	}
 	
 	@Override
@@ -570,16 +498,9 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public <R> List<R> find(Class<R> resultClass, final String ql,
 			final Map<String, ?> paramMap, final int start, final int maxRows) {
-		
-		return getHibernateTemplate().executeFind(new HibernateCallback<List<R>>() {
-
-			@Override
-			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(ql);
-				setQueryNamedParameters(query, paramMap, start, maxRows);
-				return query.list();
-			}
-		});
+		Query query = getCurrentSession().createQuery(ql);
+		setQueryNamedParameters(query, paramMap, start, maxRows);
+		return query.list();
 	}
 	
 	@Override
@@ -663,20 +584,13 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 		return findUniqueByNamedQuery(this.getEntityClass(), queryName, values);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R findUniqueByNamedQuery(Class<R> resultClass,
 			final String queryName, final Object[] values) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<R>() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public R doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.getNamedQuery(queryName);
-				setQueryParameters(query, values);
-				return (R) query.uniqueResult();
-			}
-		});
+		Query query = getCurrentSession().getNamedQuery(queryName);
+		setQueryParameters(query, values);
+		return (R) query.uniqueResult();
 	}
 
 	@Override
@@ -684,20 +598,13 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 		return findUniqueByNamedQuery(this.getEntityClass(), queryName, paramMap);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R findUniqueByNamedQuery(Class<R> resultClass,
 			final String queryName, final Map<String, ?> paramMap) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<R>() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public R doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.getNamedQuery(queryName);
-				setQueryNamedParameters(query, paramMap);
-				return (R) query.uniqueResult();
-			}
-		});
+		Query query = getCurrentSession().getNamedQuery(queryName);
+		setQueryNamedParameters(query, paramMap);
+		return (R) query.uniqueResult();
 	}
 
 	@Override
@@ -739,16 +646,9 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	public <R> List<R> findByNamedQuery(Class<R> resultClass,
 			final String queryName, final Object[] values, final int start,
 			final int maxRows) {
-		
-		return getHibernateTemplate().executeFind(new HibernateCallback<List<R>>() {
-
-			@Override
-			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.getNamedQuery(queryName);
-				setQueryParameters(query, values, start, maxRows);
-				return query.list();
-			}
-		});
+		Query query = getCurrentSession().getNamedQuery(queryName);
+		setQueryParameters(query, values, start, maxRows);
+		return query.list();
 	}
 	
 	@Override
@@ -771,16 +671,9 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	public <R> List<R> findByNamedQuery(Class<R> resultClass,
 			final String queryName, final Map<String, ?> paramMap,
 			final int start, final int maxRows) {
-		
-		return getHibernateTemplate().executeFind(new HibernateCallback<List<R>>() {
-
-			@Override
-			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.getNamedQuery(queryName);
-				setQueryNamedParameters(query, paramMap, start, maxRows);
-				return query.list();
-			}
-		});
+		Query query = getCurrentSession().getNamedQuery(queryName);
+		setQueryNamedParameters(query, paramMap, start, maxRows);
+		return query.list();
 	}
 
 	@Override
@@ -790,30 +683,16 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public int executeNamedQuery(final String queryName, final Object[] values) {
-		return getHibernateTemplate().execute(new HibernateCallback<Integer>() {
-
-			@Override
-			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.getNamedQuery(queryName);
-				setQueryParameters(query, values);
-				return query.executeUpdate();
-			}
-			
-		});
+		Query query = getCurrentSession().getNamedQuery(queryName);
+		setQueryParameters(query, values);
+		return query.executeUpdate();
 	}
 
 	@Override
 	public int executeNamedQuery(final String queryName, final Map<String, ?> paramMap) {
-		return getHibernateTemplate().execute(new HibernateCallback<Integer>() {
-
-			@Override
-			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.getNamedQuery(queryName);
-				setQueryNamedParameters(query, paramMap);
-				return query.executeUpdate();
-			}
-			
-		});
+		Query query = getCurrentSession().getNamedQuery(queryName);
+		setQueryNamedParameters(query, paramMap);
+		return query.executeUpdate();
 	}
 	
 	@Override
@@ -823,30 +702,16 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public long countByNamedQuery(final String queryName, final Object[] values) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<Long>() {
-
-			@Override
-			public Long doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.getNamedQuery(queryName);
-				setQueryParameters(query, values);
-				return Long.valueOf(String.valueOf(query.uniqueResult()));
-			}
-		});
+		Query query = getCurrentSession().getNamedQuery(queryName);
+		setQueryParameters(query, values);
+		return Long.valueOf(String.valueOf(query.uniqueResult()));
 	}
 	
 	@Override
 	public long countByNamedQuery(final String queryName, final Map<String, ?> paramMap) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<Long>() {
-
-			@Override
-			public Long doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.getNamedQuery(queryName);
-				setQueryNamedParameters(query, paramMap);
-				return Long.valueOf(String.valueOf(query.uniqueResult()));
-			}
-		});
+		Query query = getCurrentSession().getNamedQuery(queryName);
+		setQueryNamedParameters(query, paramMap);
+		return Long.valueOf(String.valueOf(query.uniqueResult()));
 	}
 	
 	@Override
@@ -868,17 +733,10 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public <R> R findUniqueByNativeQuery(final Class<R> resultClass,
 			final String sql, final Object[] values) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<R>() {
-
-			@Override
-			public R doInHibernate(Session session) throws HibernateException, SQLException {
-				SQLQuery query = session.createSQLQuery(sql);
-				query.addEntity(resultClass);
-				setQueryParameters(query, values);
-				return (R) query.uniqueResult();
-			}
-		});
+		SQLQuery query = getCurrentSession().createSQLQuery(sql);
+		query.addEntity(resultClass);
+		setQueryParameters(query, values);
+		return (R) query.uniqueResult();
 	}
 	
 	@Override
@@ -890,17 +748,10 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public <R> R findUniqueByNativeQuery(final Class<R> resultClass,
 			final String sql, final Map<String, ?> paramMap) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<R>() {
-
-			@Override
-			public R doInHibernate(Session session) throws HibernateException, SQLException {
-				SQLQuery query = session.createSQLQuery(sql);
-				query.addEntity(resultClass);
-				setQueryNamedParameters(query, paramMap);
-				return (R) query.uniqueResult();
-			}
-		});
+		SQLQuery query = getCurrentSession().createSQLQuery(sql);
+		query.addEntity(resultClass);
+		setQueryNamedParameters(query, paramMap);
+		return (R) query.uniqueResult();
 	}
 	
 	@Override
@@ -953,15 +804,10 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	public <R> List<R> findByNativeQuery(final Class<R> resultClass, final String sql,
 			final Object[] values, final int start, final int maxRows) {
 		
-		return getHibernateTemplate().executeFind(new HibernateCallback<List<R>>() {
-			@Override
-			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
-				SQLQuery query = session.createSQLQuery(sql);
-				query.addEntity(resultClass);
-				setQueryParameters(query, values, start, maxRows);
-				return query.list();
-			}
-		});
+		SQLQuery query = getCurrentSession().createSQLQuery(sql);
+		query.addEntity(resultClass);
+		setQueryParameters(query, values, start, maxRows);
+		return query.list();
 	}
 	
 	@Override
@@ -973,16 +819,9 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public <R> List<R> findByNativeQuery(Class<R> resultClass, final String sql,
 			final Map<String, ?> paramMap, final int start, final int maxRows) {
-		
-		return getHibernateTemplate().executeFind(new HibernateCallback<List<R>>() {
-
-			@Override
-			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
-				SQLQuery query = session.createSQLQuery(sql);
-				setQueryNamedParameters(query, paramMap, start, maxRows);
-				return query.list();
-			}
-		});
+		SQLQuery query = getCurrentSession().createSQLQuery(sql);
+		setQueryNamedParameters(query, paramMap, start, maxRows);
+		return query.list();
 	}
 
 	@Override
@@ -992,28 +831,16 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public int executeByNativeQuery(final String sql, final Object[] values) {
-		return getHibernateTemplate().execute(new HibernateCallback<Integer>() {
-
-			@Override
-			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
-				SQLQuery query = session.createSQLQuery(sql);
-				setQueryParameters(query, values);
-				return query.executeUpdate();
-			}
-		});
+		SQLQuery query = getCurrentSession().createSQLQuery(sql);
+		setQueryParameters(query, values);
+		return query.executeUpdate();
 	}
 
 	@Override
 	public int executeByNativeQuery(final String sql, final Map<String, ?> paramMap) {
-		return getHibernateTemplate().execute(new HibernateCallback<Integer>() {
-
-			@Override
-			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
-				SQLQuery query = session.createSQLQuery(sql);
-				setQueryNamedParameters(query, paramMap);
-				return query.executeUpdate();
-			}
-		});
+		SQLQuery query = getCurrentSession().createSQLQuery(sql);
+		setQueryNamedParameters(query, paramMap);
+		return query.executeUpdate();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -1023,29 +850,17 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 		if (callback instanceof HibernateCriteriaQueryCallbackDao)
 			((HibernateCriteriaQueryCallbackDao<P>)callback).setParameter(parameter);
 		
-		return getHibernateTemplate().execute(new HibernateCallback<T>() {
-			
-			@Override
-			public T doInHibernate(Session session) throws HibernateException, SQLException {
-				Criteria criteria = session.createCriteria(getEntityClass());
-				callback.execute(criteria);
-				return (T) criteria.uniqueResult();
-			}
-		});
+		Criteria criteria = getCurrentSession().createCriteria(getEntityClass());
+		callback.execute(criteria);
+		return (T) criteria.uniqueResult();
+		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public T findUniqueByCriteria(final DetachedCriteria criteria) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<T>() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public T doInHibernate(Session session) throws HibernateException, SQLException {
-				Criteria executableCriteria = criteria.getExecutableCriteria(session);
-				return (T) executableCriteria.uniqueResult();
-			}
-		});
+		Criteria executableCriteria = criteria.getExecutableCriteria(getCurrentSession());
+		return (T) executableCriteria.uniqueResult();
 	}
 	
 	@Override
@@ -1066,22 +881,18 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 		if (callback instanceof HibernateCriteriaQueryCallbackDao)
 			((HibernateCriteriaQueryCallbackDao<P>)callback).setParameter(parameter);
 		
-		return getHibernateTemplate().executeFind(new HibernateCallback<List<T>>() {
-
-			@Override
-			public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
-				Criteria criteria = session.createCriteria(getEntityClass());
-				callback.execute(criteria);
-				setOffsetCriteria(criteria, start, maxRows);
-				return criteria.list();
-			}
-		});
+		Criteria criteria = getCurrentSession().createCriteria(this.getEntityClass());
+		callback.execute(criteria);
+		setOffsetCriteria(criteria, start, maxRows);
+		return criteria.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findByCriteria(DetachedCriteria criteria, int start, int maxRows) {
-		return getHibernateTemplate().findByCriteria(criteria, start, maxRows);
+		Criteria executableCriteria = criteria.getExecutableCriteria(getCurrentSession());
+		setOffsetCriteria(executableCriteria, start, maxRows);
+		return executableCriteria.list();
 	}
 	
 	@Override
@@ -1097,21 +908,14 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 		if (callback instanceof HibernateCriteriaQueryCallbackDao)
 			((HibernateCriteriaQueryCallbackDao<P>) callback).setParameter(parameter);
 		
-		return getHibernateTemplate().execute(new HibernateCallback<Long>() {
-
-			@Override
-			public Long doInHibernate(Session session) throws HibernateException, SQLException {
-				Criteria criteria = session.createCriteria(getEntityClass());
-				if (distinct)
-					criteria.setProjection(Projections.distinct(Projections.rowCount()));
-				else
-					criteria.setProjection(Projections.rowCount());  
-				
-				callback.execute(criteria);
-				return Long.valueOf(String.valueOf(criteria.uniqueResult()));
-			}
-			
-		});
+		Criteria criteria = getCurrentSession().createCriteria(this.getEntityClass());
+		if (distinct)
+			criteria.setProjection(Projections.distinct(Projections.rowCount()));
+		else
+			criteria.setProjection(Projections.rowCount());  
+		
+		callback.execute(criteria);
+		return Long.valueOf(String.valueOf(criteria.uniqueResult()));
 	}
 
 	@Override
@@ -1121,18 +925,13 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public long countByCriteria(final DetachedCriteria criteria, final boolean distinct) {
-		return getHibernateTemplate().execute(new HibernateCallback<Long>() {
-
-			@Override
-			public Long doInHibernate(Session session) throws HibernateException, SQLException {
-				if (distinct)
-					criteria.setProjection(Projections.distinct(Projections.rowCount()));
-				else
-					criteria.setProjection(Projections.rowCount());  
-				Criteria executableCriteria = criteria.getExecutableCriteria(session);
-				return (Long) executableCriteria.uniqueResult();
-			}
-		});
+		if (distinct)
+			criteria.setProjection(Projections.distinct(Projections.rowCount()));
+		else
+			criteria.setProjection(Projections.rowCount());  
+		
+		Criteria executableCriteria = criteria.getExecutableCriteria(getCurrentSession());
+		return (Long) executableCriteria.uniqueResult();
 	}
 	
 	@Override
@@ -1153,39 +952,27 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findByExample(String entityName, T entity, int start, int maxRows) {
-		return StringUtils.isNotBlank(entityName) ? 
-			getHibernateTemplate().findByExample(entityName, entity, start, maxRows) :
-				getHibernateTemplate().findByExample(entity, start, maxRows);
+		Criteria executableCriteria = (StringUtils.isNotBlank(entityName)?
+				getCurrentSession().createCriteria(entityName.trim()) : getCurrentSession().createCriteria(entity.getClass()));
+		executableCriteria.add(Example.create(entity));
+		setOffsetCriteria(executableCriteria, start, maxRows);
+		return executableCriteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T findUniqueByFilterList(final List<PersistencePropertyFilter> filterList) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<T>() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public T doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterList(
-						false, getEntityClass(), filterList));
-				return (T) query.uniqueResult();
-			}
-		});
+		Query query = getCurrentSession().createQuery(PersistenceUtils.buildQueryStringByFilterList(
+				false, getEntityClass(), filterList));
+		return (T) query.uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T findUniqueByFilterChain(final PersistencePropertyFilterChain chain) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<T>() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public T doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterChain(
-						false, getEntityClass(), chain));
-				return (T) query.uniqueResult();
-			}
-		});
+		Query query = getCurrentSession().createQuery(PersistenceUtils.buildQueryStringByFilterChain(
+				false, getEntityClass(), chain));
+		return (T) query.uniqueResult();
 	}
 
 	@Override
@@ -1196,17 +983,10 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findByFilterList(final List<PersistencePropertyFilter> filterList, final int start, final int maxRows) {
-			
-		return getHibernateTemplate().executeFind(new HibernateCallback<List<T>>() {
-
-			@Override
-			public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterList(
-						false, getEntityClass(), filterList));
-				setOffsetQuery(query, start, maxRows);
-				return query.list();
-			}
-		});
+		Query query = getCurrentSession().createQuery(PersistenceUtils.buildQueryStringByFilterList(
+				false, getEntityClass(), filterList));
+		setOffsetQuery(query, start, maxRows);
+		return query.list();
 	}
 	
 	@Override
@@ -1217,45 +997,24 @@ public class Hibernate3PersistenceDaoImpl<T, PK extends Serializable> extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findByFilterChain(final PersistencePropertyFilterChain chain, final int start, final int maxRows) {
-			
-		return getHibernateTemplate().executeFind(new HibernateCallback<List<T>>() {
-
-			@Override
-			public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterChain(
-						false, getEntityClass(), chain));
-				setOffsetQuery(query, start, maxRows);
-				return query.list();
-			}
-		});
+		Query query = getCurrentSession().createQuery(PersistenceUtils.buildQueryStringByFilterChain(
+				false, getEntityClass(), chain));
+		setOffsetQuery(query, start, maxRows);
+		return query.list();
 	}
 
 	@Override
 	public long countByFilterList(final List<PersistencePropertyFilter> filterList) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<Long>() {
-			
-			@Override
-			public Long doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterList(
-						true, entityClass, filterList));
-				return Long.valueOf(String.valueOf(query.uniqueResult()));
-			}
-		});
+		Query query = getCurrentSession().createQuery(PersistenceUtils.buildQueryStringByFilterList(
+				true, entityClass, filterList));
+		return Long.valueOf(String.valueOf(query.uniqueResult()));
 	}
 
 	@Override
 	public long countByFilterChain(final PersistencePropertyFilterChain chain) {
-		
-		return getHibernateTemplate().execute(new HibernateCallback<Long>() {
-
-			@Override
-			public Long doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterChain(
-						true, entityClass, chain));
-				return Long.valueOf(String.valueOf(query.uniqueResult()));
-			}
-		});
+		Query query = getCurrentSession().createQuery(PersistenceUtils.buildQueryStringByFilterChain(
+				true, entityClass, chain));
+		return Long.valueOf(String.valueOf(query.uniqueResult()));
 	}
 
 	@SuppressWarnings("unchecked")

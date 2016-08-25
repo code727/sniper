@@ -46,13 +46,13 @@ import org.workin.persistence.util.PersistencePropertyFilterChain;
 import org.workin.persistence.util.PersistenceUtils;
 
 /**
- * @description JPA2标准的持久化实现类
+ * @description JPA2标准的DAO实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @Repository
-public class Jpa2PersistenceDaoImpl<T, PK extends Serializable> extends
-		Jpa2DaoSupport implements JpaPersistenceDao<T, PK> {
+public class Jpa2DaoImpl<T, PK extends Serializable> extends
+		Jpa2DaoSupport implements JpaDao<T, PK> {
 	
 	/** 当前DAO所关联的实体类型 */
 	private Class<T> entityClass;

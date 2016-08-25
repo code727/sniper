@@ -13,34 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-3-10
+ * Create Date : 2015-2-2
  */
 
-package org.workin.persistence.jpa.service;
+package org.workin.persistence.jpa.dao;
 
 import java.io.Serializable;
 
-import org.workin.persistence.jpa.dao.JpaDao;
+import javax.persistence.EntityManager;
+
+import org.workin.persistence.FilterQuery;
+import org.workin.persistence.GenericDao;
 
 /**
- * @description JPA持久化服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @description JPA DAO接口
+ * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JpaPersistenceService<T, PK extends Serializable> {
+public interface JpaDao<T, PK extends Serializable> extends
+		JpaPersistenceDao<T, PK>, JpaQuery<T, PK>, JpaNamedQuery<T>,
+		JpaNativeQuery<T>, JpaNativePersistence, JpaCriteriaQuery<T>, JpaPagingQuery<T>,
+		FilterQuery<T>, GenericDao<T> {
 	
 	/**
-	 * @description 设置DAO接口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param jpaDao
-	 */
-	public void setJpaDao(JpaDao<T, PK> jpaDao);
-	
-	/**
-	 * @description 获取持久化DAO接口
+	 * @description 获取EntityManager对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public JpaDao<T, PK> getJpaDao();
+	public EntityManager getEntityManager();
+	
+	/**
+	 * @description 设置EntityManager对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entityManager
+	 */
+	public void setEntityManager(EntityManager entityManager);
 
 }

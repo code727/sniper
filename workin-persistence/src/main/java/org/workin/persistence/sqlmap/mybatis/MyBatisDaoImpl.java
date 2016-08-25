@@ -18,15 +18,15 @@
 
 package org.workin.persistence.sqlmap.mybatis;
 
-import org.workin.persistence.sqlmap.dao.SqlMapPersistenceDao;
+import org.workin.persistence.sqlmap.dao.SqlMapDao;
 
 /**
- * @description MyBatis持久化DAO实现类
+ * @description MyBatis DAO实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MyBatisPersistenceDaoImpl<T> extends MyBatisQueryDaoImpl<T>
-		implements SqlMapPersistenceDao<T> {
+public class MyBatisDaoImpl<T> extends MyBatisQueryDaoImpl<T>
+		implements SqlMapDao<T> {
 
 	@Override
 	public Integer insert(String id) {
