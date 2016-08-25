@@ -16,16 +16,16 @@
  * Create Date : 2015-7-1
  */
 
-package org.workin.support.puter;
+package org.workin.support.parameter.handler;
 
 import java.util.Map;
 
 /**
- * @description 重复键处理器
+ * @description 键处理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Puter {
+public interface KeyHandler {
 	
 	/**
 	 * @description 将指定的键-值对PUT到映射集中

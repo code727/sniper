@@ -16,7 +16,7 @@
  * Create Date : 2015-7-1
  */
 
-package org.workin.support.puter;
+package org.workin.support.parameter.handler;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -30,7 +30,7 @@ import org.workin.commons.util.MapUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ErrorDulicateKeyPuter implements Puter {
+public class ErrorDulicateKeyHandler implements KeyHandler {
 
 	@Override
 	public <K, V, K1 extends K, V1 extends V> void put(Map<K, V> map, K1 key, V1 value) {

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年11月16日
+ * Create Date : 2015-11-16
  */
 
 package org.workin.spring.context;
@@ -26,8 +26,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.DateUtils;
 import org.workin.support.parameter.ConcurrentParameter;
-import org.workin.support.puter.ErrorDulicateKeyPuter;
-import org.workin.support.puter.Puter;
+import org.workin.support.parameter.handler.CoverageDulicateKeyHandler;
+import org.workin.support.parameter.handler.KeyHandler;
 
 /**
  * @description 应用上下文参数实现类
@@ -38,22 +38,22 @@ public class ApplicationContextParameter<K, V> extends ConcurrentParameter<K, V>
 		
 	private static Logger logger = LoggerFactory.getLogger(ApplicationContextParameter.class);
 	
-	private Puter puter;
+	private KeyHandler keyHandler;
 	
 	private ParameterService parameterService;
 	
 	public ApplicationContextParameter() {
-		this.puter = new ErrorDulicateKeyPuter();
+		this.keyHandler = new CoverageDulicateKeyHandler();
 	}
 	
-	public Puter getPuter() {
-		return puter;
+	public KeyHandler getKeyHandler() {
+		return keyHandler;
 	}
 
-	public void setPuter(Puter puter) {
-		this.puter = puter;
+	public void setKeyHandler(KeyHandler keyHandler) {
+		this.keyHandler = keyHandler;
 	}
-	
+
 	public ParameterService getParameterService() {
 		return parameterService;
 	}
@@ -65,6 +65,7 @@ public class ApplicationContextParameter<K, V> extends ConcurrentParameter<K, V>
 	@SuppressWarnings("unchecked")
 	@Override
 	public void afterPropertiesSet() throws Exception {
+		
 		if (this.parameterService != null) {
 			Date start = new Date();
 			logger.info("Starting preloading application context parameters");
@@ -76,12 +77,12 @@ public class ApplicationContextParameter<K, V> extends ConcurrentParameter<K, V>
 	
 	@Override
 	public void add(K name, V value) {
-		this.puter.put(this.parameters, name, value);
+		keyHandler.put(this.parameters, name, value);
 	}
 	
 	@Override
 	public void setParameters(Map<K, V> parameters) {
-		this.puter.putAll(this.parameters, parameters);
+		keyHandler.putAll(this.parameters, parameters);
 	}
 	
 }

@@ -16,7 +16,7 @@
  * Create Date : 2015-7-1
  */
 
-package org.workin.support.puter;
+package org.workin.support.parameter.handler;
 
 import java.util.Map;
 
@@ -27,7 +27,7 @@ import org.workin.commons.util.MapUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CoverageDulicateKeyPuter implements Puter {
+public class CoverageDulicateKeyHandler implements KeyHandler {
 
 	@Override
 	public <K, V, K1 extends K, V1 extends V> void put(Map<K, V> map, K1 key, V1 value) {
