@@ -12,29 +12,26 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *  
- * Create Date : 2015-2-2
+ * 
+ * Create Date : 2015-3-11
  */
 
-package org.workin.persistence.jpa.dao;
+package org.workin.persistence.hibernate.dao.support;
 
-import org.workin.commons.pagination.PagingQuery;
-import org.workin.commons.pagination.PagingResult;
+import org.hibernate.Criteria;
 
 /**
- * @description Jpa分页查询接口
+ * @description Hibernate标准查询回调接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JpaPagingQuery<T> {
-	
+public interface HibernateCriteriaQueryCallback {
+		
 	/**
-	 * @description 针对于当前实体类型的分页查询
+	 * @description 执行标准化查询业务处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 分页查询条件对象
-	 * @param callback 查询回调
-	 * @return
+	 * @param criteria
 	 */
-	public PagingResult<T> pagingQuery(PagingQuery query, JpaCriteriaQueryCallback<T> callback);
+	public void execute(Criteria criteria);
 
 }

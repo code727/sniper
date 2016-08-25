@@ -35,124 +35,124 @@ public class AbstractSqlMapPersistenceService<T> implements
 		SqlMapPersistenceService<T>, InitializingBean {
 	
 	@Autowired
-	protected SqlMapDao<T> sqlMapPersistenceDao;
+	protected SqlMapDao<T> sqlMapDao;
 
 	@Override
 	public void setSqlMapPersistenceDao(
 			SqlMapDao<T> sqlMapPersistenceDao) {
-		this.sqlMapPersistenceDao = sqlMapPersistenceDao;
+		this.sqlMapDao = sqlMapPersistenceDao;
 	}
 
 	@Override
 	public SqlMapDao<T> getSqlMapPersistenceDao() {
-		return this.sqlMapPersistenceDao;
+		return this.sqlMapDao;
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (this.sqlMapPersistenceDao == null)
+		if (this.sqlMapDao == null)
 			throw new BeanCreationException("SqlMapPersistenceDao object can not be null, please inject to spring container.");
 	}
 
 	@Override
 	public Object insert(String id) {
-		return this.sqlMapPersistenceDao.insert(id);
+		return this.sqlMapDao.insert(id);
 	}
 
 	@Override
 	public Object insert(String id, Object parameter) {
-		return this.sqlMapPersistenceDao.insert(id, parameter);
+		return this.sqlMapDao.insert(id, parameter);
 	}
 
 	@Override
 	public int update(String id) {
-		return this.sqlMapPersistenceDao.update(id);
+		return this.sqlMapDao.update(id);
 	}
 
 	@Override
 	public int update(String id, Object parameter) {
-		return this.sqlMapPersistenceDao.update(id, parameter);
+		return this.sqlMapDao.update(id, parameter);
 	}
 
 	@Override
 	public int delete(String id) {
-		return this.sqlMapPersistenceDao.delete(id);
+		return this.sqlMapDao.delete(id);
 	}
 
 	@Override
 	public int delete(String id, Object parameter) {
-		return this.sqlMapPersistenceDao.delete(id, parameter);
+		return this.sqlMapDao.delete(id, parameter);
 	}
 
 	@Override
 	public long countBySqlMap(String id) {
-		return this.sqlMapPersistenceDao.countBySqlMap(id);
+		return this.sqlMapDao.countBySqlMap(id);
 	}
 
 	@Override
 	public long countBySqlMap(String id, Object parameter) {
-		return this.sqlMapPersistenceDao.countBySqlMap(id, parameter);
+		return this.sqlMapDao.countBySqlMap(id, parameter);
 	}
 
 	@Override
 	public T queryUniqueBySqlMap(String id) {
-		return this.sqlMapPersistenceDao.queryUniqueBySqlMap(id);
+		return this.sqlMapDao.queryUniqueBySqlMap(id);
 	}
 
 	@Override
 	public T queryUniqueBySqlMap(String id, Object parameter) {
-		return this.sqlMapPersistenceDao.queryUniqueBySqlMap(id, parameter);
+		return this.sqlMapDao.queryUniqueBySqlMap(id, parameter);
 	}
 
 	@Override
 	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String id) {
-		return this.sqlMapPersistenceDao.queryUniqueBySqlMap(resultClass, id);
+		return this.sqlMapDao.queryUniqueBySqlMap(resultClass, id);
 	}
 
 	@Override
 	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String id,
 			Object parameter) {
-		return this.sqlMapPersistenceDao.queryUniqueBySqlMap(resultClass, id, parameter);
+		return this.sqlMapDao.queryUniqueBySqlMap(resultClass, id, parameter);
 	}
 
 	@Override
 	public List<T> queryListBySqlMap(String id) {
-		return this.sqlMapPersistenceDao.queryListBySqlMap(id);
+		return this.sqlMapDao.queryListBySqlMap(id);
 	}
 
 	@Override
 	public List<T> queryListBySqlMap(String id, Object parameter) {
-		return this.sqlMapPersistenceDao.queryListBySqlMap(id, parameter);
+		return this.sqlMapDao.queryListBySqlMap(id, parameter);
 	}
 
 	@Override
 	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String id) {
-		return this.sqlMapPersistenceDao.queryListBySqlMap(resultClass, id);
+		return this.sqlMapDao.queryListBySqlMap(resultClass, id);
 	}
 
 	@Override
 	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String id, Object parameter) {
-		return this.sqlMapPersistenceDao.queryListBySqlMap(resultClass, id, parameter);
+		return this.sqlMapDao.queryListBySqlMap(resultClass, id, parameter);
 	}
 
 	@Override
 	public <K, V> Map<K, V> queryMapBySqlMap(String id) {
-		return this.sqlMapPersistenceDao.queryMapBySqlMap(id);
+		return this.sqlMapDao.queryMapBySqlMap(id);
 	}
 
 	@Override
 	public <K, V> Map<K, V> queryMapBySqlMap(String id, Object parameter) {
-		return this.sqlMapPersistenceDao.queryMapBySqlMap(id, parameter);
+		return this.sqlMapDao.queryMapBySqlMap(id, parameter);
 	}
 
 	@Override
 	public <K, V> Map<K, V> queryMapBySqlMap(String id, String keyProperty) {
-		return this.sqlMapPersistenceDao.queryMapBySqlMap(id, keyProperty);
+		return this.sqlMapDao.queryMapBySqlMap(id, keyProperty);
 	}
 
 	@Override
 	public <K, V> Map<K, V> queryMapBySqlMap(String id, Object parameter, String keyProperty) {
-		return this.sqlMapPersistenceDao.queryMapBySqlMap(id, parameter, keyProperty);
+		return this.sqlMapDao.queryMapBySqlMap(id, parameter, keyProperty);
 	}
 
 }

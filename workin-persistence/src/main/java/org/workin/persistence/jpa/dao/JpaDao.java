@@ -24,16 +24,22 @@ import javax.persistence.EntityManager;
 
 import org.workin.persistence.FilterQuery;
 import org.workin.persistence.GenericDao;
+import org.workin.persistence.jpa.dao.support.JpaCriteriaQuery;
+import org.workin.persistence.jpa.dao.support.JpaNamedQuery;
+import org.workin.persistence.jpa.dao.support.JpaNativePersistence;
+import org.workin.persistence.jpa.dao.support.JpaNativeQuery;
+import org.workin.persistence.jpa.dao.support.JpaPagingQuery;
+import org.workin.persistence.jpa.dao.support.JpaPersistence;
+import org.workin.persistence.jpa.dao.support.JpaQuery;
 
 /**
- * @description JPA DAO接口
+ * @description JPA持久化数据访问接口
  * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JpaDao<T, PK extends Serializable> extends
-		JpaPersistenceDao<T, PK>, JpaQuery<T, PK>, JpaNamedQuery<T>,
-		JpaNativeQuery<T>, JpaNativePersistence, JpaCriteriaQuery<T>, JpaPagingQuery<T>,
-		FilterQuery<T>, GenericDao<T> {
+public interface JpaDao<T, PK extends Serializable> extends GenericDao<T>,
+		JpaPersistence<T, PK>, JpaNativePersistence, JpaQuery<T, PK>, JpaNamedQuery<T>,
+		JpaNativeQuery<T>, JpaCriteriaQuery<T>, JpaPagingQuery<T>, FilterQuery<T> {
 	
 	/**
 	 * @description 获取EntityManager对象

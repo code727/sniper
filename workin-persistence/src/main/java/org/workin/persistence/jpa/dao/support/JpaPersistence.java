@@ -16,18 +16,18 @@
  * Create Date : 2015-1-29
  */
 
-package org.workin.persistence.jpa.dao;
+package org.workin.persistence.jpa.dao.support;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 /**
- * @description JPA泛型持久化接口
+ * @description JPA持久化接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JpaPersistenceDao<T, PK extends Serializable> {
+public interface JpaPersistence<T, PK extends Serializable> {
 	
 	/**
 	 * @description 新增持久化实体对象

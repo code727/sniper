@@ -39,6 +39,8 @@ import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CollectionUtils;
+import org.workin.persistence.jpa.dao.support.JpaCriteriaQueryCallback;
+import org.workin.persistence.jpa.dao.support.JpaCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
 import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;

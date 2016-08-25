@@ -16,7 +16,7 @@
  * Create Date : 2015-3-10
  */
 
-package org.workin.persistence.hibernate.dao;
+package org.workin.persistence.hibernate.dao.support;
 
 import java.util.List;
 

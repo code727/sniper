@@ -16,7 +16,7 @@
  * Create Date : 2015-1-31
  */
 
-package org.workin.persistence.jpa.dao;
+package org.workin.persistence.jpa.dao.support;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

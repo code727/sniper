@@ -16,20 +16,20 @@
  * Create Date : 2015-2-2
  */
 
-package org.workin.persistence.hibernate.dao;
+package org.workin.persistence.hibernate.dao.support;
 
 import java.io.Serializable;
 import java.util.List;
 
-import org.workin.persistence.jpa.dao.JpaPersistenceDao;
+import org.workin.persistence.jpa.dao.support.JpaPersistence;
 
 /**
  * @description Hibernate持久化接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface HibernatePersistenceDao<T, PK extends Serializable> extends
-		JpaPersistenceDao<T, PK> { 
+public interface HibernatePersistence<T, PK extends Serializable> extends
+		JpaPersistence<T, PK> { 
 	
 	/**
 	 * @description 根据名称持久化指定的实体

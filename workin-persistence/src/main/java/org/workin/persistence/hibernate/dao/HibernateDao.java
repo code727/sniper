@@ -24,9 +24,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.workin.persistence.FilterQuery;
 import org.workin.persistence.GenericDao;
-import org.workin.persistence.jpa.dao.JpaNamedQuery;
-import org.workin.persistence.jpa.dao.JpaNativePersistence;
-import org.workin.persistence.jpa.dao.JpaNativeQuery;
+import org.workin.persistence.hibernate.dao.support.HibernateCriteriaQuery;
+import org.workin.persistence.hibernate.dao.support.HibernateExampleQuery;
+import org.workin.persistence.hibernate.dao.support.HibernatePersistence;
+import org.workin.persistence.hibernate.dao.support.HibernateQuery;
+import org.workin.persistence.jpa.dao.support.JpaNamedQuery;
+import org.workin.persistence.jpa.dao.support.JpaNativePersistence;
+import org.workin.persistence.jpa.dao.support.JpaNativeQuery;
 
 /**
  * @description Hibernate持久化数据访问接口
@@ -34,7 +38,7 @@ import org.workin.persistence.jpa.dao.JpaNativeQuery;
  * @version 1.0
  */
 public interface HibernateDao<T, Pk extends Serializable> extends
-		HibernatePersistenceDao<T, Pk>, HibernateQuery<T, Pk>,
+		HibernatePersistence<T, Pk>, HibernateQuery<T, Pk>,
 		JpaNamedQuery<T>, JpaNativeQuery<T>, JpaNativePersistence,
 		HibernateCriteriaQuery<T>, HibernateExampleQuery<T>, FilterQuery<T>, GenericDao<T> {
 		
