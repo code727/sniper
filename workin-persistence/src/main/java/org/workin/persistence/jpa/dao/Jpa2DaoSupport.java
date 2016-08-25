@@ -29,13 +29,14 @@ import javax.persistence.Query;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.persistence.GenericDaoSupport;
 
 /**
  * @description JPA2标准的DAO支持抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class Jpa2DaoSupport {
+public abstract class Jpa2DaoSupport<T> extends GenericDaoSupport<T> {
 	
 	@PersistenceContext
 	private EntityManager entityManager;

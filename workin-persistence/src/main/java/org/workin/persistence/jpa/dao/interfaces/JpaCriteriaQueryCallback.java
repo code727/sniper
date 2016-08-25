@@ -13,28 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *  
- * Create Date : 2015-2-2
+ * Create Date : 2015-1-31
  */
 
-package org.workin.persistence.jpa.dao.support;
+package org.workin.persistence.jpa.dao.interfaces;
 
-import org.workin.commons.pagination.PagingQuery;
-import org.workin.commons.pagination.PagingResult;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
- * @description Jpa分页查询接口
+ * @description JPA标准查询回调接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JpaPagingQuery<T> {
+public interface JpaCriteriaQueryCallback<T> {
 	
 	/**
-	 * @description 针对于当前实体类型的分页查询
+	 * @description 根据CriteriaBuilder、CriteriaQuery和Root
+	 * 				对象执行查询业务处理，并返回条件谓词对象组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 分页查询条件对象
-	 * @param callback 查询回调
+	 * @param builder
+	 * @param query
+	 * @param entityRoot
 	 * @return
 	 */
-	public PagingResult<T> pagingQuery(PagingQuery query, JpaCriteriaQueryCallback<T> callback);
-
+	public Predicate[] execute(CriteriaBuilder builder, CriteriaQuery<?> query, Root<T> entityRoot);
+	
 }

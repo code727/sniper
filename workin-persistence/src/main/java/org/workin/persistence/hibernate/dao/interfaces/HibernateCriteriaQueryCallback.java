@@ -12,33 +12,26 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *  
- * Create Date : 2015-1-31
+ * 
+ * Create Date : 2015-3-11
  */
 
-package org.workin.persistence.jpa.dao.support;
+package org.workin.persistence.hibernate.dao.interfaces;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import org.hibernate.Criteria;
 
 /**
- * @description JPA标准查询回调接口
+ * @description Hibernate标准查询回调接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JpaCriteriaQueryCallback<T> {
-	
+public interface HibernateCriteriaQueryCallback {
+		
 	/**
-	 * @description 根据CriteriaBuilder、CriteriaQuery和Root
-	 * 				对象执行查询业务处理，并返回条件谓词对象组
+	 * @description 执行标准化查询业务处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param builder
-	 * @param query
-	 * @param entityRoot
-	 * @return
+	 * @param criteria
 	 */
-	public Predicate[] execute(CriteriaBuilder builder, CriteriaQuery<?> query, Root<T> entityRoot);
-	
+	public void execute(Criteria criteria);
+
 }

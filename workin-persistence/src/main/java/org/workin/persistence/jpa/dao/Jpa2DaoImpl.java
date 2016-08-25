@@ -37,10 +37,9 @@ import org.workin.commons.pagination.PagingResult;
 import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CollectionUtils;
-import org.workin.persistence.jpa.dao.support.JpaCriteriaQueryCallback;
-import org.workin.persistence.jpa.dao.support.JpaCriteriaQueryCallbackDao;
+import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQueryCallback;
+import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
 import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
@@ -54,24 +53,8 @@ import org.workin.persistence.util.PersistenceUtils;
  */
 @Repository
 public class Jpa2DaoImpl<T, PK extends Serializable> extends
-		Jpa2DaoSupport implements JpaDao<T, PK> {
+		Jpa2DaoSupport<T> implements JpaDao<T, PK> {
 	
-	/** 当前DAO所关联的实体类型 */
-	private Class<T> entityClass;
-	
-	@Override
-	public void setEntityClass(Class<T> entityClass) {
-		this.entityClass = entityClass;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public Class<T> getEntityClass() {
-		if (this.entityClass == null)
-			this.setEntityClass((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
-		return this.entityClass;
-	}
-
 	@Override
 	public void persist(T entity) {
 		getEntityManager().persist(entity);

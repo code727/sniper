@@ -16,7 +16,7 @@
  * Create Date : 2015-1-29
  */
 
-package org.workin.persistence.jpa.dao.support;
+package org.workin.persistence.jpa.dao.interfaces;
 
 import java.io.Serializable;
 import java.util.List;

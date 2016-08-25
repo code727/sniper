@@ -80,7 +80,6 @@ public abstract class AbstractHibernatePersistenceService<T, PK extends Serializ
 					+ sqlMapQuery.getClass().getName());
 		}
 		
-		this.hibernatePersistenceDao.setEntityClass((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
 	}
 
 }

@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-3-11
+ * Create Date : 2015-3-12
  */
 
-package org.workin.persistence.jpa.dao.support;
+package org.workin.persistence.hibernate.dao.interfaces;
 
 /**
- * @description JPA标准查询回调DAO抽象类。
- * 				它在JpaCriteriaQueryCallback的基础上可以设置上层对象(如Service)传入的查询参数，
+ * @description Hibernate标准查询回调DAO抽象类。
+ * 				它在HibernateCriteriaQueryCallback的基础上可以设置上层对象(如Service)传入的查询参数，
  * 				可以真正完全独立的在DAO中处理属于JPA的业务，而不必混杂在上层对象中来处理。
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class JpaCriteriaQueryCallbackDao<T, P> implements JpaCriteriaQueryCallback<T> {
+public abstract class HibernateCriteriaQueryCallbackDao<P> implements HibernateCriteriaQueryCallback {
 	
 	/** 查询参数对象 */
 	protected P parameter;

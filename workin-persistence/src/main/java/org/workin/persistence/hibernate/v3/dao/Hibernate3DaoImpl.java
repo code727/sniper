@@ -41,8 +41,8 @@ import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.persistence.hibernate.dao.HibernateDao;
-import org.workin.persistence.hibernate.dao.support.HibernateCriteriaQueryCallback;
-import org.workin.persistence.hibernate.dao.support.HibernateCriteriaQueryCallbackDao;
+import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallback;
+import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
 import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
@@ -70,6 +70,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	public Class<T> getEntityClass() {
 		if (this.entityClass == null)
 			this.entityClass = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
+		
 		return this.entityClass;
 	}
 	

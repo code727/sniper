@@ -31,8 +31,7 @@ import org.workin.persistence.sqlmap.dao.SqlMapQuery;
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
-public class IBatisQueryDaoImpl<T> extends SqlMapClientDaoSupport
-		implements SqlMapQuery<T> {
+public class IBatisQueryDaoImpl<T> extends SqlMapClientDaoSupport implements SqlMapQuery<T> {
 	
 	/** 当前DAO所关联的实体类型 */
 	private Class<T> entityClass;
@@ -47,6 +46,7 @@ public class IBatisQueryDaoImpl<T> extends SqlMapClientDaoSupport
 	public Class<T> getEntityClass() {
 		if (this.entityClass == null)
 			this.setEntityClass((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
+		
 		return this.entityClass;
 	}
 	

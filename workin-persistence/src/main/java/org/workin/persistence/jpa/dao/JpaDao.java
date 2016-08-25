@@ -24,13 +24,13 @@ import javax.persistence.EntityManager;
 
 import org.workin.persistence.FilterQuery;
 import org.workin.persistence.GenericDao;
-import org.workin.persistence.jpa.dao.support.JpaCriteriaQuery;
-import org.workin.persistence.jpa.dao.support.JpaNamedQuery;
-import org.workin.persistence.jpa.dao.support.JpaNativePersistence;
-import org.workin.persistence.jpa.dao.support.JpaNativeQuery;
-import org.workin.persistence.jpa.dao.support.JpaPagingQuery;
-import org.workin.persistence.jpa.dao.support.JpaPersistence;
-import org.workin.persistence.jpa.dao.support.JpaQuery;
+import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQuery;
+import org.workin.persistence.jpa.dao.interfaces.JpaNamedQuery;
+import org.workin.persistence.jpa.dao.interfaces.JpaNativePersistence;
+import org.workin.persistence.jpa.dao.interfaces.JpaNativeQuery;
+import org.workin.persistence.jpa.dao.interfaces.JpaPagingQuery;
+import org.workin.persistence.jpa.dao.interfaces.JpaPersistence;
+import org.workin.persistence.jpa.dao.interfaces.JpaQuery;
 
 /**
  * @description JPA持久化数据访问接口

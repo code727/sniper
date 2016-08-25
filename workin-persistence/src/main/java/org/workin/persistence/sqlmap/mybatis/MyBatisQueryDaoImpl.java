@@ -45,6 +45,7 @@ public class MyBatisQueryDaoImpl<T> extends SqlSessionDaoSupport implements SqlM
 	public Class<T> getEntityClass() {
 		if (this.entityClass == null)
 			this.setEntityClass((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
+		
 		return this.entityClass;
 	}
 

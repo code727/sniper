@@ -35,12 +35,11 @@ import org.springframework.stereotype.Repository;
 import org.workin.commons.pagination.PagingResult;
 import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.persistence.hibernate.dao.HibernateDao;
-import org.workin.persistence.hibernate.dao.support.HibernateCriteriaQueryCallback;
-import org.workin.persistence.hibernate.dao.support.HibernateCriteriaQueryCallbackDao;
+import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallback;
+import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
 import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
@@ -54,24 +53,8 @@ import org.workin.persistence.util.PersistenceUtils;
  */
 @Repository
 public class Hibernate4DaoImpl<T, PK extends Serializable> extends
-	Hibernate4DaoSupport implements HibernateDao<T, PK> {
-	
-	/** 当前DAO所关联的实体类型 */
-	private Class<T> entityClass;
-	
-	@Override
-	public void setEntityClass(Class<T> entityClass) {
-		this.entityClass = entityClass;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public Class<T> getEntityClass() {
-		if (this.entityClass == null)
-			this.entityClass = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
-		return this.entityClass;
-	}
-	
+	Hibernate4DaoSupport<T> implements HibernateDao<T, PK> {
+		
 	@Override
 	public void persist(T entity) {
 		persist(null, entity);
@@ -329,7 +312,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> loadAll() {
-		Criteria criteria = getCurrentSession().createCriteria(entityClass);
+		Criteria criteria = getCurrentSession().createCriteria(getEntityClass());
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		prepareCriteria(criteria);
 		return criteria.list();
@@ -1006,14 +989,14 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	@Override
 	public long countByFilterList(final List<PersistencePropertyFilter> filterList) {
 		Query query = getCurrentSession().createQuery(PersistenceUtils.buildQueryStringByFilterList(
-				true, entityClass, filterList));
+				true, getEntityClass(), filterList));
 		return Long.valueOf(String.valueOf(query.uniqueResult()));
 	}
 
 	@Override
 	public long countByFilterChain(final PersistencePropertyFilterChain chain) {
 		Query query = getCurrentSession().createQuery(PersistenceUtils.buildQueryStringByFilterChain(
-				true, entityClass, chain));
+				true, getEntityClass(), chain));
 		return Long.valueOf(String.valueOf(query.uniqueResult()));
 	}
 

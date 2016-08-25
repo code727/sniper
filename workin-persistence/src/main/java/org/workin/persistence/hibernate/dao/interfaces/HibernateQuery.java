@@ -16,14 +16,14 @@
  * Create Date : 2015-2-3
  */
 
-package org.workin.persistence.hibernate.dao.support;
+package org.workin.persistence.hibernate.dao.interfaces;
 
 import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
-import org.workin.persistence.jpa.dao.support.JpaQuery;
+import org.workin.persistence.jpa.dao.interfaces.JpaQuery;
 
 /**
  * @description Hibernate查询接口

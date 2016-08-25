@@ -30,11 +30,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.persistence.GenericDaoSupport;
 import org.workin.persistence.hibernate.v4.Hibernate4CacheConfiguration;
 
 /**
@@ -42,7 +42,7 @@ import org.workin.persistence.hibernate.v4.Hibernate4CacheConfiguration;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class Hibernate4DaoSupport implements InitializingBean {
+public abstract class Hibernate4DaoSupport<T> extends GenericDaoSupport<T>  {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -70,7 +70,7 @@ public abstract class Hibernate4DaoSupport implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (sessionFactory == null)
-			throw new BeanCreationException("SessionFactory object can not be null, please inject to spring container.");
+			throw new BeanCreationException("Property 'sessionFactory' must not be null");
 	}
 
 	/**

@@ -13,44 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-1-29
+ * Create Date : 2015-3-11
  */
 
-package org.workin.persistence.jpa.dao.support;
-
-import java.util.Map;
+package org.workin.persistence.jpa.dao.interfaces;
 
 /**
- * @description JPA本地持久化接口
+ * @description JPA标准查询回调DAO抽象类。
+ * 				它在JpaCriteriaQueryCallback的基础上可以设置上层对象(如Service)传入的查询参数，
+ * 				可以真正完全独立的在DAO中处理属于JPA的业务，而不必混杂在上层对象中来处理。
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JpaNativePersistence {
+public abstract class JpaCriteriaQueryCallbackDao<T, P> implements JpaCriteriaQueryCallback<T> {
+	
+	/** 查询参数对象 */
+	protected P parameter;
 	
 	/**
-	 * @description 执行本地持久化SQL语句后返回受影响的行数
+	 * @description 设置查询参数对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @return
+	 * @param parameter
 	 */
-	public int executeByNativeQuery(String sql);
+	public void setParameter(P parameter) {
+		this.parameter = parameter;
+	}
 	
 	/**
-	 * @description 执行带占位符(?)参数的本地持久化SQL语句后返回受影响的行数
+	 * @description 获取查询参数对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @param values
 	 * @return
 	 */
-	public int executeByNativeQuery(String sql, Object[] values);
-
-	/**
-	 * @description 执行带命名(=:name)参数的本地持久化SQL语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @param paramMap
-	 * @return
-	 */
-	public int executeByNativeQuery(String sql, Map<String, ?> paramMap);
+	public P getParameter() {
+		return this.parameter;
+	}
 
 }
