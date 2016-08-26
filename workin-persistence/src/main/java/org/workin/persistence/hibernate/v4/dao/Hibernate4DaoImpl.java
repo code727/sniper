@@ -37,6 +37,7 @@ import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.persistence.hibernate.HibernateUtils;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallback;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
@@ -218,14 +219,14 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	@Override
 	public int execute(final String ql, final Object[] values) {
 		Query query = getCurrentSession().createQuery(ql);
-		setQueryParameters(query, values);
+		HibernateUtils.setQueryParameters(query, values);
 		return query.executeUpdate();
 	}
 
 	@Override
 	public int execute(final String ql, final Map<String, ?> paramMap) {
 		Query query = getCurrentSession().createQuery(ql);
-		setQueryNamedParameters(query, paramMap);
+		HibernateUtils.setQueryNamedParameters(query, paramMap);
 		return query.executeUpdate();
 	}
 
@@ -366,7 +367,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public T findById(PK primaryKey) {
-		return findUniqueByProperty(getPrimaryKeyName(this.getEntityClass()), primaryKey);
+		return findUniqueByProperty(getPrimaryKeyName(), primaryKey);
 	}
 	
 	@Override
@@ -400,7 +401,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	@Override
 	public <R> R findUniqueByQueryString(Class<R> resultClass, final String ql, final Object[] values) {
 		Query query = getCurrentSession().createQuery(ql);
-		setQueryParameters(query, values);
+		HibernateUtils.setQueryParameters(query, values);
 		return (R) query.uniqueResult();
 	}
 
@@ -413,7 +414,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	@Override
 	public <R> R findUniqueByQueryString(Class<R> resultClass, final String ql, final Map<String, ?> paramMap) {
 		Query query = getCurrentSession().createQuery(ql);
-		setQueryNamedParameters(query, paramMap);
+		HibernateUtils.setQueryNamedParameters(query, paramMap);
 		return (R) query.uniqueResult();
 	}
 
@@ -467,7 +468,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	public <R> List<R> find(Class<R> resultClass, final String ql,
 			final Object[] values, final int start, final int maxRows) {
 		Query query = getCurrentSession().createQuery(ql);
-		setQueryParameters(query, values, start, maxRows);
+		HibernateUtils.setQueryParameters(query, values, start, maxRows);
 		return query.list();
 	}
 	
@@ -481,7 +482,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	public <R> List<R> find(Class<R> resultClass, final String ql,
 			final Map<String, ?> paramMap, final int start, final int maxRows) {
 		Query query = getCurrentSession().createQuery(ql);
-		setQueryNamedParameters(query, paramMap, start, maxRows);
+		HibernateUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
 		return query.list();
 	}
 	
@@ -571,7 +572,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	public <R> R findUniqueByNamedQuery(Class<R> resultClass,
 			final String queryName, final Object[] values) {
 		Query query = getCurrentSession().getNamedQuery(queryName);
-		setQueryParameters(query, values);
+		HibernateUtils.setQueryParameters(query, values);
 		return (R) query.uniqueResult();
 	}
 
@@ -585,7 +586,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	public <R> R findUniqueByNamedQuery(Class<R> resultClass,
 			final String queryName, final Map<String, ?> paramMap) {
 		Query query = getCurrentSession().getNamedQuery(queryName);
-		setQueryNamedParameters(query, paramMap);
+		HibernateUtils.setQueryNamedParameters(query, paramMap);
 		return (R) query.uniqueResult();
 	}
 
@@ -629,7 +630,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 			final String queryName, final Object[] values, final int start,
 			final int maxRows) {
 		Query query = getCurrentSession().getNamedQuery(queryName);
-		setQueryParameters(query, values, start, maxRows);
+		HibernateUtils.setQueryParameters(query, values, start, maxRows);
 		return query.list();
 	}
 	
@@ -654,7 +655,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 			final String queryName, final Map<String, ?> paramMap,
 			final int start, final int maxRows) {
 		Query query = getCurrentSession().getNamedQuery(queryName);
-		setQueryNamedParameters(query, paramMap, start, maxRows);
+		HibernateUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
 		return query.list();
 	}
 
@@ -666,14 +667,14 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	@Override
 	public int executeNamedQuery(final String queryName, final Object[] values) {
 		Query query = getCurrentSession().getNamedQuery(queryName);
-		setQueryParameters(query, values);
+		HibernateUtils.setQueryParameters(query, values);
 		return query.executeUpdate();
 	}
 
 	@Override
 	public int executeNamedQuery(final String queryName, final Map<String, ?> paramMap) {
 		Query query = getCurrentSession().getNamedQuery(queryName);
-		setQueryNamedParameters(query, paramMap);
+		HibernateUtils.setQueryNamedParameters(query, paramMap);
 		return query.executeUpdate();
 	}
 	
@@ -685,14 +686,14 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	@Override
 	public long countByNamedQuery(final String queryName, final Object[] values) {
 		Query query = getCurrentSession().getNamedQuery(queryName);
-		setQueryParameters(query, values);
+		HibernateUtils.setQueryParameters(query, values);
 		return Long.valueOf(String.valueOf(query.uniqueResult()));
 	}
 	
 	@Override
 	public long countByNamedQuery(final String queryName, final Map<String, ?> paramMap) {
 		Query query = getCurrentSession().getNamedQuery(queryName);
-		setQueryNamedParameters(query, paramMap);
+		HibernateUtils.setQueryNamedParameters(query, paramMap);
 		return Long.valueOf(String.valueOf(query.uniqueResult()));
 	}
 	
@@ -717,7 +718,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 			final String sql, final Object[] values) {
 		SQLQuery query = getCurrentSession().createSQLQuery(sql);
 		query.addEntity(resultClass);
-		setQueryParameters(query, values);
+		HibernateUtils.setQueryParameters(query, values);
 		return (R) query.uniqueResult();
 	}
 	
@@ -732,7 +733,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 			final String sql, final Map<String, ?> paramMap) {
 		SQLQuery query = getCurrentSession().createSQLQuery(sql);
 		query.addEntity(resultClass);
-		setQueryNamedParameters(query, paramMap);
+		HibernateUtils.setQueryNamedParameters(query, paramMap);
 		return (R) query.uniqueResult();
 	}
 	
@@ -788,7 +789,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 		
 		SQLQuery query = getCurrentSession().createSQLQuery(sql);
 		query.addEntity(resultClass);
-		setQueryParameters(query, values, start, maxRows);
+		HibernateUtils.setQueryParameters(query, values, start, maxRows);
 		return query.list();
 	}
 	
@@ -802,7 +803,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	public <R> List<R> findByNativeQuery(Class<R> resultClass, final String sql,
 			final Map<String, ?> paramMap, final int start, final int maxRows) {
 		SQLQuery query = getCurrentSession().createSQLQuery(sql);
-		setQueryNamedParameters(query, paramMap, start, maxRows);
+		HibernateUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
 		return query.list();
 	}
 
@@ -814,14 +815,14 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	@Override
 	public int executeByNativeQuery(final String sql, final Object[] values) {
 		SQLQuery query = getCurrentSession().createSQLQuery(sql);
-		setQueryParameters(query, values);
+		HibernateUtils.setQueryParameters(query, values);
 		return query.executeUpdate();
 	}
 
 	@Override
 	public int executeByNativeQuery(final String sql, final Map<String, ?> paramMap) {
 		SQLQuery query = getCurrentSession().createSQLQuery(sql);
-		setQueryNamedParameters(query, paramMap);
+		HibernateUtils.setQueryNamedParameters(query, paramMap);
 		return query.executeUpdate();
 	}
 	
@@ -865,7 +866,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 		
 		Criteria criteria = getCurrentSession().createCriteria(this.getEntityClass());
 		callback.execute(criteria);
-		setOffsetCriteria(criteria, start, maxRows);
+		HibernateUtils.setOffsetCriteria(criteria, start, maxRows);
 		return criteria.list();
 	}
 
@@ -873,7 +874,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	@Override
 	public List<T> findByCriteria(DetachedCriteria criteria, int start, int maxRows) {
 		Criteria executableCriteria = criteria.getExecutableCriteria(getCurrentSession());
-		setOffsetCriteria(executableCriteria, start, maxRows);
+		HibernateUtils.setOffsetCriteria(executableCriteria, start, maxRows);
 		return executableCriteria.list();
 	}
 	
@@ -937,7 +938,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 		Criteria executableCriteria = (StringUtils.isNotBlank(entityName)?
 				getCurrentSession().createCriteria(entityName.trim()) : getCurrentSession().createCriteria(entity.getClass()));
 		executableCriteria.add(Example.create(entity));
-		setOffsetCriteria(executableCriteria, start, maxRows);
+		HibernateUtils.setOffsetCriteria(executableCriteria, start, maxRows);
 		return executableCriteria.list();
 	}
 
@@ -967,7 +968,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	public List<T> findByFilterList(final List<PersistencePropertyFilter> filterList, final int start, final int maxRows) {
 		Query query = getCurrentSession().createQuery(PersistenceUtils.buildQueryStringByFilterList(
 				false, getEntityClass(), filterList));
-		setOffsetQuery(query, start, maxRows);
+		HibernateUtils.setOffsetQuery(query, start, maxRows);
 		return query.list();
 	}
 	
@@ -981,7 +982,7 @@ public class Hibernate4DaoImpl<T, PK extends Serializable> extends
 	public List<T> findByFilterChain(final PersistencePropertyFilterChain chain, final int start, final int maxRows) {
 		Query query = getCurrentSession().createQuery(PersistenceUtils.buildQueryStringByFilterChain(
 				false, getEntityClass(), chain));
-		setOffsetQuery(query, start, maxRows);
+		HibernateUtils.setOffsetQuery(query, start, maxRows);
 		return query.list();
 	}
 

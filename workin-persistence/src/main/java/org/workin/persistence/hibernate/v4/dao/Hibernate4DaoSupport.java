@@ -19,9 +19,6 @@
 package org.workin.persistence.hibernate.v4.dao;
 
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -32,10 +29,9 @@ import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.workin.commons.util.ArrayUtils;
-import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.persistence.GenericDaoSupport;
+import org.workin.persistence.hibernate.HibernateUtils;
 import org.workin.persistence.hibernate.dao.HibernateDao;
 import org.workin.persistence.hibernate.v4.Hibernate4CacheConfiguration;
 
@@ -96,157 +92,45 @@ public abstract class Hibernate4DaoSupport<T, PK extends Serializable> extends
 	}
 
 	/**
-	 * @description 获取实体类型对应的元数据对象
+	 * @description 获取当前实体类型对应的元数据对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityClass
 	 * @return
 	 */
-	protected ClassMetadata getClassMetadata(Class<?> entityClass) {
-		return this.sessionFactory.getClassMetadata(entityClass);
+	protected ClassMetadata getClassMetadata() {
+		return HibernateUtils.getClassMetadata(getSessionFactory(), getEntityClass());
 	}
 	
 	/**
-	 * @description 获取实体类型对应的名称
+	 * @description 获取当前实体类型对应的名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityClass
 	 * @return
 	 */
-	protected String entityName(Class<?> entityClass) {
-		return getClassMetadata(entityClass).getEntityName();
+	protected String entityName() {
+		return getClassMetadata().getEntityName();
 	}
 	
 	/**
-	 * @description 获取实体类型对应的表名
+	 * @description 获取当前实体类型对应的表名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityClass
 	 * @return
 	 */
-	protected String getTableName(Class<?> entityClass) {
-		return ((AbstractEntityPersister) getClassMetadata(entityClass)).getTableName();
+	protected String getTableName() {
+		return ((AbstractEntityPersister) getClassMetadata()).getTableName();
 	}
 			
 	/**
-	 * @description 获取实体类型对应的表的主键名
+	 * @description 获取当前实体类型对应的表的主键名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
 	 */
-	protected String getPrimaryKeyName(Class<?> entityClass) {
-		return getClassMetadata(entityClass).getIdentifierPropertyName();
-	}
-	
-	/**
-	 * @description 设置分段标准化查询参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param criteria 标准化查询接口
-	 * @param start 起始位置
-	 * @param maxRows 最大行数
-	 */
-	protected void setOffsetCriteria(Criteria criteria, int start, int maxRows) {
-		if (start >= 0)
-			criteria.setFirstResult(start);
-		if (maxRows > 0)
-			criteria.setMaxResults(maxRows);
-	}
-	
-	/**
-	 * @description 设置分段查询参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 查询接口
-	 * @param start 起始位置
-	 * @param maxRows 最大行数
-	 */
-	protected void setOffsetQuery(Query query, int start, int maxRows) {
-		if (start >= 0)
-			query.setFirstResult(start);
-		if (maxRows > 0)
-			query.setMaxResults(maxRows);
+	protected String getPrimaryKeyName() {
+		return getClassMetadata().getIdentifierPropertyName();
 	}
 		
-	/**
-	 * @description 设置占位符形式的查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 查询接口
-	 * @param values 查询参数值顺序组
-	 */
-	protected void setQueryParameters(Query query, Object[] values) {
-		if (ArrayUtils.isNotEmpty(values)) {
-			for (int i = 0; i < values.length; i++) 
-				query.setParameter(i, values[i]);
-		}
-	}
-	
-	/**
-	 * @description 设置占位符形式的分段查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 查询接口
-	 * @param values 查询参数值顺序组
-	 * @param start 起始位置
-	 * @param maxRows 最大行数
-	 */
-	protected void setQueryParameters(Query query, Object[] values, int start, int maxRows) {
-		setQueryParameters(query, values);
-		setOffsetQuery(query, start, maxRows);
-	}
-	
-	/**
-	 * @description 设置命名形式的查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query
-	 * @param paramName 查询参数名
-	 * @param paramValue 查询参数值
-	 */
-	protected void setQueryNamedParameter(Query query, String paramName, Object paramValue) {
-		if (StringUtils.isNotBlank(paramName)) 
-			query.setParameter(paramName, paramValue);
-	}
-	
-	/**
-	 * @description 设置命名形式的分段查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 查询接口
-	 * @param paramName 查询参数名
-	 * @param paramValue 查询参数值
-	 * @param start 起始位置
-	 * @param maxRows 最大行数
-	 */
-	protected void setQueryNamedParameter(Query query, String paramName, Object paramValue, int start, int maxRows) {
-		setQueryNamedParameter(query, paramName, paramValue);
-		setOffsetQuery(query, start, maxRows);
-	}
-	
-	/**
-	 * @description 设置命名形式的多个查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 查询接口
-	 * @param paramMap 查询参数名-值映射集
-	 */
-	protected void setQueryNamedParameters(Query query, Map<String, ?> paramMap) {
-		if (MapUtils.isNotEmpty(paramMap)) {
-			Iterator<?> iterator = paramMap.entrySet().iterator();
-			String name;
-			while (iterator.hasNext()) {
-				Entry<?, ?> entry = (Entry<?, ?>) iterator.next();
-				name = (String)entry.getKey();
-				if (StringUtils.isNotBlank(name))
-					query.setParameter(name, entry.getValue());
-			}
-		}
-	}
-	
-	/**
-	 * @description 设置命名形式的多个分段查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 查询接口
-	 * @param paramMap 查询参数名-值映射集
-	 * @param start 起始位置
-	 * @param maxRows 最大行数
-	 */
-	protected void setQueryNamedParameters(Query query, Map<String, ?> paramMap, int start, int maxRows) {
-		setQueryNamedParameters(query, paramMap);
-		setOffsetQuery(query, start, maxRows);
-	}
-	
 	/**
 	 * @description 根据缓存配置项设置Criteria对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

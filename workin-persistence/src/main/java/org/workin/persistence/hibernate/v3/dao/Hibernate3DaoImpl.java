@@ -39,6 +39,7 @@ import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.persistence.hibernate.HibernateUtils;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallback;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
@@ -252,7 +253,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(ql);
-				setQueryParameters(query, values);
+				HibernateUtils.setQueryParameters(query, values);
 				return query.executeUpdate();
 			}
 		});
@@ -265,7 +266,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(ql);
-				setQueryNamedParameters(query, paramMap);
+				HibernateUtils.setQueryNamedParameters(query, paramMap);
 				return query.executeUpdate();
 			}
 		});
@@ -416,7 +417,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public T findById(PK primaryKey) {
-		return findUniqueByProperty(getPrimaryKeyName(this.getEntityClass()), primaryKey);
+		return findUniqueByProperty(getPrimaryKeyName(), primaryKey);
 	}
 	
 	@Override
@@ -455,7 +456,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public R doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(ql);
-				setQueryParameters(query, values);
+				HibernateUtils.setQueryParameters(query, values);
 				return (R) query.uniqueResult();
 			}
 		});
@@ -475,7 +476,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public R doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(ql);
-				setQueryNamedParameters(query, paramMap);
+				HibernateUtils.setQueryNamedParameters(query, paramMap);
 				return (R) query.uniqueResult();
 			}
 		});
@@ -536,7 +537,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(ql);
-				setQueryParameters(query, values, start, maxRows);
+				HibernateUtils.setQueryParameters(query, values, start, maxRows);
 				return query.list();
 			}
 		});
@@ -557,7 +558,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(ql);
-				setQueryNamedParameters(query, paramMap, start, maxRows);
+				HibernateUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
 				return query.list();
 			}
 		});
@@ -654,7 +655,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public R doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.getNamedQuery(queryName);
-				setQueryParameters(query, values);
+				HibernateUtils.setQueryParameters(query, values);
 				return (R) query.uniqueResult();
 			}
 		});
@@ -675,7 +676,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public R doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.getNamedQuery(queryName);
-				setQueryNamedParameters(query, paramMap);
+				HibernateUtils.setQueryNamedParameters(query, paramMap);
 				return (R) query.uniqueResult();
 			}
 		});
@@ -726,7 +727,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.getNamedQuery(queryName);
-				setQueryParameters(query, values, start, maxRows);
+				HibernateUtils.setQueryParameters(query, values, start, maxRows);
 				return query.list();
 			}
 		});
@@ -758,7 +759,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.getNamedQuery(queryName);
-				setQueryNamedParameters(query, paramMap, start, maxRows);
+				HibernateUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
 				return query.list();
 			}
 		});
@@ -776,7 +777,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.getNamedQuery(queryName);
-				setQueryParameters(query, values);
+				HibernateUtils.setQueryParameters(query, values);
 				return query.executeUpdate();
 			}
 			
@@ -790,7 +791,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.getNamedQuery(queryName);
-				setQueryNamedParameters(query, paramMap);
+				HibernateUtils.setQueryNamedParameters(query, paramMap);
 				return query.executeUpdate();
 			}
 			
@@ -810,7 +811,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Long doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.getNamedQuery(queryName);
-				setQueryParameters(query, values);
+				HibernateUtils.setQueryParameters(query, values);
 				return Long.valueOf(String.valueOf(query.uniqueResult()));
 			}
 		});
@@ -824,7 +825,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Long doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.getNamedQuery(queryName);
-				setQueryNamedParameters(query, paramMap);
+				HibernateUtils.setQueryNamedParameters(query, paramMap);
 				return Long.valueOf(String.valueOf(query.uniqueResult()));
 			}
 		});
@@ -856,7 +857,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			public R doInHibernate(Session session) throws HibernateException, SQLException {
 				SQLQuery query = session.createSQLQuery(sql);
 				query.addEntity(resultClass);
-				setQueryParameters(query, values);
+				HibernateUtils.setQueryParameters(query, values);
 				return (R) query.uniqueResult();
 			}
 		});
@@ -878,7 +879,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			public R doInHibernate(Session session) throws HibernateException, SQLException {
 				SQLQuery query = session.createSQLQuery(sql);
 				query.addEntity(resultClass);
-				setQueryNamedParameters(query, paramMap);
+				HibernateUtils.setQueryNamedParameters(query, paramMap);
 				return (R) query.uniqueResult();
 			}
 		});
@@ -939,7 +940,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
 				SQLQuery query = session.createSQLQuery(sql);
 				query.addEntity(resultClass);
-				setQueryParameters(query, values, start, maxRows);
+				HibernateUtils.setQueryParameters(query, values, start, maxRows);
 				return query.list();
 			}
 		});
@@ -960,7 +961,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public List<R> doInHibernate(Session session) throws HibernateException, SQLException {
 				SQLQuery query = session.createSQLQuery(sql);
-				setQueryNamedParameters(query, paramMap, start, maxRows);
+				HibernateUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
 				return query.list();
 			}
 		});
@@ -978,7 +979,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
 				SQLQuery query = session.createSQLQuery(sql);
-				setQueryParameters(query, values);
+				HibernateUtils.setQueryParameters(query, values);
 				return query.executeUpdate();
 			}
 		});
@@ -991,7 +992,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
 				SQLQuery query = session.createSQLQuery(sql);
-				setQueryNamedParameters(query, paramMap);
+				HibernateUtils.setQueryNamedParameters(query, paramMap);
 				return query.executeUpdate();
 			}
 		});
@@ -1053,7 +1054,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
 				Criteria criteria = session.createCriteria(getEntityClass());
 				callback.execute(criteria);
-				setOffsetCriteria(criteria, start, maxRows);
+				HibernateUtils.setOffsetCriteria(criteria, start, maxRows);
 				return criteria.list();
 			}
 		});
@@ -1184,7 +1185,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterList(
 						false, getEntityClass(), filterList));
-				setOffsetQuery(query, start, maxRows);
+				HibernateUtils.setOffsetQuery(query, start, maxRows);
 				return query.list();
 			}
 		});
@@ -1205,7 +1206,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterChain(
 						false, getEntityClass(), chain));
-				setOffsetQuery(query, start, maxRows);
+				HibernateUtils.setOffsetQuery(query, start, maxRows);
 				return query.list();
 			}
 		});
