@@ -16,7 +16,7 @@
  * Create Date : 2015-3-27
  */
 
-package org.workin.nosql.redis.dao.spring;
+package org.workin.nosql.redis.spring;
 
 import java.util.Collection;
 import java.util.Date;
@@ -44,7 +44,6 @@ import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.nosql.redis.RedisRepository;
-import org.workin.nosql.redis.dao.RedisCommandsDao;
 import org.workin.serialization.Serializer;
 import org.workin.serialization.jdk.StringSerializer;
 
@@ -54,7 +53,7 @@ import org.workin.serialization.jdk.StringSerializer;
  * @version 1.0
  */
 @Repository
-public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements RedisCommandsDao {
+public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements SpringRedisCommandsDao {
 	
 	@Override
 	public <K> Set<K> keys() {

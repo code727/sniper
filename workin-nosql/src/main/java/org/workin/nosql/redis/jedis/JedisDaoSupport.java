@@ -16,7 +16,7 @@
  * Create Date : 2016-8-1
  */
 
-package org.workin.nosql.redis.dao.jedis;
+package org.workin.nosql.redis.jedis;
 
 import org.workin.nosql.redis.dao.RedisDaoSupport;
 

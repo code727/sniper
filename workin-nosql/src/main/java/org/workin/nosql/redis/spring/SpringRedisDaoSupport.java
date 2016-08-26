@@ -16,7 +16,7 @@
  * Create Date : 2015-3-26
  */
 
-package org.workin.nosql.redis.dao.spring;
+package org.workin.nosql.redis.spring;
 
 import java.lang.reflect.Field;
 import java.util.List;

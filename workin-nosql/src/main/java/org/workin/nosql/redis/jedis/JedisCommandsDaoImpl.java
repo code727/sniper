@@ -16,7 +16,7 @@
  * Create Date : 2016-8-24
  */
 
-package org.workin.nosql.redis.dao.jedis;
+package org.workin.nosql.redis.jedis;
 
 import java.util.Collection;
 import java.util.Date;
@@ -25,18 +25,18 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.data.redis.connection.DataType;
-import org.springframework.data.redis.connection.RedisListCommands.Position;
-import org.springframework.data.redis.connection.RedisZSetCommands.Aggregate;
 import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
-import org.springframework.data.redis.connection.SortParameters;
-import org.workin.nosql.redis.dao.RedisCommandsDao;
+
+import redis.clients.jedis.BinaryClient.LIST_POSITION;
+import redis.clients.jedis.SortingParams;
+import redis.clients.jedis.ZParams;
 
 /**
  * @description Jedis命令行数据访问实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JedisCommandsDaoImpl extends JedisDaoSupport implements RedisCommandsDao {
+public class JedisCommandsDaoImpl extends JedisDaoSupport implements JedisCommandsDao {
 
 	@Override
 	public <K, V> void set(K key, V value) {
@@ -545,27 +545,27 @@ public class JedisCommandsDaoImpl extends JedisDaoSupport implements RedisComman
 	}
 
 	@Override
-	public <K, V> Long lInsert(K key, Position where, V pivot, V value) {
+	public <K, V> Long lInsert(K key, LIST_POSITION where, V pivot, V value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K, V> Long lInsert(K key, Position where, V pivot, V value,
+	public <K, V> Long lInsert(K key, LIST_POSITION where, V pivot, V value,
 			long expireSeconds) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K, V> Long lInsert(int dbIndex, K key, Position where, V pivot,
+	public <K, V> Long lInsert(int dbIndex, K key, LIST_POSITION where, V pivot,
 			V value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K, V> Long lInsert(int dbIndex, K key, Position where, V pivot,
+	public <K, V> Long lInsert(int dbIndex, K key, LIST_POSITION where, V pivot,
 			V value, long expireSeconds) {
 		// TODO Auto-generated method stub
 		return null;
@@ -1682,30 +1682,28 @@ public class JedisCommandsDaoImpl extends JedisDaoSupport implements RedisComman
 	}
 
 	@Override
-	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights,
-			K[] keys) {
+	public <K> Long zUnionStore(K destKey, ZParams params, int[] weights, K[] keys) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate,
+	public <K> Long zUnionStore(int dbIndex, K destKey, ZParams params,
 			int[] weights, K[] keys) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights,
+	public <K> Long zUnionStore(K destKey, ZParams params, int[] weights,
 			Collection<K> keys) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate,
+	public <K> Long zUnionStore(int dbIndex, K destKey, ZParams params,
 			int[] weights, Collection<K> keys) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -1746,28 +1744,28 @@ public class JedisCommandsDaoImpl extends JedisDaoSupport implements RedisComman
 	}
 
 	@Override
-	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights,
+	public <K> Long zInterStore(K destKey, ZParams params, int[] weights,
 			K[] keys) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate,
+	public <K> Long zInterStore(int dbIndex, K destKey, ZParams params,
 			int[] weights, K[] keys) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights,
+	public <K> Long zInterStore(K destKey, ZParams params, int[] weights,
 			Collection<K> keys) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate,
+	public <K> Long zInterStore(int dbIndex, K destKey, ZParams params,
 			int[] weights, Collection<K> keys) {
 		// TODO Auto-generated method stub
 		return null;
@@ -1918,38 +1916,37 @@ public class JedisCommandsDaoImpl extends JedisDaoSupport implements RedisComman
 	}
 
 	@Override
-	public <K, V> List<V> sort(K key, SortParameters params) {
+	public <K, V> List<V> sort(K key, SortingParams params) {
+		return null;
+	}
+
+	@Override
+	public <K, V> List<V> sort(int dbIndex, K key, SortingParams params) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K, V> List<V> sort(int dbIndex, K key, SortParameters params) {
+	public <K, V> Long sortCount(K key, SortingParams params, K targetKey) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K, V> Long sortCount(K key, SortParameters params, K targetKey) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <K, V> Long sortCount(int dbIndex, K key, SortParameters params,
+	public <K, V> Long sortCount(int dbIndex, K key, SortingParams params,
 			K targetKey) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K, V> List<V> sortResult(K key, SortParameters params, K targetKey) {
+	public <K, V> List<V> sortResult(K key, SortingParams params, K targetKey) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <K, V> List<V> sortResult(int dbIndex, K key, SortParameters params,
+	public <K, V> List<V> sortResult(int dbIndex, K key, SortingParams params,
 			K targetKey) {
 		// TODO Auto-generated method stub
 		return null;

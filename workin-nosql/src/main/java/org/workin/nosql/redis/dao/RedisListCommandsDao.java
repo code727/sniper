@@ -21,62 +21,12 @@ package org.workin.nosql.redis.dao;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.data.redis.connection.RedisListCommands.Position;
-
 /**
  * @description Redis列表命令行数据访问接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface RedisListCommandsDao {
-	
-	/**
-	 * @description 在当前库中执行lInsert命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param where
-	 * @param pivot 位置值
-	 * @param value
-	 * @return
-	 */
-	public <K, V> Long lInsert(K key, Position where, V pivot, V value);
-	
-	/**
-	 * @description 在当前库中执行lInsert命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param where
-	 * @param pivot
-	 * @param value
-	 * @param expireSeconds
-	 * @return
-	 */
-	public <K, V> Long lInsert(K key, Position where, V pivot, V value, long expireSeconds);
-	
-	/**
-	 * @description 在指定索引库中执行lInsert命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param key
-	 * @param where
-	 * @param pivot 位置值
-	 * @param value
-	 * @return
-	 */
-	public <K, V> Long lInsert(int dbIndex, K key, Position where, V pivot, V value);
-	
-	/**
-	 * @description 在指定索引库中执行lInsert命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param key
-	 * @param where
-	 * @param pivot
-	 * @param value
-	 * @param expireSeconds
-	 * @return
-	 */
-	public <K, V> Long lInsert(int dbIndex, K key, Position where, V pivot, V value, long expireSeconds);
 	
 	/**
 	 * @description 在当前库中执行lSet命令

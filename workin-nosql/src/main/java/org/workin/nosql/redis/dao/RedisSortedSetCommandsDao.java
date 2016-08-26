@@ -22,7 +22,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.data.redis.connection.RedisZSetCommands.Aggregate;
 import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 
 /**
@@ -630,56 +629,6 @@ public interface RedisSortedSetCommandsDao {
 	public <K> Long zUnionStore(int dbIndex, K destKey, Collection<K> keys);
 	
 	/**
-	 * @description 在当前库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param destKey
-	 * @param aggregate
-	 * @param weights
-	 * @param keys
-	 * @return
-	 */
-	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, K[] keys);
-	
-	/**
-	 * @description 在指定索引库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param destKey
-	 * @param aggregate
-	 * @param weights
-	 * @param keys
-	 * @return
-	 */
-	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, K[] keys);
-	
-	/**
-	 * @description 在当前库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param destKey
-	 * @param aggregate
-	 * @param weights
-	 * @param keys
-	 * @return
-	 */
-	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
-	
-	/**
-	 * @description 在指定索引库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param destKey
-	 * @param aggregate
-	 * @param weights
-	 * @param keys
-	 * @return
-	 */
-	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
-	
-	/**
 	 * @description 在当前库中执行zInterStore命令，
 	 * 				获取指定目标键集与键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -741,56 +690,6 @@ public interface RedisSortedSetCommandsDao {
 	 * @return
 	 */
 	public <K> Long zInterStore(int dbIndex, K destKey, Collection<K> keys);
-	
-	/**
-	 * @description 在当前库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param destKey
-	 * @param aggregate
-	 * @param weights
-	 * @param keys
-	 * @return
-	 */
-	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, K[] keys);
-	
-	/**
-	 * @description 在指定索引库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param destKey
-	 * @param aggregate
-	 * @param weights
-	 * @param keys
-	 * @return
-	 */
-	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, K[] keys);
-	
-	/**
-	 * @description 在当前库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param destKey
-	 * @param aggregate
-	 * @param weights
-	 * @param keys
-	 * @return
-	 */
-	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
-	
-	/**
-	 * @description 在指定索引库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param destKey
-	 * @param aggregate
-	 * @param weights
-	 * @param keys
-	 * @return
-	 */
-	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
 	
 	/**
 	 * @description 在当前库中执行zIncrBy命令，
