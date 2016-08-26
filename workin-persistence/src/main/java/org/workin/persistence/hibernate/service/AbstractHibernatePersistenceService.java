@@ -72,10 +72,10 @@ public abstract class AbstractHibernatePersistenceService<T, PK extends Serializ
 		
 		Class<T> entityType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 		// 将当前服务类管理的实体类型传递给持久化DAO，使DAO接口的方法能正常工作
-		this.hibernatePersistenceDao.setEntityClass(entityType);
+		this.hibernatePersistenceDao.setBeanClass(entityType);
 		if (sqlMapQuery != null) {
 			// 同时开启ibatis/mybatis的查询接口，弥补JPA针对复杂查询难以处理的问题
-			sqlMapQuery.setEntityClass(entityType);
+			sqlMapQuery.setBeanClass(entityType);
 			logger.info("Successful enable SqlMapQuery interface,implements class is :"
 					+ sqlMapQuery.getClass().getName());
 		}

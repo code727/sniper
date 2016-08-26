@@ -21,14 +21,14 @@ package org.workin.persistence.sqlmap.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.workin.persistence.GenericDao;
+import org.workin.support.bean.GenericBean;
 
 /**
  * @description SQL映射查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SqlMapQuery<T> extends GenericDao<T> {
+public interface SqlMapQuery<T> extends GenericBean<T> {
 	
 	/** 默认的结果映射集属性键的名称 */
 	public static final String DEFAULT_KEY_PROPERTY = "id";
@@ -36,126 +36,126 @@ public interface SqlMapQuery<T> extends GenericDao<T> {
 	/**
 	 * @description 执行id对应的count语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @return
 	 */
-	public long countBySqlMap(String id);
+	public long countBySqlMap(String statement);
 	
 	/**
-	 * @description 执行id对应的count语句后返回结果
+	 * @description 执行statement对应的count语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @param parameter
 	 * @return
 	 */
-	public long countBySqlMap(String id, Object parameter);
+	public long countBySqlMap(String statement, Object parameter);
 	
 	/**
-	 * @description 执行id对应的查询语句后返回当前类型唯一的实体对象
+	 * @description 执行statement对应的查询语句后返回当前类型唯一的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @return
 	 */
-	public T queryUniqueBySqlMap(String id);
+	public T queryUniqueBySqlMap(String statement);
 	
 	/**
-	 * @description 执行id对应的查询语句后返回当前类型的实体对象
+	 * @description 执行statement对应的查询语句后返回当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @param parameter
 	 * @return
 	 */
-	public T queryUniqueBySqlMap(String id, Object parameter);
+	public T queryUniqueBySqlMap(String statement, Object parameter);
 	
 	/**
-	 * @description 执行id对应的查询语句后返回指定类型的实体对象
+	 * @description 执行statement对应的查询语句后返回指定类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
-	 * @param id
+	 * @param statement
 	 * @return
 	 */
-	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String id);
+	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String statement);
 	
 	/**
-	 * @description 执行id对应的查询语句后返回指定类型的唯一结果
+	 * @description 执行statement对应的查询语句后返回指定类型的唯一结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
-	 * @param id
+	 * @param statement
 	 * @param parameter
 	 * @return
 	 */
-	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String id, Object parameter);
+	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String statement, Object parameter);
 	
 	/**
-	 * @description 执行id对应的查询语句后返回当前类型的实体对象列表
+	 * @description 执行statement对应的查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @return
 	 */
-	public List<T> queryListBySqlMap(String id);
+	public List<T> queryListBySqlMap(String statement);
 	
 	/**
-	 * @description 执行id对应的查询语句后返回当前类型的实体对象列表
+	 * @description 执行statement对应的查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @param parameter
 	 * @return
 	 */
-	public List<T> queryListBySqlMap(String id, Object parameter);
+	public List<T> queryListBySqlMap(String statement, Object parameter);
 		
 	/**
-	 * @description 执行id对应的查询语句后返回指定类型的实体对象列表
+	 * @description 执行statement对应的查询语句后返回指定类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
-	 * @param id
+	 * @param statement
 	 * @return
 	 */
-	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String id);
+	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String statement);
 	
 	/**
-	 * @description 执行id对应的查询语句后返回指定类型的实体对象列表
+	 * @description 执行statement对应的查询语句后返回指定类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
-	 * @param id
+	 * @param statement
 	 * @param parameter
 	 * @return
 	 */
-	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String id, Object parameter);
+	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String statement, Object parameter);
 	
 	/**
-	 * @description 执行id对应的查询语句后返回结果映射集
+	 * @description 执行statement对应的查询语句后返回结果映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id 
+	 * @param statement 
 	 * @return
 	 */
-	public <K,V> Map<K, V> queryMapBySqlMap(String id);
+	public <K,V> Map<K, V> queryMapBySqlMap(String statement);
 	
 	/**
-	 * @description 执行id对应的查询语句后返回结果映射集
+	 * @description 执行statement对应的查询语句后返回结果映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @param parameter
 	 * @return
 	 */
-	public <K,V> Map<K, V> queryMapBySqlMap(String id, Object parameter);
+	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter);
 	
 	/**
-	 * @description 执行id对应的查询语句后返回结果映射集
+	 * @description 执行statement对应的查询语句后返回结果映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @param keyProperty 结果集的键值
 	 * @return
 	 */
-	public <K,V> Map<K, V> queryMapBySqlMap(String id, String keyProperty);
+	public <K,V> Map<K, V> queryMapBySqlMap(String statement, String keyProperty);
 	
 	/**
-	 * @description 执行id对应的查询语句后返回结果映射集
+	 * @description 执行statement对应的查询语句后返回结果映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @param parameter
 	 * @param keyProperty 结果集的键值
 	 * @return
 	 */
-	public <K,V> Map<K, V> queryMapBySqlMap(String id, Object parameter, String keyProperty);
+	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter, String keyProperty);
 	
 }

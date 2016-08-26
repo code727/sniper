@@ -27,13 +27,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
-import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.util.StringUtils;
-import org.workin.persistence.GenericDaoSupport;
 import org.workin.persistence.hibernate.HibernateUtils;
 import org.workin.persistence.hibernate.dao.HibernateDao;
 import org.workin.persistence.hibernate.v4.Hibernate4CacheConfiguration;
+import org.workin.spring.beans.AbstractGenricBean;
 
 /**
  * @description Hibernate4 DAO支持抽象类
@@ -41,8 +40,8 @@ import org.workin.persistence.hibernate.v4.Hibernate4CacheConfiguration;
  * @version 1.0
  */
 public abstract class Hibernate4DaoSupport<T, PK extends Serializable> extends
-		GenericDaoSupport<T> implements HibernateDao<T, PK> {
-	
+		AbstractGenricBean<T> implements HibernateDao<T, PK> {
+ 	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -57,6 +56,20 @@ public abstract class Hibernate4DaoSupport<T, PK extends Serializable> extends
 	@Override
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+	
+	public Hibernate4CacheConfiguration getCacheConfiguration() {
+		return cacheConfiguration;
+	}
+
+	public void setCacheConfiguration(Hibernate4CacheConfiguration cacheConfiguration) {
+		this.cacheConfiguration = cacheConfiguration;
+	}
+	
+	@Override
+	protected void checkProperties() {
+		if (this.sessionFactory == null) 
+			throw new IllegalArgumentException("Property 'sessionFactory' is required");
 	}
 	
 	@Override
@@ -76,21 +89,6 @@ public abstract class Hibernate4DaoSupport<T, PK extends Serializable> extends
 		return session;
 	}
 	
-	public Hibernate4CacheConfiguration getCacheConfiguration() {
-		return cacheConfiguration;
-	}
-
-	public void setCacheConfiguration(
-			Hibernate4CacheConfiguration cacheConfiguration) {
-		this.cacheConfiguration = cacheConfiguration;
-	}
-	
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		if (sessionFactory == null)
-			throw new BeanCreationException("Property 'sessionFactory' must not be null");
-	}
-
 	/**
 	 * @description 获取当前实体类型对应的元数据对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -98,7 +96,7 @@ public abstract class Hibernate4DaoSupport<T, PK extends Serializable> extends
 	 * @return
 	 */
 	protected ClassMetadata getClassMetadata() {
-		return HibernateUtils.getClassMetadata(getSessionFactory(), getEntityClass());
+		return HibernateUtils.getClassMetadata(getSessionFactory(), getBeanClass());
 	}
 	
 	/**

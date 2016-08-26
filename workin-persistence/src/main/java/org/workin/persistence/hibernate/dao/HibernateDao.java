@@ -23,7 +23,6 @@ import java.io.Serializable;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.workin.persistence.FilterQuery;
-import org.workin.persistence.GenericDao;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQuery;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateExampleQuery;
 import org.workin.persistence.hibernate.dao.interfaces.HibernatePersistence;
@@ -31,6 +30,7 @@ import org.workin.persistence.hibernate.dao.interfaces.HibernateQuery;
 import org.workin.persistence.jpa.dao.interfaces.JpaNamedQuery;
 import org.workin.persistence.jpa.dao.interfaces.JpaNativePersistence;
 import org.workin.persistence.jpa.dao.interfaces.JpaNativeQuery;
+import org.workin.support.bean.GenericBean;
 
 /**
  * @description Hibernate持久化数据访问接口
@@ -38,7 +38,7 @@ import org.workin.persistence.jpa.dao.interfaces.JpaNativeQuery;
  * @version 1.0
  */
 public interface HibernateDao<T, Pk extends Serializable> extends
-		GenericDao<T>, HibernatePersistence<T, Pk>, JpaNativePersistence,
+		GenericBean<T>, HibernatePersistence<T, Pk>, JpaNativePersistence,
 		HibernateQuery<T, Pk>, JpaNamedQuery<T>, JpaNativeQuery<T>,
 		HibernateCriteriaQuery<T>, HibernateExampleQuery<T>, FilterQuery<T> {
 		

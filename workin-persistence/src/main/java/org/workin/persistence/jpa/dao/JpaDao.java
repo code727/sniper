@@ -23,7 +23,6 @@ import java.io.Serializable;
 import javax.persistence.EntityManager;
 
 import org.workin.persistence.FilterQuery;
-import org.workin.persistence.GenericDao;
 import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQuery;
 import org.workin.persistence.jpa.dao.interfaces.JpaNamedQuery;
 import org.workin.persistence.jpa.dao.interfaces.JpaNativePersistence;
@@ -31,13 +30,14 @@ import org.workin.persistence.jpa.dao.interfaces.JpaNativeQuery;
 import org.workin.persistence.jpa.dao.interfaces.JpaPagingQuery;
 import org.workin.persistence.jpa.dao.interfaces.JpaPersistence;
 import org.workin.persistence.jpa.dao.interfaces.JpaQuery;
+import org.workin.support.bean.GenericBean;
 
 /**
  * @description JPA持久化数据访问接口
  * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JpaDao<T, PK extends Serializable> extends GenericDao<T>,
+public interface JpaDao<T, PK extends Serializable> extends GenericBean<T>,
 		JpaPersistence<T, PK>, JpaNativePersistence, JpaQuery<T, PK>, JpaNamedQuery<T>,
 		JpaNativeQuery<T>, JpaCriteriaQuery<T>, JpaPagingQuery<T>, FilterQuery<T> {
 	

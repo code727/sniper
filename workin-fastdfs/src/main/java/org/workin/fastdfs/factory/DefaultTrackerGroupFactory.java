@@ -66,19 +66,18 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 	public void setMemberStrategy(int memberStrategy) {
 		this.memberStrategy = memberStrategy;
 	}
-
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
-		init();
-		createTrackerGroup(); 
-	}
 	
+	@Override
+	protected void checkProperties() {
+		if (this.cluster == null)
+			new IllegalArgumentException("DefaultTrackerGroupFactory property 'cluster' must not be null.");
+	}
+
 	/**
 	 * @description 初始化全局配置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	private void init() {
+	protected void init() throws Exception {
 		logger.info("Starting init FastDFS client global configuration.");
 		TrackerCluster trackerCluster = this.cluster.getTrackerCluster();
 		ClientGlobal.g_connect_timeout = trackerCluster.getConnectTimeout();
@@ -90,6 +89,8 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 		ClientGlobal.g_anti_steal_token = stealToken;
 		if (stealToken) 
 			ClientGlobal.g_secret_key = StringUtils.safeString(trackerCluster.getHttpSecretKey());
+		
+		createTrackerGroup(); 
 	}
 	
 	/** 
@@ -140,12 +141,6 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 			trackerServerAddresses[i++] = new InetSocketAddress(tracker.getHost(), tracker.getPort());
 		}
 		return trackerServerAddresses;
-	}
-
-	@Override
-	protected void checkProperties() throws IllegalArgumentException {
-		if (this.cluster == null)
-			new IllegalArgumentException("DefaultTrackerGroupFactory property 'cluster' must not be null.");
 	}
 
 	@Override

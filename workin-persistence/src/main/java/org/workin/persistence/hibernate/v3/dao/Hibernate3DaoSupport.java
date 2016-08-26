@@ -37,20 +37,22 @@ public abstract class Hibernate3DaoSupport<T, PK extends Serializable> extends
 		HibernateDaoSupport implements HibernateDao<T, PK> {
 	
 	/** 当前DAO所关联的实体类型 */
-	private Class<T> entityClass;
+	private Class<T> beanClass;
 	
 	@Override
-	public void setEntityClass(Class<T> entityClass) {
-		this.entityClass = entityClass;
+	public void setBeanClass(Class<T> beanClass) {
+		this.beanClass = beanClass;
+	}
+	
+	@Override
+	public Class<T> getBeanClass() {
+		return beanClass;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Class<T> getEntityClass() {
-		if (this.entityClass == null)
-			this.entityClass = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
-		
-		return this.entityClass;
+	protected void initDao() throws Exception {
+		this.beanClass = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 	}
 	
 	/**
@@ -80,7 +82,7 @@ public abstract class Hibernate3DaoSupport<T, PK extends Serializable> extends
 	 * @return
 	 */
 	protected ClassMetadata getClassMetadata() {
-		return HibernateUtils.getClassMetadata(getSessionFactory(), getEntityClass());
+		return HibernateUtils.getClassMetadata(getSessionFactory(), getBeanClass());
 	}
 	
 	/**

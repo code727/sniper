@@ -26,52 +26,52 @@ package org.workin.persistence.sqlmap.dao;
 public interface SqlMapDao<T> extends SqlMapQuery<T> {
 	
 	/**
-	 * @description 执行id对应的insert语句后返回结果
+	 * @description 执行statement对应的insert语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @return
 	 */
-	public Object insert(String id);
+	public Object insert(String statement);
 	
 	/**
-	 * @description 执行id对应的insert语句后返回结果
+	 * @description 执行statement对应的insert语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @param parameter
 	 * @return
 	 */
-	public Object insert(String id, Object parameter);
+	public Object insert(String statement, Object parameter);
 	
 	/**
-	 * @description 执行id对应的update语句后返回受影响的行数
+	 * @description 执行statement对应的update语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @return
 	 */
-	public int update(String id);
+	public int update(String statement);
 	
 	/**
-	 * @description 执行id对应的update语句后返回受影响的行数
+	 * @description 执行statement对应的update语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @param parameter
 	 * @return
 	 */
-	public int update(String id, Object parameter);
+	public int update(String statement, Object parameter);
 	
 	/**
-	 * @description 执行id对应的delete语句后返回受影响的行数
+	 * @description 执行statement对应的delete语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 */
-	public int delete(String id);
+	public int delete(String statement);
 	
 	/**
-	 * @description 执行id对应的delete语句后返回受影响的行数
+	 * @description 执行statement对应的delete语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param statement
 	 * @param parameter
 	 */
-	public int delete(String id, Object parameter);
+	public int delete(String statement, Object parameter);
 
 }

@@ -27,15 +27,22 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public abstract class CheckableInitializingBean implements InitializingBean {
 	
-	public void afterPropertiesSet() throws Exception {
-		this.checkProperties();
+	public final void afterPropertiesSet() throws Exception {
+		checkProperties();
+		init();
 	}
 	
 	/**
 	 * @description 检测当前Bean对象属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @throws IllegalArgumentException
 	 */
-	protected abstract void checkProperties() throws IllegalArgumentException;
+	protected abstract void checkProperties();
+	
+	/**
+	 * @description 初始化操作
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @throws Exception
+	 */
+	protected abstract void init() throws Exception;
 	
 }

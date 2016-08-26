@@ -29,14 +29,14 @@ import javax.persistence.Query;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.persistence.GenericDaoSupport;
+import org.workin.spring.beans.AbstractGenricBean;
 
 /**
  * @description JPA2标准的DAO支持抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class Jpa2DaoSupport<T> extends GenericDaoSupport<T> {
+public abstract class Jpa2DaoSupport<T> extends AbstractGenricBean<T> {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -47,6 +47,12 @@ public abstract class Jpa2DaoSupport<T> extends GenericDaoSupport<T> {
 
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
+	}
+	
+	@Override
+	protected void checkProperties() {
+		if (entityManager == null)
+			throw new IllegalArgumentException("Property 'entityManager' is required");
 	}
 	
 	/**
@@ -71,7 +77,8 @@ public abstract class Jpa2DaoSupport<T> extends GenericDaoSupport<T> {
 	 */
 	protected void setQueryParameters(Query query, Object[] values) {
 		if (ArrayUtils.isNotEmpty(values)) {
-			for (int i = 0; i < values.length; i++) 
+			int length = values.length;
+			for (int i = 0; i < length; i++) 
 				query.setParameter(i + 1, values[i]);
 		}
 	}

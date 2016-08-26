@@ -29,35 +29,35 @@ public class MyBatisDaoImpl<T> extends MyBatisQueryDaoImpl<T>
 		implements SqlMapDao<T> {
 
 	@Override
-	public Integer insert(String id) {
-		return insert(id, null);
+	public Integer insert(String statement) {
+		return insert(statement, null);
 	}
 
 	@Override
-	public Integer insert(String id, Object parameter) {
-		return parameter != null ? getSqlSession().insert(id, parameter) : getSqlSession().insert(id);
+	public Integer insert(String statement, Object parameter) {
+		return parameter != null ? getSqlSession().insert(statement, parameter) : getSqlSession().insert(statement);
 	}
 
 	@Override
-	public int update(String id) {
-		return update(id, null);
+	public int update(String statement) {
+		return update(statement, null);
 	}
 
 	@Override
-	public int update(String id, Object parameter) {
-		return parameter != null ? getSqlSession().update(id,
-				parameter) : getSqlSession().update(id);
+	public int update(String statement, Object parameter) {
+		return parameter != null ? getSqlSession().update(statement,
+				parameter) : getSqlSession().update(statement);
 	}
 
 	@Override
-	public int delete(String id) {
-		return delete(id, null);
+	public int delete(String statement) {
+		return delete(statement, null);
 	}
 
 	@Override
-	public int delete(String id, Object parameter) {
-		return parameter != null ? getSqlSession().delete(id, parameter)
-				: getSqlSession().delete(id);
+	public int delete(String statement, Object parameter) {
+		return parameter != null ? getSqlSession().delete(statement, parameter)
+				: getSqlSession().delete(statement);
 	}
 
 }

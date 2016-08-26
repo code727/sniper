@@ -20,14 +20,14 @@ package org.workin.fastdfs.node;
 
 import org.workin.commons.util.NetUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.spring.beans.CheckableInitializingBean;
+import org.workin.spring.beans.CheckableInitializingBeanAdapter;
 
 /**
  * @description StorageServer实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class StorageServer extends CheckableInitializingBean implements Storage {
+public class StorageServer extends CheckableInitializingBeanAdapter implements Storage {
 	
 	/** StorageServer节点的内网服务地址 */
 	private String host;
@@ -56,7 +56,7 @@ public class StorageServer extends CheckableInitializingBean implements Storage 
 	}
 
 	@Override
-	protected void checkProperties() throws IllegalArgumentException {
+	protected void checkProperties() {
 		if (StringUtils.isBlank(this.host))
 			new IllegalArgumentException("Storage server property 'host' must not be null or blank.");
 		

@@ -53,8 +53,7 @@ import org.workin.persistence.util.PersistenceUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Hibernate3DaoImpl<T, PK extends Serializable> extends
-		Hibernate3DaoSupport<T, PK> {
+public class Hibernate3DaoImpl<T, PK extends Serializable> extends Hibernate3DaoSupport<T, PK> {
 	
 	@Override
 	public void persist(T entity) {
@@ -335,7 +334,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	public T loadById(String entityName, PK primaryKey, LockMode lockMode) {
 		return StringUtils.isNotBlank(entityName) ? 
 				(T) getHibernateTemplate().load(entityName.trim(), primaryKey, lockMode) :
-					getHibernateTemplate().load(this.getEntityClass(), primaryKey, lockMode);
+					getHibernateTemplate().load(this.getBeanClass(), primaryKey, lockMode);
 	}
 
 	@Override
@@ -351,15 +350,15 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 								session.load(entityName.trim(), primaryKey));
 				else
 					return (T) (lockOptions != null ? 
-							session.load(getEntityClass(), primaryKey, lockOptions) :
-								session.load(getEntityClass(), primaryKey));
+							session.load(getBeanClass(), primaryKey, lockOptions) :
+								session.load(getBeanClass(), primaryKey));
 			}
 		});
 	}
 
 	@Override
 	public List<T> loadAll() {
-		return getHibernateTemplate().loadAll(this.getEntityClass());
+		return getHibernateTemplate().loadAll(this.getBeanClass());
 	}
 
 	@Override
@@ -393,7 +392,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	public T getById(String entityName, PK primaryKey, LockMode lockMode) {
 		return StringUtils.isNotBlank(entityName) ? 
 				(T) getHibernateTemplate().get(entityName.trim(), primaryKey, lockMode) :
-					getHibernateTemplate().get(this.getEntityClass(), primaryKey, lockMode);
+					getHibernateTemplate().get(this.getBeanClass(), primaryKey, lockMode);
 	}
 
 	@Override
@@ -409,8 +408,8 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 								session.load(entityName.trim(), primaryKey));
 				else
 					return (T) (lockOptions != null ? 
-							session.get(getEntityClass(), primaryKey, lockOptions) :
-								session.load(getEntityClass(), primaryKey));
+							session.get(getBeanClass(), primaryKey, lockOptions) :
+								session.load(getBeanClass(), primaryKey));
 			}
 		});
 	}
@@ -422,19 +421,19 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public T findUniqueByProperty(String propertyName, Object propertyValue) {
-		String ql = PersistenceUtils.buildQueryString(false, this.getEntityClass(), new String[] { propertyName });
+		String ql = PersistenceUtils.buildQueryString(false, this.getBeanClass(), new String[] { propertyName });
 		return findUniqueByQueryString(ql, new Object[] { propertyValue });
 	}
 		
 	@Override
 	public T findUniqueByPropertys(Map<String, ?> paramMap) {
-		String ql = PersistenceUtils.buildNamedQueryString(false, this.getEntityClass(), paramMap);
+		String ql = PersistenceUtils.buildNamedQueryString(false, this.getBeanClass(), paramMap);
 		return findUniqueByQueryString(ql, paramMap);
 	}
 	
 	@Override
 	public T findUniqueByQueryString(String ql) {
-		return findUniqueByQueryString(this.getEntityClass(), ql);
+		return findUniqueByQueryString(this.getBeanClass(), ql);
 	}
 
 	@Override
@@ -444,7 +443,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T findUniqueByQueryString(String ql, Object[] values) {
-		return findUniqueByQueryString(this.getEntityClass(), ql, values);
+		return findUniqueByQueryString(this.getBeanClass(), ql, values);
 	}
 
 	@Override
@@ -464,7 +463,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T findUniqueByQueryString(String ql, Map<String, ?> paramMap) {
-		return findUniqueByQueryString(this.getEntityClass(), ql, paramMap); 
+		return findUniqueByQueryString(this.getBeanClass(), ql, paramMap); 
 	}
 
 	@Override
@@ -484,7 +483,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public List<T> find(String ql) {
-		return find(this.getEntityClass(), ql);
+		return find(this.getBeanClass(), ql);
 	}
 
 	@Override
@@ -494,7 +493,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> find(String ql, Object[] values) {
-		return find(this.getEntityClass(), ql, values);
+		return find(this.getBeanClass(), ql, values);
 	}
 	
 	@Override
@@ -504,7 +503,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> find(String ql, Map<String, ?> paramMap) {
-		return find(this.getEntityClass(), ql, paramMap);
+		return find(this.getBeanClass(), ql, paramMap);
 	}
 	
 	@Override
@@ -519,12 +518,12 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> find(String ql, int start, int maxRows) {
-		return find(this.getEntityClass(), ql, start, maxRows);
+		return find(this.getBeanClass(), ql, start, maxRows);
 	}
 
 	@Override
 	public List<T> find(String ql, Object[] values,int start, int maxRows) {
-		return find(this.getEntityClass(), ql, values, start, maxRows);	
+		return find(this.getBeanClass(), ql, values, start, maxRows);	
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -545,7 +544,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> find(String ql, Map<String, ?> paramMap, int start, int maxRows) {
-		return find(this.getEntityClass(), ql, paramMap, start, maxRows);
+		return find(this.getBeanClass(), ql, paramMap, start, maxRows);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -576,7 +575,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findByProperty(String propertyName, Object propertyValue, int start, int maxRows) {
-		String ql = PersistenceUtils.buildQueryString(false, this.getEntityClass(), new String[]{ propertyName});
+		String ql = PersistenceUtils.buildQueryString(false, this.getBeanClass(), new String[]{ propertyName});
 		return find(ql, new Object[] { propertyValue }, start, maxRows);
 	}
 				
@@ -587,13 +586,13 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public List<T> findByPropertys(Map<String, ?> paramMap, int start, int maxRows) {
-		String ql = PersistenceUtils.buildNamedQueryString(false, this.getEntityClass(), paramMap);
+		String ql = PersistenceUtils.buildNamedQueryString(false, this.getBeanClass(), paramMap);
 		return find(ql, paramMap, start, maxRows);
 	}
 
 	@Override
 	public List<T> findAll() {
-		String ql = PersistenceUtils.buildQueryString(false, this.getEntityClass()).toString();
+		String ql = PersistenceUtils.buildQueryString(false, this.getBeanClass()).toString();
 		return find(ql);
 	}
 
@@ -605,13 +604,13 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public long countByProperty(String propertyName, Object propertyValue) {
-		String ql = PersistenceUtils.buildQueryString(true, this.getEntityClass(), new String[] { propertyName });
+		String ql = PersistenceUtils.buildQueryString(true, this.getBeanClass(), new String[] { propertyName });
 		return findUniqueByQueryString(Long.class, ql, new Object[] { propertyValue });
 	}
 	
 	@Override
 	public long countByPropertys(Map<String, ?> paramMap) {
-		String ql = PersistenceUtils.buildNamedQueryString(true, this.getEntityClass(), paramMap);
+		String ql = PersistenceUtils.buildNamedQueryString(true, this.getBeanClass(), paramMap);
 		return findUniqueByQueryString(Long.class, ql, paramMap);
 	}
 
@@ -632,7 +631,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public T findUniqueByNamedQuery(String queryName) {
-		return findUniqueByNamedQuery(this.getEntityClass(), queryName);
+		return findUniqueByNamedQuery(this.getBeanClass(), queryName);
 	}
 	
 	@Override
@@ -642,7 +641,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T findUniqueByNamedQuery(String queryName, Object[] values) {
-		return findUniqueByNamedQuery(this.getEntityClass(), queryName, values);
+		return findUniqueByNamedQuery(this.getBeanClass(), queryName, values);
 	}
 	
 	@Override
@@ -663,7 +662,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T findUniqueByNamedQuery(final String queryName, final Map<String, ?> paramMap) {
-		return findUniqueByNamedQuery(this.getEntityClass(), queryName, paramMap);
+		return findUniqueByNamedQuery(this.getBeanClass(), queryName, paramMap);
 	}
 
 	@Override
@@ -684,7 +683,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public List<T> findByNamedQuery(String queryName) {
-		return findByNamedQuery(this.getEntityClass(), queryName);
+		return findByNamedQuery(this.getBeanClass(), queryName);
 	}
 	
 	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName) {
@@ -693,7 +692,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findByNamedQuery(String queryName, int start, int maxRows) {
-		return findByNamedQuery(this.getEntityClass(), queryName, start, maxRows);
+		return findByNamedQuery(this.getBeanClass(), queryName, start, maxRows);
 	}
 	
 	@Override
@@ -703,7 +702,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findByNamedQuery(String queryName, Object[] values) {
-		return findByNamedQuery(this.getEntityClass(), queryName, values);
+		return findByNamedQuery(this.getBeanClass(), queryName, values);
 	}
 	
 	@Override
@@ -713,7 +712,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findByNamedQuery(String queryName, Object[] values, int start, int maxRows) {
-		return findByNamedQuery(this.getEntityClass(), queryName, values, start, maxRows);
+		return findByNamedQuery(this.getBeanClass(), queryName, values, start, maxRows);
 	}
 		
 	@SuppressWarnings("unchecked")
@@ -735,7 +734,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findByNamedQuery(String queryName, Map<String, ?> paramMap) {
-		return findByNamedQuery(this.getEntityClass(), queryName, paramMap);
+		return findByNamedQuery(this.getBeanClass(), queryName, paramMap);
 	}
 	
 	@Override
@@ -745,7 +744,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findByNamedQuery(String queryName, Map<String, ?> paramMap, int start, int maxRows) {
-		return findByNamedQuery(this.getEntityClass(), queryName, paramMap, start, maxRows);
+		return findByNamedQuery(this.getBeanClass(), queryName, paramMap, start, maxRows);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -833,7 +832,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public T findUniqueByNativeQuery(String sql) {
-		return findUniqueByNativeQuery(this.getEntityClass(), sql);
+		return findUniqueByNativeQuery(this.getBeanClass(), sql);
 	}
 	
 	@Override
@@ -843,7 +842,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public T findUniqueByNativeQuery(String sql, Object[] values) {
-		return findUniqueByNativeQuery(this.getEntityClass(), sql, values);
+		return findUniqueByNativeQuery(this.getBeanClass(), sql, values);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -865,7 +864,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public T findUniqueByNativeQuery(String sql, Map<String, ?> paramMap) {
-		return findUniqueByNativeQuery(this.getEntityClass(), sql, paramMap);
+		return findUniqueByNativeQuery(this.getBeanClass(), sql, paramMap);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -887,7 +886,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findByNativeQuery(String sql) {
-		return findByNativeQuery(this.getEntityClass(), sql);
+		return findByNativeQuery(this.getBeanClass(), sql);
 	}
 	
 	@Override
@@ -897,7 +896,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public List<T> findByNativeQuery(String sql, Object[] values) {
-		return findByNativeQuery(this.getEntityClass(), sql, values);
+		return findByNativeQuery(this.getBeanClass(), sql, values);
 	}
 
 	@Override
@@ -907,7 +906,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public List<T> findByNativeQuery(String sql, Map<String, ?> paramMap) {
-		return findByNativeQuery(this.getEntityClass(), sql, paramMap);
+		return findByNativeQuery(this.getBeanClass(), sql, paramMap);
 	}
 	
 	@Override
@@ -917,7 +916,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findByNativeQuery(String sql, int start, int maxRows) {
-		return findByNativeQuery(this.getEntityClass(), sql, start, maxRows);
+		return findByNativeQuery(this.getBeanClass(), sql, start, maxRows);
 	}
 	
 	@Override
@@ -927,7 +926,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findByNativeQuery(String sql, Object[] values, int start, int maxRows) {
-		return findByNativeQuery(this.getEntityClass(), sql, values, start, maxRows);
+		return findByNativeQuery(this.getBeanClass(), sql, values, start, maxRows);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -948,7 +947,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findByNativeQuery(String sql, Map<String, ?> paramMap, int start, int maxRows) {
-		return findByNativeQuery(this.getEntityClass(), sql, paramMap, start, maxRows);
+		return findByNativeQuery(this.getBeanClass(), sql, paramMap, start, maxRows);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1009,7 +1008,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			
 			@Override
 			public T doInHibernate(Session session) throws HibernateException, SQLException {
-				Criteria criteria = session.createCriteria(getEntityClass());
+				Criteria criteria = session.createCriteria(getBeanClass());
 				callback.execute(criteria);
 				return (T) criteria.uniqueResult();
 			}
@@ -1052,7 +1051,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 
 			@Override
 			public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
-				Criteria criteria = session.createCriteria(getEntityClass());
+				Criteria criteria = session.createCriteria(getBeanClass());
 				callback.execute(criteria);
 				HibernateUtils.setOffsetCriteria(criteria, start, maxRows);
 				return criteria.list();
@@ -1083,7 +1082,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 
 			@Override
 			public Long doInHibernate(Session session) throws HibernateException, SQLException {
-				Criteria criteria = session.createCriteria(getEntityClass());
+				Criteria criteria = session.createCriteria(getBeanClass());
 				if (distinct)
 					criteria.setProjection(Projections.distinct(Projections.rowCount()));
 				else
@@ -1149,7 +1148,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public T doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterList(
-						false, getEntityClass(), filterList));
+						false, getBeanClass(), filterList));
 				return (T) query.uniqueResult();
 			}
 		});
@@ -1164,7 +1163,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public T doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterChain(
-						false, getEntityClass(), chain));
+						false, getBeanClass(), chain));
 				return (T) query.uniqueResult();
 			}
 		});
@@ -1184,7 +1183,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterList(
-						false, getEntityClass(), filterList));
+						false, getBeanClass(), filterList));
 				HibernateUtils.setOffsetQuery(query, start, maxRows);
 				return query.list();
 			}
@@ -1205,7 +1204,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterChain(
-						false, getEntityClass(), chain));
+						false, getBeanClass(), chain));
 				HibernateUtils.setOffsetQuery(query, start, maxRows);
 				return query.list();
 			}
@@ -1220,7 +1219,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Long doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterList(
-						true, getEntityClass(), filterList));
+						true, getBeanClass(), filterList));
 				return Long.valueOf(String.valueOf(query.uniqueResult()));
 			}
 		});
@@ -1234,7 +1233,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Long doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterChain(
-						true, getEntityClass(), chain));
+						true, getBeanClass(), chain));
 				return Long.valueOf(String.valueOf(query.uniqueResult()));
 			}
 		});

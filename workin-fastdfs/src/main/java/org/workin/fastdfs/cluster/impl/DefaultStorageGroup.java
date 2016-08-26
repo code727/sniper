@@ -99,24 +99,8 @@ public class DefaultStorageGroup extends CheckableInitializingBean implements St
 		return this.port;
 	}
 	
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @throws Exception 
-	 */
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
-		
-		if (StringUtils.isBlank(this.internetHost))
-			this.internetHost = NetUtils.LOOPBACK_ADDRESS;
-		
-		if (StringUtils.isBlank(this.host))
-			this.host = this.internetHost;
-	}
-
-	@Override
-	protected void checkProperties() throws IllegalArgumentException {
+	protected void checkProperties() {
 		if (CollectionUtils.isEmpty(this.storages))
 			throw new IllegalArgumentException("Default storage group property 'storages' must not be null or empty.");
 	
@@ -131,6 +115,15 @@ public class DefaultStorageGroup extends CheckableInitializingBean implements St
 			throw new IllegalArgumentException("Default storage group property 'port' is "
 					+ this.port + ",valid range [" + NetUtils.MIN_PORT + "-"
 					+ NetUtils.MAX_PORT + "].");
+	}
+	
+	@Override
+	protected void init() throws Exception {
+		if (StringUtils.isBlank(this.internetHost))
+			this.internetHost = NetUtils.LOOPBACK_ADDRESS;
+		
+		if (StringUtils.isBlank(this.host))
+			this.host = this.internetHost;
 	}
 
 }

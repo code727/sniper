@@ -34,93 +34,95 @@ import org.workin.persistence.sqlmap.dao.SqlMapQuery;
 public class IBatisQueryDaoImpl<T> extends SqlMapClientDaoSupport implements SqlMapQuery<T> {
 	
 	/** 当前DAO所关联的实体类型 */
-	private Class<T> entityClass;
+	private Class<T> beanClass;
 	
 	@Override
-	public void setEntityClass(Class<T> entityClass) {
-		this.entityClass = entityClass;
+	public void setBeanClass(Class<T> beanClass) {
+		this.beanClass = beanClass;
+	}
+	
+	@Override
+	public Class<T> getBeanClass() {
+		return beanClass;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Class<T> getEntityClass() {
-		if (this.entityClass == null)
-			this.setEntityClass((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
-		
-		return this.entityClass;
+	protected void initDao() throws Exception {
+		this.beanClass = ((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
 	}
 	
 	@Override
-	public long countBySqlMap(String id) {
-		return countBySqlMap(id, null);
+	public long countBySqlMap(String statement) {
+		return countBySqlMap(statement, null);
 	}
 
 	@Override
-	public long countBySqlMap(String id, Object parameter) {
-		return queryUniqueBySqlMap(Long.class, id, parameter);
+	public long countBySqlMap(String statement, Object parameter) {
+		return queryUniqueBySqlMap(Long.class, statement, parameter);
 	}
 
 	@Override
-	public T queryUniqueBySqlMap(String id) {
-		return queryUniqueBySqlMap(id, null);
+	public T queryUniqueBySqlMap(String statement) {
+		return queryUniqueBySqlMap(statement, null);
 	}
 
 	@Override
-	public T queryUniqueBySqlMap(String id, Object parameter) {
-		return queryUniqueBySqlMap(this.getEntityClass(), id, parameter);
+	public T queryUniqueBySqlMap(String statement, Object parameter) {
+		return queryUniqueBySqlMap(this.getBeanClass(), statement, parameter);
 	}
 
 	@Override
-	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String id) {
-		return queryUniqueBySqlMap(resultClass, id, null);
+	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String statement) {
+		return queryUniqueBySqlMap(resultClass, statement, null);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String id, Object parameter) {
-		return (R) getSqlMapClientTemplate().queryForObject(id, parameter);
+	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String statement, Object parameter) {
+		return (R) getSqlMapClientTemplate().queryForObject(statement, parameter);
 	}
 
 	@Override
-	public List<T> queryListBySqlMap(String id) {
-		return queryListBySqlMap(id, null);
+	public List<T> queryListBySqlMap(String statement) {
+		return queryListBySqlMap(statement, null);
 	}
 
 	@Override
-	public List<T> queryListBySqlMap(String id, Object parameter) {
-		return queryListBySqlMap(this.getEntityClass(), id, parameter);
+	public List<T> queryListBySqlMap(String statement, Object parameter) {
+		return queryListBySqlMap(this.getBeanClass(), statement, parameter);
 	}
 	
 	@Override
-	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String id) {
-		return queryListBySqlMap(resultClass, id, null);
+	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String statement) {
+		return queryListBySqlMap(resultClass, statement, null);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String id, Object parameter) {
-		return getSqlMapClientTemplate().queryForList(id, parameter);
+	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String statement, Object parameter) {
+		return getSqlMapClientTemplate().queryForList(statement, parameter);
 	}
 	
 	@Override
-	public <K,V> Map<K, V>  queryMapBySqlMap(String id) {
-		return queryMapBySqlMap(id, (Object) null);
+	public <K,V> Map<K, V> queryMapBySqlMap(String statement) {
+		return queryMapBySqlMap(statement, (Object) null);
 	}
 	
 	@Override
-	public <K,V> Map<K, V> queryMapBySqlMap(String id, Object parameter) {
-		return queryMapBySqlMap(id, parameter, DEFAULT_KEY_PROPERTY);
+	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter) {
+		return queryMapBySqlMap(statement, parameter, DEFAULT_KEY_PROPERTY);
 	}
 
 	@Override
-	public <K,V> Map<K, V> queryMapBySqlMap(String id, String keyProperty) {
-		return queryMapBySqlMap(id, null, keyProperty);
+	public <K,V> Map<K, V> queryMapBySqlMap(String statement, String keyProperty) {
+		return queryMapBySqlMap(statement, null, keyProperty);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K,V> Map<K, V> queryMapBySqlMap(String id, Object parameter, String keyProperty) {
-		return getSqlMapClientTemplate().queryForMap(id, parameter, keyProperty);
+	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter, String keyProperty) {
+		return getSqlMapClientTemplate().queryForMap(statement, parameter, keyProperty);
 	}
 
 }

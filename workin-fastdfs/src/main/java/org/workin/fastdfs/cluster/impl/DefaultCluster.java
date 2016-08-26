@@ -207,18 +207,7 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	}
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
-		
-		wrapTrackerClusterIntranetAccessURL();
-		wrapTrackerClusterInternetAccessURL();
-		wrapTrackerIntranetAccessURLMap();
-		
-		wrapStorageGroupAndNodeAccessURLMap();
-	}
-
-	@Override
-	protected void checkProperties() throws IllegalArgumentException {
+	protected void checkProperties() {
 		if (StringUtils.isBlank(this.protocol))
 			new IllegalArgumentException("Default cluster property 'protocol' must not be null or blank.");
 		
@@ -234,29 +223,38 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 			new IllegalArgumentException("Default cluster property 'storageGroups' must not be null or empty.");
 	}
 	
+	@Override
+	protected void init() throws Exception {
+		buildTrackerClusterIntranetAccessURL();
+		buildTrackerClusterInternetAccessURL();
+		buildTrackerIntranetAccessURLMap();
+		
+		buildStorageGroupAndNodeAccessURLMap();
+	}
+	
 	/**
-	 * @description 包装Tracker集群族可访问的内网URL 
+	 * @description 构建Tracker集群族可访问的内网URL 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	private void wrapTrackerClusterIntranetAccessURL() {
+	private void buildTrackerClusterIntranetAccessURL() {
 		this.trackerClusterIntranetAccessURL = NetUtils.toURL(this.protocol,
 				this.trackerCluster.getHost(), this.accessPort);
 	}
 	
 	/**
-	 * @description 包装Tracker集群族可访问的外网URL 
+	 * @description 构建Tracker集群族可访问的外网URL 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	private void wrapTrackerClusterInternetAccessURL() {
+	private void buildTrackerClusterInternetAccessURL() {
 		this.trackerClusterInternetAccessURL = NetUtils.toURL(this.protocol,
 				this.trackerCluster.getInternetHost(), this.accessPort);
 	}
 	
 	/**
-	 * @description 包装Tracker节点可访问的内网URL映射集 
+	 * @description 构建Tracker节点可访问的内网URL映射集 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	private void wrapTrackerIntranetAccessURLMap() {
+	private void buildTrackerIntranetAccessURLMap() {
 		this.trackerIntranetAccessURLMap = MapUtils.newHashMap();
 		Map<String, Tracker> trackers = this.trackerCluster.getTrackers();
 		Iterator<Entry<String, Tracker>> iterator = trackers.entrySet().iterator();
@@ -269,10 +267,10 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	}
 	
 	/**
-	 * @description 包装StorageGroup集群组以及组内各节点可访问的URL映射集 
+	 * @description 构建StorageGroup集群组以及组内各节点可访问的URL映射集 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	private void wrapStorageGroupAndNodeAccessURLMap() {
+	private void buildStorageGroupAndNodeAccessURLMap() {
 		this.storageGroupIntranetAccessURLMap = MapUtils.newHashMap();
 		this.storageGroupInternetAccessURLMap = MapUtils.newHashMap();
 		this.storageInternetAccessURLMap = MapUtils.newHashMap();
@@ -283,13 +281,13 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 			StorageGroup storageGroup = storageGroupEntry.getValue();
 			String pathPrefix = storageGroupEntry.getKey();
 			
-			/* 包装StorageGroup路径前缀与可访问的内外网URL的映射关系 */
+			/* 构建StorageGroup路径前缀与可访问的内外网URL的映射关系 */
 			this.storageGroupIntranetAccessURLMap.put(pathPrefix, NetUtils.toURL(
 					this.protocol, storageGroup.getHost(), this.accessPort));
 			this.storageGroupInternetAccessURLMap.put(pathPrefix, NetUtils.toURL(
 					this.protocol, storageGroup.getInternetHost(), this.accessPort));
 				
-			/* 包括StorageGroup路径前缀与组内可访问的内网URL的映射关系 */
+			/* 构建StorageGroup路径前缀与组内可访问的内网URL的映射关系 */
 			Map<Integer, String> storageIntranetURLMap= this.storageInternetAccessURLMap.get(storageGroupEntry.getKey());
 			if (storageIntranetURLMap == null) 
 				storageIntranetURLMap = MapUtils.newHashMap();

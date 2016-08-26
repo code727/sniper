@@ -41,35 +41,35 @@ public class IBatisDaoImpl<T> extends IBatisQueryDaoImpl<T>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T insert(String id, Object parameter) {
-		return (T) (parameter != null ? getSqlMapClientTemplate().insert(id,
-				parameter) : getSqlMapClientTemplate().insert(id));
+	public T insert(String statement, Object parameter) {
+		return (T) (parameter != null ? getSqlMapClientTemplate().insert(statement,
+				parameter) : getSqlMapClientTemplate().insert(statement));
 	}
 
 	@Override
-	public int update(String id) {
-		return update(id, null);
+	public int update(String statement) {
+		return update(statement, null);
 	}
 
 	@Override
-	public int update(String id, Object parameter) {
-		return parameter != null ? getSqlMapClientTemplate().update(id,
-				parameter) : getSqlMapClientTemplate().update(id);
+	public int update(String statement, Object parameter) {
+		return parameter != null ? getSqlMapClientTemplate().update(statement,
+				parameter) : getSqlMapClientTemplate().update(statement);
 	}
 
 	@Override
-	public int delete(String id) {
-		return delete(id, null);
+	public int delete(String statement) {
+		return delete(statement, null);
 	}
 
 	@Override
-	public int delete(final String id, final Object parameter) {
+	public int delete(final String statement, final Object parameter) {
 		return getSqlMapClientTemplate().execute(new SqlMapClientCallback<Integer>() {
 
 			@Override
 			public Integer doInSqlMapClient(SqlMapExecutor executor)
 					throws SQLException {
-				return parameter != null ? executor.delete(id, parameter) : executor.delete(id);
+				return parameter != null ? executor.delete(statement, parameter) : executor.delete(statement);
 			}
 		});
 	}

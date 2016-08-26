@@ -165,16 +165,7 @@ public class DefaultTrackerCluster extends CheckableInitializingBean implements 
 	}
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
-		
-		/* 当内网地址未注册时，其值与外网地址一致 */
-		if (StringUtils.isBlank(this.host))
-			this.host = this.internetHost;
-	}
-
-	@Override
-	protected void checkProperties() throws IllegalArgumentException {
+	protected void checkProperties() {
 		if (this.connectTimeout <= 0)
 			throw new IllegalArgumentException("Default tracker cluster property 'connectTimeout' is "
 					+ this.connectTimeout + " second,but must greater than 0.");
@@ -200,6 +191,13 @@ public class DefaultTrackerCluster extends CheckableInitializingBean implements 
 			throw new IllegalArgumentException("Tracker cluster property 'port' is "
 					+ this.port + ",valid range [" + NetUtils.MIN_PORT + "-"
 					+ NetUtils.MAX_PORT + "].");
+	}
+	
+	@Override
+	protected void init() throws Exception {
+		/* 当内网地址未注册时，其值与外网地址一致 */
+		if (StringUtils.isBlank(this.host))
+			this.host = this.internetHost;
 	}
 
 }

@@ -111,20 +111,18 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	}
 
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
-		
-		if (this.accessor == null)
-			this.accessor = new DefaultAccessor();
-	}
-
-	@Override
-	protected void checkProperties() throws IllegalArgumentException {
+	protected void checkProperties() {
 		if (this.cluster == null)
 			throw new IllegalArgumentException("FastDFSTemplet property 'cluster' must not be null.");
 		
 		if (this.connectionFactory == null)
 			throw new IllegalArgumentException("FastDFSTemplet property 'connectionFactory' must not be null.");
+	}
+	
+	@Override
+	protected void init() throws Exception {
+		if (this.accessor == null)
+			this.accessor = new DefaultAccessor();
 	}
 	
 	/**
