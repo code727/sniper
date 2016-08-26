@@ -37,7 +37,6 @@ import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.persistence.hibernate.dao.HibernateDao;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallback;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
@@ -53,7 +52,7 @@ import org.workin.persistence.util.PersistenceUtils;
  */
 @Repository
 public class Hibernate4DaoImpl<T, PK extends Serializable> extends
-	Hibernate4DaoSupport<T> implements HibernateDao<T, PK> {
+		Hibernate4DaoSupport<T, PK> {
 		
 	@Override
 	public void persist(T entity) {

@@ -44,7 +44,9 @@ public abstract class GenericDaoSupport<T> implements GenericDao<T>, Initializin
 	@SuppressWarnings("unchecked")
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		setEntityClass((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
+		if (this.entityClass == null)
+			this.entityClass = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
+		
 	}
 
 }

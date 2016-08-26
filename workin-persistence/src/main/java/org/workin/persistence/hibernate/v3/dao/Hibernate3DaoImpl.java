@@ -37,10 +37,8 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.workin.commons.pagination.PagingResult;
 import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.persistence.hibernate.dao.HibernateDao;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallback;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
@@ -55,24 +53,7 @@ import org.workin.persistence.util.PersistenceUtils;
  * @version 1.0
  */
 public class Hibernate3DaoImpl<T, PK extends Serializable> extends
-	Hibernate3DaoSupport implements HibernateDao<T, PK> {
-	
-	/** 当前DAO所关联的实体类型 */
-	private Class<T> entityClass;
-	
-	@Override
-	public void setEntityClass(Class<T> entityClass) {
-		this.entityClass = entityClass;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public Class<T> getEntityClass() {
-		if (this.entityClass == null)
-			this.entityClass = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
-		
-		return this.entityClass;
-	}
+		Hibernate3DaoSupport<T, PK> {
 	
 	@Override
 	public void persist(T entity) {
@@ -133,7 +114,6 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 				return (T) session.merge(entity);
 			}
 		});
-//		return merge(null, entity);
 	}
 	
 	@Override
@@ -1239,7 +1219,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Long doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterList(
-						true, entityClass, filterList));
+						true, getEntityClass(), filterList));
 				return Long.valueOf(String.valueOf(query.uniqueResult()));
 			}
 		});
@@ -1253,7 +1233,7 @@ public class Hibernate3DaoImpl<T, PK extends Serializable> extends
 			@Override
 			public Long doInHibernate(Session session) throws HibernateException, SQLException {
 				Query query = session.createQuery(PersistenceUtils.buildQueryStringByFilterChain(
-						true, entityClass, chain));
+						true, getEntityClass(), chain));
 				return Long.valueOf(String.valueOf(query.uniqueResult()));
 			}
 		});

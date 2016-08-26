@@ -18,6 +18,7 @@
 
 package org.workin.persistence.hibernate.v3.dao;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -29,21 +30,42 @@ import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.workin.commons.util.ArrayUtils;
+import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.persistence.hibernate.dao.HibernateDao;
 
 /**
  * @description Hibernate3 DAO支持抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class Hibernate3DaoSupport extends HibernateDaoSupport {
+public abstract class Hibernate3DaoSupport<T, PK extends Serializable> extends
+		HibernateDaoSupport implements HibernateDao<T, PK> {
+	
+	/** 当前DAO所关联的实体类型 */
+	private Class<T> entityClass;
+	
+	@Override
+	public void setEntityClass(Class<T> entityClass) {
+		this.entityClass = entityClass;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Class<T> getEntityClass() {
+		if (this.entityClass == null)
+			this.entityClass = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
+		
+		return this.entityClass;
+	}
 	
 	/**
 	 * @description 打开一个新会话
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
+	@Override
 	public Session openSession() {
 		return getSessionFactory().openSession();
 	}
@@ -53,6 +75,7 @@ public abstract class Hibernate3DaoSupport extends HibernateDaoSupport {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
+	@Override
 	public Session getCurrentSession() {
 		return getHibernateTemplate().getSessionFactory().getCurrentSession();
 	}
@@ -64,7 +87,7 @@ public abstract class Hibernate3DaoSupport extends HibernateDaoSupport {
 	 * @return
 	 */
 	protected ClassMetadata getClassMetadata(Class<?> entityClass) {
-		return super.getSessionFactory().getClassMetadata(entityClass);
+		return getSessionFactory().getClassMetadata(entityClass);
 	}
 	
 	/**

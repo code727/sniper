@@ -18,6 +18,7 @@
 
 package org.workin.persistence.hibernate.v4.dao;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -35,6 +36,7 @@ import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.persistence.GenericDaoSupport;
+import org.workin.persistence.hibernate.dao.HibernateDao;
 import org.workin.persistence.hibernate.v4.Hibernate4CacheConfiguration;
 
 /**
@@ -42,7 +44,8 @@ import org.workin.persistence.hibernate.v4.Hibernate4CacheConfiguration;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class Hibernate4DaoSupport<T> extends GenericDaoSupport<T>  {
+public abstract class Hibernate4DaoSupport<T, PK extends Serializable> extends
+		GenericDaoSupport<T> implements HibernateDao<T, PK> {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -50,12 +53,31 @@ public abstract class Hibernate4DaoSupport<T> extends GenericDaoSupport<T>  {
 	/** 模板对象 */
 	private Hibernate4CacheConfiguration cacheConfiguration;
 	
+	@Override
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
+	@Override
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+	
+	@Override
+	public Session openSession() {
+		return this.sessionFactory.openSession();
+	}
+	
+	@Override
+	public Session getCurrentSession() {
+		Session session;
+		try {
+			session = this.sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			// 无事务绑定时，打开一个新会话
+			session = openSession();
+		}
+		return session;
 	}
 	
 	public Hibernate4CacheConfiguration getCacheConfiguration() {
@@ -73,31 +95,6 @@ public abstract class Hibernate4DaoSupport<T> extends GenericDaoSupport<T>  {
 			throw new BeanCreationException("Property 'sessionFactory' must not be null");
 	}
 
-	/**
-	 * @description 打开一个新会话
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Session openSession() {
-		return this.sessionFactory.openSession();
-	}
-	
-	/**
-	 * @description 获取当前会话
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Session getCurrentSession() {
-		Session session;
-		try {
-			session = this.sessionFactory.getCurrentSession();
-		} catch (HibernateException e) {
-			// 无事务绑定时，打开一个新会话
-			session = openSession();
-		}
-		return session;
-	}
-	
 	/**
 	 * @description 获取实体类型对应的元数据对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
