@@ -21,37 +21,35 @@ package org.workin.persistence.sqlmap.service;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.persistence.sqlmap.dao.SqlMapDao;
+import org.workin.spring.beans.CheckableInitializingBeanAdapter;
 
 /**
  * @description SQL映射持久化服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class AbstractSqlMapPersistenceService<T> implements
-		SqlMapPersistenceService<T>, InitializingBean {
-	
+public class AbstractSqlMapService<T> extends CheckableInitializingBeanAdapter
+		implements SqlMapService<T>, SqlMapBeanService<T> {
+		
 	@Autowired
 	protected SqlMapDao<T> sqlMapDao;
 
 	@Override
-	public void setSqlMapPersistenceDao(
-			SqlMapDao<T> sqlMapPersistenceDao) {
-		this.sqlMapDao = sqlMapPersistenceDao;
+	public void setSqlMapDao(SqlMapDao<T> sqlMapDao) {
+		this.sqlMapDao = sqlMapDao;
 	}
 
 	@Override
-	public SqlMapDao<T> getSqlMapPersistenceDao() {
+	public SqlMapDao<T> getSqlMapDao() {
 		return this.sqlMapDao;
 	}
-
+	
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	protected void checkProperties() {
 		if (this.sqlMapDao == null)
-			throw new BeanCreationException("SqlMapPersistenceDao object can not be null, please inject to spring container.");
+			throw new IllegalArgumentException("Property 'sqlMapDao' is required");
 	}
 
 	@Override

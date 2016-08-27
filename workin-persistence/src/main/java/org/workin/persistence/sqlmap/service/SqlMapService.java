@@ -13,28 +13,72 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-3-18
+ * Create Date : 2015-3-24
  */
 
-package org.workin.persistence.sqlmap.dao;
+package org.workin.persistence.sqlmap.service;
 
 import java.util.List;
 import java.util.Map;
 
-import org.workin.support.bean.GenericBean;
-
 /**
- * @description SQL映射查询接口
+ * @description SQL映射持久化服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SqlMapQuery<T> extends GenericBean<T> {
-	
-	/** 默认的结果映射集属性键的名称 */
-	public static final String DEFAULT_KEY_PROPERTY = "id";
+public interface SqlMapService<T> {
 	
 	/**
-	 * @description 执行statement对应的count语句后返回结果
+	 * @description 执行statement对应的insert语句后返回结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @return
+	 */
+	public Object insert(String statement);
+	
+	/**
+	 * @description 执行statement对应的insert语句后返回结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param statement
+	 * @param parameter
+	 * @return
+	 */
+	public Object insert(String statement, Object parameter);
+	
+	/**
+	 * @description 执行statement对应的update语句后返回受影响的行数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @return
+	 */
+	public int update(String statement);
+	
+	/**
+	 * @description 执行statement对应的update语句后返回受影响的行数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param statement
+	 * @param parameter
+	 * @return
+	 */
+	public int update(String statement, Object parameter);
+	
+	/**
+	 * @description 执行statement对应的delete语句后返回受影响的行数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param statement
+	 */
+	public int delete(String statement);
+	
+	/**
+	 * @description 执行statement对应的delete语句后返回受影响的行数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param statement
+	 * @param parameter
+	 */
+	public int delete(String statement, Object parameter);
+	
+	/**
+	 * @description 执行id对应的count语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @return
@@ -157,5 +201,5 @@ public interface SqlMapQuery<T> extends GenericBean<T> {
 	 * @return
 	 */
 	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter, String keyProperty);
-	
+
 }

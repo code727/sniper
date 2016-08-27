@@ -21,6 +21,7 @@ package org.workin.persistence.sqlmap.ibatis;
 import java.sql.SQLException;
 
 import org.springframework.orm.ibatis.SqlMapClientCallback;
+import org.springframework.stereotype.Repository;
 import org.workin.persistence.sqlmap.dao.SqlMapDao;
 
 import com.ibatis.sqlmap.client.SqlMapExecutor;
@@ -31,12 +32,13 @@ import com.ibatis.sqlmap.client.SqlMapExecutor;
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
+@Repository
 public class IBatisDaoImpl<T> extends IBatisQueryDaoImpl<T>
 		implements SqlMapDao<T> {
 
 	@Override
-	public T insert(String id) {
-		return insert(id, null);
+	public T insert(String statement) {
+		return insert(statement, null);
 	}
 
 	@SuppressWarnings("unchecked")

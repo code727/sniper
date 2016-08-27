@@ -18,6 +18,7 @@
 
 package org.workin.persistence.sqlmap.mybatis;
 
+import org.springframework.stereotype.Repository;
 import org.workin.persistence.sqlmap.dao.SqlMapDao;
 
 /**
@@ -25,6 +26,7 @@ import org.workin.persistence.sqlmap.dao.SqlMapDao;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@Repository
 public class MyBatisDaoImpl<T> extends MyBatisQueryDaoImpl<T>
 		implements SqlMapDao<T> {
 

@@ -34,7 +34,7 @@ import org.workin.spring.beans.CheckableInitializingBean;
  * @version 1.0
  */
 public abstract class AbstractHibernateService<T, PK extends Serializable>
-		extends CheckableInitializingBean implements HibernatePersistenceService<T, PK> {
+		extends CheckableInitializingBean implements HibernateBeanService<T, PK> {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AbstractHibernateService.class);
 	
@@ -74,10 +74,12 @@ public abstract class AbstractHibernateService<T, PK extends Serializable>
 		Class<T> entityType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 		// 将当前服务类管理的实体类型传递给持久化DAO，使DAO接口的方法能正常工作
 		this.hibernateDao.setBeanClass(entityType);
+		
+		/* 开启ibatis/mybatis的查询接口，弥补Hibernate针对复杂查询难以处理的问题 */
 		if (sqlMapQuery != null) {
-			// 同时开启ibatis/mybatis的查询接口，弥补JPA针对复杂查询难以处理的问题
 			sqlMapQuery.setBeanClass(entityType);
-			logger.info("Successful enable SqlMapQuery interface,implements class is :"
+			
+			logger.info("Success enable SqlMapQuery interface,implements class is :"
 					+ sqlMapQuery.getClass().getName());
 		}
 	}

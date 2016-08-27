@@ -36,7 +36,8 @@ import org.workin.support.bean.GenericBean;
  * @version 1.0
  */
 public interface JpaDao<T, PK extends Serializable> extends GenericBean<T>,
-		JpaPersistence<T, PK>, JpaNativePersistence, JpaQuery<T, PK>, JpaNamedQuery<T>,
-		JpaNativeQuery<T>, JpaCriteriaQuery<T>, JpaPagingQuery<T>, FilterQuery<T> {
+		JpaPersistence<T, PK>, JpaNativePersistence, JpaQuery<T, PK>,
+		JpaNamedQuery<T>, JpaNativeQuery<T>, JpaCriteriaQuery<T>,
+		JpaPagingQuery<T>, FilterQuery<T> {
 	
 }

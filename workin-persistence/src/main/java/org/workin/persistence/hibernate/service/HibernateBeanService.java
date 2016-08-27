@@ -23,11 +23,11 @@ import java.io.Serializable;
 import org.workin.persistence.hibernate.dao.HibernateDao;
 
 /**
- * @description Hibernate持久化服务接口
+ * @description Hibernate对象服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface HibernatePersistenceService<T, PK extends Serializable> {
+public interface HibernateBeanService<T, PK extends Serializable> {
 	
 	/**
 	 * @description 设置Hibernate持久化数据访问接口

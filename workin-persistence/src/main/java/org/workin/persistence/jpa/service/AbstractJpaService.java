@@ -22,21 +22,20 @@ import java.io.Serializable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.util.ClassUtils;
 import org.workin.persistence.jpa.dao.JpaDao;
 import org.workin.persistence.sqlmap.dao.SqlMapQuery;
+import org.workin.spring.beans.CheckableInitializingBean;
 
 /**
  * @description JPA持久化服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractJpaService<T, PK extends Serializable>
-		implements JpaService<T, PK>, InitializingBean {
-	
+public abstract class AbstractJpaService<T, PK extends Serializable> extends
+		CheckableInitializingBean implements JpaBeanService<T, PK> {
+		
 	private static final Logger logger = LoggerFactory.getLogger(AbstractJpaService.class);
 	
 	@Autowired
@@ -62,23 +61,28 @@ public abstract class AbstractJpaService<T, PK extends Serializable>
 	public void setSqlMapQuery(SqlMapQuery<T> sqlMapQuery) {
 		this.sqlMapQuery = sqlMapQuery;
 	}
-
+	
+	@Override
+	protected void checkProperties() {
+		if (this.jpaDao == null)
+			throw new IllegalArgumentException("Property 'jpaDao' is required");
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		if (this.jpaDao == null)
-			throw new BeanCreationException("JpaDao object can not be null, please inject to spring container.");
-		
+	protected void init() throws Exception {
 		Class<T> entityType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 		// 将当前服务类管理的实体类型传递给持久化DAO，使DAO接口的方法能正常工作
 		this.jpaDao.setBeanClass(entityType);
+		
+		/* 开启ibatis/mybatis的查询接口，弥补JPA针对复杂查询难以处理的问题 */
 		if (sqlMapQuery != null) {
-			// 同时开启ibatis/mybatis的查询接口，弥补JPA针对复杂查询难以处理的问题
 			sqlMapQuery.setBeanClass(entityType);
-			logger.info("Successful enable SqlMapQuery interface,implements class is:"
+			
+			logger.info("Success enable SqlMapQuery interface,implements class is:"
 					+ sqlMapQuery.getClass().getName());
 		}
-			
+		
 	}
 
 }

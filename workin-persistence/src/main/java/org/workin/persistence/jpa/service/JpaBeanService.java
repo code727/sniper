@@ -23,14 +23,14 @@ import java.io.Serializable;
 import org.workin.persistence.jpa.dao.JpaDao;
 
 /**
- * @description JPA持久化服务接口
+ * @description JPA对象服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JpaService<T, PK extends Serializable> {
+public interface JpaBeanService<T, PK extends Serializable> {
 	
 	/**
-	 * @description 设置DAO接口
+	 * @description 设置持久化DAO接口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param jpaDao
 	 */

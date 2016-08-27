@@ -53,8 +53,8 @@ import org.workin.persistence.util.PersistenceUtils;
  * @version 1.0
  */
 @Repository
-public class JpaDaoImpl<T, PK extends Serializable> extends
-		JpaDaoSupport<T> implements JpaDao<T, PK> {
+public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
+		implements JpaDao<T, PK> {
 	
 	@Override
 	public void persist(T entity) {

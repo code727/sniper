@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.stereotype.Repository;
 import org.workin.commons.util.ClassUtils;
 import org.workin.persistence.sqlmap.dao.SqlMapQuery;
 
@@ -30,6 +31,7 @@ import org.workin.persistence.sqlmap.dao.SqlMapQuery;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@Repository
 public class MyBatisQueryDaoImpl<T> extends SqlSessionDaoSupport implements SqlMapQuery<T> {
 
 	/** 当前DAO所关联的实体类型 */

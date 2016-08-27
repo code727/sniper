@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+import org.springframework.stereotype.Repository;
 import org.workin.commons.util.ClassUtils;
 import org.workin.persistence.sqlmap.dao.SqlMapQuery;
 
@@ -31,6 +32,7 @@ import org.workin.persistence.sqlmap.dao.SqlMapQuery;
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
+@Repository
 public class IBatisQueryDaoImpl<T> extends SqlMapClientDaoSupport implements SqlMapQuery<T> {
 	
 	/** 当前DAO所关联的实体类型 */
