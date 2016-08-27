@@ -16,7 +16,7 @@
  * Create Date : 2015-2-2
  */
 
-package org.workin.persistence.hibernate.v3;
+package org.workin.persistence.hibernate.filter.v4;
 
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -32,13 +32,13 @@ import org.workin.persistence.OpenEntitySessionManagerInViewFilter;
 import org.workin.persistence.OpenEntitySessionManagerInViewFilterProxy;
 
 /**
- * @description Hibernate3实体视图管理过滤器。此类的作用在于防止当实体启用了延迟加载策略后，
+ * @description Hibernate4实体视图管理过滤器。此类的作用在于防止当实体启用了延迟加载策略后，
  * 				加载的数据返回给view层的时候Session已经关闭而导致的访问异常。
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class OpenSessionManagerInViewFilter extends
-		org.springframework.orm.hibernate3.support.OpenSessionInViewFilter {
+		org.springframework.orm.hibernate4.support.OpenSessionInViewFilter {
 	
 	/** 视图管理过滤器代理 */
 	private OpenEntitySessionManagerInViewFilterProxy proxy;

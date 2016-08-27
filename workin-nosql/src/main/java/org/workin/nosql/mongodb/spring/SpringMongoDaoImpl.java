@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016年8月25日
+ * Create Date : 2016-8-25
  */
 
 package org.workin.nosql.mongodb.spring;
@@ -23,12 +23,15 @@ import java.util.List;
 
 import org.workin.nosql.mongodb.dao.MongoDao;
 
+import com.mongodb.WriteResult;
+
 /**
  * @description Spring MongoDB数据访问实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SpringMongoDaoImpl<T, PK extends Serializable > extends SpringMongoDaoSupport<T> implements MongoDao<T, PK> {
+public class SpringMongoDaoImpl<T, PK extends Serializable> extends
+		SpringMongoDaoSupport<T> implements MongoDao<T, PK> {
 
 	@Override
 	public void save(T entity) {
@@ -40,13 +43,32 @@ public class SpringMongoDaoImpl<T, PK extends Serializable > extends SpringMongo
 		return getMongoTemplate().findById(primaryKey, getBeanClass());
 	}
 
+	@Override
+	public List<T> findAll() {
+		return getMongoTemplate().findAll(getBeanClass());
+	}
+
+	@Override
+	public void save(T entity, String collection) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public WriteResult remove(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * @description
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param object
+	 * @param collection
 	 * @return 
 	 */
 	@Override
-	public List<T> findAll() {
+	public WriteResult remove(Object object, String collection) {
 		// TODO Auto-generated method stub
 		return null;
 	}

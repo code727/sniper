@@ -22,38 +22,36 @@ import java.io.Serializable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.util.ClassUtils;
 import org.workin.persistence.hibernate.dao.HibernateDao;
 import org.workin.persistence.sqlmap.dao.SqlMapQuery;
+import org.workin.spring.beans.CheckableInitializingBean;
 
 /**
  * @description Hibernate持久化服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractHibernatePersistenceService<T, PK extends Serializable>
-		implements HibernatePersistenceService<T, PK>, InitializingBean {
+public abstract class AbstractHibernateService<T, PK extends Serializable>
+		extends CheckableInitializingBean implements HibernatePersistenceService<T, PK> {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AbstractHibernatePersistenceService.class);
+	private static final Logger logger = LoggerFactory.getLogger(AbstractHibernateService.class);
 	
 	@Autowired
-	protected HibernateDao<T, PK> hibernatePersistenceDao;
+	protected HibernateDao<T, PK> hibernateDao;
 	
 	@Autowired(required = false)
 	protected SqlMapQuery<T> sqlMapQuery;
 	
 	@Override
-	public HibernateDao<T, PK> getHibernatePersistenceDao() {
-		return hibernatePersistenceDao;
+	public HibernateDao<T, PK> getHibernateDao() {
+		return hibernateDao;
 	}
 
 	@Override
-	public void setHibernatePersistenceDao(
-			HibernateDao<T, PK> hibernatePersistenceDao) {
-		this.hibernatePersistenceDao = hibernatePersistenceDao;
+	public void setHibernateDao(HibernateDao<T, PK> hibernateDao) {
+		this.hibernateDao = hibernateDao;
 	}
 
 	public SqlMapQuery<T> getSqlMapQuery() {
@@ -63,23 +61,25 @@ public abstract class AbstractHibernatePersistenceService<T, PK extends Serializ
 	public void setSqlMapQuery(SqlMapQuery<T> sqlMapQuery) {
 		this.sqlMapQuery = sqlMapQuery;
 	}
-
+	
+	@Override
+	protected void checkProperties() {
+		if (hibernateDao == null)
+			throw new IllegalArgumentException("Property 'hibernateDao' is required");
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		if (hibernatePersistenceDao == null)
-			throw new BeanCreationException("HibernatePersistenceDao object can not be null, please inject to spring container.");
-		
+	protected void init() throws Exception {
 		Class<T> entityType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 		// 将当前服务类管理的实体类型传递给持久化DAO，使DAO接口的方法能正常工作
-		this.hibernatePersistenceDao.setBeanClass(entityType);
+		this.hibernateDao.setBeanClass(entityType);
 		if (sqlMapQuery != null) {
 			// 同时开启ibatis/mybatis的查询接口，弥补JPA针对复杂查询难以处理的问题
 			sqlMapQuery.setBeanClass(entityType);
 			logger.info("Successful enable SqlMapQuery interface,implements class is :"
 					+ sqlMapQuery.getClass().getName());
 		}
-		
 	}
 
 }

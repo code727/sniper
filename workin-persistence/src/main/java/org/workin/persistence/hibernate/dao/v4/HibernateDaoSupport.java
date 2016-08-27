@@ -16,9 +16,7 @@
  * Create Date : 2015-2-2
  */
 
-package org.workin.persistence.hibernate.v4.dao;
-
-import java.io.Serializable;
+package org.workin.persistence.hibernate.dao.v4;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -30,8 +28,6 @@ import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.util.StringUtils;
 import org.workin.persistence.hibernate.HibernateUtils;
-import org.workin.persistence.hibernate.dao.HibernateDao;
-import org.workin.persistence.hibernate.v4.Hibernate4CacheConfiguration;
 import org.workin.spring.beans.AbstractGenricBean;
 
 /**
@@ -39,30 +35,27 @@ import org.workin.spring.beans.AbstractGenricBean;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class Hibernate4DaoSupport<T, PK extends Serializable> extends
-		AbstractGenricBean<T> implements HibernateDao<T, PK> {
- 	
+public abstract class HibernateDaoSupport<T> extends AbstractGenricBean<T> {
+		
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	/** 模板对象 */
-	private Hibernate4CacheConfiguration cacheConfiguration;
+	private HibernateCacheConfiguration cacheConfiguration;
 	
-	@Override
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
-	@Override
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 	
-	public Hibernate4CacheConfiguration getCacheConfiguration() {
+	public HibernateCacheConfiguration getCacheConfiguration() {
 		return cacheConfiguration;
 	}
 
-	public void setCacheConfiguration(Hibernate4CacheConfiguration cacheConfiguration) {
+	public void setCacheConfiguration(HibernateCacheConfiguration cacheConfiguration) {
 		this.cacheConfiguration = cacheConfiguration;
 	}
 	
@@ -72,12 +65,10 @@ public abstract class Hibernate4DaoSupport<T, PK extends Serializable> extends
 			throw new IllegalArgumentException("Property 'sessionFactory' is required");
 	}
 	
-	@Override
 	public Session openSession() {
 		return this.sessionFactory.openSession();
 	}
 	
-	@Override
 	public Session getCurrentSession() {
 		Session session;
 		try {

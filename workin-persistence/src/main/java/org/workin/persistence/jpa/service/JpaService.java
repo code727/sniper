@@ -27,7 +27,7 @@ import org.workin.persistence.jpa.dao.JpaDao;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JpaPersistenceService<T, PK extends Serializable> {
+public interface JpaService<T, PK extends Serializable> {
 	
 	/**
 	 * @description 设置DAO接口

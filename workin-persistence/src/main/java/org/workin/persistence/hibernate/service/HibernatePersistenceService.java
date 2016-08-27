@@ -30,17 +30,17 @@ import org.workin.persistence.hibernate.dao.HibernateDao;
 public interface HibernatePersistenceService<T, PK extends Serializable> {
 	
 	/**
-	 * @description 设置持久化DAO接口
+	 * @description 设置Hibernate持久化数据访问接口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param jpaPersistenceDao
+	 * @param hibernateDao
 	 */
-	public void setHibernatePersistenceDao(HibernateDao<T, PK> hibernatePersistenceDao);
+	public void setHibernateDao(HibernateDao<T, PK> hibernateDao);
 	
 	/**
-	 * @description 获取持久化DAO接口
+	 * @description 获取Hibernate持久化数据访问接口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public HibernateDao<T, PK> getHibernatePersistenceDao();
+	public HibernateDao<T, PK> getHibernateDao();
 
 }

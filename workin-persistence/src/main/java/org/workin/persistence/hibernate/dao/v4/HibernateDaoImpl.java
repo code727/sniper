@@ -16,7 +16,7 @@
  * Create Date : 2015-2-2
  */
 
-package org.workin.persistence.hibernate.v4.dao;
+package org.workin.persistence.hibernate.dao.v4;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -38,6 +38,7 @@ import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.persistence.hibernate.HibernateUtils;
+import org.workin.persistence.hibernate.dao.HibernateDao;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallback;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
@@ -52,7 +53,8 @@ import org.workin.persistence.util.PersistenceUtils;
  * @version 1.0
  */
 @Repository
-public class Hibernate4DaoImpl<T, PK extends Serializable> extends Hibernate4DaoSupport<T, PK> {
+public class HibernateDaoImpl<T, PK extends Serializable> extends
+		HibernateDaoSupport<T> implements HibernateDao<T, PK> {
 		
 	@Override
 	public void persist(T entity) {

@@ -16,25 +16,22 @@
  * Create Date : 2015-2-2
  */
 
-package org.workin.persistence.hibernate.v3.dao;
-
-import java.io.Serializable;
+package org.workin.persistence.hibernate.dao.v3;
 
 import org.hibernate.Session;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.workin.commons.util.ClassUtils;
 import org.workin.persistence.hibernate.HibernateUtils;
-import org.workin.persistence.hibernate.dao.HibernateDao;
+import org.workin.support.bean.GenericBean;
 
 /**
  * @description Hibernate3 DAO支持抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class Hibernate3DaoSupport<T, PK extends Serializable> extends
-		HibernateDaoSupport implements HibernateDao<T, PK> {
+public abstract class HibernateDaoSupport<T> extends
+	org.springframework.orm.hibernate3.support.HibernateDaoSupport implements GenericBean<T> {
 	
 	/** 当前DAO所关联的实体类型 */
 	private Class<T> beanClass;
@@ -60,7 +57,6 @@ public abstract class Hibernate3DaoSupport<T, PK extends Serializable> extends
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	@Override
 	public Session openSession() {
 		return getSessionFactory().openSession();
 	}
@@ -70,7 +66,6 @@ public abstract class Hibernate3DaoSupport<T, PK extends Serializable> extends
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	@Override
 	public Session getCurrentSession() {
 		return getHibernateTemplate().getSessionFactory().getCurrentSession();
 	}

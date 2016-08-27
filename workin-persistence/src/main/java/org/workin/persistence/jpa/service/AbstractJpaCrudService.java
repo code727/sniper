@@ -27,7 +27,7 @@ import java.util.List;
  * @version 1.0
  */
 public abstract class AbstractJpaCrudService<T, PK extends Serializable> extends
-		AbstractJpaPersistenceService<T, PK> implements JpaCrudService<T, PK> {
+		AbstractJpaService<T, PK> implements JpaCrudService<T, PK> {
 		
 	@Override
 	public void persist(T entity) {

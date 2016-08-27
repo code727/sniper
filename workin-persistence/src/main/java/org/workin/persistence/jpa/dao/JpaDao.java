@@ -20,8 +20,6 @@ package org.workin.persistence.jpa.dao;
 
 import java.io.Serializable;
 
-import javax.persistence.EntityManager;
-
 import org.workin.persistence.FilterQuery;
 import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQuery;
 import org.workin.persistence.jpa.dao.interfaces.JpaNamedQuery;
@@ -41,18 +39,4 @@ public interface JpaDao<T, PK extends Serializable> extends GenericBean<T>,
 		JpaPersistence<T, PK>, JpaNativePersistence, JpaQuery<T, PK>, JpaNamedQuery<T>,
 		JpaNativeQuery<T>, JpaCriteriaQuery<T>, JpaPagingQuery<T>, FilterQuery<T> {
 	
-	/**
-	 * @description 获取EntityManager对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public EntityManager getEntityManager();
-	
-	/**
-	 * @description 设置EntityManager对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param entityManager
-	 */
-	public void setEntityManager(EntityManager entityManager);
-
 }

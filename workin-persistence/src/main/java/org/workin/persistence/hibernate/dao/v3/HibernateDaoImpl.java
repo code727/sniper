@@ -16,7 +16,7 @@
  * Create Date : 2015-2-2
  */
 
-package org.workin.persistence.hibernate.v3.dao;
+package org.workin.persistence.hibernate.dao.v3;
 
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -34,12 +34,14 @@ import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.stereotype.Repository;
 import org.workin.commons.pagination.PagingResult;
 import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.persistence.hibernate.HibernateUtils;
+import org.workin.persistence.hibernate.dao.HibernateDao;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallback;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
@@ -53,8 +55,10 @@ import org.workin.persistence.util.PersistenceUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Hibernate3DaoImpl<T, PK extends Serializable> extends Hibernate3DaoSupport<T, PK> {
-	
+@Repository
+public class HibernateDaoImpl<T, PK extends Serializable> extends
+		HibernateDaoSupport<T> implements HibernateDao<T, PK> {
+		
 	@Override
 	public void persist(T entity) {
 		persist(null, entity);

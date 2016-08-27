@@ -20,8 +20,6 @@ package org.workin.persistence.hibernate.dao;
 
 import java.io.Serializable;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.workin.persistence.FilterQuery;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateCriteriaQuery;
 import org.workin.persistence.hibernate.dao.interfaces.HibernateExampleQuery;
@@ -42,31 +40,4 @@ public interface HibernateDao<T, Pk extends Serializable> extends
 		HibernateQuery<T, Pk>, JpaNamedQuery<T>, JpaNativeQuery<T>,
 		HibernateCriteriaQuery<T>, HibernateExampleQuery<T>, FilterQuery<T> {
 		
-	/**
-	 * @description 设置SessionFactory对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sessionFactory
-	 */
-	public void setSessionFactory(SessionFactory sessionFactory);
-	
-	/**
-	 * @description 获取SessionFactory对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public SessionFactory getSessionFactory();
-
-	/**
-	 * @description 打开一个新会话
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Session openSession();
-	
-	/**
-	 * @description 获取当前会话
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Session getCurrentSession();
 }

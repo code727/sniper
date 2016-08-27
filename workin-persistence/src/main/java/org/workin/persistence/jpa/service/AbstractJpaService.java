@@ -34,10 +34,10 @@ import org.workin.persistence.sqlmap.dao.SqlMapQuery;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractJpaPersistenceService<T, PK extends Serializable>
-		implements JpaPersistenceService<T, PK>, InitializingBean {
+public abstract class AbstractJpaService<T, PK extends Serializable>
+		implements JpaService<T, PK>, InitializingBean {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AbstractJpaPersistenceService.class);
+	private static final Logger logger = LoggerFactory.getLogger(AbstractJpaService.class);
 	
 	@Autowired
 	protected JpaDao<T, PK> jpaDao;

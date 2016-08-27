@@ -16,14 +16,14 @@
  * Create Date : 2015-3-17
  */
 
-package org.workin.persistence.hibernate.v4;
+package org.workin.persistence.hibernate.dao.v4;
 
 /**
  * @description Hibernate4缓存配置
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Hibernate4CacheConfiguration {
+public class HibernateCacheConfiguration {
 	
 	/** 是否开启查询缓存 */
 	private boolean cacheQueries = false;

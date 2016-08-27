@@ -30,186 +30,186 @@ import org.hibernate.LockOptions;
  * @version 1.0
  */
 public abstract class AbstractHibernateCrudService<T, PK extends Serializable> extends
-		AbstractHibernatePersistenceService<T, PK> implements HibernateCrudService<T, PK> {
+		AbstractHibernateService<T, PK> implements HibernateCrudService<T, PK> {
 
 	@Override
 	public void persist(T entity) {
-		this.hibernatePersistenceDao.persist(entity);
+		this.hibernateDao.persist(entity);
 	}
 	
 	@Override
 	public void persist(String entityName, T entity) {
-		this.hibernatePersistenceDao.persist(entityName, entity);
+		this.hibernateDao.persist(entityName, entity);
 	}
 
 	@Override
 	public void batchPersist(List<T> entityList) {
-		this.hibernatePersistenceDao.batchPersist(entityList);
+		this.hibernateDao.batchPersist(entityList);
 	}
 	
 	@Override
 	public void batchPersist(String entityName, List<T> entityList) {
-		this.hibernatePersistenceDao.batchPersist(entityName, entityList);
+		this.hibernateDao.batchPersist(entityName, entityList);
 	}
 
 	@Override
 	public T merge(T entity) {
-		return this.hibernatePersistenceDao.merge(entity);
+		return this.hibernateDao.merge(entity);
 	}
 	
 	@Override
 	public T merge(String entityName, T entity) {
-		return this.hibernatePersistenceDao.merge(entityName, entity);
+		return this.hibernateDao.merge(entityName, entity);
 	}
 
 	@Override
 	public List<T> batchMerge(List<T> entityList) {
-		return this.hibernatePersistenceDao.batchMerge(entityList);
+		return this.hibernateDao.batchMerge(entityList);
 	}
 	
 	@Override
 	public List<T> batchMerge(String entityName, List<T> entityList) {
-		return this.hibernatePersistenceDao.batchMerge(entityName, entityList);
+		return this.hibernateDao.batchMerge(entityName, entityList);
 	}
 
 	@Override
 	public void remove(T entity) {
-		this.hibernatePersistenceDao.remove(entity);
+		this.hibernateDao.remove(entity);
 	}
 	
 	@Override
 	public void remove(String entityName, T entity) {
-		this.hibernatePersistenceDao.remove(entityName, entity); 
+		this.hibernateDao.remove(entityName, entity); 
 	}
 
 	@Override
 	public void remove(PK primaryKey) {
-		this.hibernatePersistenceDao.remove(primaryKey);
+		this.hibernateDao.remove(primaryKey);
 	}
 
 	@Override
 	public void batchRemove(List<T> entityList) {
-		this.hibernatePersistenceDao.batchRemove(entityList);
+		this.hibernateDao.batchRemove(entityList);
 	}
 	
 	@Override
 	public void batchRemove(String entityName, List<T> entityList) {
-		this.hibernatePersistenceDao.batchRemove(entityName, entityList);
+		this.hibernateDao.batchRemove(entityName, entityList);
 	}
 
 	@Override
 	public T findById(PK primaryKey) {
-		return this.hibernatePersistenceDao.findById(primaryKey);
+		return this.hibernateDao.findById(primaryKey);
 	}
 
 	@Override
 	public List<T> findAll() {
-		return this.hibernatePersistenceDao.findAll();
+		return this.hibernateDao.findAll();
 	}
 
 	@Override
 	public List<T> findAllDistinct() {
-		return this.hibernatePersistenceDao.findAllDistinct();
+		return this.hibernateDao.findAllDistinct();
 	}
 
 	@Override
 	public PK save(T entity) {
-		return this.hibernatePersistenceDao.save(entity);
+		return this.hibernateDao.save(entity);
 	}
 
 	@Override
 	public PK save(String entityName, T entity) {
-		return this.hibernatePersistenceDao.save(entityName, entity);
+		return this.hibernateDao.save(entityName, entity);
 	}
 
 	@Override
 	public void update(T entity) {
-		this.hibernatePersistenceDao.update(entity);
+		this.hibernateDao.update(entity);
 	}
 
 	@Override
 	public void update(String entityName, T entity) {
-		this.hibernatePersistenceDao.update(entityName, entity);
+		this.hibernateDao.update(entityName, entity);
 	}
 
 	@Override
 	public void saveOrUpdate(T entity) {
-		this.hibernatePersistenceDao.saveOrUpdate(entity);
+		this.hibernateDao.saveOrUpdate(entity);
 	}
 
 	@Override
 	public void saveOrUpdate(String entityName, T entity) {
-		this.hibernatePersistenceDao.saveOrUpdate(entityName, entity);
+		this.hibernateDao.saveOrUpdate(entityName, entity);
 	}
 
 	@Override
 	public T loadById(PK primaryKey) {
-		return this.hibernatePersistenceDao.loadById(primaryKey);
+		return this.hibernateDao.loadById(primaryKey);
 	}
 
 	@Override
 	public T loadById(PK primaryKey, LockMode lockMode) {
-		return this.hibernatePersistenceDao.loadById(primaryKey, lockMode);
+		return this.hibernateDao.loadById(primaryKey, lockMode);
 	}
 
 	@Override
 	public T loadById(PK primaryKey, LockOptions lockOptions) {
-		return this.hibernatePersistenceDao.loadById(primaryKey, lockOptions);
+		return this.hibernateDao.loadById(primaryKey, lockOptions);
 	}
 
 	@Override
 	public T loadById(String entityName, PK primaryKey) {
-		return this.hibernatePersistenceDao.loadById(entityName, primaryKey);
+		return this.hibernateDao.loadById(entityName, primaryKey);
 	}
 
 	@Override
 	public T loadById(String entityName, PK primaryKey, LockMode lockMode) {
-		return this.hibernatePersistenceDao.loadById(entityName, primaryKey, lockMode);
+		return this.hibernateDao.loadById(entityName, primaryKey, lockMode);
 	}
 
 	@Override
 	public T loadById(String entityName, PK primaryKey, LockOptions lockOptions) {
-		return this.hibernatePersistenceDao.loadById(entityName, primaryKey, lockOptions);
+		return this.hibernateDao.loadById(entityName, primaryKey, lockOptions);
 	}
 
 	@Override
 	public List<T> loadAll() {
-		return this.hibernatePersistenceDao.loadAll();
+		return this.hibernateDao.loadAll();
 	}
 
 	@Override
 	public List<T> loadAllDistinct() {
-		return this.hibernatePersistenceDao.loadAllDistinct();
+		return this.hibernateDao.loadAllDistinct();
 	}
 	
 	@Override
 	public T getById(PK primaryKey) {
-		return this.hibernatePersistenceDao.getById(primaryKey);
+		return this.hibernateDao.getById(primaryKey);
 	}
 
 	@Override
 	public T getById(PK primaryKey, LockMode lockMode) {
-		return this.hibernatePersistenceDao.getById(primaryKey, lockMode);
+		return this.hibernateDao.getById(primaryKey, lockMode);
 	}
 
 	@Override
 	public T getById(PK primaryKey, LockOptions lockOptions) {
-		return this.hibernatePersistenceDao.getById(primaryKey, lockOptions);
+		return this.hibernateDao.getById(primaryKey, lockOptions);
 	}
 
 	@Override
 	public T getById(String entityName, PK primaryKey) {
-		return this.hibernatePersistenceDao.getById(entityName, primaryKey);
+		return this.hibernateDao.getById(entityName, primaryKey);
 	}
 
 	@Override
 	public T getById(String entityName, PK primaryKey, LockMode lockMode) {
-		return this.hibernatePersistenceDao.getById(entityName, primaryKey, lockMode);
+		return this.hibernateDao.getById(entityName, primaryKey, lockMode);
 	}
 
 	@Override
 	public T getById(String entityName, PK primaryKey, LockOptions lockOptions) {
-		return this.hibernatePersistenceDao.getById(entityName, primaryKey, lockOptions);
+		return this.hibernateDao.getById(entityName, primaryKey, lockOptions);
 	}
 
 }

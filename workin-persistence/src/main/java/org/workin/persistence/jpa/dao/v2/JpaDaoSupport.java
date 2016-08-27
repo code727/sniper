@@ -16,7 +16,7 @@
  * Create Date : 2015-1-29
  */
 
-package org.workin.persistence.jpa.dao;
+package org.workin.persistence.jpa.dao.v2;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -36,7 +36,7 @@ import org.workin.spring.beans.AbstractGenricBean;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class Jpa2DaoSupport<T> extends AbstractGenricBean<T> {
+public abstract class JpaDaoSupport<T> extends AbstractGenricBean<T> {
 	
 	@PersistenceContext
 	private EntityManager entityManager;

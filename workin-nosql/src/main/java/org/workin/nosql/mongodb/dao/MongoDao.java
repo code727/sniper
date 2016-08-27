@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016-8-25
+ * Create Date : 2016-8-26
  */
 
 package org.workin.nosql.mongodb.dao;
@@ -25,8 +25,7 @@ import java.io.Serializable;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface MongoDao<T, PK extends Serializable> extends MongoQuery<T, PK> {
-	
-	public void save(T entity);
-	
+public interface MongoDao<T, PK extends Serializable> extends
+		MongoPersistence<T, PK>, MongoQuery<T, PK> {
+
 }

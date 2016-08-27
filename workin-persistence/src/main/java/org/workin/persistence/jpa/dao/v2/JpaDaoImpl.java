@@ -16,7 +16,7 @@
  * Create Date : 2015-1-29
  */
 
-package org.workin.persistence.jpa.dao;
+package org.workin.persistence.jpa.dao.v2;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -38,6 +38,7 @@ import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
+import org.workin.persistence.jpa.dao.JpaDao;
 import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQueryCallback;
 import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
@@ -52,8 +53,8 @@ import org.workin.persistence.util.PersistenceUtils;
  * @version 1.0
  */
 @Repository
-public class Jpa2DaoImpl<T, PK extends Serializable> extends
-		Jpa2DaoSupport<T> implements JpaDao<T, PK> {
+public class JpaDaoImpl<T, PK extends Serializable> extends
+		JpaDaoSupport<T> implements JpaDao<T, PK> {
 	
 	@Override
 	public void persist(T entity) {
