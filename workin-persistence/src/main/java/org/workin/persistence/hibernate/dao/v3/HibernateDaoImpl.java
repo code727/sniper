@@ -83,21 +83,22 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 
 			@Override
 			public T doInHibernate(Session session) throws HibernateException, SQLException {
+				int max = entityList.size() - 1;
 				
-				int max = entityList.size();
 				if (StringUtils.isNotBlank(entityName)) {
 					String name = entityName.trim();
-					for (int i = 0; i < max; i++) {
+					
+					for (int i = 0; i <= max; i++) {
 						session.persist(name, entityList.get(i));
 						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+						if (((i != 0) && (i % 1000 == 0)) || (i == max))
 							session.flush();
 					}
 				} else {
-					for (int i = 0; i < max; i++) {
+					for (int i = 0; i <= max; i++) {
 						session.persist(entityList.get(i));
 						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+						if (((i != 0) && (i % 1000 == 0)) || (i == max))
 							session.flush();
 					}
 				}
@@ -138,25 +139,23 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 			@SuppressWarnings("unchecked")
 			@Override
 			public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
+				int max = entityList.size() - 1;
 				List<T> list = CollectionUtils.newArrayList();
-				int max = entityList.size();
-				T entity;
+				
 				if (StringUtils.isNotBlank(entityName)) {
-					for (int i = 0; i < max; i++) {
-						entity = entityList.get(i);
-						if (entity != null)
-							list.add((T) session.merge(entityName, entityList.get(i)));
+					String name = entityName.trim();
+					
+					for (int i = 0; i <= max; i++) {
+						list.add((T) session.merge(name, entityList.get(i)));
 						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+						if (((i != 0) && (i % 1000 == 0)) || (i == max))
 							session.flush();
 					}
 				} else {
-					for (int i = 0; i < max; i++) {
-						entity = entityList.get(i);
-						if (entity != null)
-							list.add((T) session.merge(entityList.get(i)));
+					for (int i = 0; i <= max; i++) {
+						list.add((T) session.merge(entityList.get(i)));
 						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+						if (((i != 0) && (i % 1000 == 0)) || (i == max))
 							session.flush();
 					}
 				}
@@ -196,19 +195,29 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 
 			@Override
 			public T doInHibernate(Session session) throws HibernateException, SQLException {
-				int max = entityList.size();
+				int max = entityList.size() - 1;
+				T entity;
+				
 				if (StringUtils.isNotBlank(entityName)) {
-					for (int i = 0; i < max; i++) {
-						session.delete(entityName, entityList.get(i));
+					String name = entityName.trim();
+					
+					for (int i = 0; i <= max; i++) {
+						entity = entityList.get(i);
+						session.refresh(name, entity);
+						session.delete(name, entity);
+						
 						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+						if (((i != 0) && (i % 1000 == 0)) || (i == max))
 							session.flush();
 					}
 				} else {
-					for (int i = 0; i < max; i++) {
-						session.delete(entityList.get(i));
+					for (int i = 0; i <= max; i++) {
+						entity = entityList.get(i);
+						session.refresh(entity);
+						session.delete(entity);
+						
 						// 最大1000条记录保存一次
-						if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+						if (((i != 0) && (i % 1000 == 0)) || (i == max))
 							session.flush();
 					}
 				}

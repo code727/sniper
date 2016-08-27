@@ -29,9 +29,9 @@ import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.stereotype.Repository;
 import org.workin.commons.pagination.PagingQuery;
 import org.workin.commons.pagination.PagingResult;
+import org.workin.commons.util.CollectionUtils;
 import org.workin.persistence.jpa.dao.JpaDao;
 import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQueryCallback;
-import org.workin.persistence.jpa.dao.v1.JpaDaoSupport;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
 import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
@@ -58,17 +58,17 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 			@Override
 			public T doInJpa(EntityManager em) throws PersistenceException {
-				int max = entityList.size();
-				for (int i = 0; i < max; i++) {
+				int max = entityList.size() - 1;
+				
+				for (int i = 0; i <= max; i++) {
 					em.persist(entityList.get(i));
 					// 最大1000条记录保存一次
-					if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
+					if (((i != 0) && (i % 1000 == 0)) || (i == max))
 						em.flush();
 				}
 				return null;
 			}
 		});
-		
 	}
 
 	@Override
@@ -76,125 +76,101 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 		return getJpaTemplate().merge(entity);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param entityList
-	 * @return 
-	 */
 	@Override
-	public List<T> batchMerge(List<T> entityList) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> batchMerge(final List<T> entityList) {
+		return getJpaTemplate().execute(new JpaCallback<List<T>>() {
+
+			@Override
+			public List<T> doInJpa(EntityManager em) throws PersistenceException {
+				int max = entityList.size() - 1;
+				List<T> list = CollectionUtils.newArrayList();
+				
+				for (int i = 0; i <= max; i++) {
+					list.add(em.merge(entityList.get(i)));
+					// 最大1000条记录保存一次
+					if (((i != 0) && (i % 1000 == 0)) || (i == max))
+						em.flush();
+				}
+				
+				return list;
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param entity 
-	 */
 	@Override
 	public void remove(T entity) {
-		// TODO Auto-generated method stub
-		
+		getJpaTemplate().remove(entity);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey 
-	 */
 	@Override
 	public void remove(PK primaryKey) {
-		// TODO Auto-generated method stub
-		
+		T entity = findById(primaryKey);
+		if (entity != null)
+			remove(entity);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param entityList 
-	 */
 	@Override
-	public void batchRemove(List<T> entityList) {
-		// TODO Auto-generated method stub
+	public void batchRemove(final List<T> entityList) {
+		getJpaTemplate().execute(new JpaCallback<T>() {
+
+			@Override
+			public T doInJpa(EntityManager em) throws PersistenceException {
+				int max = entityList.size() - 1;
+				T entity;
+				
+				for (int i = 0; i <= max; i++) {
+					entity = entityList.get(i);
+					em.refresh(entity);
+					em.remove(entity);
+						
+					if (((i != 0) && (i % 1000 == 0)) || (i == max))
+						em.flush();	
+				}
+				
+				return null;
+			}
+		});
 		
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param entity 
-	 */
 	@Override
 	public void refresh(T entity) {
-		// TODO Auto-generated method stub
-		
+		getJpaTemplate().refresh(entity);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>  
-	 */
 	@Override
 	public void flush() {
-		// TODO Auto-generated method stub
-		
+		getJpaTemplate().flush();
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>  
-	 */
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		getJpaTemplate().execute(new JpaCallback<T>() {
+			
+			@Override
+			public T doInJpa(EntityManager em) throws PersistenceException {
+				em.clear();
+				return null;
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param entity
-	 * @return 
-	 */
 	@Override
 	public boolean contains(T entity) {
-		// TODO Auto-generated method stub
-		return false;
+		return getJpaTemplate().contains(entity);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
-	 * @return 
-	 */
 	@Override
 	public boolean contains(PK primaryKey) {
-		// TODO Auto-generated method stub
-		return false;
+		return contains(findById(primaryKey));
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @return 
-	 */
 	@Override
 	public int execute(String ql) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @param values
-	 * @return 
-	 */
 	@Override
 	public int execute(String ql, Object[] values) {
 		// TODO Auto-generated method stub

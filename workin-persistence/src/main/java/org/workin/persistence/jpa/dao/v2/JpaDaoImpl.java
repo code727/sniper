@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -63,12 +64,14 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public void batchPersist(List<T> entityList) {
-		int max = entityList.size();
-		for (int i = 0; i < max; i++) {
-			getEntityManager().persist(entityList.get(i));
+		int max = entityList.size() - 1;
+		EntityManager em = getEntityManager();
+		
+		for (int i = 0; i <= max; i++) {
+			em.persist(entityList.get(i));
 			// 最大1000条记录保存一次
-			if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-				getEntityManager().flush();
+			if (((i != 0) && (i % 1000 == 0)) || (i == max))
+				em.flush();
 		}
 	}
 
@@ -79,17 +82,17 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> batchMerge(List<T> entityList) {
-		int max = entityList.size();
+		int max = entityList.size() - 1;
+		EntityManager em = getEntityManager();
 		List<T> list = CollectionUtils.newArrayList();
-		T entity;
-		for (int i = 0; i < max; i++) {
-			entity = entityList.get(i);
-			if (entity != null)
-				list.add(getEntityManager().merge(entityList.get(i)));
+		
+		for (int i = 0; i <= max; i++) {
+			list.add(em.merge(entityList.get(i)));
 			// 最大1000条记录保存一次
-			if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-				getEntityManager().flush();
+			if (((i != 0) && (i % 1000 == 0)) || (i == max))
+				em.flush();
 		}
+		
 		return list;
 	}
 
@@ -100,23 +103,24 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public void remove(PK primaryKey) {
-		T entity = getEntityManager().find(this.getBeanClass(), primaryKey);
+		T entity = findById(primaryKey);
 		if (entity != null)
 			remove(entity);
 	}
 
 	@Override
 	public void batchRemove(List<T> entityList) {
-		int max = entityList.size();
+		int max = entityList.size() - 1;
+		EntityManager em = getEntityManager();
 		T entity;
-		for (int i = 0; i < max; i++) {
+		
+		for (int i = 0; i <= max; i++) {
 			entity = entityList.get(i);
-			if (entity != null) {
-				getEntityManager().refresh(entityList.get(i));
-				getEntityManager().remove(entity);
-			}
-			if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-				getEntityManager().flush();	
+			em.refresh(entity);
+			em.remove(entity);
+				
+			if (((i != 0) && (i % 1000 == 0)) || (i == max))
+				em.flush();	
 		}
 	}
 

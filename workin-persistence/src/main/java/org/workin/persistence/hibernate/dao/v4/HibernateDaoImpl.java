@@ -28,6 +28,7 @@ import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Projections;
@@ -76,21 +77,24 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public void batchPersist(final String entityName, final List<T> entityList) {
-		int max = entityList.size();
+		int max = entityList.size() - 1;
+		Session session = getCurrentSession();
+		
 		if (StringUtils.isNotBlank(entityName)) {
 			String name = entityName.trim();
-			for (int i = 0; i < max; i++) {
-				getCurrentSession().persist(name, entityList.get(i));
+			
+			for (int i = 0; i <= max; i++) {
+				session.persist(name, entityList.get(i));
 				// 最大1000条记录保存一次
-				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-					getCurrentSession().flush();
+				if (((i != 0) && (i % 1000 == 0)) || (i == max))
+					session.flush();
 			}
 		} else {
-			for (int i = 0; i < max; i++) {
-				getCurrentSession().persist(entityList.get(i));
+			for (int i = 0; i <= max; i++) {
+				session.persist(entityList.get(i));
 				// 最大1000条记录保存一次
-				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-					getCurrentSession().flush();
+				if (((i != 0) && (i % 1000 == 0)) || (i == max))
+					session.flush();
 			}
 		}
 	}
@@ -115,26 +119,25 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> batchMerge(final String entityName, final List<T> entityList) {
-		int max = entityList.size();
+		int max = entityList.size() - 1;
+		Session session = getCurrentSession();
 		List<T> list = CollectionUtils.newArrayList();
-		T entity;
+		
 		if (StringUtils.isNotBlank(entityName)) {
-			for (int i = 0; i < max; i++) {
-				entity = entityList.get(i);
-				if (entity != null)
-					list.add((T) getCurrentSession().merge(entityName, entityList.get(i)));
+			String name = entityName.trim();
+			
+			for (int i = 0; i <= max; i++) {
+				list.add((T) session.merge(name, entityList.get(i)));
 				// 最大1000条记录保存一次
-				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-					getCurrentSession().flush();
+				if (((i != 0) && (i % 1000 == 0)) || (i == max))
+					session.flush();
 			}
 		} else {
-			for (int i = 0; i < max; i++) {
-				entity = entityList.get(i);
-				if (entity != null)
-					list.add((T) getCurrentSession().merge(entityList.get(i)));
+			for (int i = 0; i <= max; i++) {
+				list.add((T) session.merge(entityList.get(i)));
 				// 最大1000条记录保存一次
-				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-					getCurrentSession().flush();
+				if (((i != 0) && (i % 1000 == 0)) || (i == max))
+					session.flush();
 			}
 		}
 		return list;
@@ -168,20 +171,31 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public void batchRemove(final String entityName, final List<T> entityList) {
-		int max = entityList.size();
+		int max = entityList.size() - 1;
+		Session session = getCurrentSession();
+		T entity;
+		
 		if (StringUtils.isNotBlank(entityName)) {
-			for (int i = 0; i < max; i++) {
-				getCurrentSession().delete(entityName, entityList.get(i));
+			String name = entityName.trim();
+			
+			for (int i = 0; i <= max; i++) {
+				entity = entityList.get(i);
+				session.refresh(name, entity);
+				session.delete(name, entity);
+				
 				// 最大1000条记录保存一次
-				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-					getCurrentSession().flush();
+				if (((i != 0) && (i % 1000 == 0)) || (i == max))
+					session.flush();
 			}
 		} else {
-			for (int i = 0; i < max; i++) {
-				getCurrentSession().delete(entityList.get(i));
+			for (int i = 0; i <= max; i++) {
+				entity = entityList.get(i);
+				session.refresh(entity);
+				session.delete(entity);
+				
 				// 最大1000条记录保存一次
-				if (((i != 0) && (i % 1000 == 0)) || (i == max - 1))
-					getCurrentSession().flush();
+				if (((i != 0) && (i % 1000 == 0)) || (i == max))
+					session.flush();
 			}
 		}
 	}
