@@ -39,6 +39,7 @@ import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
+import org.workin.persistence.jpa.JpaUtils;
 import org.workin.persistence.jpa.dao.JpaDao;
 import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQueryCallback;
 import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQueryCallbackDao;
@@ -158,14 +159,14 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public int execute(String ql, Object[] values) {
 		Query query = getEntityManager().createQuery(ql);
-		setQueryParameters(query, values);
+		JpaUtils.setQueryParameters(query, values);
 		return query.executeUpdate();
 	}
 
 	@Override
 	public int execute(String ql, Map<String, ?> paramMap) {
 		Query query = getEntityManager().createQuery(ql);
-		setQueryNamedParameters(query, paramMap);
+		JpaUtils.setQueryNamedParameters(query, paramMap);
 		return query.executeUpdate();
 	}
 	
@@ -204,7 +205,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public <R> R findUniqueByQueryString(Class<R> resultClass, String ql, Object[] values) {
 		TypedQuery<R> query = getEntityManager().createQuery(ql, resultClass);
-		setQueryParameters(query, values);
+		JpaUtils.setQueryParameters(query, values);
 		return query.getSingleResult();
 	}
 
@@ -216,7 +217,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public <R> R findUniqueByQueryString(Class<R> resultClass, String ql, Map<String, ?> paramMap) {
 		TypedQuery<R> query = getEntityManager().createQuery(ql, resultClass);
-		setQueryNamedParameters(query, paramMap);
+		JpaUtils.setQueryNamedParameters(query, paramMap);
 		return query.getSingleResult();
 	}
 
@@ -268,7 +269,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public <R> List<R> find(Class<R> resultClass, String ql, Object[] values, int start, int maxRows) {
 		TypedQuery<R> query = getEntityManager().createQuery(ql, resultClass);
-		setQueryParameters(query, values, start, maxRows);
+		JpaUtils.setQueryParameters(query, values, start, maxRows);
 		return query.getResultList();
 	}
 	
@@ -280,7 +281,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public <R> List<R> find(Class<R> resultClass, String ql, Map<String, ?> paramMap, int start, int maxRows) {
 		TypedQuery<R> query = getEntityManager().createQuery(ql, resultClass);
-		setQueryNamedParameters(query, paramMap, start, maxRows);
+		JpaUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
 		return query.getResultList();
 	}
 	
@@ -368,7 +369,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public <R> R findUniqueByNamedQuery(Class<R> resultClass, String queryName, Object[] values) {
 		TypedQuery<R> query = getEntityManager().createNamedQuery(queryName, resultClass);	
-		setQueryParameters(query, values);
+		JpaUtils.setQueryParameters(query, values);
 		return query.getSingleResult();
 	}
 
@@ -380,7 +381,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public <R> R findUniqueByNamedQuery(Class<R> resultClass, String queryName, Map<String, ?> paramMap) {
 		TypedQuery<R> query = getEntityManager().createNamedQuery(queryName, resultClass);
-		setQueryNamedParameters(query, paramMap);	
+		JpaUtils.setQueryNamedParameters(query, paramMap);	
 		return query.getSingleResult();
 	}
 
@@ -421,7 +422,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName, Object[] values, int start, int maxRows) {
 		TypedQuery<R> query = getEntityManager().createNamedQuery(queryName, resultClass);
-		setQueryParameters(query, values, start, maxRows);
+		JpaUtils.setQueryParameters(query, values, start, maxRows);
 		return query.getResultList();
 	}
 
@@ -443,7 +444,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName, Map<String, ?> paramMap, int start, int maxRows) {
 		TypedQuery<R> query = getEntityManager().createNamedQuery(queryName, resultClass);
-		setQueryNamedParameters(query, paramMap, start, maxRows);
+		JpaUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
 		return query.getResultList();
 	}
 
@@ -455,14 +456,14 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public int executeNamedQuery(String queryName, Object[] values) {
 		Query query = getEntityManager().createNamedQuery(queryName);
-		setQueryParameters(query, values);
+		JpaUtils.setQueryParameters(query, values);
 		return query.executeUpdate();
 	}
 
 	@Override
 	public int executeNamedQuery(String queryName, Map<String, ?> paramMap) {
 		Query query = getEntityManager().createNamedQuery(queryName);
-		setQueryNamedParameters(query, paramMap);
+		JpaUtils.setQueryNamedParameters(query, paramMap);
 		return query.executeUpdate();
 	}
 	
@@ -474,14 +475,14 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public long countByNamedQuery(String queryName, Object[] values) {
 		TypedQuery<Long> query = getEntityManager().createNamedQuery(queryName, Long.class);
-		setQueryParameters(query, values);
+		JpaUtils.setQueryParameters(query, values);
 		return query.getSingleResult();
 	}
 
 	@Override
 	public long countByNamedQuery(String queryName, Map<String, ?> paramMap) {
 		TypedQuery<Long> query = getEntityManager().createNamedQuery(queryName, Long.class);
-		setQueryNamedParameters(query, paramMap);
+		JpaUtils.setQueryNamedParameters(query, paramMap);
 		return query.getSingleResult();
 	}
 	
@@ -504,7 +505,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public <R> R findUniqueByNativeQuery(Class<R> resultClass, String sql, Object[] values) {
 		Query query = getEntityManager().createNativeQuery(sql, resultClass);
-		setQueryParameters(query, values);
+		JpaUtils.setQueryParameters(query, values);
 		return (R) query.getSingleResult();
 	}
 	
@@ -517,7 +518,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public <R> R findUniqueByNativeQuery(Class<R> resultClass, String sql, Map<String, ?> paramMap) {
 		Query query = getEntityManager().createNativeQuery(sql, resultClass);
-		setQueryNamedParameters(query, paramMap);
+		JpaUtils.setQueryNamedParameters(query, paramMap);
 		return (R) query.getSingleResult();
 	}
 	
@@ -571,7 +572,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql,
 			Object[] values, int start, int maxRows) {
 		Query query = getEntityManager().createNativeQuery(sql, resultClass);
-		setQueryParameters(query, values, start, maxRows);
+		JpaUtils.setQueryParameters(query, values, start, maxRows);
 		return query.getResultList();
 	}
 
@@ -585,7 +586,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql,
 			Map<String, ?> paramMap, int start, int maxRows) {
 		Query query = getEntityManager().createNativeQuery(sql, resultClass);
-		setQueryNamedParameters(query, paramMap, start, maxRows);
+		JpaUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
 		return query.getResultList();
 	}
 
@@ -597,14 +598,14 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public int executeByNativeQuery(String sql, Object[] values) {
 		Query query = getEntityManager().createNativeQuery(sql);
-		setQueryParameters(query, values);
+		JpaUtils.setQueryParameters(query, values);
 		return query.executeUpdate();
 	}
 
 	@Override
 	public int executeByNativeQuery(String sql, Map<String, ?> paramMap) {
 		Query query = getEntityManager().createNativeQuery(sql);
-		setQueryNamedParameters(query, paramMap);
+		JpaUtils.setQueryNamedParameters(query, paramMap);
 		return query.executeUpdate();
 	}
 	
@@ -658,7 +659,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
         
         TypedQuery<T> typeQuery = getEntityManager().createQuery(criteriaQuery);
         /* 无需在自定义的回调函数中设置分段参数,如下自动设置 */
-        setOffsetQuery(typeQuery, start, maxRows);
+        JpaUtils.setOffsetQuery(typeQuery, start, maxRows);
 		return typeQuery.getResultList();
 	}
 	

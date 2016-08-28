@@ -19,23 +19,37 @@
 package org.workin.persistence.jpa.dao.v1;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.stereotype.Repository;
 import org.workin.commons.pagination.PagingQuery;
 import org.workin.commons.pagination.PagingResult;
+import org.workin.commons.pagination.result.SimplePagingResult;
+import org.workin.commons.util.ArrayUtils;
+import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
+import org.workin.persistence.jpa.JpaUtils;
 import org.workin.persistence.jpa.dao.JpaDao;
 import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQueryCallback;
+import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQueryCallbackDao;
 import org.workin.persistence.pagination.FilterChainPagingQuery;
 import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
 import org.workin.persistence.util.PersistencePropertyFilterChain;
+import org.workin.persistence.util.PersistenceUtils;
 
 /**
  * @description JPA标准的DAO实现类
@@ -167,1317 +181,819 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public int execute(String ql) {
-		// TODO Auto-generated method stub
-		return 0;
+		return execute(ql, (Object[]) null);
 	}
 
 	@Override
-	public int execute(String ql, Object[] values) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int execute(final String ql, final Object[] values) {
+		return getJpaTemplate().execute(new JpaCallback<Integer>() {
+
+			@Override
+			public Integer doInJpa(EntityManager em) throws PersistenceException {
+				Query query = em.createQuery(ql);
+				JpaUtils.setQueryParameters(query, values);
+				return query.executeUpdate();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @param paramMap
-	 * @return 
-	 */
 	@Override
-	public int execute(String ql, Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int execute(final String ql, final Map<String, ?> paramMap) {
+		return getJpaTemplate().execute(new JpaCallback<Integer>() {
+
+			@Override
+			public Integer doInJpa(EntityManager em) throws PersistenceException {
+				Query query = em.createQuery(ql);
+				JpaUtils.setQueryNamedParameters(query, paramMap);
+				return query.executeUpdate();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @return 
-	 */
-	@Override
-	public int executeByNativeQuery(String sql) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @param values
-	 * @return 
-	 */
-	@Override
-	public int executeByNativeQuery(String sql, Object[] values) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @param paramMap
-	 * @return 
-	 */
-	@Override
-	public int executeByNativeQuery(String sql, Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
-	 * @return 
-	 */
 	@Override
 	public T findById(PK primaryKey) {
-		// TODO Auto-generated method stub
-		return null;
+		return getJpaTemplate().find(this.getBeanClass(), primaryKey);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param propertyName
-	 * @param propertyValue
-	 * @return 
-	 */
+	
 	@Override
 	public T findUniqueByProperty(String propertyName, Object propertyValue) {
-		// TODO Auto-generated method stub
-		return null;
+		String ql = PersistenceUtils.buildQueryString(false, this.getBeanClass(), new String[] { propertyName });
+		return findUniqueByQueryString(ql, new Object[] { propertyValue });
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param paramMap
-	 * @return 
-	 */
+	
 	@Override
 	public T findUniqueByPropertys(Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+		String ql = PersistenceUtils.buildNamedQueryString(false, this.getBeanClass(), paramMap);
+		return findUniqueByQueryString(ql, paramMap);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @return 
-	 */
+	
 	@Override
 	public T findUniqueByQueryString(String ql) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByQueryString(this.getBeanClass(), ql);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param ql
-	 * @return 
-	 */
 	@Override
 	public <R> R findUniqueByQueryString(Class<R> resultClass, String ql) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByQueryString(resultClass, ql, (Object[]) null);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @param values
-	 * @return 
-	 */
 	@Override
 	public T findUniqueByQueryString(String ql, Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByQueryString(this.getBeanClass(), ql, values);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param ql
-	 * @param values
-	 * @return 
-	 */
 	@Override
-	public <R> R findUniqueByQueryString(Class<R> resultClass, String ql,
-			Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> R findUniqueByQueryString(final Class<R> resultClass,
+			final String ql, final Object[] values) {
+		
+		return getJpaTemplate().execute(new JpaCallback<R>() {
+
+			@Override
+			public R doInJpa(EntityManager em) throws PersistenceException {
+				TypedQuery<R> query = em.createQuery(ql, resultClass);
+				JpaUtils.setQueryParameters(query, values);
+				return query.getSingleResult();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @param paramMap
-	 * @return 
-	 */
 	@Override
 	public T findUniqueByQueryString(String ql, Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByQueryString(this.getBeanClass(), ql, paramMap); 
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param ql
-	 * @param paramMap
-	 * @return 
-	 */
 	@Override
-	public <R> R findUniqueByQueryString(Class<R> resultClass, String ql,
-			Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> R findUniqueByQueryString(final Class<R> resultClass,
+			final String ql, final Map<String, ?> paramMap) {
+		
+		return getJpaTemplate().execute(new JpaCallback<R>() {
+
+			@Override
+			public R doInJpa(EntityManager em) throws PersistenceException {
+				TypedQuery<R> query = em.createQuery(ql, resultClass);
+				JpaUtils.setQueryNamedParameters(query, paramMap);
+				return query.getSingleResult();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @return 
-	 */
 	@Override
 	public List<T> find(String ql) {
-		// TODO Auto-generated method stub
-		return null;
+		return find(this.getBeanClass(), ql);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param ql
-	 * @return 
-	 */
+	
 	@Override
 	public <R> List<R> find(Class<R> resultClass, String ql) {
-		// TODO Auto-generated method stub
-		return null;
+		return find(resultClass, ql, (Object[]) null);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @param values
-	 * @return 
-	 */
+	
 	@Override
 	public List<T> find(String ql, Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
+		return find(this.getBeanClass(), ql, values);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param ql
-	 * @param values
-	 * @return 
-	 */
+	
 	@Override
 	public <R> List<R> find(Class<R> resultClass, String ql, Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
+		return find(resultClass, ql, values, -1, -1);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @param paramMap
-	 * @return 
-	 */
+	
 	@Override
 	public List<T> find(String ql, Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+		return find(this.getBeanClass(), ql, paramMap);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param ql
-	 * @param paramMap
-	 * @return 
-	 */
+	
 	@Override
-	public <R> List<R> find(Class<R> resultClass, String ql,
-			Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> find(Class<R> resultClass, String ql, Map<String, ?> paramMap) {
+		return find(resultClass, ql, paramMap, -1, -1);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
 	@Override
 	public List<T> find(String ql, int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+		return find(this.getBeanClass(), ql, start, maxRows);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param ql
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
-	public <R> List<R> find(Class<R> resultClass, String ql, int start,
-			int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> find(Class<R> resultClass, String ql, int start, int maxRows) {
+		return find(resultClass, ql, (Object[]) null, start, maxRows);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @param values
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
 	@Override
 	public List<T> find(String ql, Object[] values, int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+		return find(this.getBeanClass(), ql, values, start, maxRows);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param ql
-	 * @param values
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
-	public <R> List<R> find(Class<R> resultClass, String ql, Object[] values,
-			int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public <R> List<R> find(final Class<R> resultClass, final String ql,
+			final Object[] values, final int start, final int maxRows) {
+		
+		return getJpaTemplate().execute(new JpaCallback<List<R>>() {
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @param paramMap
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+			@Override
+			public List<R> doInJpa(EntityManager em) throws PersistenceException {
+				TypedQuery<R> query = em.createQuery(ql, resultClass);
+				JpaUtils.setQueryParameters(query, values, start, maxRows);
+				return query.getResultList();
+			}
+		});
+	}
+	
 	@Override
-	public List<T> find(String ql, Map<String, ?> paramMap, int start,
-			int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> find(String ql, Map<String, ?> paramMap, int start, int maxRows) {
+		return find(this.getBeanClass(), ql, paramMap, start, maxRows);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param ql
-	 * @param paramMap
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
-	public <R> List<R> find(Class<R> resultClass, String ql,
-			Map<String, ?> paramMap, int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> find(final Class<R> resultClass, final String ql,
+			final Map<String, ?> paramMap, final int start, final int maxRows) {
+		
+		return getJpaTemplate().execute(new JpaCallback<List<R>>() {
+			
+			@Override
+			public List<R> doInJpa(EntityManager em) throws PersistenceException {
+				TypedQuery<R> query = em.createQuery(ql, resultClass);
+				JpaUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
+				return query.getResultList();
+			}
+		});
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
 	public List<T> find(int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByProperty(null, null, start, maxRows);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param propertyName
-	 * @param propertyValue
-	 * @return 
-	 */
+	
 	@Override
 	public List<T> findByProperty(String propertyName, Object propertyValue) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByProperty(propertyName, propertyValue, -1, -1);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param propertyName
-	 * @param propertyValue
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+		
 	@Override
-	public List<T> findByProperty(String propertyName, Object propertyValue,
-			int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> findByProperty(String propertyName, Object propertyValue, int start, int maxRows) {
+		String ql = PersistenceUtils.buildQueryString(false, this.getBeanClass(), new String[]{ propertyName});
+		return find(ql, new Object[] { propertyValue }, start, maxRows);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param paramMap
-	 * @return 
-	 */
+				
 	@Override
 	public List<T> findByPropertys(Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByPropertys(paramMap, -1, -1);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param paramMap
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
-	public List<T> findByPropertys(Map<String, ?> paramMap, int start,
-			int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> findByPropertys(Map<String, ?> paramMap, int start, int maxRows) {
+		String ql = PersistenceUtils.buildNamedQueryString(false, this.getBeanClass(), paramMap);
+		return find(ql, paramMap, start, maxRows);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return 
-	 */
+	
 	@Override
 	public List<T> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		String ql = PersistenceUtils.buildQueryString(false, this.getBeanClass()).toString();
+		return find(ql);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return 
-	 */
+	
 	@Override
 	public List<T> findAllDistinct() {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<T> result = CollectionUtils.newLinkedHashSet(findAll());
+		return CollectionUtils.newArrayList(result);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param propertyName
-	 * @param propertyValue
-	 * @return 
-	 */
+	
 	@Override
 	public long countByProperty(String propertyName, Object propertyValue) {
-		// TODO Auto-generated method stub
-		return 0;
+		String ql = PersistenceUtils.buildQueryString(true, this.getBeanClass(), new String[] { propertyName });
+		return findUniqueByQueryString(Long.class, ql, new Object[] { propertyValue });
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param paramMap
-	 * @return 
-	 */
+	
 	@Override
 	public long countByPropertys(Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return 0;
+		String ql = PersistenceUtils.buildNamedQueryString(true, this.getBeanClass(), paramMap);
+		return findUniqueByQueryString(Long.class, ql, paramMap);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @return 
-	 */
 	@Override
 	public long countByQueryString(String ql) {
-		// TODO Auto-generated method stub
-		return 0;
+		return countByQueryString(ql, (Object[]) null);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @param values
-	 * @return 
-	 */
 	@Override
 	public long countByQueryString(String ql, Object[] values) {
-		// TODO Auto-generated method stub
-		return 0;
+		return findUniqueByQueryString(Long.class, ql, values);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param ql
-	 * @param paramMap
-	 * @return 
-	 */
+	
 	@Override
 	public long countByQueryString(String ql, Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return 0;
+		return findUniqueByQueryString(Long.class, ql, paramMap);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @return 
-	 */
+	
 	@Override
 	public T findUniqueByNamedQuery(String queryName) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByNamedQuery(this.getBeanClass(), queryName);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param queryName
-	 * @return 
-	 */
+	
 	@Override
 	public <R> R findUniqueByNamedQuery(Class<R> resultClass, String queryName) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByNamedQuery(resultClass, queryName, (Object[]) null);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @param values
-	 * @return 
-	 */
 	@Override
 	public T findUniqueByNamedQuery(String queryName, Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByNamedQuery(this.getBeanClass(), queryName, values);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param queryName
-	 * @param values
-	 * @return 
-	 */
+	
 	@Override
-	public <R> R findUniqueByNamedQuery(Class<R> resultClass, String queryName,
-			Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> R findUniqueByNamedQuery(final Class<R> resultClass,
+			final String queryName, final Object[] values) {
+		
+		return getJpaTemplate().execute(new JpaCallback<R>() {
+
+			@Override
+			public R doInJpa(EntityManager em) throws PersistenceException {
+				TypedQuery<R> query = em.createNamedQuery(queryName, resultClass);	
+				JpaUtils.setQueryParameters(query, values);
+				return query.getSingleResult();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @param paramMap
-	 * @return 
-	 */
 	@Override
 	public T findUniqueByNamedQuery(String queryName, Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByNamedQuery(this.getBeanClass(), queryName, paramMap);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param queryName
-	 * @param paramMap
-	 * @return 
-	 */
+	
 	@Override
-	public <R> R findUniqueByNamedQuery(Class<R> resultClass, String queryName,
-			Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> R findUniqueByNamedQuery(final Class<R> resultClass,
+			final String queryName, final Map<String, ?> paramMap) {
+		
+		return getJpaTemplate().execute(new JpaCallback<R>() {
+
+			@Override
+			public R doInJpa(EntityManager em) throws PersistenceException {
+				TypedQuery<R> query = em.createNamedQuery(queryName, resultClass);
+				JpaUtils.setQueryNamedParameters(query, paramMap);	
+				return query.getSingleResult();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @return 
-	 */
 	@Override
 	public List<T> findByNamedQuery(String queryName) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByNamedQuery(this.getBeanClass(), queryName);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param queryName
-	 * @return 
-	 */
-	@Override
+	
 	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByNamedQuery(resultClass, queryName, (Object[]) null);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
 	public List<T> findByNamedQuery(String queryName, int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByNamedQuery(this.getBeanClass(), queryName, start, maxRows);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param queryName
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
-	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName,
-			int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName, int start, int maxRows) {
+		return findByNamedQuery(resultClass, queryName, (Object[])null, start, maxRows);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @param values
-	 * @return 
-	 */
 	@Override
 	public List<T> findByNamedQuery(String queryName, Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByNamedQuery(this.getBeanClass(), queryName, values);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param queryName
-	 * @param values
-	 * @return 
-	 */
+	
 	@Override
-	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName,
-			Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName, Object[] values) {
+		return findByNamedQuery(resultClass, queryName, values, -1, -1);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @param values
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
-	public List<T> findByNamedQuery(String queryName, Object[] values,
-			int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> findByNamedQuery(String queryName, Object[] values, int start, int maxRows) {
+		return findByNamedQuery(this.getBeanClass(), queryName, values, start, maxRows);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param queryName
-	 * @param values
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
-	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName,
-			Object[] values, int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> findByNamedQuery(final Class<R> resultClass,
+			final String queryName, final Object[] values, final int start,
+			final int maxRows) {
+		
+		return getJpaTemplate().execute(new JpaCallback<List<R>>() {
+
+			@Override
+			public List<R> doInJpa(EntityManager em) throws PersistenceException {
+				TypedQuery<R> query = em.createNamedQuery(queryName, resultClass);
+				JpaUtils.setQueryParameters(query, values, start, maxRows);
+				return query.getResultList();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @param paramMap
-	 * @return 
-	 */
 	@Override
 	public List<T> findByNamedQuery(String queryName, Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByNamedQuery(this.getBeanClass(), queryName, paramMap);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param queryName
-	 * @param paramMap
-	 * @return 
-	 */
+	
 	@Override
-	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName,
-			Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName, Map<String, ?> paramMap) {
+		return findByNamedQuery(resultClass, queryName, paramMap, -1, -1);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @param paramMap
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
-	public List<T> findByNamedQuery(String queryName, Map<String, ?> paramMap,
-			int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> findByNamedQuery(String queryName, Map<String, ?> paramMap, int start, int maxRows) {
+		return findByNamedQuery(this.getBeanClass(), queryName, paramMap, start, maxRows);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param queryName
-	 * @param paramMap
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
-	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName,
-			Map<String, ?> paramMap, int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> findByNamedQuery(final Class<R> resultClass,
+			final String queryName, final Map<String, ?> paramMap,
+			final int start, final int maxRows) {
+		
+		return getJpaTemplate().execute(new JpaCallback<List<R>>() {
+			
+			@Override
+			public List<R> doInJpa(EntityManager em) throws PersistenceException {
+				TypedQuery<R> query = em.createNamedQuery(queryName, resultClass);
+				JpaUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
+				return query.getResultList();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @return 
-	 */
 	@Override
 	public int executeNamedQuery(String queryName) {
-		// TODO Auto-generated method stub
-		return 0;
+		return executeNamedQuery(queryName, (Object[]) null);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @param values
-	 * @return 
-	 */
 	@Override
-	public int executeNamedQuery(String queryName, Object[] values) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int executeNamedQuery(final String queryName, final Object[] values) {
+		
+		return getJpaTemplate().execute(new JpaCallback<Integer>() {
+
+			@Override
+			public Integer doInJpa(EntityManager em) throws PersistenceException {
+				Query query = em.createNamedQuery(queryName);
+				JpaUtils.setQueryParameters(query, values);
+				return query.executeUpdate();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @param paramMap
-	 * @return 
-	 */
 	@Override
-	public int executeNamedQuery(String queryName, Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int executeNamedQuery(final String queryName, final Map<String, ?> paramMap) {
+		
+		return getJpaTemplate().execute(new JpaCallback<Integer>() {
+			
+			@Override
+			public Integer doInJpa(EntityManager em) throws PersistenceException {
+				Query query = em.createNamedQuery(queryName);
+				JpaUtils.setQueryNamedParameters(query, paramMap);
+				return query.executeUpdate();
+			}
+		});
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @return 
-	 */
+	
 	@Override
 	public long countByNamedQuery(String queryName) {
-		// TODO Auto-generated method stub
-		return 0;
+		return countByNamedQuery(queryName, (Object[]) null);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @param values
-	 * @return 
-	 */
 	@Override
-	public long countByNamedQuery(String queryName, Object[] values) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long countByNamedQuery(final String queryName, final Object[] values) {
+		
+		return getJpaTemplate().execute(new JpaCallback<Long>() {
+
+			@Override
+			public Long doInJpa(EntityManager em) throws PersistenceException {
+				TypedQuery<Long> query = em.createNamedQuery(queryName, Long.class);
+				JpaUtils.setQueryParameters(query, values);
+				return query.getSingleResult();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param queryName
-	 * @param paramMap
-	 * @return 
-	 */
 	@Override
-	public long countByNamedQuery(String queryName, Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public long countByNamedQuery(final String queryName, final Map<String, ?> paramMap) {
+		
+		return getJpaTemplate().execute(new JpaCallback<Long>() {
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @return 
-	 */
+			@Override
+			public Long doInJpa(EntityManager em) throws PersistenceException {
+				TypedQuery<Long> query = em.createNamedQuery(queryName, Long.class);
+				JpaUtils.setQueryNamedParameters(query, paramMap);
+				return query.getSingleResult();
+			}
+		});
+	}
+	
 	@Override
 	public T findUniqueByNativeQuery(String sql) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByNativeQuery(this.getBeanClass(), sql);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param sql
-	 * @return 
-	 */
+	
 	@Override
 	public <R> R findUniqueByNativeQuery(Class<R> resultClass, String sql) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByNativeQuery(resultClass, sql, (Object[]) null);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @param values
-	 * @return 
-	 */
+	
 	@Override
 	public T findUniqueByNativeQuery(String sql, Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByNativeQuery(this.getBeanClass(), sql, values);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param sql
-	 * @param values
-	 * @return 
-	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R findUniqueByNativeQuery(Class<R> resultClass, String sql,
-			Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public <R> R findUniqueByNativeQuery(final Class<R> resultClass,
+			final String sql, final Object[] values) {
+		
+		return getJpaTemplate().execute(new JpaCallback<R>() {
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @param paramMap
-	 * @return 
-	 */
+			@Override
+			public R doInJpa(EntityManager em) throws PersistenceException {
+				Query query = em.createNativeQuery(sql, resultClass);
+				JpaUtils.setQueryParameters(query, values);
+				return (R) query.getSingleResult();
+			}
+		});
+	}
+	
 	@Override
 	public T findUniqueByNativeQuery(String sql, Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+		return findUniqueByNativeQuery(this.getBeanClass(), sql, paramMap);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param sql
-	 * @param paramMap
-	 * @return 
-	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R findUniqueByNativeQuery(Class<R> resultClass, String sql,
-			Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public <R> R findUniqueByNativeQuery(final Class<R> resultClass,
+			final String sql, final Map<String, ?> paramMap) {
+		
+		return getJpaTemplate().execute(new JpaCallback<R>() {
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @return 
-	 */
+			@Override
+			public R doInJpa(EntityManager em) throws PersistenceException {
+				Query query = em.createNativeQuery(sql, resultClass);
+				JpaUtils.setQueryNamedParameters(query, paramMap);
+				return (R) query.getSingleResult();
+			}
+		});
+	}
+	
 	@Override
 	public List<T> findByNativeQuery(String sql) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByNativeQuery(this.getBeanClass(), sql);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param sql
-	 * @return 
-	 */
 	@Override
 	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByNativeQuery(resultClass, sql, (Object[]) null);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @param values
-	 * @return 
-	 */
 	@Override
 	public List<T> findByNativeQuery(String sql, Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByNativeQuery(this.getBeanClass(), sql, values);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param sql
-	 * @param values
-	 * @return 
-	 */
 	@Override
-	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql,
-			Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql, Object[] values) {
+		return findByNativeQuery(resultClass, sql, values, -1, -1);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @param paramMap
-	 * @return 
-	 */
 	@Override
 	public List<T> findByNativeQuery(String sql, Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByNativeQuery(this.getBeanClass(), sql, paramMap);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param sql
-	 * @param paramMap
-	 * @return 
-	 */
 	@Override
-	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql,
-			Map<String, ?> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql, Map<String, ?> paramMap) {
+		return findByNativeQuery(resultClass, sql, paramMap, -1, -1);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
 	@Override
 	public List<T> findByNativeQuery(String sql, int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByNativeQuery(this.getBeanClass(), sql, start, maxRows);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param sql
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
 	@Override
-	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql,
-			int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql, int start, int maxRows) {
+		return findByNativeQuery(resultClass, sql, (Object[]) null, start, maxRows);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @param values
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
 	@Override
-	public List<T> findByNativeQuery(String sql, Object[] values, int start,
-			int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> findByNativeQuery(String sql, Object[] values, int start, int maxRows) {
+		return findByNativeQuery(this.getBeanClass(), sql, values, start, maxRows);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param sql
-	 * @param values
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql,
-			Object[] values, int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> findByNativeQuery(final Class<R> resultClass, final String sql,
+			final Object[] values, final int start, final int maxRows) {
+		
+		return getJpaTemplate().execute(new JpaCallback<List<R>>() {
+
+			@Override
+			public List<R> doInJpa(EntityManager em) throws PersistenceException {
+				Query query = em.createNativeQuery(sql, resultClass);
+				JpaUtils.setQueryParameters(query, values, start, maxRows);
+				return query.getResultList();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sql
-	 * @param paramMap
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
 	@Override
-	public List<T> findByNativeQuery(String sql, Map<String, ?> paramMap,
-			int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> findByNativeQuery(String sql, Map<String, ?> paramMap, int start, int maxRows) {
+		return findByNativeQuery(this.getBeanClass(), sql, paramMap, start, maxRows);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param resultClass
-	 * @param sql
-	 * @param paramMap
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql,
-			Map<String, ?> paramMap, int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public <R> List<R> findByNativeQuery(final Class<R> resultClass, final String sql,
+			final Map<String, ?> paramMap, final int start, final int maxRows) {
+		
+		return getJpaTemplate().execute(new JpaCallback<List<R>>() {
+
+			@Override
+			public List<R> doInJpa(EntityManager em) throws PersistenceException {
+				Query query = em.createNativeQuery(sql, resultClass);
+				JpaUtils.setQueryNamedParameters(query, paramMap, start, maxRows);
+				return query.getResultList();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameter
-	 * @param callback
-	 * @return 
-	 */
 	@Override
-	public <P> T findUniqueByCriteria(P parameter,
-			JpaCriteriaQueryCallback<T> callback) {
-		// TODO Auto-generated method stub
-		return null;
+	public int executeByNativeQuery(String sql) {
+		return executeByNativeQuery(sql, (Object[]) null);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameter
-	 * @param callback
-	 * @return 
-	 */
 	@Override
-	public <P> List<T> findByCriteria(P parameter,
-			JpaCriteriaQueryCallback<T> callback) {
-		// TODO Auto-generated method stub
-		return null;
+	public int executeByNativeQuery(final String sql, final Object[] values) {
+		
+		return getJpaTemplate().execute(new JpaCallback<Integer>() {
+
+			@Override
+			public Integer doInJpa(EntityManager em) throws PersistenceException {
+				Query query = em.createNativeQuery(sql);
+				JpaUtils.setQueryParameters(query, values);
+				return query.executeUpdate();
+			}
+		});
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameter
-	 * @param start
-	 * @param maxRows
-	 * @param callback
-	 * @return 
-	 */
 	@Override
-	public <P> List<T> findByCriteria(P parameter, int start, int maxRows,
-			JpaCriteriaQueryCallback<T> callback) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public int executeByNativeQuery(final String sql, final Map<String, ?> paramMap) {
+		
+		return getJpaTemplate().execute(new JpaCallback<Integer>() {
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameter
-	 * @param callback
-	 * @return 
-	 */
+			@Override
+			public Integer doInJpa(EntityManager em) throws PersistenceException {
+				Query query = em.createNativeQuery(sql);
+				JpaUtils.setQueryNamedParameters(query, paramMap);
+				return query.executeUpdate();
+			}
+		});
+	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
-	public <P> long countByCriteria(P parameter,
-			JpaCriteriaQueryCallback<T> callback) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public <P> T findUniqueByCriteria(P parameter, final JpaCriteriaQueryCallback<T> callback) {
+		AssertUtils.assertNotNull(callback, "JpaCriteriaQueryCallback object can not be null.");
+		if (callback instanceof JpaCriteriaQueryCallbackDao) 
+			((JpaCriteriaQueryCallbackDao<T, P>) callback).setParameter(parameter);
+		
+		final Class<T> entityType = this.getBeanClass(); 
+		return getJpaTemplate().execute(new JpaCallback<T>() {
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameter
-	 * @param distinct
-	 * @param callback
-	 * @return 
-	 */
+			@Override
+			public T doInJpa(EntityManager em) throws PersistenceException {
+				CriteriaBuilder builder = em.getCriteriaBuilder();
+				
+				CriteriaQuery<T> criteriaQuery = builder.createQuery(entityType);
+				Root<T> entityRoot = criteriaQuery.from(entityType);
+		        criteriaQuery.select(entityRoot);
+		        
+		        Predicate[] predicates = callback.execute(builder, criteriaQuery, entityRoot);
+		        if (ArrayUtils.isNotEmpty(predicates))
+		        	criteriaQuery.where(predicates);
+		        else
+		        	criteriaQuery.where(builder.conjunction());
+		        
+		        return em.createQuery(criteriaQuery).getSingleResult();
+			}
+		});
+	}
+	
 	@Override
-	public <P> long countByCriteria(P parameter, boolean distinct,
-			JpaCriteriaQueryCallback<T> callback) {
-		// TODO Auto-generated method stub
-		return 0;
+	public <P> List<T> findByCriteria(P parameter, JpaCriteriaQueryCallback<T> callback) {
+		return findByCriteria(parameter, -1, -1, callback);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query
-	 * @param callback
-	 * @return 
-	 */
+	
+	@SuppressWarnings("unchecked")
 	@Override
-	public PagingResult<T> pagingQuery(PagingQuery query,
-			JpaCriteriaQueryCallback<T> callback) {
-		// TODO Auto-generated method stub
-		return null;
+	public <P> List<T> findByCriteria(P parameter, final int start,
+			final int maxRows, final JpaCriteriaQueryCallback<T> callback) {
+		AssertUtils.assertNotNull(callback, "JpaCriteriaQueryCallback object can not be null.");
+		if (callback instanceof JpaCriteriaQueryCallbackDao) 
+			((JpaCriteriaQueryCallbackDao<T, P>) callback).setParameter(parameter);
+		
+		final Class<T> entityType = this.getBeanClass();
+		return getJpaTemplate().execute(new JpaCallback<List<T>>() {
+
+			@Override
+			public List<T> doInJpa(EntityManager em) throws PersistenceException {
+				CriteriaBuilder builder = em.getCriteriaBuilder();
+				
+				CriteriaQuery<T> criteriaQuery = builder.createQuery(entityType);
+				Root<T> entityRoot = criteriaQuery.from(entityType);
+		        criteriaQuery.select(entityRoot);
+		        
+		        Predicate[] predicates = callback.execute(builder, criteriaQuery, entityRoot);
+		        if (ArrayUtils.isNotEmpty(predicates))
+		        	criteriaQuery.where(predicates);
+		        else
+		        	criteriaQuery.where(builder.conjunction());
+		        
+		        TypedQuery<T> typeQuery = em.createQuery(criteriaQuery);
+		        /* 无需在自定义的回调函数中设置分段参数,如下自动设置 */
+		        JpaUtils.setOffsetQuery(typeQuery, start, maxRows);
+				return typeQuery.getResultList();
+			}
+		});
+	}
+	
+	@Override
+	public <P> long countByCriteria(P parameter, JpaCriteriaQueryCallback<T> callback) {
+		return countByCriteria(parameter, false, callback);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <P> long countByCriteria(P parameter, final boolean distinct, final JpaCriteriaQueryCallback<T> callback) {
+		AssertUtils.assertNotNull(callback, "JpaCriteriaQueryCallback object can not be null.");
+		if (callback instanceof JpaCriteriaQueryCallbackDao) 
+			((JpaCriteriaQueryCallbackDao<T, P>) callback).setParameter(parameter);
+		
+		return getJpaTemplate().execute(new JpaCallback<Long>() {
+
+			@Override
+			public Long doInJpa(EntityManager em) throws PersistenceException {
+				CriteriaBuilder builder = em.getCriteriaBuilder();
+				CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
+				Root<T> entityRoot = criteriaQuery.from(getBeanClass());
+				
+				if (distinct)
+					criteriaQuery.select(builder.countDistinct(entityRoot)); 
+				else
+					criteriaQuery.select(builder.count(entityRoot));
+				
+				Predicate[] predicates = callback.execute(builder, criteriaQuery, entityRoot);
+				if (ArrayUtils.isNotEmpty(predicates))
+		        	criteriaQuery.where(predicates);
+				else
+		        	criteriaQuery.where(builder.conjunction());
+				
+				// 忽略orderBy排序
+				criteriaQuery.orderBy((Order[]) null);
+				
+			    TypedQuery<Long> typeQuery = em.createQuery(criteriaQuery);
+				return typeQuery.getSingleResult();
+			}
+		});
+		
+		
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param filterList
-	 * @return 
-	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public PagingResult<T> pagingQuery(PagingQuery query, JpaCriteriaQueryCallback<T> callback) {
+		AssertUtils.assertNotNull(callback, "JpaCriteriaQueryCallback object can not be null.");
+		if (callback instanceof JpaCriteriaQueryCallbackDao) 
+			((JpaCriteriaQueryCallbackDao<T, PagingQuery>) callback).setParameter(query);
+			
+		PagingResult<T> pagingResult;
+		if (query instanceof PagingResult)
+			// 分页条件中包含分页结果时，则直接强制转换
+			pagingResult = (PagingResult<T>) query;
+		else
+			pagingResult = new SimplePagingResult<T>();
+		
+		/* 依次在结果对象中查询并设置符合当前条件的记录和总数 */
+		pagingResult.setData(this.findByCriteria(query,
+				new Long(query.getBegin()).intValue(), query.getPageSize(), callback));
+		pagingResult.setTotal(this.countByCriteria(query, callback));
+		return pagingResult;
+	}
+
 	@Override
 	public T findUniqueByFilterList(List<PersistencePropertyFilter> filterList) {
-		// TODO Auto-generated method stub
-		return null;
+		String ql = PersistenceUtils.buildQueryStringByFilterList(false, this.getBeanClass(), filterList);
+		return findUniqueByQueryString(ql);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param chain
-	 * @return 
-	 */
 	@Override
 	public T findUniqueByFilterChain(PersistencePropertyFilterChain chain) {
-		// TODO Auto-generated method stub
-		return null;
+		String ql = PersistenceUtils.buildQueryStringByFilterChain(false, this.getBeanClass(), chain);
+		return findUniqueByQueryString(ql);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param filterList
-	 * @return 
-	 */
 	@Override
 	public List<T> findByFilterList(List<PersistencePropertyFilter> filterList) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByFilterList(filterList, -1, -1);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param filterList
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
-	public List<T> findByFilterList(List<PersistencePropertyFilter> filterList,
-			int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> findByFilterList(List<PersistencePropertyFilter> filterList, int start, int maxRows) {
+		String ql = PersistenceUtils.buildQueryStringByFilterList(false, this.getBeanClass(), filterList);
+		return find(ql, start, maxRows);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param chain
-	 * @return 
-	 */
 	@Override
 	public List<T> findByFilterChain(PersistencePropertyFilterChain chain) {
-		// TODO Auto-generated method stub
-		return null;
+		return findByFilterChain(chain, -1, -1);
 	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param chain
-	 * @param start
-	 * @param maxRows
-	 * @return 
-	 */
+	
 	@Override
-	public List<T> findByFilterChain(PersistencePropertyFilterChain chain,
-			int start, int maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> findByFilterChain(PersistencePropertyFilterChain chain, int start, int maxRows) {
+		String ql = PersistenceUtils.buildQueryStringByFilterChain(false, this.getBeanClass(), chain);
+		return find(ql, start, maxRows);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param filterList
-	 * @return 
-	 */
 	@Override
 	public long countByFilterList(List<PersistencePropertyFilter> filterList) {
-		// TODO Auto-generated method stub
-		return 0;
+		String ql = PersistenceUtils.buildQueryStringByFilterList(true, this.getBeanClass(), filterList);
+		return findUniqueByQueryString(Long.class, ql);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param chain
-	 * @return 
-	 */
 	@Override
 	public long countByFilterChain(PersistencePropertyFilterChain chain) {
-		// TODO Auto-generated method stub
-		return 0;
+		String ql = PersistenceUtils.buildQueryStringByFilterChain(true, this.getBeanClass(), chain);
+		return findUniqueByQueryString(Long.class, ql);
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query
-	 * @return 
-	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public PagingResult<T> pagingQuery(FilterListPagingQuery query) {
-		// TODO Auto-generated method stub
-		return null;
+		PagingResult<T> pagingResult;
+		if (query instanceof PagingResult)
+			// 分页条件中包含分页结果时，则直接强制转换
+			pagingResult = (PagingResult<T>) query;
+		else
+			pagingResult = new SimplePagingResult<T>();
+		
+		pagingResult.setData(this.findByFilterList(query.getFilterList(), new Long(
+				query.getBegin()).intValue(), query.getPageSize()));
+		pagingResult.setTotal(this.countByFilterList(query.getFilterList()));
+		return pagingResult;
 	}
 
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query
-	 * @return 
-	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public PagingResult<T> pagingQuery(FilterChainPagingQuery query) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		PagingResult<T> pagingResult;
+		if (query instanceof PagingResult)
+			// 分页条件中包含分页结果时，则直接强制转换
+			pagingResult = (PagingResult<T>) query;
+		else
+			pagingResult = new SimplePagingResult<T>();
+		
+		pagingResult.setData(this.findByFilterChain(query.getFilterChain(), new Long(
+				query.getBegin()).intValue(), query.getPageSize()));
+		pagingResult.setTotal(this.countByFilterChain(query.getFilterChain()));
+		return pagingResult;
 	}
 
 

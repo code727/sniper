@@ -27,6 +27,7 @@ import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.util.StringUtils;
+import org.workin.persistence.hibernate.HibernateCacheConfiguration;
 import org.workin.persistence.hibernate.HibernateUtils;
 import org.workin.spring.beans.AbstractGenricBean;
 

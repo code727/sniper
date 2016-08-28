@@ -16,7 +16,7 @@
  * Create Date : 2015-3-17
  */
 
-package org.workin.persistence.hibernate.dao.v4;
+package org.workin.persistence.hibernate;
 
 /**
  * @description Hibernate4缓存配置
