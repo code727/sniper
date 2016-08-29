@@ -16,7 +16,7 @@
  * Create Date : 2015-3-12
  */
 
-package org.workin.persistence.hibernate.dao.interfaces;
+package org.workin.persistence.hibernate.dao;
 
 /**
  * @description Hibernate标准查询回调DAO抽象类。

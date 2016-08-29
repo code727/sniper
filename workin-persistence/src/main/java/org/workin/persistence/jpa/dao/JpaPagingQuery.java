@@ -16,7 +16,7 @@
  * Create Date : 2015-2-2
  */
 
-package org.workin.persistence.jpa.dao.interfaces;
+package org.workin.persistence.jpa.dao;
 
 import org.workin.commons.pagination.PagingQuery;
 import org.workin.commons.pagination.PagingResult;

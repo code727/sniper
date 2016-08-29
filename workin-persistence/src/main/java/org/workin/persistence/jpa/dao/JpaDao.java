@@ -21,13 +21,6 @@ package org.workin.persistence.jpa.dao;
 import java.io.Serializable;
 
 import org.workin.persistence.FilterQuery;
-import org.workin.persistence.jpa.dao.interfaces.JpaCriteriaQuery;
-import org.workin.persistence.jpa.dao.interfaces.JpaNamedQuery;
-import org.workin.persistence.jpa.dao.interfaces.JpaNativePersistence;
-import org.workin.persistence.jpa.dao.interfaces.JpaNativeQuery;
-import org.workin.persistence.jpa.dao.interfaces.JpaPagingQuery;
-import org.workin.persistence.jpa.dao.interfaces.JpaPersistence;
-import org.workin.persistence.jpa.dao.interfaces.JpaQuery;
 import org.workin.support.bean.GenericBean;
 
 /**

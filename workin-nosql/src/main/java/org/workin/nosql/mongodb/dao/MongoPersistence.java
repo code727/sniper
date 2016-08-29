@@ -19,6 +19,7 @@
 package org.workin.nosql.mongodb.dao;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import com.mongodb.WriteResult;
 
@@ -30,14 +31,52 @@ import com.mongodb.WriteResult;
 public interface MongoPersistence<T, PK extends Serializable> {
 	
 	/**
-	 * @description 保存对象到泛型实体类型对应的集合中
+	 * @description 新增对象到泛型实体类型对应的集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entity
+	 */
+	public void insert(T entity);
+	
+	/**
+	 * @description 新增对象到指定名称的集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entity
+	 * @param collection
+	 */
+	public void insert(T entity, String collection);
+	
+	/**
+	 * @description 批量新增对象到泛型实体类型对应的集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entities
+	 */
+	public void batchInsert(Collection<T> entities);
+	
+	/**
+	 * @description 批量新增对象到指定名称的集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entities
+	 * @param collection
+	 */
+	public void batchInsert(Collection<T> entities, String collection);
+	
+	/**
+	 * @description 批量新增对象到指定实体类型对应的集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param entities
+	 * @param entityClass
+	 */
+	public <E> void batchinsert(Collection<T> entities, Class<E> entityClass);
+	
+	/**
+	 * @description 新增/更新对象到泛型实体类型对应的集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void save(T entity);
 	
 	/**
-	 * @description 保存对象到指定名称的集合中
+	 * @description 新增/更新对象到指定名称的集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @param collection
@@ -47,19 +86,19 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	/**
 	 * @description 在泛型实体类型对应的集合中删除指定对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param object
+	 * @param entity
 	 * @return
 	 */
-	public WriteResult remove(Object object);
+	public WriteResult remove(T entity);
 	
 	/**
 	 * @description 在指定名称的集合中删除对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param object
+	 * @param entity
 	 * @param collection
 	 * @return
 	 */
-	public WriteResult remove(Object object, String collection);
+	public WriteResult remove(T entity, String collection);
 	
 	
 	

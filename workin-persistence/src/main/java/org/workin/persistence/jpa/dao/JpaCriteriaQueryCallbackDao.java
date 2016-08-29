@@ -16,7 +16,7 @@
  * Create Date : 2015-3-11
  */
 
-package org.workin.persistence.jpa.dao.interfaces;
+package org.workin.persistence.jpa.dao;
 
 /**
  * @description JPA标准查询回调DAO抽象类。
