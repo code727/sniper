@@ -13,22 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年12月21日
+ * Create Date : 2015-12-21
  */
 
 package org.workin.spring.context;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.Lifecycle;
+import org.workin.spring.beans.CheckableInitializingBeanAdapter;
 
-/**
- * @description Spring上下文环境工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
- * @version 1.0
- */
-public class ApplicationContextHolder implements ApplicationContextAware, InitializingBean {
+public class ApplicationContextHolder extends CheckableInitializingBeanAdapter
+		implements ApplicationContextAware {
 	
 	private static ApplicationContext applicationContext;
 	
@@ -39,7 +36,7 @@ public class ApplicationContextHolder implements ApplicationContextAware, Initia
 	}
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	protected void checkProperties() {
 		if (applicationContext == null)
 			throw new IllegalArgumentException("Property 'applicationContext' is required.");
 	}
@@ -56,6 +53,16 @@ public class ApplicationContextHolder implements ApplicationContextAware, Initia
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(Class<T> clazz) {
 		return (T) applicationContext.getBeansOfType(clazz);
+	}
+	
+	public static void start() {
+		if (applicationContext instanceof Lifecycle)
+			((Lifecycle) applicationContext).start();
+	}
+	
+	public static void stop() {
+		if (applicationContext instanceof Lifecycle)
+			((Lifecycle) applicationContext).stop();
 	}
 
 }
