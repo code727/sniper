@@ -22,11 +22,11 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * @description Redis集合命令行数据访问接口
+ * @description Redis集合命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface RedisSetCommandsDao {
+public interface RedisSetCommands {
 	
 	/**
 	 * @description 在当前库中执行sAdd命令

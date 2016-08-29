@@ -25,11 +25,11 @@ import java.util.Set;
 import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 
 /**
- * @description Redis有序集合命令行数据访问接口
+ * @description Redis有序集合命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface RedisSortedSetCommandsDao {
+public interface RedisSortedSetCommands {
 	
 	/**
 	 * @description 在当前库中执行zAdd命令

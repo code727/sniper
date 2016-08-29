@@ -40,24 +40,21 @@ public abstract class JedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
+	protected void checkProperties() {
+		super.checkProperties();
 		
 		if (this.jedisPool == null)
-			throw new IllegalArgumentException(
-					"JedisPool object can not be null, please inject to spring container.");
+			throw new IllegalArgumentException("Property 'jedisPool' is required");
 	}
 
 	@Override
 	protected void initializeDefaultDbIndex() throws Exception {
 		// TODO Auto-generated method stub
-		
 	}
-
+	
 	@Override
 	protected void initializeGlobalSerializers() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

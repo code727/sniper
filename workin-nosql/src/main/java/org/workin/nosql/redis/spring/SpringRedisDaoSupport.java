@@ -51,18 +51,25 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	public void setRedisTemplate(RedisTemplate<?, ?> redisTemplate) {
 		this.redisTemplate = redisTemplate;
 	}
-
+	
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
+	protected void checkProperties() {
+		super.checkProperties();
 		
 		if (this.redisTemplate == null)
 			throw new IllegalArgumentException("Property 'RedisTemplate' must not be null");
-		
-		this.initializeGlobalSerializers();
-		this.initializeDefaultDbIndex();
 	}
 	
+	@Override
+	protected void initializeDefaultDbIndex() throws Exception {
+		RedisConnectionFactory connectionFactory = this.redisTemplate.getConnectionFactory();
+		Field dbIndex = ReflectionUtils.getField(connectionFactory, "dbIndex");
+		if (dbIndex != null)
+			this.defaultDbIndex = ReflectionUtils.getFieldValue(connectionFactory, dbIndex);
+		else
+			this.defaultDbIndex = 0;
+	}
+
 	@Override
 	protected void initializeGlobalSerializers() {
 		if (getGlobalKeySerializer() == null)
@@ -76,16 +83,6 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 		
 		if (getGlobalHashValueSerializer() == null)
 			setGlobalHashValueSerializer(new SpringRedisSerializerProxy(this.redisTemplate.getHashValueSerializer()));
-	}
-	
-	@Override
-	protected void initializeDefaultDbIndex() throws Exception {
-		RedisConnectionFactory connectionFactory = this.redisTemplate.getConnectionFactory();
-		Field dbIndex = ReflectionUtils.getField(connectionFactory, "dbIndex");
-		if (dbIndex != null)
-			this.defaultDbIndex = ReflectionUtils.getFieldValue(connectionFactory, dbIndex);
-		else
-			this.defaultDbIndex = 0;
 	}
 	
 	/**

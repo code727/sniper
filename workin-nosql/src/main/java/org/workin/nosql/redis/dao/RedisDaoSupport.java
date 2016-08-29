@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MapUtils;
@@ -34,13 +33,14 @@ import org.workin.commons.util.StringUtils;
 import org.workin.nosql.redis.RedisRepository;
 import org.workin.nosql.redis.RedisRepositoryManager;
 import org.workin.serialization.Serializer;
+import org.workin.spring.beans.CheckableInitializingBean;
 
 /**
  * @description RedisDao支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class RedisDaoSupport implements InitializingBean {
+public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	
 	/** Redis库管理 */
 	protected RedisRepositoryManager repositoryManager;
@@ -112,10 +112,15 @@ public abstract class RedisDaoSupport implements InitializingBean {
 	}
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	protected void checkProperties() {
 		if (this.repositoryManager == null)
-			throw new IllegalArgumentException(
-					"RedisRepositoryManager object can not be null, please inject to spring container.");
+			throw new IllegalArgumentException("Property 'repositoryManager' is required");
+	}
+	
+	@Override
+	protected void init() throws Exception {
+		initializeDefaultDbIndex();
+		initializeGlobalSerializers();
 	}
 	
 	/**

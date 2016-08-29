@@ -23,11 +23,11 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * @description Redis键命令行数据访问接口
+ * @description Redis键命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface RedisKeyCommandsDao {
+public interface RedisKeyCommands {
 	
 	/**
 	 * @description 获取当前库中所有的键

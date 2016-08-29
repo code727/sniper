@@ -22,11 +22,11 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @description Redis列表命令行数据访问接口
+ * @description Redis列表命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface RedisListCommandsDao {
+public interface RedisListCommands {
 	
 	/**
 	 * @description 在当前库中执行lSet命令
