@@ -18,6 +18,7 @@
 
 package org.workin.nosql.mongodb.spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.workin.spring.beans.AbstractGenricBean;
 
@@ -26,8 +27,9 @@ import org.workin.spring.beans.AbstractGenricBean;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SpringMongoDaoSupport<T> extends AbstractGenricBean<T> {
+public abstract class SpringMongoDaoSupport<T> extends AbstractGenricBean<T> {
 	
+	@Autowired
 	private MongoTemplate mongoTemplate;
 
 	public MongoTemplate getMongoTemplate() {

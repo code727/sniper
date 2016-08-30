@@ -31,14 +31,14 @@ import com.mongodb.WriteResult;
 public interface MongoPersistence<T, PK extends Serializable> {
 	
 	/**
-	 * @description 新增对象到泛型实体类型对应的集合中
+	 * @description 新增实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void insert(T entity);
 	
 	/**
-	 * @description 新增对象到指定名称的集合中
+	 * @description 新增实体对象到目标集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @param collection
@@ -46,45 +46,37 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	public void insert(T entity, String collection);
 	
 	/**
-	 * @description 批量新增对象到泛型实体类型对应的集合中
+	 * @description 批量新增实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entities
 	 */
 	public void batchInsert(Collection<T> entities);
 	
 	/**
-	 * @description 批量新增对象到指定名称的集合中
+	 * @description 批量新增实体对象到目标集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entities
 	 * @param collection
 	 */
 	public void batchInsert(Collection<T> entities, String collection);
-	
+		
 	/**
-	 * @description 批量新增对象到指定实体类型对应的集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param entities
-	 * @param entityClass
-	 */
-	public <E> void batchinsert(Collection<T> entities, Class<E> entityClass);
-	
-	/**
-	 * @description 新增/更新对象到泛型实体类型对应的集合中
+	 * @description 新增/更新实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void save(T entity);
 	
 	/**
-	 * @description 新增/更新对象到指定名称的集合中
+	 * @description 新增/更新实体对象到目标集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @param collection
 	 */
 	public void save(T entity, String collection);
-	
+		
 	/**
-	 * @description 在泛型实体类型对应的集合中删除指定对象
+	 * @description 删除实体对象    
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @return
@@ -92,7 +84,7 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	public WriteResult remove(T entity);
 	
 	/**
-	 * @description 在指定名称的集合中删除对象
+	 * @description 在目标集合中删除实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @param collection
@@ -100,6 +92,21 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	 */
 	public WriteResult remove(T entity, String collection);
 	
+	/**
+	 * @description 删除主键对应的实体对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param primaryKey
+	 * @return
+	 */
+	public WriteResult remove(PK primaryKey);
 	
+	/**
+	 * @description 在目标集合中删除主键对应的实体对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param primaryKey
+	 * @param collection
+	 * @return
+	 */
+	public WriteResult remove(PK primaryKey, String collection);
 	
 }

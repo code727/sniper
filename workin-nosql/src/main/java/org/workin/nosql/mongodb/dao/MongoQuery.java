@@ -29,7 +29,7 @@ import java.util.List;
 public interface MongoQuery<T, PK extends Serializable> {
 	
 	/**
-	 * @description 根据主键ID查询当前类型的实体对象
+	 * @description 根据主键查询实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @return
@@ -37,7 +37,16 @@ public interface MongoQuery<T, PK extends Serializable> {
 	public T findById(PK primaryKey);
 	
 	/**
-	 * @description 查询出当前实例集合中所有的数据对象
+	 * @description 根据主键查询目标集合中的实体对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param primaryKey
+	 * @param collection
+	 * @return
+	 */
+	public T findById(PK primaryKey, String collection);
+	
+	/**
+	 * @description 查询出当前集合中所有的数据对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

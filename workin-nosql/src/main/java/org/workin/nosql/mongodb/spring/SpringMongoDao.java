@@ -13,16 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016年8月27日
+ * Create Date : 2016-8-27
  */
 
 package org.workin.nosql.mongodb.spring;
 
+import java.io.Serializable;
+
+import org.workin.nosql.mongodb.dao.MongoDao;
+
 /**
- * @description Spring MongDB数据访问接口
+ * @description Spring MongDB持久化数据访问接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SpringMongoDao {
+public interface SpringMongoDao<T, PK extends Serializable> extends
+		MongoDao<T, PK>, SpringMongoPersistence<T, PK>, SpringMongoQuery<T, PK> {
 
 }

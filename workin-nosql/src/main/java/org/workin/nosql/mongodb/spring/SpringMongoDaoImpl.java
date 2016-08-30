@@ -19,9 +19,13 @@
 package org.workin.nosql.mongodb.spring;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
-import org.workin.nosql.mongodb.dao.MongoDao;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Repository;
+import org.workin.commons.util.StringUtils;
 
 import com.mongodb.WriteResult;
 
@@ -30,47 +34,125 @@ import com.mongodb.WriteResult;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@Repository
 public class SpringMongoDaoImpl<T, PK extends Serializable> extends
-		SpringMongoDaoSupport<T> implements MongoDao<T, PK> {
+		SpringMongoDaoSupport<T> implements SpringMongoDao<T, PK> {
+	
+	@Override
+	public void insert(T entity) {
+		insert(entity, null);
+	}
 
+	@Override
+	public void insert(T entity, String collection) {
+		if (StringUtils.isNotBlank(collection))
+			getMongoTemplate().insert(entity, collection);
+		else
+			getMongoTemplate().insert(entity);
+	}
+	
+	@Override
+	public void batchInsert(Collection<T> entities) {
+		batchInsert(entities, (String) null);
+	}
+
+	@Override
+	public void batchInsert(Collection<T> entities, String collection) {
+		if (StringUtils.isNotBlank(collection))
+			getMongoTemplate().insert(entities, collection);
+		else
+			getMongoTemplate().insert(entities);
+	}
+	
+	@Override
+	public WriteResult update(Query query, Update update) {
+		return update(query, update, null);
+	}
+	
+	@Override
+	public WriteResult update(Query query, Update update, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+				.updateFirst(query, update, getBeanClass(), collection)
+				: getMongoTemplate().updateFirst(query, update, getBeanClass());
+	}
+	
+	@Override
+	public WriteResult batchUpdate(Query query, Update update) {
+		return batchUpdate(query, update, null);
+	}
+
+	@Override
+	public WriteResult batchUpdate(Query query, Update update, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+				.updateMulti(query, update, getBeanClass(), collection)
+				: getMongoTemplate().updateMulti(query, update, getBeanClass());
+	}
+
+	@Override
+	public WriteResult upsert(Query query, Update update) {
+		return upsert(query, update, null);
+	}
+
+	@Override
+	public WriteResult upsert(Query query, Update update, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+				.upsert(query, update, getBeanClass(), collection)
+				: getMongoTemplate().upsert(query, update, getBeanClass());
+	}
+	
 	@Override
 	public void save(T entity) {
-		getMongoTemplate().save(entity);
+		save(entity, null);
+	}
+	
+	@Override
+	public void save(T entity, String collection) {
+		if (StringUtils.isNotBlank(collection))
+			getMongoTemplate().save(entity, collection);
+		else
+			getMongoTemplate().save(entity);
 	}
 
 	@Override
-	public T findById(PK primaryKey) {
-		return getMongoTemplate().findById(primaryKey, getBeanClass());
+	public WriteResult remove(T entity) {
+		return remove(entity, null);
 	}
 
+	@Override
+	public WriteResult remove(T entity, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoTemplate().remove(
+				entity, collection) : getMongoTemplate().remove(entity);
+	}
+	
+	@Override
+	public WriteResult remove(PK primaryKey) {
+		return remove(primaryKey, null);
+	}
+
+	@Override
+	public WriteResult remove(PK primaryKey, String collection) {
+		T entity = findById(primaryKey, collection);
+		if (entity != null)
+			return getMongoTemplate().remove(entity);
+		
+		return null;
+	}
+	
+	@Override
+	public T findById(PK primaryKey) {
+		return findById(primaryKey, null);
+	}
+	
+	@Override
+	public T findById(PK primaryKey, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+				.findById(primaryKey, getBeanClass(), collection)
+				: getMongoTemplate().findById(primaryKey, getBeanClass());
+	}
+	
 	@Override
 	public List<T> findAll() {
 		return getMongoTemplate().findAll(getBeanClass());
 	}
-
-	@Override
-	public void save(T entity, String collection) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public WriteResult remove(Object object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @description
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param object
-	 * @param collection
-	 * @return 
-	 */
-	@Override
-	public WriteResult remove(Object object, String collection) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

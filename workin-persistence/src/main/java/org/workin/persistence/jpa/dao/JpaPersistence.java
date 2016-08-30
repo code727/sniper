@@ -30,7 +30,7 @@ import java.util.Map;
 public interface JpaPersistence<T, PK extends Serializable> {
 	
 	/**
-	 * @description 新增持久化实体对象
+	 * @description 新增实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @return
@@ -38,7 +38,7 @@ public interface JpaPersistence<T, PK extends Serializable> {
 	public void persist(T entity);
 			
 	/**
-	 * @description 批量新增持久化实体对象
+	 * @description 批量新增实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityList
 	 */
