@@ -21,14 +21,14 @@ package org.workin.persistence.hibernate.dao;
 import java.util.List;
 
 /**
- * @description Hibernate示例查询接口
+ * Hibernate示例查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface HibernateExampleQuery<T> {
 	
 	/**
-	 * @description 以实体为查询条件查询出实体结果集
+	 * 以实体为查询条件查询出实体结果集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @return
@@ -36,7 +36,7 @@ public interface HibernateExampleQuery<T> {
 	public List<T> findByExample(T entity);
 	
 	/**
-	 * @description 以实体为查询条件查询出实体结果集
+	 * 以实体为查询条件查询出实体结果集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -45,7 +45,7 @@ public interface HibernateExampleQuery<T> {
 	public List<T> findByExample(String entityName, T entity);
 	
 	/**
-	 * @description 以实体为查询条件分段查询出实体结果集
+	 * 以实体为查询条件分段查询出实体结果集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @param start
@@ -55,7 +55,7 @@ public interface HibernateExampleQuery<T> {
 	public List<T> findByExample(T entity, int start, int maxRows);
 	
 	/**
-	 * @description 以实体为查询条件分段查询出实体结果集
+	 * 以实体为查询条件分段查询出实体结果集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity

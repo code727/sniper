@@ -19,21 +19,21 @@
 package org.workin.commons.pagination;
 
 /**
- * @description 可排序的分页查询条件接口
+ * 可排序的分页查询条件接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface SortablePagingQuery extends PagingQuery {
 	
 	/**
-	 * @description 设置排序对象
+	 * 设置排序对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sort
 	 */
 	public void setSortObject(SortObject sort);
 	
 	/**
-	 * @description 获取排序对象
+	 * 获取排序对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

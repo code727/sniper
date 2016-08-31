@@ -24,7 +24,7 @@ import org.workin.persistence.FilterQuery;
 import org.workin.support.bean.GenericBean;
 
 /**
- * @description JPA持久化数据访问接口
+ * JPA持久化数据访问接口
  * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -19,7 +19,7 @@
 package org.workin.persistence.handler;
 
 /**
- * @description 采用用户名作为审核者名称的处理器实现类
+ * 采用用户名作为审核者名称的处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -29,7 +29,7 @@ import org.workin.jms.core.strategy.SharedStrategy;
 import org.workin.jms.util.JmsUtils;
 
 /**
- * @description JMS访问器抽象类
+ * JMS访问器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -53,7 +53,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	}
 	
 	/**
-	 * @description 创建连接
+	 * 创建连接
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 * @throws JMSException
@@ -63,7 +63,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	}
 	
 	/**
-	 * @description 根据连接和策略创建会话对象
+	 * 根据连接和策略创建会话对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param strategy
@@ -75,7 +75,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	}
 	
 	/**
-	 * @description 根据连接和策略创建会话对象，并选择是否启动连接
+	 * 根据连接和策略创建会话对象，并选择是否启动连接
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param strategy
@@ -92,7 +92,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	}
 	
 	/**
-	 * @description 根据连接和指定名称对应的策略创建会话对象
+	 * 根据连接和指定名称对应的策略创建会话对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param strategyName
@@ -102,7 +102,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	protected abstract Session createSession(Connection connection, String strategyName) throws JMSException;
 	
 	/**
-	 * @description 根据连接和指定名称对应的策略创建会话对象，并选择是否启动连接
+	 * 根据连接和指定名称对应的策略创建会话对象，并选择是否启动连接
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param strategyName
@@ -113,7 +113,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	protected abstract Session createSession(Connection connection, String strategyName, boolean startConnection) throws JMSException;
 	
 	/**
-	 * @description 判断当前会话是否具备本地事务特性
+	 * 判断当前会话是否具备本地事务特性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -125,7 +125,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	}
 
 	/**
-	 * @description 判断会话是否具有事务性
+	 * 判断会话是否具有事务性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @return
@@ -139,7 +139,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	}
 	
 	/**
-	 * @description 自动回滚事务
+	 * 自动回滚事务
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy

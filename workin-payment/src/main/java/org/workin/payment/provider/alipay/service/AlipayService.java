@@ -30,7 +30,7 @@ import org.workin.payment.enums.payment.ThirdPaymentStatus;
 import org.workin.payment.service.AbstractPaymentService;
 
 /**
- * @description 阿里支付服务抽象类
+ * 阿里支付服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -46,7 +46,7 @@ public abstract class AlipayService<T, P> extends AbstractPaymentService<T, P> {
 	protected static final String[] WAP_SIGN_TYPES = new String[] {"MD5", "RSA", "DSA"};
 	
 	/**
-	 * @description 根据响应参数更新充值记录
+	 * 根据响应参数更新充值记录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param payResponse
 	 * @return

@@ -25,7 +25,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 长整型响应处理器实现类
+ * 长整型响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

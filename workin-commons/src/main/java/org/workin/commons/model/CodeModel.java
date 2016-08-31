@@ -19,21 +19,21 @@
 package org.workin.commons.model;
 
 /**
- * @description 可编码的对象模型
+ * 可编码的对象模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface CodeModel {
 	
 	/**
-	 * @description 获取编码
+	 * 获取编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getCode();
 	
 	/**
-	 * @description 设置编码
+	 * 设置编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param code
 	 */

@@ -21,14 +21,14 @@ package org.workin.fastdfs.factory;
 import org.csource.fastdfs.TrackerGroup;
 
 /**
- * @description TrackerGroup实例工厂接口
+ * TrackerGroup实例工厂接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface TrackerGroupFactory {
 	
 	/**
-	 * @description 获取TrackerGroup实例
+	 * 获取TrackerGroup实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

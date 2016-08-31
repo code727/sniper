@@ -29,7 +29,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.workin.nosql.redis.dao.RedisCommandsDao;
 
 /**
- * @description Redis会话共享库实现类
+ * Redis会话共享库实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

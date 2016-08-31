@@ -30,7 +30,7 @@ import org.workin.support.encoder.StringEncoder;
 import org.workin.templet.message.formatter.AdaptiveMessageFormatter;
 
 /**
- * @description 自适应URL格式化处理器实现类
+ * 自适应URL格式化处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

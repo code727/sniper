@@ -35,7 +35,7 @@ import org.workin.security.handler.AuthorizationHandler;
 import org.workin.security.manager.AuthorizationFilterChainManager;
 
 /**
- * @description Shiro认证/授权过滤器链管理抽象类
+ * Shiro认证/授权过滤器链管理抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

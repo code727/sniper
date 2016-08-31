@@ -23,7 +23,7 @@ import org.workin.http.HttpForm;
 import org.workin.support.codec.CodecSupport;
 
 /**
- * @description 请求处理器抽象类
+ * 请求处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

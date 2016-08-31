@@ -21,7 +21,7 @@ package org.workin.nosql.redis.jedis;
 import org.workin.nosql.redis.dao.RedisCommandsDao;
 
 /**
- * @description Jedis命令行数据访问接口
+ * Jedis命令行数据访问接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

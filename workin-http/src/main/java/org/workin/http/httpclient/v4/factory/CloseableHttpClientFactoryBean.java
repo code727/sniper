@@ -25,7 +25,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 
 /**
- * @description 默认HttpClient4.x CloseableHttpClient工厂对象实现类
+ * 默认HttpClient4.x CloseableHttpClient工厂对象实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

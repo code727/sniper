@@ -19,21 +19,21 @@
 package org.workin.sms.packet;
 
 /**
- * @description 模板化消息数据包接口
+ * 模板化消息数据包接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface TemplateMessagePacket extends ParameterizationMessagePacket {
 	
 	/**
-	 * @description 设置模板ID
+	 * 设置模板ID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param templateId
 	 */
 	public void setTemplateId(String templateId);
 	
 	/**
-	 * @description 获取模板ID
+	 * 获取模板ID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

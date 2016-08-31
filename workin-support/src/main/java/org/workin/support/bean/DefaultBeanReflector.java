@@ -30,7 +30,7 @@ import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description Bean映射器默认实现类
+ * Bean映射器默认实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -265,7 +265,7 @@ public class DefaultBeanReflector implements BeanReflector {
 	}
 	
 	/**
-	 * @description 获取当前Bean对象成员属性对应的getter方法名称
+	 * 获取当前Bean对象成员属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean bean对象或class类型
 	 * @param propertyName 属性名称
@@ -283,7 +283,7 @@ public class DefaultBeanReflector implements BeanReflector {
 	}
 	
 	/**
-	 * @description 获取当前Bean对象成员属性对应的setter方法名称
+	 * 获取当前Bean对象成员属性对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean bean对象或class类型
 	 * @param propertyName 属性名称

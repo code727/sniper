@@ -27,14 +27,14 @@ import org.workin.persistence.util.PersistencePropertyFilter;
 import org.workin.persistence.util.PersistencePropertyFilterChain;
 
 /**
- * @description 过滤器查询接口
+ * 过滤器查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface FilterQuery<T> {
 	
 	/**
-	 * @description 根据过滤器列表查询出当前类型的唯一实体对象
+	 * 根据过滤器列表查询出当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param filterList
 	 * @return
@@ -42,7 +42,7 @@ public interface FilterQuery<T> {
 	public T findUniqueByFilterList(List<PersistencePropertyFilter> filterList);
 	
 	/**
-	 * @description 根据过滤器链查询出当前类型的唯一实体对象
+	 * 根据过滤器链查询出当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param chain
 	 * @return
@@ -50,7 +50,7 @@ public interface FilterQuery<T> {
 	public T findUniqueByFilterChain(PersistencePropertyFilterChain chain);
 	
 	/**
-	 * @description 根据过滤器列表查询出当前类型的实体对象列表
+	 * 根据过滤器列表查询出当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param filterList
 	 * @return
@@ -58,7 +58,7 @@ public interface FilterQuery<T> {
 	public List<T> findByFilterList(List<PersistencePropertyFilter> filterList);
 	
 	/**
-	 * @description 根据过滤器列表分段查询出当前类型的实体对象列表
+	 * 根据过滤器列表分段查询出当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param filterList
 	 * @param start
@@ -68,7 +68,7 @@ public interface FilterQuery<T> {
 	public List<T> findByFilterList(List<PersistencePropertyFilter> filterList, int start, int maxRows);
 	
 	/**
-	 * @description 根据过滤器链查询出当前类型的实体对象列表
+	 * 根据过滤器链查询出当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param chain
 	 * @return
@@ -76,7 +76,7 @@ public interface FilterQuery<T> {
 	public List<T> findByFilterChain(PersistencePropertyFilterChain chain);
 	
 	/**
-	 * @description 根据过滤器链分段查询出当前类型的实体对象列表
+	 * 根据过滤器链分段查询出当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param chain
 	 * @param start
@@ -86,7 +86,7 @@ public interface FilterQuery<T> {
 	public List<T> findByFilterChain(PersistencePropertyFilterChain chain, int start, int maxRows);
 			
 	/**
-	 * @description 根据过滤器列表查询出当前类型的实体对象个数
+	 * 根据过滤器列表查询出当前类型的实体对象个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param filterList
 	 * @return
@@ -94,7 +94,7 @@ public interface FilterQuery<T> {
 	public long countByFilterList(List<PersistencePropertyFilter> filterList);
 	
 	/**
-	 * @description 根据过滤器链查询出当前类型的实体对象个数
+	 * 根据过滤器链查询出当前类型的实体对象个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param chain
 	 * @return
@@ -102,7 +102,7 @@ public interface FilterQuery<T> {
 	public long countByFilterChain(PersistencePropertyFilterChain chain);
 	
 	/**
-	 * @description 根据带属性过滤器列表的对象分页查询出当前类型的实体对象列表
+	 * 根据带属性过滤器列表的对象分页查询出当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query
 	 * @return
@@ -110,7 +110,7 @@ public interface FilterQuery<T> {
 	public PagingResult<T> pagingQuery(FilterListPagingQuery query);
 	
 	/**
-	 * @description 根据带属性过滤器链的对象分页查询出当前类型的实体对象列表
+	 * 根据带属性过滤器链的对象分页查询出当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query
 	 * @return

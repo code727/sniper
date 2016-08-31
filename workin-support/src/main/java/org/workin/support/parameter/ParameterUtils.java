@@ -21,14 +21,14 @@ package org.workin.support.parameter;
 import org.workin.commons.util.MapUtils;
 
 /**
- * @description 泛型参数工具类
+ * 泛型参数工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class ParameterUtils {
 	
 	/**
-	 * @description 判断参数对象是否为空
+	 * 判断参数对象是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter
 	 * @return
@@ -38,7 +38,7 @@ public class ParameterUtils {
 	}
 	
 	/**
-	 * @description 判断参数对象是否不为空
+	 * 判断参数对象是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter
 	 * @return

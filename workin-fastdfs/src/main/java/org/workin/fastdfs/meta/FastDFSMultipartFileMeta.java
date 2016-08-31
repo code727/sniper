@@ -25,7 +25,7 @@ import org.workin.web.spring.file.MultipartFileMeta;
 
 
 /**
- * @description FastDFS MultipartFile源抽象类
+ * FastDFS MultipartFile源抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -29,7 +29,7 @@ import org.workin.commons.util.DateUtils;
 import org.workin.serialization.DateSerializer;
 
 /**
- * @description 自定义日期序列化器实现类
+ * 自定义日期序列化器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

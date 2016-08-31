@@ -23,14 +23,14 @@ import org.workin.sms.packet.MessagePacket;
 import org.workin.spring.context.ApplicationContextParameter;
 
 /**
- * @description 短信发送接口
+ * 短信发送接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Sender {
 	
 	/**
-	 * @description 发送数据包
+	 * 发送数据包
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param packet
 	 * @return
@@ -38,14 +38,14 @@ public interface Sender {
 	public CodeMessageModel send(MessagePacket packet) throws Exception;
 	
 	/**
-	 * @description 获取短信应用上下文参数项
+	 * 获取短信应用上下文参数项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public ApplicationContextParameter<String, Object> getSmsContextParameters();
 	
 	/**
-	 * @description 设置短信应用上下文参数项
+	 * 设置短信应用上下文参数项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param smsContextParameters
 	 */

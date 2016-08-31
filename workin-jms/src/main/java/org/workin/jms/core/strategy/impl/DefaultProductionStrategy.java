@@ -23,7 +23,7 @@ import javax.jms.Message;
 import org.workin.jms.core.strategy.ProductionStrategy;
 
 /**
- * @description 默认的生产策略实现类
+ * 默认的生产策略实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

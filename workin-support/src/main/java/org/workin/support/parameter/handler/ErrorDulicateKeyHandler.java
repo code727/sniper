@@ -26,7 +26,7 @@ import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.MapUtils;
 
 /**
- * @description 错误重复键处理器，当put键出现重复时将报错
+ * 错误重复键处理器，当put键出现重复时将报错
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

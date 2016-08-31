@@ -26,14 +26,14 @@ import org.springframework.jms.connection.ConnectionFactoryUtils;
 import org.workin.jms.core.strategy.SharedStrategy;
 
 /**
- * @description JMS工具类
+ * JMS工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class JmsUtils {
 	
 	/**
-	 * @description 判断是否为客户端回复会话模式
+	 * 判断是否为客户端回复会话模式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @return
@@ -44,7 +44,7 @@ public class JmsUtils {
 	}
 	
 	/**
-	 * @description 回滚当前会话的事务
+	 * 回滚当前会话的事务
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @throws JMSException
@@ -55,7 +55,7 @@ public class JmsUtils {
 	}
 	
 	/**
-	 * @description 自动回滚当前会话的事务
+	 * 自动回滚当前会话的事务
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @throws JMSException
@@ -66,7 +66,7 @@ public class JmsUtils {
 	}
 	
 	/**
-	 * @description 判断当前会话是否具备本地事务特性
+	 * 判断当前会话是否具备本地事务特性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -78,7 +78,7 @@ public class JmsUtils {
 	}
 
 	/**
-	 * @description 判断会话是否具有事务性
+	 * 判断会话是否具有事务性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy

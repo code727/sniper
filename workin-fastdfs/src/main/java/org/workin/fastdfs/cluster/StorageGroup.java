@@ -24,21 +24,21 @@ import org.workin.fastdfs.node.Storage;
 import org.workin.support.server.InternetServer;
 
 /**
- * @description StorageGroup接口
+ * StorageGroup接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface StorageGroup extends InternetServer {
 	
 	/**
-	 * @description 设置当前组包含的Storage
+	 * 设置当前组包含的Storage
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param storages
 	 */
 	public void setStorages(List<Storage> storages);
 	
 	/**
-	 * @description 获取当前组包含的所有Storage
+	 * 获取当前组包含的所有Storage
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

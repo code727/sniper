@@ -36,7 +36,7 @@ import org.workin.payment.provider.wechatpay.enums.ReturnCode;
 import org.workin.payment.provider.wechatpay.enums.TradeType;
 
 /**
- * @description 微信支付解析器默认实现类
+ * 微信支付解析器默认实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -111,7 +111,7 @@ public class DefaultWechatpayParser implements WechatpayParser {
 	}
 	
 	/**
-	 * @description 解析出通知中的必要参数项
+	 * 解析出通知中的必要参数项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param document
 	 * @param root
@@ -153,7 +153,7 @@ public class DefaultWechatpayParser implements WechatpayParser {
 	}
 	
 	/**
-	 * @description 解析出通知中的非必要参数项
+	 * 解析出通知中的非必要参数项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param document
 	 * @param root

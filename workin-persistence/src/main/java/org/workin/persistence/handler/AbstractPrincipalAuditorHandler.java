@@ -22,7 +22,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.workin.security.manager.PrincipalManager;
 
 /**
- * @description 关联Principal对象的审核者处理器抽象类
+ * 关联Principal对象的审核者处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

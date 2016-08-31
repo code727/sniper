@@ -23,7 +23,7 @@ import java.io.Serializable;
 import org.workin.nosql.mongodb.dao.MongoQuery;
 
 /**
- * @description Spring MongoDB查询接口
+ * Spring MongoDB查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

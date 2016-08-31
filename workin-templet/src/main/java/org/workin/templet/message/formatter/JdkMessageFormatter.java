@@ -28,7 +28,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.support.encoder.StringEncoder;
 
 /**
- * @description JDK原生态消息格式化处理器实现类
+ * JDK原生态消息格式化处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -58,7 +58,7 @@ public class JdkMessageFormatter extends EncodeableMessageFormatter<Object> {
 	}
 	
 	/**
-	 * @description 将数组中的元素重新编码
+	 * 将数组中的元素重新编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param encoding

@@ -22,7 +22,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.support.generator.IDGenerator;
 
 /**
- * @description ID生成适配器
+ * ID生成适配器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -51,7 +51,7 @@ public abstract class IDGeneratorAdapter implements IDGenerator {
 	}
 
 	/**
-	 * @description 生成流水号主体
+	 * 生成流水号主体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

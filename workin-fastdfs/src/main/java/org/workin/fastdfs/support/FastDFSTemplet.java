@@ -42,7 +42,7 @@ import org.workin.support.thread.task.FilesDeleteTask;
 import org.workin.web.WebUtils;
 
 /**
- * @description FastDFS模板实现类
+ * FastDFS模板实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -169,7 +169,7 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	}
 	
 	/**
-	 * @description 批量上传资源到指定组，并指定完成后是否删除旧资源
+	 * 批量上传资源到指定组，并指定完成后是否删除旧资源
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param metas
@@ -191,7 +191,7 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	}
 	
 	/**
-	 * @description 批量上传源以及缩放后的资源到指定组，并指定完成后是否删除旧资源
+	 * 批量上传源以及缩放后的资源到指定组，并指定完成后是否删除旧资源
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param metas
@@ -220,7 +220,7 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	}
 	
 	/**
-	 * @description FastDFS文件源中指定的旧资源
+	 * FastDFS文件源中指定的旧资源
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param deleteAll
 	 * @param metas
@@ -235,7 +235,7 @@ public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations 
 	}
 	
 	/**
-	 * @description 清理本地临时文件
+	 * 清理本地临时文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param files
 	 * @throws Exception

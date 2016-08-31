@@ -21,7 +21,7 @@ package org.workin.http.exception;
 import org.workin.commons.exception.WorkinRuntimeException;
 
 /**
- * @description "表单未找到"运行时异常
+ * "表单未找到"运行时异常
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

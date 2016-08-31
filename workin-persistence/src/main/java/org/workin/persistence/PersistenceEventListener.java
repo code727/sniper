@@ -19,35 +19,35 @@
 package org.workin.persistence;
 
 /**
- * @description 持久化事件监听器
+ * 持久化事件监听器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface PersistenceEventListener<T> {
 	
 	/**
-	 * @description 实体准备进行新增操作之前触发
+	 * 实体准备进行新增操作之前触发
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void onPrePersist(T entity);
 	
 	/**
-	 * @description 实体准备进行更新操作之前触发
+	 * 实体准备进行更新操作之前触发
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void onPreUpdate(T entity);
 	
 	/**
-	 * @description 实体准备进行删除操作之前触发
+	 * 实体准备进行删除操作之前触发
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void onPreRemove(T entity); 
 	
 	/**
-	 * @description 准备进行销毁之前触发
+	 * 准备进行销毁之前触发
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public void onPreDestroy();

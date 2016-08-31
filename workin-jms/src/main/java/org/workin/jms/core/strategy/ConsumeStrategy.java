@@ -21,63 +21,63 @@ package org.workin.jms.core.strategy;
 import javax.jms.MessageListener;
 
 /**
- * @description JMS消费策略接口
+ * JMS消费策略接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ConsumeStrategy extends SharedStrategy {
 	
 	/**
-	 * @description 设置消息选择器字符串
+	 * 设置消息选择器字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param messageSelector
 	 */
 	public void setMessageSelector(String messageSelector);
 	
 	/**
-	 * @description 获取消息选择器字符串
+	 * 获取消息选择器字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getMessageSelector();
 	
 	/**
-	 * @description 设置是否不接收来自同一个连接的消息
+	 * 设置是否不接收来自同一个连接的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pubSubNoLocal
 	 */
 	public void setPubSubNoLocal(boolean pubSubNoLocal);
 
 	/**
-	 * @description 判断是否不接收来自同一个连接的消息
+	 * 判断是否不接收来自同一个连接的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public boolean isPubSubNoLocal();
 	
 	/**
-	 * @description 设置消息接收时的超时时间
+	 * 设置消息接收时的超时时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param receiveTimeout
 	 */
 	public void setReceiveTimeout(long receiveTimeout);
 
 	/**
-	 * @description 获取消息接收时的超时时间
+	 * 获取消息接收时的超时时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public long getReceiveTimeout();
 	
 	/**
-	 * @description 设置接收消息时所用的监听器
+	 * 设置接收消息时所用的监听器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param messageListener
 	 */
 	public void setMessageListener(MessageListener messageListener);
 	
 	/**
-	 * @description 获取接收消息时所用的监听器
+	 * 获取接收消息时所用的监听器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

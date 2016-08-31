@@ -21,7 +21,7 @@ package org.workin.persistence.datasource.selector;
 import org.workin.commons.util.NumberUtils;
 
 /**
- * @description 多数据源随机选择器实现类
+ * 多数据源随机选择器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

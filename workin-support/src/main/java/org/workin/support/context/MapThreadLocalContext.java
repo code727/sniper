@@ -23,7 +23,7 @@ import java.util.Map;
 import org.workin.commons.util.MapUtils;
 
 /**
- * @description 基于Map类型线程局部变量上下文对象
+ * 基于Map类型线程局部变量上下文对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -32,7 +32,7 @@ public class MapThreadLocalContext<K, V> implements ApplicationContext<K, V> {
 	private static final ThreadLocal<Object> context = new ThreadLocal<Object>();
 
 	/**
-	 * @description 根据名称获取线程局部变量的属性值
+	 * 根据名称获取线程局部变量的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -51,7 +51,7 @@ public class MapThreadLocalContext<K, V> implements ApplicationContext<K, V> {
 	}
 
 	/**
-	 * @description 设置线程局部变量的属性值
+	 * 设置线程局部变量的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param value
@@ -68,7 +68,7 @@ public class MapThreadLocalContext<K, V> implements ApplicationContext<K, V> {
 	}
 
 	/**
-	 * @description 根据名称删除对应的局部变量属性
+	 * 根据名称删除对应的局部变量属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return

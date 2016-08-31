@@ -21,35 +21,35 @@ package org.workin.image.zoom;
 import org.workin.image.ImageHandler;
 
 /**
- * @description 图像缩放处理器接口
+ * 图像缩放处理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ImageZoomHandler extends ImageHandler {
 	
 	/**
-	 * @description 设置目标高度
+	 * 设置目标高度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param targetWidth
 	 */
 	public void setTargetWidth(int targetWidth);
 	
 	/**
-	 * @description 获取目标高度
+	 * 获取目标高度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public int getTargetWidth();
 	
 	/**
-	 * @description 设置目标高度
+	 * 设置目标高度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param targetHeight
 	 */
 	public void setTargetHeight(int targetHeight);
 	
 	/**
-	 * @description 获取目标高度
+	 * 获取目标高度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

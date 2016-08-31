@@ -26,7 +26,7 @@ import org.workin.commons.util.SecurityUtils;
 import org.workin.support.signature.AsymmetricSignature;
 
 /**
- * @description 阿里支付DSA签名实现类
+ * 阿里支付DSA签名实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

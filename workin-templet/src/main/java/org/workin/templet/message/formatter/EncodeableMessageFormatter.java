@@ -23,7 +23,7 @@ import java.io.UnsupportedEncodingException;
 import org.workin.support.encoder.StringEncoder;
 
 /**
- * @description 可编码的消息格式化处理器
+ * 可编码的消息格式化处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

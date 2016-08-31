@@ -21,14 +21,14 @@ package org.workin.templet.message.service;
 import java.util.Locale;
 
 /**
- * @description 消息源服务接口
+ * 消息源服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface MessageService {
 	
 	/**
-	 * @description 根据键获取对应的消息
+	 * 根据键获取对应的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -36,7 +36,7 @@ public interface MessageService {
 	public String getMessageByKey(String key);
 	
 	/**
-	 * @description 根据键获取对应的本地化消息
+	 * 根据键获取对应的本地化消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param locale

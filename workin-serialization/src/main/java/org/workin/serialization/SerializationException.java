@@ -19,7 +19,7 @@
 package org.workin.serialization;
 
 /**
- * @description 序列化异常类
+ * 序列化异常类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

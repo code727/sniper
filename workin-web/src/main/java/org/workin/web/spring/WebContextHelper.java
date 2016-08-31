@@ -32,7 +32,7 @@ import org.workin.web.WebUtils;
 import org.workin.web.spring.invocation.WebApplicationContextInvocation;
 
 /**
- * @description Spring Web应用上下文帮助类
+ * Spring Web应用上下文帮助类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -41,7 +41,7 @@ public class WebContextHelper {
 	private static final Logger logger = LoggerFactory.getLogger(WebContextHelper.class);
 	
 	/**
-	 * @description 获取HttpServletRequest对象。
+	 * 获取HttpServletRequest对象。
 	 * 				需要配置org.springframework.web.context.request.RequestContextListener过滤器或
 	 * 				org.workin.web.spring.invocation.WebApplicationContextInvocation拦截器后才能获取到不为空的对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -64,7 +64,7 @@ public class WebContextHelper {
 	}
 	
 	/**
-	 * @description 获取HttpServletResponse对象。
+	 * 获取HttpServletResponse对象。
 	 * 				需要配置org.workin.web.spring.invocation.WebApplicationContextInvocation拦截器后才能获取到不为空的对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
@@ -81,7 +81,7 @@ public class WebContextHelper {
 	}
 	
 	/**
-	 * @description 获取HttpSession对象
+	 * 获取HttpSession对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -90,7 +90,7 @@ public class WebContextHelper {
 	}
 	
 	/**
-	 * @description 获取HttpSession对象，为空时选择是否自动创建一个新对象后返回。
+	 * 获取HttpSession对象，为空时选择是否自动创建一个新对象后返回。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param create
 	 * @return

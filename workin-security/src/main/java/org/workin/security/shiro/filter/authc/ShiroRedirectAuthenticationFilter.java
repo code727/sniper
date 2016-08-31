@@ -29,7 +29,7 @@ import org.workin.security.filter.RedirectAuthenticationFilter;
 import org.workin.security.shiro.ShiroWebUtils;
 
 /**
- * @description Shiro 重定向认证过滤器实现类
+ * Shiro 重定向认证过滤器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

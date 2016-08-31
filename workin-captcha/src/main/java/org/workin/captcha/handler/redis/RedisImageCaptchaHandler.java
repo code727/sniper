@@ -31,7 +31,7 @@ import org.workin.captcha.generator.ImageCaptchaGenerator;
 import org.workin.captcha.handler.ImageCaptchaHandler;
 
 /**
- * @description Redis库图片验证码处理器实现类
+ * Redis库图片验证码处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

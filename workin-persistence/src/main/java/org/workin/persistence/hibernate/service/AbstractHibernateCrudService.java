@@ -25,7 +25,7 @@ import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
 
 /**
- * @description 具备基本增删改查功能的Hibernate持久化服务抽象类
+ * 具备基本增删改查功能的Hibernate持久化服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

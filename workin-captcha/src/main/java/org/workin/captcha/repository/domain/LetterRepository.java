@@ -19,7 +19,7 @@
 package org.workin.captcha.repository.domain;
 
 /**
- * @description 字母文本库
+ * 字母文本库
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -23,7 +23,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.spring.beans.CheckableInitializingBeanAdapter;
 
 /**
- * @description TrackerServer实现类
+ * TrackerServer实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -29,7 +29,7 @@ import org.workin.captcha.manager.font.FontManager;
 import org.workin.image.layout.CaptchaLayout;
 
 /**
- * @description 默认的图片验证码生成器实现类
+ * 默认的图片验证码生成器实现类
  * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -51,7 +51,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 	}
 
 	/**
-	 * @description 绘制背景
+	 * 绘制背景
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param graphics
 	 */
@@ -63,7 +63,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 	}
 
 	/**
-	 * @description 绘制边框
+	 * 绘制边框
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param graphics
 	 */
@@ -77,7 +77,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 	}
 
 	/**
-	 * @description 绘制干扰项
+	 * 绘制干扰项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param graphics
 	 * @param text
@@ -102,7 +102,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 	}
 
 	/** 
-	 * @description 绘制验证码文本
+	 * 绘制验证码文本
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param graphics
 	 * @param text 

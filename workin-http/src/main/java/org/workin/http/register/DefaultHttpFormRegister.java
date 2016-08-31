@@ -27,7 +27,7 @@ import org.workin.http.converter.DefaultHttpFormConverter;
 import org.workin.http.converter.HttpFormConverter;
 
 /**
- * @description 默认的HTTP表单注册器实现类
+ * 默认的HTTP表单注册器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

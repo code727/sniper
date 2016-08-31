@@ -31,7 +31,7 @@ import org.workin.fastdfs.factory.PoolableStorageServerFactory;
 import org.workin.support.context.ApplicationContextHolder;
 
 /**
- * @description 池化的连接工厂实现类
+ * 池化的连接工厂实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

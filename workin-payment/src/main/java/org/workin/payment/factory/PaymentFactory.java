@@ -21,14 +21,14 @@ package org.workin.payment.factory;
 import org.workin.payment.Payment;
 
 /**
- * @description 支付对象工厂接口
+ * 支付对象工厂接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface PaymentFactory {
 	
 	/**
-	 * @description 创建支付对象
+	 * 创建支付对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

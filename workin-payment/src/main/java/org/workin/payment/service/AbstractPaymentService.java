@@ -41,7 +41,7 @@ import org.workin.support.generator.IDGenerator;
 import org.workin.support.signature.Signature;
 
 /**
- * @description 支付服务抽象类
+ * 支付服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -202,7 +202,7 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 	}
 	
 	/**
-	 * @description 根据订单执行支付服务的保存业务
+	 * 根据订单执行支付服务的保存业务
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param paymentService
 	 * @param order
@@ -220,14 +220,14 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 	}
 	
 	/** 
-	 * @description 初始化签名器
+	 * 初始化签名器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return 
 	 */
 	protected abstract Signature<P> initSignature() throws Exception;
 		
 	/**
-	 * @description 根据订单和其它非订单参数项创建支付参数对象模型
+	 * 根据订单和其它非订单参数项创建支付参数对象模型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param order
 	 * @param parameters

@@ -19,7 +19,7 @@
 package org.workin.support.file.filter;
 
 /**
- * @description 本地文件字符串过滤器抽象类
+ * 本地文件字符串过滤器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

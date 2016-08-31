@@ -22,14 +22,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @description JPA本地查询接口
+ * JPA本地查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface JpaNativeQuery<T> {
 	
 	/**
-	 * @description 执行SQL查询语句后返回当前类型的唯一实体对象
+	 * 执行SQL查询语句后返回当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @return
@@ -37,7 +37,7 @@ public interface JpaNativeQuery<T> {
 	public T findUniqueByNativeQuery(String sql);
 	
 	/**
-	 * @description 执行SQL查询语句后返回指定类型的结果
+	 * 执行SQL查询语句后返回指定类型的结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param sql
@@ -46,7 +46,7 @@ public interface JpaNativeQuery<T> {
 	public <R> R findUniqueByNativeQuery(Class<R> resultClass, String sql);
 	
 	/**
-	 * @description 执行带占位符(?)参数的SQL查询语句后返回当前类型的唯一实体对象
+	 * 执行带占位符(?)参数的SQL查询语句后返回当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @param values
@@ -55,7 +55,7 @@ public interface JpaNativeQuery<T> {
 	public T findUniqueByNativeQuery(String sql, Object[] values);
 	
 	/**
-	 * @description 执行带占位符(?)参数的SQL查询语句后返回指定类型的结果
+	 * 执行带占位符(?)参数的SQL查询语句后返回指定类型的结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param sql
@@ -65,7 +65,7 @@ public interface JpaNativeQuery<T> {
 	public <R> R findUniqueByNativeQuery(Class<R> resultClass, String sql, Object[] values);
 	
 	/**
-	 * @description 执行带命名(=:name)参数的SQL查询语句后返回当前类型的唯一实体对象
+	 * 执行带命名(=:name)参数的SQL查询语句后返回当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @param paramMap
@@ -74,7 +74,7 @@ public interface JpaNativeQuery<T> {
 	public T findUniqueByNativeQuery(String sql, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 执行带命名(=:name)参数的SQL查询语句后返回指定类型的结果
+	 * 执行带命名(=:name)参数的SQL查询语句后返回指定类型的结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param sql
@@ -84,7 +84,7 @@ public interface JpaNativeQuery<T> {
 	public <R> R findUniqueByNativeQuery(Class<R> resultClass, String sql, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 执行SQL查询语句后返回当前类型的实体对象列表
+	 * 执行SQL查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @return 
@@ -92,7 +92,7 @@ public interface JpaNativeQuery<T> {
 	public List<T> findByNativeQuery(String sql);
 	
 	/**
-	 * @description 执行SQL查询语句后返回指定类型的结果集
+	 * 执行SQL查询语句后返回指定类型的结果集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param sql
@@ -101,7 +101,7 @@ public interface JpaNativeQuery<T> {
 	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql);
 
 	/**
-	 * @description 执行带占位符(?)参数的SQL查询语句后返回当前类型的实体对象列表
+	 * 执行带占位符(?)参数的SQL查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @param values
@@ -110,7 +110,7 @@ public interface JpaNativeQuery<T> {
 	public List<T> findByNativeQuery(String sql, Object[] values);
 	
 	/**
-	 * @description 执行带占位符(?)参数的SQL查询语句后返回指定类型的结果集
+	 * 执行带占位符(?)参数的SQL查询语句后返回指定类型的结果集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param sql
@@ -120,7 +120,7 @@ public interface JpaNativeQuery<T> {
 	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql, Object[] values);
 
 	/**
-	 * @description 执行带命名(=:name)参数的SQL查询语句后返回当前类型的实体对象列表
+	 * 执行带命名(=:name)参数的SQL查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @param paramMap
@@ -129,7 +129,7 @@ public interface JpaNativeQuery<T> {
 	public List<T> findByNativeQuery(String sql, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 执行带命名(=:name)参数的SQL查询语句后返回指定类型的结果集
+	 * 执行带命名(=:name)参数的SQL查询语句后返回指定类型的结果集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param sql
@@ -139,7 +139,7 @@ public interface JpaNativeQuery<T> {
 	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 从起始位置开始执行SQL查询语句后返回最大行数当前类型的实体对象列表
+	 * 从起始位置开始执行SQL查询语句后返回最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @param start
@@ -149,7 +149,7 @@ public interface JpaNativeQuery<T> {
 	public List<T> findByNativeQuery(String sql, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始执行SQL查询语句后返回最大行数指定类型的结果列表
+	 * 从起始位置开始执行SQL查询语句后返回最大行数指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param sql
@@ -160,7 +160,7 @@ public interface JpaNativeQuery<T> {
 	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始执行带占位符(?)参数的SQL查询语句后返回最大行数当前类型的实体对象列表
+	 * 从起始位置开始执行带占位符(?)参数的SQL查询语句后返回最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @param values
@@ -171,7 +171,7 @@ public interface JpaNativeQuery<T> {
 	public List<T> findByNativeQuery(String sql, Object[] values, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始执行带占位符(?)参数的SQL查询语句后返回最大行数指定类型的结果列表
+	 * 从起始位置开始执行带占位符(?)参数的SQL查询语句后返回最大行数指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param sql
@@ -183,7 +183,7 @@ public interface JpaNativeQuery<T> {
 	public <R> List<R> findByNativeQuery(Class<R> resultClass, String sql, Object[] values, int start, int maxRows);
 
 	/**
-	 * @description 从起始位置开始执行带命名(=:name)参数的SQL查询语句后返回最大行数当前类型的实体对象列表
+	 * 从起始位置开始执行带命名(=:name)参数的SQL查询语句后返回最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @param paramMap
@@ -194,7 +194,7 @@ public interface JpaNativeQuery<T> {
 	public List<T> findByNativeQuery(String sql, Map<String, ?> paramMap, int start, int maxRows);
 
 	/**
-	 * @description 从起始位置开始执行带命名(=:name)参数的SQL查询语句后返回指定类型的结果集
+	 * 从起始位置开始执行带命名(=:name)参数的SQL查询语句后返回指定类型的结果集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param sql

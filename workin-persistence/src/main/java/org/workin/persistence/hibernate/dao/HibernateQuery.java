@@ -26,14 +26,14 @@ import org.hibernate.LockOptions;
 import org.workin.persistence.jpa.dao.JpaQuery;
 
 /**
- * @description Hibernate查询接口
+ * Hibernate查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, PK> {
 	
 	/**
-	 * @description 根据主键ID加载当前类型的实体对象
+	 * 根据主键ID加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @return
@@ -41,7 +41,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	public T loadById(PK primaryKey);
 	
 	/**
-	 * @description 根据主键ID按指定的锁模式锁住并加载当前类型的实体对象
+	 * 根据主键ID按指定的锁模式锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @param lockMode
@@ -50,7 +50,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	public T loadById(PK primaryKey, LockMode lockMode);
 	
 	/**
-	 * @description 根据主键ID按指定的锁选项锁住并加载当前类型的实体对象
+	 * 根据主键ID按指定的锁选项锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @param lockOptions
@@ -59,7 +59,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	public T loadById(PK primaryKey, LockOptions lockOptions);
 	
 	/**
-	 * @description 根据名称和主键ID加载当前类型的实体对象
+	 * 根据名称和主键ID加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey
@@ -68,7 +68,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	public T loadById(String entityName, PK primaryKey);
 	
 	/**
-	 * @description 根据名称和主键ID按指定的锁模式锁住并加载当前类型的实体对象
+	 * 根据名称和主键ID按指定的锁模式锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey
@@ -78,7 +78,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	public T loadById(String entityName, PK primaryKey, LockMode lockMode);
 	
 	/**
-	 * @description 根据名称和主键ID按指定的锁选项锁住并加载当前类型的实体对象
+	 * 根据名称和主键ID按指定的锁选项锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey
@@ -88,21 +88,21 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	public T loadById(String entityName, PK primaryKey, LockOptions lockOptions);
 	
 	/**
-	 * @description 加载当前类型的所有实体对象
+	 * 加载当前类型的所有实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<T> loadAll();
 	
 	/**
-	 * @description 加载当前类型所有不重复的实体对象
+	 * 加载当前类型所有不重复的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<T> loadAllDistinct();
 	
 	/**
-	 * @description 根据主键ID获取当前类型的实体对象
+	 * 根据主键ID获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @return
@@ -110,7 +110,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	public T getById(PK primaryKey);
 	
 	/**
-	 * @description 根据主键ID按指定的锁模式锁住并获取当前类型的实体对象
+	 * 根据主键ID按指定的锁模式锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @param lockMode
@@ -119,7 +119,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	public T getById(PK primaryKey, LockMode lockMode);
 	
 	/**
-	 * @description 根据主键ID按指定的锁选项锁住并获取当前类型的实体对象
+	 * 根据主键ID按指定的锁选项锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @param lockOptions
@@ -128,7 +128,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	public T getById(PK primaryKey, LockOptions lockOptions);
 	
 	/**
-	 * @description 根据名称和主键ID获取当前类型的实体对象
+	 * 根据名称和主键ID获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey
@@ -137,7 +137,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	public T getById(String entityName, PK primaryKey);
 	
 	/**
-	 * @description 根据名称和主键ID按指定的锁模式锁住并获取当前类型的实体对象
+	 * 根据名称和主键ID按指定的锁模式锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey
@@ -147,7 +147,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	public T getById(String entityName, PK primaryKey, LockMode lockMode);
 	
 	/**
-	 * @description 根据名称和主键ID按指定的锁选项锁住并获取当前类型的实体对象
+	 * 根据名称和主键ID按指定的锁选项锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey

@@ -26,14 +26,14 @@ import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.payment.Order;
 
 /**
- * @description 支付服务接口
+ * 支付服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface PaymentService {
 	
 	/**
-	 * @description 根据订单和其它非订单参数项创建支付请求数据对象模型
+	 * 根据订单和其它非订单参数项创建支付请求数据对象模型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param order
 	 * @param parameters
@@ -43,7 +43,7 @@ public interface PaymentService {
 	public CodeModel createRequest(Order order, Map<String, String> parameters) throws Exception;
 	
 	/**
-	 * @description 处理支付响应
+	 * 处理支付响应
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param response
 	 * @return

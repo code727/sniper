@@ -26,7 +26,7 @@ import org.workin.commons.util.AnnotationUtils;
 import org.workin.test.junit.BaseTestCase;
 
 /**
- * @description Annotation工具测试类
+ * Annotation工具测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

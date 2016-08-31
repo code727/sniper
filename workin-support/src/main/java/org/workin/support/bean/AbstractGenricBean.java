@@ -21,7 +21,7 @@ package org.workin.support.bean;
 import org.workin.commons.util.ClassUtils;
 
 /**
- * @description 泛型Bean抽象类
+ * 泛型Bean抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

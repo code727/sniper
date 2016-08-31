@@ -26,7 +26,7 @@ import org.workin.support.parameter.Parameter;
 import org.workin.support.parameter.ParameterUtils;
 
 /**
- * @description org.workin.support.parameter.Parameter对象与org.workin.support.parameter.Parameter对象之间的映射转换
+ * org.workin.support.parameter.Parameter对象与org.workin.support.parameter.Parameter对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

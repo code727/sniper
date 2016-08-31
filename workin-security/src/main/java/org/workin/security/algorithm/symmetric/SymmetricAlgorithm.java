@@ -21,28 +21,28 @@ package org.workin.security.algorithm.symmetric;
 import org.workin.security.algorithm.SecurityAlgorithm;
 
 /**
- * @description 对称算法接口
+ * 对称算法接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface SymmetricAlgorithm extends SecurityAlgorithm {
 	
 	/**
-	 * @description 获取算法名称
+	 * 获取算法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getAlgorithm();
 	
 	/**
-	 * @description 设置私钥
+	 * 设置私钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param privateKey
 	 */
 	public void setPrivateKey(String privateKey);
 	
 	/**
-	 * @description 获取私钥
+	 * 获取私钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

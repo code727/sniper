@@ -40,7 +40,7 @@ import org.workin.support.signature.SymmetricSignature;
 import org.workin.support.signature.Signature;
 
 /**
- * @description 阿里网银支付服务实现类
+ * 阿里网银支付服务实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

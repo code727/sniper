@@ -21,21 +21,21 @@ package org.workin.persistence.sqlmap.service;
 import org.workin.persistence.sqlmap.dao.SqlMapDao;
 
 /**
- * @description SQL映射对象服务接口
+ * SQL映射对象服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface SqlMapBeanService<T> {
 	
 	/**
-	 * @description 设置持久化DAO接口
+	 * 设置持久化DAO接口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sqlMapDao
 	 */
 	public void setSqlMapDao(SqlMapDao<T> sqlMapDao);
 	
 	/**
-	 * @description 获取持久化DAO接口
+	 * 获取持久化DAO接口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

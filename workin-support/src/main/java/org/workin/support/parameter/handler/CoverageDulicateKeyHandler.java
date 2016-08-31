@@ -23,7 +23,7 @@ import java.util.Map;
 import org.workin.commons.util.MapUtils;
 
 /**
- * @description 覆盖重复键处理器，当put键出现重复时则直接覆盖对应的原值
+ * 覆盖重复键处理器，当put键出现重复时则直接覆盖对应的原值
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

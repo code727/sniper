@@ -21,14 +21,14 @@ package org.workin.support.bean;
 import java.util.Map;
 
 /**
- * @description Bean反射器接口
+ * Bean反射器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface BeanReflector {
 	
 	/**
-	 * @description 获取指定对象中表达式所指向的最后一个属性对应的getter方法名称
+	 * 获取指定对象中表达式所指向的最后一个属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param expression
@@ -37,7 +37,7 @@ public interface BeanReflector {
 	public String getterName(Object bean, String expression);
 	
 	/**
-	 * @description 获取指定对象中表达式所指向的最后一个属性对应的setter方法名称
+	 * 获取指定对象中表达式所指向的最后一个属性对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param expression
@@ -46,7 +46,7 @@ public interface BeanReflector {
 	public String setterName(Object bean, String expression);
 	
 	/**
-	 * @description 获取指定对象中表达式所指向的最后一个属性对应的setter方法名称
+	 * 获取指定对象中表达式所指向的最后一个属性对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param expression
@@ -56,7 +56,7 @@ public interface BeanReflector {
 	public String setterName(Object bean, String expression, Class<?> parameterType);
 	
 	/**
-	 * @description 获取指定对象中表达式所指向的最后一个属性对应的值
+	 * 获取指定对象中表达式所指向的最后一个属性对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param expression
@@ -66,7 +66,7 @@ public interface BeanReflector {
 	public Object get(Object bean, String expression) throws Exception;
 	
 	/**
-	 * @description 设置指定对象中表达式所指向的最后一个属性对应的值
+	 * 设置指定对象中表达式所指向的最后一个属性对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param expression
@@ -75,7 +75,7 @@ public interface BeanReflector {
 	public void set(Object bean, String expression, Object parameterValue) throws Exception;
 	
 	/**
-	 * @description 设置指定对象中表达式所指向的最后一个属性对应的值
+	 * 设置指定对象中表达式所指向的最后一个属性对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param expression
@@ -85,7 +85,7 @@ public interface BeanReflector {
 	public void set(Object bean, String expression, Class<?> parameterType, Object parameterValue) throws Exception;
 	
 	/**
-	 * @description 调用全限定名对应类的构造函数创建Bean实例，
+	 * 调用全限定名对应类的构造函数创建Bean实例，
 	 * 				并调用各表达式所指向的最后一个属性对应的setter方法赋值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param className
@@ -96,7 +96,7 @@ public interface BeanReflector {
 	public <T, V> T create(String className, Map<String, V> expressionValues) throws Exception;
 	
 	/**
-	 * @description 创建Bean实例，并调用各表达式所指向的最后一个属性对应的setter方法赋值
+	 * 创建Bean实例，并调用各表达式所指向的最后一个属性对应的setter方法赋值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @param expressionValues

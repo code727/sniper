@@ -19,7 +19,7 @@
 package org.workin.payment;
 
 /**
- * @description Web版支付请求对象模型
+ * Web版支付请求对象模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

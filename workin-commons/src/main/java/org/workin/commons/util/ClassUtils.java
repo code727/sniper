@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * @description 类型工具类
+ * 类型工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -61,7 +61,7 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * @description 判断指定的类型对象是否为包装类型
+	 * 判断指定的类型对象是否为包装类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
@@ -71,7 +71,7 @@ public class ClassUtils {
     } 
 	
 	/**
-	 * @description 判断指定的类型对象是否为基本类型
+	 * 判断指定的类型对象是否为基本类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
@@ -81,7 +81,7 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * @description 获取指定类型的包装类型
+	 * 获取指定类型的包装类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
@@ -94,7 +94,7 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * @description 获取指定类型的基本类型
+	 * 获取指定类型的基本类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
@@ -107,7 +107,7 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * @description 获取两个类型对象共同的类型
+	 * 获取两个类型对象共同的类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz1
 	 * @param clazz2
@@ -136,7 +136,7 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * @description 获取两个对象共同的类型
+	 * 获取两个对象共同的类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj1
 	 * @param obj2
@@ -158,7 +158,7 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * @description 获取集合元素共同的类型
+	 * 获取集合元素共同的类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -185,7 +185,7 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * @description 判断对象是否可直接强制转换为指定的类型
+	 * 判断对象是否可直接强制转换为指定的类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param clazz
@@ -202,7 +202,7 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * @description 判断clazz1类型是否可强制转换为clazz2类型
+	 * 判断clazz1类型是否可强制转换为clazz2类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz1
 	 * @param clazz2
@@ -232,7 +232,7 @@ public class ClassUtils {
 	}
 		
 	/**
-	 * @description 获取指定类型的超类签名中第1个泛型类型
+	 * 获取指定类型的超类签名中第1个泛型类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
@@ -242,7 +242,7 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * @description 获取指定类型的超类签名中第index+1个泛型类型
+	 * 获取指定类型的超类签名中第index+1个泛型类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @param index
@@ -279,7 +279,7 @@ public class ClassUtils {
     }
 	
 	/**
-	 * @description 判断是否为JAVA自带类型
+	 * 判断是否为JAVA自带类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
@@ -289,7 +289,7 @@ public class ClassUtils {
 	}  
 	
 	/**
-	 * @description 判断是否为JAVA自带类型的对象
+	 * 判断是否为JAVA自带类型的对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -299,7 +299,7 @@ public class ClassUtils {
 	}  
 	
 	/**
-	 * @description 返回当前非Class对象的类型
+	 * 返回当前非Class对象的类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return

@@ -27,7 +27,7 @@ import org.workin.commons.util.StringUtils;
 
 
 /**
- * @description JSON响应处理器抽象类
+ * JSON响应处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  * @param <T>

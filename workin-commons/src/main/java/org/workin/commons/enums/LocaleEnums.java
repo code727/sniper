@@ -19,21 +19,21 @@
 package org.workin.commons.enums;
 
 /**
- * @description 本地化消息枚举对象接口
+ * 本地化消息枚举对象接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface LocaleEnums<K> {
 	
 	/**
-	 * @description 获取当前枚举对象值的本地化消息
+	 * 获取当前枚举对象值的本地化消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getMessage();
 	
 	/**
-	 * @description 获取当前枚举对象值的本地化消息，未获取到时返回默认的消息
+	 * 获取当前枚举对象值的本地化消息，未获取到时返回默认的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param defaultMessage
 	 * @return
@@ -41,7 +41,7 @@ public interface LocaleEnums<K> {
 	public String getMessage(String defaultMessage);
 	
 	/**
-	 * @description 获取当前枚举对象值的本地参数化消息
+	 * 获取当前枚举对象值的本地参数化消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param params
 	 * @return
@@ -49,7 +49,7 @@ public interface LocaleEnums<K> {
 	public String getMessage(Object[] params);
 	
 	/**
-	 * @description 获取当前枚举对象值的本地参数化消息，未获取到时返回默认的消息
+	 * 获取当前枚举对象值的本地参数化消息，未获取到时返回默认的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param params
 	 * @param defaultMessage

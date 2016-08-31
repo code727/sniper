@@ -32,7 +32,7 @@ import org.workin.jms.core.manager.ConsumeStrategiesManager;
 import org.workin.jms.core.strategy.ConsumeStrategy;
 
 /**
- * @description 消费者服务抽象类
+ * 消费者服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -74,7 +74,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}
 	
 	/**
-	 * @description 根据会话和指定名称的消费策略创建消费者
+	 * 根据会话和指定名称的消费策略创建消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategyName 
@@ -85,7 +85,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}
 	
 	/**
-	 * @description 根据会话和指定的消费策略创建消费者
+	 * 根据会话和指定的消费策略创建消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -97,7 +97,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}
 	
 	/**
-	 * @description 根据会话、策略名称和目的地名称创建消费者
+	 * 根据会话、策略名称和目的地名称创建消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategyName
@@ -110,7 +110,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}	
 	
 	/**
-	 * @description 根据会话、策略名称和目的地创建消费者
+	 * 根据会话、策略名称和目的地创建消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategyName
@@ -123,7 +123,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}
 	
 	/**
-	 * @description 根据会话、策略和目的地名称创建消费者
+	 * 根据会话、策略和目的地名称创建消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -136,7 +136,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}	
 	
 	/**
-	 * @description 根据会话、策略和目的地创建消费者
+	 * 根据会话、策略和目的地创建消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -149,7 +149,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}
 	
 	/**
-	 * @description 根据会话和消费策略名称创建具备选择功能的消费者
+	 * 根据会话和消费策略名称创建具备选择功能的消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategyName
@@ -162,7 +162,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}
 	
 	/**
-	 * @description 根据会话和消费策略创建具备选择能力的消费者
+	 * 根据会话和消费策略创建具备选择能力的消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -175,7 +175,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}
 	
 	/**
-	 * @description 根据会话、策略名称和目的地创建具备选择能力的消费者
+	 * 根据会话、策略名称和目的地创建具备选择能力的消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategyName
@@ -190,7 +190,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}
 	
 	/**
-	 * @description 根据会话、策略名称和目的地名称创建具备选择能力的消费者
+	 * 根据会话、策略名称和目的地名称创建具备选择能力的消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategyName
@@ -205,7 +205,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}
 	
 	/**
-	 * @description 根据会话、策略和目的地名称创建具备选择能力的消费者
+	 * 根据会话、策略和目的地名称创建具备选择能力的消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -220,7 +220,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}
 			
 	/**
-	 * @description 根据会话、消费策略和目的地创建具备选择能力的消费者
+	 * 根据会话、消费策略和目的地创建具备选择能力的消费者
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param strategy
@@ -250,7 +250,7 @@ public abstract class ConsumerServiceSupport extends JmsDestinationAccessor impl
 	}
 				
 	/**
-	 * @description 判断当前消费者是否采用异步消费方式
+	 * 判断当前消费者是否采用异步消费方式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param consumer
 	 * @return

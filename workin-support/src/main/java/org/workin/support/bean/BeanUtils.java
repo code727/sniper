@@ -30,7 +30,7 @@ import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description JAVA Bean工具类
+ * JAVA Bean工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0, 2014-12-9
  */
@@ -39,7 +39,7 @@ public class BeanUtils {
 	private static final BeanReflector beanReflector = new DefaultBeanReflector();
 			
 	/**
-	 * @description 检索成员属性对应的getter方法
+	 * 检索成员属性对应的getter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean bean对象或class类型
 	 * @param propertyName 属性名称
@@ -64,7 +64,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 检索成员属性对应的setter方法
+	 * 检索成员属性对应的setter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param propertyName 属性名称
@@ -97,7 +97,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 检索当前对象所有的getter方法
+	 * 检索当前对象所有的getter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @return
@@ -123,7 +123,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 检索当前对象所有的getter方法名称
+	 * 检索当前对象所有的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @return
@@ -149,7 +149,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 检索当前对象所有的setter方法
+	 * 检索当前对象所有的setter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @return
@@ -171,7 +171,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 检索当前对象所有的setter方法名称
+	 * 检索当前对象所有的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @return
@@ -193,7 +193,7 @@ public class BeanUtils {
 	}
 		
 	/**
-	 * @description 获取非boolean类型属性对应的getter方法名称
+	 * 获取非boolean类型属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param propertyName
 	 * @return
@@ -203,7 +203,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 获取属性对应的getter方法名称
+	 * 获取属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param propertyName
 	 * @param paramterType 成员属性类型
@@ -214,7 +214,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 获取属性对应的setter方法名称
+	 * 获取属性对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param propertyName
 	 * @return
@@ -224,7 +224,7 @@ public class BeanUtils {
 	}
 		
 	/**
-	 * @description 获取前缀+属性组合的方法名
+	 * 获取前缀+属性组合的方法名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param propertyName
 	 * @param prefix
@@ -244,7 +244,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 获取当前Bean对象属性对应的getter方法名称
+	 * 获取当前Bean对象属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param propertyName 属性名
@@ -255,7 +255,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 获取当前Bean对象属性对应的setter方法名称
+	 * 获取当前Bean对象属性对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param propertyName 属性名
@@ -266,7 +266,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 获取当前Bean对象属性对应的具有指定类型的setter方法名称
+	 * 获取当前Bean对象属性对应的具有指定类型的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param propertyName  属性名
@@ -278,7 +278,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 获取当前Bean对象属性的值
+	 * 获取当前Bean对象属性的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param propertyName 属性名
@@ -290,7 +290,7 @@ public class BeanUtils {
 	}
 		
 	/**
-	 * @description 设置当前Bean对象属性的值
+	 * 设置当前Bean对象属性的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param propertyName 属性名
@@ -302,7 +302,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 调用当前Bean对象属性的setter方法
+	 * 调用当前Bean对象属性的setter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param parameterType 方法的参数类型
@@ -314,7 +314,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 调用全限定名对应类的构造函数创建Bean实例
+	 * 调用全限定名对应类的构造函数创建Bean实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param className
 	 * @return
@@ -326,7 +326,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 调用全限定名对应类的构造函数创建Bean实例，并调用各属性对应的setter方法赋值
+	 * 调用全限定名对应类的构造函数创建Bean实例，并调用各属性对应的setter方法赋值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param className
 	 * @param propertyValues
@@ -341,7 +341,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 创建Bean实例
+	 * 创建Bean实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
@@ -352,7 +352,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 创建Bean实例，并调用各属性对应的setter方法赋值
+	 * 创建Bean实例，并调用各属性对应的setter方法赋值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @param propertyValues 属性-值映射集
@@ -364,7 +364,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 根据当前Bean对象创建一个Map，其键值对就是bean的每一个属性名和值
+	 * 根据当前Bean对象创建一个Map，其键值对就是bean的每一个属性名和值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @return
@@ -375,7 +375,7 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * @description 根据当前Bean对象创建一个Map
+	 * 根据当前Bean对象创建一个Map
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param excludesName

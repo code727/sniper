@@ -31,7 +31,7 @@ import org.workin.templet.message.resolver.AbstractMessageResolver;
 import org.workin.web.WebApplicationContextMessageResolver;
 
 /**
- * @description 基于Spring Web应用上下文环境的消息解析器实现类
+ * 基于Spring Web应用上下文环境的消息解析器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

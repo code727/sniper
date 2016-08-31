@@ -26,7 +26,7 @@ import org.workin.templet.message.formatter.MessageFormatter;
 import org.workin.templet.message.service.MessageService;
 
 /**
- * @description 模板消息解析器实现类
+ * 模板消息解析器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -72,7 +72,7 @@ public class TempletMessageResolver extends AbstractLocaleMessageResolver {
 	}
 	
 	/**
-	 * @description 检查消息服务
+	 * 检查消息服务
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	protected void checkMessageService() {

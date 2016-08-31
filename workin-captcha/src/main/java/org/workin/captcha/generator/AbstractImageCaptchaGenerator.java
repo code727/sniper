@@ -33,7 +33,7 @@ import org.workin.commons.util.NumberUtils;
 import org.workin.image.layout.CaptchaLayout;
 
 /**
- * @description 图片验证码生成器抽象类
+ * 图片验证码生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -142,7 +142,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	}
 	
 	/**
-	 * @description 构建默认样式
+	 * 构建默认样式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -161,7 +161,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	}
 	
 	/**
-	 * @description 构建默认的背景颜色管理器
+	 * 构建默认的背景颜色管理器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 * @throws Exception
@@ -173,7 +173,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	}
 	
 	/**
-	 * @description 构建默认的边框颜色管理器
+	 * 构建默认的边框颜色管理器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 * @throws Exception
@@ -185,7 +185,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	}
 	
 	/**
-	 * @description 构建默认的干扰项颜色管理器
+	 * 构建默认的干扰项颜色管理器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 * @throws Exception
@@ -197,7 +197,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	}
 	
 	/** 
-	 * @description 构建默认的文本颜色管理器
+	 * 构建默认的文本颜色管理器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 * @throws Exception
@@ -209,7 +209,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	}
 	
 	/** 
-	 * @description 构建默认的文本字体管理器
+	 * 构建默认的文本字体管理器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return 
 	 * @throws Exception 
@@ -221,7 +221,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	}
 		
 	/**
-	 * @description 初始化布局
+	 * 初始化布局
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	private void initializeLayout() {

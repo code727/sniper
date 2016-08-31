@@ -24,7 +24,7 @@ import java.util.Map;
 import org.workin.commons.util.MapUtils;
 
 /**
- * @description 文本颜色管理实现类
+ * 文本颜色管理实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

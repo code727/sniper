@@ -26,7 +26,7 @@ import org.workin.security.PrincipalMeta;
 import org.workin.support.bean.BeanUtils;
 
 /**
- * @description Principal管理器抽象类
+ * Principal管理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -97,7 +97,7 @@ public abstract class AbstractPrincipalManager implements PrincipalManager, Init
 	}
 	
 	/**
-	 * @description 检测当前用户是否登录
+	 * 检测当前用户是否登录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws SecurityException
 	 */

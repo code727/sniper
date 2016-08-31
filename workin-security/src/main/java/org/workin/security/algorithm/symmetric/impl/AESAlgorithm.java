@@ -28,7 +28,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.workin.security.algorithm.symmetric.CipherSymmetricAlgorithm;
 
 /**
- * @description AES加解密算法实现类
+ * AES加解密算法实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

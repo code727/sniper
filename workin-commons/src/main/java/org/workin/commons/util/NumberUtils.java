@@ -24,7 +24,7 @@ import java.text.DecimalFormat;
 import java.util.Map;
 
 /**
- * @description 数字工具类
+ * 数字工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -63,7 +63,7 @@ public class NumberUtils {
 	}
 		
 	/**
-	 * @description 根据指定的模式在当前线程的局部变量中获取已定义的数字格式对象
+	 * 根据指定的模式在当前线程的局部变量中获取已定义的数字格式对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @return
@@ -84,7 +84,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的双精度数值，否则返回0
+	 * 获取不为空的双精度数值，否则返回0
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @return
@@ -94,7 +94,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的双精度数值，否则返回指定的默认值
+	 * 获取不为空的双精度数值，否则返回指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @param defaultValue
@@ -105,7 +105,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的单精度数值，否则返回0
+	 * 获取不为空的单精度数值，否则返回0
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @return
@@ -115,7 +115,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的双精度数值，否则返回指定的默认值
+	 * 获取不为空的双精度数值，否则返回指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @param defaultValue
@@ -126,7 +126,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的整数值，否则返回0
+	 * 获取不为空的整数值，否则返回0
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @return 
@@ -136,7 +136,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的整数值，否则返回指定的默认值
+	 * 获取不为空的整数值，否则返回指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @param defaultValue
@@ -147,7 +147,7 @@ public class NumberUtils {
 	}
 	
 	/** 
-	 * @description 获取不为空的长整数值，否则返回0
+	 * 获取不为空的长整数值，否则返回0
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @return
@@ -157,7 +157,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的长整数值，否则返回指定的默认值
+	 * 获取不为空的长整数值，否则返回指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @param defaultValue
@@ -168,7 +168,7 @@ public class NumberUtils {
 	}
 	
 	/** 
-	 * @description 获取不为空的短整数值，否则返回0
+	 * 获取不为空的短整数值，否则返回0
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @return
@@ -178,7 +178,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的短整数值，否则返回指定的默认值
+	 * 获取不为空的短整数值，否则返回指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @param defaultValue
@@ -189,7 +189,7 @@ public class NumberUtils {
 	}
 	
 	/** 
-	 * @description 获取不为空的比特数，否则返回0
+	 * 获取不为空的比特数，否则返回0
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @return
@@ -199,7 +199,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的比特数，否则返回指定的默认值
+	 * 获取不为空的比特数，否则返回指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @param defaultValue
@@ -210,7 +210,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的BigDecimal，否则返回0
+	 * 获取不为空的BigDecimal，否则返回0
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @return
@@ -220,7 +220,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的BigDecimal，否则返回指定不为空的默认值
+	 * 获取不为空的BigDecimal，否则返回指定不为空的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param defaultValue
@@ -236,7 +236,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的BigInteger，否则返回0
+	 * 获取不为空的BigInteger，否则返回0
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param integer
 	 * @return
@@ -246,7 +246,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 获取不为空的BigInteger，否则返回指定不为空的默认值
+	 * 获取不为空的BigInteger，否则返回指定不为空的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param defaultValue
@@ -262,7 +262,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 生成指定值之内的随机双精度浮点数
+	 * 生成指定值之内的随机双精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param in
 	 * @return
@@ -272,7 +272,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 生成指定值之内的随机浮点数
+	 * 生成指定值之内的随机浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param in
 	 * @return
@@ -282,7 +282,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 生成指定值之内的随机整数
+	 * 生成指定值之内的随机整数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param in
 	 * @return
@@ -292,7 +292,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 生成指定值之内的随机长整数
+	 * 生成指定值之内的随机长整数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param in
 	 * @return
@@ -302,7 +302,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 生成指定值之内的随机短整数
+	 * 生成指定值之内的随机短整数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param in
 	 * @return
@@ -312,7 +312,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 生成指定值之内的随机比特数
+	 * 生成指定值之内的随机比特数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param in
 	 * @return
@@ -322,7 +322,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最小极限值
+	 * 求指定值的最小极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param d
 	 * @param limit
@@ -333,7 +333,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最小极限值
+	 * 求指定值的最小极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param f
 	 * @param limit
@@ -344,7 +344,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最小极限值
+	 * 求指定值的最小极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param i
 	 * @param limit
@@ -355,7 +355,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最小极限值
+	 * 求指定值的最小极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param l
 	 * @param limit
@@ -366,7 +366,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最小极限值
+	 * 求指定值的最小极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param s
 	 * @param limit
@@ -377,7 +377,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最小极限值
+	 * 求指定值的最小极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param b
 	 * @param limit
@@ -388,7 +388,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最小极限值
+	 * 求指定值的最小极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c
 	 * @param limit
@@ -399,7 +399,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最大极限值
+	 * 求指定值的最大极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param d
 	 * @param limit
@@ -410,7 +410,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最大极限值
+	 * 求指定值的最大极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param f
 	 * @param limit
@@ -421,7 +421,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最大极限值
+	 * 求指定值的最大极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param i
 	 * @param limit
@@ -432,7 +432,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最大极限值
+	 * 求指定值的最大极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param l
 	 * @param limit
@@ -443,7 +443,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最大极限值
+	 * 求指定值的最大极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param s
 	 * @param limit
@@ -454,7 +454,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最大极限值
+	 * 求指定值的最大极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param b
 	 * @param limit
@@ -465,7 +465,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 求指定值的最大极限值
+	 * 求指定值的最大极限值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c
 	 * @param limit
@@ -476,7 +476,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于指定的双精度浮点数
+	 * 判断decimal是否大于指定的双精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -487,7 +487,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于指定的单精度浮点数
+	 * 判断decimal是否大于指定的单精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -498,7 +498,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于等于指定的整型数
+	 * 判断decimal是否大于等于指定的整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -509,7 +509,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否等于指定的长整型数
+	 * 判断decimal是否等于指定的长整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -520,7 +520,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于指定的短整型数
+	 * 判断decimal是否大于指定的短整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -531,7 +531,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于指定的比特数
+	 * 判断decimal是否大于指定的比特数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -542,7 +542,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于指定的字符ASCII码
+	 * 判断decimal是否大于指定的字符ASCII码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param c
@@ -553,7 +553,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal1是否大于decimal2
+	 * 判断decimal1是否大于decimal2
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal1
 	 * @param decimal2
@@ -567,7 +567,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于等于指定的双精度浮点数
+	 * 判断decimal是否大于等于指定的双精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -578,7 +578,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于等于指定的单精度浮点数
+	 * 判断decimal是否大于等于指定的单精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -589,7 +589,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于等于指定的整型数
+	 * 判断decimal是否大于等于指定的整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -600,7 +600,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于等于指定的长整型数
+	 * 判断decimal是否大于等于指定的长整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -611,7 +611,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于等于指定的短整型数
+	 * 判断decimal是否大于等于指定的短整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -622,7 +622,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于等于指定的比特数
+	 * 判断decimal是否大于等于指定的比特数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -633,7 +633,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否大于等于指定的字符ASCII码
+	 * 判断decimal是否大于等于指定的字符ASCII码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param c
@@ -644,7 +644,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal1是否大于等于decimal2
+	 * 判断decimal1是否大于等于decimal2
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal1
 	 * @param decimal2
@@ -658,7 +658,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于等于指定的双精度浮点数
+	 * 判断decimal是否小于等于指定的双精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -669,7 +669,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于等于指定的单精度浮点数
+	 * 判断decimal是否小于等于指定的单精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -680,7 +680,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于等于指定的整型数
+	 * 判断decimal是否小于等于指定的整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -691,7 +691,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于等于指定的长整型数
+	 * 判断decimal是否小于等于指定的长整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -702,7 +702,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于等于指定的短整型数
+	 * 判断decimal是否小于等于指定的短整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -713,7 +713,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于等于指定的比特数
+	 * 判断decimal是否小于等于指定的比特数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -724,7 +724,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于等于指定的字符ASCII码
+	 * 判断decimal是否小于等于指定的字符ASCII码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param c
@@ -735,7 +735,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal1是否小于等于decimal2
+	 * 判断decimal1是否小于等于decimal2
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal1
 	 * @param decimal2
@@ -749,7 +749,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于指定的双精度浮点数
+	 * 判断decimal是否小于指定的双精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -760,7 +760,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于指定的单精度浮点数
+	 * 判断decimal是否小于指定的单精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -771,7 +771,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于指定的整型数
+	 * 判断decimal是否小于指定的整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -782,7 +782,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于等于指定的长整型数
+	 * 判断decimal是否小于等于指定的长整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -793,7 +793,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于指定的短整型数
+	 * 判断decimal是否小于指定的短整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -804,7 +804,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于等于指定的比特数
+	 * 判断decimal是否小于等于指定的比特数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -815,7 +815,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否小于等于指定的字符ASCII码
+	 * 判断decimal是否小于等于指定的字符ASCII码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param c
@@ -826,7 +826,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal1是否小于等于decimal2
+	 * 判断decimal1是否小于等于decimal2
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal1
 	 * @param decimal2
@@ -840,7 +840,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否等于指定的双精度浮点数
+	 * 判断decimal是否等于指定的双精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -851,7 +851,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否等于指定的单精度浮点数
+	 * 判断decimal是否等于指定的单精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -862,7 +862,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否等于指定的整型数
+	 * 判断decimal是否等于指定的整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -873,7 +873,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否等于指定的长整型数
+	 * 判断decimal是否等于指定的长整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -884,7 +884,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否等于指定的短整型数
+	 * 判断decimal是否等于指定的短整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -895,7 +895,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否等于指定的比特数
+	 * 判断decimal是否等于指定的比特数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -906,7 +906,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal是否等于指定的字符ASCII码
+	 * 判断decimal是否等于指定的字符ASCII码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param c
@@ -917,7 +917,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断decimal1是否等于decimal2
+	 * 判断decimal1是否等于decimal2
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal1
 	 * @param decimal2
@@ -931,7 +931,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 将字符ASCII码转化为指定格式的字符串
+	 * 将字符ASCII码转化为指定格式的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @param pattern
@@ -942,7 +942,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 将数字转化为指定格式的字符串
+	 * 将数字转化为指定格式的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @param pattern
@@ -955,7 +955,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 绝对值取反
+	 * 绝对值取反
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param a
 	 * @return
@@ -965,7 +965,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 绝对值取反
+	 * 绝对值取反
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param a
 	 * @return
@@ -975,7 +975,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 绝对值取反
+	 * 绝对值取反
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param a
 	 * @return
@@ -985,7 +985,7 @@ public class NumberUtils {
     }
 	
 	/**
-	 * @description 绝对值取反
+	 * 绝对值取反
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param a
 	 * @return
@@ -995,7 +995,7 @@ public class NumberUtils {
     }
 	
 	/**
-	 * @description 判断是否为一个奇数
+	 * 判断是否为一个奇数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @return
@@ -1005,7 +1005,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断字符串表示的数字是否为一个奇数
+	 * 判断字符串表示的数字是否为一个奇数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @return
@@ -1015,7 +1015,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断字符串表示的数字是否为一个奇数，并且选择在判断前是否校验数字的合法性
+	 * 判断字符串表示的数字是否为一个奇数，并且选择在判断前是否校验数字的合法性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @param validation
@@ -1030,7 +1030,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断是否为一个偶数
+	 * 判断是否为一个偶数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @return
@@ -1040,7 +1040,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断字符串表示的数字是否为一个偶数
+	 * 判断字符串表示的数字是否为一个偶数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @return
@@ -1050,7 +1050,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * @description 判断字符串表示的数字是否为一个偶数，并且选择在判断前是否校验数字的合法性
+	 * 判断字符串表示的数字是否为一个偶数，并且选择在判断前是否校验数字的合法性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @param validation

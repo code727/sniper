@@ -26,7 +26,7 @@ import javax.persistence.MappedSuperclass;
 import org.workin.commons.entity.number.IdEntity;
 
 /**
- * @description Auto主键类型实体抽象类
+ * Auto主键类型实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

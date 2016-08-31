@@ -21,35 +21,35 @@ package org.workin.security.shiro.generator;
 import org.apache.shiro.session.mgt.eis.SessionIdGenerator;
 
 /**
- * @description Shiro SessionID生成器接口
+ * Shiro SessionID生成器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ShiroSessionIdGenerator extends SessionIdGenerator {
 	
 	/**
-	 * @description 设置前缀
+	 * 设置前缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param prefix
 	 */
 	public void setPrefix(String prefix);
 	
 	/**
-	 * @description 获取前缀
+	 * 获取前缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getPrefix();
 	
 	/**
-	 * @description 设置后缀
+	 * 设置后缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param suffix
 	 */
 	public void setSuffix(String suffix);
 	
 	/**
-	 * @description 获取后缀
+	 * 获取后缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

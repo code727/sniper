@@ -26,7 +26,7 @@ import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 第三方支付状态枚举类
+ * 第三方支付状态枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -120,7 +120,7 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	}
 	
 	/**
-	 * @description 根据第三方交易状态码获取对应的支付状态对象
+	 * 根据第三方交易状态码获取对应的支付状态对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param thirdCode
 	 * @return
@@ -130,7 +130,7 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	}
 	
 	/**
-	 * @description 根据第三方交易状态码获取对应的支付状态码
+	 * 根据第三方交易状态码获取对应的支付状态码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param thirdCode
 	 * @return
@@ -141,7 +141,7 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	}
 	
 	/**
-	 * @description 根据第三方交易状态码获取对应的支付消息
+	 * 根据第三方交易状态码获取对应的支付消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param thirdPayStatuCode
 	 * @return
@@ -151,7 +151,7 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	}
 		
 	/**
-	 * @description 根据第三方交易状态码获取对应的参数化支付消息
+	 * 根据第三方交易状态码获取对应的参数化支付消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param thirdCode
 	 * @param params

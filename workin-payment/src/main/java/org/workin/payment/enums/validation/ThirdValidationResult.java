@@ -25,7 +25,7 @@ import org.workin.commons.enums.Enums;
 import org.workin.commons.util.MapUtils;
 
 /**
- * @description 第三方验证结果枚举类
+ * 第三方验证结果枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -52,7 +52,7 @@ public class ThirdValidationResult extends AbstractNestableLocaleEnums<String, S
 	}
 	
 	/**
-	 * @description 根据第三方交易验证结果码获取对应的验证结果对象
+	 * 根据第三方交易验证结果码获取对应的验证结果对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param thirdCode
 	 * @return
@@ -62,7 +62,7 @@ public class ThirdValidationResult extends AbstractNestableLocaleEnums<String, S
 	}
 	
 	/**
-	 * @description 根据第三方交易验证结果码获取本系统的验证结果码
+	 * 根据第三方交易验证结果码获取本系统的验证结果码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param thirdCode
 	 * @return
@@ -73,7 +73,7 @@ public class ThirdValidationResult extends AbstractNestableLocaleEnums<String, S
 	}
 	
 	/**
-	 * @description 根据第三方交易验证结果码获取对应的验证信息
+	 * 根据第三方交易验证结果码获取对应的验证信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param thirdCode
 	 * @return
@@ -83,7 +83,7 @@ public class ThirdValidationResult extends AbstractNestableLocaleEnums<String, S
 	}
 	
 	/**
-	 * @description 根据第三方交易验证结果码获取对应的参数化验证信息
+	 * 根据第三方交易验证结果码获取对应的参数化验证信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param thirdCode
 	 * @param params

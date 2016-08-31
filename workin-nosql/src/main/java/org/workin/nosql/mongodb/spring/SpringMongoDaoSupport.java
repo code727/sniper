@@ -23,7 +23,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.workin.spring.beans.AbstractGenricBean;
 
 /**
- * @description Spring MongoDB数据访问支持类
+ * Spring MongoDB数据访问支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

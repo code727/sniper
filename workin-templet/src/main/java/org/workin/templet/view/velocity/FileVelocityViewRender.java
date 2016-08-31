@@ -25,7 +25,7 @@ import org.workin.commons.util.FileUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 文件路径Velocity视图渲染器实现类
+ * 文件路径Velocity视图渲染器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

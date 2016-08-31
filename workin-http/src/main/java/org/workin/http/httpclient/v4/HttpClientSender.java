@@ -24,7 +24,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.workin.http.HttpSender;
 
 /**
- * @description HttpClient4.x发送器实现类
+ * HttpClient4.x发送器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

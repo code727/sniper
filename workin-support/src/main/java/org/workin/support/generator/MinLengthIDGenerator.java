@@ -19,7 +19,7 @@
 package org.workin.support.generator;
 
 /**
- * @description 具有最小长度限制的ID生成器
+ * 具有最小长度限制的ID生成器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -29,42 +29,42 @@ public interface MinLengthIDGenerator extends IDGenerator {
 	public int DEFAULT_MIN_LENGTH = 16;
 	
 	/**
-	 * @description 设置ID的最小长度
+	 * 设置ID的最小长度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param minLength
 	 */
 	public void setMinLength(int minLength);
 	
 	/**
-	 * @description 设置ID的最小长度
+	 * 设置ID的最小长度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public int getMinLength();
 	
 	/**
-	 * @description 设置当总长度未达到最小要求时需要补充的字符
+	 * 设置当总长度未达到最小要求时需要补充的字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param supply
 	 */
 	public void setSupply(char supply);
 	
 	/**
-	 * @description 获取当总长度未达到最小要求时需要补充的字符
+	 * 获取当总长度未达到最小要求时需要补充的字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public char getSupply();
 	
 	/**
-	 * @description 设置补充字符的位置
+	 * 设置补充字符的位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param supplyPosition
 	 */
 	public void setSupplyPosition(int supplyPosition);
 	
 	/**
-	 * @description 获取补充字符的位置
+	 * 获取补充字符的位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

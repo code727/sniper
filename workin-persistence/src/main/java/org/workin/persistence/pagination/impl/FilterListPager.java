@@ -25,7 +25,7 @@ import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
 
 /**
- * @description 带属性过滤器列表的分页器实现类
+ * 带属性过滤器列表的分页器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

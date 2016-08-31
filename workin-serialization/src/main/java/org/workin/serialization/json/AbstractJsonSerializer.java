@@ -23,7 +23,7 @@ import org.workin.serialization.SerializationException;
 import org.workin.support.codec.CodecSupport;
 
 /**
- * @description JSON序列器抽象类
+ * JSON序列器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -89,7 +89,7 @@ public abstract class AbstractJsonSerializer extends CodecSupport implements Jso
 	}
 	
 	/**
-	 * @description 从字符串中判断出是否为一个JSON数组
+	 * 从字符串中判断出是否为一个JSON数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param jsonString
 	 * @return

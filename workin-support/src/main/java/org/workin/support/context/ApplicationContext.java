@@ -19,14 +19,14 @@
 package org.workin.support.context;
 
 /**
- * @description 泛型应用上下文接口
+ * 泛型应用上下文接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ApplicationContext<K, V> {
 	
 	/**
-	 * @description 根据名称获取上下文属性值
+	 * 根据名称获取上下文属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -34,7 +34,7 @@ public interface ApplicationContext<K, V> {
 	public V getAttribute(K name);
 	
 	/**
-	 * @description 设置上下文属性值
+	 * 设置上下文属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param value
@@ -42,7 +42,7 @@ public interface ApplicationContext<K, V> {
 	public void setAttribute(K name, V value);
 	
 	/**
-	 * @description 根据名称删除上下文属性
+	 * 根据名称删除上下文属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -50,7 +50,7 @@ public interface ApplicationContext<K, V> {
 	public V removeAttribute(K name);
 	
 	/**
-	 * @description 清除上下文
+	 * 清除上下文
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public void clear();

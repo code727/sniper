@@ -51,7 +51,7 @@ import org.workin.persistence.util.PersistencePropertyFilterChain;
 import org.workin.persistence.util.PersistenceUtils;
 
 /**
- * @description Hibernate3 DAO实现类
+ * Hibernate3 DAO实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

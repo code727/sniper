@@ -21,7 +21,7 @@ package org.workin.captcha;
 import org.workin.captcha.repository.Repository;
 
 /**
- * @description 验证码管理器接口
+ * 验证码管理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -31,28 +31,28 @@ public interface CaptchaManager {
 	public static final int TEXT_MIN_LENGTH = 4;
 	
 	/**
-	 * @description 设置文本库
+	 * 设置文本库
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param repository
 	 */
 	public void setRepository(Repository repository);
 	
 	/**
-	 * @description 获取文本库
+	 * 获取文本库
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Repository getRepository();
 	
 	/**
-	 * @description 设置生成的文本内容长度
+	 * 设置生成的文本内容长度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param length
 	 */
 	public void setLength(int length);
 	
 	/**
-	 * @description 获取生成的文本内容长度
+	 * 获取生成的文本内容长度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

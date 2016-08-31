@@ -52,7 +52,7 @@ import org.workin.persistence.util.PersistencePropertyFilterChain;
 import org.workin.persistence.util.PersistenceUtils;
 
 /**
- * @description JPA标准的DAO实现类
+ * JPA标准的DAO实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

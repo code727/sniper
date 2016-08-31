@@ -27,7 +27,7 @@ import org.workin.image.layout.QRCodeLayout;
 import org.workin.support.codec.CodecSupport;
 
 /**
- * @description 二维码对象
+ * 二维码对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

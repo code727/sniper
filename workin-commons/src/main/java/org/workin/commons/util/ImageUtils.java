@@ -21,14 +21,14 @@ package org.workin.commons.util;
 import java.awt.image.BufferedImage;
 
 /**
- * @description 图片工具类
+ * 图片工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class ImageUtils {
 	
 	/**
-	 * @description 判断是否为横向图
+	 * 判断是否为横向图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param image
 	 * @return
@@ -38,7 +38,7 @@ public class ImageUtils {
 	}
 	
 	/**
-	 * @description 判断是否为纵向图
+	 * 判断是否为纵向图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param image
 	 * @return
@@ -48,7 +48,7 @@ public class ImageUtils {
 	}
 	
 	/**
-	 * @description 判断是否为正方形图
+	 * 判断是否为正方形图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param image
 	 * @return
@@ -58,7 +58,7 @@ public class ImageUtils {
 	}
 	
 	/**
-	 * @description 判断是否为横向图
+	 * 判断是否为横向图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param width
 	 * @param height
@@ -69,7 +69,7 @@ public class ImageUtils {
 	}
 	
 	/**
-	 * @description 判断是否为纵向图
+	 * 判断是否为纵向图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param width
 	 * @param height
@@ -80,7 +80,7 @@ public class ImageUtils {
 	}
 	
 	/**
-	 * @description 判断是否为正方形图
+	 * 判断是否为正方形图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param width
 	 * @param height

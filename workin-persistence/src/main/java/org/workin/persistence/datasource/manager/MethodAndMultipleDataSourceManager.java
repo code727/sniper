@@ -28,7 +28,7 @@ import org.workin.commons.util.MapUtils;
 import org.workin.persistence.datasource.selector.MultipleDataSourceSelector;
 
 /**
- * @description 方法和多数据源关系管理实现类，主要维护方法名称与多个数据源之间的关系
+ * 方法和多数据源关系管理实现类，主要维护方法名称与多个数据源之间的关系
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -33,14 +33,14 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @description 映射集工具类
+ * 映射集工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class MapUtils {
 	
 	/**
-	 * @description 实例化一个HashMap对象
+	 * 实例化一个HashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -49,7 +49,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个具有指定容量的HashMap对象
+	 * 实例化一个具有指定容量的HashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param initialCapacity
 	 * @return
@@ -59,7 +59,7 @@ public class MapUtils {
 	}
 		
 	/**
-	 * @description 根据指定的映射集实例化一个HashMap对象
+	 * 根据指定的映射集实例化一个HashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @return
@@ -69,7 +69,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个LinkedHashMap对象
+	 * 实例化一个LinkedHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -78,7 +78,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个具有指定容量LinkedHashMap对象
+	 * 实例化一个具有指定容量LinkedHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param initialCapacity
 	 * @return
@@ -88,7 +88,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 根据指定的映射集实例化一个LinkedHashMap对象
+	 * 根据指定的映射集实例化一个LinkedHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @return
@@ -98,7 +98,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个Hashtable对象
+	 * 实例化一个Hashtable对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -107,7 +107,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个具有指定容量Hashtable对象
+	 * 实例化一个具有指定容量Hashtable对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param initialCapacity
 	 * @return
@@ -117,7 +117,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 根据指定的映射集实例化一个Hashtable对象
+	 * 根据指定的映射集实例化一个Hashtable对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @return
@@ -127,7 +127,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个TreeMap对象
+	 * 实例化一个TreeMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -136,7 +136,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个具有指定比较器的TreeMap对象
+	 * 实例化一个具有指定比较器的TreeMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param comparator
 	 * @return
@@ -146,7 +146,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个具有指定排序器的TreeMap对象
+	 * 实例化一个具有指定排序器的TreeMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sortedMap
 	 * @return
@@ -156,7 +156,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 根据指定的映射集实例化一个TreeMap对象
+	 * 根据指定的映射集实例化一个TreeMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @return
@@ -166,7 +166,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个ConcurrentHashMap对象
+	 * 实例化一个ConcurrentHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -175,7 +175,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个具有指定容量的ConcurrentHashMap对象
+	 * 实例化一个具有指定容量的ConcurrentHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param initialCapacity
 	 * @return
@@ -185,7 +185,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 根据指定的映射集实例化一个ConcurrentHashMap对象
+	 * 根据指定的映射集实例化一个ConcurrentHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @return
@@ -195,7 +195,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个IdentityHashMap对象
+	 * 实例化一个IdentityHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -204,7 +204,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 实例化一个具有指定容量的IdentityHashMap对象
+	 * 实例化一个具有指定容量的IdentityHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param initialCapacity
 	 * @return
@@ -214,7 +214,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 根据指定的映射集实例化一个IdentityHashMap对象
+	 * 根据指定的映射集实例化一个IdentityHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @return
@@ -224,7 +224,7 @@ public class MapUtils {
 	}
 		
 	/**
-	 * @description 判断Map对象是否为空
+	 * 判断Map对象是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @return
@@ -234,7 +234,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 判断Map对象是否不为空
+	 * 判断Map对象是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @return
@@ -244,7 +244,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 将映射集里的所有键值对元素连接成URL查询字符串
+	 * 将映射集里的所有键值对元素连接成URL查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @return
@@ -254,7 +254,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 将映射集里排除后剩余的键值对元素连接成URL查询字符串
+	 * 将映射集里排除后剩余的键值对元素连接成URL查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @param excludeNames
@@ -287,7 +287,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 将映射集里的所有键值对元素按各部分的连接符连接成字符串
+	 * 将映射集里的所有键值对元素按各部分的连接符连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map 映射集
 	 * @param kvSeperator 键值之间的连接符
@@ -299,7 +299,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 将映射集里排除后剩余的键值对元素按各部分的连接符连接成字符串
+	 * 将映射集里排除后剩余的键值对元素按各部分的连接符连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @param kvSeperator
@@ -312,7 +312,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 将集合里的所有Entry元素按各部分的连接符连接成字符串
+	 * 将集合里的所有Entry元素按各部分的连接符连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entrySet 映射集
 	 * @param kvSeperator 键值之间的连接符
@@ -324,7 +324,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 将集合里排除后剩余的Entry元素按各部分的连接符连接成字符串
+	 * 将集合里排除后剩余的Entry元素按各部分的连接符连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entrySet
 	 * @param kvSeperator
@@ -359,7 +359,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 获取两映射键的差集
+	 * 获取两映射键的差集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map1
 	 * @param map2
@@ -376,7 +376,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @description 获取两映射键的补集
+	 * 获取两映射键的补集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map1
 	 * @param map2

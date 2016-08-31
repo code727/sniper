@@ -23,14 +23,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @description JPA查询接口
+ * JPA查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface JpaQuery<T, PK extends Serializable> {
 	
 	/**
-	 * @description 根据主键ID查询当前类型的实体对象
+	 * 根据主键ID查询当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @return
@@ -38,7 +38,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public T findById(PK primaryKey);
 		
 	/**
-	 * @description 根据属性名和值查询出当前类型的唯一实体对象
+	 * 根据属性名和值查询出当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param propertyName
 	 * @param propertyValue
@@ -47,7 +47,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public T findUniqueByProperty(String propertyName, Object propertyValue);
 		
 	/**
-	 * @description 根据属性名值映射集查询出当前类型的唯一实体对象
+	 * 根据属性名值映射集查询出当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param paramMap
 	 * @return
@@ -55,7 +55,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public T findUniqueByPropertys(Map<String, ?> paramMap);
 		
 	/**
-	 * @description 执行查询语句后返回当前类型的唯一实体对象
+	 * 执行查询语句后返回当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql
 	 * @return
@@ -63,7 +63,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public T findUniqueByQueryString(String ql);
 	
 	/**
-	 * @description 执行查询语句后返回指定类型的唯一结果
+	 * 执行查询语句后返回指定类型的唯一结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass 
 	 * @param ql
@@ -72,7 +72,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public <R> R findUniqueByQueryString(Class<R> resultClass, String ql);
 	
 	/**
-	 * @description 执行带占位符(?)参数的查询语句后返回当前类型的唯一实体对象
+	 * 执行带占位符(?)参数的查询语句后返回当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql
 	 * @param values
@@ -81,7 +81,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public T findUniqueByQueryString(String ql, Object[] values);
 	
 	/**
-	 * @description 执行带占位符(?)参数的查询语句后返回指定类型的唯一结果
+	 * 执行带占位符(?)参数的查询语句后返回指定类型的唯一结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass 
 	 * @param ql
@@ -91,7 +91,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public <R> R findUniqueByQueryString(Class<R> resultClass, String ql, Object[] values);
 	
 	/**
-	 * @description 执行带命名(=:name)参数的查询语句后返回当前类型的唯一实体对象
+	 * 执行带命名(=:name)参数的查询语句后返回当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql
 	 * @param paramMap
@@ -100,7 +100,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public T findUniqueByQueryString(String ql, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 执行带命名(=:name)参数的查询语句后返回指定类型的唯一结果
+	 * 执行带命名(=:name)参数的查询语句后返回指定类型的唯一结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param ql
@@ -110,7 +110,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public <R> R findUniqueByQueryString(Class<R> resultClass, String ql, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 执行查询语句后返回当前类型的实体对象列表
+	 * 执行查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql
 	 * @return 
@@ -118,7 +118,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public List<T> find(String ql);
 	
 	/**
-	 * @description 执行查询语句后返回指定类型的结果列表
+	 * 执行查询语句后返回指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param ql
@@ -127,7 +127,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public <R> List<R> find(Class<R> resultClass, String ql);
 	
 	/**
-	 * @description 执行带占位符(?)参数的查询语句后返回当前类型的实体对象列表
+	 * 执行带占位符(?)参数的查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql
 	 * @param values
@@ -136,7 +136,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public List<T> find(String ql, Object[] values);
 	
 	/**
-	 * @description 执行带占位符(?)参数的查询语句后返回指定类型的结果列表
+	 * 执行带占位符(?)参数的查询语句后返回指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param ql
@@ -146,7 +146,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public <R> List<R> find(Class<R> resultClass, String ql, Object[] values);
 	
 	/**
-	 * @description 执行带命名(=:name)参数的查询语句后返回当前类型的实体对象列表
+	 * 执行带命名(=:name)参数的查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql
 	 * @param paramMap
@@ -155,7 +155,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public List<T> find(String ql, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 执行带命名(=:name)参数的查询语句后返回指定类型的结果列表
+	 * 执行带命名(=:name)参数的查询语句后返回指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param ql
@@ -165,7 +165,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public <R> List<R> find(Class<R> resultClass, String ql, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 从起始位置开始执行查询后，得到最大行数当前类型的实体对象列表
+	 * 从起始位置开始执行查询后，得到最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql
 	 * @param start
@@ -175,7 +175,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public List<T> find(String ql, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始执行查询后，得到最大行数指定类型的结果列表
+	 * 从起始位置开始执行查询后，得到最大行数指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param ql
@@ -186,7 +186,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public <R> List<R> find(Class<R> resultClass, String ql, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始执行带占位符(?)参数的查询后，得到最大行数当前类型的实体对象列表
+	 * 从起始位置开始执行带占位符(?)参数的查询后，得到最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql 
 	 * @param values
@@ -197,7 +197,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public List<T> find(String ql, Object[] values, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始执行带占位符(?)参数的查询后，得到最大行数指定类型的结果列表
+	 * 从起始位置开始执行带占位符(?)参数的查询后，得到最大行数指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param ql
@@ -209,7 +209,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public <R> List<R> find(Class<R> resultClass, String ql, Object[] values, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始执行带命名(=:name)参数的查询后，得到最大行数当前类型的实体对象列表
+	 * 从起始位置开始执行带命名(=:name)参数的查询后，得到最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql 
 	 * @param paramMap
@@ -220,7 +220,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public List<T> find(String ql, Map<String, ?> paramMap, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始执行带命名(=:name)参数的查询后，得到最大行数指定类型的结果列表
+	 * 从起始位置开始执行带命名(=:name)参数的查询后，得到最大行数指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param ql
@@ -232,7 +232,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public <R> List<R> find(Class<R> resultClass, String ql, Map<String, ?> paramMap, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始查询，得到最大行数当前类型的实体对象列表
+	 * 从起始位置开始查询，得到最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param start
 	 * @param maxRows
@@ -241,7 +241,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public List<T> find(int start, int maxRows);
 		
 	/**
-	 * @description 根据属性名和值查询出当前类型的实体对象列表
+	 * 根据属性名和值查询出当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param propertyName
 	 * @param propertyValue
@@ -250,7 +250,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public List<T> findByProperty(String propertyName, Object propertyValue);
 			
 	/**
-	 * @description 根据属性名和值从起始位置开始查询，得到最大行数当前类型的实体对象列表
+	 * 根据属性名和值从起始位置开始查询，得到最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param propertyName
 	 * @param propertyValue
@@ -261,7 +261,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public List<T> findByProperty(String propertyName, Object propertyValue, int start, int maxRows);
 		
 	/**
-	 * @description 根据属性名值映射集查询出当前类型的实体对象列表
+	 * 根据属性名值映射集查询出当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param paramMap
 	 * @return
@@ -269,7 +269,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public List<T> findByPropertys(Map<String, ?> paramMap);
 		
 	/**
-	 * @description 根据属性名值映射集从起始位置开始查询，得到最大行数当前类型的实体对象列表
+	 * 根据属性名值映射集从起始位置开始查询，得到最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param paramMap
 	 * @param start
@@ -279,21 +279,21 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public List<T> findByPropertys(Map<String, ?> paramMap, int start, int maxRows);
 	
 	/**
-	 * @description 查询当前类型的所有实体对象
+	 * 查询当前类型的所有实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<T> findAll();
 		
 	/**
-	 * @description 查询当前类型所有不重复的实体对象
+	 * 查询当前类型所有不重复的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<T> findAllDistinct();
 	
 	/**
-	 * @description 根据属性名和值查询出当前类型实体对象总数
+	 * 根据属性名和值查询出当前类型实体对象总数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param propertyName
 	 * @param propertyValue
@@ -302,7 +302,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public long countByProperty(String propertyName, Object propertyValue);
 		
 	/**
-	 * @description 根据属性名值映射集查询出当前类型实体对象的总数
+	 * 根据属性名值映射集查询出当前类型实体对象的总数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param paramMap
 	 * @return
@@ -310,7 +310,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public long countByPropertys(Map<String, ?> paramMap);
 	
 	/**
-	 * @description 执行总计查询语句后返回结果
+	 * 执行总计查询语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql
 	 * @return
@@ -318,7 +318,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public long countByQueryString(String ql);
 
 	/**
-	 * @description 执行带占位符(?)参数的总计查询语句后返回结果
+	 * 执行带占位符(?)参数的总计查询语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql
 	 * @param values
@@ -327,7 +327,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	public long countByQueryString(String ql, Object[] values);
 	
 	/**
-	 * @description 执行带命名(=:name)参数的总计查询语句后返回结果
+	 * 执行带命名(=:name)参数的总计查询语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ql
 	 * @param paramMap

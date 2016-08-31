@@ -21,21 +21,21 @@ package org.workin.commons.entity;
 import java.io.Serializable;
 
 /**
- * @description 可锁定的实体接口
+ * 可锁定的实体接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Lockable extends Serializable {
 	
 	/**
-	 * @description 获取当前版本号
+	 * 获取当前版本号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public long getVersion();
 
 	/**
-	 * @description 设置当前版本号
+	 * 设置当前版本号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param version
 	 */

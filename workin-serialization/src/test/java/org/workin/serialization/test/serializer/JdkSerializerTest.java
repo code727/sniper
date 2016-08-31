@@ -30,7 +30,7 @@ import org.workin.serialization.jdk.JdkSerializer;
 import org.workin.serialization.test.domain.User;
 
 /**
- * @description JDK原生序列器单元测试类O
+ * JDK原生序列器单元测试类O
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

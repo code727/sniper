@@ -19,7 +19,7 @@
 package org.workin.spring.beans.propertyeditors;
 
 /**
- * @description StringBuffer属性编辑器实现类
+ * StringBuffer属性编辑器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

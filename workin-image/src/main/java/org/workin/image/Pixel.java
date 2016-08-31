@@ -21,7 +21,7 @@ package org.workin.image;
 import java.io.Serializable;
 
 /**
- * @description 像素对象
+ * 像素对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

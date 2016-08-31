@@ -29,7 +29,7 @@ import org.workin.commons.util.PropertiesUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 以Properties配置为基准的Velocity视图渲染器实现类
+ * 以Properties配置为基准的Velocity视图渲染器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -22,7 +22,7 @@ import org.workin.payment.Payment;
 import org.workin.spring.context.ApplicationContextHolder;
 
 /**
- * @description 利用Spring上下文配置创建支付对象的工厂实现类
+ * 利用Spring上下文配置创建支付对象的工厂实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

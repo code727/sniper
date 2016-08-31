@@ -25,7 +25,7 @@ import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 实体/会话视图管理过滤器代理实现类
+ * 实体/会话视图管理过滤器代理实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -49,7 +49,7 @@ public class OpenEntitySessionManagerInViewFilter implements OpenEntitySessionMa
 	private static String[] excludeSuffixs = DEFAULT_EXCLUDE_SUFFIXS;
 	
 	/**
-	 * @description 初始化过滤器
+	 * 初始化过滤器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws ServletException
 	 */
@@ -89,7 +89,7 @@ public class OpenEntitySessionManagerInViewFilter implements OpenEntitySessionMa
 	}
 	
 	/**
-	 * @description 排除不需要过滤的资源
+	 * 排除不需要过滤的资源
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @return
@@ -110,7 +110,7 @@ public class OpenEntitySessionManagerInViewFilter implements OpenEntitySessionMa
 	}
 					
 	/**
-	 * @description 检测指定的路径是否属于exclude组
+	 * 检测指定的路径是否属于exclude组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param path
 	 * @return
@@ -124,7 +124,7 @@ public class OpenEntitySessionManagerInViewFilter implements OpenEntitySessionMa
 	}
 	
 	/**
-	 * @description 检测指定的路径是否属于include组
+	 * 检测指定的路径是否属于include组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param path
 	 * @return

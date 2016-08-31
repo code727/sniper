@@ -19,7 +19,7 @@
 package org.workin.support.codec;
 
 /**
- * @description 编解码处理器抽象类
+ * 编解码处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

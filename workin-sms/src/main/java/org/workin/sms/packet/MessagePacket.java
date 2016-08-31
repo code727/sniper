@@ -21,49 +21,49 @@ package org.workin.sms.packet;
 import java.io.Serializable;
 
 /**
- * @description 消息数据包接口
+ * 消息数据包接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface MessagePacket extends Serializable {
 	
 	/**
-	 * @description 设置消息内容
+	 * 设置消息内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param message
 	 */
 	public void setMessage(String message);
 	
 	/**
-	 * @description 获取消息内容
+	 * 获取消息内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getMessage();
 	
 	/**
-	 * @description 设置接收方手机号
+	 * 设置接收方手机号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param phones
 	 */
 	public void setPhones(String phones);
 	
 	/**
-	 * @description 获取接收方手机号
+	 * 获取接收方手机号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getPhones();
 	
 	/**
-	 * @description 设置签名
+	 * 设置签名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param signature
 	 */
 	public void setSignature(String signature);
 	
 	/**
-	 * @description 获取签名
+	 * 获取签名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

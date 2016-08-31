@@ -21,7 +21,7 @@ package org.workin.commons.entity;
 import java.util.Date;
 
 /**
- * @description 可进行新增修改审核的实体接口
+ * 可进行新增修改审核的实体接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -33,56 +33,56 @@ public interface CuAuditable {
 	public static final String UPDATE_TIME = "updateTime";
 	
 	/**
-	 * @description 获取创建时间
+	 * 获取创建时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Date getCreateTime();
 
 	/**
-	 * @description 设置创建时间
+	 * 设置创建时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param createTime
 	 */
 	public void setCreateTime(Date createTime);
 
 	/**
-	 * @description 获取更新时间
+	 * 获取更新时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Date getUpdateTime();
 
 	/**
-	 * @description 设置更新时间
+	 * 设置更新时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param updateTime
 	 */
 	public void setUpdateTime(Date updateTime);
 
 	/**
-	 * @description 获取创建者名称
+	 * 获取创建者名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getCreateBy();
 
 	/**
-	 * @description 设置创建者名称
+	 * 设置创建者名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param createBy
 	 */
 	public void setCreateBy(String createBy);
 
 	/**
-	 * @description 获取更新者名称
+	 * 获取更新者名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getUpdateBy();
 
 	/**
-	 * @description 设置更新者名称
+	 * 设置更新者名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param updateBy
 	 */

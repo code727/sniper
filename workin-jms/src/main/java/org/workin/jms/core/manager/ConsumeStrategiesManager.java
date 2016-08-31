@@ -23,28 +23,28 @@ import java.util.Map;
 import org.workin.jms.core.strategy.ConsumeStrategy;
 
 /**
- * @description JMS消费策略管理接口
+ * JMS消费策略管理接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ConsumeStrategiesManager {
 	
 	/**
-	 * @description 设置消费策略映射集
+	 * 设置消费策略映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param strategies
 	 */
 	public void setStrategies(Map<String, ConsumeStrategy> strategies);
 	
 	/**
-	 * @description 设置消费策略映射集
+	 * 设置消费策略映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Map<String, ConsumeStrategy> getStrategies();
 	
 	/**
-	 * @description 获取指定名称的消费策略
+	 * 获取指定名称的消费策略
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return

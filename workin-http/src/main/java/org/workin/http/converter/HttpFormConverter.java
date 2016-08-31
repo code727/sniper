@@ -23,14 +23,14 @@ import java.util.Map;
 import org.workin.http.HttpForm;
 
 /**
- * @description HTTP表单转换器接口
+ * HTTP表单转换器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface HttpFormConverter {
 	
 	/**
-	 * @description 将表单映射集转换成URL字符串映射集
+	 * 将表单映射集转换成URL字符串映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param formMap
 	 * @return

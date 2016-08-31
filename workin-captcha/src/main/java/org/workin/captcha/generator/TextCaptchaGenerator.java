@@ -24,7 +24,7 @@ import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.NumberUtils;
 
 /**
- * @description 普通文本验证码生成器实现类
+ * 普通文本验证码生成器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

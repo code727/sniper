@@ -21,14 +21,14 @@ package org.workin.trace.service;
 import org.workin.trace.domain.BehaviorPerformance;
 
 /**
- * @description 性能采集服务接口
+ * 性能采集服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface BehaviorPerformanceService {
 	
 	/**
-	 * @description 存储性能记录
+	 * 存储性能记录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param behaviorPerformance
 	 */

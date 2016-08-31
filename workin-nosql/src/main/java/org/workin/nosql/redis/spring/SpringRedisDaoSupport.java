@@ -36,7 +36,7 @@ import org.workin.nosql.redis.dao.RedisDaoSupport;
 import org.workin.nosql.redis.serializer.SpringRedisSerializerProxy;
 
 /**
- * @description Redis数据访问接口支持类
+ * Redis数据访问接口支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -86,7 +86,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/**
-	 * @description 选择并连接库
+	 * 选择并连接库
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param dbIndex
@@ -101,7 +101,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 		
 	/**
-	 * @description 设置当前库数据键的全局过期时间
+	 * 设置当前库数据键的全局过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param repository
@@ -118,7 +118,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/**
-	 * @description 设置当前库数据键的过期时间。当参数expireTime小于等于0时，则使用当前库设置的全局过期时间
+	 * 设置当前库数据键的过期时间。当参数expireTime小于等于0时，则使用当前库设置的全局过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param repository
@@ -133,7 +133,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/** 
-	 * @description 设置当前库多个数据键的全局过期时间
+	 * 设置当前库多个数据键的全局过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param repository
@@ -152,7 +152,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/**
-	 * @description 设置当前库多个数据键的过期时间。当参数expireTime小于等于0时，则使用当前库设置的全局过期时间
+	 * 设置当前库多个数据键的过期时间。当参数expireTime小于等于0时，则使用当前库设置的全局过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param repository
@@ -168,7 +168,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/**
-	 * @description 获取不同类型键对应的结果列表
+	 * 获取不同类型键对应的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dataType
 	 * @param connection
@@ -190,7 +190,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/**
-	 * @description 获取none(不存在)键类型对应的数据列表
+	 * 获取none(不存在)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param repository
@@ -202,7 +202,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/**
-	 * @description 获取string(字符串)键类型对应的数据列表
+	 * 获取string(字符串)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param dbIndex
@@ -218,7 +218,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/**
-	 * @description 获取list(列表)键类型对应的数据列表
+	 * 获取list(列表)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param dbIndex
@@ -230,7 +230,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/**
-	 * @description 获取set(集合)键类型对应的数据列表
+	 * 获取set(集合)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param dbIndex
@@ -242,7 +242,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/**
-	 * @description 获取zset(有序集合)键类型对应的数据列表
+	 * 获取zset(有序集合)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param dbIndex
@@ -255,7 +255,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 	
 	/**
-	 * @description 获取hash(哈希表)键类型对应的数据列表
+	 * 获取hash(哈希表)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param dbIndex

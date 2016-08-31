@@ -19,7 +19,7 @@
 package org.workin.payment.provider.wechatpay.enums;
 
 /**
- * @description 微信支付业务结果枚举
+ * 微信支付业务结果枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

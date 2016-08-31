@@ -22,14 +22,14 @@ import org.workin.fastdfs.node.Storage;
 import org.workin.fastdfs.node.Tracker;
 
 /**
- * @description 集群访问接口
+ * 集群访问接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ClusterAccessor {
 	
 	/**
-	 * @description 根据名称获取集群族内的Tracker
+	 * 根据名称获取集群族内的Tracker
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -37,7 +37,7 @@ public interface ClusterAccessor {
 	public Tracker getTracker(String name);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup
+	 * 根据路径前缀获取StorageGroup
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
@@ -45,7 +45,7 @@ public interface ClusterAccessor {
 	public StorageGroup getStorageGroup(String pathPrefix);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内指定索引位的Storage
+	 * 根据路径前缀获取StorageGroup内指定索引位的Storage
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @param index
@@ -54,7 +54,7 @@ public interface ClusterAccessor {
 	public Storage getStorage(String pathPrefix, int index);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内第一个Storage
+	 * 根据路径前缀获取StorageGroup内第一个Storage
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
@@ -62,7 +62,7 @@ public interface ClusterAccessor {
 	public Storage getFristStorage(String pathPrefix);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内最后一个Storage
+	 * 根据路径前缀获取StorageGroup内最后一个Storage
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
@@ -70,7 +70,7 @@ public interface ClusterAccessor {
 	public Storage getLastStorage(String pathPrefix);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内随机的一个Storage
+	 * 根据路径前缀获取StorageGroup内随机的一个Storage
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
@@ -78,21 +78,21 @@ public interface ClusterAccessor {
 	public Storage randomStorage(String pathPrefix);
 	
 	/**
-	 * @description 获取整个Tracker族提供的内网访问URL地址
+	 * 获取整个Tracker族提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getTrackerClusterIntranetAccessURL();
 	
 	/**
-	 * @description 获取整个Tracker族提供的外网访问URL地址
+	 * 获取整个Tracker族提供的外网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getTrackerClusterInternetAccessURL();
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup提供的内网访问URL地址
+	 * 根据路径前缀获取StorageGroup提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
@@ -100,7 +100,7 @@ public interface ClusterAccessor {
 	public String getStorageGroupIntranetAccessURL(String pathPrefix);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup提供的外网访问URL地址
+	 * 根据路径前缀获取StorageGroup提供的外网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
@@ -108,7 +108,7 @@ public interface ClusterAccessor {
 	public String getStorageGroupInternetAccessURL(String pathPrefix);
 	
 	/**
-	 * @description 根据名称获取Tracker节点提供的内网访问URL地址
+	 * 根据名称获取Tracker节点提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -116,7 +116,7 @@ public interface ClusterAccessor {
 	public String getTrackerIntranetAccessURL(String name);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内指定索引位Storage节点提供的内网访问URL地址
+	 * 根据路径前缀获取StorageGroup内指定索引位Storage节点提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @param index
@@ -125,7 +125,7 @@ public interface ClusterAccessor {
 	public String getStorageIntranetAccessURL(String pathPrefix, int index);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内第一个Storage节点提供的内网访问URL地址
+	 * 根据路径前缀获取StorageGroup内第一个Storage节点提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
@@ -133,7 +133,7 @@ public interface ClusterAccessor {
 	public String getFristStorageIntranetAccessURL(String pathPrefix);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内最后一个Storage节点提供的内网访问URL地址
+	 * 根据路径前缀获取StorageGroup内最后一个Storage节点提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return
@@ -141,7 +141,7 @@ public interface ClusterAccessor {
 	public String getLastStorageIntranetAccessURL(String pathPrefix);
 	
 	/**
-	 * @description 根据路径前缀获取StorageGroup内随机的一个Storage节点提供的内网访问URL地址
+	 * 根据路径前缀获取StorageGroup内随机的一个Storage节点提供的内网访问URL地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathPrefix
 	 * @return

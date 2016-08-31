@@ -23,7 +23,7 @@ import org.workin.commons.util.RegexUtils;
 import org.workin.test.junit.BaseTestCase;
 
 /**
- * @description 正则表达式工具单元测试类
+ * 正则表达式工具单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

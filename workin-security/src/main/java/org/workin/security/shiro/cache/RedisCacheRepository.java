@@ -28,7 +28,7 @@ import org.workin.commons.util.CollectionUtils;
 import org.workin.nosql.redis.dao.RedisCommandsDao;
 
 /**
- * @description Redis缓存共享库实现类
+ * Redis缓存共享库实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

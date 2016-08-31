@@ -24,7 +24,7 @@ import org.workin.commons.pagination.PagingResult;
 import org.workin.commons.util.ObjectUtils;
 
 /**
- * @description 简单分页结果实现类
+ * 简单分页结果实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

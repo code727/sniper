@@ -31,7 +31,7 @@ import org.workin.commons.util.IOUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 图片写入器默认实现类
+ * 图片写入器默认实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -88,7 +88,7 @@ public class DefaultImageWriter implements ImageWriter {
 	}
 	
 	/**
-	 * @description 检查目标图片
+	 * 检查目标图片
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @throws IOException

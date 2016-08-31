@@ -30,7 +30,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 /**
- * @description 网络通信工具类
+ * 网络通信工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -65,7 +65,7 @@ public class NetUtils {
 	 
 	
 	/**
-	 * @description 获取本机的IP地址
+	 * 获取本机的IP地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 * @throws UnknownHostException 
@@ -77,7 +77,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 获取本机的名称
+	 * 获取本机的名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 * @throws UnknownHostException
@@ -88,7 +88,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 发送HTTP httpGet请求后返回响应结果
+	 * 发送HTTP httpGet请求后返回响应结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @return
@@ -99,7 +99,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 发送带参数的HTTP httpGet请求后返回响应结果
+	 * 发送带参数的HTTP httpGet请求后返回响应结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param parameters
@@ -111,7 +111,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 发送带参数的HTTP httpGet请求后返回响应结果
+	 * 发送带参数的HTTP httpGet请求后返回响应结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param parameters
@@ -123,7 +123,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 发送带参数的HTTP httpGet请求后按指定的字符集编码格式返回响应结果
+	 * 发送带参数的HTTP httpGet请求后按指定的字符集编码格式返回响应结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param parameters
@@ -148,7 +148,7 @@ public class NetUtils {
 	}
 	
 	/** 
-	 * @description 发送带参数的HTTP httpGet请求后按指定的字符集编码格式返回响应结果
+	 * 发送带参数的HTTP httpGet请求后按指定的字符集编码格式返回响应结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param parameters
@@ -161,7 +161,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 发送HTTP httpPost请求后返回响应结果
+	 * 发送HTTP httpPost请求后返回响应结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @return
@@ -172,7 +172,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 发送带HTTP httpPost请求后返回响应结果
+	 * 发送带HTTP httpPost请求后返回响应结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param parameters
@@ -184,7 +184,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 发送带HTTP httpPost请求后返回响应结果
+	 * 发送带HTTP httpPost请求后返回响应结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param parameters
@@ -196,7 +196,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 发送带参数的HTTP httpPost请求后按指定的字符集编码格式返回响应结果
+	 * 发送带参数的HTTP httpPost请求后按指定的字符集编码格式返回响应结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param parameters
@@ -235,7 +235,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 发送带参数的HTTP httpPost请求后按指定的字符集编码格式返回响应结果
+	 * 发送带参数的HTTP httpPost请求后按指定的字符集编码格式返回响应结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param parameters
@@ -248,7 +248,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description  获取URL中包含协议、主机域/IP和端口号在内的Action字符串
+	 *  获取URL中包含协议、主机域/IP和端口号在内的Action字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @return
@@ -266,7 +266,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 从URL的Action字符串中获取以默认前缀和后缀标识的参数名称集
+	 * 从URL的Action字符串中获取以默认前缀和后缀标识的参数名称集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @return
@@ -276,7 +276,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 从URL的Action字符串中获取参数名称集
+	 * 从URL的Action字符串中获取参数名称集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param prefix 参数标识前缀
@@ -292,7 +292,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 获取URL包含的查询字符串
+	 * 获取URL包含的查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @return
@@ -314,7 +314,7 @@ public class NetUtils {
 	}
 		
 	/**
-	 * @description 从URL字符串中提取出所有参数名-值映射集
+	 * 从URL字符串中提取出所有参数名-值映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @return
@@ -336,7 +336,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 判断端口号是否有效
+	 * 判断端口号是否有效
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param port
 	 * @return
@@ -346,7 +346,7 @@ public class NetUtils {
 	}
 	
 	/**
-	 * @description 根据协议、主机地址和端口号拼接转换成URL
+	 * 根据协议、主机地址和端口号拼接转换成URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param protocol
 	 * @param host

@@ -21,14 +21,14 @@ package org.workin.jms.core;
 import javax.jms.Destination;
 
 /**
- * @description JMS生产者服务接口
+ * JMS生产者服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ProducerService {
 		
 	/**
-	 * @description 按指定名称的生产策略发送消息
+	 * 按指定名称的生产策略发送消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param strategyName 生产策略名称
 	 * @param message 消息数据
@@ -36,7 +36,7 @@ public interface ProducerService {
 	public <T> void send(String strategyName, T message);
 	
 	/**
-	 * @description 按指定的生产策略将消息发送到目的地
+	 * 按指定的生产策略将消息发送到目的地
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param strategyName
 	 * @param destinationName
@@ -45,7 +45,7 @@ public interface ProducerService {
 	public <T> void send(String strategyName, String destinationName, T message);
 	
 	/**
-	 * @description 按指定的生产策略将消息发送到目的地
+	 * 按指定的生产策略将消息发送到目的地
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param strategyName
 	 * @param destination

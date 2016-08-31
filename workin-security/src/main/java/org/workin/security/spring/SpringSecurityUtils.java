@@ -22,14 +22,14 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
- * @description SpringSecurity工具类
+ * SpringSecurity工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class SpringSecurityUtils {
 
 	/**
-	 * @description 获取上下文对象
+	 * 获取上下文对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -38,7 +38,7 @@ public class SpringSecurityUtils {
 	}
 	
 	/**
-	 * @description 获取当前用户
+	 * 获取当前用户
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

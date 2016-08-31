@@ -27,42 +27,42 @@ import org.workin.image.reader.ImageReader;
 import org.workin.image.writer.ImageWriter;
 
 /**
- * @description 图片处理器
+ * 图片处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ImageHandler {
 	
 	/**
-	 * @description 设置图片读取器
+	 * 设置图片读取器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param imageReader
 	 */
 	public void setImageReader(ImageReader imageReader);
 	
 	/**
-	 * @description 获取图片读取器
+	 * 获取图片读取器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public ImageReader getImageReader();
 	
 	/**
-	 * @description 设置图片写入器
+	 * 设置图片写入器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param imageWriter
 	 */
 	public void setImageWriter(ImageWriter imageWriter);
 	
 	/**
-	 * @description 获取图片写入器
+	 * 获取图片写入器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public ImageWriter getImageWriter();
 	
 	/**
-	 * @description 将本地的图片资源文件进行处理
+	 * 将本地的图片资源文件进行处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source 本地资源文件
 	 * @throws Exception 
@@ -70,7 +70,7 @@ public interface ImageHandler {
 	public void handle(File source) throws IOException;
 	
 	/**
-	 * @description 将本地的资源文件按照指定的格式进行处理
+	 * 将本地的资源文件按照指定的格式进行处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source 本地资源文件
 	 * @throws Exception 
@@ -78,7 +78,7 @@ public interface ImageHandler {
 	public void handle(File source, String formatName) throws IOException;
 	
 	/**
-	 * @description 将本地的资源文件进行处理后写入目标本地文件
+	 * 将本地的资源文件进行处理后写入目标本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source
 	 * @param dest
@@ -87,7 +87,7 @@ public interface ImageHandler {
 	public void handle(File source, File dest) throws IOException;
 	
 	/**
-	 * @description 将本地的资源文件按照指定的格式进行处理后写入目标本地文件
+	 * 将本地的资源文件按照指定的格式进行处理后写入目标本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source 本地资源文件
 	 * @param formatName 格式
@@ -97,7 +97,7 @@ public interface ImageHandler {
 	public void handle(File source, String formatName, File dest) throws IOException;
 	
 	/**
-	 * @description 将本地的资源文件进行处理后写入目标输出流
+	 * 将本地的资源文件进行处理后写入目标输出流
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source 本地资源文件
 	 * @param dest 目标输出流
@@ -106,7 +106,7 @@ public interface ImageHandler {
 	public void handle(File source, OutputStream dest) throws IOException;
 	
 	/**
-	 * @description 将本地的资源文件按照指定的格式进行处理后写入目标输出流
+	 * 将本地的资源文件按照指定的格式进行处理后写入目标输出流
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source 本地资源文件
 	 * @param formatName 格式
@@ -116,7 +116,7 @@ public interface ImageHandler {
 	public void handle(File source, String formatName, OutputStream dest) throws IOException;
 	
 	/**
-	 * @description 将资源流进行处理后写入目标本地文件
+	 * 将资源流进行处理后写入目标本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source 资源流
 	 * @param dest 目标本地文件
@@ -125,7 +125,7 @@ public interface ImageHandler {
 	public void handle(InputStream source, File dest) throws IOException;
 	
 	/**
-	 * @description 将资源流进行处理后写入目标输出流
+	 * 将资源流进行处理后写入目标输出流
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source 资源流
 	 * @param dest 目标输出流
@@ -134,7 +134,7 @@ public interface ImageHandler {
 	public void handle(InputStream source, OutputStream dest) throws IOException;
 	
 	/**
-	 * @description 将资源流按照指定格式进行处理后写入目标本地文件
+	 * 将资源流按照指定格式进行处理后写入目标本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source
 	 * @param formatName
@@ -144,7 +144,7 @@ public interface ImageHandler {
 	public void handle(InputStream source, String formatName, File dest) throws IOException;
 	
 	/**
-	 * @description 将资源流按照指定格式进行处理后写入到目标输出流
+	 * 将资源流按照指定格式进行处理后写入到目标输出流
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source 图片资源流
 	 * @param formatName 格式

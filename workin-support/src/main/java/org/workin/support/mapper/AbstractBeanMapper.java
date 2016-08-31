@@ -25,7 +25,7 @@ import org.workin.commons.util.ReflectionUtils;
 
 
 /**
- * @description Java Bean映射器抽象类
+ * Java Bean映射器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -50,7 +50,7 @@ public abstract class AbstractBeanMapper<T, R> extends AbstractMapper<T, R> {
 	}
 
 	/**
-	 * @description 根据被映射的目标Bean对象
+	 * 根据被映射的目标Bean对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

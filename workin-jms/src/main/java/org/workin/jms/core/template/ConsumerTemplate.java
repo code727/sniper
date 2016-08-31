@@ -35,7 +35,7 @@ import org.workin.jms.core.strategy.ConsumeStrategy;
 import org.workin.jms.support.ConsumerServiceSupport;
 
 /**
- * @description 消费者服务模板
+ * 消费者服务模板
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -23,7 +23,7 @@ import javax.jms.MessageListener;
 import org.workin.jms.core.strategy.ConsumeStrategy;
 
 /**
- * @description 默认的JMS消费策略实现类
+ * 默认的JMS消费策略实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

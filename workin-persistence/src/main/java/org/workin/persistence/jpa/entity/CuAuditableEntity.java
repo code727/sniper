@@ -23,7 +23,7 @@ import javax.persistence.MappedSuperclass;
 import org.workin.commons.entity.number.Idable;
 
 /**
- * @description JPA可进行新增修改审核的实体抽象类
+ * JPA可进行新增修改审核的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

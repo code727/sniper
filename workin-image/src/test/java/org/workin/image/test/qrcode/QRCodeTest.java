@@ -38,7 +38,7 @@ import org.workin.image.writer.ImageWriter;
 import org.workin.test.junit.BaseTestCase;
 
 /**
- * @description 二维码单元测试
+ * 二维码单元测试
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -98,7 +98,7 @@ public class QRCodeTest extends BaseTestCase {
 	}
 	
 	/**
-	 * @description 如果二维码图片太小，小日本的二维码解析器要报错，
+	 * 如果二维码图片太小，小日本的二维码解析器要报错，
 	 * 				另外还不能解析出zxing生成的二维码图片
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws Exception

@@ -25,7 +25,7 @@ import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerServer;
 
 /**
- * @description 默认原生API实现的连接工厂
+ * 默认原生API实现的连接工厂
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

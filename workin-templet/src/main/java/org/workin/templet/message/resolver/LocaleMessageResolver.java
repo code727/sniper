@@ -21,14 +21,14 @@ package org.workin.templet.message.resolver;
 import java.util.Locale;
 
 /**
- * @description 本地化消息解析器接口
+ * 本地化消息解析器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface LocaleMessageResolver extends MessageResolver {
 	
 	/**
-	 * @description 根据键获取对应的本地化资源信息
+	 * 根据键获取对应的本地化资源信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param locale
@@ -37,7 +37,7 @@ public interface LocaleMessageResolver extends MessageResolver {
 	public String getMessage(String key, Locale locale);
 	
 	/**
-	 * @description 根据键获取对应的本地化资源信息，未获取到时返回指定的默认信息
+	 * 根据键获取对应的本地化资源信息，未获取到时返回指定的默认信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param locale
@@ -47,7 +47,7 @@ public interface LocaleMessageResolver extends MessageResolver {
 	public String getMessage(String key, Locale locale, String defaultMessage);
 	
 	/**
-	 * @description 根据键获取具有参数的本地化资源信息，未获取到时返回指定的默认信息
+	 * 根据键获取具有参数的本地化资源信息，未获取到时返回指定的默认信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param locale
@@ -58,7 +58,7 @@ public interface LocaleMessageResolver extends MessageResolver {
 	public String getMessage(String key, Locale locale, Object param, String defaultMessage);
 	
 	/**
-	 * @description 根据键获取具有参数的本地化资源信息
+	 * 根据键获取具有参数的本地化资源信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param locale
@@ -68,7 +68,7 @@ public interface LocaleMessageResolver extends MessageResolver {
 	public String getMessage(String key, Locale locale, Object param);
 	
 	/**
-	 * @description 根据键获取具有参数的本地化资源信息
+	 * 根据键获取具有参数的本地化资源信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param locale
@@ -78,7 +78,7 @@ public interface LocaleMessageResolver extends MessageResolver {
 	public String getMessage(String key, Locale locale, Object[] params);
 	
 	/**
-	 * @description 根据键获取具有多个不同参数的本地化资源信息，未获取到时返回默认的信息
+	 * 根据键获取具有多个不同参数的本地化资源信息，未获取到时返回默认的信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param locale

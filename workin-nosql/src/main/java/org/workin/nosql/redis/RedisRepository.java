@@ -21,7 +21,7 @@ package org.workin.nosql.redis;
 import org.workin.serialization.Serializer;
 
 /**
- * @description Redis库配置对象
+ * Redis库配置对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

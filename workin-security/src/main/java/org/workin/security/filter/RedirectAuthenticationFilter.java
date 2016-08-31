@@ -22,49 +22,49 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
- * @description 重定向认证过滤器
+ * 重定向认证过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface RedirectAuthenticationFilter {
 	
 	/**
-	 * @description 设置参数名
+	 * 设置参数名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param redirectParameterName
 	 */
 	public void setParameterName(String parameterName);
 	
 	/**
-	 * @description 获取参数名
+	 * 获取参数名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getParameterName();
 	
 	/**
-	 * @description 设置登录认证成功后重定向的URL
+	 * 设置登录认证成功后重定向的URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param successUrl
 	 */
 	public void setSuccessUrl(String successUrl);
 	
 	/**
-	 * @description 获取登录认证成功后重定向的URL
+	 * 获取登录认证成功后重定向的URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getSuccessUrl();
 	
 	/**
-	 * @description 获取已保存的请求URL
+	 * 获取已保存的请求URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getSavedRequestUrl();
 	
 	/**
-	 * @description 获取已保存的请求URL
+	 * 获取已保存的请求URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @return
@@ -72,14 +72,14 @@ public interface RedirectAuthenticationFilter {
 	public String getSavedRequestUrl(ServletRequest request);
 	
 	/**
-	 * @description 重定向到已保存的请求URL
+	 * 重定向到已保存的请求URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws Exception
 	 */
 	public void redirectToSavedRequest() throws Exception;
 	
 	/**
-	 * @description 重定向到已保存的请求URL
+	 * 重定向到已保存的请求URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param response

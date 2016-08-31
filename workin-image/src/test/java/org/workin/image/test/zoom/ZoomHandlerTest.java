@@ -33,7 +33,7 @@ import org.workin.image.zoom.AdaptiveRatioHandler;
 import org.workin.test.junit.BaseTestCase;
 
 /**
- * @description 缩放处理器单元测试
+ * 缩放处理器单元测试
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.spring.context.ApplicationContextParameter;
 
 /**
- * @description 短信发送抽象类
+ * 短信发送抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -54,7 +54,7 @@ public abstract class AbstractSender implements Sender, InitializingBean {
 	}
 
 	/**
-	 * @description 根据应用上下文配置参数项初始化必要的参数
+	 * 根据应用上下文配置参数项初始化必要的参数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param smsContextParameters
 	 * @return

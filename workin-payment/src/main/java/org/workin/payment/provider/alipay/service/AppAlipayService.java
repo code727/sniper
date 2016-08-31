@@ -37,7 +37,7 @@ import org.workin.support.signature.AsymmetricSignature;
 import org.workin.support.signature.Signature;
 
 /**
- * @description 阿里移动支付服务实现类
+ * 阿里移动支付服务实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -99,7 +99,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 	}
 	
 	/**
-	 * @description 创建必填参数项
+	 * 创建必填参数项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param order
 	 * @param parameters
@@ -142,7 +142,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 	}
 	
 	/**
-	 * @description 创建非必填参数项
+	 * 创建非必填参数项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param order
 	 * @param parameters

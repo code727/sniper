@@ -21,14 +21,14 @@ package org.workin.captcha.handler;
 import java.io.Serializable;
 
 /**
- * @description 验证码处理器接口
+ * 验证码处理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface CaptchaHandler {
 	
 	/**
-	 * @description 创建验证码
+	 * 创建验证码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 * @return
@@ -36,7 +36,7 @@ public interface CaptchaHandler {
 	public String create(Serializable id);
 	
 	/**
-	 * @description 更新验证码
+	 * 更新验证码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 * @return
@@ -44,7 +44,7 @@ public interface CaptchaHandler {
 	public String update(Serializable id);
 	
 	/**
-	 * @description 获取验证码
+	 * 获取验证码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 * @return
@@ -52,7 +52,7 @@ public interface CaptchaHandler {
 	public String get(Serializable id);
 	
 	/**
-	 * @description 删除验证码
+	 * 删除验证码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 * @return
@@ -60,21 +60,21 @@ public interface CaptchaHandler {
 	public String detele(Serializable id);
 	
 	/**
-	 * @description 是否按忽略大小写的方式进行验证
+	 * 是否按忽略大小写的方式进行验证
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public boolean isIgnoreCaseValidation();
 
 	/**
-	 * @description 设置是否按忽略大小写的方式进行验证
+	 * 设置是否按忽略大小写的方式进行验证
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ignoreCaseValidation
 	 */
 	public void setIgnoreCaseValidation(boolean ignoreCaseValidation);
 	
 	/**
-	 * @description 校验验证码
+	 * 校验验证码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 * @param captcha
@@ -83,14 +83,14 @@ public interface CaptchaHandler {
 	public boolean validation(Serializable id, String captcha);
 
 	/**
-	 * @description 当验证失败时是否删除已保存的验证码
+	 * 当验证失败时是否删除已保存的验证码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public boolean isDeleteWhenValidationFailed();
 
 	/**
-	 * @description 设置当验证失败时是否删除已保存的验证码
+	 * 设置当验证失败时是否删除已保存的验证码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param deleteWhenValidationFailed
 	 */

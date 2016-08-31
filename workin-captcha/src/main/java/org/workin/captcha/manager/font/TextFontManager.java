@@ -29,7 +29,7 @@ import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 文本字体管理器实现类
+ * 文本字体管理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -110,7 +110,7 @@ public class TextFontManager implements FontManager, InitializingBean {
 	}
 	
 	/**
-	 * @description 构建默认支持的字体样式映射集
+	 * 构建默认支持的字体样式映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -123,7 +123,7 @@ public class TextFontManager implements FontManager, InitializingBean {
 	}
 	
 	/**
-	 * @description 设置字体名称组 
+	 * 设置字体名称组 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fontName
 	 */
@@ -132,7 +132,7 @@ public class TextFontManager implements FontManager, InitializingBean {
 	}
 	
 	/**
-	 * @description 获取字体名称组 
+	 * 获取字体名称组 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -141,7 +141,7 @@ public class TextFontManager implements FontManager, InitializingBean {
 	}
 	
 	/**
-	 * @description 设置字体样式名称组 
+	 * 设置字体样式名称组 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fontStyles
 	 */
@@ -150,7 +150,7 @@ public class TextFontManager implements FontManager, InitializingBean {
 	}
 	
 	/**
-	 * @description 获取字体样式名称组 
+	 * 获取字体样式名称组 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

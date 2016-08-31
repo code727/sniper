@@ -29,7 +29,7 @@ import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 颜色管理器抽象类
+ * 颜色管理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -80,7 +80,7 @@ public abstract class AbstractColorManager implements ColorManager, Initializing
 	}
 
 	/**
-	 * @description 获取颜色名称组
+	 * 获取颜色名称组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -89,7 +89,7 @@ public abstract class AbstractColorManager implements ColorManager, Initializing
 	}
 	
 	/**
-	 * @description 根据备选颜色对象映射设置颜色名称组
+	 * 根据备选颜色对象映射设置颜色名称组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param colors
 	 */
@@ -98,7 +98,7 @@ public abstract class AbstractColorManager implements ColorManager, Initializing
 	}
 	
 	/**
-	 * @description 构建默认支持的颜色映射集
+	 * 构建默认支持的颜色映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

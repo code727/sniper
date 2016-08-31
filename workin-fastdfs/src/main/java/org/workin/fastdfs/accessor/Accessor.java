@@ -21,14 +21,14 @@ package org.workin.fastdfs.accessor;
 import org.workin.fastdfs.cluster.Cluster;
 
 /**
- * @description FastDFS访问器接口
+ * FastDFS访问器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Accessor {
 	
 	/**
-	 * @description 根据FastDFS集群族和路径获取最终可访问的URL
+	 * 根据FastDFS集群族和路径获取最终可访问的URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cluster
 	 * @param path
@@ -37,7 +37,7 @@ public interface Accessor {
 	public String getAccessableURL(Cluster cluster, String path);
 	
 	/**
-	 * @description 根据FastDFS集群族和路径获取存储路径
+	 * 根据FastDFS集群族和路径获取存储路径
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cluster
 	 * @param url

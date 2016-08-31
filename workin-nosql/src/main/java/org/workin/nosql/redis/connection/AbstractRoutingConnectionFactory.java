@@ -26,7 +26,7 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 
 /**
- * @description 多路由RedisConnectionFactory抽象类
+ * 多路由RedisConnectionFactory抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -69,7 +69,7 @@ public abstract class AbstractRoutingConnectionFactory implements InitializingBe
 	}
 
 	/**
-	 * @description 获取目标RedisConnection对象
+	 * 获取目标RedisConnection对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return 
 	 */
@@ -84,7 +84,7 @@ public abstract class AbstractRoutingConnectionFactory implements InitializingBe
 	}
 	
 	/**
-	 * @description 获取目标RedisConnectionFactory对象
+	 * 获取目标RedisConnectionFactory对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -101,7 +101,7 @@ public abstract class AbstractRoutingConnectionFactory implements InitializingBe
 	}
 	
 	/** 
-	 * @description 查找RedisConnectionFactory对象的标识键
+	 * 查找RedisConnectionFactory对象的标识键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

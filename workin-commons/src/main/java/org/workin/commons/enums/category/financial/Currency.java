@@ -22,7 +22,7 @@ import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.MessageUtils;
 
 /**
- * @description 货币枚举类
+ * 货币枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -131,7 +131,7 @@ public enum Currency {
 	}
 
 	/**
-	 * @description 获取当前货币的简称
+	 * 获取当前货币的简称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -140,7 +140,7 @@ public enum Currency {
 	}
 
 	/**
-	 * @description 获取当前货币的模式
+	 * 获取当前货币的模式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -149,7 +149,7 @@ public enum Currency {
 	}
 	
 	/**
-	 * @description 获取当前货币的类型
+	 * 获取当前货币的类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -158,7 +158,7 @@ public enum Currency {
 	}
 
 	/**
-	 * @description 获取当前货币的全称
+	 * 获取当前货币的全称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -167,7 +167,7 @@ public enum Currency {
 	}
 	
 	/**
-	 * @description 获取指定类型对应的货币
+	 * 获取指定类型对应的货币
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 * @return
@@ -177,7 +177,7 @@ public enum Currency {
 	}
 	
 	/**
-	 * @description 获取指定类型对应的货币模式
+	 * 获取指定类型对应的货币模式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 * @return
@@ -188,7 +188,7 @@ public enum Currency {
 	}
 	
 	/**
-	 * @description 获取国际通用的货币符号
+	 * 获取国际通用的货币符号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -197,7 +197,7 @@ public enum Currency {
 	}
 	
 	/**
-	 * @description 获取指定类型对应的货币全称
+	 * 获取指定类型对应的货币全称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 * @return

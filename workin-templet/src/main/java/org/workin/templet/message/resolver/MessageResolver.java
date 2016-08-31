@@ -19,14 +19,14 @@
 package org.workin.templet.message.resolver;
 
 /**
- * @description 消息解析器接口
+ * 消息解析器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface MessageResolver {
 	
 	/**
-	 * @description 根据键获取对应的资源信息
+	 * 根据键获取对应的资源信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key 资源项的键
 	 * @return
@@ -34,7 +34,7 @@ public interface MessageResolver {
 	public String getMessage(String key);
 	
 	/**
-	 * @description 根据键获取对应的资源信息，未获取到时返回指定的默认信息
+	 * 根据键获取对应的资源信息，未获取到时返回指定的默认信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key 资源项的键
 	 * @param defaultMessage 默认信息
@@ -43,7 +43,7 @@ public interface MessageResolver {
 	public String getMessage(String key, String defaultMessage);
 	
 	/**
-	 * @description 根据键获取具有参数的资源信息，未获取到时返回指定的默认信息
+	 * 根据键获取具有参数的资源信息，未获取到时返回指定的默认信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key 资源信息的键
 	 * @param param 参数值
@@ -53,7 +53,7 @@ public interface MessageResolver {
 	public String getMessage(String key, Object param, String defaultMessage);
 	
 	/**
-	 * @description 根据键获取具有参数的资源信息
+	 * 根据键获取具有参数的资源信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key 资源项的键
 	 * @param param 参数值
@@ -62,7 +62,7 @@ public interface MessageResolver {
 	public String getMessage(String key, Object param);
 	
 	/**
-	 * @description 根据键获取具有参数的资源信息
+	 * 根据键获取具有参数的资源信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key 资源项的键
 	 * @param params 参数值组
@@ -71,7 +71,7 @@ public interface MessageResolver {
 	public String getMessage(String key, Object[] params);
 	
 	/**
-	 * @description 根据键获取具有参数的资源信息，未获取到时返回默认的信息
+	 * 根据键获取具有参数的资源信息，未获取到时返回默认的信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key 资源项的键
 	 * @param params 参数值组

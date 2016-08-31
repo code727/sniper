@@ -25,7 +25,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 字符串属性编辑器实现类
+ * 字符串属性编辑器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -75,7 +75,7 @@ public class StringPropertyEditor extends PropertyEditorSupport
 	}
 
 	/**
-	 * @description 非空文本的处理方法，返回处理后的结果
+	 * 非空文本的处理方法，返回处理后的结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param text
 	 * @return

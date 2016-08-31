@@ -29,7 +29,7 @@ import org.apache.http.util.EntityUtils;
 import org.workin.support.codec.CodecSupport;
 
 /**
- * @description 响应处理器抽象类
+ * 响应处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -48,7 +48,7 @@ public abstract class AbstractResponseHandler<T> extends CodecSupport implements
 	}
 
 	/**
-	 * @description 处理响应并返回字符串结果
+	 * 处理响应并返回字符串结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param response
 	 * @return

@@ -21,7 +21,7 @@ package org.workin.fastdfs.node;
 import org.workin.support.server.IntranetServer;
 
 /**
- * @description Tracker接口
+ * Tracker接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

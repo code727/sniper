@@ -20,7 +20,7 @@ package org.workin.commons.pagination;
 
 
 /**
- * @description 排序对象
+ * 排序对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

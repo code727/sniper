@@ -22,7 +22,7 @@ import org.springframework.stereotype.Repository;
 import org.workin.persistence.sqlmap.dao.SqlMapDao;
 
 /**
- * @description MyBatis DAO实现类
+ * MyBatis DAO实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -41,7 +41,7 @@ import org.workin.support.signature.SymmetricSignature;
 import org.workin.support.signature.Signature;
 
 /**
- * @description APP版微信支付服务实现类
+ * APP版微信支付服务实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -131,7 +131,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 	}
 	
 	/**
-	 * @description 统一下单
+	 * 统一下单
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param order
 	 * @param parameters
@@ -194,7 +194,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 	}
 	
 	/**
-	 * @description 当解析"统一下单"结果出现业务错误时更新支付记录
+	 * 当解析"统一下单"结果出现业务错误时更新支付记录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param errCode
 	 * @param errMessage

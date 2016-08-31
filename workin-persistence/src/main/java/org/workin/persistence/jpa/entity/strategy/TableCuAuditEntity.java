@@ -26,7 +26,7 @@ import javax.persistence.MappedSuperclass;
 import org.workin.persistence.jpa.entity.CuAuditableEntity;
 
 /**
- * @description Table主键类型的新增更新审核实体抽象类
+ * Table主键类型的新增更新审核实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -23,55 +23,55 @@ import java.io.FileFilter;
 import java.util.List;
 
 /**
- * @description Workin框架文件过滤器
+ * Workin框架文件过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface WorkinFileFilter extends FileFilter {
 	
 	/**
-	 * @description 判断过滤操作是否包含根文件/目录
+	 * 判断过滤操作是否包含根文件/目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public boolean isContainsRoot();
 	
 	/** 
-	 * @description 设置过滤操作是否包含根文件/目录
+	 * 设置过滤操作是否包含根文件/目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param containsRoot
 	 */
 	public void setContainsRoot(boolean containsRoot);
 		
 	/**
-	 * @description 设置开始过滤的根目录
+	 * 设置开始过滤的根目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param root
 	 */
 	public void setRoot(File root);
 	
 	/**
-	 * @description 获取开始过滤的根目录
+	 * 获取开始过滤的根目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public File getRoot();
 	
 	/**
-	 * @description 清空结果集
+	 * 清空结果集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public void clear();
 	
 	/**
-	 * @description 获取满足过滤条件的结果集
+	 * 获取满足过滤条件的结果集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<File> list();
 	
 	/**
-	 * @description 执行过滤操作
+	 * 执行过滤操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public void doFileter();

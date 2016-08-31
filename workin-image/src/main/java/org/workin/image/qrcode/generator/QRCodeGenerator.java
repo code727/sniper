@@ -24,28 +24,28 @@ import org.workin.image.layout.QRCodeLayout;
 import org.workin.image.qrcode.QRCode;
 
 /**
- * @description 二维码生成器接口
+ * 二维码生成器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface QRCodeGenerator {
 	
 	/**
-	 * @description 设置全局样式
+	 * 设置全局样式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param layout
 	 */
 	public void setLayout(QRCodeLayout layout);
 	
 	/**
-	 * @description 获取全局样式
+	 * 获取全局样式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public QRCodeLayout getLayout();
 	
 	/**
-	 * @description 生成二维码图片对象
+	 * 生成二维码图片对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param qrCode
 	 * @return

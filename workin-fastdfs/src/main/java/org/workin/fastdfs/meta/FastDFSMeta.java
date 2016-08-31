@@ -24,70 +24,70 @@ import org.csource.common.NameValuePair;
 import org.workin.support.file.meta.FileMeta;
 
 /**
- * @description FastDFS文件源接口
+ * FastDFS文件源接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface FastDFSMeta<T> extends FileMeta<T> {
 	
 	/**
-	 * @description 设置原有的资源标识
+	 * 设置原有的资源标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param originalId
 	 */
 	public void setOriginalId(String originalId);
 	
 	/**
-	 * @description 获取原有的资源标识
+	 * 获取原有的资源标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getOriginalId();
 	
 	/**
-	 * @description 设置原有的缩放资源标识
+	 * 设置原有的缩放资源标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param originalZoomId
 	 */
 	public void setOriginalZoomId(String originalZoomId);
 	
 	/**
-	 * @description 获取原有的缩放资源标识
+	 * 获取原有的缩放资源标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getOriginalZoomId();
 		
 	/**
-	 * @description 添加目标文件元数据名值对
+	 * 添加目标文件元数据名值对
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param nameValuePair
 	 */
 	public void addNameValuePair(NameValuePair nameValuePair);
 	
 	/**
-	 * @description 批量添加目标文件元数据名值对
+	 * 批量添加目标文件元数据名值对
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param NameValuePairs
 	 */
 	public void addNameValuePaires(NameValuePair[] nameValuePairs);
 	
 	/**
-	 * @description 批量添加目标文件元数据名值对
+	 * 批量添加目标文件元数据名值对
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param nameValuePairs
 	 */
 	public void addNameValuePaires(List<NameValuePair> nameValuePairs);
 	
 	/**
-	 * @description 获取所有的元数据名值对
+	 * 获取所有的元数据名值对
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<NameValuePair> getNameValuePaires();
 	
 	/**
-	 * @description 获取指定索引位上的元数据名值对
+	 * 获取指定索引位上的元数据名值对
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param index
 	 * @return
@@ -95,21 +95,21 @@ public interface FastDFSMeta<T> extends FileMeta<T> {
 	public NameValuePair getNameValuePair(int index);
 	
 	/**
-	 * @description 获取第一个元数据名值对
+	 * 获取第一个元数据名值对
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public NameValuePair getFirstNameValuePair();
 	
 	/**
-	 * @description 获取最后一个元数据名值对
+	 * 获取最后一个元数据名值对
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public NameValuePair getLastNameValuePair();
 	
 	/**
-	 * @description 获取匹配名称对应的值
+	 * 获取匹配名称对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -117,7 +117,7 @@ public interface FastDFSMeta<T> extends FileMeta<T> {
 	public String getValue(String name);
 	
 	/**
-	 * @description 按忽略大小写的方式获取匹配名称对应的值
+	 * 按忽略大小写的方式获取匹配名称对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return

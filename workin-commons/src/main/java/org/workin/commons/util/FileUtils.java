@@ -33,7 +33,7 @@ import java.net.URL;
 import java.nio.channels.FileChannel;
 
 /**
- * @description 文件工具类
+ * 文件工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -43,7 +43,7 @@ public class FileUtils {
 	public static final String EXTENSION_SEPERATOR = ".";
 		
 	/**
-	 * @description 获取指定路径下的文件名
+	 * 获取指定路径下的文件名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param filePath
 	 * @return
@@ -60,7 +60,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 获取文件的名称
+	 * 获取文件的名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @return
@@ -70,7 +70,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 获取指定路径下的文件的主名（不包含扩展名的名称）
+	 * 获取指定路径下的文件的主名（不包含扩展名的名称）
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param filePath
 	 * @return
@@ -82,7 +82,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 获取文件的主名（不包含扩展名的名称）
+	 * 获取文件的主名（不包含扩展名的名称）
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @return
@@ -94,7 +94,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 获取指定路径下的文件的扩展名
+	 * 获取指定路径下的文件的扩展名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param filePath
 	 * @return
@@ -104,7 +104,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 获取文件的扩展名
+	 * 获取文件的扩展名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @return
@@ -114,7 +114,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 判断文件有无扩展名
+	 * 判断文件有无扩展名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @return
@@ -124,7 +124,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按默认字符串编码格式和缓冲区大小读取文件的内容
+	 * 按默认字符串编码格式和缓冲区大小读取文件的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @return
@@ -136,7 +136,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按指定字符串编码格式和默认缓冲区大小读取文件的内容
+	 * 按指定字符串编码格式和默认缓冲区大小读取文件的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param encoding
@@ -148,7 +148,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按默认字符串编码格式和指定缓冲区大小读取文件的内容
+	 * 按默认字符串编码格式和指定缓冲区大小读取文件的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param bufferSize
@@ -160,7 +160,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按指定字符串编码格式和缓冲区大小读取文件的内容
+	 * 按指定字符串编码格式和缓冲区大小读取文件的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param encoding
@@ -186,7 +186,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按默认的字符集编码和缓冲区大小读取指定行号的内容
+	 * 按默认的字符集编码和缓冲区大小读取指定行号的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -198,7 +198,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按指定的字符集编码和默认的缓冲区大小读取指定行号的内容
+	 * 按指定的字符集编码和默认的缓冲区大小读取指定行号的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -211,7 +211,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按默认的字符集编码和指定的缓冲区大小读取指定行号的内容
+	 * 按默认的字符集编码和指定的缓冲区大小读取指定行号的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -224,7 +224,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按指定的字符集编码和缓冲区大小读取指定行号的内容
+	 * 按指定的字符集编码和缓冲区大小读取指定行号的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -255,7 +255,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按默认的字符集编码和缓冲区大小读取指定行号之前的内容
+	 * 按默认的字符集编码和缓冲区大小读取指定行号之前的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -267,7 +267,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按指定的字符集编码和默认的缓冲区大小读取指定行号之前的内容
+	 * 按指定的字符集编码和默认的缓冲区大小读取指定行号之前的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -280,7 +280,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按默认的字符集编码和指定的缓冲区大小读取指定行号之前的内容
+	 * 按默认的字符集编码和指定的缓冲区大小读取指定行号之前的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -293,7 +293,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按指定的字符集编码和缓冲区大小读取指定行号之前的内容
+	 * 按指定的字符集编码和缓冲区大小读取指定行号之前的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -327,7 +327,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按默认的字符集编码和缓冲区大小读取指定行号之后的内容
+	 * 按默认的字符集编码和缓冲区大小读取指定行号之后的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -339,7 +339,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按指定的字符集编码和默认的缓冲区大小读取指定行号之后的内容
+	 * 按指定的字符集编码和默认的缓冲区大小读取指定行号之后的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -352,7 +352,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按默认的字符集编码和指定的缓冲区大小读取指定行号之后的内容
+	 * 按默认的字符集编码和指定的缓冲区大小读取指定行号之后的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -365,7 +365,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按指定的字符集编码和缓冲区大小读取指定行号之后的内容
+	 * 按指定的字符集编码和缓冲区大小读取指定行号之后的内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param lineNumber
@@ -401,7 +401,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 将输入流的数据拷贝到目标
+	 * 将输入流的数据拷贝到目标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param in
 	 * @param file
@@ -412,7 +412,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按是否追加的方式将源输入流的内容拷贝到目标文件
+	 * 按是否追加的方式将源输入流的内容拷贝到目标文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param in
 	 * @param file
@@ -437,7 +437,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 将读取器的内容按默认字符集编码格式写入到目标文件
+	 * 将读取器的内容按默认字符集编码格式写入到目标文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param reader
 	 * @param file
@@ -448,7 +448,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 将读取器的内容按指定字符集编码格式写入到目标文件
+	 * 将读取器的内容按指定字符集编码格式写入到目标文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param reader
 	 * @param file
@@ -459,7 +459,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按是否追加的方式将读取器的内容以指定字符集编码格式写入到目标文件
+	 * 按是否追加的方式将读取器的内容以指定字符集编码格式写入到目标文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param reader
 	 * @param file
@@ -485,7 +485,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 将源文件/目录的内容拷贝到目标文件/目录
+	 * 将源文件/目录的内容拷贝到目标文件/目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param src 
 	 * @param dest
@@ -495,7 +495,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 将源文件/目录的内容拷贝到目标文件/目录
+	 * 将源文件/目录的内容拷贝到目标文件/目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param src
 	 * @param dest
@@ -506,7 +506,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按是否追加的方式将源文件内容拷贝到目标文件
+	 * 按是否追加的方式将源文件内容拷贝到目标文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param src
 	 * @param dest
@@ -518,7 +518,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按是否追加的方式将源文件内容拷贝到目标文件
+	 * 按是否追加的方式将源文件内容拷贝到目标文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param src
 	 * @param dest
@@ -570,7 +570,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 将URL的内容拷贝到本地文件
+	 * 将URL的内容拷贝到本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param file
@@ -582,7 +582,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 将URL的内容拷贝到本地文件
+	 * 将URL的内容拷贝到本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param file
@@ -596,7 +596,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 按是否追加的方式将源文件内容拷贝到目标文件
+	 * 按是否追加的方式将源文件内容拷贝到目标文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param src 源文件
 	 * @param dest 目标文件
@@ -627,7 +627,7 @@ public class FileUtils {
 	}
 		
 	/**
-	 * @description 按追加的方式将源输入流的内容拷贝到目标文件
+	 * 按追加的方式将源输入流的内容拷贝到目标文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param in
 	 * @param file
@@ -638,7 +638,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 以默认UTF-8字符集编码格式并按追加的方式将读取器的内容写入到目标文件
+	 * 以默认UTF-8字符集编码格式并按追加的方式将读取器的内容写入到目标文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param reader
 	 * @param file
@@ -649,7 +649,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 以指定的字符集编码格式并按追加的方式将读取器的内容写入到目标文件
+	 * 以指定的字符集编码格式并按追加的方式将读取器的内容写入到目标文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param reader
 	 * @param file
@@ -661,7 +661,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 将源文件/目录内容追加拷贝到目标文件/目录
+	 * 将源文件/目录内容追加拷贝到目标文件/目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param src
 	 * @param dest
@@ -672,7 +672,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 将源文件/目录内容追加拷贝到目标文件/目录
+	 * 将源文件/目录内容追加拷贝到目标文件/目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param src
 	 * @param dest
@@ -684,7 +684,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 删除文件/目录
+	 * 删除文件/目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param path
 	 */
@@ -694,7 +694,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 删除文件/目录
+	 * 删除文件/目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 */
@@ -703,7 +703,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 删除文件/目录
+	 * 删除文件/目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param filter 针对于源目录的文件过滤器
@@ -722,7 +722,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 获取文件/目录的大小(字节)
+	 * 获取文件/目录的大小(字节)
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @return
@@ -732,7 +732,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 获取文件/目录的大小(字节)
+	 * 获取文件/目录的大小(字节)
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param filter 针对于目录的文件过滤器
@@ -754,7 +754,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 累加目录的大小(字节)
+	 * 累加目录的大小(字节)
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dir
 	 * @param filter
@@ -773,7 +773,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 获取系统级的临时目录路径
+	 * 获取系统级的临时目录路径
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -782,7 +782,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * @description 获取系统级的临时目录
+	 * 获取系统级的临时目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

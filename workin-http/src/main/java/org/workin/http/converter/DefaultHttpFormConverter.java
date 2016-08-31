@@ -27,7 +27,7 @@ import org.workin.http.handler.DefaultFormHandler;
 import org.workin.http.handler.FormHandler;
 
 /**
- * @description 默认HTTP表单转换器实现类
+ * 默认HTTP表单转换器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

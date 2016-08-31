@@ -19,21 +19,21 @@
 package org.workin.serialization;
 
 /**
- * @description 日期序列器接口
+ * 日期序列器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface DateSerializer {
 	
 	/**
-	 * @description 获取日期格式
+	 * 获取日期格式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getDateFormat();
 	
 	/**
-	 * @description 设置日期格式
+	 * 设置日期格式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dateFormat
 	 */

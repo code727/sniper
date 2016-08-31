@@ -21,14 +21,14 @@ package org.workin.http;
 import java.util.Map;
 
 /**
- * @description 请求/响应头接口
+ * 请求/响应头接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface HttpHeader {
 	
 	/**
-	 * @description 设置指定名称的属性值
+	 * 设置指定名称的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param value
@@ -36,7 +36,7 @@ public interface HttpHeader {
 	public void setAttribute(String name, Object value);
 	
 	/**
-	 * @description 获取指定名称的属性值
+	 * 获取指定名称的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -44,7 +44,7 @@ public interface HttpHeader {
 	public Object getAttribute(String name);
 	
 	/**
-	 * @description 获取指定名称和类型的属性值
+	 * 获取指定名称和类型的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param value
@@ -53,20 +53,20 @@ public interface HttpHeader {
 	public <T> T getAttribute(String name, Class<T> clazz);
 	
 	/**
-	 * @description 删除指定名称的属性
+	 * 删除指定名称的属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 */
 	public void removeAttribute(String name);
 	
 	/**
-	 * @description 删除所有属性
+	 * 删除所有属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public void removeAll();
 	
 	/**
-	 * @description 获取所有的属性名-值映射集
+	 * 获取所有的属性名-值映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

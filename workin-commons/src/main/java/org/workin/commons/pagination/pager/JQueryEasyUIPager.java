@@ -20,14 +20,14 @@ package org.workin.commons.pagination.pager;
 
 
 /**
- * @description JQuery EasyUI分页器实现类
+ * JQuery EasyUI分页器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class JQueryEasyUIPager extends SimplePager {
 	
 	/**
-	 * @description 获取每页条数
+	 * 获取每页条数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -36,7 +36,7 @@ public class JQueryEasyUIPager extends SimplePager {
 	}
 
 	/**
-	 * @description 设置每页条数
+	 * 设置每页条数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param rows
 	 */
@@ -45,7 +45,7 @@ public class JQueryEasyUIPager extends SimplePager {
 	}
 
 	/**
-	 * @description 获取当前页数
+	 * 获取当前页数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -54,7 +54,7 @@ public class JQueryEasyUIPager extends SimplePager {
 	}
 
 	/**
-	 * @description 设置当前页数
+	 * 设置当前页数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param page
 	 */

@@ -21,7 +21,7 @@ package org.workin.spring.beans.propertyeditors;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 数字属性编辑器抽象类
+ * 数字属性编辑器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

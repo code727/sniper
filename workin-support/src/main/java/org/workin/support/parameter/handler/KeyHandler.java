@@ -21,14 +21,14 @@ package org.workin.support.parameter.handler;
 import java.util.Map;
 
 /**
- * @description 键处理器接口
+ * 键处理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface KeyHandler {
 	
 	/**
-	 * @description 将指定的键-值对PUT到映射集中
+	 * 将指定的键-值对PUT到映射集中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @param key
@@ -37,7 +37,7 @@ public interface KeyHandler {
 	public <K, V, K1 extends K, V1 extends V> void put(Map<K, V> map, K1 key, V1 value);
 	
 	/**
-	 * @description 批量PUT到源映射集中
+	 * 批量PUT到源映射集中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @param puted

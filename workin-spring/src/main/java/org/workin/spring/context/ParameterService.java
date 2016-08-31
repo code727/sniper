@@ -21,14 +21,14 @@ package org.workin.spring.context;
 import java.util.Map;
 
 /**
- * @description 参数服务接口
+ * 参数服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ParameterService {
 	
 	/**
-	 * @description 预加载
+	 * 预加载
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

@@ -28,7 +28,7 @@ import org.workin.commons.pagination.result.SimplePagingResult;
 import org.workin.commons.util.CollectionUtils;
 
 /**
- * @description 多功能详情分页器实现类。它既可以接收查询参数，
+ * 多功能详情分页器实现类。它既可以接收查询参数，
  * 				又可以根据查询参数返回比SimplePagingResult更为详细的分页结果。
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0

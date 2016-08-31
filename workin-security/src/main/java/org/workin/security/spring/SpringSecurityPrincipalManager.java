@@ -21,7 +21,7 @@ package org.workin.security.spring;
 import org.workin.security.manager.AnnotationPrincipalManager;
 
 /**
- * @description Spring安全管理器
+ * Spring安全管理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

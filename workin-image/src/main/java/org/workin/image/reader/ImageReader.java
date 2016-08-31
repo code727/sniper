@@ -28,14 +28,14 @@ import java.net.URL;
 import javax.imageio.stream.ImageInputStream;
 
 /**
- * @description 图片读取器接口
+ * 图片读取器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ImageReader {
 	
 	/**
-	 * @description 读取本地图片
+	 * 读取本地图片
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source
 	 * @return
@@ -44,7 +44,7 @@ public interface ImageReader {
 	public BufferedImage read(File source) throws IOException;
 	
 	/**
-	 * @description 读取输入流
+	 * 读取输入流
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source
 	 * @return
@@ -53,7 +53,7 @@ public interface ImageReader {
 	public BufferedImage read(InputStream source) throws IOException;
 	
 	/**
-	 * @description 读取图片输入流
+	 * 读取图片输入流
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source
 	 * @return
@@ -62,7 +62,7 @@ public interface ImageReader {
 	public BufferedImage read(ImageInputStream source) throws IOException;
 	
 	/**
-	 * @description 读取URL图片
+	 * 读取URL图片
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @return
@@ -71,7 +71,7 @@ public interface ImageReader {
 	public BufferedImage read(URL url) throws IOException;
 	
 	/**
-	 * @description 读取URI图片
+	 * 读取URI图片
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param uri
 	 * @return

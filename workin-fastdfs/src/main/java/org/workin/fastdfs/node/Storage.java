@@ -21,7 +21,7 @@ package org.workin.fastdfs.node;
 import org.workin.support.server.IntranetServer;
 
 /**
- * @description Storage接口
+ * Storage接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -25,7 +25,7 @@ import org.workin.commons.util.FileUtils;
 import org.workin.support.file.meta.AbstaractFileMeta;
 
 /**
- * @description MultipartFile源实现类
+ * MultipartFile源实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

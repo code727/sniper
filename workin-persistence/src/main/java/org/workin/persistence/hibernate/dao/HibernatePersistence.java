@@ -24,7 +24,7 @@ import java.util.List;
 import org.workin.persistence.jpa.dao.JpaPersistence;
 
 /**
- * @description Hibernate持久化接口
+ * Hibernate持久化接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -32,7 +32,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 		JpaPersistence<T, PK> { 
 	
 	/**
-	 * @description 根据名称持久化指定的实体
+	 * 根据名称持久化指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -40,7 +40,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	public void persist(String entityName, T entity);
 	
 	/**
-	 * @description 根据名称持久化指定的实体
+	 * 根据名称持久化指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entityList
@@ -48,7 +48,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	public void batchPersist(String entityName, List<T> entityList);
 	
 	/**
-	 * @description 根据名称合并指定的实体
+	 * 根据名称合并指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -57,7 +57,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	public T merge(String entityName, T entity);
 	
 	/**
-	 * @description 根据名称批量合并指定的实体
+	 * 根据名称批量合并指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entityList
@@ -66,7 +66,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	public List<T> batchMerge(String entityName, List<T> entityList);
 	
 	/**
-	 * @description 根据名称删除指定的实体
+	 * 根据名称删除指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -74,7 +74,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	public void remove(String entityName, T entity);
 
 	/** 
-	 * @description 根据名称批量删除指定的实体
+	 * 根据名称批量删除指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entityList 
@@ -82,14 +82,14 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	void batchRemove(String entityName, List<T> entityList);
 	
 	/**
-	 * @description 新增保存实体
+	 * 新增保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public PK save(T entity);
 	
 	/**
-	 * @description 根据名称新增保存实体
+	 * 根据名称新增保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -97,14 +97,14 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	public PK save(String entityName, T entity);
 	
 	/**
-	 * @description 更新保存实体
+	 * 更新保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void update(T entity);
 	
 	/**
-	 * @description 根据名称更新保存实体
+	 * 根据名称更新保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -112,14 +112,14 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	public void update(String entityName, T entity);
 	
 	/**
-	 * @description 新增/更新保存实体
+	 * 新增/更新保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void saveOrUpdate(T entity);
 	
 	/**
-	 * @description 根据名称新增/更新保存实体
+	 * 根据名称新增/更新保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity

@@ -33,7 +33,7 @@ import org.workin.support.encoder.RawURLEncoder;
 import org.workin.templet.message.formatter.MessageFormatter;
 
 /**
- * @description HttpClient访问器抽象类
+ * HttpClient访问器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -82,7 +82,7 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	}
 	
 	/**
-	 * @description 将表单对象加上请求参数后格式化成URL
+	 * 将表单对象加上请求参数后格式化成URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param form
 	 * @param name
@@ -97,7 +97,7 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	}
 	
 	/**
-	 * @description 执行指定名称对应的表单的请求方法
+	 * 执行指定名称对应的表单的请求方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param param
@@ -131,7 +131,7 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	}
 	
 	/**
-	 * @description 执行HTTP GET方法后返回结果
+	 * 执行HTTP GET方法后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param param
@@ -141,7 +141,7 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	protected abstract <T> T doGetRequest(String name, Object param) throws Exception;
 	
 	/**
-	 * @description 执行HTTP POST方法后返回结果
+	 * 执行HTTP POST方法后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param param
@@ -151,7 +151,7 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	protected abstract <T> T doPostRequest(String name, Object param) throws Exception;
 	
 	/**
-	 * @description 执行HTTP PUT方法后返回结果
+	 * 执行HTTP PUT方法后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param param
@@ -161,7 +161,7 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	protected abstract <T> T doPutRequest(String name, Object param) throws Exception;
 	
 	/**
-	 * @description 执行HTTP DELETE方法后返回结果
+	 * 执行HTTP DELETE方法后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param param

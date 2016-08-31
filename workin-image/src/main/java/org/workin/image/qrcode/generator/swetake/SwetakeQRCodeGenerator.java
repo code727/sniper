@@ -31,7 +31,7 @@ import org.workin.image.qrcode.generator.AbstractQRCodeGenerator;
 import com.swetake.util.Qrcode;
 
 /**
- * @description Swetake二维码生成器实现类
+ * Swetake二维码生成器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -47,7 +47,7 @@ public class SwetakeQRCodeGenerator extends AbstractQRCodeGenerator {
 	}
 	
 	/**
-	 * @description 获取com.swetake.util.Qrcode对象
+	 * 获取com.swetake.util.Qrcode对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param qrCode
 	 * @return
@@ -80,7 +80,7 @@ public class SwetakeQRCodeGenerator extends AbstractQRCodeGenerator {
 	}
 	
 	/**
-	 * @description 绘制二维码原图
+	 * 绘制二维码原图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param calQrcode
 	 * @param qrCode

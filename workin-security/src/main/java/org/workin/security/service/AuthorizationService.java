@@ -23,20 +23,20 @@ import java.util.List;
 import org.workin.security.AuthorizationModel;
 
 /**
- * @description 授权服务接口
+ * 授权服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface AuthorizationService {
 
 	/** 
-	 * @description 加载角色授权规则列表
+	 * 加载角色授权规则列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>  
 	 */
 	public List<AuthorizationModel> loadRoleRules();
 	
 	/**
-	 * @description 加载权限授权规则列表
+	 * 加载权限授权规则列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

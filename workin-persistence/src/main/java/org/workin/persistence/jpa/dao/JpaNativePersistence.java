@@ -21,14 +21,14 @@ package org.workin.persistence.jpa.dao;
 import java.util.Map;
 
 /**
- * @description JPA本地持久化接口
+ * JPA本地持久化接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface JpaNativePersistence {
 	
 	/**
-	 * @description 执行本地持久化SQL语句后返回受影响的行数
+	 * 执行本地持久化SQL语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @return
@@ -36,7 +36,7 @@ public interface JpaNativePersistence {
 	public int executeByNativeQuery(String sql);
 	
 	/**
-	 * @description 执行带占位符(?)参数的本地持久化SQL语句后返回受影响的行数
+	 * 执行带占位符(?)参数的本地持久化SQL语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @param values
@@ -45,7 +45,7 @@ public interface JpaNativePersistence {
 	public int executeByNativeQuery(String sql, Object[] values);
 
 	/**
-	 * @description 执行带命名(=:name)参数的本地持久化SQL语句后返回受影响的行数
+	 * 执行带命名(=:name)参数的本地持久化SQL语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sql
 	 * @param paramMap

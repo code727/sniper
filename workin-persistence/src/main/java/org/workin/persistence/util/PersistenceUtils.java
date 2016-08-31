@@ -30,7 +30,7 @@ import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 持久化辅助工具类
+ * 持久化辅助工具类
  * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -39,7 +39,7 @@ public class PersistenceUtils {
 	private static final Logger logger = LoggerFactory.getLogger(PersistenceUtils.class);
 	
 	/**
-	 * @description 构建指定类型的查询语句
+	 * 构建指定类型的查询语句
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
@@ -61,7 +61,7 @@ public class PersistenceUtils {
 	}
 	
 	/**
-	 * @description 构建指定类型带属性占位符(?)条件的查询语句，属性条件之间为AND关系
+	 * 构建指定类型带属性占位符(?)条件的查询语句，属性条件之间为AND关系
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
@@ -88,7 +88,7 @@ public class PersistenceUtils {
 	}
 	
 	/**
-	 * @description 构建指定类型带属性命名(=:name)条件的查询语句，属性条件之间为AND关系
+	 * 构建指定类型带属性命名(=:name)条件的查询语句，属性条件之间为AND关系
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
@@ -116,7 +116,7 @@ public class PersistenceUtils {
 	}
 	
 	/**
-	 * @description 构建指定类型带属性命名(=:name)条件的查询语句，属性条件之间为AND关系
+	 * 构建指定类型带属性命名(=:name)条件的查询语句，属性条件之间为AND关系
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
@@ -144,7 +144,7 @@ public class PersistenceUtils {
 	}
 	
 	/**
-	 * @description 构建指定类型带属性命名(=:name)条件的查询语句，属性条件之间为AND关系
+	 * 构建指定类型带属性命名(=:name)条件的查询语句，属性条件之间为AND关系
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
@@ -158,7 +158,7 @@ public class PersistenceUtils {
 	}
 	
 	/**
-	 * @description 根据属性过滤器链来构建指定类型的查询语句
+	 * 根据属性过滤器链来构建指定类型的查询语句
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
@@ -175,7 +175,7 @@ public class PersistenceUtils {
 	}
 	
 	/**
-	 * @description 根据属性过滤器列表来构建指定类型的查询语句
+	 * 根据属性过滤器列表来构建指定类型的查询语句
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型

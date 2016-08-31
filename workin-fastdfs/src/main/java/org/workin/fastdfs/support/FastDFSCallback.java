@@ -21,14 +21,14 @@ package org.workin.fastdfs.support;
 import org.csource.fastdfs.StorageClient1;
 
 /**
- * @description FastDFS回调接口
+ * FastDFS回调接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface FastDFSCallback<T> {
 	
 	/**
-	 * @description 执行FastDFS回调
+	 * 执行FastDFS回调
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param storageClient
 	 * @return

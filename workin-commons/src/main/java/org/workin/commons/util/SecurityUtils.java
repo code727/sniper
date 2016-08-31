@@ -23,7 +23,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * @description 安全工具类
+ * 安全工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -42,7 +42,7 @@ public class SecurityUtils {
 	public static final String RSA_ALGORITHM_NAME = "RSA";
 	
 	/**
-	 * @description 按指定算法生成明文的摘要
+	 * 按指定算法生成明文的摘要
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext 明文
 	 * @param algorithm 摘要算法名称
@@ -53,7 +53,7 @@ public class SecurityUtils {
 	}
 	
 	/**
-	 * @description 按指定的字符集编码和算法生成明文的摘要
+	 * 按指定的字符集编码和算法生成明文的摘要
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext
 	 * @param algorithm
@@ -86,7 +86,7 @@ public class SecurityUtils {
 	}
 	
 	/**
-	 * @description 生成32位全小写MD5摘要信息
+	 * 生成32位全小写MD5摘要信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext 明文
 	 * @return
@@ -96,7 +96,7 @@ public class SecurityUtils {
 	}
 	
 	/**
-	 * @description 生成32位全小写并按指定字符集编码后的MD5摘要信息
+	 * 生成32位全小写并按指定字符集编码后的MD5摘要信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext
 	 * @param charsetName
@@ -107,7 +107,7 @@ public class SecurityUtils {
 	}
 	
 	/**
-	 * @description 生成32位全大写MD5摘要信息
+	 * 生成32位全大写MD5摘要信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext
 	 * @return
@@ -117,7 +117,7 @@ public class SecurityUtils {
 	}
 	
 	/**
-	 * @description 生成32位全大写并按指定字符集编码后的MD5摘要信息
+	 * 生成32位全大写并按指定字符集编码后的MD5摘要信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext
 	 * @param charsetName
@@ -128,7 +128,7 @@ public class SecurityUtils {
 	}
 	
 	/**
-	 * @description 选择是否按全大写的方式生成32位MD5摘要信息
+	 * 选择是否按全大写的方式生成32位MD5摘要信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext
 	 * @param upperCase
@@ -139,7 +139,7 @@ public class SecurityUtils {
 	}
 	
 	/**
-	 * @description 选择是否按全大写的方式生成指定字符集编码后的32位MD5摘要信息
+	 * 选择是否按全大写的方式生成指定字符集编码后的32位MD5摘要信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext
 	 * @param charsetName

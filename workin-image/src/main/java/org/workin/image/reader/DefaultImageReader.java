@@ -29,7 +29,7 @@ import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 
 /**
- * @description 图片读取器默认实现类
+ * 图片读取器默认实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -75,7 +75,7 @@ public class DefaultImageReader implements ImageReader {
 	}
 	
 	/**
-	 * @description 检查原图片
+	 * 检查原图片
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param src
 	 * @throws IOException

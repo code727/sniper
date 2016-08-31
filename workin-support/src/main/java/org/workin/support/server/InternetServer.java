@@ -19,35 +19,35 @@
 package org.workin.support.server;
 
 /**
- * @description 互联网服务器接口
+ * 互联网服务器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface InternetServer extends IntranetServer {
 		
 	/**
-	 * @description 设置互联网服务地址
+	 * 设置互联网服务地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param internetHost
 	 */
     public void setInternetHost(String internetHost);
 	
     /**
-     * @description 获取互联网服务地址
+     * 获取互联网服务地址
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
      * @return
      */
 	public String getInternetHost();
 
 	/**
-	 * @description 设置互联网服务端口
+	 * 设置互联网服务端口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param internetPort
 	 */
 	public void setInternetPort(int internetPort);
 	
 	/**
-	 * @description 获取互联网服务端口
+	 * 获取互联网服务端口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param extPort
 	 * @return

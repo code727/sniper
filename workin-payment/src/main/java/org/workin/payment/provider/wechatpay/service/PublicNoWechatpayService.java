@@ -28,7 +28,7 @@ import org.workin.payment.WebPaymentRequest;
 import org.workin.support.signature.Signature;
 
 /**
- * @description 微信公众号支付服务实现类
+ * 微信公众号支付服务实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

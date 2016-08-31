@@ -19,35 +19,35 @@
 package org.workin.support.file.filter;
 
 /**
- * @description Workin框架本地文件字符串值过滤器
+ * Workin框架本地文件字符串值过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface WorkinFileStringFilter extends WorkinFileFilter {
 	
 	/**
-	 * @description 获取字符串过滤值
+	 * 获取字符串过滤值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getFilterValue();
 	
 	/**
-	 * @description 设置字符串过滤值
+	 * 设置字符串过滤值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param filterValue
 	 */
 	public void setFilterValue(String filterValue);
 	
 	/**
-	 * @description 是否忽略大小写
+	 * 是否忽略大小写
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @return 
 	 */
 	public boolean isIgnoreCase();
 	
 	/**
-	 * @description 设置是否忽略大小写
+	 * 设置是否忽略大小写
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param ignoreCase 
 	 */

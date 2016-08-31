@@ -21,7 +21,7 @@ package org.workin.payment.provider.wechatpay.parser;
 import org.workin.payment.PaymentParser;
 
 /**
- * @description 微信支付解析器
+ * 微信支付解析器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

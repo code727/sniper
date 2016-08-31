@@ -25,7 +25,7 @@ import org.workin.serialization.Serializer;
 import org.workin.support.codec.CodecSupport;
 
 /**
- * @description 字符串序列化器实现类
+ * 字符串序列化器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

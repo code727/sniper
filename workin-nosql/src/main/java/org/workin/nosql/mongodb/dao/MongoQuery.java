@@ -22,14 +22,14 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @description MongoDB查询接口
+ * MongoDB查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface MongoQuery<T, PK extends Serializable> {
 	
 	/**
-	 * @description 根据主键查询实体对象
+	 * 根据主键查询实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @return
@@ -37,7 +37,7 @@ public interface MongoQuery<T, PK extends Serializable> {
 	public T findById(PK primaryKey);
 	
 	/**
-	 * @description 根据主键查询目标集合中的实体对象
+	 * 根据主键查询目标集合中的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @param collection
@@ -46,7 +46,7 @@ public interface MongoQuery<T, PK extends Serializable> {
 	public T findById(PK primaryKey, String collection);
 	
 	/**
-	 * @description 查询出当前集合中所有的数据对象
+	 * 查询出当前集合中所有的数据对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

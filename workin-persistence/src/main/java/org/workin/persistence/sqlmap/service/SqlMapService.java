@@ -22,14 +22,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @description SQL映射持久化服务接口
+ * SQL映射持久化服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface SqlMapService<T> {
 	
 	/**
-	 * @description 执行statement对应的insert语句后返回结果
+	 * 执行statement对应的insert语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 * @return
@@ -37,7 +37,7 @@ public interface SqlMapService<T> {
 	public Object insert(String statement);
 	
 	/**
-	 * @description 执行statement对应的insert语句后返回结果
+	 * 执行statement对应的insert语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param parameter
@@ -46,7 +46,7 @@ public interface SqlMapService<T> {
 	public Object insert(String statement, Object parameter);
 	
 	/**
-	 * @description 执行statement对应的update语句后返回受影响的行数
+	 * 执行statement对应的update语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 * @return
@@ -54,7 +54,7 @@ public interface SqlMapService<T> {
 	public int update(String statement);
 	
 	/**
-	 * @description 执行statement对应的update语句后返回受影响的行数
+	 * 执行statement对应的update语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param parameter
@@ -63,14 +63,14 @@ public interface SqlMapService<T> {
 	public int update(String statement, Object parameter);
 	
 	/**
-	 * @description 执行statement对应的delete语句后返回受影响的行数
+	 * 执行statement对应的delete语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 */
 	public int delete(String statement);
 	
 	/**
-	 * @description 执行statement对应的delete语句后返回受影响的行数
+	 * 执行statement对应的delete语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param parameter
@@ -78,7 +78,7 @@ public interface SqlMapService<T> {
 	public int delete(String statement, Object parameter);
 	
 	/**
-	 * @description 执行id对应的count语句后返回结果
+	 * 执行id对应的count语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @return
@@ -86,7 +86,7 @@ public interface SqlMapService<T> {
 	public long countBySqlMap(String statement);
 	
 	/**
-	 * @description 执行statement对应的count语句后返回结果
+	 * 执行statement对应的count语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param parameter
@@ -95,7 +95,7 @@ public interface SqlMapService<T> {
 	public long countBySqlMap(String statement, Object parameter);
 	
 	/**
-	 * @description 执行statement对应的查询语句后返回当前类型唯一的实体对象
+	 * 执行statement对应的查询语句后返回当前类型唯一的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @return
@@ -103,7 +103,7 @@ public interface SqlMapService<T> {
 	public T queryUniqueBySqlMap(String statement);
 	
 	/**
-	 * @description 执行statement对应的查询语句后返回当前类型的实体对象
+	 * 执行statement对应的查询语句后返回当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param parameter
@@ -112,7 +112,7 @@ public interface SqlMapService<T> {
 	public T queryUniqueBySqlMap(String statement, Object parameter);
 	
 	/**
-	 * @description 执行statement对应的查询语句后返回指定类型的实体对象
+	 * 执行statement对应的查询语句后返回指定类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param statement
@@ -121,7 +121,7 @@ public interface SqlMapService<T> {
 	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String statement);
 	
 	/**
-	 * @description 执行statement对应的查询语句后返回指定类型的唯一结果
+	 * 执行statement对应的查询语句后返回指定类型的唯一结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param statement
@@ -131,7 +131,7 @@ public interface SqlMapService<T> {
 	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String statement, Object parameter);
 	
 	/**
-	 * @description 执行statement对应的查询语句后返回当前类型的实体对象列表
+	 * 执行statement对应的查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @return
@@ -139,7 +139,7 @@ public interface SqlMapService<T> {
 	public List<T> queryListBySqlMap(String statement);
 	
 	/**
-	 * @description 执行statement对应的查询语句后返回当前类型的实体对象列表
+	 * 执行statement对应的查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param parameter
@@ -148,7 +148,7 @@ public interface SqlMapService<T> {
 	public List<T> queryListBySqlMap(String statement, Object parameter);
 		
 	/**
-	 * @description 执行statement对应的查询语句后返回指定类型的实体对象列表
+	 * 执行statement对应的查询语句后返回指定类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param statement
@@ -157,7 +157,7 @@ public interface SqlMapService<T> {
 	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String statement);
 	
 	/**
-	 * @description 执行statement对应的查询语句后返回指定类型的实体对象列表
+	 * 执行statement对应的查询语句后返回指定类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param statement
@@ -167,7 +167,7 @@ public interface SqlMapService<T> {
 	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String statement, Object parameter);
 	
 	/**
-	 * @description 执行statement对应的查询语句后返回结果映射集
+	 * 执行statement对应的查询语句后返回结果映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement 
 	 * @return
@@ -175,7 +175,7 @@ public interface SqlMapService<T> {
 	public <K,V> Map<K, V> queryMapBySqlMap(String statement);
 	
 	/**
-	 * @description 执行statement对应的查询语句后返回结果映射集
+	 * 执行statement对应的查询语句后返回结果映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param parameter
@@ -184,7 +184,7 @@ public interface SqlMapService<T> {
 	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter);
 	
 	/**
-	 * @description 执行statement对应的查询语句后返回结果映射集
+	 * 执行statement对应的查询语句后返回结果映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param keyProperty 结果集的键值
@@ -193,7 +193,7 @@ public interface SqlMapService<T> {
 	public <K,V> Map<K, V> queryMapBySqlMap(String statement, String keyProperty);
 	
 	/**
-	 * @description 执行statement对应的查询语句后返回结果映射集
+	 * 执行statement对应的查询语句后返回结果映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param parameter

@@ -22,14 +22,14 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * @description HTTP请求发送器接口
+ * HTTP请求发送器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface HttpSender {
 	
 	/**
-	 * @description 执行指定名称且未带参数的HTTP表单请求，并返回响应处理结果
+	 * 执行指定名称且未带参数的HTTP表单请求，并返回响应处理结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -38,7 +38,7 @@ public interface HttpSender {
 	public <T> T request(String name) throws Exception;
 	
 	/**
-	 * @description 执行指定名称且带参数的HTTP表单请求，并返回响应处理结果
+	 * 执行指定名称且带参数的HTTP表单请求，并返回响应处理结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param parameters
@@ -48,7 +48,7 @@ public interface HttpSender {
 	public <T> T request(String name, Map<String, Object> parameters) throws Exception;
 	
 	/**
-	 * @description 执行指定名称且带参数的HTTP表单请求，并返回响应处理结果
+	 * 执行指定名称且带参数的HTTP表单请求，并返回响应处理结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param parameter

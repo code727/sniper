@@ -23,14 +23,14 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * @description 对象工具类
+ * 对象工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class ObjectUtils {
 	
 	/**
-	 * @description 判断指定的对象是否为空
+	 * 判断指定的对象是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -52,7 +52,7 @@ public class ObjectUtils {
 	}
 	
 	/**
-	 * @description 判断指定的对象是否不为空
+	 * 判断指定的对象是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -62,7 +62,7 @@ public class ObjectUtils {
 	}
 	
 	/**
-	 * @description 判断两个对象是否相等
+	 * 判断两个对象是否相等
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj1
 	 * @param obj2
@@ -76,7 +76,7 @@ public class ObjectUtils {
 	}
 	
 	/**
-	 * @description 判断两个对象的字符串是否相等
+	 * 判断两个对象的字符串是否相等
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj1
 	 * @param obj2
@@ -90,7 +90,7 @@ public class ObjectUtils {
 	}
 	
 	/**
-	 * @description 调用对象的toString()方法
+	 * 调用对象的toString()方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -100,7 +100,7 @@ public class ObjectUtils {
 	}
 	
 	/**
-	 * @description 调用对象的toString()方法，若对象为Null，则返回空字符串
+	 * 调用对象的toString()方法，若对象为Null，则返回空字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -110,7 +110,7 @@ public class ObjectUtils {
 	}
 	
 	/**
-	 * @description 获取对象元素的个数
+	 * 获取对象元素的个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return

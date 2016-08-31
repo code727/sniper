@@ -26,14 +26,14 @@ import org.hibernate.LockOptions;
 import org.workin.persistence.jpa.service.JpaCrudService;
 
 /**
- * @description 具备基本增删改查功能的Hibernate持久化服务接口
+ * 具备基本增删改查功能的Hibernate持久化服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface HibernateCrudService<T, PK extends Serializable> extends JpaCrudService<T, PK> {
 	
 	/**
-	 * @description 根据名称持久化指定的实体
+	 * 根据名称持久化指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -41,7 +41,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public void persist(String entityName, T entity);
 	
 	/**
-	 * @description 根据名称持久化指定的实体
+	 * 根据名称持久化指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entityList
@@ -49,7 +49,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public void batchPersist(String entityName, List<T> entityList);
 	
 	/**
-	 * @description 根据名称合并指定的实体
+	 * 根据名称合并指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -58,7 +58,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T merge(String entityName, T entity);
 	
 	/**
-	 * @description 根据名称批量合并指定的实体
+	 * 根据名称批量合并指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entityList
@@ -67,7 +67,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public List<T> batchMerge(String entityName, List<T> entityList);
 	
 	/**
-	 * @description 根据名称删除指定的实体
+	 * 根据名称删除指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -75,7 +75,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public void remove(String entityName, T entity);
 
 	/** 
-	 * @description 根据名称批量删除指定的实体
+	 * 根据名称批量删除指定的实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entityList 
@@ -83,14 +83,14 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	void batchRemove(String entityName, List<T> entityList);
 	
 	/**
-	 * @description 新增保存实体
+	 * 新增保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public PK save(T entity);
 	
 	/**
-	 * @description 根据名称新增保存实体
+	 * 根据名称新增保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -98,14 +98,14 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public PK save(String entityName, T entity);
 	
 	/**
-	 * @description 更新保存实体
+	 * 更新保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void update(T entity);
 	
 	/**
-	 * @description 根据名称更新保存实体
+	 * 根据名称更新保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -113,14 +113,14 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public void update(String entityName, T entity);
 	
 	/**
-	 * @description 新增/更新保存实体
+	 * 新增/更新保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void saveOrUpdate(T entity);
 	
 	/**
-	 * @description 根据名称新增/更新保存实体
+	 * 根据名称新增/更新保存实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param entity
@@ -128,7 +128,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public void saveOrUpdate(String entityName, T entity);
 	
 	/**
-	 * @description 根据主键ID加载当前类型的实体对象
+	 * 根据主键ID加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @return
@@ -136,7 +136,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T loadById(PK primaryKey);
 	
 	/**
-	 * @description 根据主键ID按指定的锁模式锁住并加载当前类型的实体对象
+	 * 根据主键ID按指定的锁模式锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @param lockMode
@@ -145,7 +145,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T loadById(PK primaryKey, LockMode lockMode);
 	
 	/**
-	 * @description 根据主键ID按指定的锁选项锁住并加载当前类型的实体对象
+	 * 根据主键ID按指定的锁选项锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @param lockOptions
@@ -154,7 +154,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T loadById(PK primaryKey, LockOptions lockOptions);
 	
 	/**
-	 * @description 根据名称和主键ID加载当前类型的实体对象
+	 * 根据名称和主键ID加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey
@@ -163,7 +163,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T loadById(String entityName, PK primaryKey);
 	
 	/**
-	 * @description 根据名称和主键ID按指定的锁模式锁住并加载当前类型的实体对象
+	 * 根据名称和主键ID按指定的锁模式锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey
@@ -173,7 +173,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T loadById(String entityName, PK primaryKey, LockMode lockMode);
 	
 	/**
-	 * @description 根据名称和主键ID按指定的锁选项锁住并加载当前类型的实体对象
+	 * 根据名称和主键ID按指定的锁选项锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey
@@ -183,21 +183,21 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T loadById(String entityName, PK primaryKey, LockOptions lockOptions);
 	
 	/**
-	 * @description 加载当前类型的所有实体对象
+	 * 加载当前类型的所有实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<T> loadAll();
 	
 	/**
-	 * @description 加载当前类型所有不重复的实体对象
+	 * 加载当前类型所有不重复的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<T> loadAllDistinct();
 	
 	/**
-	 * @description 根据主键ID获取当前类型的实体对象
+	 * 根据主键ID获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @return
@@ -205,7 +205,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T getById(PK primaryKey);
 	
 	/**
-	 * @description 根据主键ID按指定的锁模式锁住并获取当前类型的实体对象
+	 * 根据主键ID按指定的锁模式锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @param lockMode
@@ -214,7 +214,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T getById(PK primaryKey, LockMode lockMode);
 	
 	/**
-	 * @description 根据主键ID按指定的锁选项锁住并获取当前类型的实体对象
+	 * 根据主键ID按指定的锁选项锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @param lockOptions
@@ -223,7 +223,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T getById(PK primaryKey, LockOptions lockOptions);
 	
 	/**
-	 * @description 根据名称和主键ID获取当前类型的实体对象
+	 * 根据名称和主键ID获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey
@@ -232,7 +232,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T getById(String entityName, PK primaryKey);
 	
 	/**
-	 * @description 根据名称和主键ID按指定的锁模式锁住并获取当前类型的实体对象
+	 * 根据名称和主键ID按指定的锁模式锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey
@@ -242,7 +242,7 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	public T getById(String entityName, PK primaryKey, LockMode lockMode);
 	
 	/**
-	 * @description 根据名称和主键ID按指定的锁选项锁住并获取当前类型的实体对象
+	 * 根据名称和主键ID按指定的锁选项锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
 	 * @param primaryKey

@@ -23,14 +23,14 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 /**
- * @description Shiro工具类
+ * Shiro工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class ShiroUtils {
 	
 	/**
-	 * @description 获取当前认证主题
+	 * 获取当前认证主题
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -39,7 +39,7 @@ public class ShiroUtils {
 	}
 	
 	/**
-	 * @description 获取当前认证通过后的会话对象
+	 * 获取当前认证通过后的会话对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -48,7 +48,7 @@ public class ShiroUtils {
 	}
 	
 	/**
-	 * @description 在当前认证通过后的会话对象中设置属性
+	 * 在当前认证通过后的会话对象中设置属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
@@ -58,7 +58,7 @@ public class ShiroUtils {
 	}
 	
 	/**
-	 * @description 获取当前用户
+	 * 获取当前用户
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public class ShiroUtils {
 	}
 	
 	/**
-	 * @description 获取当前用户
+	 * 获取当前用户
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param userType
 	 * @return
@@ -80,7 +80,7 @@ public class ShiroUtils {
 	}
 	
 	/**
-	 * @description 注销
+	 * 注销
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public static void logout() {

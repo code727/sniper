@@ -30,7 +30,7 @@ import org.workin.serialization.json.codehaus.JacksonSerializer;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
 /**
- * @description Jackson序列化器单元测试类
+ * Jackson序列化器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

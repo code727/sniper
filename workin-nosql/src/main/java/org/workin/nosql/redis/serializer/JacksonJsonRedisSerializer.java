@@ -28,7 +28,7 @@ import org.springframework.data.redis.serializer.SerializationException;
 import org.workin.commons.util.ArrayUtils;
 
 /**
- * @description JOSN格式的redis序列化器
+ * JOSN格式的redis序列化器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  * @see org.workin.serialization.json.codehaus.JacksonSerializer
@@ -52,7 +52,7 @@ public class JacksonJsonRedisSerializer<T> implements RedisSerializer<T> {
 	}
 
 	/**
-	 * @description 将指定的对象序列化成字节数组
+	 * 将指定的对象序列化成字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param t
 	 * @return
@@ -71,7 +71,7 @@ public class JacksonJsonRedisSerializer<T> implements RedisSerializer<T> {
 	}
 
 	/**
-	 * @description 将指定的字节数组反序列化成对象
+	 * 将指定的字节数组反序列化成对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bytes
 	 * @return

@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 /**
- * @description 基于JUnit4的Spring单元测试类
+ * 基于JUnit4的Spring单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

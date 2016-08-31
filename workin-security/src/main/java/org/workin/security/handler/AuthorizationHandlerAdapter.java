@@ -22,7 +22,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.security.service.AuthorizationService;
 
 /**
- * @description 授权处理适配器实现类
+ * 授权处理适配器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -32,7 +32,7 @@ import org.workin.support.codec.CodecSupport;
 import sun.security.action.GetPropertyAction;
 
 /**
- * @description RFC-2396标准的URL编码器实现类
+ * RFC-2396标准的URL编码器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

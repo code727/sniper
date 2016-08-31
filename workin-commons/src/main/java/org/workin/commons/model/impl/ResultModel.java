@@ -21,7 +21,7 @@ package org.workin.commons.model.impl;
 import org.workin.commons.model.GenericsDataModel;
 
 /**
- * @description 结果对象模型，同时包含状态码、消息和数据三部分
+ * 结果对象模型，同时包含状态码、消息和数据三部分
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

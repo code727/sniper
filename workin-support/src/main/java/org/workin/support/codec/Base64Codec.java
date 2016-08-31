@@ -21,7 +21,7 @@ package org.workin.support.codec;
 import org.workin.commons.util.Base64Utils;
 
 /**
- * @description Base64编解码处理器
+ * Base64编解码处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

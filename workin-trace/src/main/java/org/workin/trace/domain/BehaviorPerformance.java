@@ -24,7 +24,7 @@ import java.util.Date;
 import org.workin.commons.entity.number.IdEntity;
 
 /**
- * @description 性能记录对象
+ * 性能记录对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

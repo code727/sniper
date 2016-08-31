@@ -27,7 +27,7 @@ import org.workin.support.codec.Base64Codec;
 import org.workin.support.codec.Codec;
 
 /**
- * @description 非对称算法抽象类
+ * 非对称算法抽象类
  * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -83,7 +83,7 @@ public abstract class AbstractAsymmetricAlgorithm extends
 	}
 
 	/**
-	 * @description 获取公钥的字节数组
+	 * 获取公钥的字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @return
 	 */

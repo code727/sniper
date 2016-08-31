@@ -32,7 +32,7 @@ import org.workin.persistence.util.PropertyFilterChain;
 import org.workin.test.junit.BaseTestCase;
 
 /**
- * @description 持久化属性过滤器单元测试类
+ * 持久化属性过滤器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

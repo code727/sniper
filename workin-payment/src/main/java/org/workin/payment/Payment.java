@@ -24,105 +24,105 @@ import java.util.Date;
 import org.workin.commons.entity.number.Idable;
 
 /**
- * @description 支付记录实体
+ * 支付记录实体
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Payment extends Idable {
 
 	/**
-	 * @description 获取订单编号
+	 * 获取订单编号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getOrderId();
 
 	/**
-	 * @description 设置订单编号
+	 * 设置订单编号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param orderId
 	 */
 	public void setOrderId(String orderId);
 
 	/**
-	 * @description 获取第三方订单编号
+	 * 获取第三方订单编号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getThirdOrderId();
 
 	/**
-	 * @description 设置第三方订单编号
+	 * 设置第三方订单编号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param thirdOrderId
 	 */
 	public void setThirdOrderId(String thirdOrderId);
 
 	/**
-	 * @description 获取支付金额
+	 * 获取支付金额
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public BigDecimal getAmount();
 
 	/**
-	 * @description 设置支付金额
+	 * 设置支付金额
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param amount
 	 */
 	public void setAmount(BigDecimal amount);
 
 	/**
-	 * @description 获取实际支付金额
+	 * 获取实际支付金额
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public BigDecimal getPayAmount();
 
 	/**
-	 * @description 设置实际支付金额
+	 * 设置实际支付金额
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param payAmount
 	 */
 	public void setPayAmount(BigDecimal payAmount);
 
 	/**
-	 * @description 获取支付时间
+	 * 获取支付时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Date getPayTime();
 
 	/**
-	 * @description 设置支付时间
+	 * 设置支付时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param payTime
 	 */
 	public void setPayTime(Date payTime);
 
 	/**
-	 * @description 获取支付状态
+	 * 获取支付状态
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public int getStatus();
 
 	/**
-	 * @description 设置支付状态
+	 * 设置支付状态
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param status
 	 */
 	public void setStatus(int status);
 
 	/**
-	 * @description 获取支付结果信息
+	 * 获取支付结果信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getMessage();
 
 	/**
-	 * @description 设置支付结果信息
+	 * 设置支付结果信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param message
 	 */

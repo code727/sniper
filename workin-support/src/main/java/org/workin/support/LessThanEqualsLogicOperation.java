@@ -21,7 +21,7 @@ package org.workin.support;
 import java.math.BigDecimal;
 
 /**
- * @description 小于等于逻辑运算操作
+ * 小于等于逻辑运算操作
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

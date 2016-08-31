@@ -19,14 +19,14 @@
 package org.workin.commons.enums;
 
 /**
- * @description 可嵌套的枚举对象接口
+ * 可嵌套的枚举对象接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface NestableEnums<K1, K2, V2> extends Enums<K1, Enums<K2, V2>>{
 	
 	/**
-	 * @description 获取被嵌套枚举对象的键
+	 * 获取被嵌套枚举对象的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -34,7 +34,7 @@ public interface NestableEnums<K1, K2, V2> extends Enums<K1, Enums<K2, V2>>{
 	public K2 getNestedKey(K1 key);
 	
 	/**
-	 * @description 获取被嵌套枚举对象的值
+	 * 获取被嵌套枚举对象的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return

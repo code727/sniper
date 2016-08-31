@@ -19,7 +19,7 @@
 package org.workin.jms.core;
 
 /**
- * @description JMS生产/消费服务接口
+ * JMS生产/消费服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

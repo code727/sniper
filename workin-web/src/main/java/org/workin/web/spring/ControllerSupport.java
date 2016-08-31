@@ -42,7 +42,7 @@ import org.workin.web.ServletAware;
 import org.workin.web.WebApplicationContextMessageResolver;
 
 /**
- * @description SpringMVC控制器抽象类
+ * SpringMVC控制器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -124,7 +124,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	}
 	
 	/**
-	 * @description 设置消息模型对象中的本地化消息
+	 * 设置消息模型对象中的本地化消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param result
 	 */
@@ -133,7 +133,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	}
 	
 	/**
-	 * @description 设置消息模型对象中的本地参数化消息
+	 * 设置消息模型对象中的本地参数化消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param model
 	 * @param params
@@ -145,7 +145,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	}
 	
 	/**
-	 * @description 设置可编码的对象模型中的本地消息
+	 * 设置可编码的对象模型中的本地消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param model
 	 */
@@ -154,7 +154,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	}
 	
 	/**
-	 * @description 设置可编码的对象模型中的本地参数化消息
+	 * 设置可编码的对象模型中的本地参数化消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param model
 	 * @param params
@@ -165,7 +165,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	}
 	
 	/**
-	 * @description 在绑定表单之前，统一的进行初始化绑定操作
+	 * 在绑定表单之前，统一的进行初始化绑定操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param binder
@@ -180,7 +180,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
     } 
 	
 	/**
-	 * @description 覆盖默认的初始化绑定操作
+	 * 覆盖默认的初始化绑定操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param binder

@@ -22,14 +22,14 @@ import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.payment.Payment;
 
 /**
- * @description 支付服务接口
+ * 支付服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface PaymentBaseService {
 	
 	/**
-	 * @description 保存支付记录
+	 * 保存支付记录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param payment
 	 * @return
@@ -38,7 +38,7 @@ public interface PaymentBaseService {
 	public CodeMessageModel save(Payment payment) throws Exception;
 	
 	/**
-	 * @description 根据订单编号查询支付记录
+	 * 根据订单编号查询支付记录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param orderId
 	 * @return
@@ -47,7 +47,7 @@ public interface PaymentBaseService {
 	public Payment findByOrderId(String orderId) throws Exception;
 	
 	/**
-	 * @description 更新支付记录
+	 * 更新支付记录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param payment
 	 * @return

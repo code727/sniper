@@ -25,7 +25,7 @@ import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.MapUtils;
 
 /**
- * @description HTTP请求头实现类
+ * HTTP请求头实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

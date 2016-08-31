@@ -27,7 +27,7 @@ import org.workin.commons.util.CodecUtils;
 import org.workin.image.qrcode.parser.QRCodeParser;
 
 /**
- * @description jp.sourceforge二维码解析器实现类
+ * jp.sourceforge二维码解析器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

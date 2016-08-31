@@ -22,7 +22,7 @@ import org.workin.commons.enums.category.SystemStatus;
 import org.workin.commons.model.CodeModel;
 
 /**
- * @description 状态码模型对象
+ * 状态码模型对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

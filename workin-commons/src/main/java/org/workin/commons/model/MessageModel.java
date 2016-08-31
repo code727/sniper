@@ -19,21 +19,21 @@
 package org.workin.commons.model;
 
 /**
- * @description 消息模型
+ * 消息模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface MessageModel {
 	
 	/**
-	 * @description 获取消息
+	 * 获取消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getMessage();
 	
 	/**
-	 * @description 设置消息
+	 * 设置消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param message
 	 */

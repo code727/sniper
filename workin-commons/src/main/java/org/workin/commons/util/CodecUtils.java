@@ -26,7 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @description 编解码工具类
+ * 编解码工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -54,7 +54,7 @@ public class CodecUtils {
 	public static char[] HEX_CODES = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };  
 		
 	/**
-	 * @description 将URL字符串按默认编码集进行编码
+	 * 将URL字符串按默认编码集进行编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url URL字符
 	 * @return
@@ -64,7 +64,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将URL字符串按指定的编码集进行编码
+	 * 将URL字符串按指定的编码集进行编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url URL字符
 	 * @param encoding 编码集
@@ -81,7 +81,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将URL字符串按默认编码集进行解码
+	 * 将URL字符串按默认编码集进行解码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param URL URL字符
 	 * @return
@@ -91,7 +91,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将URL字符串按指定的编码集进行解码
+	 * 将URL字符串按指定的编码集进行解码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url URL字符
 	 * @param encoding 编码集
@@ -107,7 +107,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description UNICODE编码
+	 * UNICODE编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param text
 	 * @return
@@ -117,7 +117,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description UNICODE编码，并选择是否以全大写的方式返回编码结果
+	 * UNICODE编码，并选择是否以全大写的方式返回编码结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param text
 	 * @param upperCase
@@ -152,7 +152,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将文本进行UNICODE编码
+	 * 将文本进行UNICODE编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -188,7 +188,7 @@ public class CodecUtils {
     }
 	
 	/**
-	 * @description 获取字符串的字节数组
+	 * 获取字符串的字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -198,7 +198,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 获取字符串按指定编码集编码后的字节数组
+	 * 获取字符串按指定编码集编码后的字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param encoding
@@ -213,7 +213,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将字节数组还原成源字符串
+	 * 将字节数组还原成源字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param textBytes
 	 * @return
@@ -223,7 +223,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 按指定编码集将字节数组还原成源字符串
+	 * 按指定编码集将字节数组还原成源字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param textBytes
 	 * @param encoding
@@ -239,7 +239,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将字符串转换为16进制表现形式
+	 * 将字符串转换为16进制表现形式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -249,7 +249,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将字符串转换为按指定编码集编码后的16进制表现形式
+	 * 将字符串转换为按指定编码集编码后的16进制表现形式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param encoding
@@ -260,7 +260,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将字节数组转换为16进制全大写的字符串
+	 * 将字节数组转换为16进制全大写的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bytes
 	 * @return
@@ -270,7 +270,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将字节数组转换为16进制的字符串
+	 * 将字节数组转换为16进制的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bytes
 	 * @return
@@ -290,7 +290,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将16进制的字符串转换为字节数组
+	 * 将16进制的字符串转换为字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param hexString
 	 * @return
@@ -305,7 +305,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将16进制的字符串还原成原文
+	 * 将16进制的字符串还原成原文
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param hexString
 	 * @return
@@ -315,7 +315,7 @@ public class CodecUtils {
 	}
 	
 	/**
-	 * @description 将16进制的字符串按指定的字符集编码还原成原文
+	 * 将16进制的字符串按指定的字符集编码还原成原文
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param hexString
 	 * @param encoding

@@ -25,7 +25,7 @@ import java.util.StringTokenizer;
 import java.util.UUID;
 
 /**
- * @description 字符串工具类
+ * 字符串工具类
  * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0.0
  */
@@ -43,7 +43,7 @@ public class StringUtils {
 	public static final String CLASSPATH = "classpath:";
 	
 	/**
-	 * @description 判断是否为空字符串
+	 * 判断是否为空字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
@@ -53,7 +53,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 判断是否不为空字符
+	 * 判断是否不为空字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
@@ -63,7 +63,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 判断是否全为空白字符串
+	 * 判断是否全为空白字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
@@ -81,7 +81,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 判断是否不全为空白字符串
+	 * 判断是否不全为空白字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
@@ -91,7 +91,7 @@ public class StringUtils {
 	}
 				
 	/**
-	 * @description 检索第一个标记在字符串中的索引位置
+	 * 检索第一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -102,7 +102,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从指定的起始位开始检索第一个标记在字符串中的索引位置
+	 * 从指定的起始位开始检索第一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -113,7 +113,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按照忽略大小写的方式检索第一个标记在字符串中的索引位置
+	 * 按照忽略大小写的方式检索第一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -124,7 +124,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按照忽略大小写的方式从指定的起始位开始检索第一个标记在字符串中的索引位置
+	 * 按照忽略大小写的方式从指定的起始位开始检索第一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -135,7 +135,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按照忽略大小写的方式检索第一个标记在字符串中的索引位置
+	 * 选择是否按照忽略大小写的方式检索第一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -147,7 +147,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按照忽略大小写的方式从指定的起始位开始检索第一个标记在字符串中的索引位置
+	 * 选择是否按照忽略大小写的方式从指定的起始位开始检索第一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -183,7 +183,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 检索最后一个标记在字符串中的索引位置
+	 * 检索最后一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -194,7 +194,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从指定的起始位开始检索最后一个标记在字符串中的索引位置
+	 * 从指定的起始位开始检索最后一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -205,7 +205,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按照忽略大小写的方式检索最后一个标记在字符串中的索引位置
+	 * 按照忽略大小写的方式检索最后一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -216,7 +216,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按照忽略大小写的方式从指定的起始位开始检索最后一个标记在字符串中的索引位置
+	 * 按照忽略大小写的方式从指定的起始位开始检索最后一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -228,7 +228,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按照忽略大小写的方式检索最后一个标记在字符串中的索引位置
+	 * 选择是否按照忽略大小写的方式检索最后一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -240,7 +240,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按照忽略大小写的方式从指定的起始位开始检索最后一个标记在字符串中的索引位置
+	 * 选择是否按照忽略大小写的方式从指定的起始位开始检索最后一个标记在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -277,7 +277,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否以指定的前缀开头
+	 * 判断字符串是否以指定的前缀开头
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
@@ -288,7 +288,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式判断字符串是否以指定的前缀开头
+	 * 按忽略大小写的方式判断字符串是否以指定的前缀开头
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
@@ -299,7 +299,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式判断字符串是否以指定的前缀开头
+	 * 选择是否按忽略大小写的方式判断字符串是否以指定的前缀开头
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
@@ -318,7 +318,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否以指定的后缀结束
+	 * 判断字符串是否以指定的后缀结束
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param suffix
@@ -329,7 +329,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式判断字符串是否以指定的后缀结束
+	 * 按忽略大小写的方式判断字符串是否以指定的后缀结束
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
@@ -341,7 +341,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式判断字符串是否以指定的后缀结束
+	 * 选择是否按忽略大小写的方式判断字符串是否以指定的后缀结束
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
@@ -361,7 +361,7 @@ public class StringUtils {
 	}
 		
 	/**
-	 * @description 获取后缀在字符串中的索引位置
+	 * 获取后缀在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param suffix
@@ -372,7 +372,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式获取后缀在字符串中的索引位置
+	 * 按忽略大小写的方式获取后缀在字符串中的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param suffix
@@ -383,7 +383,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式获取指定后缀的索引位置
+	 * 选择是否按忽略大小写的方式获取指定后缀的索引位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
@@ -403,7 +403,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 字符串首字符大写
+	 * 字符串首字符大写
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
@@ -413,7 +413,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 字符串首字符小写
+	 * 字符串首字符小写
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
@@ -423,7 +423,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 字符串首字符大/小写
+	 * 字符串首字符大/小写
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param capitalize
@@ -444,7 +444,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 返回不为null的字符，null返回空字符串
+	 * 返回不为null的字符，null返回空字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -454,7 +454,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 去掉字符串左右两端的空白字符，null返回空字符串
+	 * 去掉字符串左右两端的空白字符，null返回空字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return 
@@ -464,7 +464,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 去掉字符串左右两端的空白字符，null不作处理
+	 * 去掉字符串左右两端的空白字符，null不作处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return 
@@ -474,7 +474,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 清空字符串中所有的空格、制表符和换页符等空白字符，null返回空字符串
+	 * 清空字符串中所有的空格、制表符和换页符等空白字符，null返回空字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @return
@@ -484,7 +484,7 @@ public class StringUtils {
 	}
 		
 	/**
-	 * @description 清空字符串中所有的空格、制表符和换页符等空白字符，null不作处理
+	 * 清空字符串中所有的空格、制表符和换页符等空白字符，null不作处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return 
@@ -501,7 +501,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 获取前缀之后的字符串
+	 * 获取前缀之后的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param prefix
@@ -512,7 +512,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式获取前缀之后的字符串
+	 * 按忽略大小写的方式获取前缀之后的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param prefix
@@ -523,7 +523,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写方式获取前缀之后的字符串
+	 * 选择是否按忽略大小写方式获取前缀之后的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param prefix
@@ -538,7 +538,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 获取第一个标记之后的字符串
+	 * 获取第一个标记之后的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
@@ -549,7 +549,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式获取第一个标记之后的字符串
+	 * 按忽略大小写的方式获取第一个标记之后的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -560,7 +560,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按按忽略大小写的方式获取第一个标记之后的字符串
+	 * 选择是否按按忽略大小写的方式获取第一个标记之后的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -576,7 +576,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个标记之后的字符串
+	 * 获取最后一个标记之后的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
@@ -587,7 +587,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式获取最后一个标记之后的字符串
+	 * 按忽略大小写的方式获取最后一个标记之后的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
@@ -598,7 +598,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式获取最后一个标记之后的字符串
+	 * 选择是否按忽略大小写的方式获取最后一个标记之后的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str 开始标记
 	 * @param mark 结束标记
@@ -617,7 +617,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 获取后缀之前的字符串
+	 * 获取后缀之前的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param suffix
@@ -628,7 +628,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写方式获取后缀之前的字符串
+	 * 按忽略大小写方式获取后缀之前的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param suffix
@@ -640,7 +640,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写方式获取后缀之前的字符串
+	 * 选择是否按忽略大小写方式获取后缀之前的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param suffix
@@ -656,7 +656,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 获取第一个标记之前的字符串
+	 * 获取第一个标记之前的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
@@ -668,7 +668,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式获取第一个标记之前的字符串
+	 * 按忽略大小写的方式获取第一个标记之前的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param part
@@ -679,7 +679,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式获取第一个标记之前的字符串
+	 * 选择是否按忽略大小写的方式获取第一个标记之前的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -698,7 +698,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 获取最后一个标记之前的字符串
+	 * 获取最后一个标记之前的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
@@ -709,7 +709,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式获取最后一个标记之前的字符串
+	 * 按忽略大小写的方式获取最后一个标记之前的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
@@ -720,7 +720,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式获取最后一个标记之前的字符串
+	 * 选择是否按忽略大小写的方式获取最后一个标记之前的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -736,7 +736,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 从左至右截取起始字符串之间的子串
+	 * 从左至右截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -748,7 +748,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式，从左至右截取起始字符串之间的子串
+	 * 按忽略大小写的方式，从左至右截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -760,7 +760,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式从左至右截取起始字符串之间的子串
+	 * 选择是否按忽略大小写的方式从左至右截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -785,7 +785,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从左至右截取所有起始字符串之间的子串
+	 * 从左至右截取所有起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -797,7 +797,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式，从左至右截取所有起始字符串之间的子串
+	 * 按忽略大小写的方式，从左至右截取所有起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -809,7 +809,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式从左至右截取所有起始字符串之间的子串
+	 * 选择是否按忽略大小写的方式从左至右截取所有起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -844,7 +844,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从右至左截取起始字符串之间的子串
+	 * 从右至左截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -856,7 +856,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式从右至左截取起始字符串之间的子串
+	 * 按忽略大小写的方式从右至左截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -868,7 +868,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式从右至左截取起始字符串之间的子串
+	 * 选择是否按忽略大小写的方式从右至左截取起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -891,7 +891,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从右至左截取所有起始字符串之间的子串
+	 * 从右至左截取所有起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -903,7 +903,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式从右至左截取所有起始字符串之间的子串
+	 * 按忽略大小写的方式从右至左截取所有起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -915,7 +915,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式从右至左截取所有起始字符串之间的子串
+	 * 选择是否按忽略大小写的方式从右至左截取所有起始字符串之间的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param start 开始标记
@@ -948,7 +948,7 @@ public class StringUtils {
 	
 	
 	/**
-	 * @description 将字符串中的第一个标记替换成指定的子串
+	 * 将字符串中的第一个标记替换成指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -960,7 +960,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按照忽略大小写的方式将字符串中的第一个标记替换成指定的子串
+	 * 按照忽略大小写的方式将字符串中的第一个标记替换成指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -972,7 +972,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按照忽略大小写的方式将字符串中的第一个标记替换成指定的子串
+	 * 选择是否按照忽略大小写的方式将字符串中的第一个标记替换成指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1006,7 +1006,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 将字符串中的所有标记替换成指定的子串
+	 * 将字符串中的所有标记替换成指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
@@ -1018,7 +1018,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按照忽略大小写的方式将字符串中的所有标记替换成指定的子串
+	 * 按照忽略大小写的方式将字符串中的所有标记替换成指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1030,7 +1030,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按照忽略大小写的方式将字符串中的所有标记替换成指定的子串
+	 * 选择是否按照忽略大小写的方式将字符串中的所有标记替换成指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1065,7 +1065,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 将开始索引位之后的所有字符串替换成子串
+	 * 将开始索引位之后的所有字符串替换成子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param subStr
@@ -1077,7 +1077,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 将开始索引和结束索引位之间的所有字符串替换成子串
+	 * 将开始索引和结束索引位之间的所有字符串替换成子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param subStr
@@ -1113,7 +1113,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 将字符串中连续多个空格、制表符和换页符等空白字符整理替换成一个空格。
+	 * 将字符串中连续多个空格、制表符和换页符等空白字符整理替换成一个空格。
 	 * 				而字符串左右两侧的空白字符则直接清除。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
@@ -1136,7 +1136,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 生成32位UUID
+	 * 生成32位UUID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @return
 	 */
@@ -1145,7 +1145,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 生成32位UUID，并指定是否转换为全大写
+	 * 生成32位UUID，并指定是否转换为全大写
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param upperCase
 	 * @return
@@ -1156,7 +1156,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 生成32位无符号UUID
+	 * 生成32位无符号UUID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -1165,7 +1165,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 生成32位无符号UUID，并指定是否转换为全大写
+	 * 生成32位无符号UUID，并指定是否转换为全大写
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param upperCase
 	 * @return
@@ -1176,7 +1176,7 @@ public class StringUtils {
 	}
 		
 	/**
-	 * @description 判断指定的标记是否存在
+	 * 判断指定的标记是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1187,7 +1187,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 以忽略大小写的方式来判断指定的标记是否存在
+	 * 以忽略大小写的方式来判断指定的标记是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1198,7 +1198,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按照忽略大小写的方式来判断指定的标记是否存在
+	 * 选择是否按照忽略大小写的方式来判断指定的标记是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1210,7 +1210,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * @description 统计出字符串中指定标记的个数
+	 * 统计出字符串中指定标记的个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param str
 	 * @param mark
@@ -1221,7 +1221,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式统计出字符串中指定标记的个数
+	 * 按忽略大小写的方式统计出字符串中指定标记的个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1232,7 +1232,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否忽略大小写的方式统计出字符串中指定标记的个数
+	 * 选择是否忽略大小写的方式统计出字符串中指定标记的个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1261,7 +1261,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 删除字符串中指定的子串
+	 * 删除字符串中指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1272,7 +1272,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式删除字符串中指定的子串
+	 * 按忽略大小写的方式删除字符串中指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1283,7 +1283,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式除字符串中指定的子串
+	 * 选择是否按忽略大小写的方式除字符串中指定的子串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1295,7 +1295,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 整理字符串最左侧的空白字符
+	 * 整理字符串最左侧的空白字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -1314,7 +1314,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 整理字符串最右侧的空白字符
+	 * 整理字符串最右侧的空白字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -1333,7 +1333,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 将集合中的所有元素以指定的分隔符连接成字符串
+	 * 将集合中的所有元素以指定的分隔符连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @param seperator
@@ -1354,7 +1354,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 将数组中的所有元素以指定的分隔符连接成字符串
+	 * 将数组中的所有元素以指定的分隔符连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param arry
 	 * @param seperator
@@ -1365,7 +1365,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从指定的起始下标位开始，将数组中的元素以指定的分隔符连接成字符串
+	 * 从指定的起始下标位开始，将数组中的元素以指定的分隔符连接成字符串
 	 * @param array
 	 * @param seperator
 	 * @param startIndex
@@ -1392,7 +1392,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从原字符串中随机产生出指定长度的字符串
+	 * 从原字符串中随机产生出指定长度的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param length
@@ -1412,7 +1412,7 @@ public class StringUtils {
 	}
 
 	/** 
-	 * @description 调用Object对象的toString()方法，为空时返回空字符串
+	 * 调用Object对象的toString()方法，为空时返回空字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @return 
@@ -1422,7 +1422,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 调用Object对象的toString()方法，为空时返回指定的字符串
+	 * 调用Object对象的toString()方法，为空时返回指定的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @param defaultStr
@@ -1433,7 +1433,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 获取字符串的长度
+	 * 获取字符串的长度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -1443,7 +1443,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 倒置字符串
+	 * 倒置字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -1453,7 +1453,7 @@ public class StringUtils {
 	}
 		
 	/**
-	 * @description 比较两个字符序列对象的值是否相等
+	 * 比较两个字符序列对象的值是否相等
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param s1
 	 * @param s2
@@ -1467,7 +1467,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 按忽略大小写的方式比较两个字符序列对象的值是否相等
+	 * 按忽略大小写的方式比较两个字符序列对象的值是否相等
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param s1
 	 * @param s2
@@ -1493,7 +1493,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从指定位置开始用指定标记将字符串分割成若干数组
+	 * 从指定位置开始用指定标记将字符串分割成若干数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1505,7 +1505,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 以忽略大小写的方式将指定标记将字符串分割成若干数组
+	 * 以忽略大小写的方式将指定标记将字符串分割成若干数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1516,7 +1516,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从指定位置开始以忽略大小写的方式将指定标记将字符串分割成若干数组
+	 * 从指定位置开始以忽略大小写的方式将指定标记将字符串分割成若干数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1528,7 +1528,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式用指定标记将字符串分割成若干数组
+	 * 选择是否按忽略大小写的方式用指定标记将字符串分割成若干数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1540,7 +1540,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式从指定位置开始用指定标记将字符串分割成若干数组
+	 * 选择是否按忽略大小写的方式从指定位置开始用指定标记将字符串分割成若干数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1583,7 +1583,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 用指定标记将字符串分割成若干去空后的数组
+	 * 用指定标记将字符串分割成若干去空后的数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1594,7 +1594,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从指定位置开始用指定标记将字符串分割成若干去空后的数组
+	 * 从指定位置开始用指定标记将字符串分割成若干去空后的数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1606,7 +1606,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 以忽略大小写的方式用指定标记将字符串分割成若干去空后的数组
+	 * 以忽略大小写的方式用指定标记将字符串分割成若干去空后的数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1617,7 +1617,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从指定位置开始以忽略大小写的方式用指定标记将字符串分割成若干去空后的数组
+	 * 从指定位置开始以忽略大小写的方式用指定标记将字符串分割成若干去空后的数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1629,7 +1629,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式用指定标记将字符串分割成若干去空后的数组
+	 * 选择是否按忽略大小写的方式用指定标记将字符串分割成若干去空后的数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1640,7 +1640,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略大小写的方式从指定位置开始用指定标记将字符串分割成若干去空后的数组
+	 * 选择是否按忽略大小写的方式从指定位置开始用指定标记将字符串分割成若干去空后的数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1693,7 +1693,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否有指定的文本标记
+	 * 判断字符串是否有指定的文本标记
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1704,7 +1704,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始判断字符串是否有指定的文本标记
+	 * 从指定的索引位置开始判断字符串是否有指定的文本标记
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1716,7 +1716,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 以忽略大小写的方式,判断字符串是否有指定的文本标记
+	 * 以忽略大小写的方式,判断字符串是否有指定的文本标记
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1727,7 +1727,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 以忽略大小写的方式,从指定的索引位置开始判断字符串是否有指定的文本标记
+	 * 以忽略大小写的方式,从指定的索引位置开始判断字符串是否有指定的文本标记
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1739,7 +1739,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否以忽略大小写的方式,判断字符串是否有指定的文本标记
+	 * 选择是否以忽略大小写的方式,判断字符串是否有指定的文本标记
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1751,7 +1751,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 选择是否以忽略大小写的方式,从指定的索引位置开始判断字符串是否有指定的文本标记
+	 * 选择是否以忽略大小写的方式,从指定的索引位置开始判断字符串是否有指定的文本标记
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param mark
@@ -1764,7 +1764,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从原数字的左侧（开头）增补若干个字符0，生成具有指定最小长度的新字符串
+	 * 从原数字的左侧（开头）增补若干个字符0，生成具有指定最小长度的新字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @param minLength
@@ -1775,7 +1775,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从原数字的左侧（开头）增补若干个指定的字符，生成具有指定最小长度的新字符串
+	 * 从原数字的左侧（开头）增补若干个指定的字符，生成具有指定最小长度的新字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @param c
@@ -1787,7 +1787,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从原数字的右侧（尾部）增补若干个字符0，生成具有指定最小长度的新字符串
+	 * 从原数字的右侧（尾部）增补若干个字符0，生成具有指定最小长度的新字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @param minLength
@@ -1798,7 +1798,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从原数字的右侧（尾部）增补若干个指定的字符，生成具有指定最小长度的新字符串
+	 * 从原数字的右侧（尾部）增补若干个指定的字符，生成具有指定最小长度的新字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @param c
@@ -1810,7 +1810,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从原字符串的左侧（开头）增补若干个指定的字符，生成具有指定最小长度的新字符串
+	 * 从原字符串的左侧（开头）增补若干个指定的字符，生成具有指定最小长度的新字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param c
@@ -1835,7 +1835,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * @description 从原字符串的右侧（尾部）增补若干个指定的字符，生成具有指定最小长度的新字符串
+	 * 从原字符串的右侧（尾部）增补若干个指定的字符，生成具有指定最小长度的新字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param c

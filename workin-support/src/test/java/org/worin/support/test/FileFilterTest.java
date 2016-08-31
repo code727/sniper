@@ -20,14 +20,14 @@ import org.workin.support.file.filter.impl.FileTypeFilter;
 import org.workin.test.junit.BaseTestCase;
 
 /**
- * @description 文件过滤器测试
+ * 文件过滤器测试
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0, 2015-1-16
  */
 public class FileFilterTest extends BaseTestCase {
 	
 	/**
-	 * @description 测试文件名称过滤器
+	 * 测试文件名称过滤器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	@Test
@@ -46,7 +46,7 @@ public class FileFilterTest extends BaseTestCase {
 	}
 	
 	/**
-	 * @description 测试文件类型过滤器
+	 * 测试文件类型过滤器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	@Test
@@ -65,7 +65,7 @@ public class FileFilterTest extends BaseTestCase {
 	}
 	
 	/**
-	 * @description 测试文件大小过滤器
+	 * 测试文件大小过滤器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	@Test
@@ -90,7 +90,7 @@ public class FileFilterTest extends BaseTestCase {
 	}
 	
 	/**
-	 * @description 测试文件最后修改时间过滤器过滤器
+	 * 测试文件最后修改时间过滤器过滤器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	@Test

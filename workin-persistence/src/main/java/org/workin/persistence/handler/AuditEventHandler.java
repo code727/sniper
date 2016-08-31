@@ -19,35 +19,35 @@
 package org.workin.persistence.handler;
 
 /**
- * @description 审核事件处理器
+ * 审核事件处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface AuditEventHandler<T> {
 	
 	/**
-	 * @description 实体准备进行新增操作之前触发审核操作
+	 * 实体准备进行新增操作之前触发审核操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param auditEntity
 	 */
 	public abstract void auditOnPrePersist(T auditEntity);
 
 	/**
-	 * @description 实体准备进行更新操作之前触发审核操作
+	 * 实体准备进行更新操作之前触发审核操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param auditEntity
 	 */
 	public abstract void auditOnPreUpdate(T auditEntity);
 
 	/**
-	 * @description 实体准备进行删除操作之前触发审核操作
+	 * 实体准备进行删除操作之前触发审核操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param auditEntity
 	 */
 	public abstract void auditOnPreRemove(T auditEntity);
 
 	/**
-	 * @description 准备进行销毁之前触发审核操作
+	 * 准备进行销毁之前触发审核操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public abstract void auditOnDestroy();

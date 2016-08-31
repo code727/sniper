@@ -19,14 +19,14 @@
 package org.workin.persistence.handler;
 
 /**
- * @description 审核者处理器
+ * 审核者处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface AuditorHandler {
 	
 	/**
-	 * @description 获取当前审核人名称
+	 * 获取当前审核人名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

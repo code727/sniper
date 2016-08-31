@@ -20,7 +20,7 @@ package org.workin.image.layout;
 
 
 /**
- * @description 文本框布局
+ * 文本框布局
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -26,7 +26,7 @@ import org.workin.persistence.hibernate.HibernateUtils;
 import org.workin.support.bean.GenericBean;
 
 /**
- * @description Hibernate3 DAO支持抽象类
+ * Hibernate3 DAO支持抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -53,7 +53,7 @@ public abstract class HibernateDaoSupport<T> extends
 	}
 	
 	/**
-	 * @description 打开一个新会话
+	 * 打开一个新会话
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -62,7 +62,7 @@ public abstract class HibernateDaoSupport<T> extends
 	}
 	
 	/**
-	 * @description 获取当前会话
+	 * 获取当前会话
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public abstract class HibernateDaoSupport<T> extends
 	}
 	
 	/**
-	 * @description 获取当前实体类型对应的元数据对象
+	 * 获取当前实体类型对应的元数据对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityClass
 	 * @return
@@ -81,7 +81,7 @@ public abstract class HibernateDaoSupport<T> extends
 	}
 	
 	/**
-	 * @description 获取当前实体类型对应的名称
+	 * 获取当前实体类型对应的名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityClass
 	 * @return
@@ -91,7 +91,7 @@ public abstract class HibernateDaoSupport<T> extends
 	}
 	
 	/**
-	 * @description 获取当前实体类型对应的表名
+	 * 获取当前实体类型对应的表名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityClass
 	 * @return
@@ -101,7 +101,7 @@ public abstract class HibernateDaoSupport<T> extends
 	}
 			
 	/**
-	 * @description 获取当前实体类型对应的表的主键名
+	 * 获取当前实体类型对应的表的主键名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return

@@ -22,7 +22,7 @@ import java.util.Date;
 
 
 /**
- * @description HTTP请求头接口
+ * HTTP请求头接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -71,196 +71,196 @@ public interface HttpRequestHeader extends HttpHeader {
 	public static final String USER_AGENT = "User-Agent";
 	
 	/**
-	 * @description 设置Accept
+	 * 设置Accept
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param mediaTypes
 	 */
 	public void setAccept(String mediaTypes);
 	
 	/**
-	 * @description 获取Accept
+	 * 获取Accept
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getAccept();
 	
 	/**
-	 * @description 设置Accept-Charset
+	 * 设置Accept-Charset
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param acceptCharset
 	 */
 	public void setAcceptCharset(String acceptCharset);
 	
 	/**
-	 * @description 获取Accept-Charset
+	 * 获取Accept-Charset
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getAcceptCharset();
 	
 	/**
-	 * @description 设置Accept-Encoding
+	 * 设置Accept-Encoding
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param acceptEncoding
 	 */
 	public void setAcceptEncoding(String acceptEncoding);
 	
 	/**
-	 * @description 获取Accept-Encoding
+	 * 获取Accept-Encoding
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getAcceptEncoding();
 	
 	/**
-	 * @description 设置Accept-Language
+	 * 设置Accept-Language
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param acceptLanguage
 	 */
 	public void setAcceptLanguage(String acceptLanguage);
 	
 	/**
-	 * @description 获取Accept-Language
+	 * 获取Accept-Language
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getAcceptLanguage();	
 	
 	/**
-	 * @description 设置Authorization
+	 * 设置Authorization
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param authorization
 	 */
 	public void setAuthorization(String authorization);
 	
 	/**
-	 * @description 获取Authorization
+	 * 获取Authorization
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getAuthorization();
 	
 	/**
-	 * @description 设置Connection
+	 * 设置Connection
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 */
 	public void setConnection(String connection);
 	
 	/**
-	 * @description 获取Connection
+	 * 获取Connection
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getConnection();
 	
 	/**
-	 * @description 设置Content-Length
+	 * 设置Content-Length
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param contentLength
 	 */
 	public void setContentLength(String contentLength);
 	
 	/**
-	 * @description 获取Content-Length
+	 * 获取Content-Length
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getContentLength();
 	
 	/**
-	 * @description 设置Cookie
+	 * 设置Cookie
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cookie
 	 */
 	public void setCookie(String cookie);
 	
 	/**
-	 * @description 获取Cookie
+	 * 获取Cookie
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getCookie();
 
 	/**
-	 * @description 设置From
+	 * 设置From
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param from
 	 */
 	public void setFrom(String from);
 	
 	/**
-	 * @description 获取From
+	 * 获取From
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getFrom();
 	
 	/**
-	 * @description 设置Host
+	 * 设置Host
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param host
 	 */
 	public void setHost(String host);
 	
 	/**
-	 * @description 获取Host
+	 * 获取Host
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getHost();
 	
 	/**
-	 * @description 设置If-Modified-Since
+	 * 设置If-Modified-Since
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 */
 	public void setIfModifiedSince(Date date);
 	
 	/**
-	 * @description 获取If-Modified-Since
+	 * 获取If-Modified-Since
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Date getIfModifiedSince();
 	
 	/**
-	 * @description 设置Pragma
+	 * 设置Pragma
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pragma
 	 */
 	public void setPragma(String pragma);
 	
 	/**
-	 * @description 获取Pragma
+	 * 获取Pragma
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getPragma();
 	
 	/**
-	 * @description 设置Referer
+	 * 设置Referer
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param referer
 	 */
 	public void setReferer(String referer);
 	
 	/**
-	 * @description 获取Referer
+	 * 获取Referer
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getReferer();
 	
 	/**
-	 * @description 设置User-Agent
+	 * 设置User-Agent
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param userAgent
 	 */
 	public void setUserAgent(String userAgent);
 	
 	/**
-	 * @description 获取User-Agent
+	 * 获取User-Agent
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public String getUserAgent();

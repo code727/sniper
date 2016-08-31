@@ -26,7 +26,7 @@ import org.workin.support.mapper.AbstractMapper;
 import org.workin.support.mapper.ParameterRule;
 
 /**
- * @description Map对象与Map对象之间的映射转换
+ * Map对象与Map对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  * @param <V>

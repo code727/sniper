@@ -21,7 +21,7 @@ package org.workin.nosql.redis.connection;
 import org.workin.support.context.DataSourceHolder;
 
 /**
- * @description 多路由RedisConnectionFactory实现类
+ * 多路由RedisConnectionFactory实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

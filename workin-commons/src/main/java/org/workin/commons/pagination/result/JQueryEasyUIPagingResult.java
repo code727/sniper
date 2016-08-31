@@ -21,14 +21,14 @@ package org.workin.commons.pagination.result;
 import java.util.List;
 
 /**
- * @description JQuery EasyUI分页结果类
+ * JQuery EasyUI分页结果类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class JQueryEasyUIPagingResult<T> extends SimplePagingResult<T> {
 	
 	/**
-	 * @description 获取分页结果
+	 * 获取分页结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public class JQueryEasyUIPagingResult<T> extends SimplePagingResult<T> {
 	}
 
 	/**
-	 * @description 设置分页结果
+	 * 设置分页结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param rows
 	 */

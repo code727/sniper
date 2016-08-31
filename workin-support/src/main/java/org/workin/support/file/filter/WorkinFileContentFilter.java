@@ -19,21 +19,21 @@
 package org.workin.support.file.filter;
 
 /**
- * @description Workin框架本地文件内容过滤器
+ * Workin框架本地文件内容过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface WorkinFileContentFilter extends WorkinFileStringFilter {
 	
 	/**
-	 * @description 设置文本内容编码集
+	 * 设置文本内容编码集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param encoding
 	 */
 	public void setEncoding(String encoding);
 	
 	/**
-	 * @description 获取文本内容编码集
+	 * 获取文本内容编码集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

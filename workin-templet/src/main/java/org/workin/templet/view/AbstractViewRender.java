@@ -21,7 +21,7 @@ package org.workin.templet.view;
 import org.workin.support.codec.CodecSupport;
 
 /**
- * @description 视图渲染器抽象类
+ * 视图渲染器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

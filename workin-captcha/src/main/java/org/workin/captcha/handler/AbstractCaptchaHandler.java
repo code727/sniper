@@ -25,7 +25,7 @@ import org.workin.captcha.generator.CaptchaGenerator;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 验证码处理器抽象类
+ * 验证码处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -105,7 +105,7 @@ public abstract class AbstractCaptchaHandler implements CaptchaHandler, Initiali
 	}
 	
 	/**
-	 * @description 执行验证码文本新增操作
+	 * 执行验证码文本新增操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 * @param text
@@ -113,7 +113,7 @@ public abstract class AbstractCaptchaHandler implements CaptchaHandler, Initiali
 	protected abstract void doCreate(Serializable id, String text);
 	
 	/**
-	 * @description 执行验证码文本更新操作
+	 * 执行验证码文本更新操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 * @param text

@@ -26,7 +26,7 @@ import org.workin.support.context.ApplicationContextHolder;
 import org.workin.web.WebUtils;
 
 /**
- * @description 基于Web应用上下文的资源拦截器
+ * 基于Web应用上下文的资源拦截器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -42,7 +42,7 @@ import org.workin.spring.beans.CheckableInitializingBean;
 import org.workin.support.file.ZoomResource;
 
 /**
- * @description FastDFS支持服务类
+ * FastDFS支持服务类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -126,7 +126,7 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 根据文件源创建本地临时文件对象
+	 * 根据文件源创建本地临时文件对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param meta
 	 * @return
@@ -139,7 +139,7 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 执行批量上传资源到指定组的操作
+	 * 执行批量上传资源到指定组的操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param storageClient
 	 * @param groupName
@@ -163,7 +163,7 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 执行批量上传源以及缩放后的资源到指定组的操作
+	 * 执行批量上传源以及缩放后的资源到指定组的操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param storageClient
 	 * @param groupName

@@ -22,7 +22,7 @@ import org.workin.persistence.datasource.manager.DataSourceManager;
 import org.workin.spring.aop.MatchableMethodAroundAdvice;
 
 /**
- * @description 多数据源切换选择器抽象类
+ * 多数据源切换选择器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

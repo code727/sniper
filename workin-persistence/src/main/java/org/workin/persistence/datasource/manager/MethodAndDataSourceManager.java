@@ -26,7 +26,7 @@ import org.springframework.util.PatternMatchUtils;
 import org.workin.commons.util.MapUtils;
 
 /**
- * @description 方法和单数据源关系管理实现类，主要维护方法名称与单个数据源之间的关系
+ * 方法和单数据源关系管理实现类，主要维护方法名称与单个数据源之间的关系
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -59,7 +59,7 @@ public class MethodAndDataSourceManager implements DataSourceManager, Initializi
 	}
 	
 	/**
-	 * @description 根据方法名称获取匹配模式对应的数据源名称
+	 * 根据方法名称获取匹配模式对应的数据源名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param methodName
 	 * @return

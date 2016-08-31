@@ -28,7 +28,7 @@ import org.workin.image.layout.QRCodeLayout;
 import org.workin.image.qrcode.QRCode;
 
 /**
- * @description 二维码生成器抽象类
+ * 二维码生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -67,7 +67,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 	}
 
 	/**
-	 * @description 创建二维码原图
+	 * 创建二维码原图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param qrCode
 	 * @return
@@ -76,7 +76,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 	protected abstract BufferedImage createSourceImage(QRCode qrCode) throws Exception;
 
 	/**
-	 * @description 等比缩放二维码原图
+	 * 等比缩放二维码原图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param qrcodeImage
 	 */
@@ -117,7 +117,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 	}
 
 	/**
-	 * @description 等比缩放二维码logo图
+	 * 等比缩放二维码logo图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param qrcodeImage
 	 * @param logo
@@ -148,7 +148,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 	}
 
 	/**
-	 * @description 在二维码原图内绘制logo
+	 * 在二维码原图内绘制logo
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param qrcodeImage
 	 * @param logo

@@ -23,7 +23,7 @@ import java.io.Serializable;
 import org.workin.nosql.mongodb.dao.MongoDao;
 
 /**
- * @description Spring MongDB持久化数据访问接口
+ * Spring MongDB持久化数据访问接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

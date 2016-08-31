@@ -30,7 +30,7 @@ import java.util.Map;
 import org.workin.commons.enums.category.astrology.Horoscope;
 
 /**
- * @description 日期时间工具类
+ * 日期时间工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0.0
  */
@@ -117,7 +117,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 根据指定的模式获取日期格式对象
+	 * 根据指定的模式获取日期格式对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @return
@@ -141,7 +141,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以默认格式将字符串转换成Date对象
+	 * 以默认格式将字符串转换成Date对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dateString
 	 * @return
@@ -151,7 +151,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以指定的格式将字符串转换成Date对象
+	 * 以指定的格式将字符串转换成Date对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dateString
 	 * @param pattern
@@ -164,7 +164,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以默认格式将日期转换成字符串
+	 * 以默认格式将日期转换成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param date
 	 * @return 
@@ -174,7 +174,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以指定格式将日期转换成字符串
+	 * 以指定格式将日期转换成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param date
 	 * @param pattern
@@ -186,7 +186,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以默认格式将时间数字转换成字符串
+	 * 以默认格式将时间数字转换成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param time
 	 * @return 
@@ -196,7 +196,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以指定格式将时间数字转换成字符串
+	 * 以指定格式将时间数字转换成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param time
 	 * @param pattern
@@ -210,7 +210,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以默认格式将对象转换成日期字符串
+	 * 以默认格式将对象转换成日期字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -220,7 +220,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以指定格式将对象转换成日期字符串
+	 * 以指定格式将对象转换成日期字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param pattern
@@ -232,7 +232,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以默认格式将字符串转换成时间毫秒数
+	 * 以默认格式将字符串转换成时间毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param dateString
 	 * @return 
@@ -242,7 +242,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以指定格式将字符串转换成时间毫秒数
+	 * 以指定格式将字符串转换成时间毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param dateString
 	 * @param pattern
@@ -254,7 +254,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以默认格式将字符串转换成Unix时间戳
+	 * 以默认格式将字符串转换成Unix时间戳
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dateString
 	 * @return
@@ -264,7 +264,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 以指定格式将字符串转换成Unix时间戳
+	 * 以指定格式将字符串转换成Unix时间戳
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dateString
 	 * @param pattern
@@ -275,7 +275,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 将指定日期转换成Unix时间戳
+	 * 将指定日期转换成Unix时间戳
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @return
@@ -287,7 +287,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 判断两个日期是否为同一天
+	 * 判断两个日期是否为同一天
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param now
 	 * @param then
@@ -301,7 +301,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 判断指定的日期是否为今天
+	 * 判断指定的日期是否为今天
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param date
 	 * @return 
@@ -311,7 +311,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 计算两日期间隔的毫秒数
+	 * 计算两日期间隔的毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param when
 	 * @param then
@@ -323,7 +323,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 计算两日期间隔的秒数
+	 * 计算两日期间隔的秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param when
 	 * @param then
@@ -334,7 +334,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 计算两日期间隔的分钟数
+	 * 计算两日期间隔的分钟数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param when
 	 * @param then
@@ -345,7 +345,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 计算两日期间隔的小时数
+	 * 计算两日期间隔的小时数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param when
 	 * @param then
@@ -356,7 +356,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 计算两日期间隔的天数
+	 * 计算两日期间隔的天数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param when
 	 * @param then
@@ -367,7 +367,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 计算两日期间隔的周数
+	 * 计算两日期间隔的周数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param when
 	 * @param then
@@ -378,7 +378,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 计算两日期间隔的月数
+	 * 计算两日期间隔的月数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param when
 	 * @param then
@@ -390,7 +390,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 计算两日期间隔的年数
+	 * 计算两日期间隔的年数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param when
 	 * @param then
@@ -434,7 +434,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 根据生日计算出距今的年龄
+	 * 根据生日计算出距今的年龄
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param birthday
 	 * @return
@@ -467,7 +467,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 根据生日获取星座
+	 * 根据生日获取星座
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param birthday
 	 * @return 星座类型,,从0至11依次为白羊座至双鱼座
@@ -516,7 +516,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 获取计量单位对应的毫秒数
+	 * 获取计量单位对应的毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param um
 	 * @return 
@@ -527,7 +527,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 将单位时间换算成毫秒
+	 * 将单位时间换算成毫秒
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param time 时间
 	 * @param um 时间的单位
@@ -538,7 +538,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 将单位时间换算成秒
+	 * 将单位时间换算成秒
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param time 时间
 	 * @param um 时间的单位
@@ -549,7 +549,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 获取指定日期这周内每一天的日期
+	 * 获取指定日期这周内每一天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param now
 	 * @return
@@ -570,7 +570,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 判断指定的日期是否为一个周末
+	 * 判断指定的日期是否为一个周末
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @return
@@ -587,7 +587,7 @@ public class DateUtils {
 	}
 		
 	/**
-	 * @description 获取指定日期所在周的周末
+	 * 获取指定日期所在周的周末
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @return
@@ -606,7 +606,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 获取指定日期所在周内第几天的日期
+	 * 获取指定日期所在周内第几天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @param weekday
@@ -626,7 +626,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 获取在指定日期第几天以前或以后的日期
+	 * 获取在指定日期第几天以前或以后的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @param offset 距离指定日期之前(负数)或之后(正数)的天数
@@ -641,7 +641,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 获取昨天的日期
+	 * 获取昨天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -650,7 +650,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 获取明天的日期
+	 * 获取明天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -659,7 +659,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 判断指定日期是否为闰年
+	 * 判断指定日期是否为闰年
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @return
@@ -671,7 +671,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 判断指定数字是否为闰年
+	 * 判断指定数字是否为闰年
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @return
@@ -681,7 +681,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 计算两日期间经历有多少个闰年
+	 * 计算两日期间经历有多少个闰年
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param start
 	 * @param end
@@ -710,7 +710,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 获取两日期间经历的所有闰年
+	 * 获取两日期间经历的所有闰年
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param start
 	 * @param end
@@ -741,7 +741,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * @description 获取指定的日期是星期几
+	 * 获取指定的日期是星期几
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param now
 	 * @return

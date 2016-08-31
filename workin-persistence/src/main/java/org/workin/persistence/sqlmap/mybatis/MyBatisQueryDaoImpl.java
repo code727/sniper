@@ -27,7 +27,7 @@ import org.workin.commons.util.ClassUtils;
 import org.workin.persistence.sqlmap.dao.SqlMapQuery;
 
 /**
- * @description MyBatis查询DAO实现类
+ * MyBatis查询DAO实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

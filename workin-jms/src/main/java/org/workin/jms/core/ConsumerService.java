@@ -21,14 +21,14 @@ package org.workin.jms.core;
 import javax.jms.Destination;
 
 /**
- * @description JMS消费者服务接口
+ * JMS消费者服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ConsumerService {
 	
 	/**
-	 * @description 按指定名称的消费策略接收消息
+	 * 按指定名称的消费策略接收消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param strategyName 消费策略名称
 	 * @return
@@ -36,7 +36,7 @@ public interface ConsumerService {
 	public <T> T receive(String strategyName);
 	
 	/**
-	 * @description 按指定名称的消费策略接收来自目的地的消息
+	 * 按指定名称的消费策略接收来自目的地的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param strategyName
 	 * @param destinationName
@@ -45,7 +45,7 @@ public interface ConsumerService {
 	public <T> T receive(String strategyName, String destinationName);
 	
 	/**
-	 * @description 按指定名称的消费策略接收来自目的地的消息
+	 * 按指定名称的消费策略接收来自目的地的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param strategyName
 	 * @param destination
@@ -54,7 +54,7 @@ public interface ConsumerService {
 	public <T> T receive(String strategyName, Destination destination);
 	
 	/**
-	 * @description 按指定名称的消费策略选择接收消息
+	 * 按指定名称的消费策略选择接收消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param strategyName
 	 * @param messageSelector
@@ -63,7 +63,7 @@ public interface ConsumerService {
 	public <T> T selectReceive(String strategyName, String messageSelector);
 	
 	/**
-	 * @description 按指定名称的消费策略选择接收来自目的地的消息
+	 * 按指定名称的消费策略选择接收来自目的地的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param strategyName
 	 * @param destinationName
@@ -73,7 +73,7 @@ public interface ConsumerService {
 	public <T> T selectReceive(String strategyName, String destinationName, String messageSelector);
 	
 	/**
-	 * @description 按指定名称的消费策略选择接收来自目的地的消息
+	 * 按指定名称的消费策略选择接收来自目的地的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param strategyName
 	 * @param destination

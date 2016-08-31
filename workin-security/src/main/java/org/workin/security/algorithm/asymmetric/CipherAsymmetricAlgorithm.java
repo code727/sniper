@@ -21,7 +21,7 @@ package org.workin.security.algorithm.asymmetric;
 import javax.crypto.Cipher;
 
 /**
- * @description 密码器非对称算法抽象类
+ * 密码器非对称算法抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

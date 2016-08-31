@@ -28,7 +28,7 @@ import org.workin.security.annotation.UserName;
 
 
 /**
- * @description 注解方式的Principal管理器抽象类
+ * 注解方式的Principal管理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -56,7 +56,7 @@ public abstract class AnnotationPrincipalManager extends AbstractPrincipalManage
 	}
 	
 	/**
-	 * @description 根据注解描述设置PrincipalMeta对象的loginNameField值
+	 * 根据注解描述设置PrincipalMeta对象的loginNameField值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param principalMeta
 	 */
@@ -67,7 +67,7 @@ public abstract class AnnotationPrincipalManager extends AbstractPrincipalManage
 	}
 	
 	/**
-	 * @description 根据注解描述设置PrincipalMeta对象的userNameField值
+	 * 根据注解描述设置PrincipalMeta对象的userNameField值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param principalMeta
 	 */

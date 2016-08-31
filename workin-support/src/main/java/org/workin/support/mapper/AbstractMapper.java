@@ -21,7 +21,7 @@ package org.workin.support.mapper;
 import java.util.Set;
 
 /**
- * @description 抽象映射器
+ * 抽象映射器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

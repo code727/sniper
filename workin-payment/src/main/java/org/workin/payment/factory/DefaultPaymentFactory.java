@@ -24,7 +24,7 @@ import org.workin.payment.Payment;
 import org.workin.support.bean.BeanUtils;
 
 /**
- * @description 支付对象工厂默认实现类
+ * 支付对象工厂默认实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

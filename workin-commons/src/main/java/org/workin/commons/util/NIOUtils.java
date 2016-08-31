@@ -19,7 +19,7 @@
 package org.workin.commons.util;
 
 /**
- * @description NIO工具类
+ * NIO工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

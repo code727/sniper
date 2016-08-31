@@ -32,7 +32,7 @@ import org.workin.trace.service.BehaviorPerformanceLoggerService;
 import org.workin.trace.service.BehaviorPerformanceService;
 
 /**
- * @description 性能采集拦截切面实现类
+ * 性能采集拦截切面实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

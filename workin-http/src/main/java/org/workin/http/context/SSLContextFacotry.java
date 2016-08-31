@@ -23,14 +23,14 @@ import java.security.GeneralSecurityException;
 import javax.net.ssl.SSLContext;
 
 /**
- * @description SSL上下文工厂接口
+ * SSL上下文工厂接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface SSLContextFacotry {
 	
 	/**
-	 * @description 创建SSL上下文对象
+	 * 创建SSL上下文对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 * @throws GeneralSecurityException

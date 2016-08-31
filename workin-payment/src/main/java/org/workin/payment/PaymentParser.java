@@ -25,14 +25,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.workin.commons.model.impl.ResultModel;
 
 /**
- * @description 支付解析器接口
+ * 支付解析器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface PaymentParser {
 	
 	/**
-	 * @description 解析下单结果
+	 * 解析下单结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param result
 	 * @return
@@ -40,7 +40,7 @@ public interface PaymentParser {
 	public ResultModel<Map<String, Object>> parsePlaceOrderResult(String result) throws Exception;
 	
 	/**
-	 * @description 从HttpServletRequest对象中解析出支付结果通用通知
+	 * 从HttpServletRequest对象中解析出支付结果通用通知
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @return

@@ -24,91 +24,91 @@ import org.workin.fastdfs.node.Tracker;
 import org.workin.support.server.InternetServer;
 
 /**
- * @description Tracker集群族接口
+ * Tracker集群族接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface TrackerCluster extends InternetServer {
 		
 	/**
-	 * @description 设置集群族内的TrackerServer映射集
+	 * 设置集群族内的TrackerServer映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param trackers
 	 */
 	public void setTrackers(Map<String, Tracker> trackers);
 	
 	/**
-	 * @description 获取集群族内的TrackerServer映射集
+	 * 获取集群族内的TrackerServer映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Map<String, Tracker> getTrackers();
 	
 	/**
-	 * @description 设置Tracker集群族连接超时时间
+	 * 设置Tracker集群族连接超时时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connectTimeout
 	 */
 	public void setConnectTimeout(int connectTimeout);
 	
 	/**
-	 * @description 获取Tracker集群族连接超时时间
+	 * 获取Tracker集群族连接超时时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public int getConnectTimeout();
 	
 	/**
-	 * @description 设置Tracker集群族网络超时时间
+	 * 设置Tracker集群族网络超时时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param networkTimeout
 	 */
 	public void setNetworkTimeout(int networkTimeout);
 	
 	/**
-	 * @description 设置Tracker集群族网络超时时间
+	 * 设置Tracker集群族网络超时时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public int getNetworkTimeout();
 	
 	/**
-	 * @description 设置字符集
+	 * 设置字符集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param charset
 	 */
 	public void setCharset(String charset);
 	
 	/**
-	 * @description 获取字符集
+	 * 获取字符集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getCharset();
 		
 	/**
-	 * @description 是否设置HTTP安全秘钥
+	 * 是否设置HTTP安全秘钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param httpAntiStealToken
 	 */
 	public void setHttpAntiStealToken(boolean httpAntiStealToken);
 
 	/**
-	 * @description 判断是否设置HTTP安全秘钥
+	 * 判断是否设置HTTP安全秘钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public boolean isHttpAntiStealToken();
 	
 	/**
-	 * @description 设置HTTP安全秘钥 
+	 * 设置HTTP安全秘钥 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param httpSecretKey
 	 */
 	public void setHttpSecretKey(String httpSecretKey);
 
 	/**
-	 * @description 获取HTTP安全秘钥 
+	 * 获取HTTP安全秘钥 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

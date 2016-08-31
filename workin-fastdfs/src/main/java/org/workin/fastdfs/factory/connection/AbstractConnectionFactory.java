@@ -21,7 +21,7 @@ package org.workin.fastdfs.factory.connection;
 import org.csource.fastdfs.TrackerClient;
 
 /**
- * @description 抽象连接工厂
+ * 抽象连接工厂
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

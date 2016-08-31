@@ -27,7 +27,7 @@ import org.workin.commons.util.RegexUtils;
 import org.workin.support.encoder.StringEncoder;
 
 /**
- * @description 自适应参数对象消息格式化实现类
+ * 自适应参数对象消息格式化实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

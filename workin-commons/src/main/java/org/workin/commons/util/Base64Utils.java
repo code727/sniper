@@ -21,7 +21,7 @@ package org.workin.commons.util;
 import java.io.UnsupportedEncodingException;
 
 /**
- * @description Base64编解码工具
+ * Base64编解码工具
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -81,7 +81,7 @@ public class Base64Utils {
     }
     
     /**
-     * @description 将原文本按默认字符集进行编码处理
+     * 将原文本按默认字符集进行编码处理
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
      * @param text
      * @return
@@ -91,7 +91,7 @@ public class Base64Utils {
     }
     
     /**
-     * @description 将原文本按指定字符集格式进行编码处理
+     * 将原文本按指定字符集格式进行编码处理
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
      * @param text
      * @param charsetName
@@ -108,7 +108,7 @@ public class Base64Utils {
     }
     
     /**
-     * @description 对字节数组进行编码处理
+     * 对字节数组进行编码处理
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
      * @param bytes
      * @return
@@ -175,7 +175,7 @@ public class Base64Utils {
     }
     
     /**
-     * @description 将被编码的文本内容按默认字符集进行解码处理
+     * 将被编码的文本内容按默认字符集进行解码处理
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
      * @param encodedText
      * @return
@@ -185,7 +185,7 @@ public class Base64Utils {
     }
     
     /**
-     * @description 将被编码的文本内容按指定字符集进行解码处理
+     * 将被编码的文本内容按指定字符集进行解码处理
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
      * @param encodedText
      * @param charsetName
@@ -201,7 +201,7 @@ public class Base64Utils {
     }
         
     /**
-     * @description 将被编码的文本内容解码成字节数组
+     * 将被编码的文本内容解码成字节数组
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
      * @param encodedText
      * @return

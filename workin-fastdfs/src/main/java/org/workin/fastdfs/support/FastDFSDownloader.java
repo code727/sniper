@@ -22,14 +22,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @description FastDFS文件下载器
+ * FastDFS文件下载器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface FastDFSDownloader {
 	
 	/**
-	 * @description 从指定的Storage路径下载
+	 * 从指定的Storage路径下载
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param path
 	 * @return
@@ -38,7 +38,7 @@ public interface FastDFSDownloader {
 	public byte[] download(String path) throws Exception;
 	
 	/**
-	 * @description 从指定的Storage路径下载到指定名称的本地文件中
+	 * 从指定的Storage路径下载到指定名称的本地文件中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param path
 	 * @param fileName
@@ -48,7 +48,7 @@ public interface FastDFSDownloader {
 	public String download(String path, String fileName) throws Exception;
 	
 	/**
-	 * @description 从指定的Storage路径下载资源，并写入HttpServletResponse对象
+	 * 从指定的Storage路径下载资源，并写入HttpServletResponse对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param path
 	 * @param request
@@ -58,7 +58,7 @@ public interface FastDFSDownloader {
 	public void download(String path, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	/**
-	 * @description 从指定的Storage路径下载资源，并写入HttpServletResponse对象
+	 * 从指定的Storage路径下载资源，并写入HttpServletResponse对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param path
 	 * @param attachmentName

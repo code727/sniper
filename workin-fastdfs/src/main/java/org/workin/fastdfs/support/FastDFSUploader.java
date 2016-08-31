@@ -24,14 +24,14 @@ import org.workin.fastdfs.meta.FastDFSMeta;
 import org.workin.support.file.ZoomResource;
 
 /**
- * @description FastDFS文件上传器
+ * FastDFS文件上传器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface FastDFSUploader {
 	
 	/**
-	 * @description 上传文件
+	 * 上传文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param meta
 	 * @return
@@ -39,7 +39,7 @@ public interface FastDFSUploader {
 	public <T> String upload(FastDFSMeta<T> meta) throws Exception;
 	
 	/**
-	 * @description 上传文件到指定组
+	 * 上传文件到指定组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param meta
@@ -48,7 +48,7 @@ public interface FastDFSUploader {
 	public <T> String upload(String groupName, FastDFSMeta<T> meta) throws Exception;
 	
 	/**
-	 * @description 重传文件
+	 * 重传文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param meta
 	 * @return
@@ -56,7 +56,7 @@ public interface FastDFSUploader {
 	public <T> String reupload(FastDFSMeta<T> meta) throws Exception;
 	
 	/**
-	 * @description 重传文件到指定组
+	 * 重传文件到指定组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param meta
@@ -65,7 +65,7 @@ public interface FastDFSUploader {
 	public <T> String reupload(String groupName, FastDFSMeta<T> meta) throws Exception;
 	
 	/**
-	 * @description 批量上传文件
+	 * 批量上传文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param metas
 	 * @return
@@ -73,7 +73,7 @@ public interface FastDFSUploader {
 	public <T> List<String> batchUpload(List<FastDFSMeta<T>> metas) throws Exception;
 	
 	/**
-	 * @description 批量上传文件到指定组
+	 * 批量上传文件到指定组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param metas
@@ -82,14 +82,14 @@ public interface FastDFSUploader {
 	public <T> List<String> batchUpload(String groupName, List<FastDFSMeta<T>> metas) throws Exception;
 	
 	/**
-	 * @description 批量重传
+	 * 批量重传
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public <T> List<String> batchReupload(List<FastDFSMeta<T>> metas) throws Exception;
 	
 	/**
-	 * @description 批量重传到指定组
+	 * 批量重传到指定组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param metas
@@ -98,7 +98,7 @@ public interface FastDFSUploader {
 	public <T> List<String> batchReupload(String groupName, List<FastDFSMeta<T>> metas) throws Exception;
 	
 	/**
-	 * @description 上传源以及缩放后的文件
+	 * 上传源以及缩放后的文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param meta
 	 * @return
@@ -106,7 +106,7 @@ public interface FastDFSUploader {
 	public <T> ZoomResource zoomUpload(FastDFSMeta<T> meta) throws Exception;
 	
 	/**
-	 * @description 上传源以及缩放后的文件到指定组
+	 * 上传源以及缩放后的文件到指定组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param meta
@@ -115,7 +115,7 @@ public interface FastDFSUploader {
 	public <T> ZoomResource zoomUpload(String groupName, FastDFSMeta<T> meta) throws Exception;
 	
 	/**
-	 * @description 重传源以及缩放后的文件
+	 * 重传源以及缩放后的文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param meta
 	 * @return
@@ -123,7 +123,7 @@ public interface FastDFSUploader {
 	public <T> ZoomResource zoomReupload(FastDFSMeta<T> meta) throws Exception;
 	
 	/**
-	 * @description 重传源以及缩放后的文件到指定组
+	 * 重传源以及缩放后的文件到指定组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param meta
@@ -132,7 +132,7 @@ public interface FastDFSUploader {
 	public <T> ZoomResource zoomReupload(String groupName, FastDFSMeta<T> meta) throws Exception;
 	
 	/**
-	 * @description 批量上传源以及缩放后的文件
+	 * 批量上传源以及缩放后的文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param metas
 	 * @return
@@ -140,7 +140,7 @@ public interface FastDFSUploader {
 	public <T> List<ZoomResource> batchZoomUpload(List<FastDFSMeta<T>> metas) throws Exception;
 	
 	/**
-	 * @description 批量上传源以及缩放后的文件到指定组
+	 * 批量上传源以及缩放后的文件到指定组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param metas
@@ -149,7 +149,7 @@ public interface FastDFSUploader {
 	public <T> List<ZoomResource> batchZoomUpload(String groupName, List<FastDFSMeta<T>> metas) throws Exception;
 	
 	/**
-	 * @description 批量重传源以及缩放后的文件
+	 * 批量重传源以及缩放后的文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param metas
 	 * @return
@@ -157,7 +157,7 @@ public interface FastDFSUploader {
 	public <T> List<ZoomResource> batchZoomReupload(List<FastDFSMeta<T>> metas) throws Exception;
 	
 	/**
-	 * @description 批量重传源以及缩放后的文件到指定组
+	 * 批量重传源以及缩放后的文件到指定组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param metas

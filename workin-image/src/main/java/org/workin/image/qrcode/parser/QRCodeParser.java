@@ -21,14 +21,14 @@ package org.workin.image.qrcode.parser;
 import java.awt.image.BufferedImage;
 
 /**
- * @description 二维码解析器接口
+ * 二维码解析器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface QRCodeParser {
 	
 	/**
-	 * @description 解析出二维码图片
+	 * 解析出二维码图片
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param qrCodeImage
 	 * @return
@@ -37,7 +37,7 @@ public interface QRCodeParser {
 	public String parse(BufferedImage qrCodeImage) throws Exception;
 	
 	/**
-	 * @description 按指定的字符集编码解析出二维码图片
+	 * 按指定的字符集编码解析出二维码图片
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param qrCodeImage
 	 * @param encoding

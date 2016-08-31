@@ -19,7 +19,7 @@
 package org.workin.security;
 
 /**
- * @description Principal元数据对象
+ * Principal元数据对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

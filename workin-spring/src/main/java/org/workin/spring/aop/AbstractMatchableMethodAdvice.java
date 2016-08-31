@@ -27,7 +27,7 @@ import org.workin.commons.util.CollectionUtils;
 import org.workin.support.context.ApplicationContextHolder;
 
 /**
- * @description 可设置匹配模式的方法拦截切面抽象类
+ * 可设置匹配模式的方法拦截切面抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -52,7 +52,7 @@ public abstract class AbstractMatchableMethodAdvice implements MatchableMethodAd
 	}
 	
 	/**
-	 * @description 检测当前方法是否匹配于模式
+	 * 检测当前方法是否匹配于模式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param method
 	 * @return

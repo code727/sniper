@@ -19,21 +19,21 @@
 package org.workin.captcha.repository;
 
 /**
- * @description 文本库接口
+ * 文本库接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Repository {
 	
 	/**
-	 * @description 设置库内容
+	 * 设置库内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param content
 	 */
 	public void setContent(String content);
 	
 	/**
-	 * @description 获取库内容
+	 * 获取库内容
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

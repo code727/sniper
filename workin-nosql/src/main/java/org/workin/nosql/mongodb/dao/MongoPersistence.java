@@ -24,21 +24,21 @@ import java.util.Collection;
 import com.mongodb.WriteResult;
 
 /**
- * @description MongoDB持久化接口
+ * MongoDB持久化接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface MongoPersistence<T, PK extends Serializable> {
 	
 	/**
-	 * @description 新增实体对象
+	 * 新增实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void insert(T entity);
 	
 	/**
-	 * @description 新增实体对象到目标集合中
+	 * 新增实体对象到目标集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @param collection
@@ -46,14 +46,14 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	public void insert(T entity, String collection);
 	
 	/**
-	 * @description 批量新增实体对象
+	 * 批量新增实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entities
 	 */
 	public void batchInsert(Collection<T> entities);
 	
 	/**
-	 * @description 批量新增实体对象到目标集合中
+	 * 批量新增实体对象到目标集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entities
 	 * @param collection
@@ -61,14 +61,18 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	public void batchInsert(Collection<T> entities, String collection);
 		
 	/**
-	 * @description 新增/更新实体对象
+	 * 新增/更新实体对象</br>
+	 *              1)当entity对象的id在数据库中找不到记录，则新增</br>
+	 *              2)当entity对象的id在数据库中找得到记录，则更新</br>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void save(T entity);
 	
 	/**
-	 * @description 新增/更新实体对象到目标集合中
+	 * 新增/更新实体对象到目标集合中</br>
+	 *              1)当entity对象的id在数据库中找不到记录，则新增</br>
+	 *              2)当entity对象的id在数据库中找得到记录，则更新</br>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @param collection
@@ -76,7 +80,7 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	public void save(T entity, String collection);
 		
 	/**
-	 * @description 删除实体对象    
+	 * 删除实体对象    
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @return
@@ -84,7 +88,7 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	public WriteResult remove(T entity);
 	
 	/**
-	 * @description 在目标集合中删除实体对象
+	 * 在目标集合中删除实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @param collection
@@ -93,7 +97,7 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	public WriteResult remove(T entity, String collection);
 	
 	/**
-	 * @description 删除主键对应的实体对象
+	 * 删除主键对应的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @return
@@ -101,7 +105,7 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	public WriteResult remove(PK primaryKey);
 	
 	/**
-	 * @description 在目标集合中删除主键对应的实体对象
+	 * 在目标集合中删除主键对应的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @param collection

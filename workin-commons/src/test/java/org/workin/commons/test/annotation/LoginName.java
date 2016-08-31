@@ -25,7 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @description 登录名注释
+ * 登录名注释
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -21,14 +21,14 @@ package org.workin.captcha.generator;
 import org.workin.captcha.CaptchaManager;
 
 /**
- * @description 验证码生成器接口
+ * 验证码生成器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface CaptchaGenerator extends CaptchaManager {
 	
 	/**
-	 * @description 生成验证码
+	 * 生成验证码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

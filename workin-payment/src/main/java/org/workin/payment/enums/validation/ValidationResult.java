@@ -21,7 +21,7 @@ package org.workin.payment.enums.validation;
 import org.workin.commons.enums.AbstractLocaleEnums;
 
 /**
- * @description 验证结果枚举类
+ * 验证结果枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

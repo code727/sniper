@@ -26,7 +26,7 @@ import org.workin.persistence.sqlmap.dao.SqlMapDao;
 import org.workin.spring.beans.CheckableInitializingBeanAdapter;
 
 /**
- * @description SQL映射持久化服务抽象类
+ * SQL映射持久化服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

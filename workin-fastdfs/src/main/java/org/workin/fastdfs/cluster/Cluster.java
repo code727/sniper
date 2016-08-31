@@ -21,63 +21,63 @@ package org.workin.fastdfs.cluster;
 import java.util.Map;
 
 /**
- * @description FastDFS集群族接口
+ * FastDFS集群族接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Cluster extends ClusterAccessor {
 	
 	/**
-	 * @description 设置Tracker和Storage集群族统一提供的服务协议
+	 * 设置Tracker和Storage集群族统一提供的服务协议
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param protocol
 	 */
 	public void setProtocol(String protocol);
 	
 	/**
-	 * @description 获取Tracker和Storage集群族统一提供的服务协议
+	 * 获取Tracker和Storage集群族统一提供的服务协议
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getProtocol();
 	
 	/**
-	 * @description 设置Tracker和Storage集群族统一提供的访问服务端口
+	 * 设置Tracker和Storage集群族统一提供的访问服务端口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param accessPort
 	 */
 	public void setAccessPort(int accessPort);
 	
 	/**
-	 * @description 获取Tracker和Storage集群族统一提供的访问服务端口
+	 * 获取Tracker和Storage集群族统一提供的访问服务端口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public int getAccessPort();
 	
 	/**
-	 * @description 设置Tracker集群族
+	 * 设置Tracker集群族
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param trackerCluster
 	 */
 	public void setTrackerCluster(TrackerCluster trackerCluster);
 	
 	/**
-	 * @description 获取Tracker集群族
+	 * 获取Tracker集群族
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public TrackerCluster getTrackerCluster();
 	
 	/**
-	 * @description 设置StorageGroup映射集
+	 * 设置StorageGroup映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param storageGroups：StorageGroup映射集，其中K表示请求路径前缀，V表示StorageGroup实例
 	 */
 	public void setStorageGroups(Map<String, StorageGroup> storageGroups);
 	
 	/**
-	 * @description 获取StorageGroup映射集
+	 * 获取StorageGroup映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

@@ -30,7 +30,7 @@ import org.workin.support.codec.CompositeCodec;
 import org.workin.support.codec.HexCodec;
 
 /**
- * @description 非对称加解密算法单元测试类
+ * 非对称加解密算法单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

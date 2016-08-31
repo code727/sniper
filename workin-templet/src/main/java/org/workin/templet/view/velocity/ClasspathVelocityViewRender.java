@@ -24,14 +24,14 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 /**
- * @description 类路径Velocity视图渲染器实现类
+ * 类路径Velocity视图渲染器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class ClasspathVelocityViewRender extends AbstractVelocityViewRender {
 		
 	/**
-	 * @description 构建Velocity模板引擎
+	 * 构建Velocity模板引擎
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

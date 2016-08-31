@@ -19,21 +19,21 @@
 package org.workin.support.generator;
 
 /**
- * @description ID生成器
+ * ID生成器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface IDGenerator {
 	
 	/**
-	 * @description 生成ID号
+	 * 生成ID号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String generate();
 	
 	/**
-	 * @description 生成ID号，并组合上前缀和后缀
+	 * 生成ID号，并组合上前缀和后缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param prefix
 	 * @param suffix
@@ -42,7 +42,7 @@ public interface IDGenerator {
 	public String generate(String prefix, String suffix);
 	
 	/**
-	 * @description 生成ID号，并组合上前缀
+	 * 生成ID号，并组合上前缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param prefix
 	 * @return
@@ -50,7 +50,7 @@ public interface IDGenerator {
 	public String generateByPrefix(String prefix);
 	
 	/**
-	 * @description  生成ID号，并组合上后缀
+	 *  生成ID号，并组合上后缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param suffix
 	 * @return

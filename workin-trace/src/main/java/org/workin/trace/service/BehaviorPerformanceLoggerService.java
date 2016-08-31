@@ -24,7 +24,7 @@ import org.workin.commons.util.DateUtils;
 import org.workin.trace.domain.BehaviorPerformance;
 
 /**
- * @description 性能采集日志服务实现类
+ * 性能采集日志服务实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

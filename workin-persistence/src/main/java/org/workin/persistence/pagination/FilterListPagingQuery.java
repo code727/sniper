@@ -24,21 +24,21 @@ import org.workin.commons.pagination.PagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
 
 /**
- * @description 带属性过滤器列表的分页查询对象
+ * 带属性过滤器列表的分页查询对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface FilterListPagingQuery extends PagingQuery {
 	
 	/**
-	 * @description 设置属性过滤器列表
+	 * 设置属性过滤器列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param filterList
 	 */
 	public void setFilterList(List<PersistencePropertyFilter> filterList);
 	
 	/**
-	 * @description 获取属性过滤器列表
+	 * 获取属性过滤器列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

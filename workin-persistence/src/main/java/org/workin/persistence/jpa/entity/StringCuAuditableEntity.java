@@ -24,7 +24,7 @@ import org.workin.commons.entity.string.StringIdable;
 import org.workin.persistence.jpa.entity.JpaCuAuditableEntity;
 
 /**
- * @description 字符串主键类型的可进行新增修改审核的实体抽象类
+ * 字符串主键类型的可进行新增修改审核的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

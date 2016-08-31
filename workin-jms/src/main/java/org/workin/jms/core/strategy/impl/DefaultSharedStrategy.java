@@ -27,7 +27,7 @@ import org.springframework.jms.support.converter.SimpleMessageConverter;
 import org.workin.jms.core.strategy.SharedStrategy;
 
 /**
- * @description 默认JMS共享策略实现类
+ * 默认JMS共享策略实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

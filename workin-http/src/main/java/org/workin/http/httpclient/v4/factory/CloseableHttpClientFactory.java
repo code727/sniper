@@ -21,14 +21,14 @@ package org.workin.http.httpclient.v4.factory;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 /**
- * @description HttpClient4.x CloseableHttpClient对象工厂接口
+ * HttpClient4.x CloseableHttpClient对象工厂接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface CloseableHttpClientFactory {
 			
 	/**
-	 * @description 创建CloseableHttpClient实例
+	 * 创建CloseableHttpClient实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

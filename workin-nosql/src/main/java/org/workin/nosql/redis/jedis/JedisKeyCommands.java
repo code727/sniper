@@ -26,14 +26,14 @@ import org.workin.nosql.redis.dao.RedisKeyCommands;
 import redis.clients.jedis.SortingParams;
 
 /**
- * @description Jedis键命令接口
+ * Jedis键命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface JedisKeyCommands extends RedisKeyCommands {
 	
 	/**
-	 * @description 将当前库的键按照指定的规则进行排序
+	 * 将当前库的键按照指定的规则进行排序
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param params
@@ -42,7 +42,7 @@ public interface JedisKeyCommands extends RedisKeyCommands {
 	public <K, V> List<V> sort(K key, SortingParams params);
 	
 	/**
-	 * @description 将指定库的键按照规则进行排序
+	 * 将指定库的键按照规则进行排序
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param key
@@ -52,7 +52,7 @@ public interface JedisKeyCommands extends RedisKeyCommands {
 	public <K, V> List<V> sort(int dbIndex, K key, SortingParams params);
 	
 	/**
-	 * @description 将当前库的键按照指定的规则进行排序后返回存入目标键的结果个数
+	 * 将当前库的键按照指定的规则进行排序后返回存入目标键的结果个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param params
@@ -62,7 +62,7 @@ public interface JedisKeyCommands extends RedisKeyCommands {
 	public <K, V> Long sortCount(K key, SortingParams params, K targetKey);
 	
 	/**
-	 * @description 将指定库的键按照规则进行排序后返回存入目标键的结果个数
+	 * 将指定库的键按照规则进行排序后返回存入目标键的结果个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param key
@@ -73,7 +73,7 @@ public interface JedisKeyCommands extends RedisKeyCommands {
 	public <K, V> Long sortCount(int dbIndex, K key, SortingParams params, K targetKey);
 	
 	/**
-	 * @description 将当前库的键按照指定的规则进行排序后返回存入目标键的结果列表
+	 * 将当前库的键按照指定的规则进行排序后返回存入目标键的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param params
@@ -83,7 +83,7 @@ public interface JedisKeyCommands extends RedisKeyCommands {
 	public <K, V> List<V> sortResult(K key, SortingParams params, K targetKey);
 	
 	/**
-	 * @description 将指定库的键按照规则进行排序后返回存入目标键的结果列表
+	 * 将指定库的键按照规则进行排序后返回存入目标键的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param key
@@ -94,7 +94,7 @@ public interface JedisKeyCommands extends RedisKeyCommands {
 	public <K, V> List<V> sortResult(int dbIndex, K key, SortingParams params, K targetKey);
 	
 	/**
-	 * @description 获取当前库的键对应的值类型
+	 * 获取当前库的键对应的值类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -102,7 +102,7 @@ public interface JedisKeyCommands extends RedisKeyCommands {
 	public <K> DataType type(K key);
 	
 	/**
-	 * @description 获取指定库的键对应的值类型
+	 * 获取指定库的键对应的值类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param key

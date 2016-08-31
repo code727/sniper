@@ -27,7 +27,7 @@ import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description Date类型响应处理器
+ * Date类型响应处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0j
  */

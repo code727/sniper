@@ -28,7 +28,7 @@ import org.csource.fastdfs.TrackerServer;
 import org.workin.support.context.ApplicationContextHolder;
 
 /**
- * @description 可池化的StorageServer对象工厂默认实现类
+ * 可池化的StorageServer对象工厂默认实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

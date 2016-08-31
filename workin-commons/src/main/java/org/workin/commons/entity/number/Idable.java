@@ -22,21 +22,21 @@ import java.io.Serializable;
 
 
 /**
- * @description 主键ID接口
+ * 主键ID接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Idable extends Serializable {
 	
 	/**
-	 * @description 获取ID
+	 * 获取ID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Long getId();
 	
 	/**
-	 * @description 设置ID
+	 * 设置ID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 */

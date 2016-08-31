@@ -21,14 +21,14 @@ package org.workin.persistence.jpa.dao;
 import java.util.List;
 
 /**
- * @description JPA标准化查询接口
+ * JPA标准化查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface JpaCriteriaQuery<T> {
 		
 	/**
-	 * @description 查询出当前类型并满足参数条件的唯一实体对象
+	 * 查询出当前类型并满足参数条件的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter 条件参数对象
 	 * @param callback 查询回调
@@ -37,7 +37,7 @@ public interface JpaCriteriaQuery<T> {
 	public <P> T findUniqueByCriteria(P parameter, JpaCriteriaQueryCallback<T> callback);
 	
 	/**
-	 * @description 查询出当前类型并满足参数条件的实体对象列表
+	 * 查询出当前类型并满足参数条件的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter 条件参数对象
 	 * @param callback 查询回调
@@ -46,7 +46,7 @@ public interface JpaCriteriaQuery<T> {
 	public <P> List<T> findByCriteria(P parameter, JpaCriteriaQueryCallback<T> callback);
 	
 	/**
-	 * @description 从起始位置开始查询出当前类型最大行数并满足参数条件的实体对象列表
+	 * 从起始位置开始查询出当前类型最大行数并满足参数条件的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter 条件参数对象
 	 * @param start 起始位置
@@ -57,7 +57,7 @@ public interface JpaCriteriaQuery<T> {
 	public <P> List<T> findByCriteria(P parameter, int start, int maxRows, JpaCriteriaQueryCallback<T> callback);
 	
 	/**
-	 * @description 查询出当前类型并满足参数条件的实体对象总数
+	 * 查询出当前类型并满足参数条件的实体对象总数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter 条件参数对象
 	 * @param callback 查询回调
@@ -66,7 +66,7 @@ public interface JpaCriteriaQuery<T> {
 	public <P> long countByCriteria(P parameter, JpaCriteriaQueryCallback<T> callback);
 	
 	/**
-	 * @description 查询出当前类型并满足参数条件的实体对象总数
+	 * 查询出当前类型并满足参数条件的实体对象总数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter 条件参数对象
 	 * @param distinct 是否加上distinct关键字查询

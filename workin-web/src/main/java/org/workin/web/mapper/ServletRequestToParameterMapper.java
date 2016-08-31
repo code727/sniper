@@ -31,7 +31,7 @@ import org.workin.support.parameter.Parameter;
 import org.workin.web.WebUtils;
 
 /**
- * @description javax.servlet.ServletRequest对象与org.workin.support.parameter.Parameter对象之间的映射转换
+ * javax.servlet.ServletRequest对象与org.workin.support.parameter.Parameter对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

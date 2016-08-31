@@ -19,14 +19,14 @@
 package org.workin.serialization;
 
 /**
- * @description 类型序列器接口
+ * 类型序列器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface TypeSerializer extends Serializer {
 	
 	/**
-	 * @description 将字节数据反序列化成指定类型的对象
+	 * 将字节数据反序列化成指定类型的对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bytes
 	 * @param type

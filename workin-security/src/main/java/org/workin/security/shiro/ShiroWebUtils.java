@@ -30,14 +30,14 @@ import org.apache.shiro.web.util.WebUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description Shiro Web工具类
+ * Shiro Web工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class ShiroWebUtils extends ShiroUtils {
 	
 	/**
-	 * @description 获取已保存的请求URL
+	 * 获取已保存的请求URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -46,7 +46,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	}
 	
 	/**
-	 * @description 获取已保存的请求URL，否则返回默认指定的URL
+	 * 获取已保存的请求URL，否则返回默认指定的URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fallbackUrl
 	 * @return
@@ -56,7 +56,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	}
 	
 	/**
-	 * @description 获取已保存的请求URL
+	 * 获取已保存的请求URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @return
@@ -66,7 +66,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	}
 	
 	/**
-	 * @description 获取已保存的请求URL，否则返回默认指定的URL
+	 * 获取已保存的请求URL，否则返回默认指定的URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param fallbackUrl
@@ -97,7 +97,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	}
 	
 	/**
-	 * @description 重定向到已保存的请求URL
+	 * 重定向到已保存的请求URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws IOException
 	 */
@@ -106,7 +106,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	}
 	
 	/**
-	 * @description 重定向到已保存的请求URL
+	 * 重定向到已保存的请求URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fallbackUrl
 	 * @throws IOException
@@ -116,7 +116,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	}
 	
 	/**
-	 * @description 重定向到已保存的请求URL
+	 * 重定向到已保存的请求URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param response
@@ -127,7 +127,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	}
 	
 	/**
-	 * @description 重定向到已保存的请求URL，否则重定向默认指定的URL
+	 * 重定向到已保存的请求URL，否则重定向默认指定的URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param request
 	 * @param response
@@ -139,7 +139,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	}
 	
 	/**
-	 * @description 获取javax.servlet.ServletRequest对象
+	 * 获取javax.servlet.ServletRequest对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -148,7 +148,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	}
 	
 	/**
-	 * @description 获取javax.servlet.ServletResponse对象
+	 * 获取javax.servlet.ServletResponse对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

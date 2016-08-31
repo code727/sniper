@@ -25,7 +25,7 @@ import java.io.IOException;
 import org.workin.commons.util.FileUtils;
 
 /**
- * @description 本地文件源抽象类
+ * 本地文件源抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -25,7 +25,7 @@ import org.workin.commons.util.NumberUtils;
 import org.workin.image.Pixel;
 
 /**
- * @description 自适应图片等比缩放处理器
+ * 自适应图片等比缩放处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -35,7 +35,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	private boolean compressOnly;
 	
 	/**
-	 * @description 判断是否只用于压缩处理
+	 * 判断是否只用于压缩处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -44,7 +44,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	}
 
 	/**
-	 * @description 设置是否只用于压缩处理
+	 * 设置是否只用于压缩处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param compressOnly
 	 */
@@ -64,7 +64,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	}
 	
 	/**
-	 * @description 按原图片自身的属性为基准创建目标像素
+	 * 按原图片自身的属性为基准创建目标像素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sourceImage
 	 * @return
@@ -83,7 +83,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	}
 	
 	/**
-	 * @description 已宽度为优先基准创建目标像素
+	 * 已宽度为优先基准创建目标像素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param width
 	 * @param height
@@ -104,7 +104,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	}
 	
 	/**
-	 * @description 已高度为优先基准创建目标像素
+	 * 已高度为优先基准创建目标像素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param width
 	 * @param height

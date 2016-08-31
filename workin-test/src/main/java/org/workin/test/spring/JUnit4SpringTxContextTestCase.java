@@ -21,7 +21,7 @@ package org.workin.test.spring;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
- * @description 基于JUnit4并依赖于Spring上下文资源的事务性测试用例类
+ * 基于JUnit4并依赖于Spring上下文资源的事务性测试用例类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

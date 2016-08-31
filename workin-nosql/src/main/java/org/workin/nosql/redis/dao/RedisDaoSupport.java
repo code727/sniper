@@ -36,7 +36,7 @@ import org.workin.serialization.Serializer;
 import org.workin.spring.beans.CheckableInitializingBean;
 
 /**
- * @description RedisDao支持类
+ * RedisDao支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -124,20 +124,20 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 初始化默认连接库索引
+	 * 初始化默认连接库索引
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws Exception
 	 */
 	protected abstract void initializeDefaultDbIndex() throws Exception;
 	
 	/**
-	 * @description 初始化全局序列化器
+	 * 初始化全局序列化器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	protected abstract void initializeGlobalSerializers();
 	
 	/**
-	 * @description 获取默认连接库的索引
+	 * 获取默认连接库的索引
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -146,7 +146,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 获取指定索引库配置对应的全局过期秒数
+	 * 获取指定索引库配置对应的全局过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndx
 	 * @return
@@ -157,7 +157,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 获取指定库配置对应的全局过期秒数
+	 * 获取指定库配置对应的全局过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param repository
 	 * @return
@@ -170,7 +170,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 选择指定索引库的键序列化器
+	 * 选择指定索引库的键序列化器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @return 
@@ -188,7 +188,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 选择指定索引库的值序列化器
+	 * 选择指定索引库的值序列化器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @return
@@ -206,7 +206,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 选择指定索引库的哈希键序列化器
+	 * 选择指定索引库的哈希键序列化器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @return
@@ -224,7 +224,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 选择指定索引库的哈希值序列化器
+	 * 选择指定索引库的哈希值序列化器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @return
@@ -242,7 +242,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/** 
-	 * @description 将指定库的键值映射集序列化成Byte类型的结果
+	 * 将指定库的键值映射集序列化成Byte类型的结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param kValues
@@ -263,7 +263,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 将指定库的域值映射集序列化成Byte类型的结果
+	 * 将指定库的域值映射集序列化成Byte类型的结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param fValues
@@ -284,7 +284,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 将指定库的多个键字节序列化到Byte类型的二维数组中
+	 * 将指定库的多个键字节序列化到Byte类型的二维数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param keys
@@ -300,7 +300,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 将指定库的多个值字节序列化到Byte类型的二维数组中
+	 * 将指定库的多个值字节序列化到Byte类型的二维数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param values
@@ -316,7 +316,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 将指定库的多个域字节序列化到Byte类型的二维数组中
+	 * 将指定库的多个域字节序列化到Byte类型的二维数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param fileds
@@ -332,7 +332,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 将指定库的多个值字节反序列化到列表中
+	 * 将指定库的多个值字节反序列化到列表中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param valueBytes
@@ -348,7 +348,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 将指定库的多个值字节反序列化到集合中
+	 * 将指定库的多个值字节反序列化到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param valueBytes
@@ -364,7 +364,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 将指定库的多个哈希值字节反序列化到列表中
+	 * 将指定库的多个哈希值字节反序列化到列表中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param hashValueBytes
@@ -380,7 +380,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 将指定库的多个域值字节反序列化到映射集中
+	 * 将指定库的多个域值字节反序列化到映射集中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param fieldValueBytes
@@ -401,7 +401,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * @description 将指定库的多个域字节反序列化到集合中
+	 * 将指定库的多个域字节反序列化到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param fieldBytes

@@ -30,7 +30,7 @@ import org.workin.support.parameter.handler.CoverageDulicateKeyHandler;
 import org.workin.support.parameter.handler.KeyHandler;
 
 /**
- * @description 应用上下文参数实现类
+ * 应用上下文参数实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

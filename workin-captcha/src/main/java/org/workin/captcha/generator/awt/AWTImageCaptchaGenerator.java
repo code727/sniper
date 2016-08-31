@@ -26,7 +26,7 @@ import org.workin.captcha.generator.AbstractImageCaptchaGenerator;
 import org.workin.image.layout.CaptchaLayout;
 
 /**
- * @description AWT图片验证码生成器抽象类
+ * AWT图片验证码生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -45,7 +45,7 @@ public abstract class AWTImageCaptchaGenerator extends AbstractImageCaptchaGener
 	}
 	
 	/**
-	 * @description 绘制验证码文本
+	 * 绘制验证码文本
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param graphics
 	 * @param text

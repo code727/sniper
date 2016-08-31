@@ -21,7 +21,7 @@ package org.workin.image.layout;
 import java.io.Serializable;
 
 /**
- * @description 基本布局对象
+ * 基本布局对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -23,14 +23,14 @@ import java.io.File;
 import org.workin.support.file.filter.AbstractFileNumberFilter;
 
 /**
- * @description 文件最后修改时间过滤器
+ * 文件最后修改时间过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class FileLastModifiedTimeFilter extends AbstractFileNumberFilter {
 
 	/**
-	 * @description 判断目标文件/目录的最后修改时间是否满足逻辑运算条件
+	 * 判断目标文件/目录的最后修改时间是否满足逻辑运算条件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pathname
 	 * @return 

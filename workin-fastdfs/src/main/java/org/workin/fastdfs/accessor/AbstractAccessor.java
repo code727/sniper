@@ -21,14 +21,14 @@ package org.workin.fastdfs.accessor;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description FastDFS访问器抽象类
+ * FastDFS访问器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public abstract class AbstractAccessor extends AccessorSupport {
 	
 	/**
-	 * @description 根据URL和路径包装后返回完整可访问的结果
+	 * 根据URL和路径包装后返回完整可访问的结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param path

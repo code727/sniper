@@ -22,7 +22,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.support.generator.adapter.IDGeneratorAdapter;
 
 /**
- * @description UUID序列生成器
+ * UUID序列生成器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

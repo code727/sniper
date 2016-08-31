@@ -22,35 +22,35 @@ import org.workin.serialization.DateSerializer;
 import org.workin.serialization.TypeSerializer;
 
 /**
- * @description JSON序列器接口
+ * JSON序列器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface JsonSerializer extends TypeSerializer, DateSerializer {
 	
 	/**
-	 * @description 获取结果类型
+	 * 获取结果类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getTypeClass();
 
 	/**
-	 * @description 设置结果类型
+	 * 设置结果类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param typeClass
 	 */
 	public void setTypeClass(String typeClass);
 
 	/**
-	 * @description 获取结果类型
+	 * 获取结果类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Class<?> getType();
 
 	/**
-	 * @description 设置结果类型
+	 * 设置结果类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 */

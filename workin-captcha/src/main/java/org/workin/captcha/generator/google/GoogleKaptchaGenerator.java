@@ -35,7 +35,7 @@ import com.google.code.kaptcha.util.Config;
 
 
 /**
- * @description Google图片验证码处理器实现类
+ * Google图片验证码处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -61,7 +61,7 @@ public class GoogleKaptchaGenerator extends AbstractImageCaptchaGenerator {
 	}
 	
 	/**
-	 * @description 获取具有指定文字颜色的验证码对象
+	 * 获取具有指定文字颜色的验证码对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fontColor
 	 * @return
@@ -89,7 +89,7 @@ public class GoogleKaptchaGenerator extends AbstractImageCaptchaGenerator {
 	}
 	
 	/**
-	 * @description 构建配置
+	 * 构建配置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

@@ -22,7 +22,7 @@ import org.workin.commons.model.GenericsDataModel;
 import org.workin.commons.model.MessageModel;
 
 /**
- * @description 有消息记录的数据模型
+ * 有消息记录的数据模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

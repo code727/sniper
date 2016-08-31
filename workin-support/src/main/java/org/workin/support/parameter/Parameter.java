@@ -23,14 +23,14 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @description 泛型参数接口
+ * 泛型参数接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Parameter<K, V> {
 	
 	/**
-	 * @description 新增参数
+	 * 新增参数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param value
@@ -38,7 +38,7 @@ public interface Parameter<K, V> {
 	public void add(K name, V value);
 	
 	/**
-	 * @description 获取指定名称的参数值
+	 * 获取指定名称的参数值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -46,7 +46,7 @@ public interface Parameter<K, V> {
 	public V getValue(K name);
 	
 	/**
-	 * @description 获取指定名称和类型的参数值
+	 * 获取指定名称和类型的参数值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param clazz
@@ -55,7 +55,7 @@ public interface Parameter<K, V> {
 	public <V1> V1 getValue(K name, Class<V1> clazz);
 	
 	/**
-	 * @description 设置参数映射
+	 * 设置参数映射
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameters
 	 * @return
@@ -63,35 +63,35 @@ public interface Parameter<K, V> {
 	public void setParameters(Map<K, V> parameters);
 	
 	/**
-	 * @description 获取所有的参数映射集
+	 * 获取所有的参数映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Map<K, V> getParameters();
 	
 	/**
-	 * @description 获取所有的参数名
+	 * 获取所有的参数名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Set<K> getNames();
 	
 	/**
-	 * @description 获取所有的参数值
+	 * 获取所有的参数值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<V> getValues();
 	
 	/**
-	 * @description 删除指定名称的参数项
+	 * 删除指定名称的参数项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 */
 	public void remove(K name);
 	
 	/**
-	 * @description 清除所有参数项
+	 * 清除所有参数项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public void clear();

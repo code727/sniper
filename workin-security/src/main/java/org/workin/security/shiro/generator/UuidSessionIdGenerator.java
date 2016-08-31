@@ -24,7 +24,7 @@ import org.apache.shiro.session.Session;
 import org.workin.support.generator.UUIDGenerator;
 
 /**
- * @description UUID格式的SessionID生成器实现类
+ * UUID格式的SessionID生成器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

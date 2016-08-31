@@ -22,7 +22,7 @@ import org.workin.commons.pagination.SortObject;
 import org.workin.commons.pagination.SortablePagingQuery;
 
 /**
- * @description 简单分页器实现类
+ * 简单分页器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

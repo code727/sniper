@@ -21,7 +21,7 @@ package org.workin.support.codec;
 import org.workin.commons.util.CodecUtils;
 
 /**
- * @description 编码/解码器支持抽象类
+ * 编码/解码器支持抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

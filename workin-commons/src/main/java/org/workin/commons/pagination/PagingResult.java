@@ -21,35 +21,35 @@ package org.workin.commons.pagination;
 import java.util.List;
 
 /**
- * @description 分页结果接口
+ * 分页结果接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface PagingResult<T> {
 	
 	/**
-	 * @description 获取分页结果列表
+	 * 获取分页结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<T> getData();
 	
 	/**
-	 * @description 设置分页结果列表
+	 * 设置分页结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param data
 	 */
 	public void setData(List<T> data);
 	
 	/**
-	 * @description 获取符合分页条件的结果总数 
+	 * 获取符合分页条件的结果总数 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public long getTotal();
 	
 	/**
-	 * @description 设置符合分页条件的结果总数 
+	 * 设置符合分页条件的结果总数 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param total
 	 */

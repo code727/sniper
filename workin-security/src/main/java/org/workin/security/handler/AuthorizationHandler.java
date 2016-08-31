@@ -21,7 +21,7 @@ package org.workin.security.handler;
 import org.workin.commons.util.SystemUtils;
 
 /**
- * @description 授权处理器
+ * 授权处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -31,28 +31,28 @@ public interface AuthorizationHandler {
 	public static final String CRLF = SystemUtils.getTextNewline();
 	
 	/**
-	 * @description 创建角色授权规则字符串
+	 * 创建角色授权规则字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String createRoleRule();
 	
 	/**
-	 * @description 创建角色授权规则字符串
+	 * 创建角色授权规则字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String createPermissionRule();
 	
 	/**
-	 * @description 设置固定规则字符串
+	 * 设置固定规则字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fixRule
 	 */
 	public void setFixRule(String fixRule);
 	
 	/**
-	 * @description 获取固定规则字符串
+	 * 获取固定规则字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

@@ -24,14 +24,14 @@ import org.springframework.data.redis.connection.RedisZSetCommands.Aggregate;
 import org.workin.nosql.redis.dao.RedisSortedSetCommands;
 
 /**
- * @description Spring Redis有序集合命令接口
+ * Spring Redis有序集合命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	
 	/**
-	 * @description 在当前库中执行zUnionStore命令，
+	 * 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -43,7 +43,7 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
-	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 在指定索引库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
@@ -56,7 +56,7 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
-	 * @description 在当前库中执行zUnionStore命令，
+	 * 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -68,7 +68,7 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
 	
 	/**
-	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 在指定索引库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
@@ -81,7 +81,7 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
 	
 	/**
-	 * @description 在当前库中执行zUnionStore命令，
+	 * 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -93,7 +93,7 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
-	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 在指定索引库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
@@ -106,7 +106,7 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
-	 * @description 在当前库中执行zUnionStore命令，
+	 * 在当前库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
@@ -118,7 +118,7 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
 	
 	/**
-	 * @description 在指定索引库中执行zUnionStore命令，
+	 * 在指定索引库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex

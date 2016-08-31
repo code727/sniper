@@ -23,14 +23,14 @@ import org.workin.http.HttpForm;
 import org.workin.support.codec.Codecable;
 
 /**
- * @description 请求处理器
+ * 请求处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface RequestHandler extends Codecable {
 	
 	/**
-	 * @description 根据URL和表单对象设置请求体到HttpEntityEnclosingRequestBase对象
+	 * 根据URL和表单对象设置请求体到HttpEntityEnclosingRequestBase对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param httpRequest
 	 * @param url
@@ -40,7 +40,7 @@ public interface RequestHandler extends Codecable {
 	public void setRequestBody(HttpEntityEnclosingRequestBase httpRequest, String url, HttpForm form) throws Exception;
 	
 	/**
-	 * @description 获取表单绑定的字符集编码
+	 * 获取表单绑定的字符集编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

@@ -21,7 +21,7 @@ package org.workin.captcha;
 import java.awt.image.RenderedImage;
 
 /**
- * @description 图片验证码对象
+ * 图片验证码对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

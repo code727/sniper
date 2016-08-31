@@ -20,7 +20,7 @@ package org.workin.templet.message.formatter;
 
 
 /**
- * @description 占位符参数消息格式化处理器抽象类
+ * 占位符参数消息格式化处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -21,7 +21,7 @@ package org.workin.spring.beans.propertyeditors;
 import java.math.BigInteger;
 
 /**
- * @description BigInteger属性编辑器
+ * BigInteger属性编辑器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

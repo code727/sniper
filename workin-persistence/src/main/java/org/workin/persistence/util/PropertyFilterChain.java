@@ -29,7 +29,7 @@ import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 持久化实体属性过滤器链
+ * 持久化实体属性过滤器链
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -116,7 +116,7 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 	}
 	
 	/**
-	 * @description 按顺序将整条链中所有组内过滤器中的属性-值拼接成查询字符串
+	 * 按顺序将整条链中所有组内过滤器中的属性-值拼接成查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -131,7 +131,7 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 	}
 		
 	/**
-	 * @description 根据名称列表构建出组内所有过滤器成员的查询字符串
+	 * 根据名称列表构建出组内所有过滤器成员的查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param names
 	 * @return
@@ -163,7 +163,7 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 	}
 	
 	/**
-	 * @description 构建名称列表中对应的最后一组的查询字符串
+	 * 构建名称列表中对应的最后一组的查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param names
 	 * @return

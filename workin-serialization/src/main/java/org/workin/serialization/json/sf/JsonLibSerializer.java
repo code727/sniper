@@ -36,7 +36,7 @@ import org.workin.serialization.SerializationException;
 import org.workin.serialization.json.AbstractJsonSerializer;
 
 /**
- * @description JsonLib序列器实现类
+ * JsonLib序列器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -69,7 +69,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	}
 	
 	/**
-	 * @description 构建全局默认的Morpher
+	 * 构建全局默认的Morpher
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	private void buildDefaultMorpher() {
@@ -81,7 +81,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	}
 	
 	/**
-	 * @description 构建全局默认的JsonConfig
+	 * 构建全局默认的JsonConfig
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	private void buildDefaultJsonConfig() {
@@ -101,7 +101,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	}
 	
 	/**
-	 * @description 注册全局的Morpher
+	 * 注册全局的Morpher
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param morpher
 	 */

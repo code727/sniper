@@ -28,7 +28,7 @@ import org.workin.commons.util.ObjectUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 逻辑运算枚举
+ * 逻辑运算枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -75,7 +75,7 @@ public final class LogicOperationEnum extends AbstractEnums<String, LogicOperati
 	}	
 	
 	/**
-	 * @description 获取存放的所有逻辑运算枚举
+	 * 获取存放的所有逻辑运算枚举
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -84,7 +84,7 @@ public final class LogicOperationEnum extends AbstractEnums<String, LogicOperati
 	}
 	
 	/**
-	 * @description 根据键获取对应的枚举对象
+	 * 根据键获取对应的枚举对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -102,7 +102,7 @@ public final class LogicOperationEnum extends AbstractEnums<String, LogicOperati
 	}
 	
 	/**
-	 * @description 判断键对应的枚举对象是否存在
+	 * 判断键对应的枚举对象是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return

@@ -24,7 +24,7 @@ import org.workin.serialization.SerializationException;
 import org.workin.serialization.Serializer;
 
 /**
- * @description Spring Redis序列化器代理
+ * Spring Redis序列化器代理
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

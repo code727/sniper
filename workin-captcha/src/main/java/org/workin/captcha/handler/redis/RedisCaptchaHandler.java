@@ -24,7 +24,7 @@ import org.workin.captcha.handler.AbstractCaptchaHandler;
 import org.workin.nosql.redis.dao.RedisCommandsDao;
 
 /**
- * @description Redis库验证码处理器实现类
+ * Redis库验证码处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

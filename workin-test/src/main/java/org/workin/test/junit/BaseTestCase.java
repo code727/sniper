@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import junit.framework.Assert;
 
 /**
- * @description 基础单元测试类
+ * 基础单元测试类
  * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

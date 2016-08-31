@@ -19,35 +19,35 @@
 package org.workin.support.server;
 
 /**
- * @description 内网服务器接口
+ * 内网服务器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface IntranetServer {
 	
 	/**
-	 * @description 设置内网主机服务地址
+	 * 设置内网主机服务地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param host
 	 */
 	public void setHost(String host);
 	
 	/**
-	 * @description 获取内网主机服务地址
+	 * 获取内网主机服务地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getHost();
 	
 	/**
-	 * @description 设置内网主机服务端口
+	 * 设置内网主机服务端口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param port
 	 */
 	public void setPort(int port);
 	
 	/**
-	 * @description 获取内网主机服务端口
+	 * 获取内网主机服务端口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

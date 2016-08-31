@@ -19,7 +19,7 @@
 package org.workin.persistence.hibernate;
 
 /**
- * @description Hibernate4缓存配置
+ * Hibernate4缓存配置
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

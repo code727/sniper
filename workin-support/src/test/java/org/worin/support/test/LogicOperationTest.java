@@ -12,7 +12,7 @@ import org.workin.support.LogicOperationEnum;
 import org.workin.test.junit.BaseTestCase;
 
 /**
- * @description 逻辑运算单元测试
+ * 逻辑运算单元测试
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0, 2015-1-20
  */

@@ -22,7 +22,7 @@ import org.workin.serialization.SerializationException;
 import org.workin.serialization.Serializer;
 
 /**
- * @description BOSN序列器实现类
+ * BOSN序列器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

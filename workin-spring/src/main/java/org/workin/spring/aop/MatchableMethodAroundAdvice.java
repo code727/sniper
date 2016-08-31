@@ -23,7 +23,7 @@ import java.lang.reflect.Method;
 import org.springframework.aop.MethodBeforeAdvice;
 
 /**
- * @description 环绕型方法拦截切面抽象类
+ * 环绕型方法拦截切面抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -39,7 +39,7 @@ public abstract class MatchableMethodAroundAdvice extends MatchableMethodAfterAd
 	}
 	
 	/**
-	 * @description 执行前置拦截任务
+	 * 执行前置拦截任务
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param method
 	 * @param args

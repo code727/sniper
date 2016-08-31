@@ -22,7 +22,7 @@ import org.workin.commons.entity.Lockable;
 
 
 /**
- * @description 可锁定的主键ID实体抽象类
+ * 可锁定的主键ID实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

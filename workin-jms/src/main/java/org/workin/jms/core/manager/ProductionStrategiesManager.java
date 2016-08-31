@@ -23,28 +23,28 @@ import java.util.Map;
 import org.workin.jms.core.strategy.ProductionStrategy;
 
 /**
- * @description Jms生产策略管理接口
+ * Jms生产策略管理接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ProductionStrategiesManager {
 	
 	/**
-	 * @description 设置生产策略映射集
+	 * 设置生产策略映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param productionStrategies
 	 */
 	public void setStrategies(Map<String, ProductionStrategy> productionStrategies);
 	
 	/**
-	 * @description 获取生产策略映射集
+	 * 获取生产策略映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Map<String, ProductionStrategy> getStrategies();
 	
 	/**
-	 * @description 获取指定名称的生产策略
+	 * 获取指定名称的生产策略
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return

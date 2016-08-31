@@ -35,7 +35,7 @@ import org.workin.commons.util.NetUtils;
 import org.workin.http.HttpForm;
 
 /**
- * @description 请求处理器默认实现类
+ * 请求处理器默认实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -53,7 +53,7 @@ public class DefualtRequestHandler extends AbstractRequestHandler {
 	}
 	
 	/**
-	 * @description 根据url中的查询字符串构建NameValuePair对象列表
+	 * 根据url中的查询字符串构建NameValuePair对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @return

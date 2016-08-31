@@ -19,21 +19,21 @@
 package org.workin.support.codec;
 
 /**
- * @description 可编解码的标识接口
+ * 可编解码的标识接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Codecable {
 	
 	/**
-	 * @description 设置编解码字符集
+	 * 设置编解码字符集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param encoding
 	 */
 	public void setEncoding(String encoding);
 	
 	/**
-	 * @description 获取编解码字符集
+	 * 获取编解码字符集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

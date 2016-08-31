@@ -20,14 +20,14 @@ package org.workin.serialization;
 
 
 /**
- * @description 序列器接口
+ * 序列器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Serializer {
 	
 	/**
-	 * @description 将数据序列化为字节数据
+	 * 将数据序列化为字节数据
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param t
 	 * @return
@@ -36,7 +36,7 @@ public interface Serializer {
 	public <T> byte[] serialize(T t) throws SerializationException;
 	
 	/**
-	 * @description 将字节数据反序列化
+	 * 将字节数据反序列化
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bytes
 	 * @return

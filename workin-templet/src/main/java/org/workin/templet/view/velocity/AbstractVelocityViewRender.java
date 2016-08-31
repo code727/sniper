@@ -29,7 +29,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.templet.view.AbstractViewRender;
 
 /**
- * @description Velocity视图渲染器抽象类
+ * Velocity视图渲染器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -64,7 +64,7 @@ public abstract class AbstractVelocityViewRender extends AbstractViewRender {
 	}
 	
 	/**
-	 * @description 构建Velocity模板引擎
+	 * 构建Velocity模板引擎
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 * @throws IOException

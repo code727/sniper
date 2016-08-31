@@ -26,7 +26,7 @@ import org.workin.fastdfs.cluster.Cluster;
 import org.workin.fastdfs.cluster.StorageGroup;
 
 /**
- * @description FastDFS访问器支持类
+ * FastDFS访问器支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -21,21 +21,21 @@ package org.workin.commons.entity.string;
 import java.io.Serializable;
 
 /**
- * @description 字符串ID主键ID接口
+ * 字符串ID主键ID接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface StringIdable extends Serializable {
 	
 	/**
-	 * @description 获取ID
+	 * 获取ID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getId();
 	
 	/**
-	 * @description 设置ID
+	 * 设置ID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 */

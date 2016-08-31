@@ -21,14 +21,14 @@ package org.workin.http.handler;
 import org.workin.http.HttpForm;
 
 /**
- * @description 表单处理器接口
+ * 表单处理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface FormHandler {
 	
 	/**
-	 * @description 将表单对象中的所有关键属性拼接到指定的URL
+	 * 将表单对象中的所有关键属性拼接到指定的URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param form

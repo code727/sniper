@@ -21,21 +21,21 @@ package org.workin.sms.packet;
 import java.util.Map;
 
 /**
- * @description 参数化消息数据包接口
+ * 参数化消息数据包接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ParameterizationMessagePacket extends MessagePacket {
 	
 	/**
-	 * @description 设置参数映射集
+	 * 设置参数映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameters
 	 */
 	public void setParameters(Map<String, Object> parameters);
 	
 	/**
-	 * @description 获取参数映射集
+	 * 获取参数映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

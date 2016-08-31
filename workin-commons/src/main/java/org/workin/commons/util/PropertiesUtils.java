@@ -33,14 +33,14 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * @description 资源属性工具类
+ * 资源属性工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class PropertiesUtils {
 	
 	/**
-	 * @description 判断属性对象是否为空
+	 * 判断属性对象是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param properties
 	 * @return
@@ -50,7 +50,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 判断属性对象是否不为空
+	 * 判断属性对象是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param properties
 	 * @return
@@ -60,7 +60,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将资源属性对象里的所有键值对元素连接成URL参数字符串
+	 * 将资源属性对象里的所有键值对元素连接成URL参数字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param properties
 	 * @return
@@ -70,7 +70,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将资源属性对象里的所有键值对元素按各部分的连接符连接成字符串
+	 * 将资源属性对象里的所有键值对元素按各部分的连接符连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param properties 资源属性对象
 	 * @param kvSeperator 键值之间的连接符
@@ -82,7 +82,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 根据指定的URL参数字符串创建Properties对象
+	 * 根据指定的URL参数字符串创建Properties对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @return
@@ -92,7 +92,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按照指定的各部分分隔符将字符串分割后创建Properties对象
+	 * 按照指定的各部分分隔符将字符串分割后创建Properties对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str 
 	 * @param kvSeperator
@@ -112,7 +112,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 根据本地文件创建Properties文件
+	 * 根据本地文件创建Properties文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地文件名
 	 * @return
@@ -123,7 +123,7 @@ public class PropertiesUtils {
 	}
 	
 	/** 
-	 * @description 根据本地文件创建Properties文件
+	 * 根据本地文件创建Properties文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地文件
 	 * @return
@@ -143,7 +143,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 根据输入流创建Properties对象
+	 * 根据输入流创建Properties对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param in
 	 * @return
@@ -156,7 +156,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 根据IO读取器创建Properties对象
+	 * 根据IO读取器创建Properties对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param reader
 	 * @return
@@ -169,7 +169,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 根据本地XML文件创建Properties对象
+	 * 根据本地XML文件创建Properties对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地XML文件名
 	 * @return
@@ -179,7 +179,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 根据本地XML文件创建Properties对象
+	 * 根据本地XML文件创建Properties对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地XML文件
 	 * @return
@@ -198,7 +198,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 根据XML文件输入流创建Properties对象
+	 * 根据XML文件输入流创建Properties对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param in XML文件输入流
 	 * @return
@@ -211,7 +211,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将源文件属性追加到目标属性对象中，重复项将被更新
+	 * 将源文件属性追加到目标属性对象中，重复项将被更新
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param fileName
@@ -222,7 +222,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按忽略重复项的方式将源文件的属性追加到目标属性对象中
+	 * 按忽略重复项的方式将源文件的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param fileName
@@ -233,7 +233,7 @@ public class PropertiesUtils {
 	}
 		
 	/**
-	 * @description 选择是否按忽略重复项的方式将源文件的属性追加到目标属性对象中
+	 * 选择是否按忽略重复项的方式将源文件的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param fileName
@@ -245,7 +245,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按忽略重复项的方式将源文件的属性追加到目标属性对象中
+	 * 按忽略重复项的方式将源文件的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param src
@@ -256,7 +256,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略重复项的方式将源文件的属性追加到目标属性对象中
+	 * 选择是否按忽略重复项的方式将源文件的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param src
@@ -268,7 +268,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将源属性追加到目标属性对象中，重复项将被更新
+	 * 将源属性追加到目标属性对象中，重复项将被更新
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param src
@@ -278,7 +278,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按忽略重复项的方式将源属性追加到目标属性对象中
+	 * 按忽略重复项的方式将源属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param src
@@ -288,7 +288,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略重复项的方式将源属性追加到目标属性对象中
+	 * 选择是否按忽略重复项的方式将源属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param src
@@ -310,7 +310,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将输入流的属性追加到目标属性对象中，重复项将被更新
+	 * 将输入流的属性追加到目标属性对象中，重复项将被更新
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param in
@@ -321,7 +321,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按忽略重复项的方式将输入流的属性追加到目标属性对象中
+	 * 按忽略重复项的方式将输入流的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param src
@@ -332,7 +332,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 选择是否按忽略重复项的方式将输入流的属性追加到目标属性对象中
+	 * 选择是否按忽略重复项的方式将输入流的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param in
@@ -344,7 +344,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将源XML文件的属性追加到目标属性对象中，重复项将被更新
+	 * 将源XML文件的属性追加到目标属性对象中，重复项将被更新
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param fileName
@@ -355,7 +355,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
+	 * 按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param fileName
@@ -366,7 +366,7 @@ public class PropertiesUtils {
 	}
 		
 	/**
-	 * @description 选择是否按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
+	 * 选择是否按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param fileName
@@ -378,7 +378,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将源XML文件的属性追加到目标属性对象中，重复项将被更新
+	 * 将源XML文件的属性追加到目标属性对象中，重复项将被更新
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param file
@@ -389,7 +389,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
+	 * 按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param file
@@ -400,7 +400,7 @@ public class PropertiesUtils {
 	}
 		
 	/**
-	 * @description 选择是否按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
+	 * 选择是否按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param file
@@ -412,7 +412,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将源XML文件的属性追加到目标属性对象中，重复项将被更新
+	 * 将源XML文件的属性追加到目标属性对象中，重复项将被更新
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param in XML输入流
@@ -423,7 +423,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
+	 * 按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param in XML输入流
@@ -434,7 +434,7 @@ public class PropertiesUtils {
 	}
 		
 	/**
-	 * @description 选择是否按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
+	 * 选择是否按忽略重复项的方式将源XML文件的属性追加到目标属性对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dest
 	 * @param in XML输入流
@@ -446,7 +446,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性追加写入到本地文件
+	 * 将各属性追加写入到本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地文件名
 	 * @param properties 属性对象
@@ -457,7 +457,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性和备注追加写入到本地文件
+	 * 将各属性和备注追加写入到本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地文件名
 	 * @param properties 属性对象
@@ -469,7 +469,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性追加写入到本地文件
+	 * 将各属性追加写入到本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地文件
 	 * @param properties 属性对象
@@ -480,7 +480,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性和备注追加写入到本地文件
+	 * 将各属性和备注追加写入到本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地文件
 	 * @param properties 属性对象
@@ -500,7 +500,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性追加写入到输出流
+	 * 将各属性追加写入到输出流
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param out
 	 * @param properties
@@ -511,7 +511,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性和备注追加写入到输出流
+	 * 将各属性和备注追加写入到输出流
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param out 输出流
 	 * @param properties 属性对象
@@ -523,7 +523,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性追加写入到写入器中
+	 * 将各属性追加写入到写入器中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param writer 写入器
 	 * @param properties 属性对象
@@ -534,7 +534,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性和备注追加写入到写入器中
+	 * 将各属性和备注追加写入到写入器中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param writer 写入器
 	 * @param properties 属性对象
@@ -546,7 +546,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性追加写入到本地XML文件中
+	 * 将各属性追加写入到本地XML文件中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地文件名
 	 * @param properties 属性对象
@@ -557,7 +557,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性和备注追加写入到本地XML文件中
+	 * 将各属性和备注追加写入到本地XML文件中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地文件名
 	 * @param properties 属性对象
@@ -569,7 +569,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性追加写入到本地XML文件中
+	 * 将各属性追加写入到本地XML文件中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地文件
 	 * @param properties 属性对象
@@ -580,7 +580,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性和备注追加写入到本地XML文件中
+	 * 将各属性和备注追加写入到本地XML文件中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地文件
 	 * @param properties 属性对象
@@ -600,7 +600,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性写入到输出流中
+	 * 将各属性写入到输出流中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param out 输出流
 	 * @param properties 属性对象
@@ -611,7 +611,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性和备注写入到输出流中
+	 * 将各属性和备注写入到输出流中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param out 输出流
 	 * @param properties 属性对象
@@ -623,7 +623,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按指定的编码格式将各属性和备注写入到输出流中
+	 * 按指定的编码格式将各属性和备注写入到输出流中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param out 输出流
 	 * @param properties 属性对象
@@ -639,7 +639,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按指定的编码格式将各属性写入到输出流中
+	 * 按指定的编码格式将各属性写入到输出流中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param out 输出流
 	 * @param properties 属性对象
@@ -651,7 +651,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按指定的编码格式将各属性追加写入到本地XML文件中
+	 * 按指定的编码格式将各属性追加写入到本地XML文件中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地XML文件名
 	 * @param properties 属性对象
@@ -663,7 +663,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按指定的编码格式将各属性和备注追加写入到本地XML文件中
+	 * 按指定的编码格式将各属性和备注追加写入到本地XML文件中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地XML文件名
 	 * @param properties 属性对象
@@ -676,7 +676,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按指定的编码格式将各属性追加写入到本地XML文件中
+	 * 按指定的编码格式将各属性追加写入到本地XML文件中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 * @param properties
@@ -688,7 +688,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按指定的编码格式将各属性和备注追加写入到本地XML文件中
+	 * 按指定的编码格式将各属性和备注追加写入到本地XML文件中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地XML文件
 	 * @param properties 属性对象
@@ -712,7 +712,7 @@ public class PropertiesUtils {
 	}
 		
 	/**
-	 * @description 将各属性重写入到本地文件
+	 * 将各属性重写入到本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地文件名
 	 * @param properties 属性对象
@@ -723,7 +723,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性和备注重写入到本地文件
+	 * 将各属性和备注重写入到本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地文件名
 	 * @param properties 属性对象
@@ -735,7 +735,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性重写入到本地文件
+	 * 将各属性重写入到本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地文件
 	 * @param properties 属性对象
@@ -746,7 +746,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性和备注重写入到本地文件
+	 * 将各属性和备注重写入到本地文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地文件
 	 * @param properties 属性对象
@@ -766,7 +766,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性重写入到本地XML文件
+	 * 将各属性重写入到本地XML文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地XML文件名
 	 * @param properties 属性对象
@@ -777,7 +777,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性和备注重写入到本地XML文件
+	 * 将各属性和备注重写入到本地XML文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地XML文件名
 	 * @param properties 属性对象
@@ -789,7 +789,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性重写入到本地XML文件
+	 * 将各属性重写入到本地XML文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地XML文件
 	 * @param properties 属性对象
@@ -800,7 +800,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 将各属性和备注重写入到本地XML文件
+	 * 将各属性和备注重写入到本地XML文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地XML文件
 	 * @param properties 属性对象
@@ -812,7 +812,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按指定的编码格式将各属性重写入到本地XML文件
+	 * 按指定的编码格式将各属性重写入到本地XML文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地XML文件名
 	 * @param properties 属性对象
@@ -824,7 +824,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按指定的编码格式将各属性和备注重写入到本地XML文件
+	 * 按指定的编码格式将各属性和备注重写入到本地XML文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param fileName 本地XML文件名
 	 * @param properties 属性对象
@@ -837,7 +837,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按指定的编码格式将各属性重写入到本地XML文件
+	 * 按指定的编码格式将各属性重写入到本地XML文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地XML文件
 	 * @param properties 属性对象
@@ -849,7 +849,7 @@ public class PropertiesUtils {
 	}
 	
 	/**
-	 * @description 按指定的编码格式将各属性和备注重写入到本地XML文件
+	 * 按指定的编码格式将各属性和备注重写入到本地XML文件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file 本地XML文件
 	 * @param properties 属性对象

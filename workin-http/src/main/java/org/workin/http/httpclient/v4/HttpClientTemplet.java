@@ -44,7 +44,7 @@ import org.workin.http.httpclient.v4.handler.request.RequestHandler;
 import org.workin.http.httpclient.v4.handler.response.StringResponseHandler;
 
 /**
- * @description HttpClient4.x模板实现类
+ * HttpClient4.x模板实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -111,7 +111,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	}
 	
 	/**
-	 * @description 执行指定名称对应的表单GET请求，并返回结果
+	 * 执行指定名称对应的表单GET请求，并返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param param
@@ -138,7 +138,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	}
 	
 	/**
-	 * @description 执行指定名称对应的表单POST请求，并返回结果
+	 * 执行指定名称对应的表单POST请求，并返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param param
@@ -166,7 +166,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	}
 	
 	/**
-	 * @description 执行指定名称对应的表单PUT请求，并返回结果
+	 * 执行指定名称对应的表单PUT请求，并返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param param
@@ -194,7 +194,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	}
 	
 	/**
-	 * @description 执行指定名称对应的表单DELETE请求，并返回结果
+	 * 执行指定名称对应的表单DELETE请求，并返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param param
@@ -228,7 +228,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	}
 	
 	/**
-	 * @description 为HttpRequestBase对象添加表单绑定的Header
+	 * 为HttpRequestBase对象添加表单绑定的Header
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param httpGet
 	 */
@@ -244,7 +244,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	}
 	
 	/**
-	 * @description 为HttpRequestBase对象设置配置
+	 * 为HttpRequestBase对象设置配置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param httpRequest
 	 */
@@ -253,7 +253,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	}
 	
 	/**
-	 * @description 获取HttpForm表单绑定的请求处理器
+	 * 获取HttpForm表单绑定的请求处理器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param form
 	 * @return
@@ -268,7 +268,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	}
 	
 	/**
-	 * @description 获取HttpForm表单绑定的响应处理器
+	 * 获取HttpForm表单绑定的响应处理器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param form
 	 * @return
@@ -283,7 +283,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	}
 	
 	/**
-	 * @description 获取HttpForm表单绑定的字符集编码
+	 * 获取HttpForm表单绑定的字符集编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param form
 	 * @return

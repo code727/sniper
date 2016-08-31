@@ -29,7 +29,7 @@ import org.workin.serialization.json.alibaba.FastJsonSerializer;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
 /**
- * @description 阿里FastJson序列化器单元测试类
+ * 阿里FastJson序列化器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

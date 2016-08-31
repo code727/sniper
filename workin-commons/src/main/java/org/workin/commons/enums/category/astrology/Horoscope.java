@@ -21,7 +21,7 @@ package org.workin.commons.enums.category.astrology;
 import org.workin.commons.enums.AbstractLocaleEnums;
 
 /**
- * @description 星座枚举类
+ * 星座枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -35,7 +35,7 @@ import com.google.zxing.qrcode.encoder.ByteMatrix;
 import com.google.zxing.qrcode.encoder.Encoder;
 
 /**
- * @description Google二维码生成器实现类
+ * Google二维码生成器实现类
  * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -72,7 +72,7 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	}
 
 	/**
-	 * @description 获取com.google.zxing.EncodeHintType映射配置
+	 * 获取com.google.zxing.EncodeHintType映射配置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @param qrCode
 	 * @return
@@ -111,7 +111,7 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	}
 
 	/**
-	 * @description 根据字节矩阵绘制二维码原图
+	 * 根据字节矩阵绘制二维码原图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param byteMatrix
 	 * @param qrCode
@@ -134,7 +134,7 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	}
 	
 	/**
-	 * @description 根据比特位矩阵绘制二维码原图
+	 * 根据比特位矩阵绘制二维码原图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bitMatrix
 	 * @param qrCode
@@ -157,7 +157,7 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	}
 	
 	/**
-	 * @description 清空默认计算出的边距
+	 * 清空默认计算出的边距
 	 *              不建议使用，调用此方法后再生成的图片，可能会导致解析失败
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param matrix

@@ -36,7 +36,7 @@ import org.workin.fastdfs.node.Tracker;
 import org.workin.spring.beans.CheckableInitializingBean;
 
 /**
- * @description 默认的FastDFS集群族实现类
+ * 默认的FastDFS集群族实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -233,7 +233,7 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	}
 	
 	/**
-	 * @description 构建Tracker集群族可访问的内网URL 
+	 * 构建Tracker集群族可访问的内网URL 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	private void buildTrackerClusterIntranetAccessURL() {
@@ -242,7 +242,7 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	}
 	
 	/**
-	 * @description 构建Tracker集群族可访问的外网URL 
+	 * 构建Tracker集群族可访问的外网URL 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	private void buildTrackerClusterInternetAccessURL() {
@@ -251,7 +251,7 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	}
 	
 	/**
-	 * @description 构建Tracker节点可访问的内网URL映射集 
+	 * 构建Tracker节点可访问的内网URL映射集 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	private void buildTrackerIntranetAccessURLMap() {
@@ -267,7 +267,7 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	}
 	
 	/**
-	 * @description 构建StorageGroup集群组以及组内各节点可访问的URL映射集 
+	 * 构建StorageGroup集群组以及组内各节点可访问的URL映射集 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	private void buildStorageGroupAndNodeAccessURLMap() {

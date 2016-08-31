@@ -27,7 +27,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.support.context.ApplicationContextHolder;
 
 /**
- * @description java.util.ResourceBundle消息解析服务实现类
+ * java.util.ResourceBundle消息解析服务实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -37,7 +37,7 @@ public class ResourceBundleMessageService implements MessageService {
 	private String[] baseNames;
 
 	/**
-	 * @description 设置资源的基础名称
+	 * 设置资源的基础名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param baseName
 	 */
@@ -46,7 +46,7 @@ public class ResourceBundleMessageService implements MessageService {
 	}
 	
 	/**
-	 * @description 获取资源的基础名称组
+	 * 获取资源的基础名称组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -55,7 +55,7 @@ public class ResourceBundleMessageService implements MessageService {
 	}
 
 	/**
-	 * @description 根据基础名称和本地化对象获取对应的java.util.ResourceBundle对象
+	 * 根据基础名称和本地化对象获取对应的java.util.ResourceBundle对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param baseName
 	 * @param locale

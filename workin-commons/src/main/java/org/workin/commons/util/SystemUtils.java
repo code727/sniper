@@ -22,7 +22,7 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * @description 系统工具类
+ * 系统工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -60,7 +60,7 @@ public class SystemUtils {
 	}
 	
 	/**
-	 * @description 获取所用的系统属性
+	 * 获取所用的系统属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public class SystemUtils {
 	}
 	
 	/**
-	 * @description 获取所用的系统属性名称
+	 * 获取所用的系统属性名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -78,7 +78,7 @@ public class SystemUtils {
 	}
 	
 	/**
-	 * @description 根据名称获取Worin Jar包定义的全局属性对象
+	 * 根据名称获取Worin Jar包定义的全局属性对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -88,7 +88,7 @@ public class SystemUtils {
 	}
 	
 	/**
-	 * @description 判断是否为系统属性
+	 * 判断是否为系统属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 */
@@ -100,7 +100,7 @@ public class SystemUtils {
 	}
 	
 	/**
-	 * @description 获取当前操作系统的文本换行符
+	 * 获取当前操作系统的文本换行符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -109,7 +109,7 @@ public class SystemUtils {
 	}
 	
 	/**
-	 * @description 获取文件系统编码集
+	 * 获取文件系统编码集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -118,7 +118,7 @@ public class SystemUtils {
 	}
 	
 	/**
-	 * @description 获取当前操作系统的临时目录
+	 * 获取当前操作系统的临时目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

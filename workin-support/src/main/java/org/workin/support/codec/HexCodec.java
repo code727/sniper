@@ -21,7 +21,7 @@ package org.workin.support.codec;
 import org.workin.commons.util.CodecUtils;
 
 /**
- * @description 十六进制编解码器
+ * 十六进制编解码器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -34,7 +34,7 @@ import org.workin.fastdfs.node.Tracker;
 import org.workin.spring.beans.CheckableInitializingBean;
 
 /**
- * @description 默认的TrackerGroup实例工厂实现类
+ * 默认的TrackerGroup实例工厂实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -74,7 +74,7 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 	}
 
 	/**
-	 * @description 初始化全局配置
+	 * 初始化全局配置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	protected void init() throws Exception {
@@ -94,7 +94,7 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 	}
 	
 	/** 
-	 * @description 创建TrackerGroup实例
+	 * 创建TrackerGroup实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>  
 	 */
 	private void createTrackerGroup() {
@@ -113,7 +113,7 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 	}
 	
 	/**
-	 * @description 将TrackerCluster作为Group成员来注册
+	 * 将TrackerCluster作为Group成员来注册
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -125,7 +125,7 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 	}
 
 	/**
-	 * @description 将TrackerCluster内的每个Tracker节点作为Group成员来注册
+	 * 将TrackerCluster内的每个Tracker节点作为Group成员来注册
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

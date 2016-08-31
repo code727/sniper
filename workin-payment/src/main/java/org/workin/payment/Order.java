@@ -24,203 +24,203 @@ import java.util.Date;
 import org.workin.commons.entity.number.Idable;
 
 /**
- * @description 订单接口对象
+ * 订单接口对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Order extends Idable {
 	
 	/**
-	 * @description 获取支付用户登录账号
+	 * 获取支付用户登录账号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getLoginName();
 
 	/**
-	 * @description 设置支付用户登录账号
+	 * 设置支付用户登录账号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param loginName
 	 */
 	public void setLoginName(String loginName);
 
 	/**
-	 * @description 获取订单编号
+	 * 获取订单编号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getOrderId();
 
 	/**
-	 * @description 设置订单编号
+	 * 设置订单编号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param orderId
 	 */
 	public void setOrderId(String orderId);
 
 	/**
-	 * @description 获取支付类型
+	 * 获取支付类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public int getType();
 
 	/**
-	 * @description 设置支付类型
+	 * 设置支付类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 */
 	public void setType(int type);
 
 	/**
-	 * @description 获取支付金额
+	 * 获取支付金额
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public BigDecimal getAmount();
 
 	/**
-	 * @description 设置支付金额
+	 * 设置支付金额
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param amount
 	 */
 	public void setAmount(BigDecimal amount);
 
 	/**
-	 * @description 获取购买数量
+	 * 获取购买数量
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public int getQuantity();
 
 	/**
-	 * @description 设置购买数量
+	 * 设置购买数量
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param quantity
 	 */
 	public void setQuantity(int quantity);
 
 	/**
-	 * @description 获取产品编号
+	 * 获取产品编号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getProductId();
 
 	/**
-	 * @description 设置产品编号
+	 * 设置产品编号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param productId
 	 */
 	public void setProductId(String productId);
 
 	/**
-	 * @description 获取产品名称
+	 * 获取产品名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getProductName();
 
 	/**
-	 * @description 设置产品名称
+	 * 设置产品名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param productName
 	 */
 	public void setProductName(String productName);
 
 	/**
-	 * @description 获取产品描述
+	 * 获取产品描述
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getDescription();
 
 	/**
-	 * @description 设置产品描述
+	 * 设置产品描述
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param description
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * @description 获取下单提交时间
+	 * 获取下单提交时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Date getSubmitTime();
 
 	/**
-	 * @description 设置下单提交时间
+	 * 设置下单提交时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param submitTime
 	 */
 	public void setSubmitTime(Date submitTime);
 
 	/**
-	 * @description 设置产品单价
+	 * 设置产品单价
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public BigDecimal getPrice();
 
 	/**
-	 * @description 获取产品单价
+	 * 获取产品单价
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param price
 	 */
 	public void setPrice(BigDecimal price);
 
 	/**
-	 * @description 获取产品折扣
+	 * 获取产品折扣
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public double getDiscount();
 
 	/**
-	 * @description 设置产品折扣
+	 * 设置产品折扣
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param discount
 	 */
 	public void setDiscount(double discount);
 
 	/**
-	 * @description 获取线上/线下类型
+	 * 获取线上/线下类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public int getO2oType();
 
 	/**
-	 * @description 设置线上/线下类型
+	 * 设置线上/线下类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param o2oType
 	 */
 	public void setO2oType(int o2oType);
 
 	/**
-	 * @description 获取针对于线下用户输入的账号
+	 * 获取针对于线下用户输入的账号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getAccount();
 
 	/**
-	 * @description 设置针对于线下用户输入的账号
+	 * 设置针对于线下用户输入的账号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param account
 	 */
 	public void setAccount(String account);
 
 	/**
-	 * @description 取针对于线下用户输入的密码
+	 * 取针对于线下用户输入的密码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getPassword();
 
 	/**
-	 * @description 设置对于线下用户输入的密码
+	 * 设置对于线下用户输入的密码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param password
 	 */

@@ -21,7 +21,7 @@ package org.workin.image.zoom;
 import org.workin.image.AbstractImageHandler;
 
 /**
- * @description 标准缩放处理器
+ * 标准缩放处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -53,7 +53,7 @@ public abstract class AbstractStandardZoomHandler extends AbstractImageHandler
 	}
 
 	/**
-	 * @description 判断是否超宽
+	 * 判断是否超宽
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param width
 	 * @return
@@ -63,7 +63,7 @@ public abstract class AbstractStandardZoomHandler extends AbstractImageHandler
 	}
 	
 	/**
-	 * @description 判断是否超高
+	 * 判断是否超高
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param height
 	 * @return
@@ -73,7 +73,7 @@ public abstract class AbstractStandardZoomHandler extends AbstractImageHandler
 	}
 	
 	/**
-	 * @description 判断指定的宽高是否在目标范围区间内
+	 * 判断指定的宽高是否在目标范围区间内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param width
 	 * @param height

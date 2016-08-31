@@ -22,21 +22,21 @@ import org.workin.commons.pagination.PagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilterChain;
 
 /**
- * @description 带属性过滤器链的分页查询对象
+ * 带属性过滤器链的分页查询对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface FilterChainPagingQuery extends PagingQuery {
 	
 	/**
-	 * @description 设置属性过滤器链
+	 * 设置属性过滤器链
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param chain
 	 */
 	public void setFilterChain(PersistencePropertyFilterChain chain);
 	
 	/**
-	 * @description 获取属性过滤器链
+	 * 获取属性过滤器链
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

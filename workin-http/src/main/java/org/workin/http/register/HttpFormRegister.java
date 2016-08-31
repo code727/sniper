@@ -25,35 +25,35 @@ import org.workin.http.HttpForm;
 import org.workin.http.converter.HttpFormConverter;
 
 /**
- * @description Http表单注册器接口
+ * Http表单注册器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface HttpFormRegister {
 	
 	/**
-	 * @description 设置表单转换器
+	 * 设置表单转换器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param converter
 	 */
 	public void setConverter(HttpFormConverter converter);
 	
 	/**
-	 * @description 设置表单映射集
+	 * 设置表单映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param formMap
 	 */
 	public void setFormMap(Map<String, HttpForm> formMap);
 	
 	/**
-	 * @description 获取表单映射集
+	 * 获取表单映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Map<String, HttpForm> getFormMap();
 	
 	/**
-	 * @description 根据名称查找到对应的表单对象
+	 * 根据名称查找到对应的表单对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -61,7 +61,7 @@ public interface HttpFormRegister {
 	public HttpForm find(String name);
 	
 	/**
-	 * @description 根据名称查找到对应表单的URL
+	 * 根据名称查找到对应表单的URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -69,14 +69,14 @@ public interface HttpFormRegister {
 	public String findURL(String name);
 	
 	/**
-	 * @description 获取所有的表单对象
+	 * 获取所有的表单对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<HttpForm> getForms();
 	
 	/**
-	 * @description 获取所有的URL字符串
+	 * 获取所有的URL字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

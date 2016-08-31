@@ -19,7 +19,7 @@
 package org.workin.persistence.jpa.dao;
 
 /**
- * @description JPA标准查询回调DAO抽象类。
+ * JPA标准查询回调DAO抽象类。
  * 				它在JpaCriteriaQueryCallback的基础上可以设置上层对象(如Service)传入的查询参数，
  * 				可以真正完全独立的在DAO中处理属于JPA的业务，而不必混杂在上层对象中来处理。
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -31,7 +31,7 @@ public abstract class JpaCriteriaQueryCallbackDao<T, P> implements JpaCriteriaQu
 	protected P parameter;
 	
 	/**
-	 * @description 设置查询参数对象
+	 * 设置查询参数对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter
 	 */
@@ -40,7 +40,7 @@ public abstract class JpaCriteriaQueryCallbackDao<T, P> implements JpaCriteriaQu
 	}
 	
 	/**
-	 * @description 获取查询参数对象
+	 * 获取查询参数对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

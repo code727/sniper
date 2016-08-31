@@ -24,7 +24,7 @@ import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 日期属性编辑器实现类
+ * 日期属性编辑器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -51,7 +51,7 @@ public class DatePropertyEditor extends StringPropertyEditor {
 	}
 	
 	/**
-	 * @description 覆盖父类getDefaultValue()方法，当文本值为空时，默认值取当前时间
+	 * 覆盖父类getDefaultValue()方法，当文本值为空时，默认值取当前时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

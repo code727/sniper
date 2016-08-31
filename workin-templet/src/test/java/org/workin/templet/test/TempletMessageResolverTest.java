@@ -24,7 +24,7 @@ import org.workin.templet.message.service.ResourceBundleMessageService;
 import org.workin.test.junit.BaseTestCase;
 
 /**
- * @description 模板消息解析器单元测试类
+ * 模板消息解析器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -25,7 +25,7 @@ import org.apache.shiro.util.Destroyable;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * @description 自定义Cache管理实现类
+ * 自定义Cache管理实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

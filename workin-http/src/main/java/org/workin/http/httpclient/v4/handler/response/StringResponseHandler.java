@@ -25,7 +25,7 @@ import org.apache.http.client.ClientProtocolException;
 
 
 /**
- * @description HttpClient字符串响应结果处理器实现类
+ * HttpClient字符串响应结果处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

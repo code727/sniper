@@ -19,7 +19,7 @@
 package org.workin.commons.exception;
 
 /**
- * @description 业务异常处理类
+ * 业务异常处理类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

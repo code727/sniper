@@ -24,7 +24,7 @@ import org.workin.jms.core.JmsService;
 import org.workin.jms.support.JmsServiceSupport;
 
 /**
- * @description JMS服务模板实现类
+ * JMS服务模板实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

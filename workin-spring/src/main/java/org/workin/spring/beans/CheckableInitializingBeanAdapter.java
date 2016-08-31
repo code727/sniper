@@ -19,7 +19,7 @@
 package org.workin.spring.beans;
 
 /**
- * @description 可检测的初始化Bean适配器抽象类
+ * 可检测的初始化Bean适配器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

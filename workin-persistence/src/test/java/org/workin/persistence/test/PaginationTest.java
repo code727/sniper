@@ -28,14 +28,14 @@ import org.workin.commons.util.CollectionUtils;
 import org.workin.test.junit.BaseTestCase;
 
 /**
- * @description 分页查询类
+ * 分页查询类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class PaginationTest extends BaseTestCase {
 	
 	/**
-	 * @description 测试根据当前页数(currentPage)和每页条数(pageSize)的常规分页
+	 * 测试根据当前页数(currentPage)和每页条数(pageSize)的常规分页
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	@Test
@@ -54,7 +54,7 @@ public class PaginationTest extends BaseTestCase {
 	}
 	
 	/**
-	 * @description 根据根据ID(begin)和每页条数(pageSize)的半偏移分页。
+	 * 根据根据ID(begin)和每页条数(pageSize)的半偏移分页。
 	 * 				针对全偏移(begin和end参数作为查询条件)分页方式同样适用。
 	 * 				对于偏移分页，不要设置当前页数，否则分页器仍将用常规分页的方式来计算参数。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>

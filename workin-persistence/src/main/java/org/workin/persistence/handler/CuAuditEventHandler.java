@@ -23,7 +23,7 @@ import java.util.Date;
 import org.workin.commons.entity.CuAuditable;
 
 /**
- * @description 新增更新审核事件处理器实现类
+ * 新增更新审核事件处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

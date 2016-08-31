@@ -23,7 +23,7 @@ import java.io.File;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 文件类型过滤器
+ * 文件类型过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

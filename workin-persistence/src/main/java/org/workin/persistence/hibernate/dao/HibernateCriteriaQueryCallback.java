@@ -21,14 +21,14 @@ package org.workin.persistence.hibernate.dao;
 import org.hibernate.Criteria;
 
 /**
- * @description Hibernate标准查询回调接口
+ * Hibernate标准查询回调接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface HibernateCriteriaQueryCallback {
 		
 	/**
-	 * @description 执行标准化查询业务处理
+	 * 执行标准化查询业务处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param criteria
 	 */

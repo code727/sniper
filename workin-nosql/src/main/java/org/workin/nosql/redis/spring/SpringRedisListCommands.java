@@ -22,14 +22,14 @@ import org.springframework.data.redis.connection.RedisListCommands.Position;
 import org.workin.nosql.redis.dao.RedisListCommands;
 
 /**
- * @description Spring Redis列表命令接口
+ * Spring Redis列表命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface SpringRedisListCommands extends RedisListCommands {
 	
 	/**
-	 * @description 在当前库中执行lInsert命令
+	 * 在当前库中执行lInsert命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param where
@@ -40,7 +40,7 @@ public interface SpringRedisListCommands extends RedisListCommands {
 	public <K, V> Long lInsert(K key, Position where, V pivot, V value);
 	
 	/**
-	 * @description 在当前库中执行lInsert命令，并设置过期秒数
+	 * 在当前库中执行lInsert命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param where
@@ -52,7 +52,7 @@ public interface SpringRedisListCommands extends RedisListCommands {
 	public <K, V> Long lInsert(K key, Position where, V pivot, V value, long expireSeconds);
 	
 	/**
-	 * @description 在指定索引库中执行lInsert命令
+	 * 在指定索引库中执行lInsert命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param key
@@ -64,7 +64,7 @@ public interface SpringRedisListCommands extends RedisListCommands {
 	public <K, V> Long lInsert(int dbIndex, K key, Position where, V pivot, V value);
 	
 	/**
-	 * @description 在指定索引库中执行lInsert命令，并设置过期秒数
+	 * 在指定索引库中执行lInsert命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param key

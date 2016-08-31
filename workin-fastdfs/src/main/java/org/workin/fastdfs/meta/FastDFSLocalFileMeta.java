@@ -24,7 +24,7 @@ import java.io.IOException;
 import org.workin.support.file.meta.LocalFileMeta;
 
 /**
- * @description FastDFS本地文件源实现类
+ * FastDFS本地文件源实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -19,7 +19,7 @@
 package org.workin.commons.enums;
 
 /**
- * @description 枚举对象抽象类
+ * 枚举对象抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

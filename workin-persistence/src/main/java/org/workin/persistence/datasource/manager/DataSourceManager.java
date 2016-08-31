@@ -19,14 +19,14 @@
 package org.workin.persistence.datasource.manager;
 
 /**
- * @description 数据源管理器接口
+ * 数据源管理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface DataSourceManager {
 	
 	/**
-	 * @description 根据方法名称获取对应的数据源名称
+	 * 根据方法名称获取对应的数据源名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param methodName
 	 * @return

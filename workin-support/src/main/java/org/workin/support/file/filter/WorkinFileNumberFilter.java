@@ -19,28 +19,28 @@
 package org.workin.support.file.filter;
 
 /**
- * @description Workin框架本地文件数字属性值过滤器
+ * Workin框架本地文件数字属性值过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface WorkinFileNumberFilter extends WorkinFileFilter {
 	
 	/**
-	 * @description 获取字符串过滤值
+	 * 获取字符串过滤值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Number getFilterValue();
 	
 	/**
-	 * @description 设置字符串过滤值
+	 * 设置字符串过滤值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param filterValue
 	 */
 	public void setFilterValue(Number filterValue);
 	
 	/**
-	 * @description 设置逻辑运算规则
+	 * 设置逻辑运算规则
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param operation
 	 */

@@ -22,14 +22,14 @@ import org.workin.support.codec.Codecable;
 
 
 /**
- * @description 加密算法接口
+ * 加密算法接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Encryption extends Codecable {
 	
 	/**
-	 * @description 将明文加密成密文
+	 * 将明文加密成密文
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext
 	 * @return
@@ -38,7 +38,7 @@ public interface Encryption extends Codecable {
 	public String encrypt(String plaintext) throws Exception;
 	
 	/**
-	 * @description 将明文字节数组加密成密文
+	 * 将明文字节数组加密成密文
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintextBytes
 	 * @return
@@ -47,7 +47,7 @@ public interface Encryption extends Codecable {
 	public String encrypt(byte[] plaintextBytes) throws Exception;
 	
 	/**
-	 * @description 将明文加密成密文字节数组
+	 * 将明文加密成密文字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintext
 	 * @return
@@ -56,7 +56,7 @@ public interface Encryption extends Codecable {
 	public byte[] encryptToBytes(String plaintext) throws Exception;
 	
 	/**
-	 * @description 将明文字节数组加密成密文字节数组
+	 * 将明文字节数组加密成密文字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param plaintextBytes
 	 * @return

@@ -24,14 +24,14 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- * @description JPA标准查询回调接口
+ * JPA标准查询回调接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface JpaCriteriaQueryCallback<T> {
 	
 	/**
-	 * @description 根据CriteriaBuilder、CriteriaQuery和Root
+	 * 根据CriteriaBuilder、CriteriaQuery和Root
 	 * 				对象执行查询业务处理，并返回条件谓词对象组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param builder

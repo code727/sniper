@@ -19,7 +19,7 @@
 package org.workin.commons.pagination;
 
 /**
- * @description 分页查询条件接口
+ * 分页查询条件接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -35,56 +35,56 @@ public interface PagingQuery {
 	public static final int DEFAULT_PAGE_SIZE = 10;
 	
 	/**
-	 * @description 获取每页条数
+	 * 获取每页条数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public int getPageSize();
 	
 	/**
-	 * @description 设置每页条数
+	 * 设置每页条数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pageSize
 	 */
 	public void setPageSize(int pageSize);
 	
 	/**
-	 * @description 获取当前页数
+	 * 获取当前页数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public int getCurrentPage();
 	
 	/**
-	 * @description 设置当前页数
+	 * 设置当前页数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param page
 	 */
 	public void setCurrentPage(int page);
 			
 	/**
-	 * @description 获取执行查询的起始位置
+	 * 获取执行查询的起始位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public long getBegin();
 
 	/**
-	 * @description 设置执行查询的起始位置
+	 * 设置执行查询的起始位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param begin
 	 */
 	public void setBegin(long begin);
 	
 	/**
-	 * @description 获取执行查询的结束位置
+	 * 获取执行查询的结束位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public long getEnd();
 
 	/**
-	 * @description 设置执行查询的结束位置
+	 * 设置执行查询的结束位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param end
 	 */

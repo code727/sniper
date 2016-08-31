@@ -23,7 +23,7 @@ import org.workin.jms.core.template.ConsumerTemplate;
 import org.workin.jms.core.template.ProducerTemplate;
 
 /**
- * @description JMS服务支持抽象类
+ * JMS服务支持抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

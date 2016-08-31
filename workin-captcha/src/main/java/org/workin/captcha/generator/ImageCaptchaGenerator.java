@@ -22,7 +22,7 @@ import org.workin.captcha.ImageCaptcha;
 import org.workin.image.layout.CaptchaLayout;
 
 /**
- * @description 图片验证码生成器
+ * 图片验证码生成器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -41,21 +41,21 @@ public interface ImageCaptchaGenerator extends CaptchaGenerator {
 	public static final int MIN_FONT_SIZE = 12;
 	
 	/**
-	 * @description 获取图片验证码布局
+	 * 获取图片验证码布局
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public CaptchaLayout getLayout();
 	
 	/**
-	 * @description 设置图片验证码布局
+	 * 设置图片验证码布局
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param layout
 	 */
 	public void setLayout(CaptchaLayout layout);
 		
 	/**
-	 * @description 创建图片验证码
+	 * 创建图片验证码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

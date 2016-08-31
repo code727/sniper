@@ -28,7 +28,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.support.file.filter.AbstractFileStringFilter;
 
 /**
- * @description 文件名过滤器
+ * 文件名过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

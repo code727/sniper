@@ -29,7 +29,7 @@ import javax.crypto.Cipher;
 import org.workin.security.algorithm.asymmetric.CipherAsymmetricAlgorithm;
 
 /**
- * @description RSA加解密算法实现类
+ * RSA加解密算法实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>	
  * @version 1.0
  */
@@ -53,7 +53,7 @@ public class RSAAlgorithm extends CipherAsymmetricAlgorithm {
 	}
 	
 	/**
-	 * @description 构建公钥
+	 * 构建公钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keyPair
 	 * @param keyFactory
@@ -74,7 +74,7 @@ public class RSAAlgorithm extends CipherAsymmetricAlgorithm {
 	}
 	
 	/**
-	 * @description 构建私钥
+	 * 构建私钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keyPair
 	 * @param keyFactory

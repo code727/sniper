@@ -22,14 +22,14 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 
 /**
- * @description Shiro缓存库接口
+ * Shiro缓存库接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface CacheRepository {
 	
 	/**
-	 * @description 根据名称获取缓存对象
+	 * 根据名称获取缓存对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -38,7 +38,7 @@ public interface CacheRepository {
 	public <K, V> Cache<K, V> getCache(String name) throws CacheException;
 	
 	/**
-	 * @description 销毁缓存库
+	 * 销毁缓存库
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws Exception
 	 */

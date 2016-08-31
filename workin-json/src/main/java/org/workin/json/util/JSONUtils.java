@@ -36,7 +36,7 @@ import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description JSON工具类
+ * JSON工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -54,7 +54,7 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 构建全局默认的Morpher
+	 * 构建全局默认的Morpher
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	private static void buildDefaultMorpher() {
@@ -66,7 +66,7 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 构建全局默认的JsonConfig
+	 * 构建全局默认的JsonConfig
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	private static void buildDefaultJsonConfig() {
@@ -87,7 +87,7 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 注册全局的Morpher
+	 * 注册全局的Morpher
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param morpher
 	 */
@@ -99,7 +99,7 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 设置全局的JsonConfig
+	 * 设置全局的JsonConfig
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param jsonConfig
 	 */
@@ -110,7 +110,7 @@ public class JSONUtils {
 	}
 
 	/**
-	 * @description 将对象转换成JSON字符串
+	 * 将对象转换成JSON字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -122,7 +122,7 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 将泛型集合中若干个Bean对象转换成JSON字符串
+	 * 将泛型集合中若干个Bean对象转换成JSON字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param beanCollection
 	 * @return
@@ -134,7 +134,7 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 将泛型列表中若干个Bean对象转换成JSON字符串
+	 * 将泛型列表中若干个Bean对象转换成JSON字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param beanList
 	 * @return
@@ -146,7 +146,7 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 将数组中的Bean对象转换成JSON字符串
+	 * 将数组中的Bean对象转换成JSON字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param beanArray
 	 * @return
@@ -158,7 +158,7 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 将JSON字符串转换成指定类型的集合
+	 * 将JSON字符串转换成指定类型的集合
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param json
 	 * @param beanClass
@@ -173,7 +173,7 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 将JSON字符串转换成指定类型的列表
+	 * 将JSON字符串转换成指定类型的列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param json
 	 * @param beanClass
@@ -188,7 +188,7 @@ public class JSONUtils {
 	}
 	
 	/**
-	 * @description 将JSON字符串转换成指定类型的对象
+	 * 将JSON字符串转换成指定类型的对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param json
 	 * @param beanClass

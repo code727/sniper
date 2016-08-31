@@ -19,7 +19,7 @@
 package org.workin.support.context;
 
 /**
- * @description 应用上下文工具类
+ * 应用上下文工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -28,7 +28,7 @@ public class ApplicationContextHolder {
 	private static final ApplicationContext<Object, Object> holder = newMapThreadLocalContext();
 	
 	/**
-	 * @description 清除上下文
+	 * 清除上下文
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public static void clear() {
@@ -36,7 +36,7 @@ public class ApplicationContextHolder {
 	}
 	
 	/**
-	 * @description 根据名称获取线程局部变量的属性值
+	 * 根据名称获取线程局部变量的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -46,7 +46,7 @@ public class ApplicationContextHolder {
 	}
 	
 	/**
-	 * @description 设置线程局部变量的属性值
+	 * 设置线程局部变量的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param value
@@ -56,7 +56,7 @@ public class ApplicationContextHolder {
 	}
 	
 	/**
-	 * @description 根据名称删除对应的局部变量属性
+	 * 根据名称删除对应的局部变量属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -66,7 +66,7 @@ public class ApplicationContextHolder {
 	}
 		
 	/**
-	 * @description 创建基于Map类型的线程局部变量
+	 * 创建基于Map类型的线程局部变量
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

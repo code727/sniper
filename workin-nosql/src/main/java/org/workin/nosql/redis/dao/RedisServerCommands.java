@@ -19,21 +19,21 @@
 package org.workin.nosql.redis.dao;
 
 /**
- * @description Redis服务终端命令接口
+ * Redis服务终端命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface RedisServerCommands {
 	
 	/**
-	 * @description 在当前库中执行dbSize命令，获取当前库中键的个数
+	 * 在当前库中执行dbSize命令，获取当前库中键的个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Long dbSize();
 	
 	/**
-	 * @description 在指定库中执行dbSize命令，获取当前库中键的个数
+	 * 在指定库中执行dbSize命令，获取当前库中键的个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @return
@@ -41,26 +41,26 @@ public interface RedisServerCommands {
 	public Long dbSize(int dbIndex);
 	
 	/**
-	 * @description 执行flushAll命令，清空所有库中的数据
+	 * 执行flushAll命令，清空所有库中的数据
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public void flushAll();
 	
 	/**
-	 * @description 在当前库中执行flushDb命令，清空当前库中的所有数据
+	 * 在当前库中执行flushDb命令，清空当前库中的所有数据
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public void flushDb();
 	
 	/**
-	 * @description 在指定库中执行flushDb命令，清空当前库中的所有数据
+	 * 在指定库中执行flushDb命令，清空当前库中的所有数据
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 */
 	public void flushDb(int dbIndex);
 	
 	/**
-	 * @description 执行shutdown命令，关闭服务器
+	 * 执行shutdown命令，关闭服务器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public void shutdown();

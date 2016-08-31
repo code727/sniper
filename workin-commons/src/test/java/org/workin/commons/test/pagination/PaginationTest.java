@@ -24,7 +24,7 @@ import org.workin.commons.pagination.pager.SimplePager;
 import org.workin.test.junit.BaseTestCase;
 
 /**
- * @description 分页查询单元测试类
+ * 分页查询单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

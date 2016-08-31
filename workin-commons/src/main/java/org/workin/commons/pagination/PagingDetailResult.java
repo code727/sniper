@@ -19,28 +19,28 @@
 package org.workin.commons.pagination;
 
 /**
- * @description 分页详情结果类
+ * 分页详情结果类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface PagingDetailResult<T> extends PagingResult<T> {
 	
 	/**
-	 * @description 获取当前分页结果的总页数
+	 * 获取当前分页结果的总页数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public long getPages();
 	
 	/**
-	 * @description 获取当前分页结果从第几条记录开始
+	 * 获取当前分页结果从第几条记录开始
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public long getFrom();
 	
 	/**
-	 * @description 获取当前分页结果从第几条记录结束
+	 * 获取当前分页结果从第几条记录结束
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

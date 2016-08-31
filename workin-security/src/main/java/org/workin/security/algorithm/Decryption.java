@@ -21,14 +21,14 @@ package org.workin.security.algorithm;
 import org.workin.support.codec.Codecable;
 
 /**
- * @description 解密算法接口
+ * 解密算法接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Decryption extends Codecable {
 	
 	/**
-	 * @description 将密文解密为明文
+	 * 将密文解密为明文
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ciphertext
 	 * @return
@@ -37,7 +37,7 @@ public interface Decryption extends Codecable {
 	public String decrypt(String ciphertext) throws Exception;
 	
 	/**
-	 * @description 将密文字节数组解密成明文
+	 * 将密文字节数组解密成明文
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ciphertextBytes
 	 * @return
@@ -46,7 +46,7 @@ public interface Decryption extends Codecable {
 	public String decrypt(byte[] ciphertextBytes) throws Exception;
 	
 	/**
-	 * @description 将密文解密为明文字节数组
+	 * 将密文解密为明文字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ciphertext
 	 * @return
@@ -55,7 +55,7 @@ public interface Decryption extends Codecable {
 	public byte[] decryptToBytes(String ciphertext) throws Exception;
 	
 	/**
-	 * @description 将密文字节数组解密为明文字节数组
+	 * 将密文字节数组解密为明文字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param ciphertextBytes
 	 * @return

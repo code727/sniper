@@ -29,7 +29,7 @@ import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
 /**
- * @description JsonLib序列化器单元测试类
+ * JsonLib序列化器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

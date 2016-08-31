@@ -22,7 +22,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.workin.support.context.DataSourceHolder;
 
 /**
- * @description JDBC多数据源实现类
+ * JDBC多数据源实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

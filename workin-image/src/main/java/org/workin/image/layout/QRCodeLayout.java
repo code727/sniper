@@ -23,7 +23,7 @@ import java.awt.Color;
 import org.workin.commons.util.NumberUtils;
 
 /**
- * @description 二维码布局
+ * 二维码布局
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

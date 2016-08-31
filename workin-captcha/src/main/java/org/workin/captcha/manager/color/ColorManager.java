@@ -22,42 +22,42 @@ import java.awt.Color;
 import java.util.Map;
 
 /**
- * @description 颜色管理器
+ * 颜色管理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface ColorManager {
 	
 	/**
-	 * @description 设置"名称-颜色"映射集
+	 * 设置"名称-颜色"映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param colors
 	 */
 	public void setColors(Map<String, Color> colors);
 	
 	/**
-	 * @description 获取"名称-颜色"映射集
+	 * 获取"名称-颜色"映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Map<String, Color> getColors();
 	
 	/**
-	 * @description 选择一个颜色名称
+	 * 选择一个颜色名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String selectColorName();
 	
 	/**
-	 * @description 选择一个颜色对象
+	 * 选择一个颜色对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Color selectColor();
 	
 	/**
-	 * @description 获取指定名称的颜色对象
+	 * 获取指定名称的颜色对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return

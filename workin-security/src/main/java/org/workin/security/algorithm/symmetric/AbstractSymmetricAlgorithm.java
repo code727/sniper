@@ -26,7 +26,7 @@ import org.workin.support.codec.Base64Codec;
 import org.workin.support.codec.Codec;
 
 /**
- * @description 对称算法抽象类
+ * 对称算法抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -94,7 +94,7 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	}
 	
 	/**
-	 * @description 初始化加密/解密结果的编解码器
+	 * 初始化加密/解密结果的编解码器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws Exception
 	 */
@@ -143,7 +143,7 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	}
 	
 	/**
-	 * @description 获取密钥的字节数组
+	 * 获取密钥的字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -155,7 +155,7 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	}
 	
 	/**
-	 * @description 初始化操作
+	 * 初始化操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws Exception
 	 */

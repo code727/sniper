@@ -24,7 +24,7 @@ import javax.persistence.PersistenceContext;
 import org.workin.spring.beans.AbstractGenricBean;
 
 /**
- * @description JPA2标准的DAO支持抽象类
+ * JPA2标准的DAO支持抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

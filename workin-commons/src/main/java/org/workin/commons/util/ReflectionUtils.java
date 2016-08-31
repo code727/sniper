@@ -28,14 +28,14 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * @description 反射工具类
+ * 反射工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class ReflectionUtils {
 	
 	/**
-	 * @description 获取当前对象所在类以及非Object基类中定义的所有方法
+	 * 获取当前对象所在类以及非Object基类中定义的所有方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @return
@@ -55,7 +55,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象所在类以及非Object基类中定义的所有方法的名称
+	 * 获取当前对象所在类以及非Object基类中定义的所有方法的名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @return
@@ -72,7 +72,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象所在类或非Object基类中所指定的方法
+	 * 获取当前对象所在类或非Object基类中所指定的方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param methodName 方法名称
@@ -98,7 +98,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 判断指定的方法是否存在于当前对象所在类或非Object基类中
+	 * 判断指定的方法是否存在于当前对象所在类或非Object基类中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param methodName 方法名称
@@ -110,7 +110,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象所在类中所指定的方法
+	 * 获取当前对象所在类中所指定的方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param methodName
@@ -134,7 +134,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 判断指定的方法是否存在于当前对象中
+	 * 判断指定的方法是否存在于当前对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param methodName 方法名称
@@ -146,7 +146,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象所在类以及非Object基类中定义的所有构造函数
+	 * 获取当前对象所在类以及非Object基类中定义的所有构造函数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @return
@@ -166,7 +166,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象所在类以及非Object基类中定义的所有构造函数名称
+	 * 获取当前对象所在类以及非Object基类中定义的所有构造函数名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @return
@@ -183,7 +183,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象所在类或非Object基类中所指定的构造函数
+	 * 获取当前对象所在类或非Object基类中所指定的构造函数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param pTypes 构造函数中各参数对应的类型
@@ -204,7 +204,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 判断指定的构造函数是否存在于当前对象所在类或非Object基类中
+	 * 判断指定的构造函数是否存在于当前对象所在类或非Object基类中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param pTypes 构造函数中各参数对应的类型
@@ -215,7 +215,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象所在类中所指定的构造函数
+	 * 获取当前对象所在类中所指定的构造函数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param pTypes 构造函数中各参数对应的类型
@@ -236,7 +236,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 判断指定的构造函数是否存在于当前对象中
+	 * 判断指定的构造函数是否存在于当前对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param pTypes 构造函数中各参数对应的类型
@@ -247,7 +247,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象所在类以及非Object基类中定义的所有属性对象
+	 * 获取当前对象所在类以及非Object基类中定义的所有属性对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @return
@@ -266,7 +266,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象所在类以及非Object基类中定义的所有属性名称
+	 * 获取当前对象所在类以及非Object基类中定义的所有属性名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @return
@@ -284,7 +284,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象所在类或非Object基类中所指定的属性
+	 * 获取当前对象所在类或非Object基类中所指定的属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param fieldName
@@ -309,7 +309,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 判断指定的属性是否存在于当前对象所在类或非Object基类中
+	 * 判断指定的属性是否存在于当前对象所在类或非Object基类中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param fieldName
@@ -320,7 +320,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象所在类中所指定的属性
+	 * 获取当前对象所在类中所指定的属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param fieldName
@@ -332,7 +332,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 判断指定的属性是否存在于当前对象中
+	 * 判断指定的属性是否存在于当前对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param fieldName
@@ -343,7 +343,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象某个属性的类型
+	 * 获取当前对象某个属性的类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param fieldName
@@ -355,7 +355,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象某个属性的值
+	 * 获取当前对象某个属性的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param fieldName
@@ -372,7 +372,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 获取当前对象某个属性的值
+	 * 获取当前对象某个属性的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param field
@@ -385,7 +385,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 设置当前对象的某个属性值
+	 * 设置当前对象的某个属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param target
 	 * @param fieldName
@@ -402,7 +402,7 @@ public class ReflectionUtils {
 	}
 	
 	/** 
-	 * @description 批量设置当前对象的属性值
+	 * 批量设置当前对象的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param fieldValues
@@ -419,7 +419,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 设置当前对象的某个属性值
+	 * 设置当前对象的某个属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param field
@@ -432,7 +432,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 根据调用全限定名对应类的默认构造函数创建实例
+	 * 根据调用全限定名对应类的默认构造函数创建实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param className
 	 * @return
@@ -443,7 +443,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 调用全限定名对应类的构造函数创建实例
+	 * 调用全限定名对应类的构造函数创建实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param className
 	 * @param pTypes
@@ -457,7 +457,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 调用指定类的默认构造函数生成一个实例对象
+	 * 调用指定类的默认构造函数生成一个实例对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c
 	 * @return
@@ -468,7 +468,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 调用指定类的构造函数生成一个该类的实例对象
+	 * 调用指定类的构造函数生成一个该类的实例对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c
 	 * @param pTypes 构造函数中各参数对应的类型
@@ -487,7 +487,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 调用目标对象无参数的方法
+	 * 调用目标对象无参数的方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param target
 	 * @param methodName
@@ -499,7 +499,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 调用目标对象的方法后返回调用结果
+	 * 调用目标对象的方法后返回调用结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param target
 	 * @param methodName
@@ -519,14 +519,14 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @description 当前包下共享的静态反射工具支持类
+	 * 当前包下共享的静态反射工具支持类
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @version 1.0
 	 */
 	static class Supports {
 		
 		/**
-		 * @description 设置当前对象某个被强制设置为可访问的属性值
+		 * 设置当前对象某个被强制设置为可访问的属性值
 		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 		 * @param object
 		 * @param field
@@ -541,7 +541,7 @@ public class ReflectionUtils {
 		}
 		
 		/**
-		 * @description 获取当前对象某个被强制设置为可访问的属性值
+		 * 获取当前对象某个被强制设置为可访问的属性值
 		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 		 * @param object
 		 * @param field
@@ -557,7 +557,7 @@ public class ReflectionUtils {
 		}
 		
 		/**
-		 * @description 调用目标对象某个被强制设置为可访问的方法后返回调用结果
+		 * 调用目标对象某个被强制设置为可访问的方法后返回调用结果
 		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 		 * @param target
 		 * @param method

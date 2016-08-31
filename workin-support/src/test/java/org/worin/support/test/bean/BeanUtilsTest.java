@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.workin.support.bean.BeanUtils;
 
 /**
- * @description JAVA Bean工具测试类
+ * JAVA Bean工具测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0, 2015-2-26
  */

@@ -21,28 +21,28 @@ package org.workin.support.mapper;
 import java.util.Set;
 
 /**
- * @description 参数映射器接口
+ * 参数映射器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Mapper<T, R> {
 	
 	/**
-	 * @description 设置参数映射规则集
+	 * 设置参数映射规则集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameterRules
 	 */
 	public void setParameterRules(Set<ParameterRule> parameterRules);
 	
 	/**
-	 * @description 获取参数映射规则集
+	 * 获取参数映射规则集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Set<ParameterRule> getParameterRules();
 	
 	/**
-	 * @description 将指定的源对象进行映射处理
+	 * 将指定的源对象进行映射处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source
 	 * @return

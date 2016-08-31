@@ -20,14 +20,14 @@ package org.workin.fastdfs.support;
 
 
 /**
- * @description FastDFS操作接口
+ * FastDFS操作接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface FastDFSOperations extends FastDFSUploader, FastDFSDownloader, FastDFSDeleter {
 	
 	/**
-	 * @description 执行回调操作
+	 * 执行回调操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param action
 	 * @return
@@ -36,7 +36,7 @@ public interface FastDFSOperations extends FastDFSUploader, FastDFSDownloader, F
 	public <T> T execute(FastDFSCallback<T> action) throws Exception;
 	
 	/**
-	 * @description 在指定组上执行回调操作
+	 * 在指定组上执行回调操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param action
@@ -46,7 +46,7 @@ public interface FastDFSOperations extends FastDFSUploader, FastDFSDownloader, F
 	public <T> T execute(String groupName, FastDFSCallback<T> action) throws Exception;
 	
 	/**
-	 * @description 在指定组上执行回调操作，并指定完成操作后是否自动释放连接
+	 * 在指定组上执行回调操作，并指定完成操作后是否自动释放连接
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param groupName
 	 * @param action

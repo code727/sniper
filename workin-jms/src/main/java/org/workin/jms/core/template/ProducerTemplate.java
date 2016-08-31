@@ -32,7 +32,7 @@ import org.workin.jms.core.strategy.ProductionStrategy;
 import org.workin.jms.support.ProducerServiceSupport;
 
 /**
- * @description 生产者服务模板
+ * 生产者服务模板
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

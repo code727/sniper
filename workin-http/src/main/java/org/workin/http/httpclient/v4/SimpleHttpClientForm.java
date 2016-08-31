@@ -23,7 +23,7 @@ import org.workin.http.SimpleHttpForm;
 import org.workin.http.httpclient.v4.handler.request.RequestHandler;
 
 /**
- * @description HttpClient4.x表单实现类
+ * HttpClient4.x表单实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  * @param <T>

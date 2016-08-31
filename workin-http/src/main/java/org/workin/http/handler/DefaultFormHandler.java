@@ -23,7 +23,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.http.HttpForm;
 
 /**
- * @description 默认表单处理器实现类
+ * 默认表单处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -40,7 +40,7 @@ public class DefaultFormHandler implements FormHandler {
 	}
 	
 	/**
-	 * @description 拼接表单中的上下文根路径
+	 * 拼接表单中的上下文根路径
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param form
@@ -57,7 +57,7 @@ public class DefaultFormHandler implements FormHandler {
 	}
 	
 	/**
-	 * @description 拼接表单中的Action请求路径
+	 * 拼接表单中的Action请求路径
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param form
@@ -74,7 +74,7 @@ public class DefaultFormHandler implements FormHandler {
 	}
 	
 	/**
-	 * @description 拼接表单中的查询字符串
+	 * 拼接表单中的查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param queryString
@@ -94,7 +94,7 @@ public class DefaultFormHandler implements FormHandler {
 	}
 
 	/**
-	 * @description 格式化表单中的查询字符串
+	 * 格式化表单中的查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param form
 	 * @return

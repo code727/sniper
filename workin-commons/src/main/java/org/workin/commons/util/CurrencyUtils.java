@@ -24,7 +24,7 @@ import java.math.BigInteger;
 import org.workin.commons.enums.category.financial.Currency;
 
 /**
- * @description 货币工具类
+ * 货币工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -34,7 +34,7 @@ public class CurrencyUtils {
 	public static final String YUANJIAOFEN_FORMAT = "0.00";
 	
 	/**
-	 * @description 将字符ASCII码转化为指定货币格式的字符串
+	 * 将字符ASCII码转化为指定货币格式的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @param currency
@@ -45,7 +45,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将数字转化为指定货币格式的字符串
+	 * 将数字转化为指定货币格式的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @param currency
@@ -56,7 +56,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将字符ASCII码转化为人民币字符串
+	 * 将字符ASCII码转化为人民币字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @return
@@ -66,7 +66,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将数字转化为人民币字符串
+	 * 将数字转化为人民币字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @return
@@ -76,7 +76,7 @@ public class CurrencyUtils {
 	}
 
 	/**
-	 * @description 将比特型的元转换为分
+	 * 将比特型的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -86,7 +86,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将字符型的元转换为分
+	 * 将字符型的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -96,7 +96,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将短整型的元转换为分
+	 * 将短整型的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -106,7 +106,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将整型的元转换为分
+	 * 将整型的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -116,7 +116,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将长整型的元转换为分
+	 * 将长整型的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -126,7 +126,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将单精度浮点数的元转换为分
+	 * 将单精度浮点数的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -136,7 +136,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 选择是否采用四舍五入的方式将单精度浮点数的元转换为分
+	 * 选择是否采用四舍五入的方式将单精度浮点数的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param yuan
 	 * @param round
@@ -147,7 +147,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将双精度浮点数的元转换为分
+	 * 将双精度浮点数的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -157,7 +157,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 选择是否采用四舍五入的方式将双精度浮点数的元转换为分
+	 * 选择是否采用四舍五入的方式将双精度浮点数的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @param round
@@ -168,7 +168,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将BigDecimal类型的元转换为分
+	 * 将BigDecimal类型的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -178,7 +178,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 选择是否采用四舍五入的方式将BigDecimal类型的元转换为分
+	 * 选择是否采用四舍五入的方式将BigDecimal类型的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @param round
@@ -195,7 +195,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将BigInteger类型的元转换为分
+	 * 将BigInteger类型的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -208,7 +208,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将字符串类型的元转换为分
+	 * 将字符串类型的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -218,7 +218,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 选择是否采用四舍五入的方式将字符串类型的元转换为分
+	 * 选择是否采用四舍五入的方式将字符串类型的元转换为分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @param round
@@ -229,7 +229,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将字符串类型的元转换为分， 当字符串为空或转换出现异常时返回指定的默认分
+	 * 将字符串类型的元转换为分， 当字符串为空或转换出现异常时返回指定的默认分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @param defaultFen
@@ -240,7 +240,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 选择是否采用四舍五入的方式将字符串类型的元转换为分， 当字符串为空或转换出现异常时返回指定的默认分
+	 * 选择是否采用四舍五入的方式将字符串类型的元转换为分， 当字符串为空或转换出现异常时返回指定的默认分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @param round
@@ -259,7 +259,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将比特型的分转换为元
+	 * 将比特型的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -269,7 +269,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将字符型的分转换为元
+	 * 将字符型的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -279,7 +279,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将短整型的分转换为元
+	 * 将短整型的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -289,7 +289,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将整型的分转换为元
+	 * 将整型的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -299,7 +299,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将长整型的分转换为元
+	 * 将长整型的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -309,7 +309,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将单精度浮点数的分转换为元
+	 * 将单精度浮点数的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -319,7 +319,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 选择是否采用四舍五入的方式将单精度浮点数的分转换为元
+	 * 选择是否采用四舍五入的方式将单精度浮点数的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @param round
@@ -330,7 +330,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将双精度浮点数的分转换为元
+	 * 将双精度浮点数的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -340,7 +340,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 选择是否采用四舍五入的方式将双精度浮点数的分转换为元
+	 * 选择是否采用四舍五入的方式将双精度浮点数的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @param round
@@ -351,7 +351,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将BigInteger类型的分转换为元
+	 * 将BigInteger类型的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -361,7 +361,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将BigDecimal类型的分转换为元
+	 * 将BigDecimal类型的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -371,7 +371,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 选择是否采用四舍五入的方式将BigDecimal类型的分转换为元
+	 * 选择是否采用四舍五入的方式将BigDecimal类型的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @param round
@@ -392,7 +392,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将字符串类型的分转换为元
+	 * 将字符串类型的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @return
@@ -402,7 +402,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 选择是否采用四舍五入的方式将字符串类型的分转换为元
+	 * 选择是否采用四舍五入的方式将字符串类型的分转换为元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @param round
@@ -413,7 +413,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 将字符串类型的分转换为元，当字符串为空或转换出现异常时返回指定的默认分
+	 * 将字符串类型的分转换为元，当字符串为空或转换出现异常时返回指定的默认分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @param defaultYuan
@@ -424,7 +424,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * @description 选择是否采用四舍五入的方式将字符串类型的分转换为元， 当字符串为空或转换出现异常时返回指定的默认元
+	 * 选择是否采用四舍五入的方式将字符串类型的分转换为元， 当字符串为空或转换出现异常时返回指定的默认元
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param cash
 	 * @param round

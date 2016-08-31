@@ -23,7 +23,7 @@ import java.util.List;
 import org.workin.security.AuthorizationModel;
 
 /**
- * @description 授权服务适配器
+ * 授权服务适配器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

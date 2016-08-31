@@ -24,7 +24,7 @@ import org.workin.payment.provider.wechatpay.parser.WechatpayParser;
 import org.workin.payment.service.AbstractPaymentService;
 
 /**
- * @description 微信支付服务抽象类
+ * 微信支付服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

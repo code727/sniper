@@ -24,7 +24,7 @@ import java.util.List;
 import org.workin.commons.util.CollectionUtils;
 
 /**
- * @description 本地文件过滤器抽象类
+ * 本地文件过滤器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -78,7 +78,7 @@ public abstract class AbstractFileFilter implements WorkinFileFilter {
 	}
 	
 	/**
-	 * @description 过滤下级文件/目录
+	 * 过滤下级文件/目录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
 	 */

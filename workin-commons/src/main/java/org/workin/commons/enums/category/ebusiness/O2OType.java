@@ -21,7 +21,7 @@ package org.workin.commons.enums.category.ebusiness;
 import org.workin.commons.enums.AbstractLocaleEnums;
 
 /**
- * @description O2O类型枚举类
+ * O2O类型枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

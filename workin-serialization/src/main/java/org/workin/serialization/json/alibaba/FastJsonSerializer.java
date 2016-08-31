@@ -30,7 +30,7 @@ import com.alibaba.fastjson.serializer.SerializeWriter;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
 /**
- * @description 阿里FastJson序列化器实现类
+ * 阿里FastJson序列化器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

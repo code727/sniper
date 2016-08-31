@@ -22,49 +22,49 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * @description 文件源接口
+ * 文件源接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface FileMeta<T> {
 	
 	/**
-	 * @description 获取文件源对象
+	 * 获取文件源对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public T getSource();
 	
 	/**
-	 * @description 获取文件源名称
+	 * 获取文件源名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getName();
 	
 	/**
-	 * @description 获取文件源主名
+	 * 获取文件源主名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getMainName();
 	
 	/**
-	 * @description 获取文件源扩展名
+	 * 获取文件源扩展名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getExtName();
 	
 	/**
-	 * @description 获取文件源的字节数组
+	 * 获取文件源的字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public byte[] getBytes() throws IOException;
 	
 	/**
-	 * @description 获取文件源的输入流对象
+	 * 获取文件源的输入流对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

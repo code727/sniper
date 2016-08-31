@@ -29,7 +29,7 @@ import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * @description 自定义的Shiro会话DAO实现类
+ * 自定义的Shiro会话DAO实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

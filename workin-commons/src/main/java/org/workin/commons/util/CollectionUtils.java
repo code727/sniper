@@ -40,14 +40,14 @@ import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 
 /**
- * @description 集合工具类
+ * 集合工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0.0
  */
 public class CollectionUtils {
 	
 	/**
-	 * @description 判断集合是否为空
+	 * 判断集合是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param collection
 	 * @return 
@@ -57,7 +57,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 判断集合是否不为空
+	 * 判断集合是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param collection
 	 * @return 
@@ -67,7 +67,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个ArrayList对象
+	 * 实例化一个ArrayList对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -76,7 +76,7 @@ public class CollectionUtils {
 	}
 		
 	/**
-	 * @description 根据指定的集合实例化一个ArrayList对象
+	 * 根据指定的集合实例化一个ArrayList对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -87,7 +87,7 @@ public class CollectionUtils {
 	}
 		
 	/**
-	 * @description 实例化一个LinkedList对象
+	 * 实例化一个LinkedList对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -96,7 +96,7 @@ public class CollectionUtils {
 	}
 		
 	/**
-	 * @description 根据指定的集合实例化一个LinkedList对象
+	 * 根据指定的集合实例化一个LinkedList对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -106,7 +106,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个HashSet对象
+	 * 实例化一个HashSet对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -115,7 +115,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 根据指定的集合实例化一个HashSet对象
+	 * 根据指定的集合实例化一个HashSet对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -125,7 +125,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个LinkedHashSet对象
+	 * 实例化一个LinkedHashSet对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -134,7 +134,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 根据指定的集合实例化一个LinkedHashSet对象
+	 * 根据指定的集合实例化一个LinkedHashSet对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -144,7 +144,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个Vector对象
+	 * 实例化一个Vector对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -153,7 +153,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 根据指定的集合实例化一个Vector对象
+	 * 根据指定的集合实例化一个Vector对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -163,7 +163,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个ArrayDeque对象
+	 * 实例化一个ArrayDeque对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -172,7 +172,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 根据指定的集合实例化一个ArrayDeque对象
+	 * 根据指定的集合实例化一个ArrayDeque对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -182,7 +182,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个PriorityQueue对象
+	 * 实例化一个PriorityQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -191,7 +191,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 根据指定的集合实例化一个PriorityQueue对象
+	 * 根据指定的集合实例化一个PriorityQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -201,7 +201,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个DelayQueue对象
+	 * 实例化一个DelayQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -210,7 +210,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 根据指定的集合实例化一个DelayQueue对象
+	 * 根据指定的集合实例化一个DelayQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -220,7 +220,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个ArrayBlockingQueue对象
+	 * 实例化一个ArrayBlockingQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -229,7 +229,7 @@ public class CollectionUtils {
 	}
 		
 	/**
-	 * @description 根据指定的集合实例化一个ArrayBlockingQueue对象
+	 * 根据指定的集合实例化一个ArrayBlockingQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -240,7 +240,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个LinkedBlockingQueue对象
+	 * 实例化一个LinkedBlockingQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -249,7 +249,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 根据指定的集合实例化一个LinkedBlockingQueue对象
+	 * 根据指定的集合实例化一个LinkedBlockingQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -259,7 +259,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个LinkedBlockingDeque对象
+	 * 实例化一个LinkedBlockingDeque对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -268,7 +268,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 根据指定的集合实例化一个LinkedBlockingDeque对象
+	 * 根据指定的集合实例化一个LinkedBlockingDeque对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -278,7 +278,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个PriorityBlockingQueue对象
+	 * 实例化一个PriorityBlockingQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -287,7 +287,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 根据指定的集合实例化一个PriorityBlockingQueue对象
+	 * 根据指定的集合实例化一个PriorityBlockingQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -297,7 +297,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个SynchronousQueue对象
+	 * 实例化一个SynchronousQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -306,7 +306,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个ConcurrentLinkedQueue对象
+	 * 实例化一个ConcurrentLinkedQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -315,7 +315,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 根据指定的集合实例化一个ConcurrentLinkedQueue对象
+	 * 根据指定的集合实例化一个ConcurrentLinkedQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -325,7 +325,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 实例化一个ConcurrentLinkedDeque对象
+	 * 实例化一个ConcurrentLinkedDeque对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -334,7 +334,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 根据指定的集合实例化一个ConcurrentLinkedDeque对象
+	 * 根据指定的集合实例化一个ConcurrentLinkedDeque对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -344,7 +344,7 @@ public class CollectionUtils {
 	}
 		
 	/**
-	 * @description 删除集合中所有指定的元素
+	 * 删除集合中所有指定的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @param element
@@ -360,7 +360,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 清空集合中所有的空元素
+	 * 清空集合中所有的空元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 */
@@ -369,7 +369,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 获取两集合的差集
+	 * 获取两集合的差集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c1
 	 * @param c2
@@ -392,7 +392,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 获取两集合的补集
+	 * 获取两集合的补集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c1
 	 * @param c2
@@ -418,7 +418,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 获取集合元素的个数
+	 * 获取集合元素的个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -428,7 +428,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 将集合转换成Object类型的数组
+	 * 将集合转换成Object类型的数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @return
@@ -441,7 +441,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 将集合转换成具有共同元素类型的数组。
+	 * 将集合转换成具有共同元素类型的数组。
 	 * 				此方法要求集合中至少有一个不为null的元素，否则方法将抛出NullPointerException。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
@@ -458,7 +458,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 将集合转换成指定类型的数组
+	 * 将集合转换成指定类型的数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @param componentType
@@ -474,7 +474,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 判断执行对象是否为Collection接口实例
+	 * 判断执行对象是否为Collection接口实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -484,7 +484,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 获取索引位对应的元素值，未获取到时默认返回null
+	 * 获取索引位对应的元素值，未获取到时默认返回null
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param list
 	 * @param index
@@ -495,7 +495,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 获取索引位对应的元素值，未获取到时返回指定的值
+	 * 获取索引位对应的元素值，未获取到时返回指定的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param list
 	 * @param index
@@ -511,7 +511,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 获取列表中的第一个元素
+	 * 获取列表中的第一个元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param list
 	 * @return
@@ -521,7 +521,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 获取列表中的第一个元素，未获取到时返回指定的值
+	 * 获取列表中的第一个元素，未获取到时返回指定的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param list
 	 * @param defaultValue
@@ -535,7 +535,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 获取列表中的最后一个元素
+	 * 获取列表中的最后一个元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param list
 	 * @return
@@ -545,7 +545,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 获取列表中的最后一个元素，未获取到时返回指定的值
+	 * 获取列表中的最后一个元素，未获取到时返回指定的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param list
 	 * @param defaultValue
@@ -559,7 +559,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @description 按指定的分隔符将列表中各元素连接成字符串
+	 * 按指定的分隔符将列表中各元素连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param list
 	 * @param separator

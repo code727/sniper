@@ -21,7 +21,7 @@ package org.workin.commons.model.impl;
 import org.workin.commons.model.GenericsDataModel;
 
 /**
- * @description 可编码的数据对象模型
+ * 可编码的数据对象模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

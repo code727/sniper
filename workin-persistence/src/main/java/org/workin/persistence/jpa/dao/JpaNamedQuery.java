@@ -22,14 +22,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @description JPA命名空间查询接口
+ * JPA命名空间查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface JpaNamedQuery<T> {
 	
 	/**
-	 * @description 执行空间名称对应的查询语句后返回当前类型的唯一实体对象
+	 * 执行空间名称对应的查询语句后返回当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @return
@@ -37,7 +37,7 @@ public interface JpaNamedQuery<T> {
 	public T findUniqueByNamedQuery(String queryName);
 	
 	/**
-	 * @description 执行空间名称对应的查询语句后返回指定类型的唯一结果
+	 * 执行空间名称对应的查询语句后返回指定类型的唯一结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass 
 	 * @param queryName
@@ -46,7 +46,7 @@ public interface JpaNamedQuery<T> {
 	public <R> R findUniqueByNamedQuery(Class<R> resultClass, String queryName);
 	
 	/**
-	 * @description 执行空间名称对应的带占位符(?)参数的查询语句后返回当前类型的唯一实体对象
+	 * 执行空间名称对应的带占位符(?)参数的查询语句后返回当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @param values
@@ -55,7 +55,7 @@ public interface JpaNamedQuery<T> {
 	public T findUniqueByNamedQuery(String queryName, Object[] values);
 	
 	/**
-	 * @description 执行空间名称对应的带占位符(?)参数的查询语句后返回指定类型的唯一结果
+	 * 执行空间名称对应的带占位符(?)参数的查询语句后返回指定类型的唯一结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param queryName
@@ -65,7 +65,7 @@ public interface JpaNamedQuery<T> {
 	public <R> R findUniqueByNamedQuery(Class<R> resultClass, String queryName, Object[] values);
 
 	/**
-	 * @description 执行空间名称对应的带命名(=:name)参数的查询语句后返回当前类型的唯一实体对象
+	 * 执行空间名称对应的带命名(=:name)参数的查询语句后返回当前类型的唯一实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @param paramMap
@@ -74,7 +74,7 @@ public interface JpaNamedQuery<T> {
 	public T findUniqueByNamedQuery(String queryName, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 执行空间名称对应的带命名(=:name)参数的查询语句后返回指定类型的唯一结果
+	 * 执行空间名称对应的带命名(=:name)参数的查询语句后返回指定类型的唯一结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass 
 	 * @param queryName
@@ -84,7 +84,7 @@ public interface JpaNamedQuery<T> {
 	public <R> R findUniqueByNamedQuery(Class<R> resultClass, String queryName, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 执行空间名称对应的查询语句后返回当前类型的实体对象列表
+	 * 执行空间名称对应的查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @return 
@@ -92,7 +92,7 @@ public interface JpaNamedQuery<T> {
 	public List<T> findByNamedQuery(String queryName);
 	
 	/**
-	 * @description 执行空间名称对应的查询语句后返回指定类型的结果列表
+	 * 执行空间名称对应的查询语句后返回指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param queryName
@@ -101,7 +101,7 @@ public interface JpaNamedQuery<T> {
 	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName);
 	
 	/**
-	 * @description 从起始位置开始执行空间名称对应的查询语句后， 得到最大行数当前类型的实体对象列表
+	 * 从起始位置开始执行空间名称对应的查询语句后， 得到最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @param start
@@ -111,7 +111,7 @@ public interface JpaNamedQuery<T> {
 	public List<T> findByNamedQuery(String queryName, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始执行空间名称对应的查询语句后， 得到最大行数指定类型的结果列表
+	 * 从起始位置开始执行空间名称对应的查询语句后， 得到最大行数指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param queryName
@@ -122,7 +122,7 @@ public interface JpaNamedQuery<T> {
 	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName, int start, int maxRows);
 	
 	/**
-	 * @description 执行空间名称对应的带占位符(?)参数的查询语句后返回当前类型的实体对象列表
+	 * 执行空间名称对应的带占位符(?)参数的查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @param values
@@ -131,7 +131,7 @@ public interface JpaNamedQuery<T> {
 	public List<T> findByNamedQuery(String queryName, Object[] values);
 	
 	/**
-	 * @description 执行空间名称对应的带占位符(?)参数的查询语句后返回指定类型的结果列表
+	 * 执行空间名称对应的带占位符(?)参数的查询语句后返回指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param queryName
@@ -141,7 +141,7 @@ public interface JpaNamedQuery<T> {
 	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName, Object[] values);
 	
 	/**
-	 * @description 从起始位置开始执行空间名称对应的带占位符(?)参数的查询语句后，得到最大行数当前类型的实体对象列表
+	 * 从起始位置开始执行空间名称对应的带占位符(?)参数的查询语句后，得到最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @param values
@@ -152,7 +152,7 @@ public interface JpaNamedQuery<T> {
 	public List<T> findByNamedQuery(String queryName, Object[] values, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始执行空间名称对应的带占位符(?)参数的查询语句后，得到最大行数指定类型的结果列表
+	 * 从起始位置开始执行空间名称对应的带占位符(?)参数的查询语句后，得到最大行数指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param queryName
@@ -164,7 +164,7 @@ public interface JpaNamedQuery<T> {
 	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName, Object[] values, int start, int maxRows);
 
 	/**
-	 * @description 执行空间名称对应的带命名(=:name)参数的查询语句后返回当前类型的实体对象列表
+	 * 执行空间名称对应的带命名(=:name)参数的查询语句后返回当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @param paramMap
@@ -173,7 +173,7 @@ public interface JpaNamedQuery<T> {
 	public List<T> findByNamedQuery(String queryName, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 执行空间名称对应的带命名(=:name)参数的查询语句后返回指定类型的结果列表
+	 * 执行空间名称对应的带命名(=:name)参数的查询语句后返回指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param queryName
@@ -183,7 +183,7 @@ public interface JpaNamedQuery<T> {
 	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 从起始位置开始执行空间名称对应的带命名(=:name)参数的查询语句后，得到最大行数当前类型的实体对象列表
+	 * 从起始位置开始执行空间名称对应的带命名(=:name)参数的查询语句后，得到最大行数当前类型的实体对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @param paramMap
@@ -194,7 +194,7 @@ public interface JpaNamedQuery<T> {
 	public List<T> findByNamedQuery(String queryName, Map<String, ?> paramMap, int start, int maxRows);
 	
 	/**
-	 * @description 从起始位置开始执行空间名称对应的带命名(=:name)参数的查询语句后，得到最大行数指定类型的结果列表
+	 * 从起始位置开始执行空间名称对应的带命名(=:name)参数的查询语句后，得到最大行数指定类型的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param resultClass
 	 * @param queryName
@@ -206,7 +206,7 @@ public interface JpaNamedQuery<T> {
 	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName, Map<String, ?> paramMap, int start, int maxRows);
 	
 	/**
-	 * @description 执行空间名称对应的语句后返回受影响的行数
+	 * 执行空间名称对应的语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @return
@@ -214,7 +214,7 @@ public interface JpaNamedQuery<T> {
 	public int executeNamedQuery(String queryName);
 
 	/**
-	 * @description 执行空间名称对应的带占位符(?)参数语句后返回受影响的行数
+	 * 执行空间名称对应的带占位符(?)参数语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @param values
@@ -223,7 +223,7 @@ public interface JpaNamedQuery<T> {
 	public int executeNamedQuery(String queryName, Object[] values);
 
 	/**
-	 * @description 执行空间名称对应的带命名(=:name)参数语句后返回受影响的行数
+	 * 执行空间名称对应的带命名(=:name)参数语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @param paramMap
@@ -232,7 +232,7 @@ public interface JpaNamedQuery<T> {
 	public int executeNamedQuery(String queryName, Map<String, ?> paramMap);
 	
 	/**
-	 * @description 执行空间名称对应的总计查询语句后返回结果
+	 * 执行空间名称对应的总计查询语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @return
@@ -240,7 +240,7 @@ public interface JpaNamedQuery<T> {
 	public long countByNamedQuery(String queryName);
 	
 	/**
-	 * @description 执行空间名称对应的带占位符(?)参数的总计查询语句后返回结果
+	 * 执行空间名称对应的带占位符(?)参数的总计查询语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @param values
@@ -249,7 +249,7 @@ public interface JpaNamedQuery<T> {
 	public long countByNamedQuery(String queryName, Object[] values);
 	
 	/**
-	 * @description 执行空间名称对应的带命名(=:name)参数的总计查询语句后返回结果
+	 * 执行空间名称对应的带命名(=:name)参数的总计查询语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param queryName
 	 * @param paramMap

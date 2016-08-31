@@ -24,7 +24,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 
 /**
- * @description 布尔类型响应处理器
+ * 布尔类型响应处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0j
  */

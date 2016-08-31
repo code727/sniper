@@ -19,14 +19,14 @@
 package org.workin.support;
 
 /**
- * @description 逻辑运算接口
+ * 逻辑运算接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface LogicOperation<T1, T2> {
 	
 	/**
-	 * @description 执行两对象之间的逻辑运算，并返回逻辑结果
+	 * 执行两对象之间的逻辑运算，并返回逻辑结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj1
 	 * @param obj2

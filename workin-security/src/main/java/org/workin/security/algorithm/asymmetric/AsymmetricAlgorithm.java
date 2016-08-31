@@ -24,35 +24,35 @@ import java.security.PublicKey;
 import org.workin.security.algorithm.symmetric.SymmetricAlgorithm;
 
 /**
- * @description 非对称算法接口
+ * 非对称算法接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface AsymmetricAlgorithm extends SymmetricAlgorithm {
 	
 	/**
-	 * @description 设置公钥
+	 * 设置公钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param publicKey
 	 */
 	public void setPublicKey(String publicKey);
 	
 	/**
-	 * @description 获取公钥
+	 * 获取公钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getPublicKey();
 	
 	/**
-	 * @description 获取公钥接口对象
+	 * 获取公钥接口对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public PublicKey getPublicKeyInterface();
 	
 	/**
-	 * @description 获取私钥接口对象
+	 * 获取私钥接口对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

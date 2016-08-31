@@ -23,7 +23,7 @@ import org.workin.nosql.redis.dao.RedisDaoSupport;
 import redis.clients.jedis.JedisPool;
 
 /**
- * @description JedisDao支持类
+ * JedisDao支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

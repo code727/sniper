@@ -22,7 +22,7 @@ import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 支付类型枚举
+ * 支付类型枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -66,7 +66,7 @@ public enum PaymentType {
 	}
 	
 	/**
-	 * @description 获取支付类型标识
+	 * 获取支付类型标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -75,7 +75,7 @@ public enum PaymentType {
 	}
 
 	/**
-	 * @description 获取当前支付类型的订单号前缀
+	 * 获取当前支付类型的订单号前缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -84,7 +84,7 @@ public enum PaymentType {
 	}
 	
 	/**
-	 * @description 获取当前支付类型的订单号后缀
+	 * 获取当前支付类型的订单号后缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -93,7 +93,7 @@ public enum PaymentType {
 	}
 
 	/**
-	 * @description 获取对应支付类型的订单号前缀
+	 * 获取对应支付类型的订单号前缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 * @return
@@ -108,7 +108,7 @@ public enum PaymentType {
 	}
 	
 	/**
-	 * @description 获取对应支付类型的订单号后缀
+	 * 获取对应支付类型的订单号后缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 * @return
@@ -123,7 +123,7 @@ public enum PaymentType {
 	}
 	
 	/**
-	 * @description 判断指定的支付类型是否有效
+	 * 判断指定的支付类型是否有效
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 * @return
@@ -133,7 +133,7 @@ public enum PaymentType {
 	}
 	
 	/**
-	 * @description 获取指定类型的对象
+	 * 获取指定类型的对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 * @return

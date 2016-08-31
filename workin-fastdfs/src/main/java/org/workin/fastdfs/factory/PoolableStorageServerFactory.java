@@ -23,21 +23,21 @@ import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerClient;
 
 /**
- * @description 可池化的StorageServer对象工厂接口
+ * 可池化的StorageServer对象工厂接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface PoolableStorageServerFactory extends PoolableObjectFactory<StorageServer> {
 	
 	/**
-	 * @description 获取TrackerClient实例
+	 * 获取TrackerClient实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public TrackerClient getTrackerClient();
 	
 	/**
-	 * @description 设置TrackerClient实例
+	 * 设置TrackerClient实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param trackerClient
 	 */

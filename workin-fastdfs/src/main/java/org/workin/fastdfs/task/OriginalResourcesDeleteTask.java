@@ -27,7 +27,7 @@ import org.workin.fastdfs.meta.FastDFSMeta;
 import org.workin.fastdfs.support.FastDFSTemplet;
 
 /**
- * @description FastDFS旧资源清理信息
+ * FastDFS旧资源清理信息
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

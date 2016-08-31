@@ -21,7 +21,7 @@ package org.workin.fastdfs.accessor;
 import org.workin.fastdfs.cluster.Cluster;
 
 /**
- * @description 默认访问器实现类
+ * 默认访问器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

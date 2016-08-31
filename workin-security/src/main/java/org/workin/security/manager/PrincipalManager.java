@@ -19,28 +19,28 @@
 package org.workin.security.manager;
 
 /**
- * @description Principal管理器接口
+ * Principal管理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface PrincipalManager {
 	
 	/**
-	 * @description 获取当前用户登录名
+	 * 获取当前用户登录名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getCurrentLoginName();
 		
 	/**
-	 * @description 获取当前用户姓名
+	 * 获取当前用户姓名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public String getCurrentUserName();
 	
 	/**
-	 * @description 获取当前用户信息
+	 * 获取当前用户信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

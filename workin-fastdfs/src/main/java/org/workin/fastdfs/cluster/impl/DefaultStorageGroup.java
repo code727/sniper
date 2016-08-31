@@ -28,7 +28,7 @@ import org.workin.fastdfs.node.Storage;
 import org.workin.spring.beans.CheckableInitializingBean;
 
 /**
- * @description 默认的StorageGroup集群族实现类
+ * 默认的StorageGroup集群族实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

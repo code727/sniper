@@ -25,7 +25,7 @@ import org.workin.support.LogicOperation;
 import org.workin.support.LogicOperationEnum;
 
 /**
- * @description 本地文件数字属性值过滤器抽象类
+ * 本地文件数字属性值过滤器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

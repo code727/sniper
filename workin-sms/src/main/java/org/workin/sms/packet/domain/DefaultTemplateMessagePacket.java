@@ -21,7 +21,7 @@ package org.workin.sms.packet.domain;
 import org.workin.sms.packet.TemplateMessagePacket;
 
 /**
- * @description 默认的模板化消息数据包实体
+ * 默认的模板化消息数据包实体
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

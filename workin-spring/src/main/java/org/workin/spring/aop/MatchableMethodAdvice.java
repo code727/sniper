@@ -24,28 +24,28 @@ import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * @description 可设置匹配模式的方法拦截切面接口
+ * 可设置匹配模式的方法拦截切面接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface MatchableMethodAdvice extends ThrowsAdvice, InitializingBean {
 	
 	/**
-	 * @description 设置需要被拦截处理的方法名称模式集
+	 * 设置需要被拦截处理的方法名称模式集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param names
 	 */
 	public void setNamePatterns(Set<String> namePatterns);
 	
 	/**
-	 * @description 获取需要被拦截处理的方法模式集
+	 * 获取需要被拦截处理的方法模式集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Set<String> getNamePatterns();
 	
 	/**
-	 * @description 目标方法出现异常后被拦截处理的方法
+	 * 目标方法出现异常后被拦截处理的方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param e
 	 * @throws Throwable

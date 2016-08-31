@@ -23,7 +23,7 @@ import java.util.Map;
 import org.workin.sms.packet.ParameterizationMessagePacket;
 
 /**
- * @description 默认的参数化消息数据包实体
+ * 默认的参数化消息数据包实体
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

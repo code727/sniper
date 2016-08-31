@@ -21,28 +21,28 @@ package org.workin.nosql.redis;
 import java.util.Map;
 
 /**
- * @description Redis库管理接口
+ * Redis库管理接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface RedisRepositoryManager {
 	
 	/**
-	 * @description 设置库配置映射集
+	 * 设置库配置映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param repositories
 	 */
 	public void setRepositories(Map<Integer, RedisRepository> repositories);
 	
 	/**
-	 * @description 获取所有库的配置映射集
+	 * 获取所有库的配置映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public Map<Integer, RedisRepository> getRepositories();
 	
 	/**
-	 * @description 根据键获取映射集合里的某个库配置项
+	 * 根据键获取映射集合里的某个库配置项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @return

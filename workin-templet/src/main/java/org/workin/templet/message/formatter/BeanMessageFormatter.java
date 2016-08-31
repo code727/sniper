@@ -28,7 +28,7 @@ import org.workin.support.bean.DefaultBeanReflector;
 import org.workin.support.encoder.StringEncoder;
 
 /**
- * @description Java Bean对象消息格式化处理器
+ * Java Bean对象消息格式化处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

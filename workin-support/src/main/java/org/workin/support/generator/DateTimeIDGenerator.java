@@ -24,7 +24,7 @@ import org.workin.commons.util.DateUtils;
 import org.workin.support.generator.adapter.MinLengthIDGeneratorAdapter;
 
 /**
- * @description 日期时间序列ID生成器
+ * 日期时间序列ID生成器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

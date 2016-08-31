@@ -21,7 +21,7 @@ package org.workin.persistence.handler;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 同时采用"登录名[用户名]"格式作为审核者名称的处理器实现类
+ * 同时采用"登录名[用户名]"格式作为审核者名称的处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -22,14 +22,14 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * @description 断言工具类
+ * 断言工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0.0
  */
 public class AssertUtils {
 	
 	/**
-	 * @description 断言对象为空
+	 * 断言对象为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param obj 
 	 */
@@ -38,7 +38,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言对象为空，否则抛出自定义异常信息
+	 * 断言对象为空，否则抛出自定义异常信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param obj
 	 * @param message 
@@ -49,7 +49,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言对象不为空
+	 * 断言对象不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param obj 
 	 */
@@ -58,7 +58,7 @@ public class AssertUtils {
 	}
 
 	/**
-	 * @description 断言对象不为空，否则抛出自定义异常信息
+	 * 断言对象不为空，否则抛出自定义异常信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param obj
 	 * @param message 
@@ -69,7 +69,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言表达式为true
+	 * 断言表达式为true
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param express 
 	 */
@@ -78,7 +78,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言表达式为true,否则抛出自定义异常信息
+	 * 断言表达式为true,否则抛出自定义异常信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param express
 	 * @param message 
@@ -89,7 +89,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言表达式为false
+	 * 断言表达式为false
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param express 
 	 */
@@ -98,7 +98,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言表达式为false，否则抛出自定义异常信息
+	 * 断言表达式为false，否则抛出自定义异常信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param express
 	 * @param message 
@@ -109,7 +109,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言不为空字符串
+	 * 断言不为空字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param str 
 	 */
@@ -118,7 +118,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言不为空字符串，否则抛出自定义的异常信息
+	 * 断言不为空字符串，否则抛出自定义的异常信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param str
 	 * @param message 
@@ -128,7 +128,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言不全为空白字符串，否则抛出自定义的异常信息
+	 * 断言不全为空白字符串，否则抛出自定义的异常信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param str
 	 * @param message 
@@ -138,7 +138,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言数组不为空
+	 * 断言数组不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 */
@@ -147,7 +147,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言数组不为空，否则抛出自定义的异常信息
+	 * 断言数组不为空，否则抛出自定义的异常信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param message
@@ -157,7 +157,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言集合不为空
+	 * 断言集合不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 */
@@ -166,7 +166,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言集合不为空，否则抛出自定义的异常信息
+	 * 断言集合不为空，否则抛出自定义的异常信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
 	 * @param message
@@ -176,7 +176,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言集合不为空
+	 * 断言集合不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 */
@@ -185,7 +185,7 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * @description 断言集合不为空，否则抛出自定义的异常信息
+	 * 断言集合不为空，否则抛出自定义的异常信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @param message

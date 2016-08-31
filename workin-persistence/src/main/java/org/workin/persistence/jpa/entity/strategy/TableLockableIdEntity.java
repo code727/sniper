@@ -24,7 +24,7 @@ import javax.persistence.Version;
 import org.workin.commons.entity.Lockable;
 
 /**
- * @description Table主键类型可锁定的实体抽象类
+ * Table主键类型可锁定的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

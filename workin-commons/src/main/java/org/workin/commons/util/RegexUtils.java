@@ -26,7 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @description 正则工具类
+ * 正则工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -57,7 +57,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 根据正则表达式获取对应的模式对象
+	 * 根据正则表达式获取对应的模式对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param regex
 	 * @return
@@ -79,7 +79,7 @@ public class RegexUtils {
 	}
 		
 	/**
-	 * @description 根据字符串和表达式创建Matcher对象
+	 * 根据字符串和表达式创建Matcher对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param regex
@@ -90,7 +90,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否完全匹配表达式
+	 * 判断字符串是否完全匹配表达式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param regex
@@ -104,7 +104,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否有匹配表达式的部分
+	 * 判断字符串是否有匹配表达式的部分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param regex
@@ -118,7 +118,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否为整数
+	 * 判断字符串是否为整数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -128,7 +128,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串中是否有整数
+	 * 判断字符串中是否有整数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -138,7 +138,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否为小数
+	 * 判断字符串是否为小数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -148,7 +148,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串中是否有小数
+	 * 判断字符串中是否有小数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -158,7 +158,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否为数字
+	 * 判断字符串是否为数字
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -168,7 +168,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串中是否有数字
+	 * 判断字符串中是否有数字
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -178,7 +178,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否为IPV4
+	 * 判断字符串是否为IPV4
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -188,7 +188,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串中是否有IPV4
+	 * 判断字符串中是否有IPV4
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -198,7 +198,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否为IPV6
+	 * 判断字符串是否为IPV6
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -208,7 +208,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串中是否有IPV6
+	 * 判断字符串中是否有IPV6
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -218,7 +218,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否为Email
+	 * 判断字符串是否为Email
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -228,7 +228,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串中是否有Email
+	 * 判断字符串中是否有Email
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -238,7 +238,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否为手机号
+	 * 判断字符串是否为手机号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -248,7 +248,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串中是否有手机号
+	 * 判断字符串中是否有手机号
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -258,7 +258,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断是否为URL查询字符串
+	 * 判断是否为URL查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -268,7 +268,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串中是否有URL查询字符串
+	 * 判断字符串中是否有URL查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -278,7 +278,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否全为ASCII字符组成
+	 * 判断字符串是否全为ASCII字符组成
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -288,7 +288,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串中有是否有ASCII字符
+	 * 判断字符串中有是否有ASCII字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -298,7 +298,7 @@ public class RegexUtils {
 	}
 		
 	/**
-	 * @description 判断字符串是否全为中文组成
+	 * 判断字符串是否全为中文组成
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -308,7 +308,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否有中文字符
+	 * 判断字符串是否有中文字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -318,7 +318,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否为非ASCII的双字节字符
+	 * 判断字符串是否为非ASCII的双字节字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -328,7 +328,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串是否有非ASCII的双字节字符
+	 * 判断字符串是否有非ASCII的双字节字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -338,7 +338,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断是否为URL字符串
+	 * 判断是否为URL字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -348,7 +348,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 判断字符串中是否包含URL
+	 * 判断字符串中是否包含URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -358,7 +358,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 从源字符串中提取匹配表达式的子串集
+	 * 从源字符串中提取匹配表达式的子串集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param regex
@@ -376,7 +376,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 统一为匹配模式的子串添加前缀和后缀
+	 * 统一为匹配模式的子串添加前缀和后缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param regex
@@ -407,7 +407,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 从源字符串中提取匹配表达式的起始位置和子串映射集
+	 * 从源字符串中提取匹配表达式的起始位置和子串映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param regex
@@ -425,7 +425,7 @@ public class RegexUtils {
 	}
 	
 	/**
-	 * @description 统计源字符串中匹配表达式的子串个数
+	 * 统计源字符串中匹配表达式的子串个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param regex

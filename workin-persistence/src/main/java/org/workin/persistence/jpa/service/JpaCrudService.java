@@ -22,28 +22,28 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @description 具备基本增删改查功能的JPA持久化服务接口
+ * 具备基本增删改查功能的JPA持久化服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface JpaCrudService<T, PK extends Serializable> {
 	
 	/**
-	 * @description 新增持久化实体对象
+	 * 新增持久化实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void persist(T entity);
 	
 	/**
-	 * @description 批量新增持久化实体对象
+	 * 批量新增持久化实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityList
 	 */
 	public void batchPersist(List<T> entityList);
 	
 	/**
-	 * @description 合并(新增/更新)实体对象 - 实体与数据库同步
+	 * 合并(新增/更新)实体对象 - 实体与数据库同步
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @return
@@ -51,7 +51,7 @@ public interface JpaCrudService<T, PK extends Serializable> {
 	public T merge(T entity);
 	
 	/**
-	 * @description 批量合并(新增/更新)实体对象  - 实体与数据库同步
+	 * 批量合并(新增/更新)实体对象  - 实体与数据库同步
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityList
 	 * @return
@@ -59,28 +59,28 @@ public interface JpaCrudService<T, PK extends Serializable> {
 	public List<T> batchMerge(List<T> entityList);
 	
 	/**
-	 * @description 删除实体对象 - 实体游离
+	 * 删除实体对象 - 实体游离
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void remove(T entity);
 	
 	/**
-	 * @description 删除指定主键ID对应的实体对象 - 实体游离
+	 * 删除指定主键ID对应的实体对象 - 实体游离
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 */
 	public void remove(PK primaryKey);
 	
 	/**
-	 * @description 批量删除实体对象 - 实体游离
+	 * 批量删除实体对象 - 实体游离
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityList
 	 */
 	public void batchRemove(List<T> entityList);
 	
 	/**
-	 * @description 根据主键ID查询当前类型的实体对象
+	 * 根据主键ID查询当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param primaryKey
 	 * @return
@@ -88,14 +88,14 @@ public interface JpaCrudService<T, PK extends Serializable> {
 	public T findById(PK primaryKey);
 
 	/**
-	 * @description 查询当前类型的所有实体对象
+	 * 查询当前类型的所有实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<T> findAll();
 
 	/**
-	 * @description 查询当前类型所有不重复的实体对象
+	 * 查询当前类型所有不重复的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

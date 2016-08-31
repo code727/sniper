@@ -19,7 +19,7 @@
 package org.workin.nosql.redis.dao;
 
 /**
- * @description Redis命令行数据访问接口
+ * Redis命令行数据访问接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -19,14 +19,14 @@
 package org.workin.persistence.sqlmap.dao;
 
 /**
- * @description SQL映射DAO接口
+ * SQL映射DAO接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface SqlMapDao<T> extends SqlMapQuery<T> {
 	
 	/**
-	 * @description 执行statement对应的insert语句后返回结果
+	 * 执行statement对应的insert语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @return
@@ -34,7 +34,7 @@ public interface SqlMapDao<T> extends SqlMapQuery<T> {
 	public Object insert(String statement);
 	
 	/**
-	 * @description 执行statement对应的insert语句后返回结果
+	 * 执行statement对应的insert语句后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param parameter
@@ -43,7 +43,7 @@ public interface SqlMapDao<T> extends SqlMapQuery<T> {
 	public Object insert(String statement, Object parameter);
 	
 	/**
-	 * @description 执行statement对应的update语句后返回受影响的行数
+	 * 执行statement对应的update语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @return
@@ -51,7 +51,7 @@ public interface SqlMapDao<T> extends SqlMapQuery<T> {
 	public int update(String statement);
 	
 	/**
-	 * @description 执行statement对应的update语句后返回受影响的行数
+	 * 执行statement对应的update语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param parameter
@@ -60,14 +60,14 @@ public interface SqlMapDao<T> extends SqlMapQuery<T> {
 	public int update(String statement, Object parameter);
 	
 	/**
-	 * @description 执行statement对应的delete语句后返回受影响的行数
+	 * 执行statement对应的delete语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 */
 	public int delete(String statement);
 	
 	/**
-	 * @description 执行statement对应的delete语句后返回受影响的行数
+	 * 执行statement对应的delete语句后返回受影响的行数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param statement
 	 * @param parameter

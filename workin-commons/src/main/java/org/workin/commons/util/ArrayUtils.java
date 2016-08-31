@@ -21,14 +21,14 @@ package org.workin.commons.util;
 import java.lang.reflect.Array;
 
 /**
- * @description 数组工具类
+ * 数组工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0.0
  */
 public class ArrayUtils {
 	
 	/**
-	 * @description 判断byte数组是否为空
+	 * 判断byte数组是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -38,7 +38,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断byte数组是否不为空
+	 * 判断byte数组是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -48,7 +48,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断boolean数组是否为空
+	 * 判断boolean数组是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -58,7 +58,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断boolean数组是否不为空
+	 * 判断boolean数组是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -68,7 +68,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断char数组是否为空
+	 * 判断char数组是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -78,7 +78,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断char数组是否不为空
+	 * 判断char数组是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -88,7 +88,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断double数组是否为空
+	 * 判断double数组是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -98,7 +98,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断double数组是否不为空
+	 * 判断double数组是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -108,7 +108,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断float数组是否为空
+	 * 判断float数组是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -118,7 +118,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断float数组是否不为空
+	 * 判断float数组是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -128,7 +128,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断int数组是否为空
+	 * 判断int数组是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -138,7 +138,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断int数组是否不为空
+	 * 判断int数组是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -148,7 +148,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断long数组是否为空
+	 * 判断long数组是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -158,7 +158,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断long数组是否不为空
+	 * 判断long数组是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -168,7 +168,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断short数组是否为空
+	 * 判断short数组是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -178,7 +178,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断short数组是否不为空
+	 * 判断short数组是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -188,7 +188,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断数组是否为空
+	 * 判断数组是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param array
 	 * @return 
@@ -198,7 +198,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断数组是否不为空
+	 * 判断数组是否不为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param array
 	 * @return 
@@ -208,7 +208,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取数组的长度
+	 * 获取数组的长度
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param array
 	 * @return 
@@ -218,7 +218,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取数组的长度
+	 * 获取数组的长度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return 数组长度，当参数为一个非数组对象时返回0
@@ -228,7 +228,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的对象是否为一数组
+	 * 判断指定的对象是否为一数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -238,7 +238,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将boolean[]数组转换为Boolean[]
+	 * 将boolean[]数组转换为Boolean[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -255,7 +255,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Boolean[]数组转换为boolean[]
+	 * 将Boolean[]数组转换为boolean[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -265,7 +265,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Boolean[]数组转换为boolean[]。
+	 * 将Boolean[]数组转换为boolean[]。
 	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
@@ -284,7 +284,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将byte[]数组转换为Byte[]
+	 * 将byte[]数组转换为Byte[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -301,7 +301,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Byte[]数组转换为byte[]
+	 * 将Byte[]数组转换为byte[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -311,7 +311,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Byte[]数组转换为byte[]。
+	 * 将Byte[]数组转换为byte[]。
 	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
@@ -330,7 +330,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将char[]数组转换为Character[]
+	 * 将char[]数组转换为Character[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -347,7 +347,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Character[]数组转换为char[]
+	 * 将Character[]数组转换为char[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -357,7 +357,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Character[]数组转换为char[]。
+	 * 将Character[]数组转换为char[]。
 	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
@@ -376,7 +376,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将double[]数组转换为Double[]。
+	 * 将double[]数组转换为Double[]。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -393,7 +393,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Double[]数组转换为double[]。
+	 * 将Double[]数组转换为double[]。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -403,7 +403,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Double[]数组转换为double[]。
+	 * 将Double[]数组转换为double[]。
 	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
@@ -422,7 +422,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将float[]数组转换为Float[]。
+	 * 将float[]数组转换为Float[]。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -439,7 +439,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Float[]数组转换为float[]。
+	 * 将Float[]数组转换为float[]。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -449,7 +449,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Float[]数组转换为float[]。
+	 * 将Float[]数组转换为float[]。
 	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
@@ -468,7 +468,7 @@ public class ArrayUtils {
 	}
 			
 	/**
-	 * @description 将int[]数组转换为Integer[]
+	 * 将int[]数组转换为Integer[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -485,7 +485,7 @@ public class ArrayUtils {
 	}
 		
 	/**
-	 * @description 将Integer[]数组转换为int[]
+	 * 将Integer[]数组转换为int[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -495,7 +495,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Integer[]数组转换为int[]。
+	 * 将Integer[]数组转换为int[]。
 	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
@@ -514,7 +514,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将long[]数组转换为Long[]
+	 * 将long[]数组转换为Long[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -531,7 +531,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Long[]数组转换为long[]
+	 * 将Long[]数组转换为long[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -541,7 +541,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Long[]数组转换为long[]。
+	 * 将Long[]数组转换为long[]。
 	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
@@ -560,7 +560,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将short[]数组转换为Short[]
+	 * 将short[]数组转换为Short[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -577,7 +577,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Short[]数组转换为short[]
+	 * 将Short[]数组转换为short[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -587,7 +587,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将Short[]数组转换为short[]。
+	 * 将Short[]数组转换为short[]。
 	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
@@ -606,7 +606,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将boolean类型的元素组添加到同类型的原数组后面
+	 * 将boolean类型的元素组添加到同类型的原数组后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -625,7 +625,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将byte类型的元素组添加到同类型的原数组后面
+	 * 将byte类型的元素组添加到同类型的原数组后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -644,7 +644,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将char类型的元素组添加到同类型的原数组后面
+	 * 将char类型的元素组添加到同类型的原数组后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -663,7 +663,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将double类型的元素组添加到同类型的原数组后面
+	 * 将double类型的元素组添加到同类型的原数组后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -682,7 +682,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将float类型的元素组添加到同类型的原数组后面
+	 * 将float类型的元素组添加到同类型的原数组后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -701,7 +701,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将int类型的元素组添加到同类型的原数组后面
+	 * 将int类型的元素组添加到同类型的原数组后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -720,7 +720,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将long类型的元素组添加到同类型的原数组后面
+	 * 将long类型的元素组添加到同类型的原数组后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -739,7 +739,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将short类型的元素组添加到同类型的原数组后面
+	 * 将short类型的元素组添加到同类型的原数组后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -759,7 +759,7 @@ public class ArrayUtils {
 	
 				
 	/**
-	 * @description 将Object类型的元素组添加到原数组后面
+	 * 将Object类型的元素组添加到原数组后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -775,7 +775,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将元素添加到原数组的后面
+	 * 将元素添加到原数组的后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -793,7 +793,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将基本类型的数组准换为包装类型的
+	 * 将基本类型的数组准换为包装类型的
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param baseTypeArray
 	 * @return
@@ -844,7 +844,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配元素在数组中的下标
+	 * 获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -855,7 +855,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -876,7 +876,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配子数组在原数组中的下标
+	 * 获取第一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -887,7 +887,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -933,7 +933,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配元素在数组中的下标
+	 * 获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -944,7 +944,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -965,7 +965,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配子数组在原数组中的下标
+	 * 获取第一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -976,7 +976,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1022,7 +1022,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配元素在数组中的下标
+	 * 获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1033,7 +1033,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1054,7 +1054,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配子数组在原数组中的下标
+	 * 获取第一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1065,7 +1065,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1111,7 +1111,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配元素在数组中的下标
+	 * 获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1122,7 +1122,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1143,7 +1143,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配子数组在原数组中的下标
+	 * 获取第一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1154,7 +1154,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1200,7 +1200,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配元素在数组中的下标
+	 * 获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1211,7 +1211,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1232,7 +1232,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配子数组在原数组中的下标
+	 * 获取第一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1243,7 +1243,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1289,7 +1289,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配元素在数组中的下标
+	 * 获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1300,7 +1300,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1321,7 +1321,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配子数组在原数组中的下标
+	 * 获取第一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1332,7 +1332,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1378,7 +1378,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配元素在数组中的下标
+	 * 获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1389,7 +1389,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1410,7 +1410,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配子数组在原数组中的下标
+	 * 获取第一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1421,7 +1421,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1467,7 +1467,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配元素在数组中的下标
+	 * 获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1478,7 +1478,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1499,7 +1499,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配子数组在原数组中的下标
+	 * 获取第一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1510,7 +1510,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1556,7 +1556,7 @@ public class ArrayUtils {
 	}
 
 	/**
-	 * @description 获取第一个匹配子数组在原数组中的下标
+	 * 获取第一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1567,7 +1567,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取第一个匹配子数组在原数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1624,7 +1624,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配元素在数组中的下标
+	 * 获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1635,7 +1635,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取第一个匹配元素在数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1659,7 +1659,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取第一个匹配值字符序列元素在数组中的下标
+	 * 获取第一个匹配值字符序列元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1670,7 +1670,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取第一个匹配元素在数组中的下标
+	 * 从指定的索引位置开始获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1693,7 +1693,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配元素在数组中的下标
+	 * 获取最后一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1704,7 +1704,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1725,7 +1725,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配子数组在原数组中的下标
+	 * 获取最后一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1736,7 +1736,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1784,7 +1784,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配元素在数组中的下标
+	 * 获取最后一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1795,7 +1795,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1816,7 +1816,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配子数组在原数组中的下标
+	 * 获取最后一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1827,7 +1827,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1875,7 +1875,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配元素在数组中的下标
+	 * 获取最后一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1886,7 +1886,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1907,7 +1907,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配子数组在原数组中的下标
+	 * 获取最后一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1918,7 +1918,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -1966,7 +1966,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配元素在数组中的下标
+	 * 获取最后一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1977,7 +1977,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -1998,7 +1998,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配子数组在原数组中的下标
+	 * 获取最后一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2009,7 +2009,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2056,7 +2056,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配元素在数组中的下标
+	 * 获取最后一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2067,7 +2067,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2088,7 +2088,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配子数组在原数组中的下标
+	 * 获取最后一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2099,7 +2099,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2147,7 +2147,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配元素在数组中的下标
+	 * 获取最后一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2158,7 +2158,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2179,7 +2179,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配子数组在原数组中的下标
+	 * 获取最后一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2190,7 +2190,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2238,7 +2238,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配元素在数组中的下标
+	 * 获取最后一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2249,7 +2249,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2270,7 +2270,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配子数组在原数组中的下标
+	 * 获取最后一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2281,7 +2281,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2329,7 +2329,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配元素在数组中的下标
+	 * 获取最后一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2340,7 +2340,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2361,7 +2361,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配子数组在原数组中的下标
+	 * 获取最后一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2372,7 +2372,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2420,7 +2420,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配子数组在原数组中的下标
+	 * 获取最后一个匹配子数组在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2431,7 +2431,7 @@ public class ArrayUtils {
 	}
 	
 	/** 
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2487,7 +2487,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配元素在数组中的下标
+	 * 获取最后一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2498,7 +2498,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配元素在原数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2523,7 +2523,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取最后一个匹配值字符序列元素在数组中的下标
+	 * 获取最后一个匹配值字符序列元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2534,7 +2534,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 从指定的索引位置开始获取最后一个匹配值字符序列元素在数组中的下标
+	 * 从指定的索引位置开始获取最后一个匹配值字符序列元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2557,7 +2557,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中指定索引位的元素
+	 * 删除数组中指定索引位的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param index
@@ -2583,7 +2583,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子元素
+	 * 删除数组中所有指定的子元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2599,7 +2599,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子数组
+	 * 删除数组中所有指定的子数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2626,7 +2626,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中指定索引位的元素
+	 * 删除数组中指定索引位的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param index
@@ -2652,7 +2652,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子元素
+	 * 删除数组中所有指定的子元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2668,7 +2668,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子数组
+	 * 删除数组中所有指定的子数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2695,7 +2695,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中指定索引位的元素
+	 * 删除数组中指定索引位的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param index
@@ -2721,7 +2721,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子元素
+	 * 删除数组中所有指定的子元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2737,7 +2737,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子数组
+	 * 删除数组中所有指定的子数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2764,7 +2764,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中指定索引位的元素
+	 * 删除数组中指定索引位的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param index
@@ -2790,7 +2790,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子元素
+	 * 删除数组中所有指定的子元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2806,7 +2806,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子数组
+	 * 删除数组中所有指定的子数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2833,7 +2833,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中指定索引位的元素
+	 * 删除数组中指定索引位的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param index
@@ -2859,7 +2859,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子元素
+	 * 删除数组中所有指定的子元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2875,7 +2875,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子数组
+	 * 删除数组中所有指定的子数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2902,7 +2902,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中指定索引位的元素
+	 * 删除数组中指定索引位的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param index
@@ -2928,7 +2928,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子元素
+	 * 删除数组中所有指定的子元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -2944,7 +2944,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子数组
+	 * 删除数组中所有指定的子数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -2971,7 +2971,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中指定索引位的元素
+	 * 删除数组中指定索引位的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param index
@@ -2997,7 +2997,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子元素
+	 * 删除数组中所有指定的子元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -3013,7 +3013,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子数组
+	 * 删除数组中所有指定的子数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -3040,7 +3040,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中指定索引位的元素
+	 * 删除数组中指定索引位的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param index
@@ -3066,7 +3066,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子元素
+	 * 删除数组中所有指定的子元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -3082,7 +3082,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子数组
+	 * 删除数组中所有指定的子数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -3109,7 +3109,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中指定索引位的元素
+	 * 删除数组中指定索引位的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param index
@@ -3135,7 +3135,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子元素
+	 * 删除数组中所有指定的子元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -3153,7 +3153,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除数组中所有指定的子数组
+	 * 删除数组中所有指定的子数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -3180,7 +3180,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 倒置数组
+	 * 倒置数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 */
@@ -3199,7 +3199,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 倒置数组
+	 * 倒置数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 */
@@ -3218,7 +3218,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 倒置数组
+	 * 倒置数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 */
@@ -3237,7 +3237,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 倒置数组
+	 * 倒置数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 */
@@ -3256,7 +3256,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 倒置数组
+	 * 倒置数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 */
@@ -3275,7 +3275,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 倒置数组
+	 * 倒置数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 */
@@ -3294,7 +3294,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 倒置数组
+	 * 倒置数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 */
@@ -3313,7 +3313,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 倒置数组
+	 * 倒置数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 */
@@ -3332,7 +3332,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 倒置数组
+	 * 倒置数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 */
@@ -3351,7 +3351,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的值是否存在于数组中
+	 * 判断指定的值是否存在于数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param obj
@@ -3362,7 +3362,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的子数组是否存在于原数组中
+	 * 判断指定的子数组是否存在于原数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -3373,7 +3373,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的值是否存在于数组中
+	 * 判断指定的值是否存在于数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param obj
@@ -3384,7 +3384,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的值是否存在于数组中
+	 * 判断指定的值是否存在于数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param obj
@@ -3395,7 +3395,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的子数组是否存在于原数组中
+	 * 判断指定的子数组是否存在于原数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -3406,7 +3406,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的值是否存在于数组中
+	 * 判断指定的值是否存在于数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param obj
@@ -3417,7 +3417,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的子数组是否存在于原数组中
+	 * 判断指定的子数组是否存在于原数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -3428,7 +3428,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的值是否存在于数组中
+	 * 判断指定的值是否存在于数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param obj
@@ -3439,7 +3439,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的子数组是否存在于原数组中
+	 * 判断指定的子数组是否存在于原数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -3450,7 +3450,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的值是否存在于数组中
+	 * 判断指定的值是否存在于数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param obj
@@ -3461,7 +3461,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的子数组是否存在于原数组中
+	 * 判断指定的子数组是否存在于原数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -3472,7 +3472,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的值是否存在于数组中
+	 * 判断指定的值是否存在于数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param obj
@@ -3483,7 +3483,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的子数组是否存在于原数组中
+	 * 判断指定的子数组是否存在于原数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -3494,7 +3494,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的值是否存在于数组中
+	 * 判断指定的值是否存在于数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param obj
@@ -3505,7 +3505,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的子数组是否存在于原数组中
+	 * 判断指定的子数组是否存在于原数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -3516,7 +3516,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的对象是否存在于数组中
+	 * 判断指定的对象是否存在于数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param obj
@@ -3527,7 +3527,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的子数组是否存在于原数组中
+	 * 判断指定的子数组是否存在于原数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param subArray
@@ -3538,7 +3538,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 判断指定的字符序列元素值是否存在于原数组中
+	 * 判断指定的字符序列元素值是否存在于原数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param obj
@@ -3549,7 +3549,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将null转换为容量为0的空数组
+	 * 将null转换为容量为0的空数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3559,7 +3559,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将null转换为容量为0的空数组
+	 * 将null转换为容量为0的空数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3569,7 +3569,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将null转换为容量为0的空数组
+	 * 将null转换为容量为0的空数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3579,7 +3579,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将null转换为容量为0的空数组
+	 * 将null转换为容量为0的空数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3589,7 +3589,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将null转换为容量为0的空数组
+	 * 将null转换为容量为0的空数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3599,7 +3599,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将null转换为容量为0的空数组
+	 * 将null转换为容量为0的空数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3609,7 +3609,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将null转换为容量为0的空数组
+	 * 将null转换为容量为0的空数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3619,7 +3619,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将null转换为容量为0的空数组
+	 * 将null转换为容量为0的空数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3629,7 +3629,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将null转换为容量为0的空数组
+	 * 将null转换为容量为0的空数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3639,7 +3639,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 整理数组里所有的空元素
+	 * 整理数组里所有的空元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3649,7 +3649,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除字符串数组里所有的空字符串元素，并且整理各元素左右两侧的空白字符
+	 * 删除字符串数组里所有的空字符串元素，并且整理各元素左右两侧的空白字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3671,7 +3671,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 删除字符串数组里所有的空白字符串元素，并且整理各元素左右两侧的空白字符
+	 * 删除字符串数组里所有的空白字符串元素，并且整理各元素左右两侧的空白字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3693,7 +3693,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 将数组转换成字符串
+	 * 将数组转换成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
@@ -3703,7 +3703,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 按指定的分隔符将数组中各元素连接成字符串
+	 * 按指定的分隔符将数组中各元素连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param separator
@@ -3729,7 +3729,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取索引位对应的元素值，未获取到时默认返回null
+	 * 获取索引位对应的元素值，未获取到时默认返回null
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param index
@@ -3740,7 +3740,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * @description 获取索引位对应的元素值，未获取到时返回指定的值
+	 * 获取索引位对应的元素值，未获取到时返回指定的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param index

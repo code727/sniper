@@ -21,14 +21,14 @@ package org.workin.support;
 import org.workin.commons.util.ObjectUtils;
 
 /**
- * @description 值相等逻辑运算操作
+ * 值相等逻辑运算操作
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class EqualsLogicOperation implements LogicOperation<Object, Object> {
 
 	/**
-	 * @description 执行对象的equals方法进行值比较
+	 * 执行对象的equals方法进行值比较
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj1
 	 * @param obj2

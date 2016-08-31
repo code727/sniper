@@ -24,7 +24,7 @@ import org.springframework.aop.AfterReturningAdvice;
 import org.workin.support.context.ApplicationContextHolder;
 
 /**
- * @description 后置型方法拦截切面抽象类
+ * 后置型方法拦截切面抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -41,7 +41,7 @@ public abstract class MatchableMethodAfterAdvice extends AbstractMatchableMethod
 	}
 
 	/**
-	 * @description 执行后置拦截任务
+	 * 执行后置拦截任务
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param returnValue
 	 * @param method

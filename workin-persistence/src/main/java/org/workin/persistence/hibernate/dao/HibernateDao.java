@@ -27,7 +27,7 @@ import org.workin.persistence.jpa.dao.JpaNativeQuery;
 import org.workin.support.bean.GenericBean;
 
 /**
- * @description Hibernate持久化数据访问接口
+ * Hibernate持久化数据访问接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

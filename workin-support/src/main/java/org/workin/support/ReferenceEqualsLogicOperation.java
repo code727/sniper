@@ -19,14 +19,14 @@
 package org.workin.support;
 
 /**
- * @description 引用相等逻辑运算操作
+ * 引用相等逻辑运算操作
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class ReferenceEqualsLogicOperation implements LogicOperation<Object, Object> {
 	
 	/**
-	 * @description 执行引用相等逻辑判断
+	 * 执行引用相等逻辑判断
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj1
 	 * @param obj2

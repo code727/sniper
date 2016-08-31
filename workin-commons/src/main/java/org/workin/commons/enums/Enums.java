@@ -19,35 +19,35 @@
 package org.workin.commons.enums;
 
 /**
- * @description 枚举对象类接口
+ * 枚举对象类接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface Enums<K, V> {
 	
 	/**
-	 * @description 获取枚举键
+	 * 获取枚举键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public K getKey();
 	
 	/**
-	 * @description 设置枚举键
+	 * 设置枚举键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 */
 	public void setKey(K key);
 	
 	/**
-	 * @description 获取枚举值
+	 * 获取枚举值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public V getValue();
 	
 	/**
-	 * @description 设置枚举值
+	 * 设置枚举值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 */

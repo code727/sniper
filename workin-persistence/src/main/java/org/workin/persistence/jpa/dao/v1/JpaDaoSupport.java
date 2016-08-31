@@ -22,7 +22,7 @@ import org.workin.commons.util.ClassUtils;
 import org.workin.support.bean.GenericBean;
 
 /**
- * @description JPA标准的DAO支持抽象类
+ * JPA标准的DAO支持抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

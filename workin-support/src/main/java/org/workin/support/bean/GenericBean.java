@@ -19,21 +19,21 @@
 package org.workin.support.bean;
 
 /**
- * @description 泛型Bean接口
+ * 泛型Bean接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface GenericBean<T> {
 	
 	/**
-	 * @description 设置当前泛型类所管理的Bean类型
+	 * 设置当前泛型类所管理的Bean类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param beanClass
 	 */
 	public void setBeanClass(Class<T> beanClass);
 	
 	/**
-	 * @description 当前当前泛型类所管理的Bean类型
+	 * 当前当前泛型类所管理的Bean类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

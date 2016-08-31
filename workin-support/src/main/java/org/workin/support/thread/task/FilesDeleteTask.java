@@ -25,7 +25,7 @@ import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.FileUtils;
 
 /**
- * @description 本地文件列表清理任务
+ * 本地文件列表清理任务
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

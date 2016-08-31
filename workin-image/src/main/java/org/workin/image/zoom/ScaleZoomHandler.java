@@ -25,7 +25,7 @@ import org.workin.image.AbstractImageHandler;
 import org.workin.image.Pixel;
 
 /**
- * @description 比例缩放处理器实现类
+ * 比例缩放处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

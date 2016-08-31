@@ -21,7 +21,7 @@ package org.workin.commons.enums.category.terminal;
 import org.workin.commons.enums.AbstractLocaleEnums;
 
 /**
- * @description 个人设备类型枚举类
+ * 个人设备类型枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

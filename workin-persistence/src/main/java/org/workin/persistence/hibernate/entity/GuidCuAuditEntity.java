@@ -26,7 +26,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.workin.persistence.jpa.entity.StringCuAuditableEntity;
 
 /**
- * @description GUID主键类型的新增更新审核实体对象抽象类
+ * GUID主键类型的新增更新审核实体对象抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

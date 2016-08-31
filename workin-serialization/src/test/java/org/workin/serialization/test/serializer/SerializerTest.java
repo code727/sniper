@@ -20,21 +20,21 @@ package org.workin.serialization.test.serializer;
 
 
 /**
- * @description 序列器测试接口
+ * 序列器测试接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface SerializerTest {
 	
 	/**
-	 * @description 测试序列化
+	 * 测试序列化
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws Exception
 	 */
 	public void testSerialize() throws Exception;
 	
 	/**
-	 * @description 测试反序列化
+	 * 测试反序列化
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws Exception
 	 */

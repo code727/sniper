@@ -30,7 +30,7 @@ import org.workin.commons.util.StringUtils;
 import com.mongodb.WriteResult;
 
 /**
- * @description Spring MongoDB数据访问实现类
+ * Spring MongoDB数据访问实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -139,6 +139,30 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
+	public T findAndModify(Query query, Update update) {
+		return findAndModify(query, update, null);
+	}
+
+	@Override
+	public T findAndModify(Query query, Update update, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+				.findAndModify(query, update, getBeanClass(), collection)
+				: getMongoTemplate().findAndModify(query, update, getBeanClass());
+	}
+
+	@Override
+	public T findAndRemove(Query query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T findAndRemove(Query query, String collection) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public T findById(PK primaryKey) {
 		return findById(primaryKey, null);
 	}
@@ -154,5 +178,5 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public List<T> findAll() {
 		return getMongoTemplate().findAll(getBeanClass());
 	}
-	
+
 }

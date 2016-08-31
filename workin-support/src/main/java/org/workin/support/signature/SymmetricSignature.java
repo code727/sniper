@@ -19,7 +19,7 @@
 package org.workin.support.signature;
 
 /**
- * @description 对称签名抽象类
+ * 对称签名抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -42,7 +42,7 @@ public abstract class SymmetricSignature<T> implements Signature<T> {
 	}
 	
 	/**
-	 * @description 设置私钥
+	 * 设置私钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param privateKey
 	 */
@@ -51,7 +51,7 @@ public abstract class SymmetricSignature<T> implements Signature<T> {
 	}
 	
 	/**
-	 * @description 获取私钥
+	 * 获取私钥
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

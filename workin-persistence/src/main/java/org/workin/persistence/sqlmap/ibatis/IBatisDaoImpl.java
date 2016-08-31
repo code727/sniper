@@ -27,7 +27,7 @@ import org.workin.persistence.sqlmap.dao.SqlMapDao;
 import com.ibatis.sqlmap.client.SqlMapExecutor;
 
 /**
- * @description IBatis DAO实现类
+ * IBatis DAO实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

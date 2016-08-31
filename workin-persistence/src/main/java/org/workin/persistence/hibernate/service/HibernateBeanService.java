@@ -23,21 +23,21 @@ import java.io.Serializable;
 import org.workin.persistence.hibernate.dao.HibernateDao;
 
 /**
- * @description Hibernate对象服务接口
+ * Hibernate对象服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface HibernateBeanService<T, PK extends Serializable> {
 	
 	/**
-	 * @description 设置Hibernate持久化数据访问接口
+	 * 设置Hibernate持久化数据访问接口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param hibernateDao
 	 */
 	public void setHibernateDao(HibernateDao<T, PK> hibernateDao);
 	
 	/**
-	 * @description 获取Hibernate持久化数据访问接口
+	 * 获取Hibernate持久化数据访问接口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

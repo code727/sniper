@@ -24,14 +24,14 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
- * @description 注解工具类
+ * 注解工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class AnnotationUtils {
 	
 	/**
-	 * @description 判断对象是否有注解
+	 * 判断对象是否有注解
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -49,7 +49,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 判断对象是否被指定的注解所标识
+	 * 判断对象是否被指定的注解所标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -70,7 +70,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 判断域对象是否有注解
+	 * 判断域对象是否有注解
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param field
 	 * @return
@@ -83,7 +83,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 判断域对象是否被指定的注解所标识
+	 * 判断域对象是否被指定的注解所标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param field
 	 * @param annotationClass
@@ -97,7 +97,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 判断方法对象是否有注解
+	 * 判断方法对象是否有注解
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param method
 	 * @return
@@ -110,7 +110,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 判断方法对象是否有被指定的注解所标识
+	 * 判断方法对象是否有被指定的注解所标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param method
 	 * @param annotationClass
@@ -124,7 +124,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 查找被注解标识的域对象列表
+	 * 查找被注解标识的域对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -152,7 +152,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 查找被指定注解标识的域对象列表
+	 * 查找被指定注解标识的域对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -163,7 +163,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 查找第一个被指定注解标识的域对象列表
+	 * 查找第一个被指定注解标识的域对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -173,7 +173,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 选择是否只需要第一个被指定注解标识的方式查找域对象列表
+	 * 选择是否只需要第一个被指定注解标识的方式查找域对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -221,7 +221,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 查找被注解标识的方法对象列表
+	 * 查找被注解标识的方法对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
@@ -249,7 +249,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 查找被指定注解标识的方法对象列表
+	 * 查找被指定注解标识的方法对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -260,7 +260,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 查找第一个被指定注解标识的方法对象
+	 * 查找第一个被指定注解标识的方法对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -271,7 +271,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 选择是否只需要第一个被指定注解标识的方式查找方法对象列表
+	 * 选择是否只需要第一个被指定注解标识的方式查找方法对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -319,7 +319,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 查找被指定注解标识的getter方法对象列表
+	 * 查找被指定注解标识的getter方法对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -330,7 +330,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 查找第一个被指定注解标识的getter方法对象
+	 * 查找第一个被指定注解标识的getter方法对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -341,7 +341,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 选择是否只需要第一个被指定注解标识的方式查找getter方法对象列表
+	 * 选择是否只需要第一个被指定注解标识的方式查找getter方法对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -389,7 +389,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 查找被指定注解标识的setter方法对象列表
+	 * 查找被指定注解标识的setter方法对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -400,7 +400,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 查找第一个被指定注解标识的setter方法对象
+	 * 查找第一个被指定注解标识的setter方法对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -411,7 +411,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 选择是否只需要第一个被指定注解标识的方式查找setter方法对象列表
+	 * 选择是否只需要第一个被指定注解标识的方式查找setter方法对象列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -459,7 +459,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 查找第一个被指定注解标识的域对象值
+	 * 查找第一个被指定注解标识的域对象值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -473,7 +473,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 调用第一个被指定注解标识的无参方法，并返回执行结果
+	 * 调用第一个被指定注解标识的无参方法，并返回执行结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -485,7 +485,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 调用第一个被指定注解标识的方法，并返回执行结果
+	 * 调用第一个被指定注解标识的方法，并返回执行结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -503,7 +503,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 调用第一个被指定注解标识的getter方法，并返回执行结果
+	 * 调用第一个被指定注解标识的getter方法，并返回执行结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -520,7 +520,7 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 调用第一个被指定注解标识的setter方法
+	 * 调用第一个被指定注解标识的setter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -536,14 +536,14 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * @description 当前包下共享的静态注解工具支持类
+	 * 当前包下共享的静态注解工具支持类
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @version 1.0
 	 */
 	static class Supports {
 		
 		/**
-		 * @description 判断是否为一个被指定注解标识的getter方法对象
+		 * 判断是否为一个被指定注解标识的getter方法对象
 		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 		 * @param method
 		 * @param annotationClass
@@ -555,7 +555,7 @@ public class AnnotationUtils {
 		}
 		
 		/**
-		 * @description 判断是否为一个被指定注解标识的setter方法对象
+		 * 判断是否为一个被指定注解标识的setter方法对象
 		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 		 * @param method
 		 * @param annotationClass

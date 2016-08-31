@@ -21,7 +21,7 @@ package org.workin.security.shiro;
 import org.workin.security.manager.AnnotationPrincipalManager;
 
 /**
- * @description Shiro Principal管理器
+ * Shiro Principal管理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

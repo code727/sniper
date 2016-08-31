@@ -21,7 +21,7 @@ package org.workin.support.generator;
 import org.workin.support.generator.adapter.IDGeneratorAdapter;
 
 /**
- * @description ID序列生成器实现类
+ * ID序列生成器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

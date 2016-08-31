@@ -26,7 +26,7 @@ import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 import org.workin.commons.util.ArrayUtils;
 
 /**
- * @description 自定义角色授权过滤器。
+ * 自定义角色授权过滤器。
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

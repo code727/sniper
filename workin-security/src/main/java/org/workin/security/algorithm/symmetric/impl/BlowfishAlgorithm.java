@@ -34,7 +34,7 @@ import org.workin.commons.util.IOUtils;
 import org.workin.security.algorithm.symmetric.CipherSymmetricAlgorithm;
 
 /**
- * @description Blowfish加解密算法实现类
+ * Blowfish加解密算法实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

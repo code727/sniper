@@ -22,14 +22,14 @@ import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.payment.Order;
 
 /**
- * @description 订单基础服务接口
+ * 订单基础服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface OrderBaseService {
 	
 	/**
-	 * @description 保存订单
+	 * 保存订单
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param order
 	 * @throws Exception
@@ -37,7 +37,7 @@ public interface OrderBaseService {
 	public CodeMessageModel save(Order order) throws Exception;
 
 	/**
-	 * @description 根据编号查询订单对象
+	 * 根据编号查询订单对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param orderId
 	 * @return
@@ -46,7 +46,7 @@ public interface OrderBaseService {
 	public Order findByOrderId(String orderId) throws Exception;
 	
 	/**
-	 * @description 获取线下充值用户的登录名
+	 * 获取线下充值用户的登录名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param account
 	 * @param password

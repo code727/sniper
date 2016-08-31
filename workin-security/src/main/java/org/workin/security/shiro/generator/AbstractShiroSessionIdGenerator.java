@@ -19,7 +19,7 @@
 package org.workin.security.shiro.generator;
 
 /**
- * @description Shiro SessionID生成器抽象类
+ * Shiro SessionID生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

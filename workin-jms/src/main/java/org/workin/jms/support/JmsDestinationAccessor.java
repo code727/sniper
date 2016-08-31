@@ -28,7 +28,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.jms.core.strategy.SharedStrategy;
 
 /**
- * @description JMS目的地访问器抽象类
+ * JMS目的地访问器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -47,7 +47,7 @@ public abstract class JmsDestinationAccessor extends JmsAccessor {
 	}
 	
 	/**
-	 * @description 根据名称是否解析出一个发布/订阅域(topic)目的地对象
+	 * 根据名称是否解析出一个发布/订阅域(topic)目的地对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param session
 	 * @param destinationName
@@ -61,7 +61,7 @@ public abstract class JmsDestinationAccessor extends JmsAccessor {
 	}
 	
 	/**
-	 * @description 获取必要的目的地对象，否则抛出IllegalArgumentException
+	 * 获取必要的目的地对象，否则抛出IllegalArgumentException
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param strategy
 	 * @param destination

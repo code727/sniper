@@ -23,7 +23,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.support.generator.MinLengthIDGenerator;
 
 /**
- * @description 具有最小长度限制的ID生成适配器
+ * 具有最小长度限制的ID生成适配器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -93,7 +93,7 @@ public abstract class MinLengthIDGeneratorAdapter extends
 	}
 	
 	/**
-	 * @description 产生指定长度的补充字符序列
+	 * 产生指定长度的补充字符序列
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param length
 	 * @return

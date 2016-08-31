@@ -21,7 +21,7 @@ package org.workin.templet.message.resolver;
 import java.util.Locale;
 
 /**
- * @description 本地化消息解析器抽象类
+ * 本地化消息解析器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

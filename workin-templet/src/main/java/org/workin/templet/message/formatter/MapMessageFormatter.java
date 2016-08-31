@@ -28,7 +28,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.support.encoder.StringEncoder;
 
 /**
- * @description Map参数消息格式化处理器实现类
+ * Map参数消息格式化处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

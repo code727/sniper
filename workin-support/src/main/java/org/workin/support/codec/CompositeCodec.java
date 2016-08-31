@@ -25,7 +25,7 @@ import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.CollectionUtils;
 
 /**
- * @description 混合型编解码器实现类
+ * 混合型编解码器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -65,7 +65,7 @@ public class CompositeCodec extends AbstractCodec {
 	}
 	
 	/**
-	 * @description 按成员加入的顺序对文本字节数组进行编码
+	 * 按成员加入的顺序对文本字节数组进行编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bytes
 	 * @return
@@ -77,7 +77,7 @@ public class CompositeCodec extends AbstractCodec {
 	}
 	
 	/**
-	 * @description 按成员加入的顺序和指定的字符集对文本进行编码，起始为列表中的第start+1个成员
+	 * 按成员加入的顺序和指定的字符集对文本进行编码，起始为列表中的第start+1个成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param text
 	 * @param charsetName
@@ -92,7 +92,7 @@ public class CompositeCodec extends AbstractCodec {
 	}
 	
 	/**
-	 * @description 按成员加入的逆序和指定的字符集对文本进行解码
+	 * 按成员加入的逆序和指定的字符集对文本进行解码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param encodedText
 	 * @param charsetName
@@ -107,7 +107,7 @@ public class CompositeCodec extends AbstractCodec {
 	}
 	
 	/**
-	 * @description 按成员加入的逆序将文本解码为字节数组
+	 * 按成员加入的逆序将文本解码为字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param encodedText
 	 * @return

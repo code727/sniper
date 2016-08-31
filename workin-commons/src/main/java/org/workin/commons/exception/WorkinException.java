@@ -19,7 +19,7 @@
 package org.workin.commons.exception;
 
 /**
- * @description 全局的Workin包强制异常处理类
+ * 全局的Workin包强制异常处理类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
