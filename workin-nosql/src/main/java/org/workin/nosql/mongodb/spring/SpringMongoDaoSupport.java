@@ -20,7 +20,7 @@ package org.workin.nosql.mongodb.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mapping.context.MappingContext;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.convert.MongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
@@ -35,20 +35,20 @@ import org.workin.spring.beans.AbstractGenricBean;
 public abstract class SpringMongoDaoSupport<T> extends AbstractGenricBean<T> {
 	
 	@Autowired
-	private MongoTemplate mongoTemplate;
+	private MongoOperations mongoOperations;
 
-	public MongoTemplate getMongoTemplate() {
-		return mongoTemplate;
+	public MongoOperations getMongoOperations() {
+		return mongoOperations;
 	}
 
-	public void setMongoTemplate(MongoTemplate mongoTemplate) {
-		this.mongoTemplate = mongoTemplate;
+	public void setMongoOperations(MongoOperations mongoOperations) {
+		this.mongoOperations = mongoOperations;
 	}
-	
+
 	@Override
 	protected void checkProperties() {
-		if (this.mongoTemplate == null)
-			throw new IllegalArgumentException("Property 'mongoTemplate' is required");
+		if (this.mongoOperations == null)
+			throw new IllegalArgumentException("Property 'mongoOperations' is required");
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public abstract class SpringMongoDaoSupport<T> extends AbstractGenricBean<T> {
 	 * @return
 	 */
 	protected MongoConverter getConverter() {
-		return mongoTemplate.getConverter();
+		return mongoOperations.getConverter();
 	}
 	
 	/**
@@ -85,7 +85,8 @@ public abstract class SpringMongoDaoSupport<T> extends AbstractGenricBean<T> {
 	 */
 	protected String getPrimaryKeyName() {		
 		MongoPersistentEntity<?> persistentEntity = getMongoPersistentEntity();
-		MongoPersistentProperty idProperty = (persistentEntity != null ? persistentEntity.getIdProperty() : null);
+		MongoPersistentProperty idProperty = (persistentEntity != null ? persistentEntity
+				.getIdProperty() : null);
 		return idProperty != null ? idProperty.getName() : "_id";
 	}
 	
@@ -101,7 +102,8 @@ public abstract class SpringMongoDaoSupport<T> extends AbstractGenricBean<T> {
 				
 		propertyName = propertyName.trim();
 		MongoPersistentEntity<?> persistentEntity = getMongoPersistentEntity();
-		MongoPersistentProperty property = (persistentEntity != null ? persistentEntity.getPersistentProperty(propertyName) : null);
+		MongoPersistentProperty property = (persistentEntity != null ? persistentEntity
+				.getPersistentProperty(propertyName) : null);
 		return property != null ? property.getName() : propertyName;
 	}
 	

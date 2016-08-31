@@ -46,9 +46,9 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public void insert(T entity, String collection) {
 		if (StringUtils.isNotBlank(collection))
-			getMongoTemplate().insert(entity, collection);
+			getMongoOperations().insert(entity, collection);
 		else
-			getMongoTemplate().insert(entity);
+			getMongoOperations().insert(entity);
 	}
 	
 	@Override
@@ -59,57 +59,56 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public void batchInsert(Collection<T> entities, String collection) {
 		if (StringUtils.isNotBlank(collection))
-			getMongoTemplate().insert(entities, collection);
+			getMongoOperations().insert(entities, collection);
 		else
-			getMongoTemplate().insert(entities);
+			getMongoOperations().insert(entities);
+	}
+		
+	@Override
+	public WriteResult updateFirst(Query query, Update update) {
+		return updateFirst(query, update, null);
 	}
 	
 	@Override
-	public WriteResult update(PK primaryKey, Update update) {
-		return update(primaryKey, update, null);
-	}
-
-	@Override
-	public WriteResult update(PK primaryKey, Update update, String collection) {
-		Query query = new Query();
-		query.getQueryObject().put(getPrimaryKeyName(), primaryKey);
-		return update(query, update, collection);
-	}
-	
-	@Override
-	public WriteResult update(Query query, Update update) {
-		return update(query, update, null);
-	}
-	
-	@Override
-	public WriteResult update(Query query, Update update, String collection) {
-		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+	public WriteResult updateFirst(Query query, Update update, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.updateFirst(query, update, getBeanClass(), collection)
-				: getMongoTemplate().updateFirst(query, update, getBeanClass());
+				: getMongoOperations().updateFirst(query, update, getBeanClass());
 	}
 	
 	@Override
-	public WriteResult batchUpdate(Query query, Update update) {
-		return batchUpdate(query, update, null);
+	public WriteResult updateMulti(Query query, Update update) {
+		return updateMulti(query, update, null);
 	}
 
 	@Override
-	public WriteResult batchUpdate(Query query, Update update, String collection) {
-		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+	public WriteResult updateMulti(Query query, Update update, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.updateMulti(query, update, getBeanClass(), collection)
-				: getMongoTemplate().updateMulti(query, update, getBeanClass());
+				: getMongoOperations().updateMulti(query, update, getBeanClass());
 	}
 
 	@Override
-	public WriteResult upsert(Query query, Update update) {
-		return upsert(query, update, null);
+	public WriteResult upsertOne(Query query, Update update) {
+		return upsertOne(query, update, null);
 	}
 
 	@Override
-	public WriteResult upsert(Query query, Update update, String collection) {
-		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+	public WriteResult upsertOne(Query query, Update update, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.upsert(query, update, getBeanClass(), collection)
-				: getMongoTemplate().upsert(query, update, getBeanClass());
+				: getMongoOperations().upsert(query, update, getBeanClass());
+	}
+	
+	@Override
+	public WriteResult upsertMulti(Query query, Update update) {
+		return upsertMulti(query, update, null);
+	}
+
+	@Override
+	public WriteResult upsertMulti(Query query, Update update, String collection) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	@Override
@@ -120,9 +119,9 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public void save(T entity, String collection) {
 		if (StringUtils.isNotBlank(collection))
-			getMongoTemplate().save(entity, collection);
+			getMongoOperations().save(entity, collection);
 		else
-			getMongoTemplate().save(entity);
+			getMongoOperations().save(entity);
 	}
 
 	@Override
@@ -132,8 +131,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public WriteResult remove(T entity, String collection) {
-		return StringUtils.isNotBlank(collection) ? getMongoTemplate().remove(
-				entity, collection) : getMongoTemplate().remove(entity);
+		return StringUtils.isNotBlank(collection) ? getMongoOperations().remove(
+				entity, collection) : getMongoOperations().remove(entity);
 	}
 	
 	@Override
@@ -145,7 +144,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public WriteResult remove(PK primaryKey, String collection) {
 		T entity = findById(primaryKey, collection);
 		if (entity != null)
-			return getMongoTemplate().remove(entity);
+			return getMongoOperations().remove(entity);
 		
 		return null;
 	}
@@ -157,9 +156,9 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T findAndModify(Query query, Update update, String collection) {
-		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.findAndModify(query, update, getBeanClass(), collection)
-				: getMongoTemplate().findAndModify(query, update, getBeanClass());
+				: getMongoOperations().findAndModify(query, update, getBeanClass());
 	}
 
 	@Override
@@ -169,9 +168,9 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T findAndRemove(Query query, String collection) {
-		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.findAndRemove(query, getBeanClass(), collection)
-				: getMongoTemplate().findAndRemove(query, getBeanClass());
+				: getMongoOperations().findAndRemove(query, getBeanClass());
 	}
 	
 	@Override
@@ -181,14 +180,14 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public T findById(PK primaryKey, String collection) {
-		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.findById(primaryKey, getBeanClass(), collection)
-				: getMongoTemplate().findById(primaryKey, getBeanClass());
+				: getMongoOperations().findById(primaryKey, getBeanClass());
 	}
 	
 	@Override
 	public List<T> findAll() {
-		return getMongoTemplate().findAll(getBeanClass());
+		return getMongoOperations().findAll(getBeanClass());
 	}
 
 }

@@ -35,88 +35,100 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 		MongoPersistence<T, PK> {
 	
 	/**
-	 * 更新主键对应的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
-	 * @param update
-	 * @return
-	 */
-	public WriteResult update(PK primaryKey, Update update);
-	
-	/**
-	 * 更新主键对应的实体对象到目标集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
-	 * @param update
-	 * @param collection
-	 * @return
-	 */
-	public WriteResult update(PK primaryKey, Update update, String collection);
-	
-	/**
-	 * 更新满足查询条件的实体对象
+	 * 更新查询结果集返回的第一条记录<p>
+	 * 实际执行的语句为:db.collection.update({查询},{更新},false,false})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
 	 * @return
 	 */
-	public WriteResult update(Query query, Update update);
+	public WriteResult updateFirst(Query query, Update update);
 	
 	/**
-	 * 更新满足查询条件的实体对象到目标集合中
+	 * 在目标集合中更新查询结果集返回的第一条记录<p>
+	 * 实际执行的语句为:db.collection.update({查询},{更新},false,false})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
 	 * @param collection 目标集合
 	 * @return
 	 */
-	public WriteResult update(Query query, Update update, String collection);
+	public WriteResult updateFirst(Query query, Update update, String collection);
 	
 	/**
-	 * 批量更新满足查询条件的实体对象
+	 * 更新查询结果集返回的所有记录<p>
+	 * 实际执行的语句为:db.collection.update({查询},{更新},false,true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
 	 * @return
 	 */
-	public WriteResult batchUpdate(Query query, Update update);
+	public WriteResult updateMulti(Query query, Update update);
 	
 	/**
-	 * 批量更新满足查询条件的实体对象到目标集合中
+	 * 在目标集合中更新查询结果集返回的所有记录<p>
+	 * 实际执行的语句为:db.collection.update({查询},{更新},false,true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
 	 * @param collection 目标集合名称
 	 * @return
 	 */
-	public WriteResult batchUpdate(Query query, Update update, String collection);
+	public WriteResult updateMulti(Query query, Update update, String collection);
 	
 	/**
-	 * 更新满足查询条件或插入未满足查询条件的实体对象<p>
-	 * 1.query如果查找到符合条件的行，则修改这些行<p>
-	 * 2.query如果未查找到符合条件的行，则连同update中的数据键值组合成新的一行插入到集合中
+	 * 更新满足查询条件或插入未满足查询条件的一条记录<p>
+	 * 1.query如果查找到符合条件的结果集，则修改结果集中第一条记录<p>
+	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
+	 * 实际执行的语句为:db.collection.update({查询},{更新},true,false})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
-	 * @param update 更新/插入操作和数据
+	 * @param update 更新操作和数据
 	 * @return
 	 */
-	public WriteResult upsert(Query query, Update update);
+	public WriteResult upsertOne(Query query, Update update);
 	
 	/**
-	 * 更新满足查询条件或插入未满足查询条件的实体对象到目标集合中<p>
-	 * 1.query如果查找到符合条件的行，则修改这些行<p>
-	 * 2.query如果未查找到符合条件的行，则连同update中的数据键值组合成新的一行插入到集合中
+	 * 在目标集合中更新满足查询条件或插入未满足查询条件的一条记录<p>
+	 * 1.query如果查找到符合条件的结果集，则修改结果集中第一条记录<p>
+	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
+	 * 实际执行的语句为:db.collection.update({查询},{更新},true,false})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
-	 * @param update 更新/插入操作和数据
+	 * @param update 更新操作和数据
 	 * @param collection 目标集合名称
 	 * @return
 	 */
-	public WriteResult upsert(Query query, Update update, String collection);
+	public WriteResult upsertOne(Query query, Update update, String collection);
 	
 	/**
-	 * 更新满足查询条件的实体对象，并且返回操作前的实体数据对象<p>
-	 * 执行的语句为:db.collection.findAndModify({"query":{查询},"update":{更新}})
+	 * 更新满足查询条件的多条或插入未满足查询条件的一条记录<p>
+	 * 1.query如果查找到符合条件的结果集，则修改结果集中所有记录<p>
+	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
+	 * 实际执行的语句为:db.collection.update({查询},{更新},true,true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param query
+	 * @param update
+	 * @return
+	 */
+	public WriteResult upsertMulti(Query query, Update update);
+	
+	/**
+	 * 在目标集合中更新满足查询条件的多条或插入未满足查询条件的一条记录<p>
+	 * 1.query如果查找到符合条件的结果集，则修改结果集中所有记录<p>
+	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
+	 * 实际执行的语句为:db.collection.update({查询},{更新},true,true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param query 查询条件
+	 * @param update 更新操作和数据
+	 * @param collection 目标集合名称
+	 * @return
+	 */
+	public WriteResult upsertMulti(Query query, Update update, String collection);
+	
+	/**
+	 * 更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"update":{更新}})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
@@ -125,8 +137,8 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	public T findAndModify(Query query, Update update);
 	
 	/**
-	 * 在目标集合中更新/删除满足查询条件的实体对象，并且返回操作前的实体数据对象<p>
-	 * 执行的语句为:db.collection.findAndModify({"query":{查询},"update":{更新}})
+	 * 在目标集合中更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"update":{更新}})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
@@ -136,8 +148,8 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	public T findAndModify(Query query, Update update, String collection);
 	
 	/**
-	 * 删除满足查询条件的实体对象，并且返回操作前的实体数据对象<p>
-	 * 执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
+	 * 删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @return
@@ -145,8 +157,8 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	public T findAndRemove(Query query);
 	
 	/**
-	 * 在目标集合中删除满足查询条件的实体对象，并且返回操作前的实体数据对象<p>
-	 * 执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
+	 * 在目标集合中删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param collection 目标集合名称
