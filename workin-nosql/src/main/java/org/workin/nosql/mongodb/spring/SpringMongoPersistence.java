@@ -35,6 +35,25 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 		MongoPersistence<T, PK> {
 	
 	/**
+	 * 更新主键对应的实体对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param primaryKey
+	 * @param update
+	 * @return
+	 */
+	public WriteResult update(PK primaryKey, Update update);
+	
+	/**
+	 * 更新主键对应的实体对象到目标集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param primaryKey
+	 * @param update
+	 * @param collection
+	 * @return
+	 */
+	public WriteResult update(PK primaryKey, Update update, String collection);
+	
+	/**
 	 * 更新满足查询条件的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
@@ -73,9 +92,9 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	public WriteResult batchUpdate(Query query, Update update, String collection);
 	
 	/**
-	 * 更新满足查询条件或插入未满足查询条件的实体对象</br> 
-	 * 				1）query如果查找到符合条件的行，则修改这些行</br>
-	 *              2）query如果未查找到符合条件的行，则连同update中的数据键值组合成新的一行插入到集合中</br>
+	 * 更新满足查询条件或插入未满足查询条件的实体对象<p>
+	 * 1.query如果查找到符合条件的行，则修改这些行<p>
+	 * 2.query如果未查找到符合条件的行，则连同update中的数据键值组合成新的一行插入到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param update 更新/插入操作和数据
@@ -84,9 +103,9 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	public WriteResult upsert(Query query, Update update);
 	
 	/**
-	 * 更新满足查询条件或插入未满足查询条件的实体对象到目标集合中</br>
-	 * 				1）query如果查找到符合条件的行，则修改这些行</br>
-	 *              2）query如果未查找到符合条件的行，则连同update中的数据键值组合成新的一行插入到集合中</br>
+	 * 更新满足查询条件或插入未满足查询条件的实体对象到目标集合中<p>
+	 * 1.query如果查找到符合条件的行，则修改这些行<p>
+	 * 2.query如果未查找到符合条件的行，则连同update中的数据键值组合成新的一行插入到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param update 更新/插入操作和数据
@@ -96,12 +115,8 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	public WriteResult upsert(Query query, Update update, String collection);
 	
 	/**
-	 * 更新满足查询条件的实体对象，并且返回操作前的实体数据对象</br>
-	 * 				执行的语句为</br>
-	 *             		db.test.findAndModify({</br>
-     *                 		"query":{查询},</br>
-     *                  	"update":{更新}</br>
-     *                 	})</br>
+	 * 更新满足查询条件的实体对象，并且返回操作前的实体数据对象<p>
+	 * 执行的语句为:db.collection.findAndModify({"query":{查询},"update":{更新}})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
@@ -110,12 +125,8 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	public T findAndModify(Query query, Update update);
 	
 	/**
-	 * 在目标集合中更新/删除满足查询条件的实体对象，并且返回操作前的实体数据对象</br>
-	 * 				执行的语句为</br>
-	 *             		db.test.findAndModify({</br>
-     *                 		"query":{查询},</br>
-     *                  	"update":{更新}</br>
-     *                 	})</br>
+	 * 在目标集合中更新/删除满足查询条件的实体对象，并且返回操作前的实体数据对象<p>
+	 * 执行的语句为:db.collection.findAndModify({"query":{查询},"update":{更新}})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
@@ -125,12 +136,8 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	public T findAndModify(Query query, Update update, String collection);
 	
 	/**
-	 * 删除满足查询条件的实体对象，并且返回操作前的实体数据对象
-	 * 				执行的语句为</br>
-	 *             		db.test.findAndModify({</br>
-     *                 		"query":{查询},</br>
-     *                  	"remove":true</br>
-     *                 	})</br>
+	 * 删除满足查询条件的实体对象，并且返回操作前的实体数据对象<p>
+	 * 执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @return
@@ -138,7 +145,8 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	public T findAndRemove(Query query);
 	
 	/**
-	 * 在目标集合中删除满足查询条件的实体对象，并且返回操作前的实体数据对象
+	 * 在目标集合中删除满足查询条件的实体对象，并且返回操作前的实体数据对象<p>
+	 * 执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param query 查询条件
 	 * @param collection 目标集合名称

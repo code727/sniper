@@ -65,6 +65,18 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
+	public WriteResult update(PK primaryKey, Update update) {
+		return update(primaryKey, update, null);
+	}
+
+	@Override
+	public WriteResult update(PK primaryKey, Update update, String collection) {
+		Query query = new Query();
+		query.getQueryObject().put(getPrimaryKeyName(), primaryKey);
+		return update(query, update, collection);
+	}
+	
+	@Override
 	public WriteResult update(Query query, Update update) {
 		return update(query, update, null);
 	}
@@ -152,14 +164,14 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T findAndRemove(Query query) {
-		// TODO Auto-generated method stub
-		return null;
+		return findAndRemove(query, null);
 	}
 
 	@Override
 	public T findAndRemove(Query query, String collection) {
-		// TODO Auto-generated method stub
-		return null;
+		return StringUtils.isNotBlank(collection) ? getMongoTemplate()
+				.findAndRemove(query, getBeanClass(), collection)
+				: getMongoTemplate().findAndRemove(query, getBeanClass());
 	}
 	
 	@Override

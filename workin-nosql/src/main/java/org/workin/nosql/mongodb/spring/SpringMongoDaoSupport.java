@@ -19,7 +19,12 @@
 package org.workin.nosql.mongodb.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mapping.context.MappingContext;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.convert.MongoConverter;
+import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
+import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
+import org.workin.commons.util.StringUtils;
 import org.workin.spring.beans.AbstractGenricBean;
 
 /**
@@ -45,5 +50,59 @@ public abstract class SpringMongoDaoSupport<T> extends AbstractGenricBean<T> {
 		if (this.mongoTemplate == null)
 			throw new IllegalArgumentException("Property 'mongoTemplate' is required");
 	}
-
+	
+	/**
+	 * 获取转换器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	protected MongoConverter getConverter() {
+		return mongoTemplate.getConverter();
+	}
+	
+	/**
+	 * 获取映射上下文
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	protected MappingContext<?, ?> getMappingContext() {
+		return getConverter().getMappingContext();
+	}
+	
+	/**
+	 * 获取当前实体对象对应的MongoDB持久化实体对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	protected MongoPersistentEntity<?> getMongoPersistentEntity() {
+		return (MongoPersistentEntity<?>) getMappingContext().getPersistentEntity(getBeanClass());
+	}
+	
+	/**
+	 * 获取当前实体对象对应的MongoDB主键名称
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	protected String getPrimaryKeyName() {		
+		MongoPersistentEntity<?> persistentEntity = getMongoPersistentEntity();
+		MongoPersistentProperty idProperty = (persistentEntity != null ? persistentEntity.getIdProperty() : null);
+		return idProperty != null ? idProperty.getName() : "_id";
+	}
+	
+	/**
+	 * 获取当前实体对象属性对应的MongoDB键名称
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName
+	 * @return
+	 */
+	protected String getKeyName(String propertyName) {
+		if (StringUtils.isBlank(propertyName))
+			return StringUtils.EMPTY_STRING;
+				
+		propertyName = propertyName.trim();
+		MongoPersistentEntity<?> persistentEntity = getMongoPersistentEntity();
+		MongoPersistentProperty property = (persistentEntity != null ? persistentEntity.getPersistentProperty(propertyName) : null);
+		return property != null ? property.getName() : propertyName;
+	}
+	
 }

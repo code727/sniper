@@ -61,18 +61,18 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	public void batchInsert(Collection<T> entities, String collection);
 		
 	/**
-	 * 新增/更新实体对象</br>
-	 *              1)当entity对象的id在数据库中找不到记录，则新增</br>
-	 *              2)当entity对象的id在数据库中找得到记录，则更新</br>
+	 * 新增/更新实体对象<p>
+	 * 1.当entity对象的id在数据库中找不到记录，则新增<p>
+	 * 2.当entity对象的id在数据库中找得到记录，则更新<p>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 */
 	public void save(T entity);
 	
 	/**
-	 * 新增/更新实体对象到目标集合中</br>
-	 *              1)当entity对象的id在数据库中找不到记录，则新增</br>
-	 *              2)当entity对象的id在数据库中找得到记录，则更新</br>
+	 * 新增/更新实体对象到目标集合中<p>
+	 * 1.当entity对象的id在数据库中找不到记录，则新增<p>
+	 * 2.当entity对象的id在数据库中找得到记录，则更新<p>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entity
 	 * @param collection
