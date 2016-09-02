@@ -18,12 +18,16 @@
 
 package org.workin.nosql.mongodb.spring;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mapping.context.MappingContext;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.convert.MongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.workin.commons.util.StringUtils;
 import org.workin.spring.beans.AbstractGenricBean;
 
@@ -32,7 +36,7 @@ import org.workin.spring.beans.AbstractGenricBean;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class SpringMongoDaoSupport<T> extends AbstractGenricBean<T> {
+public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends AbstractGenricBean<T> {
 	
 	@Autowired
 	private MongoOperations mongoOperations;
@@ -70,20 +74,20 @@ public abstract class SpringMongoDaoSupport<T> extends AbstractGenricBean<T> {
 	}
 	
 	/**
-	 * 获取当前实体对象对应的MongoDB持久化实体对象
+	 * 获取当前实体对象类型对应的MongoDB持久化实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	protected MongoPersistentEntity<?> getMongoPersistentEntity() {
 		return (MongoPersistentEntity<?>) getMappingContext().getPersistentEntity(getBeanClass());
 	}
-	
+		
 	/**
-	 * 获取当前实体对象对应的MongoDB主键名称
+	 * 获取当前实体对象对应的MongoDB ID键名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	protected String getPrimaryKeyName() {		
+	protected String getIdKeyName() {		
 		MongoPersistentEntity<?> persistentEntity = getMongoPersistentEntity();
 		MongoPersistentProperty idProperty = (persistentEntity != null ? persistentEntity
 				.getIdProperty() : null);
@@ -100,11 +104,33 @@ public abstract class SpringMongoDaoSupport<T> extends AbstractGenricBean<T> {
 		if (StringUtils.isBlank(propertyName))
 			return StringUtils.EMPTY_STRING;
 				
-		propertyName = propertyName.trim();
 		MongoPersistentEntity<?> persistentEntity = getMongoPersistentEntity();
 		MongoPersistentProperty property = (persistentEntity != null ? persistentEntity
 				.getPersistentProperty(propertyName) : null);
 		return property != null ? property.getName() : propertyName;
+	}
+	
+	/**
+	 * 构建ID查询对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @return
+	 */
+	protected Query buildIdQuery(PK id) {
+		return new Query(Criteria.where(getIdKeyName()).is(id));
+	}
+	
+	/**
+	 * 构建属性查询对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName
+	 * @param propertyValue
+	 * @return
+	 */
+	protected Query buildPropertyQuery(String propertyName, Object propertyValue) {
+		String keyName = getKeyName(propertyName);
+		return StringUtils.isNotEmpty(keyName) ? new Query(Criteria.where(
+				keyName).is(propertyValue)) : new Query();
 	}
 	
 }

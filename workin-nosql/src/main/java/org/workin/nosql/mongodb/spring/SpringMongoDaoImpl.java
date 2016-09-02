@@ -36,7 +36,7 @@ import com.mongodb.WriteResult;
  */
 @Repository
 public class SpringMongoDaoImpl<T, PK extends Serializable> extends
-		SpringMongoDaoSupport<T> implements SpringMongoDao<T, PK> {
+		SpringMongoDaoSupport<T, PK> implements SpringMongoDao<T, PK> {
 	
 	@Override
 	public void insert(T entity) {
@@ -61,7 +61,17 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		if (StringUtils.isNotBlank(collection))
 			getMongoOperations().insert(entities, collection);
 		else
-			getMongoOperations().insert(entities);
+			getMongoOperations().insert(entities, getBeanClass());
+	}
+	
+	@Override
+	public WriteResult updateById(PK id, Update update) {
+		return updateById(id, update, null);
+	}
+
+	@Override
+	public WriteResult updateById(PK id, Update update, String collection) {
+		return updateFirst(buildIdQuery(id), update, collection);
 	}
 		
 	@Override
@@ -87,12 +97,22 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 				.updateMulti(query, update, getBeanClass(), collection)
 				: getMongoOperations().updateMulti(query, update, getBeanClass());
 	}
+	
+	@Override
+	public WriteResult upsertById(PK id, Update update) {
+		return upsertById(id, update, null);
+	}
+
+	@Override
+	public WriteResult upsertById(PK id, Update update, String collection) {
+		return upsertOne(buildIdQuery(id), update, collection);
+	}
 
 	@Override
 	public WriteResult upsertOne(Query query, Update update) {
 		return upsertOne(query, update, null);
 	}
-
+	
 	@Override
 	public WriteResult upsertOne(Query query, Update update, String collection) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
@@ -100,16 +120,16 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 				: getMongoOperations().upsert(query, update, getBeanClass());
 	}
 	
-	@Override
-	public WriteResult upsertMulti(Query query, Update update) {
-		return upsertMulti(query, update, null);
-	}
-
-	@Override
-	public WriteResult upsertMulti(Query query, Update update, String collection) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public WriteResult upsertMulti(Query query, Update update) {
+//		return upsertMulti(query, update, null);
+//	}
+//
+//	@Override
+//	public WriteResult upsertMulti(Query query, Update update, String collection) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 	@Override
 	public void save(T entity) {
@@ -136,13 +156,13 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
-	public WriteResult remove(PK primaryKey) {
-		return remove(primaryKey, null);
+	public WriteResult remove(PK id) {
+		return remove(id, null);
 	}
 
 	@Override
-	public WriteResult remove(PK primaryKey, String collection) {
-		T entity = findById(primaryKey, collection);
+	public WriteResult remove(PK id, String collection) {
+		T entity = findById(id, collection);
 		if (entity != null)
 			return getMongoOperations().remove(entity);
 		
@@ -174,20 +194,44 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
-	public T findById(PK primaryKey) {
-		return findById(primaryKey, null);
+	public List<T> findAllAndRemove(Query query) {
+		return findAllAndRemove(query, null);
+	}
+
+	@Override
+	public List<T> findAllAndRemove(Query query, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoOperations()
+				.findAllAndRemove(query, getBeanClass(), collection)
+				: getMongoOperations().findAllAndRemove(query, getBeanClass());
 	}
 	
 	@Override
-	public T findById(PK primaryKey, String collection) {
+	public T findById(PK id) {
+		return findById(id, null);
+	}
+	
+	@Override
+	public T findById(PK id, String collection) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
-				.findById(primaryKey, getBeanClass(), collection)
-				: getMongoOperations().findById(primaryKey, getBeanClass());
+				.findById(id, getBeanClass(), collection)
+				: getMongoOperations().findById(id, getBeanClass());
 	}
 	
 	@Override
 	public List<T> findAll() {
 		return getMongoOperations().findAll(getBeanClass());
+	}
+
+	@Override
+	public T findOne(Query query) {
+		return findOne(query, null);
+	}
+
+	@Override
+	public T findOne(Query query, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoOperations()
+				.findOne(query, getBeanClass(), collection)
+				: getMongoOperations().findOne(query, getBeanClass());
 	}
 
 }

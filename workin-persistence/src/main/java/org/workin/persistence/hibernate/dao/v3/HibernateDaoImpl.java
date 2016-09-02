@@ -170,8 +170,8 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
-	public void remove(PK primaryKey) {
-		T entity = getById(primaryKey);
+	public void remove(PK id) {
+		T entity = getById(id);
 		if (entity != null)
 			remove(entity);
 	}
@@ -247,8 +247,8 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
-	public boolean contains(PK primaryKey) {
-		T entity = getById(primaryKey);
+	public boolean contains(PK id) {
+		T entity = getById(id);
 		return contains(entity);
 	}
 
@@ -323,35 +323,35 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
-	public T loadById(PK primaryKey) {
-		return loadById(primaryKey, (LockMode) null);
+	public T loadById(PK id) {
+		return loadById(id, (LockMode) null);
 	}
 
 	@Override
-	public T loadById(PK primaryKey, LockMode lockMode) {
-		return loadById(null, primaryKey, lockMode);
+	public T loadById(PK id, LockMode lockMode) {
+		return loadById(null, id, lockMode);
 	}
 
 	@Override
-	public T loadById(PK primaryKey, LockOptions lockOptions) {
-		return loadById(null, primaryKey, lockOptions);
+	public T loadById(PK id, LockOptions lockOptions) {
+		return loadById(null, id, lockOptions);
 	}
 
 	@Override
-	public T loadById(String entityName, PK primaryKey) {
-		return loadById(entityName, primaryKey, (LockMode) null);
+	public T loadById(String entityName, PK id) {
+		return loadById(entityName, id, (LockMode) null);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T loadById(String entityName, PK primaryKey, LockMode lockMode) {
+	public T loadById(String entityName, PK id, LockMode lockMode) {
 		return StringUtils.isNotBlank(entityName) ? 
-				(T) getHibernateTemplate().load(entityName.trim(), primaryKey, lockMode) :
-					getHibernateTemplate().load(this.getBeanClass(), primaryKey, lockMode);
+				(T) getHibernateTemplate().load(entityName.trim(), id, lockMode) :
+					getHibernateTemplate().load(this.getBeanClass(), id, lockMode);
 	}
 
 	@Override
-	public T loadById(final String entityName, final PK primaryKey, final LockOptions lockOptions) {
+	public T loadById(final String entityName, final PK id, final LockOptions lockOptions) {
 		return getHibernateTemplate().execute(new HibernateCallback<T>() {
 			
 			@SuppressWarnings("unchecked")
@@ -359,12 +359,12 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 			public T doInHibernate(Session session) throws HibernateException, SQLException {
 				if (StringUtils.isNotBlank(entityName)) 
 					return (T) (lockOptions != null ? 
-							session.load(entityName.trim(), primaryKey, lockOptions) : 
-								session.load(entityName.trim(), primaryKey));
+							session.load(entityName.trim(), id, lockOptions) : 
+								session.load(entityName.trim(), id));
 				else
 					return (T) (lockOptions != null ? 
-							session.load(getBeanClass(), primaryKey, lockOptions) :
-								session.load(getBeanClass(), primaryKey));
+							session.load(getBeanClass(), id, lockOptions) :
+								session.load(getBeanClass(), id));
 			}
 		});
 	}
@@ -381,35 +381,35 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
-	public T getById(PK primaryKey) {
-		return getById(primaryKey, (LockMode) null);
+	public T getById(PK id) {
+		return getById(id, (LockMode) null);
 	}
 
 	@Override
-	public T getById(PK primaryKey, LockMode lockMode) {
-		return getById(null, primaryKey, lockMode);
+	public T getById(PK id, LockMode lockMode) {
+		return getById(null, id, lockMode);
 	}
 
 	@Override
-	public T getById(PK primaryKey, LockOptions lockOptions) {
-		return getById(null, primaryKey, lockOptions);
+	public T getById(PK id, LockOptions lockOptions) {
+		return getById(null, id, lockOptions);
 	}
 
 	@Override
-	public T getById(String entityName, PK primaryKey) {
-		return getById(entityName, primaryKey, (LockMode) null);
+	public T getById(String entityName, PK id) {
+		return getById(entityName, id, (LockMode) null);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T getById(String entityName, PK primaryKey, LockMode lockMode) {
+	public T getById(String entityName, PK id, LockMode lockMode) {
 		return StringUtils.isNotBlank(entityName) ? 
-				(T) getHibernateTemplate().get(entityName.trim(), primaryKey, lockMode) :
-					getHibernateTemplate().get(this.getBeanClass(), primaryKey, lockMode);
+				(T) getHibernateTemplate().get(entityName.trim(), id, lockMode) :
+					getHibernateTemplate().get(this.getBeanClass(), id, lockMode);
 	}
 
 	@Override
-	public T getById(final String entityName, final PK primaryKey, final LockOptions lockOptions) {
+	public T getById(final String entityName, final PK id, final LockOptions lockOptions) {
 		return getHibernateTemplate().execute(new HibernateCallback<T>() {
 			
 			@SuppressWarnings("unchecked")
@@ -417,19 +417,19 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 			public T doInHibernate(Session session) throws HibernateException, SQLException {
 				if (StringUtils.isNotBlank(entityName)) 
 					return (T) (lockOptions != null ? 
-							session.get(entityName.trim(), primaryKey, lockOptions) : 
-								session.load(entityName.trim(), primaryKey));
+							session.get(entityName.trim(), id, lockOptions) : 
+								session.load(entityName.trim(), id));
 				else
 					return (T) (lockOptions != null ? 
-							session.get(getBeanClass(), primaryKey, lockOptions) :
-								session.load(getBeanClass(), primaryKey));
+							session.get(getBeanClass(), id, lockOptions) :
+								session.load(getBeanClass(), id));
 			}
 		});
 	}
 	
 	@Override
-	public T findById(PK primaryKey) {
-		return findUniqueByProperty(getPrimaryKeyName(), primaryKey);
+	public T findById(PK id) {
+		return findUniqueByProperty(getIdPropertyName(), id);
 	}
 	
 	@Override
@@ -439,7 +439,7 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	}
 		
 	@Override
-	public T findUniqueByPropertys(Map<String, ?> paramMap) {
+	public T findUniqueByProperties(Map<String, ?> paramMap) {
 		String ql = PersistenceUtils.buildNamedQueryString(false, this.getBeanClass(), paramMap);
 		return findUniqueByQueryString(ql, paramMap);
 	}
@@ -593,12 +593,12 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	}
 				
 	@Override
-	public List<T> findByPropertys(Map<String, ?> paramMap) {
-		return findByPropertys(paramMap, -1, -1);
+	public List<T> findByProperties(Map<String, ?> paramMap) {
+		return findByProperties(paramMap, -1, -1);
 	}
 
 	@Override
-	public List<T> findByPropertys(Map<String, ?> paramMap, int start, int maxRows) {
+	public List<T> findByProperties(Map<String, ?> paramMap, int start, int maxRows) {
 		String ql = PersistenceUtils.buildNamedQueryString(false, this.getBeanClass(), paramMap);
 		return find(ql, paramMap, start, maxRows);
 	}
@@ -622,7 +622,7 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
-	public long countByPropertys(Map<String, ?> paramMap) {
+	public long countByProperties(Map<String, ?> paramMap) {
 		String ql = PersistenceUtils.buildNamedQueryString(true, this.getBeanClass(), paramMap);
 		return findUniqueByQueryString(Long.class, ql, paramMap);
 	}

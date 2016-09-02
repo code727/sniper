@@ -112,12 +112,12 @@ public abstract class HibernateDaoSupport<T> extends AbstractGenricBean<T> {
 	}
 			
 	/**
-	 * 获取当前实体类型对应的表的主键名
+	 * 获取当前实体类型对应的ID属性名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
 	 */
-	protected String getPrimaryKeyName() {
+	protected String getIdPropertyName() {
 		return getClassMetadata().getIdentifierPropertyName();
 	}
 		

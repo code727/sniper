@@ -130,57 +130,57 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	/**
 	 * 根据主键ID加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @return
 	 */
-	public T loadById(PK primaryKey);
+	public T loadById(PK id);
 	
 	/**
 	 * 根据主键ID按指定的锁模式锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @param lockMode
 	 * @return
 	 */
-	public T loadById(PK primaryKey, LockMode lockMode);
+	public T loadById(PK id, LockMode lockMode);
 	
 	/**
 	 * 根据主键ID按指定的锁选项锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @param lockOptions
 	 * @return
 	 */
-	public T loadById(PK primaryKey, LockOptions lockOptions);
+	public T loadById(PK id, LockOptions lockOptions);
 	
 	/**
 	 * 根据名称和主键ID加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
-	 * @param primaryKey
+	 * @param id
 	 * @return
 	 */
-	public T loadById(String entityName, PK primaryKey);
+	public T loadById(String entityName, PK id);
 	
 	/**
 	 * 根据名称和主键ID按指定的锁模式锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
-	 * @param primaryKey
+	 * @param id
 	 * @param lockMode
 	 * @return
 	 */
-	public T loadById(String entityName, PK primaryKey, LockMode lockMode);
+	public T loadById(String entityName, PK id, LockMode lockMode);
 	
 	/**
 	 * 根据名称和主键ID按指定的锁选项锁住并加载当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
-	 * @param primaryKey
+	 * @param id
 	 * @param lockOptions
 	 * @return
 	 */
-	public T loadById(String entityName, PK primaryKey, LockOptions lockOptions);
+	public T loadById(String entityName, PK id, LockOptions lockOptions);
 	
 	/**
 	 * 加载当前类型的所有实体对象
@@ -199,56 +199,56 @@ public interface HibernateCrudService<T, PK extends Serializable> extends JpaCru
 	/**
 	 * 根据主键ID获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @return
 	 */
-	public T getById(PK primaryKey);
+	public T getById(PK id);
 	
 	/**
 	 * 根据主键ID按指定的锁模式锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @param lockMode
 	 * @return
 	 */
-	public T getById(PK primaryKey, LockMode lockMode);
+	public T getById(PK id, LockMode lockMode);
 	
 	/**
 	 * 根据主键ID按指定的锁选项锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @param lockOptions
 	 * @return
 	 */
-	public T getById(PK primaryKey, LockOptions lockOptions);
+	public T getById(PK id, LockOptions lockOptions);
 	
 	/**
 	 * 根据名称和主键ID获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
-	 * @param primaryKey
+	 * @param id
 	 * @return
 	 */
-	public T getById(String entityName, PK primaryKey);
+	public T getById(String entityName, PK id);
 	
 	/**
 	 * 根据名称和主键ID按指定的锁模式锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
-	 * @param primaryKey
+	 * @param id
 	 * @param lockMode
 	 * @return
 	 */
-	public T getById(String entityName, PK primaryKey, LockMode lockMode);
+	public T getById(String entityName, PK id, LockMode lockMode);
 	
 	/**
 	 * 根据名称和主键ID按指定的锁选项锁住并获取当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param entityName
-	 * @param primaryKey
+	 * @param id
 	 * @param lockOptions
 	 * @return
 	 */
-	public T getById(String entityName, PK primaryKey, LockOptions lockOptions);
+	public T getById(String entityName, PK id, LockOptions lockOptions);
 
 }

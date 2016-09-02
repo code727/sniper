@@ -31,25 +31,25 @@ public interface MongoQuery<T, PK extends Serializable> {
 	/**
 	 * 根据主键查询实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @return
 	 */
-	public T findById(PK primaryKey);
+	public T findById(PK id);
 	
 	/**
 	 * 根据主键查询目标集合中的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @param collection
 	 * @return
 	 */
-	public T findById(PK primaryKey, String collection);
-	
+	public T findById(PK id, String collection);
+		
 	/**
 	 * 查询出当前集合中所有的数据对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<T> findAll();
-
+	
 }

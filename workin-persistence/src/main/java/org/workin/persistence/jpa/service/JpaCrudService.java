@@ -68,9 +68,9 @@ public interface JpaCrudService<T, PK extends Serializable> {
 	/**
 	 * 删除指定主键ID对应的实体对象 - 实体游离
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 */
-	public void remove(PK primaryKey);
+	public void remove(PK id);
 	
 	/**
 	 * 批量删除实体对象 - 实体游离
@@ -82,10 +82,10 @@ public interface JpaCrudService<T, PK extends Serializable> {
 	/**
 	 * 根据主键ID查询当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @return
 	 */
-	public T findById(PK primaryKey);
+	public T findById(PK id);
 
 	/**
 	 * 查询当前类型的所有实体对象

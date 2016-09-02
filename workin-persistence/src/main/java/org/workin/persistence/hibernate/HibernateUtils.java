@@ -193,7 +193,7 @@ public class HibernateUtils {
 	 * @param entityClass
 	 * @return
 	 */
-	public static String getPrimaryKeyName(SessionFactory sessionFactory, Class<?> entityClass) {
+	public static String getidName(SessionFactory sessionFactory, Class<?> entityClass) {
 		return getClassMetadata(sessionFactory, entityClass).getIdentifierPropertyName();
 	}
 

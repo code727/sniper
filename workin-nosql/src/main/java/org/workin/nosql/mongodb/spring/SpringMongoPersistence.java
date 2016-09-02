@@ -19,6 +19,7 @@
 package org.workin.nosql.mongodb.spring;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -33,6 +34,27 @@ import com.mongodb.WriteResult;
  */
 public interface SpringMongoPersistence<T, PK extends Serializable> extends
 		MongoPersistence<T, PK> {
+	
+	/**
+	 * 更新主键对应的记录<p>
+	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},false,false})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @param update
+	 * @return
+	 */
+	public WriteResult updateById(PK id, Update update);
+	
+	/**
+	 * 在目标集合中更新主键对应的记录<p>
+	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},false,false})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @param update
+	 * @param collection
+	 * @return
+	 */
+	public WriteResult updateById(PK id, Update update, String collection);
 	
 	/**
 	 * 更新查询结果集返回的第一条记录<p>
@@ -77,6 +99,31 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	public WriteResult updateMulti(Query query, Update update, String collection);
 	
 	/**
+	 * 根据ID更新满足查询条件或插入未满足查询条件的一条记录<p>
+	 * 1.如果根据ID查找到符合条件的结果集，则修改结果集中第一条记录<p>
+	 * 2.如果根据ID未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
+	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},true,false})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @param update
+	 * @return
+	 */
+	public WriteResult upsertById(PK id, Update update);
+	
+	/**
+	 * 在目标集合中根据ID更新满足查询条件或插入未满足查询条件的一条记录<p>
+	 * 1.如果根据ID查找到符合条件的结果集，则修改结果集中第一条记录<p>
+	 * 2.如果根据ID未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
+	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},true,false})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @param update
+	 * @param collection
+	 * @return
+	 */
+	public WriteResult upsertById(PK id, Update update, String collection);
+	
+	/**
 	 * 更新满足查询条件或插入未满足查询条件的一条记录<p>
 	 * 1.query如果查找到符合条件的结果集，则修改结果集中第一条记录<p>
 	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
@@ -101,30 +148,30 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 */
 	public WriteResult upsertOne(Query query, Update update, String collection);
 	
-	/**
-	 * 更新满足查询条件的多条或插入未满足查询条件的一条记录<p>
-	 * 1.query如果查找到符合条件的结果集，则修改结果集中所有记录<p>
-	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
-	 * 实际执行的语句为:db.collection.update({查询},{更新},true,true})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query
-	 * @param update
-	 * @return
-	 */
-	public WriteResult upsertMulti(Query query, Update update);
-	
-	/**
-	 * 在目标集合中更新满足查询条件的多条或插入未满足查询条件的一条记录<p>
-	 * 1.query如果查找到符合条件的结果集，则修改结果集中所有记录<p>
-	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
-	 * 实际执行的语句为:db.collection.update({查询},{更新},true,true})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 查询条件
-	 * @param update 更新操作和数据
-	 * @param collection 目标集合名称
-	 * @return
-	 */
-	public WriteResult upsertMulti(Query query, Update update, String collection);
+//	/**
+//	 * 更新满足查询条件的多条或插入未满足查询条件的一条记录<p>
+//	 * 1.query如果查找到符合条件的结果集，则修改结果集中所有记录<p>
+//	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
+//	 * 实际执行的语句为:db.collection.update({查询},{更新},true,true})
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param query
+//	 * @param update
+//	 * @return
+//	 */
+//	public WriteResult upsertMulti(Query query, Update update);
+//	
+//	/**
+//	 * 在目标集合中更新满足查询条件的多条或插入未满足查询条件的一条记录<p>
+//	 * 1.query如果查找到符合条件的结果集，则修改结果集中所有记录<p>
+//	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
+//	 * 实际执行的语句为:db.collection.update({查询},{更新},true,true})
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param query 查询条件
+//	 * @param update 更新操作和数据
+//	 * @param collection 目标集合名称
+//	 * @return
+//	 */
+//	public WriteResult upsertMulti(Query query, Update update, String collection);
 	
 	/**
 	 * 更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
@@ -165,5 +212,26 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * @return
 	 */
 	public T findAndRemove(Query query, String collection);
+	
+	/**
+	 * 删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param query
+	 * @return
+	 */
+	public List<T> findAllAndRemove(Query query);
+	
+	/**
+	 * 在目标集合中删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param query
+	 * @param collection
+	 * @return
+	 */
+	public List<T> findAllAndRemove(Query query, String collection);
+	
+	
 
 }

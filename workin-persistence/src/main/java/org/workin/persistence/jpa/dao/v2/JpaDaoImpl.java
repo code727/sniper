@@ -103,8 +103,8 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	}
 
 	@Override
-	public void remove(PK primaryKey) {
-		T entity = findById(primaryKey);
+	public void remove(PK id) {
+		T entity = findById(id);
 		if (entity != null)
 			remove(entity);
 	}
@@ -146,8 +146,8 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	}
 	
 	@Override
-	public boolean contains(PK primaryKey) {
-		T entity = getEntityManager().find(this.getBeanClass(), primaryKey);
+	public boolean contains(PK id) {
+		T entity = getEntityManager().find(this.getBeanClass(), id);
 		return contains(entity);
 	}
 
@@ -171,8 +171,8 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	}
 	
 	@Override
-	public T findById(PK primaryKey) {
-		return getEntityManager().find(this.getBeanClass(), primaryKey);
+	public T findById(PK id) {
+		return getEntityManager().find(this.getBeanClass(), id);
 	}
 	
 	@Override
@@ -182,7 +182,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	}
 	
 	@Override
-	public T findUniqueByPropertys(Map<String, ?> paramMap) {
+	public T findUniqueByProperties(Map<String, ?> paramMap) {
 		String ql = PersistenceUtils.buildNamedQueryString(false, this.getBeanClass(), paramMap);
 		return findUniqueByQueryString(ql, paramMap);
 	}
@@ -302,12 +302,12 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	}
 				
 	@Override
-	public List<T> findByPropertys(Map<String, ?> paramMap) {
-		return findByPropertys(paramMap, -1, -1);
+	public List<T> findByProperties(Map<String, ?> paramMap) {
+		return findByProperties(paramMap, -1, -1);
 	}
 	
 	@Override
-	public List<T> findByPropertys(Map<String, ?> paramMap, int start, int maxRows) {
+	public List<T> findByProperties(Map<String, ?> paramMap, int start, int maxRows) {
 		String ql = PersistenceUtils.buildNamedQueryString(false, this.getBeanClass(), paramMap);
 		return find(ql, paramMap, start, maxRows);
 	}
@@ -331,7 +331,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	}
 	
 	@Override
-	public long countByPropertys(Map<String, ?> paramMap) {
+	public long countByProperties(Map<String, ?> paramMap) {
 		String ql = PersistenceUtils.buildNamedQueryString(true, this.getBeanClass(), paramMap);
 		return findUniqueByQueryString(Long.class, ql, paramMap);
 	}

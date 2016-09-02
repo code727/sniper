@@ -83,8 +83,8 @@ public abstract class AbstractHibernateCrudService<T, PK extends Serializable> e
 	}
 
 	@Override
-	public void remove(PK primaryKey) {
-		this.hibernateDao.remove(primaryKey);
+	public void remove(PK id) {
+		this.hibernateDao.remove(id);
 	}
 
 	@Override
@@ -98,8 +98,8 @@ public abstract class AbstractHibernateCrudService<T, PK extends Serializable> e
 	}
 
 	@Override
-	public T findById(PK primaryKey) {
-		return this.hibernateDao.findById(primaryKey);
+	public T findById(PK id) {
+		return this.hibernateDao.findById(id);
 	}
 
 	@Override
@@ -143,33 +143,33 @@ public abstract class AbstractHibernateCrudService<T, PK extends Serializable> e
 	}
 
 	@Override
-	public T loadById(PK primaryKey) {
-		return this.hibernateDao.loadById(primaryKey);
+	public T loadById(PK id) {
+		return this.hibernateDao.loadById(id);
 	}
 
 	@Override
-	public T loadById(PK primaryKey, LockMode lockMode) {
-		return this.hibernateDao.loadById(primaryKey, lockMode);
+	public T loadById(PK id, LockMode lockMode) {
+		return this.hibernateDao.loadById(id, lockMode);
 	}
 
 	@Override
-	public T loadById(PK primaryKey, LockOptions lockOptions) {
-		return this.hibernateDao.loadById(primaryKey, lockOptions);
+	public T loadById(PK id, LockOptions lockOptions) {
+		return this.hibernateDao.loadById(id, lockOptions);
 	}
 
 	@Override
-	public T loadById(String entityName, PK primaryKey) {
-		return this.hibernateDao.loadById(entityName, primaryKey);
+	public T loadById(String entityName, PK id) {
+		return this.hibernateDao.loadById(entityName, id);
 	}
 
 	@Override
-	public T loadById(String entityName, PK primaryKey, LockMode lockMode) {
-		return this.hibernateDao.loadById(entityName, primaryKey, lockMode);
+	public T loadById(String entityName, PK id, LockMode lockMode) {
+		return this.hibernateDao.loadById(entityName, id, lockMode);
 	}
 
 	@Override
-	public T loadById(String entityName, PK primaryKey, LockOptions lockOptions) {
-		return this.hibernateDao.loadById(entityName, primaryKey, lockOptions);
+	public T loadById(String entityName, PK id, LockOptions lockOptions) {
+		return this.hibernateDao.loadById(entityName, id, lockOptions);
 	}
 
 	@Override
@@ -183,33 +183,33 @@ public abstract class AbstractHibernateCrudService<T, PK extends Serializable> e
 	}
 	
 	@Override
-	public T getById(PK primaryKey) {
-		return this.hibernateDao.getById(primaryKey);
+	public T getById(PK id) {
+		return this.hibernateDao.getById(id);
 	}
 
 	@Override
-	public T getById(PK primaryKey, LockMode lockMode) {
-		return this.hibernateDao.getById(primaryKey, lockMode);
+	public T getById(PK id, LockMode lockMode) {
+		return this.hibernateDao.getById(id, lockMode);
 	}
 
 	@Override
-	public T getById(PK primaryKey, LockOptions lockOptions) {
-		return this.hibernateDao.getById(primaryKey, lockOptions);
+	public T getById(PK id, LockOptions lockOptions) {
+		return this.hibernateDao.getById(id, lockOptions);
 	}
 
 	@Override
-	public T getById(String entityName, PK primaryKey) {
-		return this.hibernateDao.getById(entityName, primaryKey);
+	public T getById(String entityName, PK id) {
+		return this.hibernateDao.getById(entityName, id);
 	}
 
 	@Override
-	public T getById(String entityName, PK primaryKey, LockMode lockMode) {
-		return this.hibernateDao.getById(entityName, primaryKey, lockMode);
+	public T getById(String entityName, PK id, LockMode lockMode) {
+		return this.hibernateDao.getById(entityName, id, lockMode);
 	}
 
 	@Override
-	public T getById(String entityName, PK primaryKey, LockOptions lockOptions) {
-		return this.hibernateDao.getById(entityName, primaryKey, lockOptions);
+	public T getById(String entityName, PK id, LockOptions lockOptions) {
+		return this.hibernateDao.getById(entityName, id, lockOptions);
 	}
 
 }

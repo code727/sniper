@@ -20,6 +20,7 @@ package org.workin.nosql.mongodb.spring;
 
 import java.io.Serializable;
 
+import org.springframework.data.mongodb.core.query.Query;
 import org.workin.nosql.mongodb.dao.MongoQuery;
 
 /**
@@ -29,5 +30,22 @@ import org.workin.nosql.mongodb.dao.MongoQuery;
  */
 public interface SpringMongoQuery<T, PK extends Serializable> extends
 		MongoQuery<T, PK> {
+	
+	/**
+	 * 查询出满足条件的唯一记录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param query
+	 * @return
+	 */
+	public T findOne(Query query);
+	
+	/**
+	 * 在目标集合中查询出满足条件的唯一记录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param query
+	 * @param collection
+	 * @return
+	 */
+	public T findOne(Query query, String collection);
 
 }

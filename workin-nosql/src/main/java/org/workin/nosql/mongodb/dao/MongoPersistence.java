@@ -99,18 +99,18 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	/**
 	 * 删除主键对应的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @return
 	 */
-	public WriteResult remove(PK primaryKey);
+	public WriteResult remove(PK id);
 	
 	/**
 	 * 在目标集合中删除主键对应的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @param collection
 	 * @return
 	 */
-	public WriteResult remove(PK primaryKey, String collection);
+	public WriteResult remove(PK id, String collection);
 	
 }

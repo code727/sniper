@@ -32,10 +32,10 @@ public interface JpaQuery<T, PK extends Serializable> {
 	/**
 	 * 根据主键ID查询当前类型的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param primaryKey
+	 * @param id
 	 * @return
 	 */
-	public T findById(PK primaryKey);
+	public T findById(PK id);
 		
 	/**
 	 * 根据属性名和值查询出当前类型的唯一实体对象
@@ -52,7 +52,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	 * @param paramMap
 	 * @return
 	 */
-	public T findUniqueByPropertys(Map<String, ?> paramMap);
+	public T findUniqueByProperties(Map<String, ?> paramMap);
 		
 	/**
 	 * 执行查询语句后返回当前类型的唯一实体对象
@@ -266,7 +266,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	 * @param paramMap
 	 * @return
 	 */
-	public List<T> findByPropertys(Map<String, ?> paramMap);
+	public List<T> findByProperties(Map<String, ?> paramMap);
 		
 	/**
 	 * 根据属性名值映射集从起始位置开始查询，得到最大行数当前类型的实体对象列表
@@ -276,7 +276,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	 * @param maxRows
 	 * @return
 	 */
-	public List<T> findByPropertys(Map<String, ?> paramMap, int start, int maxRows);
+	public List<T> findByProperties(Map<String, ?> paramMap, int start, int maxRows);
 	
 	/**
 	 * 查询当前类型的所有实体对象
@@ -307,7 +307,7 @@ public interface JpaQuery<T, PK extends Serializable> {
 	 * @param paramMap
 	 * @return
 	 */
-	public long countByPropertys(Map<String, ?> paramMap);
+	public long countByProperties(Map<String, ?> paramMap);
 	
 	/**
 	 * 执行总计查询语句后返回结果

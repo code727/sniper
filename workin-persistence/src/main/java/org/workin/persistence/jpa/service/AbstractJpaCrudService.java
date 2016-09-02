@@ -55,8 +55,8 @@ public abstract class AbstractJpaCrudService<T, PK extends Serializable> extends
 	}
 
 	@Override
-	public void remove(PK primaryKey) {
-		this.jpaDao.remove(primaryKey);
+	public void remove(PK id) {
+		this.jpaDao.remove(id);
 	}
 
 	@Override
@@ -65,8 +65,8 @@ public abstract class AbstractJpaCrudService<T, PK extends Serializable> extends
 	}
 
 	@Override
-	public T findById(PK primaryKey) {
-		return this.jpaDao.findById(primaryKey);
+	public T findById(PK id) {
+		return this.jpaDao.findById(id);
 	}
 
 	@Override
