@@ -20,6 +20,7 @@ package org.workin.nosql.mongodb.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * MongoDB查询接口
@@ -29,27 +30,114 @@ import java.util.List;
 public interface MongoQuery<T, PK extends Serializable> {
 	
 	/**
-	 * 根据主键查询实体对象
+	 * 根据主键查询实体对象<P>
+	 * 实际执行的语句为:db.collection.findOne({"_id":id})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * @param id 主键ID
 	 * @return
 	 */
 	public T findById(PK id);
 	
 	/**
-	 * 根据主键查询目标集合中的实体对象
+	 * 根据主键查询目标集合中的实体对象<P>
+	 * 实际执行的语句为:db.collection.findOne({"_id":id})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
-	 * @param collection
+	 * @param id 主键ID
+	 * @param collection 目标集合
 	 * @return
 	 */
 	public T findById(PK id, String collection);
+	
+	/**
+	 * 根据属性查询出满足条件的唯一记录<P>
+	 * 实际执行的语句为:db.collection.findOne({"propertyKey":propertyValue})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName 属性名称
+	 * @param propertyValue 属性值
+	 * @return
+	 */
+	public T findOne(String propertyName, Object propertyValue);
+	
+	/**
+	 * 在目标集合中根据属性查询出满足条件的唯一记录<P>
+	 * 实际执行的语句为:db.collection.findOne({"propertyKey":propertyValue})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName 属性名称
+	 * @param propertyValue 属性值
+	 * @param collection 目标集合名称
+	 * @return
+	 */
+	public T findOne(String propertyName, Object propertyValue, String collection);
+	
+	/**
+	 * 根据属性映射组查询出满足条件的唯一记录<P>
+	 * 实际执行的语句为:db.collection.findOne({"$and":[{"propertyKey1":propertyValue1},{
+	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @param propertyMap 属性映射组
+	 * @return
+	 */
+	public T findOne(Map<String, ?> propertyMap);
+	
+	/**
+	 * 在目标集合中根据属性映射组查询出满足条件的唯一记录<P>
+	 * 实际执行的语句为:db.collection.findOne({"$and":[{"propertyKey1":propertyValue1},{
+	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap 属性映射组
+	 * @param collection 目标集合
+	 * @return
+	 */
+	public T findOne(Map<String, ?> propertyMap, String collection);
 		
 	/**
-	 * 查询出当前集合中所有的数据对象
+	 * 查询出当前集合中所有的数据对象<P>
+	 * 实际执行的语句为:db.collection.find({});
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<T> findAll();
+	
+	/**
+	 * 根据属性查询出满足条件的记录列表<P>
+	 * 实际执行的语句为:db.collection.find({"propertyKey":propertyValue})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName
+	 * @param propertyValue
+	 * @return
+	 */
+	public List<T> find(String propertyName, Object propertyValue);
+	
+	/**
+	 * 在目标集合中根据属性查询出满足条件的记录列表<P>
+	 * 实际执行的语句为:db.collection.find({"propertyKey":propertyValue})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName
+	 * @param propertyValue
+	 * @param collection
+	 * @return
+	 */
+	public List<T> find(String propertyName, Object propertyValue, String collection);
+	
+	/**
+	 * 根据属性映射组查询出满足条件的记录列表<P>
+	 * 实际执行的语句为:db.collection.find({"$and":[{"propertyKey1":propertyValue1},{
+	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap 属性映射组
+	 * @return
+	 */
+	public List<T> find(Map<String, ?> propertyMap);
+	
+	/**
+	 * 在目标集合中根据属性映射组查询出满足条件的记录列表<P>
+	 * 实际执行的语句为:db.collection.find({"$and":[{"propertyKey1":propertyValue1},{
+	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @param propertyMap 属性映射组
+	 * @param collection 目标集合
+	 * @return
+	 */
+	public List<T> find(Map<String, ?> propertyMap, String collection);
 	
 }

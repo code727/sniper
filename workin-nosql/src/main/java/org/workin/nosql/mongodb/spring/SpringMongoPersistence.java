@@ -174,6 +174,27 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 //	public WriteResult upsertMulti(Query query, Update update, String collection);
 	
 	/**
+	 * 根据ID更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"_id":id,"update":{更新}})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @param update
+	 * @return
+	 */
+	public T findAndModify(PK id, Update update);
+	
+	/**
+	 * 根据ID在目标集合中更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"_id":id,"update":{更新}})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @param update
+	 * @param collection
+	 * @return
+	 */
+	public T findAndModify(PK id, Update update, String collection);
+	
+	/**
 	 * 更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"update":{更新}})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

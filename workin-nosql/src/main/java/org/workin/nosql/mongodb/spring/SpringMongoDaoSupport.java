@@ -19,6 +19,10 @@
 package org.workin.nosql.mongodb.spring;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mapping.context.MappingContext;
@@ -28,6 +32,8 @@ import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.workin.commons.util.CollectionUtils;
+import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.spring.beans.AbstractGenricBean;
 
@@ -97,7 +103,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 	/**
 	 * 获取当前实体对象属性对应的MongoDB键名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param propertyName
+	 * @param propertyName 属性名称
 	 * @return
 	 */
 	protected String getKeyName(String propertyName) {
@@ -123,14 +129,85 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 	/**
 	 * 构建属性查询对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param propertyName
-	 * @param propertyValue
+	 * @param propertyName 属性名称
+	 * @param propertyValue 属性值
 	 * @return
 	 */
 	protected Query buildPropertyQuery(String propertyName, Object propertyValue) {
+		Query query = new Query();
 		String keyName = getKeyName(propertyName);
-		return StringUtils.isNotEmpty(keyName) ? new Query(Criteria.where(
-				keyName).is(propertyValue)) : new Query();
+		return StringUtils.isNotEmpty(keyName) ? query.addCriteria(Criteria
+				.where(keyName).is(propertyValue)) : query;
 	}
 	
+	/**
+	 * 构建属性映射组"逻辑与"查询对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap 属性映射组
+	 * @return
+	 */
+	protected Query buildPropertiesAndQuery(Map<String, ?> propertyMap) {
+		
+		Query query = new Query();
+		List<Criteria> whereIsCriteria = buildWhereIsCriteria(propertyMap);
+		
+		if (CollectionUtils.isNotEmpty(whereIsCriteria)) {
+			if (whereIsCriteria.size() > 1)
+				query.addCriteria(new Criteria().andOperator(
+						CollectionUtils.toArray(whereIsCriteria, Criteria.class)));
+			else
+				query.addCriteria(whereIsCriteria.get(0));
+		}
+		
+		return query;
+	}
+	
+	/**
+	 * 构建属性映射组"逻辑或"查询对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap 属性映射组
+	 * @return
+	 */
+	protected Query buildPropertiesOrQuery(Map<String, ?> propertyMap) {
+		
+		Query query = new Query();
+		List<Criteria> whereIsCriteria = buildWhereIsCriteria(propertyMap);
+		
+		if (CollectionUtils.isNotEmpty(whereIsCriteria)) {
+			if (whereIsCriteria.size() > 1)
+				query.addCriteria(new Criteria().orOperator(
+						CollectionUtils.toArray(whereIsCriteria, Criteria.class)));
+			else
+				query.addCriteria(whereIsCriteria.get(0));
+		}
+		
+		return query;
+	}
+	
+	/**
+	 * 将属性映射组构建成多个where-is条件列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap 属性映射组
+	 * @return
+	 */
+	protected List<Criteria> buildWhereIsCriteria(Map<String, ?> propertyMap) {
+		List<Criteria> whereIsCriteria = CollectionUtils.newArrayList();
+		
+		if (MapUtils.isNotEmpty(propertyMap)) {
+			
+			Iterator<?> iterator = propertyMap.entrySet().iterator();
+			Entry<?, ?> entry;
+			String name;
+			
+			while (iterator.hasNext()) {
+				entry = (Entry<?, ?>) iterator.next();
+				name = (String) entry.getKey();
+				if (StringUtils.isNotBlank(name))
+					whereIsCriteria.add(Criteria.where(name).is(entry.getValue()));
+			}
+		}
+		
+		return whereIsCriteria;
+	}
+		
 }

@@ -113,4 +113,23 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	 */
 	public WriteResult remove(PK id, String collection);
 	
+	/**
+	 * 根据ID删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"_id":id,"remove":true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @return
+	 */
+	public T findAndRemove(PK id);
+	
+	/**
+	 * 在目标集合中根据ID删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"_id":id,"remove":true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @param collection
+	 * @return
+	 */
+	public T findAndRemove(PK id, String collection);
+	
 }

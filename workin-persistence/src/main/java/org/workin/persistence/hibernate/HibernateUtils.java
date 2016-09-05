@@ -130,10 +130,12 @@ public class HibernateUtils {
 	public static void setQueryNamedParameters(Query query, Map<String, ?> paramMap) {
 		if (MapUtils.isNotEmpty(paramMap)) {
 			Iterator<?> iterator = paramMap.entrySet().iterator();
+			
+			Entry<?, ?> entry;
 			String name;
 			while (iterator.hasNext()) {
-				Entry<?, ?> entry = (Entry<?, ?>) iterator.next();
-				name = (String)entry.getKey();
+				entry = (Entry<?, ?>) iterator.next();
+				name = (String) entry.getKey();
 				if (StringUtils.isNotBlank(name))
 					query.setParameter(name, entry.getValue());
 			}

@@ -19,6 +19,7 @@
 package org.workin.nosql.mongodb.spring;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.data.mongodb.core.query.Query;
 import org.workin.nosql.mongodb.dao.MongoQuery;
@@ -32,20 +33,41 @@ public interface SpringMongoQuery<T, PK extends Serializable> extends
 		MongoQuery<T, PK> {
 	
 	/**
-	 * 查询出满足条件的唯一记录
+	 * 查询出满足条件的唯一记录<p>
+	 * 实际执行的语句为:db.collection.findOne({查询}})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query
+	 * @param query 查询条件
 	 * @return
 	 */
 	public T findOne(Query query);
 	
 	/**
-	 * 在目标集合中查询出满足条件的唯一记录
+	 * 在目标集合中查询出满足条件的唯一记录<p>
+	 * 实际执行的语句为:db.collection.findOne({查询}})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query
-	 * @param collection
+	 * @param query 查询条件
+	 * @param collection 目标集合
 	 * @return
 	 */
 	public T findOne(Query query, String collection);
+	
+	/**
+	 * 查询出满足条件的记录列表<p>
+	 * 实际执行的语句为:db.collection.find({查询}})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param query 查询条件
+	 * @return
+	 */
+	public List<T> find(Query query);
+	
+	/**
+	 * 在目标集合中查询出满足条件的记录列表<p>
+	 * 实际执行的语句为:db.collection.find({查询}})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param query 查询条件
+	 * @param collection 目标集合
+	 * @return
+	 */
+	public List<T> find(Query query, String collection);
 
 }

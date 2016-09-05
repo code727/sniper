@@ -21,6 +21,7 @@ package org.workin.nosql.mongodb.spring;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -170,6 +171,16 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
+	public T findAndModify(PK id, Update update) {
+		return findAndModify(id, update, null);
+	}
+
+	@Override
+	public T findAndModify(PK id, Update update, String collection) {
+		return findAndModify(buildIdQuery(id), update, collection);
+	}
+	
+	@Override
 	public T findAndModify(Query query, Update update) {
 		return findAndModify(query, update, null);
 	}
@@ -179,6 +190,16 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.findAndModify(query, update, getBeanClass(), collection)
 				: getMongoOperations().findAndModify(query, update, getBeanClass());
+	}
+	
+	@Override
+	public T findAndRemove(PK id) {
+		return findAndRemove(id, null);
+	}
+
+	@Override
+	public T findAndRemove(PK id, String collection) {
+		return findAndRemove(buildIdQuery(id), collection);
 	}
 
 	@Override
@@ -221,6 +242,26 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public List<T> findAll() {
 		return getMongoOperations().findAll(getBeanClass());
 	}
+	
+	@Override
+	public T findOne(String propertyName, Object propertyValue) {
+		return findOne(propertyName, propertyValue, null);
+	}
+
+	@Override
+	public T findOne(String propertyName, Object propertyValue, String collection) {
+		return findOne(buildPropertyQuery(propertyName, propertyValue), collection);
+	}
+
+	@Override
+	public T findOne(Map<String, ?> propertyMap) {
+		return findOne(propertyMap, null);
+	}
+
+	@Override
+	public T findOne(Map<String, ?> propertyMap, String collection) {
+		return findOne(buildPropertiesAndQuery(propertyMap), collection);
+	}
 
 	@Override
 	public T findOne(Query query) {
@@ -232,6 +273,38 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.findOne(query, getBeanClass(), collection)
 				: getMongoOperations().findOne(query, getBeanClass());
+	}
+	
+	@Override
+	public List<T> find(String propertyName, Object propertyValue) {
+		return find(propertyName, propertyValue, null);
+	}
+
+	@Override
+	public List<T> find(String propertyName, Object propertyValue, String collection) {
+		return find(buildPropertyQuery(propertyName, propertyValue), collection);
+	}
+
+	@Override
+	public List<T> find(Map<String, ?> propertyMap) {
+		return find(propertyMap, null);
+	}
+
+	@Override
+	public List<T> find(Map<String, ?> propertyMap, String collection) {
+		return find(buildPropertiesAndQuery(propertyMap), collection);
+	}
+
+	@Override
+	public List<T> find(Query query) {
+		return find(query, null);
+	}
+
+	@Override
+	public List<T> find(Query query, String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoOperations()
+				.find(query, getBeanClass(), collection) 
+				: getMongoOperations().find(query, getBeanClass());
 	}
 
 }
