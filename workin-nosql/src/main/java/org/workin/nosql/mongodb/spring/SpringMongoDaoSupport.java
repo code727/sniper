@@ -127,6 +127,19 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 	}
 	
 	/**
+	 * 构建具备分段能力的查询对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param start
+	 * @param maxRows
+	 * @return
+	 */
+	protected Query buildOffsetQuery(int start, int maxRows) {
+		Query query = new Query();
+		setOffsetQuery(query, start, maxRows);
+		return query;
+	}
+	
+	/**
 	 * 构建属性查询对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param propertyName 属性名称
@@ -134,11 +147,28 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 	 * @return
 	 */
 	protected Query buildPropertyQuery(String propertyName, Object propertyValue) {
+		return buildPropertyQuery(propertyName, propertyValue, -1, -1);
+	}
+	
+	/**
+	 * 构建具备分段能力的属性查询对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName 属性名称
+	 * @param propertyValue 属性值
+	 * @param start 起始位置
+	 * @param maxRows 最大行数
+	 * @return
+	 */
+	protected Query buildPropertyQuery(String propertyName, Object propertyValue, int start, int maxRows) {
 		Query query = new Query();
 		String keyName = getKeyName(propertyName);
-		return StringUtils.isNotEmpty(keyName) ? query.addCriteria(Criteria
-				.where(keyName).is(propertyValue)) : query;
+		if (StringUtils.isNotEmpty(keyName))
+			query.addCriteria(Criteria.where(keyName).is(propertyValue));
+		
+		setOffsetQuery(query, start, maxRows);
+		return query;
 	}
+	
 	
 	/**
 	 * 构建属性映射组"逻辑与"查询对象
@@ -147,7 +177,18 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 	 * @return
 	 */
 	protected Query buildPropertiesAndQuery(Map<String, ?> propertyMap) {
-		
+		return buildPropertiesAndQuery(propertyMap, -1, -1);
+	}
+	
+	/**
+	 * 构建具备分段能力的属性映射组"逻辑与"查询对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap 属性映射组
+	 * @param start 起始位置
+	 * @param maxRows 最大行数
+	 * @return
+	 */
+	protected Query buildPropertiesAndQuery(Map<String, ?> propertyMap, int start, int maxRows) {
 		Query query = new Query();
 		List<Criteria> whereIsCriteria = buildWhereIsCriteria(propertyMap);
 		
@@ -159,6 +200,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 				query.addCriteria(whereIsCriteria.get(0));
 		}
 		
+		setOffsetQuery(query, start, maxRows);
 		return query;
 	}
 	
@@ -169,7 +211,18 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 	 * @return
 	 */
 	protected Query buildPropertiesOrQuery(Map<String, ?> propertyMap) {
-		
+		return buildPropertiesOrQuery(propertyMap, -1, -1);
+	}
+	
+	/**
+	 * 构建具备分段能力的属性映射组"逻辑或"查询对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap 属性映射组
+	 * @param start 起始位置
+	 * @param maxRows 最大行数
+	 * @return
+	 */
+	protected Query buildPropertiesOrQuery(Map<String, ?> propertyMap, int start, int maxRows) {
 		Query query = new Query();
 		List<Criteria> whereIsCriteria = buildWhereIsCriteria(propertyMap);
 		
@@ -181,6 +234,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 				query.addCriteria(whereIsCriteria.get(0));
 		}
 		
+		setOffsetQuery(query, start, maxRows);
 		return query;
 	}
 	
@@ -197,17 +251,32 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 			
 			Iterator<?> iterator = propertyMap.entrySet().iterator();
 			Entry<?, ?> entry;
-			String name;
+			String propertyName;
 			
 			while (iterator.hasNext()) {
 				entry = (Entry<?, ?>) iterator.next();
-				name = (String) entry.getKey();
-				if (StringUtils.isNotBlank(name))
-					whereIsCriteria.add(Criteria.where(name).is(entry.getValue()));
+				propertyName = (String) entry.getKey();
+				if (StringUtils.isNotBlank(propertyName))
+					whereIsCriteria.add(Criteria.where(getKeyName(propertyName)).is(entry.getValue()));
 			}
 		}
 		
 		return whereIsCriteria;
+	}
+	
+	/**
+	 * 设置分段查询参数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param query 查询对象
+	 * @param start 起始位置
+	 * @param maxRows 最大行数
+	 */
+	protected void setOffsetQuery(Query query, int start, int maxRows) {
+		if (start > -1)
+			query.skip(start);
+		
+		if (maxRows > 0)
+			query.limit(maxRows);
 	}
 		
 }

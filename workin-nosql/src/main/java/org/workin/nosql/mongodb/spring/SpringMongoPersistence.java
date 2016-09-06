@@ -39,8 +39,8 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 更新主键对应的记录<p>
 	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},false,false})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
-	 * @param update
+	 * @param id ID主键值
+	 * @param update 更新操作和数据
 	 * @return
 	 */
 	public WriteResult updateById(PK id, Update update);
@@ -49,9 +49,9 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 在目标集合中更新主键对应的记录<p>
 	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},false,false})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
-	 * @param update
-	 * @param collection
+	 * @param id ID主键值
+	 * @param update 更新操作和数据
+	 * @param collection 目标集合
 	 * @return
 	 */
 	public WriteResult updateById(PK id, Update update, String collection);
@@ -104,8 +104,8 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 2.如果根据ID未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
 	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},true,false})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
-	 * @param update
+	 * @param id ID主键值
+	 * @param update 更新操作和数据
 	 * @return
 	 */
 	public WriteResult upsertById(PK id, Update update);
@@ -116,9 +116,9 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 2.如果根据ID未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
 	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},true,false})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
-	 * @param update
-	 * @param collection
+	 * @param id ID主键值
+	 * @param update 更新操作和数据
+	 * @param collection 目标集合
 	 * @return
 	 */
 	public WriteResult upsertById(PK id, Update update, String collection);
@@ -177,8 +177,8 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 根据ID更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"_id":id,"update":{更新}})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
-	 * @param update
+	 * @param id ID主键值
+	 * @param update 更新操作和数据
 	 * @return
 	 */
 	public T findAndModify(PK id, Update update);
@@ -187,9 +187,9 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 根据ID在目标集合中更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"_id":id,"update":{更新}})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
-	 * @param update
-	 * @param collection
+	 * @param id ID主键值
+	 * @param update 更新操作和数据
+	 * @param collection 目标集合
 	 * @return
 	 */
 	public T findAndModify(PK id, Update update, String collection);
@@ -238,7 +238,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query
+	 * @param query 查询条件
 	 * @return
 	 */
 	public List<T> findAllAndRemove(Query query);
@@ -247,12 +247,10 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 在目标集合中删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query
-	 * @param collection
+	 * @param query 查询条件
+	 * @param collection 目标集合
 	 * @return
 	 */
 	public List<T> findAllAndRemove(Query query, String collection);
-	
-	
 
 }

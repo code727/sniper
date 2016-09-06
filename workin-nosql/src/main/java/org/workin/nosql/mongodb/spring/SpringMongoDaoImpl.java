@@ -128,7 +128,6 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 //
 //	@Override
 //	public WriteResult upsertMulti(Query query, Update update, String collection) {
-//		// TODO Auto-generated method stub
 //		return null;
 //	}
 	
@@ -240,9 +239,16 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findAll() {
-		return getMongoOperations().findAll(getBeanClass());
+		return findAll(null);
 	}
 	
+	@Override
+	public List<T> findAll(String collection) {
+		return StringUtils.isNotBlank(collection) ? getMongoOperations()
+				.findAll(getBeanClass(), collection) : getMongoOperations()
+				.findAll(getBeanClass());
+	}
+
 	@Override
 	public T findOne(String propertyName, Object propertyValue) {
 		return findOne(propertyName, propertyValue, null);
@@ -262,7 +268,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public T findOne(Map<String, ?> propertyMap, String collection) {
 		return findOne(buildPropertiesAndQuery(propertyMap), collection);
 	}
-
+	
 	@Override
 	public T findOne(Query query) {
 		return findOne(query, null);
@@ -276,6 +282,19 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
+	public List<T> find(int start, int maxRows) {
+		return find(start, maxRows, null);
+	}
+
+	@Override
+	public List<T> find(int start, int maxRows, String collection) {
+		Query query = buildOffsetQuery(start, maxRows);
+		return StringUtils.isNotBlank(collection) ? getMongoOperations().find(
+				query, getBeanClass(), collection) : getMongoOperations().find(
+				query, getBeanClass());
+	}
+	
+	@Override
 	public List<T> find(String propertyName, Object propertyValue) {
 		return find(propertyName, propertyValue, null);
 	}
@@ -283,6 +302,16 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public List<T> find(String propertyName, Object propertyValue, String collection) {
 		return find(buildPropertyQuery(propertyName, propertyValue), collection);
+	}
+	
+	@Override
+	public List<T> find(String propertyName, Object propertyValue, int start, int maxRows) {
+		return find(propertyName, propertyValue, start, maxRows, null);
+	}
+
+	@Override
+	public List<T> find(String propertyName, Object propertyValue, int start, int maxRows, String collection) {
+		return find(buildPropertyQuery(propertyName, propertyValue, start, maxRows), collection);
 	}
 
 	@Override
@@ -293,6 +322,16 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public List<T> find(Map<String, ?> propertyMap, String collection) {
 		return find(buildPropertiesAndQuery(propertyMap), collection);
+	}
+	
+	@Override
+	public List<T> find(Map<String, ?> propertyMap, int start, int maxRows) {
+		return find(propertyMap, start, maxRows, null);
+	}
+
+	@Override
+	public List<T> find(Map<String, ?> propertyMap, int start, int maxRows, String collection) {
+		return find(buildPropertiesAndQuery(propertyMap, start, maxRows), collection);
 	}
 
 	@Override
