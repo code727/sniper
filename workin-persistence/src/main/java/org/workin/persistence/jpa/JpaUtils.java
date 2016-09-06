@@ -43,8 +43,9 @@ public class JpaUtils {
 	 * @param maxRows 最大行数
 	 */
 	public static void setOffsetQuery(Query query, int start, int maxRows) {
-		if (start >= 0)
+		if (start > -1)
 			query.setFirstResult(start);
+		
 		if (maxRows > 0)
 			query.setMaxResults(maxRows);
 	}
