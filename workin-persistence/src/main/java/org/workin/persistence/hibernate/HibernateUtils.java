@@ -46,7 +46,7 @@ public class HibernateUtils {
 	 * @param maxRows 最大行数
 	 */
 	public static void setOffsetCriteria(Criteria criteria, int start, int maxRows) {
-		if (start >= 0)
+		if (start > -1)
 			criteria.setFirstResult(start);
 		
 		if (maxRows > 0)
@@ -61,7 +61,7 @@ public class HibernateUtils {
 	 * @param maxRows 最大行数
 	 */
 	public static void setOffsetQuery(Query query, int start, int maxRows) {
-		if (start >= 0)
+		if (start > -1)
 			query.setFirstResult(start);
 		
 		if (maxRows > 0)

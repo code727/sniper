@@ -200,6 +200,26 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public T findAndRemove(PK id, String collection) {
 		return findAndRemove(buildIdQuery(id), collection);
 	}
+	
+	@Override
+	public T findAndRemove(String propertyName, Object propertyValue) {
+		return findAndRemove(propertyName, propertyValue, null);
+	}
+
+	@Override
+	public T findAndRemove(String propertyName, Object propertyValue, String collection) {
+		return findAndRemove(buildPropertyQuery(propertyName, propertyValue), collection);
+	}
+	
+	@Override
+	public T findAndRemove(Map<String, ?> propertyMap) {
+		return findAndRemove(propertyMap, null);
+	}
+
+	@Override
+	public T findAndRemove(Map<String, ?> propertyMap, String collection) {
+		return findAndRemove(buildPropertiesAndQuery(propertyMap), collection);
+	}
 
 	@Override
 	public T findAndRemove(Query query) {
@@ -211,6 +231,26 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.findAndRemove(query, getBeanClass(), collection)
 				: getMongoOperations().findAndRemove(query, getBeanClass());
+	}
+	
+	@Override
+	public List<T> findAllAndRemove(String propertyName, Object propertyValue) {
+		return findAllAndRemove(propertyName, propertyValue, null);
+	}
+
+	@Override
+	public List<T> findAllAndRemove(String propertyName, Object propertyValue, String collection) {
+		return findAllAndRemove(buildPropertyQuery(propertyName, propertyValue), collection);
+	}
+
+	@Override
+	public List<T> findAllAndRemove(Map<String, ?> propertyMap) {
+		return findAllAndRemove(propertyMap, null);
+	}
+
+	@Override
+	public List<T> findAllAndRemove(Map<String, ?> propertyMap, String collection) {
+		return findAllAndRemove(buildPropertiesAndQuery(propertyMap), collection);
 	}
 	
 	@Override

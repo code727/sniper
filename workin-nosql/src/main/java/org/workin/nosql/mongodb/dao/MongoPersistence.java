@@ -20,6 +20,8 @@ package org.workin.nosql.mongodb.dao;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import com.mongodb.WriteResult;
 
@@ -131,5 +133,89 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	 * @return
 	 */
 	public T findAndRemove(PK id, String collection);
+	
+	 /**
+	  * 根据属性删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
+	  * 实际执行的语句为:db.collection.findAndModify({"propertyKey":propertyValue,"remove":true})
+	  * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	  * @param propertyName 属性名
+	  * @param propertyValue 属性值
+	  * @return
+	  */
+	public T findAndRemove(String propertyName, Object propertyValue);
+	
+	/**
+	 * 在目标集合中根据属性删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"propertyKey":propertyValue,"remove":true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName 属性名
+	 * @param propertyValue 属性值
+	 * @param collection 目标集合
+	 * @return
+	 */
+	public T findAndRemove(String propertyName, Object propertyValue, String collection);
+	
+	/**
+	 * 根据属性映射组删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"query":{"$and":[{propertyKey1:
+	 * propertyValue1},{propertyKey2:propertyValue2},{propertyKeyN:propertyValueN}]},"remove":true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @param propertyMap 属性映射组
+	 * @return
+	 */
+	public T findAndRemove(Map<String, ?> propertyMap);
+	
+	/**
+	 * 在目标集合中根据属性映射组删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"query":{"$and":[{propertyKey1:
+	 * propertyValue1},{propertyKey2:propertyValue2},{propertyKeyN:propertyValueN}]},"remove":true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap 属性映射组
+	 * @param collection 目标集合
+	 * @return
+	 */
+	public T findAndRemove(Map<String, ?> propertyMap, String collection);
+	
+	/**
+	 * 根据属性删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"propertyKey":propertyValue,"remove":true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName 属性名
+	 * @param propertyValue 属性值
+	 * @return
+	 */
+	public List<T> findAllAndRemove(String propertyName, Object propertyValue);
+	
+	/**
+	 * 在目标集合中根据属性删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"propertyKey":propertyValue,"remove":true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName 属性名
+	 * @param propertyValue 属性值
+	 * @param collection 目标集合
+	 * @return
+	 */
+	public List<T> findAllAndRemove(String propertyName, Object propertyValue, String collection);
+	
+	/**
+	 * 根据属性映射组删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
+	 * 实际执行的语句为:db.collection.findAndModify({"query":{"$and":[{propertyKey1:
+	 * propertyValue1},{propertyKey2:propertyValue2},{propertyKeyN:propertyValueN}]},"remove":true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap 属性映射组
+	 * @return
+	 */
+	public List<T> findAllAndRemove(Map<String, ?> propertyMap);
+	
+	/**
+	 * 在目标集合中根据属性映射组删除查询结果集返回的所有记录，并返回删除前的数据对象列表
+	 * 实际执行的语句为:db.collection.findAndModify({"query":{"$and":[{propertyKey1:
+	 * propertyValue1},{propertyKey2:propertyValue2},{propertyKeyN:propertyValueN}]},"remove":true})
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap 属性映射组
+	 * @param collection 目标集合
+	 * @return
+	 */
+	public List<T> findAllAndRemove(Map<String, ?> propertyMap, String collection);
 	
 }
