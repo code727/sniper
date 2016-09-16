@@ -28,6 +28,7 @@ import org.workin.nosql.mongodb.dao.MongoDao;
  * @version 1.0
  */
 public interface SpringMongoDao<T, PK extends Serializable> extends
-		MongoDao<T, PK>, SpringMongoPersistence<T, PK>, SpringMongoQuery<T, PK> {
+		MongoDao<T, PK>, SpringMongoPersistence<T, PK>,
+		SpringMongoQuery<T, PK>, SpringMongoMapReduce {
 
 }

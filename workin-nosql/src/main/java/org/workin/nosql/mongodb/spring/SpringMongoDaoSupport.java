@@ -62,6 +62,15 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 	}
 	
 	/**
+	 * 获取当前实体对象类型对应的集合名称
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	protected String getCollectionName() {
+		return mongoOperations.getCollectionName(getBeanClass());
+	}
+	
+	/**
 	 * 获取转换器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return

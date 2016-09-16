@@ -23,10 +23,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 import org.workin.commons.util.StringUtils;
+import org.workin.nosql.mongodb.MapReduceResultModel;
 
 import com.mongodb.WriteResult;
 
@@ -385,5 +387,57 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 				.find(query, getBeanClass(), collection) 
 				: getMongoOperations().find(query, getBeanClass());
 	}
+	
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction) {
+		return mapReduce(null, mapFunction, reduceFunction);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, String reduceFunction) {
+		if (StringUtils.isBlank(collection))
+			collection = getCollectionName();
+		
+		return getMongoOperations().mapReduce(collection, mapFunction, reduceFunction, MapReduceResultModel.class);
+	}
+	
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+			String queryPropertyName, Object queryPropertyValue) {
+			
+		return mapReduce(null, mapFunction, reduceFunction, queryPropertyName, queryPropertyValue);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+			String reduceFunction, String queryPropertyName, Object queryPropertyValue) {
+		
+		if (StringUtils.isBlank(collection))
+			collection = getCollectionName();
+		
+		return getMongoOperations().mapReduce(buildPropertyQuery(queryPropertyName, queryPropertyValue),
+				 collection, mapFunction, reduceFunction, MapReduceResultModel.class);
+	}
+	
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+			String queryPropertyName, Object queryPropertyValue, int limit) {
+			
+		return mapReduce(null, mapFunction, reduceFunction, queryPropertyName, queryPropertyValue, limit);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+			String reduceFunction, String queryPropertyName, Object queryPropertyValue, int limit) {
+		
+		if (StringUtils.isBlank(collection))
+			collection = getCollectionName();
+		
+		// 还未加limit逻辑
+		return getMongoOperations().mapReduce(buildPropertyQuery(queryPropertyName, queryPropertyValue),
+				collection, mapFunction, reduceFunction, MapReduceResultModel.class);
+	}
+
+	
 
 }

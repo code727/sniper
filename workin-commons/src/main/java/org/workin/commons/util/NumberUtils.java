@@ -147,7 +147,7 @@ public class NumberUtils {
 	}
 	
 	/** 
-	 * 获取不为空的长整数值，否则返回0
+	 * 获取不为空的长整型数值，否则返回0
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @return
@@ -157,7 +157,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 获取不为空的长整数值，否则返回指定的默认值
+	 * 获取不为空的长整型数值，否则返回指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @param defaultValue
@@ -228,7 +228,7 @@ public class NumberUtils {
 	 */
 	public static BigDecimal safeBigDecimal(BigDecimal decimal, BigDecimal defaultValue) {
 		if (decimal == null) {
-			AssertUtils.assertNotNull(defaultValue, "Default decimal must not be null.");
+			AssertUtils.assertNotNull(defaultValue, "Default big decimal must not be null.");
 			return defaultValue;
 		}
 		
@@ -254,11 +254,189 @@ public class NumberUtils {
 	 */
 	public static BigInteger safeBigInteger(BigInteger integer, BigInteger defaultValue) {
 		if (integer == null) {
-			AssertUtils.assertNotNull(defaultValue, "Default decimal must not be null.");
+			AssertUtils.assertNotNull(defaultValue, "Default big integer must not be null.");
 			return defaultValue;
 		}
 		
 		return integer;
+	}
+	
+	/**
+	 * 将数字对象转换为双精度数值，否则返回0
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static double toDouble(Object obj) {
+		return toDouble(obj, 0);
+	}
+	
+	/**
+	 * 将数字对象转换为双精度数值，否则返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param defaultValue
+	 * @return
+	 */
+	public static double toDouble(Object obj, double defaultValue) {
+		return obj != null && obj instanceof Number ? ((Number)obj).doubleValue() : defaultValue;
+	}
+	
+	/**
+	 * 将数字对象转换为单精度数值，否则返回0
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static float toFloat(Object obj) {
+		return toFloat(obj, 0);
+	}
+	
+	/**
+	 * 将数字对象转换为单精度数值，否则返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param defaultValue
+	 * @return
+	 */
+	public static float toFloat(Object obj, float defaultValue) {
+		return obj != null && obj instanceof Number ? ((Number)obj).floatValue() : defaultValue;
+	}
+	
+	/** 
+	 * 将数字对象转换为整数值，否则返回0
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static int toInteger(Object obj) {
+		return toInteger(obj, 0);
+	}
+	
+	/**
+	 * 将数字对象转换为整数值，否则返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param defaultValue
+	 * @return
+	 */
+	public static int toInteger(Object obj, int defaultValue) {
+		return obj != null && obj instanceof Number ? ((Number)obj).intValue() : defaultValue;
+	}
+	
+	/** 
+	 * 将数字对象转换为长整型数值，否则返回0
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static long toLong(Object obj) {
+		return toLong(obj, 0);
+	}
+	
+	/**
+	 * 将数字对象转换为长整型数值，否则返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param defaultValue
+	 * @return
+	 */
+	public static long toLong(Object obj, long defaultValue) {
+		return obj != null && obj instanceof Number ? ((Number)obj).longValue() : defaultValue;
+	}
+	
+	/**
+	 * 将数字对象转换为短整型数值，否则返回0
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static short toShort(Object obj) {
+		return toShort(obj, (short) 0);
+	}
+	
+	/**
+	 * 将数字对象转换为短整型数值，否则返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param defaultValue
+	 * @return
+	 */
+	public static short toShort(Object obj, short defaultValue) {
+		return obj != null && obj instanceof Number ? ((Number)obj).shortValue() : defaultValue;
+	}
+	
+	/**
+	 * 将数字对象转换为比特数，否则返回0
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static byte toByte(Object obj) {
+		return toByte(obj, (byte) 0);
+	}
+	
+	/**
+	 * 将数字对象转换为比特数，否则返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param defaultValue
+	 * @return
+	 */
+	public static byte toByte(Object obj, byte defaultValue) {
+		return obj != null && obj instanceof Number ? ((Number)obj).byteValue() : defaultValue;
+	}
+	
+	/**
+	 * 将数字对象转换为BigDecimal，否则返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static BigDecimal toBigDecimal(Object obj) {
+		return toBigDecimal(obj, new BigDecimal(0));
+	}
+	
+	/**
+	 * 将数字对象转换为BigDecimal，否则返回指定不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param defaultValue
+	 * @return
+	 */
+	public static BigDecimal toBigDecimal(Object obj, BigDecimal defaultValue) {
+		if (obj == null || !(obj instanceof Number)) {
+			AssertUtils.assertNotNull(defaultValue, "Default big decimal must not be null.");
+			return defaultValue;
+		}
+		
+		return obj instanceof BigDecimal ? (BigDecimal)obj : new BigDecimal(obj.toString());
+	}
+	
+	/**
+	 * 将数字对象转换为BigInteger，否则返回0
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static BigInteger toBigInteger(Object obj) {
+		return toBigInteger(obj, new BigInteger("0"));
+	}
+	
+	/**
+	 * 将数字对象转换为BigInteger，否则返回指定不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param defaultValue
+	 * @return
+	 */
+	public static BigInteger toBigInteger(Object obj, BigInteger defaultValue) {
+		if (obj == null || !(obj instanceof Number)) {
+			AssertUtils.assertNotNull(defaultValue, "Default big integer must not be null.");
+			return defaultValue;
+		}
+		
+		return obj instanceof BigInteger ? (BigInteger)obj : new BigInteger(obj.toString());
 	}
 	
 	/**
