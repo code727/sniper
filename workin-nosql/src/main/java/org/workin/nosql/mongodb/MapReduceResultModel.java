@@ -18,185 +18,33 @@
 
 package org.workin.nosql.mongodb;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
-import org.workin.commons.util.NumberUtils;
-import org.workin.commons.util.ObjectUtils;
-
 /**
  * MongoDB MapReduce的结果集(results键)对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MapReduceResultModel {
+public class MapReduceResultModel<K, V> {
 	
 	/** _id键值 */
-	private Object id;
+	private K id;
 	
 	/** value键值 */
-	private Object value;
+	private V value;
 
-	public Object getId() {
+	public K getId() {
 		return id;
 	}
 
-	public void setId(Object id) {
+	public void setId(K id) {
 		this.id = id;
 	}
 
-	public Object getValue() {
+	public V getValue() {
 		return value;
 	}
 
-	public void setValue(Object value) {
+	public void setValue(V value) {
 		this.value = value;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <T> T getId(Class<T> clazz) {
-		return (T) id;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <T> T getValue(Class<T> clazz) {
-		return (T) value;
-	}
-	
-	public String getStringId() {
-		return ObjectUtils.toString(id);
-	}
-	
-	public double getDoubleId() {
-		return NumberUtils.toDouble(id);
-	}
-	
-	public double getDoubleId(double defaultValue) {
-		return NumberUtils.toDouble(id, defaultValue);
-	}
-	
-	public float getFloatId() {
-		return NumberUtils.toFloat(id);
-	}
-	
-	public float getFloatId(float defaultValue) {
-		return NumberUtils.toFloat(id, defaultValue);
-	}
-	
-	public int getIntegerId() {
-		return NumberUtils.toInteger(id);
-	}
-	
-	public int getIntegerId(int defaultValue) {
-		return NumberUtils.toInteger(id, defaultValue);
-	}
-	
-	public long getLongId() {
-		return NumberUtils.toLong(id);
-	}
-	
-	public long getLongId(long defaultValue) {
-		return NumberUtils.toLong(id, defaultValue);
-	}
-	
-	public short getShortId() {
-		return NumberUtils.toShort(id);
-	}
-	
-	public short getShortId(short defaultValue) {
-		return NumberUtils.toShort(id, defaultValue);
-	}
-	
-	public byte getByteId() {
-		return NumberUtils.toByte(id);
-	}
-	
-	public byte getByteId(byte defaultValue) {
-		return NumberUtils.toByte(id, defaultValue);
-	}
-	
-	public BigDecimal getBigDecimalId() {
-		return NumberUtils.toBigDecimal(id);
-	}
-	
-	public BigDecimal getBigDecimalId(BigDecimal defaultValue) {
-		return NumberUtils.toBigDecimal(id, defaultValue);
-	}
-	
-	public BigInteger getBigIntegerId() {
-		return NumberUtils.toBigInteger(id);
-	}
-	
-	public BigInteger getBigIntegerId(BigInteger defaultValue) {
-		return NumberUtils.toBigInteger(id, defaultValue);
-	}
-	
-	public String getStringValue() {
-		return ObjectUtils.toString(value);
-	}
-	
-	public double getDoubleValue() {
-		return NumberUtils.toDouble(value);
-	}
-	
-	public double getDoubleValue(double defaultValue) {
-		return NumberUtils.toDouble(value, defaultValue);
-	}
-	
-	public float getFloatValue() {
-		return NumberUtils.toFloat(value);
-	}
-	
-	public float getFloatValue(float defaultValue) {
-		return NumberUtils.toFloat(value, defaultValue);
-	}
-	
-	public int getIntegerValue() {
-		return NumberUtils.toInteger(value);
-	}
-	
-	public int getIntegerValue(int defaultValue) {
-		return NumberUtils.toInteger(value, defaultValue);
-	}
-	
-	public long getLongValue() {
-		return NumberUtils.toLong(value);
-	}
-	
-	public long getLongValue(long defaultValue) {
-		return NumberUtils.toLong(value, defaultValue);
-	}
-	
-	public short getShortValue() {
-		return NumberUtils.toShort(value);
-	}
-	
-	public short getShortValue(short defaultValue) {
-		return NumberUtils.toShort(value, defaultValue);
-	}
-	
-	public byte getByteValue() {
-		return NumberUtils.toByte(value);
-	}
-	
-	public byte getByteValue(byte defaultValue) {
-		return NumberUtils.toByte(value, defaultValue);
-	}
-	
-	public BigDecimal getBigDecimalValue() {
-		return NumberUtils.toBigDecimal(value);
-	}
-	
-	public BigDecimal getBigDecimalValue(BigDecimal defaultValue) {
-		return NumberUtils.toBigDecimal(value, defaultValue);
-	}
-	
-	public BigInteger getBigIntegerValue() {
-		return NumberUtils.toBigInteger(value);
-	}
-	
-	public BigInteger getBigIntegerValue(BigInteger defaultValue) {
-		return NumberUtils.toBigInteger(value, defaultValue);
 	}
 
 }

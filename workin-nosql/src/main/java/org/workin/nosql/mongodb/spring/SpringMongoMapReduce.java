@@ -40,7 +40,7 @@ public interface SpringMongoMapReduce {
 	 * @param reduceFunction
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction);
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction);
 	
 	/**
 	 * 在目标集合中执行mapReduce，并将临时结果集保存在内存中<P>
@@ -51,7 +51,7 @@ public interface SpringMongoMapReduce {
 	 * @param reduceFunction
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection,
 			String mapFunction, String reduceFunction);
 	
 	/**
@@ -63,7 +63,7 @@ public interface SpringMongoMapReduce {
 	 * @param limit
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction,
 			String reduceFunction, int limit);
 	
 	/**
@@ -76,7 +76,7 @@ public interface SpringMongoMapReduce {
 	 * @param limit
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection,
 			String mapFunction, String reduceFunction, int limit);
 	
 	/**
@@ -90,7 +90,7 @@ public interface SpringMongoMapReduce {
 	 * @param queryPropertyValue
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction, 
 			String queryPropertyName, Object queryPropertyValue);
 	
 	/**
@@ -105,7 +105,7 @@ public interface SpringMongoMapReduce {
 	 * @param queryPropertyValue
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction,
 			String reduceFunction, String queryPropertyName, Object queryPropertyValue);
 	
 	/**
@@ -120,7 +120,7 @@ public interface SpringMongoMapReduce {
 	 * @param limit
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction, 
 			String queryPropertyName, Object queryPropertyValue, int limit);
 	
 	/**
@@ -136,7 +136,7 @@ public interface SpringMongoMapReduce {
 	 * @param limit
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction,
 			String reduceFunction, String queryPropertyName, Object queryPropertyValue, int limit);
 	
 	/**
@@ -149,7 +149,7 @@ public interface SpringMongoMapReduce {
 	 * @param queryProperties
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction,
 			String reduceFunction, Map<String, ?> queryProperties);
 	
 	/**
@@ -163,7 +163,7 @@ public interface SpringMongoMapReduce {
 	 * @param queryProperties
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction,
 			String reduceFunction, Map<String, ?> queryProperties);
 	
 	/**
@@ -175,7 +175,7 @@ public interface SpringMongoMapReduce {
 	 * @param limit
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction,
 			String reduceFunction, Map<String, ?> queryProperties, int limit);
 			
 	/**
@@ -190,7 +190,7 @@ public interface SpringMongoMapReduce {
 	 * @param limit
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction,
 			String reduceFunction, Map<String, ?> queryProperties, int limit);
 	
 	/**
@@ -202,7 +202,7 @@ public interface SpringMongoMapReduce {
 	 * @param query
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction,
 			String reduceFunction, Query query);
 	
 	/**
@@ -215,7 +215,7 @@ public interface SpringMongoMapReduce {
 	 * @param query
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection,
 			String mapFunction, String reduceFunction, Query query);
 	
 	/**
@@ -228,7 +228,7 @@ public interface SpringMongoMapReduce {
 	 * @param limit
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction,
 			String reduceFunction, Query query, int limit);
 	
 	/**
@@ -242,7 +242,7 @@ public interface SpringMongoMapReduce {
 	 * @param limit
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection,
 			String mapFunction, String reduceFunction, Query query, int limit);
 	
 	/**
@@ -254,7 +254,7 @@ public interface SpringMongoMapReduce {
 	 * @param mapReduceOptions
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction,
 			String reduceFunction, MapReduceOptions mapReduceOptions);
 			
 	/**
@@ -267,7 +267,7 @@ public interface SpringMongoMapReduce {
 	 * @param mapReduceOptions
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction,
 			String reduceFunction, MapReduceOptions mapReduceOptions);
 	
 	/**
@@ -281,7 +281,7 @@ public interface SpringMongoMapReduce {
 	 * @param mapReduceOptions
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction, 
 			String queryPropertyName, Object queryPropertyValue, MapReduceOptions mapReduceOptions);
 	
 	/**
@@ -296,7 +296,7 @@ public interface SpringMongoMapReduce {
 	 * @param mapReduceOptions
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, String reduceFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction, String reduceFunction, 
 			String queryPropertyName, Object queryPropertyValue, MapReduceOptions mapReduceOptions);
 	
 	/**
@@ -310,7 +310,7 @@ public interface SpringMongoMapReduce {
 	 * @param mapReduceOptions
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction, 
 			Map<String, ?> queryProperties, MapReduceOptions mapReduceOptions);
 	
 	/**
@@ -325,7 +325,7 @@ public interface SpringMongoMapReduce {
 	 * @param mapReduceOptions
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, String reduceFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction, String reduceFunction, 
 			Map<String, ?> queryProperties, MapReduceOptions mapReduceOptions);
 	
     /**
@@ -338,7 +338,7 @@ public interface SpringMongoMapReduce {
      * @param mapReduceOptions
      * @return
      */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction, 
 			Query query, MapReduceOptions mapReduceOptions);
 	
 	/**
@@ -352,7 +352,7 @@ public interface SpringMongoMapReduce {
 	 * @param mapReduceOptions
 	 * @return
 	 */
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction, 
 			String reduceFunction, Query query, MapReduceOptions mapReduceOptions);
 
 }

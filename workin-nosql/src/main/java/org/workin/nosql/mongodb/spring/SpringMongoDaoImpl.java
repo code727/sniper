@@ -28,6 +28,7 @@ import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
+import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.nosql.mongodb.MapReduceResultModel;
 
@@ -390,36 +391,36 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction) {
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction) {
 		return mapReduce(null, mapFunction, reduceFunction);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, String reduceFunction) {
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction, String reduceFunction) {
 		return mapReduce(collection, mapFunction, reduceFunction, (Query) null, null);
 	}
 	
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, int limit) {
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction, int limit) {
 		return mapReduce(null, mapFunction, reduceFunction, limit);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection,
 			String mapFunction, String reduceFunction, int limit) {
 		
 		return mapReduce(collection, mapFunction, reduceFunction, (Query) null, limit);
 	}
 	
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction, 
 			String queryPropertyName, Object queryPropertyValue) {
 			
 		return mapReduce(null, mapFunction, reduceFunction, queryPropertyName, queryPropertyValue);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction,
 			String reduceFunction, String queryPropertyName, Object queryPropertyValue) {
 		
 		return mapReduce(collection, mapFunction, reduceFunction,
@@ -427,14 +428,14 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 	
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction, 
 			String queryPropertyName, Object queryPropertyValue, int limit) {
 			
 		return mapReduce(null, mapFunction, reduceFunction, queryPropertyName, queryPropertyValue, limit);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction,
 			String reduceFunction, String queryPropertyName, Object queryPropertyValue, int limit) {
 		
 		return mapReduce(collection, mapFunction, reduceFunction,
@@ -442,28 +443,28 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction,
 			String reduceFunction, Map<String, ?> queryProperties) {
 		
 		return mapReduce(null, mapFunction, reduceFunction, queryProperties);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection,
 			String mapFunction, String reduceFunction, Map<String, ?> queryProperties) {
 		
 		return mapReduce(collection, mapFunction, reduceFunction, queryProperties, null);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction,
 			String reduceFunction, Map<String, ?> queryProperties, int limit) {
 		
 		return mapReduce(null, mapFunction, reduceFunction, queryProperties, limit);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction, 
 			String reduceFunction, Map<String, ?> queryProperties, int limit) {
 		
 		return mapReduce(collection, mapFunction, reduceFunction,
@@ -471,28 +472,28 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction,
 			String reduceFunction, Query query) {
 		
 		return mapReduce(null, mapFunction, reduceFunction, query);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection,
 			String mapFunction, String reduceFunction, Query query) {
 		
 		return mapReduce(collection, mapFunction, reduceFunction, query, null);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction,
 			String reduceFunction, Query query, int limit) {
 		
 		return mapReduce(null, mapFunction, reduceFunction, query, limit);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection,
 			String mapFunction, String reduceFunction, Query query, int limit) {
 		
 		return mapReduce(collection, mapFunction, reduceFunction, query,
@@ -500,21 +501,21 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction,
 			String reduceFunction, MapReduceOptions mapReduceOptions) {
 		
 		return mapReduce(null, mapFunction, reduceFunction, mapReduceOptions);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection,
 			String mapFunction, String reduceFunction, MapReduceOptions mapReduceOptions) {
 			
 		return mapReduce(collection, mapFunction, reduceFunction, (Query) null, mapReduceOptions);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction, 
 			String queryPropertyName, Object queryPropertyValue, MapReduceOptions mapReduceOptions) {
 		
 		return mapReduce(null, mapFunction, reduceFunction, queryPropertyName,
@@ -522,7 +523,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, String reduceFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction, String reduceFunction,
 			String queryPropertyName, Object queryPropertyValue, MapReduceOptions mapReduceOptions) {
 			
 		return mapReduce(collection, mapFunction, reduceFunction,
@@ -530,14 +531,14 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, String reduceFunction, 
 			Map<String, ?> queryProperties, MapReduceOptions mapReduceOptions) {
 			
 		return mapReduce(null, mapFunction, reduceFunction, queryProperties, mapReduceOptions);
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, String reduceFunction,
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction, String reduceFunction,
 			Map<String, ?> queryProperties, MapReduceOptions mapReduceOptions) {
 		
 		return mapReduce(collection, mapFunction, reduceFunction, 
@@ -545,14 +546,15 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	}
 
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String mapFunction, 
 			String reduceFunction, Query query, MapReduceOptions mapReduceOptions) {
 			
 		return mapReduce(null, mapFunction, reduceFunction, query, mapReduceOptions);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, 
+	public <K,V> MapReduceResults<MapReduceResultModel<K,V>> mapReduce(String collection, String mapFunction, 
 			String reduceFunction, Query query, MapReduceOptions mapReduceOptions) {
 			
 		if (StringUtils.isBlank(collection))
@@ -560,9 +562,10 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		
 		if (mapReduceOptions == null)
 			mapReduceOptions = new MapReduceOptions().outputTypeInline();
-			
-		return getMongoOperations().mapReduce(query, collection, mapFunction,
-				reduceFunction, mapReduceOptions, MapReduceResultModel.class);
+		
+		return (MapReduceResults<MapReduceResultModel<K, V>>) getMongoOperations()
+				.mapReduce(query, collection, mapFunction, reduceFunction,
+						mapReduceOptions, ClassUtils.getDeclaredClass(MapReduceResultModel.class));
 	}
 
 }
