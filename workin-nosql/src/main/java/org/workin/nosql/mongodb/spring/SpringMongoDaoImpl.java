@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.mongodb.core.mapreduce.MapReduceOptions;
 import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -395,10 +396,19 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, String reduceFunction) {
-		if (StringUtils.isBlank(collection))
-			collection = getCollectionName();
+		return mapReduce(collection, mapFunction, reduceFunction, (Query) null, null);
+	}
+	
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, int limit) {
+		return mapReduce(null, mapFunction, reduceFunction, limit);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+			String mapFunction, String reduceFunction, int limit) {
 		
-		return getMongoOperations().mapReduce(collection, mapFunction, reduceFunction, MapReduceResultModel.class);
+		return mapReduce(collection, mapFunction, reduceFunction, (Query) null, limit);
 	}
 	
 	@Override
@@ -412,11 +422,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
 			String reduceFunction, String queryPropertyName, Object queryPropertyValue) {
 		
-		if (StringUtils.isBlank(collection))
-			collection = getCollectionName();
-		
-		return getMongoOperations().mapReduce(buildPropertyQuery(queryPropertyName, queryPropertyValue),
-				 collection, mapFunction, reduceFunction, MapReduceResultModel.class);
+		return mapReduce(collection, mapFunction, reduceFunction,
+				buildPropertyQuery(queryPropertyName, queryPropertyValue), null);
 	}
 	
 	@Override
@@ -430,14 +437,132 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
 			String reduceFunction, String queryPropertyName, Object queryPropertyValue, int limit) {
 		
+		return mapReduce(collection, mapFunction, reduceFunction,
+				buildPropertyQuery(queryPropertyName, queryPropertyValue), limit);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+			String reduceFunction, Map<String, ?> queryProperties) {
+		
+		return mapReduce(null, mapFunction, reduceFunction, queryProperties);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+			String mapFunction, String reduceFunction, Map<String, ?> queryProperties) {
+		
+		return mapReduce(collection, mapFunction, reduceFunction, queryProperties, null);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+			String reduceFunction, Map<String, ?> queryProperties, int limit) {
+		
+		return mapReduce(null, mapFunction, reduceFunction, queryProperties, limit);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, 
+			String reduceFunction, Map<String, ?> queryProperties, int limit) {
+		
+		return mapReduce(collection, mapFunction, reduceFunction,
+				buildPropertiesAndQuery(queryProperties), limit);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+			String reduceFunction, Query query) {
+		
+		return mapReduce(null, mapFunction, reduceFunction, query);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+			String mapFunction, String reduceFunction, Query query) {
+		
+		return mapReduce(collection, mapFunction, reduceFunction, query, null);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+			String reduceFunction, Query query, int limit) {
+		
+		return mapReduce(null, mapFunction, reduceFunction, query, limit);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+			String mapFunction, String reduceFunction, Query query, int limit) {
+		
+		return mapReduce(collection, mapFunction, reduceFunction, query,
+				new MapReduceOptions().limit(limit).outputTypeInline());
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+			String reduceFunction, MapReduceOptions mapReduceOptions) {
+		
+		return mapReduce(null, mapFunction, reduceFunction, mapReduceOptions);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+			String mapFunction, String reduceFunction, MapReduceOptions mapReduceOptions) {
+			
+		return mapReduce(collection, mapFunction, reduceFunction, (Query) null, mapReduceOptions);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+			String queryPropertyName, Object queryPropertyValue, MapReduceOptions mapReduceOptions) {
+		
+		return mapReduce(null, mapFunction, reduceFunction, queryPropertyName,
+				queryPropertyValue, mapReduceOptions);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, String reduceFunction,
+			String queryPropertyName, Object queryPropertyValue, MapReduceOptions mapReduceOptions) {
+			
+		return mapReduce(collection, mapFunction, reduceFunction,
+				buildPropertyQuery(queryPropertyName, queryPropertyValue), mapReduceOptions);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+			Map<String, ?> queryProperties, MapReduceOptions mapReduceOptions) {
+			
+		return mapReduce(null, mapFunction, reduceFunction, queryProperties, mapReduceOptions);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, String reduceFunction,
+			Map<String, ?> queryProperties, MapReduceOptions mapReduceOptions) {
+		
+		return mapReduce(collection, mapFunction, reduceFunction, 
+				buildPropertiesAndQuery(queryProperties), mapReduceOptions);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, 
+			String reduceFunction, Query query, MapReduceOptions mapReduceOptions) {
+			
+		return mapReduce(null, mapFunction, reduceFunction, query, mapReduceOptions);
+	}
+
+	@Override
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, 
+			String reduceFunction, Query query, MapReduceOptions mapReduceOptions) {
+			
 		if (StringUtils.isBlank(collection))
 			collection = getCollectionName();
 		
-		// 还未加limit逻辑
-		return getMongoOperations().mapReduce(buildPropertyQuery(queryPropertyName, queryPropertyValue),
-				collection, mapFunction, reduceFunction, MapReduceResultModel.class);
+		if (mapReduceOptions == null)
+			mapReduceOptions = new MapReduceOptions().outputTypeInline();
+			
+		return getMongoOperations().mapReduce(query, collection, mapFunction,
+				reduceFunction, mapReduceOptions, MapReduceResultModel.class);
 	}
-
-	
 
 }

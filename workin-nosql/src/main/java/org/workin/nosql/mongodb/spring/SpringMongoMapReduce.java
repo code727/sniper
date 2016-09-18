@@ -18,7 +18,11 @@
 
 package org.workin.nosql.mongodb.spring;
 
+import java.util.Map;
+
+import org.springframework.data.mongodb.core.mapreduce.MapReduceOptions;
 import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
+import org.springframework.data.mongodb.core.query.Query;
 import org.workin.nosql.mongodb.MapReduceResultModel;
 
 /**
@@ -49,6 +53,31 @@ public interface SpringMongoMapReduce {
 	 */
 	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
 			String mapFunction, String reduceFunction);
+	
+	/**
+	 * 执行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"limit":limit,out:{inline:1}}
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param limit
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+			String reduceFunction, int limit);
+	
+	/**
+	 * 在目标集合中执行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"limit":limit,out:{inline:1}}
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param limit
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+			String mapFunction, String reduceFunction, int limit);
 	
 	/**
 	 * 根据属性查询出文档后对其进行mapReduce，并将临时结果集保存在内存中<P>
@@ -110,79 +139,220 @@ public interface SpringMongoMapReduce {
 	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
 			String reduceFunction, String queryPropertyName, Object queryPropertyValue, int limit);
 	
-//	/**
-//	 * 在目标集合中根据属性组查询出需要进行mapReduce的文档，并将临时结果集保存在内存中<P>
-//	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
-//	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},out:{inline:1}});
-//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-//	 * @param collection
-//	 * @param mapFunction
-//	 * @param reduceFunction
-//	 * @param queryProperties
-//	 * @return
-//	 */
-//	public MapReduceResults<T> mapReduce(String collection, String mapFunction,
-//			String reduceFunction, Map<String, ?> queryProperties);
-//		
-//	/**
-//	 * 在目标集合中根据属性组查询出需要进行mapReduce的最大行数的文档，并将临时结果集保存在内存中<P>
-//	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
-//	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},"limit":maxRows,out:{inline:1}});
-//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-//	 * @param collection
-//	 * @param mapFunction
-//	 * @param reduceFunction
-//	 * @param queryProperties
-//	 * @param maxRows
-//	 * @return
-//	 */
-//	public MapReduceResults<T> mapReduce(String collection, String mapFunction,
-//			String reduceFunction, Map<String, ?> queryProperties, int maxRows);
-//	
-//	/**
-//	 * 在目标集合中查询出需要进行mapReduce的文档，并将临时结果集保存在内存中<P>
-//	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{query},out:{inline:1}});
-//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-//	 * @param collection
-//	 * @param mapFunction
-//	 * @param reduceFunction
-//	 * @param query
-//	 * @return
-//	 */
-//	public MapReduceResults<T> mapReduce(String collection, String mapFunction,
-//			String reduceFunction, Query query);
-//	
-//	/**
-//	 * 在目标集合中执行mapReduce<P>
-//	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{mapReduceOptions});
-//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-//	 * @param collection
-//	 * @param mapFunction
-//	 * @param reduceFunction
-//	 * @param mapReduceOptions
-//	 * @return
-//	 */
-//	public MapReduceResults<T> mapReduce(String collection, String mapFunction,
-//			String reduceFunction, MapReduceOptions mapReduceOptions);
-//	
-//	/**
-//	 * 在目标集合中根据属性查询出需要进行mapReduce的文档，并将临时结果集保存在内存中<P>
-//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-//	 * @param collection
-//	 * @param mapFunction
-//	 * @param reduceFunction
-//	 * @param queryPropertyName
-//	 * @param queryPropertyValue
-//	 * @param mapReduceOptions
-//	 * @return
-//	 */
-//	public MapReduceResults<T> mapReduce(String collection, String mapFunction, String reduceFunction, 
-//			String queryPropertyName, Object queryPropertyValue, MapReduceOptions mapReduceOptions);
-//	
-//	public MapReduceResults<T> mapReduce(String collection, String mapFunction, String reduceFunction, 
-//			Map<String, ?> queryProperties, MapReduceOptions mapReduceOptions);
-//	
-//	public MapReduceResults<T> mapReduce(String collection, String mapFunction, String reduceFunction, 
-//			Query query, MapReduceOptions mapReduceOptions);
+	/**
+	 * 根据属性组查询出文档后对其进行mapReduce，并将临时结果集保存在内存中<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
+	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},out:{inline:1}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param queryProperties
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+			String reduceFunction, Map<String, ?> queryProperties);
+	
+	/**
+	 * 在目标集合中根据属性组查询出文档后对其进行mapReduce，并将临时结果集保存在内存中<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
+	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},out:{inline:1}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param queryProperties
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+			String reduceFunction, Map<String, ?> queryProperties);
+	
+	/**
+	 * 根据属性组查询出文档后对其进行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param queryProperties
+	 * @param limit
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+			String reduceFunction, Map<String, ?> queryProperties, int limit);
+			
+	/**
+	 * 在目标集合中根据属性组查询出文档后对其进行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
+	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},"limit":limit,out:{inline:1}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param queryProperties
+	 * @param limit
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+			String reduceFunction, Map<String, ?> queryProperties, int limit);
+	
+	/**
+	 * 查询出文档后对其进行mapReduce，并将临时结果集保存在内存中<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{query},out:{inline:1}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param query
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+			String reduceFunction, Query query);
+	
+	/**
+	 * 在目标集合中查询出文档后对其进行mapReduce，并将临时结果集保存在内存中<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{query},out:{inline:1}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param query
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+			String mapFunction, String reduceFunction, Query query);
+	
+	/**
+	 * 查询出文档后对其进行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{query},"limit":limit,out:{inline:1}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param query
+	 * @param limit
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+			String reduceFunction, Query query, int limit);
+	
+	/**
+	 * 在目标集合中查询出文档后对其进行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{query},"limit":limit,out:{inline:1}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param query
+	 * @param limit
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection,
+			String mapFunction, String reduceFunction, Query query, int limit);
+	
+	/**
+	 * 执行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{mapReduceOptions});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param mapReduceOptions
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction,
+			String reduceFunction, MapReduceOptions mapReduceOptions);
+			
+	/**
+	 * 在目标集合中执行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{mapReduceOptions});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param mapReduceOptions
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction,
+			String reduceFunction, MapReduceOptions mapReduceOptions);
+	
+	/**
+	 * 根据属性查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"propertyKey":propertyValue},mapReduceOptions});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param queryPropertyName
+	 * @param queryPropertyValue
+	 * @param mapReduceOptions
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+			String queryPropertyName, Object queryPropertyValue, MapReduceOptions mapReduceOptions);
+	
+	/**
+	 * 在目标集合中根据属性查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"propertyKey":propertyValue},mapReduceOptions});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param queryPropertyName
+	 * @param queryPropertyValue
+	 * @param mapReduceOptions
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, String reduceFunction, 
+			String queryPropertyName, Object queryPropertyValue, MapReduceOptions mapReduceOptions);
+	
+	/**
+	 * 根据属性组查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
+	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},mapReduceOptions});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param queryProperties
+	 * @param mapReduceOptions
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+			Map<String, ?> queryProperties, MapReduceOptions mapReduceOptions);
+	
+	/**
+	 * 在目标集合中根据属性组查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
+	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},mapReduceOptions});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param queryProperties
+	 * @param mapReduceOptions
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, String reduceFunction, 
+			Map<String, ?> queryProperties, MapReduceOptions mapReduceOptions);
+	
+    /**
+     * 查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
+     * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":query,mapReduceOptions});
+     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @param mapFunction
+     * @param reduceFunction
+     * @param query
+     * @param mapReduceOptions
+     * @return
+     */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String mapFunction, String reduceFunction, 
+			Query query, MapReduceOptions mapReduceOptions);
+	
+	/**
+	 * 在目标集合中查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
+	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":query,mapReduceOptions});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @param mapFunction
+	 * @param reduceFunction
+	 * @param query
+	 * @param mapReduceOptions
+	 * @return
+	 */
+	public MapReduceResults<MapReduceResultModel> mapReduce(String collection, String mapFunction, 
+			String reduceFunction, Query query, MapReduceOptions mapReduceOptions);
 
 }
