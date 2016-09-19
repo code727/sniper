@@ -170,10 +170,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 	 */
 	protected Query buildPropertyQuery(String propertyName, Object propertyValue, int start, int maxRows) {
 		Query query = new Query();
-		String keyName = getKeyName(propertyName);
-		if (StringUtils.isNotEmpty(keyName))
-			query.addCriteria(Criteria.where(keyName).is(propertyValue));
-		
+		query.addCriteria(buildWhereIsCriteria(propertyName, propertyValue));
 		setOffsetQuery(query, start, maxRows);
 		return query;
 	}
@@ -199,16 +196,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 	 */
 	protected Query buildPropertiesAndQuery(Map<String, ?> propertyMap, int start, int maxRows) {
 		Query query = new Query();
-		List<Criteria> whereIsCriteria = buildWhereIsCriteria(propertyMap);
-		
-		if (CollectionUtils.isNotEmpty(whereIsCriteria)) {
-			if (whereIsCriteria.size() > 1)
-				query.addCriteria(new Criteria().andOperator(
-						CollectionUtils.toArray(whereIsCriteria, Criteria.class)));
-			else
-				query.addCriteria(whereIsCriteria.get(0));
-		}
-		
+		query.addCriteria(buildWhereIsAndCriteria(propertyMap));
 		setOffsetQuery(query, start, maxRows);
 		return query;
 	}
@@ -233,18 +221,79 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 	 */
 	protected Query buildPropertiesOrQuery(Map<String, ?> propertyMap, int start, int maxRows) {
 		Query query = new Query();
-		List<Criteria> whereIsCriteria = buildWhereIsCriteria(propertyMap);
-		
-		if (CollectionUtils.isNotEmpty(whereIsCriteria)) {
-			if (whereIsCriteria.size() > 1)
-				query.addCriteria(new Criteria().orOperator(
-						CollectionUtils.toArray(whereIsCriteria, Criteria.class)));
-			else
-				query.addCriteria(whereIsCriteria.get(0));
-		}
-		
+		query.addCriteria(buildWhereIsOrCriteria(propertyMap));
 		setOffsetQuery(query, start, maxRows);
 		return query;
+	}
+	
+	/**
+	 * 设置分段查询参数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param query 查询对象
+	 * @param start 起始位置
+	 * @param maxRows 最大行数
+	 */
+	protected void setOffsetQuery(Query query, int start, int maxRows) {
+		if (start > -1)
+			query.skip(start);
+		
+		if (maxRows > 0)
+			query.limit(maxRows);
+	}
+	
+	/**
+	 * 将属性名和属性值构建成where-is条件
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName
+	 * @param propertyValue
+	 * @return
+	 */
+	protected Criteria buildWhereIsCriteria(String propertyName, Object propertyValue) {
+		String keyName = getKeyName(propertyName);
+		return StringUtils.isNotEmpty(keyName) ? Criteria.where(
+				getKeyName(propertyName)).is(propertyValue) : new Criteria();
+	}
+	
+	/**
+	 * 将属性映射组构建成多个where-is"逻辑与"条件列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap
+	 * @return
+	 */
+	protected Criteria buildWhereIsAndCriteria(Map<String, ?> propertyMap) {
+		List<Criteria> whereIsCriteria = buildWhereIsCriteria(propertyMap);
+		
+		Criteria criteria = null;
+		if (CollectionUtils.isNotEmpty(whereIsCriteria)) {
+			if (whereIsCriteria.size() > 1) {
+				criteria = new Criteria();
+				criteria.andOperator(CollectionUtils.toArray(whereIsCriteria, Criteria.class));
+			} else
+				criteria = whereIsCriteria.get(0);
+		}
+		
+		return criteria != null ? criteria : new Criteria();
+	}
+	
+	/**
+	 * 将属性映射组构建成多个where-is"逻辑或"条件列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap
+	 * @return
+	 */
+	protected Criteria buildWhereIsOrCriteria(Map<String, ?> propertyMap) {
+		List<Criteria> whereIsCriteria = buildWhereIsCriteria(propertyMap);
+		
+		Criteria criteria = null;
+		if (CollectionUtils.isNotEmpty(whereIsCriteria)) {
+			if (whereIsCriteria.size() > 1) {
+				criteria = new Criteria();
+				criteria.orOperator(CollectionUtils.toArray(whereIsCriteria, Criteria.class));
+			} else
+				criteria = whereIsCriteria.get(0);
+		}
+		
+		return criteria != null ? criteria : new Criteria();
 	}
 	
 	/**
@@ -271,21 +320,6 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 		}
 		
 		return whereIsCriteria;
-	}
-	
-	/**
-	 * 设置分段查询参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 查询对象
-	 * @param start 起始位置
-	 * @param maxRows 最大行数
-	 */
-	protected void setOffsetQuery(Query query, int start, int maxRows) {
-		if (start > -1)
-			query.skip(start);
-		
-		if (maxRows > 0)
-			query.limit(maxRows);
 	}
 		
 }

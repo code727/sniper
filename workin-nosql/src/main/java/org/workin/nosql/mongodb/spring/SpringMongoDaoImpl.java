@@ -23,12 +23,17 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.mongodb.core.mapreduce.GroupBy;
+import org.springframework.data.mongodb.core.mapreduce.GroupByResults;
 import org.springframework.data.mongodb.core.mapreduce.MapReduceOptions;
 import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
+import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ClassUtils;
+import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.nosql.mongodb.MapReduceResultModel;
 
@@ -566,6 +571,117 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		return (MapReduceResults<MapReduceResultModel<K, V>>) getMongoOperations()
 				.mapReduce(query, collection, mapFunction, reduceFunction,
 						mapReduceOptions, ClassUtils.getDeclaredClass(MapReduceResultModel.class));
+	}
+
+	@Override
+	public GroupByResults<T> group(GroupBy groupBy) {
+		return group((String) null, groupBy);
+	}
+
+	@Override
+	public GroupByResults<T> group(String collection, GroupBy groupBy) {
+		return group(collection, groupBy, getBeanClass());
+	}
+
+	@Override
+	public <R> GroupByResults<R> group(GroupBy groupBy, Class<R> resultClass) {
+		return group((String) null, groupBy, resultClass);
+	}
+
+	@Override
+	public <R> GroupByResults<R> group(String collection, GroupBy groupBy, Class<R> resultClass) {
+		return group(collection, (Criteria) null, groupBy, resultClass);
+	}
+	
+	@Override
+	public GroupByResults<T> group(String propertyName, Object propertyValue, GroupBy groupBy) {
+		return group(null, propertyName, propertyValue, groupBy);
+	}
+
+	@Override
+	public GroupByResults<T> group(String collection, String propertyName,
+			Object propertyValue, GroupBy groupBy) {
+		
+		return group(collection, propertyName, propertyValue, groupBy, getBeanClass());
+	}
+
+	@Override
+	public <R> GroupByResults<R> group(String propertyName,
+			Object propertyValue, GroupBy groupBy, Class<R> resultClass) {
+		
+		return group(null, propertyName, propertyValue, groupBy, resultClass);
+	}
+
+	@Override
+	public <R> GroupByResults<R> group(String collection, String propertyName,
+			Object propertyValue, GroupBy groupBy, Class<R> resultClass) {
+		
+		return group(collection, buildWhereIsCriteria(propertyName, propertyValue), groupBy, resultClass);
+	}
+
+	@Override
+	public GroupByResults<T> group(Map<String, ?> properties, GroupBy groupBy) {
+		return group(null, properties, groupBy);
+	}
+
+	@Override
+	public GroupByResults<T> group(String collection,
+			Map<String, ?> properties, GroupBy groupBy) {
+		
+		return group(collection, properties, groupBy, getBeanClass());
+	}
+
+	@Override
+	public <R> GroupByResults<R> group(Map<String, ?> properties,
+			GroupBy groupBy, Class<R> resultClass) {
+		
+		return group(null, properties, groupBy, resultClass);
+	}
+
+	@Override
+	public <R> GroupByResults<R> group(String collection,
+			Map<String, ?> properties, GroupBy groupBy, Class<R> resultClass) {
+		
+		return group(collection, buildWhereIsCriteria(properties), groupBy, resultClass);
+	}
+
+	@Override
+	public GroupByResults<T> group(Criteria criteria, GroupBy groupBy) {
+		return group(null, criteria, groupBy);
+	}
+
+	@Override
+	public GroupByResults<T> group(String collection, Criteria criteria, GroupBy groupBy) {
+		return group(collection, criteria, groupBy, getBeanClass());
+	}
+
+	@Override
+	public <R> GroupByResults<R> group(Criteria criteria, GroupBy groupBy, Class<R> resultClass) {
+		return group(null, criteria, groupBy, resultClass);
+	}
+
+	@Override
+	public <R> GroupByResults<R> group(String collection, Criteria criteria, GroupBy groupBy, Class<R> resultClass) {
+		
+		AssertUtils.assertNotNull(groupBy, "group parameter must not be null.");
+		AssertUtils.assertNotNull(resultClass, "group result class parameter must not be null.");
+		
+		try {
+			String reduce = ReflectionUtils.getFieldValue(groupBy, "reduce");
+			AssertUtils.assertNotBlank(reduce, "group reduce function must not be null or blank");
+			
+			String initial = ReflectionUtils.getFieldValue(groupBy, "initial");
+			if (StringUtils.isBlank(initial))
+				groupBy.initialDocument("{}");
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (StringUtils.isBlank(collection))
+			collection = getCollectionName();
+		
+		return getMongoOperations().group(criteria, collection, groupBy, resultClass);
 	}
 
 }
