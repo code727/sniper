@@ -128,6 +128,15 @@ public class AssertUtils {
 	}
 	
 	/**
+	 * 断言不全为空白字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 */
+	public static void assertNotBlank(String str) {
+		assertNotBlank(str, "[Assertion failed] - This string argument must not be null or blank.");
+	}
+	
+	/**
 	 * 断言不全为空白字符串，否则抛出自定义的异常信息
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param str
