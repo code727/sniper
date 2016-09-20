@@ -18,13 +18,105 @@
 
 package org.workin.nosql.mongodb.spring;
 
+import java.util.List;
+
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 
 /**
  * Spring MongoDB聚合接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SpringMongoAggregate {
+public interface SpringMongoAggregate<T> {
 	
-
+	/**
+	 * 按列表中的操作进行聚合运算后返回结果<P>
+	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
+	 * "operationName2":{operation2},"operationNameN":{operationN}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @param operations 聚合操作列表
+	 * @return
+	 */
+	public AggregationResults<T> aggregate(List<AggregationOperation> operations);
+	
+	/**
+	 * 在目标集合中按列表中的操作进行聚合运算后返回结果<P>
+	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
+	 * "operationName2":{operation2},"operationNameN":{operationN}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection 目标集合
+	 * @param operations 聚合操作列表
+	 * @return
+	 */
+	public AggregationResults<T> aggregate(String collection, List<AggregationOperation> operations);
+	
+	/**
+	 * 按列表中的操作进行聚合运算后以指定的数据类型返回结果<P>
+	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
+	 * "operationName2":{operation2},"operationNameN":{operationN}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param operations 聚合操作列表
+	 * @param resultClass 聚合结果数据类型
+	 * @return
+	 */
+	public <R> AggregationResults<R> aggregate(List<AggregationOperation> operations, Class<R> resultClass);
+	
+	/**
+	 * 在目标集合中按列表中的操作进行聚合运算后以指定的数据类型返回结果<P>
+	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
+	 * "operationName2":{operation2},"operationNameN":{operationN}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection 目标集合
+	 * @param operations 聚合操作列表
+	 * @param resultClass 聚合结果数据类型
+	 * @return
+	 */
+	public <R> AggregationResults<R> aggregate(String collection, List<AggregationOperation> operations, Class<R> resultClass);
+	
+	/**
+	 * 执行聚合运算P>
+	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
+	 * "operationName2":{operation2},"operationNameN":{operationN}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param aggregation 聚合运算
+	 * @return
+	 */
+	public AggregationResults<T> aggregate(Aggregation aggregation);
+	
+	/**
+	 * 在目标集合中执行聚合运算P>
+	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
+	 * "operationName2":{operation2},"operationNameN":{operationN}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection 目标集合
+	 * @param aggregation 聚合运算
+	 * @return
+	 */
+	public AggregationResults<T> aggregate(String collection, Aggregation aggregation);
+	
+	/**
+	 * 执行聚合运算后以指定的数据类型返回结果<P>
+	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
+	 * "operationName2":{operation2},"operationNameN":{operationN}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param aggregation 聚合运算
+	 * @param resultClass 聚合结果数据类型
+	 * @return
+	 */
+	public <R> AggregationResults<R> aggregate(Aggregation aggregation, Class<R> resultClass);
+	
+	/**
+	 * 在目标集合中执行聚合运算后以指定的数据类型返回结果<P>
+	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
+	 * "operationName2":{operation2},"operationNameN":{operationN}});
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection 目标集合
+	 * @param aggregation 聚合运算
+	 * @param resultClass 聚合结果数据类型
+	 * @return
+	 */
+	public <R> AggregationResults<R> aggregate(String collection, Aggregation aggregation, Class<R> resultClass);
+	
 }

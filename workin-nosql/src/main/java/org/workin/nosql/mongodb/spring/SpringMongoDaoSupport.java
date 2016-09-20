@@ -42,7 +42,8 @@ import org.workin.spring.beans.AbstractGenricBean;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends AbstractGenricBean<T> {
+public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
+		AbstractGenricBean<T> {
 	
 	@Autowired
 	private MongoOperations mongoOperations;
@@ -227,21 +228,6 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 	}
 	
 	/**
-	 * 设置分段查询参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 查询对象
-	 * @param start 起始位置
-	 * @param maxRows 最大行数
-	 */
-	protected void setOffsetQuery(Query query, int start, int maxRows) {
-		if (start > -1)
-			query.skip(start);
-		
-		if (maxRows > 0)
-			query.limit(maxRows);
-	}
-	
-	/**
 	 * 将属性名和属性值构建成where-is条件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param propertyName
@@ -320,6 +306,21 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends 
 		}
 		
 		return whereIsCriteria;
+	}
+	
+	/**
+	 * 设置分段查询参数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param query 查询对象
+	 * @param start 起始位置
+	 * @param maxRows 最大行数
+	 */
+	protected void setOffsetQuery(Query query, int start, int maxRows) {
+		if (start > -1)
+			query.skip(start);
+		
+		if (maxRows > 0)
+			query.limit(maxRows);
 	}
 		
 }

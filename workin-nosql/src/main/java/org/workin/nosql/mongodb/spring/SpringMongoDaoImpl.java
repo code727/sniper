@@ -23,6 +23,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.mapreduce.GroupBy;
 import org.springframework.data.mongodb.core.mapreduce.GroupByResults;
 import org.springframework.data.mongodb.core.mapreduce.MapReduceOptions;
@@ -659,7 +662,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public <R> GroupByResults<R> group(Criteria criteria, GroupBy groupBy, Class<R> resultClass) {
 		return group(null, criteria, groupBy, resultClass);
 	}
-
+	
 	@Override
 	public <R> GroupByResults<R> group(String collection, Criteria criteria, GroupBy groupBy, Class<R> resultClass) {
 		
@@ -680,8 +683,57 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		
 		if (StringUtils.isBlank(collection))
 			collection = getCollectionName();
-		
+			
 		return getMongoOperations().group(criteria, collection, groupBy, resultClass);
+	}
+	
+	@Override
+	public AggregationResults<T> aggregate(List<AggregationOperation> operations) {
+		return aggregate(null, operations);
+	}
+
+	@Override
+	public AggregationResults<T> aggregate(String collection, List<AggregationOperation> operations) {
+		return aggregate(collection, operations, getBeanClass());
+	}
+
+	@Override
+	public <R> AggregationResults<R> aggregate(List<AggregationOperation> operations, Class<R> resultClass) {
+		return aggregate(null, operations, resultClass);
+	}
+
+	@Override
+	public <R> AggregationResults<R> aggregate(String collection, List<AggregationOperation> operations, Class<R> resultClass) {
+		
+		AssertUtils.assertNotEmpty(operations, "Aggregation operations must not be null or empty.");
+		return aggregate(collection, Aggregation.newAggregation(operations), resultClass);
+	}
+
+	@Override
+	public AggregationResults<T> aggregate(Aggregation aggregation) {
+		return aggregate(null, aggregation);
+	}
+
+	@Override
+	public AggregationResults<T> aggregate(String collection, Aggregation aggregation) {
+		return aggregate(collection, aggregation, getBeanClass());
+	}
+
+	@Override
+	public <R> AggregationResults<R> aggregate(Aggregation aggregation, Class<R> resultClass) {
+		return aggregate(null, aggregation, resultClass);
+	}
+
+	@Override
+	public <R> AggregationResults<R> aggregate(String collection, Aggregation aggregation, Class<R> resultClass) {
+		
+		AssertUtils.assertNotNull(aggregation, "aggregation parameter must not be null.");
+		AssertUtils.assertNotNull(resultClass, "out type parameter must not be null.");
+		
+		if (StringUtils.isBlank(collection))
+			collection = getCollectionName();
+		
+		return getMongoOperations().aggregate(aggregation, collection, resultClass);
 	}
 
 }
