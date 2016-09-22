@@ -26,6 +26,9 @@ import java.util.Map;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.LimitOperation;
+import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.aggregation.SkipOperation;
 import org.springframework.data.mongodb.core.mapreduce.GroupBy;
 import org.springframework.data.mongodb.core.mapreduce.GroupByResults;
 import org.springframework.data.mongodb.core.mapreduce.MapReduceOptions;
@@ -734,6 +737,357 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 			collection = getCollectionName();
 		
 		return getMongoOperations().aggregate(aggregation, collection, resultClass);
+	}
+
+	@Override
+	public T aggregateFindOne(MatchOperation matchOperation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T aggregateFindOne(String collection, MatchOperation matchOperation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> R aggregateFindOne(MatchOperation matchOperation,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> R aggregateFindOne(String collection,
+			MatchOperation matchOperation, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public List<T> aggregateFind(SkipOperation skipOperation,
+			LimitOperation limitOperation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(String collection,
+			SkipOperation skipOperation, LimitOperation limitOperation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(SkipOperation skipOperation,
+			LimitOperation limitOperation, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(String collection,
+			SkipOperation skipOperation, LimitOperation limitOperation,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(MatchOperation matchOperation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(String collection,
+			MatchOperation matchOperation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(MatchOperation matchOperation,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(String collection,
+			MatchOperation matchOperation, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T aggregateFindById(PK id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T aggregateFindById(String collection, PK id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> R aggregateFindById(PK id, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> R aggregateFindById(String collection, PK id,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T aggregateFindOne(String propertyName, Object propertyValue) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T aggregateFindOne(String collection, String propertyName,
+			Object propertyValue) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> R aggregateFindOne(String propertyName, Object propertyValue,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> R aggregateFindOne(String collection, String propertyName,
+			Object propertyValue, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T aggregateFindOne(Map<String, ?> propertyMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T aggregateFindOne(String collection, Map<String, ?> propertyMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> R aggregateFindOne(Map<String, ?> propertyMap,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> R aggregateFindOne(String collection,
+			Map<String, ?> propertyMap, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFindAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFindAll(String collection) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFindAll(Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFindAll(String collection, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(int start, int maxRows) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(String collection, int start, int maxRows) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(int start, int maxRows,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(String collection, int start, int maxRows,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(String propertyName, Object propertyValue) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(String collection, String propertyName,
+			Object propertyValue) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(String propertyName, Object propertyValue,
+			int start, int maxRows) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(String collection, String propertyName,
+			Object propertyValue, int start, int maxRows) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(String propertyName, Object propertyValue,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(String collection, String propertyName,
+			Object propertyValue, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(String propertyName, Object propertyValue,
+			int start, int maxRows, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(String collection, String propertyName,
+			Object propertyValue, int start, int maxRows, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(Map<String, ?> propertyMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(String collection, Map<String, ?> propertyMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(Map<String, ?> propertyMap, int start,
+			int maxRows) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(String collection, Map<String, ?> propertyMap,
+			int start, int maxRows) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(Map<String, ?> propertyMap,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(String collection,
+			Map<String, ?> propertyMap, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(Map<String, ?> propertyMap, int start,
+			int maxRows, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(String collection,
+			Map<String, ?> propertyMap, int start, int maxRows,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(MatchOperation matchOperation,
+			SkipOperation skipOperation, LimitOperation limitOperation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> aggregateFind(String collection,
+			MatchOperation matchOperation, SkipOperation skipOperation,
+			LimitOperation limitOperation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(MatchOperation matchOperation,
+			SkipOperation skipOperation, LimitOperation limitOperation,
+			Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R> List<R> aggregateFind(String collection,
+			MatchOperation matchOperation, SkipOperation skipOperation,
+			LimitOperation limitOperation, Class<R> resultClass) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

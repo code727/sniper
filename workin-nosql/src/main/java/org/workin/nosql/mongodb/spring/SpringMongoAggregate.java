@@ -31,7 +31,7 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
  * @version 1.0
  */
 public interface SpringMongoAggregate<T, PK extends Serializable> extends
-		SpringMongoAggregateQurey<T, PK> {
+		SpringMongoAggregateQuery<T, PK> {
 	
 	/**
 	 * 按列表中的操作进行聚合运算后返回结果<P>
