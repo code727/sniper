@@ -18,6 +18,7 @@
 
 package org.workin.nosql.mongodb.spring;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -29,7 +30,8 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SpringMongoAggregate<T> {
+public interface SpringMongoAggregate<T, PK extends Serializable> extends
+		SpringMongoAggregateQurey<T, PK> {
 	
 	/**
 	 * 按列表中的操作进行聚合运算后返回结果<P>

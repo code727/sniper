@@ -42,10 +42,10 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	/**
 	 * 新增实体对象到目标集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param entity
 	 * @param collection
+	 * @param entity
 	 */
-	public void insert(T entity, String collection);
+	public void insert(String collection, T entity);
 	
 	/**
 	 * 批量新增实体对象
@@ -57,10 +57,10 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	/**
 	 * 批量新增实体对象到目标集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param entities
 	 * @param collection
+	 * @param entities
 	 */
-	public void batchInsert(Collection<T> entities, String collection);
+	public void batchInsert(String collection, Collection<T> entities);
 		
 	/**
 	 * 新增/更新实体对象<p>
@@ -79,7 +79,7 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	 * @param entity
 	 * @param collection
 	 */
-	public void save(T entity, String collection);
+	public void save(String collection, T entity);
 		
 	/**
 	 * 删除实体对象    
@@ -92,11 +92,11 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	/**
 	 * 在目标集合中删除实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param entity
 	 * @param collection
+	 * @param entity
 	 * @return
 	 */
-	public WriteResult remove(T entity, String collection);
+	public WriteResult remove(String collection, T entity);
 	
 	/**
 	 * 删除主键对应的实体对象
@@ -109,11 +109,11 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	/**
 	 * 在目标集合中删除主键对应的实体对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
 	 * @param collection
+	 * @param id
 	 * @return
 	 */
-	public WriteResult remove(PK id, String collection);
+	public WriteResult remove(String collection, PK id);
 	
 	/**
 	 * 根据ID删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
@@ -132,7 +132,7 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	 * @param collection
 	 * @return
 	 */
-	public T findAndRemove(PK id, String collection);
+	public T findAndRemove(String collection, PK id);
 	
 	 /**
 	  * 根据属性删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
@@ -148,12 +148,12 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	 * 在目标集合中根据属性删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"propertyKey":propertyValue,"remove":true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection 目标集合
 	 * @param propertyName 属性名
 	 * @param propertyValue 属性值
-	 * @param collection 目标集合
 	 * @return
 	 */
-	public T findAndRemove(String propertyName, Object propertyValue, String collection);
+	public T findAndRemove(String collection, String propertyName, Object propertyValue);
 	
 	/**
 	 * 根据属性映射组删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
@@ -170,11 +170,11 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	 * 实际执行的语句为:db.collection.findAndModify({"query":{"$and":[{propertyKey1:
 	 * propertyValue1},{propertyKey2:propertyValue2},{propertyKeyN:propertyValueN}]},"remove":true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param propertyMap 属性映射组
 	 * @param collection 目标集合
+	 * @param propertyMap 属性映射组
 	 * @return
 	 */
-	public T findAndRemove(Map<String, ?> propertyMap, String collection);
+	public T findAndRemove(String collection, Map<String, ?> propertyMap);
 	
 	/**
 	 * 根据属性删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
@@ -190,12 +190,12 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	 * 在目标集合中根据属性删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"propertyKey":propertyValue,"remove":true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection 目标集合
 	 * @param propertyName 属性名
 	 * @param propertyValue 属性值
-	 * @param collection 目标集合
 	 * @return
 	 */
-	public List<T> findAllAndRemove(String propertyName, Object propertyValue, String collection);
+	public List<T> findAllAndRemove(String collection, String propertyName, Object propertyValue);
 	
 	/**
 	 * 根据属性映射组删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
@@ -212,10 +212,10 @@ public interface MongoPersistence<T, PK extends Serializable> {
 	 * 实际执行的语句为:db.collection.findAndModify({"query":{"$and":[{propertyKey1:
 	 * propertyValue1},{propertyKey2:propertyValue2},{propertyKeyN:propertyValueN}]},"remove":true})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param propertyMap 属性映射组
 	 * @param collection 目标集合
+	 * @param propertyMap 属性映射组
 	 * @return
 	 */
-	public List<T> findAllAndRemove(Map<String, ?> propertyMap, String collection);
+	public List<T> findAllAndRemove(String collection, Map<String, ?> propertyMap);
 	
 }

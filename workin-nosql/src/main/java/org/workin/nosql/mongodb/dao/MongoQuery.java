@@ -42,11 +42,11 @@ public interface MongoQuery<T, PK extends Serializable> {
 	 * 根据主键查询目标集合中的实体对象<P>
 	 * 实际执行的语句为:db.collection.findOne({"_id":id})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id 主键ID
 	 * @param collection 目标集合
+	 * @param id 主键ID
 	 * @return
 	 */
-	public T findById(PK id, String collection);
+	public T findById(String collection, PK id);
 	
 	/**
 	 * 根据属性查询出满足条件的唯一记录<P>
@@ -62,12 +62,12 @@ public interface MongoQuery<T, PK extends Serializable> {
 	 * 在目标集合中根据属性查询出满足条件的唯一记录<P>
 	 * 实际执行的语句为:db.collection.findOne({"propertyKey":propertyValue})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection 目标集合
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
-	 * @param collection 目标集合名称
 	 * @return
 	 */
-	public T findOne(String propertyName, Object propertyValue, String collection);
+	public T findOne(String collection, String propertyName, Object propertyValue);
 	
 	/**
 	 * 根据属性映射组查询出满足条件的唯一记录<P>
@@ -84,11 +84,11 @@ public interface MongoQuery<T, PK extends Serializable> {
 	 * 实际执行的语句为:db.collection.findOne({"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param propertyMap 属性映射组
 	 * @param collection 目标集合
+	 * @param propertyMap 属性映射组
 	 * @return
 	 */
-	public T findOne(Map<String, ?> propertyMap, String collection);
+	public T findOne(String collection, Map<String, ?> propertyMap);
 		
 	/**
 	 * 查询出当前集合中所有的数据对象<P>
@@ -121,12 +121,12 @@ public interface MongoQuery<T, PK extends Serializable> {
 	 * 在目标集合中从起始位置开始执行查询后，得到最大行数的记录列表<P>
 	 * 实际执行的语句为:db.collection.find({}).skip(start).limit(maxRows);
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection 目标集合
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
-	 * @param collection 目标集合
 	 * @return
 	 */
-	public List<T> find(int start, int maxRows, String collection);
+	public List<T> find(String collection, int start, int maxRows);
 	
 	/**
 	 * 根据属性查询出满足条件的记录列表<P>
@@ -142,12 +142,12 @@ public interface MongoQuery<T, PK extends Serializable> {
 	 * 在目标集合中根据属性查询出满足条件的记录列表<P>
 	 * 实际执行的语句为:db.collection.find({"propertyKey":propertyValue})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection 目标集合
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
-	 * @param collection 目标集合
 	 * @return
 	 */
-	public List<T> find(String propertyName, Object propertyValue, String collection);
+	public List<T> find(String collection, String propertyName, Object propertyValue);
 	
 	/**
 	 * 从起始位置开始，根据属性查询出满足条件的最大行数记录列表<P>
@@ -165,14 +165,14 @@ public interface MongoQuery<T, PK extends Serializable> {
 	 * 从起始位置开始，在目标集合中根据属性查询出满足条件的最大行数记录列表<P>
 	 * 实际执行的语句为:db.collection.find({"propertyKey":propertyValue}).skip(start).limit(maxRows)
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection 目标集合
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
-	 * @param collection 目标集合
 	 * @return
 	 */
-	public List<T> find(String propertyName, Object propertyValue, int start, int maxRows, String collection);
+	public List<T> find(String collection, String propertyName, Object propertyValue, int start, int maxRows);
 	
 	/**
 	 * 根据属性映射组查询出满足条件的记录列表<P>
@@ -189,11 +189,11 @@ public interface MongoQuery<T, PK extends Serializable> {
 	 * 实际执行的语句为:db.collection.find({"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 * @param propertyMap 属性映射组
 	 * @param collection 目标集合
+	 * @param propertyMap 属性映射组
 	 * @return
 	 */
-	public List<T> find(Map<String, ?> propertyMap, String collection);
+	public List<T> find(String collection, Map<String, ?> propertyMap);
 	
 	/**
 	 * 从起始位置开始，根据属性映射组查询出满足条件的最大行数记录列表<P>
@@ -212,12 +212,12 @@ public interface MongoQuery<T, PK extends Serializable> {
 	 * 实际执行的语句为:db.collection.find({"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]}).skip(start).limit(maxRows)
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection 目标集合
 	 * @param propertyMap 属性映射组
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
-	 * @param collection 目标集合
 	 * @return
 	 */
-	public List<T> find(Map<String, ?> propertyMap, int start, int maxRows, String collection);
+	public List<T> find(String collection, Map<String, ?> propertyMap, int start, int maxRows);
 	
 }

@@ -53,11 +53,11 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public void insert(T entity) {
-		insert(entity, null);
+		insert(null, entity);
 	}
 
 	@Override
-	public void insert(T entity, String collection) {
+	public void insert(String collection, T entity) {
 		if (StringUtils.isNotBlank(collection))
 			getMongoOperations().insert(entity, collection);
 		else
@@ -66,11 +66,11 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public void batchInsert(Collection<T> entities) {
-		batchInsert(entities, (String) null);
+		batchInsert(null, entities);
 	}
 
 	@Override
-	public void batchInsert(Collection<T> entities, String collection) {
+	public void batchInsert(String collection, Collection<T> entities) {
 		if (StringUtils.isNotBlank(collection))
 			getMongoOperations().insert(entities, collection);
 		else
@@ -79,21 +79,21 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public WriteResult updateById(PK id, Update update) {
-		return updateById(id, update, null);
+		return updateById(null, id, update);
 	}
 
 	@Override
-	public WriteResult updateById(PK id, Update update, String collection) {
-		return updateFirst(buildIdQuery(id), update, collection);
+	public WriteResult updateById(String collection, PK id, Update update) {
+		return updateFirst(collection, buildIdQuery(id), update);
 	}
 		
 	@Override
 	public WriteResult updateFirst(Query query, Update update) {
-		return updateFirst(query, update, null);
+		return updateFirst(null, query, update);
 	}
 	
 	@Override
-	public WriteResult updateFirst(Query query, Update update, String collection) {
+	public WriteResult updateFirst(String collection, Query query, Update update) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.updateFirst(query, update, getBeanClass(), collection)
 				: getMongoOperations().updateFirst(query, update, getBeanClass());
@@ -101,11 +101,11 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public WriteResult updateMulti(Query query, Update update) {
-		return updateMulti(query, update, null);
+		return updateMulti(null, query, update);
 	}
 
 	@Override
-	public WriteResult updateMulti(Query query, Update update, String collection) {
+	public WriteResult updateMulti(String collection, Query query, Update update) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.updateMulti(query, update, getBeanClass(), collection)
 				: getMongoOperations().updateMulti(query, update, getBeanClass());
@@ -113,21 +113,21 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public WriteResult upsertById(PK id, Update update) {
-		return upsertById(id, update, null);
+		return upsertById(null, id, update);
 	}
 
 	@Override
-	public WriteResult upsertById(PK id, Update update, String collection) {
-		return upsertOne(buildIdQuery(id), update, collection);
+	public WriteResult upsertById(String collection, PK id, Update update) {
+		return upsertOne(collection, buildIdQuery(id), update);
 	}
 
 	@Override
 	public WriteResult upsertOne(Query query, Update update) {
-		return upsertOne(query, update, null);
+		return upsertOne(null, query, update);
 	}
 	
 	@Override
-	public WriteResult upsertOne(Query query, Update update, String collection) {
+	public WriteResult upsertOne(String collection, Query query, Update update) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.upsert(query, update, getBeanClass(), collection)
 				: getMongoOperations().upsert(query, update, getBeanClass());
@@ -145,11 +145,11 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public void save(T entity) {
-		save(entity, null);
+		save(null, entity);
 	}
 	
 	@Override
-	public void save(T entity, String collection) {
+	public void save(String collection, T entity) {
 		if (StringUtils.isNotBlank(collection))
 			getMongoOperations().save(entity, collection);
 		else
@@ -158,46 +158,46 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public WriteResult remove(T entity) {
-		return remove(entity, null);
+		return remove(null, entity);
 	}
 
 	@Override
-	public WriteResult remove(T entity, String collection) {
+	public WriteResult remove(String collection, T entity) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations().remove(
 				entity, collection) : getMongoOperations().remove(entity);
 	}
 	
 	@Override
 	public WriteResult remove(PK id) {
-		return remove(id, null);
+		return remove(null, id);
 	}
 
 	@Override
-	public WriteResult remove(PK id, String collection) {
-		T entity = findById(id, collection);
+	public WriteResult remove(String collection, PK id) {
+		T entity = findById(collection, id);
 		if (entity != null)
-			return getMongoOperations().remove(entity);
+			return getMongoOperations().remove(entity, collection);
 		
 		return null;
 	}
 	
 	@Override
 	public T findAndModify(PK id, Update update) {
-		return findAndModify(id, update, null);
+		return findAndModify(null, id, update);
 	}
 
 	@Override
-	public T findAndModify(PK id, Update update, String collection) {
-		return findAndModify(buildIdQuery(id), update, collection);
+	public T findAndModify(String collection, PK id, Update update) {
+		return findAndModify(collection, buildIdQuery(id), update);
 	}
 	
 	@Override
 	public T findAndModify(Query query, Update update) {
-		return findAndModify(query, update, null);
+		return findAndModify(null, query, update);
 	}
 
 	@Override
-	public T findAndModify(Query query, Update update, String collection) {
+	public T findAndModify(String collection, Query query, Update update) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.findAndModify(query, update, getBeanClass(), collection)
 				: getMongoOperations().findAndModify(query, update, getBeanClass());
@@ -205,41 +205,41 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public T findAndRemove(PK id) {
-		return findAndRemove(id, null);
+		return findAndRemove(null, id);
 	}
 
 	@Override
-	public T findAndRemove(PK id, String collection) {
-		return findAndRemove(buildIdQuery(id), collection);
+	public T findAndRemove(String collection, PK id) {
+		return findAndRemove(collection, buildIdQuery(id));
 	}
 	
 	@Override
 	public T findAndRemove(String propertyName, Object propertyValue) {
-		return findAndRemove(propertyName, propertyValue, null);
+		return findAndRemove(null, propertyName, propertyValue);
 	}
 
 	@Override
-	public T findAndRemove(String propertyName, Object propertyValue, String collection) {
-		return findAndRemove(buildPropertyQuery(propertyName, propertyValue), collection);
+	public T findAndRemove(String collection, String propertyName, Object propertyValue) {
+		return findAndRemove(collection, buildPropertyQuery(propertyName, propertyValue));
 	}
 	
 	@Override
 	public T findAndRemove(Map<String, ?> propertyMap) {
-		return findAndRemove(propertyMap, null);
+		return findAndRemove(null, propertyMap);
 	}
 
 	@Override
-	public T findAndRemove(Map<String, ?> propertyMap, String collection) {
-		return findAndRemove(buildPropertiesAndQuery(propertyMap), collection);
+	public T findAndRemove(String collection, Map<String, ?> propertyMap) {
+		return findAndRemove(collection, buildPropertiesAndQuery(propertyMap));
 	}
 
 	@Override
 	public T findAndRemove(Query query) {
-		return findAndRemove(query, null);
+		return findAndRemove(null, query);
 	}
 
 	@Override
-	public T findAndRemove(Query query, String collection) {
+	public T findAndRemove(String collection, Query query) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.findAndRemove(query, getBeanClass(), collection)
 				: getMongoOperations().findAndRemove(query, getBeanClass());
@@ -247,31 +247,31 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> findAllAndRemove(String propertyName, Object propertyValue) {
-		return findAllAndRemove(propertyName, propertyValue, null);
+		return findAllAndRemove(null, propertyName, propertyValue);
 	}
 
 	@Override
-	public List<T> findAllAndRemove(String propertyName, Object propertyValue, String collection) {
-		return findAllAndRemove(buildPropertyQuery(propertyName, propertyValue), collection);
+	public List<T> findAllAndRemove(String collection, String propertyName, Object propertyValue) {
+		return findAllAndRemove(collection, buildPropertyQuery(propertyName, propertyValue));
 	}
 
 	@Override
 	public List<T> findAllAndRemove(Map<String, ?> propertyMap) {
-		return findAllAndRemove(propertyMap, null);
+		return findAllAndRemove(null, propertyMap);
 	}
 
 	@Override
-	public List<T> findAllAndRemove(Map<String, ?> propertyMap, String collection) {
-		return findAllAndRemove(buildPropertiesAndQuery(propertyMap), collection);
+	public List<T> findAllAndRemove(String collection, Map<String, ?> propertyMap) {
+		return findAllAndRemove(collection, buildPropertiesAndQuery(propertyMap));
 	}
 	
 	@Override
 	public List<T> findAllAndRemove(Query query) {
-		return findAllAndRemove(query, null);
+		return findAllAndRemove(null, query);
 	}
 
 	@Override
-	public List<T> findAllAndRemove(Query query, String collection) {
+	public List<T> findAllAndRemove(String collection, Query query) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.findAllAndRemove(query, getBeanClass(), collection)
 				: getMongoOperations().findAllAndRemove(query, getBeanClass());
@@ -279,11 +279,11 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public T findById(PK id) {
-		return findById(id, null);
+		return findById(null, id);
 	}
 	
 	@Override
-	public T findById(PK id, String collection) {
+	public T findById(String collection, PK id) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.findById(id, getBeanClass(), collection)
 				: getMongoOperations().findById(id, getBeanClass());
@@ -303,31 +303,31 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T findOne(String propertyName, Object propertyValue) {
-		return findOne(propertyName, propertyValue, null);
+		return findOne(null, propertyName, propertyValue);
 	}
 
 	@Override
-	public T findOne(String propertyName, Object propertyValue, String collection) {
-		return findOne(buildPropertyQuery(propertyName, propertyValue), collection);
+	public T findOne(String collection, String propertyName, Object propertyValue) {
+		return findOne(collection, buildPropertyQuery(propertyName, propertyValue));
 	}
 
 	@Override
 	public T findOne(Map<String, ?> propertyMap) {
-		return findOne(propertyMap, null);
+		return findOne(null, propertyMap);
 	}
 
 	@Override
-	public T findOne(Map<String, ?> propertyMap, String collection) {
-		return findOne(buildPropertiesAndQuery(propertyMap), collection);
+	public T findOne(String collection, Map<String, ?> propertyMap) {
+		return findOne(collection, buildPropertiesAndQuery(propertyMap));
 	}
 	
 	@Override
 	public T findOne(Query query) {
-		return findOne(query, null);
+		return findOne(null, query);
 	}
 
 	@Override
-	public T findOne(Query query, String collection) {
+	public T findOne(String collection, Query query) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.findOne(query, getBeanClass(), collection)
 				: getMongoOperations().findOne(query, getBeanClass());
@@ -335,11 +335,11 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> find(int start, int maxRows) {
-		return find(start, maxRows, null);
+		return find((String) null, start, maxRows);
 	}
 
 	@Override
-	public List<T> find(int start, int maxRows, String collection) {
+	public List<T> find(String collection, int start, int maxRows) {
 		Query query = buildOffsetQuery(start, maxRows);
 		return StringUtils.isNotBlank(collection) ? getMongoOperations().find(
 				query, getBeanClass(), collection) : getMongoOperations().find(
@@ -348,51 +348,51 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	
 	@Override
 	public List<T> find(String propertyName, Object propertyValue) {
-		return find(propertyName, propertyValue, null);
+		return find(null, propertyName, propertyValue);
 	}
 
 	@Override
-	public List<T> find(String propertyName, Object propertyValue, String collection) {
-		return find(buildPropertyQuery(propertyName, propertyValue), collection);
+	public List<T> find(String collection, String propertyName, Object propertyValue) {
+		return find(collection, buildPropertyQuery(propertyName, propertyValue));
 	}
 	
 	@Override
 	public List<T> find(String propertyName, Object propertyValue, int start, int maxRows) {
-		return find(propertyName, propertyValue, start, maxRows, null);
+		return find(null, propertyName, propertyValue, start, maxRows);
 	}
 
 	@Override
-	public List<T> find(String propertyName, Object propertyValue, int start, int maxRows, String collection) {
-		return find(buildPropertyQuery(propertyName, propertyValue, start, maxRows), collection);
+	public List<T> find(String collection, String propertyName, Object propertyValue, int start, int maxRows) {
+		return find(collection, buildPropertyQuery(propertyName, propertyValue, start, maxRows));
 	}
 
 	@Override
 	public List<T> find(Map<String, ?> propertyMap) {
-		return find(propertyMap, null);
+		return find(null, propertyMap);
 	}
 
 	@Override
-	public List<T> find(Map<String, ?> propertyMap, String collection) {
-		return find(buildPropertiesAndQuery(propertyMap), collection);
+	public List<T> find(String collection, Map<String, ?> propertyMap) {
+		return find(collection, buildPropertiesAndQuery(propertyMap));
 	}
 	
 	@Override
 	public List<T> find(Map<String, ?> propertyMap, int start, int maxRows) {
-		return find(propertyMap, start, maxRows, null);
+		return find(null, propertyMap, start, maxRows);
 	}
 
 	@Override
-	public List<T> find(Map<String, ?> propertyMap, int start, int maxRows, String collection) {
-		return find(buildPropertiesAndQuery(propertyMap, start, maxRows), collection);
+	public List<T> find(String collection, Map<String, ?> propertyMap, int start, int maxRows) {
+		return find(collection, buildPropertiesAndQuery(propertyMap, start, maxRows));
 	}
 
 	@Override
 	public List<T> find(Query query) {
-		return find(query, null);
+		return find(null, query);
 	}
 
 	@Override
-	public List<T> find(Query query, String collection) {
+	public List<T> find(String collection, Query query) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
 				.find(query, getBeanClass(), collection) 
 				: getMongoOperations().find(query, getBeanClass());

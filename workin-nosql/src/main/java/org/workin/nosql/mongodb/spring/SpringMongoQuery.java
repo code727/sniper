@@ -45,11 +45,11 @@ public interface SpringMongoQuery<T, PK extends Serializable> extends
 	 * 在目标集合中查询出满足条件的唯一记录<p>
 	 * 实际执行的语句为:db.collection.findOne({查询}})
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param query 查询条件
 	 * @param collection 目标集合
+	 * @param query 查询条件
 	 * @return
 	 */
-	public T findOne(Query query, String collection);
+	public T findOne(String collection, Query query);
 	
 	/**
 	 * 查询出满足条件的记录列表<p>
@@ -68,6 +68,6 @@ public interface SpringMongoQuery<T, PK extends Serializable> extends
 	 * @param collection 目标集合
 	 * @return
 	 */
-	public List<T> find(Query query, String collection);
+	public List<T> find(String collection, Query query);
 
 }
