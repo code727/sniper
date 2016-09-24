@@ -27,6 +27,9 @@ import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mapping.context.MappingContext;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.aggregation.LimitOperation;
+import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.aggregation.SkipOperation;
 import org.springframework.data.mongodb.core.convert.MongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
@@ -119,7 +122,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	protected String getKeyName(String propertyName) {
 		if (StringUtils.isBlank(propertyName))
 			return StringUtils.EMPTY_STRING;
-				
+		
 		MongoPersistentEntity<?> persistentEntity = getMongoPersistentEntity();
 		MongoPersistentProperty property = (persistentEntity != null ? persistentEntity
 				.getPersistentProperty(propertyName) : null);
@@ -133,7 +136,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	 * @return
 	 */
 	protected Query buildIdQuery(PK id) {
-		return new Query(Criteria.where(getIdKeyName()).is(id));
+		return new Query(buildWhereIsCriteria(id));
 	}
 	
 	/**
@@ -225,6 +228,16 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 		query.addCriteria(buildWhereIsOrCriteria(propertyMap));
 		setOffsetQuery(query, start, maxRows);
 		return query;
+	}
+	
+	/**
+	 * 将ID属性名和属性值构建成where-is条件
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @return
+	 */
+	protected Criteria buildWhereIsCriteria(PK id) {
+		return Criteria.where(getIdKeyName()).is(id);
 	}
 	
 	/**
@@ -321,6 +334,59 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 		
 		if (maxRows > 0)
 			query.limit(maxRows);
+	}
+	
+	/**
+	 * 将ID属性名和属性值构建成where-is条件的MatchOperation对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param id
+	 * @return
+	 */
+	protected MatchOperation buildWhereIsMatchOperation(PK id) {
+		MatchOperation matchOperation = new MatchOperation(buildWhereIsCriteria(id));
+		System.out.println("-------------" + matchOperation + "----------------");
+		return matchOperation;
+	}
+	
+	/**
+	 * 将属性名和属性值构建成where-is条件的MatchOperation对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyName
+	 * @param propertyValue
+	 * @return
+	 */
+	protected MatchOperation buildWhereIsMatchOperation(String propertyName, Object propertyValue) {
+		return new MatchOperation(buildWhereIsCriteria(propertyName, propertyValue));
+	}
+	
+	/**
+	 * 将属性映射组构建成多个where-is"逻辑与"条件的MatchOperation对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyMap
+	 * @return
+	 */
+	protected MatchOperation buildWhereIsMatchAndOperation(Map<String, ?> propertyMap) {
+		return new MatchOperation(buildWhereIsAndCriteria(propertyMap));
+	}
+	
+	/**
+	 * 根据起始位置构建SkipOperation对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param start
+	 * @return
+	 */
+	protected SkipOperation buildSkipOperation(int start) {
+		return start >=0 ? new SkipOperation(start) : null;
+	}
+	
+	/**
+	 * 根据最大行数构建LimitOperation对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param maxRows
+	 * @return
+	 */
+	protected LimitOperation buildLimitOperation(int maxRows) {
+		return maxRows >= 0 ? new LimitOperation(maxRows) : null;
 	}
 		
 }
