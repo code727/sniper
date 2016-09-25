@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mapping.context.MappingContext;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -47,6 +48,8 @@ import org.workin.spring.beans.AbstractGenricBean;
  */
 public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 		AbstractGenricBean<T> {
+	
+	public static final String ID_KEY_NAME = "_id";
 	
 	@Autowired
 	private MongoOperations mongoOperations;
@@ -110,7 +113,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 		MongoPersistentEntity<?> persistentEntity = getMongoPersistentEntity();
 		MongoPersistentProperty idProperty = (persistentEntity != null ? persistentEntity
 				.getIdProperty() : null);
-		return idProperty != null ? idProperty.getName() : "_id";
+		return idProperty != null ? idProperty.getName() : ID_KEY_NAME;
 	}
 	
 	/**
@@ -136,7 +139,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	 * @return
 	 */
 	protected Query buildIdQuery(PK id) {
-		return new Query(buildWhereIsCriteria(id));
+		return new Query(Criteria.where(getIdKeyName()).is(id));
 	}
 	
 	/**
@@ -228,16 +231,6 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 		query.addCriteria(buildWhereIsOrCriteria(propertyMap));
 		setOffsetQuery(query, start, maxRows);
 		return query;
-	}
-	
-	/**
-	 * 将ID属性名和属性值构建成where-is条件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
-	 * @return
-	 */
-	protected Criteria buildWhereIsCriteria(PK id) {
-		return Criteria.where(getIdKeyName()).is(id);
 	}
 	
 	/**
@@ -337,15 +330,22 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	}
 	
 	/**
-	 * 将ID属性名和属性值构建成where-is条件的MatchOperation对象
+	 * 将ID值构建成where-is条件的MatchOperation对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 * @return
 	 */
 	protected MatchOperation buildWhereIsMatchOperation(PK id) {
-		MatchOperation matchOperation = new MatchOperation(buildWhereIsCriteria(id));
-		System.out.println("-------------" + matchOperation + "----------------");
-		return matchOperation;
+		
+//		Criteria criteria = Criteria.where(getIdKeyName());
+		Criteria criteria = Criteria.where(ID_KEY_NAME);
+		
+		if (id != null && ObjectId.isValid(id.toString()))
+			criteria.is(new ObjectId(id.toString()));
+		else
+			criteria.is(id);
+		
+		return new MatchOperation(criteria);
 	}
 	
 	/**

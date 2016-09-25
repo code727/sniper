@@ -23,7 +23,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
@@ -41,7 +40,6 @@ import org.springframework.stereotype.Repository;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CollectionUtils;
-import org.workin.commons.util.ObjectUtils;
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.nosql.mongodb.MapReduceResultModel;
@@ -710,11 +708,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public <R> R aggregateFindById(String collection, PK id, Class<R> resultClass) {
-//		return aggregateFindOne(collection, buildWhereIsMatchOperation(id), resultClass);
-		// TODO 有BUG
-		String propertyName = getIdKeyName();
-		Object propertyValue = new ObjectId(ObjectUtils.toSafeString(id));
-		return aggregateFindOne(collection, "_id", propertyValue, resultClass);
+		return aggregateFindOne(collection, buildWhereIsMatchOperation(id), resultClass);
 	}
 	
 	@Override
