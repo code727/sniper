@@ -28,6 +28,7 @@ import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.LimitOperation;
 import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
 import org.springframework.data.mongodb.core.aggregation.SkipOperation;
 import org.springframework.data.mongodb.core.mapreduce.GroupBy;
 import org.springframework.data.mongodb.core.mapreduce.GroupByResults;
@@ -1002,6 +1003,13 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		
 		if (limitOperation != null)
 			operations.add(limitOperation);
+		
+		/* 投影处理 */
+		if (resultClass != getBeanClass()) {
+			ProjectionOperation projectionOperation = buildProjectionOperation(resultClass);
+			if (projectionOperation != null)
+				operations.add(projectionOperation);
+		}
 		
 		AggregationResults<R> aggregationResults = aggregate(collection, Aggregation.newAggregation(operations), resultClass);
 		return aggregationResults != null ? aggregationResults.getMappedResults() : null;

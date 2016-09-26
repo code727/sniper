@@ -28,8 +28,10 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mapping.context.MappingContext;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.LimitOperation;
 import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
 import org.springframework.data.mongodb.core.aggregation.SkipOperation;
 import org.springframework.data.mongodb.core.convert.MongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
@@ -38,6 +40,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.MapUtils;
+import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.spring.beans.AbstractGenricBean;
 
@@ -113,7 +116,8 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 		MongoPersistentEntity<?> persistentEntity = getMongoPersistentEntity();
 		MongoPersistentProperty idProperty = (persistentEntity != null ? persistentEntity
 				.getIdProperty() : null);
-		return idProperty != null ? idProperty.getName() : ID_KEY_NAME;
+		
+		return idProperty != null ? idProperty.getFieldName() : ID_KEY_NAME;
 	}
 	
 	/**
@@ -129,7 +133,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 		MongoPersistentEntity<?> persistentEntity = getMongoPersistentEntity();
 		MongoPersistentProperty property = (persistentEntity != null ? persistentEntity
 				.getPersistentProperty(propertyName) : null);
-		return property != null ? property.getName() : propertyName;
+		return property != null ? property.getFieldName() : propertyName;
 	}
 	
 	/**
@@ -182,7 +186,6 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 		return query;
 	}
 	
-	
 	/**
 	 * 构建属性映射组"逻辑与"查询对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -232,7 +235,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 		setOffsetQuery(query, start, maxRows);
 		return query;
 	}
-	
+		
 	/**
 	 * 将属性名和属性值构建成where-is条件
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -337,8 +340,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	 */
 	protected MatchOperation buildWhereIsMatchOperation(PK id) {
 		
-//		Criteria criteria = Criteria.where(getIdKeyName());
-		Criteria criteria = Criteria.where(ID_KEY_NAME);
+		Criteria criteria = Criteria.where(getIdKeyName());
 		
 		if (id != null && ObjectId.isValid(id.toString()))
 			criteria.is(new ObjectId(id.toString()));
@@ -376,7 +378,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	 * @return
 	 */
 	protected SkipOperation buildSkipOperation(int start) {
-		return start >=0 ? new SkipOperation(start) : null;
+		return start >= 0 ? new SkipOperation(start) : null;
 	}
 	
 	/**
@@ -387,6 +389,27 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	 */
 	protected LimitOperation buildLimitOperation(int maxRows) {
 		return maxRows >= 0 ? new LimitOperation(maxRows) : null;
+	}
+	
+	/**
+	 * 根据结果类型构建ProjectionOperation对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param resultClass
+	 * @return
+	 */
+	protected <R> ProjectionOperation buildProjectionOperation(Class<R> resultClass) {
+		ProjectionOperation projectionOperation = null;
+		
+		List<String> propertyNames = ReflectionUtils.getDeclaredFieldNames(resultClass);
+		if (CollectionUtils.isNotEmpty(propertyNames)) {
+			List<String> keyNames = CollectionUtils.newArrayList();
+			for (String propertyName : propertyNames) {
+				keyNames.add(getKeyName(propertyName));
+			}
+			projectionOperation = Aggregation.project(CollectionUtils.toArray(keyNames, String.class));
+		}
+		
+		return projectionOperation;
 	}
 		
 }
