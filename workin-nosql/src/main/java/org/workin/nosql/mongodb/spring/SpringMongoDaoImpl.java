@@ -997,6 +997,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		
 		if (matchOperation != null)
 			operations.add(matchOperation);
+		else
+			operations.add(new MatchOperation(new Criteria()));
 		
 		if (skipOperation != null)
 			operations.add(skipOperation);
