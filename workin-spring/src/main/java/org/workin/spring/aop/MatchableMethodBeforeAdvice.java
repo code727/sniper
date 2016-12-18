@@ -21,7 +21,7 @@ package org.workin.spring.aop;
 import java.lang.reflect.Method;
 
 import org.springframework.aop.MethodBeforeAdvice;
-import org.workin.support.context.ApplicationContextHolder;
+import org.workin.support.context.ThreadLocalHolder;
 
 /**
  * 前置型方法拦截切面抽象类
@@ -38,7 +38,7 @@ public abstract class MatchableMethodBeforeAdvice extends
 		if (super.checkMatch(method))
 			this.doBeforeTask(method, args, target);
 		
-		ApplicationContextHolder.removeAttribute(ADVICE_MATCH);
+		ThreadLocalHolder.removeAttribute(ADVICE_MATCH);
 	}
 	
 	/**

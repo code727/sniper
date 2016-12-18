@@ -24,7 +24,7 @@ import java.util.Set;
 
 import org.springframework.util.PatternMatchUtils;
 import org.workin.commons.util.CollectionUtils;
-import org.workin.support.context.ApplicationContextHolder;
+import org.workin.support.context.ThreadLocalHolder;
 
 /**
  * 可设置匹配模式的方法拦截切面抽象类
@@ -59,33 +59,33 @@ public abstract class AbstractMatchableMethodAdvice implements MatchableMethodAd
 	 */
 	protected boolean checkMatch(Method method) {
 		/* 同一个方法第一次被拦截时的检测 */
-		if (ApplicationContextHolder.getAttribute(ADVICE_MATCH) == null) {
+		if (ThreadLocalHolder.getAttribute(ADVICE_MATCH) == null) {
 			if (CollectionUtils.isNotEmpty(this.namePatterns)) {
 				// 配置有"*"号时，则所有方法都需要拦截处理
 				if (this.namePatterns.contains("*")) {
-					ApplicationContextHolder.setAttribute(ADVICE_MATCH, true);
+					ThreadLocalHolder.setAttribute(ADVICE_MATCH, true);
 					return true;
 				} else {
 					Iterator<String> iterator = this.namePatterns.iterator();
 					while (iterator.hasNext()) {
 						String pattern = iterator.next();
 						if (PatternMatchUtils.simpleMatch(pattern, method.getName())) {
-							ApplicationContextHolder.setAttribute(ADVICE_MATCH, true);
+							ThreadLocalHolder.setAttribute(ADVICE_MATCH, true);
 							return true;
 						}
 					}
-					ApplicationContextHolder.setAttribute(ADVICE_MATCH, false);
+					ThreadLocalHolder.setAttribute(ADVICE_MATCH, false);
 					return false;
 				}
 			} else {
-				ApplicationContextHolder.setAttribute(ADVICE_MATCH, true);
+				ThreadLocalHolder.setAttribute(ADVICE_MATCH, true);
 				return true;
 			}
 		} 
 		else
 			/* 同一个方法第n+1次被拦截时的检测，例如：
 			 * 环绕型拦截切面执行afterReturning()方法时则直接返回第一次执行before()方式时的检测结果 */
-			return (boolean) ApplicationContextHolder.getAttribute(ADVICE_MATCH);
+			return (boolean) ThreadLocalHolder.getAttribute(ADVICE_MATCH);
 	}
 
 	@Override

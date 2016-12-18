@@ -21,7 +21,7 @@ package org.workin.spring.aop;
 import java.lang.reflect.Method;
 
 import org.springframework.aop.AfterReturningAdvice;
-import org.workin.support.context.ApplicationContextHolder;
+import org.workin.support.context.ThreadLocalHolder;
 
 /**
  * 后置型方法拦截切面抽象类
@@ -37,7 +37,7 @@ public abstract class MatchableMethodAfterAdvice extends AbstractMatchableMethod
 		if (super.checkMatch(method)) 
 			this.doAfterReturningTask(returnValue, method, args, target);
 		
-		ApplicationContextHolder.removeAttribute(ADVICE_MATCH);
+		ThreadLocalHolder.removeAttribute(ADVICE_MATCH);
 	}
 
 	/**

@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.workin.support.context.ApplicationContextHolder;
+import org.workin.support.context.ThreadLocalHolder;
 import org.workin.web.WebUtils;
 import org.workin.web.spring.invocation.WebApplicationContextInvocation;
 
@@ -42,8 +42,8 @@ public class WebContextHelper {
 	
 	/**
 	 * 获取HttpServletRequest对象。
-	 * 				需要配置org.springframework.web.context.request.RequestContextListener过滤器或
-	 * 				org.workin.web.spring.invocation.WebApplicationContextInvocation拦截器后才能获取到不为空的对象
+	 * 需要配置org.springframework.web.context.request.RequestContextListener过滤器或
+	 * org.workin.web.spring.invocation.WebApplicationContextInvocation拦截器后才能获取到不为空的对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -52,7 +52,7 @@ public class WebContextHelper {
 				((ServletRequestAttributes) RequestContextHolder.getRequestAttributes());
 		HttpServletRequest request = null;
 		if (requestAttributes == null) {
-			request = (HttpServletRequest) ApplicationContextHolder.getAttribute(WebUtils.HTTP_SERVLET_REQUEST_NAME);
+			request = (HttpServletRequest) ThreadLocalHolder.getAttribute(WebUtils.HTTP_SERVLET_REQUEST_NAME);
 			if (request == null) 
 				logger.warn("HttpServletRequest is null,please configure ["
 						+ RequestContextListener.class + "] in web.xml or configure ["
@@ -65,12 +65,12 @@ public class WebContextHelper {
 	
 	/**
 	 * 获取HttpServletResponse对象。
-	 * 				需要配置org.workin.web.spring.invocation.WebApplicationContextInvocation拦截器后才能获取到不为空的对象
+	 * 需要配置org.workin.web.spring.invocation.WebApplicationContextInvocation拦截器后才能获取到不为空的对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public static HttpServletResponse getHttpServletResponse() {
-		HttpServletResponse response = (HttpServletResponse) ApplicationContextHolder
+		HttpServletResponse response = (HttpServletResponse) ThreadLocalHolder
 				.getAttribute(WebUtils.HTTP_SERVLET_RESPONSE_NAME);
 		
 		if (response == null)

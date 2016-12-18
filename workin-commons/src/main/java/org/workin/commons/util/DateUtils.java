@@ -23,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,10 +69,13 @@ public class DateUtils {
 	public static final String SUNDAY = "Sunday";
 	
 	/** 模式与日期时间格式关系映射集线程局部变量 */
-	private static final ThreadLocal<Map<String, SimpleDateFormat>> dateFormates = new ThreadLocal<Map<String,SimpleDateFormat>>();
+//	private static final ThreadLocal<Map<String, SimpleDateFormat>> dateFormates = new ThreadLocal<Map<String,SimpleDateFormat>>();
+	
+	/** 全局模式与日期时间格式关系映射集 */
+	private static final Map<String, SimpleDateFormat> dateFormates = MapUtils.newConcurrentHashMap();
 	
 	/** 计量单位与毫秒时间的映射关系 */
-	private static final Map<String,Long> UM_MS = new HashMap<String, Long>();
+	private static final Map<String,Long> UM_MS = MapUtils.newHashMap();
 	
 	static {
 		
@@ -122,19 +124,32 @@ public class DateUtils {
 	 * @param pattern
 	 * @return
 	 */
+//	public static SimpleDateFormat getDateFormat(String pattern) {
+//		if (StringUtils.isBlank(pattern))
+//			pattern = DEFAULT_DATETIME_FORMAT;
+//		
+//		Map<String, SimpleDateFormat> formateMap = dateFormates.get();
+//		if (formateMap == null)
+//			formateMap = MapUtils.newConcurrentHashMap();
+//		
+//		SimpleDateFormat dateFormat = formateMap.get(pattern);
+//		if (dateFormat == null) {
+//			dateFormat = new SimpleDateFormat(pattern);
+//			formateMap.put(pattern, dateFormat);
+//			dateFormates.set(formateMap);
+//		}
+//		
+//		return dateFormat;
+//	}
+	
 	public static SimpleDateFormat getDateFormat(String pattern) {
 		if (StringUtils.isBlank(pattern))
 			pattern = DEFAULT_DATETIME_FORMAT;
 		
-		Map<String, SimpleDateFormat> formateMap = dateFormates.get();
-		if (formateMap == null)
-			formateMap = MapUtils.newConcurrentHashMap();
-		
-		SimpleDateFormat dateFormat = formateMap.get(pattern);
+		SimpleDateFormat dateFormat = dateFormates.get(pattern);
 		if (dateFormat == null) {
 			dateFormat = new SimpleDateFormat(pattern);
-			formateMap.put(pattern, dateFormat);
-			dateFormates.set(formateMap);
+			dateFormates.put(pattern, dateFormat);
 		}
 		
 		return dateFormat;
@@ -774,6 +789,26 @@ public class DateUtils {
 				break;
 		}
 		return result;
+	}
+	
+	public static void main(String[] args) {
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				getDateFormat(DEFAULT_DATETIME_FORMAT);
+				
+			}
+		}).start();
+		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				getDateFormat(DEFAULT_DATETIME_FORMAT);
+				
+			}
+		}).start();
 	}
 	
 }

@@ -83,7 +83,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	}
 	
 	/**
-	 * 已宽度为优先基准创建目标像素
+	 * 以宽度为优先基准创建目标像素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param width
 	 * @param height
@@ -104,7 +104,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	}
 	
 	/**
-	 * 已高度为优先基准创建目标像素
+	 * 以高度为优先基准创建目标像素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param width
 	 * @param height

@@ -19,11 +19,11 @@
 package org.workin.support.context;
 
 /**
- * 泛型应用上下文接口
+ * 泛型上下文接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ApplicationContext<K, V> {
+public interface Context<K, V> {
 	
 	/**
 	 * 根据名称获取上下文属性值

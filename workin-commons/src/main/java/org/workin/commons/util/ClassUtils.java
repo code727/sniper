@@ -21,7 +21,6 @@ package org.workin.commons.util;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -33,10 +32,10 @@ import java.util.Map;
 public class ClassUtils {
 	
 	/** 基本类型集(K:基本类型对象,V:包装类型对象)*/
-	private static final Map<Class<?>, Class<?>> BASE_TYPES = new HashMap<Class<?>, Class<?>>(8);
+	private static final Map<Class<?>, Class<?>> BASE_TYPES = MapUtils.newHashMap(8);
 	
 	/** 包装类型集(K:包装类型对象,V:基本类型对象) */
-	private static final Map<Class<?>, Class<?>> WRAPPER_TYPES = new HashMap<Class<?>, Class<?>>(8);
+	private static final Map<Class<?>, Class<?>> WRAPPER_TYPES = MapUtils.newHashMap(8);
 	
 	static {
 		

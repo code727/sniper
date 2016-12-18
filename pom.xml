@@ -89,5 +89,6 @@
 		<module>workin-image</module>
 		<module>workin-serialization</module>
 		<module>workin-templet</module>
+		<module>workin-kafka</module>
 	</modules>
 </project>

@@ -23,11 +23,11 @@ import java.util.Map;
 import org.workin.commons.util.MapUtils;
 
 /**
- * 基于Map类型线程局部变量上下文对象
+ * 基于Map类型的线程局部变量上下文对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MapThreadLocalContext<K, V> implements ApplicationContext<K, V> {
+public class MapThreadLocalContext<K, V> implements Context<K, V> {
 	
 	private static final ThreadLocal<Object> context = new ThreadLocal<Object>();
 

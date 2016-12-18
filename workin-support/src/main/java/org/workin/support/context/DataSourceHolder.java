@@ -23,7 +23,7 @@ package org.workin.support.context;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DataSourceHolder extends ApplicationContextHolder {
+public class DataSourceHolder extends ThreadLocalHolder {
 	
 	public static final String CURRENT_DATASOURCE_NAME = "current_datasource_name";
 	

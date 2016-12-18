@@ -788,7 +788,6 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public <R> List<R> aggregateFind(int start, int maxRows, Class<R> resultClass) {
 		return aggregateFind((String) null, start, maxRows, resultClass);
 	}
-
 	
 	@Override
 	public <R> List<R> aggregateFind(String collection, int start, int maxRows, Class<R> resultClass) {
@@ -838,7 +837,6 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		
 		return aggregateFind(null, propertyName, propertyValue, start, maxRows, resultClass);
 	}
-	
 
 	@Override
 	public <R> List<R> aggregateFind(String collection, String propertyName,

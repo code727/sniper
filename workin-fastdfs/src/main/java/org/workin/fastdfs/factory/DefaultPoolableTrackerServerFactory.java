@@ -24,7 +24,7 @@ import java.net.Socket;
 import org.apache.commons.pool.PoolableObjectFactory;
 import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.TrackerServer;
-import org.workin.support.context.ApplicationContextHolder;
+import org.workin.support.context.ThreadLocalHolder;
 
 /**
  * 可池化的TrackerServer对象工厂默认实现类
@@ -36,7 +36,7 @@ public class DefaultPoolableTrackerServerFactory implements PoolableObjectFactor
 	@Override
 	public TrackerServer makeObject() throws Exception {
 		return ClientGlobal.g_tracker_group.getConnection(
-				(int) ApplicationContextHolder.getAttribute("CURRENT_TRACKERSERVER_INDEX"));
+				(int) ThreadLocalHolder.getAttribute("CURRENT_TRACKERSERVER_INDEX"));
 	}
 
 	@Override

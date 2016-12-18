@@ -23,9 +23,9 @@ package org.workin.support.context;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ApplicationContextHolder {
+public class ThreadLocalHolder {
 		
-	private static final ApplicationContext<Object, Object> holder = newMapThreadLocalContext();
+	private static final Context<Object, Object> holder = newMapThreadLocalContext();
 	
 	/**
 	 * 清除上下文
@@ -66,7 +66,7 @@ public class ApplicationContextHolder {
 	}
 		
 	/**
-	 * 创建基于Map类型的线程局部变量
+	 * 创建基于Map类型的线程局部变量上下文对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

@@ -28,7 +28,7 @@ import org.workin.commons.util.StringUtils;
 import org.workin.fastdfs.factory.DefaultPoolableStorageServerFactory;
 import org.workin.fastdfs.factory.DefaultPoolableTrackerServerFactory;
 import org.workin.fastdfs.factory.PoolableStorageServerFactory;
-import org.workin.support.context.ApplicationContextHolder;
+import org.workin.support.context.ThreadLocalHolder;
 
 /**
  * 池化的连接工厂实现类
@@ -85,7 +85,7 @@ public class PoolConnectionFactory extends AbstractConnectionFactory implements 
 
 	@Override
 	public TrackerServer getTrackerServer(int index) throws Exception {
-		ApplicationContextHolder.setAttribute("CURRENT_TRACKERSERVER_INDEX", index);
+		ThreadLocalHolder.setAttribute("CURRENT_TRACKERSERVER_INDEX", index);
 		return this.trackerServerPool.borrowObject();
 	}
 
@@ -96,16 +96,16 @@ public class PoolConnectionFactory extends AbstractConnectionFactory implements 
 
 	@Override
 	public StorageServer getStorageServer(TrackerServer trackerServer, String groupName) throws Exception {
-		ApplicationContextHolder.setAttribute("CURRENT_TRACKERSERVER", trackerServer);
-		ApplicationContextHolder.setAttribute("CURRENT_STORAGE_GROUPNAME", StringUtils.safeString(groupName));
+		ThreadLocalHolder.setAttribute("CURRENT_TRACKERSERVER", trackerServer);
+		ThreadLocalHolder.setAttribute("CURRENT_STORAGE_GROUPNAME", StringUtils.safeString(groupName));
 		return this.storageServerPool.borrowObject();
 	}
 
 	@Override
 	public void release(TrackerServer trackerServer, StorageServer storageServer) throws Exception {
-		ApplicationContextHolder.removeAttribute("CURRENT_TRACKERSERVER_INDEX");
-		ApplicationContextHolder.removeAttribute("CURRENT_TRACKERSERVER");
-		ApplicationContextHolder.removeAttribute("CURRENT_STORAGE_GROUPNAME");
+		ThreadLocalHolder.removeAttribute("CURRENT_TRACKERSERVER_INDEX");
+		ThreadLocalHolder.removeAttribute("CURRENT_TRACKERSERVER");
+		ThreadLocalHolder.removeAttribute("CURRENT_STORAGE_GROUPNAME");
 		try {
 			if (storageServer != null)
 				this.storageServerPool.returnObject(storageServer);

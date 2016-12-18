@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.support.context.ApplicationContextHolder;
+import org.workin.support.context.ThreadLocalHolder;
 
 /**
  * java.util.ResourceBundle消息解析服务实现类
@@ -66,11 +66,11 @@ public class ResourceBundleMessageService implements MessageService {
 			locale = Locale.getDefault();
 		
 		String attribute = baseName + "_" + locale;
-		ResourceBundle besourceBundle = (ResourceBundle) ApplicationContextHolder.getAttribute(attribute);
+		ResourceBundle besourceBundle = (ResourceBundle) ThreadLocalHolder.getAttribute(attribute);
 		if (besourceBundle == null) {
 			try {
 				besourceBundle = ResourceBundle.getBundle(baseName, locale);
-				ApplicationContextHolder.setAttribute(attribute, besourceBundle);
+				ThreadLocalHolder.setAttribute(attribute, besourceBundle);
 			} catch (MissingResourceException e) {}
 			
 		}

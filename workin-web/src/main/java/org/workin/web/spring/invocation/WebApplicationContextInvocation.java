@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.workin.support.context.ApplicationContextHolder;
+import org.workin.support.context.ThreadLocalHolder;
 import org.workin.web.WebUtils;
 
 /**
@@ -36,9 +36,9 @@ public class WebApplicationContextInvocation extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		/* 当执行请求之前，将request和response对象设置到应用上下文对象 */
-		ApplicationContextHolder.setAttribute(WebUtils.HTTP_SERVLET_REQUEST_NAME, request);
-		ApplicationContextHolder.setAttribute(WebUtils.HTTP_SERVLET_RESPONSE_NAME, response);
-		ApplicationContextHolder.setAttribute(WebUtils.HTTP_SESSION_NAME, request.getSession());
+		ThreadLocalHolder.setAttribute(WebUtils.HTTP_SERVLET_REQUEST_NAME, request);
+		ThreadLocalHolder.setAttribute(WebUtils.HTTP_SERVLET_RESPONSE_NAME, response);
+		ThreadLocalHolder.setAttribute(WebUtils.HTTP_SESSION_NAME, request.getSession());
 		return super.preHandle(request, response, handler);
 	}
 	
@@ -47,9 +47,9 @@ public class WebApplicationContextInvocation extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		/* 当请求执行结束后，将request和response从应用上下文对象中清除 */
-		ApplicationContextHolder.removeAttribute(WebUtils.HTTP_SERVLET_REQUEST_NAME);
-		ApplicationContextHolder.removeAttribute(WebUtils.HTTP_SERVLET_RESPONSE_NAME);
-		ApplicationContextHolder.removeAttribute(WebUtils.HTTP_SESSION_NAME);
+		ThreadLocalHolder.removeAttribute(WebUtils.HTTP_SERVLET_REQUEST_NAME);
+		ThreadLocalHolder.removeAttribute(WebUtils.HTTP_SERVLET_RESPONSE_NAME);
+		ThreadLocalHolder.removeAttribute(WebUtils.HTTP_SESSION_NAME);
 		super.afterCompletion(request, response, handler, ex);
 	}
 	

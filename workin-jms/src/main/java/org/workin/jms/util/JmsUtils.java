@@ -51,7 +51,7 @@ public class JmsUtils {
 	 */
 	public static void rollback(Session session) throws JMSException {
 		if (session != null)
-			session.close();
+			session.rollback();
 	}
 	
 	/**

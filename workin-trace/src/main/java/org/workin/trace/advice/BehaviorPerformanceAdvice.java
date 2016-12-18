@@ -26,7 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.workin.commons.util.DateUtils;
 import org.workin.spring.aop.MatchableMethodAroundAdvice;
-import org.workin.support.context.ApplicationContextHolder;
+import org.workin.support.context.ThreadLocalHolder;
 import org.workin.trace.domain.BehaviorPerformance;
 import org.workin.trace.service.BehaviorPerformanceLoggerService;
 import org.workin.trace.service.BehaviorPerformanceService;
@@ -62,11 +62,11 @@ public class BehaviorPerformanceAdvice extends MatchableMethodAroundAdvice {
 	@Override
 	protected void doBeforeTask(Method method, Object[] args, Object target) {
 		
-		Stack<BehaviorPerformance> methodStack = (Stack<BehaviorPerformance>) ApplicationContextHolder.getAttribute(BEHAVIOR_PERFORMANCE);
+		Stack<BehaviorPerformance> methodStack = (Stack<BehaviorPerformance>) ThreadLocalHolder.getAttribute(BEHAVIOR_PERFORMANCE);
 		
 		if (methodStack == null) {
 			methodStack = new Stack<BehaviorPerformance>();
-			ApplicationContextHolder.setAttribute(BEHAVIOR_PERFORMANCE, methodStack);
+			ThreadLocalHolder.setAttribute(BEHAVIOR_PERFORMANCE, methodStack);
 		}
 		
 		BehaviorPerformance behaviorPerformance = new BehaviorPerformance();
@@ -84,7 +84,7 @@ public class BehaviorPerformanceAdvice extends MatchableMethodAroundAdvice {
 			Object[] args, Object target) throws Throwable {
 		
 		// 从堆栈里取出最近一个被doBeforeTask()处理的方法BehaviorPerformance对象，可保证总是先得到最里层的方法
-		BehaviorPerformance behaviorPerformance = ((Stack<BehaviorPerformance>) ApplicationContextHolder
+		BehaviorPerformance behaviorPerformance = ((Stack<BehaviorPerformance>) ThreadLocalHolder
 				.getAttribute(BEHAVIOR_PERFORMANCE)).pop();
 		
 		if (method == behaviorPerformance.getMethod()) {
