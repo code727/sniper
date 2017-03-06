@@ -21,14 +21,26 @@ package org.workin.payment;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.workin.commons.entity.number.Idable;
-
 /**
  * 订单接口对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Order extends Idable {
+public interface Order {
+	
+	/**
+	 * 获取订单编号
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getOrderId();
+
+	/**
+	 * 设置订单编号
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param orderId
+	 */
+	public void setOrderId(String orderId);
 	
 	/**
 	 * 获取支付用户登录账号
@@ -43,20 +55,6 @@ public interface Order extends Idable {
 	 * @param loginName
 	 */
 	public void setLoginName(String loginName);
-
-	/**
-	 * 获取订单编号
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getOrderId();
-
-	/**
-	 * 设置订单编号
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param orderId
-	 */
-	public void setOrderId(String orderId);
 
 	/**
 	 * 获取支付类型

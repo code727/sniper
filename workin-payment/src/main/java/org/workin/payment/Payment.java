@@ -21,14 +21,12 @@ package org.workin.payment;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.workin.commons.entity.number.Idable;
-
 /**
  * 支付记录实体
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Payment extends Idable {
+public interface Payment {
 
 	/**
 	 * 获取订单编号

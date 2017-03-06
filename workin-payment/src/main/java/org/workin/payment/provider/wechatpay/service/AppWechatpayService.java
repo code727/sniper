@@ -37,8 +37,8 @@ import org.workin.payment.provider.wechatpay.enums.ResultCode;
 import org.workin.payment.provider.wechatpay.enums.ReturnCode;
 import org.workin.payment.provider.wechatpay.parser.WechatpayParser;
 import org.workin.payment.provider.wechatpay.signature.WechatpayMD5Signature;
-import org.workin.support.signature.SymmetricSignature;
 import org.workin.support.signature.Signature;
+import org.workin.support.signature.SymmetricSignature;
 
 /**
  * APP版微信支付服务实现类
@@ -217,10 +217,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		else 
 			payment.setMessage(ThirdPaymentStatus.getPaymentMessage(errCode));
 		
-		if (payment.getId() != null)
-			result = paymentService.update(payment);
-		else
-			result = paymentService.save(payment);
+		result = paymentService.update(payment);
 		
 		return result;
 	}
@@ -269,10 +266,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 			else
 				payment.setPayTime(null);
 			
-			if (payment.getId() != null)
-				result = paymentService.update(payment);
-			else
-				result = paymentService.save(payment);
+			result = paymentService.update(payment);
 		}  else 
 			// 不重复处理"已成功"或"已完成"的支付记录
 			result.setCode(SystemStatus.FAILED.getKey());

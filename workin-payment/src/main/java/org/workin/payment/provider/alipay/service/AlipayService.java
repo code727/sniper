@@ -81,10 +81,7 @@ public abstract class AlipayService<T, P> extends AbstractPaymentService<T, P> {
 			else
 				payment.setPayTime(null);
 			
-			if (payment.getId() != null)
-				result = paymentService.update(payment);
-			else
-				result = paymentService.save(payment);
+			result = paymentService.update(payment);
 		} else 
 			// 不重复处理"已成功"或"已完成"的支付记录
 			result.setCode(SystemStatus.FAILED.getKey());
