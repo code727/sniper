@@ -37,5 +37,10 @@ public abstract class SequenceCuAuditEntity extends CuAuditEntity<Long> {
 	public Long getId() {
 		return super.getId();
 	}
+	
+	@Override
+	public void setId(Long id) {
+		super.setId(id);
+	}
 
 }

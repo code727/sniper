@@ -31,10 +31,12 @@ public abstract class IdEntity<PK extends Serializable> implements Idable<PK>{
 	/** 主键ID */
 	private PK id;
 
+	@Override
 	public PK getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(PK id) {
 		this.id = id;
 	}

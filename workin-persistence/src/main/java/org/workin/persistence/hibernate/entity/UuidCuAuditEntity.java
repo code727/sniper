@@ -40,5 +40,10 @@ public abstract class UuidCuAuditEntity extends CuAuditEntity<String> {
 	public String getId() {
 		return super.getId();
 	}
+	
+	@Override
+	public void setId(String id) {
+		super.setId(id);
+	}
 
 }

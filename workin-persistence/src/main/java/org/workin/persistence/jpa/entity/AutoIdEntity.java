@@ -40,4 +40,9 @@ public abstract class AutoIdEntity extends IdEntity<Long> {
 		return super.getId();
 	}
 	
+	@Override
+	public void setId(Long id) {
+		super.setId(id);
+	}
+	
 }

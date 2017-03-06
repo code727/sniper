@@ -38,4 +38,9 @@ public abstract class IdentityCuAuditEntity extends CuAuditEntity<Long> {
 		return super.getId();
 	}
 	
+	@Override
+	public void setId(Long id) {
+		super.setId(id);
+	}
+	
 }
