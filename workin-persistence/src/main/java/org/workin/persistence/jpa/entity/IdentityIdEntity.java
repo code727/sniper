@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *  
- * Create Date : 2015-1-27
+ * Create Date : 2015-1-28
  */
 
-package org.workin.persistence.jpa.entity.strategy;
+package org.workin.persistence.jpa.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.workin.persistence.jpa.entity.CuAuditableEntity;
+import org.workin.commons.entity.IdEntity;
 
 /**
- * Identity主键类型的新增更新审核实体抽象类
+ * Identity主键类型的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class IdentityCuAuditEntity extends CuAuditableEntity {
+public abstract class IdentityIdEntity extends IdEntity<Long> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

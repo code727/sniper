@@ -24,7 +24,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
-import org.workin.commons.entity.CuAuditableEntity;
+import org.workin.commons.entity.CuAuditEntity;
 import org.workin.persistence.CuAuditEventListener;
 
 /**
@@ -34,7 +34,7 @@ import org.workin.persistence.CuAuditEventListener;
  */
 @MappedSuperclass
 @EntityListeners(value = { CuAuditEventListener.class })
-public abstract class JpaCuAuditableEntity extends CuAuditableEntity {
+public abstract class JpaCuAuditEntity extends CuAuditEntity {
 	
 	@Column(length = 30, updatable = false)
 	public Date getCreateTime() {

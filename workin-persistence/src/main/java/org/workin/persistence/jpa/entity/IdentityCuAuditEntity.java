@@ -16,28 +16,26 @@
  * Create Date : 2015-1-27
  */
 
-package org.workin.persistence.jpa.entity.strategy;
+package org.workin.persistence.jpa.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.workin.persistence.jpa.entity.CuAuditableEntity;
-
 /**
- * Sequence主键类型的新增更新审核实体抽象类
+ * Identity主键类型的新增/更新审核实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class SequenceCuAuditEntity extends CuAuditableEntity { 
+public abstract class IdentityCuAuditEntity extends CuAuditEntity<Long> {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return super.getId();
 	}
-
+	
 }

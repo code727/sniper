@@ -13,37 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-1-27
+ * Create Date : 2015-12-15
  */
 
-package org.workin.persistence.jpa.entity.strategy;
+package org.workin.persistence.jpa.entity;
 
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import org.workin.commons.entity.Lockable;
+import org.workin.commons.entity.Versioned;
 
 /**
- * Identity主键类型可锁定的实体抽象类
+ * Table主键类型版本化的新增/修改审核实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
-@MappedSuperclass
-public abstract class IdentityLockableIdEntity extends IdentityIdEntity implements Lockable {
+public abstract class TableVersionedCuAuditEntity extends TableCuAuditEntity implements Versioned {
 	
 	/** 版本号 */
 	private long version;
-	
+
 	@Version
 	public long getVersion() {
 		return this.version;
 	}
-	
+
 	@Override
 	public void setVersion(long version) {
 		this.version = version;
 	}
-	
 
 }

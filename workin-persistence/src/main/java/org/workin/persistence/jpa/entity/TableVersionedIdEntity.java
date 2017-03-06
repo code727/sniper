@@ -12,34 +12,34 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- * Create Date : 2015-12-15
+ *  
+ * Create Date : 2015-1-27
  */
 
-package org.workin.persistence.jpa.entity.strategy;
+package org.workin.persistence.jpa.entity;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import org.workin.commons.entity.Lockable;
+import org.workin.commons.entity.Versioned;
 
 /**
- * Auto主键类型可锁定的新增修改审核实体抽象类
+ * Table主键类型版本化的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class AutoLockableCuAuditEntity extends AutoCuAuditEntity implements Lockable {
+public abstract class TableVersionedIdEntity extends TableIdEntity implements Versioned {
 	
 	/** 版本号 */
 	private long version;
-
+	
 	@Version
 	public long getVersion() {
 		return this.version;
 	}
-
+	
 	@Override
 	public void setVersion(long version) {
 		this.version = version;

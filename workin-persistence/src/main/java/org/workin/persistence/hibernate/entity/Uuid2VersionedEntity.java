@@ -21,16 +21,16 @@ package org.workin.persistence.hibernate.entity;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import org.workin.commons.entity.Lockable;
+import org.workin.commons.entity.Versioned;
 
 /**
- * GUID主键类型可锁定的实体抽象类
+ * UUID2主键类型版本化的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class GuidLockableEntity extends GuidEntity implements Lockable {
+public abstract class Uuid2VersionedEntity extends Uuid2Entity implements Versioned {
 	
 	/** 版本号 */
 	private long version;
@@ -44,5 +44,5 @@ public abstract class GuidLockableEntity extends GuidEntity implements Lockable 
 	public void setVersion(long version) {
 		this.version = version;
 	}
-	
+
 }

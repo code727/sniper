@@ -12,8 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *  
- * Create Date : 2015-2-2
+ * 
+ * Create Date : 2015-12-15
  */
 
 package org.workin.persistence.hibernate.entity;
@@ -21,16 +21,16 @@ package org.workin.persistence.hibernate.entity;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import org.workin.commons.entity.Lockable;
+import org.workin.commons.entity.Versioned;
 
 /**
- * UUID2主键类型可锁定的实体抽象类
+ * UUID主键类型版本化的新增/修改审核实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class Uuid2LockableEntity extends Uuid2Entity implements Lockable {
+public abstract class UuidVersionedCuAuditEntity extends UuidCuAuditEntity implements Versioned {
 	
 	/** 版本号 */
 	private long version;

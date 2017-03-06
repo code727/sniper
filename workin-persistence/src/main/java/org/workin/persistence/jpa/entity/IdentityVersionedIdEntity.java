@@ -13,35 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年12月15日
+ * Create Date : 2015-1-27
  */
 
 package org.workin.persistence.jpa.entity;
 
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
-import org.workin.commons.entity.number.Idable;
+import org.workin.commons.entity.Versioned;
 
 /**
- * JPA可进行新增修改审核的实体抽象类
+ * Identity主键类型版本化的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class CuAuditableEntity extends JpaCuAuditableEntity implements Idable {
+public abstract class IdentityVersionedIdEntity extends IdentityIdEntity implements Versioned {
 	
-	/** 主键ID */
-	private Long id;
-
-	@Override
-	public Long getId() {
-		return this.id;
+	/** 版本号 */
+	private long version;
+	
+	@Version
+	public long getVersion() {
+		return this.version;
 	}
-
+	
 	@Override
-	public void setId(Long id) {
-		this.id = id;
+	public void setVersion(long version) {
+		this.version = version;
 	}
+	
 
 }

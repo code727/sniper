@@ -16,14 +16,14 @@
  * Create Date : 2015-1-28
  */
 
-package org.workin.persistence.jpa.entity.strategy;
+package org.workin.persistence.jpa.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.workin.commons.entity.number.IdEntity;
+import org.workin.commons.entity.IdEntity;
 
 /**
  * Auto主键类型实体抽象类
@@ -32,7 +32,7 @@ import org.workin.commons.entity.number.IdEntity;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class AutoIdEntity extends IdEntity {
+public abstract class AutoIdEntity extends IdEntity<Long> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -12,32 +12,39 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *  
- * Create Date : 2015-1-28
+ * 
+ * Create Date : 2015年12月15日
  */
 
-package org.workin.persistence.jpa.entity.strategy;
+package org.workin.persistence.jpa.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
+
 import javax.persistence.MappedSuperclass;
 
-import org.workin.commons.entity.number.IdEntity;
+import org.workin.commons.entity.Idable;
 
 /**
- * Identity主键类型的实体抽象类
+ * JPA可进行新增/修改审核的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class IdentityIdEntity extends IdEntity {
+public abstract class CuAuditEntity<PK extends Serializable> extends
+		JpaCuAuditEntity implements Idable<PK> {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
-		return super.getId();
+	/** 主键ID */
+	private PK id;
+
+	@Override
+	public PK getId() {
+		return this.id;
 	}
-	
+
+	@Override
+	public void setId(PK id) {
+		this.id = id;
+	}
+
 }

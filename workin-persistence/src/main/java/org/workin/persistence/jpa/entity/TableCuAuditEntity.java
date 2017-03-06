@@ -12,37 +12,30 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- * Create Date : 2015年12月15日
+ *  
+ * Create Date : 2015-1-27
  */
 
 package org.workin.persistence.jpa.entity;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.workin.commons.entity.string.StringIdable;
-import org.workin.persistence.jpa.entity.JpaCuAuditableEntity;
-
 /**
- * 字符串主键类型的可进行新增修改审核的实体抽象类
+ * Table主键类型的新增/更新审核实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class StringCuAuditableEntity extends JpaCuAuditableEntity implements StringIdable {
+public abstract class TableCuAuditEntity extends CuAuditEntity<Long> {
 	
-	/** 主键ID */
-	private String id;
-
-	@Override
-	public String getId() {
-		return this.id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	public Long getId() {
+		return super.getId();
 	}
-
-	@Override
-	public void setId(String id) {
-		this.id = id;
-	}
-
+	
 }

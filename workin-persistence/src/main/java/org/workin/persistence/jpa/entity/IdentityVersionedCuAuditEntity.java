@@ -16,19 +16,21 @@
  * Create Date : 2015-12-15
  */
 
-package org.workin.persistence.jpa.entity.strategy;
+package org.workin.persistence.jpa.entity;
 
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import org.workin.commons.entity.Lockable;
+import org.workin.commons.entity.Versioned;
 
 /**
- * Table主键类型可锁定的新增修改审核实体抽象类
+ * Identity主键类型可锁定的新增修改审核实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
-public abstract class TableLockableCuAuditEntity extends TableCuAuditEntity implements Lockable {
+@MappedSuperclass
+public abstract class IdentityVersionedCuAuditEntity extends AutoCuAuditEntity implements Versioned {
 	
 	/** 版本号 */
 	private long version;
