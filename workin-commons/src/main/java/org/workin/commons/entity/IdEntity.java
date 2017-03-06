@@ -16,29 +16,27 @@
  * Create Date : 2015-1-27
  */
 
-package org.workin.commons.entity.number;
+package org.workin.commons.entity;
 
-import org.workin.commons.entity.CuAuditableEntity;
+import java.io.Serializable;
 
 /**
- * 可进行新增修改审核实体抽象类
+ * 主键ID实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
-public abstract class CuAuditEntity extends CuAuditableEntity implements Idable {
+public abstract class IdEntity<PK extends Serializable> implements Idable<PK>{
 	
 	/** 主键ID */
-	private Long id;
+	private PK id;
 
-	@Override
-	public Long getId() {
-		return this.id;
+	public PK getId() {
+		return id;
 	}
 
-	@Override
-	public void setId(Long id) {
+	public void setId(PK id) {
 		this.id = id;
 	}
-
+	
 }

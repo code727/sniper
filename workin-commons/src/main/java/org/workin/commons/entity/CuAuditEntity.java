@@ -21,11 +21,11 @@ package org.workin.commons.entity;
 import java.util.Date;
 
 /**
- * 可进行新增修改审核的实体抽象类
+ * 可进行新增/修改审核的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class CuAuditableEntity implements CuAuditable {
+public abstract class CuAuditEntity implements CuAuditable {
 
 	/** 创建时间 */
 	private Date createTime;

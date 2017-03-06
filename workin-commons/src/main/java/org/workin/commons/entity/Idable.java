@@ -16,30 +16,29 @@
  * Create Date : 2015-1-27
  */
 
-package org.workin.commons.entity.number;
+package org.workin.commons.entity;
 
 import java.io.Serializable;
-
 
 /**
  * 主键ID接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Idable extends Serializable {
+public interface Idable<PK extends Serializable> extends Serializable {
 	
 	/**
 	 * 获取ID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Long getId();
+	public PK getId();
 	
 	/**
 	 * 设置ID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param id
 	 */
-	public void setId(Long id); 
+	public void setId(PK id); 
 
 }

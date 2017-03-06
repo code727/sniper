@@ -12,33 +12,37 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *  
+ * 
  * Create Date : 2015-1-27
  */
 
-package org.workin.commons.entity.string;
+package org.workin.commons.entity;
 
-import org.workin.commons.entity.CuAuditableEntity;
+import java.io.Serializable;
+
+import org.workin.commons.entity.Versioned;
+
 
 /**
- * 可进行新增修改审核实体抽象类
+ * 版本化主键ID实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @SuppressWarnings("serial")
-public abstract class StringCuAuditEntity extends CuAuditableEntity implements StringIdable {
+public abstract class VersionedIdEntity<PK extends Serializable> extends
+		IdEntity<PK> implements Versioned {
+		
+	/** 版本号 */
+	private long version;
 	
-	/** 主键ID */
-	private String id;
-
 	@Override
-	public String getId() {
-		return this.id;
+	public long getVersion() {
+		return this.version;
 	}
-
+	
 	@Override
-	public void setId(String id) {
-		this.id = id;
+	public void setVersion(long version) {
+		this.version = version;
 	}
 
 }

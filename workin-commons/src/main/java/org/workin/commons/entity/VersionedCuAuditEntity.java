@@ -18,27 +18,27 @@
 
 package org.workin.commons.entity;
 
-import java.io.Serializable;
+import org.workin.commons.entity.Versioned;
 
 /**
- * 可锁定的实体接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * 版本化新增/修改审核实体抽象类
+ * @author <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Lockable extends Serializable {
-	
-	/**
-	 * 获取当前版本号
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public long getVersion();
+@SuppressWarnings("serial")
+public abstract class VersionedCuAuditEntity extends CuAuditEntity implements Versioned {
+		
+	/** 版本号 */
+	private long version;
 
-	/**
-	 * 设置当前版本号
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param version
-	 */
-	public void setVersion(long version);
+	@Override
+	public long getVersion() {
+		return this.version;
+	}
+
+	@Override
+	public void setVersion(long version) {
+		this.version = version;
+	}
 
 }
