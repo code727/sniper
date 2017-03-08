@@ -8,102 +8,104 @@
 	</parent>
 	<artifactId>workin-persistence</artifactId>
 	
+	<properties>
+		<spring-orm.version>3.2.2.RELEASE</spring-orm.version>
+		<hibernate.version>4.3.11.Final</hibernate.version>
+		<hibernate-jpa.version>1.0.1.Final</hibernate-jpa.version>
+		<ibatis.version>2.3.0</ibatis.version>
+		<mybatis.version>3.2.2</mybatis.version>
+		<mybatis-spring.version>1.2.0</mybatis-spring.version>
+	</properties>
+	
 	<dependencies>
 		<dependency>
   			<groupId>org.slf4j</groupId>
   			<artifactId>slf4j-api</artifactId>
-  			<version>1.7.5</version>
+  			<version>${slf4j.version}</version>
   			<optional>true</optional>
 		</dependency>
 		<dependency>
   			<groupId>org.slf4j</groupId>
   			<artifactId>slf4j-log4j12</artifactId>
-  			<version>1.7.5</version>
+  			<version>${slf4j.version}</version>
   			<optional>true</optional>
 		</dependency>
 		<dependency> 
    			<groupId>javax.servlet</groupId> 
    			<artifactId>servlet-api</artifactId> 
-   			<version>2.5</version> 
+   			<version>${servlet.version}</version> 
    			<scope>provided</scope> 
 		</dependency>
-		<!-- <dependency>
-		  	<groupId>org.hibernate</groupId>
-		  	<artifactId>hibernate-core</artifactId>
-		  	<version>3.6.10.Final</version>
-		  	<optional>true</optional>
-		</dependency> -->
 		<dependency>
 		  	<groupId>org.hibernate</groupId>
 		  	<artifactId>hibernate-core</artifactId>
-		  	<version>4.3.6.Final</version>
+		  	<version>${hibernate.version}</version>
 		  	<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 		    <artifactId>hibernate-jpa-2.0-api</artifactId>
-		    <version>1.0.1.Final</version>
+		    <version>${hibernate-jpa.version}</version>
 		    <optional>true</optional>
     	</dependency>
     	<dependency>
   			<groupId>org.apache.ibatis</groupId>
   			<artifactId>ibatis-sqlmap</artifactId>
-  			<version>2.3.0</version>
+  			<version>${ibatis.version}</version>
 		    <optional>true</optional>
 		</dependency>
 		<dependency>
   			<groupId>org.mybatis</groupId>
   			<artifactId>mybatis</artifactId>
-  			<version>3.2.2</version>
+  			<version>${mybatis.version}</version>
 		    <optional>true</optional>
 		</dependency>
 		<dependency>
   			<groupId>org.mybatis</groupId>
   			<artifactId>mybatis-spring</artifactId>
-  			<version>1.2.0</version>
+  			<version>${mybatis-spring.version}</version>
 		    <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>3.2.2.RELEASE</version>
-            <scope>compile</scope>
+            <version>${spring-orm.version}</version>
             <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>3.2.2.RELEASE</version>
+            <version>${spring.version}</version>
             <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>3.2.2.RELEASE</version>
+            <version>${spring.version}</version>
             <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
             <artifactId>workin-commons</artifactId>
-            <version>1.0.0</version>
+            <version>${workin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
             <artifactId>workin-spring</artifactId>
-            <version>1.0.0</version>
+            <version>${workin.version}</version>
             <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
             <artifactId>workin-security</artifactId>
-            <version>1.0.0</version>
+            <version>${workin.version}</version>
             <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
-            <artifactId>workin-test</artifactId>
-            <version>1.0.0</version>
-            <scope>test</scope>
+			<artifactId>workin-test</artifactId>
+			<version>${workin.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

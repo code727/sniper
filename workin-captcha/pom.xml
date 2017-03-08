@@ -18,31 +18,37 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>3.2.2.RELEASE</version>
+            <version>${spring.version}</version>
             <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>3.2.2.RELEASE</version>
+            <version>${spring.version}</version>
             <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>3.2.2.RELEASE</version>
+            <version>${spring.version}</version>
             <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-image</artifactId>
-			<version>1.0.0</version>
+			<version>${workin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-nosql</artifactId>
-			<version>1.0.0</version>
+			<version>${workin.version}</version>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-test</artifactId>
+			<version>${workin.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

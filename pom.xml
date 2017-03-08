@@ -7,6 +7,16 @@
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	
+	<properties>
+		<slf4j.version>1.7.5</slf4j.version>
+		<log4j.version>1.2.17</log4j.version>
+		<jackson.version>1.9.12</jackson.version>
+		<json-lib.version>2.4</json-lib.version>
+		<servlet.version>2.5</servlet.version>
+		<spring.version>4.3.7.RELEASE</spring.version>
+		<workin.version>1.0.0</workin.version>
+	</properties>
+		
 	<build>
 		<resources>
 			<resource>  
@@ -90,5 +100,6 @@
 		<module>workin-serialization</module>
 		<module>workin-templet</module>
 		<module>workin-kafka</module>
+		<module>workin-generator</module>
 	</modules>
 </project>

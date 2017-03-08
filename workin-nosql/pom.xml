@@ -12,16 +12,20 @@
 		<dependency>
   			<groupId>org.codehaus.jackson</groupId>
   			<artifactId>jackson-core-asl</artifactId>
-  			<version>1.9.12</version>
-  			<scope>compile</scope>
+  			<version>${jackson.version}</version>
       		<optional>true</optional>
 		</dependency>
 		<dependency>
   			<groupId>org.codehaus.jackson</groupId>
   			<artifactId>jackson-mapper-asl</artifactId>
-  			<version>1.9.12</version>
-  			<scope>compile</scope>
+  			<version>${jackson.version}</version>
       		<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>3.1</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
@@ -32,35 +36,25 @@
 		<dependency>
       		<groupId>org.springframework</groupId>
       		<artifactId>spring-context-support</artifactId>
-      		<version>3.2.2.RELEASE</version>
-      		<scope>compile</scope>
+      		<version>${spring.version}</version>
       		<optional>true</optional>
     	</dependency>
 		<dependency>
 	    	<groupId>org.springframework</groupId>
 	      	<artifactId>spring-aop</artifactId>
-	      	<version>3.2.2.RELEASE</version>
-	      	<scope>compile</scope>
+	      	<version>${spring.version}</version>
 	      	<optional>true</optional>
     	</dependency>
 		<dependency>
 	    	<groupId>org.springframework</groupId>
 	      	<artifactId>spring-tx</artifactId>
-	      	<version>3.2.2.RELEASE</version>
-	      	<scope>compile</scope>
+	      	<version>${spring.version}</version>
 	      	<optional>true</optional>
     	</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.1.0.RELEASE</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>3.1</version>
-			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -73,7 +67,6 @@
 			<groupId>org.mongodb.morphia</groupId>
 			<artifactId>morphia</artifactId>
 			<version>1.0.1</version>
-			<scope>compile</scope>
 			<optional>true</optional>
 			<exclusions>
 				<exclusion>
@@ -85,19 +78,25 @@
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-serialization</artifactId>
-			<version>1.0.0</version>
+			<version>${workin.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-spring</artifactId>
-			<version>1.0.0</version>
+			<version>${workin.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
             <artifactId>workin-commons</artifactId>
-            <version>1.0.0</version>
+            <version>${workin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-test</artifactId>
+			<version>${workin.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

@@ -12,25 +12,30 @@
 		<dependency>
   			<groupId>org.slf4j</groupId>
   			<artifactId>slf4j-api</artifactId>
-  			<version>1.7.5</version>
+  			<version>${slf4j.version}</version>
   			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>3.2.2.RELEASE</version>
-            <scope>compile</scope>
+            <version>${spring.version}</version>
             <optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-persistence</artifactId>
-			<version>1.0.0</version>
+			<version>${workin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-spring</artifactId>
-			<version>1.0.0</version>
+			<version>${workin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-test</artifactId>
+			<version>${workin.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

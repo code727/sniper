@@ -12,18 +12,18 @@
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
-			<version>2.4</version>
+			<version>${json-lib.version}</version>
 			<classifier>jdk15</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-commons</artifactId>
-			<version>1.0.0</version>
+			<version>${workin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-test</artifactId>
-			<version>1.0.0</version>
+			<version>${workin.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

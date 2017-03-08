@@ -12,50 +12,50 @@
 		<dependency>
   			<groupId>org.slf4j</groupId>
   			<artifactId>slf4j-api</artifactId>
-  			<version>1.7.5</version>
+  			<version>${slf4j.version}</version>
   			<optional>true</optional>
 		</dependency>
 		<dependency>
   			<groupId>org.slf4j</groupId>
   			<artifactId>slf4j-log4j12</artifactId>
-  			<version>1.7.5</version>
+  			<version>${slf4j.version}</version>
   			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
+			<version>${log4j.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>3.2.2.RELEASE</version>
+            <version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>3.2.2.RELEASE</version>
+            <version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>3.2.2.RELEASE</version>
+            <version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-commons</artifactId>
-			<version>1.0.0</version>
+			<version>${workin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-support</artifactId>
-			<version>1.0.0</version>
+			<version>${workin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-test</artifactId>
-			<version>1.0.0</version>
+			<version>${workin.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -12,50 +12,42 @@
 		<dependency>
   			<groupId>org.slf4j</groupId>
   			<artifactId>slf4j-api</artifactId>
-  			<version>1.7.5</version>
-  			<scope>compile</scope>
+  			<version>${slf4j.version}</version>
   			<optional>true</optional>
 		</dependency>
 		<dependency>
   			<groupId>org.slf4j</groupId>
   			<artifactId>slf4j-log4j12</artifactId>
-  			<version>1.7.5</version>
-  			<scope>compile</scope>
-  			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-core</artifactId>
-			<version>5.7.0</version>
-			<scope>compile</scope>
-  			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jms</artifactId>
-			<version>3.2.14.RELEASE</version>
-			<scope>compile</scope>
-  			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-kafka</artifactId>
-			<version>1.2.1.RELEASE</version>
-			<scope>compile</scope>
+  			<version>${slf4j.version}</version>
   			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.2</version>
-			<scope>compile</scope>
+  			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+      		<artifactId>geronimo-jms_1.1_spec</artifactId>
+      		<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
   			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
             <artifactId>workin-commons</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
+            <version>${workin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-test</artifactId>
+			<version>${workin.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies> 
 </project>
