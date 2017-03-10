@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<bean id="producerProperties" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="bootstrap.servers" value="${bootstrap.servers}" />
+				<!-- <entry key="group.id" value="0" /> -->
+				<entry key="retries" value="10" />
+				<entry key="batch.size" value="16384" />
+				<entry key="linger.ms" value="1" />
+				<entry key="buffer.memory" value="33554432" />
+				<entry key="metadata.fetch.timeout.ms" value="5000" />
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="stringSerializer" class="org.apache.kafka.common.serialization.IntegerSerializer" />
+	<bean id="jsonSerializer" class="org.springframework.kafka.support.serializer.JsonSerializer" />
+
+	<bean id="producerFactory" class="org.springframework.kafka.core.DefaultKafkaProducerFactory">
+		<constructor-arg index="0" ref="producerProperties" />
+		<constructor-arg index="1" ref="stringSerializer" />
+		<constructor-arg index="2" ref="jsonSerializer" />
+	</bean>
+
+	<bean id="kafkaTemplate" class="org.springframework.kafka.core.KafkaTemplate">
+		<constructor-arg ref="producerFactory" />
+		<constructor-arg name="autoFlush" value="false" />
+		<property name="defaultTopic" value="test" />
+		<property name="producerListener">
+			<bean class="org.workin.kafka.producer.listener.ThrowableProducerListener"/>
+		</property>
+		
+	</bean>
+
+	<bean id="kafkaProducer" class="org.workin.kafka.producer.DefaultKafkaProducer">
+		<property name="kafkaTemplate" ref="kafkaTemplate" />
+	</bean>
+
+</beans>
