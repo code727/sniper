@@ -21,7 +21,7 @@ package org.workin.test.junit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 /**
  * 基础单元测试类
