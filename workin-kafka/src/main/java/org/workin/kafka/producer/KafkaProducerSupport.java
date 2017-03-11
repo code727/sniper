@@ -22,8 +22,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.converter.MessageConverter;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.workin.commons.util.StringUtils;
-import org.workin.kafka.TopicNode;
-import org.workin.kafka.TopicManager;
+import org.workin.kafka.topic.TopicManager;
+import org.workin.kafka.topic.TopicNode;
 import org.workin.spring.beans.CheckableInitializingBean;
 
 /**

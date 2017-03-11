@@ -13,27 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-3-10
+ * Create Date : 2017-3-7
  */
 
-package org.workin.kafka.producer.listener;
+package org.workin.kafka.topic;
 
-import org.springframework.kafka.support.LoggingProducerListener;
-import org.workin.kafka.exception.ProducerException;
+import java.util.Map;
 
 /**
- * 可抛出异常的生产监听器
+ * Topic管理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
- * @param <V>
- * @param <K>
  */
-public class ThrowableProducerListener<K, V> extends LoggingProducerListener<K, V> {
+public class TopicManagerImpl implements TopicManager {
 	
+	private Map<String, TopicNode> topicNodes;
+
 	@Override
-	public void onError(String topic, Integer partition, K key, V value, Exception ex) {
-		super.onError(topic, partition, key, value, ex);
-		throw new ProducerException(ex);
+	public void setTopics(Map<String, TopicNode> topicNodes) {
+		this.topicNodes = topicNodes;
+	}
+
+	@Override
+	public Map<String, TopicNode> getTopicNodes() {
+		return topicNodes;
+	}
+
+	@Override
+	public TopicNode getTopicNode(String topicKey) {
+		return topicNodes.get(topicKey);
 	}
 
 }

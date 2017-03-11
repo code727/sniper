@@ -13,49 +13,60 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-3-9
+ * Create Date : 2017年3月9日
  */
 
-package org.workin.kafka.support;
+package org.workin.kafka.test;
 
 import java.io.Serializable;
-
-import org.workin.kafka.topic.Topic;
+import java.util.Date;
 
 /**
- * 生产结果实例
+ * 测试用的消息实例
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ProduceResult<K, V> implements Serializable {
+@SuppressWarnings("serial")
+public class Message implements Serializable {
 	
-	private static final long serialVersionUID = 9160410391945854012L;
+	private int id;
 	
-	/** 源Topic */
-	private Topic sourceTopic;
-
-	/** 目标Topic */
-	private Topic targetTopic;
+	private String text;
 	
-	/** 在目标Topic中生产的消息 */
-	private Message<K, V> message;
+	private Date createTime;
 	
-	public ProduceResult(Topic sourceTopic, Topic targetTopic,  Message<K, V> message) {
-		this.sourceTopic = sourceTopic;
-		this.targetTopic = targetTopic;
-		this.message = message;
+	public Message() {
+		
 	}
 	
-	public Topic getSourceTopic() {
-		return sourceTopic;
+	public Message(int id, String text, Date createTime) {
+		this.id = id;
+		this.text = text;
+		this.createTime = createTime;
 	}
 
-	public Topic getTargetTopic() {
-		return targetTopic;
+	public int getId() {
+		return id;
 	}
 
-	public Message<K, V> getMessage() {
-		return message;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 }

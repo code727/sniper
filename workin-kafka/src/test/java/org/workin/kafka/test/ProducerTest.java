@@ -22,29 +22,40 @@ import java.util.Date;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 import org.workin.kafka.producer.KafkaProducer;
 import org.workin.kafka.producer.callback.ProduceFutureCallback;
-import org.workin.test.spring.JUnit4SpringContextTestCase;
+import org.workin.kafka.support.ProduceResult;
+import org.workin.kafka.topic.Topic;
+import org.workin.test.spring.JUnit4SpringTestCase;
 
 /**
  * 生产者测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ProducerTest extends JUnit4SpringContextTestCase {
+@ContextConfiguration(locations = { "/applicationContext-producer.xml" })
+public class ProducerTest extends JUnit4SpringTestCase {
 	
 	@Autowired
-	private KafkaProducer<Integer, User> kafkaProducer;
+	private KafkaProducer<Integer, Message> kafkaProducer;
 	
 	@Test
-	public void testProducer() throws Exception {
-		User user = new User(1024, "kafka_tester", new Date());
-		ProduceFutureCallback<Integer, User> callback = new ProduceFutureCallback<Integer, User>();
-		try {
-			kafkaProducer.send(user.getId(), user, callback);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testSend() throws Exception {
+		Message message = new Message(1024, "kafka_testSend", new Date());
+		ProduceFutureCallback<Integer, Message> callback = new ProduceFutureCallback<Integer, Message>();
+		kafkaProducer.send(message.getId(), message, callback);
+	}
+	
+//	@Test
+	public void sendAndWait() throws Exception {
+		Message message = new Message(1024, "kafka_sendAndWait", new Date());
+		
+		ProduceResult<Integer, Message> result = kafkaProducer.sendAndWait(message.getId(), message);
+		Topic targetTopic = result.getTargetTopic();
+		
+		System.out.println("Sucess send to target topic [name:"
+				+ targetTopic.getName() + ",partition:" + targetTopic.getPartition() + "]");
 	}
 		
 }

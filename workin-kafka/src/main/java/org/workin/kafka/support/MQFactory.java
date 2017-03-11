@@ -18,11 +18,13 @@
 
 package org.workin.kafka.support;
 
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.support.SendResult;
 import org.workin.commons.util.AssertUtils;
-import org.workin.kafka.Topic;
+import org.workin.kafka.topic.ConsumeTopic;
+import org.workin.kafka.topic.Topic;
 
 /**
  * 消息队列工厂
@@ -32,7 +34,7 @@ import org.workin.kafka.Topic;
 public class MQFactory {
 	
 	/**
-	 * 从生产者发送结果中构建出可序列化的生产结果
+	 * 根据生产者发送结果构建出可序列化的生产结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param result
 	 * @return
@@ -43,13 +45,14 @@ public class MQFactory {
 	}
 	
 	/**
-	 * 从生产者记录中构建出可序列化的生产结果
+	 * 根据生产者记录和元数据构建出可序列化的生产结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param record
 	 * @return
 	 */
 	public static <K, V> ProduceResult<K, V> buildProduceResult(ProducerRecord<K, V> record, RecordMetadata metadata) {
 		AssertUtils.assertNotNull(record, "Producer record must not be null.");
+		AssertUtils.assertNotNull(record, "Producer record must metadata not be null.");
 		
 		Topic sourceTopic = new Topic(record.topic(), record.partition(), record.timestamp());
 		Topic targetTopic = new Topic(metadata.topic(), metadata.partition(), metadata.timestamp());
@@ -57,5 +60,25 @@ public class MQFactory {
 		
 		return new ProduceResult<K, V>(sourceTopic, targetTopic, message);
 	}
+	
+	/**
+	 * 根据消费者记录构建出可序列化的消费结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param record
+	 * @return
+	 */
+	public static <K, V> ConsumeResult<K, V> buildConsumeResult(ConsumerRecord<K, V> record) {
+		AssertUtils.assertNotNull(record, "Consumer record must not be null.");
+		
+		ConsumeTopic consumeTopic = new ConsumeTopic(record.topic(),
+				record.partition(), record.timestamp(), record.offset(),
+				record.timestampType(), record.serializedKeySize(),
+				record.serializedValueSize());
+		Message<K, V> message = new Message<K, V>(record.key(), record.value());
+		
+		return new ConsumeResult<K, V>(consumeTopic, message);
+	}
+	
+	
 
 }

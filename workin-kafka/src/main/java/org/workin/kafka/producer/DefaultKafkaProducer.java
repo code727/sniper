@@ -21,11 +21,12 @@ package org.workin.kafka.producer;
 import java.util.List;
 
 import org.apache.kafka.common.PartitionInfo;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
-import org.workin.kafka.TopicNode;
+import org.workin.kafka.support.MQFactory;
+import org.workin.kafka.support.ProduceResult;
+import org.workin.kafka.topic.TopicNode;
 
 /**
  * Kafka生产者实现类
@@ -34,35 +35,51 @@ import org.workin.kafka.TopicNode;
  */
 public class DefaultKafkaProducer<K, V> extends KafkaProducerSupport<K, V>
 		implements KafkaProducer<K, V> {
-
+	
 	@Override
-	public ListenableFuture<SendResult<K, V>> send(V data) {
-		ListenableFuture<SendResult<K, V>> future = getKafkaTemplate().sendDefault(data);
-		return future;
+	public <T> void send(V data, ListenableFutureCallback<T> callback) {
+		sendToPartition(null, null, data, callback);
 	}
-
+	
 	@Override
-	public ListenableFuture<SendResult<K, V>> send(K key, V data) {
-		ListenableFuture<SendResult<K, V>> future = getKafkaTemplate().sendDefault(key, data);
-		return future;
+	public <T> void send(K key, V data, ListenableFutureCallback<T> callback) {
+		sendToPartition(null, key, data, callback);
+	}
+	
+	@Override
+	public <T> void sendToPartition(Integer partition, V data, ListenableFutureCallback<T> callback) {
+		sendToPartition(partition, null, data, callback);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> void send(V data, ListenableFutureCallback<T> callback) {
-		ListenableFuture<SendResult<K, V>> future = getKafkaTemplate().sendDefault(data);
+	public <T> void sendToPartition(Integer partition, K key, V data, ListenableFutureCallback<T> callback) {
+		ListenableFuture<SendResult<K, V>> future = sendToPartition(partition, key, data);
 		if (callback != null)
 			future.addCallback((ListenableFutureCallback<? super SendResult<K, V>>) callback);
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
-	public <T> void send(K key, V data, ListenableFutureCallback<T> callback) {
-		ListenableFuture<SendResult<K, V>> future = getKafkaTemplate().sendDefault(key, data);
-		if (callback != null)
-			future.addCallback((ListenableFutureCallback<? super SendResult<K, V>>) callback);
+	public ListenableFuture<SendResult<K, V>> send(V data) {
+		return sendToPartition(null, null, data);
 	}
-
+	
+	@Override
+	public ListenableFuture<SendResult<K, V>> send(K key, V data) {
+		return sendToPartition(null, key, data);
+	}
+	
+	@Override
+	public ListenableFuture<SendResult<K, V>> sendToPartition(Integer partition, V data) {
+		 return sendToPartition(partition, null, data);
+	}
+	
+	@Override
+	public ListenableFuture<SendResult<K, V>> sendToPartition(Integer partition, K key, V data) {
+		return partition != null ? getKafkaTemplate().sendDefault(partition, key,
+				data) : getKafkaTemplate().sendDefault(key, data);
+	}
+	
 	@Override
 	public ListenableFuture<SendResult<K, V>> send(String topicKey, V data) {
 		return send(topicKey, null, data);
@@ -71,22 +88,50 @@ public class DefaultKafkaProducer<K, V> extends KafkaProducerSupport<K, V>
 	@SuppressWarnings("unchecked")
 	@Override
 	public ListenableFuture<SendResult<K, V>> send(String topicKey, K key, V data) {
-		KafkaTemplate<K, V> kafkaTemplate = getKafkaTemplate();
-		
 		TopicNode topicNode = getTopicNode(topicKey);
 		Integer partition = getPartition(topicNode);
 		
-		ListenableFuture<SendResult<K, V>> future;
-		if (partition != null)
-			future = kafkaTemplate.send(getTopicName(topicNode), partition, key, data);
-		else
-			future = kafkaTemplate.send(getTopicName(topicNode), key, data);
+		ListenableFuture<SendResult<K, V>> future = (partition != null ? 
+				getKafkaTemplate().send(getTopicName(topicNode), partition, key, data) : 
+					getKafkaTemplate().send(getTopicName(topicNode), key, data));
 		
 		ListenableFutureCallback<?> callback = getFutureCallback(topicNode);
 		if (callback != null)
 			future.addCallback((ListenableFutureCallback<? super SendResult<K, V>>) callback);
 		
 		return future;
+	}
+	
+	@Override
+	public ProduceResult<K, V> sendAndWait(V data) throws Exception {
+		return sendToPartitionAndWait(null, null, data);
+	}
+	
+	@Override
+	public ProduceResult<K, V> sendAndWait(K key, V data) throws Exception {
+		return sendToPartitionAndWait(null, key, data);
+	}
+	
+	@Override
+	public ProduceResult<K, V> sendToPartitionAndWait(Integer partition, V data) throws Exception {
+		return sendToPartitionAndWait(partition, null, data);
+	}
+	
+	@Override
+	public ProduceResult<K, V> sendToPartitionAndWait(Integer partition, K key, V data) throws Exception {
+		ListenableFuture<SendResult<K, V>> future = sendToPartition(partition, key, data);
+		return MQFactory.buildProduceResult(future.get());
+	}
+	
+	@Override
+	public ProduceResult<K, V> sendAndWait(String topicKey, V data) throws Exception {
+		return sendAndWait(topicKey, null, data);
+	}
+
+	@Override
+	public ProduceResult<K, V> sendAndWait(String topicKey, K key, V data) throws Exception {
+		ListenableFuture<SendResult<K, V>> future = send(topicKey, key, data);	
+		return MQFactory.buildProduceResult(future.get());
 	}
 
 	@Override
