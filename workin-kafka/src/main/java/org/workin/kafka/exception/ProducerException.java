@@ -13,40 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-3-7
+ * Create Date : 2017-3-10
  */
 
-package org.workin.kafka;
-
-import java.util.Map;
+package org.workin.kafka.exception;
 
 /**
- * Topic管理器接口
+ * 生产者运行时异常类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface TopicManager {
+public class ProducerException extends RuntimeException {
+
+	private static final long serialVersionUID = 8685615532352086785L;
 	
-	/**
-	 * 设置Topic映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param topicNodes
-	 */
-	public void setTopics(Map<String, TopicNode> topicNodes);
+	public ProducerException() {
+		super();
+	}
 	
-	/**
-	 * 获取Topic映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Map<String, TopicNode> getTopicNodes();
+	public ProducerException(String messgae) {
+		super(messgae);
+	}
 	
-	/**
-	 * 根据键名称获取Topic实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param topicKey
-	 * @return
-	 */
-	public TopicNode getTopicNode(String topicKey);
+	public ProducerException(Throwable throwable) {
+		super(throwable);
+	}
 	
+	public ProducerException(String message, Throwable throwable) {
+		super(message,throwable);
+	}
+
 }

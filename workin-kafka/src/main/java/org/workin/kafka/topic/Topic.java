@@ -13,46 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年3月9日
+ * Create Date : 2017-3-9
  */
 
-package org.workin.kafka.test;
-
-import java.io.Serializable;
-import java.util.Date;
+package org.workin.kafka.topic;
 
 /**
- * 测试用的用户实例
+ * Topic实例
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-@SuppressWarnings("serial")
-public class User implements Serializable {
+public class Topic {
 	
-	private int id;
-	
+	/** Topic实例名称 */
 	private String name;
 	
-	private Date createTime;
+	/** 分区索引 */
+	private Integer partition;
 	
-	public User() {
+	/** 时间戳 */
+	private Long timestamp;
+	
+	public Topic() {}
 		
+	public Topic(String name, Integer partition, Long timestamp) {
+		this.name = name;
+		this.partition = partition;
+		this.timestamp = timestamp;
 	}
 	
-	public User(int id, String name, Date createTime) {
-		this.id = id;
-		this.name = name;
-		this.createTime = createTime;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -61,12 +50,20 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
+	public Integer getPartition() {
+		return partition;
 	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setPartition(Integer partition) {
+		this.partition = partition;
+	}
+	
+	public Long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Long timestamp) {
+		this.timestamp = timestamp;
 	}
 
 }
