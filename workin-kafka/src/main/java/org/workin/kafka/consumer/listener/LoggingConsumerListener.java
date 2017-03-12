@@ -29,22 +29,18 @@ import org.workin.serialization.Serializer;
 import org.workin.serialization.json.codehaus.JacksonSerializer;
 
 /**
- * 消费日志监听实现类
+ * 消费者日志监听实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ConsumeLoggerListener<K, V> implements ConsumeListener<K, V> {
+public class LoggingConsumerListener<K, V> implements ConsumerListener<K, V> {
 		
-	protected final transient Logger logger = LoggerFactory.getLogger(ConsumeLoggerListener.class);
+	protected final transient Logger logger = LoggerFactory.getLogger(LoggingConsumerListener.class);
 	
 	private Serializer serializer = new JacksonSerializer();
 	
 	@Override
 	public void onMessage(ConsumerRecord<K, V> record) {
-		ConsumeResult<K, V> consumeResult = MQFactory.buildConsumeResult(record);
-		logger.info("Consumer success receive message:"
-				+ CodecUtils.bytesToString(serializer.serialize(consumeResult)));
-		
 		onMessage(record, null);
 	}
 	

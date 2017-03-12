@@ -22,10 +22,10 @@ import org.springframework.kafka.listener.AcknowledgingMessageListener;
 import org.springframework.kafka.listener.MessageListener;
 
 /**
- * 消费监听接口
+ * 消费者监听接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ConsumeListener<K, V> extends MessageListener<K, V>, AcknowledgingMessageListener<K, V> {
+public interface ConsumerListener<K, V> extends MessageListener<K, V>, AcknowledgingMessageListener<K, V> {
 
 }
