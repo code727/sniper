@@ -17,12 +17,13 @@
 		<constructor-arg>
 			<map>
 				<entry key="bootstrap.servers" value="${bootstrap.servers}" />
-				<entry key="group.id" value="0" />
+				<entry key="client.id" value="p0" />
 				<entry key="retries" value="10" />
 				<entry key="batch.size" value="16384" />
 				<entry key="linger.ms" value="1" />
 				<entry key="buffer.memory" value="33554432" />
-				<entry key="metadata.fetch.timeout.ms" value="3000" />
+				<entry key="max.block.ms" value="3000" />
+				<!-- <entry key="metadata.fetch.timeout.ms" value="3000" /> -->
 			</map>
 		</constructor-arg>
 	</bean>

@@ -40,16 +40,16 @@ public class ProducerTest extends JUnit4SpringTestCase {
 	@Autowired
 	private KafkaProducer<Integer, Message> kafkaProducer;
 	
-	@Test
+//	@Test
 	public void testSend() throws Exception {
-		Message message = new Message(1024, "kafka_testSend", new Date());
+		Message message = new Message(1025, "testSend", new Date());
 		ProduceFutureCallback<Integer, Message> callback = new ProduceFutureCallback<Integer, Message>();
 		kafkaProducer.send(message.getId(), message, callback);
 	}
 	
-//	@Test
+	@Test
 	public void sendAndWait() throws Exception {
-		Message message = new Message(1024, "kafka_sendAndWait", new Date());
+		Message message = new Message(4444, "kafka_sendAndWait", new Date());
 		
 		ProduceResult<Integer, Message> result = kafkaProducer.sendAndWait(message.getId(), message);
 		Topic targetTopic = result.getTargetTopic();

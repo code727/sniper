@@ -20,14 +20,13 @@ package org.workin.kafka.test;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.workin.spring.context.ApplicationContextHolder;
-import org.workin.test.spring.JUnit4SpringTestCase;
 
 /**
  * 消费者测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ConsumerTest extends JUnit4SpringTestCase {
+public class ConsumerTest {
 		
 	public static void main(String[] args) {
 		ApplicationContextHolder holder = new ApplicationContextHolder();
