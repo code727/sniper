@@ -42,7 +42,9 @@
 		<constructor-arg name="autoFlush" value="false" />
 		<property name="defaultTopic" value="test" />
 		<property name="producerListener">
-			<bean class="org.workin.kafka.producer.listener.ThrowableProducerListener"/>
+			<bean class="org.workin.kafka.producer.listener.LoggingProducerListener">
+				<property name="throwExceptionOnError" value="false" />
+			</bean>
 		</property>
 		
 	</bean>
