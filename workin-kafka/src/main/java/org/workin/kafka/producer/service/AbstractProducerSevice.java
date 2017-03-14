@@ -16,24 +16,26 @@
  * Create Date : 2017-3-10
  */
 
-package org.workin.kafka.producer.listener;
+package org.workin.kafka.producer.service;
 
-import org.springframework.kafka.support.LoggingProducerListener;
-import org.workin.kafka.exception.ProducerException;
+import org.workin.kafka.support.ProduceRecord;
+import org.workin.kafka.support.ProduceResult;
 
 /**
- * 可抛出异常的生产监听器
+ * 生产者服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
- * @param <V>
- * @param <K>
  */
-public class ThrowableProducerListener<K, V> extends LoggingProducerListener<K, V> {
-	
+public abstract class AbstractProducerSevice implements ProducerSevice {
+
 	@Override
-	public void onError(String topic, Integer partition, K key, V value, Exception ex) {
-		super.onError(topic, partition, key, value, ex);
-		throw new ProducerException(ex);
+	public <K, V> void afterSuccess(ProduceResult<K, V> produceResult) {
+		
+	}
+
+	@Override
+	public <K, V> void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
+		
 	}
 
 }

@@ -18,8 +18,6 @@
 
 package org.workin.kafka.support;
 
-import java.io.Serializable;
-
 import org.workin.kafka.topic.Topic;
 
 /**
@@ -27,35 +25,20 @@ import org.workin.kafka.topic.Topic;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ProduceResult<K, V> implements Serializable {
+public class ProduceResult<K, V> extends ProduceRecord<K, V> {
 	
 	private static final long serialVersionUID = 9160410391945854012L;
 	
-	/** 源Topic */
-	private Topic sourceTopic;
-
 	/** 目标Topic */
 	private Topic targetTopic;
 	
-	/** 在目标Topic中生产的消息 */
-	private Message<K, V> message;
-	
 	public ProduceResult(Topic sourceTopic, Topic targetTopic,  Message<K, V> message) {
-		this.sourceTopic = sourceTopic;
+		super(sourceTopic, message);
 		this.targetTopic = targetTopic;
-		this.message = message;
 	}
 	
-	public Topic getSourceTopic() {
-		return sourceTopic;
-	}
-
 	public Topic getTargetTopic() {
 		return targetTopic;
-	}
-
-	public Message<K, V> getMessage() {
-		return message;
 	}
 
 }

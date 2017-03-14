@@ -31,8 +31,10 @@ public class ConsumeResult<K, V> implements Serializable {
 	
 	private static final long serialVersionUID = 9005358330863757717L;
 
+	/** 产生实际消费的目标topic */
 	private ConsumeTopic consumeTopic;
 	
+	/** 消费的消息 */
 	private Message<K, V> message;
 	
 	public ConsumeResult(ConsumeTopic consumeTopic, Message<K, V> message) {

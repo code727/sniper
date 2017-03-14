@@ -18,6 +18,7 @@
 
 package org.workin.kafka.producer.service;
 
+import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
 
 /**
@@ -37,8 +38,9 @@ public interface ProducerSevice {
 	/**
 	 * 生产者生产消息失败后的服务处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param produceRecord
 	 * @param ex
 	 */
-	public <K, V> void afterFailure(Throwable ex);
+	public <K, V> void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex);
 
 }

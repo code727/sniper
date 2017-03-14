@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年3月10日
+ * Create Date : 2017-3-10
  */
 
 package org.workin.kafka.consumer.service;
 
-import org.springframework.kafka.support.Acknowledgment;
 import org.workin.kafka.exception.ConsumerException;
 import org.workin.kafka.support.ConsumeResult;
 
@@ -35,17 +34,6 @@ public interface ConsumerSevice {
 	 * @param consumeResult
 	 * @throws ConsumerException
 	 */
-	public <K, V> void afterReceive(ConsumeResult<K, V> consumeResult)
-			throws ConsumerException;
-	
-	/**
-	 * 接收到消费结果后的业务处理，完成之前进行Ack回复确认
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param tconsumeResult
-	 * @param acknowledgment
-	 * @throws ConsumerException
-	 */
-	public <K, V> void afterReceive(ConsumeResult<K, V> tconsumeResult,
-			Acknowledgment acknowledgment) throws ConsumerException;
+	public <K, V> void receive(ConsumeResult<K, V> consumeResult) throws ConsumerException;
 
 }

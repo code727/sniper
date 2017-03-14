@@ -24,7 +24,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.workin.kafka.producer.KafkaProducer;
-import org.workin.kafka.producer.callback.ProduceFutureCallback;
+import org.workin.kafka.producer.callback.LoggingProducerFutureCallback;
 import org.workin.kafka.support.ProduceResult;
 import org.workin.kafka.topic.Topic;
 import org.workin.test.spring.JUnit4SpringTestCase;
@@ -40,14 +40,18 @@ public class ProducerTest extends JUnit4SpringTestCase {
 	@Autowired
 	private KafkaProducer<Integer, Message> kafkaProducer;
 	
-//	@Test
+	@Test
 	public void testSend() throws Exception {
 		Message message = new Message(1025, "testSend", new Date());
-		ProduceFutureCallback<Integer, Message> callback = new ProduceFutureCallback<Integer, Message>();
-		kafkaProducer.send(message.getId(), message, callback);
+		try {
+			kafkaProducer.send(message.getId(), message, new LoggingProducerFutureCallback<Integer, Message>());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
-	@Test
+//	@Test
 	public void sendAndWait() throws Exception {
 		Message message = new Message(4444, "kafka_sendAndWait", new Date());
 		

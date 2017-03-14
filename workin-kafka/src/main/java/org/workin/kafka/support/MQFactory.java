@@ -34,6 +34,39 @@ import org.workin.kafka.topic.Topic;
 public class MQFactory {
 	
 	/**
+	 * 根据topic名称、分区和消息的键值构建出可序列化的生产记录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param topic
+	 * @param partition
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public static <K, V> ProduceRecord<K, V> buildProduceRecord(String topic, Integer partition, K key, V value) {
+		AssertUtils.assertNotBlank(topic, "Producer topic name must not be null or blank.");
+		
+		Topic sourceTopic = new Topic(topic, partition, null);
+		Message<K, V> message = new Message<K, V>(key, value);
+		
+		return new ProduceRecord<K, V>(sourceTopic, message);
+	}
+	
+	/**
+	 * 根据Kafka ProducerRecord对象构建出可序列化的生产记录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param record
+	 * @return
+	 */
+	public static <K, V> ProduceRecord<K, V> buildProduceRecord(ProducerRecord<K, V> record) {
+		AssertUtils.assertNotNull(record, "Producer record must not be null.");
+		
+		Topic sourceTopic = new Topic(record.topic(), record.partition(), record.timestamp());
+		Message<K, V> message = new Message<K, V>(record.key(), record.value());
+		
+		return new ProduceRecord<K, V>(sourceTopic, message);
+	}
+	
+	/**
 	 * 根据生产者发送结果构建出可序列化的生产结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param result
@@ -78,7 +111,5 @@ public class MQFactory {
 		
 		return new ConsumeResult<K, V>(consumeTopic, message);
 	}
-	
-	
 
 }

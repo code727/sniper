@@ -18,37 +18,21 @@
 
 package org.workin.kafka.consumer.listener;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.kafka.support.Acknowledgment;
 import org.workin.commons.util.CodecUtils;
 import org.workin.kafka.support.ConsumeResult;
-import org.workin.kafka.support.MQFactory;
-import org.workin.serialization.Serializer;
-import org.workin.serialization.json.codehaus.JacksonSerializer;
 
 /**
- * 消费者日志监听实现类
+ * 可记录日志的消费者监听实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class LoggingConsumerListener<K, V> implements ConsumerListener<K, V> {
+public class LoggingConsumerListener<K, V> extends AbstractConsumerListener<K, V> {
 		
-	protected final transient Logger logger = LoggerFactory.getLogger(LoggingConsumerListener.class);
-	
-	private Serializer serializer = new JacksonSerializer();
-	
 	@Override
-	public void onMessage(ConsumerRecord<K, V> record) {
-		onMessage(record, null);
-	}
-	
-	@Override
-	public void onMessage(ConsumerRecord<K, V> record, Acknowledgment acknowledgment) {
-		ConsumeResult<K, V> consumeResult = MQFactory.buildConsumeResult(record);
-		logger.info("Consumer success receive message:"
-				+ CodecUtils.bytesToString(serializer.serialize(consumeResult)));
+	public void receive(ConsumeResult<K, V> consumeResult) {
+		logger.info("Consumer success receive message:{}",
+				CodecUtils.bytesToString(loggerSerializer.serialize(consumeResult)));
+					
 	}
 
 }
