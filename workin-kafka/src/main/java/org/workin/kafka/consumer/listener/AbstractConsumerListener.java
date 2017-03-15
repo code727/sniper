@@ -37,7 +37,7 @@ public abstract class AbstractConsumerListener<K, V> implements ConsumerListener
 	protected final Logger logger;
 	
 	protected Serializer loggerSerializer = new JacksonSerializer();
-	
+		
 	public AbstractConsumerListener() {
 		logger = LoggerFactory.getLogger(getClass()); 
 	}

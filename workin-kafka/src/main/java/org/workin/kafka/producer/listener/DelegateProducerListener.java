@@ -30,7 +30,8 @@ import org.workin.kafka.support.ProduceResult;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DelegateProducerListener<K, V> extends AbstractProducerListener<K, V> implements InitializingBean {
+public class DelegateProducerListener<K, V> extends
+		AbstractProducerListener<K, V> implements InitializingBean {
 	
 	@Autowired
 	protected ProducerSevice delegate;
@@ -51,25 +52,38 @@ public class DelegateProducerListener<K, V> extends AbstractProducerListener<K, 
 	
 	@Override
 	protected void afterSuccess(ProduceResult<K, V> produceResult) {
-		if (logger.isInfoEnabled())
-			logger.info("Producer success send message:{},will be delegate [{}] handle.",
-					CodecUtils.bytesToString(loggerSerializer.serialize(produceResult)), delegate.getClass());
-		
+		logForSuccess(delegate, produceResult);;
 		delegate.afterSuccess(produceResult);
 	}
 	
 	@Override
-	protected void afterFailure(ProduceRecord<K, V> produceRecord, Exception ex) {		
+	protected void afterFailure(ProduceRecord<K, V> produceRecord, Exception ex) {
+		logForFailure(delegate, produceRecord, ex);
 		delegate.afterFailure(produceRecord, ex);
 	}
 	
 	/**
-	 * 
+	 * 打印生产者发送成功后的日志
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param delegate
+	 * @param produceResult
 	 */
-	protected void successLog(ProducerSevice delegate) {
-		
+	protected void logForSuccess(ProducerSevice delegate, ProduceResult<K, V> produceResult) {
+		if (logger.isDebugEnabled())
+			logger.debug("Producer success send message:{},will be delegate [{}] execute follow-up task.",
+					CodecUtils.bytesToString(loggerSerializer.serialize(produceResult)), delegate.getClass());
 	}
-
+	
+	/**
+	 * 打印生产者发送失败后的日志
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param delegate
+	 * @param produceRecord
+	 * @param ex
+	 */
+	protected void logForFailure(ProducerSevice delegate, ProduceRecord<K, V> produceRecord, Exception ex) {
+		logger.error("Producer send message is failure:{},error cause:{},will be delegate [{}] execute follow-up task.",
+				CodecUtils.bytesToString(loggerSerializer.serialize(produceRecord)), ex, delegate.getClass());
+	}
+	
 }

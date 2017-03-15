@@ -21,7 +21,7 @@ package org.workin.kafka.topic;
 import org.apache.kafka.common.record.TimestampType;
 
 /**
- * 消费的Topic实例
+ * 产生实际消费的Topic实例
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

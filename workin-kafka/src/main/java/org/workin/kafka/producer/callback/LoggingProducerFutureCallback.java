@@ -29,7 +29,7 @@ import org.workin.serialization.json.codehaus.JacksonSerializer;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class LoggingProducerFutureCallback<K, V> extends AbstractProducerFutureCallbackt<K, V> {
+public class LoggingProducerFutureCallback<K, V> extends AbstractProducerFutureCallback<K, V> {
 	
 	private Serializer serializer = new JacksonSerializer();
 
@@ -43,9 +43,9 @@ public class LoggingProducerFutureCallback<K, V> extends AbstractProducerFutureC
 	protected void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
 		if (produceRecord != null)
 			logger.error("Producer send message is failure:{},error cause:{}",
-					CodecUtils.bytesToString(serializer.serialize(produceRecord)), ex.getMessage());
+					CodecUtils.bytesToString(serializer.serialize(produceRecord)), ex);
 		else
-			logger.error("Producer send message is failure,error cause:{}", ex.getMessage());
+			logger.error("Producer send message is failure,error cause:{}", ex);
 	}
 	
 }

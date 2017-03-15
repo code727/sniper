@@ -26,19 +26,32 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.workin.kafka.support.MQFactory;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
+import org.workin.serialization.Serializer;
+import org.workin.serialization.json.codehaus.JacksonSerializer;
 
 /**
  * 生产者回调抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractProducerFutureCallbackt<K, V> implements
+public abstract class AbstractProducerFutureCallback<K, V> implements
 		ListenableFutureCallback<SendResult<K, V>> {
 	
 	protected final Logger logger;
 	
-	public AbstractProducerFutureCallbackt() {
+	/** logger序列化器 */
+	protected Serializer loggerSerializer = new JacksonSerializer();
+	
+	public AbstractProducerFutureCallback() {
 		logger = LoggerFactory.getLogger(getClass());
+	}
+	
+	public Serializer getLoggerSerializer() {
+		return loggerSerializer;
+	}
+
+	public void setLoggerSerializer(Serializer loggerSerializer) {
+		this.loggerSerializer = loggerSerializer;
 	}
 	
 	@Override
@@ -52,8 +65,8 @@ public abstract class AbstractProducerFutureCallbackt<K, V> implements
 		ProduceRecord<K, V> produceRecord = null;
 		
 		if (ex instanceof KafkaProducerException) 
-			produceRecord = (ProduceRecord<K, V>) MQFactory
-					.buildProduceRecord(((KafkaProducerException) ex).getProducerRecord());
+			produceRecord = (ProduceRecord<K, V>) MQFactory.buildProduceRecord(
+					((KafkaProducerException) ex).getProducerRecord());
 	
 		afterFailure(produceRecord, ex);
 	}

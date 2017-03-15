@@ -35,7 +35,7 @@ import org.workin.serialization.json.codehaus.JacksonSerializer;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class AbstractProducerListener<K,V> extends ProducerListenerAdapter<K,V> {
+public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdapter<K,V> {
 	
 	protected final Logger logger;
 	

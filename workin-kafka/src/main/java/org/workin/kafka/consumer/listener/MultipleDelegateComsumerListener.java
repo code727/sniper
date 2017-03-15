@@ -26,7 +26,7 @@ import org.workin.kafka.exception.ConsumerException;
 import org.workin.kafka.support.ConsumeResult;
 
 /**
- * 多委派消费者监听委派实现类
+ * 多委派消费者监听实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -56,32 +56,34 @@ public class MultipleDelegateComsumerListener<K, V> extends DelegateComsumerList
 
 	@Override
 	protected void receive(ConsumeResult<K, V> consumeResult) {
-		String topicName = consumeResult.getConsumeTopic().getName();
-		selectDelegate(topicName).receive(consumeResult);
+		ConsumerSevice delegate = selectDelegate(consumeResult);
+		log(delegate, consumeResult);
+		
+		delegate.receive(consumeResult);
 	}
 	
 	/**
-	 * 根据产生实际消费的目标topic名称，选择对应的委派代表来执行具体的消费业务
+	 * 根据实际消费结果选择对应的委派代表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param topicName
+	 * @param consumeResult
 	 * @return
 	 */
-	protected ConsumerSevice selectDelegate(String topicName) {
-		
+	protected ConsumerSevice selectDelegate(ConsumeResult<K, V> consumeResult) {
+		// 根据产生实际消费的Topic名称来找到对应的委派代表
+		String topicName = consumeResult.getConsumeTopic().getName();
 		ConsumerSevice consumerSevice = (consumerSeviceManager != null ? 
 				consumerSeviceManager.getConsumerSevice(topicName) : null);
-		
+				
 		if (consumerSevice == null) {
 			if (DelegatePolicy.USE_DEFAULT_WHEN_DELEGATE_NOTFOUND.name().equalsIgnoreCase(delegatePolicy))
 				consumerSevice = delegate;
 			else
-				throw new ConsumerException("Can not found delegate consumer sevice for topic [" + topicName + "]");
+				throw new ConsumerException("Can not found delegate " + "consumer sevice for topic [" + topicName + "]");
 		}
 		
 		return consumerSevice;
 	}
 	
-		
 }
 
 

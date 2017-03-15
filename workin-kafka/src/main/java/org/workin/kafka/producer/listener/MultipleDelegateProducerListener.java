@@ -27,7 +27,7 @@ import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
 
 /**
- * 委派生产者监听实现类
+ * 多委派生产者监听实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -49,24 +49,29 @@ public class MultipleDelegateProducerListener<K,V> extends DelegateProducerListe
 	
 	@Override
 	protected void afterSuccess(ProduceResult<K, V> produceResult) {
-		String topicName = produceResult.getSourceTopic().getName();
-		selectDelegate(topicName).afterSuccess(produceResult);
+		ProducerSevice delegate = selectDelegate(produceResult);
+		logForSuccess(delegate, produceResult);
+		
+		delegate.afterSuccess(produceResult);
 	}
 	
 	@Override
 	protected void afterFailure(ProduceRecord<K, V> produceRecord, Exception ex) {
-		String topicName = produceRecord.getSourceTopic().getName();
-		selectDelegate(topicName).afterFailure(produceRecord, ex);
+		ProducerSevice delegate = selectDelegate(produceRecord);
+		logForFailure(delegate, produceRecord, ex);
+		
+		delegate.afterFailure(produceRecord, ex);
 	}
 	
 	/**
-	 * 根据产生目标的topic名称，选择对应的委派代表来执行具体的生产业务
+	 * 根据生产记录选择对应的委派代表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param topicName
+	 * @param produceRecord
 	 * @return
 	 */
-	protected ProducerSevice selectDelegate(String topicName) {
-		
+	protected ProducerSevice selectDelegate(ProduceRecord<K, V> produceRecord) {
+		// 根据源Topic名称来找到对应的委派代表
+		String topicName = produceRecord.getSourceTopic().getName();
 		ProducerSevice producerSevice = (producerSeviceManager != null ? 
 				producerSeviceManager.getProducerSevice(topicName) : null);
 		

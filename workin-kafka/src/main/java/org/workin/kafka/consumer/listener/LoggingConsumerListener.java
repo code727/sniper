@@ -32,7 +32,6 @@ public class LoggingConsumerListener<K, V> extends AbstractConsumerListener<K, V
 	public void receive(ConsumeResult<K, V> consumeResult) {
 		logger.info("Consumer success receive message:{}",
 				CodecUtils.bytesToString(loggerSerializer.serialize(consumeResult)));
-					
 	}
 
 }

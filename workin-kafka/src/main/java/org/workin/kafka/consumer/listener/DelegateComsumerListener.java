@@ -20,6 +20,7 @@ package org.workin.kafka.consumer.listener;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.workin.commons.util.CodecUtils;
 import org.workin.kafka.consumer.service.ConsumerSevice;
 import org.workin.kafka.support.ConsumeResult;
 
@@ -50,8 +51,21 @@ public class DelegateComsumerListener<K, V> extends
 	}
 	
 	@Override
-	protected void receive(ConsumeResult<K, V> consumeResult) {					
+	protected void receive(ConsumeResult<K, V> consumeResult) {	
+		log(delegate, consumeResult);
 		delegate.receive(consumeResult);
+	}
+	
+	/**
+	 * 日志记录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param delegate
+	 * @param consumeResult
+	 */
+	protected void log(ConsumerSevice delegate, ConsumeResult<K, V> consumeResult) {
+		if (logger.isDebugEnabled())
+			logger.debug("Consumer success receive message:{},will be delegate [{}] execute receive task.",
+					CodecUtils.bytesToString(loggerSerializer.serialize(consumeResult)), delegate.getClass());
 	}
 
 }

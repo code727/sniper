@@ -31,17 +31,14 @@ public class LoggingProducerListener<K, V> extends AbstractProducerListener<K, V
 	
 	@Override
 	protected void afterSuccess(ProduceResult<K, V> produceResult) {
-		if (logger.isInfoEnabled())
-			logger.info("Producer success send message:{}",
-					CodecUtils.bytesToString(loggerSerializer.serialize(produceResult)));
+		logger.info("Producer success send message:{}",
+				CodecUtils.bytesToString(loggerSerializer.serialize(produceResult)));
 	}
 
 	@Override
 	protected void afterFailure(ProduceRecord<K, V> produceRecord, Exception ex) {
-		if (logger.isErrorEnabled())
-			logger.error("Producer send message is failure:{},error cause:{}",CodecUtils.bytesToString(
-					loggerSerializer.serialize(produceRecord)),ex.getMessage());
-		
+		logger.error("Producer send message is failure:{},error cause:{}",
+				CodecUtils.bytesToString(loggerSerializer.serialize(produceRecord)), ex);
 	}
 
 }
