@@ -23,6 +23,7 @@ import java.util.Date;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.workin.commons.util.NumberUtils;
 import org.workin.kafka.producer.KafkaProducer;
 import org.workin.kafka.producer.callback.LoggingProducerFutureCallback;
 import org.workin.kafka.support.ProduceResult;
@@ -42,18 +43,19 @@ public class ProducerTest extends JUnit4SpringTestCase {
 	
 	@Test
 	public void testSend() throws Exception {
-		Message message = new Message(1025, "testSend", new Date());
+		Message message = new Message(NumberUtils.randomIn(10000), "testSend", new Date());
+		LoggingProducerFutureCallback<Integer, Message> callback = new LoggingProducerFutureCallback<Integer, Message>();
+//		callback.setInterestedInSuccess(false);
 		try {
-			kafkaProducer.send(message.getId(), message, new LoggingProducerFutureCallback<Integer, Message>());
+			kafkaProducer.send(message.getId(), message, callback);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
-//	@Test
+	@Test
 	public void sendAndWait() throws Exception {
-		Message message = new Message(4444, "kafka_sendAndWait", new Date());
+		Message message = new Message(NumberUtils.randomIn(10000), "kafka_sendAndWait", new Date());
 		
 		ProduceResult<Integer, Message> result = kafkaProducer.sendAndWait(message.getId(), message);
 		Topic targetTopic = result.getTargetTopic();
