@@ -42,6 +42,9 @@ public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdap
 	/** logger序列化器 */
 	protected Serializer loggerSerializer = new JacksonSerializer();
 	
+	/** 是否关注Success事件的发生 */
+	private boolean interestedInSuccess = true;
+	
 	/** 当监听到生产者异常后是否抛出这个异常 */
 	private boolean throwExceptionOnError;
 	
@@ -56,6 +59,20 @@ public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdap
 	public void setLoggerSerializer(Serializer loggerSerializer) {
 		this.loggerSerializer = loggerSerializer;
 	}
+	
+	public void setInterestedInSuccess(boolean interestedInSuccess) {
+		this.interestedInSuccess = interestedInSuccess;
+	}
+
+	/**
+	 * 重写父类方法，修改为根据配置的属性来判断
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	@Override
+	public boolean isInterestedInSuccess() {
+		return interestedInSuccess;
+	}
 
 	public boolean isThrowExceptionOnError() {
 		return throwExceptionOnError;
@@ -64,7 +81,7 @@ public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdap
 	public void setThrowExceptionOnError(boolean throwExceptionOnError) {
 		this.throwExceptionOnError = throwExceptionOnError;
 	}
-
+	
 	@Override
 	public void onSuccess(String topic, Integer partition, K key, V value, RecordMetadata recordMetadata) {
 		ProducerRecord<K, V> producerRecord = new ProducerRecord<K, V>(topic, partition, key, value);

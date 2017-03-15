@@ -42,6 +42,9 @@ public abstract class AbstractProducerFutureCallback<K, V> implements
 	/** logger序列化器 */
 	protected Serializer loggerSerializer = new JacksonSerializer();
 	
+	/** 是否关注Success事件的发生 */
+	private boolean interestedInSuccess = true;
+	
 	public AbstractProducerFutureCallback() {
 		logger = LoggerFactory.getLogger(getClass());
 	}
@@ -54,9 +57,18 @@ public abstract class AbstractProducerFutureCallback<K, V> implements
 		this.loggerSerializer = loggerSerializer;
 	}
 	
+	public boolean isInterestedInSuccess() {
+		return interestedInSuccess;
+	}
+
+	public void setInterestedInSuccess(boolean interestedInSuccess) {
+		this.interestedInSuccess = interestedInSuccess;
+	}
+
 	@Override
 	public void onSuccess(SendResult<K, V> result) {
-		afterSuccess(MQFactory.buildProduceResult(result));
+		if (interestedInSuccess)
+			afterSuccess(MQFactory.buildProduceResult(result));
 	}
 
 	@SuppressWarnings("unchecked")
