@@ -16,7 +16,7 @@
  * Create Date : 2015-11-27
  */
 
-package org.workin.commons.enums.category.financial;
+package org.workin.commons.enums.financial;
 
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.MessageUtils;

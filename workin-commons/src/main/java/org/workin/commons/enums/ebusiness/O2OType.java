@@ -16,24 +16,25 @@
  * Create Date : 2015-11-20
  */
 
-package org.workin.commons.enums.category.terminal;
+package org.workin.commons.enums.ebusiness;
 
 import org.workin.commons.enums.AbstractLocaleEnums;
 
 /**
- * 个人设备类型枚举类
+ * O2O类型枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class PersonalDevice extends AbstractLocaleEnums<Integer> {
+public final class O2OType extends AbstractLocaleEnums<Integer> {
 
-	private PersonalDevice(Integer key, String messageKey) {
+	private O2OType(Integer key, String messageKey) {
 		super(key, messageKey);
 	}
 	
-	public static final PersonalDevice PC = new PersonalDevice(0, "personal.device.type.pc");
-	public static final PersonalDevice ANDROID = new PersonalDevice(1, "personal.device.type.android");
-	public static final PersonalDevice IOS = new PersonalDevice(2, "personal.device.type.ios");
-	public static final PersonalDevice WINPHONE = new PersonalDevice(3, "personal.device.type.winphone");
+	/** 线上 */
+	public static final O2OType ONLINE = new O2OType(0, "o2o.type.online");
+	
+	/** 线下 */
+	public static final O2OType OFFLINE = new O2OType(1, "o2o.type.offline");
 
 }

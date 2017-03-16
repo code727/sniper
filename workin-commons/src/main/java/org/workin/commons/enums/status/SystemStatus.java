@@ -16,7 +16,7 @@
  * Create Date : 2015-11-17
  */
 
-package org.workin.commons.enums.category;
+package org.workin.commons.enums.status;
 
 import org.workin.commons.enums.AbstractLocaleEnums;
 

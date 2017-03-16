@@ -16,7 +16,7 @@
  * Create Date : 2015-12-17
  */
 
-package org.workin.commons.enums.category.astrology;
+package org.workin.commons.enums.astrology;
 
 import org.workin.commons.enums.AbstractLocaleEnums;
 
