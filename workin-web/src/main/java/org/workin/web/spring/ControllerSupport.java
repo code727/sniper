@@ -30,6 +30,8 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.workin.commons.model.CodeModel;
 import org.workin.commons.model.MessageModel;
+import org.workin.commons.response.MessageResponse;
+import org.workin.commons.response.Response;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MessageUtils;
 import org.workin.commons.util.ObjectUtils;
@@ -163,6 +165,47 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	protected void setLocaleMessage(CodeModel model, Object[] params) {
 		if (model instanceof MessageModel)
 			setLocaleMessage((MessageModel) model, params);
+	}
+	
+	/**
+	 * 设置消息响应对象中的本地化消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param response
+	 */
+	protected void setLocaleMessage(MessageResponse response) {
+		setLocaleMessage(response, null);
+	}
+	
+	/**
+	 * 设置消息响应对象中的本地参数化消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param response
+	 * @param params
+	 */
+	protected void setLocaleMessage(MessageResponse response, Object[] params) {
+		String message = response.getMessage();
+		if (StringUtils.isNotBlank(message)) 
+			response.setMessage(getMessage(message, params));
+	}
+	
+	/**
+	 * 设置响应对象中的本地消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param response
+	 */
+	protected void setLocaleMessage(Response response) {
+		setLocaleMessage(response, null);
+	}
+	
+	/**
+	 * 设置响应对象中的本地参数化消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param response
+	 * @param params
+	 */
+	protected void setLocaleMessage(Response response, Object[] params) {
+		if (response instanceof MessageResponse)
+			setLocaleMessage((MessageResponse) response, params);
 	}
 	
 	/**

@@ -108,6 +108,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K> Long del(final int dbIndex, final K[] keys) {
+		
 		if (ArrayUtils.isEmpty(keys))
 			return 0L;
 		

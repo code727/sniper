@@ -23,7 +23,6 @@
 				<entry key="linger.ms" value="1" />
 				<entry key="buffer.memory" value="33554432" />
 				<entry key="max.block.ms" value="3000" />
-				<!-- <entry key="metadata.fetch.timeout.ms" value="3000" /> -->
 			</map>
 		</constructor-arg>
 	</bean>

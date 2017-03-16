@@ -22,8 +22,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.workin.commons.enums.category.SystemStatus;
-import org.workin.commons.enums.category.ebusiness.O2OType;
+import org.workin.commons.enums.ebusiness.O2OType;
+import org.workin.commons.enums.status.SystemStatus;
 import org.workin.commons.model.CodeModel;
 import org.workin.commons.model.impl.CodeDataModel;
 import org.workin.commons.model.impl.CodeMessageModel;

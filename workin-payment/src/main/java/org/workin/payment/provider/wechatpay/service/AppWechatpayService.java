@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
-import org.workin.commons.enums.category.SystemStatus;
+import org.workin.commons.enums.status.SystemStatus;
 import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.model.impl.ResultModel;
 import org.workin.commons.util.CurrencyUtils;

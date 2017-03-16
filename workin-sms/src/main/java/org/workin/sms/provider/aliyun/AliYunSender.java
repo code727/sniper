@@ -21,7 +21,7 @@ package org.workin.sms.provider.aliyun;
 import java.util.Date;
 import java.util.Map;
 
-import org.workin.commons.enums.category.SystemStatus;
+import org.workin.commons.enums.status.SystemStatus;
 import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.MapUtils;

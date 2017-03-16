@@ -27,7 +27,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.Node;
-import org.workin.commons.enums.category.SystemStatus;
+import org.workin.commons.enums.status.SystemStatus;
 import org.workin.commons.model.impl.ResultModel;
 import org.workin.commons.util.IOUtils;
 import org.workin.commons.util.MapUtils;
