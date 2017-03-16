@@ -18,7 +18,7 @@
 
 package org.workin.commons.response;
 
-import org.workin.commons.enums.status.SystemStatus;
+import org.workin.commons.enums.status.BizStatus;
 
 /**
  * 基本的响应实现类
@@ -31,7 +31,7 @@ public class BaseResponse implements Response {
 	private String code;
 	
 	public BaseResponse() {
-		this.code = SystemStatus.SUCCESS.getKey();
+		this.code = BizStatus.SUCCESS.getKey();
 	}
 	
 	public BaseResponse(String code) {
