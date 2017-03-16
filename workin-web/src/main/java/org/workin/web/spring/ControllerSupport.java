@@ -46,6 +46,7 @@ import org.workin.web.WebApplicationContextMessageResolver;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@SuppressWarnings("deprecation")
 public abstract class ControllerSupport implements MessageResolver, ServletAware {
 		
 	@Autowired

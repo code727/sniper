@@ -30,6 +30,7 @@ import org.workin.payment.Order;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@SuppressWarnings("deprecation")
 public interface PaymentService {
 	
 	/**

@@ -43,6 +43,7 @@ import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@SuppressWarnings("deprecation")
 public class AliYunSender extends AbstractSender {
 	
 	@Override

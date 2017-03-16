@@ -22,7 +22,9 @@ package org.workin.commons.model;
  * 可编码的对象模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
+ * @see org.workin.commons.response.Response
  */
+@Deprecated
 public interface CodeModel {
 	
 	/**

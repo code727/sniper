@@ -44,6 +44,7 @@ import org.workin.support.signature.Signature;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@SuppressWarnings("deprecation")
 @Service
 public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<String, Object>> {
 	

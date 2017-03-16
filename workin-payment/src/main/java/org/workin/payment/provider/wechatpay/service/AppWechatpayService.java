@@ -45,6 +45,7 @@ import org.workin.support.signature.SymmetricSignature;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@SuppressWarnings("deprecation")
 @Service
 public class AppWechatpayService extends WechatpayService<Map<String, Object>, Map<String, Object>> {
 	

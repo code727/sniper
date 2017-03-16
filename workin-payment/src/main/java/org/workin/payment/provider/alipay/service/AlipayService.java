@@ -34,6 +34,7 @@ import org.workin.payment.service.AbstractPaymentService;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@SuppressWarnings("deprecation")
 public abstract class AlipayService<T, P> extends AbstractPaymentService<T, P> {
 	
 	/** APP支付所支持的签名类型组 */

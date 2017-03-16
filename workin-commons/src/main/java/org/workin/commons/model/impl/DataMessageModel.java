@@ -26,6 +26,7 @@ import org.workin.commons.model.MessageModel;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@Deprecated
 public class DataMessageModel<T> implements MessageModel, GenericsDataModel<T> {
 	
 	/** 数据 */

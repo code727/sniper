@@ -26,6 +26,7 @@ import org.workin.commons.model.CodeModel;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
+@Deprecated
 public class StatusCodeModel implements CodeModel {
 	
 	/** 状态编码 */
