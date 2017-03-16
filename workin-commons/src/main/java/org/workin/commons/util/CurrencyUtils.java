@@ -21,7 +21,7 @@ package org.workin.commons.util;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.workin.commons.enums.category.financial.Currency;
+import org.workin.commons.enums.financial.Currency;
 
 /**
  * 货币工具类

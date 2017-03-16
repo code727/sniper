@@ -18,7 +18,7 @@
 
 package org.workin.commons.response;
 
-import org.workin.commons.enums.category.SystemStatus;
+import org.workin.commons.enums.status.SystemStatus;
 
 /**
  * 基本的响应实现类

@@ -18,7 +18,7 @@
 
 package org.workin.commons.model.impl;
 
-import org.workin.commons.enums.category.SystemStatus;
+import org.workin.commons.enums.status.SystemStatus;
 import org.workin.commons.model.CodeModel;
 
 /**

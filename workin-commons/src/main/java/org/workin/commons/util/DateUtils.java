@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.workin.commons.enums.category.astrology.Horoscope;
+import org.workin.commons.enums.astrology.Horoscope;
 
 /**
  * 日期时间工具类
