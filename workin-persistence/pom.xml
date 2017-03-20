@@ -103,6 +103,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
+            <artifactId>workin-serialization</artifactId>
+            <version>${workin.version}</version>
+            <optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
 			<artifactId>workin-test</artifactId>
 			<version>${workin.version}</version>
 			<scope>test</scope>
