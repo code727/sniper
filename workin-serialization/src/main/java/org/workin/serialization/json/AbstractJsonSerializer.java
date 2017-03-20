@@ -18,6 +18,7 @@
 
 package org.workin.serialization.json;
 
+import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.serialization.SerializationException;
 import org.workin.support.codec.CodecSupport;
@@ -30,24 +31,14 @@ import org.workin.support.codec.CodecSupport;
 public abstract class AbstractJsonSerializer extends CodecSupport implements JsonSerializer {
 	
 	/** 序列化日期时指定的格式 */
-	private String dateFormat;
+	protected String dateFormat = DateUtils.DEFAULT_DATETIME_FORMAT;
 	
 	/** 序列化结果类型字符串 */
 	private String typeClass;
 	
 	/** 序列化结果类型 */
 	private Class<?> type;
-	
-	protected AbstractJsonSerializer() {}
 		
-	protected AbstractJsonSerializer(String typeClass) {
-		setTypeClass(typeClass);
-	}
-	
-	protected AbstractJsonSerializer(Class<?> type) {
-		setTypeClass(typeClass);
-	}
-	
 	@Override
 	public String getDateFormat() {
 		return dateFormat;

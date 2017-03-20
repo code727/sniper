@@ -31,7 +31,20 @@ import org.workin.serialization.json.AbstractJsonSerializer;
  */
 public class JacksonSerializer extends AbstractJsonSerializer {
 	
-	private ObjectMapper objectMapper = new ObjectMapper();
+	private ObjectMapper objectMapper;
+	
+	public JacksonSerializer() {
+		this(null);
+	}
+	
+	public JacksonSerializer(ObjectMapper objectMapper) {
+		if (objectMapper != null )
+			this.objectMapper = objectMapper;
+		else {
+			this.objectMapper = new ObjectMapper();
+			this.objectMapper.setDateFormat(DateUtils.getDateFormat(dateFormat));
+		}
+	}
 	
 	public ObjectMapper getObjectMapper() {
 		return objectMapper;

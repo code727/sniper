@@ -790,25 +790,5 @@ public class DateUtils {
 		}
 		return result;
 	}
-	
-	public static void main(String[] args) {
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				getDateFormat(DEFAULT_DATETIME_FORMAT);
-				
-			}
-		}).start();
 		
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				getDateFormat(DEFAULT_DATETIME_FORMAT);
-				
-			}
-		}).start();
-	}
-	
 }

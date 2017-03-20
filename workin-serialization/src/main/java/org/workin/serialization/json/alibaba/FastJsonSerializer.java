@@ -43,7 +43,6 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 			 out = new SerializeWriter();
 			 JSONSerializer serializer = new JSONSerializer(out);
 			 
-			 String dateFormat = getDateFormat();
 			 if (StringUtils.isNotBlank(dateFormat)) {
 				 serializer.config(SerializerFeature.WriteDateUseDateFormat, true);
 				 serializer.setDateFormat(dateFormat);
@@ -71,7 +70,6 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	public <T> T deserialize(String text, Class<T> type) throws SerializationException {
 		DefaultJSONParser jsonParser = new DefaultJSONParser(text);
 		
-		String dateFormat = getDateFormat();
 		if (StringUtils.isNotBlank(dateFormat)) 
 			jsonParser.setDateFormat(dateFormat);
 		
