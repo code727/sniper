@@ -34,5 +34,24 @@ public interface TypeSerializer extends Serializer {
 	 * @throws SerializationException
 	 */
 	public <T> T deserialize(byte[] bytes, Class<T> type) throws SerializationException;
+	
+	/**
+	 * 将字符串反序列化成指定类型的对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param text
+	 * @param type
+	 * @return
+	 * @throws SerializationException
+	 */
+	public <T> T deserialize(String text, Class<T> type) throws SerializationException;
+	
+	/**
+	 * 将字符串文本反序列化
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param text
+	 * @return
+	 * @throws SerializationException
+	 */
+	public <T> T deserialize(String text) throws SerializationException;
 
 }

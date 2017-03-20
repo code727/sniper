@@ -103,4 +103,9 @@ public abstract class AbstractJsonSerializer extends CodecSupport implements Jso
 		return deserialize(bytes, null);
 	}
 	
+	@Override
+	public <T> T deserialize(String text) throws SerializationException {
+		return deserialize(text, null);
+	}
+	
 }

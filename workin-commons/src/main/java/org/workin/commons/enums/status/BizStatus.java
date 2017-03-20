@@ -25,7 +25,7 @@ import org.workin.commons.enums.AbstractLocaleEnums;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BizStatus extends AbstractLocaleEnums<String> {
+public final class BizStatus extends AbstractLocaleEnums<String> {
 	
 	protected BizStatus(String key, String messageKey) {
 		super(key, messageKey);

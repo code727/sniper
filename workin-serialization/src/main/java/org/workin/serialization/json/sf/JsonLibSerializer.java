@@ -115,10 +115,14 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 		return CodecUtils.getBytes(JSONSerializer.toJSON(t, getJsonConfig()).toString(), getEncoding());
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T deserialize(byte[] bytes, Class<T> type) throws SerializationException {
-		String jsonString = CodecUtils.bytesToString(bytes, getEncoding());
+		return deserialize(CodecUtils.bytesToString(bytes, getEncoding()), type);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T deserialize(String jsonString, Class<T> type) throws SerializationException {
 		if (isJsonArray(jsonString)) {
 			JSONArray jsonArray = JSONArray.fromObject(jsonString, getJsonConfig());
 			// 统一的转换为Collection对象

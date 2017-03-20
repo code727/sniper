@@ -43,5 +43,5 @@ public interface Serializer {
 	 * @throws SerializationException
 	 */
 	public <T> T deserialize(byte[] bytes) throws SerializationException;
-
+	
 }
