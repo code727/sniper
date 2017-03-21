@@ -21,6 +21,7 @@ package org.workin.persistence.sqlmap.ibatis;
 import java.sql.SQLException;
 
 import org.springframework.orm.ibatis.SqlMapClientCallback;
+import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 import org.workin.persistence.sqlmap.dao.SqlMapDao;
 
@@ -35,7 +36,7 @@ import com.ibatis.sqlmap.client.SqlMapExecutor;
 @Repository
 public class IBatisDaoImpl<T> extends IBatisQueryDaoImpl<T>
 		implements SqlMapDao<T> {
-
+	
 	@Override
 	public T insert(String statement) {
 		return insert(statement, null);
@@ -44,8 +45,10 @@ public class IBatisDaoImpl<T> extends IBatisQueryDaoImpl<T>
 	@SuppressWarnings("unchecked")
 	@Override
 	public T insert(String statement, Object parameter) {
-		return (T) (parameter != null ? getSqlMapClientTemplate().insert(statement,
-				parameter) : getSqlMapClientTemplate().insert(statement));
+		SqlMapClientTemplate template = getSqlMapClientTemplate();
+		return (T) (parameter != null ? template.insert(namespace + statement,
+				parameter) : template.insert(namespace + statement));
+				
 	}
 
 	@Override
@@ -55,8 +58,10 @@ public class IBatisDaoImpl<T> extends IBatisQueryDaoImpl<T>
 
 	@Override
 	public int update(String statement, Object parameter) {
-		return parameter != null ? getSqlMapClientTemplate().update(statement,
-				parameter) : getSqlMapClientTemplate().update(statement);
+		SqlMapClientTemplate template = getSqlMapClientTemplate();
+		return parameter != null ? template.update(namespace + statement,
+				parameter) : template.update(namespace + statement);
+				
 	}
 
 	@Override
@@ -68,10 +73,9 @@ public class IBatisDaoImpl<T> extends IBatisQueryDaoImpl<T>
 	public int delete(final String statement, final Object parameter) {
 		return getSqlMapClientTemplate().execute(new SqlMapClientCallback<Integer>() {
 
-			@Override
-			public Integer doInSqlMapClient(SqlMapExecutor executor)
-					throws SQLException {
-				return parameter != null ? executor.delete(statement, parameter) : executor.delete(statement);
+			public Integer doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
+				return parameter != null ? executor.delete(namespace
+						+ statement, parameter) : executor.delete(namespace + statement);
 			}
 		});
 	}

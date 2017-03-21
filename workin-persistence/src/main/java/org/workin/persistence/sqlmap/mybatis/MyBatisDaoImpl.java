@@ -18,6 +18,7 @@
 
 package org.workin.persistence.sqlmap.mybatis;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.workin.persistence.sqlmap.dao.SqlMapDao;
 
@@ -37,7 +38,9 @@ public class MyBatisDaoImpl<T> extends MyBatisQueryDaoImpl<T>
 
 	@Override
 	public Integer insert(String statement, Object parameter) {
-		return parameter != null ? getSqlSession().insert(statement, parameter) : getSqlSession().insert(statement);
+		SqlSession sqlSession = getSqlSession();
+		return parameter != null ? sqlSession.insert(namespace + statement,
+				parameter) : sqlSession.insert(namespace + statement);
 	}
 
 	@Override
@@ -47,8 +50,9 @@ public class MyBatisDaoImpl<T> extends MyBatisQueryDaoImpl<T>
 
 	@Override
 	public int update(String statement, Object parameter) {
-		return parameter != null ? getSqlSession().update(statement,
-				parameter) : getSqlSession().update(statement);
+		SqlSession sqlSession = getSqlSession();
+		return parameter != null ? sqlSession.update(namespace + statement,
+				parameter) : sqlSession.update(namespace + statement);
 	}
 
 	@Override
@@ -58,8 +62,9 @@ public class MyBatisDaoImpl<T> extends MyBatisQueryDaoImpl<T>
 
 	@Override
 	public int delete(String statement, Object parameter) {
-		return parameter != null ? getSqlSession().delete(statement, parameter)
-				: getSqlSession().delete(statement);
+		SqlSession sqlSession = getSqlSession();
+		return parameter != null ? sqlSession.delete(namespace + statement,
+				parameter) : sqlSession.delete(namespace + statement);
 	}
 
 }

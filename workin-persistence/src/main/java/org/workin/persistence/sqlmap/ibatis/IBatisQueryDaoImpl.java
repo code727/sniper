@@ -21,9 +21,7 @@ package org.workin.persistence.sqlmap.ibatis;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import org.springframework.stereotype.Repository;
-import org.workin.commons.util.ClassUtils;
 import org.workin.persistence.sqlmap.dao.SqlMapQuery;
 
 /**
@@ -33,26 +31,7 @@ import org.workin.persistence.sqlmap.dao.SqlMapQuery;
  */
 @SuppressWarnings("deprecation")
 @Repository
-public class IBatisQueryDaoImpl<T> extends SqlMapClientDaoSupport implements SqlMapQuery<T> {
-	
-	/** 当前DAO所关联的实体类型 */
-	private Class<T> beanClass;
-	
-	@Override
-	public void setBeanClass(Class<T> beanClass) {
-		this.beanClass = beanClass;
-	}
-	
-	@Override
-	public Class<T> getBeanClass() {
-		return beanClass;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void initDao() throws Exception {
-		this.beanClass = ((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
-	}
+public class IBatisQueryDaoImpl<T> extends IBatisDaoSupport<T> implements SqlMapQuery<T> {
 	
 	@Override
 	public long countBySqlMap(String statement) {
@@ -82,7 +61,7 @@ public class IBatisQueryDaoImpl<T> extends SqlMapClientDaoSupport implements Sql
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String statement, Object parameter) {
-		return (R) getSqlMapClientTemplate().queryForObject(statement, parameter);
+		return (R) getSqlMapClientTemplate().queryForObject(namespace + statement, parameter);
 	}
 
 	@Override
@@ -103,7 +82,7 @@ public class IBatisQueryDaoImpl<T> extends SqlMapClientDaoSupport implements Sql
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String statement, Object parameter) {
-		return getSqlMapClientTemplate().queryForList(statement, parameter);
+		return getSqlMapClientTemplate().queryForList(namespace + statement, parameter);
 	}
 	
 	@Override
@@ -124,7 +103,7 @@ public class IBatisQueryDaoImpl<T> extends SqlMapClientDaoSupport implements Sql
 	@SuppressWarnings("unchecked")
 	@Override
 	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter, String keyProperty) {
-		return getSqlMapClientTemplate().queryForMap(statement, parameter, keyProperty);
+		return getSqlMapClientTemplate().queryForMap(namespace + statement, parameter, keyProperty);
 	}
 
 }

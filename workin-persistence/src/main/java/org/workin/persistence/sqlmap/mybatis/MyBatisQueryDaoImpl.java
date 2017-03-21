@@ -21,9 +21,7 @@ package org.workin.persistence.sqlmap.mybatis;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
-import org.workin.commons.util.ClassUtils;
 import org.workin.persistence.sqlmap.dao.SqlMapQuery;
 
 /**
@@ -32,26 +30,7 @@ import org.workin.persistence.sqlmap.dao.SqlMapQuery;
  * @version 1.0
  */
 @Repository
-public class MyBatisQueryDaoImpl<T> extends SqlSessionDaoSupport implements SqlMapQuery<T> {
-
-	/** 当前DAO所关联的实体类型 */
-	private Class<T> beanClass;
-	
-	@Override
-	public void setBeanClass(Class<T> beanClass) {
-		this.beanClass = beanClass;
-	}
-	
-	@Override
-	public Class<T> getBeanClass() {
-		return beanClass;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void initDao() throws Exception {
-		this.beanClass = ((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
-	}
+public class MyBatisQueryDaoImpl<T> extends MyBatisDaoSupport<T> implements SqlMapQuery<T> {
 
 	@Override
 	public long countBySqlMap(String statement) {
@@ -60,7 +39,7 @@ public class MyBatisQueryDaoImpl<T> extends SqlSessionDaoSupport implements SqlM
 
 	@Override
 	public long countBySqlMap(String statement, Object parameter) {
-		return getSqlSession().selectOne(statement, parameter);
+		return getSqlSession().selectOne(namespace + statement, parameter);
 	}
 
 	@Override
@@ -80,7 +59,7 @@ public class MyBatisQueryDaoImpl<T> extends SqlSessionDaoSupport implements SqlM
 
 	@Override
 	public <R> R queryUniqueBySqlMap(Class<R> resultClass, String statement, Object parameter) {
-		return getSqlSession().selectOne(statement, parameter);
+		return getSqlSession().selectOne(namespace + statement, parameter);
 	}
 
 	@Override
@@ -100,7 +79,7 @@ public class MyBatisQueryDaoImpl<T> extends SqlSessionDaoSupport implements SqlM
 
 	@Override
 	public <R> List<R> queryListBySqlMap(Class<R> resultClass, String statement, Object parameter) {
-		return getSqlSession().selectList(statement, parameter);
+		return getSqlSession().selectList(namespace + statement, parameter);
 	}
 
 	@Override
@@ -120,7 +99,7 @@ public class MyBatisQueryDaoImpl<T> extends SqlSessionDaoSupport implements SqlM
 
 	@Override
 	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter, String keyProperty) {
-		return getSqlSession().selectMap(statement, parameter, keyProperty);
+		return getSqlSession().selectMap(namespace + statement, parameter, keyProperty);
 	}
 
 }

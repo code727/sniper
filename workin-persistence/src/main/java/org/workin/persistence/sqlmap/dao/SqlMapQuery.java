@@ -21,14 +21,14 @@ package org.workin.persistence.sqlmap.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.workin.support.bean.GenericBean;
+import org.workin.persistence.sqlmap.SqlMapOperations;
 
 /**
  * SQL映射查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SqlMapQuery<T> extends GenericBean<T> {
+public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/** 默认的结果映射集属性键的名称 */
 	public static final String DEFAULT_KEY_PROPERTY = "id";

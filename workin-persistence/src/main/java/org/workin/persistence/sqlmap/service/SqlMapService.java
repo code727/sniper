@@ -21,12 +21,14 @@ package org.workin.persistence.sqlmap.service;
 import java.util.List;
 import java.util.Map;
 
+import org.workin.persistence.sqlmap.SqlMapOperations;
+
 /**
  * SQL映射持久化服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SqlMapService<T> {
+public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的insert语句后返回结果
