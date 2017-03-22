@@ -25,27 +25,70 @@ import org.workin.commons.enums.status.BizStatus;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BaseResponse implements Response {
-	
-	/** 状态编码 */
-	private String code;
+public class BaseResponse extends AbstractResponse {
 	
 	public BaseResponse() {
-		this.code = BizStatus.SUCCESS.getKey();
+		super();
 	}
 	
 	public BaseResponse(String code) {
-		this.code = code;
+		super(code);
 	}
-
-	@Override
-	public String getCode() {
-		return code;
+	
+	/**
+	 * 创建具备默认成功状态码的响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static BaseResponse success() {
+		return success(BizStatus.SUCCESS.getKey());
 	}
-
-	@Override
-	public void setCode(String code) {
-		this.code = code;
+	
+	/**
+	 * 创建具备自定义成功状态码的响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param code
+	 * @return
+	 */
+	public static BaseResponse success(String code) {
+		return new BaseResponse(code);
+	}
+	
+	/**
+	 * 创建具备默认失败状态码的响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static BaseResponse failed() {
+		return failed(BizStatus.FAILED.getKey());
+	}
+	
+	/**
+	 * 创建具备自定义失败状态码的响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static BaseResponse failed(String code) {
+		return new BaseResponse(code);
+	}
+	
+	/**
+	 * 创建具备默认异常状态码的响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static BaseResponse exception() {
+		return new BaseResponse(BizStatus.EXCEPTION.getKey());
+	}
+	
+	/**
+	 * 创建具备自定义异常状态码的响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param code
+	 * @return
+	 */
+	public static BaseResponse exception(String code) {
+		return new BaseResponse(code);
 	}
 
 }

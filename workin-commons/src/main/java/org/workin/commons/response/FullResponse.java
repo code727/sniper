@@ -13,30 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-3-16
+ * Create Date : 2017-3-22
  */
 
 package org.workin.commons.response;
 
 /**
- * 全量响应实现类
+ * 全量响应接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
- * @param <T>
  */
-public class FullResponse<T> extends BaseDataResponse<T> implements MessageResponse {
-
-	/** 响应消息 */
-	private String message;
-
-	@Override
-	public String getMessage() {
-		return message;
-	}
-
-	@Override
-	public void setMessage(String message) {
-		this.message = message;
-	}
+public interface FullResponse<T> extends Response, MessageResponse, DataResponse<T> {
 
 }

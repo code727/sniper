@@ -23,7 +23,7 @@ package org.workin.commons.response;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface MessageResponse {
+public interface MessageResponse extends Response {
 	
 	/**
 	 * 获取响应消息

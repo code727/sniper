@@ -18,24 +18,88 @@
 
 package org.workin.commons.response;
 
+import org.workin.commons.enums.status.BizStatus;
+
 /**
  * 基本的数据响应实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BaseDataResponse<T> extends BaseResponse implements DataResponse<T> {
+public class BaseDataResponse<T> extends AbstractDataResponse<T> {
 	
-	/** 响应数据 */
-	private T data;
-
-	@Override
-	public T getData() {
-		return data;
+	public BaseDataResponse(T data) {
+		super(data);
 	}
-
-	@Override
-	public void setData(T data) {
-		this.data = data;
+	
+	public BaseDataResponse(DataResponse<T> response) {
+		super(response);
+	}
+		
+	public BaseDataResponse(String code, T data) {
+		super(code, data);
+	}
+	
+	/**
+	 * 创建具备默认成功状态码的数据响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param data
+	 * @return
+	 */
+	public static <T> BaseDataResponse<T> success(T data) {
+		return success(BizStatus.SUCCESS.getKey(), data);
+	}
+	
+	/**
+	 * 创建具备自定义成功状态码的数据响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param code
+	 * @param data
+	 * @return
+	 */
+	public static <T> BaseDataResponse<T> success(String code, T data) {
+		return new BaseDataResponse<T>(code, data);
+	}
+	
+	/**
+	 * 创建具备默认失败状态码的数据响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param data
+	 * @return
+	 */
+	public static <T> BaseDataResponse<T> failed(T data) {
+		return new BaseDataResponse<T>(BizStatus.FAILED.getKey(), data);
+	}
+	
+	/**
+	 * 创建具备自定义失败状态码的数据响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param code
+	 * @param data
+	 * @return
+	 */
+	public static <T> BaseDataResponse<T> failed(String code, T data) {
+		return new BaseDataResponse<T>(code, data);
+	}
+	
+	/**
+	 * 创建具备默认异常状态码的数据响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param data
+	 * @return
+	 */
+	public static <T> BaseDataResponse<T> exception(T data) {
+		return exception(BizStatus.EXCEPTION.getKey(), data);
+	}
+	
+	/**
+	 * 创建具备自定义异常状态码的数据响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param code
+	 * @param data
+	 * @return
+	 */
+	public static <T> BaseDataResponse<T> exception(String code, T data) {
+		return new BaseDataResponse<T>(code, data);
 	}
 	
 }

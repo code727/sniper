@@ -38,5 +38,5 @@ public interface Response {
 	 * @param code
 	 */
 	public void setCode(String code);
-	
+		
 }
