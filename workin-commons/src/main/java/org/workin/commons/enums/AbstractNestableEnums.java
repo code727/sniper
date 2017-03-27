@@ -23,7 +23,7 @@ package org.workin.commons.enums;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class AbstractNestableEnums<K1, K2, V2> extends
+public abstract class AbstractNestableEnums<K1, K2, V2> extends
 		AbstractEnums<K1, Enums<K2, V2>> implements NestableEnums<K1, K2, V2> {
 
 	protected AbstractNestableEnums(K1 key, Enums<K2, V2> value) {
