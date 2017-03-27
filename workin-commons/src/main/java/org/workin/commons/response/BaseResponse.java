@@ -90,5 +90,6 @@ public class BaseResponse extends AbstractResponse {
 	public static BaseResponse exception(String code) {
 		return new BaseResponse(code);
 	}
+	
 
 }

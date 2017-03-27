@@ -19,6 +19,7 @@
 package org.workin.commons.response;
 
 import org.workin.commons.enums.status.BizStatus;
+import org.workin.commons.util.StringUtils;
 
 /**
  * 响应抽象类
@@ -46,6 +47,47 @@ public abstract class AbstractResponse implements Response {
 	@Override
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	@Override
+	public boolean isSuccess() {
+		return isMatchStatus(BizStatus.SUCCESS.getKey());
+	}
+	
+
+	@Override
+	public boolean isSuccess(String successCode) {
+		return isMatchStatus(successCode);
+	}
+
+	@Override
+	public boolean isFailed() {
+		return isMatchStatus(BizStatus.FAILED.getKey());
+	}
+
+	@Override
+	public boolean isFailed(String failedCode) {
+		return isMatchStatus(failedCode);
+	}
+
+	@Override
+	public boolean isException() {
+		return isMatchStatus(BizStatus.EXCEPTION.getKey());
+	}
+
+	@Override
+	public boolean isException(String exceptionCode) {
+		return isMatchStatus(exceptionCode);
+	}
+	
+	/**
+	 * 判断状态码是否匹配当前状态
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param status
+	 * @return
+	 */
+	protected boolean isMatchStatus(String status) {
+		return StringUtils.equalsIgnoreCase(status, code);
 	}
 
 }
