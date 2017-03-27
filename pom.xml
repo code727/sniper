@@ -101,5 +101,6 @@
 		<module>workin-templet</module>
 		<module>workin-kafka</module>
 		<module>workin-generator</module>
+		<module>workin-zookeeper</module>
 	</modules>
 </project>

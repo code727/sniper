@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年3月20日
+ * Create Date : 2017-3-20
  */
 
 package org.workin.persistence.sqlmap.mybatis.handler.array;

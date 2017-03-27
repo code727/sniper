@@ -55,7 +55,7 @@ public abstract class AbstractLocaleEnums<K> extends AbstractEnums<K, String> im
 		String message = MessageUtils.getClassMessage(this.getClass(),
 				Locale.getDefault(), getValue(), params, null);
 		
-		return message != null ? message : MessageUtils.getClassMessage(
+		return message != null ? message : MessageUtils.getPackageMessage(
 				this.getClass(), Locale.getDefault(), getValue(), params, defaultMessage);
 	}
 
