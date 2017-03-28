@@ -22,7 +22,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.workin.commons.util.CodecUtils;
-import org.workin.serialization.json.codehaus.JacksonSerializer;
+import org.workin.serialization.json.JacksonSerializer;
 
 /**
  * @description

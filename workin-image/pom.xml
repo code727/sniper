@@ -39,7 +39,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
-			<artifactId>workin-support</artifactId>
+			<artifactId>workin-codec</artifactId>
 			<version>${workin.version}</version>
 		</dependency>
 		<dependency>

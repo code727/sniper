@@ -25,7 +25,7 @@ import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.IOUtils;
-import org.workin.serialization.json.alibaba.FastJsonSerializer;
+import org.workin.serialization.json.FastJsonSerializer;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
 /**
@@ -47,7 +47,7 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 	public void testSerialize() throws Exception {
 		bytes = fastJsonSerializer.serialize(list);
 		
-		String path = "C:/Users/Administrator/Desktop/fastJsonSerializer.txt";
+		String path = "C:/Users/Daniele/Desktop/fastJsonSerializer.txt";
 		IOUtils.write(new FileOutputStream(new File(path)), bytes);
 	}
 

@@ -18,11 +18,11 @@
 
 package org.workin.serialization.jdk;
 
+import org.workin.codec.CodecSupport;
 import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.ObjectUtils;
 import org.workin.serialization.SerializationException;
 import org.workin.serialization.Serializer;
-import org.workin.support.codec.CodecSupport;
 
 /**
  * 字符串序列化器实现类

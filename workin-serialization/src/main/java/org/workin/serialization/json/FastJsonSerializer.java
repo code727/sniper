@@ -16,13 +16,12 @@
  * Create Date : 2016-7-13
  */
 
-package org.workin.serialization.json.alibaba;
+package org.workin.serialization.json;
 
 
 import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.serialization.SerializationException;
-import org.workin.serialization.json.AbstractJsonSerializer;
 
 import com.alibaba.fastjson.parser.DefaultJSONParser;
 import com.alibaba.fastjson.serializer.JSONSerializer;

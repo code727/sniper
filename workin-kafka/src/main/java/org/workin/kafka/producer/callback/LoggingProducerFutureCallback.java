@@ -22,7 +22,7 @@ import org.workin.commons.util.CodecUtils;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
 import org.workin.serialization.Serializer;
-import org.workin.serialization.json.codehaus.JacksonSerializer;
+import org.workin.serialization.json.JacksonSerializer;
 
 /**
  * 可记录日志的生产者回调实现类

@@ -103,7 +103,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	public ListenableFuture<SendResult<K, V>> sendDefaultToPartition(Integer partition, K key, V data);
 	
 	/**
-	 * 将消息数据发送到默认Topic中
+	 * 将消息数据发送到默认Topic后等待返回生产结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param data
 	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
@@ -112,7 +112,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	public ProduceResult<K, V> sendDefaultAndWait(V data) throws Exception;
 	
 	/**
-	 * 将键值对消息数据发送到默认Topic中
+	 * 将键值对消息数据发送到默认Topic后等待返回生产结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param data
@@ -122,7 +122,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	public ProduceResult<K, V> sendDefaultAndWait(K key, V data) throws Exception;
 	
 	/**
-	 * 将消息数据发送到默认Topic的指定分区中
+	 * 将消息数据发送到默认Topic的指定分区后等待返回生产结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param partition
 	 * @param data
@@ -132,7 +132,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	public ProduceResult<K, V> sendDefaultToPartitionAndWait(Integer partition, V data) throws Exception;
 	
 	/**
-	 *  将键值对消息数据发送到默认Topic的指定中
+	 *  将键值对消息数据发送到默认Topic的指定分区后等待返回生产结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param partition
 	 * @param key
@@ -162,7 +162,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	public ListenableFuture<SendResult<K, V>> send(String topicKey, K key, V data);
 	
 	/**
-	 * 将消息数据发送到指定的Topic实例中
+	 * 将消息数据发送到指定的Topic实例后等待返回生产结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param topicKey Topic实例的键
 	 * @param data
@@ -172,7 +172,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	public ProduceResult<K, V> sendAndWait(String topicKey, V data) throws Exception;
 	
 	/**
-	 * 将键值对消息数据发送到指定的Topic实例中
+	 * 将键值对消息数据发送到指定的Topic实例后等待返回生产结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param topicKey Topic实例的键
 	 * @param key

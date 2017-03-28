@@ -26,7 +26,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.util.EntityUtils;
-import org.workin.support.codec.CodecSupport;
+import org.workin.codec.CodecSupport;
 
 /**
  * 响应处理器抽象类

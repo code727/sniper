@@ -19,11 +19,11 @@
 package org.workin.security.algorithm.symmetric;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.workin.codec.Base64Codec;
+import org.workin.codec.Codec;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.support.codec.Base64Codec;
-import org.workin.support.codec.Codec;
 
 /**
  * 对称算法抽象类

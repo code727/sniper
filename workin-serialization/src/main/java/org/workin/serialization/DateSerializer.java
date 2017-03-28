@@ -23,7 +23,7 @@ package org.workin.serialization;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface DateSerializer {
+public interface DateSerializer extends Serializer {
 	
 	/**
 	 * 获取日期格式
@@ -38,5 +38,6 @@ public interface DateSerializer {
 	 * @param dateFormat
 	 */
 	public void setDateFormat(String dateFormat);
+	
 
 }

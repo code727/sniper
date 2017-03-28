@@ -22,9 +22,9 @@ import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.Map;
 
+import org.workin.codec.encoder.StringEncoder;
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.RegexUtils;
-import org.workin.support.encoder.StringEncoder;
 
 /**
  * 自适应参数对象消息格式化实现类

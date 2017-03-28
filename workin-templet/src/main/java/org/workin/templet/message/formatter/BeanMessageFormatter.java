@@ -21,11 +21,11 @@ package org.workin.templet.message.formatter;
 import java.io.UnsupportedEncodingException;
 import java.util.Set;
 
+import org.workin.codec.encoder.StringEncoder;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.support.bean.BeanReflector;
 import org.workin.support.bean.DefaultBeanReflector;
-import org.workin.support.encoder.StringEncoder;
 
 /**
  * Java Bean对象消息格式化处理器

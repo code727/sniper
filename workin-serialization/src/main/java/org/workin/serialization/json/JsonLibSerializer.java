@@ -16,7 +16,7 @@
  * Create Date : 2016-7-12
  */
 
-package org.workin.serialization.json.sf;
+package org.workin.serialization.json;
 
 import java.util.Date;
 
@@ -33,7 +33,6 @@ import net.sf.json.util.JSONUtils;
 import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.DateUtils;
 import org.workin.serialization.SerializationException;
-import org.workin.serialization.json.AbstractJsonSerializer;
 
 /**
  * JsonLib序列器实现类

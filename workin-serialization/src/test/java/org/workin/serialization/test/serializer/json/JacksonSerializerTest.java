@@ -26,7 +26,7 @@ import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.IOUtils;
-import org.workin.serialization.json.codehaus.JacksonSerializer;
+import org.workin.serialization.json.JacksonSerializer;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
 /**
@@ -48,7 +48,7 @@ public class JacksonSerializerTest extends AbstractSerializerTest {
 	public void testSerialize() throws Exception {
 		bytes = jacksonSerializer.serialize(list);
 		
-		String path = "C:/Users/Administrator/Desktop/jacksonSerializer.txt";
+		String path = "C:/Users/Daniele/Desktop/jacksonSerializer.txt";
 		IOUtils.write(new FileOutputStream(new File(path)), bytes);
 	}
 

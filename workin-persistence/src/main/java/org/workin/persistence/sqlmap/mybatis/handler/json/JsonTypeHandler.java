@@ -28,8 +28,8 @@ import org.apache.ibatis.type.JdbcType;
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.serialization.json.JacksonSerializer;
 import org.workin.serialization.json.JsonSerializer;
-import org.workin.serialization.json.codehaus.JacksonSerializer;
 
 /**
  * @description JSON类型处理器

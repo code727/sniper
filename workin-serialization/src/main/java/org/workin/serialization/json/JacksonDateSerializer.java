@@ -16,7 +16,7 @@
  * Create Date : 2016-7-13
  */
 
-package org.workin.serialization.json.codehaus.support;
+package org.workin.serialization.json;
 
 import java.io.IOException;
 import java.util.Date;
@@ -26,23 +26,20 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.workin.commons.util.DateUtils;
-import org.workin.serialization.DateSerializer;
 
 /**
- * 自定义日期序列化器实现类
+ * Jackson日期序列化器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CustomDateSerializer extends JsonSerializer<Date> implements DateSerializer {
+public class JacksonDateSerializer extends JsonSerializer<Date> {
 	
 	private String dateFormat;
 	
-	@Override
 	public String getDateFormat() {
 		return dateFormat;
 	}
 
-	@Override
 	public void setDateFormat(String dateFormat) {
 		this.dateFormat = dateFormat;
 	}
@@ -53,5 +50,5 @@ public class CustomDateSerializer extends JsonSerializer<Date> implements DateSe
 		
 		jgen.writeString(DateUtils.dateToString(date, getDateFormat()));  
 	}
-	
+
 }

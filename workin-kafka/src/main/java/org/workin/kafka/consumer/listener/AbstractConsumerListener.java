@@ -25,7 +25,7 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.workin.kafka.support.ConsumeResult;
 import org.workin.kafka.support.MQFactory;
 import org.workin.serialization.Serializer;
-import org.workin.serialization.json.codehaus.JacksonSerializer;
+import org.workin.serialization.json.JacksonSerializer;
 
 /**
  * 消费者监听抽象类

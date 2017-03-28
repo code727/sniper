@@ -22,13 +22,13 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.workin.codec.Base64Codec;
+import org.workin.codec.Codec;
+import org.workin.codec.CompositeCodec;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.security.algorithm.symmetric.impl.AESAlgorithm;
 import org.workin.security.algorithm.symmetric.impl.BlowfishAlgorithm;
 import org.workin.security.algorithm.symmetric.impl.DESAlgorithm;
-import org.workin.support.codec.Base64Codec;
-import org.workin.support.codec.Codec;
-import org.workin.support.codec.CompositeCodec;
 import org.workin.test.junit.BaseTestCase;
 
 /**

@@ -21,10 +21,10 @@ package org.workin.security.algorithm.asymmetric;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+import org.workin.codec.Base64Codec;
+import org.workin.codec.Codec;
 import org.workin.commons.util.CodecUtils;
 import org.workin.security.algorithm.symmetric.AbstractSymmetricAlgorithm;
-import org.workin.support.codec.Base64Codec;
-import org.workin.support.codec.Codec;
 
 /**
  * 非对称算法抽象类

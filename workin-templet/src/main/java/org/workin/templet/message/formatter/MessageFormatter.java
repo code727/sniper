@@ -20,7 +20,7 @@ package org.workin.templet.message.formatter;
 
 import java.io.UnsupportedEncodingException;
 
-import org.workin.support.encoder.StringEncoder;
+import org.workin.codec.encoder.StringEncoder;
 
 /**
  * 泛型参数消息格式化处理器接口

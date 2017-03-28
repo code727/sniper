@@ -102,5 +102,6 @@
 		<module>workin-kafka</module>
 		<module>workin-generator</module>
 		<module>workin-zookeeper</module>
+		<module>workin-codec</module>
 	</modules>
 </project>

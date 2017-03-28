@@ -23,9 +23,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.workin.codec.encoder.StringEncoder;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.support.encoder.StringEncoder;
 
 /**
  * Map参数消息格式化处理器实现类

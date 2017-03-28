@@ -22,12 +22,12 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.workin.codec.Base64Codec;
+import org.workin.codec.Codec;
+import org.workin.codec.CompositeCodec;
+import org.workin.codec.HexCodec;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.security.algorithm.asymmetric.impl.RSAAlgorithm;
-import org.workin.support.codec.Base64Codec;
-import org.workin.support.codec.Codec;
-import org.workin.support.codec.CompositeCodec;
-import org.workin.support.codec.HexCodec;
 
 /**
  * 非对称加解密算法单元测试类

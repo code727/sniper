@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016-5-6
+ * Create Date : 2017-3-10
  */
 
-package org.workin.support.codec;
+package org.workin.kafka.serialization;
+
+import org.apache.kafka.common.serialization.Deserializer;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 /**
- * 编解码处理器抽象类
+ * SpringKafka JSON反序列化解析器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractCodec implements Codec {
+public class SpringKafkaJsonDeserializer<T> extends JsonDeserializer<T> implements Deserializer<T> {
 	
-	@Override
-	public String encode(String text) {
-		return encode(text, null);
-	}
-	
-	@Override
-	public String decode(String encodedText) {
-		return decode(encodedText, null);
+	@SuppressWarnings("unchecked")
+	public SpringKafkaJsonDeserializer(String typeClass) throws ClassNotFoundException {
+		super((Class<T>) Class.forName(typeClass));
 	}
 
 }

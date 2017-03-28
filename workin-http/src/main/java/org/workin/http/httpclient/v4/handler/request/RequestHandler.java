@@ -19,8 +19,8 @@
 package org.workin.http.httpclient.v4.handler.request;
 
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.workin.codec.Codecable;
 import org.workin.http.HttpForm;
-import org.workin.support.codec.Codecable;
 
 /**
  * 请求处理器

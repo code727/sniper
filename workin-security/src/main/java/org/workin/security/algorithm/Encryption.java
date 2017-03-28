@@ -18,7 +18,7 @@
 
 package org.workin.security.algorithm;
 
-import org.workin.support.codec.Codecable;
+import org.workin.codec.Codecable;
 
 
 /**

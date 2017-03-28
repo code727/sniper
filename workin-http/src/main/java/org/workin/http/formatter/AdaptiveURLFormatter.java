@@ -22,11 +22,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.Map;
 
+import org.workin.codec.encoder.StringEncoder;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.support.encoder.StringEncoder;
 import org.workin.templet.message.formatter.AdaptiveMessageFormatter;
 
 /**

@@ -16,13 +16,12 @@
  * Create Date : 2016-7-12
  */
 
-package org.workin.serialization.json.codehaus;
+package org.workin.serialization.json;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.serialization.SerializationException;
-import org.workin.serialization.json.AbstractJsonSerializer;
 
 /**
  * Jackson序列器实现类

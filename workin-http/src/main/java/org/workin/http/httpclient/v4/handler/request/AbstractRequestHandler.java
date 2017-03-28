@@ -18,9 +18,9 @@
 
 package org.workin.http.httpclient.v4.handler.request;
 
+import org.workin.codec.CodecSupport;
 import org.workin.commons.util.StringUtils;
 import org.workin.http.HttpForm;
-import org.workin.support.codec.CodecSupport;
 
 /**
  * 请求处理器抽象类

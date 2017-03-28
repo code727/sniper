@@ -21,6 +21,7 @@ package org.workin.http.httpclient;
 import java.util.Map;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.workin.codec.encoder.RawURLEncoder;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
@@ -29,7 +30,6 @@ import org.workin.http.exception.HttpFormNotFoundException;
 import org.workin.http.exception.NoSuchHttpMethodException;
 import org.workin.http.formatter.AdaptiveURLFormatter;
 import org.workin.http.register.HttpFormRegister;
-import org.workin.support.encoder.RawURLEncoder;
 import org.workin.templet.message.formatter.MessageFormatter;
 
 /**

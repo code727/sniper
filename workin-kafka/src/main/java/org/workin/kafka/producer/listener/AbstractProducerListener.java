@@ -28,7 +28,7 @@ import org.workin.kafka.support.MQFactory;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
 import org.workin.serialization.Serializer;
-import org.workin.serialization.json.codehaus.JacksonSerializer;
+import org.workin.serialization.json.JacksonSerializer;
 
 /**
  * 生产者监听器抽象类

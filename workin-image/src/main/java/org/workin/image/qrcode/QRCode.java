@@ -21,10 +21,10 @@ package org.workin.image.qrcode;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
+import org.workin.codec.CodecSupport;
 import org.workin.commons.util.NumberUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.image.layout.QRCodeLayout;
-import org.workin.support.codec.CodecSupport;
 
 /**
  * 二维码对象

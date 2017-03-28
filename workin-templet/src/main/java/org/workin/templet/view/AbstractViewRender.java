@@ -18,7 +18,7 @@
 
 package org.workin.templet.view;
 
-import org.workin.support.codec.CodecSupport;
+import org.workin.codec.CodecSupport;
 
 /**
  * 视图渲染器抽象类

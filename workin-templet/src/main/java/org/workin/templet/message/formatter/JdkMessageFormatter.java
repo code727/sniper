@@ -22,10 +22,10 @@ import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.Collection;
 
+import org.workin.codec.encoder.StringEncoder;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.support.encoder.StringEncoder;
 
 /**
  * JDK原生态消息格式化处理器实现类

@@ -18,10 +18,10 @@
 
 package org.workin.serialization.json;
 
+import org.workin.codec.CodecSupport;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.serialization.SerializationException;
-import org.workin.support.codec.CodecSupport;
 
 /**
  * JSON序列器抽象类

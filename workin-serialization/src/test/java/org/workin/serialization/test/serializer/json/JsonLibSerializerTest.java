@@ -24,7 +24,7 @@ import java.io.FileOutputStream;
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.IOUtils;
-import org.workin.serialization.json.sf.JsonLibSerializer;
+import org.workin.serialization.json.JsonLibSerializer;
 import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
@@ -42,7 +42,7 @@ public class JsonLibSerializerTest extends AbstractSerializerTest {
 	public void testSerialize() throws Exception {
 		bytes = jsonLibSerializer.serialize(list);
 		
-		String path = "C:/Users/Administrator/Desktop/jsonLibSerializer.txt";
+		String path = "C:/Users/Daniele/Desktop/jsonLibSerializer.txt";
 		IOUtils.write(new FileOutputStream(new File(path)), bytes);
 	}
 

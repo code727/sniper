@@ -31,7 +31,7 @@ import org.workin.commons.util.ArrayUtils;
  * JOSN格式的redis序列化器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
- * @see org.workin.serialization.json.codehaus.JacksonSerializer
+ * @see org.workin.serialization.json.JacksonSerializer
  */
 @Deprecated
 public class JacksonJsonRedisSerializer<T> implements RedisSerializer<T> {
