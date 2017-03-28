@@ -22,6 +22,8 @@
 				<entry key="group.id" value="consumer_group_0" />
 				<entry key="client.id" value="0" />
 				<entry key="enable.auto.commit" value="true" />
+				<!-- 当Kafka没有初始偏移或如果当前偏移在服务器上不再存在时的处理方式 -->
+				<!-- <entry key="auto.offset.reset" value="none" /> -->
 				<entry key="auto.commit.interval.ms" value="1000" />
 				<entry key="session.timeout.ms" value="15000" />
 				<entry key="connections.max.idle.ms" value="300000" />

@@ -36,7 +36,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	 * @param data
 	 * @return
 	 */
-	public <T> void send(V data, ListenableFutureCallback<T> callback);
+	public <T> void sendDefault(V data, ListenableFutureCallback<T> callback);
 	
 	/**
 	 * 将键值对数据发送到默认Topic，发送结束后回调指定的事件
@@ -45,7 +45,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	 * @param data
 	 * @param callback
 	 */
-	public <T> void send(K key, V data, ListenableFutureCallback<T> callback);
+	public <T> void sendDefault(K key, V data, ListenableFutureCallback<T> callback);
 	
 	/**
 	 * 将消息数据发送到默认Topic的指定分区中，发送结束后回调指定的事件
@@ -54,7 +54,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	 * @param data
 	 * @param callback
 	 */
-	public <T> void sendToPartition(Integer partition, V data, ListenableFutureCallback<T> callback);
+	public <T> void sendDefaultToPartition(Integer partition, V data, ListenableFutureCallback<T> callback);
 	
 	/** 
 	 * 将键值对数据发送到默认Topic的指定分区中，发送结束后回调指定的事件
@@ -64,7 +64,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	 * @param data
 	 * @param callback 
 	 */
-	public <T> void sendToPartition(Integer partition, K key, V data, ListenableFutureCallback<T> callback);
+	public <T> void sendDefaultToPartition(Integer partition, K key, V data, ListenableFutureCallback<T> callback);
 	
 	/**
 	 * 将消息数据发送到默认Topic中
@@ -72,7 +72,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	 * @param data
 	 * @return
 	 */
-	public ListenableFuture<SendResult<K, V>> send(V data);
+	public ListenableFuture<SendResult<K, V>> sendDefault(V data);
 	
 	/**
 	 * 将键值对消息数据发送到默认Topic中
@@ -81,7 +81,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	 * @param data
 	 * @return
 	 */
-	public ListenableFuture<SendResult<K, V>> send(K key, V data);
+	public ListenableFuture<SendResult<K, V>> sendDefault(K key, V data);
 	
 	/**
 	 * 将消息数据发送到默认Topic的指定分区中
@@ -90,7 +90,7 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	 * @param data
 	 * @return
 	 */
-	public ListenableFuture<SendResult<K, V>> sendToPartition(Integer partition, V data);
+	public ListenableFuture<SendResult<K, V>> sendDefaultToPartition(Integer partition, V data);
 	
 	/**
 	 * 将键值对消息数据发送到默认Topic的指定分区中
@@ -100,8 +100,48 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	 * @param data
 	 * @return
 	 */
-	public ListenableFuture<SendResult<K, V>> sendToPartition(Integer partition, K key, V data);
+	public ListenableFuture<SendResult<K, V>> sendDefaultToPartition(Integer partition, K key, V data);
 	
+	/**
+	 * 将消息数据发送到默认Topic中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param data
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public ProduceResult<K, V> sendDefaultAndWait(V data) throws Exception;
+	
+	/**
+	 * 将键值对消息数据发送到默认Topic中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param data
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public ProduceResult<K, V> sendDefaultAndWait(K key, V data) throws Exception;
+	
+	/**
+	 * 将消息数据发送到默认Topic的指定分区中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param partition
+	 * @param data
+	 * @returns 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public ProduceResult<K, V> sendDefaultToPartitionAndWait(Integer partition, V data) throws Exception;
+	
+	/**
+	 *  将键值对消息数据发送到默认Topic的指定中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param partition
+	 * @param key
+	 * @param data
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public ProduceResult<K, V> sendDefaultToPartitionAndWait(Integer partition, K key, V data) throws Exception;
+		
 	/**
 	 * 将消息数据发送到指定的Topic实例中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -120,46 +160,6 @@ public interface KafkaProducer<K, V> extends KafkaProducerOperations {
 	 * @return
 	 */
 	public ListenableFuture<SendResult<K, V>> send(String topicKey, K key, V data);
-	
-	/**
-	 * 将消息数据发送到默认Topic中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param data
-	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
-	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
-	 */
-	public ProduceResult<K, V> sendAndWait(V data) throws Exception;
-	
-	/**
-	 * 将键值对消息数据发送到默认Topic中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param data
-	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
-	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
-	 */
-	public ProduceResult<K, V> sendAndWait(K key, V data) throws Exception;
-	
-	/**
-	 * 将消息数据发送到默认Topic的指定分区中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param partition
-	 * @param data
-	 * @returns 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
-	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
-	 */
-	public ProduceResult<K, V> sendToPartitionAndWait(Integer partition, V data) throws Exception;
-	
-	/**
-	 *  将键值对消息数据发送到默认Topic的指定中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param partition
-	 * @param key
-	 * @param data
-	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
-	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
-	 */
-	public ProduceResult<K, V> sendToPartitionAndWait(Integer partition, K key, V data) throws Exception;
 	
 	/**
 	 * 将消息数据发送到指定的Topic实例中

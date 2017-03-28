@@ -1145,6 +1145,15 @@ public class StringUtils {
 	}
 	
 	/**
+	 * 生成32位全大写UUID
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static String UUIDUpperCase() {
+		return UUID(true);
+	}
+	
+	/**
 	 * 生成32位UUID，并指定是否转换为全大写
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param upperCase
@@ -1161,7 +1170,16 @@ public class StringUtils {
 	 * @return
 	 */
 	public static String unsignedUUID() {
-		return UUID.randomUUID().toString().replaceAll("-", "");
+		return unsignedUUID(false);
+	}
+	
+	/**
+	 * 生成32位无符号全大写UUID
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static String unsignedUUIDUpperCase() {
+		return unsignedUUID(true);
 	}
 	
 	/**

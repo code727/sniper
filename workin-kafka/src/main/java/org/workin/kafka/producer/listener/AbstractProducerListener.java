@@ -43,7 +43,7 @@ public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdap
 	protected Serializer loggerSerializer = new JacksonSerializer();
 	
 	/** 是否关注Success事件的发生 */
-	private boolean interestedInSuccess = true;
+	private boolean interestedInSuccess;
 	
 	/** 当监听到生产者异常后是否抛出这个异常 */
 	private boolean throwExceptionOnError;
@@ -84,8 +84,10 @@ public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdap
 	
 	@Override
 	public void onSuccess(String topic, Integer partition, K key, V value, RecordMetadata recordMetadata) {
-		ProducerRecord<K, V> producerRecord = new ProducerRecord<K, V>(topic, partition, key, value);
-		afterSuccess(MQFactory.buildProduceResult(producerRecord, recordMetadata));
+		if (interestedInSuccess) {
+			ProducerRecord<K, V> producerRecord = new ProducerRecord<K, V>(topic, partition, key, value);
+			afterSuccess(MQFactory.buildProduceResult(producerRecord, recordMetadata));
+		}
 	}
 	
 	@Override

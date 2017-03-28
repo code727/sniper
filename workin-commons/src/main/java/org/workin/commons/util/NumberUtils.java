@@ -1159,7 +1159,7 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static float unAbs(float a) {
-        return (a > 0.0F) ? 0.0F - a : a;
+        return (a > 0.0F) ? -a : a;
     }
 	
 	/**
@@ -1169,7 +1169,7 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static double unAbs(double a) {
-        return (a > 0.0D) ? 0.0D - a : a;
+        return (a > 0.0D) ? -a : a;
     }
 	
 	/**

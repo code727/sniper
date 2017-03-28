@@ -68,7 +68,7 @@ public abstract class KafkaProducerSupport<K, V> extends CheckableInitializingBe
 	}
 	
 	/**
-	 * 根据键名称获取Topic实例
+	 * 根据键名称获取Topic节点
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param topicKey
 	 * @return
@@ -78,17 +78,29 @@ public abstract class KafkaProducerSupport<K, V> extends CheckableInitializingBe
 	}
 	
 	/**
-	 * 获取Topic实例名称，为空时返回全局默认的名称
+	 * 获取Topic节点名称，为空时返回全局默认的名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param topicNode
 	 * @return
 	 */
 	protected String getTopicName(TopicNode topicNode) {
+		return getTopicName(topicNode, null);
+	}
+	
+	/**
+	 * 获取Topic节点名称，节点为空时返回指定的名称，若指定的名称也为空，返回全局默认的名称
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param topicNode
+	 * @param name
+	 * @return
+	 */
+	protected String getTopicName(TopicNode topicNode, String name) {
 		if (topicNode == null)
-			return kafkaTemplate.getDefaultTopic();
+			return StringUtils.isNotBlank(name) ? name : kafkaTemplate.getDefaultTopic();
 		
 		String topicName = topicNode.getName();
-		return StringUtils.isNotBlank(topicName) ? topicName : kafkaTemplate.getDefaultTopic();
+		return StringUtils.isNotBlank(topicName) ? topicName
+				: (StringUtils.isNotBlank(name) ? name : kafkaTemplate.getDefaultTopic());
 	}
 	
 	/**

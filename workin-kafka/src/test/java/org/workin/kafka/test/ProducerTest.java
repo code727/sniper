@@ -39,29 +39,44 @@ import org.workin.test.spring.JUnit4SpringTestCase;
 public class ProducerTest extends JUnit4SpringTestCase {
 	
 	@Autowired
-	private KafkaProducer<Integer, Message> kafkaProducer;
+	private KafkaProducer<Integer, Object> kafkaProducer;
 	
-	@Test
-	public void testSend() throws Exception {
-		Message message = new Message(NumberUtils.randomIn(10000), "testSend", new Date());
+//	@Test
+	public void testSendDefault() throws Exception {
+		Message message = new Message(NumberUtils.randomIn(10000), "sendDefault", new Date());
 		LoggingProducerFutureCallback<Integer, Message> callback = new LoggingProducerFutureCallback<Integer, Message>();
 //		callback.setInterestedInSuccess(false);
 		try {
-			kafkaProducer.send(message.getId(), message, callback);
+			kafkaProducer.sendDefault(message.getId(), message, callback);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	@Test
-	public void sendAndWait() throws Exception {
-		Message message = new Message(NumberUtils.randomIn(10000), "kafka_sendAndWait", new Date());
+//	@Test
+	public void testSendDefaultAndWait() throws Exception {
+		Message message = new Message(NumberUtils.randomIn(10000), "sendDefaultAndWait", new Date());
 		
-		ProduceResult<Integer, Message> result = kafkaProducer.sendAndWait(message.getId(), message);
+		ProduceResult<Integer, Object> result = kafkaProducer.sendDefaultAndWait(message.getId(), message);
 		Topic targetTopic = result.getTargetTopic();
 		
-		System.out.println("Sucess send to target topic [name:"
+		System.out.println("Success send to target topic [name:"
 				+ targetTopic.getName() + ",partition:" + targetTopic.getPartition() + "]");
+	}
+	
+	@Test
+	public void testSend() throws Exception {
+		for (int i = 0; i < 10; i++) {
+			Message message = new Message(NumberUtils.randomIn(10000), "testSend", new Date());
+			kafkaProducer.send("test", message.getId(), message);
+		}
+		
+	}
+	
+//	@Test
+	public void testSendAndWait() throws Exception {
+		Message message = new Message(NumberUtils.randomIn(10000), "testSendAndWait", new Date());
+		kafkaProducer.sendAndWait("test", message.getId(), message);
 	}
 		
 }
