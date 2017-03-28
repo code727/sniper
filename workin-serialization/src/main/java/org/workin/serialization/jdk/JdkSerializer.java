@@ -46,7 +46,7 @@ public class JdkSerializer implements Serializer {
 			objectOutputStream.flush();
 			byte[] bytes = byteArrayOutputStream.toByteArray();
 			return bytes;
-		}  catch(IOException e) {
+		} catch (IOException e) {
 			throw new SerializationException("Cannot serialize", e);
 		} finally {
 			try {
@@ -68,7 +68,7 @@ public class JdkSerializer implements Serializer {
 			objectInputStream = new ObjectInputStream(byteArrayInputStream);
 			T result = (T) objectInputStream.readObject();
 			return result;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw new SerializationException("Cannot deserialize", e);
 		} finally {
 			try {

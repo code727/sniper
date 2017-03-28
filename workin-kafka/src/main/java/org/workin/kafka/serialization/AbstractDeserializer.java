@@ -31,15 +31,12 @@ public abstract class AbstractDeserializer<T> implements Deserializer<T> {
 
 	@Override
 	public void configure(Map<String, ?> configs, boolean isKey) {
-	}
-
-	@Override
-	public T deserialize(String topic, byte[] data) {
-		return null;
+		
 	}
 
 	@Override
 	public void close() {
+		
 	}
 
 }

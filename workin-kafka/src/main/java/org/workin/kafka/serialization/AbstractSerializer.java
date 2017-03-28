@@ -27,16 +27,11 @@ import org.apache.kafka.common.serialization.Serializer;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class AbstractSerializer<T> implements Serializer<T> {
+public abstract class AbstractSerializer<T> implements Serializer<T> {
 
 	@Override
 	public void configure(Map<String, ?> configs, boolean isKey) {
 		
-	}
-
-	@Override
-	public byte[] serialize(String topic, T data) {
-		return null;
 	}
 
 	@Override
