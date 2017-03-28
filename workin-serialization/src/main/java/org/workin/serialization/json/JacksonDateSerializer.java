@@ -48,7 +48,7 @@ public class JacksonDateSerializer extends JsonSerializer<Date> {
 	public void serialize(Date date, JsonGenerator jgen, SerializerProvider provider) 
 			throws IOException, JsonProcessingException {
 		
-		jgen.writeString(DateUtils.dateToString(date, getDateFormat()));  
+		jgen.writeString(DateUtils.dateToString(date, dateFormat));  
 	}
 
 }

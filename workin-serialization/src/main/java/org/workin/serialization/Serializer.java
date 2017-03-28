@@ -18,7 +18,6 @@
 
 package org.workin.serialization;
 
-
 /**
  * 序列器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -43,5 +42,5 @@ public interface Serializer {
 	 * @throws SerializationException
 	 */
 	public <T> T deserialize(byte[] bytes) throws SerializationException;
-	
+		
 }

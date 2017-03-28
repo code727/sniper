@@ -23,35 +23,34 @@ package org.workin.serialization;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface TypeSerializer extends Serializer {
+public interface TypeSerializer extends Serializer, Deserializer {
 	
 	/**
-	 * 将字节数据反序列化成指定类型的对象
+	 * 获取结果类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bytes
+	 * @return
+	 */
+	public String getTypeClass();
+
+	/**
+	 * 设置结果类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param typeClass
+	 */
+	public void setTypeClass(String typeClass);
+
+	/**
+	 * 获取结果类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Class<?> getType();
+
+	/**
+	 * 设置结果类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
-	 * @return
-	 * @throws SerializationException
 	 */
-	public <T> T deserialize(byte[] bytes, Class<T> type) throws SerializationException;
-	
-	/**
-	 * 将字符串反序列化成指定类型的对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param text
-	 * @param type
-	 * @return
-	 * @throws SerializationException
-	 */
-	public <T> T deserialize(String text, Class<T> type) throws SerializationException;
-	
-	/**
-	 * 将字符串文本反序列化
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param text
-	 * @return
-	 * @throws SerializationException
-	 */
-	public <T> T deserialize(String text) throws SerializationException;
+	public void setType(Class<?> type);
 
 }

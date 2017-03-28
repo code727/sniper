@@ -28,32 +28,4 @@ import org.workin.serialization.TypeSerializer;
  */
 public interface JsonSerializer extends TypeSerializer, DateSerializer {
 	
-	/**
-	 * 获取结果类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getTypeClass();
-
-	/**
-	 * 设置结果类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param typeClass
-	 */
-	public void setTypeClass(String typeClass);
-
-	/**
-	 * 获取结果类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Class<?> getType();
-
-	/**
-	 * 设置结果类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param type
-	 */
-	public void setType(Class<?> type);
-			
 }

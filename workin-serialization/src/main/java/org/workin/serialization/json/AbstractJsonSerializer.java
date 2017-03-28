@@ -18,27 +18,19 @@
 
 package org.workin.serialization.json;
 
-import org.workin.codec.CodecSupport;
-import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.serialization.SerializationException;
+import org.workin.serialization.AbstractTypeSerializer;
 
 /**
  * JSON序列器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractJsonSerializer extends CodecSupport implements JsonSerializer {
+public abstract class AbstractJsonSerializer extends AbstractTypeSerializer implements JsonSerializer {
 	
 	/** 序列化日期时指定的格式 */
-	protected String dateFormat = DateUtils.DEFAULT_DATETIME_FORMAT;
+	protected String dateFormat;
 	
-	/** 序列化结果类型字符串 */
-	private String typeClass;
-	
-	/** 序列化结果类型 */
-	private Class<?> type;
-		
 	@Override
 	public String getDateFormat() {
 		return dateFormat;
@@ -49,36 +41,6 @@ public abstract class AbstractJsonSerializer extends CodecSupport implements Jso
 		this.dateFormat = dateFormat;
 	}
 		
-	@Override
-	public String getTypeClass() {
-		return typeClass;
-	}
-	
-	@Override
-	public void setTypeClass(String typeClass) {
-		if (StringUtils.isNotBlank(typeClass) && !(typeClass.equals(this.typeClass))) {
-			this.typeClass = typeClass;
-			try {
-				this.type = Class.forName(typeClass);
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	@Override
-	public void setType(Class<?> type) {
-		if (type != null && type != this.type) {
-			this.type = type;
-			this.typeClass = type.getName();
-		}
-	}
-
-	@Override
-	public Class<?> getType() {
-		return type;
-	}
-	
 	/**
 	 * 从字符串中判断出是否为一个JSON数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -87,16 +49,6 @@ public abstract class AbstractJsonSerializer extends CodecSupport implements Jso
 	 */
 	protected boolean isJsonArray(String jsonString) {
 		return StringUtils.startsWith(jsonString, "[") && StringUtils.endsWith(jsonString, "]");
-	}
-	
-	@Override
-	public <T> T deserialize(byte[] bytes) throws SerializationException {
-		return deserialize(bytes, null);
-	}
-	
-	@Override
-	public <T> T deserialize(String text) throws SerializationException {
-		return deserialize(text, null);
 	}
 	
 }
