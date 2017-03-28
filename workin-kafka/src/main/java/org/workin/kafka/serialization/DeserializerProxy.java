@@ -29,11 +29,11 @@ import org.workin.serialization.Serializer;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class KafkaDeserializerProxy<T> extends AbstractDeserializer<T> {
+public class DeserializerProxy<T> extends AbstractDeserializer<T> {
 	
 	private Serializer serializer;
 	
-	public KafkaDeserializerProxy(Serializer serializer) {
+	public DeserializerProxy(Serializer serializer) {
 		AssertUtils.assertNotNull(serializer, "Workin serializer must not be null");
 		
 		this.serializer = serializer;

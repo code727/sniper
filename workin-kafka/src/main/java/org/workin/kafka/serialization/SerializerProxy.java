@@ -28,11 +28,11 @@ import org.workin.serialization.Serializer;
  * @version 1.0
  */
 @SuppressWarnings("rawtypes")
-public class KafkaSerializerProxy extends AbstractSerializer {
+public class SerializerProxy extends AbstractSerializer {
 	
 	private Serializer serializer;
 	
-	public KafkaSerializerProxy(Serializer serializer) {
+	public SerializerProxy(Serializer serializer) {
 		AssertUtils.assertNotNull(serializer, "Workin serializer must not be null");
 		
 		this.serializer = serializer;
