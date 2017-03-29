@@ -34,6 +34,19 @@ import org.workin.kafka.topic.Topic;
 public class MQFactory {
 	
 	/**
+	 * 根据topic名称、分区和消息的键值构建出Kafka生产记录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param topic
+	 * @param partition
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public static <K, V> ProducerRecord<K, V> buildProducerRecord(String topic, Integer partition, K key, V value) {
+		return new ProducerRecord<K, V>(topic, partition, null, key, value);
+	}
+	
+	/**
 	 * 根据topic名称、分区和消息的键值构建出可序列化的生产记录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param topic

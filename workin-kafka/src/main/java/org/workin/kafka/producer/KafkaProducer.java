@@ -18,168 +18,129 @@
 
 package org.workin.kafka.producer;
 
-import org.springframework.kafka.support.SendResult;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
+import java.util.concurrent.Future;
+
+import org.apache.kafka.clients.producer.Callback;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.workin.kafka.support.ProduceResult;
 
 /**
- * Kafka生产者接口
+ * 生产者接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface KafkaProducer<K, V> extends KafkaProducerOperations {
+public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
-	 * 将消息数据发送到默认Topic中，发送结束后回调指定的事件
+	 * 将消息值发送到默认topic
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param data
+	 * @param value
 	 * @return
 	 */
-	public <T> void sendDefault(V data, ListenableFutureCallback<T> callback);
+	public <K, V> Future<ProduceResult<K, V>> sendDefault(V value);
 	
 	/**
-	 * 将键值对数据发送到默认Topic，发送结束后回调指定的事件
+	 * 将消息键值发送到默认topic
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
-	 * @param data
+	 * @param value
+	 * @return
+	 */
+	public <K, V> Future<ProduceResult<K, V>> sendDefault(K key, V value);
+	
+	/**
+	 * 将消息值发送到默认topic后等待返回生产结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public <K, V> ProduceResult<K, V> sendDefaultAndWait(V value) throws Exception;
+	
+	/**
+	 * 将消息键值发送到默认Topic后等待返回生产结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key 
+	 * @param value
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public <K, V> ProduceResult<K, V> sendDefaultAndWait(K key, V value) throws Exception;
+	
+	/**
+	 * 将消息值发送到指定的Topic实例中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name Topic注册名称
+	 * @param value
+	 * @return
+	 */
+	public <K, V> Future<ProduceResult<K, V>> send(String name, V value);
+	
+	/**
+	 * 将消息键值发送到指定的Topic实例中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name Topic注册名称
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public <K, V> Future<ProduceResult<K, V>> send(String name, K key, V value);
+	
+	/**
+	 * 将消息值发送到指定的Topic实例后等待返回生产结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name Topic注册名称
+	 * @param value
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public <K, V> ProduceResult<K, V> sendAndWait(String name, V value) throws Exception;
+	
+	/**
+	 * 将消息键值发送到指定的Topic实例后等待返回生产结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name Topic注册名称
+	 * @param key
+	 * @param value
+	 * @return
+	 * @throws Exception
+	 */
+	public <K, V> ProduceResult<K, V> sendAndWait(String name, K key, V value) throws Exception;
+	
+	/**
+	 * 发送生产记录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param producerRecord
+	 * @return
+	 */
+	public <K, V> Future<ProduceResult<K, V>> send(ProducerRecord<K, V> producerRecord);
+	
+	/**
+	 * 发送生产记录，并指定在生产完成时的回调行为
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param producerRecord
 	 * @param callback
+	 * @return
 	 */
-	public <T> void sendDefault(K key, V data, ListenableFutureCallback<T> callback);
+	public <K, V> Future<ProduceResult<K, V>> send(ProducerRecord<K, V> producerRecord, Callback callback);
 	
 	/**
-	 * 将消息数据发送到默认Topic的指定分区中，发送结束后回调指定的事件
+	 * 发送生产记录后等待返回生产结果    并指定在生产过程中的回调行为
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param partition
-	 * @param data
+	 * @param producerRecord
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public <K, V> ProduceResult<K, V> sendAndWait(ProducerRecord<K, V> producerRecord) throws Exception;
+	
+	/**
+	 * 发送生产记录后等待返回生产结果，
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param producerRecord
 	 * @param callback
-	 */
-	public <T> void sendDefaultToPartition(Integer partition, V data, ListenableFutureCallback<T> callback);
-	
-	/** 
-	 * 将键值对数据发送到默认Topic的指定分区中，发送结束后回调指定的事件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param partition
-	 * @param key
-	 * @param data
-	 * @param callback 
-	 */
-	public <T> void sendDefaultToPartition(Integer partition, K key, V data, ListenableFutureCallback<T> callback);
-	
-	/**
-	 * 将消息数据发送到默认Topic中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param data
 	 * @return
+	 * @throws Exception
 	 */
-	public ListenableFuture<SendResult<K, V>> sendDefault(V data);
+	public <K, V> ProduceResult<K, V> sendAndWait(ProducerRecord<K, V> producerRecord, Callback callback) throws Exception;
 	
-	/**
-	 * 将键值对消息数据发送到默认Topic中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param data
-	 * @return
-	 */
-	public ListenableFuture<SendResult<K, V>> sendDefault(K key, V data);
-	
-	/**
-	 * 将消息数据发送到默认Topic的指定分区中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param partition
-	 * @param data
-	 * @return
-	 */
-	public ListenableFuture<SendResult<K, V>> sendDefaultToPartition(Integer partition, V data);
-	
-	/**
-	 * 将键值对消息数据发送到默认Topic的指定分区中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param partition
-	 * @param key
-	 * @param data
-	 * @return
-	 */
-	public ListenableFuture<SendResult<K, V>> sendDefaultToPartition(Integer partition, K key, V data);
-	
-	/**
-	 * 将消息数据发送到默认Topic后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param data
-	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
-	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
-	 */
-	public ProduceResult<K, V> sendDefaultAndWait(V data) throws Exception;
-	
-	/**
-	 * 将键值对消息数据发送到默认Topic后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param data
-	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
-	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
-	 */
-	public ProduceResult<K, V> sendDefaultAndWait(K key, V data) throws Exception;
-	
-	/**
-	 * 将消息数据发送到默认Topic的指定分区后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param partition
-	 * @param data
-	 * @returns 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
-	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
-	 */
-	public ProduceResult<K, V> sendDefaultToPartitionAndWait(Integer partition, V data) throws Exception;
-	
-	/**
-	 *  将键值对消息数据发送到默认Topic的指定分区后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param partition
-	 * @param key
-	 * @param data
-	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
-	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
-	 */
-	public ProduceResult<K, V> sendDefaultToPartitionAndWait(Integer partition, K key, V data) throws Exception;
-		
-	/**
-	 * 将消息数据发送到指定的Topic实例中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param topicKey Topic实例的键
-	 * @param data
-	 * @return
-	 */
-	public ListenableFuture<SendResult<K, V>> send(String topicKey, V data);
-	
-	/**
-	 * 将键值对消息数据发送到指定的Topic实例中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param topicKey Topic实例的键
-	 * @param key
-	 * @param data
-	 * @return
-	 */
-	public ListenableFuture<SendResult<K, V>> send(String topicKey, K key, V data);
-	
-	/**
-	 * 将消息数据发送到指定的Topic实例后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param topicKey Topic实例的键
-	 * @param data
-	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
-	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
-	 */
-	public ProduceResult<K, V> sendAndWait(String topicKey, V data) throws Exception;
-	
-	/**
-	 * 将键值对消息数据发送到指定的Topic实例后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param topicKey Topic实例的键
-	 * @param key
-	 * @param data
-	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
-	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
-	 */
-	public ProduceResult<K, V> sendAndWait(String topicKey, K key, V data) throws Exception;
-
 }

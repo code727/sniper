@@ -21,6 +21,7 @@ package org.workin.kafka.consumer.service;
 import java.util.Map;
 
 /**
+ * 消费者服务管理实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

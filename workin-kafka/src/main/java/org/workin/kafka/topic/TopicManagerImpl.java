@@ -40,8 +40,8 @@ public class TopicManagerImpl implements TopicManager {
 	}
 
 	@Override
-	public TopicNode getTopicNode(String topicKey) {
-		return topicNodes.get(topicKey);
+	public TopicNode getTopicNode(String name) {
+		return topicNodes.get(name);
 	}
 
 }

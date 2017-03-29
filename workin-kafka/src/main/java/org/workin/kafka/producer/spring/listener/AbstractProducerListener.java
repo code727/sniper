@@ -16,7 +16,7 @@
  * Create Date : 2017-3-14
  */
 
-package org.workin.kafka.producer.listener;
+package org.workin.kafka.producer.spring.listener;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.support.ProducerListenerAdapter;
 import org.workin.kafka.exception.ProducerException;
+import org.workin.kafka.producer.callback.Controllable;
 import org.workin.kafka.support.MQFactory;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
@@ -35,7 +36,7 @@ import org.workin.serialization.json.JacksonSerializer;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdapter<K,V> {
+public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdapter<K,V> implements Controllable {
 	
 	protected final Logger logger;
 	

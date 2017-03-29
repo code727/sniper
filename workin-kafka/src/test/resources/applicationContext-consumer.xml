@@ -32,7 +32,7 @@
 	</bean>
 
 	<bean id="keyDeserializer" class="org.apache.kafka.common.serialization.IntegerDeserializer" />
-	<bean id="valueDeserializer" class="org.workin.kafka.serialization.KafkaJsonDeserializer" >
+	<bean id="valueDeserializer" class="org.workin.kafka.serialization.SpringKafkaJsonDeserializer" >
 		<constructor-arg name="typeClass" value="org.workin.kafka.test.Message" />
 	</bean>
 

@@ -13,39 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-3-13
+ * Create Date : 2017-3-14
  */
 
-package org.workin.kafka.producer.callback;
+package org.workin.kafka.producer.spring.listener;
 
 import org.workin.commons.util.CodecUtils;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
-import org.workin.serialization.Serializer;
-import org.workin.serialization.json.JacksonSerializer;
 
 /**
- * 可记录日志的生产者回调实现类
+ * 可记录日志的生产者监听器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class LoggingProducerFutureCallback<K, V> extends AbstractProducerFutureCallback<K, V> {
+public class LoggingProducerListener<K, V> extends AbstractProducerListener<K, V> {
 	
-	private Serializer serializer = new JacksonSerializer();
-
 	@Override
 	protected void afterSuccess(ProduceResult<K, V> produceResult) {
 		logger.info("Producer success send message:{}",
-				CodecUtils.bytesToString(serializer.serialize(produceResult)));
+				CodecUtils.bytesToString(loggerSerializer.serialize(produceResult)));
 	}
 
 	@Override
-	protected void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
-		if (produceRecord != null)
-			logger.error("Producer send message is failure:{},error cause:{}",
-					CodecUtils.bytesToString(serializer.serialize(produceRecord)), ex);
-		else
-			logger.error("Producer send message is failure,error cause:{}", ex);
+	protected void afterFailure(ProduceRecord<K, V> produceRecord, Exception ex) {
+		logger.error("Producer send message is failure:{},error cause:{}",
+				CodecUtils.bytesToString(loggerSerializer.serialize(produceRecord)), ex);
 	}
-	
+
 }

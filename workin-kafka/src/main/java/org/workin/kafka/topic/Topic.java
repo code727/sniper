@@ -34,7 +34,13 @@ public class Topic {
 	/** 时间戳 */
 	private Long timestamp;
 	
-	public Topic() {}
+	public Topic() {
+		
+	}
+	
+	public Topic(String name) {
+		this.name = name;
+	}
 		
 	public Topic(String name, Integer partition, Long timestamp) {
 		this.name = name;

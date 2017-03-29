@@ -44,9 +44,9 @@ public interface TopicManager {
 	/**
 	 * 根据键名称获取Topic实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param topicKey
+	 * @param name
 	 * @return
 	 */
-	public TopicNode getTopicNode(String topicKey);
+	public TopicNode getTopicNode(String name);
 	
 }

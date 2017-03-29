@@ -16,7 +16,7 @@
  * Create Date : 2017-3-14
  */
 
-package org.workin.kafka.producer.listener;
+package org.workin.kafka.producer.spring.callback;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.kafka.exception.ProducerException;
@@ -27,11 +27,11 @@ import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
 
 /**
- * 多委派生产者监听实现类
+ * 多委派生产者回调实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MultipleDelegateProducerListener<K,V> extends DelegateProducerListener<K,V> {
+public class MultipleDelegateProducerFutureCallback<K,V> extends DelegateProducerFutureCallback<K, V> {
 	
 	@Autowired(required = false)
 	private ProducerSeviceManager producerSeviceManager;
@@ -56,7 +56,7 @@ public class MultipleDelegateProducerListener<K,V> extends DelegateProducerListe
 	}
 	
 	@Override
-	protected void afterFailure(ProduceRecord<K, V> produceRecord, Exception ex) {
+	protected void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
 		ProducerSevice delegate = selectDelegate(produceRecord);
 		logForFailure(delegate, produceRecord, ex);
 		
@@ -66,12 +66,12 @@ public class MultipleDelegateProducerListener<K,V> extends DelegateProducerListe
 	/**
 	 * 根据生产记录选择对应的委派代表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param produceRecord
+	 * @param topicName
 	 * @return
 	 */
 	protected ProducerSevice selectDelegate(ProduceRecord<K, V> produceRecord) {
 		// 根据源Topic名称来找到对应的委派代表
-		String topicName = produceRecord.getSourceTopic().getName();
+		String topicName = (produceRecord != null? produceRecord.getSourceTopic().getName() : null);
 		ProducerSevice producerSevice = (producerSeviceManager != null ? 
 				producerSeviceManager.getProducerSevice(topicName) : null);
 		

@@ -16,7 +16,7 @@
  * Create Date : 2017-3-13
  */
 
-package org.workin.kafka.producer.callback;
+package org.workin.kafka.producer.spring.callback;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ import org.workin.serialization.json.JacksonSerializer;
  * @version 1.0
  */
 public abstract class AbstractProducerFutureCallback<K, V> implements
-		ListenableFutureCallback<SendResult<K, V>> {
+		ListenableFutureCallback<SendResult<K, V>>{
 	
 	protected final Logger logger;
 	

@@ -23,14 +23,14 @@ import java.util.List;
 import org.apache.kafka.common.PartitionInfo;
 
 /**
- * Kafka生产者操作接口
+ * 生产者操作接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface KafkaProducerOperations {
 	
 	/**
-	 * 获取默认的topic分区信息列表
+	 * 获取默认topic分区信息列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -39,10 +39,10 @@ public interface KafkaProducerOperations {
 	/**
 	 * 获取指定的topic分区信息列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param topicKey
+	 * @param name
 	 * @return
 	 */
-	public List<PartitionInfo> partitionsFor(String topicKey);
+	public List<PartitionInfo> partitionsFor(String name);
 	
 	/**
 	 * 发送生产者缓存的消息

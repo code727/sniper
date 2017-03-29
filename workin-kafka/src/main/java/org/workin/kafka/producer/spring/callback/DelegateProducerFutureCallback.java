@@ -16,7 +16,7 @@
  * Create Date : 2017-3-14
  */
 
-package org.workin.kafka.producer.listener;
+package org.workin.kafka.producer.spring.callback;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,12 @@ import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
 
 /**
- * 委派生产者监听实现类
+ * 委派生产者回调实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DelegateProducerListener<K, V> extends
-		AbstractProducerListener<K, V> implements InitializingBean {
+public class DelegateProducerFutureCallback<K, V> extends
+		AbstractProducerFutureCallback<K, V> implements InitializingBean {
 	
 	@Autowired
 	protected ProducerSevice delegate;
@@ -52,12 +52,12 @@ public class DelegateProducerListener<K, V> extends
 	
 	@Override
 	protected void afterSuccess(ProduceResult<K, V> produceResult) {
-		logForSuccess(delegate, produceResult);;
+		logForSuccess(delegate, produceResult);
 		delegate.afterSuccess(produceResult);
 	}
 	
 	@Override
-	protected void afterFailure(ProduceRecord<K, V> produceRecord, Exception ex) {
+	protected void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
 		logForFailure(delegate, produceRecord, ex);
 		delegate.afterFailure(produceRecord, ex);
 	}
@@ -81,9 +81,13 @@ public class DelegateProducerListener<K, V> extends
 	 * @param produceRecord
 	 * @param ex
 	 */
-	protected void logForFailure(ProducerSevice delegate, ProduceRecord<K, V> produceRecord, Exception ex) {
-		logger.error("Producer send message is failure:{},error cause:{},will be delegate [{}] execute follow-up task.",
-				CodecUtils.bytesToString(loggerSerializer.serialize(produceRecord)), ex, delegate.getClass());
+	protected void logForFailure(ProducerSevice delegate, ProduceRecord<K, V> produceRecord, Throwable ex) {
+		if (produceRecord != null)
+			logger.error("Producer send message is failure:{},error cause:{},will be delegate [{}] execute follow-up task.",
+					CodecUtils.bytesToString(loggerSerializer.serialize(produceRecord)), ex, delegate.getClass());
+		else
+			logger.error("Producer send message is failure,error cause:{},will be delegate [{}] execute follow-up task.",
+					ex, delegate.getClass());
 	}
-	
+
 }

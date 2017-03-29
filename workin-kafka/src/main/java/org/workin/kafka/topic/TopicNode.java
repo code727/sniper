@@ -18,8 +18,7 @@
 
 package org.workin.kafka.topic;
 
-import org.springframework.kafka.support.converter.MessageConverter;
-import org.springframework.util.concurrent.ListenableFutureCallback;
+import org.apache.kafka.clients.producer.Callback;
 
 /**
  * Topic节点
@@ -28,27 +27,23 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
  */
 public class TopicNode extends Topic {
 	
-	/** 当前Topic实例所使用的消息转换器 */
-	private MessageConverter messageConverter;
-	
 	/** 当前Topic实例中注册的生产回调事件 */
-	private ListenableFutureCallback<?> futureCallback;
+	private Callback callback;
 	
-	public MessageConverter getMessageConverter() {
-		return messageConverter;
+	public TopicNode() {
+		
+	}
+		
+	public TopicNode(String name) {
+		super(name);
 	}
 
-	public void setMessageConverter(MessageConverter messageConverter) {
-		this.messageConverter = messageConverter;
-	}
-	
-	public <T> void setFutureCallback(ListenableFutureCallback<T> futureCallback) {
-		this.futureCallback = futureCallback;
+	public Callback getCallback() {
+		return callback;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T> ListenableFutureCallback<T> getFutureCallback() {
-		return (ListenableFutureCallback<T>) futureCallback;
+	public void setCallback(Callback callback) {
+		this.callback = callback;
 	}
 	
 }
