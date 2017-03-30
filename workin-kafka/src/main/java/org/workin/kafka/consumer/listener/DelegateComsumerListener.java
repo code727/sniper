@@ -34,13 +34,13 @@ public class DelegateComsumerListener<K, V> extends
 	
 	/** 被委派用于消费的服务 */
 	@Autowired
-	protected ConsumerSevice delegate;
+	protected ConsumerSevice<K, V> delegate;
 		
-	public ConsumerSevice getDelegate() {
+	public ConsumerSevice<K, V> getDelegate() {
 		return delegate;
 	}
 
-	public void setDelegate(ConsumerSevice delegate) {
+	public void setDelegate(ConsumerSevice<K, V> delegate) {
 		this.delegate = delegate;
 	}
 	
@@ -62,7 +62,7 @@ public class DelegateComsumerListener<K, V> extends
 	 * @param delegate
 	 * @param consumeResult
 	 */
-	protected void log(ConsumerSevice delegate, ConsumeResult<K, V> consumeResult) {
+	protected void log(ConsumerSevice<K, V> delegate, ConsumeResult<K, V> consumeResult) {
 		if (logger.isDebugEnabled())
 			logger.debug("Consumer success receive message:{},will be delegate [{}] execute receive task.",
 					CodecUtils.bytesToString(loggerSerializer.serialize(consumeResult)), delegate.getClass());

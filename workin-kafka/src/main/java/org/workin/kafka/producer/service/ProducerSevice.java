@@ -26,14 +26,14 @@ import org.workin.kafka.support.ProduceResult;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ProducerSevice {
+public interface ProducerSevice<K, V> {
 	
 	/**
 	 * 生产者成功生产消息后的服务处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param produceResult
 	 */
-	public <K, V> void afterSuccess(ProduceResult<K, V> produceResult);
+	public void afterSuccess(ProduceResult<K, V> produceResult);
 	
 	/**
 	 * 生产者生产消息失败后的服务处理
@@ -41,6 +41,6 @@ public interface ProducerSevice {
 	 * @param produceRecord
 	 * @param ex
 	 */
-	public <K, V> void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex);
+	public void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex);
 
 }

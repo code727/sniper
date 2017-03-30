@@ -26,7 +26,7 @@ import org.workin.kafka.support.ConsumeResult;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ConsumerSevice {
+public interface ConsumerSevice<K, V> {
 	
 	/**
 	 * 接收到消费结果后的业务处理
@@ -34,6 +34,6 @@ public interface ConsumerSevice {
 	 * @param consumeResult
 	 * @throws ConsumerException
 	 */
-	public <K, V> void receive(ConsumeResult<K, V> consumeResult) throws ConsumerException;
+	public void receive(ConsumeResult<K, V> consumeResult) throws ConsumerException;
 
 }

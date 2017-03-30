@@ -32,14 +32,14 @@ public interface ProducerSeviceManager {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param producerSevice
 	 */
-	public void setProducerSevices(Map<String, ProducerSevice> producerSevice);
+	public void setProducerSevices(Map<String, ProducerSevice<?, ?>> producerSevice);
 	
 	/**
 	 * 获取生产者服务映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Map<String, ProducerSevice> getProducerSevices();
+	public Map<String, ProducerSevice<?, ?>> getProducerSevices();
 	
 	/**
 	 * 根据键获取映射集里的某个生产者服务
@@ -47,6 +47,6 @@ public interface ProducerSeviceManager {
 	 * @param key
 	 * @return
 	 */
-	public ProducerSevice getProducerSevice(String key);
+	public ProducerSevice<?, ?> getProducerSevice(String key);
 
 }

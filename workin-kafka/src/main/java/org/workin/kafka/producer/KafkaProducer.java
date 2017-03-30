@@ -20,7 +20,6 @@ package org.workin.kafka.producer;
 
 import java.util.concurrent.Future;
 
-import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.workin.kafka.support.ProduceResult;
 
@@ -114,16 +113,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	 * @return
 	 */
 	public <K, V> Future<ProduceResult<K, V>> send(ProducerRecord<K, V> producerRecord);
-	
-	/**
-	 * 发送生产记录，并指定在生产完成时的回调行为
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param producerRecord
-	 * @param callback
-	 * @return
-	 */
-	public <K, V> Future<ProduceResult<K, V>> send(ProducerRecord<K, V> producerRecord, Callback callback);
-	
+		
 	/**
 	 * 发送生产记录后等待返回生产结果    并指定在生产过程中的回调行为
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -132,15 +122,5 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
 	 */
 	public <K, V> ProduceResult<K, V> sendAndWait(ProducerRecord<K, V> producerRecord) throws Exception;
-	
-	/**
-	 * 发送生产记录后等待返回生产结果，
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param producerRecord
-	 * @param callback
-	 * @return
-	 * @throws Exception
-	 */
-	public <K, V> ProduceResult<K, V> sendAndWait(ProducerRecord<K, V> producerRecord, Callback callback) throws Exception;
-	
+		
 }

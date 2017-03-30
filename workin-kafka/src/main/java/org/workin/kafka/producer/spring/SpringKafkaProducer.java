@@ -21,17 +21,14 @@ package org.workin.kafka.producer.spring;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.PartitionInfo;
 import org.springframework.kafka.core.KafkaOperations.ProducerCallback;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.util.concurrent.SettableListenableFuture;
-import org.workin.kafka.exception.ProducerException;
 import org.workin.kafka.producer.KafkaProducer;
-import org.workin.kafka.support.MQFactory;
 import org.workin.kafka.support.ProduceResult;
 
 /**
@@ -69,7 +66,7 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 
 	@Override
 	public <K, V> Future<ProduceResult<K, V>> send(String name, K key, V value) {
-		return send(createProducerRecord(name, key, value), getCallback(name));
+		return send(createProducerRecord(name, key, value));
 	}
 
 	@Override
@@ -83,33 +80,20 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 		return future.get();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Future<ProduceResult<K, V>> send(final ProducerRecord<K, V> producerRecord) {
-		return send(producerRecord, null);
-	}
-
-	@SuppressWarnings("unchecked")	
-	@Override
-	public <K, V> Future<ProduceResult<K, V>> send(final ProducerRecord<K, V> producerRecord, final Callback callback) {
+		
 		final KafkaTemplate<K, V> kafkaTemplate = (KafkaTemplate<K, V>) getKafkaTemplate();
+		final SettableListenableFuture<ProduceResult<K, V>> future = new SettableListenableFuture<ProduceResult<K, V>>();
 		
 		return kafkaTemplate.execute(new ProducerCallback<K, V, Future<ProduceResult<K, V>>>() {
-			
+
+			@Override
 			public Future<ProduceResult<K, V>> doInKafka(Producer<K, V> producer) {
-				SettableListenableFuture<ProduceResult<K, V>> future = new SettableListenableFuture<ProduceResult<K, V>>();
-				if (callback != null) {
-					try {
-						/* 如果有自定义的生产回调，则执行后需阻塞等待回调返回metadata后，
-						 * 结合producerRecord生成生产结果再设置到SettableListenableFuture中 */
-						RecordMetadata metadata = producer.send(producerRecord, callback).get();
-						future.set(MQFactory.buildProduceResult(producerRecord, metadata));
-					} catch (Exception e) {
-						throw new ProducerException(e.getMessage());
-					}
-				} else {
-					producer.send(producerRecord, createProduceCallback(future, producer, producerRecord));
-				}
-				
+				producer.send(producerRecord, createProduceCallback(future, producer, producerRecord));
+				if (producerCallback != null)
+					future.addCallback((ListenableFutureCallback<? super ProduceResult<K, V>>) producerCallback);
 				return future;
 			}
 		});
@@ -117,12 +101,7 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 
 	@Override
 	public <K, V> ProduceResult<K, V> sendAndWait(ProducerRecord<K, V> producerRecord) throws Exception {
-		return sendAndWait(producerRecord, null);
-	}
-
-	@Override
-	public <K, V> ProduceResult<K, V> sendAndWait(ProducerRecord<K, V> producerRecord, Callback callback) throws Exception {
-		Future<ProduceResult<K, V>> future = send(producerRecord, callback);
+		Future<ProduceResult<K, V>> future = send(producerRecord);
 		return future.get();
 	}
 

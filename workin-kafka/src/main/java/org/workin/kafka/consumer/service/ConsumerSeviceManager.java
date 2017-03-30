@@ -32,14 +32,14 @@ public interface ConsumerSeviceManager {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param consumerSevices
 	 */
-	public void setConsumerSevices(Map<String, ConsumerSevice> consumerSevices);
+	public void setConsumerSevices(Map<String, ConsumerSevice<?, ?>> consumerSevices);
 	
 	/**
 	 * 获取消费者服务映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Map<String, ConsumerSevice> getConsumerSevices();
+	public Map<String, ConsumerSevice<?, ?>> getConsumerSevices();
 	
 	/**
 	 * 根据键获取映射集里的某个消费者服务
@@ -47,6 +47,6 @@ public interface ConsumerSeviceManager {
 	 * @param key
 	 * @return
 	 */
-	public ConsumerSevice getConsumerSevice(String key);
+	public ConsumerSevice<?, ?> getConsumerSevice(String key);
 
 }

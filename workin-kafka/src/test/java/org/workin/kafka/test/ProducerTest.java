@@ -20,6 +20,7 @@ package org.workin.kafka.test;
 
 import java.util.Date;
 
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -38,16 +39,19 @@ public class ProducerTest extends JUnit4SpringTestCase {
 	@Autowired
 	private KafkaProducer kafkaProducer;
 	
-	@Test
+//	@Test
 	public void testSendDefault() {
 		Message message = new Message(NumberUtils.randomIn(10000), "testSendDefault", new Date());
 		kafkaProducer.sendDefault(message.getId(), message);
 	}
 	
-//	@Test
+	@Test
 	public void testSend() throws Exception {
-		Message message = new Message(NumberUtils.randomIn(10000), "testSend", new Date());
-		kafkaProducer.send("test", message.getId(), message);
+		for (int i = 0; i < 1; i++) {
+			Message message = new Message(NumberUtils.randomIn(10000), "testSend", new Date());
+			final ProducerRecord<Integer, Message> producerRecord = new ProducerRecord<Integer, Message>("test", message.getId(), message);
+			kafkaProducer.send(producerRecord);
+		}
 	}
 		
 }

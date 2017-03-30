@@ -18,7 +18,6 @@
 
 package org.workin.kafka.producer.spring.listener;
 
-import org.workin.commons.util.CodecUtils;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
 
@@ -30,15 +29,13 @@ import org.workin.kafka.support.ProduceResult;
 public class LoggingProducerListener<K, V> extends AbstractProducerListener<K, V> {
 	
 	@Override
-	protected void afterSuccess(ProduceResult<K, V> produceResult) {
-		logger.info("Producer success send message:{}",
-				CodecUtils.bytesToString(loggerSerializer.serialize(produceResult)));
+	public void afterSuccess(ProduceResult<K, V> produceResult) {
+		producerBehavior.successLog(produceResult);
 	}
 
 	@Override
-	protected void afterFailure(ProduceRecord<K, V> produceRecord, Exception ex) {
-		logger.error("Producer send message is failure:{},error cause:{}",
-				CodecUtils.bytesToString(loggerSerializer.serialize(produceRecord)), ex);
+	public void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
+		producerBehavior.errorLog(produceRecord, ex);
 	}
 
 }

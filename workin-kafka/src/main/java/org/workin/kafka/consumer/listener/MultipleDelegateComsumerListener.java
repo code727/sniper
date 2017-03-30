@@ -19,7 +19,7 @@
 package org.workin.kafka.consumer.listener;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.workin.kafka.consumer.DelegatePolicy;
+import org.workin.kafka.consumer.ConsumerDelegatePolicy;
 import org.workin.kafka.consumer.service.ConsumerSevice;
 import org.workin.kafka.consumer.service.ConsumerSeviceManager;
 import org.workin.kafka.exception.ConsumerException;
@@ -36,7 +36,7 @@ public class MultipleDelegateComsumerListener<K, V> extends DelegateComsumerList
 	private ConsumerSeviceManager consumerSeviceManager;
 	
 	/** 根据topic名称找不到对应委派时的消费策略 */
-	private String delegatePolicy = DelegatePolicy.USE_DEFAULT_WHEN_DELEGATE_NOTFOUND.name();
+	private String delegatePolicy = ConsumerDelegatePolicy.USE_DEFAULT_WHEN_DELEGATE_NOTFOUND.name();
 	
 	public String getDelegatePolicy() {
 		return delegatePolicy;
@@ -56,7 +56,7 @@ public class MultipleDelegateComsumerListener<K, V> extends DelegateComsumerList
 
 	@Override
 	protected void receive(ConsumeResult<K, V> consumeResult) {
-		ConsumerSevice delegate = selectDelegate(consumeResult);
+		ConsumerSevice<K, V> delegate = selectDelegate(consumeResult);
 		log(delegate, consumeResult);
 		
 		delegate.receive(consumeResult);
@@ -68,14 +68,15 @@ public class MultipleDelegateComsumerListener<K, V> extends DelegateComsumerList
 	 * @param consumeResult
 	 * @return
 	 */
-	protected ConsumerSevice selectDelegate(ConsumeResult<K, V> consumeResult) {
+	@SuppressWarnings("unchecked")
+	protected ConsumerSevice<K, V> selectDelegate(ConsumeResult<K, V> consumeResult) {
 		// 根据产生实际消费的Topic名称来找到对应的委派代表
 		String topicName = consumeResult.getConsumeTopic().getName();
-		ConsumerSevice consumerSevice = (consumerSeviceManager != null ? 
+		ConsumerSevice<K, V> consumerSevice = (ConsumerSevice<K, V>) (consumerSeviceManager != null ? 
 				consumerSeviceManager.getConsumerSevice(topicName) : null);
 				
 		if (consumerSevice == null) {
-			if (DelegatePolicy.USE_DEFAULT_WHEN_DELEGATE_NOTFOUND.name().equalsIgnoreCase(delegatePolicy))
+			if (ConsumerDelegatePolicy.USE_DEFAULT_WHEN_DELEGATE_NOTFOUND.name().equalsIgnoreCase(delegatePolicy))
 				consumerSevice = delegate;
 			else
 				throw new ConsumerException("Can not found delegate " + "consumer sevice for topic [" + topicName + "]");

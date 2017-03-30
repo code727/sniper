@@ -23,7 +23,7 @@ package org.workin.kafka.producer;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum DelegatePolicy {
+public enum ProducerDelegatePolicy {
 
 	/** 当找不到委派时用默认的来执行 */
 	USE_DEFAULT_WHEN_DELEGATE_NOTFOUND("default"),
@@ -33,7 +33,7 @@ public enum DelegatePolicy {
 	
 	private String name;
 	
-	private DelegatePolicy(String name) {
+	private ProducerDelegatePolicy(String name) {
         this.name = name;
 	}
 

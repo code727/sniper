@@ -27,20 +27,20 @@ import java.util.Map;
  */
 public class ProducerSeviceManagerImpl implements ProducerSeviceManager {
 	
-	private Map<String, ProducerSevice> producerSevices;
+	private Map<String, ProducerSevice<?, ?>> producerSevices;
 
 	@Override
-	public void setProducerSevices(Map<String, ProducerSevice> producerSevices) {
+	public void setProducerSevices(Map<String, ProducerSevice<?, ?>> producerSevices) {
 		this.producerSevices = producerSevices;
 	}
 
 	@Override
-	public Map<String, ProducerSevice> getProducerSevices() {
+	public Map<String, ProducerSevice<?, ?>> getProducerSevices() {
 		return producerSevices;
 	}
 
 	@Override
-	public ProducerSevice getProducerSevice(String key) {
+	public ProducerSevice<?, ?> getProducerSevice(String key) {
 		return producerSevices.get(key);
 	}
 

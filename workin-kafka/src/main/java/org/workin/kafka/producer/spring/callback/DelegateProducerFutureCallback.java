@@ -18,9 +18,9 @@
 
 package org.workin.kafka.producer.spring.callback;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.workin.commons.util.CodecUtils;
 import org.workin.kafka.producer.service.ProducerSevice;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
@@ -31,16 +31,16 @@ import org.workin.kafka.support.ProduceResult;
  * @version 1.0
  */
 public class DelegateProducerFutureCallback<K, V> extends
-		AbstractProducerFutureCallback<K, V> implements InitializingBean {
+		AbstractProducerFutureCallback<K, V, ProduceResult<K, V>> implements InitializingBean {
 	
 	@Autowired
-	protected ProducerSevice delegate;
+	protected ProducerSevice<K, V> delegate;
 	
-	public ProducerSevice getDelegate() {
+	public ProducerSevice<K, V> getDelegate() {
 		return delegate;
 	}
 
-	public void setDelegate(ProducerSevice delegate) {
+	public void setDelegate(ProducerSevice<K, V> delegate) {
 		this.delegate = delegate;
 	}
 
@@ -51,13 +51,13 @@ public class DelegateProducerFutureCallback<K, V> extends
 	}
 	
 	@Override
-	protected void afterSuccess(ProduceResult<K, V> produceResult) {
+	public void afterSuccess(ProduceResult<K, V> produceResult) {
 		logForSuccess(delegate, produceResult);
 		delegate.afterSuccess(produceResult);
 	}
 	
 	@Override
-	protected void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
+	public void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
 		logForFailure(delegate, produceRecord, ex);
 		delegate.afterFailure(produceRecord, ex);
 	}
@@ -68,10 +68,11 @@ public class DelegateProducerFutureCallback<K, V> extends
 	 * @param delegate
 	 * @param produceResult
 	 */
-	protected void logForSuccess(ProducerSevice delegate, ProduceResult<K, V> produceResult) {
+	protected void logForSuccess(ProducerSevice<K, V> delegate, ProduceResult<K, V> produceResult) {
+//		producerBehavior.successLog(produceResult);
+		Logger logger = producerBehavior.getLogger();
 		if (logger.isDebugEnabled())
-			logger.debug("Producer success send message:{},will be delegate [{}] execute follow-up task.",
-					CodecUtils.bytesToString(loggerSerializer.serialize(produceResult)), delegate.getClass());
+			logger.debug("Delegate [{}] execute 'afterSuccess' service", delegate.getClass());
 	}
 	
 	/**
@@ -81,13 +82,9 @@ public class DelegateProducerFutureCallback<K, V> extends
 	 * @param produceRecord
 	 * @param ex
 	 */
-	protected void logForFailure(ProducerSevice delegate, ProduceRecord<K, V> produceRecord, Throwable ex) {
-		if (produceRecord != null)
-			logger.error("Producer send message is failure:{},error cause:{},will be delegate [{}] execute follow-up task.",
-					CodecUtils.bytesToString(loggerSerializer.serialize(produceRecord)), ex, delegate.getClass());
-		else
-			logger.error("Producer send message is failure,error cause:{},will be delegate [{}] execute follow-up task.",
-					ex, delegate.getClass());
+	protected void logForFailure(ProducerSevice<K, V> delegate, ProduceRecord<K, V> produceRecord, Throwable ex) {
+//		producerBehavior.errorLog(produceRecord, ex);
+		producerBehavior.getLogger().error("Delegate [{}] execute 'afterFailure' service", delegate.getClass());
 	}
 
 }

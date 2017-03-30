@@ -27,20 +27,20 @@ import java.util.Map;
  */
 public class ConsumerSeviceManagerImpl implements ConsumerSeviceManager {
 	
-	private Map<String, ConsumerSevice> consumerSevices;
+	private Map<String, ConsumerSevice<?, ?>> consumerSevices;
 
 	@Override
-	public void setConsumerSevices(Map<String, ConsumerSevice> consumerSevices) {
+	public void setConsumerSevices(Map<String, ConsumerSevice<?, ?>> consumerSevices) {
 		this.consumerSevices = consumerSevices;
 	}
 
 	@Override
-	public Map<String, ConsumerSevice> getConsumerSevices() {
+	public Map<String, ConsumerSevice<?, ?>> getConsumerSevices() {
 		return consumerSevices;
 	}
 
 	@Override
-	public ConsumerSevice getConsumerSevice(String key) {
+	public ConsumerSevice<?, ?> getConsumerSevice(String key) {
 		return consumerSevices.get(key);
 	}
 

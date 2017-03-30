@@ -20,50 +20,23 @@ package org.workin.kafka.producer.spring.listener;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.kafka.support.ProducerListenerAdapter;
 import org.workin.kafka.exception.ProducerException;
-import org.workin.kafka.producer.callback.Controllable;
+import org.workin.kafka.producer.behavior.DefaultProducerBehavior;
+import org.workin.kafka.producer.behavior.ProducerBehavior;
+import org.workin.kafka.producer.service.ProducerSevice;
 import org.workin.kafka.support.MQFactory;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
-import org.workin.serialization.Serializer;
-import org.workin.serialization.json.JacksonSerializer;
 
 /**
  * 生产者监听器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdapter<K,V> implements Controllable {
+public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdapter<K,V> implements ProducerSevice<K, V> {
 	
-	protected final Logger logger;
-	
-	/** logger序列化器 */
-	protected Serializer loggerSerializer = new JacksonSerializer();
-	
-	/** 是否关注Success事件的发生 */
-	private boolean interestedInSuccess;
-	
-	/** 当监听到生产者异常后是否抛出这个异常 */
-	private boolean throwExceptionOnError;
-	
-	public AbstractProducerListener() {
-		this.logger = LoggerFactory.getLogger(getClass());
-	}
-	
-	public Serializer getLoggerSerializer() {
-		return loggerSerializer;
-	}
-
-	public void setLoggerSerializer(Serializer loggerSerializer) {
-		this.loggerSerializer = loggerSerializer;
-	}
-	
-	public void setInterestedInSuccess(boolean interestedInSuccess) {
-		this.interestedInSuccess = interestedInSuccess;
-	}
+	protected ProducerBehavior producerBehavior = new DefaultProducerBehavior(getClass());
 
 	/**
 	 * 重写父类方法，修改为根据配置的属性来判断
@@ -72,20 +45,12 @@ public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdap
 	 */
 	@Override
 	public boolean isInterestedInSuccess() {
-		return interestedInSuccess;
-	}
-
-	public boolean isThrowExceptionOnError() {
-		return throwExceptionOnError;
-	}
-
-	public void setThrowExceptionOnError(boolean throwExceptionOnError) {
-		this.throwExceptionOnError = throwExceptionOnError;
+		return producerBehavior.isInterestedInSuccess();
 	}
 	
 	@Override
 	public void onSuccess(String topic, Integer partition, K key, V value, RecordMetadata recordMetadata) {
-		if (interestedInSuccess) {
+		if (isInterestedInSuccess()) {
 			ProducerRecord<K, V> producerRecord = new ProducerRecord<K, V>(topic, partition, key, value);
 			afterSuccess(MQFactory.buildProduceResult(producerRecord, recordMetadata));
 		}
@@ -93,14 +58,11 @@ public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdap
 	
 	@Override
 	public void onError(String topic, Integer partition, K key, V value, Exception ex) {
-		
-		if (throwExceptionOnError)
-			/* 当抛出异常后，可在生产者的send方法中catch到异常，
-			 * 在一些事务性要求比较严格的应用场景下，catch这个异常很有必要，
-			 * 同时也阻止了afterFailure方法的执行 */
-			throw new ProducerException(ex);
-		
 		afterFailure(MQFactory.buildProduceRecord(topic, partition, key, value), ex);
+		if (producerBehavior.isThrowExceptionOnError())
+			/* 当抛出异常后，可在生产者的send方法中catch到异常，
+			 * 在一些事务性要求比较严格的应用场景下，catch这个异常很有必要*/
+			throw new ProducerException(ex);
 	}
 	
 	/**
@@ -108,7 +70,8 @@ public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdap
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param produceResult
 	 */
-	protected void afterSuccess(ProduceResult<K, V> produceResult) {
+	@Override
+	public void afterSuccess(ProduceResult<K, V> produceResult) {
 		
 	}
 	
@@ -118,7 +81,8 @@ public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdap
 	 * @param produceRecord
 	 * @param ex
 	 */
-	protected void afterFailure(ProduceRecord<K, V> produceRecord, Exception ex) {
+	@Override
+	public void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
 		
 	}
 

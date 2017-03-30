@@ -18,57 +18,43 @@
 
 package org.workin.kafka.producer.spring.callback;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.kafka.core.KafkaProducerException;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFutureCallback;
+import org.workin.kafka.producer.behavior.DefaultProducerBehavior;
+import org.workin.kafka.producer.behavior.ProducerBehavior;
+import org.workin.kafka.producer.service.ProducerSevice;
 import org.workin.kafka.support.MQFactory;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
-import org.workin.serialization.Serializer;
-import org.workin.serialization.json.JacksonSerializer;
 
 /**
  * 生产者回调抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractProducerFutureCallback<K, V> implements
-		ListenableFutureCallback<SendResult<K, V>>{
+public abstract class AbstractProducerFutureCallback<K, V, T> implements ListenableFutureCallback<T>, ProducerSevice<K, V> {
 	
-	protected final Logger logger;
-	
-	/** logger序列化器 */
-	protected Serializer loggerSerializer = new JacksonSerializer();
-	
-	/** 是否关注Success事件的发生 */
-	private boolean interestedInSuccess = true;
-	
-	public AbstractProducerFutureCallback() {
-		logger = LoggerFactory.getLogger(getClass());
-	}
-	
-	public Serializer getLoggerSerializer() {
-		return loggerSerializer;
+	protected ProducerBehavior producerBehavior = new DefaultProducerBehavior(getClass());
+
+	public ProducerBehavior getProducerBehavior() {
+		return producerBehavior;
 	}
 
-	public void setLoggerSerializer(Serializer loggerSerializer) {
-		this.loggerSerializer = loggerSerializer;
-	}
-	
-	public boolean isInterestedInSuccess() {
-		return interestedInSuccess;
+	public void setProducerBehavior(ProducerBehavior producerBehavior) {
+		this.producerBehavior = producerBehavior;
 	}
 
-	public void setInterestedInSuccess(boolean interestedInSuccess) {
-		this.interestedInSuccess = interestedInSuccess;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
-	public void onSuccess(SendResult<K, V> result) {
-		if (interestedInSuccess)
-			afterSuccess(MQFactory.buildProduceResult(result));
+	public void onSuccess(T result) {
+		if (producerBehavior.isInterestedInSuccess()) {
+			if (result instanceof ProduceResult)
+				afterSuccess((ProduceResult<K, V>) result);
+			else
+				afterSuccess(MQFactory.buildProduceResult((SendResult<K, V>) result));
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -76,29 +62,22 @@ public abstract class AbstractProducerFutureCallback<K, V> implements
 	public void onFailure(Throwable ex) {
 		ProduceRecord<K, V> produceRecord = null;
 		
-		if (ex instanceof KafkaProducerException) 
-			produceRecord = (ProduceRecord<K, V>) MQFactory.buildProduceRecord(
-					((KafkaProducerException) ex).getProducerRecord());
+		if (ex instanceof KafkaProducerException) {
+			ProducerRecord<K, V> record = (ProducerRecord<K, V>) ((KafkaProducerException) ex).getProducerRecord();
+			if (record != null)
+				produceRecord = (ProduceRecord<K, V>) MQFactory.buildProduceRecord(record);
+		}
 	
 		afterFailure(produceRecord, ex);
 	}
 	
-	/**
-	 * 生产者发送消息成功以后的业务处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param produceResult
-	 */
-	protected void afterSuccess(ProduceResult<K, V> produceResult) {
+	@Override
+	public void afterSuccess(ProduceResult<K, V> produceResult) {
 		
 	}
 	
-	/**
-	 * 生产者发送消息失败以后的业务处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param produceRecord
-	 * @param ex
-	 */
-	protected void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
+	@Override
+	public void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
 		
 	}
 

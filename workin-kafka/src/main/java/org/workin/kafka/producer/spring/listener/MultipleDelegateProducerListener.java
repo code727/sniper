@@ -20,7 +20,7 @@ package org.workin.kafka.producer.spring.listener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.kafka.exception.ProducerException;
-import org.workin.kafka.producer.DelegatePolicy;
+import org.workin.kafka.producer.ProducerDelegatePolicy;
 import org.workin.kafka.producer.service.ProducerSevice;
 import org.workin.kafka.producer.service.ProducerSeviceManager;
 import org.workin.kafka.support.ProduceRecord;
@@ -37,7 +37,7 @@ public class MultipleDelegateProducerListener<K,V> extends DelegateProducerListe
 	private ProducerSeviceManager producerSeviceManager;
 	
 	/** 根据topic名称找不到对应委派时的生产策略 */
-	private String delegatePolicy = DelegatePolicy.USE_DEFAULT_WHEN_DELEGATE_NOTFOUND.name();
+	private String delegatePolicy = ProducerDelegatePolicy.USE_DEFAULT_WHEN_DELEGATE_NOTFOUND.name();
 	
 	public String getDelegatePolicy() {
 		return delegatePolicy;
@@ -48,16 +48,16 @@ public class MultipleDelegateProducerListener<K,V> extends DelegateProducerListe
 	}
 	
 	@Override
-	protected void afterSuccess(ProduceResult<K, V> produceResult) {
-		ProducerSevice delegate = selectDelegate(produceResult);
+	public void afterSuccess(ProduceResult<K, V> produceResult) {
+		ProducerSevice<K, V> delegate = selectDelegate(produceResult);
 		logForSuccess(delegate, produceResult);
 		
 		delegate.afterSuccess(produceResult);
 	}
 	
 	@Override
-	protected void afterFailure(ProduceRecord<K, V> produceRecord, Exception ex) {
-		ProducerSevice delegate = selectDelegate(produceRecord);
+	public void afterFailure(ProduceRecord<K, V> produceRecord, Throwable ex) {
+		ProducerSevice<K, V> delegate = selectDelegate(produceRecord);
 		logForFailure(delegate, produceRecord, ex);
 		
 		delegate.afterFailure(produceRecord, ex);
@@ -69,14 +69,15 @@ public class MultipleDelegateProducerListener<K,V> extends DelegateProducerListe
 	 * @param produceRecord
 	 * @return
 	 */
-	protected ProducerSevice selectDelegate(ProduceRecord<K, V> produceRecord) {
+	@SuppressWarnings("unchecked")
+	protected ProducerSevice<K, V> selectDelegate(ProduceRecord<K, V> produceRecord) {
 		// 根据源Topic名称来找到对应的委派代表
 		String topicName = produceRecord.getSourceTopic().getName();
-		ProducerSevice producerSevice = (producerSeviceManager != null ? 
+		ProducerSevice<K, V> producerSevice = (ProducerSevice<K, V>) (producerSeviceManager != null ? 
 				producerSeviceManager.getProducerSevice(topicName) : null);
 		
 		if (producerSevice == null) {
-			if (DelegatePolicy.USE_DEFAULT_WHEN_DELEGATE_NOTFOUND.name().equalsIgnoreCase(delegatePolicy))
+			if (ProducerDelegatePolicy.USE_DEFAULT_WHEN_DELEGATE_NOTFOUND.name().equalsIgnoreCase(delegatePolicy))
 				producerSevice = delegate;
 			else
 				throw new ProducerException("Can not found delegate producer sevice for topic [" + topicName + "]");

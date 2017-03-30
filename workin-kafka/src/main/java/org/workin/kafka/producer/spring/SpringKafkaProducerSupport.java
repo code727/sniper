@@ -25,6 +25,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.core.KafkaProducerException;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.ProducerListener;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.util.concurrent.SettableListenableFuture;
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.kafka.producer.KafkaProducerSupport;
@@ -41,7 +42,11 @@ public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
 	
     private KafkaTemplate<?, ?> kafkaTemplate;
     
+    /** 全局的生产者监听 */
     private volatile ProducerListener<?, ?> producerListener;
+    
+    /** 全局的生产者回调 */
+    protected ListenableFutureCallback<?> producerCallback;
     
 	public KafkaTemplate<?, ?> getKafkaTemplate() {
 		return kafkaTemplate;
@@ -51,6 +56,14 @@ public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
 		this.kafkaTemplate = kafkaTemplate;
 	}
 	
+	public ListenableFutureCallback<?> getProducerCallback() {
+		return producerCallback;
+	}
+
+	public void setProducerCallback(ListenableFutureCallback<?> producerCallback) {
+		this.producerCallback = producerCallback;
+	}
+
 	@Override
 	protected void checkProperties() {		
 		if (kafkaTemplate == null)
@@ -81,7 +94,8 @@ public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
 	}
 		
 	/**
-	 * 创建生产回调
+	 * 创建生产回调，此方法和KafkaTemplate doSend方法内部创建callback的逻辑基本一致
+	 * 只是在生产成功时是将自定义的ProduceResult对象设置到了future中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param future
 	 * @param producer
