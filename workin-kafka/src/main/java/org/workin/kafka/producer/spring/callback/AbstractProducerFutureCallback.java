@@ -24,7 +24,7 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.workin.kafka.producer.behavior.DefaultProducerBehavior;
 import org.workin.kafka.producer.behavior.ProducerBehavior;
-import org.workin.kafka.producer.service.ProducerSevice;
+import org.workin.kafka.producer.service.ProducerService;
 import org.workin.kafka.support.MQFactory;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
@@ -34,7 +34,7 @@ import org.workin.kafka.support.ProduceResult;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractProducerFutureCallback<K, V, T> implements ListenableFutureCallback<T>, ProducerSevice<K, V> {
+public abstract class AbstractProducerFutureCallback<K, V, T> implements ListenableFutureCallback<T>, ProducerService<K, V> {
 	
 	protected ProducerBehavior producerBehavior = new DefaultProducerBehavior(getClass());
 

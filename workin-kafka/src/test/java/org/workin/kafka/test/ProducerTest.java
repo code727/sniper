@@ -47,11 +47,14 @@ public class ProducerTest extends JUnit4SpringTestCase {
 	
 	@Test
 	public void testSend() throws Exception {
-		for (int i = 0; i < 1; i++) {
+		try {
 			Message message = new Message(NumberUtils.randomIn(10000), "testSend", new Date());
 			final ProducerRecord<Integer, Message> producerRecord = new ProducerRecord<Integer, Message>("test", message.getId(), message);
 			kafkaProducer.send(producerRecord);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+			
 	}
 		
 }

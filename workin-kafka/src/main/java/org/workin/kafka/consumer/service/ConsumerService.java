@@ -26,7 +26,7 @@ import org.workin.kafka.support.ConsumeResult;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ConsumerSevice<K, V> {
+public interface ConsumerService<K, V> {
 	
 	/**
 	 * 接收到消费结果后的业务处理

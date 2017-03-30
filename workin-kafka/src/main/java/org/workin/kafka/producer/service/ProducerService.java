@@ -26,7 +26,7 @@ import org.workin.kafka.support.ProduceResult;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ProducerSevice<K, V> {
+public interface ProducerService<K, V> {
 	
 	/**
 	 * 生产者成功生产消息后的服务处理

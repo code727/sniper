@@ -21,7 +21,7 @@ package org.workin.kafka.consumer.listener;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.commons.util.CodecUtils;
-import org.workin.kafka.consumer.service.ConsumerSevice;
+import org.workin.kafka.consumer.service.ConsumerService;
 import org.workin.kafka.support.ConsumeResult;
 
 /**
@@ -34,13 +34,13 @@ public class DelegateComsumerListener<K, V> extends
 	
 	/** 被委派用于消费的服务 */
 	@Autowired
-	protected ConsumerSevice<K, V> delegate;
+	protected ConsumerService<K, V> delegate;
 		
-	public ConsumerSevice<K, V> getDelegate() {
+	public ConsumerService<K, V> getDelegate() {
 		return delegate;
 	}
 
-	public void setDelegate(ConsumerSevice<K, V> delegate) {
+	public void setDelegate(ConsumerService<K, V> delegate) {
 		this.delegate = delegate;
 	}
 	
@@ -62,7 +62,7 @@ public class DelegateComsumerListener<K, V> extends
 	 * @param delegate
 	 * @param consumeResult
 	 */
-	protected void log(ConsumerSevice<K, V> delegate, ConsumeResult<K, V> consumeResult) {
+	protected void log(ConsumerService<K, V> delegate, ConsumeResult<K, V> consumeResult) {
 		if (logger.isDebugEnabled())
 			logger.debug("Consumer success receive message:{},will be delegate [{}] execute receive task.",
 					CodecUtils.bytesToString(loggerSerializer.serialize(consumeResult)), delegate.getClass());

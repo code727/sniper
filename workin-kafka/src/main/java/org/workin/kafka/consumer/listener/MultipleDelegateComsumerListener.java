@@ -20,8 +20,8 @@ package org.workin.kafka.consumer.listener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workin.kafka.consumer.ConsumerDelegatePolicy;
-import org.workin.kafka.consumer.service.ConsumerSevice;
-import org.workin.kafka.consumer.service.ConsumerSeviceManager;
+import org.workin.kafka.consumer.service.ConsumerService;
+import org.workin.kafka.consumer.service.ConsumerServiceManager;
 import org.workin.kafka.exception.ConsumerException;
 import org.workin.kafka.support.ConsumeResult;
 
@@ -33,7 +33,7 @@ import org.workin.kafka.support.ConsumeResult;
 public class MultipleDelegateComsumerListener<K, V> extends DelegateComsumerListener<K, V> {
 	
 	@Autowired(required = false)
-	private ConsumerSeviceManager consumerSeviceManager;
+	private ConsumerServiceManager consumerServiceManager;
 	
 	/** 根据topic名称找不到对应委派时的消费策略 */
 	private String delegatePolicy = ConsumerDelegatePolicy.USE_DEFAULT_WHEN_DELEGATE_NOTFOUND.name();
@@ -46,17 +46,17 @@ public class MultipleDelegateComsumerListener<K, V> extends DelegateComsumerList
 		this.delegatePolicy = delegatePolicy;
 	}
 
-	public ConsumerSeviceManager getConsumerSeviceManager() {
-		return consumerSeviceManager;
+	public ConsumerServiceManager getConsumerSeviceManager() {
+		return consumerServiceManager;
 	}
 
-	public void setConsumerSeviceManager(ConsumerSeviceManager consumerSeviceManager) {
-		this.consumerSeviceManager = consumerSeviceManager;
+	public void setConsumerSeviceManager(ConsumerServiceManager consumerServiceManager) {
+		this.consumerServiceManager = consumerServiceManager;
 	}
 
 	@Override
 	protected void receive(ConsumeResult<K, V> consumeResult) {
-		ConsumerSevice<K, V> delegate = selectDelegate(consumeResult);
+		ConsumerService<K, V> delegate = selectDelegate(consumeResult);
 		log(delegate, consumeResult);
 		
 		delegate.receive(consumeResult);
@@ -69,11 +69,11 @@ public class MultipleDelegateComsumerListener<K, V> extends DelegateComsumerList
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected ConsumerSevice<K, V> selectDelegate(ConsumeResult<K, V> consumeResult) {
+	protected ConsumerService<K, V> selectDelegate(ConsumeResult<K, V> consumeResult) {
 		// 根据产生实际消费的Topic名称来找到对应的委派代表
 		String topicName = consumeResult.getConsumeTopic().getName();
-		ConsumerSevice<K, V> consumerSevice = (ConsumerSevice<K, V>) (consumerSeviceManager != null ? 
-				consumerSeviceManager.getConsumerSevice(topicName) : null);
+		ConsumerService<K, V> consumerSevice = (ConsumerService<K, V>) (consumerServiceManager != null ? 
+				consumerServiceManager.getService(topicName) : null);
 				
 		if (consumerSevice == null) {
 			if (ConsumerDelegatePolicy.USE_DEFAULT_WHEN_DELEGATE_NOTFOUND.name().equalsIgnoreCase(delegatePolicy))

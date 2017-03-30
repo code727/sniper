@@ -25,23 +25,23 @@ import java.util.Map;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ProducerSeviceManagerImpl implements ProducerSeviceManager {
+public class ProducerServiceManagerImpl implements ProducerServiceManager {
 	
-	private Map<String, ProducerSevice<?, ?>> producerSevices;
+	private Map<String, ProducerService<?, ?>> producerServices;
 
 	@Override
-	public void setProducerSevices(Map<String, ProducerSevice<?, ?>> producerSevices) {
-		this.producerSevices = producerSevices;
+	public Map<String, ProducerService<?, ?>> getProducerServices() {
+		return producerServices;
 	}
 
 	@Override
-	public Map<String, ProducerSevice<?, ?>> getProducerSevices() {
-		return producerSevices;
+	public void setProducerServices(Map<String, ProducerService<?, ?>> producerServices) {
+		this.producerServices = producerServices;
 	}
 
 	@Override
-	public ProducerSevice<?, ?> getProducerSevice(String key) {
-		return producerSevices.get(key);
+	public ProducerService<?, ?> getService(String key) {
+		return producerServices.get(key);
 	}
 
 }

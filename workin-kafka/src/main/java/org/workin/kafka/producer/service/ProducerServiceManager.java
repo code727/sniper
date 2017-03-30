@@ -25,28 +25,28 @@ import java.util.Map;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ProducerSeviceManager {
+public interface ProducerServiceManager {
 	
 	/**
 	 * 设置生产者服务映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param producerSevice
 	 */
-	public void setProducerSevices(Map<String, ProducerSevice<?, ?>> producerSevice);
+	public void setProducerServices(Map<String, ProducerService<?, ?>> producerServices);
 	
 	/**
 	 * 获取生产者服务映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Map<String, ProducerSevice<?, ?>> getProducerSevices();
+	public Map<String, ProducerService<?, ?>> getProducerServices();
 	
-	/**
+	/** 
 	 * 根据键获取映射集里的某个生产者服务
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
-	 * @return
+	 * @return 
 	 */
-	public ProducerSevice<?, ?> getProducerSevice(String key);
+	public ProducerService<?, ?> getService(String key);
 
 }

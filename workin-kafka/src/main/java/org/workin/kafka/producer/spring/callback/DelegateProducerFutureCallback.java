@@ -21,7 +21,7 @@ package org.workin.kafka.producer.spring.callback;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.workin.kafka.producer.service.ProducerSevice;
+import org.workin.kafka.producer.service.ProducerService;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
 
@@ -34,13 +34,13 @@ public class DelegateProducerFutureCallback<K, V> extends
 		AbstractProducerFutureCallback<K, V, ProduceResult<K, V>> implements InitializingBean {
 	
 	@Autowired
-	protected ProducerSevice<K, V> delegate;
+	protected ProducerService<K, V> delegate;
 	
-	public ProducerSevice<K, V> getDelegate() {
+	public ProducerService<K, V> getDelegate() {
 		return delegate;
 	}
 
-	public void setDelegate(ProducerSevice<K, V> delegate) {
+	public void setDelegate(ProducerService<K, V> delegate) {
 		this.delegate = delegate;
 	}
 
@@ -68,7 +68,7 @@ public class DelegateProducerFutureCallback<K, V> extends
 	 * @param delegate
 	 * @param produceResult
 	 */
-	protected void logForSuccess(ProducerSevice<K, V> delegate, ProduceResult<K, V> produceResult) {
+	protected void logForSuccess(ProducerService<K, V> delegate, ProduceResult<K, V> produceResult) {
 //		producerBehavior.successLog(produceResult);
 		Logger logger = producerBehavior.getLogger();
 		if (logger.isDebugEnabled())
@@ -82,7 +82,7 @@ public class DelegateProducerFutureCallback<K, V> extends
 	 * @param produceRecord
 	 * @param ex
 	 */
-	protected void logForFailure(ProducerSevice<K, V> delegate, ProduceRecord<K, V> produceRecord, Throwable ex) {
+	protected void logForFailure(ProducerService<K, V> delegate, ProduceRecord<K, V> produceRecord, Throwable ex) {
 //		producerBehavior.errorLog(produceRecord, ex);
 		producerBehavior.getLogger().error("Delegate [{}] execute 'afterFailure' service", delegate.getClass());
 	}

@@ -25,23 +25,21 @@ import java.util.Map;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ConsumerSeviceManagerImpl implements ConsumerSeviceManager {
+public class ConsumerServiceManagerImpl implements ConsumerServiceManager {
 	
-	private Map<String, ConsumerSevice<?, ?>> consumerSevices;
+	private Map<String, ConsumerService<?, ?>> consumerServices;
 
-	@Override
-	public void setConsumerSevices(Map<String, ConsumerSevice<?, ?>> consumerSevices) {
-		this.consumerSevices = consumerSevices;
+	public Map<String, ConsumerService<?, ?>> getConsumerServices() {
+		return consumerServices;
+	}
+
+	public void setConsumerServices(Map<String, ConsumerService<?, ?>> consumerServices) {
+		this.consumerServices = consumerServices;
 	}
 
 	@Override
-	public Map<String, ConsumerSevice<?, ?>> getConsumerSevices() {
-		return consumerSevices;
-	}
-
-	@Override
-	public ConsumerSevice<?, ?> getConsumerSevice(String key) {
-		return consumerSevices.get(key);
+	public ConsumerService<?, ?> getService(String key) {
+		return consumerServices.get(key);
 	}
 
 }

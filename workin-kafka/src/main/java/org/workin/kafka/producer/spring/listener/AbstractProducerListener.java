@@ -24,7 +24,7 @@ import org.springframework.kafka.support.ProducerListenerAdapter;
 import org.workin.kafka.exception.ProducerException;
 import org.workin.kafka.producer.behavior.DefaultProducerBehavior;
 import org.workin.kafka.producer.behavior.ProducerBehavior;
-import org.workin.kafka.producer.service.ProducerSevice;
+import org.workin.kafka.producer.service.ProducerService;
 import org.workin.kafka.support.MQFactory;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
@@ -34,9 +34,17 @@ import org.workin.kafka.support.ProduceResult;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdapter<K,V> implements ProducerSevice<K, V> {
+public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdapter<K,V> implements ProducerService<K, V> {
 	
 	protected ProducerBehavior producerBehavior = new DefaultProducerBehavior(getClass());
+	
+	public ProducerBehavior getProducerBehavior() {
+		return producerBehavior;
+	}
+
+	public void setProducerBehavior(ProducerBehavior producerBehavior) {
+		this.producerBehavior = producerBehavior;
+	}
 
 	/**
 	 * 重写父类方法，修改为根据配置的属性来判断

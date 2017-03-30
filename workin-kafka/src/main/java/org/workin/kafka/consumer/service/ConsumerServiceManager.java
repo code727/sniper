@@ -25,21 +25,21 @@ import java.util.Map;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ConsumerSeviceManager {
+public interface ConsumerServiceManager {
 	
 	/**
 	 * 设置消费者服务映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param consumerSevices
 	 */
-	public void setConsumerSevices(Map<String, ConsumerSevice<?, ?>> consumerSevices);
+	public void setConsumerServices(Map<String, ConsumerService<?, ?>> consumerSevices);
 	
 	/**
 	 * 获取消费者服务映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Map<String, ConsumerSevice<?, ?>> getConsumerSevices();
+	public Map<String, ConsumerService<?, ?>> getConsumerServices();
 	
 	/**
 	 * 根据键获取映射集里的某个消费者服务
@@ -47,6 +47,7 @@ public interface ConsumerSeviceManager {
 	 * @param key
 	 * @return
 	 */
-	public ConsumerSevice<?, ?> getConsumerSevice(String key);
+	public ConsumerService<?, ?> getService(String key);
+
 
 }
