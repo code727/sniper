@@ -51,8 +51,6 @@ public class KayValuePair<K, V> implements DataPair<K, V> {
 		this.value = value;
 	}
 	
-	
-
 	@Override
 	public K getKey() {
 		return key;
