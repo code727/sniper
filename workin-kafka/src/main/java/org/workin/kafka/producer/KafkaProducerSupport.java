@@ -69,7 +69,7 @@ public abstract class KafkaProducerSupport extends CheckableInitializingBean {
 	 * @return
 	 */
 	protected TopicNode getTopicNode(String name) {
-		return topicManager != null ? topicManager.getTopicNode(name) : defaultTopic;
+		return topicManager != null ? topicManager.getTopicNode(name) : null;
 	}
 	
 	/**
