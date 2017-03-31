@@ -50,33 +50,33 @@ public abstract class AbstractResponse implements Response {
 	}
 
 	@Override
-	public boolean isSuccess() {
+	public boolean IsSuccess() {
 		return isMatchStatus(BizStatus.SUCCESS.getKey());
 	}
 	
 
 	@Override
-	public boolean isSuccess(String successCode) {
+	public boolean IsSuccess(String successCode) {
 		return isMatchStatus(successCode);
 	}
 
 	@Override
-	public boolean isFailed() {
+	public boolean IsFailed() {
 		return isMatchStatus(BizStatus.FAILED.getKey());
 	}
 
 	@Override
-	public boolean isFailed(String failedCode) {
+	public boolean IsFailed(String failedCode) {
 		return isMatchStatus(failedCode);
 	}
 
 	@Override
-	public boolean isException() {
+	public boolean IsException() {
 		return isMatchStatus(BizStatus.EXCEPTION.getKey());
 	}
 
 	@Override
-	public boolean isException(String exceptionCode) {
+	public boolean IsException(String exceptionCode) {
 		return isMatchStatus(exceptionCode);
 	}
 	
