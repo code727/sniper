@@ -72,7 +72,7 @@ public class MultipleDelegateProducerListener<K,V> extends DelegateProducerListe
 	@SuppressWarnings("unchecked")
 	protected ProducerService<K, V> selectDelegate(ProduceRecord<K, V> produceRecord) {
 		// 根据源Topic名称来找到对应的委派代表
-		String topicName = produceRecord.getSourceTopic().getName();
+		String topicName = produceRecord.getSource().getName();
 		ProducerService<K, V> producerSevice = (ProducerService<K, V>) (producerServiceManager != null ? 
 				producerServiceManager.getService(topicName) : null);
 		

@@ -100,11 +100,11 @@ public class MQFactory {
 		AssertUtils.assertNotNull(record, "Producer record must not be null.");
 		AssertUtils.assertNotNull(record, "Producer record must metadata not be null.");
 		
-		Topic sourceTopic = new Topic(record.topic(), record.partition(), record.timestamp());
-		Topic targetTopic = new Topic(metadata.topic(), metadata.partition(), metadata.timestamp());
+		Topic source = new Topic(record.topic(), record.partition(), record.timestamp());
+		Topic target = new Topic(metadata.topic(), metadata.partition(), metadata.timestamp());
 		Message<K, V> message = new Message<K, V>(record.key(), record.value());
 		
-		return new ProduceResult<K, V>(sourceTopic, targetTopic, message);
+		return new ProduceResult<K, V>(source, target, message);
 	}
 	
 	/**
@@ -116,13 +116,11 @@ public class MQFactory {
 	public static <K, V> ConsumeResult<K, V> buildConsumeResult(ConsumerRecord<K, V> record) {
 		AssertUtils.assertNotNull(record, "Consumer record must not be null.");
 		
-		ConsumeTopic consumeTopic = new ConsumeTopic(record.topic(),
-				record.partition(), record.timestamp(), record.offset(),
-				record.timestampType(), record.serializedKeySize(),
-				record.serializedValueSize());
+		ConsumeTopic topic = new ConsumeTopic(record.topic(), record.partition(), record.timestamp(), record.offset(),
+				record.timestampType(), record.serializedKeySize(), record.serializedValueSize());
 		Message<K, V> message = new Message<K, V>(record.key(), record.value());
 		
-		return new ConsumeResult<K, V>(consumeTopic, message);
+		return new ConsumeResult<K, V>(topic, message);
 	}
 
 }

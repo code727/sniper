@@ -21,6 +21,7 @@ package org.workin.kafka.producer;
 import java.util.concurrent.Future;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.workin.commons.KayValuePair;
 import org.workin.kafka.support.ProduceResult;
 
 /**
@@ -33,7 +34,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	/**
 	 * 将消息值发送到默认topic
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param value
+	 * @param value	
 	 * @return
 	 */
 	public <K, V> Future<ProduceResult<K, V>> sendDefault(V value);
@@ -46,6 +47,22 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	 * @return
 	 */
 	public <K, V> Future<ProduceResult<K, V>> sendDefault(K key, V value);
+	
+	/**
+	 * 将键值对消息发送到默认Topic
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pair
+	 * @return
+	 */
+	public <K, V> Future<ProduceResult<K, V>> sendDefault(KayValuePair<K, V> pair);
+	
+	/**
+	 * 将数据包发送到默认Topic
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param packet
+	 * @return
+	 */
+	public <K, V> Future<ProduceResult<K, V>> sendDefault(MessagePacket<K, V> packet);
 	
 	/**
 	 * 将消息值发送到默认topic后等待返回生产结果
@@ -67,7 +84,25 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	public <K, V> ProduceResult<K, V> sendDefaultAndWait(K key, V value) throws Exception;
 	
 	/**
-	 * 将消息值发送到指定的Topic实例中
+	 * 将键值对消息发送到默认Topic后等待返回生产结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pair
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public <K, V> ProduceResult<K, V> sendDefaultAndWait(KayValuePair<K, V> pair) throws Exception;
+	
+	/**
+	 * 将数据包发送到默认Topic后等待返回生产结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param packet
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public <K, V> ProduceResult<K, V> sendDefaultAndWait(MessagePacket<K, V> packet) throws Exception;
+	
+	/**
+	 * 将消息值发送到指定的Topic
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name Topic注册名称
 	 * @param value
@@ -76,7 +111,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	public <K, V> Future<ProduceResult<K, V>> send(String name, V value);
 	
 	/**
-	 * 将消息键值发送到指定的Topic实例中
+	 * 将消息键值发送到指定的Topic
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name Topic注册名称
 	 * @param key
@@ -84,6 +119,24 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	 * @return
 	 */
 	public <K, V> Future<ProduceResult<K, V>> send(String name, K key, V value);
+	
+	/**
+	 * 将键值对消息发送到指定的Topic
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param pair
+	 * @return
+	 */
+	public <K, V> Future<ProduceResult<K, V>> send(String name, KayValuePair<K, V> pair);
+	
+	/**
+	 * 将数据包发送到指定的Topic
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param packet
+	 * @return
+	 */
+	public <K, V> Future<ProduceResult<K, V>> send(String name, MessagePacket<K, V> packet);
 	
 	/**
 	 * 将消息值发送到指定的Topic实例后等待返回生产结果
@@ -101,10 +154,30 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	 * @param name Topic注册名称
 	 * @param key
 	 * @param value
-	 * @return
-	 * @throws Exception
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
 	 */
 	public <K, V> ProduceResult<K, V> sendAndWait(String name, K key, V value) throws Exception;
+	
+	/**
+	 * 将键值对消息发送到指定的Topic实例后等待返回生产结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param pair
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public <K, V> ProduceResult<K, V> sendAndWait(String name, KayValuePair<K, V> pair) throws Exception;
+	
+	/**
+	 * 将数据包发送到指定的Topic实例后等待返回生产结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param packet
+	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
+	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
+	 */
+	public <K, V> ProduceResult<K, V> sendAndWait(String name, MessagePacket<K, V> packet) throws Exception;
 	
 	/**
 	 * 发送生产记录

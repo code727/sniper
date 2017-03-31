@@ -20,12 +20,12 @@ package org.workin.kafka.test;
 
 import java.util.Date;
 
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.workin.commons.util.NumberUtils;
 import org.workin.kafka.producer.KafkaProducer;
+import org.workin.kafka.producer.MessagePacket;
 import org.workin.test.spring.JUnit4SpringTestCase;
 
 /**
@@ -47,14 +47,14 @@ public class ProducerTest extends JUnit4SpringTestCase {
 	
 	@Test
 	public void testSend() throws Exception {
+		Message message = new Message(NumberUtils.randomIn(10000), "testSend", new Date());
+		MessagePacket<Integer, Message> packet = new MessagePacket<Integer, Message>(message.getId(), message);
+		packet.setTimestamp(System.currentTimeMillis());
 		try {
-			Message message = new Message(NumberUtils.randomIn(10000), "testSend", new Date());
-			final ProducerRecord<Integer, Message> producerRecord = new ProducerRecord<Integer, Message>("test", message.getId(), message);
-			kafkaProducer.send(producerRecord);
+			kafkaProducer.send("test", packet);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
 	}
 		
 }

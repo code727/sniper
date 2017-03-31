@@ -32,20 +32,20 @@ public class ProduceRecord <K, V> implements Serializable {
 	private static final long serialVersionUID = -1444897214374302627L;
 
 	/** 源Topic */
-	private Topic sourceTopic;
+	private Topic source;
 	
 	/** 预生产消息 */
 	private Message<K, V> message;
 	
-	public ProduceRecord(Topic sourceTopic, Message<K, V> message) {
-		this.sourceTopic = sourceTopic;
+	public ProduceRecord(Topic source, Message<K, V> message) {
+		this.source = source;
 		this.message = message;
 	}
 	
-	public Topic getSourceTopic() {
-		return sourceTopic;
+	public Topic getSource() {
+		return source;
 	}
-	
+
 	public Message<K, V> getMessage() {
 		return message;
 	}

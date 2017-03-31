@@ -30,15 +30,15 @@ public class ProduceResult<K, V> extends ProduceRecord<K, V> {
 	private static final long serialVersionUID = 9160410391945854012L;
 	
 	/** 目标Topic */
-	private Topic targetTopic;
+	private Topic target;
 	
-	public ProduceResult(Topic sourceTopic, Topic targetTopic,  Message<K, V> message) {
-		super(sourceTopic, message);
-		this.targetTopic = targetTopic;
+	public ProduceResult(Topic source, Topic target,  Message<K, V> message) {
+		super(source, message);
+		this.target = target;
 	}
-	
-	public Topic getTargetTopic() {
-		return targetTopic;
+
+	public Topic getTarget() {
+		return target;
 	}
 
 }

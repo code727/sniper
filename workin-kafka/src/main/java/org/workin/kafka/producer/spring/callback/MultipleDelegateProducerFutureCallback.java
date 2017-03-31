@@ -72,7 +72,7 @@ public class MultipleDelegateProducerFutureCallback<K,V> extends DelegateProduce
 	@SuppressWarnings("unchecked")
 	protected ProducerService<K, V> selectDelegate(ProduceRecord<K, V> produceRecord) {
 		// 根据源Topic名称来找到对应的委派代表
-		String topicName = (produceRecord != null? produceRecord.getSourceTopic().getName() : null);
+		String topicName = (produceRecord != null? produceRecord.getSource().getName() : null);
 		ProducerService<K, V> producerSevice = (ProducerService<K, V>) (producerServiceManager != null ? 
 				producerServiceManager.getService(topicName) : null);
 		

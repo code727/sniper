@@ -71,7 +71,7 @@ public class MultipleDelegateComsumerListener<K, V> extends DelegateComsumerList
 	@SuppressWarnings("unchecked")
 	protected ConsumerService<K, V> selectDelegate(ConsumeResult<K, V> consumeResult) {
 		// 根据产生实际消费的Topic名称来找到对应的委派代表
-		String topicName = consumeResult.getConsumeTopic().getName();
+		String topicName = consumeResult.getTarget().getName();
 		ConsumerService<K, V> consumerSevice = (ConsumerService<K, V>) (consumerServiceManager != null ? 
 				consumerServiceManager.getService(topicName) : null);
 				

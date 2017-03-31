@@ -102,19 +102,64 @@ public abstract class KafkaProducerSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * 根据名称获取Topic节点上注册的各项生产数据指标后，创建出生产记录
+	 * 根据注册名称获取Topic节点上注册的各项生产数据指标后创建出原生Kafka生产记录
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
+	 * @param name Topic注册名
 	 * @param key
 	 * @param value
 	 * @return
 	 */
 	protected <K, V> ProducerRecord<K, V> createProducerRecord(String name, K key, V value) {
+		return createProducerRecord(name, key, value, null);
+	}
+	
+	/**
+	 * 根据注册名称获取Topic节点上注册的各项生产数据指标后创建出原生Kafka生产记录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name Topic注册名
+	 * @param key
+	 * @param value
+	 * @param partition 未找到节点时传入的分区索引
+	 * @return
+	 */
+	protected <K, V> ProducerRecord<K, V> createProducerRecord(String name, K key, V value, Integer partition) {
+		return createProducerRecord(name, key, value, partition, null);
+	}
+	
+	/**
+	 * 根据注册名称获取Topic节点上注册的各项生产数据指标后创建出原生Kafka生产记录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param packet
+	 * @return
+	 */
+	protected <K, V> ProducerRecord<K, V> createProducerRecord(String name, MessagePacket<K, V> packet) {
+		return createProducerRecord(name, packet.getKey(), packet.getValue(), packet.getPartition(), packet.getTimestamp());
+	}
+	
+	/**
+	 * 根据注册名称获取Topic节点上注册的各项生产数据指标后创建出原生Kafka生产记录
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name Topic注册名
+	 * @param key
+	 * @param value
+	 * @param partition 未找到节点或节点注册的分区索引为空时传入的自定义分区索引
+	 * @param timestamp 未找到节点或节点注册的时间戳为空时传入的自定义时间戳
+	 * @return
+	 */
+	protected <K, V> ProducerRecord<K, V> createProducerRecord(String name, K key, V value, Integer partition, Long timestamp) {
+		// 先根据注册名称找到节点真实的名称，否则就按注册名称作为默认名称
 		String topicName = getTopicName(getTopicNode(name), name);
+		// topicName有可能返回的是全局默认名称，因此这里再找一次节点
 		TopicNode topicNode = getTopicNode(topicName);
 		
-		return topicNode != null ? new ProducerRecord<K, V>(topicNode.getName(), topicNode.getPartition(),
-				topicNode.getTimestamp(), key, value) : new ProducerRecord<K, V>(topicName, null, null, key, value);
+		if (topicNode != null) {
+			Integer recordPartition = (topicNode.getPartition() != null ? topicNode.getPartition() : partition);
+			Long recordTimestamp = (topicNode.getTimestamp() != null ? topicNode.getTimestamp() : timestamp);
+			return new ProducerRecord<K, V>(topicNode.getName(), recordPartition, recordTimestamp, key, value);
+		} else {
+			return new ProducerRecord<K, V>(topicName, partition, timestamp, key, value);
+		}
 	}
 	
 }
