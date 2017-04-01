@@ -18,6 +18,7 @@
 
 package org.workin.serialization.test.serializer;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +50,7 @@ public abstract class AbstractSerializerTest extends BaseTestCase implements Ser
 		user.setMarried(true);
 		user.setVision(1.0);
 		user.setCreateTime(new Date());
+		user.setAmount(new BigDecimal("100"));
 		
 		list = CollectionUtils.newArrayList();
 		list.add(user);

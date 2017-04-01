@@ -19,7 +19,6 @@
 package org.workin.serialization.json;
 
 
-import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.serialization.SerializationException;
 
@@ -59,11 +58,6 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 		 }
 	}
 
-	@Override
-	public <T> T deserialize(byte[] bytes, Class<T> type) throws SerializationException {
-		return deserialize(CodecUtils.bytesToString(bytes, getEncoding()), type);
-	}
-
 	@SuppressWarnings({ "unchecked", "resource" })
 	@Override
 	public <T> T deserialize(String text, Class<T> type) throws SerializationException {
@@ -72,7 +66,8 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 		if (StringUtils.isNotBlank(dateFormat)) 
 			jsonParser.setDateFormat(dateFormat);
 		
-		return (T) jsonParser.parseObject(type != null ? type : getType());
+		Class<?> clazz = (type != null ? type : getType());
+		return (T) (isJsonArray(text) ? jsonParser.parseArray(clazz) : jsonParser.parseObject(clazz));
 	}
 
 }

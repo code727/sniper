@@ -71,7 +71,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	 * 构建全局默认的Morpher
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	private void buildDefaultMorpher() {
+	protected void buildDefaultMorpher() {
 		this.morpherRegistry = JSONUtils.getMorpherRegistry();
 		this.morpherRegistry.registerMorpher(new DateMorpher(new String[] {
 				DateUtils.DEFAULT_DATETIME_FORMAT, DateUtils.DEFAULT_DATE_FORMAT
@@ -83,7 +83,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	 * 构建全局默认的JsonConfig
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	private void buildDefaultJsonConfig() {
+	protected void buildDefaultJsonConfig() {
 		this.jsonConfig = new JsonConfig();
 		this.jsonConfig.registerJsonValueProcessor(Date.class, new JsonValueProcessor(){
 			

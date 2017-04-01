@@ -21,7 +21,7 @@
 				              则消息只能由组内某一个成员消费，在消费者集群环境下，要特别注意这点 -->
 				<entry key="group.id" value="consumer_group_0" />
 				<entry key="client.id" value="0" />
-				<entry key="enable.auto.commit" value="true" />
+				<entry key="enable.auto.commit" value="false" />
 				<!-- 当Kafka没有初始偏移或如果当前偏移在服务器上不再存在时的处理方式 -->
 				<!-- <entry key="auto.offset.reset" value="none" /> -->
 				<entry key="auto.commit.interval.ms" value="1000" />

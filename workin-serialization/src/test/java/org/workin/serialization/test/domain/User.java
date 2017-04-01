@@ -19,10 +19,12 @@
 package org.workin.serialization.test.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 import org.workin.commons.util.CodecUtils;
-import org.workin.serialization.json.JacksonSerializer;
+import org.workin.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
 
 /**
  * @description
@@ -45,8 +47,9 @@ public class User implements Serializable, Cloneable {
 	
 	private double vision;
 	
-//	@JsonSerialize(using = CustomDateSerializer.class)
 	private Date createTime;
+	
+	private BigDecimal amount;
 
 	public Long getId() {
 		return id;
@@ -104,8 +107,16 @@ public class User implements Serializable, Cloneable {
 		this.createTime = createTime;
 	}
 	
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = (amount != null ? amount.setScale(2, RoundingMode.DOWN) : amount);
+	}
+
 	public String toString() {
-		return CodecUtils.bytesToString(new JacksonSerializer().serialize(this));
+		return CodecUtils.bytesToString(new FasterxmlJacksonSerializer().serialize(this));
 	}
 	
 	@Override

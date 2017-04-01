@@ -20,13 +20,14 @@ package org.workin.serialization.test.serializer.json;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.List;
+import java.math.BigDecimal;
 
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.IOUtils;
-import org.workin.serialization.json.JacksonSerializer;
+import org.workin.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
+import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
 /**
@@ -34,21 +35,21 @@ import org.workin.serialization.test.serializer.AbstractSerializerTest;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JacksonSerializerTest extends AbstractSerializerTest {
+public class CodehausJacksonSerializerTest extends AbstractSerializerTest {
 	
-	private JacksonSerializer jacksonSerializer;
+	private CodehausJacksonSerializer codehausJacksonSerializer;
 	
-	public JacksonSerializerTest() {
-		this.jacksonSerializer = new JacksonSerializer();
-		this.jacksonSerializer.setDateFormat(DateUtils.DEFAULT_DATETIME_FORMAT);
+	public CodehausJacksonSerializerTest() {
+		this.codehausJacksonSerializer = new CodehausJacksonSerializer();
+		this.codehausJacksonSerializer.setDateFormat(DateUtils.DEFAULT_DATETIME_FORMAT);
 	}
 	
 	@Override
 	@Test
 	public void testSerialize() throws Exception {
-		bytes = jacksonSerializer.serialize(list);
+		bytes = codehausJacksonSerializer.serialize(list);
 		
-		String path = "C:/Users/Daniele/Desktop/jacksonSerializer.txt";
+		String path = "C:/Users/Daniele/Desktop/codehausJacksonSerializer.txt";
 		IOUtils.write(new FileOutputStream(new File(path)), bytes);
 	}
 
@@ -59,9 +60,12 @@ public class JacksonSerializerTest extends AbstractSerializerTest {
 			testSerialize();
 		}
 		
-		jacksonSerializer.setType(List.class);
-		list = jacksonSerializer.deserialize(bytes);
-		System.out.println(list);
+		User user = new User();
+		user.setAmount(new BigDecimal("99.9999"));
+		codehausJacksonSerializer.setType(User.class);
+		User users = codehausJacksonSerializer.deserialize(codehausJacksonSerializer.serialize(user));
+		System.out.println(users);
+		
 	}
-
+	
 }

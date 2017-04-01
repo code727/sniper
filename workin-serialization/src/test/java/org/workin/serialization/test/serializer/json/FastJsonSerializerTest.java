@@ -20,12 +20,14 @@ package org.workin.serialization.test.serializer.json;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.IOUtils;
 import org.workin.serialization.json.FastJsonSerializer;
+import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
 /**
@@ -58,10 +60,14 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 			testSerialize();
 		}
 		
-		// List<JavaBean>可以不用设置type，单个JavaBean则必须设置
-//		fastJsonSerializer.setType(List.class);
-		list = fastJsonSerializer.deserialize(bytes);
-		System.out.println(list);
+		fastJsonSerializer.setType(User.class);
+		List<User> users = fastJsonSerializer.deserialize(bytes);
+		System.out.println(users);
+		System.out.println(users.getClass());
+		
+//		User user = fastJsonSerializer.deserialize(fastJsonSerializer.serialize(users.get(0)), User.class);
+//		System.out.println(user);
+		
 	}
 
 }

@@ -56,6 +56,10 @@ public class JsonLibSerializerTest extends AbstractSerializerTest {
 		jsonLibSerializer.setType(User.class);
 		list = jsonLibSerializer.deserialize(bytes);
 		System.out.println(list);
+		System.out.println(list.getClass());
+		
+		User user = jsonLibSerializer.deserialize(jsonLibSerializer.serialize(list.get(0)));
+		System.out.println(user);
 	}
 
 }

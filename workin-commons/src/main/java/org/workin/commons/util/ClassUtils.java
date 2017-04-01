@@ -22,6 +22,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -295,7 +296,67 @@ public class ClassUtils {
 	 */
 	public static boolean isJavaTypeObject(Object obj) {  
 	    return obj != null && isJavaType(obj.getClass());
+	} 
+	
+	/**
+	 * 判断是否为数组类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz
+	 * @return
+	 */
+	public static boolean isArray(Class<?> clazz) {  
+	    return clazz != null && clazz.isArray();
 	}  
+	
+	/**
+	 * 判断是否为数组类型的对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isArray(Object obj) {
+		return obj != null && isArray(obj.getClass());
+	}
+	
+	/**
+	 * 判断是否为集合类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz
+	 * @return
+	 */
+	public static boolean isCollection(Class<?> clazz) {
+		return clazz != null && Collection.class.isAssignableFrom(clazz);
+	}
+	
+	/**
+	 * 判断是否为集合类型的对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isCollection(Object obj) {
+		return obj != null && isCollection(obj.getClass());
+	}
+	
+	/**
+	 * 判断是否为列表类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz
+	 * @return
+	 */
+	public static boolean isList(Class<?> clazz) {
+		return clazz != null && List.class.isAssignableFrom(clazz);
+	}
+	
+	/**
+	 * 判断是否为列表类型的对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isList(Object obj) {
+		return obj != null && isList(obj.getClass());
+	}
 	
 	/**
 	 * 返回当前非Class对象的类型

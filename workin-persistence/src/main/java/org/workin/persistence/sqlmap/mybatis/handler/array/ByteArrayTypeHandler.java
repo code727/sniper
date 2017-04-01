@@ -19,7 +19,7 @@
 package org.workin.persistence.sqlmap.mybatis.handler.array;
 
 /**
- * @description 比特型数组类型处理器
+ * 比特型数组类型处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -19,11 +19,11 @@
 package org.workin.persistence.sqlmap.mybatis.handler.array;
 
 /**
- * @description 有进制要求的数组类型处理器
+ * 有进制要求的数组类型处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RadixArrayTypeHandler<T> extends ArrayTypeHandler<T> {
+public abstract class RadixArrayTypeHandler<T> extends ArrayTypeHandler<T> {
 	
 	protected int radix = 10;
 

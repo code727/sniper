@@ -29,7 +29,7 @@ import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
- * @description 数组类型处理器
+ * 数组类型处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  * @param <T>

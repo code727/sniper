@@ -19,7 +19,7 @@
 package org.workin.persistence.sqlmap.mybatis.handler.array;
 
 /**
- * @description 布尔数组类型处理器
+ * 布尔数组类型处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -33,7 +33,7 @@ public class BooleanArrayTypeHandler extends ArrayTypeHandler<Boolean> {
 		String element;
 		for (int i = 0; i < length; i++) {
 			element = resultArray[i];
-			result[i] = ("true".equalsIgnoreCase(element) || "1".equals(element));
+			result[i] = ("true".equalsIgnoreCase(element) || "Y".equalsIgnoreCase(element) || "1".equals(element));
 		}
 			
 		return result;

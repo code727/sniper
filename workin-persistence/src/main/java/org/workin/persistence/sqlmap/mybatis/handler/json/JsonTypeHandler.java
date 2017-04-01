@@ -28,11 +28,11 @@ import org.apache.ibatis.type.JdbcType;
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.serialization.json.JacksonSerializer;
 import org.workin.serialization.json.JsonSerializer;
+import org.workin.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
 
 /**
- * @description JSON类型处理器
+ * JSON类型处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -45,7 +45,7 @@ public class JsonTypeHandler<T> extends BaseTypeHandler<T> {
 	}
 	
 	public JsonTypeHandler(JsonSerializer jsonSerializer) {
-		this.jsonSerializer = (jsonSerializer != null ? jsonSerializer : new JacksonSerializer());
+		this.jsonSerializer = (jsonSerializer != null ? jsonSerializer : new CodehausJacksonSerializer());
 	}
 	
 	public JsonSerializer getJsonSerializer() {

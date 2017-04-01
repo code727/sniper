@@ -19,6 +19,7 @@
 package org.workin.serialization;
 
 import org.workin.codec.CodecSupport;
+import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
@@ -67,6 +68,11 @@ public abstract class AbstractTypeSerializer extends CodecSupport implements Typ
 	@Override
 	public <T> T deserialize(byte[] bytes) throws SerializationException {
 		return deserialize(bytes, null);
+	}
+	
+	@Override
+	public <T> T deserialize(byte[] bytes, Class<T> type) throws SerializationException {
+		return deserialize(CodecUtils.bytesToString(bytes, getEncoding()), type);
 	}
 	
 	@Override
