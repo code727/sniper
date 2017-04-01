@@ -16,7 +16,7 @@
  * Create Date : 2017-3-31
  */
 
-package org.workin.serialization.json;
+package org.workin.serialization.json.jackson.codehaus;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -28,15 +28,24 @@ import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 
 /**
- * Jackson BigDecimal类型序列化器实现类
+ * CodehausJackson BigDecimal类型序列化器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JacksonBigDecimalSerializer extends JsonSerializer<BigDecimal> {
+public class CodehausJacksonBigDecimalSerializer extends JsonSerializer<BigDecimal> {
 	
-	private int newScale = 2;
+	private int newScale;
 	
-	private int roundingMode = RoundingMode.DOWN.ordinal();
+	private int roundingMode;
+	
+	public CodehausJacksonBigDecimalSerializer() {
+		this(2, RoundingMode.DOWN.ordinal());
+	}
+	
+	public CodehausJacksonBigDecimalSerializer(int newScale, int roundingMode) {
+		this.newScale = newScale;
+		this.roundingMode = roundingMode;
+	}
 	
 	public int getNewScale() {
 		return newScale;

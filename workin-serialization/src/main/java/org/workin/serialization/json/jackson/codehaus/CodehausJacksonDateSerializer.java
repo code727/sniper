@@ -16,7 +16,7 @@
  * Create Date : 2016-7-13
  */
 
-package org.workin.serialization.json;
+package org.workin.serialization.json.jackson.codehaus;
 
 import java.io.IOException;
 import java.util.Date;
@@ -28,13 +28,21 @@ import org.codehaus.jackson.map.SerializerProvider;
 import org.workin.commons.util.DateUtils;
 
 /**
- * Jackson日期序列化器实现类
+ * CodehausJackson 日期序列化器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JacksonDateSerializer extends JsonSerializer<Date> {
+public class CodehausJacksonDateSerializer extends JsonSerializer<Date> {
 	
 	private String dateFormat;
+	
+	public CodehausJacksonDateSerializer() {
+		
+	}
+	
+	public CodehausJacksonDateSerializer(String dateFormat) {
+		this.dateFormat = dateFormat;
+	}
 	
 	public String getDateFormat() {
 		return dateFormat;
