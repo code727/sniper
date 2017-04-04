@@ -20,6 +20,7 @@ package org.workin.serialization.test.serializer.json;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Test;
@@ -29,6 +30,8 @@ import org.workin.commons.util.IOUtils;
 import org.workin.serialization.json.FastJsonSerializer;
 import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
+
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 阿里FastJson序列化器单元测试类
@@ -60,13 +63,13 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 			testSerialize();
 		}
 		
-		fastJsonSerializer.setType(User.class);
-		List<User> users = fastJsonSerializer.deserialize(bytes);
-		System.out.println(users);
-		System.out.println(users.getClass());
+		User user = new User();
+		user.setAmount(new BigDecimal("99.9999"));
+//		fastJsonSerializer.serialize(user)
+//		fastJsonSerializer.setType(List.class);
 		
-//		User user = fastJsonSerializer.deserialize(fastJsonSerializer.serialize(users.get(0)), User.class);
-//		System.out.println(user);
+		List<JSONObject> users = fastJsonSerializer.deserialize(bytes);
+		System.out.println(users.get(0).getClass());
 		
 	}
 

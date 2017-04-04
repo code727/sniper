@@ -50,7 +50,7 @@ public abstract class AbstractSerializerTest extends BaseTestCase implements Ser
 		user.setMarried(true);
 		user.setVision(1.0);
 		user.setCreateTime(new Date());
-		user.setAmount(new BigDecimal("100"));
+		user.setAmount(new BigDecimal("99.9999"));
 		
 		list = CollectionUtils.newArrayList();
 		list.add(user);

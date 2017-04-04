@@ -19,6 +19,12 @@
 package org.workin.serialization.json;
 
 
+import java.lang.reflect.Array;
+import java.util.Collection;
+import java.util.List;
+
+import org.workin.commons.util.ClassUtils;
+import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.serialization.SerializationException;
 
@@ -61,13 +67,116 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	@SuppressWarnings({ "unchecked", "resource" })
 	@Override
 	public <T> T deserialize(String text, Class<T> type) throws SerializationException {
-		DefaultJSONParser jsonParser = new DefaultJSONParser(text);
 		
+		Class<?> clazz = (type != null ? type : getType());
+		
+		DefaultJSONParser jsonParser = new DefaultJSONParser(text);
 		if (StringUtils.isNotBlank(dateFormat)) 
 			jsonParser.setDateFormat(dateFormat);
 		
-		Class<?> clazz = (type != null ? type : getType());
-		return (T) (isJsonArray(text) ? jsonParser.parseArray(clazz) : jsonParser.parseObject(clazz));
+		try {
+			if (!isJsonArray(text)) {
+				if (clazz != null && !ClassUtils.isCollection(clazz)) {
+					return (T) (!ClassUtils.isArray(clazz) ? 
+							beanDeserialize(jsonParser, clazz) : beanDeserializeToArray(jsonParser, clazz));
+				} else
+					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<JSONObject>
+					return beanDeserializeToCollection(jsonParser);
+			} else {
+				if (clazz != null && !ClassUtils.isCollection(clazz)) {
+					return (T) (!ClassUtils.isArray(clazz) ? 
+							multipleBeanDeserializeToElementTypeCollection(jsonParser, clazz) : multipleBeanDeserializeToArray(jsonParser, clazz));
+				} else
+					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<JSONObject>
+					return multipleBeanDeserializeToCollection(jsonParser, clazz);
+			}
+		} catch (Exception e) {
+			throw new SerializationException("Cannot deserialize", e);
+		}
+	}
+	
+	/**
+	 * 将JsonBean字符串反序列化为指定类型的bean对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonParser
+	 * @param beanClazz
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T beanDeserialize(DefaultJSONParser jsonParser, Class<?> beanClazz) throws Exception {
+		return (T) jsonParser.parseObject(beanClazz);
+	}
+	
+	/**
+	 * 将JsonBean字符串反序列化到指定类型的数组中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonParser
+	 * @param arrayClazz
+	 * @return
+	 * @throws Exception 
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T beanDeserializeToArray(DefaultJSONParser jsonParser, Class<?> arrayClazz) throws Exception {
+		Class<?> componentType = arrayClazz.getComponentType();
+		T[] array = (T[]) Array.newInstance(componentType, 1);
+		array[0] = (T) jsonParser.parseObject(componentType);
+		return (T) array;
+	}
+	
+	/**
+	 * 将JsonBean字符串反序列化到集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonParser
+	 * @param collectionClazz
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T beanDeserializeToCollection(DefaultJSONParser jsonParser) throws Exception {
+		List<Object> list = CollectionUtils.newArrayList();
+		list.add(jsonParser.parseObject(Object.class));
+		return (T) list;
+	}
+	
+	/**
+	 * 将代表多个bean的JSON字符串反序列化到指定元素类型的集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonParser
+	 * @param beanClazz
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T multipleBeanDeserializeToElementTypeCollection(DefaultJSONParser jsonParser, Class<?> beanClazz) throws Exception {
+		return (T) jsonParser.parseArray(beanClazz);
+	}
+	
+	/**
+	 * 将代表多个bean的JSON字符串反序列化到指定类型的数组中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonParser
+	 * @param arrayClazz
+	 * @return 
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T multipleBeanDeserializeToArray(DefaultJSONParser jsonParser, Class<?> arrayClazz) throws Exception {
+		Collection<T> collection = multipleBeanDeserializeToElementTypeCollection(jsonParser, arrayClazz.getComponentType());
+		return (T) CollectionUtils.toArray(collection);
+	}
+	
+	/**
+	 * 将代表多个bean的JSON字符串反序列化到指定类型的集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonParser
+	 * @param collectionClazz
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T multipleBeanDeserializeToCollection(DefaultJSONParser jsonParser, Class<?> collectionClazz) throws Exception {
+		return (T) jsonParser.parseObject(collectionClazz);
 	}
 
 }

@@ -21,6 +21,7 @@ package org.workin.serialization.test.serializer.json;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.junit.Test;
@@ -62,9 +63,10 @@ public class FasterxmlJacksonSerializerTest extends AbstractSerializerTest {
 		
 		User user = new User();
 		user.setAmount(new BigDecimal("99.9999"));
+//		fasterxmlJacksonSerializer.serialize(user)
+//		fasterxmlJacksonSerializer.setType(List.class);
 		
-		fasterxmlJacksonSerializer.setType(List.class);
-		List<User> users = fasterxmlJacksonSerializer.deserialize(fasterxmlJacksonSerializer.serialize(user));
+		List<LinkedHashMap<?, ?>> users = fasterxmlJacksonSerializer.deserialize(fasterxmlJacksonSerializer.serialize(user));
 		System.out.println(users);
 	}
 
