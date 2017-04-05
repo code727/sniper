@@ -76,12 +76,16 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 		
 		try {
 			if (!isJsonArray(text)) {
-				if (clazz != null && !ClassUtils.isCollection(clazz)) {
-					return (T) (!ClassUtils.isArray(clazz) ? 
-							beanDeserialize(jsonParser, clazz) : beanDeserializeToArray(jsonParser, clazz));
+				if (clazz != null) {
+					if ( !ClassUtils.isCollection(clazz)) {
+						return (T) (!ClassUtils.isArray(clazz) ? 
+								beanDeserialize(jsonParser, clazz) : beanDeserializeToArray(jsonParser, clazz));
+					} else
+						// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<JSONObject>
+						return beanDeserializeToCollection(jsonParser);
 				} else
-					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<JSONObject>
-					return beanDeserializeToCollection(jsonParser);
+					// 指定的类型为null时，则返回JSONObject
+					return beanDeserializeToObject(jsonParser);
 			} else {
 				if (clazz != null && !ClassUtils.isCollection(clazz)) {
 					return (T) (!ClassUtils.isArray(clazz) ? 
@@ -135,8 +139,20 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	@SuppressWarnings("unchecked")
 	private <T> T beanDeserializeToCollection(DefaultJSONParser jsonParser) throws Exception {
 		List<Object> list = CollectionUtils.newArrayList();
-		list.add(jsonParser.parseObject(Object.class));
+		list.add(beanDeserializeToObject(jsonParser));
 		return (T) list;
+	}
+	
+	/**
+	 * 将JsonBean字符串反序列化为Object
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonParser
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T beanDeserializeToObject(DefaultJSONParser jsonParser) throws Exception {
+		return (T) jsonParser.parseObject(Object.class);
 	}
 	
 	/**

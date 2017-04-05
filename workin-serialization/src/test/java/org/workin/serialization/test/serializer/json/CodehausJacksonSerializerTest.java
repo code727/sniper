@@ -65,9 +65,9 @@ public class CodehausJacksonSerializerTest extends AbstractSerializerTest {
 		User user = new User();
 		user.setAmount(new BigDecimal("99.9999"));
 //		codehausJacksonSerializer.serialize(user)
-//		codehausJacksonSerializer.setType(List.class);		
+		codehausJacksonSerializer.setType(List.class);		
 		
-		List<LinkedHashMap<?, ?>> users = codehausJacksonSerializer.deserialize(bytes);
+		List<LinkedHashMap<?, ?>> users = codehausJacksonSerializer.deserialize(codehausJacksonSerializer.serialize(user));
 		System.out.println(users);
 		
 	}

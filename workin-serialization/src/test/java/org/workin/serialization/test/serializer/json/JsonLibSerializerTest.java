@@ -20,6 +20,8 @@ package org.workin.serialization.test.serializer.json;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
+import java.util.List;
 
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
@@ -27,6 +29,8 @@ import org.workin.commons.util.IOUtils;
 import org.workin.serialization.json.JsonLibSerializer;
 import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
+
+import net.sf.json.JSONObject;
 
 /**
  * JsonLib序列化器单元测试类
@@ -53,13 +57,15 @@ public class JsonLibSerializerTest extends AbstractSerializerTest {
 			testSerialize();
 		}
 		
-		jsonLibSerializer.setType(User.class);
-		list = jsonLibSerializer.deserialize(bytes);
-		System.out.println(list);
-		System.out.println(list.getClass());
+		User user = new User();
+		user.setAmount(new BigDecimal("99.9999"));
 		
-		User user = jsonLibSerializer.deserialize(jsonLibSerializer.serialize(list.get(0)));
-		System.out.println(user);
+//		jsonLibSerializer.serialize(user);
+//		jsonLibSerializer.setType(List.class);
+		
+		List<JSONObject> users = jsonLibSerializer.deserialize(bytes);
+		System.out.println(users.getClass());
+		System.out.println(users.get(0));
 	}
 
 }

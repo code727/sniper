@@ -18,7 +18,16 @@
 
 package org.workin.serialization.json;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
+import org.workin.commons.util.ClassUtils;
+import org.workin.commons.util.CodecUtils;
+import org.workin.commons.util.CollectionUtils;
+import org.workin.commons.util.DateUtils;
+import org.workin.serialization.SerializationException;
 
 import net.sf.ezmorph.Morpher;
 import net.sf.ezmorph.MorpherRegistry;
@@ -29,10 +38,6 @@ import net.sf.json.JSONSerializer;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.util.JSONUtils;
-
-import org.workin.commons.util.CodecUtils;
-import org.workin.commons.util.DateUtils;
-import org.workin.serialization.SerializationException;
 
 /**
  * JsonLib序列器实现类
@@ -89,12 +94,12 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 			
 			@Override
 			public Object processObjectValue(String propertyName, Object date, JsonConfig cfg) {
-				return DateUtils.objectToString(date, getDateFormat());
+				return date != null ? DateUtils.objectToString(date, getDateFormat()) : date;
 			}
 
 			@Override
 			public Object processArrayValue(Object date, JsonConfig cfg) {
-				return DateUtils.objectToString(date, getDateFormat());
+				return date != null ? DateUtils.objectToString(date, getDateFormat()) : date;
 			}
 		});
 	}
@@ -113,25 +118,130 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	public <T> byte[] serialize(T t) throws SerializationException {
 		return CodecUtils.getBytes(JSONSerializer.toJSON(t, getJsonConfig()).toString(), getEncoding());
 	}
-
-	@Override
-	public <T> T deserialize(byte[] bytes, Class<T> type) throws SerializationException {
-		return deserialize(CodecUtils.bytesToString(bytes, getEncoding()), type);
-	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T deserialize(String jsonString, Class<T> type) throws SerializationException {
-		if (isJsonArray(jsonString)) {
-			JSONArray jsonArray = JSONArray.fromObject(jsonString, getJsonConfig());
-			// 统一的转换为Collection对象
-			return (T) JSONArray.toCollection(jsonArray, type != null ? type : getType());
-//			return (T) JSONArray.toArray(jsonArray, getType());
-		} else {
-			JSONObject jsonObject = JSONObject.fromObject(jsonString, getJsonConfig());
-			// 转换为单个JavaBean或一个Map对象
-			return (T) JSONObject.toBean(jsonObject, type != null ? type : getType());
+		
+		Class<?> clazz = (type != null ? type : getType());
+		
+		try {
+			if (!isJsonArray(jsonString)) {
+				if (clazz != null) {
+					if (!ClassUtils.isCollection(clazz)) {
+						return (T) (!ClassUtils.isArray(clazz) ? 
+								beanDeserialize(jsonString, clazz) : beanDeserializeToArray(jsonString, clazz));
+					} else 
+						// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<JSONObject>
+						return beanDeserializeToCollection(jsonString);
+				} else 
+					// 指定的类型为null时，则返回JSONObject
+					return beanDeserializeToObject(jsonString);
+			} else {
+				if (clazz != null && !ClassUtils.isCollection(clazz)) {
+					return (T) (!ClassUtils.isArray(clazz) ? 
+							multipleBeanDeserializeToElementTypeCollection(jsonString, clazz) : multipleBeanDeserializeToArray(jsonString, clazz));
+				} else 
+					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<JSONObject>
+					return multipleBeanDeserializeToCollection(jsonString, clazz);
+			}
+		} catch (Exception e) {
+			throw new SerializationException("Cannot deserialize", e);
 		}
+	}
+	
+	/**
+	 * 将JsonBean字符串反序列化为指定类型的bean对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonBean
+	 * @param beanClazz
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T beanDeserialize(String jsonBean, Class<?> beanClazz) throws Exception {
+		JSONObject jsonObject = JSONObject.fromObject(jsonBean, getJsonConfig());
+		return (T) JSONObject.toBean(jsonObject, beanClazz);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private <T> T beanDeserializeToArray(String jsonBean, Class<?> arrayClazz) throws Exception {
+		Class<?> componentType = arrayClazz.getComponentType();
+		T[] array = (T[]) Array.newInstance(componentType, 1);
+		array[0] = (T) beanDeserialize(jsonBean, componentType);
+		return (T) array;
+	}
+	
+	/**
+	 * 将JsonBean字符串反序列化到集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonBean
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T beanDeserializeToCollection(String jsonBean) throws Exception {
+		List<Object> list = CollectionUtils.newArrayList();
+		list.add(beanDeserializeToObject(jsonBean));
+		return (T) list;
+	}
+	
+	/**
+	 * 将JsonBean字符串反序列化为Object
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonBean
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T beanDeserializeToObject(String jsonBean) throws Exception {
+		return (T) JSONObject.fromObject(jsonBean, getJsonConfig());
+	}
+	
+	/**
+	 * 将代表多个bean的JSON字符串反序列化到指定元素类型的集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonArray
+	 * @param beanClazz
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T multipleBeanDeserializeToElementTypeCollection(String jsonArray, Class<?> beanClazz) throws Exception {
+		JSONArray array = JSONArray.fromObject(jsonArray, getJsonConfig());
+		return (T) JSONArray.toCollection(array, beanClazz);
+	}
+	
+	/**
+	 * 将代表多个bean的JSON字符串反序列化到指定类型的数组中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonArray
+	 * @param arrayClazz
+	 * @return 
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T multipleBeanDeserializeToArray(String jsonArray, Class<?> arrayClazz) throws Exception {
+		JSONArray array = JSONArray.fromObject(jsonArray, getJsonConfig());
+		return (T) JSONArray.toArray(array, arrayClazz.getComponentType());
+	}
+	
+	/**
+	 * 将代表多个bean的JSON字符串反序列化到指定类型的集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonArray
+	 * @param collectionClazz
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T multipleBeanDeserializeToCollection(String jsonArray, Class<?> collectionClazz) throws Exception {
+		JSONArray array = JSONArray.fromObject(jsonArray, getJsonConfig());
+		return (T) CollectionUtils.newArrayList(Arrays.asList((Object[]) array.toArray()));
+		
+//		JSONArray array = JSONArray.fromObject(jsonArray, getJsonConfig());
+		// return List<MorphDynaBean>
+//		return (T) JSONArray.toCollection(array, getJsonConfig());
 	}
 	
 }

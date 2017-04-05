@@ -64,9 +64,9 @@ public class FasterxmlJacksonSerializerTest extends AbstractSerializerTest {
 		User user = new User();
 		user.setAmount(new BigDecimal("99.9999"));
 //		fasterxmlJacksonSerializer.serialize(user)
-//		fasterxmlJacksonSerializer.setType(List.class);
+		fasterxmlJacksonSerializer.setType(List.class);
 		
-		List<LinkedHashMap<?, ?>> users = fasterxmlJacksonSerializer.deserialize(fasterxmlJacksonSerializer.serialize(user));
+		List<LinkedHashMap<?, ?>> users = fasterxmlJacksonSerializer.deserialize(bytes);
 		System.out.println(users);
 	}
 

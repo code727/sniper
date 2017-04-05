@@ -91,12 +91,16 @@ public class FasterxmlJacksonSerializer extends AbstractJsonSerializer {
 		
 		try {
 			if (!isJsonArray(text)) {
-				if (clazz != null && !ClassUtils.isCollection(clazz)) {
-					return (T) (!ClassUtils.isArray(clazz) ? 
-							beanDeserialize(text, clazz) : beanDeserializeToArray(text, clazz));
+				if (clazz != null) {
+					if (!ClassUtils.isCollection(clazz)) {
+						return (T) (!ClassUtils.isArray(clazz) ? 
+								beanDeserialize(text, clazz) : beanDeserializeToArray(text, clazz));
+					} else 
+						// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
+						return beanDeserializeToCollection(text);
 				} else 
-					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
-					return beanDeserializeToCollection(text);
+					// 指定的类型为null时，则返回LinkedHashMap
+					return beanDeserializeToObject(text);
 			} else {
 				if (clazz != null && !ClassUtils.isCollection(clazz)) {
 					return (T) (!ClassUtils.isArray(clazz) ? 
@@ -149,8 +153,20 @@ public class FasterxmlJacksonSerializer extends AbstractJsonSerializer {
 	@SuppressWarnings("unchecked")
 	private <T> T beanDeserializeToCollection(String jsonBean) throws Exception {
 		List<Object> list = CollectionUtils.newArrayList();
-		list.add(objectMapper.readValue(jsonBean, Object.class));
+		list.add(beanDeserializeToObject(jsonBean));
 		return (T) list;
+	}
+	
+	/**
+	 * 将JsonBean字符串反序列化为Object
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param jsonBean
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T beanDeserializeToObject(String jsonBean) throws Exception {
+		return (T) objectMapper.readValue(jsonBean, Object.class);
 	}
 	
 	/**

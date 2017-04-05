@@ -21,7 +21,6 @@ package org.workin.serialization.test.serializer.json;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
@@ -68,8 +67,8 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 //		fastJsonSerializer.serialize(user)
 //		fastJsonSerializer.setType(List.class);
 		
-		List<JSONObject> users = fastJsonSerializer.deserialize(bytes);
-		System.out.println(users.get(0).getClass());
+		JSONObject users = fastJsonSerializer.deserialize(fastJsonSerializer.serialize(user));
+		System.out.println(users);
 		
 	}
 
