@@ -25,41 +25,37 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
+import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.serialization.json.JsonSerializer;
-import org.workin.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
 
 /**
- * JSON类型处理器
+ * JSON类型处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JsonTypeHandler<T> extends BaseTypeHandler<T> {
+public abstract class AbstractJsonTypeHandler<T> extends BaseTypeHandler<T> {
 	
 	private JsonSerializer jsonSerializer;
 	
-	public JsonTypeHandler() {
-		this(null);
+	public AbstractJsonTypeHandler() {
+		this.jsonSerializer = initJsonSerializer();
+		
+		AssertUtils.assertNotNull(jsonSerializer, "Json serializer must not be null.");
 	}
 	
-	public JsonTypeHandler(JsonSerializer jsonSerializer) {
-		this.jsonSerializer = (jsonSerializer != null ? jsonSerializer : new CodehausJacksonSerializer());
-	}
-	
-	public JsonSerializer getJsonSerializer() {
-		return jsonSerializer;
-	}
-
-	public void setJsonSerializer(JsonSerializer jsonSerializer) {
-		this.jsonSerializer = jsonSerializer;
-	}
+	/**
+	 * 初始化JSON序列化器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	protected abstract JsonSerializer initJsonSerializer();
 
 	@Override
 	public void setNonNullParameter(PreparedStatement ps, int i,
 			T parameter, JdbcType jdbcType) throws SQLException {
-		
 		if (parameter != null)
 			ps.setString(i, CodecUtils.bytesToString(jsonSerializer.serialize(parameter)));
 	}
@@ -85,7 +81,6 @@ public class JsonTypeHandler<T> extends BaseTypeHandler<T> {
 		if (StringUtils.isBlank(jsonString))
 			return null;
 		
-		// 如果直接使用这个实现类，则反序列化JSON字符串后，只能用Map对象来接收最终结果
 		return (T) jsonSerializer.deserialize(jsonString, ClassUtils.getSuperClassGenricType(this.getClass()));
 	}
 	
