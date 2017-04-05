@@ -237,7 +237,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	@SuppressWarnings("unchecked")
 	private <T> T multipleBeanDeserializeToCollection(String jsonArray, Class<?> collectionClazz) throws Exception {
 		JSONArray array = JSONArray.fromObject(jsonArray, getJsonConfig());
-		return (T) CollectionUtils.newArrayList(Arrays.asList((Object[]) array.toArray()));
+		return (T) CollectionUtils.newArrayList(Arrays.asList(array.toArray()));
 		
 //		JSONArray array = JSONArray.fromObject(jsonArray, getJsonConfig());
 		// return List<MorphDynaBean>
