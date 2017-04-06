@@ -45,6 +45,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
+			<artifactId>workin-serialization</artifactId>
+			<version>${workin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
 			<artifactId>workin-spring</artifactId>
 			<version>${workin.version}</version>
 		</dependency>

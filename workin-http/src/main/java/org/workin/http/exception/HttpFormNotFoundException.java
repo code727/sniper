@@ -18,14 +18,14 @@
 
 package org.workin.http.exception;
 
-import org.workin.commons.exception.WorkinRuntimeException;
+import org.workin.commons.exception.WorkinException;
 
 /**
  * "表单未找到"运行时异常
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class HttpFormNotFoundException extends WorkinRuntimeException {
+public class HttpFormNotFoundException extends WorkinException {
 
 	private static final long serialVersionUID = -2895027098437321733L;
 	

@@ -16,7 +16,7 @@
  * Create Date : 2015-6-23
  */
 
-package org.workin.web.spring;
+package org.workin.web.spring.reslover;
 
 import java.util.Locale;
 
@@ -29,6 +29,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.workin.templet.message.resolver.AbstractMessageResolver;
 import org.workin.web.WebApplicationContextMessageResolver;
+import org.workin.web.spring.WebContextHelper;
 
 /**
  * 基于Spring Web应用上下文环境的消息解析器实现类
