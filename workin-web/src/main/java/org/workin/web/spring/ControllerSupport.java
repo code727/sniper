@@ -28,8 +28,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.workin.commons.model.CodeModel;
-import org.workin.commons.model.MessageModel;
 import org.workin.commons.response.MessageResponse;
 import org.workin.commons.response.Response;
 import org.workin.commons.util.DateUtils;
@@ -48,7 +46,6 @@ import org.workin.web.WebApplicationContextMessageResolver;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-@SuppressWarnings("deprecation")
 public abstract class ControllerSupport implements MessageResolver, ServletAware {
 		
 	@Autowired
@@ -124,47 +121,6 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 		// 同理，如果返回的消息与指定的默认值再次一致，则再从与当前包同名的配置文件中获取
 		return !ObjectUtils.equals(message, defaultMessage) ? message : MessageUtils
 				.getClassMessage(this.getClass(), locale, key, params, defaultMessage);
-	}
-	
-	/**
-	 * 设置消息模型对象中的本地化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param result
-	 */
-	protected void setLocaleMessage(MessageModel model) {
-		setLocaleMessage(model, null);
-	}
-	
-	/**
-	 * 设置消息模型对象中的本地参数化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param model
-	 * @param params
-	 */
-	protected void setLocaleMessage(MessageModel model, Object[] params) {
-		String message = model.getMessage();
-		if (StringUtils.isNotBlank(message)) 
-			model.setMessage(getMessage(message, params));
-	}
-	
-	/**
-	 * 设置可编码的对象模型中的本地消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param model
-	 */
-	protected void setLocaleMessage(CodeModel model) {
-		setLocaleMessage(model, null);
-	}
-	
-	/**
-	 * 设置可编码的对象模型中的本地参数化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param model
-	 * @param params
-	 */
-	protected void setLocaleMessage(CodeModel model, Object[] params) {
-		if (model instanceof MessageModel)
-			setLocaleMessage((MessageModel) model, params);
 	}
 	
 	/**
