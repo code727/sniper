@@ -25,7 +25,7 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.workin.kafka.support.ConsumeResult;
 import org.workin.kafka.support.MQFactory;
 import org.workin.serialization.Serializer;
-import org.workin.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
+import org.workin.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
 
 /**
  * 消费者监听抽象类
@@ -36,7 +36,7 @@ public abstract class AbstractConsumerListener<K, V> implements ConsumerListener
 	
 	protected final Logger logger;
 	
-	protected Serializer loggerSerializer = new CodehausJacksonSerializer();
+	protected Serializer loggerSerializer = new FasterxmlJacksonSerializer();
 		
 	public AbstractConsumerListener() {
 		logger = LoggerFactory.getLogger(getClass()); 

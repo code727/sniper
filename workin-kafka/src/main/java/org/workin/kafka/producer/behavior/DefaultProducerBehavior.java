@@ -24,7 +24,7 @@ import org.workin.commons.util.CodecUtils;
 import org.workin.kafka.support.ProduceRecord;
 import org.workin.kafka.support.ProduceResult;
 import org.workin.serialization.Serializer;
-import org.workin.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
+import org.workin.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
 
 /**
  * 生产者默认行为实现类
@@ -36,7 +36,7 @@ public class DefaultProducerBehavior implements ProducerBehavior {
 	private final Logger logger;
 	
 	/** logger序列化器 */
-	protected Serializer loggerSerializer = new CodehausJacksonSerializer();
+	protected Serializer loggerSerializer = new FasterxmlJacksonSerializer();
 	
 	/** 是否关注成功事件 */
 	private boolean interestedInSuccess = true;
