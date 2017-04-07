@@ -27,14 +27,17 @@ public class BooleanPropertyEditor extends StringPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return BooleanEnum.TRUE.name().equalsIgnoreCase(text.trim())
-				|| String.valueOf(BooleanEnum.TRUE.ordinal()).equals(text.trim());
+		text = text.trim();
+		return BooleanEnum.TRUE.name().equalsIgnoreCase(text) || BooleanEnum.Y.name().equalsIgnoreCase(text)
+				|| String.valueOf(BooleanEnum.TRUE.ordinal()).equals(text);
 	}
 	
 	enum BooleanEnum {
 		FALSE,
-		TRUE
+		TRUE,
+		N,
+		Y
 	}
-			
+					
 }
 

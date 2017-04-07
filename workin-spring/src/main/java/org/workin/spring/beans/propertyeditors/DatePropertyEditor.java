@@ -30,18 +30,29 @@ import org.workin.commons.util.StringUtils;
  */
 public class DatePropertyEditor extends StringPropertyEditor {
 	
-	/** 能处理的日期格式 */
+	/** 日期格式 */
 	private String pattern;
+	
+	public DatePropertyEditor() {
+		
+	}
 	
 	public DatePropertyEditor(String pattern) {
 		this.pattern = pattern;
 	}
 	
+	public String getPattern() {
+		return pattern;
+	}
+
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
+	}
+
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	protected void check() throws Exception {
 		if (!this.isAllowEmpty() && StringUtils.isBlank(this.getDefaultValue()))
-			throw new IllegalArgumentException(
-					"Default value can not be null or blank when 'allowEmpty' is false.");
+			throw new IllegalArgumentException("Date default value must not be null or blank when 'allowEmpty' is false.");
 	}
 		
 	@Override

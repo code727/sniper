@@ -28,14 +28,15 @@ import org.workin.commons.util.StringUtils;
 public abstract class NumberPropertyEditor extends StringPropertyEditor {
 	
 	public NumberPropertyEditor() {
-		this.setDefaultValue("0");
+		// 重新设置数字属性编辑器的默认值为0
+		setDefaultValue("0");
 	}
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	protected void check() throws Exception {
+		// 当不允许为空而默认值为空白字符串时，则抛出异常
 		if (!this.isAllowEmpty() && StringUtils.isBlank(this.getDefaultValue()))
-			throw new IllegalArgumentException(
-					"Default value can not be blank when 'allowEmpty' is false.");
+			throw new IllegalArgumentException("Number default value must not be null or blank when 'allowEmpty' is false.");
 	}
 	
 	@Override
@@ -50,6 +51,7 @@ public abstract class NumberPropertyEditor extends StringPropertyEditor {
 	
 	@Override
 	public String getAsText() {
+		// 让左右两侧有空白的字符串也能进行数字转换
 		return StringUtils.toString(this.getValue()).trim();
 	}
 	

@@ -56,15 +56,23 @@ public class StringPropertyEditor extends PropertyEditorSupport
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		// 当不允许为空而默认值为空时，则抛出异常
+		check();
+	}
+	
+	/**
+	 * 检查设置
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @throws Exception
+	 */
+	protected void check() throws Exception {
+		// 当不允许为空而默认值为null时，则抛出异常
 		if (!this.isAllowEmpty() && this.getDefaultValue() == null)
-			throw new IllegalArgumentException(
-					"Default value can not be empty when 'allowEmpty' is false.");
+			throw new IllegalArgumentException("String default value must not be null when 'allowEmpty' is false.");
 	}
 	
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
-		if (!StringUtils.isEmpty(text))
+		if (StringUtils.isNotEmpty(text))
 			setValue(handleText(text));
 		else {
 			if (!this.isAllowEmpty())
@@ -83,5 +91,5 @@ public class StringPropertyEditor extends PropertyEditorSupport
 	protected Object handleText(String text) {
 		return text;
 	}
-
+		
 }
