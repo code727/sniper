@@ -45,6 +45,8 @@ public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
     /** 全局的生产者监听 */
     private volatile ProducerListener<?, ?> producerListener;
     
+    private boolean autoFlush;
+    
     /** 全局的生产者回调 */
     protected ListenableFutureCallback<?> producerCallback;
     
@@ -63,6 +65,10 @@ public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
 	public void setProducerCallback(ListenableFutureCallback<?> producerCallback) {
 		this.producerCallback = producerCallback;
 	}
+	
+	public boolean isAutoFlush() {
+		return autoFlush;
+	}
 
 	@Override
 	protected void checkProperties() {		
@@ -78,6 +84,7 @@ public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
 		kafkaTemplate.setDefaultTopic(defaultTopic.getName());
 		
 		producerListener = ReflectionUtils.getFieldValue(kafkaTemplate, "producerListener");
+		autoFlush = ReflectionUtils.getFieldValue(kafkaTemplate, "autoFlush");
 	}
 	
 	/**
@@ -95,7 +102,7 @@ public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
 		
 	/**
 	 * 创建生产回调，此方法和KafkaTemplate doSend方法内部创建callback的逻辑基本一致
-	 * 只是在生产成功时是将自定义的ProduceResult对象设置到了future中
+	 * 只是在生产成功时将自定义的ProduceResult对象设置到future中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param future
 	 * @param producer
@@ -114,12 +121,14 @@ public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
 					if (exception == null) {
 						future.set(MQFactory.buildProduceResult(producerRecord, metadata));
 						if (producerListener != null && producerListener.isInterestedInSuccess()) {
+							// 触发生产者对发送成功（Success）后的监听
 							((ProducerListener<K, V>) producerListener).onSuccess(producerRecord.topic(),
 									producerRecord.partition(), producerRecord.key(), producerRecord.value(), metadata);
 						}
 					} else {
 						future.setException(new KafkaProducerException(producerRecord, "Failed to send", exception));
 						if (producerListener != null) {
+							// 触发生产者对发送失败（Error）后的监听
 							((ProducerListener<K, V>) producerListener).onError(producerRecord.topic(),
 									producerRecord.partition(), producerRecord.key(), producerRecord.value(), exception);
 						}

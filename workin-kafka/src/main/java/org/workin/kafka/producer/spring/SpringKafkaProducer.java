@@ -125,15 +125,12 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Future<ProduceResult<K, V>> send(final ProducerRecord<K, V> producerRecord) {
-		
-		final KafkaTemplate<K, V> kafkaTemplate = (KafkaTemplate<K, V>) getKafkaTemplate();
-		final SettableListenableFuture<ProduceResult<K, V>> future = new SettableListenableFuture<ProduceResult<K, V>>();
-		
-		return kafkaTemplate.execute(new ProducerCallback<K, V, Future<ProduceResult<K, V>>>() {
+		KafkaTemplate<K, V> kafkaTemplate = (KafkaTemplate<K, V>) getKafkaTemplate();
+		Future<ProduceResult<K, V>> result = kafkaTemplate.execute(new ProducerCallback<K, V, Future<ProduceResult<K, V>>>() {
 
 			@Override
 			public Future<ProduceResult<K, V>> doInKafka(Producer<K, V> producer) {
-				
+				SettableListenableFuture<ProduceResult<K, V>> future = new SettableListenableFuture<ProduceResult<K, V>>();
 				producer.send(producerRecord, createProduceCallback(future, producer, producerRecord));
 				
 				if (producerCallback != null)
@@ -142,6 +139,11 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 				return future;
 			}
 		});
+		
+		if (isAutoFlush())
+			flush();
+		
+		return result;
 	}
 
 	@Override

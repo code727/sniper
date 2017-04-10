@@ -22,6 +22,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.kafka.core.KafkaProducerException;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFutureCallback;
+import org.workin.kafka.exception.ProducerException;
 import org.workin.kafka.producer.behavior.DefaultProducerBehavior;
 import org.workin.kafka.producer.behavior.ProducerBehavior;
 import org.workin.kafka.producer.service.ProducerService;
@@ -69,6 +70,8 @@ public abstract class AbstractProducerFutureCallback<K, V, T> implements Listena
 		}
 	
 		afterFailure(produceRecord, ex);
+		if (producerBehavior.isThrowExceptionOnError())
+			throw new ProducerException(ex);
 	}
 	
 	@Override

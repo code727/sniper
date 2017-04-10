@@ -90,15 +90,17 @@ public class DefaultProducerBehavior implements ProducerBehavior {
 
 	@Override
 	public <K, V> void successLog(ProduceResult<K, V> produceResult) {
-		logger.info("Producer success send message:{}", CodecUtils.bytesToString(loggerSerializer.serialize(produceResult)));
+		logger.info("Producer success send message:{}",
+				CodecUtils.bytesToString(loggerSerializer.serialize(produceResult)));
 	}
 
 	@Override
 	public <K, V> void errorLog(ProduceRecord<K, V> produceRecord, Throwable ex) {
 		if (produceRecord != null)
-			logger.error("Producer send message is failure:{},error cause:{}", CodecUtils.bytesToString(loggerSerializer.serialize(produceRecord)), ex);
+			logger.error("Producer send message is failure:{},error cause: {}",
+					CodecUtils.bytesToString(loggerSerializer.serialize(produceRecord)), ex);
 		else
-			logger.error("Producer send message is failure,error cause:{}", ex);
+			logger.error("Producer send message is failure,error cause: {}", ex);
 	}
-
+	
 }

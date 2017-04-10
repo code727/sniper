@@ -64,7 +64,7 @@ public class DelegateComsumerListener<K, V> extends
 	 */
 	protected void log(ConsumerService<K, V> delegate, ConsumeResult<K, V> consumeResult) {
 		if (logger.isDebugEnabled())
-			logger.debug("Consumer success receive message:{},will be delegate [{}] execute receive task.",
+			logger.debug("Consumer success receive message:{},will be delegate {} execute receive task.",
 					CodecUtils.bytesToString(loggerSerializer.serialize(consumeResult)), delegate.getClass());
 	}
 

@@ -48,10 +48,10 @@ public class ProducerTest extends JUnit4SpringTestCase {
 	@Test
 	public void testSend() throws Exception {
 		Message message = new Message(NumberUtils.randomIn(10000), "testSend", new Date());
-		MessagePacket<Integer, Message> packet = new MessagePacket<Integer, Message>(message.getId(), message);
+		MessagePacket<Integer, Message> packet = new MessagePacket<Integer, Message>(null, message);
 		packet.setTimestamp(System.currentTimeMillis());
 		try {
-			kafkaProducer.send("payment_event", packet);
+			kafkaProducer.sendDefault(packet);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

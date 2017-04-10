@@ -72,7 +72,7 @@ public class DelegateProducerListener<K, V> extends
 		producerBehavior.successLog(produceResult);
 		Logger logger = producerBehavior.getLogger();
 		if (logger.isDebugEnabled()) 
-			logger.debug("Delegate [{}] execute 'afterSuccess' service", delegate.getClass());
+			logger.debug("Delegate {} execute 'afterSuccess' service", delegate.getClass());
 	}
 	
 	/**
@@ -84,7 +84,7 @@ public class DelegateProducerListener<K, V> extends
 	 */
 	protected void logForFailure(ProducerService<K, V> delegate, ProduceRecord<K, V> produceRecord, Throwable ex) {
 		producerBehavior.errorLog(produceRecord, ex);
-		producerBehavior.getLogger().error("Delegate [{}] execute 'afterFailure' service", delegate.getClass());
+		producerBehavior.getLogger().error("Delegate {} execute 'afterFailure' service", delegate.getClass());
 	}
 	
 }
