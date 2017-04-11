@@ -23,11 +23,13 @@ import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.IOUtils;
+import org.workin.commons.util.MapUtils;
 import org.workin.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
 import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
@@ -66,10 +68,15 @@ public class CodehausJacksonSerializerTest extends AbstractSerializerTest {
 		user.setAmount(new BigDecimal("99.9999"));
 //		codehausJacksonSerializer.serialize(user)
 		codehausJacksonSerializer.setType(List.class);		
-		
+//		
 		List<LinkedHashMap<?, ?>> users = codehausJacksonSerializer.deserialize(codehausJacksonSerializer.serialize(user));
 		System.out.println(users);
 		
+		codehausJacksonSerializer.setType(null);
+		Map<String, Object> map = MapUtils.newHashMap();
+		map.put("name", "dubin");
+		map.put("age", 34);
+		System.out.println(codehausJacksonSerializer.deserialize(codehausJacksonSerializer.serialize(map)));
 	}
 	
 }

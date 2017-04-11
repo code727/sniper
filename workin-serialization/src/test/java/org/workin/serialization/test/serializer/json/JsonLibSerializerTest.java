@@ -22,10 +22,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.IOUtils;
+import org.workin.commons.util.MapUtils;
 import org.workin.serialization.json.JsonLibSerializer;
 import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
@@ -66,6 +68,12 @@ public class JsonLibSerializerTest extends AbstractSerializerTest {
 		List<JSONObject> users = jsonLibSerializer.deserialize(bytes);
 		System.out.println(users.getClass());
 		System.out.println(users.get(0));
+		
+//		jsonLibSerializer.setType(Map.class);
+		Map<String, Object> map = MapUtils.newHashMap();
+		map.put("name", "dubin");
+		map.put("age", 34);
+		System.out.println(jsonLibSerializer.deserialize(jsonLibSerializer.serialize(map)));
 	}
 
 }

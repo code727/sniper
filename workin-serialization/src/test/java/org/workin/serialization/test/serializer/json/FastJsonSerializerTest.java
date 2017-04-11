@@ -21,11 +21,13 @@ package org.workin.serialization.test.serializer.json;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
+import java.util.Map;
 
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.IOUtils;
+import org.workin.commons.util.MapUtils;
 import org.workin.serialization.json.FastJsonSerializer;
 import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
@@ -70,6 +72,10 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 		JSONObject users = fastJsonSerializer.deserialize(fastJsonSerializer.serialize(user));
 		System.out.println(users);
 		
+		Map<String, Object> map = MapUtils.newHashMap();
+		map.put("name", "dubin");
+		map.put("age", 34);
+		System.out.println(fastJsonSerializer.deserialize(fastJsonSerializer.serialize(map)));
 	}
 
 }

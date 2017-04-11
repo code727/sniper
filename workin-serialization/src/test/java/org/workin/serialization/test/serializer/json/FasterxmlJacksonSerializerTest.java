@@ -23,11 +23,13 @@ import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.IOUtils;
+import org.workin.commons.util.MapUtils;
 import org.workin.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
 import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
@@ -68,6 +70,12 @@ public class FasterxmlJacksonSerializerTest extends AbstractSerializerTest {
 		
 		List<LinkedHashMap<?, ?>> users = fasterxmlJacksonSerializer.deserialize(bytes);
 		System.out.println(users);
+		
+		fasterxmlJacksonSerializer.setType(null);
+		Map<String, Object> map = MapUtils.newHashMap();
+		map.put("name", "dubin");
+		map.put("age", 34);
+		System.out.println(fasterxmlJacksonSerializer.deserialize(fasterxmlJacksonSerializer.serialize(map)));
 	}
 
 }
