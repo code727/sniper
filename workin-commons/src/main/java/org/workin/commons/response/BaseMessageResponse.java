@@ -18,8 +18,6 @@
 
 package org.workin.commons.response;
 
-import org.workin.commons.enums.status.BizStatus;
-
 /**
  * 基本的消息响应实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -31,7 +29,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	private String message;
 	
 	public BaseMessageResponse() {
-		this(BizStatus.SUCCESS.getKey(), BizStatus.SUCCESS.getMessage());
+		this(DEFAULT_SUCCESS_STATUS, DEFAULT_SUCCESS_MESSAGE);
 	}
 	
 	public BaseMessageResponse(MessageResponse response) {
@@ -59,7 +57,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse success() {
-		return successByCode(BizStatus.SUCCESS.getKey());
+		return successByCode(DEFAULT_SUCCESS_STATUS);
 	}
 	
 	/**
@@ -69,7 +67,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse successByCode(String code) {
-		return success(code, BizStatus.SUCCESS.getMessage());
+		return success(code, DEFAULT_SUCCESS_MESSAGE);
 	}
 	
 	/**
@@ -79,7 +77,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse successByMessage(String message) {
-		return success(BizStatus.SUCCESS.getKey(), message);
+		return success(DEFAULT_SUCCESS_STATUS, message);
 	}
 	
 	/**
@@ -99,7 +97,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse failed() {
-		return failedByCode(BizStatus.FAILED.getKey());
+		return failedByCode(DEFAULT_FAILED_STATUS);
 	}
 	
 	/**
@@ -109,7 +107,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse failedByCode(String code) {
-		return failed(code, BizStatus.FAILED.getMessage());
+		return failed(code, DEFAULT_FAILED_MESSAGE);
 	}
 	
 	/**
@@ -119,7 +117,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse failedByMessage(String message) {
-		return failed(BizStatus.FAILED.getKey(), message);
+		return failed(DEFAULT_FAILED_STATUS, message);
 	}
 	
 	/**
@@ -141,7 +139,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse exception() {
-		return exceptionByCode(BizStatus.EXCEPTION.getKey());
+		return exceptionByCode(DEFAULT_EXCEPTION_STATUS);
 	}
 	
 	/**
@@ -151,7 +149,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse exceptionByCode(String code) {
-		return exception(code, BizStatus.EXCEPTION.getMessage());
+		return exception(code, DEFAULT_EXCEPTION_MESSAGE);
 	}
 	
 	/**
@@ -161,7 +159,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse exceptionByMessage(String message) {
-		return exception(BizStatus.EXCEPTION.getKey(), message);
+		return exception(DEFAULT_EXCEPTION_STATUS, message);
 	}
 	
 	/**

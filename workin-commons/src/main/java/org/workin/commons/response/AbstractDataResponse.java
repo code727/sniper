@@ -18,8 +18,6 @@
 
 package org.workin.commons.response;
 
-import org.workin.commons.enums.status.BizStatus;
-
 /**
  * 数据响应抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -31,7 +29,7 @@ public abstract class AbstractDataResponse<T> extends AbstractResponse implement
 	private T data;
 	
 	public AbstractDataResponse(T data) {
-		this(BizStatus.SUCCESS.getKey(), data);
+		this(DEFAULT_SUCCESS_STATUS, data);
 	}
 	
 	public AbstractDataResponse(DataResponse<T> response) {

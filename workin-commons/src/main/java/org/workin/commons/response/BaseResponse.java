@@ -18,8 +18,6 @@
 
 package org.workin.commons.response;
 
-import org.workin.commons.enums.status.BizStatus;
-
 /**
  * 基本的响应实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -41,7 +39,7 @@ public class BaseResponse extends AbstractResponse {
 	 * @return
 	 */
 	public static BaseResponse success() {
-		return success(BizStatus.SUCCESS.getKey());
+		return success(DEFAULT_SUCCESS_STATUS);
 	}
 	
 	/**
@@ -60,7 +58,7 @@ public class BaseResponse extends AbstractResponse {
 	 * @return
 	 */
 	public static BaseResponse failed() {
-		return failed(BizStatus.FAILED.getKey());
+		return failed(DEFAULT_FAILED_STATUS);
 	}
 	
 	/**
@@ -78,7 +76,7 @@ public class BaseResponse extends AbstractResponse {
 	 * @return
 	 */
 	public static BaseResponse exception() {
-		return new BaseResponse(BizStatus.EXCEPTION.getKey());
+		return exception(DEFAULT_EXCEPTION_STATUS);
 	}
 	
 	/**
@@ -90,6 +88,5 @@ public class BaseResponse extends AbstractResponse {
 	public static BaseResponse exception(String code) {
 		return new BaseResponse(code);
 	}
-	
-
+		
 }

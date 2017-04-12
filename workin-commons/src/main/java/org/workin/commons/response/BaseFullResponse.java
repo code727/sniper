@@ -18,8 +18,6 @@
 
 package org.workin.commons.response;
 
-import org.workin.commons.enums.status.BizStatus;
-
 /**
  * 全量响应实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -32,7 +30,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	private String message;
 	
 	public BaseFullResponse(T data) {
-		this(BizStatus.SUCCESS.getKey(), BizStatus.SUCCESS.getValue(), data);
+		this(DEFAULT_SUCCESS_STATUS, DEFAULT_SUCCESS_MESSAGE, data);
 	}
 	
 	public BaseFullResponse(FullResponse<T> response) {
@@ -65,7 +63,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> success(T data) {
-		return successByCode(BizStatus.SUCCESS.getKey(), data);
+		return successByCode(DEFAULT_SUCCESS_STATUS, data);
 	}
 	
 	/**
@@ -76,7 +74,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> successByCode(String code, T data) {
-		return success(code, BizStatus.SUCCESS.getMessage(), data);
+		return success(code, DEFAULT_SUCCESS_MESSAGE, data);
 	}
 	
 	/**
@@ -87,7 +85,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> successByMessage(String message, T data) {
-		return success(BizStatus.SUCCESS.getKey(), message, data);
+		return success(DEFAULT_SUCCESS_STATUS, message, data);
 	}
 	
 	/**
@@ -109,7 +107,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> failed(T data) {
-		return failedByCode(BizStatus.FAILED.getKey(), data);
+		return failedByCode(DEFAULT_FAILED_STATUS, data);
 	}
 		
 	/**
@@ -120,7 +118,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> failedByCode(String code, T data) {
-		return failed(code, BizStatus.FAILED.getMessage(), data);
+		return failed(code, DEFAULT_FAILED_MESSAGE, data);
 	}
 	
 	/**
@@ -131,7 +129,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> failedByMessage(String message, T data) {
-		return failed(BizStatus.FAILED.getKey(), message, data);
+		return failed(DEFAULT_FAILED_STATUS, message, data);
 	}
 	
 	/**
@@ -153,7 +151,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> exception(T data) {
-		return exceptionByCode(BizStatus.EXCEPTION.getKey(), data);
+		return exceptionByCode(DEFAULT_EXCEPTION_STATUS, data);
 	}
 	
 	/**
@@ -164,7 +162,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> exceptionByCode(String code, T data) {
-		return exception(code, BizStatus.EXCEPTION.getMessage(), data);
+		return exception(code, DEFAULT_EXCEPTION_MESSAGE, data);
 	}
 	
 	/**
@@ -175,7 +173,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> exceptionByMessage(String message, T data) {
-		return exception(BizStatus.EXCEPTION.getKey(), message, data);
+		return exception(DEFAULT_EXCEPTION_STATUS, message, data);
 	}
 	
 	/**

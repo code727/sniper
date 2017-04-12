@@ -18,12 +18,23 @@
 
 package org.workin.commons.response;
 
+import org.workin.commons.enums.status.BizStatus;
+
 /**
  * 消息响应接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface MessageResponse extends Response {
+	
+	/** 默认成功消息 */
+	public static final String DEFAULT_SUCCESS_MESSAGE = BizStatus.SUCCESS.getMessage();
+	
+	/** 默认失败消息 */
+	public static final String DEFAULT_FAILED_MESSAGE = BizStatus.FAILED.getMessage();
+	
+	/** 默认异常消息 */
+	public static final String DEFAULT_EXCEPTION_MESSAGE = BizStatus.EXCEPTION.getMessage();
 	
 	/**
 	 * 获取响应消息
