@@ -32,8 +32,6 @@ import org.workin.serialization.json.JsonLibSerializer;
 import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
 
-import net.sf.json.JSONObject;
-
 /**
  * JsonLib序列化器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -65,9 +63,8 @@ public class JsonLibSerializerTest extends AbstractSerializerTest {
 //		jsonLibSerializer.serialize(user);
 //		jsonLibSerializer.setType(List.class);
 		
-		List<JSONObject> users = jsonLibSerializer.deserialize(bytes);
-		System.out.println(users.getClass());
-		System.out.println(users.get(0));
+		jsonLibSerializer.setType(List.class);
+		System.out.println(jsonLibSerializer.deserialize(bytes));
 		
 //		jsonLibSerializer.setType(Map.class);
 		Map<String, Object> map = MapUtils.newHashMap();

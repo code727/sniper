@@ -21,6 +21,8 @@ package org.workin.serialization.test.serializer.json;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -31,8 +33,6 @@ import org.workin.commons.util.MapUtils;
 import org.workin.serialization.json.FastJsonSerializer;
 import org.workin.serialization.test.domain.User;
 import org.workin.serialization.test.serializer.AbstractSerializerTest;
-
-import com.alibaba.fastjson.JSONObject;
 
 /**
  * 阿里FastJson序列化器单元测试类
@@ -69,7 +69,7 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 //		fastJsonSerializer.serialize(user)
 //		fastJsonSerializer.setType(List.class);
 		
-		JSONObject users = fastJsonSerializer.deserialize(fastJsonSerializer.serialize(user));
+		List<LinkedHashMap<?, ?>> users = fastJsonSerializer.deserialize(bytes);
 		System.out.println(users);
 		
 		Map<String, Object> map = MapUtils.newHashMap();
