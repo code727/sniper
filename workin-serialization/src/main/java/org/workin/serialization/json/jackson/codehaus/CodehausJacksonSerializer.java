@@ -22,6 +22,7 @@ package org.workin.serialization.json.jackson.codehaus;
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.JavaType;
@@ -99,7 +100,7 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 						return beanDeserializeToCollection(text);
 				} else
 					// 指定的类型为null时，则返回LinkedHashMap
-					return beanDeserializeToObject(text);
+					return beanDeserializeToMap(text);
 			} else {
 				if (clazz != null && !ClassUtils.isCollection(clazz)) {
 					return (T) (!ClassUtils.isArray(clazz) ? 
@@ -152,20 +153,20 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 	@SuppressWarnings("unchecked")
 	private <T> T beanDeserializeToCollection(String jsonBean) throws Exception {
 		List<Object> list = CollectionUtils.newArrayList();
-		list.add(beanDeserializeToObject(jsonBean));
+		list.add(beanDeserializeToMap(jsonBean));
 		return (T) list;
 	}
 	
 	/**
-	 * 将JsonBean字符串反序列化为Object
+	 * 将JsonBean字符串反序列化为Map
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param jsonBean
 	 * @return
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	private <T> T beanDeserializeToObject(String jsonBean) throws Exception {
-		return (T) objectMapper.readValue(jsonBean, Object.class);
+	private <T> T beanDeserializeToMap(String jsonBean) throws Exception {
+		return (T) objectMapper.readValue(jsonBean, Map.class);
 	}
 	
 	/**
@@ -204,7 +205,7 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 	 */
 	@SuppressWarnings("unchecked")
 	private <T> T multipleBeanDeserializeToCollection(String jsonArray, Class<?> collectionClazz) throws Exception {
-		return (T) objectMapper.readValue(jsonArray, collectionClazz != null ? collectionClazz : Object.class);
+		return (T) objectMapper.readValue(jsonArray, collectionClazz != null ? collectionClazz : Map.class);
 	}
 	
 }

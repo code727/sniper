@@ -21,6 +21,7 @@ package org.workin.serialization.json;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.workin.commons.util.ClassUtils;
@@ -81,17 +82,17 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 						return (T) (!ClassUtils.isArray(clazz) ? 
 								beanDeserialize(jsonParser, clazz) : beanDeserializeToArray(jsonParser, clazz));
 					} else
-						// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<JSONObject>
+						// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
 						return beanDeserializeToCollection(jsonParser);
 				} else
-					// 指定的类型为null时，则返回JSONObject
-					return beanDeserializeToObject(jsonParser);
+					// 指定的类型为null时，则返回LinkedHashMap
+					return beanDeserializeToMap(jsonParser);
 			} else {
 				if (clazz != null && !ClassUtils.isCollection(clazz)) {
 					return (T) (!ClassUtils.isArray(clazz) ? 
 							multipleBeanDeserializeToElementTypeCollection(jsonParser, clazz) : multipleBeanDeserializeToArray(jsonParser, clazz));
 				} else
-					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<JSONObject>
+					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
 					return multipleBeanDeserializeToCollection(jsonParser, clazz);
 			}
 		} catch (Exception e) {
@@ -139,20 +140,20 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	@SuppressWarnings("unchecked")
 	private <T> T beanDeserializeToCollection(DefaultJSONParser jsonParser) throws Exception {
 		List<Object> list = CollectionUtils.newArrayList();
-		list.add(beanDeserializeToObject(jsonParser));
+		list.add(beanDeserializeToMap(jsonParser));
 		return (T) list;
 	}
 	
 	/**
-	 * 将JsonBean字符串反序列化为Object
+	 * 将JsonBean字符串反序列化为Map
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param jsonParser
 	 * @return
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	private <T> T beanDeserializeToObject(DefaultJSONParser jsonParser) throws Exception {
-		return (T) jsonParser.parseObject(Object.class);
+	private <T> T beanDeserializeToMap(DefaultJSONParser jsonParser) throws Exception {
+		return (T) jsonParser.parseObject(LinkedHashMap.class);
 	}
 	
 	/**
@@ -192,7 +193,7 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	 */
 	@SuppressWarnings("unchecked")
 	private <T> T multipleBeanDeserializeToCollection(DefaultJSONParser jsonParser, Class<?> collectionClazz) throws Exception {
-		return (T) jsonParser.parseObject(collectionClazz);
+		return (T) jsonParser.parseArray(LinkedHashMap.class);
 	}
 
 }

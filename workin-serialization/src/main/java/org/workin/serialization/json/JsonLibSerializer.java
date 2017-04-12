@@ -19,8 +19,8 @@
 package org.workin.serialization.json;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.workin.commons.util.ClassUtils;
@@ -132,17 +132,17 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 						return (T) (!ClassUtils.isArray(clazz) ? 
 								beanDeserialize(jsonString, clazz) : beanDeserializeToArray(jsonString, clazz));
 					} else 
-						// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<JSONObject>
+						// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
 						return beanDeserializeToCollection(jsonString);
 				} else 
-					// 指定的类型为null时，则返回JSONObject
-					return beanDeserializeToObject(jsonString);
+					// 指定的类型为null时，则返回LinkedHashMap
+					return beanDeserializeToMap(jsonString);
 			} else {
 				if (clazz != null && !ClassUtils.isCollection(clazz)) {
 					return (T) (!ClassUtils.isArray(clazz) ? 
 							multipleBeanDeserializeToElementTypeCollection(jsonString, clazz) : multipleBeanDeserializeToArray(jsonString, clazz));
 				} else 
-					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<JSONObject>
+					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
 					return multipleBeanDeserializeToCollection(jsonString, clazz);
 			}
 		} catch (Exception e) {
@@ -182,7 +182,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	@SuppressWarnings("unchecked")
 	private <T> T beanDeserializeToCollection(String jsonBean) throws Exception {
 		List<Object> list = CollectionUtils.newArrayList();
-		list.add(beanDeserializeToObject(jsonBean));
+		list.add(beanDeserializeToMap(jsonBean));
 		return (T) list;
 	}
 	
@@ -194,8 +194,9 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	private <T> T beanDeserializeToObject(String jsonBean) throws Exception {
-		return (T) JSONObject.fromObject(jsonBean, getJsonConfig());
+	private <T> T beanDeserializeToMap(String jsonBean) throws Exception {
+		JSONObject jsonObject = JSONObject.fromObject(jsonBean, getJsonConfig());
+		return (T) JSONObject.toBean(jsonObject, LinkedHashMap.class);
 	}
 	
 	/**
@@ -237,11 +238,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	@SuppressWarnings("unchecked")
 	private <T> T multipleBeanDeserializeToCollection(String jsonArray, Class<?> collectionClazz) throws Exception {
 		JSONArray array = JSONArray.fromObject(jsonArray, getJsonConfig());
-		return (T) CollectionUtils.newArrayList(Arrays.asList(array.toArray()));
-		
-//		JSONArray array = JSONArray.fromObject(jsonArray, getJsonConfig());
-		// return List<MorphDynaBean>
-//		return (T) JSONArray.toCollection(array, getJsonConfig());
+		return (T) JSONArray.toCollection(array, LinkedHashMap.class);
 	}
 	
 }
