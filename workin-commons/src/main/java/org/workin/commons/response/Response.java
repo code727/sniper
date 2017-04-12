@@ -49,5 +49,50 @@ public interface Response {
 	 * @param code
 	 */
 	public void setCode(String code);
+	
+	/**
+	 * 响应是否成功
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean IsSuccess();
+	
+	/**
+	 * 响应是否成功
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param successCode
+	 * @return
+	 */
+	public boolean IsSuccess(String successCode);
+	
+	/**
+	 * 响应是否失败
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean IsFailed();
+	
+	/**
+	 * 响应是否失败
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param failedCode
+	 * @return
+	 */
+	public boolean IsFailed(String failedCode);
+	
+	/**
+	 * 响应是否异常
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean IsException();
+	
+	/**
+	 * 响应是否异常
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param exceptionCode
+	 * @return
+	 */
+	public boolean IsException(String exceptionCode);
 			
 }
