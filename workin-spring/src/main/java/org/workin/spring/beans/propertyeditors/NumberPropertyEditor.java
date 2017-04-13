@@ -33,7 +33,7 @@ public abstract class NumberPropertyEditor extends StringPropertyEditor {
 	}
 	
 	@Override
-	protected void check() throws Exception {
+	protected void check() throws IllegalArgumentException {
 		// 当不允许为空而默认值为空白字符串时，则抛出异常
 		if (!this.isAllowEmpty() && StringUtils.isBlank(this.getDefaultValue()))
 			throw new IllegalArgumentException("Number default value must not be null or blank when 'allowEmpty' is false.");

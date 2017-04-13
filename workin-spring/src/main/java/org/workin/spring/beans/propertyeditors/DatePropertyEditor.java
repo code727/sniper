@@ -50,7 +50,8 @@ public class DatePropertyEditor extends StringPropertyEditor {
 	}
 
 	@Override
-	protected void check() throws Exception {
+	protected void check() throws IllegalArgumentException {
+		// 当不允许为空而默认值为空白字符串时，则抛出异常
 		if (!this.isAllowEmpty() && StringUtils.isBlank(this.getDefaultValue()))
 			throw new IllegalArgumentException("Date default value must not be null or blank when 'allowEmpty' is false.");
 	}
@@ -62,7 +63,7 @@ public class DatePropertyEditor extends StringPropertyEditor {
 	}
 	
 	/**
-	 * 覆盖父类getDefaultValue()方法，当文本值为空时，默认值取当前时间
+	 * 覆写父类getDefaultValue()方法，当文本值为空时，默认值取当前时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

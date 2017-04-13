@@ -19,6 +19,7 @@
 package org.workin.spring.beans.propertyeditors;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * BigDecimal属性编辑器
@@ -26,10 +27,39 @@ import java.math.BigDecimal;
  * @version 1.0
  */
 public class BigDecimalPropertyEditor extends NumberPropertyEditor {
-
-	@Override
-	protected Object handleText(String text) {
-		return new BigDecimal(text);
+	
+	private int newScale;
+	
+	private int roundingMode;
+	
+	public int getNewScale() {
+		return newScale;
 	}
 
+	public void setNewScale(int newScale) {
+		this.newScale = newScale;
+	}
+
+	public int getRoundingMode() {
+		return roundingMode;
+	}
+
+	public void setRoundingMode(int roundingMode) {
+		this.roundingMode = roundingMode;
+	}
+	
+	public BigDecimalPropertyEditor() {
+		this(2, RoundingMode.DOWN.ordinal());
+	}
+	
+	public BigDecimalPropertyEditor(int newScale, int roundingMode) {
+		this.newScale = newScale;
+		this.roundingMode = roundingMode;
+	}
+	
+	@Override
+	protected Object handleText(String text) {
+		return new BigDecimal(text).setScale(newScale, roundingMode);
+	}
+	
 }

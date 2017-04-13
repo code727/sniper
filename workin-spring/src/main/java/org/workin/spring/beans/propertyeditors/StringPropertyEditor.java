@@ -32,8 +32,8 @@ import org.workin.commons.util.StringUtils;
 public class StringPropertyEditor extends PropertyEditorSupport
 		implements PropertyEditor, InitializingBean {
 	
-	/** 是否允许为空，默认为不允许 */
-	private boolean allowEmpty;
+	/** 是否允许为空，默认允许为空 */
+	private boolean allowEmpty = true;
 	
 	/** 不允许为空时指定的默认值 */
 	private String defaultValue = StringUtils.EMPTY_STRING;
@@ -62,9 +62,9 @@ public class StringPropertyEditor extends PropertyEditorSupport
 	/**
 	 * 检查设置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @throws Exception
+	 * @throws IllegalArgumentException
 	 */
-	protected void check() throws Exception {
+	protected void check() throws IllegalArgumentException {
 		// 当不允许为空而默认值为null时，则抛出异常
 		if (!this.isAllowEmpty() && this.getDefaultValue() == null)
 			throw new IllegalArgumentException("String default value must not be null when 'allowEmpty' is false.");
@@ -72,7 +72,7 @@ public class StringPropertyEditor extends PropertyEditorSupport
 	
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
-		if (StringUtils.isNotEmpty(text))
+		if (text != null)
 			setValue(handleText(text));
 		else {
 			if (!this.isAllowEmpty())
@@ -91,5 +91,5 @@ public class StringPropertyEditor extends PropertyEditorSupport
 	protected Object handleText(String text) {
 		return text;
 	}
-		
+			
 }
