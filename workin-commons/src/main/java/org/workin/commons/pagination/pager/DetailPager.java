@@ -22,26 +22,48 @@ import java.util.List;
 
 import org.workin.commons.pagination.PagingDetailResult;
 import org.workin.commons.pagination.PagingResult;
-import org.workin.commons.pagination.SortObject;
 import org.workin.commons.pagination.SortablePagingQuery;
+import org.workin.commons.pagination.result.JQueryEasyUIPagingResult;
 import org.workin.commons.pagination.result.SimplePagingResult;
+import org.workin.commons.request.Sort;
 import org.workin.commons.util.CollectionUtils;
 
 /**
  * 多功能详情分页器实现类。它既可以接收查询参数，
- * 				又可以根据查询参数返回比SimplePagingResult更为详细的分页结果。
+ * 又可以根据查询参数返回比SimplePagingResult更为详细的分页结果。
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class DetailPager<T> implements SortablePagingQuery, PagingDetailResult<T> {
+
+	private static final long serialVersionUID = -6132358308660100965L;
 
 	private SortablePagingQuery pager;
 	
 	private PagingResult<T> result;
 	
 	public DetailPager() {
-		this.pager = new SimplePager();
-		this.result = new SimplePagingResult<T>();
+		this(null, null);
+	}
+	
+	public DetailPager(SortablePagingQuery pager) {
+		this(pager, null);
+	}
+	
+	public DetailPager(PagingResult<T> result) {
+		this(null, result);
+	}
+	
+	public DetailPager(SortablePagingQuery pager, PagingResult<T> result) {
+		if (pager == null)
+			this.pager = new SimplePager();
+		else
+			this.pager = pager;
+		
+		if (result == null)
+			this.result = new SimplePagingResult<T>();
+		else
+			this.result = result;
 	}
 	
 	@Override
@@ -85,17 +107,10 @@ public class DetailPager<T> implements SortablePagingQuery, PagingDetailResult<T
 	}
 	
 	@Override
-	public void setSortObject(SortObject sort) {
-		this.pager.setSortObject(sort);
-	}
-
-	@Override
-	public SortObject getSortObject() {
-		return this.pager.getSortObject();
-	}
-
-	@Override
 	public List<T> getData() {
+		if (this.result instanceof JQueryEasyUIPagingResult)
+			return ((JQueryEasyUIPagingResult<T>) result).getRows();
+		
 		return this.result.getData();
 	}
 
@@ -128,6 +143,21 @@ public class DetailPager<T> implements SortablePagingQuery, PagingDetailResult<T
 	@Override
 	public long getPages() {
 		return getTotal() / getPageSize() + (getTotal() % getPageSize() != 0 ? 1 : 0);
+	}
+	
+	@Override
+	public List<Sort> getSortes() {
+		return this.pager.getSortes();
+	}
+
+	@Override
+	public void setSortes(List<Sort> sortes) {
+		this.pager.setSortes(sortes);
+	}
+
+	@Override
+	public void add(Sort sort) {
+		this.pager.add(sort);
 	}
 
 }

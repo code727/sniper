@@ -30,6 +30,8 @@ import org.workin.commons.util.ObjectUtils;
  */
 public class SimplePagingResult<T> implements PagingResult<T> {
 	
+	private static final long serialVersionUID = -5209318203792180797L;
+
 	/** 返回的数据列表 */
 	private List<T> data;
 	

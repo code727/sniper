@@ -16,20 +16,23 @@
  * Create Date : 2015-2-26
  */
 
-package org.workin.persistence.pagination.impl;
+package org.workin.persistence.pagination.pager;
 
 import java.util.List;
 
-import org.workin.commons.pagination.pager.SimplePager;
+import org.workin.commons.pagination.pager.DetailPager;
 import org.workin.persistence.pagination.FilterListPagingQuery;
 import org.workin.persistence.util.PersistencePropertyFilter;
 
 /**
- * 带属性过滤器列表的分页器实现类
+ * 带属性过滤器列表的多功能详情分页器实现类。
+ * 它既可以接收查询参数， 又可以根据查询参数返回比SimplePagingResult更为详细的分页结果。
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FilterListPager extends SimplePager implements FilterListPagingQuery {
+public class FilterListDetailPager<T> extends DetailPager<T> implements FilterListPagingQuery {
+	
+	private static final long serialVersionUID = 4377413858897720611L;
 	
 	/** 属性过滤器列表 */
 	private List<PersistencePropertyFilter> filterList;

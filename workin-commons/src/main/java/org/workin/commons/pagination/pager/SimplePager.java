@@ -18,16 +18,18 @@
 
 package org.workin.commons.pagination.pager;
 
-import org.workin.commons.pagination.SortObject;
 import org.workin.commons.pagination.SortablePagingQuery;
+import org.workin.commons.request.SortRequest;
 
 /**
  * 简单分页器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SimplePager implements SortablePagingQuery {
+public class SimplePager extends SortRequest implements SortablePagingQuery {
 	
+	private static final long serialVersionUID = -3075094595070319133L;
+
 	/** 每页条数 */
 	private int pageSize = DEFAULT_PAGE_SIZE;
 	
@@ -40,9 +42,6 @@ public class SimplePager implements SortablePagingQuery {
 	/** 结束查询的位置 */
 	private long end = START_POS;
 	
-	/** 分页排序对象 */
-	private SortObject sort;
-
 	@Override
 	public int getPageSize() {
 		return this.pageSize;
@@ -95,15 +94,5 @@ public class SimplePager implements SortablePagingQuery {
 	public void setEnd(long end) {
 		this.end = end;
 	}
-
-	@Override
-	public void setSortObject(SortObject sort) {
-		this.sort = sort;
-	}
-
-	@Override
-	public SortObject getSortObject() {
-		return sort;
-	}
-
+			
 }

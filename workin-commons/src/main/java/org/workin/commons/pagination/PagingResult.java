@@ -18,6 +18,7 @@
 
 package org.workin.commons.pagination;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ import java.util.List;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface PagingResult<T> {
+public interface PagingResult<T> extends Serializable {
 	
 	/**
 	 * 获取分页结果列表

@@ -27,12 +27,29 @@ import java.util.List;
  */
 public class JQueryEasyUIPagingResult<T> extends SimplePagingResult<T> {
 	
+	private static final long serialVersionUID = -4715294078489576653L;
+
+	/**
+	 * 重写父类方法：</br>
+	 * 1.JQuery EasyUI分页器是用"rows"字段返回数据列表的；</br>
+	 * 2.这里需将"data"字段返回的数据清空，以防止JSON序列化时，将多余的data字段值也进行处理；</br>
+	 * 3.此时返回的结果类似于{"data":null,"total":total,"rows":rowData}，data字段仍然存在，
+	 *   如果要严格控制JQuery EasyUI分页结果的内容，可以在序列化结果前过滤掉data字段</br>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	@Override
+	public List<T> getData() {
+		return null;
+	}
+	
 	/**
 	 * 获取分页结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public List<T> getRows() {
+		// 从父类的分页结果列表中获取
 		return super.getData();
 	}
 

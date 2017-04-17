@@ -18,12 +18,14 @@
 
 package org.workin.commons.pagination;
 
+import java.io.Serializable;
+
 /**
  * 分页查询条件接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface PagingQuery {
+public interface PagingQuery extends Serializable {
 	
 	/** 执行查询的默认起始位置 */
 	public static final long START_POS = 0;

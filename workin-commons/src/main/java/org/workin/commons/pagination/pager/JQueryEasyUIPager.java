@@ -18,16 +18,17 @@
 
 package org.workin.commons.pagination.pager;
 
-
 /**
  * JQuery EasyUI分页器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JQueryEasyUIPager extends SimplePager {
+public class JQueryEasyUIPager extends SingleSortPager {
+	
+	private static final long serialVersionUID = -4724476082340689425L;
 	
 	/**
-	 * 获取每页条数
+	 * 获取JQuery EasyUI分页器每页条数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -36,7 +37,7 @@ public class JQueryEasyUIPager extends SimplePager {
 	}
 
 	/**
-	 * 设置每页条数
+	 * 设置JQuery EasyUI分页器每页条数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param rows
 	 */
@@ -45,7 +46,7 @@ public class JQueryEasyUIPager extends SimplePager {
 	}
 
 	/**
-	 * 获取当前页数
+	 * 获取JQuery EasyUI分页器当前页数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -54,12 +55,49 @@ public class JQueryEasyUIPager extends SimplePager {
 	}
 
 	/**
-	 * 设置当前页数
+	 * 设置JQuery EasyUI分页器当前页数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param page
 	 */
 	public void setPage(int page) {
 		super.setCurrentPage(page);
 	}
-
+	
+	/**
+	 * 设置JQuery EasyUI分页器单个排序字段名
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param sort
+	 */
+	public void setSort(String name) {
+		sortProxy.setName(name);
+		add(sortProxy);
+	}
+		
+	/**
+	 * 获取JQuery EasyUI分页器单个排序字段名
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getSort() {
+		return sortProxy != null ? sortProxy.getName() : null;
+	}
+	
+	/**
+	 * 设置JQuery EasyUI分页器单个排序方式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param order
+	 */
+	public void setOrder(String order) {
+		this.sortProxy.setOrder(order);
+	}
+	
+	/**
+	 * 获取JQuery EasyUI分页器单个排序方法
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getOrder() {
+		return sortProxy != null ? sortProxy.getOrder() : null;
+	}
+			
 }

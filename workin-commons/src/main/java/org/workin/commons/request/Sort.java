@@ -16,29 +16,36 @@
  * Create Date : 2016-7-28
  */
 
-package org.workin.commons.pagination;
+package org.workin.commons.request;
 
+import org.workin.commons.util.StringUtils;
 
 /**
  * 排序对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SortObject {
+public class Sort implements Sortable {
+
+	private static final long serialVersionUID = -3569581291289010870L;
 
 	/** 需要排序的字段名称 */
 	private String name;
 	
-	/** 排序方式，例如RDMS的ASC和DESC关键字，MongoDB的0和1 */
-	private String policy;
+	/** 排序方法，例如RDMS的ASC和DESC关键字，MongoDB的0和1等 */
+	private String order;
 	
-	public SortObject() {
+	public Sort() {
 		
 	}
 	
-	public SortObject(String name, String policy) {
+	public Sort(String name) {
+		this(name, null);
+	}
+	
+	public Sort(String name, String order) {
 		this.name = name;
-		this.policy = policy;
+		this.order = order;
 	}
 
 	public String getName() {
@@ -49,12 +56,21 @@ public class SortObject {
 		this.name = name;
 	}
 
-	public String getPolicy() {
-		return policy;
+	public String getOrder() {
+		return order;
 	}
 
-	public void setPolicy(String policy) {
-		this.policy = policy;
+	public void setOrder(String order) {
+		this.order = order;
+	}
+	
+	/**
+	 * 判断是否为有效排序对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean effective() {
+		return StringUtils.isNotBlank(name);
 	}
 
 }
