@@ -16,33 +16,26 @@
  * Create Date : 2017-4-18
  */
 
-package org.workin.commons.partition;
+package org.workin.commons.sharding;
 
 /**
- * 瞬时划分实现类
+ * 瞬时分片实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class TransientPartition implements Partition {
+public class TransientSharding implements Sharding {
 	
-	private transient String partition;
-	
-	public TransientPartition() {
-		this(null);
-	}
-	
-	public TransientPartition(String partition) {
-		this.partition = partition;
-	}
-	
+	/** 瞬时路由对象 */
+	private transient Route route;
+
 	@Override
-	public void setPartition(String partition) {
-		this.partition = partition;
+	public void setRoute(Route route) {
+		this.route = route;
 	}
 
 	@Override
-	public String getPartition() {
-		return partition;
+	public Route getRoute() {
+		return route;
 	}
-
+	
 }

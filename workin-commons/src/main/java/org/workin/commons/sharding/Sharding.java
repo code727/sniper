@@ -16,27 +16,27 @@
  * Create Date : 2017-4-18
  */
 
-package org.workin.commons.partition;
+package org.workin.commons.sharding;
 
 /**
- * 划分接口
+ * 分片接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Partition {
+public interface Sharding {
 	
 	/**
-	 * 设置划分标志
+	 * 设置路由标志
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param partition
 	 */
-	public void setPartition(String partition);
+	public void setRoute(Route route);
 	
 	/**
-	 * 获取划分标志
+	 * 获取路由标志
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public String getPartition();
+	public Route getRoute();
 
 }

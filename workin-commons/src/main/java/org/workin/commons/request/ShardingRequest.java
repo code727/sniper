@@ -18,13 +18,13 @@
 
 package org.workin.commons.request;
 
-import org.workin.commons.partition.Partition;
+import org.workin.commons.sharding.Sharding;
 
 /**
- * 划分请求接口
+ * 分片请求接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface PartitionRequest extends Partition {
+public interface ShardingRequest extends Sharding {
 
 }

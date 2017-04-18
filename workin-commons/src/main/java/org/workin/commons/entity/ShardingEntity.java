@@ -18,13 +18,13 @@
 
 package org.workin.commons.entity;
 
-import org.workin.commons.partition.Partition;
+import org.workin.commons.sharding.Sharding;
 
 /**
- * 划分实体接口
+ * 分片实体接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface PartitionEntity extends Partition {
+public interface ShardingEntity extends Sharding {
 
 }
