@@ -26,64 +26,60 @@ import org.workin.commons.util.StringUtils;
  * @version 1.0
  */
 public class Route {
-	
-	/** 前缀标志 */
-	private String prefix;
-	
-	/** 后缀标志 */
-	private String suffix;
-	
-	/** 目标 */
+		
+	/** 路由目标 */
 	private String target;
 	
 	public Route() {
-		this(null, null, null);
+		this(null);
 	}
 	
-	public Route(String prefix) {
-		this(prefix, null, null);
-	}
-	
-	public Route(String prefix, String target) {
-		this(prefix, target, null);
-	}
-	
-	public Route(String prefix, String target, String suffix) {
-		this.prefix = prefix;
+	public Route(String target) {
 		this.target = target;
-		this.suffix = suffix;
 	}
-
-	public String getPrefix() {
-		return prefix;
-	}
-
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
-
-	public String getSuffix() {
-		return suffix;
-	}
-
-	public void setSuffix(String suffix) {
-		this.suffix = suffix;
-	}
-
+	
+	/**
+	 * 获取路由目标
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
 	public String getTarget() {
-		return new StringBuilder(StringUtils.safeString(prefix)).append(StringUtils.safeString(target))
-				.append(StringUtils.safeString(suffix)).toString();
+		return target;
 	}
 
+	/**
+	 * 设置路由目标
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param target
+	 */
 	public void setTarget(String target) {
 		this.target = target;
 	}
 	
-	@Override
-	public String toString() {
-		return getTarget();
+	/**
+	 * 追加目标前缀
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param prefix
+	 */
+	public Route prefix(String prefix) {
+		this.target = new StringBuilder(StringUtils.safeString(prefix)).append(StringUtils.safeString(target)).toString(); 
+		return this;
 	}
 	
+	/**
+	 * 追加目标后缀
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param suffix
+	 */
+	public Route suffix(String suffix) {
+		this.target = new StringBuilder(StringUtils.safeString(target)).append(StringUtils.safeString(suffix)).toString(); 
+		return this;
+	}
 	
+	@Override
+	public String toString() {
+		return StringUtils.safeString(target);
+	}
 	
+		
 }

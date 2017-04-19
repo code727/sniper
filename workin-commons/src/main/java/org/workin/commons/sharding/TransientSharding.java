@@ -27,6 +27,14 @@ public class TransientSharding implements Sharding {
 	
 	/** 瞬时路由对象 */
 	private transient Route route;
+	
+	public TransientSharding() {
+		this(null);
+	}
+	
+	public TransientSharding(Route route) {
+		this.route = route;
+	}
 
 	@Override
 	public void setRoute(Route route) {
