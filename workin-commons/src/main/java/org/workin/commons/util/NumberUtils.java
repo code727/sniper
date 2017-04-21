@@ -745,6 +745,33 @@ public class NumberUtils {
 	}
 	
 	/**
+	 * 判断number1是否大于number2
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @return
+	 */
+	public static boolean greaterThan(Number number1, Number number2) {
+		if (number1 == null || number2 == null)
+			return false;
+		
+		BigDecimal decimal1;
+		BigDecimal decimal2;
+		
+		if (number1 instanceof BigDecimal)
+			decimal1 = (BigDecimal) number1;
+		else
+			decimal1 = new BigDecimal(number1.toString());
+		
+		if (number2 instanceof BigDecimal)
+			decimal2 = (BigDecimal) number1;
+		else
+			decimal2 = new BigDecimal(number2.toString());
+		
+		return decimal1.compareTo(decimal2) == 1;
+	}
+	
+	/**
 	 * 判断decimal是否大于等于指定的双精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
@@ -834,6 +861,34 @@ public class NumberUtils {
 		
 		return decimal1.compareTo(decimal2) > -1;
 	}
+	
+	/**
+	 * 判断number1是否大于等于number2
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @return
+	 */
+	public static boolean greaterThanEquals(Number number1, Number number2) {
+		if (number1 == null || number2 == null)
+			return false;
+		
+		BigDecimal decimal1;
+		BigDecimal decimal2;
+		
+		if (number1 instanceof BigDecimal)
+			decimal1 = (BigDecimal) number1;
+		else
+			decimal1 = new BigDecimal(number1.toString());
+		
+		if (number2 instanceof BigDecimal)
+			decimal2 = (BigDecimal) number1;
+		else
+			decimal2 = new BigDecimal(number2.toString());
+		
+		return decimal1.compareTo(decimal2) > -1;
+	}
+	
 	
 	/**
 	 * 判断decimal是否小于等于指定的双精度浮点数
@@ -927,6 +982,33 @@ public class NumberUtils {
 	}
 	
 	/**
+	 * 判断number1是否小于等于number2
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @return
+	 */
+	public static boolean lessThanEquals(Number number1, Number number2) {
+		if (number1 == null || number2 == null)
+			return false;
+		
+		BigDecimal decimal1;
+		BigDecimal decimal2;
+		
+		if (number1 instanceof BigDecimal)
+			decimal1 = (BigDecimal) number1;
+		else
+			decimal1 = new BigDecimal(number1.toString());
+		
+		if (number2 instanceof BigDecimal)
+			decimal2 = (BigDecimal) number1;
+		else
+			decimal2 = new BigDecimal(number2.toString());
+		
+		return decimal1.compareTo(decimal2) < 1;
+	}
+	
+	/**
 	 * 判断decimal是否小于指定的双精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
@@ -960,7 +1042,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 判断decimal是否小于等于指定的长整型数
+	 * 判断decimal是否小于指定的长整型数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -982,7 +1064,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 判断decimal是否小于等于指定的比特数
+	 * 判断decimal是否小于指定的比特数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param number
@@ -993,7 +1075,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 判断decimal是否小于等于指定的字符ASCII码
+	 * 判断decimal是否小于指定的字符ASCII码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param c
@@ -1004,7 +1086,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 判断decimal1是否小于等于decimal2
+	 * 判断decimal1是否小于decimal2
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal1
 	 * @param decimal2
@@ -1013,6 +1095,33 @@ public class NumberUtils {
 	public static boolean lessThan(BigDecimal decimal1, BigDecimal decimal2) {
 		if (decimal1 == null || decimal2 == null)
 			return false;
+		
+		return decimal1.compareTo(decimal2) == -1;
+	}
+	
+	/**
+	 * 判断number1是否小于number2
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @return
+	 */
+	public static boolean lessThan(Number number1, Number number2) {
+		if (number1 == null || number2 == null)
+			return false;
+		
+		BigDecimal decimal1;
+		BigDecimal decimal2;
+		
+		if (number1 instanceof BigDecimal)
+			decimal1 = (BigDecimal) number1;
+		else
+			decimal1 = new BigDecimal(number1.toString());
+		
+		if (number2 instanceof BigDecimal)
+			decimal2 = (BigDecimal) number1;
+		else
+			decimal2 = new BigDecimal(number2.toString());
 		
 		return decimal1.compareTo(decimal2) == -1;
 	}
@@ -1105,9 +1214,36 @@ public class NumberUtils {
 		if (decimal1 == null || decimal2 == null)
 			return false;
 		
-		return decimal1.equals(decimal2);
+		return decimal1.compareTo(decimal2) == 0;
 	}
 	
+	/**
+	 * 判断number1是否等于number2
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @return
+	 */
+	public static boolean equals(Number number1, Number number2) {
+		if (number1 == null || number2 == null)
+			return false;
+		
+		BigDecimal decimal1;
+		BigDecimal decimal2;
+		
+		if (number1 instanceof BigDecimal)
+			decimal1 = (BigDecimal) number1;
+		else
+			decimal1 = new BigDecimal(number1.toString());
+		
+		if (number2 instanceof BigDecimal)
+			decimal2 = (BigDecimal) number1;
+		else
+			decimal2 = new BigDecimal(number2.toString());
+		
+		return decimal1.compareTo(decimal2) == 0;
+	}
+			
 	/**
 	 * 将字符ASCII码转化为指定格式的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

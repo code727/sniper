@@ -129,4 +129,14 @@ public class ObjectUtils {
 		return 1;
 	}
 	
+	/**
+	 * 获取对象的哈希值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static int hashCode(Object obj) {
+		return obj != null ? obj.hashCode() : 0;
+	}
+		
 }
