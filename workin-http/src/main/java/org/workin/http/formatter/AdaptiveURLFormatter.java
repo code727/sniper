@@ -19,8 +19,8 @@
 package org.workin.http.formatter;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 import org.workin.codec.encoder.StringEncoder;
 import org.workin.commons.util.CollectionUtils;
@@ -43,10 +43,10 @@ public class AdaptiveURLFormatter extends AdaptiveMessageFormatter {
 		if (param instanceof Map) {
 			Map<String, Object> inputParam = (Map<String, Object>) param;
 			
-			/* 求输入参数分别与查询字符串以及Action字符串中查询名的交集，
+			/* 求输入参数分别与查询字符串以及Action字符串中查询名的差集，
 			 * 多余的参数以及对于的值则直接拼接到URL字符串后面 */
-			Collection<String> nameSubtract = MapUtils.keySubtract(inputParam, NetUtils.getParameterMap(url));
-			nameSubtract = CollectionUtils.subtract(nameSubtract, NetUtils.getActionParameterNames(
+			Set<String> nameSubtract = (Set<String>) MapUtils.keySubtract(inputParam, NetUtils.getParameterMap(url));
+			nameSubtract = (Set<String>) CollectionUtils.subtract(nameSubtract, NetUtils.getActionParameterNames(
 					NetUtils.getActionString(url), super.getPrefix(), super.getSuffix()));
 					
 			if (CollectionUtils.isNotEmpty(nameSubtract)) {
@@ -68,8 +68,8 @@ public class AdaptiveURLFormatter extends AdaptiveMessageFormatter {
 				formatedUrl.deleteCharAt(formatedUrl.lastIndexOf("&"));
 			}
 		}
+		
 		return formatedUrl.toString();
 	}
 		
-	
 }

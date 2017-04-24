@@ -28,6 +28,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -342,22 +343,6 @@ public class CollectionUtils {
 	public static <T> ConcurrentLinkedDeque<T> newConcurrentLinkedDeque(Collection<? extends T> collection) {
 		return new ConcurrentLinkedDeque<T>(collection);
 	}
-		
-	/**
-	 * 删除集合中所有指定的元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param collection
-	 * @param element
-	 */
-	public static void removeAll(Collection<?> collection, Object element) {
-		if (isNotEmpty(collection)) {
-			Iterator<?> iterator = collection.iterator();
-			while (iterator.hasNext()) {
-				if (ObjectUtils.equals(iterator.next(), element))
-					iterator.remove();
-			}
-		}
-	}
 	
 	/**
 	 * 清空集合中所有的空元素
@@ -367,56 +352,243 @@ public class CollectionUtils {
 	public static void trimNull(Collection<?> collection) {
 		removeAll(collection, null);
 	}
+		
+	/**
+	 * 删除集合中所有指定的元素
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @param element
+	 */
+	public static void removeAll(Collection<?> collection, Object element) {
+		if (isNotEmpty(collection)) {
+			if (element instanceof Collection)
+				collection.removeAll((Collection<?>) element);
+			else {
+				Set<Object> set = newHashSet();
+				set.add(element);
+				collection.removeAll(set);
+			}
+		}
+	}
 	
 	/**
-	 * 获取两集合的差集
+	 * 删除集合中所有重复的元素
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 */
+	public static void removeDuplication(Collection<?> collection) {
+		if (isNotEmpty(collection) && !(collection instanceof Set)) {
+			
+			// 记录已被迭代过的集合元素
+			LinkedHashSet<Object> iterated = newLinkedHashSet();
+			Object element;
+			Iterator<?> iterator = collection.iterator();
+			while (iterator.hasNext()) {
+				element = iterator.next();
+				if (iterated.contains(element))
+					// 如果副本中已存在当前元素，说明以前已迭代处理过相同的元素，因此需删除这个重复的	
+					iterator.remove();
+				else 
+					// 添加到已迭代过的记录集合中
+					iterated.add(element);
+			}
+		}
+	}
+	
+	/**
+	 * 求两集合的并集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param s1
+	 * @param s2
+	 * @return s1∪s2
+	 */
+	public static Set<?> union(Set<?> s1, Set<?> s2) {
+		// "空∪s2"为s2
+		if (isEmpty(s1))
+			return newLinkedHashSet(s2);
+		
+		// "s1∪空"为s1
+		if (isEmpty(s2))
+			return newLinkedHashSet(s1);
+		
+		HashSet<Object> set = newLinkedHashSet(s1);
+		set.addAll(s2);
+		return set;
+	}
+	
+	/**
+	 * 求两集合的并集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c1
 	 * @param c2
-	 * @return c1与 c2的差集(c1 - c2)
+	 * @return c1∪c2
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static Collection subtract(Collection c1, Collection c2) {
+	public static List<?> union(Collection<?> c1, Collection<?> c2) {
+		// "空∪c2"为c2
+		if (isEmpty(c1))
+			return newArrayList(c2);
+		
+		// "c1∪空"为c1
+		if (isEmpty(c2))
+			return newArrayList(c1);
+		
+		List<Object> list = newArrayList(c1);
+		list.addAll(c2);
+		
+		return list;
+	}
+	
+	/**
+	 * 求两集合的唯一元素并集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param c1
+	 * @param c2
+	 * @return c1∪c2
+	 */
+	public static List<?> unionUnique(Collection<?> c1, Collection<?> c2) {
+		// "空∪c2"为c2
+		if (isEmpty(c1))
+			return newArrayList(newLinkedHashSet(c2));
+		
+		// "c1∪空"为c1
+		if (isEmpty(c2))
+			return newArrayList(newLinkedHashSet(c1));
+		
+		Set<Object> set = newLinkedHashSet(c1);
+		set.addAll(c2);
+				
+		return newArrayList(set);
+	}
+	
+	/**
+	 * 求两集合的交集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param s1
+	 * @param s2
+	 * @return s1∩s2
+	 */
+	public static Set<?> intersection(Set<?> s1, Set<?> s2) {
+		// "s1∩空"或"空∩s2"都为空
+		if (isEmpty(s1) || isEmpty(s2))
+			return newLinkedHashSet();
+		
+		LinkedHashSet<Object> set = newLinkedHashSet(s1);
+		set.retainAll(s2);
+		
+		return set;
+	}
+	
+	/**
+	 * 求两集合的交集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param c1
+	 * @param c2
+	 * @return c1∩c2
+	 */
+	public static List<?> intersection(Collection<?> c1, Collection<?> c2) {
+		// "c1∩空"或"空∩c2"都为空
 		if (isEmpty(c1) || isEmpty(c2))
-			return c1;
+			return newArrayList();
 		
-		List list = newArrayList(c1);
-		Iterator iterator = c2.iterator();
-		Object element;
-		while (iterator.hasNext()) {
-			element = iterator.next();
-			if (c2.contains(element))
-				list.remove(element);
-		}
+		List<Object> list = newArrayList(c1);
+		list.retainAll(c2);
+		
 		return list;
 	}
 	
 	/**
-	 * 获取两集合的补集
+	 * 求两集合唯一元素的交集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c1
 	 * @param c2
-	 * @return c1相对于c2的补集
+	 * @return c1∩c2
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static Collection complement(Collection c1, Collection c2) {
-		if (c1 == null || c2 == null)
-			return null;
-		
-		if (c1.size() == 0  && c1.size() == c2.size())
-			return c1;
-		
-		List list = newArrayList();
-		Iterator iterator = c2.iterator();
-		Object element;
-		while (iterator.hasNext()) {
-			element = iterator.next();
-			if (!c1.contains(element))
-				list.add(element);
-		}
+	public static List<?> intersectionUnique(Collection<?> c1, Collection<?> c2) {
+		List<?> list = intersection(c1, c2);
+		removeDuplication(list);
 		return list;
 	}
 	
+	/**
+	 * 求两集合的差集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param s1
+	 * @param s2
+	 * @return
+	 */
+	public static Set<?> subtract(Set<?> s1, Set<?> s2) {
+		// "s1-空"或"空-s2"都为s1
+		if (isEmpty(s1) || isEmpty(s2))
+			return newLinkedHashSet(s1); 
+		
+		Set<?> set = newLinkedHashSet(s1);
+		set.removeAll(s2);
+		return set;
+	}
+		
+	/**
+	 * 求两集合的差集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param c1
+	 * @param c2
+	 * @return c1 - c2
+	 */
+	public static List<?> subtract(Collection<?> c1, Collection<?> c2) {
+		// "c1-null"或"null-c2"都为c1
+		if (isEmpty(c1) || isEmpty(c2))
+			return newArrayList(c1);
+		
+		List<?> list = newArrayList(c1);
+		list.removeAll(c2);
+		return list;
+	}
+	
+	/**
+	 * 求两集合唯一元素的差集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param c1
+	 * @param c2
+	 * @return
+	 */
+	public static List<?> subtractUnique(Collection<?> c1, Collection<?> c2) {
+		List<?> list = subtract(c1, c2);
+		removeDuplication(list);
+		return list;
+	}
+	
+	/**
+	 * 求两集合的补集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param s1
+	 * @param s2
+	 * @return s1相对于s2的补集，等价于s2与s1的差集(s2-s1)
+	 */
+	public static Set<?> complement(Set<?> s1, Set<?> s2) {
+		return subtract(s2, s1);
+	}
+	
+	/**
+	 * 求两集合的补集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param c1
+	 * @param c2
+	 * @return c1相对于c2的补集，等价于c2与c1的差集(c2-c1)
+	 */
+	public static Collection<?> complement(Collection<?> c1, Collection<?> c2) {
+		return subtract(c2, c1);
+	}
+	
+	/**
+	 * 求两集合唯一元素的补集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param c1
+	 * @param c2
+	 * @return c1相对于c2的补集，等价于c2与c1的差集(c2-c1)
+	 */
+	public static Collection<?> complementUnique(Collection<?> c1, Collection<?> c2) {
+		return subtractUnique(c2, c1);
+	}
+		
 	/**
 	 * 获取集合元素的个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

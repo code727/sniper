@@ -284,7 +284,8 @@ public class NetUtils {
 	 * @return
 	 */
 	public static Set<String> getActionParameterNames(String url, String prefix, String suffix) {
-		Set<String> names = CollectionUtils.newHashSet();
+		Set<String> names = CollectionUtils.newLinkedHashSet();
+		
 		String actionString = getActionString(url);
 		if (actionString.length() > 0) 
 			names.addAll(CollectionUtils.newHashSet(StringUtils.leftSubstringAll(url, prefix, suffix)));

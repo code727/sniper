@@ -18,7 +18,6 @@
 
 package org.workin.commons.util;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -26,9 +25,9 @@ import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -365,8 +364,7 @@ public class MapUtils {
 	 * @param map2
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
-	public static Collection keySubtract(Map map1, Map map2) {
+	public static Set<?> keySubtract(Map<?,?> map1, Map<?,?> map2) {
 		if (map1 == null)
 			return null;
 		if (map2 == null)
@@ -382,8 +380,7 @@ public class MapUtils {
 	 * @param map2
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
-	public static Collection keyComplement(Map map1, Map map2) {
+	public static Set<?> keyComplement(Map<?,?> map1, Map<?,?> map2) {
 		if (map1 == null || map2 == map1)
 			return null;
 		

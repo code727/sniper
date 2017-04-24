@@ -125,6 +125,7 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 			positiveInfinity = true;
 		}
 		
+		this.name = name;
 		this.leftClose = leftClose;
 		this.rightClose = rightClose;
 		
