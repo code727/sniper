@@ -103,5 +103,6 @@
 		<module>workin-generator</module>
 		<module>workin-zookeeper</module>
 		<module>workin-codec</module>
+		<module>workin-sharding</module>
 	</modules>
 </project>
