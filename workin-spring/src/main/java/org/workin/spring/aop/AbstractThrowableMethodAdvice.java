@@ -18,36 +18,19 @@
 
 package org.workin.spring.aop;
 
-import java.lang.reflect.Method;
-
-import org.springframework.aop.MethodBeforeAdvice;
-import org.workin.support.context.ThreadLocalHolder;
+import org.workin.spring.beans.CheckableInitializingBeanAdapter;
 
 /**
- * 前置型方法拦截切面抽象类
+ * 可抛出异常的方法可拦截切面抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class MatchableMethodBeforeAdvice extends
-		AbstractMatchableMethodAdvice implements MethodBeforeAdvice {
-
+public abstract class AbstractThrowableMethodAdvice extends CheckableInitializingBeanAdapter
+		implements ThrowableMethodAdvice {
+	
 	@Override
-	public void before(Method method, Object[] args, Object target)
-			throws Throwable {
-		
-		if (super.checkMatch(method))
-			this.doBeforeTask(method, args, target);
-		
-		ThreadLocalHolder.removeAttribute(ADVICE_MATCH);
+	public void afterThrowing(Exception e) throws Throwable {
+		throw new Exception(e);
 	}
 	
-	/**
-	 * 执行前置拦截任务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param method
-	 * @param args
-	 * @param target
-	 */
-	protected abstract void doBeforeTask(Method method, Object[] args, Object target);
-
 }

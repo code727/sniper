@@ -21,16 +21,16 @@ package org.workin.persistence.datasource.manager;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.PatternMatchUtils;
 import org.workin.commons.util.MapUtils;
+import org.workin.spring.beans.CheckableInitializingBeanAdapter;
 
 /**
  * 方法和单数据源关系管理实现类，主要维护方法名称与单个数据源之间的关系
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MethodAndDataSourceManager implements DataSourceManager, InitializingBean {
+public class MethodAndDataSourceManager extends CheckableInitializingBeanAdapter implements DataSourceManager {
 	
 	/** 维护方法名称模式与数据源名称之间的关系 */
 	private Map<String, String> methodPatternAndDataSourceName;
@@ -50,11 +50,15 @@ public class MethodAndDataSourceManager implements DataSourceManager, Initializi
 	public Set<String> getMethodPattern() {
 		return methodPattern;
 	}
-
-	public void afterPropertiesSet() throws Exception {
+	
+	@Override
+	protected void checkProperties() {
 		if (MapUtils.isEmpty(methodPatternAndDataSourceName))
 			throw new IllegalArgumentException("Property 'methodPatternAndDataSourceName' is required");
-		
+	}
+	
+	@Override
+	protected void init() throws Exception {
 		this.methodPattern = methodPatternAndDataSourceName.keySet();
 	}
 	

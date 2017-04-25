@@ -18,38 +18,29 @@
 
 package org.workin.spring.aop;
 
-import java.util.Set;
+import java.lang.reflect.Method;
 
-import org.springframework.aop.ThrowsAdvice;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.aop.MethodBeforeAdvice;
 
 /**
- * 可设置匹配模式的方法拦截切面接口
+ * 环绕型方法拦截切面抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface MatchableMethodAdvice extends ThrowsAdvice, InitializingBean {
+public abstract class AbstractMethodAroundAdvice extends AbstractMethodAfterAdvice implements MethodBeforeAdvice {
+	
+	@Override
+	public void before(Method method, Object[] args, Object target) throws Throwable {
+		doBeforeTask(method, args, target);
+	}
 	
 	/**
-	 * 设置需要被拦截处理的方法名称模式集
+	 * 执行前置拦截任务
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param names
+	 * @param method
+	 * @param args
+	 * @param target
 	 */
-	public void setNamePatterns(Set<String> namePatterns);
-	
-	/**
-	 * 获取需要被拦截处理的方法模式集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Set<String> getNamePatterns();
-	
-	/**
-	 * 目标方法出现异常后被拦截处理的方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param e
-	 * @throws Throwable
-	 */
-	public void afterThrowing(Exception e) throws Throwable; 
+	protected abstract void doBeforeTask(Method method, Object[] args, Object target);		
 
 }

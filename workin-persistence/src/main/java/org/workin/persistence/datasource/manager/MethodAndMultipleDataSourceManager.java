@@ -25,6 +25,7 @@ import java.util.Map.Entry;
 import org.springframework.util.PatternMatchUtils;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.MapUtils;
+import org.workin.persistence.datasource.selector.MultipleDataSourceRandomSelector;
 import org.workin.persistence.datasource.selector.MultipleDataSourceSelector;
 
 /**
@@ -40,21 +41,22 @@ public class MethodAndMultipleDataSourceManager extends MethodAndDataSourceManag
 	/** 多数据源选择器 */
 	private MultipleDataSourceSelector multipleDataSourceSelector;
 	
-	public void setMultipleDataSourceSelector(
-			MultipleDataSourceSelector multipleDataSourceSelector) {
+	public void setMultipleDataSourceSelector(MultipleDataSourceSelector multipleDataSourceSelector) {
 		this.multipleDataSourceSelector = multipleDataSourceSelector;
 	}
-
+	
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
-		if (multipleDataSourceSelector == null)
-			throw new IllegalArgumentException("Property 'multipleDataSourceSelector' is required");
+	protected void init() throws Exception {
+		super.init();
 		
-		Iterator<Entry<String, String>> iterator = super
-				.getMethodPatternAndDataSourceName().entrySet().iterator();
+		/* 多数据源选择器为空时，默认为随机选择器 */
+		if (multipleDataSourceSelector == null)
+			this.multipleDataSourceSelector = new MultipleDataSourceRandomSelector();
 		
 		this.patternAndNames = MapUtils.newHashMap();
+		
+		/* 将方法名称和数据源名称转换成一对多的关系 */
+		Iterator<Entry<String, String>> iterator = super.getMethodPatternAndDataSourceName().entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<String, String> entry = iterator.next();
 			this.patternAndNames.put(entry.getKey(), ArrayUtils.rbte(entry.getValue().split(",")));
@@ -66,8 +68,7 @@ public class MethodAndMultipleDataSourceManager extends MethodAndDataSourceManag
 		for (String pattern : super.getMethodPattern()) {
 			if (PatternMatchUtils.simpleMatch(pattern, methodName)) {
 				String[] sourceNames = this.patternAndNames.get(pattern);
-				return sourceNames.length != 1 ? this.multipleDataSourceSelector
-						.select(sourceNames) : sourceNames[0];
+				return sourceNames.length != 1 ? this.multipleDataSourceSelector.select(sourceNames) : sourceNames[0];
 			}
 		}
 		

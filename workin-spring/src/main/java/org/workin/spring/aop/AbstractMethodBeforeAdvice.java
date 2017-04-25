@@ -21,21 +21,19 @@ package org.workin.spring.aop;
 import java.lang.reflect.Method;
 
 import org.springframework.aop.MethodBeforeAdvice;
+import org.workin.spring.beans.CheckableInitializingBeanAdapter;
 
 /**
- * 环绕型方法拦截切面抽象类
+ * 方法前置型拦截切面抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class MatchableMethodAroundAdvice extends MatchableMethodAfterAdvice implements MethodBeforeAdvice {
-
+public abstract class AbstractMethodBeforeAdvice extends CheckableInitializingBeanAdapter
+		implements MethodBeforeAdvice {
+		
 	@Override
-	public void before(Method method, Object[] args, Object target)
-			throws Throwable {
-		
-		if (super.checkMatch(method))
-			this.doBeforeTask(method, args, target);
-		
+	public void before(Method method, Object[] args, Object target) throws Throwable {
+		doBeforeTask(method, args, target);
 	}
 	
 	/**
@@ -45,6 +43,6 @@ public abstract class MatchableMethodAroundAdvice extends MatchableMethodAfterAd
 	 * @param args
 	 * @param target
 	 */
-	protected abstract void doBeforeTask(Method method, Object[] args, Object target);		
+	protected abstract void doBeforeTask(Method method, Object[] args, Object target);
 
 }

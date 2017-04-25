@@ -19,14 +19,14 @@
 package org.workin.persistence.datasource.advice;
 
 import org.workin.persistence.datasource.manager.DataSourceManager;
-import org.workin.spring.aop.MatchableMethodAroundAdvice;
+import org.workin.spring.aop.AbstractMethodAroundAdvice;
 
 /**
  * 多数据源切换选择器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractMultipleDataSourceAdvice extends MatchableMethodAroundAdvice {
+public abstract class AbstractMultipleDataSourceAdvice extends AbstractMethodAroundAdvice {
 	
 	/** 多数据源管理器 */
 	protected DataSourceManager multipleDataSourceManager;
@@ -35,9 +35,9 @@ public abstract class AbstractMultipleDataSourceAdvice extends MatchableMethodAr
 			DataSourceManager multipleDataSourceManager) {
 		this.multipleDataSourceManager = multipleDataSourceManager;
 	}
-
+	
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	protected void checkProperties() {
 		if (multipleDataSourceManager == null)
 			throw new IllegalArgumentException("Property 'multipleDataSourceManager' is required");
 	}

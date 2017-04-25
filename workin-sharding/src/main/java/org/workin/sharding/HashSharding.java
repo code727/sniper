@@ -41,7 +41,7 @@ public class HashSharding extends AbstractSharding {
 		if (model != 0)
 			this.model = new BigInteger(String.valueOf(Math.abs(model)));
 	}
-
+	
 	@Override
 	protected <T> void doSharded(T parameter, Route route) {
 		String target = "";

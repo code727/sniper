@@ -21,23 +21,19 @@ package org.workin.spring.aop;
 import java.lang.reflect.Method;
 
 import org.springframework.aop.AfterReturningAdvice;
-import org.workin.support.context.ThreadLocalHolder;
 
 /**
  * 后置型方法拦截切面抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class MatchableMethodAfterAdvice extends AbstractMatchableMethodAdvice implements AfterReturningAdvice {
-
+public abstract class AbstractMethodAfterAdvice extends AbstractThrowableMethodAdvice implements AfterReturningAdvice {
+	
 	@Override
 	public void afterReturning(Object returnValue, Method method,
 			Object[] args, Object target) throws Throwable {
 		
-		if (super.checkMatch(method)) 
-			this.doAfterReturningTask(returnValue, method, args, target);
-		
-		ThreadLocalHolder.removeAttribute(ADVICE_MATCH);
+		doAfterReturningTask(returnValue, method, args, target);
 	}
 
 	/**
@@ -51,5 +47,5 @@ public abstract class MatchableMethodAfterAdvice extends AbstractMatchableMethod
 	 */
 	protected abstract void doAfterReturningTask(Object returnValue, Method method,
 			Object[] args, Object target) throws Throwable;
-
+	
 }

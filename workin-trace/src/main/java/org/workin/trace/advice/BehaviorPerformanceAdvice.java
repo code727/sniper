@@ -25,7 +25,7 @@ import java.util.Stack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.workin.commons.util.DateUtils;
-import org.workin.spring.aop.MatchableMethodAroundAdvice;
+import org.workin.spring.aop.AbstractMethodAroundAdvice;
 import org.workin.support.context.ThreadLocalHolder;
 import org.workin.trace.domain.BehaviorPerformance;
 import org.workin.trace.service.BehaviorPerformanceLoggerService;
@@ -36,7 +36,7 @@ import org.workin.trace.service.BehaviorPerformanceService;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BehaviorPerformanceAdvice extends MatchableMethodAroundAdvice {
+public class BehaviorPerformanceAdvice extends AbstractMethodAroundAdvice {
 	
 	private static final String BEHAVIOR_PERFORMANCE = "behavior_performance";
 	
@@ -48,13 +48,12 @@ public class BehaviorPerformanceAdvice extends MatchableMethodAroundAdvice {
 			BehaviorPerformanceService behaviorPerformanceService) {
 		this.behaviorPerformanceService = behaviorPerformanceService;
 	}
-
+	
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	protected void init() throws Exception {
 		if (behaviorPerformanceService == null) {
 			behaviorPerformanceService = new BehaviorPerformanceLoggerService();
-			logger.info("behaviorPerformanceService is null, use default implementation:"
-					+ BehaviorPerformanceLoggerService.class.getName());
+			logger.info("behaviorPerformanceService is null, use default implementation:" + BehaviorPerformanceLoggerService.class.getName());
 		}
 	}
 		
