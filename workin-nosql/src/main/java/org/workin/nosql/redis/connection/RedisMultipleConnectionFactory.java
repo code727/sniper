@@ -35,7 +35,7 @@ public class RedisMultipleConnectionFactory extends AbstractRoutingConnectionFac
 	protected Object determineCurrentLookupKey() {
 		Object datasource = DataSourceHolder.getDataSource();
 		if (datasource != null) 
-			logger.info("Determine current datasource:{}", datasource);
+			logger.info("Determine current datasource [{}]", datasource);
 		
 		return datasource;
 	}
