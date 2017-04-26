@@ -31,8 +31,7 @@ public abstract class AbstractMultipleDataSourceAdvice extends AbstractMethodAro
 	/** 多数据源管理器 */
 	protected DataSourceManager multipleDataSourceManager;
 	
-	public void setMultipleDataSourceManager(
-			DataSourceManager multipleDataSourceManager) {
+	public void setMultipleDataSourceManager(DataSourceManager multipleDataSourceManager) {
 		this.multipleDataSourceManager = multipleDataSourceManager;
 	}
 	

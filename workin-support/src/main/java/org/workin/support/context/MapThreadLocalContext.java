@@ -20,16 +20,45 @@ package org.workin.support.context;
 
 import java.util.Map;
 
+import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.MapUtils;
+import org.workin.commons.util.StringUtils;
 
 /**
  * 基于Map类型的线程局部变量上下文对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MapThreadLocalContext<K, V> implements Context<K, V> {
+public class MapThreadLocalContext implements Context {
 	
-	private static final ThreadLocal<Object> context = new ThreadLocal<Object>();
+	private final ThreadLocal<Object> context = new ThreadLocal<Object>();
+	
+	/** 全局默认的属性名称 */
+	private Object attributeName;
+	
+	public MapThreadLocalContext() {
+		this(StringUtils.EMPTY_STRING);
+	}
+	
+	public MapThreadLocalContext(Object attributeName) {
+		setAttributeName(attributeName);
+	}
+	
+	@Override
+	public void setAttributeName(Object attributeName) {
+		AssertUtils.assertNotNull(attributeName, "Global default context attribute name must not be null");
+		this.attributeName = attributeName;
+	}
+
+	@Override
+	public Object getAttributeName() {
+		return attributeName;
+	}
+
+	@Override
+	public <V> V getAttribute() {
+		return getAttribute(attributeName);
+	}
 
 	/**
 	 * 根据名称获取线程局部变量的属性值
@@ -39,15 +68,20 @@ public class MapThreadLocalContext<K, V> implements Context<K, V> {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public V getAttribute(K name) {
+	public <K, V> V getAttribute(K name) {
 		if (context.get() == null)
 			return null;
 		
-		 Map<K, V> map = (Map<K, V>)context.get();
+		Map<K, V> map = (Map<K, V>) context.get();
 		 if (MapUtils.isNotEmpty(map))
 			 return map.get(name);
 		 
 		 return null;
+	}
+	
+	@Override
+	public <V> void setAttribute(V value) {
+		setAttribute(attributeName, value);
 	}
 
 	/**
@@ -58,13 +92,18 @@ public class MapThreadLocalContext<K, V> implements Context<K, V> {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void setAttribute(K name, V value) {
-		Map<K, V> map = (Map<K, V>)context.get();
+	public <K, V> void setAttribute(K name, V value) {
+		Map<K, V> map = (Map<K, V>) context.get();
 		if (map == null)
 			map = MapUtils.newConcurrentHashMap();
 		
 		map.put(name, value);
 		context.set(map);
+	}
+	
+	@Override
+	public <V> V removeAttribute() {
+		return removeAttribute(attributeName);
 	}
 
 	/**
@@ -75,7 +114,7 @@ public class MapThreadLocalContext<K, V> implements Context<K, V> {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public V removeAttribute(K name) {
+	public <K, V> V removeAttribute(K name) {
 		Map<K, V> map = (Map<K, V>) context.get();
 		if (MapUtils.isNotEmpty(map))
 			return map.remove(name);
@@ -87,5 +126,5 @@ public class MapThreadLocalContext<K, V> implements Context<K, V> {
 	public void clear() {
 		context.remove();
 	}
-	
+		
 }

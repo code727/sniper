@@ -18,6 +18,8 @@
 
 package org.workin.persistence.datasource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.workin.support.context.DataSourceHolder;
 
@@ -28,9 +30,15 @@ import org.workin.support.context.DataSourceHolder;
  */
 public class JdbcMultipleDataSource extends AbstractRoutingDataSource {
 	
+	private static Logger logger = LoggerFactory.getLogger(JdbcMultipleDataSource.class);
+	
 	@Override
 	protected Object determineCurrentLookupKey() {
-		return DataSourceHolder.getDataSourceName();
+		Object datasource = DataSourceHolder.getDataSource();
+		if (datasource != null) 
+			logger.info("Determine current datasource [{}]", datasource);
+		
+		return datasource;
 	}
 
 }

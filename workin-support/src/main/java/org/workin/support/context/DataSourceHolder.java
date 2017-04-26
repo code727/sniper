@@ -25,24 +25,32 @@ package org.workin.support.context;
  */
 public class DataSourceHolder extends ThreadLocalHolder {
 	
-	public static final String CURRENT_DATASOURCE_NAME = "current_datasource_name";
+	public static final String DATASOURCE_CONTEXT_ATTRIBUTE_NAME = "workin_datasource_name";
 	
 	/**
-	 * 设置数据源标识到线程上下文变量中
+	 * 设置数据源到线程上下文变量中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 */
-    public static void setDataSourceName(String name){  
-       setAttribute(CURRENT_DATASOURCE_NAME, name);
+    public static void setDataSource(Object source){  
+       setAttribute(DATASOURCE_CONTEXT_ATTRIBUTE_NAME, source);
     }  
       
     /**
-     * 从线程上下文变量中获取数据源标识
+     * 从线程上下文变量中获取数据源
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 
      * @return
      */
-    public static String getDataSourceName() {  
-        return (String) getAttribute(CURRENT_DATASOURCE_NAME);
+    public static Object getDataSource() {  
+        return getAttribute(DATASOURCE_CONTEXT_ATTRIBUTE_NAME);
     }  
+    
+    /**
+     * 删除线程上下文变量中存储的数据源名称
+     * @author <a href="mailto:code727@gmail.com">杜斌</a>
+     */
+    public static Object removeDataSource() {
+    	return removeAttribute(DATASOURCE_CONTEXT_ATTRIBUTE_NAME);
+    }
                 
 }

@@ -19,11 +19,18 @@
 package org.workin.support.context;
 
 /**
- * 泛型上下文接口
+ * 上下文接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Context<K, V> {
+public interface Context extends ConfigurableContext {
+	
+	/**
+	 * 获取上下文默认属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public <V> V getAttribute();
 	
 	/**
 	 * 根据名称获取上下文属性值
@@ -31,7 +38,14 @@ public interface Context<K, V> {
 	 * @param name
 	 * @return
 	 */
-	public V getAttribute(K name);
+	public <K, V> V getAttribute(K name);
+	
+	/**
+	 * 设置上下文默认属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 */
+	public <V> void setAttribute(V value);
 	
 	/**
 	 * 设置上下文属性值
@@ -39,7 +53,14 @@ public interface Context<K, V> {
 	 * @param name
 	 * @param value
 	 */
-	public void setAttribute(K name, V value);
+	public <K, V> void setAttribute(K name, V value);
+	
+	/**
+	 * 删除上下文默认属性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public <V> V removeAttribute();
 	
 	/**
 	 * 根据名称删除上下文属性
@@ -47,7 +68,7 @@ public interface Context<K, V> {
 	 * @param name
 	 * @return
 	 */
-	public V removeAttribute(K name);
+	public <K, V> V removeAttribute(K name);
 	
 	/**
 	 * 清除上下文

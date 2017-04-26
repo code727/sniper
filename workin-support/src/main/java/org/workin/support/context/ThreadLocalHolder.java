@@ -25,7 +25,7 @@ package org.workin.support.context;
  */
 public class ThreadLocalHolder {
 		
-	private static final Context<Object, Object> holder = newMapThreadLocalContext();
+	private static final Context holder = newMapThreadLocalContext();
 	
 	/**
 	 * 清除上下文
@@ -70,8 +70,8 @@ public class ThreadLocalHolder {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static <K,V> MapThreadLocalContext<K,V> newMapThreadLocalContext() {
-		return new MapThreadLocalContext<K, V>();
+	public static MapThreadLocalContext newMapThreadLocalContext() {
+		return new MapThreadLocalContext();
 	}
-	
+			
 }

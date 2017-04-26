@@ -31,28 +31,27 @@ import org.workin.support.context.DataSourceHolder;
  * @version 1.0
  */
 public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceAdvice {
-		
-	private static Logger logger = LoggerFactory.getLogger(MultipleDataSourceAdvice.class);
 	
+	private static Logger logger = LoggerFactory.getLogger(MultipleDataSourceAdvice.class);
+
 	@Override
 	protected void doBeforeTask(Method method, Object[] args, Object target) {
 		String methodName = method.getName();
 		String sourceName = multipleDataSourceManager.getDataSourceName(methodName);
 		if (sourceName == null)
-			throw new AopInvocationException("Target method ["
-					+ methodName + "] not found correlative data source name.");
-		
-		DataSourceHolder.setDataSourceName(sourceName);
-		logger.info(new StringBuilder("Data source will be switch to [").append(sourceName)
-				.append("] before invoke [").append(method.getDeclaringClass()).append("] method [")
-				.append(methodName).append("].").toString());
-	}
+			throw new AopInvocationException(
+					"Target method [" + methodName + "] not found correlative data source name.");
 	
+		DataSourceHolder.setDataSource(sourceName);
+		logger.debug("Data source will be switch to [{}] before invoke [{}] method [{}]", 
+				sourceName, method.getDeclaringClass(), methodName);
+	}
+		
 	@Override
 	protected void doAfterReturningTask(Object returnValue, Method method,
 			Object[] args, Object target) throws Throwable {
 		
-		DataSourceHolder.removeAttribute(DataSourceHolder.CURRENT_DATASOURCE_NAME);
+		DataSourceHolder.removeDataSource();
 	}
 	
 }

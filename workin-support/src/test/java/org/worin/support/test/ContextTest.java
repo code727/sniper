@@ -22,21 +22,6 @@ public class ContextTest extends BaseTestCase {
 			@Override
 			public void run() {
 				System.out.println("Start thread1...");
-				
-//				ApplicationContext<String, String> context1 = ApplicationContextHolder.newMapThreadLocalContext();
-//				ApplicationContext<String, String> context2 = ApplicationContextHolder.newMapThreadLocalContext();
-//				
-//				context1.setAttribute("my", "dubin");
-//				assertEquals("dubin", context1.getAttribute("my"));
-//				System.out.println(context1.getAttribute("my"));
-//				
-//				context2.setAttribute("my", "daniele");
-//				assertTrue(context1.getAttribute("my").equals(context2.getAttribute("my")));
-//				System.out.println(context2.getAttribute("my"));
-//				System.out.println(context1.getAttribute("my"));
-//				
-//				assertTrue(context1.getAttribute("my").equals(ApplicationContextHolder.getAttribute("my")));
-				
 				ThreadLocalHolder.setAttribute("my", "dubin");
 				System.out.println(ThreadLocalHolder.getAttribute("my"));
 				System.out.println("End thread1!");
@@ -47,18 +32,7 @@ public class ContextTest extends BaseTestCase {
 			@Override
 			public void run() {
 				System.out.println("Start thread2...");
-//				
-//				ApplicationContext<String, String> context1 = ApplicationContextHolder.newMapThreadLocalContext();
-//				ApplicationContext<String, String> context2 = ApplicationContextHolder.newMapThreadLocalContext();
-//				
-//				assertNull(context1.getAttribute("my"));
-//				assertNull(context2.getAttribute("my"));
-//				assertNull(ApplicationContextHolder.getAttribute("my"));
-//				
-//				System.out.println(context1.getAttribute("my"));
-//				System.out.println(context2.getAttribute("my"));
 				System.out.println(ThreadLocalHolder.getAttribute("my"));
-				
 				System.out.println("End thread2!");
 			}
 		});

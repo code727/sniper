@@ -18,6 +18,8 @@
 
 package org.workin.nosql.redis.connection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.workin.support.context.DataSourceHolder;
 
 /**
@@ -26,10 +28,16 @@ import org.workin.support.context.DataSourceHolder;
  * @version 1.0
  */
 public class RedisMultipleConnectionFactory extends AbstractRoutingConnectionFactory {
+	
+	private static Logger logger = LoggerFactory.getLogger(RedisMultipleConnectionFactory.class);
 
 	@Override
 	protected Object determineCurrentLookupKey() {
-		return DataSourceHolder.getDataSourceName();
+		Object datasource = DataSourceHolder.getDataSource();
+		if (datasource != null) 
+			logger.info("Determine current datasource:{}", datasource);
+		
+		return datasource;
 	}
 
 }
