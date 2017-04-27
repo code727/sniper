@@ -18,20 +18,20 @@
 
 package org.workin.persistence.datasource.advice;
 
-import org.workin.persistence.datasource.manager.DataSourceManager;
+import org.workin.persistence.datasource.manager.MultipleDataSourceManager;
 import org.workin.spring.aop.AbstractMethodAroundAdvice;
 
 /**
- * 多数据源切换选择器抽象类
+ * 多数据源切面抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public abstract class AbstractMultipleDataSourceAdvice extends AbstractMethodAroundAdvice {
 	
 	/** 多数据源管理器 */
-	protected DataSourceManager multipleDataSourceManager;
+	protected MultipleDataSourceManager multipleDataSourceManager;
 	
-	public void setMultipleDataSourceManager(DataSourceManager multipleDataSourceManager) {
+	public void setMultipleDataSourceManager(MultipleDataSourceManager multipleDataSourceManager) {
 		this.multipleDataSourceManager = multipleDataSourceManager;
 	}
 	

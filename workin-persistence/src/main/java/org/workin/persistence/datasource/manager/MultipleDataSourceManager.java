@@ -19,18 +19,18 @@
 package org.workin.persistence.datasource.manager;
 
 /**
- * 数据源管理器接口
+ * 多数据源管理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface DataSourceManager {
+public interface MultipleDataSourceManager {
 	
 	/**
-	 * 根据方法名称获取对应的数据源名称
+	 * 根据参数获取对应的数据源
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param methodName
+	 * @param parameter
 	 * @return
 	 */
-	public String getDataSourceName(String methodName);
+	public Object getDataSource(Object parameter);
 
 }

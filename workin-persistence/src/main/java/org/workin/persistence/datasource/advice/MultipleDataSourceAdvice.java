@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.AopInvocationException;
+import org.workin.commons.exception.WorkinException;
 import org.workin.support.context.DataSourceHolder;
 
 /**
@@ -36,15 +36,16 @@ public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceAdvice {
 
 	@Override
 	protected void doBeforeTask(Method method, Object[] args, Object target) {
+		System.out.println(target);
 		String methodName = method.getName();
-		String sourceName = multipleDataSourceManager.getDataSourceName(methodName);
-		if (sourceName == null)
-			throw new AopInvocationException(
-					"Target method [" + methodName + "] not found correlative data source name.");
-	
-		DataSourceHolder.setDataSource(sourceName);
-		logger.debug("Data source will be switch to [{}] before invoke [{}] method [{}]", 
-				sourceName, method.getDeclaringClass(), methodName);
+		// 根据方法名称来获取对应的数据源
+		Object dataSource = multipleDataSourceManager.getDataSource(methodName);
+		if (dataSource == null)
+			throw new WorkinException("Target method [" + methodName + "] not found correlative data source"); 
+		
+		DataSourceHolder.setDataSource(dataSource);
+		logger.debug("Data source will be switch to [{}] before invoke [{}] method [{}]", dataSource,
+				method.getDeclaringClass(), methodName);
 	}
 		
 	@Override

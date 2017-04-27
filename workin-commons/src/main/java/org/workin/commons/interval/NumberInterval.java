@@ -151,6 +151,24 @@ public class NumberInterval extends AbstractInterval<Number> {
 		return !isLeftClose() && interval.isLeftClose() || !isRightClose() && interval.isRightClose() ? false : true;
 	}
 	
+	@Override
+	public void offset(Object offset) {
+		if (offset == null || !(offset instanceof Number) && !RegexUtils.isNumber(offset.toString()))
+			return;
+		
+		BigDecimal offsetDecimal;
+		if (offset instanceof BigDecimal) 
+			offsetDecimal = (BigDecimal) offset;
+		else
+			offsetDecimal = new BigDecimal(offset.toString());
+		
+		if (NumberUtils.equals(offsetDecimal, 0))
+			return;
+		
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/**
 	 * 创建一个左开区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -290,5 +308,5 @@ public class NumberInterval extends AbstractInterval<Number> {
 	public static NumberInterval newClose(String name, Number minimal, Number maximum) {
 		return new NumberInterval(name, minimal, maximum, true, true);
 	}
-	
+
 }

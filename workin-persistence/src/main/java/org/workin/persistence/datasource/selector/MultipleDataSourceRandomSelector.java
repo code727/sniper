@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年5月13日
+ * Create Date : 2015-5-13
  */
 
 package org.workin.persistence.datasource.selector;
@@ -29,7 +29,7 @@ public class MultipleDataSourceRandomSelector implements MultipleDataSourceSelec
 
 	@Override
 	public String select(String[] sourceNames) {
-		return sourceNames[NumberUtils.randomIn(sourceNames.length)];
+		return sourceNames.length != 1 ? sourceNames[NumberUtils.randomIn(sourceNames.length)] : sourceNames[0];
 	}
-
+	
 }

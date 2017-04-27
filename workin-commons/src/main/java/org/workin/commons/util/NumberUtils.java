@@ -20,6 +20,7 @@ package org.workin.commons.util;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Map;
 
@@ -755,19 +756,8 @@ public class NumberUtils {
 		if (number1 == null || number2 == null)
 			return false;
 		
-		BigDecimal decimal1;
-		BigDecimal decimal2;
-		
-		if (number1 instanceof BigDecimal)
-			decimal1 = (BigDecimal) number1;
-		else
-			decimal1 = new BigDecimal(number1.toString());
-		
-		if (number2 instanceof BigDecimal)
-			decimal2 = (BigDecimal) number1;
-		else
-			decimal2 = new BigDecimal(number2.toString());
-		
+		BigDecimal decimal1 = toBigDecimal(number1);
+		BigDecimal decimal2 = toBigDecimal(number2);
 		return decimal1.compareTo(decimal2) == 1;
 	}
 	
@@ -873,19 +863,8 @@ public class NumberUtils {
 		if (number1 == null || number2 == null)
 			return false;
 		
-		BigDecimal decimal1;
-		BigDecimal decimal2;
-		
-		if (number1 instanceof BigDecimal)
-			decimal1 = (BigDecimal) number1;
-		else
-			decimal1 = new BigDecimal(number1.toString());
-		
-		if (number2 instanceof BigDecimal)
-			decimal2 = (BigDecimal) number1;
-		else
-			decimal2 = new BigDecimal(number2.toString());
-		
+		BigDecimal decimal1 = toBigDecimal(number1);
+		BigDecimal decimal2 = toBigDecimal(number2);
 		return decimal1.compareTo(decimal2) > -1;
 	}
 	
@@ -992,19 +971,8 @@ public class NumberUtils {
 		if (number1 == null || number2 == null)
 			return false;
 		
-		BigDecimal decimal1;
-		BigDecimal decimal2;
-		
-		if (number1 instanceof BigDecimal)
-			decimal1 = (BigDecimal) number1;
-		else
-			decimal1 = new BigDecimal(number1.toString());
-		
-		if (number2 instanceof BigDecimal)
-			decimal2 = (BigDecimal) number1;
-		else
-			decimal2 = new BigDecimal(number2.toString());
-		
+		BigDecimal decimal1 = toBigDecimal(number1);
+		BigDecimal decimal2 = toBigDecimal(number2);
 		return decimal1.compareTo(decimal2) < 1;
 	}
 	
@@ -1110,19 +1078,8 @@ public class NumberUtils {
 		if (number1 == null || number2 == null)
 			return false;
 		
-		BigDecimal decimal1;
-		BigDecimal decimal2;
-		
-		if (number1 instanceof BigDecimal)
-			decimal1 = (BigDecimal) number1;
-		else
-			decimal1 = new BigDecimal(number1.toString());
-		
-		if (number2 instanceof BigDecimal)
-			decimal2 = (BigDecimal) number1;
-		else
-			decimal2 = new BigDecimal(number2.toString());
-		
+		BigDecimal decimal1 = toBigDecimal(number1);
+		BigDecimal decimal2 = toBigDecimal(number2);
 		return decimal1.compareTo(decimal2) == -1;
 	}
 	
@@ -1228,20 +1185,367 @@ public class NumberUtils {
 		if (number1 == null || number2 == null)
 			return false;
 		
-		BigDecimal decimal1;
-		BigDecimal decimal2;
-		
-		if (number1 instanceof BigDecimal)
-			decimal1 = (BigDecimal) number1;
-		else
-			decimal1 = new BigDecimal(number1.toString());
-		
-		if (number2 instanceof BigDecimal)
-			decimal2 = (BigDecimal) number1;
-		else
-			decimal2 = new BigDecimal(number2.toString());
-		
+		BigDecimal decimal1 = toBigDecimal(number1);
+		BigDecimal decimal2 = toBigDecimal(number2);
 		return decimal1.compareTo(decimal2) == 0;
+	}
+	
+	/**
+	 * 计算decimal + number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal add(BigDecimal decimal, double number) {
+		return add(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal + number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal add(BigDecimal decimal, float number) {
+		return add(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal + number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal add(BigDecimal decimal, int number) {
+		return add(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal + number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal add(BigDecimal decimal, long number) {
+		return add(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal + number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal add(BigDecimal decimal, short number) {
+		return add(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal + number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal add(BigDecimal decimal, byte number) {
+		return add(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal + number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal add(BigDecimal decimal, char number) {
+		return add(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal1 + decimal2的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @return
+	 */
+	public static BigDecimal add(BigDecimal decimal1, BigDecimal decimal2) {
+		AssertUtils.assertNotNull(decimal1, "Added decimal must not be null");
+		AssertUtils.assertNotNull(decimal2, "Adding decimal must not be null");
+		
+		return decimal1.add(decimal2);
+	}
+	
+	/**
+	 * 计算number1 + number2的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @return
+	 */
+	public static BigDecimal add(Number number1, Number number2) {
+		AssertUtils.assertNotNull(number1, "Added number must not be null");
+		AssertUtils.assertNotNull(number2, "Adding number must not be null");
+		
+		BigDecimal decimal1 = toBigDecimal(number1);
+		BigDecimal decimal2 = toBigDecimal(number2);
+		return decimal1.add(decimal2);
+	}
+	
+	/**
+	 * 计算decimal - number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal subtract(BigDecimal decimal, double number) {
+		return subtract(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal - number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal subtract(BigDecimal decimal, float number) {
+		return subtract(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal - number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal subtract(BigDecimal decimal, int number) {
+		return subtract(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal - number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal subtract(BigDecimal decimal, long number) {
+		return subtract(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal - number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal subtract(BigDecimal decimal, short number) {
+		return subtract(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal - number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal subtract(BigDecimal decimal, byte number) {
+		return subtract(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal - number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal subtract(BigDecimal decimal, char number) {
+		return subtract(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal1 - decimal2的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @return
+	 */
+	public static BigDecimal subtract(BigDecimal decimal1, BigDecimal decimal2) {
+		AssertUtils.assertNotNull(decimal1, "Subtracted decimal must not be null");
+		AssertUtils.assertNotNull(decimal2, "Subtracting decimal must not be null");
+		
+		return decimal1.subtract(decimal2);
+	}
+	
+	/**
+	 * 计算number1 - number2的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @return
+	 */
+	public static BigDecimal subtract(Number number1, Number number2) {
+		AssertUtils.assertNotNull(number1, "Subtracted number must not be null");
+		AssertUtils.assertNotNull(number2, "Subtracting number must not be null");
+		
+		BigDecimal decimal1 = toBigDecimal(number1);
+		BigDecimal decimal2 = toBigDecimal(number2);
+		return decimal1.subtract(decimal2);
+	}
+	
+	/**
+	 * 计算decimal * number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal multiply(BigDecimal decimal, double number) {
+		return multiply(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal * number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal multiply(BigDecimal decimal, float number) {
+		return multiply(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal * number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal multiply(BigDecimal decimal, long number) {
+		return multiply(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal * number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal multiply(BigDecimal decimal, int number) {
+		return multiply(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal * number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal multiply(BigDecimal decimal, short number) {
+		return multiply(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal * number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal multiply(BigDecimal decimal, byte number) {
+		return multiply(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal * number的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal multiply(BigDecimal decimal, char number) {
+		return multiply(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal1 * decimal2的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @return
+	 */
+	public static BigDecimal multiply(BigDecimal decimal1, BigDecimal decimal2) {
+		AssertUtils.assertNotNull(decimal1, "Multiplied decimal must not be null");
+		AssertUtils.assertNotNull(decimal2, "Multiplting decimal must not be null");
+		
+		return decimal1.multiply(decimal2);
+	}
+	
+	/**
+	 * 计算number1 * number2的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @return
+	 */
+	public static BigDecimal multiply(Number number1, Number number2) {
+		AssertUtils.assertNotNull(number1, "Multiplied number must not be null");
+		AssertUtils.assertNotNull(number2, "Multiplting number must not be null");
+		
+		BigDecimal decimal1 = toBigDecimal(number1);
+		BigDecimal decimal2 = toBigDecimal(number2);
+		return decimal1.multiply(decimal2);
+	}
+	
+	/**
+	 * 计算number1 ÷  number2的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @return
+	 */
+	public static BigDecimal divide(Number number1, Number number2) {
+		return divide(number1, number2, -1, null);
+	}
+	
+	public static BigDecimal divide(Number number1, Number number2, int scale) {
+		return divide(number1, number2, scale, null);
+	}
+	
+	/**
+	 * 计算number1 ÷  number2的值，并以roundingMode指定的四舍五入的形式保留scale位小数返回最终的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @param scale
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(Number number1, Number number2, int scale, RoundingMode roundingMode) {
+		AssertUtils.assertNotNull(number1, "Multiplied number must not be null");
+		AssertUtils.assertNotNull(number2, "Multiplting number must not be null");
+		
+		BigDecimal decimal1 = toBigDecimal(number1);
+		BigDecimal decimal2 = toBigDecimal(number2);
+		return decimal1.divide(decimal2, scale, roundingMode != null ? roundingMode : RoundingMode.DOWN);
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(divide(10, 1.1));
 	}
 			
 	/**
@@ -1329,21 +1633,6 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 判断字符串表示的数字是否为一个奇数，并且选择在判断前是否校验数字的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param number
-	 * @param validation
-	 * @return
-	 */
-	private static boolean isOddNumber(String number, boolean validation) {
-		if (validation && !RegexUtils.isNumber(number))
-			return false;
-		
-		char lastNumber = number.charAt(number.length() - 1);
-		return ODD_NUMBERS.containsKey(lastNumber);
-	}
-	
-	/**
 	 * 判断是否为一个偶数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
@@ -1364,6 +1653,21 @@ public class NumberUtils {
 	}
 	
 	/**
+	 * 判断字符串表示的数字是否为一个奇数，并且选择在判断前是否校验数字的合法性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @param validation
+	 * @return
+	 */
+	private static boolean isOddNumber(String number, boolean validation) {
+		if (validation && !RegexUtils.isNumber(number))
+			return false;
+		
+		char lastNumber = number.charAt(number.length() - 1);
+		return ODD_NUMBERS.containsKey(lastNumber);
+	}
+	
+	/**
 	 * 判断字符串表示的数字是否为一个偶数，并且选择在判断前是否校验数字的合法性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
@@ -1376,6 +1680,16 @@ public class NumberUtils {
 		
 		char lastNumber = number.charAt(number.length() - 1);
 		return EVEN_NUMBERS.containsKey(lastNumber);
+	}
+	
+	/**
+	 * 将数字对象统一转换为BigDecimal
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal toBigDecimal(Number number) {
+		return (number instanceof BigDecimal) ? (BigDecimal) number : new BigDecimal(number.toString());
 	}
 			
 }

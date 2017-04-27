@@ -125,4 +125,18 @@ public interface Interval<T> {
 	 */
 	public boolean contains(Interval<T> interval);
 	
+	/**
+	 * 将整个区间产生指定值的偏移
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param offset
+	 */
+	public void offset(Object offset);
+	
+//	/**
+//	 * 
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param interval
+//	 */
+//	public void offset(Interval<T> interval);
+	
 }
