@@ -1512,22 +1512,429 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 计算number1 ÷  number2的值
+	 * 计算decimal ÷ number的值，返回整数结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, double number) {
+		return divide(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, double number, int scale) {
+		return divide(decimal, new BigDecimal(number), scale);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, double number, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, double number, int scale, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), scale, roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，返回整数结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, float number) {
+		return divide(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, float number, int scale) {
+		return divide(decimal, new BigDecimal(number), scale);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, float number, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, float number, int scale, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), scale, roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，返回整数结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, long number) {
+		return divide(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, long number, int scale) {
+		return divide(decimal, new BigDecimal(number), scale);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, long number, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, long number, int scale, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), scale, roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，返回整数结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, int number) {
+		return divide(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, int number, int scale) {
+		return divide(decimal, new BigDecimal(number), scale);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, int number, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, int number, int scale, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), scale, roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，返回整数结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, short number) {
+		return divide(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, short number, int scale) {
+		return divide(decimal, new BigDecimal(number), scale);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, short number, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, short number, int scale, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), scale, roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，返回整数结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, byte number) {
+		return divide(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, byte number, int scale) {
+		return divide(decimal, new BigDecimal(number), scale);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, byte number, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, byte number, int scale, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), scale, roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，返回整数结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, char number) {
+		return divide(decimal, new BigDecimal(number));
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, char number, int scale) {
+		return divide(decimal, new BigDecimal(number), scale);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, char number, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), roundingMode);
+	}
+	
+	/**
+	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal
+	 * @param number
+	 * @param scale
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal, char number, int scale, RoundingMode roundingMode) {
+		return divide(decimal, new BigDecimal(number), scale, roundingMode);
+	}
+	
+	/**
+	 * 计算decimal1 ÷  decimal2的值，返回整数结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal1, BigDecimal decimal2) {
+		return divide(decimal1, decimal2, 0);
+	}
+	
+	/**
+	 * 计算decimal1 ÷  decimal2的值，并保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @param scale
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal1, BigDecimal decimal2, int scale) {
+		return divide(decimal1, decimal2, scale, null);
+	}
+	
+	/**
+	 * 计算decimal1 ÷  decimal2的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal1, BigDecimal decimal2, RoundingMode roundingMode) {
+		return divide(decimal1, decimal2, 0, roundingMode);
+	}
+	
+	/**
+	 * 计算decimal1 ÷  decimal2的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param decimal1
+	 * @param decimal2
+	 * @param scale
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(BigDecimal decimal1, BigDecimal decimal2, int scale, RoundingMode roundingMode) {
+		AssertUtils.assertNotNull(decimal1, "Divided decimal must not be null");
+		AssertUtils.assertNotNull(decimal2, "Dividing decimal must not be null");
+		
+		return decimal1.divide(decimal2, scale, roundingMode != null ? roundingMode : RoundingMode.DOWN);
+	}
+	 
+	/**
+	 * 计算number1 ÷  number2的值，返回整数结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number1
 	 * @param number2
 	 * @return
 	 */
 	public static BigDecimal divide(Number number1, Number number2) {
-		return divide(number1, number2, -1, null);
+		return divide(number1, number2, 0);
 	}
 	
+	/**
+	 * 计算number1 ÷  number2的值，并保留scale位小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @param scale
+	 * @return
+	 */
 	public static BigDecimal divide(Number number1, Number number2, int scale) {
 		return divide(number1, number2, scale, null);
 	}
 	
 	/**
-	 * 计算number1 ÷  number2的值，并以roundingMode指定的四舍五入的形式保留scale位小数返回最终的结果
+	 * 计算number1 ÷  number2的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number1
+	 * @param number2
+	 * @param roundingMode
+	 * @return
+	 */
+	public static BigDecimal divide(Number number1, Number number2, RoundingMode roundingMode) {
+		return divide(number1, number2, 0, roundingMode);
+	}
+	
+	/**
+	 * 计算number1 ÷  number2的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number1
 	 * @param number2
@@ -1536,18 +1943,14 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static BigDecimal divide(Number number1, Number number2, int scale, RoundingMode roundingMode) {
-		AssertUtils.assertNotNull(number1, "Multiplied number must not be null");
-		AssertUtils.assertNotNull(number2, "Multiplting number must not be null");
+		AssertUtils.assertNotNull(number1, "Divided number must not be null");
+		AssertUtils.assertNotNull(number2, "Dividing number must not be null");
 		
 		BigDecimal decimal1 = toBigDecimal(number1);
 		BigDecimal decimal2 = toBigDecimal(number2);
 		return decimal1.divide(decimal2, scale, roundingMode != null ? roundingMode : RoundingMode.DOWN);
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(divide(10, 1.1));
-	}
-			
 	/**
 	 * 将字符ASCII码转化为指定格式的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
