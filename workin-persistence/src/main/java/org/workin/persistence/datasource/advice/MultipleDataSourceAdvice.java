@@ -36,7 +36,6 @@ public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceAdvice {
 
 	@Override
 	protected void doBeforeTask(Method method, Object[] args, Object target) {
-		System.out.println(target);
 		String methodName = method.getName();
 		// 根据方法名称来获取对应的数据源
 		Object dataSource = multipleDataSourceManager.getDataSource(methodName);

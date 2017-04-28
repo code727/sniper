@@ -28,8 +28,8 @@ import org.workin.commons.util.NumberUtils;
 public class MultipleDataSourceRandomSelector implements MultipleDataSourceSelector {
 
 	@Override
-	public String select(String[] sourceNames) {
-		return sourceNames.length != 1 ? sourceNames[NumberUtils.randomIn(sourceNames.length)] : sourceNames[0];
+	public Object select(Object[] sources) {
+		return sources.length != 1 ? sources[NumberUtils.randomIn(sources.length)] : sources[0];
 	}
 	
 }

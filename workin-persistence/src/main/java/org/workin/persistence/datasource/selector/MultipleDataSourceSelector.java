@@ -26,11 +26,11 @@ package org.workin.persistence.datasource.selector;
 public interface MultipleDataSourceSelector {
 	
 	/**
-	 * 从指定的多个源名称数组中选择并返回一个元素值
+	 * 从指定的多个源数组中选择并返回一个元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sourceNames
+	 * @param sources
 	 * @return
 	 */
-	public String select(String[] sourceNames);
+	public Object select(Object[] sources);
 
 }

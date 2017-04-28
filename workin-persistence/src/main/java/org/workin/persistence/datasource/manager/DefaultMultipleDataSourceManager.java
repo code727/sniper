@@ -18,13 +18,14 @@
 
 package org.workin.persistence.datasource.manager;
 
-import java.util.Iterator;
+import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.workin.commons.util.ArrayUtils;
+import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.persistence.datasource.selector.MultipleDataSourceRandomSelector;
@@ -41,11 +42,11 @@ public class DefaultMultipleDataSourceManager extends CheckableInitializingBeanA
 		
 	protected final Logger logger;
 	
-	/** 维护模式与数据源名称之间的关系 */
-	private Map<String, String> patternAndDataSource;
+	/** 目标模式与数据源名称之间的关系 */
+	private Map<String, String> patternNames;
 	
-	/** 维护模式多个数据源名称之间的关系 */
-	private Map<String, String[]> patternAndNames;
+	/** 目标模式与多个数据源之间的关系 */
+	private Map<String, Object[]> patternDataSources;
 	
 	/** 多数据源选择器 */
 	private MultipleDataSourceSelector multipleDataSourceSelector;
@@ -54,14 +55,22 @@ public class DefaultMultipleDataSourceManager extends CheckableInitializingBeanA
 		logger = LoggerFactory.getLogger(getClass());
 	}
 	
-	public Map<String, String> getPatternAndDataSource() {
-		return patternAndDataSource;
+	public Map<String, String> getPatternNames() {
+		return patternNames;
 	}
 
-	public void setPatternAndDataSource(Map<String, String> patternAndDataSource) {
-		this.patternAndDataSource = patternAndDataSource;
+	public void setPatternNames(Map<String, String> patternNames) {
+		this.patternNames = patternNames;
 	}
-	
+
+	public Map<String, Object[]> getPatternDataSources() {
+		return patternDataSources;
+	}
+
+	public void setPatternDataSources(Map<String, Object[]> patternDataSources) {
+		this.patternDataSources = patternDataSources;
+	}
+
 	public MultipleDataSourceSelector getMultipleDataSourceSelector() {
 		return multipleDataSourceSelector;
 	}
@@ -70,62 +79,62 @@ public class DefaultMultipleDataSourceManager extends CheckableInitializingBeanA
 		this.multipleDataSourceSelector = multipleDataSourceSelector;
 	}
 	
-	public Map<String, String[]> getPatternAndNames() {
-		return patternAndNames;
-	}
-
 	@Override
 	protected void checkProperties() {
-		if (MapUtils.isEmpty(patternAndDataSource))
-			throw new IllegalArgumentException("Property 'patternAndDataSource' is required");
+		// patternNames和patternDataSources至少有一项不能空
+		if (MapUtils.isEmpty(patternNames) && MapUtils.isEmpty(patternDataSources))
+			throw new IllegalArgumentException("Property 'patternNames' or 'patternDataSources' is required");
 	}
 	
 	@Override
 	protected void init() throws Exception {
+		Date start = new Date();
+		
 		/* 多数据源选择器为空时，默认为随机选择器 */
 		if (multipleDataSourceSelector == null)
-			this.multipleDataSourceSelector = new MultipleDataSourceRandomSelector();
+			multipleDataSourceSelector = new MultipleDataSourceRandomSelector();
 		
-		/* 将方法名称和数据源名称转换成一对多的关系 */
-		this.patternAndNames = MapUtils.newLinkedHashMap();
-		Iterator<Entry<String, String>> iterator = getPatternAndDataSource().entrySet().iterator();
-		while (iterator.hasNext()) {
-			Entry<String, String> entry = iterator.next();
-			this.patternAndNames.put(entry.getKey(), ArrayUtils.rbte(entry.getValue().split(",")));
-		}
+		if (MapUtils.isEmpty(patternDataSources)) 
+			patternDataSources = MapUtils.newLinkedHashMap();
 		
-		initializeLog();
+		/* 将模式和数据源名称转换成一对多的关系 */
+		for (Entry<String, String> pattern : patternNames.entrySet()) 
+			this.patternDataSources.put(pattern.getKey(), ArrayUtils.rbte(pattern.getValue().split(",")));
+		
+		initializeLog(start);
 	}
 	
 	/**
 	 * 打印初始化log
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	protected void initializeLog() {
+	protected void initializeLog(Date start) {
 		StringBuilder message = new StringBuilder();
-		Iterator<Entry<String, String>> iterator = patternAndDataSource.entrySet().iterator();
-		while (iterator.hasNext()) {
-			Entry<String, String> next = iterator.next();
-			message.append(next.getKey()).append("=").append(next.getValue()).append("\n");
-		}
+		for (Entry<String, Object[]> entry : patternDataSources.entrySet()) 
+			message.append(entry.getKey()).append("=").append(ArrayUtils.join(entry.getValue(), ",")).append("\n");
 		
-		logger.info("Success initialize method pattern and datasource name:\n{}", message);
+		logger.info("Success initialize pattern and datasources on {}ms:\n{}",
+				DateUtils.getIntervalMillis(new Date(), start), message);
 	}
 	
+	/**
+	 * 根据参数匹配模式后获取对应的数据源
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param parameter
+	 * @return
+	 */
 	@Override
 	public Object getDataSource(Object parameter) {
-		for (String pattern : patternAndNames.keySet()) {
-			// 字符串型参数匹配模式
-			if (StringUtils.simpleMatch(pattern, parameter.toString())) {
-				String[] sourceNames = patternAndNames.get(pattern);
-				if (ArrayUtils.isNotEmpty(sourceNames))
-					return multipleDataSourceSelector.select(sourceNames);
-				
-				continue;
+		for (Entry<String, Object[]> entry : patternDataSources.entrySet()) {
+			/* 模式与参数字符串匹配时，从当前模式对应的多个数据源中选择一个后返回结果 */
+			if (StringUtils.simpleMatch(entry.getKey(), parameter.toString())) {
+				Object[] sources = entry.getValue();
+				if (ArrayUtils.isNotEmpty(sources))
+					return multipleDataSourceSelector.select(sources);
 			}
 		}
 		
-		return null;
+		return null;		
 	}
 	
 }
