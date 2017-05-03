@@ -35,10 +35,13 @@ public class NumberUtils {
 	public static final String CURRENCY_FORMAT = "#,##0.00";
 	
 	/** 百分比格式 */
-	public static final String PERCENT_FORMAT = "%";
+	public static final String PERCENT_FORMAT = "#%";
 	
 	/** 模式与格式对象关系映射集线程局部变量 */
-	private static final ThreadLocal<Map<String, DecimalFormat>> decimalFormats = new ThreadLocal<Map<String, DecimalFormat>>();
+//	private static final ThreadLocal<Map<String, DecimalFormat>> decimalFormats = new ThreadLocal<Map<String, DecimalFormat>>();
+	
+	/** 全局模模式与格式对象关系映射集 */
+	private static final Map<String, DecimalFormat> decimalFormats = MapUtils.newConcurrentHashMap();
 	
 	/** 奇数映射组 */
 	private static Map<Character, Integer> ODD_NUMBERS;
@@ -64,23 +67,33 @@ public class NumberUtils {
 	}
 		
 	/**
-	 * 根据指定的模式在当前线程的局部变量中获取已定义的数字格式对象
+	 * 根据指定的模式获取已定义的数字格式对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @return
 	 */
+//	public static DecimalFormat getDecimalFormat(String pattern) {
+//		Map<String, DecimalFormat> formateMap = decimalFormats.get();
+//		
+//		if (formateMap == null)
+//			formateMap = MapUtils.newConcurrentHashMap();
+//		
+//		DecimalFormat decimalFormat = formateMap.get(pattern);
+//		if (decimalFormat == null) {
+//			decimalFormat = new DecimalFormat(pattern);
+//			formateMap.put(pattern, decimalFormat);
+//			decimalFormats.set(formateMap);
+//		}
+//		return decimalFormat;
+//	}
+	
 	public static DecimalFormat getDecimalFormat(String pattern) {
-		Map<String, DecimalFormat> formateMap = decimalFormats.get();
-		
-		if (formateMap == null)
-			formateMap = MapUtils.newConcurrentHashMap();
-		
-		DecimalFormat decimalFormat = formateMap.get(pattern);
+		DecimalFormat decimalFormat = decimalFormats.get(pattern);
 		if (decimalFormat == null) {
 			decimalFormat = new DecimalFormat(pattern);
-			formateMap.put(pattern, decimalFormat);
-			decimalFormats.set(formateMap);
+			decimalFormats.put(pattern, decimalFormat);
 		}
+		
 		return decimalFormat;
 	}
 	
@@ -406,14 +419,24 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static BigDecimal toBigDecimal(Object obj, BigDecimal defaultValue) {
-		if (obj == null || !(obj instanceof Number)) {
+		if (obj == null || !(obj instanceof Number) && !RegexUtils.isNumber(obj.toString())) {
 			AssertUtils.assertNotNull(defaultValue, "Default big decimal must not be null.");
 			return defaultValue;
 		}
 		
 		return obj instanceof BigDecimal ? (BigDecimal)obj : new BigDecimal(obj.toString());
 	}
-	
+		
+	/**
+	 * 将数字对象统一转换为BigDecimal
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @return
+	 */
+	public static BigDecimal toBigDecimal(Number number) {
+		return (number instanceof BigDecimal) ? (BigDecimal) number : new BigDecimal(number.toString());
+	}
+		
 	/**
 	 * 将数字对象转换为BigInteger，否则返回0
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -432,14 +455,14 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static BigInteger toBigInteger(Object obj, BigInteger defaultValue) {
-		if (obj == null || !(obj instanceof Number)) {
+		if (obj == null || !(obj instanceof Number) && !RegexUtils.isNumber(obj.toString())) {
 			AssertUtils.assertNotNull(defaultValue, "Default big integer must not be null.");
 			return defaultValue;
 		}
 		
 		return obj instanceof BigInteger ? (BigInteger)obj : new BigInteger(obj.toString());
 	}
-	
+		
 	/**
 	 * 生成指定值之内的随机双精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -1971,7 +1994,8 @@ public class NumberUtils {
 	 */
 	public static String format(Number number, String pattern) {
 		AssertUtils.assertNotNull(number, "Formated number must not be null.");
-		AssertUtils.assertTrue(StringUtils.isNotBlank(pattern), "Integer pattern must not be null or blank.");
+		AssertUtils.assertTrue(StringUtils.isNotBlank(pattern), "Number pattern must not be null or blank.");
+		
 		return getDecimalFormat(pattern).format(number);
 	}
 	
@@ -2084,15 +2108,5 @@ public class NumberUtils {
 		char lastNumber = number.charAt(number.length() - 1);
 		return EVEN_NUMBERS.containsKey(lastNumber);
 	}
-	
-	/**
-	 * 将数字对象统一转换为BigDecimal
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param number
-	 * @return
-	 */
-	public static BigDecimal toBigDecimal(Number number) {
-		return (number instanceof BigDecimal) ? (BigDecimal) number : new BigDecimal(number.toString());
-	}
-			
+		
 }

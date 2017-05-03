@@ -37,17 +37,11 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 	protected T maximum;
 	
 	/** 是否左闭合 */
-	private boolean leftClose;
+	protected boolean leftClose;
 	
 	/** 是否右闭合 */
-	private boolean rightClose;
-	
-	/** 是否负无穷 */
-	private boolean minusInfinity;
-	
-	/** 是否正无穷 */
-	private boolean positiveInfinity;
-	
+	protected boolean rightClose;
+		
 	/**
 	 * 构建正负无穷的开区间(-∞,+∞)
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
@@ -110,20 +104,16 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 	protected AbstractInterval(String name, T minimal, T maximum, boolean leftClose, boolean rightClose) {
 		
 		/* 最小值为空，表示区间为负无穷的
-		 * 因此需要将左闭合区间标志强制设置为false,负无穷标志设置为true 
+		 * 因此需要将左闭合区间标志强制设置为false
 		 * 未来可能修改为当leftClose为true时抛异常*/
-		if (minimal == null) {
+		if (minimal == null) 
 			leftClose = false;
-			minusInfinity = true;
-		}
 		
-		/* 最小值为空，表示区间为正无穷的
-		 * 因此需要将右闭合区间标志强制设置为false,正无穷标志为true 
+		/* 最大值为空，表示区间为正无穷的
+		 * 因此需要将右闭合区间标志强制设置为false
 		 * 未来可能修改为当rightClose为true时抛异常*/
-		if (maximum == null) {
+		if (maximum == null)
 			rightClose = false;
-			positiveInfinity = true;
-		}
 		
 		this.name = name;
 		this.leftClose = leftClose;
@@ -131,7 +121,7 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 		
 		/* 整个区间有一边是无穷的，说明最小值和最大值至少有一个为空，直接完成设置即可 
 		 * 否则应该在自定义初始化方法中进行更为具体的设置 */
-		if (minusInfinity || positiveInfinity) {
+		if (isMinusInfinity() || isPositiveInfinity()) {
 			this.minimal = minimal;
 			this.maximum = maximum;
 		} else 
@@ -200,12 +190,12 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 	
 	@Override
 	public boolean isMinusInfinity() {
-		return minimal == null || minusInfinity;
+		return minimal == null;
 	}
 
 	@Override
 	public boolean isPositiveInfinity() {
-		return maximum == null || positiveInfinity;
+		return maximum == null;
 	}
 	
 	/**

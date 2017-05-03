@@ -152,23 +152,39 @@ public class NumberInterval extends AbstractInterval<Number> {
 	}
 	
 	@Override
-	public void offset(Object offset) {
-		if (offset == null || !(offset instanceof Number) && !RegexUtils.isNumber(offset.toString()))
-			return;
+	public Interval<Number> offset(Object offset) {		
+		BigDecimal decimal = NumberUtils.toBigDecimal(offset);
+		if (!NumberUtils.equals(decimal, 0)) {
+			if (!this.isMinusInfinity())
+				this.minimal = NumberUtils.add(this.minimal, decimal);
+			
+			if (!this.isPositiveInfinity())
+				this.maximum = NumberUtils.add(this.maximum, decimal);
+		}
 		
-		BigDecimal offsetDecimal;
-		if (offset instanceof BigDecimal) 
-			offsetDecimal = (BigDecimal) offset;
-		else
-			offsetDecimal = new BigDecimal(offset.toString());
-		
-		if (NumberUtils.equals(offsetDecimal, 0))
-			return;
-		
-		// TODO Auto-generated method stub
-		
+		return this;
 	}
 	
+	@Override
+	public Interval<Number> offset(Interval<Number> interval) {
+		if (interval != null) {
+			this.leftClose = interval.isLeftClose();
+			this.rightClose = interval.isRightClose();
+			
+			if (this.isMinusInfinity() || interval.isMinusInfinity()) 
+				this.minimal = interval.getMinimal();
+			else 
+				this.minimal = NumberUtils.add(this.minimal, interval.getMinimal());
+			
+			if (this.isPositiveInfinity() || interval.isPositiveInfinity()) 
+				this.maximum = interval.getMaximum();
+			else
+				this.maximum = NumberUtils.add(this.maximum, interval.getMaximum());
+		}
+		
+		return this;
+	}
+		
 	/**
 	 * 创建一个左开区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

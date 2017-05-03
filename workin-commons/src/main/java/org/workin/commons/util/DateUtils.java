@@ -20,7 +20,6 @@ package org.workin.commons.util;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -302,6 +301,22 @@ public class DateUtils {
 	}
 	
 	/**
+	 * 判断是否为同一天
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param c1
+	 * @param c2
+	 * @return
+	 */
+	public static boolean isSameDay(Calendar c1, Calendar c2) {
+		if (c1 == null || c2 == null)
+			return false;
+		
+		return (c1.get(Calendar.ERA) == c2.get(Calendar.ERA) &&
+				c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR) &&
+                c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR));
+	}
+	
+	/**
 	 * 判断两个日期是否为同一天
 	 * @author <a href="mailto:code727@gmail.com">杜斌(Daniele)</a> 
 	 * @param now
@@ -312,7 +327,11 @@ public class DateUtils {
 		if (now == null || then == null)
 			return false;
 		
-		return getIntervalMillis(now, then) / UM_MS.get("day") == 0;
+		Calendar c1 = Calendar.getInstance();
+		c1.setTime(now);
+        Calendar c2 = Calendar.getInstance();
+        c2.setTime(then);
+        return isSameDay(c1, c2);
 	}
 	
 	/**
@@ -485,7 +504,7 @@ public class DateUtils {
 	 * 根据生日获取星座
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param birthday
-	 * @return 星座类型,,从0至11依次为白羊座至双鱼座
+	 * @return 星座类型,从0至11依次为白羊座至双鱼座
 	 */
 	public static int getHoroscopeByBirthday(Date birthday) {
 		int type = -1; 
@@ -564,113 +583,145 @@ public class DateUtils {
 	}
 	
 	/**
-	 * 获取指定日期这周内每一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param now
-	 * @return
-	 */
-	public static Date[] getEveryDayOfWeek(Date date) {
-		AssertUtils.assertNotNull(date, "Date object can not be null.");
-		Calendar calendar = Calendar.getInstance();
-		calendar.setFirstDayOfWeek(Calendar.MONDAY);
-		calendar.setTime(date);
-		// 本周第一天(星期天)的字段编号
-		int day = calendar.getFirstDayOfWeek();
-		Date []dayOfWeek = new Date[7];
-		for (int i = 0; i < 7; i++) {
-			calendar.set(Calendar.DAY_OF_WEEK, day++);
-			dayOfWeek[i] = calendar.getTime();
-		}
-		return dayOfWeek;
-	}
-	
-	/**
-	 * 判断指定的日期是否为一个周末
+	 * 判断指定的日期是否为一个周末(每周最后一天)
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @return
 	 */
 	public static boolean isWeekend(Date date) {
+		return isWeekend(date, Calendar.MONDAY);
+	}
+	
+	/**
+	 * 判断指定的日期是否为一个周末(每周最后一天)
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param firstDayOfWeek 周的星期几为第一天
+	 * @return
+	 */
+	public static boolean isWeekend(Date date, int firstDayOfWeek) {
 		if (date == null)
 			return false;
 		
 		Calendar calendar = Calendar.getInstance();
+		calendar.setFirstDayOfWeek(firstDayOfWeek);
 		calendar.setTime(date);
-		// 当前日期在本周的字段编号
-		int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
-		return currentDay == Calendar.SATURDAY || currentDay == Calendar.SUNDAY;
-	}
 		
+		int day = calendar.getFirstDayOfWeek();
+		calendar.set(Calendar.DAY_OF_WEEK, day + 6);
+		return isSameDay(calendar.getTime(), date);
+	}
+				
 	/**
-	 * 获取指定日期所在周的周末
+	 * 累加到指定日期第几年以前或以后的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
+	 * @param amount 距离指定日期之前(负数)或之后(正数)的年数
 	 * @return
 	 */
-	public static Date[] getWeekend(Date date) {
-		AssertUtils.assertNotNull(date, "Date object can not be null.");
-		Date[] dates = new Date[2];
-		Calendar calendar = Calendar.getInstance();
-		calendar.setFirstDayOfWeek(Calendar.MONDAY);
-		calendar.setTime(date);
-		calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-		dates[0] = calendar.getTime();
-		calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		dates[1] = calendar.getTime();
-		return dates;
+	public static Date addYears(Date date, int amount) {
+		return add(date, Calendar.YEAR, amount);
 	}
 	
 	/**
-	 * 获取指定日期所在周内第几天的日期
+	 * 累加到指定日期第几个月以前或以后的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
-	 * @param weekday
+	 * @param amount 距离指定日期之前(负数)或之后(正数)的月数
 	 * @return
 	 */
-	public static Date getDayOfWeek(Date date, int weekday) {
-		AssertUtils.assertNotNull(date, "Date object can not be null.");
+	public static Date addMonths(Date date, int amount) {
+		return add(date, Calendar.MONTH, amount);
+	}
+	
+	/**
+	 * 累加到指定日期第几天以前或以后的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param amount 距离指定日期之前(负数)或之后(正数)的天数
+	 * @return
+	 */
+	public static Date addDays(Date date, int amount) {
+		return add(date, Calendar.DAY_OF_YEAR, amount);
+	}
+	
+	/**
+	 * 累加到指定日期第几小时以前或以后的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param amount 距离指定日期之前(负数)或之后(正数)的小时数
+	 * @return
+	 */
+	public static Date addHours(Date date, int amount) {
+		return add(date, Calendar.HOUR_OF_DAY, amount);
+	}
+	
+	/**
+	 * 累加到指定日期第几分钟以前或以后的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param amount 距离指定日期之前(负数)或之后(正数)的分钟数
+	 * @return
+	 */
+	public static Date addMinutes(Date date, int amount) {
+        return add(date, Calendar.MINUTE, amount);
+    }
+	
+	/**
+	 * 累加到指定日期第几秒以前或以后的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param amount 距离指定日期之前(负数)或之后(正数)的秒数
+	 * @return
+	 */
+	public static Date addSeconds(Date date, int amount) {
+		return add(date, Calendar.SECOND, amount);
+	}
+	
+	/**
+	 * 累加到指定日期第几毫秒以前或以后的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param amount 距离指定日期之前(负数)或之后(正数)的毫秒数
+	 * @return
+	 */
+	public static Date addMilliseconds(Date date, int amount) {
+		return add(date, Calendar.MILLISECOND, amount);
+	}
+	
+	/**
+	 * 在calendarField范围内将date增加amount个偏移
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param calendarField
+	 * @param amount 距离指定日期之前(负数)或之后(正数)的偏移量
+	 * @return
+	 */
+	public static Date add(Date date, int calendarField, int amount) {
+		AssertUtils.assertNotNull(date, "Date object can not be null");
+
 		Calendar calendar = Calendar.getInstance();
-		calendar.setFirstDayOfWeek(Calendar.MONDAY);
 		calendar.setTime(date);
-		if (weekday > 0)
-			calendar.set(Calendar.DAY_OF_WEEK, weekday + 1);
-		else
-			// 本周第一天
-			calendar.set(Calendar.DAY_OF_WEEK, 2);
+		calendar.add(calendarField, amount);
 		return calendar.getTime();
 	}
 	
 	/**
-	 * 获取在指定日期第几天以前或以后的日期
+	 * 昨天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param date
-	 * @param offset 距离指定日期之前(负数)或之后(正数)的天数
 	 * @return
 	 */
-	public static Date getOffsetDay(Date date, int offset) {
-		AssertUtils.assertNotNull(date, "Date object can not be null.");
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		calendar.add(Calendar.DAY_OF_YEAR, offset);
-		return calendar.getTime();
+	public static Date yesterday(){
+		return addDays(new Date(), -1);
 	}
 	
 	/**
-	 * 获取昨天的日期
+	 * 明天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static Date getYesterday(){
-		return getOffsetDay(new Date(), -1);
-	}
-	
-	/**
-	 * 获取明天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public static Date getTomorrow(){
-		return getOffsetDay(new Date(), 1);
+	public static Date tomorrow(){
+		return addDays(new Date(), 1);
 	}
 	
 	/**
@@ -682,7 +733,10 @@ public class DateUtils {
 	public static boolean isLeapYear(Date date) {
 		if (date == null)
 			return false;
-		return isLeapYear(Integer.valueOf(dateToString(date, "yyyy")));
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return isLeapYear(calendar.get(Calendar.YEAR));
 	}
 	
 	/**
@@ -732,7 +786,6 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Date[] getLeapYears(Date start, Date end) {
-		
 		if (start == null)
 			return isLeapYear(end) ? new Date[] { end } : new Date[] {};
 		if (end == null)
@@ -745,14 +798,80 @@ public class DateUtils {
 		
 		int offset = Math.abs(startYear - endYear);
 		int year = Math.min(startYear, endYear);
-		List<Date> leapYears = new ArrayList<Date>();
+		List<Date> leapYears = CollectionUtils.newArrayList();
 		do {
 			if (isLeapYear(year))
 				leapYears.add(stringToDate(String.valueOf(year), DEFAULT_YEAR_FORMAT));
+			
 			year++;
 			offset--;
 		} while (offset > -1);
+		
 		return leapYears.toArray(new Date[] {});
+	}
+	
+	/**
+	 * 获取当前日期这周内的每一天
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static List<Date> everyDayOfWeek() {
+		return everyDayOfWeek(Calendar.MONDAY);
+	}
+	
+	/**
+	 * 获取当前日期这周内的每一天
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param firstDayOfWeek 周的星期几为第一天
+	 * @return
+	 */
+	public static List<Date> everyDayOfWeek(int firstDayOfWeek) {
+		return everyDayOfWeek(new Date(), firstDayOfWeek);
+	}
+	
+	/**
+	 * 获取指定日期这周内的每一天
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param now
+	 * @return
+	 */
+	public static List<Date> everyDayOfWeek(Date date) {
+		return everyDayOfWeek(date, Calendar.MONDAY);
+	}
+	
+	/**
+	 * 获取指定日期这周内的每一天
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param firstDayOfWeek 周的星期几为第一天
+	 * @return
+	 */
+	public static List<Date> everyDayOfWeek(Date date, int firstDayOfWeek) {
+		AssertUtils.assertNotNull(date, "Date object can not be null");
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setFirstDayOfWeek(firstDayOfWeek);
+		calendar.setTime(date);
+		
+		int day = calendar.getFirstDayOfWeek();
+		int initialCapacity = 7;
+		
+		List<Date> list = CollectionUtils.newArrayList(initialCapacity);
+		for (int i = 0; i < initialCapacity; i++) {
+			calendar.set(Calendar.DAY_OF_WEEK, day++);
+			list.add(calendar.getTime());
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 获当前日期是星期几
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static String dayOfWeek() {
+		return dayOfWeek(new Date());
 	}
 	
 	/**
@@ -761,7 +880,7 @@ public class DateUtils {
 	 * @param now
 	 * @return
 	 */
-	public static String getDayOfWeek(Date now){
+	public static String dayOfWeek(Date now) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(now);
 		String result = null;
@@ -790,5 +909,60 @@ public class DateUtils {
 		}
 		return result;
 	}
+	
+	/**
+	 * 获取当前日期所在周内第几天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param weekday
+	 * @return
+	 */
+	public static Date dayOfWeek(int weekday) {
+		return dayOfWeek(new Date(), weekday);
+	}
+	
+	/**
+	 * 获取当前日期所在周内第几天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param weekday
+	 * @param firstDayOfWeek 周的星期几为第一天
+	 * @return
+	 */
+	public static Date dayOfWeek(int weekday, int firstDayOfWeek) {
+		return dayOfWeek(new Date(), weekday, firstDayOfWeek);
+	}
+	
+	/**
+	 * 获取指定日期所在周内第几天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param weekday
+	 * @return
+	 */
+	public static Date dayOfWeek(Date date, int weekday) {
+		return dayOfWeek(date, weekday, Calendar.MONDAY);
+	}
+	
+	/**
+	 * 获取指定日期所在周内第几天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param weekday
+	 * @param firstDayOfWeek 周的星期几为第一天
+	 * @return
+	 */
+	public static Date dayOfWeek(Date date, int weekday, int firstDayOfWeek) {
+		AssertUtils.assertNotNull(date, "Date object can not be null");
 		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setFirstDayOfWeek(firstDayOfWeek);
+		calendar.setTime(date);
+		if (weekday > 0)
+			calendar.set(Calendar.DAY_OF_WEEK, firstDayOfWeek + weekday - 1);
+		else
+			calendar.set(Calendar.DAY_OF_WEEK, firstDayOfWeek);
+		
+		return calendar.getTime();
+	}
+	
+	
 }

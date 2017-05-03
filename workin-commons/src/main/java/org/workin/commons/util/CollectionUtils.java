@@ -83,8 +83,17 @@ public class CollectionUtils {
 	 * @return
 	 */
 	public static <T> ArrayList<T> newArrayList(Collection<? extends T> collection) {
-		return collection != null ? new ArrayList<T>(collection)
-				: new ArrayList<T>();
+		return collection != null ? new ArrayList<T>(collection) : new ArrayList<T>();
+	}
+	
+	/**
+	 * 实例化一个具备指定初始容量的ArrayList对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <T> ArrayList<T> newArrayList(int initialCapacity) {
+		return new ArrayList<T>(NumberUtils.minLimit(initialCapacity, 0));
 	}
 		
 	/**
@@ -126,6 +135,16 @@ public class CollectionUtils {
 	}
 	
 	/**
+	 * 实例化一个具备指定初始容量的HashSet对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <T> HashSet<T> newHashSet(int initialCapacity) {
+		return new HashSet<T>(NumberUtils.minLimit(initialCapacity, 0));
+	}
+	
+	/**
 	 * 实例化一个LinkedHashSet对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
@@ -142,6 +161,16 @@ public class CollectionUtils {
 	 */
 	public static <T> LinkedHashSet<T> newLinkedHashSet(Collection<? extends T> collection) {
 		return collection != null ? new LinkedHashSet<T>(collection) : new LinkedHashSet<T>();
+	}
+	
+	/**
+	 * 实例化一个具备指定初始容量的LinkedHashSet对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <T> LinkedHashSet<T> newLinkedHashSet(int initialCapacity) {
+		return new LinkedHashSet<T>(NumberUtils.minLimit(initialCapacity, 0));
 	}
 	
 	/**
@@ -164,6 +193,27 @@ public class CollectionUtils {
 	}
 	
 	/**
+	 * 实例化一个具备指定初始容量的Vector对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <T> Vector<T> newVector(int initialCapacity) {
+		return newVector(initialCapacity, 0);
+	}
+	
+	/**
+	 * 实例化一个具备指定初始容量和增长系数的Vector对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @param capacityIncrement
+	 * @return
+	 */
+	public static <T> Vector<T> newVector(int initialCapacity, int capacityIncrement) {
+		return new Vector<T>(NumberUtils.minLimit(initialCapacity, 0), NumberUtils.minLimit(capacityIncrement, 0));
+	}
+	
+	/**
 	 * 实例化一个ArrayDeque对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
@@ -183,6 +233,16 @@ public class CollectionUtils {
 	}
 	
 	/**
+	 * 实例化一个具备指定初始容量的ArrayDeque对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <T> ArrayDeque<T> newArrayDeque(int initialCapacity) {
+		return new ArrayDeque<T>(NumberUtils.minLimit(initialCapacity, 0));
+	}
+	
+	/**
 	 * 实例化一个PriorityQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
@@ -199,6 +259,16 @@ public class CollectionUtils {
 	 */
 	public static <T> PriorityQueue<T> newPriorityQueue(Collection<? extends T> collection) {
 		return collection != null ? new PriorityQueue<T>(collection) : new PriorityQueue<T>();
+	}
+	
+	/**
+	 * 实例化一个具备指定初始容量的PriorityQueue对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <T> PriorityQueue<T> newPriorityQueue(int initialCapacity) {
+		return new PriorityQueue<T>(NumberUtils.minLimit(initialCapacity, 0));
 	}
 	
 	/**
@@ -228,18 +298,83 @@ public class CollectionUtils {
 	public static <T> ArrayBlockingQueue<T> newArrayBlockingQueue() {
 		return newArrayBlockingQueue(null);
 	}
-		
+	
 	/**
 	 * 根据指定的集合实例化一个ArrayBlockingQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param collection
+	 * @param collection 加入阻塞队列的集合
 	 * @return
 	 */
 	public static <T> ArrayBlockingQueue<T> newArrayBlockingQueue(Collection<? extends T> collection) {
-		return isNotEmpty(collection) ? new ArrayBlockingQueue<T>(collection.size(), false, collection)
-				: new ArrayBlockingQueue<T>(16);
+		return newArrayBlockingQueue(false, collection);
 	}
 	
+	/**
+	 * 实例化一个具备指定初始容量的ArrayBlockingQueue对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <T> ArrayBlockingQueue<T> newArrayBlockingQueue(int initialCapacity) {
+		return newArrayBlockingQueue(initialCapacity, false);
+	}
+	
+	/**
+	 * 实例化一个ArrayBlockingQueue对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param fair 如果为true则阻塞线程的队列访问，插入或删除，按FIFO顺序处理。否则访问顺序不固定
+	 * @return
+	 */
+	public static <T> ArrayBlockingQueue<T> newArrayBlockingQueue(boolean fair) {
+		return newArrayBlockingQueue(0, fair);
+	}
+	
+	/**
+	 * 实例化一个ArrayBlockingQueue对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param fair 如果为true则阻塞线程的队列访问，插入或删除，按FIFO顺序处理。否则访问顺序不固定
+	 * @param collection 加入阻塞队列的集合
+	 * @return
+	 */
+	public static <T> ArrayBlockingQueue<T> newArrayBlockingQueue(boolean fair, Collection<? extends T> collection) {
+		return newArrayBlockingQueue(0, fair, collection);
+	}
+	
+	/**
+	 * 实例化一个具备指定初始容量的ArrayBlockingQueue对象，但实际容量不会小于指定集合的容量
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @param collection 加入阻塞队列的集合
+	 * @return
+	 */
+	public static <T> ArrayBlockingQueue<T> newArrayBlockingQueue(int initialCapacity, Collection<? extends T> collection) {
+		return newArrayBlockingQueue(initialCapacity, false, collection);
+	}
+	
+	/**
+	 * 实例化一个具备指定初始容量的ArrayBlockingQueue对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @param fair 如果为true则阻塞线程的队列访问，插入或删除，按FIFO顺序处理。否则访问顺序不固定
+	 * @return
+	 */
+	public static <T> ArrayBlockingQueue<T> newArrayBlockingQueue(int initialCapacity, boolean fair) {
+		return newArrayBlockingQueue(initialCapacity, fair, null);
+	}
+	
+	/**
+	 * 实例化一个具备指定初始容量的ArrayBlockingQueue对象，但实际容量不会小于指定集合的容量
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @param fair 如果为true则阻塞线程的队列访问，插入或删除，按FIFO顺序处理。否则访问顺序不固定
+	 * @param collection 加入阻塞队列的集合
+	 * @return
+	 */
+	public static <T> ArrayBlockingQueue<T> newArrayBlockingQueue(int initialCapacity, boolean fair, Collection<? extends T> collection) {
+		return collection != null ? new ArrayBlockingQueue<T>(NumberUtils.minLimit(initialCapacity, NumberUtils.minLimit(collection.size(), 1)), fair, collection)
+				: new ArrayBlockingQueue<T>(NumberUtils.minLimit(initialCapacity, 1), fair);
+	}
+		
 	/**
 	 * 实例化一个LinkedBlockingQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -279,6 +414,16 @@ public class CollectionUtils {
 	}
 	
 	/**
+	 * 实例化一个具备指定初始容量的LinkedBlockingDeque对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <T> LinkedBlockingDeque<T> newLinkedBlockingDeque(int initialCapacity) {
+		return newLinkedBlockingDeque(NumberUtils.minLimit(initialCapacity, 1));
+	}
+	
+	/**
 	 * 实例化一个PriorityBlockingQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
@@ -298,12 +443,32 @@ public class CollectionUtils {
 	}
 	
 	/**
+	 * 实例化一个具备指定初始容量的PriorityBlockingQueue对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param initialCapacity
+	 * @return
+	 */
+	public static <T> PriorityBlockingQueue<T> newPriorityBlockingQueue(int initialCapacity) {
+		return new PriorityBlockingQueue<T>(NumberUtils.minLimit(initialCapacity, 1));
+	}
+	
+	/**
 	 * 实例化一个SynchronousQueue对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public static <T> SynchronousQueue<T> newSynchronousQueue() {
-		return new SynchronousQueue<T>();
+		return newSynchronousQueue(false);
+	}
+	
+	/**
+	 * 实例化一个SynchronousQueue对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param fair
+	 * @return
+	 */
+	public static <T> SynchronousQueue<T> newSynchronousQueue(boolean fair) {
+		return new SynchronousQueue<T>(fair);
 	}
 	
 	/**
@@ -331,7 +496,7 @@ public class CollectionUtils {
 	 * @return
 	 */
 	public static <T> ConcurrentLinkedDeque<T> newConcurrentLinkedDeque() {
-		return new ConcurrentLinkedDeque<T>();
+		return newConcurrentLinkedDeque(null);
 	}
 	
 	/**
@@ -341,7 +506,7 @@ public class CollectionUtils {
 	 * @return
 	 */
 	public static <T> ConcurrentLinkedDeque<T> newConcurrentLinkedDeque(Collection<? extends T> collection) {
-		return new ConcurrentLinkedDeque<T>(collection);
+		return collection != null ? new ConcurrentLinkedDeque<T>(collection) : new ConcurrentLinkedDeque<T>(collection);
 	}
 	
 	/**
