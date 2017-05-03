@@ -524,7 +524,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最小极限值
+	 * 将指定值限定在最小范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param d
 	 * @param limit
@@ -535,7 +535,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最小极限值
+	 * 将指定值限定在最小范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param f
 	 * @param limit
@@ -546,7 +546,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最小极限值
+	 * 将指定值限定在最小范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param i
 	 * @param limit
@@ -557,7 +557,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最小极限值
+	 * 将指定值限定在最小范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param l
 	 * @param limit
@@ -568,7 +568,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最小极限值
+	 * 将指定值限定在最小范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param s
 	 * @param limit
@@ -579,7 +579,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最小极限值
+	 * 将指定值限定在最小范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param b
 	 * @param limit
@@ -590,7 +590,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最小极限值
+	 * 将指定值限定在最小范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c
 	 * @param limit
@@ -601,7 +601,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最大极限值
+	 * 将指定值限定在最大范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param d
 	 * @param limit
@@ -612,7 +612,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最大极限值
+	 * 将指定值限定在最大范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param f
 	 * @param limit
@@ -623,7 +623,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最大极限值
+	 * 将指定值限定在最大范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param i
 	 * @param limit
@@ -634,7 +634,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最大极限值
+	 * 将指定值限定在最大范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param l
 	 * @param limit
@@ -645,7 +645,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最大极限值
+	 * 将指定值限定在最大范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param s
 	 * @param limit
@@ -656,7 +656,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最大极限值
+	 * 将指定值限定在最大范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param b
 	 * @param limit
@@ -667,7 +667,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 求指定值的最大极限值
+	 * 将指定值限定在最大范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param c
 	 * @param limit
@@ -677,6 +677,97 @@ public class NumberUtils {
 		return c > limit ? limit : c;
 	}
 	
+	/**
+	 * 将指定值限定在最小/最大范围内
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param d
+	 * @param minLimit
+	 * @param maxLimit
+	 * @return
+	 */
+	public static double rangeLimit(double d, double minLimit, double maxLimit) {
+		return !(minLimit > maxLimit) ? minLimit(maxLimit(d, maxLimit), minLimit)
+				: minLimit(maxLimit(d, minLimit), maxLimit);
+	}
+	
+	/**
+	 * 将指定值限定在最小/最大范围内
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param f
+	 * @param minLimit
+	 * @param maxLimit
+	 * @return
+	 */
+	public static float rangeLimit(float f, float minLimit, float maxLimit) {
+		return !(minLimit > maxLimit) ? minLimit(maxLimit(f, maxLimit), minLimit)
+				: minLimit(maxLimit(f, minLimit), maxLimit);
+	}
+	
+	/**
+	 * 将指定值限定在最小/最大范围内
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param i
+	 * @param minLimit
+	 * @param maxLimit
+	 * @return
+	 */
+	public static int rangeLimit(int i, int minLimit, int maxLimit) {
+		return !(minLimit > maxLimit) ? minLimit(maxLimit(i, maxLimit), minLimit)
+				: minLimit(maxLimit(i, minLimit), maxLimit);
+	}
+	
+	/**
+	 * 将指定值限定在最小/最大范围内
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param l
+	 * @param minLimit
+	 * @param maxLimit
+	 * @return
+	 */
+	public static long rangeLimit(long l, long minLimit, long maxLimit) {
+		return !(minLimit > maxLimit) ? minLimit(maxLimit(l, maxLimit), minLimit)
+				: minLimit(maxLimit(l, minLimit), maxLimit);
+	}
+	
+	/**
+	 * 将指定值限定在最小/最大范围内
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param s
+	 * @param minLimit
+	 * @param maxLimit
+	 * @return
+	 */
+	public static short rangeLimit(short s, short minLimit, short maxLimit) {
+		return !(minLimit > maxLimit) ? minLimit(maxLimit(s, maxLimit), minLimit)
+				: minLimit(maxLimit(s, minLimit), maxLimit);
+	}
+	
+	/**
+	 * 将指定值限定在最小/最大范围内
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param b
+	 * @param minLimit
+	 * @param maxLimit
+	 * @return
+	 */
+	public static byte rangeLimit(byte b, byte minLimit, byte maxLimit) {
+		return !(minLimit > maxLimit) ? minLimit(maxLimit(b, maxLimit), minLimit)
+				: minLimit(maxLimit(b, minLimit), maxLimit);
+	}
+	
+	/**
+	 * 将指定值限定在最小/最大范围内
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param c
+	 * @param minLimit
+	 * @param maxLimit
+	 * @return
+	 */
+	public static char rangeLimit(char c, char minLimit, char maxLimit) {
+		return !(minLimit > maxLimit) ? minLimit(maxLimit(c, maxLimit), minLimit)
+				: minLimit(maxLimit(c, minLimit), maxLimit);
+	}
+		
 	/**
 	 * 判断decimal是否大于指定的双精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

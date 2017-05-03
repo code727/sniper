@@ -66,6 +66,5 @@ public final class Horoscope extends AbstractLocaleEnums<Integer> {
 	
 	/** 双鱼座 */
 	public static final Horoscope PISCES = new Horoscope(11, "horoscope.type.pisces");
-	
 
 }

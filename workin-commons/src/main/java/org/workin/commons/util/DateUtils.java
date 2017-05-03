@@ -501,52 +501,49 @@ public class DateUtils {
 	}
 	
 	/**
-	 * 根据生日获取星座
+	 * 根据指定的日期获取对应的星座
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param birthday
 	 * @return 星座类型,从0至11依次为白羊座至双鱼座
 	 */
-	public static int getHoroscopeByBirthday(Date birthday) {
-		int type = -1; 
+	public static Horoscope getHoroscope(Date date) {
+		AssertUtils.assertNotNull(date, "Date object can not be null");
 		
-		if (birthday != null) {
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(birthday);
-			
-			int month = calendar.get(Calendar.MONTH) + 1;
-			int day = calendar.get(Calendar.DAY_OF_MONTH);
-			
-			double d = Double.valueOf(new StringBuffer(ObjectUtils.toString(month))
-					.append(".").append(day).toString());
-			
-			if (d >= 3.21 && d <= 4.19 ) {
-	            type = Horoscope.ARIES.getKey();
-	        } else if (d >= 4.20 && d <= 5.20) {
-	            type = Horoscope.TAURUS.getKey();
-	        } else if (d >= 5.21 && d <= 6.21) {
-	            type = Horoscope.GEMINI.getKey();
-	        } else if (d >= 6.22 && d <= 7.22) {
-	            type = Horoscope.CANCER.getKey();
-	        } else if (d >= 7.23 && d <= 8.22) {
-	            type = Horoscope.LEO.getKey();
-	        } else if (d >= 8.23 && d <= 9.22) {
-	            type = Horoscope.VIRGO.getKey();
-	        } else if (d >= 9.23 && d <= 10.23) {
-	            type = Horoscope.LIBRA.getKey();
-	        } else if (d >= 10.24 && d <= 11.22) {
-	            type = Horoscope.ACRAB.getKey();
-	        } else if (d >= 11.23 && d <= 12.21) {
-	            type = Horoscope.SAGITTARIUS.getKey();
-	        } else if ((d >= 12.22 && d <= 12.31) || (d >= 1.01 && d <= 1.19)) {
-	            type = Horoscope.CAPRICORN.getKey();
-	        } else if (d >= 1.20 && d <= 2.18) {
-	            type = Horoscope.AQUARIUS.getKey();
-	        } else if (d >= 2.19 && d <= 3.20) {
-	            type = Horoscope.PISCES.getKey();
-	        }
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int month = calendar.get(Calendar.MONTH) + 1;
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+		//  将月和日拼接成小数的形式，格式[月].[日]
+		double d = Double.valueOf(new StringBuffer(ObjectUtils.toString(month)).append(".").append(day).toString());
+		Horoscope horoscope = null;
+		if (d >= 3.21 && d <= 4.19 ) {
+			horoscope = Horoscope.ARIES;
+		} else if (d >= 4.20 && d <= 5.20) {
+			horoscope = Horoscope.TAURUS;
+		} else if (d >= 5.21 && d <= 6.21) {
+			horoscope = Horoscope.GEMINI;
+		} else if (d >= 6.22 && d <= 7.22) {
+			horoscope = Horoscope.CANCER;
+		} else if (d >= 7.23 && d <= 8.22) {
+			horoscope = Horoscope.LEO;
+		} else if (d >= 8.23 && d <= 9.22) {
+			horoscope = Horoscope.VIRGO;
+		} else if (d >= 9.23 && d <= 10.23) {
+			horoscope = Horoscope.LIBRA;
+		} else if (d >= 10.24 && d <= 11.22) {
+			horoscope = Horoscope.ACRAB;
+		} else if (d >= 11.23 && d <= 12.21) {
+			horoscope = Horoscope.SAGITTARIUS;
+		} else if ((d >= 12.22 && d <= 12.31) || (d >= 1.01 && d <= 1.19)) {
+			horoscope = Horoscope.CAPRICORN;
+		} else if (d >= 1.20 && d <= 2.18) {
+			horoscope = Horoscope.AQUARIUS;
+		} else if (d >= 2.19 && d <= 3.20) {
+			horoscope = Horoscope.PISCES;
 		}
 		
-		return type;
+		return horoscope;
 	}
 	
 	/**
@@ -822,7 +819,7 @@ public class DateUtils {
 	/**
 	 * 获取当前日期这周内的每一天
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param firstDayOfWeek 周的星期几为第一天
+	 * @param firstDayOfWeek 星期几为每周第一天
 	 * @return
 	 */
 	public static List<Date> everyDayOfWeek(int firstDayOfWeek) {
@@ -843,7 +840,7 @@ public class DateUtils {
 	 * 获取指定日期这周内的每一天
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
-	 * @param firstDayOfWeek 周的星期几为第一天
+	 * @param firstDayOfWeek 星期几为每周第一天
 	 * @return
 	 */
 	public static List<Date> everyDayOfWeek(Date date, int firstDayOfWeek) {
@@ -913,56 +910,110 @@ public class DateUtils {
 	/**
 	 * 获取当前日期所在周内第几天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param weekday
+	 * @param day
 	 * @return
 	 */
-	public static Date dayOfWeek(int weekday) {
-		return dayOfWeek(new Date(), weekday);
+	public static Date dayOfWeek(int day) {
+		return dayOfWeek(new Date(), day);
 	}
 	
 	/**
 	 * 获取当前日期所在周内第几天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param weekday
-	 * @param firstDayOfWeek 周的星期几为第一天
+	 * @param day
+	 * @param firstDayOfWeek 星期几为每周第一天
 	 * @return
 	 */
-	public static Date dayOfWeek(int weekday, int firstDayOfWeek) {
-		return dayOfWeek(new Date(), weekday, firstDayOfWeek);
+	public static Date dayOfWeek(int day, int firstDayOfWeek) {
+		return dayOfWeek(new Date(), day, firstDayOfWeek);
 	}
 	
 	/**
 	 * 获取指定日期所在周内第几天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
-	 * @param weekday
+	 * @param day
 	 * @return
 	 */
-	public static Date dayOfWeek(Date date, int weekday) {
-		return dayOfWeek(date, weekday, Calendar.MONDAY);
+	public static Date dayOfWeek(Date date, int day) {
+		return dayOfWeek(date, day, Calendar.MONDAY);
 	}
 	
 	/**
 	 * 获取指定日期所在周内第几天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
-	 * @param weekday
-	 * @param firstDayOfWeek 周的星期几为第一天
+	 * @param day
+	 * @param firstDayOfWeek 星期几为每周第一天
 	 * @return
 	 */
-	public static Date dayOfWeek(Date date, int weekday, int firstDayOfWeek) {
-		AssertUtils.assertNotNull(date, "Date object can not be null");
+	public static Date dayOfWeek(Date date, int day, int firstDayOfWeek) {
+		AssertUtils.assertNotNull(date, "Date object can not be null"); 
+		AssertUtils.assertTrue(firstDayOfWeek >= 1 && firstDayOfWeek <= 7,
+				"First day of week parameter [" + firstDayOfWeek + "] can not out of range [1 - 7]");
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setFirstDayOfWeek(firstDayOfWeek);
 		calendar.setTime(date);
-		if (weekday > 0)
-			calendar.set(Calendar.DAY_OF_WEEK, firstDayOfWeek + weekday - 1);
-		else
-			calendar.set(Calendar.DAY_OF_WEEK, firstDayOfWeek);
+		
+		day = NumberUtils.rangeLimit(firstDayOfWeek + day - 1, firstDayOfWeek, 8);
+		calendar.set(Calendar.DAY_OF_WEEK, day);
+		return calendar.getTime();
+	}
+	
+	/**
+	 * 获取当前日期所在月内第几天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param day
+	 * @return
+	 */
+	public static Date dayOfMonth(int day) {
+		return dayOfMonth(new Date(), day);
+	}
+	
+	/**
+	 * 获取指定日期所在月内第几天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param day
+	 * @return
+	 */
+	public static Date dayOfMonth(Date date, int day) {
+		int maxDays = maxDaysOfMonth(date);
+		day = NumberUtils.minLimit(NumberUtils.maxLimit(day, maxDays), 1);
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, NumberUtils.rangeLimit(day, 1, maxDays));
 		
 		return calendar.getTime();
 	}
 	
+	/**
+	 * 获取当前日期所在月的最大天数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static int maxDaysOfMonth() {
+		return maxDaysOfMonth(new Date());
+	}
 	
+	/**
+	 * 获取指定日期所在月的最大天数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @return
+	 */
+	public static int maxDaysOfMonth(Date date) {
+		AssertUtils.assertNotNull(date, "Date object can not be null");
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		// 将日期设置为当月第一天
+		calendar.set(Calendar.DATE, 1);
+		// 日期回滚一天，也就是最后一天
+		calendar.roll(Calendar.DATE, -1);
+	    return calendar.get(Calendar.DATE);  
+	}
+		
 }
