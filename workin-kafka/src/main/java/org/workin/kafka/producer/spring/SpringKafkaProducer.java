@@ -19,6 +19,7 @@
 package org.workin.kafka.producer.spring;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import org.apache.kafka.clients.producer.Producer;
@@ -29,6 +30,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.util.concurrent.SettableListenableFuture;
 import org.workin.commons.KayValuePair;
+import org.workin.kafka.exception.ProducerException;
 import org.workin.kafka.producer.KafkaProducer;
 import org.workin.kafka.producer.MessagePacket;
 import org.workin.kafka.support.ProduceResult;
@@ -72,13 +74,12 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 	
 	@Override
 	public <K, V> ProduceResult<K, V> sendDefaultAndWait(KayValuePair<K, V> pair) throws Exception {
-		return sendDefaultAndWait(pair.getKey(), pair.getValue());
+		return sendDefaultAndWait(new MessagePacket<K, V>(pair));
 	}
 	
 	@Override
 	public <K, V> ProduceResult<K, V> sendDefaultAndWait(MessagePacket<K, V> packet) throws Exception {
-		Future<ProduceResult<K, V>> future = sendDefault(packet);
-		return future.get();
+		return sendAndWait(createProducerRecord(getKafkaTemplate().getDefaultTopic(), packet));
 	}
 	
 	@Override
@@ -118,25 +119,42 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 
 	@Override
 	public <K, V> ProduceResult<K, V> sendAndWait(String name, MessagePacket<K, V> packet) throws Exception {
-		Future<ProduceResult<K, V>> future = send(name, packet);
-		return future.get();
+		return sendAndWait(createProducerRecord(name, packet));
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> Future<ProduceResult<K, V>> send(final ProducerRecord<K, V> producerRecord) {
+		return (Future<ProduceResult<K, V>>) send(producerRecord, false);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> ProduceResult<K, V> sendAndWait(final ProducerRecord<K, V> producerRecord) throws Exception {
+		return (ProduceResult<K, V>) send(producerRecord, true);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected <K, V> Object send(final ProducerRecord<K, V> producerRecord, final boolean wait) {
 		KafkaTemplate<K, V> kafkaTemplate = (KafkaTemplate<K, V>) getKafkaTemplate();
-		Future<ProduceResult<K, V>> result = kafkaTemplate.execute(new ProducerCallback<K, V, Future<ProduceResult<K, V>>>() {
+		Object result = kafkaTemplate.execute(new ProducerCallback<K, V, Object>() {
 
 			@Override
-			public Future<ProduceResult<K, V>> doInKafka(Producer<K, V> producer) {
+			public Object doInKafka(Producer<K, V> producer) {
 				SettableListenableFuture<ProduceResult<K, V>> future = new SettableListenableFuture<ProduceResult<K, V>>();
 				producer.send(producerRecord, createProduceCallback(future, producer, producerRecord));
 				
 				if (producerCallback != null)
 					future.addCallback((ListenableFutureCallback<? super ProduceResult<K, V>>) producerCallback);
 				
-				return future;
+				if (wait) {
+					try {
+						return future.get();
+					} catch (InterruptedException | ExecutionException e) {
+						throw new ProducerException(e);
+					}
+				} else 
+					return future;
 			}
 		});
 		
@@ -144,12 +162,6 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 			flush();
 		
 		return result;
-	}
-
-	@Override
-	public <K, V> ProduceResult<K, V> sendAndWait(ProducerRecord<K, V> producerRecord) throws Exception {
-		Future<ProduceResult<K, V>> future = send(producerRecord);
-		return future.get();
 	}
 
 	@Override
