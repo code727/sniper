@@ -16,7 +16,7 @@
 	<bean id="consumerProperties" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
-				<entry key="bootstrap.servers" value="${bootstrap.servers}" />
+				<entry key="bootstrap.servers" value="192.166.1.95:9092,192.166.1.95:9093,192.166.1.95:9094" />
 				<!-- 当有多个消费者（监听）时，如果它们的group.id都相同，
 				              则消息只能由组内某一个成员消费，在消费者集群环境下，要特别注意这点 -->
 				<entry key="group.id" value="consumer_group_0" />
