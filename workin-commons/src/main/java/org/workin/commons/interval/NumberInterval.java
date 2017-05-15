@@ -129,9 +129,9 @@ public class NumberInterval extends AbstractInterval<Number> {
 		}
 		
 		if (isPositiveInfinity())
-			// 比较最大值与当前正无穷区间最小值的关系
-			return NumberUtils.lessThan(interval.getMaximum(), minimal)
-					|| NumberUtils.equals(interval.getMaximum(), minimal) && isLeftClose();
+			// 比较最小值与当前正无穷区间最小值的关系
+			return NumberUtils.greaterThan(interval.getMinimal(), minimal)
+					|| NumberUtils.equals(interval.getMinimal(), minimal) && isLeftClose();
 		
 		// 指定区间在当前区间的最小或最大值范围外时返回false 
 		if (NumberUtils.lessThan(interval.getMinimal(), minimal)
@@ -150,7 +150,7 @@ public class NumberInterval extends AbstractInterval<Number> {
 		 *   例如当前区间[0,9)接受0-8的整数，而指定区间[0,9]可以包含9，因此它不完全包含在当前区间内 */
 		return !isLeftClose() && interval.isLeftClose() || !isRightClose() && interval.isRightClose() ? false : true;
 	}
-	
+		
 	@Override
 	public Interval<Number> offset(Object offset) {		
 		BigDecimal decimal = NumberUtils.toBigDecimal(offset);
