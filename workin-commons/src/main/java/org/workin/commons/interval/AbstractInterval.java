@@ -121,7 +121,7 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 		
 		/* 整个区间有一边是无穷的，说明最小值和最大值至少有一个为空，直接完成设置即可 
 		 * 否则应该在自定义初始化方法中进行更为具体的设置 */
-		if (isMinusInfinity() || isPositiveInfinity()) {
+		if (minimal == null || maximum == null) {
 			this.minimal = minimal;
 			this.maximum = maximum;
 		} else 
