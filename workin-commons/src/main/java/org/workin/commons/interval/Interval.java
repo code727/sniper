@@ -139,6 +139,6 @@ public interface Interval<T> {
 	 * @param interval
 	 * @return
 	 */
-	public Interval<T> offset(Interval<T> interval);
+	public Interval<T> offset(Interval<Number> interval);
 	
 }

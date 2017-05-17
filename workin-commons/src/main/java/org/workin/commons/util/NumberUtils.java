@@ -455,14 +455,14 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static BigInteger toBigInteger(Object obj, BigInteger defaultValue) {
-		if (obj == null || !(obj instanceof Number) && !RegexUtils.isNumber(obj.toString())) {
+		if (obj == null || !(obj instanceof Number) && !RegexUtils.isInteger(obj.toString())) {
 			AssertUtils.assertNotNull(defaultValue, "Default big integer must not be null.");
 			return defaultValue;
 		}
 		
 		return obj instanceof BigInteger ? (BigInteger)obj : new BigInteger(obj.toString());
 	}
-		
+			
 	/**
 	 * 生成指定值之内的随机双精度浮点数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

@@ -219,10 +219,53 @@ public class DateUtils {
 	public static String timeToString(long time, String pattern) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(time); 
-		return dateToString(calendar.getTime(), StringUtils.isNotBlank(pattern) ?
-				pattern : DEFAULT_DATETIME_FORMAT);			
+		return dateToString(calendar.getTime(), StringUtils.isNotBlank(pattern) ? pattern : DEFAULT_DATETIME_FORMAT);
 	}
 	
+	/**
+	 * 将时间数字转换成日期对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param time
+	 * @return
+	 */
+	public static Date timeToDate(long time) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(time); 
+		return calendar.getTime();
+	}
+	
+	/**
+	 * 将Object对象转换成日期对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param object
+	 * @return
+	 */
+	public static Date objectToDate(Object object) {
+		return objectToDate(object, null);
+	}
+	
+	/**
+	 * 将Object对象转换成日期对象，当Object对象为字符串时，将以指定格式转换
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param object
+	 * @param pattern
+	 * @return
+	 */
+	public static Date objectToDate(Object object, String pattern) {
+		Date date = null;
+		if (object instanceof Date) {
+			date = (Date) object;
+		} else if (object instanceof Calendar) {
+			date = ((Calendar) object).getTime();
+		} else if (object instanceof Number) {
+			date = timeToDate(Long.valueOf(object.toString()));
+		} else {
+			date = DateUtils.stringToDate(object.toString(), pattern);
+		}
+		
+		return date;
+	}
+			
 	/**
 	 * 以默认格式将对象转换成日期字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -708,7 +751,7 @@ public class DateUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static Date yesterday(){
+	public static Date yesterday() {
 		return addDays(new Date(), -1);
 	}
 	
@@ -717,7 +760,7 @@ public class DateUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static Date tomorrow(){
+	public static Date tomorrow() {
 		return addDays(new Date(), 1);
 	}
 	
@@ -908,6 +951,86 @@ public class DateUtils {
 	}
 	
 	/**
+	 * 获取当前日期所在周内第一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static Date firstDayOfWeek() {
+		return firstDayOfWeek(new Date());
+	}
+	
+	/**
+	 * 获取当前日期所在周内第一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param firstDayOfWeek 星期几为每周第一天
+	 * @return
+	 */
+	public static Date firstDayOfWeek(int firstDayOfWeek) {
+		return firstDayOfWeek(new Date(), firstDayOfWeek);
+	}
+	
+	/**
+	 * 获取当前日期所在周内第一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @return
+	 */
+	public static Date firstDayOfWeek(Date date) {
+		return firstDayOfWeek(date, Calendar.MONDAY);
+	}
+	
+	/**
+	 * 获取当前日期所在周内第一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param firstDayOfWeek
+	 * @return
+	 */
+	public static Date firstDayOfWeek(Date date, int firstDayOfWeek) {
+		return dayOfWeek(date, 1, firstDayOfWeek);
+	}
+	
+	/**
+	 * 获取当前日期所在周内最后一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static Date lastDayOfWeek() {
+		return lastDayOfWeek(new Date());
+	}
+	
+	/**
+	 * 获取当前日期所在周内最后一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param firstDayOfWeek 星期几为每周第一天
+	 * @return
+	 */
+	public static Date lastDayOfWeek(int firstDayOfWeek) {
+		return lastDayOfWeek(new Date(), firstDayOfWeek);
+	}
+	
+	/**
+	 * 获取当前日期所在周内最后一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @return
+	 */
+	public static Date lastDayOfWeek(Date date) {
+		return lastDayOfWeek(date, Calendar.MONDAY);
+	}
+	
+	/**
+	 * 获取当前日期所在周内最后一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param firstDayOfWeek
+	 * @return
+	 */
+	public static Date lastDayOfWeek(Date date, int firstDayOfWeek) {
+		return dayOfWeek(date, 7, firstDayOfWeek);
+	}
+		
+	/**
 	 * 获取当前日期所在周内第几天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param day
@@ -962,6 +1085,45 @@ public class DateUtils {
 	}
 	
 	/**
+	 * 获取当前日期所在月内第一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static Date firstDayOfMonth() {
+		return firstDayOfMonth(new Date());
+	}
+		
+	/**
+	 * 获取当前日期所在月内第一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @return
+	 */
+	public static Date firstDayOfMonth(Date date) {
+		return dayOfMonth(date, 1);
+	}
+	
+	/**
+	 * 获取当前日期所在月内最后一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @return
+	 */
+	public static Date lastDayOfMonth() {
+		return lastDayOfMonth(new Date());
+	}
+		
+	/**
+	 * 获取指定日期所在月内最后一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @return
+	 */
+	public static Date lastDayOfMonth(Date date) {
+		return dayOfMonth(date, 31);
+	}
+		
+	/**
 	 * 获取当前日期所在月内第几天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param day
@@ -979,32 +1141,97 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Date dayOfMonth(Date date, int day) {
-		int maxDays = maxDaysOfMonth(date);
-		day = NumberUtils.minLimit(NumberUtils.maxLimit(day, maxDays), 1);
+		int totalDays = totalDaysOfMonth(date);
+		day = NumberUtils.minLimit(NumberUtils.maxLimit(day, totalDays), 1);
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
-		calendar.set(Calendar.DAY_OF_MONTH, NumberUtils.rangeLimit(day, 1, maxDays));
+		calendar.set(Calendar.DAY_OF_MONTH, NumberUtils.rangeLimit(day, 1, totalDays));
 		
 		return calendar.getTime();
 	}
 	
 	/**
-	 * 获取当前日期所在月的最大天数
+	 * 获取当年日期所在年内第一天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static int maxDaysOfMonth() {
-		return maxDaysOfMonth(new Date());
+	public static Date firstDayOfYear() {
+		return firstDayOfYear(new Date());
 	}
 	
 	/**
-	 * 获取指定日期所在月的最大天数
+	 * 获取指定日期所在年内第一天的日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @return
 	 */
-	public static int maxDaysOfMonth(Date date) {
+	public static Date firstDayOfYear(Date date) {
+		return dayOfYear(date, 1);
+	}
+	
+	/**
+	 * 获取当年日期所在年内最后一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static Date lastDayOfYear() {
+		return lastDayOfYear(new Date());
+	}
+	
+	/**
+	 * 获取指定日期所在年内最后一天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @return
+	 */
+	public static Date lastDayOfYear(Date date) {
+		return dayOfYear(date, 366);
+	}
+		
+	/**
+	 * 获取当前日期所在年内第几天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param day
+	 * @return
+	 */
+	public static Date dayOfYear(int day) {
+		return dayOfYear(new Date(), day);
+	}
+	
+	/**
+	 * 获取指定日期所在年内第几天的日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @param day
+	 * @return
+	 */
+	public static Date dayOfYear(Date date, int day) {
+		int totalDays = totalDaysOfYear(date);
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_YEAR, NumberUtils.rangeLimit(day, 1, totalDays));
+		
+		return calendar.getTime();
+	}
+		
+	/**
+	 * 获取当前日期所在月的总天数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static int totalDaysOfMonth() {
+		return totalDaysOfMonth(new Date());
+	}
+	
+	/**
+	 * 获取指定日期所在月的总天数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @return
+	 */
+	public static int totalDaysOfMonth(Date date) {
 		AssertUtils.assertNotNull(date, "Date object can not be null");
 		
 		Calendar calendar = Calendar.getInstance();
@@ -1014,6 +1241,26 @@ public class DateUtils {
 		// 日期回滚一天，也就是最后一天
 		calendar.roll(Calendar.DATE, -1);
 	    return calendar.get(Calendar.DATE);  
+	}
+	
+	/**
+	 * 获取当前日期所在年的总天数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static int totalDaysOfYear() {
+		return totalDaysOfYear(new Date());
+	}
+	
+	/**
+	 * 获取指定日期所在年的总天数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 * @return
+	 */
+	public static int totalDaysOfYear(Date date) {
+		AssertUtils.assertNotNull(date, "Date object can not be null");
+		return isLeapYear(date) ? 366 : 365;
 	}
 		
 }

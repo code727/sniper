@@ -184,6 +184,11 @@ public class NumberInterval extends AbstractInterval<Number> {
 		
 		return this;
 	}
+	
+	public static void main(String[] args) {
+		Interval<Number> interval = NumberInterval.newOpen(-9, 9);
+		System.out.println(interval.offset(NumberInterval.newClose(9,null)));
+	}
 		
 	/**
 	 * 创建一个左开区间
