@@ -18,9 +18,9 @@
 
 package org.workin.http.httpclient.v4.factory;
 
+import org.apache.http.client.HttpClient;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 
@@ -29,7 +29,7 @@ import org.apache.http.impl.client.HttpClients;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CloseableHttpClientFactoryBean implements CloseableHttpClientFactory {
+public class CloseableHttpClientFactoryBean implements HttpClientFactory {
 	
 	private HttpClientBuilder builder;
 	
@@ -52,7 +52,7 @@ public class CloseableHttpClientFactoryBean implements CloseableHttpClientFactor
 	}
 
 	@Override
-	public CloseableHttpClient create() {
+	public HttpClient create() {
 		return this.builder.build();
 	}
 		

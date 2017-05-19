@@ -18,7 +18,6 @@
 
 package org.workin.http.httpclient.v4;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -37,8 +36,8 @@ import org.workin.http.HttpAccessor;
 import org.workin.http.HttpForm;
 import org.workin.http.HttpRequestHeader;
 import org.workin.http.HttpSender;
-import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactory;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
+import org.workin.http.httpclient.v4.factory.HttpClientFactory;
 import org.workin.http.httpclient.v4.handler.request.DefualtRequestHandler;
 import org.workin.http.httpclient.v4.handler.request.RequestHandler;
 import org.workin.http.httpclient.v4.handler.response.StringResponseHandler;
@@ -52,7 +51,7 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 	
 	private static Logger logger = LoggerFactory.getLogger(HttpClientTemplate.class);
 	
-	private CloseableHttpClientFactory httpClientFactory;
+	private HttpClientFactory httpClientFactory;
 	
 	private RequestConfig requestConfig;
 	
@@ -62,7 +61,7 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 	/** 全局的响应处理器 */
 	private ResponseHandler<?> responseHandler;
 	
-	public void setHttpClientFactory(CloseableHttpClientFactory httpClientFactory) {
+	public void setHttpClientFactory(HttpClientFactory httpClientFactory) {
 		this.httpClientFactory = httpClientFactory;
 	}
 	
@@ -126,13 +125,12 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 		HttpGet httpGet = new HttpGet(url);
 		addHeader(httpGet, form);
 		setConfig(httpGet);
+		
 		try {
-			logger.info("Request form [" + name + "] url [" + url + "] method:[GET].");
+			logger.info("Request form [{}] url [{}] method:[GET]", name, url);
 			return (T) this.httpClientFactory.create().execute(httpGet, getBoundResponseHandler(form));
-		}  catch (IOException e) {
-			throw new IOException(e);
 		} finally {
-			if (httpGet != null)
+			if (httpGet != null) 
 				httpGet.releaseConnection();
 		}
 	}
@@ -153,14 +151,13 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 		HttpPost httpPost = new HttpPost(NetUtils.getActionString(url));
 		addHeader(httpPost, form);
 		setConfig(httpPost);
+		
 		try {
 			getBoundRequestHandler(form).setRequestBody(httpPost, url, form);
-			logger.info("Request form [" + name + "] url [" + url + "] method:[POST].");
+			logger.info("Request form [{}] url [{}] method:[POST]", name, url);
 			return (T) this.httpClientFactory.create().execute(httpPost, getBoundResponseHandler(form));
-		}  catch (IOException e) {
-			throw new IOException(e);
-		} finally {
-			if (httpPost != null)
+		}  finally {
+			if (httpPost != null) 
 				httpPost.releaseConnection();
 		}
 	}
@@ -177,17 +174,16 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 	protected <T> T doPutRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
 		String url = formatToURL(form, name, param);
-		HttpPut httpPut = new HttpPut(NetUtils.getActionString(url));
 		
+		HttpPut httpPut = new HttpPut(NetUtils.getActionString(url));
 		addHeader(httpPut, form);
 		setConfig(httpPut);
+		
 		try {
 			getBoundRequestHandler(form).setRequestBody(httpPut, url, form);
-			logger.info("Request form [" + name + "] url [" + url + "] method:[PUT].");
+			logger.info("Request form [{}] url [{}] method:[PUT]", name, url);
 			return (T) this.httpClientFactory.create().execute(httpPut, getBoundResponseHandler(form));
-		}  catch (IOException e) {
-			throw new IOException(e);
-		} finally {
+		}  finally {
 			if (httpPut != null)
 				httpPut.releaseConnection();
 		}
@@ -205,16 +201,15 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 	protected <T> T doDeleteRequest(String name, Object param) throws Exception {
 		HttpForm form = getFormRegister().find(name);
 		String url = formatToURL(form, name, param);
-		HttpDelete httpDelete = new HttpDelete(url);
 		
+		HttpDelete httpDelete = new HttpDelete(url);
 		addHeader(httpDelete, form);
 		setConfig(httpDelete);
+		
 		try {
-			logger.info("Request form [" + name + "] url [" + url + "] method:[DELETE].");
+			logger.info("Request form [{}] url [{}] method:[DELETE]", name, url);
 			return (T) this.httpClientFactory.create().execute(httpDelete, getBoundResponseHandler(form));
-		}  catch (IOException e) {
-			throw new IOException(e);
-		} finally {
+		}  finally {
 			if (httpDelete != null)
 				httpDelete.releaseConnection();
 		}
