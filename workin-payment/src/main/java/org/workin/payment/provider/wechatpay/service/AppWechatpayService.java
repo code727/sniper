@@ -183,7 +183,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		
 		try {
 			// 调用微信支付统一下单请求
-			String xmlString = paymentHttpTemplet.request("appWechatpayPlaceOrder", requestParameters);
+			String xmlString = paymentHttpTemplate.request("appWechatpayPlaceOrder", requestParameters);
 			resultModel.setData(xmlString);
 		} catch (Exception e) {
 			resultModel.setCode(SystemStatus.FAILED.getKey());

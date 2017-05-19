@@ -167,7 +167,7 @@ public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<Strin
 		parameters.put("notify_id", response.get("notify_id"));
 		
 		// 发送支付宝验证请求，并返回验证结果状态
-		String status = paymentHttpTemplet.request("webAlipayNotifyValidation", parameters);
+		String status = paymentHttpTemplate.request("webAlipayNotifyValidation", parameters);
 		// 再根据支付宝验证结果状态获取本系统的状态码
 		String code = ThirdValidationResult.getValidationResultCode(status);
 		

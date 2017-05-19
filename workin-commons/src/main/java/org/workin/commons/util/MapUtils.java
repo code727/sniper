@@ -243,7 +243,57 @@ public class MapUtils {
 	}
 	
 	/**
-	 * 将映射集里的所有键值对元素连接成URL查询字符串
+	 * 将映射集里的所有键值对元素连接成URL Map查询字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param parameterName
+	 * @param map
+	 * @return
+	 */
+	public static <K extends CharSequence, V> String joinMapQueryString(String parameterName, Map<K, V> map) {
+		return joinMapQueryString(parameterName, map, null);
+	}
+	
+	/**
+	 * 将映射集里的所有键值对元素连接成URL Map查询字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param parameterName
+	 * @param map
+	 * @param excludeNames
+	 * @return
+	 */
+	public static <K1 extends CharSequence, K2 extends CharSequence, V> String joinMapQueryString(String parameterName, Map<K1, V> map, K2[] excludeNames) {
+			
+		if (StringUtils.isBlank(parameterName))
+			return joinQueryString(map, excludeNames);
+		
+		Set<Entry<K1, V>> entrySet = map.entrySet();
+		if (ArrayUtils.isNotEmpty(excludeNames)) {
+			Set<Entry<K1,V>> remainEntrySet = CollectionUtils.newLinkedHashSet();
+			Iterator<Entry<K1, V>> iterator = entrySet.iterator();
+			while (iterator.hasNext()) {
+				Entry<K1, V> entry = iterator.next();
+				if (!ArrayUtils.contains(excludeNames, entry.getKey()))
+					remainEntrySet.add(entry);
+			}
+			entrySet = remainEntrySet;
+		}
+		
+		parameterName = parameterName.trim();
+		StringBuilder builder = new StringBuilder();
+		for (Entry<K1,V> entry : entrySet) {
+			
+			if (builder.length() > 0)
+				builder.append("&");
+			
+			builder.append(parameterName).append("['")
+				.append(entry.getKey()).append("']").append("=").append(entry.getValue());
+		}
+		
+		return builder.toString();
+	}
+		
+	/**
+	 * 将映射集里的所有键值对元素连接成URL Map查询字符串查询字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param map
 	 * @return
@@ -263,28 +313,30 @@ public class MapUtils {
 		if (isEmpty(map))
 			return StringUtils.EMPTY_STRING;
 		
-		StringBuilder builder = new StringBuilder();
-		
 		Set<Entry<K1, V>> entrySet = map.entrySet();
 		if (ArrayUtils.isNotEmpty(excludeNames)) {
 			Set<Entry<K1,V>> remainEntrySet = CollectionUtils.newLinkedHashSet();
 			Iterator<Entry<K1, V>> iterator = entrySet.iterator();
 			while (iterator.hasNext()) {
 				Entry<K1, V> entry = iterator.next();
-				if (!ArrayUtils.containsValue(excludeNames, entry.getKey()))
+				if (!ArrayUtils.contains(excludeNames, entry.getKey()))
 					remainEntrySet.add(entry);
 			}
 			entrySet = remainEntrySet;
 		}
+		
+		StringBuilder builder = new StringBuilder();
 		for (Entry<K1,V> entry : entrySet) {
+			
 			if (builder.length() > 0)
 				builder.append("&");
+			
 			builder.append(entry.getKey()).append("=").append(entry.getValue());
 		}
 		
 		return builder.toString();
 	}
-	
+		
 	/**
 	 * 将映射集里的所有键值对元素按各部分的连接符连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -343,18 +395,17 @@ public class MapUtils {
 				if (!ArrayUtils.contains(excludeKeys, entry.getKey()))
 					remainEntrySet.add(entry);
 			}
-			
-			return join(remainEntrySet, kvSeperator, itemSeperator, null);
-		} else {
-			StringBuilder builder = new StringBuilder();
-			for (Entry<K,V> entry : entrySet) {
-				if (builder.length() > 0)
-					builder.append(itemSeperator);
-				builder.append(entry.getKey()).append(kvSeperator).append(entry.getValue());
-			}
-			
-			return builder.toString();
+			entrySet = remainEntrySet;
+		} 
+		
+		StringBuilder builder = new StringBuilder();
+		for (Entry<K,V> entry : entrySet) {
+			if (builder.length() > 0)
+				builder.append(itemSeperator);
+			builder.append(entry.getKey()).append(kvSeperator).append(entry.getValue());
 		}
+
+		return builder.toString();
 	}
 	
 	/**

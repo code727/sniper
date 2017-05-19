@@ -48,17 +48,17 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
-			<artifactId>workin-commons</artifactId>
-			<version>${workin.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.workin</groupId>
 			<artifactId>workin-codec</artifactId>
 			<version>${workin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-templet</artifactId>
+			<version>${workin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-spring</artifactId>
 			<version>${workin.version}</version>
 		</dependency>
 		<dependency>

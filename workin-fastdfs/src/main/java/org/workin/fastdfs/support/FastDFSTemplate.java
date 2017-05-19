@@ -46,11 +46,11 @@ import org.workin.web.WebUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FastDFSTemplet extends FastDFSSupport implements FastDFSOperations {
+public class FastDFSTemplate extends FastDFSSupport implements FastDFSOperations {
 	
-	public FastDFSTemplet() {}
+	public FastDFSTemplate() {}
 	
-	public FastDFSTemplet(Cluster cluster, ConnectionFactory connectionFactory) {
+	public FastDFSTemplate(Cluster cluster, ConnectionFactory connectionFactory) {
 		setConnectionFactory(connectionFactory);
 	}
 

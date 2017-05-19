@@ -24,7 +24,7 @@ import java.util.Set;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.fastdfs.meta.FastDFSMeta;
-import org.workin.fastdfs.support.FastDFSTemplet;
+import org.workin.fastdfs.support.FastDFSTemplate;
 
 /**
  * FastDFS旧资源清理信息
@@ -37,17 +37,17 @@ public class OriginalResourcesDeleteTask<T> implements Runnable {
 	
 	private List<FastDFSMeta<T>> metas;
 	
-	private FastDFSTemplet templet;
+	private FastDFSTemplate template;
 	
-	public OriginalResourcesDeleteTask(List<FastDFSMeta<T>> metas, FastDFSTemplet templet) {
+	public OriginalResourcesDeleteTask(List<FastDFSMeta<T>> metas, FastDFSTemplate template) {
 		this.metas = metas;
-		this.templet = templet;
+		this.template = template;
 	}
 	
-	public OriginalResourcesDeleteTask(boolean deleteAll, List<FastDFSMeta<T>> metas, FastDFSTemplet templet) {
+	public OriginalResourcesDeleteTask(boolean deleteAll, List<FastDFSMeta<T>> metas, FastDFSTemplate template) {
 		this.deleteAll = deleteAll;
 		this.metas = metas;
-		this.templet = templet;
+		this.template = template;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class OriginalResourcesDeleteTask<T> implements Runnable {
 			}
 		}
 		try {
-			this.templet.bathDelete(pathSet);
+			this.template.bathDelete(pathSet);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

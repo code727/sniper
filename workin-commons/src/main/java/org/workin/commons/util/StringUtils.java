@@ -73,9 +73,10 @@ public class StringUtils {
 		if (str == null || (length = str.length()) == 0)
             return true;
 		
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			if (!Character.isWhitespace(str.charAt(i)))
                 return false;
+		}
 
         return true;
 	}
@@ -173,9 +174,10 @@ public class StringUtils {
 			if (markLength == 0)
 				return start;
 
-			for (int i = start; i < maxSearchCount; i++)
+			for (int i = start; i < maxSearchCount; i++) {
 				if (str.regionMatches(ignoreCase, i, mark, 0, markLength))
 					return i;
+			}
 			
 			return -1;
 		} else 
@@ -267,9 +269,10 @@ public class StringUtils {
 				return start;
 
 			// 从最大索引处开始反向检索
-			for (int i = start; i > -1; i--)
+			for (int i = start; i > -1; i--) {
 				if (str.regionMatches(ignoreCase, i, mark, 0, markLength))
 					return i;
+			}
 
 			return -1;
 		} else
@@ -1878,14 +1881,14 @@ public class StringUtils {
 	}
 	
 	/**
-	 * 模式配置
+	 * 模式匹配
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @param str
 	 * @return
 	 */
 	public static boolean simpleMatch(String pattern, String str) {
-		if (pattern == null || str == null) 
+		if (pattern == null || str == null)
 			return false;
 		
 		int firstIndex = pattern.indexOf('*');
@@ -1915,5 +1918,53 @@ public class StringUtils {
 				simpleMatch(pattern.substring(firstIndex), str.substring(firstIndex)));
 	}
 	
+	/**
+	 * 当字符串的长度小于指定指定的最小长度，在原字符串之前补充minLength-length个char字符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param minLength
+	 * @param c
+	 * @return
+	 */
+	public static String beforeSupplement(String str, int minLength, char c) {
+		return supplement(str, minLength, c, false);
+	}
 	
+	/**
+	 * 当字符串的长度小于指定指定的最小长度，在原字符串之后补充minLength-length个char字符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param minLength
+	 * @param c
+	 * @return
+	 */
+	public static String afterSupplement(String str, int minLength, char c) {
+		return supplement(str, minLength, c, true);
+	}
+	
+	/**
+	 *  当字符串的长度小于指定指定的最小长度，选择是否在原字符串之后补充minLength-length个char字符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param minLength
+	 * @param c
+	 * @param after
+	 * @return
+	 */
+	private static String supplement(String str, int minLength, char c, boolean after) {
+		AssertUtils.assertTrue(minLength > 0, "Minimal length [" + minLength + "] must greater than 0");
+		
+		int length = length(str);
+		if (length < minLength) {
+			StringBuilder supplied = new StringBuilder();
+			int offset = minLength - length;
+			for (int i = 0; i < offset; i++) {
+				supplied.append(c);
+			}
+			return after ? safeString(str) + supplied : supplied + safeString(str);
+		}
+		
+		return safeString(str);
+	}
+				
 }

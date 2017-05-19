@@ -30,7 +30,7 @@ public class ConsumerTest {
 		
 	public static void main(String[] args) {
 		ApplicationContextHolder holder = new ApplicationContextHolder();
-		holder.setApplicationContext(new ClassPathXmlApplicationContext(new String[]{"/applicationContext-consumer.xml"}));
+		holder.setApplicationContext(new ClassPathXmlApplicationContext(new String[] { "/applicationContext-consumer.xml" }));
 		ApplicationContextHolder.start();
 	}
 

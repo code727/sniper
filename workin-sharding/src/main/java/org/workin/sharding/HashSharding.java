@@ -21,6 +21,7 @@ package org.workin.sharding;
 import java.math.BigInteger;
 
 import org.workin.commons.sharding.Route;
+import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.RegexUtils;
 
 /**
@@ -31,15 +32,23 @@ import org.workin.commons.util.RegexUtils;
 public class HashSharding extends AbstractSharding {
 	
 	/** 模数 */
-	private BigInteger model = new BigInteger("1");
+	private BigInteger model;
+	
+	public HashSharding() {
+		this(1);
+	}
+	
+	public HashSharding(int model) {
+		setModel(model);
+	}
 	
 	public int getModel() {
 		return model.intValue();
 	}
 
 	public void setModel(int model) {
-		if (model != 0)
-			this.model = new BigInteger(String.valueOf(Math.abs(model)));
+		AssertUtils.assertTrue(model != 0, "Hash model must not be equals 0");
+		this.model = new BigInteger(String.valueOf(Math.abs(model)));
 	}
 	
 	@Override
@@ -62,5 +71,5 @@ public class HashSharding extends AbstractSharding {
 		
 		route.suffix(target);
 	}
-		
+			
 }

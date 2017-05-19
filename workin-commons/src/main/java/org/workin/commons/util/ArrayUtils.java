@@ -1665,8 +1665,8 @@ public class ArrayUtils {
 	 * @param element
 	 * @return
 	 */
-	public static int indexOfValue(CharSequence[] array, CharSequence element) {
-		return indexOfValue(array, element, 0);
+	public static int indexOf(CharSequence[] array, CharSequence element) {
+		return indexOf(array, element, 0);
 	}
 	
 	/**
@@ -1677,7 +1677,7 @@ public class ArrayUtils {
 	 * @param start
 	 * @return
 	 */
-	public static int indexOfValue(CharSequence[] array, CharSequence element, int start) {
+	public static int indexOf(CharSequence[] array, CharSequence element, int start) {
 		if (isEmpty(array))
 			return -1;
 		
@@ -3544,8 +3544,8 @@ public class ArrayUtils {
 	 * @param obj
 	 * @return
 	 */
-	public static boolean containsValue(CharSequence array[], CharSequence value) {
-		return indexOfValue(array, value) != -1;
+	public static boolean contains(CharSequence array[], CharSequence value) {
+		return indexOf(array, value) != -1;
 	}
 	
 	/**

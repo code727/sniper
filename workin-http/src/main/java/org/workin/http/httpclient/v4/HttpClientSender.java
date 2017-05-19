@@ -30,35 +30,35 @@ import org.workin.http.HttpSender;
  */
 public class HttpClientSender implements HttpSender, InitializingBean {
 	
-	private HttpClientTemplet httpClientTemplet;
+	private HttpClientTemplate httpClientTemplate;
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (httpClientTemplet == null)
-			throw new IllegalArgumentException("Property 'httpClientTemplet' is required");
+		if (httpClientTemplate == null)
+			throw new IllegalArgumentException("Property 'httpClientTemplate' is required");
 	}
 	
-	public HttpClientTemplet getHttpClientTemplet() {
-		return httpClientTemplet;
+	public HttpClientTemplate getHttpClientTemplet() {
+		return httpClientTemplate;
 	}
 
-	public void setHttpClientTemplet(HttpClientTemplet httpClientTemplet) {
-		this.httpClientTemplet = httpClientTemplet;
+	public void setHttpClientTemplet(HttpClientTemplate httpClientTemplate) {
+		this.httpClientTemplate = httpClientTemplate;
 	}
 
 	@Override
 	public <T> T request(String name) throws Exception {
-		return httpClientTemplet.request(name);
+		return httpClientTemplate.request(name);
 	}
 
 	@Override
 	public <T> T request(String name, Map<String, Object> parameters) throws Exception {
-		return httpClientTemplet.request(name, parameters);
+		return httpClientTemplate.request(name, parameters);
 	}
 
 	@Override
 	public <T> T request(String name, Object parameter) throws Exception {
-		return httpClientTemplet.request(name, parameter);
+		return httpClientTemplate.request(name, parameter);
 	}
 
 }

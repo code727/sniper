@@ -33,10 +33,10 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.workin.commons.util.NetUtils;
+import org.workin.http.HttpAccessor;
 import org.workin.http.HttpForm;
 import org.workin.http.HttpRequestHeader;
 import org.workin.http.HttpSender;
-import org.workin.http.httpclient.HttpClientAccessor;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactory;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
 import org.workin.http.httpclient.v4.handler.request.DefualtRequestHandler;
@@ -48,9 +48,9 @@ import org.workin.http.httpclient.v4.handler.response.StringResponseHandler;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class HttpClientTemplet extends HttpClientAccessor implements HttpSender {
+public final class HttpClientTemplate extends HttpAccessor implements HttpSender {
 	
-	private static Logger logger = LoggerFactory.getLogger(HttpClientTemplet.class);
+	private static Logger logger = LoggerFactory.getLogger(HttpClientTemplate.class);
 	
 	private CloseableHttpClientFactory httpClientFactory;
 	
@@ -79,8 +79,8 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 	}
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
+	protected void init() throws Exception {
+		super.init();
 		
 		if (this.httpClientFactory == null) 
 			this.httpClientFactory = new CloseableHttpClientFactoryBean();
@@ -94,7 +94,7 @@ public final class HttpClientTemplet extends HttpClientAccessor implements HttpS
 		if (this.responseHandler == null)
 			this.responseHandler = new StringResponseHandler();
 	}
-	
+		
 	@Override
 	public <T> T request(String name) throws Exception {
 		return super.requestByName(name, null);

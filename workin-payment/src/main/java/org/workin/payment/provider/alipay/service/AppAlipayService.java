@@ -199,7 +199,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 		parameters.put("notify_id", response.get("notify_id"));
 		
 		// 发送支付宝通知验证请求，并返回验证结果状态
-		String status = paymentHttpTemplet.request("appAlipayNotifyValidation", parameters);
+		String status = paymentHttpTemplate.request("appAlipayNotifyValidation", parameters);
 		// 再根据支付宝验证结果状态获取本系统的状态码
 		String code = ThirdValidationResult.getValidationResultCode(status);
 		

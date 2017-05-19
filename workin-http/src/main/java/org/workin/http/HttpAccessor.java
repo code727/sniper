@@ -16,28 +16,27 @@
  * Create Date : 2015-7-9
  */
 
-package org.workin.http.httpclient;
+package org.workin.http;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.workin.codec.encoder.RawURLEncoder;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.http.HttpForm;
 import org.workin.http.exception.HttpFormNotFoundException;
 import org.workin.http.exception.NoSuchHttpMethodException;
 import org.workin.http.formatter.AdaptiveURLFormatter;
 import org.workin.http.register.HttpFormRegister;
+import org.workin.spring.beans.CheckableInitializingBeanAdapter;
 import org.workin.templet.message.formatter.MessageFormatter;
 
 /**
- * HttpClient访问器抽象类
+ * HTTP访问器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class HttpClientAccessor implements InitializingBean {
+public abstract class HttpAccessor extends CheckableInitializingBeanAdapter {
 	
 	private HttpFormRegister formRegister;
 	
@@ -71,16 +70,19 @@ public abstract class HttpClientAccessor implements InitializingBean {
 	}
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	protected void checkProperties() {
 		if (formRegister == null)
 			throw new IllegalArgumentException("Property 'formRegister' is required");
-		
+	}
+	
+	@Override
+	protected void init() throws Exception {
 		if (this.urlFormatter == null) {
 			this.urlFormatter = new AdaptiveURLFormatter();
 			this.urlFormatter.setEncoder(new RawURLEncoder());
 		}
 	}
-	
+		
 	/**
 	 * 将表单对象加上请求参数后格式化成URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -118,8 +120,7 @@ public abstract class HttpClientAccessor implements InitializingBean {
 		if (StringUtils.isNotBlank(methodName)) {
 			try {
 				return (T) ReflectionUtils.invokeMethod(this, executedMethod,
-						new Class<?>[] { String.class, Object.class },
-						new Object[] { name, param });
+						new Class<?>[] { String.class, Object.class }, new Object[] { name, param });
 			} catch (NoSuchMethodException e) {
 				throw new NoSuchHttpMethodException("No such http method ["
 						+ methodName + "] in current version of workin-http framework.");
@@ -127,7 +128,6 @@ public abstract class HttpClientAccessor implements InitializingBean {
 		} else
 			throw new NoSuchHttpMethodException("No such http method ["
 					+ methodName + "] in current version of workin-http framework.");
-		
 	}
 	
 	/**

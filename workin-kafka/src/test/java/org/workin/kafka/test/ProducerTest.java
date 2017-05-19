@@ -51,7 +51,7 @@ public class ProducerTest extends JUnit4SpringTestCase {
 		MessagePacket<Integer, Message> packet = new MessagePacket<Integer, Message>(message.getId(), message);
 		packet.setTimestamp(System.currentTimeMillis());
 		try {
-			kafkaProducer.send("payment_event", packet);
+			kafkaProducer.sendDefault(packet);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

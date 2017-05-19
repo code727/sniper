@@ -16,16 +16,22 @@
 	<bean id="consumerProperties" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
-				<entry key="bootstrap.servers" value="192.166.1.95:9092,192.166.1.95:9093,192.166.1.95:9094" />
+				<entry key="bootstrap.servers" value="${bootstrap.servers}" />
 				<!-- 当有多个消费者（监听）时，如果它们的group.id都相同，
 				              则消息只能由组内某一个成员消费，在消费者集群环境下，要特别注意这点 -->
 				<entry key="group.id" value="consumer_group_0" />
 				<entry key="client.id" value="0" />
-				<entry key="enable.auto.commit" value="true" />
-				<!-- 当Kafka没有初始偏移或如果当前偏移在服务器上不再存在时的处理方式 -->
-				<entry key="auto.offset.reset" value="earliest" />
+				
+				<!-- 是否自动提交offset -->
+				<entry key="enable.auto.commit" value="false" />
 				<entry key="auto.commit.interval.ms" value="1000" />
+				
+				<!-- 当Kafka没有初始偏移或如果当前偏移在服务器上不再存在时的处理方式 earliest latest none-->
+				<entry key="auto.offset.reset" value="earliest" />
+				
+				<entry key="heartbeat.interval.ms" value="3000" />
 				<entry key="session.timeout.ms" value="15000" />
+				
 				<entry key="connections.max.idle.ms" value="300000" />
 			</map>
 		</constructor-arg>

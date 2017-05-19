@@ -58,11 +58,11 @@
 				<constructor-arg name="name" value="test" />
 			</bean>
 		</property>
-		<property name="producerCallback" ref="producerCallback" />
+		<!-- <property name="producerCallback" ref="producerCallback" /> -->
 	</bean>
 	
-	<bean id="producerCallback" class="org.workin.kafka.producer.spring.callback.DelegateProducerFutureCallback" >
+	<!-- <bean id="producerCallback" class="org.workin.kafka.producer.spring.callback.DelegateProducerFutureCallback" >
 		<property name="delegate"><bean class="org.workin.kafka.test.ProducerServiceImpl"/></property>
-	</bean>
+	</bean> -->
 
 </beans>

@@ -29,7 +29,7 @@ import org.workin.commons.model.impl.CodeDataModel;
 import org.workin.commons.model.impl.CodeMessageModel;
 import org.workin.commons.model.impl.ResultModel;
 import org.workin.commons.util.StringUtils;
-import org.workin.http.httpclient.v4.HttpClientTemplet;
+import org.workin.http.httpclient.v4.HttpClientTemplate;
 import org.workin.payment.Order;
 import org.workin.payment.Payment;
 import org.workin.payment.enums.payment.PaymentStatus;
@@ -50,7 +50,7 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 	
 	/** 支付接口HTTP调用模板 */
 	@Autowired
-	protected HttpClientTemplet paymentHttpTemplet; 
+	protected HttpClientTemplate paymentHttpTemplate; 
 	
 	/** 支付应用上下文配置参数项 */
 	@Autowired
@@ -121,8 +121,8 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 			throw new IllegalArgumentException("Property 'paymentService' must not be null.");
 		if (this.paymentContextParameters == null)
 			throw new IllegalArgumentException("Property 'paymentContextParameters' must not be null.");
-		if (this.paymentHttpTemplet == null)
-			throw new IllegalArgumentException("Property 'paymentHttpTemplet' must not be null.");
+		if (this.paymentHttpTemplate == null)
+			throw new IllegalArgumentException("Property 'paymentHttpTemplate' must not be null.");
 		if (this.paymentFactory == null)
 			throw new IllegalArgumentException("Property 'paymentFactory' must not be null.");
 		
@@ -132,12 +132,12 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 		this.signature = initSignature();
 	}
 	
-	public HttpClientTemplet getPaymentHttpTemplet() {
-		return paymentHttpTemplet;
+	public HttpClientTemplate getPaymentHttpTemplate() {
+		return paymentHttpTemplate;
 	}
 
-	public void setPaymentHttpTemplet(HttpClientTemplet paymentHttpTemplet) {
-		this.paymentHttpTemplet = paymentHttpTemplet;
+	public void setPaymentHttpTemplate(HttpClientTemplate paymentHttpTemplate) {
+		this.paymentHttpTemplate = paymentHttpTemplate;
 	}
 
 	public ApplicationContextParameter<Object, Object> getPaymentContextParameters() {
