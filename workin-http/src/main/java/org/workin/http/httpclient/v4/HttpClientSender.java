@@ -20,20 +20,20 @@ package org.workin.http.httpclient.v4;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.workin.http.HttpSender;
+import org.workin.spring.beans.CheckableInitializingBeanAdapter;
 
 /**
  * HttpClient4.x发送器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class HttpClientSender implements HttpSender, InitializingBean {
+public class HttpClientSender extends CheckableInitializingBeanAdapter implements HttpSender {
 	
 	private HttpClientTemplate httpClientTemplate;
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	protected void checkProperties() {
 		if (httpClientTemplate == null)
 			throw new IllegalArgumentException("Property 'httpClientTemplate' is required");
 	}
