@@ -20,8 +20,8 @@ package org.workin.persistence.jpa.dao;
 
 import java.io.Serializable;
 
+import org.workin.beans.GenericBean;
 import org.workin.persistence.FilterQuery;
-import org.workin.support.bean.GenericBean;
 
 /**
  * JPA持久化数据访问接口

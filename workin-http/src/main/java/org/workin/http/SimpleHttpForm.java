@@ -20,6 +20,8 @@ package org.workin.http;
 
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.NetUtils;
+import org.workin.commons.util.StringUtils;
+import org.workin.http.enums.MimeTypeEnum;
 
 /**
  * HTTP表单实现类
@@ -52,8 +54,8 @@ public class SimpleHttpForm implements HttpForm {
 	/** 请求头对象 */
 	private HttpRequestHeader header;
 	
-	/** 是否自动编码 */
-	private boolean autoEncoding = true;
+	/** Mime-Type */
+	private String mimeType = MimeTypeEnum.APPLICATION_FORM_URLENCODED.getType();
 	
 	/** 字符串编码 */
 	private String encoding;
@@ -142,15 +144,16 @@ public class SimpleHttpForm implements HttpForm {
 	}
 	
 	@Override
-	public boolean isAutoEncoding() {
-		return autoEncoding;
+	public void setMimeType(String mimeType) {
+		if (StringUtils.isNotBlank(mimeType))
+			this.mimeType = mimeType;
 	}
 
 	@Override
-	public void setAutoEncoding(boolean autoEncoding) {
-		this.autoEncoding = autoEncoding;
+	public String getMimeType() {
+		return this.mimeType;
 	}
-
+	
 	@Override
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
@@ -160,5 +163,7 @@ public class SimpleHttpForm implements HttpForm {
 	public String getEncoding() {
 		return this.encoding;
 	}
+
+	
 
 }

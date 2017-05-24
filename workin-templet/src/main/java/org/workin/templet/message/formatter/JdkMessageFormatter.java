@@ -18,57 +18,27 @@
 
 package org.workin.templet.message.formatter;
 
-import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.Collection;
 
-import org.workin.codec.encoder.StringEncoder;
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.CollectionUtils;
-import org.workin.commons.util.StringUtils;
 
 /**
  * JDK原生态消息格式化处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JdkMessageFormatter extends EncodeableMessageFormatter<Object> {
+public class JdkMessageFormatter implements MessageFormatter<Object> {
 	
 	@Override
-	public String format(String message, Object param, String encoding) throws UnsupportedEncodingException {
-		StringEncoder enc = this.getEncoder();
-		if (enc != null && StringUtils.isNotBlank(encoding)) {
-			if (ArrayUtils.isArray(param)) {
-				Object[] params = (Object[]) param;
-				this.encode(params, encoding);
-				return MessageFormat.format(message, params);
-			} else if (CollectionUtils.isCollection(param)) {
-				return format(message, CollectionUtils.toObjectArray((Collection<?>) param), encoding);
-			} else
-				return param != null ? MessageFormat.format(message, 
-						enc.encode(param.toString(), encoding)) : message;
-		} else {
-			if (ArrayUtils.isArray(param)) {
-				return MessageFormat.format(message, (Object[]) param);
-			} else if (CollectionUtils.isCollection(param)) {
-				return format(message, CollectionUtils.toObjectArray((Collection<?>) param));
-			} else
-				return param != null ? MessageFormat.format(message, param) : message;
-		}
+	public String format(String message, Object param) {
+		if (ArrayUtils.isArray(param)) {
+			return MessageFormat.format(message, (Object[]) param);
+		} else if (CollectionUtils.isCollection(param)) {
+			return format(message, CollectionUtils.toObjectArray((Collection<?>) param));
+		} else
+			return param != null ? MessageFormat.format(message, param) : message;
 	}
-	
-	/**
-	 * 将数组中的元素重新编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param encoding
-	 * @return
-	 * @throws UnsupportedEncodingException
-	 */
-	protected void encode(Object[] array, String encoding) throws UnsupportedEncodingException {
-		StringEncoder enc = this.getEncoder();
-		for (int i = 0; i < array.length; i++)
-			array[i] = enc.encode(StringUtils.toString(array[i]), encoding);
-	}
-	
+		
 }

@@ -41,12 +41,14 @@ public abstract class AbstractTypeSerializer extends CodecSupport implements Typ
 	}
 	
 	@Override
-	public void setTypeClass(String typeClass) {
-		this.typeClass = typeClass;
-		try {
-			this.type = (StringUtils.isNotBlank(typeClass) ? Class.forName(typeClass) : null);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+	public void setTypeClass(String typeClass) throws ClassNotFoundException {
+		if (StringUtils.isNotBlank(typeClass)) {
+			// 先尝试加载类型
+			this.type = Class.forName(typeClass);
+			this.typeClass = typeClass;
+		} else {
+			this.type = null;
+			this.typeClass = null;
 		}
 	}
 	

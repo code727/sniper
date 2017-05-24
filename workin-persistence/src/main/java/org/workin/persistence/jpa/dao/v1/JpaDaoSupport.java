@@ -18,8 +18,8 @@
 
 package org.workin.persistence.jpa.dao.v1;
 
+import org.workin.beans.GenericBean;
 import org.workin.commons.util.ClassUtils;
-import org.workin.support.bean.GenericBean;
 
 /**
  * JPA标准的DAO支持抽象类

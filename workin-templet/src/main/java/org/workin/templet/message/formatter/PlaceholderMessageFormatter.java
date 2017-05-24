@@ -24,7 +24,7 @@ package org.workin.templet.message.formatter;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class PlaceholderMessageFormatter<T> extends EncodeableMessageFormatter<T> {
+public abstract class PlaceholderMessageFormatter<T> implements MessageFormatter<T> {
 	
 	/** 参数化文本标识前缀 */
 	private String prefix = "{";

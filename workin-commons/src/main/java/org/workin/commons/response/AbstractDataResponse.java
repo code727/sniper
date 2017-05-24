@@ -28,6 +28,10 @@ public abstract class AbstractDataResponse<T> extends AbstractResponse implement
 	/** 响应数据 */
 	private T data;
 	
+	public AbstractDataResponse() {
+		super();
+	}
+	
 	public AbstractDataResponse(T data) {
 		this(DEFAULT_SUCCESS_STATUS, data);
 	}

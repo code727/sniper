@@ -19,9 +19,9 @@
 package org.workin.payment.factory;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.workin.beans.BeanUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.payment.Payment;
-import org.workin.support.bean.BeanUtils;
 
 /**
  * 支付对象工厂默认实现类

@@ -58,10 +58,26 @@ public class RawURLEncoder extends CodecSupport implements StringEncoder {
         }
 //        dontNeedEncoding.set(' '); 
         
+        /* 排除如下特殊字符 */
+        dontNeedEncoding.set('$');
         dontNeedEncoding.set('-');
         dontNeedEncoding.set('_');
         dontNeedEncoding.set('.');
+        dontNeedEncoding.set('+');
+        dontNeedEncoding.set('!');
         dontNeedEncoding.set('*');
+        dontNeedEncoding.set('’');
+        dontNeedEncoding.set('(');
+        dontNeedEncoding.set(')');
+        
+        /* 排除如下URL保留字符 */
+        dontNeedEncoding.set('&');
+        dontNeedEncoding.set('/');
+        dontNeedEncoding.set(':');
+        dontNeedEncoding.set(';');
+        dontNeedEncoding.set('=');
+        dontNeedEncoding.set('?');
+        dontNeedEncoding.set('@');
 
         dfltEncName = AccessController.doPrivileged(new GetPropertyAction("file.encoding"));
     }
@@ -136,5 +152,11 @@ public class RawURLEncoder extends CodecSupport implements StringEncoder {
 
         return (needToChange? out.toString() : message);
     }
+	
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		String url = "http://localhost:10000/event/payment/get/0BA04C7743644FCE8783AE530DF23444/2017-05-22 10:05:00?name=";
+		RawURLEncoder encoder = new RawURLEncoder();
+		System.out.println(encoder.encode(url));
+	}
 	
 }

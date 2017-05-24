@@ -26,13 +26,18 @@
   			<version>1.1.4</version>
 		</dependency>
 		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-support</artifactId>
+			<version>${workin.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
-			<artifactId>workin-support</artifactId>
+			<artifactId>workin-beans</artifactId>
 			<version>${workin.version}</version>
 		</dependency>
 		<dependency>

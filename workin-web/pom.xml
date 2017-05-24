@@ -40,6 +40,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
+			<artifactId>workin-support</artifactId>
+			<version>${workin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
 			<artifactId>workin-templet</artifactId>
 			<version>${workin.version}</version>
 		</dependency>

@@ -49,7 +49,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
-			<artifactId>workin-support</artifactId>
+			<artifactId>workin-beans</artifactId>
 			<version>${workin.version}</version>
 		</dependency>
 		<dependency>

@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 import org.workin.commons.util.ArrayUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.support.context.ThreadLocalHolder;
+import org.workin.context.ThreadLocalHolder;
 
 /**
  * java.util.ResourceBundle消息解析服务实现类

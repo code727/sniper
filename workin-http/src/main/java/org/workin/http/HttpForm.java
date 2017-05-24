@@ -137,19 +137,15 @@ public interface HttpForm {
 	public HttpRequestHeader getHeader();
 	
 	/**
-	 * 判断表单是否自动编码
+	 * 
+	 * @description
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param autoEncoding
+	 * @param mimeType
 	 */
-	public boolean isAutoEncoding();
+	public void setMimeType(String mimeType);
 	
-	/**
-	 * 设置表单是否自动编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param autoEncoding
-	 */
-	public void setAutoEncoding(boolean autoEncoding);
-	
+	public String getMimeType();
+		
 	/**
 	 * 设置字符集编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

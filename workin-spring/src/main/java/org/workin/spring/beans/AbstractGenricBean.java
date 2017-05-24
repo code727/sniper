@@ -18,8 +18,8 @@
 
 package org.workin.spring.beans;
 
+import org.workin.beans.GenericBean;
 import org.workin.commons.util.ClassUtils;
-import org.workin.support.bean.GenericBean;
 
 /**
  * Spring泛型Bean抽象类

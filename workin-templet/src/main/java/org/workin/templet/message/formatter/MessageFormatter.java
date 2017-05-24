@@ -18,31 +18,13 @@
 
 package org.workin.templet.message.formatter;
 
-import java.io.UnsupportedEncodingException;
-
-import org.workin.codec.encoder.StringEncoder;
-
 /**
  * 泛型参数消息格式化处理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface MessageFormatter<T> {
-	
-	/**
-	 * 设置字符串编码器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param encoder
-	 */
-	public void setEncoder(StringEncoder encoder);
-	
-	/**
-	 * 获取字符串编码器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public StringEncoder getEncoder();
-	
+		
 	/**
 	 * 参数消息格式化
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -51,15 +33,5 @@ public interface MessageFormatter<T> {
 	 * @return
 	 */
 	public String format(String message, T param); 
-	
-	/**
-	 * 将参数进行字符串编码后格式化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param message
-	 * @param param
-	 * @param encoding
-	 * @return
-	 */
-	public String format(String message, T param, String encoding) throws UnsupportedEncodingException; 
-	
+		
 }

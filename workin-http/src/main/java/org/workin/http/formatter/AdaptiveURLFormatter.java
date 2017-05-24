@@ -18,11 +18,9 @@
 
 package org.workin.http.formatter;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.Set;
 
-import org.workin.codec.encoder.StringEncoder;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.NetUtils;
@@ -38,13 +36,13 @@ public class AdaptiveURLFormatter extends AdaptiveMessageFormatter {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public String format(String url, Object param, String encoding) throws UnsupportedEncodingException {
-		StringBuffer formatedUrl = new StringBuffer(super.format(url, param, encoding));
+	public String format(String url, Object param) {
+		StringBuffer formatedUrl = new StringBuffer(super.format(url, param));
 		if (param instanceof Map) {
 			Map<String, Object> inputParam = (Map<String, Object>) param;
 			
 			/* 求输入参数分别与查询字符串以及Action字符串中查询名的差集，
-			 * 多余的参数以及对于的值则直接拼接到URL字符串后面 */
+			 * 多余的参数以及对应的值则直接拼接到URL字符串后面 */
 			Set<String> nameSubtract = (Set<String>) MapUtils.keySubtract(inputParam, NetUtils.getParameterMap(url));
 			nameSubtract = (Set<String>) CollectionUtils.subtract(nameSubtract, NetUtils.getActionParameterNames(
 					NetUtils.getActionString(url), super.getPrefix(), super.getSuffix()));
@@ -55,21 +53,15 @@ public class AdaptiveURLFormatter extends AdaptiveMessageFormatter {
 				else
 					formatedUrl.append("&");
 				
-				StringEncoder enc = this.getEncoder();
-				if (enc != null && StringUtils.isNotBlank(encoding)) {
-					for (String name : nameSubtract) 
-						formatedUrl.append(name).append("=")
-							.append(enc.encode(StringUtils.toString(inputParam.get(name)), encoding)).append("&");
-				} else {
-					for (String name : nameSubtract) 
-						formatedUrl.append(name).append("=")
-							.append(StringUtils.toString(inputParam.get(name))).append("&");
+				for (String name : nameSubtract) {
+					formatedUrl.append(name).append("=").append(StringUtils.toString(inputParam.get(name))).append("&");
 				}
+							
 				formatedUrl.deleteCharAt(formatedUrl.lastIndexOf("&"));
 			}
 		}
 		
 		return formatedUrl.toString();
 	}
-		
+			
 }

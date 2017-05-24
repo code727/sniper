@@ -40,10 +40,15 @@ public abstract class AbstractJsonTypeHandler<T> extends BaseTypeHandler<T> {
 	
 	private JsonSerializer jsonSerializer;
 	
+	/** 返回类型 */
+	protected final Class<T> type;
+	
+	@SuppressWarnings("unchecked")
 	public AbstractJsonTypeHandler() {
 		this.jsonSerializer = initJsonSerializer();
-		
 		AssertUtils.assertNotNull(jsonSerializer, "Json serializer must not be null.");
+		
+		this.type = (Class<T>) ClassUtils.getSuperClassGenricType(this.getClass());
 	}
 	
 	/**
@@ -75,13 +80,12 @@ public abstract class AbstractJsonTypeHandler<T> extends BaseTypeHandler<T> {
 		return getResult(cs.getString(columnIndex));
 	}
 
-	@SuppressWarnings("unchecked")
 	private T getResult(String jsonString) {
 		
 		if (StringUtils.isBlank(jsonString))
 			return null;
 		
-		return (T) jsonSerializer.deserialize(jsonString, ClassUtils.getSuperClassGenricType(this.getClass()));
+		return (T) jsonSerializer.deserialize(jsonString, type);
 	}
 	
 }

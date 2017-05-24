@@ -25,11 +25,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
-import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.http.HttpForm;
@@ -39,17 +38,12 @@ import org.workin.http.HttpForm;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefualtRequestHandler extends AbstractRequestHandler {
+public class DefualtRequestHandler implements RequestHandler {
 
 	@Override
-	public void setRequestBody(HttpEntityEnclosingRequestBase httpRequest, String url, HttpForm form) throws Exception {
-		if (form.isAutoEncoding()) 
-			httpRequest.setEntity(new StringEntity(NetUtils.getQueryString(url)));
-		else {
-			List<NameValuePair> nameValueList = buildeNameValuePairByQueryString(url);
-			if (CollectionUtils.isNotEmpty(nameValueList)) 
-				httpRequest.setEntity(new UrlEncodedFormEntity(nameValueList, getEncoding(form))); 
-		}
+	public void handle(HttpEntityEnclosingRequestBase httpRequest, String url, HttpForm form) throws Exception {
+		ContentType contentType = ContentType.create(form.getMimeType(), form.getEncoding());
+		httpRequest.setEntity(new StringEntity(NetUtils.getQueryString(url), contentType));
 	}
 	
 	/**

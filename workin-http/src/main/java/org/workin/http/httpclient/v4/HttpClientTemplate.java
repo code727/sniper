@@ -19,7 +19,6 @@
 package org.workin.http.httpclient.v4;
 
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.http.client.ResponseHandler;
@@ -35,7 +34,6 @@ import org.workin.commons.util.NetUtils;
 import org.workin.http.HttpAccessor;
 import org.workin.http.HttpForm;
 import org.workin.http.HttpRequestHeader;
-import org.workin.http.HttpSender;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
 import org.workin.http.httpclient.v4.factory.HttpClientFactory;
 import org.workin.http.httpclient.v4.handler.request.DefualtRequestHandler;
@@ -47,7 +45,7 @@ import org.workin.http.httpclient.v4.handler.response.StringResponseHandler;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class HttpClientTemplate extends HttpAccessor implements HttpSender {
+public final class HttpClientTemplate extends HttpAccessor {
 	
 	private static Logger logger = LoggerFactory.getLogger(HttpClientTemplate.class);
 	
@@ -94,21 +92,6 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 			this.responseHandler = new StringResponseHandler();
 	}
 		
-	@Override
-	public <T> T request(String name) throws Exception {
-		return super.requestByName(name, null);
-	}
-
-	@Override
-	public <T> T request(String name, Map<String, Object> parameters) throws Exception {
-		return super.requestByName(name, parameters);
-	}
-
-	@Override
-	public <T> T request(String name, Object parameter) throws Exception {
-		return super.requestByName(name, parameter);
-	}
-	
 	/**
 	 * 执行指定名称对应的表单GET请求，并返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -119,15 +102,15 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 	 */
 	@SuppressWarnings("unchecked")
 	protected <T> T doGetRequest(String name, Object param) throws Exception {
-		HttpForm form = getFormRegister().find(name);
-		String url = formatToURL(form, name, param);
+		String url = format(name, param);
+		HttpForm form = formRegister.find(name);
 		
-		HttpGet httpGet = new HttpGet(url);
+		HttpGet httpGet = new HttpGet(getUrlEncoder().encode(url, form.getEncoding()));
 		addHeader(httpGet, form);
 		setConfig(httpGet);
 		
 		try {
-			logger.info("Request form [{}] url [{}] method:[GET]", name, url);
+			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpGet.METHOD_NAME);
 			return (T) this.httpClientFactory.create().execute(httpGet, getBoundResponseHandler(form));
 		} finally {
 			if (httpGet != null) 
@@ -145,16 +128,16 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 	 */
 	@SuppressWarnings("unchecked")
 	protected <T> T doPostRequest(String name, Object param) throws Exception {
-		HttpForm form = getFormRegister().find(name);
-		String url = formatToURL(form, name, param);
+		String url = format(name, param);
+		HttpForm form = formRegister.find(name);
 		
-		HttpPost httpPost = new HttpPost(NetUtils.getActionString(url));
+		HttpPost httpPost = new HttpPost(getUrlEncoder().encode(NetUtils.getActionString(url), form.getEncoding()));
 		addHeader(httpPost, form);
 		setConfig(httpPost);
 		
 		try {
-			getBoundRequestHandler(form).setRequestBody(httpPost, url, form);
-			logger.info("Request form [{}] url [{}] method:[POST]", name, url);
+			getBoundRequestHandler(form).handle(httpPost, url, form);
+			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpPost.METHOD_NAME);
 			return (T) this.httpClientFactory.create().execute(httpPost, getBoundResponseHandler(form));
 		}  finally {
 			if (httpPost != null) 
@@ -172,16 +155,16 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 	 */
 	@SuppressWarnings("unchecked")
 	protected <T> T doPutRequest(String name, Object param) throws Exception {
-		HttpForm form = getFormRegister().find(name);
-		String url = formatToURL(form, name, param);
+		String url = format(name, param);
+		HttpForm form = formRegister.find(name);
 		
 		HttpPut httpPut = new HttpPut(NetUtils.getActionString(url));
 		addHeader(httpPut, form);
 		setConfig(httpPut);
 		
 		try {
-			getBoundRequestHandler(form).setRequestBody(httpPut, url, form);
-			logger.info("Request form [{}] url [{}] method:[PUT]", name, url);
+			getBoundRequestHandler(form).handle(httpPut, url, form);
+			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpPut.METHOD_NAME);
 			return (T) this.httpClientFactory.create().execute(httpPut, getBoundResponseHandler(form));
 		}  finally {
 			if (httpPut != null)
@@ -199,29 +182,22 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 	 */
 	@SuppressWarnings("unchecked")
 	protected <T> T doDeleteRequest(String name, Object param) throws Exception {
-		HttpForm form = getFormRegister().find(name);
-		String url = formatToURL(form, name, param);
+		String url = format(name, param);
+		HttpForm form = formRegister.find(name);
 		
-		HttpDelete httpDelete = new HttpDelete(url);
+		HttpDelete httpDelete = new HttpDelete(getUrlEncoder().encode(url, form.getEncoding()));
 		addHeader(httpDelete, form);
 		setConfig(httpDelete);
 		
 		try {
-			logger.info("Request form [{}] url [{}] method:[DELETE]", name, url);
+			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpDelete.METHOD_NAME);
 			return (T) this.httpClientFactory.create().execute(httpDelete, getBoundResponseHandler(form));
 		}  finally {
 			if (httpDelete != null)
 				httpDelete.releaseConnection();
 		}
 	}
-	
-	@Override
-	protected String formatToURL(HttpForm form, String name, Object param) throws Exception {
-		String url = getFormRegister().findURL(name);
-		url = getUrlFormatter().format(url, param, form.isAutoEncoding() ? getBoundEncoding(form) : null);
-		return url;
-	}
-	
+		
 	/**
 	 * 为HttpRequestBase对象添加表单绑定的Header
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -276,15 +252,5 @@ public final class HttpClientTemplate extends HttpAccessor implements HttpSender
 		ResponseHandler<?> responseHandler = hcForm.getResponseHandler();
 		return responseHandler != null ? responseHandler : this.responseHandler;
 	}
-	
-	/**
-	 * 获取HttpForm表单绑定的字符集编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param form
-	 * @return
-	 */
-	protected String getBoundEncoding(HttpForm form) {
-		return getBoundRequestHandler(form).getEncoding(form);
-	}
-		
+				
 }

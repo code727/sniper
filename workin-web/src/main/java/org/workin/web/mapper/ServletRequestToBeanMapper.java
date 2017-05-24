@@ -23,10 +23,10 @@ import java.util.Set;
 
 import javax.servlet.ServletRequest;
 
-import org.workin.support.mapper.AbstractBeanMapper;
-import org.workin.support.mapper.Mapper;
-import org.workin.support.mapper.ParameterRule;
-import org.workin.support.mapper.impl.MapToBeanMapper;
+import org.workin.beans.mapper.AbstractBeanMapper;
+import org.workin.beans.mapper.MapToBeanMapper;
+import org.workin.beans.mapper.Mapper;
+import org.workin.beans.mapper.ParameterRule;
 import org.workin.web.WebUtils;
 
 /**

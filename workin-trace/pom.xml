@@ -33,6 +33,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
+			<artifactId>workin-context</artifactId>
+			<version>${workin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
 			<artifactId>workin-test</artifactId>
 			<version>${workin.version}</version>
 			<scope>test</scope>

@@ -19,7 +19,6 @@
 package org.workin.http.httpclient.v4.handler.request;
 
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
-import org.workin.codec.Codecable;
 import org.workin.http.HttpForm;
 
 /**
@@ -27,23 +26,16 @@ import org.workin.http.HttpForm;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface RequestHandler extends Codecable {
+public interface RequestHandler {
 	
 	/**
-	 * 根据URL和表单对象设置请求体到HttpEntityEnclosingRequestBase对象
+	 * 根据URL和表单对象设置处理HttpEntityEnclosingRequestBase对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param httpRequest
 	 * @param url
 	 * @param form
 	 * @throws Exception
 	 */
-	public void setRequestBody(HttpEntityEnclosingRequestBase httpRequest, String url, HttpForm form) throws Exception;
-	
-	/**
-	 * 获取表单绑定的字符集编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getEncoding(HttpForm form);
-	
+	public void handle(HttpEntityEnclosingRequestBase httpRequest, String url, HttpForm form) throws Exception;
+		
 }

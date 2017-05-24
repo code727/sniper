@@ -52,10 +52,11 @@ public class AdaptiveMessageFormatterTest extends BaseTestCase {
 		map.put("1", "workin test_001");
 	}
 	
-//	@Test
+	@Test
 	public void testFormat1() {
 		String message1 = "This result code is {code}, data is {data}";
 		String result = formatter.format(message1, model);
+		System.out.println(result);
 		
 		assertEquals(result, formatter.format(message1, map));
 		System.out.println(result);
@@ -81,7 +82,7 @@ public class AdaptiveMessageFormatterTest extends BaseTestCase {
 		System.out.println(result);
 	}
 	
-	@Test
+//	@Test
 	public void testFormat4() {
 		String message = "This result code is {0}, data is {1}";
 		String result = formatter.format(message, map);

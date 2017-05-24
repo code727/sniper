@@ -21,6 +21,7 @@ package org.workin.http;
 import java.util.Map;
 
 import org.workin.codec.encoder.RawURLEncoder;
+import org.workin.codec.encoder.StringEncoder;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
@@ -36,11 +37,13 @@ import org.workin.templet.message.formatter.MessageFormatter;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class HttpAccessor extends CheckableInitializingBeanAdapter {
+public abstract class HttpAccessor extends CheckableInitializingBeanAdapter implements HttpSender {
 	
-	private HttpFormRegister formRegister;
+	protected HttpFormRegister formRegister;
 	
-	private MessageFormatter<Object> urlFormatter;
+	protected MessageFormatter<Object> urlFormatter;
+	
+	protected StringEncoder urlEncoder;
 		
 	/** 模板所支持的请求方法映射集 */
 	private static final Map<String, String> SUPPORT_REQUEST_METHOD;
@@ -53,6 +56,14 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter {
 		SUPPORT_REQUEST_METHOD.put("delete", "doDeleteRequest");
 	}
 	
+	public void setFormRegister(HttpFormRegister formRegister) {
+		this.formRegister = formRegister;
+	}
+	
+	public HttpFormRegister getFormRegister() {
+		return formRegister;
+	}
+	
 	public void setUrlFormatter(MessageFormatter<Object> urlFormatter) {
 		this.urlFormatter = urlFormatter;
 	}
@@ -60,13 +71,13 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter {
 	public MessageFormatter<Object> getUrlFormatter() {
 		return urlFormatter;
 	}
-
-	public void setFormRegister(HttpFormRegister formRegister) {
-		this.formRegister = formRegister;
-	}
 	
-	public HttpFormRegister getFormRegister() {
-		return formRegister;
+	public StringEncoder getUrlEncoder() {
+		return urlEncoder;
+	}
+
+	public void setUrlEncoder(StringEncoder urlEncoder) {
+		this.urlEncoder = urlEncoder;
 	}
 	
 	@Override
@@ -77,25 +88,40 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter {
 	
 	@Override
 	protected void init() throws Exception {
-		if (this.urlFormatter == null) {
+		if (this.urlFormatter == null) 
 			this.urlFormatter = new AdaptiveURLFormatter();
-			this.urlFormatter.setEncoder(new RawURLEncoder());
-		}
+		
+		if (this.urlEncoder == null)
+			this.urlEncoder = new RawURLEncoder();
 	}
 		
 	/**
-	 * 将表单对象加上请求参数后格式化成URL
+	 * 将指定名称对应的表单对象加上请求参数后格式化成完成的URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param form
 	 * @param name
 	 * @param param
 	 * @return
 	 * @throws Exception
 	 */
-	protected String formatToURL(HttpForm form, String name, Object param) throws Exception {
-		String url = getFormRegister().findURL(name);
-		url = this.urlFormatter.format(url, param, form.isAutoEncoding() ? form.getEncoding() : null);
+	protected String format(String name, Object param) {
+		String url = formRegister.findURL(name);
+		url = urlFormatter.format(url, param);
 		return url;
+	}
+	
+	@Override
+	public <T> T request(String name) throws Exception {
+		return requestByName(name, null);
+	}
+
+	@Override
+	public <T> T request(String name, Map<String, Object> parameters) throws Exception {
+		return requestByName(name, parameters);
+	}
+
+	@Override
+	public <T> T request(String name, Object parameter) throws Exception {
+		return requestByName(name, parameter);
 	}
 	
 	/**

@@ -104,5 +104,7 @@
 		<module>workin-zookeeper</module>
 		<module>workin-codec</module>
 		<module>workin-sharding</module>
+		<module>workin-beans</module>
+		<module>workin-context</module>
 	</modules>
 </project>

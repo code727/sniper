@@ -21,10 +21,10 @@ package org.workin.spring.context.test;
 import java.util.Map;
 
 import org.junit.Test;
+import org.workin.beans.parameter.handler.CoverageDulicateKeyHandler;
 import org.workin.commons.util.MapUtils;
 import org.workin.spring.context.ApplicationContextParameter;
 import org.workin.spring.context.ParameterService;
-import org.workin.support.parameter.handler.CoverageDulicateKeyHandler;
 import org.workin.test.junit.BaseTestCase;
 
 /**

@@ -25,6 +25,10 @@ package org.workin.commons.response;
  */
 public class BaseDataResponse<T> extends AbstractDataResponse<T> {
 	
+	public BaseDataResponse() {
+		super();
+	}
+		
 	public BaseDataResponse(T data) {
 		super(data);
 	}

@@ -47,6 +47,13 @@
             <optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+            <scope>compile</scope>
+            <optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-codec</artifactId>
 			<version>${workin.version}</version>
@@ -54,6 +61,11 @@
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-templet</artifactId>
+			<version>${workin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
+			<artifactId>workin-serialization</artifactId>
 			<version>${workin.version}</version>
 		</dependency>
 		<dependency>

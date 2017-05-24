@@ -29,6 +29,10 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	/** 响应消息 */
 	private String message;
 	
+	public BaseFullResponse() {
+		super();
+	}
+	
 	public BaseFullResponse(T data) {
 		this(DEFAULT_SUCCESS_STATUS, DEFAULT_SUCCESS_MESSAGE, data);
 	}
@@ -187,5 +191,5 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	public static <T> BaseFullResponse<T> exception(String code, String message, T data) {
 		return new BaseFullResponse<T>(code, message, data);
 	}
-
+	
 }

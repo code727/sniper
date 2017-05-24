@@ -20,11 +20,11 @@ package org.workin.persistence.hibernate.dao;
 
 import java.io.Serializable;
 
+import org.workin.beans.GenericBean;
 import org.workin.persistence.FilterQuery;
 import org.workin.persistence.jpa.dao.JpaNamedQuery;
 import org.workin.persistence.jpa.dao.JpaNativePersistence;
 import org.workin.persistence.jpa.dao.JpaNativeQuery;
-import org.workin.support.bean.GenericBean;
 
 /**
  * Hibernate持久化数据访问接口

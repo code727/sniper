@@ -18,7 +18,7 @@
 
 package org.workin.persistence.sqlmap;
 
-import org.workin.support.bean.GenericBean;
+import org.workin.beans.GenericBean;
 
 /**
  * SQL映射操作接口

@@ -21,9 +21,9 @@ package org.workin.persistence.hibernate.dao.v3;
 import org.hibernate.Session;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
+import org.workin.beans.GenericBean;
 import org.workin.commons.util.ClassUtils;
 import org.workin.persistence.hibernate.HibernateUtils;
-import org.workin.support.bean.GenericBean;
 
 /**
  * Hibernate3 DAO支持抽象类

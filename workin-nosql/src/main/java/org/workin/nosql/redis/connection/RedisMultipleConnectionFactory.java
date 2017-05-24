@@ -20,7 +20,7 @@ package org.workin.nosql.redis.connection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.workin.support.context.DataSourceHolder;
+import org.workin.context.DataSourceHolder;
 
 /**
  * 多路由RedisConnectionFactory实现类

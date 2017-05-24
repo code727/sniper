@@ -21,9 +21,9 @@ package org.workin.security.manager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.workin.beans.BeanUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.security.PrincipalMeta;
-import org.workin.support.bean.BeanUtils;
 
 /**
  * Principal管理器抽象类

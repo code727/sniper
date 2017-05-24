@@ -18,14 +18,12 @@
 
 package org.workin.templet.message.formatter;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Set;
 
-import org.workin.codec.encoder.StringEncoder;
+import org.workin.beans.BeanReflector;
+import org.workin.beans.DefaultBeanReflector;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.StringUtils;
-import org.workin.support.bean.BeanReflector;
-import org.workin.support.bean.DefaultBeanReflector;
 
 /**
  * Java Bean对象消息格式化处理器
@@ -41,30 +39,18 @@ public class BeanMessageFormatter extends PlaceholderMessageFormatter<Object> {
 	}
 			
 	@Override
-	public String format(String message, Object bean, String encoding) throws UnsupportedEncodingException {
+	public String format(String message, Object bean) {
 		if (bean != null) {
 			// 获取需要被替换的标记子串
 			Set<String> markSet = CollectionUtils.newHashSet(StringUtils.leftSubstringAll(message, this.getPrefix(), this.getSuffix()));
 			if (CollectionUtils.isNotEmpty(markSet)) {
-				StringEncoder encoder = this.getEncoder();
 				StringBuffer expression = new StringBuffer();
-				if (encoder != null && StringUtils.isNotBlank(encoding)) {
-					for (String mark : markSet) {
-						expression.setLength(0);
-						expression.append(this.getPrefix()).append(mark).append(this.getSuffix());
-						try {
-							message = StringUtils.replaceAll(message, expression.toString(), 
-									encoder.encode(StringUtils.toString(this.beanReflector.get(bean, mark)), encoding)); 
-						} catch (Exception e) {} // 忽略异常继续处理
-					}
-				} else {
-					for (String mark : markSet) {
-						expression.setLength(0);
-						expression.append(this.getPrefix()).append(mark).append(this.getSuffix());
-						try {
-							message = StringUtils.replaceAll(message, expression.toString(),StringUtils.toString(this.beanReflector.get(bean, mark))); 
-						} catch (Exception e) {} // 忽略异常继续处理
-					}
+				for (String mark : markSet) {
+					expression.setLength(0);
+					expression.append(this.getPrefix()).append(mark).append(this.getSuffix());
+					try {
+						message = StringUtils.replaceAll(message, expression.toString(),StringUtils.toString(this.beanReflector.get(bean, mark))); 
+					} catch (Exception e) {} // 忽略异常继续处理
 				}
 			}
 		}

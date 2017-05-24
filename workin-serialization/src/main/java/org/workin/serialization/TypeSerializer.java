@@ -36,8 +36,9 @@ public interface TypeSerializer extends Serializer, Deserializer {
 	 * 设置结果类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param typeClass
+	 * @throws ClassNotFoundException
 	 */
-	public void setTypeClass(String typeClass);
+	public void setTypeClass(String typeClass) throws ClassNotFoundException;
 
 	/**
 	 * 获取结果类型
