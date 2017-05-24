@@ -25,10 +25,10 @@ import org.csource.fastdfs.TrackerServer;
 import org.springframework.beans.factory.InitializingBean;
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
+import org.workin.context.ThreadLocalHolder;
 import org.workin.fastdfs.factory.DefaultPoolableStorageServerFactory;
 import org.workin.fastdfs.factory.DefaultPoolableTrackerServerFactory;
 import org.workin.fastdfs.factory.PoolableStorageServerFactory;
-import org.workin.support.context.ThreadLocalHolder;
 
 /**
  * 池化的连接工厂实现类

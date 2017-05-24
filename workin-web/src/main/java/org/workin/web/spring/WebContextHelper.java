@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.workin.support.context.ThreadLocalHolder;
+import org.workin.context.ThreadLocalHolder;
 import org.workin.web.WebUtils;
 import org.workin.web.spring.invocation.WebApplicationContextInvocation;
 

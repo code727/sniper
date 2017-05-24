@@ -24,7 +24,7 @@ import java.net.Socket;
 import org.apache.commons.pool.PoolableObjectFactory;
 import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.TrackerServer;
-import org.workin.support.context.ThreadLocalHolder;
+import org.workin.context.ThreadLocalHolder;
 
 /**
  * 可池化的TrackerServer对象工厂默认实现类

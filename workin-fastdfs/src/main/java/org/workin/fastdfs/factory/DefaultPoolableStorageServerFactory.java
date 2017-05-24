@@ -25,7 +25,7 @@ import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerClient;
 import org.csource.fastdfs.TrackerServer;
-import org.workin.support.context.ThreadLocalHolder;
+import org.workin.context.ThreadLocalHolder;
 
 /**
  * 可池化的StorageServer对象工厂默认实现类

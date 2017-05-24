@@ -23,7 +23,7 @@ import java.lang.reflect.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.workin.commons.exception.WorkinException;
-import org.workin.support.context.DataSourceHolder;
+import org.workin.context.DataSourceHolder;
 
 /**
  * 多数据源切换实现类

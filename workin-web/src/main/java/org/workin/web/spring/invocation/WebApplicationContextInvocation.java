@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.workin.support.context.ThreadLocalHolder;
+import org.workin.context.ThreadLocalHolder;
 import org.workin.web.WebUtils;
 
 /**
