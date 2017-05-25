@@ -63,6 +63,10 @@ public class User extends Person implements Serializable, Cloneable {
 		return password;
 	}
 	
+	public String getLoginName() {
+		return loginName;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -76,5 +80,5 @@ public class User extends Person implements Serializable, Cloneable {
 		}
 		return null;
 	}
-		
+			
 }

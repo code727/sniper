@@ -19,6 +19,7 @@
 package org.workin.beans.mapper;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.workin.beans.parameter.Parameter;
 import org.workin.beans.parameter.ParameterUtils;
@@ -26,25 +27,33 @@ import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.MapUtils;
 
 /**
- *  org.workin.support.parameter.Parameter对象与Map对象之间的映射转换
+ * org.workin.beans.parameter.Parameter对象与Map对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class ParameterToMapMapper<V> extends
 		AbstractMapper<Parameter<String, V>, Map<String, V>> {
+	
+	public ParameterToMapMapper() {
+		super();
+	}
+	
+	public ParameterToMapMapper(Set<MapperRule> mapperRules) {
+		super(mapperRules);
+	}
 
 	@Override
-	public Map<String, V> mapping(Parameter<String, V> source) {
-		if (ParameterUtils.isEmpty(source))
+	public Map<String, V> mapping(Parameter<String, V> parameter) throws Exception {
+		if (ParameterUtils.isEmpty(parameter))
 			return null;
 		
-		 Map<String, V> map = null;
-		 if (CollectionUtils.isNotEmpty(parameterRules)) {
-			 map = MapUtils.newHashMap();
-			 for (ParameterRule rule : parameterRules) 
-				 map.put(rule.getMappedName(), source.getValue(rule.getOriginalName()));
+		 Map<String, V> map = MapUtils.newLinkedHashMap();
+		 if (CollectionUtils.isNotEmpty(mapperRules)) {
+			 for (MapperRule rule : mapperRules) {
+				 map.put(rule.getMappedName(), parameter.getValue(rule.getOriginalName()));
+			 }
 		 } else
-			 map = source.getParameters();
+			 map.putAll(parameter.getParameters());
 		 
 		 return map;
 	}

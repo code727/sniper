@@ -95,5 +95,26 @@ public interface Parameter<K, V> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	public void clear();
+	
+	/**
+	 * 获取参数的个数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public int size();
+	
+	/**
+	 * 判断是否为空
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean isEmpty();
+	
+	/**
+	 * 判断是否不为空
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean isNotEmpty();
 
 }

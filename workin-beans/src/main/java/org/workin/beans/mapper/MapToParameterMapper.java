@@ -19,30 +19,39 @@
 package org.workin.beans.mapper;
 
 import java.util.Map;
+import java.util.Set;
 
-import org.workin.beans.parameter.ConcurrentParameter;
+import org.workin.beans.parameter.MapParameter;
 import org.workin.beans.parameter.Parameter;
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.MapUtils;
 
 /**
- * Map对象与org.workin.support.parameter.Parameter对象之间的映射转换
+ * Map对象与org.workin.beans.parameter.Parameter对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MapToParameterMapper<V> extends
-		AbstractMapper<Map<String, V>, Parameter<String, V>> {
+public class MapToParameterMapper<V> extends AbstractMapper<Map<String, V>, Parameter<String, V>> {
+	
+	public MapToParameterMapper() {
+		super();
+	}
+	
+	public MapToParameterMapper(Set<MapperRule> mapperRules) {
+		super(mapperRules);
+	}
 
 	@Override
 	public Parameter<String, V> mapping(Map<String, V> source) {
 		if (MapUtils.isEmpty(source))
 			return null;
 		
-		Parameter<String, V> parameter = new ConcurrentParameter<String, V>();
-		if (CollectionUtils.isNotEmpty((parameterRules)))
-			for (ParameterRule rule : parameterRules) 
+		Parameter<String, V> parameter = new MapParameter<String, V>();
+		if (CollectionUtils.isNotEmpty((mapperRules))) {
+			for (MapperRule rule : mapperRules) {
 				parameter.add(rule.getMappedName(), source.get(rule.getOriginalName()));
-		else
+			}
+		} else
 			parameter.setParameters(source);
 		
 		return parameter;

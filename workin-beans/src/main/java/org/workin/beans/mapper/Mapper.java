@@ -25,21 +25,21 @@ import java.util.Set;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Mapper<T, R> {
+public interface Mapper<S, T> {
 	
 	/**
-	 * 设置参数映射规则集
+	 * 设置映射器规则集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameterRules
+	 * @param mapperRules
 	 */
-	public void setParameterRules(Set<ParameterRule> parameterRules);
+	public void setMapperRules(Set<MapperRule> mapperRules);
 	
 	/**
-	 * 获取参数映射规则集
+	 * 获取映射器规则集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Set<ParameterRule> getParameterRules();
+	public Set<MapperRule> getMapperRules();
 	
 	/**
 	 * 将指定的源对象进行映射处理
@@ -48,6 +48,6 @@ public interface Mapper<T, R> {
 	 * @return
 	 * @throws Exception
 	 */
-	public R mapping(T source) throws Exception;
+	public T mapping(S source) throws Exception;
 
 }

@@ -18,11 +18,8 @@
 
 package org.workin.beans.parameter;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.MapUtils;
 
 /**
@@ -30,59 +27,18 @@ import org.workin.commons.util.MapUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ConcurrentParameter<K, V> implements Parameter<K, V> {
-	
-	/** 参数映射集 */
-	protected Map<K, V> parameters;
+public class ConcurrentParameter<K, V> extends MapParameter<K, V> {
 	
 	public ConcurrentParameter() {
-		this.parameters = MapUtils.newConcurrentHashMap();
+		this((Map<K, V>) null);
 	}
 	
-	@Override
-	public void setParameters(Map<K, V> parameters) {
-		this.parameters.putAll(parameters);
-	}
-
-	@Override
-	public Map<K, V> getParameters() {
-		return this.parameters;
-	}
-
-	@Override
-	public void add(K name, V value) {
-		this.parameters.put(name, value);
-	}
-
-	@Override
-	public V getValue(K name) {
-		return this.parameters.get(name);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <V1> V1 getValue(K name, Class<V1> clazz) {
-		return (V1) this.getValue(name);
+	public ConcurrentParameter(Parameter<K, V> parameter) {
+		this(parameter != null ? parameter.getParameters() : null);
 	}
 	
-	@Override
-	public Set<K> getNames() {
-		return this.parameters.keySet();
+	public ConcurrentParameter(Map<K, V> parameters) {
+		this.parameters = MapUtils.newConcurrentHashMap(parameters);
 	}
-
-	@Override
-	public List<V> getValues() {
-		return CollectionUtils.newArrayList(this.parameters.values());
-	}
-
-	@Override
-	public void remove(K name) {
-		this.parameters.remove(name);
-	}
-
-	@Override
-	public void clear() {
-		this.parameters.clear();
-	}
-
+				
 }

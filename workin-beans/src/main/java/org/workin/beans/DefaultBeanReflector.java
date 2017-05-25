@@ -37,19 +37,18 @@ import org.workin.commons.util.StringUtils;
 public class DefaultBeanReflector implements BeanReflector {
 	
 	/** 在表达式中各属性间的分隔符 */
-	private String Propertieseperator;
+	private String propertySeperator;
 	
 	public DefaultBeanReflector() {
-		this.Propertieseperator = ".";
+		this.propertySeperator = ".";
 	}
 	
-	public String getPropertieseperator() {
-		return Propertieseperator;
+	public String getPropertySeperator() {
+		return propertySeperator;
 	}
 
-	public void setPropertieseperator(String Propertieseperator) {
-		if (StringUtils.isNotBlank(Propertieseperator))
-			this.Propertieseperator = Propertieseperator;
+	public void setPropertySeperator(String propertySeperator) {
+		this.propertySeperator = propertySeperator;
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class DefaultBeanReflector implements BeanReflector {
 		if (bean == null || StringUtils.isBlank(expression))
 			return null;
 		
-		String memberName = StringUtils.beforeFrist(expression, this.Propertieseperator);
+		String memberName = StringUtils.beforeFrist(expression, this.propertySeperator);
 		if (memberName.length() > 0) {
 			memberName = memberName.trim();
 			// 复合成员属性
@@ -67,7 +66,7 @@ public class DefaultBeanReflector implements BeanReflector {
 				if (getter != null)
 					memberType = getter.getReturnType();
 			}
-			return getterName(memberType, StringUtils.afterFrist(expression, this.Propertieseperator));
+			return getterName(memberType, StringUtils.afterFrist(expression, this.propertySeperator));
 		}
 		
 		return memberGetterName(bean, expression);
@@ -75,7 +74,7 @@ public class DefaultBeanReflector implements BeanReflector {
 
 	@Override
 	public String setterName(Object bean, String expression) {
-		return setterName(bean, this.Propertieseperator, null);
+		return setterName(bean, this.propertySeperator, null);
 	}
 
 	@Override
@@ -83,7 +82,7 @@ public class DefaultBeanReflector implements BeanReflector {
 		if (bean == null || StringUtils.isBlank(expression))
 			return null;
 		
-		String memberName = StringUtils.beforeFrist(expression, this.Propertieseperator);
+		String memberName = StringUtils.beforeFrist(expression, this.propertySeperator);
 		if (memberName.length() > 0) {
 			memberName = memberName.trim();
 			// 复合成员属性
@@ -94,7 +93,7 @@ public class DefaultBeanReflector implements BeanReflector {
 				if (setter != null)
 					memberType = setter.getParameterTypes()[0];
 			}
-			return setterName(memberType, StringUtils.afterFrist(expression, this.Propertieseperator), parameterType);
+			return setterName(memberType, StringUtils.afterFrist(expression, this.propertySeperator), parameterType);
 		}
 		
 		return memberSetterName(bean, expression, parameterType);
@@ -103,7 +102,7 @@ public class DefaultBeanReflector implements BeanReflector {
 	@Override
 	public Object get(Object bean, String expression) throws Exception {
 		
-		String memberName = StringUtils.beforeFrist(expression, this.Propertieseperator);
+		String memberName = StringUtils.beforeFrist(expression, this.propertySeperator);
 		if (StringUtils.isNotBlank(memberName)) {
 			
 			String memberGetterName = getterName(bean, memberName);
@@ -117,7 +116,7 @@ public class DefaultBeanReflector implements BeanReflector {
 				}
 				
 				// 复合成员的下一级成员名
-				String nextMemberName = StringUtils.afterFrist(expression, this.Propertieseperator);
+				String nextMemberName = StringUtils.afterFrist(expression, this.propertySeperator);
 				if (StringUtils.isNotBlank(nextMemberName)) {
 					if (memberValue != null)
 						// 递归获取下一级成员的值
@@ -156,7 +155,7 @@ public class DefaultBeanReflector implements BeanReflector {
 	public void set(Object bean, String expression, Class<?> parameterType, 
 			Object parameterValue) throws Exception {
 			
-		String memberName = StringUtils.beforeFrist(expression, this.Propertieseperator);
+		String memberName = StringUtils.beforeFrist(expression, this.propertySeperator);
 		if (StringUtils.isNotBlank(memberName)) {
 			
 			// 成员setter方法参数类型。默认情况下，认为成员属性的类型即为对应setter方法的参数类型
@@ -189,7 +188,7 @@ public class DefaultBeanReflector implements BeanReflector {
 			}
 			
 			// 当前复合成员的下一级成员名
-			String nextMemberName = StringUtils.afterFrist(expression, this.Propertieseperator);
+			String nextMemberName = StringUtils.afterFrist(expression, this.propertySeperator);
 			if (StringUtils.isNotBlank(nextMemberName)) {
 				if (memberValue == null) {
 					/* 复合成员为空，则利用此成员的默认构造函数创建一个后，再调用此setter方法或直接对其赋值 */

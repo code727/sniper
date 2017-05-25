@@ -19,19 +19,19 @@
 package org.workin.beans.mapper;
 
 /**
- * 参数规则
+ * 映射器规则
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ParameterRule {
+public class MapperRule {
 	
 	/** 原始参数名称 */
 	private String originalName;
 	
-	/** 被映射参数名称 */
+	/** 被映射后的参数名称 */
 	private String mappedName;
 	
-	public ParameterRule(String originalName, String mappedName) {
+	public MapperRule(String originalName, String mappedName) {
 		this.originalName = originalName;
 		this.mappedName = mappedName;
 	}

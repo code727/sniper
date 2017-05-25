@@ -18,25 +18,38 @@
 
 package org.workin.beans.mapper;
 
-import org.workin.beans.parameter.ConcurrentParameter;
+import java.util.Set;
+
+import org.workin.beans.parameter.MapParameter;
 import org.workin.beans.parameter.Parameter;
 import org.workin.beans.parameter.ParameterUtils;
 import org.workin.commons.util.CollectionUtils;
 
 /**
- * org.workin.support.parameter.Parameter对象与org.workin.support.parameter.Parameter对象之间的映射转换
+ * org.workin.beans.parameter.Parameter对象与org.workin.beans.parameter.Parameter对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ParameterToParameter<V> extends AbstractMapper<Parameter<String,V>, Parameter<String,V>> {
+public class ParameterToParameterMapper<V> extends AbstractMapper<Parameter<String,V>, Parameter<String,V>> {
+	
+	public ParameterToParameterMapper() {
+		super();
+	}
+	
+	public ParameterToParameterMapper(Set<MapperRule> mapperRules) {
+		super(mapperRules);
+	}
 
 	@Override
 	public Parameter<String, V> mapping(Parameter<String, V> source) {
-		if (ParameterUtils.isEmpty(source) || CollectionUtils.isEmpty((parameterRules)))
-			return source;
+		if (ParameterUtils.isEmpty(source))
+			return null;
 		
-		Parameter<String, V> parameter = new ConcurrentParameter<String, V>();
-		for (ParameterRule rule : parameterRules) 
+		if (CollectionUtils.isEmpty(mapperRules))
+			return new MapParameter<String, V>(source);
+		
+		Parameter<String, V> parameter = new MapParameter<String, V>();
+		for (MapperRule rule : mapperRules) 
 			parameter.add(rule.getMappedName(), source.getValue(rule.getOriginalName()));
 		
 		return parameter;

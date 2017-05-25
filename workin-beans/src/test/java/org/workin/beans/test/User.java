@@ -62,7 +62,7 @@ public class User implements Serializable {
 	public boolean isVip() {
 		return vip;
 	}
-
+	
 	public void setVip(boolean vip) {
 		this.vip = vip;
 	}

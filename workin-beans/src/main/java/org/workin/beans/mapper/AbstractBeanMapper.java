@@ -23,30 +23,46 @@ import java.util.Set;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ReflectionUtils;
 
-
 /**
  * Java Bean映射器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractBeanMapper<T, R> extends AbstractMapper<T, R> {
+public abstract class AbstractBeanMapper<S, T> extends AbstractMapper<S, T> {
 	
 	/** 被映射的目标Bean类型 */
-	private String type;
+	private String beanType;
 	
-	public AbstractBeanMapper(String type) {
-		this(type, null);
+	/** 被映射的目标Bean类型 */
+	private Class<T> beanClass;
+	
+	protected AbstractBeanMapper(String beanType) throws ClassNotFoundException {
+		this(beanType, null);
 	}
 	
-	public AbstractBeanMapper(String type, Set<ParameterRule> parameterRules) {
-		AssertUtils.assertNotBlank(type, "Mapped bean type must not be null or blank.");
+	protected AbstractBeanMapper(Class<T> beanClass) {
+		this(beanClass, null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected AbstractBeanMapper(String beanType, Set<MapperRule> mapperRules) throws ClassNotFoundException {
+		this((Class<T>) Class.forName(beanType), mapperRules);
+	}
+	
+	protected AbstractBeanMapper(Class<T> beanClass, Set<MapperRule> mapperRules) {
+		AssertUtils.assertNotNull(beanClass, "Mapped bean class must not be null or blank.");
 		
-		this.type = type;
-		this.parameterRules = parameterRules;
+		this.beanClass = beanClass;
+		this.beanType = beanClass.getName();
+		this.mapperRules = mapperRules;
+	}
+	
+	public String getBeanType() {
+		return beanType;
 	}
 
-	public String getType() {
-		return type;
+	public Class<T> getBeanClass() {
+		return beanClass;
 	}
 
 	/**
@@ -54,8 +70,8 @@ public abstract class AbstractBeanMapper<T, R> extends AbstractMapper<T, R> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	protected R createMappedBean() throws Exception {
-		return ReflectionUtils.newInstance(this.type);
+	protected T createMappedBean() throws Exception {
+		return ReflectionUtils.newInstance(beanType);
 	}
 	
 }

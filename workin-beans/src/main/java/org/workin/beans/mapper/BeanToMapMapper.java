@@ -19,6 +19,7 @@
 package org.workin.beans.mapper;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.workin.beans.BeanUtils;
 import org.workin.commons.util.CollectionUtils;
@@ -29,23 +30,30 @@ import org.workin.commons.util.MapUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BeanToMapMapper<T, V> extends AbstractMapper<T, Map<String,V>> {
+public class BeanToMapMapper<S, V> extends AbstractMapper<S, Map<String, V>> {
+	
+	protected BeanToMapMapper() {
+		this(null);
+	}
+	
+	protected BeanToMapMapper(Set<MapperRule> mapperRules) {
+		this.mapperRules = mapperRules;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, V> mapping(T source) throws Exception {
+	public Map<String, V> mapping(S source) throws Exception {
 		if (source == null)
 			return null;
 
-		Map<String, V> result = null;
-		if (CollectionUtils.isNotEmpty(parameterRules)) {
-			result = MapUtils.newHashMap();
-			for (ParameterRule rule : parameterRules) 
+		Map<String, V> result = MapUtils.newLinkedHashMap();
+		if (CollectionUtils.isNotEmpty(mapperRules)) {
+			for (MapperRule rule : mapperRules) 
 				result.put(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
 		} else 
-			result = BeanUtils.create(source);
+			result.putAll((Map<String, V>) BeanUtils.create(source));
 			
 		return result;
 	}
-
+	
 }

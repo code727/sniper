@@ -18,29 +18,52 @@
 
 package org.workin.beans.mapper;
 
+import java.util.Set;
+
 import org.workin.beans.BeanUtils;
 import org.workin.beans.parameter.Parameter;
 import org.workin.beans.parameter.ParameterUtils;
 import org.workin.commons.util.CollectionUtils;
 
 /**
- * org.workin.support.parameter.Parameter对象与Java Bean对象之间的映射转换
+ * org.workin.beans.parameter.Parameter对象与Java Bean对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ParameterToBeanMapper<V, R> extends AbstractBeanMapper<Parameter<String, V>, R> {
-
-	public ParameterToBeanMapper(String type) {
-		super(type);
+public class ParameterToBeanMapper<V, T> extends AbstractBeanMapper<Parameter<String, V>, T> {
+	
+	public ParameterToBeanMapper(String beanType) throws ClassNotFoundException {
+		super(beanType);
+	}
+	
+	public ParameterToBeanMapper(Class<T> beanClass) {
+		super(beanClass);
+	}
+	
+	public ParameterToBeanMapper(String beanType, Set<MapperRule> mapperRules) throws ClassNotFoundException {
+		super(beanType, mapperRules);
+	}
+	
+	public ParameterToBeanMapper(Class<T> beanClass, Set<MapperRule> mapperRules) {
+		super(beanClass, mapperRules);
 	}
 
 	@Override
-	public R mapping(Parameter<String, V> source) throws Exception {
-		R mappedBean = createMappedBean();
+	public T mapping(Parameter<String, V> source) throws Exception {
+		if (ParameterUtils.isEmpty(source))
+			return null;
 		
-		if (ParameterUtils.isNotEmpty(source) && CollectionUtils.isNotEmpty(parameterRules)) {
-			for (ParameterRule rule : parameterRules) 
+		T mappedBean = createMappedBean();
+		if (CollectionUtils.isNotEmpty(mapperRules)) {
+			for (MapperRule rule : mapperRules) {
 				BeanUtils.set(mappedBean, rule.getMappedName(), source.getValue(rule.getOriginalName()));
+			}
+		} else {
+			/* 当规则集为空时，则将源对象中所有的参数映射到目标对象中 */
+			Set<String> names = source.getNames();
+			for (String name : names) {
+				BeanUtils.set(mappedBean, name, source.getValue(name));
+			}
 		}
 		
 		return mappedBean;

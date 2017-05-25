@@ -18,8 +18,6 @@
 
 package org.workin.beans.parameter;
 
-import org.workin.commons.util.MapUtils;
-
 /**
  * 泛型参数工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -34,7 +32,7 @@ public class ParameterUtils {
 	 * @return
 	 */
 	public static <K, V> boolean isEmpty(Parameter<K, V> parameter) {
-		return parameter == null || MapUtils.isEmpty(parameter.getParameters());
+		return parameter == null || parameter.isEmpty();
 	}
 	
 	/**

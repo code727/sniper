@@ -19,6 +19,7 @@
 package org.workin.beans.mapper;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.workin.commons.util.CollectionUtils;
 import org.workin.commons.util.MapUtils;
@@ -27,17 +28,23 @@ import org.workin.commons.util.MapUtils;
  * Map对象与Map对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
- * @param <V>
- * @param <K>
  */
 public class MapToMapMapper<V> extends AbstractMapper<Map<String,V>, Map<String,V>> {
+	
+	public MapToMapMapper() {
+		super();
+	}
+	
+	public MapToMapMapper(Set<MapperRule> mapperRules) {
+		super(mapperRules);
+	}
 
 	public Map<String, V> mapping(Map<String, V> source) {
-		if (MapUtils.isEmpty(source) || CollectionUtils.isEmpty((parameterRules)))
-			return source;
+		if (MapUtils.isEmpty(source) || CollectionUtils.isEmpty((mapperRules)))
+			return MapUtils.newLinkedHashMap(source);
 		
-		Map<String, V> result = MapUtils.newHashMap();
-		for (ParameterRule rule : parameterRules) 
+		Map<String, V> result = MapUtils.newLinkedHashMap();
+		for (MapperRule rule : mapperRules) 
 			result.put(rule.getMappedName(), source.get(rule.getOriginalName()));
 		
 		return result;

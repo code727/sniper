@@ -25,25 +25,27 @@ import java.util.Set;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractMapper<T, R> implements Mapper<T, R> {
+public abstract class AbstractMapper<S, T> implements Mapper<S, T> {
 	
-	/** 参数规则集 */
-	protected Set<ParameterRule> parameterRules;
+	/** 映射器规则集 */
+	protected Set<MapperRule> mapperRules;
 	
-	public AbstractMapper() {}
+	protected AbstractMapper() {
+		this(null);
+	}
 	
-	public AbstractMapper(Set<ParameterRule> parameterRules) {
-		this.parameterRules = parameterRules;
+	protected AbstractMapper(Set<MapperRule> mapperRules) {
+		this.mapperRules = mapperRules;
 	}
 	
 	@Override
-	public void setParameterRules(Set<ParameterRule> parameterRules) {
-		this.parameterRules = parameterRules;
+	public Set<MapperRule> getMapperRules() {
+		return mapperRules;
 	}
 
 	@Override
-	public Set<ParameterRule> getParameterRules() {
-		return this.parameterRules;
+	public void setMapperRules(Set<MapperRule> mapperRules) {
+		this.mapperRules = mapperRules;
 	}
 	
 }

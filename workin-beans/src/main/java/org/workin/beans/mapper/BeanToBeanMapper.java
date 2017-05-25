@@ -18,6 +18,9 @@
 
 package org.workin.beans.mapper;
 
+import java.util.List;
+import java.util.Set;
+
 import org.workin.beans.BeanUtils;
 import org.workin.commons.util.CollectionUtils;
 
@@ -26,18 +29,38 @@ import org.workin.commons.util.CollectionUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BeanToBeanMapper<T, R> extends AbstractBeanMapper<T, R> {
+public class BeanToBeanMapper<S, T> extends AbstractBeanMapper<S, T> {
 	
-	public BeanToBeanMapper(String type) {
-		super(type);
+	public BeanToBeanMapper(String beanType) throws ClassNotFoundException {
+		super(beanType);
 	}
-
+	
+	public BeanToBeanMapper(Class<T> beanClass) {
+		super(beanClass);
+	}
+	
+	public BeanToBeanMapper(String beanType, Set<MapperRule> mapperRules) throws ClassNotFoundException {
+		super(beanType, mapperRules);
+	}
+	
+	public BeanToBeanMapper(Class<T> beanClass, Set<MapperRule> mapperRules) {
+		super(beanClass, mapperRules);
+	}
+	
 	@Override
-	public R mapping(T source) throws Exception {
-		R mappedBean = createMappedBean();
-		if (source != null && CollectionUtils.isNotEmpty(parameterRules)) {
-			for (ParameterRule rule : parameterRules) 
+	public T mapping(S source) throws Exception {
+		if (source == null)
+			return null;
+		
+		T mappedBean = createMappedBean();
+		if (CollectionUtils.isNotEmpty(mapperRules)) {
+			for (MapperRule rule : mapperRules) 
 				BeanUtils.set(mappedBean, rule.getMappedName(), BeanUtils.get(source, rule.getOriginalName()));
+		} else {
+			List<String> propertyNames = BeanUtils.findAllPropertyNameByGetter(mappedBean);
+			for (String propertyName : propertyNames) {
+				BeanUtils.set(mappedBean, propertyName, BeanUtils.get(source, propertyName));
+			}
 		}
 		return mappedBean;
 	}

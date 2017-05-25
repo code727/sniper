@@ -26,7 +26,7 @@ import javax.servlet.ServletRequest;
 import org.workin.beans.mapper.AbstractMapper;
 import org.workin.beans.mapper.MapToParameterMapper;
 import org.workin.beans.mapper.Mapper;
-import org.workin.beans.mapper.ParameterRule;
+import org.workin.beans.mapper.MapperRule;
 import org.workin.beans.parameter.Parameter;
 import org.workin.web.WebUtils;
 
@@ -44,8 +44,8 @@ public class ServletRequestToParameterMapper extends AbstractMapper<ServletReque
 	}
 	
 	@Override
-	public void setParameterRules(Set<ParameterRule> parameterRules) {
-		this.mapper.setParameterRules(parameterRules);
+	public void setMapperRules(Set<MapperRule> mapperRules) {
+		this.mapper.setMapperRules(mapperRules);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ import javax.servlet.ServletRequest;
 import org.workin.beans.mapper.AbstractBeanMapper;
 import org.workin.beans.mapper.MapToBeanMapper;
 import org.workin.beans.mapper.Mapper;
-import org.workin.beans.mapper.ParameterRule;
+import org.workin.beans.mapper.MapperRule;
 import org.workin.web.WebUtils;
 
 /**
@@ -34,22 +34,35 @@ import org.workin.web.WebUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ServletRequestToBeanMapper<R> extends AbstractBeanMapper<ServletRequest, R> {
+public class ServletRequestToBeanMapper<T> extends AbstractBeanMapper<ServletRequest, T> {
 	
-	private Mapper<Map<String, String>, R> mapper;
-
-	public ServletRequestToBeanMapper(String type) {
-		super(type);
-		this.mapper = new MapToBeanMapper<String, R>(type);
+	private Mapper<Map<String, String>, T> mapper;
+	
+	public ServletRequestToBeanMapper(String beanType) throws ClassNotFoundException {
+		this(beanType, null);
+	}
+	
+	public ServletRequestToBeanMapper(Class<T> beanClass) {
+		this(beanClass, null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ServletRequestToBeanMapper(String beanType, Set<MapperRule> mapperRules) throws ClassNotFoundException {
+		this((Class<T>) Class.forName(beanType), mapperRules);
+	}
+	
+	public ServletRequestToBeanMapper(Class<T> beanClass, Set<MapperRule> mapperRules) {
+		super(beanClass, mapperRules);
+		this.mapper = new MapToBeanMapper<String, T>(beanClass, mapperRules);
 	}
 	
 	@Override
-	public void setParameterRules(Set<ParameterRule> parameterRules) {
-		this.mapper.setParameterRules(parameterRules);
+	public void setMapperRules(Set<MapperRule> mapperRules) {
+		this.mapper.setMapperRules(mapperRules);
 	}
 	
 	@Override
-	public R mapping(ServletRequest source) throws Exception {
+	public T mapping(ServletRequest source) throws Exception {
 		if (source == null)
 			return null;
 		
