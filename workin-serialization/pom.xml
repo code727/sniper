@@ -53,6 +53,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.workin</groupId>
+			<artifactId>workin-beans</artifactId>
+			<version>${workin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.workin</groupId>
 			<artifactId>workin-codec</artifactId>
 			<version>${workin.version}</version>
 		</dependency>

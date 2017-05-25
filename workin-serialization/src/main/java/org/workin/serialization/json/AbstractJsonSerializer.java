@@ -19,14 +19,14 @@
 package org.workin.serialization.json;
 
 import org.workin.commons.util.StringUtils;
-import org.workin.serialization.AbstractTypeSerializer;
+import org.workin.serialization.AbstractTypedSerializer;
 
 /**
  * JSON序列器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractJsonSerializer extends AbstractTypeSerializer implements JsonSerializer {
+public abstract class AbstractJsonSerializer extends AbstractTypedSerializer implements JsonSerializer {
 	
 	/** 序列化日期时指定的格式 */
 	protected String dateFormat;

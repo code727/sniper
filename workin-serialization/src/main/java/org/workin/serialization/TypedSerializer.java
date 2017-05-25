@@ -18,40 +18,13 @@
 
 package org.workin.serialization;
 
+import org.workin.beans.Typed;
+
 /**
- * 类型序列器接口
+ * 类型化序列器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface TypeSerializer extends Serializer, Deserializer {
+public interface TypedSerializer extends Typed, Serializer, Deserializer {
 	
-	/**
-	 * 获取结果类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getTypeClass();
-
-	/**
-	 * 设置结果类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param typeClass
-	 * @throws ClassNotFoundException
-	 */
-	public void setTypeClass(String typeClass) throws ClassNotFoundException;
-
-	/**
-	 * 获取结果类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Class<?> getType();
-
-	/**
-	 * 设置结果类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param type
-	 */
-	public void setType(Class<?> type);
-
 }

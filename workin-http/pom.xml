@@ -53,6 +53,7 @@
             <scope>compile</scope>
             <optional>true</optional>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.workin</groupId>
 			<artifactId>workin-codec</artifactId>

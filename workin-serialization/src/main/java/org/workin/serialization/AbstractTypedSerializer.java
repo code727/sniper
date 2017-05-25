@@ -18,49 +18,27 @@
 
 package org.workin.serialization;
 
-import org.workin.codec.CodecSupport;
+import org.workin.beans.DefaultTypedBean;
+import org.workin.codec.Codecable;
 import org.workin.commons.util.CodecUtils;
-import org.workin.commons.util.StringUtils;
 
 /**
- * 类型序列器抽象类
+ * 类型化序列器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractTypeSerializer extends CodecSupport implements TypeSerializer {
+public abstract class AbstractTypedSerializer extends DefaultTypedBean implements TypedSerializer, Codecable {
 	
-	/** 序列化结果类型字符串 */
-	private String typeClass;
-	
-	/** 序列化结果类型 */
-	private Class<?> type;
+	private String encoding = CodecUtils.DEFAULT_ENCODING;
 	
 	@Override
-	public String getTypeClass() {
-		return typeClass;
-	}
-	
-	@Override
-	public void setTypeClass(String typeClass) throws ClassNotFoundException {
-		if (StringUtils.isNotBlank(typeClass)) {
-			// 先尝试加载类型
-			this.type = Class.forName(typeClass);
-			this.typeClass = typeClass;
-		} else {
-			this.type = null;
-			this.typeClass = null;
-		}
-	}
-	
-	@Override
-	public void setType(Class<?> type) {
-		this.type = type;
-		this.typeClass = (type != null ? type.getName() : null);
+	public String getEncoding() {
+		return encoding;
 	}
 
 	@Override
-	public Class<?> getType() {
-		return type;
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 	
 	@Override
@@ -70,7 +48,7 @@ public abstract class AbstractTypeSerializer extends CodecSupport implements Typ
 	
 	@Override
 	public <T> T deserialize(byte[] bytes, Class<T> type) throws SerializationException {
-		return deserialize(CodecUtils.bytesToString(bytes, getEncoding()), type);
+		return deserialize(CodecUtils.bytesToString(bytes, encoding), type);
 	}
 	
 	@Override
