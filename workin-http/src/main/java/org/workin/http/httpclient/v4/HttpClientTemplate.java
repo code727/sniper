@@ -21,7 +21,6 @@ package org.workin.http.httpclient.v4;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -34,11 +33,12 @@ import org.workin.commons.util.NetUtils;
 import org.workin.http.HttpAccessor;
 import org.workin.http.HttpForm;
 import org.workin.http.HttpRequestHeader;
+import org.workin.http.handler.response.ResponseHandler;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
 import org.workin.http.httpclient.v4.factory.HttpClientFactory;
 import org.workin.http.httpclient.v4.handler.request.DefualtRequestHandler;
 import org.workin.http.httpclient.v4.handler.request.RequestHandler;
-import org.workin.http.httpclient.v4.handler.response.StringResponseHandler;
+import org.workin.http.httpclient.v4.handler.response.DefaultResponseHandler;
 
 /**
  * HttpClient4.x模板实现类
@@ -57,7 +57,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 	private RequestHandler requestHandler;
 	
 	/** 全局的响应处理器 */
-	private ResponseHandler<?> responseHandler;
+	private org.apache.http.client.ResponseHandler<String> responseHandler;
 	
 	public void setHttpClientFactory(HttpClientFactory httpClientFactory) {
 		this.httpClientFactory = httpClientFactory;
@@ -71,10 +71,10 @@ public final class HttpClientTemplate extends HttpAccessor {
 		this.requestHandler = requestHandler;
 	}
 
-	public void setResponseHandler(ResponseHandler<?> responseHandler) {
+	public void setResponseHandler(org.apache.http.client.ResponseHandler<String> responseHandler) {
 		this.responseHandler = responseHandler;
 	}
-	
+
 	@Override
 	protected void init() throws Exception {
 		super.init();
@@ -89,7 +89,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 			this.requestHandler = new DefualtRequestHandler();
 		
 		if (this.responseHandler == null)
-			this.responseHandler = new StringResponseHandler();
+			this.responseHandler = new DefaultResponseHandler();
 	}
 		
 	/**
@@ -106,12 +106,15 @@ public final class HttpClientTemplate extends HttpAccessor {
 		HttpForm form = formRegister.find(name);
 		
 		HttpGet httpGet = new HttpGet(getUrlEncoder().encode(url, form.getEncoding()));
+		httpGet.setConfig(requestConfig);
 		addHeader(httpGet, form);
-		setConfig(httpGet);
 		
 		try {
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpGet.METHOD_NAME);
-			return (T) this.httpClientFactory.create().execute(httpGet, getBoundResponseHandler(form));
+			String response = httpClientFactory.create().execute(httpGet, responseHandler);
+			ResponseHandler<?> handler = form.getResponseHandler();
+			
+			return (T) (handler != null ? handler.handleResponse(response) : response);
 		} finally {
 			if (httpGet != null) 
 				httpGet.releaseConnection();
@@ -132,13 +135,17 @@ public final class HttpClientTemplate extends HttpAccessor {
 		HttpForm form = formRegister.find(name);
 		
 		HttpPost httpPost = new HttpPost(getUrlEncoder().encode(NetUtils.getActionString(url), form.getEncoding()));
+		httpPost.setConfig(requestConfig);
 		addHeader(httpPost, form);
-		setConfig(httpPost);
 		
 		try {
-			getBoundRequestHandler(form).handle(httpPost, url, form);
+			requestHandler.handle(httpPost, url, form);
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpPost.METHOD_NAME);
-			return (T) this.httpClientFactory.create().execute(httpPost, getBoundResponseHandler(form));
+			
+			String response = httpClientFactory.create().execute(httpPost, responseHandler);
+			ResponseHandler<?> handler = form.getResponseHandler();
+			
+			return (T) (handler != null ? handler.handleResponse(response) : response);
 		}  finally {
 			if (httpPost != null) 
 				httpPost.releaseConnection();
@@ -159,13 +166,17 @@ public final class HttpClientTemplate extends HttpAccessor {
 		HttpForm form = formRegister.find(name);
 		
 		HttpPut httpPut = new HttpPut(NetUtils.getActionString(url));
+		httpPut.setConfig(requestConfig);
 		addHeader(httpPut, form);
-		setConfig(httpPut);
 		
 		try {
-			getBoundRequestHandler(form).handle(httpPut, url, form);
+			requestHandler.handle(httpPut, url, form);
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpPut.METHOD_NAME);
-			return (T) this.httpClientFactory.create().execute(httpPut, getBoundResponseHandler(form));
+			
+			String response = httpClientFactory.create().execute(httpPut, responseHandler);
+			ResponseHandler<?> handler = form.getResponseHandler();
+			
+			return (T) (handler != null ? handler.handleResponse(response) : response);
 		}  finally {
 			if (httpPut != null)
 				httpPut.releaseConnection();
@@ -186,12 +197,15 @@ public final class HttpClientTemplate extends HttpAccessor {
 		HttpForm form = formRegister.find(name);
 		
 		HttpDelete httpDelete = new HttpDelete(getUrlEncoder().encode(url, form.getEncoding()));
+		httpDelete.setConfig(requestConfig);
 		addHeader(httpDelete, form);
-		setConfig(httpDelete);
 		
 		try {
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpDelete.METHOD_NAME);
-			return (T) this.httpClientFactory.create().execute(httpDelete, getBoundResponseHandler(form));
+			String response = httpClientFactory.create().execute(httpDelete, responseHandler);
+			ResponseHandler<?> handler = form.getResponseHandler();
+			
+			return (T) (handler != null ? handler.handleResponse(response) : response);
 		}  finally {
 			if (httpDelete != null)
 				httpDelete.releaseConnection();
@@ -213,44 +227,5 @@ public final class HttpClientTemplate extends HttpAccessor {
 			}
 		} 
 	}
-	
-	/**
-	 * 为HttpRequestBase对象设置配置
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param httpRequest
-	 */
-	protected void setConfig(HttpRequestBase httpRequest) {
-		httpRequest.setConfig(this.requestConfig);
-	}
-	
-	/**
-	 * 获取HttpForm表单绑定的请求处理器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param form
-	 * @return
-	 */
-	protected RequestHandler getBoundRequestHandler(HttpForm form) {
-		if (!(form instanceof HttpClientForm))
-			return this.requestHandler;
-		
-		HttpClientForm hcForm = (HttpClientForm) form;
-		RequestHandler requestHandler = hcForm.getRequestHandler();
-		return requestHandler != null ? requestHandler : this.requestHandler;
-	}
-	
-	/**
-	 * 获取HttpForm表单绑定的响应处理器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param form
-	 * @return
-	 */
-	protected ResponseHandler<?> getBoundResponseHandler(HttpForm form) {
-		if (!(form instanceof HttpClientForm))
-			return this.responseHandler;
-		
-		HttpClientForm hcForm = (HttpClientForm) form;
-		ResponseHandler<?> responseHandler = hcForm.getResponseHandler();
-		return responseHandler != null ? responseHandler : this.responseHandler;
-	}
-				
+					
 }

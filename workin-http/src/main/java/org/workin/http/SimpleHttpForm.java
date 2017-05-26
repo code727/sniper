@@ -22,6 +22,7 @@ import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.http.enums.MimeTypeEnum;
+import org.workin.http.handler.response.ResponseHandler;
 
 /**
  * HTTP表单实现类
@@ -59,6 +60,9 @@ public class SimpleHttpForm implements HttpForm {
 	
 	/** 字符串编码 */
 	private String encoding;
+	
+	/** 响应处理器 */
+	private ResponseHandler<?> responseHandler;
 	
 	@Override
 	public boolean isHttps() {
@@ -164,6 +168,14 @@ public class SimpleHttpForm implements HttpForm {
 		return this.encoding;
 	}
 
-	
+	@Override
+	public ResponseHandler<?> getResponseHandler() {
+		return responseHandler;
+	}
+
+	@Override
+	public void setResponseHandler(ResponseHandler<?> responseHandler) {
+		this.responseHandler = responseHandler;
+	}
 
 }

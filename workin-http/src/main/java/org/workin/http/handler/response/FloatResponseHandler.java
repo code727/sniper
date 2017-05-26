@@ -16,29 +16,24 @@
  * Create Date : 2015-7-8
  */
 
-package org.workin.http.httpclient.v4.handler.response;
+package org.workin.http.handler.response;
 
-import java.io.IOException;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.workin.commons.util.StringUtils;
 
 /**
- * 双精度响应处理器实现类
+ * 单精度响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DoubleResponseHandler extends AbstractResponseHandler<Double> {
+public class FloatResponseHandler extends AbstractResponseHandler<Float> {
 
 	@Override
-	public Double handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-		String result = super.doResponse(response);
-		if (result != null)
-			return new Double(result);
+	public Float handleResponse(String response) throws Exception {
+		if (response != null)
+			return new Float(response);
 		
 		String defaultValue = super.getDefaultValue();
-		return StringUtils.isNotBlank(defaultValue) ? new Double(defaultValue) : null;
+		return StringUtils.isNotBlank(defaultValue) ? new Float(defaultValue) : null;
 	}
 
 }

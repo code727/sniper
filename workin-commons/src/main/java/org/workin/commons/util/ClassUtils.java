@@ -185,53 +185,6 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * 判断对象是否可直接强制转换为指定的类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param clazz
-	 * @return
-	 */
-	public static boolean canCast(Object obj, Class<?> clazz) {
-		if (clazz == null)
-			return false;
-		
-		if (obj == null) 
-			return !isBaseType(clazz);
-		
-		return canCast(obj.getClass(), clazz);
-	}
-	
-	/**
-	 * 判断clazz1类型是否可强制转换为clazz2类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param clazz1
-	 * @param clazz2
-	 * @return
-	 */
-	public static boolean canCast(Class<?> clazz1, Class<?> clazz2) {
-		if (clazz1 == null || clazz2 == null)
-			return false;
-		
-		boolean canCast = false;
-		if (clazz2 == Object.class || clazz1 == clazz2 || ArrayUtils.contains(clazz1.getInterfaces(), clazz2))
-			canCast = true;
-		else if (WRAPPER_TYPES.containsKey(getCommonType(clazz1, clazz2)))
-			canCast = true;
-		else {
-			Class<?> superclass = clazz1.getSuperclass(); 
-			while (superclass != null) {
-				if (superclass == clazz2) {
-					canCast = true;
-					break;
-				}
-				superclass = superclass.getSuperclass();
-			}
-		}
-		
-		return canCast;
-	}
-		
-	/**
 	 * 获取指定类型的超类签名中第1个泛型类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
@@ -277,6 +230,26 @@ public class ClassUtils {
         }
         return (Class<?>) params[index];
     }
+	
+	/**
+	 * 判断指定的类型是否为一个接口
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz
+	 * @return
+	 */
+	public static boolean isInterface(Class<?> clazz) {
+		return clazz != null && clazz.isInterface();
+	}
+	
+	/**
+	 * 判断对象的类型是否为一个接口
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isInterface(Object obj) {
+		return obj != null && isInterface(obj.getClass());
+	}
 	
 	/**
 	 * 判断是否为JAVA自带类型
@@ -370,5 +343,22 @@ public class ClassUtils {
 		
 		return !(object instanceof Class) ? object.getClass() : (Class<?>) object;
 	}
-						
+		
+	/**
+	 * 判断clazz1是否为clazz2的子类
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz1
+	 * @param clazz2
+	 * @return
+	 */
+	public static boolean isSubClass(Class<?> clazz1, Class<?> clazz2) {
+		if (clazz1 == null || clazz2 == null || clazz1 == clazz2)
+			return false;
+		
+		if (clazz2 == Object.class)
+			return true;
+		
+		return clazz2.isAssignableFrom(clazz1);
+	}
+			
 }

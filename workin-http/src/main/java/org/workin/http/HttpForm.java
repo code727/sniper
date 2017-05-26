@@ -18,6 +18,8 @@
 
 package org.workin.http;
 
+import org.workin.http.handler.response.ResponseHandler;
+
 /**
  * HTTP表单接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -159,5 +161,19 @@ public interface HttpForm {
 	 * @return
 	 */
 	public String getEncoding();
+
+	/** 
+	 * 获取响应处理器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return 
+	 */
+	public ResponseHandler<?> getResponseHandler();
+
+	/** 
+	 * 设置响应处理器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param responseHandler 
+	 */
+	public void setResponseHandler(ResponseHandler<?> responseHandler);
 	
 }

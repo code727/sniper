@@ -16,25 +16,24 @@
  * Create Date : 2015-7-8
  */
 
-package org.workin.http.httpclient.v4.handler.response;
+package org.workin.http.handler.response;
 
-import java.io.IOException;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-
+import org.workin.commons.util.StringUtils;
 
 /**
- * HttpClient字符串响应结果处理器实现类
+ * 比特型响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class StringResponseHandler extends AbstractResponseHandler<String> {
-	
+public class ByteResponseHandler extends AbstractResponseHandler<Byte> {
+
 	@Override
-	public String handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-		String result = super.doResponse(response);
-		return result != null ? result : super.getDefaultValue();
+	public Byte handleResponse(String response) throws Exception {
+		if (response != null)
+			return new Byte(response);
+		
+		String defaultValue = super.getDefaultValue();
+		return StringUtils.isNotBlank(defaultValue) ? new Byte(defaultValue) : null;
 	}
 
 }

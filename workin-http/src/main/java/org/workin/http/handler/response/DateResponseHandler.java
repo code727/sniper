@@ -16,13 +16,10 @@
  * Create Date : 2015-7-8
  */
 
-package org.workin.http.httpclient.v4.handler.response;
+package org.workin.http.handler.response;
 
-import java.io.IOException;
 import java.util.Date;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
 
@@ -45,10 +42,9 @@ public class DateResponseHandler extends AbstractResponseHandler<Date> {
 	}
 
 	@Override
-	public Date handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-		String result = super.doResponse(response);
-		if (StringUtils.isNotBlank(result))
-			return DateUtils.stringToDate(result, this.pattern);
+	public Date handleResponse(String response) throws Exception {
+		if (StringUtils.isNotBlank(response))
+			return DateUtils.stringToDate(response, this.pattern);
 		
 		String defaultValue = super.getDefaultValue();
 		return StringUtils.isNotBlank(defaultValue) ? DateUtils.stringToDate(defaultValue, this.pattern) : null;

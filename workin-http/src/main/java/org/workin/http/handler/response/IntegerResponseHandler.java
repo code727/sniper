@@ -16,29 +16,24 @@
  * Create Date : 2015-7-8
  */
 
-package org.workin.http.httpclient.v4.handler.response;
+package org.workin.http.handler.response;
 
-import java.io.IOException;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.workin.commons.util.StringUtils;
 
 /**
- * 短整型响应处理器实现类
+ * 整型响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ShortResponseHandler extends AbstractResponseHandler<Short> {
+public class IntegerResponseHandler extends AbstractResponseHandler<Integer> {
 
 	@Override
-	public Short handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-		String result = super.doResponse(response);
-		if (result != null)
-			return new Short(result);
+	public Integer handleResponse(String response) throws Exception {
+		if (response != null)
+			return new Integer(response);
 		
 		String defaultValue = super.getDefaultValue();
-		return StringUtils.isNotBlank(defaultValue) ? new Short(defaultValue) : null;
+		return StringUtils.isNotBlank(defaultValue) ? new Integer(defaultValue) : null;
 	}
 
 }
