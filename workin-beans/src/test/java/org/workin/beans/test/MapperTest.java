@@ -60,7 +60,7 @@ public class MapperTest extends BaseTestCase {
 		System.out.println(result);
 	}
 	
-	@Test
+//	@Test
 	public void testBeanToBeanMapper() throws Exception {
 		BeanToBeanMapper<User, Company> mapper = new BeanToBeanMapper<User, Company>(Company.class);
 		Set<MapperRule> rules = CollectionUtils.newHashSet();
@@ -106,21 +106,19 @@ public class MapperTest extends BaseTestCase {
 		System.out.println(mapper.mapping(source).getParameters());
 	}
 	
-//	@Test
+	@Test
 	public void testMapToBeanMapper() throws Exception {
 		MapToBeanMapper<Object, User> mapper = new MapToBeanMapper<Object, User>(User.class);
 		Set<MapperRule> rules = CollectionUtils.newHashSet();
-//		rules.add(new MapperRule("id", "id"));
-//		rules.add(new MapperRule("name", "name"));
 		mapper.setMapperRules(rules);
 		
 		Map<String, Object> map = MapUtils.newHashMap();
-		map.put("id", 123L);
+		map.put("department.id", 123L);
 		map.put("name", "CMGE");
 		
 		User user = mapper.mapping(map);
 		System.out.println(user.getId());
-		System.out.println(user.getName());
+		System.out.println(user.getDepartment().getId());
 	}
 	
 //	@Test

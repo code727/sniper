@@ -18,6 +18,7 @@
 
 package org.workin.http;
 
+import org.workin.beans.Typed;
 import org.workin.http.handler.response.ResponseHandler;
 
 /**
@@ -25,7 +26,7 @@ import org.workin.http.handler.response.ResponseHandler;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface HttpForm {
+public interface HttpForm extends Typed {
 	
 	/**
 	 * 判断是否为HTTPS协议的表单
@@ -165,7 +166,36 @@ public interface HttpForm {
 	 * @return
 	 */
 	public String getEncoding();
-
+	
+	/**
+	 * 获取嵌套类型路径限定名
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getNestedTypeClass();
+	
+	/**
+	 * 设置嵌套类型路径限定名
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param nestedTypeClass
+	 * @throws Exception
+	 */
+	public void setNestedTypeClass(String nestedTypeClass) throws Exception;
+	
+	/**
+	 * 获取嵌套类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Class<?> getNestedType();
+	
+	/**
+	 * 设置嵌套类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param nestedType
+	 */
+	public void setNestedType(Class<?> nestedType);
+	
 	/** 
 	 * 获取响应处理器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

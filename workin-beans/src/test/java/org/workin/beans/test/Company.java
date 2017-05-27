@@ -6,6 +6,7 @@
 package org.workin.beans.test;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @description
@@ -18,6 +19,8 @@ public class Company implements Serializable {
 	private Long id;
 	
 	private String name;
+	
+	private Date createTime;
 
 	public Long getId() {
 		return id;
@@ -33,6 +36,14 @@ public class Company implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 	
 }

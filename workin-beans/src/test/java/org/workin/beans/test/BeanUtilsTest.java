@@ -5,9 +5,6 @@
 
 package org.workin.beans.test;
 
-import java.lang.reflect.Method;
-import java.util.List;
-
 import org.junit.Test;
 import org.workin.beans.BeanUtils;
 
@@ -18,22 +15,24 @@ import org.workin.beans.BeanUtils;
  */
 public class BeanUtilsTest {
 	
-//	@Test
+	@Test
 	public void testInvokeMethod() throws Exception {
 		User user = BeanUtils.create(User.class);
-		String expression = "department.";
-		BeanUtils.set(user, expression, new Department());
+		String expression = "department.company.createTime";
+		BeanUtils.set(user, expression, "2010-01-01 12:00:00");
 		System.out.println(BeanUtils.get(user, expression));
+		System.out.println(user.getDepartment().getCompany().getId());
 		
-		List<Method> methods = BeanUtils.findAllSetter(user);
-		for (Method method : methods)
-			System.out.println(method.getName());
 		
-		methods = BeanUtils.findAllGetter(user);
-		for (Method method : methods)
-			System.out.println(method.getName());
-		
-		System.out.println(BeanUtils.create(user, new String[]{"id"}));
+//		List<Method> methods = BeanUtils.findAllSetter(user);
+//		for (Method method : methods)
+//			System.out.println(method.getName());
+//		
+//		methods = BeanUtils.findAllGetter(user);
+//		for (Method method : methods)
+//			System.out.println(method.getName());
+//		
+//		System.out.println(BeanUtils.create(user, new String[]{"id"}));
 	}
 	
 //	@Test
@@ -42,7 +41,7 @@ public class BeanUtilsTest {
 		System.out.println(BeanUtils.findSetter(User.class, "vip"));
 	}
 	
-	@Test
+//	@Test
 	public void testFindAll() {
 		System.out.println(BeanUtils.findAllGetterName(User.class));
 		System.out.println(BeanUtils.findAllSetterName(User.class));

@@ -34,6 +34,7 @@ import org.workin.http.HttpAccessor;
 import org.workin.http.HttpForm;
 import org.workin.http.HttpRequestHeader;
 import org.workin.http.handler.response.ResponseHandler;
+import org.workin.http.handler.response.TypedResponseHandler;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
 import org.workin.http.httpclient.v4.factory.HttpClientFactory;
 import org.workin.http.httpclient.v4.handler.request.DefualtRequestHandler;
@@ -100,7 +101,6 @@ public final class HttpClientTemplate extends HttpAccessor {
 	 * @return
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	protected <T> T doGetRequest(String name, Object param) throws Exception {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
@@ -112,9 +112,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		try {
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpGet.METHOD_NAME);
 			String response = httpClientFactory.create().execute(httpGet, responseHandler);
-			ResponseHandler handler = form.getResponseHandler();
-			
-			return (T) (handler != null ? handler.handleResponse(response) : response);
+			return doHandle(form, response);
 		} finally {
 			if (httpGet != null) 
 				httpGet.releaseConnection();
@@ -129,7 +127,6 @@ public final class HttpClientTemplate extends HttpAccessor {
 	 * @return
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	protected <T> T doPostRequest(String name, Object param) throws Exception {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
@@ -143,9 +140,8 @@ public final class HttpClientTemplate extends HttpAccessor {
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpPost.METHOD_NAME);
 			
 			String response = httpClientFactory.create().execute(httpPost, responseHandler);
-			ResponseHandler handler = form.getResponseHandler();
-			
-			return (T) (handler != null ? handler.handleResponse(response) : response);
+			logger.info(response);
+			return doHandle(form, response);
 		}  finally {
 			if (httpPost != null) 
 				httpPost.releaseConnection();
@@ -160,7 +156,6 @@ public final class HttpClientTemplate extends HttpAccessor {
 	 * @return
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	protected <T> T doPutRequest(String name, Object param) throws Exception {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
@@ -174,9 +169,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpPut.METHOD_NAME);
 			
 			String response = httpClientFactory.create().execute(httpPut, responseHandler);
-			ResponseHandler handler = form.getResponseHandler();
-			
-			return (T) (handler != null ? handler.handleResponse(response) : response);
+			return doHandle(form, response);
 		}  finally {
 			if (httpPut != null)
 				httpPut.releaseConnection();
@@ -191,7 +184,6 @@ public final class HttpClientTemplate extends HttpAccessor {
 	 * @return
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	protected <T> T doDeleteRequest(String name, Object param) throws Exception {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
@@ -203,9 +195,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		try {
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpDelete.METHOD_NAME);
 			String response = httpClientFactory.create().execute(httpDelete, responseHandler);
-			ResponseHandler handler = form.getResponseHandler();
-			
-			return (T) (handler != null ? handler.handleResponse(response) : response);
+			return doHandle(form, response);
 		}  finally {
 			if (httpDelete != null)
 				httpDelete.releaseConnection();
@@ -226,6 +216,26 @@ public final class HttpClientTemplate extends HttpAccessor {
 				httpRequest.addHeader(item.getKey(), item.getKey());
 			}
 		} 
+	}
+	
+	/**
+	 * 根据表单所绑定的响应处理器处理字符串后返回结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param form
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	protected <T> T doHandle(HttpForm form, String response) throws Exception {
+		ResponseHandler handler = form.getResponseHandler();
+		if (handler == null)
+			return (T) response;
+		
+		if (handler instanceof TypedResponseHandler)
+			return (T) ((TypedResponseHandler)handler).handleResponse(response, form.getType(), form.getNestedType());
+		
+		return handler.handleResponse(response);
 	}
 					
 }

@@ -18,6 +18,7 @@
 
 package org.workin.http;
 
+import org.workin.beans.DefaultTypedBean;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.commons.util.StringUtils;
@@ -29,7 +30,7 @@ import org.workin.http.handler.response.ResponseHandler;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SimpleHttpForm implements HttpForm {
+public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 	
 	/** 标识是否为Https协议的表单 */
 	private boolean https;
@@ -61,9 +62,15 @@ public class SimpleHttpForm implements HttpForm {
 	/** 字符串编码 */
 	private String encoding;
 	
+	/** 嵌套类型路径限定名 */
+	private String nestedTypeClass;
+	
+	/** 嵌套类型 */
+	private Class<?> nestedType;
+	
 	/** 响应处理器 */
 	private ResponseHandler responseHandler;
-	
+		
 	@Override
 	public boolean isHttps() {
 		return https;
@@ -166,6 +173,33 @@ public class SimpleHttpForm implements HttpForm {
 	@Override
 	public String getEncoding() {
 		return this.encoding;
+	}
+	
+	@Override
+	public String getNestedTypeClass() {
+		return nestedTypeClass;
+	}
+
+	@Override
+	public void setNestedTypeClass(String nestedTypeClass) throws Exception {
+		AssertUtils.assertNotBlank(nestedTypeClass, "Nested type class must not be null or blank");
+		
+		// 先尝试加载类型
+		this.nestedType = Class.forName(nestedTypeClass);
+		this.nestedTypeClass = nestedTypeClass;
+	}
+
+	@Override
+	public Class<?> getNestedType() {
+		return nestedType;
+	}
+
+	@Override
+	public void setNestedType(Class<?> nestedType) {
+		AssertUtils.assertNotNull(nestedType, "Nested type must not be null or blank");
+		
+		this.nestedType = nestedType;
+		this.nestedTypeClass = nestedType.getName();
 	}
 
 	@Override

@@ -19,118 +19,64 @@
 package org.workin.http.handler.response;
 
 
-import java.io.IOException;
 import java.util.Map;
 
-import org.apache.http.client.ClientProtocolException;
 import org.workin.beans.mapper.MapToBeanMapper;
-import org.workin.commons.response.BaseFullResponse;
 import org.workin.commons.response.DataResponse;
 import org.workin.commons.response.MessageResponse;
-import org.workin.commons.response.Response;
-import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.ReflectionUtils;
-import org.workin.commons.util.StringUtils;
 import org.workin.serialization.json.JsonSerializer;
 
 /**
+ * Workin JSON响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class WorkinJsonResponseHandler<T extends Response> extends JsonResponseHandler<T> {
+public class WorkinJsonResponseHandler extends JsonResponseHandler {
 	
-	/** 数据Bean类型全路径限定名 */
-	private String dataClass;
-	
-	/** 数据Bean类型 */
-	private Class<?> dataType;
-	
-	public WorkinJsonResponseHandler() throws Exception {
-		this((JsonSerializer) null);
+	public WorkinJsonResponseHandler() {
+		super();
 	}
 	
-	public WorkinJsonResponseHandler(String typeClass) throws Exception {
-		this(typeClass, null);
+	public WorkinJsonResponseHandler(JsonSerializer jsonSerializer) {
+		super(jsonSerializer);
 	}
-	
-	public WorkinJsonResponseHandler(Class<T> type) {
-		this(type, null);
-	}
-	
-	public WorkinJsonResponseHandler(JsonSerializer jsonSerializer) throws Exception {
-		this(BaseFullResponse.class.getName(), jsonSerializer);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public WorkinJsonResponseHandler(String typeClass, JsonSerializer jsonSerializer) throws Exception {
-		this((Class<T>) Class.forName(typeClass), jsonSerializer);
-	}
-	
-	public WorkinJsonResponseHandler(Class<T> type, JsonSerializer jsonSerializer) {
-		super(type, jsonSerializer);
 		
-		AssertUtils.assertTrue(ClassUtils.isSubClass(type, Response.class),
-				"Json type [" + type.getName() + "] must be sub class of [" + Response.class.getName() + "]");
-	}
-	
-	public String getDataClass() {
-		return dataClass;
-	}
-
-	public void setDataClass(String dataClass) throws Exception {
-		if (StringUtils.isNotBlank(dataClass)) {
-			this.dataType = Class.forName(dataClass);
-			this.dataClass = dataClass;
-		} else {
-			this.dataType = null;
-			this.dataClass = null;
-		}
-	}
-
-	public Class<?> getDataType() {
-		return dataType;
-	}
-
-	public void setDataType(Class<?> dataBeanType) {
-		if (dataBeanType != null) {
-			this.dataType = dataBeanType;
-			this.dataClass = dataBeanType.getName();
-		} else {
-			this.dataType = null;
-			this.dataClass = null;
-		}
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes"})
+	/**
+	 * 重写父类方法，主要是解决当父类处理的响应结果为一个DataResponse对象时，其内部的data值转换问题
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param json
+	 * @param type
+	 * @param nestedType
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public T handleResponse(String json) throws ClientProtocolException, IOException {
-		T result = super.handleResponse(json);
+	public <T> T handleResponse(String json, Class<T> type, Class<?> nestedType) throws Exception {
+//		AssertUtils.assertTrue(ClassUtils.isSubClass(type, Response.class),
+//				"Json type [" + type.getName() + "] must be sub class of [" + Response.class.getName() + "]");
 		
-		if (dataType != null && result instanceof DataResponse) {
-			Object data = ((DataResponse<Object>) result).getData();
-			if (data instanceof Map) {
-				
-				try {
-					DataResponse<Object> dataResponse = (DataResponse<Object>) ReflectionUtils.newInstance(result.getClass());
-					dataResponse.setCode(result.getCode());
-					
-					if (dataResponse instanceof MessageResponse && result instanceof MessageResponse) {
-						((MessageResponse)dataResponse).setMessage(((MessageResponse)result).getMessage());
-					}
-					
-					dataResponse.setData(new MapToBeanMapper(dataType).mapping((Map) data));
-					return (T) dataResponse;
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+		T response = super.handleResponse(json, type, nestedType);
+		
+		if (nestedType != null && response instanceof DataResponse) {
+			Object data = ((DataResponse<Object>) response).getData();
 			
-		} 
+			// 目前只处理响应的data值为map而实际要转换成一个JavaBean的情况
+			if (data instanceof Map && !ClassUtils.isJavaType(nestedType)) {
+				DataResponse<Object> dataResponse = (DataResponse<Object>) ReflectionUtils.newInstance(response.getClass());
+				dataResponse.setCode(((DataResponse<Object>) response).getCode());
+				
+				if (dataResponse instanceof MessageResponse && response instanceof MessageResponse)
+					((MessageResponse) dataResponse).setMessage(((MessageResponse) response).getMessage());
+				
+				dataResponse.setData(new MapToBeanMapper(nestedType).mapping((Map) data));
+				return (T) dataResponse;
+			}
+		}
 		
-		return result;
+		return response;
 	}
-	
-	
-	
+			
 }

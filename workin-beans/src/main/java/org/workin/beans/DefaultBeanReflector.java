@@ -20,11 +20,13 @@ package org.workin.beans;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import org.workin.commons.util.AssertUtils;
+import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
@@ -194,11 +196,14 @@ public class DefaultBeanReflector implements BeanReflector {
 					/* 复合成员为空，则利用此成员的默认构造函数创建一个后，再调用此setter方法或直接对其赋值 */
 					memberValue = BeanUtils.create(memberSetterType);
 					try {
+						// 设置复合对象的值
 						set(bean, memberName, memberSetterType, memberValue);
 					} catch (NoSuchMethodException e) {
 						ReflectionUtils.setFieldValue(bean, memberName, memberValue);
 					}
 				}
+				// 设置复合对象的属性值
+				set(memberValue, nextMemberName, null, parameterValue);
 			}  else 
 				// 设置当前对象值
 				set(bean, memberName, parameterType, parameterValue);
@@ -216,14 +221,19 @@ public class DefaultBeanReflector implements BeanReflector {
 							"],Please ensure that this method exists when member [" + expression + "] undefined.");
 			}
 			try {
+				
+				// TODO 利用ProperyEditor来重新处理参数值
+				if (parameterType == Date.class && parameterValue instanceof String) {
+					parameterValue = DateUtils.stringToDate(parameterValue.toString());
+				}
+				
 				/*  调用当前成员属性的setter方法或对其直接赋值，否则抛出异常 */
-				ReflectionUtils.invokeMethod(bean, BeanUtils.setterName(expression), 
-						new Class<?>[] { parameterType }, new Object[] { parameterValue });
+				ReflectionUtils.invokeMethod(bean, BeanUtils.setterName(expression), new Class<?>[] { parameterType }, new Object[] { parameterValue });
 			} catch (NoSuchMethodException e) {
 				try {
 					ReflectionUtils.setFieldValue(bean, expression, parameterValue);
 				} catch (NoSuchFieldException nsfe) {
-					throw new NoSuchMethodException("Unknow member propertity [" + memberName 
+					throw new NoSuchMethodException("Unknow member propertity [" + memberName
 							+ "] value,Please ensure that this property or corresponding setter method exists");
 				}
 			}
