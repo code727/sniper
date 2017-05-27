@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年5月26日
+ * Create Date :2015-7-8
  */
 
 package org.workin.http.handler.response;
 
 /**
+ * 布尔型响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BooleanResponseHandler extends AbstractResponseHandler<Boolean> {
+public class BooleanResponseHandler extends AbstractResponseHandler {
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Boolean handleResponse(String response) throws Exception {
-		return response != null ? new Boolean(response) : new Boolean(super.getDefaultValue());
+	public <T> T handleResponse(String response) throws Exception {
+		return (T) (response != null ? new Boolean(response) : new Boolean(getDefaultValue()));
 	}
 
 }

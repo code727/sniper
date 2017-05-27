@@ -23,7 +23,7 @@ package org.workin.http.handler.response;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ResponseHandler<T> {
+public interface ResponseHandler {
 	
 	/**
 	 * 处理字符串响应数据后返回最终结果
@@ -32,6 +32,6 @@ public interface ResponseHandler<T> {
 	 * @return
 	 * @throws Exception
 	 */
-	public T handleResponse(String response) throws Exception;
+	public <T> T handleResponse(String response) throws Exception;
 	
 }

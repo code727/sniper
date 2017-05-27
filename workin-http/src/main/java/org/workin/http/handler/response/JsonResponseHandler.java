@@ -30,7 +30,7 @@ import org.workin.serialization.json.jackson.fasterxml.FasterxmlJacksonSerialize
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JsonResponseHandler<T> extends AbstractResponseHandler<T> {
+public class JsonResponseHandler<T> extends AbstractResponseHandler {
 	
 	/** JSON序列化器 */
 	private JsonSerializer jsonSerializer;

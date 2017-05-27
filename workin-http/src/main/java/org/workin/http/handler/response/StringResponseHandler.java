@@ -22,17 +22,17 @@ import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
 
-
 /**
- * HttpClient字符串响应结果处理器实现类
+ * 字符串响应结果处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class StringResponseHandler extends AbstractResponseHandler<String> {
+public class StringResponseHandler extends AbstractResponseHandler {
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public String handleResponse(String response) throws ClientProtocolException, IOException {
-		return response != null ? response : super.getDefaultValue();
+	public <T> T handleResponse(String response) throws ClientProtocolException, IOException {
+		return (T) (response != null ? response : super.getDefaultValue());
 	}
 
 }

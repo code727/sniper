@@ -139,13 +139,17 @@ public interface HttpForm {
 	public HttpRequestHeader getHeader();
 	
 	/**
-	 * 
-	 * @description
+	 * 设置mimeType
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param mimeType
 	 */
 	public void setMimeType(String mimeType);
 	
+	/**
+	 * 获取mimeType
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
 	public String getMimeType();
 		
 	/**
@@ -167,13 +171,13 @@ public interface HttpForm {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return 
 	 */
-	public ResponseHandler<?> getResponseHandler();
+	public ResponseHandler getResponseHandler();
 
 	/** 
 	 * 设置响应处理器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param responseHandler 
 	 */
-	public void setResponseHandler(ResponseHandler<?> responseHandler);
+	public void setResponseHandler(ResponseHandler responseHandler);
 	
 }

@@ -25,15 +25,16 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ByteResponseHandler extends AbstractResponseHandler<Byte> {
+public class ByteResponseHandler extends AbstractResponseHandler {
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Byte handleResponse(String response) throws Exception {
+	public <T> T handleResponse(String response) throws Exception {
 		if (response != null)
-			return new Byte(response);
+			return (T) new Byte(response);
 		
-		String defaultValue = super.getDefaultValue();
-		return StringUtils.isNotBlank(defaultValue) ? new Byte(defaultValue) : null;
+		String defaultValue = getDefaultValue();
+		return (T) (StringUtils.isNotBlank(defaultValue) ? new Byte(defaultValue) : null);
 	}
 
 }

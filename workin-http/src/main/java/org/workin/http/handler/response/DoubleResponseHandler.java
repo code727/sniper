@@ -26,15 +26,16 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DoubleResponseHandler extends AbstractResponseHandler<Double> {
+public class DoubleResponseHandler extends AbstractResponseHandler {
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Double handleResponse(String response) throws Exception {
+	public <T> T handleResponse(String response) throws Exception {
 		if (response != null)
-			return new Double(response);
+			return (T) new Double(response);
 		
-		String defaultValue = super.getDefaultValue();
-		return StringUtils.isNotBlank(defaultValue) ? new Double(defaultValue) : null;
+		String defaultValue = getDefaultValue();
+		return (T) (StringUtils.isNotBlank(defaultValue) ? new Double(defaultValue) : null);
 	}
-
+	
 }

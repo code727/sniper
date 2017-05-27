@@ -62,7 +62,7 @@ public class SimpleHttpForm implements HttpForm {
 	private String encoding;
 	
 	/** 响应处理器 */
-	private ResponseHandler<?> responseHandler;
+	private ResponseHandler responseHandler;
 	
 	@Override
 	public boolean isHttps() {
@@ -169,12 +169,12 @@ public class SimpleHttpForm implements HttpForm {
 	}
 
 	@Override
-	public ResponseHandler<?> getResponseHandler() {
+	public ResponseHandler getResponseHandler() {
 		return responseHandler;
 	}
 
 	@Override
-	public void setResponseHandler(ResponseHandler<?> responseHandler) {
+	public void setResponseHandler(ResponseHandler responseHandler) {
 		this.responseHandler = responseHandler;
 	}
 

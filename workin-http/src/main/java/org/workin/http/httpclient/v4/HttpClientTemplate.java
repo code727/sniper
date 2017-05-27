@@ -112,7 +112,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		try {
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpGet.METHOD_NAME);
 			String response = httpClientFactory.create().execute(httpGet, responseHandler);
-			ResponseHandler<?> handler = form.getResponseHandler();
+			ResponseHandler handler = form.getResponseHandler();
 			
 			return (T) (handler != null ? handler.handleResponse(response) : response);
 		} finally {
@@ -143,7 +143,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpPost.METHOD_NAME);
 			
 			String response = httpClientFactory.create().execute(httpPost, responseHandler);
-			ResponseHandler<?> handler = form.getResponseHandler();
+			ResponseHandler handler = form.getResponseHandler();
 			
 			return (T) (handler != null ? handler.handleResponse(response) : response);
 		}  finally {
@@ -174,7 +174,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpPut.METHOD_NAME);
 			
 			String response = httpClientFactory.create().execute(httpPut, responseHandler);
-			ResponseHandler<?> handler = form.getResponseHandler();
+			ResponseHandler handler = form.getResponseHandler();
 			
 			return (T) (handler != null ? handler.handleResponse(response) : response);
 		}  finally {
@@ -203,7 +203,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		try {
 			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpDelete.METHOD_NAME);
 			String response = httpClientFactory.create().execute(httpDelete, responseHandler);
-			ResponseHandler<?> handler = form.getResponseHandler();
+			ResponseHandler handler = form.getResponseHandler();
 			
 			return (T) (handler != null ? handler.handleResponse(response) : response);
 		}  finally {

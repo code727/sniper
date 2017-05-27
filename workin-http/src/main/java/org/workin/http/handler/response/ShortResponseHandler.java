@@ -25,15 +25,16 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ShortResponseHandler extends AbstractResponseHandler<Short> {
+public class ShortResponseHandler extends AbstractResponseHandler {
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Short handleResponse(String response) throws Exception {
+	public <T> T handleResponse(String response) throws Exception {
 		if (response != null)
-			return new Short(response);
+			return (T) new Short(response);
 		
 		String defaultValue = super.getDefaultValue();
-		return StringUtils.isNotBlank(defaultValue) ? new Short(defaultValue) : null;
+		return (T) (StringUtils.isNotBlank(defaultValue) ? new Short(defaultValue) : null);
 	}
 
 }

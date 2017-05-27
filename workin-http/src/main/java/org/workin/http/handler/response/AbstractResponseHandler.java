@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年5月26日
+ * Create Date : 2017-5-26
  */
 
 package org.workin.http.handler.response;
 
 /**
+ * 响应处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractResponseHandler<T> implements ResponseHandler<T> {
+public abstract class AbstractResponseHandler implements ResponseHandler {
 	
 	/** 当响应结果返回为空时指定的默认值 */
 	private String defaultValue;

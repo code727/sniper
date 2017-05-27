@@ -25,15 +25,16 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class LongResponseHandler extends AbstractResponseHandler<Long> {
+public class LongResponseHandler extends AbstractResponseHandler {
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Long handleResponse(String response) throws Exception {
+	public <T> T handleResponse(String response) throws Exception {
 		if (response != null)
-			return new Long(response);
+			return (T) new Long(response);
 		
-		String defaultValue = super.getDefaultValue();
-		return StringUtils.isNotBlank(defaultValue) ? new Long(defaultValue) : null;
+		String defaultValue = getDefaultValue();
+		return (T) (StringUtils.isNotBlank(defaultValue) ? new Long(defaultValue) : null);
 	}
 
 }

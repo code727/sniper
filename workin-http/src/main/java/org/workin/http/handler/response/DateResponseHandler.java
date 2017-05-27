@@ -18,8 +18,6 @@
 
 package org.workin.http.handler.response;
 
-import java.util.Date;
-
 import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.StringUtils;
 
@@ -28,7 +26,7 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0j
  */
-public class DateResponseHandler extends AbstractResponseHandler<Date> {
+public class DateResponseHandler extends AbstractResponseHandler {
 	
 	/** 日期格式 */
 	private String pattern;
@@ -41,13 +39,14 @@ public class DateResponseHandler extends AbstractResponseHandler<Date> {
 		this.pattern = pattern;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Date handleResponse(String response) throws Exception {
+	public <T> T handleResponse(String response) throws Exception {
 		if (StringUtils.isNotBlank(response))
-			return DateUtils.stringToDate(response, this.pattern);
+			return (T) DateUtils.stringToDate(response, this.pattern);
 		
-		String defaultValue = super.getDefaultValue();
-		return StringUtils.isNotBlank(defaultValue) ? DateUtils.stringToDate(defaultValue, this.pattern) : null;
+		String defaultValue = getDefaultValue();
+		return (T) (StringUtils.isNotBlank(defaultValue) ? DateUtils.stringToDate(defaultValue, this.pattern) : null);
 	}
 
 }

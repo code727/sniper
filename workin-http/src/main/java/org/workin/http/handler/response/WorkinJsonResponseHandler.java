@@ -120,8 +120,6 @@ public class WorkinJsonResponseHandler<T extends Response> extends JsonResponseH
 					}
 					
 					dataResponse.setData(new MapToBeanMapper(dataType).mapping((Map) data));
-					
-					
 					return (T) dataResponse;
 				} catch (Exception e) {
 					e.printStackTrace();
