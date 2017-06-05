@@ -59,8 +59,16 @@ public abstract class AbstractBeanMapper<S> extends DefaultTypedBean implements 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T mapping(S source) throws Exception {
-		// 映射成全局类型对应的JavaBeean对象
 		return (T) mapping(source, getType());
+	}
+	
+	public <T> T mapping(S source, Class<T> type) throws Exception {
+		return (T) mapping(source, mapperRules, type);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T> T mapping(S source, Set<MapperRule> mapperRules) throws Exception {
+		return (T) mapping(source, mapperRules, getType());
 	}
 	
 	/**

@@ -19,6 +19,7 @@
 package org.workin.beans.mapper;
 
 import java.util.List;
+import java.util.Set;
 
 import org.workin.beans.BeanUtils;
 import org.workin.commons.util.AssertUtils;
@@ -32,16 +33,33 @@ import org.workin.commons.util.CollectionUtils;
 public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
 		
 	@Override
-	public <T> T mapping(Object source, Class<T> type) throws Exception {
+	public <T> T mapping(Object source, Set<MapperRule> mapperRules, Class<T> type) throws Exception {
 		AssertUtils.assertNotNull(type, "Mapped bean type must not be null");
 		
 		if (source == null)
 			return null;
 		
 		T mappedBean = createMappedBean(type);
+		
 		if (CollectionUtils.isNotEmpty(mapperRules)) {
-			for (MapperRule rule : mapperRules) 
-				BeanUtils.set(mappedBean, rule.getMappedName(), BeanUtils.get(source, rule.getOriginalName()));
+			if (isAutoMapping()) {
+				// 需要自动映射的属性名称集
+				List<String> autoMappedNames = BeanUtils.findAllPropertyNameByGetter(source);
+				
+				for (MapperRule rule : mapperRules) {
+					BeanUtils.set(mappedBean, rule.getMappedName(), BeanUtils.get(source, rule.getOriginalName()));
+					// 删除已完成映射的属性名称
+					autoMappedNames.remove(rule.getOriginalName());
+				}
+				
+				/* 完成规则外的映射 */
+				for (String mappedName : autoMappedNames) 
+					BeanUtils.set(mappedBean, mappedName, BeanUtils.get(source, mappedName));
+					
+			} else {
+				for (MapperRule rule : mapperRules) 
+					BeanUtils.set(mappedBean, rule.getMappedName(), BeanUtils.get(source, rule.getOriginalName()));
+			}
 		} else {
 			List<String> propertyNames = BeanUtils.findAllPropertyNameByGetter(mappedBean);
 			for (String propertyName : propertyNames) {

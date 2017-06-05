@@ -34,16 +34,32 @@ import org.workin.commons.util.CollectionUtils;
 public class ParameterToBeanMapper<V> extends AbstractBeanMapper<Parameter<String, V>> {
 	
 	@Override
-	public <T> T mapping(Parameter<String, V> source, Class<T> type) throws Exception {
+	public <T> T mapping(Parameter<String, V> source, Set<MapperRule> mapperRules, Class<T> type) throws Exception {
 		AssertUtils.assertNotNull(type, "Mapped bean type must not be null");
 		
 		if (ParameterUtils.isEmpty(source))
 			return null;
 		
 		T mappedBean = createMappedBean(type);
+		
 		if (CollectionUtils.isNotEmpty(mapperRules)) {
-			for (MapperRule rule : mapperRules) {
-				BeanUtils.set(mappedBean, rule.getMappedName(), source.getValue(rule.getOriginalName()));
+			if (isAutoMapping()) {
+				// 需要自动映射的参数名称集
+				Set<String> autoMappedNames = source.getNames();
+				
+				for (MapperRule rule : mapperRules) {
+					BeanUtils.set(mappedBean, rule.getMappedName(), source.getValue(rule.getOriginalName()));
+					// 删除已完成映射的参数名称
+					autoMappedNames.remove(rule.getOriginalName());
+				}
+				
+				/* 完成规则外的映射 */
+				for (String mappedName : autoMappedNames) 
+					BeanUtils.set(mappedBean, mappedName, source.getValue(mappedName));
+				
+			} else {
+				for (MapperRule rule : mapperRules) 
+					BeanUtils.set(mappedBean, rule.getMappedName(), source.getValue(rule.getOriginalName()));
 			}
 		} else {
 			/* 当规则集为空时，则将源对象中所有的参数映射到目标对象中 */

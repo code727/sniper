@@ -28,7 +28,7 @@ import java.util.Set;
 public interface Mapper<S, T> extends ConfigurableMapper {
 	
 	/**
-	 * 将指定的源对象进行映射处理
+	 * 将源对象进行映射处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source
 	 * @return
@@ -37,7 +37,7 @@ public interface Mapper<S, T> extends ConfigurableMapper {
 	public T mapping(S source) throws Exception;
 	
 	/**
-	 * 将指定的源对象进行指定规则的映射处理
+	 * 将源对象按照指定规则进行映射处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source
 	 * @param mapperRules

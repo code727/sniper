@@ -20,6 +20,7 @@ package org.workin.beans.mapper;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.workin.beans.BeanUtils;
@@ -33,18 +34,35 @@ import org.workin.commons.util.MapUtils;
  * @version 1.0
  */
 public class MapToBeanMapper<V> extends AbstractBeanMapper<Map<String, V>> {
-
+	
 	@Override
-	public <T> T mapping(Map<String, V> source, Class<T> type) throws Exception {
+	public <T> T mapping(Map<String, V> source, Set<MapperRule> mapperRules, Class<T> type) throws Exception {
 		AssertUtils.assertNotNull(type, "Mapped bean type must not be null");
 		
 		if (MapUtils.isEmpty(source))
 			return null;
 		
 		T mappedBean = createMappedBean(type);
+		
 		if (CollectionUtils.isNotEmpty(mapperRules)) {
-			for (MapperRule rule : mapperRules) 
-				BeanUtils.set(mappedBean, rule.getMappedName(), source.get(rule.getOriginalName()));
+			if (isAutoMapping()) {
+				// 需要自动映射的参数名称集
+				Set<String> autoMappedNames = source.keySet();
+				
+				for (MapperRule rule : mapperRules) {
+					BeanUtils.set(mappedBean, rule.getMappedName(), source.get(rule.getOriginalName()));
+					// 删除已完成映射的参数名称
+					autoMappedNames.remove(rule.getOriginalName());
+				}
+				
+				/* 完成规则外的映射 */
+				for (String mappedName : autoMappedNames) 
+					BeanUtils.set(mappedBean, mappedName, source.get(mappedName));
+						
+			} else {
+				for (MapperRule rule : mapperRules) 
+					BeanUtils.set(mappedBean, rule.getMappedName(), source.get(rule.getOriginalName()));
+			}
 		} else {
 			/* 当规则集为空时，则将源对象中所有的参数映射到目标对象中 */
 			Iterator<Entry<String, V>> iterator = source.entrySet().iterator();

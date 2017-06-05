@@ -27,6 +27,7 @@ import org.workin.beans.mapper.AbstractBeanMapper;
 import org.workin.beans.mapper.BeanMapper;
 import org.workin.beans.mapper.MapToBeanMapper;
 import org.workin.beans.mapper.MapperRule;
+import org.workin.commons.util.AssertUtils;
 import org.workin.web.WebUtils;
 
 /**
@@ -63,11 +64,13 @@ public class ServletRequestToBeanMapper extends AbstractBeanMapper<ServletReques
 	}
 	
 	@Override
-	public <T> T mapping(ServletRequest source, Class<T> type) throws Exception {
+	public <T> T mapping(ServletRequest source, Set<MapperRule> mapperRules, Class<T> type) throws Exception {
+		AssertUtils.assertNotNull(type, "Mapped bean type must not be null");
+		
 		if (source == null)
 			return null;
 		
-		return mapper.mapping(WebUtils.getParameters(source), type);
+		return mapper.mapping(WebUtils.getParameters(source), mapperRules, type);
 	}
 		
 }
