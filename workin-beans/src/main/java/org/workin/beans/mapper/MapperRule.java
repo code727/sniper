@@ -40,16 +40,8 @@ public class MapperRule {
 		return originalName;
 	}
 
-	public void setOriginalName(String originalName) {
-		this.originalName = originalName;
-	}
-
 	public String getMappedName() {
 		return mappedName;
-	}
-
-	public void setMappedName(String mappedName) {
-		this.mappedName = mappedName;
 	}
 
 }

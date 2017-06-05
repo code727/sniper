@@ -20,13 +20,11 @@ package org.workin.beans;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.DateUtils;
 import org.workin.commons.util.MapUtils;
 import org.workin.commons.util.ReflectionUtils;
 import org.workin.commons.util.StringUtils;
@@ -223,9 +221,9 @@ public class DefaultBeanReflector implements BeanReflector {
 			try {
 				
 				// TODO 利用ProperyEditor来重新处理参数值
-				if (parameterType == Date.class && parameterValue instanceof String) {
-					parameterValue = DateUtils.stringToDate(parameterValue.toString());
-				}
+//				if (parameterType == Date.class && parameterValue instanceof String) {
+//					parameterValue = DateUtils.stringToDate(parameterValue.toString());
+//				}
 				
 				/*  调用当前成员属性的setter方法或对其直接赋值，否则抛出异常 */
 				ReflectionUtils.invokeMethod(bean, BeanUtils.setterName(expression), new Class<?>[] { parameterType }, new Object[] { parameterValue });

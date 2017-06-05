@@ -29,23 +29,32 @@ import org.workin.commons.util.MapUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MapToMapMapper<V> extends AbstractMapper<Map<String,V>, Map<String,V>> {
+public class MapToMapMapper<V> extends AbstractMapper<Map<String, V>, Map<String, V>> {
 	
-	public MapToMapMapper() {
-		super();
-	}
-	
-	public MapToMapMapper(Set<MapperRule> mapperRules) {
-		super(mapperRules);
-	}
-
-	public Map<String, V> mapping(Map<String, V> source) {
+	public Map<String, V> mapping(Map<String, V> source, Set<MapperRule> mapperRules) throws Exception {
 		if (MapUtils.isEmpty(source) || CollectionUtils.isEmpty((mapperRules)))
 			return MapUtils.newLinkedHashMap(source);
 		
 		Map<String, V> result = MapUtils.newLinkedHashMap();
-		for (MapperRule rule : mapperRules) 
-			result.put(rule.getMappedName(), source.get(rule.getOriginalName()));
+		
+		if (isAutoMapping()) {
+			// 需要自动映射的参数名称集
+			Set<String> autoMappedNames = source.keySet();
+			
+			for (MapperRule rule : mapperRules) {
+				result.put(rule.getMappedName(), source.get(rule.getOriginalName()));
+				// 删除已完成映射的参数名称
+				autoMappedNames.remove(rule.getOriginalName());
+			}
+			
+			/* 完成规则外的映射 */
+			for (String mappedName : autoMappedNames) 
+				result.put(mappedName, source.get(mappedName));
+			
+		} else {
+			for (MapperRule rule : mapperRules) 
+				result.put(rule.getMappedName(), source.get(rule.getOriginalName()));
+		}
 		
 		return result;
 	}

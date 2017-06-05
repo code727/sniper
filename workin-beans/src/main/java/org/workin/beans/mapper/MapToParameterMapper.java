@@ -33,23 +33,31 @@ import org.workin.commons.util.MapUtils;
  */
 public class MapToParameterMapper<V> extends AbstractMapper<Map<String, V>, Parameter<String, V>> {
 	
-	public MapToParameterMapper() {
-		super();
-	}
-	
-	public MapToParameterMapper(Set<MapperRule> mapperRules) {
-		super(mapperRules);
-	}
-
 	@Override
-	public Parameter<String, V> mapping(Map<String, V> source) {
+	public Parameter<String, V> mapping(Map<String, V> source, Set<MapperRule> mapperRules) throws Exception {
 		if (MapUtils.isEmpty(source))
 			return null;
 		
 		Parameter<String, V> parameter = new MapParameter<String, V>();
+		
 		if (CollectionUtils.isNotEmpty((mapperRules))) {
-			for (MapperRule rule : mapperRules) {
-				parameter.add(rule.getMappedName(), source.get(rule.getOriginalName()));
+			if (isAutoMapping()) {
+				// 需要自动映射的参数名称集
+				Set<String> autoMappedNames = source.keySet();
+				
+				for (MapperRule rule : mapperRules) {
+					parameter.add(rule.getMappedName(), source.get(rule.getOriginalName()));
+					// 删除已完成映射的参数名称
+					autoMappedNames.remove(rule.getOriginalName());
+				}
+					
+				/* 完成规则外的映射 */
+				for (String mappedName : autoMappedNames) 
+					parameter.add(mappedName, source.get(mappedName));
+				
+			} else {
+				for (MapperRule rule : mapperRules) 
+					parameter.add(rule.getMappedName(), source.get(rule.getOriginalName()));
 			}
 		} else
 			parameter.setParameters(source);

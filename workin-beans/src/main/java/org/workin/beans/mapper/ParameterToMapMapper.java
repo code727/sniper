@@ -31,31 +31,38 @@ import org.workin.commons.util.MapUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ParameterToMapMapper<V> extends
-		AbstractMapper<Parameter<String, V>, Map<String, V>> {
-	
-	public ParameterToMapMapper() {
-		super();
-	}
-	
-	public ParameterToMapMapper(Set<MapperRule> mapperRules) {
-		super(mapperRules);
-	}
+public class ParameterToMapMapper<V> extends AbstractMapper<Parameter<String, V>, Map<String, V>> {
 
 	@Override
-	public Map<String, V> mapping(Parameter<String, V> parameter) throws Exception {
+	public Map<String, V> mapping(Parameter<String, V> parameter, Set<MapperRule> mapperRules) throws Exception {
 		if (ParameterUtils.isEmpty(parameter))
 			return null;
-		
-		 Map<String, V> map = MapUtils.newLinkedHashMap();
-		 if (CollectionUtils.isNotEmpty(mapperRules)) {
-			 for (MapperRule rule : mapperRules) {
-				 map.put(rule.getMappedName(), parameter.getValue(rule.getOriginalName()));
-			 }
-		 } else
-			 map.putAll(parameter.getParameters());
-		 
-		 return map;
+
+		Map<String, V> map = MapUtils.newLinkedHashMap();
+
+		if (CollectionUtils.isNotEmpty(mapperRules)) {
+			if (isAutoMapping()) {
+				// 需要自动映射的参数名称集
+				Set<String> autoMappedNames = parameter.getNames();
+				
+				for (MapperRule rule : mapperRules) {
+					map.put(rule.getMappedName(), parameter.getValue(rule.getOriginalName()));
+					// 删除已完成映射的参数名称
+					autoMappedNames.remove(rule.getOriginalName());
+				}
+
+				/* 完成规则外的映射 */
+				for (String mappedName : autoMappedNames) 
+					map.put(mappedName, parameter.getValue(mappedName));
+
+			} else {
+				for (MapperRule rule : mapperRules) 
+					map.put(rule.getMappedName(), parameter.getValue(rule.getOriginalName()));
+			}
+		} else
+			map.putAll(parameter.getParameters());
+
+		return map;
 	}
 
 }

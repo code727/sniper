@@ -19,9 +19,9 @@
 package org.workin.beans.mapper;
 
 import java.util.List;
-import java.util.Set;
 
 import org.workin.beans.BeanUtils;
+import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
 
 /**
@@ -29,30 +29,16 @@ import org.workin.commons.util.CollectionUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BeanToBeanMapper<S, T> extends AbstractBeanMapper<S, T> {
-	
-	public BeanToBeanMapper(String beanType) throws ClassNotFoundException {
-		super(beanType);
-	}
-	
-	public BeanToBeanMapper(Class<T> beanClass) {
-		super(beanClass);
-	}
-	
-	public BeanToBeanMapper(String beanType, Set<MapperRule> mapperRules) throws ClassNotFoundException {
-		super(beanType, mapperRules);
-	}
-	
-	public BeanToBeanMapper(Class<T> beanClass, Set<MapperRule> mapperRules) {
-		super(beanClass, mapperRules);
-	}
-	
+public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
+		
 	@Override
-	public T mapping(S source) throws Exception {
+	public <T> T mapping(Object source, Class<T> type) throws Exception {
+		AssertUtils.assertNotNull(type, "Mapped bean type must not be null");
+		
 		if (source == null)
 			return null;
 		
-		T mappedBean = createMappedBean();
+		T mappedBean = createMappedBean(type);
 		if (CollectionUtils.isNotEmpty(mapperRules)) {
 			for (MapperRule rule : mapperRules) 
 				BeanUtils.set(mappedBean, rule.getMappedName(), BeanUtils.get(source, rule.getOriginalName()));

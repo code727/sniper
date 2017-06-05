@@ -35,7 +35,7 @@ import org.workin.web.WebUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ServletRequestToParameterMapper extends AbstractMapper<ServletRequest, Parameter<String, String>>{
+public class ServletRequestToParameterMapper extends AbstractMapper<ServletRequest, Parameter<String, String>> {
 
 	private Mapper<Map<String, String>, Parameter<String, String>> mapper;
 	
@@ -47,13 +47,28 @@ public class ServletRequestToParameterMapper extends AbstractMapper<ServletReque
 	public void setMapperRules(Set<MapperRule> mapperRules) {
 		this.mapper.setMapperRules(mapperRules);
 	}
+	
+	@Override
+	public Set<MapperRule> getMapperRules() {
+		return this.mapper.getMapperRules();
+	}
+	
+	@Override
+	public void setAutoMapping(boolean autoMapping) {
+		this.mapper.setAutoMapping(autoMapping);
+	}
+	
+	@Override
+	public boolean isAutoMapping() {
+		return this.mapper.isAutoMapping();
+	}
 
 	@Override
-	public Parameter<String, String> mapping(ServletRequest source) throws Exception {
+	public Parameter<String, String> mapping(ServletRequest source, Set<MapperRule> mapperRules) throws Exception {
 		if (source == null)
 			return null;
 		
-		return mapper.mapping(WebUtils.getParameters(source));
+		return mapper.mapping(WebUtils.getParameters(source), mapperRules);
 	}
 
 }

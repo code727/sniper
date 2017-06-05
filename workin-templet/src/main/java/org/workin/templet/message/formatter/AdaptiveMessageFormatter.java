@@ -34,7 +34,7 @@ public class AdaptiveMessageFormatter extends
 	
 	private MessageFormatter<Object> jdkMessageFormatter = new JdkMessageFormatter();
 	
-	private MessageFormatter<Map<String, Object>> mapMessageFormatter = new MapMessageFormatter();
+	private MessageFormatter<Map<String, Object>> mapMessageFormatter = new MapMessageFormatter<Object>();
 	
 	private MessageFormatter<Object> beanMessageFormatter = new BeanMessageFormatter();
 		

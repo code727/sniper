@@ -23,6 +23,7 @@ import java.util.Set;
 import org.workin.beans.BeanUtils;
 import org.workin.beans.parameter.Parameter;
 import org.workin.beans.parameter.ParameterUtils;
+import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
 
 /**
@@ -30,30 +31,16 @@ import org.workin.commons.util.CollectionUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ParameterToBeanMapper<V, T> extends AbstractBeanMapper<Parameter<String, V>, T> {
+public class ParameterToBeanMapper<V> extends AbstractBeanMapper<Parameter<String, V>> {
 	
-	public ParameterToBeanMapper(String beanType) throws ClassNotFoundException {
-		super(beanType);
-	}
-	
-	public ParameterToBeanMapper(Class<T> beanClass) {
-		super(beanClass);
-	}
-	
-	public ParameterToBeanMapper(String beanType, Set<MapperRule> mapperRules) throws ClassNotFoundException {
-		super(beanType, mapperRules);
-	}
-	
-	public ParameterToBeanMapper(Class<T> beanClass, Set<MapperRule> mapperRules) {
-		super(beanClass, mapperRules);
-	}
-
 	@Override
-	public T mapping(Parameter<String, V> source) throws Exception {
+	public <T> T mapping(Parameter<String, V> source, Class<T> type) throws Exception {
+		AssertUtils.assertNotNull(type, "Mapped bean type must not be null");
+		
 		if (ParameterUtils.isEmpty(source))
 			return null;
 		
-		T mappedBean = createMappedBean();
+		T mappedBean = createMappedBean(type);
 		if (CollectionUtils.isNotEmpty(mapperRules)) {
 			for (MapperRule rule : mapperRules) {
 				BeanUtils.set(mappedBean, rule.getMappedName(), source.getValue(rule.getOriginalName()));

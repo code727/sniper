@@ -25,21 +25,7 @@ import java.util.Set;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Mapper<S, T> {
-	
-	/**
-	 * 设置映射器规则集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param mapperRules
-	 */
-	public void setMapperRules(Set<MapperRule> mapperRules);
-	
-	/**
-	 * 获取映射器规则集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Set<MapperRule> getMapperRules();
+public interface Mapper<S, T> extends ConfigurableMapper {
 	
 	/**
 	 * 将指定的源对象进行映射处理
@@ -49,5 +35,15 @@ public interface Mapper<S, T> {
 	 * @throws Exception
 	 */
 	public T mapping(S source) throws Exception;
+	
+	/**
+	 * 将指定的源对象进行指定规则的映射处理
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param source
+	 * @param mapperRules
+	 * @return
+	 * @throws Exception
+	 */
+	public T mapping(S source, Set<MapperRule> mapperRules) throws Exception;
 
 }

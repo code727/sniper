@@ -71,7 +71,7 @@ public class WorkinJsonResponseHandler extends JsonResponseHandler {
 				if (dataResponse instanceof MessageResponse && response instanceof MessageResponse)
 					((MessageResponse) dataResponse).setMessage(((MessageResponse) response).getMessage());
 				
-				dataResponse.setData(new MapToBeanMapper(nestedType).mapping((Map) data));
+				dataResponse.setData(new MapToBeanMapper().mapping((Map) data, nestedType));
 				return (T) dataResponse;
 			}
 		}

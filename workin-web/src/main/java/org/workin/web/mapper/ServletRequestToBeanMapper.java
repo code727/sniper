@@ -24,8 +24,8 @@ import java.util.Set;
 import javax.servlet.ServletRequest;
 
 import org.workin.beans.mapper.AbstractBeanMapper;
+import org.workin.beans.mapper.BeanMapper;
 import org.workin.beans.mapper.MapToBeanMapper;
-import org.workin.beans.mapper.Mapper;
 import org.workin.beans.mapper.MapperRule;
 import org.workin.web.WebUtils;
 
@@ -34,26 +34,12 @@ import org.workin.web.WebUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ServletRequestToBeanMapper<T> extends AbstractBeanMapper<ServletRequest, T> {
+public class ServletRequestToBeanMapper extends AbstractBeanMapper<ServletRequest> {
 	
-	private Mapper<Map<String, String>, T> mapper;
+	private BeanMapper<Map<String, String>> mapper;
 	
-	public ServletRequestToBeanMapper(String beanType) throws ClassNotFoundException {
-		this(beanType, null);
-	}
-	
-	public ServletRequestToBeanMapper(Class<T> beanClass) {
-		this(beanClass, null);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public ServletRequestToBeanMapper(String beanType, Set<MapperRule> mapperRules) throws ClassNotFoundException {
-		this((Class<T>) Class.forName(beanType), mapperRules);
-	}
-	
-	public ServletRequestToBeanMapper(Class<T> beanClass, Set<MapperRule> mapperRules) {
-		super(beanClass, mapperRules);
-		this.mapper = new MapToBeanMapper<String, T>(beanClass, mapperRules);
+	public ServletRequestToBeanMapper() {
+		this.mapper = new MapToBeanMapper<String>();
 	}
 	
 	@Override
@@ -62,11 +48,26 @@ public class ServletRequestToBeanMapper<T> extends AbstractBeanMapper<ServletReq
 	}
 	
 	@Override
-	public T mapping(ServletRequest source) throws Exception {
+	public Set<MapperRule> getMapperRules() {
+		return this.mapper.getMapperRules();
+	}
+	
+	@Override
+	public void setAutoMapping(boolean autoMapping) {
+		this.mapper.setAutoMapping(autoMapping);
+	}
+	
+	@Override
+	public boolean isAutoMapping() {
+		return this.mapper.isAutoMapping();
+	}
+	
+	@Override
+	public <T> T mapping(ServletRequest source, Class<T> type) throws Exception {
 		if (source == null)
 			return null;
 		
-		return mapper.mapping(WebUtils.getParameters(source));
+		return mapper.mapping(WebUtils.getParameters(source), type);
 	}
-
+		
 }

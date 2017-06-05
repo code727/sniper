@@ -20,7 +20,7 @@ package org.workin.beans.mapper;
 
 import java.util.Set;
 
-import org.workin.commons.util.AssertUtils;
+import org.workin.beans.DefaultTypedBean;
 import org.workin.commons.util.ReflectionUtils;
 
 /**
@@ -28,49 +28,47 @@ import org.workin.commons.util.ReflectionUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractBeanMapper<S, T> extends AbstractMapper<S, T> {
+public abstract class AbstractBeanMapper<S> extends DefaultTypedBean implements BeanMapper<S>, ConfigurableMapper {
 	
-	/** 被映射的目标Bean类型 */
-	private String beanType;
+	/** 映射器规则集 */
+	protected Set<MapperRule> mapperRules;
 	
-	/** 被映射的目标Bean类型 */
-	private Class<T> beanClass;
+	/** 是否自动进行规则以外的映射处理 */
+	public boolean autoMapping = true;
 	
-	protected AbstractBeanMapper(String beanType) throws ClassNotFoundException {
-		this(beanType, null);
+	@Override
+	public Set<MapperRule> getMapperRules() {
+		return mapperRules;
 	}
-	
-	protected AbstractBeanMapper(Class<T> beanClass) {
-		this(beanClass, null);
-	}
-	
-	@SuppressWarnings("unchecked")
-	protected AbstractBeanMapper(String beanType, Set<MapperRule> mapperRules) throws ClassNotFoundException {
-		this((Class<T>) Class.forName(beanType), mapperRules);
-	}
-	
-	protected AbstractBeanMapper(Class<T> beanClass, Set<MapperRule> mapperRules) {
-		AssertUtils.assertNotNull(beanClass, "Mapped bean class must not be null or blank.");
-		
-		this.beanClass = beanClass;
-		this.beanType = beanClass.getName();
+
+	@Override
+	public void setMapperRules(Set<MapperRule> mapperRules) {
 		this.mapperRules = mapperRules;
 	}
 	
-	public String getBeanType() {
-		return beanType;
+	@Override
+	public boolean isAutoMapping() {
+		return autoMapping;
 	}
 
-	public Class<T> getBeanClass() {
-		return beanClass;
+	@Override
+	public void setAutoMapping(boolean autoMapping) {
+		this.autoMapping = autoMapping;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T mapping(S source) throws Exception {
+		// 映射成全局类型对应的JavaBeean对象
+		return (T) mapping(source, getType());
+	}
+	
 	/**
-	 * 根据被映射的目标Bean对象
+	 * 映射出指定类型的目标Bean对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	protected T createMappedBean() throws Exception {
+	protected <T> T createMappedBean(Class<T> beanType) throws Exception {
 		return ReflectionUtils.newInstance(beanType);
 	}
 	

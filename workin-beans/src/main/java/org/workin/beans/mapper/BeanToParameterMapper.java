@@ -18,6 +18,7 @@
 
 package org.workin.beans.mapper;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -31,26 +32,35 @@ import org.workin.commons.util.CollectionUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BeanToParameterMapper<S, V> extends AbstractMapper<S, Parameter<String, V>> {
+public class BeanToParameterMapper<V> extends AbstractMapper<Object, Parameter<String, V>> {
 	
-	public BeanToParameterMapper() {
-		this(null);
-	}
-	
-	public BeanToParameterMapper(Set<MapperRule> mapperRules) {
-		this.mapperRules = mapperRules;
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
-	public Parameter<String, V> mapping(S source) throws Exception {
+	public Parameter<String, V> mapping(Object source, Set<MapperRule> mapperRules) throws Exception {
 		if (source == null)
 			return null;
 		
 		Parameter<String, V> parameter = new MapParameter<String, V>();
+		
 		if (CollectionUtils.isNotEmpty(mapperRules)) {
-			for (MapperRule rule : mapperRules) 
-				parameter.add(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
+			if (isAutoMapping()) {
+				// 需要自动映射的属性名称集
+				List<String> autoMappedNames = BeanUtils.findAllPropertyNameByGetter(source);
+				
+				for (MapperRule rule : mapperRules) {
+					parameter.add(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
+					// 删除已完成映射的属性名称
+					autoMappedNames.remove(rule.getOriginalName());
+				}
+					
+				/* 完成规则外的映射 */
+				for (String mappedName : autoMappedNames) 
+					parameter.add(mappedName, (V) BeanUtils.get(source, mappedName));
+				
+			} else {
+				for (MapperRule rule : mapperRules) 
+					parameter.add(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
+			}
 		} else
 			parameter.setParameters((Map<String, V>) BeanUtils.create(source));
 		

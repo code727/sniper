@@ -32,16 +32,8 @@ import org.workin.commons.util.CollectionUtils;
  */
 public class ParameterToParameterMapper<V> extends AbstractMapper<Parameter<String,V>, Parameter<String,V>> {
 	
-	public ParameterToParameterMapper() {
-		super();
-	}
-	
-	public ParameterToParameterMapper(Set<MapperRule> mapperRules) {
-		super(mapperRules);
-	}
-
 	@Override
-	public Parameter<String, V> mapping(Parameter<String, V> source) {
+	public Parameter<String, V> mapping(Parameter<String, V> source, Set<MapperRule> mapperRules) throws Exception {
 		if (ParameterUtils.isEmpty(source))
 			return null;
 		
@@ -49,8 +41,25 @@ public class ParameterToParameterMapper<V> extends AbstractMapper<Parameter<Stri
 			return new MapParameter<String, V>(source);
 		
 		Parameter<String, V> parameter = new MapParameter<String, V>();
-		for (MapperRule rule : mapperRules) 
-			parameter.add(rule.getMappedName(), source.getValue(rule.getOriginalName()));
+		
+		if (isAutoMapping()) {
+			// 需要自动映射的参数名称集
+			Set<String> autoMappedNames = source.getNames();
+			
+			for (MapperRule rule : mapperRules) {
+				parameter.add(rule.getMappedName(), source.getValue(rule.getOriginalName()));
+				// 删除已完成映射的参数名称
+				autoMappedNames.remove(rule.getOriginalName());
+			}
+			
+			/* 完成规则外的映射 */
+			for (String mappedName : autoMappedNames) 
+				parameter.add(mappedName, source.getValue(mappedName));
+			
+		} else {
+			for (MapperRule rule : mapperRules) 
+				parameter.add(rule.getMappedName(), source.getValue(rule.getOriginalName()));
+		}
 		
 		return parameter;
 	}

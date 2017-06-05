@@ -30,15 +30,15 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MapMessageFormatter extends PlaceholderMessageFormatter<Map<String, Object>> {
+public class MapMessageFormatter<V> extends PlaceholderMessageFormatter<Map<String, V>> {
 	
 	@Override
-	public String format(String message, Map<String, Object> param) {
+	public String format(String message, Map<String, V> param) {
 		if (MapUtils.isNotEmpty(param)) {
-			Iterator<Entry<String, Object>> iterator = param.entrySet().iterator();
+			Iterator<Entry<String, V>> iterator = param.entrySet().iterator();
 			StringBuffer mark = new StringBuffer();
 			while (iterator.hasNext()) {
-				Entry<String, Object> nameValuePair = iterator.next();
+				Entry<String, V> nameValuePair = iterator.next();
 				mark.setLength(0);
 				mark.append(this.getPrefix()).append(nameValuePair.getKey()).append(this.getSuffix());
 				message = StringUtils.replaceAll(message, mark.toString(), StringUtils.toString(nameValuePair.getValue())); 
@@ -47,5 +47,5 @@ public class MapMessageFormatter extends PlaceholderMessageFormatter<Map<String,
 		
 		return message;
 	}
-
+	
 }

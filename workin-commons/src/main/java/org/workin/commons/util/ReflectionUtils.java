@@ -477,6 +477,7 @@ public class ReflectionUtils {
 	 */
 	public static <T> T newInstance(Class<T> c, Class<?>[] pTypes, Object[] pValues) throws Exception {
 		AssertUtils.assertNotNull(c, "Can not be create instance by null class.");
+		
 		if (ArrayUtils.isNotEmpty(pTypes)) {
 			Constructor<T> constructor = c.getDeclaredConstructor(pTypes);
 			constructor.setAccessible(true);

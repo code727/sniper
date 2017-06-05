@@ -25,18 +25,13 @@ import java.util.Set;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractMapper<S, T> implements Mapper<S, T> {
+public abstract class AbstractMapper<S, T> implements Mapper<S, T>, ConfigurableMapper {
 	
 	/** 映射器规则集 */
 	protected Set<MapperRule> mapperRules;
 	
-	protected AbstractMapper() {
-		this(null);
-	}
-	
-	protected AbstractMapper(Set<MapperRule> mapperRules) {
-		this.mapperRules = mapperRules;
-	}
+	/** 是否自动进行规则以外的映射处理 */
+	public boolean autoMapping = true;
 	
 	@Override
 	public Set<MapperRule> getMapperRules() {
@@ -46,6 +41,21 @@ public abstract class AbstractMapper<S, T> implements Mapper<S, T> {
 	@Override
 	public void setMapperRules(Set<MapperRule> mapperRules) {
 		this.mapperRules = mapperRules;
+	}
+	
+	@Override
+	public boolean isAutoMapping() {
+		return autoMapping;
+	}
+
+	@Override
+	public void setAutoMapping(boolean autoMapping) {
+		this.autoMapping = autoMapping;
+	}
+	
+	@Override
+	public T mapping(S source) throws Exception {
+		return mapping(source, mapperRules);
 	}
 	
 }
