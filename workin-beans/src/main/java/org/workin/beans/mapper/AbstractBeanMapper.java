@@ -21,6 +21,7 @@ package org.workin.beans.mapper;
 import java.util.Set;
 
 import org.workin.beans.DefaultTypedBean;
+import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.ReflectionUtils;
 
 /**
@@ -34,7 +35,7 @@ public abstract class AbstractBeanMapper<S> extends DefaultTypedBean implements 
 	protected Set<MapperRule> mapperRules;
 	
 	/** 是否自动进行规则以外的映射处理 */
-	public boolean autoMapping = true;
+	private boolean autoMapping = true;
 	
 	@Override
 	public Set<MapperRule> getMapperRules() {
@@ -56,10 +57,9 @@ public abstract class AbstractBeanMapper<S> extends DefaultTypedBean implements 
 		this.autoMapping = autoMapping;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T mapping(S source) throws Exception {
-		return (T) mapping(source, getType());
+		return mapping(source, mapperRules);
 	}
 	
 	public <T> T mapping(S source, Class<T> type) throws Exception {
@@ -71,6 +71,23 @@ public abstract class AbstractBeanMapper<S> extends DefaultTypedBean implements 
 		return (T) mapping(source, mapperRules, getType());
 	}
 	
+	@Override
+	public <T> T mapping(S source, Set<MapperRule> mapperRules, Class<T> type) throws Exception {
+		AssertUtils.assertNotNull(type, "Mapped bean type must not be null");
+		return doMapping(source, mapperRules, type);
+	}
+		
+	/**
+	 * 执行映射处理
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param source
+	 * @param mapperRules
+	 * @param type
+	 * @return
+	 * @throws Exception
+	 */
+	protected abstract <T> T doMapping(S source, Set<MapperRule> mapperRules, Class<T> type) throws Exception;
+
 	/**
 	 * 映射出指定类型的目标Bean对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

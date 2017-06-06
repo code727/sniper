@@ -29,10 +29,20 @@ public abstract class AbstractTypedResponseHandler implements TypedResponseHandl
 	public <T> T handleResponse(String response) throws Exception {
 		return handleResponse(response, null);
 	}
+	
+//	@Override
+//	public <T> T handleResponse(String response, Set<MapperRule> nestedMapperRules, Class<?> nestedType) throws Exception {
+//		return handleResponse(response, null, nestedMapperRules, nestedType);
+//	}
 
-	@Override
-	public <T> T handleResponse(String response, Class<T> type) throws Exception {
-		return handleResponse(response, type, null);
-	}
+//	@Override
+//	public <T> T handleResponse(String response, Class<T> type) throws Exception {
+//		return handleResponse(response, type, null);
+//	}
+	
+//	@Override
+//	public <T> T handleResponse(String response, Class<T> type, Class<?> nestedType) throws Exception {
+//		return handleResponse(response, type, null, nestedType);
+//	}
 
 }

@@ -18,7 +18,10 @@
 
 package org.workin.http;
 
+import java.util.Set;
+
 import org.workin.beans.Typed;
+import org.workin.beans.mapper.MapperRule;
 import org.workin.http.handler.response.ResponseHandler;
 
 /**
@@ -209,5 +212,19 @@ public interface HttpForm extends Typed {
 	 * @param responseHandler 
 	 */
 	public void setResponseHandler(ResponseHandler responseHandler);
+
+	/** 
+	 * 获取嵌套映射器规则集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return 
+	 */
+	public Set<MapperRule> getNestedMapperRules();
+
+	/** 
+	 * 设置嵌套映射器规则集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param nestedMapperRules 
+	 */
+	public void setNestedMapperRules(Set<MapperRule> nestedMapperRules);
 	
 }

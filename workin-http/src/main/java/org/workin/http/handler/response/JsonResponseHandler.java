@@ -30,19 +30,8 @@ import org.workin.serialization.json.jackson.fasterxml.FasterxmlJacksonSerialize
 public class JsonResponseHandler extends AbstractTypedResponseHandler {
 	
 	/** JSON序列化器 */
-	private JsonSerializer jsonSerializer;
+	private JsonSerializer jsonSerializer = new FasterxmlJacksonSerializer();
 	
-	public JsonResponseHandler() {
-		this((JsonSerializer) null);
-	}
-	
-	public JsonResponseHandler(JsonSerializer jsonSerializer) {
-		if (jsonSerializer == null)
-			this.jsonSerializer = new FasterxmlJacksonSerializer();
-		else
-			this.jsonSerializer = jsonSerializer;
-	}
-		
 	public JsonSerializer getJsonSerializer() {
 		return jsonSerializer;
 	}
@@ -50,14 +39,10 @@ public class JsonResponseHandler extends AbstractTypedResponseHandler {
 	public void setJsonSerializer(JsonSerializer jsonSerializer) {
 		this.jsonSerializer = jsonSerializer;
 	}
-
-	@Override
-	public <T> T handleResponse(String json, Class<T> type, Class<?> nestedType) throws Exception {
-		if (StringUtils.isNotBlank(json)) {
-			return (T) jsonSerializer.deserialize(json, type);
-		}
-		
-		return null;
-	}
 	
+	@Override
+	public <T> T handleResponse(String json, Class<T> type) throws Exception {
+		return StringUtils.isNotBlank(json) ? jsonSerializer.deserialize(json, type) : null;
+	}	
+
 }

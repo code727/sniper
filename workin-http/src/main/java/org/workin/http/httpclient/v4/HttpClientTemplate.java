@@ -34,6 +34,7 @@ import org.workin.http.HttpAccessor;
 import org.workin.http.HttpForm;
 import org.workin.http.HttpRequestHeader;
 import org.workin.http.handler.response.ResponseHandler;
+import org.workin.http.handler.response.TypedNestedResponseHandler;
 import org.workin.http.handler.response.TypedResponseHandler;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
 import org.workin.http.httpclient.v4.factory.HttpClientFactory;
@@ -232,9 +233,15 @@ public final class HttpClientTemplate extends HttpAccessor {
 		if (handler == null)
 			return (T) response;
 		
-		if (handler instanceof TypedResponseHandler)
-			return (T) ((TypedResponseHandler)handler).handleResponse(response, form.getType(), form.getNestedType());
 		
+		if (handler instanceof TypedResponseHandler) {
+			if (handler instanceof TypedNestedResponseHandler) 
+				return (T) ((TypedNestedResponseHandler) handler).handleResponse(response, form.getType(), form.getNestedMapperRules(), form.getNestedType());
+						
+			
+			return (T) ((TypedResponseHandler) handler).handleResponse(response, form.getType());
+		}
+			
 		return handler.handleResponse(response);
 	}
 					

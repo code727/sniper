@@ -18,12 +18,13 @@
 
 package org.workin.beans.mapper;
 
+import java.beans.PropertyEditor;
 import java.util.List;
 import java.util.Set;
 
 import org.workin.beans.BeanUtils;
-import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CollectionUtils;
+import org.workin.commons.util.ObjectUtils;
 
 /**
  * Java Bean对象与Java Bean对象之间的映射转换
@@ -33,9 +34,7 @@ import org.workin.commons.util.CollectionUtils;
 public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
 		
 	@Override
-	public <T> T mapping(Object source, Set<MapperRule> mapperRules, Class<T> type) throws Exception {
-		AssertUtils.assertNotNull(type, "Mapped bean type must not be null");
-		
+	protected <T> T doMapping(Object source, Set<MapperRule> mapperRules, Class<T> type) throws Exception {
 		if (source == null)
 			return null;
 		
@@ -47,18 +46,19 @@ public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
 				List<String> autoMappedNames = BeanUtils.findAllPropertyNameByGetter(source);
 				
 				for (MapperRule rule : mapperRules) {
-					BeanUtils.set(mappedBean, rule.getMappedName(), BeanUtils.get(source, rule.getOriginalName()));
+					ruleMapping(source, mappedBean, rule);
 					// 删除已完成映射的属性名称
 					autoMappedNames.remove(rule.getOriginalName());
 				}
 				
 				/* 完成规则外的映射 */
-				for (String mappedName : autoMappedNames) 
+				for (String mappedName : autoMappedNames) {
 					BeanUtils.set(mappedBean, mappedName, BeanUtils.get(source, mappedName));
-					
+				}
 			} else {
-				for (MapperRule rule : mapperRules) 
-					BeanUtils.set(mappedBean, rule.getMappedName(), BeanUtils.get(source, rule.getOriginalName()));
+				for (MapperRule rule : mapperRules) {
+					ruleMapping(source, mappedBean, rule);
+				}
 			}
 		} else {
 			List<String> propertyNames = BeanUtils.findAllPropertyNameByGetter(mappedBean);
@@ -67,6 +67,25 @@ public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
 			}
 		}
 		return mappedBean;
+	}
+	
+	/**
+	 * 规则内映射处理
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param source
+	 * @param mappedBean
+	 * @param rule
+	 * @throws Exception
+	 */
+	private <T> void ruleMapping(Object source, T mappedBean, MapperRule rule) throws Exception {
+		PropertyEditor propertyEditor = rule.getPropertyEditor();
+		if (propertyEditor != null) {
+//			propertyEditor.setValue(BeanUtils.get(source, rule.getOriginalName()));
+			propertyEditor.setAsText(ObjectUtils.toString(BeanUtils.get(source, rule.getOriginalName())));
+			BeanUtils.set(mappedBean, rule.getMappedName(), propertyEditor.getValue());
+		} else {
+			BeanUtils.set(mappedBean, rule.getMappedName(), BeanUtils.get(source, rule.getOriginalName()));
+		}
 	}
 
 }

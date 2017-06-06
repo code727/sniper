@@ -20,46 +20,46 @@ package org.workin.http.handler.response;
 
 
 import java.util.Map;
+import java.util.Set;
 
-import org.workin.beans.mapper.MapToBeanMapper;
+import org.workin.beans.mapper.MapperRule;
 import org.workin.commons.response.DataResponse;
 import org.workin.commons.response.MessageResponse;
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.ReflectionUtils;
-import org.workin.serialization.json.JsonSerializer;
 
 /**
  * Workin JSON响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class WorkinJsonResponseHandler extends JsonResponseHandler {
+public class WorkinJsonResponseHandler extends AbstractTypedNestedResponseHandler {
 	
 	public WorkinJsonResponseHandler() {
 		super();
 	}
 	
-	public WorkinJsonResponseHandler(JsonSerializer jsonSerializer) {
-		super(jsonSerializer);
+	public WorkinJsonResponseHandler(TypedResponseHandler typedResponseHandler) {
+		super(typedResponseHandler);
 	}
-		
+			
+	@Override
+	protected TypedResponseHandler buildDefaultTypedResponseHandler() {
+		return new JsonResponseHandler();
+	}
+	
 	/**
 	 * 重写父类方法，主要是解决当父类处理的响应结果为一个DataResponse对象时，其内部的data值转换问题
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param json
-	 * @param type
+	 * @param response
+	 * @param nestedMapperRules
 	 * @param nestedType
 	 * @return
 	 * @throws Exception
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T handleResponse(String json, Class<T> type, Class<?> nestedType) throws Exception {
-//		AssertUtils.assertTrue(ClassUtils.isSubClass(type, Response.class),
-//				"Json type [" + type.getName() + "] must be sub class of [" + Response.class.getName() + "]");
-		
-		T response = super.handleResponse(json, type, nestedType);
-		
+	protected <T> T doResponse(T response, Set<MapperRule> nestedMapperRules, Class<?> nestedType) throws Exception {
 		if (nestedType != null && response instanceof DataResponse) {
 			Object data = ((DataResponse<Object>) response).getData();
 			
@@ -71,12 +71,12 @@ public class WorkinJsonResponseHandler extends JsonResponseHandler {
 				if (dataResponse instanceof MessageResponse && response instanceof MessageResponse)
 					((MessageResponse) dataResponse).setMessage(((MessageResponse) response).getMessage());
 				
-				dataResponse.setData(new MapToBeanMapper().mapping((Map) data, nestedType));
+				dataResponse.setData(getMapToBeanMapper().mapping((Map<String, Object>) data, nestedMapperRules, nestedType));
 				return (T) dataResponse;
 			}
 		}
 		
 		return response;
 	}
-			
+
 }

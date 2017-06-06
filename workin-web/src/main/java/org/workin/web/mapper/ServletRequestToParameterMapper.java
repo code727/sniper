@@ -65,9 +65,6 @@ public class ServletRequestToParameterMapper extends AbstractMapper<ServletReque
 
 	@Override
 	public Parameter<String, String> mapping(ServletRequest source, Set<MapperRule> mapperRules) throws Exception {
-		if (source == null)
-			return null;
-		
 		return mapper.mapping(WebUtils.getParameters(source), mapperRules);
 	}
 

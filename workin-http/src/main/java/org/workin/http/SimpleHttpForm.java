@@ -18,7 +18,10 @@
 
 package org.workin.http;
 
+import java.util.Set;
+
 import org.workin.beans.DefaultTypedBean;
+import org.workin.beans.mapper.MapperRule;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.commons.util.StringUtils;
@@ -62,14 +65,17 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 	/** 字符串编码 */
 	private String encoding;
 	
+	/** 响应处理器 */
+	private ResponseHandler responseHandler;
+	
 	/** 嵌套类型路径限定名 */
 	private String nestedTypeClass;
 	
 	/** 嵌套类型 */
 	private Class<?> nestedType;
 	
-	/** 响应处理器 */
-	private ResponseHandler responseHandler;
+	/** 嵌套映射器规则集 */
+	private Set<MapperRule> nestedMapperRules;
 		
 	@Override
 	public boolean isHttps() {
@@ -176,6 +182,16 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 	}
 	
 	@Override
+	public ResponseHandler getResponseHandler() {
+		return responseHandler;
+	}
+
+	@Override
+	public void setResponseHandler(ResponseHandler responseHandler) {
+		this.responseHandler = responseHandler;
+	}
+	
+	@Override
 	public String getNestedTypeClass() {
 		return nestedTypeClass;
 	}
@@ -203,13 +219,13 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 	}
 
 	@Override
-	public ResponseHandler getResponseHandler() {
-		return responseHandler;
+	public Set<MapperRule> getNestedMapperRules() {
+		return nestedMapperRules;
 	}
 
 	@Override
-	public void setResponseHandler(ResponseHandler responseHandler) {
-		this.responseHandler = responseHandler;
+	public void setNestedMapperRules(Set<MapperRule> nestedMapperRules) {
+		this.nestedMapperRules = nestedMapperRules;
 	}
 
 }
