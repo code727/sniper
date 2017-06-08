@@ -16,17 +16,17 @@
  * Create Date : 2017年5月22日
  */
 
-package org.workin.http.handler.response;
+package org.workin.http.handler.response.typed;
 
 
 import java.util.Map;
-import java.util.Set;
 
-import org.workin.beans.mapper.MapperRule;
 import org.workin.commons.response.DataResponse;
 import org.workin.commons.response.MessageResponse;
 import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.ReflectionUtils;
+import org.workin.serialization.TypedSerializer;
+import org.workin.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
 
 /**
  * Workin JSON响应处理器实现类
@@ -35,17 +35,9 @@ import org.workin.commons.util.ReflectionUtils;
  */
 public class WorkinJsonResponseHandler extends AbstractTypedNestedResponseHandler {
 	
-	public WorkinJsonResponseHandler() {
-		super();
-	}
-	
-	public WorkinJsonResponseHandler(TypedResponseHandler typedResponseHandler) {
-		super(typedResponseHandler);
-	}
-			
 	@Override
-	protected TypedResponseHandler buildDefaultTypedResponseHandler() {
-		return new JsonResponseHandler();
+	protected TypedSerializer buildDefaultTypedSerializer() {
+		return new FasterxmlJacksonSerializer();
 	}
 	
 	/**
@@ -59,7 +51,7 @@ public class WorkinJsonResponseHandler extends AbstractTypedNestedResponseHandle
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	protected <T> T doResponse(T response, Set<MapperRule> nestedMapperRules, Class<?> nestedType) throws Exception {
+	protected <T> T doResponse(T response, Class<?> nestedType) throws Exception {
 		if (nestedType != null && response instanceof DataResponse) {
 			Object data = ((DataResponse<Object>) response).getData();
 			
@@ -71,7 +63,7 @@ public class WorkinJsonResponseHandler extends AbstractTypedNestedResponseHandle
 				if (dataResponse instanceof MessageResponse && response instanceof MessageResponse)
 					((MessageResponse) dataResponse).setMessage(((MessageResponse) response).getMessage());
 				
-				dataResponse.setData(getMapToBeanMapper().mapping((Map<String, Object>) data, nestedMapperRules, nestedType));
+				dataResponse.setData(typedSerializer.deserialize(typedSerializer.serialize(data), nestedType));
 				return (T) dataResponse;
 			}
 		}

@@ -18,10 +18,10 @@
 
 package org.workin.beans.propertyeditors;
 
-import java.text.ParsePosition;
 import java.util.Date;
 
 import org.workin.commons.util.DateUtils;
+import org.workin.commons.util.RegexUtils;
 import org.workin.commons.util.StringUtils;
 
 /**
@@ -74,8 +74,11 @@ public class DatePropertyEditor extends StringPropertyEditor {
 			
 	@Override
 	protected Object handleText(String text) {
+		if (RegexUtils.isInteger(text))
+			return DateUtils.timeToDate(Long.valueOf(text));
+		
 		// parse的文本格式不匹配时，仍然会返回null
-		return StringUtils.isNotBlank(text) ? DateUtils.getDateFormat(pattern).parse(text, new ParsePosition(0)) : new Date();
+		return StringUtils.isNotBlank(text) ? DateUtils.stringToDate(text, pattern) : new Date();
 	}
 					
 }

@@ -56,6 +56,7 @@ public class MapToBeanMapper<V> extends AbstractBeanMapper<Map<String, V>> {
 				
 				/* 完成规则外的映射 */
 				for (String mappedName : autoMappedNames) {
+					System.out.println(mappedName);
 					BeanUtils.set(mappedBean, mappedName, source.get(mappedName));
 				}
 			} else {

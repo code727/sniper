@@ -16,7 +16,9 @@
  * Create Date : 2017-5-27
  */
 
-package org.workin.http.handler.response;
+package org.workin.http.handler.response.typed;
+
+import org.workin.http.handler.response.ResponseHandler;
 
 /**
  * 类型化响应处理器接口
@@ -34,5 +36,5 @@ public interface TypedResponseHandler extends ResponseHandler {
 	 * @throws Exception
 	 */
 	public <T> T handleResponse(String response, Class<T> type) throws Exception;
-	
+		
 }

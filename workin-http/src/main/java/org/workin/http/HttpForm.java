@@ -22,6 +22,7 @@ import java.util.Set;
 
 import org.workin.beans.Typed;
 import org.workin.beans.mapper.MapperRule;
+import org.workin.codec.Codecable;
 import org.workin.http.handler.response.ResponseHandler;
 
 /**
@@ -29,7 +30,7 @@ import org.workin.http.handler.response.ResponseHandler;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface HttpForm extends Typed {
+public interface HttpForm extends Typed, Codecable {
 	
 	/**
 	 * 判断是否为HTTPS协议的表单
@@ -155,21 +156,7 @@ public interface HttpForm extends Typed {
 	 * @return
 	 */
 	public String getMimeType();
-		
-	/**
-	 * 设置字符集编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param encoding
-	 */
-	public void setEncoding(String encoding);
-	
-	/**
-	 * 获取字符集编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getEncoding();
-	
+			
 	/**
 	 * 获取嵌套类型路径限定名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

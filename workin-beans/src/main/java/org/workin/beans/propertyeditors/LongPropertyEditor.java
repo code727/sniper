@@ -43,7 +43,7 @@ public class LongPropertyEditor extends NumberPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return new Double(text);
+		return new Long(text);
 	}
 	
 }

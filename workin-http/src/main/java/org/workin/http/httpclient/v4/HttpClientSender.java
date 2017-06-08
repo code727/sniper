@@ -38,11 +38,11 @@ public class HttpClientSender extends CheckableInitializingBeanAdapter implement
 			throw new IllegalArgumentException("Property 'httpClientTemplate' is required");
 	}
 	
-	public HttpClientTemplate getHttpClientTemplet() {
+	public HttpClientTemplate getHttpClientTemplate() {
 		return httpClientTemplate;
 	}
 
-	public void setHttpClientTemplet(HttpClientTemplate httpClientTemplate) {
+	public void setHttpClientTemplate(HttpClientTemplate httpClientTemplate) {
 		this.httpClientTemplate = httpClientTemplate;
 	}
 

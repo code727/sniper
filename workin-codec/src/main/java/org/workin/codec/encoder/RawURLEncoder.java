@@ -95,7 +95,7 @@ public class RawURLEncoder extends CodecSupport implements StringEncoder {
         CharArrayWriter charArrayWriter = new CharArrayWriter();
 
         if (StringUtils.isBlank(encoding))
-        	encoding = super.getEncoding();
+        	encoding = getEncoding();
 
         try {
             charset = Charset.forName(encoding);

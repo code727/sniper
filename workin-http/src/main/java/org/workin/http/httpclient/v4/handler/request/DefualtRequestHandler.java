@@ -42,8 +42,9 @@ public class DefualtRequestHandler implements RequestHandler {
 
 	@Override
 	public void handle(HttpEntityEnclosingRequestBase httpRequest, String url, HttpForm form) throws Exception {
+		String queryString = NetUtils.getQueryString(url);
 		ContentType contentType = ContentType.create(form.getMimeType(), form.getEncoding());
-		httpRequest.setEntity(new StringEntity(NetUtils.getQueryString(url), contentType));
+		httpRequest.setEntity(new StringEntity(queryString, contentType));
 	}
 	
 	/**

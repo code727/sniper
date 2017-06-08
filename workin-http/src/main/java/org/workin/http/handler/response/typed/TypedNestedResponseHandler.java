@@ -16,11 +16,7 @@
  * Create Date : 2017-6-6
  */
 
-package org.workin.http.handler.response;
-
-import java.util.Set;
-
-import org.workin.beans.mapper.MapperRule;
+package org.workin.http.handler.response.typed;
 
 /**
  * 类型化嵌套响应处理器接口
@@ -28,18 +24,7 @@ import org.workin.beans.mapper.MapperRule;
  * @version 1.0
  */
 public interface TypedNestedResponseHandler extends TypedResponseHandler {
-	
-	/**
-	 * 处理字符串响应数据后返回全局类型的最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param response
-	 * @param nestedMapperRules 最终结果的内部嵌套映射规则
-	 * @param nestedType 最终结果的内部嵌套类型
-	 * @return
-	 * @throws Exception
-	 */
-	public <T> T handleResponse(String response, Set<MapperRule> nestedMapperRules, Class<?> nestedType) throws Exception;
-	
+		
 	/**
 	 * 处理字符串响应数据后返回指定类型的最终结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -51,16 +36,4 @@ public interface TypedNestedResponseHandler extends TypedResponseHandler {
 	 */
 	public <T> T handleResponse(String response, Class<T> type, Class<?> nestedType) throws Exception;
 	
-	/**
-	 * 处理字符串响应数据后返回指定类型的最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param response
-	 * @param type 最终结果的类型
-	 * @param nestedMapperRules 最终结果的内部嵌套映射规则
-	 * @param nestedType 最终结果的内部嵌套类型
-	 * @return
-	 * @throws Exception
-	 */
-	public <T> T handleResponse(String response, Class<T> type, Set<MapperRule> nestedMapperRules, Class<?> nestedType) throws Exception;
-
 }

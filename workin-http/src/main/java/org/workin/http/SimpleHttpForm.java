@@ -23,6 +23,7 @@ import java.util.Set;
 import org.workin.beans.DefaultTypedBean;
 import org.workin.beans.mapper.MapperRule;
 import org.workin.commons.util.AssertUtils;
+import org.workin.commons.util.CodecUtils;
 import org.workin.commons.util.NetUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.http.enums.MimeTypeEnum;
@@ -63,7 +64,7 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 	private String mimeType = MimeTypeEnum.APPLICATION_FORM_URLENCODED.getType();
 	
 	/** 字符串编码 */
-	private String encoding;
+	private String encoding = CodecUtils.DEFAULT_ENCODING;
 	
 	/** 响应处理器 */
 	private ResponseHandler responseHandler;

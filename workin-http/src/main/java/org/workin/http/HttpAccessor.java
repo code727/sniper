@@ -20,6 +20,8 @@ package org.workin.http;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.workin.codec.encoder.RawURLEncoder;
 import org.workin.codec.encoder.StringEncoder;
 import org.workin.commons.util.MapUtils;
@@ -28,6 +30,9 @@ import org.workin.commons.util.StringUtils;
 import org.workin.http.exception.HttpFormNotFoundException;
 import org.workin.http.exception.NoSuchHttpMethodException;
 import org.workin.http.formatter.AdaptiveURLFormatter;
+import org.workin.http.handler.response.ResponseHandler;
+import org.workin.http.handler.response.typed.TypedNestedResponseHandler;
+import org.workin.http.handler.response.typed.TypedResponseHandler;
 import org.workin.http.register.HttpFormRegister;
 import org.workin.spring.beans.CheckableInitializingBeanAdapter;
 import org.workin.templet.message.formatter.MessageFormatter;
@@ -38,6 +43,8 @@ import org.workin.templet.message.formatter.MessageFormatter;
  * @version 1.0
  */
 public abstract class HttpAccessor extends CheckableInitializingBeanAdapter implements HttpSender {
+	
+	protected final transient Logger logger;
 	
 	protected HttpFormRegister formRegister;
 	
@@ -54,6 +61,10 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 		SUPPORT_REQUEST_METHOD.put("post", "doPostRequest");
 		SUPPORT_REQUEST_METHOD.put("put", "doPutRequest");
 		SUPPORT_REQUEST_METHOD.put("delete", "doDeleteRequest");
+	}
+	
+	protected HttpAccessor() {
+		this.logger = LoggerFactory.getLogger(getClass());
 	}
 	
 	public void setFormRegister(HttpFormRegister formRegister) {
@@ -136,7 +147,7 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 	protected <T> T requestByName(String name, Object param) throws Exception {
 		HttpForm form = formRegister.find(name);
 		if (form == null)
-			throw new HttpFormNotFoundException("Form [name=" + name +"] not found in register.");
+			throw new HttpFormNotFoundException("Form [name=" + name +"] not found in register");
 		
 		String methodName = form.getMethod();
 		if (StringUtils.isBlank(methodName))
@@ -149,11 +160,38 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 						new Class<?>[] { String.class, Object.class }, new Object[] { name, param });
 			} catch (NoSuchMethodException e) {
 				throw new NoSuchHttpMethodException("No such http method ["
-						+ methodName + "] in current version of workin-http framework.");
+						+ methodName + "] in current version of workin-http framework");
 			}
 		} else
 			throw new NoSuchHttpMethodException("No such http method ["
-					+ methodName + "] in current version of workin-http framework.");
+					+ methodName + "] in current version of workin-http framework");
+	}
+	
+	/**
+	 * 根据表单所绑定的响应处理器处理字符串响应后返回最终结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param form
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	protected <T> T handleResponse(HttpForm form, String response) throws Exception {
+		logger.info("Http string response:{}", response);
+		
+		ResponseHandler handler = form.getResponseHandler();
+		
+		if (handler == null)
+			return (T) response;
+		
+		if (handler instanceof TypedResponseHandler) {
+			if (handler instanceof TypedNestedResponseHandler) 
+				return (T) ((TypedNestedResponseHandler) handler).handleResponse(response, form.getType(), form.getNestedType());
+			
+			return (T) ((TypedResponseHandler) handler).handleResponse(response, form.getType());
+		}
+			
+		return handler.handleResponse(response);
 	}
 	
 	/**

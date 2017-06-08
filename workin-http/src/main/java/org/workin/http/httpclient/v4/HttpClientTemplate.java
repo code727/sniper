@@ -27,15 +27,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.workin.commons.util.NetUtils;
 import org.workin.http.HttpAccessor;
 import org.workin.http.HttpForm;
 import org.workin.http.HttpRequestHeader;
-import org.workin.http.handler.response.ResponseHandler;
-import org.workin.http.handler.response.TypedNestedResponseHandler;
-import org.workin.http.handler.response.TypedResponseHandler;
 import org.workin.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
 import org.workin.http.httpclient.v4.factory.HttpClientFactory;
 import org.workin.http.httpclient.v4.handler.request.DefualtRequestHandler;
@@ -48,9 +43,7 @@ import org.workin.http.httpclient.v4.handler.response.DefaultResponseHandler;
  * @version 1.0
  */
 public final class HttpClientTemplate extends HttpAccessor {
-	
-	private static Logger logger = LoggerFactory.getLogger(HttpClientTemplate.class);
-	
+		
 	private HttpClientFactory httpClientFactory;
 	
 	private RequestConfig requestConfig;
@@ -106,14 +99,16 @@ public final class HttpClientTemplate extends HttpAccessor {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
 		
-		HttpGet httpGet = new HttpGet(getUrlEncoder().encode(url, form.getEncoding()));
+		// 已进行编码后的URL
+		String encodedUrl = urlEncoder.encode(url, form.getEncoding());
+		HttpGet httpGet = new HttpGet(encodedUrl);
 		httpGet.setConfig(requestConfig);
 		addHeader(httpGet, form);
 		
 		try {
-			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpGet.METHOD_NAME);
+			logger.info("Execute {} request [{}] from form [{}]", HttpGet.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpGet, responseHandler);
-			return doHandle(form, response);
+			return handleResponse(form, response);
 		} finally {
 			if (httpGet != null) 
 				httpGet.releaseConnection();
@@ -132,17 +127,17 @@ public final class HttpClientTemplate extends HttpAccessor {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
 		
-		HttpPost httpPost = new HttpPost(getUrlEncoder().encode(NetUtils.getActionString(url), form.getEncoding()));
+		// 已进行编码后的Action，不包含参数字符串部分
+		String encodedAction = urlEncoder.encode(NetUtils.getActionString(url), form.getEncoding());
+		HttpPost httpPost = new HttpPost(encodedAction);
 		httpPost.setConfig(requestConfig);
 		addHeader(httpPost, form);
 		
 		try {
 			requestHandler.handle(httpPost, url, form);
-			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpPost.METHOD_NAME);
-			
+			logger.info("Execute {} request [{}] from form [{}]", HttpPost.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpPost, responseHandler);
-			logger.info(response);
-			return doHandle(form, response);
+			return handleResponse(form, response);
 		}  finally {
 			if (httpPost != null) 
 				httpPost.releaseConnection();
@@ -161,16 +156,17 @@ public final class HttpClientTemplate extends HttpAccessor {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
 		
-		HttpPut httpPut = new HttpPut(NetUtils.getActionString(url));
+		// 已进行编码后的Action，不包含参数字符串部分
+		String encodedAction = urlEncoder.encode(NetUtils.getActionString(url), form.getEncoding());
+		HttpPut httpPut = new HttpPut(encodedAction);
 		httpPut.setConfig(requestConfig);
 		addHeader(httpPut, form);
 		
 		try {
 			requestHandler.handle(httpPut, url, form);
-			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpPut.METHOD_NAME);
-			
+			logger.info("Execute {} request [{}] from form [{}]", HttpPut.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpPut, responseHandler);
-			return doHandle(form, response);
+			return handleResponse(form, response);
 		}  finally {
 			if (httpPut != null)
 				httpPut.releaseConnection();
@@ -189,14 +185,16 @@ public final class HttpClientTemplate extends HttpAccessor {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
 		
-		HttpDelete httpDelete = new HttpDelete(getUrlEncoder().encode(url, form.getEncoding()));
+		// 已进行编码后的URL
+		String encodedUrl = urlEncoder.encode(url, form.getEncoding());
+		HttpDelete httpDelete = new HttpDelete(encodedUrl);
 		httpDelete.setConfig(requestConfig);
 		addHeader(httpDelete, form);
 		
 		try {
-			logger.info("Request form [{}] url [{}] method:[{}]", name, url, HttpDelete.METHOD_NAME);
+			logger.info("Execute {} request [{}] from form [{}]", HttpDelete.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpDelete, responseHandler);
-			return doHandle(form, response);
+			return handleResponse(form, response);
 		}  finally {
 			if (httpDelete != null)
 				httpDelete.releaseConnection();
@@ -217,32 +215,6 @@ public final class HttpClientTemplate extends HttpAccessor {
 				httpRequest.addHeader(item.getKey(), item.getKey());
 			}
 		} 
-	}
-	
-	/**
-	 * 根据表单所绑定的响应处理器处理字符串后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param form
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	@SuppressWarnings("unchecked")
-	protected <T> T doHandle(HttpForm form, String response) throws Exception {
-		ResponseHandler handler = form.getResponseHandler();
-		if (handler == null)
-			return (T) response;
-		
-		
-		if (handler instanceof TypedResponseHandler) {
-			if (handler instanceof TypedNestedResponseHandler) 
-				return (T) ((TypedNestedResponseHandler) handler).handleResponse(response, form.getType(), form.getNestedMapperRules(), form.getNestedType());
-						
-			
-			return (T) ((TypedResponseHandler) handler).handleResponse(response, form.getType());
-		}
-			
-		return handler.handleResponse(response);
 	}
 					
 }

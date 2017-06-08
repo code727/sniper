@@ -20,6 +20,8 @@ package org.workin.beans.mapper;
 
 import java.beans.PropertyEditor;
 
+import org.workin.commons.util.AssertUtils;
+
 /**
  * 映射器规则
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -41,6 +43,9 @@ public class MapperRule {
 	}
 	
 	public MapperRule(String originalName, String mappedName, PropertyEditor propertyEditor) {
+		AssertUtils.assertNotBlank(originalName, "Original name must not be null or blank");
+		AssertUtils.assertNotBlank(mappedName, "Mapped name must not be null or blank");
+		
 		this.originalName = originalName;
 		this.mappedName = mappedName;
 		this.propertyEditor = propertyEditor;

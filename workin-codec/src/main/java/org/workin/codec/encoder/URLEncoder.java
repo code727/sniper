@@ -37,7 +37,7 @@ public class URLEncoder extends CodecSupport implements StringEncoder {
 
 	@Override
 	public String encode(String message, String encoding) throws UnsupportedEncodingException {
-		return java.net.URLEncoder.encode(message, StringUtils.isNotBlank(encoding) ? encoding : super.getEncoding());
+		return java.net.URLEncoder.encode(message, StringUtils.isNotBlank(encoding) ? encoding : getEncoding());
 	}
 
 }

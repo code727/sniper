@@ -16,9 +16,10 @@
  * Create Date : 2017-5-22
  */
 
-package org.workin.http.handler.response;
+package org.workin.http.handler.response.typed;
 
 import org.workin.commons.util.StringUtils;
+import org.workin.serialization.TypedSerializer;
 import org.workin.serialization.json.JsonSerializer;
 import org.workin.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
 
@@ -29,20 +30,22 @@ import org.workin.serialization.json.jackson.fasterxml.FasterxmlJacksonSerialize
  */
 public class JsonResponseHandler extends AbstractTypedResponseHandler {
 	
-	/** JSON序列化器 */
-	private JsonSerializer jsonSerializer = new FasterxmlJacksonSerializer();
+	public JsonResponseHandler() {
+		super();
+	}
 	
-	public JsonSerializer getJsonSerializer() {
-		return jsonSerializer;
+	public JsonResponseHandler(JsonSerializer jsonSerializer) {
+		super(jsonSerializer);
 	}
-
-	public void setJsonSerializer(JsonSerializer jsonSerializer) {
-		this.jsonSerializer = jsonSerializer;
-	}
+		
+	@Override
+	protected TypedSerializer buildDefaultTypedSerializer() {
+		return new FasterxmlJacksonSerializer();
+	}	
 	
 	@Override
 	public <T> T handleResponse(String json, Class<T> type) throws Exception {
-		return StringUtils.isNotBlank(json) ? jsonSerializer.deserialize(json, type) : null;
-	}	
+		return StringUtils.isNotBlank(json) ? typedSerializer.deserialize(json, type) : null;
+	}
 
 }

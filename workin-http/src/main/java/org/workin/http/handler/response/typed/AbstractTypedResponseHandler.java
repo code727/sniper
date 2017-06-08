@@ -16,7 +16,10 @@
  * Create Date : 2017-5-27
  */
 
-package org.workin.http.handler.response;
+package org.workin.http.handler.response.typed;
+
+import org.workin.commons.util.AssertUtils;
+import org.workin.serialization.TypedSerializer;
 
 /**
  * 类型化响应处理器抽象类
@@ -24,25 +27,32 @@ package org.workin.http.handler.response;
  * @version 1.0
  */
 public abstract class AbstractTypedResponseHandler implements TypedResponseHandler {
+	
+	protected final TypedSerializer typedSerializer;
+	
+	protected AbstractTypedResponseHandler() {
+		this(null);
+	}
+	
+	protected AbstractTypedResponseHandler(TypedSerializer typedSerializer) {
+		if (typedSerializer != null)
+			this.typedSerializer = typedSerializer;
+		else
+			this.typedSerializer = buildDefaultTypedSerializer();
 		
+		AssertUtils.assertNotNull(this.typedSerializer, "Typed serializer must not be null");
+	}
+	
+	/**
+	 * 构建默认的类型化序列器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	protected abstract TypedSerializer buildDefaultTypedSerializer();
+	
 	@Override
 	public <T> T handleResponse(String response) throws Exception {
 		return handleResponse(response, null);
 	}
 	
-//	@Override
-//	public <T> T handleResponse(String response, Set<MapperRule> nestedMapperRules, Class<?> nestedType) throws Exception {
-//		return handleResponse(response, null, nestedMapperRules, nestedType);
-//	}
-
-//	@Override
-//	public <T> T handleResponse(String response, Class<T> type) throws Exception {
-//		return handleResponse(response, type, null);
-//	}
-	
-//	@Override
-//	public <T> T handleResponse(String response, Class<T> type, Class<?> nestedType) throws Exception {
-//		return handleResponse(response, type, null, nestedType);
-//	}
-
 }
