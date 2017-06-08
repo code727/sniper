@@ -126,7 +126,7 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 	}
 
 	@Override
-	public <T> T request(String name, Map<String, Object> parameters) throws Exception {
+	public <V, T> T request(String name, Map<String, V> parameters) throws Exception {
 		return requestByName(name, parameters);
 	}
 
@@ -177,7 +177,7 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 	 */
 	@SuppressWarnings("unchecked")
 	protected <T> T handleResponse(HttpForm form, String response) throws Exception {
-		logger.info("Http string response:{}", response);
+		logger.debug("Http string response:{}", response);
 		
 		ResponseHandler handler = form.getResponseHandler();
 		
@@ -186,7 +186,7 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 		
 		if (handler instanceof TypedResponseHandler) {
 			if (handler instanceof TypedNestedResponseHandler) 
-				return (T) ((TypedNestedResponseHandler) handler).handleResponse(response, form.getType(), form.getNestedType());
+				return (T) ((TypedNestedResponseHandler) handler).handleNestedResponse(response, form.getType(), form.getNestedType());
 			
 			return (T) ((TypedResponseHandler) handler).handleResponse(response, form.getType());
 		}

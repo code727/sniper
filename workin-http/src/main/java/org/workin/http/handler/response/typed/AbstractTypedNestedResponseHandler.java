@@ -35,29 +35,25 @@ public abstract class AbstractTypedNestedResponseHandler extends AbstractTypedRe
 	protected AbstractTypedNestedResponseHandler(TypedSerializer typedSerializer) {
 		super(typedSerializer);
 	}
-			
+				
 	@Override
-	public <T> T handleResponse(String response, Class<T> type) throws Exception {
-		return handleResponse(response, type, null);
+	public <T> T handleNestedResponse(String response, Class<?> nestedType) throws Exception {
+		return handleNestedResponse(response, null, nestedType);
 	}
 
 	@Override
-	public <T> T handleResponse(String response, Class<T> type, Class<?> nestedType) throws Exception {
-		T responseEntity = typedSerializer.deserialize(response, type);
-		return doResponse(responseEntity, nestedType);
+	public <T> T handleNestedResponse(String response, Class<T> type, Class<?> nestedType) throws Exception {
+		return doResponse(handleResponse(response, type), nestedType);
 	}
 	
 	/**
-	 *  处理响应实体后返回最终结果
+	 * 处理响应实体后返回最终结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param responseEntity
-	 * @param nestedMapperRules 响应实体内部嵌套映射规则
+	 * @param response
 	 * @param nestedType 响应实体内部嵌套类型
 	 * @return
 	 * @throws Exception
 	 */
-	protected <T> T doResponse(T response, Class<?> nestedType) throws Exception {
-		return response;
-	}
+	protected abstract <T> T doResponse(T response, Class<?> nestedType) throws Exception;
 	
 }

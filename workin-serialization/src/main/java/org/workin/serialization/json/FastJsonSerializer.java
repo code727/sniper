@@ -69,18 +69,16 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	@Override
 	public <T> T deserialize(String text, Class<T> type) throws SerializationException {
 		
-		Class<?> clazz = (type != null ? type : getType());
-		
 		DefaultJSONParser jsonParser = new DefaultJSONParser(text);
 		if (StringUtils.isNotBlank(dateFormat)) 
 			jsonParser.setDateFormat(dateFormat);
 		
 		try {
 			if (!isJsonArray(text)) {
-				if (clazz != null) {
-					if ( !ClassUtils.isCollection(clazz)) {
-						return (T) (!ClassUtils.isArray(clazz) ? 
-								beanDeserialize(jsonParser, clazz) : beanDeserializeToArray(jsonParser, clazz));
+				if (type != null) {
+					if ( !ClassUtils.isCollection(type)) {
+						return (T) (!ClassUtils.isArray(type) ? 
+								beanDeserialize(jsonParser, type) : beanDeserializeToArray(jsonParser, type));
 					} else
 						// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
 						return beanDeserializeToCollection(jsonParser);
@@ -88,12 +86,12 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 					// 指定的类型为null时，则返回LinkedHashMap
 					return beanDeserializeToMap(jsonParser);
 			} else {
-				if (clazz != null && !ClassUtils.isCollection(clazz)) {
-					return (T) (!ClassUtils.isArray(clazz) ? 
-							multipleBeanDeserializeToElementTypeCollection(jsonParser, clazz) : multipleBeanDeserializeToArray(jsonParser, clazz));
+				if (type != null && !ClassUtils.isCollection(type)) {
+					return (T) (!ClassUtils.isArray(type) ? 
+							multipleBeanDeserializeToElementTypeCollection(jsonParser, type) : multipleBeanDeserializeToArray(jsonParser, type));
 				} else
 					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
-					return multipleBeanDeserializeToCollection(jsonParser, clazz);
+					return multipleBeanDeserializeToCollection(jsonParser, type);
 			}
 		} catch (Exception e) {
 			throw new SerializationException("Cannot deserialize", e);

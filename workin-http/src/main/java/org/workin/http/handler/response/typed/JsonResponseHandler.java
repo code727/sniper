@@ -18,7 +18,6 @@
 
 package org.workin.http.handler.response.typed;
 
-import org.workin.commons.util.StringUtils;
 import org.workin.serialization.TypedSerializer;
 import org.workin.serialization.json.JsonSerializer;
 import org.workin.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
@@ -43,9 +42,4 @@ public class JsonResponseHandler extends AbstractTypedResponseHandler {
 		return new FasterxmlJacksonSerializer();
 	}	
 	
-	@Override
-	public <T> T handleResponse(String json, Class<T> type) throws Exception {
-		return StringUtils.isNotBlank(json) ? typedSerializer.deserialize(json, type) : null;
-	}
-
 }

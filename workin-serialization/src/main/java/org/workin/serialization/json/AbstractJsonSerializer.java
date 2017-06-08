@@ -48,7 +48,7 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	 * @return
 	 */
 	protected boolean isJsonArray(String jsonString) {
-		return StringUtils.startsWith(jsonString, "[{") && StringUtils.endsWith(jsonString, "}]");
+		return StringUtils.startsWith(jsonString, "[") && StringUtils.endsWith(jsonString, "]");
 	}
 	
 }

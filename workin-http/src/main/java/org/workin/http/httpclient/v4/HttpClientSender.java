@@ -52,7 +52,7 @@ public class HttpClientSender extends CheckableInitializingBeanAdapter implement
 	}
 
 	@Override
-	public <T> T request(String name, Map<String, Object> parameters) throws Exception {
+	public <V, T> T request(String name, Map<String, V> parameters) throws Exception {
 		return httpClientTemplate.request(name, parameters);
 	}
 

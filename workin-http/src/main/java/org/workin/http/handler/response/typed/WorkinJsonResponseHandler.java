@@ -13,35 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年5月22日
+ * Create Date : 2017-5-22
  */
 
 package org.workin.http.handler.response.typed;
 
 
-import java.util.Map;
-
 import org.workin.commons.response.DataResponse;
 import org.workin.commons.response.MessageResponse;
-import org.workin.commons.util.ClassUtils;
 import org.workin.commons.util.ReflectionUtils;
-import org.workin.serialization.TypedSerializer;
-import org.workin.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
 
 /**
  * Workin JSON响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class WorkinJsonResponseHandler extends AbstractTypedNestedResponseHandler {
-	
-	@Override
-	protected TypedSerializer buildDefaultTypedSerializer() {
-		return new FasterxmlJacksonSerializer();
-	}
-	
+public class WorkinJsonResponseHandler extends AbstractJsonNestedResponseHandler {
+		
 	/**
-	 * 重写父类方法，主要是解决当父类处理的响应结果为一个DataResponse对象时，其内部的data值转换问题
+	 * 实现父类方法，主要是解决当父类处理的响应结果为一个DataResponse对象时，其内部的data值转换问题
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param response
 	 * @param nestedMapperRules
@@ -52,11 +42,12 @@ public class WorkinJsonResponseHandler extends AbstractTypedNestedResponseHandle
 	@SuppressWarnings("unchecked")
 	@Override
 	protected <T> T doResponse(T response, Class<?> nestedType) throws Exception {
+		
 		if (nestedType != null && response instanceof DataResponse) {
 			Object data = ((DataResponse<Object>) response).getData();
 			
 			// 目前只处理响应的data值为map而实际要转换成一个JavaBean的情况
-			if (data instanceof Map && !ClassUtils.isJavaType(nestedType)) {
+			if (data != null && !data.getClass().equals(nestedType)) {
 				DataResponse<Object> dataResponse = (DataResponse<Object>) ReflectionUtils.newInstance(response.getClass());
 				dataResponse.setCode(((DataResponse<Object>) response).getCode());
 				

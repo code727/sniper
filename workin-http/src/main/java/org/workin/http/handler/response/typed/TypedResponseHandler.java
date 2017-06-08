@@ -36,5 +36,5 @@ public interface TypedResponseHandler extends ResponseHandler {
 	 * @throws Exception
 	 */
 	public <T> T handleResponse(String response, Class<T> type) throws Exception;
-		
+	
 }

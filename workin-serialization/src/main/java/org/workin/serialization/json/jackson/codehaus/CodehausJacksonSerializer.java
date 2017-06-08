@@ -86,15 +86,12 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T deserialize(String text, Class<T> type) throws SerializationException {
-		
-		Class<?> clazz = (type != null ? type : getType());
-		
 		try {
 			if (!isJsonArray(text)) {
-				if (clazz != null) {
-					if (!ClassUtils.isCollection(clazz)) {
-						return (T) (!ClassUtils.isArray(clazz) ? 
-								beanDeserialize(text, clazz) : beanDeserializeToArray(text, clazz));
+				if (type != null) {
+					if (!ClassUtils.isCollection(type)) {
+						return (T) (!ClassUtils.isArray(type) ? 
+								beanDeserialize(text, type) : beanDeserializeToArray(text, type));
 					} else 
 						// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
 						return beanDeserializeToCollection(text);
@@ -102,12 +99,12 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 					// 指定的类型为null时，则返回LinkedHashMap
 					return beanDeserializeToMap(text);
 			} else {
-				if (clazz != null && !ClassUtils.isCollection(clazz)) {
-					return (T) (!ClassUtils.isArray(clazz) ? 
-							multipleBeanDeserializeToElementTypeCollection(text, clazz) : multipleBeanDeserializeToArray(text, clazz));
+				if (type != null && !ClassUtils.isCollection(type)) {
+					return (T) (!ClassUtils.isArray(type) ? 
+							multipleBeanDeserializeToElementTypeCollection(text, type) : multipleBeanDeserializeToArray(text, type));
 				} else
 					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
-					return multipleBeanDeserializeToCollection(text, clazz);
+					return multipleBeanDeserializeToCollection(text, type);
 			}
 		} catch (Exception e) {
 			throw new SerializationException("Cannot deserialize", e);

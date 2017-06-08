@@ -41,9 +41,10 @@ public abstract class AbstractTypedSerializer extends DefaultTypedBean implement
 		this.encoding = encoding;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T deserialize(byte[] bytes) throws SerializationException {
-		return deserialize(bytes, null);
+		return (T) deserialize(bytes, getType());
 	}
 	
 	@Override
@@ -51,9 +52,10 @@ public abstract class AbstractTypedSerializer extends DefaultTypedBean implement
 		return deserialize(CodecUtils.bytesToString(bytes, encoding), type);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T deserialize(String text) throws SerializationException {
-		return deserialize(text, null);
+		return (T) deserialize(text, getType());
 	}
 
 }

@@ -106,7 +106,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		addHeader(httpGet, form);
 		
 		try {
-			logger.info("Execute {} request [{}] from form [{}]", HttpGet.METHOD_NAME, url, name);
+			logger.debug("Execute {} request [{}] from form [{}]", HttpGet.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpGet, responseHandler);
 			return handleResponse(form, response);
 		} finally {
@@ -135,7 +135,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		
 		try {
 			requestHandler.handle(httpPost, url, form);
-			logger.info("Execute {} request [{}] from form [{}]", HttpPost.METHOD_NAME, url, name);
+			logger.debug("Execute {} request [{}] from form [{}]", HttpPost.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpPost, responseHandler);
 			return handleResponse(form, response);
 		}  finally {
@@ -164,7 +164,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		
 		try {
 			requestHandler.handle(httpPut, url, form);
-			logger.info("Execute {} request [{}] from form [{}]", HttpPut.METHOD_NAME, url, name);
+			logger.debug("Execute {} request [{}] from form [{}]", HttpPut.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpPut, responseHandler);
 			return handleResponse(form, response);
 		}  finally {
@@ -192,7 +192,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		addHeader(httpDelete, form);
 		
 		try {
-			logger.info("Execute {} request [{}] from form [{}]", HttpDelete.METHOD_NAME, url, name);
+			logger.debug("Execute {} request [{}] from form [{}]", HttpDelete.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpDelete, responseHandler);
 			return handleResponse(form, response);
 		}  finally {
