@@ -118,7 +118,7 @@ public class NetUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String httpGet(String url, Map<String, String> parameters) throws IOException {
+	public static <V> String httpGet(String url, Map<String, V> parameters) throws IOException {
 		return httpGet(url, MapUtils.joinQueryString(parameters), "");
 	}
 	
@@ -156,7 +156,7 @@ public class NetUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String httpGet(String url, Map<String,String> parameters, String encoding) throws IOException {
+	public static <V> String httpGet(String url, Map<String, V> parameters, String encoding) throws IOException {
 		return httpGet(url, MapUtils.joinQueryString(parameters), encoding);
 	}
 	
@@ -191,7 +191,7 @@ public class NetUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String httpPost(String url, Map<String, String> parameters) throws IOException {
+	public static <V> String httpPost(String url, Map<String, V> parameters) throws IOException {
 		return httpPost(url, MapUtils.joinQueryString(parameters), "");
 	}
 	
@@ -243,17 +243,17 @@ public class NetUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String httpPost(String url, Map<String,String> parameters, String encoding) throws IOException {
+	public static <V> String httpPost(String url, Map<String, V> parameters, String encoding) throws IOException {
 		return httpPost(url, MapUtils.joinQueryString(parameters), encoding);
 	}
 	
 	/**
-	 *  获取URL中包含协议、主机域/IP和端口号在内的Action字符串
+	 * 获取URL中的请求地址，即查询字符串之前的部分
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @return
 	 */
-	public static String getActionString(String url) {
+	public static String getAddress(String url) {
 		if (StringUtils.isBlank(url))
 			return StringUtils.EMPTY_STRING;
 		
@@ -266,13 +266,13 @@ public class NetUtils {
 	}
 	
 	/**
-	 * 从URL的Action字符串中获取以默认前缀和后缀标识的参数名称集
+	 * 从URL的请求地址中获取以默认前缀和后缀标识的参数名称集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @return
 	 */
-	public static Set<String> getActionParameterNames(String url) {
-		return getActionParameterNames(url, "{", "}");
+	public static Set<String> getAddressParameterNames(String url) {
+		return getAddressParameterNames(url, "{", "}");
 	}
 	
 	/**
@@ -283,12 +283,12 @@ public class NetUtils {
 	 * @param suffix 参数标识后缀
 	 * @return
 	 */
-	public static Set<String> getActionParameterNames(String url, String prefix, String suffix) {
+	public static Set<String> getAddressParameterNames(String url, String prefix, String suffix) {
 		Set<String> names = CollectionUtils.newLinkedHashSet();
 		
-		String actionString = getActionString(url);
-		if (actionString.length() > 0) 
-			names.addAll(CollectionUtils.newHashSet(StringUtils.leftSubstringAll(url, prefix, suffix)));
+		String address = getAddress(url);
+		if (address.length() > 0) 
+			names.addAll(StringUtils.leftSubstringAll(url, prefix, suffix));
 		return names;
 	}
 	
@@ -355,10 +355,8 @@ public class NetUtils {
 	 * @return
 	 */
 	public static String toURL(String protocol, String host, int port) {
-		protocol = StringUtils.trimToEmpty(protocol);
-		host = StringUtils.trimToEmpty(host);
-		AssertUtils.assertTrue(protocol.length() > 0, "URL protocol can not be null or empty.");
-		AssertUtils.assertTrue(host.length() > 0, "URL host can not be null or empty.");
+		AssertUtils.assertNotBlank(protocol, "URL protocol must not be null or blank");
+		AssertUtils.assertNotBlank(host, "URL host must not be null or blank");
 		
 		StringBuffer url = new StringBuffer(protocol);
 		if (!protocol.endsWith("://"))

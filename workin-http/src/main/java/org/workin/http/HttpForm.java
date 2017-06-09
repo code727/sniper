@@ -18,10 +18,8 @@
 
 package org.workin.http;
 
-import java.util.Set;
 
 import org.workin.beans.Typed;
-import org.workin.beans.mapper.MapperRule;
 import org.workin.codec.Codecable;
 import org.workin.http.handler.response.ResponseHandler;
 
@@ -33,60 +31,18 @@ import org.workin.http.handler.response.ResponseHandler;
 public interface HttpForm extends Typed, Codecable {
 	
 	/**
-	 * 判断是否为HTTPS协议的表单
+	 * 设置URL请求地址
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 */
+	public void setAddress(String url);
+	
+	/**
+	 * 获取URL请求地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public boolean isHttps();
-	
-	/** 
-	 * 设置否为HTTPS协议的表单
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param https 
-	 */
-	void setHttps(boolean https);
-	
-	/** 
-	 * 设置主机IP/域名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param host
-	 */
-	public void setHost(String host);
-	
-	/**
-	 * 获取主机IP/域名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getHost();
-	
-	/**
-	 * 设置端口号
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param port
-	 */
-	public void setPort(int port);
-	
-	/**
-	 * 获取端口号
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public int getPort();
-	
-	/**
-	 * 设置上下文根路径
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param contextRoot
-	 */
-	public void setContextRoot(String contextRoot);
-	
-	/**
-	 * 获取上下文根路径
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getContextRoot();
+	public String getAddress();
 	
 	/**
 	 * 设置请求路径
@@ -101,20 +57,7 @@ public interface HttpForm extends Typed, Codecable {
 	 * @return
 	 */
 	public String getAction();
-	
-	/**
-	 * 设置请求参数名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	public void setParameterNames(String parameterNames);
-	
-	/**
-	 * 获取请求参数名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getParameterNames();
-	
+				
 	/**
 	 * 设置发送请求的方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -199,19 +142,5 @@ public interface HttpForm extends Typed, Codecable {
 	 * @param responseHandler 
 	 */
 	public void setResponseHandler(ResponseHandler responseHandler);
-
-	/** 
-	 * 获取嵌套映射器规则集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return 
-	 */
-	public Set<MapperRule> getNestedMapperRules();
-
-	/** 
-	 * 设置嵌套映射器规则集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param nestedMapperRules 
-	 */
-	public void setNestedMapperRules(Set<MapperRule> nestedMapperRules);
 	
 }

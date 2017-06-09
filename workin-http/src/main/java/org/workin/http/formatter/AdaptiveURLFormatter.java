@@ -44,8 +44,8 @@ public class AdaptiveURLFormatter extends AdaptiveMessageFormatter {
 			/* 求输入参数分别与查询字符串以及Action字符串中查询名的差集，
 			 * 多余的参数以及对应的值则直接拼接到URL字符串后面 */
 			Set<String> nameSubtract = (Set<String>) MapUtils.keySubtract(inputParam, NetUtils.getParameterMap(url));
-			nameSubtract = (Set<String>) CollectionUtils.subtract(nameSubtract, NetUtils.getActionParameterNames(
-					NetUtils.getActionString(url), super.getPrefix(), super.getSuffix()));
+			nameSubtract = (Set<String>) CollectionUtils.subtract(nameSubtract, NetUtils.getAddressParameterNames(
+					NetUtils.getAddress(url), getPrefix(), getSuffix()));
 					
 			if (CollectionUtils.isNotEmpty(nameSubtract)) {
 				if (url.indexOf("?") < 0)

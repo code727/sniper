@@ -127,9 +127,9 @@ public final class HttpClientTemplate extends HttpAccessor {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
 		
-		// 已进行编码后的Action，不包含参数字符串部分
-		String encodedAction = urlEncoder.encode(NetUtils.getActionString(url), form.getEncoding());
-		HttpPost httpPost = new HttpPost(encodedAction);
+		// 已进行编码后的请求地址，不包含查询字符串部分
+		String encodedAddress = urlEncoder.encode(NetUtils.getAddress(url), form.getEncoding());
+		HttpPost httpPost = new HttpPost(encodedAddress);
 		httpPost.setConfig(requestConfig);
 		addHeader(httpPost, form);
 		
@@ -156,9 +156,9 @@ public final class HttpClientTemplate extends HttpAccessor {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
 		
-		// 已进行编码后的Action，不包含参数字符串部分
-		String encodedAction = urlEncoder.encode(NetUtils.getActionString(url), form.getEncoding());
-		HttpPut httpPut = new HttpPut(encodedAction);
+		// 已进行编码后的请求地址，不包含查询字符串部分
+		String encodedAddress = urlEncoder.encode(NetUtils.getAddress(url), form.getEncoding());
+		HttpPut httpPut = new HttpPut(encodedAddress);
 		httpPut.setConfig(requestConfig);
 		addHeader(httpPut, form);
 		

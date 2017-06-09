@@ -33,7 +33,7 @@ import org.workin.http.handler.FormHandler;
  */
 public class DefaultHttpFormConverter implements HttpFormConverter {
 	
-	/** 参数处理器 */
+	/** 表单处理器 */
 	private FormHandler formHandler = new DefaultFormHandler();
 
 	public void setFormHandler(FormHandler formHandler) {

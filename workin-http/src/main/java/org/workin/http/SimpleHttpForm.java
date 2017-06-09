@@ -18,13 +18,9 @@
 
 package org.workin.http;
 
-import java.util.Set;
-
 import org.workin.beans.DefaultTypedBean;
-import org.workin.beans.mapper.MapperRule;
 import org.workin.commons.util.AssertUtils;
 import org.workin.commons.util.CodecUtils;
-import org.workin.commons.util.NetUtils;
 import org.workin.commons.util.StringUtils;
 import org.workin.http.enums.MimeTypeEnum;
 import org.workin.http.handler.response.ResponseHandler;
@@ -35,24 +31,12 @@ import org.workin.http.handler.response.ResponseHandler;
  * @version 1.0
  */
 public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
-	
-	/** 标识是否为Https协议的表单 */
-	private boolean https;
-	
-	/** 主机域/IP地址 */
-	private String host;
-	
-	/** 端口号 */
-	private int port = -1;
-	
-	/** 上下文根路径 */
-	private String contextRoot;
+		
+	/** 请求地址 */
+	private String address;
 	
 	/** Action(请求路径) */
 	private String action;
-	
-	/** 多个参数名，以逗号分隔 */
-	private String parameterNames;
 	
 	/** 请求方法 */
 	private String method;
@@ -75,52 +59,16 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 	/** 嵌套类型 */
 	private Class<?> nestedType;
 	
-	/** 嵌套映射器规则集 */
-	private Set<MapperRule> nestedMapperRules;
-		
 	@Override
-	public boolean isHttps() {
-		return https;
+	public String getAddress() {
+		return address;
 	}
 
 	@Override
-	public void setHttps(boolean https) {
-		this.https = https;
-	}
-
-	@Override
-	public void setHost(String host) {
-		AssertUtils.assertNotBlank(host, "Host can not be null or blank.");
-		this.host = host;
-	}
-
-	@Override
-	public String getHost() {
-		return this.host;
-	}
-
-	@Override
-	public void setPort(int port) {
-		AssertUtils.assertTrue(NetUtils.isValidPort(port), 
-				"Illegal port [" + port + "],Valid scope [" + NetUtils.MIN_PORT + "-" + NetUtils.MAX_PORT + "].");
-		this.port = port;
-	}
-
-	@Override
-	public int getPort() {
-		return this.port;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
-	@Override
-	public void setContextRoot(String contextRoot) {
-		this.contextRoot = contextRoot;
-	}
-
-	@Override
-	public String getContextRoot() {
-		return this.contextRoot;
-	}
-
 	@Override
 	public void setAction(String action) {
 		this.action = action;
@@ -128,19 +76,9 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 
 	@Override
 	public String getAction() {
-		return this.action;
+		return action;
 	}
 
-	@Override
-	public void setParameterNames(String parameterNames) {
-		this.parameterNames = parameterNames;
-	}
-
-	@Override
-	public String getParameterNames() {
-		return this.parameterNames;
-	}
-	
 	@Override
 	public void setMethod(String method) {
 		this.method = method;
@@ -219,14 +157,5 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 		this.nestedTypeClass = nestedType.getName();
 	}
 
-	@Override
-	public Set<MapperRule> getNestedMapperRules() {
-		return nestedMapperRules;
-	}
-
-	@Override
-	public void setNestedMapperRules(Set<MapperRule> nestedMapperRules) {
-		this.nestedMapperRules = nestedMapperRules;
-	}
 
 }
