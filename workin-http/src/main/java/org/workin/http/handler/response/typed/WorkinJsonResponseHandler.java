@@ -46,7 +46,7 @@ public class WorkinJsonResponseHandler extends AbstractJsonNestedResponseHandler
 		if (nestedType != null && response instanceof DataResponse) {
 			Object data = ((DataResponse<Object>) response).getData();
 			
-			// 目前只处理响应的data值为map而实际要转换成一个JavaBean的情况
+			//  data值的类型与指定的嵌套类型不一致时，需转换成嵌套类型
 			if (data != null && !data.getClass().equals(nestedType)) {
 				DataResponse<Object> dataResponse = (DataResponse<Object>) ReflectionUtils.newInstance(response.getClass());
 				dataResponse.setCode(((DataResponse<Object>) response).getCode());
