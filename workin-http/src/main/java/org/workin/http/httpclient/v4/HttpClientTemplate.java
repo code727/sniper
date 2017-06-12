@@ -123,7 +123,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 	 * @return
 	 * @throws Exception
 	 */
-	protected <T> T doPostRequest(String name, Object param) throws Exception {
+	protected <T> T doPostRequest(String name, Object requestBody, Object param) throws Exception {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
 		
@@ -143,7 +143,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 				httpPost.releaseConnection();
 		}
 	}
-	
+		
 	/**
 	 * 执行指定名称对应的表单PUT请求，并返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -152,7 +152,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 	 * @return
 	 * @throws Exception
 	 */
-	protected <T> T doPutRequest(String name, Object param) throws Exception {
+	protected <T> T doPutRequest(String name, Object requestBody, Object param) throws Exception {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
 		

@@ -61,4 +61,19 @@ public class HttpClientSender extends CheckableInitializingBeanAdapter implement
 		return httpClientTemplate.request(name, parameter);
 	}
 
+	@Override
+	public <T> T requestByBody(String name, Object requestBody) throws Exception {
+		return httpClientTemplate.requestByBody(name, requestBody);
+	}
+
+	@Override
+	public <V, T> T requestByBody(String name, Object requestBody, Map<String, V> parameters) throws Exception {
+		return httpClientTemplate.requestByBody(name, requestBody, parameters);
+	}
+
+	@Override
+	public <T> T requestByBody(String name, Object requestBody, Object parameter) throws Exception {
+		return  httpClientTemplate.requestByBody(name, requestBody, parameter);
+	}
+
 }

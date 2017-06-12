@@ -28,11 +28,17 @@
   			<optional>true</optional>
 		</dependency>
 		<dependency>
+    		<groupId>org.apache.httpcomponents</groupId>
+    		<artifactId>httpmime</artifactId>
+    		<version>4.3.1</version>
+    		<optional>true</optional>
+		</dependency>
+		<!-- <dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 			<optional>true</optional>
-		</dependency>
+		</dependency> -->
 		<dependency>
   			<groupId>org.codehaus.jackson</groupId>
   			<artifactId>jackson-mapper-asl</artifactId>

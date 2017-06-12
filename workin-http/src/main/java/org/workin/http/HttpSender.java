@@ -56,5 +56,37 @@ public interface HttpSender {
 	 * @throws IOException
 	 */
 	public <T> T request(String name, Object parameter) throws Exception;
+	
+	/**
+	 * 执行指定名称且带RequestBody的HTTP表单请求，并返回响应处理结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param requestBody
+	 * @return
+	 * @throws Exception
+	 */
+	public <T> T requestByBody(String name, Object requestBody) throws Exception;
+	
+	/**
+	 * 执行指定名称且带RequestBody和参数的HTTP表单请求，并返回响应处理结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param requestBody
+	 * @param parameters
+	 * @return
+	 * @throws Exception
+	 */
+	public <V, T> T requestByBody(String name, Object requestBody, Map<String, V> parameters) throws Exception;
+	
+	/**
+	 * 执行指定名称且带RequestBody和参数的HTTP表单请求，并返回响应处理结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param requestBody
+	 * @param parameter
+	 * @return
+	 * @throws Exception
+	 */
+	public <T> T requestByBody(String name, Object requestBody, Object parameter) throws Exception;
 
 }

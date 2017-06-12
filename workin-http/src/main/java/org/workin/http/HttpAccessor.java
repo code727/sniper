@@ -107,7 +107,7 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 	}
 		
 	/**
-	 * 将指定名称对应的表单对象加上请求参数后格式化成完成的URL
+	 * 将指定名称对应的表单对象加上请求参数后格式化成完整的URL
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @param param
@@ -122,29 +122,45 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 	
 	@Override
 	public <T> T request(String name) throws Exception {
-		return requestByName(name, null);
+		return requestByName(name, null, null);
 	}
 
 	@Override
 	public <V, T> T request(String name, Map<String, V> parameters) throws Exception {
-		return requestByName(name, parameters);
+		return requestByName(name, null, parameters);
 	}
 
 	@Override
 	public <T> T request(String name, Object parameter) throws Exception {
-		return requestByName(name, parameter);
+		return requestByName(name, null, parameter);
+	}
+	
+	@Override
+	public <T> T requestByBody(String name, Object requestBody) throws Exception {
+		return requestByName(name, requestBody, null);
+	}
+
+	@Override
+	public <V, T> T requestByBody(String name, Object requestBody, Map<String, V> parameters) throws Exception {
+		return requestByName(name, requestBody, parameters);
+	}
+
+	@Override
+	public <T> T requestByBody(String name, Object requestBody, Object parameter) throws Exception {
+		return requestByName(name, requestBody, parameter);
 	}
 	
 	/**
 	 * 执行指定名称对应的表单的请求方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
+	 * @param requestBody
 	 * @param param
 	 * @return
-	 * @throws NoSuchHttpMethodException 
+	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	protected <T> T requestByName(String name, Object param) throws Exception {
+	protected <T> T requestByName(String name, Object requestBody, Object param) throws Exception {
 		HttpForm form = formRegister.find(name);
 		if (form == null)
 			throw new HttpFormNotFoundException("Form [name=" + name +"] not found in register");
@@ -157,7 +173,7 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 		if (StringUtils.isNotBlank(methodName)) {
 			try {
 				return (T) ReflectionUtils.invokeMethod(this, executedMethod,
-						new Class<?>[] { String.class, Object.class }, new Object[] { name, param });
+						new Class<?>[] { String.class, Object.class, Object.class }, new Object[] { name, requestBody, param });
 			} catch (NoSuchMethodException e) {
 				throw new NoSuchHttpMethodException("No such http method ["
 						+ methodName + "] in current version of workin-http framework");
@@ -198,6 +214,34 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 	 * 执行HTTP GET方法后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
+	 * @param requestBody
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	protected <T> T doGetRequest(String name, Object requestBody, Object param) throws Exception {
+		// HTTP Get不能设置RequestBody，因此忽略掉
+		return doGetRequest(name, param);
+	}
+	
+	/**
+	 * 执行HTTP DELETE方法后返回结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param requestBody
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	protected <T> T doDeleteRequest(String name, Object requestBody, Object param) throws Exception {
+		// HTTP Delete不能设置RequestBody，因此忽略掉
+		return doGetRequest(name, param);
+	}
+		
+	/**
+	 * 执行HTTP GET方法后返回结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
 	 * @param param
 	 * @return
 	 * @throws Exception
@@ -208,21 +252,23 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 	 * 执行HTTP POST方法后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
+	 * @param requestBody
 	 * @param param
 	 * @return
 	 * @throws Exception
 	 */
-	protected abstract <T> T doPostRequest(String name, Object param) throws Exception;
+	protected abstract <T> T doPostRequest(String name, Object requestBody, Object param) throws Exception;
 	
 	/**
 	 * 执行HTTP PUT方法后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
+	 * @param requestBody
 	 * @param param
 	 * @return
 	 * @throws Exception
 	 */
-	protected abstract <T> T doPutRequest(String name, Object param) throws Exception;
+	protected abstract <T> T doPutRequest(String name, Object requestBody, Object param) throws Exception;
 	
 	/**
 	 * 执行HTTP DELETE方法后返回结果
@@ -233,5 +279,5 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 	 * @throws Exception
 	 */
 	protected abstract <T> T doDeleteRequest(String name, Object param) throws Exception;
-	
+
 }

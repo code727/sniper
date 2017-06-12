@@ -61,21 +61,21 @@ public class SpringRestSender extends HttpAccessor {
 	}
 
 	@Override
-	protected <T> T doPostRequest(String name, Object param) throws Exception {
+	protected <T> T doPostRequest(String name, Object requestBody, Object param) throws Exception {
 		String url = format(name, param);
 		HttpForm form = getFormRegister().find(name);
 		
 		logger.debug("Execute {} request [{}] from form [{}]", HttpMethod.POST, url, name);
-		String response = restTemplate.postForObject(url, null, String.class);
+		String response = restTemplate.postForObject(url, requestBody, String.class);
 		return handleResponse(form, response);
 	}
 
 	@Override
-	protected <T> T doPutRequest(String name, Object param) throws Exception {
+	protected <T> T doPutRequest(String name, Object requestBody, Object param) throws Exception {
 		String url = format(name, param);
 		
 		logger.debug("Execute {} request [{}] from form [{}]", HttpMethod.PUT, url, name);
-		restTemplate.put(url, null);
+		restTemplate.put(url, requestBody, (Object) null);
 		return null;
 	}
 
