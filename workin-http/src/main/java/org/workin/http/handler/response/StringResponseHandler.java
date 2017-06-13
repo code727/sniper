@@ -18,10 +18,6 @@
 
 package org.workin.http.handler.response;
 
-import java.io.IOException;
-
-import org.apache.http.client.ClientProtocolException;
-
 /**
  * 字符串响应结果处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -31,7 +27,7 @@ public class StringResponseHandler extends AbstractResponseHandler {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T handleResponse(String response) throws ClientProtocolException, IOException {
+	public <T> T handleResponse(String response) throws Exception {
 		return (T) (response != null ? response : super.getDefaultValue());
 	}
 
