@@ -134,7 +134,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		addHeader(httpPost, form);
 		
 		try {
-			requestHandler.handle(httpPost, url, form);
+			requestHandler.handle(httpPost, url, requestBody, form);
 			logger.debug("Execute {} request [{}] from form [{}]", HttpPost.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpPost, responseHandler);
 			return handleResponse(form, response);
@@ -163,7 +163,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		addHeader(httpPut, form);
 		
 		try {
-			requestHandler.handle(httpPut, url, form);
+			requestHandler.handle(httpPut, url, requestBody, form);
 			logger.debug("Execute {} request [{}] from form [{}]", HttpPut.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpPut, responseHandler);
 			return handleResponse(form, response);

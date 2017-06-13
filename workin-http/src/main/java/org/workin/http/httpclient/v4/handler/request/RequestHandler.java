@@ -33,9 +33,11 @@ public interface RequestHandler {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param httpRequest
 	 * @param url
+	 * @param requestBody
 	 * @param form
 	 * @throws Exception
 	 */
-	public void handle(HttpEntityEnclosingRequestBase httpRequest, String url, HttpForm form) throws Exception;
+	public void handle(HttpEntityEnclosingRequestBase httpRequest, 
+			String url, Object requestBody, HttpForm form) throws Exception;
 		
 }
