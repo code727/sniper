@@ -23,7 +23,7 @@ package org.workin.beans.propertyeditors;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ShortPropertyEditor extends NumberPropertyEditor {
+public class ShortPropertyEditor extends AbstractNumberPropertyEditor {
 	
 	public ShortPropertyEditor() {
 		super();
@@ -45,5 +45,5 @@ public class ShortPropertyEditor extends NumberPropertyEditor {
 	protected Object handleText(String text) {
 		return new Short(text);
 	}
-
+	
 }

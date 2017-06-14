@@ -59,6 +59,12 @@ public class DatePropertyEditor extends StringPropertyEditor {
 		this.pattern = pattern;
 	}
 	
+	/**
+	 * 由于字符串的日期要求不能为空白，因此重写父类方法，覆盖掉父类中的判空方式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param text
+	 * @throws IllegalArgumentException
+	 */
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
 		if (StringUtils.isNotBlank(text)) {
@@ -74,11 +80,18 @@ public class DatePropertyEditor extends StringPropertyEditor {
 			
 	@Override
 	protected Object handleText(String text) {
-		if (RegexUtils.isInteger(text))
-			return DateUtils.timeToDate(Long.valueOf(text));
+		if (StringUtils.isBlank(text))
+			return new Date();
 		
-		// parse的文本格式不匹配时，仍然会返回null
-		return StringUtils.isNotBlank(text) ? DateUtils.stringToDate(text, pattern) : new Date();
+		// 先尝试将字符串按照指定格式转换成Date对象，parse的文本格式不匹配时，仍然会返回null
+		Date date = DateUtils.stringToDate(text, pattern);
+		if (date == null && RegexUtils.isInteger(text)) {
+			/* 如果按照指定格式转换整数字符串得到的Date对象为空，
+			 * 则有可能字符串表示的是一个毫秒时间戳，则直接转换成Date对象 */
+			date = DateUtils.timeToDate(Long.valueOf(text));
+		}
+		
+		return date;
 	}
-					
+	
 }

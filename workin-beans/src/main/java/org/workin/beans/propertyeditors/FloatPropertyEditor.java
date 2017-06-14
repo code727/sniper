@@ -23,7 +23,7 @@ package org.workin.beans.propertyeditors;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FloatPropertyEditor extends NumberPropertyEditor {
+public class FloatPropertyEditor extends AbstractNumberPropertyEditor {
 	
 	public FloatPropertyEditor() {
 		super();
@@ -45,5 +45,5 @@ public class FloatPropertyEditor extends NumberPropertyEditor {
 	protected Object handleText(String text) {
 		return new Float(text);
 	}
-
+	
 }

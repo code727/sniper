@@ -25,7 +25,7 @@ import java.math.BigInteger;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BigIntegerPropertyEditor extends NumberPropertyEditor {
+public class BigIntegerPropertyEditor extends AbstractNumberPropertyEditor {
 	
 	public BigIntegerPropertyEditor() {
 		super();

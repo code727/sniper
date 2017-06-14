@@ -18,23 +18,33 @@
 
 package org.workin.http.handler.response;
 
-import org.workin.commons.util.StringUtils;
-
 /**
  * 单精度响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FloatResponseHandler extends AbstractResponseHandler {
+public class FloatResponseHandler extends AbstractNumberResponseHandler {
+	
+	public FloatResponseHandler() {
+		super();
+	}
+	
+	public FloatResponseHandler(boolean allowEmpty) {
+		super(allowEmpty);
+	}
+	
+	public FloatResponseHandler(String defaultValue) {
+		super(defaultValue);
+	}
+	
+	public FloatResponseHandler(boolean allowEmpty, String defaultValue) {
+		super(allowEmpty, defaultValue);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T handleResponse(String response) throws Exception {
-		if (response != null)
-			return (T) new Float(response);
-		
-		String defaultValue = getDefaultValue();
-		return (T) (StringUtils.isNotBlank(defaultValue) ? new Float(defaultValue) : null);
+	protected <T> T handle(String response) {
+		return (T) new Float(response);
 	}
 
 }

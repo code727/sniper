@@ -18,24 +18,33 @@
 
 package org.workin.http.handler.response;
 
-
-import org.workin.commons.util.StringUtils;
-
 /**
  * 双精度响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DoubleResponseHandler extends AbstractResponseHandler {
+public class DoubleResponseHandler extends AbstractNumberResponseHandler {
+	
+	public DoubleResponseHandler() {
+		super();
+	}
+	
+	public DoubleResponseHandler(boolean allowEmpty) {
+		super(allowEmpty);
+	}
+	
+	public DoubleResponseHandler(String defaultValue) {
+		super(defaultValue);
+	}
+	
+	public DoubleResponseHandler(boolean allowEmpty, String defaultValue) {
+		super(allowEmpty, defaultValue);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T handleResponse(String response) throws Exception {
-		if (response != null)
-			return (T) new Double(response);
-		
-		String defaultValue = getDefaultValue();
-		return (T) (StringUtils.isNotBlank(defaultValue) ? new Double(defaultValue) : null);
+	protected <T> T handle(String response) {
+		return (T) new Double(response);
 	}
 	
 }

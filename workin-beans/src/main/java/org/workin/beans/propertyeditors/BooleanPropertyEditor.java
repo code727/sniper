@@ -18,6 +18,8 @@
 
 package org.workin.beans.propertyeditors;
 
+import org.workin.commons.enums.logic.BooleanEnum;
+
 /**
  * 布尔属性编辑器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -43,17 +45,9 @@ public class BooleanPropertyEditor extends StringPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		text = text.trim();
 		return BooleanEnum.TRUE.name().equalsIgnoreCase(text) || BooleanEnum.Y.name().equalsIgnoreCase(text)
 				|| String.valueOf(BooleanEnum.TRUE.ordinal()).equals(text);
 	}
 	
-	enum BooleanEnum {
-		FALSE,
-		TRUE,
-		N,
-		Y
-	}
-						
 }
 

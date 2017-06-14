@@ -25,10 +25,25 @@ package org.workin.http.handler.response;
  */
 public class StringResponseHandler extends AbstractResponseHandler {
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T> T handleResponse(String response) throws Exception {
-		return (T) (response != null ? response : super.getDefaultValue());
+	public StringResponseHandler() {
+		super();
 	}
-
+	
+	public StringResponseHandler(boolean allowEmpty) {
+		super(allowEmpty);
+	}
+	
+	public StringResponseHandler(String defaultValue) {
+		super(defaultValue);
+	}
+	
+	public StringResponseHandler(boolean allowEmpty, String defaultValue) {
+		super(allowEmpty, defaultValue);
+	}
+		
+	@SuppressWarnings("unchecked")
+	protected <T> T handle(String response) {
+		return (T) response;
+	}
+		
 }

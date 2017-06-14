@@ -18,17 +18,36 @@
 
 package org.workin.http.handler.response;
 
+import org.workin.commons.enums.logic.BooleanEnum;
+
 /**
  * 布尔型响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BooleanResponseHandler extends AbstractResponseHandler {
-
+public class BooleanResponseHandler extends StringResponseHandler {
+	
+	public BooleanResponseHandler() {
+		super();
+	}
+	
+	public BooleanResponseHandler(boolean allowEmpty) {
+		super(allowEmpty);
+	}
+	
+	public BooleanResponseHandler(String defaultValue) {
+		super(defaultValue);
+	}
+	
+	public BooleanResponseHandler(boolean allowEmpty, String defaultValue) {
+		super(allowEmpty, defaultValue);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T handleResponse(String response) throws Exception {
-		return (T) (response != null ? new Boolean(response) : new Boolean(getDefaultValue()));
+	protected <T> T handle(String response) {
+		return (T) new Boolean(BooleanEnum.TRUE.name().equalsIgnoreCase(response) || BooleanEnum.Y.name().equalsIgnoreCase(response)
+				|| String.valueOf(BooleanEnum.TRUE.ordinal()).equals(response));
 	}
-
+	
 }

@@ -355,10 +355,21 @@ public class ClassUtils {
 		if (clazz1 == null || clazz2 == null || clazz1 == clazz2)
 			return false;
 		
-		if (clazz2 == Object.class)
-			return true;
-		
 		return clazz2.isAssignableFrom(clazz1);
 	}
-			
+	
+	/**
+	 * 判断clazz1是否包含在clazz2中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz1
+	 * @param clazz2
+	 * @return
+	 */
+	public static boolean contains(Class<?> clazz1, Class<?> clazz2) {
+		if (clazz1 == null || clazz2 == null)
+			return false;
+		
+		return clazz1 == clazz2 || clazz2.isAssignableFrom(clazz1);
+	}
+					
 }

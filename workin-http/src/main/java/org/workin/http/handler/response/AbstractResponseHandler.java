@@ -18,6 +18,9 @@
 
 package org.workin.http.handler.response;
 
+import org.workin.commons.util.AssertUtils;
+import org.workin.commons.util.StringUtils;
+
 /**
  * 响应处理器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -25,15 +28,71 @@ package org.workin.http.handler.response;
  */
 public abstract class AbstractResponseHandler implements ResponseHandler {
 	
+	/** 是否允许为空 */
+	private boolean allowEmpty;
+	
 	/** 当响应结果返回为空时指定的默认值 */
 	private String defaultValue;
 	
+	protected AbstractResponseHandler() {
+		this(true);
+	}
+	
+	protected AbstractResponseHandler(boolean allowEmpty) {
+		this(allowEmpty, StringUtils.EMPTY_STRING);
+	}
+	
+	protected AbstractResponseHandler(String defaultValue) {
+		this(true, defaultValue);
+	}
+	
+	protected AbstractResponseHandler(boolean allowEmpty, String defaultValue) {
+		setAllowEmpty(allowEmpty);
+		setDefaultValue(defaultValue);
+	}
+	
+	public boolean isAllowEmpty() {
+		return allowEmpty;
+	}
+
+	public void setAllowEmpty(boolean allowEmpty) {
+		this.allowEmpty = allowEmpty;
+	}
+
 	public String getDefaultValue() {
 		return defaultValue;
 	}
 
 	public void setDefaultValue(String defaultValue) {
+		check(defaultValue);
 		this.defaultValue = defaultValue;
 	}
-
+	
+	/**
+	 * 检查默认值的合法性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param defaultValue
+	 * @throws IllegalArgumentException
+	 */
+	protected void check(String defaultValue) throws IllegalArgumentException {
+		AssertUtils.assertNotNull(defaultValue, "String default value must not be null");
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T handleResponse(String response) throws Exception {
+		if (response != null) 
+			return handle(response);
+		
+		return (T) (!isAllowEmpty() ? handle(defaultValue) : null);
+	}
+	
+	/**
+	 * 非空响应的处理方法，返回处理后的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param response
+	 * @return
+	 */
+	protected abstract <T> T handle(String response);
+	
 }

@@ -19,17 +19,18 @@
 package org.workin.beans.propertyeditors;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 /**
  * BigDecimal属性编辑器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BigDecimalPropertyEditor extends NumberPropertyEditor {
+public class BigDecimalPropertyEditor extends AbstractNumberPropertyEditor {
 	
+	/** 小数位数 */
 	private int newScale;
 	
+	/** 第 newScale位后的小数收敛模式 */
 	private int roundingMode;
 	
 	public BigDecimalPropertyEditor() {
@@ -37,7 +38,7 @@ public class BigDecimalPropertyEditor extends NumberPropertyEditor {
 	}
 	
 	public BigDecimalPropertyEditor(boolean allowEmpty) {
-		this(allowEmpty, NUMBER_PROPERTY_DEFAULT_VALUE);
+		this(allowEmpty, NUMBER_DEFAULT_VALUE);
 	}
 	
 	public BigDecimalPropertyEditor(String defaultValue) {
@@ -45,11 +46,19 @@ public class BigDecimalPropertyEditor extends NumberPropertyEditor {
 	}
 	
 	public BigDecimalPropertyEditor(int newScale, int roundingMode) {
-		this(true, NUMBER_PROPERTY_DEFAULT_VALUE, newScale, roundingMode);
+		this(true, NUMBER_DEFAULT_VALUE, newScale, roundingMode);
 	}
 		
 	public BigDecimalPropertyEditor(boolean allowEmpty, String defaultValue) {
-		this(allowEmpty, defaultValue, 2, RoundingMode.DOWN.ordinal());
+		this(allowEmpty, defaultValue, 2, -1);
+	}
+	
+	public BigDecimalPropertyEditor(boolean allowEmpty, int newScale, int roundingMode) {
+		this(allowEmpty, NUMBER_DEFAULT_VALUE, newScale, roundingMode);
+	}
+	
+	public BigDecimalPropertyEditor(String defaultValue, int newScale, int roundingMode) {
+		this(true, defaultValue, newScale, roundingMode);
 	}
 	
 	public BigDecimalPropertyEditor(boolean allowEmpty, String defaultValue, int newScale, int roundingMode) {
@@ -76,7 +85,8 @@ public class BigDecimalPropertyEditor extends NumberPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return new BigDecimal(text).setScale(newScale, roundingMode);
+		BigDecimal decimal = new BigDecimal(text);
+		return roundingMode > -1 ? decimal.setScale(newScale, roundingMode) : decimal;
 	}
-		
+			
 }

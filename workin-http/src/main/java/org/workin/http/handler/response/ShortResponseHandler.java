@@ -18,23 +18,33 @@
 
 package org.workin.http.handler.response;
 
-import org.workin.commons.util.StringUtils;
-
 /**
  * 短整型响应处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ShortResponseHandler extends AbstractResponseHandler {
+public class ShortResponseHandler extends AbstractNumberResponseHandler {
+	
+	public ShortResponseHandler() {
+		super();
+	}
+	
+	public ShortResponseHandler(boolean allowEmpty) {
+		super(allowEmpty);
+	}
+	
+	public ShortResponseHandler(String defaultValue) {
+		super(defaultValue);
+	}
+	
+	public ShortResponseHandler(boolean allowEmpty, String defaultValue) {
+		super(allowEmpty, defaultValue);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T handleResponse(String response) throws Exception {
-		if (response != null)
-			return (T) new Short(response);
-		
-		String defaultValue = super.getDefaultValue();
-		return (T) (StringUtils.isNotBlank(defaultValue) ? new Short(defaultValue) : null);
+	protected <T> T handle(String response) {
+		return (T) new Short(response);
 	}
-
+	
 }

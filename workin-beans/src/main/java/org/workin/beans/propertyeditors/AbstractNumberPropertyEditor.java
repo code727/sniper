@@ -25,48 +25,54 @@ import org.workin.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class NumberPropertyEditor extends StringPropertyEditor {
+public abstract class AbstractNumberPropertyEditor extends AbstractPropertyEditor {
 	
-	protected static final String NUMBER_PROPERTY_DEFAULT_VALUE = "0";
+	protected static final String NUMBER_DEFAULT_VALUE = "0";
 	
-	protected NumberPropertyEditor() {
+	protected AbstractNumberPropertyEditor() {
 		this(true);
 	}
 	
-	protected NumberPropertyEditor(boolean allowEmpty) {
-		this(allowEmpty, NUMBER_PROPERTY_DEFAULT_VALUE);
+	protected AbstractNumberPropertyEditor(boolean allowEmpty) {
+		this(allowEmpty, NUMBER_DEFAULT_VALUE);
 	}
 	
-	protected NumberPropertyEditor(String defaultValue) {
+	protected AbstractNumberPropertyEditor(String defaultValue) {
 		this(true, defaultValue);
 	}
 	
-	protected NumberPropertyEditor(boolean allowEmpty, String defaultValue) {
+	protected AbstractNumberPropertyEditor(boolean allowEmpty, String defaultValue) {
 		super(allowEmpty, defaultValue);
 	}
 	
+	/**
+	 * 由于字符串的数字要求不能为空白，因此重写父类方法，覆盖掉父类中的检查方式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param defaultValue
+	 * @throws IllegalArgumentException
+	 */
 	@Override
 	protected void check(String defaultValue) throws IllegalArgumentException {
 		if (StringUtils.isBlank(defaultValue))
 			throw new IllegalArgumentException("Number default value must not be null or blank");
 	}
 	
+	/**
+	 * 由于字符串的数字要求不能为空白，因此重写父类方法，覆盖掉父类中的判空方式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param text
+	 * @throws IllegalArgumentException
+	 */
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
 		if (StringUtils.isNotBlank(text))
-			setValue(handleText(text));
+			setValue(handleText(text.trim()));
 		else {
 			if (!isAllowEmpty())
-				setValue(handleText(getDefaultValue()));
+				setValue(handleText(getDefaultValue().trim()));
 			else
 				setValue(null);
 		}
 	}
-	
-	@Override
-	public String getAsText() {
-		// 让左右两侧有空白的字符串也能进行数字转换
-		return StringUtils.toString(this.getValue()).trim();
-	}
-		
+			
 }

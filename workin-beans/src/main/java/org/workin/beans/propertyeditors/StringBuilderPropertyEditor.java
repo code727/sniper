@@ -25,6 +25,22 @@ package org.workin.beans.propertyeditors;
  */
 public class StringBuilderPropertyEditor extends StringPropertyEditor {
 	
+	public StringBuilderPropertyEditor() {
+		super();
+	}
+	
+	public StringBuilderPropertyEditor(boolean allowEmpty) {
+		super(allowEmpty);
+	}
+	
+	public StringBuilderPropertyEditor(String defaultValue) {
+		super(defaultValue);
+	}
+	
+	public StringBuilderPropertyEditor(boolean allowEmpty, String defaultValue) {
+		super(allowEmpty, defaultValue);
+	}
+	
 	@Override
 	protected Object handleText(String text) {
 		return new StringBuilder(text);

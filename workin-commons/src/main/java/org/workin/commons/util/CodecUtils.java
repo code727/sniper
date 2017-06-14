@@ -22,8 +22,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 编解码工具类
@@ -150,9 +148,9 @@ public class CodecUtils {
 		}
 		return result.toString();
 	}
-	
+		
 	/**
-	 * 将文本进行UNICODE编码
+	 * 将文本进行UNICODE解码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
@@ -161,7 +159,7 @@ public class CodecUtils {
 		if (StringUtils.isEmpty(text))
 			return StringUtils.EMPTY_STRING;
 		
-		Pattern pattern = RegexUtils.getPattern("[0-9A-Fa-f]{4}"); 
+//		Pattern pattern = RegexUtils.getPattern("[0-9A-Fa-f]{4}"); 
         StringBuilder result = new StringBuilder(); 
         int length = text.length();  
         
@@ -171,13 +169,13 @@ public class CodecUtils {
                 char c2 = text.charAt(++i);  
                 if ((c2 == 'u' || c2 == 'U') && i <= length - 5) {  
                     String temp = text.substring(i + 1, i + 5);  
-                    Matcher matcher = pattern.matcher(temp);  
-                    if (matcher.find()) {  
-                    	result.append((char) Integer.parseInt(temp, 16));  
-                        i = i + 4;  
-                    } else {  
-                    	result.append(c1).append(c2);  
-                    }  
+//                  Matcher matcher = pattern.matcher(temp);  
+//                  if (matcher.find()) {  
+                    result.append((char) Integer.parseInt(temp, 16));  
+                    i = i + 4;  
+//                  } else {  
+//                  result.append(c1).append(c2);  
+//                  }  
                 } else 
                 	result.append(c1).append(c2);  
             } else 

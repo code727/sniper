@@ -18,89 +18,38 @@
 
 package org.workin.beans.propertyeditors;
 
-import java.beans.PropertyEditor;
-import java.beans.PropertyEditorSupport;
-
-import org.workin.commons.util.AssertUtils;
-import org.workin.commons.util.StringUtils;
-
 /**
  * 字符串属性编辑器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class StringPropertyEditor extends PropertyEditorSupport implements PropertyEditor {
-	
-	/** 是否允许为空 */
-	private boolean allowEmpty;
-	
-	/** 不允许为空时指定的默认值 */
-	private String defaultValue;
+public class StringPropertyEditor extends AbstractPropertyEditor {
 	
 	public StringPropertyEditor() {
-		this(true);
+		super();
 	}
 	
 	public StringPropertyEditor(boolean allowEmpty) {
-		this(allowEmpty, StringUtils.EMPTY_STRING);
+		super(allowEmpty);
 	}
 	
 	public StringPropertyEditor(String defaultValue) {
-		this(true, defaultValue);
+		super(defaultValue);
 	}
 	
 	public StringPropertyEditor(boolean allowEmpty, String defaultValue) {
-		setAllowEmpty(allowEmpty);
-		setDefaultValue(defaultValue);
+		super(allowEmpty, defaultValue);
 	}
 	
-	public boolean isAllowEmpty() {
-		return allowEmpty;
-	}
-
-	public void setAllowEmpty(boolean allowEmpty) {
-		this.allowEmpty = allowEmpty;
-	}
-
-	public String getDefaultValue() {
-		return defaultValue;
-	}
-
-	public void setDefaultValue(String defaultValue) {
-		check(defaultValue);
-		this.defaultValue = defaultValue;
-	}
-	
-	/**
-	 * 检查默认值的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param defaultValue
-	 * @throws IllegalArgumentException
-	 */
-	protected void check(String defaultValue) throws IllegalArgumentException {
-		AssertUtils.assertNotNull(defaultValue, "String default value must not be null");
-	}
-		
-	@Override
-	public void setAsText(String text) throws IllegalArgumentException {
-		if (text != null) {
-			setValue(handleText(text));
-		} else {
-			if (!isAllowEmpty())
-				setValue(handleText(defaultValue));
-			else
-				setValue(text);
-		}
-	}
-
 	/**
 	 * 非空文本的处理方法，返回处理后的结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param text
 	 * @return
 	 */
+	@Override
 	protected Object handleText(String text) {
 		return text;
 	}
-					
+	
 }

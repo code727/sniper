@@ -25,9 +25,25 @@ package org.workin.beans.propertyeditors;
  */
 public class StringBufferPropertyEditor extends StringPropertyEditor {
 	
+	public StringBufferPropertyEditor() {
+		super();
+	}
+	
+	public StringBufferPropertyEditor(boolean allowEmpty) {
+		super(allowEmpty);
+	}
+	
+	public StringBufferPropertyEditor(String defaultValue) {
+		super(defaultValue);
+	}
+	
+	public StringBufferPropertyEditor(boolean allowEmpty, String defaultValue) {
+		super(allowEmpty, defaultValue);
+	}
+	
 	@Override
 	protected Object handleText(String text) {
 		return new StringBuffer(text);
 	}
-
+	
 }

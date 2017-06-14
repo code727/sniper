@@ -23,7 +23,7 @@ package org.workin.beans.propertyeditors;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DoublePropertyEditor extends NumberPropertyEditor {
+public class DoublePropertyEditor extends AbstractNumberPropertyEditor {
 	
 	public DoublePropertyEditor() {
 		super();
