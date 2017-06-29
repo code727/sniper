@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<context:annotation-config />
+	<context:property-placeholder location="application.properties" />
+	
+	<bean id="producerProperties" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="bootstrap.servers" value="${bootstrap.servers}" />
+				<entry key="client.id" value="p0" />
+				<entry key="retries" value="10" />
+				<entry key="batch.size" value="16384" />
+				<entry key="linger.ms" value="1" />
+				<entry key="buffer.memory" value="33554432" />
+				<entry key="max.block.ms" value="1500" />
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="keySerializer" class="org.apache.kafka.common.serialization.IntegerSerializer" />
+	<bean id="valueSerializer" class="org.springframework.kafka.support.serializer.JsonSerializer" />
+
+	<bean id="producerFactory" class="org.springframework.kafka.core.DefaultKafkaProducerFactory">
+		<constructor-arg index="0" ref="producerProperties" />
+		<constructor-arg index="1" ref="keySerializer" />
+		<constructor-arg index="2" ref="valueSerializer" />
+	</bean>
+
+	<bean id="kafkaTemplate" class="org.springframework.kafka.core.KafkaTemplate">
+		<constructor-arg ref="producerFactory" />
+		<constructor-arg name="autoFlush" value="false" />
+		<property name="producerListener">
+			<bean class="org.sniper.kafka.producer.spring.listener.LoggingProducerListener">
+				<property name="producerBehavior" ref="producerBehavior" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="producerBehavior" class="org.sniper.kafka.producer.behavior.DefaultProducerBehavior">
+		<constructor-arg type="java.lang.String" value="org.sniper.kafka.producer.spring.listener.LoggingProducerListener" />
+		<property name="throwExceptionOnError" value="true" /> 
+	</bean>
+
+	<bean id="kafkaProducer" class="org.sniper.kafka.producer.spring.SpringKafkaProducer">
+		<property name="kafkaTemplate" ref="kafkaTemplate" />
+		<property name="defaultTopic">
+			<bean class="org.sniper.kafka.topic.TopicNode">
+				<constructor-arg name="name" value="test" />
+			</bean>
+		</property>
+		<!-- <property name="producerCallback" ref="producerCallback" /> -->
+	</bean>
+	
+	<!-- <bean id="producerCallback" class="org.sniper.kafka.producer.spring.callback.DelegateProducerFutureCallback" >
+		<property name="delegate"><bean class="org.sniper.kafka.test.ProducerServiceImpl"/></property>
+	</bean> -->
+
+</beans>

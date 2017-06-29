@@ -1,0 +1,131 @@
+/*
+ * Copyright 2016 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * Create Date : 2016年7月11日
+ */
+
+package org.sniper.serialization.test.domain;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Date;
+
+import org.sniper.commons.util.CodecUtils;
+import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
+
+/**
+ * @description
+ * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @version 1.0
+ */
+public class User implements Serializable, Cloneable {
+
+	private static final long serialVersionUID = -7146724311576587958L;
+	
+	private Long id;
+	
+	private String name;
+	
+	private byte gender;
+	
+	private int age;
+	
+	private boolean married;
+	
+	private double vision;
+	
+	private Date createTime;
+	
+	private BigDecimal amount;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public byte getGender() {
+		return gender;
+	}
+
+	public void setGender(byte gender) {
+		this.gender = gender;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public boolean isMarried() {
+		return married;
+	}
+
+	public void setMarried(boolean married) {
+		this.married = married;
+	}
+
+	public double getVision() {
+		return vision;
+	}
+
+	public void setVision(double vision) {
+		this.vision = vision;
+	}
+	
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = (amount != null ? amount.setScale(2, RoundingMode.DOWN) : amount);
+	}
+
+	public String toString() {
+		return CodecUtils.bytesToString(new FasterxmlJacksonSerializer().serialize(this));
+	}
+	
+	@Override
+	public User clone() {
+		try {
+			return (User) super.clone();
+		} catch (CloneNotSupportedException e) {
+			return null; 
+		}
+	}
+
+}

@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.workin</groupId>
-	<artifactId>workin</artifactId>
+	<groupId>org.sniper</groupId>
+	<artifactId>sniper</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	
@@ -14,7 +14,7 @@
 		<json-lib.version>2.4</json-lib.version>
 		<servlet.version>2.5</servlet.version>
 		<spring.version>4.3.7.RELEASE</spring.version>
-		<workin.version>1.0.0</workin.version>
+		<sniper.version>1.0.0</sniper.version>
 	</properties>
 		
 	<build>
@@ -79,32 +79,32 @@
 	</build>
 	
 	<modules>
-		<module>workin-commons</module>
-		<module>workin-test</module>
-		<module>workin-support</module>
-		<module>workin-json</module>
-		<module>workin-web</module>
-		<module>workin-persistence</module>
-		<module>workin-security</module>
-		<module>workin-nosql</module>
-		<module>workin-http</module>
-		<module>workin-spring</module>
-		<module>workin-trace</module>
-		<module>workin-jms</module>
-		<module>workin-fastdfs</module>
-		<module>workin-payment</module>
-		<module>workin-captcha</module>
-		<module>workin-sms</module>
-		<module>workin-push</module>
-		<module>workin-image</module>
-		<module>workin-serialization</module>
-		<module>workin-templet</module>
-		<module>workin-kafka</module>
-		<module>workin-generator</module>
-		<module>workin-zookeeper</module>
-		<module>workin-codec</module>
-		<module>workin-sharding</module>
-		<module>workin-beans</module>
-		<module>workin-context</module>
+		<module>sniper-commons</module>
+		<module>sniper-test</module>
+		<module>sniper-support</module>
+		<module>sniper-json</module>
+		<module>sniper-web</module>
+		<module>sniper-persistence</module>
+		<module>sniper-security</module>
+		<module>sniper-nosql</module>
+		<module>sniper-http</module>
+		<module>sniper-spring</module>
+		<module>sniper-trace</module>
+		<module>sniper-jms</module>
+		<module>sniper-fastdfs</module>
+		<module>sniper-payment</module>
+		<module>sniper-captcha</module>
+		<module>sniper-sms</module>
+		<module>sniper-push</module>
+		<module>sniper-image</module>
+		<module>sniper-serialization</module>
+		<module>sniper-templet</module>
+		<module>sniper-kafka</module>
+		<module>sniper-generator</module>
+		<module>sniper-zookeeper</module>
+		<module>sniper-codec</module>
+		<module>sniper-sharding</module>
+		<module>sniper-beans</module>
+		<module>sniper-context</module>
 	</modules>
 </project>
