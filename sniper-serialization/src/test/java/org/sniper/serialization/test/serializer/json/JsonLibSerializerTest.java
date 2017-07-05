@@ -20,14 +20,12 @@ package org.sniper.serialization.test.serializer.json;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 import org.sniper.commons.util.ArrayUtils;
+import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.IOUtils;
-import org.sniper.commons.util.MapUtils;
 import org.sniper.serialization.json.JsonLibSerializer;
 import org.sniper.serialization.test.domain.User;
 import org.sniper.serialization.test.serializer.AbstractSerializerTest;
@@ -39,38 +37,34 @@ import org.sniper.serialization.test.serializer.AbstractSerializerTest;
  */
 public class JsonLibSerializerTest extends AbstractSerializerTest {
 	
-	private JsonLibSerializer jsonLibSerializer = new JsonLibSerializer();
+	private JsonLibSerializer jsonLibSerializer;
+	
+	public JsonLibSerializerTest() {
+		this.jsonLibSerializer = new JsonLibSerializer();
+//		this.jsonLibSerializer.setDateFormat(DateUtils.DEFAULT_DATETIME_FORMAT);
+	}
 	
 	@Override
-	@Test
+//	@Test
 	public void testSerialize() throws Exception {
 		bytes = jsonLibSerializer.serialize(list);
 		
-		String path = "C:/Users/sniper/Desktop/jsonLibSerializer.txt";
+		String path = "C:/Users/Daniele/Desktop/jsonLibSerializer.txt";
 		IOUtils.write(new FileOutputStream(new File(path)), bytes);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Test
 	public void testDeserialize() throws Exception {
 		if (ArrayUtils.isEmpty(bytes)) {
 			testSerialize();
+			System.out.println(CodecUtils.bytesToString(bytes));
 		}
 		
-		User user = new User();
-		user.setAmount(new BigDecimal("99.9999"));
-		
-//		jsonLibSerializer.serialize(user);
-//		jsonLibSerializer.setType(List.class);
-		
-		jsonLibSerializer.setType(List.class);
-		System.out.println(jsonLibSerializer.deserialize(bytes));
-		
-//		jsonLibSerializer.setType(Map.class);
-		Map<String, Object> map = MapUtils.newHashMap();
-		map.put("name", "dubin");
-		map.put("age", 34);
-		System.out.println(jsonLibSerializer.deserialize(jsonLibSerializer.serialize(map)));
+		List<User> users = (List<User>) jsonLibSerializer.deserialize(bytes, User.class);
+		System.out.println(users);
+		System.out.println(users.get(0).getCreateTime());
 	}
-
+	
 }

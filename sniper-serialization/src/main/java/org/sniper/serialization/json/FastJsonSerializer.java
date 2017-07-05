@@ -43,25 +43,23 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	
 	@Override
 	public <T> byte[] serialize(T t) throws SerializationException {
-		 SerializeWriter out = null;
+		 SerializeWriter out = new SerializeWriter();
+		 
 		 try {
-			 out = new SerializeWriter();
 			 JSONSerializer serializer = new JSONSerializer(out);
 			 
+			 String dateFormat = getDateFormat();
 			 if (StringUtils.isNotBlank(dateFormat)) {
 				 serializer.config(SerializerFeature.WriteDateUseDateFormat, true);
 				 serializer.setDateFormat(dateFormat);
 			 }
 			 
 			 serializer.write(t);
-			 
-			 byte[] bytes = out.toBytes(getEncoding());
-			 return bytes;
+			 return out.toBytes(getEncoding());
 		 } catch (Exception e) {
 			 throw new SerializationException("Cannot serialize", e);
 		 } finally {
-			 if (out != null)
-				 out.close();
+			 out.close();
 		 }
 	}
 
@@ -70,6 +68,8 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	public <T> T deserialize(String text, Class<T> type) throws SerializationException {
 		
 		DefaultJSONParser jsonParser = new DefaultJSONParser(text);
+		
+		String dateFormat = getDateFormat();
 		if (StringUtils.isNotBlank(dateFormat)) 
 			jsonParser.setDateFormat(dateFormat);
 		

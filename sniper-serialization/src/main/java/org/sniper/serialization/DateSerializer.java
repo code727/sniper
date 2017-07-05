@@ -38,6 +38,5 @@ public interface DateSerializer extends Serializer {
 	 * @param dateFormat
 	 */
 	public void setDateFormat(String dateFormat);
-	
 
 }

@@ -20,16 +20,12 @@ package org.sniper.serialization.test.serializer.json;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.math.BigDecimal;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 import org.sniper.commons.util.ArrayUtils;
-import org.sniper.commons.util.DateUtils;
+import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.IOUtils;
-import org.sniper.commons.util.MapUtils;
 import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
 import org.sniper.serialization.test.domain.User;
 import org.sniper.serialization.test.serializer.AbstractSerializerTest;
@@ -44,38 +40,30 @@ public class FasterxmlJacksonSerializerTest extends AbstractSerializerTest {
 	
 	public FasterxmlJacksonSerializerTest() {
 		this.fasterxmlJacksonSerializer = new FasterxmlJacksonSerializer();
-		this.fasterxmlJacksonSerializer.setDateFormat(DateUtils.DEFAULT_DATETIME_FORMAT);
+//		this.fasterxmlJacksonSerializer.setDateFormat(DateUtils.DEFAULT_DATETIME_FORMAT);
 	}
 	
 	@Override
-	@Test
+//	@Test
 	public void testSerialize() throws Exception {
 		bytes = fasterxmlJacksonSerializer.serialize(list);
 		
-		String path = "C:/Users/sniper/Desktop/fasterxmlJacksonSerializer.txt";
+		String path = "C:/Users/Daniele/Desktop/fasterxmlJacksonSerializer.txt";
 		IOUtils.write(new FileOutputStream(new File(path)), bytes);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Test
 	public void testDeserialize() throws Exception {
 		if (ArrayUtils.isEmpty(bytes)) {
 			testSerialize();
+			System.out.println(CodecUtils.bytesToString(bytes));
 		}
 		
-		User user = new User();
-		user.setAmount(new BigDecimal("99.9999"));
-//		fasterxmlJacksonSerializer.serialize(user)
-		fasterxmlJacksonSerializer.setType(List.class);
-		
-		List<LinkedHashMap<?, ?>> users = fasterxmlJacksonSerializer.deserialize(bytes);
+		List<User> users = (List<User>) fasterxmlJacksonSerializer.deserialize(bytes, User.class);
 		System.out.println(users);
-		
-		fasterxmlJacksonSerializer.setType(null);
-		Map<String, Object> map = MapUtils.newHashMap();
-		map.put("name", "dubin");
-		map.put("age", 34);
-		System.out.println(fasterxmlJacksonSerializer.deserialize(fasterxmlJacksonSerializer.serialize(map)));
+		System.out.println(users.get(0).getCreateTime());
 	}
 
 }

@@ -42,6 +42,9 @@ public abstract class AbstractSerializerTest extends BaseTestCase implements Ser
 	
 	@Before
 	public void init() {
+		Date date = new Date();
+		System.out.println(date.getTime());
+		
 		user = new User();
 		user.setId(9527L);
 		user.setName("dubin");
@@ -49,16 +52,16 @@ public abstract class AbstractSerializerTest extends BaseTestCase implements Ser
 		user.setGender((byte) 1);
 		user.setMarried(true);
 		user.setVision(1.0);
-		user.setCreateTime(new Date());
+		user.setCreateTime(date);
 		user.setAmount(new BigDecimal("99.9999"));
 		
 		list = CollectionUtils.newArrayList();
 		list.add(user);
-		for (int i = 0 ; i < 2; i++) {
-			User cloneUser = user.clone();
-			cloneUser.setId(user.getId() + i + 1);
-			list.add(cloneUser);
-		}
+//		for (int i = 0 ; i < 2; i++) {
+//			User cloneUser = user.clone();
+//			cloneUser.setId(user.getId() + i + 1);
+//			list.add(cloneUser);
+//		}
 			
 	}
 

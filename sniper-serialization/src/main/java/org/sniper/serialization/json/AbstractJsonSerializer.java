@@ -29,7 +29,7 @@ import org.sniper.serialization.AbstractTypedSerializer;
 public abstract class AbstractJsonSerializer extends AbstractTypedSerializer implements JsonSerializer {
 	
 	/** 序列化日期时指定的格式 */
-	protected String dateFormat;
+	private String dateFormat;
 	
 	@Override
 	public String getDateFormat() {

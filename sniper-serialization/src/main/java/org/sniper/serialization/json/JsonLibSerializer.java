@@ -23,14 +23,17 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.sniper.beans.propertyeditors.DatePropertyEditor;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
+import org.sniper.commons.util.ObjectUtils;
+import org.sniper.commons.util.StringUtils;
 import org.sniper.serialization.SerializationException;
 
-import net.sf.ezmorph.Morpher;
 import net.sf.ezmorph.MorpherRegistry;
+import net.sf.ezmorph.ObjectMorpher;
 import net.sf.ezmorph.object.DateMorpher;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -46,77 +49,116 @@ import net.sf.json.util.JSONUtils;
  */
 public class JsonLibSerializer extends AbstractJsonSerializer {
 	
-	private MorpherRegistry morpherRegistry;
+	protected final MorpherRegistry morpherRegistry;
 	
-	private JsonConfig jsonConfig;
-		
+	protected final JsonConfig jsonConfig;
+	
 	public JsonLibSerializer() {
-		buildDefaultMorpher();
-		buildDefaultJsonConfig();
+		this(null, null);
 	}
 	
-	public MorpherRegistry getMorpherRegistry() {
+	public JsonLibSerializer(MorpherRegistry morpherRegistry) {
+		this(morpherRegistry, null);
+	}
+	
+	public JsonLibSerializer(JsonConfig jsonConfig) {
+		this(null, jsonConfig);
+	}
+	
+	public JsonLibSerializer(MorpherRegistry morpherRegistry, JsonConfig jsonConfig) {
+		if (morpherRegistry == null) 
+			this.morpherRegistry = buildDefaultMorpherRegistry();
+		else
+			this.morpherRegistry = morpherRegistry;
+		
+		if (jsonConfig == null) 
+			this.jsonConfig = buildDefaultJsonConfig();
+		else
+			this.jsonConfig = jsonConfig;
+	}
+	
+	/**
+	 * 构建默认的MorpherRegistry对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	private MorpherRegistry buildDefaultMorpherRegistry() {
+		MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
+		
+		/* 覆盖掉net.sf.ezmorph.bean.BeanMorpher对java.util.Date对象的处理
+		 * 改由org.sniper.serialization.json.DateBeanMorpher处理 */
+		morpherRegistry.registerMorpher(new DateBeanMorpher());
+		
 		return morpherRegistry;
 	}
-
-	public void setMorpherRegistry(MorpherRegistry morpherRegistry) {
-		if (morpherRegistry != null)
-			this.morpherRegistry = morpherRegistry;
-	}
-
-	public JsonConfig getJsonConfig() {
-		return jsonConfig;
-	}
-
-	public void setJsonConfig(JsonConfig jsonConfig) {
-		this.jsonConfig = jsonConfig;
-	}
 	
 	/**
-	 * 构建全局默认的Morpher
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * 构建默认的JsonConfig对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
 	 */
-	protected void buildDefaultMorpher() {
-		this.morpherRegistry = JSONUtils.getMorpherRegistry();
-		this.morpherRegistry.registerMorpher(new DateMorpher(new String[] {
-				DateUtils.DEFAULT_DATETIME_FORMAT, DateUtils.DEFAULT_DATE_FORMAT
-			}
-		)); 
-	}
-	
-	/**
-	 * 构建全局默认的JsonConfig
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	protected void buildDefaultJsonConfig() {
-		this.jsonConfig = new JsonConfig();
-		this.jsonConfig.registerJsonValueProcessor(Date.class, new JsonValueProcessor(){
+	private JsonConfig buildDefaultJsonConfig() {
+		JsonConfig jsonConfig = new JsonConfig();
+		
+		/* 将Date类型的值处理为毫秒数，与其他的JSON序列化工具(CodehausJackson等)的默认行为保持一致 */
+		jsonConfig.registerJsonValueProcessor(Date.class, new JsonValueProcessor(){
 			
 			@Override
 			public Object processObjectValue(String propertyName, Object date, JsonConfig cfg) {
-				return date != null ? DateUtils.objectToString(date, getDateFormat()) : date;
+				return date != null ? ((Date) date).getTime() : date;
 			}
 
 			@Override
 			public Object processArrayValue(Object date, JsonConfig cfg) {
-				return date != null ? DateUtils.objectToString(date, getDateFormat()) : date;
+				return date != null ? ((Date) date).getTime() : date;
+			}
+		});
+		
+		return jsonConfig;
+	}
+		
+	/**
+	 * 注册指定类型的DateMorpher
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dateFormat
+	 */
+	private void registerDateMorpher(String dateFormat) {
+		morpherRegistry.registerMorpher(new DateMorpher(new String[] { dateFormat }));
+	}
+	
+	/**
+	 * 注册指定类型的JSON Date值的处理过程
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dateFormat
+	 */
+	private void registerJsonDateProcessor(final String dateFormat) {
+		jsonConfig.registerJsonValueProcessor(Date.class, new JsonValueProcessor(){
+			
+			@Override
+			public Object processObjectValue(String propertyName, Object date, JsonConfig cfg) {
+				return date != null ? DateUtils.objectToString(date, dateFormat) : date;
+			}
+
+			@Override
+			public Object processArrayValue(Object date, JsonConfig cfg) {
+				return date != null ? DateUtils.objectToString(date, dateFormat) : date;
 			}
 		});
 	}
 	
-	/**
-	 * 注册全局的Morpher
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param morpher
-	 */
-	public void registerMorpher(Morpher morpher) {
-		if (morpher != null)
-			morpherRegistry.registerMorpher(morpher);
-	}
+	@Override
+	public void setDateFormat(String dateFormat) {
+		super.setDateFormat(dateFormat);
 		
+		if (StringUtils.isNotBlank(dateFormat)) {
+			registerDateMorpher(dateFormat);
+			registerJsonDateProcessor(dateFormat);
+		}
+	}
+			
 	@Override
 	public <T> byte[] serialize(T t) throws SerializationException {
-		return CodecUtils.getBytes(JSONSerializer.toJSON(t, getJsonConfig()).toString(), getEncoding());
+		return CodecUtils.getBytes(JSONSerializer.toJSON(t, jsonConfig).toString(), getEncoding());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -157,7 +199,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	 */
 	@SuppressWarnings("unchecked")
 	private <T> T beanDeserialize(String jsonBean, Class<?> beanClazz) throws Exception {
-		JSONObject jsonObject = JSONObject.fromObject(jsonBean, getJsonConfig());
+		JSONObject jsonObject = JSONObject.fromObject(jsonBean, jsonConfig);
 		return (T) JSONObject.toBean(jsonObject, beanClazz);
 	}
 	
@@ -192,7 +234,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	 */
 	@SuppressWarnings("unchecked")
 	private <T> T beanDeserializeToMap(String jsonBean) throws Exception {
-		JSONObject jsonObject = JSONObject.fromObject(jsonBean, getJsonConfig());
+		JSONObject jsonObject = JSONObject.fromObject(jsonBean, jsonConfig);
 		return (T) JSONObject.toBean(jsonObject, LinkedHashMap.class);
 	}
 	
@@ -206,7 +248,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	 */
 	@SuppressWarnings("unchecked")
 	private <T> T multipleBeanDeserializeToElementTypeCollection(String jsonArray, Class<?> beanClazz) throws Exception {
-		JSONArray array = JSONArray.fromObject(jsonArray, getJsonConfig());
+		JSONArray array = JSONArray.fromObject(jsonArray, jsonConfig);
 		return (T) JSONArray.toCollection(array, beanClazz);
 	}
 	
@@ -220,7 +262,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	 */
 	@SuppressWarnings("unchecked")
 	private <T> T multipleBeanDeserializeToArray(String jsonArray, Class<?> arrayClazz) throws Exception {
-		JSONArray array = JSONArray.fromObject(jsonArray, getJsonConfig());
+		JSONArray array = JSONArray.fromObject(jsonArray, jsonConfig);
 		return (T) JSONArray.toArray(array, arrayClazz.getComponentType());
 	}
 	
@@ -234,8 +276,42 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	 */
 	@SuppressWarnings("unchecked")
 	private <T> T multipleBeanDeserializeToCollection(String jsonArray, Class<?> collectionClazz) throws Exception {
-		JSONArray array = JSONArray.fromObject(jsonArray, getJsonConfig());
+		JSONArray array = JSONArray.fromObject(jsonArray, jsonConfig);
 		return (T) JSONArray.toCollection(array, LinkedHashMap.class);
+	}
+	
+	/**
+	 * DateBeanMorpher实现类
+	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @version 1.0
+	 */
+	class DateBeanMorpher implements ObjectMorpher {
+
+		private final Class<?> beanClass;
+		
+		private DatePropertyEditor datePropertyEditor;
+
+		public DateBeanMorpher() {
+			this.beanClass = Date.class;
+			this.datePropertyEditor = new DatePropertyEditor(getDateFormat());
+		}
+
+		@Override
+		public Object morph(Object sourceBean) {
+			datePropertyEditor.setAsText(ObjectUtils.toString(sourceBean));
+			return datePropertyEditor.getValue();
+		}
+
+		@Override
+		public Class<?> morphsTo() {
+			return beanClass;
+		}
+
+		@SuppressWarnings("rawtypes")
+		@Override
+		public boolean supports(Class clazz) {
+			return !clazz.isArray();
+		}
 	}
 	
 }

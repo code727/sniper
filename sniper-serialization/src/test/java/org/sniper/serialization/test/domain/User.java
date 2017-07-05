@@ -24,6 +24,7 @@ import java.math.RoundingMode;
 import java.util.Date;
 
 import org.sniper.commons.util.CodecUtils;
+import org.sniper.serialization.json.JsonSerializer;
 import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
 
 /**
@@ -50,6 +51,13 @@ public class User implements Serializable, Cloneable {
 	private Date createTime;
 	
 	private BigDecimal amount;
+	
+	private transient JsonSerializer jsonSerializer;
+	
+	public User() {
+		this.jsonSerializer = new FasterxmlJacksonSerializer();
+//		this.jsonSerializer.setDateFormat(DateUtils.DEFAULT_DATETIME_PLUS_FORMAT);
+	}
 
 	public Long getId() {
 		return id;
@@ -116,7 +124,7 @@ public class User implements Serializable, Cloneable {
 	}
 
 	public String toString() {
-		return CodecUtils.bytesToString(new FasterxmlJacksonSerializer().serialize(this));
+		return CodecUtils.bytesToString(jsonSerializer.serialize(this));
 	}
 	
 	@Override

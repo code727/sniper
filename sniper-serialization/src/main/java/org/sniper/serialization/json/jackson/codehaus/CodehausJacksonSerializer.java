@@ -49,10 +49,8 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 	public CodehausJacksonSerializer(ObjectMapper objectMapper) {
 		if (objectMapper != null )
 			this.objectMapper = objectMapper;
-		else {
+		else 
 			this.objectMapper = new ObjectMapper();
-			this.objectMapper.setDateFormat(DateUtils.getDateFormat(dateFormat));
-		}
 	}
 	
 	public ObjectMapper getObjectMapper() {
@@ -60,8 +58,7 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 	}
 
 	public void setObjectMapper(ObjectMapper objectMapper) {
-		if (objectMapper != null)
-			this.objectMapper = objectMapper;
+		this.objectMapper = objectMapper;
 	}
 	
 	@Override
@@ -204,5 +201,5 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 	private <T> T multipleBeanDeserializeToCollection(String jsonArray, Class<?> collectionClazz) throws Exception {
 		return (T) objectMapper.readValue(jsonArray, collectionClazz != null ? collectionClazz : Map.class);
 	}
-	
+		
 }

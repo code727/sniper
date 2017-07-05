@@ -50,10 +50,8 @@ public class FasterxmlJacksonSerializer extends AbstractJsonSerializer {
 	public FasterxmlJacksonSerializer(ObjectMapper objectMapper) {
 		if (objectMapper != null )
 			this.objectMapper = objectMapper;
-		else {
+		else 
 			this.objectMapper = new ObjectMapper();
-			this.objectMapper.setDateFormat(DateUtils.getDateFormat(dateFormat));
-		}
 	}
 	
 	public ObjectMapper getObjectMapper() {
@@ -61,8 +59,7 @@ public class FasterxmlJacksonSerializer extends AbstractJsonSerializer {
 	}
 	
 	public void setObjectMapper(ObjectMapper objectMapper) {
-		if (objectMapper != null)
-			this.objectMapper = objectMapper;
+		this.objectMapper = objectMapper;
 	}
 	
 	@Override
