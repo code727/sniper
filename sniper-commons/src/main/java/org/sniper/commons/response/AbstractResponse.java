@@ -49,33 +49,33 @@ public abstract class AbstractResponse implements Response {
 	}
 	
 	@Override
-	public boolean IsSuccess() {
+	public boolean wasSuccess() {
 		return isMatchStatus(DEFAULT_SUCCESS_STATUS);
 	}
 	
 
 	@Override
-	public boolean IsSuccess(String successCode) {
+	public boolean wasSuccess(String successCode) {
 		return isMatchStatus(successCode);
 	}
 
 	@Override
-	public boolean IsFailed() {
+	public boolean wasFailed() {
 		return isMatchStatus(DEFAULT_FAILED_STATUS);
 	}
 
 	@Override
-	public boolean IsFailed(String failedCode) {
+	public boolean wasFailed(String failedCode) {
 		return isMatchStatus(failedCode);
 	}
 
 	@Override
-	public boolean IsException() {
+	public boolean wasException() {
 		return isMatchStatus(DEFAULT_EXCEPTION_STATUS);
 	}
 
 	@Override
-	public boolean IsException(String exceptionCode) {
+	public boolean wasException(String exceptionCode) {
 		return isMatchStatus(exceptionCode);
 	}
 	

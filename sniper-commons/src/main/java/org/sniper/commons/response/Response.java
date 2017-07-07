@@ -55,7 +55,7 @@ public interface Response {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public boolean IsSuccess();
+	public boolean wasSuccess();
 	
 	/**
 	 * 响应是否成功
@@ -63,14 +63,14 @@ public interface Response {
 	 * @param successCode
 	 * @return
 	 */
-	public boolean IsSuccess(String successCode);
+	public boolean wasSuccess(String successCode);
 	
 	/**
 	 * 响应是否失败
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public boolean IsFailed();
+	public boolean wasFailed();
 	
 	/**
 	 * 响应是否失败
@@ -78,14 +78,14 @@ public interface Response {
 	 * @param failedCode
 	 * @return
 	 */
-	public boolean IsFailed(String failedCode);
+	public boolean wasFailed(String failedCode);
 	
 	/**
 	 * 响应是否异常
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public boolean IsException();
+	public boolean wasException();
 	
 	/**
 	 * 响应是否异常
@@ -93,6 +93,6 @@ public interface Response {
 	 * @param exceptionCode
 	 * @return
 	 */
-	public boolean IsException(String exceptionCode);
+	public boolean wasException(String exceptionCode);
 			
 }
