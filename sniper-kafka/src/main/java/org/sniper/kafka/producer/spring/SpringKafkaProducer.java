@@ -29,7 +29,7 @@ import org.springframework.kafka.core.KafkaOperations.ProducerCallback;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.util.concurrent.SettableListenableFuture;
-import org.sniper.commons.KayValuePair;
+import org.sniper.commons.KeyValuePair;
 import org.sniper.kafka.exception.ProducerException;
 import org.sniper.kafka.producer.KafkaProducer;
 import org.sniper.kafka.producer.MessagePacket;
@@ -53,7 +53,7 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 	}
 	
 	@Override
-	public <K, V> Future<ProduceResult<K, V>> sendDefault(KayValuePair<K, V> pair) {
+	public <K, V> Future<ProduceResult<K, V>> sendDefault(KeyValuePair<K, V> pair) {
 		return sendDefault(new MessagePacket<K, V>(pair));
 	}
 	
@@ -73,7 +73,7 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 	}
 	
 	@Override
-	public <K, V> ProduceResult<K, V> sendDefaultAndWait(KayValuePair<K, V> pair) throws Exception {
+	public <K, V> ProduceResult<K, V> sendDefaultAndWait(KeyValuePair<K, V> pair) throws Exception {
 		return sendDefaultAndWait(new MessagePacket<K, V>(pair));
 	}
 	
@@ -93,7 +93,7 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 	}
 	
 	@Override
-	public <K, V> Future<ProduceResult<K, V>> send(String name, KayValuePair<K, V> pair) {
+	public <K, V> Future<ProduceResult<K, V>> send(String name, KeyValuePair<K, V> pair) {
 		return send(name, new MessagePacket<K, V>(pair));
 	}
 
@@ -113,7 +113,7 @@ public class SpringKafkaProducer extends SpringKafkaProducerSupport implements K
 	}
 	
 	@Override
-	public <K, V> ProduceResult<K, V> sendAndWait(String name, KayValuePair<K, V> pair) throws Exception {
+	public <K, V> ProduceResult<K, V> sendAndWait(String name, KeyValuePair<K, V> pair) throws Exception {
 		return sendAndWait(name, new MessagePacket<K, V>(pair));
 	}
 

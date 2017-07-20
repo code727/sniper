@@ -28,7 +28,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.sniper.commons.DataPair;
-import org.sniper.commons.KayValuePair;
+import org.sniper.commons.KeyValuePair;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
@@ -184,7 +184,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 				
 				List<DataPair<K, Boolean>> list = CollectionUtils.newArrayList();
 				for (K key : keys) {
-					list.add(new KayValuePair<K, Boolean>(key, connection.exists(keySerializer.serialize(key))));
+					list.add(new KeyValuePair<K, Boolean>(key, connection.exists(keySerializer.serialize(key))));
 				}
 				
 				return list;

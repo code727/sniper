@@ -23,7 +23,7 @@ package org.sniper.commons;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class KayValuePair<K, V> implements DataPair<K, V> {
+public class KeyValuePair<K, V> implements DataPair<K, V> {
 	
 	private static final long serialVersionUID = -6146608197344697759L;
 
@@ -31,22 +31,22 @@ public class KayValuePair<K, V> implements DataPair<K, V> {
 	
 	private V value;
 	
-	public KayValuePair() {
+	public KeyValuePair() {
 		
 	}
 	
-	public KayValuePair(K key) {
+	public KeyValuePair(K key) {
 		this(key, null);
 	}
 	
-	public KayValuePair(DataPair<K, V> pair) {
+	public KeyValuePair(DataPair<K, V> pair) {
 		if (pair != null) {
 			this.key = pair.getKey();
 			this.value = pair.getValue();
 		}
 	}
 	
-	public KayValuePair(K key, V value) {
+	public KeyValuePair(K key, V value) {
 		this.key = key;
 		this.value = value;
 	}

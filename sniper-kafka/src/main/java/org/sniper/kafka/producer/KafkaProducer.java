@@ -21,7 +21,7 @@ package org.sniper.kafka.producer;
 import java.util.concurrent.Future;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.sniper.commons.KayValuePair;
+import org.sniper.commons.KeyValuePair;
 import org.sniper.kafka.support.ProduceResult;
 
 /**
@@ -54,7 +54,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	 * @param pair
 	 * @return
 	 */
-	public <K, V> Future<ProduceResult<K, V>> sendDefault(KayValuePair<K, V> pair);
+	public <K, V> Future<ProduceResult<K, V>> sendDefault(KeyValuePair<K, V> pair);
 	
 	/**
 	 * 将数据包发送到默认Topic
@@ -90,7 +90,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
 	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
 	 */
-	public <K, V> ProduceResult<K, V> sendDefaultAndWait(KayValuePair<K, V> pair) throws Exception;
+	public <K, V> ProduceResult<K, V> sendDefaultAndWait(KeyValuePair<K, V> pair) throws Exception;
 	
 	/**
 	 * 将数据包发送到默认Topic后等待返回生产结果
@@ -127,7 +127,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	 * @param pair
 	 * @return
 	 */
-	public <K, V> Future<ProduceResult<K, V>> send(String name, KayValuePair<K, V> pair);
+	public <K, V> Future<ProduceResult<K, V>> send(String name, KeyValuePair<K, V> pair);
 	
 	/**
 	 * 将数据包发送到指定的Topic
@@ -167,7 +167,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
 	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
 	 */
-	public <K, V> ProduceResult<K, V> sendAndWait(String name, KayValuePair<K, V> pair) throws Exception;
+	public <K, V> ProduceResult<K, V> sendAndWait(String name, KeyValuePair<K, V> pair) throws Exception;
 	
 	/**
 	 * 将数据包发送到指定的Topic实例后等待返回生产结果

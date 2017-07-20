@@ -19,14 +19,14 @@
 package org.sniper.kafka.producer;
 
 import org.sniper.commons.DataPair;
-import org.sniper.commons.KayValuePair;
+import org.sniper.commons.KeyValuePair;
 
 /**
  * 生产者消息数据包
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MessagePacket<K, V> extends KayValuePair<K, V> {
+public class MessagePacket<K, V> extends KeyValuePair<K, V> {
 	
 	private static final long serialVersionUID = -3243425298344495025L;
 
