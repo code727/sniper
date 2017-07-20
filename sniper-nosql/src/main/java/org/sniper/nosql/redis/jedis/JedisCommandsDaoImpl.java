@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.sniper.commons.DataPair;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 
@@ -1851,6 +1852,52 @@ public class JedisCommandsDaoImpl extends JedisDaoSupport implements JedisComman
 
 	@Override
 	public <K> Boolean exists(int dbIndex, K key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/**
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param keys
+	 * @return 
+	 */
+	@Override
+	public <K> List<DataPair<K, Boolean>> exists(K[] keys) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param keys
+	 * @return 
+	 */
+	@Override
+	public <K> List<DataPair<K, Boolean>> exists(int dbIndex, K[] keys) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param keys
+	 * @return 
+	 */
+	@Override
+	public <K> List<DataPair<K, Boolean>> exists(Collection<K> keys) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbIndex
+	 * @param keys
+	 * @return 
+	 */
+	@Override
+	public <K> List<DataPair<K, Boolean>> exists(int dbIndex, Collection<K> keys) {
 		// TODO Auto-generated method stub
 		return null;
 	}

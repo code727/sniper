@@ -27,15 +27,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.DataType;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.RedisListCommands.Position;
-import org.springframework.data.redis.connection.RedisZSetCommands.Aggregate;
-import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
-import org.springframework.data.redis.connection.SortParameters;
-import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.stereotype.Repository;
+import org.sniper.commons.DataPair;
+import org.sniper.commons.KayValuePair;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
@@ -46,6 +39,15 @@ import org.sniper.commons.util.StringUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.serialization.Serializer;
 import org.sniper.serialization.jdk.StringSerializer;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.DataType;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisListCommands.Position;
+import org.springframework.data.redis.connection.RedisZSetCommands.Aggregate;
+import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
+import org.springframework.data.redis.connection.SortParameters;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.stereotype.Repository;
 
 /**
  * Spring Redis命令行数据访问实现类
@@ -149,6 +151,43 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbIndex);
 				return connection.exists(keySerializer.serialize(key));
+			}
+		});
+	}
+	
+	@Override
+	public <K> List<DataPair<K, Boolean>> exists(K[] keys) {
+		return exists(super.getDefaultDbIndex(), keys);
+	}
+
+	@Override
+	public <K> List<DataPair<K, Boolean>> exists(int dbIndex, K[] keys) {
+		return exists(dbIndex, ArrayUtils.toList(keys));
+	}
+
+	@Override
+	public <K> List<DataPair<K, Boolean>> exists(Collection<K> keys) {
+		return exists(super.getDefaultDbIndex(), keys);
+	}
+
+	@Override
+	public <K> List<DataPair<K, Boolean>> exists(final int dbIndex, final Collection<K> keys) {
+		if (CollectionUtils.isEmpty(keys))
+			return null;
+		
+		final Serializer keySerializer = selectKeySerializer(dbIndex);
+		return super.getRedisTemplate().execute(new RedisCallback<List<DataPair<K, Boolean>>>() {
+
+			@Override
+			public List<DataPair<K, Boolean>> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbIndex);
+				
+				List<DataPair<K, Boolean>> list = CollectionUtils.newArrayList();
+				for (K key : keys) {
+					list.add(new KayValuePair<K, Boolean>(key, connection.exists(keySerializer.serialize(key))));
+				}
+				
+				return list;
 			}
 		});
 	}

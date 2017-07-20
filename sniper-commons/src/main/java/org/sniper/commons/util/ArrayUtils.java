@@ -19,6 +19,8 @@
 package org.sniper.commons.util;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 数组工具类
@@ -3690,6 +3692,16 @@ public class ArrayUtils {
 				array[i] = array[i].trim();
 		}
 		return array;
+	}
+	
+	/**
+	 * 将数组转换为列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @return
+	 */
+	public static <T> List<T> toList(T[] array) {
+		return array != null ? Arrays.asList(array) : null;
 	}
 	
 	/**
