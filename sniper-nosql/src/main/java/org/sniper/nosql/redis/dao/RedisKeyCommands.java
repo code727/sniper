@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import org.sniper.commons.DataPair;
+import org.sniper.commons.KeyValuePair;
 
 /**
  * Redis键命令接口
@@ -138,7 +138,7 @@ public interface RedisKeyCommands {
 	 * @param keys
 	 * @return
 	 */
-	public <K> List<DataPair<K, Boolean>> exists(K[] keys);
+	public <K> List<KeyValuePair<K, Boolean>> exists(K[] keys);
 	
 	/**
 	 * 判断指定库中多个键是否存在
@@ -147,7 +147,7 @@ public interface RedisKeyCommands {
 	 * @param keys
 	 * @return
 	 */
-	public <K> List<DataPair<K, Boolean>> exists(int dbIndex, K[] keys);
+	public <K> List<KeyValuePair<K, Boolean>> exists(int dbIndex, K[] keys);
 	
 	/**
 	 * 判断当前库中多个键是否存在
@@ -155,7 +155,7 @@ public interface RedisKeyCommands {
 	 * @param keys
 	 * @return
 	 */
-	public <K> List<DataPair<K, Boolean>> exists(Collection<K> keys);
+	public <K> List<KeyValuePair<K, Boolean>> exists(Collection<K> keys);
 	
 	/**
 	 * 判断指定库中多个键是否存在
@@ -164,7 +164,7 @@ public interface RedisKeyCommands {
 	 * @param keys
 	 * @return
 	 */
-	public <K> List<DataPair<K, Boolean>> exists(int dbIndex, Collection<K> keys);
+	public <K> List<KeyValuePair<K, Boolean>> exists(int dbIndex, Collection<K> keys);
 	
 	/**
 	 * 设置当前库中指定键的过期秒数

@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.sniper.commons.DataPair;
 import org.sniper.commons.KeyValuePair;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
@@ -156,33 +155,33 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	}
 	
 	@Override
-	public <K> List<DataPair<K, Boolean>> exists(K[] keys) {
+	public <K> List<KeyValuePair<K, Boolean>> exists(K[] keys) {
 		return exists(super.getDefaultDbIndex(), keys);
 	}
 
 	@Override
-	public <K> List<DataPair<K, Boolean>> exists(int dbIndex, K[] keys) {
+	public <K> List<KeyValuePair<K, Boolean>> exists(int dbIndex, K[] keys) {
 		return exists(dbIndex, ArrayUtils.toList(keys));
 	}
 
 	@Override
-	public <K> List<DataPair<K, Boolean>> exists(Collection<K> keys) {
+	public <K> List<KeyValuePair<K, Boolean>> exists(Collection<K> keys) {
 		return exists(super.getDefaultDbIndex(), keys);
 	}
 
 	@Override
-	public <K> List<DataPair<K, Boolean>> exists(final int dbIndex, final Collection<K> keys) {
+	public <K> List<KeyValuePair<K, Boolean>> exists(final int dbIndex, final Collection<K> keys) {
 		if (CollectionUtils.isEmpty(keys))
 			return null;
 		
 		final Serializer keySerializer = selectKeySerializer(dbIndex);
-		return super.getRedisTemplate().execute(new RedisCallback<List<DataPair<K, Boolean>>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<List<KeyValuePair<K, Boolean>>>() {
 
 			@Override
-			public List<DataPair<K, Boolean>> doInRedis(RedisConnection connection) throws DataAccessException {
+			public List<KeyValuePair<K, Boolean>> doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbIndex);
 				
-				List<DataPair<K, Boolean>> list = CollectionUtils.newArrayList();
+				List<KeyValuePair<K, Boolean>> list = CollectionUtils.newArrayList();
 				for (K key : keys) {
 					list.add(new KeyValuePair<K, Boolean>(key, connection.exists(keySerializer.serialize(key))));
 				}

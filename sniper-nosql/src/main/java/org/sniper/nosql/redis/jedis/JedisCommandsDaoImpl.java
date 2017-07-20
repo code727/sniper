@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.sniper.commons.DataPair;
+import org.sniper.commons.KeyValuePair;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 
@@ -1862,7 +1862,7 @@ public class JedisCommandsDaoImpl extends JedisDaoSupport implements JedisComman
 	 * @return 
 	 */
 	@Override
-	public <K> List<DataPair<K, Boolean>> exists(K[] keys) {
+	public <K> List<KeyValuePair<K, Boolean>> exists(K[] keys) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -1874,7 +1874,7 @@ public class JedisCommandsDaoImpl extends JedisDaoSupport implements JedisComman
 	 * @return 
 	 */
 	@Override
-	public <K> List<DataPair<K, Boolean>> exists(int dbIndex, K[] keys) {
+	public <K> List<KeyValuePair<K, Boolean>> exists(int dbIndex, K[] keys) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -1885,7 +1885,7 @@ public class JedisCommandsDaoImpl extends JedisDaoSupport implements JedisComman
 	 * @return 
 	 */
 	@Override
-	public <K> List<DataPair<K, Boolean>> exists(Collection<K> keys) {
+	public <K> List<KeyValuePair<K, Boolean>> exists(Collection<K> keys) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -1897,7 +1897,7 @@ public class JedisCommandsDaoImpl extends JedisDaoSupport implements JedisComman
 	 * @return 
 	 */
 	@Override
-	public <K> List<DataPair<K, Boolean>> exists(int dbIndex, Collection<K> keys) {
+	public <K> List<KeyValuePair<K, Boolean>> exists(int dbIndex, Collection<K> keys) {
 		// TODO Auto-generated method stub
 		return null;
 	}
