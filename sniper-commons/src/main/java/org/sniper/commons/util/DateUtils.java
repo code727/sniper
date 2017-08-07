@@ -172,8 +172,10 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Date stringToDate(String dateString, String pattern) {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(dateString), 
-				"Date string can not be null or blank.");
+//		AssertUtils.assertTrue(StringUtils.isNotBlank(dateString), "Date string can not be null or blank.");
+		if (StringUtils.isNotBlank(dateString))
+			return null;
+				
 		return getDateFormat(pattern).parse(dateString, new ParsePosition(0));
 	}
 	
@@ -195,7 +197,10 @@ public class DateUtils {
 	 * @return 
 	 */
 	public static String dateToString(Date date, String pattern) {
-		AssertUtils.assertNotNull(date, "Date object can not be null.");
+//		AssertUtils.assertNotNull(date, "Date object can not be null.");
+		if (date == null)
+			return null;
+		
 		return getDateFormat(pattern).format(date);
 	}
 	
@@ -287,7 +292,10 @@ public class DateUtils {
 	 * @return
 	 */
 	public static String objectToString(Object obj, String pattern) {
-		AssertUtils.assertNotNull(obj, "Object can not be null.");
+//		AssertUtils.assertNotNull(obj, "Object can not be null.");
+		if (obj == null)
+			return null;
+		
 		return getDateFormat(pattern).format(obj);
 	}
 	
@@ -343,7 +351,7 @@ public class DateUtils {
 	public static long dateToUnixTimestamp(Date date) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
-		return calendar.getTimeInMillis()/1000;
+		return calendar.getTimeInMillis() / 1000;
 	}
 	
 	/**

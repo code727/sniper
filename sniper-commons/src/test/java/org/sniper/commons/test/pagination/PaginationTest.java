@@ -30,12 +30,12 @@ import org.sniper.test.junit.BaseTestCase;
  */
 public class PaginationTest extends BaseTestCase {
 	
-//	@Test
+	@Test
 	public void testSimplePager() {
 		SimplePager pager = new SimplePager();
 		/* 进行常规分页时，传入currentPage和pageSize，再根据begin和pageSize来分页 */
-//		pager.setCurrentPage(2);
-//		pager.setPageSize(10);
+		pager.setCurrentPage(2);
+		pager.setPageSize(16);
 		System.out.println("begin:" + pager.getBegin());
 		System.out.println("end:" + pager.getEnd());
 		System.out.println("pageSize" + pager.getPageSize());
@@ -55,7 +55,7 @@ public class PaginationTest extends BaseTestCase {
 		
 	}
 	
-	@Test
+//	@Test
 	public void testJQueryEasyUIPager() {
 		JQueryEasyUIPager pager = new JQueryEasyUIPager();
 		/* 进行JQueryEasyUI分页时，传入page(当前页数)和rows(每页条数)，再根据begin和pageSize来分页 */

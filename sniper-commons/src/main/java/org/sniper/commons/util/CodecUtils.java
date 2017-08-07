@@ -30,9 +30,6 @@ import java.nio.charset.Charset;
  */
 public class CodecUtils {
 	
-	/** 系统默认的编码集 */
-	public static final String DEFAULT_ENCODING = Charset.defaultCharset().name();
-	
 	/** UTF-8编码集 */
 	public static final String UTF8_ENCODING = "UTF-8";
 	
@@ -47,6 +44,12 @@ public class CodecUtils {
 	
 	/** ISO-8859-1编码集 */
 	public static final String ISO_8859_1 = "ISO-8859-1";
+	
+	/** 默认编码集 */
+	public static final String DEFAULT_ENCODING = UTF8_ENCODING;
+	
+	/** JVM默认编码集 */
+	public static final String JVM_DEFAULT_ENCODING = Charset.defaultCharset().name();
 	
 	/** 16进制码 */
 	public static char[] HEX_CODES = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };  

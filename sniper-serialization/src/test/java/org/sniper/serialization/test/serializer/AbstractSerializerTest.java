@@ -47,7 +47,7 @@ public abstract class AbstractSerializerTest extends BaseTestCase implements Ser
 		
 		user = new User();
 		user.setId(9527L);
-		user.setName("dubin");
+		user.setName("杜斌测试");
 		user.setAge(33);
 		user.setGender((byte) 1);
 		user.setMarried(true);
