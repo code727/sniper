@@ -116,5 +116,260 @@ public interface Parameter<K, V> {
 	 * @return
 	 */
 	public boolean isNotEmpty();
+	
+	/**
+	 * 获取字符串参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public String getString(K name);
+	
+	/**
+	 * 获取字符串参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public String getString(K name, String defaultValue);
+	
+	/**
+	 * 获取包装类布尔参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public Boolean getBoolean(K name);
+	
+	/**
+	 * 获取包装类布尔参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public Boolean getBoolean(K name, Boolean defaultValue);
+	
+	/**
+	 * 获取布尔参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public boolean getBooleanValue(K name);
+	
+	/**
+	 * 获取包装类布尔参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public boolean getBooleanValue(K name, boolean defaultValue);
+	
+	/**
+	 * 获取包装类比特参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public Byte getByte(K name);
+	
+	/**
+	 * 获取包装类比特参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public Byte getByte(K name, Byte defaultValue);
+	
+	/**
+	 * 获取比特参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public byte getByteValue(K name);
+	
+	/**
+	 * 获取比特参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public byte getByteValue(K name, byte defaultValue);
+	
+	/**
+	 * 获取包装类短整型参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public Short getShort(K name);
+	
+	/**
+	 * 获取包装类短整型参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public Short getShort(K name, Short defaultValue);
+	
+	/**
+	 * 获取短整型参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public short getShortValue(K name);
+	
+	/**
+	 * 获取短整型参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public short getShortValue(K name, short defaultValue);
+	
+	/**
+	 * 获取包装类整型参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public Integer getInteger(K name);
+	
+	/**
+	 * 获取包装类整型参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public Integer getInteger(K name, Integer defaultValue);
+	
+	/**
+	 * 获取整型参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public int getIntegerValue(K name);
+	
+	/**
+	 * 获取整型参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public int getIntegerValue(K name, int defaultValue);
+	
+	/**
+	 * 获取包装类长整型参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public Long getLong(K name);
+	
+	/**
+	 * 获取包装类长整型参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public Long getLong(K name, Long defaultValue);
+	
+	/**
+	 * 获取长整型参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public long getLongValue(K name);
+	
+	/**
+	 * 获取长整型参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public long getLongValue(K name, long defaultValue);
+	
+	/**
+	 * 获取包装类单精度浮点参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public Float getFloat(K name);
+	
+	/**
+	 * 获取包装类单精度浮点参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public Float getFloat(K name, Float defaultValue);
+	
+	/**
+	 * 获取单精度浮点参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public float getFloatValue(K name);
+	
+	/**
+	 * 获取单精度浮点参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public float getFloatValue(K name, float defaultValue);
+	
+	/**
+	 * 获取包装类双精度浮点参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public Double getDouble(K name);
+	
+	/**
+	 * 获取包装类双精度浮点参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public Double getDouble(K name, Double defaultValue);
+	
+	/**
+	 * 获取双精度浮点参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public double getDoubleValue(K name);
+	
+	/**
+	 * 获取双精度浮点参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public double getDoubleValue(K name, double defaultValue);
 
 }
