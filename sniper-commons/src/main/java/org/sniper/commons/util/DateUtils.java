@@ -173,7 +173,7 @@ public class DateUtils {
 	 */
 	public static Date stringToDate(String dateString, String pattern) {
 //		AssertUtils.assertTrue(StringUtils.isNotBlank(dateString), "Date string can not be null or blank.");
-		if (StringUtils.isNotBlank(dateString))
+		if (StringUtils.isBlank(dateString))
 			return null;
 				
 		return getDateFormat(pattern).parse(dateString, new ParsePosition(0));
