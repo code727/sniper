@@ -841,20 +841,20 @@ public class CollectionUtils {
 	 */
 	public static <T> T get(List<T> list, int index, T defaultValue) {
 		int max = size(list) - 1;
-		if (max == -1 || index < 0 || index > max)
+		if (index < 0 || index > max)
 			return defaultValue;
 		
 		return list.get(index);
 	}
-	
+		
 	/**
 	 * 获取列表中的第一个元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param list
 	 * @return
 	 */
-	public static <T> T first(List<T> list) {
-		return first(list, null);
+	public static <T> T getFirst(List<T> list) {
+		return getFirst(list, null);
 	}
 	
 	/**
@@ -864,7 +864,7 @@ public class CollectionUtils {
 	 * @param defaultValue
 	 * @return
 	 */
-	public static <T> T first(List<T> list, T defaultValue) {
+	public static <T> T getFirst(List<T> list, T defaultValue) {
 		if (list instanceof LinkedList)
 			return list.size() > 0 ? ((LinkedList<T>) list).getFirst() : defaultValue;
 		
@@ -877,8 +877,8 @@ public class CollectionUtils {
 	 * @param list
 	 * @return
 	 */
-	public static <T> T last(List<T> list) {
-		return last(list, null);
+	public static <T> T getLast(List<T> list) {
+		return getLast(list, null);
 	}
 	
 	/**
@@ -888,36 +888,50 @@ public class CollectionUtils {
 	 * @param defaultValue
 	 * @return
 	 */
-	public static <T> T last(List<T> list, T defaultValue) {
+	public static <T> T getLast(List<T> list, T defaultValue) {
 		if (list instanceof LinkedList)
 			return list.size() > 0 ? ((LinkedList<T>) list).getLast() : defaultValue;
 		
-		return get(list, size(list) - 1, null);
+		return get(list, size(list) - 1, defaultValue);
 	}
 	
 	/**
-	 * 按指定的分隔符将列表中各元素连接成字符串
+	 * 按默认的逗号分隔符将集合中各元素连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param list
+	 * @param collection
+	 * @return
+	 */
+	public static <T> String join(Collection<T> collection) {
+		return join(collection, ",");
+	}
+	
+	/**
+	 * 按指定的分隔符将集合中各元素连接成字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
 	 * @param separator
 	 * @return
 	 */
-	public static <T> String join(List<T> list, String separator) {
-		if (isEmpty(list))
+	public static <T> String join(Collection<T> collection, String separator) {
+		if (isEmpty(collection))
 			return StringUtils.EMPTY_STRING;
 		
+		Iterator<T> iterator = collection.iterator();
 		StringBuilder builder = new StringBuilder();
+		
 		if (StringUtils.isNotEmpty(separator)) {
-			
-			int max = list.size() - 1;
-			for (int i = 0; i < max; i++)
-				builder.append(list.get(i)).append(separator);
-			
-			builder.append(list.get(max));
+			while (iterator.hasNext()) {
+				builder.append(iterator.next());
+				
+				if (iterator.hasNext())
+					builder.append(separator);
+			}
 		} else {
-			for (T e : list) 
-				builder.append(e);
+			while (iterator.hasNext()) {
+				builder.append(iterator.next());
+			}
 		}
+		
 		return builder.toString();
 	}
 	

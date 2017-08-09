@@ -72,7 +72,7 @@ public class CompositeCodec extends AbstractCodec {
 	 */
 	private String encodeByMemberOrder(byte[] bytes) {
 		/* 第一个编解码器对字节数组编码后，再将结果从列表的第2个成员开始依次再进行编码 */
-		String encodedText = CollectionUtils.first(this.members).encode(bytes);
+		String encodedText = CollectionUtils.getFirst(this.members).encode(bytes);
 		return encodeByMemberOrder(encodedText, null, 1);
 	}
 	
@@ -114,7 +114,7 @@ public class CompositeCodec extends AbstractCodec {
 	 */
 	private byte[] decodeToBytesByMemberInvertedOrder(String encodedText) {
 		/* 最后一个编解码器对文本解码后，再对字节数组结果从列表的倒数第2个成员开始逆序进行解码 */
-		byte[] textBytes = CollectionUtils.last(this.members).decodeToBytes(encodedText);
+		byte[] textBytes = CollectionUtils.getLast(this.members).decodeToBytes(encodedText);
 		int size = CollectionUtils.size(this.members);
 		if (size > 1) {
 			for (int i = size - 2; i > -1; i--) 
