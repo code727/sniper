@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import org.sniper.http.HttpAccessor;
-import org.sniper.http.HttpForm;
+import org.sniper.http.form.HttpForm;
 
 /**
  * Spring Rest发送器实现类

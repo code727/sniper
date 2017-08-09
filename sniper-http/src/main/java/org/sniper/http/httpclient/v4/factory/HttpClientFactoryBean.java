@@ -19,36 +19,24 @@
 package org.sniper.http.httpclient.v4.factory;
 
 import org.apache.http.client.HttpClient;
-import org.apache.http.conn.HttpClientConnectionManager;
-import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 
 /**
- * 默认HttpClient4.x CloseableHttpClient工厂对象实现类
+ * HttpClient4.x工厂对象实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CloseableHttpClientFactoryBean implements HttpClientFactory {
+public class HttpClientFactoryBean implements HttpClientFactory {
 	
 	private HttpClientBuilder builder;
 	
-	private HttpClientConnectionManager connectionManager;
-		
-	private LayeredConnectionSocketFactory sslSocketFactory;
-	
-	public CloseableHttpClientFactoryBean() {
+	public HttpClientFactoryBean() {
 		this.builder = HttpClients.custom();
 	}
 	
-	public void setConnectionManager(HttpClientConnectionManager connectionManager) {
-		this.connectionManager = connectionManager;
-		this.builder.setConnectionManager(this.connectionManager);
-	}
-
-	public void setSslSocketFactory(LayeredConnectionSocketFactory sslSocketFactory) {
-		this.sslSocketFactory = sslSocketFactory;
-		this.builder.setSSLSocketFactory(this.sslSocketFactory);
+	public HttpClientFactoryBean(HttpClientBuilder builder) {
+		this.builder = (builder != null ? builder : HttpClients.custom());
 	}
 
 	@Override

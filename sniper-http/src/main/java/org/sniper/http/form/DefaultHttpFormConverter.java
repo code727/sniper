@@ -16,15 +16,12 @@
  * Create Date : 2015-7-8
  */
 
-package org.sniper.http.converter;
+package org.sniper.http.form;
 
 import java.util.Map;
-import java.util.Set;
+import java.util.Map.Entry;
 
 import org.sniper.commons.util.MapUtils;
-import org.sniper.http.HttpForm;
-import org.sniper.http.handler.DefaultFormHandler;
-import org.sniper.http.handler.FormHandler;
 
 /**
  * 默认HTTP表单转换器实现类
@@ -34,26 +31,28 @@ import org.sniper.http.handler.FormHandler;
 public class DefaultHttpFormConverter implements HttpFormConverter {
 	
 	/** 表单处理器 */
-	private FormHandler formHandler = new DefaultFormHandler();
-
-	public void setFormHandler(FormHandler formHandler) {
-		if (this.formHandler != null)
-			this.formHandler = formHandler;
+	private FormHandler formHandler;
+	
+	public DefaultHttpFormConverter() {
+		this(null);
+	}
+	
+	public DefaultHttpFormConverter(FormHandler formHandler) {
+		this.formHandler = (formHandler != null ? formHandler : new DefaultFormHandler());
 	}
 
 	@Override
-	public Map<String, String> convertUrlMap(Map<String, HttpForm> formMap) {
-		if (formMap == null)
+	public Map<String, String> convert(Map<String, HttpForm> formMap) {
+		if (MapUtils.isEmpty(formMap))
 			return null;
 		
 		Map<String, String> map = MapUtils.newHashMap();
-		StringBuffer url = new StringBuffer();
-		Set<String> names = formMap.keySet();
-		for (String name : names) {
-			url.setLength(0); 
-			formHandler.append(url, formMap.get(name));
-			map.put(name, url.toString());
+		String name;
+		for (Entry<String, HttpForm> entry : formMap.entrySet()) {
+			name = entry.getKey();
+			map.put(name, formHandler.handle(name, entry.getValue()));
 		}
+		
 		return map;
 	}
 		

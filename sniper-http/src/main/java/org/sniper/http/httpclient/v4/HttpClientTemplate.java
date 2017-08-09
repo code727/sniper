@@ -29,9 +29,9 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.sniper.commons.util.NetUtils;
 import org.sniper.http.HttpAccessor;
-import org.sniper.http.HttpForm;
 import org.sniper.http.HttpRequestHeader;
-import org.sniper.http.httpclient.v4.factory.CloseableHttpClientFactoryBean;
+import org.sniper.http.form.HttpForm;
+import org.sniper.http.httpclient.v4.factory.HttpClientFactoryBean;
 import org.sniper.http.httpclient.v4.factory.HttpClientFactory;
 import org.sniper.http.httpclient.v4.handler.request.DefualtRequestHandler;
 import org.sniper.http.httpclient.v4.handler.request.RequestHandler;
@@ -75,7 +75,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		super.init();
 		
 		if (this.httpClientFactory == null) 
-			this.httpClientFactory = new CloseableHttpClientFactoryBean();
+			this.httpClientFactory = new HttpClientFactoryBean();
 		
 		if (this.requestConfig == null)
 			this.requestConfig = RequestConfig.custom().build();

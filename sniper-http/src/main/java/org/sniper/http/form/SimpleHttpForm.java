@@ -16,12 +16,13 @@
  * Create Date : 2015-7-7
  */
 
-package org.sniper.http;
+package org.sniper.http.form;
 
 import org.sniper.beans.DefaultTypedBean;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.StringUtils;
+import org.sniper.http.HttpRequestHeader;
 import org.sniper.http.enums.MimeTypeEnum;
 import org.sniper.http.handler.response.ResponseHandler;
 

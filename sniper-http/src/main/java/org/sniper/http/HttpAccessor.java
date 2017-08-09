@@ -29,11 +29,11 @@ import org.sniper.commons.util.ReflectionUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.http.exception.HttpFormNotFoundException;
 import org.sniper.http.exception.NoSuchHttpMethodException;
-import org.sniper.http.formatter.AdaptiveURLFormatter;
+import org.sniper.http.form.HttpForm;
+import org.sniper.http.form.HttpFormRegister;
 import org.sniper.http.handler.response.ResponseHandler;
 import org.sniper.http.handler.response.typed.TypedNestedResponseHandler;
 import org.sniper.http.handler.response.typed.TypedResponseHandler;
-import org.sniper.http.register.HttpFormRegister;
 import org.sniper.spring.beans.CheckableInitializingBeanAdapter;
 import org.sniper.templet.message.formatter.MessageFormatter;
 

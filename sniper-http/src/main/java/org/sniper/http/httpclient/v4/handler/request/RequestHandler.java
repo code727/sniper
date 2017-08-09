@@ -19,7 +19,7 @@
 package org.sniper.http.httpclient.v4.handler.request;
 
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
-import org.sniper.http.HttpForm;
+import org.sniper.http.form.HttpForm;
 
 /**
  * 请求处理器

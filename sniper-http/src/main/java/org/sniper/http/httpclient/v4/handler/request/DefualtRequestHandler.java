@@ -36,8 +36,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.NetUtils;
-import org.sniper.http.HttpForm;
 import org.sniper.http.enums.MimeTypeEnum;
+import org.sniper.http.form.HttpForm;
 import org.sniper.http.rest.SpringRestSender;
 
 /**

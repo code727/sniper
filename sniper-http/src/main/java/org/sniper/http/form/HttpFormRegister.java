@@ -16,28 +16,17 @@
  * Create Date : 2015-7-7
  */
 
-package org.sniper.http.register;
+package org.sniper.http.form;
 
-import java.util.List;
 import java.util.Map;
 
-import org.sniper.http.HttpForm;
-import org.sniper.http.converter.HttpFormConverter;
-
 /**
- * Http表单注册器接口
+ * HTTP表单注册器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface HttpFormRegister {
-	
-	/**
-	 * 设置表单转换器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param converter
-	 */
-	public void setConverter(HttpFormConverter converter);
-	
+		
 	/**
 	 * 设置表单映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -67,19 +56,5 @@ public interface HttpFormRegister {
 	 * @return
 	 */
 	public String findURL(String name);
-	
-	/**
-	 * 获取所有的表单对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public List<HttpForm> getForms();
-	
-	/**
-	 * 获取所有的URL字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public List<String> getURL();
-	
+		
 }

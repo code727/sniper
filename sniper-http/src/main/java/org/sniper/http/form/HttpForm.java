@@ -16,11 +16,12 @@
  * Create Date : 2015-7-5
  */
 
-package org.sniper.http;
+package org.sniper.http.form;
 
 
 import org.sniper.beans.Typed;
 import org.sniper.codec.Codecable;
+import org.sniper.http.HttpRequestHeader;
 import org.sniper.http.handler.response.ResponseHandler;
 
 /**

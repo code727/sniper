@@ -16,15 +16,9 @@
  * Create Date : 2015-7-7
  */
 
-package org.sniper.http.register;
+package org.sniper.http.form;
 
-import java.util.List;
 import java.util.Map;
-
-import org.sniper.commons.util.CollectionUtils;
-import org.sniper.http.HttpForm;
-import org.sniper.http.converter.DefaultHttpFormConverter;
-import org.sniper.http.converter.HttpFormConverter;
 
 /**
  * 默认的HTTP表单注册器实现类
@@ -40,18 +34,20 @@ public class DefaultHttpFormRegister implements HttpFormRegister {
 	private Map<String, String> formUrlMap;
 	
 	/** 表单转换器 */
-	private HttpFormConverter converter = new DefaultHttpFormConverter();
+	private final HttpFormConverter converter;
 	
-	@Override
-	public void setConverter(HttpFormConverter converter) {
-		if (converter != null)
-			this.converter = converter;
+	public DefaultHttpFormRegister() {
+		this(null);
+	}
+	
+	public DefaultHttpFormRegister(HttpFormConverter converter) {
+		this.converter = (converter != null ? converter : new DefaultHttpFormConverter());
 	}
 
 	@Override
 	public void setFormMap(Map<String, HttpForm> formMap) {
 		this.formMap = formMap;
-		this.formUrlMap = this.converter.convertUrlMap(formMap);
+		this.formUrlMap = this.converter.convert(formMap);
 	}
 	
 	@Override
@@ -69,16 +65,4 @@ public class DefaultHttpFormRegister implements HttpFormRegister {
 		return this.formUrlMap != null ? this.formUrlMap.get(name) : null;
 	}
 	
-	@Override
-	public List<HttpForm> getForms() {
-		return this.formMap != null ? 
-				CollectionUtils.newArrayList(this.formMap.values()) : null;
-	}
-
-	@Override
-	public List<String> getURL() {
-		return this.formUrlMap != null ? 
-				CollectionUtils.newArrayList(this.formUrlMap.values()) : null;
-	}
-
 }

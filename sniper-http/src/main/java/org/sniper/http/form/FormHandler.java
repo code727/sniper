@@ -13,28 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-7-7
+ * Create Date : 2015-7-8
  */
 
-package org.sniper.http.converter;
-
-import java.util.Map;
-
-import org.sniper.http.HttpForm;
+package org.sniper.http.form;
 
 /**
- * HTTP表单转换器接口
+ * 表单处理器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface HttpFormConverter {
+public interface FormHandler {
 	
 	/**
-	 * 将表单映射集转换成URL字符串映射集
+	 * 处理表单
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param formMap
-	 * @return
+	 * @param url
+	 * @param form
 	 */
-	public Map<String, String> convertUrlMap(Map<String, HttpForm> formMap);
+	public String handle(String name, HttpForm form);
 	
 }

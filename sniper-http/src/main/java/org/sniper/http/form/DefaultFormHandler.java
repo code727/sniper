@@ -16,10 +16,10 @@
  * Create Date : 2015-7-8
  */
 
-package org.sniper.http.handler;
+package org.sniper.http.form;
 
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.http.HttpForm;
 
 /**
  * 默认表单处理器实现类
@@ -29,18 +29,26 @@ import org.sniper.http.HttpForm;
 public class DefaultFormHandler implements FormHandler {
 	
 	@Override
-	public void append(StringBuffer url, HttpForm form) {
+	public String handle(String name, HttpForm form) {
+		StringBuilder url = new StringBuilder();
 		appendAddress(url, form);
 		appendAction(url, form);
+		check(name, url);
+		return url.toString();
 	}
-	
+		
+	private void check(String name, StringBuilder url) {
+		AssertUtils.assertTrue(url.length() > 0, "Handle form [" + name
+				+ "] error, must ensure that at least one of the parameters 'address' and 'action' can not be empty ");
+	}
+
 	/**
 	 * 拼接表单中的请求地址
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param url
 	 * @param form
 	 */
-	protected void appendAddress(StringBuffer url, HttpForm form) {
+	private void appendAddress(StringBuilder url, HttpForm form) {
 		url.append(form.getAddress().trim());
 	}
 	
@@ -50,15 +58,17 @@ public class DefaultFormHandler implements FormHandler {
 	 * @param url
 	 * @param form
 	 */
-	protected void appendAction(StringBuffer url, HttpForm form) {
+	private void appendAction(StringBuilder url, HttpForm form) {
 		String action = form.getAction();
+		
 		/* 添加Action请求路径 */
 		if (StringUtils.isNotBlank(action)) {
 			action = action.trim();
 			if (!action.startsWith("/") && !url.toString().endsWith("/"))
 				url.append("/");
+			
 			url.append(action);
 		}
 	}
-	
+
 }

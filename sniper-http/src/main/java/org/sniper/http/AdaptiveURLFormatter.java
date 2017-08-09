@@ -16,7 +16,7 @@
  * Create Date : 2015-7-10
  */
 
-package org.sniper.http.formatter;
+package org.sniper.http;
 
 import java.util.Map;
 import java.util.Set;
