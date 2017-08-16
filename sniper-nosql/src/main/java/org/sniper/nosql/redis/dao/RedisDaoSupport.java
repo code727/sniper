@@ -146,7 +146,10 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	 * @return
 	 */
 	protected long getExpireSecond(int dbIndx) {
-		RedisRepository repository = this.repositoryManager.getRepository(dbIndx);
+		if (repositoryManager == null)
+			return 0L;
+		
+		RedisRepository repository = repositoryManager.getRepository(dbIndx);
 		return repository != null ? getExpireSecond(repository) : 0L;
 	}
 	
