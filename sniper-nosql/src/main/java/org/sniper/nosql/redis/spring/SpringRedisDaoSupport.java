@@ -54,8 +54,6 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	
 	@Override
 	protected void checkProperties() {
-		super.checkProperties();
-		
 		if (this.redisTemplate == null)
 			throw new IllegalArgumentException("Property 'RedisTemplate' must not be null");
 	}
