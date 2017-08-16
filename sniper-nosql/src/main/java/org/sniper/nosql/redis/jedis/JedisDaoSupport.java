@@ -41,8 +41,6 @@ public abstract class JedisDaoSupport extends RedisDaoSupport {
 	
 	@Override
 	protected void checkProperties() {
-		super.checkProperties();
-		
 		if (this.jedisPool == null)
 			throw new IllegalArgumentException("Property 'jedisPool' is required");
 	}

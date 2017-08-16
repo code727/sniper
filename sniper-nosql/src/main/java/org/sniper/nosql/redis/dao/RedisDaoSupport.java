@@ -110,13 +110,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	public void setGlobalHashValueSerializer(Serializer globalHashValueSerializer) {
 		this.globalHashValueSerializer = globalHashValueSerializer;
 	}
-	
-	@Override
-	protected void checkProperties() {
-		if (this.repositoryManager == null)
-			throw new IllegalArgumentException("Property 'repositoryManager' is required");
-	}
-	
+		
 	@Override
 	protected void init() throws Exception {
 		initializeDefaultDbIndex();
