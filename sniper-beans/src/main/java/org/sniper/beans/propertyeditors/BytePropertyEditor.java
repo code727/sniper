@@ -43,7 +43,7 @@ public class BytePropertyEditor extends AbstractNumberPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return new Byte(text);
+		return Byte.valueOf(text);
 	}
 	
 }

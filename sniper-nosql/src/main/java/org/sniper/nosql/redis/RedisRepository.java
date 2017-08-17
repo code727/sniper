@@ -18,6 +18,8 @@
 
 package org.sniper.nosql.redis;
 
+import java.util.concurrent.TimeUnit;
+
 import org.sniper.serialization.Serializer;
 
 /**
@@ -33,8 +35,8 @@ public class RedisRepository {
 	/** 针对于当前库所有数据的过期时间 */
 	private long expireTime;
 	
-	/** 过期时间单位 */
-	private String timeUnit;
+	/** 过期时间单位，默认为秒 */
+	private TimeUnit timeUnit = TimeUnit.SECONDS;
 	
 	/** 键序列化器 */
 	private Serializer keySerializer;
@@ -64,11 +66,11 @@ public class RedisRepository {
 		this.expireTime = expireTime;
 	}
 
-	public String getTimeUnit() {
+	public TimeUnit getTimeUnit() {
 		return timeUnit;
 	}
 
-	public void setTimeUnit(String timeUnit) {
+	public void setTimeUnit(TimeUnit timeUnit) {
 		this.timeUnit = timeUnit;
 	}
 

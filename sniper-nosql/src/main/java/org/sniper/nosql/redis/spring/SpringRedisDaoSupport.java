@@ -22,18 +22,17 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Set;
 
+import org.sniper.commons.util.CollectionUtils;
+import org.sniper.commons.util.DateUtils;
+import org.sniper.commons.util.ReflectionUtils;
+import org.sniper.nosql.redis.RedisRepository;
+import org.sniper.nosql.redis.dao.RedisDaoSupport;
+import org.sniper.nosql.redis.serializer.SpringRedisSerializerProxy;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import org.sniper.commons.util.CollectionUtils;
-import org.sniper.commons.util.DateUtils;
-import org.sniper.commons.util.ReflectionUtils;
-import org.sniper.commons.util.StringUtils;
-import org.sniper.nosql.redis.RedisRepository;
-import org.sniper.nosql.redis.dao.RedisDaoSupport;
-import org.sniper.nosql.redis.serializer.SpringRedisSerializerProxy;
 
 /**
  * Redis数据访问接口支持类
@@ -107,9 +106,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 */
 	protected void setExpireTime(RedisConnection connection, RedisRepository repository, byte[] key) {
 		if (repository != null) {
-			String timeUnit = repository.getTimeUnit();
-			long expireSeconds = DateUtils.getSecond(repository.getExpireTime(), 
-					StringUtils.safeString(timeUnit).trim().toLowerCase());
+			long expireSeconds = DateUtils.toSeconds(repository.getExpireTime(), repository.getTimeUnit());
 			if (expireSeconds > 0) 
 				connection.expire(key, expireSeconds);
 		}
@@ -139,12 +136,11 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 */
 	protected void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keySet) {
 		if (repository != null) {
-			String timeUnit = repository.getTimeUnit();
-			long expireTime = DateUtils.getSecond(repository.getExpireTime(), 
-					StringUtils.safeString(timeUnit).trim().toLowerCase());
-			if (expireTime > 0) {
-				for (byte[] keyByte : keySet) 
-					connection.expire(keyByte, expireTime);
+			long expireSeconds = DateUtils.toSeconds(repository.getExpireTime(), repository.getTimeUnit());
+			if (expireSeconds > 0) {
+				for (byte[] keyByte : keySet) {
+					connection.expire(keyByte, expireSeconds);
+				}
 			}
 		}
 	}

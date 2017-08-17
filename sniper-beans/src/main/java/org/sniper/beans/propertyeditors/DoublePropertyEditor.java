@@ -43,7 +43,7 @@ public class DoublePropertyEditor extends AbstractNumberPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return new Double(text);
+		return Double.valueOf(text);
 	}
 	
 }

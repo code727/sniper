@@ -914,7 +914,7 @@ public class CollectionUtils {
 	 */
 	public static <T> String join(Collection<T> collection, String separator) {
 		if (isEmpty(collection))
-			return StringUtils.EMPTY_STRING;
+			return null;
 		
 		Iterator<T> iterator = collection.iterator();
 		StringBuilder builder = new StringBuilder();

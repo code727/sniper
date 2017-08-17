@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.sniper.commons.enums.astrology.Horoscope;
 
@@ -66,81 +67,16 @@ public class DateUtils {
 	
 	/** 星期日字符串 */
 	public static final String SUNDAY = "Sunday";
-	
-	/** 模式与日期时间格式关系映射集线程局部变量 */
-//	private static final ThreadLocal<Map<String, SimpleDateFormat>> dateFormates = new ThreadLocal<Map<String,SimpleDateFormat>>();
-	
+		
 	/** 全局模式与日期时间格式关系映射集 */
 	private static final Map<String, SimpleDateFormat> dateFormates = MapUtils.newConcurrentHashMap();
-	
-	/** 计量单位与毫秒时间的映射关系 */
-	private static final Map<String,Long> UM_MS = MapUtils.newHashMap();
-	
-	static {
-		
-		UM_MS.put("ms", 1L);
-		UM_MS.put("msec", 1L);
-		
-		/* 每秒的毫秒数 */
-		UM_MS.put("s", 1000L);
-		UM_MS.put("sec", 1000L);
-		
-		/* 每分钟的毫秒数 */
-		UM_MS.put("min", 60000L);
-		
-		/* 每小时的毫秒数 */
-		UM_MS.put("h", 3600000L);
-		UM_MS.put("hr", 3600000L);
-		
-		/* 每天的毫秒数 */
-		UM_MS.put("d", 86400000L);
-		UM_MS.put("day", 86400000L);
-		
-		/* 每周的毫秒数 */
-		UM_MS.put("w", 604800000L);
-		
-		/* 每个小月的毫秒数 */
-		UM_MS.put("m", 2592000000L);
-		UM_MS.put("lm", 2592000000L);
-		/* 每个大月的毫秒数 */
-		UM_MS.put("bm", 2678400000L);
-		
-		/* 二月的毫秒数 */
-		UM_MS.put("feb", 2419200000L);
-		/* 闰年二月的毫秒数 */
-		UM_MS.put("lyFeb", 2505600000L);
-		
-		/* 一个平年的毫秒数 */
-		UM_MS.put("y", 31536000000L);
-		/* 一个闰年的毫秒数 */
-		UM_MS.put("ly", 31622400000L);
-		
-	}
-	
+			
 	/**
 	 * 根据指定的模式获取日期格式对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @return
 	 */
-//	public static SimpleDateFormat getDateFormat(String pattern) {
-//		if (StringUtils.isBlank(pattern))
-//			pattern = DEFAULT_DATETIME_FORMAT;
-//		
-//		Map<String, SimpleDateFormat> formateMap = dateFormates.get();
-//		if (formateMap == null)
-//			formateMap = MapUtils.newConcurrentHashMap();
-//		
-//		SimpleDateFormat dateFormat = formateMap.get(pattern);
-//		if (dateFormat == null) {
-//			dateFormat = new SimpleDateFormat(pattern);
-//			formateMap.put(pattern, dateFormat);
-//			dateFormates.set(formateMap);
-//		}
-//		
-//		return dateFormat;
-//	}
-	
 	public static SimpleDateFormat getDateFormat(String pattern) {
 		if (StringUtils.isBlank(pattern))
 			pattern = DEFAULT_DATETIME_FORMAT;
@@ -292,7 +228,6 @@ public class DateUtils {
 	 * @return
 	 */
 	public static String objectToString(Object obj, String pattern) {
-//		AssertUtils.assertNotNull(obj, "Object can not be null.");
 		if (obj == null)
 			return null;
 		
@@ -399,129 +334,6 @@ public class DateUtils {
 	}
 	
 	/**
-	 * 计算两日期间隔的毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
-	 * @param when
-	 * @param then
-	 * @return 
-	 */
-	public static long getIntervalMillis(Date when, Date then) {
-		AssertUtils.assertTrue(when != null && then != null, "Date must not be null.");
-		return Math.abs(then.getTime() - when.getTime());
-	}
-	
-	/**
-	 * 计算两日期间隔的秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param when
-	 * @param then
-	 * @return
-	 */
-	public static long getIntervalSecond(Date when, Date then) {
-		return getIntervalMillis(when, then) / UM_MS.get("sec");
-	}
-	
-	/**
-	 * 计算两日期间隔的分钟数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param when
-	 * @param then
-	 * @return
-	 */
-	public static long getIntervalMinute(Date when, Date then) {
-		return getIntervalMillis(when, then) / UM_MS.get("min");
-	}
-	
-	/**
-	 * 计算两日期间隔的小时数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param when
-	 * @param then
-	 * @return
-	 */
-	public static long getIntervalHour(Date when, Date then) {
-		return getIntervalMillis(when, then) / UM_MS.get("hr");
-	}
-	
-	/**
-	 * 计算两日期间隔的天数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param when
-	 * @param then
-	 * @return
-	 */
-	public static long getIntervalDay(Date when, Date then) {
-		return getIntervalMillis(when, then) / UM_MS.get("day");
-	}
-	
-	/**
-	 * 计算两日期间隔的周数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param when
-	 * @param then
-	 * @return
-	 */
-	public static long getIntervalWeek(Date when, Date then) {
-		return getIntervalMillis(when, then) / UM_MS.get("w");
-	}
-	
-	/**
-	 * 计算两日期间隔的月数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param when
-	 * @param then
-	 * @return
-	 */
-	@Deprecated
-	public static long getIntervalMonth(Date when, Date then) {
-		return getIntervalYear(when, then) * 12;
-	}
-	
-	/**
-	 * 计算两日期间隔的年数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param when
-	 * @param then
-	 * @return
-	 */
-	public static int getIntervalYear(Date when, Date then) {
-		AssertUtils.assertTrue(when != null && then != null, "Date must not be null.");
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(when);
-		
-		int whenYear = calendar.get(Calendar.YEAR);
-		int whenMonth = calendar.get(Calendar.MONTH) + 1;
-		int whenDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-		
-		calendar.setTime(then);
-		int thenYear = calendar.get(Calendar.YEAR);
-		int thenMonth = calendar.get(Calendar.MONTH) + 1;
-		int thenDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-		
-		int year = 0;
-		if (when.before(then)) {
-			year = thenYear - whenYear;
-			if (thenMonth <= whenMonth) {
-				if (whenMonth == thenMonth) {
-					if (thenDayOfMonth < whenDayOfMonth) 
-						year--;
-				} else 
-					year--;
-			}
-		} else {
-			year = whenYear - thenYear;
-			if (whenMonth <= thenMonth) {
-				if (whenMonth == thenMonth) {
-					if (whenDayOfMonth < thenDayOfMonth) 
-						year--;
-				} else 
-					year--;
-			}
-		}
-		return year;
-	}
-	
-	/**
 	 * 根据生日计算出距今的年龄
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param birthday
@@ -598,39 +410,6 @@ public class DateUtils {
 		}
 		
 		return horoscope;
-	}
-	
-	/**
-	 * 获取计量单位对应的毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
-	 * @param um
-	 * @return 
-	 */
-	public static long unitMillis(String um) {
-		Long ms = UM_MS.get(um);
-		return ms != null ? ms : UM_MS.get("ms");
-	}
-	
-	/**
-	 * 将单位时间换算成毫秒
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param time 时间
-	 * @param um 时间的单位
-	 * @return
-	 */
-	public static long getMillis(long time, String um) {
-		return time * unitMillis(um);
-	}
-	
-	/**
-	 * 将单位时间换算成秒
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param time 时间
-	 * @param um 时间的单位
-	 * @return
-	 */
-	public static long getSecond(long time, String um) {
-		return getMillis(time, um) / unitMillis("sec");
 	}
 	
 	/**
@@ -736,7 +515,7 @@ public class DateUtils {
 	 * @param amount 距离指定日期之前(负数)或之后(正数)的毫秒数
 	 * @return
 	 */
-	public static Date addMilliseconds(Date date, int amount) {
+	public static Date addMillis(Date date, int amount) {
 		return add(date, Calendar.MILLISECOND, amount);
 	}
 	
@@ -801,7 +580,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * 计算两日期间经历有多少个闰年
+	 * 计算两日期间有多少个闰年
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param start
 	 * @param end
@@ -810,11 +589,18 @@ public class DateUtils {
 	public static int getLeapYearCount(Date start, Date end) {
 		if (start == null)
 			return isLeapYear(end) ? 1 : 0;
+		
 		if (end == null)
 			return isLeapYear(start) ? 1 : 0;
 		
-		int startYear = Integer.valueOf(dateToString(start, DEFAULT_YEAR_FORMAT));
-		int endYear = Integer.valueOf(dateToString(end, DEFAULT_YEAR_FORMAT));
+		Calendar calendar = Calendar.getInstance();
+		
+		calendar.setTime(start);
+		int startYear = calendar.get(Calendar.YEAR);
+		
+		calendar.setTime(end);
+		int endYear = calendar.get(Calendar.YEAR);
+		
 		if (startYear == endYear)
 			return isLeapYear(startYear) ? 1 : 0;
 		
@@ -822,11 +608,19 @@ public class DateUtils {
 		int offset = Math.abs(startYear - endYear);
 		int year = Math.min(startYear, endYear);
 		do {
-			if (isLeapYear(year++))
+			if (isLeapYear(year++)) 
 				leapYears++;
+			
 			offset--;
 		} while (offset > -1);
+		
 		return leapYears;
+	}
+	
+	public static void main(String[] args) {
+		Date when = stringToDate("2000-03-15 12:31:15");
+		Date then = new Date();
+		System.out.println(getLeapYears(when, then));
 	}
 	
 	/**
@@ -836,29 +630,57 @@ public class DateUtils {
 	 * @param end
 	 * @return
 	 */
-	public static Date[] getLeapYears(Date start, Date end) {
-		if (start == null)
-			return isLeapYear(end) ? new Date[] { end } : new Date[] {};
-		if (end == null)
-			return isLeapYear(start) ? new Date[] { start } : new Date[] {};
-			
-		int startYear = Integer.valueOf(dateToString(start, DEFAULT_YEAR_FORMAT));
-		int endYear = Integer.valueOf(dateToString(end, DEFAULT_YEAR_FORMAT));
-		if (startYear == endYear)
-			return isLeapYear(startYear) ? new Date[] { start } : new Date[] {};
+	public static List<Integer> getLeapYears(Date start, Date end) {
+		List<Integer> leapYears = CollectionUtils.newArrayList();
 		
-		int offset = Math.abs(startYear - endYear);
-		int year = Math.min(startYear, endYear);
-		List<Date> leapYears = CollectionUtils.newArrayList();
-		do {
-			if (isLeapYear(year))
-				leapYears.add(stringToDate(String.valueOf(year), DEFAULT_YEAR_FORMAT));
+		if (start == null) {
+			if (end != null) {
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(end);
+				int endYear = calendar.get(Calendar.YEAR);
+				if (isLeapYear(endYear))
+					leapYears.add(endYear);
+			}
 			
-			year++;
-			offset--;
-		} while (offset > -1);
+			return leapYears;
+		}
 		
-		return leapYears.toArray(new Date[] {});
+		if (end == null) {
+			if (start != null) {
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(start);
+				int startYear = calendar.get(Calendar.YEAR);
+				if (isLeapYear(startYear))
+					leapYears.add(startYear);
+			}
+			
+			return leapYears;
+		}
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(start);
+		int startYear = calendar.get(Calendar.YEAR);
+		
+		calendar.setTime(end);
+		int endYear = calendar.get(Calendar.YEAR);
+						
+		if (startYear == endYear) {
+			if (isLeapYear(startYear))
+				leapYears.add(startYear);
+		} else {
+			
+			int offset = Math.abs(startYear - endYear);
+			int year = Math.min(startYear, endYear);
+			do {
+				if (isLeapYear(year))
+					leapYears.add(year);
+				
+				year++;
+				offset--;
+			} while (offset > -1);
+		}
+		
+		return leapYears;
 	}
 	
 	/**
@@ -1273,5 +1095,172 @@ public class DateUtils {
 		AssertUtils.assertNotNull(date, "Date object can not be null");
 		return isLeapYear(date) ? 366 : 365;
 	}
+	
+	/**
+	 * 将单位时间换算成纳秒
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param time 时间
+	 * @param timeUnit 时间单位
+	 * @return
+	 */
+	public static long toNanos(long time, TimeUnit timeUnit) {
+		return timeUnit != null ? timeUnit.toNanos(time) : time;
+	}
+	
+	/**
+	 * 将单位时间换算成微秒
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param time
+	 * @param timeUnit
+	 * @return
+	 */
+	public static long toMicros(long time, TimeUnit timeUnit) {
+		return timeUnit != null ? timeUnit.toMicros(time) : time;
+	}
+	
+	/**
+	 * 将单位时间换算成毫秒
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param time 时间
+	 * @param timeUnit 时间单位
+	 * @return
+	 */
+	public static long toMillis(long time, TimeUnit timeUnit) {
+		return timeUnit != null ? timeUnit.toMillis(time) : time;
+	}
+	
+	/**
+	 * 将单位时间换算成秒
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param time 时间
+	 * @param timeUnit 时间单位
+	 * @return
+	 */
+	public static long toSeconds(long time, TimeUnit timeUnit) {
+		return timeUnit != null ? timeUnit.toSeconds(time) : time;
+	}
+	
+	/**
+	 * 将单位时间换算成分钟
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param time 时间
+	 * @param timeUnit 时间单位
+	 * @return
+	 */
+	public static long toMinutes(long time, TimeUnit timeUnit) {
+		return timeUnit != null ? timeUnit.toMinutes(time) : time;
+	}
+	
+	/**
+	 * 将单位时间换算成小时
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param time 时间
+	 * @param timeUnit 时间单位
+	 * @return
+	 */
+	public static long toHours(long time, TimeUnit timeUnit) {
+		return timeUnit != null ? timeUnit.toHours(time) : time;
+	}
+	
+	/**
+	 * 将单位时间转换成天
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param time 时间
+	 * @param timeUnit 时间单位
+	 * @return
+	 */
+	public static long toDays(long time, TimeUnit timeUnit) {
+		return timeUnit != null ? timeUnit.toDays(time) : time;
+	}
+	
+	/**
+	 * 计算两日期间隔的纳秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param when
+	 * @param then
+	 * @return
+	 */
+	public static long getIntervalNanos(Date when, Date then) {
+		return TimeUnit.MILLISECONDS.toNanos(getIntervalMillis(when, then));
+	}
+	
+	/**
+	 * 计算两日期间隔的微秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param when
+	 * @param then
+	 * @return
+	 */
+	public static long getIntervalMicros(Date when, Date then) {
+		return TimeUnit.MILLISECONDS.toMicros(getIntervalMillis(when, then));
+	}
+	
+	/**
+	 * 计算两日期间隔的毫秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @param when
+	 * @param then
+	 * @return 
+	 */
+	public static long getIntervalMillis(Date when, Date then) {
+		AssertUtils.assertTrue(when != null && then != null, "Date must not be null.");
+		return Math.abs(then.getTime() - when.getTime());
+	}
+	
+	/**
+	 * 计算两日期间隔的秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param when
+	 * @param then
+	 * @return
+	 */
+	public static long getIntervalSeconds(Date when, Date then) {
+		return TimeUnit.MILLISECONDS.toSeconds(getIntervalMillis(when, then));
+	}
+	
+	/**
+	 * 计算两日期间隔的分钟数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param when
+	 * @param then
+	 * @return
+	 */
+	public static long getIntervalMinutes(Date when, Date then) {
+		return TimeUnit.MILLISECONDS.toMinutes(getIntervalMillis(when, then));
+	}
+	
+	/**
+	 * 计算两日期间隔的小时数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param when
+	 * @param then
+	 * @return
+	 */
+	public static long getIntervalHours(Date when, Date then) {
+		return TimeUnit.MILLISECONDS.toHours(getIntervalMillis(when, then));
+	}
+	
+	/**
+	 * 计算两日期间隔的天数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param when
+	 * @param then
+	 * @return
+	 */
+	public static long getIntervalDays(Date when, Date then) {
+		return TimeUnit.MILLISECONDS.toDays(getIntervalMillis(when, then));
+	}
+	
+	/**
+	 * 计算两日期间隔的周数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param when
+	 * @param then
+	 * @return
+	 */
+	public static long getIntervalWeeks(Date when, Date then) {
+		return getIntervalDays(when, then) / 7;
+	}
 		
+			
 }

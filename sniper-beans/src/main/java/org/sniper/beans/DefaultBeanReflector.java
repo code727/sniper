@@ -219,12 +219,6 @@ public class DefaultBeanReflector implements BeanReflector {
 							"],Please ensure that this method exists when member [" + expression + "] undefined.");
 			}
 			try {
-				
-				// TODO 利用ProperyEditor来重新处理参数值
-//				if (parameterType == Date.class && parameterValue instanceof String) {
-//					parameterValue = DateUtils.stringToDate(parameterValue.toString());
-//				}
-				
 				/*  调用当前成员属性的setter方法或对其直接赋值，否则抛出异常 */
 				ReflectionUtils.invokeMethod(bean, BeanUtils.setterName(expression), new Class<?>[] { parameterType }, new Object[] { parameterValue });
 			} catch (NoSuchMethodException e) {

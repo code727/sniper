@@ -499,7 +499,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K, V> void setEx(int dbIndex, K key, V value) {
-		setEx(dbIndex, key, getExpireSecond(dbIndex), value);	
+		setEx(dbIndex, key, getExpireSeconds(dbIndex), value);	
 	}
 
 	@Override

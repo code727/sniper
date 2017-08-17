@@ -18,21 +18,16 @@
 
 package org.sniper.http.httpclient.v4;
 
-import java.util.Iterator;
-import java.util.Map.Entry;
 
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
 import org.sniper.commons.util.NetUtils;
 import org.sniper.http.HttpAccessor;
-import org.sniper.http.HttpRequestHeader;
 import org.sniper.http.form.HttpForm;
-import org.sniper.http.httpclient.v4.factory.HttpClientFactoryBean;
 import org.sniper.http.httpclient.v4.factory.HttpClientFactory;
+import org.sniper.http.httpclient.v4.factory.HttpClientFactoryBean;
 import org.sniper.http.httpclient.v4.handler.request.DefualtRequestHandler;
 import org.sniper.http.httpclient.v4.handler.request.RequestHandler;
 import org.sniper.http.httpclient.v4.handler.response.DefaultResponseHandler;
@@ -45,9 +40,7 @@ import org.sniper.http.httpclient.v4.handler.response.DefaultResponseHandler;
 public final class HttpClientTemplate extends HttpAccessor {
 		
 	private HttpClientFactory httpClientFactory;
-	
-	private RequestConfig requestConfig;
-	
+		
 	/** 全局的请求处理器 */
 	private RequestHandler requestHandler;
 	
@@ -57,11 +50,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 	public void setHttpClientFactory(HttpClientFactory httpClientFactory) {
 		this.httpClientFactory = httpClientFactory;
 	}
-	
-	public void setRequestConfig(RequestConfig requestConfig) {
-		this.requestConfig = requestConfig;
-	}
-	
+		
 	public void setRequestHandler(RequestHandler requestHandler) {
 		this.requestHandler = requestHandler;
 	}
@@ -76,10 +65,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		
 		if (this.httpClientFactory == null) 
 			this.httpClientFactory = new HttpClientFactoryBean();
-		
-		if (this.requestConfig == null)
-			this.requestConfig = RequestConfig.custom().build();
-		
+				
 		if (this.requestHandler == null)
 			this.requestHandler = new DefualtRequestHandler();
 		
@@ -102,8 +88,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		// 已进行编码后的URL
 		String encodedUrl = urlEncoder.encode(url, form.getEncoding());
 		HttpGet httpGet = new HttpGet(encodedUrl);
-		httpGet.setConfig(requestConfig);
-		addHeader(httpGet, form);
+//		addHeader(httpGet, form);
 		
 		try {
 			logger.debug("Execute {} request [{}] from form [{}]", HttpGet.METHOD_NAME, url, name);
@@ -130,8 +115,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		// 已进行编码后的请求地址，不包含查询字符串部分
 		String encodedAddress = urlEncoder.encode(NetUtils.getAddress(url), form.getEncoding());
 		HttpPost httpPost = new HttpPost(encodedAddress);
-		httpPost.setConfig(requestConfig);
-		addHeader(httpPost, form);
+//		addHeader(httpPost, form);
 		
 		try {
 			requestHandler.handle(httpPost, url, requestBody, form);
@@ -159,8 +143,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		// 已进行编码后的请求地址，不包含查询字符串部分
 		String encodedAddress = urlEncoder.encode(NetUtils.getAddress(url), form.getEncoding());
 		HttpPut httpPut = new HttpPut(encodedAddress);
-		httpPut.setConfig(requestConfig);
-		addHeader(httpPut, form);
+//		addHeader(httpPut, form);
 		
 		try {
 			requestHandler.handle(httpPut, url, requestBody, form);
@@ -188,8 +171,7 @@ public final class HttpClientTemplate extends HttpAccessor {
 		// 已进行编码后的URL
 		String encodedUrl = urlEncoder.encode(url, form.getEncoding());
 		HttpDelete httpDelete = new HttpDelete(encodedUrl);
-		httpDelete.setConfig(requestConfig);
-		addHeader(httpDelete, form);
+//		addHeader(httpDelete, form);
 		
 		try {
 			logger.debug("Execute {} request [{}] from form [{}]", HttpDelete.METHOD_NAME, url, name);
@@ -201,20 +183,20 @@ public final class HttpClientTemplate extends HttpAccessor {
 		}
 	}
 		
-	/**
-	 * 为HttpRequestBase对象添加表单绑定的Header
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param httpGet
-	 */
-	protected void addHeader(HttpRequestBase httpRequest, HttpForm form) {
-		HttpRequestHeader header = form.getHeader();
-		if (header != null) {
-			Iterator<Entry<String, Object>> headerItem = header.getAttributes().entrySet().iterator();
-			while (headerItem.hasNext()) {
-				Entry<String, Object> item = headerItem.next();
-				httpRequest.addHeader(item.getKey(), item.getKey());
-			}
-		} 
-	}
+//	/**
+//	 * 为HttpRequestBase对象添加表单绑定的Header
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param httpGet
+//	 */
+//	protected void addHeader(HttpRequestBase httpRequest, HttpForm form) {
+//		HttpRequestHeader header = form.getHeader();
+//		if (header != null) {
+//			Iterator<Entry<String, Object>> headerItem = header.getAttributes().entrySet().iterator();
+//			while (headerItem.hasNext()) {
+//				Entry<String, Object> item = headerItem.next();
+//				httpRequest.addHeader(item.getKey(), item.getKey());
+//			}
+//		} 
+//	}
 					
 }

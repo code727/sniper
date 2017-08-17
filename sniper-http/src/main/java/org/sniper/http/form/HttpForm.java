@@ -21,7 +21,6 @@ package org.sniper.http.form;
 
 import org.sniper.beans.Typed;
 import org.sniper.codec.Codecable;
-import org.sniper.http.HttpRequestHeader;
 import org.sniper.http.handler.response.ResponseHandler;
 
 /**
@@ -78,14 +77,14 @@ public interface HttpForm extends Typed, Codecable {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param header
 	 */
-	public void setHeader(HttpRequestHeader header);
+//	public void setHeader(HttpRequestHeader header);
 	
 	/**
 	 * 获取请求头
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public HttpRequestHeader getHeader();
+//	public HttpRequestHeader getHeader();
 	
 	/**
 	 * 设置mimeType

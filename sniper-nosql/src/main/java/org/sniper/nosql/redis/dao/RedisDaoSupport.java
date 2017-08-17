@@ -29,7 +29,6 @@ import java.util.Set;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.StringUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.RedisRepositoryManager;
 import org.sniper.serialization.Serializer;
@@ -140,30 +139,27 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * 获取指定索引库配置对应的全局过期秒数
+	 * 获取指定索引库对应的过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndx
 	 * @return
 	 */
-	protected long getExpireSecond(int dbIndx) {
+	protected long getExpireSeconds(int dbIndx) {
 		if (repositoryManager == null)
 			return 0L;
 		
 		RedisRepository repository = repositoryManager.getRepository(dbIndx);
-		return repository != null ? getExpireSecond(repository) : 0L;
+		return repository != null ? getExpireSeconds(repository) : 0L;
 	}
 	
 	/**
-	 * 获取指定库配置对应的全局过期秒数
+	 * 获取指定库设置的过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param repository
 	 * @return
 	 */
-	protected long getExpireSecond(RedisRepository repository) {
-		String timeUnit = repository.getTimeUnit();
-		long expireTime = DateUtils.getSecond(repository.getExpireTime(),
-				StringUtils.safeString(timeUnit).trim().toLowerCase());
-		return expireTime;
+	protected long getExpireSeconds(RedisRepository repository) {
+		return DateUtils.toSeconds(repository.getExpireTime(), repository.getTimeUnit());
 	}
 	
 	/**

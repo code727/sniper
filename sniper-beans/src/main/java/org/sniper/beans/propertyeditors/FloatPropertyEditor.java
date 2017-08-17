@@ -43,7 +43,7 @@ public class FloatPropertyEditor extends AbstractNumberPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return new Float(text);
+		return Float.valueOf(text);
 	}
 	
 }

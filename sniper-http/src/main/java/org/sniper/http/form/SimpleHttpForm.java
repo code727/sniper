@@ -22,7 +22,6 @@ import org.sniper.beans.DefaultTypedBean;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.http.HttpRequestHeader;
 import org.sniper.http.enums.MimeTypeEnum;
 import org.sniper.http.handler.response.ResponseHandler;
 
@@ -43,7 +42,7 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 	private String method;
 	
 	/** 请求头对象 */
-	private HttpRequestHeader header;
+//	private HttpRequestHeader header;
 	
 	/** Mime-Type */
 	private String mimeType = MimeTypeEnum.APPLICATION_FORM_URLENCODED.getType();
@@ -90,15 +89,15 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 		return this.method;
 	}
 
-	@Override
-	public void setHeader(HttpRequestHeader header) {
-		this.header = header;
-	}
-
-	@Override
-	public HttpRequestHeader getHeader() {
-		return this.header;
-	}
+//	@Override
+//	public void setHeader(HttpRequestHeader header) {
+//		this.header = header;
+//	}
+//
+//	@Override
+//	public HttpRequestHeader getHeader() {
+//		return this.header;
+//	}
 	
 	@Override
 	public void setMimeType(String mimeType) {
