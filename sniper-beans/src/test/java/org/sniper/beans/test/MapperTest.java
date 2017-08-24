@@ -23,14 +23,14 @@ import java.util.Set;
 
 import org.junit.Test;
 import org.sniper.beans.mapper.BeanToMapMapper;
-import org.sniper.beans.mapper.BeanToParameterMapper;
+import org.sniper.beans.mapper.BeanToParametersMapper;
 import org.sniper.beans.mapper.MapToMapMapper;
-import org.sniper.beans.mapper.MapToParameterMapper;
+import org.sniper.beans.mapper.MapToParametersMapper;
 import org.sniper.beans.mapper.MapperRule;
-import org.sniper.beans.mapper.ParameterToMapMapper;
-import org.sniper.beans.mapper.ParameterToParameterMapper;
-import org.sniper.beans.parameter.MapParameter;
-import org.sniper.beans.parameter.Parameter;
+import org.sniper.beans.mapper.ParametersToMapMapper;
+import org.sniper.beans.mapper.ParametersToParametersMapper;
+import org.sniper.beans.parameter.DefaultParameters;
+import org.sniper.beans.parameter.Parameters;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.test.junit.BaseTestCase;
@@ -75,7 +75,7 @@ public class MapperTest extends BaseTestCase {
 	
 //	@Test
 	public void testBeanToParameter() throws Exception {
-		BeanToParameterMapper<Object> mapper = new BeanToParameterMapper<Object>();
+		BeanToParametersMapper<Object> mapper = new BeanToParametersMapper<Object>();
 		
 		Set<MapperRule> rules = CollectionUtils.newHashSet();
 		rules.add(new MapperRule("id", "user_id"));
@@ -86,12 +86,12 @@ public class MapperTest extends BaseTestCase {
 		source.setId(123L);
 		source.setName("CMGE");
 		
-		System.out.println(mapper.mapping(source).getParameters());
+		System.out.println(mapper.mapping(source).getMappedItems());
 	}
 	
 //	@Test
 	public void testMapToParameterMapper() throws Exception {
-		MapToParameterMapper<Object> mapper = new MapToParameterMapper<Object>();
+		MapToParametersMapper<Object> mapper = new MapToParametersMapper<Object>();
 		
 		Set<MapperRule> rules = CollectionUtils.newHashSet();
 		rules.add(new MapperRule("id", "user_id"));
@@ -107,14 +107,14 @@ public class MapperTest extends BaseTestCase {
 	
 //	@Test
 	public void testParameterToMapMapper() throws Exception {
-		ParameterToMapMapper<Object> mapper = new ParameterToMapMapper<Object>();
+		ParametersToMapMapper<Object> mapper = new ParametersToMapMapper<Object>();
 		
 		Set<MapperRule> rules = CollectionUtils.newHashSet();
 		rules.add(new MapperRule("id", "user_id"));
 		rules.add(new MapperRule("name", "user_name"));
 		mapper.setMapperRules(rules);
 		
-		Parameter<String, Object> source = new MapParameter<String, Object>();
+		Parameters<String, Object> source = new DefaultParameters<String, Object>();
 		source.add("id", 123);
 		source.add("name", "CMGE");
 		
@@ -124,18 +124,18 @@ public class MapperTest extends BaseTestCase {
 	
 	@Test
 	public void testParameterToParameterMapper() throws Exception {
-		ParameterToParameterMapper<Object> mapper = new ParameterToParameterMapper<Object>();
+		ParametersToParametersMapper<Object> mapper = new ParametersToParametersMapper<Object>();
 		
 		Set<MapperRule> rules = CollectionUtils.newHashSet();
 		rules.add(new MapperRule("id", "user_id"));
 		rules.add(new MapperRule("name", "user_name"));
 		mapper.setMapperRules(rules);
 		
-		Parameter<String, Object> source = new MapParameter<String, Object>();
+		Parameters<String, Object> source = new DefaultParameters<String, Object>();
 		source.add("id", 123);
 		source.add("name", "CMGE");
 		
-		Parameter<String, Object> parameter = mapper.mapping(source);
+		Parameters<String, Object> parameter = mapper.mapping(source);
 		System.out.println(parameter);
 	}	
 }

@@ -255,14 +255,14 @@ public class NetUtils {
 	 */
 	public static String getAddress(String url) {
 		if (StringUtils.isBlank(url))
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		
 		url = url.trim();
 		int index = url.indexOf("?");
 		if (index < 0) 
 			return url;
 		
-		return index > -1 ? url.substring(0, index) : StringUtils.EMPTY_STRING;
+		return index > -1 ? url.substring(0, index) : StringUtils.EMPTY;
 	}
 	
 	/**
@@ -300,11 +300,11 @@ public class NetUtils {
 	 */
 	public static String getQueryString(String url) {
 		if (StringUtils.isBlank(url))
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		
 		int index = url.indexOf("?");
 		if (index < 0)
-			return RegexUtils.isURLQueryString(url) ? url : StringUtils.EMPTY_STRING;
+			return RegexUtils.isURLQueryString(url) ? url : StringUtils.EMPTY;
 		
 		String queryString = StringUtils.leftTrim(url.substring(index + 1));
 		if (queryString.length() > 0 && queryString.startsWith("?")) 

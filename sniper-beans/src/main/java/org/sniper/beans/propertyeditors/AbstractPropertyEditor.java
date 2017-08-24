@@ -42,7 +42,7 @@ public abstract class AbstractPropertyEditor extends PropertyEditorSupport imple
 	}
 	
 	protected AbstractPropertyEditor(boolean allowEmpty) {
-		this(allowEmpty, StringUtils.EMPTY_STRING);
+		this(allowEmpty, StringUtils.EMPTY);
 	}
 	
 	protected AbstractPropertyEditor(String defaultValue) {

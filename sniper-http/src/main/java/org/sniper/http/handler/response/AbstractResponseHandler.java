@@ -39,7 +39,7 @@ public abstract class AbstractResponseHandler implements ResponseHandler {
 	}
 	
 	protected AbstractResponseHandler(boolean allowEmpty) {
-		this(allowEmpty, StringUtils.EMPTY_STRING);
+		this(allowEmpty, StringUtils.EMPTY);
 	}
 	
 	protected AbstractResponseHandler(String defaultValue) {

@@ -542,7 +542,8 @@ public class WebUtils {
 		
 		BufferedOutputStream out = null;
 		try {
-			IOUtils.write(IOUtils.newBufferedOutputStream(response.getOutputStream()), bytes);
+			out = IOUtils.newBufferedOutputStream(response.getOutputStream());
+			IOUtils.write(out, bytes);
 		} finally {
 			IOUtils.close(out);
 		}

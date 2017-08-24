@@ -18,53 +18,51 @@
 
 package org.sniper.beans.mapper;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.sniper.beans.BeanUtils;
-import org.sniper.beans.parameter.MapParameter;
-import org.sniper.beans.parameter.Parameter;
+import org.sniper.beans.parameter.Parameters;
+import org.sniper.beans.parameter.ParametersUtils;
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.commons.util.MapUtils;
 
 /**
- * Java Bean对象与org.sniper.beans.parameter.Parameter对象之间的映射转换
+ * org.sniper.beans.parameter.Parameters对象与Map对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BeanToParameterMapper<V> extends AbstractMapper<Object, Parameter<String, V>> {
-	
-	@SuppressWarnings("unchecked")
+public class ParametersToMapMapper<V> extends AbstractMapper<Parameters<String, V>, Map<String, V>> {
+
 	@Override
-	public Parameter<String, V> mapping(Object source, Set<MapperRule> mapperRules) throws Exception {
-		if (source == null)
+	public Map<String, V> mapping(Parameters<String, V> parameters, Set<MapperRule> mapperRules) throws Exception {
+		if (ParametersUtils.isEmpty(parameters))
 			return null;
-		
-		Parameter<String, V> parameter = new MapParameter<String, V>();
-		
+
+		Map<String, V> map = MapUtils.newLinkedHashMap();
+
 		if (CollectionUtils.isNotEmpty(mapperRules)) {
 			if (isAutoMapping()) {
-				// 需要自动映射的属性名称集
-				List<String> autoMappedNames = BeanUtils.findAllPropertyNameByGetter(source);
+				// 需要自动映射的参数名称集
+				Set<String> autoMappedNames = parameters.getNames();
 				
 				for (MapperRule rule : mapperRules) {
-					parameter.add(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
-					// 删除已完成映射的属性名称
+					map.put(rule.getMappedName(), parameters.getValue(rule.getOriginalName()));
+					// 删除已完成映射的参数名称
 					autoMappedNames.remove(rule.getOriginalName());
 				}
-					
+
 				/* 完成规则外的映射 */
 				for (String mappedName : autoMappedNames) 
-					parameter.add(mappedName, (V) BeanUtils.get(source, mappedName));
-				
+					map.put(mappedName, parameters.getValue(mappedName));
+
 			} else {
 				for (MapperRule rule : mapperRules) 
-					parameter.add(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
+					map.put(rule.getMappedName(), parameters.getValue(rule.getOriginalName()));
 			}
 		} else
-			parameter.setParameters((Map<String, V>) BeanUtils.create(source));
-		
-		return parameter;
+			map.putAll(parameters.getMappedItems());
+
+		return map;
 	}
 
 }

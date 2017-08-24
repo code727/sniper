@@ -41,10 +41,10 @@ public class ApplicationContextParameterTest extends BaseTestCase {
 		parameter.setKeyHandler(new CoverageDulicateKeyHandler());
 		
 		/* 设置初始参数列表 */
-		Map<String, Object> parameters = MapUtils.newHashMap();
-		parameters.put("name", "dubin");
-		parameters.put("age", "33");
-		parameter.setParameters(parameters);
+		Map<String, Object> mappedItems = MapUtils.newHashMap();
+		mappedItems.put("name", "dubin");
+		mappedItems.put("age", "33");
+		parameter.setMappedItems(mappedItems);
 		
 		/* 预加载其余参数，例如从数据库中获取系统全局的配置参数 */
 		parameter.setParameterService(new ParameterService() {

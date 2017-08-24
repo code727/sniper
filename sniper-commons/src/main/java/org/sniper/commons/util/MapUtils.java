@@ -221,7 +221,7 @@ public class MapUtils {
 	public static <K, V> IdentityHashMap<K, V> newIdentityHashMap(Map<? extends K, ? extends V> map) {
 		return map != null ? new IdentityHashMap<K, V>(map) : new IdentityHashMap<K, V>();
 	}
-		
+			
 	/**
 	 * 判断Map对象是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -311,7 +311,7 @@ public class MapUtils {
 	 */
 	public static <K1 extends CharSequence, K2 extends CharSequence, V> String joinQueryString(Map<K1, V> map, K2[] excludeNames) {
 		if (isEmpty(map))
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		
 		Set<Entry<K1, V>> entrySet = map.entrySet();
 		if (ArrayUtils.isNotEmpty(excludeNames)) {
@@ -359,7 +359,7 @@ public class MapUtils {
 	 * @return
 	 */
 	public static <K, V> String join(Map<K, V> map, Object kvSeperator, Object itemSeperator, K[] excludeNames) {
-		return map != null ? join(map.entrySet(), kvSeperator, itemSeperator, excludeNames) : StringUtils.EMPTY_STRING;
+		return map != null ? join(map.entrySet(), kvSeperator, itemSeperator, excludeNames) : StringUtils.EMPTY;
 	}
 	
 	/**
@@ -385,7 +385,7 @@ public class MapUtils {
 	 */
 	public static <K, V> String join(Set<Entry<K,V>> entrySet, Object kvSeperator, Object itemSeperator, K[] excludeKeys) {
 		if (CollectionUtils.isEmpty(entrySet))
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		
 		if (ArrayUtils.isNotEmpty(excludeKeys)) {
 			Iterator<Entry<K, V>> iterator = entrySet.iterator();

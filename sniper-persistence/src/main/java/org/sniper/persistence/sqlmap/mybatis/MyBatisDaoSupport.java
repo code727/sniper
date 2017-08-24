@@ -95,7 +95,7 @@ public abstract class MyBatisDaoSupport<T> extends SqlSessionDaoSupport
 			else if (beanClass != Object.class)
 				namespace = beanClass.getName() + FileUtils.EXTENSION_SEPERATOR;
 			else
-				namespace = StringUtils.EMPTY_STRING;
+				namespace = StringUtils.EMPTY;
 		} else {
 			if (StringUtils.isNotBlank(namespace) && !namespace.endsWith(FileUtils.EXTENSION_SEPERATOR))
 				namespace += FileUtils.EXTENSION_SEPERATOR;

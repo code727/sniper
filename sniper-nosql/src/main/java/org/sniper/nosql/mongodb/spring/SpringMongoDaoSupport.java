@@ -128,7 +128,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	 */
 	protected String getKeyName(String propertyName) {
 		if (StringUtils.isBlank(propertyName))
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		
 		MongoPersistentEntity<?> persistentEntity = getMongoPersistentEntity();
 		MongoPersistentProperty property = (persistentEntity != null ? persistentEntity

@@ -122,7 +122,7 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 	 */
 	public String toQueryString() {
 		if (this.groups.size() == 0)
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		
 		StringBuilder query = new StringBuilder();
 		List<String> names = CollectionUtils.newArrayList(this.groups.keySet());
@@ -150,12 +150,12 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 				groupQuery.setLength(0);
 				groupQuery.append("(");
 				for (int j = 0; j < groupMax; j++) 
-					groupQuery.append(group.get(j)).append(StringUtils.SPACE_STRING)
-						.append(group.get(j).getPredicate()).append(StringUtils.SPACE_STRING);
+					groupQuery.append(group.get(j)).append(StringUtils.SPACE)
+						.append(group.get(j).getPredicate()).append(StringUtils.SPACE);
 						
 				// 忽略当前组最后一个属性的谓词，并添加组与组之间的谓词
-				groupQuery.append(group.get(groupMax)).append(")").append(StringUtils.SPACE_STRING)
-					.append(this.getPredicate(name)).append(StringUtils.SPACE_STRING);
+				groupQuery.append(group.get(groupMax)).append(")").append(StringUtils.SPACE)
+					.append(this.getPredicate(name)).append(StringUtils.SPACE);
 			}
 		}
 		groupQuery.append(buildeLastGroupQuery(names));
@@ -176,8 +176,8 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 		int groupMax = group.size() - 1;
 		groupQuery.append("(");
 		for (int j = 0; j < groupMax; j++) 
-			groupQuery.append(group.get(j)).append(StringUtils.SPACE_STRING)
-				.append(group.get(j).getPredicate()).append(StringUtils.SPACE_STRING);
+			groupQuery.append(group.get(j)).append(StringUtils.SPACE)
+				.append(group.get(j).getPredicate()).append(StringUtils.SPACE);
 		
 		groupQuery.append(group.get(groupMax)).append(")");
 		return groupQuery.toString();

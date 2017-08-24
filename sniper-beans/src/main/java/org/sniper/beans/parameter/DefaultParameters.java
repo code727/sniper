@@ -18,6 +18,7 @@
 
 package org.sniper.beans.parameter;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,76 +28,73 @@ import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * Map参数实现类
+ * 泛型参数默认实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MapParameter<K, V> implements Parameter<K, V> {
+public class DefaultParameters<K, V> implements Parameters<K, V> {
 	
-	/** 参数映射集 */
-	protected Map<K, V> parameters;
+	/** 参数映射项 */
+	protected Map<K, V> mappedItems;
 	
-	public MapParameter() {
+	public DefaultParameters() {
 		this((Map<K, V>) null);
 	}
 	
-	public MapParameter(Parameter<K, V> parameter) {
-		this(parameter != null ? parameter.getParameters() : null);
+	public DefaultParameters(Parameters<K, V> parameters) {
+		this(parameters != null ? parameters.getMappedItems() : null);
 	}
 	
-	public MapParameter(Map<K, V> parameters) {
-		this.parameters = MapUtils.newLinkedHashMap(parameters);
+	public DefaultParameters(Map<K, V> mappedItems) {
+		setMappedItems(mappedItems);
 	}
 	
 	@Override
-	public void setParameters(Map<K, V> parameters) {
-		parameters.putAll(parameters);
+	public void setMappedItems(Map<K, V> mappedItems) {
+		if (mappedItems instanceof LinkedHashMap)
+			this.mappedItems = mappedItems;
+		else
+			this.mappedItems = MapUtils.newLinkedHashMap(mappedItems);
 	}
 
 	@Override
-	public Map<K, V> getParameters() {
-		return parameters;
+	public Map<K, V> getMappedItems() {
+		return mappedItems;
 	}
-
+	
 	@Override
 	public void add(K name, V value) {
-		parameters.put(name, value);
+		mappedItems.put(name, value);
 	}
 
 	@Override
 	public V getValue(K name) {
-		return parameters.get(name);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <V1> V1 getValue(K name, Class<V1> clazz) {
-		return (V1) this.getValue(name);
+		return mappedItems.get(name);
 	}
 	
 	@Override
 	public Set<K> getNames() {
-		return parameters.keySet();
+		return mappedItems.keySet();
 	}
 
 	@Override
 	public List<V> getValues() {
-		return CollectionUtils.newArrayList(this.parameters.values());
+		return CollectionUtils.newArrayList(this.mappedItems.values());
 	}
 
 	@Override
 	public void remove(K name) {
-		parameters.remove(name);
+		mappedItems.remove(name);
 	}
 
 	@Override
 	public void clear() {
-		parameters.clear();
+		mappedItems.clear();
 	}
 
 	@Override
 	public int size() {
-		return parameters.size();
+		return mappedItems.size();
 	}
 
 	@Override
@@ -111,7 +109,7 @@ public class MapParameter<K, V> implements Parameter<K, V> {
 	
 	@Override
 	public String toString() {
-		return parameters.toString();
+		return mappedItems.toString();
 	}
 
 	@Override
@@ -121,7 +119,7 @@ public class MapParameter<K, V> implements Parameter<K, V> {
 
 	@Override
 	public String getString(K name, String defaultValue) {
-		V value = parameters.get(name);
+		V value = mappedItems.get(name);
 		return value != null ? value.toString() : defaultValue;
 	}
 
@@ -132,7 +130,7 @@ public class MapParameter<K, V> implements Parameter<K, V> {
 
 	@Override
 	public Boolean getBoolean(K name, Boolean defaultValue) {
-		V value = parameters.get(name);
+		V value = mappedItems.get(name);
 		if (value != null) {
 			String str = value.toString();
 			return Boolean.valueOf(BooleanEnum.TRUE.name().equalsIgnoreCase(str) 
@@ -159,7 +157,7 @@ public class MapParameter<K, V> implements Parameter<K, V> {
 
 	@Override
 	public Byte getByte(K name, Byte defaultValue) {
-		V value = parameters.get(name);
+		V value = mappedItems.get(name);
 		return value instanceof Number ? ((Number) value).byteValue() : defaultValue;
 	}
 	
@@ -180,7 +178,7 @@ public class MapParameter<K, V> implements Parameter<K, V> {
 
 	@Override
 	public Short getShort(K name, Short defaultValue) {
-		V value = parameters.get(name);
+		V value = mappedItems.get(name);
 		return value instanceof Number ? ((Number) value).shortValue() : defaultValue;
 	}
 	
@@ -201,7 +199,7 @@ public class MapParameter<K, V> implements Parameter<K, V> {
 
 	@Override
 	public Integer getInteger(K name, Integer defaultValue) {
-		V value = parameters.get(name);
+		V value = mappedItems.get(name);
 		return value instanceof Number ? ((Number) value).intValue() : defaultValue;
 	}
 
@@ -222,7 +220,7 @@ public class MapParameter<K, V> implements Parameter<K, V> {
 
 	@Override
 	public Long getLong(K name, Long defaultValue) {
-		V value = parameters.get(name);
+		V value = mappedItems.get(name);
 		return value instanceof Number ? ((Number) value).longValue() : defaultValue;
 	}
 
@@ -243,7 +241,7 @@ public class MapParameter<K, V> implements Parameter<K, V> {
 
 	@Override
 	public Float getFloat(K name, Float defaultValue) {
-		V value = parameters.get(name);
+		V value = mappedItems.get(name);
 		return value instanceof Number ? ((Number) value).floatValue() : defaultValue;
 	}
 
@@ -264,7 +262,7 @@ public class MapParameter<K, V> implements Parameter<K, V> {
 
 	@Override
 	public Double getDouble(K name, Double defaultValue) {
-		V value = parameters.get(name);
+		V value = mappedItems.get(name);
 		return value instanceof Number ? ((Number) value).doubleValue() : defaultValue;
 	}
 
@@ -277,5 +275,5 @@ public class MapParameter<K, V> implements Parameter<K, V> {
 	public double getDoubleValue(K name, double defaultValue) {
 		return getDouble(name, defaultValue);
 	}
-		
+
 }

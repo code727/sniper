@@ -3723,7 +3723,7 @@ public class ArrayUtils {
 	 */
 	public static String join(Object[] array, String separator) {
 		if (isEmpty(array))
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		
 		StringBuilder builder = new StringBuilder();
 		if (StringUtils.isNotEmpty(separator)) {

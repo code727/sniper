@@ -24,10 +24,10 @@ import java.util.Set;
 import javax.servlet.ServletRequest;
 
 import org.sniper.beans.mapper.AbstractMapper;
-import org.sniper.beans.mapper.MapToParameterMapper;
+import org.sniper.beans.mapper.MapToParametersMapper;
 import org.sniper.beans.mapper.Mapper;
 import org.sniper.beans.mapper.MapperRule;
-import org.sniper.beans.parameter.Parameter;
+import org.sniper.beans.parameter.Parameters;
 import org.sniper.web.WebUtils;
 
 /**
@@ -35,12 +35,12 @@ import org.sniper.web.WebUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ServletRequestToParameterMapper extends AbstractMapper<ServletRequest, Parameter<String, String>> {
+public class ServletRequestToParameterMapper extends AbstractMapper<ServletRequest, Parameters<String, String>> {
 
-	private Mapper<Map<String, String>, Parameter<String, String>> mapper;
+	private Mapper<Map<String, String>, Parameters<String, String>> mapper;
 	
 	public ServletRequestToParameterMapper() {
-		this.mapper = new MapToParameterMapper<String>();
+		this.mapper = new MapToParametersMapper<String>();
 	}
 	
 	@Override
@@ -64,7 +64,7 @@ public class ServletRequestToParameterMapper extends AbstractMapper<ServletReque
 	}
 
 	@Override
-	public Parameter<String, String> mapping(ServletRequest source, Set<MapperRule> mapperRules) throws Exception {
+	public Parameters<String, String> mapping(ServletRequest source, Set<MapperRule> mapperRules) throws Exception {
 		return mapper.mapping(WebUtils.getParameters(source), mapperRules);
 	}
 

@@ -81,19 +81,19 @@ public class AliYunSender extends AbstractSender {
 	@Override
 	protected Map<String, String> initParameters(ApplicationContextParameter<String, Object> smsContextParameters) {
 		Map<String, String> parameters = MapUtils.newHashMap();
-		String url = smsContextParameters.getValue("aliyun.sms.url", String.class);
+		String url = smsContextParameters.getString("aliyun.sms.url");
 		if (StringUtils.isBlank(url))
 			url = "http://gw.api.taobao.com/router/rest";
 		
-		String appKey = smsContextParameters.getValue("aliyun.sms.app.key", String.class);
+		String appKey = smsContextParameters.getString("aliyun.sms.app.key");
 		if (StringUtils.isBlank(appKey))
 			throw new IllegalArgumentException("Aliyun sms app key must not be null or blank.");
 		
-		String appSecret = smsContextParameters.getValue("aliyun.sms.app.secret", String.class);
+		String appSecret = smsContextParameters.getString("aliyun.sms.app.secret");
 		if (StringUtils.isBlank(appSecret))
 			throw new IllegalArgumentException("Aliyun sms app secret must not be null or blank.");
 		
-		String smsType = smsContextParameters.getValue("aliyun.sms.type", String.class);
+		String smsType = smsContextParameters.getString("aliyun.sms.type");
 		if (StringUtils.isBlank(smsType))
 			smsType = "normal";
 		

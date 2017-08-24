@@ -60,7 +60,7 @@ public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<Strin
 		/* 检查/设置私钥 */
 		String privateKey = signature.getPrivateKey();
 		if (StringUtils.isBlank(privateKey)) {
-			privateKey = paymentContextParameters.getValue("alipay.web.privatekey", String.class);
+			privateKey = paymentContextParameters.getString("alipay.web.privatekey");
 			if (StringUtils.isBlank(privateKey))
 				throw new IllegalArgumentException("Alipay web privatekey is required.");
 			signature.setPrivateKey(privateKey);
@@ -70,7 +70,7 @@ public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<Strin
 		if (signature instanceof AsymmetricSignature) {
 			String publicKey = ((AsymmetricSignature<Map<String, Object>>) signature).getPublicKey();
 			if (StringUtils.isBlank(publicKey)) {
-				publicKey = paymentContextParameters.getValue("alipay.web.publickey", String.class);
+				publicKey = paymentContextParameters.getString("alipay.web.publickey");
 				if (StringUtils.isBlank(publicKey))
 					throw new IllegalArgumentException("Alipay web publickey is required.");
 				
@@ -90,21 +90,21 @@ public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<Strin
 		// 商户ID
 		paymentParameters.put("partner", paymentContextParameters.getValue("alipay.web.partner"));
 		
-		String sellerEmail = paymentContextParameters.getValue("alipay.web.seller.email", String.class);
+		String sellerEmail = paymentContextParameters.getString("alipay.web.seller.email");
 		if (StringUtils.isNotBlank(sellerEmail)) 
 			// 卖家邮件
 			paymentParameters.put("seller_email", sellerEmail);
 		else 
 			// 卖家ID
-			paymentParameters.put("seller_id", paymentContextParameters.getValue("alipay.web.seller.id", String.class));
+			paymentParameters.put("seller_id", paymentContextParameters.getString("alipay.web.seller.id"));
 		
 		// 通知回调地址
-		paymentParameters.put("notify_url", paymentContextParameters.getValue("alipay.web.notify.url", String.class));
+		paymentParameters.put("notify_url", paymentContextParameters.getString("alipay.web.notify.url"));
 		
-		String returnUrl = paymentContextParameters.getValue("alipay.web.return.url", String.class);
+		String returnUrl = paymentContextParameters.getString("alipay.web.return.url");
 		if (StringUtils.isNotBlank(returnUrl))
 			// 返回URL
-			paymentParameters.put("return_url", paymentContextParameters.getValue("alipay.web.return.url", String.class));
+			paymentParameters.put("return_url", paymentContextParameters.getString("alipay.web.return.url"));
 		
 		// 商品名称
 		paymentParameters.put("subject", order.getProductName());
@@ -142,7 +142,7 @@ public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<Strin
 		// 签名类型
 		paymentParameters.put("sign_type", signature.getType());
 		
-		String inputCharset = paymentContextParameters.getValue("alipay.web.input.charset", String.class);
+		String inputCharset = paymentContextParameters.getString("alipay.web.input.charset");
 		if (StringUtils.isBlank(inputCharset))
 			inputCharset = CodecUtils.UTF8_ENCODING;
 		
@@ -162,8 +162,8 @@ public class WebAlipayService extends AlipayService<WebPaymentRequest, Map<Strin
 	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
 		Map<String, String> parameters = MapUtils.newHashMap();
-		parameters.put("service", paymentContextParameters.getValue("alipay.web.validation.service", String.class));
-		parameters.put("partner", paymentContextParameters.getValue("alipay.web.partner", String.class));
+		parameters.put("service", paymentContextParameters.getString("alipay.web.validation.service"));
+		parameters.put("partner", paymentContextParameters.getString("alipay.web.partner"));
 		parameters.put("notify_id", response.get("notify_id"));
 		
 		// 发送支付宝验证请求，并返回验证结果状态

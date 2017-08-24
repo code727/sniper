@@ -50,7 +50,7 @@ public class FileUtils {
 	 */
 	public static String getName(String filePath) {
 		if (StringUtils.isBlank(filePath))
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		
 		String name = StringUtils.afterLast(filePath, "/");
 		if (StringUtils.isEmpty(name))
@@ -66,7 +66,7 @@ public class FileUtils {
 	 * @return
 	 */
 	public static String getName(File file) {
-		return file != null ? file.getName() : StringUtils.EMPTY_STRING;
+		return file != null ? file.getName() : StringUtils.EMPTY;
 	}
 	
 	/**

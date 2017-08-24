@@ -48,7 +48,7 @@ public class FileVelocityViewRender extends AbstractVelocityViewRender {
 		if (isLoadRelativePathTemplet()) 
 			properties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, FileUtils.EXTENSION_SEPERATOR);
 		else
-			properties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, StringUtils.EMPTY_STRING);
+			properties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, StringUtils.EMPTY);
 			
 		return new VelocityEngine(properties);
 	}

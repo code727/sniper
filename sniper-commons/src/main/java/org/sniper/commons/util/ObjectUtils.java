@@ -106,7 +106,7 @@ public class ObjectUtils {
 	 * @return
 	 */
 	public static String toSafeString(Object obj) {
-		return obj != null ? obj.toString() : StringUtils.EMPTY_STRING;
+		return obj != null ? obj.toString() : StringUtils.EMPTY;
 	}
 	
 	/**

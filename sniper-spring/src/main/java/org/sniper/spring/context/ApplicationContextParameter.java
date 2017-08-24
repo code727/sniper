@@ -24,7 +24,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.sniper.beans.parameter.ConcurrentParameter;
+import org.sniper.beans.parameter.ConcurrentParameters;
 import org.sniper.beans.parameter.handler.CoverageDulicateKeyHandler;
 import org.sniper.beans.parameter.handler.KeyHandler;
 import org.sniper.commons.util.DateUtils;
@@ -34,7 +34,7 @@ import org.sniper.commons.util.DateUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ApplicationContextParameter<K, V> extends ConcurrentParameter<K, V> implements InitializingBean {
+public class ApplicationContextParameter<K, V> extends ConcurrentParameters<K, V> implements InitializingBean {
 		
 	private static Logger logger = LoggerFactory.getLogger(ApplicationContextParameter.class);
 	
@@ -69,20 +69,20 @@ public class ApplicationContextParameter<K, V> extends ConcurrentParameter<K, V>
 		if (this.parameterService != null) {
 			Date start = new Date();
 			logger.info("Starting preloading application context parameters");
-			this.setParameters((Map<K, V>) this.parameterService.preloading());
+			this.setMappedItems((Map<K, V>) this.parameterService.preloading());
 			logger.info("End preloading application context parameters in "
-					+ DateUtils.getIntervalMillis(start, new Date()) + "ms.");
+					+ DateUtils.getIntervalMillis(start, new Date()) + "ms");
 		}
 	}
 	
 	@Override
 	public void add(K name, V value) {
-		keyHandler.put(this.parameters, name, value);
+		keyHandler.put(this.mappedItems, name, value);
 	}
 	
 	@Override
-	public void setParameters(Map<K, V> parameters) {
-		keyHandler.putAll(this.parameters, parameters);
+	public void setMappedItems(Map<K, V> mappedItems) {
+		keyHandler.putAll(this.mappedItems, mappedItems);
 	}
-	
+		
 }

@@ -63,7 +63,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 		
 		/* 检查/设置私钥 */
 		if (StringUtils.isBlank(privateKey)) {
-			privateKey = paymentContextParameters.getValue("alipay.app.privatekey", String.class);
+			privateKey = paymentContextParameters.getString("alipay.app.privatekey");
 			if (StringUtils.isBlank(privateKey))
 				throw new IllegalArgumentException("Alipay app privatekey is required.");
 			
@@ -73,7 +73,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 			
 		/* 检查/设置公钥 */
 		if (StringUtils.isBlank(publicKey)) {
-			publicKey = paymentContextParameters.getValue("alipay.app.publickey", String.class);
+			publicKey = paymentContextParameters.getString("alipay.app.publickey");
 			if (StringUtils.isBlank(privateKey))
 				throw new IllegalArgumentException("Alipay app publickey is required.");
 			
@@ -113,7 +113,7 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 		// 合作者身份ID 
 		requiredParameters.put("partner", paymentContextParameters.getValue("alipay.app.partner"));
 		
-		String inputCharset = paymentContextParameters.getValue("alipay.app.input.charset", String.class);
+		String inputCharset = paymentContextParameters.getString("alipay.app.input.charset");
 		if (StringUtils.isBlank(inputCharset))
 			inputCharset = CodecUtils.UTF8_ENCODING;
 		
@@ -194,8 +194,8 @@ public class AppAlipayService extends AlipayService<Map<String, Object>, Map<Str
 	public CodeMessageModel handleResponse(Map<String, String> response) throws Exception {
 		CodeMessageModel result = new CodeMessageModel();
 		Map<String, Object> parameters = MapUtils.newHashMap();
-		parameters.put("service", paymentContextParameters.getValue("alipay.app.validation.service", String.class));
-		parameters.put("partner", paymentContextParameters.getValue("alipay.app.partner", String.class));
+		parameters.put("service", paymentContextParameters.getString("alipay.app.validation.service"));
+		parameters.put("partner", paymentContextParameters.getString("alipay.app.partner"));
 		parameters.put("notify_id", response.get("notify_id"));
 		
 		// 发送支付宝通知验证请求，并返回验证结果状态

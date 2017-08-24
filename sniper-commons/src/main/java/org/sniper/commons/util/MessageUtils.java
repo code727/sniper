@@ -535,7 +535,7 @@ public class MessageUtils {
 	public static String getMessage(String baseName, Locale locale,
 			String key, Object[] params, String defaultMessage) {
 		if (StringUtils.isEmpty(baseName))
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		try {
 			ResourceBundle bundle = getResourceBundle(baseName, locale);
 			String message = bundle.getString(StringUtils.safeString(key));

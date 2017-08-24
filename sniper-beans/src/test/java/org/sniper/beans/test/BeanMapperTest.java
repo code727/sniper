@@ -25,9 +25,9 @@ import org.junit.Test;
 import org.sniper.beans.mapper.BeanToBeanMapper;
 import org.sniper.beans.mapper.MapToBeanMapper;
 import org.sniper.beans.mapper.MapperRule;
-import org.sniper.beans.mapper.ParameterToBeanMapper;
-import org.sniper.beans.parameter.MapParameter;
-import org.sniper.beans.parameter.Parameter;
+import org.sniper.beans.mapper.ParametersToBeanMapper;
+import org.sniper.beans.parameter.DefaultParameters;
+import org.sniper.beans.parameter.Parameters;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.test.junit.BaseTestCase;
@@ -76,14 +76,14 @@ public class BeanMapperTest extends BaseTestCase {
 	
 	@Test
 	public void testParameterToBeanMapper() throws Exception {
-		ParameterToBeanMapper<Object> mapper = new ParameterToBeanMapper<Object>();
+		ParametersToBeanMapper<Object> mapper = new ParametersToBeanMapper<Object>();
 		
 		Set<MapperRule> rules = CollectionUtils.newHashSet();
 		rules.add(new MapperRule("id", "id"));
 		rules.add(new MapperRule("name", "name"));
 		mapper.setMapperRules(rules);
 		
-		Parameter<String, Object> source = new MapParameter<String, Object>();
+		Parameters<String, Object> source = new DefaultParameters<String, Object>();
 		source.add("id", 123L);
 		source.add("name", "CMGE");
 		

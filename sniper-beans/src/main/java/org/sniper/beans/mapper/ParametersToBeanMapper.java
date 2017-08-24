@@ -22,21 +22,21 @@ import java.beans.PropertyEditor;
 import java.util.Set;
 
 import org.sniper.beans.BeanUtils;
-import org.sniper.beans.parameter.Parameter;
-import org.sniper.beans.parameter.ParameterUtils;
+import org.sniper.beans.parameter.Parameters;
+import org.sniper.beans.parameter.ParametersUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.ObjectUtils;
 
 /**
- * org.sniper.beans.parameter.Parameter对象与Java Bean对象之间的映射转换
+ * org.sniper.beans.parameter.Parameters对象与Java Bean对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ParameterToBeanMapper<V> extends AbstractBeanMapper<Parameter<String, V>> {
+public class ParametersToBeanMapper<V> extends AbstractBeanMapper<Parameters<String, V>> {
 	
 	@Override
-	protected <T> T doMapping(Parameter<String, V> source, Set<MapperRule> mapperRules, Class<T> type) throws Exception {
-		if (ParameterUtils.isEmpty(source))
+	protected <T> T doMapping(Parameters<String, V> parameters, Set<MapperRule> mapperRules, Class<T> type) throws Exception {
+		if (ParametersUtils.isEmpty(parameters))
 			return null;
 		
 		T mappedBean = createMappedBean(type);
@@ -44,28 +44,28 @@ public class ParameterToBeanMapper<V> extends AbstractBeanMapper<Parameter<Strin
 		if (CollectionUtils.isNotEmpty(mapperRules)) {
 			if (isAutoMapping()) {
 				// 需要自动映射的参数名称集
-				Set<String> autoMappedNames = source.getNames();
+				Set<String> autoMappedNames = parameters.getNames();
 				
 				for (MapperRule rule : mapperRules) {
-					ruleMapping(source, mappedBean, rule);
+					ruleMapping(parameters, mappedBean, rule);
 					// 删除已完成映射的参数名称
 					autoMappedNames.remove(rule.getOriginalName());
 				}
 				
 				/* 完成规则外的映射 */
 				for (String mappedName : autoMappedNames) {
-					BeanUtils.set(mappedBean, mappedName, source.getValue(mappedName));
+					BeanUtils.set(mappedBean, mappedName, parameters.getValue(mappedName));
 				}
 			} else {
 				for (MapperRule rule : mapperRules) {
-					ruleMapping(source, mappedBean, rule);
+					ruleMapping(parameters, mappedBean, rule);
 				}
 			}
 		} else {
 			/* 当规则集为空时，则将源对象中所有的参数映射到目标对象中 */
-			Set<String> names = source.getNames();
+			Set<String> names = parameters.getNames();
 			for (String name : names) {
-				BeanUtils.set(mappedBean, name, source.getValue(name));
+				BeanUtils.set(mappedBean, name, parameters.getValue(name));
 			}
 		}
 		
@@ -80,7 +80,7 @@ public class ParameterToBeanMapper<V> extends AbstractBeanMapper<Parameter<Strin
 	 * @param rule
 	 * @throws Exception
 	 */
-	private <T> void ruleMapping(Parameter<String, V> source, T mappedBean, MapperRule rule) throws Exception {
+	private <T> void ruleMapping(Parameters<String, V> source, T mappedBean, MapperRule rule) throws Exception {
 		PropertyEditor propertyEditor = rule.getPropertyEditor();
 		if (propertyEditor != null) {
 //			propertyEditor.setValue(source.getValue(rule.getOriginalName()));

@@ -126,7 +126,7 @@ public class CodecUtils {
 	 */
 	public static String unicodeEncode(String text, boolean upperCase) {
 		if (StringUtils.isEmpty(text))
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		
 		StringBuilder result = new StringBuilder();
 		char c;
@@ -160,7 +160,7 @@ public class CodecUtils {
 	 */
 	public static String unicodeDecode(String text) { 
 		if (StringUtils.isEmpty(text))
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		
 //		Pattern pattern = RegexUtils.getPattern("[0-9A-Fa-f]{4}"); 
         StringBuilder result = new StringBuilder(); 

@@ -13,32 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-13
+ * Create Date : 2015-11-21
  */
 
 package org.sniper.beans.parameter;
 
-import java.util.Map;
-
-import org.sniper.commons.util.MapUtils;
-
 /**
- * 并发泛型参数实现类
+ * 泛型参数工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ConcurrentParameter<K, V> extends MapParameter<K, V> {
+public class ParametersUtils {
 	
-	public ConcurrentParameter() {
-		this((Map<K, V>) null);
+	/**
+	 * 判断参数对象是否为空
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param parameters
+	 * @return
+	 */
+	public static <K, V> boolean isEmpty(Parameters<K, V> parameters) {
+		return parameters == null || parameters.isEmpty();
 	}
 	
-	public ConcurrentParameter(Parameter<K, V> parameter) {
-		this(parameter != null ? parameter.getParameters() : null);
+	/**
+	 * 判断参数对象是否不为空
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param parameters
+	 * @return
+	 */
+	public static <K, V> boolean isNotEmpty(Parameters<K, V> parameters) {
+		return !isEmpty(parameters);
 	}
-	
-	public ConcurrentParameter(Map<K, V> parameters) {
-		this.parameters = MapUtils.newConcurrentHashMap(parameters);
-	}
-				
+
 }

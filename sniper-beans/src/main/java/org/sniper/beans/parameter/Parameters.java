@@ -27,7 +27,22 @@ import java.util.Set;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Parameter<K, V> {
+public interface Parameters<K, V> {
+	
+	/**
+	 * 设置参数映射项
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param parameters
+	 * @return
+	 */
+	public void setMappedItems(Map<K, V> mappedItems);
+	
+	/**
+	 * 获取所有的参数映射集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Map<K, V> getMappedItems();
 	
 	/**
 	 * 新增参数
@@ -44,31 +59,7 @@ public interface Parameter<K, V> {
 	 * @return
 	 */
 	public V getValue(K name);
-	
-	/**
-	 * 获取指定名称和类型的参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param clazz
-	 * @return
-	 */
-	public <V1> V1 getValue(K name, Class<V1> clazz);
-	
-	/**
-	 * 设置参数映射
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameters
-	 * @return
-	 */
-	public void setParameters(Map<K, V> parameters);
-	
-	/**
-	 * 获取所有的参数映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Map<K, V> getParameters();
-	
+		
 	/**
 	 * 获取所有的参数名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

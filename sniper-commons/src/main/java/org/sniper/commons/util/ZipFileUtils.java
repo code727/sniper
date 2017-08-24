@@ -149,7 +149,7 @@ public class ZipFileUtils {
 	 */
 	public static String getName(ZipFile zipFile) {
 		if (zipFile == null)
-			return StringUtils.EMPTY_STRING;
+			return StringUtils.EMPTY;
 		
 		return StringUtils.afterLast(zipFile.getName(), File.separator);
 	}

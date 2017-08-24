@@ -156,7 +156,7 @@ public class AuthorizationHandler extends AuthorizationHandlerAdapter implements
 		if (MapUtils.isNotEmpty(authMap)) {
 			Set<Entry<String, String>> authSet = authMap.entrySet();
 			for (Entry<String, String> auth : authSet) {
-				result.append(auth.getKey()).append(" = ").append(AUTHC).append(",").append(StringUtils.SPACE_STRING)
+				result.append(auth.getKey()).append(" = ").append(AUTHC).append(",").append(StringUtils.SPACE)
 					.append(filterName).append("[").append(auth.getValue()).append("]").append(CRLF);
 			}
 		}

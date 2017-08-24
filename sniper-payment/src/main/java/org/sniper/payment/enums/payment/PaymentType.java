@@ -104,7 +104,7 @@ public enum PaymentType {
 			if (payTypes.ordinal() == type)
 				return payTypes.getOrderPrefix();
 		}
-		return StringUtils.EMPTY_STRING;
+		return StringUtils.EMPTY;
 	}
 	
 	/**
@@ -119,7 +119,7 @@ public enum PaymentType {
 			if (payTypes.ordinal() == type)
 				return payTypes.getOrderSuffix();
 		}
-		return StringUtils.EMPTY_STRING;
+		return StringUtils.EMPTY;
 	}
 	
 	/**

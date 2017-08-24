@@ -58,7 +58,7 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		/* 检查/设置私钥 */
 		String privateKey = signature.getPrivateKey();
 		if (StringUtils.isBlank(privateKey)) {
-			privateKey = paymentContextParameters.getValue("wechatpay.app.privatekey", String.class);
+			privateKey = paymentContextParameters.getString("wechatpay.app.privatekey");
 			if (StringUtils.isBlank(privateKey))
 				throw new IllegalArgumentException("Wechatpay app privatekey is required.");
 			signature.setPrivateKey(privateKey);
@@ -168,8 +168,8 @@ public class AppWechatpayService extends WechatpayService<Map<String, Object>, M
 		requestParameters.put("spbill_create_ip", parameters.get("ip"));
 		
 		// 通知回调地址
-		requestParameters.put("notify_url",paymentContextParameters.getValue("wechatpay.app.notify.url", String.class));
-		String tradeType = paymentContextParameters.getValue("wechatpay.app.trade.type", String.class);
+		requestParameters.put("notify_url",paymentContextParameters.getString("wechatpay.app.notify.url"));
+		String tradeType = paymentContextParameters.getString("wechatpay.app.trade.type");
 		
 		// 交易类型
 		requestParameters.put("trade_type", tradeType);

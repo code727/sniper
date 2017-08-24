@@ -55,7 +55,7 @@ public class PersistenceUtils {
 			queryBuilder.append("SELECT ").append(alias).append(" FROM ");
 
 		queryBuilder.append(clazz.getName());
-		queryBuilder.append(StringUtils.SPACE_STRING).append(alias).append(StringUtils.SPACE_STRING);
+		queryBuilder.append(StringUtils.SPACE).append(alias).append(StringUtils.SPACE);
 
 		return queryBuilder;
 	}

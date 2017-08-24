@@ -29,7 +29,7 @@ import org.sniper.security.service.AuthorizationService;
 public class AuthorizationHandlerAdapter implements AuthorizationHandler {
 	
 	/** 固定授权规则字符串 */
-	private String fixRule = StringUtils.EMPTY_STRING;
+	private String fixRule = StringUtils.EMPTY;
 	
 	private AuthorizationService authorizationService;
 	
@@ -53,12 +53,12 @@ public class AuthorizationHandlerAdapter implements AuthorizationHandler {
 
 	@Override
 	public String createRoleRule() {
-		return StringUtils.EMPTY_STRING;
+		return StringUtils.EMPTY;
 	}
 
 	@Override
 	public String createPermissionRule() {
-		return StringUtils.EMPTY_STRING;
+		return StringUtils.EMPTY;
 	}
 
 }

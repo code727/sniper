@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.ReflectionUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.dao.RedisDaoSupport;
@@ -98,22 +97,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	}
 		
 	/**
-	 * 设置当前库数据键的全局过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param connection
-	 * @param repository
-	 * @param key 数据键
-	 */
-	protected void setExpireTime(RedisConnection connection, RedisRepository repository, byte[] key) {
-		if (repository != null) {
-			long expireSeconds = DateUtils.toSeconds(repository.getExpireTime(), repository.getTimeUnit());
-			if (expireSeconds > 0) 
-				connection.expire(key, expireSeconds);
-		}
-	}
-	
-	/**
-	 * 设置当前库数据键的过期时间。当参数expireTime小于等于0时，则使用当前库设置的全局过期时间
+	 * 设置当前库数据键的过期时间。当参数expireSeconds小于等于0时，则使用当前库设置的过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param repository
@@ -124,29 +108,11 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 		if (expireSeconds > 0)
 			connection.expire(key, expireSeconds);
 		else
-			this.setExpireTime(connection, repository, key);
-	}
-	
-	/** 
-	 * 设置当前库多个数据键的全局过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param connection
-	 * @param repository
-	 * @param keySet 数据键集
-	 */
-	protected void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keySet) {
-		if (repository != null) {
-			long expireSeconds = DateUtils.toSeconds(repository.getExpireTime(), repository.getTimeUnit());
-			if (expireSeconds > 0) {
-				for (byte[] keyByte : keySet) {
-					connection.expire(keyByte, expireSeconds);
-				}
-			}
-		}
+			setExpireTime(connection, repository, key);
 	}
 	
 	/**
-	 * 设置当前库多个数据键的过期时间。当参数expireTime小于等于0时，则使用当前库设置的全局过期时间
+	 * 设置当前库多个数据键的过期时间。当参数expireSeconds小于等于0时，则使用当前库设置的全局过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param repository
@@ -158,7 +124,40 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 			for (byte[] keyByte : keySet) 
 				connection.expire(keyByte, expireSeconds);
 		} else 
-			this.setExpireTime(connection, repository, keySet);
+			setExpireTime(connection, repository, keySet);
+	}
+	
+	/**
+	 * 设置当前库数据键的全局过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param connection
+	 * @param repository
+	 * @param key 数据键
+	 */
+	private void setExpireTime(RedisConnection connection, RedisRepository repository, byte[] key) {
+		if (repository != null) {
+			long expireSeconds = getExpireSeconds(repository);
+			if (expireSeconds > 0) 
+				connection.expire(key, expireSeconds);
+		}
+	}
+	
+	/** 
+	 * 设置当前库多个数据键的全局过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param connection
+	 * @param repository
+	 * @param keySet 数据键集
+	 */
+	private void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keySet) {
+		if (repository != null) {
+			long expireSeconds = getExpireSeconds(repository);
+			if (expireSeconds > 0) {
+				for (byte[] keyByte : keySet) {
+					connection.expire(keyByte, expireSeconds);
+				}
+			}
+		}
 	}
 	
 	/**

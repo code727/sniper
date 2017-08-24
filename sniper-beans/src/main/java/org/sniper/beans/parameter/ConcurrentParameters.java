@@ -13,36 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-21
+ * Create Date : 2015-11-13
  */
 
 package org.sniper.beans.parameter;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.sniper.commons.util.MapUtils;
+
 /**
- * 泛型参数工具类
+ * 并发泛型参数实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ParameterUtils {
+public class ConcurrentParameters<K, V> extends DefaultParameters<K, V> {
 	
-	/**
-	 * 判断参数对象是否为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameter
-	 * @return
-	 */
-	public static <K, V> boolean isEmpty(Parameter<K, V> parameter) {
-		return parameter == null || parameter.isEmpty();
+	public ConcurrentParameters() {
+		super();
+	}
+	
+	public ConcurrentParameters(Parameters<K, V> parameters) {
+		super(parameters);
+	}
+	
+	public ConcurrentParameters(Map<K, V> mappedItems) {
+		super(mappedItems);
 	}
 	
 	/**
-	 * 判断参数对象是否不为空
+	 * 重写父类方法，将mappedItems强制设置为ConcurrentHashMap
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameter
-	 * @return
+	 * @param mappedItems
 	 */
-	public static <K, V> boolean isNotEmpty(Parameter<K, V> parameter) {
-		return !isEmpty(parameter);
+	@Override
+	public void setMappedItems(Map<K, V> mappedItems) {
+		if (mappedItems instanceof ConcurrentHashMap)
+			this.mappedItems = mappedItems;
+		else
+			this.mappedItems = MapUtils.newConcurrentHashMap(mappedItems);
 	}
-
+					
 }

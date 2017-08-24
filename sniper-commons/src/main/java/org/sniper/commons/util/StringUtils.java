@@ -32,15 +32,35 @@ import java.util.UUID;
 public class StringUtils {
 	
 	/** null字符串 */
-	public static final String NULL_STRING = "null";
+	public static final String NULL = "null";
 
 	/** 空字符串 */
-	public static final String EMPTY_STRING = "";
+	public static final String EMPTY = "";
 
 	/** 空格字符串 */
-	public static final String SPACE_STRING = " ";
+	public static final String SPACE = " ";
 	
+	/** 赋值 */
+	public static final String ASSIGNMENT = "=";
+	
+	/** 逗号 */
+	public static final String COMMA = ",";
+	
+	/** 分号 */
+	public static final String SEMICOLON = ";";
+	
+	/** 单引号 */
+	public static final String SINGLE_QUOTES = "'";
+	
+	/** 双引号 */
+	public static final String DOUBLE_QUOTES = "\"";
+	
+	/** 类路径标志 */
 	public static final String CLASSPATH = "classpath:";
+	
+	public static final String ANY = "*";
+	
+	public static final char ANY_CHAR = '*';
 	
 	/**
 	 * 判断是否为空字符串
@@ -453,7 +473,7 @@ public class StringUtils {
 	 * @return
 	 */
 	public static String safeString(String str) {
-		return str != null ? str : EMPTY_STRING ;
+		return str != null ? str : EMPTY ;
 	}
 	
 	/**
@@ -500,6 +520,7 @@ public class StringUtils {
 		StringBuilder result = new StringBuilder();
 		while (tokenizer.hasMoreTokens())
 			result.append(tokenizer.nextElement());
+		
 		return result.toString();
 	}
 	
@@ -537,7 +558,7 @@ public class StringUtils {
 		if (isEmpty(str) || isEmpty(prefix))
 			return str;
 		
-		return indexOf(str, prefix, 0, ignoreCase) == 0 ? str.substring(prefix.length()) : EMPTY_STRING;
+		return indexOf(str, prefix, 0, ignoreCase) == 0 ? str.substring(prefix.length()) : EMPTY;
 	}
 	
 	/**
@@ -575,9 +596,9 @@ public class StringUtils {
 			return str;
 		
 		int index = indexOf(str, mark, 0, ignoreCase);
-		return index > -1 ? str.substring(index + mark.length()) : EMPTY_STRING;
+		return index > -1 ? str.substring(index + mark.length()) : EMPTY;
 	}
-	
+		
 	/**
 	 * 获取最后一个标记之后的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
@@ -613,10 +634,10 @@ public class StringUtils {
 			return str;
 		
 		if (str.length() == 0 || isEmpty(mark))
-			return EMPTY_STRING;
+			return EMPTY;
 		
 		int index = lastIndexOf(str, mark, ignoreCase);
-		return index > -1 ? str.substring(index + mark.length()) : EMPTY_STRING;
+		return index > -1 ? str.substring(index + mark.length()) : EMPTY;
 	}
 	
 	/**
@@ -655,7 +676,7 @@ public class StringUtils {
 			return str;
 		
 		int suffixIndex = indexOfSuffix(str, suffix, ignoreCase);
-		return suffixIndex > -1 ? str.substring(0, suffixIndex) : EMPTY_STRING;
+		return suffixIndex > -1 ? str.substring(0, suffixIndex) : EMPTY;
 	}
 
 	/**
@@ -694,10 +715,10 @@ public class StringUtils {
 			return str;
 		
 		if (str.length() == 0 || isEmpty(mark))
-			return EMPTY_STRING;
+			return EMPTY;
 				
 		int index = indexOf(str, mark, 0, ignoreCase);
-		return index > 0 ? str.substring(0, index) : EMPTY_STRING;
+		return index > 0 ? str.substring(0, index) : EMPTY;
 	}
 
 	/**
@@ -735,7 +756,7 @@ public class StringUtils {
 			return str;
 		
 		int index = lastIndexOf(str, mark, ignoreCase);
-		return index > 0 ? str.substring(0, index) : EMPTY_STRING;
+		return index > 0 ? str.substring(0, index) : EMPTY;
 	}
 
 	/**
@@ -773,7 +794,7 @@ public class StringUtils {
 	 */
 	public static String leftSubstring(String str, String start, String end, boolean ignoreCase) {
 		if (isEmpty(start) || isEmpty(end))
-			return str == null ? str : EMPTY_STRING;
+			return str == null ? str : EMPTY;
 		
 		int startIndex = indexOf(str, start, 0, ignoreCase);
 		if (startIndex > -1) {
@@ -881,7 +902,7 @@ public class StringUtils {
 	 */
 	public static String rightSubstring(String str, String start, String end, boolean ignoreCase) {
 		if (isEmpty(start) || isEmpty(end))
-			return str == null ? str : EMPTY_STRING;
+			return str == null ? str : EMPTY;
 		
 		int endIndex = lastIndexOf(str, end, ignoreCase);
 		if (endIndex > -1) {
@@ -1131,7 +1152,7 @@ public class StringUtils {
 		if (tokenizer.hasMoreElements()) {
 			builder.append(tokenizer.nextToken());
 			while (tokenizer.hasMoreElements()) {
-				builder.append(SPACE_STRING);
+				builder.append(SPACE);
 				builder.append(tokenizer.nextToken());
 			}
 		}
@@ -1312,7 +1333,7 @@ public class StringUtils {
 	 * @return 
 	 */
 	public static String delete(String str, String mark, boolean ignoreCase) {
-		return replaceAll(str, mark, EMPTY_STRING, ignoreCase);
+		return replaceAll(str, mark, EMPTY, ignoreCase);
 	}
 	
 	/**
@@ -1362,7 +1383,7 @@ public class StringUtils {
 	 */
 	public static String join(Collection<?> collection, String seperator) {
 		if (CollectionUtils.isEmpty(collection))
-			return EMPTY_STRING;
+			return EMPTY;
 		
 		StringBuilder result = new StringBuilder();
 		Iterator<?> iterator = collection.iterator();
@@ -1395,7 +1416,7 @@ public class StringUtils {
 	 */
 	public static String join(Object[] array, String seperator, int startIndex, int endIndex) {
 		if (ArrayUtils.isEmpty(array))
-			return EMPTY_STRING;
+			return EMPTY;
 		
 		if (startIndex < 0)
 			startIndex = 0;
@@ -1439,7 +1460,7 @@ public class StringUtils {
 	 * @return 
 	 */
 	public static String toString(Object value) {
-		return toString(value, EMPTY_STRING);
+		return toString(value, EMPTY);
 	}
 	
 	/**
@@ -1804,7 +1825,7 @@ public class StringUtils {
 	 * @return
 	 */
 	public static String leftSupplement(Number number, char c, int minLength) {
-		return leftSupplement(number != null ? number.toString() : EMPTY_STRING, c, minLength);
+		return leftSupplement(number != null ? number.toString() : EMPTY, c, minLength);
 	}
 	
 	/**
@@ -1827,7 +1848,7 @@ public class StringUtils {
 	 * @return
 	 */
 	public static String rightSupplement(Number number, char c, int minLength) {
-		return rightSupplement(number != null ? number.toString() : EMPTY_STRING, c, minLength);
+		return rightSupplement(number != null ? number.toString() : EMPTY, c, minLength);
 	}
 	
 	/**
@@ -1840,7 +1861,7 @@ public class StringUtils {
 	 */
 	public static String leftSupplement(String str, char c, int minLength) {
 		if (str == null)
-			str = EMPTY_STRING;
+			str = EMPTY;
 		
 		int length = str.length();
 		if (length < minLength) {
@@ -1865,7 +1886,7 @@ public class StringUtils {
 	 */
 	public static String rightSupplement(String str, char c, int minLength) {
 		if (str == null)
-			str = EMPTY_STRING;
+			str = EMPTY;
 		
 		int length = str.length();
 		if (length < minLength) {
@@ -1891,7 +1912,7 @@ public class StringUtils {
 		if (pattern == null || str == null)
 			return false;
 		
-		int firstIndex = pattern.indexOf('*');
+		int firstIndex = pattern.indexOf(ANY_CHAR);
 		if (firstIndex == -1) 
 			return pattern.equals(str);
 		
@@ -1899,7 +1920,7 @@ public class StringUtils {
 			if (pattern.length() == 1) 
 				return true;
 			
-			int nextIndex = pattern.indexOf('*', firstIndex + 1);
+			int nextIndex = pattern.indexOf(ANY_CHAR, firstIndex + 1);
 			if (nextIndex == -1) 
 				return str.endsWith(pattern.substring(1));
 			

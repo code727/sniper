@@ -37,7 +37,7 @@ public class MapThreadLocalContext implements Context {
 	private Object attributeName;
 	
 	public MapThreadLocalContext() {
-		this(StringUtils.EMPTY_STRING);
+		this(StringUtils.EMPTY);
 	}
 	
 	public MapThreadLocalContext(Object attributeName) {

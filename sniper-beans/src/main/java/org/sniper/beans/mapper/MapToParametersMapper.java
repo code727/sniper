@@ -21,24 +21,24 @@ package org.sniper.beans.mapper;
 import java.util.Map;
 import java.util.Set;
 
-import org.sniper.beans.parameter.MapParameter;
-import org.sniper.beans.parameter.Parameter;
+import org.sniper.beans.parameter.DefaultParameters;
+import org.sniper.beans.parameter.Parameters;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * Map对象与org.sniper.beans.parameter.Parameter对象之间的映射转换
+ * Map对象与org.sniper.beans.parameter.Parameters对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MapToParameterMapper<V> extends AbstractMapper<Map<String, V>, Parameter<String, V>> {
+public class MapToParametersMapper<V> extends AbstractMapper<Map<String, V>, Parameters<String, V>> {
 	
 	@Override
-	public Parameter<String, V> mapping(Map<String, V> source, Set<MapperRule> mapperRules) throws Exception {
+	public Parameters<String, V> mapping(Map<String, V> source, Set<MapperRule> mapperRules) throws Exception {
 		if (MapUtils.isEmpty(source))
 			return null;
 		
-		Parameter<String, V> parameter = new MapParameter<String, V>();
+		Parameters<String, V> parameters = new DefaultParameters<String, V>();
 		
 		if (CollectionUtils.isNotEmpty((mapperRules))) {
 			if (isAutoMapping()) {
@@ -46,23 +46,23 @@ public class MapToParameterMapper<V> extends AbstractMapper<Map<String, V>, Para
 				Set<String> autoMappedNames = source.keySet();
 				
 				for (MapperRule rule : mapperRules) {
-					parameter.add(rule.getMappedName(), source.get(rule.getOriginalName()));
+					parameters.add(rule.getMappedName(), source.get(rule.getOriginalName()));
 					// 删除已完成映射的参数名称
 					autoMappedNames.remove(rule.getOriginalName());
 				}
 					
 				/* 完成规则外的映射 */
 				for (String mappedName : autoMappedNames) 
-					parameter.add(mappedName, source.get(mappedName));
+					parameters.add(mappedName, source.get(mappedName));
 				
 			} else {
 				for (MapperRule rule : mapperRules) 
-					parameter.add(rule.getMappedName(), source.get(rule.getOriginalName()));
+					parameters.add(rule.getMappedName(), source.get(rule.getOriginalName()));
 			}
 		} else
-			parameter.setParameters(source);
+			parameters.setMappedItems(source);
 		
-		return parameter;
+		return parameters;
 	}
 	
 }

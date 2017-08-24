@@ -159,7 +159,7 @@ public final class ThirdPaymentStatus extends AbstractNestableLocaleEnums<String
 	 */
 	public static String getPaymentMessage(String thirdCode, Object[] params) {
 		PaymentStatus payStatus = getPaymentStatus(thirdCode);
-		return payStatus != null ? payStatus.getMessage(params) : StringUtils.EMPTY_STRING;
+		return payStatus != null ? payStatus.getMessage(params) : StringUtils.EMPTY;
 	}
 		
 }
