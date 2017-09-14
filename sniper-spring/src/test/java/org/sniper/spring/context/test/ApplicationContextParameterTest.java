@@ -23,8 +23,8 @@ import java.util.Map;
 import org.junit.Test;
 import org.sniper.beans.parameter.handler.CoverageDulicateKeyHandler;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.spring.context.ApplicationContextParameter;
-import org.sniper.spring.context.ParameterService;
+import org.sniper.spring.context.ApplicationContextParameters;
+import org.sniper.spring.context.ParametersService;
 import org.sniper.test.junit.BaseTestCase;
 
 /**
@@ -37,17 +37,17 @@ public class ApplicationContextParameterTest extends BaseTestCase {
 	@Test
 	public void test() throws Exception {
 		
-		ApplicationContextParameter<String, Object> parameter = new ApplicationContextParameter<String, Object>();
+		ApplicationContextParameters<String, Object> parameter = new ApplicationContextParameters<String, Object>();
 		parameter.setKeyHandler(new CoverageDulicateKeyHandler());
 		
 		/* 设置初始参数列表 */
-		Map<String, Object> mappedItems = MapUtils.newHashMap();
-		mappedItems.put("name", "dubin");
-		mappedItems.put("age", "33");
-		parameter.setMappedItems(mappedItems);
+		Map<String, Object> parameterItems = MapUtils.newHashMap();
+		parameterItems.put("name", "dubin");
+		parameterItems.put("age", "33");
+		parameter.setParameterItems(parameterItems);
 		
 		/* 预加载其余参数，例如从数据库中获取系统全局的配置参数 */
-		parameter.setParameterService(new ParameterService() {
+		parameter.setParameterService(new ParametersService() {
 			
 			@SuppressWarnings("unchecked")
 			@Override

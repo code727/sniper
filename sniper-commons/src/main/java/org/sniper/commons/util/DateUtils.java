@@ -23,7 +23,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import org.sniper.commons.enums.astrology.Horoscope;
@@ -47,6 +49,13 @@ public class DateUtils {
 	/** 默认的日期时间(带毫秒)格式 */
 	public static final String DEFAULT_DATETIME_PLUS_FORMAT = "yyyy-MM-dd HH:mm:ss:SSS";
 	
+	/** 格林尼治日期时间格式组 */
+	public static final String[] GMT_DATETIME_FORMATS = new String[] {
+			"EEE, dd MMM yyyy HH:mm:ss zzz",
+			"EEE, dd-MMM-yy HH:mm:ss zzz",
+			"EEE MMM dd HH:mm:ss yyyy"
+	};
+	
 	/** 星期一字符串 */
 	public static final String MONDAY = "Monday";
 	
@@ -68,9 +77,9 @@ public class DateUtils {
 	/** 星期日字符串 */
 	public static final String SUNDAY = "Sunday";
 		
-	/** 全局模式与日期时间格式关系映射集 */
+	/** 全局键与日期时间格式关系映射集 */
 	private static final Map<String, SimpleDateFormat> dateFormates = MapUtils.newConcurrentHashMap();
-			
+	
 	/**
 	 * 根据指定的模式获取日期格式对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -85,6 +94,59 @@ public class DateUtils {
 		if (dateFormat == null) {
 			dateFormat = new SimpleDateFormat(pattern);
 			dateFormates.put(pattern, dateFormat);
+		}
+		
+		return dateFormat;
+	}
+	
+	/**
+	 * 获取工具默认支持的格林尼治日期时间格式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static SimpleDateFormat getGMTDateFormat() {
+		return getGMTDateFormat(0);
+	}
+	
+	/**
+	 * 根据索引获取工具所支持的格林尼治日期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param index
+	 * @return
+	 */
+	public static SimpleDateFormat getGMTDateFormat(int index) {
+		return getGMTDateFormat(index, null);
+	}
+	
+	/**
+	 * 根据Locale对象获取工具默认支持的格林尼治日期时间格式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param locale
+	 * @return
+	 */
+	public static SimpleDateFormat getGMTDateFormat(Locale locale) {
+		return getGMTDateFormat(0, locale);
+	}
+	
+	/**
+	 * 根据索引和Locale对象获取工具所支持的格林尼治日期时间格式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param index
+	 * @param locale
+	 * @return
+	 */
+	public static SimpleDateFormat getGMTDateFormat(int index, Locale locale) {
+		if (locale == null)
+			locale = Locale.US;
+		
+		String pattern = GMT_DATETIME_FORMATS[NumberUtils.rangeLimit(index, 0, GMT_DATETIME_FORMATS.length - 1)];
+		String key = pattern + StringUtils.UNDER_LINE + locale;
+		
+		SimpleDateFormat dateFormat = dateFormates.get(key);
+		if (dateFormat == null) {
+			dateFormat = new SimpleDateFormat(pattern, locale);
+			dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+			dateFormates.put(key, dateFormat);
 		}
 		
 		return dateFormat;
@@ -616,13 +678,7 @@ public class DateUtils {
 		
 		return leapYears;
 	}
-	
-	public static void main(String[] args) {
-		Date when = stringToDate("2000-03-15 12:31:15");
-		Date then = new Date();
-		System.out.println(getLeapYears(when, then));
-	}
-	
+		
 	/**
 	 * 获取两日期间经历的所有闰年
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

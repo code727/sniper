@@ -18,6 +18,7 @@
 
 package org.sniper.commons.util;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -63,10 +64,10 @@ public class MapUtils {
 	 * @param map
 	 * @return
 	 */
-	public static <K, V> HashMap<K, V> newHashMap(Map<? extends K, ? extends V> map) {
+	public static <K, V> HashMap<K, V> newHashMap(Map<? extends K, ? extends V> map) {		
 		return map != null ? new HashMap<K, V>(map) : new HashMap<K, V>();
 	}
-	
+		
 	/**
 	 * 实例化一个LinkedHashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -220,6 +221,17 @@ public class MapUtils {
 	 */
 	public static <K, V> IdentityHashMap<K, V> newIdentityHashMap(Map<? extends K, ? extends V> map) {
 		return map != null ? new IdentityHashMap<K, V>(map) : new IdentityHashMap<K, V>();
+	}
+	
+	/**
+	 * 根据指定的映射集实例化一个不可变的Map对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param map
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static <K, V> Map<K,V> newUnmodifiableMap(Map<? extends K, ? extends V> map) {
+		return (Map<K, V>) (map != null ? Collections.unmodifiableMap(map) : Collections.emptyMap());
 	}
 			
 	/**

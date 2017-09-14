@@ -20,8 +20,6 @@ package org.sniper.payment.service;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.sniper.commons.enums.ebusiness.O2OType;
 import org.sniper.commons.enums.status.SystemStatus;
 import org.sniper.commons.model.CodeModel;
@@ -35,10 +33,12 @@ import org.sniper.payment.Payment;
 import org.sniper.payment.enums.payment.PaymentStatus;
 import org.sniper.payment.enums.payment.PaymentType;
 import org.sniper.payment.factory.PaymentFactory;
-import org.sniper.spring.context.ApplicationContextParameter;
+import org.sniper.spring.context.ApplicationContextParameters;
 import org.sniper.support.generator.DateTimeIDGenerator;
 import org.sniper.support.generator.IDGenerator;
 import org.sniper.support.signature.Signature;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 支付服务抽象类
@@ -54,7 +54,7 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 	
 	/** 支付应用上下文配置参数项 */
 	@Autowired
-	protected ApplicationContextParameter<Object, Object> paymentContextParameters;
+	protected ApplicationContextParameters<Object, Object> paymentContextParameters;
 	
 	/** 订单服务接口 */
 	@Autowired
@@ -140,12 +140,11 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 		this.paymentHttpTemplate = paymentHttpTemplate;
 	}
 
-	public ApplicationContextParameter<Object, Object> getPaymentContextParameters() {
+	public ApplicationContextParameters<Object, Object> getPaymentContextParameters() {
 		return paymentContextParameters;
 	}
 
-	public void setPaymentContextParameters(
-			ApplicationContextParameter<Object, Object> paymentContextParameters) {
+	public void setPaymentContextParameters(ApplicationContextParameters<Object, Object> paymentContextParameters) {
 		this.paymentContextParameters = paymentContextParameters;
 	}
 

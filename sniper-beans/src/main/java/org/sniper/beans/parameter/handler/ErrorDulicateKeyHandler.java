@@ -34,11 +34,10 @@ public class ErrorDulicateKeyHandler implements KeyHandler {
 
 	@Override
 	public <K, V, K1 extends K, V1 extends V> void put(Map<K, V> map, K1 key, V1 value) {
-		AssertUtils.assertTrue(!map.containsKey(key), "Dulicate map key [ " + key + "].");
+		AssertUtils.assertTrue(!map.containsKey(key), "Dulicate map key [ " + key + "]");
 		map.put(key, value);
 	}
 
-	
 	@Override
 	public <K, V, K1 extends K, V1 extends V> void putAll(Map<K, V> map, Map<K1, V1> puted) {
 		if (MapUtils.isEmpty(puted))

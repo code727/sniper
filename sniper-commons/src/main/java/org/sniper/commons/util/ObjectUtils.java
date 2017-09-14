@@ -39,12 +39,15 @@ public class ObjectUtils {
 		if (obj == null)
 			return true;
 		
-		if (obj.getClass().isArray())
-			return Array.getLength(obj) == 0;
 		if (obj instanceof CharSequence)
 			return ((CharSequence)obj).length() == 0;
+		
+		if (obj.getClass().isArray())
+			return Array.getLength(obj) == 0;
+		
 		if (obj instanceof Collection)
 			return ((Collection<?>)obj).size() == 0;
+		
 		if (obj instanceof Map<?, ?>)
 			return ((Map<?,?>)obj).size() == 0;
 		
@@ -59,6 +62,41 @@ public class ObjectUtils {
 	 */
 	public static boolean isNotEmpty(Object obj) {
 		return !isEmpty(obj);
+	}
+	
+	/**
+	 * 判断对象是否为空白
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isBlank(Object obj) {
+		if (obj == null)
+			return true;
+		
+		if (obj instanceof CharSequence)
+			return StringUtils.isBlank(obj.toString());
+		
+		if (obj.getClass().isArray())
+			return Array.getLength(obj) == 0;
+		
+		if (obj instanceof Collection)
+			return ((Collection<?>)obj).size() == 0;
+		
+		if (obj instanceof Map<?, ?>)
+			return ((Map<?,?>)obj).size() == 0;
+		
+		return false;
+	}
+	
+	/**
+	 * 判断对象是否不为空白
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isNotBlank(Object obj) {
+		return !isBlank(obj);
 	}
 	
 	/**

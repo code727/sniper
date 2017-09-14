@@ -62,7 +62,7 @@ public class BeanToParametersMapper<V> extends AbstractMapper<Object, Parameters
 					parameters.add(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
 			}
 		} else
-			parameters.setMappedItems((Map<String, V>) BeanUtils.create(source));
+			parameters.setParameterItems((Map<String, V>) BeanUtils.create(source));
 		
 		return parameters;
 	}

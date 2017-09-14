@@ -46,8 +46,7 @@ public class BooleanResponseHandler extends StringResponseHandler {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected <T> T handle(String response) {
-		return (T) Boolean.valueOf(BooleanEnum.TRUE.name().equalsIgnoreCase(response) || BooleanEnum.Y.name().equalsIgnoreCase(response)
-				|| String.valueOf(BooleanEnum.TRUE.ordinal()).equals(response));
+		return (T) BooleanEnum.parse(response);
 	}
 	
 }

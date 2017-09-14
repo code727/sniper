@@ -27,5 +27,16 @@ public enum BooleanEnum {
 	FALSE,
 	TRUE,
 	N,
-	Y
+	Y;
+	
+	/**
+	 * 根据字符串值解析出布尔值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 * @return
+	 */
+	public static Boolean parse(String value) {
+		return Boolean.valueOf(BooleanEnum.TRUE.name().equalsIgnoreCase(value) || BooleanEnum.Y.name().equalsIgnoreCase(value)
+				|| String.valueOf(BooleanEnum.TRUE.ordinal()).equals(value));
+	}
 }

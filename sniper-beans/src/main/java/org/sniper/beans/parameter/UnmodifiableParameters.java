@@ -18,74 +18,18 @@
 
 package org.sniper.beans.parameter;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * 泛型参数接口
+ * 不可修改的泛型参数接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Parameters<K, V> {
-	
-	/**
-	 * 设置参数映射项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameters
-	 * @return
-	 */
-	public void setMappedItems(Map<K, V> mappedItems);
-	
-	/**
-	 * 获取所有的参数映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Map<K, V> getMappedItems();
-	
-	/**
-	 * 新增参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param value
-	 */
-	public void add(K name, V value);
-	
-	/**
-	 * 获取指定名称的参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @return
-	 */
-	public V getValue(K name);
-		
-	/**
-	 * 获取所有的参数名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Set<K> getNames();
-	
-	/**
-	 * 获取所有的参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public List<V> getValues();
-	
-	/**
-	 * 删除指定名称的参数项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 */
-	public void remove(K name);
-	
-	/**
-	 * 清除所有参数项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	public void clear();
+public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取参数的个数
@@ -109,7 +53,36 @@ public interface Parameters<K, V> {
 	public boolean isNotEmpty();
 	
 	/**
-	 * 获取字符串参数值
+	 * 获取所有的参数映射集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Map<K, V> getParameterItems();
+	
+	/**
+	 * 获取所有的参数名
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Set<K> getNames();
+	
+	/**
+	 * 获取所有的参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public List<V> getValues();
+	
+	/**
+	 * 获取指定名称的参数值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public V getValue(K name);
+	
+	/**
+	 * 获取字符串参数值，未获取到时返回默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -126,7 +99,41 @@ public interface Parameters<K, V> {
 	public String getString(K name, String defaultValue);
 	
 	/**
-	 * 获取包装类布尔参数值
+	 * 根据名称获取不为空的字符串值，未获取到时返回不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public String getNotEmptyStringt(K name);
+	
+	/**
+	 * 根据名称获取不为空的字符串值，未获取到时返回指定不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public String getNotEmptyStringt(K name, String defaultValue);
+	
+	/**
+	 * 根据名称获取不为空白的字符串值，未获取到时返回不为空白的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public String getNotBlankStringt(K name);
+	
+	/**
+	 * 根据名称获取不为空白的字符串值，未获取到时返回指定不为空白的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public String getNotBlankStringt(K name, String defaultValue);
+	
+	/**
+	 * 获取包装类布尔参数值，未获取到时返回默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -143,7 +150,7 @@ public interface Parameters<K, V> {
 	public Boolean getBoolean(K name, Boolean defaultValue);
 	
 	/**
-	 * 获取布尔参数值
+	 * 获取布尔参数值，未获取到时返回不为空的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -160,7 +167,7 @@ public interface Parameters<K, V> {
 	public boolean getBooleanValue(K name, boolean defaultValue);
 	
 	/**
-	 * 获取包装类比特参数值
+	 * 获取包装类比特参数值，未获取到时返回默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -177,7 +184,7 @@ public interface Parameters<K, V> {
 	public Byte getByte(K name, Byte defaultValue);
 	
 	/**
-	 * 获取比特参数值
+	 * 获取比特参数值，未获取到时返回不为空的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -194,7 +201,7 @@ public interface Parameters<K, V> {
 	public byte getByteValue(K name, byte defaultValue);
 	
 	/**
-	 * 获取包装类短整型参数值
+	 * 获取包装类短整型参数值，未获取到时返回默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -211,7 +218,7 @@ public interface Parameters<K, V> {
 	public Short getShort(K name, Short defaultValue);
 	
 	/**
-	 * 获取短整型参数值
+	 * 获取短整型参数值，未获取到时返回不为空的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -228,7 +235,7 @@ public interface Parameters<K, V> {
 	public short getShortValue(K name, short defaultValue);
 	
 	/**
-	 * 获取包装类整型参数值
+	 * 获取包装类整型参数值，未获取到时返回默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -245,7 +252,7 @@ public interface Parameters<K, V> {
 	public Integer getInteger(K name, Integer defaultValue);
 	
 	/**
-	 * 获取整型参数值
+	 * 获取整型参数值，未获取到时返回不为空的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -262,7 +269,7 @@ public interface Parameters<K, V> {
 	public int getIntegerValue(K name, int defaultValue);
 	
 	/**
-	 * 获取包装类长整型参数值
+	 * 获取包装类长整型参数值，未获取到时返回默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -279,7 +286,7 @@ public interface Parameters<K, V> {
 	public Long getLong(K name, Long defaultValue);
 	
 	/**
-	 * 获取长整型参数值
+	 * 获取长整型参数值，未获取到时返回不为空的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -296,7 +303,7 @@ public interface Parameters<K, V> {
 	public long getLongValue(K name, long defaultValue);
 	
 	/**
-	 * 获取包装类单精度浮点参数值
+	 * 获取包装类单精度浮点参数值，未获取到时返回默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -313,7 +320,7 @@ public interface Parameters<K, V> {
 	public Float getFloat(K name, Float defaultValue);
 	
 	/**
-	 * 获取单精度浮点参数值
+	 * 获取单精度浮点参数值，未获取到时返回不为空的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -330,7 +337,7 @@ public interface Parameters<K, V> {
 	public float getFloatValue(K name, float defaultValue);
 	
 	/**
-	 * 获取包装类双精度浮点参数值
+	 * 获取包装类双精度浮点参数值，未获取到时返回默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -347,7 +354,7 @@ public interface Parameters<K, V> {
 	public Double getDouble(K name, Double defaultValue);
 	
 	/**
-	 * 获取双精度浮点参数值
+	 * 获取双精度浮点参数值，未获取到时返回不为空的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -362,5 +369,73 @@ public interface Parameters<K, V> {
 	 * @return
 	 */
 	public double getDoubleValue(K name, double defaultValue);
+	
+	/**
+	 * 获取BigInteger参数值，未获取到时返回默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public BigInteger getBigInteger(K name);
+	
+	/**
+	 * 获取BigInteger参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public BigInteger getBigInteger(K name, BigInteger defaultValue);
+	
+	/**
+	 * 获取BigInteger参数值，未获取到时返回不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public BigInteger getBigIntegerValue(K name);
+	
+	/**
+	 * 获取BigInteger参数值，未获取到时返回指定不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public BigInteger getBigIntegerValue(K name, BigInteger defaultValue);
+	
+	/**
+	 * 获取BigDecimal参数值，未获取到时返回默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public BigDecimal getBigDecimal(K name);
+	
+	/**
+	 * 获取BigDecimal参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public BigDecimal getBigDecimal(K name, BigDecimal defaultValue);
+	
+	/**
+	 * 获取BigDecimal参数值，未获取到时返回不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public BigDecimal getBigDecimalValue(K name);
+	
+	/**
+	 * 获取BigDecimal参数值，未获取到时返回指定不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public BigDecimal getBigDecimalValue(K name, BigDecimal defaultValue);
 
 }

@@ -18,7 +18,6 @@
 
 package org.sniper.kafka.producer;
 
-import org.sniper.commons.DataPair;
 import org.sniper.commons.KeyValuePair;
 
 /**
@@ -35,17 +34,13 @@ public class MessagePacket<K, V> extends KeyValuePair<K, V> {
 	
 	/** 时间戳 */
 	private Long timestamp;
-	
-	public MessagePacket() {
-		super();
-	}
-	
+		
 	public MessagePacket(K key) {
 		super(key);
 	}
 	
-	public MessagePacket(DataPair<K, V> pair) {
-		super(pair);
+	public MessagePacket(KeyValuePair<K, V> keyValuePair) {
+		super(keyValuePair);
 	}
 	
 	public MessagePacket(K key, V value) {

@@ -60,7 +60,7 @@ public class ParametersToMapMapper<V> extends AbstractMapper<Parameters<String, 
 					map.put(rule.getMappedName(), parameters.getValue(rule.getOriginalName()));
 			}
 		} else
-			map.putAll(parameters.getMappedItems());
+			map.putAll(parameters.getParameterItems());
 
 		return map;
 	}

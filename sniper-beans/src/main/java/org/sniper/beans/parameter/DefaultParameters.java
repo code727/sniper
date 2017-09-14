@@ -18,14 +18,19 @@
 
 package org.sniper.beans.parameter;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.sniper.commons.enums.logic.BooleanEnum;
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.commons.util.MapUtils;
+import org.sniper.commons.util.NumberUtils;
+import org.sniper.commons.util.ObjectUtils;
+import org.sniper.commons.util.StringUtils;
 
 /**
  * 泛型参数默认实现类
@@ -34,67 +39,72 @@ import org.sniper.commons.util.MapUtils;
  */
 public class DefaultParameters<K, V> implements Parameters<K, V> {
 	
-	/** 参数映射项 */
-	protected Map<K, V> mappedItems;
+	protected Map<K, V> parameterItems;
 	
 	public DefaultParameters() {
 		this((Map<K, V>) null);
 	}
 	
 	public DefaultParameters(Parameters<K, V> parameters) {
-		this(parameters != null ? parameters.getMappedItems() : null);
+		this(parameters != null ? parameters.getParameterItems() : null);
 	}
 	
-	public DefaultParameters(Map<K, V> mappedItems) {
-		setMappedItems(mappedItems);
+	public DefaultParameters(Map<K, V> parameterItems) {
+		setParameterItems(parameterItems);
 	}
 	
 	@Override
-	public void setMappedItems(Map<K, V> mappedItems) {
-		if (mappedItems instanceof LinkedHashMap)
-			this.mappedItems = mappedItems;
+	public void setParameterItems(Map<K, V> parameterItems) {
+		if (parameterItems != null)
+			this.parameterItems = parameterItems;
 		else
-			this.mappedItems = MapUtils.newLinkedHashMap(mappedItems);
-	}
-
-	@Override
-	public Map<K, V> getMappedItems() {
-		return mappedItems;
+			this.parameterItems = new LinkedHashMap<K,V>();
 	}
 	
 	@Override
 	public void add(K name, V value) {
-		mappedItems.put(name, value);
-	}
-
-	@Override
-	public V getValue(K name) {
-		return mappedItems.get(name);
+		parameterItems.put(name, value);
 	}
 	
 	@Override
-	public Set<K> getNames() {
-		return mappedItems.keySet();
+	public void addAll(Map<K, V> parameterItems) {
+		if (parameterItems != null)
+			parameterItems.putAll(parameterItems);
 	}
-
+	
 	@Override
-	public List<V> getValues() {
-		return CollectionUtils.newArrayList(this.mappedItems.values());
-	}
-
-	@Override
-	public void remove(K name) {
-		mappedItems.remove(name);
+	public V remove(K name) {
+		return parameterItems.remove(name);
 	}
 
 	@Override
 	public void clear() {
-		mappedItems.clear();
+		parameterItems.clear();
+	}
+	
+	@Override
+	public Map<K, V> getParameterItems() {
+		return parameterItems;
+	}
+
+	@Override
+	public V getValue(K name) {
+		return parameterItems.get(name);
+	}
+
+	@Override
+	public Set<K> getNames() {
+		return parameterItems.keySet();
+	}
+
+	@Override
+	public List<V> getValues() {
+		return CollectionUtils.newArrayList(this.parameterItems.values());
 	}
 
 	@Override
 	public int size() {
-		return mappedItems.size();
+		return parameterItems.size();
 	}
 
 	@Override
@@ -109,7 +119,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 	
 	@Override
 	public String toString() {
-		return mappedItems.toString();
+		return parameterItems.toString();
 	}
 
 	@Override
@@ -119,10 +129,32 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public String getString(K name, String defaultValue) {
-		V value = mappedItems.get(name);
+		V value = parameterItems.get(name);
 		return value != null ? value.toString() : defaultValue;
 	}
+	
+	@Override
+	public String getNotEmptyStringt(K name) {
+		return getNotEmptyStringt(name, null);
+	}
 
+	@Override
+	public String getNotEmptyStringt(K name, String defaultValue) {
+		String value = ObjectUtils.toString(parameterItems.get(name));
+		return StringUtils.isNotEmpty(value) ? value : (StringUtils.isNotEmpty(defaultValue) ? defaultValue : StringUtils.NULL);
+	}
+
+	@Override
+	public String getNotBlankStringt(K name) {
+		return getNotBlankStringt(name, null);
+	}
+
+	@Override
+	public String getNotBlankStringt(K name, String defaultValue) {
+		String value = ObjectUtils.toString(parameterItems.get(name));
+		return StringUtils.isNotBlank(value) ? value : (StringUtils.isNotBlank(defaultValue) ? defaultValue : StringUtils.NULL);
+	}
+	
 	@Override
 	public Boolean getBoolean(K name) {
 		return getBoolean(name, null);
@@ -130,14 +162,16 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Boolean getBoolean(K name, Boolean defaultValue) {
-		V value = mappedItems.get(name);
-		if (value != null) {
-			String str = value.toString();
-			return Boolean.valueOf(BooleanEnum.TRUE.name().equalsIgnoreCase(str) 
-					|| BooleanEnum.Y.name().equalsIgnoreCase(str) || String.valueOf(BooleanEnum.TRUE.ordinal()).equals(str));
-		}
-			
-		return defaultValue;		
+		V value = parameterItems.get(name);
+		
+		if (value instanceof Boolean)
+			return (Boolean) value;
+		
+		String stringValue = ObjectUtils.toString(value);
+		if (StringUtils.isBlank(stringValue))
+			return defaultValue;
+		
+		return BooleanEnum.parse(stringValue);
 	}
 
 	@Override
@@ -149,7 +183,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 	public boolean getBooleanValue(K name, boolean defaultValue) {
 		return getBoolean(name, defaultValue);
 	}
-
+	
 	@Override
 	public Byte getByte(K name) {
 		return getByte(name, null);
@@ -157,8 +191,23 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Byte getByte(K name, Byte defaultValue) {
-		V value = mappedItems.get(name);
-		return value instanceof Number ? ((Number) value).byteValue() : defaultValue;
+		V value = parameterItems.get(name);
+		
+		if (value instanceof Number)
+			return ((Number) value).byteValue();
+		
+		String stringValue = ObjectUtils.toString(value);
+		if (StringUtils.isBlank(stringValue))
+			return defaultValue;
+		
+		try {
+			/* 这里不用Byte.parseByte(value.toString())的原因在于当value为字符串类型的小数时，最终的结果会抛出NumberFormatException。
+			 * 因此这里为了与Number类型的小数(如Double、Float和BigDecimal)保持一致的转换结果，统一的先将字符串转换成BigDecimal后再获取最终结果。
+			 * 如下getLong、getShort、getInteger、getBigInteger方法的处理方式类似。*/
+			return new BigDecimal(stringValue).byteValue();
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException("Can not cast to byte, [name:" + name + ",value:" + stringValue + "]");
+	    }
 	}
 	
 	@Override
@@ -178,8 +227,20 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Short getShort(K name, Short defaultValue) {
-		V value = mappedItems.get(name);
-		return value instanceof Number ? ((Number) value).shortValue() : defaultValue;
+		V value = parameterItems.get(name);
+				
+		if (value instanceof Number)
+			return ((Number) value).shortValue();
+		
+		String stringValue = ObjectUtils.toString(value);
+		if (StringUtils.isBlank(stringValue))
+			return defaultValue;
+		
+		try {
+			return new BigDecimal(stringValue).shortValue();
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException("Can not cast to short, [name:" + name + ",value:" + stringValue + "]");
+	    }
 	}
 	
 	@Override
@@ -199,10 +260,22 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Integer getInteger(K name, Integer defaultValue) {
-		V value = mappedItems.get(name);
-		return value instanceof Number ? ((Number) value).intValue() : defaultValue;
+		V value = parameterItems.get(name);
+				
+		if (value instanceof Number)
+			return ((Number) value).intValue();
+		
+		String stringValue = ObjectUtils.toString(value);
+		if (StringUtils.isBlank(stringValue))
+			return defaultValue;
+		
+		try {
+			return new BigDecimal(stringValue).intValue();
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException("Can not cast to integer, [name:" + name + ",value:" + stringValue + "]");
+	    }
 	}
-
+	
 	@Override
 	public int getIntegerValue(K name) {
 		return getIntegerValue(name, 0);
@@ -220,10 +293,22 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Long getLong(K name, Long defaultValue) {
-		V value = mappedItems.get(name);
-		return value instanceof Number ? ((Number) value).longValue() : defaultValue;
+		V value = parameterItems.get(name);
+		
+		if (value instanceof Number)
+			return ((Number) value).longValue();
+		
+		String stringValue = ObjectUtils.toString(value);
+		if (StringUtils.isBlank(stringValue))
+			return defaultValue;
+		
+		try {
+			return new BigDecimal(stringValue).longValue();
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException("Can not cast to long, [name:" + name + ",value:" + stringValue + "]");
+	    }
 	}
-
+	
 	@Override
 	public long getLongValue(K name) {
 		return getLongValue(name, 0L);
@@ -241,10 +326,22 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Float getFloat(K name, Float defaultValue) {
-		V value = mappedItems.get(name);
-		return value instanceof Number ? ((Number) value).floatValue() : defaultValue;
+		V value = parameterItems.get(name);
+		
+		if (value instanceof Number)
+			return ((Number) value).floatValue();
+		
+		String stringValue = ObjectUtils.toString(value);
+		if (StringUtils.isBlank(stringValue))
+			return defaultValue;
+		
+		try {
+			return Float.parseFloat(stringValue);
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException("Can not cast to float, [name:" + name + ",value:" + stringValue + "]");
+	    }
 	}
-
+	
 	@Override
 	public float getFloatValue(K name) {
 		return getFloatValue(name, 0f);
@@ -262,10 +359,22 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Double getDouble(K name, Double defaultValue) {
-		V value = mappedItems.get(name);
-		return value instanceof Number ? ((Number) value).doubleValue() : defaultValue;
+		V value = parameterItems.get(name);
+		
+		if (value instanceof Number)
+			return ((Number) value).doubleValue();
+		
+		String stringValue = ObjectUtils.toString(value);
+		if (StringUtils.isBlank(stringValue))
+			return defaultValue;
+		
+		try {
+			return Double.parseDouble(stringValue);
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException("Can not cast to double, [name:" + name + ",value:" + stringValue + "]");
+	    }
 	}
-
+	
 	@Override
 	public double getDoubleValue(K name) {
 		return getDoubleValue(name, 0d);
@@ -274,6 +383,80 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 	@Override
 	public double getDoubleValue(K name, double defaultValue) {
 		return getDouble(name, defaultValue);
+	}
+
+	@Override
+	public BigInteger getBigInteger(K name) {
+		return getBigInteger(name, null);
+	}
+
+	@Override
+	public BigInteger getBigInteger(K name, BigInteger defaultValue) {
+		V value = parameterItems.get(name);
+		
+		if (value instanceof BigInteger)
+			 return (BigInteger) value;
+		
+		if (value instanceof BigDecimal)
+			return ((BigDecimal) value).toBigInteger();
+		
+		String stringValue = ObjectUtils.toString(value);
+		if (StringUtils.isBlank(stringValue))
+			return defaultValue;
+		
+		try {
+			return new BigDecimal(stringValue).toBigInteger();
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException("Can not cast to big integer, [name:" + name + ",value:" + stringValue + "]");
+	    }
+	}
+
+	@Override
+	public BigInteger getBigIntegerValue(K name) {
+		return getBigIntegerValue(name, NumberUtils.ZERO_BIGINTEGER);
+	}
+	
+	@Override
+	public BigInteger getBigIntegerValue(K name, BigInteger defaultValue) {
+		AssertUtils.assertNotNull(defaultValue, "Default big integer must not be null");
+		return getBigInteger(name, defaultValue);
+	}
+
+	@Override
+	public BigDecimal getBigDecimal(K name) {
+		return getBigDecimal(name, null);
+	}
+
+	@Override
+	public BigDecimal getBigDecimal(K name, BigDecimal defaultValue) {
+		V value = parameterItems.get(name);
+		
+		if (value instanceof BigDecimal)
+			return (BigDecimal) value;
+		
+		if (value instanceof BigInteger)
+			return new BigDecimal((BigInteger) value);
+		
+		String stringValue = ObjectUtils.toString(value);
+		if (StringUtils.isBlank(stringValue))
+			return defaultValue;
+		
+		try {
+			return new BigDecimal(stringValue);
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException("Can not cast to big decimal, [name:" + name + ",value:" + stringValue + "]");
+	    }
+	}
+
+	@Override
+	public BigDecimal getBigDecimalValue(K name) {
+		return getBigDecimalValue(name, NumberUtils.ZERO_BIGDECIMAL);
+	}
+
+	@Override
+	public BigDecimal getBigDecimalValue(K name, BigDecimal defaultValue) {
+		AssertUtils.assertNotNull(defaultValue, "Default big decimal must not be null");
+		return getBigDecimal(name, defaultValue);
 	}
 
 }

@@ -19,12 +19,11 @@
 package org.sniper.beans.parameter;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.sniper.commons.util.MapUtils;
 
 /**
- * 并发泛型参数实现类
+ * 并发参数实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -38,21 +37,18 @@ public class ConcurrentParameters<K, V> extends DefaultParameters<K, V> {
 		super(parameters);
 	}
 	
-	public ConcurrentParameters(Map<K, V> mappedItems) {
-		super(mappedItems);
+	public ConcurrentParameters(Map<K, V> parameterItems) {
+		super(parameterItems);
 	}
 	
 	/**
-	 * 重写父类方法，将mappedItems强制设置为ConcurrentHashMap
+	 * 重写父类方法，将parameterItems强制设置为ConcurrentHashMap
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param mappedItems
+	 * @param parameterItems
 	 */
 	@Override
-	public void setMappedItems(Map<K, V> mappedItems) {
-		if (mappedItems instanceof ConcurrentHashMap)
-			this.mappedItems = mappedItems;
-		else
-			this.mappedItems = MapUtils.newConcurrentHashMap(mappedItems);
+	public void setParameterItems(Map<K, V> parameterItems) {
+		this.parameterItems = MapUtils.newConcurrentHashMap(parameterItems);
 	}
-					
+						
 }

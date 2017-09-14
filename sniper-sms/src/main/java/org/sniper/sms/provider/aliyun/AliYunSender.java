@@ -30,7 +30,7 @@ import org.sniper.json.util.JSONUtils;
 import org.sniper.sms.AbstractSender;
 import org.sniper.sms.packet.MessagePacket;
 import org.sniper.sms.packet.TemplateMessagePacket;
-import org.sniper.spring.context.ApplicationContextParameter;
+import org.sniper.spring.context.ApplicationContextParameters;
 
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
@@ -79,7 +79,7 @@ public class AliYunSender extends AbstractSender {
 	}
 
 	@Override
-	protected Map<String, String> initParameters(ApplicationContextParameter<String, Object> smsContextParameters) {
+	protected Map<String, String> initParameters(ApplicationContextParameters<String, Object> smsContextParameters) {
 		Map<String, String> parameters = MapUtils.newHashMap();
 		String url = smsContextParameters.getString("aliyun.sms.url");
 		if (StringUtils.isBlank(url))

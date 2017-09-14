@@ -31,7 +31,7 @@ import org.sniper.beans.parameter.Parameters;
 import org.sniper.web.WebUtils;
 
 /**
- * javax.servlet.ServletRequest对象与org.sniper.support.parameter.Parameter对象之间的映射转换
+ * javax.servlet.ServletRequest对象与org.sniper.beans.parameter.Parameters对象之间的映射转换
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

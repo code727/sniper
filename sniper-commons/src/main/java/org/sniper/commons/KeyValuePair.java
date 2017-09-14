@@ -18,57 +18,69 @@
 
 package org.sniper.commons;
 
+import java.io.Serializable;
+
+import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.ObjectUtils;
+import org.sniper.commons.util.StringUtils;
+
 /**
  * 键值对
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class KeyValuePair<K, V> implements DataPair<K, V> {
+public class KeyValuePair<K, V> implements Serializable {
 	
 	private static final long serialVersionUID = -6146608197344697759L;
 
+	/** 键 */
 	private K key;
 	
+	/** 值 */
 	private V value;
-	
-	public KeyValuePair() {
-		
-	}
-	
+			
 	public KeyValuePair(K key) {
 		this(key, null);
 	}
 	
-	public KeyValuePair(DataPair<K, V> pair) {
-		if (pair != null) {
-			this.key = pair.getKey();
-			this.value = pair.getValue();
-		}
+	public KeyValuePair(KeyValuePair<K, V> keyValuePair) {
+		this(keyValuePair != null ? keyValuePair.getKey() : null, keyValuePair.getValue());
 	}
 	
 	public KeyValuePair(K key, V value) {
-		this.key = key;
-		this.value = value;
+		setKey(key);
+		setValue(value);
 	}
 	
-	@Override
 	public K getKey() {
 		return key;
 	}
 
-	@Override
 	public void setKey(K key) {
+		checkKey(key);
 		this.key = key;
 	}
 
-	@Override
 	public V getValue() {
 		return value;
 	}
 
-	@Override
 	public void setValue(V value) {
 		this.value = value;
 	}
-
+	
+	/**
+	 * 检查键的合法性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 */
+	protected void checkKey(K key) {
+		AssertUtils.assertTrue(ObjectUtils.isNotBlank(key), "Key must not be null or blank");
+	}
+	
+	@Override
+	public String toString() {
+		return key + StringUtils.ASSIGNMENT + value;
+	}
+		
 }

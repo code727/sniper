@@ -20,7 +20,6 @@ package org.sniper.sms;
 
 import org.sniper.commons.model.impl.CodeMessageModel;
 import org.sniper.sms.packet.MessagePacket;
-import org.sniper.spring.context.ApplicationContextParameter;
 
 /**
  * 短信发送接口
@@ -37,20 +36,5 @@ public interface Sender {
 	 * @return
 	 */
 	public CodeMessageModel send(MessagePacket packet) throws Exception;
-	
-	/**
-	 * 获取短信应用上下文参数项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public ApplicationContextParameter<String, Object> getSmsContextParameters();
-	
-	/**
-	 * 设置短信应用上下文参数项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param smsContextParameters
-	 */
-	public void setSmsContextParameters(ApplicationContextParameter<String, Object> smsContextParameters);
-	
-
+		
 }

@@ -20,9 +20,9 @@ package org.sniper.sms;
 
 import java.util.Map;
 
+import org.sniper.spring.context.ApplicationContextParameters;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.sniper.spring.context.ApplicationContextParameter;
 
 /**
  * 短信发送抽象类
@@ -33,7 +33,7 @@ public abstract class AbstractSender implements Sender, InitializingBean {
 	
 	/** 短信应用上下文配置参数项 */
 	@Autowired
-	private ApplicationContextParameter<String, Object> smsContextParameters;
+	private ApplicationContextParameters<String, Object> smsContextParameters;
 	
 	protected Map<String, String> parameters;
 	
@@ -44,12 +44,8 @@ public abstract class AbstractSender implements Sender, InitializingBean {
 		
 		parameters = initParameters(smsContextParameters);
 	}
-	
-	public ApplicationContextParameter<String, Object> getSmsContextParameters() {
-		return smsContextParameters;
-	}
 
-	public void setSmsContextParameters(ApplicationContextParameter<String, Object> smsContextParameters) {
+	public void setSmsContextParameters(ApplicationContextParameters<String, Object> smsContextParameters) {
 		this.smsContextParameters = smsContextParameters;
 	}
 
@@ -60,6 +56,6 @@ public abstract class AbstractSender implements Sender, InitializingBean {
 	 * @return
 	 */
 	protected abstract Map<String, String> initParameters(
-			ApplicationContextParameter<String, Object> smsContextParameters);
+			ApplicationContextParameters<String, Object> smsContextParameters);
 
 }

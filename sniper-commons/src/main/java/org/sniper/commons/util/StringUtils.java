@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
+import org.sniper.commons.KeyValuePair;
+
 /**
  * 字符串工具类
  * @author <a href="mailto:code727@gmail.com">杜斌</a>
@@ -54,6 +56,18 @@ public class StringUtils {
 	
 	/** 双引号 */
 	public static final String DOUBLE_QUOTES = "\"";
+	
+	/** 正斜杠 */
+	public static final String FORWARD_SLASH = "/";
+	
+	/** 反斜杠 */
+	public static final String BACK_SLASH = "\\";
+	
+	/** 连接线 */
+	public static final String CONNECTION_LINE = "-";
+	
+	/** 下划线 */
+	public static final String UNDER_LINE = "_";
 	
 	/** 类路径标志 */
 	public static final String CLASSPATH = "classpath:";
@@ -1735,6 +1749,47 @@ public class StringUtils {
 	}
 	
 	/**
+	 * 按指定标记将字符串分割成键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @return
+	 */
+	public static KeyValuePair<String, String> splitToKeyValuePair(String str, String mark) {
+		return splitToKeyValuePair(str, mark, false);
+	}
+	
+	/**
+	 * 以忽略大小写的方式用指定标记将字符串分割成键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @return
+	 */
+	public static KeyValuePair<String, String> splitToKeyValuePairIgnoreCase(String str, String mark) {
+		return splitToKeyValuePair(str, mark, true);
+	}
+	
+	/**
+	 * 选择是否按忽略大小写的方式用指定标记将字符串分割成键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param mark
+	 * @param ignoreCase
+	 * @return
+	 */
+	public static KeyValuePair<String, String> splitToKeyValuePair(String str, String mark, boolean ignoreCase) {
+		int index = indexOf(str, mark, ignoreCase);
+		
+		if (index < 1) {
+//			return isNotEmpty(str) ? new KeyValuePair<String, String>(str) : null;
+			return null;
+		}
+		
+		return new KeyValuePair<String, String>(str.substring(0, index), str.substring(index + mark.length()));
+	}
+	
+	/**
 	 * 判断字符串是否有指定的文本标记
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
@@ -1964,7 +2019,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 *  当字符串的长度小于指定指定的最小长度，选择是否在原字符串之后补充minLength-length个char字符
+	 * 当字符串的长度小于指定指定的最小长度，选择是否在原字符串之后补充minLength-length个char字符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param minLength
@@ -1987,5 +2042,38 @@ public class StringUtils {
 		
 		return safeString(str);
 	}
-				
+	
+	/**
+	 * 为字符串追加前缀和后缀
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param prefix
+	 * @param suffix
+	 * @return
+	 */
+	public static StringBuilder append(String str, String prefix, String suffix) {
+		StringBuilder builder = new StringBuilder();
+		
+		if (!EMPTY.equals(prefix))
+			builder.append(prefix);
+		
+		if (!EMPTY.equals(str))
+			builder.append(str);
+		
+		if (!EMPTY.equals(suffix))
+			builder.append(suffix);
+		
+		return builder;
+	}
+	
+	/**
+	 * 为字符串追加前后双引号
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static String appendDoubleQuotes(String str) {
+		return append(str, DOUBLE_QUOTES, DOUBLE_QUOTES).toString();
+	}
+	
 }
