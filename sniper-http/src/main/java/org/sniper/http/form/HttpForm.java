@@ -21,7 +21,9 @@ package org.sniper.http.form;
 
 import org.sniper.beans.Typed;
 import org.sniper.codec.Codecable;
+import org.sniper.commons.enums.http.HttpMethod;
 import org.sniper.http.handler.response.ResponseHandler;
+import org.sniper.http.headers.request.HttpRequestHeaders;
 
 /**
  * HTTP表单接口
@@ -63,43 +65,29 @@ public interface HttpForm extends Typed, Codecable {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param method
 	 */
-	public void setMethod(String method);
+	public void setMethod(HttpMethod method);
 	
 	/**
 	 * 获取发送请求的方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public String getMethod();
+	public HttpMethod getMethod();
 	
 	/**
 	 * 设置请求头
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param header
 	 */
-//	public void setHeader(HttpRequestHeader header);
+	public void setHeaders(HttpRequestHeaders headers);
 	
 	/**
 	 * 获取请求头
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-//	public HttpRequestHeader getHeader();
-	
-	/**
-	 * 设置mimeType
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param mimeType
-	 */
-	public void setMimeType(String mimeType);
-	
-	/**
-	 * 获取mimeType
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getMimeType();
-			
+	public HttpRequestHeaders getHeaders();
+				
 	/**
 	 * 获取嵌套类型路径限定名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

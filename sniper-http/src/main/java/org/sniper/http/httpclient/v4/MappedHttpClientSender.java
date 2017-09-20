@@ -24,7 +24,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.sniper.commons.util.NetUtils;
-import org.sniper.http.HttpAccessor;
+import org.sniper.http.MappedHttpAccessor;
 import org.sniper.http.form.HttpForm;
 import org.sniper.http.httpclient.v4.factory.HttpClientFactory;
 import org.sniper.http.httpclient.v4.factory.HttpClientFactoryBean;
@@ -33,11 +33,11 @@ import org.sniper.http.httpclient.v4.handler.request.RequestHandler;
 import org.sniper.http.httpclient.v4.handler.response.DefaultResponseHandler;
 
 /**
- * HttpClient4.x模板实现类
+ * 已映射的 HttpClient4.x发送器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class HttpClientTemplate extends HttpAccessor {
+public final class MappedHttpClientSender extends MappedHttpAccessor {
 		
 	private HttpClientFactory httpClientFactory;
 		
@@ -88,10 +88,8 @@ public final class HttpClientTemplate extends HttpAccessor {
 		// 已进行编码后的URL
 		String encodedUrl = urlEncoder.encode(url, form.getEncoding());
 		HttpGet httpGet = new HttpGet(encodedUrl);
-//		addHeader(httpGet, form);
-		
 		try {
-			logger.debug("Execute {} request [{}] from form [{}]", HttpGet.METHOD_NAME, url, name);
+			logger.debug("Execute {} request [{}] by form [{}]", HttpGet.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpGet, responseHandler);
 			return handleResponse(form, response);
 		} finally {
@@ -115,11 +113,10 @@ public final class HttpClientTemplate extends HttpAccessor {
 		// 已进行编码后的请求地址，不包含查询字符串部分
 		String encodedAddress = urlEncoder.encode(NetUtils.getAddress(url), form.getEncoding());
 		HttpPost httpPost = new HttpPost(encodedAddress);
-//		addHeader(httpPost, form);
 		
 		try {
-			requestHandler.handle(httpPost, url, requestBody, form);
-			logger.debug("Execute {} request [{}] from form [{}]", HttpPost.METHOD_NAME, url, name);
+			requestHandler.handle(httpPost, url, requestBody, form.getEncoding());
+			logger.info("Execute {} request [{}] by form [{}]", HttpPost.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpPost, responseHandler);
 			return handleResponse(form, response);
 		}  finally {
@@ -143,11 +140,10 @@ public final class HttpClientTemplate extends HttpAccessor {
 		// 已进行编码后的请求地址，不包含查询字符串部分
 		String encodedAddress = urlEncoder.encode(NetUtils.getAddress(url), form.getEncoding());
 		HttpPut httpPut = new HttpPut(encodedAddress);
-//		addHeader(httpPut, form);
 		
 		try {
-			requestHandler.handle(httpPut, url, requestBody, form);
-			logger.debug("Execute {} request [{}] from form [{}]", HttpPut.METHOD_NAME, url, name);
+			requestHandler.handle(httpPut, url, requestBody, form.getEncoding());
+			logger.debug("Execute {} request [{}] by form [{}]", HttpPut.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpPut, responseHandler);
 			return handleResponse(form, response);
 		}  finally {
@@ -171,10 +167,8 @@ public final class HttpClientTemplate extends HttpAccessor {
 		// 已进行编码后的URL
 		String encodedUrl = urlEncoder.encode(url, form.getEncoding());
 		HttpDelete httpDelete = new HttpDelete(encodedUrl);
-//		addHeader(httpDelete, form);
-		
 		try {
-			logger.debug("Execute {} request [{}] from form [{}]", HttpDelete.METHOD_NAME, url, name);
+			logger.debug("Execute {} request [{}] by form [{}]", HttpDelete.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpDelete, responseHandler);
 			return handleResponse(form, response);
 		}  finally {
@@ -182,21 +176,5 @@ public final class HttpClientTemplate extends HttpAccessor {
 				httpDelete.releaseConnection();
 		}
 	}
-		
-//	/**
-//	 * 为HttpRequestBase对象添加表单绑定的Header
-//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-//	 * @param httpGet
-//	 */
-//	protected void addHeader(HttpRequestBase httpRequest, HttpForm form) {
-//		HttpRequestHeader header = form.getHeader();
-//		if (header != null) {
-//			Iterator<Entry<String, Object>> headerItem = header.getAttributes().entrySet().iterator();
-//			while (headerItem.hasNext()) {
-//				Entry<String, Object> item = headerItem.next();
-//				httpRequest.addHeader(item.getKey(), item.getKey());
-//			}
-//		} 
-//	}
-					
+							
 }

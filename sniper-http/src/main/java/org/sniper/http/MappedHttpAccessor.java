@@ -38,11 +38,11 @@ import org.sniper.spring.beans.CheckableInitializingBeanAdapter;
 import org.sniper.templet.message.formatter.MessageFormatter;
 
 /**
- * HTTP访问器抽象类
+ * 已映射的HTTP访问器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class HttpAccessor extends CheckableInitializingBeanAdapter implements HttpSender {
+public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapter implements MappedHttpSender {
 	
 	protected final transient Logger logger;
 	
@@ -63,7 +63,7 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 		SUPPORT_REQUEST_METHOD.put("delete", "doDeleteRequest");
 	}
 	
-	protected HttpAccessor() {
+	protected MappedHttpAccessor() {
 		this.logger = LoggerFactory.getLogger(getClass());
 	}
 	
@@ -116,8 +116,7 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 	 */
 	protected String format(String name, Object param) {
 		String url = formRegister.findURL(name);
-		url = urlFormatter.format(url, param);
-		return url;
+		return urlFormatter.format(url, param);
 	}
 	
 	@Override
@@ -165,7 +164,7 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 		if (form == null)
 			throw new HttpFormNotFoundException("Form [name=" + name +"] not found in register");
 		
-		String methodName = form.getMethod();
+		String methodName = form.getMethod().name();
 		if (StringUtils.isBlank(methodName))
 			methodName = "get";
 		
@@ -235,7 +234,7 @@ public abstract class HttpAccessor extends CheckableInitializingBeanAdapter impl
 	 */
 	protected <T> T doDeleteRequest(String name, Object requestBody, Object param) throws Exception {
 		// HTTP Delete不能设置RequestBody，因此忽略掉
-		return doGetRequest(name, param);
+		return doDeleteRequest(name, param);
 	}
 		
 	/**

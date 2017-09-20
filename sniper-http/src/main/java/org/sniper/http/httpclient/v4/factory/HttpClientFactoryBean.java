@@ -32,7 +32,7 @@ public class HttpClientFactoryBean implements HttpClientFactory {
 	private HttpClientBuilder builder;
 	
 	public HttpClientFactoryBean() {
-		this.builder = HttpClients.custom();
+		this(null);
 	}
 	
 	public HttpClientFactoryBean(HttpClientBuilder builder) {

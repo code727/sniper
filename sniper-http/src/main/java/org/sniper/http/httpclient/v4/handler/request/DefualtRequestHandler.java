@@ -34,10 +34,9 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sniper.commons.enums.http.Media;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.NetUtils;
-import org.sniper.http.enums.MimeTypeEnum;
-import org.sniper.http.form.HttpForm;
 import org.sniper.http.rest.SpringRestSender;
 
 /**
@@ -50,20 +49,16 @@ public class DefualtRequestHandler implements RequestHandler {
 	private static final Logger logger = LoggerFactory.getLogger(DefualtRequestHandler.class);
 
 	@Override
-	public void handle(HttpEntityEnclosingRequestBase httpRequest, 
-			String url, Object requestBody, HttpForm form) throws Exception {
-		
+	public void handle(HttpEntityEnclosingRequestBase httpRequest, String url, Object requestBody, String encoding) throws Exception {
 		ContentType contentType;
 		if (requestBody == null) {
-//			List<NameValuePair> parameters = buildeNameValuePairByQueryString(url);
-//			httpRequest.setEntity(new UrlEncodedFormEntity(parameters, form.getEncoding()));
-			contentType = ContentType.create(MimeTypeEnum.APPLICATION_FORM_URLENCODED.getType(), form.getEncoding()); 
+			contentType = ContentType.create(Media.APPLICATION_FORM_URLENCODED.getType(), encoding); 
 			httpRequest.setEntity(new StringEntity(NetUtils.getQueryString(url), contentType));
 		} else {
 			MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 			builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);  
 			
-			contentType = ContentType.create(MimeTypeEnum.MULTIPART_FORM_DATA.getType(), form.getEncoding()); 
+			contentType = ContentType.create(Media.MULTIPART_FORM_DATA.getType(), encoding); 
 			addParameteres(builder, url, contentType);
 			addRequestBody(builder, requestBody, contentType);
 			

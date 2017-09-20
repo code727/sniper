@@ -16,14 +16,13 @@
  * Create Date : 2015-11-2
  */
 
-package org.sniper.fastdfs.cluster.impl;
+package org.sniper.fastdfs.cluster;
 
 import java.util.Map;
 
 import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.NetUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.fastdfs.cluster.TrackerCluster;
 import org.sniper.fastdfs.node.Tracker;
 import org.sniper.spring.beans.CheckableInitializingBean;
 

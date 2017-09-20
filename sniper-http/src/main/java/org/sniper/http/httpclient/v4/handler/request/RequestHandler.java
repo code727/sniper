@@ -19,7 +19,6 @@
 package org.sniper.http.httpclient.v4.handler.request;
 
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
-import org.sniper.http.form.HttpForm;
 
 /**
  * 请求处理器
@@ -29,15 +28,15 @@ import org.sniper.http.form.HttpForm;
 public interface RequestHandler {
 	
 	/**
-	 * 根据URL和表单对象设置处理HttpEntityEnclosingRequestBase对象
+	 * 根据URL、请求体和字符集编码处理HttpEntityEnclosingRequestBase对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param httpRequest
 	 * @param url
 	 * @param requestBody
-	 * @param form
+	 * @param encoding
 	 * @throws Exception
 	 */
 	public void handle(HttpEntityEnclosingRequestBase httpRequest, 
-			String url, Object requestBody, HttpForm form) throws Exception;
+			String url, Object requestBody, String encoding) throws Exception;
 		
 }

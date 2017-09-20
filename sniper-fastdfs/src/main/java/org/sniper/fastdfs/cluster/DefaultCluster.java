@@ -16,7 +16,7 @@
  * Create Date : 2015-10-30
  */
 
-package org.sniper.fastdfs.cluster.impl;
+package org.sniper.fastdfs.cluster;
 
 import java.util.Iterator;
 import java.util.List;
@@ -28,9 +28,6 @@ import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.NetUtils;
 import org.sniper.commons.util.NumberUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.fastdfs.cluster.Cluster;
-import org.sniper.fastdfs.cluster.StorageGroup;
-import org.sniper.fastdfs.cluster.TrackerCluster;
 import org.sniper.fastdfs.node.Storage;
 import org.sniper.fastdfs.node.Tracker;
 import org.sniper.spring.beans.CheckableInitializingBean;

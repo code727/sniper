@@ -34,5 +34,14 @@ public interface HttpFormConverter {
 	 * @return
 	 */
 	public Map<String, String> convert(Map<String, HttpForm> formMap);
+
+	/** 
+	 * 将单个表单转换成URL字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param form
+	 * @return 
+	 */
+	public String convert(String name, HttpForm form);
 	
 }

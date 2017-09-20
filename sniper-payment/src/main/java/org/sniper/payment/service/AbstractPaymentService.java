@@ -27,7 +27,7 @@ import org.sniper.commons.model.impl.CodeDataModel;
 import org.sniper.commons.model.impl.CodeMessageModel;
 import org.sniper.commons.model.impl.ResultModel;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.http.httpclient.v4.HttpClientTemplate;
+import org.sniper.http.httpclient.v4.MappedHttpClientSender;
 import org.sniper.payment.Order;
 import org.sniper.payment.Payment;
 import org.sniper.payment.enums.payment.PaymentStatus;
@@ -50,7 +50,7 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 	
 	/** 支付接口HTTP调用模板 */
 	@Autowired
-	protected HttpClientTemplate paymentHttpTemplate; 
+	protected MappedHttpClientSender paymentHttpTemplate; 
 	
 	/** 支付应用上下文配置参数项 */
 	@Autowired
@@ -132,11 +132,11 @@ public abstract class AbstractPaymentService<T, P> implements PaymentService, In
 		this.signature = initSignature();
 	}
 	
-	public HttpClientTemplate getPaymentHttpTemplate() {
+	public MappedHttpClientSender getPaymentHttpTemplate() {
 		return paymentHttpTemplate;
 	}
 
-	public void setPaymentHttpTemplate(HttpClientTemplate paymentHttpTemplate) {
+	public void setPaymentHttpTemplate(MappedHttpClientSender paymentHttpTemplate) {
 		this.paymentHttpTemplate = paymentHttpTemplate;
 	}
 

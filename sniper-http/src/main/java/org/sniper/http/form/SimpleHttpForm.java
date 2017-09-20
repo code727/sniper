@@ -19,11 +19,11 @@
 package org.sniper.http.form;
 
 import org.sniper.beans.DefaultTypedBean;
+import org.sniper.commons.enums.http.HttpMethod;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CodecUtils;
-import org.sniper.commons.util.StringUtils;
-import org.sniper.http.enums.MimeTypeEnum;
 import org.sniper.http.handler.response.ResponseHandler;
+import org.sniper.http.headers.request.HttpRequestHeaders;
 
 /**
  * HTTP表单实现类
@@ -39,14 +39,11 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 	private String action;
 	
 	/** 请求方法 */
-	private String method;
+	private HttpMethod method = HttpMethod.GET;
 	
 	/** 请求头对象 */
-//	private HttpRequestHeader header;
-	
-	/** Mime-Type */
-	private String mimeType = MimeTypeEnum.APPLICATION_FORM_URLENCODED.getType();
-	
+	private HttpRequestHeaders headers;
+		
 	/** 字符串编码 */
 	private String encoding = CodecUtils.DEFAULT_ENCODING;
 	
@@ -79,37 +76,24 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 		return action;
 	}
 
-	@Override
-	public void setMethod(String method) {
+	public HttpMethod getMethod() {
+		return method;
+	}
+
+	public void setMethod(HttpMethod method) {
 		this.method = method;
 	}
-
-	@Override
-	public String getMethod() {
-		return this.method;
-	}
-
-//	@Override
-//	public void setHeader(HttpRequestHeader header) {
-//		this.header = header;
-//	}
-//
-//	@Override
-//	public HttpRequestHeader getHeader() {
-//		return this.header;
-//	}
 	
 	@Override
-	public void setMimeType(String mimeType) {
-		if (StringUtils.isNotBlank(mimeType))
-			this.mimeType = mimeType;
+	public void setHeaders(HttpRequestHeaders headers) {
+		this.headers = headers;
 	}
 
 	@Override
-	public String getMimeType() {
-		return this.mimeType;
+	public HttpRequestHeaders getHeaders() {
+		return headers;
 	}
-	
+
 	@Override
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
@@ -156,6 +140,5 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 		this.nestedType = nestedType;
 		this.nestedTypeClass = nestedType.getName();
 	}
-
 
 }

@@ -16,20 +16,20 @@
  * Create Date : 2017-5-19
  */
 
-package org.sniper.http.rest;
+package org.sniper.http.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
-import org.sniper.http.HttpAccessor;
+import org.sniper.http.MappedHttpAccessor;
 import org.sniper.http.form.HttpForm;
 
 /**
- * Spring Rest发送器实现类
+ * 已映射的Spring Rest发送器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SpringRestSender extends HttpAccessor {
+public final class MappedRestSender extends MappedHttpAccessor {
 	
 	@Autowired(required = false)
 	private RestTemplate restTemplate;

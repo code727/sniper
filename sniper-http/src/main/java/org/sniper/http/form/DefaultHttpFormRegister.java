@@ -44,13 +44,11 @@ public class DefaultHttpFormRegister implements HttpFormRegister {
 		this.converter = (converter != null ? converter : new DefaultHttpFormConverter());
 	}
 
-	@Override
 	public void setFormMap(Map<String, HttpForm> formMap) {
 		this.formMap = formMap;
 		this.formUrlMap = this.converter.convert(formMap);
 	}
 	
-	@Override
 	public Map<String, HttpForm> getFormMap() {
 		return this.formMap;
 	}

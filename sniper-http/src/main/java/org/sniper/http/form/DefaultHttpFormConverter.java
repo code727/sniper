@@ -21,7 +21,9 @@ package org.sniper.http.form;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.commons.util.StringUtils;
 
 /**
  * 默认HTTP表单转换器实现类
@@ -29,31 +31,71 @@ import org.sniper.commons.util.MapUtils;
  * @version 1.0
  */
 public class DefaultHttpFormConverter implements HttpFormConverter {
-	
-	/** 表单处理器 */
-	private FormHandler formHandler;
-	
-	public DefaultHttpFormConverter() {
-		this(null);
-	}
-	
-	public DefaultHttpFormConverter(FormHandler formHandler) {
-		this.formHandler = (formHandler != null ? formHandler : new DefaultFormHandler());
-	}
-
+		
 	@Override
 	public Map<String, String> convert(Map<String, HttpForm> formMap) {
 		if (MapUtils.isEmpty(formMap))
 			return null;
 		
-		Map<String, String> map = MapUtils.newHashMap();
+		Map<String, String> map = MapUtils.newLinkedHashMap();
 		String name;
 		for (Entry<String, HttpForm> entry : formMap.entrySet()) {
 			name = entry.getKey();
-			map.put(name, formHandler.handle(name, entry.getValue()));
+			map.put(name, convert(name, entry.getValue()));
 		}
 		
 		return map;
+	}
+	
+	@Override
+	public String convert(String name, HttpForm form) {
+		StringBuilder url = new StringBuilder();
+		appendAddress(url, form);
+		appendAction(url, form);
+		check(name, url);
+		return url.toString();
+	}
+		
+	/**
+	 * 拼接表单中的请求地址
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 * @param form
+	 */
+	private void appendAddress(StringBuilder url, HttpForm form) {
+		String address = form.getAddress();
+		if (StringUtils.isNotBlank(address)) 
+			url.append(address.trim());
+	}
+	
+	/**
+	 * 拼接表单中的Action请求路径
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 * @param form
+	 */
+	private void appendAction(StringBuilder url, HttpForm form) {
+		String action = form.getAction();
+		
+		/* 添加Action请求路径 */
+		if (StringUtils.isNotBlank(action)) {
+			action = action.trim();
+			if (!action.startsWith(StringUtils.FORWARD_SLASH) && !url.toString().endsWith(StringUtils.FORWARD_SLASH)) 
+				url.append(StringUtils.FORWARD_SLASH);
+			
+			url.append(action);
+		}
+	}
+	
+	/**
+	 * 检查表单URL的合法性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param url
+	 */
+	private void check(String name, StringBuilder url) {
+		AssertUtils.assertTrue(url.length() > 0, "Handle form [" + name
+				+ "] error, must ensure that at least one of the parameters 'address' and 'action' can not be empty");
 	}
 		
 }
