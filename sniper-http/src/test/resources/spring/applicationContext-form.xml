@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd ">
+		
+	<bean id="post" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">    
+        <property name="staticField" value="org.sniper.commons.enums.http.HttpMethod.POST" />    
+    </bean>  
+	
+	<bean id="formRegister" class="org.sniper.http.form.DefaultHttpFormRegister">
+		<property name="formMap">
+			<map>
+				<entry key="getBean" value-ref="getBean" />
+				<entry key="postBean" value-ref="postBean" />
+				<entry key="postListBean" value-ref="postListBean" />
+				<entry key="postArrayBean" value-ref="postArrayBean" />
+				
+				<entry key="postList" value-ref="postList" />
+				<entry key="postArray" value-ref="postArray" />
+				
+				<entry key="postUpload" value-ref="postUpload" />
+				<entry key="postUploads" value-ref="postUploads" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="getBean" class="org.sniper.http.form.SimpleHttpForm">
+		<property name="address" value="http://localhost:8080/snipersite" />
+		<property name="action" value="/test/get/{id}/{name}/{birthday}" />
+		<property name="responseHandler" ref="jsonResponseHandler" />
+		<property name="typeClass" value="org.sniper.commons.response.BaseFullResponse" />
+		<property name="nestedTypeClass" value="org.sniper.http.test.domain.Developer" />
+	</bean>
+	
+	<bean id="postBean" class="org.sniper.http.form.SimpleHttpForm">
+		<property name="method" ref="post" />
+		<property name="address" value="http://localhost:8080/snipersite" />
+		<property name="action" value="/test/post/bean" />
+		<property name="responseHandler" ref="jsonResponseHandler" />
+		<property name="typeClass" value="org.sniper.commons.response.BaseFullResponse" />
+		<property name="nestedTypeClass" value="org.sniper.http.test.domain.Developer" /> 
+	</bean>
+	
+	<bean id="postListBean" class="org.sniper.http.form.SimpleHttpForm">
+		<property name="method" ref="post" />
+		<property name="address" value="http://localhost:8080/snipersite" />
+		<property name="action" value="/test/post/list/bean" />
+		<property name="responseHandler" ref="jsonResponseHandler" />
+		<property name="typeClass" value="org.sniper.commons.response.BaseFullResponse" />
+		<property name="nestedTypeClass" value="org.sniper.http.test.domain.Developer" /> 
+	</bean>
+	
+	<bean id="postArrayBean" class="org.sniper.http.form.SimpleHttpForm">
+		<property name="method" ref="post" />
+		<property name="address" value="http://localhost:8080/snipersite" />
+		<property name="action" value="/test/post/array/bean" />
+		<property name="responseHandler" ref="jsonResponseHandler" />
+		<property name="typeClass" value="org.sniper.commons.response.BaseFullResponse" />
+		<property name="nestedTypeClass" value="[Lorg.sniper.http.test.domain.Developer;" /> 
+	</bean>
+	
+	<bean id="postList" class="org.sniper.http.form.SimpleHttpForm">
+		<property name="method" ref="post" />
+		<property name="address" value="org.sniper.http.form.SimpleHttpForm" />
+		<property name="action" value="/test/post/list" />
+		<property name="responseHandler" ref="jsonResponseHandler" />
+		<property name="typeClass" value="org.sniper.commons.response.BaseFullResponse" />
+	</bean>
+	
+	<bean id="postArray" class="org.sniper.http.form.SimpleHttpForm">
+		<property name="method" ref="post" />
+		<property name="address" value="http://localhost:8080/snipersite" />
+		<property name="action" value="/test/post/array" />
+		<property name="responseHandler" ref="jsonResponseHandler" />
+		<property name="typeClass" value="org.sniper.commons.response.BaseFullResponse" />
+		<property name="nestedTypeClass" value="[Ljava.lang.String;" /> 
+	</bean>
+	
+	<bean id="postUpload" class="org.sniper.http.form.SimpleHttpForm">
+		<property name="method" ref="post" />
+		<property name="address" value="http://localhost:8080/snipersite" />
+		<property name="action" value="/test/post/upload" />
+		<property name="responseHandler" ref="jsonResponseHandler" />
+		<property name="typeClass" value="org.sniper.commons.response.BaseMessageResponse" />
+	</bean>
+	
+	<bean id="postUploads" class="org.sniper.http.form.SimpleHttpForm">
+		<property name="method" ref="post" />
+		<property name="address" value="http://localhost:8080/snipersite" />
+		<property name="action" value="/test/post/uploads" />
+		<property name="responseHandler" ref="jsonResponseHandler" />
+		<property name="typeClass" value="org.sniper.commons.response.BaseMessageResponse" />
+	</bean>
+		
+	<bean id="jsonResponseHandler" class="org.sniper.http.handler.response.typed.SniperJsonResponseHandler" />
+		
+</beans>

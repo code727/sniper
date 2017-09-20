@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd ">
+	
+	<bean id="restSender" class="org.sniper.http.rest.SpringRestSender">
+		<property name="restTemplate" ref="restTemplate" />
+		<property name="formRegister" ref="formRegister" />
+	</bean>
+	
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" >
+		<constructor-arg index="0">
+	     	<list>
+	     		<bean id="byteArrayHttpMessageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+	     		<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+	     			<!-- Form参数编码集 -->
+	     			<constructor-arg value="UTF-8" />
+	     		</bean>
+	     		<bean id="allEncompassingFormHttpMessageConverter" class="org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter" >
+	     			<!-- Multipart参数编码集，当要实现文件上传时，需指定文件名称的编码格式，
+	     				  默认为 US-ASCII，当指定不同的编码集后，需引入javax.mail包 -->
+	     			<property name="multipartCharset" value="UTF-8" />
+	     		</bean>
+	     		<bean id="resourceHttpMessageConverter" class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+	     		<bean id="sourceHttpMessageConverter" class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+	     		<bean id="jaxb2RootElementHttpMessageConverter" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
+	     		<bean id="mappingJackson2HttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	     	</list>
+	     </constructor-arg>
+	</bean>
+			
+</beans>
