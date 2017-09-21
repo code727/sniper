@@ -50,7 +50,7 @@ public class IBatisQueryDaoImpl<T> extends IBatisDaoSupport<T> implements SqlMap
 
 	@Override
 	public T queryUniqueBySqlMap(String statement, Object parameter) {
-		return queryUniqueBySqlMap(this.getBeanClass(), statement, parameter);
+		return queryUniqueBySqlMap(this.getTargetType(), statement, parameter);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class IBatisQueryDaoImpl<T> extends IBatisDaoSupport<T> implements SqlMap
 
 	@Override
 	public List<T> queryListBySqlMap(String statement, Object parameter) {
-		return queryListBySqlMap(this.getBeanClass(), statement, parameter);
+		return queryListBySqlMap(this.getTargetType(), statement, parameter);
 	}
 	
 	@Override

@@ -26,37 +26,16 @@ import org.sniper.commons.util.AssertUtils;
  * @version 1.0
  */
 public class DefaultTypedBean implements Typed {
-	
-	/** 类型路径限定名 */
-	private String typeClass;
-	
+		
 	/** 类型 */
 	private Class<?> type;
 	
 	public DefaultTypedBean() {
 		this(Object.class);
 	}
-	
-	public DefaultTypedBean(String typeClass) throws Exception {
-		setTypeClass(typeClass);
-	}
-	
+		
 	public DefaultTypedBean(Class<?> type) {
 		setType(type);
-	}
-
-	@Override
-	public String getTypeClass() {
-		return typeClass;
-	}
-
-	@Override
-	public void setTypeClass(String typeClass) throws Exception {
-		AssertUtils.assertNotBlank(typeClass, "Type class must not be null or blank");
-		
-		// 先尝试加载类型
-		this.type = Class.forName(typeClass);
-		this.typeClass = typeClass;
 	}
 
 	@Override
@@ -67,9 +46,7 @@ public class DefaultTypedBean implements Typed {
 	@Override
 	public void setType(Class<?> type) {
 		AssertUtils.assertNotNull(type, "Type must not be null or blank");
-		
 		this.type = type;
-		this.typeClass = type.getName();
 	}
 
 }

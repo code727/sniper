@@ -368,40 +368,40 @@ public class MediaType extends MimeType implements Serializable {
 		super();
 	}
 	
-	public MediaType(String type) {
-		super(type);
+	public MediaType(String mainType) {
+		super(mainType);
 	}
 	
-	public MediaType(String type, Charset charset) {
-		super(type, charset);
+	public MediaType(String mainType, Charset charset) {
+		super(mainType, charset);
 	}
 	
-	public MediaType(String type, double qualityValue) {
-		this(type, (Charset) null, qualityValue);
+	public MediaType(String mainType, double qualityValue) {
+		this(mainType, (Charset) null, qualityValue);
 	}
 	
-	public MediaType(String type, Charset charset, double qualityValue) {
-		this(type, null, charset, qualityValue);
+	public MediaType(String mainType, Charset charset, double qualityValue) {
+		this(mainType, null, charset, qualityValue);
 	}
 	
-	public MediaType(String type, String subtype) {
-		super(type, subtype);
+	public MediaType(String mainType, String subType) {
+		super(mainType, subType);
 	}
 	
-	public MediaType(String type, String subtype, Charset charset) {
-		super(type, subtype, charset);
+	public MediaType(String mainType, String subType, Charset charset) {
+		super(mainType, subType, charset);
 	}
 	
-	public MediaType(String type, String subtype, double qualityValue) {
-		this(type, subtype, null, qualityValue);
+	public MediaType(String mainType, String subType, double qualityValue) {
+		this(mainType, subType, null, qualityValue);
 	}
 	
-	public MediaType(String type, String subtype, Charset charset, double qualityValue) {
-		super(type, subtype, buildParameters(charset, qualityValue));
+	public MediaType(String mainType, String subType, Charset charset, double qualityValue) {
+		super(mainType, subType, buildParameters(charset, qualityValue));
 	}
 		
-	public MediaType(String type, Map<String, Object> parameters) {
-		super(type, parameters);
+	public MediaType(String mainType, Map<String, Object> parameters) {
+		super(mainType, parameters);
 	}
 	
 	public MediaType(MediaType mediaType, Charset charset) {
@@ -420,8 +420,8 @@ public class MediaType extends MimeType implements Serializable {
 		super(mediaType, parameters);
 	}
 		
-	public MediaType(String type, String subtype, Map<String, Object> parameters) {
-		super(type, subtype, parameters);
+	public MediaType(String mainType, String subType, Map<String, Object> parameters) {
+		super(mainType, subType, parameters);
 	}
 		
 	/**

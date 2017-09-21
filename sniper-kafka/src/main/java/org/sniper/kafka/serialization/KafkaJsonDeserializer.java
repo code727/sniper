@@ -34,28 +34,30 @@ public class KafkaJsonDeserializer<T> extends AbstractDeserializer<T> {
 	/** JSON序列化解析器 */
 	private JsonSerializer jsonSerializer;
 	
-	/** 类型化对象 */
-	private Typed typed;
+	/** 反序列化目标对象类型 */
+	private Class<T> targetType;
 	
 	public KafkaJsonDeserializer() {
-		this(null);
+		this(null, null);
+	}
+	
+	public KafkaJsonDeserializer(Class<T> type) {
+		this(null, type);
 	}
 	
 	public KafkaJsonDeserializer(JsonSerializer jsonSerializer) {
+		this(jsonSerializer, null);
+	}
+	
+	public KafkaJsonDeserializer(JsonSerializer jsonSerializer, Class<T> type) {
 		if (jsonSerializer == null)
 			this.jsonSerializer = new FasterxmlJacksonSerializer();
 		else
 			this.jsonSerializer = jsonSerializer;
 		
-		/* 类型化对象初始化 */
-		this.typed = new DefaultTypedBean();
-		this.typed.setType(ClassUtils.getSuperClassGenricType(getClass()));
+		this.typed = new DefaultTypedBean(type != null ? type : ClassUtils.getSuperClassGenricType(getClass()));
 	}
 	
-	public void setTypeClass(String typeClass) throws Exception {
-		this.typed.setTypeClass(typeClass);
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public T deserialize(String topic, byte[] data) {

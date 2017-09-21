@@ -88,7 +88,7 @@ public abstract class HibernateDaoSupport<T> extends AbstractGenricBean<T> {
 	 * @return
 	 */
 	protected ClassMetadata getClassMetadata() {
-		return HibernateUtils.getClassMetadata(getSessionFactory(), getBeanClass());
+		return HibernateUtils.getClassMetadata(getSessionFactory(), getTargetType());
 	}
 	
 	/**

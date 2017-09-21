@@ -49,7 +49,7 @@ public class MyBatisQueryDaoImpl<T> extends MyBatisDaoSupport<T> implements SqlM
 
 	@Override
 	public T queryUniqueBySqlMap(String statement, Object parameter) {
-		return queryUniqueBySqlMap(this.getBeanClass(), statement, parameter);
+		return queryUniqueBySqlMap(this.getTargetType(), statement, parameter);
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class MyBatisQueryDaoImpl<T> extends MyBatisDaoSupport<T> implements SqlM
 
 	@Override
 	public List<T> queryListBySqlMap(String statement, Object parameter) {
-		return queryListBySqlMap(this.getBeanClass(), statement, parameter);
+		return queryListBySqlMap(this.getTargetType(), statement, parameter);
 	}
 
 	@Override

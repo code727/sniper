@@ -85,9 +85,10 @@ public final class MappedHttpClientSender extends MappedHttpAccessor {
 		String url = format(name, param);
 		HttpForm form = formRegister.find(name);
 		
-		// 已进行编码后的URL
+		// 已进行编码后的URL，包含查询字符串部分
 		String encodedUrl = urlEncoder.encode(url, form.getEncoding());
 		HttpGet httpGet = new HttpGet(encodedUrl);
+		
 		try {
 			logger.debug("Execute {} request [{}] by form [{}]", HttpGet.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpGet, responseHandler);
@@ -115,8 +116,8 @@ public final class MappedHttpClientSender extends MappedHttpAccessor {
 		HttpPost httpPost = new HttpPost(encodedAddress);
 		
 		try {
-			requestHandler.handle(httpPost, url, requestBody, form.getEncoding());
-			logger.info("Execute {} request [{}] by form [{}]", HttpPost.METHOD_NAME, url, name);
+			requestHandler.handle(httpPost, url, form.getHeaders(), requestBody, form.getEncoding());
+			logger.debug("Execute {} request [{}] by form [{}]", HttpPost.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpPost, responseHandler);
 			return handleResponse(form, response);
 		}  finally {
@@ -142,7 +143,7 @@ public final class MappedHttpClientSender extends MappedHttpAccessor {
 		HttpPut httpPut = new HttpPut(encodedAddress);
 		
 		try {
-			requestHandler.handle(httpPut, url, requestBody, form.getEncoding());
+			requestHandler.handle(httpPut, url, form.getHeaders(), requestBody, form.getEncoding());
 			logger.debug("Execute {} request [{}] by form [{}]", HttpPut.METHOD_NAME, url, name);
 			String response = httpClientFactory.create().execute(httpPut, responseHandler);
 			return handleResponse(form, response);

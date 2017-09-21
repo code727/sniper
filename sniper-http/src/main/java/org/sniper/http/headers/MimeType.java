@@ -38,10 +38,10 @@ import org.sniper.commons.util.StringUtils;
 public class MimeType extends DefaultUnmodifiableParameters<String, Object> implements Cloneable {
 	
 	/** 主类型 */
-	private final String type;
+	private final String mainType;
 	
 	/** 子类型 */
-	private final String subtype;
+	private final String subType;
 	
 	private static final BitSet TOKEN;
 	
@@ -86,24 +86,24 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> impl
 		this(null);
 	}
 	
-	public MimeType(String type) {
-		this(type, (String) null);
+	public MimeType(String mainType) {
+		this(mainType, (String) null);
 	}
 	
-	public MimeType(String type, Charset charset) {
-		this(type, null, charset);
+	public MimeType(String mainType, Charset charset) {
+		this(mainType, null, charset);
 	}
 		
-	public MimeType(String type, String subtype) {
-		this(type, subtype, (Charset) null);
+	public MimeType(String mainType, String subType) {
+		this(mainType, subType, (Charset) null);
 	}
 	
-	public MimeType(String type, String subtype, Charset charset) {
-		this(type, subtype, buildCharsetParameter(charset));
+	public MimeType(String mainType, String subType, Charset charset) {
+		this(mainType, subType, buildCharsetParameter(charset));
 	}
 		
-	public MimeType(String type, Map<String, Object> parameters) {
-		this(type, null, parameters);
+	public MimeType(String mainType, Map<String, Object> parameters) {
+		this(mainType, null, parameters);
 	}
 	
 	public MimeType(MimeType mimeType, Charset charset) {
@@ -112,12 +112,12 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> impl
 	
 	public MimeType(MimeType mimeType, Map<String, Object> parameters) {
 		this(mimeType != null ? mimeType.getType() : StringUtils.ANY,
-				mimeType != null ? mimeType.getSubtype() : StringUtils.ANY, parameters);
+				mimeType != null ? mimeType.getSubType() : StringUtils.ANY, parameters);
 	}
 				
-	public MimeType(String type, String subtype, Map<String, Object> parameters) {
+	public MimeType(String mainType, String subType, Map<String, Object> parameters) {
 		super(parameters);
-		checkTypes(this.type = buildType(type), this.subtype = buildSubtype(subtype));
+		checkTypes(this.mainType = buildMainType(mainType), this.subType = buildSubtype(subType));
 	}
 				
 	/**
@@ -155,13 +155,13 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> impl
 	/**
 	 * 构建主类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param type
+	 * @param mainType
 	 * @return
 	 */
-	protected String buildType(String type) {
-		if (StringUtils.isNotBlank(type)) {
-			checkToken(type);
-			return type.trim().toLowerCase(Locale.ENGLISH);
+	protected String buildMainType(String mainType) {
+		if (StringUtils.isNotBlank(mainType)) {
+			checkToken(mainType);
+			return mainType.trim().toLowerCase(Locale.ENGLISH);
 		}
 			
 		return StringUtils.ANY;
@@ -170,13 +170,13 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> impl
 	/**
 	 * 构建子类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param subtype
+	 * @param subType
 	 * @return
 	 */
-	protected String buildSubtype(String subtype) {
-		if (StringUtils.isNotBlank(subtype)) {
-			checkToken(subtype);
-			return subtype.trim().toLowerCase(Locale.ENGLISH);
+	protected String buildSubtype(String subType) {
+		if (StringUtils.isNotBlank(subType)) {
+			checkToken(subType);
+			return subType.trim().toLowerCase(Locale.ENGLISH);
 		}
 		
 		return StringUtils.ANY;
@@ -224,10 +224,10 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> impl
 	 * @param type
 	 * @param subtype
 	 */
-	private void checkTypes(String type, String subtype) {
+	private void checkTypes(String mainType, String subType) {
 		// 不允许*/XXX的MimeType
-		AssertUtils.assertFalse(StringUtils.ANY.equals(type) && !StringUtils.ANY.equals(subtype), 
-				"Subtype must not be '" + subtype + "' when type is any '*'");
+		AssertUtils.assertFalse(StringUtils.ANY.equals(mainType) && !StringUtils.ANY.equals(subType), 
+				"Subtype must not be '" + subType + "' when type is any '*'");
 	}
 	
 	/**
@@ -248,12 +248,31 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> impl
 			AssertUtils.assertNotNull(value, "Parameter attribute '" + attribute + "' value must not be null");
 	}
 
-	public String getType() {
-		return type;
+	/**
+	 * 获取主类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getMainType() {
+		return mainType;
 	}
 
-	public String getSubtype() {
-		return subtype;
+	/**
+	 * 获取子类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getSubType() {
+		return subType;
+	}
+
+	/**
+	 * 获取类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getType() {
+		return mainType + StringUtils.FORWARD_SLASH + subType;
 	}
 		
 	/**
@@ -273,8 +292,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> impl
 		
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append(type).append(StringUtils.FORWARD_SLASH).append(subtype);
+		StringBuilder builder = new StringBuilder(getType());
 		
 		String attribute;
 		for (Map.Entry<String, Object> entry : getParameterItems().entrySet()) {

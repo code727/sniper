@@ -77,7 +77,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	 * @return
 	 */
 	protected String getCollectionName() {
-		return mongoOperations.getCollectionName(getBeanClass());
+		return mongoOperations.getCollectionName(getTargetType());
 	}
 	
 	/**
@@ -104,7 +104,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	 * @return
 	 */
 	protected MongoPersistentEntity<?> getMongoPersistentEntity() {
-		return (MongoPersistentEntity<?>) getMappingContext().getPersistentEntity(getBeanClass());
+		return (MongoPersistentEntity<?>) getMappingContext().getPersistentEntity(getTargetType());
 	}
 		
 	/**

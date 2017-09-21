@@ -33,23 +33,24 @@ import org.sniper.persistence.hibernate.HibernateUtils;
 public abstract class HibernateDaoSupport<T> extends
 	org.springframework.orm.hibernate3.support.HibernateDaoSupport implements GenericBean<T> {
 	
-	/** 当前DAO所关联的实体类型 */
-	private Class<T> beanClass;
+	/** 当前DAO所关联的目标实体类型 */
+	private Class<T> targetType;
 	
 	@Override
-	public void setBeanClass(Class<T> beanClass) {
-		this.beanClass = beanClass;
+	public Class<T> getTargetType() {
+		return targetType;
 	}
-	
+
 	@Override
-	public Class<T> getBeanClass() {
-		return beanClass;
+	public void setTargetType(Class<T> targetType) {
+		this.targetType = targetType;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void initDao() throws Exception {
-		this.beanClass = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
+		if (this.targetType == null)
+			this.targetType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 	}
 	
 	/**
@@ -77,7 +78,7 @@ public abstract class HibernateDaoSupport<T> extends
 	 * @return
 	 */
 	protected ClassMetadata getClassMetadata() {
-		return HibernateUtils.getClassMetadata(getSessionFactory(), getBeanClass());
+		return HibernateUtils.getClassMetadata(getSessionFactory(), getTargetType());
 	}
 	
 	/**

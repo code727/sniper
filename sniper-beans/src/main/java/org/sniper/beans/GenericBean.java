@@ -26,17 +26,17 @@ package org.sniper.beans;
 public interface GenericBean<T> {
 	
 	/**
-	 * 设置当前泛型类所管理的Bean类型
+	 * 设置当前泛型类所管理的目标类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param beanClass
+	 * @param targetType
 	 */
-	public void setBeanClass(Class<T> beanClass);
+	public void setTargetType(Class<T> targetType);
 	
 	/**
-	 * 当前当前泛型类所管理的Bean类型
+	 * 获取当前泛型类所管理的目标类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Class<T> getBeanClass();
+	public Class<T> getTargetType();
 
 }

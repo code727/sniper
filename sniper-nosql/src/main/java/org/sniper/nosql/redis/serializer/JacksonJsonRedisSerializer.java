@@ -41,11 +41,6 @@ public class JacksonJsonRedisSerializer<T> implements RedisSerializer<T> {
 	private ObjectMapper objectMapper = new ObjectMapper();
 	
 	private final JavaType javaType;
-
-	@SuppressWarnings("unchecked")
-	public JacksonJsonRedisSerializer(String typeClass) throws ClassNotFoundException {
-		this((Class<T>) Class.forName(typeClass));
-	}
 	
 	public JacksonJsonRedisSerializer(Class<T> type) {
 		this.javaType = getJavaType(type);

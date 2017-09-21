@@ -212,24 +212,24 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public T findById(PK id) {
-		return getJpaTemplate().find(this.getBeanClass(), id);
+		return getJpaTemplate().find(this.getTargetType(), id);
 	}
 	
 	@Override
 	public T findUniqueByProperty(String propertyName, Object propertyValue) {
-		String ql = PersistenceUtils.buildQueryString(false, this.getBeanClass(), new String[] { propertyName });
+		String ql = PersistenceUtils.buildQueryString(false, this.getTargetType(), new String[] { propertyName });
 		return findUniqueByQueryString(ql, new Object[] { propertyValue });
 	}
 	
 	@Override
 	public T findUniqueByProperties(Map<String, ?> paramMap) {
-		String ql = PersistenceUtils.buildNamedQueryString(false, this.getBeanClass(), paramMap);
+		String ql = PersistenceUtils.buildNamedQueryString(false, this.getTargetType(), paramMap);
 		return findUniqueByQueryString(ql, paramMap);
 	}
 	
 	@Override
 	public T findUniqueByQueryString(String ql) {
-		return findUniqueByQueryString(this.getBeanClass(), ql);
+		return findUniqueByQueryString(this.getTargetType(), ql);
 	}
 
 	@Override
@@ -239,7 +239,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public T findUniqueByQueryString(String ql, Object[] values) {
-		return findUniqueByQueryString(this.getBeanClass(), ql, values);
+		return findUniqueByQueryString(this.getTargetType(), ql, values);
 	}
 
 	@Override
@@ -259,7 +259,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public T findUniqueByQueryString(String ql, Map<String, ?> paramMap) {
-		return findUniqueByQueryString(this.getBeanClass(), ql, paramMap); 
+		return findUniqueByQueryString(this.getTargetType(), ql, paramMap); 
 	}
 
 	@Override
@@ -279,7 +279,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> find(String ql) {
-		return find(this.getBeanClass(), ql);
+		return find(this.getTargetType(), ql);
 	}
 	
 	@Override
@@ -289,7 +289,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public List<T> find(String ql, Object[] values) {
-		return find(this.getBeanClass(), ql, values);
+		return find(this.getTargetType(), ql, values);
 	}
 	
 	@Override
@@ -299,7 +299,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public List<T> find(String ql, Map<String, ?> paramMap) {
-		return find(this.getBeanClass(), ql, paramMap);
+		return find(this.getTargetType(), ql, paramMap);
 	}
 	
 	@Override
@@ -309,7 +309,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> find(String ql, int start, int maxRows) {
-		return find(this.getBeanClass(), ql, start, maxRows);
+		return find(this.getTargetType(), ql, start, maxRows);
 	}
 	
 	@Override
@@ -319,7 +319,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> find(String ql, Object[] values, int start, int maxRows) {
-		return find(this.getBeanClass(), ql, values, start, maxRows);
+		return find(this.getTargetType(), ql, values, start, maxRows);
 	}
 	
 	@Override
@@ -339,7 +339,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public List<T> find(String ql, Map<String, ?> paramMap, int start, int maxRows) {
-		return find(this.getBeanClass(), ql, paramMap, start, maxRows);
+		return find(this.getTargetType(), ql, paramMap, start, maxRows);
 	}
 	
 	@Override
@@ -369,7 +369,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 		
 	@Override
 	public List<T> findByProperty(String propertyName, Object propertyValue, int start, int maxRows) {
-		String ql = PersistenceUtils.buildQueryString(false, this.getBeanClass(), new String[]{ propertyName});
+		String ql = PersistenceUtils.buildQueryString(false, this.getTargetType(), new String[]{ propertyName});
 		return find(ql, new Object[] { propertyValue }, start, maxRows);
 	}
 				
@@ -380,13 +380,13 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public List<T> findByProperties(Map<String, ?> paramMap, int start, int maxRows) {
-		String ql = PersistenceUtils.buildNamedQueryString(false, this.getBeanClass(), paramMap);
+		String ql = PersistenceUtils.buildNamedQueryString(false, this.getTargetType(), paramMap);
 		return find(ql, paramMap, start, maxRows);
 	}
 	
 	@Override
 	public List<T> findAll() {
-		String ql = PersistenceUtils.buildQueryString(false, this.getBeanClass()).toString();
+		String ql = PersistenceUtils.buildQueryString(false, this.getTargetType()).toString();
 		return find(ql);
 	}
 	
@@ -398,13 +398,13 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public long countByProperty(String propertyName, Object propertyValue) {
-		String ql = PersistenceUtils.buildQueryString(true, this.getBeanClass(), new String[] { propertyName });
+		String ql = PersistenceUtils.buildQueryString(true, this.getTargetType(), new String[] { propertyName });
 		return findUniqueByQueryString(Long.class, ql, new Object[] { propertyValue });
 	}
 	
 	@Override
 	public long countByProperties(Map<String, ?> paramMap) {
-		String ql = PersistenceUtils.buildNamedQueryString(true, this.getBeanClass(), paramMap);
+		String ql = PersistenceUtils.buildNamedQueryString(true, this.getTargetType(), paramMap);
 		return findUniqueByQueryString(Long.class, ql, paramMap);
 	}
 
@@ -425,7 +425,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public T findUniqueByNamedQuery(String queryName) {
-		return findUniqueByNamedQuery(this.getBeanClass(), queryName);
+		return findUniqueByNamedQuery(this.getTargetType(), queryName);
 	}
 	
 	@Override
@@ -435,7 +435,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public T findUniqueByNamedQuery(String queryName, Object[] values) {
-		return findUniqueByNamedQuery(this.getBeanClass(), queryName, values);
+		return findUniqueByNamedQuery(this.getTargetType(), queryName, values);
 	}
 	
 	@Override
@@ -455,7 +455,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public T findUniqueByNamedQuery(String queryName, Map<String, ?> paramMap) {
-		return findUniqueByNamedQuery(this.getBeanClass(), queryName, paramMap);
+		return findUniqueByNamedQuery(this.getTargetType(), queryName, paramMap);
 	}
 	
 	@Override
@@ -475,7 +475,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> findByNamedQuery(String queryName) {
-		return findByNamedQuery(this.getBeanClass(), queryName);
+		return findByNamedQuery(this.getTargetType(), queryName);
 	}
 	
 	public <R> List<R> findByNamedQuery(Class<R> resultClass, String queryName) {
@@ -484,7 +484,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public List<T> findByNamedQuery(String queryName, int start, int maxRows) {
-		return findByNamedQuery(this.getBeanClass(), queryName, start, maxRows);
+		return findByNamedQuery(this.getTargetType(), queryName, start, maxRows);
 	}
 	
 	@Override
@@ -494,7 +494,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> findByNamedQuery(String queryName, Object[] values) {
-		return findByNamedQuery(this.getBeanClass(), queryName, values);
+		return findByNamedQuery(this.getTargetType(), queryName, values);
 	}
 	
 	@Override
@@ -504,7 +504,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public List<T> findByNamedQuery(String queryName, Object[] values, int start, int maxRows) {
-		return findByNamedQuery(this.getBeanClass(), queryName, values, start, maxRows);
+		return findByNamedQuery(this.getTargetType(), queryName, values, start, maxRows);
 	}
 	
 	@Override
@@ -525,7 +525,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> findByNamedQuery(String queryName, Map<String, ?> paramMap) {
-		return findByNamedQuery(this.getBeanClass(), queryName, paramMap);
+		return findByNamedQuery(this.getTargetType(), queryName, paramMap);
 	}
 	
 	@Override
@@ -535,7 +535,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public List<T> findByNamedQuery(String queryName, Map<String, ?> paramMap, int start, int maxRows) {
-		return findByNamedQuery(this.getBeanClass(), queryName, paramMap, start, maxRows);
+		return findByNamedQuery(this.getTargetType(), queryName, paramMap, start, maxRows);
 	}
 	
 	@Override
@@ -622,7 +622,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public T findUniqueByNativeQuery(String sql) {
-		return findUniqueByNativeQuery(this.getBeanClass(), sql);
+		return findUniqueByNativeQuery(this.getTargetType(), sql);
 	}
 	
 	@Override
@@ -632,7 +632,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public T findUniqueByNativeQuery(String sql, Object[] values) {
-		return findUniqueByNativeQuery(this.getBeanClass(), sql, values);
+		return findUniqueByNativeQuery(this.getTargetType(), sql, values);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -653,7 +653,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public T findUniqueByNativeQuery(String sql, Map<String, ?> paramMap) {
-		return findUniqueByNativeQuery(this.getBeanClass(), sql, paramMap);
+		return findUniqueByNativeQuery(this.getTargetType(), sql, paramMap);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -674,7 +674,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public List<T> findByNativeQuery(String sql) {
-		return findByNativeQuery(this.getBeanClass(), sql);
+		return findByNativeQuery(this.getTargetType(), sql);
 	}
 
 	@Override
@@ -684,7 +684,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> findByNativeQuery(String sql, Object[] values) {
-		return findByNativeQuery(this.getBeanClass(), sql, values);
+		return findByNativeQuery(this.getTargetType(), sql, values);
 	}
 
 	@Override
@@ -694,7 +694,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> findByNativeQuery(String sql, Map<String, ?> paramMap) {
-		return findByNativeQuery(this.getBeanClass(), sql, paramMap);
+		return findByNativeQuery(this.getTargetType(), sql, paramMap);
 	}
 
 	@Override
@@ -704,7 +704,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> findByNativeQuery(String sql, int start, int maxRows) {
-		return findByNativeQuery(this.getBeanClass(), sql, start, maxRows);
+		return findByNativeQuery(this.getTargetType(), sql, start, maxRows);
 	}
 
 	@Override
@@ -714,7 +714,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> findByNativeQuery(String sql, Object[] values, int start, int maxRows) {
-		return findByNativeQuery(this.getBeanClass(), sql, values, start, maxRows);
+		return findByNativeQuery(this.getTargetType(), sql, values, start, maxRows);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -735,7 +735,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public List<T> findByNativeQuery(String sql, Map<String, ?> paramMap, int start, int maxRows) {
-		return findByNativeQuery(this.getBeanClass(), sql, paramMap, start, maxRows);
+		return findByNativeQuery(this.getTargetType(), sql, paramMap, start, maxRows);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -794,7 +794,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 		if (callback instanceof JpaCriteriaQueryCallbackDao) 
 			((JpaCriteriaQueryCallbackDao<T, P>) callback).setParameter(parameter);
 		
-		final Class<T> entityType = this.getBeanClass(); 
+		final Class<T> entityType = this.getTargetType(); 
 		return getJpaTemplate().execute(new JpaCallback<T>() {
 
 			@Override
@@ -829,7 +829,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 		if (callback instanceof JpaCriteriaQueryCallbackDao) 
 			((JpaCriteriaQueryCallbackDao<T, P>) callback).setParameter(parameter);
 		
-		final Class<T> entityType = this.getBeanClass();
+		final Class<T> entityType = this.getTargetType();
 		return getJpaTemplate().execute(new JpaCallback<List<T>>() {
 
 			@Override
@@ -872,7 +872,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 			public Long doInJpa(EntityManager em) throws PersistenceException {
 				CriteriaBuilder builder = em.getCriteriaBuilder();
 				CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
-				Root<T> entityRoot = criteriaQuery.from(getBeanClass());
+				Root<T> entityRoot = criteriaQuery.from(getTargetType());
 				
 				if (distinct)
 					criteriaQuery.select(builder.countDistinct(entityRoot)); 
@@ -919,13 +919,13 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@Override
 	public T findUniqueByFilterList(List<PersistencePropertyFilter> filterList) {
-		String ql = PersistenceUtils.buildQueryStringByFilterList(false, this.getBeanClass(), filterList);
+		String ql = PersistenceUtils.buildQueryStringByFilterList(false, this.getTargetType(), filterList);
 		return findUniqueByQueryString(ql);
 	}
 
 	@Override
 	public T findUniqueByFilterChain(PersistencePropertyFilterChain chain) {
-		String ql = PersistenceUtils.buildQueryStringByFilterChain(false, this.getBeanClass(), chain);
+		String ql = PersistenceUtils.buildQueryStringByFilterChain(false, this.getTargetType(), chain);
 		return findUniqueByQueryString(ql);
 	}
 
@@ -936,7 +936,7 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public List<T> findByFilterList(List<PersistencePropertyFilter> filterList, int start, int maxRows) {
-		String ql = PersistenceUtils.buildQueryStringByFilterList(false, this.getBeanClass(), filterList);
+		String ql = PersistenceUtils.buildQueryStringByFilterList(false, this.getTargetType(), filterList);
 		return find(ql, start, maxRows);
 	}
 
@@ -947,19 +947,19 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	
 	@Override
 	public List<T> findByFilterChain(PersistencePropertyFilterChain chain, int start, int maxRows) {
-		String ql = PersistenceUtils.buildQueryStringByFilterChain(false, this.getBeanClass(), chain);
+		String ql = PersistenceUtils.buildQueryStringByFilterChain(false, this.getTargetType(), chain);
 		return find(ql, start, maxRows);
 	}
 
 	@Override
 	public long countByFilterList(List<PersistencePropertyFilter> filterList) {
-		String ql = PersistenceUtils.buildQueryStringByFilterList(true, this.getBeanClass(), filterList);
+		String ql = PersistenceUtils.buildQueryStringByFilterList(true, this.getTargetType(), filterList);
 		return findUniqueByQueryString(Long.class, ql);
 	}
 
 	@Override
 	public long countByFilterChain(PersistencePropertyFilterChain chain) {
-		String ql = PersistenceUtils.buildQueryStringByFilterChain(true, this.getBeanClass(), chain);
+		String ql = PersistenceUtils.buildQueryStringByFilterChain(true, this.getTargetType(), chain);
 		return findUniqueByQueryString(Long.class, ql);
 	}
 

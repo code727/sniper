@@ -37,8 +37,8 @@ public class SqlMapServiceSupport<T> extends CheckableInitializingBeanAdapter
 	@Autowired
 	protected SqlMapDao<T> sqlMapDao;
 	
-	/** 当前Service所关联的实体类型 */
-	private Class<T> beanClass;
+	/** 当前Service所关联的目标实体类型 */
+	private Class<T> targetType;
 	
 	/** 是否自动构建命名空间 */
 	private boolean autoBuildNamespace = true;
@@ -57,13 +57,13 @@ public class SqlMapServiceSupport<T> extends CheckableInitializingBeanAdapter
 	}
 	
 	@Override
-	public void setBeanClass(Class<T> beanClass) {
-		this.beanClass = beanClass;
+	public Class<T> getTargetType() {
+		return targetType;
 	}
 
 	@Override
-	public Class<T> getBeanClass() {
-		return beanClass;
+	public void setTargetType(Class<T> targetType) {
+		this.targetType = targetType;
 	}
 
 	@Override
@@ -94,13 +94,14 @@ public class SqlMapServiceSupport<T> extends CheckableInitializingBeanAdapter
 	
 	@Override
 	protected void init() throws Exception {
-		initBeanClass();
+		initTargetType();
 		initNamespace();
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void initBeanClass() {
-		beanClass = ((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
+	protected void initTargetType() {
+		if (this.targetType == null)
+			this.targetType = ((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
 	}
 	
 	/**
@@ -116,14 +117,12 @@ public class SqlMapServiceSupport<T> extends CheckableInitializingBeanAdapter
 		
 		/* 在需要自动构建命名空间且没有手动设置命名空间的情况下，
 		 * 当前SqlMapSerivce中的命名空间为非Object实体对象类型的名称 */
-		if (autoBuildNamespace && StringUtils.isBlank(namespace) && beanClass != Object.class) 
-			namespace = beanClass.getName() + FileUtils.EXTENSION_SEPERATOR;
+		if (autoBuildNamespace && StringUtils.isBlank(namespace) && targetType != Object.class) 
+			namespace = targetType.getName() + FileUtils.EXTENSION_SEPERATOR;
 		else {
 			if (StringUtils.isNotBlank(namespace) && !namespace.endsWith(FileUtils.EXTENSION_SEPERATOR))
 				namespace += FileUtils.EXTENSION_SEPERATOR;
 		}
-		
-			
 	}
 	
 }

@@ -28,20 +28,6 @@ import org.sniper.beans.GenericBean;
 public interface SqlMapOperations<T> extends GenericBean<T> {
 	
 	/**
-	 * 设置SQL映射所关联的实体类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param beanClass
-	 */
-	public void setBeanClass(Class<T> beanClass);
-	
-	/**
-	 * 获取当前SQL映射所关联的实体类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Class<T> getBeanClass();
-	
-	/**
 	 * 设置是否自动构建命名空间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param autoBuildNamespace

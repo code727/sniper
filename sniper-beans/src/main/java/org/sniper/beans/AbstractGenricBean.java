@@ -27,25 +27,21 @@ import org.sniper.commons.util.ClassUtils;
  */
 public abstract class AbstractGenricBean<T> implements GenericBean<T> {
 	
-	/** 当前泛型类所管理的Bean类型 */
-	private Class<T> beanClass;
-
+	/** 当前泛型类所管理的目标类型 */
+	private Class<T> targetType;
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void setBeanClass(Class<T> beanClass) {
-		if (beanClass == null)
-			this.beanClass = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
+	public void setTargetType(Class<T> targetType) {
+		if (targetType == null)
+			this.targetType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 		else
-			this.beanClass = beanClass;
+			this.targetType = targetType;
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
-	public Class<T> getBeanClass() {
-		if (this.beanClass == null)
-			this.beanClass = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
-		
-		return this.beanClass;
+	public Class<T> getTargetType() {
+		return targetType;
 	}
 
 }

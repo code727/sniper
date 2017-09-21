@@ -26,19 +26,11 @@ package org.sniper.beans;
 public interface Typed {
 	
 	/**
-	 * 获取类型路径限定名
+	 * 设置类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
+	 * @param type
 	 */
-	public String getTypeClass();
-	
-	/**
-	 * 设置类型路径限定名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param typeClass
-	 * @throws Exception
-	 */
-	public void setTypeClass(String typeClass) throws Exception;
+	public void setType(Class<?> type);
 	
 	/**
 	 * 获取类型
@@ -46,12 +38,5 @@ public interface Typed {
 	 * @return
 	 */
 	public Class<?> getType();
-
-	/**
-	 * 设置类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param type
-	 */
-	public void setType(Class<?> type);
-
+		
 }

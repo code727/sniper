@@ -18,6 +18,7 @@
 
 package org.sniper.http.httpclient.v4.handler.request;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -28,16 +29,19 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.commons.enums.http.Media;
+import org.sniper.commons.enums.http.headers.HttpRequestHeadersEnum;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.NetUtils;
-import org.sniper.http.rest.SpringRestSender;
+import org.sniper.http.headers.MediaType;
+import org.sniper.http.headers.request.HttpRequestHeaders;
+import org.sniper.serialization.json.JsonSerializer;
+import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
 
 /**
  * 请求处理器默认实现类
@@ -47,23 +51,67 @@ import org.sniper.http.rest.SpringRestSender;
 public class DefualtRequestHandler implements RequestHandler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DefualtRequestHandler.class);
+	
+	private JsonSerializer jsonSerializer = new FasterxmlJacksonSerializer();
 
 	@Override
-	public void handle(HttpEntityEnclosingRequestBase httpRequest, String url, Object requestBody, String encoding) throws Exception {
+	public void handle(HttpEntityEnclosingRequestBase httpRequest, String url, HttpRequestHeaders requestHeaders, Object requestBody, String encoding) throws Exception {
 		ContentType contentType;
 		if (requestBody == null) {
 			contentType = ContentType.create(Media.APPLICATION_FORM_URLENCODED.getType(), encoding); 
 			httpRequest.setEntity(new StringEntity(NetUtils.getQueryString(url), contentType));
-		} else {
-			MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-			builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);  
-			
-			contentType = ContentType.create(Media.MULTIPART_FORM_DATA.getType(), encoding); 
-			addParameteres(builder, url, contentType);
-			addRequestBody(builder, requestBody, contentType);
-			
-			httpRequest.setEntity(builder.build());
 		}
+		
+//		ContentType contentType = (hasContentType(requestHeaders) ? createCustomizeContentType(requestHeaders, encoding) : null);
+//		if (requestBody == null ) {
+//			/* 如果HttpRequestHeaders对象不包含有Content-Type，
+//			 * 则建默认的ContentType对象(application/x-www-form-urlencoded) */
+//			if (contentType == null)
+//				contentType = ContentType.create(Media.APPLICATION_FORM_URLENCODED.getType(), encoding); 
+//			
+//			httpRequest.setEntity(new StringEntity(NetUtils.getQueryString(url), contentType));
+//		} else {
+//			if (contentType == null)
+//				contentType = ContentType.create(Media.APPLICATION_JSON.getType(), encoding); 
+//			
+//			httpRequest.setEntity(new StringEntity(CodecUtils.bytesToString(jsonSerializer.serialize(requestBody), encoding), contentType));
+//			
+////			MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+////			builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE); 
+////			/* 如果HttpRequestHeaders对象不包含有Content-Type，
+////			 * 则建默认的ContentType对象(multipart/form-data) */
+////			if (contentType == null)
+////				contentType = ContentType.create(Media.APPLICATION_FORM_URLENCODED.getType(), encoding); 
+////			
+////			addParameteres(builder, url, contentType);
+////			addRequestBody(builder, requestBody, contentType);
+////			
+////			httpRequest.setEntity(builder.build());
+//		}
+	}
+	
+	/**
+	 * 判断请求头内是否有Content-Type(
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param requestHeaders
+	 * @return
+	 */
+	protected boolean hasContentType(HttpRequestHeaders requestHeaders) {
+		return requestHeaders != null && requestHeaders.containsKey(HttpRequestHeadersEnum.CONTENT_TYPE.getKey());
+	}
+	
+	/**
+	 * 创建自定义类型的ContentType对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param requestHeaders
+	 * @param encoding
+	 * @return
+	 */
+	protected ContentType createCustomizeContentType(HttpRequestHeaders requestHeaders, String encoding) {
+		MediaType mediaType = requestHeaders.getContentType();
+		Charset charset = mediaType.getCharset();
+		return charset != null ? ContentType.create(mediaType.getType(), mediaType.getCharset())
+				: ContentType.create(mediaType.getType(), encoding);
 	}
 	
 	/**
@@ -110,9 +158,18 @@ public class DefualtRequestHandler implements RequestHandler {
 	 * @param requestBody
 	 * @param contentType
 	 */
+	@SuppressWarnings("unchecked")
 	protected void addRequestBody(MultipartEntityBuilder builder, Object requestBody, ContentType contentType) {
-		// 暂时不支持对RequestBody部分的处理
-		logger.warn("No support handle for http request body, please use {}", SpringRestSender.class);
+		if (requestBody instanceof Map) {
+			Map<String, Object> mapBody = (Map<String, Object>) requestBody;
+			if (MapUtils.isNotEmpty(mapBody)) {
+				Iterator<Entry<String, Object>> iterator = mapBody.entrySet().iterator();
+				while (iterator.hasNext()) {
+					Entry<String, Object> parameter = iterator.next();
+					builder.addPart(parameter.getKey(), new StringBody(parameter.getValue().toString(), contentType));
+				}
+			}
+		}
 		
 //		if (requestBody instanceof File) {
 //			File file = (File) requestBody;

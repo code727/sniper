@@ -30,22 +30,23 @@ public abstract class AbstractGenricBean<T> extends CheckableInitializingBeanAda
 		implements GenericBean<T> {
 	
 	/** 当前泛型类所管理的Bean类型 */
-	private Class<T> beanClass;
+	private Class<T> targetType;
 
 	@Override
-	public void setBeanClass(Class<T> beanClass) {
-		this.beanClass = beanClass;
+	public void setTargetType(Class<T> targetType) {
+		this.targetType = targetType;
 	}
 
 	@Override
-	public Class<T> getBeanClass() {
-		return this.beanClass;
+	public Class<T> getTargetType() {
+		return targetType;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void init() throws Exception {
-		this.beanClass = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
+		if (this.targetType == null)
+			this.targetType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 	}
 	
 }

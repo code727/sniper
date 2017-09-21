@@ -19,6 +19,7 @@
 package org.sniper.http.httpclient.v4.handler.request;
 
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.sniper.http.headers.request.HttpRequestHeaders;
 
 /**
  * 请求处理器
@@ -37,6 +38,6 @@ public interface RequestHandler {
 	 * @throws Exception
 	 */
 	public void handle(HttpEntityEnclosingRequestBase httpRequest, 
-			String url, Object requestBody, String encoding) throws Exception;
+			String url, HttpRequestHeaders requestHeaders, Object requestBody, String encoding) throws Exception;
 		
 }

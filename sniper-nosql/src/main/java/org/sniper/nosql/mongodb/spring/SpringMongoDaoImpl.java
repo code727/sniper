@@ -79,7 +79,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		if (StringUtils.isNotBlank(collection))
 			getMongoOperations().insert(entities, collection);
 		else
-			getMongoOperations().insert(entities, getBeanClass());
+			getMongoOperations().insert(entities, getTargetType());
 	}
 	
 	@Override
@@ -100,8 +100,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public WriteResult updateFirst(String collection, Query query, Update update) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
-				.updateFirst(query, update, getBeanClass(), collection)
-				: getMongoOperations().updateFirst(query, update, getBeanClass());
+				.updateFirst(query, update, getTargetType(), collection)
+				: getMongoOperations().updateFirst(query, update, getTargetType());
 	}
 	
 	@Override
@@ -112,8 +112,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public WriteResult updateMulti(String collection, Query query, Update update) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
-				.updateMulti(query, update, getBeanClass(), collection)
-				: getMongoOperations().updateMulti(query, update, getBeanClass());
+				.updateMulti(query, update, getTargetType(), collection)
+				: getMongoOperations().updateMulti(query, update, getTargetType());
 	}
 	
 	@Override
@@ -134,8 +134,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public WriteResult upsertOne(String collection, Query query, Update update) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
-				.upsert(query, update, getBeanClass(), collection)
-				: getMongoOperations().upsert(query, update, getBeanClass());
+				.upsert(query, update, getTargetType(), collection)
+				: getMongoOperations().upsert(query, update, getTargetType());
 	}
 	
 //	@Override
@@ -204,8 +204,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public T findAndModify(String collection, Query query, Update update) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
-				.findAndModify(query, update, getBeanClass(), collection)
-				: getMongoOperations().findAndModify(query, update, getBeanClass());
+				.findAndModify(query, update, getTargetType(), collection)
+				: getMongoOperations().findAndModify(query, update, getTargetType());
 	}
 	
 	@Override
@@ -246,8 +246,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public T findAndRemove(String collection, Query query) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
-				.findAndRemove(query, getBeanClass(), collection)
-				: getMongoOperations().findAndRemove(query, getBeanClass());
+				.findAndRemove(query, getTargetType(), collection)
+				: getMongoOperations().findAndRemove(query, getTargetType());
 	}
 	
 	@Override
@@ -278,8 +278,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public List<T> findAllAndRemove(String collection, Query query) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
-				.findAllAndRemove(query, getBeanClass(), collection)
-				: getMongoOperations().findAllAndRemove(query, getBeanClass());
+				.findAllAndRemove(query, getTargetType(), collection)
+				: getMongoOperations().findAllAndRemove(query, getTargetType());
 	}
 	
 	@Override
@@ -290,8 +290,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public T findById(String collection, PK id) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
-				.findById(id, getBeanClass(), collection)
-				: getMongoOperations().findById(id, getBeanClass());
+				.findById(id, getTargetType(), collection)
+				: getMongoOperations().findById(id, getTargetType());
 	}
 	
 	@Override
@@ -302,8 +302,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public List<T> findAll(String collection) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
-				.findAll(getBeanClass(), collection) : getMongoOperations()
-				.findAll(getBeanClass());
+				.findAll(getTargetType(), collection) : getMongoOperations()
+				.findAll(getTargetType());
 	}
 
 	@Override
@@ -334,8 +334,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public T findOne(String collection, Query query) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
-				.findOne(query, getBeanClass(), collection)
-				: getMongoOperations().findOne(query, getBeanClass());
+				.findOne(query, getTargetType(), collection)
+				: getMongoOperations().findOne(query, getTargetType());
 	}
 	
 	@Override
@@ -347,8 +347,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public List<T> find(String collection, int start, int maxRows) {
 		Query query = buildOffsetQuery(start, maxRows);
 		return StringUtils.isNotBlank(collection) ? getMongoOperations().find(
-				query, getBeanClass(), collection) : getMongoOperations().find(
-				query, getBeanClass());
+				query, getTargetType(), collection) : getMongoOperations().find(
+				query, getTargetType());
 	}
 	
 	@Override
@@ -399,8 +399,8 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public List<T> find(String collection, Query query) {
 		return StringUtils.isNotBlank(collection) ? getMongoOperations()
-				.find(query, getBeanClass(), collection) 
-				: getMongoOperations().find(query, getBeanClass());
+				.find(query, getTargetType(), collection) 
+				: getMongoOperations().find(query, getTargetType());
 	}
 	
 	@Override
@@ -588,7 +588,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public GroupByResults<T> group(String collection, GroupBy groupBy) {
-		return group(collection, groupBy, getBeanClass());
+		return group(collection, groupBy, getTargetType());
 	}
 
 	@Override
@@ -610,7 +610,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public GroupByResults<T> group(String collection, String propertyName,
 			Object propertyValue, GroupBy groupBy) {
 		
-		return group(collection, propertyName, propertyValue, groupBy, getBeanClass());
+		return group(collection, propertyName, propertyValue, groupBy, getTargetType());
 	}
 
 	@Override
@@ -636,7 +636,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public GroupByResults<T> group(String collection,
 			Map<String, ?> properties, GroupBy groupBy) {
 		
-		return group(collection, properties, groupBy, getBeanClass());
+		return group(collection, properties, groupBy, getTargetType());
 	}
 
 	@Override
@@ -660,7 +660,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public GroupByResults<T> group(String collection, Criteria criteria, GroupBy groupBy) {
-		return group(collection, criteria, groupBy, getBeanClass());
+		return group(collection, criteria, groupBy, getTargetType());
 	}
 
 	@Override
@@ -699,7 +699,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T aggregateFindById(String collection, PK id) {
-		return aggregateFindById(collection, id, getBeanClass());
+		return aggregateFindById(collection, id, getTargetType());
 	}
 
 	@Override
@@ -719,7 +719,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T aggregateFindOne(String collection, String propertyName, Object propertyValue) {
-		return aggregateFindOne(collection, propertyName, propertyValue, getBeanClass());
+		return aggregateFindOne(collection, propertyName, propertyValue, getTargetType());
 	}
 
 	@Override
@@ -741,7 +741,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T aggregateFindOne(String collection, Map<String, ?> propertyMap) {
-		return aggregateFindOne(collection, propertyMap, getBeanClass());
+		return aggregateFindOne(collection, propertyMap, getTargetType());
 	}
 
 	@Override
@@ -761,7 +761,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public List<T> aggregateFindAll(String collection) {
-		return aggregateFindAll(collection, getBeanClass());
+		return aggregateFindAll(collection, getTargetType());
 	}
 
 	@Override
@@ -781,7 +781,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public List<T> aggregateFind(String collection, int start, int maxRows) {
-		return aggregateFind(collection, start, maxRows, getBeanClass());
+		return aggregateFind(collection, start, maxRows, getTargetType());
 	}
 
 	@Override
@@ -802,7 +802,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public List<T> aggregateFind(String collection, String propertyName, Object propertyValue) {
-		return aggregateFind(collection, propertyName, propertyValue, getBeanClass());
+		return aggregateFind(collection, propertyName, propertyValue, getTargetType());
 	}
 
 	@Override
@@ -828,7 +828,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public List<T> aggregateFind(String collection, String propertyName,
 			Object propertyValue, int start, int maxRows) {
 		
-		return aggregateFind(collection, propertyName, propertyValue, start, maxRows, getBeanClass());
+		return aggregateFind(collection, propertyName, propertyValue, start, maxRows, getTargetType());
 	}
 	
 	@Override
@@ -856,7 +856,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public List<T> aggregateFind(String collection, Map<String, ?> propertyMap) {
-		return aggregateFind(collection, propertyMap, getBeanClass());
+		return aggregateFind(collection, propertyMap, getTargetType());
 	}
 	
 	@Override
@@ -878,7 +878,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public List<T> aggregateFind(String collection, Map<String, ?> propertyMap,
 			int start, int maxRows) {
 		
-		return aggregateFind(collection, propertyMap, start, maxRows, getBeanClass());
+		return aggregateFind(collection, propertyMap, start, maxRows, getTargetType());
 	}
 
 	@Override
@@ -906,7 +906,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public T aggregateFindOne(String collection, MatchOperation matchOperation) {
-		return aggregateFindOne(collection, matchOperation, getBeanClass());
+		return aggregateFindOne(collection, matchOperation, getTargetType());
 	}
 
 	@Override
@@ -931,7 +931,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public List<T> aggregateFind(String collection, SkipOperation skipOperation, LimitOperation limitOperation) {
-		return aggregateFind(collection, skipOperation, limitOperation, getBeanClass());
+		return aggregateFind(collection, skipOperation, limitOperation, getTargetType());
 	}
 
 	@Override
@@ -953,7 +953,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public List<T> aggregateFind(String collection, MatchOperation matchOperation) {
-		return aggregateFind(collection, matchOperation, getBeanClass());
+		return aggregateFind(collection, matchOperation, getTargetType());
 	}
 
 	@Override
@@ -977,7 +977,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 	public List<T> aggregateFind(String collection, MatchOperation matchOperation, 
 			SkipOperation skipOperation, LimitOperation limitOperation) {
 			
-		return aggregateFind(collection, matchOperation, skipOperation, limitOperation, getBeanClass());
+		return aggregateFind(collection, matchOperation, skipOperation, limitOperation, getTargetType());
 	}
 
 	@Override
@@ -1005,7 +1005,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 			operations.add(limitOperation);
 		
 		/* 投影处理 */
-		if (resultClass != getBeanClass()) {
+		if (resultClass != getTargetType()) {
 			ProjectionOperation projectionOperation = buildProjectionOperation(resultClass);
 			if (projectionOperation != null)
 				operations.add(projectionOperation);
@@ -1022,7 +1022,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public AggregationResults<T> aggregate(String collection, List<AggregationOperation> operations) {
-		return aggregate(collection, operations, getBeanClass());
+		return aggregate(collection, operations, getTargetType());
 	}
 
 	@Override
@@ -1044,7 +1044,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 
 	@Override
 	public AggregationResults<T> aggregate(String collection, Aggregation aggregation) {
-		return aggregate(collection, aggregation, getBeanClass());
+		return aggregate(collection, aggregation, getTargetType());
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public abstract class IBatisDaoSupport<T> extends SqlMapClientDaoSupport
 		implements SqlMapOperations<T> {
 	
 	/** 当前DAO所关联的实体类型 */
-	private Class<T> beanClass;
+	private Class<T> targetType;
 	
 	/** 是否自动构建命名空间 */
 	private boolean autoBuildNamespace = true;
@@ -44,15 +44,15 @@ public abstract class IBatisDaoSupport<T> extends SqlMapClientDaoSupport
 	protected String namespace;
 	
 	@Override
-	public void setBeanClass(Class<T> beanClass) {
-		this.beanClass = beanClass;
+	public Class<T> getTargetType() {
+		return targetType;
 	}
-	
+
 	@Override
-	public Class<T> getBeanClass() {
-		return beanClass;
+	public void setTargetType(Class<T> targetType) {
+		this.targetType = targetType;
 	}
-	
+
 	@Override
 	public void setAutoBuildNamespace(boolean autoBuildNamespace) {
 		this.autoBuildNamespace = autoBuildNamespace;
@@ -75,13 +75,14 @@ public abstract class IBatisDaoSupport<T> extends SqlMapClientDaoSupport
 	
 	@Override
 	protected void initDao() throws Exception {
-		initBeanClass();
+		initTargetType();
 		initNamespace();
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void initBeanClass() {
-		beanClass = ((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
+	protected void initTargetType() {
+		if (this.targetType == null)
+			this.targetType = ((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
 	}
 	
 	/**
@@ -93,8 +94,8 @@ public abstract class IBatisDaoSupport<T> extends SqlMapClientDaoSupport
 			Class<?> customizeInterface = SqlMapUtils.getCustomizeDaoInterface(getClass());
 			if (customizeInterface != null)
 				namespace = customizeInterface.getName() + FileUtils.EXTENSION_SEPERATOR;
-			else if (beanClass != Object.class)
-				namespace = beanClass.getName() + FileUtils.EXTENSION_SEPERATOR;
+			else if (targetType != Object.class)
+				namespace = targetType.getName() + FileUtils.EXTENSION_SEPERATOR;
 			else
 				namespace = StringUtils.EMPTY;
 		} else {

@@ -26,7 +26,7 @@ package org.sniper.serialization;
 public interface Serializer {
 	
 	/**
-	 * 将数据序列化为字节数据
+	 * 将对象序列化为字节数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param t
 	 * @return
@@ -35,7 +35,26 @@ public interface Serializer {
 	public <T> byte[] serialize(T t) throws SerializationException;
 	
 	/**
-	 * 将字节数据反序列化
+	 * 将对象序列化为字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param t
+	 * @return
+	 * @throws SerializationException
+	 */
+//	public <T> String serializeToString(T t) throws SerializationException;
+	
+	/**
+	 * 将对象序列化为指定编码格式的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param t
+	 * @param encoding
+	 * @return
+	 * @throws SerializationException
+	 */
+//	public <T> String serializeToString(T t, String encoding) throws SerializationException;
+	
+	/**
+	 * 将字节数组反序列化
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bytes
 	 * @return

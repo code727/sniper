@@ -42,12 +42,19 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 	
 	private Map<String, Object> parameters;
 	
+	private Map<String, Object> requestBody;
+	
 	@Before
 	public void init() {
 		parameters = MapUtils.newLinkedHashMap();
 		parameters.put("id", "9527");
-		parameters.put("name", "dubin");
+		parameters.put("name", "杜斌");
 		parameters.put("birthday", DateUtils.dateToString(new Date()));
+		
+		requestBody = MapUtils.newLinkedHashMap();
+		requestBody.put("id", "9527");
+		requestBody.put("name", "杜斌");
+		requestBody.put("birthday", new Date());
 	}
 	
 //	@Test
@@ -59,9 +66,18 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 		System.out.println(response.getData().getBirthday());
 	}
 	
-	@Test
+//	@Test
 	public void testPostBean() throws Exception {
 		BaseFullResponse<Developer> response = mappedHttpSender.request("postBean", parameters);
+		System.out.println(response.getCode());
+		System.out.println(response.getData().getId());
+		System.out.println(response.getData().getName());
+		System.out.println(response.getData().getBirthday());
+	}
+	
+	@Test
+	public void testPostBodyBean() throws Exception {
+		BaseFullResponse<Developer> response = mappedHttpSender.requestByBody("postBodyBean", requestBody);
 		System.out.println(response.getCode());
 		System.out.println(response.getData().getId());
 		System.out.println(response.getData().getName());

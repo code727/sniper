@@ -73,11 +73,11 @@ public abstract class AbstractJpaService<T, PK extends Serializable> extends
 	protected void init() throws Exception {
 		Class<T> entityType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 		// 将当前服务类管理的实体类型传递给持久化DAO，使DAO接口的方法能正常工作
-		this.jpaDao.setBeanClass(entityType);
+		this.jpaDao.setTargetType(entityType);
 		
 		/* 开启ibatis/mybatis的查询接口，弥补JPA针对复杂查询难以处理的问题 */
 		if (sqlMapQuery != null) {
-			sqlMapQuery.setBeanClass(entityType);
+			sqlMapQuery.setTargetType(entityType);
 			
 			logger.info("Success enable SqlMapQuery interface,implements class is:"
 					+ sqlMapQuery.getClass().getName());
