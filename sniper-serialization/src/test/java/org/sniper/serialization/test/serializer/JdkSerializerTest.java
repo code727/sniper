@@ -46,7 +46,7 @@ public class JdkSerializerTest extends AbstractSerializerTest {
 		
 		// 写入目标文件查看序列化结果
 		IOUtils.write(new FileOutputStream(new File(
-				"C:/Users/Administrator/Desktop/JdkSerializer.txt")), bytes);
+				"C:/Users/Daniele/Desktop/JdkSerializer.txt")), bytes);
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class JdkSerializerTest extends AbstractSerializerTest {
 			testSerialize();
 		
 		List<User> result = serializer.deserialize(bytes);
-		System.out.println(result);
+		System.out.println(result.get(0).getName());
 	}
 
 }

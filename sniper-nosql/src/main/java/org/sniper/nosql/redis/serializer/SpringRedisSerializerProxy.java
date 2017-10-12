@@ -20,8 +20,8 @@ package org.sniper.nosql.redis.serializer;
 
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.sniper.commons.util.AssertUtils;
+import org.sniper.serialization.AbstractSerializer;
 import org.sniper.serialization.SerializationException;
-import org.sniper.serialization.Serializer;
 
 /**
  * Spring Redis序列化器代理
@@ -29,7 +29,7 @@ import org.sniper.serialization.Serializer;
  * @version 1.0
  */
 @SuppressWarnings("rawtypes")
-public class SpringRedisSerializerProxy implements Serializer {
+public class SpringRedisSerializerProxy extends AbstractSerializer {
 	
 	private RedisSerializer redisSerializer;
 	

@@ -371,5 +371,5 @@ public class ClassUtils {
 		
 		return clazz1 == clazz2 || clazz2.isAssignableFrom(clazz1);
 	}
-					
+						
 }

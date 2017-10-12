@@ -201,9 +201,9 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 		
 		if (handler instanceof TypedResponseHandler) {
 			if (handler instanceof TypedNestedResponseHandler) 
-				return (T) ((TypedNestedResponseHandler) handler).handleNestedResponse(response, form.getType(), form.getNestedType());
+				return (T) ((TypedNestedResponseHandler) handler).handleNestedResponse(response, form.getTargetType(), form.getNestedType());
 			
-			return (T) ((TypedResponseHandler) handler).handleResponse(response, form.getType());
+			return (T) ((TypedResponseHandler) handler).handleResponse(response, form.getTargetType());
 		}
 			
 		return handler.handleResponse(response);

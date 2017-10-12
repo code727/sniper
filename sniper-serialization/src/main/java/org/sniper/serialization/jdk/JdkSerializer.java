@@ -25,15 +25,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import org.sniper.commons.util.IOUtils;
+import org.sniper.serialization.AbstractSerializer;
 import org.sniper.serialization.SerializationException;
-import org.sniper.serialization.Serializer;
 
 /**
  * JDK原生序列器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JdkSerializer implements Serializer {
+public class JdkSerializer extends AbstractSerializer {
 	
 	@Override
 	public <T> byte[] serialize(T t) throws SerializationException {

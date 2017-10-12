@@ -44,7 +44,7 @@ public class ByteResponseHandler extends AbstractNumberResponseHandler {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected <T> T handle(String response) {
-		return (T) new Byte(response);
+		return (T) Byte.valueOf(response);
 	}
 
 }

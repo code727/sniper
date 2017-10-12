@@ -44,7 +44,7 @@ public class LongResponseHandler extends AbstractNumberResponseHandler {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected <T> T handle(String response) {
-		return (T) new Long(response);
+		return (T) Long.valueOf(response);
 	}
-
+	
 }

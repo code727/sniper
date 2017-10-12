@@ -23,10 +23,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Date;
 
-import org.sniper.commons.util.CodecUtils;
-import org.sniper.serialization.json.JsonSerializer;
-import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
-
 /**
  * @description
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -51,14 +47,7 @@ public class User implements Serializable, Cloneable {
 	private Date createTime;
 	
 	private BigDecimal amount;
-	
-	private transient JsonSerializer jsonSerializer;
-	
-	public User() {
-		this.jsonSerializer = new FasterxmlJacksonSerializer();
-//		this.jsonSerializer.setDateFormat(DateUtils.DEFAULT_DATETIME_PLUS_FORMAT);
-	}
-
+		
 	public Long getId() {
 		return id;
 	}
@@ -121,10 +110,6 @@ public class User implements Serializable, Cloneable {
 
 	public void setAmount(BigDecimal amount) {
 		this.amount = (amount != null ? amount.setScale(2, RoundingMode.DOWN) : amount);
-	}
-
-	public String toString() {
-		return CodecUtils.bytesToString(jsonSerializer.serialize(this));
 	}
 	
 	@Override

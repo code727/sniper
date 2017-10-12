@@ -25,28 +25,28 @@ import org.sniper.commons.util.AssertUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultTypedBean implements Typed {
+public class TypedBean implements Typed {
 		
 	/** 类型 */
-	private Class<?> type;
+	private Class<?> targetType;
 	
-	public DefaultTypedBean() {
+	public TypedBean() {
 		this(Object.class);
 	}
 		
-	public DefaultTypedBean(Class<?> type) {
-		setType(type);
+	public TypedBean(Class<?> targetType) {
+		setTargetType(targetType);
 	}
 
 	@Override
-	public Class<?> getType() {
-		return type;
+	public void setTargetType(Class<?> targetType) {
+		AssertUtils.assertNotNull(targetType, "Target type must not be null");
+		this.targetType = targetType;
 	}
 
 	@Override
-	public void setType(Class<?> type) {
-		AssertUtils.assertNotNull(type, "Type must not be null or blank");
-		this.type = type;
+	public Class<?> getTargetType() {
+		return targetType;
 	}
 
 }

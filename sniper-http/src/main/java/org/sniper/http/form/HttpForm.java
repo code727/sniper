@@ -87,22 +87,7 @@ public interface HttpForm extends Typed, Codecable {
 	 * @return
 	 */
 	public HttpRequestHeaders getHeaders();
-				
-	/**
-	 * 获取嵌套类型路径限定名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getNestedTypeClass();
-	
-	/**
-	 * 设置嵌套类型路径限定名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param nestedTypeClass
-	 * @throws Exception
-	 */
-	public void setNestedTypeClass(String nestedTypeClass) throws Exception;
-	
+					
 	/**
 	 * 获取嵌套类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

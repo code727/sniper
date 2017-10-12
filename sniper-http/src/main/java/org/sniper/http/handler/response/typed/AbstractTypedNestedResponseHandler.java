@@ -42,8 +42,8 @@ public abstract class AbstractTypedNestedResponseHandler extends AbstractTypedRe
 	}
 
 	@Override
-	public <T> T handleNestedResponse(String response, Class<T> type, Class<?> nestedType) throws Exception {
-		return doResponse(handleResponse(response, type), nestedType);
+	public <T> T handleNestedResponse(String response, Class<T> targetType, Class<?> nestedType) throws Exception {
+		return doResponse(handleResponse(response, targetType), nestedType);
 	}
 	
 	/**

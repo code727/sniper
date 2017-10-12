@@ -18,7 +18,8 @@
 
 package org.sniper.serialization;
 
-import org.sniper.beans.DefaultTypedBean;
+import org.sniper.beans.Typed;
+import org.sniper.beans.TypedBean;
 import org.sniper.codec.Codecable;
 import org.sniper.commons.util.CodecUtils;
 
@@ -27,35 +28,35 @@ import org.sniper.commons.util.CodecUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractTypedSerializer extends DefaultTypedBean implements TypedSerializer, Codecable {
+public abstract class AbstractTypedSerializer extends AbstractSerializer implements TypedSerializer, Codecable {
 	
-	private String encoding = CodecUtils.DEFAULT_ENCODING;
+	private final Typed typed = new TypedBean();
 	
 	@Override
-	public String getEncoding() {
-		return encoding;
-	}
-
-	@Override
-	public void setEncoding(String encoding) {
-		this.encoding = encoding;
+	public void setTargetType(Class<?> targetType) {
+		typed.setTargetType(targetType);
 	}
 	
+	@Override
+	public Class<?> getTargetType() {
+		return typed.getTargetType();
+	}
+		
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T deserialize(byte[] bytes) throws SerializationException {
-		return (T) deserialize(bytes, getType());
+		return (T) deserialize(bytes, getTargetType());
 	}
 	
 	@Override
-	public <T> T deserialize(byte[] bytes, Class<T> type) throws SerializationException {
-		return deserialize(CodecUtils.bytesToString(bytes, encoding), type);
+	public <T> T deserialize(byte[] bytes, Class<T> targetType) throws SerializationException {
+		return deserialize(CodecUtils.bytesToString(bytes, getEncoding()), targetType);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T deserialize(String text) throws SerializationException {
-		return (T) deserialize(text, getType());
+		return (T) deserialize(text, getTargetType());
 	}
 
 }

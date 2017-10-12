@@ -449,5 +449,33 @@ public class MapUtils {
 		
 		return CollectionUtils.complement(map1.keySet(), map2.keySet());
 	}
+	
+	/**
+	 * 判断Map中是否有指定类型的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param map
+	 * @param type
+	 * @return
+	 */
+	public static <K, V> boolean hasTypeValue(Map<K, V> map, Class<?> type) {
+		if (isEmpty(map))
+			return false;
+		
+		Set<Entry<K, V>> entrySet = map.entrySet();
+		if (type == null) {
+			for (Entry<K, V> entry : entrySet) {
+				if (entry.getValue() == null)
+					return true;
+			}
+		} else {
+			for (Entry<K, V> entry : entrySet) {
+				V value = entry.getValue();
+				if (value != null && type.isAssignableFrom(value.getClass()))
+					return true;
+			}
+		}
+		
+		return false;
+	}	
 
 }

@@ -18,28 +18,27 @@
 
 package org.sniper.serialization.jdk;
 
-import org.sniper.codec.CodecSupport;
 import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.ObjectUtils;
+import org.sniper.serialization.AbstractSerializer;
 import org.sniper.serialization.SerializationException;
-import org.sniper.serialization.Serializer;
 
 /**
  * 字符串序列化器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class StringSerializer extends CodecSupport implements Serializer {
+public class StringSerializer extends AbstractSerializer {
 
 	@Override
 	public <T> byte[] serialize(T t) throws SerializationException {
-		return t != null ? CodecUtils.getBytes(ObjectUtils.toString(t), getEncoding()) : null;
+		return CodecUtils.getBytes(ObjectUtils.toString(t), getEncoding());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public String deserialize(byte[] bytes) throws SerializationException {
-		return bytes != null ? CodecUtils.bytesToString(bytes, getEncoding()) : null;
+		return CodecUtils.bytesToString(bytes, getEncoding());
 	}
-
+	
 }

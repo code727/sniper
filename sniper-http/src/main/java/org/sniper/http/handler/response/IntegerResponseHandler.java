@@ -44,7 +44,7 @@ public class IntegerResponseHandler extends AbstractNumberResponseHandler {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected <T> T handle(String response) {
-		return (T) new Integer(response);
+		return (T) Integer.valueOf(response);
 	}
 
 }

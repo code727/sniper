@@ -20,7 +20,7 @@ package org.sniper.beans.mapper;
 
 import java.util.Set;
 
-import org.sniper.beans.DefaultTypedBean;
+import org.sniper.beans.AbstractGenricBean;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.ReflectionUtils;
 
@@ -29,7 +29,7 @@ import org.sniper.commons.util.ReflectionUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractBeanMapper<S> extends DefaultTypedBean implements BeanMapper<S>, ConfigurableMapper {
+public abstract class AbstractBeanMapper<S> extends AbstractGenricBean<S> implements BeanMapper<S> {
 	
 	/** 映射器规则集 */
 	protected Set<MapperRule> mapperRules;
@@ -62,19 +62,19 @@ public abstract class AbstractBeanMapper<S> extends DefaultTypedBean implements 
 		return mapping(source, mapperRules);
 	}
 	
-	public <T> T mapping(S source, Class<T> type) throws Exception {
-		return (T) mapping(source, mapperRules, type);
+	public <T> T mapping(S source, Class<T> targetType) throws Exception {
+		return (T) mapping(source, mapperRules, targetType);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public <T> T mapping(S source, Set<MapperRule> mapperRules) throws Exception {
-		return (T) mapping(source, mapperRules, getType());
+		return (T) mapping(source, mapperRules, getTargetType());
 	}
 	
 	@Override
-	public <T> T mapping(S source, Set<MapperRule> mapperRules, Class<T> type) throws Exception {
-		AssertUtils.assertNotNull(type, "Mapped bean type must not be null");
-		return doMapping(source, mapperRules, type);
+	public <T> T mapping(S source, Set<MapperRule> mapperRules, Class<T> targetType) throws Exception {
+		AssertUtils.assertNotNull(targetType, "Mapped target bean type must not be null");
+		return doMapping(source, mapperRules, targetType);
 	}
 		
 	/**
@@ -82,11 +82,11 @@ public abstract class AbstractBeanMapper<S> extends DefaultTypedBean implements 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source
 	 * @param mapperRules
-	 * @param type
+	 * @param targetType
 	 * @return
 	 * @throws Exception
 	 */
-	protected abstract <T> T doMapping(S source, Set<MapperRule> mapperRules, Class<T> type) throws Exception;
+	protected abstract <T> T doMapping(S source, Set<MapperRule> mapperRules, Class<T> targetType) throws Exception;
 
 	/**
 	 * 映射出指定类型的目标Bean对象

@@ -206,6 +206,9 @@ public class CodecUtils {
 	 * @return
 	 */
 	public static byte[] getBytes(String str, String encoding) {
+		if (str == null)
+			return null;
+		
 		try {
 			return StringUtils.isNotBlank(encoding) ? str.getBytes(encoding) : str.getBytes();
 		} catch (UnsupportedEncodingException e) {
@@ -231,6 +234,9 @@ public class CodecUtils {
 	 * @return
 	 */
 	public static String bytesToString(byte[] textBytes, String encoding) {
+		if (ArrayUtils.isEmpty(textBytes))
+			return null;
+		
 		try {
 			return StringUtils.isNotBlank(encoding) ? new String(textBytes,
 					encoding) : new String(textBytes);
