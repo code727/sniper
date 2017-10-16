@@ -27,6 +27,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.sniper.commons.LinkedMultiValueMap;
+import org.sniper.commons.MultiValueMap;
 import org.sniper.commons.response.BaseFullResponse;
 import org.sniper.commons.response.BaseMessageResponse;
 import org.sniper.commons.util.DateUtils;
@@ -37,8 +39,6 @@ import org.sniper.http.test.domain.Developer;
 import org.sniper.test.spring.JUnit4SpringContextTestCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -96,21 +96,32 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 	
 	@Test
 	public void testPostUpload() throws Exception {
-		Map<String, Object> requestBody = MapUtils.newHashMap();
+//		Map<String, Object> requestBody = MapUtils.newHashMap();
+//		requestBody.put("file", new File("C:/Users/Daniele/Desktop/新建.txt"));
+//		requestBody.put("age", 34);
+//		requestBody.put("name", "杜斌");
+//		requestBody.put("loginName", null);
 		
 		DiskFileItemFactory factory = new DiskFileItemFactory(); 
 		factory.setSizeThreshold(4096);  
 		factory.setRepository(new File("C:/Users/Daniele/Desktop/新建.txt"));
-		FileItem fileItem = factory.createItem("test", MediaType.MULTIPART_FORM_DATA.getType(), true,
+		FileItem fileItem = factory.createItem("file", MediaType.MULTIPART_FORM_DATA.getType(), true,
 				factory.getRepository().getName());
 		fileItem.getOutputStream();
 		
-		requestBody.put("file", fileItem);
-		requestBody.put("age", 34);
-		requestBody.put("name", "杜斌");
-		requestBody.put("loginName", null);
+		MultiValueMap<String, Object> multiValueMap = new LinkedMultiValueMap<String, Object>();
+		multiValueMap.add("file", fileItem);
+		multiValueMap.add("age", 34);
+		multiValueMap.add("name", "杜斌");
+		multiValueMap.add("loginName", null);
+//		
+//		
+//		requestBody.put("file", fileItem);
+//		requestBody.put("age", 34);
+//		requestBody.put("name", "杜斌");
+//		requestBody.put("loginName", null);
 		
-		BaseMessageResponse response = mappedHttpSender.requestByBody("postUpload", fileItem);
+		BaseMessageResponse response = mappedHttpSender.requestByBody("postUpload", multiValueMap);
 		System.out.println(response.wasSuccess());
 	}
 	
