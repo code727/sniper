@@ -25,12 +25,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.type.TypeFactory;
 import org.codehaus.jackson.type.JavaType;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
-import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.serialization.SerializationException;
 import org.sniper.serialization.json.AbstractJsonSerializer;
@@ -71,22 +69,6 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 			this.objectMapper.setDateFormat(DateUtils.getDateFormat(dateFormat));
 		else
 			this.objectMapper.setDateFormat(null);
-	}
-	
-	@Override
-	public boolean canSerialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
-		return type != null && this.objectMapper.canSerialize(type);
-	}
-
-	@Override
-	public boolean canDeserialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
-		if (type == null)
-			return false;
-		
-		JavaType javaType = TypeFactory.defaultInstance().constructType(type);
-		return this.objectMapper.canDeserialize(javaType);
 	}
 
 	@Override
@@ -219,5 +201,5 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 	private <T> T multipleBeanDeserializeToCollection(String jsonArray, Class<?> collectionClazz) throws Exception {
 		return (T) objectMapper.readValue(jsonArray, collectionClazz != null ? collectionClazz : Map.class);
 	}
-
+		
 }

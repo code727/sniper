@@ -26,13 +26,10 @@ import java.util.List;
 
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.serialization.SerializationException;
 
-import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.parser.DefaultJSONParser;
-import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.JSONSerializer;
 import com.alibaba.fastjson.serializer.SerializeWriter;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -43,26 +40,6 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
  * @version 1.0
  */
 public class FastJsonSerializer extends AbstractJsonSerializer {
-	
-	@Override
-	public boolean canSerialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
-		return type != null;
-	}
-
-	@Override
-	public boolean canDeserialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
-		if (type == null)
-			return false;
-		
-		ParserConfig instance = ParserConfig.getGlobalInstance();
-		try {
-			return instance.getDeserializer(type) != null;
-		} catch (JSONException e) {
-			return false;
-		}
-	}
 	
 	@Override
 	public <T> byte[] serialize(T t) throws SerializationException {
