@@ -26,17 +26,17 @@ package org.sniper.beans;
 public interface Typed {
 	
 	/**
-	 * 设置类型
+	 * 设置目标类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 */
-	public void setType(Class<?> type);
+	public void setTargetType(Class<?> targetType);
 	
 	/**
-	 * 获取类型
+	 * 获取目标类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Class<?> getType();
+	public Class<?> getTargetType();
 		
 }

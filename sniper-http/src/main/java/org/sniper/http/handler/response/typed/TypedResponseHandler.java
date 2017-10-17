@@ -31,10 +31,10 @@ public interface TypedResponseHandler extends ResponseHandler {
 	 * 处理字符串响应数据后返回指定类型的最终结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param response
-	 * @param type 最终结果的类型
+	 * @param targetType 最终结果的类型
 	 * @return
 	 * @throws Exception
 	 */
-	public <T> T handleResponse(String response, Class<T> type) throws Exception;
+	public <T> T handleResponse(String response, Class<T> targetType) throws Exception;
 	
 }

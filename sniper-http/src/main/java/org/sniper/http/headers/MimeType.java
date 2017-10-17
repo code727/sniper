@@ -35,13 +35,16 @@ import org.sniper.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MimeType extends DefaultUnmodifiableParameters<String, Object> implements Cloneable {
+public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 	
 	/** 主类型 */
 	private final String mainType;
 	
 	/** 子类型 */
 	private final String subType;
+	
+	/** 类型 */
+	private final String type;
 	
 	private static final BitSet TOKEN;
 	
@@ -118,6 +121,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> impl
 	public MimeType(String mainType, String subType, Map<String, Object> parameters) {
 		super(parameters);
 		checkTypes(this.mainType = buildMainType(mainType), this.subType = buildSubtype(subType));
+		this.type = this.mainType + StringUtils.FORWARD_SLASH + this.subType;
 	}
 				
 	/**
@@ -272,7 +276,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> impl
 	 * @return
 	 */
 	public String getType() {
-		return mainType + StringUtils.FORWARD_SLASH + subType;
+		return type;
 	}
 		
 	/**
@@ -288,6 +292,70 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> impl
 		
 		String charsetName = ObjectUtils.toString(value);
 		return StringUtils.isNotBlank(charsetName) ? Charset.forName(charsetName) : null;
+	}
+	
+	/**
+	 * 是否为通配符主类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean isWildcardMainType() {
+		return StringUtils.ANY.equals(mainType);
+	}
+	
+	/**
+	 * 是否为通配符子类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean isWildcardSubType() {
+		return StringUtils.ANY.equals(subType) || subType.startsWith("*+");
+	}
+	
+	/**
+	 * 是否为通配符类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean isWildcardType() {
+		return isWildcardType() && isWildcardSubType();
+	}
+	
+	/**
+	 * 判断是否包含指定的MimeType对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param other
+	 * @return
+	 */
+	public boolean includes(MimeType other) {
+		if (other == null) 
+			return false;
+		
+		if (this.isWildcardMainType()) 
+			return true;
+		
+		if (mainType.equals(other.getMainType())) {
+			if (subType.equals(other.getSubType())) 
+				return true;
+			
+			if (this.isWildcardSubType()) {
+				int thisPlusIdx = subType.indexOf('+');
+				if (thisPlusIdx == -1) 
+					return true;
+				else {
+					int otherPlusIdx = other.getSubType().indexOf('+');
+					if (otherPlusIdx != -1) {
+						String thisSubtypeNoSuffix = subType.substring(0, thisPlusIdx);
+						String thisSubtypeSuffix = subType.substring(thisPlusIdx + 1);
+						String otherSubtypeSuffix = other.getSubType().substring(otherPlusIdx + 1);
+						if (thisSubtypeSuffix.equals(otherSubtypeSuffix) && StringUtils.ANY.equals(thisSubtypeNoSuffix)) 
+							return true;
+					}
+				}
+			}
+		}
+		
+		return false;
 	}
 		
 	@Override
@@ -306,5 +374,5 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> impl
 		
 		return builder.toString();
 	}
-				
+						
 }

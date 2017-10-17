@@ -56,8 +56,8 @@ public abstract class AbstractTypedResponseHandler implements TypedResponseHandl
 	}
 	
 	@Override
-	public <T> T handleResponse(String response, Class<T> type) throws Exception {
-		return typedSerializer.deserialize(response, type);
+	public <T> T handleResponse(String response, Class<T> targetType) throws Exception {
+		return typedSerializer.deserialize(response, targetType);
 	}
 	
 }

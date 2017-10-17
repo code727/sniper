@@ -18,8 +18,6 @@
 
 package org.sniper.kafka.serialization;
 
-import org.sniper.beans.DefaultTypedBean;
-import org.sniper.beans.Typed;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.serialization.json.JsonSerializer;
 import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
@@ -32,10 +30,10 @@ import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerialize
 public class KafkaJsonDeserializer<T> extends AbstractDeserializer<T> {
 	
 	/** JSON序列化解析器 */
-	private JsonSerializer jsonSerializer;
+	private final JsonSerializer jsonSerializer;
 	
 	/** 反序列化目标对象类型 */
-	private Class<T> targetType;
+	private final Class<T> targetType;
 	
 	public KafkaJsonDeserializer() {
 		this(null, null);
@@ -49,19 +47,30 @@ public class KafkaJsonDeserializer<T> extends AbstractDeserializer<T> {
 		this(jsonSerializer, null);
 	}
 	
-	public KafkaJsonDeserializer(JsonSerializer jsonSerializer, Class<T> type) {
+	@SuppressWarnings("unchecked")
+	public KafkaJsonDeserializer(JsonSerializer jsonSerializer, Class<T> targetType) {
 		if (jsonSerializer == null)
 			this.jsonSerializer = new FasterxmlJacksonSerializer();
 		else
 			this.jsonSerializer = jsonSerializer;
 		
-		this.typed = new DefaultTypedBean(type != null ? type : ClassUtils.getSuperClassGenricType(getClass()));
+		if (targetType != null)
+			this.targetType = targetType;
+		else
+			this.targetType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public T deserialize(String topic, byte[] data) {
-		return (T) jsonSerializer.deserialize(data, typed.getType());
+	public JsonSerializer getJsonSerializer() {
+		return jsonSerializer;
 	}
 
+	public Class<T> getTargetType() {
+		return targetType;
+	}
+	
+	@Override
+	public T deserialize(String topic, byte[] data) {
+		return (T) this.jsonSerializer.deserialize(data, this.targetType);
+	}
+	
 }

@@ -18,7 +18,7 @@
 
 package org.sniper.http.form;
 
-import org.sniper.beans.DefaultTypedBean;
+import org.sniper.beans.TypedBean;
 import org.sniper.commons.enums.http.HttpMethod;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CodecUtils;
@@ -30,7 +30,7 @@ import org.sniper.http.headers.request.HttpRequestHeaders;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
+public class SimpleHttpForm extends TypedBean implements HttpForm {
 		
 	/** 请求地址 */
 	private String address;
@@ -49,10 +49,7 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 	
 	/** 响应处理器 */
 	private ResponseHandler responseHandler;
-	
-	/** 嵌套类型路径限定名 */
-	private String nestedTypeClass;
-	
+		
 	/** 嵌套类型 */
 	private Class<?> nestedType;
 	
@@ -115,20 +112,6 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 	}
 	
 	@Override
-	public String getNestedTypeClass() {
-		return nestedTypeClass;
-	}
-
-	@Override
-	public void setNestedTypeClass(String nestedTypeClass) throws Exception {
-		AssertUtils.assertNotBlank(nestedTypeClass, "Nested type class must not be null or blank");
-		
-		// 先尝试加载类型
-		this.nestedType = Class.forName(nestedTypeClass);
-		this.nestedTypeClass = nestedTypeClass;
-	}
-
-	@Override
 	public Class<?> getNestedType() {
 		return nestedType;
 	}
@@ -136,9 +119,7 @@ public class SimpleHttpForm extends DefaultTypedBean implements HttpForm {
 	@Override
 	public void setNestedType(Class<?> nestedType) {
 		AssertUtils.assertNotNull(nestedType, "Nested type must not be null or blank");
-		
 		this.nestedType = nestedType;
-		this.nestedTypeClass = nestedType.getName();
 	}
-
+	
 }

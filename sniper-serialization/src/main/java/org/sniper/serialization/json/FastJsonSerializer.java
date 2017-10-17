@@ -44,7 +44,6 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	@Override
 	public <T> byte[] serialize(T t) throws SerializationException {
 		 SerializeWriter out = new SerializeWriter();
-		 
 		 try {
 			 JSONSerializer serializer = new JSONSerializer(out);
 			 

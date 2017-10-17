@@ -44,7 +44,7 @@ public class DoubleResponseHandler extends AbstractNumberResponseHandler {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected <T> T handle(String response) {
-		return (T) new Double(response);
+		return (T) Double.valueOf(response);
 	}
 	
 }

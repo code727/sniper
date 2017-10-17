@@ -18,18 +18,28 @@
 
 package org.sniper.http.test.sender;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.sniper.commons.LinkedMultiValueMap;
+import org.sniper.commons.MultiValueMap;
 import org.sniper.commons.response.BaseFullResponse;
+import org.sniper.commons.response.BaseMessageResponse;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.http.MappedHttpSender;
+import org.sniper.http.headers.MediaType;
 import org.sniper.http.test.domain.Developer;
 import org.sniper.test.spring.JUnit4SpringContextTestCase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -75,7 +85,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 		System.out.println(response.getData().getBirthday());
 	}
 	
-	@Test
+//	@Test
 	public void testPostBodyBean() throws Exception {
 		BaseFullResponse<Developer> response = mappedHttpSender.requestByBody("postBodyBean", requestBody);
 		System.out.println(response.getCode());
@@ -83,5 +93,72 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 		System.out.println(response.getData().getName());
 		System.out.println(response.getData().getBirthday());
 	}
+	
+	@Test
+	public void testPostUpload() throws Exception {
+//		Map<String, Object> requestBody = MapUtils.newHashMap();
+//		requestBody.put("file", new File("C:/Users/Daniele/Desktop/新建.txt"));
+//		requestBody.put("age", 34);
+//		requestBody.put("name", "杜斌");
+//		requestBody.put("loginName", null);
+		
+		DiskFileItemFactory factory = new DiskFileItemFactory(); 
+		factory.setSizeThreshold(4096);  
+		factory.setRepository(new File("C:/Users/Daniele/Desktop/新建.txt"));
+		FileItem fileItem = factory.createItem("file", MediaType.MULTIPART_FORM_DATA.getType(), true,
+				factory.getRepository().getName());
+		fileItem.getOutputStream();
+		
+		MultiValueMap<String, Object> multiValueMap = new LinkedMultiValueMap<String, Object>();
+		multiValueMap.add("file", fileItem);
+		multiValueMap.add("age", 34);
+		multiValueMap.add("name", "杜斌");
+		multiValueMap.add("loginName", null);
+//		
+//		
+//		requestBody.put("file", fileItem);
+//		requestBody.put("age", 34);
+//		requestBody.put("name", "杜斌");
+//		requestBody.put("loginName", null);
+		
+		BaseMessageResponse response = mappedHttpSender.requestByBody("postUpload", multiValueMap);
+		System.out.println(response.wasSuccess());
+	}
+	
+//	@Test
+	public void testPostUploads() throws Exception {
+		
+//		MultiValueMap<String, Object> fileBody = new LinkedMultiValueMap<String, Object>();
+//		fileBody.add("files", new File("C:/Users/Daniele/Desktop/新建.txt"));
+//		for (Entry<String, Object> entry : this.requestBody.entrySet()) {
+//			fileBody.add(entry.getKey(), entry.getValue());
+//		}
+		
+		File[] files = new File[] { new File("C:/Users/Daniele/Desktop/新建.txt") };
+		
+		BaseFullResponse<Developer> response = mappedHttpSender.requestByBody("postUploads", files);
+		if (response.wasSuccess()) {
+			Developer developer = response.getData();
+			System.out.println(developer.getId());
+			System.out.println(developer.getName());
+			System.out.println(developer.getBirthday());
+		} else {
+			System.out.println("Response code:" + response.getCode());
+		}
+	}
+	
+//	@Test
+	public void test() {
+		String url = "http://localhost:8080/snipersite/test/post/uploads";
+		MultiValueMap<String, Object> fileBody = new LinkedMultiValueMap<String, Object>();
+		fileBody.add("files", new FileSystemResource("C:/Users/Daniele/Desktop/新建.txt"));
+		for (Entry<String, Object> entry : this.requestBody.entrySet()) {
+			fileBody.add(entry.getKey(), entry.getValue());
+		}
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String response = restTemplate.postForObject(url, fileBody, String.class);
+		System.out.println(response);
+	}	
 
 }

@@ -20,17 +20,17 @@ package org.sniper.beans.mapper;
 
 import java.util.Set;
 
-import org.sniper.beans.Typed;
+import org.sniper.beans.GenericBean;
 
 /**
  * Java Bean映射器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface BeanMapper<S> extends ConfigurableMapper, Typed {
+public interface BeanMapper<S> extends ConfigurableMapper, GenericBean<S> {
 	
 	/**
-	 * 将源对象映射成一个JavaBean
+	 * 将源对象映射成一个全局类型的JavaBean
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source 源对象
 	 * @return
@@ -39,34 +39,34 @@ public interface BeanMapper<S> extends ConfigurableMapper, Typed {
 	public <T> T mapping(S source) throws Exception;
 	
 	/**
-	 * 将源对象映射成一个指定类型的JavaBean
+	 * 将源对象映射成一个指定目标类型的JavaBean
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param source 源对象
-	 * @param type JavaBean类型
+	 * @param targetType 目标JavaBean类型
 	 * @return
 	 * @throws Exception
 	 */
-	public <T> T mapping(S source, Class<T> type) throws Exception;
+	public <T> T mapping(S source, Class<T> targetType) throws Exception;
 	
 	/**
-	 * 将源对象按照指定规则映射成一个JavaBean
+	 * 将源对象按照指定规则映射成一个全局类型的JavaBean
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param source
-	 * @param mapperRules
+	 * @param source 源对象
+	 * @param mapperRules 映射规则集
 	 * @return
 	 * @throws Exception
 	 */
 	public <T> T mapping(S source, Set<MapperRule> mapperRules) throws Exception;
 	
 	/**
-	 *  将源对象按照指定规则映射成一个指定类型的JavaBean
+	 *  将源对象按照指定规则映射成一个指定目标类型的JavaBean
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param source
-	 * @param mapperRules
-	 * @param type
+	 * @param source 源对象
+	 * @param mapperRules 映射规则集
+	 * @param targetType 目标JavaBean类型
 	 * @return
 	 * @throws Exception
 	 */
-	public <T> T mapping(S source, Set<MapperRule> mapperRules, Class<T> type) throws Exception;
+	public <T> T mapping(S source, Set<MapperRule> mapperRules, Class<T> targetType) throws Exception;
 
 }

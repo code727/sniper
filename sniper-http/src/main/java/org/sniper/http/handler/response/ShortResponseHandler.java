@@ -44,7 +44,7 @@ public class ShortResponseHandler extends AbstractNumberResponseHandler {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected <T> T handle(String response) {
-		return (T) new Short(response);
+		return (T) Short.valueOf(response);
 	}
-	
+		
 }

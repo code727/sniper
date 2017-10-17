@@ -25,6 +25,35 @@ import org.sniper.beans.Typed;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface TypedSerializer extends Typed, Serializer, Deserializer {
+public interface TypedSerializer extends Typed, Serializer {
+	
+	/**
+	 * 将字节数据反序列化成指定目标类型的对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param bytes
+	 * @param targetType
+	 * @return
+	 * @throws SerializationException
+	 */
+	public <T> T deserialize(byte[] bytes, Class<T> targetType) throws SerializationException;
+	
+	/**
+	 * 将字符串反序列化成指定目标类型的对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param text
+	 * @param targetType
+	 * @return
+	 * @throws SerializationException
+	 */
+	public <T> T deserialize(String text, Class<T> targetType) throws SerializationException;
+	
+	/**
+	 * 将字符串文本反序列化成全局目标类型的对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param text
+	 * @return
+	 * @throws SerializationException
+	 */
+	public <T> T deserialize(String text) throws SerializationException;
 	
 }

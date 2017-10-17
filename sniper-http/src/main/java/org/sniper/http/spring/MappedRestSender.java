@@ -65,7 +65,7 @@ public final class MappedRestSender extends MappedHttpAccessor {
 		String url = format(name, param);
 		HttpForm form = getFormRegister().find(name);
 		
-		logger.debug("Execute {} request [{}] from form [{}]", HttpMethod.POST, url, name);
+		logger.info("Execute {} request [{}] from form [{}]", HttpMethod.POST, url, name);
 		String response = restTemplate.postForObject(url, requestBody, String.class);
 		return handleResponse(form, response);
 	}
