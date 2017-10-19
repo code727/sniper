@@ -22,17 +22,21 @@ import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
+import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.serialization.SerializationException;
 import org.sniper.serialization.json.AbstractJsonSerializer;
 
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.ArrayType;
 import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
 /**
  * FasterxmlJackson 序列器实现类
@@ -43,6 +47,8 @@ public class FasterxmlJacksonSerializer extends AbstractJsonSerializer {
 	
 	private ObjectMapper objectMapper;
 	
+	private AtomicReference<Throwable> cause;
+	
 	public FasterxmlJacksonSerializer() {
 		this(null);
 	}
@@ -52,6 +58,8 @@ public class FasterxmlJacksonSerializer extends AbstractJsonSerializer {
 			this.objectMapper = objectMapper;
 		else 
 			this.objectMapper = new ObjectMapper();
+		
+		this.cause = new AtomicReference<Throwable>();
 	}
 	
 	public ObjectMapper getObjectMapper() {
@@ -70,6 +78,22 @@ public class FasterxmlJacksonSerializer extends AbstractJsonSerializer {
 			this.objectMapper.setDateFormat(DateUtils.getDateFormat(dateFormat));
 		else
 			this.objectMapper.setDateFormat(null);
+	}
+	
+	@Override
+	public boolean canSerialize(Object obj) {
+		Class<?> type = ObjectUtils.getClass(obj);
+		return type != null && this.objectMapper.canSerialize(type, this.cause);
+	}
+
+	@Override
+	public boolean canDeserialize(Object obj) {
+		Class<?> type = ObjectUtils.getClass(obj);
+		if (type == null)
+			return false;
+		
+		JavaType javaType = TypeFactory.defaultInstance().constructType(type);
+		return this.objectMapper.canDeserialize(javaType, this.cause);
 	}
 
 	@Override

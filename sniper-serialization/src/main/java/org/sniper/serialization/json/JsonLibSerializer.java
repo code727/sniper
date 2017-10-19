@@ -155,6 +155,24 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 			registerJsonDateProcessor(dateFormat);
 		}
 	}
+	
+	@Override
+	public boolean canSerialize(Object obj) {
+		Class<?> type = ObjectUtils.getClass(obj);
+		if (type == null)
+			return false;
+		
+		return morpherRegistry.getMorphersFor(type) != null;
+	}
+
+	@Override
+	public boolean canDeserialize(Object obj) {
+		Class<?> type = ObjectUtils.getClass(obj);
+		if (type == null)
+			return false;
+		
+		return morpherRegistry.getMorphersFor(type) != null;
+	}
 			
 	@Override
 	public <T> byte[] serialize(T t) throws SerializationException {

@@ -28,4 +28,20 @@ import org.sniper.serialization.TypedSerializer;
  */
 public interface JsonSerializer extends TypedSerializer, DateSerializer {
 	
+	/**
+	 * 判断对象是否可以被序列化
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public boolean canSerialize(Object obj);
+	
+	/**
+	 * 判断对象是否可以被反序列化
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public boolean canDeserialize(Object obj);
+	
 }
