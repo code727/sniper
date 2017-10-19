@@ -33,17 +33,17 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FasterxmlJJacksonBigDecimalSerializer extends JsonSerializer<BigDecimal> {
+public class FasterxmlJacksonBigDecimalSerializer extends JsonSerializer<BigDecimal> {
 	
 	private int newScale;
 	
 	private int roundingMode;
 	
-	public FasterxmlJJacksonBigDecimalSerializer() {
+	public FasterxmlJacksonBigDecimalSerializer() {
 		this(2, RoundingMode.DOWN.ordinal());
 	}
 	
-	public FasterxmlJJacksonBigDecimalSerializer(int newScale, int roundingMode) {
+	public FasterxmlJacksonBigDecimalSerializer(int newScale, int roundingMode) {
 		this.newScale = newScale;
 		this.roundingMode = roundingMode;
 	}

@@ -58,5 +58,15 @@ public abstract class AbstractTypedSerializer extends AbstractSerializer impleme
 	public <T> T deserialize(String text) throws SerializationException {
 		return (T) deserialize(text, getTargetType());
 	}
+	
+	/**
+	 * 获取一个安全的反序列化类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param type
+	 * @return
+	 */
+	protected Class<?> safeDeserializeType(Class<?> type) {
+		return type != null ? type : typed.getTargetType();
+	}
 
 }

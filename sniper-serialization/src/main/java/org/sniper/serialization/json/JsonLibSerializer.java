@@ -22,9 +22,9 @@ import java.lang.reflect.Array;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.sniper.beans.propertyeditors.DatePropertyEditor;
-import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
@@ -162,7 +162,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 		if (type == null)
 			return false;
 		
-		return morpherRegistry.getMorphersFor(type) != null;
+		return morpherRegistry.getMorpherFor(type) != null;
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 		if (type == null)
 			return false;
 		
-		return morpherRegistry.getMorphersFor(type) != null;
+		return morpherRegistry.getMorpherFor(type) != null;
 	}
 			
 	@Override
@@ -179,121 +179,66 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 		return CodecUtils.getBytes(JSONSerializer.toJSON(t, jsonConfig).toString(), getEncoding());
 	}
 	
+	/**
+	 * 重写父类方法，由于Json在做反序列化操作时:<P>
+	 * 1)如果调用方传入的目标对象类型为null或Object，则默认反序列化结果的类型为net.sf.json.JSONObject<P>
+	 * 2)如果调用方传入的目标对象类型为java.util.Map接口类型，则默认反序列化结果的类型为java.util.HashMap<P>
+	 * 因此，为达到保持与CodehausJacksonSerializer和FasterxmlJacksonSerializer实现类在反序列化默认行为上的一致性，以及向调用方屏蔽掉第三方专用API的目的，
+	 * 针对于上述两种情况，可以在反序列化执行之前，调用此方法将目标对象类型统一返回为java.util.LinkedHashMap
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param type
+	 * @return
+	 */
+	@Override
+	protected Class<?> safeDeserializeType(Class<?> type) {
+		Class<?> deserializeType = super.safeDeserializeType(type);
+		if (deserializeType == Object.class || deserializeType == Map.class)
+			return LinkedHashMap.class;
+		
+		return deserializeType;
+	}
+			
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T deserialize(String jsonString, Class<T> type) throws SerializationException {
-		try {
-			if (!isJsonArray(jsonString)) {
-				if (type != null) {
-					if (!ClassUtils.isCollection(type)) {
-						return (T) (!ClassUtils.isArray(type) ? 
-								beanDeserialize(jsonString, type) : beanDeserializeToArray(jsonString, type));
-					} else 
-						// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
-						return beanDeserializeToCollection(jsonString);
-				} else 
-					// 指定的类型为null时，则返回LinkedHashMap
-					return beanDeserializeToMap(jsonString);
-			} else {
-				if (type != null && !ClassUtils.isCollection(type)) {
-					return (T) (!ClassUtils.isArray(type) ? 
-							multipleBeanDeserializeToElementTypeCollection(jsonString, type) : multipleBeanDeserializeToArray(jsonString, type));
-				} else 
-					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
-					return multipleBeanDeserializeToCollection(jsonString, type);
-			}
-		} catch (Exception e) {
-			throw new SerializationException("Cannot deserialize", e);
-		}
-	}
-	
-	/**
-	 * 将JsonBean字符串反序列化为指定类型的bean对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param jsonBean
-	 * @param beanClazz
-	 * @return
-	 * @throws Exception
-	 */
-	@SuppressWarnings("unchecked")
-	private <T> T beanDeserialize(String jsonBean, Class<?> beanClazz) throws Exception {
-		JSONObject jsonObject = JSONObject.fromObject(jsonBean, jsonConfig);
-		return (T) JSONObject.toBean(jsonObject, beanClazz);
+	protected <T> T deserializeToType(String json, Class<T> type) throws Exception {
+		JSONObject jsonObject = JSONObject.fromObject(json, jsonConfig);
+		return (T) JSONObject.toBean(jsonObject, safeDeserializeType(type));
 	}
 	
 	@SuppressWarnings("unchecked")
-	private <T> T beanDeserializeToArray(String jsonBean, Class<?> arrayClazz) throws Exception {
-		Class<?> componentType = arrayClazz.getComponentType();
+	@Override
+	protected <T> T deserializeToArray(String json, Class<T> arrayType) throws Exception {
+		Class<?> componentType = arrayType.getComponentType();
 		T[] array = (T[]) Array.newInstance(componentType, 1);
-		array[0] = (T) beanDeserialize(jsonBean, componentType);
+		array[0] = (T) deserializeToType(json, componentType);
 		return (T) array;
 	}
 	
-	/**
-	 * 将JsonBean字符串反序列化到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param jsonBean
-	 * @return
-	 * @throws Exception
-	 */
 	@SuppressWarnings("unchecked")
-	private <T> T beanDeserializeToCollection(String jsonBean) throws Exception {
+	@Override
+	protected <T> T deserializeToCollection(String json) throws Exception {
 		List<Object> list = CollectionUtils.newArrayList();
-		list.add(beanDeserializeToMap(jsonBean));
+		list.add(deserializeToType(json, null));
 		return (T) list;
 	}
-	
-	/**
-	 * 将JsonBean字符串反序列化为Object
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param jsonBean
-	 * @return
-	 * @throws Exception
-	 */
+		
 	@SuppressWarnings("unchecked")
-	private <T> T beanDeserializeToMap(String jsonBean) throws Exception {
-		JSONObject jsonObject = JSONObject.fromObject(jsonBean, jsonConfig);
-		return (T) JSONObject.toBean(jsonObject, LinkedHashMap.class);
-	}
-	
-	/**
-	 * 将代表多个bean的JSON字符串反序列化到指定元素类型的集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param jsonArray
-	 * @param beanClazz
-	 * @return
-	 * @throws Exception
-	 */
-	@SuppressWarnings("unchecked")
-	private <T> T multipleBeanDeserializeToElementTypeCollection(String jsonArray, Class<?> beanClazz) throws Exception {
+	@Override
+	protected <T> T multipleDeserializeToElementTypeCollection(String jsonArray, Class<?> elementType) throws Exception {
 		JSONArray array = JSONArray.fromObject(jsonArray, jsonConfig);
-		return (T) JSONArray.toCollection(array, beanClazz);
+		return (T) JSONArray.toCollection(array, elementType);
 	}
 	
-	/**
-	 * 将代表多个bean的JSON字符串反序列化到指定类型的数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param jsonArray
-	 * @param arrayClazz
-	 * @return 
-	 * @throws Exception
-	 */
 	@SuppressWarnings("unchecked")
-	private <T> T multipleBeanDeserializeToArray(String jsonArray, Class<?> arrayClazz) throws Exception {
+	@Override
+	protected <T> T multipleDeserializeToArray(String jsonArray, Class<T> arrayType) throws Exception {
 		JSONArray array = JSONArray.fromObject(jsonArray, jsonConfig);
-		return (T) JSONArray.toArray(array, arrayClazz.getComponentType());
+		return (T) JSONArray.toArray(array, arrayType.getComponentType());
 	}
 	
-	/**
-	 * 将代表多个bean的JSON字符串反序列化到指定类型的集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param jsonArray
-	 * @param collectionClazz
-	 * @return
-	 * @throws Exception
-	 */
 	@SuppressWarnings("unchecked")
-	private <T> T multipleBeanDeserializeToCollection(String jsonArray, Class<?> collectionClazz) throws Exception {
+	@Override
+	protected <T> T multipleDeserializeToCollection(String jsonArray, Class<?> collectionType) throws Exception {
 		JSONArray array = JSONArray.fromObject(jsonArray, jsonConfig);
 		return (T) JSONArray.toCollection(array, LinkedHashMap.class);
 	}

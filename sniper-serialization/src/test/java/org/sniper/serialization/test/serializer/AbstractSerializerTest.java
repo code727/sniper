@@ -32,36 +32,32 @@ import org.sniper.test.junit.BaseTestCase;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractSerializerTest extends BaseTestCase implements SerializerTest {
+public abstract class AbstractSerializerTest extends BaseTestCase {
 	
 	protected User user;
 	
 	protected List<User> list;
-	
-	protected byte[] bytes;
-	
+		
 	@Before
 	public void init() {
-		Date date = new Date();		
 		user = new User();
 		user.setId(9527L);
-		user.setName("杜斌测试");
+		user.setName("杜斌");
 		user.setAge(33);
 		user.setGender((byte) 1);
 		user.setMarried(true);
 		user.setVision(1.0);
-		user.setCreateTime(date);
+		user.setCreateTime(new Date());
 		user.setAmount(new BigDecimal("99.9999"));
-		System.out.println(date.getTime());
 		
+		int size = 3;
 		list = CollectionUtils.newArrayList();
-		list.add(user);
-//		for (int i = 0 ; i < 1000000; i++) {
-//			User cloneUser = user.clone();
-//			cloneUser.setId(user.getId() + i + 1);
-//			list.add(cloneUser);
-//		}
-			
+		for (int i = 0; i < size; i++) {
+			User user = this.user.clone();
+			user.setId(this.user.getId() + (i + 1));
+			list.add(user);
+		}
+		
 	}
-
+	
 }

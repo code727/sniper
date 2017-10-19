@@ -18,14 +18,11 @@
 
 package org.sniper.serialization.test.serializer.json;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
-import org.sniper.commons.util.ArrayUtils;
-import org.sniper.commons.util.CodecUtils;
-import org.sniper.commons.util.IOUtils;
+import org.sniper.commons.util.ObjectUtils;
 import org.sniper.serialization.json.JsonLibSerializer;
 import org.sniper.serialization.test.domain.User;
 import org.sniper.serialization.test.serializer.AbstractSerializerTest;
@@ -41,30 +38,47 @@ public class JsonLibSerializerTest extends AbstractSerializerTest {
 	
 	public JsonLibSerializerTest() {
 		this.jsonLibSerializer = new JsonLibSerializer();
-//		this.jsonLibSerializer.setDateFormat(DateUtils.DEFAULT_DATETIME_FORMAT);
 	}
 	
-	@Override
-//	@Test
-	public void testSerialize() throws Exception {
-		bytes = jsonLibSerializer.serialize(list);
-		
-		String path = "C:/Users/Daniele/Desktop/jsonLibSerializer.txt";
-		IOUtils.write(new FileOutputStream(new File(path)), bytes);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
+	/**
+	 * 单值测试
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @throws Exception
+	 */
 	@Test
-	public void testDeserialize() throws Exception {
-		if (ArrayUtils.isEmpty(bytes)) {
-			testSerialize();
-			System.out.println(CodecUtils.bytesToString(bytes));
-		}
+	public void singleValueTest() throws Exception {
+		String json = jsonLibSerializer.serializeToString(user);
+		System.out.println("----------------------------JSON------------------------");
+		System.out.println(json);
 		
-		List<User> users = (List<User>) jsonLibSerializer.deserialize(bytes, User.class);
-		System.out.println(users);
-		System.out.println(users.get(0).getCreateTime());
+		Object deserializeResult = null;
+		
+		System.out.println("--------------------------Deserialize--------------------");
+		deserializeResult = jsonLibSerializer.deserialize(json);
+		System.out.println("Default type -> " + deserializeResult.getClass());
+		
+		deserializeResult = jsonLibSerializer.deserialize(json, null);
+		System.out.println("Null type -> " + deserializeResult.getClass());
+		
+		deserializeResult = jsonLibSerializer.deserialize(json, Object.class);
+		System.out.println("Object type -> " + deserializeResult.getClass());
+		
+		deserializeResult = jsonLibSerializer.deserialize(json, Map.class);
+		System.out.println("Map type -> " + deserializeResult.getClass());
+		
+		deserializeResult = jsonLibSerializer.deserialize(json, User.class);
+		System.out.println("Java bean type - > " + deserializeResult.getClass());
+		
+		deserializeResult = jsonLibSerializer.deserialize(json, Object[].class);
+		System.out.println("Object array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Object array element type -> " + ((Object[])deserializeResult)[0].getClass());
+		
+		deserializeResult = jsonLibSerializer.deserialize(json, User[].class);
+		System.out.println("Java bean array type - > " + deserializeResult.getClass());
+		
+		deserializeResult = jsonLibSerializer.deserialize(json, List.class);
+		System.out.println("List type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
 	}
 	
 }
