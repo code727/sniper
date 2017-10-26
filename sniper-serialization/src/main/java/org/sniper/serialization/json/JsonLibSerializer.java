@@ -19,16 +19,27 @@
 package org.sniper.serialization.json;
 
 import java.lang.reflect.Array;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Deque;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.sniper.beans.propertyeditors.DatePropertyEditor;
 import org.sniper.commons.util.CodecUtils;
-import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.ObjectUtils;
+import org.sniper.commons.util.ReflectionUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.serialization.SerializationException;
 
@@ -180,11 +191,11 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	}
 	
 	/**
-	 * 重写父类方法，由于Json在做反序列化操作时:<P>
-	 * 1)如果调用方传入的目标对象类型为null或Object，则默认反序列化结果的类型为net.sf.json.JSONObject<P>
-	 * 2)如果调用方传入的目标对象类型为java.util.Map接口类型，则默认反序列化结果的类型为java.util.HashMap<P>
+	 * 重写父类方法，由于JsonLib在做反序列化操作时:<P>
+	 * 1)如果调用方传入的目标对象类型为null或接口类型，则会报异常
+	 * 2)如果调用方传入的目标对象类型为Object，则默认反序列化结果的类型为net.sf.json.JSONObject<P>
 	 * 因此，为达到保持与CodehausJacksonSerializer和FasterxmlJacksonSerializer实现类在反序列化默认行为上的一致性，以及向调用方屏蔽掉第三方专用API的目的，
-	 * 针对于上述两种情况，可以在反序列化执行之前，调用此方法将目标对象类型统一返回为java.util.LinkedHashMap
+	 * 针对于上述两种情况，可以在反序列化执行之前，调用此方法将目标对象类型统一返回为具体的实现类对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 * @return
@@ -192,9 +203,25 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	@Override
 	protected Class<?> safeDeserializeType(Class<?> type) {
 		Class<?> deserializeType = super.safeDeserializeType(type);
+		
 		if (deserializeType == Object.class || deserializeType == Map.class)
 			return LinkedHashMap.class;
 		
+		if (deserializeType == List.class)
+			return ArrayList.class;
+		
+		if (deserializeType == Set.class)
+			return LinkedHashSet.class;
+		
+		if (deserializeType == Queue.class || deserializeType == BlockingQueue.class)
+			return LinkedBlockingQueue.class;
+		
+		if (deserializeType == Deque.class)
+			return ArrayDeque.class;
+		
+		if (deserializeType == BlockingDeque.class)
+			return LinkedBlockingDeque.class;
+			
 		return deserializeType;
 	}
 			
@@ -214,33 +241,62 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 		return (T) array;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	protected <T> T deserializeToCollection(String json) throws Exception {
-		List<Object> list = CollectionUtils.newArrayList();
-		list.add(deserializeToType(json, null));
-		return (T) list;
+	protected <T> T deserializeToCollection(String json, Class<T> collectionType) throws Exception {
+		/* 将JSON字符串先构建成数组形式的再进行反序列化 */
+		String jsonArray = new StringBuilder("[").append(json).append("]").toString();
+		return multipleDeserializeToCollection(jsonArray, collectionType);
 	}
 		
 	@SuppressWarnings("unchecked")
 	@Override
-	protected <T> T multipleDeserializeToElementTypeCollection(String jsonArray, Class<?> elementType) throws Exception {
+	protected <T, E> T multipleDeserializeToElementTypeCollection(String jsonArray, Class<E> elementType) throws Exception {
 		JSONArray array = JSONArray.fromObject(jsonArray, jsonConfig);
-		return (T) JSONArray.toCollection(array, elementType);
+		return (T) JSONArray.toCollection(array, safeDeserializeType(elementType));
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected <T> T multipleDeserializeToArray(String jsonArray, Class<T> arrayType) throws Exception {
+		Class<T> componentType = (Class<T>) arrayType.getComponentType();
 		JSONArray array = JSONArray.fromObject(jsonArray, jsonConfig);
-		return (T) JSONArray.toArray(array, arrayType.getComponentType());
+		return (T) JSONArray.toArray(array, safeDeserializeType(componentType));
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected <T> T multipleDeserializeToCollection(String jsonArray, Class<?> collectionType) throws Exception {
+	protected <T> T multipleDeserializeToCollection(String jsonArray, Class<T> collectionType) throws Exception {
 		JSONArray array = JSONArray.fromObject(jsonArray, jsonConfig);
-		return (T) JSONArray.toCollection(array, LinkedHashMap.class);
+		Collection<T> collection = JSONArray.toCollection(array, LinkedHashMap.class);
+		return toTargetCollection(collection, collectionType);
+	}
+	
+	/**
+	 * 将原集合转换为指定类型的集合，目的与safeDeserializeType方法的一致
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param sourceSollection
+	 * @param collectionType
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T toTargetCollection(Collection<T> sourceCollection, Class<T> collectionType) throws Exception {
+		Class<?> sourceCollectionType = sourceCollection.getClass();
+		Class<?> targetCollectionType = safeDeserializeType(collectionType);
+		
+		// 如果原集合类型和目标集合类型下相同，则直接将原集合作为目标集合结果返回
+		if (sourceCollectionType == targetCollectionType)
+			return (T) sourceCollection;
+		
+		Collection<T> targetCollection;
+		try {
+			targetCollection = (Collection<T>) ReflectionUtils.newInstance(targetCollectionType, 
+					new Class<?>[] {Collection.class}, new Object[] {sourceCollection});
+		} catch (Exception e) {
+			targetCollection = (Collection<T>) ReflectionUtils.newInstance(targetCollectionType);
+			targetCollection.addAll(sourceCollection);
+		}
+		return (T) targetCollection;
 	}
 	
 	/**

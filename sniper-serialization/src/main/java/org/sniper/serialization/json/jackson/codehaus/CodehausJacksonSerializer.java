@@ -21,13 +21,10 @@ package org.sniper.serialization.json.jackson.codehaus;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
 import org.codehaus.jackson.type.JavaType;
-import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
@@ -112,17 +109,16 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 		return (T) array;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	protected <T> T deserializeToCollection(String json) throws Exception {
-		List<Object> list = CollectionUtils.newArrayList();
-		list.add(deserializeToType(json, null));
-		return (T) list;
+	protected <T> T deserializeToCollection(String json, Class<T> collectionType) throws Exception {
+		/* 将JSON字符串先构建成数组形式的再进行反序列化 */
+		String jsonArray = new StringBuilder("[").append(json).append("]").toString();
+		return multipleDeserializeToCollection(jsonArray, collectionType);
 	}
 		
 	@Override
-	protected <T> T multipleDeserializeToElementTypeCollection(String jsonArray, Class<?> elementType) throws Exception {
-		JavaType javaType = objectMapper.getTypeFactory().constructParametricType(Collection.class, elementType);
+	protected <T, E> T multipleDeserializeToElementTypeCollection(String jsonArray, Class<E> elementType) throws Exception {
+		JavaType javaType = objectMapper.getTypeFactory().constructParametricType(Collection.class, safeDeserializeType(elementType));
 		return objectMapper.readValue(jsonArray, javaType);
 	}
 	
@@ -134,8 +130,8 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected <T> T multipleDeserializeToCollection(String jsonArray, Class<?> collectionType) throws Exception {
-		return (T) objectMapper.readValue(jsonArray, collectionType != null ? collectionType : Map.class);
+	protected <T> T multipleDeserializeToCollection(String jsonArray, Class<T> collectionType) throws Exception {
+		return (T) objectMapper.readValue(jsonArray, safeDeserializeType(collectionType));
 	}
 
 }

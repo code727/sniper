@@ -18,6 +18,7 @@
 
 package org.sniper.serialization.json;
 
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.serialization.AbstractTypedSerializer;
@@ -43,23 +44,30 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 		this.dateFormat = dateFormat;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T deserialize(String text, Class<T> type) throws SerializationException {
+		AssertUtils.assertNotBlank(text, "JSON string must not be null or blank");
 		try {
-			if (!isJsonArray(text)) {
+			if (isJsonArray(text)) {
 				if (ClassUtils.isCollection(type))
-					// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
-					return deserializeToCollection(text);
-					
-				return (T) (ClassUtils.isArray(type) ? deserializeToArray(text, type) : deserializeToType(text, type));
-			} else {
-				if (ClassUtils.isCollection(type))
-					// 指定的类型为null、Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
+					// 指定的类型为Collection、List、Set或其它集合类型时，则统一返回Collection<LinkedHashMap>
 					return multipleDeserializeToCollection(text, type);
 				
-				return (T) (ClassUtils.isArray(type) ? multipleDeserializeToArray(text, type) : multipleDeserializeToElementTypeCollection(text, type));
+				if (ClassUtils.isArray(type))
+					return multipleDeserializeToArray(text, type);
+				
+				return multipleDeserializeToElementTypeCollection(text, type);
+			} else {
+				if (ClassUtils.isCollection(type))
+					// 指定的类型为Collection、List或其它集合类型时，则统一返回Collection<LinkedHashMap>
+					return deserializeToCollection(text, type);
+				
+				if (ClassUtils.isArray(type))
+					return deserializeToArray(text, type);
+				
+				return deserializeToType(text, type);
 			}
+			
 		} catch (Exception e) {
 			throw new SerializationException("Cannot deserialize", e);
 		}
@@ -98,11 +106,12 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	/**
 	 * 将JSON字符串反序列化到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param json JSON字符串
+	 * @param json
+	 * @param collectionType
 	 * @return
 	 * @throws Exception
 	 */
-	protected abstract <T> T deserializeToCollection(String json) throws Exception;
+	protected abstract <T> T deserializeToCollection(String json, Class<T> collectionType) throws Exception;
 	
 	/**
 	 * 将JSON数组字符串反序列化到指定元素类型的集合中
@@ -112,7 +121,7 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	 * @return
 	 * @throws Exception
 	 */
-	protected abstract <T> T multipleDeserializeToElementTypeCollection(String jsonArray, Class<?> elementType) throws Exception;
+	protected abstract <T, E> T multipleDeserializeToElementTypeCollection(String jsonArray, Class<E> elementType) throws Exception;
 	
 	/**
 	 * 将JSON数组字符串反序列化到指定类型的数组中
@@ -132,6 +141,6 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	 * @return
 	 * @throws Exception
 	 */
-	protected abstract <T> T multipleDeserializeToCollection(String jsonArray, Class<?> collectionType) throws Exception;
+	protected abstract <T> T multipleDeserializeToCollection(String jsonArray, Class<T> collectionType) throws Exception;
 	
 }

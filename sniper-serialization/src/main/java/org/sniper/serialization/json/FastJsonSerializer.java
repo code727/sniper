@@ -21,16 +21,20 @@ package org.sniper.serialization.json;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.ObjectUtils;
+import org.sniper.commons.util.ReflectionUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.serialization.SerializationException;
 
 import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.DefaultJSONParser;
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.JSONSerializer;
@@ -71,23 +75,23 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	
 	@Override
 	public <T> byte[] serialize(T t) throws SerializationException {
-		 SerializeWriter out = new SerializeWriter();
-		 try {
-			 JSONSerializer serializer = new JSONSerializer(out);
-			 
-			 String dateFormat = getDateFormat();
-			 if (StringUtils.isNotBlank(dateFormat)) {
-				 serializer.config(SerializerFeature.WriteDateUseDateFormat, true);
-				 serializer.setDateFormat(dateFormat);
-			 }
-			 
-			 serializer.write(t);
-			 return out.toBytes(getEncoding());
-		 } catch (Exception e) {
-			 throw new SerializationException("Cannot serialize", e);
-		 } finally {
-			 out.close();
-		 }
+		JSONSerializer serializer = null;
+		try {
+			serializer = new JSONSerializer(new SerializeWriter());
+			
+			String dateFormat = getDateFormat();
+			if (StringUtils.isNotBlank(dateFormat)) {
+				serializer.config(SerializerFeature.WriteDateUseDateFormat, true);
+				serializer.setDateFormat(dateFormat);
+			}
+			serializer.write(t);
+			return serializer.getWriter().toBytes(getEncoding());
+		} catch (Exception e) {
+			throw new SerializationException("Cannot serialize", e);
+		} finally {
+			if (serializer != null)
+				serializer.close();
+		}
 	}
 	
 	/**
@@ -139,31 +143,57 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 		return (T) array;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	protected <T> T deserializeToCollection(String json) throws Exception {
-		List<Object> list = CollectionUtils.newArrayList();
-		list.add(deserializeToType(json, null));
-		return (T) list;
+	protected <T> T deserializeToCollection(String json, Class<T> collectionType) throws Exception {
+		/* 将JSON字符串先构建成数组形式的再进行反序列化 */
+		String jsonArray = new StringBuilder("[").append(json).append("]").toString();
+		return multipleDeserializeToCollection(jsonArray, collectionType);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected <T> T multipleDeserializeToElementTypeCollection(String jsonArray, Class<?> elementType) throws Exception {
-		return (T) newJSONParser(jsonArray).parseArray(elementType);
+	protected <T, E> T multipleDeserializeToElementTypeCollection(String jsonArray, Class<E> elementType) throws Exception {
+		return (T) newJSONParser(jsonArray).parseArray(safeDeserializeType(elementType));
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected <T> T multipleDeserializeToArray(String jsonArray, Class<T> arrayType) throws Exception {
-		Collection<T> collection = multipleDeserializeToElementTypeCollection(jsonArray, arrayType.getComponentType());
-		return (T) CollectionUtils.toArray(collection);
+		Class<T> componentType = (Class<T>) arrayType.getComponentType();
+		Collection<T> collection = multipleDeserializeToElementTypeCollection(jsonArray, componentType);
+		return (T) CollectionUtils.toArray(collection, componentType);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected <T> T multipleDeserializeToCollection(String jsonArray, Class<?> collectionType) throws Exception {
-		return (T) newJSONParser(jsonArray).parseArray(LinkedHashMap.class);
+	protected <T> T multipleDeserializeToCollection(String jsonArray, Class<T> collectionType) throws Exception {
+		Collection<JSONObject> collection = (Collection<JSONObject>) newJSONParser(jsonArray)
+				.parseObject(safeDeserializeType(collectionType));
+		return (T) toOriginalMapElementCollection(collection);
+	}
+	
+	/**
+	 * 将com.alibaba.fastjson.JSONObject元素类型的集合转换为原生Map元素类型的集合，
+	 * 目的与safeDeserializeType方法的一致
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param collection
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private Collection<Map<String, Object>> toOriginalMapElementCollection(Collection<JSONObject> collection) throws Exception {
+		// 要求集合的实际类型必须有默认构造函数
+		Collection<Map<String, Object>> result = ReflectionUtils.newInstance(collection.getClass());
+		Iterator<JSONObject> iterator = collection.iterator();
+		
+		while (iterator.hasNext()) {
+			Map<String, Object> map = MapUtils.newLinkedHashMap();
+			for (Entry<String, Object> entry : ((JSONObject) iterator.next()).entrySet()) {
+				map.put(entry.getKey(), entry.getValue());
+			}
+			result.add(map);
+		}
+		return result;
 	}
 
 }
