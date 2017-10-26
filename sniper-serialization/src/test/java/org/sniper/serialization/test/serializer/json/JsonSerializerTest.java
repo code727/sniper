@@ -13,26 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年10月17日
+ * Create Date : 2017-10-17
  */
 
 package org.sniper.serialization.test.serializer.json;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.sniper.commons.enums.ebusiness.O2OType;
 import org.sniper.serialization.json.FastJsonSerializer;
 import org.sniper.serialization.json.JsonLibSerializer;
 import org.sniper.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
 import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
-import org.sniper.test.junit.BaseTestCase;
+import org.sniper.serialization.test.domain.User;
+import org.sniper.serialization.test.serializer.AbstractSerializerTest;
 
 /**
  * JSON序列化器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JsonSerializerTest extends BaseTestCase {
+public class JsonSerializerTest extends AbstractSerializerTest {
 	
 	private CodehausJacksonSerializer codehausJacksonSerializer = new CodehausJacksonSerializer();
 	
@@ -42,37 +41,28 @@ public class JsonSerializerTest extends BaseTestCase {
 	
 	private JsonLibSerializer jsonLibSerializer = new JsonLibSerializer();
 	
-	protected Class<?> type;
-	protected Object value;
-	
-	@Before
-	public void init() {
-		type = O2OType[].class;
-		value = O2OType.ONLINE;
-	}
-	
-//	@Test
+	@Test
 	public void testCanSerialize() {
-		System.out.println("CodehausJacksonSerializer can serialize:" + codehausJacksonSerializer.canSerialize(type)); 
-		System.out.println("FasterxmlJacksonSerializer can serialize:" + fasterxmlJacksonSerializer.canSerialize(type));
-		System.out.println("FastJsonSerializer can serialize:" + fastJsonSerializer.canSerialize(type)); 
-		System.out.println("JsonLibSerializer can serialize:" + jsonLibSerializer.canSerialize(type)); 
+		System.out.println("CodehausJacksonSerializer can serialize:" + codehausJacksonSerializer.canSerialize(User.class)); 
+		System.out.println("FasterxmlJacksonSerializer can serialize:" + fasterxmlJacksonSerializer.canSerialize(User.class));
+		System.out.println("FastJsonSerializer can serialize:" + fastJsonSerializer.canSerialize(User.class)); 
+		System.out.println("JsonLibSerializer can serialize:" + jsonLibSerializer.canSerialize(User.class)); 
 	}
 	
-//	@Test
+	@Test
 	public void testCanDeserialize() {
-		System.out.println("CodehausJacksonSerializer can deserialize:" + codehausJacksonSerializer.canDeserialize(type)); 
-		System.out.println("FasterxmlJacksonSerializer can deserialize:" + fasterxmlJacksonSerializer.canDeserialize(type));
-		System.out.println("FastJsonSerializer can deserialize:" + fastJsonSerializer.canDeserialize(type)); 
-		System.out.println("JsonLibSerializer can deserialize:" + jsonLibSerializer.canDeserialize(type)); 
+		System.out.println("CodehausJacksonSerializer can deserialize:" + codehausJacksonSerializer.canDeserialize(User.class)); 
+		System.out.println("FasterxmlJacksonSerializer can deserialize:" + fasterxmlJacksonSerializer.canDeserialize(User.class));
+		System.out.println("FastJsonSerializer can deserialize:" + fastJsonSerializer.canDeserialize(User.class)); 
+		System.out.println("JsonLibSerializer can deserialize:" + jsonLibSerializer.canDeserialize(User.class)); 
 	}
 	
 	@Test
 	public void test() {
-		String codehausJacksonResult = codehausJacksonSerializer.serializeToString(value);
-		String fasterxmlJacksonResult = fasterxmlJacksonSerializer.serializeToString(value);
-		String fastJsonResult = fastJsonSerializer.serializeToString(value);
-		String jsonLibResult = jsonLibSerializer.serializeToString(value);
+		String codehausJacksonResult = codehausJacksonSerializer.serializeToString(user);
+		String fasterxmlJacksonResult = fasterxmlJacksonSerializer.serializeToString(user);
+		String fastJsonResult = fastJsonSerializer.serializeToString(user);
+		String jsonLibResult = jsonLibSerializer.serializeToString(user);
 		
 		System.out.println("CodehausJacksonSerializer serialize result:" + codehausJacksonResult); 
 		System.out.println("FasterxmlJacksonSerializer serialize result:" + fasterxmlJacksonResult);
