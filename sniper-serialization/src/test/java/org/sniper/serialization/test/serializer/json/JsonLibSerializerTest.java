@@ -18,8 +18,10 @@
 
 package org.sniper.serialization.test.serializer.json;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 import org.sniper.commons.util.ObjectUtils;
@@ -45,7 +47,7 @@ public class JsonLibSerializerTest extends AbstractSerializerTest {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws Exception
 	 */
-	@Test
+//	@Test
 	public void singleValueTest() throws Exception {
 		String json = jsonLibSerializer.serializeToString(user);
 		System.out.println("----------------------------JSON------------------------");
@@ -54,31 +56,107 @@ public class JsonLibSerializerTest extends AbstractSerializerTest {
 		Object deserializeResult = null;
 		
 		System.out.println("--------------------------Deserialize--------------------");
+		// LinkedHashMap
 		deserializeResult = jsonLibSerializer.deserialize(json);
 		System.out.println("Default type -> " + deserializeResult.getClass());
 		
+		// LinkedHashMap
 		deserializeResult = jsonLibSerializer.deserialize(json, null);
 		System.out.println("Null type -> " + deserializeResult.getClass());
 		
+		// LinkedHashMap
 		deserializeResult = jsonLibSerializer.deserialize(json, Object.class);
 		System.out.println("Object type -> " + deserializeResult.getClass());
 		
+		// LinkedHashMap
 		deserializeResult = jsonLibSerializer.deserialize(json, Map.class);
 		System.out.println("Map type -> " + deserializeResult.getClass());
 		
+		// User
 		deserializeResult = jsonLibSerializer.deserialize(json, User.class);
 		System.out.println("Java bean type - > " + deserializeResult.getClass());
 		
+		// Object[LinkedHashMap]
 		deserializeResult = jsonLibSerializer.deserialize(json, Object[].class);
 		System.out.println("Object array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("Object array element type -> " + ((Object[])deserializeResult)[0].getClass());
 		
+		// Map[LinkedHashMap]
+		deserializeResult = jsonLibSerializer.deserialize(json, Map[].class);
+		System.out.println("Map array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Map array element type -> " + ((Object[])deserializeResult)[0].getClass());
+		
+		// User[]
 		deserializeResult = jsonLibSerializer.deserialize(json, User[].class);
 		System.out.println("Java bean array type - > " + deserializeResult.getClass());
 		
-		deserializeResult = jsonLibSerializer.deserialize(json, List.class);
+		// List<LinkedHashMap>
+		deserializeResult = jsonLibSerializer.deserialize(json, LinkedList.class);
 		System.out.println("List type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+//
+		// Set<LinkedHashMap>
+		deserializeResult = jsonLibSerializer.deserialize(json, Set.class);
+		System.out.println("Set type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Set element type -> " + ((Set<?>)deserializeResult).iterator().next().getClass());
+	}
+	
+	@Test
+	public void multiValueTest() throws Exception {
+		String jsonArray = jsonLibSerializer.serializeToString(list);
+		System.out.println("----------------------------JSON------------------------");
+		System.out.println(jsonArray);
+		
+		Object deserializeResult = null;
+		System.out.println("--------------------------Deserialize--------------------");
+		
+		// List<LinkedHashMap>
+		deserializeResult = jsonLibSerializer.deserialize(jsonArray);
+		System.out.println("Default type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+		
+		// List<LinkedHashMap>
+		deserializeResult = jsonLibSerializer.deserialize(jsonArray, null);
+		System.out.println("Null type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+		
+		// List<LinkedHashMap>
+		deserializeResult = jsonLibSerializer.deserialize(jsonArray, Object.class);
+		System.out.println("Object type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+		
+		// List<LinkedHashMap>
+		deserializeResult = jsonLibSerializer.deserialize(jsonArray, Map.class);
+		System.out.println("Map type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Map element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+		
+		// List<User>
+		deserializeResult = jsonLibSerializer.deserialize(jsonArray, User.class);
+		System.out.println("Java bean type - > " + deserializeResult.getClass());
+		
+		// Object[LinkedHashMap]
+		deserializeResult = jsonLibSerializer.deserialize(jsonArray, Object[].class);
+		System.out.println("Object array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Object array element type -> " + ((Object[])deserializeResult)[0].getClass());
+		
+		// Map[LinkedHashMap]
+		deserializeResult = jsonLibSerializer.deserialize(jsonArray, Map[].class);
+		System.out.println("Map array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Map array element type -> " + ((Map[])deserializeResult)[0].getClass());
+		
+		// User[]
+		deserializeResult = jsonLibSerializer.deserialize(jsonArray, User[].class);
+		System.out.println("Java bean array type - > " + deserializeResult.getClass());
+		
+		// List<LinkedHashMap>
+		deserializeResult = jsonLibSerializer.deserialize(jsonArray, List.class);
+		System.out.println("List type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+		
+		// Set<LinkedHashMap>
+		deserializeResult = jsonLibSerializer.deserialize(jsonArray, Set.class);
+		System.out.println("Set type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Set element type -> " + ((Set<?>)deserializeResult).iterator().next().getClass());
 	}
 	
 }

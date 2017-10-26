@@ -54,7 +54,7 @@ public abstract class AbstractSerializerTest extends BaseTestCase {
 		list = CollectionUtils.newArrayList();
 		for (int i = 0; i < size; i++) {
 			User user = this.user.clone();
-			user.setId(this.user.getId() + (i + 1));
+			user.setId(this.user.getId() + i);
 			list.add(user);
 		}
 		

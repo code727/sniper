@@ -20,6 +20,7 @@ package org.sniper.serialization.test.serializer.json;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 import org.sniper.commons.util.ObjectUtils;
@@ -54,31 +55,107 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 		Object deserializeResult = null;
 		
 		System.out.println("--------------------------Deserialize--------------------");
+		// LinkedHashMap
 		deserializeResult = fastJsonSerializer.deserialize(json);
 		System.out.println("Default type -> " + deserializeResult.getClass());
 		
+		// LinkedHashMap
 		deserializeResult = fastJsonSerializer.deserialize(json, null);
 		System.out.println("Null type -> " + deserializeResult.getClass());
 		
+		// LinkedHashMap
 		deserializeResult = fastJsonSerializer.deserialize(json, Object.class);
 		System.out.println("Object type -> " + deserializeResult.getClass());
 		
+		// LinkedHashMap
 		deserializeResult = fastJsonSerializer.deserialize(json, Map.class);
 		System.out.println("Map type -> " + deserializeResult.getClass());
 		
+		// User
 		deserializeResult = fastJsonSerializer.deserialize(json, User.class);
 		System.out.println("Java bean type - > " + deserializeResult.getClass());
 		
+		// Object[LinkedHashMap]
 		deserializeResult = fastJsonSerializer.deserialize(json, Object[].class);
 		System.out.println("Object array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("Object array element type -> " + ((Object[])deserializeResult)[0].getClass());
 		
+		// Map[LinkedHashMap]
+		deserializeResult = fastJsonSerializer.deserialize(json, Map[].class);
+		System.out.println("Map array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Map array element type -> " + ((Object[])deserializeResult)[0].getClass());
+		
+		// User[]
 		deserializeResult = fastJsonSerializer.deserialize(json, User[].class);
 		System.out.println("Java bean array type - > " + deserializeResult.getClass());
 		
+		// List<LinkedHashMap>
 		deserializeResult = fastJsonSerializer.deserialize(json, List.class);
 		System.out.println("List type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+//
+		// Set<LinkedHashMap>
+		deserializeResult = fastJsonSerializer.deserialize(json, Set.class);
+		System.out.println("Set type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Set element type -> " + ((Set<?>)deserializeResult).iterator().next().getClass());
+	}
+	
+//	@Test
+	public void multiValueTest() throws Exception {
+		String jsonArray = fastJsonSerializer.serializeToString(list);
+		System.out.println("----------------------------JSON------------------------");
+		System.out.println(jsonArray);
+		
+		Object deserializeResult = null;
+		System.out.println("--------------------------Deserialize--------------------");
+		
+		// List<LinkedHashMap>
+		deserializeResult = fastJsonSerializer.deserialize(jsonArray);
+		System.out.println("Default type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+		
+		// List<LinkedHashMap>
+		deserializeResult = fastJsonSerializer.deserialize(jsonArray, null);
+		System.out.println("Null type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+		
+		// List<LinkedHashMap>
+		deserializeResult = fastJsonSerializer.deserialize(jsonArray, Object.class);
+		System.out.println("Object type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+		
+		// List<LinkedHashMap>
+		deserializeResult = fastJsonSerializer.deserialize(jsonArray, Map.class);
+		System.out.println("Map type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Map element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+		
+		// List<User>
+		deserializeResult = fastJsonSerializer.deserialize(jsonArray, User.class);
+		System.out.println("Java bean type - > " + deserializeResult.getClass());
+		
+		// Object[LinkedHashMap]
+		deserializeResult = fastJsonSerializer.deserialize(jsonArray, Object[].class);
+		System.out.println("Object array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Object array element type -> " + ((Object[])deserializeResult)[0].getClass());
+		
+		// Map[LinkedHashMap]
+		deserializeResult = fastJsonSerializer.deserialize(jsonArray, Map[].class);
+		System.out.println("Map array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Map array element type -> " + ((Map[])deserializeResult)[0].getClass());
+		
+		// User[]
+		deserializeResult = fastJsonSerializer.deserialize(jsonArray, User[].class);
+		System.out.println("Java bean array type - > " + deserializeResult.getClass());
+		
+		// List<LinkedHashMap>
+		deserializeResult = fastJsonSerializer.deserialize(jsonArray, List.class);
+		System.out.println("List type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
+		
+		// Set<LinkedHashMap>
+		deserializeResult = fastJsonSerializer.deserialize(jsonArray, Set.class);
+		System.out.println("Set type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
+		System.out.println("Set element type -> " + ((Set<?>)deserializeResult).iterator().next().getClass());
 	}
 
 }
