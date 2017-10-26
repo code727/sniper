@@ -86,15 +86,6 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 	}
 	
 //	@Test
-	public void testPostBodyBean() throws Exception {
-		BaseFullResponse<Developer> response = mappedHttpSender.requestByBody("postBodyBean", requestBody);
-		System.out.println(response.getCode());
-		System.out.println(response.getData().getId());
-		System.out.println(response.getData().getName());
-		System.out.println(response.getData().getBirthday());
-	}
-	
-	@Test
 	public void testPostUpload() throws Exception {
 //		Map<String, Object> requestBody = MapUtils.newHashMap();
 //		requestBody.put("file", new File("C:/Users/Daniele/Desktop/新建.txt"));
@@ -145,6 +136,15 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 		} else {
 			System.out.println("Response code:" + response.getCode());
 		}
+	}
+	
+	@Test
+	public void testPostBodyBean() throws Exception {
+		BaseFullResponse<Developer> response = mappedHttpSender.requestByBody("postBodyBean", requestBody);
+		System.out.println(response.getCode());
+		System.out.println(response.getData().getId());
+		System.out.println(response.getData().getName());
+		System.out.println(response.getData().getBirthday());
 	}
 	
 //	@Test
