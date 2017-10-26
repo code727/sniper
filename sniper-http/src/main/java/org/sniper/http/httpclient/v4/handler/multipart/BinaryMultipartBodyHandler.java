@@ -37,7 +37,7 @@ class BinaryMultipartBodyHandler extends AbstractMultipartBodyHandler {
 		if (requestBody == null)
 			return;
 		
-		logger.info("Add binary request body [name={},value={}]", name, requestBody);
+		logger.debug("Add binary request body [name={},value={}]", name, requestBody);
 		if (requestBody instanceof byte[])
 			builder.addBinaryBody(name, (byte[]) requestBody, contentType, "");
 		else {

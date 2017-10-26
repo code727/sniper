@@ -62,7 +62,7 @@ public class SpringMultipartFileBodyHandler extends AbstractSourceMultipartBodyH
 				name = SINGLE_FILE_PARAMETER_NAME;
 		}
 		
-		logger.info("Add spring multipart file request body [name:{},value:{}]", name, multipartFile);
+		logger.debug("Add spring multipart file request body [name:{},value:{}]", name, multipartFile);
 		builder.addBinaryBody(name, multipartFile.getInputStream(), contentType, multipartFile.getOriginalFilename());
 	}
 	
@@ -79,7 +79,7 @@ public class SpringMultipartFileBodyHandler extends AbstractSourceMultipartBodyH
 			ContentType contentType) throws IOException {
 		
 		if (StringUtils.isNotBlank(name)) {
-			logger.info("Add spring multipart files request body [name:{},value:{}]", name, multipartFiles);
+			logger.debug("Add spring multipart files request body [name:{},value:{}]", name, multipartFiles);
 			for (MultipartFile multipartFile : multipartFiles) {
 				builder.addBinaryBody(name, multipartFile.getInputStream(), contentType, multipartFile.getOriginalFilename());
 			}
@@ -90,7 +90,7 @@ public class SpringMultipartFileBodyHandler extends AbstractSourceMultipartBodyH
 				if (StringUtils.isBlank(name))
 					name = MULTI_FILE_PARAMETER_NAME;
 				
-				logger.info("Add spring multipart files request body [name:{},value:{}]", name, multipartFile);
+				logger.debug("Add spring multipart files request body [name:{},value:{}]", name, multipartFile);
 				builder.addBinaryBody(name, multipartFile.getInputStream(), contentType, multipartFile.getOriginalFilename());
 			}
 		}

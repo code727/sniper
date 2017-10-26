@@ -56,7 +56,7 @@ public class FileMultipartBodyHandler extends AbstractSourceMultipartBodyHandler
 		if (StringUtils.isBlank(name))
 			name = SINGLE_FILE_PARAMETER_NAME;
 		
-		logger.info("Add file request body [name:{},value:{}]", name, file);
+		logger.debug("Add file request body [name:{},value:{}]", name, file);
 		builder.addPart(name, new FileBody(file, contentType, file.getName()));
 	}
 	
@@ -72,7 +72,7 @@ public class FileMultipartBodyHandler extends AbstractSourceMultipartBodyHandler
 		if (StringUtils.isBlank(name))
 			name = MULTI_FILE_PARAMETER_NAME;
 		
-		logger.info("Add files request body [name:{},value:{}]", name, files);
+		logger.debug("Add files request body [name:{},value:{}]", name, files);
 		for (File file : files ) {
 			builder.addPart(name, new FileBody(file, contentType, file.getName()));
 		}

@@ -56,7 +56,7 @@ public class InputStreamMultipartBodyHandler extends AbstractSourceMultipartBody
 		if (StringUtils.isBlank(name))
 			name = SINGLE_FILE_PARAMETER_NAME;
 			
-		logger.info("Add input stream request body [name:{},value:{}]", name, inputStream);
+		logger.debug("Add input stream request body [name:{},value:{}]", name, inputStream);
 		builder.addPart(name, new InputStreamBody(inputStream, contentType, StringUtils.EMPTY));
 	}
 	
@@ -72,7 +72,7 @@ public class InputStreamMultipartBodyHandler extends AbstractSourceMultipartBody
 		if (StringUtils.isBlank(name))
 			name = MULTI_FILE_PARAMETER_NAME;
 		
-		logger.info("Add input streams request body [name:{},value:{}]", name, inputStreams);
+		logger.debug("Add input streams request body [name:{},value:{}]", name, inputStreams);
 		for (InputStream inputStream : inputStreams) {
 			builder.addPart(name, new InputStreamBody(inputStream, contentType, StringUtils.EMPTY));
 		}

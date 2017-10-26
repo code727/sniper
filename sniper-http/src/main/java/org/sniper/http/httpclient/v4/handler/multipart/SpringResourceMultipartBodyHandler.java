@@ -59,7 +59,7 @@ public class SpringResourceMultipartBodyHandler extends AbstractSourceMultipartB
 		if (StringUtils.isBlank(name))
 			name = SINGLE_FILE_PARAMETER_NAME;
 		
-		logger.info("Add spring resource file request body [name:{},value:{}]", name, resource);
+		logger.debug("Add spring resource file request body [name:{},value:{}]", name, resource);
 		builder.addBinaryBody(name, resource.getInputStream(), contentType, resource.getFilename());
 	}
 	
@@ -78,7 +78,7 @@ public class SpringResourceMultipartBodyHandler extends AbstractSourceMultipartB
 		if (StringUtils.isBlank(name))
 			name = MULTI_FILE_PARAMETER_NAME;
 		
-		logger.info("Add spring resource files request body [name:{},value:{}]", name, resources);
+		logger.debug("Add spring resource files request body [name:{},value:{}]", name, resources);
 		for (Resource resource : resources) {
 			builder.addBinaryBody(name, resource.getInputStream(), contentType, resource.getFilename());
 		}
