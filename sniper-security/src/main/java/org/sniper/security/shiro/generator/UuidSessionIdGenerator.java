@@ -21,7 +21,7 @@ package org.sniper.security.shiro.generator;
 import java.io.Serializable;
 
 import org.apache.shiro.session.Session;
-import org.sniper.support.generator.UUIDGenerator;
+import org.sniper.generator.UUIDGenerator;
 
 /**
  * UUID格式的SessionID生成器实现类
@@ -54,7 +54,7 @@ public class UuidSessionIdGenerator extends AbstractShiroSessionIdGenerator {
 
 	@Override
 	public Serializable generateId(Session session) {
-		String sessionId = generator.generate(getPrefix(), getSuffix());
+		String sessionId = generator.generate();
 		return sessionId;
 	}
 			

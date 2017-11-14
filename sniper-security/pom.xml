@@ -80,7 +80,7 @@
 		</dependency>
 		<dependency>  
 			<groupId>org.sniper</groupId>  
-		    <artifactId>sniper-support</artifactId>  
+		    <artifactId>sniper-generator</artifactId>  
 		    <version>${sniper.version}</version> 
 		</dependency>
 		<dependency>  
