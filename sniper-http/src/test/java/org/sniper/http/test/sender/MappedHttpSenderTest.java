@@ -85,7 +85,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 		System.out.println(response.getData().getBirthday());
 	}
 	
-//	@Test
+	@Test
 	public void testPostUpload() throws Exception {
 //		Map<String, Object> requestBody = MapUtils.newHashMap();
 //		requestBody.put("file", new File("C:/Users/Daniele/Desktop/新建.txt"));
@@ -138,7 +138,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void testPostBodyBean() throws Exception {
 		BaseFullResponse<Developer> response = mappedHttpSender.requestByBody("postBodyBean", requestBody);
 		System.out.println(response.getCode());

@@ -168,6 +168,28 @@ public class ObjectUtils {
 	}
 	
 	/**
+	 * 获取对象的容量/长度
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static int size(Object obj) {
+		if (obj == null)
+			return 0;
+		
+		if (obj instanceof CharSequence)
+			return ((CharSequence)obj).length();
+		if (obj instanceof Collection<?>)
+			return ((Collection<?>)obj).size();
+		if (ArrayUtils.isArray(obj))
+			return Array.getLength(obj);
+		if (obj instanceof Map<?, ?>)
+			return ((Map<?, ?>)obj).size();
+		
+		return 1;
+	}
+	
+	/**
 	 * 获取对象的哈希值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj

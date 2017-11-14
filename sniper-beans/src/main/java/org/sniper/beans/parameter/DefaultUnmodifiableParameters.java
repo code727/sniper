@@ -20,6 +20,7 @@ package org.sniper.beans.parameter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -306,6 +307,46 @@ public class DefaultUnmodifiableParameters<K, V> implements UnmodifiableParamete
 	@Override
 	public BigDecimal getBigDecimalValue(K name, BigDecimal defaultValue) {
 		return parameters.getBigDecimalValue(name, defaultValue);
+	}
+
+	@Override
+	public Date getDate(K name) {
+		return parameters.getDate(name);
+	}
+
+	@Override
+	public Date getDate(K name, Date defaultValue) {
+		return parameters.getDate(name, defaultValue);
+	}
+
+	@Override
+	public Date getDateValue(K name) {
+		return parameters.getDateValue(name);
+	}
+
+	@Override
+	public Date getDateValue(K name, Date defaultValue) {
+		return parameters.getDateValue(name, defaultValue);
+	}
+
+	@Override
+	public Date getDate(K name, String pattern) {
+		return parameters.getDate(name, pattern);
+	}
+
+	@Override
+	public Date getDate(K name, String pattern, Date defaultValue) {
+		return parameters.getDate(name, pattern, defaultValue);
+	}
+
+	@Override
+	public Date getDateValue(K name, String pattern) {
+		return parameters.getDateValue(name, pattern);
+	}
+
+	@Override
+	public Date getDateValue(K name, String pattern, Date defaultValue) {
+		return  parameters.getDateValue(name, pattern, defaultValue);
 	}
 
 }

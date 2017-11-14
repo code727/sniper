@@ -20,6 +20,7 @@ package org.sniper.beans.parameter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -437,5 +438,77 @@ public interface UnmodifiableParameters<K, V> {
 	 * @return
 	 */
 	public BigDecimal getBigDecimalValue(K name, BigDecimal defaultValue);
+	
+	/**
+	 * 获取Date参数值，未获取到时返回默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public Date getDate(K name);
+	
+	/**
+	 * 获取Date参数值，如果获取到的值为字符串，则按指定的格式转换成目标值后返回。否则，未获取到时返回默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param pattern
+	 * @return
+	 */
+	public Date getDate(K name, String pattern);
+	
+	/**
+	 * 获取Date参数值，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public Date getDate(K name, Date defaultValue);
+	
+	/**
+	 * 获取Date参数值，如果获取到的值为字符串，则按指定的格式转换成目标值后返回。否则，未获取到时返回指定的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param pattern
+	 * @param defaultValue
+	 * @return
+	 */
+	public Date getDate(K name, String pattern, Date defaultValue);
+	
+	/**
+	 * 获取Date参数值，未获取到时返回指定不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public Date getDateValue(K name);
+	
+	/**
+	 * 获取Date参数值，如果获取到的值为字符串，则按指定的格式转换成目标值后返回。否则，未获取到时返回不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param pattern
+	 * @return
+	 */
+	public Date getDateValue(K name, String pattern);
+	
+	/**
+	 * 获取Date参数值，未获取到时返回指定不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public Date getDateValue(K name, Date defaultValue);
+	
+	/**
+	 * 获取Date参数值，如果获取到的值为字符串，则按指定的格式转换成目标值后返回。否则，未获取到时返回指定不为空的默认值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @param pattern
+	 * @param defaultValue
+	 * @return
+	 */
+	public Date getDateValue(K name, String pattern, Date defaultValue);
 
 }

@@ -2076,4 +2076,21 @@ public class StringUtils {
 		return append(str, DOUBLE_QUOTES, DOUBLE_QUOTES).toString();
 	}
 	
+	/**
+	 * 提取beginIndex到endIndex之间的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param beginIndex
+	 * @param endIndex
+	 * @return
+	 */
+	public static String substring(String str, int beginIndex, int endIndex) {
+		if (isEmpty(str))
+			return str;
+		
+		return beginIndex < endIndex
+				? str.substring(NumberUtils.minLimit(beginIndex, 0), NumberUtils.maxLimit(endIndex, str.length()))
+				: str.substring(NumberUtils.minLimit(endIndex, 0), NumberUtils.maxLimit(beginIndex, str.length()));
+	}
+	
 }

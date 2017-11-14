@@ -266,7 +266,10 @@ public class DateUtils {
 		} else if (object instanceof Number) {
 			date = timeToDate(Long.valueOf(object.toString()));
 		} else {
-			date = stringToDate(object.toString(), pattern);
+			String stringValue = object.toString();
+			date = stringToDate(stringValue, pattern);
+			if (date == null && RegexUtils.isInteger(stringValue))
+				date = timeToDate(Long.valueOf(stringValue));
 		}
 		
 		return date;

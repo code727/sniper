@@ -20,6 +20,7 @@ package org.sniper.beans.parameter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import java.util.Set;
 import org.sniper.commons.enums.logic.BooleanEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.NumberUtils;
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
@@ -457,6 +459,52 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 	public BigDecimal getBigDecimalValue(K name, BigDecimal defaultValue) {
 		AssertUtils.assertNotNull(defaultValue, "Default big decimal must not be null");
 		return getBigDecimal(name, defaultValue);
+	}
+
+	@Override
+	public Date getDate(K name) {
+		return getDate(name, (String) null);
+	}
+	
+	@Override
+	public Date getDate(K name, String pattern) {
+		return getDate(name, pattern, null);
+	}
+
+	@Override
+	public Date getDate(K name, Date defaultValue) {
+		return getDate(name, null, defaultValue);
+	}
+
+	@Override
+	public Date getDate(K name, String pattern, Date defaultValue) {
+		V value = parameterItems.get(name);
+		Date date = DateUtils.objectToDate(value, pattern);
+		return date != null ? date : defaultValue;
+	}
+
+	@Override
+	public Date getDateValue(K name) {
+		return getDateValue(name, (String) null);
+	}
+	
+	@Override
+	public Date getDateValue(K name, String pattern) {
+		return getDateValue(name, pattern, new Date());
+	}
+
+	@Override
+	public Date getDateValue(K name, Date defaultValue) {
+		return getDateValue(name, null, defaultValue);
+	}
+
+	@Override
+	public Date getDateValue(K name, String pattern, Date defaultValue) {
+		AssertUtils.assertNotNull(defaultValue, "Default big decimal must not be null");
+		
+		V value = parameterItems.get(name);
+		Date date = DateUtils.objectToDate(value, pattern);
+		return date != null ? date : defaultValue;
 	}
 
 }
