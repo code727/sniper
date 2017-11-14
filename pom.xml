@@ -82,7 +82,6 @@
 		<module>sniper-commons</module>
 		<module>sniper-test</module>
 		<module>sniper-support</module>
-		<module>sniper-json</module>
 		<module>sniper-web</module>
 		<module>sniper-persistence</module>
 		<module>sniper-security</module>
