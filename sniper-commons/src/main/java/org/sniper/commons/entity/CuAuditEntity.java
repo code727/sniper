@@ -18,46 +18,18 @@
 
 package org.sniper.commons.entity;
 
-import java.util.Date;
-
 /**
  * 可进行新增/修改审核的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class CuAuditEntity implements CuAuditable {
+public abstract class CuAuditEntity extends CuEntity implements CuAuditable {
 
-	/** 创建时间 */
-	private Date createTime;
-	
-	/** 更新时间 */
-	private Date updateTime;
-	
 	/** 创建者 */
 	private String createBy;
 	
 	/** 更新者 */
 	private String updateBy;
-
-	@Override
-	public Date getCreateTime() {
-		return this.createTime;
-	}
-
-	@Override
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	@Override
-	public Date getUpdateTime() {
-		return this.updateTime;
-	}
-
-	@Override
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
 
 	@Override
 	public String getCreateBy() {

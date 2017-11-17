@@ -18,48 +18,16 @@
 
 package org.sniper.commons.entity;
 
-import java.util.Date;
-
 /**
- * 可进行新增/修改审核的实体接口
+ * 可记录新增/修改审核的实体接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface CuAuditable {
+public interface CuAuditable extends Cuable {
 	
 	public static final String CREATE_BY = "createBy";
-	public static final String CREATE_TIME = "createTime";
 	public static final String UPDATE_BY = "updateBy";
-	public static final String UPDATE_TIME = "updateTime";
 	
-	/**
-	 * 获取创建时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Date getCreateTime();
-
-	/**
-	 * 设置创建时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param createTime
-	 */
-	public void setCreateTime(Date createTime);
-
-	/**
-	 * 获取更新时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Date getUpdateTime();
-
-	/**
-	 * 设置更新时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param updateTime
-	 */
-	public void setUpdateTime(Date updateTime);
-
 	/**
 	 * 获取创建者名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
