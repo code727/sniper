@@ -34,7 +34,7 @@ public class NumberInterval extends AbstractInterval<Number> {
 		super();
 	}
 	
-	public NumberInterval(Number minimal, Long maximum) {
+	public NumberInterval(Number minimal, Number maximum) {
 		super(minimal, maximum);
 	}
 	

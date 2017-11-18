@@ -33,10 +33,14 @@ import org.sniper.commons.util.NumberUtils;
 public class DateInterval extends AbstractInterval<Date> {
 	
 	/** 日期格式 */
-	private String dateFormat = DateUtils.DEFAULT_DATE_FORMAT;
+	private String dateFormat;
 	
 	/** calendar域 */
 	private int calendarField = Calendar.DAY_OF_YEAR;
+	
+	public DateInterval() {
+		super();
+	}
 	
 	public DateInterval(Date minimal, Date maximum) {
 		super(minimal, maximum);
@@ -261,5 +265,5 @@ public class DateInterval extends AbstractInterval<Date> {
 				.append(maximum != null ? DateUtils.dateToString(maximum, dateFormat) : "+∞")
 				.append(rightClose ? "]" : ")").toString();
 	}
-		
+			
 }
