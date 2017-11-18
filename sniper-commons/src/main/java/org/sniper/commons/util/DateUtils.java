@@ -258,20 +258,20 @@ public class DateUtils {
 		if (object == null)
 			return null;
 		
-		Date date = null;
-		if (object instanceof Date) {
-			date = (Date) object;
-		} else if (object instanceof Calendar) {
-			date = ((Calendar) object).getTime();
-		} else if (object instanceof Number) {
-			date = timeToDate(Long.valueOf(object.toString()));
-		} else {
-			String stringValue = object.toString();
-			date = stringToDate(stringValue, pattern);
-			if (date == null && RegexUtils.isInteger(stringValue))
-				date = timeToDate(Long.valueOf(stringValue));
-		}
+		if (object instanceof Date)
+			return (Date) object;
 		
+		if (object instanceof Calendar)
+			return ((Calendar) object).getTime();
+		
+		if (object instanceof Number)
+			return timeToDate(((Number) object).longValue());
+		
+		String stringValue = object.toString();
+		Date date = stringToDate(stringValue, pattern);
+		if (date == null && RegexUtils.isInteger(stringValue))
+			date = timeToDate(Long.valueOf(stringValue));
+				
 		return date;
 	}
 			

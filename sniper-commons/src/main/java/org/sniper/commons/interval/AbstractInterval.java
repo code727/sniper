@@ -18,18 +18,13 @@
 
 package org.sniper.commons.interval;
 
-import org.sniper.commons.util.StringUtils;
-
 /**
  * 抽象区间
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public abstract class AbstractInterval<T> implements Interval<T> {
-	
-	/** 名称 */
-	protected String name;
-	
+		
 	/** 最小值 */
 	protected T minimal;
 	
@@ -47,18 +42,9 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	protected AbstractInterval() {
-		this(null);
+		this(null, null, false, false);
 	}
-	
-	/**
-	 * 构建指定名称的正负无穷的开区间(-∞,+∞)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 */
-	protected AbstractInterval(String name) {
-		this(name, null, null);
-	}
-	
+		
 	/**
 	 * 构建闭合区间[minimal,maximum]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -66,22 +52,11 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 	 * @param maximum
 	 */
 	protected AbstractInterval(T minimal, T maximum) {
-		this(null, minimal, maximum);
+		this(minimal, maximum, true, true);
 	}
-	
+			
 	/**
-	 * 构建指定名称的闭合区间[minimal,maximum]
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 */
-	protected AbstractInterval(String name, T minimal, T maximum) {
-		this(name, minimal, maximum, true, true);
-	}
-	
-	/**
-	 * 构建区间，在构建时设置左/右是否为闭合的
+	 * 构建区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param minimal
 	 * @param maximum
@@ -89,19 +64,6 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 	 * @param rightClose
 	 */
 	protected AbstractInterval(T minimal, T maximum, boolean leftClose, boolean rightClose) {
-		this(null, minimal, maximum, leftClose, rightClose);
-	}
-	
-	/**
-	 * 构建指定名称的区间，并在构建时设置左/右是否为闭合的
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @param leftClose
-	 * @param rightClose
-	 */
-	protected AbstractInterval(String name, T minimal, T maximum, boolean leftClose, boolean rightClose) {
 		
 		/* 最小值为空，表示区间为负无穷的
 		 * 因此需要将左闭合区间标志强制设置为false
@@ -115,7 +77,6 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 		if (maximum == null)
 			rightClose = false;
 		
-		this.name = name;
 		this.leftClose = leftClose;
 		this.rightClose = rightClose;
 		
@@ -125,7 +86,7 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 			this.minimal = minimal;
 			this.maximum = maximum;
 		} else 
-			init(name, minimal, maximum, this.leftClose, this.rightClose);
+			init(minimal, maximum, this.leftClose, this.rightClose);
 	}
 	
 	/**
@@ -136,18 +97,8 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 	 * @param leftClose
 	 * @param rightClose
 	 */
-	protected abstract void init(String name, T minimal, T maximum, boolean leftClose, boolean rightClose);
+	protected abstract void init(T minimal, T maximum, boolean leftClose, boolean rightClose);
 		
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	@Override
 	public T getMinimal() {
 		return minimal;
@@ -198,25 +149,14 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 		return maximum == null;
 	}
 	
-	/**
-	 * 区间表达式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @param leftClose
-	 * @param rightClose
-	 * @return
-	 */
-	protected String expression(String name, T minimal, T maximum, boolean leftClose, boolean rightClose) {
-		return new StringBuilder(StringUtils.isNotBlank(name) ? name : "")
-				.append(leftClose ? "[" : "(").append(minimal != null ? minimal : "-∞").append(",")
+	protected String toString(T minimal, T maximum, boolean leftClose, boolean rightClose) {
+		return new StringBuilder().append(leftClose ? "[" : "(").append(minimal != null ? minimal : "-∞").append(",")
 				.append(maximum != null ? maximum : "+∞").append(rightClose ? "]" : ")").toString();
 	}
-		
+			
 	@Override
 	public String toString() {
-		return expression(name, minimal, maximum, leftClose, rightClose);
+		return toString(minimal, maximum, leftClose, rightClose);
 	}
 
 }

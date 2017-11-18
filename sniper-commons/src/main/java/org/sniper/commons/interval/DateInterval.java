@@ -24,7 +24,6 @@ import java.util.Date;
 
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.NumberUtils;
-import org.sniper.commons.util.StringUtils;
 
 /**
  * 日期区间
@@ -43,25 +42,18 @@ public class DateInterval extends AbstractInterval<Date> {
 		super(minimal, maximum);
 	}
 	
-	public DateInterval(String name, Date minimal, Date maximum) {
-		super(name, minimal, maximum);
-	}
-	
 	public DateInterval(Date minimal, Date maximum, boolean leftClose, boolean rightClose) {
 		super(minimal, maximum, leftClose, rightClose);
 	}
 	
-	public DateInterval(String name, Date minimal, Date maximum, boolean leftClose, boolean rightClose) {
-		super(name, minimal, maximum, leftClose, rightClose);
-	}
-	
 	@Override
-	protected void init(String name, Date minimal, Date maximum, boolean leftClose, boolean rightClose) {
-		if (minimal.getTime() == maximum.getTime() && !isClose())
+	protected void init(Date minimal, Date maximum, boolean leftClose, boolean rightClose) {
+		if (minimal.getTime() == maximum.getTime() && !isClose()) {
 			/* 如果最小和最大值相等，则要求区间只能是一个全闭合的单元素集，例如:[2015-01-01,2015-01-01]，
 			 * 而类似于(2015-01-01,2015-01-01],[2015-01-01,2015-01-01),(2015-01-01,2015-01-01)这样半开或全开区间将抛出如下异常 */
 			throw new IllegalArgumentException("Minimal must not be equals maximum when current is not a close interval:"
-						+ expression(name, minimal, maximum, leftClose, rightClose));
+					+ toString(minimal, maximum, leftClose, rightClose));
+		}
 					
 		if (minimal.after(maximum))	{
 			/* 最小值比最大值大，则相互交换 */
@@ -88,19 +80,11 @@ public class DateInterval extends AbstractInterval<Date> {
 	public void setCalendarField(int calendarField) {
 		this.calendarField = calendarField;
 	}
-
-	@Override
-	protected String expression(String name, Date minimal, Date maximum, boolean leftClose, boolean rightClose) {
-		return new StringBuilder(StringUtils.isNotBlank(name) ? name : "").append(leftClose ? "[" : "(").append(
-				minimal != null ? DateUtils.dateToString(minimal, dateFormat) : "-∞").append(",")
-				.append(maximum != null ? DateUtils.dateToString(maximum, dateFormat): "+∞")
-				.append(rightClose ? "]" : ")").toString();
-	}
-
+	
 	@Override
 	public boolean contains(Object value) {
 		if (value == null)
-			return false;
+			return isMinusInfinity() || isPositiveInfinity();
 		
 		Date date = DateUtils.objectToDate(value, dateFormat);
 		if (date == null)
@@ -122,7 +106,7 @@ public class DateInterval extends AbstractInterval<Date> {
 	@Override
 	public boolean contains(Interval<Date> interval) {
 		if (interval == null)
-			return false;
+			return isMinusInfinity() || isPositiveInfinity();
 		
 		if (interval == this)
 			return true;
@@ -155,7 +139,7 @@ public class DateInterval extends AbstractInterval<Date> {
 		 *   例如当前区间[2015-01-01,2015-01-07)接受2015-01-01至2015-01-06的日期，而指定区间[2015-01-01,2015-01-07]可以包含2015-01-07，因此它不完全包含在当前区间内 */
 		return !isLeftClose() && interval.isLeftClose() || !isRightClose() && interval.isRightClose() ? false : true;
 	}
-	
+		
 	@Override
 	public Interval<Date> offset(Object offset) {
 		BigDecimal decimal = NumberUtils.toBigDecimal(offset);
@@ -210,21 +194,9 @@ public class DateInterval extends AbstractInterval<Date> {
 	 * @return
 	 */
 	public static DateInterval newLeftOpen(Date minimal, Date maximum) {
-		return newLeftOpen(null, minimal, maximum);
+		return new DateInterval(minimal, maximum, false, true);
 	}
-	
-	/**
-	 * 创建一个指定名称的左开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static DateInterval newLeftOpen(String name, Date minimal, Date maximum) {
-		return new DateInterval(name, minimal, maximum, false, true);
-	}
-	
+		
 	/**
 	 * 创建一个右开区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -233,21 +205,9 @@ public class DateInterval extends AbstractInterval<Date> {
 	 * @return
 	 */
 	public static DateInterval newRightOpen(Date minimal, Date maximum) {
-		return newRightOpen(null, minimal, maximum);
+		return new DateInterval(minimal, maximum, true, false);
 	}
-	
-	/**
-	 * 创建一个指定名称的右开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static DateInterval newRightOpen(String name, Date minimal, Date maximum) {
-		return new DateInterval(name, minimal, maximum, true, false);
-	}
-	
+		
 	/**
 	 * 创建一个开区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -256,21 +216,9 @@ public class DateInterval extends AbstractInterval<Date> {
 	 * @return
 	 */
 	public static DateInterval newOpen(Date minimal, Date maximum) {
-		return newOpen(null, minimal, maximum);
+		return new DateInterval(minimal, maximum, false, false);
 	}
-	
-	/**
-	 * 创建一个指定名称的开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static DateInterval newOpen(String name, Date minimal, Date maximum) {
-		return new DateInterval(name, minimal, maximum, false, false);
-	}
-	
+		
 	/**
 	 * 创建一个左闭合区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -279,22 +227,10 @@ public class DateInterval extends AbstractInterval<Date> {
 	 * @return
 	 */
 	public static DateInterval newLeftClose(Date minimal, Date maximum) {
-		return newLeftClose(null, minimal, maximum);
-	}
-	
-	/**
-	 * 创建一个指定名称的左闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static DateInterval newLeftClose(String name, Date minimal, Date maximum) {
 		// 相当于创建一个右开区间
-		return newRightOpen(name, minimal, maximum);
+		return newRightOpen(minimal, maximum);
 	}
-	
+		
 	/**
 	 * 创建一个右闭合区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -303,22 +239,10 @@ public class DateInterval extends AbstractInterval<Date> {
 	 * @return
 	 */
 	public static DateInterval newRightClose(Date minimal, Date maximum) {
-		return newRightClose(null, minimal, maximum);
-	}
-	
-	/**
-	 * 创建一个指定名称的右闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static DateInterval newRightClose(String name, Date minimal, Date maximum) {
 		// 相当于创建一个左开区间
-		return newLeftOpen(name, minimal, maximum);
+		return newLeftOpen(minimal, maximum);
 	}
-	
+		
 	/**
 	 * 创建一个闭合区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -327,19 +251,15 @@ public class DateInterval extends AbstractInterval<Date> {
 	 * @return
 	 */
 	public static DateInterval newClose(Date minimal, Date maximum) {
-		return newClose(null, minimal, maximum);
+		return new DateInterval(minimal, maximum, true, true);
 	}
 	
-	/**
-	 * 创建一个指定名称的闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static DateInterval newClose(String name, Date minimal, Date maximum) {
-		return new DateInterval(name, minimal, maximum, true, true);
+	@Override
+	protected String toString(Date minimal, Date maximum, boolean leftClose, boolean rightClose) {
+		return new StringBuilder().append(leftClose ? "[" : "(")
+				.append(minimal != null ? DateUtils.dateToString(minimal, dateFormat) : "-∞").append(",")
+				.append(maximum != null ? DateUtils.dateToString(maximum, dateFormat) : "+∞")
+				.append(rightClose ? "]" : ")").toString();
 	}
-	
+		
 }

@@ -34,33 +34,21 @@ public class NumberInterval extends AbstractInterval<Number> {
 		super();
 	}
 	
-	public NumberInterval(String name) {
-		super(name);
-	}
-	
 	public NumberInterval(Number minimal, Long maximum) {
 		super(minimal, maximum);
-	}
-	
-	public NumberInterval(String name, Number minimal, Number maximum) {
-		super(name, minimal, maximum);
 	}
 	
 	public NumberInterval(Number minimal, Number maximum, boolean leftClose, boolean rightClose) {
 		super(minimal, maximum, leftClose, rightClose);
 	}
 	
-	public NumberInterval(String name, Number minimal, Number maximum, boolean leftClose, boolean rightClose) {
-		super(name, minimal, maximum, leftClose, rightClose);
-	}
-	
 	@Override
-	protected void init(String name, Number minimal, Number maximum, boolean leftClose, boolean rightClose) {
+	protected void init(Number minimal, Number maximum, boolean leftClose, boolean rightClose) {
 		if (NumberUtils.equals(minimal, maximum) && !isClose()) {
 			/* 如果最小和最大值相等，则要求区间只能是一个全闭合的单元素集，例如:[10,10]，
 			 * 而类似于(10,10],[10,10),(10,10)这样半开或全开区间将抛出如下异常 */
 			throw new IllegalArgumentException("Minimal must not be equals maximum when current is not a close interval:" 
-					+ expression(name, minimal, maximum, leftClose, rightClose));
+					+ toString(minimal, maximum, leftClose, rightClose));
 		}
 		
 		if (NumberUtils.greaterThan(minimal, maximum)) {
@@ -80,7 +68,10 @@ public class NumberInterval extends AbstractInterval<Number> {
 	 * @return
 	 */
 	public boolean contains(Object value) {
-		if (value == null || !(value instanceof Number) && !RegexUtils.isNumber(value.toString()))
+		if (value == null)
+			return isMinusInfinity() || isPositiveInfinity();
+		
+		if (!(value instanceof Number) && !RegexUtils.isNumber(value.toString()))
 			return false;
 		
 		BigDecimal valueDecimal;
@@ -113,7 +104,7 @@ public class NumberInterval extends AbstractInterval<Number> {
 	 */
 	public boolean contains(Interval<Number> interval) {
 		if (interval == null)
-			return false;
+			return isMinusInfinity() || isPositiveInfinity();
 		
 		if (interval == this)
 			return true;
@@ -150,7 +141,7 @@ public class NumberInterval extends AbstractInterval<Number> {
 		 *   例如当前区间[0,9)接受0-8的整数，而指定区间[0,9]可以包含9，因此它不完全包含在当前区间内 */
 		return !isLeftClose() && interval.isLeftClose() || !isRightClose() && interval.isRightClose() ? false : true;
 	}
-		
+			
 	@Override
 	public Interval<Number> offset(Object offset) {		
 		BigDecimal decimal = NumberUtils.toBigDecimal(offset);
@@ -193,21 +184,9 @@ public class NumberInterval extends AbstractInterval<Number> {
 	 * @return
 	 */
 	public static NumberInterval newLeftOpen(Number minimal, Number maximum) {
-		return newLeftOpen(null, minimal, maximum);
+		return new NumberInterval(minimal, maximum, false, true);
 	}
-	
-	/**
-	 * 创建一个指定名称的左开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static NumberInterval newLeftOpen(String name, Number minimal, Number maximum) {
-		return new NumberInterval(name, minimal, maximum, false, true);
-	}
-	
+		
 	/**
 	 * 创建一个右开区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -216,21 +195,9 @@ public class NumberInterval extends AbstractInterval<Number> {
 	 * @return
 	 */
 	public static NumberInterval newRightOpen(Number minimal, Number maximum) {
-		return newRightOpen(null, minimal, maximum);
+		return new NumberInterval(minimal, maximum, true, false);
 	}
-	
-	/**
-	 * 创建一个指定名称的右开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static NumberInterval newRightOpen(String name, Number minimal, Number maximum) {
-		return new NumberInterval(name, minimal, maximum, true, false);
-	}
-	
+		
 	/**
 	 * 创建一个开区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -239,21 +206,9 @@ public class NumberInterval extends AbstractInterval<Number> {
 	 * @return
 	 */
 	public static NumberInterval newOpen(Number minimal, Number maximum) {
-		return newOpen(null, minimal, maximum);
+		return new NumberInterval(minimal, maximum, false, false);
 	}
-	
-	/**
-	 * 创建一个指定名称的开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static NumberInterval newOpen(String name, Number minimal, Number maximum) {
-		return new NumberInterval(name, minimal, maximum, false, false);
-	}
-	
+		
 	/**
 	 * 创建一个左闭合区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -262,20 +217,8 @@ public class NumberInterval extends AbstractInterval<Number> {
 	 * @return
 	 */
 	public static NumberInterval newLeftClose(Number minimal, Number maximum) {
-		return newLeftClose(null, minimal, maximum);
-	}
-	
-	/**
-	 * 创建一个指定名称的左闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static NumberInterval newLeftClose(String name, Number minimal, Number maximum) {
 		// 相当于创建一个右开区间
-		return newRightOpen(name, minimal, maximum);
+		return newRightOpen(minimal, maximum);
 	}
 	
 	/**
@@ -286,22 +229,10 @@ public class NumberInterval extends AbstractInterval<Number> {
 	 * @return
 	 */
 	public static NumberInterval newRightClose(Number minimal, Number maximum) {
-		return newRightClose(null, minimal, maximum);
-	}
-	
-	/**
-	 * 创建一个指定名称的右闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static NumberInterval newRightClose(String name, Number minimal, Number maximum) {
 		// 相当于创建一个左开区间
-		return newLeftOpen(name, minimal, maximum);
+		return newLeftOpen(minimal, maximum);
 	}
-	
+		
 	/**
 	 * 创建一个闭合区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -310,19 +241,7 @@ public class NumberInterval extends AbstractInterval<Number> {
 	 * @return
 	 */
 	public static NumberInterval newClose(Number minimal, Number maximum) {
-		return newClose(null, minimal, maximum);
+		return new NumberInterval(minimal, maximum, true, true);
 	}
-	
-	/**
-	 * 创建一个指定名称的闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @param minimal
-	 * @param maximum
-	 * @return
-	 */
-	public static NumberInterval newClose(String name, Number minimal, Number maximum) {
-		return new NumberInterval(name, minimal, maximum, true, true);
-	}
-
+		
 }

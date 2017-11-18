@@ -26,20 +26,6 @@ package org.sniper.commons.interval;
 public interface Interval<T> {
 	
 	/**
-	 * 设置区间名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 */
-	public void setName(String name);
-	
-	/**
-	 * 获取区间名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getName();
-	
-	/**
 	 * 获取区间最小值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
@@ -124,7 +110,7 @@ public interface Interval<T> {
 	 * @return
 	 */
 	public boolean contains(Interval<T> interval);
-	
+		
 	/**
 	 * 将整个区间进行指定值的偏移
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
