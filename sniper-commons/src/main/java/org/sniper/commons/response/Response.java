@@ -18,8 +18,6 @@
 
 package org.sniper.commons.response;
 
-import java.io.Serializable;
-
 import org.sniper.commons.enums.status.BizStatus;
 
 /**
@@ -27,7 +25,7 @@ import org.sniper.commons.enums.status.BizStatus;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Response extends Serializable {
+public interface Response {
 	
 	/** 默认成功状态 */
 	public static final String DEFAULT_SUCCESS_STATUS = BizStatus.SUCCESS.getKey();

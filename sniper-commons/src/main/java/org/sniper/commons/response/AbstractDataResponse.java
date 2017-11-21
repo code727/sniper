@@ -25,8 +25,6 @@ package org.sniper.commons.response;
  */
 public abstract class AbstractDataResponse<T> extends AbstractResponse implements DataResponse<T> {
 	
-	private static final long serialVersionUID = 4108877402467845840L;
-	
 	/** 响应数据 */
 	private T data;
 	
