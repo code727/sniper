@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sniper.commons.model.impl.ResultModel;
+import org.sniper.commons.response.BaseFullResponse;
 import org.sniper.templet.message.formatter.AdaptiveMessageFormatter;
 import org.sniper.test.junit.BaseTestCase;
 
@@ -32,19 +32,18 @@ import org.sniper.test.junit.BaseTestCase;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-@SuppressWarnings("deprecation")
 public class AdaptiveMessageFormatterTest extends BaseTestCase {
 	
 	private AdaptiveMessageFormatter formatter = new AdaptiveMessageFormatter();
 	
-	private ResultModel<String> model = new ResultModel<String>();
+	private BaseFullResponse<String> response = new BaseFullResponse<String>();
 	
 	private Map<String, Object> map = new HashMap<String, Object>();
 	
 	@Before
 	public void initDate() {
-		model.setCode("0001");
-		model.setData("sniper test_001");
+		response.setCode("0001");
+		response.setData("sniper test_001");
 		
 		map.put("code", "0001");
 		map.put("data", "sniper test_001");
@@ -55,7 +54,7 @@ public class AdaptiveMessageFormatterTest extends BaseTestCase {
 //	@Test
 	public void testFormat1() {
 		String message1 = "This result code is {code}, data is {data}";
-		String result = formatter.format(message1, model);
+		String result = formatter.format(message1, response);
 		System.out.println(result);
 		
 		assertEquals(result, formatter.format(message1, map));
@@ -78,7 +77,7 @@ public class AdaptiveMessageFormatterTest extends BaseTestCase {
 		String message3 = "This result code is #{code}#, data is #{data}#";
 		String result = formatter.format(message3, map);
 		
-		assertEquals(result, formatter.format(message3, model));
+		assertEquals(result, formatter.format(message3, response));
 		System.out.println(result);
 	}
 	

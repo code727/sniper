@@ -25,6 +25,8 @@ package org.sniper.commons.response;
  */
 public class BaseMessageResponse extends AbstractResponse implements MessageResponse {
 	
+	private static final long serialVersionUID = -3819338460091380325L;
+	
 	/** 响应消息 */
 	private String message;
 	

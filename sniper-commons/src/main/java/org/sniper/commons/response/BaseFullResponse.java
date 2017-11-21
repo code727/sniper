@@ -26,6 +26,8 @@ package org.sniper.commons.response;
  */
 public class BaseFullResponse<T> extends AbstractDataResponse<T> implements FullResponse<T> {
 
+	private static final long serialVersionUID = 4193681302264204651L;
+	
 	/** 响应消息 */
 	private String message;
 	

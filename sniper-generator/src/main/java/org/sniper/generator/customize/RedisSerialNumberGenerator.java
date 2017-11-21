@@ -19,6 +19,7 @@
 package org.sniper.generator.customize;
 
 import org.sniper.commons.util.AssertUtils;
+import org.sniper.generator.dimension.DateDimensionGenerator;
 import org.sniper.generator.dimension.DimensionGenerator;
 import org.sniper.nosql.redis.dao.RedisCommandsDao;
 
@@ -30,7 +31,7 @@ import org.sniper.nosql.redis.dao.RedisCommandsDao;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisSerialNumberGenerator extends AbstractCustomizeNumberGenerator<Long> {
+public class RedisSerialNumberGenerator extends AbstractCustomizeNumberGenerator {
 	
 	private final RedisCommandsDao redisCommandsDao;
 	
@@ -39,7 +40,7 @@ public class RedisSerialNumberGenerator extends AbstractCustomizeNumberGenerator
 	}
 		
 	public RedisSerialNumberGenerator(int minLength, RedisCommandsDao redisCommandsDao) {
-		this(minLength, DEFAULT_DIMENSION_GENERATOR, redisCommandsDao);
+		this(minLength, new DateDimensionGenerator(), redisCommandsDao);
 	}
 	
 	public RedisSerialNumberGenerator(DimensionGenerator<?> dimensionGenerator, RedisCommandsDao redisCommandsDao) {
@@ -53,9 +54,10 @@ public class RedisSerialNumberGenerator extends AbstractCustomizeNumberGenerator
 		this.redisCommandsDao = redisCommandsDao;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	protected Long generateByDimension(Object dimension) {
-		return redisCommandsDao.incr(dimension);
+	protected <T> T generateByDimension(Object dimension) {
+		return (T) redisCommandsDao.incr(dimension);
 	}
 	
 }

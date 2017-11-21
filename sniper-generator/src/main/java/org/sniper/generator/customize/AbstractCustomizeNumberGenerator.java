@@ -31,7 +31,7 @@ import org.sniper.generator.dimension.DimensionGenerator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractCustomizeNumberGenerator<T> extends AbstractCustomizeGenerator<T> {
+public abstract class AbstractCustomizeNumberGenerator extends AbstractCustomizeGenerator {
 	
 	private static final Map<Integer, DecimalFormat> decimalFormats = MapUtils.newConcurrentHashMap();
 	

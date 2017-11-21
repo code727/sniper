@@ -25,6 +25,8 @@ package org.sniper.commons.response;
  */
 public class BaseResponse extends AbstractResponse {
 	
+	private static final long serialVersionUID = 2773282924720586568L;
+
 	public BaseResponse() {
 		super();
 	}

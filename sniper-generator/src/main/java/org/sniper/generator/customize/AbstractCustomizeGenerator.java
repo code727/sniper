@@ -28,11 +28,9 @@ import org.sniper.generator.dimension.DimensionGenerator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractCustomizeGenerator<T> implements Generator<String> {
+public abstract class AbstractCustomizeGenerator implements Generator<String> {
 	
 	protected final static int DEFAULT_MIN_LENGTH = 16;
-	
-	protected final static DimensionGenerator<?> DEFAULT_DIMENSION_GENERATOR = new DateDimensionGenerator();
 	
 	/** 最终生成结果的最小长度 */
 	protected final int minLength;
@@ -45,11 +43,11 @@ public abstract class AbstractCustomizeGenerator<T> implements Generator<String>
 	}
 	
 	protected AbstractCustomizeGenerator(int minLength) {
-		this(minLength, DEFAULT_DIMENSION_GENERATOR);
+		this(minLength, new DateDimensionGenerator());
 	}
 	
 	protected AbstractCustomizeGenerator(DimensionGenerator<?> dimensionGenerator) {
-		this(DEFAULT_MIN_LENGTH, DEFAULT_DIMENSION_GENERATOR);
+		this(DEFAULT_MIN_LENGTH, new DateDimensionGenerator());
 	}
 	
 	protected AbstractCustomizeGenerator(int minLength, DimensionGenerator<?> dimensionGenerator) {
@@ -88,7 +86,7 @@ public abstract class AbstractCustomizeGenerator<T> implements Generator<String>
 	 * @param dimension
 	 * @return
 	 */
-	protected abstract T generateByDimension(Object dimension);
+	protected abstract <T> T generateByDimension(Object dimension);
 	
 	/**
 	 * 补偿生成指定字符串长度+offset长度的结果
