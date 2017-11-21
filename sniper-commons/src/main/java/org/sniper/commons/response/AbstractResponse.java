@@ -27,6 +27,8 @@ import org.sniper.commons.util.StringUtils;
  */
 public abstract class AbstractResponse implements Response {
 		
+	private static final long serialVersionUID = 8451538043375748612L;
+	
 	/** 状态码 */
 	private String code;
 	
