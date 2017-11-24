@@ -35,7 +35,7 @@ import org.sniper.commons.util.SecurityUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, String> {
+public class ShortLinkGenerator implements ParameterizeGenerator<Object, String> {
 
 	protected final char[] chars = new char[] { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' , 'h' ,  
 			'i' , 'j' , 'k' , 'l' , 'm' , 'n' , 'o' , 'p' , 'q' , 'r' , 's' , 't' ,  
@@ -57,6 +57,11 @@ public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, St
 			}
 		}
 	}
+	
+	@Override
+	public String generate() {
+		return generate(null);
+	}  
 
 	@Override
 	public String generate(Object key) {
@@ -76,6 +81,6 @@ public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, St
 			}  
 		}  
 		return builder.toString();
-	}  
-	
+	}
+
 }

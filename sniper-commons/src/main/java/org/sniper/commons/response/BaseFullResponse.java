@@ -18,13 +18,15 @@
 
 package org.sniper.commons.response;
 
+import java.io.Serializable;
+
 /**
  * 全量响应实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  * @param <T>
  */
-public class BaseFullResponse<T> extends AbstractDataResponse<T> implements FullResponse<T> {
+public class BaseFullResponse<T> extends AbstractDataResponse<T> implements FullResponse<T>, Serializable {
 
 	private static final long serialVersionUID = 5105502275635899805L;
 	

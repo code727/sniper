@@ -16,10 +16,10 @@
  * Create Date : 2017-11-14
  */
 
-package org.sniper.generator.customize;
+package org.sniper.generator.redis;
 
 import org.sniper.commons.util.AssertUtils;
-import org.sniper.generator.dimension.DateDimensionGenerator;
+import org.sniper.generator.AbstractNumberGenerator;
 import org.sniper.generator.dimension.DimensionGenerator;
 import org.sniper.nosql.redis.dao.RedisCommandsDao;
 
@@ -31,20 +31,20 @@ import org.sniper.nosql.redis.dao.RedisCommandsDao;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisSerialNumberGenerator extends AbstractCustomizeNumberGenerator {
+public class RedisSerialNumberGenerator extends AbstractNumberGenerator {
 	
 	private final RedisCommandsDao redisCommandsDao;
 	
 	public RedisSerialNumberGenerator(RedisCommandsDao redisCommandsDao) {
-		this(DEFAULT_MIN_LENGTH, redisCommandsDao);
+		this(0, redisCommandsDao);
 	}
 		
 	public RedisSerialNumberGenerator(int minLength, RedisCommandsDao redisCommandsDao) {
-		this(minLength, new DateDimensionGenerator(), redisCommandsDao);
+		this(minLength, null, redisCommandsDao);
 	}
 	
 	public RedisSerialNumberGenerator(DimensionGenerator<?> dimensionGenerator, RedisCommandsDao redisCommandsDao) {
-		this(DEFAULT_MIN_LENGTH, dimensionGenerator, redisCommandsDao);
+		this(0, dimensionGenerator, redisCommandsDao);
 	}
 	
 	public RedisSerialNumberGenerator(int minLength, DimensionGenerator<?> dimensionGenerator, RedisCommandsDao redisCommandsDao) {

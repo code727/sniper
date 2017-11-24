@@ -16,7 +16,7 @@
  * Create Date : 2017年11月14日
  */
 
-package org.sniper.generator.customize;
+package org.sniper.generator;
 
 import java.math.BigInteger;
 import java.text.DecimalFormat;
@@ -27,27 +27,27 @@ import org.sniper.commons.util.StringUtils;
 import org.sniper.generator.dimension.DimensionGenerator;
 
 /**
- * 自定义数字生成器抽象类
+ * 数字生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractCustomizeNumberGenerator extends AbstractCustomizeGenerator {
+public abstract class AbstractNumberGenerator extends AbstractGenerator {
 	
 	private static final Map<Integer, DecimalFormat> decimalFormats = MapUtils.newConcurrentHashMap();
 	
-	protected AbstractCustomizeNumberGenerator() {
+	protected AbstractNumberGenerator() {
 		super();
 	}
 	
-	protected AbstractCustomizeNumberGenerator(int minLength) {
+	protected AbstractNumberGenerator(int minLength) {
 		super(minLength);
 	}
 	
-	protected AbstractCustomizeNumberGenerator(DimensionGenerator<?> dimensionGenerator) {
+	protected AbstractNumberGenerator(DimensionGenerator<?> dimensionGenerator) {
 		super(dimensionGenerator);
 	}
 	
-	protected AbstractCustomizeNumberGenerator(int minLength, DimensionGenerator<?> dimensionGenerator) {
+	protected AbstractNumberGenerator(int minLength, DimensionGenerator<?> dimensionGenerator) {
 		super(minLength, dimensionGenerator);
 	}
 	

@@ -16,46 +16,48 @@
  * Create Date : 2017-11-13
  */
 
-package org.sniper.generator.customize;
+package org.sniper.generator;
 
-import org.sniper.commons.util.AssertUtils;
-import org.sniper.generator.Generator;
 import org.sniper.generator.dimension.DateDimensionGenerator;
 import org.sniper.generator.dimension.DimensionGenerator;
 
 /**
- * 自定义生成器抽象类
+ * 生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractCustomizeGenerator implements Generator<String> {
-	
-	protected final static int DEFAULT_MIN_LENGTH = 16;
-	
+public abstract class AbstractGenerator implements Generator<String> {
+		
 	/** 最终生成结果的最小长度 */
 	protected final int minLength;
 	
 	/** 维度生成器 */
 	protected final DimensionGenerator<?> dimensionGenerator;
 	
-	protected AbstractCustomizeGenerator() {
-		this(DEFAULT_MIN_LENGTH);
+	protected AbstractGenerator() {
+		this(0);
 	}
 	
-	protected AbstractCustomizeGenerator(int minLength) {
-		this(minLength, new DateDimensionGenerator());
+	protected AbstractGenerator(int minLength) {
+		this(minLength, null);
 	}
 	
-	protected AbstractCustomizeGenerator(DimensionGenerator<?> dimensionGenerator) {
-		this(DEFAULT_MIN_LENGTH, new DateDimensionGenerator());
+	protected AbstractGenerator(DimensionGenerator<?> dimensionGenerator) {
+		this(0, new DateDimensionGenerator());
 	}
 	
-	protected AbstractCustomizeGenerator(int minLength, DimensionGenerator<?> dimensionGenerator) {
-		AssertUtils.assertTrue(minLength > 0, "Generator minimum length must greater than 0");
-		AssertUtils.assertNotNull(dimensionGenerator, "Dimension generator must not be null");
+	protected AbstractGenerator(int minLength, DimensionGenerator<?> dimensionGenerator) {
+		if (minLength > 0)
+			this.minLength = minLength;
+		else
+			// 默认最小长度为16位
+			this.minLength = 16;
 		
-		this.minLength = minLength;
-		this.dimensionGenerator = dimensionGenerator;
+		if (dimensionGenerator != null)
+			this.dimensionGenerator = dimensionGenerator;
+		else
+			// 默认的维度采用日期维度生成器
+			this.dimensionGenerator = new DateDimensionGenerator(); 
 	}
 	
 	public int getMinLength() {

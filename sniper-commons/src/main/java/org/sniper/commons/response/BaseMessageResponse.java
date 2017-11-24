@@ -18,12 +18,14 @@
 
 package org.sniper.commons.response;
 
+import java.io.Serializable;
+
 /**
  * 基本的消息响应实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BaseMessageResponse extends AbstractResponse implements MessageResponse {
+public class BaseMessageResponse extends AbstractResponse implements MessageResponse, Serializable {
 	
 	private static final long serialVersionUID = -3819338460091380325L;
 	

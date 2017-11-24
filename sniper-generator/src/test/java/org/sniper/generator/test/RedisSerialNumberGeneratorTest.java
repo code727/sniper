@@ -25,7 +25,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.generator.customize.RedisSerialNumberGenerator;
+import org.sniper.generator.redis.RedisSerialNumberGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

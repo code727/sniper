@@ -18,16 +18,61 @@
 
 package org.sniper.generator.parameterize;
 
+import org.sniper.generator.AbstractGenerator;
+import org.sniper.generator.dimension.DimensionGenerator;
+
 /**
  * 参数化生成器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractParameterizeGenerator<K, T> implements ParameterizeGenerator<K, T> {
+public abstract class AbstractParameterizeGenerator<K> extends AbstractGenerator
+		implements ParameterizeGenerator<K, String> {
+	
+	/** 是否将generate方法中传递来的键作为维度值的一部分 */
+	private boolean dimensionKey;
+	
+	protected AbstractParameterizeGenerator() {
+		super();
+	}
+	
+	protected AbstractParameterizeGenerator(int minLength) {
+		super(minLength);
+	}
+	
+	protected AbstractParameterizeGenerator(DimensionGenerator<?> dimensionGenerator) {
+		super(dimensionGenerator);
+	}
+	
+	protected AbstractParameterizeGenerator(int minLength, DimensionGenerator<?> dimensionGenerator) {
+		super(minLength, dimensionGenerator);
+	}
+	
+	public boolean isDimensionKey() {
+		return dimensionKey;
+	}
+
+	public void setDimensionKey(boolean dimensionKey) {
+		this.dimensionKey = dimensionKey;
+	}
+
+	@Override
+	public String generate() {
+		return generate(null);
+	}
 	
 	@Override
-	public T generate() {
-		return generate(null);
+	public String generate(K key) {
+		Object dimension = dimensionGenerator.create();
+		Object generated = generateByDimension(dimension);
+		
+		String dimensionString = dimension.toString();
+		String generatedString = generated.toString();
+		
+		int length = dimensionString.length() + generatedString.length();
+		int offset = minLength - length;
+		
+		return offset > 0 ? dimensionString + makeupGenerate(generatedString, offset) : dimensionString + generatedString;
 	}
 
 }
