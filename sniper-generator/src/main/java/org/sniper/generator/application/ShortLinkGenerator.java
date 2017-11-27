@@ -16,10 +16,11 @@
  * Create Date : 2017-11-9
  */
 
-package org.sniper.generator.parameterize;
+package org.sniper.generator.application;
 
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.SecurityUtils;
+import org.sniper.generator.ParameterizeGenerator;
 
 /**
  * 短链接生成器</p>
@@ -64,8 +65,8 @@ public class ShortLinkGenerator implements ParameterizeGenerator<Object, String>
 	}  
 
 	@Override
-	public String generate(Object key) {
-		String md5 = SecurityUtils.md5(ObjectUtils.toSafeString(key));
+	public String generate(Object parameter) {
+		String md5 = SecurityUtils.md5(ObjectUtils.toSafeString(parameter));
 		
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < 4; i++) {  
@@ -82,5 +83,5 @@ public class ShortLinkGenerator implements ParameterizeGenerator<Object, String>
 		}  
 		return builder.toString();
 	}
-
+	
 }

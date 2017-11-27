@@ -22,8 +22,8 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.generator.parameterize.ParameterizeGenerator;
-import org.sniper.generator.parameterize.ShortLinkGenerator;
+import org.sniper.generator.ParameterizeGenerator;
+import org.sniper.generator.application.ShortLinkGenerator;
 
 /**
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>

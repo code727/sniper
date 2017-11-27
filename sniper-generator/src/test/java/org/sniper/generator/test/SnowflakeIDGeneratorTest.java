@@ -26,7 +26,7 @@ import java.util.concurrent.Future;
 
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.generator.Generator;
-import org.sniper.generator.SnowflakeGenerator;
+import org.sniper.generator.application.SnowflakeGenerator;
 
 /**
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>

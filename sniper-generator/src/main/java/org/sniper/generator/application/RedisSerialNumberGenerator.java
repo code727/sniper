@@ -16,11 +16,11 @@
  * Create Date : 2017-11-14
  */
 
-package org.sniper.generator.redis;
+package org.sniper.generator.application;
 
 import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.NumberUtils;
 import org.sniper.generator.AbstractNumberGenerator;
-import org.sniper.generator.dimension.DimensionGenerator;
 import org.sniper.nosql.redis.dao.RedisCommandsDao;
 
 /**
@@ -33,31 +33,25 @@ import org.sniper.nosql.redis.dao.RedisCommandsDao;
  */
 public class RedisSerialNumberGenerator extends AbstractNumberGenerator {
 	
+	private final int dbIndex;
+	
 	private final RedisCommandsDao redisCommandsDao;
 	
 	public RedisSerialNumberGenerator(RedisCommandsDao redisCommandsDao) {
 		this(0, redisCommandsDao);
 	}
-		
-	public RedisSerialNumberGenerator(int minLength, RedisCommandsDao redisCommandsDao) {
-		this(minLength, null, redisCommandsDao);
-	}
 	
-	public RedisSerialNumberGenerator(DimensionGenerator<?> dimensionGenerator, RedisCommandsDao redisCommandsDao) {
-		this(0, dimensionGenerator, redisCommandsDao);
-	}
-	
-	public RedisSerialNumberGenerator(int minLength, DimensionGenerator<?> dimensionGenerator, RedisCommandsDao redisCommandsDao) {
-		super(minLength, dimensionGenerator);
-		
+	public RedisSerialNumberGenerator(int dbIndex, RedisCommandsDao redisCommandsDao) {
 		AssertUtils.assertNotNull(redisCommandsDao, "Redis commands dao not be null");
+		
+		this.dbIndex = NumberUtils.minLimit(dbIndex, 0);
 		this.redisCommandsDao = redisCommandsDao;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	protected <T> T generateByDimension(Object dimension) {
-		return (T) redisCommandsDao.incr(dimension);
+	protected <T> T generateByDimension(String dimension) {
+		return (T) redisCommandsDao.incr(dbIndex, dimension);
 	}
-	
+			
 }

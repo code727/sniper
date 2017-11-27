@@ -24,41 +24,24 @@ import java.util.Map;
 
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.generator.dimension.DimensionGenerator;
 
 /**
  * 数字生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractNumberGenerator extends AbstractGenerator {
+public abstract class AbstractNumberGenerator extends AbstractParameterizeGenerator {
 	
 	private static final Map<Integer, DecimalFormat> decimalFormats = MapUtils.newConcurrentHashMap();
-	
-	protected AbstractNumberGenerator() {
-		super();
-	}
-	
-	protected AbstractNumberGenerator(int minLength) {
-		super(minLength);
-	}
-	
-	protected AbstractNumberGenerator(DimensionGenerator<?> dimensionGenerator) {
-		super(dimensionGenerator);
-	}
-	
-	protected AbstractNumberGenerator(int minLength, DimensionGenerator<?> dimensionGenerator) {
-		super(minLength, dimensionGenerator);
-	}
-	
+			
 	/**
 	 * 获取指定长度位数的补偿数字格式化对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param size
 	 * @return
 	 */
-	protected static DecimalFormat getMakeupDecimalFormat(Integer length) {
-		if (length == null || length <=0)
+	protected static DecimalFormat getMakeupDecimalFormat(int length) {
+		if (length <= 0)
 			return null;
 		
 		DecimalFormat decimalFormat = decimalFormats.get(length);
@@ -72,11 +55,11 @@ public abstract class AbstractNumberGenerator extends AbstractGenerator {
 	}
 
 	@Override
-	protected String makeupGenerate(String generatedString, int offset) {
-		DecimalFormat decimalFormat = getMakeupDecimalFormat(generatedString.length() + offset);
+	protected String makeupGenerate(String generated, int offset) {
+		DecimalFormat decimalFormat = getMakeupDecimalFormat(generated.length() + offset);
 		
-		// 要求generatedString参数必须为字符串类型的数字，否则会抛出IllegalArgumentException
-		return decimalFormat != null ? decimalFormat.format(new BigInteger(generatedString)) : generatedString;
+		// 要求generated参数必须为字符串类型的数字，否则会抛出IllegalArgumentException
+		return decimalFormat != null ? decimalFormat.format(new BigInteger(generated)) : generated;
 	}
 
 }

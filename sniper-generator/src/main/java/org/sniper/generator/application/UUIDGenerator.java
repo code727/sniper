@@ -13,26 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-11-9
+ * Create Date : 2017-11-6
  */
 
-package org.sniper.generator.parameterize;
+package org.sniper.generator.application;
 
+import org.sniper.commons.util.StringUtils;
 import org.sniper.generator.Generator;
 
 /**
- * 参数化生成器接口
+ * UUID生成器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ParameterizeGenerator<K, T> extends Generator<T> {
+public class UUIDGenerator implements Generator<String> {
 	
-	/**
-	 * 根据指定的键生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @return
-	 */
-	public T generate(K key);
+	/** 是否无符号生成 */
+	private boolean unsigned = true;
+	
+	/** 是否全大写生成 */
+	private boolean upperCase;
+	
+	public boolean isUnsigned() {
+		return unsigned;
+	}
 
+	public void setUnsigned(boolean unsigned) {
+		this.unsigned = unsigned;
+	}
+
+	public boolean isUpperCase() {
+		return upperCase;
+	}
+
+	public void setUpperCase(boolean upperCase) {
+		this.upperCase = upperCase;
+	}
+
+	@Override
+	public String generate() {
+		return unsigned ? StringUtils.unsignedUUID(upperCase) : StringUtils.UUID(upperCase);
+	}
+	
 }

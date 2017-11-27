@@ -16,10 +16,11 @@
  * Create Date : 2017-11-6
  */
 
-package org.sniper.generator;
+package org.sniper.generator.application;
 
 
 import org.sniper.commons.util.AssertUtils;
+import org.sniper.generator.Generator;
 
 /**
  * 推特Snowflake算法实现类结果是一个long型的ID。</p>
