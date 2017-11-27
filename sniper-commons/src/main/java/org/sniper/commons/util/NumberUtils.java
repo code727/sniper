@@ -762,7 +762,29 @@ public class NumberUtils {
 	public static byte randomIn(byte in) {
 		return (byte) (Math.random() * in);
 	}
+		
+	/**
+	 * 产生[min,max]区间内的随机整数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+	public static int rangeRandom(int min, int max) {
+		return min < max ? randomIn(max - min + 1) + min : randomIn(min - max + 1) + max;
+	}
 	
+	/**
+	 * 产生[min,max]区间内的随机长整数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+	public static long rangeRandom(long min, long max) {
+		return min < max ? randomIn(max - min + 1) + min : randomIn(min - max + 1) + max;
+	}
+		
 	/**
 	 * 将指定值限定在最小范围内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
