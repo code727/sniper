@@ -18,7 +18,7 @@
 
 package org.sniper.generator;
 
-import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.generator.dimension.DateDimensionGenerator;
 import org.sniper.generator.dimension.DimensionGenerator;
@@ -28,43 +28,45 @@ import org.sniper.generator.dimension.DimensionGenerator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractParameterizeGenerator implements ParameterizeGenerator<String, String> {
+public abstract class AbstractParameterizeGenerator implements ParameterizeGenerator<Object, String> {
 	
-	/** 前缀 */
-	protected String prefix = StringUtils.EMPTY;
+	/** 全局参数 */
+	protected Object parameter = StringUtils.EMPTY;
 	
-	/** 是否将前缀作为最终结果的一部分进行返回 */
-	protected boolean prefixAsResult;
-		
-	/** 最终生成结果的最小长度 */
-	protected int minLength = 16;
+	/** 是否将参数作为维度键的前缀 */
+	protected boolean parameterAsDimensionKeyPrefix = true;
+	
+	/** 是否将参数作为最终结果的一部分进行返回 */
+	protected boolean parameterAsResult;
 	
 	/** 维度生成器 */
 	protected DimensionGenerator<?> dimensionGenerator = new DateDimensionGenerator();
+		
+	/** 最终结果的最小长度 */
+	protected int minLength = 16;
 	
-	public String getPrefix() {
-		return prefix;
+	public Object getParameter() {
+		return parameter;
 	}
 
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
+	public void setParameter(Object parameter) {
+		this.parameter = parameter;
 	}
 
-	public boolean isPrefixAsResult() {
-		return prefixAsResult;
+	public boolean isParameterAsDimensionKeyPrefix() {
+		return parameterAsDimensionKeyPrefix;
 	}
 
-	public void setPrefixAsResult(boolean prefixAsResult) {
-		this.prefixAsResult = prefixAsResult;
+	public void setParameterAsDimensionKeyPrefix(boolean parameterAsDimensionKeyPrefix) {
+		this.parameterAsDimensionKeyPrefix = parameterAsDimensionKeyPrefix;
 	}
 
-	public int getMinLength() {
-		return minLength;
+	public boolean isParameterAsResult() {
+		return parameterAsResult;
 	}
 
-	public void setMinLength(int minLength) {
-		AssertUtils.assertTrue(minLength > 0, "Generator minimum length must greater than 0");
-		this.minLength = minLength;
+	public void setParameterAsResult(boolean parameterAsResult) {
+		this.parameterAsResult = parameterAsResult;
 	}
 
 	public DimensionGenerator<?> getDimensionGenerator() {
@@ -72,23 +74,31 @@ public abstract class AbstractParameterizeGenerator implements ParameterizeGener
 	}
 
 	public void setDimensionGenerator(DimensionGenerator<?> dimensionGenerator) {
-		AssertUtils.assertNotNull(dimensionGenerator, "Dimension generator must not be null");
 		this.dimensionGenerator = dimensionGenerator;
+	}
+
+	public int getMinLength() {
+		return minLength;
+	}
+
+	public void setMinLength(int minLength) {
+		this.minLength = minLength;
 	}
 
 	@Override
 	public String generate() {
-		// 根据设置的全局前缀来生成
-		return generate(this.prefix);
+		// 根据设置的全局参数来生成
+		return generate(this.parameter);
 	}
 	
 	@Override
-	public String generate(String prefix) {
+	public String generate(Object parameter) {
 		String dimension = dimensionGenerator.create().toString();
-		String dimensionKey = StringUtils.safeString(prefix) + dimension;
+		String dimensionKey = (parameterAsDimensionKeyPrefix ? ObjectUtils.toSafeString(parameter) + dimension
+				: dimension + ObjectUtils.toSafeString(parameter));
 		String generated = generateByDimension(dimensionKey).toString();
 		
-		if (prefixAsResult) {
+		if (parameterAsResult) {
 			int length = dimensionKey.length() + generated.length();
 			int offset = minLength - length;
 			return offset > 0 ? dimensionKey + makeupGenerate(generated, offset) : dimensionKey + generated;

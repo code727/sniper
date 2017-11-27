@@ -33,7 +33,7 @@ public class ShortLinkGeneratorTest extends GeneratorTest {
 	
 	private ParameterizeGenerator<Object, String> parameterizeGenerator = new ShortLinkGenerator(true);
 	
-	private long key = 1L;
+	private long parameter = 1L;
 
 	@Override
 	public void init() {
@@ -79,7 +79,7 @@ public class ShortLinkGeneratorTest extends GeneratorTest {
 	@Override
 	protected void doPerformanceTest() {
 		for (int i = 0; i < size; i++) {
-			parameterizeGenerator.generate(key + i);
+			parameterizeGenerator.generate(parameter + i);
 		}
 	}
 	
@@ -98,7 +98,7 @@ public class ShortLinkGeneratorTest extends GeneratorTest {
 			Set<String> set = CollectionUtils.newLinkedHashSet(size);
 			int end = start + size;
 			for (int i = start; i < end; i++) {
-				set.add(parameterizeGenerator.generate(key + i).toString());
+				set.add(parameterizeGenerator.generate(parameter + i).toString());
 			}
 			return set;
 		}

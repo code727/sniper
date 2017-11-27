@@ -38,9 +38,10 @@ public class RedisSerialNumberGeneratorTest extends SpringGeneratorTest {
 
 	@Override
 	protected void doUniquenessTest() throws Exception {
-		redisSerialNumberGenerator.setPrefix("orederId_");
-		redisSerialNumberGenerator.setPrefixAsResult(false);
-		System.out.println(redisSerialNumberGenerator.generate("haha_"));
+		redisSerialNumberGenerator.setParameter("orederId_");
+		redisSerialNumberGenerator.setParameterAsResult(false);
+		redisSerialNumberGenerator.setParameterAsDimensionKeyPrefix(true);
+		System.out.println(redisSerialNumberGenerator.generate("dubin"));
 		
 //		ExecutorService executor = Executors.newCachedThreadPool();
 //		Callable<Set<String>> task = new Callable<Set<String>>() {
