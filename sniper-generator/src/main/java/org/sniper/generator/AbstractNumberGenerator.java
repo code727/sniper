@@ -19,11 +19,8 @@
 package org.sniper.generator;
 
 import java.math.BigInteger;
-import java.text.DecimalFormat;
-import java.util.Map;
 
-import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.StringUtils;
+import org.sniper.commons.util.NumberUtils;
 
 /**
  * 数字生成器抽象类
@@ -32,34 +29,10 @@ import org.sniper.commons.util.StringUtils;
  */
 public abstract class AbstractNumberGenerator extends AbstractParameterizeGenerator {
 	
-	private static final Map<Integer, DecimalFormat> decimalFormats = MapUtils.newConcurrentHashMap();
-			
-	/**
-	 * 获取指定长度位数的补偿数字格式化对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param size
-	 * @return
-	 */
-	protected static DecimalFormat getMakeupDecimalFormat(int length) {
-		if (length <= 0)
-			return null;
-		
-		DecimalFormat decimalFormat = decimalFormats.get(length);
-		if (decimalFormat == null) {
-			/* 创建指定长度位数的数字格式化对象 */
-			decimalFormat = new DecimalFormat(StringUtils.leftSupplement(StringUtils.EMPTY, '0', length));
-			decimalFormats.put(length, decimalFormat);
-		}
-		
-		return decimalFormat;
-	}
-
 	@Override
 	protected String makeupGenerate(String generated, int offset) {
-		DecimalFormat decimalFormat = getMakeupDecimalFormat(generated.length() + offset);
-		
 		// 要求generated参数必须为字符串类型的数字，否则会抛出IllegalArgumentException
-		return decimalFormat != null ? decimalFormat.format(new BigInteger(generated)) : generated;
+		return NumberUtils.format(new BigInteger(generated), generated.length() + offset);
 	}
 
 }

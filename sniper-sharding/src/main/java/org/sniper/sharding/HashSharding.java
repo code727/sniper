@@ -20,9 +20,9 @@ package org.sniper.sharding;
 
 import java.math.BigInteger;
 
-import org.sniper.commons.sharding.Route;
 import org.sniper.commons.util.AssertUtils;
-import org.sniper.commons.util.RegexUtils;
+import org.sniper.commons.util.NumberUtils;
+import org.sniper.sharding.route.Route;
 
 /**
  * 哈希分片器实现类
@@ -33,6 +33,9 @@ public class HashSharding extends AbstractSharding {
 	
 	/** 模数 */
 	private BigInteger model;
+	
+	/** 路由目标格式化长度 */
+	private int formatLength;
 	
 	public HashSharding() {
 		this(1);
@@ -51,25 +54,35 @@ public class HashSharding extends AbstractSharding {
 		this.model = new BigInteger(String.valueOf(Math.abs(model)));
 	}
 	
+	public int getFormatLength() {
+		return formatLength;
+	}
+
+	public void setFormatLength(int formatLength) {
+		this.formatLength = formatLength;
+	}
+
 	@Override
-	protected <T> void doSharded(T parameter, Route route) {
+	protected <T> void doSharding(T parameter, Route route) {
 		String target = "";
 		if (parameter == null)
 			target = "0";
 		else {
-			String str = parameter.toString();
 			BigInteger integer;
-			if (RegexUtils.isInteger(str)) 
-				// 如果参数是整数，则直接利用整数绝对值取模
-				integer = new BigInteger(str).abs();
-			else 
+			try {
+				integer = new BigInteger(parameter.toString()).abs();
+			} catch (NumberFormatException e) {
 				// 如果是小数或其他非数字型对象，则直接利用该对象的哈希绝对值取模
-				integer = new BigInteger(String.valueOf(Math.abs(parameter.hashCode())));
-				
+				integer = new BigInteger(String.valueOf(parameter.hashCode())).abs();
+			}
+			
 			target = integer.mod(model).toString();
 		}
 		
-		route.suffix(target);
+		if (formatLength > 0)
+			route.setTarget(NumberUtils.format(new BigInteger(target), formatLength));
+		else
+			route.setTarget(target);
 	}
-			
+	
 }

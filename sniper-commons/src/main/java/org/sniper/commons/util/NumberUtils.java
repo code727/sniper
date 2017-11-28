@@ -43,8 +43,11 @@ public class NumberUtils {
 	/** 数值为0的BigDecimal */
 	public static final BigDecimal ZERO_BIGDECIMAL = new BigDecimal(ZERO_BIGINTEGER);
 		
-	/** 全局模模式与格式对象关系映射集 */
-	private static final Map<String, DecimalFormat> decimalFormats = MapUtils.newConcurrentHashMap();
+	/** 全局模式与格式对象关系映射集 */
+	private static final Map<String, DecimalFormat> PATTERN_DECIMALFORMATS = MapUtils.newConcurrentHashMap();
+	
+	/** 全局长度与格式对象关系映射集 */
+	private static final Map<Integer, DecimalFormat> LENGTH_DECIMALFORMATS = MapUtils.newConcurrentHashMap();
 	
 	/** 奇数映射组 */
 	private static Map<Character, Integer> ODD_NUMBERS;
@@ -76,14 +79,34 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static DecimalFormat getDecimalFormat(String pattern) {
-		DecimalFormat decimalFormat = decimalFormats.get(pattern);
+		DecimalFormat decimalFormat = PATTERN_DECIMALFORMATS.get(pattern);
 		if (decimalFormat == null) {
 			decimalFormat = new DecimalFormat(pattern);
-			decimalFormats.put(pattern, decimalFormat);
+			PATTERN_DECIMALFORMATS.put(pattern, decimalFormat);
 		}
 		
 		return decimalFormat;
 	}
+	
+	/**
+	 * 根据指定的长度获取已定义的数字格式对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pattern
+	 * @return
+	 */
+	public static DecimalFormat getDecimalFormat(int length) {
+		if (length <= 0)
+			return null;
+		
+		DecimalFormat decimalFormat = LENGTH_DECIMALFORMATS.get(length);
+		if (decimalFormat == null) {
+			decimalFormat = new DecimalFormat(StringUtils.leftSupplement(StringUtils.EMPTY, '0', length));
+			LENGTH_DECIMALFORMATS.put(length, decimalFormat);
+		}
+		
+		return decimalFormat;
+	}
+	
 	
 	/**
 	 * 获取不为空的双精度数值，否则返回0
@@ -1392,6 +1415,17 @@ public class NumberUtils {
 	}
 	
 	/**
+	 * 将字符ASCII码转化为固定长度的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @param length
+	 * @return
+	 */
+	public static String format(char c, int length) {
+		return format((long) c, length);
+	}
+	
+	/**
 	 * 将数字转化为指定格式的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
@@ -1399,12 +1433,30 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static String format(Number number, String pattern) {
-		AssertUtils.assertNotNull(number, "Formated number must not be null.");
-		AssertUtils.assertTrue(StringUtils.isNotBlank(pattern), "Number pattern must not be null or blank.");
+		if (number == null)
+			return null;
+		
+		if (pattern == null)
+			return number.toString();
 		
 		return getDecimalFormat(pattern).format(number);
 	}
 	
+	/**
+	 * 将数字转化为固定长度的字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param number
+	 * @param length
+	 * @return
+	 */
+	public static String format(Number number, int length) {
+		if (number == null)
+			return null;
+		
+		DecimalFormat decimalFormat = getDecimalFormat(length);
+		return decimalFormat != null ? decimalFormat.format(number) : number.toString();
+	}
+		
 	/**
 	 * 绝对值取反
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

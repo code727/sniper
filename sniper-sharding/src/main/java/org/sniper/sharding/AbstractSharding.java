@@ -18,15 +18,15 @@
 
 package org.sniper.sharding;
 
-import org.sniper.commons.sharding.Route;
 import org.sniper.commons.util.AssertUtils;
+import org.sniper.sharding.route.Route;
 
 /**
  * 分片器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractSharding implements Sharding {
+public abstract class AbstractSharding implements Shardable {
 	
 	/** 是否允许分片参数为空 */
 	private boolean allowNull;
@@ -36,17 +36,17 @@ public abstract class AbstractSharding implements Sharding {
 	}
 
 	@Override
-	public <T> Route sharded(T parameter) {
+	public <T> Route sharding(T parameter) {
 		Route route = new Route();
-		sharded(parameter, route);
+		sharding(parameter, route);
 		return route;
 	}
 
 	@Override
-	public <T> void sharded(T parameter, Route route) {
+	public <T> void sharding(T parameter, Route route) {
 		checkParameter(parameter);
 		checkRoute(route);
-		doSharded(parameter, route);
+		doSharding(parameter, route);
 	}
 	
 	/**
@@ -78,6 +78,6 @@ public abstract class AbstractSharding implements Sharding {
 	 * @param parameter
 	 * @param route 
 	 */
-	protected abstract <T> void doSharded(T parameter, Route route);
+	protected abstract <T> void doSharding(T parameter, Route route);
 		
 }
