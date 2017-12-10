@@ -41,6 +41,12 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+    		<groupId>com.caucho</groupId>
+    		<artifactId>hessian</artifactId>
+    		<version>4.0.51</version>
+    		<optional>true</optional>
+		</dependency>
+		<dependency>
     		<groupId>org.mongodb</groupId>
     		<artifactId>bson</artifactId>
     		<version>3.2.2</version>
