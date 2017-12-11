@@ -16,16 +16,19 @@
  * Create Date : 2017年3月20日
  */
 
-package org.sniper.http.test.domain;
+package org.snipersite.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Attribute {
+public class Attribute implements Serializable {
 	
+	private static final long serialVersionUID = 4824055884977964744L;
+
 	private int height;
 	
 	private int weight;

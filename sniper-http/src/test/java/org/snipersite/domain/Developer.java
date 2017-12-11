@@ -16,18 +16,19 @@
  * Create Date : 2015-3-9
  */
 
-package org.sniper.http.test.domain;
+package org.snipersite.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import org.sniper.commons.entity.IdEntity;
+import org.sniper.commons.entity.number.IdEntity;
 
 /**
  * 
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Developer extends IdEntity<String> {
+public class Developer extends IdEntity implements Serializable {
 		
 	private static final long serialVersionUID = -1087393058569622124L;
 		
