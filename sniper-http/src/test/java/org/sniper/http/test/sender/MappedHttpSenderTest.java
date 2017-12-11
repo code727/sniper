@@ -35,8 +35,8 @@ import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.http.MappedHttpSender;
 import org.sniper.http.headers.MediaType;
-import org.sniper.http.test.domain.Developer;
 import org.sniper.test.spring.JUnit4SpringContextTestCase;
+import org.snipersite.domain.Developer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.client.RestTemplate;
@@ -76,7 +76,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 		System.out.println(response.getData().getBirthday());
 	}
 	
-//	@Test
+	@Test
 	public void testPostBean() throws Exception {
 		BaseFullResponse<Developer> response = mappedHttpSender.request("postBean", parameters);
 		System.out.println(response.getCode());
@@ -85,7 +85,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 		System.out.println(response.getData().getBirthday());
 	}
 	
-	@Test
+//	@Test
 	public void testPostUpload() throws Exception {
 //		Map<String, Object> requestBody = MapUtils.newHashMap();
 //		requestBody.put("file", new File("C:/Users/Daniele/Desktop/新建.txt"));

@@ -44,6 +44,7 @@ public class JdkSerializerTest extends AbstractSerializerTest {
 	public void testSerialize() throws Exception {
 		bytes = serializer.serialize(list);
 		assertTrue(ArrayUtils.isNotEmpty(bytes));
+		System.out.println(serializer.serializeToString(list));
 		
 		// 写入目标文件查看序列化结果
 		IOUtils.write(new FileOutputStream(new File(

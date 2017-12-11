@@ -44,8 +44,7 @@ public class JdkSerializer extends AbstractSerializer {
 			objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);  
 			objectOutputStream.writeObject(t);  
 			objectOutputStream.flush();
-			byte[] bytes = byteArrayOutputStream.toByteArray();
-			return bytes;
+			return byteArrayOutputStream.toByteArray();
 		} catch (IOException e) {
 			throw new SerializationException("Cannot serialize", e);
 		} finally {

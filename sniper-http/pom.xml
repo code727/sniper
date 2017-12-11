@@ -92,6 +92,12 @@
   			<scope>test</scope>
 		</dependency>
 		<dependency>
+    		<groupId>com.caucho</groupId>
+    		<artifactId>hessian</artifactId>
+    		<version>4.0.51</version>
+    		<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-test</artifactId>
 			<version>${sniper.version}</version>

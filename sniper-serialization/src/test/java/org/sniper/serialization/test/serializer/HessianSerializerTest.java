@@ -20,12 +20,10 @@ package org.sniper.serialization.test.serializer;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.List;
 
 import org.junit.Test;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.IOUtils;
-import org.sniper.serialization.Serializer;
 import org.sniper.serialization.hessian.HessianSerializer;
 import org.sniper.serialization.test.domain.User;
 
@@ -35,7 +33,7 @@ import org.sniper.serialization.test.domain.User;
  */
 public class HessianSerializerTest extends AbstractSerializerTest {
 	
-	private Serializer serializer = new HessianSerializer();
+	private HessianSerializer serializer = new HessianSerializer();
 	
 	private byte[] bytes;
 	
@@ -44,6 +42,7 @@ public class HessianSerializerTest extends AbstractSerializerTest {
 		bytes = serializer.serialize(list);
 		assertTrue(ArrayUtils.isNotEmpty(bytes));
 		
+		System.out.println(serializer.serializeToString(list));
 		// 写入目标文件查看序列化结果
 		IOUtils.write(new FileOutputStream(new File(
 				"C:/Users/Daniele/Desktop/HessianSerializer.txt")), bytes);
@@ -54,8 +53,8 @@ public class HessianSerializerTest extends AbstractSerializerTest {
 		if (ArrayUtils.isEmpty(bytes))
 			testSerialize();
 		
-		List<User> result = serializer.deserialize(bytes);
-		User user = result.get(0);
+		User[] result = serializer.deserialize(serializer.serializeToString(list), User[].class);
+		User user = result[0];
 		
 		System.out.println(user.getName());
 		System.out.println(user.getAmount());

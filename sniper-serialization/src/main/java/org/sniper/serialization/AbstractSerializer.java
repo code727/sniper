@@ -19,7 +19,7 @@
 package org.sniper.serialization;
 
 import org.sniper.codec.CodecSupport;
-import org.sniper.commons.util.CodecUtils;
+import org.sniper.commons.util.Base64Utils;
 
 /**
  * 序列器抽象类
@@ -30,7 +30,7 @@ public abstract class AbstractSerializer extends CodecSupport implements Seriali
 	
 	@Override
 	public <T> String serializeToString(T t) throws SerializationException {
-		return CodecUtils.bytesToString(serialize(t), getEncoding());
+		return Base64Utils.encode(serialize(t));
 	}
 
 }

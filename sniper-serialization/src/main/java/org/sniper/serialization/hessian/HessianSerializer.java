@@ -22,8 +22,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import org.sniper.commons.util.ArrayUtils;
+import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.Base64Utils;
 import org.sniper.commons.util.IOUtils;
-import org.sniper.serialization.AbstractSerializer;
+import org.sniper.serialization.AbstractTypedSerializer;
 import org.sniper.serialization.SerializationException;
 
 import com.caucho.hessian.io.HessianInput;
@@ -34,10 +37,12 @@ import com.caucho.hessian.io.HessianOutput;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class HessianSerializer extends AbstractSerializer {
+public class HessianSerializer extends AbstractTypedSerializer {
 
 	@Override
 	public <T> byte[] serialize(T t) throws SerializationException {
+		AssertUtils.assertNotNull(t, "Serialized object must not be null");
+		
 		ByteArrayOutputStream byteArrayOutputStream = null;
 		HessianOutput hessianOutput = null;  
 		try {
@@ -55,16 +60,18 @@ public class HessianSerializer extends AbstractSerializer {
 			}
 		}
 	}
-
+		
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T deserialize(byte[] bytes) throws SerializationException {
+	public <T> T deserialize(byte[] bytes, Class<T> targetType) throws SerializationException {
+		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(bytes), "Deserialized byte array must not be null or empty");
+		
 		ByteArrayInputStream byteArrayInputStream = null;  
 	    HessianInput hessianInput = null;
 	    try {
 	    	byteArrayInputStream = new ByteArrayInputStream(bytes);
 	    	hessianInput = new HessianInput(byteArrayInputStream);
-	    	return (T) hessianInput.readObject();
+	    	return (T) hessianInput.readObject(safeDeserializeType(targetType));
 	    } catch (IOException e) {
 	    	throw new SerializationException("Cannot deserialize", e);
 	    } finally {
@@ -74,6 +81,11 @@ public class HessianSerializer extends AbstractSerializer {
 				throw new SerializationException("Cannot deserialize", e);
 			}
 	    }
+	}
+	
+	@Override
+	public <T> T deserialize(String text, Class<T> targetType) throws SerializationException {
+		return deserialize(Base64Utils.decodeToBytes(text), targetType);
 	}
 
 }

@@ -151,7 +151,7 @@ public class AssertUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 */
-	public static void assertNotEmpty(Object[] array) {
+	public static <T> void assertNotEmpty(T[] array) {
 		assertNotEmpty(array, "[Assertion failed] - This array argument must not be null or empty.");
 	}
 	
@@ -161,7 +161,7 @@ public class AssertUtils {
 	 * @param array
 	 * @param message
 	 */
-	public static void assertNotEmpty(Object[] array, String message) {
+	public static <T> void assertNotEmpty(T[] array, String message) {
 		assertTrue(ArrayUtils.isNotEmpty(array), message);
 	}
 	

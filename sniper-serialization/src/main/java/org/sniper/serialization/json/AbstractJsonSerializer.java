@@ -20,6 +20,7 @@ package org.sniper.serialization.json;
 
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.ClassUtils;
+import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.serialization.AbstractTypedSerializer;
 import org.sniper.serialization.SerializationException;
@@ -42,6 +43,18 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	@Override
 	public void setDateFormat(String dateFormat) {
 		this.dateFormat = dateFormat;
+	}
+	
+	/**
+	 * 重写父类方法，将对象序列化成二进制数组后再进行最基本的字符串转换即可得到JSON字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param t
+	 * @return
+	 * @throws SerializationException
+	 */
+	@Override
+	public <T> String serializeToString(T t) throws SerializationException {
+		return CodecUtils.bytesToString(serialize(t), getEncoding());
 	}
 	
 	@Override

@@ -55,7 +55,7 @@
 		<property name="action" value="/test/get/{id}/{name}/{birthday}" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
 		<property name="targetType" value="org.sniper.commons.response.BaseFullResponse" />
-		<property name="nestedType" value="org.sniper.http.test.domain.Developer" />
+		<property name="nestedType" value="org.snipersite.domain.Developer" />
 	</bean>
 	
 	<bean id="postBean" class="org.sniper.http.form.SimpleHttpForm">
@@ -64,7 +64,7 @@
 		<property name="action" value="/test/post/bean" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
 		<property name="targetType" value="org.sniper.commons.response.BaseFullResponse" />
-		<property name="nestedType" value="org.sniper.http.test.domain.Developer" /> 
+		<property name="nestedType" value="org.snipersite.domain.Developer" /> 
 	</bean>
 	
 	<bean id="postListBean" class="org.sniper.http.form.SimpleHttpForm">
@@ -73,7 +73,7 @@
 		<property name="action" value="/test/post/list/bean" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
 		<property name="targetType" value="org.sniper.commons.response.BaseFullResponse" />
-		<property name="nestedType" value="org.sniper.http.test.domain.Developer" /> 
+		<property name="nestedType" value="org.snipersite.domain.Developer" /> 
 	</bean>
 	
 	<bean id="postArrayBean" class="org.sniper.http.form.SimpleHttpForm">
@@ -82,7 +82,7 @@
 		<property name="action" value="/test/post/array/bean" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
 		<property name="targetType" value="org.sniper.commons.response.BaseFullResponse" />
-		<property name="nestedType" value="[Lorg.sniper.http.test.domain.Developer;" /> 
+		<property name="nestedType" value="[Lorg.snipersite.domain.Developer;" /> 
 	</bean>
 	
 	<bean id="postList" class="org.sniper.http.form.SimpleHttpForm">
@@ -108,7 +108,7 @@
 		<property name="action" value="/test/post/body/bean" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
 		<property name="targetType" value="org.sniper.commons.response.BaseFullResponse" />
-		<property name="nestedType" value="org.sniper.http.test.domain.Developer" /> 
+		<property name="nestedType" value="org.snipersite.domain.Developer" /> 
 	</bean>
 	
 	<bean id="postUpload" class="org.sniper.http.form.SimpleHttpForm">
@@ -125,9 +125,9 @@
 		<property name="action" value="/test/post/uploads" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
 		<property name="targetType" value="org.sniper.commons.response.BaseFullResponse" />
-		<property name="nestedType" value="org.sniper.http.test.domain.Developer" />
+		<property name="nestedType" value="org.snipersite.domain.Developer" />
 	</bean>
 		
 	<bean id="jsonResponseHandler" class="org.sniper.http.handler.response.typed.SniperJsonResponseHandler" />
-		
+	
 </beans>
