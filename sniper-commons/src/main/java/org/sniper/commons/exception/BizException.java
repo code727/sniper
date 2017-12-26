@@ -18,20 +18,15 @@
 
 package org.sniper.commons.exception;
 
-import org.sniper.commons.util.StringUtils;
-
 /**
  * 业务异常处理类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BizException extends SniperException {
+public class BizException extends RuntimeException {
 	
 	private static final long serialVersionUID = -7058119064602809131L;
 	
-	/** 业务/模块码 */
-	private String bizCode;
-
 	public BizException() {
 		super();
 	}
@@ -43,59 +38,9 @@ public class BizException extends SniperException {
 	public BizException(Throwable throwable) {
 		super(throwable);
 	}
-	
-	public BizException(String code, String message) {
-		super(code, message);
-	}
-	
+		
 	public BizException(String messgae, Throwable throwable) {
 		super(messgae, throwable);
 	}
-	
-	public BizException(String code, String messgae, Throwable throwable) {
-		super(code, messgae, throwable);
-	}
-
-	public String getBizCode() {
-		return bizCode;
-	}
-
-	public BizException setBizCode(String bizCode) {
-		this.bizCode = bizCode;
-		return this;
-	}
-	
-	@Override
-	protected void append(StringBuilder result) {
-		String code = getCode();
-		String message = getLocalizedMessage();
-		boolean codeIsNotBlank = StringUtils.isNotBlank(code);
-		boolean bizCodeIsNotBlank = StringUtils.isNotBlank(bizCode);
-		boolean messageIsNotBlank = StringUtils.isNotBlank(message);
 		
-		if (codeIsNotBlank || bizCodeIsNotBlank || messageIsNotBlank) {
-			result.append(":{");
-			
-			StringBuilder builder = new StringBuilder();
-			if (codeIsNotBlank) 
-				builder.append("code:").append(code);
-			
-			if (bizCodeIsNotBlank) {
-				if (builder.length() > 0)
-					builder.append(",");
-				
-				builder.append("bizCode:").append(bizCode);
-			}
-			
-			if (messageIsNotBlank) {
-				if (builder.length() > 0)
-					builder.append(",");
-				
-				builder.append("message:").append(message);
-			}
-			
-			result.append(builder).append("}");
-		}
-	}
-	
 }

@@ -18,19 +18,14 @@
 
 package org.sniper.commons.exception;
 
-import org.sniper.commons.util.StringUtils;
-
 /**
- * 自定义sniper包异常类
+ * 自定义Sniper包异常类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class SniperException extends RuntimeException {
 	
 	private static final long serialVersionUID = -3747309828506142444L;
-
-	/** 异常码 */
-	private String code;
 
 	public SniperException() {
 		super();
@@ -44,62 +39,8 @@ public class SniperException extends RuntimeException {
 		super(throwable);
 	}
 	
-	public SniperException(String code, String message) {
-		this(message);
-		this.code = code;
-	}
-	
 	public SniperException(String message, Throwable throwable) {
 		super(message, throwable);
 	}
-	
-	public SniperException(String code, String message, Throwable throwable) {
-		this(message, throwable);
-		this.code = code;
-	}
-	
-	public SniperException setCode(String code) {
-		this.code = code;
-		return this;
-	}
-
-	public String getCode() {
-		return code;
-	}
-	
-	@Override
-	public String toString() {
-		StringBuilder result = new StringBuilder(getClass().getName());
-		append(result);
-		return result.toString();
-	}
-	
-	/**
-	 * 追加Exception的显示结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param result
-	 */
-	protected void append(StringBuilder result) {
-		String message = getLocalizedMessage();
-		
-		boolean codeIsNotBlank = StringUtils.isNotBlank(code);
-		boolean messageIsNotBlank = StringUtils.isNotBlank(message);
-		if (codeIsNotBlank || messageIsNotBlank) {
-			result.append(":{");
 			
-			StringBuilder builder = new StringBuilder();
-			if (codeIsNotBlank) 
-				builder.append("code:").append(code);
-			
-			if (messageIsNotBlank) {
-				if (builder.length() > 0)
-					builder.append(",");
-				
-				builder.append("message:").append(message);
-			}
-				
-			result.append(builder).append("}");
-		}
-	}
-		
 }
