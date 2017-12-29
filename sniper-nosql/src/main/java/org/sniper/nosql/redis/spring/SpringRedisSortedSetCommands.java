@@ -46,14 +46,14 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	 * 在指定索引库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param aggregate
 	 * @param weights
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, K[] keys);
+	public <K> Long zUnionStore(String dbName, K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
 	 * 在当前库中执行zUnionStore命令，
@@ -71,14 +71,14 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	 * 在指定索引库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param aggregate
 	 * @param weights
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long zUnionStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
+	public <K> Long zUnionStore(String dbName, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
 	
 	/**
 	 * 在当前库中执行zUnionStore命令，
@@ -96,14 +96,14 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	 * 在指定索引库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param aggregate
 	 * @param weights
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, K[] keys);
+	public <K> Long zInterStore(String dbName, K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
 	 * 在当前库中执行zUnionStore命令，
@@ -121,12 +121,12 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	 * 在指定索引库中执行zUnionStore命令，
 	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param aggregate
 	 * @param weights
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long zInterStore(int dbIndex, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
+	public <K> Long zInterStore(String dbName, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
 }

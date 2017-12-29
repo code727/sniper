@@ -54,19 +54,19 @@ public interface SpringRedisListCommands extends RedisListCommands {
 	/**
 	 * 在指定索引库中执行lInsert命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param where
 	 * @param pivot 位置值
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long lInsert(int dbIndex, K key, Position where, V pivot, V value);
+	public <K, V> Long lInsert(String dbName, K key, Position where, V pivot, V value);
 	
 	/**
 	 * 在指定索引库中执行lInsert命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param where
 	 * @param pivot
@@ -74,6 +74,6 @@ public interface SpringRedisListCommands extends RedisListCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long lInsert(int dbIndex, K key, Position where, V pivot, V value, long expireSeconds);
+	public <K, V> Long lInsert(String dbName, K key, Position where, V pivot, V value, long expireSeconds);
 
 }

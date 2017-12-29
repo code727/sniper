@@ -50,23 +50,23 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param posttion
 	 * @param value
 	 */
-	public <K, V> void lSet(int dbIndex, K key, long posttion, V value);
+	public <K, V> void lSet(String dbName, K key, long posttion, V value);
 	
 	/**
 	 * 在指定索引库中执行lSet命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param posttion
 	 * @param value
 	 * @param expireSeconds
 	 */
-	public <K, V> void lSet(int dbIndex, K key, long posttion, V value, long expireSeconds);
+	public <K, V> void lSet(String dbName, K key, long posttion, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行lPush命令
@@ -90,23 +90,23 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lPushX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long lPush(int dbIndex, K key, V value);
+	public <K, V> Long lPush(String dbName, K key, V value);
 	
 	/**
 	 * 在指定索引库中执行lPushX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long lPush(int dbIndex, K key, V value, long expireSeconds);
+	public <K, V> Long lPush(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中批量执行lPush命令
@@ -130,23 +130,23 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中批量执行lPushX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param values
 	 * @return
 	 */
-	public <K, V> Long lPush(int dbIndex, K key, V[] values);
+	public <K, V> Long lPush(String dbName, K key, V[] values);
 	
 	/**
 	 * 在指定索引库中批量执行lPushX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param values
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long lPush(int dbIndex, K key, V[] values, long expireSeconds);
+	public <K, V> Long lPush(String dbName, K key, V[] values, long expireSeconds);
 	
 	/**
 	 * 在当前库中批量执行lPush命令
@@ -170,23 +170,23 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中批量执行lPushX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param values
 	 * @return
 	 */
-	public <K, V> Long lPush(int dbIndex, K key, Collection<V> values);
+	public <K, V> Long lPush(String dbName, K key, Collection<V> values);
 	
 	/**
 	 * 在指定索引库中批量执行lPushX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param values
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long lPush(int dbIndex, K key, Collection<V> values, long expireSeconds);
+	public <K, V> Long lPush(String dbName, K key, Collection<V> values, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行lPushX命令
@@ -210,23 +210,23 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lPushX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long lPushX(int dbIndex, K key, V value);
+	public <K, V> Long lPushX(String dbName, K key, V value);
 	
 	/**
 	 * 在当前库中执行lPushX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long lPushX(int dbIndex, K key, V value, long expireSeconds);
+	public <K, V> Long lPushX(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行lIndex命令，获取指定下标位对应的元素值
@@ -240,12 +240,12 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lIndex命令，获取下标位对应的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param index
 	 * @return
 	 */
-	public <K, V> V lIndex(int dbIndex, K key, long index);
+	public <K, V> V lIndex(String dbName, K key, long index);
 	
 	/**
 	 * 在当前库中执行lLen命令，获取指定键的元素合数
@@ -258,11 +258,11 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lLen命令，获取指定键的元素合数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K> Long lLen(int dbIndex, K key);
+	public <K> Long lLen(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行lPop命令，删除并返回原列表栈顶的元素
@@ -275,11 +275,11 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lPop命令，删除并返回原列表栈顶的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, V> V lPop(int dbIndex, K key);
+	public <K, V> V lPop(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行lRange命令，获取指定键列表下标在区间范围内的所有元素
@@ -294,13 +294,13 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lRange命令，获取指定键列表下标在区间范围内的所有元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param begin
 	 * @param end
 	 * @return
 	 */
-	public <K, V> List<V> lRange(int dbIndex, K key, long begin, long end);
+	public <K, V> List<V> lRange(String dbName, K key, long begin, long end);
 	
 	/**
 	 * 在当前库中执行lRange命令，获取指定键列表中的所有元素
@@ -315,13 +315,13 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lRange命令，获取指定键列表中的所有元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param begin
 	 * @param end
 	 * @return
 	 */
-	public <K, V> List<V> lRangeAll(int dbIndex, K key);
+	public <K, V> List<V> lRangeAll(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行lRem命令，删除键列表中count个与指定值相等的元素
@@ -336,13 +336,13 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lRem命令，删除键列表中count个与指定值相等的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param count
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long lRem(int dbIndex, K key, long count, V value);
+	public <K, V> Long lRem(String dbName, K key, long count, V value);
 	
 	/**
 	 * 在当前库中执行lRem命令，删除键列表中所有与指定相等的元素
@@ -356,12 +356,12 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lRem命令，删除键列表中所有与指定相等的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long lRemAll(int dbIndex, K key, V value);
+	public <K, V> Long lRemAll(String dbName, K key, V value);
 	
 	/**
 	 * 在当前库中执行lTrim命令，删除键列表下标在区间范围外的所有子元素
@@ -375,12 +375,12 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lTrim命令，删除键列表下标在区间范围外的所有子元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param begin
 	 * @param end
 	 */
-	public <K> void lTrim(int dbIndex, K key, long begin, long end);
+	public <K> void lTrim(String dbName, K key, long begin, long end);
 	
 	/**
 	 * 在当前库中执行rPush命令
@@ -404,23 +404,23 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行lPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long rPush(int dbIndex, K key, V value);
+	public <K, V> Long rPush(String dbName, K key, V value);
 	
 	/**
 	 * 在当前库中执行rPush命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long rPush(int dbIndex, K key, V value, long expireSeconds);
+	public <K, V> Long rPush(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中批量执行rPush命令
@@ -444,23 +444,23 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中批量执行rPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param values
 	 * @return
 	 */
-	public <K, V> Long rPush(int dbIndex, K key, V[] values);
+	public <K, V> Long rPush(String dbName, K key, V[] values);
 	
 	/**
 	 * 在当前库中批量执行rPush命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param values
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long rPush(int dbIndex, K key, V[] values, long expireSeconds);
+	public <K, V> Long rPush(String dbName, K key, V[] values, long expireSeconds);
 	
 	/**
 	 * 在当前库中批量执行rPush命令
@@ -484,23 +484,23 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中批量执行rPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param values
 	 * @return
 	 */
-	public <K, V> Long rPush(int dbIndex, K key, Collection<V> values);
+	public <K, V> Long rPush(String dbName, K key, Collection<V> values);
 	
 	/**
 	 * 在指定索引库中批量执行rPush命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param values
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long rPush(int dbIndex, K key, Collection<V> values, long expireSeconds);
+	public <K, V> Long rPush(String dbName, K key, Collection<V> values, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行rPushX命令
@@ -524,23 +524,23 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行rPushX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long rPushX(int dbIndex, K key, V value);
+	public <K, V> Long rPushX(String dbName, K key, V value);
 	
 	/**
 	 * 在指定索引库中执行rPushX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long rPushX(int dbIndex, K key, V value, long expireSeconds);
+	public <K, V> Long rPushX(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行rPopLPush命令
@@ -564,23 +564,23 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行rPopLPush命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param srcKey
 	 * @param destKey
 	 * @return
 	 */
-	public <K, V> V rPopLPush(int dbIndex, K srcKey, K destKey);
+	public <K, V> V rPopLPush(String dbName, K srcKey, K destKey);
 	
 	/**
 	 * 在指定索引库中执行rPopLPush命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param srcKey
 	 * @param destKey
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> V rPopLPush(int dbIndex, K srcKey, K destKey, long expireSeconds);
+	public <K, V> V rPopLPush(String dbName, K srcKey, K destKey, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行rPop命令，删除并返回原列表栈底的元素
@@ -593,9 +593,9 @@ public interface RedisListCommands {
 	/**
 	 * 在指定索引库中执行rPop命令，删除并返回原列表栈底的元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, V> V rPop(int dbIndex, K key);
+	public <K, V> V rPop(String dbName, K key);
 }

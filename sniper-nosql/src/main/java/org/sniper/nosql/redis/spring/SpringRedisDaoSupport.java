@@ -85,15 +85,22 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * 选择并连接库
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
-	 * @param dbIndex
+	 * @param dbName
 	 * @return
 	 */
-	protected RedisRepository select(RedisConnection connection, int dbIndex) {
-		if (dbIndex != this.defaultDbIndex && !isCluster())
-			// 非集群环境下redis的select命令才能被执行
-			connection.select(dbIndex);
+	protected RedisRepository select(RedisConnection connection, String dbName) {
+		if (repositoryManager == null)
+			return null;
 		
-		return repositoryManager != null ? repositoryManager.getRepository(dbIndex) : null;
+		RedisRepository redisRepository = repositoryManager.getRepository(dbName);
+		if (redisRepository != null) {
+			int dbIndex = redisRepository.getDbIndex();
+			if (dbIndex != this.defaultDbIndex && !isCluster())
+				// 非集群环境下redis的select命令才能被执行
+				connection.select(dbIndex);
+		}
+		
+		return redisRepository;
 	}
 		
 	/**
@@ -165,17 +172,17 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dataType
 	 * @param connection
-	 * @param dbIndex
+	 * @param dbName
 	 * @param targetKey
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> listByDataType(DataType dataType, RedisConnection connection, int dbIndex, byte[] targetKey) {
+	protected <V> List<V> listByDataType(DataType dataType, RedisConnection connection, String dbName, byte[] targetKey) {
 		try {
 			// 执行当前对象的xxxTypeList方法后返回结果，其中xxx表示DataType枚举的code值
 			return (List<V>) ReflectionUtils.invokeMethod(this, dataType.code() + "TypeList", 
-					new Class<?>[] { RedisConnection.class, int.class, byte[].class },
-					new Object[] { connection, dbIndex, targetKey });
+					new Class<?>[] { RedisConnection.class, String.class, byte[].class },
+					new Object[] { connection, dbName, targetKey });
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -186,11 +193,11 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * 获取none(不存在)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
-	 * @param repository
+	 * @param dbName
 	 * @param targetKey
 	 * @return
 	 */
-	protected <V> List<V> noneTypeList(RedisConnection connection, int dbIndex, byte[] targetKey) {
+	protected <V> List<V> noneTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
 		return null;
 	}
 	
@@ -198,13 +205,13 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * 获取string(字符串)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
-	 * @param dbIndex
+	 * @param dbName
 	 * @param targetKey
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> stringTypeList(RedisConnection connection, int dbIndex, byte[] targetKey) {
-		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbIndex);
+	protected <V> List<V> stringTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
+		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbName);
 		List<V> result = CollectionUtils.newArrayList();
 		result.add(valueSerializer.deserialize(connection.get(targetKey)));
 		return result;
@@ -214,50 +221,50 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * 获取list(列表)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
-	 * @param dbIndex
+	 * @param dbName
 	 * @param targetKey
 	 * @return
 	 */
-	protected <V> List<V> listTypeList(RedisConnection connection, int dbIndex, byte[] targetKey) {
-		return deserializeValueByteToList(dbIndex, connection.lRange(targetKey, 0, -1));
+	protected <V> List<V> listTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
+		return deserializeValueByteToList(dbName, connection.lRange(targetKey, 0, -1));
 	}
 	
 	/**
 	 * 获取set(集合)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
-	 * @param dbIndex
+	 * @param dbName
 	 * @param targetKey
 	 * @return
 	 */
-	protected <V> List<V> setTypeList(RedisConnection connection, int dbIndex, byte[] targetKey) {
-		return deserializeValueByteToList(dbIndex, connection.sMembers(targetKey));
+	protected <V> List<V> setTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
+		return deserializeValueByteToList(dbName, connection.sMembers(targetKey));
 	}
 	
 	/**
 	 * 获取zset(有序集合)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
-	 * @param dbIndex
+	 * @param dbName
 	 * @param targetKey
 	 * @return
 	 */
-	protected <V> List<V> zsetTypeList(RedisConnection connection, int dbIndex, byte[] targetKey) {
+	protected <V> List<V> zsetTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
 		Set<byte[]> resultBytes = connection.zRange(targetKey, 0, -1);
-		return deserializeValueByteToList(dbIndex, resultBytes);
+		return deserializeValueByteToList(dbName, resultBytes);
 	}
 	
 	/**
 	 * 获取hash(哈希表)键类型对应的数据列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
-	 * @param dbIndex
+	 * @param dbName
 	 * @param targetKey
 	 * @return
 	 */
-	protected <V> List<V> hashTypeList(RedisConnection connection, int dbIndex, byte[] targetKey) {
+	protected <V> List<V> hashTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
 		// 返回当前键所有域对应的值列表
-		return deserializeHashValueByteToList(dbIndex, connection.hVals(targetKey));
+		return deserializeHashValueByteToList(dbName, connection.hVals(targetKey));
 	}
 
 }

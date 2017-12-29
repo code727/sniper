@@ -29,8 +29,11 @@ import org.sniper.serialization.Serializer;
  */
 public class RedisRepository {
 	
-	/** 库名称 */
-	private String name;
+	/** 库的命名空间 */
+	private String namespace;
+	
+	/** 当前库索引 */
+	private int dbIndex;
 	
 	/** 针对于当前库所有数据的过期时间 */
 	private long expireTime;
@@ -50,12 +53,20 @@ public class RedisRepository {
 	/** 哈希值序列化器 */
 	private Serializer hashValueSerializer; 
 
-	public String getName() {
-		return name;
+	public String getNamespace() {
+		return namespace;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNamespace(String namespace) {
+		this.namespace = namespace;
+	}
+
+	public int getDbIndex() {
+		return dbIndex;
+	}
+
+	public void setDbIndex(int dbIndex) {
+		this.dbIndex = dbIndex;
 	}
 
 	public long getExpireTime() {

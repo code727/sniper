@@ -32,21 +32,21 @@ public interface RedisRepositoryManager {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param repositories
 	 */
-	public void setRepositories(Map<Integer, RedisRepository> repositories);
+	public void setRepositories(Map<String, RedisRepository> repositories);
 	
 	/**
 	 * 获取所有库的配置映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Map<Integer, RedisRepository> getRepositories();
+	public Map<String, RedisRepository> getRepositories();
 	
 	/**
-	 * 根据键获取映射集合里的某个库配置项
+	 * 根据库名称获取映射集合里的库配置项
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @return
 	 */
-	public RedisRepository getRepository(int dbIndex);
+	public RedisRepository getRepository(String dbName);
 
 }

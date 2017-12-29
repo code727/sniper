@@ -19,7 +19,6 @@
 package org.sniper.generator.application;
 
 import org.sniper.commons.util.AssertUtils;
-import org.sniper.commons.util.NumberUtils;
 import org.sniper.generator.AbstractNumberGenerator;
 import org.sniper.nosql.redis.dao.RedisCommandsDao;
 
@@ -33,25 +32,25 @@ import org.sniper.nosql.redis.dao.RedisCommandsDao;
  */
 public class RedisSerialNumberGenerator extends AbstractNumberGenerator {
 	
-	private final int dbIndex;
+	private final String dbName;
 	
 	private final RedisCommandsDao redisCommandsDao;
 	
 	public RedisSerialNumberGenerator(RedisCommandsDao redisCommandsDao) {
-		this(0, redisCommandsDao);
+		this(null, redisCommandsDao);
 	}
 	
-	public RedisSerialNumberGenerator(int dbIndex, RedisCommandsDao redisCommandsDao) {
+	public RedisSerialNumberGenerator(String dbName, RedisCommandsDao redisCommandsDao) {
 		AssertUtils.assertNotNull(redisCommandsDao, "Redis commands dao not be null");
 		
-		this.dbIndex = NumberUtils.minLimit(dbIndex, 0);
+		this.dbName = dbName;
 		this.redisCommandsDao = redisCommandsDao;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected <T> T generateByDimension(String dimension) {
-		return (T) redisCommandsDao.incr(dbIndex, dimension);
+		return (T) redisCommandsDao.incr(dbName, dimension);
 	}
 			
 }

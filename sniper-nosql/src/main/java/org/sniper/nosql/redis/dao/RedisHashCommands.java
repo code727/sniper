@@ -54,25 +54,25 @@ public interface RedisHashCommands {
 	/**
 	 * 在指定索引库中执行hSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex 库索引
+	 * @param dbName
 	 * @param key 键
 	 * @param field 域
 	 * @param value 值
 	 * @return
 	 */
-	public <K, F, V> Boolean hSet(int dbIndex, K key, F field, V value);
+	public <K, F, V> Boolean hSet(String dbName, K key, F field, V value);
 	
 	/**
 	 * 在当前库中执行hSet命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param field
 	 * @param value
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, F, V> Boolean hSet(int dbIndex, K key, F field, V value, long expireSeconds);
+	public <K, F, V> Boolean hSet(String dbName, K key, F field, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行hSetNX命令
@@ -98,25 +98,25 @@ public interface RedisHashCommands {
 	/**
 	 * 在指定索引库中执行hSetNX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex 库索引
+	 * @param dbName
 	 * @param key 键
 	 * @param field 域
 	 * @param value 值
 	 * @return
 	 */
-	public <K, F, V> Boolean hSetNX(int dbIndex, K key, F field, V value);
+	public <K, F, V> Boolean hSetNX(String dbName, K key, F field, V value);
 	
 	/**
 	 * 在指定索引库中执行hSetNX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param field
 	 * @param value
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, F, V> Boolean hSetNX(int dbIndex, K key, F field, V value, long expireSeconds);
+	public <K, F, V> Boolean hSetNX(String dbName, K key, F field, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行hMSet命令
@@ -138,21 +138,21 @@ public interface RedisHashCommands {
 	/**
 	 * 在指定索引库中执行hMSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex 库索引
+	 * @param dbName
 	 * @param key 键
 	 * @param fValues 域-值映射集
 	 */
-	public <K, F, V> void hMSet(int dbIndex, K key, Map<F, V> fValues);
+	public <K, F, V> void hMSet(String dbName, K key, Map<F, V> fValues);
 	
 	/**
 	 * 在当前库中执行hMSet命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param fValues
 	 * @param expireSeconds
 	 */
-	public <K, F, V> void hMSet(int dbIndex, K key, Map<F, V> fValues, long expireSeconds);
+	public <K, F, V> void hMSet(String dbName, K key, Map<F, V> fValues, long expireSeconds);
 	
 	/**
 	 * 删除当前库指定键对应的域值
@@ -166,12 +166,12 @@ public interface RedisHashCommands {
 	/**
 	 * 删除指定库键对应的域值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param filed
 	 * @return
 	 */
-	public <K, F> Long hDel(int dbIndex, K key, F filed);
+	public <K, F> Long hDel(String dbName, K key, F filed);
 	
 	/**
 	 * 删除当前库指定键对应的多个域值
@@ -185,12 +185,12 @@ public interface RedisHashCommands {
 	/**
 	 * 删除指定库键对应的多个域值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param fileds
 	 * @return
 	 */
-	public <K, F> Long hDel(int dbIndex, K key, F[] fileds);
+	public <K, F> Long hDel(String dbName, K key, F[] fileds);
 	
 	/**
 	 * 删除当前库指定键对应的多个域值
@@ -204,12 +204,12 @@ public interface RedisHashCommands {
 	/**
 	 * 删除指定库键对应的多个域值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param fileds
 	 * @return
 	 */
-	public <K, F> Long hDel(int dbIndex, K key, Collection<F> fileds);
+	public <K, F> Long hDel(String dbName, K key, Collection<F> fileds);
 	
 	/**
 	 * 判断当前库指定键对应域是否存在
@@ -223,12 +223,12 @@ public interface RedisHashCommands {
 	/**
 	 * 判断指定库键对应域是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param filed
 	 * @return
 	 */
-	public <K, F> Boolean hExists(int dbIndex, K key, F filed);
+	public <K, F> Boolean hExists(String dbName, K key, F filed);
 	
 	/**
 	 * 在当前库中执行hGet命令
@@ -242,12 +242,12 @@ public interface RedisHashCommands {
 	/**
 	 * 在指定库中执行hGet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param filed
 	 * @return
 	 */
-	public <K, F, V> V hGet(int dbIndex, K key, F filed);
+	public <K, F, V> V hGet(String dbName, K key, F filed);
 	
 	/**
 	 * 在当前库中执行hGetAll命令
@@ -260,11 +260,11 @@ public interface RedisHashCommands {
 	/** 
 	 * 在指定库中执行hGetAll命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, F, V> Map<F, V> hGetAll(int dbIndex, K key);
+	public <K, F, V> Map<F, V> hGetAll(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行hKeys命令，获取键对应的所有域
@@ -277,11 +277,11 @@ public interface RedisHashCommands {
 	/**
 	 * 在指定库中执行hKeys命令，获取键对应的所有域
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, F> Set<F> hKeys(int dbIndex, K key);
+	public <K, F> Set<F> hKeys(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行hLen命令，获取键对应的域个数
@@ -294,11 +294,11 @@ public interface RedisHashCommands {
 	/**
 	 * 在指定库中执行hLen命令，获取键对应的域个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K> Long hLen(int dbIndex, K key);
+	public <K> Long hLen(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行hMGet命令，获取键对应的多个域的值
@@ -312,12 +312,12 @@ public interface RedisHashCommands {
 	/**
 	 * 在指定库中执行hMGet命令，获取键对应的多个域的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param fields
 	 * @return
 	 */
-	public <K, F, V> List<V> hMGet(int dbIndex, K key, F[] fields);
+	public <K, F, V> List<V> hMGet(String dbName, K key, F[] fields);
 	
 	/**
 	 * 在当前库中执行hMGet命令，获取键对应的多个域的值
@@ -331,12 +331,12 @@ public interface RedisHashCommands {
 	/**
 	 * 在指定库中执行hMGet命令，获取键对应的多个域的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param fields
 	 * @return
 	 */
-	public <K, F, V> List<V> hMGet(int dbIndex, K key, Collection<F> fields);
+	public <K, F, V> List<V> hMGet(String dbName, K key, Collection<F> fields);
 	
 	/**
 	 * 在当前库中执行hVals命令，获取键对应的所有域的值
@@ -349,10 +349,10 @@ public interface RedisHashCommands {
 	/**
 	 * 在指定库中执行hMGet命令，获取键对应的所有域的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, V> List<V> hVals(int dbIndex, K key);
+	public <K, V> List<V> hVals(String dbName, K key);
 
 }

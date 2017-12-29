@@ -35,10 +35,10 @@ public interface RedisServerCommands {
 	/**
 	 * 在指定库中执行dbSize命令，获取当前库中键的个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @return
 	 */
-	public Long dbSize(int dbIndex);
+	public Long dbSize(String dbName);
 	
 	/**
 	 * 执行flushAll命令，清空所有库中的数据
@@ -55,9 +55,9 @@ public interface RedisServerCommands {
 	/**
 	 * 在指定库中执行flushDb命令，清空当前库中的所有数据
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 */
-	public void flushDb(int dbIndex);
+	public void flushDb(String dbName);
 	
 	/**
 	 * 执行shutdown命令，关闭服务器

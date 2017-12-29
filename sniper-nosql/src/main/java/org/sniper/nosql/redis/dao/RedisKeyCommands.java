@@ -42,10 +42,10 @@ public interface RedisKeyCommands {
 	/**
 	 * 获取指定库中所有的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @return
 	 */
-	public <K> Set<K> keys(int dbIndex);
+	public <K> Set<K> keysByName(String dbName);
 	
 	/**
 	 * 获取当前库中指定模式的键集
@@ -58,11 +58,11 @@ public interface RedisKeyCommands {
 	/**
 	 * 获取指定库中满足模式的键集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param pattern
 	 * @return
 	 */
-	public <K> Set<K> keys(int dbIndex, String pattern);
+	public <K> Set<K> keys(String dbName, String pattern);
 	
 	/**
 	 * 删除当前库指定的键
@@ -75,11 +75,11 @@ public interface RedisKeyCommands {
 	/**
 	 * 删除指定库的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K> Long del(int dbIndex, K key);
+	public <K> Long del(String dbName, K key);
 	
 	/**
 	 * 删除当前库指定的多个键
@@ -92,11 +92,11 @@ public interface RedisKeyCommands {
 	/**
 	 * 删除指定库多个键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long del(int dbIndex, K[] keys);
+	public <K> Long del(String dbName, K[] keys);
 	
 	/**
 	 * 删除当前库指定的多个键
@@ -109,11 +109,11 @@ public interface RedisKeyCommands {
 	/**
 	 * 删除指定库多个键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long del(int dbIndex, Collection<K> keys);
+	public <K> Long del(String dbName, Collection<K> keys);
 	
 	/**
 	 * 判断当前库中指定键是否存在
@@ -126,11 +126,11 @@ public interface RedisKeyCommands {
 	/**
 	 * 判断指定库中的键是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K> Boolean exists(int dbIndex, K key);
+	public <K> Boolean exists(String dbName, K key);
 	
 	/**
 	 * 判断当前库中多个键是否存在
@@ -143,11 +143,11 @@ public interface RedisKeyCommands {
 	/**
 	 * 判断指定库中多个键是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K> List<KeyValuePair<K, Boolean>> exists(int dbIndex, K[] keys);
+	public <K> List<KeyValuePair<K, Boolean>> exists(String dbName, K[] keys);
 	
 	/**
 	 * 判断当前库中多个键是否存在
@@ -160,11 +160,11 @@ public interface RedisKeyCommands {
 	/**
 	 * 判断指定库中多个键是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K> List<KeyValuePair<K, Boolean>> exists(int dbIndex, Collection<K> keys);
+	public <K> List<KeyValuePair<K, Boolean>> exists(String dbName, Collection<K> keys);
 	
 	/**
 	 * 设置当前库中指定键的过期秒数
@@ -178,12 +178,12 @@ public interface RedisKeyCommands {
 	/**
 	 * 设置指定库中键的过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param seconds
 	 * @return
 	 */
-	public <K> Boolean expire(int dbIndex, K key, long seconds);
+	public <K> Boolean expire(String dbName, K key, long seconds);
 	
 	/**
 	 * 设置当前库中指定键的过期时间戳
@@ -197,12 +197,12 @@ public interface RedisKeyCommands {
 	/**
 	 * 设置指定库中键的过期时间戳
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param timestamp
 	 * @return
 	 */
-	public <K> Boolean expireAt(int dbIndex, K key, long timestamp); 
+	public <K> Boolean expireAt(String dbName, K key, long timestamp); 
 	
 	/**
 	 * 设置当前库中指定键的过期日期
@@ -216,12 +216,12 @@ public interface RedisKeyCommands {
 	/**
 	 * 设置指定库中键的过期时间戳
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param date
 	 * @return
 	 */
-	public <K> Boolean expireAt(int dbIndex, K key, Date date); 
+	public <K> Boolean expireAt(String dbName, K key, Date date); 
 		
 	/**
 	 * 将当前库的键移动到目标库
@@ -235,12 +235,12 @@ public interface RedisKeyCommands {
 	/**
 	 * 将指定库中的键移动到目标库
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param targetIndex
 	 * @return
 	 */
-	public <K> Boolean move(int dbIndex, K key, int targetIndex);
+	public <K> Boolean move(String dbName, K key, int targetIndex);
 	
 	/**
 	 * 获取当前库的指定键的剩余秒数
@@ -253,11 +253,11 @@ public interface RedisKeyCommands {
 	/**
 	 * 获取指定库中的键的剩余秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K> Long ttl(int dbIndex, K key);
+	public <K> Long ttl(String dbName, K key);
 	
 	/**
 	 * 获取当前库中所有键对应的值
@@ -269,10 +269,10 @@ public interface RedisKeyCommands {
 	/**
 	 * 获取指定库中所有键对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @return
 	 */
-	public <V> Set<V> values(int dbIndex);
+	public <V> Set<V> valuesByName(String dbName);
 	
 	/**
 	 * 获取当前库中匹配模式的键对应的值
@@ -285,10 +285,10 @@ public interface RedisKeyCommands {
 	/**
 	 * 获取指定库中匹配模式的键对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param pattern
 	 * @return
 	 */
-	public <V> Set<V> values(int dbIndex, String pattern);
+	public <V> Set<V> values(String dbName, String pattern);
 	
 }

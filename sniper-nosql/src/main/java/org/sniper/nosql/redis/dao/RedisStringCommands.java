@@ -49,21 +49,21 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行set命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex 库索引
+	 * @param dbName
 	 * @param key 键
 	 * @param value 值
 	 */
-	public <K, V> void set(int dbIndex, K key, V value);
+	public <K, V> void set(String dbName, K key, V value);
 	
 	/**
 	 * 在指定索引库中执行set命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
 	 */
-	public <K, V> void set(int dbIndex, K key, V value, long expireSeconds);
+	public <K, V> void set(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行setNX命令
@@ -86,22 +86,22 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行setNX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex 库索引
+	 * @param dbName
 	 * @param key 键
 	 * @param value 值
 	 */
-	public <K, V> Boolean setNX(int dbIndex, K key, V value);
+	public <K, V> Boolean setNX(String dbName, K key, V value);
 	
 	/**
 	 * 在指定索引库中执行setNX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean setNX(int dbIndex, K key, V value, long expireSeconds);
+	public <K, V> Boolean setNX(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行setEx命令，并设置当前库全局过期秒数
@@ -114,11 +114,11 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行setEx命令，并设置当前库全局过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 */
-	public <K, V> void setEx(int dbIndex, K key, V value);
+	public <K, V> void setEx(String dbName, K key, V value);
 	
 	/**
 	 * 在当前库中执行setEx命令，并设置当前库过期秒数
@@ -132,12 +132,12 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行setEx命令，并设置当前库过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param seconds
 	 * @param value
 	 */
-	public <K, V> void setEx(int dbIndex, K key, long seconds, V value);
+	public <K, V> void setEx(String dbName, K key, long seconds, V value);
 	
 	/**
 	 * 在当前库中执行mSet命令
@@ -157,19 +157,19 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行mSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param kValues
 	 */
-	public <K, V> void mSet(int dbIndex, Map<K, V> kValues);
+	public <K, V> void mSet(String dbName, Map<K, V> kValues);
 	
 	/**
 	 * 在指定索引库中执行mSet命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param kValues
 	 * @param expireSeconds
 	 */
-	public <K, V> void mSet(int dbIndex, Map<K, V> kValues, long expireSeconds);
+	public <K, V> void mSet(String dbName, Map<K, V> kValues, long expireSeconds);
 
 	/**
 	 * 在当前库中执行mSetNX命令
@@ -189,19 +189,19 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行mSetNX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param kValues
 	 */
-	public <K, V> void mSetNX(int dbIndex, Map<K, V> kValues);
+	public <K, V> void mSetNX(String dbName, Map<K, V> kValues);
 	
 	/**
 	 * 在指定索引库中执行mSetNX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param kValues
 	 * @param expireSeconds
 	 */
-	public <K, V> void mSetNX(int dbIndex, Map<K, V> kValues, long expireSeconds);
+	public <K, V> void mSetNX(String dbName, Map<K, V> kValues, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行setRange命令
@@ -225,23 +225,23 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行setRange命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param offset
 	 * @param value
 	 */
-	public <K, V> void setRange(int dbIndex, K key, long offset, V value);
+	public <K, V> void setRange(String dbName, K key, long offset, V value);
 	
 	/**
 	 * 在指定索引库中执行setRange命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param offset
 	 * @param value
 	 * @param expireSeconds
 	 */
-	public <K, V> void setRange(int dbIndex, K key, long offset, V value, long expireSeconds);
+	public <K, V> void setRange(String dbName, K key, long offset, V value, long expireSeconds);
 	
 	/**
 	 * 将值追加到当前库键的原值后面
@@ -265,23 +265,23 @@ public interface RedisStringCommands {
 	/**
 	 * 将值追加到指定索引库键的原值后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long append(int dbIndex, K key, V value);
+	public <K, V> Long append(String dbName, K key, V value);
 	
 	/**
 	 * 将值追加到指定索引库键的原值后面，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long append(int dbIndex, K key, V value, long expireSeconds);
+	public <K, V> Long append(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行get命令
@@ -294,11 +294,11 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行get命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, V> V get(int dbIndex, K key);
+	public <K, V> V get(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行getRange命令
@@ -313,13 +313,13 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行getRange命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param begin
 	 * @param end
 	 * @return
 	 */
-	public <K, V> V getRange(int dbIndex, K key, long begin, long end);
+	public <K, V> V getRange(String dbName, K key, long begin, long end);
 	
 	/**
 	 * 在当前库中执行getSet命令
@@ -343,23 +343,23 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行getSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @return 键对应的旧值
 	 */
-	public <K, V> V getSet(int dbIndex, K key, V value);
+	public <K, V> V getSet(String dbName, K key, V value);
 	
 	/**
 	 * 在指定索引库中执行getSet命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> V getSet(int dbIndex, K key, V value, long expireSeconds);
+	public <K, V> V getSet(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行mGet命令
@@ -372,11 +372,11 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行mGet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K, V> List<V> mGet(int dbIndex, K[] keys);
+	public <K, V> List<V> mGet(String dbName, K[] keys);
 	
 	/**
 	 * 在当前库中执行mGet命令
@@ -389,11 +389,11 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行mGet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K, V> List<V> mGet(int dbIndex, Collection<K> keys);
+	public <K, V> List<V> mGet(String dbName, Collection<K> keys);
 	
 	/**
 	 * 在当前库中执行strLen命令，获取键对应的字符串值的长度
@@ -406,11 +406,11 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行getSet命令，获取键对应的字符串值的长度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K> Long strLen(int dbIndex, K key);
+	public <K> Long strLen(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行decr命令，将键储存的数字值减一
@@ -423,11 +423,11 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行decr命令，将键储存的数字值减一
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K> Long decr(int dbIndex, K key);
+	public <K> Long decr(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行decrBy命令，将键储存的数字值减去指定的值
@@ -441,12 +441,12 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行decrBy命令，将键储存的数字值减去指定的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public <K> Long decrBy(int dbIndex, K key, long value);
+	public <K> Long decrBy(String dbName, K key, long value);
 	
 	/**
 	 * 在当前库中执行incr命令，将键储存的数字值加一
@@ -459,11 +459,11 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行incr命令，将键储存的数字值加一
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K> Long incr(int dbIndex, K key);
+	public <K> Long incr(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行incrBy命令，将键储存的数字值加上指定的值
@@ -477,11 +477,11 @@ public interface RedisStringCommands {
 	/**
 	 * 在指定索引库中执行incrBy命令，将键储存的数字值加上指定的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public <K> Long incrBy(int dbIndex, K key, long value);
+	public <K> Long incrBy(String dbName, K key, long value);
 	
 }

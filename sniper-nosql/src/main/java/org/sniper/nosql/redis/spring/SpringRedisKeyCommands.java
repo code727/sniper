@@ -43,12 +43,12 @@ public interface SpringRedisKeyCommands extends RedisKeyCommands {
 	/**
 	 * 将指定库的键按照规则进行排序
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param params
 	 * @return
 	 */
-	public <K, V> List<V> sort(int dbIndex, K key, SortParameters params);
+	public <K, V> List<V> sort(String dbName, K key, SortParameters params);
 	
 	/**
 	 * 将当前库的键按照指定的规则进行排序后返回存入目标键的结果个数
@@ -63,13 +63,13 @@ public interface SpringRedisKeyCommands extends RedisKeyCommands {
 	/**
 	 * 将指定库的键按照规则进行排序后返回存入目标键的结果个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param params
 	 * @param targetKey
 	 * @return 存入目标键的结果个数
 	 */
-	public <K, V> Long sortCount(int dbIndex, K key, SortParameters params, K targetKey);
+	public <K, V> Long sortCount(String dbName, K key, SortParameters params, K targetKey);
 	
 	/**
 	 * 将当前库的键按照指定的规则进行排序后返回存入目标键的结果列表
@@ -84,13 +84,13 @@ public interface SpringRedisKeyCommands extends RedisKeyCommands {
 	/**
 	 * 将指定库的键按照规则进行排序后返回存入目标键的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param params
 	 * @param targetKey
 	 * @return 存入目标键的结果个数
 	 */
-	public <K, V> List<V> sortResult(int dbIndex, K key, SortParameters params, K targetKey);
+	public <K, V> List<V> sortResult(String dbName, K key, SortParameters params, K targetKey);
 	
 	/**
 	 * 获取当前库的键对应的值类型
@@ -103,10 +103,10 @@ public interface SpringRedisKeyCommands extends RedisKeyCommands {
 	/**
 	 * 获取指定库的键对应的值类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K> DataType type(int dbIndex, K key);
+	public <K> DataType type(String dbName, K key);
 
 }

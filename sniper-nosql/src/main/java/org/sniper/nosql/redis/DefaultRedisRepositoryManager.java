@@ -20,35 +20,27 @@ package org.sniper.nosql.redis;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- *  Redis库配置管理实现类
+ *  Redis库配置管理默认实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisRepositoryManagerImpl implements RedisRepositoryManager {
-	
-	private static final Logger logger = LoggerFactory.getLogger(RedisRepositoryManagerImpl.class);
-	
-	private Map<Integer, RedisRepository> repositories;
+public class DefaultRedisRepositoryManager implements RedisRepositoryManager {
+		
+	private Map<String, RedisRepository> repositories;
 
 	@Override
-	public void setRepositories(Map<Integer, RedisRepository> repositories) {
+	public void setRepositories(Map<String, RedisRepository> repositories) {
 		this.repositories = repositories;
 	}
 
-	public Map<Integer, RedisRepository> getRepositories() {
+	public Map<String, RedisRepository> getRepositories() {
 		return this.repositories;
 	}
 
 	@Override
-	public RedisRepository getRepository(int dbIndex) {
-		RedisRepository repository = repositories.get(dbIndex);
-		if (repository == null)
-			logger.warn("Redis repository [index:" + dbIndex + "] configuration has not exist.will be return null.");
-		return repository;
+	public RedisRepository getRepository(String dbName) {
+		return repositories.get(dbName);
 	}
 
 }

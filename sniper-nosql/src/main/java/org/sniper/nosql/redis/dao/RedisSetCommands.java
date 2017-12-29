@@ -50,23 +50,23 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sAdd命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Long sAdd(int dbIndex, K key, V member);
+	public <K, V> Long sAdd(String dbName, K key, V member);
 	
 	/**
 	 * 在指定索引库中执行sAdd命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param member
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long sAdd(int dbIndex, K key, V member, long expireSeconds);
+	public <K, V> Long sAdd(String dbName, K key, V member, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行sAdd命令
@@ -90,23 +90,23 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sAdd命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Long sAdd(int dbIndex, K key, V[] members);
+	public <K, V> Long sAdd(String dbName, K key, V[] members);
 	
 	/**
 	 * 在指定索引库中执行sAdd命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param members
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long sAdd(int dbIndex, K key, V[] members, long expireSeconds);
+	public <K, V> Long sAdd(String dbName, K key, V[] members, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行sAdd命令
@@ -130,23 +130,23 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sAdd命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Long sAdd(int dbIndex, K key, Collection<V> members);
+	public <K, V> Long sAdd(String dbName, K key, Collection<V> members);
 	
 	/**
 	 * 在指定索引库中执行sAdd命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param members
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long sAdd(int dbIndex, K key, Collection<V> members, long expireSeconds);
+	public <K, V> Long sAdd(String dbName, K key, Collection<V> members, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行sCard命令，获取集合键对应的元素个数
@@ -159,11 +159,11 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sCard命令，获取集合键对应的元素个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K> Long sCard(int dbIndex, K key);
+	public <K> Long sCard(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行sDiff命令，获取多个键集之间的差集
@@ -176,11 +176,11 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sDiff命令，获取多个键集之间的差集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K, V> Set<V> sDiff(int dbIndex, K[] keys);
+	public <K, V> Set<V> sDiff(String dbName, K[] keys);
 	
 	/**
 	 * 在当前库中执行sDiff命令，获取多个键集之间的差集
@@ -193,11 +193,11 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sDiff命令，获取多个键集之间的差集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K, V> Set<V> sDiff(int dbIndex, Collection<K> keys);
+	public <K, V> Set<V> sDiff(String dbName, Collection<K> keys);
 	
 	/**
 	 * 在当前库中执行sDiffStore命令，将返回的差集存入指定的目标键
@@ -222,24 +222,24 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sDiffStore命令，将返回的差集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long sDiffStore(int dbIndex, K destKey, K[] keys);
+	public <K> Long sDiffStore(String dbName, K destKey, K[] keys);
 	
 	/**
 	 * 在指定索引库中执行sDiffStore命令，
 	 * 				将返回的差集存入指定的目标键，并设置过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K> Long sDiffStore(int dbIndex, K destKey, K[] keys, long expireSeconds);
+	public <K> Long sDiffStore(String dbName, K destKey, K[] keys, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行sDiffStore命令，将返回的差集存入指定的目标键
@@ -264,24 +264,24 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sDiffStore命令，将返回的差集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long sDiffStore(int dbIndex, K destKey, Collection<K> keys);
+	public <K> Long sDiffStore(String dbName, K destKey, Collection<K> keys);
 	
 	/**
 	 * 在当前库中执行sDiffStore命令，
 	 * 				将返回的差集存入指定的目标键，并设置过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K> Long sDiffStore(int dbIndex, K destKey, Collection<K> keys, long expireSeconds);
+	public <K> Long sDiffStore(String dbName, K destKey, Collection<K> keys, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行sInter命令，获取多个键集之间的交集
@@ -294,11 +294,11 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sInter命令，获取多个键集之间的交集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K, V> Set<V> sInter(int dbIndex, K[] keys);
+	public <K, V> Set<V> sInter(String dbName, K[] keys);
 	
 	/**
 	 * 在当前库中执行sInter命令，获取多个键集之间的交集
@@ -311,11 +311,11 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sInter命令，获取多个键集之间的交集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K, V> Set<V> sInter(int dbIndex, Collection<K> keys);
+	public <K, V> Set<V> sInter(String dbName, Collection<K> keys);
 	
 	/**
 	 * 在当前库中执行sInterStore命令，将返回的交集存入指定的目标键
@@ -340,24 +340,24 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sInterStore命令，将返回的交集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long sInterStore(int dbIndex, K destKey, K[] keys);
+	public <K> Long sInterStore(String dbName, K destKey, K[] keys);
 	
 	/**
 	 * 在指定索引库中执行sInterStore命令，
 	 * 				将返回的交集存入指定的目标键，并设置过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K> Long sInterStore(int dbIndex, K destKey, K[] keys, long expireSeconds);
+	public <K> Long sInterStore(String dbName, K destKey, K[] keys, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行sInterStore命令，将返回的交集存入指定的目标键
@@ -382,24 +382,24 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sInterStore命令，将返回的交集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long sInterStore(int dbIndex, K destKey, Collection<K> keys);
+	public <K> Long sInterStore(String dbName, K destKey, Collection<K> keys);
 	
 	/**
 	 * 在指定索引库中执行sInterStore命令，
 	 * 				将返回的交集存入指定的目标键，并设置过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K> Long sInterStore(int dbIndex, K destKey, Collection<K> keys, long expireSeconds);
+	public <K> Long sInterStore(String dbName, K destKey, Collection<K> keys, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行sUnion命令，获取多个键集之间的并集
@@ -412,11 +412,11 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sUnion命令，获取多个键集之间的并集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K, V> Set<V> sUnion(int dbIndex, K[] keys);
+	public <K, V> Set<V> sUnion(String dbName, K[] keys);
 	
 	/**
 	 * 在当前库中执行sInter命令，获取多个键集之间的并集
@@ -429,11 +429,11 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sInter命令，获取多个键集之间的并集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param keys
 	 * @return
 	 */
-	public <K, V> Set<V> sUnion(int dbIndex, Collection<K> keys);
+	public <K, V> Set<V> sUnion(String dbName, Collection<K> keys);
 	
 	/**
 	 * 在当前库中执行sUnionStore命令，将返回的并集存入指定的目标键
@@ -458,24 +458,24 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sUnionStore命令，将返回的并集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long sUnionStore(int dbIndex, K destKey, K[] keys);
+	public <K> Long sUnionStore(String dbName, K destKey, K[] keys);
 	
 	/**
 	 * 在指定索引库中执行sUnionStore命令，
 	 * 				将返回的并集存入指定的目标键，并设置过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K> Long sUnionStore(int dbIndex, K destKey, K[] keys, long expireSeconds);
+	public <K> Long sUnionStore(String dbName, K destKey, K[] keys, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行sUnionStore命令，将返回的并集存入指定的目标键
@@ -500,24 +500,24 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sUnionStore命令，将返回的并集存入指定的目标键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long sUnionStore(int dbIndex, K destKey, Collection<K> keys);
+	public <K> Long sUnionStore(String dbName, K destKey, Collection<K> keys);
 	
 	/**
 	 * 在指定索引库中执行sUnionStore命令，
 	 * 				将返回的并集存入指定的目标键，并设置过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K> Long sUnionStore(int dbIndex, K destKey, Collection<K> keys, long expireSeconds);
+	public <K> Long sUnionStore(String dbName, K destKey, Collection<K> keys, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行sIsMember命令，判断集合键中是否存在指定的成员元素
@@ -531,12 +531,12 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sIsMember命令，判断集合键中是否存在指定的成员元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Boolean sIsMember(int dbIndex, K key, V member);
+	public <K, V> Boolean sIsMember(String dbName, K key, V member);
 	
 	/**
 	 * 在当前库中执行sMembers命令，获取集合键对应的所有成员元素
@@ -549,11 +549,11 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sMembers命令，获取集合键对应的所有成员元素
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, V> Set<V> sMembers(int dbIndex, K key);
+	public <K, V> Set<V> sMembers(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行sMove命令，将源集合键指定的成员移到目标集合键中
@@ -568,13 +568,13 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sMove命令，将源集合键指定的成员移到目标集合键中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param srcKey
 	 * @param destKey
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Boolean sMove(int dbIndex, K srcKey, K destKey, V member);
+	public <K, V> Boolean sMove(String dbName, K srcKey, K destKey, V member);
 	
 	/**
 	 * 在当前库中执行sPop命令，删除并返回集合键中的一个随机成员
@@ -587,11 +587,11 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sPop命令，删除并返回集合键中的一个随机成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, V> V sPop(int dbIndex, K key);
+	public <K, V> V sPop(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行sRandMember命令，获取集合键中的一个随机成员
@@ -604,11 +604,11 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sRandMember命令，获取集合键中的一个随机成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, V> V sRandMember(int dbIndex, K key);
+	public <K, V> V sRandMember(String dbName, K key);
 	
 	/**
 	 * 在当前库中执行sRem命令，删除集合键中指定的一个成员
@@ -622,12 +622,12 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sRem命令，删除集合键中指定的一个成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Long sRem(int dbIndex, K key, V member);
+	public <K, V> Long sRem(String dbName, K key, V member);
 	
 	/**
 	 * 在当前库中执行sRem命令，删除集合键中指定的多个成员
@@ -641,12 +641,12 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sRem命令，删除集合键中指定的多个成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Long sRem(int dbIndex, K key, V[] members);
+	public <K, V> Long sRem(String dbName, K key, V[] members);
 	
 	/**
 	 * 在当前库中执行sRem命令，删除集合键中指定的多个成员
@@ -660,11 +660,11 @@ public interface RedisSetCommands {
 	/**
 	 * 在指定索引库中执行sRem命令，删除集合键中指定的多个成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
+	 * @param dbName
 	 * @param key
 	 * @param members
 	 * @return
 	 */
-	public <K, V> Long sRem(int dbIndex, K key, Collection<V> members);
+	public <K, V> Long sRem(String dbName, K key, Collection<V> members);
 	
 }
