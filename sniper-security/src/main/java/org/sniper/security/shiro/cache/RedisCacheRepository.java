@@ -41,8 +41,8 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 	/** 名称 */
 	private String name;
 	
-	/** 存储缓存数据的库索引 */
-	private int dbIndex;
+	/** 存储缓存数据的库名称 */
+	private String dbName;
 	
 	/** Redis命令行Dao接口 */
 	private RedisCommandsDao redisCommandsDao;
@@ -67,12 +67,12 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 		this.name = name;
 	}
 
-	public int getDbIndex() {
-		return dbIndex;
+	public String getDbName() {
+		return dbName;
 	}
 
-	public void setDbIndex(int dbIndex) {
-		this.dbIndex = dbIndex;
+	public void setDbName(String dbName) {
+		this.dbName = dbName;
 	}
 
 	public RedisCommandsDao getRedisCommandsDao() {
@@ -91,27 +91,27 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 
 	@Override
 	public V get(K key) throws CacheException {
-		return redisCommandsDao.get(dbIndex, getPrefix() + key);
+		return redisCommandsDao.get(dbName, getPrefix() + key);
 	}
 
 	@Override
 	public V put(K key, V value) throws CacheException {
 		V v = get(key);
-		redisCommandsDao.set(dbIndex, getPrefix() + key, value);
+		redisCommandsDao.set(dbName, getPrefix() + key, value);
 		return v;
 	}
 
 	@Override
 	public V remove(K key) throws CacheException {
 		V v = get(key);
-		redisCommandsDao.del(dbIndex, getPrefix() + key);
+		redisCommandsDao.del(dbName, getPrefix() + key);
 		return v;
 	}
 
 	@Override
 	public void clear() throws CacheException {
-		Set<Object> keys = redisCommandsDao.keys(dbIndex, getPrefix() + "*");
-		redisCommandsDao.del(dbIndex, keys);
+		Set<Object> keys = redisCommandsDao.keys(dbName, getPrefix() + "*");
+		redisCommandsDao.del(dbName, keys);
 	}
 
 	@Override
@@ -121,12 +121,12 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 
 	@Override
 	public Set<K> keys() {
-		return redisCommandsDao.keys(dbIndex, getPrefix() + "*");
+		return redisCommandsDao.keys(dbName, getPrefix() + "*");
 	}
 
 	@Override
 	public Collection<V> values() {
-		return redisCommandsDao.values(dbIndex, getPrefix() + "*");
+		return redisCommandsDao.values(dbName, getPrefix() + "*");
 	}
 	
 	@SuppressWarnings("unchecked")

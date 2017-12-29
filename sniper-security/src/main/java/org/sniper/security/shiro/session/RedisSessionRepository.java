@@ -40,8 +40,8 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 	/** Session前缀标识 */
 	private String prefix;
 	
-	/** 存储会话数据的库索引 */
-	private int dbIndex;
+	/** 存储会话数据的库名称 */
+	private String dbName;
 		
 	private RedisCommandsDao redisCommandsDao;
 	
@@ -57,12 +57,12 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 		this.prefix = prefix;
 	}
 
-	public int getDbIndex() {
-		return dbIndex;
+	public String getDbName() {
+		return dbName;
 	}
 
-	public void setDbIndex(int dbIndex) {
-		this.dbIndex = dbIndex;
+	public void setDbName(String dbName) {
+		this.dbName = dbName;
 	}
 
 	public RedisCommandsDao getRedisCommandsDao() {
@@ -85,21 +85,21 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 			((SimpleSession) session).setStopTimestamp(null);
 		
 		String sessionId = getPrefix() + session.getId();
-		redisCommandsDao.set(dbIndex, sessionId, session);
+		redisCommandsDao.set(dbName, sessionId, session);
 		logger.debug("Set session id:" + sessionId);
 	}
 
 	@Override
 	public void deleteSession(Serializable sessionId) {
 		String cacheSessionId = getPrefix() + sessionId;
-		redisCommandsDao.del(dbIndex, new Serializable[] { cacheSessionId });
+		redisCommandsDao.del(dbName, new Serializable[] { cacheSessionId });
 		logger.debug("Delete session id:" + cacheSessionId);
 	}
 
 	@Override
 	public Session getSession(Serializable sessionId) {
 		String cacheSessionId = getPrefix() + sessionId;
-		Session session = redisCommandsDao.get(dbIndex, cacheSessionId);
+		Session session = redisCommandsDao.get(dbName, cacheSessionId);
 		logger.debug("Get session id:" + cacheSessionId);
 		return session;
 	}
@@ -107,7 +107,7 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 	@Override
 	public Collection<Session> getAllSessions() {
 		String keys = getPrefix() + "*";
-		Collection<Session> sessions = redisCommandsDao.values(dbIndex, keys);
+		Collection<Session> sessions = redisCommandsDao.values(dbName, keys);
 		logger.debug("Get all session keys:" + keys);
 		return sessions;
 	}
