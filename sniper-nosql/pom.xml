@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
-			<version>1.1.0.RELEASE</version>
+			<version>1.6.1.RELEASE</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -106,6 +106,12 @@
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-test</artifactId>
 			<version>${sniper.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.6</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

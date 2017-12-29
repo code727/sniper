@@ -7,6 +7,7 @@ package org.sniper.beans.test;
 
 import org.junit.Test;
 import org.sniper.beans.BeanUtils;
+import org.sniper.test.domain.User;
 
 /**
  * JAVA Bean工具测试类

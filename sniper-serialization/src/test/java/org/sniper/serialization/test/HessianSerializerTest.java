@@ -16,7 +16,7 @@
  * Create Date : 2017年12月11日
  */
 
-package org.sniper.serialization.test.serializer;
+package org.sniper.serialization.test;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,7 +25,7 @@ import org.junit.Test;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.IOUtils;
 import org.sniper.serialization.hessian.HessianSerializer;
-import org.sniper.serialization.test.domain.User;
+import org.sniper.test.domain.User;
 
 /**
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>

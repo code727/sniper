@@ -24,6 +24,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisSentinelConnection;
 
 /**
  * 多路由RedisConnectionFactory抽象类
@@ -77,7 +78,17 @@ public abstract class AbstractRoutingConnectionFactory implements InitializingBe
 	public RedisConnection getConnection() {
 		return this.determineTargetConnectionFactory().getConnection();
 	}
-		
+	
+	/**
+	 * 获取目标RedisSentinelConnection对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	@Override
+	public RedisSentinelConnection getSentinelConnection() {
+		return this.determineTargetConnectionFactory().getSentinelConnection();
+	}
+	
 	@Override
 	public boolean getConvertPipelineAndTxResults() {
 		return this.determineTargetConnectionFactory().getConvertPipelineAndTxResults();

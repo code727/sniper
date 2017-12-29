@@ -16,15 +16,15 @@
  * Create Date : 2017-10-17
  */
 
-package org.sniper.serialization.test.serializer.json;
+package org.sniper.serialization.test.json;
 
 import org.junit.Test;
 import org.sniper.serialization.json.FastJsonSerializer;
 import org.sniper.serialization.json.JsonLibSerializer;
 import org.sniper.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
 import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
-import org.sniper.serialization.test.domain.User;
-import org.sniper.serialization.test.serializer.AbstractSerializerTest;
+import org.sniper.serialization.test.AbstractSerializerTest;
+import org.sniper.test.domain.User;
 
 /**
  * JSON序列化器单元测试类

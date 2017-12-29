@@ -16,7 +16,7 @@
  * Create Date : 2016-7-11
  */
 
-package org.sniper.serialization.test.serializer;
+package org.sniper.serialization.test;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,7 +27,7 @@ import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.IOUtils;
 import org.sniper.serialization.Serializer;
 import org.sniper.serialization.jdk.JdkSerializer;
-import org.sniper.serialization.test.domain.User;
+import org.sniper.test.domain.User;
 
 /**
  * JDK原生序列器单元测试类O

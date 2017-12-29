@@ -16,7 +16,7 @@
  * Create Date : 2016年7月11日
  */
 
-package org.sniper.serialization.test.serializer;
+package org.sniper.serialization.test;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.serialization.test.domain.User;
+import org.sniper.test.domain.User;
 import org.sniper.test.junit.BaseTestCase;
 
 /**

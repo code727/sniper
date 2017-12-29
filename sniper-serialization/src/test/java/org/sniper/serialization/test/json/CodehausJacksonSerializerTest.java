@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016-7-13
+ * Create Date : 2016-7-12
  */
 
-package org.sniper.serialization.test.serializer.json;
+package org.sniper.serialization.test.json;
 
 import java.util.List;
 import java.util.Map;
@@ -24,31 +24,31 @@ import java.util.Set;
 
 import org.junit.Test;
 import org.sniper.commons.util.ObjectUtils;
-import org.sniper.serialization.json.FastJsonSerializer;
-import org.sniper.serialization.test.domain.User;
-import org.sniper.serialization.test.serializer.AbstractSerializerTest;
+import org.sniper.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
+import org.sniper.serialization.test.AbstractSerializerTest;
+import org.sniper.test.domain.User;
 
 /**
- * 阿里FastJson序列化器单元测试类
+ * Jackson序列化器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FastJsonSerializerTest extends AbstractSerializerTest {
+public class CodehausJacksonSerializerTest extends AbstractSerializerTest {
 	
-	private FastJsonSerializer fastJsonSerializer;
+	private CodehausJacksonSerializer codehausJacksonSerializer;
 	
-	public FastJsonSerializerTest() {
-		this.fastJsonSerializer = new FastJsonSerializer();
+	public CodehausJacksonSerializerTest() {
+		this.codehausJacksonSerializer = new CodehausJacksonSerializer();
 	}
-
+	
 	/**
 	 * 单值测试
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws Exception
 	 */
-	@Test
+//	@Test
 	public void singleValueTest() throws Exception {
-		String json = fastJsonSerializer.serializeToString(user);
+		String json = codehausJacksonSerializer.serializeToString(user);
 		System.out.println("----------------------------JSON------------------------");
 		System.out.println(json);
 		
@@ -56,53 +56,53 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 		
 		System.out.println("--------------------------Deserialize--------------------");
 		// LinkedHashMap
-		deserializeResult = fastJsonSerializer.deserialize(json);
+		deserializeResult = codehausJacksonSerializer.deserialize(json);
 		System.out.println("Default type -> " + deserializeResult.getClass());
 		
 		// LinkedHashMap
-		deserializeResult = fastJsonSerializer.deserialize(json, null);
+		deserializeResult = codehausJacksonSerializer.deserialize(json, null);
 		System.out.println("Null type -> " + deserializeResult.getClass());
 		
 		// LinkedHashMap
-		deserializeResult = fastJsonSerializer.deserialize(json, Object.class);
+		deserializeResult = codehausJacksonSerializer.deserialize(json, Object.class);
 		System.out.println("Object type -> " + deserializeResult.getClass());
 		
 		// LinkedHashMap
-		deserializeResult = fastJsonSerializer.deserialize(json, Map.class);
+		deserializeResult = codehausJacksonSerializer.deserialize(json, Map.class);
 		System.out.println("Map type -> " + deserializeResult.getClass());
 		
 		// User
-		deserializeResult = fastJsonSerializer.deserialize(json, User.class);
+		deserializeResult = codehausJacksonSerializer.deserialize(json, User.class);
 		System.out.println("Java bean type - > " + deserializeResult.getClass());
 		
 		// Object[LinkedHashMap]
-		deserializeResult = fastJsonSerializer.deserialize(json, Object[].class);
+		deserializeResult = codehausJacksonSerializer.deserialize(json, Object[].class);
 		System.out.println("Object array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("Object array element type -> " + ((Object[])deserializeResult)[0].getClass());
 		
 		// Map[LinkedHashMap]
-		deserializeResult = fastJsonSerializer.deserialize(json, Map[].class);
+		deserializeResult = codehausJacksonSerializer.deserialize(json, Map[].class);
 		System.out.println("Map array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("Map array element type -> " + ((Object[])deserializeResult)[0].getClass());
 		
 		// User[]
-		deserializeResult = fastJsonSerializer.deserialize(json, User[].class);
+		deserializeResult = codehausJacksonSerializer.deserialize(json, User[].class);
 		System.out.println("Java bean array type - > " + deserializeResult.getClass());
 		
 		// List<LinkedHashMap>
-		deserializeResult = fastJsonSerializer.deserialize(json, List.class);
+		deserializeResult = codehausJacksonSerializer.deserialize(json, List.class);
 		System.out.println("List type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
 //
 		// Set<LinkedHashMap>
-		deserializeResult = fastJsonSerializer.deserialize(json, Set.class);
+		deserializeResult = codehausJacksonSerializer.deserialize(json, Set.class);
 		System.out.println("Set type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("Set element type -> " + ((Set<?>)deserializeResult).iterator().next().getClass());
 	}
 	
-//	@Test
+	@Test
 	public void multiValueTest() throws Exception {
-		String jsonArray = fastJsonSerializer.serializeToString(list);
+		String jsonArray = codehausJacksonSerializer.serializeToString(list);
 		System.out.println("----------------------------JSON------------------------");
 		System.out.println(jsonArray);
 		
@@ -110,52 +110,52 @@ public class FastJsonSerializerTest extends AbstractSerializerTest {
 		System.out.println("--------------------------Deserialize--------------------");
 		
 		// List<LinkedHashMap>
-		deserializeResult = fastJsonSerializer.deserialize(jsonArray);
+		deserializeResult = codehausJacksonSerializer.deserialize(jsonArray);
 		System.out.println("Default type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
 		
 		// List<LinkedHashMap>
-		deserializeResult = fastJsonSerializer.deserialize(jsonArray, null);
+		deserializeResult = codehausJacksonSerializer.deserialize(jsonArray, null);
 		System.out.println("Null type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
 		
 		// List<LinkedHashMap>
-		deserializeResult = fastJsonSerializer.deserialize(jsonArray, Object.class);
+		deserializeResult = codehausJacksonSerializer.deserialize(jsonArray, Object.class);
 		System.out.println("Object type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
 		
 		// List<LinkedHashMap>
-		deserializeResult = fastJsonSerializer.deserialize(jsonArray, Map.class);
+		deserializeResult = codehausJacksonSerializer.deserialize(jsonArray, Map.class);
 		System.out.println("Map type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("Map element type -> " + ((List<?>)deserializeResult).get(0).getClass());
 		
 		// List<User>
-		deserializeResult = fastJsonSerializer.deserialize(jsonArray, User.class);
+		deserializeResult = codehausJacksonSerializer.deserialize(jsonArray, User.class);
 		System.out.println("Java bean type - > " + deserializeResult.getClass());
 		
 		// Object[LinkedHashMap]
-		deserializeResult = fastJsonSerializer.deserialize(jsonArray, Object[].class);
+		deserializeResult = codehausJacksonSerializer.deserialize(jsonArray, Object[].class);
 		System.out.println("Object array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("Object array element type -> " + ((Object[])deserializeResult)[0].getClass());
 		
 		// Map[LinkedHashMap]
-		deserializeResult = fastJsonSerializer.deserialize(jsonArray, Map[].class);
+		deserializeResult = codehausJacksonSerializer.deserialize(jsonArray, Map[].class);
 		System.out.println("Map array type -> " + deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("Map array element type -> " + ((Map[])deserializeResult)[0].getClass());
 		
 		// User[]
-		deserializeResult = fastJsonSerializer.deserialize(jsonArray, User[].class);
+		deserializeResult = codehausJacksonSerializer.deserialize(jsonArray, User[].class);
 		System.out.println("Java bean array type - > " + deserializeResult.getClass());
 		
 		// List<LinkedHashMap>
-		deserializeResult = fastJsonSerializer.deserialize(jsonArray, List.class);
+		deserializeResult = codehausJacksonSerializer.deserialize(jsonArray, List.class);
 		System.out.println("List type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("List element type -> " + ((List<?>)deserializeResult).get(0).getClass());
 		
 		// Set<LinkedHashMap>
-		deserializeResult = fastJsonSerializer.deserialize(jsonArray, Set.class);
+		deserializeResult = codehausJacksonSerializer.deserialize(jsonArray, Set.class);
 		System.out.println("Set type -> " +  deserializeResult.getClass() + "(size=" + ObjectUtils.count(deserializeResult) + ")");
 		System.out.println("Set element type -> " + ((Set<?>)deserializeResult).iterator().next().getClass());
 	}
-
+		
 }

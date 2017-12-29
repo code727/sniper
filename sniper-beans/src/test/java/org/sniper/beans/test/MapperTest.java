@@ -33,6 +33,7 @@ import org.sniper.beans.parameter.DefaultParameters;
 import org.sniper.beans.parameter.Parameters;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.test.domain.User;
 import org.sniper.test.junit.BaseTestCase;
 
 /**

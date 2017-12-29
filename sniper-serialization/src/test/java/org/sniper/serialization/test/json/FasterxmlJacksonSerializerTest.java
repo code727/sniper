@@ -16,7 +16,7 @@
  * Create Date : 2017-4-1
  */
 
-package org.sniper.serialization.test.serializer.json;
+package org.sniper.serialization.test.json;
 
 import java.util.List;
 import java.util.Map;
@@ -25,8 +25,8 @@ import java.util.Set;
 import org.junit.Test;
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerializer;
-import org.sniper.serialization.test.domain.User;
-import org.sniper.serialization.test.serializer.AbstractSerializerTest;
+import org.sniper.serialization.test.AbstractSerializerTest;
+import org.sniper.test.domain.User;
 
 /**
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
