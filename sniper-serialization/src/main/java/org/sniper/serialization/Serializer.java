@@ -51,5 +51,12 @@ public interface Serializer {
 	 * @throws SerializationException
 	 */
 	public <T> T deserialize(byte[] bytes) throws SerializationException;
+	
+	/**
+	 * 判断是否为类型化序列器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean isTypedSerializer();
 		
 }

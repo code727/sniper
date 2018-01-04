@@ -284,7 +284,7 @@ public interface RedisStringCommands {
 	public <K, V> Long append(String dbName, K key, V value, long expireSeconds);
 	
 	/**
-	 * 在当前库中执行get命令
+	 * 在当前库中执行get命令，获取指定键对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -292,7 +292,16 @@ public interface RedisStringCommands {
 	public <K, V> V get(K key);
 	
 	/**
-	 * 在指定索引库中执行get命令
+	 * 在当前库中执行get命令，获取指定键对应类型的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> V get(K key, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行get命令，获取指定键对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -301,7 +310,17 @@ public interface RedisStringCommands {
 	public <K, V> V get(String dbName, K key);
 	
 	/**
-	 * 在当前库中执行getRange命令
+	 * 在指定库中执行get命令，获取指定键对应类型的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> V get(String dbName, K key, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行getRange命令，获取begin至end之间的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -311,7 +330,18 @@ public interface RedisStringCommands {
 	public <K, V> V getRange(K key, long begin, long end);
 	
 	/**
-	 * 在指定索引库中执行getRange命令
+	 * 在当前库中执行getRange命令，获取begin至end之间的类型值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> V getRange(K key, long begin, long end, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行getRange命令，获取begin至end之间的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -322,36 +352,80 @@ public interface RedisStringCommands {
 	public <K, V> V getRange(String dbName, K key, long begin, long end);
 	
 	/**
-	 * 在当前库中执行getSet命令
+	 * 在指定库中执行getRange命令，获取begin至end之间的类型值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> V getRange(String dbName, K key, long begin, long end, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行getSet命令，设置键值对后返回键对应的旧值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
-	 * @return 键对应的旧值
+	 * @return 
 	 */
-	public <K, V> V getSet(K key, V value);
+	public <K, V, O> O getSet(K key, V value);
 	
 	/**
-	 * 在当前库中执行getSet命令，并设置过期秒数
+	 * 在当前库中执行getSet命令，设置键值对后返回键对应类型的旧值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 * @param oldValueType
+	 * @return
+	 */
+	public <K, V, O> O getSet(K key, V value, Class<O> oldValueType);
+	
+	/**
+	 * 在当前库中执行getSet命令，设置具有时效的键值对后返回键对应的旧值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> V getSet(K key, V value, long expireSeconds);
+	public <K, V, O> O getSet(K key, V value, long expireSeconds);
 	
 	/**
-	 * 在指定索引库中执行getSet命令
+	 * 在当前库中执行getSet命令，设置具有时效的键值对后返回键对应类型的旧值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 * @param expireSeconds
+	 * @param oldValueType
+	 * @return
+	 */
+	public <K, V, O> O getSet(K key, V value, long expireSeconds, Class<O> oldValueType);
+	
+	/**
+	 * 在指定库中执行getSet命令，设置键值对后返回键对应的旧值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
 	 * @param value
-	 * @return 键对应的旧值
+	 * @return 
 	 */
-	public <K, V> V getSet(String dbName, K key, V value);
+	public <K, V, O> O getSet(String dbName, K key, V value);
 	
 	/**
-	 * 在指定索引库中执行getSet命令，并设置过期秒数
+	 * 在指定库中执行getSet命令，设置键值对后返回键对应类型的旧值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param value
+	 * @param oldValueType
+	 * @return
+	 */
+	public <K, V, O> O getSet(String dbName, K key, V value, Class<O> oldValueType);
+	
+	/**
+	 * 在指定库中执行getSet命令，设置具有时效的键值对后返回键对应的旧值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -359,10 +433,58 @@ public interface RedisStringCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> V getSet(String dbName, K key, V value, long expireSeconds);
+	public <K, V, O> O getSet(String dbName, K key, V value, long expireSeconds);
 	
 	/**
-	 * 在当前库中执行mGet命令
+	 * 在指定库中执行getSet命令，设置具有时效的键值对后返回键对应类型的旧值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param value
+	 * @param expireSeconds
+	 * @param oldValueType
+	 * @return
+	 */
+	public <K, V, O> O getSet(String dbName, K key, V value, long expireSeconds, Class<O> oldValueType);
+	
+	/**
+	 * 在当前库中执行mGet命令，批量获取多个键对应的值列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param keys
+	 * @return
+	 */
+	public <K, V> List<V> mGet(Collection<K> keys);
+	
+	/**
+	 * 在当前库中执行mGet命令，批量获取多个键对应类型的值列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param keys
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> List<V> mGet(Collection<K> keys, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行mGet命令，批量获取多个键对应的值列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param keys
+	 * @return
+	 */
+	public <K, V> List<V> mGet(String dbName, Collection<K> keys);
+	
+	/**
+	 * 在指定库中执行mGet命令，批量获取多个键对应的值列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param keys
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> List<V> mGet(String dbName, Collection<K> keys, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行mGet命令，批量获取多个键对应的值列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keys
 	 * @return
@@ -370,7 +492,16 @@ public interface RedisStringCommands {
 	public <K, V> List<V> mGet(K[] keys);
 	
 	/**
-	 * 在指定索引库中执行mGet命令
+	 * 在当前库中执行mGet命令，批量获取多个键对应类型的值列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param keys
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> List<V> mGet(K[] keys, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行mGet命令，批量获取多个键对应的值列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param keys
@@ -379,21 +510,14 @@ public interface RedisStringCommands {
 	public <K, V> List<V> mGet(String dbName, K[] keys);
 	
 	/**
-	 * 在当前库中执行mGet命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keys
-	 * @return
-	 */
-	public <K, V> List<V> mGet(Collection<K> keys);
-	
-	/**
-	 * 在指定索引库中执行mGet命令
+	 * 在指定库中执行mGet命令，批量获取多个键对应类型的值列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param keys
+	 * @param valueType
 	 * @return
 	 */
-	public <K, V> List<V> mGet(String dbName, Collection<K> keys);
+	public <K, V> List<V> mGet(String dbName, K[] keys, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行strLen命令，获取键对应的字符串值的长度

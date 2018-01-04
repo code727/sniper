@@ -32,5 +32,10 @@ public abstract class AbstractSerializer extends CodecSupport implements Seriali
 	public <T> String serializeToString(T t) throws SerializationException {
 		return Base64Utils.encode(serialize(t));
 	}
+	
+	@Override
+	public boolean isTypedSerializer() {
+		return this instanceof TypedSerializer;
+	}
 
 }

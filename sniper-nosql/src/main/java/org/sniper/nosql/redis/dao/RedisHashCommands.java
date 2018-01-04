@@ -52,7 +52,7 @@ public interface RedisHashCommands {
 	public <K, F, V> Boolean hSet(K key, F field, V value, long expireSeconds);
 	
 	/**
-	 * 在指定索引库中执行hSet命令
+	 * 在指定库中执行hSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key 键
@@ -96,7 +96,7 @@ public interface RedisHashCommands {
 	public <K, F, V> Boolean hSetNX(K key, F field, V value, long expireSeconds);
 	
 	/**
-	 * 在指定索引库中执行hSetNX命令
+	 * 在指定库中执行hSetNX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key 键
@@ -107,7 +107,7 @@ public interface RedisHashCommands {
 	public <K, F, V> Boolean hSetNX(String dbName, K key, F field, V value);
 	
 	/**
-	 * 在指定索引库中执行hSetNX命令，并设置过期秒数
+	 * 在指定库中执行hSetNX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -136,7 +136,7 @@ public interface RedisHashCommands {
 	public <K, F, V> void hMSet(K key, Map<F, V> fValues, long expireSeconds);
 	
 	/**
-	 * 在指定索引库中执行hMSet命令
+	 * 在指定库中执行hMSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key 键
@@ -164,7 +164,7 @@ public interface RedisHashCommands {
 	public <K, F> Long hDel(K key, F filed);
 	
 	/**
-	 * 删除指定库键对应的域值
+	 * 在指定库删除键对应的域值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -231,7 +231,7 @@ public interface RedisHashCommands {
 	public <K, F> Boolean hExists(String dbName, K key, F filed);
 	
 	/**
-	 * 在当前库中执行hGet命令
+	 * 在当前库中执行hGet命令，获取哈希键中指定的域值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param filed
@@ -240,7 +240,17 @@ public interface RedisHashCommands {
 	public <K, F, V> V hGet(K key, F filed);
 	
 	/**
-	 * 在指定库中执行hGet命令
+	 * 在当前库中执行hGet命令，获取哈希键中指定类型的域值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param filed
+	 * @param valueType
+	 * @return
+	 */
+	public <K, F, V> V hGet(K key, F filed, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行hGet命令，获取哈希键中指定的域值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -248,6 +258,17 @@ public interface RedisHashCommands {
 	 * @return
 	 */
 	public <K, F, V> V hGet(String dbName, K key, F filed);
+	
+	/**
+	 * 在指定库中执行hGet命令，获取哈希键中指定类型的域值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param filed
+	 * @param valueType
+	 * @return
+	 */
+	public <K, F, V> V hGet(String dbName, K key, F filed, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行hGetAll命令

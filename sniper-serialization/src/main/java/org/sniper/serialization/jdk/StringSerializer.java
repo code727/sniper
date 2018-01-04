@@ -45,9 +45,5 @@ public class StringSerializer extends AbstractSerializer {
 	public <T> String serializeToString(T t) throws SerializationException {
 		return ObjectUtils.toString(t);
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(new StringSerializer().serializeToString("杜斌"));
-	}
-			
+				
 }

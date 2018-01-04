@@ -27,11 +27,12 @@ import org.sniper.commons.util.ReflectionUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.dao.RedisDaoSupport;
 import org.sniper.nosql.redis.serializer.SpringRedisSerializerProxy;
+import org.sniper.serialization.Serializer;
+import org.sniper.serialization.TypedSerializer;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
 
 /**
  * Redis数据访问接口支持类
@@ -128,8 +129,9 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 */
 	protected void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keySet, long expireSeconds) {
 		if (expireSeconds > 0) {
-			for (byte[] keyByte : keySet) 
+			for (byte[] keyByte : keySet) {
 				connection.expire(keyByte, expireSeconds);
+			}
 		} else 
 			setExpireTime(connection, repository, keySet);
 	}
@@ -174,15 +176,16 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * @param connection
 	 * @param dbName
 	 * @param targetKey
+	 * @param valueType
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> listByDataType(DataType dataType, RedisConnection connection, String dbName, byte[] targetKey) {
+	protected <V> List<V> listByDataType(DataType dataType, RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
 		try {
 			// 执行当前对象的xxxTypeList方法后返回结果，其中xxx表示DataType枚举的code值
 			return (List<V>) ReflectionUtils.invokeMethod(this, dataType.code() + "TypeList", 
-					new Class<?>[] { RedisConnection.class, String.class, byte[].class },
-					new Object[] { connection, dbName, targetKey });
+					new Class<?>[] { RedisConnection.class, String.class, byte[].class, Class.class},
+					new Object[] { connection, dbName, targetKey, valueType });
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -195,9 +198,10 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * @param connection
 	 * @param dbName
 	 * @param targetKey
+	 * @param valueType
 	 * @return
 	 */
-	protected <V> List<V> noneTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
+	protected <V> List<V> noneTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
 		return null;
 	}
 	
@@ -207,13 +211,18 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * @param connection
 	 * @param dbName
 	 * @param targetKey
+	 * @param valueType
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> stringTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
-		RedisSerializer<V> valueSerializer = (RedisSerializer<V>) selectValueSerializer(dbName);
+	protected <V> List<V> stringTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
+		Serializer valueSerializer = selectValueSerializer(dbName);
 		List<V> result = CollectionUtils.newArrayList();
-		result.add(valueSerializer.deserialize(connection.get(targetKey)));
+		if (valueSerializer.isTypedSerializer()) 
+			result.add(((TypedSerializer) valueSerializer).deserialize(connection.get(targetKey), valueType));
+		else 
+			result.add((V) valueSerializer.deserialize(connection.get(targetKey)));
+		
 		return result;
 	}
 	
@@ -223,10 +232,11 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * @param connection
 	 * @param dbName
 	 * @param targetKey
+	 * @param valueType
 	 * @return
 	 */
-	protected <V> List<V> listTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
-		return deserializeValueByteToList(dbName, connection.lRange(targetKey, 0, -1));
+	protected <V> List<V> listTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
+		return deserializeValueByteToList(dbName, connection.lRange(targetKey, 0, -1), valueType);
 	}
 	
 	/**
@@ -235,10 +245,11 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * @param connection
 	 * @param dbName
 	 * @param targetKey
+	 * @param valueType
 	 * @return
 	 */
-	protected <V> List<V> setTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
-		return deserializeValueByteToList(dbName, connection.sMembers(targetKey));
+	protected <V> List<V> setTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
+		return deserializeValueByteToList(dbName, connection.sMembers(targetKey), valueType);
 	}
 	
 	/**
@@ -247,11 +258,12 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * @param connection
 	 * @param dbName
 	 * @param targetKey
+	 * @param valueType
 	 * @return
 	 */
-	protected <V> List<V> zsetTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
+	protected <V> List<V> zsetTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
 		Set<byte[]> resultBytes = connection.zRange(targetKey, 0, -1);
-		return deserializeValueByteToList(dbName, resultBytes);
+		return deserializeValueByteToList(dbName, resultBytes, valueType);
 	}
 	
 	/**
@@ -260,11 +272,12 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * @param connection
 	 * @param dbName
 	 * @param targetKey
+	 * @param valueType
 	 * @return
 	 */
-	protected <V> List<V> hashTypeList(RedisConnection connection, String dbName, byte[] targetKey) {
+	protected <V> List<V> hashTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
 		// 返回当前键所有域对应的值列表
-		return deserializeHashValueByteToList(dbName, connection.hVals(targetKey));
+		return deserializeHashValueByteToList(dbName, connection.hVals(targetKey), valueType);
 	}
 
 }

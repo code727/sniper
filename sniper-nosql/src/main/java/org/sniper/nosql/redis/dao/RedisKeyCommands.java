@@ -40,12 +40,29 @@ public interface RedisKeyCommands {
 	public <K> Set<K> keys();
 	
 	/**
+	 * 获取当前库中所有指定类型的键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param keyType
+	 * @return
+	 */
+	public <K> Set<K> keys(Class<K> keyType);
+	
+	/**
 	 * 获取指定库中所有的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @return
 	 */
 	public <K> Set<K> keysByName(String dbName);
+	
+	/**
+	 * 获取库中所有指定类型的键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param keyType
+	 * @return
+	 */
+	public <K> Set<K> keysByName(String dbName, Class<K> keyType);
 	
 	/**
 	 * 获取当前库中指定模式的键集
@@ -56,6 +73,15 @@ public interface RedisKeyCommands {
 	public <K> Set<K> keys(String pattern);
 	
 	/**
+	 * 获取当前库中指定模式和类型的键集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pattern
+	 * @param keyType
+	 * @return
+	 */
+	public <K> Set<K> keys(String pattern, Class<K> keyType);
+	
+	/**
 	 * 获取指定库中满足模式的键集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
@@ -63,6 +89,16 @@ public interface RedisKeyCommands {
 	 * @return
 	 */
 	public <K> Set<K> keys(String dbName, String pattern);
+	
+	/**
+	 * 获取指定库中满足模式和类型的键集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param pattern
+	 * @param keyType
+	 * @return
+	 */
+	public <K> Set<K> keys(String dbName, String pattern, Class<K> keyType);
 	
 	/**
 	 * 删除当前库指定的键
@@ -267,6 +303,14 @@ public interface RedisKeyCommands {
 	public <V> Set<V> values();
 	
 	/**
+	 * 获取当前库中所有键对应类型的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param valueType
+	 * @return
+	 */
+	public <V> Set<V> values(Class<V> valueType);
+	
+	/**
 	 * 获取指定库中所有键对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
@@ -275,7 +319,16 @@ public interface RedisKeyCommands {
 	public <V> Set<V> valuesByName(String dbName);
 	
 	/**
-	 * 获取当前库中匹配模式的键对应的值
+	 * 获取指定库中所有键对应类型的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param valueType
+	 * @return
+	 */
+	public <V> Set<V> valuesByName(String dbName, Class<V> valueType);
+	
+	/**
+	 * 获取当前库中匹配模式键对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @return
@@ -283,12 +336,31 @@ public interface RedisKeyCommands {
 	public <V> Set<V> values(String pattern);
 	
 	/**
-	 * 获取指定库中匹配模式的键对应的值
+	 * 获取当前库中匹配模式键对应类型的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pattern
+	 * @param valueType
+	 * @return
+	 */
+	public <V> Set<V> values(String pattern, Class<V> valueType);
+	
+	/**
+	 * 获取指定库中匹配模式键对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param pattern
 	 * @return
 	 */
 	public <V> Set<V> values(String dbName, String pattern);
+	
+	/**
+	 * 获取指定库中匹配模式键对应类型的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param pattern
+	 * @param valueType
+	 * @return
+	 */
+	public <V> Set<V> values(String dbName, String pattern, Class<V> valueType);
 	
 }

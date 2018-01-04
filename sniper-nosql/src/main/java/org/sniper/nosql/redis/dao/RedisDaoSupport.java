@@ -32,6 +32,8 @@ import org.sniper.commons.util.MapUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.RedisRepositoryManager;
 import org.sniper.serialization.Serializer;
+import org.sniper.serialization.TypedSerializer;
+import org.sniper.serialization.jdk.StringSerializer;
 import org.sniper.spring.beans.CheckableInitializingBean;
 
 /**
@@ -49,6 +51,9 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 		
 	/** 默认连接库索引 */
 	protected int defaultDbIndex;
+	
+	/** 全局默认的字符串序列化器 */
+	protected final Serializer stringSerializer = new StringSerializer();
 	
 	/** 全局键序列化器 */
 	private Serializer globalKeySerializer;
@@ -329,14 +334,23 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param valueBytes
+	 * @param valueType
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> deserializeValueByteToList(String dbName, Collection<byte[]> valueBytes) {
+	protected <V> List<V> deserializeValueByteToList(String dbName, Collection<byte[]> valueBytes, Class<V> valueType) {
 		Serializer valueSerializer = selectValueSerializer(dbName);
 		List<V> list = CollectionUtils.newArrayList();
-		for (byte[] valueByte : valueBytes) 
-			list.add((V) valueSerializer.deserialize(valueByte));
+		if (valueSerializer.isTypedSerializer()) {
+			TypedSerializer valueTypedSerializer = (TypedSerializer) valueSerializer;
+			for (byte[] valueByte : valueBytes) {
+				list.add(valueTypedSerializer.deserialize(valueByte, valueType));
+			}
+		} else {
+			for (byte[] valueByte : valueBytes) {
+				list.add((V) valueSerializer.deserialize(valueByte));
+			}
+		}
 		return list;
 	}
 	
@@ -361,14 +375,24 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param hashValueBytes
+	 * @param hashValueType
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> deserializeHashValueByteToList(String dbName, List<byte[]> hashValueBytes) {
+	protected <V> List<V> deserializeHashValueByteToList(String dbName, List<byte[]> hashValueBytes, Class<V> hashValueType) {
 		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
 		List<V> list = CollectionUtils.newArrayList();
-		for (byte[] hashValueByte : hashValueBytes) 
-			list.add((V) hashValueSerializer.deserialize(hashValueByte));
+		
+		if (hashValueSerializer.isTypedSerializer()) {
+			TypedSerializer hashValueTypedSerializer = (TypedSerializer) hashValueSerializer;
+			for (byte[] hashValueByte : hashValueBytes) {
+				list.add(hashValueTypedSerializer.deserialize(hashValueByte, hashValueType));
+			}
+		} else {
+			for (byte[] hashValueByte : hashValueBytes) {
+				list.add((V) hashValueSerializer.deserialize(hashValueByte));
+			}
+		}
 		return list;
 	}
 	
