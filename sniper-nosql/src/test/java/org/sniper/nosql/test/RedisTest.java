@@ -63,24 +63,20 @@ public class RedisTest extends JUnit4SpringTestCase {
 		System.out.println(name);
 		
 		key = "age";
-		int age = 35;
+		int age = 36;
 		redisCommandsDao.set2("k-v-string", key, age);
-		age = redisCommandsDao.get2("k-v-string", key);
+		age = redisCommandsDao.get2("k-v-string", key, Integer.class);
 		System.out.println(age);
 	}
 	
 	@Test
 	public void testKVJson() {
 		String key = "user";
-		String name = "dubin";
+		User value = user;
 		
-		redisCommandsDao.set(key, user);
-		
-		redisCommandsDao.set2("db", key, name);
-		name = redisCommandsDao.get(key, String.class);
-//				
-//		redisCommandsDao.getRange(key, 0, 0, User.class);
-//		System.out.println(jsonSerializer.serializeToString(value));
+		redisCommandsDao.set2("k-v-json", key, value);
+		value = redisCommandsDao.get2("k-v-json", key, User.class);
+		System.out.println(jsonSerializer.serializeToString(value));
 	}
 	
 }

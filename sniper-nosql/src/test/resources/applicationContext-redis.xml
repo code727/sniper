@@ -20,10 +20,8 @@
 			<bean class="org.sniper.serialization.jdk.StringSerializer" />
 		</property>
 		<property name="globalValueSerializer">
-			<bean class="org.sniper.serialization.json.jackson.codehaus.CodehausJacksonSerializer" />
+			<bean class="org.sniper.serialization.jdk.StringSerializer" />
 		</property>
-		<!-- <property name="globalHashKeySerializer" ref="repositoryManager" />
-		<property name="globalHashValueSerializer" ref="repositoryManager" /> -->
 	</bean>
 	
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
@@ -85,7 +83,7 @@
 	</bean>
 	
 	<bean id="k-v-string" class="org.sniper.nosql.redis.RedisRepository">
-		<property name="namespace" value="org.sniper.nosql.redis.test.repository_0" />
+		<property name="namespace" value="org.sniper.nosql.redis.test.repository_0" />		
 		<property name="keySerializer">
 			<bean class="org.sniper.serialization.jdk.StringSerializer" />
 		</property>
@@ -95,7 +93,8 @@
 	</bean>
 	
 	<bean id="k-v-json" class="org.sniper.nosql.redis.RedisRepository">
-		<property name="namespace" value="org.sniper.nosql.redis.test.repository_0" />
+		<property name="namespace" value="org.sniper.nosql.redis.test.repository_1" />
+		<property name="dbIndex" value="1" />
 		<property name="keySerializer">
 			<bean class="org.sniper.serialization.jdk.StringSerializer" />
 		</property>
