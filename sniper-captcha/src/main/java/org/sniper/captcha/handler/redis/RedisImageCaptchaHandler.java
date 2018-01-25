@@ -35,8 +35,7 @@ import org.sniper.captcha.handler.ImageCaptchaHandler;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisImageCaptchaHandler extends RedisCaptchaHandler implements
-		ImageCaptchaHandler {
+public class RedisImageCaptchaHandler extends RedisCaptchaHandler implements ImageCaptchaHandler {
 	
 	/** 图片格式名称 */
 	private String formatName;

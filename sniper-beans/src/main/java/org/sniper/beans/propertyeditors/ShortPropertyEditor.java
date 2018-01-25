@@ -43,7 +43,7 @@ public class ShortPropertyEditor extends AbstractNumberPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return Short.valueOf(text);
+		return Short.parseShort(text);
 	}
 	
 }

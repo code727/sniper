@@ -40,10 +40,10 @@ public class BytePropertyEditor extends AbstractNumberPropertyEditor {
 	public BytePropertyEditor(boolean allowEmpty, String defaultValue) {
 		super(allowEmpty, defaultValue);
 	}
-	
+		
 	@Override
 	protected Object handleText(String text) {
-		return Byte.valueOf(text);
+		return Byte.parseByte(text);
 	}
 	
 }

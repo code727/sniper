@@ -69,7 +69,7 @@ public class TextCaptchaGenerator implements CaptchaGenerator {
 		String content = repository.getContent();
 		int contentLength = content.length();
 		
-		StringBuffer captcha = new StringBuffer();
+		StringBuilder captcha = new StringBuilder(this.length);
 		for (int i = 0; i < this.length; i++)
 			captcha.append(content.charAt(NumberUtils.randomIn(contentLength)));
 		

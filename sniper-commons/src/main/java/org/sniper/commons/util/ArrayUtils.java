@@ -759,7 +759,6 @@ public class ArrayUtils {
 		return joinedArray;
 	}
 	
-				
 	/**
 	 * 将Object类型的元素组添加到原数组后面
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -777,7 +776,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * 将元素添加到原数组的后面
+	 * 将元素添加到数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param element
@@ -787,11 +786,18 @@ public class ArrayUtils {
 		return add(array, element, ClassUtils.getCommonType(array, element));
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static <T> T[] add(Object array, Object element, Class<?> componentType) {
+	/**
+	 * 将指定类型的元素添加到数组中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param element
+	 * @param componentType
+	 * @return
+	 */
+	public static <T> T[] add(Object array, Object element, Class<T> componentType) {
 		Object[] array1 = convertWapperArray(array);
 		Object[] array2 = convertWapperArray(element);
-		return (T[]) copy(array1, array2, componentType != null ? componentType : Object.class);
+		return (T[]) copy(array1, array2, componentType);
 	}
 	
 	/**

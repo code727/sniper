@@ -40,7 +40,7 @@ public class StringPropertyEditor extends AbstractPropertyEditor {
 	public StringPropertyEditor(boolean allowEmpty, String defaultValue) {
 		super(allowEmpty, defaultValue);
 	}
-	
+		
 	/**
 	 * 非空文本的处理方法，返回处理后的结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

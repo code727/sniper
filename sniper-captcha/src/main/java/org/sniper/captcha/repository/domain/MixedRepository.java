@@ -27,12 +27,13 @@ import org.sniper.commons.util.StringUtils;
  */
 public class MixedRepository extends TextRepository {
 	
-	private static final String[] deletedString = new String[]{"0", "o", "O", "1", "l"};
+	private static final String[] deletedString = new String[] { "0", "o", "O", "1", "l" };
 	
 	public MixedRepository() {
 		String content = new NumberRepository().getContent() + new LetterRepository().getContent();
-		for (String ds : deletedString) 
+		for (String ds : deletedString) {
 			content = StringUtils.delete(content, ds);
+		}
 		
 		setContent(content);
 	}

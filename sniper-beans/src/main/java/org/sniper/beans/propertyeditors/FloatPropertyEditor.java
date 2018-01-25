@@ -40,10 +40,10 @@ public class FloatPropertyEditor extends AbstractNumberPropertyEditor {
 	public FloatPropertyEditor(boolean allowEmpty, String defaultValue) {
 		super(allowEmpty, defaultValue);
 	}
-	
+		
 	@Override
 	protected Object handleText(String text) {
-		return Float.valueOf(text);
+		return Float.parseFloat(text);
 	}
 	
 }

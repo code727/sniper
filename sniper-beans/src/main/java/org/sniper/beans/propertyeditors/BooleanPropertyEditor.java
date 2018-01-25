@@ -42,11 +42,10 @@ public class BooleanPropertyEditor extends StringPropertyEditor {
 	public BooleanPropertyEditor(boolean allowEmpty, String defaultValue) {
 		super(allowEmpty, defaultValue);
 	}
-	
+		
 	@Override
 	protected Object handleText(String text) {
-		return BooleanEnum.TRUE.name().equalsIgnoreCase(text) || BooleanEnum.Y.name().equalsIgnoreCase(text)
-				|| String.valueOf(BooleanEnum.TRUE.ordinal()).equals(text);
+		return BooleanEnum.parse(text);
 	}
 	
 }

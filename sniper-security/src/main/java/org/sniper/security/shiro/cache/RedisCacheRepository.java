@@ -25,6 +25,7 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.springframework.beans.factory.InitializingBean;
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.commons.util.StringUtils;
 import org.sniper.nosql.redis.dao.RedisCommandsDao;
 
 /**
@@ -32,8 +33,7 @@ import org.sniper.nosql.redis.dao.RedisCommandsDao;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisCacheRepository<K, V> implements CacheRepository,
-		Cache<K, V>, InitializingBean {
+public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V>, InitializingBean {
 	
 	/** Cache标识前缀 */
 	private String prefix;
@@ -91,13 +91,13 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 
 	@Override
 	public V get(K key) throws CacheException {
-		return redisCommandsDao.get(dbName, getPrefix() + key);
+		return redisCommandsDao.get2(dbName, getPrefix() + key);
 	}
 
 	@Override
 	public V put(K key, V value) throws CacheException {
 		V v = get(key);
-		redisCommandsDao.set(dbName, getPrefix() + key, value);
+		redisCommandsDao.set2(dbName, getPrefix() + key, value);
 		return v;
 	}
 
@@ -110,7 +110,7 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 
 	@Override
 	public void clear() throws CacheException {
-		Set<Object> keys = redisCommandsDao.keys(dbName, getPrefix() + "*");
+		Set<Object> keys = redisCommandsDao.keysByPattern(dbName, getPrefix() + StringUtils.ANY);
 		redisCommandsDao.del(dbName, keys);
 	}
 
@@ -121,12 +121,12 @@ public class RedisCacheRepository<K, V> implements CacheRepository,
 
 	@Override
 	public Set<K> keys() {
-		return redisCommandsDao.keys(dbName, getPrefix() + "*");
+		return redisCommandsDao.keysByPattern(dbName, getPrefix() + StringUtils.ANY);
 	}
 
 	@Override
 	public Collection<V> values() {
-		return redisCommandsDao.values(dbName, getPrefix() + "*");
+		return redisCommandsDao.valuesByPattern(dbName, getPrefix() + StringUtils.ANY);
 	}
 	
 	@SuppressWarnings("unchecked")

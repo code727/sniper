@@ -43,7 +43,7 @@ public class LongPropertyEditor extends AbstractNumberPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return Long.valueOf(text);
+		return Long.parseLong(text);
 	}
 		
 }

@@ -33,8 +33,8 @@ public class RedisCaptchaHandler extends AbstractCaptchaHandler {
 	/** ID前缀标识 */
 	private String prefix;
 	
-	/** 存储会话数据的库索引 */
-	private int dbIndex;
+	/** 存储验证码数据的库索引 */
+	private String dbName;
 		
 	private RedisCommandsDao redisCommandsDao;
 	
@@ -50,12 +50,12 @@ public class RedisCaptchaHandler extends AbstractCaptchaHandler {
 		this.prefix = prefix;
 	}
 
-	public int getDbIndex() {
-		return dbIndex;
+	public String getDbName() {
+		return dbName;
 	}
 
-	public void setDbIndex(int dbIndex) {
-		this.dbIndex = dbIndex;
+	public void setDbName(String dbName) {
+		this.dbName = dbName;
 	}
 
 	public RedisCommandsDao getRedisCommandsDao() {
@@ -74,7 +74,7 @@ public class RedisCaptchaHandler extends AbstractCaptchaHandler {
 	
 	@Override
 	protected void doCreate(Serializable id, String text) {
-		this.redisCommandsDao.set(getPrefix() + id, text);
+		this.redisCommandsDao.set2(dbName, getPrefix() + id, text);
 	}
 
 	@Override
@@ -84,13 +84,13 @@ public class RedisCaptchaHandler extends AbstractCaptchaHandler {
 
 	@Override
 	public String get(Serializable id) {
-		return this.redisCommandsDao.get(getPrefix() + id);
+		return this.redisCommandsDao.get2(dbName, getPrefix() + id);
 	}
 
 	@Override
 	public String detele(Serializable id) {
 		String text = this.get(id);
-		this.redisCommandsDao.del(getPrefix() + id);
+		this.redisCommandsDao.del(dbName, getPrefix() + id);
 		return text;
 	}
 

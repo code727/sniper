@@ -277,7 +277,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 */
 	protected <V> List<V> hashTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
 		// 返回当前键所有域对应的值列表
-		return deserializeHashValueByteToList(dbName, connection.hVals(targetKey), valueType);
+		return deserializeHashValueBytesToList(dbName, connection.hVals(targetKey), valueType);
 	}
 
 }

@@ -40,10 +40,10 @@ public class DoublePropertyEditor extends AbstractNumberPropertyEditor {
 	public DoublePropertyEditor(boolean allowEmpty, String defaultValue) {
 		super(allowEmpty, defaultValue);
 	}
-	
+		
 	@Override
 	protected Object handleText(String text) {
-		return Double.valueOf(text);
+		return Double.parseDouble(text);
 	}
 	
 }

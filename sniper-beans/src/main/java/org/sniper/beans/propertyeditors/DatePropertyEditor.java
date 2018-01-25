@@ -77,7 +77,7 @@ public class DatePropertyEditor extends StringPropertyEditor {
 				setValue(null);
 		}
 	}
-			
+				
 	@Override
 	protected Object handleText(String text) {
 		if (StringUtils.isBlank(text))

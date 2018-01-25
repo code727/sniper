@@ -60,7 +60,7 @@ public interface RedisHashCommands {
 	 * @param value 值
 	 * @return
 	 */
-	public <K, F, V> Boolean hSet(String dbName, K key, F field, V value);
+	public <K, F, V> Boolean hSet2(String dbName, K key, F field, V value);
 	
 	/**
 	 * 在当前库中执行hSet命令，并设置过期秒数
@@ -72,7 +72,7 @@ public interface RedisHashCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, F, V> Boolean hSet(String dbName, K key, F field, V value, long expireSeconds);
+	public <K, F, V> Boolean hSet2(String dbName, K key, F field, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行hSetNX命令
@@ -104,7 +104,7 @@ public interface RedisHashCommands {
 	 * @param value 值
 	 * @return
 	 */
-	public <K, F, V> Boolean hSetNX(String dbName, K key, F field, V value);
+	public <K, F, V> Boolean hSetNX2(String dbName, K key, F field, V value);
 	
 	/**
 	 * 在指定库中执行hSetNX命令，并设置过期秒数
@@ -116,7 +116,7 @@ public interface RedisHashCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, F, V> Boolean hSetNX(String dbName, K key, F field, V value, long expireSeconds);
+	public <K, F, V> Boolean hSetNX2(String dbName, K key, F field, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行hMSet命令
@@ -257,7 +257,7 @@ public interface RedisHashCommands {
 	 * @param filed
 	 * @return
 	 */
-	public <K, F, V> V hGet(String dbName, K key, F filed);
+	public <K, F, V> V hGet2(String dbName, K key, F filed);
 	
 	/**
 	 * 在指定库中执行hGet命令，获取哈希键中指定类型的域值
@@ -268,24 +268,64 @@ public interface RedisHashCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, F, V> V hGet(String dbName, K key, F filed, Class<V> valueType);
+	public <K, F, V> V hGet2(String dbName, K key, F filed, Class<V> valueType);
 	
 	/**
-	 * 在当前库中执行hGetAll命令
+	 * 在当前库中执行hGetAll命令，获取哈希键中所有的域值映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
-	 * @return 域值映射集
+	 * @return 
 	 */
 	public <K, F, V> Map<F, V> hGetAll(K key);
 	
+	/**
+	 * 在当前库中执行hGetAll命令，获取哈希键中所有指定类型的域值映射集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, F, V> Map<F, V> hGetAll(K key, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行hGetAll命令，获取哈希键中所有指定类型的域值映射集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param fieldType
+	 * @param valueType
+	 * @return
+	 */
+	public <K, F, V> Map<F, V> hGetAll(K key, Class<F> fieldType, Class<V> valueType);
+	
 	/** 
-	 * 在指定库中执行hGetAll命令
+	 * 在指定库中执行hGetAll命令，获取哈希键中所有的域值映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, F, V> Map<F, V> hGetAll(String dbName, K key);
+	public <K, F, V> Map<F, V> hGetAll2(String dbName, K key);
+	
+	/**
+	 * 在指定库中执行hGetAll命令，获取哈希键中所有指定类型的域值映射集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, F, V> Map<F, V> hGetAll2(String dbName, K key, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行hGetAll命令，获取哈希键中所有指定类型的域值映射集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param fieldType
+	 * @param valueType
+	 * @return
+	 */
+	public <K, F, V> Map<F, V> hGetAll2(String dbName, K key, Class<F> fieldType, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行hKeys命令，获取键对应的所有域
@@ -296,13 +336,32 @@ public interface RedisHashCommands {
 	public <K, F> Set<F> hKeys(K key);
 	
 	/**
+	 * 在当前库中执行hKeys命令，获取键对应的所有域
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param fieldType
+	 * @return
+	 */
+	public <K, F> Set<F> hKeys(K key, Class<F> fieldType);
+	
+	/**
 	 * 在指定库中执行hKeys命令，获取键对应的所有域
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, F> Set<F> hKeys(String dbName, K key);
+	public <K, F> Set<F> hKeys2(String dbName, K key);
+	
+	/**
+	 * 在指定库中执行hKeys命令，获取键对应的所有域
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param fieldType
+	 * @return
+	 */
+	public <K, F> Set<F> hKeys2(String dbName, K key, Class<F> fieldType);
 	
 	/**
 	 * 在当前库中执行hLen命令，获取键对应的域个数
@@ -322,26 +381,7 @@ public interface RedisHashCommands {
 	public <K> Long hLen(String dbName, K key);
 	
 	/**
-	 * 在当前库中执行hMGet命令，获取键对应的多个域的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param fields
-	 * @return
-	 */
-	public <K, F, V> List<V> hMGet(K key, F[] fields);
-	
-	/**
-	 * 在指定库中执行hMGet命令，获取键对应的多个域的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param fields
-	 * @return
-	 */
-	public <K, F, V> List<V> hMGet(String dbName, K key, F[] fields);
-	
-	/**
-	 * 在当前库中执行hMGet命令，获取键对应的多个域的值
+	 * 在当前库中执行hMGet命令，获取键中多个域的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param fields
@@ -350,7 +390,17 @@ public interface RedisHashCommands {
 	public <K, F, V> List<V> hMGet(K key, Collection<F> fields);
 	
 	/**
-	 * 在指定库中执行hMGet命令，获取键对应的多个域的值
+	 * 在当前库中执行hMGet命令，获取键中多个域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param fields
+	 * @param valueType
+	 * @return
+	 */
+	public <K, F, V> List<V> hMGet(K key, Collection<F> fields, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行hMGet命令，获取键中多个域的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -360,7 +410,58 @@ public interface RedisHashCommands {
 	public <K, F, V> List<V> hMGet(String dbName, K key, Collection<F> fields);
 	
 	/**
-	 * 在当前库中执行hVals命令，获取键对应的所有域的值
+	 * 在指定库中执行hMGet命令，获取键中多个域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param fields
+	 * @param valueType
+	 * @return
+	 */
+	public <K, F, V> List<V> hMGet(String dbName, K key, Collection<F> fields, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行hMGet命令，获取键中多个域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param fields
+	 * @return
+	 */
+	public <K, F, V> List<V> hMGet(K key, F[] fields);
+	
+	/**
+	 * 在当前库中执行hMGet命令，获取键中多个域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param fields
+	 * @param valueType
+	 * @return
+	 */
+	public <K, F, V> List<V> hMGet(K key, F[] fields, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行hMGet命令，获取键中多个域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param fields
+	 * @return
+	 */
+	public <K, F, V> List<V> hMGet(String dbName, K key, F[] fields);
+	
+	/**
+	 * 在指定库中执行hMGet命令，获取键中多个域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param fields
+	 * @param valueType
+	 * @return
+	 */
+	public <K, F, V> List<V> hMGet(String dbName, K key, F[] fields, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行hVals命令，获取键中所有域的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -368,12 +469,31 @@ public interface RedisHashCommands {
 	public <K, V> List<V> hVals(K key);
 	
 	/**
-	 * 在指定库中执行hMGet命令，获取键对应的所有域的值
+	 * 在当前库中执行hVals命令，获取键中所有域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> List<V> hVals(K key, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行hMGet命令，获取键中所有域的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
 	 * @return
 	 */
-	public <K, V> List<V> hVals(String dbName, K key);
+	public <K, V> List<V> hVals2(String dbName, K key);
+	
+	/**
+	 * 在指定库中执行hMGet命令，获取键中所有域的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> List<V> hVals2(String dbName, K key, Class<V> valueType);
 
 }

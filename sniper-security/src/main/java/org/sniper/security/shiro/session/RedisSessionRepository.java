@@ -26,6 +26,7 @@ import org.apache.shiro.session.mgt.SimpleSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.sniper.commons.util.StringUtils;
 import org.sniper.nosql.redis.dao.RedisCommandsDao;
 
 /**
@@ -85,30 +86,30 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 			((SimpleSession) session).setStopTimestamp(null);
 		
 		String sessionId = getPrefix() + session.getId();
-		redisCommandsDao.set(dbName, sessionId, session);
-		logger.debug("Set session id:" + sessionId);
+		redisCommandsDao.set2(dbName, sessionId, session);
+		logger.debug("Set session id:{}", sessionId);
 	}
 
 	@Override
 	public void deleteSession(Serializable sessionId) {
 		String cacheSessionId = getPrefix() + sessionId;
 		redisCommandsDao.del(dbName, new Serializable[] { cacheSessionId });
-		logger.debug("Delete session id:" + cacheSessionId);
+		logger.debug("Delete session id:{}", cacheSessionId);
 	}
 
 	@Override
 	public Session getSession(Serializable sessionId) {
 		String cacheSessionId = getPrefix() + sessionId;
-		Session session = redisCommandsDao.get(dbName, cacheSessionId);
-		logger.debug("Get session id:" + cacheSessionId);
+		Session session = redisCommandsDao.get2(dbName, cacheSessionId);
+		logger.debug("Get session id:{}", cacheSessionId);
 		return session;
 	}
 
 	@Override
 	public Collection<Session> getAllSessions() {
-		String keys = getPrefix() + "*";
-		Collection<Session> sessions = redisCommandsDao.values(dbName, keys);
-		logger.debug("Get all session keys:" + keys);
+		String pattern = getPrefix() + StringUtils.ANY;
+		Collection<Session> sessions = redisCommandsDao.valuesByPattern(dbName, pattern);
+		logger.debug("Get all session keys:{}", pattern);
 		return sessions;
 	}
 

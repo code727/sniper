@@ -53,7 +53,7 @@ public interface RedisKeyCommands {
 	 * @param dbName
 	 * @return
 	 */
-	public <K> Set<K> keysByName(String dbName);
+	public <K> Set<K> keys(String dbName);
 	
 	/**
 	 * 获取库中所有指定类型的键
@@ -62,7 +62,7 @@ public interface RedisKeyCommands {
 	 * @param keyType
 	 * @return
 	 */
-	public <K> Set<K> keysByName(String dbName, Class<K> keyType);
+	public <K> Set<K> keys(String dbName, Class<K> keyType);
 	
 	/**
 	 * 获取当前库中指定模式的键集
@@ -70,7 +70,7 @@ public interface RedisKeyCommands {
 	 * @param pattern
 	 * @return
 	 */
-	public <K> Set<K> keys(String pattern);
+	public <K> Set<K> keysByPattern(String pattern);
 	
 	/**
 	 * 获取当前库中指定模式和类型的键集
@@ -79,7 +79,7 @@ public interface RedisKeyCommands {
 	 * @param keyType
 	 * @return
 	 */
-	public <K> Set<K> keys(String pattern, Class<K> keyType);
+	public <K> Set<K> keysByPattern(String pattern, Class<K> keyType);
 	
 	/**
 	 * 获取指定库中满足模式的键集
@@ -88,7 +88,7 @@ public interface RedisKeyCommands {
 	 * @param pattern
 	 * @return
 	 */
-	public <K> Set<K> keys(String dbName, String pattern);
+	public <K> Set<K> keysByPattern(String dbName, String pattern);
 	
 	/**
 	 * 获取指定库中满足模式和类型的键集
@@ -98,7 +98,7 @@ public interface RedisKeyCommands {
 	 * @param keyType
 	 * @return
 	 */
-	public <K> Set<K> keys(String dbName, String pattern, Class<K> keyType);
+	public <K> Set<K> keysByPattern(String dbName, String pattern, Class<K> keyType);
 	
 	/**
 	 * 删除当前库指定的键
@@ -123,23 +123,6 @@ public interface RedisKeyCommands {
 	 * @param keys
 	 * @return
 	 */
-	public <K> Long del(K[] keys);
-	
-	/**
-	 * 删除指定库多个键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param keys
-	 * @return
-	 */
-	public <K> Long del(String dbName, K[] keys);
-	
-	/**
-	 * 删除当前库指定的多个键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keys
-	 * @return
-	 */
 	public <K> Long del(Collection<K> keys);
 	
 	/**
@@ -150,6 +133,23 @@ public interface RedisKeyCommands {
 	 * @return
 	 */
 	public <K> Long del(String dbName, Collection<K> keys);
+	
+	/**
+	 * 删除当前库指定的多个键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long del(K[] keys);
+	
+	/**
+	 * 删除指定库多个键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param keys
+	 * @return
+	 */
+	public <K> Long del(String dbName, K[] keys);
 	
 	/**
 	 * 判断当前库中指定键是否存在
@@ -316,7 +316,7 @@ public interface RedisKeyCommands {
 	 * @param dbName
 	 * @return
 	 */
-	public <V> Set<V> valuesByName(String dbName);
+	public <V> Set<V> values(String dbName);
 	
 	/**
 	 * 获取指定库中所有键对应类型的值
@@ -325,7 +325,7 @@ public interface RedisKeyCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <V> Set<V> valuesByName(String dbName, Class<V> valueType);
+	public <V> Set<V> values(String dbName, Class<V> valueType);
 	
 	/**
 	 * 获取当前库中匹配模式键对应的值
@@ -333,7 +333,7 @@ public interface RedisKeyCommands {
 	 * @param pattern
 	 * @return
 	 */
-	public <V> Set<V> values(String pattern);
+	public <V> Set<V> valuesByPattern(String pattern);
 	
 	/**
 	 * 获取当前库中匹配模式键对应类型的值
@@ -342,7 +342,7 @@ public interface RedisKeyCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <V> Set<V> values(String pattern, Class<V> valueType);
+	public <V> Set<V> valuesByPattern(String pattern, Class<V> valueType);
 	
 	/**
 	 * 获取指定库中匹配模式键对应的值
@@ -351,7 +351,7 @@ public interface RedisKeyCommands {
 	 * @param pattern
 	 * @return
 	 */
-	public <V> Set<V> values(String dbName, String pattern);
+	public <V> Set<V> valuesByPattern(String dbName, String pattern);
 	
 	/**
 	 * 获取指定库中匹配模式键对应类型的值
@@ -361,6 +361,6 @@ public interface RedisKeyCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <V> Set<V> values(String dbName, String pattern, Class<V> valueType);
+	public <V> Set<V> valuesByPattern(String dbName, String pattern, Class<V> valueType);
 	
 }

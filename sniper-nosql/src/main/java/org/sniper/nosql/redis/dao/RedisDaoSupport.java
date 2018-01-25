@@ -18,6 +18,7 @@
 
 package org.sniper.nosql.redis.dao;
 
+import java.beans.PropertyEditor;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,6 +27,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.sniper.beans.PropertyConverter;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.MapUtils;
@@ -51,6 +53,9 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 		
 	/** 默认连接库索引 */
 	protected int defaultDbIndex;
+	
+	/** 全局默认的属性转换器 */
+	private PropertyConverter propertyConverter = new PropertyConverter();
 	
 	/** 全局默认的字符串序列化器 */
 	protected final Serializer stringSerializer = new StringSerializer();
@@ -83,6 +88,14 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 		this.cluster = cluster;
 	}
 	
+	public PropertyConverter getPropertyConverter() {
+		return propertyConverter;
+	}
+
+	public void setPropertyConverter(PropertyConverter propertyConverter) {
+		this.propertyConverter = propertyConverter;
+	}
+
 	public Serializer getGlobalKeySerializer() {
 		return globalKeySerializer;
 	}
@@ -291,8 +304,9 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	protected <K> byte[][] serializeKeysToArray(String dbName, K[] keys) {
 		Serializer keySerializer = selectKeySerializer(dbName);
 		List<byte[]> list = CollectionUtils.newArrayList();
-		for (K key : keys)
+		for (K key : keys) {
 			list.add(keySerializer.serialize(key));
+		}
 		
 		return CollectionUtils.toArray(list);
 	}
@@ -307,9 +321,10 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	protected <V> byte[][] serializeValuesToArray(String dbName, V[] values) {
 		Serializer valueSerializer = selectValueSerializer(dbName);
 		List<byte[]> list = CollectionUtils.newArrayList();
-		for (V value : values)
+		for (V value : values) {
 			list.add(valueSerializer.serialize(value));
-		
+		}
+			
 		return CollectionUtils.toArray(list);
 	}
 	
@@ -323,10 +338,47 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	protected <F> byte[][] serializeFiledsToArray(String dbName, F[] fileds) {
 		Serializer keySerializer = selectHashKeySerializer(dbName);
 		List<byte[]> list = CollectionUtils.newArrayList();
-		for (F filed : fileds)
+		for (F filed : fileds) {
 			list.add(keySerializer.serialize(filed));
+		}
 		
 		return CollectionUtils.toArray(list);
+	}
+	
+	/**
+	 * 将指定库的值字节反序列后返回
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param valueByte
+	 * @param valueType
+	 * @return
+	 */
+	protected <V> V deserializeValueByte(String dbName, byte[] valueByte, Class<V> valueType) {
+		Serializer valueSerializer = selectValueSerializer(dbName);
+		if (valueSerializer.isTypedSerializer())
+			return ((TypedSerializer) valueSerializer).deserialize(valueByte, valueType);
+		
+		V value = valueSerializer.deserialize(valueByte);
+		PropertyEditor propertyEditor = propertyConverter.find(valueType);
+		return propertyEditor != null ? PropertyConverter.converte(propertyEditor, value, valueType) : value;
+	}
+	
+	/**
+	 * 将指定库的哈希值字节反序列后返回
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param valueByte
+	 * @param valueType
+	 * @return
+	 */
+	protected <V> V deserializeHashValueByte(String dbName, byte[] hashValueByte, Class<V> valueType) {
+		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
+		if (hashValueSerializer.isTypedSerializer())
+			return ((TypedSerializer) hashValueSerializer).deserialize(hashValueByte, valueType);
+		
+		V value = hashValueSerializer.deserialize(hashValueByte);
+		PropertyEditor propertyEditor = propertyConverter.find(valueType);
+		return propertyEditor != null ? PropertyConverter.converte(propertyEditor, value, valueType) : value;
 	}
 	
 	/**
@@ -347,8 +399,16 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 				list.add(valueTypedSerializer.deserialize(valueByte, valueType));
 			}
 		} else {
-			for (byte[] valueByte : valueBytes) {
-				list.add((V) valueSerializer.deserialize(valueByte));
+			PropertyEditor propertyEditor = propertyConverter.find(valueType);
+			if (propertyEditor != null) {
+				for (byte[] valueByte : valueBytes) {
+					V value = valueSerializer.deserialize(valueByte);
+					list.add(PropertyConverter.converte(propertyEditor, value, valueType));
+				}
+			} else {
+				for (byte[] valueByte : valueBytes) {
+					list.add((V) valueSerializer.deserialize(valueByte));
+				}
 			}
 		}
 		return list;
@@ -359,14 +419,31 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param valueBytes
+	 * @param valueType
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> Set<V> deserializeValueByteToSet(String dbName, Collection<byte[]> valueBytes) {
+	protected <V> Set<V> deserializeValueByteToSet(String dbName, Collection<byte[]> valueBytes, Class<V> valueType) {
 		Serializer valueSerializer = selectValueSerializer(dbName);
 		Set<V> set = CollectionUtils.newLinkedHashSet();
-		for (byte[] valueByte : valueBytes) 
-			set.add((V) valueSerializer.deserialize(valueByte));
+		if (valueSerializer.isTypedSerializer()) {
+			TypedSerializer typedValueSerializer = (TypedSerializer) valueSerializer;
+			for (byte[] valueByte : valueBytes) {
+				set.add(typedValueSerializer.deserialize(valueByte, valueType));
+			}
+		} else {
+			PropertyEditor propertyEditor = propertyConverter.find(valueType);
+			if (propertyEditor != null) {
+				for (byte[] valueByte : valueBytes) {
+					V value = valueSerializer.deserialize(valueByte);
+					set.add(PropertyConverter.converte(propertyEditor, value, valueType));
+				}
+			} else {
+				for (byte[] valueByte : valueBytes) {
+					set.add((V) valueSerializer.deserialize(valueByte));
+				}
+			}
+		}
 		return set;
 	}
 	
@@ -379,7 +456,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> deserializeHashValueByteToList(String dbName, List<byte[]> hashValueBytes, Class<V> hashValueType) {
+	protected <V> List<V> deserializeHashValueBytesToList(String dbName, List<byte[]> hashValueBytes, Class<V> hashValueType) {
 		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
 		List<V> list = CollectionUtils.newArrayList();
 		
@@ -389,8 +466,16 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 				list.add(hashValueTypedSerializer.deserialize(hashValueByte, hashValueType));
 			}
 		} else {
-			for (byte[] hashValueByte : hashValueBytes) {
-				list.add((V) hashValueSerializer.deserialize(hashValueByte));
+			PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
+			if (propertyEditor != null) {
+				for (byte[] hashValueByte : hashValueBytes) {
+					V value = hashValueSerializer.deserialize(hashValueByte);
+					list.add(PropertyConverter.converte(propertyEditor, value, hashValueType));
+				}
+			} else {
+				for (byte[] hashValueByte : hashValueBytes) {
+					list.add((V) hashValueSerializer.deserialize(hashValueByte));
+				}
 			}
 		}
 		return list;
@@ -401,18 +486,86 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param fieldValueBytes
+	 * @param fieldType
+	 * @param valueType
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <F, V> Map<F, V> deserializeFiledValueByteToMap(String dbName, Map<byte[], byte[]> fieldValueBytes) {
+	protected <F, V> Map<F, V> deserializeFiledValueBytesToMap(String dbName, Map<byte[], byte[]> fieldValueBytes,
+			Class<F> fieldType, Class<V> valueType) {
+		
 		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
 		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
 		Map<F, V> map = MapUtils.newLinkedHashMap();
+		
 		if (MapUtils.isNotEmpty(fieldValueBytes)) {
 			Set<Entry<byte[], byte[]>> entrySet = fieldValueBytes.entrySet();
-			for (Entry<byte[], byte[]> entry : entrySet) 
-				map.put((F) hashKeySerializer.deserialize(entry.getKey()),
-						(V) hashValueSerializer.deserialize(entry.getValue()));
+			if (hashKeySerializer.isTypedSerializer() && hashValueSerializer.isTypedSerializer()) {
+				TypedSerializer typedHashKeySerializer = (TypedSerializer) hashKeySerializer;
+				TypedSerializer typedhashValueSerializer = (TypedSerializer) hashValueSerializer;
+				for (Entry<byte[], byte[]> entry : entrySet) {
+					map.put(typedHashKeySerializer.deserialize(entry.getKey(), fieldType),
+							typedhashValueSerializer.deserialize(entry.getValue(), valueType));
+				}
+			} else if (hashKeySerializer.isTypedSerializer()) {
+				TypedSerializer typedHashKeySerializer = (TypedSerializer) hashKeySerializer;
+				PropertyEditor propertyEditor = propertyConverter.find(valueType);
+				if (propertyEditor != null) {
+					for (Entry<byte[], byte[]> entry : entrySet) {
+						V value = hashValueSerializer.deserialize(entry.getValue());
+						map.put(typedHashKeySerializer.deserialize(entry.getKey(), fieldType),
+								PropertyConverter.converte(propertyEditor, value, valueType));
+					}
+				} else {
+					for (Entry<byte[], byte[]> entry : entrySet) {
+						map.put(typedHashKeySerializer.deserialize(entry.getKey(), fieldType), 
+								(V) hashValueSerializer.deserialize(entry.getValue()));
+					}
+				}
+			} else if (hashValueSerializer.isTypedSerializer()) {
+				TypedSerializer typedhashValueSerializer = (TypedSerializer) hashValueSerializer;
+				PropertyEditor propertyEditor = propertyConverter.find(fieldType);
+				if (propertyEditor != null) {
+					for (Entry<byte[], byte[]> entry : entrySet) {
+						F field = (F) hashKeySerializer.deserialize(entry.getKey());
+						map.put(PropertyConverter.converte(propertyEditor, field, fieldType), 
+								typedhashValueSerializer.deserialize(entry.getValue(), valueType));
+					}
+				} else {
+					for (Entry<byte[], byte[]> entry : entrySet) {
+						map.put((F) hashKeySerializer.deserialize(entry.getKey()), 
+								typedhashValueSerializer.deserialize(entry.getValue(), valueType));
+					}
+				}
+			} else {
+				PropertyEditor fieldPropertyEditor = propertyConverter.find(fieldType);
+				PropertyEditor valuePropertyEditor = propertyConverter.find(valueType);
+				if (fieldPropertyEditor != null && valuePropertyEditor != null) {
+					for (Entry<byte[], byte[]> entry : entrySet) {
+						F field = hashKeySerializer.deserialize(entry.getKey());
+						V value = hashValueSerializer.deserialize(entry.getValue());
+						map.put(PropertyConverter.converte(fieldPropertyEditor, field, fieldType), 
+								PropertyConverter.converte(valuePropertyEditor, value, valueType));
+					}
+				} else if (fieldPropertyEditor != null) {
+					for (Entry<byte[], byte[]> entry : entrySet) {
+						F field = hashKeySerializer.deserialize(entry.getKey());
+						map.put(PropertyConverter.converte(fieldPropertyEditor, field, fieldType), 
+								(V) hashValueSerializer.deserialize(entry.getValue()));
+					}
+				} else if (valuePropertyEditor != null) {
+					for (Entry<byte[], byte[]> entry : entrySet) {
+						V value = hashValueSerializer.deserialize(entry.getValue());
+						map.put((F) hashKeySerializer.deserialize(entry.getKey()),
+								PropertyConverter.converte(valuePropertyEditor, value, valueType));
+					}
+				} else {
+					for (Entry<byte[], byte[]> entry : entrySet) {
+						map.put((F) hashKeySerializer.deserialize(entry.getKey()), 
+								(V) hashValueSerializer.deserialize(entry.getValue()));
+					}
+				}
+			}
 		}
 		return map;
 	}
@@ -425,11 +578,29 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <F> Set<F> deserializeFiledBytesToSet(String dbName, Set<byte[]> fieldBytes) {
+	protected <F> Set<F> deserializeFiledBytesToSet(String dbName, Set<byte[]> fieldBytes, Class<F> fieldType) {
 		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
 		Set<F> set = CollectionUtils.newLinkedHashSet();
-		for (byte[] fieldByte : fieldBytes) 
-			set.add((F) hashKeySerializer.deserialize(fieldByte));
+		
+		if (hashKeySerializer.isTypedSerializer()) {
+			TypedSerializer hashKeyTypedSerializer = (TypedSerializer) hashKeySerializer;
+			for (byte[] fieldByte : fieldBytes) {
+				set.add(hashKeyTypedSerializer.deserialize(fieldByte, fieldType));
+			}
+		} else {
+			PropertyEditor propertyEditor = propertyConverter.find(fieldType);
+			if (propertyEditor != null) {
+				for (byte[] fieldByte : fieldBytes) {
+					F field = hashKeySerializer.deserialize(fieldByte);
+					set.add(PropertyConverter.converte(propertyEditor, field, fieldType));
+				}
+			} else {
+				for (byte[] fieldByte : fieldBytes) {
+					set.add((F) hashKeySerializer.deserialize(fieldByte));
+				}
+			}
+		}
+		
 		return set;
 	}
 

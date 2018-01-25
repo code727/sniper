@@ -43,7 +43,7 @@ public class IntegerPropertyEditor extends AbstractNumberPropertyEditor {
 	
 	@Override
 	protected Object handleText(String text) {
-		return Integer.valueOf(text);
+		return Integer.parseInt(text);
 	}
-	
+		
 }
