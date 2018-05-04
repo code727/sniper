@@ -19,14 +19,13 @@
 package org.sniper.sharding;
 
 import org.sniper.commons.util.AssertUtils;
-import org.sniper.sharding.route.Route;
 
 /**
  * 分片器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractSharding implements Shardable {
+public abstract class AbstractSharding<T> implements Shardable<T> {
 	
 	/** 是否允许分片参数为空 */
 	private boolean allowNull;
@@ -36,17 +35,17 @@ public abstract class AbstractSharding implements Shardable {
 	}
 
 	@Override
-	public <T> Route sharding(T parameter) {
-		Route route = new Route();
-		sharding(parameter, route);
-		return route;
+	public <P> T sharding(P parameter) {
+		T shardingEntity = buildShardingEntity();
+		sharding(parameter, shardingEntity);
+		return shardingEntity;
 	}
 
 	@Override
-	public <T> void sharding(T parameter, Route route) {
+	public <P> void sharding(P parameter, T shardingEntity) {
 		checkParameter(parameter);
-		checkRoute(route);
-		doSharding(parameter, route);
+		checkShardingEntity(shardingEntity);
+		doSharding(parameter, shardingEntity);
 	}
 	
 	/**
@@ -55,29 +54,36 @@ public abstract class AbstractSharding implements Shardable {
 	 * @param parameter
 	 * @throws IllegalArgumentException
 	 */
-	protected <T> void checkParameter(T parameter) throws IllegalArgumentException {
+	protected <P> void checkParameter(P parameter) throws IllegalArgumentException {
 		if (!allowNull && parameter == null)
 			// 当不允许为空而参数为空时，则抛出IllegalArgumentException
-			throw new IllegalArgumentException("Sharded parameter must not be null.");
+			throw new IllegalArgumentException("Sharded parameter must not be null");
 	}
 	
 	/**
-	 * 检查路由对象
+	 * 检查分片实体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param route
+	 * @param shardingEntity
 	 * @throws IllegalArgumentException
 	 */
-	protected <T> void checkRoute(Route route) throws IllegalArgumentException {
-		// 强制要求指定的路由对象不能为空
-		AssertUtils.assertNotNull(route, "Sharded route must not be null.");
+	protected void checkShardingEntity(T shardingEntity) throws IllegalArgumentException {
+		// 强制要求指定的切分目标不能为空
+		AssertUtils.assertNotNull(shardingEntity, "Sharding entity must not be null");
 	}
+	
+	/**
+	 * 构建分片实体
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	protected abstract T buildShardingEntity();
 	
 	/** 
 	 * 分片处理
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter
-	 * @param route 
+	 * @param shardingEntity 
 	 */
-	protected abstract <T> void doSharding(T parameter, Route route);
+	protected abstract <P> void doSharding(P parameter, T shardingEntity);
 		
 }

@@ -76,7 +76,7 @@ public class PropertyConverter {
 			this.propertyEditors.put(Long.class, new LongPropertyEditor(true));
 			
 			this.propertyEditors.put(float.class, new FloatPropertyEditor(false));
-			this.propertyEditors.put(Float.class, new FloatPropertyEditor());
+			this.propertyEditors.put(Float.class, new FloatPropertyEditor(true));
 			
 			this.propertyEditors.put(double.class, new DoublePropertyEditor(false));
 			this.propertyEditors.put(Double.class, new DoublePropertyEditor(true));

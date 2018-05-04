@@ -37,7 +37,7 @@ public class CodehausJacksonDateSerializer extends JsonSerializer<Date> {
 	private String dateFormat;
 	
 	public CodehausJacksonDateSerializer() {
-		
+		this(null);
 	}
 	
 	public CodehausJacksonDateSerializer(String dateFormat) {

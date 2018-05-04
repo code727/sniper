@@ -19,8 +19,8 @@
 package org.sniper.sharding.test;
 
 import org.junit.Test;
-import org.sniper.sharding.HashSharding;
 import org.sniper.sharding.route.Route;
+import org.sniper.sharding.route.HashRouteSharding;
 import org.sniper.test.junit.BaseTestCase;
 
 /**
@@ -30,14 +30,14 @@ import org.sniper.test.junit.BaseTestCase;
 public class ShardingTest extends BaseTestCase {
 	
 	@Test
-	public void testHashSharding() {
-		HashSharding sharding = new HashSharding();
-		sharding.setModel(20);
-		sharding.setAllowNull(true);
+	public void testHashRouteSharding() {
+		HashRouteSharding sharding = new HashRouteSharding();
+		sharding.setModel(100);
+		sharding.setAllowNull(false);
 		sharding.setFormatLength(4);
 		
 		Route route = new Route("test_table_");
-		sharding.sharding("dubin", route);
+		sharding.sharding("9527", route);
 		System.out.println(route);
 	}
 

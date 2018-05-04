@@ -78,6 +78,7 @@
 			<map>
 				<entry key="k-v-string" value-ref="k-v-string" />
 				<entry key="k-v-json" value-ref="k-v-json" />
+				<entry key="k-v-hessian" value-ref="k-v-hessian" />
 			</map>
 		</property>
 	</bean>
@@ -100,6 +101,17 @@
 		</property>
 		<property name="valueSerializer">
 			<bean class="org.sniper.serialization.json.jackson.codehaus.CodehausJacksonSerializer" />
+		</property>
+	</bean>
+	
+	<bean id="k-v-hessian" class="org.sniper.nosql.redis.RedisRepository">
+		<property name="namespace" value="org.sniper.nosql.redis.test.repository_2" />
+		<property name="dbIndex" value="2" />
+		<property name="keySerializer">
+			<bean class="org.sniper.serialization.jdk.StringSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<bean class="org.sniper.serialization.hessian.HessianSerializer" />
 		</property>
 	</bean>
 	

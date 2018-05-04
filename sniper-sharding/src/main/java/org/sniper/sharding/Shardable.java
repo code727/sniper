@@ -18,29 +18,27 @@
 
 package org.sniper.sharding;
 
-import org.sniper.sharding.route.Route;
-
 /**
  * 可分片的接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Shardable {
+public interface Shardable<T> {
 	
 	/**
-	 * 根据指定参数进行分片后返回路由对象
+	 * 根据指定参数进行分片后返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter
 	 * @return
 	 */
-	public <T> Route sharding(T parameter);
+	public <P> T sharding(P parameter);
 	
 	/**
 	 * 根据指定参数进行分片后将结果设置到路由对象中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter
-	 * @param route
+	 * @param target
 	 */
-	public <T> void sharding(T parameter, Route route);
+	public <P> void sharding(P parameter, T target);
 
 }

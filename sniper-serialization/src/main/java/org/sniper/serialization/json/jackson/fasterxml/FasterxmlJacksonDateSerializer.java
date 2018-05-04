@@ -39,7 +39,7 @@ public class FasterxmlJacksonDateSerializer extends JsonSerializer<Date> {
 	private String dateFormat;
 	
 	public FasterxmlJacksonDateSerializer() {
-		
+		this(null);
 	}
 	
 	public FasterxmlJacksonDateSerializer(String dateFormat) {
