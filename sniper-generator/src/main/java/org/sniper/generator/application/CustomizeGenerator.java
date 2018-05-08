@@ -20,7 +20,7 @@ package org.sniper.generator.application;
 
 import org.sniper.commons.util.NumberUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.generator.AbstractNumberGenerator;
+import org.sniper.generator.AbstractParameterizeNumberGenerator;
 import org.sniper.generator.dimension.TimeStampDimensionGenerator;
 
 /**
@@ -32,7 +32,7 @@ import org.sniper.generator.dimension.TimeStampDimensionGenerator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CustomizeGenerator extends AbstractNumberGenerator {
+public class CustomizeGenerator extends AbstractParameterizeNumberGenerator<String> {
 	
 	private ShortLinkGenerator shortLinkGenerator;
 	
@@ -43,10 +43,9 @@ public class CustomizeGenerator extends AbstractNumberGenerator {
 		this.dimensionGenerator = new TimeStampDimensionGenerator();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected String generateByDimension(String dimensionKey) {
-		String result = shortLinkGenerator.generate(dimensionKey);
+	protected String generateByKey(String key) {
+		String result = shortLinkGenerator.generate(key);
 		
 //		int beginIndex = NumberUtils.randomIn(3) << 3;
 //		return StringUtils.substring(result, beginIndex, beginIndex + 8);

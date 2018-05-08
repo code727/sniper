@@ -23,7 +23,8 @@
 		</property>
 	</bean>
 
-	<bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+	<!-- destroy-method="destroy" -->
+	<bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >
         <property name="hostName" value="${redis.master.host}" />  
         <property name="port" value="${redis.master.port}" />  
 		<property name="password" value="${redis.password}" />
@@ -37,6 +38,7 @@
 		<property name="maxTotal" value="${redis.maxTotal}" />  
         <property name="minIdle" value="${redis.minIdle}" />  
         <property name="maxIdle" value="${redis.maxIdle}" />  
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />  
        	<property name="testOnBorrow" value="true" />
     </bean>  
     

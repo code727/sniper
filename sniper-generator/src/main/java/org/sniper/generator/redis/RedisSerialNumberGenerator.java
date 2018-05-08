@@ -16,10 +16,10 @@
  * Create Date : 2017-11-14
  */
 
-package org.sniper.generator.application;
+package org.sniper.generator.redis;
 
 import org.sniper.commons.util.AssertUtils;
-import org.sniper.generator.AbstractNumberGenerator;
+import org.sniper.generator.AbstractParameterizeNumberGenerator;
 import org.sniper.nosql.redis.dao.RedisCommandsDao;
 
 /**
@@ -30,11 +30,11 @@ import org.sniper.nosql.redis.dao.RedisCommandsDao;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisSerialNumberGenerator extends AbstractNumberGenerator {
+public class RedisSerialNumberGenerator extends AbstractParameterizeNumberGenerator<Long> {
 	
-	private final String dbName;
+	protected final String dbName;
 	
-	private final RedisCommandsDao redisCommandsDao;
+	protected final RedisCommandsDao redisCommandsDao;
 	
 	public RedisSerialNumberGenerator(RedisCommandsDao redisCommandsDao) {
 		this(null, redisCommandsDao);
@@ -47,10 +47,9 @@ public class RedisSerialNumberGenerator extends AbstractNumberGenerator {
 		this.redisCommandsDao = redisCommandsDao;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected <T> T generateByDimension(String dimension) {
-		return (T) redisCommandsDao.incr(dbName, dimension);
+	protected Long generateByKey(String key) {
+		return redisCommandsDao.incr(dbName, key);
 	}
 			
 }

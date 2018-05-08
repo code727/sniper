@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年11月14日
+ * Create Date : 2017-11-14
  */
 
 package org.sniper.generator;
@@ -23,11 +23,11 @@ import java.math.BigInteger;
 import org.sniper.commons.util.NumberUtils;
 
 /**
- * 数字生成器抽象类
+ * 参数化数字生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractNumberGenerator extends AbstractParameterizeGenerator {
+public abstract class AbstractParameterizeNumberGenerator<T> extends AbstractDimensionParameterizeGenerator<T> {
 	
 	@Override
 	protected String makeupGenerate(String generated, int offset) {
