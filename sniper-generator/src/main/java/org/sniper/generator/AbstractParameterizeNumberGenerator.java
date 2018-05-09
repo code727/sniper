@@ -27,7 +27,7 @@ import org.sniper.commons.util.NumberUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractParameterizeNumberGenerator<T> extends AbstractDimensionParameterizeGenerator<T> {
+public abstract class AbstractParameterizeNumberGenerator<P, T> extends AbstractParameterizeDimensionGenerator<P, T> {
 	
 	@Override
 	protected String makeupGenerate(String generated, int offset) {

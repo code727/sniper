@@ -31,7 +31,7 @@ import org.sniper.generator.application.CustomizeGenerator;
  */
 public class CustomizeGeneratorTest extends GeneratorTest {
 	
-	private ParameterizeGenerator<Object, String> parameterizeGenerator = new CustomizeGenerator();
+	private ParameterizeGenerator<Object, String> parameterizeGenerator = new CustomizeGenerator<Object>();
 	
 	private long parameter = 1L;
 

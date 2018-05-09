@@ -18,56 +18,28 @@
 
 package org.sniper.generator;
 
-import org.sniper.commons.util.ObjectUtils;
-
 /**
  * 参数化生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractParameterizeGenerator<T> implements ParameterizeGenerator<Object, String> {
+public abstract class AbstractParameterizeGenerator<P, T> implements ParameterizeGenerator<P, T> {
 	
 	/** 全局参数 */
-	protected Object parameter;
+	protected P parameter;
 	
-	/** 是否将参数作为最终结果的一部分进行返回 */
-	protected boolean parameterAsResult;
-	
-	public Object getParameter() {
+	public P getParameter() {
 		return parameter;
 	}
 
-	public void setParameter(Object parameter) {
+	public void setParameter(P parameter) {
 		this.parameter = parameter;
 	}
 	
-	public boolean isParameterAsResult() {
-		return parameterAsResult;
-	}
-
-	public void setParameterAsResult(boolean parameterAsResult) {
-		this.parameterAsResult = parameterAsResult;
-	}
-
 	@Override
-	public String generate() {
+	public T generate() {
 		// 根据设置的全局参数来生成
 		return generate(this.parameter);
 	}
-	
-	@Override
-	public String generate(Object parameter) {
-		String safeParameter = ObjectUtils.toSafeString(parameter);
-		String result = generateByKey(safeParameter).toString();
-		return parameterAsResult ? safeParameter + result : result;
-	}
-	
-	/**
-	 * 根据键生成可变结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @return
-	 */
-	protected abstract T generateByKey(String key);
 	
 }

@@ -22,17 +22,20 @@ import org.sniper.commons.util.ObjectUtils;
 import org.sniper.generator.dimension.DimensionGenerator;
 
 /**
- * 维度参数化生成器抽象类
+ * 参数化维度生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractDimensionParameterizeGenerator<T> extends AbstractParameterizeGenerator<T> {
+public abstract class AbstractParameterizeDimensionGenerator<P, T> extends AbstractParameterizeGenerator<P, String> {
 	
 	/** 维度生成器 */
 	protected DimensionGenerator<?> dimensionGenerator;
 	
 	/** 是否将参数作为维度键的前缀 */
 	protected boolean parameterAsDimensionKeyPrefix = true;
+	
+	/** 是否将参数作为最终结果的一部分进行返回 */
+	protected boolean parameterAsResult;
 	
 	/** 最终结果的最小长度 */
 	protected int minLength = 16;
@@ -51,6 +54,14 @@ public abstract class AbstractDimensionParameterizeGenerator<T> extends Abstract
 
 	public void setParameterAsDimensionKeyPrefix(boolean parameterAsDimensionKeyPrefix) {
 		this.parameterAsDimensionKeyPrefix = parameterAsDimensionKeyPrefix;
+	}
+	
+	public boolean isParameterAsResult() {
+		return parameterAsResult;
+	}
+
+	public void setParameterAsResult(boolean parameterAsResult) {
+		this.parameterAsResult = parameterAsResult;
 	}
 
 	public int getMinLength() {
@@ -83,6 +94,14 @@ public abstract class AbstractDimensionParameterizeGenerator<T> extends Abstract
 		String result = (offset > 0 ? makeupGenerate(generated, offset) : generated);
 		return parameterAsResult ? safeParameter + result : result;
 	}
+	
+	/**
+	 * 根据键生成可变结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	protected abstract T generateByKey(String key);
 	
 	/**
 	 * 补偿生成指定字符串长度+offset长度的结果

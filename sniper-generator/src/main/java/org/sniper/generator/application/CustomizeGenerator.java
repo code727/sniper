@@ -32,7 +32,7 @@ import org.sniper.generator.dimension.TimeStampDimensionGenerator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CustomizeGenerator extends AbstractParameterizeNumberGenerator<String> {
+public class CustomizeGenerator<P> extends AbstractParameterizeNumberGenerator<P, String> {
 	
 	private ShortLinkGenerator shortLinkGenerator;
 	

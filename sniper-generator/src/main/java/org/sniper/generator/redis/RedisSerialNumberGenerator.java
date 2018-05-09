@@ -20,36 +20,27 @@ package org.sniper.generator.redis;
 
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.generator.AbstractParameterizeNumberGenerator;
-import org.sniper.nosql.redis.dao.RedisCommandsDao;
 
 /**
  * Redis流水号生成器实现类，生成结果满足几点要求：</P>
- * 1.在指定的维度区间内流水号是唯一的；</P>
- * 2.在指定的维度区间内流水号是趋势递增的；</P>
- * 3.在指定的维度区间内流水号是连续的；</P>
+ * 1.在指定的参数化维度区间内流水号是唯一的；</P>
+ * 2.在指定的参数化维度区间内流水号的趋势递增性和连续性取决于内部代理的Redis生成器实现类；</P>
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisSerialNumberGenerator extends AbstractParameterizeNumberGenerator<Long> {
+public class RedisSerialNumberGenerator<P> extends AbstractParameterizeNumberGenerator<P, Long> {
 	
-	protected final String dbName;
+	private AbstractRedisParameterizeGenerator<P> redisParameterizeGenerator;
 	
-	protected final RedisCommandsDao redisCommandsDao;
-	
-	public RedisSerialNumberGenerator(RedisCommandsDao redisCommandsDao) {
-		this(null, redisCommandsDao);
-	}
-	
-	public RedisSerialNumberGenerator(String dbName, RedisCommandsDao redisCommandsDao) {
-		AssertUtils.assertNotNull(redisCommandsDao, "Redis commands dao not be null");
-		
-		this.dbName = dbName;
-		this.redisCommandsDao = redisCommandsDao;
+	public RedisSerialNumberGenerator(AbstractRedisParameterizeGenerator<P> redisParameterizeGenerator) {
+		AssertUtils.assertNotNull(redisParameterizeGenerator, "Redis parameterize generator must not be null");
+		this.redisParameterizeGenerator = redisParameterizeGenerator;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected Long generateByKey(String key) {
-		return redisCommandsDao.incr(dbName, key);
+		return this.redisParameterizeGenerator.generate((P) key);
 	}
 			
 }
