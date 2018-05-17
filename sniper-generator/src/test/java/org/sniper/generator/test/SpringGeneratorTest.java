@@ -31,7 +31,7 @@ import org.sniper.test.spring.JUnit4SpringContextTestCase;
  */
 public abstract class SpringGeneratorTest extends JUnit4SpringContextTestCase {
 	
-	protected final int size = 15;
+	protected final int size = 10;
 	
 	protected boolean uniquenessTest = true;
 	

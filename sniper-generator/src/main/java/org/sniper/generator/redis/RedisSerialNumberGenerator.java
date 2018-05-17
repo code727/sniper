@@ -24,7 +24,7 @@ import org.sniper.generator.AbstractParameterizeNumberGenerator;
 /**
  * Redis流水号生成器实现类，生成结果满足几点要求：</P>
  * 1.在指定的参数化维度区间内流水号是唯一的；</P>
- * 2.在指定的参数化维度区间内流水号的趋势递增性和连续性取决于内部代理的Redis生成器实现类；</P>
+ * 2.在指定的参数化维度区间内流水号的连续性和递增性取决于内部代理的Redis生成器实现类；</P>
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

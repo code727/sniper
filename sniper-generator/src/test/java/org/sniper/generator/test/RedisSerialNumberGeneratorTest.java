@@ -18,6 +18,7 @@
 
 package org.sniper.generator.test;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -62,32 +63,26 @@ public class RedisSerialNumberGeneratorTest extends SpringGeneratorTest {
 			}
 		};
 		
-		Future<Set<String>> f1 = executor.submit(task);
-		Future<Set<String>> f2 = executor.submit(task);
-
-		Set<String> set1 = f1.get();
-		Set<String> set2 = f2.get();
-		Set<String> set3 = CollectionUtils.newLinkedHashSet();
-		set3.addAll(set1);
-		set3.addAll(set2);
+		int thradSize = 5;
+		List<Future<Set<String>>> futures = CollectionUtils.newArrayList(thradSize);
+		for (int i = 0; i < thradSize; i++) {
+			futures.add(executor.submit(task));
+		}
 		
-		int size1 = set1.size();
-		int size2 = set2.size();
-		int size3 = set3.size();
+		Set<String> totalSet = CollectionUtils.newLinkedHashSet();
+		for (int i = 0; i < thradSize; i++) {
+			Set<String> set = futures.get(i).get();
+			System.out.println("Set" + (i+1) + " size:" + set.size() + "," + set);
+			totalSet.addAll(set);
+		}
 		
-//		assertTrue(size1 == size);
-//		assertTrue(size2 == size);
-//		assertTrue(size3 == (size * 2));
-
-		System.out.println("set1 size:" + size1 + "," + set1);
-		System.out.println("set2 size:" + size2 + "," + set2);
-		System.out.println("set3 size:" + size3);
+		System.out.println("Total set size:" + totalSet.size());
 	}
 
 	@Override
 	protected void doPerformanceTest() {
 		for (int i = 0; i < size; i++) {
-			System.out.println(redisSerialNumberGenerator.generate());
+			redisSerialNumberGenerator.generate();
 		}
 	}
 

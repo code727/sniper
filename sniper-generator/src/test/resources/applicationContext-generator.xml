@@ -12,7 +12,7 @@
 		<property name="dimensionGenerator" ref="dimensionGenerator" />
 	</bean>
 	
-	<bean id="redisParameterizeGenerator" class="org.sniper.generator.redis.QueueCacheRedisNumberGenerator" >
+	<bean id="redisParameterizeGenerator" class="org.sniper.generator.redis.CounterCacheRedisNumberGenerator" >
 		<constructor-arg name="redisCommandsDao" ref="redisCommandsDao" />
 		<property name="cacheSize" value="10" />
 	</bean>
