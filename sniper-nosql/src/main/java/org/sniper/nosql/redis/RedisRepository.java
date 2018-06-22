@@ -28,10 +28,7 @@ import org.sniper.serialization.Serializer;
  * @version 1.0
  */
 public class RedisRepository {
-	
-	/** 库的命名空间 */
-	private String namespace;
-	
+		
 	/** 当前库索引 */
 	private int dbIndex;
 	
@@ -52,14 +49,6 @@ public class RedisRepository {
 	
 	/** 哈希值序列化器 */
 	private Serializer hashValueSerializer; 
-
-	public String getNamespace() {
-		return namespace;
-	}
-
-	public void setNamespace(String namespace) {
-		this.namespace = namespace;
-	}
 
 	public int getDbIndex() {
 		return dbIndex;

@@ -300,7 +300,7 @@ public interface RedisKeyCommands {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public <V> Set<V> values();
+	public <V> List<V> values();
 	
 	/**
 	 * 获取当前库中所有键对应类型的值
@@ -308,7 +308,7 @@ public interface RedisKeyCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <V> Set<V> values(Class<V> valueType);
+	public <V> List<V> values(Class<V> valueType);
 	
 	/**
 	 * 获取指定库中所有键对应的值
@@ -316,7 +316,7 @@ public interface RedisKeyCommands {
 	 * @param dbName
 	 * @return
 	 */
-	public <V> Set<V> values(String dbName);
+	public <V> List<V> values(String dbName);
 	
 	/**
 	 * 获取指定库中所有键对应类型的值
@@ -325,7 +325,7 @@ public interface RedisKeyCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <V> Set<V> values(String dbName, Class<V> valueType);
+	public <V> List<V> values(String dbName, Class<V> valueType);
 	
 	/**
 	 * 获取当前库中匹配模式键对应的值
@@ -333,7 +333,7 @@ public interface RedisKeyCommands {
 	 * @param pattern
 	 * @return
 	 */
-	public <V> Set<V> valuesByPattern(String pattern);
+	public <V> List<V> valuesByPattern(String pattern);
 	
 	/**
 	 * 获取当前库中匹配模式键对应类型的值
@@ -342,7 +342,7 @@ public interface RedisKeyCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <V> Set<V> valuesByPattern(String pattern, Class<V> valueType);
+	public <V> List<V> valuesByPattern(String pattern, Class<V> valueType);
 	
 	/**
 	 * 获取指定库中匹配模式键对应的值
@@ -351,7 +351,7 @@ public interface RedisKeyCommands {
 	 * @param pattern
 	 * @return
 	 */
-	public <V> Set<V> valuesByPattern(String dbName, String pattern);
+	public <V> List<V> valuesByPattern(String dbName, String pattern);
 	
 	/**
 	 * 获取指定库中匹配模式键对应类型的值
@@ -361,6 +361,6 @@ public interface RedisKeyCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <V> Set<V> valuesByPattern(String dbName, String pattern, Class<V> valueType);
+	public <V> List<V> valuesByPattern(String dbName, String pattern, Class<V> valueType);
 	
 }

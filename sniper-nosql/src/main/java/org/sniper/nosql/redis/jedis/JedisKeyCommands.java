@@ -20,7 +20,6 @@ package org.sniper.nosql.redis.jedis;
 
 import java.util.List;
 
-import org.springframework.data.redis.connection.DataType;
 import org.sniper.nosql.redis.dao.RedisKeyCommands;
 
 import redis.clients.jedis.SortingParams;
@@ -93,21 +92,4 @@ public interface JedisKeyCommands extends RedisKeyCommands {
 	 */
 	public <K, V> List<V> sortResult(int dbIndex, K key, SortingParams params, K targetKey);
 	
-	/**
-	 * 获取当前库的键对应的值类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @return
-	 */
-	public <K> DataType type(K key);
-	
-	/**
-	 * 获取指定库的键对应的值类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbIndex
-	 * @param key
-	 * @return
-	 */
-	public <K> DataType type(int dbIndex, K key);
-
 }

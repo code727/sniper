@@ -44,7 +44,7 @@ public class CustomCacheManager implements CacheManager, Destroyable, Initializi
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (this.cacheRepository == null)
-			throw new IllegalArgumentException("Property 'cacheRepository' is required.");
+			throw new IllegalArgumentException("Property 'cacheRepository' is required");
 		
 	}
 

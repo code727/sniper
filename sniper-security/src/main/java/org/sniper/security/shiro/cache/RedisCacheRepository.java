@@ -38,7 +38,7 @@ public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V>,
 	/** Cache标识前缀 */
 	private String prefix;
 	
-	/** 名称 */
+	/** 缓存名称 */
 	private String name;
 	
 	/** 存储缓存数据的库名称 */
@@ -96,16 +96,16 @@ public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V>,
 
 	@Override
 	public V put(K key, V value) throws CacheException {
-		V v = get(key);
+		V oldValue = get(key);
 		redisCommandsDao.set2(dbName, getPrefix() + key, value);
-		return v;
+		return oldValue;
 	}
 
 	@Override
 	public V remove(K key) throws CacheException {
-		V v = get(key);
+		V removedValue = get(key);
 		redisCommandsDao.del(dbName, getPrefix() + key);
-		return v;
+		return removedValue;
 	}
 
 	@Override

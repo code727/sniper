@@ -63,7 +63,7 @@ public class RedisSerialNumberGeneratorTest extends SpringGeneratorTest {
 			}
 		};
 		
-		int thradSize = 5;
+		int thradSize = 10;
 		List<Future<Set<String>>> futures = CollectionUtils.newArrayList(thradSize);
 		for (int i = 0; i < thradSize; i++) {
 			futures.add(executor.submit(task));

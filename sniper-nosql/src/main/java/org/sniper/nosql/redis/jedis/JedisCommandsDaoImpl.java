@@ -25,8 +25,6 @@
 //import java.util.Set;
 //
 //import org.sniper.commons.KeyValuePair;
-//import org.springframework.data.redis.connection.DataType;
-//import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 //
 //import redis.clients.jedis.BinaryClient.LIST_POSITION;
 //import redis.clients.jedis.SortingParams;
@@ -41,6 +39,7 @@
 //
 //	@Override
 //	public <K, V> void set(K key, V value) {
+//		// TODO Auto-generated method stub
 //		
 //	}
 //
@@ -51,13 +50,13 @@
 //	}
 //
 //	@Override
-//	public <K, V> void set(int dbIndex, K key, V value) {
+//	public <K, V> void set2(String dbName, K key, V value) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
 //	@Override
-//	public <K, V> void set(int dbIndex, K key, V value, long expireSeconds) {
+//	public <K, V> void set2(String dbName, K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		
 //	}
@@ -75,13 +74,13 @@
 //	}
 //
 //	@Override
-//	public <K, V> Boolean setNX(int dbIndex, K key, V value) {
+//	public <K, V> Boolean setNX2(String dbName, K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
 //	@Override
-//	public <K, V> Boolean setNX(int dbIndex, K key, V value, long expireSeconds) {
+//	public <K, V> Boolean setNX2(String dbName, K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
@@ -93,19 +92,19 @@
 //	}
 //
 //	@Override
-//	public <K, V> void setEx(int dbIndex, K key, V value) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
 //	public <K, V> void setEx(K key, long seconds, V value) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
 //	@Override
-//	public <K, V> void setEx(int dbIndex, K key, long seconds, V value) {
+//	public <K, V> void setEx2(String dbName, K key, V value) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public <K, V> void setEx2(String dbName, K key, long seconds, V value) {
 //		// TODO Auto-generated method stub
 //		
 //	}
@@ -123,13 +122,13 @@
 //	}
 //
 //	@Override
-//	public <K, V> void mSet(int dbIndex, Map<K, V> kValues) {
+//	public <K, V> void mSet(String dbName, Map<K, V> kValues) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
 //	@Override
-//	public <K, V> void mSet(int dbIndex, Map<K, V> kValues, long expireSeconds) {
+//	public <K, V> void mSet(String dbName, Map<K, V> kValues, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		
 //	}
@@ -147,13 +146,13 @@
 //	}
 //
 //	@Override
-//	public <K, V> void mSetNX(int dbIndex, Map<K, V> kValues) {
+//	public <K, V> void mSetNX(String dbName, Map<K, V> kValues) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
 //	@Override
-//	public <K, V> void mSetNX(int dbIndex, Map<K, V> kValues, long expireSeconds) {
+//	public <K, V> void mSetNX(String dbName, Map<K, V> kValues, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		
 //	}
@@ -169,15 +168,15 @@
 //		// TODO Auto-generated method stub
 //		
 //	}
+//
 //	@Override
-//	public <K, V> void setRange(int dbIndex, K key, long offset, V value) {
+//	public <K, V> void setRange2(String dbName, K key, long offset, V value) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
 //	@Override
-//	public <K, V> void setRange(int dbIndex, K key, long offset, V value,
-//			long expireSeconds) {
+//	public <K, V> void setRange2(String dbName, K key, long offset, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		
 //	}
@@ -195,13 +194,13 @@
 //	}
 //
 //	@Override
-//	public <K, V> Long append(int dbIndex, K key, V value) {
+//	public <K, V> Long append2(String dbName, K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
 //	@Override
-//	public <K, V> Long append(int dbIndex, K key, V value, long expireSeconds) {
+//	public <K, V> Long append2(String dbName, K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
@@ -213,7 +212,19 @@
 //	}
 //
 //	@Override
-//	public <K, V> V get(int dbIndex, K key) {
+//	public <K, V> V get(K key, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <K, V> V get2(String dbName, K key) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <K, V> V get2(String dbName, K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
@@ -225,43 +236,67 @@
 //	}
 //
 //	@Override
-//	public <K, V> V getRange(int dbIndex, K key, long begin, long end) {
+//	public <K, V> V getRange(K key, long begin, long end, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
 //	@Override
-//	public <K, V> V getSet(K key, V value) {
+//	public <K, V> V getRange(String dbName, K key, long begin, long end) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
 //	@Override
-//	public <K, V> V getSet(K key, V value, long expireSeconds) {
+//	public <K, V> V getRange(String dbName, K key, long begin, long end, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
 //	@Override
-//	public <K, V> V getSet(int dbIndex, K key, V value) {
+//	public <K, V, O> O getSet(K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
 //	@Override
-//	public <K, V> V getSet(int dbIndex, K key, V value, long expireSeconds) {
+//	public <K, V, O> O getSet(K key, V value, Class<O> oldValueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
 //	@Override
-//	public <K, V> List<V> mGet(K[] keys) {
+//	public <K, V, O> O getSet(K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
 //	@Override
-//	public <K, V> List<V> mGet(int dbIndex, K[] keys) {
+//	public <K, V, O> O getSet(K key, V value, long expireSeconds, Class<O> oldValueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <K, V, O> O getSet2(String dbName, K key, V value) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <K, V, O> O getSet2(String dbName, K key, V value, Class<O> oldValueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <K, V, O> O getSet2(String dbName, K key, V value, long expireSeconds) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <K, V, O> O getSet2(String dbName, K key, V value, long expireSeconds, Class<O> oldValueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
@@ -273,1589 +308,3888 @@
 //	}
 //
 //	@Override
-//	public <K, V> List<V> mGet(int dbIndex, Collection<K> keys) {
+//	public <K, V> List<V> mGet(Collection<K> keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	@Override
+//	public <K, V> List<V> mGet(String dbName, Collection<K> keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <K, V> List<V> mGet(String dbName, Collection<K> keys, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> mGet(K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> mGet(K[] keys, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> mGet(String dbName, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> mGet(String dbName, K[] keys, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long strLen(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long strLen(int dbIndex, K key) {
+//	public <K> Long strLen(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long decr(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long decr(int dbIndex, K key) {
+//	public <K> Long decr(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long decrBy(K key, long value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long decrBy(int dbIndex, K key, long value) {
+//	public <K> Long decrBy(String dbName, K key, long value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long incr(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long incr(int dbIndex, K key) {
+//	public <K> Long incr(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long incrBy(K key, long value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long incrBy(int dbIndex, K key, long value) {
+//	public <K> Long incrBy(String dbName, K key, long value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKey
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> Boolean hSet(K key, F field, V value) {
+//	public <K, H, V> Boolean hSet(K key, H hashKey, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKey
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> Boolean hSet(K key, F field, V value, long expireSeconds) {
+//	public <K, H, V> Boolean hSet(K key, H hashKey, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKey
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> Boolean hSet(int dbIndex, K key, F field, V value) {
+//	public <K, H, V> Boolean hSet2(String dbName, K key, H hashKey, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKey
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> Boolean hSet(int dbIndex, K key, F field, V value,
-//			long expireSeconds) {
+//	public <K, H, V> Boolean hSet2(String dbName, K key, H hashKey, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKey
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> Boolean hSetNX(K key, F field, V value) {
+//	public <K, H, V> Boolean hSetNX(K key, H hashKey, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKey
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> Boolean hSetNX(K key, F field, V value, long expireSeconds) {
+//	public <K, H, V> Boolean hSetNX(K key, H hashKey, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKey
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> Boolean hSetNX(int dbIndex, K key, F field, V value) {
+//	public <K, H, V> Boolean hSetNX2(String dbName, K key, H hashKey, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKey
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> Boolean hSetNX(int dbIndex, K key, F field, V value,
-//			long expireSeconds) {
+//	public <K, H, V> Boolean hSetNX2(String dbName, K key, H hashKey, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKeyValues 
+//	 */
 //	@Override
-//	public <K, F, V> void hMSet(K key, Map<F, V> fValues) {
+//	public <K, H, V> void hMSet(K key, Map<H, V> hashKeyValues) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKeyValues
+//	 * @param expireSeconds 
+//	 */
 //	@Override
-//	public <K, F, V> void hMSet(K key, Map<F, V> fValues, long expireSeconds) {
+//	public <K, H, V> void hMSet(K key, Map<H, V> hashKeyValues, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKeyValues 
+//	 */
 //	@Override
-//	public <K, F, V> void hMSet(int dbIndex, K key, Map<F, V> fValues) {
+//	public <K, H, V> void hMSet(String dbName, K key, Map<H, V> hashKeyValues) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKeyValues
+//	 * @param expireSeconds 
+//	 */
 //	@Override
-//	public <K, F, V> void hMSet(int dbIndex, K key, Map<F, V> fValues,
-//			long expireSeconds) {
+//	public <K, H, V> void hMSet(String dbName, K key, Map<H, V> hashKeyValues, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKey
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F> Long hDel(K key, F filed) {
+//	public <K, H> Long hDel(K key, H hashKey) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKey
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F> Long hDel(int dbIndex, K key, F filed) {
+//	public <K, H> Long hDel(String dbName, K key, H hashKey) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKeys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F> Long hDel(K key, F[] fileds) {
+//	public <K, H> Long hDel(K key, H[] hashKeys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKeys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F> Long hDel(int dbIndex, K key, F[] fileds) {
+//	public <K, H> Long hDel(String dbName, K key, H[] hashKeys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKeys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F> Long hDel(K key, Collection<F> fileds) {
+//	public <K, H> Long hDel(K key, Collection<H> hashKeys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKeys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F> Long hDel(int dbIndex, K key, Collection<F> fileds) {
+//	public <K, H> Long hDel(String dbName, K key, Collection<H> hashKeys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKey
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F> Boolean hExists(K key, F filed) {
+//	public <K, H> Boolean hExists(K key, H hashKey) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKey
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F> Boolean hExists(int dbIndex, K key, F filed) {
+//	public <K, H> Boolean hExists(String dbName, K key, H hashKey) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKey
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> V hGet(K key, F filed) {
+//	public <K, H, V> V hGet(K key, H hashKey) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKey
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> V hGet(int dbIndex, K key, F filed) {
+//	public <K, H, V> V hGet(K key, H hashKey, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKey
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> Map<F, V> hGetAll(K key) {
+//	public <K, H, V> V hGet2(String dbName, K key, H hashKey) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKey
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> Map<F, V> hGetAll(int dbIndex, K key) {
+//	public <K, H, V> V hGet2(String dbName, K key, H hashKey, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F> Set<F> hKeys(K key) {
+//	public <K, H, V> Map<H, V> hGetAll(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F> Set<F> hKeys(int dbIndex, K key) {
+//	public <K, H, V> Map<H, V> hGetAll(K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKeyType
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H, V> Map<H, V> hGetAll(K key, Class<H> hashKeyType, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H, V> Map<H, V> hGetAll2(String dbName, K key) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H, V> Map<H, V> hGetAll2(String dbName, K key, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKeyType
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H, V> Map<H, V> hGetAll2(String dbName, K key, Class<H> hashKeyType, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H> Set<H> hKeys(K key) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKeyType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H> Set<H> hKeys(K key, Class<H> hashKeyType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H> Set<H> hKeys2(String dbName, K key) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKeyType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H> Set<H> hKeys2(String dbName, K key, Class<H> hashKeyType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long hLen(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long hLen(int dbIndex, K key) {
+//	public <K> Long hLen(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKeys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> List<V> hMGet(K key, F[] fields) {
+//	public <K, H, V> List<V> hMGet(K key, Collection<H> hashKeys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKeys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> List<V> hMGet(int dbIndex, K key, F[] fields) {
+//	public <K, H, V> List<V> hMGet(K key, Collection<H> hashKeys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKeys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> List<V> hMGet(K key, Collection<F> fields) {
+//	public <K, H, V> List<V> hMGet(String dbName, K key, Collection<H> hashKeys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKeys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, F, V> List<V> hMGet(int dbIndex, K key, Collection<F> fields) {
+//	public <K, H, V> List<V> hMGet(String dbName, K key, Collection<H> hashKeys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKeys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H, V> List<V> hMGet(K key, H[] hashKeys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param hashKeys
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H, V> List<V> hMGet(K key, H[] hashKeys, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKeys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H, V> List<V> hMGet(String dbName, K key, H[] hashKeys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param hashKeys
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, H, V> List<V> hMGet(String dbName, K key, H[] hashKeys, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> List<V> hVals(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> List<V> hVals(int dbIndex, K key) {
+//	public <K, V> List<V> hVals(K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lInsert(K key, LIST_POSITION where, V pivot, V value) {
+//	public <K, V> List<V> hVals2(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lInsert(K key, LIST_POSITION where, V pivot, V value,
-//			long expireSeconds) {
+//	public <K, V> List<V> hVals2(String dbName, K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
-//	@Override
-//	public <K, V> Long lInsert(int dbIndex, K key, LIST_POSITION where, V pivot,
-//			V value) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K, V> Long lInsert(int dbIndex, K key, LIST_POSITION where, V pivot,
-//			V value, long expireSeconds) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param posttion
+//	 * @param value 
+//	 */
 //	@Override
 //	public <K, V> void lSet(K key, long posttion, V value) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param posttion
+//	 * @param value
+//	 * @param expireSeconds 
+//	 */
 //	@Override
 //	public <K, V> void lSet(K key, long posttion, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param posttion
+//	 * @param value 
+//	 */
 //	@Override
-//	public <K, V> void lSet(int dbIndex, K key, long posttion, V value) {
+//	public <K, V> void lSet2(String dbName, K key, long posttion, V value) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param posttion
+//	 * @param value
+//	 * @param expireSeconds 
+//	 */
 //	@Override
-//	public <K, V> void lSet(int dbIndex, K key, long posttion, V value,
-//			long expireSeconds) {
+//	public <K, V> void lSet2(String dbName, K key, long posttion, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long lPush(K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long lPush(K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lPush(int dbIndex, K key, V value) {
+//	public <K, V> Long lPush2(String dbName, K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lPush(int dbIndex, K key, V value, long expireSeconds) {
+//	public <K, V> Long lPush2(String dbName, K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param values
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long lPush(K key, V[] values) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param values
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long lPush(K key, V[] values, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param values
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lPush(int dbIndex, K key, V[] values) {
+//	public <K, V> Long lPush(String dbName, K key, V[] values) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param values
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lPush(int dbIndex, K key, V[] values, long expireSeconds) {
+//	public <K, V> Long lPush(String dbName, K key, V[] values, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param values
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long lPush(K key, Collection<V> values) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param values
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long lPush(K key, Collection<V> values, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param values
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lPush(int dbIndex, K key, Collection<V> values) {
+//	public <K, V> Long lPush(String dbName, K key, Collection<V> values) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param values
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lPush(int dbIndex, K key, Collection<V> values,
-//			long expireSeconds) {
+//	public <K, V> Long lPush(String dbName, K key, Collection<V> values, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long lPushX(K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long lPushX(K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lPushX(int dbIndex, K key, V value) {
+//	public <K, V> Long lPushX2(String dbName, K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lPushX(int dbIndex, K key, V value, long expireSeconds) {
+//	public <K, V> Long lPushX2(String dbName, K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param index
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> V lIndex(K key, long index) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param index
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> V lIndex(int dbIndex, K key, long index) {
+//	public <K, V> V lIndex(K key, long index, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param index
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> V lIndex(String dbName, K key, long index) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param index
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> V lIndex(String dbName, K key, long index, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long lLen(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long lLen(int dbIndex, K key) {
+//	public <K> Long lLen(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> V lPop(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> V lPop(int dbIndex, K key) {
+//	public <K, V> V lPop(K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> V lPop2(String dbName, K key) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> V lPop2(String dbName, K key, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> List<V> lRange(K key, long begin, long end) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> List<V> lRange(int dbIndex, K key, long begin, long end) {
+//	public <K, V> List<V> lRange(K key, long begin, long end, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> lRange(String dbName, K key, long begin, long end) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> lRange(String dbName, K key, long begin, long end, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> List<V> lRangeAll(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> List<V> lRangeAll(int dbIndex, K key) {
+//	public <K, V> List<V> lRangeAll(K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> lRangeAll2(String dbName, K key) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> lRangeAll2(String dbName, K key, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param count
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long lRem(K key, long count, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param count
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lRem(int dbIndex, K key, long count, V value) {
+//	public <K, V> Long lRem(String dbName, K key, long count, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long lRemAll(K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long lRemAll(int dbIndex, K key, V value) {
+//	public <K, V> Long lRemAll(String dbName, K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param begin
+//	 * @param end 
+//	 */
 //	@Override
 //	public <K> void lTrim(K key, long begin, long end) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param begin
+//	 * @param end 
+//	 */
 //	@Override
-//	public <K> void lTrim(int dbIndex, K key, long begin, long end) {
+//	public <K> void lTrim(String dbName, K key, long begin, long end) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long rPush(K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long rPush(K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long rPush(int dbIndex, K key, V value) {
+//	public <K, V> Long rPush2(String dbName, K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long rPush(int dbIndex, K key, V value, long expireSeconds) {
+//	public <K, V> Long rPush2(String dbName, K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param values
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long rPush(K key, V[] values) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param values
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long rPush(K key, V[] values, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param values
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long rPush(int dbIndex, K key, V[] values) {
+//	public <K, V> Long rPush(String dbName, K key, V[] values) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param values
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long rPush(int dbIndex, K key, V[] values, long expireSeconds) {
+//	public <K, V> Long rPush(String dbName, K key, V[] values, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param values
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long rPush(K key, Collection<V> values) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param values
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long rPush(K key, Collection<V> values, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param values
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long rPush(int dbIndex, K key, Collection<V> values) {
+//	public <K, V> Long rPush(String dbName, K key, Collection<V> values) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param values
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long rPush(int dbIndex, K key, Collection<V> values,
-//			long expireSeconds) {
+//	public <K, V> Long rPush(String dbName, K key, Collection<V> values, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long rPushX(K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long rPushX(K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param value
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long rPushX(int dbIndex, K key, V value) {
+//	public <K, V> Long rPushX2(String dbName, K key, V value) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long rPushX(int dbIndex, K key, V value, long expireSeconds) {
+//	public <K, V> Long rPushX2(String dbName, K key, V value, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param srcKey
+//	 * @param destKey
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> V rPopLPush(K srcKey, K destKey) {
+//	public <S, T, V> V rPopLPush(S srcKey, T destKey) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param srcKey
+//	 * @param destKey
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> V rPopLPush(K srcKey, K destKey, long expireSeconds) {
+//	public <S, T, V> V rPopLPush(S srcKey, T destKey, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param srcKey
+//	 * @param destKey
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> V rPopLPush(int dbIndex, K srcKey, K destKey) {
+//	public <S, T, V> V rPopLPush(S srcKey, T destKey, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param srcKey
+//	 * @param destKey
+//	 * @param expireSeconds
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> V rPopLPush(int dbIndex, K srcKey, K destKey,
-//			long expireSeconds) {
+//	public <S, T, V> V rPopLPush(S srcKey, T destKey, long expireSeconds, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param srcKey
+//	 * @param destKey
+//	 * @return 
+//	 */
+//	@Override
+//	public <S, T, V> V rPopLPush2(String dbName, S srcKey, T destKey) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param srcKey
+//	 * @param destKey
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <S, T, V> V rPopLPush2(String dbName, S srcKey, T destKey, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param srcKey
+//	 * @param destKey
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
+//	@Override
+//	public <S, T, V> V rPopLPush2(String dbName, S srcKey, T destKey, long expireSeconds) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param srcKey
+//	 * @param destKey
+//	 * @param expireSeconds
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <S, T, V> V rPopLPush2(String dbName, S srcKey, T destKey, long expireSeconds, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> V rPop(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> V rPop(int dbIndex, K key) {
+//	public <K, V> V rPop(K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> V rPop2(String dbName, K key) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> V rPop2(String dbName, K key, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long sAdd(K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param member
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long sAdd(K key, V member, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long sAdd(int dbIndex, K key, V member) {
+//	public <K, V> Long sAdd2(String dbName, K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param member
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long sAdd(int dbIndex, K key, V member, long expireSeconds) {
+//	public <K, V> Long sAdd2(String dbName, K key, V member, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long sAdd(K key, V[] members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param members
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long sAdd(K key, V[] members, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long sAdd(int dbIndex, K key, V[] members) {
+//	public <K, V> Long sAdd(String dbName, K key, V[] members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param members
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long sAdd(int dbIndex, K key, V[] members, long expireSeconds) {
+//	public <K, V> Long sAdd(String dbName, K key, V[] members, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long sAdd(K key, Collection<V> members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param members
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long sAdd(K key, Collection<V> members, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long sAdd(int dbIndex, K key, Collection<V> members) {
+//	public <K, V> Long sAdd(String dbName, K key, Collection<V> members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param members
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long sAdd(int dbIndex, K key, Collection<V> members,
-//			long expireSeconds) {
+//	public <K, V> Long sAdd(String dbName, K key, Collection<V> members, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long sCard(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sCard(int dbIndex, K key) {
+//	public <K> Long sCard(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
-//	@Override
-//	public <K, V> Set<V> sDiff(K[] keys) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K, V> Set<V> sDiff(int dbIndex, K[] keys) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Set<V> sDiff(Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> sDiff(int dbIndex, Collection<K> keys) {
+//	public <K, V> Set<V> sDiff(Collection<K> keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sDiffStore(K destKey, K[] keys) {
+//	public <K, V> Set<V> sDiff(String dbName, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sDiffStore(K destKey, K[] keys, long expireSeconds) {
+//	public <K, V> Set<V> sDiff(String dbName, Collection<K> keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sDiffStore(int dbIndex, K destKey, K[] keys) {
+//	public <K, V> Set<V> sDiff(K[] keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sDiffStore(int dbIndex, K destKey, K[] keys,
-//			long expireSeconds) {
+//	public <K, V> Set<V> sDiff(K[] keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sDiffStore(K destKey, Collection<K> keys) {
+//	public <K, V> Set<V> sDiff(String dbName, K[] keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sDiffStore(K destKey, Collection<K> keys, long expireSeconds) {
+//	public <K, V> Set<V> sDiff(String dbName, K[] keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sDiffStore(int dbIndex, K destKey, Collection<K> keys) {
+//	public <T, K> Long sDiffStore(T destKey, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sDiffStore(int dbIndex, K destKey, Collection<K> keys,
-//			long expireSeconds) {
+//	public <T, K> Long sDiffStore(T destKey, Collection<K> keys, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> sInter(K[] keys) {
+//	public <T, K> Long sDiffStore(String dbName, T destKey, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> sInter(int dbIndex, K[] keys) {
+//	public <T, K> Long sDiffStore(String dbName, T destKey, Collection<K> keys, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sDiffStore(T destKey, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sDiffStore(T destKey, K[] keys, long expireSeconds) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sDiffStore(String dbName, T destKey, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sDiffStore(String dbName, T destKey, K[] keys, long expireSeconds) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Set<V> sInter(Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> sInter(int dbIndex, Collection<K> keys) {
+//	public <K, V> Set<V> sInter(Collection<K> keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sInterStore(K destKey, K[] keys) {
+//	public <K, V> Set<V> sInter(String dbName, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sInterStore(K destKey, K[] keys, long expireSeconds) {
+//	public <K, V> Set<V> sInter(String dbName, Collection<K> keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sInterStore(int dbIndex, K destKey, K[] keys) {
+//	public <K, V> Set<V> sInter(K[] keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sInterStore(int dbIndex, K destKey, K[] keys,
-//			long expireSeconds) {
+//	public <K, V> Set<V> sInter(K[] keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sInterStore(K destKey, Collection<K> keys) {
+//	public <K, V> Set<V> sInter(String dbName, K[] keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sInterStore(K destKey, Collection<K> keys,
-//			long expireSeconds) {
+//	public <K, V> Set<V> sInter(String dbName, K[] keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sInterStore(int dbIndex, K destKey, Collection<K> keys) {
+//	public <T, K> Long sInterStore(T destKey, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sInterStore(int dbIndex, K destKey, Collection<K> keys,
-//			long expireSeconds) {
+//	public <T, K> Long sInterStore(T destKey, Collection<K> keys, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> sUnion(K[] keys) {
+//	public <T, K> Long sInterStore(String dbName, T destKey, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> sUnion(int dbIndex, K[] keys) {
+//	public <T, K> Long sInterStore(String dbName, T destKey, Collection<K> keys, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sInterStore(T destKey, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sInterStore(T destKey, K[] keys, long expireSeconds) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sInterStore(String dbName, T destKey, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sInterStore(String dbName, T destKey, K[] keys, long expireSeconds) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Set<V> sUnion(Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> sUnion(int dbIndex, Collection<K> keys) {
+//	public <K, V> Set<V> sUnion(Collection<K> keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sUnionStore(K destKey, K[] keys) {
+//	public <K, V> Set<V> sUnion(String dbName, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sUnionStore(K destKey, K[] keys, long expireSeconds) {
+//	public <K, V> Set<V> sUnion(String dbName, Collection<K> keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sUnionStore(int dbIndex, K destKey, K[] keys) {
+//	public <K, V> Set<V> sUnion(K[] keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sUnionStore(int dbIndex, K destKey, K[] keys,
-//			long expireSeconds) {
+//	public <K, V> Set<V> sUnion(K[] keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sUnionStore(K destKey, Collection<K> keys) {
+//	public <K, V> Set<V> sUnion(String dbName, K[] keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sUnionStore(K destKey, Collection<K> keys,
-//			long expireSeconds) {
+//	public <K, V> Set<V> sUnion(String dbName, K[] keys, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sUnionStore(int dbIndex, K destKey, Collection<K> keys) {
+//	public <T, K> Long sUnionStore(T destKey, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long sUnionStore(int dbIndex, K destKey, Collection<K> keys,
-//			long expireSeconds) {
+//	public <T, K> Long sUnionStore(T destKey, Collection<K> keys, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sUnionStore(String dbName, T destKey, Collection<K> keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sUnionStore(String dbName, T destKey, Collection<K> keys, long expireSeconds) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sUnionStore(T destKey, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sUnionStore(T destKey, K[] keys, long expireSeconds) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sUnionStore(String dbName, T destKey, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
+//	@Override
+//	public <T, K> Long sUnionStore(String dbName, T destKey, K[] keys, long expireSeconds) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Boolean sIsMember(K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Boolean sIsMember(int dbIndex, K key, V member) {
+//	public <K, V> Boolean sIsMember(String dbName, K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Set<V> sMembers(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> sMembers(int dbIndex, K key) {
+//	public <K, V> Set<V> sMembers(K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Boolean sMove(K srcKey, K destKey, V member) {
+//	public <K, V> Set<V> sMembers2(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Boolean sMove(int dbIndex, K srcKey, K destKey, V member) {
+//	public <K, V> Set<V> sMembers2(String dbName, K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param srcKey
+//	 * @param destKey
+//	 * @param member
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, T, V> Boolean sMove(K srcKey, T destKey, V member) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param srcKey
+//	 * @param destKey
+//	 * @param member
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, T, V> Boolean sMove(String dbName, K srcKey, T destKey, V member) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> V sPop(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> V sPop(int dbIndex, K key) {
+//	public <K, V> V sPop(K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> V sPop2(String dbName, K key) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> V sPop2(String dbName, K key, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> V sRandMember(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> V sRandMember(int dbIndex, K key) {
+//	public <K, V> V sRandMember(K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> V sRandMember2(String dbName, K key) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> V sRandMember2(String dbName, K key, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long sRem(K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long sRem(int dbIndex, K key, V member) {
+//	public <K, V> Long sRem(String dbName, K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long sRem(K key, V[] members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long sRem(int dbIndex, K key, V[] members) {
+//	public <K, V> Long sRem(String dbName, K key, V[] members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long sRem(K key, Collection<V> members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long sRem(int dbIndex, K key, Collection<V> members) {
+//	public <K, V> Long sRem(String dbName, K key, Collection<V> members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param score
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Boolean zAdd(K key, double score, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param score
+//	 * @param member
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Boolean zAdd(K key, double score, V member, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param score
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Boolean zAdd(int dbIndex, K key, double score, V member) {
+//	public <K, V> Boolean zAdd2(String dbName, K key, double score, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param score
+//	 * @param member
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Boolean zAdd(int dbIndex, K key, double score, V member,
-//			long expireSeconds) {
+//	public <K, V> Boolean zAdd2(String dbName, K key, double score, V member, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param scoreMembers
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param scoreMembers
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers,
-//			long expireSeconds) {
+//	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param scoreMembers
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Boolean zAdd(int dbIndex, K key, Map<Double, V> scoreMembers) {
+//	public <K, V> Boolean zAdd(String dbName, K key, Map<Double, V> scoreMembers) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param scoreMembers
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Boolean zAdd(int dbIndex, K key, Map<Double, V> scoreMembers,
-//			long expireSeconds) {
+//	public <K, V> Boolean zAdd(String dbName, K key, Map<Double, V> scoreMembers, long expireSeconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long zCard(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long zCard(int dbIndex, K key) {
+//	public <K> Long zCard(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long zCount(K key, double minScore, double maxScore) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long zCount(int dbIndex, K key, double minScore, double maxScore) {
+//	public <K> Long zCount(String dbName, K key, double minScore, double maxScore) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Set<V> zRange(K key, long begin, long end) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> zRange(int dbIndex, K key, long begin, long end) {
+//	public <K, V> Set<V> zRange(K key, long begin, long end, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Set<V> zRange(String dbName, K key, long begin, long end) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Set<V> zRange(String dbName, K key, long begin, long end, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Set<V> zRangeAll(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> zRangeAll(int dbIndex, K key) {
+//	public <K, V> Set<V> zRangeAll(K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Set<V> zRangeAll2(String dbName, K key) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Set<V> zRangeAll2(String dbName, K key, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> zRangeByScore(int dbIndex, K key, double minScore,
-//			double maxScore) {
+//	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore,
-//			long offset, long count) {
+//	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> zRangeByScore(int dbIndex, K key, double minScore,
-//			double maxScore, long offset, long count) {
+//	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @param offset
+//	 * @param count
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Set<Tuple> zRangeByScoreWithScores(K key, double minScore,
-//			double maxScore) {
+//	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, long offset, long count) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @param offset
+//	 * @param count
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Set<Tuple> zRangeByScoreWithScores(int dbIndex, K key,
-//			double minScore, double maxScore) {
+//	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, long offset, long count,
+//			Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @param offset
+//	 * @param count
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Set<Tuple> zRangeByScoreWithScores(K key, double minScore,
-//			double maxScore, long offset, long count) {
+//	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore, long offset,
+//			long count) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @param offset
+//	 * @param count
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Set<Tuple> zRangeByScoreWithScores(int dbIndex, K key,
-//			double minScore, double maxScore, long offset, long count) {
+//	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore, long offset, long count,
+//			Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long zRank(K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long zRank(int dbIndex, K key, V member) {
+//	public <K, V> Long zRank(String dbName, K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long zRem(K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long zRem(int dbIndex, K key, V member) {
+//	public <K, V> Long zRem(String dbName, K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long zRem(K key, V[] members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long zRem(int dbIndex, K key, V[] members) {
+//	public <K, V> Long zRem(String dbName, K key, V[] members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long zRem(K key, Collection<V> members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param members
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long zRem(int dbIndex, K key, Collection<V> members) {
+//	public <K, V> Long zRem(String dbName, K key, Collection<V> members) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long zRemRangeByRank(K key, long begin, long end) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long zRemRangeByRank(int dbIndex, K key, long begin, long end) {
+//	public <K> Long zRemRangeByRank(String dbName, K key, long begin, long end) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long zRemRangeByScore(K key, double minScore, double maxScore) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long zRemRangeByScore(int dbIndex, K key, double minScore,
-//			double maxScore) {
+//	public <K> Long zRemRangeByScore(String dbName, K key, double minScore, double maxScore) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Set<V> zRevRange(K key, long begin, long end) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> zRevRange(int dbIndex, K key, long begin, long end) {
+//	public <K, V> Set<V> zRevRange(K key, long begin, long end, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Set<V> zRevRange(String dbName, K key, long begin, long end) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param begin
+//	 * @param end
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Set<V> zRevRange(String dbName, K key, long begin, long end, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Set<V> zRevRangeAll(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> zRevRangeAll(int dbIndex, K key) {
+//	public <K, V> Set<V> zRevRangeAll(K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> zRevRangeByScore(K key, double minScore,
-//			double maxScore) {
+//	public <K, V> Set<V> zRevRangeAll2(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Set<V> zRevRangeByScore(int dbIndex, K key, double minScore,
-//			double maxScore) {
+//	public <K, V> Set<V> zRevRangeAll2(String dbName, K key, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Set<Tuple> zRevRangeByScoreWithScores(K key, double minScore,
-//			double maxScore) {
+//	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Set<Tuple> zRevRangeByScoreWithScores(int dbIndex, K key,
-//			double minScore, double maxScore) {
+//	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Set<Tuple> zRevRangeByScoreWithScores(K key, double minScore,
-//			double maxScore, long offset, long count) {
+//	public <K, V> Set<V> zRevRangeByScore(String dbName, K key, double minScore, double maxScore) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param minScore
+//	 * @param maxScore
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Set<Tuple> zRevRangeByScoreWithScores(int dbIndex, K key,
-//			double minScore, double maxScore, long offset, long count) {
+//	public <K, V> Set<V> zRevRangeByScore(String dbName, K key, double minScore, double maxScore, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Long zRevRank(K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Long zRevRank(int dbIndex, K key, V member) {
+//	public <K, V> Long zRevRank(String dbName, K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Double zScore(K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Double zScore(int dbIndex, K key, V member) {
+//	public <K, V> Double zScore(String dbName, K key, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long zUnionStore(K destKey, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long zUnionStore(int dbIndex, K destKey, K key) {
+//	public <K> Long zUnionStore(String dbName, K destKey, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long zUnionStore(K destKey, K[] keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long zUnionStore(int dbIndex, K destKey, K[] keys) {
+//	public <K> Long zUnionStore(String dbName, K destKey, K[] keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long zUnionStore(K destKey, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long zUnionStore(int dbIndex, K destKey, Collection<K> keys) {
+//	public <K> Long zUnionStore(String dbName, K destKey, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
-//	@Override
-//	public <K> Long zUnionStore(K destKey, ZParams params, int[] weights, K[] keys) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K> Long zUnionStore(int dbIndex, K destKey, ZParams params,
-//			int[] weights, K[] keys) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K> Long zUnionStore(K destKey, ZParams params, int[] weights,
-//			Collection<K> keys) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K> Long zUnionStore(int dbIndex, K destKey, ZParams params,
-//			int[] weights, Collection<K> keys) {
-//		return null;
-//	}
-//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param srcKey
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long zInterStore(K destKey, K srcKey) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param srcKey
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long zInterStore(int dbIndex, K destKey, K srcKey) {
+//	public <K> Long zInterStore(String dbName, K destKey, K srcKey) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long zInterStore(K destKey, K[] keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long zInterStore(int dbIndex, K destKey, K[] keys) {
+//	public <K> Long zInterStore(String dbName, K destKey, K[] keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long zInterStore(K destKey, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param destKey
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long zInterStore(int dbIndex, K destKey, Collection<K> keys) {
+//	public <K> Long zInterStore(String dbName, K destKey, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
-//	@Override
-//	public <K> Long zInterStore(K destKey, ZParams params, int[] weights,
-//			K[] keys) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K> Long zInterStore(int dbIndex, K destKey, ZParams params,
-//			int[] weights, K[] keys) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K> Long zInterStore(K destKey, ZParams params, int[] weights,
-//			Collection<K> keys) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K> Long zInterStore(int dbIndex, K destKey, ZParams params,
-//			int[] weights, Collection<K> keys) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param increment
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
 //	public <K, V> Double zIncrBy(K key, double increment, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param increment
+//	 * @param member
+//	 * @return 
+//	 */
 //	@Override
-//	public <K, V> Double zIncrBy(int dbIndex, K key, double increment, V member) {
+//	public <K, V> Double zIncrBy(String dbName, K key, double increment, V member) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Set<K> keys() {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keyType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Set<K> keys(int dbIndex) {
+//	public <K> Set<K> keys(Class<K> keyType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Set<K> keys(String pattern) {
+//	public <K> Set<K> keys(String dbName) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keyType
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Set<K> keys(int dbIndex, String pattern) {
+//	public <K> Set<K> keys(String dbName, Class<K> keyType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param pattern
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Set<K> keysByPattern(String pattern) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param pattern
+//	 * @param keyType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Set<K> keysByPattern(String pattern, Class<K> keyType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param pattern
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Set<K> keysByPattern(String dbName, String pattern) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param pattern
+//	 * @param keyType
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Set<K> keysByPattern(String dbName, String pattern, Class<K> keyType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long del(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long del(int dbIndex, K key) {
+//	public <K> Long del(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
-//	@Override
-//	public <K> Long del(K[] keys) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K> Long del(int dbIndex, K[] keys) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long del(Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long del(int dbIndex, Collection<K> keys) {
+//	public <K> Long del(String dbName, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Long del(K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Long del(String dbName, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Boolean exists(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Boolean exists(int dbIndex, K key) {
+//	public <K> Boolean exists(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
-//	
+//
 //	/**
 //	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 //	 * @param keys
@@ -1869,12 +4203,12 @@
 //
 //	/**
 //	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-//	 * @param dbIndex
+//	 * @param dbName
 //	 * @param keys
 //	 * @return 
 //	 */
 //	@Override
-//	public <K> List<KeyValuePair<K, Boolean>> exists(int dbIndex, K[] keys) {
+//	public <K> List<KeyValuePair<K, Boolean>> exists(String dbName, K[] keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
@@ -1892,183 +4226,544 @@
 //
 //	/**
 //	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-//	 * @param dbIndex
+//	 * @param dbName
 //	 * @param keys
 //	 * @return 
 //	 */
 //	@Override
-//	public <K> List<KeyValuePair<K, Boolean>> exists(int dbIndex, Collection<K> keys) {
+//	public <K> List<KeyValuePair<K, Boolean>> exists(String dbName, Collection<K> keys) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param seconds
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Boolean expire(K key, long seconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param seconds
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Boolean expire(int dbIndex, K key, long seconds) {
+//	public <K> Boolean expire(String dbName, K key, long seconds) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param timestamp
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Boolean expireAt(K key, long timestamp) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param timestamp
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Boolean expireAt(int dbIndex, K key, long timestamp) {
+//	public <K> Boolean expireAt(String dbName, K key, long timestamp) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param date
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Boolean expireAt(K key, Date date) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param date
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Boolean expireAt(int dbIndex, K key, Date date) {
+//	public <K> Boolean expireAt(String dbName, K key, Date date) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param targetIndex
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Boolean move(K key, int targetIndex) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @param targetIndex
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Boolean move(int dbIndex, K key, int targetIndex) {
+//	public <K> Boolean move(String dbName, K key, int targetIndex) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
 //	public <K> Long ttl(K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param key
+//	 * @return 
+//	 */
 //	@Override
-//	public <K> Long ttl(int dbIndex, K key) {
+//	public <K> Long ttl(String dbName, K key) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
-//	@Override
-//	public <K, V> List<V> sort(K key, SortingParams params) {
-//		return null;
-//	}
-//
-//	@Override
-//	public <K, V> List<V> sort(int dbIndex, K key, SortingParams params) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K, V> Long sortCount(K key, SortingParams params, K targetKey) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K, V> Long sortCount(int dbIndex, K key, SortingParams params,
-//			K targetKey) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K, V> List<V> sortResult(K key, SortingParams params, K targetKey) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K, V> List<V> sortResult(int dbIndex, K key, SortingParams params,
-//			K targetKey) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K> DataType type(K key) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public <K> DataType type(int dbIndex, K key) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @return 
+//	 */
 //	@Override
 //	public <V> Set<V> values() {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <V> Set<V> values(int dbIndex) {
+//	public <V> Set<V> values(Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @return 
+//	 */
 //	@Override
-//	public <V> Set<V> values(String pattern) {
+//	public <V> Set<V> values(String dbName) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param valueType
+//	 * @return 
+//	 */
 //	@Override
-//	public <V> Set<V> values(int dbIndex, String pattern) {
+//	public <V> Set<V> values(String dbName, Class<V> valueType) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param pattern
+//	 * @return 
+//	 */
+//	@Override
+//	public <V> Set<V> valuesByPattern(String pattern) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param pattern
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <V> Set<V> valuesByPattern(String pattern, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param pattern
+//	 * @return 
+//	 */
+//	@Override
+//	public <V> Set<V> valuesByPattern(String dbName, String pattern) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @param pattern
+//	 * @param valueType
+//	 * @return 
+//	 */
+//	@Override
+//	public <V> Set<V> valuesByPattern(String dbName, String pattern, Class<V> valueType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @return 
+//	 */
 //	@Override
 //	public Long dbSize() {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName
+//	 * @return 
+//	 */
 //	@Override
-//	public Long dbSize(int dbIndex) {
+//	public Long dbSize(String dbName) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a>  
+//	 */
 //	@Override
 //	public void flushAll() {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a>  
+//	 */
 //	@Override
 //	public void flushDb() {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbName 
+//	 */
 //	@Override
-//	public void flushDb(int dbIndex) {
+//	public void flushDb(String dbName) {
 //		// TODO Auto-generated method stub
 //		
 //	}
 //
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a>  
+//	 */
 //	@Override
 //	public void shutdown() {
 //		// TODO Auto-generated method stub
 //		
 //	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param params
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> sort(K key, SortingParams params) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbIndex
+//	 * @param key
+//	 * @param params
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> sort(int dbIndex, K key, SortingParams params) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param params
+//	 * @param targetKey
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Long sortCount(K key, SortingParams params, K targetKey) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbIndex
+//	 * @param key
+//	 * @param params
+//	 * @param targetKey
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Long sortCount(int dbIndex, K key, SortingParams params, K targetKey) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param params
+//	 * @param targetKey
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> sortResult(K key, SortingParams params, K targetKey) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbIndex
+//	 * @param key
+//	 * @param params
+//	 * @param targetKey
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> List<V> sortResult(int dbIndex, K key, SortingParams params, K targetKey) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param where
+//	 * @param pivot
+//	 * @param value
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Long lInsert(K key, LIST_POSITION where, V pivot, V value) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param key
+//	 * @param where
+//	 * @param pivot
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Long lInsert(K key, LIST_POSITION where, V pivot, V value, long expireSeconds) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbIndex
+//	 * @param key
+//	 * @param where
+//	 * @param pivot
+//	 * @param value
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Long lInsert(int dbIndex, K key, LIST_POSITION where, V pivot, V value) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbIndex
+//	 * @param key
+//	 * @param where
+//	 * @param pivot
+//	 * @param value
+//	 * @param expireSeconds
+//	 * @return 
+//	 */
+//	@Override
+//	public <K, V> Long lInsert(int dbIndex, K key, LIST_POSITION where, V pivot, V value, long expireSeconds) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param params
+//	 * @param weights
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Long zUnionStore(K destKey, ZParams params, int[] weights, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbIndex
+//	 * @param destKey
+//	 * @param params
+//	 * @param weights
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Long zUnionStore(int dbIndex, K destKey, ZParams params, int[] weights, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param params
+//	 * @param weights
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Long zUnionStore(K destKey, ZParams params, int[] weights, Collection<K> keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbIndex
+//	 * @param destKey
+//	 * @param params
+//	 * @param weights
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Long zUnionStore(int dbIndex, K destKey, ZParams params, int[] weights, Collection<K> keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param params
+//	 * @param weights
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Long zInterStore(K destKey, ZParams params, int[] weights, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbIndex
+//	 * @param destKey
+//	 * @param params
+//	 * @param weights
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Long zInterStore(int dbIndex, K destKey, ZParams params, int[] weights, K[] keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param destKey
+//	 * @param params
+//	 * @param weights
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Long zInterStore(K destKey, ZParams params, int[] weights, Collection<K> keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @param dbIndex
+//	 * @param destKey
+//	 * @param params
+//	 * @param weights
+//	 * @param keys
+//	 * @return 
+//	 */
+//	@Override
+//	public <K> Long zInterStore(int dbIndex, K destKey, ZParams params, int[] weights, Collection<K> keys) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	
 //
 //}

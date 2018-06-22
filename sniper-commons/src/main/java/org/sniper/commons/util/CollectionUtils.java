@@ -803,7 +803,7 @@ public class CollectionUtils {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T[] toArray(Collection<T> collection, Class<T> componentType) {
-		AssertUtils.assertNotNull(componentType, "Component type can not be null.");
+		AssertUtils.assertNotNull(componentType, "Component type can not be null");
 		if (isEmpty(collection))
 			return (T[]) Array.newInstance(componentType, 0);
 		

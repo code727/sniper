@@ -76,15 +76,14 @@
     <bean id="repositoryManager" class="org.sniper.nosql.redis.DefaultRedisRepositoryManager">
 		<property name="repositories">
 			<map>
-				<entry key="k-v-string" value-ref="k-v-string" />
-				<entry key="k-v-json" value-ref="k-v-json" />
-				<entry key="k-v-hessian" value-ref="k-v-hessian" />
+				<entry key="string" value-ref="string" />
+				<entry key="json" value-ref="json" />
+				<entry key="hessian" value-ref="hessian" />
 			</map>
 		</property>
 	</bean>
 	
-	<bean id="k-v-string" class="org.sniper.nosql.redis.RedisRepository">
-		<property name="namespace" value="org.sniper.nosql.redis.test.repository_0" />		
+	<bean id="string" class="org.sniper.nosql.redis.RedisRepository">
 		<property name="keySerializer">
 			<bean class="org.sniper.serialization.jdk.StringSerializer" />
 		</property>
@@ -93,8 +92,7 @@
 		</property>
 	</bean>
 	
-	<bean id="k-v-json" class="org.sniper.nosql.redis.RedisRepository">
-		<property name="namespace" value="org.sniper.nosql.redis.test.repository_1" />
+	<bean id="json" class="org.sniper.nosql.redis.RedisRepository">
 		<property name="dbIndex" value="1" />
 		<property name="keySerializer">
 			<bean class="org.sniper.serialization.jdk.StringSerializer" />
@@ -104,8 +102,7 @@
 		</property>
 	</bean>
 	
-	<bean id="k-v-hessian" class="org.sniper.nosql.redis.RedisRepository">
-		<property name="namespace" value="org.sniper.nosql.redis.test.repository_2" />
+	<bean id="hessian" class="org.sniper.nosql.redis.RedisRepository">
 		<property name="dbIndex" value="2" />
 		<property name="keySerializer">
 			<bean class="org.sniper.serialization.jdk.StringSerializer" />

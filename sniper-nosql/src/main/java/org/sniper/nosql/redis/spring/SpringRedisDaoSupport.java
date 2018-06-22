@@ -236,7 +236,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * @return
 	 */
 	protected <V> List<V> listTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
-		return deserializeValueByteToList(dbName, connection.lRange(targetKey, 0, -1), valueType);
+		return deserializeValueBytesToList(dbName, connection.lRange(targetKey, 0, -1), valueType);
 	}
 	
 	/**
@@ -249,7 +249,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 * @return
 	 */
 	protected <V> List<V> setTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
-		return deserializeValueByteToList(dbName, connection.sMembers(targetKey), valueType);
+		return deserializeValueBytesToList(dbName, connection.sMembers(targetKey), valueType);
 	}
 	
 	/**
@@ -263,7 +263,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 */
 	protected <V> List<V> zsetTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
 		Set<byte[]> resultBytes = connection.zRange(targetKey, 0, -1);
-		return deserializeValueByteToList(dbName, resultBytes, valueType);
+		return deserializeValueBytesToList(dbName, resultBytes, valueType);
 	}
 	
 	/**

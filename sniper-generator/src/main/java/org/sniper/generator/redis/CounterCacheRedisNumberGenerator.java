@@ -34,8 +34,8 @@ import org.sniper.nosql.redis.dao.RedisCommandsDao;
  * 2.再次以"start = redisSeed - cacheSize"的公式计算出新起始值后更新计数器。</P>
  * 此实现类生成的结果具备如下特点：</P>
  * 1)生成的数字是全局唯一的；</P>
- * 2)在单节点单线程环境中生成的数字是连续递增的；</P>
- * 3)在多线程(多节点)环境中生成的数字不是连续的，但是趋势递增的；</P>
+ * 2)在单节点单线程无中断环境中生成的数字是连续递增的；</P>
+ * 3)在其余环境(单节点多线程/多节点单线程/多节点多线程)中生成的数字不能保证是连续的，也不能保证是趋势递增的；</P>
  * 4)由于此实现是基于计数器起始值和步长参数计算出来的，因此当服务重启再恢复后，新旧数字之间可能存在不连续的情况，断续长度取决于计数器的步长设置；
  * 此实现类的关键性能参数是cacheSize，它决定了计数器在每一个计数区间的步长，从而影响更新频率：</P>
  * 1)cacheSize越大，并且当服务重启再恢复后，断续长度可能会越大，从而造成浪费；</P>
@@ -76,24 +76,34 @@ public class CounterCacheRedisNumberGenerator<K, P> extends CacheableRedisNumber
 			}
 		}
 		
-		/* 由于greaterThanEqualsMaximum和setStart方法是非原子性的，
-		 * 并且存在多线程"先检查后执行"问题，因此需加锁操作 */
-		synchronized (lock) {
-			if (counter.greaterThanEqualsMaximum()) {
-				long start = calculateStartValueByParameter(parameter);
-				logger.debug("Parameter '{}' counter {} current value greater than or equals max limit, reset [start={}]", parameter, counter, start);
-				counter.setStart(start);
+		Long value = counter.increment();
+		if (value > counter.getMaximum()) {
+			synchronized (lock) {
+				if (value > counter.getMaximum()) {
+					long start = calculateStartValueByParameter(parameter);
+					counter = new AtomicLongIntervalCounter(start, (long) cacheSize);
+					value = counter.increment();
+				}
 			}
-		}
-				
-	    return counter.increment();
+		}		
+		
+//		if (value == null) {
+//			synchronized (lock) {
+//				if ((value = counter.increment()) == null) {
+//					long start = calculateStartValueByParameter(parameter);
+//					counter = new AtomicLongIntervalCounter(start, (long) cacheSize);
+//					value = counter.increment();
+//				}
+//			}
+//		}
+	    return value;
 	}
 	
 	/**
 	 * 根据参数计算出计数器的起始值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter
-	 * @return
+	 * @returnp
 	 */
 	protected long calculateStartValueByParameter(P parameter) {
 		/* 同QueueCacheRedisNumberGenerator实现类一样，不要以redis的自然累加(incr指令)结果作为种子来计算起始元素，
