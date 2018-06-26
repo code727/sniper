@@ -14,7 +14,7 @@
 	
 	<bean id="redisParameterizeGenerator" class="org.sniper.generator.redis.CounterCacheRedisNumberGenerator" >
 		<constructor-arg name="redisCommandsDao" ref="redisCommandsDao" />
-		<property name="cacheSize" value="10" />
+		<property name="cacheSize" value="100000" />
 	</bean>
 	
 	<bean id="dimensionGenerator" class="org.sniper.generator.dimension.DateDimensionGenerator" >

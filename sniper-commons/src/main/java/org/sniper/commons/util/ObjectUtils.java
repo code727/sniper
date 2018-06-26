@@ -148,6 +148,16 @@ public class ObjectUtils {
 	}
 	
 	/**
+	 * 调用对象的toString()方法，若对象为Null，则返回字符串"null"
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static String toSafeNullString(Object obj) {
+		return obj != null ? obj.toString() : StringUtils.NULL;
+	}
+	
+	/**
 	 * 获取对象元素的个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj

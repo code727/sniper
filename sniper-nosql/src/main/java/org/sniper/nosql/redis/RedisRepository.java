@@ -18,8 +18,7 @@
 
 package org.sniper.nosql.redis;
 
-import java.util.concurrent.TimeUnit;
-
+import org.sniper.commons.timer.DefaultExpiredTimer;
 import org.sniper.serialization.Serializer;
 
 /**
@@ -27,17 +26,11 @@ import org.sniper.serialization.Serializer;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisRepository {
+public class RedisRepository extends DefaultExpiredTimer {
 		
 	/** 当前库索引 */
 	private int dbIndex;
-	
-	/** 针对于当前库所有数据的过期时间 */
-	private long expireTime;
-	
-	/** 过期时间单位，默认为秒 */
-	private TimeUnit timeUnit = TimeUnit.SECONDS;
-	
+		
 	/** 键序列化器 */
 	private Serializer keySerializer;
 	
@@ -57,23 +50,7 @@ public class RedisRepository {
 	public void setDbIndex(int dbIndex) {
 		this.dbIndex = dbIndex;
 	}
-
-	public long getExpireTime() {
-		return expireTime;
-	}
-
-	public void setExpireTime(long expireTime) {
-		this.expireTime = expireTime;
-	}
-
-	public TimeUnit getTimeUnit() {
-		return timeUnit;
-	}
-
-	public void setTimeUnit(TimeUnit timeUnit) {
-		this.timeUnit = timeUnit;
-	}
-
+	
 	public Serializer getKeySerializer() {
 		return keySerializer;
 	}

@@ -30,7 +30,6 @@ import java.util.Set;
 import org.sniper.beans.PropertyConverter;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.RedisRepositoryManager;
@@ -168,17 +167,7 @@ public abstract class RedisDaoSupport extends CheckableInitializingBean {
 			return 0L;
 		
 		RedisRepository repository = repositoryManager.getRepository(dbName);
-		return repository != null ? getExpireSeconds(repository) : 0L;
-	}
-	
-	/**
-	 * 获取指定库设置的过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param repository
-	 * @return
-	 */
-	protected long getExpireSeconds(RedisRepository repository) {
-		return DateUtils.toSeconds(repository.getExpireTime(), repository.getTimeUnit());
+		return repository != null ? repository.toSeconds() : 0L;
 	}
 	
 	/**

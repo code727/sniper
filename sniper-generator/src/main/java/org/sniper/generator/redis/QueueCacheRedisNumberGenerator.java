@@ -22,7 +22,10 @@ import java.util.Queue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.lock.ParameterizeLock;
+import org.sniper.lock.jdk.JdkParameterizeLock;
 import org.sniper.nosql.redis.dao.RedisCommandsDao;
 
 /**
@@ -60,42 +63,53 @@ public class QueueCacheRedisNumberGenerator<K, P> extends CacheableRedisNumberGe
 	
 	private static final Logger logger = LoggerFactory.getLogger(QueueCacheRedisNumberGenerator.class);
 	
-	protected static final Object lock;
-	
-	static {
-		lock = new Object();
-	}
+	protected final ParameterizeLock<P> lock;
 
 	public QueueCacheRedisNumberGenerator(RedisCommandsDao redisCommandsDao) {
-		super(redisCommandsDao);
+		this(null, redisCommandsDao);
+	}
+	
+	public QueueCacheRedisNumberGenerator(RedisCommandsDao redisCommandsDao, ParameterizeLock<P> lock) {
+		this(null, redisCommandsDao, lock);
 	}
 
 	public QueueCacheRedisNumberGenerator(String dbName, RedisCommandsDao redisCommandsDao) {
+		this(dbName, redisCommandsDao, new JdkParameterizeLock<P>());
+	}
+	
+	public QueueCacheRedisNumberGenerator(String dbName, RedisCommandsDao redisCommandsDao, ParameterizeLock<P> lock) {
 		super(dbName, redisCommandsDao);
+		AssertUtils.assertNotNull(lock, "Parameterize lock must not be null");
+		this.lock = lock;
 	}
 
 	@Override
 	protected Long generateByParameter(P parameter) {
 		Queue<Long> queue = cache.get(parameter);
 		if (queue == null) {
-			synchronized (lock) {
+			lock.lock(parameter);
+			try {
 				// 双重检查，防止多线程环境针对同一参数同时创建多个队列
 				if ((queue = cache.get(parameter)) == null) {
 					queue = CollectionUtils.newConcurrentLinkedQueue();
 					return cache(queue, parameter);
 				}
+			} finally {
+				lock.unlock(parameter);
 			}
-		} else {
-			/* 由于isEmpty和cache方法是非原子性的，
-			 * 并且存在多线程"先检查后执行"问题，因此需加锁操作 */
-			synchronized (lock) {
-				if (queue.isEmpty()) {
-					return cache(queue, parameter);
-				}
-			}
-		}
+		} 
 		
-		return queue.poll();
+		/* 由于isEmpty和cache方法组合在一起是非原子性的，
+		 * 因此存在多线程"先检查后执行"问题，需加锁操作 */
+		lock.lock(parameter);
+		try {
+			if (queue.isEmpty()) {
+				return cache(queue, parameter);
+			}
+			return queue.poll();
+		} finally {
+			lock.unlock(parameter);
+		}
 	}
 	
 	/**

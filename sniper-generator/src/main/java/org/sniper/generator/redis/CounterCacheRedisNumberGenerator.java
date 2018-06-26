@@ -22,6 +22,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.commons.counter.AtomicLongIntervalCounter;
 import org.sniper.commons.counter.IntervalCounter;
+import org.sniper.commons.util.AssertUtils;
+import org.sniper.lock.ParameterizeLock;
+import org.sniper.lock.jdk.JdkParameterizeLock;
 import org.sniper.nosql.redis.dao.RedisCommandsDao;
 
 /**
@@ -48,18 +51,24 @@ public class CounterCacheRedisNumberGenerator<K, P> extends CacheableRedisNumber
 	
 	private static final Logger logger = LoggerFactory.getLogger(QueueCacheRedisNumberGenerator.class);
 	
-	protected static final Object lock;
+	protected final ParameterizeLock<P> lock;
 	
-	static {
-		lock = new Object();
-	}
-
 	public CounterCacheRedisNumberGenerator(RedisCommandsDao redisCommandsDao) {
-		super(redisCommandsDao);
+		this(null, redisCommandsDao);
+	}
+	
+	public CounterCacheRedisNumberGenerator(RedisCommandsDao redisCommandsDao, ParameterizeLock<P> lock) {
+		this(null, redisCommandsDao, lock);
 	}
 	
 	public CounterCacheRedisNumberGenerator(String dbName, RedisCommandsDao redisCommandsDao) {
+		this(dbName, redisCommandsDao, new JdkParameterizeLock<P>());
+	}
+	
+	public CounterCacheRedisNumberGenerator(String dbName, RedisCommandsDao redisCommandsDao, ParameterizeLock<P> lock) {
 		super(dbName, redisCommandsDao);
+		AssertUtils.assertNotNull(lock, "Parameterize lock must not be null");
+		this.lock = lock;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -67,36 +76,32 @@ public class CounterCacheRedisNumberGenerator<K, P> extends CacheableRedisNumber
 	protected Long generateByParameter(P parameter) {
 		IntervalCounter<Long> counter = cache.get(parameter);
 		if (counter == null) {
-			synchronized (lock) {
+			lock.lock(parameter); 
+			try {
+				// 双重检查，防止多线程环境下针对同一参数同时创建多个Counter
 				if ((counter = cache.get(parameter)) == null) {
 					counter = new AtomicLongIntervalCounter(calculateStartValueByParameter(parameter), (long) cacheSize);
 					cache.put((K) parameter, counter);
 					logger.debug("Initialize counter start value '{}' for  parameter '{}' ", counter.getStart(), parameter);
 				}
+			} finally {
+				lock.unlock(parameter);
 			}
+		} 
+		
+		/* 由于counter不是线程安全的，并且increment和判空操作组合在一起是非原子性的，
+		 * 因此存在多线程"先检查后执行"问题，需加锁操作 */
+		lock.lock(parameter);
+		try {
+			Long value = counter.increment();
+			if (value == null) {
+				counter.setStart(calculateStartValueByParameter(parameter));
+				value = counter.increment();
+			}
+			return value;
+		} finally {
+			lock.unlock(parameter);
 		}
-		
-		Long value = counter.increment();
-		if (value > counter.getMaximum()) {
-			synchronized (lock) {
-				if (value > counter.getMaximum()) {
-					long start = calculateStartValueByParameter(parameter);
-					counter = new AtomicLongIntervalCounter(start, (long) cacheSize);
-					value = counter.increment();
-				}
-			}
-		}		
-		
-//		if (value == null) {
-//			synchronized (lock) {
-//				if ((value = counter.increment()) == null) {
-//					long start = calculateStartValueByParameter(parameter);
-//					counter = new AtomicLongIntervalCounter(start, (long) cacheSize);
-//					value = counter.increment();
-//				}
-//			}
-//		}
-	    return value;
 	}
 	
 	/**

@@ -145,7 +145,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 */
 	private void setExpireTime(RedisConnection connection, RedisRepository repository, byte[] key) {
 		if (repository != null) {
-			long expireSeconds = getExpireSeconds(repository);
+			long expireSeconds = repository.toSeconds();
 			if (expireSeconds > 0) 
 				connection.expire(key, expireSeconds);
 		}
@@ -160,7 +160,7 @@ public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
 	 */
 	private void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keySet) {
 		if (repository != null) {
-			long expireSeconds = getExpireSeconds(repository);
+			long expireSeconds = repository.toSeconds();
 			if (expireSeconds > 0) {
 				for (byte[] keyByte : keySet) {
 					connection.expire(keyByte, expireSeconds);

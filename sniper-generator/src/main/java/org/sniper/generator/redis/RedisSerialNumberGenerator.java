@@ -30,7 +30,7 @@ import org.sniper.generator.AbstractParameterizeNumberGenerator;
  */
 public class RedisSerialNumberGenerator<P> extends AbstractParameterizeNumberGenerator<P, Long> {
 	
-	private AbstractRedisParameterizeGenerator<P> redisParameterizeGenerator;
+	private final AbstractRedisParameterizeGenerator<P> redisParameterizeGenerator;
 	
 	public RedisSerialNumberGenerator(AbstractRedisParameterizeGenerator<P> redisParameterizeGenerator) {
 		AssertUtils.assertNotNull(redisParameterizeGenerator, "Redis parameterize generator must not be null");

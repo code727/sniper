@@ -31,7 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Redis流水号生成器单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  <a href="mailto:code727@gmail.com">杜斌</a> 
  * @version 1.0
  */
 public class RedisSerialNumberGeneratorTest extends SpringGeneratorTest {
@@ -41,8 +41,8 @@ public class RedisSerialNumberGeneratorTest extends SpringGeneratorTest {
 	
 	@Override
 	public void init() {
-		uniquenessTest = true;
-		performanceTest = false;
+		uniquenessTest = false;
+		performanceTest = true;
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class RedisSerialNumberGeneratorTest extends SpringGeneratorTest {
 			}
 		};
 		
-		int thradSize = 10;
+		int thradSize = 100;
 		List<Future<Set<String>>> futures = CollectionUtils.newArrayList(thradSize);
 		for (int i = 0; i < thradSize; i++) {
 			futures.add(executor.submit(task));
