@@ -19,7 +19,7 @@
 package org.sniper.generator.redis;
 
 import org.sniper.commons.util.AssertUtils;
-import org.sniper.generator.AbstractParameterizeNumberGenerator;
+import org.sniper.generator.AbstractCompensableParameterizeGenerator;
 
 /**
  * Redis流水号生成器实现类，生成结果满足几点要求：</P>
@@ -28,7 +28,7 @@ import org.sniper.generator.AbstractParameterizeNumberGenerator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisSerialNumberGenerator<P> extends AbstractParameterizeNumberGenerator<P, Long> {
+public class RedisSerialNumberGenerator<P> extends AbstractCompensableParameterizeGenerator<P, Long> {
 	
 	private final AbstractRedisParameterizeGenerator<P> redisParameterizeGenerator;
 	

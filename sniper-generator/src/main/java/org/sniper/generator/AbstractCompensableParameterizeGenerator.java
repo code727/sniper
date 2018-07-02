@@ -18,15 +18,19 @@
 
 package org.sniper.generator;
 
+import java.math.BigInteger;
+
+import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.NumberUtils;
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.generator.dimension.DimensionGenerator;
 
 /**
- * 参数化维度生成器抽象类
+ * 可补偿的参数化生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractParameterizeDimensionGenerator<P, T> extends AbstractParameterizeGenerator<P, String> {
+public abstract class AbstractCompensableParameterizeGenerator<P, T> extends AbstractParameterizeGenerator<P, String> {
 	
 	/** 维度生成器 */
 	protected DimensionGenerator<?> dimensionGenerator;
@@ -38,7 +42,7 @@ public abstract class AbstractParameterizeDimensionGenerator<P, T> extends Abstr
 	protected boolean parameterAsResult;
 	
 	/** 最终结果的最小长度 */
-	protected int minLength = 16;
+	protected int minLength = 16;;
 	
 	public DimensionGenerator<?> getDimensionGenerator() {
 		return dimensionGenerator;
@@ -67,11 +71,12 @@ public abstract class AbstractParameterizeDimensionGenerator<P, T> extends Abstr
 	public int getMinLength() {
 		return minLength;
 	}
-
+	
 	public void setMinLength(int minLength) {
+		AssertUtils.assertTrue(minLength > 0, "Generator min length must greater than 0");
 		this.minLength = minLength;
 	}
-	
+
 	@Override
 	public String generate(Object parameter) {
 		String safeParameter = ObjectUtils.toSafeString(parameter);
@@ -85,14 +90,26 @@ public abstract class AbstractParameterizeDimensionGenerator<P, T> extends Abstr
 			// 参数的长度不参与补偿长度的计算
 			int offset = minLength - length;
 			
-			String result = (offset > 0 ? dimension + makeupGenerate(generated, offset) : dimension + generated);
+			String result = (offset > 0 ? dimension + compensateGenerate(generated, offset) : dimension + generated);
 			return parameterAsResult ? safeParameter + result : result;
 		} 
 		
 		String generated = generateByKey(safeParameter).toString();
 		int offset = minLength - generated.length();
-		String result = (offset > 0 ? makeupGenerate(generated, offset) : generated);
+		String result = (offset > 0 ? compensateGenerate(generated, offset) : generated);
 		return parameterAsResult ? safeParameter + result : result;
+	}
+	
+	/**
+	 * 补偿生成指定字符串长度+offset长度的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param generated
+	 * @param offset
+	 * @return
+	 */
+	protected String compensateGenerate(String generated, int offset) {
+		// 要求generated参数必须为字符串类型的数字，否则会抛出IllegalArgumentException
+		return NumberUtils.format(new BigInteger(generated), generated.length() + offset);
 	}
 	
 	/**
@@ -103,13 +120,4 @@ public abstract class AbstractParameterizeDimensionGenerator<P, T> extends Abstr
 	 */
 	protected abstract T generateByKey(String key);
 	
-	/**
-	 * 补偿生成指定字符串长度+offset长度的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param generated
-	 * @param offset
-	 * @return
-	 */
-	protected abstract String makeupGenerate(String generated, int offset);
-
 }

@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年11月9日
+ * Create Date : 2017-11-9
  */
 
 package org.sniper.generator.test;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -25,58 +26,56 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.generator.Generator;
-import org.sniper.generator.application.SnowflakeGenerator;
+import org.sniper.generator.snowflake.SequenceNode;
+import org.sniper.generator.snowflake.SnowflakeGenerator;
 
 /**
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SnowflakeIDGeneratorTest extends GeneratorTest {
+public class SnowflakeGeneratorTest extends GeneratorTest {
 
-	private Generator<Long> generator = new SnowflakeGenerator(0, 0);
+	private SnowflakeGenerator generator;
 	
 	@Override
 	public void init() {
-		uniquenessTest = false;
-		performanceTest = true;
+		SequenceNode sequenceNode = new SequenceNode();
+		sequenceNode.setUseTwepoch(false);
+		this.generator = new SnowflakeGenerator(sequenceNode);
+		
+		uniquenessTest = true;
+		performanceTest = false;
 	}
 	
 	@Override
 	protected void doUniquenessTest() throws Exception {
 		ExecutorService executor = Executors.newCachedThreadPool();
-		Callable<Set<Long>> task = new Callable<Set<Long>>() {
+		Callable<Set<String>> task = new Callable<Set<String>>() {
 
 			@Override
-			public Set<Long> call() throws Exception {
-				Set<Long> set = CollectionUtils.newLinkedHashSet(size);
+			public Set<String> call() throws Exception {
+				Set<String> set = CollectionUtils.newLinkedHashSet(size);
 				for (int i = 0; i < size; i++) {
-					set.add((Long) generator.generate());
+					set.add(generator.generate().toString());
 				}
 				return set;
 			}
 		};
-
-		Future<Set<Long>> f1 = executor.submit(task);
-		Future<Set<Long>> f2 = executor.submit(task);
-
-		Set<Long> set1 = f1.get();
-		Set<Long> set2 = f2.get();
-		Set<Long> set3 = CollectionUtils.newLinkedHashSet();
-		set3.addAll(set1);
-		set3.addAll(set2);
 		
-		int size1 = set1.size();
-		int size2 = set2.size();
-		int size3 = set3.size();
+		int thradSize = 100;
+		List<Future<Set<String>>> futures = CollectionUtils.newArrayList(thradSize);
+		for (int i = 0; i < thradSize; i++) {
+			futures.add(executor.submit(task));
+		}
 		
-		assertTrue(size1 == size);
-		assertTrue(size2 == size);
-		assertTrue(size3 == (size * 2));
-
-		System.out.println("set1 size:" + size1);
-		System.out.println("set2 size:" + size2);
-		System.out.println("set3 size:" + size3);
+		Set<String> totalSet = CollectionUtils.newLinkedHashSet();
+		for (int i = 0; i < thradSize; i++) {
+			Set<String> set = futures.get(i).get();
+			System.out.println("Set" + (i+1) + " size:" + set.size() + "," + set);
+			totalSet.addAll(set);
+		}
+		
+		System.out.println("Total set size:" + totalSet.size());
 	}
 
 	@Override

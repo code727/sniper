@@ -20,7 +20,7 @@ package org.sniper.generator.application;
 
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.SecurityUtils;
-import org.sniper.generator.ParameterizeGenerator;
+import org.sniper.generator.AbstractParameterizeGenerator;
 
 /**
  * 短链接生成器</p>
@@ -36,7 +36,7 @@ import org.sniper.generator.ParameterizeGenerator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ShortLinkGenerator implements ParameterizeGenerator<Object, String> {
+public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, String> {
 
 	protected final char[] chars = new char[] { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' , 'h' ,  
 			'i' , 'j' , 'k' , 'l' , 'm' , 'n' , 'o' , 'p' , 'q' , 'r' , 's' , 't' ,  
@@ -60,11 +60,6 @@ public class ShortLinkGenerator implements ParameterizeGenerator<Object, String>
 	}
 	
 	@Override
-	public String generate() {
-		return generate(null);
-	}  
-
-	@Override
 	public String generate(Object parameter) {
 		String md5 = SecurityUtils.md5(ObjectUtils.toSafeString(parameter));
 		
@@ -78,10 +73,10 @@ public class ShortLinkGenerator implements ParameterizeGenerator<Object, String>
 			for (int j = 0; j < 6; j++) {  
 				builder.append(chars[(int) (sub16 & 0x0000003D)]);
 				// 左移5位
-				sub16 >>= 5; 
+				sub16 = sub16 >> 5; 
 			}  
 		}  
 		return builder.toString();
 	}
-	
+			
 }

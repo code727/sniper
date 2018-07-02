@@ -71,8 +71,9 @@ public class SecurityUtils {
 					StringUtils.isNotBlank(charsetName) ? charsetName : CodecUtils.DEFAULT_ENCODING));
 			StringBuffer buffer = new StringBuffer(bytes.length * 2);
 			for (int i = 0; i < bytes.length; i++) {
-				if ((bytes[i] & 0xff) < 0x10)
+				if ((bytes[i] & 0xff) < 0x10) {
 					buffer.append("0");
+				}
 				buffer.append(Long.toString(bytes[i] & 0xff, 16));
 			}
 			digestMessage = buffer.toString();
