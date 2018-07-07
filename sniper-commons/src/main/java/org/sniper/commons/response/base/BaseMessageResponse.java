@@ -1,3 +1,4 @@
+package org.sniper.commons.response.base;
 /*
  * Copyright 2017 the original author or authors.
  *
@@ -16,16 +17,16 @@
  * Create Date : 2017-3-16
  */
 
-package org.sniper.commons.response;
-
 import java.io.Serializable;
+
+import org.sniper.commons.response.MessageResponse;
 
 /**
  * 基本的消息响应实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BaseMessageResponse extends AbstractResponse implements MessageResponse, Serializable {
+public class BaseMessageResponse extends BaseResponse implements MessageResponse<String>, Serializable {
 	
 	private static final long serialVersionUID = -3819338460091380325L;
 	
@@ -33,11 +34,12 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	private String message;
 	
 	public BaseMessageResponse() {
-		this(DEFAULT_SUCCESS_STATUS, DEFAULT_SUCCESS_MESSAGE);
+		this(DEFAULT_SUCCESS_CODE, DEFAULT_SUCCESS_MESSAGE);
 	}
 	
-	public BaseMessageResponse(MessageResponse response) {
-		this(response.getCode(), response.getMessage());
+	public BaseMessageResponse(MessageResponse<?> response) {
+		// 要求response对象以及code值不为空
+		this(response.getCode().toString(), response.getMessage());
 	}
 		
 	public BaseMessageResponse(String code, String message) {
@@ -61,7 +63,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse success() {
-		return successByCode(DEFAULT_SUCCESS_STATUS);
+		return successByCode(DEFAULT_SUCCESS_CODE);
 	}
 	
 	/**
@@ -81,7 +83,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse successByMessage(String message) {
-		return success(DEFAULT_SUCCESS_STATUS, message);
+		return success(DEFAULT_SUCCESS_CODE, message);
 	}
 	
 	/**
@@ -101,7 +103,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse failed() {
-		return failedByCode(DEFAULT_FAILED_STATUS);
+		return failedByCode(DEFAULT_FAILED_CODE);
 	}
 	
 	/**
@@ -121,7 +123,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse failedByMessage(String message) {
-		return failed(DEFAULT_FAILED_STATUS, message);
+		return failed(DEFAULT_FAILED_CODE, message);
 	}
 	
 	/**
@@ -143,7 +145,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse exception() {
-		return exceptionByCode(DEFAULT_EXCEPTION_STATUS);
+		return exceptionByCode(DEFAULT_EXCEPTION_CODE);
 	}
 	
 	/**
@@ -163,7 +165,7 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	 * @return
 	 */
 	public static BaseMessageResponse exceptionByMessage(String message) {
-		return exception(DEFAULT_EXCEPTION_STATUS, message);
+		return exception(DEFAULT_EXCEPTION_CODE, message);
 	}
 	
 	/**
@@ -176,5 +178,5 @@ public class BaseMessageResponse extends AbstractResponse implements MessageResp
 	public static BaseMessageResponse exception(String code, String message) {
 		return new BaseMessageResponse(code, message);
 	}
-			
+				
 }

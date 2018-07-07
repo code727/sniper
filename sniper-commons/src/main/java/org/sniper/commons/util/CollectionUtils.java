@@ -771,10 +771,7 @@ public class CollectionUtils {
 	 * @return
 	 */
 	public static <T> Object[] toObjectArray(Collection<T> collection) {
-		if (isEmpty(collection))
-			return new Object[] {};
-		
-		return collection.toArray();
+		return isNotEmpty(collection) ? collection.toArray() : new Object[] {};
 	}
 	
 	/**

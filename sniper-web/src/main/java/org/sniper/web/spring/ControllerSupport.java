@@ -128,7 +128,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param response
 	 */
-	protected void setLocaleMessage(MessageResponse response) {
+	protected void setLocaleMessage(MessageResponse<?> response) {
 		setLocaleMessage(response, null);
 	}
 	
@@ -138,7 +138,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	 * @param response
 	 * @param params
 	 */
-	protected void setLocaleMessage(MessageResponse response, Object[] params) {
+	protected void setLocaleMessage(MessageResponse<?> response, Object[] params) {
 		String message = response.getMessage();
 		if (StringUtils.isNotBlank(message)) 
 			response.setMessage(getMessage(message, params));
@@ -149,7 +149,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param response
 	 */
-	protected void setLocaleMessage(Response response) {
+	protected void setLocaleMessage(Response<?> response) {
 		setLocaleMessage(response, null);
 	}
 	
@@ -159,9 +159,9 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	 * @param response
 	 * @param params
 	 */
-	protected void setLocaleMessage(Response response, Object[] params) {
+	protected void setLocaleMessage(Response<?> response, Object[] params) {
 		if (response instanceof MessageResponse)
-			setLocaleMessage((MessageResponse) response, params);
+			setLocaleMessage((MessageResponse<?>) response, params);
 	}
 	
 	/**

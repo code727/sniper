@@ -44,15 +44,15 @@ public class SniperJsonResponseHandler extends AbstractJsonNestedResponseHandler
 	protected <T> T doResponse(T response, Class<?> nestedType) throws Exception {
 		
 		if (nestedType != null && response instanceof DataResponse) {
-			Object data = ((DataResponse<Object>) response).getData();
+			Object data = ((DataResponse<Object, Object>) response).getData();
 			
 			//  data值的类型与指定的嵌套类型不一致时，需转换成嵌套类型
 			if (data != null && !data.getClass().equals(nestedType)) {
-				DataResponse<Object> dataResponse = (DataResponse<Object>) ReflectionUtils.newInstance(response.getClass());
-				dataResponse.setCode(((DataResponse<Object>) response).getCode());
+				DataResponse<Object, Object> dataResponse = (DataResponse<Object, Object>) ReflectionUtils.newInstance(response.getClass());
+				dataResponse.setCode(((DataResponse<Object, Object>) response).getCode());
 				
 				if (dataResponse instanceof MessageResponse && response instanceof MessageResponse)
-					((MessageResponse) dataResponse).setMessage(((MessageResponse) response).getMessage());
+					((MessageResponse<Object>) dataResponse).setMessage(((MessageResponse<Object>) response).getMessage());
 				
 				dataResponse.setData(typedSerializer.deserialize(typedSerializer.serialize(data), nestedType));
 				return (T) dataResponse;

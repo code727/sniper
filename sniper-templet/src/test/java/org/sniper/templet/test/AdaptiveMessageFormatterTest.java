@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sniper.commons.response.BaseFullResponse;
+import org.sniper.commons.response.base.BaseFullResponse;
 import org.sniper.templet.message.formatter.AdaptiveMessageFormatter;
 import org.sniper.test.junit.BaseTestCase;
 

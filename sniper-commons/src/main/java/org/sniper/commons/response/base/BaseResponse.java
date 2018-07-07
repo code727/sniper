@@ -16,25 +16,64 @@
  * Create Date : 2017-3-16
  */
 
-package org.sniper.commons.response;
+package org.sniper.commons.response.base;
 
 import java.io.Serializable;
+
+import org.sniper.commons.enums.status.BizStatus;
+import org.sniper.commons.response.AbstractResponse;
+import org.sniper.commons.response.Response;
+import org.sniper.commons.util.StringUtils;
 
 /**
  * 基本的响应实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class BaseResponse extends AbstractResponse implements Serializable {
+public class BaseResponse extends AbstractResponse<String> implements Serializable {
 	
 	private static final long serialVersionUID = 2773282924720586568L;
-
+	
+	/** 默认成功消息 */
+	public static final String DEFAULT_SUCCESS_CODE = BizStatus.SUCCESS.getKey();
+	
+	/** 默认失败消息 */
+	public static final String DEFAULT_FAILED_CODE = BizStatus.FAILED.getKey();
+	
+	/** 默认异常消息 */
+	public static final String DEFAULT_EXCEPTION_CODE = BizStatus.EXCEPTION.getKey();
+		
 	public BaseResponse() {
-		super();
+		this(DEFAULT_SUCCESS_CODE);
+	}
+	
+	public BaseResponse(Response<?> response) {
+		// 要求response对象以及code值不为空
+		this(response.getCode().toString());
 	}
 	
 	public BaseResponse(String code) {
 		super(code);
+	}
+	
+	@Override
+	public boolean wasSuccess() {
+		return isMatchStatus(DEFAULT_SUCCESS_CODE);
+	}
+
+	@Override
+	public boolean wasFailed() {
+		return isMatchStatus(DEFAULT_FAILED_CODE);
+	}
+
+	@Override
+	public boolean wasException() {
+		return isMatchStatus(DEFAULT_EXCEPTION_CODE);
+	}
+	
+	@Override
+	protected boolean isMatchStatus(String code) {
+		return StringUtils.equalsIgnoreCase(code, this.getCode());
 	}
 	
 	/**
@@ -43,7 +82,7 @@ public class BaseResponse extends AbstractResponse implements Serializable {
 	 * @return
 	 */
 	public static BaseResponse success() {
-		return success(DEFAULT_SUCCESS_STATUS);
+		return success(DEFAULT_SUCCESS_CODE);
 	}
 	
 	/**
@@ -62,7 +101,7 @@ public class BaseResponse extends AbstractResponse implements Serializable {
 	 * @return
 	 */
 	public static BaseResponse failed() {
-		return failed(DEFAULT_FAILED_STATUS);
+		return failed(DEFAULT_FAILED_CODE);
 	}
 	
 	/**
@@ -80,7 +119,7 @@ public class BaseResponse extends AbstractResponse implements Serializable {
 	 * @return
 	 */
 	public static BaseResponse exception() {
-		return exception(DEFAULT_EXCEPTION_STATUS);
+		return exception(DEFAULT_EXCEPTION_CODE);
 	}
 	
 	/**
@@ -92,5 +131,5 @@ public class BaseResponse extends AbstractResponse implements Serializable {
 	public static BaseResponse exception(String code) {
 		return new BaseResponse(code);
 	}
-		
+	
 }

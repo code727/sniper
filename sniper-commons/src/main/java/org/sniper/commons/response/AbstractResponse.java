@@ -18,77 +18,53 @@
 
 package org.sniper.commons.response;
 
-import org.sniper.commons.util.StringUtils;
-
 /**
  * 响应抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractResponse implements Response {
+public abstract class AbstractResponse<C> implements Response<C> {
 		
 	private static final long serialVersionUID = 8451538043375748612L;
 	
 	/** 状态码 */
-	private String code;
+	private C code;
 	
-	public AbstractResponse() {
-		this(DEFAULT_SUCCESS_STATUS);
-	}
-	
-	public AbstractResponse(String code) {
+	protected AbstractResponse(C code) {
 		this.code = code;
 	}
-
+		
 	@Override
-	public String getCode() {
+	public C getCode() {
 		return code;
 	}
 
 	@Override
-	public void setCode(String code) {
+	public void setCode(C code) {
 		this.code = code;
 	}
 	
 	@Override
-	public boolean wasSuccess() {
-		return isMatchStatus(DEFAULT_SUCCESS_STATUS);
-	}
-	
-
-	@Override
-	public boolean wasSuccess(String successCode) {
+	public boolean wasSuccess(C successCode) {
 		return isMatchStatus(successCode);
 	}
 
 	@Override
-	public boolean wasFailed() {
-		return isMatchStatus(DEFAULT_FAILED_STATUS);
-	}
-
-	@Override
-	public boolean wasFailed(String failedCode) {
+	public boolean wasFailed(C failedCode) {
 		return isMatchStatus(failedCode);
 	}
 
 	@Override
-	public boolean wasException() {
-		return isMatchStatus(DEFAULT_EXCEPTION_STATUS);
-	}
-
-	@Override
-	public boolean wasException(String exceptionCode) {
+	public boolean wasException(C exceptionCode) {
 		return isMatchStatus(exceptionCode);
 	}
-	
+		
 	/**
 	 * 判断状态码是否匹配当前状态
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param status
 	 * @return
 	 */
-	protected boolean isMatchStatus(String status) {
-		return StringUtils.equalsIgnoreCase(status, code);
-	}
+	protected abstract boolean isMatchStatus(C status); 
 	
 }

@@ -20,37 +20,26 @@ package org.sniper.commons.response;
 
 import java.io.Serializable;
 
-import org.sniper.commons.enums.status.BizStatus;
-
 /**
  * 响应接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Response extends Serializable {
-	
-	/** 默认成功状态 */
-	public static final String DEFAULT_SUCCESS_STATUS = BizStatus.SUCCESS.getKey();
-	
-	/** 默认失败状态 */
-	public static final String DEFAULT_FAILED_STATUS = BizStatus.FAILED.getKey();
-	
-	/** 默认异常状态 */
-	public static final String DEFAULT_EXCEPTION_STATUS = BizStatus.EXCEPTION.getKey();
+public interface Response<C> extends Serializable {
 	
 	/**
 	 * 获取状态编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public String getCode();
+	public C getCode();
 	
 	/**
 	 * 设置状态编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param code
 	 */
-	public void setCode(String code);
+	public void setCode(C code);
 	
 	/**
 	 * 响应是否成功
@@ -65,7 +54,7 @@ public interface Response extends Serializable {
 	 * @param successCode
 	 * @return
 	 */
-	public boolean wasSuccess(String successCode);
+	public boolean wasSuccess(C successCode);
 	
 	/**
 	 * 响应是否失败
@@ -80,7 +69,7 @@ public interface Response extends Serializable {
 	 * @param failedCode
 	 * @return
 	 */
-	public boolean wasFailed(String failedCode);
+	public boolean wasFailed(C failedCode);
 	
 	/**
 	 * 响应是否异常
@@ -95,6 +84,6 @@ public interface Response extends Serializable {
 	 * @param exceptionCode
 	 * @return
 	 */
-	public boolean wasException(String exceptionCode);
+	public boolean wasException(C exceptionCode);
 			
 }

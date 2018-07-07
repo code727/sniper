@@ -23,7 +23,7 @@ package org.sniper.commons.response;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface DataResponse<T> extends Response {
+public interface DataResponse<C, T> extends Response<C> {
 	
 	/**
 	 * 获取数据

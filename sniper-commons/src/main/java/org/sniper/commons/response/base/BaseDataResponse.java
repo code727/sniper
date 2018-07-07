@@ -16,9 +16,11 @@
  * Create Date : 2017-3-16
  */
 
-package org.sniper.commons.response;
+package org.sniper.commons.response.base;
 
 import java.io.Serializable;
+
+import org.sniper.commons.response.DataResponse;
 
 /**
  * 基本的数据响应实现类
@@ -28,16 +30,16 @@ import java.io.Serializable;
 public class BaseDataResponse<T> extends AbstractDataResponse<T> implements Serializable {
 	
 	private static final long serialVersionUID = 7831515870882940776L;
-
+	
 	public BaseDataResponse() {
-		super();
+		this((T) null);
 	}
 		
 	public BaseDataResponse(T data) {
-		super(data);
+		this(DEFAULT_SUCCESS_CODE, data);
 	}
 	
-	public BaseDataResponse(DataResponse<T> response) {
+	public BaseDataResponse(DataResponse<String, T> response) {
 		super(response);
 	}
 		
@@ -52,7 +54,7 @@ public class BaseDataResponse<T> extends AbstractDataResponse<T> implements Seri
 	 * @return
 	 */
 	public static <T> BaseDataResponse<T> success(T data) {
-		return success(DEFAULT_SUCCESS_STATUS, data);
+		return success(DEFAULT_SUCCESS_CODE, data);
 	}
 	
 	/**
@@ -73,7 +75,7 @@ public class BaseDataResponse<T> extends AbstractDataResponse<T> implements Seri
 	 * @return
 	 */
 	public static <T> BaseDataResponse<T> failed(T data) {
-		return failed(DEFAULT_FAILED_STATUS, data);
+		return failed(DEFAULT_FAILED_CODE, data);
 	}
 	
 	/**
@@ -94,7 +96,7 @@ public class BaseDataResponse<T> extends AbstractDataResponse<T> implements Seri
 	 * @return
 	 */
 	public static <T> BaseDataResponse<T> exception(T data) {
-		return exception(DEFAULT_EXCEPTION_STATUS, data);
+		return exception(DEFAULT_EXCEPTION_CODE, data);
 	}
 	
 	/**

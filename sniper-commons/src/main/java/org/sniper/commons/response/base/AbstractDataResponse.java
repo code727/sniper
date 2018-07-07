@@ -16,33 +16,27 @@
  * Create Date : 2017-3-22
  */
 
-package org.sniper.commons.response;
+package org.sniper.commons.response.base;
+
+import org.sniper.commons.response.DataResponse;
 
 /**
  * 数据响应抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractDataResponse<T> extends AbstractResponse implements DataResponse<T> {
+public abstract class AbstractDataResponse<T> extends BaseResponse implements DataResponse<String, T> {
 	
 	private static final long serialVersionUID = 4108877402467845840L;
 	
 	/** 响应数据 */
 	private T data;
-	
-	public AbstractDataResponse() {
-		super();
-	}
-	
-	public AbstractDataResponse(T data) {
-		this(DEFAULT_SUCCESS_STATUS, data);
-	}
-	
-	public AbstractDataResponse(DataResponse<T> response) {
+			
+	protected AbstractDataResponse(DataResponse<String, T> response) {
 		this(response.getCode(), response.getData());
 	}
 		
-	public AbstractDataResponse(String code, T data) {
+	protected AbstractDataResponse(String code, T data) {
 		super(code);
 		this.data = data;
 	}

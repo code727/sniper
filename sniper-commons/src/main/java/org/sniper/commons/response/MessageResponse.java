@@ -25,7 +25,7 @@ import org.sniper.commons.enums.status.BizStatus;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface MessageResponse extends Response {
+public interface MessageResponse<C> extends Response<C> {
 	
 	/** 默认成功消息 */
 	public static final String DEFAULT_SUCCESS_MESSAGE = BizStatus.SUCCESS.getMessage();

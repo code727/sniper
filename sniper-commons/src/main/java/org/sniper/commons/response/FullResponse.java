@@ -23,6 +23,6 @@ package org.sniper.commons.response;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface FullResponse<T> extends Response, MessageResponse, DataResponse<T> {
+public interface FullResponse<C, T> extends MessageResponse<C>, DataResponse<C, T> {
 
 }

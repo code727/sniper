@@ -16,9 +16,12 @@
  * Create Date : 2017-3-16
  */
 
-package org.sniper.commons.response;
+package org.sniper.commons.response.base;
 
 import java.io.Serializable;
+
+import org.sniper.commons.response.FullResponse;
+import org.sniper.commons.response.MessageResponse;
 
 /**
  * 全量响应实现类
@@ -26,7 +29,7 @@ import java.io.Serializable;
  * @version 1.0
  * @param <T>
  */
-public class BaseFullResponse<T> extends AbstractDataResponse<T> implements FullResponse<T>, Serializable {
+public class BaseFullResponse<T> extends AbstractDataResponse<T> implements FullResponse<String, T>, Serializable {
 
 	private static final long serialVersionUID = 5105502275635899805L;
 	
@@ -34,19 +37,23 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	private String message;
 	
 	public BaseFullResponse() {
-		super();
+		this((T) null);
 	}
 	
 	public BaseFullResponse(T data) {
-		this(DEFAULT_SUCCESS_STATUS, DEFAULT_SUCCESS_MESSAGE, data);
+		this(DEFAULT_SUCCESS_CODE, DEFAULT_SUCCESS_MESSAGE, data);
 	}
 	
-	public BaseFullResponse(FullResponse<T> response) {
-		this(response.getCode(), response.getMessage(), response.getData());
+	public BaseFullResponse(FullResponse<?, T> response) {
+		this(response.getCode().toString(), response.getMessage(), response.getData());
 	}
 	
-	public BaseFullResponse(MessageResponse response, T data) {
-		this(response.getCode(), response.getMessage(), data);
+	public BaseFullResponse(MessageResponse<?> response) {
+		this(response, null);
+	}
+	
+	public BaseFullResponse(MessageResponse<?> response, T data) {
+		this(response.getCode().toString(), response.getMessage(), data);
 	}
 		
 	public BaseFullResponse(String code, String message, T data) {
@@ -71,7 +78,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> success(T data) {
-		return successByCode(DEFAULT_SUCCESS_STATUS, data);
+		return successByCode(DEFAULT_SUCCESS_CODE, data);
 	}
 	
 	/**
@@ -93,7 +100,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> successByMessage(String message, T data) {
-		return success(DEFAULT_SUCCESS_STATUS, message, data);
+		return success(DEFAULT_SUCCESS_CODE, message, data);
 	}
 	
 	/**
@@ -115,7 +122,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> failed(T data) {
-		return failedByCode(DEFAULT_FAILED_STATUS, data);
+		return failedByCode(DEFAULT_FAILED_CODE, data);
 	}
 		
 	/**
@@ -137,7 +144,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> failedByMessage(String message, T data) {
-		return failed(DEFAULT_FAILED_STATUS, message, data);
+		return failed(DEFAULT_FAILED_CODE, message, data);
 	}
 	
 	/**
@@ -159,7 +166,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> exception(T data) {
-		return exceptionByCode(DEFAULT_EXCEPTION_STATUS, data);
+		return exceptionByCode(DEFAULT_EXCEPTION_CODE, data);
 	}
 	
 	/**
@@ -181,7 +188,7 @@ public class BaseFullResponse<T> extends AbstractDataResponse<T> implements Full
 	 * @return
 	 */
 	public static <T> BaseFullResponse<T> exceptionByMessage(String message, T data) {
-		return exception(DEFAULT_EXCEPTION_STATUS, message, data);
+		return exception(DEFAULT_EXCEPTION_CODE, message, data);
 	}
 	
 	/**
