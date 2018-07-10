@@ -28,6 +28,8 @@ import java.util.Map;
  */
 public class AssertUtils {
 	
+	private AssertUtils() {}
+	
 	/**
 	 * 断言对象为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 

@@ -18,25 +18,37 @@
 
 package org.sniper.commons.response;
 
+import org.sniper.commons.enums.status.BizStatus;
+
 /**
- * 数据响应接口
+ * 消息化响应对象接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface DataResponse<C, T> extends Response<C> {
+public interface MessagingResponse<C> extends GenericResponse<C> {
+	
+	/** 默认成功消息 */
+	public static final String DEFAULT_SUCCESS_MESSAGE = BizStatus.SUCCESS.getMessage();
+	
+	/** 默认失败消息 */
+	public static final String DEFAULT_FAILED_MESSAGE = BizStatus.FAILED.getMessage();
+	
+	/** 默认异常消息 */
+	public static final String DEFAULT_EXCEPTION_MESSAGE = BizStatus.EXCEPTION.getMessage();
+	
 	
 	/**
-	 * 获取数据
+	 * 获取响应消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public T getData();
+	public String getMessage();
 	
 	/**
-	 * 设置数据
+	 * 设置响应消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param data
+	 * @param message
 	 */
-	public void setData(T data);
-
+	public void setMessage(String message);
+	
 }

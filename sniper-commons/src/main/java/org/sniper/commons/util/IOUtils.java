@@ -45,6 +45,8 @@ public class IOUtils {
 	/** 默认缓存区字节大小 */
 	public static final int DEFAULT_BUFFER_SIZE = 1024;
 	
+	private IOUtils() {}
+	
 	/**
 	 * 创建指定大小的字节缓存区
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

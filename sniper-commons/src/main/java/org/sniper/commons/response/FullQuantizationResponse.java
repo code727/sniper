@@ -19,10 +19,10 @@
 package org.sniper.commons.response;
 
 /**
- * 全量响应接口
+ * 全量化响应对象接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface FullResponse<C, T> extends MessageResponse<C>, DataResponse<C, T> {
+public interface FullQuantizationResponse<C, T> extends MessagingResponse<C>, DatamationResponse<C, T> {
 
 }

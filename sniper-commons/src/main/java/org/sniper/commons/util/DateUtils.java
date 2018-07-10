@@ -80,6 +80,8 @@ public class DateUtils {
 	/** 全局键与日期时间格式关系映射集 */
 	private static final Map<String, SimpleDateFormat> dateFormates = MapUtils.newConcurrentHashMap();
 	
+	private DateUtils() {}
+	
 	/**
 	 * 根据指定的模式获取日期格式对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

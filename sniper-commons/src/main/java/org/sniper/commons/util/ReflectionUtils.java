@@ -34,6 +34,8 @@ import java.util.Set;
  */
 public class ReflectionUtils {
 	
+	private ReflectionUtils() {}
+	
 	/**
 	 * 获取当前对象所在类以及非Object基类中定义的所有方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

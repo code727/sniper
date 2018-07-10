@@ -33,6 +33,8 @@ public class CurrencyUtils {
 	/** 元角分货币格式 */
 	public static final String YUANJIAOFEN_FORMAT = "0.00";
 	
+	private CurrencyUtils() {}
+	
 	/**
 	 * 将字符ASCII码转化为指定货币格式的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

@@ -29,8 +29,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.sniper.commons.LinkedMultiValueMap;
 import org.sniper.commons.MultiValueMap;
-import org.sniper.commons.response.base.BaseFullResponse;
-import org.sniper.commons.response.base.BaseMessageResponse;
+import org.sniper.commons.response.character.FullResponse;
+import org.sniper.commons.response.character.MessageResponse;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.http.MappedHttpSender;
@@ -69,7 +69,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 	
 //	@Test
 	public void testGetBean() throws Exception {
-		BaseFullResponse<Developer> response = mappedHttpSender.request("getBean", parameters);
+		FullResponse<Developer> response = mappedHttpSender.request("getBean", parameters);
 		System.out.println(response.getCode());
 		System.out.println(response.getData().getId());
 		System.out.println(response.getData().getName());
@@ -78,7 +78,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 	
 	@Test
 	public void testPostBean() throws Exception {
-		BaseFullResponse<Developer> response = mappedHttpSender.request("postBean", parameters);
+		FullResponse<Developer> response = mappedHttpSender.request("postBean", parameters);
 		System.out.println(response.getCode());
 		System.out.println(response.getData().getId());
 		System.out.println(response.getData().getName());
@@ -112,7 +112,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 //		requestBody.put("name", "杜斌");
 //		requestBody.put("loginName", null);
 		
-		BaseMessageResponse response = mappedHttpSender.requestByBody("postUpload", multiValueMap);
+		MessageResponse response = mappedHttpSender.requestByBody("postUpload", multiValueMap);
 		System.out.println(response.wasSuccess());
 	}
 	
@@ -127,7 +127,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 		
 		File[] files = new File[] { new File("C:/Users/Daniele/Desktop/新建.txt") };
 		
-		BaseFullResponse<Developer> response = mappedHttpSender.requestByBody("postUploads", files);
+		FullResponse<Developer> response = mappedHttpSender.requestByBody("postUploads", files);
 		if (response.wasSuccess()) {
 			Developer developer = response.getData();
 			System.out.println(developer.getId());
@@ -140,7 +140,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 	
 //	@Test
 	public void testPostBodyBean() throws Exception {
-		BaseFullResponse<Developer> response = mappedHttpSender.requestByBody("postBodyBean", requestBody);
+		FullResponse<Developer> response = mappedHttpSender.requestByBody("postBodyBean", requestBody);
 		System.out.println(response.getCode());
 		System.out.println(response.getData().getId());
 		System.out.println(response.getData().getName());

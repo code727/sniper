@@ -41,6 +41,8 @@ public class SecurityUtils {
 	/** RSA算法名称 */
 	public static final String RSA_ALGORITHM_NAME = "RSA";
 	
+	private SecurityUtils() {}
+	
 	/**
 	 * 按指定算法生成明文的摘要
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

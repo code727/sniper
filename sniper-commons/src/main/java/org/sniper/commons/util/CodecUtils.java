@@ -54,6 +54,8 @@ public class CodecUtils {
 	/** 16进制码 */
 	public static char[] HEX_CODES = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };  
 		
+	private CodecUtils() {}
+	
 	/**
 	 * 将URL字符串按默认编码集进行编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

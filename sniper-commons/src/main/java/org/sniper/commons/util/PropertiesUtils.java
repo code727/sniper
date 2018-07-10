@@ -39,6 +39,8 @@ import java.util.Set;
  */
 public class PropertiesUtils {
 	
+	private PropertiesUtils() {}
+	
 	/**
 	 * 判断属性对象是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

@@ -29,6 +29,8 @@ import java.util.Map;
  */
 public class ObjectUtils {
 	
+	private ObjectUtils() {}
+	
 	/**
 	 * 判断指定的对象是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

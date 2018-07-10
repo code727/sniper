@@ -63,6 +63,7 @@ public class NetUtils {
 	/** 回送地址 */
 	public static final String LOOPBACK_ADDRESS = "127.0.0.1";
 	 
+	private NetUtils() {}
 	
 	/**
 	 * 获取本机的IP地址

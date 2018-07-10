@@ -71,6 +71,8 @@ public class NumberUtils {
 		EVEN_NUMBERS.put('6', 6);
 		EVEN_NUMBERS.put('8', 8);
 	}
+	
+	private NumberUtils() {}
 		
 	/**
 	 * 根据指定的模式获取已定义的数字格式对象

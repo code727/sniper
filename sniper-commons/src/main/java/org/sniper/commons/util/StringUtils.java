@@ -72,9 +72,13 @@ public class StringUtils {
 	/** 类路径标志 */
 	public static final String CLASSPATH = "classpath:";
 	
+	/** 通用匹配字符串 */
 	public static final String ANY = "*";
 	
+	/** 通用匹配字符 */
 	public static final char ANY_CHAR = '*';
+	
+	private StringUtils() {}
 	
 	/**
 	 * 判断是否为空字符串

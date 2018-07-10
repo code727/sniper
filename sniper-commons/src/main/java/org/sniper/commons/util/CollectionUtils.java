@@ -47,6 +47,8 @@ import java.util.concurrent.SynchronousQueue;
  */
 public class CollectionUtils {
 	
+	private CollectionUtils() {}
+	
 	/**
 	 * 判断集合是否为空
 	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 

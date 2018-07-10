@@ -39,6 +39,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class MapUtils {
 	
+	private MapUtils() {}
+	
 	/**
 	 * 实例化一个HashMap对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

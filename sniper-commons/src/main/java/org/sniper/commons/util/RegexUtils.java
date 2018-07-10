@@ -56,6 +56,8 @@ public class RegexUtils {
 		regex.put(MessageFormat.class.getName(), "(\\{\\d+\\})");
 	}
 	
+	private RegexUtils() {}
+	
 	/**
 	 * 根据正则表达式获取对应的模式对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

@@ -59,6 +59,8 @@ public class SystemUtils {
 //		}
 	}
 	
+	private SystemUtils() {}
+	
 	/**
 	 * 获取所用的系统属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

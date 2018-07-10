@@ -80,6 +80,8 @@ public class Base64Utils {
         return (octect < BASELENGTH && base64Alphabet[octect] != -1);
     }
     
+    private Base64Utils() {}
+    
     /**
      * 将原文本按默认字符集进行编码处理
      * @author <a href="mailto:code727@gmail.com">杜斌</a> 

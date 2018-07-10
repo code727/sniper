@@ -43,6 +43,8 @@ public class ZipFileUtils {
 	
 	/** ZIP扩展名 */
 	public static final String EXTENSION_NAME = ".zip";
+	
+	private ZipFileUtils() {}
 		
 	/**
 	 * 创建一个ZIP文件。若先前存在则直接返回

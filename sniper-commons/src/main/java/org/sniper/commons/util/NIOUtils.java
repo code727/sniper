@@ -24,5 +24,7 @@ package org.sniper.commons.util;
  * @version 1.0
  */
 public class NIOUtils {
+	
+	private NIOUtils() {}
 
 }

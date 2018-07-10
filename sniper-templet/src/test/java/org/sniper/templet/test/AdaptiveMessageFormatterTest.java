@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sniper.commons.response.base.BaseFullResponse;
+import org.sniper.commons.response.character.FullResponse;
 import org.sniper.templet.message.formatter.AdaptiveMessageFormatter;
 import org.sniper.test.junit.BaseTestCase;
 
@@ -36,7 +36,7 @@ public class AdaptiveMessageFormatterTest extends BaseTestCase {
 	
 	private AdaptiveMessageFormatter formatter = new AdaptiveMessageFormatter();
 	
-	private BaseFullResponse<String> response = new BaseFullResponse<String>();
+	private FullResponse<String> response = new FullResponse<String>();
 	
 	private Map<String, Object> map = new HashMap<String, Object>();
 	

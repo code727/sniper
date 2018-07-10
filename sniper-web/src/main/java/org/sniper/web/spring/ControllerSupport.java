@@ -31,8 +31,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.sniper.beans.propertyeditors.DatePropertyEditor;
 import org.sniper.beans.propertyeditors.StringBufferPropertyEditor;
 import org.sniper.beans.propertyeditors.StringBuilderPropertyEditor;
-import org.sniper.commons.response.MessageResponse;
-import org.sniper.commons.response.Response;
+import org.sniper.commons.response.MessagingResponse;
+import org.sniper.commons.response.GenericResponse;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.MessageUtils;
 import org.sniper.commons.util.ObjectUtils;
@@ -128,7 +128,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param response
 	 */
-	protected void setLocaleMessage(MessageResponse<?> response) {
+	protected void setLocaleMessage(MessagingResponse<?> response) {
 		setLocaleMessage(response, null);
 	}
 	
@@ -138,7 +138,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	 * @param response
 	 * @param params
 	 */
-	protected void setLocaleMessage(MessageResponse<?> response, Object[] params) {
+	protected void setLocaleMessage(MessagingResponse<?> response, Object[] params) {
 		String message = response.getMessage();
 		if (StringUtils.isNotBlank(message)) 
 			response.setMessage(getMessage(message, params));
@@ -149,7 +149,7 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param response
 	 */
-	protected void setLocaleMessage(Response<?> response) {
+	protected void setLocaleMessage(GenericResponse<?> response) {
 		setLocaleMessage(response, null);
 	}
 	
@@ -159,9 +159,9 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	 * @param response
 	 * @param params
 	 */
-	protected void setLocaleMessage(Response<?> response, Object[] params) {
-		if (response instanceof MessageResponse)
-			setLocaleMessage((MessageResponse<?>) response, params);
+	protected void setLocaleMessage(GenericResponse<?> response, Object[] params) {
+		if (response instanceof MessagingResponse)
+			setLocaleMessage((MessagingResponse<?>) response, params);
 	}
 	
 	/**

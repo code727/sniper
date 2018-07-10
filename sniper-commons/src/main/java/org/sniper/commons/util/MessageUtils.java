@@ -33,6 +33,8 @@ import java.util.ResourceBundle;
 public class MessageUtils {
 	
 	private static final ThreadLocal<Map<String, ResourceBundle>> resourceBundles = new ThreadLocal<Map<String, ResourceBundle>>();
+	
+	private MessageUtils() {}
 		
 	/**
 	 * 根据基础名称和Locale对象获取java.util.ResourceBundle对象

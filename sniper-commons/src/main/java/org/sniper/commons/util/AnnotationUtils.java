@@ -30,6 +30,8 @@ import java.util.List;
  */
 public class AnnotationUtils {
 	
+	private AnnotationUtils() {}
+	
 	/**
 	 * 判断对象是否有注解
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

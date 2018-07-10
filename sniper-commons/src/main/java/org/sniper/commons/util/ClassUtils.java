@@ -60,6 +60,8 @@ public class ClassUtils {
 	    
 	}
 	
+	private ClassUtils() {}
+	
 	/**
 	 * 判断指定的类型对象是否为包装类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

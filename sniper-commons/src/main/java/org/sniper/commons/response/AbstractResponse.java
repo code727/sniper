@@ -23,7 +23,7 @@ package org.sniper.commons.response;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractResponse<C> implements Response<C> {
+public abstract class AbstractResponse<C> implements GenericResponse<C> {
 		
 	private static final long serialVersionUID = 8451538043375748612L;
 	
@@ -45,26 +45,26 @@ public abstract class AbstractResponse<C> implements Response<C> {
 	}
 	
 	@Override
-	public boolean wasSuccess(C successCode) {
-		return isMatchStatus(successCode);
+	public boolean wasSuccess(C code) {
+		return matches(code);
 	}
 
 	@Override
-	public boolean wasFailed(C failedCode) {
-		return isMatchStatus(failedCode);
+	public boolean wasFailed(C code) {
+		return matches(code);
 	}
 
 	@Override
-	public boolean wasException(C exceptionCode) {
-		return isMatchStatus(exceptionCode);
+	public boolean wasException(C code) {
+		return matches(code);
 	}
 		
 	/**
-	 * 判断状态码是否匹配当前状态
+	 * 判断指定的状态码是否与当前状态码匹配
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param status
+	 * @param code
 	 * @return
 	 */
-	protected abstract boolean isMatchStatus(C status); 
+	protected abstract boolean matches(C code); 
 	
 }
