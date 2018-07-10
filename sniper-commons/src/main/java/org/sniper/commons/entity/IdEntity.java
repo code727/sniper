@@ -26,13 +26,13 @@ import java.io.Serializable;
  * @version 1.0
  */
 @SuppressWarnings("serial")
-public  class IdEntity<PK extends Serializable> implements Idable<PK>, Deletable {
+public class IdEntity<PK extends Serializable> implements Idable<PK>, Deletable {
 	
 	/** 主键ID */
 	private PK id;
 	
 	/** "是否已删除"状态标识(0:未删除,1:已删除)*/
-	private int deletedStatus;
+	private int deleted;
 
 	@Override
 	public PK getId() {
@@ -45,13 +45,13 @@ public  class IdEntity<PK extends Serializable> implements Idable<PK>, Deletable
 	}
 
 	@Override
-	public int getDeletedStatus() {
-		return deletedStatus;
+	public int getDeleted() {
+		return deleted;
 	}
 
 	@Override
-	public void setDeletedStatus(int deletedStatus) {
-		this.deletedStatus = deletedStatus;
+	public void setDeleted(int deleted) {
+		this.deleted = deleted;
 	}
 	
 }

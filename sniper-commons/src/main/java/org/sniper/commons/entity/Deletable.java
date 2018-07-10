@@ -26,17 +26,17 @@ package org.sniper.commons.entity;
 public interface Deletable {
 	
 	/**
-	 * 获取"是否已删除"的状态标识
+	 * 获取"是否已删除"状态标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public int getDeletedStatus();
+	public int getDeleted();
 	
 	/**
-	 * 设置"是否已删除"的状态标识
+	 * 设置"是否已删除"状态标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param deletedStatus
+	 * @param deleted
 	 */
-	public void setDeletedStatus(int deletedStatus); 
+	public void setDeleted(int deleted); 
 
 }
