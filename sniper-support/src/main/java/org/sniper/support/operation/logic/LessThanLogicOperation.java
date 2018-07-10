@@ -12,38 +12,34 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *  
- * Create Date : 2015-1-19
+ * 
+ * Create Date : 2015-1-20
  */
 
-package org.sniper.support.file.filter;
+package org.sniper.support.operation.logic;
+
+import java.math.BigDecimal;
 
 /**
- * sniper框架本地文件数字属性值过滤器
+ * 小于逻辑运算操作
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SniperFileNumberFilter extends SniperFileFilter {
-	
-	/**
-	 * 获取字符串过滤值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Number getFilterValue();
-	
-	/**
-	 * 设置字符串过滤值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param filterValue
-	 */
-	public void setFilterValue(Number filterValue);
-	
-	/**
-	 * 设置逻辑运算规则
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param operation
-	 */
-	public void setLogicOperation(String operation);
-	
+public class LessThanLogicOperation implements LogicOperation<Object, Object> {
+
+	@Override
+	public boolean execute(Object value1, Object value2) {
+		if (value1 == null || value2 == null)
+			return false;
+		
+		try {
+			BigDecimal v1 = new BigDecimal(value1.toString());
+			BigDecimal v2 = new BigDecimal(value2.toString());
+			return v1.compareTo(v2) == -1;
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+		
 }

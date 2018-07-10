@@ -35,7 +35,7 @@ import org.sniper.commons.util.FileUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.fastdfs.cluster.Cluster;
 import org.sniper.fastdfs.factory.connection.ConnectionFactory;
-import org.sniper.fastdfs.meta.FastDFSMeta;
+import org.sniper.fastdfs.source.FastFileSource;
 import org.sniper.fastdfs.task.OriginalResourcesDeleteTask;
 import org.sniper.support.file.ZoomResource;
 import org.sniper.support.thread.task.FilesDeleteTask;
@@ -81,90 +81,90 @@ public class FastDFSTemplate extends FastDFSSupport implements FastDFSOperations
 	}
 
 	@Override
-	public <T> String upload(FastDFSMeta<T> meta) throws Exception {
+	public <T> String upload(FastFileSource<T> meta) throws Exception {
 		return upload(null, meta);
 	}
 
 	@Override
-	public <T> String upload(String groupName, FastDFSMeta<T> meta) throws Exception {
-		List<FastDFSMeta<T>> metas = CollectionUtils.newArrayList();
+	public <T> String upload(String groupName, FastFileSource<T> meta) throws Exception {
+		List<FastFileSource<T>> metas = CollectionUtils.newArrayList();
 		metas.add(meta);
 		return CollectionUtils.get(batchUpload(groupName, metas, false), 0);
 	}
 
 	@Override
-	public <T> String reupload(FastDFSMeta<T> meta) throws Exception {
+	public <T> String reupload(FastFileSource<T> meta) throws Exception {
 		return reupload(null, meta);
 	}
 
 	@Override
-	public <T> String reupload(String groupName, FastDFSMeta<T> meta) throws Exception {
-		List<FastDFSMeta<T>> metas = CollectionUtils.newArrayList();
+	public <T> String reupload(String groupName, FastFileSource<T> meta) throws Exception {
+		List<FastFileSource<T>> metas = CollectionUtils.newArrayList();
 		metas.add(meta);
 		return CollectionUtils.get(batchUpload(groupName, metas, true), 0);
 	}
 
 	@Override
-	public <T> List<String> batchUpload(List<FastDFSMeta<T>> metas) throws Exception {
+	public <T> List<String> batchUpload(List<FastFileSource<T>> metas) throws Exception {
 		return batchUpload(null, metas);
 	}
 
 	@Override
-	public <T> List<String> batchUpload(String groupName, List<FastDFSMeta<T>> metas) throws Exception {
+	public <T> List<String> batchUpload(String groupName, List<FastFileSource<T>> metas) throws Exception {
 		return batchUpload(groupName, metas, false);
 	}
 
 	@Override
-	public <T> List<String> batchReupload(List<FastDFSMeta<T>> metas) throws Exception {
+	public <T> List<String> batchReupload(List<FastFileSource<T>> metas) throws Exception {
 		return batchReupload(null, metas);
 	}
 
 	@Override
-	public <T> List<String> batchReupload(String groupName, List<FastDFSMeta<T>> metas) throws Exception {
+	public <T> List<String> batchReupload(String groupName, List<FastFileSource<T>> metas) throws Exception {
 		return batchUpload(groupName, metas, true);
 	}
 
 	@Override
-	public <T> ZoomResource zoomUpload(FastDFSMeta<T> meta) throws Exception {
+	public <T> ZoomResource zoomUpload(FastFileSource<T> meta) throws Exception {
 		return zoomUpload(null, meta);
 	}
 
 	@Override
-	public <T> ZoomResource zoomUpload(String groupName, FastDFSMeta<T> meta) throws Exception {
-		List<FastDFSMeta<T>> metas = CollectionUtils.newArrayList();
+	public <T> ZoomResource zoomUpload(String groupName, FastFileSource<T> meta) throws Exception {
+		List<FastFileSource<T>> metas = CollectionUtils.newArrayList();
 		metas.add(meta);
 		return CollectionUtils.get(batchZoomUpload(groupName, metas, false), 0);
 	}
 
 	@Override
-	public <T> ZoomResource zoomReupload(FastDFSMeta<T> meta) throws Exception {
+	public <T> ZoomResource zoomReupload(FastFileSource<T> meta) throws Exception {
 		return zoomReupload(null, meta);
 	}
 
 	@Override
-	public <T> ZoomResource zoomReupload(String groupName, FastDFSMeta<T> meta) throws Exception {
-		List<FastDFSMeta<T>> metas = CollectionUtils.newArrayList();
+	public <T> ZoomResource zoomReupload(String groupName, FastFileSource<T> meta) throws Exception {
+		List<FastFileSource<T>> metas = CollectionUtils.newArrayList();
 		metas.add(meta);
 		return CollectionUtils.get(batchZoomUpload(groupName, metas, true), 0);
 	}
 
 	@Override
-	public <T> List<ZoomResource> batchZoomUpload(List<FastDFSMeta<T>> metas) throws Exception {
+	public <T> List<ZoomResource> batchZoomUpload(List<FastFileSource<T>> metas) throws Exception {
 		return batchZoomUpload(null, metas);
 	}
 
 	@Override
-	public <T> List<ZoomResource> batchZoomUpload(String groupName, List<FastDFSMeta<T>> metas) throws Exception {
+	public <T> List<ZoomResource> batchZoomUpload(String groupName, List<FastFileSource<T>> metas) throws Exception {
 		return batchZoomUpload(groupName, metas, false);
 	}
 
 	@Override
-	public <T> List<ZoomResource> batchZoomReupload(List<FastDFSMeta<T>> metas) throws Exception {
+	public <T> List<ZoomResource> batchZoomReupload(List<FastFileSource<T>> metas) throws Exception {
 		return batchZoomReupload(null, metas);
 	}
 
 	@Override
-	public <T> List<ZoomResource> batchZoomReupload(final String groupName, final List<FastDFSMeta<T>> metas) throws Exception {
+	public <T> List<ZoomResource> batchZoomReupload(final String groupName, final List<FastFileSource<T>> metas) throws Exception {
 		return batchZoomUpload(groupName, metas, true);
 	}
 	
@@ -177,7 +177,7 @@ public class FastDFSTemplate extends FastDFSSupport implements FastDFSOperations
 	 * @return
 	 * @throws Exception
 	 */
-	private <T> List<String> batchUpload(final String groupName, final List<FastDFSMeta<T>> metas, final boolean deleteOriginalResource) throws Exception {
+	private <T> List<String> batchUpload(final String groupName, final List<FastFileSource<T>> metas, final boolean deleteOriginalResource) throws Exception {
 		return this.execute(groupName, new FastDFSCallback<List<String>>() {
 
 			@Override
@@ -199,7 +199,7 @@ public class FastDFSTemplate extends FastDFSSupport implements FastDFSOperations
 	 * @return
 	 * @throws Exception
 	 */
-	private <T> List<ZoomResource> batchZoomUpload(final String groupName, final List<FastDFSMeta<T>> metas, final boolean deleteOriginalResource) throws Exception {
+	private <T> List<ZoomResource> batchZoomUpload(final String groupName, final List<FastFileSource<T>> metas, final boolean deleteOriginalResource) throws Exception {
 		return this.execute(groupName, new FastDFSCallback<List<ZoomResource>>() {
 			
 			@SuppressWarnings("unchecked")
@@ -226,7 +226,7 @@ public class FastDFSTemplate extends FastDFSSupport implements FastDFSOperations
 	 * @param metas
 	 * @throws Exception 
 	 */
-	private <T> void deleteOriginalResources(boolean deleteAll, List<FastDFSMeta<T>> metas) throws Exception {
+	private <T> void deleteOriginalResources(boolean deleteAll, List<FastFileSource<T>> metas) throws Exception {
 		Runnable task = new OriginalResourcesDeleteTask<T>(deleteAll, metas, this);
 		if (this.threadPoolTaskExecutor != null)
 			this.threadPoolTaskExecutor.execute(task);

@@ -16,21 +16,21 @@
  * Create Date : 2015-11-6
  */
 
-package org.sniper.fastdfs.meta;
+package org.sniper.fastdfs.source;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.sniper.support.file.meta.LocalFileMeta;
+import org.sniper.support.file.source.LocalFileSource;
 
 /**
  * FastDFS本地文件源实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FastDFSLocalFileMeta extends AbstractFastDFSMeta<File> {
+public class FastDFSLocalFileMeta extends AbstractFastFileSource<File> {
 	
-	private LocalFileMeta localFileSource;
+	private LocalFileSource localFileSource;
 
 	public FastDFSLocalFileMeta(File source) throws IOException {
 		super(source);
@@ -39,7 +39,7 @@ public class FastDFSLocalFileMeta extends AbstractFastDFSMeta<File> {
 	@Override
 	protected void handle() throws IOException {
 		if (this.localFileSource == null)
-			this.localFileSource = new LocalFileMeta(getSource());
+			this.localFileSource = new LocalFileSource(getSource());
 		
 		this.name = this.localFileSource.getName();
 		this.mainName = this.localFileSource.getMainName();

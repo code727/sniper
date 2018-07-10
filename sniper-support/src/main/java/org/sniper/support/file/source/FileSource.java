@@ -12,68 +12,62 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *  
- * Create Date : 2015-1-16
+ * 
+ * Create Date : 2015-11-5
  */
 
-package org.sniper.support.file.filter;
+package org.sniper.support.file.source;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
- * sniper框架文件过滤器
+ * 文件资源接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SniperFileFilter extends FileFilter {
+public interface FileSource<T> {
 	
 	/**
-	 * 判断过滤操作是否包含根文件/目录
+	 * 获取文件体
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public boolean isContainsRoot();
-	
-	/** 
-	 * 设置过滤操作是否包含根文件/目录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param containsRoot
-	 */
-	public void setContainsRoot(boolean containsRoot);
-		
-	/**
-	 * 设置开始过滤的根目录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param root
-	 */
-	public void setRoot(File root);
+	public T getFile();
 	
 	/**
-	 * 获取开始过滤的根目录
+	 * 获取文件源名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public File getRoot();
+	public String getName();
 	
 	/**
-	 * 清空结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	public void clear();
-	
-	/**
-	 * 获取满足过滤条件的结果集
+	 * 获取文件源主名
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public List<File> list();
+	public String getMainName();
 	
 	/**
-	 * 执行过滤操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * 获取文件源扩展名
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
 	 */
-	public void doFileter();
+	public String getExtName();
+	
+	/**
+	 * 获取文件源的输入流对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public InputStream getInputStream() throws IOException;
+	
+	/**
+	 * 获取文件源的字节数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public byte[] getBytes() throws IOException;
 	
 }

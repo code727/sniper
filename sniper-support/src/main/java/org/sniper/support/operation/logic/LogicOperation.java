@@ -16,7 +16,7 @@
  * Create Date : 2015-1-20
  */
 
-package org.sniper.support;
+package org.sniper.support.operation.logic;
 
 /**
  * 逻辑运算接口

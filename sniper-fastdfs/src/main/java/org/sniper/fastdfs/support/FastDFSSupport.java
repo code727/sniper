@@ -36,7 +36,7 @@ import org.sniper.fastdfs.accessor.Accessor;
 import org.sniper.fastdfs.accessor.DefaultAccessor;
 import org.sniper.fastdfs.cluster.Cluster;
 import org.sniper.fastdfs.factory.connection.ConnectionFactory;
-import org.sniper.fastdfs.meta.FastDFSMeta;
+import org.sniper.fastdfs.source.FastFileSource;
 import org.sniper.image.zoom.ImageZoomHandler;
 import org.sniper.spring.beans.CheckableInitializingBean;
 import org.sniper.support.file.ZoomResource;
@@ -131,7 +131,7 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	 * @param meta
 	 * @return
 	 */
-	protected <T> File createTempFile(FastDFSMeta<T> meta) {
+	protected <T> File createTempFile(FastFileSource<T> meta) {
 		String tempPathName = new StringBuilder(SystemUtils.getTempDir())
 			.append(File.separator).append("temp_").append(new Date().getTime())
 			.append("_").append(meta.getName()).toString();
@@ -147,10 +147,10 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	 * @return
 	 * @throws Exception
 	 */
-	protected <T> List<String> doBatchUpload(StorageClient1 storageClient, String groupName, List<FastDFSMeta<T>> metas) throws Exception { 
+	protected <T> List<String> doBatchUpload(StorageClient1 storageClient, String groupName, List<FastFileSource<T>> metas) throws Exception { 
 		List<String> list = CollectionUtils.newArrayList();
 		String targetGroupName = StringUtils.trimToEmpty(groupName);
-		for (FastDFSMeta<T> meta : metas) {
+		for (FastFileSource<T> meta : metas) {
 			NameValuePair[] nameValuePaires = CollectionUtils.isNotEmpty(meta.getNameValuePaires()) ? 
 					CollectionUtils.toArray(meta.getNameValuePaires()) : null;
 			
@@ -171,14 +171,14 @@ public abstract class FastDFSSupport extends CheckableInitializingBean {
 	 * @return
 	 * @throws Exception
 	 */
-	protected <T> Map<String, Object> doBatchZoomUpload(StorageClient1 storageClient, String groupName, List<FastDFSMeta<T>> metas) throws Exception { 
+	protected <T> Map<String, Object> doBatchZoomUpload(StorageClient1 storageClient, String groupName, List<FastFileSource<T>> metas) throws Exception { 
 		AssertUtils.assertNotNull(imageZoomHandler, "ImageZoomHandler must not be null.");
 		
 		List<ZoomResource> zoomResources = CollectionUtils.newArrayList();
 		String targetGroupName = StringUtils.trimToEmpty(groupName);
 		List<File> localTempSources = CollectionUtils.newArrayList();
 		
-		for (FastDFSMeta<T> meta : metas) {
+		for (FastFileSource<T> meta : metas) {
 			ZoomResource zoomResource = new ZoomResource();
 			NameValuePair[] nameValuePaires = CollectionUtils.isNotEmpty(meta.getNameValuePaires()) ? 
 					CollectionUtils.toArray(meta.getNameValuePaires()) : null;

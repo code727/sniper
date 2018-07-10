@@ -13,61 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-5
+ * Create Date : 2015-1-15
  */
 
-package org.sniper.support.file.meta;
-
-import java.io.IOException;
-import java.io.InputStream;
+package org.sniper.resource.file.filter;
 
 /**
- * 文件源接口
+ * Sniper框架本地文件字符串值过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface FileMeta<T> {
+public interface SniperFileStringFilter extends SniperFileFilter {
 	
 	/**
-	 * 获取文件源对象
+	 * 获取字符串过滤值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public T getSource();
+	public String getFilterValue();
 	
 	/**
-	 * 获取文件源名称
+	 * 设置字符串过滤值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
+	 * @param filterValue
 	 */
-	public String getName();
+	public void setFilterValue(String filterValue);
 	
 	/**
-	 * 获取文件源主名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
+	 * 是否忽略大小写
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @return 
 	 */
-	public String getMainName();
+	public boolean isIgnoreCase();
 	
 	/**
-	 * 获取文件源扩展名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
+	 * 设置是否忽略大小写
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @param ignoreCase 
 	 */
-	public String getExtName();
+	public void setIgnoreCase(boolean ignoreCase);
 	
-	/**
-	 * 获取文件源的字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public byte[] getBytes() throws IOException;
-	
-	/**
-	 * 获取文件源的输入流对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public InputStream getInputStream() throws IOException;
-
 }

@@ -13,29 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *  
- * Create Date : 2015-1-20
+ * Create Date : 2015-1-19
  */
 
-package org.sniper.support.file.filter;
-
+package org.sniper.resource.file.filter;
 
 /**
- * 本地文件内容过滤器
+ * sniper框架本地文件数字属性值过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractFileContentFilter extends AbstractFileStringFilter implements SniperFileContentFilter {
+public interface SniperFileNumberFilter extends SniperFileFilter {
 	
-	protected String encoding;
+	/**
+	 * 获取字符串过滤值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Number getFilterValue();
 	
-	@Override
-	public void setEncoding(String encoding) {
-		this.encoding = encoding;
-	}
+	/**
+	 * 设置字符串过滤值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param filterValue
+	 */
+	public void setFilterValue(Number filterValue);
 	
-	@Override
-	public String getEncoding() {
-		return this.encoding;
-	}
-
+	/**
+	 * 设置逻辑运算规则
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param operation
+	 */
+	public void setLogicOperation(String operation);
+	
 }

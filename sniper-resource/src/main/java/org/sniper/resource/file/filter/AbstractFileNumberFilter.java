@@ -16,13 +16,13 @@
  * Create Date : 2015-1-20
  */
 
-package org.sniper.support.file.filter;
+package org.sniper.resource.file.filter;
 
 
-import org.sniper.commons.enums.Enums;
 import org.sniper.commons.util.AssertUtils;
-import org.sniper.support.LogicOperation;
-import org.sniper.support.LogicOperationEnum;
+import org.sniper.support.operation.logic.LogicOperation;
+import org.sniper.support.operation.logic.LogicOperationEnum;
+
 
 /**
  * 本地文件数字属性值过滤器抽象类
@@ -35,9 +35,10 @@ public abstract class AbstractFileNumberFilter extends AbstractFileFilter implem
 	protected Number filterValue;
 	
 	/** 逻辑运算符 */
-	protected String logicOperation;
+	protected String operation;
 	
-	protected LogicOperation<Object, Object> logic;
+	
+	protected LogicOperation<Object, Object> logicOperation;
 	
 	@Override
 	public Number getFilterValue() {
@@ -51,10 +52,11 @@ public abstract class AbstractFileNumberFilter extends AbstractFileFilter implem
 
 	@Override
 	public void setLogicOperation(String operation) {
-		Enums<String,LogicOperation<Object, Object>> enumObject = LogicOperationEnum.get(operation);
-		AssertUtils.assertNotNull(enumObject, "Invalid logic operation:" + operation);
-		this.logicOperation = operation;
-		this.logic = enumObject.getValue();
+		LogicOperationEnum logicOperationEnum = LogicOperationEnum.resolve(operation);
+		AssertUtils.assertNotNull(logicOperationEnum, "Invalid logic operation:" + operation);
+		
+		this.operation = logicOperationEnum.getKey();
+		this.logicOperation = logicOperationEnum.getValue();
 	}
 	
 }

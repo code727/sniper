@@ -21,14 +21,14 @@ package org.snipersite.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.sniper.commons.entity.number.IdEntity;
+import org.sniper.commons.entity.IdEntity;
 
 /**
  * 
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Developer extends IdEntity implements Serializable {
+public class Developer extends IdEntity<Long> implements Serializable {
 		
 	private static final long serialVersionUID = -1087393058569622124L;
 		

@@ -35,7 +35,7 @@ public class CompositeCodec extends AbstractCodec {
 	private List<Codec> members;
 	
 	public CompositeCodec(List<Codec> members) {
-		AssertUtils.assertNotEmpty(members, "Composite codec member must not be null or empty.");
+		AssertUtils.assertNotEmpty(members, "Composite codec member must not be null or empty");
 		
 		this.members = members;
 	}
@@ -85,8 +85,9 @@ public class CompositeCodec extends AbstractCodec {
 	 * @return
 	 */
 	private String encodeByMemberOrder(String text, String charsetName, int start) {
-		for (int i = start; i < this.members.size(); i++)
+		for (int i = start; i < this.members.size(); i++) {
 			text = this.members.get(i).encode(text, charsetName);
+		}
 		
 		return text;
 	}
@@ -100,8 +101,9 @@ public class CompositeCodec extends AbstractCodec {
 	 */
 	private String decodeByMemberInvertedOrder(String encodedText, String charsetName) {
 		int size = CollectionUtils.size(this.members);
-		for (int i = size - 1; i > -1; i--) 
+		for (int i = size - 1; i > -1; i--) {
 			encodedText = this.members.get(i).decode(encodedText, charsetName);
+		}
 		
 		return encodedText;
 	}
@@ -116,9 +118,8 @@ public class CompositeCodec extends AbstractCodec {
 		/* 最后一个编解码器对文本解码后，再对字节数组结果从列表的倒数第2个成员开始逆序进行解码 */
 		byte[] textBytes = CollectionUtils.getLast(this.members).decodeToBytes(encodedText);
 		int size = CollectionUtils.size(this.members);
-		if (size > 1) {
-			for (int i = size - 2; i > -1; i--) 
-				textBytes = this.members.get(i).decodeToBytes(CodecUtils.bytesToString(textBytes));
+		for (int i = size - 2; i > -1; i--) {
+			textBytes = this.members.get(i).decodeToBytes(CodecUtils.bytesToString(textBytes));
 		}
 		
 		return textBytes;

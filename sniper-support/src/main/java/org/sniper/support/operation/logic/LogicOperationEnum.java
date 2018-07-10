@@ -16,16 +16,13 @@
  * Create Date : 2015-1-20
  */
 
-package org.sniper.support;
+package org.sniper.support.operation.logic;
 
 
-import java.util.Set;
+import java.util.Map;
 
 import org.sniper.commons.enums.AbstractEnums;
-import org.sniper.commons.enums.Enums;
-import org.sniper.commons.util.CollectionUtils;
-import org.sniper.commons.util.ObjectUtils;
-import org.sniper.commons.util.StringUtils;
+import org.sniper.commons.util.MapUtils;
 
 /**
  * 逻辑运算枚举
@@ -34,8 +31,8 @@ import org.sniper.commons.util.StringUtils;
  */
 public final class LogicOperationEnum extends AbstractEnums<String, LogicOperation<Object, Object>> {
 	
-	/** 存放的所有枚举对象组 */
-	protected static final Set<Enums<String,LogicOperation<Object, Object>>> ENUM_GROUP = CollectionUtils.newHashSet();
+	/** 逻辑操作组 */
+	private static final Map<String, LogicOperationEnum> LOGIC_OPERATIONS;
 	
 	/** 引用相等操作 */
 	public static final LogicOperationEnum REFERENCE_EQUALS = new LogicOperationEnum(
@@ -62,53 +59,51 @@ public final class LogicOperationEnum extends AbstractEnums<String, LogicOperati
 			"<=", new GreaterThanEqualsLogicOperation());
 	
 	static {
-		ENUM_GROUP.add(REFERENCE_EQUALS);
-		ENUM_GROUP.add(EQUALS);
-		ENUM_GROUP.add(GREATER_THAN);
-		ENUM_GROUP.add(GREATER_THAN_EQUALS);
-		ENUM_GROUP.add(LESS_THAN);
-		ENUM_GROUP.add(LESS_THAN_EQUALS);
+		LOGIC_OPERATIONS = MapUtils.newHashMap(6);
+		LOGIC_OPERATIONS.put(REFERENCE_EQUALS.getKey(), REFERENCE_EQUALS);
+		LOGIC_OPERATIONS.put(EQUALS.getKey(), EQUALS);
+		LOGIC_OPERATIONS.put(GREATER_THAN.getKey(), GREATER_THAN);
+		LOGIC_OPERATIONS.put(GREATER_THAN_EQUALS.getKey(), GREATER_THAN_EQUALS);
+		LOGIC_OPERATIONS.put(LESS_THAN.getKey(), LESS_THAN);
+		LOGIC_OPERATIONS.put(LESS_THAN_EQUALS.getKey(), LESS_THAN_EQUALS);
 	}
 	
 	private LogicOperationEnum(String key, LogicOperation<Object, Object> operation) {
 		super(key, operation);
 	}	
-	
-	/**
-	 * 获取存放的所有逻辑运算枚举
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public static Set<Enums<String,LogicOperation<Object, Object>>> getAll() {
-		return ENUM_GROUP; 
-	}
-	
-	/**
-	 * 根据键获取对应的枚举对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @return
-	 */
-	public static Enums<String,LogicOperation<Object, Object>> get(String key) {
-		key = StringUtils.trim(key);
-		if (key != null)
-			key = key.toLowerCase();
 		
-		for (Enums<String,LogicOperation<Object, Object>> operation : ENUM_GROUP) {
-			if (ObjectUtils.equals(operation.getKey(), key))
-				return operation;
-		}
-		return null;
+	/**
+	 * 将指定的操作解析成LogicOperationEnum对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param operation
+	 * @return
+	 */
+	public static LogicOperationEnum resolve(String operation) {
+		return operation != null ? LOGIC_OPERATIONS.get(operation.trim().toLowerCase()) : null;
 	}
 	
 	/**
-	 * 判断键对应的枚举对象是否存在
+	 * 将指定的操作解析成LogicOperation对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param operation
+	 * @return
+	 */
+	public static LogicOperation<Object, Object> resolveOperation(String operation) {
+		if (operation == null)
+			return null;
+		
+		LogicOperationEnum logicOperationEnum = LOGIC_OPERATIONS.get(operation.trim().toLowerCase());
+		return logicOperationEnum != null ? logicOperationEnum.getValue() : null;
+	}
+	
+	/**
+	 * 判断指定的操作是否匹配一个LogicOperationEnum对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
 	 */
-	public static boolean exist(String key) {
-		return get(key) != null;
+	public static boolean matches(String operation) {
+		return resolve(operation) != null;
 	}
 	
 }

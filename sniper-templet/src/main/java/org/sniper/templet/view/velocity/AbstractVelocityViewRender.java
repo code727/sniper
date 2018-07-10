@@ -43,14 +43,9 @@ public abstract class AbstractVelocityViewRender extends AbstractViewRender {
 
 	@Override
 	public <K, V> boolean rende(String templetName, Map<K, V> context, Writer writer) throws IOException {
-		VelocityContext velocityContext;
-		if (MapUtils.isNotEmpty(context))
-			velocityContext = new VelocityContext(context);
-		else
-			velocityContext = new VelocityContext();
-				
-		StringBuilder targetName = new StringBuilder(getPrefix()).append(
-				StringUtils.trim(templetName)).append(getSuffix());
+		VelocityContext velocityContext = MapUtils.isNotEmpty(context) ? new VelocityContext(context) : new VelocityContext();
+		StringBuilder targetName = new StringBuilder(getPrefix())
+				.append(StringUtils.trim(templetName)).append(getSuffix());
 		
 		if (velocityEngine == null) {
 			synchronized(this) {

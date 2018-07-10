@@ -23,7 +23,7 @@ import java.util.Set;
 
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.fastdfs.meta.FastDFSMeta;
+import org.sniper.fastdfs.source.FastFileSource;
 import org.sniper.fastdfs.support.FastDFSTemplate;
 
 /**
@@ -35,16 +35,16 @@ public class OriginalResourcesDeleteTask<T> implements Runnable {
 	
 	private boolean deleteAll;
 	
-	private List<FastDFSMeta<T>> metas;
+	private List<FastFileSource<T>> metas;
 	
 	private FastDFSTemplate template;
 	
-	public OriginalResourcesDeleteTask(List<FastDFSMeta<T>> metas, FastDFSTemplate template) {
+	public OriginalResourcesDeleteTask(List<FastFileSource<T>> metas, FastDFSTemplate template) {
 		this.metas = metas;
 		this.template = template;
 	}
 	
-	public OriginalResourcesDeleteTask(boolean deleteAll, List<FastDFSMeta<T>> metas, FastDFSTemplate template) {
+	public OriginalResourcesDeleteTask(boolean deleteAll, List<FastFileSource<T>> metas, FastDFSTemplate template) {
 		this.deleteAll = deleteAll;
 		this.metas = metas;
 		this.template = template;
@@ -54,7 +54,7 @@ public class OriginalResourcesDeleteTask<T> implements Runnable {
 	public void run() {
 		Set<String> pathSet = CollectionUtils.newHashSet();
 		if (this.deleteAll) {
-			for (FastDFSMeta<T> meta : this.metas) {
+			for (FastFileSource<T> meta : this.metas) {
 				String originalId = meta.getOriginalId();
 				String originalZoomId = meta.getOriginalId();
 				if (StringUtils.isNotBlank(originalId))
@@ -63,7 +63,7 @@ public class OriginalResourcesDeleteTask<T> implements Runnable {
 					pathSet.add(originalZoomId);
 			}
 		} else {
-			for (FastDFSMeta<T> meta : this.metas) {
+			for (FastFileSource<T> meta : this.metas) {
 				String originalId = meta.getOriginalId();
 				if (StringUtils.isNotBlank(originalId))
 					pathSet.add(originalId);

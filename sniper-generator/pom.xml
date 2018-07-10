@@ -22,6 +22,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
+			<artifactId>sniper-support</artifactId>
+			<version>${sniper.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.sniper</groupId>
 			<artifactId>sniper-lock</artifactId>
 			<version>${sniper.version}</version>
 			<optional>true</optional>

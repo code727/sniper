@@ -16,17 +16,19 @@
  * Create Date : 2015-1-20
  */
 
-package org.sniper.support;
+package org.sniper.support.operation.logic;
+
+import org.sniper.commons.util.ObjectUtils;
 
 /**
- * 引用相等逻辑运算操作
+ * 值相等逻辑运算操作
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ReferenceEqualsLogicOperation implements LogicOperation<Object, Object> {
-	
+public class EqualsLogicOperation implements LogicOperation<Object, Object> {
+
 	/**
-	 * 执行引用相等逻辑判断
+	 * 执行对象的equals方法进行值比较
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj1
 	 * @param obj2
@@ -34,7 +36,7 @@ public class ReferenceEqualsLogicOperation implements LogicOperation<Object, Obj
 	 */
 	@Override
 	public boolean execute(Object obj1, Object obj2) {
-		return obj1 == obj2;
+		return ObjectUtils.equals(obj1, obj2);
 	}
 
 }

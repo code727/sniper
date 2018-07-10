@@ -16,12 +16,13 @@
  * Create Date : 2015年11月6日
  */
 
-package org.sniper.fastdfs.meta;
+package org.sniper.fastdfs.source;
 
 import java.io.IOException;
 
 import org.springframework.web.multipart.MultipartFile;
-import org.sniper.web.spring.file.MultipartFileMeta;
+import org.sniper.support.file.source.AbstaractFileSource;
+import org.sniper.web.spring.file.SpringMultipartFileSource;
 
 
 /**
@@ -29,24 +30,30 @@ import org.sniper.web.spring.file.MultipartFileMeta;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FastDFSMultipartFileMeta extends AbstractFastDFSMeta<MultipartFile> {
+public class FastMultipartFileSource extends AbstractFastFileSource<MultipartFile> {
 	
-	private MultipartFileMeta multipartFileSource;
+	private SpringMultipartFileSource springMultipartFileSource;
 
-	public FastDFSMultipartFileMeta(MultipartFile source) throws IOException {
+	public FastMultipartFileSource(MultipartFile source) throws IOException {
 		super(source);
 	}
 
 	@Override
 	protected void handle() throws IOException {
-		if (this.multipartFileSource == null)
-			this.multipartFileSource = new MultipartFileMeta(getSource());
+		if (this.springMultipartFileSource == null)
+			this.springMultipartFileSource = new SpringMultipartFileSource(getSource());
 		
-		this.name = this.multipartFileSource.getName();
-		this.mainName = this.multipartFileSource.getMainName();
-		this.extName = this.multipartFileSource.getExtName();
-		this.in = this.multipartFileSource.getInputStream();
-		this.bytes = this.multipartFileSource.getBytes();
+		this.name = this.springMultipartFileSource.getName();
+		this.mainName = this.springMultipartFileSource.getMainName();
+		this.extName = this.springMultipartFileSource.getExtName();
+		this.in = this.springMultipartFileSource.getInputStream();
+		this.bytes = this.springMultipartFileSource.getBytes();
+	}
+
+	@Override
+	protected FileItem initialize(MultipartFile file) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -16,7 +16,7 @@
  * Create Date : 2015-11-5
  */
 
-package org.sniper.fastdfs.meta;
+package org.sniper.fastdfs.source;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -27,14 +27,14 @@ import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.support.file.meta.AbstaractFileMeta;
+import org.sniper.support.file.source.AbstaractFileSource;
 
 /**
- * FastDFS文件源抽象类
+ * FastDFS文件资源抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractFastDFSMeta<T> extends AbstaractFileMeta<T> implements FastDFSMeta<T> {
+public abstract class AbstractFastFileSource<T> extends AbstaractFileSource<T> implements FastFileSource<T> {
 	
 	/** 原有的资源标识 */
 	private String originalId;
@@ -45,7 +45,7 @@ public abstract class AbstractFastDFSMeta<T> extends AbstaractFileMeta<T> implem
 	/** 目标文件元数据名值对列表 */
 	private List<NameValuePair> nameValuePaires;
 	
-	public AbstractFastDFSMeta(T source) throws IOException {
+	public AbstractFastFileSource(T source) throws IOException {
 		super(source);
 	}
 	

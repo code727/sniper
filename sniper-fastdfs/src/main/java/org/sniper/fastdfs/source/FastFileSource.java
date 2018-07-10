@@ -16,19 +16,19 @@
  * Create Date : 2015-11-5
  */
 
-package org.sniper.fastdfs.meta;
+package org.sniper.fastdfs.source;
 
 import java.util.List;
 
 import org.csource.common.NameValuePair;
-import org.sniper.support.file.meta.FileMeta;
+import org.sniper.support.file.source.FileSource;
 
 /**
- * FastDFS文件源接口
+ * FastDFS文件资源接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface FastDFSMeta<T> extends FileMeta<T> {
+public interface FastFileSource<T> extends FileSource<T> {
 	
 	/**
 	 * 设置原有的资源标识

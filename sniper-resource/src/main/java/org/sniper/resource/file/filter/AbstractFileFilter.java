@@ -16,7 +16,7 @@
  * Create Date : 2015-1-15
  */
 
-package org.sniper.support.file.filter;
+package org.sniper.resource.file.filter;
 
 import java.io.File;
 import java.util.List;

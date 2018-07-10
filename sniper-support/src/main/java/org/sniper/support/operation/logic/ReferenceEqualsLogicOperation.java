@@ -16,30 +16,25 @@
  * Create Date : 2015-1-20
  */
 
-package org.sniper.support;
-
-import java.math.BigDecimal;
+package org.sniper.support.operation.logic;
 
 /**
- * 小于等于逻辑运算操作
+ * 引用相等逻辑运算操作
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class LessThanEqualsLogicOperation implements LogicOperation<Object, Object> {
-
+public class ReferenceEqualsLogicOperation implements LogicOperation<Object, Object> {
+	
+	/**
+	 * 执行引用相等逻辑判断
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj1
+	 * @param obj2
+	 * @return
+	 */
 	@Override
-	public boolean execute(Object value1, Object value2) {
-		if (value1 == null || value2 == null)
-			return false;
-		
-		try {
-			BigDecimal v1 = new BigDecimal(value1.toString());
-			BigDecimal v2 = new BigDecimal(value2.toString());
-			return v1.compareTo(v2) < 1;
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			return false;
-		}
+	public boolean execute(Object obj1, Object obj2) {
+		return obj1 == obj2;
 	}
-		
+
 }

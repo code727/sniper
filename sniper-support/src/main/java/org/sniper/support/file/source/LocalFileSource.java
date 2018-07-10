@@ -16,7 +16,7 @@
  * Create Date : 2015-11-5
  */
 
-package org.sniper.support.file.meta;
+package org.sniper.support.file.source;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,21 +29,27 @@ import org.sniper.commons.util.FileUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class LocalFileMeta extends AbstaractFileMeta<File> {
+public class LocalFileSource extends AbstaractFileSource<File> {
 
-	public LocalFileMeta(File source) throws IOException {
+	public LocalFileSource(File source) throws IOException {
 		super(source);
 	}
 
 	@Override
-	protected void handle() throws IOException {
-		File source = getSource();
-		this.name = source.getName();
-		this.mainName = FileUtils.getMainName(source);
-		this.extName = FileUtils.getExtensionName(source);
-		this.in = new FileInputStream(source);
-		this.bytes = new byte[this.in.available()];
-		this.in.read(bytes, 0, bytes.length);
+	protected FileItem initialize(File file) throws IOException {
+		String name = file.getName();
+		String mainName = FileUtils.getMainName(file);
+		String extName = FileUtils.getExtensionName(file);
+		FileInputStream input = new FileInputStream(file);
+		byte[] bytes = new byte[input.available()];
+		
+//		input.read(bytes, 0, bytes.length);
+		return new FileItem(name, mainName, extName, input, bytes);
+				
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 	
 }

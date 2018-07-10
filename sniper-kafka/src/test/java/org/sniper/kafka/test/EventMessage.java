@@ -2,9 +2,9 @@ package org.sniper.kafka.test;
 
 import java.util.Map;
 
-import org.sniper.commons.entity.string.IdEntity;
+import org.sniper.commons.entity.IdEntity;
 
-public class EventMessage extends IdEntity {
+public class EventMessage extends IdEntity<String> {
 
 	private static final long serialVersionUID = 6834085174240454027L;
 	

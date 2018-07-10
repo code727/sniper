@@ -61,6 +61,8 @@ public class WebUtils {
 	/** HttpSession对象的属性名 */
 	public static final String HTTP_SESSION_NAME = HttpSession.class.getName();
 	
+	private WebUtils() {}
+	
 	/**
 	 * 设置HttpServletRequest对象的字符集编码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

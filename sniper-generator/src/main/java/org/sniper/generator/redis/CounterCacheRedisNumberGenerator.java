@@ -20,12 +20,12 @@ package org.sniper.generator.redis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sniper.commons.counter.AtomicLongIntervalCounter;
-import org.sniper.commons.counter.IntervalCounter;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.lock.ParameterizeLock;
 import org.sniper.lock.jdk.JdkParameterizeLock;
 import org.sniper.nosql.redis.dao.RedisCommandsDao;
+import org.sniper.support.counter.AtomicLongIntervalCounter;
+import org.sniper.support.counter.IntervalCounter;
 
 /**
  * 基于计数器缓存的Redis数字生成器实现类，实现原理如下：</P>

@@ -13,30 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *  
- * Create Date : 2015-1-20
+ * Create Date : 2015-1-19
  */
 
-package org.sniper.support.file.filter;
+package org.sniper.resource.file.filter;
 
 /**
- * sniper框架本地文件内容过滤器
+ * 本地文件字符串过滤器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SniperFileContentFilter extends SniperFileStringFilter {
+public abstract class AbstractFileStringFilter extends AbstractFileFilter
+		implements SniperFileStringFilter {
 	
-	/**
-	 * 设置文本内容编码集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param encoding
-	 */
-	public void setEncoding(String encoding);
+	/** 过滤值 */
+	protected String filterValue;
 	
-	/**
-	 * 获取文本内容编码集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getEncoding();
+	/** 是否忽略大小写 */
+	protected boolean ignoreCase = true;
+
+	public String getFilterValue() {
+		return filterValue;
+	}
+
+	public void setFilterValue(String filterValue) {
+		this.filterValue = filterValue;
+	}
+
+	public boolean isIgnoreCase() {
+		return ignoreCase;
+	}
+
+	public void setIgnoreCase(boolean ignoreCase) {
+		this.ignoreCase = ignoreCase;
+	}
 
 }

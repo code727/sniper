@@ -34,8 +34,10 @@ public class FilesDeleteTask implements Runnable {
 	private List<File> files;
 	
 	public FilesDeleteTask(File file) {
-		if (this.files == null)
+		if (this.files == null) {
 			this.files = CollectionUtils.newArrayList();
+		}
+		
 		this.files.add(file);
 	}
 	
