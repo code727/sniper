@@ -21,7 +21,7 @@ package org.sniper.resource.fastdfs.file;
 import java.util.List;
 
 import org.csource.common.NameValuePair;
-import org.sniper.support.file.source.FileSource;
+import org.sniper.resource.file.FileSource;
 
 /**
  * FastDFS文件资源接口

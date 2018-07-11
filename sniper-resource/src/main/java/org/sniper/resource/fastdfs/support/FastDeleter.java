@@ -39,9 +39,9 @@ public interface FastDeleter {
 	/**
 	 * 批量删除指定路径的资源
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param pathSet
+	 * @param paths
 	 * @throws Exception
 	 */
-	public void bathDelete(Set<String> pathSet) throws Exception;
+	public void bathDelete(Set<String> paths) throws Exception;
 	
 }

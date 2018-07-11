@@ -28,9 +28,9 @@ import org.csource.fastdfs.TrackerGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.fastdfs.cluster.Cluster;
-import org.sniper.fastdfs.cluster.TrackerCluster;
-import org.sniper.fastdfs.node.Tracker;
+import org.sniper.resource.fastdfs.cluster.Cluster;
+import org.sniper.resource.fastdfs.cluster.TrackerCluster;
+import org.sniper.resource.fastdfs.node.Tracker;
 import org.sniper.spring.beans.CheckableInitializingBean;
 
 /**
@@ -78,7 +78,7 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	protected void init() throws Exception {
-		logger.info("Starting init FastDFS client global configuration.");
+		logger.info("Starting init FastDFS client global configuration");
 		TrackerCluster trackerCluster = this.cluster.getTrackerCluster();
 		ClientGlobal.g_connect_timeout = trackerCluster.getConnectTimeout();
 		ClientGlobal.g_network_timeout = trackerCluster.getNetworkTimeout();

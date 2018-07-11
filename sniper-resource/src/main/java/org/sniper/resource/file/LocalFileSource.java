@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.sniper.commons.util.FileUtils;
+import org.sniper.commons.util.IOUtils;
 
 /**
  * 本地文件源抽象类
@@ -49,13 +50,5 @@ public class LocalFileSource extends AbstaractFileSource<File> {
 		
 		return new FileItem(name, mainName, extName, input, bytes);
 	}
-
-	public static void main(String[] args) throws IOException {
-		File file = new File("D:\\test.txt");
-		LocalFileSource fileSource = new LocalFileSource(file, false);
-		System.out.println(fileSource.read());
-	}
-
-	
 
 }

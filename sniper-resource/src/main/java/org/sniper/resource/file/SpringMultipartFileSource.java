@@ -65,9 +65,4 @@ public class SpringMultipartFileSource extends AbstaractFileSource<MultipartFile
 		return delayedReading ? new byte[input.available()] : file.getBytes();
 	}
 	
-	@Override
-	public int read() throws IOException {
-		return 0;
-	}
-
 }

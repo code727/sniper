@@ -49,7 +49,7 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	protected final InputStream input;
 	
 	/** 字节数组 */
-	protected final byte[] bytes;
+	protected byte[] bytes;
 	
 	protected AbstaractFileSource(T file) throws IOException {
 		this(file, false);
@@ -71,8 +71,8 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	
 	/**
 	 * 根据输入流对象创建相关的内容字节数组：</P>
-	 * 1.如果delayedReading参数为true，则创建时不及时读取输入流的内容，返回的字节数组内容为空；</P>
-	 * 2.如果delayedReading参数为false，则创建时及时读取输入流的内容，返回的字节数组内存放读取到的内容。
+	 * 1.如果delayedReading参数为true，则创建时不及时读取输入流的内容</P>
+	 * 2.如果delayedReading参数为false，则创建时及时读取输入流的内容。
 	 * @param input
 	 * @param delayedReading
 	 * @return 
@@ -88,14 +88,24 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	}
 	
 	/**
-	 * 读取文件内容后返回文件的大小
+	 * 重写父类方法，获取文件源的字节数组：</P>
+	 * 1.如果delayedReading为true，则获取之前要先将文件内容读取到字节数组中；</P>
+	 * 2.如果delayedReading为false，则说明在创建文件资源时已经将文件内容读取到字节数组中，直接返回即可。
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
 	 * @throws IOException
 	 */
-	public int read() throws IOException {
-		// 注意：读取内容后，输入流未自动关闭，调用方根据具体需求自行关闭
-		return delayedReading ? input.read(bytes, 0, bytes.length) : bytes.length;
+	@Override
+	public byte[] getBytes() throws IOException {
+		if (this.delayedReading) {
+			synchronized (this) {
+				this.bytes = new byte[this.input.available()];
+				this.input.read(this.bytes, 0, this.bytes.length);
+			}
+		}
+		return this.bytes;
 	}
-	
+		
 	@Override
 	public T getFile() {
 		return this.file;
@@ -114,11 +124,6 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	@Override
 	public String getExtName() {
 		return this.extName;
-	}
-
-	@Override
-	public byte[] getBytes() throws IOException {
-		return this.bytes;
 	}
 
 	@Override

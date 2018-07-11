@@ -46,6 +46,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
+			<artifactId>sniper-context</artifactId>
+			<version>${sniper.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.sniper</groupId>
 			<artifactId>sniper-spring</artifactId>
 			<version>${sniper.version}</version>
 			<optional>true</optional>

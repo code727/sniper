@@ -35,8 +35,8 @@ public class DefaultPoolableTrackerServerFactory implements PoolableObjectFactor
 
 	@Override
 	public TrackerServer makeObject() throws Exception {
-		return ClientGlobal.g_tracker_group.getConnection(
-				(int) ThreadLocalHolder.getAttribute("CURRENT_TRACKERSERVER_INDEX"));
+		int serverIndex = (int) ThreadLocalHolder.getAttribute("CURRENT_TRACKERSERVER_INDEX");
+		return ClientGlobal.g_tracker_group.getConnection(serverIndex);
 	}
 
 	@Override

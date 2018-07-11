@@ -22,7 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.sniper.support.file.source.LocalFileSource;
+import org.sniper.resource.file.AbstaractFileSource.FileItem;
+import org.sniper.resource.file.LocalFileSource;
 
 /**
  * FastDFS本地文件源实现类
@@ -46,6 +47,7 @@ public class FastLocalFileSource extends AbstractFastFileSource<File> {
 		String extName = this.localFileSource.getExtName();
 		InputStream in = this.localFileSource.getInputStream();
 		byte[] bytes = this.localFileSource.getBytes();
+		
 		return new FileItem(name, mainName, extName, in, bytes);
 	}
 	

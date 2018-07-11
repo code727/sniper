@@ -34,6 +34,7 @@ import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.FileUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.resource.fastdfs.OriginalResourcesDeleteTask;
+import org.sniper.resource.fastdfs.accessor.Accessor;
 import org.sniper.resource.fastdfs.cluster.Cluster;
 import org.sniper.resource.fastdfs.factory.connection.ConnectionFactory;
 import org.sniper.resource.fastdfs.file.FastFileSource;
@@ -263,8 +264,8 @@ public class FastTemplate extends FastSupport implements FastOperations {
 	
 	@Override
 	public String download(final String path, final String fileName) throws Exception {
-		AssertUtils.assertNotBlank(path, "Source path must not be null or blank.");
-		AssertUtils.assertNotBlank(fileName, "Local file name must not be null or blank.");
+		AssertUtils.assertNotBlank(path, "Source path must not be null or blank");
+		AssertUtils.assertNotBlank(fileName, "Local file name must not be null or blank");
 		
 		return this.execute(new FastCallback<String>() {
 			@Override
@@ -293,7 +294,7 @@ public class FastTemplate extends FastSupport implements FastOperations {
 	public void download(String path, String attachmentName,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		AssertUtils.assertNotBlank(path, "Source path must not be null or blank.");
+		AssertUtils.assertNotBlank(path, "Source path must not be null or blank");
 		
 		// 如果传入的附件名为空，则从路径中获取
 		if (StringUtils.isBlank(attachmentName))
@@ -315,13 +316,13 @@ public class FastTemplate extends FastSupport implements FastOperations {
 	}
 
 	@Override
-	public void bathDelete(final Set<String> pathSet) throws Exception {
+	public void bathDelete(final Set<String> paths) throws Exception {
 		this.execute(new FastCallback<Object>() {
 
 			@Override
 			public Object doIn(StorageClient1 storageClient) throws Exception {
-				for (String path : pathSet) {
-					String storagePath = getAccessor().getStoragePath(getCluster(), path);
+				for (String path : paths) {
+					String storagePath = accessor.getStoragePath(getCluster(), path);
 					storageClient.delete_file1(storagePath);
 				}
 				return null;
