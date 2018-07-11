@@ -13,39 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-5
+ * Create Date : 2015-11-6
  */
 
-package org.sniper.support.file.source;
+package org.sniper.resource.fastdfs.file;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
-import org.sniper.commons.util.FileUtils;
+import org.sniper.support.file.source.LocalFileSource;
 
 /**
- * 本地文件源抽象类
+ * FastDFS本地文件源实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class LocalFileSource extends AbstaractFileSource<File> {
+public class FastLocalFileSource extends AbstractFastFileSource<File> {
+	
+	private LocalFileSource localFileSource;
 
-	public LocalFileSource(File source) throws IOException {
+	public FastLocalFileSource(File source) throws IOException {
 		super(source);
 	}
-
-	@Override
+	
 	protected FileItem initialize(File file) throws IOException {
-		String name = file.getName();
-		String mainName = FileUtils.getMainName(file);
-		String extName = FileUtils.getExtensionName(file);
-		FileInputStream input = new FileInputStream(file);
-		byte[] bytes = new byte[input.available()];
+		if (this.localFileSource == null)
+			this.localFileSource = new LocalFileSource(file);
 		
-//		input.read(bytes, 0, bytes.length);
-		return new FileItem(name, mainName, extName, input, bytes);
-				
+		String name = this.localFileSource.getName();
+		String mainName = this.localFileSource.getMainName();
+		String extName = this.localFileSource.getExtName();
+		InputStream in = this.localFileSource.getInputStream();
+		byte[] bytes = this.localFileSource.getBytes();
+		return new FileItem(name, mainName, extName, in, bytes);
 	}
 	
 }

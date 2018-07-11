@@ -31,7 +31,10 @@ import org.sniper.commons.util.AssertUtils;
 public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	
 	/** 文件体*/
-	private T file;
+	private final T file;
+	
+	/** 是否延迟读取文件内容 */
+	private final boolean delayedReading;
 	
 	/** 文件名(名.扩展) */
 	private final String name;
@@ -43,24 +46,56 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	private final String extName;
 	
 	/** 输入流对象 */
-	private final InputStream in;
+	protected final InputStream input;
 	
 	/** 字节数组 */
-	private final byte[] bytes;
+	protected final byte[] bytes;
 	
-	public AbstaractFileSource(T file) throws IOException {
+	protected AbstaractFileSource(T file) throws IOException {
+		this(file, false);
+	}
+	
+	protected AbstaractFileSource(T file, boolean delayedReading) throws IOException {
 		AssertUtils.assertNotNull(file, "File source body must not be null");
-		FileItem item = initialize(file);
+		FileItem item = initialize(file, delayedReading);
 		AssertUtils.assertNotNull(item, "Initialize failed, file item must not be null");
 		
 		this.file = file;
+		this.delayedReading = delayedReading;
 		this.name = item.name;
 		this.mainName = item.mainName;
 		this.extName = item.extName;
-		this.in = item.in;
+		this.input = item.input;
 		this.bytes = item.bytes;
 	}
-
+	
+	/**
+	 * 根据输入流对象创建相关的内容字节数组：</P>
+	 * 1.如果delayedReading参数为true，则创建时不及时读取输入流的内容，返回的字节数组内容为空；</P>
+	 * 2.如果delayedReading参数为false，则创建时及时读取输入流的内容，返回的字节数组内存放读取到的内容。
+	 * @param input
+	 * @param delayedReading
+	 * @return 
+	 * @throws IOException
+	 */
+	protected byte[] createBytes(T file, InputStream input, boolean delayedReading) throws IOException {
+		byte[] bytes = new byte[input.available()];
+		if (!delayedReading) {
+			input.read(bytes, 0, bytes.length);
+		}
+		
+		return bytes;
+	}
+	
+	/**
+	 * 读取文件内容后返回文件的大小
+	 * @throws IOException
+	 */
+	public int read() throws IOException {
+		// 注意：读取内容后，输入流未自动关闭，调用方根据具体需求自行关闭
+		return delayedReading ? input.read(bytes, 0, bytes.length) : bytes.length;
+	}
+	
 	@Override
 	public T getFile() {
 		return this.file;
@@ -88,17 +123,21 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 
 	@Override
 	public InputStream getInputStream() throws IOException {
-		return this.in;
+		return this.input;
 	} 
+	
+	public boolean isDelayedReading() {
+		return delayedReading;
+	}
 	
 	/**
 	 * 根据文件体初始化后返回创建完成的文件项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param file
+	 * @param delayedReading
 	 * @return
 	 * @throws IOException
 	 */
-	protected abstract FileItem initialize(T file) throws IOException;
+	protected abstract FileItem initialize(T file, boolean delayedReading) throws IOException;
 	
 	/**
 	 * 文件项内部实现类
@@ -117,16 +156,16 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 		private final String extName;
 		
 		/** 输入流对象 */
-		private final InputStream in;
+		private final InputStream input;
 		
 		/** 字节数组 */
 		private final byte[] bytes;
 		
-		public FileItem(String name, String mainName, String extName, InputStream in, byte[] bytes) {
+		public FileItem(String name, String mainName, String extName, InputStream input, byte[] bytes) {
 			this.name = name;
 			this.mainName = mainName;
 			this.extName = extName;
-			this.in = in;
+			this.input = input;
 			this.bytes = bytes;
 		}
 
@@ -146,8 +185,8 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 			return bytes;
 		}
 
-		public InputStream getIn() {
-			return in;
+		public InputStream getInputStream() {
+			return input;
 		}
 	}
 

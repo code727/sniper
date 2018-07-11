@@ -31,25 +31,31 @@ import org.sniper.commons.util.FileUtils;
  */
 public class LocalFileSource extends AbstaractFileSource<File> {
 
-	public LocalFileSource(File source) throws IOException {
-		super(source);
+	public LocalFileSource(File file) throws IOException {
+		super(file);
 	}
-
+	
+	public LocalFileSource(File file, boolean delayedReading) throws IOException {
+		super(file, delayedReading);
+	}
+	
 	@Override
-	protected FileItem initialize(File file) throws IOException {
+	protected FileItem initialize(File file, boolean delayedReading) throws IOException {
 		String name = file.getName();
 		String mainName = FileUtils.getMainName(file);
 		String extName = FileUtils.getExtensionName(file);
 		FileInputStream input = new FileInputStream(file);
-		byte[] bytes = new byte[input.available()];
+		byte[] bytes = createBytes(file, input, delayedReading);
 		
-//		input.read(bytes, 0, bytes.length);
 		return new FileItem(name, mainName, extName, input, bytes);
-				
 	}
-	
-	public static void main(String[] args) {
-		
+
+	public static void main(String[] args) throws IOException {
+		File file = new File("D:\\test.txt");
+		LocalFileSource fileSource = new LocalFileSource(file, false);
+		System.out.println(fileSource.read());
 	}
+
 	
+
 }

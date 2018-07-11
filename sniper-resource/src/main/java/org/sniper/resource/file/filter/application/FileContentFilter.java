@@ -60,12 +60,11 @@ public class FileContentFilter extends AbstractFileContentFilter {
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
-				if (reader != null)
-					try {
-						reader.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+				try {
+					IOUtils.close(reader);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return false;

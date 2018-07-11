@@ -13,45 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-10-29
+ * Create Date : 2015-10-30
  */
 
-package org.sniper.support.server;
+package org.sniper.resource.fastdfs.cluster;
+
+import java.util.List;
+
+import org.sniper.resource.fastdfs.node.Storage;
+import org.sniper.resource.server.InternetServer;
 
 /**
- * 互联网服务器接口
+ * StorageGroup接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface InternetServer extends IntranetServer {
-		
-	/**
-	 * 设置互联网服务地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param internetHost
-	 */
-    public void setInternetHost(String internetHost);
-	
-    /**
-     * 获取互联网服务地址
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @return
-     */
-	public String getInternetHost();
-
-	/**
-	 * 设置互联网服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param internetPort
-	 */
-	public void setInternetPort(int internetPort);
+public interface StorageGroup extends InternetServer {
 	
 	/**
-	 * 获取互联网服务端口
+	 * 设置当前组包含的Storage
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param extPort
+	 * @param storages
+	 */
+	public void setStorages(List<Storage> storages);
+	
+	/**
+	 * 获取当前组包含的所有Storage
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public int getInternetPort();
-	
+	public List<Storage> getStorages();
+
 }

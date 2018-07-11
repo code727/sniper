@@ -10,6 +10,30 @@
 	
 	<dependencies>
 		<dependency>
+  			<groupId>org.slf4j</groupId>
+  			<artifactId>slf4j-api</artifactId>
+  			<version>${slf4j.version}</version>
+  			<optional>true</optional>
+		</dependency>
+		<dependency> 
+   			<groupId>javax.servlet</groupId> 
+   			<artifactId>servlet-api</artifactId> 
+   			<version>${servlet.version}</version> 
+   			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.6</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+	    	<groupId>org.csource</groupId>
+	      	<artifactId>fastdfs-client</artifactId>
+	      	<version>5.0.4</version>
+	      	<optional>true</optional>
+    	</dependency>
+		<dependency>
   			<groupId>org.springframework</groupId>
   			<artifactId>spring-webmvc</artifactId>
   			<version>${spring.version}</version>
@@ -19,6 +43,12 @@
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-commons</artifactId>
 			<version>${sniper.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sniper</groupId>
+			<artifactId>sniper-spring</artifactId>
+			<version>${sniper.version}</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>

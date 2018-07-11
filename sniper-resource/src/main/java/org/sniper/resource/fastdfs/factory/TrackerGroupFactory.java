@@ -13,44 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年10月30日
+ * Create Date : 2015-11-3
  */
 
-package org.sniper.support.server;
+package org.sniper.resource.fastdfs.factory;
+
+import org.csource.fastdfs.TrackerGroup;
 
 /**
- * 内网服务器接口
+ * TrackerGroup实例工厂接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface IntranetServer {
+public interface TrackerGroupFactory {
 	
 	/**
-	 * 设置内网主机服务地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param host
-	 */
-	public void setHost(String host);
-	
-	/**
-	 * 获取内网主机服务地址
+	 * 获取TrackerGroup实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public String getHost();
-	
-	/**
-	 * 设置内网主机服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param port
-	 */
-	public void setPort(int port);
-	
-	/**
-	 * 获取内网主机服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public int getPort();
+	public TrackerGroup getTrackerGroup();
 
 }

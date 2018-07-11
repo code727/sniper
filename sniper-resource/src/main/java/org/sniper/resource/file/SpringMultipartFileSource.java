@@ -31,20 +31,43 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class SpringMultipartFileSource extends AbstaractFileSource<MultipartFile> {
 
-	public SpringMultipartFileSource(MultipartFile source) throws IOException {
-		super(source);
+	public SpringMultipartFileSource(MultipartFile file) throws IOException {
+		super(file);
+	}
+	
+	public SpringMultipartFileSource(MultipartFile file, boolean delayedReading) throws IOException {
+		super(file, delayedReading);
 	}
 	
 	@Override
-	protected FileItem initialize(MultipartFile file) throws IOException {
+	protected FileItem initialize(MultipartFile file, boolean delayedReading) throws IOException {
 		String name = file.getOriginalFilename();
 		String mainName = FileUtils.getMainName(name);
 		String extName = FileUtils.getExtensionName(name);
-		InputStream in = file.getInputStream();
-		byte[] bytes = new byte[in.available()];
-//		in.read(bytes, 0, bytes.length);
-		
-		return new FileItem(name, mainName, extName, in, bytes);
+		InputStream input = file.getInputStream();
+		byte[] bytes = createBytes(file, input, delayedReading);
+				
+		return new FileItem(name, mainName, extName, input, bytes);
+	}
+	
+	/**
+	 * 重写父类方法，当创建内容字节数组时，如果需要及时读取内容(delayedReading=false)，
+	 * 则不会像父类方法那样直接从input对象中读取，而是根据MultipartFile间接的从input对象中读取。
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param file
+	 * @param input
+	 * @param delayedReading
+	 * @return
+	 * @throws IOException
+	 */
+	@Override
+	protected byte[] createBytes(MultipartFile file, InputStream input, boolean delayedReading) throws IOException {
+		return delayedReading ? new byte[input.available()] : file.getBytes();
+	}
+	
+	@Override
+	public int read() throws IOException {
+		return 0;
 	}
 
 }
