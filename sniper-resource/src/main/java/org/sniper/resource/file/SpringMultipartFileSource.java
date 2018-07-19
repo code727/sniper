@@ -62,7 +62,28 @@ public class SpringMultipartFileSource extends AbstaractFileSource<MultipartFile
 	 */
 	@Override
 	protected byte[] createBytes(MultipartFile file, InputStream input, boolean delayedReading) throws IOException {
-		return delayedReading ? new byte[input.available()] : file.getBytes();
+		return delayedReading ? null : file.getBytes();
+	}
+	
+	/**
+	 * 重写父类方法，如果delayedReading为true，则获取之前要先将文件内容读取到字节数组中，
+	 * 但读取方式像父类方法那样直接从input对象中读取，而是根据MultipartFile间接的从input对象中读取。
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 * @throws IOException
+	 */
+	@Override
+	public byte[] getBytes() throws IOException {
+		if (isDelayedReading() && this.bytes == null) {
+			synchronized (this) {
+				/* 双重检测，如果文件源的字节数组为空，
+				 * 表示从未读取过，因此需要在此读取一次后再返回结果 */
+				if (this.bytes == null) {
+					this.bytes = getFile().getBytes();
+				}
+			}
+		}
+		return this.bytes;
 	}
 	
 }

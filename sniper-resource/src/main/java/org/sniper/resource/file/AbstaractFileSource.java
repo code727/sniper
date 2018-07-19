@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.IOUtils;
 
 /**
  * 文件资源抽象类
@@ -70,25 +71,41 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	}
 	
 	/**
-	 * 根据输入流对象创建相关的内容字节数组：</P>
+	 * 根据文件体初始化后返回创建完成的文件项
+	 * @param file
+	 * @param delayedReading
+	 * @return
+	 * @throws IOException
+	 */
+	protected FileItem initialize(T file, boolean delayedReading) throws IOException {
+		 throw new IOException("initialize not supported");
+	}
+	
+	/**
+	 * 在初始化时根据输入流对象创建相关的内容字节数组：</P>
 	 * 1.如果delayedReading参数为true，则创建时不及时读取输入流的内容</P>
 	 * 2.如果delayedReading参数为false，则创建时及时读取输入流的内容。
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param file
 	 * @param input
 	 * @param delayedReading
-	 * @return 
+	 * @return
 	 * @throws IOException
 	 */
 	protected byte[] createBytes(T file, InputStream input, boolean delayedReading) throws IOException {
-		byte[] bytes = new byte[input.available()];
-		if (!delayedReading) {
-			input.read(bytes, 0, bytes.length);
+		/* 如果需要延迟读取，则在初始化时不读取任何内容，因此直接返回null */
+		if (delayedReading) {
+			return null;
 		}
+			
+		byte[] bytes = new byte[input.available()];
+		input.read(bytes, 0, bytes.length);
 		
 		return bytes;
 	}
 	
 	/**
-	 * 重写父类方法，获取文件源的字节数组：</P>
+	 * 获取文件源的字节数组：</P>
 	 * 1.如果delayedReading为true，则获取之前要先将文件内容读取到字节数组中；</P>
 	 * 2.如果delayedReading为false，则说明在创建文件资源时已经将文件内容读取到字节数组中，直接返回即可。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -97,10 +114,14 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	 */
 	@Override
 	public byte[] getBytes() throws IOException {
-		if (this.delayedReading) {
+		if (this.delayedReading && this.bytes == null) {
 			synchronized (this) {
-				this.bytes = new byte[this.input.available()];
-				this.input.read(this.bytes, 0, this.bytes.length);
+				/* 双重检测，如果文件源的字节数组为空，
+				 * 表示从未读取过，因此需要在此读取一次后再返回结果 */
+				if (this.bytes == null) {
+					this.bytes = new byte[this.input.available()];
+					this.input.read(this.bytes, 0, this.bytes.length);
+				}
 			}
 		}
 		return this.bytes;
@@ -131,18 +152,14 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 		return this.input;
 	} 
 	
+	@Override
+	public void close() throws IOException {
+		IOUtils.close(this.input);
+	}
+	
 	public boolean isDelayedReading() {
 		return delayedReading;
 	}
-	
-	/**
-	 * 根据文件体初始化后返回创建完成的文件项
-	 * @param file
-	 * @param delayedReading
-	 * @return
-	 * @throws IOException
-	 */
-	protected abstract FileItem initialize(T file, boolean delayedReading) throws IOException;
 	
 	/**
 	 * 文件项内部实现类

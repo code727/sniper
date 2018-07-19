@@ -70,4 +70,11 @@ public interface FileSource<T> {
 	 */
 	public byte[] getBytes() throws IOException;
 	
+	/**
+	 * 关闭
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @throws IOException
+	 */
+	public void close() throws IOException;
+	
 }

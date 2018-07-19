@@ -21,7 +21,6 @@ package org.sniper.resource.fastdfs.support;
 import java.util.List;
 
 import org.sniper.resource.fastdfs.file.FastFileSource;
-import org.sniper.support.file.ZoomResource;
 
 /**
  * FastDFS文件上传器

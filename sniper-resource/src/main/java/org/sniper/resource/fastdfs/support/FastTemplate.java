@@ -34,12 +34,10 @@ import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.FileUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.resource.fastdfs.OriginalResourcesDeleteTask;
-import org.sniper.resource.fastdfs.accessor.Accessor;
 import org.sniper.resource.fastdfs.cluster.Cluster;
 import org.sniper.resource.fastdfs.factory.connection.ConnectionFactory;
 import org.sniper.resource.fastdfs.file.FastFileSource;
 import org.sniper.resource.task.FilesDeleteTask;
-import org.sniper.support.file.ZoomResource;
 import org.springframework.web.util.WebUtils;
 
 /**
