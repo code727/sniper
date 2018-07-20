@@ -167,11 +167,11 @@ public class DefaultTrackerCluster extends CheckableInitializingBean implements 
 	protected void checkProperties() {
 		if (this.connectTimeout <= 0)
 			throw new IllegalArgumentException("Default tracker cluster property 'connectTimeout' is "
-					+ this.connectTimeout + " second,but must greater than 0.");
+					+ this.connectTimeout + " second,but must greater than 0");
 		
 		if (this.networkTimeout <= 0)
 			throw new IllegalArgumentException("Default tracker cluster property 'networkTimeout' is "
-					+ this.networkTimeout + " second,but must greater than 0.");
+					+ this.networkTimeout + " second,but must greater than 0");
 		
 		if (this.httpAntiStealToken && StringUtils.isEmpty(this.httpSecretKey))
 			throw new IllegalArgumentException("Default tracker cluster property 'httpSecretKey' must not be null or empty "

@@ -18,6 +18,7 @@
 
 package org.sniper.resource.fastdfs.support;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -42,6 +43,6 @@ public interface FastDeleter {
 	 * @param paths
 	 * @throws Exception
 	 */
-	public void bathDelete(Set<String> paths) throws Exception;
+	public Map<String, Integer> bathDelete(Set<String> paths) throws Exception;
 	
 }

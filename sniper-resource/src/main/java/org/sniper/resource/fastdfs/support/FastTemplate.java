@@ -26,19 +26,19 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.csource.common.NameValuePair;
 import org.csource.fastdfs.StorageClient1;
 import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerServer;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.FileUtils;
+import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.resource.fastdfs.OriginalResourcesDeleteTask;
 import org.sniper.resource.fastdfs.cluster.Cluster;
 import org.sniper.resource.fastdfs.factory.connection.ConnectionFactory;
 import org.sniper.resource.fastdfs.file.FastFileSource;
-import org.sniper.resource.task.FilesDeleteTask;
-import org.springframework.web.util.WebUtils;
+import org.sniper.web.WebUtils;
 
 /**
  * FastDFS模板实现类
@@ -50,7 +50,8 @@ public class FastTemplate extends FastSupport implements FastOperations {
 	public FastTemplate() {}
 	
 	public FastTemplate(Cluster cluster, ConnectionFactory connectionFactory) {
-		setConnectionFactory(connectionFactory);
+		this.cluster = cluster;
+		this.connectionFactory = connectionFactory;
 	}
 
 	@Override
@@ -74,187 +75,68 @@ public class FastTemplate extends FastSupport implements FastOperations {
 			storageServer = connectionFactory.getStorageServer(trackerServer, StringUtils.trimToEmpty(groupName));
 			return action.doIn(new StorageClient1(trackerServer, storageServer));
 		} finally {
-			if (autoRelease)
+			if (autoRelease) {
 				connectionFactory.release(trackerServer, storageServer);
+			}
 		}
 	}
 
 	@Override
-	public <T> String upload(FastFileSource<T> meta) throws Exception {
-		return upload(null, meta);
+	public <T> String upload(FastFileSource<T> source) throws Exception {
+		return upload(null, source);
 	}
 
 	@Override
-	public <T> String upload(String groupName, FastFileSource<T> meta) throws Exception {
-		List<FastFileSource<T>> metas = CollectionUtils.newArrayList();
-		metas.add(meta);
-		return CollectionUtils.get(batchUpload(groupName, metas, false), 0);
-	}
-
-	@Override
-	public <T> String reupload(FastFileSource<T> meta) throws Exception {
-		return reupload(null, meta);
-	}
-
-	@Override
-	public <T> String reupload(String groupName, FastFileSource<T> meta) throws Exception {
-		List<FastFileSource<T>> metas = CollectionUtils.newArrayList();
-		metas.add(meta);
-		return CollectionUtils.get(batchUpload(groupName, metas, true), 0);
-	}
-
-	@Override
-	public <T> List<String> batchUpload(List<FastFileSource<T>> metas) throws Exception {
-		return batchUpload(null, metas);
-	}
-
-	@Override
-	public <T> List<String> batchUpload(String groupName, List<FastFileSource<T>> metas) throws Exception {
-		return batchUpload(groupName, metas, false);
-	}
-
-	@Override
-	public <T> List<String> batchReupload(List<FastFileSource<T>> metas) throws Exception {
-		return batchReupload(null, metas);
-	}
-
-	@Override
-	public <T> List<String> batchReupload(String groupName, List<FastFileSource<T>> metas) throws Exception {
-		return batchUpload(groupName, metas, true);
-	}
-
-	@Override
-	public <T> ZoomResource zoomUpload(FastFileSource<T> meta) throws Exception {
-		return zoomUpload(null, meta);
-	}
-
-	@Override
-	public <T> ZoomResource zoomUpload(String groupName, FastFileSource<T> meta) throws Exception {
-		List<FastFileSource<T>> metas = CollectionUtils.newArrayList();
-		metas.add(meta);
-		return CollectionUtils.get(batchZoomUpload(groupName, metas, false), 0);
-	}
-
-	@Override
-	public <T> ZoomResource zoomReupload(FastFileSource<T> meta) throws Exception {
-		return zoomReupload(null, meta);
-	}
-
-	@Override
-	public <T> ZoomResource zoomReupload(String groupName, FastFileSource<T> meta) throws Exception {
-		List<FastFileSource<T>> metas = CollectionUtils.newArrayList();
-		metas.add(meta);
-		return CollectionUtils.get(batchZoomUpload(groupName, metas, true), 0);
-	}
-
-	@Override
-	public <T> List<ZoomResource> batchZoomUpload(List<FastFileSource<T>> metas) throws Exception {
-		return batchZoomUpload(null, metas);
-	}
-
-	@Override
-	public <T> List<ZoomResource> batchZoomUpload(String groupName, List<FastFileSource<T>> metas) throws Exception {
-		return batchZoomUpload(groupName, metas, false);
-	}
-
-	@Override
-	public <T> List<ZoomResource> batchZoomReupload(List<FastFileSource<T>> metas) throws Exception {
-		return batchZoomReupload(null, metas);
-	}
-
-	@Override
-	public <T> List<ZoomResource> batchZoomReupload(final String groupName, final List<FastFileSource<T>> metas) throws Exception {
-		return batchZoomUpload(groupName, metas, true);
-	}
-	
-	/**
-	 * 批量上传资源到指定组，并指定完成后是否删除旧资源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param groupName
-	 * @param metas
-	 * @param deleteOriginalResource
-	 * @return
-	 * @throws Exception
-	 */
-	private <T> List<String> batchUpload(final String groupName, final List<FastFileSource<T>> metas, final boolean deleteOriginalResource) throws Exception {
-		return this.execute(groupName, new FastCallback<List<String>>() {
+	public <T> String upload(final String groupName, final FastFileSource<T> source) throws Exception {
+		AssertUtils.assertNotNull(source, "Uploaded file source must not be null");
+		return this.execute(groupName, new FastCallback<String>() {
 
 			@Override
-			public List<String> doIn(StorageClient1 storageClient) throws Exception {
-				List<String> list = doBatchUpload(storageClient, groupName, metas);
-				if (deleteOriginalResource) 
-					deleteOriginalResources(false, metas);
-				return list;
-			}
-		});
-	}
-	
-	/**
-	 * 批量上传源以及缩放后的资源到指定组，并指定完成后是否删除旧资源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param groupName
-	 * @param metas
-	 * @param deleteOriginalResource
-	 * @return
-	 * @throws Exception
-	 */
-	private <T> List<ZoomResource> batchZoomUpload(final String groupName, final List<FastFileSource<T>> metas, final boolean deleteOriginalResource) throws Exception {
-		return this.execute(groupName, new FastCallback<List<ZoomResource>>() {
-			
-			@SuppressWarnings("unchecked")
-			@Override
-			public List<ZoomResource> doIn(StorageClient1 storageClient) throws Exception {
+			public String doIn(StorageClient1 storageClient) throws Exception {
 				String targetGroupName = StringUtils.trimToEmpty(groupName);
-				Map<String, Object> map = doBatchZoomUpload(storageClient, targetGroupName, metas);
-				
-				List<File> localTempSources = (List<File>) map.get(LOCAL_TEMPSOURCES_KEY);
-				
-				if (deleteOriginalResource) 
-					deleteOriginalResources(true, metas);
-				
-				deleteTempFiles(localTempSources);
-				return (List<ZoomResource>) map.get(LOCAL_TEMPSOURCES_KEY);
+				String path = storageClient.upload_file1(targetGroupName, source.getBytes(), source.getExtName(),
+						CollectionUtils.toArray(source.getNameValuePaires(), NameValuePair.class));
+				return accessor.getAccessableURL(cluster, path);
 			}
 		});
 	}
-	
-	/**
-	 * FastDFS文件源中指定的旧资源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param deleteAll
-	 * @param metas
-	 * @throws Exception 
-	 */
-	private <T> void deleteOriginalResources(boolean deleteAll, List<FastFileSource<T>> metas) throws Exception {
-		Runnable task = new OriginalResourcesDeleteTask<T>(deleteAll, metas, this);
-		if (this.threadPoolTaskExecutor != null)
-			this.threadPoolTaskExecutor.execute(task);
-		else
-			new Thread(task).start();
-	}
-	
-	/**
-	 * 清理本地临时文件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param files
-	 * @throws Exception
-	 */
-	private void deleteTempFiles(List<File> files) throws Exception {
-		Runnable task = new FilesDeleteTask(files);
-		if (this.threadPoolTaskExecutor != null)
-			this.threadPoolTaskExecutor.execute(task);
-		else 
-			new Thread(task).start();
+
+	@Override
+	public <T> Map<FastFileSource<T>, String> batchUpload(List<FastFileSource<T>> sources) throws Exception {
+		return batchUpload(null, sources);
 	}
 
+	@Override
+	public <T> Map<FastFileSource<T>, String> batchUpload(final String groupName, final List<FastFileSource<T>> sources) throws Exception {
+		AssertUtils.assertNotEmpty(sources, "Uploaded file sources must not be empty");
+		return this.execute(groupName, new FastCallback<Map<FastFileSource<T>, String>>() {
+
+			@Override
+			public Map<FastFileSource<T>, String> doIn(StorageClient1 storageClient) throws Exception {
+				String targetGroupName = StringUtils.trimToEmpty(groupName);
+				Map<FastFileSource<T>, String> result = MapUtils.newLinkedHashMap();
+				String path;
+				for (FastFileSource<T> source : sources) {
+					/* 文件资源列表内的成员可能有空的，为空的文件资源不进行上传操作，过滤掉，
+					 * 因此最终结果的个数可能会与文件资源列表的个数不一致 */
+					if (source != null) {
+						path = storageClient.upload_file1(targetGroupName, source.getBytes(), source.getExtName(),
+								CollectionUtils.toArray(source.getNameValuePaires(), NameValuePair.class));
+						result.put(source, accessor.getAccessableURL(cluster, path));
+					}
+				}
+				return result;
+			}
+		});
+	}
 	@Override
 	public byte[] download(final String path) throws Exception {
-		AssertUtils.assertNotBlank(path, "Source path must not be null or blank.");
+		AssertUtils.assertNotBlank(path, "Source path must not be blank");
 		
 		return this.execute(new FastCallback<byte[]>() {
 			@Override
 			public byte[] doIn(StorageClient1 storageClient) throws Exception {
-				String storagePath = getAccessor().getStoragePath(getCluster(), path);
+				String storagePath = accessor.getStoragePath(cluster, path);
 				return storageClient.download_file1(storagePath);
 			}
 		});
@@ -262,23 +144,24 @@ public class FastTemplate extends FastSupport implements FastOperations {
 	
 	@Override
 	public String download(final String path, final String fileName) throws Exception {
-		AssertUtils.assertNotBlank(path, "Source path must not be null or blank");
-		AssertUtils.assertNotBlank(fileName, "Local file name must not be null or blank");
+		AssertUtils.assertNotBlank(path, "Source path must not be blank");
+		AssertUtils.assertNotBlank(fileName, "Local file name must not be blank");
 		
 		return this.execute(new FastCallback<String>() {
 			@Override
 			public String doIn(StorageClient1 storageClient) throws Exception {
-				String storagePath = getAccessor().getStoragePath(getCluster(), path);
-				String destName = fileName;
-				File dest = new File(destName);
-				if (dest.isDirectory())
-					// 如果下载目标是一个目录，则下载到此目录下，并且文件名称与被下载资源的名称一致
-					destName = new StringBuffer(destName).append(File.separator)
-						.append(FileUtils.getName(storagePath)).toString();
+				String storagePath = accessor.getStoragePath(cluster, path);
 				
-				storageClient.download_file1(storagePath, destName);
+				String destFileName = fileName;
+				File dest = new File(destFileName);
+				if (dest.isDirectory()) {
+					// 如果下载目标是一个目录，则下载到此目录下，并且文件名称与被下载资源的名称一致
+					destFileName = new StringBuffer(destFileName).append(File.separator).append(FileUtils.getName(storagePath)).toString();
+				}
+				
+				storageClient.download_file1(storagePath, destFileName);
 				// 返回实际的本地目标文件名
-				return StringUtils.replaceAll(destName, "\\", "/");
+				return StringUtils.replaceAll(destFileName, "\\", "/");
 			}
 		});
 	}
@@ -290,9 +173,9 @@ public class FastTemplate extends FastSupport implements FastOperations {
 
 	@Override
 	public void download(String path, String attachmentName,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		AssertUtils.assertNotBlank(path, "Source path must not be null or blank");
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		AssertUtils.assertNotBlank(path, "Source path must not be blank");
 		
 		// 如果传入的附件名为空，则从路径中获取
 		if (StringUtils.isBlank(attachmentName))
@@ -303,6 +186,7 @@ public class FastTemplate extends FastSupport implements FastOperations {
 
 	@Override
 	public int delete(final String path) throws Exception {
+		AssertUtils.assertNotBlank(path, "Source path must not be blank");
 		return this.execute(new FastCallback<Integer>() {
 
 			@Override
@@ -314,14 +198,20 @@ public class FastTemplate extends FastSupport implements FastOperations {
 	}
 
 	@Override
-	public void bathDelete(final Set<String> paths) throws Exception {
-		this.execute(new FastCallback<Object>() {
+	public Map<String, Integer> bathDelete(final Set<String> paths) throws Exception {
+		return this.execute(new FastCallback<Map<String, Integer>>() {
 
 			@Override
-			public Object doIn(StorageClient1 storageClient) throws Exception {
+			public Map<String, Integer> doIn(StorageClient1 storageClient) throws Exception {
+				Map<String, Integer> result = MapUtils.newLinkedHashMap();
+				String storagePath;
 				for (String path : paths) {
-					String storagePath = accessor.getStoragePath(getCluster(), path);
-					storageClient.delete_file1(storagePath);
+					/* 文件存储路径可能为空，为空时不进行删除操作，过滤掉，
+					 * 因此最终结果的个数可能会与资源路径列表的个数不一致 */
+					if (StringUtils.isNotBlank(path)) {
+						storagePath = accessor.getStoragePath(cluster, path);
+						result.put(path, storageClient.delete_file1(storagePath));
+					}
 				}
 				return null;
 			}

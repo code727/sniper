@@ -31,11 +31,11 @@ import org.sniper.commons.util.StringUtils;
 import org.sniper.resource.file.FileSource;
 
 /**
- * FastDFS文件资源默认类
+ * FastDFS代理文件资源实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultFastFileSource<T> implements FastFileSource<T> {
+public class FastProxyFileSource<T> implements FastFileSource<T> {
 	
 	/** 文件源 */
 	private final FileSource<T> source;
@@ -46,11 +46,11 @@ public class DefaultFastFileSource<T> implements FastFileSource<T> {
 	/** 目标文件元数据名值对列表 */
 	private final List<NameValuePair> nameValuePaires;
 	
-	public DefaultFastFileSource(FileSource<T> source) throws IOException {
+	public FastProxyFileSource(FileSource<T> source) {
 		this(source, null);
 	}
 	
-	public DefaultFastFileSource(FileSource<T> source, List<NameValuePair> nameValuePaires) throws IOException {
+	public FastProxyFileSource(FileSource<T> source, List<NameValuePair> nameValuePaires) {
 		this.source = source;
 		this.nameValuePaires = CollectionUtils.newArrayList(nameValuePaires);
 	}

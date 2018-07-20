@@ -21,9 +21,8 @@ package org.sniper.nosql.redis.dao;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-
-import org.sniper.commons.KeyValuePair;
 
 /**
  * Redis键命令接口
@@ -174,7 +173,7 @@ public interface RedisKeyCommands {
 	 * @param keys
 	 * @return
 	 */
-	public <K> List<KeyValuePair<K, Boolean>> exists(K[] keys);
+	public <K> Map<K, Boolean> exists(K[] keys);
 	
 	/**
 	 * 判断指定库中多个键是否存在
@@ -183,7 +182,7 @@ public interface RedisKeyCommands {
 	 * @param keys
 	 * @return
 	 */
-	public <K> List<KeyValuePair<K, Boolean>> exists(String dbName, K[] keys);
+	public <K> Map<K, Boolean> exists(String dbName, K[] keys);
 	
 	/**
 	 * 判断当前库中多个键是否存在
@@ -191,7 +190,7 @@ public interface RedisKeyCommands {
 	 * @param keys
 	 * @return
 	 */
-	public <K> List<KeyValuePair<K, Boolean>> exists(Collection<K> keys);
+	public <K> Map<K, Boolean> exists(Collection<K> keys);
 	
 	/**
 	 * 判断指定库中多个键是否存在
@@ -200,7 +199,7 @@ public interface RedisKeyCommands {
 	 * @param keys
 	 * @return
 	 */
-	public <K> List<KeyValuePair<K, Boolean>> exists(String dbName, Collection<K> keys);
+	public <K> Map<K, Boolean> exists(String dbName, Collection<K> keys);
 	
 	/**
 	 * 设置当前库中指定键的过期秒数

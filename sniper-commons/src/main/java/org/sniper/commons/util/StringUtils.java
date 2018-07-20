@@ -1635,8 +1635,9 @@ public class StringUtils {
 				}
 			}
 		} else {
-			for (int i = 0; i < length; i++)
+			for (int i = 0; i < length; i++) {
 				list.add(String.valueOf(str.charAt(i)));
+			}
 		}
 		
 		return CollectionUtils.toArray(list, String.class);

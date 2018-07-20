@@ -58,16 +58,16 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	
 	protected AbstaractFileSource(T file, boolean delayedReading) throws IOException {
 		AssertUtils.assertNotNull(file, "File source body must not be null");
-		FileItem item = initialize(file, delayedReading);
-		AssertUtils.assertNotNull(item, "Initialize failed, file item must not be null");
+		FileEntry entry = initialize(file, delayedReading);
+		AssertUtils.assertNotNull(entry, "Initialize failed, file entry must not be null");
 		
 		this.file = file;
 		this.delayedReading = delayedReading;
-		this.name = item.name;
-		this.mainName = item.mainName;
-		this.extName = item.extName;
-		this.input = item.input;
-		this.bytes = item.bytes;
+		this.name = entry.name;
+		this.mainName = entry.mainName;
+		this.extName = entry.extName;
+		this.input = entry.input;
+		this.bytes = entry.bytes;
 	}
 	
 	/**
@@ -77,12 +77,12 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	 * @return
 	 * @throws IOException
 	 */
-	protected FileItem initialize(T file, boolean delayedReading) throws IOException {
+	protected FileEntry initialize(T file, boolean delayedReading) throws IOException {
 		 throw new IOException("initialize not supported");
 	}
 	
 	/**
-	 * 在初始化时根据输入流对象创建相关的内容字节数组：</P>
+	 * 根据输入流对象创建相关的内容字节数组：</P>
 	 * 1.如果delayedReading参数为true，则创建时不及时读取输入流的内容</P>
 	 * 2.如果delayedReading参数为false，则创建时及时读取输入流的内容。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -93,7 +93,7 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	 * @throws IOException
 	 */
 	protected byte[] createBytes(T file, InputStream input, boolean delayedReading) throws IOException {
-		/* 如果需要延迟读取，则在初始化时不读取任何内容，因此直接返回null */
+		/* 如果需要延迟读取，则不读取任何内容，因此直接返回null */
 		if (delayedReading) {
 			return null;
 		}
@@ -162,11 +162,11 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	}
 	
 	/**
-	 * 文件项内部实现类
+	 * 文件条目实现类
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @version 1.0
 	 */
-	protected class FileItem {
+	protected class FileEntry {
 		
 		/** 文件名(名.扩展) */
 		private final String name;
@@ -183,7 +183,7 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 		/** 字节数组 */
 		private final byte[] bytes;
 		
-		public FileItem(String name, String mainName, String extName, InputStream input, byte[] bytes) {
+		public FileEntry(String name, String mainName, String extName, InputStream input, byte[] bytes) {
 			this.name = name;
 			this.mainName = mainName;
 			this.extName = extName;

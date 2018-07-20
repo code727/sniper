@@ -47,8 +47,7 @@ public class DefaultConnectionFactory extends AbstractConnectionFactory {
 	}
 
 	@Override
-	public StorageServer getStorageServer(TrackerServer trackerServer,
-			String groupName) throws IOException {
+	public StorageServer getStorageServer(TrackerServer trackerServer, String groupName) throws IOException {
 		return getTrackerClient().getStoreStorage(trackerServer, groupName);
 	}
 

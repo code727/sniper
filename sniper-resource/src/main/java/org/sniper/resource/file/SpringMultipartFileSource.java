@@ -40,14 +40,14 @@ public class SpringMultipartFileSource extends AbstaractFileSource<MultipartFile
 	}
 	
 	@Override
-	protected FileItem initialize(MultipartFile file, boolean delayedReading) throws IOException {
+	protected FileEntry initialize(MultipartFile file, boolean delayedReading) throws IOException {
 		String name = file.getOriginalFilename();
 		String mainName = FileUtils.getMainName(name);
 		String extName = FileUtils.getExtensionName(name);
 		InputStream input = file.getInputStream();
 		byte[] bytes = createBytes(file, input, delayedReading);
 				
-		return new FileItem(name, mainName, extName, input, bytes);
+		return new FileEntry(name, mainName, extName, input, bytes);
 	}
 	
 	/**

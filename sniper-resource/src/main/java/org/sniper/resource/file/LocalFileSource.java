@@ -40,14 +40,14 @@ public class LocalFileSource extends AbstaractFileSource<File> {
 	}
 	
 	@Override
-	protected FileItem initialize(File file, boolean delayedReading) throws IOException {
+	protected FileEntry initialize(File file, boolean delayedReading) throws IOException {
 		String name = file.getName();
 		String mainName = FileUtils.getMainName(file);
 		String extName = FileUtils.getExtensionName(file);
 		FileInputStream input = new FileInputStream(file);
 		byte[] bytes = createBytes(file, input, delayedReading);
 		
-		return new FileItem(name, mainName, extName, input, bytes);
+		return new FileEntry(name, mainName, extName, input, bytes);
 	}	
 
 }

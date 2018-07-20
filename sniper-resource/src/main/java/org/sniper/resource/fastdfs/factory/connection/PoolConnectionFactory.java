@@ -23,8 +23,6 @@ import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerServer;
 import org.sniper.commons.util.ReflectionUtils;
-import org.sniper.commons.util.StringUtils;
-import org.sniper.context.ThreadLocalHolder;
 import org.sniper.resource.fastdfs.factory.DefaultPoolableStorageServerFactory;
 import org.sniper.resource.fastdfs.factory.DefaultPoolableTrackerServerFactory;
 import org.sniper.resource.fastdfs.factory.PoolableStorageServerFactory;
@@ -85,7 +83,6 @@ public class PoolConnectionFactory extends AbstractConnectionFactory implements 
 
 	@Override
 	public TrackerServer getTrackerServer(int index) throws Exception {
-		ThreadLocalHolder.setAttribute("CURRENT_TRACKERSERVER_INDEX", index);
 		return this.trackerServerPool.borrowObject();
 	}
 
@@ -96,16 +93,11 @@ public class PoolConnectionFactory extends AbstractConnectionFactory implements 
 
 	@Override
 	public StorageServer getStorageServer(TrackerServer trackerServer, String groupName) throws Exception {
-		ThreadLocalHolder.setAttribute("CURRENT_TRACKERSERVER", trackerServer);
-		ThreadLocalHolder.setAttribute("CURRENT_STORAGE_GROUPNAME", StringUtils.safeString(groupName));
 		return this.storageServerPool.borrowObject();
 	}
 
 	@Override
 	public void release(TrackerServer trackerServer, StorageServer storageServer) throws Exception {
-		ThreadLocalHolder.removeAttribute("CURRENT_TRACKERSERVER_INDEX");
-		ThreadLocalHolder.removeAttribute("CURRENT_TRACKERSERVER");
-		ThreadLocalHolder.removeAttribute("CURRENT_STORAGE_GROUPNAME");
 		try {
 			if (storageServer != null)
 				this.storageServerPool.returnObject(storageServer);

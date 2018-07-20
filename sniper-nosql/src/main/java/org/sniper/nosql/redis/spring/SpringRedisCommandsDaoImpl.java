@@ -27,11 +27,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.sniper.commons.KeyValuePair;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
+import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.NumberUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.nosql.redis.RedisRepository;
@@ -169,38 +169,38 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	}
 	
 	@Override
-	public <K> List<KeyValuePair<K, Boolean>> exists(K[] keys) {
+	public <K> Map<K, Boolean> exists(K[] keys) {
 		return exists(null, keys);
 	}
 
 	@Override
-	public <K> List<KeyValuePair<K, Boolean>> exists(String dbName, K[] keys) {
+	public <K> Map<K, Boolean> exists(String dbName, K[] keys) {
 		return exists(dbName, ArrayUtils.toList(keys));
 	}
 
 	@Override
-	public <K> List<KeyValuePair<K, Boolean>> exists(Collection<K> keys) {
+	public <K> Map<K, Boolean> exists(Collection<K> keys) {
 		return exists(null, keys);
 	}
 
 	@Override
-	public <K> List<KeyValuePair<K, Boolean>> exists(final String dbName, final Collection<K> keys) {
+	public <K> Map<K, Boolean> exists(final String dbName, final Collection<K> keys) {
 		if (CollectionUtils.isEmpty(keys))
 			return null;
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
-		return super.getRedisTemplate().execute(new RedisCallback<List<KeyValuePair<K, Boolean>>>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Map<K, Boolean>>() {
 
 			@Override
-			public List<KeyValuePair<K, Boolean>> doInRedis(RedisConnection connection) throws DataAccessException {
+			public Map<K, Boolean> doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbName);
 				
-				List<KeyValuePair<K, Boolean>> list = CollectionUtils.newArrayList();
+				Map<K, Boolean> result = MapUtils.newLinkedHashMap();
 				for (K key : keys) {
-					list.add(new KeyValuePair<K, Boolean>(key, connection.exists(keySerializer.serialize(key))));
+					result.put(key, connection.exists(keySerializer.serialize(key)));
 				}
 				
-				return list;
+				return result;
 			}
 		});
 	}

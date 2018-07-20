@@ -48,8 +48,9 @@ public class KeyValuePair<K, V> implements Serializable {
 	}
 	
 	public KeyValuePair(K key, V value) {
-		setKey(key);
-		setValue(value);
+		checkKey(key);
+		this.key = key;
+		this.value = value;
 	}
 	
 	public K getKey() {

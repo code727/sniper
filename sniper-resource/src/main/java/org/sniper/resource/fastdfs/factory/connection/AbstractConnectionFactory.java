@@ -19,6 +19,7 @@
 package org.sniper.resource.fastdfs.factory.connection;
 
 import org.csource.fastdfs.TrackerClient;
+import org.csource.fastdfs.TrackerGroup;
 
 /**
  * 抽象连接工厂
@@ -27,10 +28,14 @@ import org.csource.fastdfs.TrackerClient;
  */
 public abstract class AbstractConnectionFactory implements ConnectionFactory {
 	
-	private TrackerClient trackerClient;
+	protected final TrackerClient trackerClient;
 	
-	public AbstractConnectionFactory() {
-		this.trackerClient = new TrackerClient();
+	protected AbstractConnectionFactory() {
+		this(null);
+	}
+	
+	protected AbstractConnectionFactory(TrackerGroup trackerGroup) {
+		trackerClient = (trackerGroup != null) ? new TrackerClient(trackerGroup) : new TrackerClient();
 	}
 
 	public TrackerClient getTrackerClient() {

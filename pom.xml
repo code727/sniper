@@ -90,7 +90,6 @@
 		<module>sniper-spring</module>
 		<module>sniper-trace</module>
 		<module>sniper-jms</module>
-		<module>sniper-fastdfs</module>
 		<module>sniper-captcha</module>
 		<module>sniper-image</module>
 		<module>sniper-serialization</module>

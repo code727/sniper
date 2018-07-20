@@ -18,22 +18,11 @@
 
 package org.sniper.resource.fastdfs.support;
 
-import java.io.File;
-import java.util.Date;
-import java.util.List;
-
-import org.csource.common.NameValuePair;
-import org.csource.fastdfs.StorageClient1;
-import org.sniper.commons.util.CollectionUtils;
-import org.sniper.commons.util.StringUtils;
-import org.sniper.commons.util.SystemUtils;
 import org.sniper.resource.fastdfs.accessor.Accessor;
 import org.sniper.resource.fastdfs.accessor.DefaultAccessor;
 import org.sniper.resource.fastdfs.cluster.Cluster;
 import org.sniper.resource.fastdfs.factory.connection.ConnectionFactory;
-import org.sniper.resource.fastdfs.file.FastFileSource;
 import org.sniper.spring.beans.CheckableInitializingBean;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
  * FastDFS支持服务类
@@ -41,25 +30,16 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @version 1.0
  */
 public abstract class FastSupport extends CheckableInitializingBean {
-	
-//	/** 缩放资源标识键 */
-//	protected final static String ZOOM_RESOURCES_KEY = "zoomResources";
-//	
-//	/** 本地临时文件资源标识键 */
-//	protected final static String LOCAL_TEMPSOURCES_KEY = "localTempSources";
-	
+		
 	/** FastDFS集群族对象 */
-	private Cluster cluster;
+	protected Cluster cluster;
 	
 	/** 连接工厂 */
 	protected ConnectionFactory connectionFactory;
 		
 	/** FastDFS访问器 */
 	protected Accessor accessor;
-	
-	/** 线程池任务执行器 */
-	protected ThreadPoolTaskExecutor threadPoolTaskExecutor;
-	
+		
 	public Cluster getCluster() {
 		return cluster;
 	}
@@ -84,21 +64,13 @@ public abstract class FastSupport extends CheckableInitializingBean {
 		this.accessor = accessor;
 	}
 	
-	public ThreadPoolTaskExecutor getThreadPoolTaskExecutor() {
-		return threadPoolTaskExecutor;
-	}
-
-	public void setThreadPoolTaskExecutor(ThreadPoolTaskExecutor threadPoolTaskExecutor) {
-		this.threadPoolTaskExecutor = threadPoolTaskExecutor;
-	}
-
 	@Override
 	protected void checkProperties() {
 		if (this.cluster == null)
-			throw new IllegalArgumentException("FastDFSTemplet property 'cluster' must not be null");
+			throw new IllegalArgumentException("Property 'cluster' must not be null");
 		
 		if (this.connectionFactory == null)
-			throw new IllegalArgumentException("FastDFSTemplet property 'connectionFactory' must not be null");
+			throw new IllegalArgumentException("Property 'connectionFactory' must not be null");
 	}
 	
 	@Override
@@ -106,89 +78,5 @@ public abstract class FastSupport extends CheckableInitializingBean {
 		if (this.accessor == null)
 			this.accessor = new DefaultAccessor();
 	}
-	
-	/**
-	 * 根据文件源创建本地临时文件对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param meta
-	 * @return
-	 */
-	protected <T> File createTempFile(FastFileSource<T> meta) {
-		String tempPathName = new StringBuilder(SystemUtils.getTempDir())
-			.append(File.separator).append("temp_").append(new Date().getTime())
-			.append("_").append(meta.getName()).toString();
-		return new File(tempPathName);
-	}
-	
-	/**
-	 * 执行批量上传资源到指定组的操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param storageClient
-	 * @param groupName
-	 * @param metas
-	 * @return
-	 * @throws Exception
-	 */
-	protected <T> List<String> doBatchUpload(StorageClient1 storageClient, String groupName, List<FastFileSource<T>> metas) throws Exception { 
-		List<String> list = CollectionUtils.newArrayList();
-		String targetGroupName = StringUtils.trimToEmpty(groupName);
-		for (FastFileSource<T> meta : metas) {
-			NameValuePair[] nameValuePaires = CollectionUtils.isNotEmpty(meta.getNameValuePaires()) ? 
-					CollectionUtils.toArray(meta.getNameValuePaires()) : null;
-			
-			/* 上传源和缩放文件后设置返回结果 */
-			String result = accessor.getAccessableURL(getCluster(), 
-					storageClient.upload_file1(targetGroupName, meta.getBytes(), meta.getExtName(), nameValuePaires));
-			list.add(result);
-		}
-		return list;
-	}
-	
-//	/**
-//	 * 执行批量上传源以及缩放后的资源到指定组的操作
-//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-//	 * @param storageClient
-//	 * @param groupName
-//	 * @param metas
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	protected <T> Map<String, Object> doBatchZoomUpload(StorageClient1 storageClient, String groupName, List<FastFileSource<T>> metas) throws Exception { 
-//		AssertUtils.assertNotNull(imageZoomHandler, "ImageZoomHandler must not be null.");
-//		
-//		List<ZoomResource> zoomResources = CollectionUtils.newArrayList();
-//		String targetGroupName = StringUtils.trimToEmpty(groupName);
-//		List<File> localTempSources = CollectionUtils.newArrayList();
-//		
-//		for (FastFileSource<T> meta : metas) {
-//			ZoomResource zoomResource = new ZoomResource();
-//			NameValuePair[] nameValuePaires = CollectionUtils.isNotEmpty(meta.getNameValuePaires()) ? 
-//					CollectionUtils.toArray(meta.getNameValuePaires()) : null;
-//			
-//			File localTempSource = createTempFile(meta);
-//			// 将源文件缩放后生成一个新的文件资源在本地的临时目录中
-//			imageZoomHandler.handle(meta.getInputStream(), meta.getExtName(), localTempSource);
-//			
-//			/* 上传源和缩放文件后设置返回结果 */
-//			String srcURL = accessor.getAccessableURL(getCluster(), 
-//					storageClient.upload_file1(targetGroupName, meta.getBytes(), meta.getExtName(), nameValuePaires));
-//			String zoomURL = accessor.getAccessableURL(getCluster(), 
-//					storageClient.upload_file1(targetGroupName, localTempSource.getCanonicalPath(), FileUtils.getExtensionName(localTempSource), nameValuePaires));
-//			zoomResource.setSrcURL(srcURL);
-//			zoomResource.setZoomURL(zoomURL);
-//		
-//			zoomResources.add(zoomResource);
-//			localTempSources.add(localTempSource);
-//		}
-//		
-//		/* 返回执行结果:
-//		 * 1)zoomResources:缩放资源结果对象 
-//		 * 2)tempImageSources:进行缩放操作时所创建的本地临时图片资源，对于上一层调用方来说，可根据此值来做本地临时文件的清理工作
-//		 */
-//		Map<String, Object> map = MapUtils.newHashMap();
-//		map.put(ZOOM_RESOURCES_KEY, zoomResources);
-//		map.put(LOCAL_TEMPSOURCES_KEY, localTempSources);
-//		return map;
-//	}
 	
 }
