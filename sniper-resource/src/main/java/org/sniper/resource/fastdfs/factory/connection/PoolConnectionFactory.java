@@ -19,7 +19,6 @@
 package org.sniper.resource.fastdfs.factory.connection;
 
 import org.apache.commons.pool.impl.GenericObjectPool;
-import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerServer;
 import org.sniper.commons.util.ReflectionUtils;
@@ -66,6 +65,7 @@ public class PoolConnectionFactory extends AbstractConnectionFactory implements 
 			PoolableStorageServerFactory factory = new DefaultPoolableStorageServerFactory();
 			factory.setTrackerClient(super.getTrackerClient());
 			this.storageServerPool = new GenericObjectPool<StorageServer>(factory);
+			
 		} else {
 			Object fieldValue = ReflectionUtils.getFieldValue(this.storageServerPool, "_factory");
 			if (fieldValue instanceof PoolableStorageServerFactory) {
@@ -78,13 +78,13 @@ public class PoolConnectionFactory extends AbstractConnectionFactory implements 
 
 	@Override
 	public TrackerServer getTrackerServer() throws Exception {
-		return getTrackerServer(ClientGlobal.g_tracker_group.tracker_server_index);
-	}
-
-	@Override
-	public TrackerServer getTrackerServer(int index) throws Exception {
 		return this.trackerServerPool.borrowObject();
 	}
+
+//	@Override
+//	public TrackerServer getTrackerServer(int index) throws Exception {
+//		return this.trackerServerPool.borrowObject();
+//	}
 
 	@Override
 	public StorageServer getStorageServer(TrackerServer trackerServer) throws Exception {

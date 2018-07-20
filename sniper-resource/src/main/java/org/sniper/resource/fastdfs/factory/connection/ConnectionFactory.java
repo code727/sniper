@@ -43,7 +43,7 @@ public interface ConnectionFactory {
 	 * @return
 	 * @throws Exception
 	 */
-	public TrackerServer getTrackerServer(int index) throws Exception;
+//	public TrackerServer getTrackerServer(int index) throws Exception;
 	
 	/**
 	 * 根据TrackerServer获取StorageServer实例

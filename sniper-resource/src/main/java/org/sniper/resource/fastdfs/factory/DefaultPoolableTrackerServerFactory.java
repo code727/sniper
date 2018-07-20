@@ -24,6 +24,7 @@ import java.net.Socket;
 import org.apache.commons.pool.PoolableObjectFactory;
 import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.TrackerServer;
+import org.sniper.commons.util.NumberUtils;
 
 /**
  * 可池化的TrackerServer对象工厂默认实现类
@@ -34,7 +35,14 @@ public class DefaultPoolableTrackerServerFactory implements PoolableObjectFactor
 
 	@Override
 	public TrackerServer makeObject() throws Exception {
-		return ClientGlobal.g_tracker_group.getConnection();
+		/*
+		 * 同org.sniper.resource.fastdfs.factory.connection.DefaultConnectionFactory类的getTrackerServer()方法的实现方式一样，
+		 * 这里也不使用ClientGlobal.g_tracker_group.getConnection()的方法来返回，
+		 * 目前只支持在tracker_servers内随机选择一个节点后返回，
+		 * 未来扩展此实现，利用轮询、加权轮询和最小连接数优先等算法选择某个TrackerServer后再返回
+		 */
+		int serverIndex = NumberUtils.randomIn(ClientGlobal.g_tracker_group.tracker_servers.length);
+		return ClientGlobal.g_tracker_group.getConnection(serverIndex);
 	}
 
 	@Override
