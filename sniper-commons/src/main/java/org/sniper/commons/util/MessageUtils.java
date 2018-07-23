@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
  */
 public class MessageUtils {
 	
-	private static final ThreadLocal<Map<String, ResourceBundle>> resourceBundles = new ThreadLocal<Map<String, ResourceBundle>>();
+	private static final Map<String, ResourceBundle> RESOURCE_BUNDLES = MapUtils.newConcurrentHashMap();
 	
 	private MessageUtils() {}
 		
@@ -48,16 +48,15 @@ public class MessageUtils {
 		if (locale == null)
 			locale = Locale.getDefault();
 		
-		Map<String, ResourceBundle> bundleMap = resourceBundles.get();
-		if (bundleMap == null)
-			bundleMap = MapUtils.newConcurrentHashMap();
-		
 		String key = baseName + "_" + locale;
-		ResourceBundle resourceBundle = bundleMap.get(key);
+		ResourceBundle resourceBundle = RESOURCE_BUNDLES.get(key);
 		if (resourceBundle == null) {
-			resourceBundle = ResourceBundle.getBundle(baseName, locale);
-			bundleMap.put(key, resourceBundle);
-			resourceBundles.set(bundleMap);
+			synchronized (RESOURCE_BUNDLES) {
+				if ((resourceBundle = RESOURCE_BUNDLES.get(key)) == null) {
+					resourceBundle = ResourceBundle.getBundle(baseName, locale);
+					RESOURCE_BUNDLES.put(key, resourceBundle);
+				}
+			}
 		}
 		
 		return resourceBundle;

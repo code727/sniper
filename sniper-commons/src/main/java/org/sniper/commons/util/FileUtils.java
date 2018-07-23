@@ -620,8 +620,8 @@ public class FileUtils {
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
-				IOUtils.close(inChannel);
-				IOUtils.close(outChannel);
+				NIOUtils.close(inChannel);
+				NIOUtils.close(outChannel);
 				IOUtils.close(in);
 				IOUtils.close(out);
 			}

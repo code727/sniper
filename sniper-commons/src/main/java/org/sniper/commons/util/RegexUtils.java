@@ -32,28 +32,28 @@ import java.util.regex.Pattern;
  */
 public class RegexUtils {
 	
-	public static final Map<String, String> regex;
+	public static final Map<String, String> REGEX;
 	
 	/** 表达式与模式关系映射集线程局部变量 */
-	private static final ThreadLocal<Map<String, Pattern>> patterns = new ThreadLocal<Map<String, Pattern>>();
+	private static final ThreadLocal<Map<String, Pattern>> PATTERNS = new ThreadLocal<Map<String, Pattern>>();
 	
 	static {
-		regex = new HashMap<String, String>();
-		regex.put("integer", "[+|-]?\\d+");
-		regex.put("decimal", "[+|-]?(\\d+\\.\\d+)");
-		regex.put("number",  "[+|-]?(\\d+((\\.\\d+)|d*))");
-		regex.put("ipv4",  "(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}");
-		regex.put("ipv6",  "((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)::((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)");
-		regex.put("email", "[\\w[.-]]+@[\\w[.-]]+\\.[\\w]+");
-		regex.put("mobile", "[1][3578]\\d{9}");
-		regex.put("ascii", "[\u0000-\u007E]+");
-		regex.put("double_byte", "[^\u0000-\u007E]+");
-		regex.put("chinese", "[\u4E00-\u9FA5]+");
-		regex.put("urlQueryString", "(\\w*=[^&]*&)*\\w*=\\w*");
-		regex.put("url", "((h|H)(t|T)(t|T)(p|P)(s|S)?(://)|(w|W){3}[.]|(f|F)(t|T)(p|P)(://)+){1}(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*((:\\d+)?)(/(\\w+(-\\w+)*))*(\\.?(\\w)*)(\\?)?(((\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*(\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*)*(\\w*)*)");
+		REGEX = new HashMap<String, String>();
+		REGEX.put("integer", "[+|-]?\\d+");
+		REGEX.put("decimal", "[+|-]?(\\d+\\.\\d+)");
+		REGEX.put("number",  "[+|-]?(\\d+((\\.\\d+)|d*))");
+		REGEX.put("ipv4",  "(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}");
+		REGEX.put("ipv6",  "((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)::((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)");
+		REGEX.put("email", "[\\w[.-]]+@[\\w[.-]]+\\.[\\w]+");
+		REGEX.put("mobile", "[1][3578]\\d{9}");
+		REGEX.put("ascii", "[\u0000-\u007E]+");
+		REGEX.put("double_byte", "[^\u0000-\u007E]+");
+		REGEX.put("chinese", "[\u4E00-\u9FA5]+");
+		REGEX.put("urlQueryString", "(\\w*=[^&]*&)*\\w*=\\w*");
+		REGEX.put("url", "((h|H)(t|T)(t|T)(p|P)(s|S)?(://)|(w|W){3}[.]|(f|F)(t|T)(p|P)(://)+){1}(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*((:\\d+)?)(/(\\w+(-\\w+)*))*(\\.?(\\w)*)(\\?)?(((\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*(\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*)*(\\w*)*)");
 		
 		// java.text.MessageFormat所默认支持的占位符表达式
-		regex.put(MessageFormat.class.getName(), "(\\{\\d+\\})");
+		REGEX.put(MessageFormat.class.getName(), "(\\{\\d+\\})");
 	}
 	
 	private RegexUtils() {}
@@ -65,21 +65,22 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static Pattern getPattern(String regex) {
-		Map<String, Pattern> patternMap = patterns.get();
-		if (patternMap == null)
+		Map<String, Pattern> patternMap = PATTERNS.get();
+		if (patternMap == null) {
 			patternMap = MapUtils.newConcurrentHashMap();
+		}
 		
 		Pattern pattern = patternMap.get(regex);
 		if (pattern == null) {
 			pattern = Pattern.compile(regex);
 			// 编译通过后存储此模式
 			patternMap.put(regex, pattern);
-			patterns.set(patternMap);
+			PATTERNS.set(patternMap);
 		}
 		
-		return patternMap.get(regex);
+		return pattern;
 	}
-		
+			
 	/**
 	 * 根据字符串和表达式创建Matcher对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -126,7 +127,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isInteger(String str) {
-		return is(str, regex.get("integer"));
+		return is(str, REGEX.get("integer"));
 	}
 	
 	/**
@@ -136,7 +137,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasInteger(String str) {
-		return has(str, regex.get("integer"));
+		return has(str, REGEX.get("integer"));
 	}
 	
 	/**
@@ -146,7 +147,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isDecimal(String str) {
-		return is(str, regex.get("decimal"));
+		return is(str, REGEX.get("decimal"));
 	}
 	
 	/**
@@ -156,7 +157,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasDecimal(String str) {
-		return has(str, regex.get("decimal"));
+		return has(str, REGEX.get("decimal"));
 	}
 	
 	/**
@@ -166,7 +167,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isNumber(String str) {
-		return is(str, regex.get("number"));
+		return is(str, REGEX.get("number"));
 	}
 	
 	/**
@@ -176,7 +177,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasNumber(String str) {
-		return has(str, regex.get("number"));
+		return has(str, REGEX.get("number"));
 	}
 	
 	/**
@@ -186,7 +187,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isIPV4(String str) {
-		return is(str, regex.get("ipv4"));
+		return is(str, REGEX.get("ipv4"));
 	}
 	
 	/**
@@ -196,7 +197,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasIPV4(String str) {
-		return has(str, regex.get("ipv4"));
+		return has(str, REGEX.get("ipv4"));
 	}
 	
 	/**
@@ -206,7 +207,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isIPV6(String str) {
-		return is(str, regex.get("ipv6"));
+		return is(str, REGEX.get("ipv6"));
 	}
 	
 	/**
@@ -216,7 +217,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasIPV6(String str) {
-		return has(str, regex.get("ipv6"));
+		return has(str, REGEX.get("ipv6"));
 	}
 	
 	/**
@@ -226,7 +227,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isEmail(String str) {
-		return is(str, regex.get("email"));
+		return is(str, REGEX.get("email"));
 	}
 	
 	/**
@@ -236,7 +237,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasEmail(String str) {
-		return has(str, regex.get("email"));
+		return has(str, REGEX.get("email"));
 	}
 	
 	/**
@@ -246,7 +247,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isMobile(String str) {
-		return is(str, regex.get("mobile"));
+		return is(str, REGEX.get("mobile"));
 	}
 	
 	/**
@@ -256,7 +257,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasMobile(String str) {
-		return has(str, regex.get("mobile"));
+		return has(str, REGEX.get("mobile"));
 	}
 	
 	/**
@@ -266,7 +267,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isURLQueryString(String str) {
-		return is(str, regex.get("urlQueryString"));
+		return is(str, REGEX.get("urlQueryString"));
 	}
 	
 	/**
@@ -276,7 +277,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasURLQueryString(String str) {
-		return has(str, regex.get("urlQueryString"));
+		return has(str, REGEX.get("urlQueryString"));
 	}
 	
 	/**
@@ -286,7 +287,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isAscii(String str) {
-		return is(str, regex.get("ascii"));
+		return is(str, REGEX.get("ascii"));
 	}
 	
 	/**
@@ -296,7 +297,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasAscii(String str) {
-		return has(str, regex.get("ascii"));
+		return has(str, REGEX.get("ascii"));
 	}
 		
 	/**
@@ -306,7 +307,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isChinese(String str) {
-		return is(str, regex.get("chinese"));
+		return is(str, REGEX.get("chinese"));
 	}
 	
 	/**
@@ -316,7 +317,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasChinese(String str) {
-		return has(str, regex.get("chinese"));
+		return has(str, REGEX.get("chinese"));
 	}
 	
 	/**
@@ -326,7 +327,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isDoubleByte(String str) {
-		return is(str, regex.get("double_byte"));
+		return is(str, REGEX.get("double_byte"));
 	}
 	
 	/**
@@ -336,7 +337,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasDoubleByte(String str) {
-		return has(str, regex.get("double_byte"));
+		return has(str, REGEX.get("double_byte"));
 	}
 	
 	/**
@@ -346,7 +347,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isURL(String str) {
-		return is(str, regex.get("url"));
+		return is(str, REGEX.get("url"));
 	}
 	
 	/**
@@ -356,7 +357,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasURL(String str) {
-		return has(str, regex.get("url"));
+		return has(str, REGEX.get("url"));
 	}
 	
 	/**

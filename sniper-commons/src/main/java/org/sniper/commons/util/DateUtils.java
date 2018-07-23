@@ -78,7 +78,7 @@ public class DateUtils {
 	public static final String SUNDAY = "Sunday";
 		
 	/** 全局键与日期时间格式关系映射集 */
-	private static final Map<String, SimpleDateFormat> dateFormates = MapUtils.newConcurrentHashMap();
+	private static final Map<String, SimpleDateFormat> DATE_FORMATES = MapUtils.newConcurrentHashMap();
 	
 	private DateUtils() {}
 	
@@ -89,18 +89,23 @@ public class DateUtils {
 	 * @return
 	 */
 	public static SimpleDateFormat getDateFormat(String pattern) {
-		if (StringUtils.isBlank(pattern))
+		if (StringUtils.isBlank(pattern)) {
 			pattern = DEFAULT_DATETIME_FORMAT;
+		}
 		
-		SimpleDateFormat dateFormat = dateFormates.get(pattern);
+		SimpleDateFormat dateFormat = DATE_FORMATES.get(pattern);
 		if (dateFormat == null) {
-			dateFormat = new SimpleDateFormat(pattern);
-			dateFormates.put(pattern, dateFormat);
+			synchronized (DATE_FORMATES) {
+				if ((dateFormat = DATE_FORMATES.get(pattern)) == null) {
+					dateFormat = new SimpleDateFormat(pattern);
+					DATE_FORMATES.put(pattern, dateFormat);
+				}
+			}
 		}
 		
 		return dateFormat;
 	}
-	
+		
 	/**
 	 * 获取工具默认支持的格林尼治日期时间格式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -129,7 +134,7 @@ public class DateUtils {
 	public static SimpleDateFormat getGMTDateFormat(Locale locale) {
 		return getGMTDateFormat(0, locale);
 	}
-	
+		
 	/**
 	 * 根据索引和Locale对象获取工具所支持的格林尼治日期时间格式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -142,13 +147,17 @@ public class DateUtils {
 			locale = Locale.US;
 		
 		String pattern = GMT_DATETIME_FORMATS[NumberUtils.rangeLimit(index, 0, GMT_DATETIME_FORMATS.length - 1)];
-		String key = pattern + StringUtils.UNDER_LINE + locale;
+		String key = new StringBuilder(pattern).append(StringUtils.UNDER_LINE).append(locale).toString();
 		
-		SimpleDateFormat dateFormat = dateFormates.get(key);
+		SimpleDateFormat dateFormat = DATE_FORMATES.get(key);
 		if (dateFormat == null) {
-			dateFormat = new SimpleDateFormat(pattern, locale);
-			dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-			dateFormates.put(key, dateFormat);
+			synchronized (DATE_FORMATES) {
+				if ((dateFormat = DATE_FORMATES.get(pattern)) == null) {
+					dateFormat = new SimpleDateFormat(pattern, locale);
+					dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+					DATE_FORMATES.put(key, dateFormat);
+				}
+			}
 		}
 		
 		return dateFormat;

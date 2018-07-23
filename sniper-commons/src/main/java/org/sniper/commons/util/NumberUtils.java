@@ -44,10 +44,10 @@ public class NumberUtils {
 	public static final BigDecimal ZERO_BIGDECIMAL = new BigDecimal(ZERO_BIGINTEGER);
 		
 	/** 全局模式与格式对象关系映射集 */
-	private static final Map<String, DecimalFormat> PATTERN_DECIMALFORMATS = MapUtils.newConcurrentHashMap();
+	private static final Map<String, DecimalFormat> PATTERN_DECIMAL_FORMATS = MapUtils.newConcurrentHashMap();
 	
 	/** 全局长度与格式对象关系映射集 */
-	private static final Map<Integer, DecimalFormat> LENGTH_DECIMALFORMATS = MapUtils.newConcurrentHashMap();
+	private static final Map<Integer, DecimalFormat> LENGTH_DECIMAL_FORMATS = MapUtils.newConcurrentHashMap();
 	
 	/** 奇数映射组 */
 	private static Map<Character, Integer> ODD_NUMBERS;
@@ -81,10 +81,15 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static DecimalFormat getDecimalFormat(String pattern) {
-		DecimalFormat decimalFormat = PATTERN_DECIMALFORMATS.get(pattern);
+		DecimalFormat decimalFormat = PATTERN_DECIMAL_FORMATS.get(pattern);
+		
 		if (decimalFormat == null) {
-			decimalFormat = new DecimalFormat(pattern);
-			PATTERN_DECIMALFORMATS.put(pattern, decimalFormat);
+			synchronized (PATTERN_DECIMAL_FORMATS) {
+				if ((decimalFormat = PATTERN_DECIMAL_FORMATS.get(pattern)) == null) {
+					decimalFormat = new DecimalFormat(pattern);
+					PATTERN_DECIMAL_FORMATS.put(pattern, decimalFormat);
+				}
+			}
 		}
 		
 		return decimalFormat;
@@ -97,13 +102,17 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static DecimalFormat getDecimalFormat(int length) {
-		if (length <= 0)
+		if (length < 1)
 			return null;
 		
-		DecimalFormat decimalFormat = LENGTH_DECIMALFORMATS.get(length);
+		DecimalFormat decimalFormat = LENGTH_DECIMAL_FORMATS.get(length);
 		if (decimalFormat == null) {
-			decimalFormat = new DecimalFormat(StringUtils.leftSupplement(StringUtils.EMPTY, '0', length));
-			LENGTH_DECIMALFORMATS.put(length, decimalFormat);
+			synchronized (LENGTH_DECIMAL_FORMATS) {
+				if ((decimalFormat = LENGTH_DECIMAL_FORMATS.get(length)) == null) {
+					decimalFormat = new DecimalFormat(StringUtils.leftSupplement(StringUtils.EMPTY, '0', length));
+					LENGTH_DECIMAL_FORMATS.put(length, decimalFormat);
+				}
+			}
 		}
 		
 		return decimalFormat;

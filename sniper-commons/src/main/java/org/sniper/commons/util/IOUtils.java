@@ -32,7 +32,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
-import java.nio.channels.Channel;
 import java.util.List;
 
 /**
@@ -875,17 +874,6 @@ public class IOUtils {
 	public static void close(Writer writer) throws IOException {
 		if (writer != null)
 			writer.close();
-	}
-	
-	/**
-	 * 关闭通道
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param channel
-	 * @throws IOException
-	 */
-	public static void close(Channel channel) throws IOException {
-		if (channel != null)
-			channel.close();
 	}
 	
 }

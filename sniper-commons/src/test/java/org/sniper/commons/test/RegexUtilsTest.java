@@ -37,7 +37,7 @@ public class RegexUtilsTest extends BaseTestCase {
 		System.out.println("-----------------  原文    -----------------");
 		System.out.println(test);
 		System.out.println("-----------------  新文    -----------------");
-		System.out.println(RegexUtils.matchesAppend(test, RegexUtils.regex.get("url"), "<url>", "</url>"));
+		System.out.println(RegexUtils.matchesAppend(test, RegexUtils.REGEX.get("url"), "<url>", "</url>"));
 	}
 
 }

@@ -18,6 +18,9 @@
 
 package org.sniper.commons.util;
 
+import java.io.IOException;
+import java.nio.channels.Channel;
+
 /**
  * NIO工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -26,5 +29,16 @@ package org.sniper.commons.util;
 public class NIOUtils {
 	
 	private NIOUtils() {}
+	
+	/**
+	 * 关闭通道
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param channel
+	 * @throws IOException
+	 */
+	public static void close(Channel channel) throws IOException {
+		if (channel != null)
+			channel.close();
+	}
 
 }

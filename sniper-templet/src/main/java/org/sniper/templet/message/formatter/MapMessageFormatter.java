@@ -36,7 +36,7 @@ public class MapMessageFormatter<V> extends PlaceholderMessageFormatter<Map<Stri
 	public String format(String message, Map<String, V> param) {
 		if (MapUtils.isNotEmpty(param)) {
 			Iterator<Entry<String, V>> iterator = param.entrySet().iterator();
-			StringBuffer mark = new StringBuffer();
+			StringBuilder mark = new StringBuilder();
 			while (iterator.hasNext()) {
 				Entry<String, V> nameValuePair = iterator.next();
 				mark.setLength(0);
