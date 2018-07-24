@@ -48,17 +48,17 @@ public class WebContextHelper {
 	 * @return
 	 */
 	public static HttpServletRequest getHttpServletRequest() {
-		ServletRequestAttributes requestAttributes = 
-				((ServletRequestAttributes) RequestContextHolder.getRequestAttributes());
+		ServletRequestAttributes requestAttributes = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes());
 		HttpServletRequest request = null;
 		if (requestAttributes == null) {
 			request = (HttpServletRequest) ThreadLocalHolder.getAttribute(WebUtils.HTTP_SERVLET_REQUEST_NAME);
-			if (request == null) 
-				logger.warn("HttpServletRequest is null,please configure ["
-						+ RequestContextListener.class + "] in web.xml or configure ["
-							+ WebApplicationContextInvocation.class + "] in SpringMVC");
-		} else 
+			if (request == null) {
+				logger.warn("HttpServletRequest is null,please configure '{}' or '{}'", 
+						RequestContextListener.class, WebApplicationContextInvocation.class);
+			}
+		} else {
 			request = requestAttributes.getRequest();
+		}
 		
 		return request;
 	}
@@ -70,13 +70,12 @@ public class WebContextHelper {
 	 * @return
 	 */
 	public static HttpServletResponse getHttpServletResponse() {
-		HttpServletResponse response = (HttpServletResponse) ThreadLocalHolder
-				.getAttribute(WebUtils.HTTP_SERVLET_RESPONSE_NAME);
+		HttpServletResponse response = (HttpServletResponse) ThreadLocalHolder.getAttribute(WebUtils.HTTP_SERVLET_RESPONSE_NAME);
 		
-		if (response == null)
-			logger.warn("HttpServletResponse is null,please configure ["
-					+ WebApplicationContextInvocation.class + "] in SpringMVC");
-		
+		if (response == null) {
+			logger.warn("HttpServletResponse is null,please configure '{}'", WebApplicationContextInvocation.class);
+		}
+					
 		return response;
 	}
 	

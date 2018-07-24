@@ -27,17 +27,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.templet.message.resolver.AbstractMessageResolver;
-import org.sniper.web.WebApplicationContextMessageResolver;
+import org.sniper.web.WebMessageResolver;
 import org.sniper.web.spring.WebContextHelper;
 
 /**
- * 基于Spring Web应用上下文环境的消息解析器实现类
+ * 基于Spring Web应用的消息解析器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SpringWebAppContextMessageReslover extends AbstractMessageResolver
-		implements WebApplicationContextMessageResolver, InitializingBean {
+public class SpringWebMessageReslover extends AbstractMessageResolver
+		implements WebMessageResolver, InitializingBean {
 	
 	@Autowired
 	private SessionLocaleResolver localeResolver;
@@ -63,11 +64,8 @@ public class SpringWebAppContextMessageReslover extends AbstractMessageResolver
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (this.localeResolver == null)
-			throw new IllegalArgumentException("Property 'localeResolver' is required");
-		
-		if (this.messageSource == null)
-			throw new IllegalArgumentException("Property 'messageSource' is required");
+		AssertUtils.assertNotNull(this.localeResolver, "Property 'localeResolver' is required");
+		AssertUtils.assertNotNull(this.messageSource, "Property 'messageSource' is required");
 	}
 	
 	public HttpServletRequest getHttpServletRequest() {

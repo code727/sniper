@@ -43,11 +43,13 @@ public class TempletMessageResolver extends AbstractLocaleMessageResolver {
 	}
 	
 	public TempletMessageResolver(MessageService messageService) {
+		AssertUtils.assertNotNull(messageService, "Parameter 'messageService' is required");
 		this.messageService = messageService;
 		this.messageFormatter = new AdaptiveMessageFormatter();
 	}
 	
 	public void setMessageService(MessageService messageService) {
+		AssertUtils.assertNotNull(messageService, "Parameter 'messageService' is required");
 		this.messageService = messageService;
 	}
 
@@ -56,8 +58,8 @@ public class TempletMessageResolver extends AbstractLocaleMessageResolver {
 	}
 	
 	public void setMessageFormatter(MessageFormatter<Object> messageFormatter) {
-		if (messageFormatter != null)
-			this.messageFormatter = messageFormatter;
+		AssertUtils.assertNotNull(messageFormatter, "Parameter 'messageFormatter' is required");
+		this.messageFormatter = messageFormatter;
 	}
 
 	public MessageFormatter<Object> getMessageFormatter() {
@@ -66,17 +68,8 @@ public class TempletMessageResolver extends AbstractLocaleMessageResolver {
 	
 	@Override
 	public String getMessage(String key, Locale locale, Object[] params, String defaultMessage) {
-		checkMessageService();
 		String message = this.messageService.getMessageByKey(key, locale);
 		return message != null ? this.messageFormatter.format(message, params) : defaultMessage;
 	}
 	
-	/**
-	 * 检查消息服务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	protected void checkMessageService() {
-		AssertUtils.assertNotNull(messageService, "Parameter 'messageService' is required.");
-	}
-
 }

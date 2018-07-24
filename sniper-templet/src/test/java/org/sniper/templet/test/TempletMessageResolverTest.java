@@ -35,8 +35,7 @@ public class TempletMessageResolverTest extends BaseTestCase {
 		ResourceBundleMessageService resourceBundleMessageService = new ResourceBundleMessageService();
 		resourceBundleMessageService.setBaseName("test");
 		
-		TempletMessageResolver templetMessageResolver = new TempletMessageResolver();
-		templetMessageResolver.setMessageService(resourceBundleMessageService);
+		TempletMessageResolver templetMessageResolver = new TempletMessageResolver(resourceBundleMessageService);
 		System.out.println(templetMessageResolver.getMessage("test.message1"));
 		System.out.println(templetMessageResolver.getMessage("test.message2", 2));
 	}

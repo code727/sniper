@@ -25,37 +25,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.sniper.beans.propertyeditors.DatePropertyEditor;
 import org.sniper.beans.propertyeditors.StringBufferPropertyEditor;
 import org.sniper.beans.propertyeditors.StringBuilderPropertyEditor;
-import org.sniper.commons.response.MessagingResponse;
 import org.sniper.commons.response.GenericResponse;
+import org.sniper.commons.response.MessagingResponse;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.MessageUtils;
-import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.templet.message.resolver.MessageResolver;
 import org.sniper.web.ServletAware;
-import org.sniper.web.WebApplicationContextMessageResolver;
+import org.sniper.web.WebMessageResolver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 /**
  * SpringMVC控制器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class ControllerSupport implements MessageResolver, ServletAware {
+public abstract class AbstractController implements MessageResolver, ServletAware {
 		
 	@Autowired
-	private WebApplicationContextMessageResolver messageResolver;
+	private WebMessageResolver messageResolver;
 			
-	public WebApplicationContextMessageResolver getMessageResolver() {
+	public WebMessageResolver getMessageResolver() {
 		return messageResolver;
 	}
 
-	public void setMessageResolver(WebApplicationContextMessageResolver messageResolver) {
+	public void setMessageResolver(WebMessageResolver messageResolver) {
 		this.messageResolver = messageResolver;
 	}
 
@@ -112,15 +111,15 @@ public abstract class ControllerSupport implements MessageResolver, ServletAware
 	public String getMessage(String key, Object[] params, String defaultMessage) {
 		Locale locale = this.getLocale();
 		// 首先从SpringMVC全局配置文件中获取消息
-		String message = messageResolver.getMessage(key, params, defaultMessage); 
-		if (ObjectUtils.equals(message, defaultMessage)) {
-			// 如果返回的消息与指定的默认值一致，说明没有到真正的消息，则再从与当前包同名的配置文件中获取
-			message = MessageUtils.getPackageMessage(this.getClass(), locale, key, params, defaultMessage);
+		String message = this.messageResolver.getMessage(key, params, null); 
+		if (message == null) {
+			// 如果返回的消息为空，说明没有获取到真正的消息，则再从与当前包同名的配置文件中获取
+			message = MessageUtils.getPackageMessage(this.getClass(), locale, key, params, null);
 		}
 		
-		// 同理，如果返回的消息与指定的默认值再次一致，则再从与当前包同名的配置文件中获取
-		return !ObjectUtils.equals(message, defaultMessage) ? message : MessageUtils
-				.getClassMessage(this.getClass(), locale, key, params, defaultMessage);
+		// 同理，如果返回的消息再次为空，则再从与当前类同名的配置文件中获取。否则，直接返回最终结果
+		return message != null ? message : MessageUtils.getClassMessage(
+				this.getClass(), locale, key, params, defaultMessage);
 	}
 	
 	/**

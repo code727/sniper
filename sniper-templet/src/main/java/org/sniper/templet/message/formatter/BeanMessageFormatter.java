@@ -44,7 +44,7 @@ public class BeanMessageFormatter extends PlaceholderMessageFormatter<Object> {
 			// 获取需要被替换的标记子串
 			Set<String> markSet = CollectionUtils.newHashSet(StringUtils.leftSubstringAll(message, this.getPrefix(), this.getSuffix()));
 			if (CollectionUtils.isNotEmpty(markSet)) {
-				StringBuffer expression = new StringBuffer();
+				StringBuilder expression = new StringBuilder();
 				for (String mark : markSet) {
 					expression.setLength(0);
 					expression.append(this.getPrefix()).append(mark).append(this.getSuffix());

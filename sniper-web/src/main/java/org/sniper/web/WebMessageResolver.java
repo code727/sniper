@@ -25,11 +25,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.sniper.templet.message.resolver.MessageResolver;
 
 /**
- * 基于Web应用上下文环境的消息解析器接口
+ * 基于Web应用的消息解析器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface WebApplicationContextMessageResolver extends MessageResolver {
+public interface WebMessageResolver extends MessageResolver {
 	
 	/**
 	 * 获取当前HttpServletRequest对象

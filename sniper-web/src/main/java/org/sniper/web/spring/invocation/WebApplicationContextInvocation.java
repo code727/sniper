@@ -35,6 +35,7 @@ public class WebApplicationContextInvocation extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
+		
 		/* 当执行请求之前，将request和response对象设置到应用上下文对象 */
 		ThreadLocalHolder.setAttribute(WebUtils.HTTP_SERVLET_REQUEST_NAME, request);
 		ThreadLocalHolder.setAttribute(WebUtils.HTTP_SERVLET_RESPONSE_NAME, response);
@@ -46,6 +47,7 @@ public class WebApplicationContextInvocation extends HandlerInterceptorAdapter {
 	public void afterCompletion(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
+		
 		/* 当请求执行结束后，将request和response从应用上下文对象中清除 */
 		ThreadLocalHolder.removeAttribute(WebUtils.HTTP_SERVLET_REQUEST_NAME);
 		ThreadLocalHolder.removeAttribute(WebUtils.HTTP_SERVLET_RESPONSE_NAME);
