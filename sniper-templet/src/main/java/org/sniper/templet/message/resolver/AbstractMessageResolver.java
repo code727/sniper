@@ -45,9 +45,4 @@ public abstract class AbstractMessageResolver implements MessageResolver {
 		return getMessage(key, params, key);
 	}
 
-	@Override
-	public String getMessage(String key, Object param, String defaultMessage) {
-		return getMessage(key, new Object[] { param }, defaultMessage);
-	}
-
 }

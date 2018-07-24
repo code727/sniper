@@ -25,7 +25,7 @@ import java.util.Locale;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface MessageService {
+public interface MessageSource {
 	
 	/**
 	 * 根据键获取对应的消息

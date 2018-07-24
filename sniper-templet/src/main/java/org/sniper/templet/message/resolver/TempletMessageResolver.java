@@ -20,10 +20,7 @@ package org.sniper.templet.message.resolver;
 
 import java.util.Locale;
 
-import org.sniper.commons.util.AssertUtils;
-import org.sniper.templet.message.formatter.AdaptiveMessageFormatter;
-import org.sniper.templet.message.formatter.MessageFormatter;
-import org.sniper.templet.message.service.MessageService;
+import org.sniper.templet.message.service.MessageSource;
 
 /**
  * 模板消息解析器实现类
@@ -32,44 +29,27 @@ import org.sniper.templet.message.service.MessageService;
  */
 public class TempletMessageResolver extends AbstractLocaleMessageResolver {
 	
-	/** 消息源服务 */
-	private MessageService messageService;
-		
-	/** 消息格式化处理器 */
-	private MessageFormatter<Object> messageFormatter;
-	
 	public TempletMessageResolver() {
-		this(null);
+		super();
+	}
+		
+	public TempletMessageResolver(MessageSource messageSource) {
+		super(messageSource);
 	}
 	
-	public TempletMessageResolver(MessageService messageService) {
-		AssertUtils.assertNotNull(messageService, "Parameter 'messageService' is required");
-		this.messageService = messageService;
-		this.messageFormatter = new AdaptiveMessageFormatter();
-	}
-	
-	public void setMessageService(MessageService messageService) {
-		AssertUtils.assertNotNull(messageService, "Parameter 'messageService' is required");
-		this.messageService = messageService;
-	}
-
-	public MessageService getMessageService() {
-		return messageService;
-	}
-	
-	public void setMessageFormatter(MessageFormatter<Object> messageFormatter) {
-		AssertUtils.assertNotNull(messageFormatter, "Parameter 'messageFormatter' is required");
-		this.messageFormatter = messageFormatter;
-	}
-
-	public MessageFormatter<Object> getMessageFormatter() {
-		return messageFormatter;
-	}
-	
+	/**
+	 * 重写父类方法，只从消息源中获取消息，未获取到时返回指定的默认消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param locale
+	 * @param param
+	 * @param defaultMessage
+	 * @return
+	 */
 	@Override
-	public String getMessage(String key, Locale locale, Object[] params, String defaultMessage) {
-		String message = this.messageService.getMessageByKey(key, locale);
-		return message != null ? this.messageFormatter.format(message, params) : defaultMessage;
+	protected String getLocaleMessage(String key, Locale locale, Object param, String defaultMessage) {
+		String message = getMessageSource().getMessageByKey(key, locale);
+		return message != null ? getMessageFormatter().format(message, param) : defaultMessage;
 	}
-	
+
 }

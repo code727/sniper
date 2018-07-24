@@ -19,6 +19,17 @@
 package org.sniper.templet.message.resolver;
 
 import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.ClassUtils;
+import org.sniper.commons.util.MessageUtils;
+import org.sniper.commons.util.StringUtils;
+import org.sniper.templet.message.formatter.JdkMessageFormatter;
+import org.sniper.templet.message.formatter.MessageFormatter;
+import org.sniper.templet.message.service.MessageSource;
+import org.sniper.templet.message.service.ResourceBundleMessageSource;
 
 /**
  * 本地化消息解析器抽象类
@@ -27,6 +38,39 @@ import java.util.Locale;
  */
 public abstract class AbstractLocaleMessageResolver extends
 		AbstractMessageResolver implements LocaleMessageResolver {
+	
+	/** 消息源 */
+	private MessageSource messageSource;
+		
+	/** 消息格式化处理器 */
+	private MessageFormatter<Object> messageFormatter;
+	
+	protected AbstractLocaleMessageResolver() {
+		this(null);
+	}
+	
+	protected AbstractLocaleMessageResolver(MessageSource messageSource) {
+		this.messageSource = (messageSource != null ? messageSource : new ResourceBundleMessageSource());
+		this.messageFormatter = new JdkMessageFormatter();
+	}
+	
+	public MessageSource getMessageSource() {
+		return messageSource;
+	}
+
+	public void setMessageSource(MessageSource messageSource) {
+		AssertUtils.assertNotNull(messageSource, "Parameter 'messageSource' is required");
+		this.messageSource = messageSource;
+	}
+
+	public void setMessageFormatter(MessageFormatter<Object> messageFormatter) {
+		AssertUtils.assertNotNull(messageFormatter, "Parameter 'messageFormatter' is required");
+		this.messageFormatter = messageFormatter;
+	}
+
+	public MessageFormatter<Object> getMessageFormatter() {
+		return messageFormatter;
+	}
 
 	@Override
 	public String getMessage(String key, Locale locale) {
@@ -54,8 +98,79 @@ public abstract class AbstractLocaleMessageResolver extends
 	}
 	
 	@Override
+	public String getMessage(String key, Object param, String defaultMessage) {
+		return getMessage(key, null, param, defaultMessage);
+	}
+	
+	@Override
 	public String getMessage(String key, Locale locale, Object param, String defaultMessage) {
-		return getMessage(key, locale, new Object[] { param }, key);
+		return getLocaleMessage(key, locale, param, defaultMessage);
+	}
+	
+	@Override
+	public String getMessage(String key, Locale locale, Object[] params, String defaultMessage) {
+		return getLocaleMessage(key, locale, params, defaultMessage);
+	}
+	
+	/**
+	 * 获取本地化消息:</P>
+	 * 1.首先从自定义的消息源中获取消息，未获取到时进入第2步，否则进入第4步；</P>
+	 * 2.再从与当前类所属包同名的配置文件中获取，未获取到时进入第3步，否则进入第4步；</P>
+	 * 3.再从与当前类同名的配置文件中获取；</P>
+	 * 4.统一判断消息是否为空，不为空时进行格式化，否则返回指定的默认值。
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param locale
+	 * @param param
+	 * @param defaultMessage
+	 * @return
+	 */
+	protected String getLocaleMessage(String key, Locale locale, Object param, String defaultMessage) {
+		// 首先从自定义的消息源中获取消息
+		String message = this.messageSource.getMessageByKey(key, locale);
+		if (message == null) {
+			// 如果返回的消息为空，说明没有获取到消息，则再从与当前类所属包同名的配置文件中获取
+			message = getPackageMessage(key, locale);
+			// 同理，如果返回的消息再次为空，则再从与当前类同名的配置文件中获取
+			if (message == null) {
+				message = getClassMessage(key, locale);
+			}
+		}
+		
+		// 统一判断消息是否为空，不为空时进行格式化，否则返回指定的默认值
+		return message != null ? this.messageFormatter.format(message, param) : defaultMessage;
+	}
+	
+	/**
+	 * 从与当前类所属包同名的配置文件中获取
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param locale
+	 * @return
+	 */
+	private String getPackageMessage(String key, Locale locale) {
+		try {
+			ResourceBundle bundle = MessageUtils.getResourceBundle(ClassUtils.getPackageBaseName(this.getClass()), locale);
+			return bundle.getString(StringUtils.safeString(key));
+		} catch (MissingResourceException e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * 从与当前类同名的配置文件中获取
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param locale
+	 * @return
+	 */
+	private String getClassMessage(String key, Locale locale) {
+		try {
+			ResourceBundle bundle = MessageUtils.getResourceBundle(ClassUtils.getClassBaseName(this.getClass()), locale);
+			return bundle.getString(StringUtils.safeString(key));
+		} catch (MissingResourceException e) {
+			return null;
+		}
 	}
 
 }

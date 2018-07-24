@@ -18,9 +18,13 @@
 
 package org.sniper.templet.test;
 
+import java.util.Map;
+
 import org.junit.Test;
+import org.sniper.commons.util.MapUtils;
+import org.sniper.templet.message.formatter.AdaptiveMessageFormatter;
 import org.sniper.templet.message.resolver.TempletMessageResolver;
-import org.sniper.templet.message.service.ResourceBundleMessageService;
+import org.sniper.templet.message.service.ResourceBundleMessageSource;
 import org.sniper.test.junit.BaseTestCase;
 
 /**
@@ -32,12 +36,18 @@ public class TempletMessageResolverTest extends BaseTestCase {
 	
 	@Test
 	public void test() {
-		ResourceBundleMessageService resourceBundleMessageService = new ResourceBundleMessageService();
-		resourceBundleMessageService.setBaseName("test");
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+//		resourceBundleMessageSource.setBaseName("test");
 		
-		TempletMessageResolver templetMessageResolver = new TempletMessageResolver(resourceBundleMessageService);
+		TempletMessageResolver templetMessageResolver = new TempletMessageResolver(messageSource);
+		templetMessageResolver.setMessageFormatter(new AdaptiveMessageFormatter());
+		
 		System.out.println(templetMessageResolver.getMessage("test.message1"));
 		System.out.println(templetMessageResolver.getMessage("test.message2", 2));
+		
+		Map<String, Object> parameters = MapUtils.newHashMap();
+		parameters.put("name", "daniele");
+		System.out.println(templetMessageResolver.getMessage("test.message3", parameters));
 	}
 
 }

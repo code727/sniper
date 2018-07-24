@@ -23,18 +23,24 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.sniper.commons.util.ArrayUtils;
+import org.sniper.commons.util.MessageUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.context.ThreadLocalHolder;
 
 /**
- * java.util.ResourceBundle消息解析服务实现类
+ * java.util.ResourceBundle消息源实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ResourceBundleMessageService implements MessageService {
+public class ResourceBundleMessageSource implements MessageSource {
 	
 	/** 资源的基础名称组 */
 	private String[] baseNames;
+	
+	private static final String DEFAULT_BASENAME = "i18n";
+	
+	public ResourceBundleMessageSource() {
+		this.baseNames = new String[] { DEFAULT_BASENAME };
+	}
 
 	/**
 	 * 设置资源的基础名称
@@ -42,7 +48,7 @@ public class ResourceBundleMessageService implements MessageService {
 	 * @param baseName
 	 */
 	public void setBaseName(String baseName) {
-		this.baseNames = StringUtils.splitTrim(baseName, ",");
+		this.baseNames = StringUtils.splitTrim(baseName, StringUtils.COMMA);
 	}
 	
 	/**
@@ -62,20 +68,11 @@ public class ResourceBundleMessageService implements MessageService {
 	 * @return
 	 */
 	protected ResourceBundle getResourceBundle(String baseName, Locale locale) {
-		if (locale == null)
-			locale = Locale.getDefault();
-		
-		String attribute = baseName + "_" + locale;
-		ResourceBundle besourceBundle = (ResourceBundle) ThreadLocalHolder.getAttribute(attribute);
-		if (besourceBundle == null) {
-			try {
-				besourceBundle = ResourceBundle.getBundle(baseName, locale);
-				ThreadLocalHolder.setAttribute(attribute, besourceBundle);
-			} catch (MissingResourceException e) {}
-			
+		try {
+			return MessageUtils.getResourceBundle(baseName, locale);
+		} catch (MissingResourceException e) {
+			return null;
 		}
-		
-		return besourceBundle;
 	}
 
 	@Override
@@ -88,19 +85,16 @@ public class ResourceBundleMessageService implements MessageService {
 		if (locale == null)
 			locale = Locale.getDefault();
 		
-		String message = key;
 		if (ArrayUtils.isNotEmpty(baseNames)) {
-			ResourceBundle resourceBundle;
 			for (String baseName : baseNames) {
-				resourceBundle = getResourceBundle(baseName, locale);
-				if (resourceBundle != null && resourceBundle.keySet().contains(key)) {
-					message = resourceBundle.getString(key);
-					break;
+				ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
+				if (resourceBundle != null && resourceBundle.containsKey(key)) {
+					return resourceBundle.getString(key);
 				}
 			}
 		}
 		
-		return message;
+		return null;
 	}
 
 }

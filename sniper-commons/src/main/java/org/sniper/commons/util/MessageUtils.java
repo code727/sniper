@@ -48,7 +48,7 @@ public class MessageUtils {
 		if (locale == null)
 			locale = Locale.getDefault();
 		
-		String key = baseName + "_" + locale;
+		String key = baseName + StringUtils.UNDER_LINE + locale;
 		ResourceBundle resourceBundle = RESOURCE_BUNDLES.get(key);
 		if (resourceBundle == null) {
 			synchronized (RESOURCE_BUNDLES) {
@@ -214,17 +214,8 @@ public class MessageUtils {
 	 */
 	public static String getPackageMessage(Class<?> clazz, Locale locale,
 			String key, Object[] params, String defaultMessage) {
-		// 将包的完整限定名替换为相对路径
-		String packageFullName = clazz.getPackage().getName();
-		int index = packageFullName.lastIndexOf(".");
-		String baseName = "";
-		/* 信息文件的基名与包名相同 */
-		if (index > -1) {
-			String lastPackageName = packageFullName.substring(index);
-			baseName = packageFullName.substring(0, index) + lastPackageName + lastPackageName;
-		} else
-			baseName = packageFullName + "/" + packageFullName;
-		return getMessage(baseName, locale, key, params, defaultMessage);
+		
+		return getMessage(ClassUtils.getPackageBaseName(clazz), locale, key, params, defaultMessage);
 	}
 	
 	/**
@@ -362,7 +353,6 @@ public class MessageUtils {
 	 * @return
 	 */
 	public static String getClassMessage(Class<?> clazz, Locale locale, String key, Object[] params) {
-		// 将类型所在的包的完整限定名替换为相对路径
 		return getClassMessage(clazz, locale, key, params, key);
 	}
 	
@@ -378,10 +368,8 @@ public class MessageUtils {
 	 */
 	public static String getClassMessage(Class<?> clazz, Locale locale,
 			String key, Object[] params, String defaultMessage) {
-		// 将类型所在的包的完整限定名替换为相对路径
-		String pageckFullName = clazz.getPackage().getName().replaceAll("\\.", "/");
-		String baseName = pageckFullName + "/" + clazz.getSimpleName();
-		return getMessage(baseName, locale, key, params, defaultMessage);
+		
+		return getMessage(ClassUtils.getClassBaseName(clazz), locale, key, params, defaultMessage);
 	}
 	
 	/**

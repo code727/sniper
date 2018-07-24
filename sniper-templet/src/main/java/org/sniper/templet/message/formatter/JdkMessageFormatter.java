@@ -25,7 +25,7 @@ import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.CollectionUtils;
 
 /**
- * JDK原生态消息格式化处理器实现类
+ * JDK原生消息格式化处理器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -35,10 +35,13 @@ public class JdkMessageFormatter implements MessageFormatter<Object> {
 	public String format(String message, Object param) {
 		if (ArrayUtils.isArray(param)) {
 			return MessageFormat.format(message, (Object[]) param);
-		} else if (CollectionUtils.isCollection(param)) {
-			return format(message, CollectionUtils.toObjectArray((Collection<?>) param));
-		} else
-			return param != null ? MessageFormat.format(message, param) : message;
+		}
+		
+		if (CollectionUtils.isCollection(param)) {
+			return MessageFormat.format(message, CollectionUtils.toObjectArray((Collection<?>) param));
+		}
+		
+		return param != null ? MessageFormat.format(message, param) : message;
 	}
 		
 }

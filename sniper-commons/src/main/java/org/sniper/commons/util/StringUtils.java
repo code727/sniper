@@ -51,6 +51,9 @@ public class StringUtils {
 	/** 分号 */
 	public static final String SEMICOLON = ";";
 	
+	/** 句号 */
+	public static final String PERIOD = ".";
+	
 	/** 单引号 */
 	public static final String SINGLE_QUOTES = "'";
 	
@@ -68,6 +71,9 @@ public class StringUtils {
 	
 	/** 下划线 */
 	public static final String UNDER_LINE = "_";
+	
+	/** 点 */
+	public static final String POINT = ".";
 	
 	/** 类路径标志 */
 	public static final String CLASSPATH = "classpath:";

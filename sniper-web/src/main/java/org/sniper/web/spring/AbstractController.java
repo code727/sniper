@@ -110,10 +110,10 @@ public abstract class AbstractController implements MessageResolver, ServletAwar
 	@Override
 	public String getMessage(String key, Object[] params, String defaultMessage) {
 		Locale locale = this.getLocale();
-		// 首先从SpringMVC全局配置文件中获取消息
+		// 首先从全局配置中获取消息
 		String message = this.messageResolver.getMessage(key, params, null); 
 		if (message == null) {
-			// 如果返回的消息为空，说明没有获取到真正的消息，则再从与当前包同名的配置文件中获取
+			// 如果返回的消息为空，说明没有获取到消息，则再从与当前类所属包同名的配置文件中获取
 			message = MessageUtils.getPackageMessage(this.getClass(), locale, key, params, null);
 		}
 		
