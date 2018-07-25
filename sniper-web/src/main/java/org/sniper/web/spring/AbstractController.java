@@ -127,12 +127,26 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	 * 设置消息响应对象中的本地参数化消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param response
+	 * @param param
+	 */
+	protected void setLocaleMessage(MessagingResponse<?> response, Object param) {
+		String message = response.getMessage();
+		if (StringUtils.isNotBlank(message)) {
+			response.setMessage(getMessage(message, param));
+		}
+	}
+	
+	/**
+	 * 设置消息响应对象中的本地参数化消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param response
 	 * @param params
 	 */
 	protected void setLocaleMessage(MessagingResponse<?> response, Object[] params) {
 		String message = response.getMessage();
-		if (StringUtils.isNotBlank(message)) 
+		if (StringUtils.isNotBlank(message)) {
 			response.setMessage(getMessage(message, params));
+		}
 	}
 	
 	/**
@@ -148,11 +162,24 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	 * 设置响应对象中的本地参数化消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param response
+	 * @param param
+	 */
+	protected void setLocaleMessage(GenericResponse<?> response, Object param) {
+		if (response instanceof MessagingResponse) {
+			setLocaleMessage((MessagingResponse<?>) response, param);
+		}
+	}
+	
+	/**
+	 * 设置响应对象中的本地参数化消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param response
 	 * @param params
 	 */
 	protected void setLocaleMessage(GenericResponse<?> response, Object[] params) {
-		if (response instanceof MessagingResponse)
+		if (response instanceof MessagingResponse) {
 			setLocaleMessage((MessagingResponse<?>) response, params);
+		}
 	}
 	
 	/**
@@ -177,6 +204,5 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	 * @param binder
 	 */
 	protected void overrideInitBinder(HttpServletRequest request, ServletRequestDataBinder binder) {}
-
 	
 }
