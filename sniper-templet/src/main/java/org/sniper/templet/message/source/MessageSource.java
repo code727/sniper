@@ -16,7 +16,7 @@
  * Create Date : 2015-6-19
  */
 
-package org.sniper.templet.message.service;
+package org.sniper.templet.message.source;
 
 import java.util.Locale;
 

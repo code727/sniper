@@ -20,12 +20,10 @@ package org.sniper.web.spring.reslover;
 
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.MessageUtils;
-import org.sniper.web.spring.WebContextHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
@@ -36,28 +34,30 @@ import org.springframework.context.support.ResourceBundleMessageSource;
  */
 public class SpringWebMessageReslover extends AbstractSpringWebMessageReslover {
 		
-	@Autowired
-	private ResourceBundleMessageSource messageSource;
+	@Autowired(required = false)
+	private MessageSource messageSource;
 	
-	public ResourceBundleMessageSource getMessageSource() {
+	public MessageSource getMessageSource() {
 		return messageSource;
 	}
 
-	public void setMessageSource(ResourceBundleMessageSource messageSource) {
+	public void setMessageSource(MessageSource messageSource) {
+		AssertUtils.assertNotNull(messageSource, "Property 'messageSource' is required");
 		this.messageSource = messageSource;
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
-		AssertUtils.assertNotNull(this.messageSource, "Property 'messageSource' is required");
+		
+		if(this.messageSource == null) {
+			ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+			source.setBasename(org.sniper.templet.message.source
+					.ResourceBundleMessageSource.DEFAULT_BASENAME);
+			this.messageSource = source;
+		}
 	}
-	
-	@Override
-	public HttpServletRequest getHttpServletRequest() {
-		return WebContextHelper.getHttpServletRequest();
-	}
-	
+		
 	@Override
 	public String getMessage(String key, Object param, String defaultMessage) {
 		return getMessage(key, new Object[] { param }, defaultMessage);

@@ -24,7 +24,7 @@ import org.junit.Test;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.templet.message.formatter.AdaptiveMessageFormatter;
 import org.sniper.templet.message.resolver.TempletMessageResolver;
-import org.sniper.templet.message.service.ResourceBundleMessageSource;
+import org.sniper.templet.message.source.ResourceBundleMessageSource;
 import org.sniper.test.junit.BaseTestCase;
 
 /**
@@ -37,7 +37,7 @@ public class TempletMessageResolverTest extends BaseTestCase {
 	@Test
 	public void test() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-//		resourceBundleMessageSource.setBaseName("test");
+//		messageSource.setBaseName("i18n/test");
 		
 		TempletMessageResolver templetMessageResolver = new TempletMessageResolver(messageSource);
 		templetMessageResolver.setMessageFormatter(new AdaptiveMessageFormatter());

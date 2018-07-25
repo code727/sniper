@@ -16,7 +16,7 @@
  * Create Date : 2016-7-28
  */
 
-package org.sniper.templet.message.service;
+package org.sniper.templet.message.source;
 
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -36,7 +36,7 @@ public class ResourceBundleMessageSource implements MessageSource {
 	/** 资源的基础名称组 */
 	private String[] baseNames;
 	
-	private static final String DEFAULT_BASENAME = "i18n";
+	public static final String DEFAULT_BASENAME = "i18n/i18n";
 	
 	public ResourceBundleMessageSource() {
 		this.baseNames = new String[] { DEFAULT_BASENAME };

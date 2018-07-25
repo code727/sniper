@@ -20,7 +20,7 @@ package org.sniper.templet.message.resolver;
 
 import java.util.Locale;
 
-import org.sniper.templet.message.service.MessageSource;
+import org.sniper.templet.message.source.MessageSource;
 
 /**
  * 模板消息解析器实现类

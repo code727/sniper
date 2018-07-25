@@ -28,8 +28,8 @@ import org.sniper.commons.util.MessageUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.templet.message.formatter.JdkMessageFormatter;
 import org.sniper.templet.message.formatter.MessageFormatter;
-import org.sniper.templet.message.service.MessageSource;
-import org.sniper.templet.message.service.ResourceBundleMessageSource;
+import org.sniper.templet.message.source.MessageSource;
+import org.sniper.templet.message.source.ResourceBundleMessageSource;
 
 /**
  * 本地化消息解析器抽象类
@@ -59,12 +59,12 @@ public abstract class AbstractLocaleMessageResolver extends
 	}
 
 	public void setMessageSource(MessageSource messageSource) {
-		AssertUtils.assertNotNull(messageSource, "Parameter 'messageSource' is required");
+		AssertUtils.assertNotNull(messageSource, "Property 'messageSource' is required");
 		this.messageSource = messageSource;
 	}
 
 	public void setMessageFormatter(MessageFormatter<Object> messageFormatter) {
-		AssertUtils.assertNotNull(messageFormatter, "Parameter 'messageFormatter' is required");
+		AssertUtils.assertNotNull(messageFormatter, "Property 'messageFormatter' is required");
 		this.messageFormatter = messageFormatter;
 	}
 
