@@ -71,7 +71,7 @@ public abstract class AbstractLocaleMessageResolver extends
 	public MessageFormatter<Object> getMessageFormatter() {
 		return messageFormatter;
 	}
-
+	
 	@Override
 	public String getMessage(String key, Locale locale) {
 		return getMessage(key, locale, key);

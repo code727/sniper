@@ -44,5 +44,5 @@ public interface WebMessageResolver extends MessageResolver {
 	 * @return
 	 */
 	public Locale getLocale();
-
+		
 }

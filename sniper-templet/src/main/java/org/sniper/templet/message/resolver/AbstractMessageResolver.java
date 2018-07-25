@@ -24,7 +24,7 @@ package org.sniper.templet.message.resolver;
  * @version 1.0
  */
 public abstract class AbstractMessageResolver implements MessageResolver {
-
+	
 	@Override
 	public String getMessage(String key) {
 		return getMessage(key, null, key);

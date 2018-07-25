@@ -22,38 +22,23 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.InitializingBean;
+import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.MessageUtils;
+import org.sniper.web.spring.WebContextHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.sniper.commons.util.AssertUtils;
-import org.sniper.templet.message.resolver.AbstractMessageResolver;
-import org.sniper.web.WebMessageResolver;
-import org.sniper.web.spring.WebContextHelper;
 
 /**
  * 基于Spring Web应用的消息解析器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SpringWebMessageReslover extends AbstractMessageResolver
-		implements WebMessageResolver, InitializingBean {
-	
-	@Autowired
-	private SessionLocaleResolver localeResolver;
-	
+public class SpringWebMessageReslover extends AbstractSpringWebMessageReslover {
+		
 	@Autowired
 	private ResourceBundleMessageSource messageSource;
 	
-	public SessionLocaleResolver getLocaleResolver() {
-		return localeResolver;
-	}
-
-	public void setLocaleResolver(SessionLocaleResolver localeResolver) {
-		this.localeResolver = localeResolver;
-	}
-
 	public ResourceBundleMessageSource getMessageSource() {
 		return messageSource;
 	}
@@ -64,28 +49,41 @@ public class SpringWebMessageReslover extends AbstractMessageResolver
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		AssertUtils.assertNotNull(this.localeResolver, "Property 'localeResolver' is required");
+		super.afterPropertiesSet();
 		AssertUtils.assertNotNull(this.messageSource, "Property 'messageSource' is required");
 	}
 	
+	@Override
 	public HttpServletRequest getHttpServletRequest() {
 		return WebContextHelper.getHttpServletRequest();
 	}
-
+	
 	@Override
-	public Locale getLocale() {
-		HttpServletRequest request = getHttpServletRequest();
-		return request != null ? localeResolver.resolveLocale(request) : Locale.getDefault();
+	public String getMessage(String key, Object param, String defaultMessage) {
+		return getMessage(key, new Object[] { param }, defaultMessage);
 	}
 
 	@Override
 	public String getMessage(String key, Object[] params, String defaultMessage) {
+		Locale locale = this.getLocale();
 		try {
-			return messageSource.getMessage(key, params, getLocale());
+			return messageSource.getMessage(key, params, locale);
 		} catch (NoSuchMessageException e) {
 			// 未获取到消息时，将默认值作为消息返回
 			return defaultMessage;
 		}
+	}
+
+	@Override
+	public String getMessage(Class<?> clazz, String key, Object param, String defaultMessage) {
+		return getMessage(clazz, key, new Object[] { param }, defaultMessage);
+	}
+
+	@Override
+	public String getMessage(Class<?> clazz, String key, Object[] params, String defaultMessage) {
+		Locale locale = this.getLocale();
+		String message = MessageUtils.getPackageMessage(clazz, locale , key, params, null);
+		return message != null ? message : MessageUtils.getClassMessage(clazz, locale, key, params, defaultMessage);
 	}
 	
 }

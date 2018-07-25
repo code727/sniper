@@ -49,12 +49,12 @@ public class WebContextHelper {
 	 */
 	public static HttpServletRequest getHttpServletRequest() {
 		ServletRequestAttributes requestAttributes = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes());
-		HttpServletRequest request = null;
+		HttpServletRequest request;
+		
 		if (requestAttributes == null) {
 			request = (HttpServletRequest) ThreadLocalHolder.getAttribute(WebUtils.HTTP_SERVLET_REQUEST_NAME);
 			if (request == null) {
-				logger.warn("HttpServletRequest is null,please configure '{}' or '{}'", 
-						RequestContextListener.class, WebApplicationContextInvocation.class);
+				logger.warn("HttpServletRequest is null,please configure '{}' or '{}'", RequestContextListener.class, WebApplicationContextInvocation.class);
 			}
 		} else {
 			request = requestAttributes.getRequest();
@@ -70,12 +70,18 @@ public class WebContextHelper {
 	 * @return
 	 */
 	public static HttpServletResponse getHttpServletResponse() {
-		HttpServletResponse response = (HttpServletResponse) ThreadLocalHolder.getAttribute(WebUtils.HTTP_SERVLET_RESPONSE_NAME);
+		ServletRequestAttributes requestAttributes = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes());
+		HttpServletResponse response;
 		
-		if (response == null) {
-			logger.warn("HttpServletResponse is null,please configure '{}'", WebApplicationContextInvocation.class);
+		if (requestAttributes == null) {
+			response = (HttpServletResponse) ThreadLocalHolder.getAttribute(WebUtils.HTTP_SERVLET_RESPONSE_NAME);
+			if (response == null) {
+				logger.warn("HttpServletResponse is null,please configure '{}' or '{}'", RequestContextListener.class, WebApplicationContextInvocation.class);
+			}
+		} else {
+			response = requestAttributes.getResponse();
 		}
-					
+
 		return response;
 	}
 	
