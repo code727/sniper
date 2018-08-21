@@ -39,5 +39,11 @@ public class URLEncoder extends CodecSupport implements StringEncoder {
 	public String encode(String message, String encoding) throws UnsupportedEncodingException {
 		return java.net.URLEncoder.encode(message, StringUtils.isNotBlank(encoding) ? encoding : getEncoding());
 	}
+	
+	public static void main(String[] args) {
+		Integer i = 127;
+		Integer j = 127;
+		System.out.println(i == j);
+	}
 
 }

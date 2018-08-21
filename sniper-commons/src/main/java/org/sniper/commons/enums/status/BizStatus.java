@@ -26,7 +26,7 @@ import org.sniper.commons.enums.AbstractLocaleEnums;
  * @version 1.0
  */
 public final class BizStatus extends AbstractLocaleEnums<String> {
-	
+		
 	protected BizStatus(String key, String messageKey) {
 		super(key, messageKey);
 	}

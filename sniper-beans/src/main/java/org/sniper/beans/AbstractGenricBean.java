@@ -30,6 +30,8 @@ public abstract class AbstractGenricBean<T> implements GenericBean<T> {
 	/** 当前泛型类所管理的目标类型 */
 	private Class<T> targetType;
 	
+	protected AbstractGenricBean() {}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setTargetType(Class<T> targetType) {
