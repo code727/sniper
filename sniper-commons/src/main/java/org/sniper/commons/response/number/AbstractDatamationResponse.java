@@ -25,18 +25,18 @@ import org.sniper.commons.response.DatamationResponse;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractDataResponse<T> extends Response implements DatamationResponse<Integer, T> {
+public abstract class AbstractDatamationResponse<T> extends Response implements DatamationResponse<Integer, T> {
 	
 	private static final long serialVersionUID = 4108877402467845840L;
 	
 	/** 响应数据 */
 	private T data;
 			
-	protected AbstractDataResponse(DatamationResponse<Integer, T> response) {
+	protected AbstractDatamationResponse(DatamationResponse<Integer, T> response) {
 		this(response.getCode(), response.getData());
 	}
 		
-	protected AbstractDataResponse(Integer code, T data) {
+	protected AbstractDatamationResponse(Integer code, T data) {
 		super(code);
 		this.data = data;
 	}

@@ -21,23 +21,23 @@ package org.sniper.commons.enums.status;
 import org.sniper.commons.enums.AbstractLocaleEnums;
 
 /**
- * 系统状态枚举类
+ * 系统执行状态枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class SystemStatus extends AbstractLocaleEnums<String> {
+public final class ExecutionStatus extends AbstractLocaleEnums<Integer> {
 	
-	private SystemStatus(String key, String value) {
+	private ExecutionStatus(Integer key, String value) {
 		super(key, value);
 	}
 	
-	/** 失败 */
-	public static final SystemStatus FAILED = new SystemStatus("-0001", "system.status.failed");
-	
-	/** 未知 */
-	public static final SystemStatus UNKNOW = new SystemStatus("0000", "system.status.unknow");
-	
 	/** 成功 */
-	public static final SystemStatus SUCCESS = new SystemStatus("0001", "system.status.success");
-				
+	public static final ExecutionStatus SUCCESS = new ExecutionStatus(1, "execution.status.success");
+	
+	/** 失败 */
+	public static final ExecutionStatus FAILED = new ExecutionStatus(0, "execution.status.failed");
+	
+	/** 异常 */
+	public static final ExecutionStatus EXCEPTION = new ExecutionStatus(-1, "execution.status.exception");
+			
 }

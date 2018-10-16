@@ -27,7 +27,7 @@ import org.sniper.commons.response.DatamationResponse;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DataResponse<T> extends AbstractDataResponse<T> implements Serializable {
+public class DataResponse<T> extends AbstractDatamationResponse<T> implements Serializable {
 	
 	private static final long serialVersionUID = 7831515870882940776L;
 	

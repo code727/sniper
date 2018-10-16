@@ -79,10 +79,4 @@ public class JdkSerializer extends AbstractSerializer {
 		}
 	}
 	
-	public static void main(String[] args) {
-		Integer i = null;
-		int j = 0;
-		System.out.println(i == j);
-	}
-
 }

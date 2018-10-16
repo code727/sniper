@@ -89,7 +89,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static MessageResponse successMessageResponse() {
-		return successMessageResponseByCode(Response.DEFAULT_SUCCESS_CODE);
+		return successMessageResponse(Response.DEFAULT_SUCCESS_CODE);
 	}
 	
 	/**
@@ -108,7 +108,7 @@ public class ResponseFactory {
 	 * @param code
 	 * @return
 	 */
-	public static MessageResponse successMessageResponseByCode(Integer code) {
+	public static MessageResponse successMessageResponse(Integer code) {
 		return successMessageResponse(code, MessageResponse.DEFAULT_SUCCESS_MESSAGE);
 	}
 	
@@ -129,7 +129,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static MessageResponse failedMessageResponse() {
-		return failedMessageResponseByCode(Response.DEFAULT_FAILED_CODE);
+		return failedMessageResponse(Response.DEFAULT_FAILED_CODE);
 	}
 	
 	/**
@@ -148,7 +148,7 @@ public class ResponseFactory {
 	 * @param code
 	 * @return
 	 */
-	public static MessageResponse failedMessageResponseByCode(Integer code) {
+	public static MessageResponse failedMessageResponse(Integer code) {
 		return failedMessageResponse(code, MessageResponse.DEFAULT_FAILED_MESSAGE);
 	}
 	
@@ -171,7 +171,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static MessageResponse exceptionMessageResponse() {
-		return exceptionMessageResponseByCode(Response.DEFAULT_EXCEPTION_CODE);
+		return exceptionMessageResponse(Response.DEFAULT_EXCEPTION_CODE);
 	}
 	
 	/**
@@ -190,7 +190,7 @@ public class ResponseFactory {
 	 * @param code
 	 * @return
 	 */
-	public static MessageResponse exceptionMessageResponseByCode(Integer code) {
+	public static MessageResponse exceptionMessageResponse(Integer code) {
 		return exceptionMessageResponse(code, MessageResponse.DEFAULT_EXCEPTION_MESSAGE);
 	}
 	
@@ -330,11 +330,20 @@ public class ResponseFactory {
 	/**
 	 * 创建具备默认成功状态码和信息的全量响应对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static <T> FullResponse<T> successFullResponse() {
+		return successFullResponse(null);
+	}
+	
+	/**
+	 * 创建具备默认成功状态码和信息的全量响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param data
 	 * @return
 	 */
 	public static <T> FullResponse<T> successFullResponse(T data) {
-		return successFullResponseByCode(Response.DEFAULT_SUCCESS_CODE, data);
+		return successFullResponse(Response.DEFAULT_SUCCESS_CODE, data);
 	}
 	
 	/**
@@ -344,7 +353,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static <T> FullResponse<T> successFullResponseByCode(Integer code) {
-		return successFullResponseByCode(code, null);
+		return successFullResponse(code, null);
 	}
 	
 	/**
@@ -354,7 +363,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static <T> FullResponse<T> successFullResponseByMessage(String message) {
-		return successFullResponseByMessage(message, null);
+		return successFullResponse(message, null);
 	}
 	
 	/**
@@ -364,7 +373,7 @@ public class ResponseFactory {
 	 * @param data
 	 * @return
 	 */
-	public static <T> FullResponse<T> successFullResponseByCode(Integer code, T data) {
+	public static <T> FullResponse<T> successFullResponse(Integer code, T data) {
 		return successFullResponse(code, MessageResponse.DEFAULT_SUCCESS_MESSAGE, data);
 	}
 	
@@ -375,7 +384,7 @@ public class ResponseFactory {
 	 * @param data
 	 * @return
 	 */
-	public static <T> FullResponse<T> successFullResponseByMessage(String message, T data) {
+	public static <T> FullResponse<T> successFullResponse(String message, T data) {
 		return successFullResponse(Response.DEFAULT_SUCCESS_CODE, message, data);
 	}
 	
@@ -389,6 +398,15 @@ public class ResponseFactory {
 	 */
 	public static <T> FullResponse<T> successFullResponse(Integer code, String message, T data) {
 		return new FullResponse<T>(code, message, data);
+	}
+	
+	/**
+	 * 创建具备默认失败状态码和信息的全量响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static <T> FullResponse<T> failedFullResponse() {
+		return failedFullResponse(null);
 	}
 	
 	/**
@@ -453,6 +471,15 @@ public class ResponseFactory {
 	 */
 	public static <T> FullResponse<T> failedFullResponse(Integer code, String message, T data) {
 		return new FullResponse<T>(code, message, data);
+	}
+	
+	/**
+	 * 创建具备默认异常状态码和信息的全量响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static <T> FullResponse<T> exceptionFullResponse() {
+		return exceptionFullResponse(null);
 	}
 	
 	/**

@@ -29,7 +29,7 @@ import org.sniper.commons.response.MessagingResponse;
  * @version 1.0
  * @param <T>
  */
-public class FullResponse<T> extends AbstractDataResponse<T> implements FullQuantizationResponse<String, T>, Serializable {
+public class FullResponse<T> extends AbstractDatamationResponse<T> implements FullQuantizationResponse<String, T>, Serializable {
 
 	private static final long serialVersionUID = 5105502275635899805L;
 	

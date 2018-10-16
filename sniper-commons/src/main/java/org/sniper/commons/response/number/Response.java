@@ -20,6 +20,7 @@ package org.sniper.commons.response.number;
 
 import java.io.Serializable;
 
+import org.sniper.commons.enums.status.ExecutionStatus;
 import org.sniper.commons.response.AbstractResponse;
 import org.sniper.commons.response.GenericResponse;
 import org.sniper.commons.util.ObjectUtils;
@@ -34,13 +35,13 @@ public class Response extends AbstractResponse<Integer> implements Serializable 
 	private static final long serialVersionUID = -6718497429123443765L;
 
 	/** 默认成功响应码 */
-	public static final int DEFAULT_SUCCESS_CODE = 1;
+	public static final int DEFAULT_SUCCESS_CODE = ExecutionStatus.SUCCESS.getKey();
 	
 	/** 默认失败响应码  */
-	public static final int DEFAULT_FAILED_CODE = 0;
+	public static final int DEFAULT_FAILED_CODE = ExecutionStatus.FAILED.getKey();
 	
 	/** 默认异常响应码  */
-	public static final int DEFAULT_EXCEPTION_CODE = -1;
+	public static final int DEFAULT_EXCEPTION_CODE = ExecutionStatus.EXCEPTION.getKey();
 		
 	public Response() {
 		this(DEFAULT_SUCCESS_CODE);

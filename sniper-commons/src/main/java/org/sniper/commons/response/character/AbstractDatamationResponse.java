@@ -21,22 +21,22 @@ package org.sniper.commons.response.character;
 import org.sniper.commons.response.DatamationResponse;
 
 /**
- * 数据响应抽象类
+ * 数据化响应抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractDataResponse<T> extends Response implements DatamationResponse<String, T> {
+public abstract class AbstractDatamationResponse<T> extends Response implements DatamationResponse<String, T> {
 	
 	private static final long serialVersionUID = 4108877402467845840L;
 	
 	/** 响应数据 */
 	private T data;
 			
-	protected AbstractDataResponse(DatamationResponse<String, T> response) {
+	protected AbstractDatamationResponse(DatamationResponse<String, T> response) {
 		this(response.getCode(), response.getData());
 	}
 		
-	protected AbstractDataResponse(String code, T data) {
+	protected AbstractDatamationResponse(String code, T data) {
 		super(code);
 		this.data = data;
 	}

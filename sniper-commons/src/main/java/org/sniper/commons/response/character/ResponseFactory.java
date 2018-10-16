@@ -330,6 +330,15 @@ public class ResponseFactory {
 	/**
 	 * 创建具备默认成功状态码和信息的全量响应对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static <T> FullResponse<T> successFullResponse() {
+		return successFullResponse(null);
+	}
+	
+	/**
+	 * 创建具备默认成功状态码和信息的全量响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param data
 	 * @return
 	 */
@@ -394,6 +403,15 @@ public class ResponseFactory {
 	/**
 	 * 创建具备默认失败状态码和信息的全量响应对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static <T> FullResponse<T> failedFullResponse() {
+		return failedFullResponse(null);
+	}
+	
+	/**
+	 * 创建具备默认失败状态码和信息的全量响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param data
 	 * @return
 	 */
@@ -453,6 +471,15 @@ public class ResponseFactory {
 	 */
 	public static <T> FullResponse<T> failedFullResponse(String code, String message, T data) {
 		return new FullResponse<T>(code, message, data);
+	}
+	
+	/**
+	 * 创建具备默认异常状态码和信息的全量响应对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static <T> FullResponse<T> exceptionFullResponse() {
+		return exceptionFullResponse(null);
 	}
 	
 	/**
