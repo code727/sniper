@@ -39,7 +39,15 @@ public class SequenceNode implements Serializable {
     private boolean useTwepoch;
     
     public SequenceNode() {
-    	this(0, 0, true);
+    	this(true);
+    }
+    
+    public SequenceNode(boolean useTwepoch) {
+    	this(0, 0, useTwepoch);
+    }
+    
+    public SequenceNode(long workerId, long dataCenterId) {
+    	this(workerId, dataCenterId, true);
     }
     
     public SequenceNode(long workerId, long dataCenterId, boolean useTwepoch) {

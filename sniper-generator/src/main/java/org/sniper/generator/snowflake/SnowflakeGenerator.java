@@ -18,6 +18,10 @@
 
 package org.sniper.generator.snowflake;
 
+import java.util.List;
+
+import org.sniper.commons.util.CollectionUtils;
+
 /**
  * 推特Snowflake序列生成器实现类，其结果为一个long型的数字。</p>
  * 其算法核心思想为：</p>
@@ -46,16 +50,30 @@ public class SnowflakeGenerator extends AbstractSnowflakeGenerator<Number> {
     public SnowflakeGenerator(SequenceNode sequenceNode) {
 		super(sequenceNode);
 		this.timeSequence = new TimeSequence();
-		this.sequenceGenerator = createSequenceGenerator(sequenceNode);
+		this.sequenceGenerator = this.useTwepoch ? new TwepochSequenceGenerator() : new UntwepochSequenceGenerator();
     }
     
-    private SequenceGenerator<Number> createSequenceGenerator(SequenceNode sequenceNode) {
-    	return sequenceNode.isUseTwepoch() ? new TwepochSequenceGenerator() : new UntwepochSequenceGenerator();
-    }
-
 	@Override
 	public synchronized Number generate() {
+		return doGenerate();
+	}
+
+	@Override
+	protected synchronized List<Number> doBatchGenerate(int count) {
+		List<Number> results = CollectionUtils.newArrayList(count);
+		for (int i = 0; i < count; i++) {
+			results.add(doGenerate());
+		}
 		
+		return results;
+	}
+	
+	/**
+	 * 执行生成操作
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	private Number doGenerate() {
 		long currentTimestamp = currentTimestamp();
 		long lastTimestamp = timeSequence.getLastTimestamp();
 		

@@ -32,7 +32,7 @@ import org.sniper.test.junit.BaseTestCase;
  */
 public abstract class GeneratorTest extends BaseTestCase {
 	
-	protected final int size = 100;
+	protected final int size = 1000000;
 	
 	protected boolean uniquenessTest = true;
 	

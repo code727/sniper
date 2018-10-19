@@ -19,6 +19,7 @@
 package org.sniper.generator.snowflake;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Map;
 
 import org.sniper.commons.util.AssertUtils;
@@ -47,41 +48,60 @@ public class ParameterizeSnowflakeGenerator extends AbstractSnowflakeGenerator<N
 	private final Map<Object, TimeSequence> timeSequences;
 
 	private final ParameterizeSequenceGenerator<Number> sequenceGenerator;
+	
+	/** 是否将参数作为最终结果的一部分 */
+	private final boolean parameterAsResult;
 
 	public ParameterizeSnowflakeGenerator() {
-		this((ParameterizeLock<Object>) null);
+		this(false);
 	}
-
-	public ParameterizeSnowflakeGenerator(ParameterizeSequenceNode sequenceNode) {
-		this(sequenceNode, null);
+	
+	public ParameterizeSnowflakeGenerator(SequenceNode sequenceNode) {
+		this(sequenceNode, false);
 	}
-
+	
 	public ParameterizeSnowflakeGenerator(ParameterizeLock<Object> lock) {
-		this(new ParameterizeSequenceNode(), lock);
+		this(lock, false);
 	}
 	
-	public ParameterizeSnowflakeGenerator(ParameterizeSequenceNode sequenceNode, ParameterizeLock<Object> lock) {
+	public ParameterizeSnowflakeGenerator(boolean parameterAsResult) {
+		this((ParameterizeLock<Object>) null, parameterAsResult);
+	}
+	
+	public ParameterizeSnowflakeGenerator(SequenceNode sequenceNode, ParameterizeLock<Object> lock) {
+		this(sequenceNode, lock, false);
+	}
+	
+	
+	public ParameterizeSnowflakeGenerator(SequenceNode sequenceNode, boolean parameterAsResult) {
+		this(sequenceNode, null, false);
+	}
+	
+	public ParameterizeSnowflakeGenerator(ParameterizeLock<Object> lock, boolean parameterAsResult) {
+		this(new SequenceNode(), lock, false);
+	}
+	
+	public ParameterizeSnowflakeGenerator(SequenceNode sequenceNode, ParameterizeLock<Object> lock, boolean parameterAsResult) {
 		super(sequenceNode);
-		
 		this.lock = (lock != null ? lock : new JdkParameterizeLock<Object>());
+		this.parameterAsResult = parameterAsResult;
 		this.timeSequences = MapUtils.newConcurrentHashMap();
-		this.sequenceGenerator = createParameterizeSequenceGenerator(sequenceNode);
+		this.sequenceGenerator = createParameterizeSequenceGenerator();
 	}
-	
+		
 	/**
 	 * 根据参数化序列节点创建对应的参数化序列生成器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param sequenceNode
 	 * @return
 	 */
-	private ParameterizeSequenceGenerator<Number> createParameterizeSequenceGenerator(ParameterizeSequenceNode sequenceNode) {
-		if (sequenceNode.isParameterAsResult()) {
-			return sequenceNode.isUseTwepoch()
-					? new DefaultParameterizeSequenceGenerator(new TwepochSequenceGenerator())
+	private ParameterizeSequenceGenerator<Number> createParameterizeSequenceGenerator() {
+		if (this.parameterAsResult) {
+			return this.useTwepoch ? new DefaultParameterizeSequenceGenerator(new TwepochSequenceGenerator())
 					: new DefaultParameterizeSequenceGenerator(new UntwepochSequenceGenerator());
 		}
 
-		return sequenceNode.isUseTwepoch() ? new TwepochUnparameterizeSequenceGenerator()
+		return this.useTwepoch ? new TwepochUnparameterizeSequenceGenerator()
 				: new UntwepochUnparameterizeSequenceGenerator();
 	}
 	
@@ -93,6 +113,18 @@ public class ParameterizeSnowflakeGenerator extends AbstractSnowflakeGenerator<N
 	@Override
 	public Number generate(Object parameter) {
 		return generateByParameter(parameter != null ? parameter : StringUtils.EMPTY);
+	}
+	
+
+	@Override
+	public List<Number> batchGenerate(Object parameter, int count) {
+		// TODO 批量生成
+		return null;
+	}
+
+	@Override
+	protected List<Number> doBatchGenerate(int count) {
+		return batchGenerate(null, count);
 	}
 
 	/**
@@ -241,9 +273,7 @@ public class ParameterizeSnowflakeGenerator extends AbstractSnowflakeGenerator<N
 	}
 	
 	public static void main(String[] args) {
-		ParameterizeSequenceNode sequenceNode = new ParameterizeSequenceNode();
-		sequenceNode.setParameterAsResult(false);
-		ParameterizeSnowflakeGenerator generator = new ParameterizeSnowflakeGenerator(sequenceNode);
+		ParameterizeSnowflakeGenerator generator = new ParameterizeSnowflakeGenerator();
 		for (int i = 0; i < 20; i++) {
 			System.out.println(generator.generate());
 		}

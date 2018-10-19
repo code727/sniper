@@ -18,6 +18,9 @@
 
 package org.sniper.generator.application;
 
+import java.util.List;
+
+import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.SecurityUtils;
 import org.sniper.generator.AbstractParameterizeGenerator;
@@ -78,5 +81,23 @@ public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, St
 		}  
 		return builder.toString();
 	}
-			
+
+	/**
+	 * 由于短链接生成器是针对参数生成的，因此针对于同一个参数批量生成的结果都是一样的，将生成count个相同的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param parameter
+	 * @param count
+	 * @return
+	 */
+	@Override
+	protected List<String> doBatchGenerate(Object parameter, int count) {
+		List<String> results = CollectionUtils.newArrayList(count);
+		String element = this.generate(parameter);
+		for (int i = 0; i < count; i++) {
+			results.add(element);
+		}
+		
+		return results;
+	}
+	
 }

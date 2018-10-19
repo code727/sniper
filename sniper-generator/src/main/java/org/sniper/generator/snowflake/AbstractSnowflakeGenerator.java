@@ -18,11 +18,9 @@
 
 package org.sniper.generator.snowflake;
 
-import java.math.BigInteger;
-
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.DateUtils;
-import org.sniper.commons.util.NumberUtils;
+import org.sniper.generator.AbstractGenerator;
 import org.sniper.generator.Generator;
 
 /**
@@ -30,7 +28,7 @@ import org.sniper.generator.Generator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractSnowflakeGenerator<T> implements Generator<T> {
+public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T> implements Generator<T> {
 	
 	/** 相对的开始时间截 */
     protected final long twepoch = DateUtils.stringToMillis("2017-01-01 00:00:00");
@@ -67,8 +65,11 @@ public abstract class AbstractSnowflakeGenerator<T> implements Generator<T> {
 
     /** 数据中心ID*/
     protected final long dataCenterId;
+    
+    /** 是否使用相对的开始时间截参数(twepoch)来生成最终结果 */
+    protected final boolean useTwepoch;
             
-    protected AbstractSnowflakeGenerator(SequenceNode sequenceNode) {
+    protected AbstractSnowflakeGenerator(SequenceNode sequenceNode) {    	
     	AssertUtils.assertNotNull(sequenceNode, "Sequence node must not be null");
     	
     	long workerId = sequenceNode.getWorkerId();
@@ -82,10 +83,11 @@ public abstract class AbstractSnowflakeGenerator<T> implements Generator<T> {
     	
         this.workerId = workerId;
         this.dataCenterId = dataCenterId;
+        this.useTwepoch = sequenceNode.isUseTwepoch();
     }
     
     /**
-	 * 生成下一步毫秒时间刻度
+	 * 生成下一个毫秒时间刻度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param lastTimestamp
 	 * @return
@@ -206,10 +208,13 @@ public abstract class AbstractSnowflakeGenerator<T> implements Generator<T> {
 		 */
 		@Override
 		public Number generate(long timestamp, AbstractSnowflakeGenerator<Number>.TimeSequence timeSequence) {
-			String value = new StringBuilder(20).append(timestamp).append(NumberUtils.format(timeSequence.getSequence(), 3))
-					.append(NumberUtils.format(workerId, 2)).append(NumberUtils.format(dataCenterId, 2)).toString();
+//			String value = new StringBuilder(20).append(timestamp).append(NumberUtils.format(timeSequence.getSequence(), 3))
+//					.append(NumberUtils.format(workerId, 2)).append(NumberUtils.format(dataCenterId, 2)).toString();
 					
-			return new BigInteger(value);
+//			return new BigInteger(value);
+			
+			return (timestamp << timestampLeftShift) | (dataCenterId << datacenterIdShift)
+					| (workerId << workerIdShift) | timeSequence.getSequence();
 		}
 	}
 	

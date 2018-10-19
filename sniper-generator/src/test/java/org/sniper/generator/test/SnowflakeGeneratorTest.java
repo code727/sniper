@@ -26,7 +26,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.generator.snowflake.SequenceNode;
 import org.sniper.generator.snowflake.SnowflakeGenerator;
 
 /**
@@ -39,12 +38,10 @@ public class SnowflakeGeneratorTest extends GeneratorTest {
 	
 	@Override
 	public void init() {
-		SequenceNode sequenceNode = new SequenceNode();
-		sequenceNode.setUseTwepoch(false);
-		this.generator = new SnowflakeGenerator(sequenceNode);
+		this.generator = new SnowflakeGenerator();
 		
-		uniquenessTest = true;
-		performanceTest = false;
+		uniquenessTest = false;
+		performanceTest = true;
 	}
 	
 	@Override

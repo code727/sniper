@@ -18,6 +18,11 @@
 
 package org.sniper.generator;
 
+import java.text.MessageFormat;
+import java.util.List;
+
+import org.sniper.commons.util.AssertUtils;
+
 /**
  * 参数化生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -38,8 +43,28 @@ public abstract class AbstractParameterizeGenerator<P, T> implements Parameteriz
 	
 	@Override
 	public T generate() {
-		// 根据设置的全局参数来生成
 		return generate(this.parameter);
 	}
+	
+	@Override
+	public List<T> batchGenerate(int count) {
+		return batchGenerate(this.parameter, count);
+	}
+	
+	@Override
+	public List<T> batchGenerate(P parameter, int count) {
+		AssertUtils.assertTrue(count > 0,MessageFormat.format(
+				"{0} batch generation count [{1}] must greater than 0", this.getClass().getName(), count));
+		return doBatchGenerate(parameter, count);
+	}
+
+	/**
+	 * 执行批量生成操作
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param parameter
+	 * @param count
+	 * @return
+	 */
+	protected abstract List<T> doBatchGenerate(P parameter, int count);
 	
 }

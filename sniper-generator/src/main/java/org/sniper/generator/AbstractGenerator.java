@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 the original author or authors.
+ * Copyright 2018 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,35 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-11-9
+ * Create Date : 2018-10-18
  */
 
 package org.sniper.generator;
 
+import java.text.MessageFormat;
 import java.util.List;
 
+import org.sniper.commons.util.AssertUtils;
+
 /**
- * 参数化生成器接口
+ * 无参数的生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface ParameterizeGenerator<P, T> extends Generator<T> {
+public abstract class AbstractGenerator<T> implements Generator<T> {
 	
-	/**
-	 * 根据指定的参数生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameter
-	 * @return
-	 */
-	public T generate(P parameter);
+	@Override
+	public List<T> batchGenerate(int count) {
+		AssertUtils.assertTrue(count > 0,MessageFormat.format(
+				"{0} batch generation count [{1}] must greater than 0", this.getClass().getName(), count));
+		return doBatchGenerate(count);
+	}
 	
-	/**
-	 * 根据参数批量生成指定数量的结果
+	/** 
+	 * 执行批量生成操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameter
 	 * @param count
-	 * @return
+	 * @return 
 	 */
-	public List<T> batchGenerate(P parameter, int count);
+	protected abstract List<T> doBatchGenerate(int count);
 
 }

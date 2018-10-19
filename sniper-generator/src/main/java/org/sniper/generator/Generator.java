@@ -18,6 +18,8 @@
 
 package org.sniper.generator;
 
+import java.util.List;
+
 /**
  * 无参数的生成器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -31,5 +33,13 @@ public interface Generator<T> {
 	 * @return
 	 */
 	public T generate();
+	
+	/**
+	 * 批量生成指定数量的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param count
+	 * @return
+	 */
+	public List<T> batchGenerate(int count);
 
 }
