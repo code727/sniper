@@ -202,7 +202,7 @@ public class ObjectUtils {
 	}
 	
 	/**
-	 * 获取对象的哈希值
+	 * 获取对象的哈希值，如果对象为null则结果等于0，等价于空字符串的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return

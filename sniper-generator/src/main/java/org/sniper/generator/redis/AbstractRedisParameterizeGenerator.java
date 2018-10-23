@@ -18,6 +18,8 @@
 
 package org.sniper.generator.redis;
 
+import java.util.List;
+
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.generator.AbstractParameterizeGenerator;
@@ -50,6 +52,12 @@ public abstract class AbstractRedisParameterizeGenerator<P> extends AbstractPara
 	@Override
 	public Long generate(P parameter) {
 		return generateByParameter(parameter != null ? parameter : (P) StringUtils.EMPTY);
+	}
+	
+	@Override
+	protected List<Long> doBatchGenerate(P parameter, int count) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**

@@ -35,19 +35,13 @@ import org.sniper.generator.AbstractParameterizeGenerator;
  * 5.此时L的二进制有效长度为30位，分为6段处理，每段的长度为5；</p>
  * 6.依次取出L的每一段（5位），进行位操作(&0x0000003D)得到一个<=61的数字，来当做index。
  *   再根据index去预定义的字符表里面去取一个字符， 最后能取出6个字符，此时就能用这6个字符拼接成一个字符串，作为短链接；</p>
- * 7.根据2重复3、4、5、6 ，总共能得到6个第六步生成的字符串，取其中任意一个字符串当作短链接都是可以的。
+ * 7.根据2重复3、4、5、6，总共能得到6个第六步生成的字符串，取其中任意一个字符串当作短链接都是可以的。
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, String> {
-
-	protected final char[] chars = new char[] { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' , 'h' ,  
-			'i' , 'j' , 'k' , 'l' , 'm' , 'n' , 'o' , 'p' , 'q' , 'r' , 's' , 't' ,  
-			'u' , 'v' , 'w' , 'x' , 'y' , 'z' , '0' , '1' , '2' , '3' , '4' , '5' ,  
-			'6' , '7' , '8' , '9' , 'A' , 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' ,  
-			'I' , 'J' , 'K' , 'L' , 'M' , 'N' , 'O' , 'P' , 'Q' , 'R' , 'S' , 'T' ,  
-			'U' , 'V' , 'W' , 'X' , 'Y' , 'Z'  
-	};  
+	
+	protected final char[] chars;
 	
 	public ShortLinkGenerator() {
 		this(false);
@@ -55,10 +49,17 @@ public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, St
 	
 	public ShortLinkGenerator(boolean allNumber) {
 		if (allNumber) {
+			chars = new char[62];
 			int length = chars.length;
 			for (int i = 0; i < length; i++) {
 				chars[i] = String.valueOf(i % 9).charAt(0);
 			}
+		} else {
+			chars = new char[] { 
+					'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+					'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', 
+					'8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 
+					'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 		}
 	}
 	

@@ -72,7 +72,6 @@ public class RedisSerialNumberGeneratorTest extends SpringGeneratorTest {
 		Set<String> totalSet = CollectionUtils.newLinkedHashSet();
 		for (int i = 0; i < thradSize; i++) {
 			Set<String> set = futures.get(i).get();
-			System.out.println("Set" + (i+1) + " size:" + set.size() + "," + set);
 			totalSet.addAll(set);
 		}
 		

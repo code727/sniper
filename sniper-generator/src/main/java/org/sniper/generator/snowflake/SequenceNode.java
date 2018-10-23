@@ -35,27 +35,15 @@ public class SequenceNode implements Serializable {
     /** 数据中心ID*/
     private long dataCenterId;
     
-    /** 是否使用相对的开始时间截参数(twepoch)来生成最终结果 */
-    private boolean useTwepoch;
-    
     public SequenceNode() {
-    	this(true);
-    }
-    
-    public SequenceNode(boolean useTwepoch) {
-    	this(0, 0, useTwepoch);
+    	this(0, 0);
     }
     
     public SequenceNode(long workerId, long dataCenterId) {
-    	this(workerId, dataCenterId, true);
-    }
-    
-    public SequenceNode(long workerId, long dataCenterId, boolean useTwepoch) {
     	this.workerId = workerId;
     	this.dataCenterId = dataCenterId;
-    	this.useTwepoch = useTwepoch;
     }
-
+    
 	public long getWorkerId() {
 		return workerId;
 	}
@@ -70,14 +58,6 @@ public class SequenceNode implements Serializable {
 
 	public void setDataCenterId(long dataCenterId) {
 		this.dataCenterId = dataCenterId;
-	}
-
-	public boolean isUseTwepoch() {
-		return useTwepoch;
-	}
-
-	public void setUseTwepoch(boolean useTwepoch) {
-		this.useTwepoch = useTwepoch;
 	}
 
 }

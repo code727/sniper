@@ -37,11 +37,9 @@ import org.sniper.commons.util.CollectionUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SnowflakeGenerator extends AbstractSnowflakeGenerator<Number> {
+public class SnowflakeGenerator extends AbstractSnowflakeGenerator<Long> {
 	
-	private final TimeSequence timeSequence;
-	
-	private final SequenceGenerator<Number> sequenceGenerator;
+	private final SequenceGenerator<Long> sequenceGenerator;
 	
     public SnowflakeGenerator() {
     	this(new SequenceNode());
@@ -49,57 +47,22 @@ public class SnowflakeGenerator extends AbstractSnowflakeGenerator<Number> {
 
     public SnowflakeGenerator(SequenceNode sequenceNode) {
 		super(sequenceNode);
-		this.timeSequence = new TimeSequence();
-		this.sequenceGenerator = this.useTwepoch ? new TwepochSequenceGenerator() : new UntwepochSequenceGenerator();
+		this.sequenceGenerator = new DefaultSequenceGenerator();
     }
     
 	@Override
-	public synchronized Number generate() {
-		return doGenerate();
+	public synchronized Long generate() {
+		return sequenceGenerator.generate(updateTimeSequence());
 	}
 
 	@Override
-	protected synchronized List<Number> doBatchGenerate(int count) {
-		List<Number> results = CollectionUtils.newArrayList(count);
+	protected synchronized List<Long> doBatchGenerate(int count) {
+		List<Long> results = CollectionUtils.newArrayList(count);
 		for (int i = 0; i < count; i++) {
-			results.add(doGenerate());
+			results.add(sequenceGenerator.generate(updateTimeSequence()));
 		}
 		
 		return results;
 	}
-	
-	/**
-	 * 执行生成操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	private Number doGenerate() {
-		long currentTimestamp = currentTimestamp();
-		long lastTimestamp = timeSequence.getLastTimestamp();
-		
-        //如果当前时间小于最近生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
-        if (currentTimestamp < lastTimestamp) {
-			throw new RuntimeException(String.format(
-					"Clock moved backwards.Refusing to generate id for %d milliseconds", lastTimestamp - currentTimestamp));
-        }
-
-        /* 如果是同一时间生成的，则进行毫秒内序列 */
-        if (lastTimestamp == currentTimestamp) {
-        	timeSequence.nextSequence();
-            if (timeSequence.getSequence() == 0) {
-				// 阻塞到下一个毫秒，获得新的时间戳
-            	currentTimestamp = nextMillis(lastTimestamp);
-            }
-        } else {
-			// 时间戳改变，毫秒内序列重置
-        	timeSequence.resetSequence();
-        }
-
-		// 更新最近生成的时间戳为当前时间戳
-        timeSequence.setLastTimestamp(currentTimestamp);
-
-        // 移位并通过"或"运算拼到一起组成64位的序列结果
-		return sequenceGenerator.generate(currentTimestamp, timeSequence);
-	}
-	
+					
 }

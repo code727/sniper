@@ -18,6 +18,7 @@
 
 package org.sniper.commons.util;
 
+import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -2039,7 +2040,7 @@ public class StringUtils {
 	 * @return
 	 */
 	private static String supplement(String str, int minLength, char c, boolean after) {
-		AssertUtils.assertTrue(minLength > 0, "Minimal length [" + minLength + "] must greater than 0");
+		AssertUtils.assertTrue(minLength > 0, MessageFormat.format("Minimal length [{0}] must greater than 0", minLength));
 		
 		int length = length(str);
 		if (length < minLength) {
@@ -2088,6 +2089,40 @@ public class StringUtils {
 	}
 	
 	/**
+	 * 提取字符串开头的count个子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param count
+	 * @return
+	 */
+	public static String substringBegin(String str, int count) {
+		return substring(str, 0, count);
+	}
+	
+	/**
+	 * 提取字符串结尾的count个子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param count
+	 * @return
+	 */
+	public static String substringEnd(String str, int count) {
+		int length = length(str);
+		return substring(str, length - count, length);
+	}
+	
+	/**
+	 * 提取从beginIndex开始的整个子串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @param beginIndex
+	 * @return
+	 */
+	public static String substring(String str, int beginIndex) {
+		return substring(str, beginIndex, length(str));
+	}
+	
+	/**
 	 * 提取beginIndex到endIndex之间的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
@@ -2100,8 +2135,8 @@ public class StringUtils {
 			return str;
 		
 		return beginIndex < endIndex
-				? str.substring(NumberUtils.minLimit(beginIndex, 0), NumberUtils.maxLimit(endIndex, str.length()))
-				: str.substring(NumberUtils.minLimit(endIndex, 0), NumberUtils.maxLimit(beginIndex, str.length()));
+				? str.substring(NumberUtils.minLimit(beginIndex, 0), NumberUtils.rangeLimit(endIndex, 0, str.length()))
+				: str.substring(NumberUtils.minLimit(endIndex, 0), NumberUtils.rangeLimit(beginIndex, 0, str.length()));
 	}
-	
+				
 }

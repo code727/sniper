@@ -16,7 +16,7 @@
  * Create Date : 2017-11-9
  */
 
-package org.sniper.generator.test;
+package org.sniper.generator.test.snowflake;
 
 import java.util.List;
 import java.util.Set;
@@ -26,7 +26,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.generator.snowflake.SequenceNode;
 import org.sniper.generator.snowflake.SnowflakeGenerator;
+import org.sniper.generator.test.GeneratorTest;
 
 /**
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -38,7 +40,7 @@ public class SnowflakeGeneratorTest extends GeneratorTest {
 	
 	@Override
 	public void init() {
-		this.generator = new SnowflakeGenerator();
+		this.generator = new SnowflakeGenerator(new SequenceNode());
 		
 		uniquenessTest = false;
 		performanceTest = true;
@@ -47,39 +49,38 @@ public class SnowflakeGeneratorTest extends GeneratorTest {
 	@Override
 	protected void doUniquenessTest() throws Exception {
 		ExecutorService executor = Executors.newCachedThreadPool();
-		Callable<Set<String>> task = new Callable<Set<String>>() {
+		
+		Callable<Set<Long>> task = new Callable<Set<Long>>() {
 
 			@Override
-			public Set<String> call() throws Exception {
-				Set<String> set = CollectionUtils.newLinkedHashSet(size);
-				for (int i = 0; i < size; i++) {
-					set.add(generator.generate().toString());
+			public Set<Long> call() throws Exception {
+				Set<Long> set = CollectionUtils.newLinkedHashSet(threadTaskExecuteSize);
+				for (int i = 0; i < threadTaskExecuteSize; i++) {
+					set.add(generator.generate());
 				}
 				return set;
 			}
 		};
 		
-		int thradSize = 100;
-		List<Future<Set<String>>> futures = CollectionUtils.newArrayList(thradSize);
-		for (int i = 0; i < thradSize; i++) {
+		List<Future<Set<Long>>> futures = CollectionUtils.newArrayList(thradPoolSize);
+		for (int i = 0; i < thradPoolSize; i++) {
 			futures.add(executor.submit(task));
 		}
 		
-		Set<String> totalSet = CollectionUtils.newLinkedHashSet();
-		for (int i = 0; i < thradSize; i++) {
-			Set<String> set = futures.get(i).get();
-			System.out.println("Set" + (i+1) + " size:" + set.size() + "," + set);
-			totalSet.addAll(set);
+		Set<Long> totalSet = CollectionUtils.newLinkedHashSet();
+		for (int i = 0; i < thradPoolSize; i++) {
+			totalSet.addAll(futures.get(i).get());
 		}
 		
+		assertTrue(totalSet.size() == (thradPoolSize * threadTaskExecuteSize));
 		System.out.println("Total set size:" + totalSet.size());
 	}
-
+	
 	@Override
 	protected void doPerformanceTest() {
 		for (int i = 0; i < size; i++) {
 			generator.generate();
 		}
 	}
-
+			
 }

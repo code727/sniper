@@ -32,7 +32,14 @@ import org.sniper.test.junit.BaseTestCase;
  */
 public abstract class GeneratorTest extends BaseTestCase {
 	
-	protected final int size = 1000000;
+	/** 线程池大小 */
+	protected int thradPoolSize = 10;
+	
+	/** 线程任务执行次数 */
+	protected final int threadTaskExecuteSize = 1000000;
+	
+	/** 单线程任务执行次数 */
+	protected final int size = 10000000;
 	
 	protected boolean uniquenessTest = true;
 	

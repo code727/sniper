@@ -42,7 +42,7 @@ public abstract class AbstractCompensableParameterizeGenerator<P, T> extends Abs
 	protected boolean parameterAsResult;
 	
 	/** 最终结果的最小长度 */
-	protected int minLength = 16;;
+	protected int minLength = 16;
 	
 	public DimensionGenerator<?> getDimensionGenerator() {
 		return dimensionGenerator;
