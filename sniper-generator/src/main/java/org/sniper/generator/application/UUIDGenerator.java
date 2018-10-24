@@ -32,24 +32,26 @@ import org.sniper.generator.AbstractGenerator;
 public class UUIDGenerator extends AbstractGenerator<String> {
 	
 	/** 是否无符号生成 */
-	private final boolean unsigned;
+	private boolean unsigned = true;
 	
 	/** 是否全大写生成 */
-	private final boolean upperCase;
+	private boolean upperCase;
 	
-	public UUIDGenerator() {
-		this(false);
+	public boolean isUnsigned() {
+		return unsigned;
 	}
-	
-	public UUIDGenerator(boolean upperCase) {
-		this(true, upperCase);
-	}
-	
-	public UUIDGenerator(boolean unsigned, boolean upperCase) {
+
+	public void setUnsigned(boolean unsigned) {
 		this.unsigned = unsigned;
+	}
+
+	public boolean isUpperCase() {
+		return upperCase;
+	}
+
+	public void setUpperCase(boolean upperCase) {
 		this.upperCase = upperCase;
 	}
-	
 	
 	@Override
 	public String generate() {

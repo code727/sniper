@@ -41,6 +41,8 @@ public class SnowflakeGenerator extends AbstractSnowflakeGenerator<Long> {
 	
 	private final SequenceGenerator<Long> sequenceGenerator;
 	
+	private final TimeSequence timeSequence;
+	
     public SnowflakeGenerator() {
     	this(new SequenceNode());
     }
@@ -48,18 +50,19 @@ public class SnowflakeGenerator extends AbstractSnowflakeGenerator<Long> {
     public SnowflakeGenerator(SequenceNode sequenceNode) {
 		super(sequenceNode);
 		this.sequenceGenerator = new DefaultSequenceGenerator();
+		this.timeSequence = new TimeSequence(sequenceMask);
     }
     
 	@Override
 	public synchronized Long generate() {
-		return sequenceGenerator.generate(updateTimeSequence());
+		return sequenceGenerator.generate(this.timeSequence.update());
 	}
 
 	@Override
 	protected synchronized List<Long> doBatchGenerate(int count) {
 		List<Long> results = CollectionUtils.newArrayList(count);
 		for (int i = 0; i < count; i++) {
-			results.add(sequenceGenerator.generate(updateTimeSequence()));
+			results.add(sequenceGenerator.generate(this.timeSequence.update()));
 		}
 		
 		return results;

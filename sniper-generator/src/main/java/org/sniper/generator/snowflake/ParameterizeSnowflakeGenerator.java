@@ -21,10 +21,9 @@ package org.sniper.generator.snowflake;
 import java.util.List;
 
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.commons.util.NumberUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.generator.ParameterizeGenerator;
-import org.sniper.generator.application.HashAbsoluteValueGenerator;
+import org.sniper.generator.application.ShortLinkGenerator;
 
 /**
  * 自定义生成器实现类，生成结果满足几点要求：</P>
@@ -40,6 +39,8 @@ public class ParameterizeSnowflakeGenerator extends AbstractSnowflakeGenerator<L
 	
 	private final SequenceGenerator<String> sequenceGenerator;
 		
+	private final TimeSequence timeSequence;
+	
 	private final ParameterizeGenerator<Object, ?> parameterGenerator;
 	
 	public ParameterizeSnowflakeGenerator() {
@@ -57,7 +58,8 @@ public class ParameterizeSnowflakeGenerator extends AbstractSnowflakeGenerator<L
 	public ParameterizeSnowflakeGenerator(SequenceNode sequenceNode, ParameterizeGenerator<Object, ?> parameterGenerator) {
 		super(sequenceNode);
 		this.sequenceGenerator = new CustomizeSequenceGenerator();
-		this.parameterGenerator = (parameterGenerator != null ? parameterGenerator : new HashAbsoluteValueGenerator());
+		this.timeSequence = new RadomTimeSequence(sequenceMask);
+		this.parameterGenerator = (parameterGenerator != null ? parameterGenerator : new ShortLinkGenerator(true));
 	}
 			
 	@Override
@@ -67,7 +69,7 @@ public class ParameterizeSnowflakeGenerator extends AbstractSnowflakeGenerator<L
 
 	@Override
 	public synchronized Long generate(Object parameter) {
-		return Long.valueOf(sequenceGenerator.generate(updateTimeSequence()) + generateByParameter(parameter));
+		return Long.valueOf(sequenceGenerator.generate(this.timeSequence.update()) + generateByParameter(parameter));
 	}
 
 	@Override
@@ -77,7 +79,7 @@ public class ParameterizeSnowflakeGenerator extends AbstractSnowflakeGenerator<L
 		List<Long> results = CollectionUtils.newArrayList(count);
 		String parameterValue = generateByParameter(parameter);
 		for (int i = 0; i < count; i++) {
-			results.add(Long.valueOf(sequenceGenerator.generate(updateTimeSequence()) + parameterValue));
+			results.add(Long.valueOf(sequenceGenerator.generate(this.timeSequence.update()) + parameterValue));
 		}
 		
 		return results;
@@ -98,19 +100,5 @@ public class ParameterizeSnowflakeGenerator extends AbstractSnowflakeGenerator<L
 		String generatedValue = StringUtils.substringEnd(parameterGenerator.generate(parameter).toString(), 4);
 		return StringUtils.beforeSupplement(generatedValue, 4, '0');
 	}
-	
-	/**
-	 * 
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
-	 * @version 1.0
-	 */
-	class CustomizeSequenceGenerator implements SequenceGenerator<String> {
-
-		@Override
-		public String generate(AbstractSnowflakeGenerator<?>.TimeSequence timeSequence) {
-			return String.valueOf(timeSequence.getLastTimestamp() - twepoch)
-					+ NumberUtils.format(timeSequence.getSequence(), 3);
-		}
-	}
-	
+				
 }

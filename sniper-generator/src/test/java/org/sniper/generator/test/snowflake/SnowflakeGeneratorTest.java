@@ -42,8 +42,8 @@ public class SnowflakeGeneratorTest extends GeneratorTest {
 	public void init() {
 		this.generator = new SnowflakeGenerator(new SequenceNode());
 		
-		uniquenessTest = false;
-		performanceTest = true;
+		uniquenessTest = true;
+		performanceTest = false;
 	}
 	
 	@Override
@@ -72,7 +72,7 @@ public class SnowflakeGeneratorTest extends GeneratorTest {
 			totalSet.addAll(futures.get(i).get());
 		}
 		
-		assertTrue(totalSet.size() == (thradPoolSize * threadTaskExecuteSize));
+		assertEquals(thradPoolSize * threadTaskExecuteSize, totalSet.size());
 		System.out.println("Total set size:" + totalSet.size());
 	}
 	

@@ -2044,7 +2044,7 @@ public class StringUtils {
 		
 		int length = length(str);
 		if (length < minLength) {
-			StringBuilder supplied = new StringBuilder();
+			StringBuffer supplied = new StringBuffer();
 			int offset = minLength - length;
 			for (int i = 0; i < offset; i++) {
 				supplied.append(c);

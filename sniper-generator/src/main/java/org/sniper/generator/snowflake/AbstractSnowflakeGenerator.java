@@ -20,6 +20,7 @@ package org.sniper.generator.snowflake;
 
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.DateUtils;
+import org.sniper.commons.util.NumberUtils;
 import org.sniper.generator.AbstractGenerator;
 import org.sniper.generator.Generator;
 
@@ -30,8 +31,8 @@ import org.sniper.generator.Generator;
  */
 public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T> implements Generator<T> {
 	
-	/** 相对的开始时间截 */
-	protected final long twepoch = DateUtils.stringToMillis("2018-01-01 00:00:00");
+	/** 相对的开始时间截，越接近当前时间，最终生成的数字结果越小 */
+	protected final long twepoch = DateUtils.stringToMillis("2018-10-01 00:00:00");
 	
     /** 机器id所占的位数 */
 	protected final long workerIdBits = 5L;
@@ -65,127 +66,23 @@ public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T>
 
     /** 数据中心ID*/
 	protected final long dataCenterId;
-    
-    /** 所使用的时间序列器 */
-    private final TimeSequence timeSequence;
-            
+                
     protected AbstractSnowflakeGenerator(SequenceNode sequenceNode) {    	
     	AssertUtils.assertNotNull(sequenceNode, "Sequence node must not be null");
-    	
+
     	long workerId = sequenceNode.getWorkerId();
     	long dataCenterId = sequenceNode.getDataCenterId();
-    	
+
     	AssertUtils.assertTrue(workerId >= 0 && workerId <= maxWorkerId,
-				String.format("Parameter 'workerId' must within interval [0-%d]", maxWorkerId));
-		
-		AssertUtils.assertTrue(dataCenterId >= 0 && dataCenterId <= maxDatacenterId,
-				String.format("Parameter 'dataCenterId' must within interval [0-%d]", maxDatacenterId));
-    	
-        this.workerId = workerId;
-        this.dataCenterId = dataCenterId;
-        this.timeSequence = new TimeSequence();
-    }
+    			String.format("Parameter 'workerId' must within interval [0-%d]", maxWorkerId));
 
-	/**
-     * 更新时间序列
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-     * @return
-     */
-    protected TimeSequence updateTimeSequence() {
-    	long currentTimestamp = currentTimestamp();
-		long lastTimestamp = this.timeSequence.getLastTimestamp();
-		
-        //如果当前时间小于最近生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
-        if (currentTimestamp < lastTimestamp) {
-			throw new RuntimeException(String.format(
-					"Clock moved backwards.Refusing to generate id for %d milliseconds", lastTimestamp - currentTimestamp));
-        }
+    	AssertUtils.assertTrue(dataCenterId >= 0 && dataCenterId <= maxDatacenterId,
+    			String.format("Parameter 'dataCenterId' must within interval [0-%d]", maxDatacenterId));
 
-        /* 如果是同一时间生成的，则进行毫秒内序列 */
-        if (lastTimestamp == currentTimestamp) {
-        	this.timeSequence.nextSequence();
-            if (this.timeSequence.getSequence() == 0) {
-				// 阻塞到下一个毫秒，获得新的时间戳
-            	currentTimestamp = nextMillis(lastTimestamp);
-            }
-        } else {
-			// 时间戳改变，毫秒内序列重置
-        	this.timeSequence.resetSequence();
-        }
-
-		// 更新最近生成的时间戳为当前时间戳
-        this.timeSequence.setLastTimestamp(currentTimestamp);
-        return this.timeSequence;
+    	this.workerId = workerId;
+    	this.dataCenterId = dataCenterId;
     }
     
-    /**
-	 * 生成下一个毫秒时间刻度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param lastTimestamp
-	 * @return
-	 */
-	private long nextMillis(long lastTimestamp) {
-        long timestamp = currentTimestamp();
-        while (timestamp <= lastTimestamp) {
-            timestamp = currentTimestamp();
-        }
-        return timestamp;
-    }
-
-	/**
-	 * 获取当前时间戳
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-    private long currentTimestamp() {
-        return System.currentTimeMillis();
-    }
-    
-    /**
-	 * 时间序列类
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
-	 * @version 1.0
-	 */
-	class TimeSequence {
-
-		/** 毫秒内序列(0~4095) */
-		private long sequence;
-
-		/** 最近生成的时间截 */
-		private long lastTimestamp = -1L;
-
-		/**
-		 * 生成时间戳内的下一序列
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-		 * @return
-		 */
-		private long nextSequence() {
-			return this.sequence = (this.sequence + 1) & sequenceMask;
-		}
-
-		/**
-		 * 重置时间戳内的序列计数
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-		 * @return
-		 */
-		private long resetSequence() {
-			return this.sequence = 0;
-		}
-
-		private void setLastTimestamp(long lastTimestamp) {
-			this.lastTimestamp = lastTimestamp;
-		}
-		
-		public long getSequence() {
-			return sequence;
-		}
-
-		public long getLastTimestamp() {
-			return lastTimestamp;
-		}
-		
-	}
-	
 	/**
 	 * 序列生成器接口
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -199,27 +96,50 @@ public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T>
 		 * @param timeSequence
 		 * @return 
 		 */
-		public T generate(AbstractSnowflakeGenerator<?>.TimeSequence timeSequence);
+		public T generate(TimeSequence timeSequence);
 	}
 	
 	/**
-	 * 有相对开始时间截参与的序列生成器实现类
+	 * 默认的Snowflake序列生成器实现类，其生成规则为：</P>
+	 * 1.得到"最近生成的时间截"与"相对的开始时间截"的时间差再左移(22位)；</P>
+	 * 2.根据左移结果再依次与数据中心ID左移(17位)结果、服务器ID左移(12位)结果、当前毫秒内的序列号进行逻辑"或"运算后得到一个64位的序列结果。</P>
+	 * 具体生成规则请参考<a>https://segmentfault.com/a/1190000011282426</a></P>
+	 * 此实现类生成的结果具备如下特点：</P>
+	 * 1)生成的数字是全局唯一的；</P>
+	 * 2)在单节点单线程环境中生成的数字是趋势递增的；</P>
+	 * 3)在单节点多线程环境中，由于共用的是同一时钟，因此当线程交替执行时，也能保证生成的数字是趋势递增的，即后执行的线程生成的数字一定比先执行的线程生成的数字大</P>
+	 * 4)在其余环境(多节点单线程/多节点多线程)中，由于很难保证有一个全局同步的时钟，因此不能保证先后生成的数字是趋势递增的</P>
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @version 1.0
 	 */
 	class DefaultSequenceGenerator implements SequenceGenerator<Long> {
 
 		/**
-		 * 生成通过移位并进行"或"运算后拼到一起组成的64位序列结果
+		 * 通过移位并进行"或"运算后拼到一起组成的64位序列结果
 		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 		 * @param timeSequence
 		 * @return 
 		 */
 		@Override
-		public Long generate(AbstractSnowflakeGenerator<?>.TimeSequence timeSequence) {
-			return ((timeSequence.getLastTimestamp() - twepoch) << timestampLeftShift) | (dataCenterId << datacenterIdShift)
-					| (workerId << workerIdShift) | timeSequence.getSequence();
+		public Long generate(TimeSequence timeSequence) {
+			return ((timeSequence.getLastTimestamp() - twepoch) << timestampLeftShift)
+					| (dataCenterId << datacenterIdShift) | (workerId << workerIdShift) | timeSequence.getSequence();
 		}
 	}
 	
+	/**
+	 * 自定义的Snowflake序列生成器实现类，其生成规则为：</P>
+	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @version 1.0
+	 */
+	class CustomizeSequenceGenerator implements SequenceGenerator<String> {
+		
+		@Override
+		public String generate(TimeSequence timeSequence) {
+			System.out.println(timeSequence.getSequence());
+			return String.valueOf(timeSequence.getLastTimestamp() - twepoch)
+					+ NumberUtils.format(timeSequence.getSequence(), 4);
+		}
+	}
+		
 }
