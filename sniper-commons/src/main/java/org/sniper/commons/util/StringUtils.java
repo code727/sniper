@@ -2052,7 +2052,11 @@ public class StringUtils {
 			return after ? safeString(str) + supplied : supplied + safeString(str);
 		}
 		
-		return safeString(str);
+		return str;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(afterSupplement(null, 5, '0'));
 	}
 	
 	/**

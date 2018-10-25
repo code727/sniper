@@ -25,7 +25,7 @@ import org.sniper.commons.util.NumberUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-class RadomTimeSequence extends TimeSequence {
+public class RadomTimeSequence extends TimeSequence {
 
 	public RadomTimeSequence(long sequenceMask) {
 		super(sequenceMask);

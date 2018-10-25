@@ -26,8 +26,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.generator.snowflake.ParameterizeSnowflakeGenerator;
 import org.sniper.generator.snowflake.SequenceNode;
+import org.sniper.generator.snowflake.SnowflakeParameterizeGenerator;
 import org.sniper.generator.test.GeneratorTest;
 
 /**
@@ -35,13 +35,13 @@ import org.sniper.generator.test.GeneratorTest;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ParameterizeSnowflakeGeneratorTest extends GeneratorTest {
+public class SnowflakeParameterizeGeneratorTest extends GeneratorTest {
 	
-	private ParameterizeSnowflakeGenerator generator ;
+	private SnowflakeParameterizeGenerator generator ;
 	
 	@Override
 	public void init() {
-		this.generator = new ParameterizeSnowflakeGenerator(new SequenceNode());
+		this.generator = new SnowflakeParameterizeGenerator(new SequenceNode());
 		
 		uniquenessTest = true;
 		performanceTest = false;
@@ -77,21 +77,20 @@ public class ParameterizeSnowflakeGeneratorTest extends GeneratorTest {
 		System.out.println("Total set size:" + totalSet.size());
 	}
 	
-	
 	@Override
 	protected void doPerformanceTest() {
 		for (int i = 0; i < size; i++) {
-			System.out.println(generator.generate());;
+			System.out.println(generator.generate());
 		}
 	}
 	
 	public static void main(String[] args) {
-		ParameterizeSnowflakeGenerator generator = new ParameterizeSnowflakeGenerator();
-//		System.out.println(generator.generate());
-//		System.out.println(generator.generate());
-		System.out.println(generator.batchGenerate(5));
+		SnowflakeParameterizeGenerator generator = new SnowflakeParameterizeGenerator();
 		
-//		System.out.println(String.format("%03d", 12));
+		Long result = generator.generate();
+		System.out.println(result = generator.generate(1));
+		System.out.println(result = generator.generate());
+		System.out.println(result.toString().length());
 	}
 
 }

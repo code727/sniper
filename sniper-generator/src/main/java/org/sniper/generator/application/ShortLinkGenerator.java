@@ -76,7 +76,7 @@ public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, St
 			/* 将剩下的30位分6段处理，每段5位 */
 			for (int j = 0; j < 6; j++) {  
 				builder.append(chars[(int) (sub16 & 0x0000003D)]);
-				// 左移5位
+				// 右移5位
 				sub16 = sub16 >> 5; 
 			}  
 		}  

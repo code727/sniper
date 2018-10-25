@@ -18,10 +18,15 @@
 
 package org.sniper.generator.test;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.commons.util.StringUtils;
 import org.sniper.generator.ParameterizeGenerator;
 import org.sniper.generator.application.ShortLinkGenerator;
 
@@ -31,77 +36,61 @@ import org.sniper.generator.application.ShortLinkGenerator;
  */
 public class ShortLinkGeneratorTest extends GeneratorTest {
 	
-	private ParameterizeGenerator<Object, String> parameterizeGenerator = new ShortLinkGenerator(true);
+	private ParameterizeGenerator<Object, String> generator = new ShortLinkGenerator(true);
 	
-	private long parameter = 1L;
-
 	@Override
 	public void init() {
-		uniquenessTest = true;
-		performanceTest = false;
+		uniquenessTest = false;
+		performanceTest = true;
 	}
 	
 	@Override
 	protected void doUniquenessTest() throws Exception {
+		ExecutorService executor = Executors.newCachedThreadPool();
 		
-		Set<String> set = CollectionUtils.newLinkedHashSet();
-		for (int i = 0; i < size; i++) {
-			set.add(parameterizeGenerator.generate(i));
+		Callable<Set<String>> task = new Callable<Set<String>>() {
+
+			@Override
+			public Set<String> call() throws Exception {
+				Set<String> set = CollectionUtils.newLinkedHashSet(threadTaskExecuteSize);
+				for (int i = 0; i < threadTaskExecuteSize; i++) {
+					set.add(generator.generate(StringUtils.UUID()));
+				}
+				return set;
+			}
+		};
+		
+		List<Future<Set<String>>> futures = CollectionUtils.newArrayList(thradPoolSize);
+		for (int i = 0; i < thradPoolSize; i++) {
+			futures.add(executor.submit(task));
 		}
 		
-//		assertTrue(set.size() == size);
-		System.out.println(set.size());
+		Set<String> totalSet = CollectionUtils.newLinkedHashSet();
+		for (int i = 0; i < thradPoolSize; i++) {
+			totalSet.addAll(futures.get(i).get());
+		}
 		
-//		ExecutorService executor = Executors.newCachedThreadPool();
-//		
-//		Future<Set<String>> f1 = executor.submit(new Task());
-//		Future<Set<String>> f2 = executor.submit(new Task(size));
-//
-//		Set<String> set1 = f1.get();
-//		Set<String> set2 = f2.get();
-//		Set<String> set3 = CollectionUtils.newLinkedHashSet();
-//		set3.addAll(set1);
-//		set3.addAll(set2);
-//		
-//		int size1 = set1.size();
-//		int size2 = set2.size();
-//		int size3 = set3.size();
-//		
-//		assertTrue(size1 == size);
-//		assertTrue(size2 == size);
-//		assertTrue(size3 == (size * 2));
-//
-//		System.out.println("set1 size:" + size1);
-//		System.out.println("set2 size:" + size2);
-//		System.out.println("set3 size:" + size3);
+		assertEquals(thradPoolSize * threadTaskExecuteSize, totalSet.size());
+		System.out.println("Total set size:" + totalSet.size());
 	}
 
 	@Override
 	protected void doPerformanceTest() {
 		for (int i = 0; i < size; i++) {
-			parameterizeGenerator.generate(parameter + i);
+			generator.generate(i + 1);
 		}
 	}
 	
-	class Task implements Callable<Set<String>> {
+	public static void main(String[] args) {
+		ShortLinkGenerator generator1 = new ShortLinkGenerator(false);
+		ShortLinkGenerator generator2 = new ShortLinkGenerator(true);
 		
-		private int start;
-		
-		public Task() {}
-		
-		public Task(int start) {
-			this.start = start;
-		}
-
-		@Override
-		public Set<String> call() throws Exception {
-			Set<String> set = CollectionUtils.newLinkedHashSet(size);
-			int end = start + size;
-			for (int i = start; i < end; i++) {
-				set.add(parameterizeGenerator.generate(parameter + i).toString());
-			}
-			return set;
-		}
+		String result;
+		System.out.println(result = generator1.generate());
+		System.out.println(result = generator2.generate(1));
+		System.out.println(result = generator2.generate(2));
+		System.out.println(result.toString().length());
 	}
+	
 	
 }

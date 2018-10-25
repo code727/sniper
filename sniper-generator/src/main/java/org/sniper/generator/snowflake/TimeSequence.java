@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2018年10月24日
+ * Create Date : 2018-10-24
  */
 
 package org.sniper.generator.snowflake;
@@ -23,7 +23,7 @@ package org.sniper.generator.snowflake;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-class TimeSequence {
+public class TimeSequence {
 	
 	/** 序列掩码 */
 	private final long sequenceMask;

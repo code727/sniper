@@ -82,5 +82,14 @@ public class SnowflakeGeneratorTest extends GeneratorTest {
 			generator.generate();
 		}
 	}
+	
+	public static void main(String[] args) {
+		SnowflakeGenerator generator = new SnowflakeGenerator();
+		
+		Long result;
+		System.out.println(result  = generator.generate());
+		System.out.println(result  = generator.generate());
+		System.out.println(result.toString().length());
+	}
 			
 }
