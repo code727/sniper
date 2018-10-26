@@ -29,6 +29,7 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import org.sniper.commons.enums.astrology.Horoscope;
+import org.sniper.commons.enums.date.DatePattern;
 
 /**
  * 日期时间工具类
@@ -37,18 +38,9 @@ import org.sniper.commons.enums.astrology.Horoscope;
  */
 public class DateUtils {
 	
-	/** 默认的年格式 */
-	public static final String DEFAULT_YEAR_FORMAT = "yyyy";
-	
-	/** 默认的日期格式 */
-	public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
-	
 	/** 默认的日期时间格式 */
-	public static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-	
-	/** 默认的日期时间(带毫秒)格式 */
-	public static final String DEFAULT_DATETIME_PLUS_FORMAT = "yyyy-MM-dd HH:mm:ss:SSS";
-	
+//	public static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+		
 	/** 格林尼治日期时间格式组 */
 	public static final String[] GMT_DATETIME_FORMATS = new String[] {
 			"EEE, dd MMM yyyy HH:mm:ss zzz",
@@ -90,7 +82,7 @@ public class DateUtils {
 	 */
 	public static SimpleDateFormat getDateFormat(String pattern) {
 		if (StringUtils.isBlank(pattern)) {
-			pattern = DEFAULT_DATETIME_FORMAT;
+			pattern = DatePattern.DATETIME.getDefaultFormat();
 		}
 		
 		SimpleDateFormat dateFormat = DATE_FORMATES.get(pattern);
@@ -170,7 +162,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Date stringToDate(String dateString){
-		return stringToDate(dateString, DEFAULT_DATETIME_FORMAT);
+		return stringToDate(dateString, DatePattern.DATETIME.getDefaultFormat());
 	}
 	
 	/**
@@ -195,7 +187,7 @@ public class DateUtils {
 	 * @return 
 	 */
 	public static String dateToString(Date date) {
-		return dateToString(date, DEFAULT_DATETIME_FORMAT);
+		return dateToString(date, DatePattern.DATETIME.getDefaultFormat());
 	}
 	
 	/**
@@ -220,7 +212,7 @@ public class DateUtils {
 	 * @return 
 	 */
 	public static String timeToString(long time) {
-		return timeToString(time, DEFAULT_DATETIME_FORMAT);
+		return timeToString(time, DatePattern.DATETIME.getDefaultFormat());
 	}
 	
 	/**
@@ -233,7 +225,8 @@ public class DateUtils {
 	public static String timeToString(long time, String pattern) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(time); 
-		return dateToString(calendar.getTime(), StringUtils.isNotBlank(pattern) ? pattern : DEFAULT_DATETIME_FORMAT);
+		return dateToString(calendar.getTime(), StringUtils.isNotBlank(pattern) 
+				? pattern : DatePattern.DATETIME.getDefaultFormat());
 	}
 	
 	/**
@@ -317,7 +310,7 @@ public class DateUtils {
 	 * @return 
 	 */
 	public static long stringToMillis(String dateString) {
-		return stringToMillis(dateString, DEFAULT_DATETIME_FORMAT);
+		return stringToMillis(dateString, DatePattern.DATETIME.getDefaultFormat());
 	}
 	
 	/**
@@ -339,7 +332,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static long stringToUnixTimestamp(String dateString) {
-		return stringToUnixTimestamp(dateString, DEFAULT_DATETIME_FORMAT);
+		return stringToUnixTimestamp(dateString, DatePattern.DATETIME.getDefaultFormat());
 	}
 	
 	/**

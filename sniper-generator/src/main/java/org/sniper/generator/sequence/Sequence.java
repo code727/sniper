@@ -16,17 +16,17 @@
  * Create Date : 2017年11月13日
  */
 
-package org.sniper.generator.dimension;
+package org.sniper.generator.sequence;
 
 /**
- * 维度生成器接口
+ * 序列接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface DimensionGenerator<T> {
+public interface Sequence<T> {
 	
 	/**
-	 * 创建维度
+	 * 创建序列
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

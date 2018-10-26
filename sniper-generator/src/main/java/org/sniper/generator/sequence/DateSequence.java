@@ -16,63 +16,45 @@
  * Create Date : 2017-11-13
  */
 
-package org.sniper.generator.dimension;
+package org.sniper.generator.sequence;
 
-import java.text.MessageFormat;
 import java.util.Date;
-import java.util.Map;
 
+import org.sniper.commons.enums.date.DatePattern;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.DateUtils;
-import org.sniper.commons.util.MapUtils;
 
 /**
- * 日期维度生成器实现类
+ * 日期时间序列实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DateDimensionGenerator implements DimensionGenerator<String> {
-	
-	/** 时间维度与格式的映射关系 */
-	private static final Map<Integer, String> patterns;
+public class DateSequence implements Sequence<String> {
 	
 	private final String pattern;
-	
-	static {
-		patterns = MapUtils.newHashMap();
 		
-		/* 年 */
-		patterns.put(0, "yyyy");
-		/* 月 */
-		patterns.put(1, "yyyyMM");
-		/* 日 */
-		patterns.put(2, "yyyyMMdd");
-		
-		/* 时 */
-		patterns.put(3, "yyyyMMddHH");
-		/* 分 */
-		patterns.put(4, "yyyyMMddHHmm");
-		/* 秒 */
-		patterns.put(5, "yyyyMMddHHmmss");
-		/* 毫秒 */
-		patterns.put(6, "yyyyMMddHHmmssSSS");
-	}
-	
-	public DateDimensionGenerator() {
+	public DateSequence() {
 		// 默认以"日"的维度
-		this(2); 
+		this(DatePattern.DAY); 
 	}
 	
-	public DateDimensionGenerator(int timeDimension) {
-		String pattern = patterns.get(timeDimension);
-		AssertUtils.assertNotNull(pattern, MessageFormat.format(
-				"Invalid time dimension \"{0}\",must in interval[{1},{2}]", timeDimension, 0, patterns.size() - 1));
-		this.pattern = pattern;
+	public DateSequence(DatePattern datePattern) {
+		AssertUtils.assertNotNull(datePattern, "Date pattern must not be null");
+		this.pattern = datePattern.getSequenceFormat();
 	}
 
 	@Override
 	public String create() {
 		return DateUtils.dateToString(new Date(), this.pattern);
+	}
+	
+	public Long toLong() {
+		return Long.valueOf(this.create());
+	}
+	
+	public static void main(String[] args) {
+		DateSequence dateSequence = new DateSequence();
+		System.out.println(dateSequence.create());
 	}
 	
 }

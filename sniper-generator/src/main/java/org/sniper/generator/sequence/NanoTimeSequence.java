@@ -16,14 +16,14 @@
  * Create Date : 2017-11-13
  */
 
-package org.sniper.generator.dimension;
+package org.sniper.generator.sequence;
 
 /**
- * 纳秒维度生成器实现类
+ * 纳秒序列实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class NanoTimeDimensionGenerator implements DimensionGenerator<Long> {
+public class NanoTimeSequence implements Sequence<Long> {
 
 	@Override
 	public Long create() {
