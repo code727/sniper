@@ -16,7 +16,7 @@
  * Create Date : 2018-6-29
  */
 
-package org.sniper.generator.snowflake;
+package org.sniper.generator.sequence;
 
 import java.io.Serializable;
 

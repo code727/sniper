@@ -32,14 +32,16 @@ import org.sniper.generator.AbstractParameterizeGenerator;
 public class HashAbsoluteValueGenerator extends AbstractParameterizeGenerator<Object, Integer> {
 
 	@Override
-	public Integer generate(Object parameter) {
+	public Integer generateByParameter(Object parameter) {
 		return Math.abs(ObjectUtils.hashCode(parameter));
 	}
 
 	@Override
-	protected List<Integer> doBatchGenerate(Object parameter, int count) {
+	public List<Integer> batchGenerateByParameter(Object parameter, int count) {
+		checkBatchCount(count);
+		
 		List<Integer> results = CollectionUtils.newArrayList(count);
-		Integer element = this.generate(parameter);
+		Integer element = this.generateByParameter(parameter);
 		for (int i = 0; i < count; i++) {
 			results.add(element);
 		}

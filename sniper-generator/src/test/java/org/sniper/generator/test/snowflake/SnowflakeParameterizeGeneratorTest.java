@@ -26,7 +26,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.generator.snowflake.SequenceNode;
+import org.sniper.generator.sequence.SequenceNode;
 import org.sniper.generator.snowflake.SnowflakeParameterizeGenerator;
 import org.sniper.generator.test.GeneratorTest;
 
@@ -37,14 +37,14 @@ import org.sniper.generator.test.GeneratorTest;
  */
 public class SnowflakeParameterizeGeneratorTest extends GeneratorTest {
 	
-	private SnowflakeParameterizeGenerator generator ;
+	private SnowflakeParameterizeGenerator generator;
 	
 	@Override
 	public void init() {
 		this.generator = new SnowflakeParameterizeGenerator(new SequenceNode());
 		
-		uniquenessTest = true;
-		performanceTest = false;
+		uniquenessTest = false;
+		performanceTest = true;
 	}
 
 	@Override
@@ -88,7 +88,8 @@ public class SnowflakeParameterizeGeneratorTest extends GeneratorTest {
 		SnowflakeParameterizeGenerator generator = new SnowflakeParameterizeGenerator();
 		
 		Long result = generator.generate();
-		System.out.println(result = generator.generate(1));
+		System.out.println(result = generator.generateByParameter(1));
+		System.out.println(result = generator.generate());
 		System.out.println(result = generator.generate());
 		System.out.println(result.toString().length());
 	}

@@ -25,37 +25,16 @@ import java.util.List;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractParameterizeGenerator<P, T> extends AbstractGenerator<T>
-		implements ParameterizeGenerator<P, T> {
+public abstract class AbstractParameterizeGenerator<P, T> extends GeneratorSupport implements ParameterizeGenerator<P, T> {
 		
 	@Override
 	public T generate() {
-		return generate(null);
+		return generateByParameter(null);
 	}
 	
 	@Override
 	public List<T> batchGenerate(int count) {
-		return batchGenerate(null, count);
+		return batchGenerateByParameter(null, count);
 	}
-	
-	@Override
-	public List<T> batchGenerate(P parameter, int count) {
-		checkBatchCount(count);
-		return doBatchGenerate(parameter, count);
-	}
-	
-	@Override
-	protected List<T> doBatchGenerate(int count) {
-		return doBatchGenerate(null, count);
-	}
-	
-	/**
-	 * 执行批量生成操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param parameter
-	 * @param count
-	 * @return
-	 */
-	protected abstract List<T> doBatchGenerate(P parameter, int count);
-	
+		
 }

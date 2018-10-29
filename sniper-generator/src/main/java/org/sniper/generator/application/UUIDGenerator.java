@@ -22,14 +22,15 @@ import java.util.List;
 
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.generator.AbstractGenerator;
+import org.sniper.generator.Generator;
+import org.sniper.generator.GeneratorSupport;
 
 /**
  * UUID生成器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class UUIDGenerator extends AbstractGenerator<String> {
+public class UUIDGenerator extends GeneratorSupport implements Generator<String> {
 	
 	/** 是否无符号生成 */
 	private boolean unsigned = true;
@@ -59,7 +60,9 @@ public class UUIDGenerator extends AbstractGenerator<String> {
 	}
 	
 	@Override
-	protected List<String> doBatchGenerate(int count) {
+	public List<String> batchGenerate(int count) {
+		checkBatchCount(count);
+		
 		List<String> results = CollectionUtils.newArrayList(count);
 		if (unsigned) {
 			if (upperCase) {

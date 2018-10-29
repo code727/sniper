@@ -33,7 +33,7 @@ public interface ParameterizeGenerator<P, T> extends Generator<T> {
 	 * @param parameter
 	 * @return
 	 */
-	public T generate(P parameter);
+	public T generateByParameter(P parameter);
 	
 	/**
 	 * 根据参数批量生成指定数量的结果
@@ -42,6 +42,6 @@ public interface ParameterizeGenerator<P, T> extends Generator<T> {
 	 * @param count
 	 * @return
 	 */
-	public List<T> batchGenerate(P parameter, int count);
+	public List<T> batchGenerateByParameter(P parameter, int count);
 
 }

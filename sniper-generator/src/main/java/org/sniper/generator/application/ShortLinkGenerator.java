@@ -64,7 +64,7 @@ public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, St
 	}
 	
 	@Override
-	public String generate(Object parameter) {
+	public String generateByParameter(Object parameter) {
 		String md5 = SecurityUtils.md5(ObjectUtils.toSafeString(parameter));
 		
 		StringBuilder builder = new StringBuilder();
@@ -91,14 +91,16 @@ public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, St
 	 * @return
 	 */
 	@Override
-	protected List<String> doBatchGenerate(Object parameter, int count) {
+	public List<String> batchGenerateByParameter(Object parameter, int count) {
+		checkBatchCount(count);
+		
 		List<String> results = CollectionUtils.newArrayList(count);
-		String element = this.generate(parameter);
+		String element = this.generateByParameter(parameter);
 		for (int i = 0; i < count; i++) {
 			results.add(element);
 		}
 		
 		return results;
 	}
-	
+		
 }

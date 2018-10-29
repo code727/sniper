@@ -23,10 +23,10 @@ package org.sniper.generator.sequence;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class NanoTimeSequence implements Sequence<Long> {
+public class NanoTimeSequence implements DimensionSequence<Long> {
 
 	@Override
-	public Long create() {
+	public Long update() {
 		return System.nanoTime();
 	}
 	

@@ -16,24 +16,28 @@
  * Create Date : 2018-10-24
  */
 
-package org.sniper.generator.snowflake;
+package org.sniper.generator.sequence;
 
 import org.sniper.commons.util.NumberUtils;
 
 /**
- * 随机时间序列实现类
+ * 时间戳内随机序列实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RadomTimeSequence extends TimeSequence {
+public class TimestampInternalRadomSequence extends TimestampInternalSequence {
+	
+	/** 序列随机种子*/
+	private final long sequenceRadomSeed;
 
-	public RadomTimeSequence(long sequenceMask) {
+	public TimestampInternalRadomSequence(long sequenceMask) {
 		super(sequenceMask);
+		this.sequenceRadomSeed = ++sequenceMask;
 	}
 	
 	@Override
-	public long resetSequence() {
-		return this.sequence = NumberUtils.randomIn(4096);
+	protected long resetSequence() {
+		return this.sequence = NumberUtils.randomIn(this.sequenceRadomSeed);
 	}
 
 }

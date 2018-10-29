@@ -16,17 +16,17 @@
  * Create Date : 2017-11-13
  */
 
-package org.sniper.generator.dimension;
+package org.sniper.generator.sequence;
 
 /**
  * 时间戳维度生成器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class TimeStampDimensionGenerator implements DimensionGenerator<Long> {
+public class TimestampSequence implements DimensionSequence<Long> {
 
 	@Override
-	public Long create() {
+	public Long update() {
 		return System.currentTimeMillis();
 	}
 

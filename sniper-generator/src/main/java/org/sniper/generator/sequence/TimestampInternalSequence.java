@@ -16,26 +16,30 @@
  * Create Date : 2018-10-24
  */
 
-package org.sniper.generator.snowflake;
+package org.sniper.generator.sequence;
 
 /**
- * 时间序列实现类
+ * 时间戳内序列实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class TimeSequence {
+public class TimestampInternalSequence implements DimensionSequence<TimestampInternalSequence> {
 	
 	/** 序列掩码 */
 	private final long sequenceMask;
 	
-	/** 毫秒内序列，[0,4095]区间内 */
+	/** 时间戳序列 */
+	private final TimestampSequence timestampSequence;
+	
+	/** 毫秒内序列，[0,sequenceMask]区间内 */
 	protected long sequence;
 	
 	/** 最近生成的时间截 */
 	private long lastTimestamp = -1L;
 	
-	public TimeSequence(long sequenceMask) {
+	public TimestampInternalSequence(long sequenceMask) {
 		this.sequenceMask = sequenceMask;
+		this.timestampSequence = new TimestampSequence();
 	}
 	
 	/**
@@ -43,13 +47,13 @@ public class TimeSequence {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public TimeSequence update() {
-		long currentTimestamp = currentTimestamp();
+	public TimestampInternalSequence update() {
+		long currentTimestamp = this.timestampSequence.update();
 		
         //如果当前时间小于最近生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
         if (currentTimestamp < this.lastTimestamp) {
-			throw new RuntimeException(String.format(
-					"Clock moved backwards.Refusing to generate id for %d milliseconds", this.lastTimestamp - currentTimestamp));
+			throw new RuntimeException(String.format("Clock moved backwards.Refusing to generate id for %d milliseconds", 
+					this.lastTimestamp - currentTimestamp));
         }
 
         /* 如果是同一时间生成的，则进行毫秒内序列 */
@@ -67,6 +71,14 @@ public class TimeSequence {
 		// 更新最近生成的时间戳为当前时间戳
         this.setLastTimestamp(currentTimestamp);
         return this;
+	}
+	
+	public long getSequence() {
+		return sequence;
+	}
+	
+	public long getLastTimestamp() {
+		return lastTimestamp;
 	}
 	
 	/**
@@ -87,18 +99,10 @@ public class TimeSequence {
 		return this.sequence = 0;
 	}
 	
-	public long getSequence() {
-		return sequence;
-	}
-	
 	protected void setLastTimestamp(long lastTimestamp) {
 		this.lastTimestamp = lastTimestamp;
 	}
 
-	public long getLastTimestamp() {
-		return lastTimestamp;
-	}
-	
 	/**
 	 * 生成下一个毫秒时间刻度
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -106,20 +110,11 @@ public class TimeSequence {
 	 * @return
 	 */
 	private long nextMillis(long lastTimestamp) {
-        long timestamp = currentTimestamp();
+        long timestamp = this.timestampSequence.update();
         while (timestamp <= lastTimestamp) {
-            timestamp = currentTimestamp();
+            timestamp = this.timestampSequence.update();
         }
         return timestamp;
     }
-
-	/**
-	 * 获取当前时间戳
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-    private long currentTimestamp() {
-        return System.currentTimeMillis();
-    }
-	
+		
 }

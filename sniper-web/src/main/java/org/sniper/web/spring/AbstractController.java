@@ -28,9 +28,9 @@ import javax.servlet.http.HttpSession;
 import org.sniper.beans.propertyeditors.DatePropertyEditor;
 import org.sniper.beans.propertyeditors.StringBufferPropertyEditor;
 import org.sniper.beans.propertyeditors.StringBuilderPropertyEditor;
+import org.sniper.commons.enums.date.DatePattern;
 import org.sniper.commons.response.GenericResponse;
 import org.sniper.commons.response.MessagingResponse;
-import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.web.AbstractWebMessageResolver;
 import org.sniper.web.ServletAware;
@@ -191,7 +191,7 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	 */
 	@InitBinder  
     protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-		binder.registerCustomEditor(Date.class, new DatePropertyEditor(DateUtils.DEFAULT_DATETIME_FORMAT));
+		binder.registerCustomEditor(Date.class, new DatePropertyEditor(DatePattern.DATETIME.getDefaultFormat()));
 		binder.registerCustomEditor(StringBuffer.class, new StringBufferPropertyEditor());
 		binder.registerCustomEditor(StringBuilder.class, new StringBuilderPropertyEditor());
 		overrideInitBinder(request, binder);

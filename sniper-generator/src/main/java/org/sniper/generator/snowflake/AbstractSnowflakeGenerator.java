@@ -21,15 +21,17 @@ package org.sniper.generator.snowflake;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.NumberUtils;
-import org.sniper.generator.AbstractGenerator;
 import org.sniper.generator.Generator;
+import org.sniper.generator.GeneratorSupport;
+import org.sniper.generator.sequence.SequenceNode;
+import org.sniper.generator.sequence.TimestampInternalSequence;
 
 /**
  * 推特Snowflake算法生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T> implements Generator<T> {
+public abstract class AbstractSnowflakeGenerator<T> extends GeneratorSupport implements Generator<T> {
 	
 	/** 相对的开始时间截，一旦投入使用，不要再修改此值 */
 	protected final long twepoch = DateUtils.stringToMillis("2018-10-01 00:00:00");
@@ -82,7 +84,7 @@ public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T>
     	this.workerId = workerId;
     	this.dataCenterId = dataCenterId;
     }
-    
+        
 	/**
 	 * 序列生成器接口
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -96,7 +98,7 @@ public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T>
 		 * @param timeSequence
 		 * @return 
 		 */
-		public T generate(TimeSequence timeSequence);
+		public T generate(TimestampInternalSequence timeSequence);
 	}
 	
 	/**
@@ -113,7 +115,7 @@ public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T>
 	class DefaultSequenceGenerator implements SequenceGenerator<Long> {
 
 		@Override
-		public Long generate(TimeSequence timeSequence) {
+		public Long generate(TimestampInternalSequence timeSequence) {
 			return ((timeSequence.getLastTimestamp() - twepoch) << timestampLeftShift)
 					| (dataCenterId << datacenterIdShift) | (workerId << workerIdShift) | timeSequence.getSequence();
 		}
@@ -137,7 +139,7 @@ public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T>
 	class CustomizeSequenceGenerator implements SequenceGenerator<String> {
 		
 		@Override
-		public String generate(TimeSequence timeSequence) {
+		public String generate(TimestampInternalSequence timeSequence) {
 			return String.valueOf(timeSequence.getLastTimestamp() - twepoch)
 					+ NumberUtils.format(timeSequence.getSequence(), 4);
 		}

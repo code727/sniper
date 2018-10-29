@@ -25,11 +25,11 @@ import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.DateUtils;
 
 /**
- * 日期时间序列实现类
+ * 日期序列实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DateSequence implements Sequence<String> {
+public class DateSequence implements DimensionSequence<String> {
 	
 	private final String pattern;
 		
@@ -44,17 +44,8 @@ public class DateSequence implements Sequence<String> {
 	}
 
 	@Override
-	public String create() {
+	public String update() {
 		return DateUtils.dateToString(new Date(), this.pattern);
 	}
-	
-	public Long toLong() {
-		return Long.valueOf(this.create());
-	}
-	
-	public static void main(String[] args) {
-		DateSequence dateSequence = new DateSequence();
-		System.out.println(dateSequence.create());
-	}
-	
+			
 }

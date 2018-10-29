@@ -19,17 +19,17 @@
 package org.sniper.generator.sequence;
 
 /**
- * 序列接口
+ * 维度序列接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Sequence<T> {
-	
+public interface DimensionSequence<T> {
+		
 	/**
-	 * 创建序列
+	 * 更新序列
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public T create();
+	public T update();
 
 }

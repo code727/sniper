@@ -54,7 +54,7 @@ public class ShortLinkGeneratorTest extends GeneratorTest {
 			public Set<String> call() throws Exception {
 				Set<String> set = CollectionUtils.newLinkedHashSet(threadTaskExecuteSize);
 				for (int i = 0; i < threadTaskExecuteSize; i++) {
-					set.add(generator.generate(StringUtils.UUID()));
+					set.add(generator.generateByParameter(StringUtils.UUID()));
 				}
 				return set;
 			}
@@ -77,7 +77,7 @@ public class ShortLinkGeneratorTest extends GeneratorTest {
 	@Override
 	protected void doPerformanceTest() {
 		for (int i = 0; i < size; i++) {
-			generator.generate(i + 1);
+			generator.generateByParameter(i + 1);
 		}
 	}
 	
@@ -87,8 +87,8 @@ public class ShortLinkGeneratorTest extends GeneratorTest {
 		
 		String result;
 		System.out.println(result = generator1.generate());
-		System.out.println(result = generator2.generate(1));
-		System.out.println(result = generator2.generate(2));
+		System.out.println(result = generator2.generateByParameter(1));
+		System.out.println(result = generator2.generateByParameter(2));
 		System.out.println(result.toString().length());
 	}
 	

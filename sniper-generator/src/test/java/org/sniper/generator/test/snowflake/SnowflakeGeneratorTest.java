@@ -26,7 +26,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.generator.snowflake.SequenceNode;
+import org.sniper.generator.sequence.SequenceNode;
 import org.sniper.generator.snowflake.SnowflakeGenerator;
 import org.sniper.generator.test.GeneratorTest;
 
@@ -79,7 +79,7 @@ public class SnowflakeGeneratorTest extends GeneratorTest {
 	@Override
 	protected void doPerformanceTest() {
 		for (int i = 0; i < size; i++) {
-			generator.generate();
+			System.out.println(generator.generate());;
 		}
 	}
 	

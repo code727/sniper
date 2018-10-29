@@ -21,6 +21,8 @@ package org.sniper.generator.snowflake;
 import java.util.List;
 
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.generator.sequence.SequenceNode;
+import org.sniper.generator.sequence.TimestampInternalSequence;
 
 /**
  * 推特Snowflake序列生成器实现类，其结果为一个long型的数字。算法核心思想为：</p>
@@ -38,7 +40,7 @@ public class SnowflakeGenerator extends AbstractSnowflakeGenerator<Long> {
 	
 	private final SequenceGenerator<Long> sequenceGenerator;
 	
-	private final TimeSequence timeSequence;
+	private final TimestampInternalSequence timeSequence;
 	
     public SnowflakeGenerator() {
     	this(new SequenceNode());
@@ -47,7 +49,7 @@ public class SnowflakeGenerator extends AbstractSnowflakeGenerator<Long> {
     public SnowflakeGenerator(SequenceNode sequenceNode) {
 		super(sequenceNode);
 		this.sequenceGenerator = new DefaultSequenceGenerator();
-		this.timeSequence = new TimeSequence(sequenceMask);
+		this.timeSequence = new TimestampInternalSequence(sequenceMask);
     }
     
 	@Override
@@ -56,7 +58,8 @@ public class SnowflakeGenerator extends AbstractSnowflakeGenerator<Long> {
 	}
 
 	@Override
-	protected synchronized List<Long> doBatchGenerate(int count) {
+	public synchronized List<Long> batchGenerate(int count) {
+		checkBatchCount(count);
 		List<Long> results = CollectionUtils.newArrayList(count);
 		for (int i = 0; i < count; i++) {
 			results.add(sequenceGenerator.generate(this.timeSequence.update()));
