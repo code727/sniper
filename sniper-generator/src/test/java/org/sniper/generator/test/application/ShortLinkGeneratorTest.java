@@ -13,74 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年11月9日
+ * Create Date : 2017-11-9
  */
 
-package org.sniper.generator.test;
+package org.sniper.generator.test.application;
 
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
-import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.generator.ParameterizeGenerator;
 import org.sniper.generator.application.ShortLinkGenerator;
+import org.sniper.generator.test.AbstractGeneratorTest;
 
 /**
+ * 短链接生成器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ShortLinkGeneratorTest extends GeneratorTest {
+public class ShortLinkGeneratorTest extends AbstractGeneratorTest<String> {
 	
-	private ParameterizeGenerator<Object, String> generator = new ShortLinkGenerator(true);
+	private final ShortLinkGenerator generator;
 	
-	@Override
-	public void init() {
-		uniquenessTest = false;
-		performanceTest = true;
+	public ShortLinkGeneratorTest() {
+		this(false, true);
 	}
 	
-	@Override
-	protected void doUniquenessTest() throws Exception {
-		ExecutorService executor = Executors.newCachedThreadPool();
-		
-		Callable<Set<String>> task = new Callable<Set<String>>() {
-
-			@Override
-			public Set<String> call() throws Exception {
-				Set<String> set = CollectionUtils.newLinkedHashSet(threadTaskExecuteSize);
-				for (int i = 0; i < threadTaskExecuteSize; i++) {
-					set.add(generator.generateByParameter(StringUtils.UUID()));
-				}
-				return set;
-			}
-		};
-		
-		List<Future<Set<String>>> futures = CollectionUtils.newArrayList(thradPoolSize);
-		for (int i = 0; i < thradPoolSize; i++) {
-			futures.add(executor.submit(task));
-		}
-		
-		Set<String> totalSet = CollectionUtils.newLinkedHashSet();
-		for (int i = 0; i < thradPoolSize; i++) {
-			totalSet.addAll(futures.get(i).get());
-		}
-		
-		assertEquals(thradPoolSize * threadTaskExecuteSize, totalSet.size());
-		System.out.println("Total set size:" + totalSet.size());
+	protected ShortLinkGeneratorTest(boolean uniquenessTest, boolean performanceTest) {
+		super(uniquenessTest, performanceTest);
+		this.generator = new ShortLinkGenerator(true);
 	}
 
 	@Override
-	protected void doPerformanceTest() {
-		for (int i = 0; i < size; i++) {
-			generator.generateByParameter(i + 1);
-		}
+	protected String generate() {
+		return generator.generateByParameter(StringUtils.UUID());
 	}
-	
+		
 	public static void main(String[] args) {
 		ShortLinkGenerator generator1 = new ShortLinkGenerator(false);
 		ShortLinkGenerator generator2 = new ShortLinkGenerator(true);
@@ -91,6 +55,5 @@ public class ShortLinkGeneratorTest extends GeneratorTest {
 		System.out.println(result = generator2.generateByParameter(2));
 		System.out.println(result.toString().length());
 	}
-	
-	
+
 }

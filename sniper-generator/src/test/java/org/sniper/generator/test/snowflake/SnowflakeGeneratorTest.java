@@ -18,69 +18,30 @@
 
 package org.sniper.generator.test.snowflake;
 
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
-import org.sniper.commons.util.CollectionUtils;
-import org.sniper.generator.sequence.SequenceNode;
 import org.sniper.generator.snowflake.SnowflakeGenerator;
-import org.sniper.generator.test.GeneratorTest;
+import org.sniper.generator.test.AbstractGeneratorTest;
 
 /**
+ * 推特Snowflake序列生成器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SnowflakeGeneratorTest extends GeneratorTest {
-
-	private SnowflakeGenerator generator;
+public class SnowflakeGeneratorTest extends AbstractGeneratorTest<Long> {
 	
-	@Override
-	public void init() {
-		this.generator = new SnowflakeGenerator(new SequenceNode());
-		
-		uniquenessTest = true;
-		performanceTest = false;
+	private final SnowflakeGenerator generator;
+	
+	public SnowflakeGeneratorTest() {
+		this(false, true);
 	}
-	
-	@Override
-	protected void doUniquenessTest() throws Exception {
-		ExecutorService executor = Executors.newCachedThreadPool();
-		
-		Callable<Set<Long>> task = new Callable<Set<Long>>() {
 
-			@Override
-			public Set<Long> call() throws Exception {
-				Set<Long> set = CollectionUtils.newLinkedHashSet(threadTaskExecuteSize);
-				for (int i = 0; i < threadTaskExecuteSize; i++) {
-					set.add(generator.generate());
-				}
-				return set;
-			}
-		};
-		
-		List<Future<Set<Long>>> futures = CollectionUtils.newArrayList(thradPoolSize);
-		for (int i = 0; i < thradPoolSize; i++) {
-			futures.add(executor.submit(task));
-		}
-		
-		Set<Long> totalSet = CollectionUtils.newLinkedHashSet();
-		for (int i = 0; i < thradPoolSize; i++) {
-			totalSet.addAll(futures.get(i).get());
-		}
-		
-		assertEquals(thradPoolSize * threadTaskExecuteSize, totalSet.size());
-		System.out.println("Total set size:" + totalSet.size());
+	protected SnowflakeGeneratorTest(boolean uniquenessTest, boolean performanceTest) {
+		super(uniquenessTest, performanceTest);
+		this.generator = new SnowflakeGenerator();
 	}
-	
+
 	@Override
-	protected void doPerformanceTest() {
-		for (int i = 0; i < size; i++) {
-			System.out.println(generator.generate());;
-		}
+	protected Long generate() {
+		return generator.generate();
 	}
 	
 	public static void main(String[] args) {
@@ -91,5 +52,5 @@ public class SnowflakeGeneratorTest extends GeneratorTest {
 		System.out.println(result  = generator.generate());
 		System.out.println(result.toString().length());
 	}
-			
+
 }
