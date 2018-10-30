@@ -21,8 +21,7 @@ package org.sniper.generator.snowflake;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.NumberUtils;
-import org.sniper.generator.Generator;
-import org.sniper.generator.GeneratorSupport;
+import org.sniper.generator.AbstractGenerator;
 import org.sniper.generator.sequence.SequenceNode;
 import org.sniper.generator.sequence.TimestampInternalSequence;
 
@@ -31,7 +30,7 @@ import org.sniper.generator.sequence.TimestampInternalSequence;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractSnowflakeGenerator<T> extends GeneratorSupport implements Generator<T> {
+public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T> {
 	
 	/** 相对的开始时间截，一旦投入使用，不要再修改此值 */
 	protected final long twepoch = DateUtils.stringToMillis("2018-10-01 00:00:00");

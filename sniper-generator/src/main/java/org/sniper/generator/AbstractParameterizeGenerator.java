@@ -25,8 +25,9 @@ import java.util.List;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractParameterizeGenerator<P, T> extends GeneratorSupport implements ParameterizeGenerator<P, T> {
-		
+public abstract class AbstractParameterizeGenerator<P, T> extends AbstractGenerator<T>
+		implements ParameterizeGenerator<P, T> {
+	
 	@Override
 	public T generate() {
 		return generateByParameter(null);

@@ -27,17 +27,17 @@ import org.sniper.commons.util.NumberUtils;
  */
 public class TimestampInternalRadomSequence extends TimestampInternalSequence {
 	
-	/** 序列随机种子*/
-	private final long sequenceRadomSeed;
+	/** 随机种子*/
+	private final long radomSeed;
 
 	public TimestampInternalRadomSequence(long sequenceMask) {
 		super(sequenceMask);
-		this.sequenceRadomSeed = ++sequenceMask;
+		this.radomSeed = ++sequenceMask;
 	}
 	
 	@Override
 	protected long resetSequence() {
-		return this.sequence = NumberUtils.randomIn(this.sequenceRadomSeed);
+		return this.sequence = NumberUtils.randomIn(this.radomSeed);
 	}
 
 }

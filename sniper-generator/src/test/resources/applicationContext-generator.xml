@@ -7,7 +7,7 @@
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd ">
 
-	<bean id="redisSerialNumberGenerator" class="org.sniper.generator.redis.RedisSerialNumberGenerator" >
+	<!-- <bean id="redisSerialNumberGenerator" class="org.sniper.generator.redis.RedisSerialNumberGenerator" >
 		<constructor-arg name="redisParameterizeGenerator" ref="redisParameterizeGenerator" />
 		<property name="dimensionGenerator" ref="dimensionGenerator" />
 	</bean>
@@ -19,6 +19,10 @@
 	
 	<bean id="dimensionGenerator" class="org.sniper.generator.dimension.DateDimensionGenerator" >
 		<constructor-arg name="timeDimension" value="1" />
+	</bean> -->
+	
+	<bean id="redisSequenceGenerator" class="org.sniper.generator.redis.RedisSequenceGenerator" >
+		<constructor-arg name="redisCommandsDao" ref="redisCommandsDao" />
 	</bean>
     
 </beans>
