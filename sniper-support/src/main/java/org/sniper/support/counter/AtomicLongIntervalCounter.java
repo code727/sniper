@@ -18,7 +18,6 @@
 
 package org.sniper.support.counter;
 
-import java.text.MessageFormat;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.sniper.commons.util.NumberUtils;
@@ -29,7 +28,7 @@ import org.sniper.commons.util.NumberUtils;
  * @version 1.0
  */
 public class AtomicLongIntervalCounter extends AbstractIntervalCounter<Long> {
-		
+	
 	/** 原子值，所有的加减操作都在此值的基础上进行 */
 	private AtomicLong atomicValue;
 	
@@ -37,12 +36,12 @@ public class AtomicLongIntervalCounter extends AbstractIntervalCounter<Long> {
 		this(Long.MAX_VALUE);
 	}
 
-	public AtomicLongIntervalCounter(long stepLength) {
-		this(null, stepLength);
+	public AtomicLongIntervalCounter(long stepSize) {
+		this(null, stepSize);
 	}
 	
-	public AtomicLongIntervalCounter(Long start, long stepLength) {
-		super(start != null ? start : 0L, stepLength);
+	public AtomicLongIntervalCounter(Long start, long stepSize) {
+		super(start != null ? start : 0L, stepSize);
 		allocateInterval();
 	}
 	
@@ -59,8 +58,8 @@ public class AtomicLongIntervalCounter extends AbstractIntervalCounter<Long> {
 	private void allocateInterval() {
 		this.atomicValue = new AtomicLong(this.start);
 		/* 以Start元素作为中间点，计算出有效区间的最小值和最大值 */
-		this.minimal = this.start - this.stepLength;
-		this.maximum = this.start + this.stepLength;
+		this.minimal = this.start - this.stepSize;
+		this.maximum = this.start + this.stepSize;
 	}
 					
 	@Override
@@ -103,31 +102,11 @@ public class AtomicLongIntervalCounter extends AbstractIntervalCounter<Long> {
 	public Long get() {
 		return this.atomicValue.get();
 	}
-	
-	@Override
-	public boolean greaterThanMaximum() {
-		return get() > maximum;
-	}
-	
-	@Override
-	public boolean greaterThanEqualsMaximum() {
-		return get() >= maximum;
-	}
-
-	@Override
-	public boolean lessThanMinimal() {
-		return get() < minimal;
-	}
-
-	@Override
-	public boolean lessThanEqualsMinimal() {
-		return get() <= minimal;
-	}
-	
+		
 	@Override
 	public String toString() {
-		return MessageFormat.format("[start={0},stepLength={1},currentValue={2},minimal={3},maximum={4}]", 
-				start, stepLength, atomicValue, minimal, maximum);
+		return String.format("{\"start\":%s,\"stepSize\":%s,\"currentValue\":%s,\"minimal\":%s,\"maximum\":%s}", 
+				start, stepSize, atomicValue, minimal, maximum);
 	}
 		
 }

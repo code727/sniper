@@ -18,7 +18,6 @@
 
 package org.sniper.support.counter;
 
-import java.text.MessageFormat;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.sniper.commons.util.NumberUtils;
@@ -69,7 +68,7 @@ public class AtomicLongCounter extends AbstractCounter<Long> {
 	
 	@Override
 	public String toString() {
-		return MessageFormat.format("[start={0},currentValue={1}]", start, atomicValue);
+		return String.format("{\"start\":%s,\"currentValue\":%s}", start, atomicValue);
 	}
 		
 }

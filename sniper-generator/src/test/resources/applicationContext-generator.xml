@@ -28,7 +28,7 @@
 	
 	<bean id="queueCacheSequenceGenerator" class="org.sniper.generator.keyspace.QueueCacheSequenceGenerator">
 		<constructor-arg name="keyspaceGenerator" ref="redisSequenceGenerator" />
-		<property name="cacheStepSize" value="3" />
+		<property name="cacheStepSize" value="100000" />
 	</bean>
     
 </beans>

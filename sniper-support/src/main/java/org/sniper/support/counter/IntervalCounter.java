@@ -28,10 +28,9 @@ public interface IntervalCounter<V> extends Counter<V> {
 	/**
 	 * 获取区间步长
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param stepLength
 	 * @return
 	 */
-	public long getStepLength();
+	public long getStepSize();
 		
 	/**
 	 * 获取区间内的最小值
@@ -47,32 +46,4 @@ public interface IntervalCounter<V> extends Counter<V> {
 	 */
 	public V getMaximum();
 	
-	/**
-	 * 判断当前计数是否大于区间内的最大值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public boolean greaterThanMaximum();
-	
-	/**
-	 * 判断当前计数是否大于等于区间内的最大值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public boolean greaterThanEqualsMaximum();
-	
-	/**
-	 * 判断当前计数是否小于区间内的最小值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public boolean lessThanMinimal();
-	
-	/**
-	 * 判断当前计数是否小于等于区间内的最小值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public boolean lessThanEqualsMinimal();
-
 }
