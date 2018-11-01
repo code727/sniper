@@ -34,9 +34,9 @@ import org.sniper.lock.ParameterizeLock;
  */
 public final class JdkParameterizeLock<P> extends DefaultExpiredTimer implements ParameterizeLock<P> {
 	
-	private final Lock[] locks;
-	
 	private static final int DEFAULT_LOCKSIZE = 16;
+	
+	private final Lock[] locks;
 	
 	public JdkParameterizeLock() {
 		this(DEFAULT_LOCKSIZE);

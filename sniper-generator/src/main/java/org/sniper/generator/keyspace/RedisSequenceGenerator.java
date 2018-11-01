@@ -16,13 +16,12 @@
  * Create Date : 2018年10月29日
  */
 
-package org.sniper.generator.redis;
+package org.sniper.generator.keyspace;
 
 import java.util.List;
 
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.generator.AbstractCacheableGenerator;
 import org.sniper.nosql.redis.dao.RedisCommandsDao;
 
 /**
@@ -32,9 +31,9 @@ import org.sniper.nosql.redis.dao.RedisCommandsDao;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisSequenceGenerator extends AbstractCacheableGenerator<Object, Long> {
+public class RedisSequenceGenerator extends AbstractKeyspaceGeneratorGenerator<Object, Long> {
 	
-	private static final String DEFAULT_CACHE_KEY = "redis_sequence_cache_key";
+	public static final String DEFAULT_CACHE_KEY = "redis_sequence_cache_key";
 	
 	/** 生成器库名 */
 	protected final String dbName;
@@ -42,14 +41,22 @@ public class RedisSequenceGenerator extends AbstractCacheableGenerator<Object, L
 	protected final RedisCommandsDao redisCommandsDao;
 	
 	public RedisSequenceGenerator(RedisCommandsDao redisCommandsDao) {
-		this(null, redisCommandsDao);
+		this((String) null, redisCommandsDao);
+	}
+	
+	public RedisSequenceGenerator(RedisCommandsDao redisCommandsDao, Object defaultKeyspace) {
+		this(null, redisCommandsDao, defaultKeyspace);
 	}
 	
 	public RedisSequenceGenerator(String dbName, RedisCommandsDao redisCommandsDao) {
+		this(dbName, redisCommandsDao, null);
+	}
+	
+	public RedisSequenceGenerator(String dbName, RedisCommandsDao redisCommandsDao, Object defaultKeyspace) {
+		super(defaultKeyspace != null ? defaultKeyspace : DEFAULT_CACHE_KEY);
 		AssertUtils.assertNotNull(redisCommandsDao, "Redis commands dao not be null");
 		this.dbName = dbName;
 		this.redisCommandsDao = redisCommandsDao;
-		this.globalKey = DEFAULT_CACHE_KEY;
 	}
 
 	@Override
@@ -59,15 +66,9 @@ public class RedisSequenceGenerator extends AbstractCacheableGenerator<Object, L
 
 	@Override
 	protected List<Long> doBatchGenerateByKey(Object key, int count) {
-		// 当前批次最大值
-//		long batchMaxValue = this.redisCommandsDao.incrBy(dbName, key, count);
-//		LinkedList<Long> list = CollectionUtils.newLinkedList();
-//		for (int i = 0; i < count; i++) {
-//			list.addFirst(batchMaxValue--);
-//		}	
-		
 		// 当前批次起始值
 		long batchStartValue = this.redisCommandsDao.incrBy(dbName, key, count) - count;
+		
 		List<Long> list = CollectionUtils.newArrayList(count);
 		for (int i = 0; i < count; i++) {
 			list.add(++batchStartValue);

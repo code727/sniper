@@ -16,58 +16,60 @@
  * Create Date : 2018-10-26
  */
 
-package org.sniper.generator;
+package org.sniper.generator.keyspace;
 
 import java.util.List;
 
 import org.sniper.commons.util.AssertUtils;
+import org.sniper.generator.AbstractGenerator;
 
 /**
- * 可缓存的生成器抽象类
+ * 基于键空间的生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractCacheableGenerator<K, V> extends AbstractGenerator<V>
-		implements CacheableGenerator<K, V> {
+public abstract class AbstractKeyspaceGeneratorGenerator<K, V> extends AbstractGenerator<V>
+		implements KeyspaceGenerator<K, V> {
 		
-	private static final String CACHE_KEY_ERROR_MESSAGE = "%s cache key must not be null";
+	/** 全局默认的键空间 */
+	protected final K defaultKeyspace;
 	
-	/** 默认的全局键 */
-	protected K globalKey;
-
-	public K getGlobalKey() {
-		return globalKey;
+	protected AbstractKeyspaceGeneratorGenerator(K defaultKeyspace) {
+		checkKeyspace(defaultKeyspace);
+		this.defaultKeyspace = defaultKeyspace;
 	}
 
-	public void setGlobalKey(K globalKey) {
-		this.globalKey = globalKey;
+	@Override
+	public K getDefaultKeyspace() {
+		return defaultKeyspace;
 	}
-	
+
 	@Override
 	public V generate() {
-		return generateByKey(this.globalKey);
+		return generateByKey(this.defaultKeyspace);
 	}
 	
 	@Override
 	public V generateByKey(K key) {
-		checkCacheKey(key);
+		checkKeyspace(key);
 		return doGenerateByKey(key);
 	}
 	
 	@Override
 	public List<V> batchGenerate(int count) {
-		return batchGenerateByKey(this.globalKey, count);
+		return batchGenerateByKey(this.defaultKeyspace, count);
 	}
 	
 	@Override
 	public List<V> batchGenerateByKey(K key, int count) {
-		checkCacheKey(key);
+		checkKeyspace(key);
 		checkBatchCount(count);
 		return doBatchGenerateByKey(key, count);
 	}
 	
-	protected void checkCacheKey(Object cacheKey) {
-		AssertUtils.assertNotNull(cacheKey, String.format(CACHE_KEY_ERROR_MESSAGE, this.getClass().getName()));
+	protected void checkKeyspace(Object keyspace) {
+		AssertUtils.assertNotNull(keyspace, String.format(
+				"%s key space must not be null", this.getClass().getName()));
 	}
 	
 	/** 

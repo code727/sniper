@@ -16,16 +16,25 @@
  * Create Date : 2018-10-26
  */
 
-package org.sniper.generator;
+package org.sniper.generator.keyspace;
 
 import java.util.List;
 
+import org.sniper.generator.Generator;
+
 /**
- * 可缓存的生成器接口
+ * 基于键空间的生成器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface CacheableGenerator<K, V> extends Generator<V> {
+public interface KeyspaceGenerator<K, V> extends Generator<V> {
+	
+	/**
+	 * 获取全局默认的键空间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public K getDefaultKeyspace();
 	
 	/**
 	 * 根据指定的键生成结果
