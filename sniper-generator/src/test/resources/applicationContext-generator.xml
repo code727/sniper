@@ -21,14 +21,17 @@
 		<constructor-arg name="timeDimension" value="1" />
 	</bean> -->
 	
-	<bean id="redisSequenceGenerator" class="org.sniper.generator.keyspace.RedisSequenceGenerator" >
+	<bean id="redisTrendSequence" class="org.sniper.generator.redis.RedisTrendSequence">
 		<constructor-arg name="redisCommandsDao" ref="redisCommandsDao" />
-		<!-- <constructor-arg name="defaultKeyspace" value="redisSequenceGenerator" /> -->
+	</bean>
+	
+	<bean id="redisSequenceGenerator" class="org.sniper.generator.redis.RedisSequenceGenerator" >
+		<constructor-arg name="redisTrendSequence" ref="redisTrendSequence" />
 	</bean>
 	
 	<bean id="queueCacheSequenceGenerator" class="org.sniper.generator.keyspace.QueueCacheSequenceGenerator">
 		<constructor-arg name="keyspaceGenerator" ref="redisSequenceGenerator" />
-		<property name="cacheStepSize" value="100000" />
+		<property name="cacheStepSize" value="1" />
 	</bean>
     
 </beans>

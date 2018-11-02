@@ -40,7 +40,7 @@ public abstract class AbstractCacheableGenerator<K, E, V> extends AbstractKeyspa
 	/** 本地缓存步长 */
 	private int cacheStepSize;
 	
-	protected AbstractCacheableGenerator(K defaultKeyspace, ParameterizeLock<K> keyLock) {
+	protected AbstractCacheableGenerator(ParameterizeLock<K> keyLock, K defaultKeyspace) {
 		super(defaultKeyspace);
 		this.cache = MapUtils.newConcurrentHashMap();
 		this.keyLock = (keyLock != null ? keyLock : new JdkParameterizeLock<K>());
@@ -52,8 +52,7 @@ public abstract class AbstractCacheableGenerator<K, E, V> extends AbstractKeyspa
 	}
 
 	public void setCacheStepSize(int cacheStepSize) {
-		AssertUtils.assertTrue(cacheStepSize > 0, String.format(
-				"%s property 'cacheStepSize' must greater than 0", this.getClass().getName()));
+		AssertUtils.assertTrue(cacheStepSize > 0, "Property 'cacheStepSize' must greater than 0");
 		this.cacheStepSize = cacheStepSize;
 	}
 	

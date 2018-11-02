@@ -27,14 +27,7 @@ import org.sniper.generator.Generator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface KeyspaceGenerator<K, V> extends Generator<V> {
-	
-	/**
-	 * 获取全局默认的键空间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public K getDefaultKeyspace();
+public interface KeyspaceGenerator<K, V> extends Generator<V>, Keyspace<K> {
 	
 	/**
 	 * 根据指定的键生成结果

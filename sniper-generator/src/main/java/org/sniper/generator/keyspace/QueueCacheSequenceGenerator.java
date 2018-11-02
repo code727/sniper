@@ -43,9 +43,10 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 	}
 
 	public QueueCacheSequenceGenerator(ParameterizeLock<Object> keyLock, KeyspaceGenerator<Object, V> keyspaceGenerator) {
-		super(keyspaceGenerator.getDefaultKeyspace(), keyLock);
+		super(keyLock, keyspaceGenerator.getDefaultKeyspace());
 		this.keyspaceGenerator = keyspaceGenerator;
 	}
+	
 	@Override
 	protected V doGenerateByKey(Object key) {
 		Queue<V> queue = cache.get(key);
@@ -145,7 +146,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		cache.put(key, queue);
 		
 		int batchCount = getCacheStepSize() + 1;
-		List<V> list = this.keyspaceGenerator.batchGenerate(batchCount);
+		List<V> list = this.keyspaceGenerator.batchGenerateByKey(key, batchCount);
 		
 		queue.addAll(list.subList(1, list.size()));
 		logger.debug("Keyspace '{}' cache {} elements in queue", key, queue.size());
@@ -170,7 +171,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		cache.put(key, queue);
 		
 		int batchCount = getCacheStepSize() + count;
-		List<V> list = this.keyspaceGenerator.batchGenerate(batchCount);
+		List<V> list = this.keyspaceGenerator.batchGenerateByKey(key, batchCount);
 		
 		queue.addAll(list.subList(count, list.size()));
 		logger.debug("Keyspace '{}' cache {} elements in queue", key, queue.size());
@@ -208,7 +209,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		/* 2.计算出批量生成的实际个数="缓存步长+补偿出列的个数"后利用代理的键空间生成器批量生成结果，
 		 * 其目的是为了保证当前批次出列后，缓存队列中仍然还缓存有cacheStepSize个元素 */
 		int batchCount = getCacheStepSize() + compensateCount;
-		List<V> list = this.keyspaceGenerator.batchGenerate(batchCount);
+		List<V> list = this.keyspaceGenerator.batchGenerateByKey(key, batchCount);
 		logger.debug("Keyspace '{}' remaining {} elements in queue, compensate generate {} elements", queueRemain, compensateCount);
 		
 		/* 3.以compensateCount为界，将第compensateCount个元素以后的所有元素全部存入缓存队列 */

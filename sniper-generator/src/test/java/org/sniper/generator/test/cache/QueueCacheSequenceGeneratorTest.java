@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2018年10月30日
+ * Create Date : 2018-10-30
  */
 
 package org.sniper.generator.test.cache;
 
+import org.junit.Test;
 import org.sniper.generator.keyspace.QueueCacheSequenceGenerator;
 import org.sniper.generator.test.AbstractSpringGeneratorTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
+ * 基于队列的缓存序列生成器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -32,7 +34,7 @@ public class QueueCacheSequenceGeneratorTest extends AbstractSpringGeneratorTest
 	private QueueCacheSequenceGenerator<Long> queueCacheSequenceGenerator;
 	
 	public QueueCacheSequenceGeneratorTest() {
-		this(false, true);
+		this(false, false);
 	}
 	
 	protected QueueCacheSequenceGeneratorTest(boolean uniquenessTest, boolean performanceTest) {
@@ -49,10 +51,9 @@ public class QueueCacheSequenceGeneratorTest extends AbstractSpringGeneratorTest
 		System.out.println(queueCacheSequenceGenerator.generate());
 	}
 	
-//	@Test
+	@Test
 	public void testBatchGenerate() {
-		System.out.println(queueCacheSequenceGenerator.batchGenerate(10));
-		System.out.println(queueCacheSequenceGenerator.batchGenerate(10));
+		System.out.println(queueCacheSequenceGenerator.generate());
 		System.out.println(queueCacheSequenceGenerator.batchGenerate(10));
 	}
 

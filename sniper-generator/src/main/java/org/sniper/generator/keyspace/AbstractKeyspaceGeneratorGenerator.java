@@ -67,9 +67,13 @@ public abstract class AbstractKeyspaceGeneratorGenerator<K, V> extends AbstractG
 		return doBatchGenerateByKey(key, count);
 	}
 	
+	/**
+	 * 检查键空间的合法性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param keyspace
+	 */
 	protected void checkKeyspace(Object keyspace) {
-		AssertUtils.assertNotNull(keyspace, String.format(
-				"%s key space must not be null", this.getClass().getName()));
+		AssertUtils.assertNotNull(keyspace, "Keyspace must not be null");
 	}
 	
 	/** 

@@ -18,7 +18,7 @@
 
 package org.sniper.generator.test.cache;
 
-import org.sniper.generator.keyspace.RedisSequenceGenerator;
+import org.sniper.generator.redis.RedisSequenceGenerator;
 import org.sniper.generator.test.AbstractSpringGeneratorTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
