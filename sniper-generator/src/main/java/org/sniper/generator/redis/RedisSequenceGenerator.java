@@ -41,7 +41,7 @@ public class RedisSequenceGenerator extends AbstractKeyspaceGeneratorGenerator<O
 	
 	@Override
 	protected Long doGenerateByKey(Object key) {
-		return this.redisTrendSequence.updateByKey(key);
+		return this.redisTrendSequence.updateByKey(key, 1);
 	}
 
 	@Override

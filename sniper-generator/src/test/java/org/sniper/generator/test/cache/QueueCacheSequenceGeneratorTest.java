@@ -49,12 +49,14 @@ public class QueueCacheSequenceGeneratorTest extends AbstractSpringGeneratorTest
 //	@Test
 	public void testGenerate() {
 		System.out.println(queueCacheSequenceGenerator.generate());
+		System.out.println(queueCacheSequenceGenerator.generate());
+		System.out.println(queueCacheSequenceGenerator.generate());
 	}
 	
 	@Test
 	public void testBatchGenerate() {
-		System.out.println(queueCacheSequenceGenerator.generate());
-		System.out.println(queueCacheSequenceGenerator.batchGenerate(10));
+		System.out.println(queueCacheSequenceGenerator.batchGenerate(3));
+		System.out.println(queueCacheSequenceGenerator.batchGenerate(3));
 	}
 
 }

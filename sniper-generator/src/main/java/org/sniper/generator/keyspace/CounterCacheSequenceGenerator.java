@@ -20,6 +20,8 @@ package org.sniper.generator.keyspace;
 
 import java.util.List;
 
+import org.sniper.commons.util.CollectionUtils;
+import org.sniper.generator.sequence.KeyspaceTrendSequence;
 import org.sniper.lock.ParameterizeLock;
 import org.sniper.support.counter.AtomicLongIntervalCounter;
 import org.sniper.support.counter.IntervalCounter;
@@ -31,16 +33,16 @@ import org.sniper.support.counter.IntervalCounter;
  */
 public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Object, IntervalCounter<Long>, Long> {
 	
-	/** 代理的键空间生成器接口 */
-	protected final KeyspaceGenerator<Object, Long> keyspaceGenerator;
+	/** 代理的键空间趋势序列接口 */
+	protected final KeyspaceTrendSequence<Object, Long> keyspaceTrendSequence;
 	
-	public CounterCacheSequenceGenerator(KeyspaceGenerator<Object, Long> keyspaceGenerator) {
-		this(null, keyspaceGenerator);
+	public CounterCacheSequenceGenerator(KeyspaceTrendSequence<Object, Long> keyspaceTrendSequence) {
+		this(null, keyspaceTrendSequence);
 	}
 
-	public CounterCacheSequenceGenerator(ParameterizeLock<Object> keyLock, KeyspaceGenerator<Object, Long> keyspaceGenerator) {
-		super(keyLock, keyspaceGenerator.getDefaultKeyspace());
-		this.keyspaceGenerator = keyspaceGenerator;
+	public CounterCacheSequenceGenerator(ParameterizeLock<Object> keyLock, KeyspaceTrendSequence<Object, Long> keyspaceTrendSequence) {
+		super(keyLock, keyspaceTrendSequence.getDefaultKeyspace());
+		this.keyspaceTrendSequence = keyspaceTrendSequence;
 	}
 
 	@Override
@@ -51,10 +53,9 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 			try {
 				// 双重检查，防止多线程环境针对同一参数同时创建多个队列
 				if ((counter = cache.get(key)) == null) {
-					long start = keyspaceGenerator.generateByKey(key);
-					counter = new AtomicLongIntervalCounter(start, getCacheStepSize());
+					counter = createCounter(key, 1);
 					cache.put(key, counter);
-					return start;
+					return counter.getStart();
 				}
 			} finally {
 				keyLock.unlock(key);
@@ -64,9 +65,10 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		keyLock.lock(key);
 		try {
 			Long value = counter.increment();
-			if (value == null) {
-				counter.setStart(counter.getMaximum() + 1);
-				value = counter.increment();
+			if (value == null || value > counter.getMaximum()) {
+				long start = updateCounterStartValue(key, 1);
+				counter.setStart(start);
+				return start;
 			}
 			
 			return value;
@@ -77,8 +79,89 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 
 	@Override
 	protected List<Long> doBatchGenerateByKey(Object key, int count) {
-		// TODO Auto-generated method stub
-		return null;
+		IntervalCounter<Long> counter = cache.get(key);
+		if (counter == null) {
+			keyLock.lock(key);
+			try {
+				// 双重检查，防止多线程环境针对同一参数同时创建多个队列
+				if ((counter = cache.get(key)) == null) {
+					counter = createCounter(key, count);
+					cache.put(key, counter);
+					
+					long batchStartValue = counter.getStart() - count;
+					List<Long> list = CollectionUtils.newArrayList(count);
+					for (int i = 0; i < count; i++) {
+						list.add(++batchStartValue);
+					}
+					return list;
+				}
+			} finally {
+				keyLock.unlock(key);
+			}
+		}
+		
+		keyLock.lock(key);
+		try {
+			long countRemain = counter.getMaximum() - counter.get();
+			if (countRemain == 0) {
+				long start = updateCounterStartValue(key, count);
+				counter.setStart(start);
+				
+				long batchStartValue = start - count;
+				List<Long> list = CollectionUtils.newArrayList(count);
+				for (int i = 0; i < count; i++) {
+					list.add(++batchStartValue);
+				}
+				
+				return list;
+			}
+			
+			if (countRemain < count) {
+				int compensateCount = (int) (count - countRemain);
+				long start = updateCounterStartValue(key, compensateCount);
+				
+				List<Long> list = CollectionUtils.newArrayList(count);
+				for (int i = 0; i < countRemain; i++) {
+					list.add(counter.increment());
+				}
+				
+				counter.setStart(start);
+				long batchStartValue = start - count + 1;
+				for (int i = 0; i < compensateCount; i++) {
+					list.add(++batchStartValue);
+				}
+				
+				return list;
+				
+			} else {
+				List<Long> list = CollectionUtils.newArrayList(count);
+				for (int i = 0; i < count; i++) {
+					list.add(counter.increment());
+				}
+				return list;
+			}
+		} finally {
+			keyLock.unlock(key);
+		}
+		
+	}
+	
+	/**
+	 * 根据键和要生成的个数，更新计数器的起始值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param count
+	 * @return
+	 */
+	private long updateCounterStartValue(Object key, int count) {
+		int cacheStepSize = getCacheStepSize();
+		long seed = keyspaceTrendSequence.updateByKey(key, cacheStepSize + count);
+		return seed - cacheStepSize;
+	}
+	
+	private IntervalCounter<Long> createCounter(Object key, int count) {
+		long start = updateCounterStartValue(key, count);
+		return new AtomicLongIntervalCounter(start, getCacheStepSize());
 	}
 	
 }
