@@ -36,7 +36,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 	/** 代理的键空间生成器接口 */
 	protected final KeyspaceGenerator<Object, V> keyspaceGenerator;
 	
-	private final QueueCachePoller queueCachePoller;
+	private final AbstractCacheableQueue cacheableQueue;
 	
 	public QueueCacheSequenceGenerator(KeyspaceGenerator<Object, V> keyspaceGenerator) {
 		this(keyspaceGenerator, true);
@@ -53,7 +53,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 	public QueueCacheSequenceGenerator(ParameterizeLock<Object> keyLock, KeyspaceGenerator<Object, V> keyspaceGenerator, boolean fixQueueCache) {
 		super(keyLock, keyspaceGenerator.getDefaultKeyspace());
 		this.keyspaceGenerator = keyspaceGenerator;
-		this.queueCachePoller = (fixQueueCache ? new FixedQueueCachePoller() : new UnfixedQueueCachePoller());
+		this.cacheableQueue = (fixQueueCache ? new FixedCacheQueue() : new UnfixedCacheQueue());
 	}
 	
 	@Override
@@ -62,26 +62,18 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		if (queue == null) {
 			keyLock.lock(key);
 			try {
-				// 双重检查，防止多线程环境针对同一参数同时创建多个队列
 				if ((queue = cache.get(key)) == null) {
-					queue = CollectionUtils.newConcurrentLinkedQueue();
-					cache.put(key, queue);
-					
-					/* 队列创建成功后立即进行缓存并返回生成结果，不延迟到下一个keyLock块中进行，
-					 * 目的是减少一次加解锁过程提高性能 */
-					return queueCachePoller.cacheAndPoll(queue, key);
+					return cacheableQueue.cacheAndPoll(key);
 				}
 			} finally {
 				keyLock.unlock(key);
 			}
 		}
 		
-		/* 由于isEmpty和cache方法组合在一起是非原子性的，
-		 * 因此存在多线程"先检查后执行"问题，需加锁操作 */
 		keyLock.lock(key);
 		try {
 			if (queue.isEmpty()) {
-				return queueCachePoller.cacheAndPoll(queue, key);
+				return cacheableQueue.updateAndPoll(queue, key);
 			}
 			return queue.poll();
 		} finally {
@@ -95,11 +87,8 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		if (queue == null) {
 			keyLock.lock(key);
 			try {
-				// 双重检查，防止多线程环境针对同一参数同时创建多个队列
 				if ((queue = cache.get(key)) == null) {
-					queue = CollectionUtils.newConcurrentLinkedQueue();
-					cache.put(key, queue);
-					return queueCachePoller.cacheAndBatchPoll(queue, key, count);
+					return cacheableQueue.cacheAndBatchPoll(key, count);
 				}
 			} finally {
 				keyLock.unlock(key);
@@ -110,28 +99,27 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		try {
 			int queueRemain = queue.size();
 			if (queueRemain < count) {
-				return queueCachePoller.cacheAndBatchPoll(queue, key, queueRemain, count);
+				return cacheableQueue.updateAndBatchPoll(queue, key, queueRemain, count);
 			}
-			return queueCachePoller.batchPoll(queue, key, count);
+			return cacheableQueue.batchPoll(queue, key, count);
 		} finally {
 			keyLock.unlock(key);
 		}
 	}
 	
 	/**
-	 * 基于队列结束的缓存轮询器，其作用在于将KeyspaceGenerator生成的结果缓存到队列中，并获取指定个数(count)的结果。
-	 * 现提供如下两种实现方式：</P>
-	 * 1.利用键空间生成器批量生成cacheStepSize+count个元素，将第count个元素之前所有的元素作为出列结果，而将之后所有的元素全部缓存入列。
-	 * FixedQueueCachePoller， QueueCacheSequenceGenerator默认的内联实现方式；</P>
-	 * 2.利用键空间生成器批量生成cacheStepSize个元素，将第count(count < cacheStepSize)个元素之前所有的元素作为出列结果，而将之后所有的元素全部缓存入列；</P>
+	 * 可缓存的队列抽象类，其作用在于将键空间生成器(KeyspaceGenerator)生成的结果缓存到队列中，
+	 * 可以获取指定个数(count)的结果。现提供如下两种实现方式：</P>
+	 * 1.利用KeyspaceGenerator批量生成cacheStepSize+count个元素，将第count个元素之前所有的元素作为出列结果，而将之后所有的元素全部缓存入列。</P>
+	 * 2.利用KeyspaceGenerator批量生成cacheStepSize个元素，将第count(count <= cacheStepSize)个元素之前所有的元素作为出列结果，而将之后所有的元素全部缓存入列。</P>
 	 * 
-	 * 方式1：本地队列中缓存的元素个数固定为cacheStepSize，生成器生成的元素个数不固定。例如：cacheStepSize=5，当某一次消费方需要生成10(count)个结果时，
+	 * 方式1(FixedCacheQueue)：本地队列中缓存的元素个数固定为cacheStepSize，生成器生成的元素个数不固定。例如：cacheStepSize=5，当某一次消费方需要生成10(count)个结果时，
 	 * 如果队列剩余的个数(queueRemain)不足以满足要求，则生成器实际会先生成cacheStepSize+(count-queueRemain)个元素(queueRemain=0表示队列无任何剩余，此时生成15个元素)
 	 * 然后将队列剩余的queueRemain(0)个元素和新生成的前count-queueRemain(10)个元素作为出列结果，最后将第count-queueRemain(5，正好等于cacheStepSize)个元素之后的所有元素全部缓存入列。</P>
 	 * 优点：这种方式可以尽最大可能的让消费方从本地缓存队列里直接获取结果，减少生成器的生成频次，性能要优于方式2。</P>
 	 * 缺点：由于生成器生成的个数会受消费方影响，因此在宕机和重启恢复的情况下，比方式2造成的丢失范围要大。另外也不方便根据生成器已生成的个数推算出缓存批次。</P>
 	 * 
-	 * 方式2：本地队列中缓存的元素个数不固定，生成器生成的元素个数固定为n倍cacheStepSize个，其中n=count/cacheStepSize+(1/0)。
+	 * 方式2(UnfixedCacheQueue)：本地队列中缓存的元素个数不固定，生成器生成的元素个数固定为n*cacheStepSize个，其中n=count/cacheStepSize+0/1。
 	 * 例如：cacheStepSize=3，当某一次消费方需要生成5(count)个结果时，如果队列剩余的个数(queueRemain=2)不足以满足要求， 则生成器会先生成固定的cacheStepSize(3)个元素，
 	 * 然后将队列剩余的queueRemain(2)个元素和新生成的前count-queueRemain(3)个元素作为出列结果，最后将第count-queueRemain(3)个元素之后的所有元素全部缓存入列。</P>
 	 * 优点：由于生成器生成的个数不会受消费方影响，因此这种方式在宕机和重启恢复的情况下，比方式1造成的丢失范围要小。另外可以很方便的根据生成器已生成的个数和cacheStepSize推算出缓存批次。</P>
@@ -140,22 +128,35 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @version 1.0
 	 */
-	protected abstract class QueueCachePoller {
+	protected abstract class AbstractCacheableQueue {
 		
 		protected final Logger logger;
 		
-		protected QueueCachePoller() {
+		protected AbstractCacheableQueue() {
 			this.logger = LoggerFactory.getLogger(getClass());
 		}
 		
 		/**
-		 * 缓存并出列1个结果
+		 * 缓存并出列一个结果
 		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 		 * @param queue
 		 * @param key
 		 * @return
 		 */
-		protected V cacheAndPoll(Queue<V> queue, Object key) {
+		protected V cacheAndPoll(Object key) {
+			Queue<V> queue = CollectionUtils.newConcurrentLinkedQueue();
+			cache.put(key, queue);
+			return updateAndPoll(queue, key);
+		}
+		
+		/**
+		 * 更新队列并出列一个结果
+		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @param queue
+		 * @param key
+		 * @return
+		 */
+		protected V updateAndPoll(Queue<V> queue, Object key) {
 			List<V> list = keyspaceGenerator.batchGenerateByKey(key, calculateBatchCount());
 			
 			queue.addAll(list.subList(1, list.size()));
@@ -175,7 +176,21 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		 * @param count
 		 * @return
 		 */
-		protected List<V> cacheAndBatchPoll(Queue<V> queue, Object key, int count) {
+		protected List<V> cacheAndBatchPoll(Object key, int count) {
+			Queue<V> queue = CollectionUtils.newConcurrentLinkedQueue();
+			cache.put(key, queue);
+			return updateAndBatchPoll(queue, key, count);
+		}
+		
+		/**
+		 * 更新队列并批量出列count个结果
+		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @param queue
+		 * @param key
+		 * @param count
+		 * @return
+		 */
+		protected List<V> updateAndBatchPoll(Queue<V> queue, Object key, int count) {
 			List<V> list = keyspaceGenerator.batchGenerateByKey(key, calculateBatchCount(count));
 			
 			queue.addAll(list.subList(count, list.size()));
@@ -188,7 +203,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		}
 		
 		/**
-		 * 缓存并批量出列。当队列的剩余个数小于批量出列个数(queueRemain<count)时被调用，其实现方式如下：</P>
+		 * 更新队列并批量出列。当队列的剩余个数小于批量出列个数(queueRemain<count)时被调用，其实现方式如下：</P>
 		 * 1.如果queueRemain==0，表明队列已经没有剩余元素了，缓存并出列count个结果；</P>
 		 * 2.如果queueRemain!=0，表明队列还剩余有元素未出列，缓存并批量出列包括剩余的queueRemain个元素在内的count(总计)个结果。</P>
 		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -198,12 +213,11 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		 * @param count
 		 * @return
 		 */
-		protected List<V> cacheAndBatchPoll(Queue<V> queue, Object key, int queueRemain, int count) {
+		protected List<V> updateAndBatchPoll(Queue<V> queue, Object key, int queueRemain, int count) {
 			if (queueRemain == 0) {
-				/* 如果queueRemain==0，表明队列已经没有剩余元素了，
-				 * 将调用重载的cacheAndBatchPoll方法缓存并出列count个结果。 */
-				logger.debug("Keyspace '{}' nothing remaining element in queue, will cache and batch poll {} elements", key, count);
-				return cacheAndBatchPoll(queue, key, count);
+				/* 如果queueRemain==0，表明队列已经没有剩余元素了， 将调用重载的updateAndBatchPoll方法更新队列并出列count个结果。 */
+				logger.debug("Keyspace '{}' nothing remaining element in queue, will update queue and batch poll {} elements", key, count);
+				return updateAndBatchPoll(queue, key, count);
 			}
 			
 			// 1.计算出还需要补偿出列的个数(compensateCount)="指定生成的个数-队列剩余的个数"
@@ -270,7 +284,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @version 1.0
 	 */
-	private class FixedQueueCachePoller extends QueueCachePoller {
+	private class FixedCacheQueue extends AbstractCacheableQueue {
 		
 		@Override
 		protected int calculateBatchCount() {
@@ -289,7 +303,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @version 1.0
 	 */
-	private class UnfixedQueueCachePoller extends QueueCachePoller {
+	private class UnfixedCacheQueue extends AbstractCacheableQueue {
 		
 		@Override
 		protected int calculateBatchCount() {

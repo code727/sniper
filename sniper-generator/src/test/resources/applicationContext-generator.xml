@@ -32,12 +32,13 @@
 	<bean id="queueCacheSequenceGenerator" class="org.sniper.generator.keyspace.QueueCacheSequenceGenerator">
 		<constructor-arg name="keyspaceGenerator" ref="redisSequenceGenerator" />
 		<constructor-arg name="fixQueueCache" value="false"/>
-		<property name="cacheStepSize" value="2" />
+		<property name="cacheStepSize" value="100000" />
 	</bean>
 	
 	<bean id="counterCacheSequenceGenerator" class="org.sniper.generator.keyspace.CounterCacheSequenceGenerator">
 		<constructor-arg name="keyspaceTrendSequence" ref="redisTrendSequence" />
-		<property name="cacheStepSize" value="1" />
+		<constructor-arg name="fixCounterCache" value="false"/>
+		<property name="cacheStepSize" value="100000" />
 	</bean>
 	
 </beans>
