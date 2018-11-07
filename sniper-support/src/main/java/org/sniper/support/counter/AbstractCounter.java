@@ -31,7 +31,7 @@ public abstract class AbstractCounter<V> implements Counter<V> {
 	protected V start;
 	
 	protected AbstractCounter(V start) {
-		AssertUtils.assertNotNull(start, "Count start must not be null");
+		checkStart(start);
 		this.start = start;
 	}
 	
@@ -42,8 +42,17 @@ public abstract class AbstractCounter<V> implements Counter<V> {
 
 	@Override
 	public void setStart(V start) {
-		AssertUtils.assertNotNull(start, "Count start must not be null");
+		checkStart(start);
 		this.start = start;
+	}
+	
+	/**
+	 * 检查起始值的合法性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param start
+	 */
+	private void checkStart(V start) {
+		AssertUtils.assertNotNull(start, "Counter start value must not be null");
 	}
 	
 }

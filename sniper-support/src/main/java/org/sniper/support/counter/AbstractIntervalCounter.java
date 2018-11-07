@@ -28,7 +28,7 @@ import org.sniper.commons.util.AssertUtils;
 public abstract class AbstractIntervalCounter<V> extends AbstractCounter<V> implements IntervalCounter<V> {
 		
 	/** 区间步长 */
-	protected final long stepSize;
+	protected long stepSize;
 	
 	/** 当前区间内的最小值 */
 	protected V minimal;
@@ -37,12 +37,18 @@ public abstract class AbstractIntervalCounter<V> extends AbstractCounter<V> impl
 	protected V maximum;
 	
 	protected AbstractIntervalCounter(V start) {
-		this(start, 1);
+		this(start, 1L);
 	}
 		
 	protected AbstractIntervalCounter(V start, long stepSize) {
 		super(start);
-		AssertUtils.assertTrue(stepSize > 0, "Counter interval step size must greater than 0");
+		checkStepSize(stepSize);
+		this.stepSize = stepSize;
+	}
+	
+	@Override
+	public void setStepSize(long stepSize) {
+		checkStepSize(stepSize);
 		this.stepSize = stepSize;
 	}
 	
@@ -58,6 +64,15 @@ public abstract class AbstractIntervalCounter<V> extends AbstractCounter<V> impl
 	@Override
 	public V getMaximum() {
 		return maximum;
+	}
+	
+	/**
+	 * 检查区间步长的合法性
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param stepSize
+	 */
+	private void checkStepSize(long stepSize) {
+		AssertUtils.assertTrue(stepSize > 0, "Counter interval step size must greater than 0");
 	}
 	
 }

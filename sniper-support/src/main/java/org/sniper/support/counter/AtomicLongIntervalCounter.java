@@ -20,6 +20,7 @@ package org.sniper.support.counter;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.NumberUtils;
 
 /**
@@ -37,29 +38,52 @@ public class AtomicLongIntervalCounter extends AbstractIntervalCounter<Long> {
 	}
 
 	public AtomicLongIntervalCounter(long stepSize) {
-		this(null, stepSize);
+		this(0L, stepSize);
 	}
 	
 	public AtomicLongIntervalCounter(Long start, long stepSize) {
-		super(start != null ? start : 0L, stepSize);
-		allocateInterval();
+		super(start, stepSize);
+		allocate();
 	}
 	
 	@Override
 	public void setStart(Long start) {
 		super.setStart(start);
-		allocateInterval();
+		allocate();
+	}
+	
+	@Override
+	public void setStepSize(long stepSize) {
+		super.setStepSize(stepSize);
+		adjustRange();
 	}
 	
 	/**
-	 * 分配区间
+	 * 区间分配，当起始值发生变更时，需要调用此方法重置当前值并且重新计算区间范围
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
-	private void allocateInterval() {
-		this.atomicValue = new AtomicLong(this.start);
+	private void allocate() {
+		if (this.atomicValue == null || this.atomicValue.get() != this.start) {
+			// 重置当前值为起始值
+			this.atomicValue = new AtomicLong(this.start);
+		}
+		adjustRange();
+	}
+	
+	/**
+	 * 调整区间范围，当起始值或区间步长发生变更时，需要调用此方法重新计算区间范围
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	private void adjustRange() {
 		/* 以Start元素作为中间点，计算出有效区间的最小值和最大值 */
 		this.minimal = this.start - this.stepSize;
 		this.maximum = this.start + this.stepSize;
+		
+		long currentValue = this.atomicValue.get();
+		// 断言区间调整后，计数器的当前值应该还在此区间内，否则调整失败(区间步长由大变小时有可能失败)
+		AssertUtils.assertTrue(currentValue >= minimal && currentValue <= maximum, String.format(
+				"Counter interval range adjustment failed, currentValue '[%d]' outside interval range[{%d},{%d}]", 
+				currentValue, minimal, maximum));
 	}
 					
 	@Override

@@ -26,12 +26,19 @@ package org.sniper.support.counter;
 public interface IntervalCounter<V> extends Counter<V> {
 	
 	/**
+	 * 设置区间步长
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param stepSize
+	 */
+	public void setStepSize(long stepSize);
+	
+	/**
 	 * 获取区间步长
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public long getStepSize();
-		
+	
 	/**
 	 * 获取区间内的最小值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
