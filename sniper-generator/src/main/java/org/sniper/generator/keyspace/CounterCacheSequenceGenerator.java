@@ -132,7 +132,6 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 	 * 优点：由于趋势序列生成的种子计数不会受消费方影响，因此这种方式在宕机和重启恢复的情况下，比方式1造成的丢失范围要小。另外可以很方便的根据趋势序列生成的种子计数和cacheStepSize推算出缓存批次。</P>
 	 * 缺点：可能会使本地缓存的计数器失效， 例如：消费方如果每次要求生成的个数都大于cacheStepSize，则每次在返回结果之前，都会使计数器更新区间初始值和步长，性能将急剧下降。
 	 * 极端情况，当cacheStepSize=1或cacheStepSize=count时，缓存的计数器实际上并不能进行累加操作，这会导致缓存失去意义。</P>
-	 * 
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @version 1.0
 	 */
@@ -155,6 +154,9 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 			cache.put(key, counter);
 			
 			Long value = counter.increment();
+			logger.debug("Keyspace '{}' cache {} elements in counter and get one element", 
+					key, counter.incrementSize());
+			
 			return value;
 		}
 		
@@ -170,6 +172,9 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 			counter.setStepSize(calculateStepSize());
 			
 			Long value = counter.increment();
+			logger.debug("Keyspace '{}' cache {} elements in counter and get one element", 
+					key, counter.incrementSize());
+					
 			return value;
 		}
 		
@@ -183,7 +188,12 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		protected List<Long> cacheAndBatchIncrement(Object key, int count) {
 			IntervalCounter<Long> counter = createCounter(key, count);
 			cache.put(key, counter);
-			return batchIncrement(counter, count);
+			
+			List<Long> list = batchIncrement(counter, count);
+			logger.debug("Keyspace '{}' cache {} elements in counter and get {} element", 
+					key, counter.incrementSize(), list.size());
+			
+			return list;
 		}
 		
 		/**
@@ -201,21 +211,36 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 			if (counterRemain == 0) {
 				counter.setStart(calculateStartValue(key, count));
 				counter.setStepSize(calculateStepSize(count));
-				return batchIncrement(counter, count);
+				
+				List<Long> list = batchIncrement(counter, count);
+				logger.debug("Keyspace '{}' cache {} elements in counter and get {} element", 
+						key, counter.incrementSize(), list.size());
+				
+				return list;
 			} 
 			
-			List<Long> list = CollectionUtils.newArrayList(count);
+			// 1.计算出还需要补偿获取的个数(compensateCount)="指定生成的个数-计数器剩余的个数"
 			int compensateCount = count - counterRemain;
+			
+			/* 2.计算出用于更新计数器的初始值和步长 */
 			long start = calculateStartValue(key, compensateCount);
 			int stepSize = calculateStepSize(compensateCount);
+			logger.debug("Keyspace '{}' remain {} elements incrementing in counter, compensate {} elements incrementing, generated {} elements",
+					key, counterRemain, compensateCount, stepSize);
 			
-			for (int i = 0; i < counterRemain; i++) {
-				list.add(counter.increment());
-			}
+			/* 3.获取计数器在更新之前剩余的所有元素 
+			 * 注意：此步不要放在第2步计算之前计数器的初始值和步长进行，因为如果先进行剩余元素的获取操作，再进行计算时由于某种原因(例如：异常)导致失败，
+			 * 由于基于计数器的获取属于单向递增的一次性消费过程，这会导致已获取的剩余元素不能被调用方正常接收到，造成缓存丢失。*/
+			List<Long> list = batchIncrement(counter, counterRemain);
 			
+			/* 4.更新计数器后，再累加并获取前compensateCount个元素，从而使最终获取到的结果为count个。
+			 * 在分布式环境中，list中呈现的出列元素可能不是连续的 */
 			counter.setStart(start);
 			counter.setStepSize(stepSize);
 			list.addAll(batchIncrement(counter, compensateCount));
+			
+			logger.debug("Keyspace '{}' cache {} elements in counter and get {} elements {remaining:{},compensated:{}}", 
+					key, counter.incrementSize(), list.size(), counterRemain, compensateCount);
 			
 			return list;
 		}
@@ -283,7 +308,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 			long seed = keyspaceTrendSequence.updateByKey(key, stepSize);
 			return seed - stepSize;
 		}
-		
+				
 		/**
 		 * 计算出计数器的步长
 		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

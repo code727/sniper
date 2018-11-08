@@ -160,10 +160,8 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 			List<V> list = keyspaceGenerator.batchGenerateByKey(key, calculateBatchCount());
 			
 			queue.addAll(list.subList(1, list.size()));
-			logger.debug("Keyspace '{}' cache {} elements in queue", key, queue.size());
-			
 			V polled = list.get(0);
-			logger.debug("Keyspace '{}' polled a element from list:[{}]", key, polled);
+			logger.debug("Keyspace '{}' cache {} elements in queue and polled one element from list", key, queue.size());
 			
 			return polled;
 		}
@@ -194,12 +192,11 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 			List<V> list = keyspaceGenerator.batchGenerateByKey(key, calculateBatchCount(count));
 			
 			queue.addAll(list.subList(count, list.size()));
-			logger.debug("Keyspace '{}' cache {} elements in queue", key, queue.size());
+			List<V> polledList = list.subList(0, count);
+			logger.debug("Keyspace '{}' cache {} elements in queue and polled {} element from list", 
+					key, queue.size(), polledList.size());
 			
-			List<V> polled = list.subList(0, count);
-			logger.debug("Keyspace '{}' batch polled {} elements from list:{}", key, polled.size(), polled);
-			
-			return polled;
+			return polledList;
 		}
 		
 		/**
@@ -215,8 +212,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		 */
 		protected List<V> updateAndBatchPoll(Queue<V> queue, Object key, int queueRemain, int count) {
 			if (queueRemain == 0) {
-				/* 如果queueRemain==0，表明队列已经没有剩余元素了， 将调用重载的updateAndBatchPoll方法更新队列并出列count个结果。 */
-				logger.debug("Keyspace '{}' nothing remaining element in queue, will update queue and batch poll {} elements", key, count);
+				// 如果queueRemain==0，表明队列已经没有剩余元素了， 将调用重载的updateAndBatchPoll方法更新队列并出列count个结果
 				return updateAndBatchPoll(queue, key, count);
 			}
 			
@@ -225,24 +221,26 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 			
 			/* 2.计算出批量生成的实际个数后利用代理的键空间生成器批量生成结果 */
 			List<V> list = keyspaceGenerator.batchGenerateByKey(key, calculateBatchCount(compensateCount));
-			logger.debug("Keyspace '{}' remaining {} elements in queue, compensate {} elements, generate {} elements",
-					queueRemain, compensateCount, list.size());
+			logger.debug("Keyspace '{}' remain {} elements polling in queue, compensate {} elements polling, generated {} elements",
+					key, queueRemain, compensateCount, list.size());
 			
-			/* 3.以compensateCount为界，将第compensateCount个元素以后的所有元素全部存入缓存队列 */
-			List<V> queueSubList = list.subList(compensateCount, list.size());
-			queue.addAll(queueSubList);
-			logger.debug("Keyspace '{}' cache {} elements in queue", key, queueSubList.size());
+			// 3.以compensateCount为界，将第compensateCount个元素以后的所有元素全部存入缓存队列 
+			queue.addAll(list.subList(compensateCount, list.size()));
 			
 			/* 4.从队列中出列前queueRemain个元素，即进行补偿生成前，缓存队列中剩余的元素。
-			 * 注意：此步不要放在第2步批量生成结果之前进行，因为如果先进行了剩余元素的出列操作，而后再进行批量生成操作时由于某种原因(例如：异常)导致失败时，
+			 * 注意：此步不要放在第2步批量生成结果之前进行。因为如果先进行剩余元素的出列操作，再进行批量生成操作时由于某种原因(例如：异常)导致失败，
 			 * 由于基于队列的出列属于一次性的消费过程，这会导致已出列的剩余元素不能被调用方正常接收到，造成缓存丢失。*/
-			List<V> polled = batchPoll(queue, key, queueRemain);
+			List<V> polledList = batchPoll(queue, key, queueRemain);
 			
-			/* 5.再次以compensateCount为界，第compensateCount个元素之前的所有元素是当前批次需要补偿出列的，因此进行出列操作 */
-			polled.addAll(list.subList(0, compensateCount));
-			logger.debug("Keyspace '{}' batch polled {} elements from queue and list:{}", key, polled.size(), polled);
+			/* 5.再次以compensateCount为界，第compensateCount个元素之前的所有元素是当前批次需要补偿出列的，
+			 * 因此进行出列操作，从而使最终获取到的结果为count个。在分布式环境中，polledList中呈现的出列元素可能不是连续的 */
+			List<V> polledSubList = list.subList(0, compensateCount);
+			polledList.addAll(polledSubList);
 			
-			return polled;
+			logger.debug("Keyspace '{}' cache {} elements in queue and polled {} elements from {originalQueue:{},list:{}}", 
+					key, queue.size(), polledList.size(), queueRemain, polledSubList.size());
+					
+			return polledList;
 		}
 		
 		/**
@@ -259,7 +257,6 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 				list.add(queue.poll());
 			}
 			
-			logger.debug("Keyspace '{}' batch polled {} elements from queue:{}", key, list.size(), list);
 			return list;
 		}
 		
