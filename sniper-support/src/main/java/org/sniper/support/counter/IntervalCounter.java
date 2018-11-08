@@ -53,4 +53,17 @@ public interface IntervalCounter<V> extends Counter<V> {
 	 */
 	public V getMaximum();
 	
+	/**
+	 * 获取在有效区间内可进行累加的长度
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public long incrementSize();
+	
+	/**
+	 * 获取在有效区间内可进行累减的长度
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public long decrementSize();
 }

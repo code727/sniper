@@ -132,5 +132,15 @@ public class AtomicLongIntervalCounter extends AbstractIntervalCounter<Long> {
 		return String.format("{\"start\":%s,\"stepSize\":%s,\"currentValue\":%s,\"minimal\":%s,\"maximum\":%s}", 
 				start, stepSize, atomicValue, minimal, maximum);
 	}
-		
+
+	@Override
+	public long incrementSize() {
+		return Math.abs(getMaximum() - get());
+	}
+
+	@Override
+	public long decrementSize() {
+		return Math.abs(get() - getMinimal());
+	}
+			
 }
