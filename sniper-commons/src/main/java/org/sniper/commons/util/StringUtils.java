@@ -1873,6 +1873,46 @@ public class StringUtils {
 	}
 	
 	/**
+	 * 模式匹配
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pattern
+	 * @param str
+	 * @return
+	 */
+	public static boolean simpleMatch(String pattern, String str) {
+		if (pattern == null || str == null)
+			return false;
+		
+		int firstIndex = pattern.indexOf(ANY_CHAR);
+		if (firstIndex == -1) 
+			return pattern.equals(str);
+		
+		if (firstIndex == 0) {
+			if (pattern.length() == 1) 
+				return true;
+			
+			int nextIndex = pattern.indexOf(ANY_CHAR, firstIndex + 1);
+			if (nextIndex == -1) 
+				return str.endsWith(pattern.substring(1));
+			
+			String part = pattern.substring(1, nextIndex);
+			int partIndex = str.indexOf(part);
+			while (partIndex != -1) {
+				if (simpleMatch(pattern.substring(nextIndex), str.substring(partIndex + part.length()))) {
+					return true;
+				}
+				partIndex = str.indexOf(part, partIndex + 1);
+			}
+			
+			return false;
+		}
+		
+		return (str.length() >= firstIndex &&
+				pattern.substring(0, firstIndex).equals(str.substring(0, firstIndex)) &&
+				simpleMatch(pattern.substring(firstIndex), str.substring(firstIndex)));
+	}
+	
+	/**
 	 * 从原数字的左侧（开头）增补若干个字符0，生成具有指定最小长度的新字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
@@ -1966,44 +2006,6 @@ public class StringUtils {
 		}
 		
 		return str;
-	}
-	
-	/**
-	 * 模式匹配
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param pattern
-	 * @param str
-	 * @return
-	 */
-	public static boolean simpleMatch(String pattern, String str) {
-		if (pattern == null || str == null)
-			return false;
-		
-		int firstIndex = pattern.indexOf(ANY_CHAR);
-		if (firstIndex == -1) 
-			return pattern.equals(str);
-		
-		if (firstIndex == 0) {
-			if (pattern.length() == 1) 
-				return true;
-			
-			int nextIndex = pattern.indexOf(ANY_CHAR, firstIndex + 1);
-			if (nextIndex == -1) 
-				return str.endsWith(pattern.substring(1));
-			
-			String part = pattern.substring(1, nextIndex);
-			int partIndex = str.indexOf(part);
-			while (partIndex != -1) {
-				if (simpleMatch(pattern.substring(nextIndex), str.substring(partIndex + part.length()))) {
-					return true;
-				}
-				partIndex = str.indexOf(part, partIndex + 1);
-			}
-			return false;
-		}
-		return (str.length() >= firstIndex &&
-				pattern.substring(0, firstIndex).equals(str.substring(0, firstIndex)) &&
-				simpleMatch(pattern.substring(firstIndex), str.substring(firstIndex)));
 	}
 	
 	/**

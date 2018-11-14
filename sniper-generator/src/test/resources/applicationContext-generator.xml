@@ -6,20 +6,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd ">
-
-	<!-- <bean id="redisSerialNumberGenerator" class="org.sniper.generator.redis.RedisSerialNumberGenerator" >
-		<constructor-arg name="redisParameterizeGenerator" ref="redisParameterizeGenerator" />
-		<property name="dimensionGenerator" ref="dimensionGenerator" />
-	</bean>
-	
-	<bean id="redisParameterizeGenerator" class="org.sniper.generator.redis.CounterCacheRedisNumberGenerator" >
-		<constructor-arg name="redisCommandsDao" ref="redisCommandsDao" />
-		<property name="cacheSize" value="100000" />
-	</bean>
-	
-	<bean id="dimensionGenerator" class="org.sniper.generator.dimension.DateDimensionGenerator" >
-		<constructor-arg name="timeDimension" value="1" />
-	</bean> -->
 	
 	<bean id="redisTrendSequence" class="org.sniper.generator.redis.RedisTrendSequence">
 		<constructor-arg name="redisCommandsDao" ref="redisCommandsDao" />
@@ -32,13 +18,21 @@
 	<bean id="queueCacheSequenceGenerator" class="org.sniper.generator.keyspace.QueueCacheSequenceGenerator">
 		<constructor-arg name="keyspaceGenerator" ref="redisSequenceGenerator" />
 		<constructor-arg name="fixQueueCache" value="false"/>
-		<property name="cacheStepSize" value="100000" />
+		<property name="cacheStepSize" value="10000" />
 	</bean>
 	
 	<bean id="counterCacheSequenceGenerator" class="org.sniper.generator.keyspace.CounterCacheSequenceGenerator">
 		<constructor-arg name="keyspaceTrendSequence" ref="redisTrendSequence" />
 		<constructor-arg name="fixCounterCache" value="false"/>
 		<property name="cacheStepSize" value="100000" />
+	</bean>
+	
+	<bean id="serialNumberGenerator" class="org.sniper.generator.application.SerialNumberGenerator">
+		<constructor-arg name="keyspaceGenerator" ref="counterCacheSequenceGenerator" />
+	</bean>
+	
+	<bean id="dimensionSerialNumberGenerator" class="org.sniper.generator.application.DimensionSerialNumberGenerator">
+		<constructor-arg name="keyspaceGenerator" ref="counterCacheSequenceGenerator" />
 	</bean>
 	
 </beans>

@@ -37,6 +37,9 @@ public class DimensionSerialNumberGenerator extends SerialNumberGenerator {
 	/** 维度序列 */
 	protected final DimensionSequence<?> dimensionSequence;
 	
+	/** 是否将自定义的键作为维度的前缀 */
+	private boolean keyAsDimensionPrefix;
+	
 	public DimensionSerialNumberGenerator(KeyspaceGenerator<Object, ?> keyspaceGenerator) {
 		this(keyspaceGenerator, null);
 	}
@@ -58,70 +61,77 @@ public class DimensionSerialNumberGenerator extends SerialNumberGenerator {
 		this.dimensionSequence = (dimensionSequence != null ? dimensionSequence : new DateSequence());
 	}
 	
+	public DimensionSequence<?> getDimensionSequence() {
+		return dimensionSequence;
+	}
+	
+	public boolean isKeyAsDimensionPrefix() {
+		return keyAsDimensionPrefix;
+	}
+
+	public void setKeyAsDimensionPrefix(boolean keyAsDimensionPrefix) {
+		this.keyAsDimensionPrefix = keyAsDimensionPrefix;
+	}
+
 	@Override
-	public String generateByParameter(Object parameter) {
-		String safeParameter = ObjectUtils.toSafeString(parameter);
+	protected String doGenerate(Object key, Object parameter) {
 		String dimension = dimensionSequence.update().toString();
-		String generated = keyspaceGenerator.generateByKey(createKey(safeParameter, dimension)).toString();
-		return generateSequence(safeParameter, dimension, generated);
+		String generated = keyspaceGenerator.generateByKey(createKey(dimension, key)).toString();
+		
+		return generateSequence(dimension, generated, ObjectUtils.toSafeString(parameter));
 	}
 	
 	@Override
-	public List<String> batchGenerateByParameter(Object parameter, int count) {
+	protected List<String> doBatchGenerate(Object key, Object parameter, int count) {
 		String safeParameter = ObjectUtils.toSafeString(parameter);
 		String dimension = dimensionSequence.update().toString();
-		List<?> list = keyspaceGenerator.batchGenerateByKey(createKey(safeParameter, dimension), count);
+		List<?> list = keyspaceGenerator.batchGenerateByKey(createKey(dimension, key), count);
 		
 		List<String> generates = CollectionUtils.newArrayList(list.size());
 		for (Object element : list) {
-			generates.add(generateSequence(safeParameter, dimension, element.toString()));
+			generates.add(generateSequence(dimension, element.toString(), safeParameter));
 		}
 		
 		return generates;
 	}
-	
+			
 	/**
-	 * 根据参数和维度值创建键
+	 * 根据维度值和自定义的键创建键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param safeParameter
 	 * @param dimension
+	 * @param key
 	 * @return
 	 */
-	private String createKey(String safeParameter, String dimension) {
-		if (isParameterAsKey()) {
-			if (isParameterAsKeyPrefix()) {
-				// 格式:"参数_默认键_维度"
-				return new StringBuilder(safeParameter).append(StringUtils.UNDER_LINE)
-						.append(defaultKeyspace).append(StringUtils.UNDER_LINE).append(dimension).toString();
-			}
-			
-			// 格式:"默认键_维度_参数"
-			return new StringBuilder(defaultKeyspace.toString()).append(StringUtils.UNDER_LINE)
-					.append(dimension).append(StringUtils.UNDER_LINE).append(safeParameter).toString();
+	private String createKey(String dimension, Object key) {
+		if (keyAsDimensionPrefix) {
+			// 格式:自定义键_维度值
+			return new StringBuilder(key.toString()).append(StringUtils.UNDER_LINE).append(dimension).toString();
 		}
 		
-		return dimension;
+		// 格式:维度值_自定义键
+		return new StringBuilder(dimension).append(StringUtils.UNDER_LINE).append(key).toString();
 	}
 	
 	/**
-	 * 根据参数、维度值和预生成结果生成最终的序列
+	 * 根据维度值、预生成结果和参数生成最终的序列
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param safeParameter
 	 * @param dimension
 	 * @param generated
+	 * @param safeParameter
 	 * @return
 	 */
-	private String generateSequence(String safeParameter, String dimension, String generated) {
+	private String generateSequence(String dimension, String generated, String safeParameter) {
 		// 当前序列的总长度="维度序列长度"+"预生成结果的长度"
 		int sequenceLength = dimension.length() + generated.length();
 		
-		/* 将"序列部分的最小长度"与"当前序列的总长度"相减，如果大于0，
-		 * 说明预生成结果的长度不够，需要补偿预生成结果的最小长度，使当前序列的总长度最小为sequenceLength*/
+		/* 将"序列部分的最小长度"与"当前序列的总长度"相减，如果大于0，明预生成结果的长度不够，
+		 * 说明需要补偿预生成结果的最小长度，使预生成结果的长度最小为generated.length() + offset，
+		 * 从而在补偿后使"维度序列长度"+"预生成结果的长度"的长度最小为sequenceMinLength */
 		int offset = getSequenceMinLength() - sequenceLength;
 		StringBuilder sequence = new StringBuilder(dimension)
-				.append(offset > 0 ? compensateGenerate(generated, offset) : generated);
+				.append(offset > 0 ? compensateGenerate(generated, generated.length() + offset) : generated);
 		
-		if (isParameterAsResult()) {
+		if (safeParameter.length() >0 && isParameterAsResult()) {
 			if (isParameterAsResultPrefix()) {
 				sequence.insert(0, safeParameter);
 			} else {

@@ -25,9 +25,7 @@ import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.NumberUtils;
 import org.sniper.commons.util.ObjectUtils;
-import org.sniper.commons.util.StringUtils;
-import org.sniper.generator.AbstractParameterizeGenerator;
-import org.sniper.generator.keyspace.Keyspace;
+import org.sniper.generator.keyspace.AbstractKeyspaceParameterizeGenerator;
 import org.sniper.generator.keyspace.KeyspaceGenerator;
 
 /**
@@ -35,24 +33,15 @@ import org.sniper.generator.keyspace.KeyspaceGenerator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SerialNumberGenerator extends AbstractParameterizeGenerator<Object, String> implements Keyspace<Object> {
+public class SerialNumberGenerator extends AbstractKeyspaceParameterizeGenerator<Object, Object, String> {
 	
 	public static final String DEFAULT_KEYSPACE = "serial_number_key";
 	
 	/** 键空间生成器 */
 	protected final KeyspaceGenerator<Object, ?> keyspaceGenerator;
-	
-	/** 全局键空间 */
-	protected final Object defaultKeyspace;
 		
-	/** 是否将参数作为键的一部分 */
-	private boolean parameterAsKey = true;
-	
-	/** 是否将参数作为键的一前缀 */
-	private boolean parameterAsKeyPrefix;
-	
 	/** 是否将参数作为最终结果的一部分进行返回 */
-	private boolean parameterAsResult;
+	private boolean parameterAsResult = true;
 	
 	/** 是否将参数作为最终结果的前缀进行返回 */
 	private boolean parameterAsResultPrefix;
@@ -65,32 +54,11 @@ public class SerialNumberGenerator extends AbstractParameterizeGenerator<Object,
 	}
 	
 	public SerialNumberGenerator(KeyspaceGenerator<Object, ?> keyspaceGenerator, Object defaultKeyspace) {
+		super(defaultKeyspace != null ? defaultKeyspace : DEFAULT_KEYSPACE);
 		AssertUtils.assertNotNull(keyspaceGenerator, "Keyspace generator must not be null");
 		this.keyspaceGenerator = keyspaceGenerator;
-		this.defaultKeyspace = (defaultKeyspace != null ? defaultKeyspace : DEFAULT_KEYSPACE);
 	}
-	
-	@Override
-	public Object getDefaultKeyspace() {
-		return defaultKeyspace;
-	}
-	
-	public boolean isParameterAsKey() {
-		return parameterAsKey;
-	}
-
-	public void setParameterAsKey(boolean parameterAsKey) {
-		this.parameterAsKey = parameterAsKey;
-	}
-
-	public boolean isParameterAsKeyPrefix() {
-		return parameterAsKeyPrefix;
-	}
-
-	public void setParameterAsKeyPrefix(boolean parameterAsKeyPrefix) {
-		this.parameterAsKeyPrefix = parameterAsKeyPrefix;
-	}
-
+		
 	public boolean isParameterAsResult() {
 		return parameterAsResult;
 	}
@@ -119,77 +87,53 @@ public class SerialNumberGenerator extends AbstractParameterizeGenerator<Object,
 		AssertUtils.assertTrue(sequenceMinLength > 0, "Property 'sequenceMinLength' must greater than 0");
 		this.sequenceMinLength = sequenceMinLength;
 	}
-
-	@Override
-	public String generateByParameter(Object parameter) {
-		String safeParameter = ObjectUtils.toSafeString(parameter);
-		String generated = keyspaceGenerator.generateByKey(createKeyByParameter(safeParameter)).toString();
-		return generateSequence(safeParameter, generated);
-	}
 	
 	@Override
-	public List<String> batchGenerateByParameter(Object parameter, int count) {
-		String safeParameter = ObjectUtils.toSafeString(parameter);
-		List<?> list = keyspaceGenerator.batchGenerateByKey(createKeyByParameter(safeParameter), count);
+	protected String doGenerate(Object key, Object parameter) {
+		String generated = keyspaceGenerator.generateByKey(key).toString();
+		return generateSequence(generated, ObjectUtils.toSafeString(parameter));
+	}
+
+	@Override
+	protected List<String> doBatchGenerate(Object key, Object parameter, int count) {
+		List<?> list = keyspaceGenerator.batchGenerateByKey(key, count);
 		
 		List<String> generates = CollectionUtils.newArrayList(list.size());
+		String safeParameter = ObjectUtils.toSafeString(parameter);
 		for (Object element : list) {
-			generates.add(generateSequence(safeParameter, element.toString()));
+			generates.add(generateSequence(element.toString(), safeParameter));
 		}
 		
 		return generates;
 	}
-	
+
 	/**
-	 * 补偿生成指定字符串长度+offset长度的结果
+	 * 补偿生成字符串的结果，使其长度最小为minLength
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param generated
-	 * @param offset
+	 * @param minLength
 	 * @return
 	 */
-	protected String compensateGenerate(String generated, int offset) {
+	protected String compensateGenerate(String generated, int minLength) {
 		// 要求generated参数必须为字符串类型的数字，否则会抛出IllegalArgumentException
-		return NumberUtils.format(new BigInteger(generated), generated.length() + offset);
+		return NumberUtils.format(new BigInteger(generated), minLength);
 	}
-	
-	/**
-	 * 根据指定的参数创建键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param safeParameter
-	 * @return
-	 */
-	private String createKeyByParameter(String safeParameter) {
-		if (parameterAsKey) {
-			if (parameterAsKeyPrefix) {
-				// 格式:"参数_默认键"
-				return new StringBuilder(safeParameter)
-						.append(StringUtils.UNDER_LINE).append(defaultKeyspace).toString();
-			}
-			
-			// 格式:"默认键_参数"
-			return new StringBuilder(defaultKeyspace.toString())
-					.append(StringUtils.UNDER_LINE).append(safeParameter).toString();
-		} 
 		
-		return defaultKeyspace.toString();
-	}
-	
 	/**
-	 * 根据参数和预生成结果生成最终的序列
+	 * 根据预生成结果和参数生成最终的序列
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param safeParameter
 	 * @param generated
+	 * @param safeParameter
 	 * @return
 	 */
-	private String generateSequence(String safeParameter, String generated) {
+	private String generateSequence(String generated, String safeParameter) {
 		/* 将"序列部分的最小长度"与"预生成结果的长度"相减，如果大于0，
 		 * 说明预生成结果的长度不够，需要补偿预生成结果的最小长度为sequenceMinLength后得到最终的序列*/
-		int offset = sequenceMinLength - generated.length();
-		if (offset > 0) {
-			generated = compensateGenerate(generated, offset);
+		if (sequenceMinLength - generated.length() > 0) {
+			generated = compensateGenerate(generated, sequenceMinLength);
 		}
 		
-		return parameterAsResult ? (parameterAsResultPrefix ? 
+		return (safeParameter.length() > 0 && parameterAsResult) ? (parameterAsResultPrefix ? 
 				safeParameter + generated : generated + safeParameter) : generated;
 	}
 

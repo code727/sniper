@@ -30,7 +30,7 @@ import org.sniper.lock.jdk.JdkParameterizeLock;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractCacheableGenerator<K, E, V> extends AbstractKeyspaceGeneratorGenerator<K, V> {
+public abstract class AbstractCacheableGenerator<K, E, V> extends AbstractKeyspaceGenerator<K, V> {
 	
 	protected final ParameterizeLock<K> keyLock;
 	

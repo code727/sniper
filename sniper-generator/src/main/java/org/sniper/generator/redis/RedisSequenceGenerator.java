@@ -21,7 +21,7 @@ package org.sniper.generator.redis;
 import java.util.List;
 
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.generator.keyspace.AbstractKeyspaceGeneratorGenerator;
+import org.sniper.generator.keyspace.AbstractKeyspaceGenerator;
 
 /**
  * 基于Redis实现的序列生成器，生成的结果具备的特点：</P>
@@ -30,7 +30,7 @@ import org.sniper.generator.keyspace.AbstractKeyspaceGeneratorGenerator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisSequenceGenerator extends AbstractKeyspaceGeneratorGenerator<Object, Long> {
+public class RedisSequenceGenerator extends AbstractKeyspaceGenerator<Object, Long> {
 	
 	private final RedisTrendSequence redisTrendSequence;
 	

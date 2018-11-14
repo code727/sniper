@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2018年11月12日
+ * Create Date : 2018-11-12
  */
 
 package org.sniper.generator.test.application;
 
-import org.junit.Test;
 import org.sniper.generator.application.SerialNumberGenerator;
 import org.sniper.generator.test.AbstractSpringGeneratorTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
+ * 流水号生成器单元测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -33,7 +33,7 @@ public class SerialNumberGeneratorTest extends AbstractSpringGeneratorTest<Strin
 	private SerialNumberGenerator serialNumberGenerator;
 
 	public SerialNumberGeneratorTest() {
-		this(false, false);
+		this(false, true);
 	}
 	
 	protected SerialNumberGeneratorTest(boolean uniquenessTest, boolean performanceTest) {
@@ -42,17 +42,7 @@ public class SerialNumberGeneratorTest extends AbstractSpringGeneratorTest<Strin
 
 	@Override
 	protected String generate() {
-		return null;
+		return serialNumberGenerator.generateByParameter("A");
 	}
-	
-	@Test
-	public void testGenerate() {
-		System.out.println(serialNumberGenerator.generateByParameter("A"));
-		System.out.println(serialNumberGenerator.batchGenerateByParameter("A", 5));
-	}
-	
-	public static void main(String[] args) {
-		System.out.println("0000000000000001A".length());
-	}
-
+			
 }

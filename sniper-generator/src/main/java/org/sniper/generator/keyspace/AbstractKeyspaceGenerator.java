@@ -28,13 +28,13 @@ import org.sniper.generator.AbstractGenerator;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractKeyspaceGeneratorGenerator<K, V> extends AbstractGenerator<V>
+public abstract class AbstractKeyspaceGenerator<K, V> extends AbstractGenerator<V>
 		implements KeyspaceGenerator<K, V> {
 		
 	/** 全局默认的键空间 */
 	protected final K defaultKeyspace;
 	
-	protected AbstractKeyspaceGeneratorGenerator(K defaultKeyspace) {
+	protected AbstractKeyspaceGenerator(K defaultKeyspace) {
 		checkKeyspace(defaultKeyspace);
 		this.defaultKeyspace = defaultKeyspace;
 	}

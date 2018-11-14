@@ -18,7 +18,6 @@
 
 package org.sniper.generator.test.cache;
 
-import org.junit.Test;
 import org.sniper.generator.keyspace.QueueCacheSequenceGenerator;
 import org.sniper.generator.test.AbstractSpringGeneratorTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class QueueCacheSequenceGeneratorTest extends AbstractSpringGeneratorTest
 	private QueueCacheSequenceGenerator<Long> queueCacheSequenceGenerator;
 	
 	public QueueCacheSequenceGeneratorTest() {
-		this(false, false);
+		this(false, true);
 	}
 	
 	protected QueueCacheSequenceGeneratorTest(boolean uniquenessTest, boolean performanceTest) {
@@ -53,7 +52,7 @@ public class QueueCacheSequenceGeneratorTest extends AbstractSpringGeneratorTest
 		System.out.println(queueCacheSequenceGenerator.generate());
 	}
 	
-	@Test
+//	@Test
 	public void testBatchGenerate() {
 		System.out.println(queueCacheSequenceGenerator.batchGenerate(3));
 		System.out.println(queueCacheSequenceGenerator.batchGenerate(3));

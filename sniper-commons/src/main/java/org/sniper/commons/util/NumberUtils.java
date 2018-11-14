@@ -1467,7 +1467,7 @@ public class NumberUtils {
 		DecimalFormat decimalFormat = getDecimalFormat(length);
 		return decimalFormat != null ? decimalFormat.format(number) : number.toString();
 	}
-		
+			
 	/**
 	 * 绝对值取反
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

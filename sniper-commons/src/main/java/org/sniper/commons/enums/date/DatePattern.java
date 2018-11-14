@@ -35,9 +35,9 @@ public enum DatePattern {
 	HOUR("yyyy-MM-dd HH", "yyyyMMddHH"),
 	/** 分 */
 	MINUTE("yyyy-MM-dd HH:mm", "yyyyMMddHHmm"),
-	/** 日期+匹配到秒的时间 */
+	/** 日期+精确到秒的时间 */
 	DATETIME("yyyy-MM-dd HH:mm:ss", "yyyyMMddHHmmss"),
-	/** 日期+匹配到毫秒的时间 */
+	/** 日期+精确到毫秒的时间 */
 	DATETIME_PLUS("yyyy-MM-dd HH:mm:ss:SSS", "yyyyMMddHHmmssSSS")
 	;
 	
