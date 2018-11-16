@@ -20,7 +20,7 @@ package org.sniper.persistence.util;
 
 import java.util.Set;
 
-import org.sniper.commons.enums.AbstractEnums;
+import org.sniper.commons.enums.AbstractEnum;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
@@ -30,8 +30,10 @@ import org.sniper.commons.util.StringUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class Operator extends AbstractEnums<String, String> {
+public final class Operator extends AbstractEnum<String, String> {
 	
+	private static final long serialVersionUID = 7578105868961133349L;
+
 	/** 存放的所有运算枚举对象组 */
 	protected static final Set<Operator> ENUM_GROUP = CollectionUtils.newLinkedHashSet();
 	

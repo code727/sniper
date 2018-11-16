@@ -18,14 +18,16 @@
 
 package org.sniper.commons.enums.http.headers;
 
-import org.sniper.commons.enums.AbstractLocaleEnums;
+import org.sniper.commons.enums.AbstractLocaleEnum;
 
 /**
  * HTTP头枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class HttpHeadersEnum extends AbstractLocaleEnums<String> {
+public class HttpHeadersEnum extends AbstractLocaleEnum<String> {
+
+	private static final long serialVersionUID = 7469645351098963000L;
 
 	protected HttpHeadersEnum(String key, String description) {
 		super(key, description);

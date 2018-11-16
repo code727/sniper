@@ -37,10 +37,7 @@ import org.sniper.commons.enums.date.DatePattern;
  * @version 1.0.0
  */
 public class DateUtils {
-	
-	/** 默认的日期时间格式 */
-//	public static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-		
+			
 	/** 格林尼治日期时间格式组 */
 	public static final String[] GMT_DATETIME_FORMATS = new String[] {
 			"EEE, dd MMM yyyy HH:mm:ss zzz",

@@ -12,48 +12,33 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Create Date : 2015-1-19
  */
 
 package org.sniper.commons.enums;
 
+import java.io.Serializable;
+
 /**
- * 枚举对象抽象类
+ * 枚举对象类接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractEnums<K, V> implements Enums<K, V> {
+public interface Enum<K, V> extends Serializable {
 	
-	/** 键 */
-	private K key;
-	
-	/** 值 */
-	private V value;
-	
-	protected AbstractEnums(K key, V value) {
-		this.key = key;
-		this.value = value;
-	}
-
-	@Override
-	public K getKey() {
-		return key;
-	}
-
-	@Override
-	public void setKey(K key) {
-		this.key = key;
-	}
-
-	@Override
-	public V getValue() {
-		return value;
-	}
-
-	@Override
-	public void setValue(V value) {
-		this.value = value;
-	}
-			
+	/**
+	 * 获取枚举键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public K getKey();
+		
+	/**
+	 * 获取枚举值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public V getValue();
+				
 }

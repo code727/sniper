@@ -19,26 +19,42 @@
 package org.sniper.commons.enums;
 
 /**
- * 可嵌套的枚举对象接口
+ * 本地化消息枚举对象接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface NestableEnums<K1, K2, V2> extends Enums<K1, Enums<K2, V2>>{
+public interface LocaleEnum<K, V> extends Enum<K, V> {
 	
 	/**
-	 * 获取被嵌套枚举对象的键
+	 * 获取当前枚举对象值的本地化消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
 	 * @return
 	 */
-	public K2 getNestedKey(K1 key);
+	public String getMessage();
 	
 	/**
-	 * 获取被嵌套枚举对象的值
+	 * 获取当前枚举对象值的本地化消息，未获取到时返回默认的消息
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
+	 * @param defaultMessage
 	 * @return
 	 */
-	public V2 getNestedValue(K1 key);
+	public String getMessage(String defaultMessage);
 	
+	/**
+	 * 获取当前枚举对象值的本地参数化消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param params
+	 * @return
+	 */
+	public String getMessage(Object[] params);
+	
+	/**
+	 * 获取当前枚举对象值的本地参数化消息，未获取到时返回默认的消息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param params
+	 * @param defaultMessage
+	 * @return
+	 */
+	public String getMessage(Object[] params, String defaultMessage);
+
 }

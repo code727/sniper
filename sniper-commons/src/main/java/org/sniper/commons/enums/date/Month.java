@@ -20,17 +20,19 @@ package org.sniper.commons.enums.date;
 
 import java.util.Calendar;
 
-import org.sniper.commons.enums.AbstractLocaleEnums;
+import org.sniper.commons.enums.AbstractLocaleEnum;
 
 /**
  * 月份枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class Month extends AbstractLocaleEnums<Integer> {
+public final class Month extends AbstractLocaleEnum<Integer> {
 
-	protected Month(Integer key, String messageKey) {
-		super(key, messageKey);
+	private static final long serialVersionUID = 6891434252926822212L;
+
+	private Month(Integer key, String value) {
+		super(key, value);
 	}
 	
 	/** 一月 */
@@ -68,5 +70,5 @@ public final class Month extends AbstractLocaleEnums<Integer> {
 	
 	/** 十二月 */
 	public static final Month DECEMBER = new Month(Calendar.DECEMBER, "date.month.december");
-
+	
 }

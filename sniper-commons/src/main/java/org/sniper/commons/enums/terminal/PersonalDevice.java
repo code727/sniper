@@ -18,17 +18,19 @@
 
 package org.sniper.commons.enums.terminal;
 
-import org.sniper.commons.enums.AbstractLocaleEnums;
+import org.sniper.commons.enums.AbstractLocaleEnum;
 
 /**
  * 个人设备类型枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class PersonalDevice extends AbstractLocaleEnums<Integer> {
+public final class PersonalDevice extends AbstractLocaleEnum<Integer> {
 
-	private PersonalDevice(Integer key, String messageKey) {
-		super(key, messageKey);
+	private static final long serialVersionUID = 2143744347288417229L;
+	
+	private PersonalDevice(Integer key, String value) {
+		super(key, value);
 	}
 	
 	public static final PersonalDevice PC = new PersonalDevice(0, "personal.device.type.pc");

@@ -6,7 +6,7 @@
 package org.sniper.support.test;
 
 import org.junit.Test;
-import org.sniper.commons.enums.Enums;
+import org.sniper.commons.enums.Enum;
 import org.sniper.support.operation.logic.LogicOperation;
 import org.sniper.support.operation.logic.LogicOperationEnum;
 import org.sniper.test.junit.BaseTestCase;
@@ -20,7 +20,7 @@ public class LogicOperationTest extends BaseTestCase {
 		
 	@Test
 	public void testLogicOperation() {
-		Enums<String, LogicOperation<Object, Object>> logicOperationEnum = LogicOperationEnum.resolve("eq");
+		Enum<String, LogicOperation<Object, Object>> logicOperationEnum = LogicOperationEnum.resolve("eq");
 		assertNotNull(logicOperationEnum);
 		
 		LogicOperation<Object, Object> operation = logicOperationEnum.getValue();

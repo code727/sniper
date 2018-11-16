@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 the original author or authors.
+ * Copyright 2018 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,31 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-3-16
+ * Create Date : 2018-11-16
  */
 
 package org.sniper.commons.enums.status;
 
-import org.sniper.commons.enums.AbstractLocaleEnums;
+import org.sniper.commons.enums.AbstractNestedLocaleEnum;
+import org.sniper.commons.enums.Enum;
 
 /**
  * 业务状态枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class BizStatus extends AbstractLocaleEnums<String> {
-		
-	protected BizStatus(String key, String messageKey) {
-		super(key, messageKey);
-	}
-
-	/** 业务执行成功 */
-	public static final BizStatus SUCCESS = new BizStatus("success", "biz.status.success");
+public final class BizStatus extends AbstractNestedLocaleEnum<String, Integer> {
 	
-	/** 业务执行失败，业务逻辑之类引起的 */
-	public static final BizStatus FAILED = new BizStatus("failed", "biz.status.failed");
+	private static final long serialVersionUID = -2847353128385702823L;
+
+	private BizStatus(String key, Enum<Integer, String> value) {
+		super(key, value);
+	}
+	
+	/** 业务执行成功 */
+	public static final BizStatus SUCCESS = new BizStatus("success", ExecutionStatus.SUCCESS);
 	
 	/** 异常，系统故障之类引起的 */
-	public static final BizStatus EXCEPTION = new BizStatus("exception", "biz.status.exception");
+	public static final BizStatus EXCEPTION = new BizStatus("exception", ExecutionStatus.EXCEPTION);
 	
+	/** 业务执行失败，业务逻辑之类引起的 */
+	public static final BizStatus FAILED = new BizStatus("failed", ExecutionStatus.FAILED);
+			
 }

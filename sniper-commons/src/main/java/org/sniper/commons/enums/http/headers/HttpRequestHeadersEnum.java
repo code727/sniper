@@ -25,6 +25,8 @@ package org.sniper.commons.enums.http.headers;
  */
 public final class HttpRequestHeadersEnum extends HttpHeadersEnum {
 
+	private static final long serialVersionUID = -7371490587451512766L;
+
 	protected HttpRequestHeadersEnum(String key, String description) {
 		super(key, description);
 	}

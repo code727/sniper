@@ -18,15 +18,17 @@
 
 package org.sniper.commons.enums.status;
 
-import org.sniper.commons.enums.AbstractLocaleEnums;
+import org.sniper.commons.enums.AbstractLocaleEnum;
 
 /**
  * 系统执行状态枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class ExecutionStatus extends AbstractLocaleEnums<Integer> {
+public final class ExecutionStatus extends AbstractLocaleEnum<Integer> {
 	
+	private static final long serialVersionUID = -4886626018923699286L;
+
 	private ExecutionStatus(Integer key, String value) {
 		super(key, value);
 	}
@@ -34,10 +36,40 @@ public final class ExecutionStatus extends AbstractLocaleEnums<Integer> {
 	/** 成功 */
 	public static final ExecutionStatus SUCCESS = new ExecutionStatus(1, "execution.status.success");
 	
-	/** 失败 */
+	/** 业务执行失败，业务逻辑之类引起的 */
 	public static final ExecutionStatus FAILED = new ExecutionStatus(0, "execution.status.failed");
 	
 	/** 异常 */
 	public static final ExecutionStatus EXCEPTION = new ExecutionStatus(-1, "execution.status.exception");
+	
+	/**
+	 * 构建一个自定义值的成功状态
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 * @return
+	 */
+	static ExecutionStatus success(String value) {
+		return new ExecutionStatus(SUCCESS.key, value);
+	}
+	
+	/**
+	 * 构建一个自定义值的失败状态
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 * @return
+	 */
+	static ExecutionStatus failed(String value) {
+		return new ExecutionStatus(FAILED.key, value);
+	}
+	
+	/**
+	 * 构建一个自定义值的失败状态
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 * @return
+	 */
+	static ExecutionStatus exception(String value) {
+		return new ExecutionStatus(EXCEPTION.key, value);
+	}
 			
 }

@@ -28,7 +28,7 @@ import org.sniper.commons.util.MessageUtils;
  */
 public enum Currency {
 	
-	/** 国际通用格式 	 */
+	/** 国际通用格式 */
 	GENERIC("GENERIC", "#,##0.00", "currency.generic.type"),
 	
 	/** 人民币  */	

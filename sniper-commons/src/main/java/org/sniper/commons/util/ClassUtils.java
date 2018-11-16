@@ -381,23 +381,22 @@ public class ClassUtils {
 	 * @return
 	 */
 	public static String getPackageBaseName(Class<?> clazz) {
-		if (clazz == null)
+		Package pkg;
+		if (clazz == null || (pkg = clazz.getPackage()) == null)
 			return null;
 		
-		String packageFullName = clazz.getPackage().getName();
-		int index = packageFullName.lastIndexOf(".");
+		String packageName = pkg.getName();
+		int index = packageName.lastIndexOf(".");
 		
-		String baseName;
 		if (index > -1) {
-			/* 如果当前类所属包的路径大于等于两级，则最终结果为"packageName.lastPackageName" */
-			String lastPackageName = packageFullName.substring(index);
-			baseName = packageFullName.substring(0, index) + lastPackageName + lastPackageName;
-		} else {
-			/* 如果当前类所属包的路径小于两级，则最终结果为"packageName/packageName" */
-			baseName = packageFullName + StringUtils.FORWARD_SLASH + packageFullName;
-		}
+			/* 如果当前类所属包的路径大于一级，则最终结果为"packageName.lastPackageName" */
+			String lastPackageName = packageName.substring(index);
+			return new StringBuilder(packageName.substring(0, index))
+					.append(lastPackageName).append(lastPackageName).toString();
+		} 
 		
-		return baseName;
+		// 如果当前类所属包的路径只有一级，则最终结果为"packageName/packageName"
+		return new StringBuilder(packageName).append(StringUtils.FORWARD_SLASH).append(packageName).toString();
 	}
 	
 	/**
@@ -410,10 +409,27 @@ public class ClassUtils {
 		if (clazz == null)
 			return null;
 		
-		/* 先将类型所在的包的完整限定名替换为相对路径后，得到的最终结果为"packageName/packageSimpleName" */
-		String pageckFullName = clazz.getPackage().getName().replaceAll("\\.", StringUtils.FORWARD_SLASH);
-		String baseName = pageckFullName + StringUtils.FORWARD_SLASH+ clazz.getSimpleName();
-		return baseName;
+		Package pkg = clazz.getPackage();
+		if (pkg == null)
+			return clazz.getSimpleName();
+		
+		/* 将类型所属包的完整限定名替换为相对路径后，得到最终结果为"packageName/classSimpleName" */
+		String pageckName = pkg.getName().replaceAll("\\.", StringUtils.FORWARD_SLASH);
+		return new StringBuilder(pageckName).append(StringUtils.FORWARD_SLASH).append(clazz.getSimpleName()).toString();
 	}
-						
+	
+	/**
+	 * 获取指定类的包名
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz
+	 * @return
+	 */
+	public static String getPackageName(Class<?> clazz) {
+		Package pkg;
+		if (clazz == null || (pkg = clazz.getPackage()) == null)
+			return null;
+		
+		return pkg.getName();
+	}
+							
 }

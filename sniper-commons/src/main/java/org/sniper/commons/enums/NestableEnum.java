@@ -13,28 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-20
+ * Create Date : 2015-11-17
  */
 
-package org.sniper.commons.enums.ebusiness;
-
-import org.sniper.commons.enums.AbstractLocaleEnums;
+package org.sniper.commons.enums;
 
 /**
- * O2O类型枚举类
+ * 可嵌套的枚举对象接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class O2OType extends AbstractLocaleEnums<Integer> {
-
-	private O2OType(Integer key, String messageKey) {
-		super(key, messageKey);
-	}
+public interface NestableEnum<K1, K2, V> extends Enum<K1, Enum<K2, V>>{
 	
-	/** 线上 */
-	public static final O2OType ONLINE = new O2OType(0, "o2o.type.online");
+	/**
+	 * 获取被嵌套枚举对象的键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public K2 getNestedKey();
 	
-	/** 线下 */
-	public static final O2OType OFFLINE = new O2OType(1, "o2o.type.offline");
-
+	/**
+	 * 获取被嵌套枚举对象的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public V getNestedValue();
+	
 }

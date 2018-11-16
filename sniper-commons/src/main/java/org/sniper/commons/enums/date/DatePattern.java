@@ -42,10 +42,10 @@ public enum DatePattern {
 	;
 	
 	/** 默认格式 */
-	private String defaultFormat;
+	public final String defaultFormat;
 	
 	/** 序列格式 */
-	private String sequenceFormat;
+	public final String sequenceFormat;
 	
 	private DatePattern(String defaultFormat, String sequenceFormat) {
 		this.defaultFormat = defaultFormat;

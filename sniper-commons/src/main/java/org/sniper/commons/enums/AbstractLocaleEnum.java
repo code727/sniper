@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015年11月17日
+ * Create Date : 2015-11-17
  */
 
 package org.sniper.commons.enums;
@@ -23,20 +23,21 @@ import java.util.Locale;
 import org.sniper.commons.util.MessageUtils;
 
 /**
- * 可嵌套的本地化消息枚举对象抽象类
+ * 本地化消息枚举对象抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractNestableLocaleEnums<K1, K2> extends
-		AbstractNestableEnums<K1, K2, String> implements LocaleEnums<K1> {
+public abstract class AbstractLocaleEnum<K> extends AbstractEnum<K, String> implements LocaleEnum<K, String> {
 
-	protected AbstractNestableLocaleEnums(K1 key, Enums<K2, String> value) {
+	private static final long serialVersionUID = -1988017355814487635L;
+
+	protected AbstractLocaleEnum(K key, String value) {
 		super(key, value);
 	}
 
 	@Override
 	public String getMessage() {
-		return this.getMessage(getNestedValue(getKey()));
+		return this.getMessage(this.value);
 	}
 
 	@Override
@@ -46,17 +47,17 @@ public abstract class AbstractNestableLocaleEnums<K1, K2> extends
 
 	@Override
 	public String getMessage(Object[] params) {
-		return this.getMessage(params, getNestedValue(getKey()));
+		return this.getMessage(params, this.value);
 	}
 
 	@Override
 	public String getMessage(Object[] params, String defaultMessage) {
 		/* 先从当前类同名的配置文件中获取，未获取到时再从与当前包同名的配置文件中获取 */
 		String message = MessageUtils.getClassMessage(this.getClass(),
-				Locale.getDefault(), getNestedValue(getKey()), params, null);
+				Locale.getDefault(), this.value, params, null);
 		
-		return message != null ? message : MessageUtils.getClassMessage(
-				this.getClass(), Locale.getDefault(), getNestedValue(getKey()), params, defaultMessage);
+		return message != null ? message : MessageUtils.getPackageMessage(
+				this.getClass(), Locale.getDefault(), this.value, params, defaultMessage);
 	}
 
 }

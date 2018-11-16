@@ -48,7 +48,7 @@ public class MessageUtils {
 		if (locale == null)
 			locale = Locale.getDefault();
 		
-		String key = baseName + StringUtils.UNDER_LINE + locale;
+		String key = new StringBuilder(baseName).append(StringUtils.UNDER_LINE).append(locale).toString();
 		ResourceBundle resourceBundle = RESOURCE_BUNDLES.get(key);
 		if (resourceBundle == null) {
 			synchronized (RESOURCE_BUNDLES) {
@@ -524,8 +524,8 @@ public class MessageUtils {
 	public static String getMessage(String baseName, Locale locale,
 			String key, Object[] params, String defaultMessage) {
 		
-		if (StringUtils.isEmpty(baseName))
-			return StringUtils.EMPTY;
+		if (StringUtils.isBlank(baseName))
+			return null;
 		
 		try {
 			ResourceBundle bundle = getResourceBundle(baseName, locale);

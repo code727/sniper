@@ -18,17 +18,19 @@
 
 package org.sniper.commons.enums.astrology;
 
-import org.sniper.commons.enums.AbstractLocaleEnums;
+import org.sniper.commons.enums.AbstractLocaleEnum;
 
 /**
  * 星座枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class Horoscope extends AbstractLocaleEnums<Integer> {
+public final class Horoscope extends AbstractLocaleEnum<Integer> {
 
-	private Horoscope(Integer key, String messageKey) {
-		super(key, messageKey);
+	private static final long serialVersionUID = -7015457411538179692L;
+
+	private Horoscope(Integer key, String value) {
+		super(key, value);
 	}
 	
 	/** 白羊座 */

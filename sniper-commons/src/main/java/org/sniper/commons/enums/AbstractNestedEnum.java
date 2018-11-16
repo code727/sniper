@@ -12,45 +12,34 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Create Date : 2015-1-19
+ * 
+ * Create Date : 2015-11-17
  */
 
 package org.sniper.commons.enums;
 
 /**
- * 枚举对象类接口
+ * 嵌套枚举抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Enums<K, V> {
+public abstract class AbstractNestedEnum<K1, K2, V> extends
+		AbstractEnum<K1, Enum<K2, V>> implements NestableEnum<K1, K2, V> {
+
+	private static final long serialVersionUID = 9131831227687610196L;
+
+	protected AbstractNestedEnum(K1 key, Enum<K2, V> value) {
+		super(key, value);
+	}
 	
-	/**
-	 * 获取枚举键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public K getKey();
+	@Override
+	public K2 getNestedKey() {
+		return value.getKey();
+	}
+
+	@Override
+	public V getNestedValue() {
+		return value.getValue();
+	}
 	
-	/**
-	 * 设置枚举键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 */
-	public void setKey(K key);
-	
-	/**
-	 * 获取枚举值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public V getValue();
-	
-	/**
-	 * 设置枚举值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param value
-	 */
-	public void setValue(V value);
-			
 }

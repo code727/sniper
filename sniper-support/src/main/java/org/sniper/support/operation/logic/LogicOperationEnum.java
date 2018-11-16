@@ -21,7 +21,7 @@ package org.sniper.support.operation.logic;
 
 import java.util.Map;
 
-import org.sniper.commons.enums.AbstractEnums;
+import org.sniper.commons.enums.AbstractEnum;
 import org.sniper.commons.util.MapUtils;
 
 /**
@@ -29,8 +29,10 @@ import org.sniper.commons.util.MapUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class LogicOperationEnum extends AbstractEnums<String, LogicOperation<Object, Object>> {
+public final class LogicOperationEnum extends AbstractEnum<String, LogicOperation<Object, Object>> {
 	
+	private static final long serialVersionUID = 7115101650824301748L;
+
 	/** 逻辑操作组 */
 	private static final Map<String, LogicOperationEnum> LOGIC_OPERATIONS;
 	

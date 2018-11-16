@@ -13,33 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-17
+ * Create Date : 2015-11-20
  */
 
-package org.sniper.commons.enums;
+package org.sniper.commons.enums.status;
+
+import org.sniper.commons.enums.AbstractLocaleEnum;
 
 /**
- * 可嵌套的枚举对象抽象类
+ * 在线离线/线上到线下状态枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractNestableEnums<K1, K2, V2> extends
-		AbstractEnums<K1, Enums<K2, V2>> implements NestableEnums<K1, K2, V2> {
+public final class O2OStatus extends AbstractLocaleEnum<Integer> {
 
-	protected AbstractNestableEnums(K1 key, Enums<K2, V2> value) {
+	private static final long serialVersionUID = -1790893708912629703L;
+
+	private O2OStatus(Integer key, String value) {
 		super(key, value);
 	}
-
-	@Override
-	public K2 getNestedKey(K1 key) {
-		Enums<K2, V2> nested = getValue();
-		return nested.getKey();
-	}
-
-	@Override
-	public V2 getNestedValue(K1 key) {
-		Enums<K2, V2> nested = getValue();
-		return nested.getValue();
-	}
-
+	
+	/** 线下/离线 */
+	public static final O2OStatus OFFLINE = new O2OStatus(0, "o2o.status.offline");
+	
+	/** 线上/在线 */
+	public static final O2OStatus ONLINE = new O2OStatus(1, "o2o.status.online");
+	
 }

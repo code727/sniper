@@ -20,17 +20,19 @@ package org.sniper.commons.enums.date;
 
 import java.util.Calendar;
 
-import org.sniper.commons.enums.AbstractLocaleEnums;
+import org.sniper.commons.enums.AbstractLocaleEnum;
 
 /**
  * 星期枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class Week extends AbstractLocaleEnums<Integer> {
+public final class Week extends AbstractLocaleEnum<Integer> {
 
-	protected Week(Integer key, String messageKey) {
-		super(key, messageKey);
+	private static final long serialVersionUID = 2842891904770104643L;
+
+	private Week(Integer key, String value) {
+		super(key, value);
 	}
 	
 	/** 星期天 */
