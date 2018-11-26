@@ -21,7 +21,7 @@ package org.sniper.commons.util;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.sniper.commons.enums.financial.Currency;
+import org.sniper.commons.enums.financial.CurrencyEnum;
 
 /**
  * 货币工具类
@@ -42,7 +42,7 @@ public class CurrencyUtils {
 	 * @param currency
 	 * @return
 	 */
-	public static String currency(char number, Currency currency) {
+	public static String currency(char number, CurrencyEnum currency) {
 		return NumberUtils.format(number, currency.getPattern());
 	}
 	
@@ -53,7 +53,7 @@ public class CurrencyUtils {
 	 * @param currency
 	 * @return
 	 */
-	public static String currency(Number number, Currency currency) {
+	public static String currency(Number number, CurrencyEnum currency) {
 		return NumberUtils.format(number, currency.getPattern());
 	}
 	
@@ -74,7 +74,7 @@ public class CurrencyUtils {
 	 * @return
 	 */
 	public static String RMB(Number number) {
-		return NumberUtils.format(number, Currency.CNY.getPattern());
+		return NumberUtils.format(number, CurrencyEnum.CNY.getPattern());
 	}
 
 	/**

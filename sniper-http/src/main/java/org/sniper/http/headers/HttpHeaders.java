@@ -26,9 +26,9 @@ import java.util.Set;
 
 import org.sniper.commons.LinkedMultiValueMap;
 import org.sniper.commons.enums.http.ContentDispositionType;
-import org.sniper.commons.enums.http.ContentEncodingAlgorithm;
-import org.sniper.commons.enums.http.HttpConnection;
-import org.sniper.commons.enums.http.HttpMethod;
+import org.sniper.commons.enums.http.ContentEncodingEnum;
+import org.sniper.commons.enums.http.HttpConnectionEnum;
+import org.sniper.commons.enums.http.HttpMethodEnum;
 import org.sniper.commons.enums.http.headers.HttpHeadersEnum;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.CollectionUtils;
@@ -56,7 +56,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param allowedMethods
 	 */
-	public void setAllow(Set<HttpMethod> allowedMethods) {
+	public void setAllow(Set<HttpMethodEnum> allowedMethods) {
 		set(HttpHeadersEnum.ALLOW.getKey(), CollectionUtils.join(allowedMethods, VALUE_SEPARATOR));
 	}
 	
@@ -65,15 +65,15 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Set<HttpMethod> getAllow() {
+	public Set<HttpMethodEnum> getAllow() {
 		String first = getFirst(HttpHeadersEnum.ALLOW.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
-			Set<HttpMethod> set = CollectionUtils.newLinkedHashSet();
-			HttpMethod method;
+			Set<HttpMethodEnum> set = CollectionUtils.newLinkedHashSet();
+			HttpMethodEnum method;
 			for (String value : values) {
-				method = HttpMethod.resolve(value);
+				method = HttpMethodEnum.resolve(value);
 				if (method != null)
 					set.add(method);
 			}
@@ -120,7 +120,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 */
-	public void setConnection(HttpConnection connection) {
+	public void setConnection(HttpConnectionEnum connection) {
 		set(HttpHeadersEnum.CONNECTION.getKey(), connection != null ? connection.getValue() : null);
 	}
 	
@@ -129,8 +129,8 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public HttpConnection getConnection() {
-		return HttpConnection.resolve(getFirst(HttpHeadersEnum.CONNECTION.getKey()));
+	public HttpConnectionEnum getConnection() {
+		return HttpConnectionEnum.resolve(getFirst(HttpHeadersEnum.CONNECTION.getKey()));
 	}
 	
 	/**
@@ -204,7 +204,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param algorithm
 	 */
-	public void setContentEncoding(Set<ContentEncodingAlgorithm> algorithms) {
+	public void setContentEncoding(Set<ContentEncodingEnum> algorithms) {
 		set(HttpHeadersEnum.CONTENT_ENCODING.getKey(), CollectionUtils.join(algorithms, VALUE_SEPARATOR));
 	}
 	
@@ -213,15 +213,15 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Set<ContentEncodingAlgorithm> getContentEncoding() {
+	public Set<ContentEncodingEnum> getContentEncoding() {
 		String first = getFirst(HttpHeadersEnum.CONTENT_ENCODING.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
-			Set<ContentEncodingAlgorithm> set = CollectionUtils.newLinkedHashSet();
-			ContentEncodingAlgorithm algorithm;
+			Set<ContentEncodingEnum> set = CollectionUtils.newLinkedHashSet();
+			ContentEncodingEnum algorithm;
 			for (String value : values) {
-				algorithm = ContentEncodingAlgorithm.resolve(value);
+				algorithm = ContentEncodingEnum.resolve(value);
 				if (algorithm != null)
 					set.add(algorithm);
 			}

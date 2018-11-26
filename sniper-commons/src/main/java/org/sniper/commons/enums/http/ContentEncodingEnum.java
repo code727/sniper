@@ -27,55 +27,59 @@ import org.sniper.commons.util.MapUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum ContentEncodingAlgorithm {
+public enum ContentEncodingEnum {
 	
 	/** Lempel-Ziv coding (LZ77) 压缩算法 */
 	GZIP("gzip"),
+	
 	/** Lempel-Ziv-Welch (LZW) 压缩算法 */
 	COMPRESS("compress"),
+	
 	/** zlib结构和deflate压缩算法 */
 	DEFLATE("deflate"),
+	
 	IDENTITY("identity"),
+	
 	/** Brotli算法 */
 	BR("br");
 	
-	private static final Map<String, ContentEncodingAlgorithm> mappings = MapUtils.newHashMap(5);
-	
-	/** 编码转换算法名称 */
-	private String encoding;
+	private static final Map<String, ContentEncodingEnum> mappings = MapUtils.newHashMap(5);
 	
 	static {
-		for (ContentEncodingAlgorithm algorithm : values()) {
-			mappings.put(algorithm.encoding, algorithm);
+		for (ContentEncodingEnum algorithm : values()) {
+			mappings.put(algorithm.algorithm, algorithm);
 		}
 	}
 	
-	private ContentEncodingAlgorithm(String encoding) {
-		this.encoding = encoding;
+	/** 编码转换算法名称 */
+	private String algorithm;
+	
+	private ContentEncodingEnum(String algorithm) {
+		this.algorithm = algorithm;
 	}
 	
 	public String getEncoding() {
-		return encoding;
+		return algorithm;
 	}
 
 	/**
-	 * 将指定的算法名称解析成ContentEncodingAlgorithm对象
+	 * 将指定的算法名称解析成ContentEncodingEnum对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param encoding
+	 * @param algorithm
 	 * @return
 	 */
-	public static ContentEncodingAlgorithm resolve(String encoding) {
-		return (encoding != null ? mappings.get(encoding.toLowerCase()) : null);
+	public static ContentEncodingEnum resolve(String algorithm) {
+		return (algorithm != null ? mappings.get(algorithm.toLowerCase()) : null);
 	}
 
 	/**
-	 * 判断指定的算法名称是否匹配一个ContentEncodingAlgorithm对象
+	 * 判断指定的算法名称是否匹配一个ContentEncodingEnum对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param encoding
+	 * @param algorithm
 	 * @return
 	 */
-	public boolean matches(String encoding) {
-		return this.encoding.equalsIgnoreCase(encoding);
+	public boolean matches(String algorithm) {
+		return this.algorithm.equalsIgnoreCase(algorithm);
 	}
 
 }

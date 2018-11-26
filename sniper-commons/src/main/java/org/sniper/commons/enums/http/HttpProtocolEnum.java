@@ -27,14 +27,14 @@ import org.sniper.commons.util.MapUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum HttpProtocol {
+public enum HttpProtocolEnum {
 	
 	HTTP, HTTPS;
 	
-	private static final Map<String, HttpProtocol> mappings = MapUtils.newHashMap(2);
+	private static final Map<String, HttpProtocolEnum> mappings = MapUtils.newHashMap(2);
 	
 	static {
-		for (HttpProtocol httpProtocol : values()) {
+		for (HttpProtocolEnum httpProtocol : values()) {
 			mappings.put(httpProtocol.name(), httpProtocol);
 		}
 	}
@@ -45,7 +45,7 @@ public enum HttpProtocol {
 	 * @param protocol
 	 * @return
 	 */
-	public static HttpProtocol resolve(String protocol) {
+	public static HttpProtocolEnum resolve(String protocol) {
 		return (protocol != null ? mappings.get(protocol.toUpperCase()) : null);
 	}
 

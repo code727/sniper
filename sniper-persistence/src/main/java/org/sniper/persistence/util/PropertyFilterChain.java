@@ -48,6 +48,7 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 		List<PersistencePropertyFilter> group = this.groups.get(name);
 		if (group == null)
 			group = CollectionUtils.newArrayList();
+		
 		group.add(filter);
 		this.groups.put(name, group);
 		return this;

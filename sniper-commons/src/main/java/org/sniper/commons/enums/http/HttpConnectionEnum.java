@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年9月11日
+ * Create Date : 2017-8-21
  */
 
 package org.sniper.commons.enums.http;
@@ -23,58 +23,52 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * 身份认证类型枚举
+ * HTTP网络连接枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum AuthenticationType {
-
-	BASIC("Basic"),
-	BEARER("Bearer"),
-	DIGEST("Digest"),
-	HOBA("HOBA"),
-	MUTUAL("Mutual"),
-	NEGOTIATE("Negotiate"),
-	OAUTH("OAuth"),
-	SCRAM_SHA_1("SCRAM-SHA-1"),
-	SCRAM_SHA_256("SCRAM-SHA-256");
+public enum HttpConnectionEnum {
 	
-	private String name;
+	CLOSE("close"),
 	
-	private static final Map<String, AuthenticationType> mappings = MapUtils.newHashMap(9);
+	KEEP_ALIVE("keep-alive");
+	
+	private static final Map<String, HttpConnectionEnum> mappings = MapUtils.newHashMap(2);
 	
 	static {
-		for (AuthenticationType scheme : values()) {
-			mappings.put(scheme.name, scheme);
+		for (HttpConnectionEnum connection : values()) {
+			mappings.put(connection.value, connection);
 		}
 	}
 	
-	private AuthenticationType(String name) {
-		this.name = name;
+	private String value;
+	
+	private HttpConnectionEnum(String value) {
+		this.value = value;
 	}
 	
-	public String getName() {
-		return name;
+	public String getValue() {
+		return value;
 	}
 
 	/**
-	 * 将指定的名称解析成AuthenticationScheme对象
+	 * 将指定的值解析成HttpConnection对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
+	 * @param value
 	 * @return
 	 */
-	public static AuthenticationType resolve(String name) {
-		return (name != null ? mappings.get(name) : null);
+	public static HttpConnectionEnum resolve(String value) {
+		return (value != null ? mappings.get(value.toLowerCase()) : null);
 	}
 
 	/**
-	 * 判断指定的名称是否匹配一个AuthenticationScheme对象
+	 * 判断指定的值是否匹配一个HttpConnection对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
+	 * @param value
 	 * @return
 	 */
-	public boolean matches(String name) {
-		return this.name.equals(name);
+	public boolean matches(String value) {
+		return this.value.equalsIgnoreCase(value);
 	}
 	
 }

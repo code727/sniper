@@ -18,24 +18,22 @@
 
 package org.sniper.persistence.util;
 
-import java.util.Set;
+import java.util.Map;
 
-import org.sniper.commons.enums.AbstractEnum;
-import org.sniper.commons.util.CollectionUtils;
-import org.sniper.commons.util.ObjectUtils;
-import org.sniper.commons.util.StringUtils;
+import org.sniper.commons.constant.AbstractConstant;
+import org.sniper.commons.util.MapUtils;
 
 /**
- * 运算符枚举
+ * 运算符常量
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class Operator extends AbstractEnum<String, String> {
+public final class Operator extends AbstractConstant<String, String> {
 	
 	private static final long serialVersionUID = 7578105868961133349L;
 
 	/** 存放的所有运算枚举对象组 */
-	protected static final Set<Operator> ENUM_GROUP = CollectionUtils.newLinkedHashSet();
+	private static final Map<String, Operator> mappings = MapUtils.newHashMap(8);
 	
 	/** 相等运算符 */
 	public static final Operator EQ = new Operator("EQ", " = ");
@@ -61,66 +59,32 @@ public final class Operator extends AbstractEnum<String, String> {
 	/** LIKE运算符，右侧匹配模式"LIKE value% */
 	public static final Operator RLIKE = new Operator("RLIKE", " LIKE {value}%");
 	
-	/** 所有的运算符名 */
-	public static final String ALL_OPERATOR_NAME;
-	
-	protected Operator(String name, String value) {
-		super(name, value);
-	}
-	
 	static {
-		ENUM_GROUP.add(EQ);
-		ENUM_GROUP.add(LT);
-		ENUM_GROUP.add(LE);
-		ENUM_GROUP.add(GT);
-		ENUM_GROUP.add(GE);
-		ENUM_GROUP.add(LIKE);
-		ENUM_GROUP.add(LLIKE);
-		ENUM_GROUP.add(RLIKE);
 		
-		StringBuilder builder = new StringBuilder();
-		for (Operator operator : ENUM_GROUP) 
-			builder.append(operator.getKey()).append(",");
-				
-		builder.deleteCharAt(builder.lastIndexOf(","));
-		ALL_OPERATOR_NAME = builder.toString();
+	}
+	
+	private Operator(String key, String value) {
+		super(key, value);
 	}
 	
 	/**
-	 * 获取存放的所有运算符枚举
+	 * 根据键解析出一个运算符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
 	 * @return
 	 */
-	public static Set<Operator> getAll() {
-		return ENUM_GROUP; 
+	public static Operator resolve(String key) {
+		return (key != null ? mappings.get(key.toUpperCase()) : null);
 	}
-	
+		
 	/**
-	 * 根据名称获取对应的枚举对象
+	 * 判断指定的键是否与当前运算符配置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
 	 */
-	public static Operator get(String name) {
-		name = StringUtils.trim(name);
-		if (name != null)
-			name = name.toUpperCase();
-		
-		for (Operator operator : ENUM_GROUP) {
-			if (ObjectUtils.equals(operator.getKey(), name))
-				return operator;
-		}
-		return null;
-	}
-	
-	/**
-	 * 判断名称对应的枚举对象是否存在
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @return
-	 */
-	public static boolean exist(String name) {
-		return get(name) != null;
+	public boolean matches(String key) {
+		return this.key.equalsIgnoreCase(key);
 	}
 		
 }

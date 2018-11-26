@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-8-22
+ * Create Date : 2017-8-15
  */
 
 package org.sniper.commons.enums.http;
@@ -23,56 +23,40 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * Content-Disposition消息头类型枚举
+ * HTTP方法枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum ContentDispositionType {
+public enum HttpMethodEnum {
 	
-	/** 内联形式 */
-	INLINE("inline"),
-	/** 附件形式 */
-	ATTACHMENT("attachment"),
-	/** 表单数据 */
-	FORM_DATA("form-data");
-	
-	private static final Map<String, ContentDispositionType> mappings = MapUtils.newHashMap(3);
-	
+	GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE;
+
+	private static final Map<String, HttpMethodEnum> mappings = MapUtils.newHashMap(8);
+
 	static {
-		for (ContentDispositionType dispositionType : values()) {
-			mappings.put(dispositionType.name, dispositionType);
+		for (HttpMethodEnum httpMethod : values()) {
+			mappings.put(httpMethod.name(), httpMethod);
 		}
 	}
-	
-	/** 类型名称 */
-	private String name;
-	
-	private ContentDispositionType(String name) {
-		this.name = name;
-	}
-	
-	public String getName() {
-		return name;
+
+	/**
+	 * 将指定的名称解析成HTTP方法对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param method
+	 * @return
+	 */
+	public static HttpMethodEnum resolve(String method) {
+		return (method != null ? mappings.get(method.toUpperCase()) : null);
 	}
 
 	/**
-	 * 将指定的名称解析成DispositionType对象
+	 * 判断指定的名称是否匹配一个HTTP方法对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
+	 * @param method
 	 * @return
 	 */
-	public static ContentDispositionType resolve(String name) {
-		return (name != null ? mappings.get(name.toLowerCase()) : null);
+	public boolean matches(String method) {
+		return this.name().equalsIgnoreCase(method);
 	}
-
-	/**
-	 * 判断指定的名称是否匹配一个DispositionType对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @return
-	 */
-	public boolean matches(String name) {
-		return this.name.equalsIgnoreCase(name);
-	}
-
+	
 }

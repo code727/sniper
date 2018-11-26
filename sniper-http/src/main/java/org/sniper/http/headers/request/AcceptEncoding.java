@@ -18,7 +18,7 @@
 
 package org.sniper.http.headers.request;
 
-import org.sniper.commons.enums.http.AcceptEncodingAlgorithm;
+import org.sniper.commons.enums.http.AcceptEncodingEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.http.headers.AbstractQualityFactor;
 
@@ -32,30 +32,30 @@ public class AcceptEncoding extends AbstractQualityFactor {
 	private static final long serialVersionUID = 7600312994109431769L;
 	
 	/** 编码算法 */
-	private AcceptEncodingAlgorithm algorithm;
+	private AcceptEncodingEnum encodingEnum;
 	
 	public AcceptEncoding() {
-		this(AcceptEncodingAlgorithm.ANY);
+		this(AcceptEncodingEnum.ANY);
 	}
 	
-	public AcceptEncoding(AcceptEncodingAlgorithm algorithm) {
+	public AcceptEncoding(AcceptEncodingEnum algorithm) {
 		this(algorithm, MAX_DEFAULT);
 	}
 	
 	public AcceptEncoding(double qualityValue) {
-		this(AcceptEncodingAlgorithm.ANY, qualityValue);
+		this(AcceptEncodingEnum.ANY, qualityValue);
 	}
 	
-	public AcceptEncoding(AcceptEncodingAlgorithm algorithm, double qualityValue) {
+	public AcceptEncoding(AcceptEncodingEnum algorithm, double qualityValue) {
 		setAlgorithm(algorithm);
 		setQualityValue(qualityValue);
 	}
 	
-	public AcceptEncodingAlgorithm getAlgorithm() {
+	public AcceptEncodingEnum getAlgorithm() {
 		return algorithm;
 	}
 
-	public void setAlgorithm(AcceptEncodingAlgorithm algorithm) {
+	public void setAlgorithm(AcceptEncodingEnum algorithm) {
 		AssertUtils.assertNotNull(algorithm, "Accept encoding algorithm must not be null");
 		
 		this.algorithm = algorithm;
@@ -66,9 +66,9 @@ public class AcceptEncoding extends AbstractQualityFactor {
 		String qualityValue = super.toString();
 		
 		if (qualityValue.length() > 0) 
-			return this.algorithm.getEncoding() + qualityValue;
+			return this.algorithm.getAlgorithm() + qualityValue;
 		
-		return this.algorithm.getEncoding();
+		return this.algorithm.getAlgorithm();
 	}
 			
 }

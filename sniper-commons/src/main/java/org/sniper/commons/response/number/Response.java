@@ -20,7 +20,7 @@ package org.sniper.commons.response.number;
 
 import java.io.Serializable;
 
-import org.sniper.commons.enums.status.ExecutionStatus;
+import org.sniper.commons.constant.status.ExecutionStatus;
 import org.sniper.commons.response.AbstractResponse;
 import org.sniper.commons.response.GenericResponse;
 import org.sniper.commons.util.ObjectUtils;

@@ -58,16 +58,7 @@ public interface PersistencePropertyFilterChain {
 	 * @return
 	 */
 	public PersistencePropertyFilterChain remove(String name, PersistencePropertyFilter filter);
-	
-	/** 
-	 * 设置指定组的与下一组之间的谓词
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name 组名
-	 * @param predicate 关系谓词字符串
-	 * @return
-	 */
-	public PersistencePropertyFilterChain setPredicate(String name, String predicate);
-	
+		
 	/**
 	 * 设置指定组的与下一组之间的谓词
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

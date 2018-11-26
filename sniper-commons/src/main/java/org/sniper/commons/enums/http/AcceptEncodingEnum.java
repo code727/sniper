@@ -23,11 +23,11 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * Accept-Encoding请求头编码算法枚举
+ * Accept-Encoding请求头编码枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum AcceptEncodingAlgorithm {
+public enum AcceptEncodingEnum {
 	
 	AES128GCM("aes128gcm"),
 	BR("br"),
@@ -43,43 +43,43 @@ public enum AcceptEncodingAlgorithm {
 	X_GZIP("x-gzip"),
 	ANY("*");
 	
-	private static final Map<String, AcceptEncodingAlgorithm> mappings = MapUtils.newHashMap(13);
-	
-	/** 编码算法名称 */
-	private String encoding;
+	private static final Map<String, AcceptEncodingEnum> mappings = MapUtils.newHashMap(13);
 	
 	static {
-		for (AcceptEncodingAlgorithm algorithm : values()) {
-			mappings.put(algorithm.encoding, algorithm);
+		for (AcceptEncodingEnum acceptEncoding : values()) {
+			mappings.put(acceptEncoding.algorithm, acceptEncoding);
 		}
 	}
 	
-	private AcceptEncodingAlgorithm(String encoding) {
-		this.encoding = encoding;
+	/** 编码算法名称 */
+	private final String algorithm;
+	
+	private AcceptEncodingEnum(String algorithm) {
+		this.algorithm = algorithm;
 	}
 	
-	public String getEncoding() {
-		return encoding;
+	public String getAlgorithm() {
+		return algorithm;
 	}
 
 	/**
-	 * 将指定的算法名称解析成AcceptEncodingAlgorithm对象
+	 * 判断指定的算法名称是否匹配一个AcceptEncodingEnum对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
+	 * @param algorithm
 	 * @return
 	 */
-	public static AcceptEncodingAlgorithm resolve(String encoding) {
-		return (encoding != null ? mappings.get(encoding.toLowerCase()) : null);
+	public boolean matches(String algorithm) {
+		return this.algorithm.equalsIgnoreCase(algorithm);
 	}
 
 	/**
-	 * 判断指定的算法名称是否匹配一个AcceptEncodingAlgorithm对象
+	 * 将指定的算法名称解析成AcceptEncodingEnum对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param encoding
+	 * @param algorithm
 	 * @return
 	 */
-	public boolean matches(String encoding) {
-		return this.encoding.equalsIgnoreCase(encoding);
+	public static AcceptEncodingEnum resolve(String algorithm) {
+		return (algorithm != null ? mappings.get(algorithm.toLowerCase()) : null);
 	}
-		
+
 }

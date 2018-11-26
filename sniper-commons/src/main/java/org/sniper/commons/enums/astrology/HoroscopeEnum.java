@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-20
+ * Create Date : 2015-12-17
  */
 
-package org.sniper.commons.enums.status;
+package org.sniper.commons.enums.astrology;
 
 import java.util.Map;
 
@@ -24,22 +24,53 @@ import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
 /**
- * 在线离线/线上到线下状态枚举类
+ * 星座枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum O2OStatus {
+public enum HoroscopeEnum {
 	
-	/** 线下/离线 */
-	OFFLINE("o2o.status.offline"),
-	/** 线上/在线 */
-	ONLINE("o2o.status.online");
+	/** 白羊座 */
+	ARIES("horoscope.aries"),
 	
-	private static final Map<Integer, O2OStatus> mappings = MapUtils.newHashMap(2);
+	/** 金牛座 */
+	TAURUS("horoscope.taurus"),
+	
+	/** 双子座 */
+	GEMINI("horoscope.gemini"),
+	
+	/** 巨蟹座 */
+	CANCER("horoscope.cancer"),
+	
+	/** 狮子座 */
+	LEO("horoscope.leo"),
+	
+	/** 处女座 */
+	VIRGO("horoscope.virgo"),
+	
+	/** 天秤座 */
+	LIBRA("horoscope.libra"),
+	
+	/** 天蝎座 */
+	ACRAB("horoscope.acrab"),
+	
+	/** 射手座 */
+	SAGITTARIUS("horoscope.sagittarius"),
+	
+	/** 摩羯座 */
+	CAPRICORN("horoscope.capricorn"),
+	
+	/** 水平座 */
+	AQUARIUS("horoscope.aquarius"),
+	
+	/** 双鱼座 */
+	PISCES("horoscope.pisces");
+	
+	private static final Map<Integer, HoroscopeEnum> mappings = MapUtils.newHashMap(12);
 	
 	static {
-		for (O2OStatus status : values()) {
-			mappings.put(status.ordinal(), status);
+		for (HoroscopeEnum horoscope : values()) {
+			mappings.put(horoscope.ordinal(), horoscope);
 		}
 	}
 	
@@ -49,7 +80,7 @@ public enum O2OStatus {
 	/** 值 */
 	private final String value;
 
-	private O2OStatus(String value) {
+	private HoroscopeEnum(String value) {
 		this.key = ordinal();
 		this.value = value;
 	}
@@ -67,7 +98,7 @@ public enum O2OStatus {
 	}
 	
 	/**
-	 * 判断指定的键是否匹配一个O2OStatus对象
+	 * 判断指定的键是否匹配一个Horoscope对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -77,13 +108,13 @@ public enum O2OStatus {
 	}
 	
 	/**
-	 * 将指定的键解析成O2OStatus对象
+	 * 将指定的键解析成Horoscope对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
+	 * @param type
 	 * @return
 	 */
-	public static O2OStatus resolve(int key) {
+	public static HoroscopeEnum resolve(int key) {
 		return mappings.get(key);
 	}
-	
+		
 }

@@ -21,7 +21,7 @@ package org.sniper.http.form;
 
 import org.sniper.beans.Typed;
 import org.sniper.codec.Codecable;
-import org.sniper.commons.enums.http.HttpMethod;
+import org.sniper.commons.enums.http.HttpMethodEnum;
 import org.sniper.http.handler.response.ResponseHandler;
 import org.sniper.http.headers.request.HttpRequestHeaders;
 
@@ -65,14 +65,14 @@ public interface HttpForm extends Typed, Codecable {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param method
 	 */
-	public void setMethod(HttpMethod method);
+	public void setMethod(HttpMethodEnum method);
 	
 	/**
 	 * 获取发送请求的方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public HttpMethod getMethod();
+	public HttpMethodEnum getMethod();
 	
 	/**
 	 * 设置请求头

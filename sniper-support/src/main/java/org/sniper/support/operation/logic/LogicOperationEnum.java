@@ -21,15 +21,15 @@ package org.sniper.support.operation.logic;
 
 import java.util.Map;
 
-import org.sniper.commons.enums.AbstractEnum;
+import org.sniper.commons.constant.AbstractConstant;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * 逻辑运算枚举
+ * 逻辑运算常量
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class LogicOperationEnum extends AbstractEnum<String, LogicOperation<Object, Object>> {
+public final class LogicOperationEnum extends AbstractConstant<String, LogicOperation<Object, Object>> {
 	
 	private static final long serialVersionUID = 7115101650824301748L;
 

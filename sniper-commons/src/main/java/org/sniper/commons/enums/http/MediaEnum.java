@@ -23,7 +23,7 @@ package org.sniper.commons.enums.http;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum Media {
+public enum MediaEnum {
 	
 	ALL("*/*"),
 	APPLICATION_ATOM_XML("application/atom+xml"),
@@ -110,7 +110,7 @@ public enum Media {
 	
 	private String type;
 	
-	private Media(String type) {
+	private MediaEnum(String type) {
 		this.type = type;
 	}
 

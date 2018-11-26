@@ -18,7 +18,7 @@
 
 package org.sniper.http.headers;
 
-import org.sniper.commons.enums.http.ContentDispositionType;
+import org.sniper.commons.enums.http.ContentDispositionEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.StringUtils;
 
@@ -30,7 +30,7 @@ import org.sniper.commons.util.StringUtils;
 public class ContentDisposition {
 	
 	/** 内容展示方式枚举  */
-	private ContentDispositionType type;
+	private ContentDispositionEnum type;
 	
 	/** 表单字段名 */
 	private String name;

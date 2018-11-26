@@ -59,14 +59,7 @@ public interface PersistencePropertyFilter {
 	 * @return
 	 */
 	public Operator getOperator();
-	
-	/** 
-	 * 设置当前属性与值之间的运算符
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param operator 运算符字符串
-	 */
-	public void setOperator(String operator);
-	
+		
 	/**
 	 * 设置当前属性与值之间的运算符
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -87,19 +80,5 @@ public interface PersistencePropertyFilter {
 	 * @param predicate 谓词枚举
 	 */
 	public void setPredicate(Predicate predicate);
-	
-	/** 
-	 * 设置当前属性与下一个属性间的关系谓词
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param predicate 谓词字符串
-	 */
-	public void setPredicate(String predicate);
-	
-	/**
-	 * 转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String toString();
-
+		
 }

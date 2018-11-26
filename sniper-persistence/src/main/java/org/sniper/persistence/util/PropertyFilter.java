@@ -18,8 +18,6 @@
 
 package org.sniper.persistence.util;
 
-import org.sniper.commons.util.ArrayUtils;
-import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
 
@@ -41,13 +39,7 @@ public class PropertyFilter implements PersistencePropertyFilter {
 	
 	/** 当前属性与下一个属性间的关系谓词，默认为AND */
 	private Predicate predicate = Predicate.AND;
-	
-	public PropertyFilter(String name, Object value, String operator) {
-		this.setOperator(operator);
-		this.name = name;
-		this.value = value;
-	}
-	
+		
 	public PropertyFilter(String name, Object value, Operator operator) {
 		this.operator = operator;
 		this.name = name;
@@ -78,18 +70,7 @@ public class PropertyFilter implements PersistencePropertyFilter {
 	public Operator getOperator() {
 		return this.operator;
 	}
-	
-	@Override
-	public void setOperator(String operator) {
-		AssertUtils.assertNotBlank(operator, "Property operator can not be null or blank.");
-		Operator operatorEnum = Operator.get(operator);
-		if (operatorEnum != null)
-			this.setOperator(operatorEnum);
-		else
-			throw new IllegalArgumentException("Unknow operator \"" + operator + 
-					"\", support operator types [" + Operator.ALL_OPERATOR_NAME + "].");
-	}
-	
+		
 	@Override
 	public void setOperator(Operator operator) {
 		this.operator = operator;
@@ -104,25 +85,16 @@ public class PropertyFilter implements PersistencePropertyFilter {
 	public void setPredicate(Predicate predicate) {
 		this.predicate = predicate;
 	}
-	
-	public void setPredicate(String predicate) {
-		try {
-			predicate = predicate.trim();
-			this.predicate = Enum.valueOf(Predicate.class, predicate.toUpperCase());
-		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException("Unknow predicate \"" + predicate + 
-					"\", support predicate types [" + ArrayUtils.join(Predicate.values(), ",") + "].");
-		}
-	}
-	
+		
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder(this.name);
-		if (StringUtils.containsIgnoreCase(this.operator.getKey(), Operator.LIKE.getKey())) 
-			builder.append(this.operator.getValue().replace("{value}",
-					ObjectUtils.toSafeString(this.value)));
-		else
+		if (StringUtils.containsIgnoreCase(this.operator.getKey(), Operator.LIKE.getKey())) {
+			builder.append(this.operator.getValue().replace("{value}", ObjectUtils.toSafeString(this.value)));
+		} else {
 			builder.append(this.operator.getValue()).append(this.value);
+		}
+			
 		return builder.toString();
 	}
 	

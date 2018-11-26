@@ -19,7 +19,7 @@
 package org.sniper.http.form;
 
 import org.sniper.beans.TypedBean;
-import org.sniper.commons.enums.http.HttpMethod;
+import org.sniper.commons.enums.http.HttpMethodEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CodecUtils;
 import org.sniper.http.handler.response.ResponseHandler;
@@ -39,7 +39,7 @@ public class SimpleHttpForm extends TypedBean implements HttpForm {
 	private String action;
 	
 	/** 请求方法 */
-	private HttpMethod method = HttpMethod.GET;
+	private HttpMethodEnum method = HttpMethodEnum.GET;
 	
 	/** 请求头对象 */
 	private HttpRequestHeaders headers;
@@ -73,11 +73,11 @@ public class SimpleHttpForm extends TypedBean implements HttpForm {
 		return action;
 	}
 
-	public HttpMethod getMethod() {
+	public HttpMethodEnum getMethod() {
 		return method;
 	}
 
-	public void setMethod(HttpMethod method) {
+	public void setMethod(HttpMethodEnum method) {
 		this.method = method;
 	}
 	

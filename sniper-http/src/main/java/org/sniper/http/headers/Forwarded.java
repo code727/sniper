@@ -22,7 +22,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-import org.sniper.commons.enums.http.HttpProtocol;
+import org.sniper.commons.enums.http.HttpProtocolEnum;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
 
@@ -40,7 +40,7 @@ public class Forwarded implements Serializable {
 	
 	private String host;
 	
-	private HttpProtocol protocol;
+	private HttpProtocolEnum protocol;
 	
 	public Forwarded() {
 		this.multiFor = CollectionUtils.newArrayList();
@@ -81,11 +81,11 @@ public class Forwarded implements Serializable {
 			this.host = host;
 	}
 
-	public HttpProtocol getProtocol() {
+	public HttpProtocolEnum getProtocol() {
 		return protocol;
 	}
 
-	public void setProtocol(HttpProtocol protocol) {
+	public void setProtocol(HttpProtocolEnum protocol) {
 		this.protocol = protocol;
 	}
 		

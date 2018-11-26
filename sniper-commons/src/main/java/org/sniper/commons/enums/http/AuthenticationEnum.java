@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-8-21
+ * Create Date : 2017年9月11日
  */
 
 package org.sniper.commons.enums.http;
@@ -23,51 +23,58 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * HTTP网络连接枚举
+ * 身份认证枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum HttpConnection {
+public enum AuthenticationEnum {
+
+	BASIC("Basic"),
+	BEARER("Bearer"),
+	DIGEST("Digest"),
+	HOBA("HOBA"),
+	MUTUAL("Mutual"),
+	NEGOTIATE("Negotiate"),
+	OAUTH("OAuth"),
+	SCRAM_SHA_1("SCRAM-SHA-1"),
+	SCRAM_SHA_256("SCRAM-SHA-256");
 	
-	CLOSE("close"),
-	KEEP_ALIVE("keep-alive");
-	
-	private static final Map<String, HttpConnection> mappings = MapUtils.newHashMap(2);
-	
-	private String value;
+	private static final Map<String, AuthenticationEnum> mappings = MapUtils.newHashMap(9);
 	
 	static {
-		for (HttpConnection connection : values()) {
-			mappings.put(connection.value, connection);
+		for (AuthenticationEnum scheme : values()) {
+			mappings.put(scheme.name, scheme);
 		}
 	}
 	
-	private HttpConnection(String value) {
-		this.value = value;
+	private String name;
+	
+	private AuthenticationEnum(String name) {
+		this.name = name;
 	}
 	
-	public String getValue() {
-		return value;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * 将指定的值解析成HttpConnection对象
+	 * 将指定的名称解析成AuthenticationScheme对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param value
+	 * @param name
 	 * @return
 	 */
-	public static HttpConnection resolve(String value) {
-		return (value != null ? mappings.get(value.toLowerCase()) : null);
+	public static AuthenticationEnum resolve(String name) {
+		return (name != null ? mappings.get(name) : null);
 	}
 
 	/**
-	 * 判断指定的值是否匹配一个HttpConnection对象
+	 * 判断指定的名称是否匹配一个AuthenticationScheme对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param value
+	 * @param name
 	 * @return
 	 */
-	public boolean matches(String value) {
-		return this.value.equalsIgnoreCase(value);
+	public boolean matches(String name) {
+		return this.name.equals(name);
 	}
 	
 }

@@ -20,7 +20,7 @@ package org.sniper.commons.response.character;
 
 import java.io.Serializable;
 
-import org.sniper.commons.enums.status.BizStatus;
+import org.sniper.commons.constant.status.BizStatus;
 import org.sniper.commons.response.AbstractResponse;
 import org.sniper.commons.response.GenericResponse;
 import org.sniper.commons.util.StringUtils;

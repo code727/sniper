@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-import org.sniper.commons.enums.astrology.Horoscope;
+import org.sniper.commons.enums.astrology.HoroscopeEnum;
 import org.sniper.commons.enums.date.DatePattern;
 
 /**
@@ -438,7 +438,7 @@ public class DateUtils {
 	 * @param birthday
 	 * @return 星座类型,从0至11依次为白羊座至双鱼座
 	 */
-	public static Horoscope getHoroscope(Date date) {
+	public static HoroscopeEnum getHoroscope(Date date) {
 		AssertUtils.assertNotNull(date, "Date object can not be null");
 		
 		Calendar calendar = Calendar.getInstance();
@@ -448,31 +448,31 @@ public class DateUtils {
 
 		//  将月和日拼接成小数的形式，格式[月].[日]
 		double d = Double.valueOf(new StringBuffer(ObjectUtils.toString(month)).append(".").append(day).toString());
-		Horoscope horoscope = null;
+		HoroscopeEnum horoscope = null;
 		if (d >= 3.21 && d <= 4.19 ) {
-			horoscope = Horoscope.ARIES;
+			horoscope = HoroscopeEnum.ARIES;
 		} else if (d >= 4.20 && d <= 5.20) {
-			horoscope = Horoscope.TAURUS;
+			horoscope = HoroscopeEnum.TAURUS;
 		} else if (d >= 5.21 && d <= 6.21) {
-			horoscope = Horoscope.GEMINI;
+			horoscope = HoroscopeEnum.GEMINI;
 		} else if (d >= 6.22 && d <= 7.22) {
-			horoscope = Horoscope.CANCER;
+			horoscope = HoroscopeEnum.CANCER;
 		} else if (d >= 7.23 && d <= 8.22) {
-			horoscope = Horoscope.LEO;
+			horoscope = HoroscopeEnum.LEO;
 		} else if (d >= 8.23 && d <= 9.22) {
-			horoscope = Horoscope.VIRGO;
+			horoscope = HoroscopeEnum.VIRGO;
 		} else if (d >= 9.23 && d <= 10.23) {
-			horoscope = Horoscope.LIBRA;
+			horoscope = HoroscopeEnum.LIBRA;
 		} else if (d >= 10.24 && d <= 11.22) {
-			horoscope = Horoscope.ACRAB;
+			horoscope = HoroscopeEnum.ACRAB;
 		} else if (d >= 11.23 && d <= 12.21) {
-			horoscope = Horoscope.SAGITTARIUS;
+			horoscope = HoroscopeEnum.SAGITTARIUS;
 		} else if ((d >= 12.22 && d <= 12.31) || (d >= 1.01 && d <= 1.19)) {
-			horoscope = Horoscope.CAPRICORN;
+			horoscope = HoroscopeEnum.CAPRICORN;
 		} else if (d >= 1.20 && d <= 2.18) {
-			horoscope = Horoscope.AQUARIUS;
+			horoscope = HoroscopeEnum.AQUARIUS;
 		} else if (d >= 2.19 && d <= 3.20) {
-			horoscope = Horoscope.PISCES;
+			horoscope = HoroscopeEnum.PISCES;
 		}
 		
 		return horoscope;

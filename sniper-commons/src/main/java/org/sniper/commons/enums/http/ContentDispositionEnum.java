@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-8-15
+ * Create Date : 2017-8-22
  */
 
 package org.sniper.commons.enums.http;
@@ -23,40 +23,58 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * HTTP方法枚举
+ * Content-Disposition消息头枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum HttpMethod {
+public enum ContentDispositionEnum {
 	
-	GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE;
-
-	private static final Map<String, HttpMethod> mappings = MapUtils.newHashMap(8);
-
+	/** 内联形式 */
+	INLINE("inline"),
+	
+	/** 附件形式 */
+	ATTACHMENT("attachment"),
+	
+	/** 表单数据 */
+	FORM_DATA("form-data");
+	
+	private static final Map<String, ContentDispositionEnum> mappings = MapUtils.newHashMap(3);
+	
 	static {
-		for (HttpMethod httpMethod : values()) {
-			mappings.put(httpMethod.name(), httpMethod);
+		for (ContentDispositionEnum dispositionType : values()) {
+			mappings.put(dispositionType.name, dispositionType);
 		}
 	}
-
-	/**
-	 * 将指定的名称解析成HTTP方法对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param method
-	 * @return
-	 */
-	public static HttpMethod resolve(String method) {
-		return (method != null ? mappings.get(method.toUpperCase()) : null);
-	}
-
-	/**
-	 * 判断指定的名称是否匹配一个HTTP方法对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param method
-	 * @return
-	 */
-	public boolean matches(String method) {
-		return this.name().equalsIgnoreCase(method);
+	
+	/** 类型名称 */
+	private String name;
+	
+	private ContentDispositionEnum(String name) {
+		this.name = name;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * 将指定的名称解析成DispositionType对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public static ContentDispositionEnum resolve(String name) {
+		return (name != null ? mappings.get(name.toLowerCase()) : null);
+	}
+
+	/**
+	 * 判断指定的名称是否匹配一个DispositionType对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public boolean matches(String name) {
+		return this.name.equalsIgnoreCase(name);
+	}
+
 }

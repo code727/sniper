@@ -26,7 +26,7 @@ import java.util.List;
 import org.junit.Test;
 import org.sniper.beans.parameter.DefaultParameters;
 import org.sniper.beans.parameter.Parameters;
-import org.sniper.commons.enums.http.AuthenticationType;
+import org.sniper.commons.enums.http.AuthenticationEnum;
 import org.sniper.commons.enums.http.TEAlgorithm;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
@@ -62,7 +62,7 @@ public class HttpRequestHeadersTest extends BaseTestCase {
 	
 //	@Test
 	public void testAuthorization() {
-		Authorization authorization = new Authorization(AuthenticationType.BASIC, "YWxhZGRpbjpvcGVuc2VzYW1l");
+		Authorization authorization = new Authorization(AuthenticationEnum.BASIC, "YWxhZGRpbjpvcGVuc2VzYW1l");
 		headers.setAuthorization(authorization);
 		System.out.println(headers.getAuthorization());
 	}
@@ -129,7 +129,7 @@ public class HttpRequestHeadersTest extends BaseTestCase {
 	
 //	@Test
 	public void testProxyAuthorization() {
-		Authorization authorization = new Authorization(AuthenticationType.BASIC, "YWxhZGRpbjpvcGVuc2VzYW1l");
+		Authorization authorization = new Authorization(AuthenticationEnum.BASIC, "YWxhZGRpbjpvcGVuc2VzYW1l");
 		headers.setProxyAuthorization(authorization);
 		System.out.println(headers.getProxyAuthorization());
 	}

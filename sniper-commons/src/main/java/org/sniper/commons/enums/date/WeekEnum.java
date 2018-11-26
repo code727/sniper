@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,33 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-20
+ * Create Date : 2017-5-3
  */
 
-package org.sniper.commons.enums.status;
+package org.sniper.commons.enums.date;
 
+import java.util.Calendar;
 import java.util.Map;
 
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
 /**
- * 在线离线/线上到线下状态枚举类
+ * 星期枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum O2OStatus {
+public enum WeekEnum {
 	
-	/** 线下/离线 */
-	OFFLINE("o2o.status.offline"),
-	/** 线上/在线 */
-	ONLINE("o2o.status.online");
+	/** 星期天 */
+	SUNDAY(Calendar.SUNDAY, "date.week.sunday"),
 	
-	private static final Map<Integer, O2OStatus> mappings = MapUtils.newHashMap(2);
+	/** 星期一 */
+	MONDAY(Calendar.MONDAY, "date.week.monday"),
+	
+	/** 星期二 */
+	TUESDAY(Calendar.TUESDAY, "date.week.tuesday"),
+	
+	/** 星期三 */
+	WEDNESDAY(Calendar.WEDNESDAY, "date.week.wednesday"),
+	
+	/** 星期四 */
+	THURSDAY(Calendar.THURSDAY, "date.week.thursday"),
+	
+	/** 星期五 */
+	FRIDAY(Calendar.FRIDAY, "date.week.friday"),
+	
+	/** 星期六 */
+	SATURDAY(Calendar.SATURDAY, "date.week.saturday");
+	
+	private static final Map<Integer, WeekEnum> mappings = MapUtils.newHashMap(7);
 	
 	static {
-		for (O2OStatus status : values()) {
-			mappings.put(status.ordinal(), status);
+		for (WeekEnum week : values()) {
+			mappings.put(week.key, week);
 		}
 	}
 	
@@ -48,9 +65,9 @@ public enum O2OStatus {
 	
 	/** 值 */
 	private final String value;
-
-	private O2OStatus(String value) {
-		this.key = ordinal();
+	
+	private WeekEnum(int key, String value) {
+		this.key = key;
 		this.value = value;
 	}
 	
@@ -67,7 +84,7 @@ public enum O2OStatus {
 	}
 	
 	/**
-	 * 判断指定的键是否匹配一个O2OStatus对象
+	 * 判断指定的键是否匹配一个Week对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -77,12 +94,12 @@ public enum O2OStatus {
 	}
 	
 	/**
-	 * 将指定的键解析成O2OStatus对象
+	 * 将指定的键解析成Week对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
 	 */
-	public static O2OStatus resolve(int key) {
+	public static WeekEnum resolve(int key) {
 		return mappings.get(key);
 	}
 	

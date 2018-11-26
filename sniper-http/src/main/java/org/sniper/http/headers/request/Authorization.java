@@ -20,7 +20,7 @@ package org.sniper.http.headers.request;
 
 import java.io.Serializable;
 
-import org.sniper.commons.enums.http.AuthenticationType;
+import org.sniper.commons.enums.http.AuthenticationEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.StringUtils;
 
@@ -34,12 +34,12 @@ public class Authorization implements Serializable {
 	private static final long serialVersionUID = -892657955289586836L;
 
 	/** 认证类型 */
-	private AuthenticationType type;
+	private AuthenticationEnum type;
 	
 	/** 凭证 */
 	private String credentials;
 	
-	public Authorization(AuthenticationType type, String credentials) {
+	public Authorization(AuthenticationEnum type, String credentials) {
 		AssertUtils.assertNotNull(type, "HTTP authentication type must not be null or blank");
 		AssertUtils.assertNotBlank(credentials, "HTTP authentication credentials must not be null or blank");
 		
@@ -47,7 +47,7 @@ public class Authorization implements Serializable {
 		this.credentials = credentials;
 	}
 
-	public AuthenticationType getType() {
+	public AuthenticationEnum getType() {
 		return type;
 	}
 
