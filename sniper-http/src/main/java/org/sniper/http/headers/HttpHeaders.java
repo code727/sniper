@@ -25,11 +25,11 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.sniper.commons.LinkedMultiValueMap;
-import org.sniper.commons.enums.http.ContentDispositionType;
-import org.sniper.commons.enums.http.ContentEncodingEnum;
+import org.sniper.commons.constant.http.HttpHeadersConstant;
+import org.sniper.commons.enums.http.ContentDispositionTypeEnum;
+import org.sniper.commons.enums.http.ContentEncodingAlgorithmEnum;
 import org.sniper.commons.enums.http.HttpConnectionEnum;
 import org.sniper.commons.enums.http.HttpMethodEnum;
-import org.sniper.commons.enums.http.headers.HttpHeadersEnum;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
@@ -57,7 +57,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param allowedMethods
 	 */
 	public void setAllow(Set<HttpMethodEnum> allowedMethods) {
-		set(HttpHeadersEnum.ALLOW.getKey(), CollectionUtils.join(allowedMethods, VALUE_SEPARATOR));
+		set(HttpHeadersConstant.ALLOW.getKey(), CollectionUtils.join(allowedMethods, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -66,19 +66,21 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public Set<HttpMethodEnum> getAllow() {
-		String first = getFirst(HttpHeadersEnum.ALLOW.getKey());
+		String first = getFirst(HttpHeadersConstant.ALLOW.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
-			Set<HttpMethodEnum> set = CollectionUtils.newLinkedHashSet();
+			Set<HttpMethodEnum> methods = CollectionUtils.newLinkedHashSet();
 			HttpMethodEnum method;
+			
 			for (String value : values) {
 				method = HttpMethodEnum.resolve(value);
-				if (method != null)
-					set.add(method);
+				if (method != null) {
+					methods.add(method);
+				}
 			}
 			
-			return set;
+			return methods;
 		}
 		
 		return null;
@@ -90,7 +92,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param list
 	 */
 	public void setCacheControl(List<String> list) {
-		set(HttpHeadersEnum.CACHE_CONTROL.getKey(), CollectionUtils.join(list, VALUE_SEPARATOR));
+		set(HttpHeadersConstant.CACHE_CONTROL.getKey(), CollectionUtils.join(list, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -99,14 +101,15 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public List<String> getCacheControl() {
-		String first = getFirst(HttpHeadersEnum.CACHE_CONTROL.getKey());
+		String first = getFirst(HttpHeadersConstant.CACHE_CONTROL.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
 			List<String> list = CollectionUtils.newArrayList();
 			for (String value : values) {
-				if (StringUtils.isNotBlank(value))
+				if (StringUtils.isNotBlank(value)) {
 					list.add(value);
+				}
 			}
 			
 			return list;
@@ -121,7 +124,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param connection
 	 */
 	public void setConnection(HttpConnectionEnum connection) {
-		set(HttpHeadersEnum.CONNECTION.getKey(), connection != null ? connection.getValue() : null);
+		set(HttpHeadersConstant.CONNECTION.getKey(), connection != null ? connection.getStatus() : null);
 	}
 	
 	/**
@@ -130,7 +133,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public HttpConnectionEnum getConnection() {
-		return HttpConnectionEnum.resolve(getFirst(HttpHeadersEnum.CONNECTION.getKey()));
+		return HttpConnectionEnum.resolve(getFirst(HttpHeadersConstant.CONNECTION.getKey()));
 	}
 	
 	/**
@@ -139,7 +142,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param contentDisposition
 	 */
 	public void setContentDisposition(ContentDisposition contentDisposition) {
-		set(HttpHeadersEnum.CONTENT_DISPOSITION.getKey(), contentDisposition != null ? contentDisposition.toString() : null);
+		set(HttpHeadersConstant.CONTENT_DISPOSITION.getKey(), contentDisposition != null ? contentDisposition.toString() : null);
 	}
 	
 	/**
@@ -148,21 +151,21 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public ContentDisposition getContentDisposition() {
-		String first = getFirst(HttpHeadersEnum.CONTENT_DISPOSITION.getKey());
+		String first = getFirst(HttpHeadersConstant.CONTENT_DISPOSITION.getKey());
 		String[] values = StringUtils.split(first, StringUtils.SEMICOLON);
 		
-		ContentDispositionType type = ContentDispositionType.resolve(ArrayUtils.get(values, 0));
+		ContentDispositionTypeEnum type = ContentDispositionTypeEnum.resolve(ArrayUtils.get(values, 0));
 		if (type != null) {
 			ContentDisposition disposition = new ContentDisposition(type);
 			
 			String item = ArrayUtils.get(values, 1);
 			if (StringUtils.simpleMatch("name=*", item)) {
 				setContentDispositionName(disposition, item);
-				
 				item = ArrayUtils.get(values, 2);
-				if (StringUtils.simpleMatch("filename=*", item)) 
-					setContentDispositionFilename(disposition, item);
 				
+				if (StringUtils.simpleMatch("filename=*", item)) {
+					setContentDispositionFilename(disposition, item);
+				}
 			} else if (StringUtils.simpleMatch("filename=*", item)) {
 				setContentDispositionFilename(disposition, item);
 				
@@ -175,6 +178,238 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * 设置对特定媒体类型的数据进行压缩的算法(Content-Encoding)
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param algorithm
+	 */
+	public void setContentEncoding(Set<ContentEncodingAlgorithmEnum> algorithms) {
+		set(HttpHeadersConstant.CONTENT_ENCODING.getKey(), CollectionUtils.join(algorithms, VALUE_SEPARATOR));
+	}
+	
+	/**
+	 * 获取对特定媒体类型的数据进行压缩的算法(Content-Encoding)
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Set<ContentEncodingAlgorithmEnum> getContentEncoding() {
+		String first = getFirst(HttpHeadersConstant.CONTENT_ENCODING.getKey());
+		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
+		
+		if (ArrayUtils.isNotEmpty(values)) {
+			Set<ContentEncodingAlgorithmEnum> algorithms = CollectionUtils.newLinkedHashSet();
+			ContentEncodingAlgorithmEnum algorithm;
+			
+			for (String value : values) {
+				algorithm = ContentEncodingAlgorithmEnum.resolve(value);
+				if (algorithm != null) {
+					algorithms.add(algorithm);
+				}
+			}
+			
+			return algorithms;
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 设置访问者希望采用的语言或语言组合(Content-Language)
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param languages
+	 */
+	public void setContentLanguage(Set<String> languages) {
+		set(HttpHeadersConstant.CONTENT_LANGUAGE.getKey(), CollectionUtils.join(languages, VALUE_SEPARATOR));
+	}
+	
+	/**
+	 * 获取访问者希望采用的语言或语言组合(Content-Language)
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Set<String> getContentLanguage() {
+		String first = getFirst(HttpHeadersConstant.CONTENT_LANGUAGE.getKey());
+		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
+		
+		if (ArrayUtils.isNotEmpty(values)) {
+			Set<String> set = CollectionUtils.newLinkedHashSet();
+			for (String value : values) {
+				if (StringUtils.isNotBlank(value))
+					set.add(value);
+			}
+			
+			return set;
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 设置发送给接收方的消息的大小(Content-Length)
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param contentLength
+	 */
+	public void setContentLength(long contentLength) {
+		set(HttpHeadersConstant.CONTENT_LENGTH.getKey(), Long.toString(NumberUtils.minLimit(contentLength, -1)));
+	}
+
+	/**
+	 * 获取发送给接收方的消息的大小(Content-Length)
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public long getContentLength() {
+		String value = getFirst(HttpHeadersConstant.CONTENT_LENGTH.getKey());
+		return value != null ? Long.parseLong(value) : -1;
+	}
+	
+	/**
+	 * 设置要返回的数据的地址选项(Content-Location)
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param url
+	 */
+	public void setContentLocation(String url) {
+		set(HttpHeadersConstant.CONTENT_LOCATION.getKey(), url);
+	}
+	
+	/**
+	 * 获取要返回的数据的地址选项(Content-Location)
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getContentLocation() {
+		return getFirst(HttpHeadersConstant.CONTENT_LOCATION.getKey());
+	}
+	
+	/**
+	 * 设置用于指示资源的MIME类型(MediaType)
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mediaType
+	 */
+	public void setContentType(MediaType mediaType) {
+		set(HttpHeadersConstant.CONTENT_TYPE.getKey(), mediaType != null ? mediaType.toString() : null);
+	}
+	
+	/**
+	 * 获取用于指示资源的MIME类型(MediaType)
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public MediaType getContentType() {
+		return MediaType.parse(getFirst(HttpHeadersConstant.CONTENT_TYPE.getKey()));
+	}
+	
+	/**
+	 * 设置消息生成的日期和时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param date
+	 */
+	public void setDate(Date date) {
+		set(HttpHeadersConstant.DATE.getKey(), date != null ? DateUtils.getGMTDateFormat(Locale.US).format(date) : null);
+	}
+	
+	/**
+	 * 获取消息生成的日期和时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Date getDate() {
+		String first = getFirst(HttpHeadersConstant.DATE.getKey());
+		return StringUtils.isNotBlank(first) ? DateUtils.getGMTDateFormat(Locale.US).parse(first, new ParsePosition(0)) : null;
+	}
+	
+	/**
+	 * 设置Keep-Alive消息头
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param keepAlive
+	 */
+	public void setKeepAlive(KeepAlive keepAlive) {
+		set(HttpHeadersConstant.KEEP_ALIVE.getKey(), keepAlive != null ? keepAlive.toString() : null);
+	}
+	
+	/**
+	 * 获取Keep-Alive消息头
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public KeepAlive getKeepAlive() {
+		String first = getFirst(HttpHeadersConstant.KEEP_ALIVE.getKey());
+		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
+		
+		if (ArrayUtils.isNotEmpty(values)) {
+			long timeout = 0;
+			int max = 0;
+			
+			for (String value : values) {
+				if (StringUtils.startsWithIgnoreCase(value, "timeout=")) {
+					timeout = NumberUtils.toLongValue(StringUtils.afterFristIgnoreCase(value, "timeout="));
+				} else if (StringUtils.startsWithIgnoreCase(value, "max=")) {
+					max = NumberUtils.toIntegerValue(StringUtils.afterFristIgnoreCase(value, "max="));
+				}
+			}
+			
+			if (timeout > 0 && max > 0) {
+				return new KeepAlive(timeout, max);
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 设置Pragma通用消息头
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param pragma
+	 */
+	public void setPragma(String pragma) {
+		set(HttpHeadersConstant.PRAGMA.getKey(), pragma);
+	}
+	
+	/**
+	 * 获取Pragma通用消息头
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getPragma() {
+		return getFirst(HttpHeadersConstant.PRAGMA.getKey());
+	}
+	
+	/**
+	 * 设置Via通用消息头
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param via
+	 */
+	public void setVia(String via) {
+		set(HttpHeadersConstant.VIA.getKey(), via);
+	}
+	
+	/**
+	 * 获取Via通用消息头
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getVia() {
+		return getFirst(HttpHeadersConstant.VIA.getKey());
+	}
+	
+	/**
+	 * 设置当前消息状态可能存在的问题
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param warning
+	 */
+	public void setWarning(String warning) {
+		set(HttpHeadersConstant.WARNING.getKey(), warning);
+	}
+	
+	/**
+	 * 获取当前消息状态可能存在的问题
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getWarning() {
+		return getFirst(HttpHeadersConstant.WARNING.getKey());
 	}
 	
 	/**
@@ -197,233 +432,6 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	private void setContentDispositionFilename(ContentDisposition disposition, String name) {
 		disposition.setFilename(StringUtils.replaceAll(StringUtils.afterFrist(name, StringUtils.ASSIGNMENT),
 				StringUtils.DOUBLE_QUOTES, StringUtils.EMPTY));
-	}
-	
-	/**
-	 * 设置对特定媒体类型的数据进行压缩的算法(Content-Encoding)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param algorithm
-	 */
-	public void setContentEncoding(Set<ContentEncodingEnum> algorithms) {
-		set(HttpHeadersEnum.CONTENT_ENCODING.getKey(), CollectionUtils.join(algorithms, VALUE_SEPARATOR));
-	}
-	
-	/**
-	 * 获取对特定媒体类型的数据进行压缩的算法(Content-Encoding)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Set<ContentEncodingEnum> getContentEncoding() {
-		String first = getFirst(HttpHeadersEnum.CONTENT_ENCODING.getKey());
-		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
-		
-		if (ArrayUtils.isNotEmpty(values)) {
-			Set<ContentEncodingEnum> set = CollectionUtils.newLinkedHashSet();
-			ContentEncodingEnum algorithm;
-			for (String value : values) {
-				algorithm = ContentEncodingEnum.resolve(value);
-				if (algorithm != null)
-					set.add(algorithm);
-			}
-			
-			return set;
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * 设置访问者希望采用的语言或语言组合(Content-Language)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param languages
-	 */
-	public void setContentLanguage(Set<String> languages) {
-		set(HttpHeadersEnum.CONTENT_LANGUAGE.getKey(), CollectionUtils.join(languages, VALUE_SEPARATOR));
-	}
-	
-	/**
-	 * 获取访问者希望采用的语言或语言组合(Content-Language)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Set<String> getContentLanguage() {
-		String first = getFirst(HttpHeadersEnum.CONTENT_LANGUAGE.getKey());
-		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
-		
-		if (ArrayUtils.isNotEmpty(values)) {
-			Set<String> set = CollectionUtils.newLinkedHashSet();
-			for (String value : values) {
-				if (StringUtils.isNotBlank(value))
-					set.add(value);
-			}
-			
-			return set;
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * 设置发送给接收方的消息的大小(Content-Length)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param contentLength
-	 */
-	public void setContentLength(long contentLength) {
-		set(HttpHeadersEnum.CONTENT_LENGTH.getKey(), Long.toString(NumberUtils.minLimit(contentLength, -1)));
-	}
-
-	/**
-	 * 获取发送给接收方的消息的大小(Content-Length)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public long getContentLength() {
-		String value = getFirst(HttpHeadersEnum.CONTENT_LENGTH.getKey());
-		return value != null ? Long.parseLong(value) : -1;
-	}
-	
-	/**
-	 * 设置要返回的数据的地址选项(Content-Location)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param url
-	 */
-	public void setContentLocation(String url) {
-		set(HttpHeadersEnum.CONTENT_LOCATION.getKey(), url);
-	}
-	
-	/**
-	 * 获取要返回的数据的地址选项(Content-Location)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getContentLocation() {
-		return getFirst(HttpHeadersEnum.CONTENT_LOCATION.getKey());
-	}
-	
-	/**
-	 * 设置用于指示资源的MIME类型(MediaType)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param mediaType
-	 */
-	public void setContentType(MediaType mediaType) {
-		set(HttpHeadersEnum.CONTENT_TYPE.getKey(), mediaType != null ? mediaType.toString() : null);
-	}
-	
-	/**
-	 * 获取用于指示资源的MIME类型(MediaType)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public MediaType getContentType() {
-		return MediaType.parse(getFirst(HttpHeadersEnum.CONTENT_TYPE.getKey()));
-	}
-	
-	/**
-	 * 设置消息生成的日期和时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param date
-	 */
-	public void setDate(Date date) {
-		set(HttpHeadersEnum.DATE.getKey(), date != null ? DateUtils.getGMTDateFormat(Locale.US).format(date) : null);
-	}
-	
-	/**
-	 * 获取消息生成的日期和时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public Date getDate() {
-		String first = getFirst(HttpHeadersEnum.DATE.getKey());
-		return StringUtils.isNotBlank(first) ? DateUtils.getGMTDateFormat(Locale.US).parse(first, new ParsePosition(0)) : null;
-	}
-	
-	/**
-	 * 设置Keep-Alive消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keepAlive
-	 */
-	public void setKeepAlive(KeepAlive keepAlive) {
-		set(HttpHeadersEnum.KEEP_ALIVE.getKey(), keepAlive != null ? keepAlive.toString() : null);
-	}
-	
-	/**
-	 * 获取Keep-Alive消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public KeepAlive getKeepAlive() {
-		String first = getFirst(HttpHeadersEnum.KEEP_ALIVE.getKey());
-		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
-		
-		if (ArrayUtils.isNotEmpty(values)) {
-			long timeout = 0;
-			int max = 0;
-			for (String value : values) {
-				if (StringUtils.startsWithIgnoreCase(value, "timeout=")) 
-					timeout = NumberUtils.toLongValue(StringUtils.afterFristIgnoreCase(value, "timeout="));
-				else if (StringUtils.startsWithIgnoreCase(value, "max="))
-					max = NumberUtils.toIntegerValue(StringUtils.afterFristIgnoreCase(value, "max="));
-			}
-			
-			if (timeout > 0 && max > 0)
-				return new KeepAlive(timeout, max);
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * 设置Pragma通用消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param pragma
-	 */
-	public void setPragma(String pragma) {
-		set(HttpHeadersEnum.PRAGMA.getKey(), pragma);
-	}
-	
-	/**
-	 * 获取Pragma通用消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getPragma() {
-		return getFirst(HttpHeadersEnum.PRAGMA.getKey());
-	}
-	
-	/**
-	 * 设置Via通用消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param via
-	 */
-	public void setVia(String via) {
-		set(HttpHeadersEnum.VIA.getKey(), via);
-	}
-	
-	/**
-	 * 获取Via通用消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getVia() {
-		return getFirst(HttpHeadersEnum.VIA.getKey());
-	}
-	
-	/**
-	 * 设置当前消息状态可能存在的问题
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param warning
-	 */
-	public void setWarning(String warning) {
-		set(HttpHeadersEnum.WARNING.getKey(), warning);
-	}
-	
-	/**
-	 * 获取当前消息状态可能存在的问题
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getWarning() {
-		return getFirst(HttpHeadersEnum.WARNING.getKey());
 	}
 					
 }
