@@ -42,7 +42,7 @@ public class AcceptCharset extends AbstractQualityFactor {
 	}
 		
 	public AcceptCharset(String charsetName) {
-		this(charsetName, MAX_DEFAULT);
+		this(charsetName, MAX_DEFAULT_VALUE);
 	}
 	
 	public AcceptCharset(double qualityValue) {
@@ -61,10 +61,11 @@ public class AcceptCharset extends AbstractQualityFactor {
 	public void setName(String name) {
 		AssertUtils.assertNotBlank(name, "Charset name must not be null or blank");
 		
-		if (StringUtils.ANY.equals(name))
+		if (StringUtils.ANY.equals(name)) {
 			this.name = name;
-		else
+		} else {
 			this.name = Charset.forName(name).name();
+		}
 	}
 	
 	@Override

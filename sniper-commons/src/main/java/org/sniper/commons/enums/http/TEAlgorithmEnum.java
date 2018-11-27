@@ -27,50 +27,50 @@ import org.sniper.commons.util.MapUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum TEAlgorithm {
+public enum TEAlgorithmEnum {
 	
 	COMPRESS("compress"),
 	DEFLATE("deflate"),
 	GZIP("gzip"),
 	TRAILERS("trailers");
 	
-	private static final Map<String, TEAlgorithm> mappings = MapUtils.newHashMap(4);
+	private static final Map<String, TEAlgorithmEnum> mappings = MapUtils.newHashMap(4);
 	
-	/** 编码算法名称 */
-	private String encoding;
+	/** 算法模式 */
+	private final String mode;
 	
 	static {
-		for (TEAlgorithm algorithm : values()) {
-			mappings.put(algorithm.encoding, algorithm);
+		for (TEAlgorithmEnum algorithm : values()) {
+			mappings.put(algorithm.mode, algorithm);
 		}
 	}
 	
-	private TEAlgorithm(String encoding) {
-		this.encoding = encoding;
+	private TEAlgorithmEnum(String mode) {
+		this.mode = mode;
 	}
 	
-	public String getEncoding() {
-		return encoding;
-	}
-	
-	/**
-	 * 将指定的算法名称解析成TEAlgorithm对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @return
-	 */
-	public static TEAlgorithm resolve(String encoding) {
-		return (encoding != null ? mappings.get(encoding.toLowerCase()) : null);
+	public String getMode() {
+		return mode;
 	}
 
 	/**
-	 * 判断指定的算法名称是否匹配一个TEAlgorithm对象
+	 * 将指定的算法模式解析成TEAlgorithm对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mode
+	 * @return
+	 */
+	public static TEAlgorithmEnum resolve(String mode) {
+		return (mode != null ? mappings.get(mode.toLowerCase()) : null);
+	}
+
+	/**
+	 * 判断指定的算法模式是否匹配一个TEAlgorithm对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param encoding
 	 * @return
 	 */
-	public boolean matches(String encoding) {
-		return this.encoding.equalsIgnoreCase(encoding);
+	public boolean matches(String mode) {
+		return this.mode.equalsIgnoreCase(mode);
 	}
 
 }

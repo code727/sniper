@@ -29,46 +29,49 @@ import org.sniper.commons.util.MapUtils;
  */
 public enum HttpConnectionEnum {
 	
+	/** 关闭状态 */
 	CLOSE("close"),
 	
+	/** 保持连接状态 */
 	KEEP_ALIVE("keep-alive");
 	
 	private static final Map<String, HttpConnectionEnum> mappings = MapUtils.newHashMap(2);
 	
+	/** 状态 */
+	private final String status;
+	
 	static {
 		for (HttpConnectionEnum connection : values()) {
-			mappings.put(connection.value, connection);
+			mappings.put(connection.status, connection);
 		}
 	}
 	
-	private String value;
-	
-	private HttpConnectionEnum(String value) {
-		this.value = value;
+	private HttpConnectionEnum(String status) {
+		this.status = status;
 	}
 	
-	public String getValue() {
-		return value;
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 判断指定的状态是否匹配一个HttpConnection对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param status
+	 * @return
+	 */
+	public boolean matches(String status) {
+		return this.status.equalsIgnoreCase(status);
 	}
 
 	/**
-	 * 将指定的值解析成HttpConnection对象
+	 * 将指定的状态解析成HttpConnection对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param value
+	 * @param status
 	 * @return
 	 */
-	public static HttpConnectionEnum resolve(String value) {
-		return (value != null ? mappings.get(value.toLowerCase()) : null);
-	}
-
-	/**
-	 * 判断指定的值是否匹配一个HttpConnection对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param value
-	 * @return
-	 */
-	public boolean matches(String value) {
-		return this.value.equalsIgnoreCase(value);
+	public static HttpConnectionEnum resolve(String status) {
+		return (status != null ? mappings.get(status.toLowerCase()) : null);
 	}
 	
 }

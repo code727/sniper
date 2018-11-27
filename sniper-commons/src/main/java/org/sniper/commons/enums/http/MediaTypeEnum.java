@@ -19,11 +19,11 @@
 package org.sniper.commons.enums.http;
 
 /**
- * Media类型枚举
+ * 媒介类型枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum MediaEnum {
+public enum MediaTypeEnum {
 	
 	ALL("*/*"),
 	APPLICATION_ATOM_XML("application/atom+xml"),
@@ -108,9 +108,10 @@ public enum MediaEnum {
 	VIDEO_X_MSVIDEO("video/x-msvideo")
 	;
 	
-	private String type;
+	/** 类型 */
+	private final String type;
 	
-	private MediaEnum(String type) {
+	private MediaTypeEnum(String type) {
 		this.type = type;
 	}
 

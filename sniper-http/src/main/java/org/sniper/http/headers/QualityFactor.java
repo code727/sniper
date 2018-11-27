@@ -31,10 +31,10 @@ public interface QualityFactor extends Serializable {
 	public static final String PARAM_QUALITY_FACTOR = "q";
 	
 	/** 最小默认值 */
-	public static final double MIN_DEFAULT = 0.0d;
+	public static final double MIN_DEFAULT_VALUE = 0.0d;
 	
 	/** 最大默认值 */
-	public static final double MAX_DEFAULT = 1.0d;
+	public static final double MAX_DEFAULT_VALUE = 1.0d;
 	
 	/**
 	 * 获取质量价值

@@ -40,7 +40,7 @@ public class AcceptLanguage extends AbstractQualityFactor {
 	}
 	
 	public AcceptLanguage(Locale locale) {
-		this(locale, MAX_DEFAULT);
+		this(locale, MAX_DEFAULT_VALUE);
 	}
 	
 	public AcceptLanguage(double qualityValue) {
@@ -71,18 +71,21 @@ public class AcceptLanguage extends AbstractQualityFactor {
 		String qualityValue = super.toString();
 		
 		StringBuilder result = new StringBuilder();
-		if (StringUtils.isNotBlank(country))
+		if (StringUtils.isNotBlank(country)) {
 			result.append(country);
+		}
 		
 		if (StringUtils.isNotBlank(language)) {
-			if (result.length() > 0)
+			if (result.length() > 0) {
 				result.append(StringUtils.COMMA);
+			}
 			
 			result.append(language);
 		}
 		
-		if (qualityValue.length() > 0) 
+		if (qualityValue.length() > 0) {
 			result.append(qualityValue);
+		}
 				
 		return result.toString();
 	}	

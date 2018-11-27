@@ -366,7 +366,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 		for (Map.Entry<String, Object> entry : getParameterItems().entrySet()) {
 			// 质量价值等于默认的1.0时不予以显示
 			if (QualityFactor.PARAM_QUALITY_FACTOR.equals(attribute = entry.getKey())
-					&& NumberUtils.equals(entry.getValue(), QualityFactor.MAX_DEFAULT)) {
+					&& NumberUtils.equals(entry.getValue(), QualityFactor.MAX_DEFAULT_VALUE)) {
 				continue;
 			}
 			builder.append(StringUtils.SEMICOLON).append(attribute).append(StringUtils.ASSIGNMENT).append(entry.getValue());

@@ -18,7 +18,7 @@
 
 package org.sniper.http.headers.request;
 
-import org.sniper.commons.enums.http.AcceptEncodingEnum;
+import org.sniper.commons.enums.http.AcceptEncodingAlgorithmEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.http.headers.AbstractQualityFactor;
 
@@ -31,44 +31,44 @@ public class AcceptEncoding extends AbstractQualityFactor {
 	
 	private static final long serialVersionUID = 7600312994109431769L;
 	
-	/** 编码算法 */
-	private AcceptEncodingEnum encodingEnum;
+	/** 编码枚举 */
+	private AcceptEncodingAlgorithmEnum algorithm;
 	
 	public AcceptEncoding() {
-		this(AcceptEncodingEnum.ANY);
+		this(AcceptEncodingAlgorithmEnum.ANY);
 	}
 	
-	public AcceptEncoding(AcceptEncodingEnum algorithm) {
-		this(algorithm, MAX_DEFAULT);
+	public AcceptEncoding(AcceptEncodingAlgorithmEnum algorithm) {
+		this(algorithm, MAX_DEFAULT_VALUE);
 	}
 	
 	public AcceptEncoding(double qualityValue) {
-		this(AcceptEncodingEnum.ANY, qualityValue);
+		this(AcceptEncodingAlgorithmEnum.ANY, qualityValue);
 	}
 	
-	public AcceptEncoding(AcceptEncodingEnum algorithm, double qualityValue) {
+	public AcceptEncoding(AcceptEncodingAlgorithmEnum algorithm, double qualityValue) {
 		setAlgorithm(algorithm);
 		setQualityValue(qualityValue);
 	}
 	
-	public AcceptEncodingEnum getAlgorithm() {
+	public AcceptEncodingAlgorithmEnum getAlgorithm() {
 		return algorithm;
 	}
 
-	public void setAlgorithm(AcceptEncodingEnum algorithm) {
+	public void setAlgorithm(AcceptEncodingAlgorithmEnum algorithm) {
 		AssertUtils.assertNotNull(algorithm, "Accept encoding algorithm must not be null");
-		
 		this.algorithm = algorithm;
 	}
-
+		
 	@Override
 	public String toString() {
 		String qualityValue = super.toString();
 		
-		if (qualityValue.length() > 0) 
-			return this.algorithm.getAlgorithm() + qualityValue;
+		if (qualityValue.length() > 0) {
+			return this.algorithm.getMode() + qualityValue;
+		}
 		
-		return this.algorithm.getAlgorithm();
+		return this.algorithm.getMode();
 	}
-			
+				
 }

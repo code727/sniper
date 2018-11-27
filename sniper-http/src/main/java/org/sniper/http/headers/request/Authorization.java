@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年8月17日
+ * Create Date : 2017-8-17
  */
 
 package org.sniper.http.headers.request;
 
 import java.io.Serializable;
 
-import org.sniper.commons.enums.http.AuthenticationEnum;
+import org.sniper.commons.enums.http.AuthenticationTypeEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.StringUtils;
 
@@ -34,20 +34,20 @@ public class Authorization implements Serializable {
 	private static final long serialVersionUID = -892657955289586836L;
 
 	/** 认证类型 */
-	private AuthenticationEnum type;
+	private final AuthenticationTypeEnum type;
 	
 	/** 凭证 */
-	private String credentials;
+	private final String credentials;
 	
-	public Authorization(AuthenticationEnum type, String credentials) {
-		AssertUtils.assertNotNull(type, "HTTP authentication type must not be null or blank");
+	public Authorization(AuthenticationTypeEnum type, String credentials) {
+		AssertUtils.assertNotNull(type, "HTTP authentication type must not be null");
 		AssertUtils.assertNotBlank(credentials, "HTTP authentication credentials must not be null or blank");
 		
 		this.type = type;
 		this.credentials = credentials;
 	}
 
-	public AuthenticationEnum getType() {
+	public AuthenticationTypeEnum getType() {
 		return type;
 	}
 
@@ -57,7 +57,7 @@ public class Authorization implements Serializable {
 	
 	@Override
 	public String toString() {
-		return new StringBuilder(type.getName()).append(StringUtils.SPACE).append(credentials).toString();
+		return new StringBuilder(type.getSchemeName()).append(StringUtils.SPACE).append(credentials).toString();
 	}
 
 }

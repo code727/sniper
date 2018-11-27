@@ -68,8 +68,9 @@ public class Forwarded implements Serializable {
 	}
 	
 	public void addFor(String xFor) {
-		if (StringUtils.isNotBlank(xFor))
+		if (StringUtils.isNotBlank(xFor)) {
 			this.multiFor.add(xFor);
+		}
 	}
 	
 	public String getHost() {
@@ -77,8 +78,9 @@ public class Forwarded implements Serializable {
 	}
 
 	public void setHost(String host) {
-		if (StringUtils.isNotBlank(host))
+		if (StringUtils.isNotBlank(host)) {
 			this.host = host;
+		}
 	}
 
 	public HttpProtocolEnum getProtocol() {
@@ -93,32 +95,38 @@ public class Forwarded implements Serializable {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		
-		if (StringUtils.isNotBlank(by))
+		if (StringUtils.isNotBlank(by)) {
 			builder.append("by=").append(by);
+		}
 		
 		if (CollectionUtils.isNotEmpty(multiFor)) {
-			if (builder.length() > 0)
+			if (builder.length() > 0) {
 				builder.append(HttpHeaders.NAME_VALUE_PAIR_SEPARATOR);
+			}
+				
 			
 			Iterator<String> iterator = multiFor.iterator();
 			while (iterator.hasNext()) {
 				builder.append("for=").append(iterator.next());
-				if (iterator.hasNext())
+				if (iterator.hasNext()) {
 					builder.append(HttpHeaders.VALUE_SEPARATOR);
+				}
 			}
 		}
 		
 		if (StringUtils.isNotBlank(host)) {
-			if (builder.length() > 0)
+			if (builder.length() > 0) {
 				builder.append(HttpHeaders.NAME_VALUE_PAIR_SEPARATOR);
+			}
 			
 			builder.append("host=").append(host);
 		}
 		
 		if (protocol != null) {
-			if (builder.length() > 0)
+			if (builder.length() > 0) {
 				builder.append(HttpHeaders.NAME_VALUE_PAIR_SEPARATOR);
-			
+			}
+				
 			builder.append("proto=").append(protocol.name().toLowerCase());
 		}
 			

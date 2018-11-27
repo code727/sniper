@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年9月11日
+ * Create Date : 2017-9-11
  */
 
 package org.sniper.commons.enums.http;
@@ -23,11 +23,11 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * 身份认证枚举
+ * 身份认证类型枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum AuthenticationEnum {
+public enum AuthenticationTypeEnum {
 
 	BASIC("Basic"),
 	BEARER("Bearer"),
@@ -39,42 +39,43 @@ public enum AuthenticationEnum {
 	SCRAM_SHA_1("SCRAM-SHA-1"),
 	SCRAM_SHA_256("SCRAM-SHA-256");
 	
-	private static final Map<String, AuthenticationEnum> mappings = MapUtils.newHashMap(9);
+	private static final Map<String, AuthenticationTypeEnum> mappings = MapUtils.newHashMap(9);
+	
+	/** 方案名称 */
+	private final String schemeName ;
 	
 	static {
-		for (AuthenticationEnum scheme : values()) {
-			mappings.put(scheme.name, scheme);
+		for (AuthenticationTypeEnum type : values()) {
+			mappings.put(type.schemeName, type);
 		}
 	}
-	
-	private String name;
-	
-	private AuthenticationEnum(String name) {
-		this.name = name;
+		
+	private AuthenticationTypeEnum(String schemeName) {
+		this.schemeName = schemeName;
 	}
 	
-	public String getName() {
-		return name;
+	public String getSchemeName() {
+		return schemeName;
 	}
 
 	/**
-	 * 将指定的名称解析成AuthenticationScheme对象
+	 * 判断指定的方案名称是否匹配一个AuthenticationTypeEnum对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
+	 * @param schemeName
 	 * @return
 	 */
-	public static AuthenticationEnum resolve(String name) {
-		return (name != null ? mappings.get(name) : null);
+	public boolean matches(String schemeName) {
+		return this.schemeName.equals(schemeName);
 	}
 
 	/**
-	 * 判断指定的名称是否匹配一个AuthenticationScheme对象
+	 * 将指定的方案名称解析成AuthenticationTypeEnum对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
+	 * @param schemeName
 	 * @return
 	 */
-	public boolean matches(String name) {
-		return this.name.equals(name);
+	public static AuthenticationTypeEnum resolve(String schemeName) {
+		return (schemeName != null ? mappings.get(schemeName) : null);
 	}
-	
+
 }

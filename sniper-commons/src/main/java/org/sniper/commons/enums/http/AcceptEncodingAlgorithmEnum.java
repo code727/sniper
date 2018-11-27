@@ -23,11 +23,11 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * Accept-Encoding请求头编码枚举
+ * Accept-Encoding请求头编码算法枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum AcceptEncodingEnum {
+public enum AcceptEncodingAlgorithmEnum {
 	
 	AES128GCM("aes128gcm"),
 	BR("br"),
@@ -43,43 +43,43 @@ public enum AcceptEncodingEnum {
 	X_GZIP("x-gzip"),
 	ANY("*");
 	
-	private static final Map<String, AcceptEncodingEnum> mappings = MapUtils.newHashMap(13);
+	private static final Map<String, AcceptEncodingAlgorithmEnum> mappings = MapUtils.newHashMap(13);
+	
+	/** 算法模式 */
+	private final String mode;
 	
 	static {
-		for (AcceptEncodingEnum acceptEncoding : values()) {
-			mappings.put(acceptEncoding.algorithm, acceptEncoding);
+		for (AcceptEncodingAlgorithmEnum acceptEncoding : values()) {
+			mappings.put(acceptEncoding.name(), acceptEncoding);
 		}
 	}
 	
-	/** 编码算法名称 */
-	private final String algorithm;
-	
-	private AcceptEncodingEnum(String algorithm) {
-		this.algorithm = algorithm;
+	private AcceptEncodingAlgorithmEnum(String mode) {
+		this.mode = mode;
 	}
 	
-	public String getAlgorithm() {
-		return algorithm;
+	public String getMode() {
+		return mode;
 	}
 
 	/**
-	 * 判断指定的算法名称是否匹配一个AcceptEncodingEnum对象
+	 * 判断指定的算法模式是否匹配一个AcceptEncodingAlgorithmEnum对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param algorithm
+	 * @param mode
 	 * @return
 	 */
-	public boolean matches(String algorithm) {
-		return this.algorithm.equalsIgnoreCase(algorithm);
+	public boolean matches(String mode) {
+		return this.mode.equalsIgnoreCase(mode);
 	}
 
 	/**
-	 * 将指定的算法名称解析成AcceptEncodingEnum对象
+	 * 将指定的算法模式解析成AcceptEncodingAlgorithmEnum对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param algorithm
+	 * @param mode
 	 * @return
 	 */
-	public static AcceptEncodingEnum resolve(String algorithm) {
-		return (algorithm != null ? mappings.get(algorithm.toLowerCase()) : null);
+	public static AcceptEncodingAlgorithmEnum resolve(String mode) {
+		return (mode != null ? mappings.get(mode.toLowerCase()) : null);
 	}
-
+	
 }

@@ -38,25 +38,25 @@ public enum HttpMethodEnum {
 			mappings.put(httpMethod.name(), httpMethod);
 		}
 	}
-
-	/**
-	 * 将指定的名称解析成HTTP方法对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param method
-	 * @return
-	 */
-	public static HttpMethodEnum resolve(String method) {
-		return (method != null ? mappings.get(method.toUpperCase()) : null);
-	}
-
-	/**
-	 * 判断指定的名称是否匹配一个HTTP方法对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param method
-	 * @return
-	 */
-	public boolean matches(String method) {
-		return this.name().equalsIgnoreCase(method);
-	}
 	
+	/**
+	 * 判断指定的方法名称是否匹配一个HttpMethodEnum方法对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public boolean matches(String name) {
+		return this.name().equalsIgnoreCase(name);
+	}
+
+	/**
+	 * 将指定的方法名称解析成HttpMethodEnum方法对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 * @return
+	 */
+	public static HttpMethodEnum resolve(String name) {
+		return (name != null ? mappings.get(name.toUpperCase()) : null);
+	}
+
 }

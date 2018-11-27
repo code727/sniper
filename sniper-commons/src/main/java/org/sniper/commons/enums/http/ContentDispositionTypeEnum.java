@@ -23,11 +23,11 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * Content-Disposition消息头枚举
+ * Content-Disposition消息头类型枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum ContentDispositionEnum {
+public enum ContentDispositionTypeEnum {
 	
 	/** 内联形式 */
 	INLINE("inline"),
@@ -38,43 +38,43 @@ public enum ContentDispositionEnum {
 	/** 表单数据 */
 	FORM_DATA("form-data");
 	
-	private static final Map<String, ContentDispositionEnum> mappings = MapUtils.newHashMap(3);
+	private static final Map<String, ContentDispositionTypeEnum> mappings = MapUtils.newHashMap(3);
+	
+	/** 类型模式 */
+	private final String mode;
 	
 	static {
-		for (ContentDispositionEnum dispositionType : values()) {
-			mappings.put(dispositionType.name, dispositionType);
+		for (ContentDispositionTypeEnum dispositionType : values()) {
+			mappings.put(dispositionType.mode, dispositionType);
 		}
 	}
 	
-	/** 类型名称 */
-	private String name;
-	
-	private ContentDispositionEnum(String name) {
-		this.name = name;
+	private ContentDispositionTypeEnum(String mode) {
+		this.mode = mode;
 	}
 	
-	public String getName() {
-		return name;
+	public String getMode() {
+		return mode;
 	}
-
+	
 	/**
-	 * 将指定的名称解析成DispositionType对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @return
-	 */
-	public static ContentDispositionEnum resolve(String name) {
-		return (name != null ? mappings.get(name.toLowerCase()) : null);
-	}
-
-	/**
-	 * 判断指定的名称是否匹配一个DispositionType对象
+	 * 判断指定的类型模式是否匹配一个DispositionType对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
 	 */
 	public boolean matches(String name) {
-		return this.name.equalsIgnoreCase(name);
+		return this.mode.equalsIgnoreCase(name);
+	}
+
+	/**
+	 * 将指定的类型模式解析成ContentDispositionTypeEnum对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mode
+	 * @return
+	 */
+	public static ContentDispositionTypeEnum resolve(String mode) {
+		return (mode != null ? mappings.get(mode.toLowerCase()) : null);
 	}
 
 }

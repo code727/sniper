@@ -21,6 +21,7 @@ package org.sniper.http.headers.request;
 import java.io.Serializable;
 
 import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.StringUtils;
 
 /**
  * HTTP文件范围值对象
@@ -31,9 +32,9 @@ public class RangeValue implements Serializable {
 	
 	private static final long serialVersionUID = 7780203358324324802L;
 
-	private long start;
+	private final long start;
 	
-	private Long end;
+	private final Long end;
 	
 	public RangeValue() {
 		this(0L);
@@ -45,31 +46,29 @@ public class RangeValue implements Serializable {
 	
 	public RangeValue(long start, Long end) {
 		if (end != null) {
-			AssertUtils.assertTrue(start != end, "Range start '" + start + "' must not equals end");
+			AssertUtils.assertTrue(start != end, String.format("Range start '%s' must not equals end", start));
 			if (start < end) {
-				AssertUtils.assertTrue(start >= 0, "Range start '" + start + "' must be greater than or equals 0");
-				AssertUtils.assertTrue(end >= 0, "Range end '" + end + "' must be greater than or equals 0");
+				AssertUtils.assertTrue(start >= 0, String.format("Range start '%s' must be greater than or equals 0", start));
+				AssertUtils.assertTrue(end >= 0, String.format("Range end '%s' must be greater than or equals 0", end));
 				this.start = start;
 				this.end = end;
 			} else {
-				AssertUtils.assertTrue(end >= 0, "Range start '" + end + "' must be greater than or equals 0");
-				AssertUtils.assertTrue(start >= 0, "Range end '" + start + "' must be greater than or equals 0");
+				AssertUtils.assertTrue(end >= 0, String.format("Range start '%s' must be greater than or equals 0", end));
+				AssertUtils.assertTrue(start >= 0, String.format("Range end '%s' must be greater than or equals 0", start));
 				this.start = end;
 				this.end = start;
 			}
 		} else {
 			AssertUtils.assertTrue(start >= 0, "Range start must be greater than or equals 0");
 			this.start = start;
+			this.end = end; 
 		}
 	}
-	
+		
 	@Override
 	public String toString() {
-		String result = start + "-";
-		if (end != null)
-			result += end;
-		
-		return result;
+		String result = start + StringUtils.CONNECTION_LINE;
+		return end == null ? result : result + end;
 	}
-	
+		
 }

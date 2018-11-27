@@ -31,23 +31,26 @@ public abstract class AbstractQualityFactor implements QualityFactor {
 	private static final long serialVersionUID = -3158184340281312062L;
 			
 	/** 质量价值，默认为1.0 */
-	private double qualityValue = MAX_DEFAULT;
+	private double qualityValue = MAX_DEFAULT_VALUE;
 	
+	@Override
 	public double getQualityValue() {
 		return qualityValue;
 	}
-
+	
+	@Override
 	public void setQualityValue(double qualityValue) {
-		AssertUtils.assertTrue(qualityValue >= QualityFactor.MIN_DEFAULT && qualityValue <= QualityFactor.MAX_DEFAULT,
-				"Invalid http quality value '" + qualityValue + "',should be between 0 and 1");
-		
+		AssertUtils.assertTrue(qualityValue >= MIN_DEFAULT_VALUE && qualityValue <= MAX_DEFAULT_VALUE,
+				String.format("Invalid http quality value '%s',should be between %s and %s", 
+						qualityValue, MIN_DEFAULT_VALUE, MAX_DEFAULT_VALUE));
+				
 		this.qualityValue = qualityValue;
 	}
 
 	@Override
 	public String toString() {
-		return (this.qualityValue >= MIN_DEFAULT && this.qualityValue < MAX_DEFAULT) ? 
-				(new StringBuilder(StringUtils.SEMICOLON).append(PARAM_QUALITY_FACTOR)
+		return (this.qualityValue >= MIN_DEFAULT_VALUE && this.qualityValue < MAX_DEFAULT_VALUE)
+				? (new StringBuilder(StringUtils.SEMICOLON).append(PARAM_QUALITY_FACTOR)
 						.append(StringUtils.ASSIGNMENT).append(this.qualityValue).toString()) : StringUtils.EMPTY;
 	}
 		
