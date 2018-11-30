@@ -101,7 +101,7 @@ public class SqlMapServiceSupport<T> extends CheckableInitializingBeanAdapter
 	@SuppressWarnings("unchecked")
 	protected void initTargetType() {
 		if (this.targetType == null)
-			this.targetType = ((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
+			this.targetType = ((Class<T>) ClassUtils.getSuperclassGenricType(getClass()));
 	}
 	
 	/**

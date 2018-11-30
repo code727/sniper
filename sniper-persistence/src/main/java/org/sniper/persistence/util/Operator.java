@@ -32,8 +32,8 @@ public final class Operator extends AbstractConstant<String, String> {
 	
 	private static final long serialVersionUID = 7578105868961133349L;
 
-	/** 存放的所有运算枚举对象组 */
-	private static final Map<String, Operator> mappings = MapUtils.newHashMap(8);
+	/** 存放所有运算符常量的映射集 */
+	private static final Map<String, Operator> mappings;
 	
 	/** 相等运算符 */
 	public static final Operator EQ = new Operator("EQ", " = ");
@@ -58,13 +58,18 @@ public final class Operator extends AbstractConstant<String, String> {
 	
 	/** LIKE运算符，右侧匹配模式"LIKE value% */
 	public static final Operator RLIKE = new Operator("RLIKE", " LIKE {value}%");
-	
-	static {
 		
+	static {
+		mappings = MapUtils.newHashMap(createMapping(Operator.class));
 	}
-	
+		
 	private Operator(String key, String value) {
 		super(key, value);
+	}
+		
+	@Override
+	public boolean matches(String key) {
+		return this.key.equalsIgnoreCase(key);
 	}
 	
 	/**
@@ -76,15 +81,5 @@ public final class Operator extends AbstractConstant<String, String> {
 	public static Operator resolve(String key) {
 		return (key != null ? mappings.get(key.toUpperCase()) : null);
 	}
-		
-	/**
-	 * 判断指定的键是否与当前运算符配置
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @return
-	 */
-	public boolean matches(String key) {
-		return this.key.equalsIgnoreCase(key);
-	}
-		
+						
 }

@@ -25,7 +25,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.sniper.commons.LinkedMultiValueMap;
-import org.sniper.commons.constant.http.HttpHeadersConstant;
+import org.sniper.commons.constant.http.HttpHeader;
 import org.sniper.commons.enums.http.ContentDispositionTypeEnum;
 import org.sniper.commons.enums.http.ContentEncodingAlgorithmEnum;
 import org.sniper.commons.enums.http.HttpConnectionEnum;
@@ -57,7 +57,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param allowedMethods
 	 */
 	public void setAllow(Set<HttpMethodEnum> allowedMethods) {
-		set(HttpHeadersConstant.ALLOW.getKey(), CollectionUtils.join(allowedMethods, VALUE_SEPARATOR));
+		set(HttpHeader.ALLOW.getKey(), CollectionUtils.join(allowedMethods, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public Set<HttpMethodEnum> getAllow() {
-		String first = getFirst(HttpHeadersConstant.ALLOW.getKey());
+		String first = getFirst(HttpHeader.ALLOW.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
@@ -92,7 +92,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param list
 	 */
 	public void setCacheControl(List<String> list) {
-		set(HttpHeadersConstant.CACHE_CONTROL.getKey(), CollectionUtils.join(list, VALUE_SEPARATOR));
+		set(HttpHeader.CACHE_CONTROL.getKey(), CollectionUtils.join(list, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -101,7 +101,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public List<String> getCacheControl() {
-		String first = getFirst(HttpHeadersConstant.CACHE_CONTROL.getKey());
+		String first = getFirst(HttpHeader.CACHE_CONTROL.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
@@ -124,7 +124,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param connection
 	 */
 	public void setConnection(HttpConnectionEnum connection) {
-		set(HttpHeadersConstant.CONNECTION.getKey(), connection != null ? connection.getStatus() : null);
+		set(HttpHeader.CONNECTION.getKey(), connection != null ? connection.getStatus() : null);
 	}
 	
 	/**
@@ -133,7 +133,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public HttpConnectionEnum getConnection() {
-		return HttpConnectionEnum.resolve(getFirst(HttpHeadersConstant.CONNECTION.getKey()));
+		return HttpConnectionEnum.resolve(getFirst(HttpHeader.CONNECTION.getKey()));
 	}
 	
 	/**
@@ -142,7 +142,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param contentDisposition
 	 */
 	public void setContentDisposition(ContentDisposition contentDisposition) {
-		set(HttpHeadersConstant.CONTENT_DISPOSITION.getKey(), contentDisposition != null ? contentDisposition.toString() : null);
+		set(HttpHeader.CONTENT_DISPOSITION.getKey(), contentDisposition != null ? contentDisposition.toString() : null);
 	}
 	
 	/**
@@ -151,7 +151,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public ContentDisposition getContentDisposition() {
-		String first = getFirst(HttpHeadersConstant.CONTENT_DISPOSITION.getKey());
+		String first = getFirst(HttpHeader.CONTENT_DISPOSITION.getKey());
 		String[] values = StringUtils.split(first, StringUtils.SEMICOLON);
 		
 		ContentDispositionTypeEnum type = ContentDispositionTypeEnum.resolve(ArrayUtils.get(values, 0));
@@ -186,7 +186,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param algorithm
 	 */
 	public void setContentEncoding(Set<ContentEncodingAlgorithmEnum> algorithms) {
-		set(HttpHeadersConstant.CONTENT_ENCODING.getKey(), CollectionUtils.join(algorithms, VALUE_SEPARATOR));
+		set(HttpHeader.CONTENT_ENCODING.getKey(), CollectionUtils.join(algorithms, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -195,7 +195,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public Set<ContentEncodingAlgorithmEnum> getContentEncoding() {
-		String first = getFirst(HttpHeadersConstant.CONTENT_ENCODING.getKey());
+		String first = getFirst(HttpHeader.CONTENT_ENCODING.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
@@ -221,7 +221,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param languages
 	 */
 	public void setContentLanguage(Set<String> languages) {
-		set(HttpHeadersConstant.CONTENT_LANGUAGE.getKey(), CollectionUtils.join(languages, VALUE_SEPARATOR));
+		set(HttpHeader.CONTENT_LANGUAGE.getKey(), CollectionUtils.join(languages, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -230,7 +230,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public Set<String> getContentLanguage() {
-		String first = getFirst(HttpHeadersConstant.CONTENT_LANGUAGE.getKey());
+		String first = getFirst(HttpHeader.CONTENT_LANGUAGE.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
@@ -252,7 +252,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param contentLength
 	 */
 	public void setContentLength(long contentLength) {
-		set(HttpHeadersConstant.CONTENT_LENGTH.getKey(), Long.toString(NumberUtils.minLimit(contentLength, -1)));
+		set(HttpHeader.CONTENT_LENGTH.getKey(), Long.toString(NumberUtils.minLimit(contentLength, -1)));
 	}
 
 	/**
@@ -261,7 +261,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public long getContentLength() {
-		String value = getFirst(HttpHeadersConstant.CONTENT_LENGTH.getKey());
+		String value = getFirst(HttpHeader.CONTENT_LENGTH.getKey());
 		return value != null ? Long.parseLong(value) : -1;
 	}
 	
@@ -271,7 +271,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param url
 	 */
 	public void setContentLocation(String url) {
-		set(HttpHeadersConstant.CONTENT_LOCATION.getKey(), url);
+		set(HttpHeader.CONTENT_LOCATION.getKey(), url);
 	}
 	
 	/**
@@ -280,7 +280,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public String getContentLocation() {
-		return getFirst(HttpHeadersConstant.CONTENT_LOCATION.getKey());
+		return getFirst(HttpHeader.CONTENT_LOCATION.getKey());
 	}
 	
 	/**
@@ -289,7 +289,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param mediaType
 	 */
 	public void setContentType(MediaType mediaType) {
-		set(HttpHeadersConstant.CONTENT_TYPE.getKey(), mediaType != null ? mediaType.toString() : null);
+		set(HttpHeader.CONTENT_TYPE.getKey(), mediaType != null ? mediaType.toString() : null);
 	}
 	
 	/**
@@ -298,7 +298,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public MediaType getContentType() {
-		return MediaType.parse(getFirst(HttpHeadersConstant.CONTENT_TYPE.getKey()));
+		return MediaType.parse(getFirst(HttpHeader.CONTENT_TYPE.getKey()));
 	}
 	
 	/**
@@ -307,7 +307,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param date
 	 */
 	public void setDate(Date date) {
-		set(HttpHeadersConstant.DATE.getKey(), date != null ? DateUtils.getGMTDateFormat(Locale.US).format(date) : null);
+		set(HttpHeader.DATE.getKey(), date != null ? DateUtils.getGMTDateFormat(Locale.US).format(date) : null);
 	}
 	
 	/**
@@ -316,7 +316,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public Date getDate() {
-		String first = getFirst(HttpHeadersConstant.DATE.getKey());
+		String first = getFirst(HttpHeader.DATE.getKey());
 		return StringUtils.isNotBlank(first) ? DateUtils.getGMTDateFormat(Locale.US).parse(first, new ParsePosition(0)) : null;
 	}
 	
@@ -326,7 +326,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param keepAlive
 	 */
 	public void setKeepAlive(KeepAlive keepAlive) {
-		set(HttpHeadersConstant.KEEP_ALIVE.getKey(), keepAlive != null ? keepAlive.toString() : null);
+		set(HttpHeader.KEEP_ALIVE.getKey(), keepAlive != null ? keepAlive.toString() : null);
 	}
 	
 	/**
@@ -335,7 +335,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public KeepAlive getKeepAlive() {
-		String first = getFirst(HttpHeadersConstant.KEEP_ALIVE.getKey());
+		String first = getFirst(HttpHeader.KEEP_ALIVE.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
@@ -364,7 +364,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param pragma
 	 */
 	public void setPragma(String pragma) {
-		set(HttpHeadersConstant.PRAGMA.getKey(), pragma);
+		set(HttpHeader.PRAGMA.getKey(), pragma);
 	}
 	
 	/**
@@ -373,7 +373,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public String getPragma() {
-		return getFirst(HttpHeadersConstant.PRAGMA.getKey());
+		return getFirst(HttpHeader.PRAGMA.getKey());
 	}
 	
 	/**
@@ -382,7 +382,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param via
 	 */
 	public void setVia(String via) {
-		set(HttpHeadersConstant.VIA.getKey(), via);
+		set(HttpHeader.VIA.getKey(), via);
 	}
 	
 	/**
@@ -391,7 +391,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public String getVia() {
-		return getFirst(HttpHeadersConstant.VIA.getKey());
+		return getFirst(HttpHeader.VIA.getKey());
 	}
 	
 	/**
@@ -400,7 +400,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @param warning
 	 */
 	public void setWarning(String warning) {
-		set(HttpHeadersConstant.WARNING.getKey(), warning);
+		set(HttpHeader.WARNING.getKey(), warning);
 	}
 	
 	/**
@@ -409,7 +409,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @return
 	 */
 	public String getWarning() {
-		return getFirst(HttpHeadersConstant.WARNING.getKey());
+		return getFirst(HttpHeader.WARNING.getKey());
 	}
 	
 	/**

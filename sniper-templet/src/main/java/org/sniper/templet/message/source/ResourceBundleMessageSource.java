@@ -60,6 +60,25 @@ public class ResourceBundleMessageSource implements MessageSource {
 		return baseNames;
 	}
 
+	@Override
+	public String getMessageByKey(String key) {
+		return getMessageByKey(key, null);
+	}
+
+	@Override
+	public String getMessageByKey(String key, Locale locale) {
+		if (ArrayUtils.isNotEmpty(baseNames)) {
+			for (String baseName : baseNames) {
+				ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
+				if (resourceBundle != null && resourceBundle.containsKey(key)) {
+					return resourceBundle.getString(key);
+				}
+			}
+		}
+		
+		return null;
+	}
+	
 	/**
 	 * 根据基础名称和本地化对象获取对应的java.util.ResourceBundle对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -73,28 +92,6 @@ public class ResourceBundleMessageSource implements MessageSource {
 		} catch (MissingResourceException e) {
 			return null;
 		}
-	}
-
-	@Override
-	public String getMessageByKey(String key) {
-		return getMessageByKey(key, null);
-	}
-
-	@Override
-	public String getMessageByKey(String key, Locale locale) {
-		if (locale == null)
-			locale = Locale.getDefault();
-		
-		if (ArrayUtils.isNotEmpty(baseNames)) {
-			for (String baseName : baseNames) {
-				ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
-				if (resourceBundle != null && resourceBundle.containsKey(key)) {
-					return resourceBundle.getString(key);
-				}
-			}
-		}
-		
-		return null;
 	}
 
 }

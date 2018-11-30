@@ -18,7 +18,10 @@
 
 package org.sniper.commons.constant.status;
 
+import java.util.Map;
+
 import org.sniper.commons.constant.AbstractNestedLocaleConstant;
+import org.sniper.commons.util.MapUtils;
 
 /**
  * 业务状态常量类
@@ -29,9 +32,8 @@ public class BizStatus extends AbstractNestedLocaleConstant<String, Integer> {
 	
 	private static final long serialVersionUID = -2847353128385702823L;
 	
-	protected BizStatus(String key, ExecutionStatus value) {
-		super(key, value);
-	}
+	/** 存放所有运算符常量的映射集 */
+	protected static final Map<String, BizStatus> mappings;
 	
 	/** 业务执行成功 */
 	public static final BizStatus SUCCESS = new BizStatus("success", ExecutionStatus.SUCCESS);
@@ -42,4 +44,27 @@ public class BizStatus extends AbstractNestedLocaleConstant<String, Integer> {
 	/** 业务执行失败，业务逻辑之类引起的 */
 	public static final BizStatus FAILED = new BizStatus("failed", ExecutionStatus.FAILED);
 		
+	static {
+		mappings = MapUtils.newHashMap(createMapping(BizStatus.class));
+	}
+		
+	protected BizStatus(String key, ExecutionStatus value) {
+		super(key, value);
+	}
+	
+	@Override
+	public boolean matches(String key) {
+		return this.key.equalsIgnoreCase(key);
+	}
+	
+	/**
+	 * 根据键解析出一个业务状态
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public static BizStatus resolve(String key) {
+		return (key != null ? mappings.get(key.toLowerCase()) : null);
+	}
+	
 }

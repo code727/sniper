@@ -32,40 +32,40 @@ import org.sniper.commons.util.MessageUtils;
 public enum MonthEnum {
 	
 	/** 一月 */
-	JANUARY(Calendar.JANUARY, "date.month.january"),
+	JANUARY(Calendar.JANUARY, "month.january"),
 	
 	/** 二月 */
-	FEBRUARY(Calendar.FEBRUARY, "date.month.february"),
+	FEBRUARY(Calendar.FEBRUARY, "month.february"),
 	
 	/** 三月 */
-	MARCH(Calendar.MARCH, "date.month.march"),
+	MARCH(Calendar.MARCH, "month.march"),
 	
 	/** 四月 */
-	APRIL(Calendar.APRIL, "date.month.april"),
+	APRIL(Calendar.APRIL, "month.april"),
 	
 	/** 五月 */
-	MAY(Calendar.MAY, "date.month.may"),
+	MAY(Calendar.MAY, "month.may"),
 	
 	/** 六月 */
-	JUNE(Calendar.JUNE, "date.month.june"),
+	JUNE(Calendar.JUNE, "month.june"),
 	
 	/** 七月 */
-	JULY(Calendar.JULY, "date.month.july"),
+	JULY(Calendar.JULY, "month.july"),
 	
 	/** 八月 */
-	AUGUST (Calendar.AUGUST, "date.month.august"),
+	AUGUST (Calendar.AUGUST, "month.august"),
 	
 	/** 九月 */
-	SEPTEMBER(Calendar.SEPTEMBER, "date.month.september"),
+	SEPTEMBER(Calendar.SEPTEMBER, "month.september"),
 	
 	/** 十月 */
-	OCTOBER(Calendar.OCTOBER, "date.month.october"),
+	OCTOBER(Calendar.OCTOBER, "month.october"),
 	
 	/** 十一月 */
-	NOVEMBER(Calendar.NOVEMBER, "date.month.november"),
+	NOVEMBER(Calendar.NOVEMBER, "month.november"),
 	
 	/** 十二月 */
-	DECEMBER(Calendar.DECEMBER, "date.month.december");
+	DECEMBER(Calendar.DECEMBER, "month.december");
 	
 	public static final Map<Integer, MonthEnum> mappings = MapUtils.newHashMap(12);
 	

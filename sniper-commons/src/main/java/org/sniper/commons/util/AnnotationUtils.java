@@ -39,16 +39,18 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	public static boolean hasAnnotation(Object obj) {
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(obj);
-		if (declaredClass != null) {
-			while (declaredClass != Object.class) {
-				if (ArrayUtils.isNotEmpty(declaredClass.getDeclaredAnnotations()))
-					return true;
-				declaredClass = declaredClass.getSuperclass();
+		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
+		while (declaredClass != null && declaredClass != Object.class) {
+			if (ArrayUtils.isNotEmpty(declaredClass.getDeclaredAnnotations())) {
+				return true;
 			}
+
+			declaredClass = declaredClass.getSuperclass();
 		}
+		
 		return false;
 	}
+	
 	
 	/**
 	 * 判断对象是否被指定的注解所标识
@@ -57,17 +59,19 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	public static <A extends Annotation> boolean hasAnnotation(Object obj, Class<A> annotationClass) {
-		if (annotationClass == null)
+		if (annotationClass == null) {
 			return false;
-		
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(obj);
-		if (declaredClass != null) {
-			while (declaredClass != Object.class) {
-				if (declaredClass.getAnnotation(annotationClass) != null)
-					return true;
-				declaredClass = declaredClass.getSuperclass();
-			}
 		}
+			
+		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
+		while (declaredClass != null && declaredClass != Object.class) {
+			if (declaredClass.getAnnotation(annotationClass) != null) {
+				return true;
+			}
+				
+			declaredClass = declaredClass.getSuperclass();
+		}
+		
 		return false;
 	}
 	
@@ -78,10 +82,7 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	public static boolean hasAnnotation(Field field) {
-		if (field == null)
-			return false;
-		
-		return ArrayUtils.isNotEmpty(field.getAnnotations());
+		return field != null && ArrayUtils.isNotEmpty(field.getAnnotations());
 	}
 	
 	/**
@@ -92,9 +93,10 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	public static <A extends Annotation> boolean hasAnnotation(Field field, Class<A> annotationClass) {
-		if (field == null || annotationClass == null)
+		if (field == null || annotationClass == null) {
 			return false;
-		
+		}
+			
 		return field.getAnnotation(annotationClass) != null;
 	}
 	
@@ -105,8 +107,9 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	public static boolean hasAnnotation(Method method) {
-		if (method == null)
+		if (method == null) {
 			return false;
+		}
 		
 		return ArrayUtils.isNotEmpty(method.getAnnotations());
 	}
@@ -119,8 +122,9 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	public static <A extends Annotation> boolean hasAnnotation(Method method, Class<A> annotationClass) {
-		if (method == null || annotationClass == null)
+		if (method == null || annotationClass == null) {
 			return false;
+		}
 		
 		return method.getAnnotation(annotationClass) != null;
 	}
@@ -132,18 +136,19 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	public static List<Field> findAnnotationField(Object obj) {
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(obj);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
 		
 		if (declaredClass != null) {
 			List<Field> fields = CollectionUtils.newArrayList();
 			Field[] declaredFields;
 			/* 获取非Object基类对象的注解域 */
-			while (declaredClass != Object.class) {
+			while (declaredClass != null && declaredClass != Object.class) {
 				declaredFields = declaredClass.getDeclaredFields();
 				if (ArrayUtils.isNotEmpty(declaredFields)) {
 					for (Field field : declaredFields) {
-						if (ArrayUtils.isNotEmpty(field.getAnnotations()))
+						if (ArrayUtils.isNotEmpty(field.getAnnotations())) {
 							fields.add(field);
+						}
 					}
 				}
 				declaredClass = declaredClass.getSuperclass();
@@ -183,43 +188,47 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	private static <A extends Annotation> List<Field> findAnnotationField(Object obj, Class<A> annotationClass, boolean onlyFirst) {
-		if (annotationClass == null)
+		if (annotationClass == null) {
 			return null;
+		}
 		
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(obj);
-		if (declaredClass != null) {
-			List<Field> fields = CollectionUtils.newArrayList();
-			Field[] declaredFields;
-			if (onlyFirst) {
-				/* 获取非Object基类对象的注解域 */
-				while (declaredClass != Object.class) {
-					declaredFields = declaredClass.getDeclaredFields();
-					if (ArrayUtils.isNotEmpty(declaredFields)) {
-						for (Field field : declaredFields) {
-							if (field.getAnnotation(annotationClass) != null) {
-								fields.add(field);
-								// 找一个域对象后立马返回结果
-								return fields;
-							}
+		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
+		if (declaredClass == null) {
+			return null;
+		}
+		
+		List<Field> fields = CollectionUtils.newArrayList();
+		Field[] declaredFields;
+		if (onlyFirst) {
+			/* 获取非Object基类对象的注解域 */
+			while (declaredClass != null && declaredClass != Object.class) {
+				declaredFields = declaredClass.getDeclaredFields();
+				if (ArrayUtils.isNotEmpty(declaredFields)) {
+					for (Field field : declaredFields) {
+						if (field.getAnnotation(annotationClass) != null) {
+							fields.add(field);
+							// 找到一个域对象后立即返回结果
+							return fields;
 						}
 					}
-					declaredClass = declaredClass.getSuperclass();
 				}
-			} else {
-				while (declaredClass != Object.class) {
-					declaredFields = declaredClass.getDeclaredFields();
-					if (ArrayUtils.isNotEmpty(declaredFields)) {
-						for (Field field : declaredFields) {
-							if (field.getAnnotation(annotationClass) != null)
-								fields.add(field);
+				declaredClass = declaredClass.getSuperclass();
+			}
+		} else {
+			while (declaredClass != null && declaredClass != Object.class) {
+				declaredFields = declaredClass.getDeclaredFields();
+				if (ArrayUtils.isNotEmpty(declaredFields)) {
+					for (Field field : declaredFields) {
+						if (field.getAnnotation(annotationClass) != null) {
+							fields.add(field);
 						}
 					}
-					declaredClass = declaredClass.getSuperclass();
 				}
-				return fields;
+				declaredClass = declaredClass.getSuperclass();
 			}
 		}
-		return null;
+		
+		return fields;
 	}
 	
 	/**
@@ -229,18 +238,19 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	public static List<Method> findAnnotationMethod(Object obj) {
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(obj);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
 		
 		if (declaredClass != null) {
 			List<Method> methods = CollectionUtils.newArrayList();
 			Method[] declaredMethods;
 			/* 获取非Object基类对象的注解域 */
-			while (declaredClass != Object.class) {
+			while (declaredClass != null && declaredClass != Object.class) {
 				declaredMethods = declaredClass.getDeclaredMethods();
 				if (ArrayUtils.isNotEmpty(declaredMethods)) {
 					for (Method method : declaredMethods) {
-						if (ArrayUtils.isNotEmpty(method.getAnnotations()))
+						if (ArrayUtils.isNotEmpty(method.getAnnotations())) {
 							methods.add(method);
+						}
 					}
 				}
 				declaredClass = declaredClass.getSuperclass();
@@ -284,13 +294,13 @@ public class AnnotationUtils {
 		if (annotationClass == null)
 			return null;
 		
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(obj);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
 		if (declaredClass != null) {
 			List<Method> methods = CollectionUtils.newArrayList();
 			Method[] declaredMethods;
 			if (onlyFirst) {
 				/* 获取非Object基类对象的注解域 */
-				while (declaredClass != Object.class) {
+				while (declaredClass != null && declaredClass != Object.class) {
 					declaredMethods = declaredClass.getDeclaredMethods();
 					if (ArrayUtils.isNotEmpty(declaredMethods)) {
 						for (Method method : declaredMethods) {
@@ -304,7 +314,7 @@ public class AnnotationUtils {
 					declaredClass = declaredClass.getSuperclass();
 				}
 			} else {
-				while (declaredClass != Object.class) {
+				while (declaredClass != null && declaredClass != Object.class) {
 					declaredMethods = declaredClass.getDeclaredMethods();
 					if (ArrayUtils.isNotEmpty(declaredMethods)) {
 						for (Method method : declaredMethods) {
@@ -354,13 +364,13 @@ public class AnnotationUtils {
 		if (annotationClass == null)
 			return null;
 		
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(obj);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
 		if (declaredClass != null) {
 			List<Method> methods = CollectionUtils.newArrayList();
 			Method[] declaredMethods;
 			if (onlyFirst) {
 				/* 获取非Object基类对象的注解域 */
-				while (declaredClass != Object.class) {
+				while (declaredClass != null && declaredClass != Object.class) {
 					declaredMethods = declaredClass.getDeclaredMethods();
 					if (ArrayUtils.isNotEmpty(declaredMethods)) {
 						for (Method method : declaredMethods) {
@@ -374,12 +384,13 @@ public class AnnotationUtils {
 					declaredClass = declaredClass.getSuperclass();
 				}
 			} else {
-				while (declaredClass != Object.class) {
+				while (declaredClass != null && declaredClass != Object.class) {
 					declaredMethods = declaredClass.getDeclaredMethods();
 					if (ArrayUtils.isNotEmpty(declaredMethods)) {
 						for (Method method : declaredMethods) {
-							if (Supports.isGetterMethod(method, annotationClass))
+							if (Supports.isGetterMethod(method, annotationClass)) {
 								methods.add(method);
+							}
 						}
 					}
 					declaredClass = declaredClass.getSuperclass();
@@ -424,13 +435,13 @@ public class AnnotationUtils {
 		if (annotationClass == null)
 			return null;
 		
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(obj);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
 		if (declaredClass != null) {
 			List<Method> methods = CollectionUtils.newArrayList();
 			Method[] declaredMethods;
 			if (onlyFirst) {
 				/* 获取非Object基类对象的注解域 */
-				while (declaredClass != Object.class) {
+				while (declaredClass != null && declaredClass != Object.class) {
 					declaredMethods = declaredClass.getDeclaredMethods();
 					if (ArrayUtils.isNotEmpty(declaredMethods)) {
 						for (Method method : declaredMethods) {
@@ -444,12 +455,13 @@ public class AnnotationUtils {
 					declaredClass = declaredClass.getSuperclass();
 				}
 			} else {
-				while (declaredClass != Object.class) {
+				while (declaredClass != null && declaredClass != Object.class) {
 					declaredMethods = declaredClass.getDeclaredMethods();
 					if (ArrayUtils.isNotEmpty(declaredMethods)) {
 						for (Method method : declaredMethods) {
-							if (Supports.isSetterMethod(method, annotationClass))
+							if (Supports.isSetterMethod(method, annotationClass)) {
 								methods.add(method);
+							}
 						}
 					}
 					declaredClass = declaredClass.getSuperclass();
@@ -498,8 +510,9 @@ public class AnnotationUtils {
 	@SuppressWarnings("unchecked")
 	public static <A extends Annotation, V> V invokeFirstAnnotationMethod(Object obj, Class<A> annotationClass, Object[] pValues) throws Exception {
 		Method annotationMethod = findFirstAnnotationMethod(obj, annotationClass);
-		if (annotationMethod == null)
+		if (annotationMethod == null) {
 			return null;
+		}
 		
 		return (V) ReflectionUtils.Supports.invokeAccessibleMethod(obj, annotationMethod, annotationMethod.getParameterTypes(), pValues);
 	}
@@ -515,8 +528,9 @@ public class AnnotationUtils {
 	@SuppressWarnings("unchecked")
 	public static <A extends Annotation, V> V invokeFirstAnnotationGetterMethodValue(Object obj, Class<A> annotationClass) throws Exception {
 		Method getterMethod = findFirstAnnotationGetterMethod(obj, annotationClass);
-		if (getterMethod == null)
+		if (getterMethod == null) {
 			return null;
+		}
 		
 		return (V) ReflectionUtils.Supports.invokeAccessibleMethod(obj, getterMethod, null, null);
 	}

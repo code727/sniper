@@ -81,7 +81,7 @@ public abstract class MyBatisDaoSupport<T> extends SqlSessionDaoSupport
 	@SuppressWarnings("unchecked")
 	protected void initTargetType() {
 		if (this.targetType == null)
-			this.targetType = ((Class<T>) ClassUtils.getSuperClassGenricType(getClass()));
+			this.targetType = ((Class<T>) ClassUtils.getSuperclassGenricType(getClass()));
 	}
 	
 	/**

@@ -57,7 +57,7 @@ public class KafkaJsonDeserializer<T> extends AbstractDeserializer<T> {
 		if (targetType != null)
 			this.targetType = targetType;
 		else
-			this.targetType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
+			this.targetType = (Class<T>) ClassUtils.getSuperclassGenricType(getClass());
 	}
 	
 	public JsonSerializer getJsonSerializer() {

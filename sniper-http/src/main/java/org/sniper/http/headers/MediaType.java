@@ -22,7 +22,7 @@ import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.Map;
 
-import org.sniper.commons.enums.http.MediaTypeEnum;
+import org.sniper.commons.enums.http.MediaEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.NumberUtils;
@@ -281,87 +281,87 @@ public class MediaType extends MimeType implements Serializable {
 	public final static MediaType VIDEO_X_MSVIDEO;
 	
 	static {
-		ALL = parse(MediaTypeEnum.ALL.getType());
-		APPLICATION_ATOM_XML = parse(MediaTypeEnum.APPLICATION_ATOM_XML.getType());
-		APPLICATION_FONT_WOFF = parse(MediaTypeEnum.APPLICATION_FONT_WOFF.getType());
-		APPLICATION_FORM_URLENCODED = parse(MediaTypeEnum.APPLICATION_FORM_URLENCODED.getType());
-		APPLICATION_JAVA_ARCHIVE = parse(MediaTypeEnum.APPLICATION_JAVA_ARCHIVE.getType());
-		APPLICATION_JAVASCRIPT = parse(MediaTypeEnum.APPLICATION_JAVASCRIPT.getType());
-		APPLICATION_JSON = parse(MediaTypeEnum.APPLICATION_JSON.getType());
-		APPLICATION_JSON_UTF8 = parse(MediaTypeEnum.APPLICATION_JSON_UTF8.getType());
-		APPLICATION_MAC_BINHEX40 = parse(MediaTypeEnum.APPLICATION_MAC_BINHEX40.getType());
-		APPLICATION_MSWORD = parse(MediaTypeEnum.APPLICATION_MSWORD.getType());
-		APPLICATION_OCTET_STREAM = parse(MediaTypeEnum.APPLICATION_OCTET_STREAM.getType());
-		APPLICATION_PDF = parse(MediaTypeEnum.APPLICATION_PDF.getType());
-		APPLICATION_POSTSCRIPT = parse(MediaTypeEnum.APPLICATION_POSTSCRIPT.getType());
-		APPLICATION_RSS_XML = parse(MediaTypeEnum.APPLICATION_RSS_XML.getType());
-		APPLICATION_RTF = parse(MediaTypeEnum.APPLICATION_RTF.getType());
-		APPLICATION_VND_APPLE_MPEGURL = parse(MediaTypeEnum.APPLICATION_VND_APPLE_MPEGURL.getType());
-		APPLICATION_VND_MS_EXCEL = parse(MediaTypeEnum.APPLICATION_VND_MS_EXCEL.getType());
-		APPLICATION_VND_MS_FONTOBJECT = parse(MediaTypeEnum.APPLICATION_VND_MS_FONTOBJECT.getType());
-		APPLICATION_VND_MS_POWERPOINT = parse(MediaTypeEnum.APPLICATION_VND_MS_POWERPOINT.getType());
-		APPLICATION_VND_WAP_WMLC = parse(MediaTypeEnum.APPLICATION_VND_WAP_WMLC.getType());
-		APPLICATION_VND_GOOGLE_EARTH_KML_XML = parse(MediaTypeEnum.APPLICATION_VND_GOOGLE_EARTH_KML_XML.getType());
-		APPLICATION_VND_GOOGLE_EARTH_KMZ = parse(MediaTypeEnum.APPLICATION_VND_GOOGLE_EARTH_KMZ.getType());
-		APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT = parse(MediaTypeEnum.APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT.getType());
-		APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET = parse(MediaTypeEnum.APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET.getType());
-		APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION = parse(MediaTypeEnum.APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION.getType());
-		APPLICATION_X_7Z_COMPRESSED = parse(MediaTypeEnum.APPLICATION_X_7Z_COMPRESSED.getType());
-		APPLICATION_X_COCOA = parse(MediaTypeEnum.APPLICATION_X_COCOA.getType());
-		APPLICATION_X_JAVA_ARCHIVE_DIFF = parse(MediaTypeEnum.APPLICATION_X_JAVA_ARCHIVE_DIFF.getType());
-		APPLICATION_X_JAVA_JNLP_FILE = parse(MediaTypeEnum.APPLICATION_X_JAVA_JNLP_FILE.getType());
-		APPLICATION_X_MAKESELF = parse(MediaTypeEnum.APPLICATION_X_MAKESELF.getType());
-		APPLICATION_X_PERL = parse(MediaTypeEnum.APPLICATION_X_PERL.getType());
-		APPLICATION_X_PILOT = parse(MediaTypeEnum.APPLICATION_X_PILOT.getType());
-		APPLICATION_X_RAR_COMPRESSED = parse(MediaTypeEnum.APPLICATION_X_RAR_COMPRESSED.getType());
-		APPLICATION_X_REDHAT_PACKAGE_MANAGER = parse(MediaTypeEnum.APPLICATION_X_REDHAT_PACKAGE_MANAGER.getType());
-		APPLICATION_X_SEA = parse(MediaTypeEnum.APPLICATION_X_SEA.getType());
-		APPLICATION_X_SHOCKWAVE_FLASH = parse(MediaTypeEnum.APPLICATION_X_SHOCKWAVE_FLASH.getType());	
-		APPLICATION_X_STUFFIT = parse(MediaTypeEnum.APPLICATION_X_STUFFIT.getType());	
-		APPLICATION_X_TCL = parse(MediaTypeEnum.APPLICATION_X_TCL.getType());
-		APPLICATION_X_X509_CA_CERT = parse(MediaTypeEnum.APPLICATION_X_X509_CA_CERT.getType());
-		PPLICATION_X_XPINSTALL = parse(MediaTypeEnum.PPLICATION_X_XPINSTALL.getType());	
-		APPLICATION_XHTML_XML = parse(MediaTypeEnum.APPLICATION_XHTML_XML.getType());		
-		APPLICATION_XML = parse(MediaTypeEnum.APPLICATION_XML.getType());			
-		APPLICATION_XSPF_XML = parse(MediaTypeEnum.APPLICATION_XSPF_XML.getType());		
-		APPLICATION_ZIP = parse(MediaTypeEnum.APPLICATION_ZIP.getType());
-		AUDIO_MIDI = parse(MediaTypeEnum.AUDIO_MIDI.getType());
-		AUDIO_MPEG = parse(MediaTypeEnum.AUDIO_MPEG.getType());
-		AUDIO_OGG = parse(MediaTypeEnum.AUDIO_OGG.getType());
-		AUDIO_X_M4A = parse(MediaTypeEnum.AUDIO_X_M4A.getType());
-		AUDIO_X_REALAUDIO = parse(MediaTypeEnum.AUDIO_X_REALAUDIO.getType());
-		IMAGE_GIF = parse(MediaTypeEnum.IMAGE_GIF.getType());
-		IMAGE_JPEG = parse(MediaTypeEnum.IMAGE_JPEG.getType());
-		IMAGE_PNG = parse(MediaTypeEnum.IMAGE_PNG.getType());
-		IMAGE_TIFF = parse(MediaTypeEnum.IMAGE_TIFF.getType());	
-		IMAGE_VND_WAP_WBMP = parse(MediaTypeEnum.IMAGE_VND_WAP_WBMP.getType());	
-		IMAGE_X_ICON = parse(MediaTypeEnum.IMAGE_X_ICON.getType());	
-		IMAGE_X_JNG = parse(MediaTypeEnum.IMAGE_X_JNG.getType());	
-		IMAGE_X_MS_BMP = parse(MediaTypeEnum.IMAGE_X_MS_BMP.getType());	
-		IMAGE_SVG_XML = parse(MediaTypeEnum.IMAGE_SVG_XML.getType());	
-		IMAGE_WEBP = parse(MediaTypeEnum.IMAGE_WEBP.getType());	
-		MULTIPART_FORM_DATA = parse(MediaTypeEnum.MULTIPART_FORM_DATA.getType());
-		TEXT_CSS = parse(MediaTypeEnum.TEXT_CSS.getType());
-		TEXT_HTML = parse(MediaTypeEnum.TEXT_HTML.getType());
-		TEXT_MARKDOWN = parse(MediaTypeEnum.TEXT_MARKDOWN.getType());
-		TEXT_MATHML = parse(MediaTypeEnum.TEXT_MATHML.getType());
-		TEXT_PLAIN = parse(MediaTypeEnum.TEXT_PLAIN.getType());
-		TEXT_VND_SUN_J2ME_APP_DESCRIPTOR = parse(MediaTypeEnum.TEXT_VND_SUN_J2ME_APP_DESCRIPTOR.getType());
-		TEXT_VND_WAP_WML = parse(MediaTypeEnum.TEXT_VND_WAP_WML.getType());
-		TEXT_X_COMPONENT = parse(MediaTypeEnum.TEXT_X_COMPONENT.getType());
-		TEXT_XML = parse(MediaTypeEnum.TEXT_XML.getType());
-		VIDEO_3GPP = parse(MediaTypeEnum.VIDEO_3GPP.getType());
-		VIDEO_MP2T = parse(MediaTypeEnum.VIDEO_MP2T.getType());
-		VIDEO_MP4 = parse(MediaTypeEnum.VIDEO_MP4.getType());
-		VIDEO_MPEG = parse(MediaTypeEnum.VIDEO_MPEG.getType());
-		VIDEO_QUICKTIME = parse(MediaTypeEnum.VIDEO_QUICKTIME.getType());
-		VIDEO_WEBM = parse(MediaTypeEnum.VIDEO_WEBM.getType());
-		VIDEO_X_FLV = parse(MediaTypeEnum.VIDEO_X_FLV.getType());
-		VIDEO_X_M4V = parse(MediaTypeEnum.VIDEO_X_M4V.getType());
-		VIDEO_X_MNG = parse(MediaTypeEnum.VIDEO_X_MNG.getType());
-		VIDEO_X_MS_ASF = parse(MediaTypeEnum.VIDEO_X_MS_ASF.getType());
-		VIDEO_X_MS_WMV = parse(MediaTypeEnum.VIDEO_X_MS_ASF.getType());
-		VIDEO_X_MSVIDEO = parse(MediaTypeEnum.VIDEO_X_MSVIDEO.getType());
+		ALL = parse(MediaEnum.ALL.getType());
+		APPLICATION_ATOM_XML = parse(MediaEnum.APPLICATION_ATOM_XML.getType());
+		APPLICATION_FONT_WOFF = parse(MediaEnum.APPLICATION_FONT_WOFF.getType());
+		APPLICATION_FORM_URLENCODED = parse(MediaEnum.APPLICATION_FORM_URLENCODED.getType());
+		APPLICATION_JAVA_ARCHIVE = parse(MediaEnum.APPLICATION_JAVA_ARCHIVE.getType());
+		APPLICATION_JAVASCRIPT = parse(MediaEnum.APPLICATION_JAVASCRIPT.getType());
+		APPLICATION_JSON = parse(MediaEnum.APPLICATION_JSON.getType());
+		APPLICATION_JSON_UTF8 = parse(MediaEnum.APPLICATION_JSON_UTF8.getType());
+		APPLICATION_MAC_BINHEX40 = parse(MediaEnum.APPLICATION_MAC_BINHEX40.getType());
+		APPLICATION_MSWORD = parse(MediaEnum.APPLICATION_MSWORD.getType());
+		APPLICATION_OCTET_STREAM = parse(MediaEnum.APPLICATION_OCTET_STREAM.getType());
+		APPLICATION_PDF = parse(MediaEnum.APPLICATION_PDF.getType());
+		APPLICATION_POSTSCRIPT = parse(MediaEnum.APPLICATION_POSTSCRIPT.getType());
+		APPLICATION_RSS_XML = parse(MediaEnum.APPLICATION_RSS_XML.getType());
+		APPLICATION_RTF = parse(MediaEnum.APPLICATION_RTF.getType());
+		APPLICATION_VND_APPLE_MPEGURL = parse(MediaEnum.APPLICATION_VND_APPLE_MPEGURL.getType());
+		APPLICATION_VND_MS_EXCEL = parse(MediaEnum.APPLICATION_VND_MS_EXCEL.getType());
+		APPLICATION_VND_MS_FONTOBJECT = parse(MediaEnum.APPLICATION_VND_MS_FONTOBJECT.getType());
+		APPLICATION_VND_MS_POWERPOINT = parse(MediaEnum.APPLICATION_VND_MS_POWERPOINT.getType());
+		APPLICATION_VND_WAP_WMLC = parse(MediaEnum.APPLICATION_VND_WAP_WMLC.getType());
+		APPLICATION_VND_GOOGLE_EARTH_KML_XML = parse(MediaEnum.APPLICATION_VND_GOOGLE_EARTH_KML_XML.getType());
+		APPLICATION_VND_GOOGLE_EARTH_KMZ = parse(MediaEnum.APPLICATION_VND_GOOGLE_EARTH_KMZ.getType());
+		APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT = parse(MediaEnum.APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT.getType());
+		APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET = parse(MediaEnum.APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET.getType());
+		APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION = parse(MediaEnum.APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION.getType());
+		APPLICATION_X_7Z_COMPRESSED = parse(MediaEnum.APPLICATION_X_7Z_COMPRESSED.getType());
+		APPLICATION_X_COCOA = parse(MediaEnum.APPLICATION_X_COCOA.getType());
+		APPLICATION_X_JAVA_ARCHIVE_DIFF = parse(MediaEnum.APPLICATION_X_JAVA_ARCHIVE_DIFF.getType());
+		APPLICATION_X_JAVA_JNLP_FILE = parse(MediaEnum.APPLICATION_X_JAVA_JNLP_FILE.getType());
+		APPLICATION_X_MAKESELF = parse(MediaEnum.APPLICATION_X_MAKESELF.getType());
+		APPLICATION_X_PERL = parse(MediaEnum.APPLICATION_X_PERL.getType());
+		APPLICATION_X_PILOT = parse(MediaEnum.APPLICATION_X_PILOT.getType());
+		APPLICATION_X_RAR_COMPRESSED = parse(MediaEnum.APPLICATION_X_RAR_COMPRESSED.getType());
+		APPLICATION_X_REDHAT_PACKAGE_MANAGER = parse(MediaEnum.APPLICATION_X_REDHAT_PACKAGE_MANAGER.getType());
+		APPLICATION_X_SEA = parse(MediaEnum.APPLICATION_X_SEA.getType());
+		APPLICATION_X_SHOCKWAVE_FLASH = parse(MediaEnum.APPLICATION_X_SHOCKWAVE_FLASH.getType());	
+		APPLICATION_X_STUFFIT = parse(MediaEnum.APPLICATION_X_STUFFIT.getType());	
+		APPLICATION_X_TCL = parse(MediaEnum.APPLICATION_X_TCL.getType());
+		APPLICATION_X_X509_CA_CERT = parse(MediaEnum.APPLICATION_X_X509_CA_CERT.getType());
+		PPLICATION_X_XPINSTALL = parse(MediaEnum.PPLICATION_X_XPINSTALL.getType());	
+		APPLICATION_XHTML_XML = parse(MediaEnum.APPLICATION_XHTML_XML.getType());		
+		APPLICATION_XML = parse(MediaEnum.APPLICATION_XML.getType());			
+		APPLICATION_XSPF_XML = parse(MediaEnum.APPLICATION_XSPF_XML.getType());		
+		APPLICATION_ZIP = parse(MediaEnum.APPLICATION_ZIP.getType());
+		AUDIO_MIDI = parse(MediaEnum.AUDIO_MIDI.getType());
+		AUDIO_MPEG = parse(MediaEnum.AUDIO_MPEG.getType());
+		AUDIO_OGG = parse(MediaEnum.AUDIO_OGG.getType());
+		AUDIO_X_M4A = parse(MediaEnum.AUDIO_X_M4A.getType());
+		AUDIO_X_REALAUDIO = parse(MediaEnum.AUDIO_X_REALAUDIO.getType());
+		IMAGE_GIF = parse(MediaEnum.IMAGE_GIF.getType());
+		IMAGE_JPEG = parse(MediaEnum.IMAGE_JPEG.getType());
+		IMAGE_PNG = parse(MediaEnum.IMAGE_PNG.getType());
+		IMAGE_TIFF = parse(MediaEnum.IMAGE_TIFF.getType());	
+		IMAGE_VND_WAP_WBMP = parse(MediaEnum.IMAGE_VND_WAP_WBMP.getType());	
+		IMAGE_X_ICON = parse(MediaEnum.IMAGE_X_ICON.getType());	
+		IMAGE_X_JNG = parse(MediaEnum.IMAGE_X_JNG.getType());	
+		IMAGE_X_MS_BMP = parse(MediaEnum.IMAGE_X_MS_BMP.getType());	
+		IMAGE_SVG_XML = parse(MediaEnum.IMAGE_SVG_XML.getType());	
+		IMAGE_WEBP = parse(MediaEnum.IMAGE_WEBP.getType());	
+		MULTIPART_FORM_DATA = parse(MediaEnum.MULTIPART_FORM_DATA.getType());
+		TEXT_CSS = parse(MediaEnum.TEXT_CSS.getType());
+		TEXT_HTML = parse(MediaEnum.TEXT_HTML.getType());
+		TEXT_MARKDOWN = parse(MediaEnum.TEXT_MARKDOWN.getType());
+		TEXT_MATHML = parse(MediaEnum.TEXT_MATHML.getType());
+		TEXT_PLAIN = parse(MediaEnum.TEXT_PLAIN.getType());
+		TEXT_VND_SUN_J2ME_APP_DESCRIPTOR = parse(MediaEnum.TEXT_VND_SUN_J2ME_APP_DESCRIPTOR.getType());
+		TEXT_VND_WAP_WML = parse(MediaEnum.TEXT_VND_WAP_WML.getType());
+		TEXT_X_COMPONENT = parse(MediaEnum.TEXT_X_COMPONENT.getType());
+		TEXT_XML = parse(MediaEnum.TEXT_XML.getType());
+		VIDEO_3GPP = parse(MediaEnum.VIDEO_3GPP.getType());
+		VIDEO_MP2T = parse(MediaEnum.VIDEO_MP2T.getType());
+		VIDEO_MP4 = parse(MediaEnum.VIDEO_MP4.getType());
+		VIDEO_MPEG = parse(MediaEnum.VIDEO_MPEG.getType());
+		VIDEO_QUICKTIME = parse(MediaEnum.VIDEO_QUICKTIME.getType());
+		VIDEO_WEBM = parse(MediaEnum.VIDEO_WEBM.getType());
+		VIDEO_X_FLV = parse(MediaEnum.VIDEO_X_FLV.getType());
+		VIDEO_X_M4V = parse(MediaEnum.VIDEO_X_M4V.getType());
+		VIDEO_X_MNG = parse(MediaEnum.VIDEO_X_MNG.getType());
+		VIDEO_X_MS_ASF = parse(MediaEnum.VIDEO_X_MS_ASF.getType());
+		VIDEO_X_MS_WMV = parse(MediaEnum.VIDEO_X_MS_ASF.getType());
+		VIDEO_X_MSVIDEO = parse(MediaEnum.VIDEO_X_MSVIDEO.getType());
 	}
 	
 	public MediaType() {
@@ -446,13 +446,15 @@ public class MediaType extends MimeType implements Serializable {
 	private static Map<String, Object> buildParameters(MediaType mediaType, Charset charset, double qualityValue) {
 		
 		Map<String, Object> parameters;
-		if (mediaType != null)
+		if (mediaType != null) {
 			parameters = MapUtils.newLinkedHashMap(mediaType.getParameterItems());
-		else
+		} else {
 			parameters = MapUtils.newLinkedHashMap();
-		
-		if (charset != null)
+		}
+			
+		if (charset != null) {
 			parameters.put(PARAM_CHARSET, charset.name());
+		}
 		
 		// 这里不检查质量价值的合法性，而是延迟到调用checkParameter方法时进行
 		parameters.put(QualityFactor.PARAM_QUALITY_FACTOR, qualityValue);
@@ -484,8 +486,8 @@ public class MediaType extends MimeType implements Serializable {
 				double qualityValue = Double.parseDouble(value.toString());
 				checkQualityValue(qualityValue);
 			} catch (NumberFormatException e) {
-				throw new IllegalArgumentException("Parameter attribute '" + attribute 
-						+ "' is a quality factor,value must be number");
+				throw new IllegalArgumentException(String.format(
+						"Parameter attribute '%s' is a quality factor,value must be number", attribute));
 			}
 		}
 	}
@@ -514,21 +516,25 @@ public class MediaType extends MimeType implements Serializable {
 		String[] parts = StringUtils.split(mimeType, StringUtils.SEMICOLON);
 		int length = parts.length;
 		
-		if (length == 0)
+		if (length == 0) {
 			return null;
+		}
 		
 		String fullType = parts[0].trim();
 		
-		if (!StringUtils.contains(fullType, StringUtils.FORWARD_SLASH))
+		if (!StringUtils.contains(fullType, StringUtils.FORWARD_SLASH)) {
 			return null;
+		}
 					
 		String type = StringUtils.beforeFrist(fullType, StringUtils.FORWARD_SLASH);
 		String subtype = StringUtils.afterFrist(fullType, StringUtils.FORWARD_SLASH);
 		
 		if (StringUtils.isBlank(type) || StringUtils.isBlank(subtype)
 				// 不允许出现*/xxx的类型
-				|| (StringUtils.ANY.equals(type) && !StringUtils.ANY.equals(subtype)))
+				|| (StringUtils.ANY.equals(type) && !StringUtils.ANY.equals(subtype))) {
 			return null;
+		}
+			
 		
 		if (length > 1) {
 			Map<String, Object> parameters = MapUtils.newLinkedHashMap(length - 1);

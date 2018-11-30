@@ -71,7 +71,7 @@ public abstract class AbstractJpaService<T, PK extends Serializable> extends
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void init() throws Exception {
-		Class<T> entityType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
+		Class<T> entityType = (Class<T>) ClassUtils.getSuperclassGenricType(getClass());
 		// 将当前服务类管理的实体类型传递给持久化DAO，使DAO接口的方法能正常工作
 		this.jpaDao.setTargetType(entityType);
 		

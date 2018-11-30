@@ -2056,11 +2056,7 @@ public class StringUtils {
 		
 		return str;
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(afterSupplement(null, 5, '0'));
-	}
-	
+		
 	/**
 	 * 为字符串追加前缀和后缀
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

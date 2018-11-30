@@ -46,7 +46,7 @@ public abstract class AbstractGenricBean<T> extends CheckableInitializingBeanAda
 	@Override
 	protected void init() throws Exception {
 		if (this.targetType == null)
-			this.targetType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
+			this.targetType = (Class<T>) ClassUtils.getSuperclassGenricType(getClass());
 	}
 	
 }

@@ -36,7 +36,7 @@ public abstract class AbstractGenricBean<T> implements GenericBean<T> {
 	@Override
 	public void setTargetType(Class<T> targetType) {
 		if (targetType == null)
-			this.targetType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
+			this.targetType = (Class<T>) ClassUtils.getSuperclassGenricType(getClass());
 		else
 			this.targetType = targetType;
 	}

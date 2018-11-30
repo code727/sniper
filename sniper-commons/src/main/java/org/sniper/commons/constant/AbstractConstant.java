@@ -18,7 +18,16 @@
 
 package org.sniper.commons.constant;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.List;
+import java.util.Map;
+
 import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.CollectionUtils;
+import org.sniper.commons.util.MapUtils;
+import org.sniper.commons.util.ReflectionUtils;
+import org.sniper.commons.util.StringUtils;
 
 /**
  * 常量抽象类
@@ -53,6 +62,16 @@ public abstract class AbstractConstant<K, V> implements Constant<K, V> {
 		return value;
 	}
 	
+	/**
+	 * 判断指定的键是否与当前常量对象匹配
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public boolean matches(K key) {
+		return this.key.equals(key);
+	}
+	
 	@Override
 	public final boolean equals(Object obj) {
 		return this == obj;
@@ -64,8 +83,42 @@ public abstract class AbstractConstant<K, V> implements Constant<K, V> {
 	}
 	
 	@Override
+	public String toString() {
+		return String.format("{\"key\":%s,\"value\":%s}",
+				key instanceof CharSequence ? StringUtils.appendDoubleQuotes(key.toString()) : key,
+				value instanceof CharSequence ? StringUtils.appendDoubleQuotes(value.toString()) : value);
+	}
+	
+	@Override
 	protected final Object clone() throws CloneNotSupportedException {
 		 throw new CloneNotSupportedException();
+	}
+	
+	/**
+	 * 创建常量映射集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param constantType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected static <K, V, C extends Constant<K, V>> Map<K, C> createMapping(Class<C> constantType) {
+		Map<K, C> mappings = MapUtils.newHashMap();
+		List<Field> fields = ReflectionUtils.getDeclaredFields(constantType);
+		
+		if (CollectionUtils.isNotEmpty(fields)) {
+			try {
+				for (Field field : fields) {
+					int modifiers = field.getModifiers();
+					/* 将同时具备public static final三个修饰符的成员对象才能被加入常量映射集 */
+					if (Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)) {
+						Constant<K, V> constant = (Constant<K, V>) field.get(constantType);
+						mappings.put(constant.getKey(), (C) constant);
+					}
+				}
+			} catch (Exception e) { e.printStackTrace();}
+		}
+		
+		return mappings;
 	}
 			
 }

@@ -578,7 +578,7 @@ public class SpringMongoDaoImpl<T, PK extends Serializable> extends
 		
 		return (MapReduceResults<MapReduceResultModel<K, V>>) getMongoOperations()
 				.mapReduce(query, collection, mapFunction, reduceFunction,
-						mapReduceOptions, ClassUtils.getDeclaredClass(MapReduceResultModel.class));
+						mapReduceOptions, ClassUtils.getDeclaredType(MapReduceResultModel.class));
 	}
 
 	@Override

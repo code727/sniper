@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import java.util.Set;
 
 /**
@@ -43,12 +44,16 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static List<Method> getDeclaredMethods(Object object) {
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(object);
 		if (declaredClass != null) {
 			List<Method> method = CollectionUtils.newArrayList();
-			while (declaredClass != Object.class) {
+			while (declaredClass != null && declaredClass != Object.class) {
 				// 如果当前对象所属的类不是顶层基类(Object),则获取此类以及基类中的所有方法
-				method.addAll(Arrays.asList(declaredClass.getDeclaredMethods()));
+				Method[] declaredMethods = declaredClass.getDeclaredMethods();
+				if (ArrayUtils.isNotEmpty(declaredMethods)) {
+					method.addAll(Arrays.asList(declaredMethods));
+				}
+				
 				declaredClass = declaredClass.getSuperclass();
 			}
 			return method;
@@ -64,12 +69,15 @@ public class ReflectionUtils {
 	 */
 	public static List<String> getDeclaredMethodNames(Object object){
 		List<Method> methods = getDeclaredMethods(object);
-		if (CollectionUtils.isEmpty(methods))
+		if (CollectionUtils.isEmpty(methods)) {
 			return null;
+		}
 		
 		List<String> names = CollectionUtils.newArrayList();
-		for (Method method : methods) 
+		for (Method method : methods) {
 			names.add(method.getName());
+		}
+			
 		return names;
 	}
 	
@@ -82,13 +90,14 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static Method getDeclaredMethod(Object object, String methodName, Class<?>[] pTypes) {
-		if (StringUtils.isBlank(methodName))
+		if (StringUtils.isBlank(methodName)) {
 			return null;
+		}
 		
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(object);
 		if (declaredClass != null) {
 			methodName = methodName.trim();
-			while (declaredClass != Object.class) {
+			while (declaredClass != null && declaredClass != Object.class) {
 				try {
 					return declaredClass.getDeclaredMethod(methodName, pTypes);
 				} catch (NoSuchMethodException e) {
@@ -123,7 +132,7 @@ public class ReflectionUtils {
 		if (StringUtils.isBlank(methodName))
 			return null;
 		
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(object);
 		while (declaredClass != null) {
 			methodName = methodName.trim();
 			try {
@@ -154,12 +163,16 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static List<Constructor<?>> getDeclaredConstructors(Object object) {
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(object);
 		if (declaredClass != null) {
 			List<Constructor<?>> constructors = CollectionUtils.newArrayList();
-			while (declaredClass != Object.class) {
+			while (declaredClass != null && declaredClass != Object.class) {
 				// 如果当前对象所属的类不是顶级基类(Object),则获取此类以及基类中的所有方法
-				constructors.addAll(Arrays.asList(declaredClass.getDeclaredConstructors()));
+				Constructor<?>[] declaredConstructors = declaredClass.getDeclaredConstructors();
+				if (ArrayUtils.isNotEmpty(declaredConstructors)) {
+					constructors.addAll(Arrays.asList(declaredConstructors));
+				}
+				
 				declaredClass = declaredClass.getSuperclass();
 			}
 			return constructors;
@@ -175,12 +188,15 @@ public class ReflectionUtils {
 	 */
 	public static Set<String> getDeclaredConstructorNames(Object object) {
 		List<Constructor<?>> constructors = getDeclaredConstructors(object);
-		if (CollectionUtils.isEmpty(constructors))
+		if (CollectionUtils.isEmpty(constructors)) {
 			return null;
+		}
 		
 		Set<String> names = CollectionUtils.newHashSet();
-		for (Constructor<?> constructor : constructors) 
+		for (Constructor<?> constructor : constructors) {
 			names.add(constructor.getName());
+		}
+			
 		return names;
 	}
 	
@@ -192,9 +208,9 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static Constructor<?> getDeclaredConstructor(Object object, Class<?>[] pTypes) {
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(object);
 		if (declaredClass != null) {
-			while (declaredClass != Object.class) {
+			while (declaredClass != null && declaredClass != Object.class) {
 				try {
 					return declaredClass.getDeclaredConstructor(pTypes);
 				} catch (NoSuchMethodException e) {
@@ -204,7 +220,7 @@ public class ReflectionUtils {
 		}
 		return null;
 	}
-	
+		
 	/**
 	 * 判断指定的构造函数是否存在于当前对象所在类或非Object基类中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -224,7 +240,7 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static Constructor<?> getConstructor(Object object, Class<?>[] pTypes) {
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(object);
 		if (declaredClass != null) {
 			while (declaredClass != null) {
 				try {
@@ -255,18 +271,22 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static List<Field> getDeclaredFields(Object object) {
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(object);
 		if (declaredClass != null) {
 			List<Field> fields = CollectionUtils.newArrayList();
-			while (declaredClass != Object.class) {
-				fields.addAll(Arrays.asList(declaredClass.getDeclaredFields()));
+			while (declaredClass != null && declaredClass != Object.class) {
+				Field[] declaredFields = declaredClass.getDeclaredFields();
+				if (ArrayUtils.isNotEmpty(declaredFields)) {
+					fields.addAll(Arrays.asList(declaredFields));
+				}
+				
 				declaredClass = declaredClass.getSuperclass();
 			}
 			return fields;
 		}
 		return null;
 	}
-	
+		
 	/**
 	 * 获取当前对象所在类以及非Object基类中定义的所有属性名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -275,13 +295,15 @@ public class ReflectionUtils {
 	 */
 	public static List<String> getDeclaredFieldNames(Object object) {
 		List<Field> fields = getDeclaredFields(object);
-		if (CollectionUtils.isEmpty(fields))
+		if (CollectionUtils.isEmpty(fields)) {
 			return null;
+		}
 		
 		List<String> fieldName = CollectionUtils.newArrayList();
-		for (Field field : fields)
+		for (Field field : fields) {
 			fieldName.add(field.getName());
-				
+		}
+			
 		return fieldName;
 	}
 	
@@ -293,13 +315,14 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static Field getDeclaredField(Object object, String fieldName) {
-		if (StringUtils.isBlank(fieldName))
+		if (StringUtils.isBlank(fieldName)) {
 			return null;
+		}
 		
-		Class<?> declaredClass = ClassUtils.getDeclaredClass(object);
+		Class<?> declaredClass = ClassUtils.getDeclaredType(object);
 		if (declaredClass != null) {
 			fieldName = fieldName.trim();
-			while (declaredClass != Object.class) {
+			while (declaredClass != null && declaredClass != Object.class) {
 				try {
 					return declaredClass.getDeclaredField(fieldName);
 				} catch (NoSuchFieldException e) {
@@ -382,7 +405,7 @@ public class ReflectionUtils {
 	 * @throws Exception 
 	 */
 	public static <V> V getFieldValue(Object object, Field field) throws Exception {
-		AssertUtils.assertNotNull(object, "Target object can not be null.");
+		AssertUtils.assertNotNull(object, "Target object can not be null");
 		return Supports.getAccessibleFieldValue(object, field);
 	}
 	
@@ -429,7 +452,7 @@ public class ReflectionUtils {
 	 * @throws Exception 
 	 */
 	public static void setFieldValue(Object object, Field field, Object value) throws Exception {
-		AssertUtils.assertNotNull(object, "Target object can not be null.");
+		AssertUtils.assertNotNull(object, "Target object can not be null");
 		Supports.setAccessibleFieldValue(object, field, value);
 	}
 	
@@ -478,7 +501,7 @@ public class ReflectionUtils {
 	 * @return
 	 */
 	public static <T> T newInstance(Class<T> c, Class<?>[] pTypes, Object[] pValues) throws Exception {
-		AssertUtils.assertNotNull(c, "Can not be create instance by null class.");
+		AssertUtils.assertNotNull(c, "Can not be create instance by null class");
 		
 		if (ArrayUtils.isNotEmpty(pTypes)) {
 			Constructor<T> constructor = c.getDeclaredConstructor(pTypes);
@@ -537,7 +560,7 @@ public class ReflectionUtils {
 		 * @throws Exception
 		 */
 		public static void setAccessibleFieldValue(Object object, Field field, Object value) throws Exception {
-			AssertUtils.assertNotNull(field, "Target field can not be null.");
+			AssertUtils.assertNotNull(field, "Target field can not be null");
 			
 			field.setAccessible(true);
 			field.set(object, value);
@@ -553,7 +576,7 @@ public class ReflectionUtils {
 		 */
 		@SuppressWarnings("unchecked")
 		public static <V> V getAccessibleFieldValue(Object object, Field field) throws Exception {
-			AssertUtils.assertNotNull(field, "Target field can not be null.");
+			AssertUtils.assertNotNull(field, "Target field can not be null");
 			
 			field.setAccessible(true);
 			return (V) field.get(object);

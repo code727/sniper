@@ -32,25 +32,25 @@ import org.sniper.commons.util.MessageUtils;
 public enum WeekEnum {
 	
 	/** 星期天 */
-	SUNDAY(Calendar.SUNDAY, "date.week.sunday"),
+	SUNDAY(Calendar.SUNDAY, "week.sunday"),
 	
 	/** 星期一 */
-	MONDAY(Calendar.MONDAY, "date.week.monday"),
+	MONDAY(Calendar.MONDAY, "week.monday"),
 	
 	/** 星期二 */
-	TUESDAY(Calendar.TUESDAY, "date.week.tuesday"),
+	TUESDAY(Calendar.TUESDAY, "week.tuesday"),
 	
 	/** 星期三 */
-	WEDNESDAY(Calendar.WEDNESDAY, "date.week.wednesday"),
+	WEDNESDAY(Calendar.WEDNESDAY, "week.wednesday"),
 	
 	/** 星期四 */
-	THURSDAY(Calendar.THURSDAY, "date.week.thursday"),
+	THURSDAY(Calendar.THURSDAY, "week.thursday"),
 	
 	/** 星期五 */
-	FRIDAY(Calendar.FRIDAY, "date.week.friday"),
+	FRIDAY(Calendar.FRIDAY, "week.friday"),
 	
 	/** 星期六 */
-	SATURDAY(Calendar.SATURDAY, "date.week.saturday");
+	SATURDAY(Calendar.SATURDAY, "week.saturday");
 	
 	private static final Map<Integer, WeekEnum> mappings = MapUtils.newHashMap(7);
 	

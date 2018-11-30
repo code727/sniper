@@ -166,7 +166,7 @@ public class ClassUtils {
 	 * @return
 	 */
 	public static Class<?> getCommonType(Collection<?> collection) {
-		if (CollectionUtils.isEmpty(collection))
+		if (CollectionUtils.isEmpty(collection)) 
 			return null;
 		
 		Class<?> type = null;
@@ -177,9 +177,9 @@ public class ClassUtils {
 			Class<?> elementType = (element != null ? element.getClass() : null);
 			if (type != null) {
 				// 元素之间类型不一致时，则返回Object类型
-				if (elementType != null && type != elementType )
+				if (elementType != null && type != elementType) 
 					return Object.class;
-			} else
+			} else 
 				type = elementType;
 		}
 		 
@@ -192,8 +192,8 @@ public class ClassUtils {
 	 * @param clazz
 	 * @return
 	 */
-	public static Class<?> getSuperClassGenricType(Class<?> clazz) {
-		return getSuperClassGenricType(clazz, 0);
+	public static Class<?> getSuperclassGenricType(Class<?> clazz) {
+		return getSuperclassGenricType(clazz, 0);
 	}
 	
 	/**
@@ -203,35 +203,46 @@ public class ClassUtils {
 	 * @param index
 	 * @return
 	 */
-	public static Class<?> getSuperClassGenricType(Class<?> clazz, int index) {
-		if (clazz == null)
+	public static Class<?> getSuperclassGenricType(Class<?> clazz, int index) {
+		if (clazz == null || index < 0) 
 			return Object.class;
+					
+		Type superclass = clazz.getGenericSuperclass();
+		if (superclass instanceof ParameterizedType) {
+			Type[] pTypes = ((ParameterizedType) superclass).getActualTypeArguments();
+			Type pType;
+			if (index < pTypes.length && (pType = pTypes[index]) instanceof Class)
+				return (Class<?>) pType;
+		}
 		
-        boolean isGenericType = true;
-        Type type = clazz.getGenericSuperclass();
-        
-        Type[] params = null;
-        
-        if (!(type instanceof ParameterizedType))
-        	isGenericType = false;
-        else {
-            params = ((ParameterizedType) type).getActualTypeArguments();
-            if (index < 0)
-            	index = 0;
-            
-            if (index >= params.length || !(params[index] instanceof Class))
-            	isGenericType = false;
-        }
-        if (!isGenericType) {
-            clazz = clazz.getSuperclass();
-            if (clazz != Object.class)
-            	/* 非Object泛型类型时，则再根据此类型的超类获取一次 */
-                return getSuperClassGenricType(clazz, index);
-            else
-            	return clazz;
-        }
-        return (Class<?>) params[index];
+		/* 当前类型的超类为非Object类型时，则根据此超类再获取一次，否则直接返回Object类型 */
+		superclass = clazz.getSuperclass();
+		return (Class<?>) (superclass != Object.class ? 
+				getSuperclassGenricType((Class<?>) superclass, index) : superclass);
     }
+			
+	/**
+	 * 获取对象已声明的类型。如果对象本身属于Class实例，则直接返回，否则返回此对象的类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static Class<?> getDeclaredType(Object object) {
+		if (object == null)
+			return null;
+		
+		return object instanceof Class ? (Class<?>) object : object.getClass();
+	}
+	
+	/**
+	 * 获取对象的类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param object
+	 * @return
+	 */
+	public static Class<?> getType(Object object) {
+		return object != null ? object.getClass() : null;
+	}
 	
 	/**
 	 * 判断指定的类型是否为一个接口
@@ -256,21 +267,12 @@ public class ClassUtils {
 	/**
 	 * 判断是否为JAVA自带类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param clazz
-	 * @return
-	 */
-	public static boolean isJavaType(Class<?> clazz) {  
-	    return clazz != null && clazz.getClassLoader() == null;  
-	}  
-	
-	/**
-	 * 判断是否为JAVA自带类型的对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
 	 */
-	public static boolean isJavaTypeObject(Object obj) {  
-	    return obj != null && isJavaType(obj.getClass());
+	public static boolean isJavaType(Object obj) {
+		Class<?> clazz = getType(obj);
+	    return clazz != null && clazz.getClassLoader() == null;  
 	} 
 	
 	/**
@@ -322,7 +324,7 @@ public class ClassUtils {
 	public static boolean isList(Class<?> clazz) {
 		return clazz != null && List.class.isAssignableFrom(clazz);
 	}
-	
+		
 	/**
 	 * 判断是否为列表类型的对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -331,19 +333,6 @@ public class ClassUtils {
 	 */
 	public static boolean isList(Object obj) {
 		return obj != null && isList(obj.getClass());
-	}
-	
-	/**
-	 * 返回当前非Class对象的类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @return
-	 */
-	public static Class<?> getDeclaredClass(Object object) {
-		if (object == null)
-			return null;
-		
-		return !(object instanceof Class) ? object.getClass() : (Class<?>) object;
 	}
 		
 	/**

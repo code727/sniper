@@ -50,7 +50,7 @@ public abstract class HibernateDaoSupport<T> extends
 	@Override
 	protected void initDao() throws Exception {
 		if (this.targetType == null)
-			this.targetType = (Class<T>) ClassUtils.getSuperClassGenricType(getClass());
+			this.targetType = (Class<T>) ClassUtils.getSuperclassGenricType(getClass());
 	}
 	
 	/**

@@ -48,7 +48,7 @@ public abstract class AbstractJsonTypeHandler<T> extends BaseTypeHandler<T> {
 		this.jsonSerializer = initJsonSerializer();
 		AssertUtils.assertNotNull(jsonSerializer, "Json serializer must not be null.");
 		
-		this.type = (Class<T>) ClassUtils.getSuperClassGenricType(this.getClass());
+		this.type = (Class<T>) ClassUtils.getSuperclassGenricType(this.getClass());
 	}
 	
 	/**

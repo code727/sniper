@@ -28,8 +28,8 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import org.sniper.commons.constant.date.DatePattern;
 import org.sniper.commons.enums.astrology.HoroscopeEnum;
-import org.sniper.commons.enums.date.DatePattern;
 
 /**
  * 日期时间工具类
@@ -79,7 +79,7 @@ public class DateUtils {
 	 */
 	public static SimpleDateFormat getDateFormat(String pattern) {
 		if (StringUtils.isBlank(pattern)) {
-			pattern = DatePattern.DATETIME.getDefaultFormat();
+			pattern = DatePattern.DATETIME.getKey();
 		}
 		
 		SimpleDateFormat dateFormat = DATE_FORMATES.get(pattern);
@@ -159,7 +159,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Date stringToDate(String dateString){
-		return stringToDate(dateString, DatePattern.DATETIME.getDefaultFormat());
+		return stringToDate(dateString, DatePattern.DATETIME.getKey());
 	}
 	
 	/**
@@ -184,7 +184,7 @@ public class DateUtils {
 	 * @return 
 	 */
 	public static String dateToString(Date date) {
-		return dateToString(date, DatePattern.DATETIME.getDefaultFormat());
+		return dateToString(date, DatePattern.DATETIME.getKey());
 	}
 	
 	/**
@@ -209,7 +209,7 @@ public class DateUtils {
 	 * @return 
 	 */
 	public static String timeToString(long time) {
-		return timeToString(time, DatePattern.DATETIME.getDefaultFormat());
+		return timeToString(time, DatePattern.DATETIME.getKey());
 	}
 	
 	/**
@@ -223,7 +223,7 @@ public class DateUtils {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(time); 
 		return dateToString(calendar.getTime(), StringUtils.isNotBlank(pattern) 
-				? pattern : DatePattern.DATETIME.getDefaultFormat());
+				? pattern : DatePattern.DATETIME.getKey());
 	}
 	
 	/**
@@ -307,7 +307,7 @@ public class DateUtils {
 	 * @return 
 	 */
 	public static long stringToMillis(String dateString) {
-		return stringToMillis(dateString, DatePattern.DATETIME.getDefaultFormat());
+		return stringToMillis(dateString, DatePattern.DATETIME.getKey());
 	}
 	
 	/**
@@ -329,7 +329,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static long stringToUnixTimestamp(String dateString) {
-		return stringToUnixTimestamp(dateString, DatePattern.DATETIME.getDefaultFormat());
+		return stringToUnixTimestamp(dateString, DatePattern.DATETIME.getKey());
 	}
 	
 	/**
