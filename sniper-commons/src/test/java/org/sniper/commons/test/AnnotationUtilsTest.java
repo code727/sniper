@@ -37,9 +37,8 @@ public class AnnotationUtilsTest extends BaseTestCase {
 	@Before
 	public void init() {
 		this.user = new User();
-		this.user.setName("cmge");
-		this.user.setLoginName("dubin");
-		this.user.setUserName("杜斌");
+		this.user.setName("dubin");
+		this.user.setLoginName("daniele");
 	}
 	
 //	@Test

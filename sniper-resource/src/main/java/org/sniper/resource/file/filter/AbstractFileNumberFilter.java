@@ -29,15 +29,11 @@ import org.sniper.support.operation.logic.LogicOperationEnum;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractFileNumberFilter extends AbstractFileFilter implements SniperFileNumberFilter {
+public abstract class AbstractFileNumberFilter extends AbstractFileFilter implements FileNumberFilter {
 	
 	/** 数字属性值 */
 	protected Number filterValue;
-	
-	/** 逻辑运算符 */
-	protected String operation;
-	
-	
+		
 	protected LogicOperation<Object, Object> logicOperation;
 	
 	@Override
@@ -51,12 +47,10 @@ public abstract class AbstractFileNumberFilter extends AbstractFileFilter implem
 	}
 
 	@Override
-	public void setLogicOperation(String operation) {
-		LogicOperationEnum logicOperationEnum = LogicOperationEnum.resolve(operation);
-		AssertUtils.assertNotNull(logicOperationEnum, "Invalid logic operation:" + operation);
-		
-		this.operation = logicOperationEnum.getKey();
-		this.logicOperation = logicOperationEnum.getValue();
+	public void setLogicOperation(String logicOperation) {
+		LogicOperationEnum logicOperationEnum = LogicOperationEnum.resolve(logicOperation);
+		AssertUtils.assertNotNull(logicOperationEnum, String.format("Invalid logic operation:%s", logicOperation));
+		this.logicOperation = logicOperationEnum.getOperation();
 	}
 	
 }

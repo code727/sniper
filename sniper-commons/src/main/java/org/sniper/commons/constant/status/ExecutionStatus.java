@@ -25,14 +25,10 @@ import org.sniper.commons.constant.AbstractLocaleConstant;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ExecutionStatus extends AbstractLocaleConstant<Integer> {
+public final class ExecutionStatus extends AbstractLocaleConstant<Integer> {
 	
 	private static final long serialVersionUID = -4886626018923699286L;
 
-	protected ExecutionStatus(Integer key, String value) {
-		super(key, value);
-	}
-		
 	/** 成功 */
 	public static final ExecutionStatus SUCCESS = new ExecutionStatus(1, "execution.status.success");
 	
@@ -41,5 +37,9 @@ public class ExecutionStatus extends AbstractLocaleConstant<Integer> {
 	
 	/** 异常 */
 	public static final ExecutionStatus EXCEPTION = new ExecutionStatus(-1, "execution.status.exception");
+	
+	private ExecutionStatus(Integer key, String value) {
+		super(key, value);
+	}
 			
 }

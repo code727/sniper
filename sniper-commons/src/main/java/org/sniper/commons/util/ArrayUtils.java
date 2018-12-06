@@ -3719,7 +3719,7 @@ public class ArrayUtils {
 	 * @return
 	 */
 	public static String toString(Object[] array) {
-		return join(array, ",");
+		return join(array, StringUtils.COMMA);
 	}
 	
 	/**
@@ -3737,8 +3737,9 @@ public class ArrayUtils {
 		if (StringUtils.isNotEmpty(separator)) {
 			
 			int max = array.length - 1;
-			for (int i = 0; i < max; i++)
+			for (int i = 0; i < max; i++) {
 				builder.append(array[i]).append(separator);
+			}
 			
 			builder.append(array[max]);
 		} else {

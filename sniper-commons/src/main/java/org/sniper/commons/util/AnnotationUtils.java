@@ -39,7 +39,7 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	public static boolean hasAnnotation(Object obj) {
-		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
+		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
 		while (declaredClass != null && declaredClass != Object.class) {
 			if (ArrayUtils.isNotEmpty(declaredClass.getDeclaredAnnotations())) {
 				return true;
@@ -63,7 +63,7 @@ public class AnnotationUtils {
 			return false;
 		}
 			
-		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
+		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
 		while (declaredClass != null && declaredClass != Object.class) {
 			if (declaredClass.getAnnotation(annotationClass) != null) {
 				return true;
@@ -136,7 +136,7 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	public static List<Field> findAnnotationField(Object obj) {
-		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
+		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
 		
 		if (declaredClass != null) {
 			List<Field> fields = CollectionUtils.newArrayList();
@@ -192,7 +192,7 @@ public class AnnotationUtils {
 			return null;
 		}
 		
-		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
+		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
 		if (declaredClass == null) {
 			return null;
 		}
@@ -238,7 +238,7 @@ public class AnnotationUtils {
 	 * @return
 	 */
 	public static List<Method> findAnnotationMethod(Object obj) {
-		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
+		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
 		
 		if (declaredClass != null) {
 			List<Method> methods = CollectionUtils.newArrayList();
@@ -294,7 +294,7 @@ public class AnnotationUtils {
 		if (annotationClass == null)
 			return null;
 		
-		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
+		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
 		if (declaredClass != null) {
 			List<Method> methods = CollectionUtils.newArrayList();
 			Method[] declaredMethods;
@@ -364,7 +364,7 @@ public class AnnotationUtils {
 		if (annotationClass == null)
 			return null;
 		
-		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
+		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
 		if (declaredClass != null) {
 			List<Method> methods = CollectionUtils.newArrayList();
 			Method[] declaredMethods;
@@ -435,7 +435,7 @@ public class AnnotationUtils {
 		if (annotationClass == null)
 			return null;
 		
-		Class<?> declaredClass = ClassUtils.getDeclaredType(obj);
+		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
 		if (declaredClass != null) {
 			List<Method> methods = CollectionUtils.newArrayList();
 			Method[] declaredMethods;
@@ -514,7 +514,7 @@ public class AnnotationUtils {
 			return null;
 		}
 		
-		return (V) ReflectionUtils.Supports.invokeAccessibleMethod(obj, annotationMethod, annotationMethod.getParameterTypes(), pValues);
+		return (V) ReflectionUtils.invokeAccessibleMethod(obj, annotationMethod, annotationMethod.getParameterTypes(), pValues);
 	}
 	
 	/**
@@ -532,7 +532,7 @@ public class AnnotationUtils {
 			return null;
 		}
 		
-		return (V) ReflectionUtils.Supports.invokeAccessibleMethod(obj, getterMethod, null, null);
+		return (V) ReflectionUtils.invokeAccessibleMethod(obj, getterMethod, null, null);
 	}
 	
 	/**
@@ -548,7 +548,7 @@ public class AnnotationUtils {
 		if (setterMethod == null)
 			return;
 		
-		ReflectionUtils.Supports.invokeAccessibleMethod(obj, setterMethod, null, new Object[] { pValue });
+		ReflectionUtils.invokeAccessibleMethod(obj, setterMethod, null, new Object[]{pValue});
 	}
 	
 	/**

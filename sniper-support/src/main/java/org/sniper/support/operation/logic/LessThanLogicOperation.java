@@ -18,14 +18,12 @@
 
 package org.sniper.support.operation.logic;
 
-import java.math.BigDecimal;
-
 /**
  * 小于逻辑运算操作
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class LessThanLogicOperation implements LogicOperation<Object, Object> {
+public class LessThanLogicOperation extends AbstractLogicOperation<Object, Object> {
 
 	@Override
 	public boolean execute(Object value1, Object value2) {
@@ -33,11 +31,8 @@ public class LessThanLogicOperation implements LogicOperation<Object, Object> {
 			return false;
 		
 		try {
-			BigDecimal v1 = new BigDecimal(value1.toString());
-			BigDecimal v2 = new BigDecimal(value2.toString());
-			return v1.compareTo(v2) == -1;
+			return toBigDecimal(value1).compareTo(toBigDecimal(value2)) == -1;
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
 			return false;
 		}
 	}

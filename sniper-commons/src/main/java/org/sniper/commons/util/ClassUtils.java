@@ -63,25 +63,28 @@ public class ClassUtils {
 	private ClassUtils() {}
 	
 	/**
-	 * 判断指定的类型对象是否为包装类型
+	 * 获取对象的类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param clazz
+	 * @param obj
 	 * @return
 	 */
-	public static boolean isWrapperType(Class<?> clazz) {
-        return WRAPPER_TYPES.get(clazz) != null;
-    } 
-	
-	/**
-	 * 判断指定的类型对象是否为基本类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param clazz
-	 * @return
-	 */
-	public static boolean isBaseType(Class<?> clazz) {
-		return BASE_TYPES.get(clazz) != null;
+	public static Class<?> getType(Object obj) {
+		return obj != null ? obj.getClass() : null;
 	}
 	
+	/**
+	 * 获取对象的当前类型。如果对象本身属于Class实例，则直接返回，否则返回对象的Class实例
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static Class<?> getCurrentType(Object obj) {
+		if (obj == null)
+			return null;
+		
+		return obj instanceof Class ? (Class<?>) obj : obj.getClass();
+	}
+				
 	/**
 	 * 获取指定类型的包装类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -222,28 +225,36 @@ public class ClassUtils {
     }
 			
 	/**
-	 * 获取对象已声明的类型。如果对象本身属于Class实例，则直接返回，否则返回此对象的类型
+	 * 判断指定的对象是否定义有ClassLoader
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
 	 */
-	public static Class<?> getDeclaredType(Object object) {
-		if (object == null)
-			return null;
-		
-		return object instanceof Class ? (Class<?>) object : object.getClass();
+	public static boolean hasClassLoader(Object obj) {
+		Class<?> currentType = getCurrentType(obj);
+	    return currentType != null && currentType.getClassLoader() == null;  
 	}
 	
 	/**
-	 * 获取对象的类型
+	 * 判断指定的类型对象是否为包装类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param object
+	 * @param clazz
 	 * @return
 	 */
-	public static Class<?> getType(Object object) {
-		return object != null ? object.getClass() : null;
-	}
+	public static boolean isWrapperType(Class<?> clazz) {
+        return WRAPPER_TYPES.get(clazz) != null;
+    } 
 	
+	/**
+	 * 判断指定的类型对象是否为基本类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz
+	 * @return
+	 */
+	public static boolean isBaseType(Class<?> clazz) {
+		return BASE_TYPES.get(clazz) != null;
+	}
+				
 	/**
 	 * 判断指定的类型是否为一个接口
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -253,27 +264,6 @@ public class ClassUtils {
 	public static boolean isInterface(Class<?> clazz) {
 		return clazz != null && clazz.isInterface();
 	}
-	
-	/**
-	 * 判断对象的类型是否为一个接口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @return
-	 */
-	public static boolean isInterface(Object obj) {
-		return obj != null && isInterface(obj.getClass());
-	}
-	
-	/**
-	 * 判断是否为JAVA自带类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @return
-	 */
-	public static boolean isJavaType(Object obj) {
-		Class<?> clazz = getType(obj);
-	    return clazz != null && clazz.getClassLoader() == null;  
-	} 
 	
 	/**
 	 * 判断是否为数组类型
@@ -294,7 +284,7 @@ public class ClassUtils {
 	public static boolean isArray(Object obj) {
 		return obj != null && isArray(obj.getClass());
 	}
-	
+		
 	/**
 	 * 判断是否为集合类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -333,6 +323,10 @@ public class ClassUtils {
 	 */
 	public static boolean isList(Object obj) {
 		return obj != null && isList(obj.getClass());
+	}
+	
+	public static boolean isNotObjectType(Class<?> clazz) {
+		return clazz != null && clazz != Object.class;
 	}
 		
 	/**

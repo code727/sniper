@@ -24,7 +24,7 @@ package org.sniper.resource.file.filter;
  * @version 1.0
  */
 public abstract class AbstractFileStringFilter extends AbstractFileFilter
-		implements SniperFileStringFilter {
+		implements FileStringFilter {
 	
 	/** 过滤值 */
 	protected String filterValue;

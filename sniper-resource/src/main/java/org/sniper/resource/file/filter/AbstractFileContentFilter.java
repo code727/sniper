@@ -24,7 +24,7 @@ package org.sniper.resource.file.filter;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractFileContentFilter extends AbstractFileStringFilter implements SniperFileContentFilter {
+public abstract class AbstractFileContentFilter extends AbstractFileStringFilter implements FileContentFilter {
 	
 	protected String encoding;
 	

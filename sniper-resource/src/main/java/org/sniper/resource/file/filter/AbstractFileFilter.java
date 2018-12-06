@@ -28,7 +28,7 @@ import org.sniper.commons.util.CollectionUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractFileFilter implements SniperFileFilter {
+public abstract class AbstractFileFilter implements FileExtensionFilter {
 	
 	/** 开始过滤的根目录 */
 	private File root;
@@ -67,7 +67,7 @@ public abstract class AbstractFileFilter implements SniperFileFilter {
 	}
 	
 	@Override
-	public void doFileter() {
+	public void execute() {
 		if (root == null)
 			return;
 		
@@ -85,8 +85,10 @@ public abstract class AbstractFileFilter implements SniperFileFilter {
 	private void doFileter(File file) {
 		File[] subFiles = file.listFiles();
 		for (File sub : subFiles) {
+			
 			if (this.accept(sub)) 
 				files.add(sub);
+			
 			if (sub.isDirectory())
 				doFileter(sub);
 		}

@@ -88,7 +88,8 @@ public class AdaptiveMessageFormatter extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public String format(String message, Object param) {
-		if (ClassUtils.isJavaType(param)) {
+		// TODO 这里用迭代器模式重新实现
+		if (ClassUtils.isJdkType(param)) {
 			if (param instanceof Map)
 				// 参数为java.util.Map对象时，则用Map参数消息格式化处理器处理
 				return this.mapMessageFormatter.format(message, (Map<String, Object>) param);

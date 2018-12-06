@@ -11,8 +11,8 @@ import java.util.List;
 import org.junit.Test;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.resource.file.filter.SniperFileNumberFilter;
-import org.sniper.resource.file.filter.SniperFileStringFilter;
+import org.sniper.resource.file.filter.FileNumberFilter;
+import org.sniper.resource.file.filter.FileStringFilter;
 import org.sniper.resource.file.filter.application.FileLastModifiedTimeFilter;
 import org.sniper.resource.file.filter.application.FileNameFilter;
 import org.sniper.resource.file.filter.application.FileSizeFilter;
@@ -32,10 +32,10 @@ public class FileFilterTest extends BaseTestCase {
 	 */
 	@Test
 	public void testFileNameFilter() {
-		SniperFileStringFilter filter = new FileNameFilter();
+		FileStringFilter filter = new FileNameFilter();
 		filter.setRoot(new File("D:/test"));
 		filter.setFilterValue("新建");
-		filter.doFileter();
+		filter.execute();
 		List<File> files = filter.list();
 		if (CollectionUtils.isNotEmpty(files)) {
 			System.out.println("File name filter list not empty.Start assertion.");
@@ -51,15 +51,18 @@ public class FileFilterTest extends BaseTestCase {
 	 */
 	@Test
 	public void testFileTypeFilter() {
-		SniperFileStringFilter filter = new FileTypeFilter();
+		FileStringFilter filter = new FileTypeFilter();
 		filter.setRoot(new File("D:/test"));
 		filter.setFilterValue("docx");
-		filter.doFileter();
+		filter.execute();
+		
 		List<File> files = filter.list();
 		if (CollectionUtils.isNotEmpty(files)) {
 			System.out.println("File type filter list not empty.Start assertion.");
-			for (File file : files) 
+			for (File file : files) {
 				assertTrue(StringUtils.endsWithIgnoreCase(file.getName(), filter.getFilterValue()));	
+			}
+				
 			System.out.println("File type filter assertion end.");
 		}
 	}
@@ -70,14 +73,14 @@ public class FileFilterTest extends BaseTestCase {
 	 */
 	@Test
 	public void testFileSizeFilter() {
-		SniperFileNumberFilter filter = new FileSizeFilter();
+		FileNumberFilter filter = new FileSizeFilter();
 		filter.setRoot(new File("D:/test"));
 		
 		/* 过滤出大于等于5个字节的文件 */
 		filter.setLogicOperation(">=");
 		filter.setFilterValue(5);
 		
-		filter.doFileter();
+		filter.execute();
 		List<File> files = filter.list();
 		if (CollectionUtils.isNotEmpty(files)) {
 			System.out.println("File size filter list not empty.Start assertion.");
@@ -95,7 +98,7 @@ public class FileFilterTest extends BaseTestCase {
 	 */
 	@Test
 	public void testFileLastModifiedTimeFilter() {
-		SniperFileNumberFilter filter = new FileLastModifiedTimeFilter();
+		FileNumberFilter filter = new FileLastModifiedTimeFilter();
 		filter.setRoot(new File("D:/test"));
 		
 		/* 过滤出当前时间之前修改之间的文件/目录 */
@@ -103,7 +106,7 @@ public class FileFilterTest extends BaseTestCase {
 		long currentMillis = System.currentTimeMillis();
 		filter.setFilterValue(currentMillis);
 		
-		filter.doFileter();
+		filter.execute();
 		List<File> files = filter.list();
 		if (CollectionUtils.isNotEmpty(files)) {
 			System.out.println("File lastModified filter list not empty.Start assertion.");

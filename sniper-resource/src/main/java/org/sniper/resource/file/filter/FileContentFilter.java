@@ -19,11 +19,11 @@
 package org.sniper.resource.file.filter;
 
 /**
- * sniper框架本地文件内容过滤器
+ * 本地文件内容过滤器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SniperFileContentFilter extends SniperFileStringFilter {
+public interface FileContentFilter extends FileStringFilter {
 	
 	/**
 	 * 设置文本内容编码集
