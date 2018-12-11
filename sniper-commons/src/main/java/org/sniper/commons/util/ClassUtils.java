@@ -254,6 +254,26 @@ public class ClassUtils {
 	public static boolean isBaseType(Class<?> clazz) {
 		return BASE_TYPES.get(clazz) != null;
 	}
+	
+	/**
+	 * 判断指定的类型是否为顶级类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz
+	 * @return
+	 */
+	public static boolean isTopType(Class<?> clazz) {
+		return clazz == null || clazz == Object.class;
+	}
+	
+	/**
+	 * 判断指定的类型是否不为顶级类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz
+	 * @return
+	 */
+	public static boolean isNotTopType(Class<?> clazz) {
+		return !isTopType(clazz);
+	}
 				
 	/**
 	 * 判断指定的类型是否为一个接口
@@ -323,10 +343,6 @@ public class ClassUtils {
 	 */
 	public static boolean isList(Object obj) {
 		return obj != null && isList(obj.getClass());
-	}
-	
-	public static boolean isNotObjectType(Class<?> clazz) {
-		return clazz != null && clazz != Object.class;
 	}
 		
 	/**
@@ -414,5 +430,5 @@ public class ClassUtils {
 		
 		return pkg.getName();
 	}
-							
+	
 }

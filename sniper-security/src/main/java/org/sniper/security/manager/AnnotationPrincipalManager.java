@@ -61,7 +61,7 @@ public abstract class AnnotationPrincipalManager extends AbstractPrincipalManage
 	 * @param principalMeta
 	 */
 	private void setLoginNameField(PrincipalMeta principalMeta) {
-		Field loginNameField = AnnotationUtils.findFirstAnnotationField(this.principalClass, LoginName.class);
+		Field loginNameField = AnnotationUtils.getAnnotatedField(this.principalClass, LoginName.class);
 		if (loginNameField != null)
 			principalMeta.setLoginNameField(loginNameField.getName());
 	}
@@ -72,7 +72,7 @@ public abstract class AnnotationPrincipalManager extends AbstractPrincipalManage
 	 * @param principalMeta
 	 */
 	private void setUserNameField(PrincipalMeta principalMeta) {
-		Field userNameField = AnnotationUtils.findFirstAnnotationField(this.principalClass, UserName.class);
+		Field userNameField = AnnotationUtils.getAnnotatedField(this.principalClass, UserName.class);
 		if (userNameField != null)
 			principalMeta.setLoginNameField(userNameField.getName());
 	}

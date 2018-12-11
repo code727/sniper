@@ -22,9 +22,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 import org.junit.Test;
-import org.sniper.commons.test.domain.User;
 import org.sniper.commons.util.NumberUtils;
 import org.sniper.commons.util.ReflectionUtils;
+import org.sniper.test.domain.User;
 import org.sniper.test.junit.BaseTestCase;
 
 /**
@@ -83,11 +83,13 @@ public class ReflectionUtilsTest extends BaseTestCase {
 //	@Test
 	public void testGetMethodNames() {
 		System.out.println(ReflectionUtils.getMethodNames(Object.class));
+		System.out.println(ReflectionUtils.getMethodNames(User.class));
 	}
 	
 //	@Test
 	public void testGetDeclaredMethodNames() {
 		System.out.println(ReflectionUtils.getDeclaredMethodNames(Object.class));
+		System.out.println(ReflectionUtils.getDeclaredMethodNames(User.class));
 	}
 	
 //	@Test
@@ -112,6 +114,12 @@ public class ReflectionUtilsTest extends BaseTestCase {
 		
 		System.out.println(method1);
 		System.out.println(method2);
+	}
+	
+	@Test
+	public void testHasDeclaredMethod() {
+		assertTrue(ReflectionUtils.hasDeclaredMethod(Object.class, "toString"));
+		assertFalse(ReflectionUtils.hasDeclaredMethod(User.class, "toString"));
 	}
 	
 //	@Test
@@ -180,7 +188,7 @@ public class ReflectionUtilsTest extends BaseTestCase {
 		assertNull(user3.getPassword());
 	}
 	
-	@Test
+//	@Test
 	public void testInvokeMethod() throws Exception {
 		Object setterExecuteResult = ReflectionUtils.invokeMethod(this.user, "setName",
 				new Class<?>[] {String.class}, new Object[] {parameterValues[0]});

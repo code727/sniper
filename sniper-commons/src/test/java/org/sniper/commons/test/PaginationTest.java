@@ -16,7 +16,7 @@
  * Create Date : 2016-7-28
  */
 
-package org.sniper.commons.test.pagination;
+package org.sniper.commons.test;
 
 import org.junit.Test;
 import org.sniper.commons.pagination.pager.JQueryEasyUIPager;

@@ -18,11 +18,18 @@
 
 package org.sniper.commons.test;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.util.List;
+
 import org.junit.Before;
-import org.sniper.commons.test.annotation.Principal;
-import org.sniper.commons.test.annotation.UserName;
-import org.sniper.commons.test.domain.User;
+import org.junit.Test;
 import org.sniper.commons.util.AnnotationUtils;
+import org.sniper.commons.util.CollectionUtils;
+import org.sniper.test.annotation.Cacheable;
+import org.sniper.test.annotation.LoginName;
+import org.sniper.test.annotation.UserName;
+import org.sniper.test.domain.User;
 import org.sniper.test.junit.BaseTestCase;
 
 /**
@@ -41,17 +48,56 @@ public class AnnotationUtilsTest extends BaseTestCase {
 		this.user.setLoginName("daniele");
 	}
 	
-//	@Test
-	public void testHasX() {
-		System.out.println(AnnotationUtils.hasAnnotation(user));
-		System.out.println(AnnotationUtils.hasAnnotation(user, Principal.class));
+	@Test
+	public void testGetAnnotations() {
+		List<Annotation> annotations = AnnotationUtils.getAnnotations(User.class);
+		assertTrue(CollectionUtils.isNotEmpty(annotations));
+		System.out.println(annotations);
 	}
 	
-//	@Test
-	public void testFindXField() {
-		System.out.println(AnnotationUtils.findAnnotationField(user.getClass()));
-		System.out.println(AnnotationUtils.findAnnotationField(user.getClass(), UserName.class));
-		System.out.println(AnnotationUtils.findFirstAnnotationField(user.getClass(), UserName.class));
+	@Test
+	public void testGetAnnotation() {
+		Annotation annotation = AnnotationUtils.getAnnotation(User.class, Cacheable.class);
+		assertNotNull(annotation);
+		System.out.println(annotation);
 	}
 	
+	@Test
+	public void testAnnotated() {
+		assertTrue(AnnotationUtils.annotated(User.class));
+		assertTrue(AnnotationUtils.annotated(User.class, Cacheable.class));
+		assertFalse(AnnotationUtils.annotated(User.class, Deprecated.class));
+	}
+	
+	@Test
+	public void testGetAnnotatedFields() {
+		List<Field> annotatedFields = AnnotationUtils.getAnnotatedFields(User.class);
+		assertTrue(CollectionUtils.isNotEmpty(annotatedFields));
+		System.out.println(annotatedFields);
+		
+		annotatedFields = AnnotationUtils.getAnnotatedFields(User.class, LoginName.class);
+		assertTrue(CollectionUtils.isNotEmpty(annotatedFields));
+		System.out.println(annotatedFields);
+		
+		annotatedFields = AnnotationUtils.getAnnotatedFields(User.class, UserName.class);
+		assertTrue(CollectionUtils.isNotEmpty(annotatedFields));
+		System.out.println(annotatedFields);
+	}
+	
+	@Test
+	public void testGetAnnotatedField() {
+		System.out.println(AnnotationUtils.getAnnotatedField(User.class, LoginName.class));
+	}
+	
+	@Test
+	public void testGetAnnotatedMethods() {
+		System.out.println(AnnotationUtils.getAnnotatedMethods(User.class));
+		System.out.println(AnnotationUtils.getAnnotatedMethods(User.class, LoginName.class));
+	}
+	
+	@Test
+	public void testGetAnnotatedMethod() {
+		System.out.println(AnnotationUtils.getAnnotatedMethod(User.class, LoginName.class));
+	}
+		
 }

@@ -18,21 +18,28 @@
 
 package org.sniper.test.domain;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import org.sniper.test.annotation.LoginName;
 
 /**
  * 用户测试对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-@SuppressWarnings("serial")
-public class User implements Serializable, Cloneable {
+public class User extends Person implements Cloneable {
+	
+	private static final long serialVersionUID = 2470588830439887184L;
+
+	public static final String DEFAULT_PASSWORD = "123456";
 	
 	private Long id;
 	
-	private String name;
+	@LoginName
+	private String loginName;
+	
+	private String password = DEFAULT_PASSWORD;
 	
 	private byte gender;
 	
@@ -42,13 +49,15 @@ public class User implements Serializable, Cloneable {
 	
 	private double vision;
 	
-	private Date createTime;
-	
 	private BigDecimal amount;
 	
 	private Department department;
 	
 	private User boss;
+	
+	private Date createTime;
+	
+	private Date updateTime;
 
 	public Long getId() {
 		return id;
@@ -58,12 +67,21 @@ public class User implements Serializable, Cloneable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	@LoginName
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public byte getGender() {
@@ -98,14 +116,6 @@ public class User implements Serializable, Cloneable {
 		this.vision = vision;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
 	public BigDecimal getAmount() {
 		return amount;
 	}
@@ -129,7 +139,23 @@ public class User implements Serializable, Cloneable {
 	public void setBoss(User boss) {
 		this.boss = boss;
 	}
-	
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	@Override
 	public User clone() {  
         try {

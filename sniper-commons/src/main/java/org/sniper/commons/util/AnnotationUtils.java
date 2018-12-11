@@ -21,6 +21,7 @@ package org.sniper.commons.util;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,447 +34,238 @@ public class AnnotationUtils {
 	private AnnotationUtils() {}
 	
 	/**
-	 * 判断对象是否有注解
+	 * 判断当前对象是否已被注解。</P>
+	 * 1.此方法的实现原理为：在当前对象类型的层次结构中获取注解组，直到在某一层次中获取到的注解组不为空时，表明当前对象已被注解。</P>
+	 * 2.即使当前对象的父类所使用的注解没有用@Inherited标注为"可继承"时，调用此方法仍然可得出"当前对象已被父类注解所标识"的结论</P>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
 	 */
-	public static boolean hasAnnotation(Object obj) {
-		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
-		while (declaredClass != null && declaredClass != Object.class) {
-			if (ArrayUtils.isNotEmpty(declaredClass.getDeclaredAnnotations())) {
-				return true;
-			}
-
-			declaredClass = declaredClass.getSuperclass();
-		}
-		
-		return false;
-	}
-	
-	
-	/**
-	 * 判断对象是否被指定的注解所标识
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @return
-	 */
-	public static <A extends Annotation> boolean hasAnnotation(Object obj, Class<A> annotationClass) {
-		if (annotationClass == null) {
+	public static boolean annotated(Object obj) {
+		Class<?> currentType = ClassUtils.getCurrentType(obj);
+		if (currentType == null)
 			return false;
-		}
-			
-		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
-		while (declaredClass != null && declaredClass != Object.class) {
-			if (declaredClass.getAnnotation(annotationClass) != null) {
+		
+		do {
+			if (ArrayUtils.isNotEmpty(currentType.getAnnotations()))
 				return true;
-			}
-				
-			declaredClass = declaredClass.getSuperclass();
-		}
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
 		
 		return false;
 	}
 	
 	/**
-	 * 判断域对象是否有注解
+	 * 判断当前对象是否已被指定的注解所标识。</P>
+	 * 1.此方法的实现原理为：在当前对象类型的层次结构中获取指定的注解，直到在某一层次中获取到的注解不为空时，表明当前对象已被指定的注解所标识。</P>
+	 * 2.即使当前对象的父类所使用的注解没有用@Inherited标注为"可继承"时，调用此方法仍然可得出"当前对象已被父类注解所标识"的结论</P>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param annotationClass
+	 * @return
+	 */
+	public static <A extends Annotation> boolean annotated(Object obj, Class<A> annotationClass) {
+		Class<?> currentType;
+		if (annotationClass == null || (currentType = ClassUtils.getCurrentType(obj)) == null) 
+			return false;
+			
+		do {
+			if (currentType.getAnnotation(annotationClass) != null)
+				return true;
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
+		
+		return false;
+	}
+	
+	/**
+	 * 判断域对象是否已被注解
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param field
 	 * @return
 	 */
-	public static boolean hasAnnotation(Field field) {
+	public static boolean annotated(Field field) {
 		return field != null && ArrayUtils.isNotEmpty(field.getAnnotations());
 	}
 	
 	/**
-	 * 判断域对象是否被指定的注解所标识
+	 * 判断域对象是否已被指定的注解所标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param field
 	 * @param annotationClass
 	 * @return
 	 */
-	public static <A extends Annotation> boolean hasAnnotation(Field field, Class<A> annotationClass) {
-		if (field == null || annotationClass == null) {
+	public static <A extends Annotation> boolean annotated(Field field, Class<A> annotationClass) {
+		if (field == null || annotationClass == null) 
 			return false;
-		}
 			
 		return field.getAnnotation(annotationClass) != null;
 	}
 	
 	/**
-	 * 判断方法对象是否有注解
+	 * 判断方法对象是否已被注解
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param method
 	 * @return
 	 */
-	public static boolean hasAnnotation(Method method) {
-		if (method == null) {
-			return false;
-		}
-		
-		return ArrayUtils.isNotEmpty(method.getAnnotations());
+	public static boolean annotated(Method method) {
+		return method != null && ArrayUtils.isNotEmpty(method.getAnnotations());
 	}
 	
 	/**
-	 * 判断方法对象是否有被指定的注解所标识
+	 * 判断方法对象是否已被指定的注解所标识
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param method
 	 * @param annotationClass
 	 * @return
 	 */
-	public static <A extends Annotation> boolean hasAnnotation(Method method, Class<A> annotationClass) {
-		if (method == null || annotationClass == null) {
+	public static <A extends Annotation> boolean annotated(Method method, Class<A> annotationClass) {
+		if (method == null || annotationClass == null) 
 			return false;
-		}
 		
 		return method.getAnnotation(annotationClass) != null;
 	}
 	
 	/**
-	 * 查找被注解标识的域对象列表
+	 * 获取当前对象类型上被标识的注解。</P>
+	 * 1.此方法的实现原理为：在当前对象类型的层次结构中获取注解，直到父类不为空或不为顶级类型(Object)为止。</P>
+	 * 2.即使当前对象的父类所使用的注解没有用@Inherited标注为"可继承"时，调用此方法仍然可得到这个注解，是对原生getDeclaredAnnotations方法的扩展实现</P>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
 	 */
-	public static List<Field> findAnnotationField(Object obj) {
-		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
+	public static List<Annotation> getAnnotations(Object obj) {
+		Class<?> currentType = ClassUtils.getCurrentType(obj);
+		if (currentType == null)
+			return null;
 		
-		if (declaredClass != null) {
-			List<Field> fields = CollectionUtils.newArrayList();
-			Field[] declaredFields;
-			/* 获取非Object基类对象的注解域 */
-			while (declaredClass != null && declaredClass != Object.class) {
-				declaredFields = declaredClass.getDeclaredFields();
-				if (ArrayUtils.isNotEmpty(declaredFields)) {
-					for (Field field : declaredFields) {
-						if (ArrayUtils.isNotEmpty(field.getAnnotations())) {
-							fields.add(field);
-						}
-					}
-				}
-				declaredClass = declaredClass.getSuperclass();
-			}
-			return fields;
-		} 
+		List<Annotation> result = CollectionUtils.newArrayList();
+		Annotation[] annotations;
+		do {
+			annotations = (Annotation[]) currentType.getDeclaredAnnotations();
+			if (ArrayUtils.isNotEmpty(annotations))
+				result.addAll(Arrays.asList(annotations));
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
+		
+		return result;
+	}
+	
+	/**
+	 * 获取当前对象类型上被指定标识的注解。</P>
+	 * 1.此方法的实现原理为：在当前对象类型的层次结构中获取注解，直到获取到指定标识、父类不为空或不为顶级类型(Object)为止。</P>
+	 * 2.即使当前对象的父类所使用的注解没有用@Inherited标注为"可继承"时，调用此方法仍然可得到这个注解，是对原生getAnnotation方法的扩展实现</P>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param annotationClass
+	 * @return
+	 */
+	public static <A extends Annotation> Annotation getAnnotation(Object obj, Class<A> annotationClass) {
+		Class<?> currentType;
+		if (annotationClass == null || (currentType = ClassUtils.getCurrentType(obj)) == null)
+			return null;
+		
+		do {
+			A annotation = currentType.getAnnotation(annotationClass);
+			if (annotation != null)
+				return annotation;
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
+		
 		return null;
 	}
 	
 	/**
-	 * 查找被指定注解标识的域对象列表
+	 * 获取对象内被注解的所有域
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
-	 * @param annotationClass
 	 * @return
 	 */
-	public static <A extends Annotation> List<Field> findAnnotationField(Object obj, Class<A> annotationClass) {
-		return findAnnotationField(obj, annotationClass, false);
-	}
-	
-	/**
-	 * 查找第一个被指定注解标识的域对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param annotationClass
-	 */
-	public static <A extends Annotation> Field findFirstAnnotationField(Object obj, Class<A> annotationClass) {
-		return CollectionUtils.get(findAnnotationField(obj, annotationClass, true), 0);
-	}
-	
-	/**
-	 * 选择是否只需要第一个被指定注解标识的方式查找域对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param annotationClass
-	 * @param onlyFirst
-	 * @return
-	 */
-	private static <A extends Annotation> List<Field> findAnnotationField(Object obj, Class<A> annotationClass, boolean onlyFirst) {
-		if (annotationClass == null) {
+	public static List<Field> getAnnotatedFields(Object obj) {
+		Class<?> currentType = ClassUtils.getCurrentType(obj);
+		if (currentType == null)
 			return null;
-		}
-		
-		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
-		if (declaredClass == null) {
-			return null;
-		}
 		
 		List<Field> fields = CollectionUtils.newArrayList();
 		Field[] declaredFields;
-		if (onlyFirst) {
-			/* 获取非Object基类对象的注解域 */
-			while (declaredClass != null && declaredClass != Object.class) {
-				declaredFields = declaredClass.getDeclaredFields();
-				if (ArrayUtils.isNotEmpty(declaredFields)) {
-					for (Field field : declaredFields) {
-						if (field.getAnnotation(annotationClass) != null) {
-							fields.add(field);
-							// 找到一个域对象后立即返回结果
-							return fields;
-						}
-					}
+		do {
+			declaredFields = currentType.getDeclaredFields();
+			if (ArrayUtils.isNotEmpty(declaredFields)) {
+				for (Field field : declaredFields) {
+					if (ArrayUtils.isNotEmpty(field.getAnnotations())) 
+						fields.add(field);
 				}
-				declaredClass = declaredClass.getSuperclass();
 			}
-		} else {
-			while (declaredClass != null && declaredClass != Object.class) {
-				declaredFields = declaredClass.getDeclaredFields();
-				if (ArrayUtils.isNotEmpty(declaredFields)) {
-					for (Field field : declaredFields) {
-						if (field.getAnnotation(annotationClass) != null) {
-							fields.add(field);
-						}
-					}
-				}
-				declaredClass = declaredClass.getSuperclass();
-			}
-		}
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
 		
 		return fields;
 	}
 	
 	/**
-	 * 查找被注解标识的方法对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @return
-	 */
-	public static List<Method> findAnnotationMethod(Object obj) {
-		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
-		
-		if (declaredClass != null) {
-			List<Method> methods = CollectionUtils.newArrayList();
-			Method[] declaredMethods;
-			/* 获取非Object基类对象的注解域 */
-			while (declaredClass != null && declaredClass != Object.class) {
-				declaredMethods = declaredClass.getDeclaredMethods();
-				if (ArrayUtils.isNotEmpty(declaredMethods)) {
-					for (Method method : declaredMethods) {
-						if (ArrayUtils.isNotEmpty(method.getAnnotations())) {
-							methods.add(method);
-						}
-					}
-				}
-				declaredClass = declaredClass.getSuperclass();
-			}
-			return methods;
-		} 
-		return null;
-	}
-	
-	/**
-	 * 查找被指定注解标识的方法对象列表
+	 * 获取对象内被指定注解标识的所有域
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
 	 */
-	public static <A extends Annotation> List<Method> findAnnotationMethod(Object obj, Class<A> annotationClass) {
-		return findAnnotationMethod(obj, annotationClass, false);
-	}
-	
-	/**
-	 * 查找第一个被指定注解标识的方法对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param annotationClass
-	 * @return
-	 */
-	public static <A extends Annotation> Method findFirstAnnotationMethod(Object obj, Class<A> annotationClass) {
-		return CollectionUtils.get(findAnnotationMethod(obj, annotationClass, true), 0);
-	}
-	
-	/**
-	 * 选择是否只需要第一个被指定注解标识的方式查找方法对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param annotationClass
-	 * @param onlyFirst
-	 * @return
-	 */
-	private static <A extends Annotation> List<Method> findAnnotationMethod(Object obj, Class<A> annotationClass, boolean onlyFirst) {
-		if (annotationClass == null)
+	public static <A extends Annotation> List<Field> getAnnotatedFields(Object obj, Class<A> annotationClass) {
+		Class<?> currentType;
+		if (annotationClass == null || (currentType = ClassUtils.getCurrentType(obj)) == null)
 			return null;
 		
-		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
-		if (declaredClass != null) {
-			List<Method> methods = CollectionUtils.newArrayList();
-			Method[] declaredMethods;
-			if (onlyFirst) {
-				/* 获取非Object基类对象的注解域 */
-				while (declaredClass != null && declaredClass != Object.class) {
-					declaredMethods = declaredClass.getDeclaredMethods();
-					if (ArrayUtils.isNotEmpty(declaredMethods)) {
-						for (Method method : declaredMethods) {
-							if (method.getAnnotation(annotationClass) != null) {
-								methods.add(method);
-								// 找一个方法对象后立马返回结果
-								return methods;
-							}
-						}
-					}
-					declaredClass = declaredClass.getSuperclass();
+		List<Field> fields = CollectionUtils.newArrayList();
+		Field[] declaredFields;
+		do {
+			declaredFields = currentType.getDeclaredFields();
+			if (ArrayUtils.isNotEmpty(declaredFields)) {
+				for (Field field : declaredFields) {
+					if (field.getAnnotation(annotationClass) != null) 
+						fields.add(field);
 				}
-			} else {
-				while (declaredClass != null && declaredClass != Object.class) {
-					declaredMethods = declaredClass.getDeclaredMethods();
-					if (ArrayUtils.isNotEmpty(declaredMethods)) {
-						for (Method method : declaredMethods) {
-							if (method.getAnnotation(annotationClass) != null)
-								methods.add(method);
-						}
-					}
-					declaredClass = declaredClass.getSuperclass();
-				}
-				return methods;
 			}
-		}
-		return null;
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
+		
+		return fields;
 	}
-	
+			
 	/**
-	 * 查找被指定注解标识的getter方法对象列表
+	 * 获取对象内被指定注解标识的域
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
-	 * @return
 	 */
-	public static <A extends Annotation> List<Method> findAnnotationGetterMethod(Object obj, Class<A> annotationClass) {
-		return findAnnotationGetterMethod(obj, annotationClass, false);
-	}
-	
-	/**
-	 * 查找第一个被指定注解标识的getter方法对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param annotationClass
-	 * @return
-	 */
-	public static <A extends Annotation> Method findFirstAnnotationGetterMethod(Object obj, Class<A> annotationClass) {
-		return CollectionUtils.get(findAnnotationGetterMethod(obj, annotationClass, true), 0);
-	}
-	
-	/**
-	 * 选择是否只需要第一个被指定注解标识的方式查找getter方法对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param annotationClass
-	 * @param onlyFirst
-	 * @return
-	 */
-	private static <A extends Annotation> List<Method> findAnnotationGetterMethod(Object obj, Class<A> annotationClass, boolean onlyFirst) {
-		if (annotationClass == null)
+	public static <A extends Annotation> Field getAnnotatedField(Object obj, Class<A> annotationClass) {
+		Class<?> currentType;
+		if (annotationClass == null || (currentType = ClassUtils.getCurrentType(obj)) == null)
 			return null;
 		
-		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
-		if (declaredClass != null) {
-			List<Method> methods = CollectionUtils.newArrayList();
-			Method[] declaredMethods;
-			if (onlyFirst) {
-				/* 获取非Object基类对象的注解域 */
-				while (declaredClass != null && declaredClass != Object.class) {
-					declaredMethods = declaredClass.getDeclaredMethods();
-					if (ArrayUtils.isNotEmpty(declaredMethods)) {
-						for (Method method : declaredMethods) {
-							if (Supports.isGetterMethod(method, annotationClass)) {
-								methods.add(method);
-								// 找一个方法对象后立马返回结果
-								return methods;
-							}
-						}
-					}
-					declaredClass = declaredClass.getSuperclass();
+		Field[] declaredFields;
+		do {
+			declaredFields = currentType.getDeclaredFields();
+			if (ArrayUtils.isNotEmpty(declaredFields)) {
+				for (Field field : declaredFields) {
+					/* 获取到第一个被指定注解标识的域对象后立即返回结果 */
+					if (field.getAnnotation(annotationClass) != null) 
+						return field;
 				}
-			} else {
-				while (declaredClass != null && declaredClass != Object.class) {
-					declaredMethods = declaredClass.getDeclaredMethods();
-					if (ArrayUtils.isNotEmpty(declaredMethods)) {
-						for (Method method : declaredMethods) {
-							if (Supports.isGetterMethod(method, annotationClass)) {
-								methods.add(method);
-							}
-						}
-					}
-					declaredClass = declaredClass.getSuperclass();
-				}
-				return methods;
 			}
-		}
-		return null;
-	}
-	
-	/**
-	 * 查找被指定注解标识的setter方法对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param annotationClass
-	 * @return
-	 */
-	public static <A extends Annotation> List<Method> findAnnotationSetterMethod(Object obj, Class<A> annotationClass) {
-		return findAnnotationSetterMethod(obj, annotationClass, false);
-	}
-	
-	/**
-	 * 查找第一个被指定注解标识的setter方法对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param annotationClass
-	 * @return
-	 */
-	public static <A extends Annotation> Method findFirstAnnotationSetterMethod(Object obj, Class<A> annotationClass) {
-		return CollectionUtils.get(findAnnotationSetterMethod(obj, annotationClass, true), 0);
-	}
-	
-	/**
-	 * 选择是否只需要第一个被指定注解标识的方式查找setter方法对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param annotationClass
-	 * @param onlyFirst
-	 * @return
-	 */
-	private static <A extends Annotation> List<Method> findAnnotationSetterMethod(Object obj, Class<A> annotationClass, boolean onlyFirst) {
-		if (annotationClass == null)
-			return null;
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
 		
-		Class<?> declaredClass = ClassUtils.getCurrentType(obj);
-		if (declaredClass != null) {
-			List<Method> methods = CollectionUtils.newArrayList();
-			Method[] declaredMethods;
-			if (onlyFirst) {
-				/* 获取非Object基类对象的注解域 */
-				while (declaredClass != null && declaredClass != Object.class) {
-					declaredMethods = declaredClass.getDeclaredMethods();
-					if (ArrayUtils.isNotEmpty(declaredMethods)) {
-						for (Method method : declaredMethods) {
-							if (Supports.isSetterMethod(method, annotationClass)) {
-								methods.add(method);
-								// 找一个方法对象后立马返回结果
-								return methods;
-							}
-						}
-					}
-					declaredClass = declaredClass.getSuperclass();
-				}
-			} else {
-				while (declaredClass != null && declaredClass != Object.class) {
-					declaredMethods = declaredClass.getDeclaredMethods();
-					if (ArrayUtils.isNotEmpty(declaredMethods)) {
-						for (Method method : declaredMethods) {
-							if (Supports.isSetterMethod(method, annotationClass)) {
-								methods.add(method);
-							}
-						}
-					}
-					declaredClass = declaredClass.getSuperclass();
-				}
-				return methods;
-			}
-		}
 		return null;
 	}
 	
 	/**
-	 * 查找第一个被指定注解标识的域对象值
+	 * 获取对象内被指定注解标识的域值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -481,25 +273,224 @@ public class AnnotationUtils {
 	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	public static <A extends Annotation, V> V findFirstAnnotationFieldValue(Object obj, Class<A> annotationClass) throws Exception {
-		Field annotationField = findFirstAnnotationField(obj, annotationClass);
-		return (V) (annotationField != null ? ReflectionUtils.getFieldValue(obj, annotationField) : null);
+	public static <A extends Annotation, V> V getAnnotatedFieldValue(Object obj, Class<A> annotationClass) throws Exception {
+		Field annotatedField = getAnnotatedField(obj, annotationClass);
+		return (V) (annotatedField != null ? ReflectionUtils.getFieldValue(obj, annotatedField) : null);
 	}
 	
 	/**
-	 * 调用第一个被指定注解标识的无参方法，并返回执行结果
+	 * 获取对象内被注解标识的所有方法
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static List<Method> getAnnotatedMethods(Object obj) {
+		Class<?> currentType = ClassUtils.getCurrentType(obj);
+		if (currentType == null)
+			return null;
+		
+		List<Method> methods = CollectionUtils.newArrayList();
+		Method[] declaredMethods;
+		do {
+			declaredMethods = currentType.getDeclaredMethods();
+			if (ArrayUtils.isNotEmpty(declaredMethods)) {
+				for (Method method : declaredMethods) {
+					if (ArrayUtils.isNotEmpty(method.getAnnotations()))
+						methods.add(method);
+				}
+			}
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
+		
+		return methods;
+	}
+			
+	/**
+	 * 获取对象内被指定注解标识的所有方法
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param annotationClass
+	 * @return
+	 */
+	public static <A extends Annotation> List<Method> getAnnotatedMethods(Object obj, Class<A> annotationClass) {
+		Class<?> currentType;
+		if (annotationClass == null || (currentType = ClassUtils.getCurrentType(obj)) == null)
+			return null;
+		
+		List<Method> methods = CollectionUtils.newArrayList();
+		Method[] declaredMethods;
+		do {
+			declaredMethods = currentType.getDeclaredMethods();
+			if (ArrayUtils.isNotEmpty(declaredMethods)) {
+				for (Method method : declaredMethods) {
+					if (method.getAnnotation(annotationClass) != null)
+						methods.add(method);
+				}
+			}
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
+		
+		return methods;
+	}
+	
+	/**
+	 * 获取对象内被指定注解标识的方法
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param annotationClass
+	 * @return
+	 */
+	public static <A extends Annotation> Method getAnnotatedMethod(Object obj, Class<A> annotationClass) {
+		Class<?> currentType;
+		if (annotationClass == null || (currentType = ClassUtils.getCurrentType(obj)) == null)
+			return null;
+		
+		Method[] declaredMethods;
+		do {
+			declaredMethods = currentType.getDeclaredMethods();
+			if (ArrayUtils.isNotEmpty(declaredMethods)) {
+				for (Method method : declaredMethods) {
+					/* 获取到第一个被指定注解标识的方法对象后立即返回结果 */
+					if (method.getAnnotation(annotationClass) != null)
+						return method;
+				}
+			}
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
+		
+		return null;
+	}
+	
+	/**
+	 * 查找对象内被指定注解标识的所有getter方法
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param annotationClass
+	 * @return
+	 */
+	public static <A extends Annotation> List<Method> findAnnotatedGetters(Object obj, Class<A> annotationClass) {
+		Class<?> currentType;
+		if (annotationClass == null || (currentType = ClassUtils.getCurrentType(obj)) == null)
+			return null;
+		
+		List<Method> methods = CollectionUtils.newArrayList();
+		Method[] declaredMethods;
+		do {
+			declaredMethods = currentType.getDeclaredMethods();
+			if (ArrayUtils.isNotEmpty(declaredMethods)) {
+				for (Method method : declaredMethods) {
+					if (annotatedGetter(method, annotationClass))
+						methods.add(method);
+				}
+			}
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
+		
+		return methods;
+	}
+	
+	/**
+	 * 查找对象内被指定注解标识的getter方法
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param annotationClass
+	 * @return
+	 */
+	public static <A extends Annotation> Method findAnnotatedGetter(Object obj, Class<A> annotationClass) {
+		Class<?> currentType;
+		if (annotationClass == null || (currentType = ClassUtils.getCurrentType(obj)) == null)
+			return null;
+		
+		Method[] declaredMethods;
+		do {
+			declaredMethods = currentType.getDeclaredMethods();
+			if (ArrayUtils.isNotEmpty(declaredMethods)) {
+				for (Method method : declaredMethods) {
+					if (annotatedGetter(method, annotationClass))
+						return method;
+				}
+			}
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
+		
+		return null;
+	}
+		
+	/**
+	 * 查找对象内被指定注解标识的所有setter方法
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param annotationClass
+	 * @return
+	 */
+	public static <A extends Annotation> List<Method> findAnnotatedSetters(Object obj, Class<A> annotationClass) {
+		Class<?> currentType;
+		if (annotationClass == null || (currentType = ClassUtils.getCurrentType(obj)) == null)
+			return null;
+		
+		List<Method> methods = CollectionUtils.newArrayList();
+		Method[] declaredMethods;
+		do {
+			declaredMethods = currentType.getDeclaredMethods();
+			if (ArrayUtils.isNotEmpty(declaredMethods)) {
+				for (Method method : declaredMethods) {
+					if (annotatedSetter(method, annotationClass))
+						methods.add(method);
+				}
+			}
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
+		
+		return methods;
+	}
+	
+	/**
+	 * 查找对象内被指定注解标识的setter方法
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param annotationClass
+	 * @return
+	 */
+	public static <A extends Annotation> Method findAnnotatedSetter(Object obj, Class<A> annotationClass) {
+		Class<?> currentType;
+		if (annotationClass == null || (currentType = ClassUtils.getCurrentType(obj)) == null)
+			return null;
+		
+		do {
+			Method[] declaredMethods = currentType.getDeclaredMethods();
+			if (ArrayUtils.isNotEmpty(declaredMethods)) {
+				for (Method method : declaredMethods) {
+					if (annotatedSetter(method, annotationClass))
+						return method;
+				}
+			}
+			
+			currentType = currentType.getSuperclass();
+		} while (ClassUtils.isNotTopType(currentType));
+		
+		return null;
+	}
+		
+	/**
+	 * 调用对象内被指定注解标识的无参方法后返回执行结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
 	 * @throws Exception 
 	 */
-	public static <A extends Annotation, V> V invokeFirstAnnotationMethod(Object obj, Class<A> annotationClass) throws Exception {
-		return invokeFirstAnnotationMethod(obj, annotationClass, null);
+	public static <A extends Annotation, V> V invokeAnnotatedMethod(Object obj, Class<A> annotationClass) throws Exception {
+		return invokeAnnotatedMethod(obj, annotationClass, null);
 	}
 	
 	/**
-	 * 调用第一个被指定注解标识的方法，并返回执行结果
+	 * 调用对象内被指定注解标识的方法后返回执行结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -508,17 +499,16 @@ public class AnnotationUtils {
 	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	public static <A extends Annotation, V> V invokeFirstAnnotationMethod(Object obj, Class<A> annotationClass, Object[] pValues) throws Exception {
-		Method annotationMethod = findFirstAnnotationMethod(obj, annotationClass);
-		if (annotationMethod == null) {
+	public static <A extends Annotation, V> V invokeAnnotatedMethod(Object obj, Class<A> annotationClass, Object[] pValues) throws Exception {
+		Method annotatedMethod = getAnnotatedMethod(obj, annotationClass);
+		if (annotatedMethod == null) 
 			return null;
-		}
 		
-		return (V) ReflectionUtils.invokeAccessibleMethod(obj, annotationMethod, annotationMethod.getParameterTypes(), pValues);
+		return (V) ReflectionUtils.invokeAccessibleMethod(obj, annotatedMethod, annotatedMethod.getParameterTypes(), pValues);
 	}
 	
 	/**
-	 * 调用第一个被指定注解标识的getter方法，并返回执行结果
+	 * 调用对象内被指定注解标识的getter方法后返回执行结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -526,61 +516,50 @@ public class AnnotationUtils {
 	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	public static <A extends Annotation, V> V invokeFirstAnnotationGetterMethodValue(Object obj, Class<A> annotationClass) throws Exception {
-		Method getterMethod = findFirstAnnotationGetterMethod(obj, annotationClass);
-		if (getterMethod == null) {
+	public static <A extends Annotation, V> V invokeAnnotatedGetter(Object obj, Class<A> annotationClass) throws Exception {
+		Method annotatedGetter = findAnnotatedGetter(obj, annotationClass);
+		if (annotatedGetter == null) 
 			return null;
-		}
 		
-		return (V) ReflectionUtils.invokeAccessibleMethod(obj, getterMethod, null, null);
+		return (V) ReflectionUtils.invokeAccessibleMethod(obj, annotatedGetter, null, null);
 	}
 	
 	/**
-	 * 调用第一个被指定注解标识的setter方法
+	 * 调用对象内被指定注解标识的setter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
 	 * @param pValue
 	 * @throws Exception 
 	 */
-	public static <A extends Annotation, V> void invokeFirstAnnotationSetterMethod(Object obj, Class<A> annotationClass, V pValue) throws Exception {
-		Method setterMethod = findFirstAnnotationGetterMethod(obj, annotationClass);
-		if (setterMethod == null)
+	public static <A extends Annotation, V> void invokeAnnotatedSetter(Object obj, Class<A> annotationClass, V pValue) throws Exception {
+		Method annotatedSetter = findAnnotatedSetter(obj, annotationClass);
+		if (annotatedSetter == null)
 			return;
 		
-		ReflectionUtils.invokeAccessibleMethod(obj, setterMethod, null, new Object[]{pValue});
+		ReflectionUtils.invokeAccessibleMethod(obj, annotatedSetter, null, new Object[] { pValue });
 	}
 	
 	/**
-	 * 当前包下共享的静态注解工具支持类
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
-	 * @version 1.0
+	 * 判断是否为一个被指定注解标识的getter方法对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param method
+	 * @param annotationClass
+	 * @return
 	 */
-	static class Supports {
-		
-		/**
-		 * 判断是否为一个被指定注解标识的getter方法对象
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-		 * @param method
-		 * @param annotationClass
-		 * @return
-		 */
-		public static <A extends Annotation> boolean isGetterMethod(Method method, Class<A> annotationClass) {
-			return method.getAnnotation(annotationClass) != null && ArrayUtils.isEmpty(method.getParameterTypes()) 
-					&& (method.getName().startsWith("get") || method.getName().startsWith("is"));
-		}
-		
-		/**
-		 * 判断是否为一个被指定注解标识的setter方法对象
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-		 * @param method
-		 * @param annotationClass
-		 * @return
-		 */
-		public static <A extends Annotation> boolean isSetterMethod(Method method, Class<A> annotationClass) {
-			return method.getAnnotation(annotationClass) != null 
-					&& ArrayUtils.length(method.getParameterTypes()) == 1 && method.getName().startsWith("set");
-		}
+	private static <A extends Annotation> boolean annotatedGetter(Method method, Class<A> annotationClass) {
+		return ReflectionUtils.isGetter(method) && method.getAnnotation(annotationClass) != null;
 	}
 	
+	/**
+	 * 判断是否为一个被指定注解标识的setter方法对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param method
+	 * @param annotationClass
+	 * @return
+	 */
+	private static <A extends Annotation> boolean annotatedSetter(Method method, Class<A> annotationClass) {
+		return ReflectionUtils.isSetter(method) && method.getAnnotation(annotationClass) != null;
+	}
+		
 }

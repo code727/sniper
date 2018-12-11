@@ -34,6 +34,15 @@ import java.util.Set;
  */
 public class ReflectionUtils {
 	
+	/** Setter方法前缀 */
+	public static final String SETTER_PREFIX = "set";
+	
+	/** Getter方法前缀 */
+	public static final String GETTER_PREFIX = "get";
+	
+	/** 布尔Getter方法前缀 */
+	public static final String BOOLEAN_GETTER_PREFIX = "is";
+	
 	private ReflectionUtils() {}
 	
 	/**
@@ -483,6 +492,42 @@ public class ReflectionUtils {
 	}
 	
 	/**
+	 * 判断是否为一个Getter方法。Getter方法要求如下：</P>
+	 * 1.方法中不能有参数</P>
+	 * 2.方法必须有返回</P>
+	 * 3.方法名称必须以"get"开头且长度大于3或以"is"开头且长度大于2</P>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param method
+	 * @return
+	 */
+	public static boolean isGetter(Method method) {
+		if (method == null || ArrayUtils.isNotEmpty(method.getParameterTypes()))
+			return false;
+		
+		String name = method.getName();
+		Class<?> returnType = method.getReturnType();
+		return (returnType != void.class && name.startsWith(GETTER_PREFIX) && name.length() > 3)
+				|| (returnType == boolean.class && name.startsWith(BOOLEAN_GETTER_PREFIX) && name.length() > 2);
+	}
+	
+	/**
+	 * 判断是否为一个Setter方法。Setter方法要求如下：</P>
+	 * 1.方法中有且只有一个参数</P>
+	 * 2.方法名称必须以"set"开头且长度大于3</P>
+	 * 注意：Setter方法是否有返回这里不做要求</P>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param method
+	 * @return
+	 */
+	public static boolean isSetter(Method method) {
+		if (method == null || ArrayUtils.length(method.getParameterTypes()) != 1)
+			return false;
+		
+		String name = method.getName();
+		return name.startsWith(SETTER_PREFIX) && name.length() > 3;
+	}
+	
+	/**
 	 * 调用指定类的构造函数生成一个该类的实例对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
@@ -634,7 +679,7 @@ public class ReflectionUtils {
 					methods.addAll(Arrays.asList(declaredMethods));
 				
 				currentType = currentType.getSuperclass();
-			} while (currentType != null && currentType != Object.class);
+			} while (ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		} else {
 			do {
 				Method[] publicMethods = currentType.getMethods();
@@ -642,7 +687,7 @@ public class ReflectionUtils {
 					methods.addAll(Arrays.asList(publicMethods));
 				
 				currentType = currentType.getSuperclass();
-			} while (currentType != null && currentType != Object.class);
+			} while (ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		}
 		
 		return methods;
@@ -673,7 +718,7 @@ public class ReflectionUtils {
 				}
 				
 				currentType = currentType.getSuperclass();
-			} while (currentType != null && currentType != Object.class);
+			} while (ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		} else {
 			do {
 				Method[] publicMethods = currentType.getMethods();
@@ -684,7 +729,7 @@ public class ReflectionUtils {
 				}
 				
 				currentType = currentType.getSuperclass();
-			} while (currentType != null && currentType != Object.class);
+			} while (ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		}
 		
 		return names;
@@ -714,7 +759,7 @@ public class ReflectionUtils {
 				} catch (NoSuchMethodException e) {
 					currentType = currentType.getSuperclass();
 				}
-			} while (currentType != null && currentType != Object.class);
+			} while (ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		} else {
 			do {
 				try {
@@ -722,7 +767,7 @@ public class ReflectionUtils {
 				} catch (NoSuchMethodException e) {
 					currentType = currentType.getSuperclass();
 				}
-			} while (currentType != null && currentType != Object.class);
+			} while (ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		}
 		
 		return null;
@@ -750,7 +795,7 @@ public class ReflectionUtils {
 					fields.addAll(Arrays.asList(declaredFields));
 				
 				currentType = currentType.getSuperclass();
-			} while(currentType != null && currentType != Object.class);
+			} while(ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		} else {
 			do {
 				Field[] publicFields = currentType.getFields();
@@ -758,7 +803,7 @@ public class ReflectionUtils {
 					fields.addAll(Arrays.asList(publicFields));
 				
 				currentType = currentType.getSuperclass();
-			} while(currentType != null && currentType != Object.class);
+			} while(ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		}
 		
 		return fields;
@@ -789,7 +834,7 @@ public class ReflectionUtils {
 				}
 				
 				currentType = currentType.getSuperclass();
-			} while(currentType != null && currentType != Object.class);
+			} while(ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		} else {
 			do {
 				Field[] publicFields = currentType.getFields();
@@ -800,7 +845,7 @@ public class ReflectionUtils {
 				}
 				
 				currentType = currentType.getSuperclass();
-			} while(currentType != null && currentType != Object.class);
+			} while(ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		}
 		
 		return names;
@@ -829,7 +874,7 @@ public class ReflectionUtils {
 				} catch (NoSuchFieldException e) {
 					currentType = currentType.getSuperclass();
 				}
-			} while (currentType != null && currentType != Object.class);
+			} while (ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		} else {
 			do {
 				try {
@@ -837,7 +882,7 @@ public class ReflectionUtils {
 				} catch (NoSuchFieldException e) {
 					currentType = currentType.getSuperclass();
 				}
-			} while (currentType != null && currentType != Object.class);
+			} while (ClassUtils.isNotTopType(currentType)); // 排除掉在顶级类型中获取，即只在当前对象以及它所有非Object父类中获取
 		}
 		
 		return null;

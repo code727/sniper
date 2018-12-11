@@ -167,16 +167,16 @@ public class BeanUtils {
 	 */
 	public static <T> List<Method> findAllGetter(T bean) {
 		List<Method> methods = ReflectionUtils.getDeclaredMethods(bean);
+		if (CollectionUtils.isEmpty(methods))
+			return null;
 		
-		if (CollectionUtils.isNotEmpty(methods)) {
-			List<Method> getters = CollectionUtils.newArrayList();
-			for (Method method : methods) {
-				if (isGetter(method))
-					getters.add(method);
-			}
-			return getters;
+		List<Method> getters = CollectionUtils.newArrayList();
+		for (Method method : methods) {
+			if (ReflectionUtils.isGetter(method))
+				getters.add(method);
 		}
-		return null;
+		
+		return getters;
 	}
 	
 	/**
@@ -187,38 +187,18 @@ public class BeanUtils {
 	 */
 	public static <T> List<String> findAllGetterName(T bean) {
 		List<Method> methods = ReflectionUtils.getDeclaredMethods(bean);
-		if (CollectionUtils.isNotEmpty(methods)) {
-			List<String> getterNames = CollectionUtils.newArrayList();
-			for (Method method : methods) {
-				if (isGetter(method))
-					getterNames.add(method.getName());
-			}
-			return getterNames;
+		if (CollectionUtils.isEmpty(methods))
+			return null;
+		
+		List<String> getterNames = CollectionUtils.newArrayList();
+		for (Method method : methods) {
+			if (ReflectionUtils.isGetter(method))
+				getterNames.add(method.getName());
 		}
-		return null;
+		
+		return getterNames;
 	}
-	
-	/**
-	 * 判断是否为一个Getter方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param method
-	 * @return
-	 */
-	private static boolean isGetter(Method method) {
-		/* Getter方法要求如下：
-		 * 1.方法中不能有参数
-		 * 2.方法必须有返回
-		 * 3.方法名称必须以"get"前缀开头且长度大于3或以"is"前缀开头且长度大于2
-		 *  */
-		if (ArrayUtils.isEmpty(method.getParameterTypes())) {
-			String name = method.getName();
-			Class<?> returnType = method.getReturnType();
-			return returnType != void.class && name.startsWith(GETTER_PREFIX) && name.length() > 3
-					|| returnType == boolean.class && name.startsWith(BOOLEAN_GETTER_PREFIX) && name.length() > 2;
-		} else
-			return false;
-	}
-	
+		
 	/**
 	 * 检索当前对象所有的setter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -227,15 +207,16 @@ public class BeanUtils {
 	 */
 	public static <T> List<Method> findAllSetter(T bean) {
 		List<Method> methods = ReflectionUtils.getDeclaredMethods(bean);
-		if (CollectionUtils.isNotEmpty(methods)) {
-			List<Method> setters = CollectionUtils.newArrayList();
-			for (Method method : methods) {
-				if (isSetter(method))
-					setters.add(method);
-			}
-			return setters;
+		if (CollectionUtils.isEmpty(methods))
+			return null;
+		
+		List<Method> setters = CollectionUtils.newArrayList();
+		for (Method method : methods) {
+			if (ReflectionUtils.isSetter(method))
+				setters.add(method);
 		}
-		return null;
+		
+		return setters;
 	}
 	
 	/**
@@ -246,38 +227,18 @@ public class BeanUtils {
 	 */
 	public static <T> List<String> findAllSetterName(T bean) {
 		List<Method> methods = ReflectionUtils.getDeclaredMethods(bean);
-		if (CollectionUtils.isNotEmpty(methods)) {
-			List<String> setterNames = CollectionUtils.newArrayList();
-			String name;
-			for (Method method : methods) {
-				// 没有判断返回类型是否为void，允许setter方法有返回类型
-				if (ArrayUtils.length(method.getParameterTypes()) == 1 && 
-						(name = method.getName()).startsWith("set") && name.length() > 3) 
-					setterNames.add(name);
-			}
-			return setterNames;
-		}
-		return null;
-	}
-	
-	/**
-	 * 判断是否为一个Getter方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param method
-	 * @return
-	 */
-	private static boolean isSetter(Method method) {
-		/* Setter方法要求如下：
-		 * 1.方法中有且只有一个参数
-		 * 2.方法名称以"set"前缀开头
-		 * 3.方法名称长度大于3 */
-		if (ArrayUtils.length(method.getParameterTypes()) == 1) {
-			String name = method.getName();
-			return name.startsWith(SETTER_PREFIX) && name.length() > 3;
-		} else
-			return false;
-	}
+		if (CollectionUtils.isEmpty(methods))
+			return null;
 		
+		List<String> setterNames = CollectionUtils.newArrayList();
+		for (Method method : methods) {
+			if (ReflectionUtils.isSetter(method))
+				setterNames.add(method.getName());
+		}
+		
+		return setterNames;
+	}
+			
 	/**
 	 * 获取非boolean类型属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -515,17 +476,16 @@ public class BeanUtils {
 	 * @return
 	 */
 	private static String propertyNameByGetter(Method method, String[] excludesName) {
-		if (isGetter(method)) {
-			String name = method.getName();
-			String propertyName = StringUtils.afterPrefix(name, GETTER_PREFIX);
-			if (StringUtils.isEmpty(propertyName))
-				propertyName = StringUtils.afterPrefix(name, BOOLEAN_GETTER_PREFIX);
-			
-			propertyName = StringUtils.uncapitalize(propertyName);
-			return !ArrayUtils.contains(excludesName, propertyName) ? propertyName : null;
-		}
+		if (!ReflectionUtils.isGetter(method))
+			return null;
 		
-		return null;
+		String name = method.getName();
+		String propertyName = StringUtils.afterPrefix(name, GETTER_PREFIX);
+		if (StringUtils.isEmpty(propertyName))
+			propertyName = StringUtils.afterPrefix(name, BOOLEAN_GETTER_PREFIX);
+
+		propertyName = StringUtils.uncapitalize(propertyName);
+		return !ArrayUtils.contains(excludesName, propertyName) ? propertyName : null;
 	}
 	
 }
