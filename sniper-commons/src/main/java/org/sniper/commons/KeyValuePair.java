@@ -81,7 +81,9 @@ public class KeyValuePair<K, V> implements Serializable {
 	
 	@Override
 	public String toString() {
-		return key + StringUtils.ASSIGNMENT + value;
+		return String.format("{\"key\":%s,\"value\":%s}",
+				key instanceof CharSequence ? StringUtils.appendDoubleQuotes(key.toString()) : key,
+				value instanceof CharSequence ? StringUtils.appendDoubleQuotes(value.toString()) : value);
 	}
 		
 }

@@ -20,18 +20,18 @@ package org.sniper.test.domain;
 
 import java.io.Serializable;
 
-import org.sniper.test.annotation.Cacheable;
-import org.sniper.test.annotation.LoginName;
-import org.sniper.test.annotation.UserName;
+import org.sniper.test.annotation.Testable;
 
-@Cacheable
+@Testable
 public abstract class Person implements Serializable {
 	
 	private static final long serialVersionUID = 4679194880575434699L;
 	
-	@LoginName
-	@UserName
+	@Testable
 	protected String name;
+	
+	@Deprecated
+	protected String userName = "tester";
 	
 	public Person() {}
 	
@@ -39,13 +39,24 @@ public abstract class Person implements Serializable {
 		this.name = name;
 	}
 
-	@UserName
+	@Testable
 	public String getName() {
 		return name;
 	}
 
+	@Testable
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Deprecated
+	public String getUserName() {
+		return userName;
+	}
+
+	@Deprecated
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 		
 }

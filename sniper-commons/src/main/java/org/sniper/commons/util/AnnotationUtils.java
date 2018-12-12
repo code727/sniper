@@ -24,6 +24,12 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
+import org.sniper.commons.KeyValuePair;
+import org.sniper.commons.exception.NoSuchAnnotatedFieldException;
+import org.sniper.commons.exception.NoSuchAnnotatedGetterException;
+import org.sniper.commons.exception.NoSuchAnnotatedMethodException;
+import org.sniper.commons.exception.NoSuchAnnotatedSetterException;
+
 /**
  * 注解工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -237,7 +243,9 @@ public class AnnotationUtils {
 	}
 			
 	/**
-	 * 获取对象内被指定注解标识的域
+	 * 获取对象内被指定注解标识的域</P>
+	 * 注意：由于内部实现使用的getDeclaredFields方法并不一定是按照声明的顺序返回的。
+	 * 当同一个注解作用在当前对象的多个域上时，此方法多次执行后并不能保证每次返回的都是同一个域对象</P>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -265,17 +273,42 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * 获取对象内被指定注解标识的域值
+	 * 获取对象内被指定注解标识的域名称和相应的值</P>
+	 * 注意：由于内部实现使用的getAnnotatedField方法结果的不确定性，
+	 * 当同一个annotation作用在当前对象的多个域上时，此方法并不能保证每次获取到的值都来自于同一个目标域</P>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
 	 * @throws Exception 
 	 */
-	@SuppressWarnings("unchecked")
-	public static <A extends Annotation, V> V getAnnotatedFieldValue(Object obj, Class<A> annotationClass) throws Exception {
+	public static <A extends Annotation, V> KeyValuePair<String, V> getAnnotatedFieldValue(Object obj, Class<A> annotationClass) throws Exception {
 		Field annotatedField = getAnnotatedField(obj, annotationClass);
-		return (V) (annotatedField != null ? ReflectionUtils.getFieldValue(obj, annotatedField) : null);
+		if (annotatedField == null)
+			throw new NoSuchAnnotatedFieldException(obj, annotationClass);
+		
+		V value = ReflectionUtils.getAccessibleFieldValue(obj, annotatedField);
+		return new KeyValuePair<String, V>(annotatedField.getName(), value);
+	}
+	
+	/**
+	 * 设置对象内被指定注解标识的域值后返回被设置的域对象</P>
+	 * 注意：由于内部实现使用的getAnnotatedField方法结果的不确定性，
+	 * 当同一个annotation作用在当前对象的多个域上时，此方法并不能保证每次被设置的域都是同一个</P>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param annotationClass
+	 * @param value
+	 * @return
+	 * @throws Exception
+	 */
+	public static <A extends Annotation, V> Field setAnnotatedFieldValue(Object obj, Class<A> annotationClass, V value) throws Exception {
+		Field annotatedField = getAnnotatedField(obj, annotationClass);
+		if (annotatedField == null)
+			throw new NoSuchAnnotatedFieldException(obj, annotationClass);
+		
+		ReflectionUtils.setAccessibleFieldValue(obj, annotatedField, value);
+		return annotatedField;
 	}
 	
 	/**
@@ -336,7 +369,9 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * 获取对象内被指定注解标识的方法
+	 * 获取对象内被指定注解标识的方法</P>
+	 * 注意：由于内部实现使用的getDeclaredMethods方法并不一定是按照声明的顺序返回的。
+	 * 当同一个注解作用在当前对象的多个方法上时，此方法多次执行后并不能保证每次返回的都是同一个方法对象</P>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -394,7 +429,9 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * 查找对象内被指定注解标识的getter方法
+	 * 查找对象内被指定注解标识的getter方法</P>
+	 * 注意：由于内部实现使用的getDeclaredMethods方法并不一定是按照声明的顺序返回的。
+	 * 当同一个注解作用在当前对象的多个方法上时，此方法多次执行后并不能保证每次返回的都是同一个方法对象</P>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -451,7 +488,9 @@ public class AnnotationUtils {
 	}
 	
 	/**
-	 * 查找对象内被指定注解标识的setter方法
+	 * 查找对象内被指定注解标识的setter方法</P>
+	 * 注意：由于内部实现使用的getDeclaredMethods方法并不一定是按照声明的顺序返回的。
+	 * 当同一个注解作用在当前对象的多个方法上时，此方法多次执行后并不能保证每次返回的都是同一个方法对象</P>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -462,8 +501,9 @@ public class AnnotationUtils {
 		if (annotationClass == null || (currentType = ClassUtils.getCurrentType(obj)) == null)
 			return null;
 		
+		Method[] declaredMethods;
 		do {
-			Method[] declaredMethods = currentType.getDeclaredMethods();
+			declaredMethods = currentType.getDeclaredMethods();
 			if (ArrayUtils.isNotEmpty(declaredMethods)) {
 				for (Method method : declaredMethods) {
 					if (annotatedSetter(method, annotationClass))
@@ -478,19 +518,23 @@ public class AnnotationUtils {
 	}
 		
 	/**
-	 * 调用对象内被指定注解标识的无参方法后返回执行结果
+	 * 调用对象内被指定注解标识的无参方法后返回被调方法名称和执行结果</P>
+	 * 注意：由于内部实现使用的getAnnotatedMethod方法结果的不确定性，
+	 * 当同一个annotation作用在当前对象的多个方法上时，此方法并不能保证每次都调用的是同一个目标方法。</P>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
 	 * @throws Exception 
 	 */
-	public static <A extends Annotation, V> V invokeAnnotatedMethod(Object obj, Class<A> annotationClass) throws Exception {
+	public static <A extends Annotation, V> KeyValuePair<String, V> invokeAnnotatedMethod(Object obj, Class<A> annotationClass) throws Exception {
 		return invokeAnnotatedMethod(obj, annotationClass, null);
 	}
 	
 	/**
-	 * 调用对象内被指定注解标识的方法后返回执行结果
+	 * 调用对象内被指定注解标识的方法后返回被调方法名称和执行结果</P>
+	 * 注意：由于内部实现使用的getAnnotatedMethod方法结果的不确定性，
+	 * 当同一个annotation作用在当前对象的多个方法上时，此方法并不能保证每次都调用的是同一个目标方法</P>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -499,16 +543,20 @@ public class AnnotationUtils {
 	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	public static <A extends Annotation, V> V invokeAnnotatedMethod(Object obj, Class<A> annotationClass, Object[] pValues) throws Exception {
+	public static <A extends Annotation, V> KeyValuePair<String, V> invokeAnnotatedMethod(Object obj, Class<A> annotationClass, Object[] pValues) throws Exception {
 		Method annotatedMethod = getAnnotatedMethod(obj, annotationClass);
-		if (annotatedMethod == null) 
-			return null;
+		if (annotatedMethod == null)
+			throw new NoSuchAnnotatedMethodException(obj, annotationClass);
 		
-		return (V) ReflectionUtils.invokeAccessibleMethod(obj, annotatedMethod, annotatedMethod.getParameterTypes(), pValues);
+		V value = (V) ReflectionUtils.invokeAccessibleMethod(obj, 
+				annotatedMethod, annotatedMethod.getParameterTypes(), pValues);
+		return new KeyValuePair<String, V>(annotatedMethod.getName(), value);
 	}
 	
 	/**
-	 * 调用对象内被指定注解标识的getter方法后返回执行结果
+	 * 调用对象内被指定注解标识的getter方法后返回被调方法名称和执行结果</P>
+	 * 注意：由于内部实现使用的findAnnotatedGetter方法结果的不确定性，
+	 * 当同一个annotation作用在当前对象的多个Getter方法上时，此方法并不能保证每次都调用的是同一个目标方法。</P>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
@@ -516,28 +564,32 @@ public class AnnotationUtils {
 	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	public static <A extends Annotation, V> V invokeAnnotatedGetter(Object obj, Class<A> annotationClass) throws Exception {
+	public static <A extends Annotation, V> KeyValuePair<String, V> invokeAnnotatedGetter(Object obj, Class<A> annotationClass) throws Exception {
 		Method annotatedGetter = findAnnotatedGetter(obj, annotationClass);
 		if (annotatedGetter == null) 
-			return null;
+			throw new NoSuchAnnotatedGetterException(obj, annotationClass);
 		
-		return (V) ReflectionUtils.invokeAccessibleMethod(obj, annotatedGetter, null, null);
+		V value = (V) ReflectionUtils.invokeAccessibleMethod(obj, annotatedGetter, null, null);
+		return new KeyValuePair<String, V>(annotatedGetter.getName(), value);
 	}
 	
 	/**
-	 * 调用对象内被指定注解标识的setter方法
+	 * 调用对象内被指定注解标识的setter方法返回被调方法对象</P>
+	 * 注意：由于内部实现使用的findAnnotatedSetter方法结果的不确定性，
+	 * 当同一个annotation作用在当前对象的多个Setter方法上时，此方法并不能保证每次都调用的是同一个目标方法。</P>
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @param annotationClass
 	 * @param pValue
 	 * @throws Exception 
 	 */
-	public static <A extends Annotation, V> void invokeAnnotatedSetter(Object obj, Class<A> annotationClass, V pValue) throws Exception {
+	public static <A extends Annotation, V> Method invokeAnnotatedSetter(Object obj, Class<A> annotationClass, V pValue) throws Exception {
 		Method annotatedSetter = findAnnotatedSetter(obj, annotationClass);
 		if (annotatedSetter == null)
-			return;
+			throw new NoSuchAnnotatedSetterException(obj, annotationClass);
 		
-		ReflectionUtils.invokeAccessibleMethod(obj, annotatedSetter, null, new Object[] { pValue });
+		ReflectionUtils.invokeAccessibleMethod(obj, annotatedSetter, annotatedSetter.getParameterTypes(), new Object[]{pValue});
+		return annotatedSetter;
 	}
 	
 	/**

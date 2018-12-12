@@ -23,6 +23,7 @@ import java.util.Collection;
 
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.commons.util.RegexUtils;
 
 /**
  * JDK原生消息格式化处理器实现类
@@ -32,16 +33,19 @@ import org.sniper.commons.util.CollectionUtils;
 public class JdkMessageFormatter implements MessageFormatter<Object> {
 	
 	@Override
+	public boolean support(String message, Object param) {
+		return RegexUtils.hasMessageFormatPlaceholder(message);
+	}
+	
+	@Override
 	public String format(String message, Object param) {
-		if (ArrayUtils.isArray(param)) {
+		if (ArrayUtils.isArray(param)) 
 			return MessageFormat.format(message, (Object[]) param);
-		}
 		
-		if (CollectionUtils.isCollection(param)) {
+		if (CollectionUtils.isCollection(param)) 
 			return MessageFormat.format(message, CollectionUtils.toObjectArray((Collection<?>) param));
-		}
 		
 		return param != null ? MessageFormat.format(message, param) : message;
 	}
-		
+			
 }

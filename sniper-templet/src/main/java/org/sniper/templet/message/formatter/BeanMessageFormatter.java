@@ -32,10 +32,11 @@ import org.sniper.commons.util.StringUtils;
  */
 public class BeanMessageFormatter extends PlaceholderMessageFormatter<Object> {
 	
-	private BeanReflector beanReflector;
+	private final BeanReflector beanReflector = new DefaultBeanReflector();
 		
-	public BeanMessageFormatter() {
-		this.beanReflector = new DefaultBeanReflector();
+	@Override
+	public boolean support(String message, Object param) {
+		return true;
 	}
 			
 	@Override
@@ -57,5 +58,5 @@ public class BeanMessageFormatter extends PlaceholderMessageFormatter<Object> {
 		
 		return message;
 	}
-	
+
 }

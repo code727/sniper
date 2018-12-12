@@ -19,6 +19,7 @@
 package org.sniper.commons.test;
 
 import org.junit.Test;
+import org.sniper.commons.constant.expression.Regex;
 import org.sniper.commons.util.RegexUtils;
 import org.sniper.test.junit.BaseTestCase;
 
@@ -37,7 +38,7 @@ public class RegexUtilsTest extends BaseTestCase {
 		System.out.println("-----------------  原文    -----------------");
 		System.out.println(test);
 		System.out.println("-----------------  新文    -----------------");
-		System.out.println(RegexUtils.matchesAppend(test, RegexUtils.REGEX.get("url"), "<url>", "</url>"));
+		System.out.println(RegexUtils.matchesAppend(test, Regex.URL.getValue(), "<url>", "</url>"));
 	}
 
 }

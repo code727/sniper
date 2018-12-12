@@ -25,13 +25,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 登录名注释
+ * 测试注释
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-@Target(value = { ElementType.FIELD, ElementType.METHOD })
+@Target(value = {ElementType.TYPE, ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface LoginName {
+//@Inherited // 标注了此注解的类的子类可以继承此注解,调用子类的getAnnotations方法可以获得
+public @interface Testable {
 
 }

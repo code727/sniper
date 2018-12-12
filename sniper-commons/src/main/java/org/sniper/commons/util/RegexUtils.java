@@ -18,12 +18,12 @@
 
 package org.sniper.commons.util;
 
-import java.text.MessageFormat;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.sniper.commons.constant.expression.Regex;
 
 /**
  * 正则工具类
@@ -32,30 +32,9 @@ import java.util.regex.Pattern;
  */
 public class RegexUtils {
 	
-	public static final Map<String, String> REGEX;
-	
-	/** 表达式与模式关系映射集线程局部变量 */
-	private static final ThreadLocal<Map<String, Pattern>> PATTERNS = new ThreadLocal<Map<String, Pattern>>();
-	
-	static {
-		REGEX = new HashMap<String, String>();
-		REGEX.put("integer", "[+|-]?\\d+");
-		REGEX.put("decimal", "[+|-]?(\\d+\\.\\d+)");
-		REGEX.put("number",  "[+|-]?(\\d+((\\.\\d+)|d*))");
-		REGEX.put("ipv4",  "(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}");
-		REGEX.put("ipv6",  "((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)::((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)");
-		REGEX.put("email", "[\\w[.-]]+@[\\w[.-]]+\\.[\\w]+");
-		REGEX.put("mobile", "[1][3578]\\d{9}");
-		REGEX.put("ascii", "[\u0000-\u007E]+");
-		REGEX.put("double_byte", "[^\u0000-\u007E]+");
-		REGEX.put("chinese", "[\u4E00-\u9FA5]+");
-		REGEX.put("urlQueryString", "(\\w*=[^&]*&)*\\w*=\\w*");
-		REGEX.put("url", "((h|H)(t|T)(t|T)(p|P)(s|S)?(://)|(w|W){3}[.]|(f|F)(t|T)(p|P)(://)+){1}(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*((:\\d+)?)(/(\\w+(-\\w+)*))*(\\.?(\\w)*)(\\?)?(((\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*(\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*)*(\\w*)*)");
+	/** 表达式与模式关系映射集 */
+	private static final Map<String, Pattern> PATTERNS = MapUtils.newConcurrentHashMap();
 		
-		// java.text.MessageFormat所默认支持的占位符表达式
-		REGEX.put(MessageFormat.class.getName(), "(\\{\\d+\\})");
-	}
-	
 	private RegexUtils() {}
 	
 	/**
@@ -65,17 +44,15 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static Pattern getPattern(String regex) {
-		Map<String, Pattern> patternMap = PATTERNS.get();
-		if (patternMap == null) {
-			patternMap = MapUtils.newConcurrentHashMap();
-		}
+		Pattern pattern = PATTERNS.get(regex);
 		
-		Pattern pattern = patternMap.get(regex);
 		if (pattern == null) {
-			pattern = Pattern.compile(regex);
-			// 编译通过后存储此模式
-			patternMap.put(regex, pattern);
-			PATTERNS.set(patternMap);
+			synchronized (PATTERNS) {
+				if ((pattern = PATTERNS.get(regex)) == null) {
+					pattern = Pattern.compile(regex);
+					PATTERNS.put(regex, pattern);
+				}
+			}
 		}
 		
 		return pattern;
@@ -127,7 +104,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isInteger(String str) {
-		return is(str, REGEX.get("integer"));
+		return is(str, Regex.INTEGER.getValue());
 	}
 	
 	/**
@@ -137,9 +114,9 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasInteger(String str) {
-		return has(str, REGEX.get("integer"));
+		return has(str, Regex.INTEGER.getValue());
 	}
-	
+		
 	/**
 	 * 判断字符串是否为小数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -147,7 +124,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isDecimal(String str) {
-		return is(str, REGEX.get("decimal"));
+		return is(str, Regex.DECIMAL.getValue());
 	}
 	
 	/**
@@ -157,7 +134,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasDecimal(String str) {
-		return has(str, REGEX.get("decimal"));
+		return has(str, Regex.DECIMAL.getValue());
 	}
 	
 	/**
@@ -167,7 +144,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isNumber(String str) {
-		return is(str, REGEX.get("number"));
+		return is(str, Regex.NUMBER.getValue());
 	}
 	
 	/**
@@ -177,7 +154,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasNumber(String str) {
-		return has(str, REGEX.get("number"));
+		return has(str, Regex.NUMBER.getValue());
 	}
 	
 	/**
@@ -187,7 +164,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isIPV4(String str) {
-		return is(str, REGEX.get("ipv4"));
+		return is(str, Regex.IPV4.getValue());
 	}
 	
 	/**
@@ -197,7 +174,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasIPV4(String str) {
-		return has(str, REGEX.get("ipv4"));
+		return has(str, Regex.IPV4.getValue());
 	}
 	
 	/**
@@ -207,7 +184,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isIPV6(String str) {
-		return is(str, REGEX.get("ipv6"));
+		return is(str, Regex.IPV6.getValue());
 	}
 	
 	/**
@@ -217,7 +194,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasIPV6(String str) {
-		return has(str, REGEX.get("ipv6"));
+		return has(str, Regex.IPV6.getValue());
 	}
 	
 	/**
@@ -227,7 +204,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isEmail(String str) {
-		return is(str, REGEX.get("email"));
+		return is(str, Regex.EMAIL.getValue());
 	}
 	
 	/**
@@ -237,57 +214,37 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasEmail(String str) {
-		return has(str, REGEX.get("email"));
+		return has(str, Regex.EMAIL.getValue());
 	}
 	
 	/**
-	 * 判断字符串是否为手机号
+	 * 判断字符串是否为移动电话号码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
 	 */
 	public static boolean isMobile(String str) {
-		return is(str, REGEX.get("mobile"));
+		return is(str, Regex.MOBILE.getValue());
 	}
 	
 	/**
-	 * 判断字符串中是否有手机号
+	 * 判断字符串中是否有移动电话号码
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
 	 */
 	public static boolean hasMobile(String str) {
-		return has(str, REGEX.get("mobile"));
+		return has(str, Regex.MOBILE.getValue());
 	}
 	
 	/**
-	 * 判断是否为URL查询字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param str
-	 * @return
-	 */
-	public static boolean isURLQueryString(String str) {
-		return is(str, REGEX.get("urlQueryString"));
-	}
-	
-	/**
-	 * 判断字符串中是否有URL查询字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param str
-	 * @return
-	 */
-	public static boolean hasURLQueryString(String str) {
-		return has(str, REGEX.get("urlQueryString"));
-	}
-	
-	/**
-	 * 判断字符串是否全为ASCII字符组成
+	 * 判断字符串是否全由ASCII字符组成
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
 	 */
 	public static boolean isAscii(String str) {
-		return is(str, REGEX.get("ascii"));
+		return is(str, Regex.ASCII.getValue());
 	}
 	
 	/**
@@ -297,37 +254,17 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasAscii(String str) {
-		return has(str, REGEX.get("ascii"));
-	}
-		
-	/**
-	 * 判断字符串是否全为中文组成
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param str
-	 * @return
-	 */
-	public static boolean isChinese(String str) {
-		return is(str, REGEX.get("chinese"));
+		return has(str, Regex.ASCII.getValue());
 	}
 	
 	/**
-	 * 判断字符串是否有中文字符
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param str
-	 * @return
-	 */
-	public static boolean hasChinese(String str) {
-		return has(str, REGEX.get("chinese"));
-	}
-	
-	/**
-	 * 判断字符串是否为非ASCII的双字节字符
+	 * 判断字符串是否全由非ASCII的双字节字符组成
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @return
 	 */
 	public static boolean isDoubleByte(String str) {
-		return is(str, REGEX.get("double_byte"));
+		return is(str, Regex.DOUBLE_BYTE.getValue());
 	}
 	
 	/**
@@ -337,7 +274,47 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasDoubleByte(String str) {
-		return has(str, REGEX.get("double_byte"));
+		return has(str, Regex.DOUBLE_BYTE.getValue());
+	}
+		
+	/**
+	 * 判断字符串是否全由中文字符组成
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isChinese(String str) {
+		return is(str, Regex.CHINESE.getValue());
+	}
+	
+	/**
+	 * 判断字符串是否有中文字符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasChinese(String str) {
+		return has(str, Regex.CHINESE.getValue());
+	}
+	
+	/**
+	 * 判断是否为URL查询字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isURLQueryString(String str) {
+		return is(str, Regex.URL_QUERY_STRING.getValue());
+	}
+	
+	/**
+	 * 判断字符串中是否有URL查询字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasURLQueryString(String str) {
+		return has(str, Regex.URL_QUERY_STRING.getValue());
 	}
 	
 	/**
@@ -347,7 +324,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isURL(String str) {
-		return is(str, REGEX.get("url"));
+		return is(str, Regex.URL.getValue());
 	}
 	
 	/**
@@ -357,9 +334,49 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasURL(String str) {
-		return has(str, REGEX.get("url"));
+		return has(str, Regex.URL.getValue());
 	}
 	
+	/**
+	 * 判断字符串是否为java.text.MessageFormat默认支持的占位符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isMessageFormatPlaceholder(String str) {
+		return is(str, Regex.MESSAGE_FORMAT_PLACEHOLDER.getValue());
+	}
+	
+	/**
+	 * 判断字符串是否包含java.text.MessageFormat默认支持的占位符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasMessageFormatPlaceholder(String str) {
+		return has(str, Regex.MESSAGE_FORMAT_PLACEHOLDER.getValue());
+	}
+	
+	/**
+	 * 判断字符串是否为默认支持的格式化占位符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isStringFormatPlaceholder(String str) {
+		return is(str, Regex.STRING_FORMAT_PLACEHOLDER.getValue());
+	}
+	
+	/**
+	 * 判断字符串是否包含默认支持的格式化占位符
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasStringFormatPlaceholder(String str) {
+		return has(str, Regex.STRING_FORMAT_PLACEHOLDER.getValue());
+	}
+		
 	/**
 	 * 从源字符串中提取匹配表达式的子串集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -437,8 +454,10 @@ public class RegexUtils {
 	public static int matchCount(String str, String regex) {
 		Matcher matcher = createMatcher(str, regex);
 		int count = 0;
-		while (matcher.find()) 
+		
+		while (matcher.find()) {
 			count++;
+		}
 		
 		return count;
 	}

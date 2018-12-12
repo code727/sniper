@@ -21,7 +21,7 @@ package org.sniper.test.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.sniper.test.annotation.LoginName;
+import org.sniper.test.annotation.Testable;
 
 /**
  * 用户测试对象
@@ -36,7 +36,7 @@ public class User extends Person implements Cloneable {
 	
 	private Long id;
 	
-	@LoginName
+	@Testable
 	private String loginName;
 	
 	private String password = DEFAULT_PASSWORD;
@@ -58,7 +58,7 @@ public class User extends Person implements Cloneable {
 	private Date createTime;
 	
 	private Date updateTime;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -67,11 +67,12 @@ public class User extends Person implements Cloneable {
 		this.id = id;
 	}
 
-	@LoginName
+	@Testable
 	public String getLoginName() {
 		return loginName;
 	}
 
+	@Testable
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
@@ -100,10 +101,12 @@ public class User extends Person implements Cloneable {
 		this.age = age;
 	}
 
+	@Testable
 	public boolean isMarried() {
 		return married;
 	}
-
+	
+	@Testable
 	public void setMarried(boolean married) {
 		this.married = married;
 	}
@@ -157,6 +160,7 @@ public class User extends Person implements Cloneable {
 	}
 
 	@Override
+	@Testable
 	public User clone() {  
         try {
 			return (User) super.clone();

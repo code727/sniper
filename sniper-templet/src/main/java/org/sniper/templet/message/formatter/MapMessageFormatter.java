@@ -31,14 +31,22 @@ import org.sniper.commons.util.StringUtils;
  * @version 1.0
  */
 public class MapMessageFormatter<V> extends PlaceholderMessageFormatter<Map<String, V>> {
+
+	@Override
+	public boolean support(String message, Object param) {
+		return param instanceof Map;
+	}
 	
 	@Override
 	public String format(String message, Map<String, V> param) {
+		
 		if (MapUtils.isNotEmpty(param)) {
 			Iterator<Entry<String, V>> iterator = param.entrySet().iterator();
 			StringBuilder mark = new StringBuilder();
+			Entry<String, V> nameValuePair;
+			
 			while (iterator.hasNext()) {
-				Entry<String, V> nameValuePair = iterator.next();
+				nameValuePair = iterator.next();
 				mark.setLength(0);
 				mark.append(this.getPrefix()).append(nameValuePair.getKey()).append(this.getSuffix());
 				message = StringUtils.replaceAll(message, mark.toString(), StringUtils.toString(nameValuePair.getValue())); 
@@ -47,5 +55,6 @@ public class MapMessageFormatter<V> extends PlaceholderMessageFormatter<Map<Stri
 		
 		return message;
 	}
+
 	
 }

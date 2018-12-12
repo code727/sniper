@@ -1107,8 +1107,9 @@ public class StringUtils {
 		} else {
 			/* 替换成length个子串 */
 			int length = str.length();
-			for (int i = 0; i < length; i++)
+			for (int i = 0; i < length; i++) {
 				result.append(subStr);
+			}
 		}
 		return result.toString();
 	}

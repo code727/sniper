@@ -24,6 +24,15 @@ package org.sniper.templet.message.formatter;
  * @version 1.0
  */
 public interface MessageFormatter<T> {
+	
+	/**
+	 * 判断当前消息格式化处理器是否能对指定的消息和参数进行处理
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param message
+	 * @param param
+	 * @return
+	 */
+	public boolean support(String message, Object param);
 		
 	/**
 	 * 参数消息格式化

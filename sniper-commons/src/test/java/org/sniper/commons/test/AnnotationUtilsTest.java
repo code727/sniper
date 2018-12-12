@@ -20,15 +20,15 @@ package org.sniper.commons.test;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.sniper.commons.KeyValuePair;
 import org.sniper.commons.util.AnnotationUtils;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.test.annotation.Cacheable;
-import org.sniper.test.annotation.LoginName;
-import org.sniper.test.annotation.UserName;
+import org.sniper.test.annotation.Testable;
 import org.sniper.test.domain.User;
 import org.sniper.test.junit.BaseTestCase;
 
@@ -48,56 +48,129 @@ public class AnnotationUtilsTest extends BaseTestCase {
 		this.user.setLoginName("daniele");
 	}
 	
-	@Test
+//	@Test
 	public void testGetAnnotations() {
 		List<Annotation> annotations = AnnotationUtils.getAnnotations(User.class);
 		assertTrue(CollectionUtils.isNotEmpty(annotations));
 		System.out.println(annotations);
 	}
 	
-	@Test
+//	@Test
 	public void testGetAnnotation() {
-		Annotation annotation = AnnotationUtils.getAnnotation(User.class, Cacheable.class);
+		Annotation annotation = AnnotationUtils.getAnnotation(User.class, Testable.class);
 		assertNotNull(annotation);
 		System.out.println(annotation);
 	}
 	
-	@Test
+//	@Test
 	public void testAnnotated() {
 		assertTrue(AnnotationUtils.annotated(User.class));
-		assertTrue(AnnotationUtils.annotated(User.class, Cacheable.class));
+		assertTrue(AnnotationUtils.annotated(User.class, Testable.class));
 		assertFalse(AnnotationUtils.annotated(User.class, Deprecated.class));
 	}
 	
-	@Test
+//	@Test
 	public void testGetAnnotatedFields() {
 		List<Field> annotatedFields = AnnotationUtils.getAnnotatedFields(User.class);
 		assertTrue(CollectionUtils.isNotEmpty(annotatedFields));
 		System.out.println(annotatedFields);
 		
-		annotatedFields = AnnotationUtils.getAnnotatedFields(User.class, LoginName.class);
+		annotatedFields = AnnotationUtils.getAnnotatedFields(User.class, Testable.class);
 		assertTrue(CollectionUtils.isNotEmpty(annotatedFields));
 		System.out.println(annotatedFields);
 		
-		annotatedFields = AnnotationUtils.getAnnotatedFields(User.class, UserName.class);
+		annotatedFields = AnnotationUtils.getAnnotatedFields(User.class, Testable.class);
 		assertTrue(CollectionUtils.isNotEmpty(annotatedFields));
 		System.out.println(annotatedFields);
 	}
 	
-	@Test
+//	@Test
 	public void testGetAnnotatedField() {
-		System.out.println(AnnotationUtils.getAnnotatedField(User.class, LoginName.class));
+		Field field = AnnotationUtils.getAnnotatedField(User.class, Testable.class);
+		assertNotNull(field);
+		System.out.println(field);
 	}
 	
 	@Test
+	public void testSetAnnotatedFieldValue() throws Exception {
+		Field field = AnnotationUtils.setAnnotatedFieldValue(this.user, Testable.class, "daniele");
+		assertNotNull(field);
+		System.out.println(field);
+	}
+	
+	@Test
+	public void testGetAnnotatedFieldValue() throws Exception {
+		KeyValuePair<String, Object> result = AnnotationUtils.getAnnotatedFieldValue(this.user, Testable.class);
+		assertNotNull(result);
+		System.out.println(result);
+	}
+	
+//	@Test
 	public void testGetAnnotatedMethods() {
-		System.out.println(AnnotationUtils.getAnnotatedMethods(User.class));
-		System.out.println(AnnotationUtils.getAnnotatedMethods(User.class, LoginName.class));
+		List<Method> methods = AnnotationUtils.getAnnotatedMethods(User.class);
+		assertTrue(CollectionUtils.isNotEmpty(methods));
+		System.out.println(methods);
+		
+		methods = AnnotationUtils.getAnnotatedMethods(User.class, Testable.class);
+		assertTrue(CollectionUtils.isNotEmpty(methods));
+		System.out.println(AnnotationUtils.getAnnotatedMethods(User.class, Testable.class));
 	}
 	
-	@Test
+//	@Test
 	public void testGetAnnotatedMethod() {
-		System.out.println(AnnotationUtils.getAnnotatedMethod(User.class, LoginName.class));
+		Method method = AnnotationUtils.getAnnotatedMethod(User.class, Testable.class);
+		assertNotNull(method);
+		System.out.println(method);
+	}
+	
+//	@Test
+	public void testFindAnnotatedGetters() {
+		List<Method> getters = AnnotationUtils.findAnnotatedGetters(User.class, Testable.class);
+		assertTrue(CollectionUtils.isNotEmpty(getters));
+		System.out.println(getters);
+	}
+	
+//	@Test
+	public void testFindAnnotatedGetter() {
+		Method getter = AnnotationUtils.findAnnotatedGetter(User.class, Testable.class);
+		assertNotNull(getter);
+		System.out.println(getter);
+	}
+	
+//	@Test
+	public void testFindAnnotatedSetters() {
+		List<Method> setters = AnnotationUtils.findAnnotatedSetters(User.class, Testable.class);
+		assertTrue(CollectionUtils.isNotEmpty(setters));
+		System.out.println(setters);
+	}
+	
+//	@Test
+	public void testFindAnnotatedSetter() {
+		Method setter = AnnotationUtils.findAnnotatedSetter(User.class, Testable.class);
+		assertNotNull(setter);
+		System.out.println(setter);
+	}
+	
+//	@Test
+	public void testInvokeAnnotatedMethod() throws Exception {
+		KeyValuePair<String, Object> result = AnnotationUtils.invokeAnnotatedMethod(this.user, Testable.class);
+		assertNotNull(result);
+		System.out.println(result);
+	}
+	
+//	@Test
+	public void testInvokeAnnotatedSetter() throws Exception {
+		String value = "daniele";
+		Method setter = AnnotationUtils.invokeAnnotatedSetter(this.user, Testable.class, value);
+		assertNotNull(setter);
+		System.out.println(setter);
+	}
+	
+//	@Test
+	public void testInvokeAnnotatedGetter() throws Exception { 
+		KeyValuePair<String, Object> result = AnnotationUtils.invokeAnnotatedGetter(this.user, Testable.class);
+		assertNotNull(result);
+		System.out.println(result);
 	}
 		
 }

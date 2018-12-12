@@ -26,10 +26,10 @@ package org.sniper.templet.message.formatter;
  */
 public abstract class PlaceholderMessageFormatter<T> implements MessageFormatter<T> {
 	
-	/** 参数化文本标识前缀 */
+	/** 占位符标识前缀 */
 	private String prefix = "{";
 	
-	/** 参数化文本标识后缀 */
+	/** 占位符标识后缀 */
 	private String suffix = "}";
 		
 	public String getPrefix() {

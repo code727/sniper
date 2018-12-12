@@ -608,6 +608,37 @@ public class ReflectionUtils {
 	}
 	
 	/**
+	 * 获取指定对象某个被强制设置为可访问的属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param object
+	 * @param field
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	static <V> V getAccessibleFieldValue(Object object, Field field) throws Exception {
+		if (!field.isAccessible())
+			field.setAccessible(true);
+		
+		return (V) field.get(object);
+	}
+	
+	/**
+	 * 设置指定对象某个被强制设置为可访问的属性值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param object
+	 * @param field
+	 * @param value
+	 * @throws Exception
+	 */
+	static void setAccessibleFieldValue(Object object, Field field, Object value) throws Exception {
+		if (!field.isAccessible())
+			field.setAccessible(true);
+		
+		field.set(object, value);
+	}
+	
+	/**
 	 * 选择性获取对象内的构造方法列表</P>
 	 * 1.declared==true，获取所有已声明的构造方法</P>
 	 * 2.declared==false，只获取所有公有的构造方法</P>
@@ -886,37 +917,6 @@ public class ReflectionUtils {
 		}
 		
 		return null;
-	}
-	
-	/**
-	 * 获取指定对象某个被强制设置为可访问的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param object
-	 * @param field
-	 * @return
-	 * @throws Exception
-	 */
-	@SuppressWarnings("unchecked")
-	private static <V> V getAccessibleFieldValue(Object object, Field field) throws Exception {
-		if (!field.isAccessible())
-			field.setAccessible(true);
-		
-		return (V) field.get(object);
-	}
-	
-	/**
-	 * 设置指定对象某个被强制设置为可访问的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param object
-	 * @param field
-	 * @param value
-	 * @throws Exception
-	 */
-	private static void setAccessibleFieldValue(Object object, Field field, Object value) throws Exception {
-		if (!field.isAccessible())
-			field.setAccessible(true);
-		
-		field.set(object, value);
 	}
 	
 	/**

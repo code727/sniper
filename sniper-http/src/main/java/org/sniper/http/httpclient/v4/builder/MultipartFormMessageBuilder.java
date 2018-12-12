@@ -57,7 +57,7 @@ public class MultipartFormMessageBuilder extends AbstractHttpClientMessageBuilde
 		if (CollectionUtils.isNotEmpty(multipartBodyHandlers))
 			this.multipartBodyHandlers = multipartBodyHandlers;
 		else {
-			this.multipartBodyHandlers = CollectionUtils.newArrayList();
+			this.multipartBodyHandlers = CollectionUtils.newArrayList(8);
 			this.multipartBodyHandlers.add(new FileMultipartBodyHandler());
 			this.multipartBodyHandlers.add(new InputStreamMultipartBodyHandler());
 			this.multipartBodyHandlers.add(new ApacheFileItemMultipartBodyHandler());

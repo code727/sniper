@@ -78,9 +78,8 @@ public class DateUtils {
 	 * @return
 	 */
 	public static SimpleDateFormat getDateFormat(String pattern) {
-		if (StringUtils.isBlank(pattern)) {
+		if (StringUtils.isBlank(pattern)) 
 			pattern = DatePattern.DATETIME.getKey();
-		}
 		
 		SimpleDateFormat dateFormat = DATE_FORMATES.get(pattern);
 		if (dateFormat == null) {
