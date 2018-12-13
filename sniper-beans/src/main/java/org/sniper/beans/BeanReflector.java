@@ -28,81 +28,80 @@ import java.util.Map;
 public interface BeanReflector {
 	
 	/**
-	 * 获取指定对象中表达式所指向的最后一个属性对应的getter方法名称
+	 * 获取对象内指定属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
-	 * @param expression
+	 * @param propertyName
 	 * @return
 	 */
-	public String getterName(Object bean, String expression);
+	public String getterName(Object bean, String propertyName);
 	
 	/**
-	 * 获取指定对象中表达式所指向的最后一个属性对应的setter方法名称
+	 * 获取对象内指定属性对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
-	 * @param expression
+	 * @param propertyName
 	 * @return
 	 */
-	public String setterName(Object bean, String expression);
+	public String setterName(Object bean, String propertyName);
 	
 	/**
-	 * 获取指定对象中表达式所指向的最后一个属性对应的setter方法名称
+	 * 获取对象内指定属性和参数类型对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
-	 * @param expression
+	 * @param propertyName
 	 * @param parameterType setter方法参数类型
 	 * @return
 	 */
-	public String setterName(Object bean, String expression, Class<?> parameterType);
+	public String setterName(Object bean, String propertyName, Class<?> parameterType);
 	
 	/**
-	 * 获取指定对象中表达式所指向的最后一个属性对应的值
+	 * 获取对象内指定的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
-	 * @param expression
+	 * @param propertyName
 	 * @return
 	 * @throws Exception
 	 */
-	public Object get(Object bean, String expression) throws Exception;
+	public Object get(Object bean, String propertyName) throws Exception;
 	
 	/**
-	 * 设置指定对象中表达式所指向的最后一个属性对应的值
+	 * 设置对象内指定的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
-	 * @param expression
+	 * @param propertyName
 	 * @param parameterValue
 	 */
-	public void set(Object bean, String expression, Object parameterValue) throws Exception;
+	public void set(Object bean, String propertyName, Object parameterValue) throws Exception;
 	
 	/**
-	 * 设置指定对象中表达式所指向的最后一个属性对应的值
+	 * 设置对象内指定的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
-	 * @param expression
+	 * @param propertyName
 	 * @param parameterType
 	 * @param parameterValue
 	 */
-	public void set(Object bean, String expression, Class<?> parameterType, Object parameterValue) throws Exception;
+	public void set(Object bean, String propertyName, Class<?> parameterType, Object parameterValue) throws Exception;
 	
 	/**
-	 * 调用全限定名对应类的构造函数创建Bean实例，
-	 * 				并调用各表达式所指向的最后一个属性对应的setter方法赋值
+	 * 调用全限定名对应类的构造函数创建Bean实例，并在创建时设置Bean实例的各个属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param className
-	 * @param expressionValues
+	 * @param properties 
 	 * @return
 	 * @throws Exception
 	 */
-	public <T, V> T create(String className, Map<String, V> expressionValues) throws Exception;
+	public <T, V> T create(String className, Map<String, V> properties) throws Exception;
 	
 	/**
-	 * 创建Bean实例，并调用各表达式所指向的最后一个属性对应的setter方法赋值
+	 * 创建Bean实例，并在创建时设置Bean实例的各个属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
-	 * @param expressionValues
+	 * @param properties
 	 * @return
 	 * @throws Exception
 	 */
-	public <T, V> T create(Class<T> clazz, Map<String, V> expressionValues) throws Exception;
+	public <T, V> T create(Class<T> clazz, Map<String, V> properties) throws Exception;
 	
 }
