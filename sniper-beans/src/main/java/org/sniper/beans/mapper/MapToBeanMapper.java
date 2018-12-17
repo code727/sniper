@@ -57,7 +57,7 @@ public class MapToBeanMapper<V> extends AbstractBeanMapper<Map<String, V>> {
 				/* 完成规则外的映射 */
 				for (String mappedName : autoMappedNames) {
 					System.out.println(mappedName);
-					BeanUtils.set(mappedBean, mappedName, source.get(mappedName));
+					BeanUtils.setPropertyValue(mappedBean, mappedName, source.get(mappedName));
 				}
 			} else {
 				for (MapperRule rule : mapperRules) {
@@ -69,7 +69,7 @@ public class MapToBeanMapper<V> extends AbstractBeanMapper<Map<String, V>> {
 			Iterator<Entry<String, V>> iterator = source.entrySet().iterator();
 			while (iterator.hasNext()) {
 				Entry<String, V> entry = iterator.next();
-				BeanUtils.set(mappedBean, entry.getKey(), entry.getValue());
+				BeanUtils.setPropertyValue(mappedBean, entry.getKey(), entry.getValue());
 			}
 		}
 		return mappedBean;
@@ -88,9 +88,9 @@ public class MapToBeanMapper<V> extends AbstractBeanMapper<Map<String, V>> {
 		if (propertyEditor != null) {
 //			propertyEditor.setValue(source.get(rule.getOriginalName()));
 			propertyEditor.setAsText(ObjectUtils.toString(source.get(rule.getOriginalName())));
-			BeanUtils.set(mappedBean, rule.getMappedName(), propertyEditor.getValue());
+			BeanUtils.setPropertyValue(mappedBean, rule.getMappedName(), propertyEditor.getValue());
 		} else {
-			BeanUtils.set(mappedBean, rule.getMappedName(), source.get(rule.getOriginalName()));
+			BeanUtils.setPropertyValue(mappedBean, rule.getMappedName(), source.get(rule.getOriginalName()));
 		}
 	}
 	

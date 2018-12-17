@@ -31,6 +31,8 @@ public class Department implements Serializable {
 	
 	private Long id;
 	
+	private String name;
+	
 	private Company company;
 	
 	public Long getId() {
@@ -41,6 +43,14 @@ public class Department implements Serializable {
 		this.id = id;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Company getCompany() {
 		return company;
 	}

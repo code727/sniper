@@ -22,6 +22,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
+import org.sniper.beans.reflector.BeanReflector;
+import org.sniper.beans.reflector.DefaultBeanReflector;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.ClassUtils;
@@ -33,7 +35,7 @@ import org.sniper.commons.util.StringUtils;
 /**
  * JAVA Bean工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
- * @version 1.0, 2014-12-9
+ * @version 1.0
  */
 public class BeanUtils {
 	
@@ -42,11 +44,11 @@ public class BeanUtils {
 	/**
 	 * 检索当前对象所有的getter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @return
 	 */
-	public static <T> List<Method> findGetters(T bean) {
-		Class<?> currentType = ClassUtils.getCurrentType(bean);
+	public static List<Method> findGetters(Object obj) {
+		Class<?> currentType = ClassUtils.getCurrentType(obj);
 		if (currentType == null)
 			return null;
 		
@@ -70,11 +72,11 @@ public class BeanUtils {
 	/**
 	 * 检索当前对象所有的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @return
 	 */
-	public static <T> List<String> findGetterNames(T bean) {
-		Class<?> currentType = ClassUtils.getCurrentType(bean);
+	public static List<String> findGetterNames(Object obj) {
+		Class<?> currentType = ClassUtils.getCurrentType(obj);
 		if (currentType == null)
 			return null;
 		
@@ -98,13 +100,13 @@ public class BeanUtils {
 	/**
 	 * 检索成员属性对应的getter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean bean对象或class类型
+	 * @param obj bean对象或class类型
 	 * @param propertyName 属性名称
 	 * @return
 	 */
-	public static <T> Method findGetter(T bean, String propertyName) {
+	public static Method findGetter(Object obj, String propertyName) {
 		Class<?> currentType;
-		if (StringUtils.isBlank(propertyName) || (currentType = ClassUtils.getCurrentType(bean)) == null)
+		if (StringUtils.isBlank(propertyName) || (currentType = ClassUtils.getCurrentType(obj)) == null)
 			return null;
 		
 		String getterName = buildGetterName(propertyName);
@@ -128,23 +130,23 @@ public class BeanUtils {
 	/**
 	 * 检索成员属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @return
 	 */
-	public static <T> String findGetterName(T bean, String propertyName) {
-		Method getter = findGetter(bean, propertyName);
+	public static String findGetterName(Object obj, String propertyName) {
+		Method getter = findGetter(obj, propertyName);
 		return getter != null ? getter.getName() : null;
 	}
 	
 	/**
 	 * 检索当前对象所有的setter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @return
 	 */
-	public static <T> List<Method> findSetters(T bean) {
-		Class<?> currentType = ClassUtils.getCurrentType(bean);
+	public static List<Method> findSetters(Object obj) {
+		Class<?> currentType = ClassUtils.getCurrentType(obj);
 		if (currentType == null)
 			return null;
 		
@@ -168,11 +170,11 @@ public class BeanUtils {
 	/**
 	 * 检索当前对象所有的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @return
 	 */
-	public static <T> List<String> findSetterNames(T bean) {
-		Class<?> currentType = ClassUtils.getCurrentType(bean);
+	public static List<String> findSetterNames(Object obj) {
+		Class<?> currentType = ClassUtils.getCurrentType(obj);
 		if (currentType == null)
 			return null;
 		
@@ -196,25 +198,25 @@ public class BeanUtils {
 	/**
 	 * 检索成员属性对应的setter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @return
 	 */
-	public static <T> Method findSetter(T bean, String propertyName) {
-		return findSetter(bean, propertyName, null);
+	public static Method findSetter(Object obj, String propertyName) {
+		return findSetter(obj, propertyName, null);
 	}
 	
 	/**
 	 * 检索成员属性对应的setter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param bean bean对象或class类型
 	 * @param propertyName 属性名称
 	 * @param parameterType 方法参数类型
 	 * @return
 	 */
-	public static <T> Method findSetter(T bean, String propertyName, Class<?> parameterType) {
+	public static Method findSetter(Object obj, String propertyName, Class<?> parameterType) {
 		Class<?> currentType;
-		if (StringUtils.isBlank(propertyName) || (currentType = ClassUtils.getCurrentType(bean)) == null)
+		if (StringUtils.isBlank(propertyName) || (currentType = ClassUtils.getCurrentType(obj)) == null)
 			return null;
 		
 		String setterName = buildSetterName(propertyName);
@@ -248,95 +250,95 @@ public class BeanUtils {
 	/**
 	 * 检索成员属性对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @return
 	 */
-	public static <T> String findSetterName(T bean, String propertyName) {
-		return findSetterName(bean, propertyName, null);
+	public static String findSetterName(Object obj, String propertyName) {
+		return findSetterName(obj, propertyName, null);
 	}
 	
 	/**
 	 * 检索成员属性对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @param parameterType
 	 * @return
 	 */
-	public static <T> String findSetterName(T bean, String propertyName, Class<?> parameterType) {
-		Method setter = findSetter(bean, propertyName, parameterType);
+	public static <T> String findSetterName(Object obj, String propertyName, Class<?> parameterType) {
+		Method setter = findSetter(obj, propertyName, parameterType);
 		return setter != null ? setter.getName() : null;
 	}
 	
 	/**
-	 * 获取当前Bean对象属性对应的getter方法名称
+	 * 检索嵌套成员属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @param propertyName 属性名
 	 * @return
 	 */
-	public static <T> String getterName(T bean, String propertyName) {
-		return beanReflector.getterName(bean, propertyName);
+	public static <T> String findNestedGetterName(Object obj, String propertyName) {
+		return beanReflector.findGetterName(obj, propertyName);
 	}
 	
 	/**
-	 * 获取当前Bean对象属性对应的setter方法名称
+	 * 检索嵌套成员属性对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @param propertyName 属性名
 	 * @return
 	 */
-	public static <T> String setterName(T bean, String propertyName) {
-		return setterName(bean, propertyName, null);
+	public static String findNestedSetterName(Object obj, String propertyName) {
+		return findNestedSetterName(obj, propertyName, null);
 	}
 	
 	/**
-	 * 获取当前Bean对象属性对应的具有指定类型的setter方法名称
+	 * 检索嵌套成员属性对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
-	 * @param propertyName  属性名
+	 * @param obj bean对象或class类型
+	 * @param propertyName 属性名
 	 * @param parameterType 方法的参数类型
 	 * @return
 	 */
-	public static <T> String setterName(T bean, String propertyName, Class<?> parameterType) {
-		return beanReflector.setterName(bean, propertyName, parameterType);
+	public static String findNestedSetterName(Object obj, String propertyName, Class<?> parameterType) {
+		return beanReflector.findSetterName(obj, propertyName, parameterType);
 	}
 	
 	/**
 	 * 获取当前Bean对象属性的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param bean bean对象
 	 * @param propertyName 属性名
 	 * @return
 	 * @throws Exception 
 	 */
-	public static <T> Object get(T bean, String propertyName) throws Exception {
-		return beanReflector.get(bean, propertyName);
+	public static <V> V getPropertyValue(Object bean, String propertyName) throws Exception {
+		return beanReflector.getPropertyValue(bean, propertyName);
 	}
 		
 	/**
 	 * 设置当前Bean对象属性的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param bean bean对象
 	 * @param propertyName 属性名
 	 * @param parameterValue 参数值
 	 * @throws Exception 
 	 */
-	public static <T> void set(T bean, String propertyName, Object parameterValue) throws Exception {
-		set(bean, propertyName, null, parameterValue);
+	public static void setPropertyValue(Object bean, String propertyName, Object parameterValue) throws Exception {
+		setPropertyValue(bean, propertyName, null, parameterValue);
 	}
 	
 	/**
 	 * 调用当前Bean对象属性的setter方法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param bean bean对象
 	 * @param parameterType 方法的参数类型
 	 * @param parameterValue 参数值
 	 * @throws Exception 
 	 */
-	public static <T> void set(T bean, String propertyName, Class<?> parameterType, Object parameterValue) throws Exception {
-		beanReflector.set(bean, propertyName, parameterType, parameterValue);
+	public static void setPropertyValue(Object bean, String propertyName, Class<?> parameterType, Object parameterValue) throws Exception {
+		beanReflector.setPropertyValue(bean, propertyName, parameterType, parameterValue);
 	}
 	
 	/**
@@ -374,7 +376,7 @@ public class BeanUtils {
 	 * @throws Exception
 	 */
 	public static <T> T create(Class<T> clazz) throws Exception {
-		return create(clazz, ( Map<String, Object>) null);
+		return create(clazz, (Map<String, Object>) null);
 	}
 	
 	/**

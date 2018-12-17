@@ -388,7 +388,7 @@ public class ReflectionUtils {
 	public static <V> V getFieldValue(Object object, String fieldName) throws Exception {
 		Field field = getDeclaredField(object, fieldName);
 		if (field == null) 
-			throw new NoSuchFieldException(buildNoSuchFieldExceptionMessage(object, fieldName));
+			throwNoSuchFieldException(object, fieldName);
 			
 		return getAccessibleFieldValue(object, field);
 	}
@@ -419,7 +419,7 @@ public class ReflectionUtils {
 	public static void setFieldValue(Object object, String fieldName, Object value) throws Exception {
 		Field field = getDeclaredField(object, fieldName);
 		if (field == null) 
-			throw new NoSuchFieldException(buildNoSuchFieldExceptionMessage(object, fieldName));
+			throwNoSuchFieldException(object, fieldName);
 					
 		setAccessibleFieldValue(object, field, value);
 	}
@@ -572,13 +572,25 @@ public class ReflectionUtils {
 		
 		Method method = getDeclaredMethod(target, methodName, pTypes);
 		if (method == null)
-			throw new NoSuchMethodException(buildNoSuchMethodExceptionMessage(target, methodName, pTypes));
+			throwNoSuchMethodException(target, methodName, pTypes);
 		
 		return invokeAccessibleMethod(target, method, pTypes, pValues);
 	}
 	
 	/**
-	 * 调用目标对象某个被强制设置为可访问的方法后返回调用结果
+	 * 调用目标对象无参方法后返回执行结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param target
+	 * @param method
+	 * @return
+	 * @throws Exception
+	 */
+	public static Object invokeMethod(Object target, Method method) throws Exception {
+		return invokeMethod(target, method, null, null);
+	}
+	
+	/**
+	 * 调用目标对象方法后返回执行结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param target
 	 * @param method
@@ -587,24 +599,11 @@ public class ReflectionUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	static Object invokeAccessibleMethod(Object target, Method method, Class<?>[] pTypes, Object[] pValues) throws Exception {
-		if (!method.isAccessible())
-			method.setAccessible(true);
+	public static Object invokeMethod(Object target, Method method, Class<?>[] pTypes, Object[] pValues) throws Exception {
+		AssertUtils.assertNotNull(target, "Target object must not be null");
+		AssertUtils.assertNotNull(method, "Target method must not be null");
 		
-		// 参数类型或值列表为空时，则调用无参方法
-		if (ArrayUtils.isEmpty(pTypes) || ArrayUtils.isEmpty(pValues))
-			return method.invoke(target);
-
-		int typeCount = pTypes.length;
-		int valueCount = pValues.length;
-		if (typeCount < valueCount) {
-			/* 实际的类型个数小于值列表个数时，则忽略多余的参数值 */
-			Object[] values = new Object[typeCount];
-			System.arraycopy(pValues, 0, values, 0, typeCount);
-			return method.invoke(target, values);
-		}
-		
-		return method.invoke(target, pValues);
+		return invokeAccessibleMethod(target, method, pTypes, pValues);
 	}
 	
 	/**
@@ -636,6 +635,36 @@ public class ReflectionUtils {
 			field.setAccessible(true);
 		
 		field.set(object, value);
+	}
+	
+	/**
+	 * 调用目标对象某个被强制设置为可访问的方法后返回调用结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param target
+	 * @param method
+	 * @param pTypes
+	 * @param pValues
+	 * @return
+	 * @throws Exception
+	 */
+	static Object invokeAccessibleMethod(Object target, Method method, Class<?>[] pTypes, Object[] pValues) throws Exception {
+		if (!method.isAccessible())
+			method.setAccessible(true);
+		
+		// 参数类型或值列表为空时，则调用无参方法
+		if (ArrayUtils.isEmpty(pTypes) || ArrayUtils.isEmpty(pValues))
+			return method.invoke(target);
+
+		int typeCount = pTypes.length;
+		int valueCount = pValues.length;
+		if (typeCount < valueCount) {
+			/* 实际的类型个数小于值列表个数时，则忽略多余的参数值 */
+			Object[] values = new Object[typeCount];
+			System.arraycopy(pValues, 0, values, 0, typeCount);
+			return method.invoke(target, values);
+		}
+		
+		return method.invoke(target, pValues);
 	}
 	
 	/**
@@ -782,7 +811,6 @@ public class ReflectionUtils {
 		if (StringUtils.isBlank(methodName) || (currentType = ClassUtils.getCurrentType(object)) == null)
 			return null;
 		
-		methodName = methodName.trim();
 		if (declared) {
 			do {
 				try {
@@ -897,7 +925,6 @@ public class ReflectionUtils {
 		if (StringUtils.isBlank(fieldName) || (currentType = ClassUtils.getCurrentType(object)) == null)
 			return null;
 		
-		fieldName = fieldName.trim();
 		if (declared) {
 			do {
 				try {
@@ -920,48 +947,45 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * 根据指定对象和域名称构建NoSuchFieldException消息
+	 * 根据指定对象和域名称抛出NoSuchFieldException
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
 	 * @param fieldName
-	 * @return
+	 * @throws NoSuchFieldException
 	 */
-	private static String buildNoSuchFieldExceptionMessage(Object object, String fieldName) {
-		Class<?> currentType = ClassUtils.getCurrentType(object);
-		return String.format("{\"currentType\":%s,\"fieldName\":%s}", 
-				(currentType != null ? StringUtils.appendDoubleQuotes(currentType.getName()) : currentType), 
-				(fieldName != null ? StringUtils.appendDoubleQuotes(fieldName) : fieldName));
+	private static void throwNoSuchFieldException(Object object, String fieldName) throws NoSuchFieldException {
+		throw new NoSuchFieldException(String.format(
+				"No such field '%s' on class '%s'", fieldName, ClassUtils.getCurrentType(object)));
 	}
 	
 	/**
-	 * 根据指定对象、方法名称和参数类型构建NoSuchMethodException消息
+	 * 根据指定对象、方法名称和参数类型抛出NoSuchMethodException
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param object
-	 * @param pTypes 
-	 * @param fieldName
-	 * @return
+	 * @param methodName
+	 * @param pTypes
+	 * @throws NoSuchMethodException
 	 */
-	private static String buildNoSuchMethodExceptionMessage(Object object, String methodName, Class<?>[] pTypes) {
-		Class<?> currentType = ClassUtils.getCurrentType(object);
-		
-		String pTypesMessage = "[]";
+	private static void throwNoSuchMethodException(Object object, String methodName, Class<?>[] pTypes) throws NoSuchMethodException {
 		if (ArrayUtils.isNotEmpty(pTypes)) {
+			StringBuilder typesMessage = new StringBuilder();
+			
+			Class<?> type;
 			int max = pTypes.length - 1;
-			Class<?> type; 
-			StringBuilder builder = new StringBuilder();
 			for (int i = 0; i < max; i++) {
 				type = pTypes[i];
-				builder.append(type != null ? StringUtils.appendDoubleQuotes(type.getName()) : type).append(StringUtils.COMMA);
+				typesMessage.append(type != null ? type.getName() : type).append(StringUtils.COMMA);
 			}
 			
 			type = pTypes[max];
-			builder.append(type != null ? StringUtils.appendDoubleQuotes(type.getName()) : type);
-			pTypesMessage = StringUtils.append(builder.toString(), "[", "]").toString();
+			typesMessage.append(type != null ? type.getName() : type);
+			
+			throw new NoSuchMethodException(String.format(
+					"No such method '%s(%s)' on class '%s'", methodName, typesMessage, ClassUtils.getCurrentType(object)));
 		}
 		
-		return String.format("{\"currentType\":%s,\"methodName\":%s,\"parameterTypes\":%s}", 
-				(currentType != null ? StringUtils.appendDoubleQuotes(currentType.getName()) : currentType), 
-				(methodName != null ? StringUtils.appendDoubleQuotes(methodName) : methodName), pTypesMessage);
+		throw new NoSuchMethodException(String.format(
+				"No such method '%s()' on class '%s'", methodName, ClassUtils.getCurrentType(object)));
 	}
 		
 }

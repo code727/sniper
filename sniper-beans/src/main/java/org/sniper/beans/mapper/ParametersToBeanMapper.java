@@ -54,7 +54,7 @@ public class ParametersToBeanMapper<V> extends AbstractBeanMapper<Parameters<Str
 				
 				/* 完成规则外的映射 */
 				for (String mappedName : autoMappedNames) {
-					BeanUtils.set(mappedBean, mappedName, parameters.getValue(mappedName));
+					BeanUtils.setPropertyValue(mappedBean, mappedName, parameters.getValue(mappedName));
 				}
 			} else {
 				for (MapperRule rule : mapperRules) {
@@ -65,7 +65,7 @@ public class ParametersToBeanMapper<V> extends AbstractBeanMapper<Parameters<Str
 			/* 当规则集为空时，则将源对象中所有的参数映射到目标对象中 */
 			Set<String> names = parameters.getNames();
 			for (String name : names) {
-				BeanUtils.set(mappedBean, name, parameters.getValue(name));
+				BeanUtils.setPropertyValue(mappedBean, name, parameters.getValue(name));
 			}
 		}
 		
@@ -85,9 +85,9 @@ public class ParametersToBeanMapper<V> extends AbstractBeanMapper<Parameters<Str
 		if (propertyEditor != null) {
 //			propertyEditor.setValue(source.getValue(rule.getOriginalName()));
 			propertyEditor.setAsText(ObjectUtils.toString(source.getValue(rule.getOriginalName())));
-			BeanUtils.set(mappedBean, rule.getMappedName(), propertyEditor.getValue());
+			BeanUtils.setPropertyValue(mappedBean, rule.getMappedName(), propertyEditor.getValue());
 		} else {
-			BeanUtils.set(mappedBean, rule.getMappedName(), source.getValue(rule.getOriginalName()));
+			BeanUtils.setPropertyValue(mappedBean, rule.getMappedName(), source.getValue(rule.getOriginalName()));
 		}
 	}
 

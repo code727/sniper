@@ -20,8 +20,8 @@ package org.sniper.templet.message.formatter;
 
 import java.util.Set;
 
-import org.sniper.beans.BeanReflector;
-import org.sniper.beans.DefaultBeanReflector;
+import org.sniper.beans.reflector.BeanReflector;
+import org.sniper.beans.reflector.DefaultBeanReflector;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
 
@@ -50,7 +50,7 @@ public class BeanMessageFormatter extends PlaceholderMessageFormatter<Object> {
 					expression.setLength(0);
 					expression.append(this.getPrefix()).append(mark).append(this.getSuffix());
 					try {
-						message = StringUtils.replaceAll(message, expression.toString(),StringUtils.toString(this.beanReflector.get(bean, mark))); 
+						message = StringUtils.replaceAll(message, expression.toString(),StringUtils.toString(this.beanReflector.getPropertyValue(bean, mark))); 
 					} catch (Exception e) {} // 忽略异常继续处理
 				}
 			}

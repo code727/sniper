@@ -47,18 +47,18 @@ public class BeanToMapMapper<V> extends AbstractMapper<Object, Map<String, V>>  
 				List<String> autoMappedNames = BeanUtils.findAllPropertyNameByGetter(source);
 				
 				for (MapperRule rule : mapperRules) {
-					result.put(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
+					result.put(rule.getMappedName(), (V) BeanUtils.getPropertyValue(source, rule.getOriginalName()));
 					// 删除已完成映射的属性名称
 					autoMappedNames.remove(rule.getOriginalName());
 				}
 					
 				/* 完成规则外的映射 */
 				for (String mappedName : autoMappedNames) 
-					result.put(mappedName, (V) BeanUtils.get(source, mappedName));
+					result.put(mappedName, (V) BeanUtils.getPropertyValue(source, mappedName));
 				
 			} else {
 				for (MapperRule rule : mapperRules) 
-					result.put(rule.getMappedName(), (V) BeanUtils.get(source, rule.getOriginalName()));
+					result.put(rule.getMappedName(), (V) BeanUtils.getPropertyValue(source, rule.getOriginalName()));
 			}
 		} else 
 			result.putAll((Map<String, V>) BeanUtils.create(source));

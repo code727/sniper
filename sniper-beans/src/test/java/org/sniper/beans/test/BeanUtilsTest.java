@@ -10,16 +10,17 @@ import java.util.List;
 
 import org.junit.Test;
 import org.sniper.beans.BeanUtils;
+import org.sniper.commons.exception.NestedNullPointerException;
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.test.domain.Department;
 import org.sniper.test.domain.User;
-import org.sniper.test.junit.BaseTestCase;
 
 /**
  * JAVA Bean工具测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0, 2015-2-26
  */
-public class BeanUtilsTest extends BaseTestCase {
+public class BeanUtilsTest extends AbstractBeanUtilsTest {
 	
 //	@Test
 	public void testFindGetters() {
@@ -97,26 +98,93 @@ public class BeanUtilsTest extends BaseTestCase {
 		System.out.println(setterName);
 	}
 	
-	@Test
-	public void testGetterName() {
-		String getterName = BeanUtils.getterName(User.class, "abc");
+//	@Test
+	public void testFindNestedGetterName() {
+		String getterName = BeanUtils.findNestedGetterName(User.class, "abc");
 		assertNull(getterName);
 		
-		getterName = BeanUtils.getterName(User.class, "loginName");
+		getterName = BeanUtils.findNestedGetterName(User.class, "loginName");
 		assertNotNull(getterName);
 		System.out.println(getterName);
 		
-		getterName = BeanUtils.getterName(User.class, "married");
+		getterName = BeanUtils.findNestedGetterName(User.class, "married");
 		assertNotNull(getterName);
 		System.out.println(getterName);
 		
-		getterName = BeanUtils.getterName(User.class, "department.company.name");
+		getterName = BeanUtils.findNestedGetterName(User.class, "boss.married");
 		assertNotNull(getterName);
 		System.out.println(getterName);
 		
-		getterName = BeanUtils.getterName(User.class, "boss.married");
+		getterName = BeanUtils.findNestedGetterName(User.class, "department.company.name");
 		assertNotNull(getterName);
 		System.out.println(getterName);
+	}
+		
+//	@Test
+	public void testFindNestedSetterName() {
+		String setterName = BeanUtils.findNestedSetterName(User.class, "abc");
+		assertNull(setterName);
+		
+		setterName = BeanUtils.findNestedSetterName(User.class, "loginName");
+		assertNotNull(setterName);
+		System.out.println(setterName);
+		
+		setterName = BeanUtils.findNestedSetterName(User.class, "married");
+		assertNotNull(setterName);
+		System.out.println(setterName);
+		
+		setterName = BeanUtils.findNestedSetterName(User.class, "boss.married");
+		assertNotNull(setterName);
+		System.out.println(setterName);
+		
+		setterName = BeanUtils.findNestedSetterName(User.class, "department.company.name");
+		assertNotNull(setterName);
+		System.out.println(setterName);
+	}
+	
+//	@Test
+	public void testGetPropertyValue() throws Exception {	
+		Object value = BeanUtils.getPropertyValue(this.user, "name");
+		assertNotNull(value);
+		System.out.println(value);
+		
+		value = BeanUtils.getPropertyValue(this.user, "boss.name");
+		assertNotNull(value);
+		System.out.println(value);
+		
+		value = BeanUtils.getPropertyValue(this.user, "boss.department");
+		assertNull(value);
+		
+		try {
+			value = BeanUtils.getPropertyValue(this.user, "boss.department.company");
+		} catch (Exception e) {
+			assertTrue(e instanceof NestedNullPointerException);
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSetPropertyValue() throws Exception {
+		Object value = BeanUtils.getPropertyValue(this.user, "boss.department");
+		assertNull(value);
+		
+		Department department = new Department();
+		BeanUtils.setPropertyValue(this.user, "boss.department", department);
+		value = BeanUtils.getPropertyValue(this.user, "boss.department");
+		assertEquals(department, value);
+		
+		department.setName("ODC");
+		BeanUtils.setPropertyValue(this.user, "boss.department.name", department.getName());
+		value = BeanUtils.getPropertyValue(this.user, "boss.department.name");
+		assertEquals(department.getName(), value);
+		
+		BeanUtils.setPropertyValue(this.user, "married", true);
+		value = BeanUtils.getPropertyValue(this.user, "married");
+		assertEquals(true, value);
+		
+		BeanUtils.setPropertyValue(this.user, "boss.married", true);
+		value = BeanUtils.getPropertyValue(this.user, "boss.married");
+		assertEquals(true, value);
 	}
 	
 //	@Test
@@ -147,5 +215,5 @@ public class BeanUtilsTest extends BaseTestCase {
 //		System.out.println(BeanUtils.create(User.class));
 //		System.out.println(BeanUtils.create(new User(), new String[] { "id" }));
 //	}
-
+	
 }

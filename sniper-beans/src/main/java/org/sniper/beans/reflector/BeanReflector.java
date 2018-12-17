@@ -16,7 +16,7 @@
  * Create Date : 2015-2-26
  */
 
-package org.sniper.beans;
+package org.sniper.beans.reflector;
 
 import java.util.Map;
 
@@ -28,32 +28,32 @@ import java.util.Map;
 public interface BeanReflector {
 	
 	/**
-	 * 获取对象内指定属性对应的getter方法名称
+	 * 检索对象内指定属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @return
 	 */
-	public String getterName(Object bean, String propertyName);
+	public String findGetterName(Object obj, String propertyName);
 	
 	/**
-	 * 获取对象内指定属性对应的setter方法名称
+	 * 检索对象内指定属性对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @return
 	 */
-	public String setterName(Object bean, String propertyName);
+	public String findSetterName(Object obj, String propertyName);
 	
 	/**
-	 * 获取对象内指定属性和参数类型对应的setter方法名称
+	 * 检索对象内指定属性和参数类型对应的setter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @param parameterType setter方法参数类型
 	 * @return
 	 */
-	public String setterName(Object bean, String propertyName, Class<?> parameterType);
+	public String findSetterName(Object obj, String propertyName, Class<?> parameterType);
 	
 	/**
 	 * 获取对象内指定的属性值
@@ -63,7 +63,7 @@ public interface BeanReflector {
 	 * @return
 	 * @throws Exception
 	 */
-	public Object get(Object bean, String propertyName) throws Exception;
+	public <V> V getPropertyValue(Object bean, String propertyName) throws Exception;
 	
 	/**
 	 * 设置对象内指定的属性值
@@ -72,7 +72,7 @@ public interface BeanReflector {
 	 * @param propertyName
 	 * @param parameterValue
 	 */
-	public void set(Object bean, String propertyName, Object parameterValue) throws Exception;
+	public void setPropertyValue(Object bean, String propertyName, Object parameterValue) throws Exception;
 	
 	/**
 	 * 设置对象内指定的属性值
@@ -82,7 +82,7 @@ public interface BeanReflector {
 	 * @param parameterType
 	 * @param parameterValue
 	 */
-	public void set(Object bean, String propertyName, Class<?> parameterType, Object parameterValue) throws Exception;
+	public void setPropertyValue(Object bean, String propertyName, Class<?> parameterType, Object parameterValue) throws Exception;
 	
 	/**
 	 * 调用全限定名对应类的构造函数创建Bean实例，并在创建时设置Bean实例的各个属性值

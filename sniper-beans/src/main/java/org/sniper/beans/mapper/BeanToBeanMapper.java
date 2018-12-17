@@ -53,7 +53,7 @@ public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
 				
 				/* 完成规则外的映射 */
 				for (String mappedName : autoMappedNames) {
-					BeanUtils.set(mappedBean, mappedName, BeanUtils.get(source, mappedName));
+					BeanUtils.setPropertyValue(mappedBean, mappedName, BeanUtils.getPropertyValue(source, mappedName));
 				}
 			} else {
 				for (MapperRule rule : mapperRules) {
@@ -63,7 +63,7 @@ public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
 		} else {
 			List<String> propertyNames = BeanUtils.findAllPropertyNameByGetter(mappedBean);
 			for (String propertyName : propertyNames) {
-				BeanUtils.set(mappedBean, propertyName, BeanUtils.get(source, propertyName));
+				BeanUtils.setPropertyValue(mappedBean, propertyName, BeanUtils.getPropertyValue(source, propertyName));
 			}
 		}
 		return mappedBean;
@@ -81,10 +81,10 @@ public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
 		PropertyEditor propertyEditor = rule.getPropertyEditor();
 		if (propertyEditor != null) {
 //			propertyEditor.setValue(BeanUtils.get(source, rule.getOriginalName()));
-			propertyEditor.setAsText(ObjectUtils.toString(BeanUtils.get(source, rule.getOriginalName())));
-			BeanUtils.set(mappedBean, rule.getMappedName(), propertyEditor.getValue());
+			propertyEditor.setAsText(ObjectUtils.toString(BeanUtils.getPropertyValue(source, rule.getOriginalName())));
+			BeanUtils.setPropertyValue(mappedBean, rule.getMappedName(), propertyEditor.getValue());
 		} else {
-			BeanUtils.set(mappedBean, rule.getMappedName(), BeanUtils.get(source, rule.getOriginalName()));
+			BeanUtils.setPropertyValue(mappedBean, rule.getMappedName(), BeanUtils.getPropertyValue(source, rule.getOriginalName()));
 		}
 	}
 

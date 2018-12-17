@@ -20,6 +20,7 @@ package org.sniper.test.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 
 import org.sniper.test.annotation.Testable;
 
@@ -54,6 +55,10 @@ public class User extends Person implements Cloneable {
 	private Department department;
 	
 	private User boss;
+	
+	private String[] keywords;
+	
+	private Map<String, Object> detail;
 	
 	private Date createTime;
 	
@@ -142,6 +147,22 @@ public class User extends Person implements Cloneable {
 	public void setBoss(User boss) {
 		this.boss = boss;
 	}
+	
+	public Map<String, Object> getDetail() {
+		return detail;
+	}
+
+	public void setDetail(Map<String, Object> detail) {
+		this.detail = detail;
+	}
+	
+	public String[] getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(String[] keywords) {
+		this.keywords = keywords;
+	}
 
 	public Date getCreateTime() {
 		return createTime;
@@ -158,7 +179,7 @@ public class User extends Person implements Cloneable {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-
+	
 	@Override
 	@Testable
 	public User clone() {  

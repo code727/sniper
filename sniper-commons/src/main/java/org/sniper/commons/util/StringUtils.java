@@ -79,6 +79,24 @@ public class StringUtils {
 	/** 类路径标志 */
 	public static final String CLASSPATH = "classpath:";
 	
+	/** 左括号 */
+	public static final String LEFT_PARENTHESES = "(";
+	
+	/** 右括号 */
+	public static final String RIGHT_PARENTHESES = ")";
+	
+	/** 左中括号 */
+	public static final String LEFT_BRACKET = "[";
+	
+	/** 右中括号 */
+	public static final String RIGHT_BRACKET = "]";
+	
+	/** 左大括号 */
+	public static final String LEFT_BRACE = "{";
+	
+	/** 右大括号 */
+	public static final String RIGHT_BRACE = "}";
+	
 	/** 通用匹配字符串 */
 	public static final String ANY = "*";
 	
@@ -481,16 +499,15 @@ public class StringUtils {
 		if (isBlank(str))
 			return str;
 
-		StringBuffer buf = new StringBuffer(str.length());
+		StringBuilder builder = new StringBuilder(str.length());
 		if (capitalize)
-			buf.append(Character.toUpperCase(str.charAt(0)));
+			builder.append(Character.toUpperCase(str.charAt(0)));
 		else
-			buf.append(Character.toLowerCase(str.charAt(0)));
+			builder.append(Character.toLowerCase(str.charAt(0)));
 
-		buf.append(str.substring(1));
-		return buf.toString();
+		return builder.append(str.substring(1)).toString();
 	}
-
+	
 	/**
 	 * 返回不为null的字符，null返回空字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
