@@ -272,6 +272,40 @@ public class BeanUtils {
 	}
 	
 	/**
+	 * 根据属性名称或对应的Getter方法检索出属性类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param memberName
+	 * @return
+	 */
+	public static Class<?> findPropertyTypeByNameOrGetter(Object obj, String propertyName) {
+		Class<?> propertyType = ReflectionUtils.getFieldType(obj, propertyName);
+		if (propertyType == null) {
+			Method getter = BeanUtils.findGetter(obj, propertyName);
+			return getter != null ? getter.getReturnType() : null;
+		}
+		
+		return propertyType;
+	}
+	
+	/**
+	 * 根据属性名称或对应的Setter方法检索出属性类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param propertyName
+	 * @return
+	 */
+	public static Class<?> findPropertyTypeByNameOrSetter(Object obj, String propertyName) {
+		Class<?> memberType = ReflectionUtils.getFieldType(obj, propertyName);
+		if (memberType == null) {
+			Method setter = BeanUtils.findSetter(obj, propertyName);
+			return setter != null ? setter.getParameterTypes()[0] : null;
+		}
+		
+		return memberType;
+	}
+	
+	/**
 	 * 检索嵌套成员属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj bean对象或class类型

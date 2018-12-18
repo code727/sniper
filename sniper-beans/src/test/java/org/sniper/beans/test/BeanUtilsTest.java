@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.sniper.beans.BeanUtils;
-import org.sniper.commons.exception.NestedNullPointerException;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.test.domain.Department;
 import org.sniper.test.domain.User;
@@ -21,6 +20,56 @@ import org.sniper.test.domain.User;
  * @version 1.0, 2015-2-26
  */
 public class BeanUtilsTest extends AbstractBeanUtilsTest {
+	
+	@Test
+	public void testGetPropertyValue() throws Exception {	
+		BeanUtils.setPropertyValue(this.user, "boss.detail(height)", 171);
+		
+		System.out.println(BeanUtils.getPropertyValue(this.user, "boss.detail.height"));
+		
+//		Object value = BeanUtils.getPropertyValue(this.user, "name");
+//		assertNotNull(value);
+//		System.out.println(value);
+//		
+//		value = BeanUtils.getPropertyValue(this.user, "boss.name");
+//		assertNotNull(value);
+//		System.out.println(value);
+//		
+//		value = BeanUtils.getPropertyValue(this.user, "boss.department");
+//		assertNull(value);
+//		
+//		try {
+//			value = BeanUtils.getPropertyValue(this.user, "boss.department.company");
+//		} catch (Exception e) {
+//			assertTrue(e instanceof NestedNullPointerException);
+//			System.out.println(e.getMessage());
+//		}
+		
+	}
+	
+//	@Test
+	public void testSetPropertyValue() throws Exception {
+		Object value = BeanUtils.getPropertyValue(this.user, "boss.department");
+		assertNull(value);
+		
+		Department department = new Department();
+		BeanUtils.setPropertyValue(this.user, "boss.department", department);
+		value = BeanUtils.getPropertyValue(this.user, "boss.department");
+		assertEquals(department, value);
+		
+		department.setName("ODC");
+		BeanUtils.setPropertyValue(this.user, "boss.department.name", department.getName());
+		value = BeanUtils.getPropertyValue(this.user, "boss.department.name");
+		assertEquals(department.getName(), value);
+		
+		BeanUtils.setPropertyValue(this.user, "married", true);
+		value = BeanUtils.getPropertyValue(this.user, "married");
+		assertEquals(true, value);
+		
+		BeanUtils.setPropertyValue(this.user, "boss.married", true);
+		value = BeanUtils.getPropertyValue(this.user, "boss.married");
+		assertEquals(true, value);
+	}
 	
 //	@Test
 	public void testFindGetters() {
@@ -140,51 +189,6 @@ public class BeanUtilsTest extends AbstractBeanUtilsTest {
 		setterName = BeanUtils.findNestedSetterName(User.class, "department.company.name");
 		assertNotNull(setterName);
 		System.out.println(setterName);
-	}
-	
-//	@Test
-	public void testGetPropertyValue() throws Exception {	
-		Object value = BeanUtils.getPropertyValue(this.user, "name");
-		assertNotNull(value);
-		System.out.println(value);
-		
-		value = BeanUtils.getPropertyValue(this.user, "boss.name");
-		assertNotNull(value);
-		System.out.println(value);
-		
-		value = BeanUtils.getPropertyValue(this.user, "boss.department");
-		assertNull(value);
-		
-		try {
-			value = BeanUtils.getPropertyValue(this.user, "boss.department.company");
-		} catch (Exception e) {
-			assertTrue(e instanceof NestedNullPointerException);
-			System.out.println(e.getMessage());
-		}
-	}
-	
-	@Test
-	public void testSetPropertyValue() throws Exception {
-		Object value = BeanUtils.getPropertyValue(this.user, "boss.department");
-		assertNull(value);
-		
-		Department department = new Department();
-		BeanUtils.setPropertyValue(this.user, "boss.department", department);
-		value = BeanUtils.getPropertyValue(this.user, "boss.department");
-		assertEquals(department, value);
-		
-		department.setName("ODC");
-		BeanUtils.setPropertyValue(this.user, "boss.department.name", department.getName());
-		value = BeanUtils.getPropertyValue(this.user, "boss.department.name");
-		assertEquals(department.getName(), value);
-		
-		BeanUtils.setPropertyValue(this.user, "married", true);
-		value = BeanUtils.getPropertyValue(this.user, "married");
-		assertEquals(true, value);
-		
-		BeanUtils.setPropertyValue(this.user, "boss.married", true);
-		value = BeanUtils.getPropertyValue(this.user, "boss.married");
-		assertEquals(true, value);
 	}
 	
 //	@Test

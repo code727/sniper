@@ -18,12 +18,16 @@
 
 package org.sniper.beans.expression;
 
+import org.sniper.commons.util.StringUtils;
+
 /**
  * 属性解析器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface PropertyParser {
+	
+	public static final String NESTED = StringUtils.POINT;
 	
 	/**
 	 * 从指定的表达式中判断出是否有嵌套属性

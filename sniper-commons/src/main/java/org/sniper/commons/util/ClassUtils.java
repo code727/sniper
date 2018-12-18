@@ -344,6 +344,26 @@ public class ClassUtils {
 	public static boolean isList(Object obj) {
 		return obj != null && isList(obj.getClass());
 	}
+	
+	/**
+	 * 判断是否为列表类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz
+	 * @return
+	 */
+	public static boolean isMap(Class<?> clazz) {
+		return clazz != null && Map.class.isAssignableFrom(clazz);
+	}
+	
+	/**
+	 * 判断是否为列表类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isMap(Object obj) {
+		return obj != null && isMap(obj.getClass());
+	}
 		
 	/**
 	 * 判断clazz1是否为clazz2的子类

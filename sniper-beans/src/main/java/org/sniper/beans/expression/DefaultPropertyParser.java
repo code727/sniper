@@ -27,14 +27,6 @@ import org.sniper.commons.util.StringUtils;
  */
 public class DefaultPropertyParser implements PropertyParser {
 	
-	public static final String NESTED = StringUtils.POINT;
-	
-	public static final String MAPPED_START = StringUtils.LEFT_PARENTHESES;
-	public static final String MAPPED_END = StringUtils.RIGHT_PARENTHESES;
-    
-	public static final String INDEXED_START = StringUtils.LEFT_BRACKET;
-	public static final String INDEXED_END   = StringUtils.RIGHT_BRACKET;
-
 	@Override
 	public boolean hasNested(String expression) {
 		return StringUtils.contains(expression, NESTED);
