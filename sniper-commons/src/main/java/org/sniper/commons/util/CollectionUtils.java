@@ -895,6 +895,30 @@ public class CollectionUtils {
 	}
 	
 	/**
+	 * 将指定索引位的值合并到列表中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param list
+	 * @param index
+	 * @param value
+	 */
+	public static <T> void merge(List<T> list, int index, T value) {
+		AssertUtils.assertNotNull(list, "Merged list must not be null");
+		if (index < 0) throw new ArrayIndexOutOfBoundsException(index);
+			
+		if (index < list.size())
+			list.set(index, value);
+		else {
+			int fillNullSize = index - list.size();
+			while (fillNullSize > 0) {
+				list.add(null);
+				fillNullSize--;
+			}
+				
+			list.add(value);
+		}
+	}
+		
+	/**
 	 * 按默认的逗号分隔符将集合中各元素连接成字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param collection
