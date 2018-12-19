@@ -228,19 +228,9 @@ public class ArrayUtils {
 	 * @return 数组长度，当参数为一个非数组对象时返回0
 	 */
 	public static int length(Object array) {
-		return isArray(array) ? Array.getLength(array) : 0;
+		return ClassUtils.isArray(array) ? Array.getLength(array) : 0;
 	}
-	
-	/**
-	 * 判断指定的对象是否为一数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @return
-	 */
-	public static boolean isArray(Object obj) {
-		return obj != null && obj.getClass().isArray();
-	}
-	
+		
 	/**
 	 * 将boolean[]数组转换为Boolean[]
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -810,7 +800,7 @@ public class ArrayUtils {
 	 */
 	private static Object[] convertWapperArray(Object baseTypeArray) {
 		Object[] array = null;
-		if (isArray(baseTypeArray)) {
+		if (ClassUtils.isArray(baseTypeArray)) {
 			Class<?> arrayComponentType = baseTypeArray.getClass().getComponentType();
 			if (ClassUtils.isBaseType(arrayComponentType)) {
 				if (arrayComponentType == Boolean.TYPE)
@@ -1658,13 +1648,15 @@ public class ArrayUtils {
 		
 		if (start < 0)
 			start = 0;
-		if (!isArray(element)) {
-			for (int i = start; i < array.length; i++)
-				if (ObjectUtils.equals(array[i], element))
-					return i;
-		} else
+		
+		if (ClassUtils.isArray(element))
 			return indexOf(array, convertWapperArray(element), start);
 		
+		for (int i = start; i < array.length; i++) {
+			if (ObjectUtils.equals(array[i], element)) 
+				return i;
+		}
+			
 		return -1;
 	}
 	
@@ -2522,12 +2514,14 @@ public class ArrayUtils {
 		if (start < 0)
 			start = 0;
 		
-		if (!isArray(element)) {
-			for (int i = (array.length - 1); i >= start; i--)
-				if (ObjectUtils.equals(array[i], element))
-					return i;
-		} else 
+		if (ClassUtils.isArray(element))
 			return lastIndexOf(array, convertWapperArray(element), start);
+		
+		for (int i = (array.length - 1); i >= start; i--) {
+			if (ObjectUtils.equals(array[i], element))
+				return i;
+		}
+			
 		
 		return -1;
 	}
@@ -3156,10 +3150,9 @@ public class ArrayUtils {
 		int index = indexOf(array, element);
 		if (index < 0)
 			return array;
-		if (!isArray(element))
-			return removeElement(remove(array, index), element);
-		else 
-			return removeSubArray(array, convertWapperArray(element));
+		
+		return ClassUtils.isArray(element) ? removeSubArray(array, convertWapperArray(element))
+				: removeElement(remove(array, index), element);
 	}
 	
 	/**
@@ -3775,5 +3768,5 @@ public class ArrayUtils {
 		
 		return array[index];
 	}
-	
+		
 }

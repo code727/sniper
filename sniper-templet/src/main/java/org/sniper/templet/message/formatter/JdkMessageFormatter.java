@@ -21,7 +21,7 @@ package org.sniper.templet.message.formatter;
 import java.text.MessageFormat;
 import java.util.Collection;
 
-import org.sniper.commons.util.ArrayUtils;
+import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.RegexUtils;
 
@@ -39,7 +39,7 @@ public class JdkMessageFormatter implements MessageFormatter<Object> {
 	
 	@Override
 	public String format(String message, Object param) {
-		if (ArrayUtils.isArray(param)) 
+		if (ClassUtils.isArray(param)) 
 			return MessageFormat.format(message, (Object[]) param);
 		
 		if (CollectionUtils.isCollection(param)) 

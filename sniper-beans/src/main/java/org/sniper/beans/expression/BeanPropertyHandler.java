@@ -18,9 +18,12 @@
 
 package org.sniper.beans.expression;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
+import java.security.Policy.Parameters;
 
 import org.sniper.beans.BeanUtils;
+import org.sniper.beans.parameter.DefaultParameters;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
@@ -32,6 +35,25 @@ import org.sniper.commons.util.ReflectionUtils;
  * @version 1.0
  */
 public class BeanPropertyHandler implements PropertyHandler<Object> {
+	
+	/** 构建数组时的长度 */
+	private int constructedArrayLength;
+	
+	public BeanPropertyHandler() {
+		this(-1);
+	}
+	
+	public BeanPropertyHandler(int constructedArrayLength) {
+		this.constructedArrayLength = constructedArrayLength;
+	}
+	
+	public int getConstructedArrayLength() {
+		return constructedArrayLength;
+	}
+
+	public void setConstructedArrayLength(int constructedArrayLength) {
+		this.constructedArrayLength = constructedArrayLength;
+	}
 
 	@Override
 	public boolean support(Object obj, String propertyName) {
@@ -55,7 +77,7 @@ public class BeanPropertyHandler implements PropertyHandler<Object> {
 			Class<?> propertyType = BeanUtils.findPropertyTypeByNameOrSetter(bean, propertyName);
 			propertyValue = constructPropertyValue(propertyType);
 			if (propertyValue != null) 
-				BeanUtils.setPropertyValue(bean, propertyName, propertyValue);
+				setPropertyValue(bean, propertyName, propertyType, propertyValue);
 		}
 			
 		return propertyValue;
@@ -64,9 +86,9 @@ public class BeanPropertyHandler implements PropertyHandler<Object> {
 	@Override
 	public void setPropertyValue(Object bean, String propertyName, Class<?> propertyType, Object propertyValue) throws Exception {
 		Method setter = BeanUtils.findSetter(bean, propertyName, propertyType);
-		if (setter != null)
+		if (setter != null) {
 			ReflectionUtils.invokeMethod(bean, setter, new Class<?>[] {propertyType}, new Object[] {propertyValue});
-		else
+		} else
 			ReflectionUtils.setFieldValue(bean, propertyName, propertyValue);	
 	}
 	
@@ -75,13 +97,20 @@ public class BeanPropertyHandler implements PropertyHandler<Object> {
 		if (ReflectionUtils.hasDeclaredConstructor(propertyType))
 			return (V) BeanUtils.create(propertyType);
 		
+		if (ClassUtils.contains(propertyType, Parameters.class))
+			return (V) new DefaultParameters<String, Object>();
+		
 		if (ClassUtils.isMap(propertyType))
 			return (V) MapUtils.newHashMap();
 		
-		if (ClassUtils.isCollection(propertyType) || ClassUtils.isList(propertyType))
+		if (ClassUtils.isList(propertyType))
 			return (V) CollectionUtils.newArrayList();
+				
+		if (ClassUtils.isArray(propertyType) && this.constructedArrayLength > -1)
+			return (V) Array.newInstance(propertyType.getComponentType(), this.constructedArrayLength);
 		
 		return null;
 	}
+	
 
 }

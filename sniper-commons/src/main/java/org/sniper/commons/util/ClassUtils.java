@@ -276,7 +276,7 @@ public class ClassUtils {
 	}
 				
 	/**
-	 * 判断指定的类型是否为一个接口
+	 * 判断是否为一个接口类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
@@ -286,47 +286,27 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * 判断是否为数组类型
+	 * 判断是否为一个数组类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
 	 */
-	public static boolean isArray(Class<?> clazz) {  
-	    return clazz != null && clazz.isArray();
-	}  
+	public static boolean isArray(Class<?> clazz) {
+		return clazz != null && clazz.isArray();
+	}
 	
 	/**
-	 * 判断是否为数组类型的对象
+	 * 判断是否为一个数组类型对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
 	 */
 	public static boolean isArray(Object obj) {
-		return obj != null && isArray(obj.getClass());
-	}
-		
-	/**
-	 * 判断是否为集合类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param clazz
-	 * @return
-	 */
-	public static boolean isCollection(Class<?> clazz) {
-		return clazz != null && Collection.class.isAssignableFrom(clazz);
+		return obj != null && obj.getClass().isArray();
 	}
 	
 	/**
-	 * 判断是否为集合类型的对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @return
-	 */
-	public static boolean isCollection(Object obj) {
-		return obj != null && isCollection(obj.getClass());
-	}
-	
-	/**
-	 * 判断是否为列表类型
+	 * 判断是否为一个列表类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
@@ -336,17 +316,37 @@ public class ClassUtils {
 	}
 		
 	/**
-	 * 判断是否为列表类型的对象
+	 * 判断是否为一个列表类型对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
 	 */
 	public static boolean isList(Object obj) {
-		return obj != null && isList(obj.getClass());
+		return obj != null && List.class.isAssignableFrom(obj.getClass());
+	}
+				
+	/**
+	 * 判断是否为为一个集合类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz
+	 * @return
+	 */
+	public static boolean isCollection(Class<?> clazz) {
+		return clazz != null && Collection.class.isAssignableFrom(clazz);
 	}
 	
 	/**
-	 * 判断是否为列表类型
+	 * 判断是否为一个集合类型对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isCollection(Object obj) {
+		return obj != null && Collection.class.isAssignableFrom(obj.getClass());
+	}
+	
+	/**
+	 * 判断是否为为一个Map类型
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param clazz
 	 * @return
@@ -356,27 +356,13 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * 判断是否为列表类型
+	 * 判断是否为为一个Map类型对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj
 	 * @return
 	 */
 	public static boolean isMap(Object obj) {
-		return obj != null && isMap(obj.getClass());
-	}
-		
-	/**
-	 * 判断clazz1是否为clazz2的子类
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param clazz1
-	 * @param clazz2
-	 * @return
-	 */
-	public static boolean isSubClass(Class<?> clazz1, Class<?> clazz2) {
-		if (clazz1 == null || clazz2 == null || clazz1 == clazz2)
-			return false;
-		
-		return clazz2.isAssignableFrom(clazz1);
+		return obj != null && Map.class.isAssignableFrom(obj.getClass());
 	}
 	
 	/**
@@ -391,6 +377,20 @@ public class ClassUtils {
 			return false;
 		
 		return clazz1 == clazz2 || clazz2.isAssignableFrom(clazz1);
+	}
+		
+	/**
+	 * 判断clazz1是否为clazz2的子类
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param clazz1
+	 * @param clazz2
+	 * @return
+	 */
+	public static boolean isSubClass(Class<?> clazz1, Class<?> clazz2) {
+		if (clazz1 == null || clazz2 == null || clazz1 == clazz2)
+			return false;
+		
+		return clazz2.isAssignableFrom(clazz1);
 	}
 	
 	/**

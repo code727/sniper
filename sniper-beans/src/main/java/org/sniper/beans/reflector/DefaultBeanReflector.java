@@ -24,10 +24,13 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.sniper.beans.BeanUtils;
+import org.sniper.beans.expression.ArrayPropertyHandler;
 import org.sniper.beans.expression.BeanPropertyHandler;
 import org.sniper.beans.expression.DefaultPropertyParser;
+import org.sniper.beans.expression.ListPropertyHandler;
 import org.sniper.beans.expression.MapPropertyHandler;
 import org.sniper.beans.expression.MappedPropertyHandler;
+import org.sniper.beans.expression.ParametersPropertyHandler;
 import org.sniper.beans.expression.PropertyHandler;
 import org.sniper.beans.expression.PropertyParser;
 import org.sniper.commons.exception.NestedNullPointerException;
@@ -70,9 +73,12 @@ public class DefaultBeanReflector implements BeanReflector {
 			this.propertyHandlers = CollectionUtils.newArrayList();
 			
 			// TODO 继续添加ParametersPropertyHandler、ArrayPropertyHandler、ListPropertyHandler和IndexedPropertyHandler
+			this.propertyHandlers.add(new ParametersPropertyHandler());
 			this.propertyHandlers.add(new MapPropertyHandler());
 			this.propertyHandlers.add(new MappedPropertyHandler());
 			
+			this.propertyHandlers.add(new ArrayPropertyHandler());
+			this.propertyHandlers.add(new ListPropertyHandler());
 			this.propertyHandlers.add(new BeanPropertyHandler());
 		}
 	}
@@ -168,49 +174,6 @@ public class DefaultBeanReflector implements BeanReflector {
 		}
 	}
 	
-	/**
-	 * 获取指定对象的成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param propertyName
-	 * @return
-	 * @throws Exception
-	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected <V> V getMemberValue(Object obj, String propertyName) throws Exception {
-		for (PropertyHandler propertyHandler : propertyHandlers) {
-			if (propertyHandler.support(obj, propertyName)) {
-				return (V) propertyHandler.getPropertyValue(obj, propertyName);
-			}
-		}
-		
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * 获取指定对象中已构建成功的成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @param propertyName
-	 * @return
-	 * @throws Exception
-	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected <V> V getConstructedMemberValue(Object obj, String memberName, String propertyName) throws Exception {
-		for (PropertyHandler propertyHandler : propertyHandlers) {
-			if (propertyHandler.support(obj, memberName)) {
-				V memberValue = (V) propertyHandler.getConstructedPropertyValue(obj, memberName);
-				if (memberValue == null)
-					throw new NestedNullPointerException(String.format(
-							"Null nested property value for '%s' on bean class '%s'", propertyName, obj.getClass()));
-				
-				return memberValue;
-			}
-		}
-		
-		throw new UnsupportedOperationException();
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T, V> T create(String className, Map<String, V> properties) throws Exception {
@@ -241,6 +204,50 @@ public class DefaultBeanReflector implements BeanReflector {
 			}
 		}
 		return bean;
+	}
+	
+	/**
+	 * 获取指定对象的成员值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param propertyName
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected <V> V getMemberValue(Object obj, String propertyName) throws Exception {
+		for (PropertyHandler propertyHandler : propertyHandlers) {
+			if (propertyHandler.support(obj, propertyName)) {
+				return (V) propertyHandler.getPropertyValue(obj, propertyName);
+			}
+		}
+		
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * 获取指定对象中已构建的成员值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param obj
+	 * @param memberName
+	 * @param propertyName
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected <V> V getConstructedMemberValue(Object obj, String memberName, String propertyName) throws Exception {
+		for (PropertyHandler propertyHandler : propertyHandlers) {
+			if (propertyHandler.support(obj, memberName)) {
+				V memberValue = (V) propertyHandler.getConstructedPropertyValue(obj, memberName);
+				if (memberValue == null)
+					throw new NestedNullPointerException(String.format(
+							"Null nested property value for '%s' on bean class '%s'", propertyName, obj.getClass()));
+				
+				return memberValue;
+			}
+		}
+		
+		throw new UnsupportedOperationException();
 	}
 	
 	/**

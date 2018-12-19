@@ -48,13 +48,13 @@ public class MapPropertyHandler implements PropertyHandler<Map<String, Object>> 
 
 	@Override
 	public void setPropertyValue(Map<String, Object> map, String propertyName, Class<?> parameterType,
-			Object parameterValue) throws Exception {
+			Object propertyValue) throws Exception {
 		
 		String mappedPropertyName = StringUtils.leftSubstring(propertyName, MAPPED_START, MAPPED_END);
 		if (StringUtils.isNotEmpty(mappedPropertyName))
-			map.put(mappedPropertyName, parameterValue);
+			map.put(mappedPropertyName, propertyValue);
 		else
-			map.put(propertyName, parameterValue);
+			map.put(propertyName, propertyValue);
 	}
 
 }

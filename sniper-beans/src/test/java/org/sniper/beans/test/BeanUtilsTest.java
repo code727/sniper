@@ -23,9 +23,17 @@ public class BeanUtilsTest extends AbstractBeanUtilsTest {
 	
 	@Test
 	public void testGetPropertyValue() throws Exception {	
-		BeanUtils.setPropertyValue(this.user, "boss.detail(height)", 171);
+//		BeanUtils.setPropertyValue(this.user, "detail.height", 175);
+//		System.out.println(BeanUtils.getPropertyValue(this.user, "detail.height"));
 		
-		System.out.println(BeanUtils.getPropertyValue(this.user, "boss.detail.height"));
+//		System.out.println(BeanUtils.getPropertyValue(this.user, "keywords.1"));
+//		BeanUtils.setPropertyValue(this.user, "keywords.1", "CEO");
+//		System.out.println(BeanUtils.getPropertyValue(this.user, "keywords.1"));
+		
+		System.out.println(BeanUtils.getPropertyValue(this.user, "addresses"));
+		BeanUtils.setPropertyValue(this.user, "addresses.[1]", "四川");
+		System.out.println(BeanUtils.getPropertyValue(this.user, "addresses.1"));
+		System.out.println(BeanUtils.getPropertyValue(this.user, "addresses"));
 		
 //		Object value = BeanUtils.getPropertyValue(this.user, "name");
 //		assertNotNull(value);

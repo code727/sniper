@@ -171,7 +171,7 @@ public class ObjectUtils {
 		
 		if (obj instanceof Collection<?>)
 			return ((Collection<?>)obj).size();
-		if (ArrayUtils.isArray(obj))
+		if (ClassUtils.isArray(obj))
 			return Array.getLength(obj);
 		if (obj instanceof Map<?, ?>)
 			return ((Map<?, ?>)obj).size();
@@ -191,10 +191,13 @@ public class ObjectUtils {
 		
 		if (obj instanceof CharSequence)
 			return ((CharSequence)obj).length();
+		
+		if (ClassUtils.isArray(obj))
+			return Array.getLength(obj);
+		
 		if (obj instanceof Collection<?>)
 			return ((Collection<?>)obj).size();
-		if (ArrayUtils.isArray(obj))
-			return Array.getLength(obj);
+		
 		if (obj instanceof Map<?, ?>)
 			return ((Map<?, ?>)obj).size();
 		
