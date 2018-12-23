@@ -119,7 +119,6 @@ public class ClassUtils {
 	 * @return
 	 */
 	public static <C1,C2> Class<?> getCommonType(Class<C1> clazz1, Class<C2> clazz2) {
-		
 		if (clazz1 == null || clazz2 == null)
 			return Object.class;
 		

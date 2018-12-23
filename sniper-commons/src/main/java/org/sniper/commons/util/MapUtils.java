@@ -57,7 +57,7 @@ public class MapUtils {
 	 * @return
 	 */
 	public static <K, V> HashMap<K, V> newHashMap(int initialCapacity) {
-		return new HashMap<K, V>(initialCapacity);
+		return new HashMap<K, V>(NumberUtils.minLimit(initialCapacity, 0));
 	}
 		
 	/**
@@ -86,7 +86,7 @@ public class MapUtils {
 	 * @return
 	 */
 	public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int initialCapacity) {
-		return new LinkedHashMap<K, V>(initialCapacity);
+		return new LinkedHashMap<K, V>(NumberUtils.minLimit(initialCapacity, 0));
 	}
 	
 	/**
@@ -115,7 +115,7 @@ public class MapUtils {
 	 * @return
 	 */
 	public static <K, V> Hashtable<K, V> newHashtable(int initialCapacity) {
-		return new Hashtable<K, V>(initialCapacity);
+		return new Hashtable<K, V>(NumberUtils.minLimit(initialCapacity, 0));
 	}
 	
 	/**
@@ -183,7 +183,7 @@ public class MapUtils {
 	 * @return
 	 */
 	public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(int initialCapacity) {
-		return new ConcurrentHashMap<K, V>(initialCapacity);
+		return new ConcurrentHashMap<K, V>(NumberUtils.minLimit(initialCapacity, 0));
 	}
 	
 	/**
@@ -212,7 +212,7 @@ public class MapUtils {
 	 * @return
 	 */
 	public static <K, V> IdentityHashMap<K, V> newIdentityHashMap(int initialCapacity) {
-		return new IdentityHashMap<K, V>(initialCapacity);
+		return new IdentityHashMap<K, V>(NumberUtils.minLimit(initialCapacity, 0));
 	}
 	
 	/**

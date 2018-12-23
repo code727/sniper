@@ -25,13 +25,21 @@ import org.sniper.commons.exception.NestedNullPointerException;
 import org.sniper.commons.util.StringUtils;
 
 /**
- * 已映射的属性处理器
+ * 已被映射的属性处理器
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class MappedPropertyHandler implements PropertyHandler<Object> {
 	
-	protected final BeanPropertyHandler beanPropertyHandler = new BeanPropertyHandler();
+	protected final BeanPropertyHandler beanPropertyHandler;
+	
+	public MappedPropertyHandler() {
+		this(null);
+	}
+	
+	public MappedPropertyHandler(BeanPropertyHandler beanPropertyHandler) {
+		this.beanPropertyHandler = (beanPropertyHandler != null ? beanPropertyHandler : new BeanPropertyHandler());
+	}
 
 	@Override
 	public boolean support(Object obj, String propertyName) {
@@ -43,46 +51,58 @@ public class MappedPropertyHandler implements PropertyHandler<Object> {
 	@Override
 	public <V> V getPropertyValue(Object obj, String propertyName) throws Exception {
 		String mappedPropertyName = StringUtils.beforeFrist(propertyName, MAPPED_START);
-		Object mappedPropertyValue = beanPropertyHandler.getPropertyValue(obj, mappedPropertyName);
-		return getMappedValue(mappedPropertyValue, mappedPropertyName);
+		Object mappedObject = beanPropertyHandler.getPropertyValue(obj, mappedPropertyName);
+		return getMappedValue(mappedObject, propertyName);
 	}
 
 	@Override
 	public <V> V getConstructedPropertyValue(Object obj, String propertyName) throws Exception {
 		String mappedPropertyName = StringUtils.beforeFrist(propertyName, MAPPED_START);
-		Object mappedPropertyValue = beanPropertyHandler.getConstructedPropertyValue(obj, mappedPropertyName);
-		return getMappedValue(mappedPropertyValue, mappedPropertyName);
+		Object mappedObject = beanPropertyHandler.getConstructedPropertyValue(obj, mappedPropertyName);
+		return getMappedValue(mappedObject, propertyName);
 	}
 	
-	@SuppressWarnings("unchecked")
-	protected <V> V getMappedValue(Object mappedPropertyValue, String propertyName) {
-		if (mappedPropertyValue == null)
-			return null;
-		
-		String key = StringUtils.leftSubstring(propertyName, MAPPED_START, MAPPED_END);
-		if (mappedPropertyValue instanceof Map) 
-			return ((Map<String, V>) mappedPropertyValue).get(key);
-		
-		if (mappedPropertyValue instanceof Parameters)
-			return ((Parameters<String, V>) mappedPropertyValue).getValue(key);
-		
-		return null;
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setPropertyValue(Object obj, String propertyName, Class<?> propertyType, Object propertyValue) throws Exception {
 		String mappedPropertyName = StringUtils.beforeFrist(propertyName, MAPPED_START);
-		Object mappedPropertyValue = beanPropertyHandler.getConstructedPropertyValue(obj, mappedPropertyName);
+		Object mappedObject = beanPropertyHandler.getConstructedPropertyValue(obj, mappedPropertyName);
 		
-		if (mappedPropertyValue == null)
+		if (mappedObject == null)
 			throw new NestedNullPointerException();
 		
 		String key = StringUtils.leftSubstring(propertyName, MAPPED_START, MAPPED_END);
-		if (mappedPropertyValue instanceof Map) 
-			((Map<String, Object>) mappedPropertyValue).put(key, propertyValue);
-		else if (mappedPropertyValue instanceof Parameters)
-			((Parameters<String, Object>) mappedPropertyValue).add(key, propertyValue);
+		if (mappedObject instanceof Map) {
+			((Map<String, Object>) mappedObject).put(key, propertyValue);
+			return;
+		}
+			
+		if (mappedObject instanceof Parameters) {
+			((Parameters<String, Object>) mappedObject).add(key, propertyValue);
+			return;
+		}
+	}
+	
+	/**
+	 * 从已映射的对象中获取到指定属性的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param mappedObject
+	 * @param propertyName
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <V> V getMappedValue(Object mappedObject, String propertyName) {
+		if (mappedObject == null)
+			return null;
+		
+		String key = StringUtils.leftSubstring(propertyName, MAPPED_START, MAPPED_END);
+		if (mappedObject instanceof Map) 
+			return ((Map<String, V>) mappedObject).get(key);
+		
+		if (mappedObject instanceof Parameters)
+			return ((Parameters<String, V>) mappedObject).getValue(key);
+		
+		return null;
 	}
 
 }

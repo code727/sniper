@@ -39,8 +39,7 @@ public class ArrayTypeHandler<T> extends BaseTypeHandler<T[]> {
 	@Override
 	public void setNonNullParameter(PreparedStatement ps, int i, T[] parameter, JdbcType jdbcType) throws SQLException {
 		if (ArrayUtils.isNotEmpty(parameter)) 
-			// 将数组参数转换为以逗号分隔的字符串后设置为PreparedStatement的参数
-			ps.setString(i, ArrayUtils.join(parameter, ","));
+			ps.setString(i, ArrayUtils.toString(parameter));
 	}
 	
 	@Override

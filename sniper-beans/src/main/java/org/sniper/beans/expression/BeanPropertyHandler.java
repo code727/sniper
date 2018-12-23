@@ -24,6 +24,7 @@ import java.security.Policy.Parameters;
 
 import org.sniper.beans.BeanUtils;
 import org.sniper.beans.parameter.DefaultParameters;
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
@@ -36,23 +37,27 @@ import org.sniper.commons.util.ReflectionUtils;
  */
 public class BeanPropertyHandler implements PropertyHandler<Object> {
 	
-	/** 构建数组时的长度 */
-	private int constructedArrayLength;
+	private static final int ARRAY_CONSTRUCTED_MAX_CAPACITY = 4095;
+	
+	/** 构建数组时的空间大小 */
+	private int arrayConstructedCapacity;
 	
 	public BeanPropertyHandler() {
 		this(-1);
 	}
 	
-	public BeanPropertyHandler(int constructedArrayLength) {
-		this.constructedArrayLength = constructedArrayLength;
-	}
-	
-	public int getConstructedArrayLength() {
-		return constructedArrayLength;
+	public BeanPropertyHandler(int arrayConstructedCapacity) {
+		checkArrayConstructedCapacity(arrayConstructedCapacity);
+		this.arrayConstructedCapacity = arrayConstructedCapacity;
 	}
 
-	public void setConstructedArrayLength(int constructedArrayLength) {
-		this.constructedArrayLength = constructedArrayLength;
+	public int getArrayConstructedCapacity() {
+		return arrayConstructedCapacity;
+	}
+
+	public void setArrayConstructedCapacity(int arrayConstructedCapacity) {
+		checkArrayConstructedCapacity(arrayConstructedCapacity);
+		this.arrayConstructedCapacity = arrayConstructedCapacity;
 	}
 
 	@Override
@@ -86,10 +91,16 @@ public class BeanPropertyHandler implements PropertyHandler<Object> {
 	@Override
 	public void setPropertyValue(Object bean, String propertyName, Class<?> propertyType, Object propertyValue) throws Exception {
 		Method setter = BeanUtils.findSetter(bean, propertyName, propertyType);
-		if (setter != null) {
-			ReflectionUtils.invokeMethod(bean, setter, new Class<?>[] {propertyType}, new Object[] {propertyValue});
-		} else
+		if (setter != null)
+			ReflectionUtils.invokeMethod(bean, setter, new Class<?>[]{propertyType}, new Object[]{propertyValue});
+		else
 			ReflectionUtils.setFieldValue(bean, propertyName, propertyValue);	
+	}
+	
+	protected void checkArrayConstructedCapacity(int arrayConstructedCapacity) {
+		AssertUtils.assertTrue(arrayConstructedCapacity <= ARRAY_CONSTRUCTED_MAX_CAPACITY,
+				String.format("Array constructed capacity '%d' must less than or equals '%d'", 
+						arrayConstructedCapacity, ARRAY_CONSTRUCTED_MAX_CAPACITY));
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -106,8 +117,8 @@ public class BeanPropertyHandler implements PropertyHandler<Object> {
 		if (ClassUtils.isList(propertyType))
 			return (V) CollectionUtils.newArrayList();
 				
-		if (ClassUtils.isArray(propertyType) && this.constructedArrayLength > -1)
-			return (V) Array.newInstance(propertyType.getComponentType(), this.constructedArrayLength);
+		if (ClassUtils.isArray(propertyType) && this.arrayConstructedCapacity > -1)
+			return (V) Array.newInstance(propertyType.getComponentType(), this.arrayConstructedCapacity);
 		
 		return null;
 	}

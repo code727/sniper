@@ -47,7 +47,7 @@ public class MapPropertyHandler implements PropertyHandler<Map<String, Object>> 
 	}
 
 	@Override
-	public void setPropertyValue(Map<String, Object> map, String propertyName, Class<?> parameterType,
+	public void setPropertyValue(Map<String, Object> map, String propertyName, Class<?> propertyType,
 			Object propertyValue) throws Exception {
 		
 		String mappedPropertyName = StringUtils.leftSubstring(propertyName, MAPPED_START, MAPPED_END);

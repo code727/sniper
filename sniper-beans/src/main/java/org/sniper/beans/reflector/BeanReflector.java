@@ -70,19 +70,19 @@ public interface BeanReflector {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param propertyName
-	 * @param parameterValue
+	 * @param propertyValue
 	 */
-	public void setPropertyValue(Object bean, String propertyName, Object parameterValue) throws Exception;
+	public void setPropertyValue(Object bean, String propertyName, Object propertyValue) throws Exception;
 	
 	/**
 	 * 设置对象内指定的属性值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param bean
 	 * @param propertyName
-	 * @param parameterType
-	 * @param parameterValue
+	 * @param propertyType
+	 * @param propertyValue
 	 */
-	public void setPropertyValue(Object bean, String propertyName, Class<?> parameterType, Object parameterValue) throws Exception;
+	public void setPropertyValue(Object bean, String propertyName, Class<?> propertyType, Object propertyValue) throws Exception;
 	
 	/**
 	 * 调用全限定名对应类的构造函数创建Bean实例，并在创建时设置Bean实例的各个属性值

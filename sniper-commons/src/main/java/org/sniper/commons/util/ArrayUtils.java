@@ -243,8 +243,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		Boolean[] wapperArray = new Boolean[length];
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			wapperArray[i] = array[i];
+		}
+		
 		return wapperArray;
 	}
 	
@@ -259,8 +261,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * 将Boolean[]数组转换为boolean[]。
-	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将Boolean[]数组转换为boolean[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
@@ -272,8 +273,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		boolean[] baseArray = new boolean[length];
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++) {
 			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
+		}
+			
 		return baseArray;
 	}
 	
@@ -289,8 +292,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		Byte[] wapperArray = new Byte[length];
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			wapperArray[i] = array[i];
+		}
+			
 		return wapperArray;
 	}
 	
@@ -305,8 +310,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * 将Byte[]数组转换为byte[]。
-	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将Byte[]数组转换为byte[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
@@ -318,8 +322,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		byte[] baseArray = new byte[length];
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++) {
 			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
+		}
+			
 		return baseArray;
 	}
 	
@@ -335,8 +341,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		Character[] wapperArray = new Character[length];
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			wapperArray[i] = array[i];
+		}
+			
 		return wapperArray;
 	}
 	
@@ -351,8 +359,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * 将Character[]数组转换为char[]。
-	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将Character[]数组转换为char[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
@@ -364,8 +371,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		char[] baseArray = new char[length];
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++) {
 			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
+		}
+			
 		return baseArray;
 	}
 	
@@ -381,8 +390,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		Double[] wapperArray = new Double[length];
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			wapperArray[i] = array[i];
+		}
+			
 		return wapperArray;
 	}
 	
@@ -397,8 +408,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * 将Double[]数组转换为double[]。
-	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将Double[]数组转换为double[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
@@ -410,8 +420,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		double[] baseArray = new double[length];
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++) {
 			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
+		}
+			
 		return baseArray;
 	}
 	
@@ -427,8 +439,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		Float[] wapperArray = new Float[length];
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			wapperArray[i] = array[i];
+		}
+			
 		return wapperArray;
 	}
 	
@@ -443,8 +457,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * 将Float[]数组转换为float[]。
-	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将Float[]数组转换为float[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
@@ -456,8 +469,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		float[] baseArray = new float[length];
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++) {
 			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
+		}
+			
 		return baseArray;
 	}
 			
@@ -473,8 +488,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		Integer[] wapperArray = new Integer[length];
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			wapperArray[i] = array[i];
+		}
+			
 		return wapperArray;
 	}
 		
@@ -489,8 +506,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * 将Integer[]数组转换为int[]。
-	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将Integer[]数组转换为int[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
@@ -502,8 +518,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		int[] baseArray = new int[length];
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++) {
 			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
+		}
+			
 		return baseArray;
 	}
 	
@@ -519,8 +537,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		Long[] wapperArray = new Long[length];
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			wapperArray[i] = array[i];
+		}
+			
 		return wapperArray;
 	}
 	
@@ -535,8 +555,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * 将Long[]数组转换为long[]。
-	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将Long[]数组转换为long[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
@@ -548,8 +567,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		long[] baseArray = new long[length];
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++) {
 			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
+		}
+			
 		return baseArray;
 	}
 	
@@ -565,8 +586,10 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		Short[] wapperArray = new Short[length];
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			wapperArray[i] = array[i];
+		}
+			
 		return wapperArray;
 	}
 	
@@ -581,8 +604,7 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * 将Short[]数组转换为short[]。
-	 * 				在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将Short[]数组转换为short[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
@@ -594,255 +616,257 @@ public class ArrayUtils {
 		
 		int length = array.length;
 		short[] baseArray = new short[length];
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++) {
 			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
+		}
+			
 		return baseArray;
 	}
 	
 	/**
-	 * 将boolean类型的元素组添加到同类型的原数组后面
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @return
-	 */
-	public static boolean[] add(boolean[] array, boolean[] element) {
-		if (isEmpty(array))
-			return element != null ? element : new boolean[]{};
-		if (isEmpty(element))
-			return array != null ? array : new boolean[]{};
-		
-		boolean joinedArray[] = new boolean[array.length + element.length];
-		System.arraycopy(array, 0, joinedArray, 0, array.length);
-        System.arraycopy(element, 0, joinedArray, array.length, element.length);
-		return joinedArray;
-	}
-	
-	/**
-	 * 将byte类型的元素组添加到同类型的原数组后面
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @return
-	 */
-	public static byte[] add(byte[] array, byte[] element) {
-		if (isEmpty(array))
-			return element != null ? element : new byte[]{};
-		if (isEmpty(element))
-			return array != null ? array : new byte[]{};
-		
-		byte joinedArray[] = new byte[array.length + element.length];
-		System.arraycopy(array, 0, joinedArray, 0, array.length);
-        System.arraycopy(element, 0, joinedArray, array.length, element.length);
-		return joinedArray;
-	}
-	
-	/**
-	 * 将char类型的元素组添加到同类型的原数组后面
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @return
-	 */
-	public static char[] add(char[] array, char[] element) {
-		if (isEmpty(array))
-			return element != null ? element : new char[]{};
-		if (isEmpty(element))
-			return array != null ? array : new char[]{};
-		
-		char joinedArray[] = new char[array.length + element.length];
-		System.arraycopy(array, 0, joinedArray, 0, array.length);
-        System.arraycopy(element, 0, joinedArray, array.length, element.length);
-		return joinedArray;
-	}
-	
-	/**
-	 * 将double类型的元素组添加到同类型的原数组后面
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @return
-	 */
-	public static double[] add(double[] array, double[] element) {
-		if (isEmpty(array))
-			return element != null ? element : new double[]{};
-		if (isEmpty(element))
-			return array != null ? array : new double[]{};
-		
-		double joinedArray[] = new double[array.length + element.length];
-		System.arraycopy(array, 0, joinedArray, 0, array.length);
-        System.arraycopy(element, 0, joinedArray, array.length, element.length);
-		return joinedArray;
-	}
-	
-	/**
-	 * 将float类型的元素组添加到同类型的原数组后面
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @return
-	 */
-	public static float[] add(float[] array, float[] element) {
-		if (isEmpty(array))
-			return element != null ? element : new float[]{};
-		if (isEmpty(element))
-			return array != null ? array : new float[]{};
-		
-		float joinedArray[] = new float[array.length + element.length];
-		System.arraycopy(array, 0, joinedArray, 0, array.length);
-        System.arraycopy(element, 0, joinedArray, array.length, element.length);
-		return joinedArray;
-	}
-	
-	/**
-	 * 将int类型的元素组添加到同类型的原数组后面
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @return
-	 */
-	public static int[] add(int[] array, int[] element) {
-		if (isEmpty(array))
-			return element != null ? element : new int[]{};
-		if (isEmpty(element))
-			return array != null ? array : new int[]{};
-		
-		int joinedArray[] = new int[array.length + element.length];
-		System.arraycopy(array, 0, joinedArray, 0, array.length);
-        System.arraycopy(element, 0, joinedArray, array.length, element.length);
-		return joinedArray;
-	}
-	
-	/**
-	 * 将long类型的元素组添加到同类型的原数组后面
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @return
-	 */
-	public static long[] add(long[] array, long[] element) {
-		if (isEmpty(array))
-			return element != null ? element : new long[]{};
-		if (isEmpty(element))
-			return array != null ? array : new long[]{};
-		
-		long joinedArray[] = new long[array.length + element.length];
-		System.arraycopy(array, 0, joinedArray, 0, array.length);
-        System.arraycopy(element, 0, joinedArray, array.length, element.length);
-		return joinedArray;
-	}
-	
-	/**
-	 * 将short类型的元素组添加到同类型的原数组后面
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @return
-	 */
-	public static short[] add(short[] array, short[] element) {
-		if (isEmpty(array))
-			return element != null ? element : new short[]{};
-		if (isEmpty(element))
-			return array != null ? array : new short[]{};
-		
-		short joinedArray[] = new short[array.length + element.length];
-		System.arraycopy(array, 0, joinedArray, 0, array.length);
-        System.arraycopy(element, 0, joinedArray, array.length, element.length);
-		return joinedArray;
-	}
-	
-	/**
-	 * 将Object类型的元素组添加到原数组后面
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @return
-	 */
-	public static Object[] add(Object[] array, Object[] element) {
-		if (isEmpty(array))
-			return element != null ? element : new Object[]{};
-		if (isEmpty(element))
-			return array != null ? array : new Object[]{};
-		
-		return copy(array, element, Object.class);
-	}
-	
-	/**
-	 * 将元素添加到数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @return
-	 */
-	public static Object[] add(Object array, Object element) {
-		return add(array, element, ClassUtils.getCommonType(array, element));
-	}
-	
-	/**
-	 * 将指定类型的元素添加到数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @param element
-	 * @param componentType
-	 * @return
-	 */
-	public static <T> T[] add(Object array, Object element, Class<T> componentType) {
-		Object[] array1 = convertWapperArray(array);
-		Object[] array2 = convertWapperArray(element);
-		return (T[]) copy(array1, array2, componentType);
-	}
-	
-	/**
-	 * 将基本类型的数组准换为包装类型的
+	 * 转换一个对象为Object类型或包装类型的数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param baseTypeArray
 	 * @return
 	 */
-	private static Object[] convertWapperArray(Object baseTypeArray) {
-		Object[] array = null;
-		if (ClassUtils.isArray(baseTypeArray)) {
-			Class<?> arrayComponentType = baseTypeArray.getClass().getComponentType();
-			if (ClassUtils.isBaseType(arrayComponentType)) {
-				if (arrayComponentType == Boolean.TYPE)
-					array = convert((boolean[]) baseTypeArray);
-				else if (arrayComponentType == Byte.TYPE)
-					array = convert((byte[]) baseTypeArray);
-				else if (arrayComponentType == Character.TYPE)
-					array = convert((char[]) baseTypeArray);
-				else if (arrayComponentType == Double.TYPE)
-					array = convert((double[]) baseTypeArray);
-				else if (arrayComponentType == Float.TYPE)
-					array = convert((float[]) baseTypeArray);
-				else if (arrayComponentType == Integer.TYPE)
-					array = convert((int[]) baseTypeArray);
-				else if (arrayComponentType == Long.TYPE)
-					array = convert((long[]) baseTypeArray);
-				else
-					array = convert((short[]) baseTypeArray);
-			} else
-				array = (Object[]) baseTypeArray;
-		} else
-			array = new Object[] { baseTypeArray };
+	public static Object[] convert(Object array) {
+		if (!ClassUtils.isArray(array))
+			return new Object[] {array};
 		
-		return array;
-	}
+		Class<?> componentType = array.getClass().getComponentType();
+		if (ClassUtils.isBaseType(componentType)) {
+			if (componentType == Boolean.TYPE)
+				return convert((boolean[]) array);
+			
+			if (componentType == Character.TYPE)
+				return convert((char[]) array);
+			
+			if (componentType == Byte.TYPE)
+				return convert((byte[]) array);
+			
+			if (componentType == Short.TYPE)
+				return convert((short[]) array);
+			
+			if (componentType == Integer.TYPE)
+				return convert((int[]) array);
+			
+			if (componentType == Long.TYPE)
+				return convert((long[]) array);
+			
+			if (componentType == Float.TYPE)
+				return convert((float[]) array);
+			
+			if (componentType == Double.TYPE)
+				return convert((double[]) array);
+		}
 		
-	@SuppressWarnings("unchecked")
-	private static <T1, T2, T3> T3[] copy(T1[] array, T2[] element, Class<T3> componentType) {
-		int arrayLength = array.length;
-		int elementLength = element.length;
-		
-		if (ClassUtils.isBaseType(componentType))
-			// 将基本类型转换为对应的包装类型后再进行拷贝，防止出现java.lang.ArrayStoreException
-			componentType = (Class<T3>) ClassUtils.getWrapperType(componentType);
-		
-		Object dest = Array.newInstance(componentType != null ? componentType
-				: Object.class, arrayLength + elementLength);
-		System.arraycopy(array, 0, dest, 0, arrayLength);
-		System.arraycopy(element, 0, dest, arrayLength, elementLength);
-		return (T3[]) dest;
+		return (Object[]) array;
 	}
 	
+	/**
+	 * 将boolean类型数组添加到同类型原数组的前面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static boolean[] addFirst(boolean[] array, boolean[] added) {
+		return (boolean[]) add(array, added, boolean.class, true);
+	}
+	
+	/**
+	 * 将boolean类型数组添加到同类型原数组的后面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static boolean[] addLast(boolean[] array, boolean[] added) {
+		return (boolean[]) add(array, added, boolean.class, false);
+	}
+	
+	/**
+	 * 将char类型数组添加到同类型原数组的前面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static char[] addFirst(char[] array, char[] added) {
+		return (char[]) add(array, added, char.class, true);
+	}
+	
+	/**
+	 * 将char类型数组添加到同类型原数组的后面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static char[] addLast(char[] array, char[] added) {
+		return (char[]) add(array, added, char.class, false);
+	}
+	
+	/**
+	 * 将byte类型数组添加到同类型原数组的前面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static byte[] addFirst(byte[] array, byte[] added) {
+		return (byte[]) add(array, added, byte.class, true);
+	}
+	
+	/**
+	 * 将byte类型数组添加到同类型原数组的后面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static byte[] addLast(byte[] array, byte[] added) {
+		return (byte[]) add(array, added, byte.class, false);
+	}
+	
+	/**
+	 * 将short类型数组添加到同类型原数组的前面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static short[] addFirst(short[] array, short[] added) {
+		return (short[]) add(array, added, short.class, true);
+	}
+	
+	/**
+	 * 将short类型数组添加到同类型原数组的后面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static short[] addLast(short[] array, short[] added) {
+		return (short[]) add(array, added, short.class, false);
+	}
+	
+	/**
+	 * 将int类型数组添加到同类型原数组的前面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static int[] addFirst(int[] array, int[] added) {
+		return (int[]) add(array, added, int.class, true);
+	}
+	
+	/**
+	 * 将int类型数组添加到同类型原数组的后面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static int[] addLast(int[] array, int[] added) {
+		return (int[]) add(array, added, int.class, false);
+	}
+	
+	/**
+	 * 将long类型数组添加到同类型原数组的前面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static long[] addFirst(long[] array, long[] added) {
+		return (long[]) add(array, added, long.class, true);
+	}
+	
+	/**
+	 * 将long类型数组添加到同类型原数组的后面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static long[] addLast(long[] array, long[] added) {
+		return (long[]) add(array, added, long.class, false);
+	}
+	
+	/**
+	 * 将float类型数组添加到同类型原数组的前面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static float[] addFirst(float[] array, float[] added) {
+		return (float[]) add(array, added, float.class, true);
+	}
+	
+	/**
+	 * 将float类型数组添加到同类型原数组的后面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static float[] addLast(float[] array, float[] added) {
+		return (float[]) add(array, added, float.class, false);
+	}
+		
+	/**
+	 * 将double类型数组添加到同类型原数组的前面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static double[] addFirst(double[] array, double[] added) {
+		return (double[]) add(array, added, double.class, true);
+	}
+	
+	/**
+	 * 将double类型数组添加到同类型原数组的后面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @return
+	 */
+	public static double[] addLast(double[] array, double[] added) {
+		return (double[]) add(array, added, double.class, false);
+	}
+	
+	/**
+	 * 将数组添加到原数组的前面，并返回指定元素类型的结果 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @param componentType
+	 * @return
+	 */
+	public static <T> T[] addFirst(Object array, Object added, Class<T> componentType) {
+		Object[] array1 = convert(array);
+		Object[] array2 = convert(added);
+		return (T[]) copy(array2, array1, componentType);
+	}
+	
+	/**
+	 * 将数组添加到原数组的后面，并返回指定元素类型的结果 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @param componentType
+	 * @return
+	 */
+	public static <T> T[] addLast(Object array, Object added, Class<T> componentType) {
+		Object[] array1 = convert(array);
+		Object[] array2 = convert(added);
+		return (T[]) copy(array1, array2, componentType);
+	}
+		
 	/**
 	 * 获取第一个匹配元素在数组中的下标
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -1585,7 +1609,6 @@ public class ArrayUtils {
 				if (ObjectUtils.equals(array[i], subArray))
 					return i;
 		} else {
-			
 			int subLength = subArray.length;
 			int length;
 			if (subLength == 0 || (length = array.length) < subLength)
@@ -1650,7 +1673,7 @@ public class ArrayUtils {
 			start = 0;
 		
 		if (ClassUtils.isArray(element))
-			return indexOf(array, convertWapperArray(element), start);
+			return indexOf(array, convert(element), start);
 		
 		for (int i = start; i < array.length; i++) {
 			if (ObjectUtils.equals(array[i], element)) 
@@ -2515,7 +2538,7 @@ public class ArrayUtils {
 			start = 0;
 		
 		if (ClassUtils.isArray(element))
-			return lastIndexOf(array, convertWapperArray(element), start);
+			return lastIndexOf(array, convert(element), start);
 		
 		for (int i = (array.length - 1); i >= start; i--) {
 			if (ObjectUtils.equals(array[i], element))
@@ -3151,7 +3174,7 @@ public class ArrayUtils {
 		if (index < 0)
 			return array;
 		
-		return ClassUtils.isArray(element) ? removeSubArray(array, convertWapperArray(element))
+		return ClassUtils.isArray(element) ? removeSubArray(array, convert(element))
 				: removeElement(remove(array, index), element);
 	}
 	
@@ -3706,23 +3729,23 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * 将数组转换成字符串
+	 * 将数组转换成由逗号分隔符连接而成的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
 	 */
 	public static String toString(Object[] array) {
-		return join(array, StringUtils.COMMA);
+		return toString(array, StringUtils.COMMA);
 	}
 	
 	/**
-	 * 按指定的分隔符将数组中各元素连接成字符串
+	 * 将数组转换成由指定分隔符连接而成的字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param separator
 	 * @return
 	 */
-	public static String join(Object[] array, String separator) {
+	public static String toString(Object[] array, String separator) {
 		if (isEmpty(array))
 			return StringUtils.EMPTY;
 		
@@ -3741,7 +3764,7 @@ public class ArrayUtils {
 		}
 		return builder.toString();
 	}
-	
+		
 	/**
 	 * 获取索引位对应的元素值，未获取到时默认返回null
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -3767,6 +3790,101 @@ public class ArrayUtils {
 			return defaultValue;
 		
 		return array[index];
+	}
+	
+	/**
+	 * 将指定索引位的值合并到数组中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param index
+	 * @param value
+	 * @return
+	 */
+	public static <T> T[] merge(T[] array, int index, T value) {
+		return merge(array, index, value, null);
+	}
+	
+	/**
+	 * 将指定索引位的值合并到数组中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param index
+	 * @param value
+	 * @param componentType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T[] merge(T[] array, int index, T value, Class<T> componentType) {
+		if (index < 0) throw new ArrayIndexOutOfBoundsException(index);
+		
+		if (array == null) {
+			Object newArray = Array.newInstance(value != null ? value.getClass() : 
+					(componentType != null ? componentType : Object.class), index + 1);
+			Array.set(newArray, index, value);
+			return (T[]) newArray;
+		}
+			
+		if (index < array.length) {
+			array[index] = value;
+			return array;
+		}
+			
+		T[] newArray = Arrays.copyOf(array, index + 1);
+		Array.set(newArray, index, value);
+		return (T[]) newArray;
+	}
+	
+	/**
+	 * 选择是否将指定类型的元素添加到原数组的前面
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param added
+	 * @param componentType
+	 * @param addFirst
+	 * @return
+	 */
+	private static Object add(Object array, Object added, Class<?> componentType, boolean addFirst) {
+		int length = length(array);
+		if (length == 0) 
+			return added != null ? added : Array.newInstance(componentType, 0);
+		
+		int addedLength = length(added);
+		if (addedLength == 0)
+			return array != null ? array : Array.newInstance(componentType, 0);
+		
+		Object newArray = Array.newInstance(componentType, length + addedLength);
+		if (addFirst) {
+			System.arraycopy(added, 0, newArray, 0, addedLength);
+	        System.arraycopy(array, 0, newArray, addedLength, length);
+		} else {
+			System.arraycopy(array, 0, newArray, 0, length);
+	        System.arraycopy(added, 0, newArray, length, addedLength);
+		}
+		
+		return newArray;
+	}
+	
+	/**
+	 * 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param array
+	 * @param elementes
+	 * @param componentType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private static <T1, T2, T3> T3[] copy(T1[] array1, T2[] array2, Class<T3> componentType) {
+		int length_1 = array1.length;
+		int length_2 = array2.length;
+		
+		if (ClassUtils.isBaseType(componentType))
+			// 将基本类型转换为对应的包装类型后再进行拷贝，防止出现java.lang.ArrayStoreException
+			componentType = (Class<T3>) ClassUtils.getWrapperType(componentType);
+		
+		Object dest = Array.newInstance(componentType != null ? componentType : Object.class, length_1 + length_2);
+		System.arraycopy(array1, 0, dest, 0, length_1);
+		System.arraycopy(array2, 0, dest, length_1, length_2);
+		return (T3[]) dest;
 	}
 		
 }

@@ -27,6 +27,7 @@ import org.sniper.beans.BeanUtils;
 import org.sniper.beans.expression.ArrayPropertyHandler;
 import org.sniper.beans.expression.BeanPropertyHandler;
 import org.sniper.beans.expression.DefaultPropertyParser;
+import org.sniper.beans.expression.IndexedPropertyHandler;
 import org.sniper.beans.expression.ListPropertyHandler;
 import org.sniper.beans.expression.MapPropertyHandler;
 import org.sniper.beans.expression.MappedPropertyHandler;
@@ -71,15 +72,17 @@ public class DefaultBeanReflector implements BeanReflector {
 			this.propertyHandlers = propertyHandlers;
 		else {
 			this.propertyHandlers = CollectionUtils.newArrayList();
+			BeanPropertyHandler beanPropertyHandler = new BeanPropertyHandler();
 			
-			// TODO 继续添加ParametersPropertyHandler、ArrayPropertyHandler、ListPropertyHandler和IndexedPropertyHandler
 			this.propertyHandlers.add(new ParametersPropertyHandler());
 			this.propertyHandlers.add(new MapPropertyHandler());
-			this.propertyHandlers.add(new MappedPropertyHandler());
+			this.propertyHandlers.add(new MappedPropertyHandler(beanPropertyHandler));
 			
 			this.propertyHandlers.add(new ArrayPropertyHandler());
 			this.propertyHandlers.add(new ListPropertyHandler());
-			this.propertyHandlers.add(new BeanPropertyHandler());
+			this.propertyHandlers.add(new IndexedPropertyHandler(beanPropertyHandler));
+			
+			this.propertyHandlers.add(beanPropertyHandler);
 		}
 	}
 	

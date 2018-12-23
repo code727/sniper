@@ -8,75 +8,209 @@ package org.sniper.beans.test;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.sniper.beans.BeanUtils;
+import org.sniper.commons.exception.NestedNullPointerException;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.test.domain.Department;
 import org.sniper.test.domain.User;
+import org.sniper.test.junit.BaseTestCase;
 
 /**
  * JAVA Bean工具测试类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0, 2015-2-26
  */
-public class BeanUtilsTest extends AbstractBeanUtilsTest {
+public class BeanUtilsTest extends BaseTestCase {
 	
-	@Test
-	public void testGetPropertyValue() throws Exception {	
-//		BeanUtils.setPropertyValue(this.user, "detail.height", 175);
-//		System.out.println(BeanUtils.getPropertyValue(this.user, "detail.height"));
-		
-//		System.out.println(BeanUtils.getPropertyValue(this.user, "keywords.1"));
-//		BeanUtils.setPropertyValue(this.user, "keywords.1", "CEO");
-//		System.out.println(BeanUtils.getPropertyValue(this.user, "keywords.1"));
-		
-		System.out.println(BeanUtils.getPropertyValue(this.user, "addresses"));
-		BeanUtils.setPropertyValue(this.user, "addresses.[1]", "四川");
-		System.out.println(BeanUtils.getPropertyValue(this.user, "addresses.1"));
-		System.out.println(BeanUtils.getPropertyValue(this.user, "addresses"));
-		
-//		Object value = BeanUtils.getPropertyValue(this.user, "name");
-//		assertNotNull(value);
-//		System.out.println(value);
-//		
-//		value = BeanUtils.getPropertyValue(this.user, "boss.name");
-//		assertNotNull(value);
-//		System.out.println(value);
-//		
-//		value = BeanUtils.getPropertyValue(this.user, "boss.department");
-//		assertNull(value);
-//		
-//		try {
-//			value = BeanUtils.getPropertyValue(this.user, "boss.department.company");
-//		} catch (Exception e) {
-//			assertTrue(e instanceof NestedNullPointerException);
-//			System.out.println(e.getMessage());
-//		}
-		
+	private final User user = new User();
+	
+	@Before
+	public void init() {
+		this.user.setBoss(new User());
 	}
 	
 //	@Test
-	public void testSetPropertyValue() throws Exception {
-		Object value = BeanUtils.getPropertyValue(this.user, "boss.department");
-		assertNull(value);
+	public void testMapPropertyOperations() throws Exception {	
+		String propertyName = "detail.height";
+		Object propertyValue = 175;
+		Object result;
 		
-		Department department = new Department();
-		BeanUtils.setPropertyValue(this.user, "boss.department", department);
-		value = BeanUtils.getPropertyValue(this.user, "boss.department");
-		assertEquals(department, value);
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		result = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, result);
+		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
 		
-		department.setName("ODC");
-		BeanUtils.setPropertyValue(this.user, "boss.department.name", department.getName());
-		value = BeanUtils.getPropertyValue(this.user, "boss.department.name");
-		assertEquals(department.getName(), value);
+		propertyName = "detail.(height)";
+		propertyValue = 176;
 		
-		BeanUtils.setPropertyValue(this.user, "married", true);
-		value = BeanUtils.getPropertyValue(this.user, "married");
-		assertEquals(true, value);
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		result = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, result);
+		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
 		
-		BeanUtils.setPropertyValue(this.user, "boss.married", true);
-		value = BeanUtils.getPropertyValue(this.user, "boss.married");
-		assertEquals(true, value);
+		propertyName = "detail(height)";
+		propertyValue = 177;
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		result = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, result);
+		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
+	}
+	
+//	@Test
+	public void testListPropertyOperations() throws Exception {	
+		int index = 0;
+		String propertyName = String.format("addresses.%s", index);
+		Object propertyValue = String.format("ads%s", index);
+		Object result;
+		
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		result = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, result);
+		assertEquals(propertyValue, this.user.getAddresses().get(index));
+		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
+		
+		index = 1;
+		propertyName = String.format("addresses.[%s]", index);
+		propertyValue = String.format("ads[%s]", index); 
+		
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		result = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, result);
+		assertEquals(propertyValue, this.user.getAddresses().get(index));
+		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
+		
+		index = 9;
+		propertyName = String.format("addresses[%s]", index);
+		propertyValue = String.format("ads[%s]", index); 
+		
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		result = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, result);
+		assertEquals(propertyValue, this.user.getAddresses().get(index));
+		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
+	}
+	
+//	@Test
+	public void testArrayPropertyOperations() throws Exception {	
+		int index = 0;
+		String propertyName = String.format("keywords.%s", index);
+		Object propertyValue = String.format("kw%s", index);
+		Object result;
+		
+		try {
+			BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		} catch (Exception e) {
+			assertTrue(e instanceof NestedNullPointerException);
+			System.out.println("Nested null pointer exception:" + index);
+		}
+		
+		propertyName = String.format("keywords.[%s]", index);
+		propertyValue = String.format("kw[%s]", index);
+		try {
+			BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		} catch (Exception e) {
+			assertTrue(e instanceof NestedNullPointerException);
+			System.out.println("Nested null pointer exception:" + index);
+		}
+		
+		propertyName = String.format("keywords[%s]", index);
+		propertyValue = String.format("kw[%s]", index);
+		try {
+			BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		} catch (Exception e) {
+			assertTrue(e instanceof NestedNullPointerException);
+			System.out.println("Nested null pointer exception:" + index);
+		}
+		
+		BeanUtils.setPropertyValue(this.user, propertyName, String[].class, propertyValue);
+		result = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, result);
+		assertEquals(propertyValue, this.user.getKeywords()[index]);
+		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
+		
+		index = 9;
+		propertyName = String.format("keywords.[%s]", index);
+		propertyValue = String.format("kw.[%s]", index);
+		try {
+			BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		} catch (Exception e) {
+			assertTrue(e instanceof ArrayIndexOutOfBoundsException);
+			System.out.println("Array index out of range: " + index);
+		}
+		
+		propertyName = String.format("keywords.%s", index);
+		propertyValue = String.format("kw.%s", index);
+		try {
+			BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		} catch (Exception e) {
+			assertTrue(e instanceof ArrayIndexOutOfBoundsException);
+			System.out.println("Array index out of range: " + index);
+		}
+		
+		propertyName = String.format("keywords[%s]", index);
+		propertyValue = String.format("kw[%s]", index);
+		
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		result = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, result);
+		assertEquals(propertyValue, this.user.getKeywords()[index]);
+		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
+		
+		propertyName = String.format("keywords.[%s]", index);
+		propertyValue = String.format("kw.[%s]", index);
+		
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		result = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, result);
+		assertEquals(propertyValue, this.user.getKeywords()[index]);
+		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
+		
+		propertyName = String.format("keywords.%s", index);
+		propertyValue = String.format("kw.%s", index);
+		
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		result = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, result);
+		assertEquals(propertyValue, this.user.getKeywords()[index]);
+		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
+	}
+	
+	@Test
+	public void testBeanPropertyOperations() throws Exception {	
+		String propertyName = "name";
+		Object propertyValue = "daniele";
+		Object value;
+		
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		value = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, value);
+		assertEquals(propertyValue, this.user.getName());
+		System.out.println(propertyValue);
+		
+		propertyName = "married";
+		propertyValue = true;
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		value = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, value);
+		assertEquals(propertyValue, this.user.isMarried());
+		System.out.println(propertyValue);
+		
+		propertyName="boss.name";
+		propertyValue = "herris";
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		value = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, value);
+		assertEquals(propertyValue, this.user.getBoss().getName());
+		System.out.println(propertyValue);
+		
+		propertyName = "boss.married";
+		propertyValue = true;
+		BeanUtils.setPropertyValue(this.user, propertyName, propertyValue);
+		value = BeanUtils.getPropertyValue(this.user, propertyName);
+		assertEquals(propertyValue, value);
+		assertEquals(propertyValue, this.user.getBoss().isMarried());
+		System.out.println(propertyValue);
 	}
 	
 //	@Test
@@ -198,34 +332,5 @@ public class BeanUtilsTest extends AbstractBeanUtilsTest {
 		assertNotNull(setterName);
 		System.out.println(setterName);
 	}
-	
-//	@Test
-//	public void testInvokeMethod() throws Exception {
-//		User user = BeanUtils.create(User.class);
-//		String expression = "department.company.createTime";
-//		BeanUtils.set(user, expression, "2010-01-01 12:00:00");
-//		System.out.println(BeanUtils.get(user, expression));
-//		System.out.println(user.getDepartment().getCompany().getId());
-//		
-//	}
-//	
-////	@Test
-//	public void testFind() {
-//		System.out.println(BeanUtils.findGetter(User.class, "vip"));
-//		System.out.println(BeanUtils.findSetter(User.class, "vip"));
-//	}
-//	
-////	@Test
-//	public void testFindAll() {
-//		System.out.println(BeanUtils.findAllGetterName(User.class));
-//		System.out.println(BeanUtils.findAllSetterName(User.class));
-//		System.out.println(BeanUtils.findAllPropertyNameByGetter(User.class));
-//	}
-//	
-////	@Test
-//	public void testCreate() throws Exception {
-//		System.out.println(BeanUtils.create(User.class));
-//		System.out.println(BeanUtils.create(new User(), new String[] { "id" }));
-//	}
-	
+		
 }
