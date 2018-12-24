@@ -43,7 +43,7 @@ public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
 		if (CollectionUtils.isNotEmpty(mapperRules)) {
 			if (isAutoMapping()) {
 				// 需要自动映射的属性名称集
-				List<String> autoMappedNames = BeanUtils.findAllPropertyNameByGetter(source);
+				List<String> autoMappedNames = BeanUtils.findPropertyNamesByGetter(source);
 				
 				for (MapperRule rule : mapperRules) {
 					ruleMapping(source, mappedBean, rule);
@@ -61,7 +61,7 @@ public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
 				}
 			}
 		} else {
-			List<String> propertyNames = BeanUtils.findAllPropertyNameByGetter(mappedBean);
+			List<String> propertyNames = BeanUtils.findPropertyNamesByGetter(mappedBean);
 			for (String propertyName : propertyNames) {
 				BeanUtils.setPropertyValue(mappedBean, propertyName, BeanUtils.getPropertyValue(source, propertyName));
 			}

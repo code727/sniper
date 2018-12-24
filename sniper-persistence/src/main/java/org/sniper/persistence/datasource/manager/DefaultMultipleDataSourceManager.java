@@ -111,7 +111,7 @@ public class DefaultMultipleDataSourceManager extends CheckableInitializingBeanA
 	protected void initializeLog(Date start) {
 		StringBuilder message = new StringBuilder();
 		for (Entry<String, Object[]> entry : patternDataSources.entrySet()) 
-			message.append(entry.getKey()).append("=").append(ArrayUtils.toString(entry.getValue())).append("\n");
+			message.append(entry.getKey()).append("=").append(ArrayUtils.join(entry.getValue())).append("\n");
 		
 		logger.info("Success initialize pattern and datasources on {}ms:\n{}",
 				DateUtils.getIntervalMillis(new Date(), start), message);

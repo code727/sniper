@@ -45,7 +45,7 @@ public class BeanToParametersMapper<V> extends AbstractMapper<Object, Parameters
 		if (CollectionUtils.isNotEmpty(mapperRules)) {
 			if (isAutoMapping()) {
 				// 需要自动映射的属性名称集
-				List<String> autoMappedNames = BeanUtils.findAllPropertyNameByGetter(source);
+				List<String> autoMappedNames = BeanUtils.findPropertyNamesByGetter(source);
 				
 				for (MapperRule rule : mapperRules) {
 					parameters.add(rule.getMappedName(), (V) BeanUtils.getPropertyValue(source, rule.getOriginalName()));

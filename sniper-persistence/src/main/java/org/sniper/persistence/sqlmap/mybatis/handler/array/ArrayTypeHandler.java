@@ -39,7 +39,7 @@ public class ArrayTypeHandler<T> extends BaseTypeHandler<T[]> {
 	@Override
 	public void setNonNullParameter(PreparedStatement ps, int i, T[] parameter, JdbcType jdbcType) throws SQLException {
 		if (ArrayUtils.isNotEmpty(parameter)) 
-			ps.setString(i, ArrayUtils.toString(parameter));
+			ps.setString(i, ArrayUtils.join(parameter));
 	}
 	
 	@Override

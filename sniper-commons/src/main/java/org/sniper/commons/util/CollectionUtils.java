@@ -927,7 +927,7 @@ public class CollectionUtils {
 	 * @return
 	 */
 	public static <T> String join(Collection<T> collection) {
-		return join(collection, ",");
+		return join(collection, StringUtils.COMMA);
 	}
 	
 	/**

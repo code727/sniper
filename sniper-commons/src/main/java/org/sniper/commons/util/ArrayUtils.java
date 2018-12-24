@@ -3734,8 +3734,8 @@ public class ArrayUtils {
 	 * @param array
 	 * @return
 	 */
-	public static String toString(Object[] array) {
-		return toString(array, StringUtils.COMMA);
+	public static String join(Object[] array) {
+		return join(array, StringUtils.COMMA);
 	}
 	
 	/**
@@ -3745,7 +3745,7 @@ public class ArrayUtils {
 	 * @param separator
 	 * @return
 	 */
-	public static String toString(Object[] array, String separator) {
+	public static String join(Object[] array, String separator) {
 		if (isEmpty(array))
 			return StringUtils.EMPTY;
 		
@@ -3759,8 +3759,9 @@ public class ArrayUtils {
 			
 			builder.append(array[max]);
 		} else {
-			for (Object e : array) 
-				builder.append(e);
+			for (Object element : array) {
+				builder.append(element);
+			}
 		}
 		return builder.toString();
 	}

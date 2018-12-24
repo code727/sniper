@@ -88,7 +88,7 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 			this.groupPredicate.put(name, Enum.valueOf(Predicate.class, predicate.toUpperCase()));
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Unknow predicate \"" + predicate + 
-					"\", support predicate types [" + ArrayUtils.toString(Predicate.values()) + "]");
+					"\", support predicate types [" + ArrayUtils.join(Predicate.values()) + "]");
 		}
 		return this;
 	}

@@ -306,6 +306,37 @@ public class BeanUtils {
 	}
 	
 	/**
+	 * 根据当前Bean的getter方法检索出对应的属性名
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param bean
+	 * @return
+	 */
+	public static <T> List<String> findPropertyNamesByGetter(T bean) {
+		return findPropertyNamesByGetter(bean, null);
+	}
+	
+	/**
+	 * 根据当前Bean的getter方法检索出对应的属性名，其中excludeNames数组内罗列的属性名称将排除在检索范围外
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param bean
+	 * @param excludeNames
+	 * @return
+	 */
+	public static <T> List<String> findPropertyNamesByGetter(T bean, String[] excludeNames) {
+		List<Method> getters = findGetters(bean);
+		if (CollectionUtils.isEmpty(getters))
+			return null;
+		
+		List<String> list = CollectionUtils.newArrayList();
+		for (Method getter : getters) {
+			String propertyName = getterToPropertyName(getter, excludeNames);
+			if (propertyName != null)
+				list.add(propertyName);
+		}
+		return list;
+	}
+	
+	/**
 	 * 检索嵌套成员属性对应的getter方法名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param obj bean对象或class类型
@@ -378,57 +409,57 @@ public class BeanUtils {
 	/**
 	 * 调用全限定名对应类的构造函数创建Bean实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param className
+	 * @param beanClassName Bean对象全限定名
 	 * @return
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T create(String className) throws Exception { 
-		return (T) create(Class.forName(className), (Map<String, Object>) null);
+	public static <T> T create(String beanClassName) throws Exception { 
+		return (T) create(beanClassName, (Map<String, Object>) null);
 	}
 	
 	/**
-	 * 调用全限定名对应类的构造函数创建Bean实例，并调用各属性对应的setter方法赋值
+	 * 调用全限定名对应类的构造函数创建Bean实例，并将映射集内的各属性值赋予Bean实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param className
-	 * @param propertyValues
+	 * @param beanClassName Bean对象全限定名
+	 * @param properties 属性-值映射集
 	 * @return
 	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T, V> T create(String className, Map<String, V> propertyValues) throws Exception {
-		AssertUtils.assertNotBlank(className, "Created bean class name must not be null or blank.");
+	public static <T, V> T create(String beanClassName, Map<String, V> properties) throws Exception {
+		AssertUtils.assertNotBlank(beanClassName, "Bean class name must not be null or blank");
 		
-		return (T) create(Class.forName(className.trim()), propertyValues);
+		return (T) create(Class.forName(beanClassName.trim()), properties);
 	}
 	
 	/**
 	 * 创建Bean实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param clazz
+	 * @param beanType Bean对象类型
 	 * @return
 	 * @throws Exception
 	 */
-	public static <T> T create(Class<T> clazz) throws Exception {
-		return create(clazz, (Map<String, Object>) null);
+	public static <T> T create(Class<T> beanType) throws Exception {
+		return create(beanType, (Map<String, Object>) null);
 	}
 	
 	/**
-	 * 创建Bean实例，并调用各属性对应的setter方法赋值
+	 * 创建Bean实例，并将映射集内的各属性值赋予Bean实例
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param clazz
-	 * @param propertyValues 属性-值映射集
+	 * @param beanType Bean对象对象
+	 * @param properties 属性-值映射集
 	 * @return
 	 * @throws Exception 
 	 */
-	public static <T, V> T create(Class<T> clazz, Map<String, V> propertyValues) throws Exception {
-		return beanReflector.create(clazz, propertyValues);
+	public static <T, V> T create(Class<T> beanType, Map<String, V> properties) throws Exception {
+		return beanReflector.create(beanType, properties);
 	}
 	
 	/**
 	 * 根据当前Bean对象创建一个Map，其键值对就是bean的每一个属性名和值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param bean Bean对象
 	 * @return
 	 * @throws Exception
 	 */
@@ -437,50 +468,44 @@ public class BeanUtils {
 	}
 	
 	/**
-	 * 根据当前Bean对象创建一个Map
+	 * 根据当前Bean对象创建一个Map，在创建的过程中可以指定哪些属性不设置给Map对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
-	 * @param excludesName
+	 * @param bean Bean对象
+	 * @param excludeNames
 	 * @return
 	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T, V> Map<String, V> create(T bean, String[] excludesName) throws Exception {
-		List<Method> methods = ReflectionUtils.getDeclaredMethods(bean);
-		if (CollectionUtils.isNotEmpty(methods)) {
-			Map<String, V> map = MapUtils.newHashMap();
-			for (Method method : methods) {
-				// 出于对性能的考虑，此方法只调用getter方法进行设值处理
-				String propertyName = propertyNameByGetter(method, excludesName);
-				if (propertyName != null)
-					map.put(propertyName, (V) ReflectionUtils.invokeMethod(bean, method.getName()));
-			}
-			return map;
-		}
+	public static <T, V> Map<String, V> create(T bean, String[] excludeNames) throws Exception {
+		List<Method> getters = findGetters(bean);
+		if (CollectionUtils.isEmpty(getters))
+			return null;
 		
-		return null;
+		Map<String, V> map = MapUtils.newHashMap();
+		for (Method getter : getters) {
+			String propertyName = getterToPropertyName(getter, excludeNames);
+			/* 将getter方法转换为对应的属性名称不为空时，说明getter方法没有被排除在外，将getter方法的返回结果赋予Map即可*/
+			if (propertyName != null)
+				map.put(propertyName, (V) ReflectionUtils.invokeMethod(bean, getter));
+		}
+		return map;
 	}
 	
 	/**
-	 * 根据当前Bean的getter方法检索出对应的属性名
+	 * 将Getter方法转换为对应的属性名称，其中excludeNames数组内罗列的属性名称将排除在转换范围外
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param bean
+	 * @param getter
+	 * @param excludeNames
 	 * @return
 	 */
-	public static <T> List<String> findAllPropertyNameByGetter(T bean) {
-		List<Method> methods = ReflectionUtils.getDeclaredMethods(bean);
-		if (CollectionUtils.isNotEmpty(methods)) {
-			List<String> list = CollectionUtils.newArrayList();
-			for (Method method : methods) {
-				String propertyName = propertyNameByGetter(method, null);
-				if (propertyName != null)
-					list.add(propertyName);
-			}
-			
-			return list;
-		}
-		
-		return null;
+	private static String getterToPropertyName(Method getter, String[] excludeNames) {
+		String name = getter.getName();
+		String propertyName = StringUtils.afterPrefix(name, ReflectionUtils.GETTER_PREFIX);
+		if (StringUtils.isEmpty(propertyName))
+			propertyName = StringUtils.afterPrefix(name, ReflectionUtils.BOOLEAN_GETTER_PREFIX);
+
+		propertyName = StringUtils.uncapitalize(propertyName);
+		return !ArrayUtils.contains(excludeNames, propertyName) ? propertyName : null;
 	}
 	
 	/**
@@ -579,26 +604,6 @@ public class BeanUtils {
 			return false;
 		
 		return method.getName().equals(setterName) && parameterTypes[0] == parameterType;
-	}
-	
-	/**
-	 * 根据Getter方法获取对应的属性名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param method
-	 * @param excludesName
-	 * @return
-	 */
-	private static String propertyNameByGetter(Method method, String[] excludesName) {
-		if (!ReflectionUtils.isGetter(method))
-			return null;
-		
-		String name = method.getName();
-		String propertyName = StringUtils.afterPrefix(name, ReflectionUtils.GETTER_PREFIX);
-		if (StringUtils.isEmpty(propertyName))
-			propertyName = StringUtils.afterPrefix(name, ReflectionUtils.BOOLEAN_GETTER_PREFIX);
-
-		propertyName = StringUtils.uncapitalize(propertyName);
-		return !ArrayUtils.contains(excludesName, propertyName) ? propertyName : null;
 	}
 	
 }

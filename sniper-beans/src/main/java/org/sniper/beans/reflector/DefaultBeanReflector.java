@@ -18,10 +18,10 @@
 
 package org.sniper.beans.reflector;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.sniper.beans.BeanUtils;
 import org.sniper.beans.expression.ArrayPropertyHandler;
@@ -40,7 +40,6 @@ import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.ReflectionUtils;
-import org.sniper.commons.util.StringUtils;
 
 /**
  * Bean映射器默认实现类
@@ -181,13 +180,7 @@ public class DefaultBeanReflector implements BeanReflector {
 	@Override
 	public <T, V> T create(String className, Map<String, V> properties) throws Exception {
 		AssertUtils.assertNotBlank(className, "Bean class name must not be null or blank");
-		
-		try {
-			return (T) create(Class.forName(className.trim()), properties);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return (T) create(Class.forName(className.trim()), properties);
 	}
 	
 	@Override
@@ -195,15 +188,10 @@ public class DefaultBeanReflector implements BeanReflector {
 		T bean = ReflectionUtils.newInstance(clazz);
 		
 		if (MapUtils.isNotEmpty(properties)) {
-			Set<Entry<String, V>> propertyValue = properties.entrySet();
-			for (Entry<String, V> pv : propertyValue) {
-				String propertyName = pv.getKey();
-				if (StringUtils.isNotBlank(propertyName))
-					try {
-						setPropertyValue(bean, propertyName, pv.getValue());
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+			Iterator<Entry<String, V>> iterator = properties.entrySet().iterator();
+			while (iterator.hasNext()) {
+				Entry<String, V> property = iterator.next();
+				setPropertyValue(bean, property.getKey(), property.getValue());
 			}
 		}
 		return bean;

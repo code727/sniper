@@ -7,12 +7,14 @@ package org.sniper.beans.test;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.sniper.beans.BeanUtils;
 import org.sniper.commons.exception.NestedNullPointerException;
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.commons.util.MapUtils;
 import org.sniper.test.domain.User;
 import org.sniper.test.junit.BaseTestCase;
 
@@ -176,7 +178,7 @@ public class BeanUtilsTest extends BaseTestCase {
 		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
 	}
 	
-	@Test
+//	@Test
 	public void testBeanPropertyOperations() throws Exception {	
 		String propertyName = "name";
 		Object propertyValue = "daniele";
@@ -331,6 +333,51 @@ public class BeanUtilsTest extends BaseTestCase {
 		setterName = BeanUtils.findNestedSetterName(User.class, "department.company.name");
 		assertNotNull(setterName);
 		System.out.println(setterName);
+	}
+	
+//	@Test
+	public void testFindPropertyNamesByGetter() {
+		List<String> names = BeanUtils.findPropertyNamesByGetter(User.class);
+		assertTrue(CollectionUtils.isNotEmpty(names));
+		System.out.println(names);
+		
+		names = BeanUtils.findPropertyNamesByGetter(User.class, new String[]{"id", "password"});
+		assertTrue(CollectionUtils.isNotEmpty(names));
+		System.out.println(names);
+	}
+	
+//	@Test
+	public void testCreateBean() throws Exception {
+		User user = BeanUtils.create(User.class);
+		assertNotNull(user);
+		
+		Map<String, Object> properties = MapUtils.newHashMap();
+		properties.put("name", "daniele");
+		properties.put("married", true);
+		properties.put("boss.name", "herris");
+		properties.put("boss.married", true);
+		
+		user = BeanUtils.create(User.class, properties);
+		assertNotNull(user);
+		assertEquals("daniele", user.getName());
+		assertEquals(true, user.isMarried());
+		assertEquals("herris", user.getBoss().getName());
+		assertEquals(true, user.getBoss().isMarried());
+	}
+	
+	@Test
+	public void testCreateMapByBean() throws Exception {
+		Map<String, Object> map = BeanUtils.create(this.user);
+		assertTrue(MapUtils.isNotEmpty(map));
+		System.out.println(map);
+		
+		map = BeanUtils.create(this.user, new String[] { "abc" });
+		assertTrue(MapUtils.isNotEmpty(map));
+		System.out.println(map);
+		
+		map = BeanUtils.create(this.user, new String[] { "createTime", "married", "boss" });
+		assertTrue(MapUtils.isNotEmpty(map));
+		System.out.println(map);
 	}
 		
 }
