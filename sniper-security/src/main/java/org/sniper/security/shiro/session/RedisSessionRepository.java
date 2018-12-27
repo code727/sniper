@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.nosql.redis.dao.RedisCommandsDao;
+import org.sniper.nosql.redis.command.RedisCommands;
 
 /**
  * Redis会话共享库实现类
@@ -44,7 +44,7 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 	/** 存储会话数据的库名称 */
 	private String dbName;
 		
-	private RedisCommandsDao redisCommandsDao;
+	private RedisCommands redisCommands;
 	
 	public RedisSessionRepository() {
 		this.prefix = "shiro_session_";
@@ -66,18 +66,18 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 		this.dbName = dbName;
 	}
 
-	public RedisCommandsDao getRedisCommandsDao() {
-		return redisCommandsDao;
+	public RedisCommands getRedisCommands() {
+		return redisCommands;
 	}
 
-	public void setRedisCommandsDao(RedisCommandsDao redisCommandsDao) {
-		this.redisCommandsDao = redisCommandsDao;
+	public void setRedisCommands(RedisCommands redisCommands) {
+		this.redisCommands = redisCommands;
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (this.redisCommandsDao == null)
-			throw new IllegalArgumentException("Property 'redisCommandsDao' is required.");
+		if (this.redisCommands == null)
+			throw new IllegalArgumentException("Property 'redisCommands' is required");
 	}
 
 	@Override
@@ -86,21 +86,21 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 			((SimpleSession) session).setStopTimestamp(null);
 		
 		String sessionId = getPrefix() + session.getId();
-		redisCommandsDao.set2(dbName, sessionId, session);
+		redisCommands.setIn(dbName, sessionId, session);
 		logger.debug("Set session id:{}", sessionId);
 	}
 
 	@Override
 	public void deleteSession(Serializable sessionId) {
 		String cacheSessionId = getPrefix() + sessionId;
-		redisCommandsDao.del(dbName, new Serializable[] { cacheSessionId });
+		redisCommands.del(dbName, new Serializable[] { cacheSessionId });
 		logger.debug("Delete session id:{}", cacheSessionId);
 	}
 
 	@Override
 	public Session getSession(Serializable sessionId) {
 		String cacheSessionId = getPrefix() + sessionId;
-		Session session = redisCommandsDao.get2(dbName, cacheSessionId);
+		Session session = redisCommands.getIn(dbName, cacheSessionId);
 		logger.debug("Get session id:{}", cacheSessionId);
 		return session;
 	}
@@ -108,7 +108,7 @@ public class RedisSessionRepository implements SessionRepository, InitializingBe
 	@Override
 	public Collection<Session> getAllSessions() {
 		String pattern = getPrefix() + StringUtils.ANY;
-		Collection<Session> sessions = redisCommandsDao.valuesByPattern(dbName, pattern);
+		Collection<Session> sessions = redisCommands.valuesByPattern(dbName, pattern);
 		logger.debug("Get all session keys:{}", pattern);
 		return sessions;
 	}

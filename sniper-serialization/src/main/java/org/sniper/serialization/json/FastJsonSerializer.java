@@ -26,9 +26,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.ReflectionUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.serialization.SerializationException;
@@ -51,7 +51,7 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	
 	@Override
 	public boolean canSerialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
+		Class<?> type = ClassUtils.getCurrentType(obj);
 		if (type == null)
 			return false;
 		
@@ -61,7 +61,7 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 
 	@Override
 	public boolean canDeserialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
+		Class<?> type = ClassUtils.getCurrentType(obj);
 		if (type == null)
 			return false;
 		

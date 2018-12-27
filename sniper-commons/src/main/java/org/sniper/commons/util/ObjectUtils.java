@@ -213,18 +213,5 @@ public class ObjectUtils {
 	public static int hashCode(Object obj) {
 		return obj != null ? obj.hashCode() : 0;
 	}
-	
-	/**
-	 * 获取对象的Class类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param obj
-	 * @return
-	 */
-	public static Class<?> getClass(Object obj) {
-		if (obj == null)
-			return null;
-		
-		return !(obj instanceof Class) ? obj.getClass() : (Class<?>) obj;
-	}
-		
+			
 }

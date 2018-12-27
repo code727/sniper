@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016年8月1日
+ * Create Date : 2016-8-1
  */
 
-package org.sniper.nosql.redis.dao;
+package org.sniper.nosql.redis.command;
 
 import java.beans.PropertyEditor;
 import java.util.Collection;
@@ -39,11 +39,11 @@ import org.sniper.serialization.jdk.StringSerializer;
 import org.sniper.spring.beans.CheckableInitializingBean;
 
 /**
- * RedisDao支持类
+ * Redis支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class RedisDaoSupport extends CheckableInitializingBean {
+public abstract class RedisSupport extends CheckableInitializingBean {
 	
 	/** Redis库管理 */
 	protected RedisRepositoryManager repositoryManager;

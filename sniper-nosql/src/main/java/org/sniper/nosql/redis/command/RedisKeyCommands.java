@@ -16,7 +16,7 @@
  * Create Date : 2015-3-30
  */
 
-package org.sniper.nosql.redis.dao;
+package org.sniper.nosql.redis.command;
 
 import java.util.Collection;
 import java.util.Date;

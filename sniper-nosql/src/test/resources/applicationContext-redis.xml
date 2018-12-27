@@ -13,7 +13,7 @@
 	<context:annotation-config />
 	<context:property-placeholder location="application-redis.properties" />
 
-	<bean id="redisCommandsDao" class="org.sniper.nosql.redis.spring.SpringRedisCommandsDaoImpl" >
+	<bean id="redisCommands" class="org.sniper.nosql.redis.spring.SpringRedisCommandsImpl" >
 		<property name="redisTemplate" ref="redisTemplate" />
 		<property name="repositoryManager" ref="repositoryManager" />
 		<property name="globalKeySerializer">

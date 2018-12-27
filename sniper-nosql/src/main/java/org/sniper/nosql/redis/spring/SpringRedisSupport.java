@@ -25,7 +25,7 @@ import java.util.Set;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.ReflectionUtils;
 import org.sniper.nosql.redis.RedisRepository;
-import org.sniper.nosql.redis.dao.RedisDaoSupport;
+import org.sniper.nosql.redis.command.RedisSupport;
 import org.sniper.nosql.redis.serializer.SpringRedisSerializerProxy;
 import org.sniper.serialization.Serializer;
 import org.sniper.serialization.TypedSerializer;
@@ -35,11 +35,11 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
 /**
- * Redis数据访问接口支持类
+ * Spring Redis支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class SpringRedisDaoSupport extends RedisDaoSupport {
+public abstract class SpringRedisSupport extends RedisSupport {
 			
 	private RedisTemplate<?, ?> redisTemplate;
 	

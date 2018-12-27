@@ -18,16 +18,16 @@
 
 package org.sniper.nosql.redis.jedis;
 
-import org.sniper.nosql.redis.dao.RedisDaoSupport;
+import org.sniper.nosql.redis.command.RedisSupport;
 
 import redis.clients.jedis.JedisPool;
 
 /**
- * JedisDao支持类
+ * Jedis支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class JedisDaoSupport extends RedisDaoSupport {
+public abstract class JedisSupport extends RedisSupport {
 	
 	 private JedisPool jedisPool;
 	 

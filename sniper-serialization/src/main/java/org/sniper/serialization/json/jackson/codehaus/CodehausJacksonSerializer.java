@@ -25,8 +25,8 @@ import java.util.Collection;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
 import org.codehaus.jackson.type.JavaType;
+import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.DateUtils;
-import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.serialization.SerializationException;
 import org.sniper.serialization.json.AbstractJsonSerializer;
@@ -71,13 +71,13 @@ public class CodehausJacksonSerializer extends AbstractJsonSerializer {
 	
 	@Override
 	public boolean canSerialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
+		Class<?> type = ClassUtils.getCurrentType(obj);
 		return type != null && this.objectMapper.canSerialize(type);
 	}
 
 	@Override
 	public boolean canDeserialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
+		Class<?> type = ClassUtils.getCurrentType(obj);
 		if (type == null)
 			return false;
 		

@@ -19,10 +19,12 @@
 package org.sniper.nosql.test;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sniper.nosql.redis.dao.RedisCommandsDao;
+import org.sniper.commons.util.MapUtils;
+import org.sniper.nosql.redis.command.RedisCommands;
 import org.sniper.serialization.json.JsonSerializer;
 import org.sniper.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
 import org.sniper.test.domain.User;
@@ -40,7 +42,7 @@ public class RedisTest extends JUnit4SpringTestCase {
 	protected JsonSerializer jsonSerializer = new CodehausJacksonSerializer();
 	
 	@Autowired
-	private RedisCommandsDao redisCommandsDao;
+	private RedisCommands redisCommands;
 	
 	private User user = new User();
 	
@@ -58,21 +60,21 @@ public class RedisTest extends JUnit4SpringTestCase {
 		String key = "name";
 		String name = "dubin";
 		
-		redisCommandsDao.set(key, name);
-		name = redisCommandsDao.get(key);
+		redisCommands.set(key, name);
+		name = redisCommands.get(key);
 		System.out.println(name);
 		
 		key = "age";
 		int age = 36;
-		redisCommandsDao.set2("string", key, age);
-		age = redisCommandsDao.get2("string", key, int.class);
+		redisCommands.setIn("string", key, age);
+		age = redisCommands.get("string", key, int.class);
 		System.out.println(age);
 	}
 	
 //	@Test
 	public void testKeys() {
-		System.out.println(redisCommandsDao.keys());
-		System.out.println(redisCommandsDao.valuesByPattern("age", int.class));
+		System.out.println(redisCommands.keys());
+		System.out.println(redisCommands.valuesByPattern("age", int.class));
 	}
 	
 //	@Test
@@ -80,18 +82,18 @@ public class RedisTest extends JUnit4SpringTestCase {
 		String key = "user";
 		User value = user;
 		
-		redisCommandsDao.set2("json", key, value);
-		value = redisCommandsDao.get2("json", key, User.class);
+		redisCommands.setIn("json", key, value);
+		value = redisCommands.get("json", key, User.class);
 		System.out.println(jsonSerializer.serializeToString(value));
 	}
 	
-	@Test
+//	@Test
 	public void testHessianOperatin() {
 		String key = "user_hessian";
 		User value = user;
 		
 //		redisCommandsDao.set2("hessian", key, value);
-		value = redisCommandsDao.get2("hessian", key);
+		value = redisCommands.getIn("hessian", key);
 		System.out.println(jsonSerializer.serializeToString(value));
 		
 //		key = "name_hessian";
@@ -105,6 +107,17 @@ public class RedisTest extends JUnit4SpringTestCase {
 //		redisCommandsDao.set2("hessian", key, age);
 //		age = redisCommandsDao.get2("hessian", key, Integer.class);
 //		System.out.println(age);
+	}
+	
+	@Test
+	public void testZAdd() {
+		Map<Double, Object> scoreMembers = MapUtils.newHashMap();
+		scoreMembers.put(0.1, "a");
+		scoreMembers.put(0.2, "b");
+		scoreMembers.put(0.3, null);
+		
+//		System.out.println(redisCommands.zAdd("zAdd", scoreMembers));
+		System.out.println(redisCommands.zAdds("zAdds", scoreMembers));
 	}
 	
 }

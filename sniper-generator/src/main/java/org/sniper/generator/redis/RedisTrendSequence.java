@@ -20,7 +20,7 @@ package org.sniper.generator.redis;
 
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.generator.sequence.AbstractKeyspaceTrendSequence;
-import org.sniper.nosql.redis.dao.RedisCommandsDao;
+import org.sniper.nosql.redis.command.RedisCommands;
 
 /**
  * 基于Redis实现的趋势序列，生成的结果具备如下特点：</P>
@@ -38,30 +38,30 @@ public class RedisTrendSequence extends AbstractKeyspaceTrendSequence<Object, Lo
 	/** 生成序列的库名 */
 	protected final String dbName;
 	
-	protected final RedisCommandsDao redisCommandsDao;
+	protected final RedisCommands redisCommands;
 	
-	public RedisTrendSequence(RedisCommandsDao redisCommandsDao) {
-		this((String) null, redisCommandsDao);
+	public RedisTrendSequence(RedisCommands redisCommands) {
+		this((String) null, redisCommands);
 	}
 	
-	public RedisTrendSequence(RedisCommandsDao redisCommandsDao, Object defaultKeyspace) {
-		this(null, redisCommandsDao, defaultKeyspace);
+	public RedisTrendSequence(RedisCommands redisCommands, Object defaultKeyspace) {
+		this(null, redisCommands, defaultKeyspace);
 	}
 	
-	public RedisTrendSequence(String dbName, RedisCommandsDao redisCommandsDao) {
-		this(dbName, redisCommandsDao, null);
+	public RedisTrendSequence(String dbName, RedisCommands redisCommands) {
+		this(dbName, redisCommands, null);
 	}
 	
-	public RedisTrendSequence(String dbName, RedisCommandsDao redisCommandsDao, Object defaultKeyspace) {
+	public RedisTrendSequence(String dbName, RedisCommands redisCommands, Object defaultKeyspace) {
 		super(defaultKeyspace != null ? defaultKeyspace : DEFAULT_KEYSPACE);
-		AssertUtils.assertNotNull(redisCommandsDao, "Redis commands dao not be null");
+		AssertUtils.assertNotNull(redisCommands, "Redis commands must not be null");
 		this.dbName = dbName;
-		this.redisCommandsDao = redisCommandsDao;
+		this.redisCommands = redisCommands;
 	}
 
 	@Override
 	protected Long doUpdateByKey(Object key, int stepSize) {
-		return redisCommandsDao.incrBy(key, stepSize);
+		return redisCommands.incrBy(key, stepSize);
 	}
 
 }

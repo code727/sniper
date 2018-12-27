@@ -20,9 +20,9 @@ package org.sniper.nosql.redis.spring;
 
 import java.util.List;
 
+import org.sniper.nosql.redis.command.RedisKeyCommands;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.SortParameters;
-import org.sniper.nosql.redis.dao.RedisKeyCommands;
 
 /**
  * Spring Redis键命令接口
@@ -58,7 +58,7 @@ public interface SpringRedisKeyCommands extends RedisKeyCommands {
 	 * @param params
 	 * @return
 	 */
-	public <K, V> List<V> sort2(String dbName, K key, SortParameters params);
+	public <K, V> List<V> sort(String dbName, K key, SortParameters params);
 	
 	/**
 	 * 将指定库的键按照规则进行排序后返回指定类型的值列表
@@ -69,7 +69,7 @@ public interface SpringRedisKeyCommands extends RedisKeyCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> List<V> sort2(String dbName, K key, SortParameters params, Class<V> valueType);
+	public <K, V> List<V> sort(String dbName, K key, SortParameters params, Class<V> valueType);
 	
 	/**
 	 * 将当前库的键按照指定的规则进行排序后返回目标键对应的值个数
@@ -122,7 +122,7 @@ public interface SpringRedisKeyCommands extends RedisKeyCommands {
 	 * @param targetKey
 	 * @return 存入目标键的结果个数
 	 */
-	public <K, V> List<V> sortResult2(String dbName, K key, SortParameters params, K targetKey);
+	public <K, V> List<V> sortResultIn(String dbName, K key, SortParameters params, K targetKey);
 	
 	/**
 	 * 将指定库的键按照规则进行排序后返回目标键对应类型的值列表
@@ -134,7 +134,7 @@ public interface SpringRedisKeyCommands extends RedisKeyCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> List<V> sortResult2(String dbName, K key, SortParameters params, K targetKey, Class<V> valueType);
+	public <K, V> List<V> sortResult(String dbName, K key, SortParameters params, K targetKey, Class<V> valueType);
 	
 	/**
 	 * 获取当前库的键对应的值类型

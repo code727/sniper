@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 the original author or authors.
+ * Copyright 2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2016-8-26
+ * Create Date : 2015-3-28
  */
 
-package org.sniper.nosql.redis.jedis;
-
-import org.sniper.nosql.redis.dao.RedisCommandsDao;
+package org.sniper.nosql.redis.command;
 
 /**
- * Jedis命令行数据访问接口
+ * Redis命令行接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JedisCommandsDao extends RedisCommandsDao, JedisKeyCommands,
-		JedisListCommands, JedisSortedSetCommands {
+public interface RedisCommands extends RedisStringCommands,
+		RedisHashCommands, RedisListCommands, RedisSetCommands,
+		RedisSortedSetCommands, RedisKeyCommands, RedisServerCommands {
 
 }

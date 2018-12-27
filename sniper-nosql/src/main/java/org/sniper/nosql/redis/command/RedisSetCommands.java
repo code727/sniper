@@ -16,7 +16,7 @@
  * Create Date : 2015-3-28
  */
 
-package org.sniper.nosql.redis.dao;
+package org.sniper.nosql.redis.command;
 
 import java.util.Collection;
 import java.util.Set;
@@ -55,7 +55,7 @@ public interface RedisSetCommands {
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Long sAdd2(String dbName, K key, V member);
+	public <K, V> Long sAddIn(String dbName, K key, V member);
 	
 	/**
 	 * 在指定库中执行sAdd命令，并设置过期秒数
@@ -66,7 +66,7 @@ public interface RedisSetCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long sAdd2(String dbName, K key, V member, long expireSeconds);
+	public <K, V> Long sAdd(String dbName, K key, V member, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行sAdd命令
@@ -664,7 +664,7 @@ public interface RedisSetCommands {
 	 * @param key
 	 * @return
 	 */
-	public <K, V> Set<V> sMembers2(String dbName, K key);
+	public <K, V> Set<V> sMembersIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行sMembers命令，获取集合键对应的所有指定类型的成员元素
@@ -674,7 +674,7 @@ public interface RedisSetCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> Set<V> sMembers2(String dbName, K key, Class<V> valueType);
+	public <K, V> Set<V> sMembers(String dbName, K key, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行sMove命令，将源集合键指定的成员移到目标集合键中
@@ -721,7 +721,7 @@ public interface RedisSetCommands {
 	 * @param key
 	 * @return
 	 */
-	public <K, V> V sPop2(String dbName, K key);
+	public <K, V> V sPopIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行sPop命令，随机出栈键中的一个值
@@ -731,7 +731,7 @@ public interface RedisSetCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> V sPop2(String dbName, K key, Class<V> valueType);
+	public <K, V> V sPop(String dbName, K key, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行sRandMember命令，随机获取键中的一个值
@@ -757,7 +757,7 @@ public interface RedisSetCommands {
 	 * @param key
 	 * @return
 	 */
-	public <K, V> V sRandMember2(String dbName, K key);
+	public <K, V> V sRandMemberIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行sRandMember命令，随机获取键中的一个值
@@ -767,7 +767,7 @@ public interface RedisSetCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> V sRandMember2(String dbName, K key, Class<V> valueType);
+	public <K, V> V sRandMember(String dbName, K key, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行sRem命令，删除集合键中指定的一个成员

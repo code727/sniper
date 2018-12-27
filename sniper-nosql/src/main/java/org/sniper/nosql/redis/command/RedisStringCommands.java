@@ -16,7 +16,7 @@
  * Create Date : 2015-3-26
  */
 
-package org.sniper.nosql.redis.dao;
+package org.sniper.nosql.redis.command;
 
 import java.util.Collection;
 import java.util.List;
@@ -53,7 +53,7 @@ public interface RedisStringCommands {
 	 * @param key 键
 	 * @param value 值
 	 */
-	public <K, V> void set2(String dbName, K key, V value);
+	public <K, V> void setIn(String dbName, K key, V value);
 	
 	/**
 	 * 在指定库中执行set命令，并设置过期秒数
@@ -63,7 +63,7 @@ public interface RedisStringCommands {
 	 * @param value
 	 * @param expireSeconds
 	 */
-	public <K, V> void set2(String dbName, K key, V value, long expireSeconds);
+	public <K, V> void set(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行setNX命令
@@ -90,7 +90,7 @@ public interface RedisStringCommands {
 	 * @param key 键
 	 * @param value 值
 	 */
-	public <K, V> Boolean setNX2(String dbName, K key, V value);
+	public <K, V> Boolean setNXIn(String dbName, K key, V value);
 	
 	/**
 	 * 在指定库中执行setNX命令，并设置过期秒数
@@ -101,7 +101,7 @@ public interface RedisStringCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean setNX2(String dbName, K key, V value, long expireSeconds);
+	public <K, V> Boolean setNX(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行setEx命令，并设置当前库全局过期秒数
@@ -127,7 +127,7 @@ public interface RedisStringCommands {
 	 * @param key
 	 * @param value
 	 */
-	public <K, V> void setEx2(String dbName, K key, V value);
+	public <K, V> void setExIn(String dbName, K key, V value);
 	
 	/**
 	 * 在指定库中执行setEx命令，并设置当前库过期秒数
@@ -137,7 +137,7 @@ public interface RedisStringCommands {
 	 * @param seconds
 	 * @param value
 	 */
-	public <K, V> void setEx2(String dbName, K key, long seconds, V value);
+	public <K, V> void setEx(String dbName, K key, long seconds, V value);
 	
 	/**
 	 * 在当前库中执行mSet命令
@@ -230,7 +230,7 @@ public interface RedisStringCommands {
 	 * @param offset
 	 * @param value
 	 */
-	public <K, V> void setRange2(String dbName, K key, long offset, V value);
+	public <K, V> void setRangeIn(String dbName, K key, long offset, V value);
 	
 	/**
 	 * 在指定库中执行setRange命令，并设置过期秒数
@@ -241,7 +241,7 @@ public interface RedisStringCommands {
 	 * @param value
 	 * @param expireSeconds
 	 */
-	public <K, V> void setRange2(String dbName, K key, long offset, V value, long expireSeconds);
+	public <K, V> void setRange(String dbName, K key, long offset, V value, long expireSeconds);
 	
 	/**
 	 * 将值追加到当前库键的原值后面
@@ -270,7 +270,7 @@ public interface RedisStringCommands {
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long append2(String dbName, K key, V value);
+	public <K, V> Long appendIn(String dbName, K key, V value);
 	
 	/**
 	 * 将值追加到指定库键的原值后面，并设置过期秒数
@@ -281,7 +281,7 @@ public interface RedisStringCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long append2(String dbName, K key, V value, long expireSeconds);
+	public <K, V> Long append(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行get命令，获取指定键对应的值
@@ -307,7 +307,7 @@ public interface RedisStringCommands {
 	 * @param key
 	 * @return
 	 */
-	public <K, V> V get2(String dbName, K key);
+	public <K, V> V getIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行get命令，获取指定键对应类型的值
@@ -317,7 +317,7 @@ public interface RedisStringCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> V get2(String dbName, K key, Class<V> valueType);
+	public <K, V> V get(String dbName, K key, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行getRange命令，获取begin至end之间的值
@@ -411,7 +411,7 @@ public interface RedisStringCommands {
 	 * @param value
 	 * @return 
 	 */
-	public <K, V, O> O getSet2(String dbName, K key, V value);
+	public <K, V, O> O getSetIn(String dbName, K key, V value);
 	
 	/**
 	 * 在指定库中执行getSet命令，设置键值对后返回键对应类型的旧值
@@ -422,7 +422,7 @@ public interface RedisStringCommands {
 	 * @param oldValueType
 	 * @return
 	 */
-	public <K, V, O> O getSet2(String dbName, K key, V value, Class<O> oldValueType);
+	public <K, V, O> O getSetIn(String dbName, K key, V value, Class<O> oldValueType);
 	
 	/**
 	 * 在指定库中执行getSet命令，设置具有时效的键值对后返回键对应的旧值
@@ -433,7 +433,7 @@ public interface RedisStringCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V, O> O getSet2(String dbName, K key, V value, long expireSeconds);
+	public <K, V, O> O getSet(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在指定库中执行getSet命令，设置具有时效的键值对后返回键对应类型的旧值
@@ -445,7 +445,7 @@ public interface RedisStringCommands {
 	 * @param oldValueType
 	 * @return
 	 */
-	public <K, V, O> O getSet2(String dbName, K key, V value, long expireSeconds, Class<O> oldValueType);
+	public <K, V, O> O getSet(String dbName, K key, V value, long expireSeconds, Class<O> oldValueType);
 	
 	/**
 	 * 在当前库中执行mGet命令，批量获取多个键对应的值列表

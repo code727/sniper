@@ -16,7 +16,7 @@
  * Create Date : 2015-3-28
  */
 
-package org.sniper.nosql.redis.dao;
+package org.sniper.nosql.redis.command;
 
 import java.util.Collection;
 import java.util.List;
@@ -55,7 +55,7 @@ public interface RedisListCommands {
 	 * @param posttion
 	 * @param value
 	 */
-	public <K, V> void lSet2(String dbName, K key, long posttion, V value);
+	public <K, V> void lSetIn(String dbName, K key, long posttion, V value);
 	
 	/**
 	 * 在指定库中执行lSet命令，并设置过期秒数
@@ -66,7 +66,7 @@ public interface RedisListCommands {
 	 * @param value
 	 * @param expireSeconds
 	 */
-	public <K, V> void lSet2(String dbName, K key, long posttion, V value, long expireSeconds);
+	public <K, V> void lSet(String dbName, K key, long posttion, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行lPush命令，入栈到键值列表的顶部
@@ -95,7 +95,7 @@ public interface RedisListCommands {
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long lPush2(String dbName, K key, V value);
+	public <K, V> Long lPushIn(String dbName, K key, V value);
 	
 	/**
 	 * 在指定库中执行lPushX命令，入栈到键值列表的顶部并设置过期秒数
@@ -106,7 +106,7 @@ public interface RedisListCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long lPush2(String dbName, K key, V value, long expireSeconds);
+	public <K, V> Long lPush(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中批量执行lPush命令，入栈到键值列表的顶部
@@ -215,7 +215,7 @@ public interface RedisListCommands {
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long lPushX2(String dbName, K key, V value);
+	public <K, V> Long lPushXIn(String dbName, K key, V value);
 	
 	/**
 	 * 在当前库中执行lPushX命令，入栈到键值列表的顶部并设置过期秒数
@@ -226,7 +226,7 @@ public interface RedisListCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long lPushX2(String dbName, K key, V value, long expireSeconds);
+	public <K, V> Long lPushX(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行lIndex命令，获取指定下标位对应的元素值
@@ -309,7 +309,7 @@ public interface RedisListCommands {
 	 * @param key
 	 * @return
 	 */
-	public <K, V> V lPop2(String dbName, K key);
+	public <K, V> V lPopIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行lPop命令，出栈指定键顶部的一个值
@@ -319,7 +319,7 @@ public interface RedisListCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> V lPop2(String dbName, K key, Class<V> valueType);
+	public <K, V> V lPop(String dbName, K key, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行lRange命令，获取指定键列表下标在区间范围内的所有元素
@@ -393,7 +393,7 @@ public interface RedisListCommands {
 	 * @param end
 	 * @return
 	 */
-	public <K, V> List<V> lRangeAll2(String dbName, K key);
+	public <K, V> List<V> lRangeAllIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行lRange命令，获取指定键列表中的所有元素
@@ -403,7 +403,7 @@ public interface RedisListCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> List<V> lRangeAll2(String dbName, K key, Class<V> valueType);
+	public <K, V> List<V> lRangeAll(String dbName, K key, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行lRem命令，删除键列表中count个与指定值相等的元素
@@ -491,7 +491,7 @@ public interface RedisListCommands {
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long rPush2(String dbName, K key, V value);
+	public <K, V> Long rPushIn(String dbName, K key, V value);
 	
 	/**
 	 * 在当前库中执行rPush命令，入栈到键值列表的末尾并设置过期秒数
@@ -502,7 +502,7 @@ public interface RedisListCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long rPush2(String dbName, K key, V value, long expireSeconds);
+	public <K, V> Long rPush(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中批量执行rPush命令，入栈到键值列表的末尾
@@ -611,7 +611,7 @@ public interface RedisListCommands {
 	 * @param value
 	 * @return
 	 */
-	public <K, V> Long rPushX2(String dbName, K key, V value);
+	public <K, V> Long rPushXIn(String dbName, K key, V value);
 	
 	/**
 	 * 在指定库中执行rPushX命令，入栈到键值列表的末尾并设置过期秒数
@@ -622,7 +622,7 @@ public interface RedisListCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long rPushX2(String dbName, K key, V value, long expireSeconds);
+	public <K, V> Long rPushX(String dbName, K key, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部
@@ -672,7 +672,7 @@ public interface RedisListCommands {
 	 * @param destKey
 	 * @return
 	 */
-	public <S, T, V> V rPopLPush2(String dbName, S srcKey, T destKey);
+	public <S, T, V> V rPopLPushIn(String dbName, S srcKey, T destKey);
 	
 	/**
 	 * 指定库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部
@@ -683,7 +683,7 @@ public interface RedisListCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <S, T, V> V rPopLPush2(String dbName, S srcKey, T destKey, Class<V> valueType);
+	public <S, T, V> V rPopLPushIn(String dbName, S srcKey, T destKey, Class<V> valueType);
 	
 	/**
 	 * 在指定库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部，并设置过期秒数
@@ -694,7 +694,7 @@ public interface RedisListCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <S, T, V> V rPopLPush2(String dbName, S srcKey, T destKey, long expireSeconds);
+	public <S, T, V> V rPopLPush(String dbName, S srcKey, T destKey, long expireSeconds);
 	
 	/**
 	 * 在指定库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部，并设置过期秒数
@@ -706,7 +706,7 @@ public interface RedisListCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <S, T, V> V rPopLPush2(String dbName, S srcKey, T destKey, long expireSeconds, Class<V> valueType);
+	public <S, T, V> V rPopLPush(String dbName, S srcKey, T destKey, long expireSeconds, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行rPop命令，出栈指定键尾部的一个值
@@ -732,7 +732,7 @@ public interface RedisListCommands {
 	 * @param key
 	 * @return
 	 */
-	public <K, V> V rPop2(String dbName, K key);
+	public <K, V> V rPopIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行rPop命令，出栈指定键尾部的一个值
@@ -742,5 +742,5 @@ public interface RedisListCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> V rPop2(String dbName, K key, Class<V> valueType);
+	public <K, V> V rPop(String dbName, K key, Class<V> valueType);
 }

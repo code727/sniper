@@ -36,6 +36,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.sniper.beans.propertyeditors.DatePropertyEditor;
+import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.ObjectUtils;
@@ -169,7 +170,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	
 	@Override
 	public boolean canSerialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
+		Class<?> type = ClassUtils.getCurrentType(obj);
 		if (type == null)
 			return false;
 		
@@ -178,7 +179,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 
 	@Override
 	public boolean canDeserialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
+		Class<?> type = ClassUtils.getCurrentType(obj);
 		if (type == null)
 			return false;
 		

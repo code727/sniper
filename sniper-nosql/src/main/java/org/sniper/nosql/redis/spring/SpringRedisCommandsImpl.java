@@ -39,6 +39,7 @@ import org.sniper.serialization.Serializer;
 import org.sniper.serialization.TypedSerializer;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.DataType;
+import org.springframework.data.redis.connection.DefaultTuple;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisListCommands.Position;
 import org.springframework.data.redis.connection.RedisZSetCommands.Aggregate;
@@ -48,12 +49,12 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.stereotype.Repository;
 
 /**
- * Spring Redis命令行数据访问实现类
+ * Spring Redis命令行实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 @Repository
-public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements SpringRedisCommandsDao {
+public class SpringRedisCommandsImpl extends SpringRedisSupport implements SpringRedisCommands {
 	
 	@Override
 	public <K> Set<K> keys() {
@@ -197,7 +198,10 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 				
 				Map<K, Boolean> result = MapUtils.newLinkedHashMap();
 				for (K key : keys) {
-					result.put(key, connection.exists(keySerializer.serialize(key)));
+					if (key != null)
+						result.put(key, connection.exists(keySerializer.serialize(key)));
+					else
+						result.put(key, false);
 				}
 				
 				return result;
@@ -305,17 +309,17 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	}
 	
 	public <K, V> List<V> sort(K key, SortParameters params, Class<V> valueType) {
-		return sort2(null, key, params, valueType);
+		return sort(null, key, params, valueType);
 	}
 
 	@Override
-	public <K, V> List<V> sort2(String dbName, K key, SortParameters params) {
-		return sort2(null, key, params, null);
+	public <K, V> List<V> sort(String dbName, K key, SortParameters params) {
+		return sort(null, key, params, null);
 	}
 	
-	public <K, V> List<V> sort2(final String dbName, final K key, final SortParameters params, final Class<V> valueType) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [sort]");
-		AssertUtils.assertNotNull(params, "Sort parameters can not be null of command [sort]");
+	public <K, V> List<V> sort(final String dbName, final K key, final SortParameters params, final Class<V> valueType) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [sort]");
+		AssertUtils.assertNotNull(params, "Sort parameters must not be null of command [sort]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -349,9 +353,9 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K, V> Long sortCount(final String dbName, final K key, final SortParameters params, final K targetKey) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [sort]");
-		AssertUtils.assertNotNull(params, "Sort parameters can not be null of command [sort]");
-		AssertUtils.assertNotNull(targetKey, "Target key can not be null of command [sort]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [sort]");
+		AssertUtils.assertNotNull(params, "Sort parameters must not be null of command [sort]");
+		AssertUtils.assertNotNull(targetKey, "Target key must not be null of command [sort]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -371,19 +375,19 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> List<V> sortResult(K key, SortParameters params, K targetKey, Class<V> valueType) {
-		return sortResult2(null, key, params, targetKey, valueType);
+		return sortResult(null, key, params, targetKey, valueType);
 	}
 
 	@Override
-	public <K, V> List<V> sortResult2(String dbName, K key, SortParameters params, K targetKey) {
-		return sortResult2(dbName, key, params, targetKey, null);
+	public <K, V> List<V> sortResultIn(String dbName, K key, SortParameters params, K targetKey) {
+		return sortResult(dbName, key, params, targetKey, null);
 	}
 	
 	@Override
-	public <K, V> List<V> sortResult2(final String dbName, final K key, final SortParameters params, final K targetKey, final Class<V> valueType) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [sort]");	
-		AssertUtils.assertNotNull(params, "Sort parameters can not be null of command [sort]");
-		AssertUtils.assertNotNull(targetKey, "Target key can not be null of command [sort]");
+	public <K, V> List<V> sortResult(final String dbName, final K key, final SortParameters params, final K targetKey, final Class<V> valueType) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [sort]");	
+		AssertUtils.assertNotNull(params, "Sort parameters must not be null of command [sort]");
+		AssertUtils.assertNotNull(targetKey, "Target key must not be null of command [sort]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
@@ -486,18 +490,18 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> void set(K key, V value, long expireSeconds) {
-		set2(null, key, value, expireSeconds);
+		set(null, key, value, expireSeconds);
 	}
 
 	@Override
-	public <K, V> void set2(String dbName, K key, V value) {
-		set2(dbName, key, value, 0);
+	public <K, V> void setIn(String dbName, K key, V value) {
+		set(dbName, key, value, 0);
 	}
 	
 	@Override
-	public <K, V> void set2(final String dbName, final K key, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [set]");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [set]");
+	public <K, V> void set(final String dbName, final K key, final V value, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [set]");
+		AssertUtils.assertNotNull(value, "Value must not be null of command [set]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -521,18 +525,18 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Boolean setNX(K key, V value, long expireSeconds) {
-		return setNX2(null, key, value, expireSeconds);
+		return setNX(null, key, value, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Boolean setNX2(String dbName, K key, V value) {
-		return setNX2(dbName, key, value, 0);
+	public <K, V> Boolean setNXIn(String dbName, K key, V value) {
+		return setNX(dbName, key, value, 0);
 	}	
 	
 	@Override
-	public <K, V> Boolean setNX2(final String dbName, final K key, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [setNX]");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [setNX]");
+	public <K, V> Boolean setNX(final String dbName, final K key, final V value, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [setNX]");
+		AssertUtils.assertNotNull(value, "Value must not be null of command [setNX]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -542,6 +546,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbName);
+				
 				Boolean result = connection.setNX(keyByte, valueSerializer.serialize(value));
 				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return result;
@@ -556,18 +561,18 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K, V> void setEx(K key, long seconds, V value) {
-		setEx2(null, key, seconds, value);
+		setEx(null, key, seconds, value);
 	}
 	
 	@Override
-	public <K, V> void setEx2(String dbName, K key, V value) {
-		setEx2(dbName, key, getExpireSeconds(dbName), value);	
+	public <K, V> void setExIn(String dbName, K key, V value) {
+		setEx(dbName, key, getExpireSeconds(dbName), value);	
 	}
 
 	@Override
-	public <K, V> void setEx2(final String dbName, final K key, final long seconds, final V value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [setEx]");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [setEx]");
+	public <K, V> void setEx(final String dbName, final K key, final long seconds, final V value) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [setEx]");
+		AssertUtils.assertNotNull(value, "Value must not be null of command [setEx]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -604,7 +609,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> void mSet(final String dbName, final Map<K, V> kValues, final long expireSeconds) {
-		AssertUtils.assertNotEmpty(kValues, "Key-value map can not be empty of command [mSet");
+		AssertUtils.assertNotEmpty(kValues, "Key-value map must not be empty of command [mSet");
 		
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
@@ -636,7 +641,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> void mSetNX(final String dbName, final Map<K, V> kValues, final long expireSeconds) {
-		AssertUtils.assertNotEmpty(kValues, "Key values can not be empty of command [mSetNX]");
+		AssertUtils.assertNotEmpty(kValues, "Key values must not be empty of command [mSetNX]");
 		
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
@@ -658,18 +663,18 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> void setRange(K key, long offset, V value, long expireSeconds) {
-		setRange2(null, key, offset, value, expireSeconds);
+		setRange(null, key, offset, value, expireSeconds);
 	}
 
 	@Override
-	public <K, V> void setRange2(String dbName, K key, long offset, V value) {
-		setRange2(dbName, key, offset, value, 0);
+	public <K, V> void setRangeIn(String dbName, K key, long offset, V value) {
+		setRange(dbName, key, offset, value, 0);
 	}
 	
 	@Override
-	public <K, V> void setRange2(final String dbName, final K key, final long offset, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [setRange]");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [setRange]");
+	public <K, V> void setRange(final String dbName, final K key, final long offset, final V value, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [setRange]");
+		AssertUtils.assertNotNull(value, "Value must not be null of command [setRange]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -693,18 +698,18 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Long append(K key, V value, long expireSeconds) {
-		return append2(null, key, value, expireSeconds);
+		return append(null, key, value, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Long append2(String dbName, final K key, V value) {
-		return append2(dbName, key, value, 0);
+	public <K, V> Long appendIn(String dbName, final K key, V value) {
+		return append(dbName, key, value, 0);
 	}
 	
 	@Override
-	public <K, V> Long append2(final String dbName, final K key, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [append]");
-		AssertUtils.assertNotNull(key, "Value can not be null of command [append]");
+	public <K, V> Long append(final String dbName, final K key, final V value, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [append]");
+		AssertUtils.assertNotNull(key, "Value must not be null of command [append]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -728,16 +733,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> V get(K key, Class<V> valueType) {
-		return get2(null, key, valueType);
+		return get(null, key, valueType);
 	}
 
 	@Override
-	public <K, V> V get2(String dbName, K key) {
-		return get2(dbName, key, null);
+	public <K, V> V getIn(String dbName, K key) {
+		return get(dbName, key, null);
 	}
 	
 	@Override
-	public <K, V> V get2(final String dbName, final K key, final Class<V> valueType) {
+	public <K, V> V get(final String dbName, final K key, final Class<V> valueType) {
 		if (key == null)
 			return null;
 		
@@ -792,7 +797,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V, O> O getSet(K key, V value, Class<O> oldValueType) {
-		return getSet2(null, key, value, oldValueType);
+		return getSet(key, value, 0, oldValueType);
 	}
 	
 	@Override
@@ -802,26 +807,26 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V, O> O getSet(K key, V value, long expireSeconds, Class<O> oldValueType) {
-		return getSet2(null, key, value, expireSeconds, oldValueType);
+		return getSet(null, key, value, expireSeconds, oldValueType);
 	}
 
 	@Override
-	public <K, V, O> O getSet2(String dbName, K key, V value) {
-		return getSet2(dbName, key, value, null);
+	public <K, V, O> O getSetIn(String dbName, K key, V value) {
+		return getSetIn(dbName, key, value, null);
 	}
 	
 	@Override
-	public <K, V, O> O getSet2(String dbName, K key, V value, Class<O> oldValueType) {
-		return getSet2(dbName, key, value, 0, oldValueType);
+	public <K, V, O> O getSetIn(String dbName, K key, V value, Class<O> oldValueType) {
+		return getSet(dbName, key, value, 0, oldValueType);
 	}
 	
 	@Override
-	public <K, V, O> O getSet2(String dbName, K key, V value, long expireSeconds) {
-		return getSet2(dbName, key, value, expireSeconds, null);
+	public <K, V, O> O getSet(String dbName, K key, V value, long expireSeconds) {
+		return getSet(dbName, key, value, expireSeconds, null);
 	}
 	
 	@Override
-	public <K, V, O> O getSet2(final String dbName, final K key, final V value, final long expireSeconds, final Class<O> oldValueType) {
+	public <K, V, O> O getSet(final String dbName, final K key, final V value, final long expireSeconds, final Class<O> oldValueType) {
 		if (key == null)
 			return null;
 		
@@ -926,7 +931,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K> Long decr(final String dbName, final K key) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [decr]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [decr]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -946,7 +951,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K> Long decrBy(final String dbName, final K key, final long value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [decrBy]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [decrBy]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -966,7 +971,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K> Long incr(final String dbName, final K key) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [incr]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [incr]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -986,7 +991,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K> Long incrBy(final String dbName, final K key, final long value) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [incrBy]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [incrBy]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -1006,20 +1011,20 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, H, V> Boolean hSet(K key, H hashKey, V value, long expireSeconds) {
-		return hSet2(null, key, hashKey, value, expireSeconds);
+		return hSet(null, key, hashKey, value, expireSeconds);
 	}
 
 	@Override
-	public <K, H, V> Boolean hSet2(String dbName, K key, H hashKey, V value) {
-		return hSet2(dbName, key, hashKey, value, 0);
+	public <K, H, V> Boolean hSetIn(String dbName, K key, H hashKey, V value) {
+		return hSet(dbName, key, hashKey, value, 0);
 	}
 	
 	@Override
-	public <K, H, V> Boolean hSet2(final String dbName, final K key,
+	public <K, H, V> Boolean hSet(final String dbName, final K key,
 			final H hashKey, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [hSet]");
-		AssertUtils.assertNotNull(hashKey, "Hash key can not be null of command [hSet]");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [hSet]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [hSet]");
+		AssertUtils.assertNotNull(hashKey, "Hash key must not be null of command [hSet]");
+		AssertUtils.assertNotNull(value, "Value must not be null of command [hSet]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer hashKeySerializer = selectHashKeySerializer(dbName);
@@ -1044,21 +1049,21 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, H, V> Boolean hSetNX(K key, H hashKey, V value, long expireSeconds) {
-		return hSetNX2(null, key, hashKey, value, expireSeconds);
+		return hSetNX(null, key, hashKey, value, expireSeconds);
 	}
 
 	@Override
-	public <K, H, V> Boolean hSetNX2(String dbName, K key, H hashKey, V value) {
-		return hSetNX2(null, key, hashKey, value, 0);
+	public <K, H, V> Boolean hSetNXIn(String dbName, K key, H hashKey, V value) {
+		return hSetNX(dbName, key, hashKey, value, 0);
 	}
 	
 	@Override
-	public <K, H, V> Boolean hSetNX2(final String dbName, final K key,
+	public <K, H, V> Boolean hSetNX(final String dbName, final K key,
 			final H hashKey, final V value, final long expireSeconds) {
 		
-		AssertUtils.assertNotNull(key, "Key can not be null of command [hSetNX]");
-		AssertUtils.assertNotNull(hashKey, "Hash key can not be null of command [hSetNX]");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [hSetNX]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [hSetNX]");
+		AssertUtils.assertNotNull(hashKey, "Hash key must not be null of command [hSetNX]");
+		AssertUtils.assertNotNull(value, "Value must not be null of command [hSetNX]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer hashKeySerializer = selectHashKeySerializer(dbName);
@@ -1095,8 +1100,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	public <K, H, V> void hMSet(final String dbName, final K key,
 			final Map<H, V> hashKeyValues, final long expireSeconds) {
 		
-		AssertUtils.assertNotNull(key, "Key can not be null of command [hMSet]");
-		AssertUtils.assertNotEmpty(hashKeyValues, "Hash key values can not be empty of command [hMSet]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [hMSet]");
+		AssertUtils.assertNotEmpty(hashKeyValues, "Hash key values must not be empty of command [hMSet]");
 				
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
@@ -1185,16 +1190,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, H, V> V hGet(K key, H hashKey, Class<V> valueType) {
-		return hGet2(null, key, hashKey, valueType);
+		return hGet(null, key, hashKey, valueType);
 	}
 
 	@Override
-	public <K, H, V> V hGet2(String dbName, K key, H hashKey) {
-		return hGet2(dbName, key, hashKey, null);
+	public <K, H, V> V hGetIn(String dbName, K key, H hashKey) {
+		return hGet(dbName, key, hashKey, null);
 	}
 	
 	@Override
-	public <K, H, V> V hGet2(final String dbName, final K key, final H hashKey, final Class<V> valueType) {
+	public <K, H, V> V hGet(final String dbName, final K key, final H hashKey, final Class<V> valueType) {
 		if (key == null || hashKey == null)
 			return null;
 		
@@ -1223,21 +1228,21 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, H, V> Map<H, V> hGetAll(K key, Class<H> hashKeyType, Class<V> valueType) {
-		return hGetAll2(null, key, hashKeyType, valueType);
+		return hGetAll(null, key, hashKeyType, valueType);
 	}
 
 	@Override
-	public <K, H, V> Map<H, V> hGetAll2(String dbName, K key) {
-		return hGetAll2(dbName, key, null);
+	public <K, H, V> Map<H, V> hGetAllIn(String dbName, K key) {
+		return hGetAllIn(dbName, key, null);
 	}
 	
 	@Override
-	public <K, H, V> Map<H, V> hGetAll2(String dbName, K key, Class<V> valueType) {
-		return hGetAll2(dbName, key, null, valueType);
+	public <K, H, V> Map<H, V> hGetAllIn(String dbName, K key, Class<V> valueType) {
+		return hGetAll(dbName, key, null, valueType);
 	}
 	
 	@Override
-	public <K, H, V> Map<H, V> hGetAll2(final String dbName, final K key, final Class<H> hashKeyType, final Class<V> valueType) {
+	public <K, H, V> Map<H, V> hGetAll(final String dbName, final K key, final Class<H> hashKeyType, final Class<V> valueType) {
 		if (key == null)
 			return null;
 		
@@ -1260,16 +1265,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, H> Set<H> hKeys(K key, Class<H> hashKeyType) {
-		return hKeys2(null, key, hashKeyType);
+		return hKeys(null, key, hashKeyType);
 	}
 
 	@Override
-	public <K, H> Set<H> hKeys2(String dbName, K key) {
-		return hKeys2(dbName, key, null);
+	public <K, H> Set<H> hKeysIn(String dbName, K key) {
+		return hKeys(dbName, key, null);
 	}
 	
 	@Override
-	public <K, H> Set<H> hKeys2(final String dbName, final K key, final Class<H> hashKeyType) {
+	public <K, H> Set<H> hKeys(final String dbName, final K key, final Class<H> hashKeyType) {
 		if (key == null)
 			return null;
 		
@@ -1365,16 +1370,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> List<V> hVals(K key, Class<V> valueType) {
-		return hVals2(null, key, valueType);
+		return hVals(null, key, valueType);
 	}
 
 	@Override
-	public <K, V> List<V> hVals2(String dbName, K key) {
-		return hVals2(dbName, key, null);
+	public <K, V> List<V> hValsIn(String dbName, K key) {
+		return hVals(dbName, key, null);
 	}
 	
 	@Override
-	public <K, V> List<V> hVals2(final String dbName, final K key, final Class<V> valueType) {
+	public <K, V> List<V> hVals(final String dbName, final K key, final Class<V> valueType) {
 		if (key == null)
 			return null;
 		
@@ -1397,22 +1402,22 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Long lInsert(K key, Position where, V pivot, V value, long expireSeconds) {
-		return lInsert2(null, key, where, pivot, value, expireSeconds);
+		return lInsert(null, key, where, pivot, value, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Long lInsert2(String dbName, K key, Position where, V pivot, V value) {
-		return lInsert2(dbName, key, where, pivot, value, 0);
+	public <K, V> Long lInsertIn(String dbName, K key, Position where, V pivot, V value) {
+		return lInsert(dbName, key, where, pivot, value, 0);
 	}
 	
 	@Override
-	public <K, V> Long lInsert2(final String dbName, final K key, final Position where, final V pivot,
+	public <K, V> Long lInsert(final String dbName, final K key, final Position where, final V pivot,
 			final V value, final long expireSeconds) {
 		
-		AssertUtils.assertNotNull(key, "Key can not be null of command [lInsert]");
-		AssertUtils.assertNotNull(where, "Insert postion can not be null of command [lInsert]");
-		AssertUtils.assertNotNull(pivot, "Postion value can not be null of command [lInsert]");
-		AssertUtils.assertNotNull(value, "Insert value can not be null of command [lInsert]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [lInsert]");
+		AssertUtils.assertNotNull(where, "Insert postion must not be null of command [lInsert]");
+		AssertUtils.assertNotNull(pivot, "Postion value must not be null of command [lInsert]");
+		AssertUtils.assertNotNull(value, "Insert value must not be null of command [lInsert]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -1440,20 +1445,20 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> void lSet(K key, long posttion, V value, long expireSeconds) {
-		lSet2(null, key, posttion, value, expireSeconds);
+		lSet(null, key, posttion, value, expireSeconds);
 	}
 
 	@Override
-	public <K, V> void lSet2(String dbName, K key, long posttion, V value) {
-		lSet2(dbName, key, posttion, value, 0);
+	public <K, V> void lSetIn(String dbName, K key, long posttion, V value) {
+		lSet(dbName, key, posttion, value, 0);
 	}
 	
 	@Override
-	public <K, V> void lSet2(final String dbName, final K key,
+	public <K, V> void lSet(final String dbName, final K key,
 			final long posttion, final V value, final long expireSeconds) {
 		
-		AssertUtils.assertNotNull(key, "Key can not be null of command [lSet]");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [lSet]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [lSet]");
+		AssertUtils.assertNotNull(value, "Value must not be null of command [lSet]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -1477,17 +1482,17 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Long lPush(K key, V value, long expireSeconds) {
-		return lPush2(null, key, value, expireSeconds);
+		return lPush(null, key, value, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Long lPush2(String dbName, K key, V value) {
-		return lPush2(dbName, key, value, 0);
+	public <K, V> Long lPushIn(String dbName, K key, V value) {
+		return lPush(dbName, key, value, 0);
 	}
 	
 	@Override
-	public <K, V> Long lPush2(String dbName, K key, V value, long expireSeconds) {
-		AssertUtils.assertNotNull(value, "Value can not be null of command [lPush]");
+	public <K, V> Long lPush(String dbName, K key, V value, long expireSeconds) {
+		AssertUtils.assertNotNull(value, "Value must not be null of command [lPush]");
 		return lPush(dbName, key, new Object[] { value }, expireSeconds);
 	}
 	
@@ -1508,8 +1513,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Long lPush(final String dbName, final K key, final V[] values, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [lPush]");
-		AssertUtils.assertNotEmpty(values, "Values can not be empty of command [lPush]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [lPush]");
+		AssertUtils.assertNotEmpty(values, "Values must not be empty of command [lPush]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -1555,18 +1560,18 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Long lPushX(K key, V value, long expireSeconds) {
-		return lPushX2(null, key, value, expireSeconds);
+		return lPushX(null, key, value, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Long lPushX2(String dbName, K key, V value) {
-		return lPushX2(dbName, key, value, 0);
+	public <K, V> Long lPushXIn(String dbName, K key, V value) {
+		return lPushX(dbName, key, value, 0);
 	}
 	
 	@Override
-	public <K, V> Long lPushX2(final String dbName, final K key, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [lPushX]");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [lPushX]");
+	public <K, V> Long lPushX(final String dbName, final K key, final V value, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [lPushX]");
+		AssertUtils.assertNotNull(value, "Value must not be null of command [lPushX]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -1646,16 +1651,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> V lPop(K key, Class<V> valueType) {
-		return lPop2(null, key, valueType);
+		return lPop(null, key, valueType);
 	}
 
 	@Override
-	public <K, V> V lPop2(String dbName, K key) {
-		return lPop2(dbName, key, null);
+	public <K, V> V lPopIn(String dbName, K key) {
+		return lPop(dbName, key, null);
 	}
 	
 	@Override
-	public <K, V> V lPop2(final String dbName, final K key, final Class<V> valueType) {
+	public <K, V> V lPop(final String dbName, final K key, final Class<V> valueType) {
 		if (key == null)
 			return null;
 		
@@ -1710,16 +1715,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> List<V> lRangeAll(K key, Class<V> valueType) {
-		return lRangeAll2(null, key, valueType);
+		return lRangeAll(null, key, valueType);
 	}
 	
 	@Override
-	public <K, V> List<V> lRangeAll2(String dbName, K key) {
-		return lRangeAll2(dbName, key, null);
+	public <K, V> List<V> lRangeAllIn(String dbName, K key) {
+		return lRangeAll(dbName, key, null);
 	}
 	
 	@Override
-	public <K, V> List<V> lRangeAll2(String dbName, K key, Class<V> valueType) {
+	public <K, V> List<V> lRangeAll(String dbName, K key, Class<V> valueType) {
 		return lRange(dbName, key, 0 , -1, valueType);
 	}
 
@@ -1784,17 +1789,17 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Long rPush(K key, V value, long expireSeconds) {
-		return rPush2(null, key, value, expireSeconds);
+		return rPush(null, key, value, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Long rPush2(String dbName, K key, V value) {
-		return rPush2(dbName, key, value, 0);
+	public <K, V> Long rPushIn(String dbName, K key, V value) {
+		return rPush(dbName, key, value, 0);
 	}
 	
 	@Override
-	public <K, V> Long rPush2(String dbName, K key, V value, long expireSeconds) {
-		AssertUtils.assertNotNull(value, "Value can not be null of command [rPush]");
+	public <K, V> Long rPush(String dbName, K key, V value, long expireSeconds) {
+		AssertUtils.assertNotNull(value, "Value must not be null of command [rPush]");
 		return rPush(dbName, key, new Object[] { value }, expireSeconds);
 	}
 	
@@ -1815,8 +1820,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Long rPush(final String dbName, final K key, final V[] values, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [rPush]");
-		AssertUtils.assertNotEmpty(values, "Values can not be empty of command [rPush]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [rPush]");
+		AssertUtils.assertNotEmpty(values, "Values must not be empty of command [rPush]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -1862,18 +1867,18 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Long rPushX(K key, V value, long expireSeconds) {
-		return rPushX2(null, key, value, expireSeconds);
+		return rPushX(null, key, value, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Long rPushX2(String dbName, K key, V value) {
-		return rPushX2(dbName, key, value, 0);
+	public <K, V> Long rPushXIn(String dbName, K key, V value) {
+		return rPushX(dbName, key, value, 0);
 	}
 	
 	@Override
-	public <K, V> Long rPushX2(final String dbName, final K key, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [rPushX]");
-		AssertUtils.assertNotNull(value, "Value can not be null of command [rPushX]");
+	public <K, V> Long rPushX(final String dbName, final K key, final V value, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [rPushX]");
+		AssertUtils.assertNotNull(value, "Value must not be null of command [rPushX]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -1905,33 +1910,33 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
   		
 	@Override
 	public <S, T, V> V rPopLPush(S srcKey, T destKey, long expireSeconds) {
-		return rPopLPush2(null, srcKey, destKey, expireSeconds);
+		return rPopLPush(null, srcKey, destKey, expireSeconds);
 	}
 	
 	@Override
 	public <S, T, V> V rPopLPush(S srcKey, T destKey, long expireSeconds, Class<V> valueType) {
-		return rPopLPush2(null, srcKey, destKey, expireSeconds, valueType);
+		return rPopLPush(null, srcKey, destKey, expireSeconds, valueType);
 	}
 
 	@Override
-	public <S, T, V> V rPopLPush2(String dbName, S srcKey, T destKey) {
-		return rPopLPush2(dbName, srcKey, destKey, 0);
+	public <S, T, V> V rPopLPushIn(String dbName, S srcKey, T destKey) {
+		return rPopLPush(dbName, srcKey, destKey, 0);
 	}
 	
 	@Override
-	public <S, T, V> V rPopLPush2(String dbName, S srcKey, T destKey, Class<V> valueType) {
-		return rPopLPush2(dbName, srcKey, destKey, 0, valueType);
+	public <S, T, V> V rPopLPushIn(String dbName, S srcKey, T destKey, Class<V> valueType) {
+		return rPopLPush(dbName, srcKey, destKey, 0, valueType);
 	}
 	
 	@Override
-	public <S, T, V> V rPopLPush2(String dbName, S srcKey, T destKey, long expireSeconds) {
-		return rPopLPush2(dbName, srcKey, destKey, expireSeconds, null);
+	public <S, T, V> V rPopLPush(String dbName, S srcKey, T destKey, long expireSeconds) {
+		return rPopLPush(dbName, srcKey, destKey, expireSeconds, null);
 	}
 	
 	@Override
-	public <S, T, V> V rPopLPush2(final String dbName, final S srcKey, final T destKey, final long expireSeconds, final Class<V> valueType) {
-		AssertUtils.assertNotNull(srcKey, "Source key can not be null of command [rPopLPush]");
-		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [rPopLPush]");
+	public <S, T, V> V rPopLPush(final String dbName, final S srcKey, final T destKey, final long expireSeconds, final Class<V> valueType) {
+		AssertUtils.assertNotNull(srcKey, "Source key must not be null of command [rPopLPush]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [rPopLPush]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
@@ -1957,16 +1962,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> V rPop(K key, Class<V> valueType) {
-		return rPop2(null, key, valueType);
+		return rPop(null, key, valueType);
 	}
 
 	@Override
-	public <K, V> V rPop2(String dbName, K key) {
-		return rPop2(dbName, key, null);
+	public <K, V> V rPopIn(String dbName, K key) {
+		return rPop(dbName, key, null);
 	}
 	
 	@Override
-	public <K, V> V rPop2(final String dbName, final K key, final Class<V> valueType) {
+	public <K, V> V rPop(final String dbName, final K key, final Class<V> valueType) {
 		if (key == null)
 			return null;
 		
@@ -1989,17 +1994,17 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Long sAdd(K key, V member, long expireSeconds) {
-		return sAdd2(null, key, member, expireSeconds);
+		return sAdd(null, key, member, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Long sAdd2(String dbName, K key, V member) {
-		return sAdd2(dbName, key, member, 0);
+	public <K, V> Long sAddIn(String dbName, K key, V member) {
+		return sAdd(dbName, key, member, 0);
 	}
 	
 	@Override
-	public <K, V> Long sAdd2(String dbName, K key, V member, long expireSeconds) {
-		AssertUtils.assertNotNull(member, "Member can not be null of command [sAdd]");
+	public <K, V> Long sAdd(String dbName, K key, V member, long expireSeconds) {
+		AssertUtils.assertNotNull(member, "Member must not be null of command [sAdd]");
 		return sAdd(dbName, key, Collections.singletonList(member), expireSeconds);
 	}
 	
@@ -2020,8 +2025,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Long sAdd(final String dbName, final K key, final V[] members, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [sAdd]");
-		AssertUtils.assertNotEmpty(members, "Members can not be empty of command [sAdd]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [sAdd]");
+		AssertUtils.assertNotEmpty(members, "Members must not be empty of command [sAdd]");
 				
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2169,8 +2174,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <T, K> Long sDiffStore(final String dbName, final T destKey, final K[] keys, final long expireSeconds) {
-		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sDiffStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [sDiffStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [sDiffStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [sDiffStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2275,8 +2280,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <T, K> Long sInterStore(final String dbName, final T destKey, final K[] keys, final long expireSeconds) {
-		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sInterStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [sInterStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [sInterStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [sInterStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2381,8 +2386,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <T, K> Long sUnionStore(final String dbName, final T destKey, final K[] keys, final long expireSeconds) {
-		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [sUnionStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [sUnionStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [sUnionStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [sUnionStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2427,16 +2432,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Set<V> sMembers(K key, Class<V> valueType) {
-		return sMembers2(null, key, valueType);
+		return sMembers(null, key, valueType);
 	}
 
 	@Override
-	public <K, V> Set<V> sMembers2(String dbName, K key) {
-		return sMembers2(dbName, key, null);
+	public <K, V> Set<V> sMembersIn(String dbName, K key) {
+		return sMembers(dbName, key, null);
 	}
 	
 	@Override
-	public <K, V> Set<V> sMembers2(final String dbName, final K key, final Class<V> valueType) {
+	public <K, V> Set<V> sMembers(final String dbName, final K key, final Class<V> valueType) {
 		if (key == null)
 			return null;
 		
@@ -2482,16 +2487,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> V sPop(K key, Class<V> valueType) {
-		return sPop2(null, key, valueType);
+		return sPop(null, key, valueType);
 	}
 
 	@Override
-	public <K, V> V sPop2(String dbName, K key) {
-		return sPop2(dbName, key, null);
+	public <K, V> V sPopIn(String dbName, K key) {
+		return sPop(dbName, key, null);
 	}
 	
 	@Override
-	public <K, V> V sPop2(final String dbName, final K key, final Class<V> valueType) {
+	public <K, V> V sPop(final String dbName, final K key, final Class<V> valueType) {
 		if (key == null)
 			return null;
 		
@@ -2514,16 +2519,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> V sRandMember(K key, Class<V> valueType) {
-		return sRandMember2(null, key, valueType);
+		return sRandMember(null, key, valueType);
 	}
 	
 	@Override
-	public <K, V> V sRandMember2(String dbName, K key) {
-		return sRandMember2(dbName, key, null);
+	public <K, V> V sRandMemberIn(String dbName, K key) {
+		return sRandMember(dbName, key, null);
 	}
 	
 	@Override
-	public <K, V> V sRandMember2(final String dbName, final K key, final Class<V> valueType) {
+	public <K, V> V sRandMember(final String dbName, final K key, final Class<V> valueType) {
 		if (key == null)
 			return null;
 		
@@ -2588,39 +2593,18 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Boolean zAdd(K key, double score, V member, long expireSeconds) {
-		return zAdd2(null, key, score, expireSeconds);
+		return zAdd(null, key, score, member, expireSeconds);
 	}
 
 	@Override
-	public <K, V> Boolean zAdd2(String dbName, K key, double score, V member) {
-		return zAdd2(dbName, key, score, member, 0);
+	public <K, V> Boolean zAddIn(String dbName, K key, double score, V member) {
+		return zAdd(dbName, key, score, member, 0);
 	}
 	
 	@Override
-	public <K, V> Boolean zAdd2(String dbName, K key, double score, V member, long expireSeconds) {
-		AssertUtils.assertNotNull(member, "Member can not be null of command [zAdd]");
-		return zAdd(dbName, key, Collections.singletonMap(score, member), expireSeconds);
-	}
-
-	@Override
-	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers) {
-		return zAdd(null, key, scoreMembers);
-	}
-	
-	@Override
-	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers, long expireSeconds) {
-		return zAdd(null, key, scoreMembers, expireSeconds);
-	}
-
-	@Override
-	public <K, V> Boolean zAdd(String dbName, K key, Map<Double, V> scoreMembers) {
-		return zAdd(dbName, key, scoreMembers, 0);
-	}
-	
-	@Override
-	public <K, V> Boolean zAdd(final String dbName, final K key, final Map<Double, V> scoreMembers, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [zAdd]");
-		AssertUtils.assertNotEmpty(scoreMembers, "Score-member map can not be empty of command [zAdd]");
+	public <K, V> Boolean zAdd(final String dbName, final K key, final double score, final V member, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [zAdd]");
+		AssertUtils.assertNotNull(member, "Member must not be null of command [zAdd]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -2630,17 +2614,112 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbName);
-				Iterator<Entry<Double, V>> iterator = scoreMembers.entrySet().iterator();
-				boolean result = true;
-				while (iterator.hasNext()) {
-					Entry<Double, V> entry = iterator.next();
-					
-					// TODO 使用批量zadd
-					result = result && connection.zAdd(keyByte, 
-							NumberUtils.safeDouble(entry.getKey()), valueSerializer.serialize(entry.getValue()));
-				}
-				setExpireTime(connection, repository, keyByte, expireSeconds);
+				
+				Boolean result = connection.zAdd(keyByte, score, valueSerializer.serialize(member));
+				if (result != null && result)
+					setExpireTime(connection, repository, keyByte, expireSeconds);
+				
 				return result;
+			}
+			
+		});
+	}
+
+	@Override
+	public <K, V> Map<Double, Boolean> zAdd(K key, Map<Double, V> scoreMembers) {
+		return zAdd(null, key, scoreMembers);
+	}
+	
+	@Override
+	public <K, V> Map<Double, Boolean> zAdd(K key, Map<Double, V> scoreMembers, long expireSeconds) {
+		return zAdd(null, key, scoreMembers, expireSeconds);
+	}
+
+	@Override
+	public <K, V> Map<Double, Boolean> zAdd(String dbName, K key, Map<Double, V> scoreMembers) {
+		return zAdd(dbName, key, scoreMembers, 0);
+	}
+	
+	@Override
+	public <K, V> Map<Double, Boolean> zAdd(final String dbName, final K key, final Map<Double, V> scoreMembers, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [zAdd]");
+		AssertUtils.assertNotEmpty(scoreMembers, "Score-member map must not be empty of command [zAdd]");
+		
+		final Serializer keySerializer = selectKeySerializer(dbName);
+		final Serializer valueSerializer = selectValueSerializer(dbName);
+		return super.getRedisTemplate().execute(new RedisCallback<Map<Double, Boolean>>() {
+
+			@Override
+			public Map<Double, Boolean> doInRedis(RedisConnection connection) throws DataAccessException {
+				byte[] keyByte = keySerializer.serialize(key);
+				RedisRepository repository = select(connection, dbName);
+				
+				Iterator<Entry<Double, V>> members = scoreMembers.entrySet().iterator();
+				Map<Double, Boolean> result = MapUtils.newLinkedHashMap();
+				while (members.hasNext()) {
+					Entry<Double, V> member = members.next();
+					Double score = member.getKey();
+					V value = member.getValue();
+					
+					if (score != null && value != null)
+						result.put(score, connection.zAdd(keyByte, score, valueSerializer.serialize(member.getValue())));
+				}
+				
+				if (result.size() > 0)
+					setExpireTime(connection, repository, keyByte, expireSeconds);
+				
+				return result;
+			}
+		});
+	}
+	
+	@Override
+	public <K, V> Long zAdds(K key, Map<Double, V> scoreMembers) {
+		return zAdds(null, key, scoreMembers);
+	}
+
+	@Override
+	public <K, V> Long zAdds(K key, Map<Double, V> scoreMembers, long expireSeconds) {
+		return zAdds(null, key, scoreMembers, expireSeconds);
+	}
+
+	@Override
+	public <K, V> Long zAdds(String dbName, K key, Map<Double, V> scoreMembers) {
+		return zAdds(dbName, key, scoreMembers, 0);
+	}
+
+	@Override
+	public <K, V> Long zAdds(final String dbName, final K key, final Map<Double, V> scoreMembers, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null of command [zAdd]");
+		AssertUtils.assertNotEmpty(scoreMembers, "Score-member map must not be empty of command [zAdd]");
+		
+		final Serializer keySerializer = selectKeySerializer(dbName);
+		final Serializer valueSerializer = selectValueSerializer(dbName);
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				Iterator<Entry<Double, V>> members = scoreMembers.entrySet().iterator();
+				Set<Tuple> tuples = CollectionUtils.newLinkedHashSet();
+				while (members.hasNext()) {
+					Entry<Double, V> member = members.next();
+					Double score = member.getKey();
+					V value = member.getValue();
+					if (score != null && value != null)
+						tuples.add(new DefaultTuple(valueSerializer.serialize(value), score));
+				}
+				
+				long count = 0;
+				if (tuples.size() > 0) {
+					byte[] keyByte = keySerializer.serialize(key);
+					RedisRepository repository = select(connection, dbName);
+					
+					count = NumberUtils.safeLong(connection.zAdd(keyByte, tuples));
+					if (count > 0)
+						setExpireTime(connection, repository, keyByte, expireSeconds);
+				}
+				
+				return count;
 			}
 		});
 	}
@@ -2726,16 +2805,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Set<V> zRangeAll(K key, Class<V> valueType) {
-		return zRangeAll2(null, key, valueType);
+		return zRangeAll(null, key, valueType);
 	}
 
 	@Override
-	public <K, V> Set<V> zRangeAll2(String dbName, K key) {
-		return zRangeAll2(dbName, key, null);
+	public <K, V> Set<V> zRangeAllIn(String dbName, K key) {
+		return zRangeAll(dbName, key, null);
 	}
 	
 	@Override
-	public <K, V> Set<V> zRangeAll2(String dbName, K key, Class<V> valueType) {
+	public <K, V> Set<V> zRangeAll(String dbName, K key, Class<V> valueType) {
 		return zRange(dbName, key, 0, -1, valueType);
 	}
 
@@ -3003,16 +3082,16 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	
 	@Override
 	public <K, V> Set<V> zRevRangeAll(K key, Class<V> valueType) {
-		return zRevRangeAll2(null, key, valueType);
+		return zRevRangeAll(null, key, valueType);
 	}
 
 	@Override
-	public <K, V> Set<V> zRevRangeAll2(String dbName, K key) {
-		return zRevRangeAll2(dbName, key, null);
+	public <K, V> Set<V> zRevRangeAllIn(String dbName, K key) {
+		return zRevRangeAll(dbName, key, null);
 	}
 	
 	@Override
-	public <K, V> Set<V> zRevRangeAll2(String dbName, K key, Class<V> valueType) {
+	public <K, V> Set<V> zRevRangeAll(String dbName, K key, Class<V> valueType) {
 		return zRevRange(dbName, key, 0, -1, valueType);
 	}
 
@@ -3146,7 +3225,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K> Long zUnionStore(String dbName, K destKey, K key) {
-		AssertUtils.assertNotNull(key, "Source key can not be null of command [zUnionStore]");
+		AssertUtils.assertNotNull(key, "Source key must not be null of command [zUnionStore]");
 		
 		return zUnionStore(dbName, destKey, new Object[] { key });
 	}
@@ -3158,8 +3237,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K> Long zUnionStore(final String dbName, final K destKey, final K[] keys) {
-		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zUnionStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zUnionStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [zUnionStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [zUnionStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -3192,8 +3271,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	public <K> Long zUnionStore(final String dbName, final K destKey, final Aggregate aggregate,
 			final int[] weights, final K[] keys) {
 		
-		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zUnionStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zUnionStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [zUnionStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [zUnionStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -3225,7 +3304,7 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K> Long zInterStore(String dbName, K destKey, K srcKey) {
-		AssertUtils.assertNotNull(srcKey, "Source key can not be null of command [zInterStore]");
+		AssertUtils.assertNotNull(srcKey, "Source key must not be null of command [zInterStore]");
 		
 		return zInterStore(dbName, destKey, new Object[] { srcKey });
 	}
@@ -3237,8 +3316,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K> Long zInterStore(final String dbName, final K destKey, final K[] keys) {
-		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zInterStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zInterStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [zInterStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [zInterStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -3270,8 +3349,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 	@Override
 	public <K> Long zInterStore(final String dbName, final K destKey, final Aggregate aggregate,
 			final int[] weights, final K[] keys) {
-		AssertUtils.assertNotNull(destKey, "Destination key can not be null of command [zInterStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys can not be empty of command [zInterStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [zInterStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [zInterStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -3303,8 +3382,8 @@ public class SpringRedisCommandsDaoImpl extends SpringRedisDaoSupport implements
 
 	@Override
 	public <K, V> Double zIncrBy(final String dbName, final K key, final double increment, final V member) {
-		AssertUtils.assertNotNull(key, "Key can not be null of command [zIncrBy]");
-		AssertUtils.assertNotNull(key, "Member can not be null of command [zIncrBy]");
+		AssertUtils.assertNotNull(key, "Key must not be null of command [zIncrBy]");
+		AssertUtils.assertNotNull(key, "Member must not be null of command [zIncrBy]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);

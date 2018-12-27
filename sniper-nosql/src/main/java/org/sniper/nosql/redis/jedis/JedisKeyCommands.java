@@ -20,7 +20,7 @@ package org.sniper.nosql.redis.jedis;
 
 import java.util.List;
 
-import org.sniper.nosql.redis.dao.RedisKeyCommands;
+import org.sniper.nosql.redis.command.RedisKeyCommands;
 
 import redis.clients.jedis.SortingParams;
 

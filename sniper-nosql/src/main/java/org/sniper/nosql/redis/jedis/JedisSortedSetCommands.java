@@ -20,7 +20,7 @@ package org.sniper.nosql.redis.jedis;
 
 import java.util.Collection;
 
-import org.sniper.nosql.redis.dao.RedisSortedSetCommands;
+import org.sniper.nosql.redis.command.RedisSortedSetCommands;
 
 import redis.clients.jedis.ZParams;
 
@@ -32,8 +32,7 @@ import redis.clients.jedis.ZParams;
 public interface JedisSortedSetCommands extends RedisSortedSetCommands {
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param params
@@ -44,8 +43,7 @@ public interface JedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(K destKey, ZParams params, int[] weights, K[] keys);
 	
 	/**
-	 * 在指定索引库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在指定索引库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param destKey
@@ -57,8 +55,7 @@ public interface JedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(int dbIndex, K destKey, ZParams params, int[] weights, K[] keys);
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param params
@@ -69,8 +66,7 @@ public interface JedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(K destKey, ZParams params, int[] weights, Collection<K> keys);
 	
 	/**
-	 * 在指定索引库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在指定索引库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param destKey
@@ -82,8 +78,7 @@ public interface JedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(int dbIndex, K destKey, ZParams params, int[] weights, Collection<K> keys);
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zUnionStore命令，获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param params
@@ -94,8 +89,7 @@ public interface JedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zInterStore(K destKey, ZParams params, int[] weights, K[] keys);
 	
 	/**
-	 * 在指定索引库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在指定索引库中执行zUnionStore命令，获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param destKey
@@ -119,8 +113,7 @@ public interface JedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zInterStore(K destKey, ZParams params, int[] weights, Collection<K> keys);
 	
 	/**
-	 * 在指定索引库中执行zUnionStore命令，
-	 * 				获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在指定索引库中执行zUnionStore命令，获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbIndex
 	 * @param destKey

@@ -53,7 +53,7 @@ public class ZipFileUtils {
 	 * @return
 	 */
 	public static ZipFile createNewZip(String pathname) throws IOException {
-		AssertUtils.assertTrue(StringUtils.isNotBlank(pathname), "Zip file path can not be null or blank.");
+		AssertUtils.assertNotBlank(pathname, "Zip file path can not be null or blank");
 		return createNewZip(new File(pathname));
 	}
 	
@@ -76,9 +76,9 @@ public class ZipFileUtils {
 	 * @throws IOException
 	 */
 	public static ZipFile createNewZip(File file, String chatset) throws IOException {
-		AssertUtils.assertNotNull(file, "Zip file can not be null.");
+		AssertUtils.assertNotNull(file, "Zip file must not be null");
 		if (file.isDirectory())
-			throw new IOException("Zip file [" + file + "] can not be is a directory");
+			throw new IOException(String.format("Zip file [%s] can not is a directory", file));
 		
 		if (file.exists()) 
 			// 直接返回一个已存在的文件
@@ -227,10 +227,10 @@ public class ZipFileUtils {
 	 */
 	public static ZipFile compress(File src, File dest) throws IOException {
 		if (!src.exists()) 
-			throw new FileNotFoundException("Compression source file [" + src + "] not found.");
+			throw new FileNotFoundException(String.format("Compression source file [%s] not found", src));
 		
 		if (src.isFile() && src.equals(dest))
-			throw new IOException("Compression source file [" + src + "] same with destination.");
+			throw new IOException(String.format("Compression source file [%s] same with destination", src));
 		
 		ZipFile zipFile;
 		if (dest == null) {
@@ -287,7 +287,7 @@ public class ZipFileUtils {
 	public static void compress(File src, ZipOutputStream out) throws IOException {
 		
 		if (!src.exists()) 
-			throw new FileNotFoundException("Compression source file [" + src + "] not found.");
+			throw new FileNotFoundException(String.format("Compression source file [%s] not found", src));
 		
 		if (src.isFile()) 
 			compressFile(src, src.getName(), out);
@@ -304,10 +304,10 @@ public class ZipFileUtils {
 	 * @throws IOException
 	 */
 	private static void compress(File src, String destZipName, ZipOutputStream out) throws IOException {
-		AssertUtils.assertNotNull(src, "Compression source file can not be null.");
+		AssertUtils.assertNotNull(src, "Compression source file can not be null");
 		
 		if (!src.exists()) 
-			throw new FileNotFoundException("Compression source file [" + src + "] not found.");
+			throw new FileNotFoundException(String.format("Compression source file [%s] not found", src));
 		
 		if (src.isFile()) 
 			compressFile(src, src.getName(), out);

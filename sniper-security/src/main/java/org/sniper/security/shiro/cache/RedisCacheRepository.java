@@ -26,7 +26,7 @@ import org.apache.shiro.cache.CacheException;
 import org.springframework.beans.factory.InitializingBean;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.nosql.redis.dao.RedisCommandsDao;
+import org.sniper.nosql.redis.command.RedisCommands;
 
 /**
  * Redis缓存共享库实现类
@@ -45,7 +45,7 @@ public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V>,
 	private String dbName;
 	
 	/** Redis命令行Dao接口 */
-	private RedisCommandsDao redisCommandsDao;
+	private RedisCommands redisCommands;
 	
 	public RedisCacheRepository() {
 		prefix = "shiro_cache_";
@@ -75,43 +75,43 @@ public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V>,
 		this.dbName = dbName;
 	}
 
-	public RedisCommandsDao getRedisCommandsDao() {
-		return redisCommandsDao;
+	public RedisCommands getRedisCommands() {
+		return redisCommands;
 	}
 
-	public void setRedisCommandsDao(RedisCommandsDao redisCommandsDao) {
-		this.redisCommandsDao = redisCommandsDao;
+	public void setRedisCommands(RedisCommands redisCommands) {
+		this.redisCommands = redisCommands;
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (this.redisCommandsDao == null)
-			throw new IllegalArgumentException("Property 'redisCommandsDao' is required.");
+		if (this.redisCommands == null)
+			throw new IllegalArgumentException("Property 'redisCommands' is required");
 	}
 
 	@Override
 	public V get(K key) throws CacheException {
-		return redisCommandsDao.get2(dbName, getPrefix() + key);
+		return redisCommands.getIn(dbName, getPrefix() + key);
 	}
 
 	@Override
 	public V put(K key, V value) throws CacheException {
 		V oldValue = get(key);
-		redisCommandsDao.set2(dbName, getPrefix() + key, value);
+		redisCommands.setIn(dbName, getPrefix() + key, value);
 		return oldValue;
 	}
 
 	@Override
 	public V remove(K key) throws CacheException {
 		V removedValue = get(key);
-		redisCommandsDao.del(dbName, getPrefix() + key);
+		redisCommands.del(dbName, getPrefix() + key);
 		return removedValue;
 	}
 
 	@Override
 	public void clear() throws CacheException {
-		Set<Object> keys = redisCommandsDao.keysByPattern(dbName, getPrefix() + StringUtils.ANY);
-		redisCommandsDao.del(dbName, keys);
+		Set<Object> keys = redisCommands.keysByPattern(dbName, getPrefix() + StringUtils.ANY);
+		redisCommands.del(dbName, keys);
 	}
 
 	@Override
@@ -121,12 +121,12 @@ public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V>,
 
 	@Override
 	public Set<K> keys() {
-		return redisCommandsDao.keysByPattern(dbName, getPrefix() + StringUtils.ANY);
+		return redisCommands.keysByPattern(dbName, getPrefix() + StringUtils.ANY);
 	}
 
 	@Override
 	public Collection<V> values() {
-		return redisCommandsDao.valuesByPattern(dbName, getPrefix() + StringUtils.ANY);
+		return redisCommands.valuesByPattern(dbName, getPrefix() + StringUtils.ANY);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -138,7 +138,7 @@ public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V>,
 
 	@Override
 	public void destroy() throws Exception {
-//		redisCommandsDao.shutdown();
+//		redisCommands.shutdown();
 	}
 	
 }

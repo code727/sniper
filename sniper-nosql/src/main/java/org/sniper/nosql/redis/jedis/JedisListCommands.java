@@ -18,7 +18,7 @@
 
 package org.sniper.nosql.redis.jedis;
 
-import org.sniper.nosql.redis.dao.RedisListCommands;
+import org.sniper.nosql.redis.command.RedisListCommands;
 
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
 

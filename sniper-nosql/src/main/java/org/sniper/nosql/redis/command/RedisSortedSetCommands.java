@@ -16,7 +16,7 @@
  * Create Date : 2015-3-28
  */
 
-package org.sniper.nosql.redis.dao;
+package org.sniper.nosql.redis.command;
 
 import java.util.Collection;
 import java.util.Map;
@@ -59,7 +59,7 @@ public interface RedisSortedSetCommands {
 	 * @param member
 	 * @return
 	 */
-	public <K, V> Boolean zAdd2(String dbName, K key, double score, V member);
+	public <K, V> Boolean zAddIn(String dbName, K key, double score, V member);
 	
 	/**
 	 * 在指定库中执行zAdd命令，并设置过期秒数
@@ -71,7 +71,7 @@ public interface RedisSortedSetCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean zAdd2(String dbName, K key, double score, V member, long expireSeconds);
+	public <K, V> Boolean zAdd(String dbName, K key, double score, V member, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行zAdd命令
@@ -80,7 +80,7 @@ public interface RedisSortedSetCommands {
 	 * @param scoreMembers
 	 * @return
 	 */
-	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers);
+	public <K, V> Map<Double, Boolean> zAdd(K key, Map<Double, V> scoreMembers);
 	
 	/**
 	 * 在当前库中执行zAdd命令，并设置过期秒数
@@ -90,7 +90,7 @@ public interface RedisSortedSetCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean zAdd(K key, Map<Double, V> scoreMembers, long expireSeconds);
+	public <K, V> Map<Double, Boolean> zAdd(K key, Map<Double, V> scoreMembers, long expireSeconds);
 	
 	/**
 	 * 在指定库中执行zAdd命令
@@ -100,7 +100,7 @@ public interface RedisSortedSetCommands {
 	 * @param scoreMembers
 	 * @return
 	 */
-	public <K, V> Boolean zAdd(String dbName, K key, Map<Double, V> scoreMembers);
+	public <K, V> Map<Double, Boolean> zAdd(String dbName, K key, Map<Double, V> scoreMembers);
 	
 	/**
 	 * 在指定库中执行zAdd命令，并设置过期秒数
@@ -111,7 +111,49 @@ public interface RedisSortedSetCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean zAdd(String dbName, K key, Map<Double, V> scoreMembers, long expireSeconds);
+	public <K, V> Map<Double, Boolean> zAdd(String dbName, K key, Map<Double, V> scoreMembers, long expireSeconds);
+	
+	// --------------------------------------------
+	
+	/**
+	 * 在当前库中执行批量zAdd命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param scoreMembers
+	 * @return
+	 */
+	public <K, V> Long zAdds(K key, Map<Double, V> scoreMembers);
+	
+	/**
+	 * 在当前库中执行批量zAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param scoreMembers
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long zAdds(K key, Map<Double, V> scoreMembers, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行批量zAdd命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param scoreMembers
+	 * @return
+	 */
+	public <K, V> Long zAdds(String dbName, K key, Map<Double, V> scoreMembers);
+	
+	/**
+	 * 在指定库中执行批量zAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param scoreMembers
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long zAdds(String dbName, K key, Map<Double, V> scoreMembers, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行zCard命令，获取有序集合键对应的元素个数
@@ -223,7 +265,7 @@ public interface RedisSortedSetCommands {
 	 * @param end
 	 * @return
 	 */
-	public <K, V> Set<V> zRangeAll2(String dbName, K key);
+	public <K, V> Set<V> zRangeAllIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行zRange命令，获取有序集合内的所有元素值
@@ -233,7 +275,7 @@ public interface RedisSortedSetCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> Set<V> zRangeAll2(String dbName, K key, Class<V> valueType);
+	public <K, V> Set<V> zRangeAll(String dbName, K key, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，获取有序集合在 [minScore, maxScore]区间范围内的元素值
@@ -516,7 +558,7 @@ public interface RedisSortedSetCommands {
 	 * @param key
 	 * @return
 	 */
-	public <K, V> Set<V> zRevRangeAll2(String dbName, K key);
+	public <K, V> Set<V> zRevRangeAllIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行zRevRange命令，按score值降序方式返回指定键集的所有值集合
@@ -526,7 +568,7 @@ public interface RedisSortedSetCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> Set<V> zRevRangeAll2(String dbName, K key, Class<V> valueType);
+	public <K, V> Set<V> zRevRangeAll(String dbName, K key, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行zRevRangeByScore命令，按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内的所有值集合
@@ -725,7 +767,7 @@ public interface RedisSortedSetCommands {
 	public <K> Long zInterStore(String dbName, K destKey, Collection<K> keys);
 	
 	/**
-	 * 在当前库中执行zIncrBy命令，为指定的键集成员的socre值加上(increment > 0)/减去(increment < 0)增量
+	 * 在当前库中执行zIncrBy命令，为指定的键集成员的socre值加上(increment>0)/减去(increment<0)增量
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param increment
@@ -735,7 +777,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Double zIncrBy(K key, double increment, V member);
 	
 	/**
-	 * 在当前库中执行zIncrBy命令，为指定的键集成员的socre值加上(increment > 0)/减去(increment < 0)增量
+	 * 在当前库中执行zIncrBy命令，为指定的键集成员的socre值加上(increment>0)/减去(increment<0)增量
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key

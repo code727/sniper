@@ -21,7 +21,7 @@ package org.sniper.captcha.handler.redis;
 import java.io.Serializable;
 
 import org.sniper.captcha.handler.AbstractCaptchaHandler;
-import org.sniper.nosql.redis.dao.RedisCommandsDao;
+import org.sniper.nosql.redis.command.RedisCommands;
 
 /**
  * Redis库验证码处理器实现类
@@ -36,7 +36,7 @@ public class RedisCaptchaHandler extends AbstractCaptchaHandler {
 	/** 存储验证码数据的库索引 */
 	private String dbName;
 		
-	private RedisCommandsDao redisCommandsDao;
+	private RedisCommands redisCommands;
 	
 	public RedisCaptchaHandler() {
 		setPrefix("captcha_");
@@ -58,23 +58,23 @@ public class RedisCaptchaHandler extends AbstractCaptchaHandler {
 		this.dbName = dbName;
 	}
 
-	public RedisCommandsDao getRedisCommandsDao() {
-		return redisCommandsDao;
+	public RedisCommands getRedisCommands() {
+		return redisCommands;
 	}
 
-	public void setRedisCommandsDao(RedisCommandsDao redisCommandsDao) {
-		this.redisCommandsDao = redisCommandsDao;
+	public void setRedisCommands(RedisCommands redisCommands) {
+		this.redisCommands = redisCommands;
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (this.redisCommandsDao == null)
-			throw new IllegalArgumentException("Property 'redisCommandsDao' is required.");
+		if (this.redisCommands == null)
+			throw new IllegalArgumentException("Property 'redisCommands' is required");
 	}
 	
 	@Override
 	protected void doCreate(Serializable id, String text) {
-		this.redisCommandsDao.set2(dbName, getPrefix() + id, text);
+		this.redisCommands.setIn(dbName, getPrefix() + id, text);
 	}
 
 	@Override
@@ -84,13 +84,13 @@ public class RedisCaptchaHandler extends AbstractCaptchaHandler {
 
 	@Override
 	public String get(Serializable id) {
-		return this.redisCommandsDao.get2(dbName, getPrefix() + id);
+		return this.redisCommands.getIn(dbName, getPrefix() + id);
 	}
 
 	@Override
 	public String detele(Serializable id) {
 		String text = this.get(id);
-		this.redisCommandsDao.del(dbName, getPrefix() + id);
+		this.redisCommands.del(dbName, getPrefix() + id);
 		return text;
 	}
 

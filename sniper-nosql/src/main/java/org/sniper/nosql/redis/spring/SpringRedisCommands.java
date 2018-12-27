@@ -18,14 +18,14 @@
 
 package org.sniper.nosql.redis.spring;
 
-import org.sniper.nosql.redis.dao.RedisCommandsDao;
+import org.sniper.nosql.redis.command.RedisCommands;
 
 /**
- * Spring Redis命令行数据访问接口
+ * Spring Redis命令行接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SpringRedisCommandsDao extends RedisCommandsDao,
+public interface SpringRedisCommands extends RedisCommands,
 		SpringRedisKeyCommands, SpringRedisListCommands,
 		SpringRedisSortedSetCommands {
 	

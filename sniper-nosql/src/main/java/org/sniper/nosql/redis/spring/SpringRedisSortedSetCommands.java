@@ -21,9 +21,9 @@ package org.sniper.nosql.redis.spring;
 import java.util.Collection;
 import java.util.Set;
 
+import org.sniper.nosql.redis.command.RedisSortedSetCommands;
 import org.springframework.data.redis.connection.RedisZSetCommands.Aggregate;
 import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
-import org.sniper.nosql.redis.dao.RedisSortedSetCommands;
 
 /**
  * Spring Redis有序集合命令接口

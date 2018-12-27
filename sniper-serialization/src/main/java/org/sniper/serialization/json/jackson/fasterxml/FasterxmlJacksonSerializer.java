@@ -22,8 +22,8 @@ import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.DateUtils;
-import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.serialization.SerializationException;
 import org.sniper.serialization.json.AbstractJsonSerializer;
@@ -48,7 +48,7 @@ public class FasterxmlJacksonSerializer extends AbstractJsonSerializer {
 	}
 	
 	public FasterxmlJacksonSerializer(ObjectMapper objectMapper) {
-		if (objectMapper != null )
+		if (objectMapper != null)
 			this.objectMapper = objectMapper;
 		else 
 			this.objectMapper = new ObjectMapper();
@@ -76,13 +76,13 @@ public class FasterxmlJacksonSerializer extends AbstractJsonSerializer {
 	
 	@Override
 	public boolean canSerialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
+		Class<?> type = ClassUtils.getCurrentType(obj);
 		return type != null && this.objectMapper.canSerialize(type, this.cause);
 	}
 
 	@Override
 	public boolean canDeserialize(Object obj) {
-		Class<?> type = ObjectUtils.getClass(obj);
+		Class<?> type = ClassUtils.getCurrentType(obj);
 		if (type == null)
 			return false;
 		

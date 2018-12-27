@@ -16,7 +16,7 @@
  * Create Date : 2015-5-11
  */
 
-package org.sniper.nosql.redis.dao;
+package org.sniper.nosql.redis.command;
 
 /**
  * Redis服务终端命令接口

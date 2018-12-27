@@ -16,7 +16,7 @@
  * Create Date : 2015-3-28
  */
 
-package org.sniper.nosql.redis.dao;
+package org.sniper.nosql.redis.command;
 
 import java.util.Collection;
 import java.util.List;
@@ -60,7 +60,7 @@ public interface RedisHashCommands {
 	 * @param value 值
 	 * @return
 	 */
-	public <K, H, V> Boolean hSet2(String dbName, K key, H hashKey, V value);
+	public <K, H, V> Boolean hSetIn(String dbName, K key, H hashKey, V value);
 	
 	/**
 	 * 在当前库中执行hSet命令，并设置过期秒数
@@ -72,7 +72,7 @@ public interface RedisHashCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, H, V> Boolean hSet2(String dbName, K key, H hashKey, V value, long expireSeconds);
+	public <K, H, V> Boolean hSet(String dbName, K key, H hashKey, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行hSetNX命令
@@ -104,7 +104,7 @@ public interface RedisHashCommands {
 	 * @param value 值
 	 * @return
 	 */
-	public <K, H, V> Boolean hSetNX2(String dbName, K key, H hashKey, V value);
+	public <K, H, V> Boolean hSetNXIn(String dbName, K key, H hashKey, V value);
 	
 	/**
 	 * 在指定库中执行hSetNX命令，并设置过期秒数
@@ -116,7 +116,7 @@ public interface RedisHashCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, H, V> Boolean hSetNX2(String dbName, K key, H hashKey, V value, long expireSeconds);
+	public <K, H, V> Boolean hSetNX(String dbName, K key, H hashKey, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行hMSet命令
@@ -257,7 +257,7 @@ public interface RedisHashCommands {
 	 * @param hashKey 哈希键
 	 * @return
 	 */
-	public <K, H, V> V hGet2(String dbName, K key, H hashKey);
+	public <K, H, V> V hGetIn(String dbName, K key, H hashKey);
 	
 	/**
 	 * 在指定库中执行hGet命令，获取哈希键中指定类型的哈希键值
@@ -268,7 +268,7 @@ public interface RedisHashCommands {
 	 * @param valueType 哈希值类型
 	 * @return
 	 */
-	public <K, H, V> V hGet2(String dbName, K key, H hashKey, Class<V> valueType);
+	public <K, H, V> V hGet(String dbName, K key, H hashKey, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行hGetAll命令，获取键中所有的哈希键值映射集
@@ -304,7 +304,7 @@ public interface RedisHashCommands {
 	 * @param key 键
 	 * @return
 	 */
-	public <K, H, V> Map<H, V> hGetAll2(String dbName, K key);
+	public <K, H, V> Map<H, V> hGetAllIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行hGetAll命令，获取键中所有指定类型的哈希键值映射集
@@ -314,7 +314,7 @@ public interface RedisHashCommands {
 	 * @param valueType 哈希值类型
 	 * @return
 	 */
-	public <K, H, V> Map<H, V> hGetAll2(String dbName, K key, Class<V> valueType);
+	public <K, H, V> Map<H, V> hGetAllIn(String dbName, K key, Class<V> valueType);
 	
 	/**
 	 * 在指定库中执行hGetAll命令，获取键中所有指定类型的哈希键值映射集
@@ -325,7 +325,7 @@ public interface RedisHashCommands {
 	 * @param valueType 哈希值类型
 	 * @return
 	 */
-	public <K, H, V> Map<H, V> hGetAll2(String dbName, K key, Class<H> hashKeyType, Class<V> valueType);
+	public <K, H, V> Map<H, V> hGetAll(String dbName, K key, Class<H> hashKeyType, Class<V> valueType);
 	
 	/**
 	 * 在当前库中执行hKeys命令，获取键对应的所有哈希键
@@ -351,7 +351,7 @@ public interface RedisHashCommands {
 	 * @param key 键
 	 * @return
 	 */
-	public <K, H> Set<H> hKeys2(String dbName, K key);
+	public <K, H> Set<H> hKeysIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行hKeys命令，获取键对应的所有哈希键
@@ -361,7 +361,7 @@ public interface RedisHashCommands {
 	 * @param hashKeyType 哈希键类型
 	 * @return
 	 */
-	public <K, H> Set<H> hKeys2(String dbName, K key, Class<H> hashKeyType);
+	public <K, H> Set<H> hKeys(String dbName, K key, Class<H> hashKeyType);
 	
 	/**
 	 * 在当前库中执行hLen命令，获取键对应的域个数
@@ -484,7 +484,7 @@ public interface RedisHashCommands {
 	 * @param key
 	 * @return
 	 */
-	public <K, V> List<V> hVals2(String dbName, K key);
+	public <K, V> List<V> hValsIn(String dbName, K key);
 	
 	/**
 	 * 在指定库中执行hMGet命令，获取键中所有域的值
@@ -494,6 +494,6 @@ public interface RedisHashCommands {
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> List<V> hVals2(String dbName, K key, Class<V> valueType);
+	public <K, V> List<V> hVals(String dbName, K key, Class<V> valueType);
 
 }
