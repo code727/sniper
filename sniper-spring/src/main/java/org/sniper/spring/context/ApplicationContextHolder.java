@@ -29,16 +29,15 @@ public class ApplicationContextHolder extends CheckableInitializingBeanAdapter
 	
 	private static ApplicationContext applicationContext;
 	
-	@SuppressWarnings("static-access")
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
+		ApplicationContextHolder.applicationContext = applicationContext;
 	}
 	
 	@Override
 	protected void checkProperties() {
 		if (applicationContext == null)
-			throw new IllegalArgumentException("Property 'applicationContext' is required.");
+			throw new IllegalArgumentException("Property 'applicationContext' is required");
 	}
 	
 	public static ApplicationContext getApplicationContext() {

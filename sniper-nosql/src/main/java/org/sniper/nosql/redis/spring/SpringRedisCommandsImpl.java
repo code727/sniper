@@ -29,6 +29,7 @@ import java.util.Set;
 
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.BooleanUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.MapUtils;
@@ -540,6 +541,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
+		
 		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
@@ -547,9 +549,15 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbName);
 				
-				Boolean result = connection.setNX(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte, expireSeconds);
-				return result;
+				long expireTime = getExpireSeconds(expireSeconds, repository);
+				/* 如果设置的过期时间大于0，则执行原子性的setNX命令，设置键值的同时设置相应的过期时间 
+				 * 注意：这里没有使用RedisConnection提供的原子性set方法，由于此方法在设计时没有声明返回结果，会对执行结果的判断造成误差，
+				 * 因此这里调用的是execute方法， 以客户端执行本地原生命令行的方式进行 */
+				if (expireTime > 0) 
+					return connection.execute(SET_COMMAND_NAME, keyByte, valueSerializer.serialize(value), 
+							NX_COMMAND_BYTES, EX_COMMAND_BYTES, stringSerializer.serialize(expireTime)) != null;
+					
+				return BooleanUtils.isTrue(connection.setNX(keyByte, valueSerializer.serialize(value)));
 			}
 		});
 	}
@@ -617,6 +625,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
 				Map<byte[], byte[]> byteMap = serializeKeyValueToByteMap(dbName, kValues);
 				RedisRepository repository = select(connection, dbName);
+				
 				connection.mSet(byteMap);
 				setExpireTime(connection, repository, byteMap.keySet(), expireSeconds);
 				return null;
@@ -649,6 +658,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
 				Map<byte[], byte[]> byteMap = serializeKeyValueToByteMap(dbName, kValues);
 				RedisRepository repository = select(connection, dbName);
+				
 				connection.mSetNX(byteMap);
 				setExpireTime(connection, repository, byteMap.keySet(), expireSeconds);
 				return null;
@@ -1035,9 +1045,12 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbName);
-				Boolean result = connection.hSet(keyByte, hashKeySerializer.serialize(hashKey), valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte, expireSeconds);
-				return result;
+				
+				Boolean success = connection.hSet(keyByte, hashKeySerializer.serialize(hashKey), valueSerializer.serialize(value));
+				if (BooleanUtils.isTrue(success))
+					setExpireTime(connection, repository, keyByte, expireSeconds);
+				
+				return success;
 			}
 		});
 	}
@@ -1074,9 +1087,12 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbName);
-				Boolean result = connection.hSetNX(keyByte, hashKeySerializer.serialize(hashKey), valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte, expireSeconds);
-				return result;
+				
+				Boolean success = connection.hSetNX(keyByte, hashKeySerializer.serialize(hashKey), valueSerializer.serialize(value));
+				if (BooleanUtils.isTrue(success))
+					setExpireTime(connection, repository, keyByte, expireSeconds);
+				
+				return success;
 			}
 		});
 	}
@@ -2615,11 +2631,11 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbName);
 				
-				Boolean result = connection.zAdd(keyByte, score, valueSerializer.serialize(member));
-				if (result != null && result)
+				Boolean success = connection.zAdd(keyByte, score, valueSerializer.serialize(member));
+				if (BooleanUtils.isTrue(success))
 					setExpireTime(connection, repository, keyByte, expireSeconds);
 				
-				return result;
+				return success;
 			}
 			
 		});

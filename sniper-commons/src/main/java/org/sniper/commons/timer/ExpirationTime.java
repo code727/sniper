@@ -20,54 +20,35 @@ package org.sniper.commons.timer;
 
 import java.util.concurrent.TimeUnit;
 
-import org.sniper.commons.util.AssertUtils;
-
 /**
- * 默认的过期计时器
+ * 过期时间对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DefaultExpiredTimer implements ExpiredTimer, TimeConverter {
+public class ExpirationTime extends AbstractTimeBean {
 	
-	/** 过期时间计数，其值小于等于0时表示永不过期 */
+	/** 过期时间计数 */
 	protected long expireTime;
 	
-	/** 过期时间单位 */
-	protected TimeUnit timeUnit;
-	
-	public DefaultExpiredTimer() {
+	public ExpirationTime() {
 		this(0);
 	}
 	
-	public DefaultExpiredTimer(long expireTime) {
-		this(expireTime, TimeUnit.SECONDS);
+	public ExpirationTime(long expireTime) {
+		this(expireTime, null);
 	}
 		
-	public DefaultExpiredTimer(long expireTime, TimeUnit timeUnit) {
-		AssertUtils.assertNotNull(timeUnit, "Expire time unit must not be null");
+	public ExpirationTime(long expireTime, TimeUnit timeUnit) {
+		super(timeUnit);
 		this.expireTime = expireTime;
-		this.timeUnit = timeUnit;
 	}
 
-	@Override
 	public long getExpireTime() {
 		return expireTime;
 	}
 
-	@Override
 	public void setExpireTime(long expireTime) {
 		this.expireTime = expireTime;
-	}
-
-	@Override
-	public TimeUnit getTimeUnit() {
-		return timeUnit;
-	}
-
-	@Override
-	public void setTimeUnit(TimeUnit timeUnit) {
-		AssertUtils.assertNotNull(timeUnit, "Expire time unit must not be null");
-		this.timeUnit = timeUnit;
 	}
 
 	@Override
@@ -104,5 +85,5 @@ public class DefaultExpiredTimer implements ExpiredTimer, TimeConverter {
 	public long toDays() {
 		return timeUnit.toDays(expireTime);
 	}
-		
+			
 }

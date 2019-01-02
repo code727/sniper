@@ -18,14 +18,12 @@
 
 package org.sniper.lock;
 
-import org.sniper.commons.timer.ExpiredTimer;
-
 /**
  * 锁接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Lock extends ExpiredTimer {
+public interface Lock {
 	
 	/**
 	 * 加锁操作

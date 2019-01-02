@@ -18,10 +18,8 @@
 
 package org.sniper.lock.jdk;
 
-import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
 
-import org.sniper.commons.timer.DefaultExpiredTimer;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.lock.Lock;
@@ -32,7 +30,7 @@ import org.sniper.lock.ParameterizeLock;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class JdkParameterizeLock<P> extends DefaultExpiredTimer implements ParameterizeLock<P> {
+public final class JdkParameterizeLock<P> implements ParameterizeLock<P> {
 	
 	private static final int DEFAULT_LOCKSIZE = 16;
 	
@@ -78,8 +76,9 @@ public final class JdkParameterizeLock<P> extends DefaultExpiredTimer implements
 	@Override
 	public void lock(P parameter) {
 		Lock lock = getLockByParameter(parameter);
-		AssertUtils.assertNotNull(lock, MessageFormat.format("Lock fail by parameter {0}", 
-				ObjectUtils.toSafeNullString(parameter)));
+		AssertUtils.assertNotNull(lock, String.format(
+				"Lock fail by parameter '%s'", ObjectUtils.toSafeNullString(parameter)));
+				
 		lock.lock();
 	}
 	
@@ -92,8 +91,9 @@ public final class JdkParameterizeLock<P> extends DefaultExpiredTimer implements
 	@Override
 	public void unlock(P parameter) {
 		Lock lock = getLockByParameter(parameter);
-		AssertUtils.assertNotNull(lock, MessageFormat.format("Lock fail by parameter {0}", 
-				ObjectUtils.toSafeNullString(parameter)));
+		AssertUtils.assertNotNull(lock, String.format(
+				"Lock fail by parameter '%s'", ObjectUtils.toSafeNullString(parameter)));
+				
 		lock.unlock();
 	}
 	

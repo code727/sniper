@@ -21,7 +21,7 @@ package org.sniper.lock.jdk;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.sniper.commons.timer.DefaultExpiredTimer;
+import org.sniper.commons.timer.ExpirationTime;
 import org.sniper.lock.Lock;
 
 /**
@@ -29,7 +29,7 @@ import org.sniper.lock.Lock;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JdkReentrantLock extends DefaultExpiredTimer implements Lock {
+public class JdkReentrantLock extends ExpirationTime implements Lock {
 	
 	private final ReentrantLock lock;
 	

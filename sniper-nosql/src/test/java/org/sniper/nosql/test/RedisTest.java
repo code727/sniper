@@ -109,7 +109,7 @@ public class RedisTest extends JUnit4SpringTestCase {
 //		System.out.println(age);
 	}
 	
-	@Test
+//	@Test
 	public void testZAdd() {
 		Map<Double, Object> scoreMembers = MapUtils.newHashMap();
 		scoreMembers.put(0.1, "a");
@@ -118,6 +118,12 @@ public class RedisTest extends JUnit4SpringTestCase {
 		
 //		System.out.println(redisCommands.zAdd("zAdd", scoreMembers));
 		System.out.println(redisCommands.zAdds("zAdds", scoreMembers));
+	}
+	
+	@Test
+	public void testSetNX() {
+		long expireSeconds = 100;
+		System.out.println(redisCommands.setNX("lock_" + expireSeconds, "lock", expireSeconds));
 	}
 	
 }

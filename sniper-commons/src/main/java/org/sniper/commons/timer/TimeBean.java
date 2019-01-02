@@ -18,12 +18,28 @@
 
 package org.sniper.commons.timer;
 
+import java.util.concurrent.TimeUnit;
+
 /**
- * 时间转换器接口
+ * 时间对象接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface TimeConverter {
+public interface TimeBean {
+	
+	/**
+	 * 获取计时单位
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public TimeUnit getTimeUnit();
+	
+	/**
+	 * 设置计时单位
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param timeUnit
+	 */
+	public void setTimeUnit(TimeUnit timeUnit);
 	
 	/**
 	 * 将当前时间计数转换成纳秒

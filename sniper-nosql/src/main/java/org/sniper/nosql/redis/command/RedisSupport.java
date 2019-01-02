@@ -45,6 +45,15 @@ import org.sniper.spring.beans.CheckableInitializingBean;
  */
 public abstract class RedisSupport extends CheckableInitializingBean {
 	
+	/** set命令名称 */
+	protected static final String SET_COMMAND_NAME;
+	
+	/** NX命令名称字节数组 */
+	protected static final byte[] NX_COMMAND_BYTES;
+	
+	/** EX命令名称字节数组 */
+	protected static final byte[] EX_COMMAND_BYTES;
+	
 	/** Redis库管理 */
 	protected RedisRepositoryManager repositoryManager;
 	
@@ -54,11 +63,11 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	/** 默认连接库索引 */
 	protected int defaultDbIndex;
 	
-	/** 全局默认的属性转换器 */
-	private PropertyConverter propertyConverter = new PropertyConverter();
-	
 	/** 全局默认的字符串序列化器 */
 	protected final Serializer stringSerializer = new StringSerializer();
+	
+	/** 全局默认的属性转换器 */
+	private PropertyConverter propertyConverter = new PropertyConverter();
 	
 	/** 全局键序列化器 */
 	private Serializer globalKeySerializer;
@@ -71,6 +80,12 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	
 	/** 全局哈希值序列化器 */
 	private Serializer globalHashValueSerializer;
+	
+	static {
+		SET_COMMAND_NAME = "set";
+		NX_COMMAND_BYTES = "NX".getBytes();
+		EX_COMMAND_BYTES = "EX".getBytes();
+	}
 	
 	public RedisRepositoryManager getRepositoryManager() {
 		return repositoryManager;
@@ -171,21 +186,35 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	}
 	
 	/**
+	 * 获取指定库对应的过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param expireSeconds
+	 * @param repository
+	 * @return
+	 */
+	protected long getExpireSeconds(long expireSeconds, RedisRepository repository) {
+		if (expireSeconds > 0 || repository == null)
+			return expireSeconds;
+		
+		return repository.toSeconds();
+	}
+	
+	/**
 	 * 选择指定库的键序列化器
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @return 
 	 */
 	protected Serializer selectKeySerializer(String dbName) {
-		if (repositoryManager != null) {
-			RedisRepository repository = repositoryManager.getRepository(dbName);
-			if (repository != null) {
-				Serializer keySerializer = repository.getKeySerializer();
-				return keySerializer != null ? keySerializer : globalKeySerializer;
-			} else
-				return globalKeySerializer;
-		} else
+		if (repositoryManager == null)
 			return globalKeySerializer;
+		
+		RedisRepository repository = repositoryManager.getRepository(dbName);
+		if (repository == null)
+			return globalKeySerializer;
+		
+		Serializer keySerializer = repository.getKeySerializer();
+		return keySerializer != null ? keySerializer : globalKeySerializer;
 	}
 	
 	/**
@@ -195,15 +224,15 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	 * @return
 	 */
 	protected Serializer selectValueSerializer(String dbName) {
-		if (repositoryManager != null) {
-			RedisRepository repository = repositoryManager.getRepository(dbName);
-			if (repository != null) {
-				Serializer valueSerializer = repository.getValueSerializer();
-				return valueSerializer != null ? valueSerializer : globalValueSerializer;
-			} else
-				return globalValueSerializer;
-		} else
+		if (repositoryManager == null)
 			return globalValueSerializer;
+		
+		RedisRepository repository = repositoryManager.getRepository(dbName);
+		if (repository == null)
+			return globalValueSerializer;
+		
+		Serializer valueSerializer = repository.getValueSerializer();
+		return valueSerializer != null ? valueSerializer : globalValueSerializer;
 	}
 	
 	/**
@@ -213,15 +242,15 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	 * @return
 	 */
 	protected Serializer selectHashKeySerializer(String dbName) {
-		if (repositoryManager != null) {
-			RedisRepository repository = repositoryManager.getRepository(dbName);
-			if (repository != null) {
-				Serializer hashKeySerializer = repository.getHashKeySerializer();
-				return hashKeySerializer != null ? hashKeySerializer : globalHashKeySerializer;
-			} else
-				return globalHashKeySerializer;
-		} else
+		if (repositoryManager == null)
 			return globalHashKeySerializer;
+		
+		RedisRepository repository = repositoryManager.getRepository(dbName);
+		if (repository == null)
+			return globalHashKeySerializer;
+		
+		Serializer hashKeySerializer = repository.getHashKeySerializer();
+		return hashKeySerializer != null ? hashKeySerializer : globalHashKeySerializer;
 	}
 	
 	/**
@@ -231,15 +260,15 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	 * @return
 	 */
 	protected Serializer selectHashValueSerializer(String dbName) {
-		if (repositoryManager != null) {
-			RedisRepository repository = repositoryManager.getRepository(dbName);
-			if (repository != null) {
-				Serializer hashValueSerializer = repository.getHashValueSerializer();
-				return hashValueSerializer != null ? hashValueSerializer : globalHashValueSerializer;
-			} else
-				return globalHashValueSerializer;
-		} else
+		if (repositoryManager == null)
 			return globalHashValueSerializer;
+		
+		RedisRepository repository = repositoryManager.getRepository(dbName);
+		if (repository == null)
+			return globalHashValueSerializer;
+		
+		Serializer hashValueSerializer = repository.getHashValueSerializer();
+		return hashValueSerializer != null ? hashValueSerializer : globalHashValueSerializer;
 	}
 	
 	/** 

@@ -20,8 +20,9 @@ package org.sniper.nosql.redis.connection;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.InitializingBean;
+import org.sniper.spring.beans.CheckableInitializingBeanAdapter;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisClusterConnection;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisSentinelConnection;
@@ -31,7 +32,8 @@ import org.springframework.data.redis.connection.RedisSentinelConnection;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractRoutingConnectionFactory implements InitializingBean, RedisConnectionFactory {
+public abstract class AbstractRoutingConnectionFactory extends CheckableInitializingBeanAdapter
+		implements RedisConnectionFactory {
 	
 	/** 可用的RedisConnectionFactory对象映射集 */
 	private Map<Object, RedisConnectionFactory> targetConnectionFactories;
@@ -58,55 +60,52 @@ public abstract class AbstractRoutingConnectionFactory implements InitializingBe
 	}
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		if (this.resolvedDefaultConnectionFactory == null) {
-			throw new IllegalArgumentException("Property 'resolvedDefaultConnectionFactory' is required");
-		}
-	}
-
-	@Override
 	public DataAccessException translateExceptionIfPossible(RuntimeException ex) {
-		return this.determineTargetConnectionFactory().translateExceptionIfPossible(ex);
+		return determineConnectionFactory().translateExceptionIfPossible(ex);
 	}
 
-	/**
-	 * 获取目标RedisConnection对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return 
-	 */
 	@Override
 	public RedisConnection getConnection() {
-		return this.determineTargetConnectionFactory().getConnection();
+		return determineConnectionFactory().getConnection();
 	}
 	
-	/**
-	 * 获取目标RedisSentinelConnection对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
+	@Override
+	public RedisClusterConnection getClusterConnection() {
+		return determineConnectionFactory().getClusterConnection();
+	}
+	
 	@Override
 	public RedisSentinelConnection getSentinelConnection() {
-		return this.determineTargetConnectionFactory().getSentinelConnection();
+		return determineConnectionFactory().getSentinelConnection();
 	}
 	
 	@Override
 	public boolean getConvertPipelineAndTxResults() {
-		return this.determineTargetConnectionFactory().getConvertPipelineAndTxResults();
+		return determineConnectionFactory().getConvertPipelineAndTxResults();
+	}
+	
+	@Override
+	protected void checkProperties() {
+		if (this.resolvedDefaultConnectionFactory == null) {
+			throw new IllegalArgumentException("Property 'resolvedDefaultConnectionFactory' is required");
+		}
 	}
 	
 	/**
-	 * 获取目标RedisConnectionFactory对象
+	 * 确定RedisConnectionFactory对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	protected RedisConnectionFactory determineTargetConnectionFactory() {
+	protected RedisConnectionFactory determineConnectionFactory() {
 		Object lookupKey = determineCurrentLookupKey();
 		RedisConnectionFactory connectionFactory = this.targetConnectionFactories.get(lookupKey);
 		
 		if (connectionFactory == null) 
 			connectionFactory = this.resolvedDefaultConnectionFactory;
+		
 		if (connectionFactory == null) 
-			throw new IllegalStateException("Cannot determine target RedisConnectionFactory for lookup key [" + lookupKey + "]");
+			throw new IllegalStateException(String.format(
+					"Cannot determine target RedisConnectionFactory for lookup key [%s]", lookupKey));
 		
 		return connectionFactory;
 	}

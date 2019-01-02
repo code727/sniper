@@ -115,8 +115,11 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	protected void setExpireTime(RedisConnection connection, RedisRepository repository, byte[] key, long expireSeconds) {
 		if (expireSeconds > 0)
 			connection.expire(key, expireSeconds);
-		else
-			setExpireTime(connection, repository, key);
+		else if (repository != null) {
+			expireSeconds = repository.toSeconds();
+			if (expireSeconds > 0)
+				connection.expire(key, expireSeconds);
+		}
 	}
 	
 	/**
@@ -124,51 +127,26 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
 	 * @param repository
-	 * @param keySet
+	 * @param keyBytes
 	 * @param expireSeconds
 	 */
-	protected void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keySet, long expireSeconds) {
+	protected void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keyBytes, long expireSeconds) {
 		if (expireSeconds > 0) {
-			for (byte[] keyByte : keySet) {
+			// TODO 批量过期
+			for (byte[] keyByte : keyBytes) {
 				connection.expire(keyByte, expireSeconds);
 			}
-		} else 
-			setExpireTime(connection, repository, keySet);
-	}
-	
-	/**
-	 * 设置当前库数据键的全局过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param connection
-	 * @param repository
-	 * @param key 数据键
-	 */
-	private void setExpireTime(RedisConnection connection, RedisRepository repository, byte[] key) {
-		if (repository != null) {
-			long expireSeconds = repository.toSeconds();
-			if (expireSeconds > 0) 
-				connection.expire(key, expireSeconds);
-		}
-	}
-	
-	/** 
-	 * 设置当前库多个数据键的全局过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param connection
-	 * @param repository
-	 * @param keySet 数据键集
-	 */
-	private void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keySet) {
-		if (repository != null) {
-			long expireSeconds = repository.toSeconds();
+		} else if (repository != null) {
+			expireSeconds = repository.toSeconds();
+			// TODO 批量过期
 			if (expireSeconds > 0) {
-				for (byte[] keyByte : keySet) {
+				for (byte[] keyByte : keyBytes) {
 					connection.expire(keyByte, expireSeconds);
 				}
 			}
 		}
 	}
-	
+			
 	/**
 	 * 获取不同类型键对应的结果列表
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
