@@ -74,14 +74,14 @@ public interface RedisStringCommands {
 	public <K, V> Boolean setNX(K key, V value);
 	
 	/**
-	 *  在当前库中执行setNX命令，并设置过期秒数
+	 *  在当前库中执行setNX命令，并设置过期毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
-	 * @param expireSeconds
+	 * @param expireMillis
 	 * @return
 	 */
-	public <K, V> Boolean setNX(K key, V value, long expireSeconds);
+	public <K, V> Boolean setNX(K key, V value, long expireMillis);
 	
 	/**
 	 * 在指定库中执行setNX命令
@@ -93,15 +93,15 @@ public interface RedisStringCommands {
 	public <K, V> Boolean setNXIn(String dbName, K key, V value);
 	
 	/**
-	 * 在指定库中执行setNX命令，并设置过期秒数
+	 * 在指定库中执行setNX命令，并设置过期毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
 	 * @param value
-	 * @param expireSeconds
+	 * @param expireMillis
 	 * @return
 	 */
-	public <K, V> Boolean setNX(String dbName, K key, V value, long expireSeconds);
+	public <K, V> Boolean setNX(String dbName, K key, V value, long expireMillis);
 	
 	/**
 	 * 在当前库中执行setEx命令，并设置当前库全局过期秒数
