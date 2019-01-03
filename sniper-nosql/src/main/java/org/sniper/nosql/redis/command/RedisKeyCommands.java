@@ -221,23 +221,27 @@ public interface RedisKeyCommands {
 	public <K> Boolean expire(String dbName, K key, long seconds);
 	
 	/**
-	 * 设置当前库中指定键的过期时间戳
+	 * 设置当前库中指定键的过期时间戳</P>
+	 * 注意：参数unixTimestamp为Unix时间戳，即"毫秒时间戳/1000"后的值，
+	 * 因此该命令只能达到"秒级过期"控制。如果要进行"毫秒级过期"控制，请使用pExpireAt命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
-	 * @param timestamp
+	 * @param unixTimestamp Unix时间戳
 	 * @return
 	 */
-	public <K> Boolean expireAt(K key, long timestamp); 
+	public <K> Boolean expireAt(K key, long unixTimestamp); 
 	
 	/**
-	 * 设置指定库中键的过期时间戳
+	 * 设置指定库中键的过期时间戳</P>
+	 * 注意：参数unixTimestamp为Unix时间戳，即"毫秒时间戳/1000"后的值，
+	 * 因此该命令只能满足"秒级过期"控制。如果要进行"毫秒级过期"控制，请使用pExpireAt命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
-	 * @param timestamp
+	 * @param unixTimestamp Unix时间戳
 	 * @return
 	 */
-	public <K> Boolean expireAt(String dbName, K key, long timestamp); 
+	public <K> Boolean expireAt(String dbName, K key, long unixTimestamp); 
 	
 	/**
 	 * 设置当前库中指定键的过期日期
@@ -249,7 +253,7 @@ public interface RedisKeyCommands {
 	public <K> Boolean expireAt(K key, Date date); 
 	
 	/**
-	 * 设置指定库中键的过期时间戳
+	 * 设置指定库中键的过期日期
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -257,6 +261,63 @@ public interface RedisKeyCommands {
 	 * @return
 	 */
 	public <K> Boolean expireAt(String dbName, K key, Date date); 
+	
+	/**
+	 * 设置当前库中指定键的过期毫秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param millis
+	 * @return
+	 */
+	public <K> Boolean pExpire(K key, long millis);
+	
+	/**
+	 * 设置指定库中键的过期毫秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param millis
+	 * @return
+	 */
+	public <K> Boolean pExpire(String dbName, K key, long millis);
+	
+	/**
+	 * 设置当前库中指定键的过期时间戳
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param timestamp
+	 * @return
+	 */
+	public <K> Boolean pExpireAt(K key, long timestamp); 
+	
+	/**
+	 * 设置指定库中键的过期时间戳
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param timestamp
+	 * @return
+	 */
+	public <K> Boolean pExpireAt(String dbName, K key, long timestamp); 
+	
+	/**
+	 * 设置当前库中指定键的过期日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param date
+	 * @return
+	 */
+	public <K> Boolean pExpireAt(K key, Date date); 
+	
+	/**
+	 * 设置指定库中键的过期时间日期
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param date
+	 * @return
+	 */
+	public <K> Boolean pExpireAt(String dbName, K key, Date date); 
 		
 	/**
 	 * 将当前库的键移动到目标库
