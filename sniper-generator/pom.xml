@@ -28,19 +28,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
-			<artifactId>sniper-lock</artifactId>
-			<version>${sniper.version}</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.sniper</groupId>
 			<artifactId>sniper-nosql</artifactId>
 			<version>${sniper.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
-			<artifactId>sniper-lock</artifactId>
+			<artifactId>sniper-concurrent</artifactId>
 			<version>${sniper.version}</version>
 			<optional>true</optional>
 		</dependency>

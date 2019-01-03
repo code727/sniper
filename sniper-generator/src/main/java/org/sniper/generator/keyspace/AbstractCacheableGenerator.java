@@ -22,8 +22,8 @@ import java.util.Map;
 
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.lock.ParameterizeLock;
-import org.sniper.lock.jdk.JdkParameterizeLock;
+import org.sniper.concurrent.locks.JdkParameterizeLock;
+import org.sniper.concurrent.locks.ParameterizeLock;
 
 /**
  * 可缓存的生成器抽象类

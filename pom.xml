@@ -134,7 +134,7 @@
 		<module>sniper-sharding</module>
 		<module>sniper-beans</module>
 		<module>sniper-context</module>
-		<module>sniper-lock</module>
+		<module>sniper-concurrent</module>
 		<module>sniper-resource</module>
 	</modules>
 </project>

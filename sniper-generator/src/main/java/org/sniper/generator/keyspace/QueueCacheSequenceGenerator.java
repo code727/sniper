@@ -24,7 +24,7 @@ import java.util.Queue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.lock.ParameterizeLock;
+import org.sniper.concurrent.locks.ParameterizeLock;
 
 /**
  * 基于队列的缓存序列生成器实现类

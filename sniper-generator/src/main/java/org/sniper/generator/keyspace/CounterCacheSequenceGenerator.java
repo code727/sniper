@@ -23,8 +23,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.concurrent.locks.ParameterizeLock;
 import org.sniper.generator.sequence.KeyspaceTrendSequence;
-import org.sniper.lock.ParameterizeLock;
 import org.sniper.support.counter.AtomicLongIntervalCounter;
 import org.sniper.support.counter.IntervalCounter;
 
