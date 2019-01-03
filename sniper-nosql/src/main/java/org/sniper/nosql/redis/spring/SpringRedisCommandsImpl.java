@@ -31,7 +31,6 @@ import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.BooleanUtils;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.NumberUtils;
 import org.sniper.commons.util.StringUtils;
@@ -225,6 +224,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				
 				select(connection, dbName);
 				return connection.expire(keySerializer.serialize(key), seconds);
 			}
@@ -232,12 +232,12 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	}
 	
 	@Override
-	public <K> Boolean expireAt(K key, long timestamp) {
-		return expireAt(null, key, timestamp);
+	public <K> Boolean expireAt(K key, long unixTimestamp) {
+		return expireAt(null, key, unixTimestamp);
 	}
 
 	@Override
-	public <K> Boolean expireAt(final String dbName, final K key, final long timestamp) {
+	public <K> Boolean expireAt(final String dbName, final K key, final long unixTimestamp) {
 		if (key == null)
 			return false;
 		
@@ -247,7 +247,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbName);
-				return connection.expireAt(keySerializer.serialize(key), timestamp);
+				return connection.expireAt(keySerializer.serialize(key), unixTimestamp);
 			}
 		});
 	}
@@ -259,7 +259,66 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K> Boolean expireAt(String dbName, K key, Date date) {
-		return expireAt(dbName, key, DateUtils.dateToUnixTimestamp(date));
+		if (date == null)
+			return false;
+		
+		return expireAt(dbName, key, date.getTime() / 1000);
+	}
+	
+	@Override
+	public <K> Boolean pExpire(K key, long millis) {
+		return pExpire(null, millis);
+	}
+
+	@Override
+	public <K> Boolean pExpire(final String dbName, final K key, final long millis) {
+		if (key == null)
+			return false;
+		
+		final Serializer keySerializer = selectKeySerializer(dbName);
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
+
+			@Override
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				
+				select(connection, dbName);
+				return connection.pExpire(keySerializer.serialize(key), millis);
+			}
+		});
+	}
+
+	@Override
+	public <K> Boolean pExpireAt(K key, long timestamp) {
+		return pExpireAt(null, key, timestamp);
+	}
+
+	@Override
+	public <K> Boolean pExpireAt(final String dbName, final K key, final long timestamp) {
+		if (key == null)
+			return false;
+		
+		final Serializer keySerializer = selectKeySerializer(dbName);
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
+
+			@Override
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return connection.pExpireAt(keySerializer.serialize(key), timestamp);
+			}
+		});
+	}
+
+	@Override
+	public <K> Boolean pExpireAt(K key, Date date) {
+		return pExpireAt(null, key, date);
+	}
+
+	@Override
+	public <K> Boolean pExpireAt(String dbName, K key, Date date) {
+		if (date == null)
+			return false;
+		
+		return pExpireAt(dbName, key, date.getTime());
 	}
 	
 	@Override
@@ -319,8 +378,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	}
 	
 	public <K, V> List<V> sort(final String dbName, final K key, final SortParameters params, final Class<V> valueType) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [sort]");
-		AssertUtils.assertNotNull(params, "Sort parameters must not be null of command [sort]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [sort]");
+		AssertUtils.assertNotNull(params, "Sort parameters must not be null for command [sort]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -354,9 +413,9 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K, V> Long sortCount(final String dbName, final K key, final SortParameters params, final K targetKey) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [sort]");
-		AssertUtils.assertNotNull(params, "Sort parameters must not be null of command [sort]");
-		AssertUtils.assertNotNull(targetKey, "Target key must not be null of command [sort]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [sort]");
+		AssertUtils.assertNotNull(params, "Sort parameters must not be null for command [sort]");
+		AssertUtils.assertNotNull(targetKey, "Target key must not be null for command [sort]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -386,9 +445,9 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> List<V> sortResult(final String dbName, final K key, final SortParameters params, final K targetKey, final Class<V> valueType) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [sort]");	
-		AssertUtils.assertNotNull(params, "Sort parameters must not be null of command [sort]");
-		AssertUtils.assertNotNull(targetKey, "Target key must not be null of command [sort]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [sort]");	
+		AssertUtils.assertNotNull(params, "Sort parameters must not be null for command [sort]");
+		AssertUtils.assertNotNull(targetKey, "Target key must not be null for command [sort]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<List<V>>() {
@@ -501,8 +560,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> void set(final String dbName, final K key, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [set]");
-		AssertUtils.assertNotNull(value, "Value must not be null of command [set]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [set]");
+		AssertUtils.assertNotNull(value, "Value must not be null for command [set]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -512,8 +571,13 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
 				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbName);
-				connection.set(keyByte, valueSerializer.serialize(value));
-				setExpireTime(connection, repository, keyByte, expireSeconds);
+				
+				long expireTime = getExpireSeconds(expireSeconds, repository);
+				if (expireTime > 0)
+					connection.setEx(keyByte, expireTime, valueSerializer.serialize(value));
+				else
+					connection.set(keyByte, valueSerializer.serialize(value));
+				
 				return null;
 			}
 		});
@@ -525,8 +589,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	}
 	
 	@Override
-	public <K, V> Boolean setNX(K key, V value, long expireSeconds) {
-		return setNX(null, key, value, expireSeconds);
+	public <K, V> Boolean setNX(K key, V value, long expireMillis) {
+		return setNX(null, key, value, expireMillis);
 	}
 
 	@Override
@@ -535,9 +599,9 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	}	
 	
 	@Override
-	public <K, V> Boolean setNX(final String dbName, final K key, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [setNX]");
-		AssertUtils.assertNotNull(value, "Value must not be null of command [setNX]");
+	public <K, V> Boolean setNX(final String dbName, final K key, final V value, final long expireMillis) {
+		AssertUtils.assertNotNull(key, "Key must not be null for command [setNX]");
+		AssertUtils.assertNotNull(value, "Value must not be null for command [setNX]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -549,15 +613,15 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbName);
 				
-				long expireTime = getExpireSeconds(expireSeconds, repository);
+				long expireTime = getExpireMillis(expireMillis, repository);
 				/* 如果设置的过期时间大于0，则执行原子性的setNX命令，设置键值的同时设置相应的过期时间 
 				 * 注意：这里没有使用RedisConnection提供的原子性set方法，由于此方法在设计时没有声明返回结果，会对执行结果的判断造成误差，
 				 * 因此这里调用的是execute方法， 以客户端执行本地原生命令行的方式进行 */
 				if (expireTime > 0) 
 					return connection.execute(SET_COMMAND_NAME, keyByte, valueSerializer.serialize(value), 
-							NX_COMMAND_BYTES, EX_COMMAND_BYTES, stringSerializer.serialize(expireTime)) != null;
-					
-				return BooleanUtils.isTrue(connection.setNX(keyByte, valueSerializer.serialize(value)));
+							NX_COMMAND_BYTES, PX_COMMAND_BYTES, stringSerializer.serialize(expireTime)) != null;
+				
+				return connection.setNX(keyByte, valueSerializer.serialize(value));
 			}
 		});
 	}
@@ -579,8 +643,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K, V> void setEx(final String dbName, final K key, final long seconds, final V value) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [setEx]");
-		AssertUtils.assertNotNull(value, "Value must not be null of command [setEx]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [setEx]");
+		AssertUtils.assertNotNull(value, "Value must not be null for command [setEx]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -617,7 +681,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> void mSet(final String dbName, final Map<K, V> kValues, final long expireSeconds) {
-		AssertUtils.assertNotEmpty(kValues, "Key-value map must not be empty of command [mSet");
+		AssertUtils.assertNotEmpty(kValues, "Key-value map must not be empty for command [mSet");
 		
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
@@ -650,7 +714,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> void mSetNX(final String dbName, final Map<K, V> kValues, final long expireSeconds) {
-		AssertUtils.assertNotEmpty(kValues, "Key values must not be empty of command [mSetNX]");
+		AssertUtils.assertNotEmpty(kValues, "Key values must not be empty for command [mSetNX]");
 		
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
 
@@ -683,8 +747,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> void setRange(final String dbName, final K key, final long offset, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [setRange]");
-		AssertUtils.assertNotNull(value, "Value must not be null of command [setRange]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [setRange]");
+		AssertUtils.assertNotNull(value, "Value must not be null for command [setRange]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -718,8 +782,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> Long append(final String dbName, final K key, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [append]");
-		AssertUtils.assertNotNull(key, "Value must not be null of command [append]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [append]");
+		AssertUtils.assertNotNull(key, "Value must not be null for command [append]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -941,7 +1005,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K> Long decr(final String dbName, final K key) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [decr]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [decr]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -961,7 +1025,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K> Long decrBy(final String dbName, final K key, final long value) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [decrBy]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [decrBy]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -981,7 +1045,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K> Long incr(final String dbName, final K key) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [incr]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [incr]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -1001,7 +1065,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K> Long incrBy(final String dbName, final K key, final long value) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [incrBy]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [incrBy]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -1032,9 +1096,9 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	@Override
 	public <K, H, V> Boolean hSet(final String dbName, final K key,
 			final H hashKey, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [hSet]");
-		AssertUtils.assertNotNull(hashKey, "Hash key must not be null of command [hSet]");
-		AssertUtils.assertNotNull(value, "Value must not be null of command [hSet]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [hSet]");
+		AssertUtils.assertNotNull(hashKey, "Hash key must not be null for command [hSet]");
+		AssertUtils.assertNotNull(value, "Value must not be null for command [hSet]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer hashKeySerializer = selectHashKeySerializer(dbName);
@@ -1074,9 +1138,9 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	public <K, H, V> Boolean hSetNX(final String dbName, final K key,
 			final H hashKey, final V value, final long expireSeconds) {
 		
-		AssertUtils.assertNotNull(key, "Key must not be null of command [hSetNX]");
-		AssertUtils.assertNotNull(hashKey, "Hash key must not be null of command [hSetNX]");
-		AssertUtils.assertNotNull(value, "Value must not be null of command [hSetNX]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [hSetNX]");
+		AssertUtils.assertNotNull(hashKey, "Hash key must not be null for command [hSetNX]");
+		AssertUtils.assertNotNull(value, "Value must not be null for command [hSetNX]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer hashKeySerializer = selectHashKeySerializer(dbName);
@@ -1116,8 +1180,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	public <K, H, V> void hMSet(final String dbName, final K key,
 			final Map<H, V> hashKeyValues, final long expireSeconds) {
 		
-		AssertUtils.assertNotNull(key, "Key must not be null of command [hMSet]");
-		AssertUtils.assertNotEmpty(hashKeyValues, "Hash key values must not be empty of command [hMSet]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [hMSet]");
+		AssertUtils.assertNotEmpty(hashKeyValues, "Hash key values must not be empty for command [hMSet]");
 				
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		super.getRedisTemplate().execute(new RedisCallback<Object>() {
@@ -1127,6 +1191,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbName);
 				connection.hMSet(keyByte, serializeHashKeyValuesToByteMap(dbName, hashKeyValues));
+				
 				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return null;
 			}
@@ -1430,10 +1495,10 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	public <K, V> Long lInsert(final String dbName, final K key, final Position where, final V pivot,
 			final V value, final long expireSeconds) {
 		
-		AssertUtils.assertNotNull(key, "Key must not be null of command [lInsert]");
-		AssertUtils.assertNotNull(where, "Insert postion must not be null of command [lInsert]");
-		AssertUtils.assertNotNull(pivot, "Postion value must not be null of command [lInsert]");
-		AssertUtils.assertNotNull(value, "Insert value must not be null of command [lInsert]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [lInsert]");
+		AssertUtils.assertNotNull(where, "Insert postion must not be null for command [lInsert]");
+		AssertUtils.assertNotNull(pivot, "Postion value must not be null for command [lInsert]");
+		AssertUtils.assertNotNull(value, "Insert value must not be null for command [lInsert]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -1473,8 +1538,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	public <K, V> void lSet(final String dbName, final K key,
 			final long posttion, final V value, final long expireSeconds) {
 		
-		AssertUtils.assertNotNull(key, "Key must not be null of command [lSet]");
-		AssertUtils.assertNotNull(value, "Value must not be null of command [lSet]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [lSet]");
+		AssertUtils.assertNotNull(value, "Value must not be null for command [lSet]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -1508,7 +1573,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> Long lPush(String dbName, K key, V value, long expireSeconds) {
-		AssertUtils.assertNotNull(value, "Value must not be null of command [lPush]");
+		AssertUtils.assertNotNull(value, "Value must not be null for command [lPush]");
 		return lPush(dbName, key, new Object[] { value }, expireSeconds);
 	}
 	
@@ -1529,8 +1594,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> Long lPush(final String dbName, final K key, final V[] values, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [lPush]");
-		AssertUtils.assertNotEmpty(values, "Values must not be empty of command [lPush]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [lPush]");
+		AssertUtils.assertNotEmpty(values, "Values must not be empty for command [lPush]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -1586,8 +1651,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> Long lPushX(final String dbName, final K key, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [lPushX]");
-		AssertUtils.assertNotNull(value, "Value must not be null of command [lPushX]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [lPushX]");
+		AssertUtils.assertNotNull(value, "Value must not be null for command [lPushX]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -1815,7 +1880,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> Long rPush(String dbName, K key, V value, long expireSeconds) {
-		AssertUtils.assertNotNull(value, "Value must not be null of command [rPush]");
+		AssertUtils.assertNotNull(value, "Value must not be null for command [rPush]");
 		return rPush(dbName, key, new Object[] { value }, expireSeconds);
 	}
 	
@@ -1836,8 +1901,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> Long rPush(final String dbName, final K key, final V[] values, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [rPush]");
-		AssertUtils.assertNotEmpty(values, "Values must not be empty of command [rPush]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [rPush]");
+		AssertUtils.assertNotEmpty(values, "Values must not be empty for command [rPush]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -1893,8 +1958,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> Long rPushX(final String dbName, final K key, final V value, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [rPushX]");
-		AssertUtils.assertNotNull(value, "Value must not be null of command [rPushX]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [rPushX]");
+		AssertUtils.assertNotNull(value, "Value must not be null for command [rPushX]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -1951,8 +2016,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <S, T, V> V rPopLPush(final String dbName, final S srcKey, final T destKey, final long expireSeconds, final Class<V> valueType) {
-		AssertUtils.assertNotNull(srcKey, "Source key must not be null of command [rPopLPush]");
-		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [rPopLPush]");
+		AssertUtils.assertNotNull(srcKey, "Source key must not be null for command [rPopLPush]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null for command [rPopLPush]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<V>() {
@@ -2020,7 +2085,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> Long sAdd(String dbName, K key, V member, long expireSeconds) {
-		AssertUtils.assertNotNull(member, "Member must not be null of command [sAdd]");
+		AssertUtils.assertNotNull(member, "Member must not be null for command [sAdd]");
 		return sAdd(dbName, key, Collections.singletonList(member), expireSeconds);
 	}
 	
@@ -2041,8 +2106,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> Long sAdd(final String dbName, final K key, final V[] members, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [sAdd]");
-		AssertUtils.assertNotEmpty(members, "Members must not be empty of command [sAdd]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [sAdd]");
+		AssertUtils.assertNotEmpty(members, "Members must not be empty for command [sAdd]");
 				
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2190,8 +2255,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <T, K> Long sDiffStore(final String dbName, final T destKey, final K[] keys, final long expireSeconds) {
-		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [sDiffStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [sDiffStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null for command [sDiffStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty for command [sDiffStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2296,8 +2361,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <T, K> Long sInterStore(final String dbName, final T destKey, final K[] keys, final long expireSeconds) {
-		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [sInterStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [sInterStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null for command [sInterStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty for command [sInterStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2402,8 +2467,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <T, K> Long sUnionStore(final String dbName, final T destKey, final K[] keys, final long expireSeconds) {
-		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [sUnionStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [sUnionStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null for command [sUnionStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty for command [sUnionStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -2619,8 +2684,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> Boolean zAdd(final String dbName, final K key, final double score, final V member, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [zAdd]");
-		AssertUtils.assertNotNull(member, "Member must not be null of command [zAdd]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [zAdd]");
+		AssertUtils.assertNotNull(member, "Member must not be null for command [zAdd]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -2658,8 +2723,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> Map<Double, Boolean> zAdd(final String dbName, final K key, final Map<Double, V> scoreMembers, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [zAdd]");
-		AssertUtils.assertNotEmpty(scoreMembers, "Score-member map must not be empty of command [zAdd]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [zAdd]");
+		AssertUtils.assertNotEmpty(scoreMembers, "Score-member map must not be empty for command [zAdd]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -2706,8 +2771,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K, V> Long zAdds(final String dbName, final K key, final Map<Double, V> scoreMembers, final long expireSeconds) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [zAdd]");
-		AssertUtils.assertNotEmpty(scoreMembers, "Score-member map must not be empty of command [zAdd]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [zAdd]");
+		AssertUtils.assertNotEmpty(scoreMembers, "Score-member map must not be empty for command [zAdd]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);
@@ -3241,7 +3306,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K> Long zUnionStore(String dbName, K destKey, K key) {
-		AssertUtils.assertNotNull(key, "Source key must not be null of command [zUnionStore]");
+		AssertUtils.assertNotNull(key, "Source key must not be null for command [zUnionStore]");
 		
 		return zUnionStore(dbName, destKey, new Object[] { key });
 	}
@@ -3253,8 +3318,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K> Long zUnionStore(final String dbName, final K destKey, final K[] keys) {
-		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [zUnionStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [zUnionStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null for command [zUnionStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty for command [zUnionStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -3287,8 +3352,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	public <K> Long zUnionStore(final String dbName, final K destKey, final Aggregate aggregate,
 			final int[] weights, final K[] keys) {
 		
-		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [zUnionStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [zUnionStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null for command [zUnionStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty for command [zUnionStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -3320,7 +3385,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K> Long zInterStore(String dbName, K destKey, K srcKey) {
-		AssertUtils.assertNotNull(srcKey, "Source key must not be null of command [zInterStore]");
+		AssertUtils.assertNotNull(srcKey, "Source key must not be null for command [zInterStore]");
 		
 		return zInterStore(dbName, destKey, new Object[] { srcKey });
 	}
@@ -3332,8 +3397,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K> Long zInterStore(final String dbName, final K destKey, final K[] keys) {
-		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [zInterStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [zInterStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null for command [zInterStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty for command [zInterStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -3365,8 +3430,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	@Override
 	public <K> Long zInterStore(final String dbName, final K destKey, final Aggregate aggregate,
 			final int[] weights, final K[] keys) {
-		AssertUtils.assertNotNull(destKey, "Destination key must not be null of command [zInterStore]");
-		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty of command [zInterStore]");
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null for command [zInterStore]");
+		AssertUtils.assertNotEmpty(keys, "Source keys must not be empty for command [zInterStore]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
@@ -3398,8 +3463,8 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 	@Override
 	public <K, V> Double zIncrBy(final String dbName, final K key, final double increment, final V member) {
-		AssertUtils.assertNotNull(key, "Key must not be null of command [zIncrBy]");
-		AssertUtils.assertNotNull(key, "Member must not be null of command [zIncrBy]");
+		AssertUtils.assertNotNull(key, "Key must not be null for command [zIncrBy]");
+		AssertUtils.assertNotNull(key, "Member must not be null for command [zIncrBy]");
 		
 		final Serializer keySerializer = selectKeySerializer(dbName);
 		final Serializer valueSerializer = selectValueSerializer(dbName);

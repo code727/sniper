@@ -32,7 +32,7 @@ public interface ParameterizeLock<P> {
 	public void lock(P parameter);
 	
 	/**
-	 * 对指定参数进行加锁操作后返回是否加锁成功
+	 * 尝试对指定参数进行加锁操作后返回是否加锁成功
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter
 	 * @return
@@ -46,7 +46,7 @@ public interface ParameterizeLock<P> {
 	public void unlock(P parameter);
 	
 	/**
-	 * 对指定参数进行解锁操作后返回是否解锁成功
+	 * 尝试对指定参数进行解锁操作后返回是否解锁成功
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameter
 	 * @return

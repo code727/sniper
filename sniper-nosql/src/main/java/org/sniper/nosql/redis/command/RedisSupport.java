@@ -54,6 +54,9 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	/** EX命令名称字节数组 */
 	protected static final byte[] EX_COMMAND_BYTES;
 	
+	/** PX命令名称字节数组 */
+	protected static final byte[] PX_COMMAND_BYTES;
+	
 	/** Redis库管理 */
 	protected RedisRepositoryManager repositoryManager;
 	
@@ -85,6 +88,7 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 		SET_COMMAND_NAME = "set";
 		NX_COMMAND_BYTES = "NX".getBytes();
 		EX_COMMAND_BYTES = "EX".getBytes();
+		PX_COMMAND_BYTES = "PX".getBytes();
 	}
 	
 	public RedisRepositoryManager getRepositoryManager() {
@@ -197,6 +201,20 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 			return expireSeconds;
 		
 		return repository.toSeconds();
+	}
+	
+	/**
+	 * 获取指定库对应的过期毫秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param expireMillis
+	 * @param repository
+	 * @return
+	 */
+	protected long getExpireMillis(long expireMillis, RedisRepository repository) {
+		if (expireMillis > 0 || repository == null)
+			return expireMillis;
+		
+		return repository.toMillis();
 	}
 	
 	/**

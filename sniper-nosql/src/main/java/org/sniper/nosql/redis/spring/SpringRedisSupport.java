@@ -113,13 +113,8 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	 * @param expireSeconds
 	 */
 	protected void setExpireTime(RedisConnection connection, RedisRepository repository, byte[] key, long expireSeconds) {
-		if (expireSeconds > 0)
+		if (expireSeconds > 0 || (repository != null && (expireSeconds = repository.toSeconds()) > 0))
 			connection.expire(key, expireSeconds);
-		else if (repository != null) {
-			expireSeconds = repository.toSeconds();
-			if (expireSeconds > 0)
-				connection.expire(key, expireSeconds);
-		}
 	}
 	
 	/**
@@ -131,18 +126,9 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	 * @param expireSeconds
 	 */
 	protected void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keyBytes, long expireSeconds) {
-		if (expireSeconds > 0) {
-			// TODO 批量过期
+		if (expireSeconds > 0 || (repository != null && (expireSeconds = repository.toSeconds()) > 0)) {
 			for (byte[] keyByte : keyBytes) {
 				connection.expire(keyByte, expireSeconds);
-			}
-		} else if (repository != null) {
-			expireSeconds = repository.toSeconds();
-			// TODO 批量过期
-			if (expireSeconds > 0) {
-				for (byte[] keyByte : keyBytes) {
-					connection.expire(keyByte, expireSeconds);
-				}
 			}
 		}
 	}

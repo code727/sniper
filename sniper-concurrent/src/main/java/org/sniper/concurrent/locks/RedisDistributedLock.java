@@ -24,7 +24,12 @@ package org.sniper.concurrent.locks;
  * @version 1.0
  */
 public class RedisDistributedLock<P> implements ParameterizeLock<P> {
-
+	
+//	private final RedisCommands redisCommands;
+	
+	
+	
+	
 	@Override
 	public void lock(P parameter) {
 		// TODO Auto-generated method stub

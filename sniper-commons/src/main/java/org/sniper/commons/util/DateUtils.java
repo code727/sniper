@@ -30,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.sniper.commons.constant.date.DatePattern;
 import org.sniper.commons.enums.astrology.HoroscopeEnum;
+import org.sniper.commons.enums.date.WeekEnum;
 
 /**
  * 日期时间工具类
@@ -45,27 +46,6 @@ public class DateUtils {
 			"EEE MMM dd HH:mm:ss yyyy"
 	};
 	
-	/** 星期一字符串 */
-	public static final String MONDAY = "Monday";
-	
-	/** 星期二字符串 */
-	public static final String TUESDAY = "Tuesday";
-	
-	/** 星期三字符串 */
-	public static final String WEDNESDAY = "Wednesday";
-	
-	/** 星期四字符串 */
-	public static final String THURSDAY = "Thursday";
-	
-	/** 星期五字符串 */
-	public static final String FRIDAY = "Friday";
-	
-	/** 星期六字符串 */
-	public static final String SATURDAY = "Saturday";
-	
-	/** 星期日字符串 */
-	public static final String SUNDAY = "Sunday";
-		
 	/** 全局键与日期时间格式关系映射集 */
 	private static final Map<String, SimpleDateFormat> DATE_FORMATES = MapUtils.newConcurrentHashMap();
 	
@@ -169,10 +149,8 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Date stringToDate(String dateString, String pattern) {
-//		AssertUtils.assertTrue(StringUtils.isNotBlank(dateString), "Date string can not be null or blank.");
-		if (StringUtils.isBlank(dateString))
-			return null;
-				
+		AssertUtils.assertNotBlank(dateString, "Date string must not be null or blank");
+		
 		return getDateFormat(pattern).parse(dateString, new ParsePosition(0));
 	}
 	
@@ -194,7 +172,6 @@ public class DateUtils {
 	 * @return 
 	 */
 	public static String dateToString(Date date, String pattern) {
-//		AssertUtils.assertNotNull(date, "Date object can not be null.");
 		if (date == null)
 			return null;
 		
@@ -221,8 +198,7 @@ public class DateUtils {
 	public static String timeToString(long time, String pattern) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(time); 
-		return dateToString(calendar.getTime(), StringUtils.isNotBlank(pattern) 
-				? pattern : DatePattern.DATETIME.getKey());
+		return dateToString(calendar.getTime(), pattern);
 	}
 	
 	/**
@@ -343,17 +319,37 @@ public class DateUtils {
 	}
 	
 	/**
+	 * 以默认格式将Unix时间戳转换为字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param unixTimestamp
+	 * @return
+	 */
+	public static String unixTimestampToString(long unixTimestamp) {
+		return unixTimestampToString(unixTimestamp, DatePattern.DATETIME.getKey());
+	}
+	
+	/**
+	 * 以指定格式将Unix时间戳转换为字符串
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param unixTimestamp
+	 * @param pattern
+	 * @return
+	 */
+	public static String unixTimestampToString(long unixTimestamp, String pattern) {
+		return timeToString(unixTimestamp * 1000, pattern);
+	}
+	
+	/**
 	 * 将指定日期转换成Unix时间戳
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @return
 	 */
 	public static long dateToUnixTimestamp(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		return calendar.getTimeInMillis() / 1000;
+		AssertUtils.assertNotNull(date, "Date object must not be null");
+		return date.getTime() / 1000;
 	}
-	
+		
 	/**
 	 * 判断是否为同一天
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -435,46 +431,55 @@ public class DateUtils {
 	 * 根据指定的日期获取对应的星座
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param birthday
-	 * @return 星座类型,从0至11依次为白羊座至双鱼座
+	 * @return
 	 */
 	public static HoroscopeEnum getHoroscope(Date date) {
-		AssertUtils.assertNotNull(date, "Date object can not be null");
+		if (date == null)
+			return null;
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		int month = calendar.get(Calendar.MONTH) + 1;
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-		//  将月和日拼接成小数的形式，格式[月].[日]
+		// 将月和日拼接成小数的形式，格式[月].[日]
 		double d = Double.valueOf(new StringBuffer(ObjectUtils.toString(month)).append(".").append(day).toString());
-		HoroscopeEnum horoscope = null;
-		if (d >= 3.21 && d <= 4.19 ) {
-			horoscope = HoroscopeEnum.ARIES;
-		} else if (d >= 4.20 && d <= 5.20) {
-			horoscope = HoroscopeEnum.TAURUS;
-		} else if (d >= 5.21 && d <= 6.21) {
-			horoscope = HoroscopeEnum.GEMINI;
-		} else if (d >= 6.22 && d <= 7.22) {
-			horoscope = HoroscopeEnum.CANCER;
-		} else if (d >= 7.23 && d <= 8.22) {
-			horoscope = HoroscopeEnum.LEO;
-		} else if (d >= 8.23 && d <= 9.22) {
-			horoscope = HoroscopeEnum.VIRGO;
-		} else if (d >= 9.23 && d <= 10.23) {
-			horoscope = HoroscopeEnum.LIBRA;
-		} else if (d >= 10.24 && d <= 11.22) {
-			horoscope = HoroscopeEnum.ACRAB;
-		} else if (d >= 11.23 && d <= 12.21) {
-			horoscope = HoroscopeEnum.SAGITTARIUS;
-		} else if ((d >= 12.22 && d <= 12.31) || (d >= 1.01 && d <= 1.19)) {
-			horoscope = HoroscopeEnum.CAPRICORN;
-		} else if (d >= 1.20 && d <= 2.18) {
-			horoscope = HoroscopeEnum.AQUARIUS;
-		} else if (d >= 2.19 && d <= 3.20) {
-			horoscope = HoroscopeEnum.PISCES;
-		}
 		
-		return horoscope;
+		if (d >= 3.21 && d <= 4.19) 
+			return HoroscopeEnum.ARIES;
+			
+		if (d >= 4.20 && d <= 5.20) 
+			return HoroscopeEnum.TAURUS;
+		
+		if (d >= 5.21 && d <= 6.21) 
+			return HoroscopeEnum.GEMINI;
+		
+		if (d >= 6.22 && d <= 7.22) 
+			return HoroscopeEnum.CANCER;
+		
+		if (d >= 7.23 && d <= 8.22) 
+			return HoroscopeEnum.LEO;
+		
+		if (d >= 8.23 && d <= 9.22) 
+			return HoroscopeEnum.VIRGO;
+
+		if (d >= 9.23 && d <= 10.23) 
+			return HoroscopeEnum.LIBRA;
+
+		if (d >= 10.24 && d <= 11.22) 
+			return HoroscopeEnum.ACRAB;
+		
+		if (d >= 11.23 && d <= 12.21) 
+			return HoroscopeEnum.SAGITTARIUS;
+			
+		if ((d >= 12.22 && d <= 12.31) || (d >= 1.01 && d <= 1.19)) 
+			return HoroscopeEnum.CAPRICORN;
+
+		if (d >= 1.20 && d <= 2.18) 
+			return HoroscopeEnum.AQUARIUS;
+		
+//		if (d >= 2.19 && d <= 3.20) 
+		return HoroscopeEnum.PISCES;
 	}
 	
 	/**
@@ -593,7 +598,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Date add(Date date, int calendarField, int amount) {
-		AssertUtils.assertNotNull(date, "Date object can not be null");
+		AssertUtils.assertNotNull(date, "Date object must not be null");
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
@@ -779,7 +784,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static List<Date> everyDayOfWeek(Date date, int firstDayOfWeek) {
-		AssertUtils.assertNotNull(date, "Date object can not be null");
+		AssertUtils.assertNotNull(date, "Date object must not be null");
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setFirstDayOfWeek(firstDayOfWeek);
@@ -798,7 +803,7 @@ public class DateUtils {
 	}
 	
 	/**
-	 * 获当前日期是星期几
+	 * 获取当前日期是星期几
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -815,31 +820,7 @@ public class DateUtils {
 	public static String dayOfWeek(Date now) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(now);
-		String result = null;
-		switch (calendar.get(Calendar.DAY_OF_WEEK)) {
-			case 1:
-				result = SUNDAY;
-				break;
-			case 2:
-				result = MONDAY;
-				break;
-			case 3:
-				result = TUESDAY;
-				break;
-			case 4:
-				result = WEDNESDAY;
-				break;
-			case 5:
-				result = THURSDAY;
-				break;
-			case 6:
-				result = FRIDAY;
-				break;
-			case 7:
-				result = SATURDAY;
-				break;
-		}
-		return result;
+		return WeekEnum.resolve(calendar.get(Calendar.DAY_OF_WEEK)).getMessage();
 	}
 	
 	/**
@@ -965,7 +946,7 @@ public class DateUtils {
 	public static Date dayOfWeek(Date date, int day, int firstDayOfWeek) {
 		AssertUtils.assertNotNull(date, "Date object can not be null"); 
 		AssertUtils.assertTrue(firstDayOfWeek >= 1 && firstDayOfWeek <= 7,
-				"First day of week parameter [" + firstDayOfWeek + "] can not out of range [1 - 7]");
+				String.format("First day of week parameter '%d' firstDayOfWeek out of range [1-7]", firstDayOfWeek));
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setFirstDayOfWeek(firstDayOfWeek);
@@ -1033,12 +1014,12 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Date dayOfMonth(Date date, int day) {
-		int totalDays = totalDaysOfMonth(date);
-		day = NumberUtils.minLimit(NumberUtils.maxLimit(day, totalDays), 1);
+		int days = daysOfMonth(date);
+		day = NumberUtils.minLimit(NumberUtils.maxLimit(day, days), 1);
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
-		calendar.set(Calendar.DAY_OF_MONTH, NumberUtils.rangeLimit(day, 1, totalDays));
+		calendar.set(Calendar.DAY_OF_MONTH, NumberUtils.rangeLimit(day, 1, days));
 		
 		return calendar.getTime();
 	}
@@ -1099,11 +1080,11 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Date dayOfYear(Date date, int day) {
-		int totalDays = totalDaysOfYear(date);
+		int days = daysOfYear(date);
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
-		calendar.set(Calendar.DAY_OF_YEAR, NumberUtils.rangeLimit(day, 1, totalDays));
+		calendar.set(Calendar.DAY_OF_YEAR, NumberUtils.rangeLimit(day, 1, days));
 		
 		return calendar.getTime();
 	}
@@ -1113,8 +1094,8 @@ public class DateUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static int totalDaysOfMonth() {
-		return totalDaysOfMonth(new Date());
+	public static int daysOfMonth() {
+		return daysOfMonth(new Date());
 	}
 	
 	/**
@@ -1123,8 +1104,8 @@ public class DateUtils {
 	 * @param date
 	 * @return
 	 */
-	public static int totalDaysOfMonth(Date date) {
-		AssertUtils.assertNotNull(date, "Date object can not be null");
+	public static int daysOfMonth(Date date) {
+		AssertUtils.assertNotNull(date, "Date object must not be null");
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
@@ -1140,8 +1121,8 @@ public class DateUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static int totalDaysOfYear() {
-		return totalDaysOfYear(new Date());
+	public static int daysOfYear() {
+		return daysOfYear(new Date());
 	}
 	
 	/**
@@ -1150,8 +1131,8 @@ public class DateUtils {
 	 * @param date
 	 * @return
 	 */
-	public static int totalDaysOfYear(Date date) {
-		AssertUtils.assertNotNull(date, "Date object can not be null");
+	public static int daysOfYear(Date date) {
+		AssertUtils.assertNotNull(date, "Date object must not be null");
 		return isLeapYear(date) ? 366 : 365;
 	}
 	
@@ -1262,7 +1243,7 @@ public class DateUtils {
 	 * @return 
 	 */
 	public static long getIntervalMillis(Date when, Date then) {
-		AssertUtils.assertTrue(when != null && then != null, "Date must not be null.");
+		AssertUtils.assertTrue(when != null && then != null, "Date must not be null");
 		return Math.abs(then.getTime() - when.getTime());
 	}
 	
