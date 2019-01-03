@@ -14,5 +14,11 @@
 			<artifactId>sniper-commons</artifactId>
 			<version>${sniper.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.sniper</groupId>
+			<artifactId>sniper-nosql</artifactId>
+			<version>${sniper.version}</version>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 </project>
