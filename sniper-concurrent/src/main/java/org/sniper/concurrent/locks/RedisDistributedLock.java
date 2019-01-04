@@ -27,9 +27,6 @@ public class RedisDistributedLock<P> implements ParameterizeLock<P> {
 	
 //	private final RedisCommands redisCommands;
 	
-	
-	
-	
 	@Override
 	public void lock(P parameter) {
 		// TODO Auto-generated method stub

@@ -21,6 +21,7 @@ package org.sniper.nosql.redis.command;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Redis字符串命令接口
@@ -38,7 +39,7 @@ public interface RedisStringCommands {
 	public <K,V> void set(K key, V value);
 	
 	/**
-	 * 在当前库中执行set命令，并设置过期秒数
+	 * 在当前库中执行set命令并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
@@ -56,7 +57,7 @@ public interface RedisStringCommands {
 	public <K, V> void setIn(String dbName, K key, V value);
 	
 	/**
-	 * 在指定库中执行set命令，并设置过期秒数
+	 * 在指定库中执行set命令并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -74,14 +75,25 @@ public interface RedisStringCommands {
 	public <K, V> Boolean setNX(K key, V value);
 	
 	/**
-	 *  在当前库中执行setNX命令，并设置过期毫秒数
+	 * 在当前库中执行setNX命令并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
 	 * @param expireMillis
 	 * @return
 	 */
-	public <K, V> Boolean setNX(K key, V value, long expireMillis);
+	public <K, V> Boolean setNX(K key, V value, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行setNX命令并设置指定单位的过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 * @param expireTime
+	 * @param timeUnit
+	 * @return
+	 */
+	public <K, V> Boolean setNX(K key, V value, long expireTime, TimeUnit timeUnit);
 	
 	/**
 	 * 在指定库中执行setNX命令
@@ -93,7 +105,7 @@ public interface RedisStringCommands {
 	public <K, V> Boolean setNXIn(String dbName, K key, V value);
 	
 	/**
-	 * 在指定库中执行setNX命令，并设置过期毫秒数
+	 * 在指定库中执行setNX命令并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -101,10 +113,22 @@ public interface RedisStringCommands {
 	 * @param expireMillis
 	 * @return
 	 */
-	public <K, V> Boolean setNX(String dbName, K key, V value, long expireMillis);
+	public <K, V> Boolean setNX(String dbName, K key, V value, long expireSeconds);
 	
 	/**
-	 * 在当前库中执行setEx命令，并设置当前库全局过期秒数
+	 * 在指定库中执行setNX命令并设置指定单位的过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param value
+	 * @param expireTime
+	 * @param timeUnit
+	 * @return
+	 */
+	public <K, V> Boolean setNX(String dbName, K key, V value, long expireTime, TimeUnit timeUnit);
+	
+	/**
+	 * 在当前库中执行setEx命令，设置键值对的同时赋予键全局的过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
@@ -112,7 +136,7 @@ public interface RedisStringCommands {
 	public <K, V> void setEx(K key, V value);
 	
 	/**
-	 * 在当前库中执行setEx命令，并设置当前库过期秒数
+	 * 在当前库中执行setEx命令，设置键值对的同时赋予键指定的过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param seconds
@@ -121,7 +145,7 @@ public interface RedisStringCommands {
 	public <K, V> void setEx(K key, long seconds, V value);
 	
 	/**
-	 * 在指定库中执行setEx命令，并设置当前库全局过期秒数
+	 * 在指定库中执行setEx命令，设置键值对的同时赋予键全局的过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -130,7 +154,7 @@ public interface RedisStringCommands {
 	public <K, V> void setExIn(String dbName, K key, V value);
 	
 	/**
-	 * 在指定库中执行setEx命令，并设置当前库过期秒数
+	 * 在指定库中执行setEx命令，设置键值对的同时赋予键指定的过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -138,6 +162,42 @@ public interface RedisStringCommands {
 	 * @param value
 	 */
 	public <K, V> void setEx(String dbName, K key, long seconds, V value);
+	
+	/**
+	 * 在当前库中执行pSetEx命令，并设置当前库全局过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param value
+	 */
+	public <K, V> void pSetEx(K key, V value);
+	
+	/**
+	 * 在当前库中执行setEx命令，并设置当前库过期毫秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param millis
+	 * @param value
+	 */
+	public <K, V> void pSetEx(K key, long millis, V value);
+	
+	/**
+	 * 在指定库中执行setEx命令，并设置当前库全局过期毫秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param value
+	 */
+	public <K, V> void pSetExIn(String dbName, K key, V value);
+	
+	/**
+	 * 在指定库中执行setEx命令，并设置当前库过期毫秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param millis
+	 * @param value
+	 */
+	public <K, V> void pSetEx(String dbName, K key, long millis, V value);
 	
 	/**
 	 * 在当前库中执行mSet命令
@@ -174,25 +234,28 @@ public interface RedisStringCommands {
 	/**
 	 * 在当前库中执行mSetNX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param kValus
+	 * @param kValues
+	 * @return
 	 */
-	public <K, V> void mSetNX(Map<K, V> kValues);
+	public <K, V> Boolean mSetNX(Map<K, V> kValues);
 	
 	/**
 	 * 在当前库中执行mSetNX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param kValues
 	 * @param expireSeconds
+	 * @return
 	 */
-	public <K, V> void mSetNX(Map<K, V> kValues, long expireSeconds);
+	public <K, V> Boolean mSetNX(Map<K, V> kValues, long expireSeconds);
 	
 	/**
 	 * 在指定库中执行mSetNX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param kValues
+	 * @return
 	 */
-	public <K, V> void mSetNX(String dbName, Map<K, V> kValues);
+	public <K, V> Boolean mSetNX(String dbName, Map<K, V> kValues);
 	
 	/**
 	 * 在指定库中执行mSetNX命令，并设置过期秒数
@@ -200,8 +263,9 @@ public interface RedisStringCommands {
 	 * @param dbName
 	 * @param kValues
 	 * @param expireSeconds
+	 * @return
 	 */
-	public <K, V> void mSetNX(String dbName, Map<K, V> kValues, long expireSeconds);
+	public <K, V> Boolean mSetNX(String dbName, Map<K, V> kValues, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行setRange命令

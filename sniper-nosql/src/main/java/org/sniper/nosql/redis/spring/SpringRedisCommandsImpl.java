@@ -26,10 +26,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
-import org.sniper.commons.util.BooleanUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.NumberUtils;
@@ -134,7 +134,6 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K> Long del(final String dbName, final K[] keys) {
-		
 		if (ArrayUtils.isEmpty(keys))
 			return 0L;
 		
@@ -364,6 +363,27 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	}
 	
 	@Override
+	public <K> Long pTtl(K key) {
+		return pTtl(null, key);
+	}
+	
+	@Override
+	public <K> Long pTtl(final String dbName, final K key) {
+		if (key == null)
+			return -2L;
+		
+		final Serializer keySerializer = selectKeySerializer(dbName);
+		return super.getRedisTemplate().execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return connection.pTtl(keySerializer.serialize(key));
+			}
+		});
+	}
+	
+	@Override
 	public <K, V> List<V> sort(K key, SortParameters params) {
 		return sort(key, params, null);
 	}
@@ -569,14 +589,13 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 			
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
-				byte[] keyByte = keySerializer.serialize(key);
 				RedisRepository repository = select(connection, dbName);
 				
 				long expireTime = getExpireSeconds(expireSeconds, repository);
 				if (expireTime > 0)
-					connection.setEx(keyByte, expireTime, valueSerializer.serialize(value));
+					connection.setEx(keySerializer.serialize(key), expireTime, valueSerializer.serialize(value));
 				else
-					connection.set(keyByte, valueSerializer.serialize(value));
+					connection.set(keySerializer.serialize(key), valueSerializer.serialize(value));
 				
 				return null;
 			}
@@ -589,8 +608,13 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	}
 	
 	@Override
-	public <K, V> Boolean setNX(K key, V value, long expireMillis) {
-		return setNX(null, key, value, expireMillis);
+	public <K, V> Boolean setNX(K key, V value, long expireSeconds) {
+		return setNX(key, value, expireSeconds, null);
+	}
+	
+	@Override
+	public <K, V> Boolean setNX(K key, V value, long expireTime, TimeUnit timeUnit) {
+		return setNX(null, key, value, expireTime, timeUnit);
 	}
 
 	@Override
@@ -599,7 +623,12 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	}	
 	
 	@Override
-	public <K, V> Boolean setNX(final String dbName, final K key, final V value, final long expireMillis) {
+	public <K, V> Boolean setNX(String dbName, K key, final V value, long expireSeconds) {
+		return setNX(dbName, key, value, expireSeconds, null);
+	}
+	
+	@Override
+	public <K, V> Boolean setNX(final String dbName, final K key, final V value, final long expireTime, final TimeUnit timeUnit) {
 		AssertUtils.assertNotNull(key, "Key must not be null for command [setNX]");
 		AssertUtils.assertNotNull(value, "Value must not be null for command [setNX]");
 		
@@ -613,13 +642,13 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbName);
 				
-				long expireTime = getExpireMillis(expireMillis, repository);
+				long expireMillis = getExpireMillis(expireTime, timeUnit, repository);
 				/* 如果设置的过期时间大于0，则执行原子性的setNX命令，设置键值的同时设置相应的过期时间 
-				 * 注意：这里没有使用RedisConnection提供的原子性set方法，由于此方法在设计时没有声明返回结果，会对执行结果的判断造成误差，
+				 * 注意：这里没有使用RedisConnection提供的原子性set方法，因为此方法在设计时没有声明返回结果，会对执行结果的判断造成误差
 				 * 因此这里调用的是execute方法， 以客户端执行本地原生命令行的方式进行 */
-				if (expireTime > 0) 
+				if (expireMillis > 0) 
 					return connection.execute(SET_COMMAND_NAME, keyByte, valueSerializer.serialize(value), 
-							NX_COMMAND_BYTES, PX_COMMAND_BYTES, stringSerializer.serialize(expireTime)) != null;
+							NX_COMMAND_BYTES, PX_COMMAND_BYTES, stringSerializer.serialize(expireMillis)) != null;
 				
 				return connection.setNX(keyByte, valueSerializer.serialize(value));
 			}
@@ -638,7 +667,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 	
 	@Override
 	public <K, V> void setExIn(String dbName, K key, V value) {
-		setEx(dbName, key, getExpireSeconds(dbName), value);	
+		setEx(dbName, key, 0, value);	
 	}
 
 	@Override
@@ -652,9 +681,11 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
-				select(connection, dbName);
-				if (seconds > 0)
-					connection.setEx(keySerializer.serialize(key), seconds, valueSerializer.serialize(value));
+				RedisRepository repository = select(connection, dbName);
+				long expireSeconds = getExpireSeconds(seconds, repository);
+				
+				if (expireSeconds > 0)
+					connection.setEx(keySerializer.serialize(key), expireSeconds, valueSerializer.serialize(value));
 				else
 					// 秒数小于等于0时永不过期
 					connection.set(keySerializer.serialize(key), valueSerializer.serialize(value));
@@ -662,6 +693,27 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 				return null;
 			}
 		});
+	}
+	
+	@Override
+	public <K, V> void pSetEx(K key, V value) {
+		pSetEx(key, 0, value);
+	}
+
+	@Override
+	public <K, V> void pSetEx(K key, long millis, V value) {
+		pSetEx(null, key, millis, value);
+	}
+
+	@Override
+	public <K, V> void pSetExIn(String dbName, K key, V value) {
+		pSetEx(dbName, key, 0, value);
+	}
+
+	@Override
+	public <K, V> void pSetEx(String dbName, K key, long millis, V value) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	@Override
@@ -692,40 +744,42 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 				
 				connection.mSet(byteMap);
 				setExpireTime(connection, repository, byteMap.keySet(), expireSeconds);
+				
 				return null;
 			}
 		});
 	}
 
 	@Override
-	public <K, V> void mSetNX(Map<K, V> kValues) {
-		mSetNX(null, kValues);
+	public <K, V> Boolean mSetNX(Map<K, V> kValues) {
+		return mSetNX(null, kValues);
 	}
 	
 	@Override
-	public <K, V> void mSetNX(Map<K, V> kValues, long expireSeconds) {
-		mSetNX(null, kValues, expireSeconds);
+	public <K, V> Boolean mSetNX(Map<K, V> kValues, long expireSeconds) {
+		return mSetNX(null, kValues, expireSeconds);
 	}
 
 	@Override
-	public <K, V> void mSetNX(String dbName, Map<K, V> kValues) {
-		mSetNX(dbName, kValues, 0);
+	public <K, V> Boolean mSetNX(String dbName, Map<K, V> kValues) {
+		return mSetNX(dbName, kValues, 0);
 	}
 	
 	@Override
-	public <K, V> void mSetNX(final String dbName, final Map<K, V> kValues, final long expireSeconds) {
+	public <K, V> Boolean mSetNX(final String dbName, final Map<K, V> kValues, final long expireSeconds) {
 		AssertUtils.assertNotEmpty(kValues, "Key values must not be empty for command [mSetNX]");
 		
-		super.getRedisTemplate().execute(new RedisCallback<Object>() {
+		return super.getRedisTemplate().execute(new RedisCallback<Boolean>() {
 
 			@Override
-			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				Map<byte[], byte[]> byteMap = serializeKeyValueToByteMap(dbName, kValues);
 				RedisRepository repository = select(connection, dbName);
 				
-				connection.mSetNX(byteMap);
+				Boolean success = connection.mSetNX(byteMap);
 				setExpireTime(connection, repository, byteMap.keySet(), expireSeconds);
-				return null;
+				
+				return success;
 			}
 		});
 	}
@@ -758,6 +812,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
 				byte[] keyByte = keySerializer.serialize(key);	
 				RedisRepository repository = select(connection, dbName);
+				
 				connection.setRange(keyByte, valueSerializer.serialize(value), offset);
 				setExpireTime(connection, repository, keyByte, expireSeconds);
 				return null;
@@ -1111,8 +1166,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 				RedisRepository repository = select(connection, dbName);
 				
 				Boolean success = connection.hSet(keyByte, hashKeySerializer.serialize(hashKey), valueSerializer.serialize(value));
-				if (BooleanUtils.isTrue(success))
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				
 				return success;
 			}
@@ -1153,8 +1207,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 				RedisRepository repository = select(connection, dbName);
 				
 				Boolean success = connection.hSetNX(keyByte, hashKeySerializer.serialize(hashKey), valueSerializer.serialize(value));
-				if (BooleanUtils.isTrue(success))
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				
 				return success;
 			}
@@ -2697,8 +2750,7 @@ public class SpringRedisCommandsImpl extends SpringRedisSupport implements Sprin
 				RedisRepository repository = select(connection, dbName);
 				
 				Boolean success = connection.zAdd(keyByte, score, valueSerializer.serialize(member));
-				if (BooleanUtils.isTrue(success))
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				setExpireTime(connection, repository, keyByte, expireSeconds);
 				
 				return success;
 			}

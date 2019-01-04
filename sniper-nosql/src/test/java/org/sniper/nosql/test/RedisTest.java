@@ -120,10 +120,21 @@ public class RedisTest extends JUnit4SpringTestCase {
 		System.out.println(redisCommands.zAdds("zAdds", scoreMembers));
 	}
 	
-	@Test
+//	@Test
 	public void testSetNX() {
 		long expireSeconds = 100;
 		System.out.println(redisCommands.setNX("lock_" + expireSeconds, "lock", expireSeconds));
+	}
+	
+//	@Test
+	public void testTTL() {
+		System.out.println(redisCommands.ttl("test"));
+		System.out.println(redisCommands.pTtl("test"));
+	}
+	
+	@Test
+	public void testDel() {
+		System.out.println(redisCommands.del("test"));
 	}
 	
 }

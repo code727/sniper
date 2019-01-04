@@ -356,6 +356,23 @@ public interface RedisKeyCommands {
 	public <K> Long ttl(String dbName, K key);
 	
 	/**
+	 * 获取当前库的指定键的剩余毫秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K> Long pTtl(K key);
+	
+	/**
+	 * 获取指定库中的键的剩余毫秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @return
+	 */
+	public <K> Long pTtl(String dbName, K key);
+	
+	/**
 	 * 获取当前库中所有键对应的值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return

@@ -18,7 +18,6 @@
 
 package org.sniper.generator.test.application;
 
-import org.sniper.commons.util.NumberUtils;
 import org.sniper.generator.application.DimensionSerialNumberGenerator;
 import org.sniper.generator.test.AbstractSpringGeneratorTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +44,5 @@ public class DimensionSerialNumberGeneratorTest extends AbstractSpringGeneratorT
 	protected String generate() {
 		return dimensionSerialNumberGenerator.generateByParameter("A");
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(NumberUtils.divide(10000000, 10.2));
-	}
-		
+			
 }

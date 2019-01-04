@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 import java.util.Set;
 
 import org.sniper.beans.PropertyConverter;
@@ -174,23 +175,9 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	protected int getDefaultDbIndex() {
 		return this.defaultDbIndex;
 	}
-	
-	/**
-	 * 获取指定库对应的过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @return
-	 */
-	protected long getExpireSeconds(String dbName) {
-		if (repositoryManager == null)
-			return 0L;
 		
-		RedisRepository repository = repositoryManager.getRepository(dbName);
-		return repository != null ? repository.toSeconds() : 0L;
-	}
-	
 	/**
-	 * 获取指定库对应的过期秒数
+	 * 获取过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param expireSeconds
 	 * @param repository
@@ -204,15 +191,19 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	}
 	
 	/**
-	 * 获取指定库对应的过期毫秒数
+	 * 获取过期毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param expireMillis
+	 * @param expireTime
+	 * @param timeUnit
 	 * @param repository
 	 * @return
 	 */
-	protected long getExpireMillis(long expireMillis, RedisRepository repository) {
-		if (expireMillis > 0 || repository == null)
-			return expireMillis;
+	protected long getExpireMillis(long expireTime, TimeUnit timeUnit, RedisRepository repository) {
+		if (expireTime > 0)
+			return timeUnit != null ? timeUnit.toMillis(expireTime) : TimeUnit.SECONDS.toMillis(expireTime);
+			
+		if (repository == null)
+			return expireTime;
 		
 		return repository.toMillis();
 	}
