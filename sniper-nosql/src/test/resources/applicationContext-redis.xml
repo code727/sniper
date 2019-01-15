@@ -22,6 +22,12 @@
 		<property name="globalValueSerializer">
 			<bean class="org.sniper.serialization.jdk.StringSerializer" />
 		</property>
+		<property name="globalHashKeySerializer">
+			<bean class="org.sniper.serialization.jdk.StringSerializer" />
+		</property>
+		<property name="globalHashValueSerializer">
+			<bean class="org.sniper.serialization.jdk.StringSerializer" />
+		</property> 
 	</bean>
 	
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">

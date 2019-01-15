@@ -212,7 +212,7 @@ public interface RedisHashCommands {
 	public <K, H> Long hDel(String dbName, K key, Collection<H> hashKeys);
 	
 	/**
-	 * 判断当前库指定键对应的哈希键是否存在
+	 * 判断在当前库中的哈希键是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key 键
 	 * @param hashKey 哈希键
@@ -221,7 +221,7 @@ public interface RedisHashCommands {
 	public <K, H> Boolean hExists(K key, H hashKey);
 	
 	/**
-	 * 判断指定库键对应域是否存在
+	 * 判断在指定库中的哈希键是否存在
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key 键
@@ -495,5 +495,85 @@ public interface RedisHashCommands {
 	 * @return
 	 */
 	public <K, V> List<V> hVals(String dbName, K key, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行hIncr命令，将哈希键储存的数字值加一
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param hashKey
+	 * @return
+	 */
+	public <K, H> Long hIncr(K key, H hashKey);
+	
+	/**
+	 * 在指定库中执行hIncr命令，将哈希键储存的数字值加一
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param hashKey
+	 * @return
+	 */
+	public <K, H> Long hIncr(String dbName, K key, H hashKey);
+	
+	/**
+	 * 在当前库中执行hIncrBy命令，将哈希键储存的数字值加上指定的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param hashKey
+	 * @param value
+	 * @return
+	 */
+	public <K, H> Long hIncrBy(K key, H hashKey, long value);
+	
+	/**
+	 * 在指定库中执行hIncrBy命令，将哈希键储存的数字值加上指定的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param hashKey
+	 * @param value
+	 * @return
+	 */
+	public <K, H> Long hIncrBy(String dbName, K key, H hashKey, long value);
+	
+	/**
+	 * 在当前库中执行hDecr命令，将哈希键储存的数字值减一
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param hashKey
+	 * @return
+	 */
+	public <K, H> Long hDecr(K key, H hashKey);
+	
+	/**
+	 * 在指定库中执行hDecr命令，将哈希键储存的数字值加一
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param hashKey
+	 * @return
+	 */
+	public <K, H> Long hDecr(String dbName, K key, H hashKey);
+	
+	/**
+	 * 在当前库中执行hDecrBy命令，将哈希键储存的数字值减去指定的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param hashKey
+	 * @param value
+	 * @return
+	 */
+	public <K, H> Long hDecrBy(K key, H hashKey, long value);
+	
+	/**
+	 * 在指定库中执行hDecrBy命令，将哈希键储存的数字值减去指定的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param hashKey
+	 * @param value
+	 * @return
+	 */
+	public <K, H> Long hDecrBy(String dbName, K key, H hashKey, long value);
 
 }

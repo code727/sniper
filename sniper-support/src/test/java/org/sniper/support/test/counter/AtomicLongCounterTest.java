@@ -45,7 +45,7 @@ public class AtomicLongCounterTest extends BaseTestCase {
 		ExecutorService executor = Executors.newCachedThreadPool();
 		Task task = new Task();
 		
-		int thradSize = 1;
+		int thradSize = 2;
 		List<Future<Set<Long>>> futures = CollectionUtils.newArrayList(thradSize);
 		for (int i = 0; i < thradSize; i++) {
 			futures.add(executor.submit(task));

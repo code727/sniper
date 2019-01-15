@@ -29,7 +29,7 @@ import java.util.Set;
 public interface RedisSetCommands {
 	
 	/**
-	 * 在当前库中执行sAdd命令
+	 * 在当前库中执行sAdd命令，将成员值加入到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param member
@@ -38,7 +38,7 @@ public interface RedisSetCommands {
 	public <K, V> Long sAdd(K key, V member);
 	
 	/**
-	 * 在当前库中执行sAdd命令，并设置过期秒数
+	 * 在当前库中执行sAdd命令，将成员值加入到集合中并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param member
@@ -48,7 +48,7 @@ public interface RedisSetCommands {
 	public <K, V> Long sAdd(K key, V member, long expireSeconds);
 	
 	/**
-	 * 在指定库中执行sAdd命令
+	 * 在指定库中执行sAdd命令，将成员值加入到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -58,7 +58,7 @@ public interface RedisSetCommands {
 	public <K, V> Long sAddIn(String dbName, K key, V member);
 	
 	/**
-	 * 在指定库中执行sAdd命令，并设置过期秒数
+	 * 在指定库中执行sAdd命令，将成员值加入到集合中并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -69,7 +69,7 @@ public interface RedisSetCommands {
 	public <K, V> Long sAdd(String dbName, K key, V member, long expireSeconds);
 	
 	/**
-	 * 在当前库中执行sAdd命令
+	 * 在当前库中执行sAdd命令，将多个成员值加入到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param members
@@ -78,7 +78,7 @@ public interface RedisSetCommands {
 	public <K, V> Long sAdd(K key, V[] members);
 	
 	/**
-	 * 在当前库中执行sAdd命令，并设置过期秒数
+	 * 在当前库中执行sAdd命令，将多个成员值加入到集合中并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param members
@@ -88,7 +88,7 @@ public interface RedisSetCommands {
 	public <K, V> Long sAdd(K key, V[] members, long expireSeconds);
 	
 	/**
-	 * 在指定库中执行sAdd命令
+	 * 在指定库中执行sAdd命令，将多个成员值加入到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -98,7 +98,7 @@ public interface RedisSetCommands {
 	public <K, V> Long sAdd(String dbName, K key, V[] members);
 	
 	/**
-	 * 在指定库中执行sAdd命令，并设置过期秒数
+	 * 在指定库中执行sAdd命令，将多个成员值加入到集合中并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -109,7 +109,7 @@ public interface RedisSetCommands {
 	public <K, V> Long sAdd(String dbName, K key, V[] members, long expireSeconds);
 	
 	/**
-	 * 在当前库中执行sAdd命令
+	 * 在当前库中执行sAdd命令，将多个成员值加入到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param memberss
@@ -118,7 +118,7 @@ public interface RedisSetCommands {
 	public <K, V> Long sAdd(K key, Collection<V> members);
 	
 	/**
-	 * 在当前库中执行sAdd命令，并设置过期秒数
+	 * 在当前库中执行sAdd命令，将多个成员值加入到集合中并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param members
@@ -128,7 +128,7 @@ public interface RedisSetCommands {
 	public <K, V> Long sAdd(K key, Collection<V> members, long expireSeconds);
 	
 	/**
-	 * 在指定库中执行sAdd命令
+	 * 在指定库中执行sAdd命令，将多个成员值加入到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -138,7 +138,7 @@ public interface RedisSetCommands {
 	public <K, V> Long sAdd(String dbName, K key, Collection<V> members);
 	
 	/**
-	 * 在指定库中执行sAdd命令，并设置过期秒数
+	 * 在指定库中执行sAdd命令，将多个成员值加入到集合中并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -687,6 +687,17 @@ public interface RedisSetCommands {
 	public <K, T, V> Boolean sMove(K srcKey, T destKey, V member);
 	
 	/**
+	 * 在当前库中执行sMove命令，将源集合键指定的成员移到目标集合键中，并设置目标键的过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param srcKey
+	 * @param destKey
+	 * @param member
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, T, V> Boolean sMove(K srcKey, T destKey, V member, long expireSeconds);
+	
+	/**
 	 * 在指定库中执行sMove命令，将源集合键指定的成员移到目标集合键中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
@@ -695,10 +706,22 @@ public interface RedisSetCommands {
 	 * @param member
 	 * @return
 	 */
-	public <K, T, V> Boolean sMove(String dbName, K srcKey, T destKey, V member);
+	public <K, T, V> Boolean sMoveIn(String dbName, K srcKey, T destKey, V member);
 	
 	/**
-	 * 在当前库中执行sPop命令，随机出栈键中的一个值
+	 * 在指定库中执行sMove命令，将源集合键指定的成员移到目标集合键中，并设置目标键的过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param srcKey
+	 * @param destKey
+	 * @param member
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, T, V> Boolean sMove(String dbName, K srcKey, T destKey, V member, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行sPop命令，随机出列指定键集合中的一个成员值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -706,7 +729,7 @@ public interface RedisSetCommands {
 	public <K, V> V sPop(K key);
 	
 	/**
-	 * 在当前库中执行sPop命令，随机出栈键中的一个值
+	 * 在当前库中执行sPop命令，随机出列指定键集合中的一个成员值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param valueType
@@ -715,7 +738,7 @@ public interface RedisSetCommands {
 	public <K, V> V sPop(K key, Class<V> valueType);
 	
 	/**
-	 * 在指定库中执行sPop命令，随机出栈键中的一个值
+	 * 在指定库中执行sPop命令，随机出列指定键集合中的一个成员值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -724,7 +747,7 @@ public interface RedisSetCommands {
 	public <K, V> V sPopIn(String dbName, K key);
 	
 	/**
-	 * 在指定库中执行sPop命令，随机出栈键中的一个值
+	 * 在指定库中执行sPop命令，随机出列指定键集合中的一个成员值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -734,7 +757,7 @@ public interface RedisSetCommands {
 	public <K, V> V sPop(String dbName, K key, Class<V> valueType);
 	
 	/**
-	 * 在当前库中执行sRandMember命令，随机获取键中的一个值
+	 * 在当前库中执行sRandMember命令，随机获取键集合中的一个成员值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -742,7 +765,7 @@ public interface RedisSetCommands {
 	public <K, V> V sRandMember(K key);
 	
 	/**
-	 * 在当前库中执行sRandMember命令，随机获取键中的一个值
+	 * 在当前库中执行sRandMember命令，随机获取键集合中的一个成员值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param valueType
@@ -751,7 +774,7 @@ public interface RedisSetCommands {
 	public <K, V> V sRandMember(K key, Class<V> valueType);
 	
 	/**
-	 * 在指定库中执行sRandMember命令，随机获取键中的一个值
+	 * 在指定库中执行sRandMember命令，随机获取键集合中的一个成员值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -760,7 +783,7 @@ public interface RedisSetCommands {
 	public <K, V> V sRandMemberIn(String dbName, K key);
 	
 	/**
-	 * 在指定库中执行sRandMember命令，随机获取键中的一个值
+	 * 在指定库中执行sRandMember命令，随机获取键集合中的一个成员值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key

@@ -74,55 +74,13 @@ public interface RedisSortedSetCommands {
 	public <K, V> Boolean zAdd(String dbName, K key, double score, V member, long expireSeconds);
 	
 	/**
-	 * 在当前库中执行zAdd命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param scoreMembers
-	 * @return
-	 */
-	public <K, V> Map<Double, Boolean> zAdd(K key, Map<Double, V> scoreMembers);
-	
-	/**
-	 * 在当前库中执行zAdd命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param scoreMembers
-	 * @param expireSeconds
-	 * @return
-	 */
-	public <K, V> Map<Double, Boolean> zAdd(K key, Map<Double, V> scoreMembers, long expireSeconds);
-	
-	/**
-	 * 在指定库中执行zAdd命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param scoreMembers
-	 * @return
-	 */
-	public <K, V> Map<Double, Boolean> zAdd(String dbName, K key, Map<Double, V> scoreMembers);
-	
-	/**
-	 * 在指定库中执行zAdd命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param scoreMembers
-	 * @param expireSeconds
-	 * @return
-	 */
-	public <K, V> Map<Double, Boolean> zAdd(String dbName, K key, Map<Double, V> scoreMembers, long expireSeconds);
-	
-	// --------------------------------------------
-	
-	/**
 	 * 在当前库中执行批量zAdd命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param scoreMembers
 	 * @return
 	 */
-	public <K, V> Long zAdds(K key, Map<Double, V> scoreMembers);
+	public <K, V> Long zAdd(K key, Map<V, Double> scoreMembers);
 	
 	/**
 	 * 在当前库中执行批量zAdd命令，并设置过期秒数
@@ -132,7 +90,7 @@ public interface RedisSortedSetCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long zAdds(K key, Map<Double, V> scoreMembers, long expireSeconds);
+	public <K, V> Long zAdd(K key, Map<V, Double> scoreMembers, long expireSeconds);
 	
 	/**
 	 * 在指定库中执行批量zAdd命令
@@ -142,7 +100,7 @@ public interface RedisSortedSetCommands {
 	 * @param scoreMembers
 	 * @return
 	 */
-	public <K, V> Long zAdds(String dbName, K key, Map<Double, V> scoreMembers);
+	public <K, V> Long zAdd(String dbName, K key, Map<V, Double> scoreMembers);
 	
 	/**
 	 * 在指定库中执行批量zAdd命令，并设置过期秒数
@@ -153,7 +111,47 @@ public interface RedisSortedSetCommands {
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Long zAdds(String dbName, K key, Map<Double, V> scoreMembers, long expireSeconds);
+	public <K, V> Long zAdd(String dbName, K key, Map<V, Double> scoreMembers, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zAdd命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param scoreMembers
+	 * @return
+	 */
+	public <K, V> Map<V, Boolean> zAdds(K key, Map<V, Double> scoreMembers);
+	
+	/**
+	 * 在当前库中执行zAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param scoreMembers
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Map<V, Boolean> zAdds(K key, Map<V, Double> scoreMembers, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zAdd命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param scoreMembers
+	 * @return
+	 */
+	public <K, V> Map<V, Boolean> zAdds(String dbName, K key, Map<V, Double> scoreMembers);
+	
+	/**
+	 * 在指定库中执行zAdd命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param scoreMembers
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Map<V, Boolean> zAdds(String dbName, K key, Map<V, Double> scoreMembers, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行zCard命令，获取有序集合键对应的元素个数
@@ -194,7 +192,7 @@ public interface RedisSortedSetCommands {
 	public <K> Long zCount(String dbName, K key, double minScore, double maxScore);
 	
 	/**
-	 * 在当前库中执行zRange命令，获取有序集合下标区间范围内的所有元素值
+	 * 在当前库中执行zRange命令，以score值升序的方式获取集合下标区间范围内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -204,7 +202,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRange(K key, long begin, long end);
 	
 	/**
-	 * 在当前库中执行zRange命令，获取有序集合下标区间范围内的所有元素值
+	 * 在当前库中执行zRange命令，以score值升序的方式获取集合下标区间范围内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -215,7 +213,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRange(K key, long begin, long end, Class<V> valueType);
 	
 	/**
-	 * 在指定库中执行zRange命令，获取有序集合下标区间范围内的所有元素值
+	 * 在指定库中执行zRange命令，以score值升序的方式获取集合下标区间范围内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -226,7 +224,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRange(String dbName, K key, long begin, long end);
 	
 	/**
-	 * 在指定库中执行zRange命令，获取有序集合下标区间范围内的所有元素值
+	 * 在指定库中执行zRange命令，以score值升序的方式获取集合下标区间范围内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -238,7 +236,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRange(String dbName, K key, long begin, long end, Class<V> valueType);
 	
 	/**
-	 * 在当前库中执行zRange命令，获取有序集合内的所有元素值
+	 * 在当前库中执行zRange命令，以score值升序的方式获取集合内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -248,7 +246,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeAll(K key);
 	
 	/**
-	 * 在当前库中执行zRange命令，获取有序集合内的所有元素值
+	 * 在当前库中执行zRange命令，以score值升序的方式获取集合内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param valueType
@@ -257,7 +255,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeAll(K key, Class<V> valueType);
 	
 	/**
-	 * 在指定库中执行zRange命令，获取有序集合内的所有元素值
+	 * 在指定库中执行zRange命令，以score值升序的方式获取集合内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -268,7 +266,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeAllIn(String dbName, K key);
 	
 	/**
-	 * 在指定库中执行zRange命令，获取有序集合内的所有元素值
+	 * 在指定库中执行zRange命令，以score值升序的方式获取集合内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -278,7 +276,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeAll(String dbName, K key, Class<V> valueType);
 	
 	/**
-	 * 在当前库中执行zRangeByScore命令，获取有序集合在 [minScore, maxScore]区间范围内的元素值
+	 * 在当前库中执行zRangeByScore命令，以score值升序的方式获取集合在[minScore, maxScore]区间范围内的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param minScore
@@ -288,7 +286,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore);
 	
 	/**
-	 * 在当前库中执行zRangeByScore命令，获取有序集合在 [minScore, maxScore]区间范围内的元素值
+	 * 在当前库中执行zRangeByScore命令，以score值升序的方式获取集合在[minScore, maxScore]区间范围内的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param minScore
@@ -299,7 +297,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, Class<V> valueType);
 	
 	/**
-	 * 在指定库中执行zRangeByScore命令，获取有序集合在 [minScore, maxScore]区间范围内的元素值
+	 * 在指定库中执行zRangeByScore命令，以score值升序的方式获取集合在[minScore, maxScore]区间范围内的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -310,7 +308,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore);
 	
 	/**
-	 * 在指定库中执行zRangeByScore命令，获取有序集合在 [minScore, maxScore]区间范围内的元素值
+	 * 在指定库中执行zRangeByScore命令，以score值升序的方式获取集合在[minScore, maxScore]区间范围内的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -322,7 +320,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
 	
 	/**
-	 * 在当前库中执行zRangeByScore命令，从offset开始定位，获取有序集合在 [minScore, maxScore]区间范围内最多count个成员
+	 * 在当前库中执行zRangeByScore命令，从offset开始定位，以score值升序的方式获取集合在[minScore, maxScore]区间范围内最多count个元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param minScore
@@ -334,7 +332,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, long offset, long count);
 	
 	/**
-	 * 在当前库中执行zRangeByScore命令，从offset开始定位，获取有序集合在 [minScore, maxScore]区间范围内最多count个成员
+	 * 在当前库中执行zRangeByScore命令，从offset开始定位，以score值升序的方式获取集合在[minScore, maxScore]区间范围内最多count个元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param minScore
@@ -347,7 +345,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, long offset, long count, Class<V> valueType);
 	
 	/**
-	 * 在指定库中执行zRangeByScore命令，从offset开始定位，获取有序集合在 [minScore, maxScore]区间范围内最多count个成员
+	 * 在指定库中执行zRangeByScore命令，从offset开始定位，以score值升序的方式获取集合在[minScore, maxScore]区间范围内最多count个元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -360,7 +358,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore, long offset, long count);
 	
 	/**
-	 * 在指定库中执行zRangeByScore命令，从offset开始定位，获取有序集合在 [minScore, maxScore]区间范围内最多count个成员
+	 * 在指定库中执行zRangeByScore命令，从offset开始定位，以score值升序的方式获取集合在[minScore, maxScore]区间范围内最多count个元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -373,7 +371,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore, long offset, long count, Class<V> valueType);
 	
 	/**
-	 * 在当前库中执行zRank命令，获取有序键集中，指定成员按score值升序排列后的下标索引
+	 * 在当前库中执行zRank命令，获取有序键集中指定成员按score值升序排列后的下标值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param member
@@ -382,7 +380,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Long zRank(K key, V member);
 	
 	/**
-	 * 在指定库中执行zRank命令，获取有序键集中，指定成员按score值升序排列后的下标索引
+	 * 在指定库中执行zRank命令，获取有序键集中指定成员按score值升序排列后的下标值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -449,7 +447,24 @@ public interface RedisSortedSetCommands {
 	public <K, V> Long zRem(String dbName, K key, Collection<V> members);
 	
 	/**
-	 * 在当前库中执行zRemRangeByRank命令，删除指定下标索引范围内的所有成员
+	 * 在当前库中执行zRem命令，删除指定键集中的所有成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K, V> Long zRemAll(K key);
+	
+	/**
+	 * 在指定库中执行zRem命令，删除指定键集中的所有成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @return
+	 */
+	public <K, V> Long zRemAll(String dbName, K key);
+	
+	/**
+	 * 在当前库中执行zRemRangeByRank命令，删除指定下标范围内所有升序排列后的成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -459,7 +474,7 @@ public interface RedisSortedSetCommands {
 	public <K> Long zRemRangeByRank(K key, long begin, long end);
 	
 	/**
-	 * 在指定库中执行zRemRangeByRank命令，删除指定下标索引范围内的所有成员
+	 * 在指定库中执行zRemRangeByRank命令，删除指定下标范围内所有升序排列后的成员
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -491,7 +506,7 @@ public interface RedisSortedSetCommands {
 	public <K> Long zRemRangeByScore(String dbName, K key, double minScore, double maxScore);
 	
 	/**
-	 * 在当前库中执行zRevRange命令，按score值降序方式返回指定键集范围内的值集合
+	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -501,7 +516,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRange(K key, long begin, long end);
 	
 	/**
-	 * 在当前库中执行zRevRange命令，按score值降序方式返回指定键集范围内的值集合
+	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param begin
@@ -512,7 +527,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRange(K key, long begin, long end, Class<V> valueType);
 	
 	/**
-	 * 在指定库中执行zRevRange命令，按score值降序方式返回指定键集范围内的值集合
+	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -523,7 +538,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRange(String dbName, K key, long begin, long end);
 	
 	/**
-	 * 在指定库中执行zRevRange命令，按score值降序方式返回指定键集范围内的值集合
+	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -535,7 +550,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRange(String dbName, K key, long begin, long end, Class<V> valueType);
 	
 	/**
-	 * 在当前库中执行zRevRange命令，按score值降序方式返回指定键集的所有值集合
+	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -543,7 +558,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRangeAll(K key);
 	
 	/**
-	 * 在当前库中执行zRevRange命令，按score值降序方式返回指定键集的所有值集合
+	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param valueType
@@ -552,7 +567,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRangeAll(K key, Class<V> valueType);
 	
 	/**
-	 * 在指定库中执行zRevRange命令，按score值降序方式返回指定键集的所有值集合
+	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -561,7 +576,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRangeAllIn(String dbName, K key);
 	
 	/**
-	 * 在指定库中执行zRevRange命令，按score值降序方式返回指定键集的所有值集合
+	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -571,7 +586,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRangeAll(String dbName, K key, Class<V> valueType);
 	
 	/**
-	 * 在当前库中执行zRevRangeByScore命令，按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内的所有值集合
+	 * 在当前库中执行zRevRangeByScore命令，以score值降序的方式获取集合在[minScore, maxScore]区间内所有的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param minScore
@@ -581,7 +596,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore);
 	
 	/**
-	 * 在当前库中执行zRevRangeByScore命令，按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内的所有值集合
+	 * 在当前库中执行zRevRangeByScore命令，以score值降序的方式获取集合在[minScore, maxScore]区间内所有的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param minScore
@@ -592,7 +607,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore, Class<V> valueType);
 	
 	/**
-	 * 在指定库中执行zRevRangeByScore命令，按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内的所有值集合
+	 * 在指定库中执行zRevRangeByScore命令，以score值降序的方式获取集合在[minScore, maxScore]区间内所有的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -603,7 +618,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRangeByScore(String dbName, K key, double minScore, double maxScore);
 	
 	/**
-	 * 在指定库中执行zRevRangeByScore命令，按score值降序方式返回指定键集在 [minScore, maxScore]区间范围内的所有值集合
+	 * 在指定库中执行zRevRangeByScore命令，以score值降序的方式获取集合在[minScore, maxScore]区间内所有的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -615,7 +630,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRangeByScore(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
 	
 	/**
-	 * 在当前库中执行zRevRank命令，获取有序键集中，指定成员按score值降序排列后的下标索引
+	 * 在当前库中执行zRevRank命令，获取有序键集中指定成员按score值降序排列后的下标值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param member
@@ -624,7 +639,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Long zRevRank(K key, V member);
 	
 	/**
-	 * 在指定库中执行zRevRank命令，获取有序键集中，指定成员按score值降序排列后的下标索引
+	 * 在指定库中执行zRevRank命令，获取有序键集中指定成员按score值降序排列后的下标值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -634,7 +649,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Long zRevRank(String dbName, K key, V member);
 	
 	/**
-	 * 在当前库中执行zScore命令，获取有序键集中，指定成员的score值
+	 * 在当前库中执行zScore命令，获取有序键集中指定成员的score值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param member
@@ -643,7 +658,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Double zScore(K key, V member);
 	
 	/**
-	 * 在指定库中执行zScore命令，获取有序键集中，指定成员的score值
+	 * 在指定库中执行zScore命令，获取有序键集中指定成员的score值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -653,7 +668,8 @@ public interface RedisSortedSetCommands {
 	public <K, V> Double zScore(String dbName, K key, V member);
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，获取指定目标键集与键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zUnionStore命令，将单个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param key
@@ -662,17 +678,42 @@ public interface RedisSortedSetCommands {
 	public <K> Long zUnionStore(K destKey, K key);
 	
 	/**
-	 * 在指定库中执行zUnionStore命令，获取指定目标键集与键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zUnionStore命令，将单个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param key
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, K key, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zUnionStore命令，将单个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param destKey
 	 * @param key
 	 * @return
 	 */
-	public <K> Long zUnionStore(String dbName, K destKey, K key);
+	public <K> Long zUnionStoreIn(String dbName, K destKey, K key);
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在当指定库中执行zUnionStore命令，将单个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param key
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(String dbName, K destKey, K key, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param keys
@@ -681,7 +722,19 @@ public interface RedisSortedSetCommands {
 	public <K> Long zUnionStore(K destKey, K[] keys);
 	
 	/**
-	 * 在指定库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, K[] keys, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param destKey
@@ -691,7 +744,19 @@ public interface RedisSortedSetCommands {
 	public <K> Long zUnionStore(String dbName, K destKey, K[] keys);
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(String dbName, K destKey, K[] keys, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param keys
@@ -700,7 +765,19 @@ public interface RedisSortedSetCommands {
 	public <K> Long zUnionStore(K destKey, Collection<K> keys);
 	
 	/**
-	 * 在指定库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, Collection<K> keys, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param destKey
@@ -710,7 +787,20 @@ public interface RedisSortedSetCommands {
 	public <K> Long zUnionStore(String dbName, K destKey, Collection<K> keys);
 	
 	/**
-	 * 在当前库中执行zInterStore命令，获取指定目标键集与键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(String dbName, K destKey, Collection<K> keys, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zInterStore命令，将单个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param srcKey
@@ -719,17 +809,42 @@ public interface RedisSortedSetCommands {
 	public <K> Long zInterStore(K destKey, K srcKey);
 	
 	/**
-	 * 在指定库中执行zUnionStore命令，获取指定目标键集与键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在指定库中执行zInterStore命令，将单个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param srcKey
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, K srcKey, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zInterStore命令，将单个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param destKey
 	 * @param srcKey
 	 * @return
 	 */
-	public <K> Long zInterStore(String dbName, K destKey, K srcKey);
+	public <K> Long zInterStoreIn(String dbName, K destKey, K srcKey);
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在指定库中执行zInterStore命令，将单个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param srcKey
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(String dbName, K destKey, K srcKey, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param keys
@@ -738,7 +853,19 @@ public interface RedisSortedSetCommands {
 	public <K> Long zInterStore(K destKey, K[] keys);
 	
 	/**
-	 * 在指定库中执行zUnionStore命令，获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, K[] keys, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param destKey
@@ -748,7 +875,20 @@ public interface RedisSortedSetCommands {
 	public <K> Long zInterStore(String dbName, K destKey, K[] keys);
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(String dbName, K destKey, K[] keys, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param keys
@@ -757,7 +897,19 @@ public interface RedisSortedSetCommands {
 	public <K> Long zInterStore(K destKey, Collection<K> keys);
 	
 	/**
-	 * 在指定库中执行zUnionStore命令，获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, Collection<K> keys, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param destKey
@@ -765,6 +917,18 @@ public interface RedisSortedSetCommands {
 	 * @return
 	 */
 	public <K> Long zInterStore(String dbName, K destKey, Collection<K> keys);
+	
+	/**
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(String dbName, K destKey, Collection<K> keys, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行zIncrBy命令，为指定的键集成员的socre值加上(increment>0)/减去(increment<0)增量

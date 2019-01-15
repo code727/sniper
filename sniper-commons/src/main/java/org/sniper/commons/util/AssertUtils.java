@@ -36,7 +36,7 @@ public class AssertUtils {
 	 * @param obj 
 	 */
 	public static void assertNull(Object obj) {
-		assertNull(obj, "[Assertion failed] - This object argument must be null.");
+		assertNull(obj, "[Assertion failed] - This object argument must be null");
 	}
 	
 	/**
@@ -56,7 +56,7 @@ public class AssertUtils {
 	 * @param obj 
 	 */
 	public static void assertNotNull(Object obj) {
-		assertNotNull(obj, "[Assertion failed] - This object argument object must not be null.");
+		assertNotNull(obj, "[Assertion failed] - This object argument object must not be null");
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class AssertUtils {
 	 * @param express 
 	 */
 	public static void assertTrue(boolean express) {
-		assertTrue(express, "[Assertion failed] - This expression must be true.");
+		assertTrue(express, "[Assertion failed] - This expression must be true");
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class AssertUtils {
 	 * @param express 
 	 */
 	public static void assertFalse(boolean express) {
-		assertFalse(express, "[Assertion failed] - This expression must be false.");
+		assertFalse(express, "[Assertion failed] - This expression must be false");
 	}
 	
 	/**
@@ -116,7 +116,7 @@ public class AssertUtils {
 	 * @param str 
 	 */
 	public static void assertNotEmpty(String str) {
-		assertNotEmpty(str, "[Assertion failed] - This string argument must not be null or empty.");
+		assertNotEmpty(str, "[Assertion failed] - This string argument must not be null or empty");
 	}
 	
 	/**
@@ -135,12 +135,12 @@ public class AssertUtils {
 	 * @param str
 	 */
 	public static void assertNotBlank(String str) {
-		assertNotBlank(str, "[Assertion failed] - This string argument must not be null or blank.");
+		assertNotBlank(str, "[Assertion failed] - This string argument must not be null or blank");
 	}
 	
 	/**
 	 * 断言不全为空白字符串，否则抛出自定义的异常信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param message 
 	 */
@@ -154,7 +154,7 @@ public class AssertUtils {
 	 * @param array
 	 */
 	public static <T> void assertNotEmpty(T[] array) {
-		assertNotEmpty(array, "[Assertion failed] - This array argument must not be null or empty.");
+		assertNotEmpty(array, "[Assertion failed] - This array argument must not be null or empty");
 	}
 	
 	/**
@@ -173,7 +173,7 @@ public class AssertUtils {
 	 * @param collection
 	 */
 	public static <T> void assertNotEmpty(Collection<T> collection) {
-		assertNotEmpty(collection, "[Assertion failed] - This collection argument must not be null or empty.");
+		assertNotEmpty(collection, "[Assertion failed] - This collection argument must not be null or empty");
 	}
 	
 	/**
@@ -192,7 +192,7 @@ public class AssertUtils {
 	 * @param map
 	 */
 	public static <K, V> void assertNotEmpty(Map<K, V> map) {
-		assertNotEmpty(map, "[Assertion failed] - This collection argument must not be null or empty.");
+		assertNotEmpty(map, "[Assertion failed] - This collection argument must not be null or empty");
 	}
 	
 	/**

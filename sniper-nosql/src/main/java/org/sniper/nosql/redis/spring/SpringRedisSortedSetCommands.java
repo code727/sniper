@@ -126,7 +126,8 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 			double minScore, double maxScore, long offset, long count);
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param aggregate
@@ -137,7 +138,21 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
-	 * 在指定库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, K[] keys, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param destKey
@@ -149,7 +164,22 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(String dbName, K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(String dbName, K destKey, Aggregate aggregate, int[] weights, K[] keys, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param aggregate
@@ -160,7 +190,21 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
 	
 	/**
-	 * 在指定库中执行zUnionStore命令，获取指定目标键集与多个键集的并集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param destKey
@@ -172,7 +216,22 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zUnionStore(String dbName, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(String dbName, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param aggregate
@@ -183,7 +242,21 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
-	 * 在指定库中执行zUnionStore命令，获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, K[] keys, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param destKey
@@ -195,7 +268,22 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zInterStore(String dbName, K destKey, Aggregate aggregate, int[] weights, K[] keys);
 	
 	/**
-	 * 在当前库中执行zUnionStore命令，获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(String dbName, K destKey, Aggregate aggregate, int[] weights, K[] keys, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param destKey
 	 * @param aggregate
@@ -206,7 +294,21 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
 	
 	/**
-	 * 在指定库中执行zUnionStore命令，获取指定目标键集与多个键集的交集后存入目标键集，并返回目标键集的基数
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, Aggregate aggregate, int[] weights, Collection<K> keys, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param destKey
@@ -216,4 +318,18 @@ public interface SpringRedisSortedSetCommands extends RedisSortedSetCommands {
 	 * @return
 	 */
 	public <K> Long zInterStore(String dbName, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys);
+	
+	/**
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @param keys
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(String dbName, K destKey, Aggregate aggregate, int[] weights, Collection<K> keys, long expireSeconds);
 }

@@ -70,7 +70,7 @@ public class PropertyConverter {
 			this.propertyEditors.put(Byte.class, new BytePropertyEditor(true));
 			
 			this.propertyEditors.put(int.class, new IntegerPropertyEditor(false));
-			this.propertyEditors.put(Integer.class, new IntegerPropertyEditor());
+			this.propertyEditors.put(Integer.class, new IntegerPropertyEditor(true));
 			
 			this.propertyEditors.put(long.class, new LongPropertyEditor(false));
 			this.propertyEditors.put(Long.class, new LongPropertyEditor(true));

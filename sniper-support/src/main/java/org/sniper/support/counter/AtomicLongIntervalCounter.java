@@ -21,7 +21,6 @@ package org.sniper.support.counter;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.sniper.commons.util.AssertUtils;
-import org.sniper.commons.util.NumberUtils;
 
 /**
  * 原子长整型区间计数器实现类
@@ -119,7 +118,7 @@ public class AtomicLongIntervalCounter extends AbstractIntervalCounter<Long> {
 		if (previous < minimal || previous > maximum)
 			return null;
 		
-		return this.atomicValue.addAndGet(NumberUtils.unAbs(value));
+		return this.atomicValue.addAndGet(-value);
 	}
 	
 	@Override

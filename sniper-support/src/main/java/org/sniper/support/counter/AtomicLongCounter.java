@@ -20,8 +20,6 @@ package org.sniper.support.counter;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.sniper.commons.util.NumberUtils;
-
 /**
  * 原子长整型计数器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -58,7 +56,7 @@ public class AtomicLongCounter extends AbstractCounter<Long> {
 
 	@Override
 	public Long decrement(Long value) {
-		return this.atomicValue.addAndGet(NumberUtils.unAbs(value));  
+		return this.atomicValue.addAndGet(-value);
 	}
 
 	@Override

@@ -107,7 +107,7 @@ public interface RedisListCommands {
 	 * @return
 	 */
 	public <K, V> Long lPush(String dbName, K key, V value, long expireSeconds);
-	
+		
 	/**
 	 * 在当前库中批量执行lPush命令，入栈到键值列表的顶部
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -189,7 +189,7 @@ public interface RedisListCommands {
 	public <K, V> Long lPush(String dbName, K key, Collection<V> values, long expireSeconds);
 	
 	/**
-	 * 在当前库中执行lPushX命令，入栈到键值列表的顶部
+	 * 在当前库中执行lPushX命令，当键存在时入栈到键值列表的顶部
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
@@ -198,7 +198,7 @@ public interface RedisListCommands {
 	public <K, V> Long lPushX(K key, V value);
 	
 	/**
-	 * 在当前库中执行lPushX命令，入栈到键值列表的顶部并设置过期秒数
+	 * 在当前库中执行lPushX命令，当键存在时入栈到键值列表的顶部并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
@@ -208,7 +208,7 @@ public interface RedisListCommands {
 	public <K, V> Long lPushX(K key, V value, long expireSeconds);
 	
 	/**
-	 * 在指定库中执行lPushX命令，入栈到键值列表的顶部
+	 * 在指定库中执行lPushX命令，当键存在时入栈到键值列表的顶部
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -218,7 +218,7 @@ public interface RedisListCommands {
 	public <K, V> Long lPushXIn(String dbName, K key, V value);
 	
 	/**
-	 * 在当前库中执行lPushX命令，入栈到键值列表的顶部并设置过期秒数
+	 * 在当前库中执行lPushX命令，当键存在时入栈到键值列表的顶部并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key

@@ -193,6 +193,20 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	/**
 	 * 获取过期毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param expireMillis
+	 * @param repository
+	 * @return
+	 */
+	protected long getExpireMillis(long expireMillis, RedisRepository repository) {
+		if (expireMillis > 0 || repository == null)
+			return expireMillis;
+		
+		return repository.toMillis();
+	}
+	
+	/**
+	 * 获取过期毫秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param expireTime
 	 * @param timeUnit
 	 * @param repository
@@ -331,12 +345,13 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	 */
 	protected <K> byte[][] serializeKeysToArray(String dbName, K[] keys) {
 		Serializer keySerializer = selectKeySerializer(dbName);
-		List<byte[]> list = CollectionUtils.newArrayList();
-		for (K key : keys) {
-			list.add(keySerializer.serialize(key));
+		byte[][] keyBytes = new byte[keys.length][];
+		
+		for (int i = 0; i < keys.length; i++) {
+			keyBytes[i] = keySerializer.serialize(keys[i]);
 		}
 		
-		return CollectionUtils.toArray(list, byte[].class);
+		return keyBytes;
 	}
 	
 	/**
@@ -348,12 +363,13 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	 */
 	protected <V> byte[][] serializeValuesToArray(String dbName, V[] values) {
 		Serializer valueSerializer = selectValueSerializer(dbName);
-		List<byte[]> list = CollectionUtils.newArrayList();
-		for (V value : values) {
-			list.add(valueSerializer.serialize(value));
+		byte[][] valueBytes = new byte[values.length][];
+		
+		for (int i = 0; i < values.length; i++) {
+			valueBytes[i] = valueSerializer.serialize(values[i]);
 		}
 			
-		return CollectionUtils.toArray(list, byte[].class);
+		return valueBytes;
 	}
 	
 	/**
@@ -365,12 +381,13 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	 */
 	protected <H> byte[][] serializeHashKeysToArray(String dbName, H[] hashKeys) {
 		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
-		List<byte[]> list = CollectionUtils.newArrayList();
-		for (H hashKey : hashKeys) {
-			list.add(hashKeySerializer.serialize(hashKey));
+		byte[][] hashKeyBytes = new byte[hashKeys.length][];
+		
+		for (int i = 0; i < hashKeys.length; i++) {
+			hashKeyBytes[i] = hashKeySerializer.serialize(hashKeys[i]);
 		}
 		
-		return CollectionUtils.toArray(list, byte[].class);
+		return hashKeyBytes;
 	}
 	
 	/**

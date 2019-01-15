@@ -127,9 +127,12 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	 */
 	protected void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keyBytes, long expireSeconds) {
 		if (expireSeconds > 0 || (repository != null && (expireSeconds = repository.toSeconds()) > 0)) {
+			/* 目前不支持批量过期设置， 为提高性能，这里采用管道的形式依次设置多个键的过期时间 */
+			connection.openPipeline();
 			for (byte[] keyByte : keyBytes) {
 				connection.expire(keyByte, expireSeconds);
 			}
+			connection.closePipeline();
 		}
 	}
 			

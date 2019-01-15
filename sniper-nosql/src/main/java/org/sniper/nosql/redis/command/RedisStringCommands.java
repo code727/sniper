@@ -164,7 +164,7 @@ public interface RedisStringCommands {
 	public <K, V> void setEx(String dbName, K key, long seconds, V value);
 	
 	/**
-	 * 在当前库中执行pSetEx命令，并设置当前库全局过期秒数
+	 * 在当前库中执行pSetEx命令，设置键值对的同时赋予键全局的过期毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param value
@@ -172,7 +172,7 @@ public interface RedisStringCommands {
 	public <K, V> void pSetEx(K key, V value);
 	
 	/**
-	 * 在当前库中执行setEx命令，并设置当前库过期毫秒数
+	 * 在当前库中执行setEx命令，设置键值对的同时赋予键指定的过期毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param millis
@@ -181,7 +181,7 @@ public interface RedisStringCommands {
 	public <K, V> void pSetEx(K key, long millis, V value);
 	
 	/**
-	 * 在指定库中执行setEx命令，并设置当前库全局过期毫秒数
+	 * 在指定库中执行setEx命令，设置键值对的同时赋予键全局的过期毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -190,7 +190,7 @@ public interface RedisStringCommands {
 	public <K, V> void pSetExIn(String dbName, K key, V value);
 	
 	/**
-	 * 在指定库中执行setEx命令，并设置当前库过期毫秒数
+	 * 在指定库中执行setEx命令，设置键值对的同时赋予键指定的过期毫秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
