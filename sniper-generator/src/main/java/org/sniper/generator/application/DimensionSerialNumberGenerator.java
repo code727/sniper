@@ -103,10 +103,9 @@ public class DimensionSerialNumberGenerator extends SerialNumberGenerator {
 	 * @return
 	 */
 	private String createKey(String dimension, Object key) {
-		if (keyAsDimensionPrefix) {
+		if (keyAsDimensionPrefix) 
 			// 格式:自定义键_维度值
 			return new StringBuilder(key.toString()).append(StringUtils.UNDER_LINE).append(dimension).toString();
-		}
 		
 		// 格式:维度值_自定义键
 		return new StringBuilder(dimension).append(StringUtils.UNDER_LINE).append(key).toString();
@@ -124,19 +123,18 @@ public class DimensionSerialNumberGenerator extends SerialNumberGenerator {
 		// 当前序列的总长度="维度序列长度"+"预生成结果的长度"
 		int sequenceLength = dimension.length() + generated.length();
 		
-		/* 将"序列部分的最小长度"与"当前序列的总长度"相减，如果大于0，明预生成结果的长度不够，
-		 * 说明需要补偿预生成结果的最小长度，使预生成结果的长度最小为generated.length() + offset，
+		/* 将"序列部分的最小长度"与"当前序列的总长度"相减，如果大于0，说明预生成结果的长度不够，
+		 * 需要补偿预生成结果的最小长度，使预生成结果的长度最小为generated.length() + offset，
 		 * 从而在补偿后使"维度序列长度"+"预生成结果的长度"的长度最小为sequenceMinLength */
 		int offset = getSequenceMinLength() - sequenceLength;
 		StringBuilder sequence = new StringBuilder(dimension)
 				.append(offset > 0 ? compensateGenerate(generated, generated.length() + offset) : generated);
 		
-		if (safeParameter.length() >0 && isParameterAsResult()) {
-			if (isParameterAsResultPrefix()) {
+		if (safeParameter.length() > 0 && isParameterAsResult()) {
+			if (isParameterAsResultPrefix()) 
 				sequence.insert(0, safeParameter);
-			} else {
+			else
 				sequence.append(safeParameter);
-			}
 		}
 		
 		return sequence.toString();

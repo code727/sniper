@@ -22,6 +22,10 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+import org.sniper.nosql.redis.model.ZSetTuple;
+import org.sniper.nosql.redis.option.Limit;
+import org.sniper.nosql.redis.option.ZStoreOptional;
+
 /**
  * Redis有序集合命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -630,6 +634,190 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRevRangeByScore(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
 	
 	/**
+	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param offset
+	 * @param count
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param offset
+	 * @param count
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
+			
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score升序方式获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param limit
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
+
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score降序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param offset
+	 * @param count
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score降序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param offset
+	 * @param count
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score降序方式获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score降序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score降序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param limit
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
+	
+	/**
 	 * 在当前库中执行zRevRank命令，获取有序键集中指定成员按score值降序排列后的下标值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
@@ -799,6 +987,102 @@ public interface RedisSortedSetCommands {
 	public <K> Long zUnionStore(String dbName, K destKey, Collection<K> keys, long expireSeconds);
 	
 	/**
+	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, K[] keys, ZStoreOptional option);
+	
+	/**
+	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, K[] keys, ZStoreOptional option, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @return
+	 */
+	public <K> Long zUnionStore(String dbName, K destKey, K[] keys, ZStoreOptional option);
+	
+	/**
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(String dbName, K destKey, K[] keys, ZStoreOptional option, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, Collection<K> keys, ZStoreOptional option);
+	
+	/**
+	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(K destKey, Collection<K> keys, ZStoreOptional option, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @return
+	 */
+	public <K> Long zUnionStore(String dbName, K destKey, Collection<K> keys, ZStoreOptional option);
+	
+	/**
+	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zUnionStore(String dbName, K destKey, Collection<K> keys, ZStoreOptional option, long expireSeconds);
+	
+	/**
 	 * 在当前库中执行zInterStore命令，将单个键的交集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -929,6 +1213,102 @@ public interface RedisSortedSetCommands {
 	 * @return
 	 */
 	public <K> Long zInterStore(String dbName, K destKey, Collection<K> keys, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, K[] keys, ZStoreOptional option);
+	
+	/**
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, K[] keys, ZStoreOptional option, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @return
+	 */
+	public <K> Long zInterStore(String dbName, K destKey, K[] keys, ZStoreOptional option);
+	
+	/**
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(String dbName, K destKey, K[] keys, ZStoreOptional option, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, Collection<K> keys, ZStoreOptional option);
+	
+	/**
+	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(K destKey, Collection<K> keys, ZStoreOptional option, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @return
+	 */
+	public <K> Long zInterStore(String dbName, K destKey, Collection<K> keys, ZStoreOptional option);
+	
+	/**
+	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param destKey
+	 * @param keys
+	 * @param option
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long zInterStore(String dbName, K destKey, Collection<K> keys, ZStoreOptional option, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行zIncrBy命令，为指定的键集成员的socre值加上(increment>0)/减去(increment<0)增量

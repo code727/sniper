@@ -394,6 +394,29 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	 * 将指定库的多个键字节反序列化到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
+	 * @param keyByte
+	 * @param keyType
+	 * @return
+	 */
+	protected <K> K deserializeKeyByte(String dbName, byte[] keyByte, Class<K> keyType) {
+		if (ArrayUtils.isEmpty(keyByte))
+			return null;
+		
+		Serializer keySerializer = selectKeySerializer(dbName);
+		if (keySerializer.isTypedSerializer()) {
+			TypedSerializer keyTypedSerializer = (TypedSerializer) keySerializer;
+			return keyTypedSerializer.deserialize(keyByte, keyType);
+		}
+		
+		K key = keySerializer.deserialize(keyByte);
+		PropertyEditor propertyEditor = propertyConverter.find(keyType);
+		return propertyEditor != null ? PropertyConverter.converte(propertyEditor, key, keyType) : key;
+	}
+	
+	/**
+	 * 将指定库的多个键字节反序列化到集合中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
 	 * @param keyBytes
 	 * @param keyType
 	 * @return
@@ -407,18 +430,19 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 		Set<K> keys = CollectionUtils.newLinkedHashSet();
 		if (keySerializer.isTypedSerializer()) {
 			TypedSerializer keyTypedSerializer = (TypedSerializer) keySerializer;
-			for (byte[] key : keyBytes) {
-				keys.add(keyTypedSerializer.deserialize(key, keyType));
+			for (byte[] keyByte : keyBytes) {
+				keys.add(keyTypedSerializer.deserialize(keyByte, keyType));
 			}
 		} else {
 			PropertyEditor propertyEditor = propertyConverter.find(keyType);
 			if (propertyEditor != null) {
-				for (byte[] key : keyBytes) {
+				for (byte[] keyByte : keyBytes) {
+					K key = keySerializer.deserialize(keyByte);
 					keys.add(PropertyConverter.converte(propertyEditor, key, keyType));
 				}
 			} else {
-				for (byte[] key : keyBytes) {
-					keys.add((K) keySerializer.deserialize(key));
+				for (byte[] keyByte : keyBytes) {
+					keys.add((K) keySerializer.deserialize(keyByte));
 				}
 			}
 		}

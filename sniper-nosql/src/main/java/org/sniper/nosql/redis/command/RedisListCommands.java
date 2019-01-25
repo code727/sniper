@@ -21,12 +21,63 @@ package org.sniper.nosql.redis.command;
 import java.util.Collection;
 import java.util.List;
 
+import org.sniper.nosql.redis.enums.ListPosition;
+
+
 /**
  * Redis列表命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface RedisListCommands {
+	
+	/**
+	 * 在当前库中执行lInsert命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param where
+	 * @param pivot 位置值
+	 * @param value
+	 * @return
+	 */
+	public <K, V> Long lInsert(K key, ListPosition where, V pivot, V value);
+	
+	/**
+	 * 在当前库中执行lInsert命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param where
+	 * @param pivot
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lInsert(K key, ListPosition where, V pivot, V value, long expireSeconds);
+	
+	/**
+	 * 在指定索引库中执行lInsert命令
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param where
+	 * @param pivot 位置值
+	 * @param value
+	 * @return
+	 */
+	public <K, V> Long lInsertIn(String dbName, K key, ListPosition where, V pivot, V value);
+	
+	/**
+	 * 在指定索引库中执行lInsert命令，并设置过期秒数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param where
+	 * @param pivot
+	 * @param value
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K, V> Long lInsert(String dbName, K key, ListPosition where, V pivot, V value, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行lSet命令

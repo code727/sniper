@@ -18,20 +18,34 @@
 
 package org.sniper.nosql.redis.spring;
 
+import java.beans.PropertyEditor;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Set;
 
+import org.sniper.beans.PropertyConverter;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.ReflectionUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.command.RedisSupport;
+import org.sniper.nosql.redis.enums.DataType;
+import org.sniper.nosql.redis.enums.ListPosition;
+import org.sniper.nosql.redis.enums.ZStoreAggregate;
+import org.sniper.nosql.redis.model.DefaultZSetTuple;
+import org.sniper.nosql.redis.model.ZSetTuple;
+import org.sniper.nosql.redis.option.Limit;
+import org.sniper.nosql.redis.option.SortOptional;
 import org.sniper.nosql.redis.serializer.SpringRedisSerializerProxy;
 import org.sniper.serialization.Serializer;
 import org.sniper.serialization.TypedSerializer;
-import org.springframework.data.redis.connection.DataType;
+import org.springframework.data.redis.connection.DefaultSortParameters;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisListCommands.Position;
+import org.springframework.data.redis.connection.RedisZSetCommands.Aggregate;
+import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
+import org.springframework.data.redis.connection.SortParameters;
+import org.springframework.data.redis.connection.SortParameters.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 
 /**
@@ -147,7 +161,9 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> listByDataType(DataType dataType, RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
+	protected <V> List<V> listByDataType(DataType dataType, RedisConnection connection, 
+			String dbName, byte[] targetKey, Class<V> valueType) {
+		
 		try {
 			// 执行当前对象的xxxTypeList方法后返回结果，其中xxx表示DataType枚举的code值
 			return (List<V>) ReflectionUtils.invokeMethod(this, dataType.code() + "TypeList", 
@@ -245,6 +261,83 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	protected <V> List<V> hashTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
 		// 返回当前键所有域对应的值列表
 		return deserializeHashValueBytesToList(dbName, connection.hVals(targetKey), valueType);
+	}
+	
+	/**
+	 * 将ListPosition枚举转换为Spring的列表位置枚举
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param position
+	 * @return
+	 */
+	protected Position toPosition(ListPosition position) {
+		return position == ListPosition.BEFORE ? Position.BEFORE : Position.AFTER;
+	}
+	
+	/**
+	 * 将有序集合聚合方式枚举转换为Spring的Aggregate对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param aggregate
+	 * @return
+	 */
+	protected Aggregate toAggregate(ZStoreAggregate aggregate) {
+		return aggregate != null ? Aggregate.valueOf(aggregate.name()) : Aggregate.MAX;
+	}
+	
+	/**
+	 * 将排序可选项转换为Spring的SortParameters对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param optional
+	 */
+	protected SortParameters toSortParameters(SortOptional optional) {
+		if (optional == null) 
+			return null;
+			
+		Limit limit = optional.getLimit();
+		org.sniper.nosql.redis.enums.Order order = optional.getOrder();
+		
+		SortParameters.Range range = (limit != null ? new SortParameters.Range(limit.getOffset(), limit.getCount()) : null);
+		Order sortOrder = (order != null ? Order.valueOf(order.name()) : null);
+		return new DefaultSortParameters(optional.getBy(), range, optional.getGets(), sortOrder, optional.isAlpha());
+	}
+	
+	/**
+	 * 反序列Spring的元组结果集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param tuples
+	 * @param valueType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <V> Set<ZSetTuple<V>> deserializeTuplesToSet(String dbName, Set<Tuple> tuples, Class<V> valueType) {
+		if (CollectionUtils.isEmpty(tuples))
+			return null;
+		
+		Serializer valueSerializer = selectValueSerializer(dbName);
+		Set<ZSetTuple<V>> zSetTuples = CollectionUtils.newLinkedHashSet();
+		if (valueSerializer.isTypedSerializer()) {
+			TypedSerializer typedValueSerializer = (TypedSerializer) valueSerializer;
+			for (Tuple tuple : tuples) {
+				zSetTuples.add(new DefaultZSetTuple<V>(tuple.getScore(),
+						typedValueSerializer.deserialize(tuple.getValue(), valueType)));
+			}
+		} else {
+			PropertyEditor propertyEditor = getPropertyConverter().find(valueType);
+			if (propertyEditor != null) {
+				for (Tuple tuple : tuples) {
+					V member = valueSerializer.deserialize(tuple.getValue());
+					zSetTuples.add(new DefaultZSetTuple<V>(tuple.getScore(),
+							PropertyConverter.converte(propertyEditor, member, valueType)));
+				}
+			} else {
+				for (Tuple tuple : tuples) {
+					zSetTuples.add(new DefaultZSetTuple<V>(tuple.getScore(),
+							(V) valueSerializer.deserialize(tuple.getValue())));
+				}
+			}
+		}
+		
+		return zSetTuples;
 	}
 
 }

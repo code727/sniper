@@ -129,9 +129,8 @@ public class SerialNumberGenerator extends AbstractKeyspaceParameterizeGenerator
 	private String generateSequence(String generated, String safeParameter) {
 		/* 将"序列部分的最小长度"与"预生成结果的长度"相减，如果大于0，
 		 * 说明预生成结果的长度不够，需要补偿预生成结果的最小长度为sequenceMinLength后得到最终的序列*/
-		if (sequenceMinLength - generated.length() > 0) {
+		if (sequenceMinLength - generated.length() > 0) 
 			generated = compensateGenerate(generated, sequenceMinLength);
-		}
 		
 		return (safeParameter.length() > 0 && parameterAsResult) ? (parameterAsResultPrefix ? 
 				safeParameter + generated : generated + safeParameter) : generated;

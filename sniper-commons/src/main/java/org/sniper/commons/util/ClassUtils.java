@@ -33,10 +33,10 @@ import java.util.Map;
 public class ClassUtils {
 	
 	/** 基本类型集(K:基本类型对象,V:包装类型对象)*/
-	private static final Map<Class<?>, Class<?>> BASE_TYPES = MapUtils.newHashMap(8);
+	public static final Map<Class<?>, Class<?>> BASE_TYPES = MapUtils.newHashMap(8);
 	
 	/** 包装类型集(K:包装类型对象,V:基本类型对象) */
-	private static final Map<Class<?>, Class<?>> WRAPPER_TYPES = MapUtils.newHashMap(8);
+	public static final Map<Class<?>, Class<?>> WRAPPER_TYPES = MapUtils.newHashMap(8);
 	
 	static {
 		
@@ -105,7 +105,7 @@ public class ClassUtils {
 	 * @return
 	 */
 	public static Class<?> getBaseType(Class<?> clazz) {
-		if (clazz == null || isBaseType(clazz))
+		if (clazz == null || BASE_TYPES.containsKey(clazz))
 			return clazz;
 		
 		return WRAPPER_TYPES.get(clazz);
@@ -241,7 +241,7 @@ public class ClassUtils {
 	 * @return
 	 */
 	public static boolean isWrapperType(Class<?> clazz) {
-        return WRAPPER_TYPES.get(clazz) != null;
+        return WRAPPER_TYPES.containsKey(clazz);
     } 
 	
 	/**
@@ -251,7 +251,7 @@ public class ClassUtils {
 	 * @return
 	 */
 	public static boolean isBaseType(Class<?> clazz) {
-		return BASE_TYPES.get(clazz) != null;
+		return BASE_TYPES.containsKey(clazz);
 	}
 	
 	/**

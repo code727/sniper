@@ -24,6 +24,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.sniper.nosql.redis.enums.DataType;
+import org.sniper.nosql.redis.option.SortOptional;
+
 /**
  * Redis键命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -32,14 +35,14 @@ import java.util.Set;
 public interface RedisKeyCommands {
 	
 	/**
-	 * 获取当前库中所有的键
+	 * 在当前库中执行keys命令，获取所有的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
 	public <K> Set<K> keys();
 	
 	/**
-	 * 获取当前库中所有指定类型的键
+	 * 在当前库中执行keys命令，获取所有指定类型的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param keyType
 	 * @return
@@ -47,7 +50,7 @@ public interface RedisKeyCommands {
 	public <K> Set<K> keys(Class<K> keyType);
 	
 	/**
-	 * 获取指定库中所有的键
+	 * 在指定库中执行keys命令，获取所有的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @return
@@ -55,7 +58,7 @@ public interface RedisKeyCommands {
 	public <K> Set<K> keys(String dbName);
 	
 	/**
-	 * 获取库中所有指定类型的键
+	 * 在指定库中执行keys命令，获取所有指定类型的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param keyType
@@ -64,7 +67,7 @@ public interface RedisKeyCommands {
 	public <K> Set<K> keys(String dbName, Class<K> keyType);
 	
 	/**
-	 * 获取当前库中指定模式的键集
+	 * 在当前库中执行keys命令，获取所有指定模式的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @return
@@ -72,7 +75,7 @@ public interface RedisKeyCommands {
 	public <K> Set<K> keysByPattern(String pattern);
 	
 	/**
-	 * 获取当前库中指定模式和类型的键集
+	 * 在当前库中执行keys命令，获取所有指定模式和类型的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @param keyType
@@ -81,7 +84,7 @@ public interface RedisKeyCommands {
 	public <K> Set<K> keysByPattern(String pattern, Class<K> keyType);
 	
 	/**
-	 * 获取指定库中满足模式的键集
+	 * 在指定库中执行keys命令，获取所有指定模式的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param pattern
@@ -90,7 +93,7 @@ public interface RedisKeyCommands {
 	public <K> Set<K> keysByPattern(String dbName, String pattern);
 	
 	/**
-	 * 获取指定库中满足模式和类型的键集
+	 * 在指定库中执行keys命令，获取所有指定模式和类型的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param pattern
@@ -99,6 +102,38 @@ public interface RedisKeyCommands {
 	 */
 	public <K> Set<K> keysByPattern(String dbName, String pattern, Class<K> keyType);
 	
+	/**
+	 * 在当前库中随机获取一个键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public <K> K randomKey();
+	
+	/**
+	 * 在当前库中随机获取一个指定类型的键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param keyType
+	 * @return
+	 */
+	public <K> K randomKey(Class<K> keyType);
+	
+	/**
+	 * 在指定库中随机获取一个键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @return
+	 */
+	public <K> K randomKey(String dbName);
+	
+	/**
+	 * 在指定库中随机获取一个指定类型的键
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param keyType
+	 * @return
+	 */
+	public <K> K randomKey(String dbName, Class<K> keyType);
+		
 	/**
 	 * 删除当前库指定的键
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -317,26 +352,43 @@ public interface RedisKeyCommands {
 	 * @param date
 	 * @return
 	 */
-	public <K> Boolean pExpireAt(String dbName, K key, Date date); 
+	public <K> Boolean pExpireAt(String dbName, K key, Date date);
+	
+	/**
+	 * 在当前库中清除键的过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K> Boolean persist(K key); 
+	
+	/**
+	 * 在指定库中清除键的过期时间
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @return
+	 */
+	public <K> Boolean persist(String dbName, K key); 
 		
 	/**
 	 * 将当前库的键移动到目标库
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
-	 * @param targetIndex
+	 * @param dbIndex 目标库索引
 	 * @return
 	 */
-	public <K> Boolean move(K key, int targetIndex);
+	public <K> Boolean move(K key, int dbIndex);
 	
 	/**
 	 * 将指定库中的键移动到目标库
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
-	 * @param targetIndex
+	 * @param dbIndex 目标库索引
 	 * @return
 	 */
-	public <K> Boolean move(String dbName, K key, int targetIndex);
+	public <K> Boolean move(String dbName, K key, int dbIndex);
 	
 	/**
 	 * 获取当前库的指定键的剩余秒数
@@ -440,4 +492,189 @@ public interface RedisKeyCommands {
 	 */
 	public <V> List<V> valuesByPattern(String dbName, String pattern, Class<V> valueType);
 	
+	/**
+	 * 在当前库中获取键的数据类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K> DataType type(K key);
+	
+	/**
+	 * 在指定库中获取键的数据类型
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @return
+	 */
+	public <K> DataType type(String dbName, K key);
+	
+	/**
+	 * 在当前库中执行sort命令，将键按默认规则进行排序后返回结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K, V> List<V> sort(K key);
+	
+	/**
+	 * 在当前库中执行sort命令，将键按默认规则进行排序后返回指定类型的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> List<V> sort(K key, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行sort命令，将键按默认规则进行排序后返回结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @return
+	 */
+	public <K, V> List<V> sort(String dbName, K key);
+	
+	/**
+	 * 在指定库中执行sort命令，将键按默认规则进行排序后返回指定类型的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> List<V> sort(String dbName, K key, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行sort命令，将键按可选规则进行排序后返回结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param optional
+	 * @return
+	 */
+	public <K, V> List<V> sortByOptional(K key, SortOptional optional);
+	
+	/**
+	 * 在当前库中执行sort命令，将键按可选规则进行排序后返回指定类型的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param optional
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> List<V> sortByOptional(K key, SortOptional optional, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行sort命令，将键按可选规则进行排序后返回结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbNames
+	 * @param key
+	 * @param optional
+	 * @return
+	 */
+	public <K, V> List<V> sortByOptional(String dbName, K key, SortOptional optional);
+	
+	/**
+	 * 在指定库中执行sort命令，将键按可选规则进行排序后返回指定类型的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param optional
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> List<V> sortByOptional(String dbName, K key, SortOptional optional, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行sort命令，将键按默认规则进行排序，将排序结果存入目标键后返回结果个数</p>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param destKey
+	 * @return
+	 */
+	public <K> Long sortStore(K key, K destKey);
+	
+	/**
+	 * 在当前库中执行sort命令，将键按默认规则进行排序，将排序结果存入目标键并设置过期时间后返回结果个数</p>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param destKey
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sortStore(K key, K destKey, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行sort命令，将键按默认规则进行排序，将排序结果存入目标键后返回结果个数</p>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param destKey
+	 * @return
+	 */
+	public <K> Long sortStoreIn(String dbName, K key, K destKey);
+	
+	/**
+	 * 在指定库中执行sort命令，将键按默认规则进行排序，将排序结果存入目标键并设置过期时间后返回结果个数</p>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param destKey
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sortStore(String dbName, K key, K destKey, long expireSeconds);
+	
+	/**
+	 * 在当前库中执行sort命令，将键按可选规则进行排序，将排序结果存入目标键后返回结果个数</p>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param optional
+	 * @param destKey
+	 * @return
+	 */
+	public <K> Long sortStoreByOptional(K key, SortOptional optional, K destKey);
+	
+	/**
+	 * 在当前库中执行sort命令，将键按可选规则进行排序，将排序结果存入目标键并设置过期时间后返回结果个数</p>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param optional
+	 * @param destKey
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sortStoreByOptional(K key, SortOptional optional, K destKey, long expireSeconds);
+	
+	/**
+	 * 在指定库中执行sort命令，将键按可选规则进行排序，将排序结果存入目标键后返回结果个数</p>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param optional
+	 * @param destKey
+	 * @return
+	 */
+	public <K> Long sortStoreByOptional(String dbName, K key, SortOptional optional, K destKey);
+	
+	/**
+	 * 在当前库中执行sort命令，将键按可选规则进行排序，将排序结果存入目标键并设置过期时间后返回结果个数</p>
+	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param optional
+	 * @param destKey
+	 * @param expireSeconds
+	 * @return
+	 */
+	public <K> Long sortStoreByOptional(String dbName, K key, SortOptional optional, K destKey, long expireSeconds);
+		
 }

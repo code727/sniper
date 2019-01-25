@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.nosql.redis.enums.ListPosition;
 
 /**
  * Redis列表命令单元测试类
@@ -31,14 +32,32 @@ import org.sniper.commons.util.CollectionUtils;
 public class RedisListCommandsTest extends AbstractRedisTest {
 	
 	@Test
-	public void testllPushAndlPop() {
-		assertTrue(redisCommands.lPush(key, values) == values.length);
-		assertTrue(redisCommands.lPush(key, "f") == values.length + 1);
+	public void testllInsert() {
+		// key不存在时返回0
+		assertEquals(0L, redisCommands.lInsert(key, ListPosition.BEFORE, "b", "a"));
 		
-		Object value = redisCommands.lPop(key);
-		assertNotNull(value);
-		System.out.println(value);
+		redisCommands.lPush(key, "a");
+		// key存在但pivot不存在时返回-1
+		assertEquals(-1L, redisCommands.lInsert(key, ListPosition.BEFORE, "b", "a"));
+		
+		// a的前面插入b，成功后返回列表总长度
+		assertEquals(redisCommands.lInsert(key, ListPosition.BEFORE, "a", "b"), redisCommands.lLen(key));
+		System.out.println(redisCommands.lRangeAll(key));
+		
+		// a的后面插入c，成功后返回列表总长度
+		assertEquals(redisCommands.lInsert(key, ListPosition.AFTER, "a", "c"), redisCommands.lLen(key));
+		System.out.println(redisCommands.lRangeAll(key));
 	}
+	
+//	@Test
+//	public void testllPushAndlPop() {
+//		assertTrue(redisCommands.lPush(key, values) == values.length);
+//		assertTrue(redisCommands.lPush(key, "f") == values.length + 1);
+//		
+//		Object value = redisCommands.lPop(key);
+//		assertNotNull(value);
+//		System.out.println(value);
+//	}
 	
 //	@Test
 	public void testllPushXAndlPop() {

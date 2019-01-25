@@ -37,7 +37,7 @@ public abstract class AbstractRedisTest extends JUnit4SpringTestCase {
 	
 	protected final String key = "test";
 	
-	protected final String[] keys = new String[] { key + "_0", key + "_1"};
+	protected final String[] keys = new String[] { key + "_0", key + "_1", key + "_2", key + "_3"};
 	
 	protected final String[] values = new String[] { "a", "b", "c", "d", "e" };
 	

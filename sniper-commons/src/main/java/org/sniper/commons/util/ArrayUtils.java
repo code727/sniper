@@ -230,437 +230,269 @@ public class ArrayUtils {
 	public static int length(Object array) {
 		return ClassUtils.isArray(array) ? Array.getLength(array) : 0;
 	}
-		
+			
 	/**
-	 * 将boolean[]数组转换为Boolean[]
+	 * 将指定的值转换为包装类型的数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
+	 * @param value
 	 * @return
 	 */
-	public static Boolean[] convert(boolean[] array) {
-		if (array == null)
+	@SuppressWarnings("unchecked")
+	public static <T> T[] toWrapperTypeArray(Object value) {
+		if (value == null)
 			return null;
 		
-		int length = array.length;
-		Boolean[] wapperArray = new Boolean[length];
-		for (int i = 0; i < length; i++) {
-			wapperArray[i] = array[i];
+		Class<?> type = value.getClass();
+		if (type.isArray()) {
+			Class<?> componentType = type.getComponentType();
+			/* 如果数组的组件类型为一个基础类型， 则获取此基础类型对应的包装类型，
+			 * 再利用这个包装类型构建一个目标数组，最后将原基础类型数组内的元素全部拷贝到目标数组中  
+			 * 注意：这里的拷贝不能使用arraycopy方法，因为原数组和目标数组不属于同一种类型，否则出现java.lang.ArrayStoreException*/
+			if (ClassUtils.isBaseType(componentType)) {
+				Class<?> wrapperType = ClassUtils.BASE_TYPES.get(componentType);
+				int length = Array.getLength(value);
+				
+				Object newArray = Array.newInstance(wrapperType, length);
+				for (int i = 0; i < length; i++) {
+					Array.set(newArray, i, Array.get(value, i));
+				}
+				return (T[]) newArray;
+			}
+			
+			// 非基础类型数组则直接返回
+			return (T[]) value;
+		} else {
+			Object newArray = Array.newInstance(type, 1);
+			Array.set(newArray, 0, value);
+			return (T[]) newArray;
 		}
-		
-		return wapperArray;
 	}
 	
 	/**
-	 * 将Boolean[]数组转换为boolean[]
+	 * 将指定的值转换为基础类型的数组
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 * @return
+	 */
+	public static Object toBaseTypeArray(Object value) {
+		return toBaseTypeArray(value, null);
+	}
+	
+	/**
+	 * 将指定的值转换为基础类型的数组。在转换的过程中，如果包装类元素为空，则统一设置为指定的默认值。
+	 * 如果默认值也为空，则跳过设置，基础类型数组中对应的元素值就是初始化时所设置的值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param value
+	 * @return
+	 */
+	public static Object toBaseTypeArray(Object value, Object defaultValueIfNull) {
+		if (value == null)
+			return null;
+		
+		Class<?> type = value.getClass();
+		if (type.isArray()) {
+			Class<?> componentType = type.getComponentType();
+			/* 如果数组的组件类型为一个包装类型， 则获取此包装类型对应的基础类型，
+			 * 再利用这个基础类型构建一个目标数组，最后将原包装类型数组内的元素全部拷贝到目标数组中  
+			 * 注意：这里的拷贝不能使用arraycopy方法，因为原数组和目标数组不属于同一种类型，否则出现java.lang.ArrayStoreException*/
+			if (ClassUtils.isWrapperType(componentType)) {
+				Class<?> baseType = ClassUtils.WRAPPER_TYPES.get(componentType);
+				int length = Array.getLength(value);
+				Object newArray = Array.newInstance(baseType, length);
+				
+				Object element;
+				if (defaultValueIfNull != null) {
+					for (int i = 0; i < length; i++) {
+						element = Array.get(value, i);
+						Array.set(newArray, i, element != null ? element : defaultValueIfNull);
+					}
+				} else {
+					for (int i = 0; i < length; i++) {
+						element = Array.get(value, i);
+						if (element != null)
+							Array.set(newArray, i, element);
+					}
+				}
+				
+				return newArray;
+			}
+			
+			// 非包装类型数组则直接返回
+			return value;
+		} else {
+			Object newArray = Array.newInstance(ClassUtils.isWrapperType(type) ? 
+					 ClassUtils.WRAPPER_TYPES.get(type) : type, 1);
+			Array.set(newArray, 0, value);
+			return newArray;
+		}
+	}
+	
+	/**
+	 * 将包装类型的布尔数组转换为基本类型的
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
 	 */
-	public static boolean[] convert(Boolean[] array) {
-		return convert(array, false);
+	public static boolean[] toBooleanArray(Boolean[] array) {
+		return (boolean[]) toBaseTypeArray(array, null);
 	}
 	
 	/**
-	 * 将Boolean[]数组转换为boolean[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将包装类型的布尔数组转换为基本类型的。在转换的过程中，如果包装类元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
 	 * @return
 	 */
-	public static boolean[] convert(Boolean[] array, boolean defaultValueIfNull) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		boolean[] baseArray = new boolean[length];
-		for (int i = 0; i < length; i++) {
-			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
-		}
-			
-		return baseArray;
-	}
+	public static boolean[] toBooleanArray(Boolean[] array, boolean defaultValueIfNull) {
+		return (boolean[]) toBaseTypeArray(array, defaultValueIfNull);
+	}	
 	
 	/**
-	 * 将byte[]数组转换为Byte[]
+	 * 将包装类型的比特数组转换为基本类型的
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
 	 */
-	public static Byte[] convert(byte[] array) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		Byte[] wapperArray = new Byte[length];
-		for (int i = 0; i < length; i++) {
-			wapperArray[i] = array[i];
-		}
-			
-		return wapperArray;
+	public static byte[] toByteArray(Byte[] array) {
+		return (byte[]) toBaseTypeArray(array, null);
 	}
 	
 	/**
-	 * 将Byte[]数组转换为byte[]
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @return
-	 */
-	public static byte[] convert(Byte[] array) {
-		return convert(array, (byte) 0);
-	}
-	
-	/**
-	 * 将Byte[]数组转换为byte[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将包装类型的比特数组转换为基本类型的。在转换的过程中，如果包装类元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
 	 * @return
 	 */
-	public static byte[] convert(Byte[] array, byte defaultValueIfNull) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		byte[] baseArray = new byte[length];
-		for (int i = 0; i < length; i++) {
-			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
-		}
-			
-		return baseArray;
+	public static byte[] toByteArray(Byte[] array, byte defaultValueIfNull) {
+		return (byte[]) toBaseTypeArray(array, defaultValueIfNull);
 	}
 	
 	/**
-	 * 将char[]数组转换为Character[]
+	 * 将包装类型的字符数组转换为基本类型的
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
 	 */
-	public static Character[] convert(char[] array) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		Character[] wapperArray = new Character[length];
-		for (int i = 0; i < length; i++) {
-			wapperArray[i] = array[i];
-		}
-			
-		return wapperArray;
+	public static char[] toCharArray(Character[] array) {
+		return (char[]) toBaseTypeArray(array, null);
 	}
 	
 	/**
-	 * 将Character[]数组转换为char[]
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @return
-	 */
-	public static char[] convert(Character[] array) {
-		return convert(array, Character.MIN_VALUE);
-	}
-	
-	/**
-	 * 将Character[]数组转换为char[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将包装类型的字符数组转换为基本类型的。在转换的过程中，如果包装类元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
 	 * @return
 	 */
-	public static char[] convert(Character[] array, char defaultValueIfNull) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		char[] baseArray = new char[length];
-		for (int i = 0; i < length; i++) {
-			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
-		}
-			
-		return baseArray;
+	public static char[] toCharArray(Character[] array, char defaultValueIfNull) {
+		return (char[]) toBaseTypeArray(array, defaultValueIfNull);
 	}
 	
 	/**
-	 * 将double[]数组转换为Double[]。
+	 * 将包装类型的双精度数组转换为基本类型的
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
 	 */
-	public static Double[] convert(double[] array) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		Double[] wapperArray = new Double[length];
-		for (int i = 0; i < length; i++) {
-			wapperArray[i] = array[i];
-		}
-			
-		return wapperArray;
+	public static double[] toDoubleArray(Double[] array) {
+		return (double[]) toBaseTypeArray(array, null);
 	}
 	
 	/**
-	 * 将Double[]数组转换为double[]。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @return
-	 */
-	public static double[] convert(Double[] array) {
-		return convert(array, 0);
-	}
-	
-	/**
-	 * 将Double[]数组转换为double[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将包装类型的双精度数组转换为基本类型的。在转换的过程中，如果包装类元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
 	 * @return
 	 */
-	public static double[] convert(Double[] array, double defaultValueIfNull) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		double[] baseArray = new double[length];
-		for (int i = 0; i < length; i++) {
-			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
-		}
-			
-		return baseArray;
+	public static double[] toDoubleArray(Double[] array, double defaultValueIfNull) {
+		return (double[]) toBaseTypeArray(array, defaultValueIfNull);
 	}
 	
 	/**
-	 * 将float[]数组转换为Float[]。
+	 * 将包装类型的单精度数组转换为基本类型的
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
 	 */
-	public static Float[] convert(float[] array) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		Float[] wapperArray = new Float[length];
-		for (int i = 0; i < length; i++) {
-			wapperArray[i] = array[i];
-		}
-			
-		return wapperArray;
+	public static float[] toFloatArray(Float[] array) {
+		return (float[]) toBaseTypeArray(array, null);
 	}
 	
 	/**
-	 * 将Float[]数组转换为float[]。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @return
-	 */
-	public static float[] convert(Float[] array) {
-		return convert(array, 0);
-	}
-	
-	/**
-	 * 将Float[]数组转换为float[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将包装类型的单精度数组转换为基本类型的。在转换的过程中，如果包装类元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
 	 * @return
 	 */
-	public static float[] convert(Float[] array, float defaultValueIfNull) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		float[] baseArray = new float[length];
-		for (int i = 0; i < length; i++) {
-			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
-		}
-			
-		return baseArray;
+	public static float[] toFloatArray(Float[] array, float defaultValueIfNull) {
+		return (float[]) toBaseTypeArray(array, defaultValueIfNull);
 	}
-			
+					
 	/**
-	 * 将int[]数组转换为Integer[]
+	 * 将包装类型的整型数组转换为基本类型的
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
 	 */
-	public static Integer[] convert(int[] array) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		Integer[] wapperArray = new Integer[length];
-		for (int i = 0; i < length; i++) {
-			wapperArray[i] = array[i];
-		}
-			
-		return wapperArray;
-	}
-		
-	/**
-	 * 将Integer[]数组转换为int[]
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @return
-	 */
-	public static int[] convert(Integer[] array) {
-		return convert(array, 0);
+	public static int[] toIntArray(Integer[] array) {
+		return (int[]) toBaseTypeArray(array, null);
 	}
 	
 	/**
-	 * 将Integer[]数组转换为int[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将包装类型的整型数组转换为基本类型的。在转换的过程中，如果包装类元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
 	 * @return
 	 */
-	public static int[] convert(Integer[] array, int defaultValueIfNull) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		int[] baseArray = new int[length];
-		for (int i = 0; i < length; i++) {
-			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
-		}
-			
-		return baseArray;
+	public static int[] toIntArray(Integer[] array, int defaultValueIfNull) {
+		return (int[]) toBaseTypeArray(array, defaultValueIfNull);
 	}
 	
 	/**
-	 * 将long[]数组转换为Long[]
+	 * 将包装类型的长整型数组转换为基本类型的
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
 	 */
-	public static Long[] convert(long[] array) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		Long[] wapperArray = new Long[length];
-		for (int i = 0; i < length; i++) {
-			wapperArray[i] = array[i];
-		}
-			
-		return wapperArray;
+	public static long[] toLongArray(Long[] array) {
+		return (long[]) toBaseTypeArray(array, null);
 	}
 	
 	/**
-	 * 将Long[]数组转换为long[]
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @return
-	 */
-	public static long[] convert(Long[] array) {
-		return convert(array, 0L);
-	}
-	
-	/**
-	 * 将Long[]数组转换为long[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将包装类型的长整型数组转换为基本类型的。在转换的过程中，如果包装类元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
 	 * @return
 	 */
-	public static long[] convert(Long[] array, long defaultValueIfNull) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		long[] baseArray = new long[length];
-		for (int i = 0; i < length; i++) {
-			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
-		}
-			
-		return baseArray;
+	public static long[] toLongArray(Long[] array, long defaultValueIfNull) {
+		return (long[]) toBaseTypeArray(array, defaultValueIfNull);
 	}
 	
 	/**
-	 * 将short[]数组转换为Short[]
+	 * 将包装类型的短整型数组转换为基本类型的
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @return
 	 */
-	public static Short[] convert(short[] array) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		Short[] wapperArray = new Short[length];
-		for (int i = 0; i < length; i++) {
-			wapperArray[i] = array[i];
-		}
-			
-		return wapperArray;
+	public static short[] toShortArray(Short[] array) {
+		return (short[]) toBaseTypeArray(array, null);
 	}
 	
 	/**
-	 * 将Short[]数组转换为short[]
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param array
-	 * @return
-	 */
-	public static short[] convert(Short[] array) {
-		return convert(array, (short) 0);
-	}
-	
-	/**
-	 * 将Short[]数组转换为short[]。在转换的过程中，如果元素为空，则统一设置为指定的默认值
+	 * 将包装类型的短整型数组转换为基本类型的。在转换的过程中，如果包装类元素为空，则统一设置为指定的默认值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param array
 	 * @param defaultValueIfNull
 	 * @return
 	 */
-	public static short[] convert(Short[] array, short defaultValueIfNull) {
-		if (array == null)
-			return null;
-		
-		int length = array.length;
-		short[] baseArray = new short[length];
-		for (int i = 0; i < length; i++) {
-			baseArray[i] = (array[i] != null ? array[i] : defaultValueIfNull);
-		}
-			
-		return baseArray;
-	}
-	
-	/**
-	 * 转换一个对象为Object类型或包装类型的数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param baseTypeArray
-	 * @return
-	 */
-	public static Object[] convert(Object array) {
-		if (!ClassUtils.isArray(array))
-			return new Object[] {array};
-		
-		Class<?> componentType = array.getClass().getComponentType();
-		if (ClassUtils.isBaseType(componentType)) {
-			if (componentType == Boolean.TYPE)
-				return convert((boolean[]) array);
-			
-			if (componentType == Character.TYPE)
-				return convert((char[]) array);
-			
-			if (componentType == Byte.TYPE)
-				return convert((byte[]) array);
-			
-			if (componentType == Short.TYPE)
-				return convert((short[]) array);
-			
-			if (componentType == Integer.TYPE)
-				return convert((int[]) array);
-			
-			if (componentType == Long.TYPE)
-				return convert((long[]) array);
-			
-			if (componentType == Float.TYPE)
-				return convert((float[]) array);
-			
-			if (componentType == Double.TYPE)
-				return convert((double[]) array);
-		}
-		
-		return (Object[]) array;
+	public static short[] toShortArray(Short[] array, short defaultValueIfNull) {
+		return (short[]) toBaseTypeArray(array, defaultValueIfNull);
 	}
 	
 	/**
@@ -848,8 +680,8 @@ public class ArrayUtils {
 	 * @return
 	 */
 	public static <T> T[] addFirst(Object array, Object added, Class<T> componentType) {
-		Object[] array1 = convert(array);
-		Object[] array2 = convert(added);
+		Object[] array1 = toWrapperTypeArray(array);
+		Object[] array2 = toWrapperTypeArray(added);
 		return (T[]) copy(array2, array1, componentType);
 	}
 	
@@ -862,8 +694,8 @@ public class ArrayUtils {
 	 * @return
 	 */
 	public static <T> T[] addLast(Object array, Object added, Class<T> componentType) {
-		Object[] array1 = convert(array);
-		Object[] array2 = convert(added);
+		Object[] array1 = toWrapperTypeArray(array);
+		Object[] array2 = toWrapperTypeArray(added);
 		return (T[]) copy(array1, array2, componentType);
 	}
 		
@@ -1673,7 +1505,7 @@ public class ArrayUtils {
 			start = 0;
 		
 		if (ClassUtils.isArray(element))
-			return indexOf(array, convert(element), start);
+			return indexOf(array, toWrapperTypeArray(element), start);
 		
 		for (int i = start; i < array.length; i++) {
 			if (ObjectUtils.equals(array[i], element)) 
@@ -2538,7 +2370,7 @@ public class ArrayUtils {
 			start = 0;
 		
 		if (ClassUtils.isArray(element))
-			return lastIndexOf(array, convert(element), start);
+			return lastIndexOf(array, toWrapperTypeArray(element), start);
 		
 		for (int i = (array.length - 1); i >= start; i--) {
 			if (ObjectUtils.equals(array[i], element))
@@ -3174,7 +3006,7 @@ public class ArrayUtils {
 		if (index < 0)
 			return array;
 		
-		return ClassUtils.isArray(element) ? removeSubArray(array, convert(element))
+		return ClassUtils.isArray(element) ? removeSubArray(array, toWrapperTypeArray(element))
 				: removeElement(remove(array, index), element);
 	}
 	
@@ -3887,5 +3719,5 @@ public class ArrayUtils {
 		System.arraycopy(array2, 0, dest, length_1, length_2);
 		return (T3[]) dest;
 	}
-		
+	
 }

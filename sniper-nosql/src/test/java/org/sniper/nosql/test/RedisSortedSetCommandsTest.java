@@ -23,6 +23,9 @@ import java.util.Set;
 
 import org.junit.Test;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.nosql.redis.model.ZSetTuple;
+import org.sniper.nosql.redis.option.Limit;
+import org.sniper.nosql.redis.option.ZStoreOption;
 
 /**
  * Redis有序集合单元测试类
@@ -47,7 +50,7 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 		scoreMembers.put(values[3], 0.3);
 	}
 	
-	@Test
+//	@Test
 	public void testZAdd() {
 		scoreMembers.put(null, 0.4);
 		scoreMembers.put(values[4], null);
@@ -113,8 +116,6 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 	
 //	@Test
 	public void testZRangeByScore() {
-		
-			
 		assertNull(redisCommands.zRangeByScore(key, minScore, maxScore));
 		
 		Long count = redisCommands.zAdd(key, scoreMembers);
@@ -323,12 +324,16 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 		redisCommands.zAdd(keys[1], 0.2, "b");
 		redisCommands.zAdd(key, 0.3, "c");
 		
+		String[] keys = new String[] {this.keys[0], this.keys[1]};
 		// 元素c将被覆盖掉
-		assertEquals(2L, redisCommands.zUnionStore(key, new String[] { keys[0], keys[1]}, 10));
-		assertEquals(2L, redisCommands.zUnionStore(keys[0], new String[] { keys[0], keys[1]}));
+		assertEquals((long) keys.length, redisCommands.zUnionStore(key, keys, 10));
+		assertEquals((long) keys.length, redisCommands.zUnionStore(keys[0], keys));
 		
 		System.out.println(redisCommands.zRangeAll(key));
 		System.out.println(redisCommands.zRangeAll(keys[0]));
+		
+		assertEquals((long) keys.length, redisCommands.zUnionStore(key, keys, ZStoreOption.build(keys)));
+		System.out.println(redisCommands.zRangeAll(key));
 	}
 	
 //	@Test
@@ -363,15 +368,19 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 		redisCommands.zAdd(keys[1], scoreMembers1);
 		redisCommands.zAdd(key, 0.3, "c");
 		
+		String[] keys = new String[] {this.keys[0], this.keys[1]};
 		// 元素c将被覆盖掉
-		assertEquals(2L, redisCommands.zInterStore(key, new String[] { keys[0], keys[1]}, 10));
-		assertEquals(2L, redisCommands.zInterStore(keys[0], new String[] { keys[0], keys[1]}));
+		assertEquals((long) keys.length, redisCommands.zInterStore(key, keys, 10));
+		assertEquals((long) keys.length, redisCommands.zInterStore(keys[0], keys));
 		
 		System.out.println(redisCommands.zRangeAll(key));
 		System.out.println(redisCommands.zRangeAll(keys[0]));
+		
+		assertEquals((long) keys.length, redisCommands.zInterStore(key, keys, ZStoreOption.build(keys)));
+		System.out.println(redisCommands.zRangeAll(key));
 	}
 	
-	@Test
+//	@Test
 	public void testZIncrBy() {
 		double increment = 1;
 		int max = 10;
@@ -380,6 +389,38 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 		}
 		
 		assertEquals(increment * max, redisCommands.zScore(key, values[0]));
+	}
+	
+//	@Test
+	public void testZRangeByScoreWithScores() {
+		assertNull(redisCommands.zRangeByScoreWithScores(key, minScore, maxScore));
+		
+		redisCommands.zAdd(key, scoreMembers);
+		
+		Set<ZSetTuple<Object>> tuples = redisCommands.zRangeByScoreWithScores(key, minScore, maxScore);
+		assertEquals(scoreMembers.size(), tuples.size());
+		System.out.println(tuples);
+		
+		Limit limit = new Limit(1, scoreMembers.size());
+		tuples = redisCommands.zRangeByScoreWithScores(key, minScore, maxScore, limit);
+		assertEquals((int) (scoreMembers.size() - limit.getOffset()), tuples.size());
+		System.out.println(tuples);
+	}
+	
+	@Test
+	public void testZRevRangeByScoreWithScores() {
+		assertNull(redisCommands.zRevRangeByScoreWithScores(key, minScore, maxScore));
+		
+		redisCommands.zAdd(key, scoreMembers);
+		
+		Set<ZSetTuple<Object>> tuples = redisCommands.zRevRangeByScoreWithScores(key, minScore, maxScore);
+		assertEquals(scoreMembers.size(), tuples.size());
+		System.out.println(tuples);
+		
+		Limit limit = new Limit(1, scoreMembers.size());
+		tuples = redisCommands.zRevRangeByScoreWithScores(key, minScore, maxScore, limit);
+		assertEquals((int) (scoreMembers.size() - limit.getOffset()), tuples.size());
+		System.out.println(tuples);
 	}
 	
 }
