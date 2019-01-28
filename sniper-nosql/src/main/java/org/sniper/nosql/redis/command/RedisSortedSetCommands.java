@@ -280,7 +280,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeAll(String dbName, K key, Class<V> valueType);
 	
 	/**
-	 * 在当前库中执行zRangeByScore命令，以score值升序的方式获取集合在[minScore, maxScore]区间范围内的元素值
+	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param minScore
@@ -290,7 +290,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore);
 	
 	/**
-	 * 在当前库中执行zRangeByScore命令，以score值升序的方式获取集合在[minScore, maxScore]区间范围内的元素值
+	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param minScore
@@ -301,7 +301,30 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, Class<V> valueType);
 	
 	/**
-	 * 在指定库中执行zRangeByScore命令，以score值升序的方式获取集合在[minScore, maxScore]区间范围内的元素值
+	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param limit
+	 * @return
+	 */
+	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, Limit limit);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param limit
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -312,7 +335,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore);
 	
 	/**
-	 * 在指定库中执行zRangeByScore命令，以score值升序的方式获取集合在[minScore, maxScore]区间范围内的元素值
+	 * 在指定库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -324,34 +347,54 @@ public interface RedisSortedSetCommands {
 	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
 	
 	/**
-	 * 在当前库中执行zRangeByScore命令，从offset开始定位，以score值升序的方式获取集合在[minScore, maxScore]区间范围内最多count个元素值
+	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
-	 * @param offset
-	 * @param count
+	 * @param limit
 	 * @return
 	 */
-	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, long offset, long count);
+	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore, Limit limit);
 	
 	/**
-	 * 在当前库中执行zRangeByScore命令，从offset开始定位，以score值升序的方式获取集合在[minScore, maxScore]区间范围内最多count个元素值
+	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
-	 * @param offset
-	 * @param count
+	 * @param limit
 	 * @param valueType
 	 * @return
 	 */
-	public <K, V> Set<V> zRangeByScore(K key, double minScore, double maxScore, long offset, long count, Class<V> valueType);
+	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
 	
 	/**
-	 * 在指定库中执行zRangeByScore命令，从offset开始定位，以score值升序的方式获取集合在[minScore, maxScore]区间范围内最多count个元素值
+	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有的元组集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -359,12 +402,11 @@ public interface RedisSortedSetCommands {
 	 * @param count
 	 * @return
 	 */
-	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore, long offset, long count);
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit);
 	
 	/**
-	 * 在指定库中执行zRangeByScore命令，从offset开始定位，以score值升序的方式获取集合在[minScore, maxScore]区间范围内最多count个元素值
+	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -372,10 +414,321 @@ public interface RedisSortedSetCommands {
 	 * @param count
 	 * @return
 	 */
-	public <K, V> Set<V> zRangeByScore(String dbName, K key, double minScore, double maxScore, long offset, long count, Class<V> valueType);
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
+			
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore);
 	
 	/**
-	 * 在当前库中执行zRank命令，获取有序键集中指定成员按score值升序排列后的下标值
+	 * 在指定库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param limit
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRange(K key, long begin, long end);
+	
+	/**
+	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRange(K key, long begin, long end, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRange(String dbName, K key, long begin, long end);
+	
+	/**
+	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param begin
+	 * @param end
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRange(String dbName, K key, long begin, long end, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeAll(K key);
+	
+	/**
+	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeAll(K key, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zRevRange命令，按score值降序的方式获取集合内所有的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeAllIn(String dbName, K key);
+	
+	/**
+	 * 在指定库中执行zRevRange命令，按score值降序的方式获取集合内所有指定类型的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeAll(String dbName, K key, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRevRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore);
+	
+	/**
+	 * 在当前库中执行zRevRangeByScore命令，按score降序的方式获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRevRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param limit
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore, Limit limit);
+	
+	/**
+	 * 在当前库中执行zRevRangeByScore命令，按score降序的方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param limit
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zRevRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeByScore(String dbName, K key, double minScore, double maxScore);
+	
+	/**
+	 * 在指定库中执行zRevRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeByScore(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zRevRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param limit
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeByScore(String dbName, K key, double minScore, double maxScore, Limit limit);
+	
+	/**
+	 * 在指定库中执行zRevRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param limit
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<V> zRevRangeByScore(String dbName, K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param offset
+	 * @param count
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param offset
+	 * @param count
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit);
+	
+	/**
+	 * 在指定库中执行zRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param minScore
+	 * @param maxScore
+	 * @param limit
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zRank命令，获取有序键集中指定成员按score升序排列后的下标值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param member
@@ -384,7 +737,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Long zRank(K key, V member);
 	
 	/**
-	 * 在指定库中执行zRank命令，获取有序键集中指定成员按score值升序排列后的下标值
+	 * 在指定库中执行zRank命令，获取有序键集中指定成员按score升序排列后的下标值
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
@@ -392,6 +745,25 @@ public interface RedisSortedSetCommands {
 	 * @return
 	 */
 	public <K, V> Long zRank(String dbName, K key, V member);
+	
+	/**
+	 * 在当前库中执行zRevRank命令，获取有序键集中指定成员按score降序排列后的下标值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Long zRevRank(K key, V member);
+	
+	/**
+	 * 在指定库中执行zRevRank命令，获取有序键集中指定成员按score降序排列后的下标值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, V> Long zRevRank(String dbName, K key, V member);
 	
 	/**
 	 * 在当前库中执行zRem命令，删除指定键集中的成员
@@ -508,333 +880,6 @@ public interface RedisSortedSetCommands {
 	 * @return
 	 */
 	public <K> Long zRemRangeByScore(String dbName, K key, double minScore, double maxScore);
-	
-	/**
-	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param begin
-	 * @param end
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRange(K key, long begin, long end);
-	
-	/**
-	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param begin
-	 * @param end
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRange(K key, long begin, long end, Class<V> valueType);
-	
-	/**
-	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param begin
-	 * @param end
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRange(String dbName, K key, long begin, long end);
-	
-	/**
-	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param begin
-	 * @param end
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRange(String dbName, K key, long begin, long end, Class<V> valueType);
-	
-	/**
-	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRangeAll(K key);
-	
-	/**
-	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRangeAll(K key, Class<V> valueType);
-	
-	/**
-	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRangeAllIn(String dbName, K key);
-	
-	/**
-	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRangeAll(String dbName, K key, Class<V> valueType);
-	
-	/**
-	 * 在当前库中执行zRevRangeByScore命令，以score值降序的方式获取集合在[minScore, maxScore]区间内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore);
-	
-	/**
-	 * 在当前库中执行zRevRangeByScore命令，以score值降序的方式获取集合在[minScore, maxScore]区间内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRangeByScore(K key, double minScore, double maxScore, Class<V> valueType);
-	
-	/**
-	 * 在指定库中执行zRevRangeByScore命令，以score值降序的方式获取集合在[minScore, maxScore]区间内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRangeByScore(String dbName, K key, double minScore, double maxScore);
-	
-	/**
-	 * 在指定库中执行zRevRangeByScore命令，以score值降序的方式获取集合在[minScore, maxScore]区间内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<V> zRevRangeByScore(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
-	
-	/**
-	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore);
-	
-	/**
-	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore, Class<V> valueType);
-	
-	/**
-	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param offset
-	 * @param count
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit);
-	
-	/**
-	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param offset
-	 * @param count
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
-			
-	/**
-	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore);
-	
-	/**
-	 * 在指定库中执行zRangeByScore命令，按score升序方式获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
-	
-	/**
-	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit);
-	
-	/**
-	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param limit
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
-
-	/**
-	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore);
-	
-	/**
-	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore, Class<V> valueType);
-	
-	/**
-	 * 在当前库中执行zRangeByScore命令，按score降序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param offset
-	 * @param count
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit);
-	
-	/**
-	 * 在当前库中执行zRangeByScore命令，按score降序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param offset
-	 * @param count
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
-	
-	/**
-	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在 [minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore);
-	
-	/**
-	 * 在指定库中执行zRangeByScore命令，按score降序方式获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Class<V> valueType);
-	
-	/**
-	 * 在指定库中执行zRangeByScore命令，按score降序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit);
-	
-	/**
-	 * 在指定库中执行zRangeByScore命令，按score降序方式限制获取有序集合在 [minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param minScore
-	 * @param maxScore
-	 * @param limit
-	 * @param valueType
-	 * @return
-	 */
-	public <K, V> Set<ZSetTuple<V>> zRevRangeByScoreWithScores(String dbName, K key, double minScore, double maxScore, Limit limit, Class<V> valueType);
-	
-	/**
-	 * 在当前库中执行zRevRank命令，获取有序键集中指定成员按score值降序排列后的下标值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param member
-	 * @return
-	 */
-	public <K, V> Long zRevRank(K key, V member);
-	
-	/**
-	 * 在指定库中执行zRevRank命令，获取有序键集中指定成员按score值降序排列后的下标值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param member
-	 * @return
-	 */
-	public <K, V> Long zRevRank(String dbName, K key, V member);
 	
 	/**
 	 * 在当前库中执行zScore命令，获取有序键集中指定成员的score值

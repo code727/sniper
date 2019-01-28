@@ -49,7 +49,7 @@ import org.springframework.data.redis.connection.SortParameters.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 
 /**
- * Spring Redis支持类
+ * SpringRedis支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

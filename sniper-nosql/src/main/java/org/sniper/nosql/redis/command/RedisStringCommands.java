@@ -202,70 +202,70 @@ public interface RedisStringCommands {
 	/**
 	 * 在当前库中执行mSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param kValues
+	 * @param keyValues
 	 */
-	public <K, V> void mSet(Map<K, V> kValues);
+	public <K, V> void mSet(Map<K, V> keyValues);
 	
 	/**
 	 * 在当前库中执行mSet命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param kValues
+	 * @param keyValues
 	 * @param expireSeconds
 	 */
-	public <K, V> void mSet(Map<K, V> kValues, long expireSeconds);
+	public <K, V> void mSet(Map<K, V> keyValues, long expireSeconds);
 	
 	/**
 	 * 在指定库中执行mSet命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
-	 * @param kValues
+	 * @param keyValues
 	 */
-	public <K, V> void mSet(String dbName, Map<K, V> kValues);
+	public <K, V> void mSet(String dbName, Map<K, V> keyValues);
 	
 	/**
 	 * 在指定库中执行mSet命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
-	 * @param kValues
+	 * @param keyValues
 	 * @param expireSeconds
 	 */
-	public <K, V> void mSet(String dbName, Map<K, V> kValues, long expireSeconds);
+	public <K, V> void mSet(String dbName, Map<K, V> keyValues, long expireSeconds);
 
 	/**
 	 * 在当前库中执行mSetNX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param kValues
+	 * @param keyValues
 	 * @return
 	 */
-	public <K, V> Boolean mSetNX(Map<K, V> kValues);
+	public <K, V> Boolean mSetNX(Map<K, V> keyValues);
 	
 	/**
 	 * 在当前库中执行mSetNX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param kValues
+	 * @param keyValues
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean mSetNX(Map<K, V> kValues, long expireSeconds);
+	public <K, V> Boolean mSetNX(Map<K, V> keyValues, long expireSeconds);
 	
 	/**
 	 * 在指定库中执行mSetNX命令
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
-	 * @param kValues
+	 * @param keyValues
 	 * @return
 	 */
-	public <K, V> Boolean mSetNX(String dbName, Map<K, V> kValues);
+	public <K, V> Boolean mSetNX(String dbName, Map<K, V> keyValues);
 	
 	/**
 	 * 在指定库中执行mSetNX命令，并设置过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
-	 * @param kValues
+	 * @param keyValues
 	 * @param expireSeconds
 	 * @return
 	 */
-	public <K, V> Boolean mSetNX(String dbName, Map<K, V> kValues, long expireSeconds);
+	public <K, V> Boolean mSetNX(String dbName, Map<K, V> keyValues, long expireSeconds);
 	
 	/**
 	 * 在当前库中执行setRange命令

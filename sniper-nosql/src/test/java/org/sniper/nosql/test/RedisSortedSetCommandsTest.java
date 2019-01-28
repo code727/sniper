@@ -114,7 +114,7 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 		System.out.println(set);
 	}
 	
-//	@Test
+	@Test
 	public void testZRangeByScore() {
 		assertNull(redisCommands.zRangeByScore(key, minScore, maxScore));
 		
@@ -138,28 +138,48 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 		assertNull(redisCommands.zRangeByScore(key, -0.1, 0.0));
 		assertNull(redisCommands.zRangeByScore(key, 0.4, 0.9));
 		
-		set = redisCommands.zRangeByScore(key, minScore, maxScore, -1, 0);
+		Limit limit = new Limit(-1, 0);
+		
+		set = redisCommands.zRangeByScore(key, minScore, maxScore, limit);
 		assertNull(set);
 		
-		set = redisCommands.zRangeByScore(key, minScore, maxScore, 0, 0);
+		limit.setOffset(0);
+		
+		set = redisCommands.zRangeByScore(key, minScore, maxScore, limit);
 		assertNull(set);
 		
-		set = redisCommands.zRangeByScore(key, minScore, maxScore, 1, 0);
+		limit.setOffset(1);
+		
+		set = redisCommands.zRangeByScore(key, minScore, maxScore, limit);
 		assertNull(set);
 		
-		set = redisCommands.zRangeByScore(key, minScore, maxScore, 0, 1);
+		limit.setOffset(0);
+		limit.setCount(1);
+		
+		set = redisCommands.zRangeByScore(key, minScore, maxScore, limit);
 		assertEquals(1, set.size());
 		
-		set = redisCommands.zRangeByScore(key, minScore, maxScore, 1, 1);
+		limit.setOffset(1);
+		
+		set = redisCommands.zRangeByScore(key, minScore, maxScore, limit);
 		assertEquals(1, set.size());
 		
-		set = redisCommands.zRangeByScore(key, minScore, maxScore, 0, scoreMembers.size());
+		limit.setOffset(0);
+		limit.setCount(scoreMembers.size());
+		
+		set = redisCommands.zRangeByScore(key, minScore, maxScore, limit);
 		assertEquals(scoreMembers.size(), set.size());
 		
-		set = redisCommands.zRangeByScore(key, minScore, maxScore, 1, scoreMembers.size());
+		limit.setOffset(1);
+		limit.setCount(scoreMembers.size());
+		
+		set = redisCommands.zRangeByScore(key, minScore, maxScore, limit);
 		assertEquals(scoreMembers.size() - 1, set.size());
 		
-		set = redisCommands.zRangeByScore(key, minScore, maxScore, 0, scoreMembers.size() + 1);
+		limit.setOffset(0);
+		limit.setCount(scoreMembers.size() + 1);
+		
+		set = redisCommands.zRangeByScore(key, minScore, maxScore, limit);
 		assertEquals(scoreMembers.size(), set.size());
 	}
 	
@@ -407,7 +427,7 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 		System.out.println(tuples);
 	}
 	
-	@Test
+//	@Test
 	public void testZRevRangeByScoreWithScores() {
 		assertNull(redisCommands.zRevRangeByScoreWithScores(key, minScore, maxScore));
 		

@@ -37,14 +37,13 @@ import org.sniper.nosql.redis.RedisRepositoryManager;
 import org.sniper.serialization.Serializer;
 import org.sniper.serialization.TypedSerializer;
 import org.sniper.serialization.jdk.StringSerializer;
-import org.sniper.spring.beans.CheckableInitializingBean;
 
 /**
  * Redis支持类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class RedisSupport extends CheckableInitializingBean {
+public abstract class RedisSupport extends RedisAccessor {
 	
 	/** set命令名称 */
 	protected static final String SET_COMMAND_NAME;
@@ -301,12 +300,12 @@ public abstract class RedisSupport extends CheckableInitializingBean {
 	 * @param kValues
 	 * @return 
 	 */
-	protected <K, V> Map<byte[], byte[]> serializeKeyValueToByteMap(String dbName, Map<K, V> kValues) {
+	protected <K, V> Map<byte[], byte[]> serializeKeyValueToByteMap(String dbName, Map<K, V> keyValues) {
 		Serializer fieldKeySerializer = selectKeySerializer(dbName);
 		Serializer valueSerializer = selectValueSerializer(dbName);
 		
 		Map<byte[], byte[]> result = new HashMap<byte[], byte[]>();
-		Iterator<Entry<K, V>> iterator = kValues.entrySet().iterator();
+		Iterator<Entry<K, V>> iterator = keyValues.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<K, V> entry = iterator.next();
 			result.put(fieldKeySerializer.serialize(entry.getKey()),
