@@ -121,22 +121,7 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	public <K> Boolean exists(K key) {
 		return exists(null, key);
 	}
-	
-	@Override
-	public <K> Map<K, Boolean> exists(K[] keys) {
-		return exists(null, keys);
-	}
-
-	@Override
-	public <K> Map<K, Boolean> exists(String dbName, K[] keys) {
-		return exists(dbName, ArrayUtils.toList(keys));
-	}
-
-	@Override
-	public <K> Map<K, Boolean> exists(Collection<K> keys) {
-		return exists(null, keys);
-	}
-	
+		
 	@Override
 	public <K> Boolean expire(K key, long seconds) {
 		return expire(null, seconds);
@@ -1493,22 +1478,7 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	public <K, V> Long zAdd(String dbName, K key, Map<V, Double> scoreMembers) {
 		return zAdd(dbName, key, scoreMembers, 0);
 	}
-	
-	@Override
-	public <K, V> Map<V, Boolean> zAdds(K key, Map<V, Double> scoreMembers) {
-		return zAdds(null, key, scoreMembers);
-	}
-	
-	@Override
-	public <K, V> Map<V, Boolean> zAdds(K key, Map<V, Double> scoreMembers, long expireSeconds) {
-		return zAdds(null, key, scoreMembers, expireSeconds);
-	}
-
-	@Override
-	public <K, V> Map<V, Boolean> zAdds(String dbName, K key, Map<V, Double> scoreMembers) {
-		return zAdds(dbName, key, scoreMembers, 0);
-	}
-	
+		
 	@Override
 	public <K> Long zCard(K key) {
 		return zCard(null, key);

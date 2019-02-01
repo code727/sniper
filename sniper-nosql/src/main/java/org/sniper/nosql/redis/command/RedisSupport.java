@@ -20,13 +20,12 @@ package org.sniper.nosql.redis.command;
 
 import java.beans.PropertyEditor;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.TimeUnit;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.sniper.beans.PropertyConverter;
 import org.sniper.commons.util.ArrayUtils;
@@ -69,9 +68,6 @@ public abstract class RedisSupport extends RedisAccessor {
 	/** 全局默认的字符串序列化器 */
 	protected final Serializer stringSerializer = new StringSerializer();
 	
-	/** 全局默认的属性转换器 */
-	private PropertyConverter propertyConverter = new PropertyConverter();
-	
 	/** 全局键序列化器 */
 	private Serializer globalKeySerializer;
 	
@@ -83,6 +79,9 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/** 全局哈希值序列化器 */
 	private Serializer globalHashValueSerializer;
+	
+	/** 全局默认的属性转换器 */
+	private PropertyConverter propertyConverter = new PropertyConverter();
 	
 	static {
 		SET_COMMAND_NAME = "set";
@@ -293,46 +292,15 @@ public abstract class RedisSupport extends RedisAccessor {
 		return hashValueSerializer != null ? hashValueSerializer : globalHashValueSerializer;
 	}
 	
-	/** 
-	 * 将指定库的键值映射集序列化成Byte类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param kValues
-	 * @return 
-	 */
-	protected <K, V> Map<byte[], byte[]> serializeKeyValueToByteMap(String dbName, Map<K, V> keyValues) {
-		Serializer fieldKeySerializer = selectKeySerializer(dbName);
-		Serializer valueSerializer = selectValueSerializer(dbName);
-		
-		Map<byte[], byte[]> result = new HashMap<byte[], byte[]>();
-		Iterator<Entry<K, V>> iterator = keyValues.entrySet().iterator();
-		while (iterator.hasNext()) {
-			Entry<K, V> entry = iterator.next();
-			result.put(fieldKeySerializer.serialize(entry.getKey()),
-					valueSerializer.serialize(entry.getValue()));
-		}
-		return result;
-	}
-	
 	/**
-	 * 将指定库的哈希键值映射集序列化成Byte类型的Map结果
+	 * 将指定库的键字节序列化到Byte类型的数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
-	 * @param hashKeyValues
+	 * @param key
 	 * @return
 	 */
-	protected <H, V> Map<byte[], byte[]> serializeHashKeyValuesToByteMap(String dbName, Map<H, V> hashKeyValues) {
-		Serializer fieldKeySerializer = selectHashKeySerializer(dbName);
-		Serializer valueSerializer = selectHashValueSerializer(dbName);
-		
-		Map<byte[], byte[]> result = new HashMap<byte[], byte[]>();
-		Iterator<Entry<H, V>> iterator = hashKeyValues.entrySet().iterator();
-		while (iterator.hasNext()) {
-			Entry<H, V> entry = iterator.next();
-			result.put(fieldKeySerializer.serialize(entry.getKey()),
-					valueSerializer.serialize(entry.getValue()));
-		}
-		return result;
+	protected <K> byte[] serializeKey(String dbName, K key) {
+		return selectKeySerializer(dbName).serialize(key);
 	}
 	
 	/**
@@ -342,15 +310,26 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @param keys
 	 * @return
 	 */
-	protected <K> byte[][] serializeKeysToArray(String dbName, K[] keys) {
+	protected <K> byte[][] serializeKeys(String dbName, K[] keys) {
 		Serializer keySerializer = selectKeySerializer(dbName);
-		byte[][] keyBytes = new byte[keys.length][];
 		
+		byte[][] keyBytes = new byte[keys.length][];
 		for (int i = 0; i < keys.length; i++) {
 			keyBytes[i] = keySerializer.serialize(keys[i]);
 		}
 		
 		return keyBytes;
+	}
+	
+	/**
+	 * 将指定库的值字节序列化到Byte类型的数组中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param value
+	 * @return
+	 */
+	protected <V> byte[] serializeValue(String dbName, V value) {
+		return selectValueSerializer(dbName).serialize(value);
 	}
 	
 	/**
@@ -360,10 +339,10 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @param values
 	 * @return
 	 */
-	protected <V> byte[][] serializeValuesToArray(String dbName, V[] values) {
+	protected <V> byte[][] serializeValues(String dbName, V[] values) {
 		Serializer valueSerializer = selectValueSerializer(dbName);
-		byte[][] valueBytes = new byte[values.length][];
 		
+		byte[][] valueBytes = new byte[values.length][];
 		for (int i = 0; i < values.length; i++) {
 			valueBytes[i] = valueSerializer.serialize(values[i]);
 		}
@@ -371,22 +350,85 @@ public abstract class RedisSupport extends RedisAccessor {
 		return valueBytes;
 	}
 	
+	/** 
+	 * 将指定库的键值映射集序列化成Byte类型的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param kValues
+	 * @return 
+	 */
+	protected <K, V> Map<byte[], byte[]> serializeKeyValues(String dbName, Map<K, V> keyValues) {
+		Serializer keySerializer = selectKeySerializer(dbName);
+		Serializer valueSerializer = selectValueSerializer(dbName);
+		
+		Map<byte[], byte[]> result = MapUtils.newHashMap(keyValues.size());
+		Iterator<Entry<K, V>> iterator = keyValues.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<K, V> entry = iterator.next();
+			result.put(keySerializer.serialize(entry.getKey()),
+					valueSerializer.serialize(entry.getValue()));
+		}
+		return result;
+	}
+	
 	/**
-	 * 将指定库的多个域字节序列化到Byte类型的二维数组中
+	 * 将指定库的哈希键序列化到字节数组中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param hashKey
+	 * @return
+	 */
+	protected <H> byte[] serializeHashKey(String dbName, H hashKey) {
+		return selectHashKeySerializer(dbName).serialize(hashKey);
+	}
+	
+	/**
+	 * 将指定库的多个哈希键序列化到Byte类型的二维数组中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param hashKeys 哈希键数组
 	 * @return
 	 */
-	protected <H> byte[][] serializeHashKeysToArray(String dbName, H[] hashKeys) {
+	protected <H> byte[][] serializeHashKeys(String dbName, H[] hashKeys) {
 		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
-		byte[][] hashKeyBytes = new byte[hashKeys.length][];
 		
+		byte[][] hashKeyBytes = new byte[hashKeys.length][];
 		for (int i = 0; i < hashKeys.length; i++) {
 			hashKeyBytes[i] = hashKeySerializer.serialize(hashKeys[i]);
 		}
 		
 		return hashKeyBytes;
+	}
+	
+	/**
+	 * 将指定库的哈希值序列化到字节数组中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param hashValue
+	 * @return
+	 */
+	protected <V> byte[] serializeHashValue(String dbName, V hashValue) {
+		return selectHashValueSerializer(dbName).serialize(hashValue);
+	}
+	
+	/**
+	 * 将指定库的哈希键值对进行序列化
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param hashKeyValues
+	 * @return
+	 */
+	protected <H, V> Map<byte[], byte[]> serializeHashKeyValues(String dbName, Map<H, V> hashKeyValues) {
+		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
+		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
+		
+		Map<byte[], byte[]> result = MapUtils.newHashMap(hashKeyValues.size());
+		Iterator<Entry<H, V>> iterator = hashKeyValues.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<H, V> entry = iterator.next();
+			result.put(hashKeySerializer.serialize(entry.getKey()), hashValueSerializer.serialize(entry.getValue()));
+		}
+		return result;
 	}
 	
 	/**
@@ -398,6 +440,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @return
 	 */
 	protected <K> K deserializeKeyByte(String dbName, byte[] keyByte, Class<K> keyType) {
+		// TODO byte数组判断方式不合理，其他deserializeXXX方法也有同样问题
 		if (ArrayUtils.isEmpty(keyByte))
 			return null;
 		
@@ -421,12 +464,12 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <K> Set<K> deserializeKeyBytesToSet(String dbName, Set<byte[]> keyBytes, Class<K> keyType) {
+	protected <K> Set<K> deserializeKeyBytes(String dbName, Set<byte[]> keyBytes, Class<K> keyType) {
 		if (CollectionUtils.isEmpty(keyBytes))
 			return null;
 		
 		Serializer keySerializer = selectKeySerializer(dbName);
-		Set<K> keys = CollectionUtils.newLinkedHashSet();
+		Set<K> keys = CollectionUtils.newLinkedHashSet(keyBytes.size());
 		if (keySerializer.isTypedSerializer()) {
 			TypedSerializer keyTypedSerializer = (TypedSerializer) keySerializer;
 			for (byte[] keyByte : keyBytes) {
@@ -471,27 +514,6 @@ public abstract class RedisSupport extends RedisAccessor {
 	}
 	
 	/**
-	 * 将指定库的哈希值字节反序列后返回
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param hashValueByte
-	 * @param hashValueType
-	 * @return
-	 */
-	protected <V> V deserializeHashValueByte(String dbName, byte[] hashValueByte, Class<V> hashValueType) {
-		if (ArrayUtils.isEmpty(hashValueByte))
-			return null;
-		
-		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
-		if (hashValueSerializer.isTypedSerializer())
-			return ((TypedSerializer) hashValueSerializer).deserialize(hashValueByte, hashValueType);
-		
-		V value = hashValueSerializer.deserialize(hashValueByte);
-		PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
-		return propertyEditor != null ? PropertyConverter.converte(propertyEditor, value, hashValueType) : value;
-	}
-	
-	/**
 	 * 将指定库的多个值字节反序列化到列表中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
@@ -505,7 +527,7 @@ public abstract class RedisSupport extends RedisAccessor {
 			return null;
 		
 		Serializer valueSerializer = selectValueSerializer(dbName);
-		List<V> list = CollectionUtils.newArrayList();
+		List<V> list = CollectionUtils.newArrayList(valueBytes.size());
 		if (valueSerializer.isTypedSerializer()) {
 			TypedSerializer valueTypedSerializer = (TypedSerializer) valueSerializer;
 			for (byte[] valueByte : valueBytes) {
@@ -536,12 +558,13 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> Set<V> deserializeValueByteToSet(String dbName, Collection<byte[]> valueBytes, Class<V> valueType) {
+	protected <V> Set<V> deserializeValueBytesToSet(String dbName, Collection<byte[]> valueBytes, Class<V> valueType) {
 		if (CollectionUtils.isEmpty(valueBytes))
 			return null;
 		
 		Serializer valueSerializer = selectValueSerializer(dbName);
-		Set<V> set = CollectionUtils.newLinkedHashSet();
+		Set<V> set = CollectionUtils.newLinkedHashSet(valueBytes.size());
+		
 		if (valueSerializer.isTypedSerializer()) {
 			TypedSerializer typedValueSerializer = (TypedSerializer) valueSerializer;
 			for (byte[] valueByte : valueBytes) {
@@ -564,40 +587,41 @@ public abstract class RedisSupport extends RedisAccessor {
 	}
 	
 	/**
-	 * 将指定库的多个哈希值字节反序列化到列表中
+	 * 将指定库的多个域字节反序列化到集合中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
-	 * @param hashValueBytes
-	 * @param hashValueType
+	 * @param hashKeyBytes
+	 * @param hashKeyBytes
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> deserializeHashValueBytesToList(String dbName, List<byte[]> hashValueBytes, Class<V> hashValueType) {
-		if (CollectionUtils.isEmpty(hashValueBytes))
+	protected <H> Set<H> deserializeHashKeyBytes(String dbName, Set<byte[]> hashKeyBytes, Class<H> hashKeyType) {
+		if (CollectionUtils.isEmpty(hashKeyBytes))
 			return null;
 		
-		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
-		List<V> list = CollectionUtils.newArrayList();
+		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
+		Set<H> set = CollectionUtils.newLinkedHashSet(hashKeyBytes.size());
 		
-		if (hashValueSerializer.isTypedSerializer()) {
-			TypedSerializer hashValueTypedSerializer = (TypedSerializer) hashValueSerializer;
-			for (byte[] hashValueByte : hashValueBytes) {
-				list.add(hashValueTypedSerializer.deserialize(hashValueByte, hashValueType));
+		if (hashKeySerializer.isTypedSerializer()) {
+			TypedSerializer hashKeyTypedSerializer = (TypedSerializer) hashKeySerializer;
+			for (byte[] hashKeyByte : hashKeyBytes) {
+				set.add(hashKeyTypedSerializer.deserialize(hashKeyByte, hashKeyType));
 			}
 		} else {
-			PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
+			PropertyEditor propertyEditor = propertyConverter.find(hashKeyType);
 			if (propertyEditor != null) {
-				for (byte[] hashValueByte : hashValueBytes) {
-					V value = hashValueSerializer.deserialize(hashValueByte);
-					list.add(PropertyConverter.converte(propertyEditor, value, hashValueType));
+				for (byte[] hashKeyByte : hashKeyBytes) {
+					H hashKey = hashKeySerializer.deserialize(hashKeyByte);
+					set.add(PropertyConverter.converte(propertyEditor, hashKey, hashKeyType));
 				}
 			} else {
-				for (byte[] hashValueByte : hashValueBytes) {
-					list.add((V) hashValueSerializer.deserialize(hashValueByte));
+				for (byte[] hashKeyByte : hashKeyBytes) {
+					set.add((H) hashKeySerializer.deserialize(hashKeyByte));
 				}
 			}
 		}
-		return list;
+		
+		return set;
 	}
 	
 	/**
@@ -610,7 +634,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <H, V> Map<H, V> deserializeHashKeyValueBytesToMap(String dbName, Map<byte[], byte[]> hashKeyValueBytes,
+	protected <H, V> Map<H, V> deserializeHashKeyValueBytes(String dbName, Map<byte[], byte[]> hashKeyValueBytes,
 			Class<H> hashKeyType, Class<V> hashValueType) {
 		
 		if (MapUtils.isEmpty(hashKeyValueBytes))
@@ -618,7 +642,7 @@ public abstract class RedisSupport extends RedisAccessor {
 		
 		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
 		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
-		Map<H, V> map = MapUtils.newLinkedHashMap();
+		Map<H, V> map = MapUtils.newLinkedHashMap(hashKeyValueBytes.size());
 		
 		if (MapUtils.isNotEmpty(hashKeyValueBytes)) {
 			Set<Entry<byte[], byte[]>> entrySet = hashKeyValueBytes.entrySet();
@@ -693,41 +717,61 @@ public abstract class RedisSupport extends RedisAccessor {
 	}
 	
 	/**
-	 * 将指定库的多个域字节反序列化到集合中
+	 * 将指定库的哈希值字节反序列后返回
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
-	 * @param hashKeyBytes
-	 * @param hashKeyBytes
+	 * @param hashValueByte
+	 * @param hashValueType
+	 * @return
+	 */
+	protected <V> V deserializeHashValueByte(String dbName, byte[] hashValueByte, Class<V> hashValueType) {
+		if (ArrayUtils.isEmpty(hashValueByte))
+			return null;
+		
+		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
+		if (hashValueSerializer.isTypedSerializer())
+			return ((TypedSerializer) hashValueSerializer).deserialize(hashValueByte, hashValueType);
+		
+		V value = hashValueSerializer.deserialize(hashValueByte);
+		PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
+		return propertyEditor != null ? PropertyConverter.converte(propertyEditor, value, hashValueType) : value;
+	}
+	
+	/**
+	 * 将指定库的多个哈希值字节反序列化到列表中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param hashValueBytes
+	 * @param hashValueType
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <H> Set<H> deserializeHashKeyBytesToSet(String dbName, Set<byte[]> hashKeyBytes, Class<H> hashKeyType) {
-		if (CollectionUtils.isEmpty(hashKeyBytes))
+	protected <V> List<V> deserializeHashValueBytesToList(String dbName, List<byte[]> hashValueBytes, Class<V> hashValueType) {
+		if (CollectionUtils.isEmpty(hashValueBytes))
 			return null;
 		
-		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
-		Set<H> set = CollectionUtils.newLinkedHashSet();
+		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
+		List<V> list = CollectionUtils.newArrayList(hashValueBytes.size());
 		
-		if (hashKeySerializer.isTypedSerializer()) {
-			TypedSerializer hashKeyTypedSerializer = (TypedSerializer) hashKeySerializer;
-			for (byte[] hashKeyByte : hashKeyBytes) {
-				set.add(hashKeyTypedSerializer.deserialize(hashKeyByte, hashKeyType));
+		if (hashValueSerializer.isTypedSerializer()) {
+			TypedSerializer hashValueTypedSerializer = (TypedSerializer) hashValueSerializer;
+			for (byte[] hashValueByte : hashValueBytes) {
+				list.add(hashValueTypedSerializer.deserialize(hashValueByte, hashValueType));
 			}
 		} else {
-			PropertyEditor propertyEditor = propertyConverter.find(hashKeyType);
+			PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
 			if (propertyEditor != null) {
-				for (byte[] hashKeyByte : hashKeyBytes) {
-					H hashKey = hashKeySerializer.deserialize(hashKeyByte);
-					set.add(PropertyConverter.converte(propertyEditor, hashKey, hashKeyType));
+				for (byte[] hashValueByte : hashValueBytes) {
+					V value = hashValueSerializer.deserialize(hashValueByte);
+					list.add(PropertyConverter.converte(propertyEditor, value, hashValueType));
 				}
 			} else {
-				for (byte[] hashKeyByte : hashKeyBytes) {
-					set.add((H) hashKeySerializer.deserialize(hashKeyByte));
+				for (byte[] hashValueByte : hashValueBytes) {
+					list.add((V) hashValueSerializer.deserialize(hashValueByte));
 				}
 			}
 		}
-		
-		return set;
+		return list;
 	}
 
 }

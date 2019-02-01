@@ -21,7 +21,6 @@ package org.sniper.nosql.redis.command;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.sniper.nosql.redis.enums.DataType;
@@ -201,41 +200,7 @@ public interface RedisKeyCommands {
 	 * @return
 	 */
 	public <K> Boolean exists(String dbName, K key);
-	
-	/**
-	 * 判断当前库中多个键是否存在
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keys
-	 * @return
-	 */
-	public <K> Map<K, Boolean> exists(K[] keys);
-	
-	/**
-	 * 判断指定库中多个键是否存在
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param keys
-	 * @return
-	 */
-	public <K> Map<K, Boolean> exists(String dbName, K[] keys);
-	
-	/**
-	 * 判断当前库中多个键是否存在
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keys
-	 * @return
-	 */
-	public <K> Map<K, Boolean> exists(Collection<K> keys);
-	
-	/**
-	 * 判断指定库中多个键是否存在
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param keys
-	 * @return
-	 */
-	public <K> Map<K, Boolean> exists(String dbName, Collection<K> keys);
-	
+			
 	/**
 	 * 设置当前库中指定键的过期秒数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

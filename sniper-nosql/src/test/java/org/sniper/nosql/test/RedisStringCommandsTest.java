@@ -54,18 +54,24 @@ public class RedisStringCommandsTest extends AbstractRedisTest {
 	@Test
 	public void testStringOperatin() {
 		Object result;
-		String name = "dubin";
+//		String name = "dubin";
+//		
+//		redisCommands.set(key, name);
+//		result = redisCommands.get(key);
+//		assertEquals(name, result);
+//		System.out.println(result);
+//		
+//		int age = 36;
+//		
+//		redisCommands.setIn("string", key, age);
+//		result = redisCommands.get("string", key, int.class);
+//		assertEquals(age, result);
+//		System.out.println(result);
 		
-		redisCommands.set(key, name);
+		String key = "";
+		String value = "";
+		redisCommands.set(key, value);
 		result = redisCommands.get(key);
-		assertEquals(name, result);
-		System.out.println(result);
-		
-		int age = 36;
-		
-		redisCommands.setIn("string", key, age);
-		result = redisCommands.get("string", key, int.class);
-		assertEquals(age, result);
 		System.out.println(result);
 	}
 	
@@ -104,7 +110,7 @@ public class RedisStringCommandsTest extends AbstractRedisTest {
 		System.out.println(result);
 	}
 	
-	@Test
+//	@Test
 	public void testSetNX() {
 		redisCommands.setNX("lock_1", "lock", expireTime);
 		redisCommands.setNX("lock_2", "lock", expireTime, TimeUnit.MILLISECONDS);

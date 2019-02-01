@@ -160,35 +160,29 @@ public class CodecUtils {
 	 * @param str
 	 * @return
 	 */
-	public static String unicodeDecode(String text) { 
+	public static String unicodeDecode(String text) {
 		if (StringUtils.isEmpty(text))
 			return StringUtils.EMPTY;
-		
-//		Pattern pattern = RegexUtils.getPattern("[0-9A-Fa-f]{4}"); 
-        StringBuilder result = new StringBuilder(); 
-        int length = text.length();  
-        
-        for (int i = 0; i < length; i++) {  
-            char c1 = text.charAt(i);  
-            if (c1 == '\\' && i < length - 1) {  
-                char c2 = text.charAt(++i);  
-                if ((c2 == 'u' || c2 == 'U') && i <= length - 5) {  
-                    String temp = text.substring(i + 1, i + 5);  
-//                  Matcher matcher = pattern.matcher(temp);  
-//                  if (matcher.find()) {  
-                    result.append((char) Integer.parseInt(temp, 16));  
-                    i = i + 4;  
-//                  } else {  
-//                  result.append(c1).append(c2);  
-//                  }  
-                } else 
-                	result.append(c1).append(c2);  
-            } else 
-            	result.append(c1);  
-        }  
-        
-        return result.toString();  
-    }
+
+		StringBuilder result = new StringBuilder();
+		int length = text.length();
+
+		for (int i = 0; i < length; i++) {
+			char c1 = text.charAt(i);
+			if (c1 == '\\' && i < length - 1) {
+				char c2 = text.charAt(++i);
+				if ((c2 == 'u' || c2 == 'U') && i <= length - 5) {
+					String temp = text.substring(i + 1, i + 5);
+					result.append((char) Integer.parseInt(temp, 16));
+					i = i + 4;
+				} else
+					result.append(c1).append(c2);
+			} else
+				result.append(c1);
+		}
+
+		return result.toString();
+	}
 	
 	/**
 	 * 获取字符串的字节数组
@@ -221,11 +215,11 @@ public class CodecUtils {
 	/**
 	 * 将字节数组还原成源字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param textBytes
+	 * @param bytes
 	 * @return
 	 */
-	public static String bytesToString(byte[] textBytes) {
-		return bytesToString(textBytes, null);
+	public static String bytesToString(byte[] bytes) {
+		return bytesToString(bytes, null);
 	}
 	
 	/**
@@ -235,15 +229,14 @@ public class CodecUtils {
 	 * @param encoding
 	 * @return
 	 */
-	public static String bytesToString(byte[] textBytes, String encoding) {
-		if (ArrayUtils.isEmpty(textBytes))
+	public static String bytesToString(byte[] bytes, String encoding) {
+		if (bytes == null)
 			return null;
 		
 		try {
-			return StringUtils.isNotBlank(encoding) ? new String(textBytes,
-					encoding) : new String(textBytes);
+			return StringUtils.isNotBlank(encoding) ? new String(bytes, encoding) : new String(bytes);
 		} catch (UnsupportedEncodingException e) {
-			return bytesToString(textBytes, DEFAULT_ENCODING);
+			return bytesToString(bytes, DEFAULT_ENCODING);
 		} 
 	}
 	
@@ -285,14 +278,20 @@ public class CodecUtils {
 	 * @return
 	 */
 	public static String bytesToHex(byte[] bytes) {
+		if (bytes == null)
+			return null;
+		
+		if (bytes.length == 0)
+			return StringUtils.EMPTY;
+		
 		StringBuilder hexString = new StringBuilder();
-		String stmp = "";
+		String temp;
 		for (int n = 0; n < bytes.length; n++) {
-			stmp = (Integer.toHexString(bytes[n] & 0XFF));
-			if (stmp.length() == 1)
+			temp = (Integer.toHexString(bytes[n] & 0XFF));
+			if (temp.length() == 1)
 				hexString.append("0");
 			
-			hexString.append(stmp);
+			hexString.append(temp);
 		}
 		
 		return hexString.toString();

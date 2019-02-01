@@ -21,7 +21,9 @@ package org.sniper.nosql.redis.spring;
 import java.beans.PropertyEditor;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import org.sniper.beans.PropertyConverter;
 import org.sniper.commons.util.CollectionUtils;
@@ -39,6 +41,7 @@ import org.sniper.nosql.redis.serializer.SpringRedisSerializerProxy;
 import org.sniper.serialization.Serializer;
 import org.sniper.serialization.TypedSerializer;
 import org.springframework.data.redis.connection.DefaultSortParameters;
+import org.springframework.data.redis.connection.DefaultTuple;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisListCommands.Position;
@@ -167,8 +170,8 @@ public abstract class SpringRedisSupport extends RedisSupport {
 		try {
 			// 执行当前对象的xxxTypeList方法后返回结果，其中xxx表示DataType枚举的code值
 			return (List<V>) ReflectionUtils.invokeMethod(this, dataType.code() + "TypeList", 
-					new Class<?>[] { RedisConnection.class, String.class, byte[].class, Class.class},
-					new Object[] { connection, dbName, targetKey, valueType });
+					new Class<?>[]{RedisConnection.class, String.class, byte[].class, Class.class},
+					new Object[]{connection, dbName, targetKey, valueType });
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -301,6 +304,28 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	}
 	
 	/**
+	 * 序列化带排名值的成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param scoreMembers
+	 * @return
+	 */
+	protected <V> Set<Tuple> serializeScoreMembers(String dbName, Map<V, Double> scoreMembers) {
+		Serializer valueSerializer = selectValueSerializer(dbName);
+		
+		Set<Tuple> tuples = CollectionUtils.newLinkedHashSet();
+		Set<Entry<V, Double>> entrySet = scoreMembers.entrySet();
+		for (Entry<V, Double> entry : entrySet) {
+			V member = entry.getKey();
+			Double score = entry.getValue();
+			if (member != null && score != null)
+				tuples.add(new DefaultTuple(valueSerializer.serialize(member), score));
+		}
+		
+		return tuples;
+	}
+	
+	/**
 	 * 反序列Spring的元组结果集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
@@ -309,7 +334,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> Set<ZSetTuple<V>> deserializeTuplesToSet(String dbName, Set<Tuple> tuples, Class<V> valueType) {
+	protected <V> Set<ZSetTuple<V>> deserializeTuples(String dbName, Set<Tuple> tuples, Class<V> valueType) {
 		if (CollectionUtils.isEmpty(tuples))
 			return null;
 		

@@ -57,11 +57,6 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 		
 		// 2表示为在当前方法内临时添加的两个空键值
 		assertEquals(scoreMembers.size() - 2, redisCommands.zAdd(key, scoreMembers).intValue());
-		
-		redisCommands.del(key);
-		Map<Object, Boolean> result = redisCommands.zAdds(key, scoreMembers);
-		assertEquals(scoreMembers.size(), result.size());
-		System.out.println(result);
 	}
 	
 //	@Test

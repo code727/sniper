@@ -116,47 +116,7 @@ public interface RedisSortedSetCommands {
 	 * @return
 	 */
 	public <K, V> Long zAdd(String dbName, K key, Map<V, Double> scoreMembers, long expireSeconds);
-	
-	/**
-	 * 在当前库中执行zAdd命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param scoreMembers
-	 * @return
-	 */
-	public <K, V> Map<V, Boolean> zAdds(K key, Map<V, Double> scoreMembers);
-	
-	/**
-	 * 在当前库中执行zAdd命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param key
-	 * @param scoreMembers
-	 * @param expireSeconds
-	 * @return
-	 */
-	public <K, V> Map<V, Boolean> zAdds(K key, Map<V, Double> scoreMembers, long expireSeconds);
-	
-	/**
-	 * 在指定库中执行zAdd命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param scoreMembers
-	 * @return
-	 */
-	public <K, V> Map<V, Boolean> zAdds(String dbName, K key, Map<V, Double> scoreMembers);
-	
-	/**
-	 * 在指定库中执行zAdd命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dbName
-	 * @param key
-	 * @param scoreMembers
-	 * @param expireSeconds
-	 * @return
-	 */
-	public <K, V> Map<V, Boolean> zAdds(String dbName, K key, Map<V, Double> scoreMembers, long expireSeconds);
-	
+		
 	/**
 	 * 在当前库中执行zCard命令，获取有序集合键对应的元素个数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -1356,7 +1316,7 @@ public interface RedisSortedSetCommands {
 	public <K> Long zInterStore(String dbName, K destKey, Collection<K> keys, ZStoreOptional option, long expireSeconds);
 	
 	/**
-	 * 在当前库中执行zIncrBy命令，为指定的键集成员的socre值加上(increment>0)/减去(increment<0)增量
+	 * 在当前库中执行zIncrBy命令，为指定键集成员的socre值加上(increment>0)/减去(increment<0)增量
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @param increment
@@ -1366,7 +1326,7 @@ public interface RedisSortedSetCommands {
 	public <K, V> Double zIncrBy(K key, double increment, V member);
 	
 	/**
-	 * 在当前库中执行zIncrBy命令，为指定的键集成员的socre值加上(increment>0)/减去(increment<0)增量
+	 * 在当前库中执行zIncrBy命令，为指定键集成员的socre值加上(increment>0)/减去(increment<0)增量
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dbName
 	 * @param key
