@@ -20,17 +20,15 @@ package org.sniper.nosql.redis.spring;
 
 import java.beans.PropertyEditor;
 import java.lang.reflect.Field;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.sniper.beans.PropertyConverter;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.ReflectionUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.command.RedisSupport;
-import org.sniper.nosql.redis.enums.DataType;
 import org.sniper.nosql.redis.enums.ListPosition;
 import org.sniper.nosql.redis.enums.ZStoreAggregate;
 import org.sniper.nosql.redis.model.DefaultZSetTuple;
@@ -152,120 +150,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 			connection.closePipeline();
 		}
 	}
-			
-	/**
-	 * 获取不同类型键对应的结果列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param dataType
-	 * @param connection
-	 * @param dbName
-	 * @param targetKey
-	 * @param valueType
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <V> List<V> listByDataType(DataType dataType, RedisConnection connection, 
-			String dbName, byte[] targetKey, Class<V> valueType) {
-		
-		try {
-			// 执行当前对象的xxxTypeList方法后返回结果，其中xxx表示DataType枚举的code值
-			return (List<V>) ReflectionUtils.invokeMethod(this, dataType.code() + "TypeList", 
-					new Class<?>[]{RedisConnection.class, String.class, byte[].class, Class.class},
-					new Object[]{connection, dbName, targetKey, valueType });
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	/**
-	 * 获取none(不存在)键类型对应的数据列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param connection
-	 * @param dbName
-	 * @param targetKey
-	 * @param valueType
-	 * @return
-	 */
-	protected <V> List<V> noneTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
-		return null;
-	}
-	
-	/**
-	 * 获取string(字符串)键类型对应的数据列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param connection
-	 * @param dbName
-	 * @param targetKey
-	 * @param valueType
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected <V> List<V> stringTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
-		Serializer valueSerializer = selectValueSerializer(dbName);
-		List<V> result = CollectionUtils.newArrayList();
-		if (valueSerializer.isTypedSerializer()) 
-			result.add(((TypedSerializer) valueSerializer).deserialize(connection.get(targetKey), valueType));
-		else 
-			result.add((V) valueSerializer.deserialize(connection.get(targetKey)));
-		
-		return result;
-	}
-	
-	/**
-	 * 获取list(列表)键类型对应的数据列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param connection
-	 * @param dbName
-	 * @param targetKey
-	 * @param valueType
-	 * @return
-	 */
-	protected <V> List<V> listTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
-		return deserializeValueBytesToList(dbName, connection.lRange(targetKey, 0, -1), valueType);
-	}
-	
-	/**
-	 * 获取set(集合)键类型对应的数据列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param connection
-	 * @param dbName
-	 * @param targetKey
-	 * @param valueType
-	 * @return
-	 */
-	protected <V> List<V> setTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
-		return deserializeValueBytesToList(dbName, connection.sMembers(targetKey), valueType);
-	}
-	
-	/**
-	 * 获取zset(有序集合)键类型对应的数据列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param connection
-	 * @param dbName
-	 * @param targetKey
-	 * @param valueType
-	 * @return
-	 */
-	protected <V> List<V> zsetTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
-		Set<byte[]> resultBytes = connection.zRange(targetKey, 0, -1);
-		return deserializeValueBytesToList(dbName, resultBytes, valueType);
-	}
-	
-	/**
-	 * 获取hash(哈希表)键类型对应的数据列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param connection
-	 * @param dbName
-	 * @param targetKey
-	 * @param valueType
-	 * @return
-	 */
-	protected <V> List<V> hashTypeList(RedisConnection connection, String dbName, byte[] targetKey, Class<V> valueType) {
-		// 返回当前键所有域对应的值列表
-		return deserializeHashValueBytesToList(dbName, connection.hVals(targetKey), valueType);
-	}
-	
+					
 	/**
 	 * 将ListPosition枚举转换为Spring的列表位置枚举
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.IOUtils;
 import org.sniper.serialization.AbstractSerializer;
 import org.sniper.serialization.SerializationException;
@@ -60,6 +61,9 @@ public class JdkSerializer extends AbstractSerializer {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T deserialize(byte[] bytes) throws SerializationException {
+		if (ArrayUtils.isEmpty(bytes))
+			return null;
+		
 		ByteArrayInputStream byteArrayInputStream = null;
 		ObjectInputStream objectInputStream = null;
 		try {
@@ -78,5 +82,5 @@ public class JdkSerializer extends AbstractSerializer {
 			}
 		}
 	}
-	
+		
 }

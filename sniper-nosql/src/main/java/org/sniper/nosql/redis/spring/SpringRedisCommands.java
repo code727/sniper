@@ -257,7 +257,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeValueBytesToList(dbName, valueBytes, valueType);
+		return deserializeValueBytes(dbName, valueBytes, valueType);
 	}
 	
 	@Override
@@ -320,7 +320,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 		});
 		
 		// 第三步：将多个值字节反序列化到列表中
-		return deserializeValueBytesToList(dbName, valueBytes, valueType);
+		return deserializeValueBytes(dbName, valueBytes, valueType);
 	}
 	
 	@Override
@@ -581,7 +581,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeValueBytesToList(dbName, valueBytes, valueType);
+		return deserializeValueBytes(dbName, valueBytes, valueType);
 	}
 
 	@Override
@@ -1059,7 +1059,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeValueBytesToList(dbName, valueBytes, valueType);
+		return deserializeValueBytes(dbName, valueBytes, valueType);
 	}
 	
 	@Override
@@ -1156,7 +1156,6 @@ public class SpringRedisCommands extends SpringRedisSupport {
 				
 				// 将源列表中最后一个元素出列后存入目标列表
 				byte[] destValueByte = connection.rPopLPush(srcKeyByte, destKeyByte);
-				// TODO 测试空判断
 				if (destValueByte != null)
 					// 只有当将源列表中出列的元素不为空时才设置目标键的过期时间，因为当为空时，表示源列表可能根本不存在
 					setExpireTime(connection, repository, destKeyByte, expireSeconds);
@@ -1192,13 +1191,14 @@ public class SpringRedisCommands extends SpringRedisSupport {
 		AssertUtils.assertNotEmpty(members, "Members must not be empty for command [sAdd]");
 				
 		final byte[] keyByte = serializeKey(dbName, key);
+		final byte[][] memberBytes = serializeValues(dbName, members);
 		return getRedisTemplate().execute(new RedisCallback<Long>() {
 			
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
 				
-				Long count = connection.sAdd(keyByte, serializeValues(dbName, members));
+				Long count = connection.sAdd(keyByte, memberBytes);
 				if (count != null && count > 0)
 					setExpireTime(connection, repository, keyByte, expireSeconds);
 				
@@ -1238,7 +1238,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeValueBytesToSet(dbName, valueBytes, valueType);
+		return deserializeValueBytes(dbName, valueBytes, valueType);
 	}
 	
 	@Override
@@ -1278,7 +1278,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeValueBytesToSet(dbName, valueBytes, valueType);
+		return deserializeValueBytes(dbName, valueBytes, valueType);
 	}
 	
 	@Override
@@ -1319,7 +1319,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeValueBytesToSet(dbName, valueBytes, valueType);
+		return deserializeValueBytes(dbName, valueBytes, valueType);
 	}
 	
 	@Override
@@ -1376,7 +1376,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeValueBytesToSet(dbName, memberBytes, valueType);
+		return deserializeValueBytes(dbName, memberBytes, valueType);
 	}
 
 	public <K, T, V> Boolean sMove(final String dbName, final K srcKey, final T destKey, final V member, final long expireSeconds) {
@@ -1550,7 +1550,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeValueBytesToSet(dbName, valueBytes, valueType);
+		return deserializeValueBytes(dbName, valueBytes, valueType);
 	}
 	
 	@Override
@@ -1571,7 +1571,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeValueBytesToSet(dbName, valueBytes, valueType);
+		return deserializeValueBytes(dbName, valueBytes, valueType);
 	}
 	
 	@Override
@@ -1610,7 +1610,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeValueBytesToSet(dbName, valueBytes, valueType);
+		return deserializeValueBytes(dbName, valueBytes, valueType);
 	}
 
 	@Override
@@ -1631,7 +1631,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeValueBytesToSet(dbName, valueBytes, valueType);
+		return deserializeValueBytes(dbName, valueBytes, valueType);
 	}
 
 	@Override

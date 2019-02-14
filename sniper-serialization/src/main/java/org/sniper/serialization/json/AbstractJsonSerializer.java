@@ -18,7 +18,6 @@
 
 package org.sniper.serialization.json;
 
-import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.StringUtils;
@@ -59,7 +58,9 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	
 	@Override
 	public <T> T deserialize(String text, Class<T> type) throws SerializationException {
-		AssertUtils.assertNotBlank(text, "JSON string must not be null or blank");
+		if (StringUtils.isBlank(text))
+			return null;
+		
 		try {
 			if (isJsonArray(text)) {
 				if (ClassUtils.isCollection(type))
@@ -87,14 +88,13 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	}
 		
 	/**
-	 * 从字符串中判断出是否为一个JSON数组
+	 * 判断字符串是否为一个JSON数组
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param jsonString
 	 * @return
 	 */
-	protected boolean isJsonArray(String jsonString) {
-		return StringUtils.startsWith(jsonString, StringUtils.LEFT_BRACKET)
-				&& StringUtils.endsWith(jsonString, StringUtils.RIGHT_BRACKET);
+	private boolean isJsonArray(String jsonString) {
+		return jsonString.startsWith(StringUtils.LEFT_BRACKET) && jsonString.endsWith(StringUtils.RIGHT_BRACKET);
 	}
 		
 	/**

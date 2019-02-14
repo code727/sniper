@@ -19,7 +19,6 @@
 package org.sniper.nosql.redis.command;
 
 import java.beans.PropertyEditor;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +27,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.sniper.beans.PropertyConverter;
-import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.nosql.redis.RedisRepository;
@@ -361,14 +359,14 @@ public abstract class RedisSupport extends RedisAccessor {
 		Serializer keySerializer = selectKeySerializer(dbName);
 		Serializer valueSerializer = selectValueSerializer(dbName);
 		
-		Map<byte[], byte[]> result = MapUtils.newHashMap(keyValues.size());
+		Map<byte[], byte[]> keyValueBytes = MapUtils.newHashMap(keyValues.size());
 		Iterator<Entry<K, V>> iterator = keyValues.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<K, V> entry = iterator.next();
-			result.put(keySerializer.serialize(entry.getKey()),
+			keyValueBytes.put(keySerializer.serialize(entry.getKey()),
 					valueSerializer.serialize(entry.getValue()));
 		}
-		return result;
+		return keyValueBytes;
 	}
 	
 	/**
@@ -422,13 +420,14 @@ public abstract class RedisSupport extends RedisAccessor {
 		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
 		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
 		
-		Map<byte[], byte[]> result = MapUtils.newHashMap(hashKeyValues.size());
+		Map<byte[], byte[]> hashKeyValueBytes = MapUtils.newHashMap(hashKeyValues.size());
 		Iterator<Entry<H, V>> iterator = hashKeyValues.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<H, V> entry = iterator.next();
-			result.put(hashKeySerializer.serialize(entry.getKey()), hashValueSerializer.serialize(entry.getValue()));
+			hashKeyValueBytes.put(hashKeySerializer.serialize(entry.getKey()),
+					hashValueSerializer.serialize(entry.getValue()));
 		}
-		return result;
+		return hashKeyValueBytes;
 	}
 	
 	/**
@@ -437,13 +436,9 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @param dbName
 	 * @param keyByte
 	 * @param keyType
-	 * @return
+	 * @return 
 	 */
 	protected <K> K deserializeKeyByte(String dbName, byte[] keyByte, Class<K> keyType) {
-		// TODO byte数组判断方式不合理，其他deserializeXXX方法也有同样问题
-		if (ArrayUtils.isEmpty(keyByte))
-			return null;
-		
 		Serializer keySerializer = selectKeySerializer(dbName);
 		if (keySerializer.isTypedSerializer()) {
 			TypedSerializer keyTypedSerializer = (TypedSerializer) keySerializer;
@@ -501,9 +496,6 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @return
 	 */
 	protected <V> V deserializeValueByte(String dbName, byte[] valueByte, Class<V> valueType) {
-		if (ArrayUtils.isEmpty(valueByte))
-			return null;
-		
 		Serializer valueSerializer = selectValueSerializer(dbName);
 		if (valueSerializer.isTypedSerializer())
 			return ((TypedSerializer) valueSerializer).deserialize(valueByte, valueType);
@@ -522,7 +514,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> deserializeValueBytesToList(String dbName, Collection<byte[]> valueBytes, Class<V> valueType) {
+	protected <V> List<V> deserializeValueBytes(String dbName, List<byte[]> valueBytes, Class<V> valueType) {
 		if (CollectionUtils.isEmpty(valueBytes))
 			return null;
 		
@@ -558,13 +550,12 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> Set<V> deserializeValueBytesToSet(String dbName, Collection<byte[]> valueBytes, Class<V> valueType) {
+	protected <V> Set<V> deserializeValueBytes(String dbName, Set<byte[]> valueBytes, Class<V> valueType) {
 		if (CollectionUtils.isEmpty(valueBytes))
 			return null;
 		
 		Serializer valueSerializer = selectValueSerializer(dbName);
 		Set<V> set = CollectionUtils.newLinkedHashSet(valueBytes.size());
-		
 		if (valueSerializer.isTypedSerializer()) {
 			TypedSerializer typedValueSerializer = (TypedSerializer) valueSerializer;
 			for (byte[] valueByte : valueBytes) {
@@ -725,9 +716,6 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @return
 	 */
 	protected <V> V deserializeHashValueByte(String dbName, byte[] hashValueByte, Class<V> hashValueType) {
-		if (ArrayUtils.isEmpty(hashValueByte))
-			return null;
-		
 		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
 		if (hashValueSerializer.isTypedSerializer())
 			return ((TypedSerializer) hashValueSerializer).deserialize(hashValueByte, hashValueType);

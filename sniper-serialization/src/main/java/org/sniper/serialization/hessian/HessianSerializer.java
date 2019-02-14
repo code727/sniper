@@ -23,7 +23,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import org.sniper.commons.util.ArrayUtils;
-import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.Base64Utils;
 import org.sniper.commons.util.IOUtils;
 import org.sniper.serialization.AbstractTypedSerializer;
@@ -38,11 +37,9 @@ import com.caucho.hessian.io.HessianOutput;
  * @version 1.0
  */
 public class HessianSerializer extends AbstractTypedSerializer {
-
+	
 	@Override
 	public <T> byte[] serialize(T t) throws SerializationException {
-		AssertUtils.assertNotNull(t, "Serialized object must not be null");
-		
 		ByteArrayOutputStream byteArrayOutputStream = null;
 		HessianOutput hessianOutput = null;  
 		try {
@@ -64,7 +61,8 @@ public class HessianSerializer extends AbstractTypedSerializer {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T deserialize(byte[] bytes, Class<T> targetType) throws SerializationException {
-		AssertUtils.assertTrue(ArrayUtils.isNotEmpty(bytes), "Deserialized byte array must not be null or empty");
+		if (ArrayUtils.isEmpty(bytes))
+			return null;
 		
 		ByteArrayInputStream byteArrayInputStream = null;  
 	    HessianInput hessianInput = null;
@@ -87,5 +85,5 @@ public class HessianSerializer extends AbstractTypedSerializer {
 	public <T> T deserialize(String text, Class<T> targetType) throws SerializationException {
 		return deserialize(Base64Utils.decodeToBytes(text), targetType);
 	}
-
+	
 }

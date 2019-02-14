@@ -32,6 +32,14 @@ import org.sniper.nosql.redis.enums.ListPosition;
 public class RedisListCommandsTest extends AbstractRedisTest {
 	
 	@Test
+	public void test() {
+		String value = "";
+		long count = redisCommands.lPush(key, value);
+		assertEquals(1L, count);
+		assertEquals(value, redisCommands.rPopLPush(key, keys[0]));
+	}
+	
+//	@Test
 	public void testllInsert() {
 		// key不存在时返回0
 		assertEquals(0L, redisCommands.lInsert(key, ListPosition.BEFORE, "b", "a"));
