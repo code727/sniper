@@ -26,6 +26,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sniper.beans.PropertyConverter;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
@@ -33,6 +35,7 @@ import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.RedisRepositoryManager;
 import org.sniper.serialization.Serializer;
 import org.sniper.serialization.TypedSerializer;
+import org.sniper.serialization.jdk.JdkSerializer;
 import org.sniper.serialization.jdk.StringSerializer;
 
 /**
@@ -41,6 +44,8 @@ import org.sniper.serialization.jdk.StringSerializer;
  * @version 1.0
  */
 public abstract class RedisSupport extends RedisAccessor {
+	
+	protected final Logger logger;
 	
 	/** set命令名称 */
 	protected static final String SET_COMMAND_NAME;
@@ -66,6 +71,9 @@ public abstract class RedisSupport extends RedisAccessor {
 	/** 全局默认的字符串序列化器 */
 	protected final Serializer stringSerializer = new StringSerializer();
 	
+	/** 全局默认的序列化器 */
+	private Serializer globalDefaultSerializer;
+	
 	/** 全局键序列化器 */
 	private Serializer globalKeySerializer;
 	
@@ -81,11 +89,18 @@ public abstract class RedisSupport extends RedisAccessor {
 	/** 全局默认的属性转换器 */
 	private PropertyConverter propertyConverter = new PropertyConverter();
 	
+	/** 预留，是否维持原子性的操作 */
+	private boolean keepAtomic;
+	
 	static {
 		SET_COMMAND_NAME = "set";
 		NX_COMMAND_BYTES = "NX".getBytes();
 		EX_COMMAND_BYTES = "EX".getBytes();
 		PX_COMMAND_BYTES = "PX".getBytes();
+	}
+	
+	protected RedisSupport() {
+		this.logger = LoggerFactory.getLogger(this.getClass());
 	}
 	
 	public RedisRepositoryManager getRepositoryManager() {
@@ -110,6 +125,14 @@ public abstract class RedisSupport extends RedisAccessor {
 
 	public void setPropertyConverter(PropertyConverter propertyConverter) {
 		this.propertyConverter = propertyConverter;
+	}
+	
+	public Serializer getGlobalDefaultSerializer() {
+		return globalDefaultSerializer;
+	}
+
+	public void setGlobalDefaultSerializer(Serializer globalDefaultSerializer) {
+		this.globalDefaultSerializer = globalDefaultSerializer;
 	}
 
 	public Serializer getGlobalKeySerializer() {
@@ -143,11 +166,28 @@ public abstract class RedisSupport extends RedisAccessor {
 	public void setGlobalHashValueSerializer(Serializer globalHashValueSerializer) {
 		this.globalHashValueSerializer = globalHashValueSerializer;
 	}
-		
+	
+	public boolean isKeepAtomic() {
+		return keepAtomic;
+	}
+
+	public void setKeepAtomic(boolean keepAtomic) {
+		this.keepAtomic = keepAtomic;
+	}
+	
 	@Override
 	protected void init() throws Exception {
 		initializeDefaultDbIndex();
 		initializeGlobalSerializers();
+	}
+	
+	/**
+	 * 初始化全局序列化器
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+	protected void initializeGlobalSerializers() {
+		if (this.globalDefaultSerializer == null)
+			this.globalDefaultSerializer = new JdkSerializer();
 	}
 	
 	/**
@@ -156,12 +196,6 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @throws Exception
 	 */
 	protected abstract void initializeDefaultDbIndex() throws Exception;
-	
-	/**
-	 * 初始化全局序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	protected abstract void initializeGlobalSerializers();
 	
 	/**
 	 * 获取默认连接库的索引

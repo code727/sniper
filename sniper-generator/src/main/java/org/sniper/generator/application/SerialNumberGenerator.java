@@ -132,8 +132,8 @@ public class SerialNumberGenerator extends AbstractKeyspaceParameterizeGenerator
 		if (sequenceMinLength - generated.length() > 0) 
 			generated = compensateGenerate(generated, sequenceMinLength);
 		
-		return (safeParameter.length() > 0 && parameterAsResult) ? (parameterAsResultPrefix ? 
-				safeParameter + generated : generated + safeParameter) : generated;
+		return (safeParameter.length() > 0 && parameterAsResult)
+				? (parameterAsResultPrefix ? safeParameter + generated : generated + safeParameter) : generated;
 	}
 
 }

@@ -20,6 +20,7 @@ package org.sniper.nosql.redis.spring;
 
 import java.beans.PropertyEditor;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -48,6 +49,7 @@ import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 import org.springframework.data.redis.connection.SortParameters;
 import org.springframework.data.redis.connection.SortParameters.Order;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
 
 /**
  * SpringRedis支持类
@@ -55,7 +57,7 @@ import org.springframework.data.redis.core.RedisTemplate;
  * @version 1.0
  */
 public abstract class SpringRedisSupport extends RedisSupport {
-			
+	
 	private RedisTemplate<?, ?> redisTemplate;
 	
 	public RedisTemplate<?, ?> getRedisTemplate() {
@@ -71,7 +73,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 		if (this.redisTemplate == null)
 			throw new IllegalArgumentException("Property 'RedisTemplate' must not be null");
 	}
-	
+		
 	@Override
 	protected void initializeDefaultDbIndex() throws Exception {
 		RedisConnectionFactory connectionFactory = this.redisTemplate.getConnectionFactory();
@@ -84,17 +86,31 @@ public abstract class SpringRedisSupport extends RedisSupport {
 
 	@Override
 	protected void initializeGlobalSerializers() {
-		if (getGlobalKeySerializer() == null)
-			setGlobalKeySerializer(new SpringRedisSerializerProxy(this.redisTemplate.getKeySerializer()));
+		super.initializeGlobalSerializers();
 		
-		if (getGlobalValueSerializer() == null)
-			setGlobalValueSerializer(new SpringRedisSerializerProxy(this.redisTemplate.getValueSerializer()));
+		if (getGlobalKeySerializer() == null) {
+			RedisSerializer<?> redisKeySerializer = this.redisTemplate.getKeySerializer();
+			setGlobalKeySerializer(redisKeySerializer != null 
+					? new SpringRedisSerializerProxy(redisKeySerializer) : getGlobalDefaultSerializer());
+		}
 		
-		if (getGlobalHashKeySerializer() == null)
-			setGlobalHashKeySerializer(new SpringRedisSerializerProxy(this.redisTemplate.getHashKeySerializer()));
+		if (getGlobalValueSerializer() == null) {
+			RedisSerializer<?> redisValueSerializer = this.redisTemplate.getValueSerializer();
+			setGlobalValueSerializer(redisValueSerializer != null 
+					? new SpringRedisSerializerProxy(redisValueSerializer) : getGlobalDefaultSerializer());
+		}
 		
-		if (getGlobalHashValueSerializer() == null)
-			setGlobalHashValueSerializer(new SpringRedisSerializerProxy(this.redisTemplate.getHashValueSerializer()));
+		if (getGlobalHashKeySerializer() == null) {
+			RedisSerializer<?> redisHashKeySerializer = this.redisTemplate.getHashKeySerializer();
+			setGlobalHashKeySerializer(redisHashKeySerializer != null
+					? new SpringRedisSerializerProxy(redisHashKeySerializer) : getGlobalDefaultSerializer());
+		}
+		
+		if (getGlobalHashValueSerializer() == null) {
+			RedisSerializer<?> redisHashValueSerializer = this.redisTemplate.getHashValueSerializer();
+			setGlobalHashValueSerializer(redisHashValueSerializer != null
+					? new SpringRedisSerializerProxy(redisHashValueSerializer) : getGlobalDefaultSerializer());
+		}
 	}
 	
 	/**
@@ -112,45 +128,43 @@ public abstract class SpringRedisSupport extends RedisSupport {
 		if (redisRepository != null) {
 			int dbIndex = redisRepository.getDbIndex();
 			if (dbIndex != this.defaultDbIndex && !isCluster())
-				// 非集群环境下redis的select命令才能被执行
+				// 非集群环境下select命令才能被执行
 				connection.select(dbIndex);
 		}
 		
 		return redisRepository;
 	}
-		
+			
 	/**
-	 * 设置当前库数据键的过期时间。当参数expireSeconds小于等于0时，则使用当前库设置的过期时间
+	 * 设置键的过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
-	 * @param repository
-	 * @param key
-	 * @param expireSeconds
+	 * @param keyByte
+	 * @param expireTime
 	 */
-	protected void setExpireTime(RedisConnection connection, RedisRepository repository, byte[] key, long expireSeconds) {
-		if (expireSeconds > 0 || (repository != null && (expireSeconds = repository.toSeconds()) > 0))
-			connection.expire(key, expireSeconds);
+	protected void setExpireTime(RedisConnection connection, byte[] keyByte, long expireTime) {
+		openPipeline(connection);
+		connection.expire(keyByte, expireTime);
+		// 注意：当管道关闭失败时，会引起上面的过期设置无效，因此该方法与其他Redis命令组合在一起使用时，并不能保证这一系列组合的原子性
+		closePipeline(connection);
 	}
 	
 	/**
-	 * 设置当前库多个数据键的过期时间。当参数expireSeconds小于等于0时，则使用当前库设置的全局过期时间
+	 * 批量设置多个键的过期时间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param connection
-	 * @param repository
 	 * @param keyBytes
-	 * @param expireSeconds
+	 * @param expireTime
 	 */
-	protected void setExpireTime(RedisConnection connection, RedisRepository repository, Set<byte[]> keyBytes, long expireSeconds) {
-		if (expireSeconds > 0 || (repository != null && (expireSeconds = repository.toSeconds()) > 0)) {
-			/* 目前不支持批量过期设置， 为提高性能，这里采用管道的形式依次设置多个键的过期时间 */
-			connection.openPipeline();
-			for (byte[] keyByte : keyBytes) {
-				connection.expire(keyByte, expireSeconds);
-			}
-			connection.closePipeline();
+	protected void batchSetExpireTime(RedisConnection connection, Set<byte[]> keyBytes, long expireTime) {
+		openPipeline(connection);
+		for (byte[] keyByte : keyBytes) {
+			connection.expire(keyByte, expireTime);
 		}
+		// 注意：当管道关闭失败时，会引起上面的过期设置无效，因此该方法与其他Redis命令组合在一起使用时，并不能保证这一系列组合的原子性
+		closePipeline(connection);
 	}
-					
+	
 	/**
 	 * 将ListPosition枚举转换为Spring的列表位置枚举
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -248,6 +262,30 @@ public abstract class SpringRedisSupport extends RedisSupport {
 		}
 		
 		return zSetTuples;
+	}
+	
+	/**
+	 * 打开管道
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param connection
+	 */
+	private void openPipeline(RedisConnection connection) {
+		if (!connection.isPipelined())
+			connection.openPipeline();
+	}
+	
+	/**
+	 * 发送管道命令后关闭，返回管道连接期间若干命令执行后一系列的结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param connection
+	 */
+	private List<Object> closePipeline(RedisConnection connection) {
+		try {
+			return connection.closePipeline();
+		} catch (Exception e) {
+			logger.error("Redis pipeline closing error, cause:{}", e.getMessage());
+			return null;
+		}
 	}
 
 }

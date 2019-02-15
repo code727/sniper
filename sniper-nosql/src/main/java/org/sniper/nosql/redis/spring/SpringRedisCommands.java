@@ -274,9 +274,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
+				
 				Long count = connection.sort(keyByte, sortParameters, destKeyByte);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, destKeyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0) 
+					setExpireTime(connection, destKeyByte, expireTime);
 				
 				return count;
 			}
@@ -433,8 +435,12 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
+				
 				connection.mSet(keyValueBytes);
-				setExpireTime(connection, repository, keyValueBytes.keySet(), expireSeconds);
+				if (expireTime > 0) 
+					batchSetExpireTime(connection, keyValueBytes.keySet(), expireTime);
+				
 				return null;
 			}
 		});
@@ -450,15 +456,16 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				/* 注意：键值设置和过期设置为非原子性操作，因此在实现诸如批量分布式锁这样的应用场景中，此命令可能并不合适。
 				 * 另外，mSetNX方法如果返回为null，并不一定代表设置不成功，可能是由于connection使用的管道或队列的形式异步来发送命令的，
 				 * 因此在这两种情况下，以同步的方式获取到的结果就为null(参考JedisConnection源代码)。
 				 * Boolean判断认为返回为null时也不进行过期时间设置，因为这里的connection是以同步的方式来发送命令的，忽略掉null只是为了防止空指针异常    */
 				Boolean success = connection.mSetNX(keyValueBytes);
-				if (BooleanUtils.isTrue(success))
-					setExpireTime(connection, repository, keyValueBytes.keySet(), expireSeconds);
-				
+				if (expireTime > 0 && BooleanUtils.isTrue(success)) 
+					batchSetExpireTime(connection, keyValueBytes.keySet(), expireTime);
+					
 				return success;
 			}
 		});
@@ -476,9 +483,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				connection.setRange(keyByte, valueByte, offset);
-				setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0)
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return null;
 			}
@@ -497,11 +506,12 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long length = connection.append(keyByte, valueByte);
 				// 有新的拼接结果才设置过期时间
-				if (length != null && length > 0)
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0 && length != null && length > 0)
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return length;
 			}
@@ -556,9 +566,12 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public byte[] doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				byte[] oldValueByte = connection.getSet(keyByte, valueByte);
-				setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0)
+					setExpireTime(connection, keyByte, expireTime);
+				
 				return oldValueByte;
 			}
 		});
@@ -676,13 +689,14 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
-				Boolean success = connection.hSet(keyByte, hashKeyByte, hashValueByte);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
+				Boolean success = connection.hSet(keyByte, hashKeyByte, hashValueByte);
 				/* 如果返回为null，并不一定代表设置不成功，可能是由于connection使用的管道或队列的形式异步来发送命令的，
 				 * 因此在这两种情况下，以同步的方式获取到的结果就为null(参考JedisConnection源代码)。
 				 * Boolean判断认为返回为null时也不进行过期时间设置，因为这里的connection是以同步的方式来发送命令的，忽略掉null只是为了防止空指针异常  */
-				if (BooleanUtils.isTrue(success))
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0 && BooleanUtils.isTrue(success))
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return success;
 			}
@@ -705,10 +719,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Boolean success = connection.hSetNX(keyByte, hashKeyByte, hashValueByte);
-				if (BooleanUtils.isTrue(success))
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0 && BooleanUtils.isTrue(success))
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return success;
 			}
@@ -729,9 +744,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				connection.hMSet(keyByte, hashKeyValueBytes);
-				setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0)
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return null;
 			}
@@ -915,10 +932,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = connection.lInsert(keyByte, toPosition(where), pivotByte, valueByte);
-				if (count != null && count > 0) 
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0) 
+					setExpireTime(connection, keyByte, expireTime);
 					
 				return count;
 			}
@@ -939,9 +957,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				connection.lSet(keyByte, posttion, valueByte);
-				setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0)
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return null;
 			}
@@ -960,10 +980,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = connection.lPush(keyByte, valueBytes);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return count;
 			}
@@ -982,10 +1003,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = connection.lPushX(keyByte, valueByte);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return count;
 			}
@@ -1108,10 +1130,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = connection.rPush(keyByte, valueBytes);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return count;
 			}
@@ -1130,10 +1153,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = connection.rPushX(keyByte, valueByte);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return count;
 			}
@@ -1153,12 +1177,13 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public byte[] doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				// 将源列表中最后一个元素出列后存入目标列表
 				byte[] destValueByte = connection.rPopLPush(srcKeyByte, destKeyByte);
-				if (destValueByte != null)
+				if (expireTime > 0 && destValueByte != null)
 					// 只有当将源列表中出列的元素不为空时才设置目标键的过期时间，因为当为空时，表示源列表可能根本不存在
-					setExpireTime(connection, repository, destKeyByte, expireSeconds);
+					setExpireTime(connection, destKeyByte, expireTime);
 				
 				return destValueByte;
 			}
@@ -1197,10 +1222,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = connection.sAdd(keyByte, memberBytes);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return count;
 			}
@@ -1253,10 +1279,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = connection.sDiffStore(destKeyByte, keyBytes);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, destKeyByte, expireSeconds);	
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, destKeyByte, expireTime);	
 				
 				return count;
 			}
@@ -1293,10 +1320,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = connection.sInterStore(destKeyByte, keyBytes);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, destKeyByte, expireSeconds);	
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, destKeyByte, expireTime);	
 				
 				return count;
 			}
@@ -1334,10 +1362,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = connection.sUnionStore(destKeyByte, keyBytes);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, destKeyByte, expireSeconds);	
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, destKeyByte, expireTime);	
 				
 				return count;
 			}
@@ -1392,10 +1421,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Boolean success = connection.sMove(srcKeyByte, destKeyByte, memberByte);
-				if (BooleanUtils.isTrue(success)) 
-					setExpireTime(connection, repository, destKeyByte, expireSeconds);
+				if (expireTime > 0 && BooleanUtils.isTrue(success)) 
+					setExpireTime(connection, destKeyByte, expireTime);
 				
 				return success;
 			}
@@ -1467,10 +1497,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Boolean success = connection.zAdd(keyByte, score, memberByte);
-				if (BooleanUtils.isTrue(success))
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0 && BooleanUtils.isTrue(success))
+					setExpireTime(connection, keyByte, expireTime);
 				
 				return success;
 			}
@@ -1493,10 +1524,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
-
+				long expireTime = getExpireSeconds(expireSeconds, repository);
+				
 				Long count = connection.zAdd(keyByte, tuples);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, keyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, keyByte, expireTime);
 
 				return count;
 			}
@@ -1768,10 +1800,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = connection.zUnionStore(destKeyByte, keyBytes);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, destKeyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, destKeyByte, expireTime);
 				
 				return count;
 			}
@@ -1792,11 +1825,12 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = (option == null ? connection.zUnionStore(destKeyByte, keyBytes)
 						: connection.zUnionStore(destKeyByte, toAggregate(option.getAggregate()), option.getWeights(), keyBytes));
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, destKeyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, destKeyByte, expireTime);
 				
 				return count;
 			}
@@ -1815,10 +1849,11 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = connection.zInterStore(destKeyByte, keyBytes);
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, destKeyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, destKeyByte, expireTime);
 				
 				return count;
 			}
@@ -1839,11 +1874,12 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
 				
 				Long count = (option == null ? connection.zInterStore(destKeyByte, keyBytes)
 						: connection.zInterStore(destKeyByte, toAggregate(option.getAggregate()), option.getWeights(), keyBytes));
-				if (count != null && count > 0)
-					setExpireTime(connection, repository, destKeyByte, expireSeconds);
+				if (expireTime > 0 && count != null && count > 0)
+					setExpireTime(connection, destKeyByte, expireTime);
 				
 				return count;
 			}
