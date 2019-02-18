@@ -480,8 +480,7 @@ public abstract class RedisSupport extends RedisAccessor {
 		}
 		
 		K key = keySerializer.deserialize(keyByte);
-		PropertyEditor propertyEditor = propertyConverter.find(keyType);
-		return propertyEditor != null ? PropertyConverter.converte(propertyEditor, key, keyType) : key;
+		return propertyConverter.converte(key, keyType);		
 	}
 	
 	/**
@@ -508,8 +507,8 @@ public abstract class RedisSupport extends RedisAccessor {
 			PropertyEditor propertyEditor = propertyConverter.find(keyType);
 			if (propertyEditor != null) {
 				for (byte[] keyByte : keyBytes) {
-					K key = keySerializer.deserialize(keyByte);
-					keys.add(PropertyConverter.converte(propertyEditor, key, keyType));
+					K key = PropertyConverter.converte(propertyEditor, keySerializer.deserialize(keyByte));
+					keys.add(key);
 				}
 			} else {
 				for (byte[] keyByte : keyBytes) {
@@ -535,8 +534,7 @@ public abstract class RedisSupport extends RedisAccessor {
 			return ((TypedSerializer) valueSerializer).deserialize(valueByte, valueType);
 		
 		V value = valueSerializer.deserialize(valueByte);
-		PropertyEditor propertyEditor = propertyConverter.find(valueType);
-		return propertyEditor != null ? PropertyConverter.converte(propertyEditor, value, valueType) : value;
+		return propertyConverter.converte(value, valueType);
 	}
 	
 	/**
@@ -553,26 +551,26 @@ public abstract class RedisSupport extends RedisAccessor {
 			return null;
 		
 		Serializer valueSerializer = selectValueSerializer(dbName);
-		List<V> list = CollectionUtils.newArrayList(valueBytes.size());
+		List<V> values = CollectionUtils.newArrayList(valueBytes.size());
 		if (valueSerializer.isTypedSerializer()) {
 			TypedSerializer valueTypedSerializer = (TypedSerializer) valueSerializer;
 			for (byte[] valueByte : valueBytes) {
-				list.add(valueTypedSerializer.deserialize(valueByte, valueType));
+				values.add(valueTypedSerializer.deserialize(valueByte, valueType));
 			}
 		} else {
 			PropertyEditor propertyEditor = propertyConverter.find(valueType);
 			if (propertyEditor != null) {
 				for (byte[] valueByte : valueBytes) {
-					V value = valueSerializer.deserialize(valueByte);
-					list.add(PropertyConverter.converte(propertyEditor, value, valueType));
+					V value = PropertyConverter.converte(propertyEditor, valueSerializer.deserialize(valueByte));
+					values.add(value);
 				}
 			} else {
 				for (byte[] valueByte : valueBytes) {
-					list.add((V) valueSerializer.deserialize(valueByte));
+					values.add((V) valueSerializer.deserialize(valueByte));
 				}
 			}
 		}
-		return list;
+		return values;
 	}
 	
 	/**
@@ -589,26 +587,26 @@ public abstract class RedisSupport extends RedisAccessor {
 			return null;
 		
 		Serializer valueSerializer = selectValueSerializer(dbName);
-		Set<V> set = CollectionUtils.newLinkedHashSet(valueBytes.size());
+		Set<V> values = CollectionUtils.newLinkedHashSet(valueBytes.size());
 		if (valueSerializer.isTypedSerializer()) {
 			TypedSerializer typedValueSerializer = (TypedSerializer) valueSerializer;
 			for (byte[] valueByte : valueBytes) {
-				set.add(typedValueSerializer.deserialize(valueByte, valueType));
+				values.add(typedValueSerializer.deserialize(valueByte, valueType));
 			}
 		} else {
 			PropertyEditor propertyEditor = propertyConverter.find(valueType);
 			if (propertyEditor != null) {
 				for (byte[] valueByte : valueBytes) {
-					V value = valueSerializer.deserialize(valueByte);
-					set.add(PropertyConverter.converte(propertyEditor, value, valueType));
+					V value = PropertyConverter.converte(propertyEditor, valueSerializer.deserialize(valueByte));
+					values.add(value);
 				}
 			} else {
 				for (byte[] valueByte : valueBytes) {
-					set.add((V) valueSerializer.deserialize(valueByte));
+					values.add((V) valueSerializer.deserialize(valueByte));
 				}
 			}
 		}
-		return set;
+		return values;
 	}
 	
 	/**
@@ -625,28 +623,28 @@ public abstract class RedisSupport extends RedisAccessor {
 			return null;
 		
 		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
-		Set<H> set = CollectionUtils.newLinkedHashSet(hashKeyBytes.size());
+		Set<H> hashKeys = CollectionUtils.newLinkedHashSet(hashKeyBytes.size());
 		
 		if (hashKeySerializer.isTypedSerializer()) {
 			TypedSerializer hashKeyTypedSerializer = (TypedSerializer) hashKeySerializer;
 			for (byte[] hashKeyByte : hashKeyBytes) {
-				set.add(hashKeyTypedSerializer.deserialize(hashKeyByte, hashKeyType));
+				hashKeys.add(hashKeyTypedSerializer.deserialize(hashKeyByte, hashKeyType));
 			}
 		} else {
 			PropertyEditor propertyEditor = propertyConverter.find(hashKeyType);
 			if (propertyEditor != null) {
 				for (byte[] hashKeyByte : hashKeyBytes) {
-					H hashKey = hashKeySerializer.deserialize(hashKeyByte);
-					set.add(PropertyConverter.converte(propertyEditor, hashKey, hashKeyType));
+					H hashKey = PropertyConverter.converte(propertyEditor, hashKeySerializer.deserialize(hashKeyByte));
+					hashKeys.add(hashKey);
 				}
 			} else {
 				for (byte[] hashKeyByte : hashKeyBytes) {
-					set.add((H) hashKeySerializer.deserialize(hashKeyByte));
+					hashKeys.add((H) hashKeySerializer.deserialize(hashKeyByte));
 				}
 			}
 		}
 		
-		return set;
+		return hashKeys;
 	}
 	
 	/**
@@ -667,7 +665,7 @@ public abstract class RedisSupport extends RedisAccessor {
 		
 		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
 		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
-		Map<H, V> map = MapUtils.newLinkedHashMap(hashKeyValueBytes.size());
+		Map<H, V> hashKeyValues = MapUtils.newLinkedHashMap(hashKeyValueBytes.size());
 		
 		if (MapUtils.isNotEmpty(hashKeyValueBytes)) {
 			Set<Entry<byte[], byte[]>> entrySet = hashKeyValueBytes.entrySet();
@@ -675,7 +673,7 @@ public abstract class RedisSupport extends RedisAccessor {
 				TypedSerializer typedHashKeySerializer = (TypedSerializer) hashKeySerializer;
 				TypedSerializer typedhashValueSerializer = (TypedSerializer) hashValueSerializer;
 				for (Entry<byte[], byte[]> entry : entrySet) {
-					map.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType),
+					hashKeyValues.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType),
 							typedhashValueSerializer.deserialize(entry.getValue(), hashValueType));
 				}
 			} else if (hashKeySerializer.isTypedSerializer()) {
@@ -683,13 +681,12 @@ public abstract class RedisSupport extends RedisAccessor {
 				PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
 				if (propertyEditor != null) {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						V hashValue = hashValueSerializer.deserialize(entry.getValue());
-						map.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType),
-								PropertyConverter.converte(propertyEditor, hashValue, hashValueType));
+						V hashValue = PropertyConverter.converte(propertyEditor, hashValueSerializer.deserialize(entry.getValue()));
+						hashKeyValues.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType), hashValue);
 					}
 				} else {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						map.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType), 
+						hashKeyValues.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType), 
 								(V) hashValueSerializer.deserialize(entry.getValue()));
 					}
 				}
@@ -698,13 +695,12 @@ public abstract class RedisSupport extends RedisAccessor {
 				PropertyEditor propertyEditor = propertyConverter.find(hashKeyType);
 				if (propertyEditor != null) {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						H hashKey = (H) hashKeySerializer.deserialize(entry.getKey());
-						map.put(PropertyConverter.converte(propertyEditor, hashKey, hashKeyType), 
-								typedhashValueSerializer.deserialize(entry.getValue(), hashValueType));
+						H hashKey = PropertyConverter.converte(propertyEditor, hashKeySerializer.deserialize(entry.getKey()));
+						hashKeyValues.put(hashKey, typedhashValueSerializer.deserialize(entry.getValue(), hashValueType));
 					}
 				} else {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						map.put((H) hashKeySerializer.deserialize(entry.getKey()), 
+						hashKeyValues.put((H) hashKeySerializer.deserialize(entry.getKey()), 
 								typedhashValueSerializer.deserialize(entry.getValue(), hashValueType));
 					}
 				}
@@ -713,32 +709,29 @@ public abstract class RedisSupport extends RedisAccessor {
 				PropertyEditor hashValuePropertyEditor = propertyConverter.find(hashValueType);
 				if (hashKeyPropertyEditor != null && hashValuePropertyEditor != null) {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						H hashKey = hashKeySerializer.deserialize(entry.getKey());
-						V hashValue = hashValueSerializer.deserialize(entry.getValue());
-						map.put(PropertyConverter.converte(hashKeyPropertyEditor, hashKey, hashKeyType), 
-								PropertyConverter.converte(hashValuePropertyEditor, hashValue, hashValueType));
+						H hashKey = PropertyConverter.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(entry.getKey()));
+						V hashValue = PropertyConverter.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(entry.getValue()));
+						hashKeyValues.put(hashKey, hashValue);
 					}
 				} else if (hashKeyPropertyEditor != null) {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						H hashKey = hashKeySerializer.deserialize(entry.getKey());
-						map.put(PropertyConverter.converte(hashKeyPropertyEditor, hashKey, hashKeyType), 
-								(V) hashValueSerializer.deserialize(entry.getValue()));
+						H hashKey = PropertyConverter.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(entry.getKey()));
+						hashKeyValues.put(hashKey, (V) hashValueSerializer.deserialize(entry.getValue()));
 					}
 				} else if (hashValuePropertyEditor != null) {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						V hashValue = hashValueSerializer.deserialize(entry.getValue());
-						map.put((H) hashKeySerializer.deserialize(entry.getKey()),
-								PropertyConverter.converte(hashValuePropertyEditor, hashValue, hashValueType));
+						V hashValue = PropertyConverter.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(entry.getValue()));
+						hashKeyValues.put((H) hashKeySerializer.deserialize(entry.getKey()), hashValue);
 					}
 				} else {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						map.put((H) hashKeySerializer.deserialize(entry.getKey()), 
+						hashKeyValues.put((H) hashKeySerializer.deserialize(entry.getKey()), 
 								(V) hashValueSerializer.deserialize(entry.getValue()));
 					}
 				}
 			}
 		}
-		return map;
+		return hashKeyValues;
 	}
 	
 	/**
@@ -754,9 +747,8 @@ public abstract class RedisSupport extends RedisAccessor {
 		if (hashValueSerializer.isTypedSerializer())
 			return ((TypedSerializer) hashValueSerializer).deserialize(hashValueByte, hashValueType);
 		
-		V value = hashValueSerializer.deserialize(hashValueByte);
-		PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
-		return propertyEditor != null ? PropertyConverter.converte(propertyEditor, value, hashValueType) : value;
+		V hashValue = hashValueSerializer.deserialize(hashValueByte);
+		return propertyConverter.converte(hashValue, hashValueType);
 	}
 	
 	/**
@@ -768,32 +760,32 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> deserializeHashValueBytesToList(String dbName, List<byte[]> hashValueBytes, Class<V> hashValueType) {
+	protected <V> List<V> deserializeHashValueBytes(String dbName, List<byte[]> hashValueBytes, Class<V> hashValueType) {
 		if (CollectionUtils.isEmpty(hashValueBytes))
 			return null;
 		
 		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
-		List<V> list = CollectionUtils.newArrayList(hashValueBytes.size());
+		List<V> hashValues = CollectionUtils.newArrayList(hashValueBytes.size());
 		
 		if (hashValueSerializer.isTypedSerializer()) {
 			TypedSerializer hashValueTypedSerializer = (TypedSerializer) hashValueSerializer;
 			for (byte[] hashValueByte : hashValueBytes) {
-				list.add(hashValueTypedSerializer.deserialize(hashValueByte, hashValueType));
+				hashValues.add(hashValueTypedSerializer.deserialize(hashValueByte, hashValueType));
 			}
 		} else {
 			PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
 			if (propertyEditor != null) {
 				for (byte[] hashValueByte : hashValueBytes) {
-					V value = hashValueSerializer.deserialize(hashValueByte);
-					list.add(PropertyConverter.converte(propertyEditor, value, hashValueType));
+					V hashValue = PropertyConverter.converte(propertyEditor, hashValueSerializer.deserialize(hashValueByte));
+					hashValues.add(hashValue);
 				}
 			} else {
 				for (byte[] hashValueByte : hashValueBytes) {
-					list.add((V) hashValueSerializer.deserialize(hashValueByte));
+					hashValues.add((V) hashValueSerializer.deserialize(hashValueByte));
 				}
 			}
 		}
-		return list;
+		return hashValues;
 	}
 
 }

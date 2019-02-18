@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +30,7 @@ import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.nosql.redis.enums.DataType;
 import org.sniper.nosql.redis.enums.ListPosition;
+import org.sniper.nosql.redis.enums.Section;
 import org.sniper.nosql.redis.model.ZSetTuple;
 import org.sniper.nosql.redis.option.Limit;
 import org.sniper.nosql.redis.option.SortOptional;
@@ -1942,6 +1944,16 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	@Override
 	public <K, V> Double zIncrBy(K key, double increment, V member) {
 		return zIncrBy(null, key, increment, member);
+	}
+	
+	@Override
+	public Properties info() {
+		return info((Section) null);
+	}
+	
+	@Override
+	public <T> T info(String key) {
+		return info(key, null);
 	}
 	
 	@Override

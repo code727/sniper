@@ -102,9 +102,27 @@ public class PropertyConverter {
 	 * @param targetType
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T converte(Object value, Class<T> targetType) {
 		PropertyEditor propertyEditor = find(targetType);
-		return converte(propertyEditor, value, targetType);
+		return (T) (propertyEditor != null ? converte(propertyEditor, value) : value);
+	}
+	
+	/**
+	 * 使用指定的属性编辑器将一个值转化成目标类型的结果，当属性编辑器为空时，则直接抛出空指针异常
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param propertyEditor
+	 * @param value
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T converte(PropertyEditor propertyEditor, Object value) {
+		if (value instanceof CharSequence) 
+			propertyEditor.setAsText(value.toString());
+		else
+			propertyEditor.setValue(value);
+		
+		return (T) propertyEditor.getValue();
 	}
 	
 	/**
@@ -115,17 +133,10 @@ public class PropertyConverter {
 	 * @param targetType
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public static <T> T converte(PropertyEditor propertyEditor, Object value, Class<T> targetType) {
 		AssertUtils.assertNotNull(propertyEditor, MessageFormat.format(
 				"Property editor must not be null for target type [{0}]", targetType));
-		
-		if (value instanceof CharSequence) 
-			propertyEditor.setAsText(value.toString());
-		else
-			propertyEditor.setValue(value);
-		
-		return (T) propertyEditor.getValue();
+		return converte(propertyEditor, value);
 	}
 		
 }

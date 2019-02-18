@@ -18,12 +18,48 @@
 
 package org.sniper.nosql.redis.command;
 
+import java.util.Properties;
+
+import org.sniper.nosql.redis.enums.Section;
+
 /**
  * Redis服务终端命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public interface RedisServerCommands {
+	
+	/**
+	 * 获取Redis服务器的各种信息和统计数值。
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public Properties info();
+	
+	/**
+	 * 获取Redis服务器指定部分的信息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param section
+	 * @return
+	 */
+	public Properties info(Section section);
+	
+	/**
+	 * 获取Redis服务器指定的信息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <T> T info(String key);
+	
+	/**
+	 * 获取Redis服务器指定类型的信息
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param messageType
+	 * @return
+	 */
+	public <T> T info(String key, Class<T> messageType);
 	
 	/**
 	 * 在当前库中执行dbSize命令，获取当前库中键的个数

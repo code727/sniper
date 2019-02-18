@@ -145,7 +145,8 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	protected void setExpireTime(RedisConnection connection, byte[] keyByte, long expireTime) {
 		openPipeline(connection);
 		connection.expire(keyByte, expireTime);
-		// 注意：当管道关闭失败时，会引起上面的过期设置无效，因此该方法与其他Redis命令组合在一起使用时，并不能保证这一系列组合的原子性
+		/* 注意：当管道关闭失败时，会引起上面的过期设置无效，
+		 * 因此该方法与其他Redis命令组合在一起使用时，并不能保证这一系列组合的原子性 */
 		closePipeline(connection);
 	}
 	
@@ -161,7 +162,8 @@ public abstract class SpringRedisSupport extends RedisSupport {
 		for (byte[] keyByte : keyBytes) {
 			connection.expire(keyByte, expireTime);
 		}
-		// 注意：当管道关闭失败时，会引起上面的过期设置无效，因此该方法与其他Redis命令组合在一起使用时，并不能保证这一系列组合的原子性
+		/* 注意：当管道关闭失败时，会引起上面的过期设置无效，
+		 * 因此该方法与其他Redis命令组合在一起使用时，并不能保证这一系列组合的原子性 */
 		closePipeline(connection);
 	}
 	
@@ -249,9 +251,8 @@ public abstract class SpringRedisSupport extends RedisSupport {
 			PropertyEditor propertyEditor = getPropertyConverter().find(valueType);
 			if (propertyEditor != null) {
 				for (Tuple tuple : tuples) {
-					V member = valueSerializer.deserialize(tuple.getValue());
-					zSetTuples.add(new DefaultZSetTuple<V>(tuple.getScore(),
-							PropertyConverter.converte(propertyEditor, member, valueType)));
+					V member = PropertyConverter.converte(propertyEditor, valueSerializer.deserialize(tuple.getValue()));
+					zSetTuples.add(new DefaultZSetTuple<V>(tuple.getScore(), member));
 				}
 			} else {
 				for (Tuple tuple : tuples) {

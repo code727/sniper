@@ -36,7 +36,8 @@ public enum BooleanEnum {
 	 * @return
 	 */
 	public static Boolean parse(String value) {
-		return Boolean.valueOf(BooleanEnum.TRUE.name().equalsIgnoreCase(value) || BooleanEnum.Y.name().equalsIgnoreCase(value)
-				|| String.valueOf(BooleanEnum.TRUE.ordinal()).equals(value));
+		return BooleanEnum.TRUE.name().equalsIgnoreCase(value) || BooleanEnum.Y.name().equalsIgnoreCase(value)
+				|| String.valueOf(BooleanEnum.TRUE.ordinal()).equals(value);
 	}
+	
 }

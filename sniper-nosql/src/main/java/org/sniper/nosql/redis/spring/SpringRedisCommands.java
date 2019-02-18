@@ -20,6 +20,7 @@ package org.sniper.nosql.redis.spring;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +32,7 @@ import org.sniper.commons.util.StringUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.enums.DataType;
 import org.sniper.nosql.redis.enums.ListPosition;
+import org.sniper.nosql.redis.enums.Section;
 import org.sniper.nosql.redis.model.ZSetTuple;
 import org.sniper.nosql.redis.option.Limit;
 import org.sniper.nosql.redis.option.SortOptional;
@@ -876,7 +878,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeHashValueBytesToList(dbName, haseValueBytes, valueType);
+		return deserializeHashValueBytes(dbName, haseValueBytes, valueType);
 	}
 
 	@Override
@@ -894,7 +896,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 		
-		return deserializeHashValueBytesToList(dbName, hashValueBytes, valueType);
+		return deserializeHashValueBytes(dbName, hashValueBytes, valueType);
 	}
 	
 	@Override
@@ -1899,6 +1901,33 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			public Double doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbName);
 				return connection.zIncrBy(keyByte, increment, memberByte);
+			}
+		});
+	}
+	
+	@Override
+	public Properties info(final Section section) {
+		return getRedisTemplate().execute(new RedisCallback<Properties>() {
+
+			@Override
+			public Properties doInRedis(RedisConnection connection) throws DataAccessException {
+				return section != null ? connection.info(section.name()) : connection.info();
+			}
+			
+		});
+	}
+	
+	@Override
+	public <T> T info(final String key, final Class<T> messageType) {
+		if (StringUtils.isBlank(key))
+			return null;
+		
+		return getRedisTemplate().execute(new RedisCallback<T>() {
+
+			@Override
+			public T doInRedis(RedisConnection connection) throws DataAccessException {
+				String message = connection.info().getProperty(key);
+				return getPropertyConverter().converte(message, messageType);
 			}
 		});
 	}
