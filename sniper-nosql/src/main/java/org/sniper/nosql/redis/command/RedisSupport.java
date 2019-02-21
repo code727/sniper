@@ -50,6 +50,9 @@ public abstract class RedisSupport extends RedisAccessor {
 	/** set命令名称 */
 	protected static final String SET_COMMAND_NAME;
 	
+	/** ping命令名称 */
+	protected static final String PING_COMMAND_NAME;
+	
 	/** NX命令名称字节数组 */
 	protected static final byte[] NX_COMMAND_BYTES;
 	
@@ -94,6 +97,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	static {
 		SET_COMMAND_NAME = "set";
+		PING_COMMAND_NAME = "ping";
 		NX_COMMAND_BYTES = "NX".getBytes();
 		EX_COMMAND_BYTES = "EX".getBytes();
 		PX_COMMAND_BYTES = "PX".getBytes();

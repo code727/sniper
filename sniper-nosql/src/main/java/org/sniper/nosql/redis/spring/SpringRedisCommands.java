@@ -1906,6 +1906,62 @@ public class SpringRedisCommands extends SpringRedisSupport {
 	}
 	
 	@Override
+	public <K, V> Long pfAdd(final String dbName, final K key, final V[] elements, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null for command [pfAdd]");
+		AssertUtils.assertNotEmpty(elements, "Elements must not be empty for command [pfAdd]");
+		
+		final byte[] keyByte = serializeKey(dbName, key);
+		final byte[][] elementBytes = serializeValues(dbName, elements);
+		return getRedisTemplate().execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
+				
+				Long result = connection.pfAdd(keyByte, elementBytes);
+				if (expireTime > 0 && result != null && result > 0)
+					setExpireTime(connection, keyByte, expireTime);
+				
+				return result;
+			}
+		});
+	}
+	
+	@Override
+	public <K> Long pfCount(final String dbName, final K[] keys) {
+		if (ArrayUtils.isEmpty(keys))
+			return 0L;
+		
+		final byte[][] keyBytes = serializeKeys(dbName, keys);
+		return getRedisTemplate().execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return connection.pfCount(keyBytes);
+			}
+		});
+	}
+	
+	@Override
+	public <K> void pfMerge(String dbName, K destKey, K[] sourceKeys) {
+		AssertUtils.assertNotNull(destKey, "Destination key must not be null for command [pfMerge]");
+		AssertUtils.assertNotEmpty(sourceKeys, "Source keys not be empty for command [pfMerge]");
+		
+		final byte[] destKeyByte = serializeKey(dbName, destKey);
+		final byte[][] sourceKeyBytes = serializeKeys(dbName, sourceKeys);
+		getRedisTemplate().execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				connection.pfMerge(destKeyByte, sourceKeyBytes);
+				return null;
+			}
+		});
+	}
+		
+	@Override
 	public Properties info(final Section section) {
 		return getRedisTemplate().execute(new RedisCallback<Properties>() {
 
@@ -1922,12 +1978,82 @@ public class SpringRedisCommands extends SpringRedisSupport {
 		if (StringUtils.isBlank(key))
 			return null;
 		
-		return getRedisTemplate().execute(new RedisCallback<T>() {
+		Properties properties = getRedisTemplate().execute(new RedisCallback<Properties>() {
 
 			@Override
-			public T doInRedis(RedisConnection connection) throws DataAccessException {
-				String message = connection.info().getProperty(key);
-				return getPropertyConverter().converte(message, messageType);
+			public Properties doInRedis(RedisConnection connection) throws DataAccessException {
+				return connection.info();
+			}
+		});
+		
+		String message = properties.getProperty(key);
+		return getPropertyConverter().converte(message, messageType);
+	}
+	
+	@Override
+	public Properties configGet(final String pattern) {
+		List<String> configs = getRedisTemplate().execute(new RedisCallback<List<String>>() {
+
+			@Override
+			public List<String> doInRedis(RedisConnection connection) throws DataAccessException {
+				return connection.getConfig(StringUtils.isNotEmpty(pattern) ? pattern : StringUtils.ANY);
+			}
+		});
+		
+		if (CollectionUtils.isEmpty(configs))
+			return null;
+		
+		Properties properties = new Properties();
+		for (int i = 0; i < configs.size(); i++) {
+			properties.put(configs.get(i), configs.get(++i));
+		}
+		return properties;
+	}
+	
+	@Override
+	public <V> V config(final String parameter, final Class<V> valueType) {
+		if (StringUtils.isBlank(parameter))
+			return null;
+		
+		List<String> configs = getRedisTemplate().execute(new RedisCallback<List<String>>() {
+
+			@Override
+			public List<String> doInRedis(RedisConnection connection) throws DataAccessException {
+				return connection.getConfig(parameter);
+			}
+		});
+		
+		if (CollectionUtils.isEmpty(configs))
+			return null;
+		
+		AssertUtils.assertTrue(configs.size() == 2, String.format(
+				"Not get a single config by parameter '%s'", parameter));
+		return getPropertyConverter().converte(configs.get(1), valueType);
+	}
+	
+	@Override
+	public void configResetStat() {
+		getRedisTemplate().execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				connection.resetConfigStats();
+				return null;
+			}
+		});
+	}
+	
+	@Override
+	public void configSet(final String parameter, final Object value) {
+		AssertUtils.assertNotBlank(parameter, "Parameter name must not be null or blank for command [config set]");
+		AssertUtils.assertNotNull(value, "Parameter value not be null for command [config set]");
+		
+		getRedisTemplate().execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				connection.setConfig(parameter, value.toString());
+				return null;
 			}
 		});
 	}
@@ -1940,6 +2066,41 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				select(connection, dbName);
 				return connection.dbSize();
+			}
+		});
+	}
+	
+	@Override
+	public Long lastSave() {
+		return getRedisTemplate().execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				return connection.lastSave();
+			}
+		});
+	}
+	
+	@Override
+	public void save() {
+		getRedisTemplate().execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				connection.save();
+				return null;
+			}
+		});
+	}
+	
+	@Override
+	public void bgSave() {
+		getRedisTemplate().execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				connection.bgSave();
+				return null;
 			}
 		});
 	}
@@ -1968,6 +2129,29 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 	}
+	
+	@Override
+	public void slaveOf(final String host, final int port) {
+		getRedisTemplate().execute(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				connection.slaveOf(host, port);
+				return null;
+			}
+		});
+	}
+	
+	@Override
+	public Long time() {
+		return getRedisTemplate().execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				return connection.time();
+			}
+		});
+	}
 
 	@Override
 	public void shutdown() {
@@ -1979,6 +2163,45 @@ public class SpringRedisCommands extends SpringRedisSupport {
 				return null;
 			}
 		});
+	}
+	
+	@Override
+	public String echo(final String message) {
+		final byte[] bytes = stringSerializer.serialize(message);
+		byte[] echo = getRedisTemplate().execute(new RedisCallback<byte[]>() {
+			
+			@Override
+			public byte[] doInRedis(RedisConnection connection) throws DataAccessException {
+				return connection.echo(bytes);
+			}
+		});
+		return stringSerializer.deserialize(echo);
+	}
+	
+	@Override
+	public String ping(final String message) {
+		if (message == null) {
+			return getRedisTemplate().execute(new RedisCallback<String>() {
+
+				@Override
+				public String doInRedis(RedisConnection connection) throws DataAccessException {
+					return connection.ping();
+					
+				}
+			});
+		}
+			
+		final byte[] bytes = stringSerializer.serialize(message);
+		byte[] echo = getRedisTemplate().execute(new RedisCallback<byte[]>() {
+
+			@Override
+			public byte[] doInRedis(RedisConnection connection) throws DataAccessException {
+				return (byte[]) connection.execute(PING_COMMAND_NAME, bytes);
+			}
+			
+		});
+		
+		return stringSerializer.deserialize(echo);
 	}
 
 }

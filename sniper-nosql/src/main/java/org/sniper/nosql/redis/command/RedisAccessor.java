@@ -1947,6 +1947,111 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	}
 	
 	@Override
+	public <K,V> Long pfAdd(K key, V element) {
+		return pfAdd(key, element, 0);
+	}
+	
+	@Override
+	public <K,V> Long pfAdd(K key, V element, long expireSeconds) {
+		return pfAdd(null, key, element, expireSeconds);
+	}
+	
+	@Override
+	public <K,V> Long pfAddIn(String dbName, K key, V element) {
+		return pfAdd(dbName, key, element, 0);
+	}
+	
+	@Override
+	public <K,V> Long pfAdd(String dbName, K key, V element, long expireSeconds) {
+		return pfAdd(dbName, key, ArrayUtils.toWrapperTypeArray(element), expireSeconds);
+	}
+	
+	@Override
+	public <K,V> Long pfAdd(K key, V[] elements) {
+		return pfAdd(key, elements, 0);
+	}
+	
+	@Override
+	public <K,V> Long pfAdd(K key, V[] elements, long expireSeconds) {
+		return pfAdd(null, key, elements, expireSeconds);
+	}
+	
+	@Override
+	public <K,V> Long pfAdd(String dbName, K key, V[] elements) {
+		return pfAdd(dbName, key, elements, 0);
+	}
+	
+	@Override
+	public <K,V> Long pfAdd(K key, Collection<V> elements) {
+		return pfAdd(key, elements, 0);
+	}
+	
+	@Override
+	public <K,V> Long pfAdd(K key, Collection<V> elements, long expireSeconds) {
+		return pfAdd(null, key, elements, expireSeconds);
+	}
+	
+	@Override
+	public <K,V> Long pfAdd(String dbName, K key, Collection<V> elements) {
+		return pfAdd(dbName, key, elements, 0);
+	}
+	
+	@Override
+	public <K,V> Long pfAdd(String dbName, K key, Collection<V> elements, long expireSeconds) {
+		return pfAdd(dbName, key, CollectionUtils.toObjectArray(elements), expireSeconds);
+	}
+	
+	@Override
+	public <K> Long pfCount(K key) {
+		return pfCount(null, key);
+	}
+	
+	@Override
+	public <K> Long pfCount(String dbName, K key) {
+		return pfCount(dbName, ArrayUtils.toWrapperTypeArray(key));
+	}
+	
+	@Override
+	public <K> Long pfCount(K[] keys) {
+		return pfCount(null, keys);
+	}
+	
+	@Override
+	public <K> Long pfCount(Collection<K> keys) {
+		return pfCount(null, keys);
+	}
+	
+	@Override
+	public <K> Long pfCount(String dbName, Collection<K> keys) {
+		return pfCount(dbName, CollectionUtils.toObjectArray(keys));
+	}
+	
+	@Override
+	public <K> void pfMerge(K destKey, K sourceKey) {
+		pfMerge(null, destKey, sourceKey);
+	}
+	
+	@Override
+	public <K> void pfMerge(String dbName, K destKey, K sourceKey) {
+		pfMerge(dbName, destKey, ArrayUtils.toWrapperTypeArray(sourceKey));
+	}
+		
+	@Override
+	public <K> void pfMerge(K destKey, K[] sourceKeys) {
+		pfMerge(null, destKey, sourceKeys);
+	}
+		
+	@Override
+	public <K> void pfMerge(K destKey, Collection<K> sourceKeys) {
+		pfMerge(null, destKey, sourceKeys);
+	}
+	
+	@Override
+	public <K> void pfMerge(String dbName, K destKey, Collection<K> sourceKeys) {
+		pfMerge(dbName, destKey, CollectionUtils.toArray(sourceKeys));
+	}
+		
+	@Override
 	public Properties info() {
 		return info((Section) null);
 	}
@@ -1957,6 +2062,16 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	}
 	
 	@Override
+	public Properties configGet() {
+		return configGet(null);
+	}
+	
+	@Override
+	public <V> V config(String parameter) {
+		return config(parameter, null);
+	}
+	
+	@Override
 	public Long dbSize() {
 		return dbSize(null);
 	}
@@ -1964,6 +2079,11 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	@Override
 	public void flushDb() {
 		this.flushDb(null);
+	}
+	
+	@Override
+	public String ping() {
+		return ping(null);
 	}
 	
 }

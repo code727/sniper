@@ -27,7 +27,9 @@ public enum BooleanEnum {
 	FALSE,
 	TRUE,
 	N,
-	Y;
+	Y,
+	NO,
+	YES;
 	
 	/**
 	 * 根据字符串值解析出布尔值
@@ -37,7 +39,8 @@ public enum BooleanEnum {
 	 */
 	public static Boolean parse(String value) {
 		return BooleanEnum.TRUE.name().equalsIgnoreCase(value) || BooleanEnum.Y.name().equalsIgnoreCase(value)
+				|| BooleanEnum.YES.name().equalsIgnoreCase(value)
 				|| String.valueOf(BooleanEnum.TRUE.ordinal()).equals(value);
 	}
-	
+		
 }
