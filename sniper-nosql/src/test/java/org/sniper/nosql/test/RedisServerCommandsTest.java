@@ -65,7 +65,7 @@ public class RedisServerCommandsTest extends AbstractRedisTest {
 		System.out.println(aofEnabled);
 	}
 	
-//	@Test
+	@Test
 	public void testConfigGet() {
 		Properties configs = redisCommands.configGet("test");
 		assertNull(configs);
@@ -128,7 +128,7 @@ public class RedisServerCommandsTest extends AbstractRedisTest {
 		System.out.println(echo);
 	}
 	
-	@Test
+//	@Test
 	public void testPing() {
 		String echo = redisCommands.ping();
 		assertEquals("PONG", echo);

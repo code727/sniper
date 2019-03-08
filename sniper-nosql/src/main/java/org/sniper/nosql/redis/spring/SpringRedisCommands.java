@@ -31,15 +31,26 @@ import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.enums.DataType;
+import org.sniper.nosql.redis.enums.GeoDistanceUnit;
 import org.sniper.nosql.redis.enums.ListPosition;
 import org.sniper.nosql.redis.enums.Section;
 import org.sniper.nosql.redis.model.ZSetTuple;
+import org.sniper.nosql.redis.model.geo.GeoCircle;
+import org.sniper.nosql.redis.model.geo.GeoDistance;
+import org.sniper.nosql.redis.model.geo.GeoLocations;
+import org.sniper.nosql.redis.model.geo.GeoPoint;
+import org.sniper.nosql.redis.model.geo.GeoRadiusResult;
+import org.sniper.nosql.redis.option.GeoRadiusOption;
 import org.sniper.nosql.redis.option.Limit;
 import org.sniper.nosql.redis.option.SortOptional;
 import org.sniper.nosql.redis.option.ZStoreOptional;
 import org.sniper.serialization.Serializer;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.data.geo.GeoResults;
+import org.springframework.data.geo.Point;
 import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisGeoCommands.GeoLocation;
 import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 import org.springframework.data.redis.connection.SortParameters;
 import org.springframework.data.redis.core.RedisCallback;
@@ -1960,7 +1971,171 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 	}
+	
+	@Override
+	public <K, M> Long geoAdd(final String dbName, final K key, final M member, final GeoPoint point, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null for command [geoAdd]");
+		AssertUtils.assertNotNull(member, "Geo member must not be null for command [geoAdd]");
+		AssertUtils.assertNotNull(point, "Geo point must not be null for command [geoAdd]");
 		
+		final byte[] keyByte = serializeKey(dbName, key);
+		final byte[] memberByte = serializeValue(dbName, member);
+		return getRedisTemplate().execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
+				
+				Long count = connection.geoAdd(keyByte, toPoint(point), memberByte);
+				if (expireTime > 0 && count != null && count > 0) 
+					setExpireTime(connection, keyByte, expireTime);
+				
+				return count;
+			}
+		});
+	}
+	
+	@Override
+	public <K, M> Long geoAdd(final String dbName, final K key, final GeoLocations<M> locations, final long expireSeconds) {
+		AssertUtils.assertNotNull(key, "Key must not be null for command [geoAdd]");
+		AssertUtils.assertTrue(locations != null && locations.size() > 0,
+				"Geo locations must not be empty for command [geoAdd]");
+		
+		final byte[] keyByte = serializeKey(dbName, key);
+		final Map<byte[], Point> locationMap = toMemberPointMap(locations);
+		return getRedisTemplate().execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				RedisRepository repository = select(connection, dbName);
+				long expireTime = getExpireSeconds(expireSeconds, repository);
+				
+				Long count = connection.geoAdd(keyByte, locationMap);
+				if (expireTime > 0 && count != null && count > 0) 
+					setExpireTime(connection, keyByte, expireTime);
+				
+				return count;
+			}
+		});
+	}
+	
+	@Override
+	public <K, M> GeoPoint geoPos(final String dbName, final K key, final M member) {
+		if (key == null || member == null)
+			return null;
+		
+		final byte[] keyByte = serializeKey(dbName, key);
+		final byte[] memberByte = serializeValue(dbName, member);
+		Point point = getRedisTemplate().execute(new RedisCallback<Point>() {
+
+			@Override
+			public Point doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return CollectionUtils.get(connection.geoPos(keyByte, memberByte), 0);
+			}
+		});
+		
+		return toGeoPoint(point);
+	}
+
+	@Override
+	public <K, M> GeoLocations<M> geoPos(final String dbName, final K key, final M[] members) {
+		if (key == null || ArrayUtils.isEmpty(members))
+			return null;
+		
+		final byte[] keyByte = serializeKey(dbName, key);
+		final byte[][] memberBytes = serializeValues(dbName, members);
+		List<Point> points = getRedisTemplate().execute(new RedisCallback<List<Point>>() {
+
+			@Override
+			public List<Point> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return connection.geoPos(keyByte, memberBytes);
+			}
+		});
+		
+		return toGeoLocations(members, points);
+	}
+	
+	@Override
+	public <K, M> GeoDistance geoDist(final String dbName, final K key, final M member1, final M member2,
+			final GeoDistanceUnit unit) {
+		
+		if (key == null || member1 == null || member2 == null)
+			return null;
+		
+		Serializer valueSerializer = selectValueSerializer(dbName);
+		final byte[] keyByte = serializeKey(dbName, key);
+		final byte[] memberByte1 = valueSerializer.serialize(member1);
+		final byte[] memberByte2 = valueSerializer.serialize(member2);
+		byte[] distanceByte = getRedisTemplate().execute(new RedisCallback<byte[]>() {
+
+			@Override
+			public byte[] doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				/* 注意：这里没有直接调用RedisConnection的geoDist方法来实现，因为当geoDist返回为空时，
+				 * jedis的源码中存在BUG，详见redis.clients.jedis.BinaryJedis的geodist方法，
+				 * 当返回空字符串时，new Double(dval)将出现NumberFormatException异常。
+				 * 因此这里使用的原生命令行的方式来实现，当返回空字节结果时，最终返回空的GeoDistance对象*/
+				if (unit == null)
+					return (byte[]) connection.execute(GEODIST_COMMAND_NAME, keyByte, memberByte1, memberByte2);
+				
+				return (byte[]) connection.execute(GEODIST_COMMAND_NAME, keyByte, memberByte1, memberByte2,
+						stringSerializer.serialize(unit.getAbbreviation()));
+			}
+		});
+		
+		return toGeoDistance(distanceByte, unit);
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadius(String dbName, K key, final GeoCircle circle, final GeoRadiusOption option) {
+		if (key == null || circle == null)
+			return null;
+		
+		final byte[] keyByte = serializeKey(dbName, key);
+		GeoResults<GeoLocation<byte[]>> geoResults = getRedisTemplate().execute(new RedisCallback<GeoResults<GeoLocation<byte[]>>>() {
+				
+			@Override
+			public GeoResults<GeoLocation<byte[]>> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return option == null ? connection.geoRadius(keyByte, toCircle(circle))
+						: connection.geoRadius(keyByte, toCircle(circle), toGeoRadiusCommandArgs(option));
+			}
+		});
+		
+		return toGeoRadiusResult(dbName, geoResults);
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadiusByMember(final String dbName, final K key, final M member,
+			final GeoDistance radius, final GeoRadiusOption option) {
+		
+		if (key == null || member == null || radius == null)
+			return null;
+		
+		final byte[] keyByte = serializeKey(dbName, key);
+		final byte[] memberByte = serializeValue(dbName, member);
+		GeoResults<GeoLocation<byte[]>> geoResults = getRedisTemplate().execute(new RedisCallback<GeoResults<GeoLocation<byte[]>>>() {
+
+			@Override
+			public GeoResults<GeoLocation<byte[]>> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				try {
+					return option == null ? connection.geoRadiusByMember(keyByte, memberByte, toDistance(radius))
+							: connection.geoRadiusByMember(keyByte, memberByte, toDistance(radius), toGeoRadiusCommandArgs(option));
+				} catch (InvalidDataAccessApiUsageException e) {
+					/* 当指定的成员不在成员列表中时，则此命令将出现"ERR could not decode requested zset member"这样的错误信息
+					 * 并包装在InvalidDataAccessApiUsageException中被抛出。针对于这种情况，将捕获此异常后返回空结果 */
+					return null;
+				}
+			}
+		});
+		
+		return toGeoRadiusResult(dbName, geoResults);
+	}
+	
 	@Override
 	public Properties info(final Section section) {
 		return getRedisTemplate().execute(new RedisCallback<Properties>() {

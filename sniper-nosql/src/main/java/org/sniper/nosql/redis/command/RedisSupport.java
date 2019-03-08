@@ -29,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.beans.PropertyConverter;
+import org.sniper.beans.PropertyUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.nosql.redis.RedisRepository;
@@ -49,6 +50,9 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/** set命令名称 */
 	protected static final String SET_COMMAND_NAME;
+	
+	/** GEODIST命令名称 */
+	protected static final String GEODIST_COMMAND_NAME;
 	
 	/** ping命令名称 */
 	protected static final String PING_COMMAND_NAME;
@@ -71,11 +75,11 @@ public abstract class RedisSupport extends RedisAccessor {
 	/** 默认连接库索引 */
 	protected int defaultDbIndex;
 	
-	/** 全局默认的字符串序列化器 */
+	/** 字符串序列化器 */
 	protected final Serializer stringSerializer = new StringSerializer();
 	
-	/** 全局默认的序列化器 */
-	private Serializer globalDefaultSerializer;
+	/** 默认的序列化器 */
+	private Serializer defaultSerializer;
 	
 	/** 全局键序列化器 */
 	private Serializer globalKeySerializer;
@@ -97,6 +101,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	static {
 		SET_COMMAND_NAME = "set";
+		GEODIST_COMMAND_NAME = "geoDist";
 		PING_COMMAND_NAME = "ping";
 		NX_COMMAND_BYTES = "NX".getBytes();
 		EX_COMMAND_BYTES = "EX".getBytes();
@@ -131,12 +136,12 @@ public abstract class RedisSupport extends RedisAccessor {
 		this.propertyConverter = propertyConverter;
 	}
 	
-	public Serializer getGlobalDefaultSerializer() {
-		return globalDefaultSerializer;
+	public Serializer getDefaultSerializer() {
+		return defaultSerializer;
 	}
 
-	public void setGlobalDefaultSerializer(Serializer globalDefaultSerializer) {
-		this.globalDefaultSerializer = globalDefaultSerializer;
+	public void setDefaultSerializer(Serializer defaultSerializer) {
+		this.defaultSerializer = defaultSerializer;
 	}
 
 	public Serializer getGlobalKeySerializer() {
@@ -190,8 +195,8 @@ public abstract class RedisSupport extends RedisAccessor {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
 	 */
 	protected void initializeGlobalSerializers() {
-		if (this.globalDefaultSerializer == null)
-			this.globalDefaultSerializer = new JdkSerializer();
+		if (this.defaultSerializer == null)
+			this.defaultSerializer = new JdkSerializer();
 	}
 	
 	/**
@@ -511,7 +516,7 @@ public abstract class RedisSupport extends RedisAccessor {
 			PropertyEditor propertyEditor = propertyConverter.find(keyType);
 			if (propertyEditor != null) {
 				for (byte[] keyByte : keyBytes) {
-					K key = PropertyConverter.converte(propertyEditor, keySerializer.deserialize(keyByte));
+					K key = PropertyUtils.converte(propertyEditor, keySerializer.deserialize(keyByte));
 					keys.add(key);
 				}
 			} else {
@@ -565,7 +570,7 @@ public abstract class RedisSupport extends RedisAccessor {
 			PropertyEditor propertyEditor = propertyConverter.find(valueType);
 			if (propertyEditor != null) {
 				for (byte[] valueByte : valueBytes) {
-					V value = PropertyConverter.converte(propertyEditor, valueSerializer.deserialize(valueByte));
+					V value = PropertyUtils.converte(propertyEditor, valueSerializer.deserialize(valueByte));
 					values.add(value);
 				}
 			} else {
@@ -601,7 +606,7 @@ public abstract class RedisSupport extends RedisAccessor {
 			PropertyEditor propertyEditor = propertyConverter.find(valueType);
 			if (propertyEditor != null) {
 				for (byte[] valueByte : valueBytes) {
-					V value = PropertyConverter.converte(propertyEditor, valueSerializer.deserialize(valueByte));
+					V value = PropertyUtils.converte(propertyEditor, valueSerializer.deserialize(valueByte));
 					values.add(value);
 				}
 			} else {
@@ -638,7 +643,7 @@ public abstract class RedisSupport extends RedisAccessor {
 			PropertyEditor propertyEditor = propertyConverter.find(hashKeyType);
 			if (propertyEditor != null) {
 				for (byte[] hashKeyByte : hashKeyBytes) {
-					H hashKey = PropertyConverter.converte(propertyEditor, hashKeySerializer.deserialize(hashKeyByte));
+					H hashKey = PropertyUtils.converte(propertyEditor, hashKeySerializer.deserialize(hashKeyByte));
 					hashKeys.add(hashKey);
 				}
 			} else {
@@ -685,7 +690,7 @@ public abstract class RedisSupport extends RedisAccessor {
 				PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
 				if (propertyEditor != null) {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						V hashValue = PropertyConverter.converte(propertyEditor, hashValueSerializer.deserialize(entry.getValue()));
+						V hashValue = PropertyUtils.converte(propertyEditor, hashValueSerializer.deserialize(entry.getValue()));
 						hashKeyValues.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType), hashValue);
 					}
 				} else {
@@ -699,7 +704,7 @@ public abstract class RedisSupport extends RedisAccessor {
 				PropertyEditor propertyEditor = propertyConverter.find(hashKeyType);
 				if (propertyEditor != null) {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						H hashKey = PropertyConverter.converte(propertyEditor, hashKeySerializer.deserialize(entry.getKey()));
+						H hashKey = PropertyUtils.converte(propertyEditor, hashKeySerializer.deserialize(entry.getKey()));
 						hashKeyValues.put(hashKey, typedhashValueSerializer.deserialize(entry.getValue(), hashValueType));
 					}
 				} else {
@@ -713,18 +718,18 @@ public abstract class RedisSupport extends RedisAccessor {
 				PropertyEditor hashValuePropertyEditor = propertyConverter.find(hashValueType);
 				if (hashKeyPropertyEditor != null && hashValuePropertyEditor != null) {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						H hashKey = PropertyConverter.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(entry.getKey()));
-						V hashValue = PropertyConverter.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(entry.getValue()));
+						H hashKey = PropertyUtils.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(entry.getKey()));
+						V hashValue = PropertyUtils.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(entry.getValue()));
 						hashKeyValues.put(hashKey, hashValue);
 					}
 				} else if (hashKeyPropertyEditor != null) {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						H hashKey = PropertyConverter.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(entry.getKey()));
+						H hashKey = PropertyUtils.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(entry.getKey()));
 						hashKeyValues.put(hashKey, (V) hashValueSerializer.deserialize(entry.getValue()));
 					}
 				} else if (hashValuePropertyEditor != null) {
 					for (Entry<byte[], byte[]> entry : entrySet) {
-						V hashValue = PropertyConverter.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(entry.getValue()));
+						V hashValue = PropertyUtils.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(entry.getValue()));
 						hashKeyValues.put((H) hashKeySerializer.deserialize(entry.getKey()), hashValue);
 					}
 				} else {
@@ -780,7 +785,7 @@ public abstract class RedisSupport extends RedisAccessor {
 			PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
 			if (propertyEditor != null) {
 				for (byte[] hashValueByte : hashValueBytes) {
-					V hashValue = PropertyConverter.converte(propertyEditor, hashValueSerializer.deserialize(hashValueByte));
+					V hashValue = PropertyUtils.converte(propertyEditor, hashValueSerializer.deserialize(hashValueByte));
 					hashValues.add(hashValue);
 				}
 			} else {

@@ -29,9 +29,16 @@ import java.util.concurrent.TimeUnit;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.nosql.redis.enums.DataType;
+import org.sniper.nosql.redis.enums.GeoDistanceUnit;
 import org.sniper.nosql.redis.enums.ListPosition;
 import org.sniper.nosql.redis.enums.Section;
 import org.sniper.nosql.redis.model.ZSetTuple;
+import org.sniper.nosql.redis.model.geo.GeoCircle;
+import org.sniper.nosql.redis.model.geo.GeoDistance;
+import org.sniper.nosql.redis.model.geo.GeoLocations;
+import org.sniper.nosql.redis.model.geo.GeoPoint;
+import org.sniper.nosql.redis.model.geo.GeoRadiusResult;
+import org.sniper.nosql.redis.option.GeoRadiusOption;
 import org.sniper.nosql.redis.option.Limit;
 import org.sniper.nosql.redis.option.SortOptional;
 import org.sniper.nosql.redis.option.ZStoreOptional;
@@ -2050,7 +2057,122 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	public <K> void pfMerge(String dbName, K destKey, Collection<K> sourceKeys) {
 		pfMerge(dbName, destKey, CollectionUtils.toArray(sourceKeys));
 	}
-		
+	
+	@Override
+	public <K, M> Long geoAdd(K key, M member, GeoPoint point) {
+		return geoAdd(key, member, point, 0);
+	}
+	
+	@Override
+	public <K, M> Long geoAdd(K key, M member, GeoPoint point, long expireSeconds) {
+		return geoAdd(null, key, member, point, expireSeconds);
+	}
+	
+	@Override
+	public <K, M> Long geoAdd(String dbName, K key, M member, GeoPoint point) {
+		return geoAdd(dbName, key, member, point, 0);
+	}
+	
+	@Override
+	public <K, M> Long geoAdd(K key, GeoLocations<M> locations) {
+		return geoAdd(key, locations, 0);
+	}
+	
+	@Override
+	public <K, M> Long geoAdd(K key, GeoLocations<M> locations, long expireSeconds) {
+		return geoAdd(null, key, locations, expireSeconds);
+	}
+	
+	@Override
+	public <K, M> Long geoAdd(String dbName, K key, GeoLocations<M> locations) {
+		return geoAdd(dbName, key, locations, 0);
+	}
+	
+	@Override
+	public <K, M> GeoPoint geoPos(K key, M member) {
+		return geoPos(null, key, member);
+	}
+	
+	@Override
+	public <K, M> GeoLocations<M> geoPos(K key, M[] members) {
+		return geoPos(null, key, members);
+	}
+	
+	@Override
+	public <K, M> GeoLocations<M> geoPos(K key, Collection<M> members) {
+		return geoPos(null, key, members);
+	}
+	
+	@Override
+	public <K, M> GeoLocations<M> geoPos(String dbName, K key, Collection<M> members) {
+		return geoPos(dbName, key, CollectionUtils.toArray(members));
+	}
+	
+	@Override
+	public <K, M> GeoDistance geoDist(K key, M member1, M member2) {
+		return geoDist(key, member1, member2, null);
+	}
+	
+	@Override
+	public <K, M> GeoDistance geoDist(K key, M member1, M member2, GeoDistanceUnit unit) {
+		return geoDist(null, key, member1, member2, unit);
+	}
+	
+	@Override
+	public <K, M> GeoDistance geoDistIn(String dbName, K key, M member1, M member2) {
+		return geoDist(dbName, key, member1, member2, null);
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadius(K key, GeoCircle circle) {
+		return geoRadius(key, circle, null);
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadius(K key, GeoCircle circle, GeoRadiusOption option) {
+		return geoRadius(null, key, circle, option);
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadius(String dbName, K key, GeoCircle circle) {
+		return geoRadius(dbName, key, circle, null);
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadiusByMember(K key, M member, double radius) {
+		return geoRadiusByMember(key, member, new GeoDistance(radius));
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadiusByMember(K key, M member, GeoDistance radius) {
+		return geoRadiusByMember(key, member, radius, null);
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadiusByMember(K key, M member, double radius, GeoRadiusOption option) {
+		return geoRadiusByMember(key, member, new GeoDistance(radius), option);
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadiusByMember(K key, M member, GeoDistance radius, GeoRadiusOption option) {
+		return geoRadiusByMember(null, key, member, radius, option);
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadiusByMember(String dbName, K key, M member, double radius) {
+		return geoRadiusByMember(dbName, key, member, new GeoDistance(radius));
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadiusByMember(String dbName, K key, M member, GeoDistance radius) {
+		return geoRadiusByMember(dbName, key, member, radius, null);
+	}
+	
+	@Override
+	public <K, M> GeoRadiusResult<M> geoRadiusByMember(String dbName, K key, M member, double radius, GeoRadiusOption option) {
+		return geoRadiusByMember(dbName, key, member, new GeoDistance(radius), option);
+	}
+	
 	@Override
 	public Properties info() {
 		return info((Section) null);

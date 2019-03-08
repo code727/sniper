@@ -159,7 +159,8 @@ public class RedisStringCommandsTest extends AbstractRedisTest {
 		for (int i = 0; i < 2; i++) {
 			long length = redisCommands.append(key, value, expireTime);
 			assertTrue(length == (value.length() * (i + 1)));
-			System.out.println(redisCommands.get(key));
+			Object appended = redisCommands.get(key);
+			System.out.println(appended);
 		}
 	}
 	

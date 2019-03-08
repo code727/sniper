@@ -81,33 +81,39 @@ public class RedisHashCommandsTest extends AbstractRedisTest {
 //	@Test
 	public void testHIncr() {
 		int max = 10;
-		
 		for (int i = 0; i < max; i++) {
 			assertEquals((long) (i + 1), redisCommands.hIncr(key, keys[1]));
 		}
-		System.out.println(redisCommands.hGet(key, keys[1]));
+		
+		Object hGet = redisCommands.hGet(key, keys[1]);
+		System.out.println(hGet);
 		
 		long increment = 5L;
 		for (int i = 0; i < max; i++) {
 			assertEquals(increment * (i + 1), redisCommands.hIncrBy(key, keys[0], increment));
 		}
-		System.out.println(redisCommands.hGet(key, keys[0]));
+		
+		hGet = redisCommands.hGet(key, keys[0]);
+		System.out.println(hGet);
 	}
 	
 	@Test
 	public void testHDecr() {
 		int max = 10;
-		
 		for (int i = 0; i < max; i++) {
 			assertEquals((long)-(i + 1), redisCommands.hDecr(key, keys[1]));
 		}
-		System.out.println(redisCommands.hGet(key, keys[1]));
+		
+		Object hGet = redisCommands.hGet(key, keys[1]);
+		System.out.println(hGet);
 		
 		long decrement = 5L;
 		for (int i = 0; i < max; i++) {
 			assertEquals(-(decrement * (i + 1)), redisCommands.hDecrBy(key, keys[0], decrement));
 		}
-		System.out.println(redisCommands.hGet(key, keys[0]));
+		
+		hGet = redisCommands.hGet(key, keys[0]);
+		System.out.println(hGet);
 	}
 
 }

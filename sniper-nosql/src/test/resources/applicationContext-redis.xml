@@ -16,6 +16,9 @@
 	<bean id="redisCommands" class="org.sniper.nosql.redis.spring.SpringRedisCommands" >
 		<property name="redisTemplate" ref="redisTemplate" />
 		<property name="repositoryManager" ref="repositoryManager" />
+		<property name="defaultSerializer">
+			<bean class="org.sniper.serialization.jdk.StringSerializer" />
+		</property>
 		<property name="globalKeySerializer">
 			<bean class="org.sniper.serialization.jdk.StringSerializer" />
 		</property>

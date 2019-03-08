@@ -23,8 +23,8 @@ package org.sniper.nosql.redis.command;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface RedisCommands extends RedisKeyCommands, RedisStringCommands,
-		RedisHashCommands, RedisListCommands, RedisSetCommands,
-		RedisSortedSetCommands, RedisHyperLogLogCommands, RedisServerCommands, RedisConnectionCommands {
+public interface RedisCommands extends RedisKeyCommands, RedisStringCommands, RedisHashCommands, RedisListCommands,
+		RedisSetCommands, RedisSortedSetCommands, RedisHyperLogLogCommands, RedisGeoCommands, RedisServerCommands,
+		RedisConnectionCommands {
 
 }
