@@ -34,14 +34,17 @@ import org.sniper.nosql.redis.enums.DataType;
 import org.sniper.nosql.redis.enums.GeoDistanceUnit;
 import org.sniper.nosql.redis.enums.ListPosition;
 import org.sniper.nosql.redis.enums.Section;
-import org.sniper.nosql.redis.model.ZSetTuple;
 import org.sniper.nosql.redis.model.geo.GeoCircle;
 import org.sniper.nosql.redis.model.geo.GeoDistance;
 import org.sniper.nosql.redis.model.geo.GeoLocations;
 import org.sniper.nosql.redis.model.geo.GeoPoint;
 import org.sniper.nosql.redis.model.geo.GeoRadiusResult;
+import org.sniper.nosql.redis.model.xscan.IndexedScanResult;
+import org.sniper.nosql.redis.model.xscan.MappedScanResult;
+import org.sniper.nosql.redis.model.zset.ZSetTuple;
 import org.sniper.nosql.redis.option.GeoRadiusOption;
 import org.sniper.nosql.redis.option.Limit;
+import org.sniper.nosql.redis.option.ScanOption;
 import org.sniper.nosql.redis.option.SortOptional;
 import org.sniper.nosql.redis.option.ZStoreOptional;
 import org.sniper.serialization.Serializer;
@@ -297,7 +300,23 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(final String dbName, final long cursorId, final ScanOption option, final Class<K> keyType) {
+		byte[][] commandArgs = toCommandArgs(cursorId, option);
+		List<Object> scanned = getRedisTemplate().execute(new RedisCallback<List<Object>>() {
 
+			@SuppressWarnings("unchecked")
+			@Override
+			public List<Object> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return (List<Object>) connection.execute(SCAN_COMMAND_NAME, commandArgs);
+			}
+		});
+		
+		return toScanResult(dbName, scanned, keyType);
+	}
+	
 	@Override
 	public <K> DataType type(final String dbName, final K key) {
 		if (key == null)
@@ -928,6 +947,48 @@ public class SpringRedisCommands extends SpringRedisSupport {
 	}
 	
 	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(final String dbName, final K key, final long cursorId,
+			final ScanOption option, final Class<H> hashKeyType, final Class<V> valueType) {
+		
+		if (key == null)
+			return null;
+		
+		byte[][] commandArgs = toCommandArgs(dbName, key, cursorId, option);
+		List<Object> scanned = getRedisTemplate().execute(new RedisCallback<List<Object>>() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public List<Object> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return (List<Object>) connection.execute(HSCAN_COMMAND_NAME, commandArgs);
+			}
+		});
+		
+		return toHScanResult(dbName, scanned, hashKeyType, valueType);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(final String dbName, final K key, final long cursorId,
+			final ScanOption option, Class<V> valueType) {
+		
+		if (key == null)
+			return null;
+		
+		byte[][] commandArgs = toCommandArgs(dbName, key, cursorId, option);
+		List<Object> scanned = getRedisTemplate().execute(new RedisCallback<List<Object>>() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public List<Object> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return (List<Object>) connection.execute(ZSCAN_COMMAND_NAME, commandArgs);
+			}
+		});
+		
+		return toZScanResult(dbName, scanned, valueType);
+	}
+	
+	@Override
 	public <K, V> Long lInsert(final String dbName, final K key, final ListPosition where, final V pivot,
 			final V value, final long expireSeconds) {
 		
@@ -1497,7 +1558,26 @@ public class SpringRedisCommands extends SpringRedisSupport {
 			}
 		});
 	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(final String dbName, final K key, final long cursorId, final ScanOption option, final Class<V> valueType) {
+		if (key == null)
+			return null;
+		
+		byte[][] commandArgs = toCommandArgs(dbName, key, cursorId, option);
+		List<Object> scanned = getRedisTemplate().execute(new RedisCallback<List<Object>>() {
 
+			@SuppressWarnings("unchecked")
+			@Override
+			public List<Object> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return (List<Object>) connection.execute(SSCAN_COMMAND_NAME, commandArgs);
+			}
+		});
+		
+		return toSScanResult(dbName, scanned, valueType);
+	}
+	
 	@Override
 	public <K, V> Boolean zAdd(final String dbName, final K key, final double score, final V member, final long expireSeconds) {
 		AssertUtils.assertNotNull(key, "Key must not be null for command [zAdd]");
@@ -2134,6 +2214,60 @@ public class SpringRedisCommands extends SpringRedisSupport {
 		});
 		
 		return toGeoRadiusResult(dbName, geoResults);
+	}
+	
+	@Override
+	public <K, M> String geoHash(final String dbName, final K key, final M member) {
+		if (key == null || member == null)
+			return null;
+		
+		final byte[] keyByte = serializeKey(dbName, key);
+		final byte[] memberByte = serializeValue(dbName, member);
+		List<String> list = getRedisTemplate().execute(new RedisCallback<List<String>>() {
+
+			@Override
+			public List<String> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return connection.geoHash(keyByte, memberByte);
+			}
+			
+		});
+		
+		return CollectionUtils.getFirst(list);
+	}
+
+	@Override
+	public <K, M> List<String> geoHash(final String dbName, final K key, final M[] members) {
+		if (key == null || ArrayUtils.isEmpty(members))
+			return null;
+		
+		final byte[] keyByte = serializeKey(dbName, key);
+		final byte[][] memberBytes = serializeValues(dbName, members);
+		return getRedisTemplate().execute(new RedisCallback<List<String>>() {
+
+			@Override
+			public List<String> doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return connection.geoHash(keyByte, memberBytes);
+			}
+		});
+	}
+	
+	@Override
+	public <K, M> Long geoRemove(final String dbName, final K key, final M[] members) {
+		if (key == null || ArrayUtils.isEmpty(members))
+			return 0L;
+		
+		final byte[] keyByte = serializeKey(dbName, key);
+		final byte[][] memberBytes = serializeValues(dbName, members);
+		return getRedisTemplate().execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				select(connection, dbName);
+				return connection.geoRemove(keyByte, memberBytes);
+			}
+		});
 	}
 	
 	@Override

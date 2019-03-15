@@ -32,14 +32,17 @@ import org.sniper.nosql.redis.enums.DataType;
 import org.sniper.nosql.redis.enums.GeoDistanceUnit;
 import org.sniper.nosql.redis.enums.ListPosition;
 import org.sniper.nosql.redis.enums.Section;
-import org.sniper.nosql.redis.model.ZSetTuple;
 import org.sniper.nosql.redis.model.geo.GeoCircle;
 import org.sniper.nosql.redis.model.geo.GeoDistance;
 import org.sniper.nosql.redis.model.geo.GeoLocations;
 import org.sniper.nosql.redis.model.geo.GeoPoint;
 import org.sniper.nosql.redis.model.geo.GeoRadiusResult;
+import org.sniper.nosql.redis.model.xscan.IndexedScanResult;
+import org.sniper.nosql.redis.model.xscan.MappedScanResult;
+import org.sniper.nosql.redis.model.zset.ZSetTuple;
 import org.sniper.nosql.redis.option.GeoRadiusOption;
 import org.sniper.nosql.redis.option.Limit;
+import org.sniper.nosql.redis.option.ScanOption;
 import org.sniper.nosql.redis.option.SortOptional;
 import org.sniper.nosql.redis.option.ZStoreOptional;
 import org.sniper.spring.beans.CheckableInitializingBean;
@@ -265,6 +268,81 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	@Override
 	public <K> Long sortStoreByOptional(String dbName, K key, SortOptional optional, K destKey) {
 		return sortStoreByOptional(dbName, key, optional, destKey, 0);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan() {
+		return scan((Class<K>) null);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(Class<K> keyType) {
+		return scan((String) null, keyType);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(ScanOption option) {
+		return scan(null, option);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(ScanOption option, Class<K> keyType) {
+		return scan(null, option, keyType);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(long cursorId) {
+		return scan(null, cursorId);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(long cursorId, Class<K> keyType) {
+		return scan(null, cursorId, keyType);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(long cursorId, ScanOption option) {
+		return scan(cursorId, option, null);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(long cursorId, ScanOption option, Class<K> keyType) {
+		return scan(null, cursorId, option, keyType);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(String dbName) {
+		return scan(dbName, (Class<K>) null);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(String dbName, Class<K> keyType) {
+		return scan(dbName, null, keyType);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(String dbName, ScanOption option) {
+		return scan(dbName, option, null);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(String dbName, ScanOption option, Class<K> keyType) {
+		return scan(dbName, 0, option, keyType);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(String dbName, long cursorId) {
+		return scan(dbName, cursorId, (Class<K>) null);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(String dbName, long cursorId, Class<K> keyType) {
+		return scan(dbName, cursorId, null, keyType);
+	}
+	
+	@Override
+	public <K> IndexedScanResult<K> scan(String dbName, long cursorId, ScanOption option) {
+		return scan(dbName, cursorId, option, null);
 	}
 	
 	@Override
@@ -788,6 +866,121 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 		return hIncrBy(dbName, key, hashKey, -value);
 	}
 	
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key) {
+		return hScan(key, (Class<V>) null);
+	}
+	
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, Class<V> valueType) {
+		return hScan(key, (Class<H>) null, valueType);
+	}
+	
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, Class<H> hashKeyType, Class<V> valueType) {
+		return hScan(key, null, hashKeyType, valueType);
+	}
+	
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId) {
+		return hScan(key, cursorId, (Class<V>) null);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId, Class<V> valueType) {
+		return hScan(key, cursorId, (Class<H>) null, valueType);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId, Class<H> hashKeyType, Class<V> valueType) {
+		return hScan(key, cursorId, null, hashKeyType, valueType);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, ScanOption option) {
+		return hScan(key, option, (Class<V>) null);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, ScanOption option, Class<V> valueType) {
+		return hScan(key, option, (Class<H>) null, valueType);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, ScanOption option, Class<H> hashKeyType, Class<V> valueType) {
+		return hScan(null, key, option, hashKeyType, valueType);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId, ScanOption option) {
+		return hScan(key, cursorId, option, (Class<V>) null);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId, ScanOption option, Class<V> valueType) {
+		return hScan(key, cursorId, option, (Class<H>) null, valueType);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId, ScanOption option, Class<H> hashKeyType, Class<V> valueType) {
+		return hScan(null, key, cursorId, option, hashKeyType, valueType);
+	}
+	
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScanIn(String dbName, K key) {
+		return hScanIn(dbName, key, null);
+	}
+	
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScanIn(String dbName, K key, Class<V> valueType) {
+		return hScanIn(dbName, key, null, valueType);
+	}
+	
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScanIn(String dbName, K key, Class<H> hashKeyType, Class<V> valueType) {
+		return hScan(dbName, key, null, hashKeyType, valueType);
+	}
+	
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, long cursorId) {
+		return hScan(dbName, key, cursorId, (Class<V>) null);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, long cursorId, Class<V> valueType) {
+		return hScan(dbName, key, cursorId, (Class<H>) null, valueType);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, long cursorId, Class<H> hashKeyType, Class<V> valueType) {
+		return hScan(dbName, key, cursorId, null, hashKeyType, valueType);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, ScanOption option) {
+		return hScan(dbName, key, option, (Class<V>) null);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, ScanOption option, Class<V> valueType) {
+		return hScan(dbName, key, option, (Class<H>) null, valueType);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, ScanOption option, Class<H> hashKeyType, Class<V> valueType) {
+		return hScan(dbName, key, 0, option, hashKeyType, valueType);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, long cursorId, ScanOption option) {
+		return hScan(dbName, key, cursorId, option, (Class<V>) null);
+	}
+
+	@Override
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, long cursorId, ScanOption option, Class<V> valueType) {
+		return hScan(dbName, key, cursorId, option, (Class<H>) null, valueType);
+	}
+
 	@Override
 	public <K, V> Long lInsert(K key, ListPosition where, V pivot, V value) {
 		return lInsert(key, where, pivot, value, 0);
@@ -1459,6 +1652,81 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	}
 	
 	@Override
+	public <K, V> IndexedScanResult<V> sscan(K key) {
+		return sscan(key, (Class<V>) null);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(K key, Class<V> valueType) {
+		return sscan(null, key, valueType);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(K key, long cursorId) {
+		return sscan(null, key, cursorId);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(K key, long cursorId, Class<V> valueType) {
+		return sscan(null, key, cursorId, valueType);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(K key, ScanOption option) {
+		return sscan(null, key, option);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(K key, ScanOption option, Class<V> valueType) {
+		return sscan(null, key, option, valueType);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(K key, long cursorId, ScanOption option) {
+		return sscan(null, key, cursorId, option);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(K key, long cursorId, ScanOption option, Class<V> valueType) {
+		return sscan(null, key, cursorId, option, valueType);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscanIn(String dbName, K key) {
+		return sscan(dbName, key, (Class<V>) null);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, Class<V> valueType) {
+		return sscan(dbName, key, null, valueType);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, long cursorId) {
+		return sscan(dbName, key, cursorId, (Class<V>) null);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, long cursorId, Class<V> valueType) {
+		return sscan(dbName, key, cursorId, null, valueType);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, ScanOption option) {
+		return sscan(dbName, key, option, null);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, ScanOption option, Class<V> valueType) {
+		return sscan(dbName, key, 0, option, valueType);
+	}
+	
+	@Override
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, long cursorId, ScanOption option) {
+		return sscan(dbName, key, cursorId, option, null);
+	}
+	
+	@Override
 	public <K, V> Boolean zAdd(K key, double score, V member) {
 		return zAdd(key, score, member, 0);
 	}
@@ -1954,6 +2222,81 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	}
 	
 	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(K key) {
+		return zScan(key, (Class<V>) null);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(K key, Class<V> valueType) {
+		return zScan(key, null, valueType);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(K key, long cursorId) {
+		return zScan(key, cursorId, (Class<V>) null);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(K key, long cursorId, Class<V> valueType) {
+		return zScan(key, cursorId, null, valueType);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(K key, ScanOption option) {
+		return zScan(key, option, (Class<V>) null);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(K key, ScanOption option, Class<V> valueType) {
+		return zScan(null, key, option, valueType);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(K key, long cursorId, ScanOption option) {
+		return zScan(key, cursorId, option, null);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(K key, long cursorId, ScanOption option, Class<V> valueType) {
+		return zScan(null, key, cursorId, option, valueType);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScanIn(String dbName, K key) {
+		return zScanIn(dbName, key, null);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScanIn(String dbName, K key, Class<V> valueType) {
+		return zScan(dbName, key, null, valueType);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(String dbName, K key, long cursorId) {
+		return zScan(dbName, key, cursorId, (Class<V>) null);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(String dbName, K key, long cursorId, Class<V> valueType) {
+		return zScan(dbName, key, cursorId, null, valueType);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(String dbName, K key, ScanOption option) {
+		return zScan(dbName, key, option, (Class<V>) null);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(String dbName, K key, ScanOption option, Class<V> valueType) {
+		return zScan(dbName, key, 0, option, valueType);
+	}
+	
+	@Override
+	public <K, V> MappedScanResult<V, Double> zScan(String dbName, K key, long cursorId, ScanOption option) {
+		return zScan(dbName, key, cursorId, option, null);
+	}
+	
+	@Override
 	public <K,V> Long pfAdd(K key, V element) {
 		return pfAdd(key, element, 0);
 	}
@@ -2055,7 +2398,7 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	
 	@Override
 	public <K> void pfMerge(String dbName, K destKey, Collection<K> sourceKeys) {
-		pfMerge(dbName, destKey, CollectionUtils.toArray(sourceKeys));
+		pfMerge(dbName, destKey, CollectionUtils.toObjectArray(sourceKeys));
 	}
 	
 	@Override
@@ -2103,9 +2446,10 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 		return geoPos(null, key, members);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public <K, M> GeoLocations<M> geoPos(String dbName, K key, Collection<M> members) {
-		return geoPos(dbName, key, CollectionUtils.toArray(members));
+		return (GeoLocations<M>) geoPos(dbName, key, CollectionUtils.toObjectArray(members));
 	}
 	
 	@Override
@@ -2171,6 +2515,51 @@ public abstract class RedisAccessor extends CheckableInitializingBean implements
 	@Override
 	public <K, M> GeoRadiusResult<M> geoRadiusByMember(String dbName, K key, M member, double radius, GeoRadiusOption option) {
 		return geoRadiusByMember(dbName, key, member, new GeoDistance(radius), option);
+	}
+	
+	@Override
+	public <K, M> String geoHash(K key, M member) {
+		return geoHash(null, key, member);
+	}
+	
+	@Override
+	public <K, M> List<String> geoHash(K key, M[] members) {
+		return geoHash(null, key, members);
+	}
+	
+	@Override
+	public <K, M> List<String> geoHash(K key, Collection<M> members) {
+		return geoHash(null, key, members);
+	}
+	
+	@Override
+	public <K, M> List<String> geoHash(String dbName, K key, Collection<M> members) {
+		return geoHash(dbName, key, CollectionUtils.toObjectArray(members));
+	}
+	
+	@Override
+	public <K, M> Long geoRemove(K key, M member) {
+		return geoRemove(null, key, member);
+	}
+	
+	@Override
+	public <K, M> Long geoRemove(String dbName, K key, M member) {
+		return geoRemove(dbName, key, ArrayUtils.toWrapperTypeArray(member));
+	}
+	
+	@Override
+	public <K, M> Long geoRemove(K key, M[] members) {
+		return geoRemove(null, key, members);
+	}
+	
+	@Override
+	public <K, M> Long geoRemove(K key, Collection<M> members) {
+		return geoRemove(null, key, members);
+	}
+	
+	@Override
+	public <K, M> Long geoRemove(String dbName, K key, Collection<M> members) {
+		return geoRemove(dbName, key, CollectionUtils.toObjectArray(members));
 	}
 	
 	@Override

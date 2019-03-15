@@ -22,8 +22,10 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import org.sniper.nosql.redis.model.ZSetTuple;
+import org.sniper.nosql.redis.model.xscan.MappedScanResult;
+import org.sniper.nosql.redis.model.zset.ZSetTuple;
 import org.sniper.nosql.redis.option.Limit;
+import org.sniper.nosql.redis.option.ScanOption;
 import org.sniper.nosql.redis.option.ZStoreOptional;
 
 /**
@@ -1335,4 +1337,165 @@ public interface RedisSortedSetCommands {
 	 * @return
 	 */
 	public <K, V> Double zIncrBy(String dbName, K key, double increment, V member);
+	
+	/**
+	 * 在当前库中执行zScan命令，以增量迭代的方式获取所有的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(K key);
+	
+	/**
+	 * 在当前库中执行zScan命令，以增量迭代的方式获取所有指定类型的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(K key, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(K key, long cursorId);
+	
+	/**
+	 * 在当前库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(K key, long cursorId, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zScan命令，以增量迭代的方式获取所有的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param option
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(K key, ScanOption option);
+	
+	/**
+	 * 在当前库中执行zScan命令，以增量迭代的方式获取所有指定类型的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(K key, ScanOption option, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(K key, long cursorId, ScanOption option);
+	
+	/**
+	 * 在当前库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(K key, long cursorId, ScanOption option, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zScan命令，以增量迭代的方式获取所有的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScanIn(String dbName, K key);
+	
+	/**
+	 * 在指定库中执行zScan命令，以增量迭代的方式获取所有指定类型的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScanIn(String dbName, K key, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(String dbName, K key, long cursorId);
+	
+	/**
+	 * 在指定库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(String dbName, K key, long cursorId, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zScan命令，以增量迭代的方式获取所有的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param option
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(String dbName, K key, ScanOption option);
+	
+	/**
+	 * 在指定库中执行zScan命令，以增量迭代的方式获取所有指定类型的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(String dbName, K key, ScanOption option, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(String dbName, K key, long cursorId, ScanOption option);
+	
+	/**
+	 * 在指定库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的有序成员
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> MappedScanResult<V, Double> zScan(String dbName, K key, long cursorId, ScanOption option, Class<V> valueType);
+	
 }

@@ -21,6 +21,8 @@ package org.sniper.nosql.test;
 import java.util.Set;
 
 import org.junit.Test;
+import org.sniper.nosql.redis.model.xscan.IndexedScanResult;
+import org.sniper.nosql.redis.option.ScanOption;
 
 /**
  * Redis集合单元测试类
@@ -29,7 +31,7 @@ import org.junit.Test;
  */
 public class RedisSetCommandsTest extends AbstractRedisTest {
 	
-	@Test
+//	@Test
 	public void testSAdd() {
 		assertEquals(1, redisCommands.sAdd(key, "0").intValue());
 		assertEquals(0, redisCommands.sAdd(key, "0").intValue());
@@ -320,6 +322,61 @@ public class RedisSetCommandsTest extends AbstractRedisTest {
 		assertEquals(1, redisCommands.sRem(key, values[0]).intValue());
 		assertEquals(2, redisCommands.sRem(key, new String[]{values[1], values[2]}).intValue());
 		assertEquals(2, redisCommands.sRem(key, new String[]{values[3], values[4], "0", "1"}).intValue());
+	}
+	
+	@Test
+	public void testSScan() {
+		IndexedScanResult<String> scanResult = redisCommands.sscan(key);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isEmpty());
+		
+		redisCommands.sAdd(key, names.values());
+		
+		scanResult = redisCommands.sscan(keys[0], scanResult.getCursorId());
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isEmpty());
+		
+		System.out.println("Scanning......");
+		scanResult = redisCommands.sscan(key);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isNotEmpty());
+		
+		System.out.println(scanResult);
+		if (scanResult.completed())
+			System.out.println("Scan completed!");
+		
+		ScanOption option = new ScanOption();
+		option.setCount(1L);
+		
+		System.out.println("Scanning by option......");
+		scanResult = redisCommands.sscan(key, scanResult.getCursorId(), option);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isNotEmpty());
+		// 如果没有使用 MATCH选项， 那么命令返回的元素数量通常和 COUNT选项指定的一样， 或者比COUNT选项指定的数量稍多一些
+		assertTrue(scanResult.size() >= option.getCount());
+		System.out.println(scanResult);
+		
+		while (!scanResult.completed()) {
+			System.out.println("Scan again......");
+			scanResult = redisCommands.sscan(key, scanResult.getCursorId(), option);
+			System.out.println(scanResult);
+		}
+		System.out.println("Scan completed!");
+		
+		option.setPattern("*T*");
+		
+		System.out.println("Scanning by option......");
+		scanResult = redisCommands.sscan(key, scanResult.getCursorId(), option);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.size() <= option.getCount());
+		System.out.println(scanResult);
+		
+		while (!scanResult.completed()) {
+			System.out.println("Scan again......");
+			scanResult = redisCommands.sscan(key, scanResult.getCursorId(), option);
+			System.out.println(scanResult);
+		}
+		System.out.println("Scan completed!");
 	}
 
 }

@@ -21,6 +21,9 @@ package org.sniper.nosql.redis.command;
 import java.util.Collection;
 import java.util.Set;
 
+import org.sniper.nosql.redis.model.xscan.IndexedScanResult;
+import org.sniper.nosql.redis.option.ScanOption;
+
 /**
  * Redis集合命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -848,5 +851,165 @@ public interface RedisSetCommands {
 	 * @return
 	 */
 	public <K, V> Long sRem(String dbName, K key, Collection<V> members);
+	
+	/**
+	 * 在当前库中执行sscan命令行，以增量迭代的方式获取所有的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(K key);
+	
+	/**
+	 * 在当前库中执行sscan命令行，以增量迭代的方式获取所有指定类型的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(K key, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(K key, long cursorId);
+	
+	/**
+	 * 在当前库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有指定类型的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(K key, long cursorId, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行sscan命令行，以增量迭代的方式获取所有的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param option
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(K key, ScanOption option);
+	
+	/**
+	 * 在当前库中执行sscan命令行，以增量迭代的方式获取所有指定类型的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(K key, ScanOption option, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(K key, long cursorId, ScanOption option);
+	
+	/**
+	 * 在当前库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有指定类型的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(K key, long cursorId, ScanOption option, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行sscan命令行，以增量迭代的方式获取所有的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscanIn(String dbName, K key);
+	
+	/**
+	 * 在指定库中执行sscan命令行，以增量迭代的方式获取所有指定类型的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, long cursorId);
+	
+	/**
+	 * 在指定库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有指定类型的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, long cursorId, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行sscan命令行，以增量迭代的方式获取所有的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param option
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, ScanOption option);
+	
+	/**
+	 * 在指定库中执行sscan命令行，以增量迭代的方式获取所有指定类型的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, ScanOption option, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, long cursorId, ScanOption option);
+	
+	/**
+	 * 在指定库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有指定类型的成员结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, V> IndexedScanResult<V> sscan(String dbName, K key, long cursorId, ScanOption option, Class<V> valueType);
 	
 }

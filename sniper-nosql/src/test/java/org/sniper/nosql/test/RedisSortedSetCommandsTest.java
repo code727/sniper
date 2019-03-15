@@ -23,8 +23,10 @@ import java.util.Set;
 
 import org.junit.Test;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.nosql.redis.model.ZSetTuple;
+import org.sniper.nosql.redis.model.xscan.MappedScanResult;
+import org.sniper.nosql.redis.model.zset.ZSetTuple;
 import org.sniper.nosql.redis.option.Limit;
+import org.sniper.nosql.redis.option.ScanOption;
 import org.sniper.nosql.redis.option.ZStoreOption;
 
 /**
@@ -43,7 +45,9 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 	protected double maxScore = 0.9;
 	
 	@Override
-	protected void before() {
+	public void init() {
+		super.init();
+		
 		scoreMembers.put(values[0], 0.1);
 		scoreMembers.put(values[1], 0.2);
 		scoreMembers.put(values[2], 0.3);
@@ -109,7 +113,7 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 		System.out.println(set);
 	}
 	
-	@Test
+//	@Test
 	public void testZRangeByScore() {
 		assertNull(redisCommands.zRangeByScore(key, minScore, maxScore));
 		
@@ -436,6 +440,60 @@ public class RedisSortedSetCommandsTest extends AbstractRedisTest {
 		tuples = redisCommands.zRevRangeByScoreWithScores(key, minScore, maxScore, limit);
 		assertEquals((int) (scoreMembers.size() - limit.getOffset()), tuples.size());
 		System.out.println(tuples);
+	}
+	
+	@Test
+	public void testZScan() {
+		MappedScanResult<String, Double> scanResult = redisCommands.zScan(key);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isEmpty());
+		
+		redisCommands.zAdd(key, scoreMembers);
+		
+		scanResult = redisCommands.zScan(keys[0], scanResult.getCursorId());
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isEmpty());
+		
+		System.out.println("Scanning......");
+		scanResult = redisCommands.zScan(key);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isNotEmpty());
+		
+		System.out.println(scanResult);
+		if (scanResult.completed())
+			System.out.println("Scan completed!");
+		
+		ScanOption option = new ScanOption();
+		option.setCount(1L);
+		
+		System.out.println("Scanning by option......");
+		scanResult = redisCommands.zScan(key, scanResult.getCursorId(), option);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isNotEmpty());
+		assertTrue(scanResult.size() >= (option.getCount() / 2));
+		System.out.println(scanResult);
+		
+		while (!scanResult.completed()) {
+			System.out.println("Scan again......");
+			scanResult = redisCommands.zScan(key, scanResult.getCursorId(), option);
+			System.out.println(scanResult);
+		}
+		System.out.println("Scan completed!");
+		
+		option.setPattern("*a*");
+		
+		System.out.println("Scanning by option......");
+		scanResult = redisCommands.zScan(key, scanResult.getCursorId(), option);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.size() >= (option.getCount() / 2));
+		System.out.println(scanResult);
+		
+		while (!scanResult.completed()) {
+			System.out.println("Scan again......");
+			scanResult = redisCommands.zScan(key, scanResult.getCursorId(), option);
+			System.out.println(scanResult);
+		}
+		System.out.println("Scan completed!");
 	}
 	
 }

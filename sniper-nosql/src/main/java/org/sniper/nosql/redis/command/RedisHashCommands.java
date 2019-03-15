@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.sniper.nosql.redis.model.xscan.MappedScanResult;
+import org.sniper.nosql.redis.option.ScanOption;
+
 /**
  * Redis哈希命令接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -575,5 +578,257 @@ public interface RedisHashCommands {
 	 * @return
 	 */
 	public <K, H> Long hDecrBy(String dbName, K key, H hashKey, long value);
+	
+	/**
+	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key);
+	
+	/**
+	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有指定值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有指定键值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param hashKeyType
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, Class<H> hashKeyType, Class<V> valueType);
+	
+	/**
+	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId);
+
+	/**
+	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId, Class<V> valueType);
+
+	/**
+	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定键值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @param hashKeyType
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId, Class<H> hashKeyType, Class<V> valueType);
+
+	/**
+	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param option
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, ScanOption option);
+
+	/**
+	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有指定值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, ScanOption option, Class<V> valueType);
+
+	/**
+	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有指定键值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param option
+	 * @param hashKeyType
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, ScanOption option, Class<H> hashKeyType, Class<V> valueType);
+
+	/**
+	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId, ScanOption option);
+
+	/**
+	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId, ScanOption option, Class<V> valueType);
+
+	/**
+	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定键值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @param hashKeyType
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(K key, long cursorId, ScanOption option, Class<H> hashKeyType, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScanIn(String dbName, K key);
+	
+	/**
+	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有指定值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScanIn(String dbName, K key, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有指定键值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param hashKeyType
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScanIn(String dbName, K key, Class<H> hashKeyType, Class<V> valueType);
+	
+	/**
+	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, long cursorId);
+
+	/**
+	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, long cursorId, Class<V> valueType);
+
+	/**
+	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定键值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param hashKeyType
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, long cursorId, Class<H> hashKeyType, Class<V> valueType);
+
+	/**
+	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param option
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, ScanOption option);
+
+	/**
+	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有指定值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, ScanOption option, Class<V> valueType);
+
+	/**
+	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有指定键值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param option
+	 * @param hashKeyType
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, ScanOption option, Class<H> hashKeyType, Class<V> valueType);
+
+	/**
+	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, long cursorId, ScanOption option);
+
+	/**
+	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, long cursorId, ScanOption option, Class<V> valueType);
+
+	/**
+	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定键值类型的哈希键值对
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @param hashKeyType
+	 * @param valueType
+	 * @return
+	 */
+	public <K, H, V> MappedScanResult<H, V> hScan(String dbName, K key, long cursorId, ScanOption option, Class<H> hashKeyType, Class<V> valueType);
 
 }

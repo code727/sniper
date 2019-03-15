@@ -23,6 +23,8 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.nosql.redis.model.xscan.MappedScanResult;
+import org.sniper.nosql.redis.option.ScanOption;
 
 /**
  * Redis哈希命令单元测试类
@@ -34,7 +36,9 @@ public class RedisHashCommandsTest extends AbstractRedisTest {
 	protected final Map<String, Object> hashKeyValues = MapUtils.newHashMap();
 	
 	@Override
-	protected void before() {
+	public void init() {
+		super.init();
+		
 		hashKeyValues.put("id", 1L);
 		hashKeyValues.put("name", "dubin");
 		hashKeyValues.put("age", 35);
@@ -97,7 +101,7 @@ public class RedisHashCommandsTest extends AbstractRedisTest {
 		System.out.println(hGet);
 	}
 	
-	@Test
+//	@Test
 	public void testHDecr() {
 		int max = 10;
 		for (int i = 0; i < max; i++) {
@@ -115,5 +119,60 @@ public class RedisHashCommandsTest extends AbstractRedisTest {
 		hGet = redisCommands.hGet(key, keys[0]);
 		System.out.println(hGet);
 	}
-
+	
+	@Test
+	public void testHScan() {
+		MappedScanResult<String, Object> scanResult = redisCommands.hScan(key);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isEmpty());
+		
+		redisCommands.hMSet(key, hashKeyValues);
+		
+		scanResult = redisCommands.hScan(keys[0], scanResult.getCursorId());
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isEmpty());
+		
+		System.out.println("Scanning......");
+		scanResult = redisCommands.hScan(key);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isNotEmpty());
+		
+		System.out.println(scanResult);
+		if (scanResult.completed())
+			System.out.println("Scan completed!");
+		
+		ScanOption option = new ScanOption();
+		option.setCount(1L);
+		
+		System.out.println("Scanning by option......");
+		scanResult = redisCommands.hScan(key, scanResult.getCursorId(), option);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.isNotEmpty());
+		assertTrue(scanResult.size() >= (option.getCount() / 2));
+		System.out.println(scanResult);
+		
+		while (!scanResult.completed()) {
+			System.out.println("Scan again......");
+			scanResult = redisCommands.hScan(key, scanResult.getCursorId(), option);
+			System.out.println(scanResult);
+		}
+		System.out.println("Scan completed!");
+		
+		option.setPattern("*a*");
+		
+		System.out.println("Scanning by option......");
+		scanResult = redisCommands.hScan(key, scanResult.getCursorId(), option);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.size() >= (option.getCount() / 2));
+		System.out.println(scanResult);
+		
+		while (!scanResult.completed()) {
+			System.out.println("Scan again......");
+			scanResult = redisCommands.hScan(key, scanResult.getCursorId(), option);
+			System.out.println(scanResult);
+		}
+		System.out.println("Scan completed!");
+		
+	}
+	
 }

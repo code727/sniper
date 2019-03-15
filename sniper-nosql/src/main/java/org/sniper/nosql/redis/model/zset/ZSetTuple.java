@@ -16,7 +16,7 @@
  * Create Date : 2019-1-24
  */
 
-package org.sniper.nosql.redis.model;
+package org.sniper.nosql.redis.model.zset;
 
 /**
  * 有序集合元组接口

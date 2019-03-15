@@ -16,7 +16,7 @@
  * Create Date : 2019-1-25
  */
 
-package org.sniper.nosql.redis.model;
+package org.sniper.nosql.redis.model.zset;
 
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.NumberUtils;

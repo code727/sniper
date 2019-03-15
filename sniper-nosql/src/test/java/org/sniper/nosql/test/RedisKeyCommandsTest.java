@@ -25,7 +25,9 @@ import org.junit.Test;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.nosql.redis.enums.DataType;
 import org.sniper.nosql.redis.enums.Order;
+import org.sniper.nosql.redis.model.xscan.IndexedScanResult;
 import org.sniper.nosql.redis.option.Limit;
+import org.sniper.nosql.redis.option.ScanOption;
 import org.sniper.nosql.redis.option.SortOption;
 import org.sniper.nosql.redis.option.SortOptional;
 
@@ -35,8 +37,6 @@ import org.sniper.nosql.redis.option.SortOptional;
  * @version 1.0
  */
 public class RedisKeyCommandsTest extends AbstractRedisTest {
-	
-	private final Integer[] numberValues = new Integer[] { 9, 5, 2, 7, 0 };
 	
 //	@Test
 	public void testType() {
@@ -142,24 +142,7 @@ public class RedisKeyCommandsTest extends AbstractRedisTest {
 	}
 	
 //	@Test
-	public void testSortByOptional2() {
-		Map<String, String> names = MapUtils.newLinkedHashMap(4);
-		Map<String, Integer> ages = MapUtils.newLinkedHashMap(4);
-		/* id         name_*        age_*
-		 *  1               GTA5      5
-		 *  2   Michael.De.Santa     54  
-		 *  3     Trevor.Philips     45
-		 *  4   Franklin.Clinton     30
-		 */
-		names.put("name_1", "GTA5");
-		names.put("name_2", "Michael.De.Santa");
-		names.put("name_3", "Trevor.Philips");
-		names.put("name_4", "Franklin.Clinton");
-		ages.put("age_1", 5);
-		ages.put("age_2", 54);
-		ages.put("age_3", 45);
-		ages.put("age_4", 30);
-		
+	public void testSortByOptional2() {		
 		int[] ids = new int[names.size()];
 		for (int i = 0; i < ids.length; i++) {
 			ids[i] = i + 1;
@@ -226,7 +209,7 @@ public class RedisKeyCommandsTest extends AbstractRedisTest {
 		System.out.println(redisCommands.lRangeAll(keys[1]));
 	}
 	
-	@Test
+//	@Test
 	public void testSortStoreByOptional() {
 		
 		SortOptional optional = null;
@@ -265,5 +248,50 @@ public class RedisKeyCommandsTest extends AbstractRedisTest {
 		assertEquals(pushCount - 2, count);
 		System.out.println(redisCommands.lRangeAll(key));
 	}
-
+	
+	@Test
+	public void testScan() {
+		redisCommands.mSet(names);
+		redisCommands.mSet(ages);
+		
+		System.out.println("Scanning......");
+		IndexedScanResult<Object> scanResult = redisCommands.scan();
+		assertNotNull(scanResult);
+		System.out.println(scanResult);
+		if (scanResult.completed())
+			System.out.println("Scan completed!");
+		
+		ScanOption option = new ScanOption();
+		option.setCount(1L);
+		
+		System.out.println("Scanning by option......");
+		scanResult = redisCommands.scan(scanResult.getCursorId(), option);
+		assertNotNull(scanResult);
+		// 如果没有使用 MATCH选项， 那么命令返回的元素数量通常和 COUNT选项指定的一样， 或者比COUNT选项指定的数量稍多一些
+		assertTrue(scanResult.size() >= option.getCount());
+		System.out.println(scanResult);
+		
+		while (!scanResult.completed()) {
+			System.out.println("Scan again......");
+			scanResult = redisCommands.scan(scanResult.getCursorId(), option);
+			System.out.println(scanResult);
+		}
+		System.out.println("Scan completed!");
+		
+		option.setPattern("name_*");
+		
+		System.out.println("Scanning by option......");
+		scanResult = redisCommands.scan(scanResult.getCursorId(), option);
+		assertNotNull(scanResult);
+		assertTrue(scanResult.size() <= option.getCount());
+		System.out.println(scanResult);
+		
+		while (!scanResult.completed()) {
+			System.out.println("Scan again......");
+			scanResult = redisCommands.scan(scanResult.getCursorId(), option);
+			System.out.println(scanResult);
+		}
+		System.out.println("Scan completed!");
+	}
+	
 }

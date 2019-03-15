@@ -41,7 +41,9 @@ public class RedisStringCommandsTest extends AbstractRedisTest {
 	protected final User user = new User();
 	
 	@Override
-	protected void before() {
+	public void init() {
+		super.init();
+		
 		user.setId(9527L);
 		user.setName("杜斌");
 		user.setAge(35);

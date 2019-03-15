@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.sniper.nosql.redis.enums.DataType;
+import org.sniper.nosql.redis.model.xscan.IndexedScanResult;
+import org.sniper.nosql.redis.option.ScanOption;
 import org.sniper.nosql.redis.option.SortOptional;
 
 /**
@@ -641,5 +643,149 @@ public interface RedisKeyCommands {
 	 * @return
 	 */
 	public <K> Long sortStoreByOptional(String dbName, K key, SortOptional optional, K destKey, long expireSeconds);
-		
+	
+	/**
+	 * 在当前库中执行scan命令，以增量迭代的方式获取所有的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan();
+	
+	/**
+	 * 在当前库中执行scan命令，以增量迭代的方式获取所有指定类型的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param keyType
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(Class<K> keyType);
+	
+	/**
+	 * 在当前库中执行scan命令，以增量迭代的方式获取所有的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param option
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(ScanOption option);
+	
+	/**
+	 * 在当前库中执行scan命令，以增量迭代的方式获取所有指定类型的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param option
+	 * @param keyType
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(ScanOption option, Class<K> keyType);
+	
+	/**
+	 * 在当前库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param cursorId
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(long cursorId);
+	
+	/**
+	 * 在当前库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param cursorId
+	 * @param keyType
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(long cursorId, Class<K> keyType);
+	
+	/**
+	 * 在当前库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param cursorId
+	 * @param option
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(long cursorId, ScanOption option);
+	
+	/**
+	 * 在当前库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param cursorId
+	 * @param option
+	 * @param keyType
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(long cursorId, ScanOption option, Class<K> keyType);
+	
+	/**
+	 * 在指定库中执行scan命令，以增量迭代的方式获取所有的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(String dbName);
+	
+	/**
+	 * 在指定库中执行scan命令，以增量迭代的方式获取所有指定类型的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param keyType
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(String dbName, Class<K> keyType);
+	
+	/**
+	 * 在指定库中执行scan命令，以增量迭代的方式获取所有的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param option
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(String dbName, ScanOption option);
+	
+	/**
+	 * 在指定库中执行scan命令，以增量迭代的方式获取所有指定类型的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param option
+	 * @param keyType
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(String dbName, ScanOption option, Class<K> keyType);
+	
+	/**
+	 * 在指定库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param cursorId
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(String dbName, long cursorId);
+	
+	/**
+	 * 在指定库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param cursorId
+	 * @param keyType
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(String dbName, long cursorId, Class<K> keyType);
+	
+	/**
+	 * 在指定库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取到所有的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param cursorId
+	 * @param option
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(String dbName, long cursorId, ScanOption option);
+	
+	/**
+	 * 在指定库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的键结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param cursorId
+	 * @param option
+	 * @param keyType
+	 * @return
+	 */
+	public <K> IndexedScanResult<K> scan(String dbName, long cursorId, ScanOption option, Class<K> keyType);
+	
 }

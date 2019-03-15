@@ -19,6 +19,7 @@
 package org.sniper.nosql.redis.command;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.sniper.nosql.redis.enums.GeoDistanceUnit;
 import org.sniper.nosql.redis.model.geo.GeoCircle;
@@ -347,5 +348,119 @@ public interface RedisGeoCommands {
 	 * @return
 	 */
 	public <K, M> GeoRadiusResult<M> geoRadiusByMember(String dbName, K key, M member, GeoDistance radius, GeoRadiusOption option);
+	
+	/**
+	 * 在当前库中执行geoHash命令，获取单个成员的地理信息哈希值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, M> String geoHash(K key, M member);
+	
+	/**
+	 * 在指定库中执行geoHash命令，获取单个成员的地理信息哈希值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, M> String geoHash(String dbName, K key, M member);
+	
+	/**
+	 * 在当前库中执行geoHash命令，获取多个成员的地理信息哈希值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, M> List<String> geoHash(K key, M[] members);
+	
+	/**
+	 * 在指定库中执行geoHash命令，获取多个成员的地理信息哈希值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, M> List<String> geoHash(String dbName, K key, M[] members);
+	
+	/**
+	 * 在当前库中执行geoHash命令，获取多个成员的地理信息哈希值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, M> List<String> geoHash(K key, Collection<M> members);
+	
+	/**
+	 * 在指定库中执行geoHash命令，获取多个成员的地理信息哈希值
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, M> List<String> geoHash(String dbName, K key, Collection<M> members);
+	
+	/**
+	 * 在当前库中执行geoRemove命令，删除指定成员后返回被删除的个数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, M> Long geoRemove(K key, M member);
+	
+	/**
+	 * 在指定库中执行geoRemove命令，删除指定成员后返回被删除的个数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param member
+	 * @return
+	 */
+	public <K, M> Long geoRemove(String dbName, K key, M member);
+	
+	/**
+	 * 在当前库中执行geoRemove命令，删除指定成员后返回被删除的个数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, M> Long geoRemove(K key, M[] members);
+	
+	/**
+	 * 在指定库中执行geoRemove命令，删除指定成员后返回被删除的个数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, M> Long geoRemove(String dbName, K key, M[] members);
+	
+	/**
+	 * 在当前库中执行geoRemove命令，删除指定成员后返回被删除的个数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, M> Long geoRemove(K key, Collection<M> members);
+	
+	/**
+	 * 在指定库中执行geoRemove命令，删除指定成员后返回被删除的个数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param members
+	 * @return
+	 */
+	public <K, M> Long geoRemove(String dbName, K key, Collection<M> members);
 	
 }

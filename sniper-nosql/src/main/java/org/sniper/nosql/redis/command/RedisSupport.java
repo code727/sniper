@@ -30,10 +30,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.beans.PropertyConverter;
 import org.sniper.beans.PropertyUtils;
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.RedisRepositoryManager;
+import org.sniper.nosql.redis.model.xscan.HScanResult;
+import org.sniper.nosql.redis.model.xscan.IndexedScanResult;
+import org.sniper.nosql.redis.model.xscan.MappedScanResult;
+import org.sniper.nosql.redis.model.xscan.SScanResult;
+import org.sniper.nosql.redis.model.xscan.ScanResult;
+import org.sniper.nosql.redis.model.xscan.ZScanResult;
+import org.sniper.nosql.redis.option.ScanOption;
 import org.sniper.serialization.Serializer;
 import org.sniper.serialization.TypedSerializer;
 import org.sniper.serialization.jdk.JdkSerializer;
@@ -54,6 +62,18 @@ public abstract class RedisSupport extends RedisAccessor {
 	/** GEODIST命令名称 */
 	protected static final String GEODIST_COMMAND_NAME;
 	
+	/** SCAN命令名称 */
+	protected static final String SCAN_COMMAND_NAME;
+	
+	/** SSCAN命令名称 */
+	protected static final String SSCAN_COMMAND_NAME;
+	
+	/** HSCAN命令名称 */
+	protected static final String HSCAN_COMMAND_NAME;
+	
+	/** ZSCAN命令名称 */
+	protected static final String ZSCAN_COMMAND_NAME;
+	
 	/** ping命令名称 */
 	protected static final String PING_COMMAND_NAME;
 	
@@ -65,6 +85,10 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/** PX命令名称字节数组 */
 	protected static final byte[] PX_COMMAND_BYTES;
+	
+	protected static final byte[] MATCH_COMMAND_BYTES;
+	
+	protected static final byte[] COUNT_COMMAND_BYTES;
 	
 	/** Redis库管理 */
 	protected RedisRepositoryManager repositoryManager;
@@ -102,10 +126,16 @@ public abstract class RedisSupport extends RedisAccessor {
 	static {
 		SET_COMMAND_NAME = "set";
 		GEODIST_COMMAND_NAME = "geoDist";
+		SCAN_COMMAND_NAME = "scan";
+		SSCAN_COMMAND_NAME = "sscan";
+		HSCAN_COMMAND_NAME = "hscan";
+		ZSCAN_COMMAND_NAME = "zscan";
 		PING_COMMAND_NAME = "ping";
 		NX_COMMAND_BYTES = "NX".getBytes();
 		EX_COMMAND_BYTES = "EX".getBytes();
 		PX_COMMAND_BYTES = "PX".getBytes();
+		MATCH_COMMAND_BYTES = "MATCH".getBytes();
+		COUNT_COMMAND_BYTES = "COUNT".getBytes();
 	}
 	
 	protected RedisSupport() {
@@ -525,8 +555,45 @@ public abstract class RedisSupport extends RedisAccessor {
 				}
 			}
 		}
-		return keys;
 		
+		return keys;
+	}
+	
+	/**
+	 * 将指定库的多个键字节反序列化到列表中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param keyBytes
+	 * @param keyType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <K> List<K> deserializeKeyBytes(String dbName, List<byte[]> keyBytes, Class<K> keyType) {
+		if (CollectionUtils.isEmpty(keyBytes))
+			return null;
+		
+		Serializer keySerializer = selectKeySerializer(dbName);
+		List<K> keys = CollectionUtils.newArrayList(keyBytes.size());
+		if (keySerializer.isTypedSerializer()) {
+			TypedSerializer keyTypedSerializer = (TypedSerializer) keySerializer;
+			for (byte[] keyByte : keyBytes) {
+				keys.add(keyTypedSerializer.deserialize(keyByte, keyType));
+			}
+		} else {
+			PropertyEditor propertyEditor = propertyConverter.find(keyType);
+			if (propertyEditor != null) {
+				for (byte[] keyByte : keyBytes) {
+					K key = PropertyUtils.converte(propertyEditor, keySerializer.deserialize(keyByte));
+					keys.add(key);
+				}
+			} else {
+				for (byte[] keyByte : keyBytes) {
+					keys.add((K) keySerializer.deserialize(keyByte));
+				}
+			}
+		}
+		
+		return keys;
 	}
 	
 	/**
@@ -676,70 +743,157 @@ public abstract class RedisSupport extends RedisAccessor {
 		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
 		Map<H, V> hashKeyValues = MapUtils.newLinkedHashMap(hashKeyValueBytes.size());
 		
-		if (MapUtils.isNotEmpty(hashKeyValueBytes)) {
-			Set<Entry<byte[], byte[]>> entrySet = hashKeyValueBytes.entrySet();
-			if (hashKeySerializer.isTypedSerializer() && hashValueSerializer.isTypedSerializer()) {
-				TypedSerializer typedHashKeySerializer = (TypedSerializer) hashKeySerializer;
-				TypedSerializer typedhashValueSerializer = (TypedSerializer) hashValueSerializer;
+		Set<Entry<byte[], byte[]>> entrySet = hashKeyValueBytes.entrySet();
+		if (hashKeySerializer.isTypedSerializer() && hashValueSerializer.isTypedSerializer()) {
+			TypedSerializer typedHashKeySerializer = (TypedSerializer) hashKeySerializer;
+			TypedSerializer typedhashValueSerializer = (TypedSerializer) hashValueSerializer;
+			for (Entry<byte[], byte[]> entry : entrySet) {
+				hashKeyValues.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType),
+						typedhashValueSerializer.deserialize(entry.getValue(), hashValueType));
+			}
+		} else if (hashKeySerializer.isTypedSerializer()) {
+			TypedSerializer typedHashKeySerializer = (TypedSerializer) hashKeySerializer;
+			PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
+			if (propertyEditor != null) {
 				for (Entry<byte[], byte[]> entry : entrySet) {
-					hashKeyValues.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType),
-							typedhashValueSerializer.deserialize(entry.getValue(), hashValueType));
-				}
-			} else if (hashKeySerializer.isTypedSerializer()) {
-				TypedSerializer typedHashKeySerializer = (TypedSerializer) hashKeySerializer;
-				PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
-				if (propertyEditor != null) {
-					for (Entry<byte[], byte[]> entry : entrySet) {
-						V hashValue = PropertyUtils.converte(propertyEditor, hashValueSerializer.deserialize(entry.getValue()));
-						hashKeyValues.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType), hashValue);
-					}
-				} else {
-					for (Entry<byte[], byte[]> entry : entrySet) {
-						hashKeyValues.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType), 
-								(V) hashValueSerializer.deserialize(entry.getValue()));
-					}
-				}
-			} else if (hashValueSerializer.isTypedSerializer()) {
-				TypedSerializer typedhashValueSerializer = (TypedSerializer) hashValueSerializer;
-				PropertyEditor propertyEditor = propertyConverter.find(hashKeyType);
-				if (propertyEditor != null) {
-					for (Entry<byte[], byte[]> entry : entrySet) {
-						H hashKey = PropertyUtils.converte(propertyEditor, hashKeySerializer.deserialize(entry.getKey()));
-						hashKeyValues.put(hashKey, typedhashValueSerializer.deserialize(entry.getValue(), hashValueType));
-					}
-				} else {
-					for (Entry<byte[], byte[]> entry : entrySet) {
-						hashKeyValues.put((H) hashKeySerializer.deserialize(entry.getKey()), 
-								typedhashValueSerializer.deserialize(entry.getValue(), hashValueType));
-					}
+					V hashValue = PropertyUtils.converte(propertyEditor, hashValueSerializer.deserialize(entry.getValue()));
+					hashKeyValues.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType), hashValue);
 				}
 			} else {
-				PropertyEditor hashKeyPropertyEditor = propertyConverter.find(hashKeyType);
-				PropertyEditor hashValuePropertyEditor = propertyConverter.find(hashValueType);
-				if (hashKeyPropertyEditor != null && hashValuePropertyEditor != null) {
-					for (Entry<byte[], byte[]> entry : entrySet) {
-						H hashKey = PropertyUtils.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(entry.getKey()));
-						V hashValue = PropertyUtils.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(entry.getValue()));
-						hashKeyValues.put(hashKey, hashValue);
-					}
-				} else if (hashKeyPropertyEditor != null) {
-					for (Entry<byte[], byte[]> entry : entrySet) {
-						H hashKey = PropertyUtils.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(entry.getKey()));
-						hashKeyValues.put(hashKey, (V) hashValueSerializer.deserialize(entry.getValue()));
-					}
-				} else if (hashValuePropertyEditor != null) {
-					for (Entry<byte[], byte[]> entry : entrySet) {
-						V hashValue = PropertyUtils.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(entry.getValue()));
-						hashKeyValues.put((H) hashKeySerializer.deserialize(entry.getKey()), hashValue);
-					}
-				} else {
-					for (Entry<byte[], byte[]> entry : entrySet) {
-						hashKeyValues.put((H) hashKeySerializer.deserialize(entry.getKey()), 
-								(V) hashValueSerializer.deserialize(entry.getValue()));
-					}
+				for (Entry<byte[], byte[]> entry : entrySet) {
+					hashKeyValues.put(typedHashKeySerializer.deserialize(entry.getKey(), hashKeyType), 
+							(V) hashValueSerializer.deserialize(entry.getValue()));
+				}
+			}
+		} else if (hashValueSerializer.isTypedSerializer()) {
+			TypedSerializer typedhashValueSerializer = (TypedSerializer) hashValueSerializer;
+			PropertyEditor propertyEditor = propertyConverter.find(hashKeyType);
+			if (propertyEditor != null) {
+				for (Entry<byte[], byte[]> entry : entrySet) {
+					H hashKey = PropertyUtils.converte(propertyEditor, hashKeySerializer.deserialize(entry.getKey()));
+					hashKeyValues.put(hashKey, typedhashValueSerializer.deserialize(entry.getValue(), hashValueType));
+				}
+			} else {
+				for (Entry<byte[], byte[]> entry : entrySet) {
+					hashKeyValues.put((H) hashKeySerializer.deserialize(entry.getKey()), 
+							typedhashValueSerializer.deserialize(entry.getValue(), hashValueType));
+				}
+			}
+		} else {
+			PropertyEditor hashKeyPropertyEditor = propertyConverter.find(hashKeyType);
+			PropertyEditor hashValuePropertyEditor = propertyConverter.find(hashValueType);
+			if (hashKeyPropertyEditor != null && hashValuePropertyEditor != null) {
+				for (Entry<byte[], byte[]> entry : entrySet) {
+					H hashKey = PropertyUtils.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(entry.getKey()));
+					V hashValue = PropertyUtils.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(entry.getValue()));
+					hashKeyValues.put(hashKey, hashValue);
+				}
+			} else if (hashKeyPropertyEditor != null) {
+				for (Entry<byte[], byte[]> entry : entrySet) {
+					H hashKey = PropertyUtils.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(entry.getKey()));
+					hashKeyValues.put(hashKey, (V) hashValueSerializer.deserialize(entry.getValue()));
+				}
+			} else if (hashValuePropertyEditor != null) {
+				for (Entry<byte[], byte[]> entry : entrySet) {
+					V hashValue = PropertyUtils.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(entry.getValue()));
+					hashKeyValues.put((H) hashKeySerializer.deserialize(entry.getKey()), hashValue);
+				}
+			} else {
+				for (Entry<byte[], byte[]> entry : entrySet) {
+					hashKeyValues.put((H) hashKeySerializer.deserialize(entry.getKey()), 
+							(V) hashValueSerializer.deserialize(entry.getValue()));
 				}
 			}
 		}
+		return hashKeyValues;
+	}
+	
+	/**
+	 * 将指定库的哈希键值对列表反序列化到映射集中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param hashKeyValueBytes
+	 * @param hashKeyType
+	 * @param hashValueType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <H, V> Map<H, V> deserializeHashKeyValueBytes(String dbName, List<byte[]> hashKeyValueBytes,
+			Class<H> hashKeyType, Class<V> hashValueType) {
+		
+		if (CollectionUtils.isEmpty(hashKeyValueBytes))
+			return null;
+		
+		AssertUtils.assertTrue(hashKeyValueBytes.size() % 2 == 0, "Hash key value list capacity must be even number");
+		Map<H, V> hashKeyValues = MapUtils.newLinkedHashMap(hashKeyValueBytes.size() / 2);
+		Serializer hashKeySerializer = selectHashKeySerializer(dbName);
+		Serializer hashValueSerializer = selectHashValueSerializer(dbName);
+		
+		if (hashKeySerializer.isTypedSerializer() && hashValueSerializer.isTypedSerializer()) {
+			TypedSerializer typedHashKeySerializer = (TypedSerializer) hashKeySerializer;
+			TypedSerializer typedhashValueSerializer = (TypedSerializer) hashValueSerializer;
+			for (int i = 0; i < hashKeyValueBytes.size(); i++) {
+				hashKeyValues.put(typedHashKeySerializer.deserialize(hashKeyValueBytes.get(i), hashKeyType),
+						typedhashValueSerializer.deserialize(hashKeyValueBytes.get(++i), hashValueType));
+			}
+			
+		} else if (hashKeySerializer.isTypedSerializer()) {
+			TypedSerializer typedHashKeySerializer = (TypedSerializer) hashKeySerializer;
+			PropertyEditor propertyEditor = propertyConverter.find(hashValueType);
+			if (propertyEditor != null) {
+				for (int i = 0; i < hashKeyValueBytes.size(); i++) {
+					H hashKey = typedHashKeySerializer.deserialize(hashKeyValueBytes.get(i), hashKeyType);
+					V hashValue = PropertyUtils.converte(propertyEditor, hashValueSerializer.deserialize(hashKeyValueBytes.get(++i)));
+					hashKeyValues.put(hashKey, hashValue);
+				}
+			} else {
+				for (int i = 0; i < hashKeyValueBytes.size(); i++) {
+					hashKeyValues.put(typedHashKeySerializer.deserialize(hashKeyValueBytes.get(i), hashKeyType),
+							(V) hashValueSerializer.deserialize(hashKeyValueBytes.get(++i)));
+				}
+			}
+		} else if (hashValueSerializer.isTypedSerializer()) {
+			TypedSerializer typedhashValueSerializer = (TypedSerializer) hashValueSerializer;
+			PropertyEditor propertyEditor = propertyConverter.find(hashKeyType);
+			if (propertyEditor != null) {
+				for (int i = 0; i < hashKeyValueBytes.size(); i++) {
+					H hashKey = PropertyUtils.converte(propertyEditor, hashKeySerializer.deserialize(hashKeyValueBytes.get(i)));
+					hashKeyValues.put(hashKey, typedhashValueSerializer.deserialize(hashKeyValueBytes.get(++i), hashValueType));
+				}
+			} else {
+				for (int i = 0; i < hashKeyValueBytes.size(); i++) {
+					hashKeyValues.put((H) hashKeySerializer.deserialize(hashKeyValueBytes.get(i)), 
+							typedhashValueSerializer.deserialize(hashKeyValueBytes.get(++i), hashValueType));
+				}
+			}
+		} else {
+			PropertyEditor hashKeyPropertyEditor = propertyConverter.find(hashKeyType);
+			PropertyEditor hashValuePropertyEditor = propertyConverter.find(hashValueType);
+			if (hashKeyPropertyEditor != null && hashValuePropertyEditor != null) {
+				for (int i = 0; i < hashKeyValueBytes.size(); i++) {
+					H hashKey = PropertyUtils.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(hashKeyValueBytes.get(i)));
+					V hashValue = PropertyUtils.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(hashKeyValueBytes.get(++i)));
+					hashKeyValues.put(hashKey, hashValue);
+				}
+			} else if (hashKeyPropertyEditor != null) {
+				for (int i = 0; i < hashKeyValueBytes.size(); i++) {
+					H hashKey = PropertyUtils.converte(hashKeyPropertyEditor, hashKeySerializer.deserialize(hashKeyValueBytes.get(i)));
+					hashKeyValues.put(hashKey, (V) hashValueSerializer.deserialize(hashKeyValueBytes.get(++i)));
+				}
+			} else if (hashValuePropertyEditor != null) {
+				for (int i = 0; i < hashKeyValueBytes.size(); i++) {
+					H hashKey = hashKeySerializer.deserialize(hashKeyValueBytes.get(i));
+					V hashValue = PropertyUtils.converte(hashValuePropertyEditor, hashValueSerializer.deserialize(hashKeyValueBytes.get(++i)));
+					hashKeyValues.put(hashKey, hashValue);
+				}
+			} else {
+				for (int i = 0; i < hashKeyValueBytes.size(); i++) {
+					hashKeyValues.put((H) hashKeySerializer.deserialize(hashKeyValueBytes.get(i)),
+							(V) hashValueSerializer.deserialize(hashKeyValueBytes.get(++i)));
+				}
+			}
+		}
+		
 		return hashKeyValues;
 	}
 	
@@ -795,6 +949,187 @@ public abstract class RedisSupport extends RedisAccessor {
 			}
 		}
 		return hashValues;
+	}
+	
+	/**
+	 * 将指定库的多个排名成员字节反序列化到映射集中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param scoreMemberBytes
+	 * @param valueType
+	 * @return
+	 */
+	protected <V> Map<V, Double> deserializeScoreMembers(String dbName, List<byte[]> scoreMemberBytes, Class<V> valueType) {
+		if (CollectionUtils.isEmpty(scoreMemberBytes))
+			return null;
+		
+		AssertUtils.assertTrue(scoreMemberBytes.size() % 2 == 0, "Score members capacity must be even number");
+		Map<V, Double> scoreMembers = MapUtils.newLinkedHashMap(scoreMemberBytes.size() / 2);
+		Serializer valueSerializer = selectValueSerializer(dbName);
+		
+		if (valueSerializer.isTypedSerializer()) {
+			TypedSerializer typedValueSerializer = (TypedSerializer) valueSerializer;
+			for (int i = 0; i < scoreMemberBytes.size(); i++) {
+				scoreMembers.put(typedValueSerializer.deserialize(scoreMemberBytes.get(i), valueType),
+						Double.parseDouble(stringSerializer.deserialize(scoreMemberBytes.get(++i))));
+			}
+		} else {
+			PropertyEditor propertyEditor = propertyConverter.find(valueType);
+			if (propertyEditor != null) {
+				for (int i = 0; i < scoreMemberBytes.size(); i++) {
+					V member = PropertyUtils.converte(propertyEditor, valueSerializer.deserialize(scoreMemberBytes.get(i)));
+					scoreMembers.put(member, Double.parseDouble(stringSerializer.deserialize(scoreMemberBytes.get(++i))));
+				}
+			} else {
+				for (int i = 0; i < scoreMemberBytes.size(); i++) {
+					scoreMembers.put(valueSerializer.deserialize(scoreMemberBytes.get(i)),
+							Double.parseDouble(stringSerializer.deserialize(scoreMemberBytes.get(++i))));
+				}
+			}
+		}
+		
+		return scoreMembers;
+	}
+	
+	/**
+	 * 将已扫描得到的列表转换为键增量迭代结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param scanned
+	 * @param keyType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <K> IndexedScanResult<K> toScanResult(String dbName, List<Object> scanned, Class<K> keyType) {
+		long cursorId = Long.valueOf(stringSerializer.deserialize((byte[]) scanned.get(0)));
+		List<K> keys = deserializeKeyBytes(dbName, (List<byte[]>) scanned.get(1), keyType);
+		return new ScanResult<K>(cursorId, keys);
+	}
+	
+	/**
+	 * 将已扫描得到的列表转换为集合增量迭代结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param scanned
+	 * @param valueType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <V> IndexedScanResult<V> toSScanResult(String dbName, List<Object> scanned, Class<V> valueType) {
+		long cursorId = Long.valueOf(stringSerializer.deserialize((byte[]) scanned.get(0)));
+		List<V> members = deserializeValueBytes(dbName, (List<byte[]>) scanned.get(1), valueType);
+		return new SScanResult<V>(cursorId, members);
+	}
+	
+	/**
+	 * 将已扫描得到的列表转换为哈希增量迭代结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param scanned
+	 * @param hashKeyType
+	 * @param valueType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <H, V> MappedScanResult<H, V> toHScanResult(String dbName, List<Object> scanned, 
+			Class<H> hashKeyType, Class<V> valueType) {
+		
+		long cursorId = Long.valueOf(stringSerializer.deserialize((byte[]) scanned.get(0)));
+		Map<H, V> mapped = deserializeHashKeyValueBytes(dbName, (List<byte[]>) scanned.get(1), hashKeyType, valueType);
+		return new HScanResult<H, V>(cursorId, mapped);
+	}
+	
+	/**
+	 * 将已扫描得到的列表转换为有序集合增量迭代结果
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param scanned
+	 * @param valueType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <V> MappedScanResult<V, Double> toZScanResult(String dbName, List<Object> scanned, Class<V> valueType) {
+		long cursorId = Long.valueOf(stringSerializer.deserialize((byte[]) scanned.get(0)));
+		Map<V, Double> mapped = deserializeScoreMembers(dbName, (List<byte[]>) scanned.get(1), valueType);
+		return new ZScanResult<V>(cursorId, mapped);
+	}
+	
+	/**
+	 * 将游标ID和增量迭代选项转换为命令行参数列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param cursorId
+	 * @param option
+	 * @return
+	 */
+	protected byte[][] toCommandArgs(long cursorId, ScanOption option) {
+		List<byte[]> commandArgs = CollectionUtils.newArrayList();
+		
+		addSerializedCursorId(commandArgs, cursorId);
+		addSerializedScanOption(commandArgs, option);
+		
+		return CollectionUtils.toArray(commandArgs, byte[].class);
+	}
+	
+	/**
+	 * 将键、游标ID和增量迭代选项转换为命令行参数列表
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param dbName
+	 * @param key
+	 * @param cursorId
+	 * @param option
+	 * @return
+	 */
+	protected <K> byte[][] toCommandArgs(String dbName, K key, long cursorId, ScanOption option) {
+		List<byte[]> commandArgs = CollectionUtils.newArrayList();
+		
+		addSerializedKey(commandArgs, dbName, key);
+		addSerializedCursorId(commandArgs, cursorId);
+		addSerializedScanOption(commandArgs, option);
+		
+		return CollectionUtils.toArray(commandArgs, byte[].class);
+	}
+	
+	/**
+	 * 将已序列化的键添加到命令行参数列表中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param commandArgs
+	 * @param dbName
+	 * @param key
+	 */
+	private <K> void addSerializedKey(List<byte[]> commandArgs, String dbName, K key) {
+		commandArgs.add(serializeKey(dbName, key));
+	}
+	
+	/**
+	 * 将已序列化的游标ID添加到命令行参数列表中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param commandArgs
+	 * @param cursorId
+	 */
+	private void addSerializedCursorId(List<byte[]> commandArgs, long cursorId) {
+		commandArgs.add(stringSerializer.serialize(cursorId));
+	}
+	
+	/**
+	 * 将已序列化的增量迭代选项添加到命令行参数列表中
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param commandArgs
+	 * @param option
+	 */
+	private void addSerializedScanOption(List<byte[]> commandArgs, ScanOption option) {
+		if (option != null) {
+			String pattern = option.getPattern();
+			if (pattern != null) {
+				commandArgs.add(MATCH_COMMAND_BYTES);
+				commandArgs.add(stringSerializer.serialize(pattern));
+			}
+			
+			Long count = option.getCount();
+			if (count != null) {
+				commandArgs.add(COUNT_COMMAND_BYTES);
+				commandArgs.add(stringSerializer.serialize(count));
+			}
+		}
 	}
 
 }

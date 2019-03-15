@@ -18,7 +18,10 @@
 
 package org.sniper.nosql.test;
 
+import java.util.List;
+
 import org.junit.Test;
+import org.sniper.commons.util.CollectionUtils;
 import org.sniper.nosql.redis.enums.GeoDistanceUnit;
 import org.sniper.nosql.redis.model.geo.DefaultGeoLocations;
 import org.sniper.nosql.redis.model.geo.GeoCircle;
@@ -148,7 +151,7 @@ public class RedisGeoCommandsTest extends AbstractRedisTest {
 		System.out.println(radiusResult);
 	}
 	
-	@Test
+//	@Test
 	public void testGeoRadiusByMember() {
 		GeoRadiusResult<String> radiusResult = redisCommands.geoRadiusByMember(key, otherMember, 100);
 		assertNull(radiusResult);
@@ -180,6 +183,48 @@ public class RedisGeoCommandsTest extends AbstractRedisTest {
 		radiusResult = redisCommands.geoRadiusByMember(key, members[0], new GeoDistance(100, GeoDistanceUnit.KILOMETERS), option);
 		assertNotNull(radiusResult);
 		System.out.println(radiusResult);
+	}
+	
+//	@Test
+	public void testGeoHash() {
+		String geoHash = redisCommands.geoHash(key, members[0]);
+		assertNull(geoHash);
+		
+		List<String> geoHashs = redisCommands.geoHash(key, members);
+		assertTrue(CollectionUtils.isEmpty(geoHashs));
+		
+		addGeoMembers();
+		
+		geoHash = redisCommands.geoHash(key, members[0]);
+		assertNotNull(geoHash);
+		System.out.println(geoHash);
+		
+		geoHashs = redisCommands.geoHash(key, members);
+		assertTrue(CollectionUtils.isNotEmpty(geoHashs));
+		System.out.println(geoHashs);
+		
+		geoHash = redisCommands.geoHash(keys[0], members[0]);
+		assertNull(geoHash);
+		
+		geoHashs = redisCommands.geoHash(keys[0], members);
+		assertTrue(CollectionUtils.isEmpty(geoHashs));
+	}
+	
+	@Test
+	public void testGeoRemove() {
+		Long count = redisCommands.geoRemove(key, members[0]);
+		assertEquals(0L, count);
+		
+		count = redisCommands.geoRemove(key, members);
+		assertEquals(0L, count);
+		
+		addGeoMembers();
+		
+		count = redisCommands.geoRemove(key, members[0]);
+		assertEquals(1L, count);
+		
+		count = redisCommands.geoRemove(key, members);
+		assertEquals(members.length - 1, count.intValue());
 	}
 	
 	protected void addGeoMembers() {
