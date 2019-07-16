@@ -16,7 +16,7 @@
  * Create Date : 2016-7-5
  */
 
-package org.sniper.image.qrcode.generator.swetake;
+package org.sniper.image.qrcode.generator;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -26,7 +26,6 @@ import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.image.layout.QRCodeLayout;
 import org.sniper.image.qrcode.QRCode;
-import org.sniper.image.qrcode.generator.AbstractQRCodeGenerator;
 
 import com.swetake.util.Qrcode;
 
@@ -37,7 +36,7 @@ import com.swetake.util.Qrcode;
  */
 public class SwetakeQRCodeGenerator extends AbstractQRCodeGenerator {
 	
-	private static final ThreadLocal<Map<String, Qrcode>> codes = new ThreadLocal<Map<String, Qrcode>>();
+	private static final Map<String, Qrcode> codes = MapUtils.newConcurrentHashMap();
 
 	@Override
 	protected BufferedImage createSourceImage(QRCode qrCode) throws Exception {
@@ -53,27 +52,25 @@ public class SwetakeQRCodeGenerator extends AbstractQRCodeGenerator {
 	 * @return
 	 */
 	protected Qrcode getCode(QRCode qrCode) {
-		Map<String, Qrcode> codesMap = codes.get();
-		if (codesMap == null)
-			codesMap = MapUtils.newConcurrentHashMap();
 		
 		char ecl = qrCode.getErrorCorrectionLevel().toUpperCase().charAt(0);
 		StringBuffer key = new StringBuffer(ecl);
 		
-		Qrcode code = codesMap.get(key);
+		Qrcode code = codes.get(key);
 		if (code == null) {
-			code = new Qrcode();
-			code.setQrcodeErrorCorrect(ecl);
-			/* 编码模式，取第一个大写字母
-	           Numeric：数字
-	           Alphanumeric： 英文字母
-	           Binary：二进制
-	           Kanji：汉字
-	        */
-			code.setQrcodeEncodeMode('B');
-			
-			codesMap.put(key.toString(), code);
-			codes.set(codesMap);
+			synchronized (this) {
+				code = new Qrcode();
+				code.setQrcodeErrorCorrect(ecl);
+				/* 编码模式，取第一个大写字母
+		           Numeric：数字
+		           Alphanumeric： 英文字母
+		           Binary：二进制
+		           Kanji：汉字
+		        */
+				code.setQrcodeEncodeMode('B');
+				
+				codes.put(key.toString(), code);
+			}
 		}
 		
 		return code;

@@ -16,7 +16,7 @@
  * Create Date : 2016-7-6
  */
 
-package org.sniper.image.qrcode.parser.jp;
+package org.sniper.image.qrcode.parser;
 
 import java.awt.image.BufferedImage;
 
@@ -24,7 +24,6 @@ import jp.sourceforge.qrcode.QRCodeDecoder;
 import jp.sourceforge.qrcode.data.QRCodeImage;
 
 import org.sniper.commons.util.CodecUtils;
-import org.sniper.image.qrcode.parser.QRCodeParser;
 
 /**
  * jp.sourceforge二维码解析器实现类

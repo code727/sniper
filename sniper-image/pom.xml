@@ -25,17 +25,15 @@
 		    <version>${zxing.version}</version>
 		    <optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>com.swetake</groupId>
-		  	<artifactId>qrcode</artifactId>
-		  	<version>0.50beta10</version>
-		  	<optional>true</optional>
+    	<dependency>
+    		<groupId>QRCode</groupId>
+    		<artifactId>QRCode</artifactId>
+    		<version>3.0.0</version>
 		</dependency>
 		<dependency>
-  			<groupId>jp.sourceforge</groupId>
-  			<artifactId>qrcode</artifactId>
-  			<version>0.9</version>
-  			<optional>true</optional>
+    		<groupId>QRCode</groupId>
+    		<artifactId>QRCode_swetake</artifactId>
+    		<version>3.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>

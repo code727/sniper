@@ -16,7 +16,7 @@
  * Create Date : 2016年7月6日
  */
 
-package org.sniper.image.qrcode.parser.google;
+package org.sniper.image.qrcode.parser;
 
 import java.awt.image.BufferedImage;
 import java.util.Map;
@@ -24,7 +24,6 @@ import java.util.Map;
 import org.sniper.commons.util.CodecUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.image.qrcode.parser.QRCodeParser;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;

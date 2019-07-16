@@ -16,7 +16,7 @@
  * Create Date : 2016-6-17
  */
 
-package org.sniper.image.qrcode.generator.google;
+package org.sniper.image.qrcode.generator;
 
 import java.awt.image.BufferedImage;
 import java.util.Map;
@@ -24,7 +24,6 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.image.layout.QRCodeLayout;
 import org.sniper.image.qrcode.QRCode;
-import org.sniper.image.qrcode.generator.AbstractQRCodeGenerator;
 
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -41,7 +40,7 @@ import com.google.zxing.qrcode.encoder.Encoder;
  */
 public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 
-	private static final ThreadLocal<Map<String, Map<EncodeHintType, Object>>> hints = new ThreadLocal<Map<String, Map<EncodeHintType, Object>>>();
+	private static final Map<String, Map<EncodeHintType, Object>> hints = MapUtils.newConcurrentHashMap();
 
 	private Writer writer;
 	
@@ -78,33 +77,29 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	 * @return
 	 */
 	protected Map<EncodeHintType, Object> getHints(QRCode qrCode) {
-		Map<String, Map<EncodeHintType, Object>> hintsMap = hints.get();
-		if (hintsMap == null)
-			hintsMap = MapUtils.newConcurrentHashMap();
-		
 		ErrorCorrectionLevel ecl = ErrorCorrectionLevel.valueOf(qrCode.getErrorCorrectionLevel().toUpperCase());
 		QRCodeLayout layout = qrCode.getLayout();
 		
-		StringBuffer key = new StringBuffer();
+		StringBuilder key = new StringBuilder();
 		key.append(ecl).append("_")
 				.append(qrCode.getEncoding()).append("_")
 				.append(layout.getSideLength()).append("_")
 				.append(layout.getSideLength()).append("_")
 				.append(layout.getMargin());
-				
-
-		Map<EncodeHintType, Object> hs = hintsMap.get(key);
+		
+		Map<EncodeHintType, Object> hs = hints.get(key);
 		if (hs == null) {
-			hs = MapUtils.newHashMap();
-			hs.put(EncodeHintType.ERROR_CORRECTION, ecl);
-			hs.put(EncodeHintType.CHARACTER_SET, qrCode.getEncoding());
-//			hs.put(EncodeHintType.MAX_SIZE, layout.getSideLength());
-//			hs.put(EncodeHintType.MIN_SIZE, QRCodeLayout.MIN_SIDELENGTH);
-//			hs.put(EncodeHintType.MARGIN, layout.getMargin());
-			hs.put(EncodeHintType.MARGIN, 0);
+			synchronized (this) {
+				hs = MapUtils.newHashMap();
+				hs.put(EncodeHintType.ERROR_CORRECTION, ecl);
+				hs.put(EncodeHintType.CHARACTER_SET, qrCode.getEncoding());
+//				hs.put(EncodeHintType.MAX_SIZE, layout.getSideLength());
+//				hs.put(EncodeHintType.MIN_SIZE, QRCodeLayout.MIN_SIDELENGTH);
+//				hs.put(EncodeHintType.MARGIN, layout.getMargin());
+				hs.put(EncodeHintType.MARGIN, 0);
 
-			hintsMap.put(key.toString(), hs);
-			hints.set(hintsMap);
+				hints.put(key.toString(), hs);
+			}
 		}
 
 		return hs;
@@ -157,8 +152,8 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	}
 	
 	/**
-	 * 清空默认计算出的边距
-	 *              不建议使用，调用此方法后再生成的图片，可能会导致解析失败
+	 * 清空默认计算出的边距</P>
+	 * @deprecated 不建议使用，调用此方法后再生成的图片可能会导致解析失败
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param matrix
 	 * @return
