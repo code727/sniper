@@ -13,29 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-12-29
+ * Create Date : 2015-12-24
  */
 
-package org.sniper.captcha.repository.domain;
-
-import org.sniper.commons.util.StringUtils;
+package org.sniper.captcha.repository;
 
 /**
- * 混编文本库实现类
+ * 字母文本库
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MixedRepository extends TextRepository {
+public class LetterRepository extends TextRepository {
 	
-	private static final String[] deletedString = new String[] { "0", "o", "O", "1", "l" };
+	private static final String TEXT = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
 	
-	public MixedRepository() {
-		String content = new NumberRepository().getContent() + new LetterRepository().getContent();
-		for (String ds : deletedString) {
-			content = StringUtils.delete(content, ds);
-		}
-		
-		setContent(content);
+	public LetterRepository() {
+		setContent(TEXT);
 	}
-		
+
 }

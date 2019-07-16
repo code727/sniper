@@ -23,7 +23,7 @@ package org.sniper.commons.pagination.pager;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JQueryEasyUIPager extends SingleSortPager {
+public class JQueryEasyUIPager extends SimplePager {
 	
 	private static final long serialVersionUID = -4724476082340689425L;
 	
@@ -63,41 +63,4 @@ public class JQueryEasyUIPager extends SingleSortPager {
 		super.setCurrentPage(page);
 	}
 	
-	/**
-	 * 设置JQuery EasyUI分页器单个排序字段名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param sort
-	 */
-	public void setSort(String name) {
-		sortProxy.setName(name);
-		add(sortProxy);
-	}
-		
-	/**
-	 * 获取JQuery EasyUI分页器单个排序字段名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getSort() {
-		return sortProxy != null ? sortProxy.getName() : null;
-	}
-	
-	/**
-	 * 设置JQuery EasyUI分页器单个排序方式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param order
-	 */
-	public void setOrder(String order) {
-		this.sortProxy.setOrder(order);
-	}
-	
-	/**
-	 * 获取JQuery EasyUI分页器单个排序方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public String getOrder() {
-		return sortProxy != null ? sortProxy.getOrder() : null;
-	}
-			
 }

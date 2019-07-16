@@ -44,7 +44,7 @@ public class JQueryEasyUIPagingResult<T> extends SimplePagingResult<T> {
 	}
 	
 	/**
-	 * 获取分页结果
+	 * 获取分页数据结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
@@ -54,7 +54,7 @@ public class JQueryEasyUIPagingResult<T> extends SimplePagingResult<T> {
 	}
 
 	/**
-	 * 设置分页结果
+	 * 设置分页数据结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param rows
 	 */

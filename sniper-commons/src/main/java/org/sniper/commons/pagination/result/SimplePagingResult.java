@@ -21,10 +21,11 @@ package org.sniper.commons.pagination.result;
 import java.util.List;
 
 import org.sniper.commons.pagination.PagingResult;
-import org.sniper.commons.util.ObjectUtils;
+import org.sniper.commons.util.CollectionUtils;
+import org.sniper.commons.util.NumberUtils;
 
 /**
- * 简单分页结果实现类
+ * 简单的分页结果实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -50,14 +51,13 @@ public class SimplePagingResult<T> implements PagingResult<T> {
 
 	@Override
 	public long getTotal() {
-		int dataSize = ObjectUtils.count(data);
+		int dataSize = CollectionUtils.size(data);
 		return this.total > dataSize ? this.total : dataSize;
 	}
 
 	@Override
 	public void setTotal(long total) {
-		if (total > 0)
-			this.total = total;
+		this.total = NumberUtils.minLimit(total, 0);
 	}
-	
+		
 }

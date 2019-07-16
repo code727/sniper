@@ -4,7 +4,7 @@
 
 	<!-- MySQL基本分页片段 -->
 	<sql id="limit" >
-		LIMIT #{begin}, #{pageSize}
+		LIMIT #{begin},#{pageSize}
 	</sql>
 	
 	<sql id="beginAndLimit" >

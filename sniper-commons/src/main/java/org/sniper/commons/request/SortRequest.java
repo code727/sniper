@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-12-24
+ * Create Date : 2016-7-28
  */
 
-package org.sniper.captcha.repository.domain;
+package org.sniper.commons.request;
+
+import java.io.Serializable;
 
 /**
- * 字母文本库
+ * 排序请求
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class LetterRepository extends TextRepository {
+public class SortRequest implements Serializable {
+
+	private static final long serialVersionUID = -3569581291289010870L;
+
+	/** 需要排序的字段名称 */
+	private String name;
 	
-	private static final String TEXT = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
+	/** 排序方式，例如RDMS的ASC和DESC关键字，MongoDB的0和1等 */
+	private String order;
 	
-	public LetterRepository() {
-		setContent(TEXT);
+	public String getName() {
+		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
+	}
+	
 }

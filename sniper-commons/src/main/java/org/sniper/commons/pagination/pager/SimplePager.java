@@ -20,9 +20,10 @@ package org.sniper.commons.pagination.pager;
 
 import org.sniper.commons.pagination.SortablePagingQuery;
 import org.sniper.commons.request.SortRequest;
+import org.sniper.commons.util.NumberUtils;
 
 /**
- * 简单分页器实现类
+ * 简单的分页器实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -49,8 +50,7 @@ public class SimplePager extends SortRequest implements SortablePagingQuery {
 
 	@Override
 	public void setPageSize(int pageSize) {
-		if (pageSize > 0)
-			this.pageSize = pageSize;
+		this.pageSize = NumberUtils.minLimit(pageSize, 1);
 	}
 
 	@Override
@@ -59,19 +59,17 @@ public class SimplePager extends SortRequest implements SortablePagingQuery {
 	}
 
 	@Override
-	public void setCurrentPage(int page) {
-		if (page > DEFAULT_CURRENT_PAGE)
-			this.currentPage = page;
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = NumberUtils.minLimit(currentPage, 1);
 	}
 
 	@Override
 	public long getBegin() {
 		// 开始位置不为默认起始位置时(例如按ID偏移进行分页时，设置此值为起始ID)，则直接返回。
-		// 否则根据当前页数和每页条数计算后返回
-//		&& this.currentPage == DEFAULT_CURRENT_PAGE
-		if (this.begin != START_POS )
+		if (this.begin != START_POS)
 			return this.begin;
 
+		// 根据当前页数和每页条数计算后返回
 		return (this.currentPage -1) * this.pageSize;
 	}
 
@@ -83,10 +81,12 @@ public class SimplePager extends SortRequest implements SortablePagingQuery {
 	@Override
 	public long getEnd() {
 		// 结束位置不为默认起始位置时(例如按ID偏移进行分页时，设置此值为结束ID)，则直接返回。
-		// 否则根据起始位置和每页条数计算后返回
-		if (this.end != START_POS)
-			return this.end > this.getBegin() ? this.end : this.getBegin();
-		
+		if (this.end != START_POS) {
+			long begin = this.getBegin();
+			return this.end > begin ? this.end : begin;
+		}
+			
+		// 根据起始位置和每页条数计算后返回
 		return this.getBegin() + this.pageSize;
 	}			
 

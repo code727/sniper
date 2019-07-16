@@ -21,11 +21,10 @@ package org.sniper.commons.pagination.pager;
 import java.util.List;
 
 import org.sniper.commons.pagination.PagingDetailResult;
+import org.sniper.commons.pagination.PagingQuery;
 import org.sniper.commons.pagination.PagingResult;
-import org.sniper.commons.pagination.SortablePagingQuery;
 import org.sniper.commons.pagination.result.JQueryEasyUIPagingResult;
 import org.sniper.commons.pagination.result.SimplePagingResult;
-import org.sniper.commons.request.Sort;
 import org.sniper.commons.util.CollectionUtils;
 
 /**
@@ -34,19 +33,21 @@ import org.sniper.commons.util.CollectionUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DetailPager<T> implements SortablePagingQuery, PagingDetailResult<T> {
+public class DetailPager<T> implements PagingQuery, PagingDetailResult<T> {
 
 	private static final long serialVersionUID = -6132358308660100965L;
 
-	private SortablePagingQuery pager;
+	/** 分页器 */
+	private PagingQuery pager;
 	
+	/** 分页结果 */
 	private PagingResult<T> result;
 	
 	public DetailPager() {
 		this(null, null);
 	}
 	
-	public DetailPager(SortablePagingQuery pager) {
+	public DetailPager(PagingQuery pager) {
 		this(pager, null);
 	}
 	
@@ -54,7 +55,7 @@ public class DetailPager<T> implements SortablePagingQuery, PagingDetailResult<T
 		this(null, result);
 	}
 	
-	public DetailPager(SortablePagingQuery pager, PagingResult<T> result) {
+	public DetailPager(PagingQuery pager, PagingResult<T> result) {
 		if (pager == null)
 			this.pager = new SimplePager();
 		else
@@ -145,19 +146,4 @@ public class DetailPager<T> implements SortablePagingQuery, PagingDetailResult<T
 		return getTotal() / getPageSize() + (getTotal() % getPageSize() != 0 ? 1 : 0);
 	}
 	
-	@Override
-	public List<Sort> getSortes() {
-		return this.pager.getSortes();
-	}
-
-	@Override
-	public void setSortes(List<Sort> sortes) {
-		this.pager.setSortes(sortes);
-	}
-
-	@Override
-	public void add(Sort sort) {
-		this.pager.add(sort);
-	}
-
 }

@@ -16,9 +16,7 @@
  * Create Date : 2015-12-24
  */
 
-package org.sniper.captcha.repository.domain;
-
-import org.sniper.captcha.repository.Repository;
+package org.sniper.captcha.repository;
 
 /**
  * 文本库实现类

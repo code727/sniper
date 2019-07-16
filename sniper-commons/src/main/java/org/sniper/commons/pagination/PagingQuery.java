@@ -60,9 +60,9 @@ public interface PagingQuery extends Serializable {
 	/**
 	 * 设置当前页数
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param page
+	 * @param currentPage
 	 */
-	public void setCurrentPage(int page);
+	public void setCurrentPage(int currentPage);
 			
 	/**
 	 * 获取执行查询的起始位置

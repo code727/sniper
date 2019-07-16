@@ -18,8 +18,8 @@
 
 package org.sniper.captcha.generator;
 
+import org.sniper.captcha.repository.MixedRepository;
 import org.sniper.captcha.repository.Repository;
-import org.sniper.captcha.repository.domain.MixedRepository;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.NumberUtils;
 

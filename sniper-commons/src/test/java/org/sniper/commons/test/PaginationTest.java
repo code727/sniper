@@ -34,25 +34,24 @@ public class PaginationTest extends BaseTestCase {
 	public void testSimplePager() {
 		SimplePager pager = new SimplePager();
 		/* 进行常规分页时，传入currentPage和pageSize，再根据begin和pageSize来分页 */
-		pager.setCurrentPage(2);
-		pager.setPageSize(16);
-		System.out.println("begin:" + pager.getBegin());
-		System.out.println("end:" + pager.getEnd());
-		System.out.println("pageSize" + pager.getPageSize());
+//		pager.setCurrentPage(2);
+//		pager.setPageSize(10);
+//		System.out.println("begin:" + pager.getBegin());
+//		System.out.println("end:" + pager.getEnd());
+//		System.out.println("pageSize" + pager.getPageSize());
 		
 		/* 进行ID半偏移分页时，传入begin和pageSize，再根据begin和pageSize来分页 */
-		pager.setBegin(15);
+		pager.setBegin(-1);
 		pager.setPageSize(20);
 		System.out.println("begin:" + pager.getBegin());
 		System.out.println("end:" + pager.getEnd());
-		System.out.println("pageSize" + pager.getPageSize());
+		System.out.println("pageSize:" + pager.getPageSize());
 		
 		/* 进行ID全偏移分页时，传入begin和end或pageSize，再根据begin和end来分页 */
-		pager.setBegin(15);
-		pager.setEnd(100);
-		System.out.println("begin:" + pager.getBegin());
-		System.out.println("end:" + pager.getEnd());
-		
+//		pager.setBegin(15);
+//		pager.setEnd(100);
+//		System.out.println("begin:" + pager.getBegin());
+//		System.out.println("end:" + pager.getEnd());
 	}
 	
 //	@Test

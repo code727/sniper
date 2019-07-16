@@ -18,14 +18,39 @@
 
 package org.sniper.commons.pagination;
 
-import org.sniper.commons.request.SortableRequest;
-
 /**
  * 可排序的分页查询条件接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface SortablePagingQuery extends PagingQuery, SortableRequest {
+public interface SortablePagingQuery extends PagingQuery {
 	
+	/**
+	 * 获取需要排序的字段名称
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getName();
 
+	/**
+	 * 设置需要排序的字段名称
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param name
+	 */
+	public void setName(String name);
+
+	/**
+	 * 获取排序方式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public String getOrder();
+
+	/**
+	 * 设置排序方式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param order
+	 */
+	public void setOrder(String order);
+	
 }
