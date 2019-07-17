@@ -45,54 +45,54 @@ public class ZoomHandlerTest extends BaseTestCase {
 	/** 纵向图 */
 	private InputStream verticalImage;
 	
-	private File lateraImageFile = new File("C:/Users/Administrator/Desktop/lateraImage.png");
-	private File verticalImageFile = new File("C:/Users/Administrator/Desktop/verticalImage.png");
+	private File lateraImageFile = new File("/test/zoom/lateraImage.png");
+	private File verticalImageFile = new File("/test/zoom/verticalImage.png");
 	
 	@Before
 	public void init() throws IOException {
-		// 1300 * 957  scale: 1.35 - 1.36
-		lateraImage = new URL("http://thumbs.dreamstime.com/z/%D3%EB%D4%C2%C1%C1%B5%C4%CD%ED%C9%CF%BA%E1%CF%F2%A3%AC%BD%E1%B9%B9%CA%F7%BC%F4%D3%B0%A3%AC%D0%C7%D0%CE-28196962.jpg").openStream();
-		// 452 * 690 scale: 0.65 - 0.66
-		verticalImage = new URL("http://s9.sinaimg.cn/middle/4fe42793ta02d76d21578&690").openStream();
+		// 1024 * 643  scale: 1.35 - 1.36
+		lateraImage = new URL("http://pic.58pic.com/58pic/13/80/78/35V58PICrWD_1024.jpg").openStream();
+		// 821 * 1024 scale: 0.65 - 0.66
+		verticalImage = new URL("http://pic25.nipic.com/20121117/9252150_165726249000_2.jpg").openStream();
 	}
 	
 //	@Test
 	public void testFixedZoomHandler() throws Exception {
 		FixedZoomHandler handler = new FixedZoomHandler();
-		handler.setTargetWidth(1024);
-		handler.setTargetHeight(768);
+		handler.setTargetWidth(800);
+		handler.setTargetHeight(600);
 		
 		handler.handle(lateraImage, lateraImageFile);
 		BufferedImage destImage = ImageIO.read(lateraImageFile); 
 		
-		System.out.println("像素区间["+ handler.getTargetWidth() + "*" + handler.getTargetHeight() + "].");;
-		System.out.println("目标横向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "].");
+		System.out.println("像素区间["+ handler.getTargetWidth() + "*" + handler.getTargetHeight() + "]");
+		System.out.println("目标横向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "]");
 		
 		handler.handle(verticalImage, verticalImageFile);
 		destImage = ImageIO.read(verticalImageFile); 
 		
-		System.out.println("像素区间["+ handler.getTargetWidth() + "*" + handler.getTargetHeight() + "].");;
-		System.out.println("目标纵向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "].");
+		System.out.println("像素区间["+ handler.getTargetWidth() + "*" + handler.getTargetHeight() + "]");
+		System.out.println("目标纵向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "]");
 	}
 	
 	@Test
 	public void testRatioHandler() throws Exception {
 		AdaptiveRatioHandler handler = new AdaptiveRatioHandler();
-		handler.setTargetWidth(2000);
-		handler.setTargetHeight(2000);
+		handler.setTargetWidth(800);
+		handler.setTargetHeight(600);
 		handler.setCompressOnly(false);
 		
 		handler.handle(lateraImage, lateraImageFile);
 		BufferedImage destImage = ImageIO.read(lateraImageFile); 
 		
-		System.out.println("像素区间["+ handler.getTargetWidth() + "*" + handler.getTargetHeight() + "].");;
-		System.out.println("目标横向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "].");
+		System.out.println("像素区间["+ handler.getTargetWidth() + "*" + handler.getTargetHeight() + "]");
+		System.out.println("目标横向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "]");
 		
 		handler.handle(verticalImage, verticalImageFile);
 		destImage = ImageIO.read(verticalImageFile); 
 		
-		System.out.println("像素区间["+ handler.getTargetWidth() + "*" + handler.getTargetHeight() + "].");;
-		System.out.println("目标纵向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "].");
+		System.out.println("像素区间["+ handler.getTargetWidth() + "*" + handler.getTargetHeight() + "]");
+		System.out.println("目标纵向图像素:[" + destImage.getWidth() + "*" + destImage.getHeight() + "]");
 	}
 	
 

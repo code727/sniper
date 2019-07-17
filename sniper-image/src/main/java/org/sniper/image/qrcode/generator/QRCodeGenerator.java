@@ -20,7 +20,6 @@ package org.sniper.image.qrcode.generator;
 
 import java.awt.image.BufferedImage;
 
-import org.sniper.image.layout.QRCodeLayout;
 import org.sniper.image.qrcode.QRCode;
 
 /**
@@ -29,21 +28,7 @@ import org.sniper.image.qrcode.QRCode;
  * @version 1.0
  */
 public interface QRCodeGenerator {
-	
-	/**
-	 * 设置全局样式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param layout
-	 */
-	public void setLayout(QRCodeLayout layout);
-	
-	/**
-	 * 获取全局样式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public QRCodeLayout getLayout();
-	
+		
 	/**
 	 * 生成二维码图片对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
@@ -51,6 +36,7 @@ public interface QRCodeGenerator {
 	 * @return
 	 * @throws Exception
 	 */
-	public BufferedImage generator(QRCode qrCode) throws Exception;
+	public BufferedImage generate(QRCode qrCode) throws Exception;
+
 
 }

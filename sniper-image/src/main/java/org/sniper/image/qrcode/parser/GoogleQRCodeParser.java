@@ -64,8 +64,12 @@ public class GoogleQRCodeParser implements QRCodeParser {
 		LuminanceSource source = new BufferedImageLuminanceSource(qrCodeImage);  
 		BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));  
 		Map<DecodeHintType, Object> hints = MapUtils.newHashMap();
+		
+		hints.put(DecodeHintType.PURE_BARCODE, Boolean.TRUE);
+		hints.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
 		hints.put(DecodeHintType.CHARACTER_SET, StringUtils
-				.isNotBlank(encoding) ? encoding : CodecUtils.DEFAULT_ENCODING);
+				.isNotBlank(encoding) ? encoding.toLowerCase() : CodecUtils.DEFAULT_ENCODING);
+		
 		return reader.decode(bitmap, hints).getText();
 	}
 

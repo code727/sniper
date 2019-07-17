@@ -23,54 +23,54 @@ import java.awt.Color;
 import org.sniper.commons.util.NumberUtils;
 
 /**
- * 二维码布局
+ * 二维码布局样式
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class QRCodeLayout extends BaseLayout {
+public class QRCodeLayout extends BaseLayout implements Cloneable {
 	
 	private static final long serialVersionUID = -8237652728083670335L;
 	
 	/** 最小边长常量 */
-	public static final int MIN_SIDELENGTH = 50;
+	private static final int MIN_SIDELENGTH = 50;
 	
 	/** logo图片占总宽高的最小比例 */
-	public static final double MIN_LOGOSCALE = 0.2;
+	private static final double LOGO_MIN_SCALE = 0.05;
 	
 	/** logo图片占总宽高的最大比例 */
-	public static final double MAX_LOGOSCALE = 0.45;
-	
-	/** 默认边框颜色 */
-	public static final Color DEFAULT_BORDER_COLOR = new Color(215, 215, 215);
+	private static final double LOGO_MAX_SCALE = 0.25;
+		
+	/** 默认的边框颜色(灰色) */
+	private static final Color DEFAULT_BORDER_COLOR = new Color(215, 215, 215);
 	
 	/** 边长 */
-	private int sideLength = MIN_SIDELENGTH;
+	private int sideLength = 512;
 	
-	/** 开放颜色 */
-    private int onColor = 0xFF000000;
+	/** 开放颜色(黑色) */
+    private Color onColor = Color.BLACK;
     
-    /** 关闭颜色 */
-    private int offColor = 0xFFFFFFFF;
+    /** 关闭颜色(白色) */
+    private Color offColor = Color.WHITE;
     
     /** logo图片占总宽高的比例 */
-    private double logoScale = MIN_LOGOSCALE;
+    private double logoScale = 0.15;
     
     /** logo是否需要背景 */
     private boolean logoBackground = true;
     
-    /** logo背景颜色 */
+    /** logo背景颜色(白色) */
     private Color logoBackgroundColor = Color.WHITE;
     
     /** logo背景是否需要边框 */
-    private boolean logoBackgroundBorder = true;
+    private boolean logoBackgroundBorder = false;
     
-    /** logo背景边框颜色 */
+    /** logo背景的边框颜色 */
     private Color logoBackgroundBorderColor = DEFAULT_BORDER_COLOR;
     
 	/** logo图片是否需要边框 */
     private boolean logoBorder = true;
     
-    /** logo图片边框颜色 */
+    /** logo图片的边框颜色 */
     private Color logoBorderColor = DEFAULT_BORDER_COLOR;
     
     @Override
@@ -78,19 +78,19 @@ public class QRCodeLayout extends BaseLayout {
     	super.setMargin(NumberUtils.minLimit(margin, 0));
     }
     
-	public int getOnColor() {
+	public Color getOnColor() {
 		return onColor;
 	}
 
-	public void setOnColor(int onColor) {
+	public void setOnColor(Color onColor) {
 		this.onColor = onColor;
 	}
 
-	public int getOffColor() {
+	public Color getOffColor() {
 		return offColor;
 	}
 
-	public void setOffColor(int offColor) {
+	public void setOffColor(Color offColor) {
 		this.offColor = offColor;
 	}
 
@@ -107,7 +107,7 @@ public class QRCodeLayout extends BaseLayout {
 	}
 
 	public void setLogoScale(double logoScale) {
-		this.logoScale = NumberUtils.maxLimit(NumberUtils.minLimit(logoScale, MIN_LOGOSCALE), MAX_LOGOSCALE);
+		this.logoScale = NumberUtils.rangeLimit(logoScale, LOGO_MIN_SCALE, LOGO_MAX_SCALE);
 	}
 
 	public boolean hasLogoBackground() {
@@ -158,6 +158,11 @@ public class QRCodeLayout extends BaseLayout {
 	public void setLogoBorderColor(Color logoBorderColor) {
 		if (!hasLogoBorder() || logoBorderColor != null)
 			this.logoBorderColor = logoBorderColor;
+	}
+	
+	@Override
+	public QRCodeLayout clone() throws CloneNotSupportedException {
+		return (QRCodeLayout) super.clone();
 	}
 
 }

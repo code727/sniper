@@ -25,13 +25,13 @@ import org.sniper.commons.util.MapUtils;
 import org.sniper.image.layout.QRCodeLayout;
 import org.sniper.image.qrcode.QRCode;
 
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.Writer;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.google.zxing.qrcode.encoder.ByteMatrix;
-import com.google.zxing.qrcode.encoder.Encoder;
 
 /**
  * Google二维码生成器实现类
@@ -42,32 +42,39 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 
 	private static final Map<String, Map<EncodeHintType, Object>> hints = MapUtils.newConcurrentHashMap();
 
-	private Writer writer;
+	private final Writer writer;
+	
+	private boolean aoutoClearMargin;
 	
 	public GoogleQRCodeGenerator() {
-		this.writer = new MultiFormatWriter();
+		this(null);
+	}
+	
+	public GoogleQRCodeGenerator(Writer writer) {
+		this.writer = (writer == null ? new QRCodeWriter() : writer);
 	}
 	
 	public Writer getWriter() {
 		return writer;
 	}
-
-	public void setWriter(Writer writer) {
-		this.writer = writer;
-	}
 	
+	public boolean isAoutoClearMargin() {
+		return aoutoClearMargin;
+	}
+
+	public void setAoutoClearMargin(boolean aoutoClearMargin) {
+		this.aoutoClearMargin = aoutoClearMargin;
+	}
+
 	@Override
 	protected BufferedImage createSourceImage(QRCode qrCode) throws Exception {
-//		QRCodeLayout layout = qrCode.getLayout();
-//		int targetWidth = layout.getSideLength();
-//		int targetHeight = layout.getSideLength();
-//		
-//		BitMatrix bitMatrix = writer.encode(qrCode.getText(), BarcodeFormat.QR_CODE, targetWidth, targetHeight, getHints(qrCode));
-//		return drawSourceImage(clearDefaultMargin(bitMatrix), qrCode);
+		QRCodeLayout layout = qrCode.getLayout();
+		int targetWidth = layout.getSideLength();
+		int targetHeight = layout.getSideLength();
 		
-		ErrorCorrectionLevel ecl = ErrorCorrectionLevel.valueOf(qrCode.getErrorCorrectionLevel().toUpperCase());
-		com.google.zxing.qrcode.encoder.QRCode code = Encoder.encode(qrCode.getText(), ecl, getHints(qrCode));
-		return drawSourceImage(code.getMatrix(), qrCode);
+		BitMatrix bitMatrix = writer.encode(qrCode.getText(), BarcodeFormat.QR_CODE, targetWidth, targetHeight, getHints(qrCode));
+		return aoutoClearMargin ? drawSourceImage(clearDefaultMargin(bitMatrix), qrCode)
+				: drawSourceImage(bitMatrix, qrCode);
 	}
 
 	/**
@@ -92,10 +99,7 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 			synchronized (this) {
 				hs = MapUtils.newHashMap();
 				hs.put(EncodeHintType.ERROR_CORRECTION, ecl);
-				hs.put(EncodeHintType.CHARACTER_SET, qrCode.getEncoding());
-//				hs.put(EncodeHintType.MAX_SIZE, layout.getSideLength());
-//				hs.put(EncodeHintType.MIN_SIZE, QRCodeLayout.MIN_SIDELENGTH);
-//				hs.put(EncodeHintType.MARGIN, layout.getMargin());
+				hs.put(EncodeHintType.CHARACTER_SET, qrCode.getEncoding().toLowerCase());
 				hs.put(EncodeHintType.MARGIN, 0);
 
 				hints.put(key.toString(), hs);
@@ -116,11 +120,14 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 		int matrixWidth = byteMatrix.getWidth();
 		int matrixHeight = byteMatrix.getHeight();
 		
-		BufferedImage image = new BufferedImage(matrixWidth, matrixHeight, qrCode.getImageType());
 		QRCodeLayout layout = qrCode.getLayout();
+		int on = layout.getOnColor().getRGB();
+		int off = layout.getOffColor().getRGB();
+		
+		BufferedImage image = new BufferedImage(matrixWidth, matrixHeight, qrCode.getImageType());
 		for (int x = 0; x < matrixWidth; x++) {
 			for (int y = 0; y < matrixHeight; y++) {
-				image.setRGB(x, y, (byteMatrix.get(x, y) != 0 ? layout.getOnColor() : layout.getOffColor()));
+				image.setRGB(x, y, (byteMatrix.get(x, y) != 0 ? on : off));
 			}
 		}
 			
@@ -139,11 +146,14 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 		int matrixWidth = bitMatrix.getWidth();
 		int matrixHeight = bitMatrix.getHeight();
 		
-		BufferedImage image = new BufferedImage(matrixWidth, matrixHeight, qrCode.getImageType());
 		QRCodeLayout layout = qrCode.getLayout();
+		int on = layout.getOnColor().getRGB();
+		int off = layout.getOffColor().getRGB();
+		
+		BufferedImage image = new BufferedImage(matrixWidth, matrixHeight, qrCode.getImageType());
 		for (int x = 0; x < matrixWidth; x++) {
 			for (int y = 0; y < matrixHeight; y++) {
-				image.setRGB(x, y, (bitMatrix.get(x, y) ? layout.getOnColor() : layout.getOffColor()));
+				image.setRGB(x, y, (bitMatrix.get(x, y) ? on : off));
 			}
 		}
 			
@@ -153,7 +163,7 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	
 	/**
 	 * 清空默认计算出的边距</P>
-	 * @deprecated 不建议使用，调用此方法后再生成的图片可能会导致解析失败
+	 * @deprecated 不建议使用，边距被清空的图片可能会导致解析失败
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param matrix
 	 * @return
@@ -164,8 +174,8 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 		int left = rectangle[0];
 		int top = rectangle[1];
 		
-		int targetWidth = rectangle[2];
-		int targetHeight = rectangle[3];
+		int targetWidth = rectangle[2] + 1;
+		int targetHeight = rectangle[3] + 1;
 		
 		BitMatrix newMatrix = new BitMatrix(targetWidth, targetHeight);
 		newMatrix.clear();

@@ -82,13 +82,13 @@ public class DefaultImageReader implements ImageReader {
 	 */
 	protected void checkSource(File source) throws IOException {
 		if (!source.exists())
-			throw new IOException("Source [" + source.getAbsolutePath() + "] does not exist.");
+			throw new IOException(String.format("Source [%s] does not exist", source.getAbsolutePath()));
 		
 		if (source.isDirectory())
-			throw new IOException("Source [" + source.getCanonicalPath() + "] is a file directory.");
+			throw new IOException(String.format("Source [%s] is a file directory", source.getCanonicalPath()));
 		
 		if (!source.canRead())
-			throw new IOException("Source [" + source.getCanonicalPath() + "] can not read." );
+			throw new IOException(String.format("Source [%s] can not read", source.getCanonicalPath()));
 	}
 
 }

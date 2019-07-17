@@ -22,12 +22,12 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 import org.sniper.codec.CodecSupport;
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.NumberUtils;
-import org.sniper.commons.util.StringUtils;
 import org.sniper.image.layout.QRCodeLayout;
 
 /**
- * 二维码对象
+ * 二维码实体对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -36,26 +36,27 @@ public class QRCode extends CodecSupport implements Serializable {
 	private static final long serialVersionUID = 6804121350317192944L;
 	
 	/** 文本内容 */
-	private String text;
-	
-	/** logo图片 */
-	private BufferedImage logo;
+	private final String text;
 	
 	/** 图片布局 */
 	private QRCodeLayout layout;
 	
-	/** 纠错等级 */
-	private String errorCorrectionLevel = "H";
+	/** 内嵌的logo图片 */
+	private BufferedImage logo;
 	
 	/** 图片类型 */
 	private int imageType = BufferedImage.TYPE_INT_RGB;
 	
+	/** 纠错等级 */
+	private String errorCorrectionLevel = "H";
+	
+	public QRCode(String text) {
+		AssertUtils.assertNotBlank("QRCode text must not be null or empty");
+		this.text = text;
+	}
+	
 	public String getText() {
 		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
 	}
 
 	public BufferedImage getLogo() {
@@ -87,8 +88,8 @@ public class QRCode extends CodecSupport implements Serializable {
 	}
 
 	public void setErrorCorrectionLevel(String errorCorrectionLevel) {
-		if (StringUtils.isNotBlank(errorCorrectionLevel))
-			this.errorCorrectionLevel = errorCorrectionLevel;
+		AssertUtils.assertNotBlank(errorCorrectionLevel, "QRCode error correction level must not null or blank");
+		this.errorCorrectionLevel = errorCorrectionLevel;
 	}
 	
 }

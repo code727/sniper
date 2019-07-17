@@ -41,7 +41,7 @@ public class SwetakeQRCodeGenerator extends AbstractQRCodeGenerator {
 	@Override
 	protected BufferedImage createSourceImage(QRCode qrCode) throws Exception {
 		Qrcode code = getCode(qrCode);
-        byte [] contentBytes = CodecUtils.getBytes(qrCode.getText(), qrCode.getEncoding());  
+        byte [] contentBytes = CodecUtils.getBytes(qrCode.getText(), qrCode.getEncoding()); 
 		return drawSourceImage(code.calQrcode(contentBytes), qrCode);
 	}
 	
@@ -54,22 +54,22 @@ public class SwetakeQRCodeGenerator extends AbstractQRCodeGenerator {
 	protected Qrcode getCode(QRCode qrCode) {
 		
 		char ecl = qrCode.getErrorCorrectionLevel().toUpperCase().charAt(0);
-		StringBuffer key = new StringBuffer(ecl);
+		String key = String.valueOf(ecl);
 		
 		Qrcode code = codes.get(key);
 		if (code == null) {
 			synchronized (this) {
 				code = new Qrcode();
 				code.setQrcodeErrorCorrect(ecl);
-				/* 编码模式，取第一个大写字母
-		           Numeric：数字
-		           Alphanumeric： 英文字母
-		           Binary：二进制
-		           Kanji：汉字
-		        */
+				/* 编码模式，取第一个大写字母。
+				   Numeric:数字，
+				   Alphanumeric:英文字母，
+				   Binary:二进制，
+				   Kanji:汉字 
+				*/
 				code.setQrcodeEncodeMode('B');
 				
-				codes.put(key.toString(), code);
+				codes.put(key, code);
 			}
 		}
 		
@@ -79,21 +79,35 @@ public class SwetakeQRCodeGenerator extends AbstractQRCodeGenerator {
 	/**
 	 * 绘制二维码原图
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param calQrcode
+	 * @param matrix
 	 * @param qrCode
 	 * @return
 	 */
-	protected BufferedImage drawSourceImage(boolean [][] calQrcode, QRCode qrCode) {
+	protected BufferedImage drawSourceImage(boolean [][] matrix, QRCode qrCode) {
 		QRCodeLayout layout = qrCode.getLayout();
-		int sideLength = calQrcode.length;
+		int sideLength = layout.getSideLength();
 		
 		BufferedImage image = new BufferedImage(sideLength, sideLength, qrCode.getImageType());  
 		Graphics2D graphics = image.createGraphics();
-		for (int x = 0; x < sideLength; x++) {
-			for (int y = 0; y < sideLength; y++) {
-				image.setRGB(x, y, calQrcode[x][y] ? layout.getOnColor() : layout.getOffColor());
+		
+		graphics.setBackground(layout.getOffColor());
+		graphics.clearRect(0, 0, sideLength, sideLength);
+		graphics.setColor(layout.getOnColor());
+
+		int matrixLength = matrix.length;
+		// 绘制二维码图片内容时的缩放倍数
+		int multiple = Math.max(sideLength, matrixLength) / matrixLength;
+
+		int leftPadding = (sideLength - (matrixLength * multiple)) / 2;
+		int topPadding = (sideLength - (matrixLength * multiple)) / 2;
+		for (int inputY = 0, outputY = topPadding; inputY < matrixLength; inputY++, outputY += multiple) {
+			for (int inputX = 0, outputX = leftPadding; inputX < matrixLength; inputX++, outputX += multiple) {
+				if (matrix[inputX][inputY]) {
+					graphics.fillRect(outputX, outputY, multiple, multiple);
+				}
 			}
 		}
+
 		graphics.dispose(); 
 		image.flush();  		
 		return image;

@@ -25,7 +25,8 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 import org.junit.Test;
-import org.sniper.image.layout.QRCodeLayout;
+import org.sniper.commons.util.NumberUtils;
+import org.sniper.commons.util.StringUtils;
 import org.sniper.image.qrcode.QRCode;
 import org.sniper.image.qrcode.generator.GoogleQRCodeGenerator;
 import org.sniper.image.qrcode.generator.SwetakeQRCodeGenerator;
@@ -44,75 +45,87 @@ import org.sniper.test.junit.BaseTestCase;
  */
 public class QRCodeTest extends BaseTestCase {
 	
-	private String text = "http://www.cmge.com/";
-	private String logoURL = "http://f.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=86ac36ad10ce36d3a204843602c85dba/0824ab18972bd407e8e3198a7e899e510fb309a5.jpg";
-	private String google_qrcode = "C:/Users/Administrator/Desktop/test_google.png";
-	private String swetake_qrcode = "C:/Users/Administrator/Desktop/test_swetake.png";
+	private final String[] texts = new String[]{
+		"a", "qrcode_test", StringUtils.unsignedUUID(),
+		"http://f.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=86ac36ad10ce36d3a204843602c85dba/0824ab18972bd407e8e3198a7e899e510fb309a5.jpg",	
+		"二维码又称二维条码，常见的二维码为QR Code，QR全称Quick Response，是一个近几年来移动设备上超流行的一种编码方式，它比传统的Bar Code条形码能存更多的信息，也能表示更多的数据类型。"	
+	};
+	
+	private final String logoURL = "http://pic.58pic.com/58pic/15/02/65/67d58PICkMZ_1024.jpg";
+	
+	private final String google_qrcode = "/test/QRCode/test_google.png";
+	private final String swetake_qrcode = "/test/QRCode/test_swetake.png";
+	
+	private final File googleQRCodeFile = new File(google_qrcode);
+	private final File swetakeQRCodeFile = new File(swetake_qrcode);
 	
 	@Test
-	public void testGoogleQRCodeGenerator() throws Exception {
-		QRCodeLayout layout = new QRCodeLayout();
-		layout.setSideLength(300);
-		layout.setMargin(5);
-		QRCode qrCode = new QRCode();
-		layout.setLogoScale(0.25);
-		qrCode.setLayout(layout);
-		qrCode.setText(text);
+	public void testGoogleGenerateAndParse() throws Exception {
+		generateGoogleQRCode();
+		
+		ImageReader reader = new DefaultImageReader();
+		GoogleQRCodeParser googleParser = new GoogleQRCodeParser();
+		JpQRCodeParser swetakeParser = new JpQRCodeParser();
+			
+		String result1 = googleParser.parse(reader.read(googleQRCodeFile));
+		System.out.println("Google parse google_qrcode:" + result1);
+		
+		String result2 = swetakeParser.parse(reader.read(googleQRCodeFile));
+		System.out.println("Swetake parse google_qrcode:" + result2);
+	}
+	
+//	@Test
+	public void testSwetakeGenerateAndParse() throws Exception {
+		generateSwetakeQRCode();
+		
+		ImageReader reader = new DefaultImageReader();
+		JpQRCodeParser swetakeParser = new JpQRCodeParser();
+		GoogleQRCodeParser googleParser = new GoogleQRCodeParser();
+		
+		String result1 = googleParser.parse(reader.read(swetakeQRCodeFile));
+		System.out.println("Google parse swetake_qrcode:" + result1);
+		
+		String result2 = swetakeParser.parse(reader.read(swetakeQRCodeFile));
+		System.out.println("Swetake parse swetake_qrcode:" + result2);
+		
+	}
+	
+	protected void generateGoogleQRCode() throws Exception {
+		String text = texts[NumberUtils.randomIn(texts.length)];
+		System.out.println("Encode text:" + text);
+		
+		QRCode qrCode = new QRCode(text);
 		qrCode.setLogo(ImageIO.read(new URL(logoURL).openStream()));
 		
 		GoogleQRCodeGenerator generator = new GoogleQRCodeGenerator();
-		BufferedImage image = generator.generator(qrCode);
+		BufferedImage image = generator.generate(qrCode);
 		
+		File googleQRCodeFile = new File(google_qrcode);
+		
+		File parent = googleQRCodeFile.getParentFile();
+		if (!parent.exists()) 
+			parent.mkdirs();
+				
 		ImageWriter imageWriter = new DefaultImageWriter();
-		imageWriter.write(image, new File(google_qrcode));
+		imageWriter.write(image, googleQRCodeFile);
 	}
 	
-	@Test
-	public void testSwetakeQRCodeGenerator() throws Exception {
-		QRCodeLayout layout = new QRCodeLayout();
-		layout.setSideLength(300);
-		layout.setMargin(5);
-		QRCode qrCode = new QRCode();
-		layout.setLogoScale(0.25);
-		qrCode.setLayout(layout);
-		qrCode.setText(text);
+	protected void generateSwetakeQRCode() throws Exception {
+		String text = texts[NumberUtils.randomIn(texts.length)];
+		System.out.println("Encode text:" + text);
+		
+		QRCode qrCode = new QRCode(text);
 		qrCode.setLogo(ImageIO.read(new URL(logoURL).openStream()));
-		
+				
 		SwetakeQRCodeGenerator generator = new SwetakeQRCodeGenerator();
-		BufferedImage image = generator.generator(qrCode);
+		BufferedImage image = generator.generate(qrCode);
+		
+		File parent = swetakeQRCodeFile.getParentFile();
+		if (!parent.exists()) 
+			parent.mkdirs();
 		
 		ImageWriter imageWriter = new DefaultImageWriter();
-		imageWriter.write(image, new File(swetake_qrcode));
+		imageWriter.write(image, swetakeQRCodeFile);
 	}
 	
-	@Test
-	public void testGoogleQRCodeParser() throws Exception {
-		ImageReader reader = new DefaultImageReader();
-		GoogleQRCodeParser parser = new GoogleQRCodeParser();
-		
-		String result = parser.parse(reader.read(new File(google_qrcode)));
-		System.out.println(result);
-		
-		result = parser.parse(reader.read(new File(swetake_qrcode)));
-		System.out.println(result);
-	}
-	
-	/**
-	 * 如果二维码图片太小，小日本的二维码解析器要报错，
-	 * 				另外还不能解析出zxing生成的二维码图片
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @throws Exception
-	 */
-	@Test
-	public void testJpQRCodeParser() throws Exception {
-		ImageReader reader = new DefaultImageReader();
-		JpQRCodeParser parser = new JpQRCodeParser();
-		
-		String result = parser.parse(reader.read(new File(swetake_qrcode)));
-		System.out.println(result);
-		
-		result = parser.parse(reader.read(new File(google_qrcode)));
-		System.out.println(result);
-	}
-
 }

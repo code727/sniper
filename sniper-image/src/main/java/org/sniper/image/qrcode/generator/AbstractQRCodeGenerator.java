@@ -35,26 +35,26 @@ import org.sniper.image.qrcode.QRCode;
 public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 
 	/** 全局样式 */
-	private QRCodeLayout layout;
+	private QRCodeLayout globalLayout = new QRCodeLayout();
 	
-	public AbstractQRCodeGenerator() {
-		this.layout = new QRCodeLayout();
+	public QRCodeLayout getGlobalLayout() {
+		return globalLayout;
 	}
 
-	public void setLayout(QRCodeLayout layout) {
-		this.layout = layout;
+	public void setGlobalLayout(QRCodeLayout globalLayout) {
+		AssertUtils.assertNotNull(globalLayout, "Global qrcode layout must not be null");
+		this.globalLayout = globalLayout;
 	}
 
-	public QRCodeLayout getLayout() {
-		return layout;
-	}
-
-	public BufferedImage generator(QRCode qrCode) throws Exception {
-		AssertUtils.assertNotEmpty(qrCode.getText(), "QRCode text must not be null or empty.");
+	@Override
+	public BufferedImage generate(QRCode qrCode) throws Exception {
+		AssertUtils.assertNotEmpty(qrCode.getText(), "QRCode text must not be null or empty");
 		QRCodeLayout layout = qrCode.getLayout();
-		if (layout == null) 
-			// 将全局样式赋予当前二维码对象
-			qrCode.setLayout(getLayout());
+		if (layout == null) {
+			// 将全局样式拷贝一份给当前二维码对象
+			layout = getGlobalLayout().clone();
+			qrCode.setLayout(layout);
+		}
 		
 		BufferedImage qrcodeImage = createSourceImage(qrCode);
 		qrcodeImage = ratioSourceImage(qrcodeImage, qrCode);
@@ -83,34 +83,43 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 	protected BufferedImage ratioSourceImage(BufferedImage qrcodeImage, QRCode qrCode) {
 		QRCodeLayout layout = qrCode.getLayout();
 
-		/* 目标宽高 */
-		int targetWidth = layout.getSideLength();
-		int targetHeight = layout.getSideLength();
-		
-		/* 二维码图片的实际宽高 */
+		/* 当前二维码图片的实际宽高 */
 		int imageWidth = qrcodeImage.getWidth();
 		int imageHeight = qrcodeImage.getHeight();
 		
+		/* 目标宽高 */
+		int targetSideLength = layout.getSideLength();
+		
 		int margin = layout.getMargin();
-		/* 如果二维码图片宽高与目标不一致或设置有边距时，则按原宽高等比缩放重新生成一张与目标一致的二维码图片 */
-		if (imageWidth != targetWidth || imageHeight != targetHeight || margin > 0) {
-			BufferedImage newImage = new BufferedImage(targetWidth, targetHeight, qrcodeImage.getType());
+		/* 如果二维码图片的实际宽高与目标不一致或设置有边距时，则重新生成一张与目标一致的二维码图片 
+		 * 注意：
+		 * 1.通常情况下，各实现类创建的二维码原图其宽高已经就与目标是一致的了;
+		 * 2.更多时候，调用方生成二维码时，如果指定了边距值(margin)，此时将进入如下代码块进行处理;
+		 * 3.建议不要设置margin值，因为各实现类为尽可能保证消息的完整性，在生成二维码时都会根据消息的大小预留一定大小的边距。
+		 *   因此，如果再设置margin值，只会让实际的边距值比设置的值更大，另外，如果margin值设置的不合理，将可能导致解析失败。
+		 * */
+		if (imageWidth != targetSideLength || imageHeight != targetSideLength || margin > 0) {
+			BufferedImage newImage = new BufferedImage(targetSideLength, targetSideLength, qrcodeImage.getType());
 			Graphics2D graphics = newImage.createGraphics();
 			if (margin > 0) {
-				/* 如果设置有边距，则先将整张图片的背景渲染成白色，
-				 * 而下面的graphics.drawImage方法则将二维码绘制在边距区域内的部分 */
-				graphics.setColor(Color.WHITE);
-				graphics.fillRect(0, 0, targetWidth, targetHeight);
+				int doubleMargin = margin * 2;
+				/* 如果设置有边距，先将整张图片的背景渲染成指定关闭颜色 */ 
+				graphics.setBackground(layout.getOffColor());
+				graphics.clearRect(0, 0, targetSideLength, targetSideLength);
+				
+				/* 再将原二维码的内容绘制在边距区域内 */
+				graphics.fillRect(0, 0, targetSideLength, targetSideLength);
+				graphics.drawImage(qrcodeImage.getScaledInstance(targetSideLength,
+						targetSideLength, Image.SCALE_SMOOTH), margin, margin,
+						targetSideLength - doubleMargin, targetSideLength - doubleMargin, null);
+			} else {
+				graphics.drawImage(qrcodeImage.getScaledInstance(targetSideLength,
+						targetSideLength, Image.SCALE_SMOOTH), 0, 0,
+						targetSideLength, targetSideLength, null);
 			}
-			
-			int doubleMargin = margin * 2;
-			graphics.drawImage(qrcodeImage.getScaledInstance(imageWidth,
-					imageHeight, Image.SCALE_SMOOTH), margin, margin,
-					targetWidth - doubleMargin, targetWidth - doubleMargin, null);
-			
 			graphics.dispose();
 			newImage.flush();
-			qrcodeImage = newImage;
+			return newImage;
 		}
 
 		return qrcodeImage;
@@ -165,9 +174,9 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 		double arcScale = 0.35;
 		int arc = (int) Math.ceil((double) Math.max(logoWidth, logoHeight) * arcScale);
 		int halfArc = (int) Math.ceil((double) arc / 2);
-		Graphics2D graphics = qrcodeImage.createGraphics(); 
 		
-		/* 绘制背景(颜色)和背景的边框(颜色) */
+		Graphics2D graphics = qrcodeImage.createGraphics(); 
+		/* 绘制Logo的背景(颜色)和背景的边框(颜色) */
 		Color backgroundColor = layout.getLogoBackgroundColor();
 		if (layout.hasLogoBackground() && backgroundColor != null) {
 			graphics.setColor(backgroundColor);
