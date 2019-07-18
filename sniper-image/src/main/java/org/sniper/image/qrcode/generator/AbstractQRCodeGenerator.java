@@ -139,18 +139,19 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 		
 		int logoWidth = logo.getWidth();
 		int logoHeight = logo.getHeight();
-
-		int targetWidth = (int) (qrcodeWidth * layout.getLogoScale());
-		int targetHeight = (int) (qrcodeHeight * layout.getLogoScale() * (double) logoHeight / logoWidth);
 		
-		if (logoWidth != targetWidth || logoHeight != targetHeight) {
-			/* 等比缩放logo图片到实际的宽高 */
-			BufferedImage newLogo = new BufferedImage(targetWidth, targetHeight, logo.getType());
+		double logoScale = layout.getLogoScale();
+		int ratioSize = Math.max((int) (qrcodeWidth * logoScale),
+				(int) (qrcodeHeight * logoScale * (double) logoHeight / logoWidth));
+			
+		/* 将Logo图片缩放成正方形 */
+		if (logoWidth != ratioSize || logoHeight != ratioSize) {
+			BufferedImage newLogo = new BufferedImage(ratioSize, ratioSize, logo.getType());
 			Graphics2D graphics = newLogo.createGraphics();
-			graphics.drawImage(logo.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH), 0, 0, targetWidth, targetHeight, null);
+			graphics.drawImage(logo.getScaledInstance(ratioSize, ratioSize, Image.SCALE_SMOOTH), 0, 0, ratioSize, ratioSize, null);
 			graphics.dispose();
 			newLogo.flush();
-			logo = newLogo;
+			return newLogo;
 		}
 
 		return logo;
@@ -172,16 +173,18 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 		
 		// 圆角比例 
 		double arcScale = 0.35;
-		int arc = (int) Math.ceil((double) Math.max(logoWidth, logoHeight) * arcScale);
-		int halfArc = (int) Math.ceil((double) arc / 2);
+		int arc = (int) Math.ceil((double) (Math.max(logoWidth, logoHeight) * arcScale));
+//		int halfArc = (int) Math.ceil((double) arc / 2);
+		int halfArc = (int) arc / 2;
 		
 		Graphics2D graphics = qrcodeImage.createGraphics(); 
-		/* 绘制Logo的背景(颜色)和背景的边框(颜色) */
 		Color backgroundColor = layout.getLogoBackgroundColor();
 		if (layout.hasLogoBackground() && backgroundColor != null) {
+			/* 绘制Logo的背景(颜色) */
 			graphics.setColor(backgroundColor);
 			graphics.fillRoundRect(x - halfArc, y - halfArc, logoWidth + arc, logoHeight + arc, arc, arc);
 			
+			/* 绘制Logo背景的边框(颜色) */
 			Color backgroundBorderColor = layout.getLogoBackgroundBorderColor();
 			if (layout.hasLogoBackgroundBorder() && backgroundBorderColor != null) {
 				graphics.setColor(backgroundBorderColor);
@@ -192,6 +195,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 		int quarterArc = (int) Math.ceil((double) arc / 4);
 		Color borderColor = layout.getLogoBorderColor();
 		if (layout.hasLogoBorder() && borderColor != null) {
+			/* 绘制Logo的边框(颜色) */
 			graphics.setColor(borderColor);
 			graphics.drawRoundRect(x - quarterArc, y - quarterArc, logoWidth + halfArc, logoHeight + halfArc, halfArc, halfArc);
 		}
