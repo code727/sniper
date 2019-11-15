@@ -16,6 +16,31 @@
 		<spring.version>4.3.7.RELEASE</spring.version>
 		<sniper.version>1.0.0</sniper.version>
 	</properties>
+	
+	<repositories>
+		<repository>
+			<id>aliyun</id>
+			<name>aliyun maven</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>develop</id>
+			<name>develop maven</name>
+			<url>http://develop.centit.com/nexus/content/repositories/centit-releases/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 				
 	<build>
 		<resources>
@@ -103,4 +128,6 @@
 		<module>sniper-concurrent</module>
 		<module>sniper-resource</module>
 	</modules>
+	
+	
 </project>
