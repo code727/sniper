@@ -102,10 +102,11 @@ public abstract class AbstractConstant<K, V> implements Constant<K, V> {
 	 */
 	@SuppressWarnings("unchecked")
 	protected static <K, V, C extends Constant<K, V>> Map<K, C> createMapping(Class<C> constantType) {
-		Map<K, C> mappings = MapUtils.newHashMap();
 		List<Field> fields = ReflectionUtils.getDeclaredFields(constantType);
+		int fieldSize = CollectionUtils.size(fields);
+		Map<K, C> mappings = MapUtils.newHashMap(fieldSize);
 		
-		if (CollectionUtils.isNotEmpty(fields)) {
+		if (fieldSize > 0) {
 			try {
 				for (Field field : fields) {
 					int modifiers = field.getModifiers();

@@ -116,7 +116,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 	 * 可缓存的计数器抽象类，其作用在于将依赖的键空间趋势序列(keyspaceTrendSequence)创建的计数器缓存到队列中，
 	 * 从而通过累加计数器的方式获取指定个数(count)的结果。现提供如下两种实现方式，主要时在创建或更新计数器时设置的步长会有所区间：</P>
 	 * 
-	 * 1.设置计数器的步长为cacheStepSize+count，其中count表示当前消费方要求返回的结果个数。   表示在计数区间内可以进行同等数量次数的累加操作， 
+	 * 1.设置计数器的步长为cacheStepSize+count，其中count表示当前消费方要求返回的结果个数。表示在计数区间内可以进行同等数量次数的累加操作， 
 	 * 当要返回count个结果累加count次后，缓存中的计数器恰好还可以进行cacheStepSize次累加；</P>
 	 * 2.设置计数器的步长固定为cacheStepSize。</P>
 	 * 
@@ -131,7 +131,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 	 * 方式2(UnfixedCacheCounter)：本地队列中缓存的计数器剩余可累加的次数不固定， 趋势序列生成的种子计数将按cacheStepSize的倍数规律的增长(n*cacheStepSize，其中n=count/cacheStepSize+0/1)</P>
 	 * 优点：由于趋势序列生成的种子计数不会受消费方影响，因此这种方式在宕机和重启恢复的情况下，比方式1造成的丢失范围要小。另外可以很方便的根据趋势序列生成的种子计数和cacheStepSize推算出缓存批次。</P>
 	 * 缺点：可能会使本地缓存的计数器失效， 例如：消费方如果每次要求生成的个数都大于cacheStepSize，则每次在返回结果之前，都会使计数器更新区间初始值和步长，性能将急剧下降。
-	 * 极端情况，当cacheStepSize=1或cacheStepSize=count时，缓存的计数器实际上并不能进行累加操作，这会导致缓存失去意义。</P>
+	 * 极端情况当cacheStepSize=1或cacheStepSize=count时，缓存的计数器实际上并不能进行累加操作，这会导致缓存失去意义。</P>
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @version 1.0
 	 */
@@ -333,6 +333,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 			return getCacheStepSize() + 1;
 		}
 		
+		@Override
 		protected int calculateStepSize(int count) {
 			return getCacheStepSize() + count;
 		}

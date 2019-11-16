@@ -16,12 +16,9 @@
  * Create Date : 2017-3-16
  */
 
-package org.sniper.commons.response.character;
+package org.sniper.commons.response;
 
 import java.io.Serializable;
-
-import org.sniper.commons.response.FullQuantizationResponse;
-import org.sniper.commons.response.MessagingResponse;
 
 /**
  * 全量响应实现类
@@ -30,7 +27,7 @@ import org.sniper.commons.response.MessagingResponse;
  * @param <T>
  */
 public class FullResponse<T> extends AbstractDatamationResponse<T>
-		implements FullQuantizationResponse<String, T>, Serializable {
+		implements FullQuantizationResponse<Integer, T>, Serializable {
 
 	private static final long serialVersionUID = 5105502275635899805L;
 	
@@ -45,19 +42,19 @@ public class FullResponse<T> extends AbstractDatamationResponse<T>
 		this(DEFAULT_SUCCESS_CODE, DEFAULT_SUCCESS_MESSAGE, data);
 	}
 	
-	public FullResponse(FullQuantizationResponse<?, T> response) {
-		this(response.getCode().toString(), response.getMessage(), response.getData());
+	public FullResponse(FullQuantizationResponse<Integer, T> response) {
+		this(response.getCode(), response.getMessage(), response.getData());
 	}
 	
-	public FullResponse(MessagingResponse<?> response) {
+	public FullResponse(MessagingResponse<Integer> response) {
 		this(response, null);
 	}
 	
-	public FullResponse(MessagingResponse<?> response, T data) {
-		this(response.getCode().toString(), response.getMessage(), data);
+	public FullResponse(MessagingResponse<Integer> response, T data) {
+		this(response.getCode(), response.getMessage(), data);
 	}
 		
-	public FullResponse(String code, String message, T data) {
+	public FullResponse(Integer code, String message, T data) {
 		super(code, data);
 		this.message = message;
 	}

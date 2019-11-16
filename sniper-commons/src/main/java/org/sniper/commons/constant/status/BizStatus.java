@@ -18,27 +18,35 @@
 
 package org.sniper.commons.constant.status;
 
-import org.sniper.commons.constant.AbstractNestedLocaleConstant;
+import java.util.Map;
+
+import org.sniper.commons.constant.AbstractLocaleConstant;
 
 /**
  * 业务状态常量类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class BizStatus extends AbstractNestedLocaleConstant<String, Integer> {
+public final class BizStatus extends AbstractLocaleConstant<String> {
 	
 	private static final long serialVersionUID = -2847353128385702823L;
 		
 	/** 业务执行成功 */
-	public static final BizStatus SUCCESS = new BizStatus("success", ExecutionStatus.SUCCESS);
-	
-	/** 异常，系统故障之类引起的 */
-	public static final BizStatus EXCEPTION = new BizStatus("exception", ExecutionStatus.EXCEPTION);
+	public static final BizStatus SUCCESS = new BizStatus("success", "biz.status.success");
 	
 	/** 业务执行失败，业务逻辑之类引起的 */
-	public static final BizStatus FAILED = new BizStatus("failed", ExecutionStatus.FAILED);
+	public static final BizStatus FAILED = new BizStatus("failed", "biz.status.failed");
+	
+	/** 异常，系统故障之类引起的 */
+	public static final BizStatus EXCEPTION = new BizStatus("exception", "biz.status.exception");
+	
+	private static final Map<String, BizStatus> mappings;
+	
+	static {
+		mappings = createMapping(BizStatus.class);
+	}
 		
-	protected BizStatus(String key, ExecutionStatus value) {
+	protected BizStatus(String key, String value) {
 		super(key, value);
 	}
 	
@@ -46,5 +54,14 @@ public final class BizStatus extends AbstractNestedLocaleConstant<String, Intege
 	public boolean matches(String key) {
 		return this.key.equalsIgnoreCase(key);
 	}
-		
+	
+	/**
+	 * 将指定的键解析成BizStatus对象
+	 * @param key
+	 * @return
+	 */
+	public static BizStatus resolve(String key) {
+		return (key != null ? mappings.get(key.toLowerCase()) : null);
+	}
+			
 }

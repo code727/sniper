@@ -16,21 +16,19 @@
  * Create Date : 2017-3-16
  */
 
-package org.sniper.commons.response.number;
+package org.sniper.commons.response;
 
 import java.io.Serializable;
 
 import org.sniper.commons.constant.status.ExecutionStatus;
-import org.sniper.commons.response.AbstractResponse;
-import org.sniper.commons.response.GenericResponse;
 import org.sniper.commons.util.ObjectUtils;
 
 /**
- * 响应实现类
+ * 基础响应实现类，不携带具体的消息和数据
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Response extends AbstractResponse<Integer> implements Serializable {
+public class BaseResponse extends AbstractResponse<Integer> implements Serializable {
 	
 	private static final long serialVersionUID = -6718497429123443765L;
 
@@ -43,15 +41,15 @@ public class Response extends AbstractResponse<Integer> implements Serializable 
 	/** 默认异常响应码  */
 	public static final int DEFAULT_EXCEPTION_CODE = ExecutionStatus.EXCEPTION.getKey();
 		
-	public Response() {
+	public BaseResponse() {
 		this(DEFAULT_SUCCESS_CODE);
 	}
 	
-	public Response(GenericResponse<Integer> response) {
+	public BaseResponse(GenericResponse<Integer> response) {
 		this(response.getCode());
 	}
 	
-	public Response(Integer code) {
+	public BaseResponse(Integer code) {
 		super(code);
 	}
 	

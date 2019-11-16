@@ -18,28 +18,45 @@
 
 package org.sniper.commons.constant.status;
 
-import org.sniper.commons.constant.AbstractLocaleConstant;
+import java.util.Map;
+
+import org.sniper.commons.constant.AbstractNestedLocaleConstant;
 
 /**
  * 系统执行状态常量类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class ExecutionStatus extends AbstractLocaleConstant<Integer> {
+public final class ExecutionStatus extends AbstractNestedLocaleConstant<Integer, String> {
 	
 	private static final long serialVersionUID = -4886626018923699286L;
 
 	/** 成功 */
-	public static final ExecutionStatus SUCCESS = new ExecutionStatus(1, "execution.status.success");
+	public static final ExecutionStatus SUCCESS = new ExecutionStatus(1, BizStatus.SUCCESS);
 	
-	/** 业务执行失败，业务逻辑之类引起的 */
-	public static final ExecutionStatus FAILED = new ExecutionStatus(0, "execution.status.failed");
+	/** 失败，业务逻辑之类引起的 */
+	public static final ExecutionStatus FAILED = new ExecutionStatus(0, BizStatus.FAILED);
 	
 	/** 异常 */
-	public static final ExecutionStatus EXCEPTION = new ExecutionStatus(-1, "execution.status.exception");
+	public static final ExecutionStatus EXCEPTION = new ExecutionStatus(-1, BizStatus.EXCEPTION);
 	
-	private ExecutionStatus(Integer key, String value) {
+	private static final Map<Integer, ExecutionStatus> mappings;
+	
+	static {
+		mappings = createMapping(ExecutionStatus.class);
+	}
+	
+	protected ExecutionStatus(Integer key, BizStatus value) {
 		super(key, value);
 	}
-			
+	
+	/**
+	 * 将指定的键解析成ExecutionStatus对象
+	 * @param key
+	 * @return
+	 */
+	public static ExecutionStatus resolve(int key) {
+		return mappings.get(key);
+	}
+				
 }

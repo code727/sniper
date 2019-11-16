@@ -124,7 +124,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 	 * 然后将队列剩余的queueRemain(2)个元素和新生成的前count-queueRemain(3)个元素作为出列结果，最后将第count-queueRemain(3)个元素之后的所有元素全部缓存入列。</P>
 	 * 优点：由于生成器生成的个数不会受消费方影响，因此这种方式在宕机和重启恢复的情况下，比方式1造成的丢失范围要小。另外可以很方便的根据生成器已生成的个数和cacheStepSize推算出缓存批次。</P>
 	 * 缺点：可能会使本地队列缓存失效， 例如：消费方如果每次要求生成的个数都大于cacheStepSize，则每次在返回出列结果之前，都会使生成器重新新生新元素并进行缓存入列，性能将急剧下降。
-	 * 极端情况，当cacheStepSize=1或cacheStepSize=count时，队列实际上是没有缓存任何元素的，这会导致缓存失去意义。</P>
+	 * 极端情况当cacheStepSize=1或cacheStepSize=count时，队列实际上是没有缓存任何元素的，这会导致缓存失去意义。</P>
 	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
 	 * @version 1.0
 	 */

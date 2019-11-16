@@ -16,18 +16,16 @@
  * Create Date : 2017-3-16
  */
 
-package org.sniper.commons.response.number;
+package org.sniper.commons.response;
 
 import java.io.Serializable;
-
-import org.sniper.commons.response.MessagingResponse;
 
 /**
  * 消息响应实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class MessageResponse extends Response implements MessagingResponse<Integer>, Serializable {
+public class MessageResponse extends BaseResponse implements MessagingResponse<Integer>, Serializable {
 	
 	private static final long serialVersionUID = -3819338460091380325L;
 	

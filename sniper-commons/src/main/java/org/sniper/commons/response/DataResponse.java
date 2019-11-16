@@ -13,42 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-3-22
+ * Create Date : 2017-3-16
  */
 
-package org.sniper.commons.response.number;
+package org.sniper.commons.response;
 
-import org.sniper.commons.response.DatamationResponse;
+import java.io.Serializable;
 
 /**
- * 数据响应抽象类
+ * 数据响应实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractDatamationResponse<T> extends Response implements DatamationResponse<Integer, T> {
+public class DataResponse<T> extends AbstractDatamationResponse<T> implements Serializable {
 	
-	private static final long serialVersionUID = 4108877402467845840L;
+	private static final long serialVersionUID = 7831515870882940776L;
 	
-	/** 响应数据 */
-	private T data;
-			
-	protected AbstractDatamationResponse(DatamationResponse<Integer, T> response) {
-		this(response.getCode(), response.getData());
+	public DataResponse() {
+		this((T) null);
 	}
 		
-	protected AbstractDatamationResponse(Integer code, T data) {
-		super(code);
-		this.data = data;
+	public DataResponse(T data) {
+		this(DEFAULT_SUCCESS_CODE, data);
 	}
 	
-	@Override
-	public T getData() {
-		return data;
+	public DataResponse(DatamationResponse<Integer, T> response) {
+		super(response);
 	}
-
-	@Override
-	public void setData(T data) {
-		this.data = data;
+		
+	public DataResponse(Integer code, T data) {
+		super(code, data);
 	}
 	
 }

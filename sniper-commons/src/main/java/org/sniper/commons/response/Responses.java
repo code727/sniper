@@ -16,24 +16,24 @@
  * Create Date : 2018-7-9
  */
 
-package org.sniper.commons.response.number;
+package org.sniper.commons.response;
 
 /**
- * 响应对应工厂实现类
+ * 响应对象工厂实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ResponseFactory {
+public class Responses {
 	
-	private ResponseFactory() {}
+	private Responses() {}
 	
 	/**
 	 * 创建具备默认成功状态码的响应对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static Response successResponse() {
-		return successResponse(Response.DEFAULT_SUCCESS_CODE);
+	public static BaseResponse successResponse() {
+		return successResponse(BaseResponse.DEFAULT_SUCCESS_CODE);
 	}
 	
 	/**
@@ -42,8 +42,8 @@ public class ResponseFactory {
 	 * @param code
 	 * @return
 	 */
-	public static Response successResponse(Integer code) {
-		return new Response(code);
+	public static BaseResponse successResponse(Integer code) {
+		return new BaseResponse(code);
 	}
 	
 	/**
@@ -51,8 +51,8 @@ public class ResponseFactory {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static Response failedResponse() {
-		return failedResponse(Response.DEFAULT_FAILED_CODE);
+	public static BaseResponse failedResponse() {
+		return failedResponse(BaseResponse.DEFAULT_FAILED_CODE);
 	}
 	
 	/**
@@ -60,8 +60,8 @@ public class ResponseFactory {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static Response failedResponse(Integer code) {
-		return new Response(code);
+	public static BaseResponse failedResponse(Integer code) {
+		return new BaseResponse(code);
 	}
 	
 	/**
@@ -69,8 +69,8 @@ public class ResponseFactory {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static Response exceptionResponse() {
-		return exceptionResponse(Response.DEFAULT_EXCEPTION_CODE);
+	public static BaseResponse exceptionResponse() {
+		return exceptionResponse(BaseResponse.DEFAULT_EXCEPTION_CODE);
 	}
 	
 	/**
@@ -79,8 +79,8 @@ public class ResponseFactory {
 	 * @param code
 	 * @return
 	 */
-	public static Response exceptionResponse(Integer code) {
-		return new Response(code);
+	public static BaseResponse exceptionResponse(Integer code) {
+		return new BaseResponse(code);
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static MessageResponse successMessageResponse() {
-		return successMessageResponse(Response.DEFAULT_SUCCESS_CODE);
+		return successMessageResponse(BaseResponse.DEFAULT_SUCCESS_CODE);
 	}
 	
 	/**
@@ -99,7 +99,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static MessageResponse successMessageResponse(String message) {
-		return successMessageResponse(Response.DEFAULT_SUCCESS_CODE, message);
+		return successMessageResponse(BaseResponse.DEFAULT_SUCCESS_CODE, message);
 	}
 	
 	/**
@@ -129,7 +129,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static MessageResponse failedMessageResponse() {
-		return failedMessageResponse(Response.DEFAULT_FAILED_CODE);
+		return failedMessageResponse(BaseResponse.DEFAULT_FAILED_CODE);
 	}
 	
 	/**
@@ -139,7 +139,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static MessageResponse failedMessageResponse(String message) {
-		return failedMessageResponse(Response.DEFAULT_FAILED_CODE, message);
+		return failedMessageResponse(BaseResponse.DEFAULT_FAILED_CODE, message);
 	}
 	
 	/**
@@ -171,7 +171,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static MessageResponse exceptionMessageResponse() {
-		return exceptionMessageResponse(Response.DEFAULT_EXCEPTION_CODE);
+		return exceptionMessageResponse(BaseResponse.DEFAULT_EXCEPTION_CODE);
 	}
 	
 	/**
@@ -181,7 +181,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static MessageResponse exceptionMessageResponse(String message) {
-		return exceptionMessageResponse(Response.DEFAULT_EXCEPTION_CODE, message);
+		return exceptionMessageResponse(BaseResponse.DEFAULT_EXCEPTION_CODE, message);
 	}
 	
 	/**
@@ -222,7 +222,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static <T> DataResponse<T> successDataResponse(T data) {
-		return successDataResponse(Response.DEFAULT_SUCCESS_CODE, data);
+		return successDataResponse(BaseResponse.DEFAULT_SUCCESS_CODE, data);
 	}
 	
 	/**
@@ -263,7 +263,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static <T> DataResponse<T> failedDataResponse(T data) {
-		return failedDataResponse(Response.DEFAULT_FAILED_CODE, data);
+		return failedDataResponse(BaseResponse.DEFAULT_FAILED_CODE, data);
 	}
 	
 	/**
@@ -303,7 +303,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static <T> DataResponse<T> exceptionDataResponse(T data) {
-		return exceptionDataResponse(Response.DEFAULT_EXCEPTION_CODE, data);
+		return exceptionDataResponse(BaseResponse.DEFAULT_EXCEPTION_CODE, data);
 	}
 	
 	/**
@@ -343,7 +343,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static <T> FullResponse<T> successFullResponse(T data) {
-		return successFullResponse(Response.DEFAULT_SUCCESS_CODE, data);
+		return successFullResponse(BaseResponse.DEFAULT_SUCCESS_CODE, data);
 	}
 	
 	/**
@@ -385,7 +385,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static <T> FullResponse<T> successFullResponse(String message, T data) {
-		return successFullResponse(Response.DEFAULT_SUCCESS_CODE, message, data);
+		return successFullResponse(BaseResponse.DEFAULT_SUCCESS_CODE, message, data);
 	}
 	
 	/**
@@ -416,7 +416,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static <T> FullResponse<T> failedFullResponse(T data) {
-		return failedFullResponseByCode(Response.DEFAULT_FAILED_CODE, data);
+		return failedFullResponseByCode(BaseResponse.DEFAULT_FAILED_CODE, data);
 	}
 	
 	/**
@@ -458,7 +458,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static <T> FullResponse<T> failedFullResponseByMessage(String message, T data) {
-		return failedFullResponse(Response.DEFAULT_FAILED_CODE, message, data);
+		return failedFullResponse(BaseResponse.DEFAULT_FAILED_CODE, message, data);
 	}
 	
 	/**
@@ -489,7 +489,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static <T> FullResponse<T> exceptionFullResponse(T data) {
-		return exceptionFullResponseByCode(Response.DEFAULT_FAILED_CODE, data);
+		return exceptionFullResponseByCode(BaseResponse.DEFAULT_FAILED_CODE, data);
 	}
 	
 	/**
@@ -531,7 +531,7 @@ public class ResponseFactory {
 	 * @return
 	 */
 	public static <T> FullResponse<T> exceptionFullResponseByMessage(String message, T data) {
-		return exceptionFullResponse(Response.DEFAULT_EXCEPTION_CODE, message, data);
+		return exceptionFullResponse(BaseResponse.DEFAULT_EXCEPTION_CODE, message, data);
 	}
 	
 	/**
