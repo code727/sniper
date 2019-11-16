@@ -21,11 +21,11 @@ package org.sniper.commons.timer;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 时间对象接口
+ * 时间度量接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface TimeBean {
+public interface TimeMeasurement {
 	
 	/**
 	 * 获取计时单位

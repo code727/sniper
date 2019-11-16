@@ -18,7 +18,7 @@
 
 package org.sniper.nosql.redis;
 
-import org.sniper.commons.timer.ExpirationTimeBean;
+import org.sniper.commons.timer.ExpirableBean;
 import org.sniper.serialization.Serializer;
 
 /**
@@ -26,7 +26,7 @@ import org.sniper.serialization.Serializer;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisRepository extends ExpirationTimeBean {
+public class RedisRepository extends ExpirableBean {
 		
 	/** 当前库索引 */
 	private int dbIndex;

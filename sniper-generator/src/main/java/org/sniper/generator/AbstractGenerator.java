@@ -27,15 +27,14 @@ import org.sniper.commons.util.AssertUtils;
  */
 public abstract class AbstractGenerator<T> implements Generator<T> {
 	
-	private static final String BATCH_COUNT_ERROR_MESSAGE = "%s batch generation count '%s' must greater than 0";
-	
 	/**
 	 * 检查批量生成的个数是否合法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param count
 	 */
 	protected void checkBatchCount(int count) {
-		AssertUtils.assertTrue(count > 0, String.format(BATCH_COUNT_ERROR_MESSAGE, this.getClass().getName(), count));
+		AssertUtils.assertTrue(count > 0, String.format(
+				"%s batch generation count '%d' must greater than 0", this.getClass().getName(), count));
 	}
 	
 }

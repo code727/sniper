@@ -21,24 +21,24 @@ package org.sniper.commons.timer;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 过期时间对象
+ * 可过期的对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ExpirationTimeBean extends AbstractTimeBean {
+public class ExpirableBean extends AbstractTimeMeasurement {
 	
 	/** 过期时间计数 */
 	protected long expireTime;
 	
-	public ExpirationTimeBean() {
+	public ExpirableBean() {
 		this(0);
 	}
 	
-	public ExpirationTimeBean(long expireTime) {
+	public ExpirableBean(long expireTime) {
 		this(expireTime, null);
 	}
 		
-	public ExpirationTimeBean(long expireTime, TimeUnit timeUnit) {
+	public ExpirableBean(long expireTime, TimeUnit timeUnit) {
 		super(timeUnit);
 		this.expireTime = expireTime;
 	}

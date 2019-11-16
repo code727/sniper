@@ -8,7 +8,7 @@
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd ">
 		
 	<bean id="post" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">    
-        <property name="staticField" value="org.sniper.commons.enums.http.HttpMethod.POST" />    
+        <property name="staticField" value="org.sniper.commons.enums.http.HttpMethodEnum.POST" />    
     </bean>  
     
     <bean id="form-urlencoded-header" class="org.sniper.http.headers.request.HttpRequestHeaders">
@@ -129,5 +129,5 @@
 		<property name="targetType" value="org.sniper.commons.response.FullResponse" />
 		<property name="nestedType" value="org.snipersite.domain.Developer" />
 	</bean>
-	
+		
 </beans>

@@ -22,8 +22,8 @@ import java.util.Map;
 
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.concurrent.locks.JdkParameterizeLock;
-import org.sniper.concurrent.locks.ParameterizeLock;
+import org.sniper.concurrent.locks.KeyspaceLock;
+import org.sniper.concurrent.locks.jdk.DefaultKeyspaceLock;
 
 /**
  * 可缓存的生成器抽象类
@@ -32,7 +32,7 @@ import org.sniper.concurrent.locks.ParameterizeLock;
  */
 public abstract class AbstractCacheableGenerator<K, E, V> extends AbstractKeyspaceGenerator<K, V> {
 	
-	protected final ParameterizeLock<K> keyLock;
+	protected final KeyspaceLock<K> keyLock;
 	
 	/** 本地缓存 */
 	protected final Map<K, E> cache;
@@ -40,10 +40,10 @@ public abstract class AbstractCacheableGenerator<K, E, V> extends AbstractKeyspa
 	/** 本地缓存步长 */
 	private int cacheStepSize;
 	
-	protected AbstractCacheableGenerator(ParameterizeLock<K> keyLock, K defaultKeyspace) {
+	protected AbstractCacheableGenerator(KeyspaceLock<K> keyLock, K defaultKeyspace) {
 		super(defaultKeyspace);
 		this.cache = MapUtils.newConcurrentHashMap();
-		this.keyLock = (keyLock != null ? keyLock : new JdkParameterizeLock<K>());
+		this.keyLock = (keyLock != null ? keyLock : new DefaultKeyspaceLock<K>());
 		this.cacheStepSize = 10000;
 	}
 
@@ -52,7 +52,8 @@ public abstract class AbstractCacheableGenerator<K, E, V> extends AbstractKeyspa
 	}
 
 	public void setCacheStepSize(int cacheStepSize) {
-		AssertUtils.assertTrue(cacheStepSize > 0, "Property 'cacheStepSize' must greater than 0");
+		AssertUtils.assertTrue(cacheStepSize > 0, String.format(
+				"Property 'cacheStepSize' value '%d' must greater than 0", cacheStepSize));
 		this.cacheStepSize = cacheStepSize;
 	}
 	

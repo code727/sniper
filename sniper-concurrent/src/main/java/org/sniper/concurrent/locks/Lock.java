@@ -23,36 +23,10 @@ package org.sniper.concurrent.locks;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Lock {
+public interface Lock extends java.util.concurrent.locks.Lock {
 	
 	/**
-	 * 加锁操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	public void lock();
-	
-	/**
-	 * 尝试加锁操作后返回是否加锁成功
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public boolean tryLock();
-	
-	/**
-	 * 解锁操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
-	 */
-	public void unlock();
-	
-	/**
-	 * 尝试解锁操作后返回是否解锁成功
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public boolean tryUnlock();
-	
-	/**
-	 * 判断是否被锁定
+	 * 判断是否处于锁定状态
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

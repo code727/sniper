@@ -16,42 +16,48 @@
  * Create Date : 2018-6-26
  */
 
-package org.sniper.concurrent.locks;
+package org.sniper.concurrent.locks.zookeeper;
+
+import java.util.concurrent.TimeUnit;
+
+import org.sniper.concurrent.locks.KeyspaceLock;
 
 /**
  * Zookeeper分布式锁实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class ZookeeperDistributedLock<P> implements ParameterizeLock<P> {
+public class ZookeeperDistributedLock<P> implements KeyspaceLock<P> {
 
 	@Override
-	public void lock(P parameter) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public boolean tryLock(P parameter) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void unlock(P parameter) {
+	public void lock(P key) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean tryUnlock(P parameter) {
+	public boolean tryLock(P key) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean isLocked(P parameter) {
+	public boolean tryLock(P key, long acquireTime, TimeUnit unit) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public void unlock(P key) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isLocked(P key) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }

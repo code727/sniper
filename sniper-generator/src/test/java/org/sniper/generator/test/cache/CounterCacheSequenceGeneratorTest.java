@@ -33,7 +33,7 @@ public class CounterCacheSequenceGeneratorTest extends AbstractSpringGeneratorTe
 	private CounterCacheSequenceGenerator counterCacheSequenceGenerator;
 	
 	public CounterCacheSequenceGeneratorTest() {
-		this(false, true);
+		this(true, false);
 	}
 	
 	protected CounterCacheSequenceGeneratorTest(boolean uniquenessTest, boolean performanceTest) {

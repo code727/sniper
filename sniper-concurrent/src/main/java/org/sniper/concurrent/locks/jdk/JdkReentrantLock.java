@@ -16,19 +16,20 @@
  * Create Date : 2018-6-25
  */
 
-package org.sniper.concurrent.locks;
+package org.sniper.concurrent.locks.jdk;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.sniper.commons.timer.ExpirationTimeBean;
+import org.sniper.concurrent.locks.Lock;
 
 /**
  * JDK重入锁实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JdkReentrantLock extends ExpirationTimeBean implements Lock {
+public class JdkReentrantLock implements Lock {
 	
 	private final ReentrantLock lock;
 	
@@ -37,58 +38,45 @@ public class JdkReentrantLock extends ExpirationTimeBean implements Lock {
 	}
 	
 	public JdkReentrantLock(boolean fair) {
-		this(0, false);
-	}
-	
-	public JdkReentrantLock(long expireTime) {
-		this(expireTime, false);
-	}
-	
-	public JdkReentrantLock(long expireTime, boolean fair) {
-		this(expireTime, TimeUnit.SECONDS, false);
-	}
-	
-	public JdkReentrantLock(long expireTime, TimeUnit timeUnit) {
-		this(expireTime, timeUnit, false);
-	}
-	
-	public JdkReentrantLock(long expireTime, TimeUnit timeUnit, boolean fair) {
-		super(expireTime, timeUnit);
 		this.lock = new ReentrantLock(fair);
 	}
-
+	
 	@Override
 	public void lock() {
 		lock.lock();
 	}
 	
 	@Override
-	public boolean tryLock() {
-		if (expireTime > 0) {
-			try {
-				// 在超时的时间单位内获取锁
-				return lock.tryLock(expireTime, timeUnit);
-			} catch (InterruptedException e) {
-				return false;
-			}
-		}
-		
-		return lock.tryLock();
-	}
-
-	@Override
-	public void unlock() {
-		/* 解锁之前需要判断是否被锁定，否则如果没有处于锁定状态而直接解锁，
-		 * 则会抛出java.lang.IllegalMonitorStateException */
-		if (isLocked())
-			lock.unlock();
+	public void lockInterruptibly() throws InterruptedException {
+		lock.lockInterruptibly();
 	}
 	
 	@Override
-	public boolean tryUnlock() {
-		unlock();
-		return !isLocked();
-	}	
+	public boolean tryLock() {
+		return lock.tryLock();
+	}
+	
+	@Override
+	public boolean tryLock(long acquireTime, TimeUnit unit) {
+		try {
+			/* 在单位时间范围内尝试加锁操作，如果成功加锁立即返回true
+			 * 如果超时后未成功加锁，则返回false */
+			return lock.tryLock(acquireTime, unit);
+		} catch (InterruptedException e) {
+			return false;
+		}
+	}
+		
+	@Override
+	public void unlock() {
+		// 如果没有处于锁定状态而直接解锁，则会抛出java.lang.IllegalMonitorStateException 
+		lock.unlock();
+	}
+	
+	@Override
+	public Condition newCondition() {
+		return lock.newCondition();
+	}
 	
 	@Override
 	public boolean isLocked() {

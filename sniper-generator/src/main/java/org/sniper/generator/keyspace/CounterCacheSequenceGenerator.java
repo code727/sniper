@@ -23,7 +23,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.concurrent.locks.ParameterizeLock;
+import org.sniper.concurrent.locks.KeyspaceLock;
 import org.sniper.generator.sequence.KeyspaceTrendSequence;
 import org.sniper.support.counter.AtomicLongIntervalCounter;
 import org.sniper.support.counter.IntervalCounter;
@@ -48,11 +48,11 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		this(null, keyspaceTrendSequence, fixCounterCache);
 	}
 
-	public CounterCacheSequenceGenerator(ParameterizeLock<Object> keyLock, KeyspaceTrendSequence<Object, Long> keyspaceTrendSequence) {
+	public CounterCacheSequenceGenerator(KeyspaceLock<Object> keyLock, KeyspaceTrendSequence<Object, Long> keyspaceTrendSequence) {
 		this(keyLock, keyspaceTrendSequence, true);
 	}
 	
-	public CounterCacheSequenceGenerator(ParameterizeLock<Object> keyLock, KeyspaceTrendSequence<Object, Long> keyspaceTrendSequence, boolean fixCounterCache) {
+	public CounterCacheSequenceGenerator(KeyspaceLock<Object> keyLock, KeyspaceTrendSequence<Object, Long> keyspaceTrendSequence, boolean fixCounterCache) {
 		super(keyLock, keyspaceTrendSequence.getDefaultKeyspace());
 		this.keyspaceTrendSequence = keyspaceTrendSequence;
 		this.cacheableCounter = (fixCounterCache ? new FixedCacheCounter() : new UnfixedCacheCounter());

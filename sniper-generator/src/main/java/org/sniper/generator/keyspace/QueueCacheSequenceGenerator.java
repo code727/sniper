@@ -24,7 +24,7 @@ import java.util.Queue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.concurrent.locks.ParameterizeLock;
+import org.sniper.concurrent.locks.KeyspaceLock;
 
 /**
  * 基于队列的缓存序列生成器实现类
@@ -46,11 +46,11 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		this(null, keyspaceGenerator, fixQueueCache);
 	}
 
-	public QueueCacheSequenceGenerator(ParameterizeLock<Object> keyLock, KeyspaceGenerator<Object, V> keyspaceGenerator) {
+	public QueueCacheSequenceGenerator(KeyspaceLock<Object> keyLock, KeyspaceGenerator<Object, V> keyspaceGenerator) {
 		this(keyLock, keyspaceGenerator, true);
 	}
 	
-	public QueueCacheSequenceGenerator(ParameterizeLock<Object> keyLock, KeyspaceGenerator<Object, V> keyspaceGenerator, boolean fixQueueCache) {
+	public QueueCacheSequenceGenerator(KeyspaceLock<Object> keyLock, KeyspaceGenerator<Object, V> keyspaceGenerator, boolean fixQueueCache) {
 		super(keyLock, keyspaceGenerator.getDefaultKeyspace());
 		this.keyspaceGenerator = keyspaceGenerator;
 		this.cacheableQueue = (fixQueueCache ? new FixedCacheQueue() : new UnfixedCacheQueue());

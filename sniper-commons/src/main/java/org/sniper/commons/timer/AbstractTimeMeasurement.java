@@ -13,48 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2018-6-26
+ * Create Date : 2018-12-28
  */
 
-package org.sniper.concurrent.locks;
+package org.sniper.commons.timer;
+
+import java.util.concurrent.TimeUnit;
+
+import org.sniper.commons.util.AssertUtils;
 
 /**
- * Redis分布式锁实现类
+ * 时间度量抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class RedisDistributedLock<P> implements ParameterizeLock<P> {
+public abstract class AbstractTimeMeasurement implements TimeMeasurement {
 	
-//	private final RedisCommands redisCommands;
+	/** 时间单位 */
+	protected TimeUnit timeUnit;
+	
+	public AbstractTimeMeasurement(TimeUnit timeUnit) {
+		this.timeUnit = (timeUnit != null ? timeUnit : TimeUnit.SECONDS);
+	}
 	
 	@Override
-	public void lock(P parameter) {
-		// TODO Auto-generated method stub
-		
+	public TimeUnit getTimeUnit() {
+		return timeUnit;
 	}
 
 	@Override
-	public boolean tryLock(P parameter) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void unlock(P parameter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean tryUnlock(P parameter) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isLocked(P parameter) {
-		// TODO Auto-generated method stub
-		return false;
+	public void setTimeUnit(TimeUnit timeUnit) {
+		AssertUtils.assertNotNull(timeUnit, "Time unit must not be null");
+		this.timeUnit = timeUnit;
 	}
 
 }
