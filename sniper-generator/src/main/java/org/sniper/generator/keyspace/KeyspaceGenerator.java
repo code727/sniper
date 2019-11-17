@@ -21,13 +21,14 @@ package org.sniper.generator.keyspace;
 import java.util.List;
 
 import org.sniper.generator.Generator;
+import org.sniper.support.Namespace;
 
 /**
  * 基于键空间的生成器接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface KeyspaceGenerator<K, V> extends Generator<V>, Keyspace<K> {
+public interface KeyspaceGenerator<K, V> extends Generator<V>, Namespace<K> {
 	
 	/**
 	 * 根据指定的键生成结果

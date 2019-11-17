@@ -51,7 +51,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 	}
 	
 	public QueueCacheSequenceGenerator(KeyspaceLock<Object> keyLock, KeyspaceGenerator<Object, V> keyspaceGenerator, boolean fixQueueCache) {
-		super(keyLock, keyspaceGenerator.getDefaultKeyspace());
+		super(keyLock, keyspaceGenerator.getDefaultSpaceId());
 		this.keyspaceGenerator = keyspaceGenerator;
 		this.cacheableQueue = (fixQueueCache ? new FixedCacheQueue() : new UnfixedCacheQueue());
 	}

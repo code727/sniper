@@ -139,5 +139,5 @@ public class DimensionSerialNumberGenerator extends SerialNumberGenerator {
 		
 		return sequence.toString();
 	}
-
+	
 }

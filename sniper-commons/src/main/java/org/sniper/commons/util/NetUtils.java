@@ -23,6 +23,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Map;
@@ -375,5 +376,55 @@ public class NetUtils {
 		
 		return url.toString();
 	}
+	
+	/**
+	 * 获取本机MAC地址
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static String getLocalMacAddress() {
+		try {
+			byte[] mac = NetworkInterface.getByInetAddress(InetAddress.getLocalHost()).getHardwareAddress();
+			return CodecUtils.bytesToHex(mac);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * 获取本机全大写的MAC地址
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static String getLocalUpperCaseMacAddress() {
+		String macAddress = getLocalMacAddress();
+		return macAddress != null ? macAddress.toUpperCase() : macAddress;
+	}
+	
+	/**
+	 * 获取本机格式化的MAC地址
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static String getLocalFormatMacAddress() {
+		try {
+			byte[] mac = NetworkInterface.getByInetAddress(InetAddress.getLocalHost()).getHardwareAddress();
+			StringBuilder builder = new StringBuilder();
+			for (int i = 0; i < mac.length; i++) {
+				if (i > 0) 
+					builder.append("-");
 				
+				int temp = mac[i]&0xff;
+				String hex = Integer.toHexString(temp);
+				if (hex.length() == 1)
+					builder.append("0").append(hex);
+				else
+					builder.append(hex);
+			}
+			return builder.toString().toUpperCase();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+					
 }

@@ -18,6 +18,7 @@
 
 package org.sniper.generator.test.cache;
 
+import org.junit.Test;
 import org.sniper.generator.keyspace.CounterCacheSequenceGenerator;
 import org.sniper.generator.test.AbstractSpringGeneratorTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class CounterCacheSequenceGeneratorTest extends AbstractSpringGeneratorTe
 	private CounterCacheSequenceGenerator counterCacheSequenceGenerator;
 	
 	public CounterCacheSequenceGeneratorTest() {
-		this(true, false);
+		this(false, false);
 	}
 	
 	protected CounterCacheSequenceGeneratorTest(boolean uniquenessTest, boolean performanceTest) {
@@ -48,14 +49,13 @@ public class CounterCacheSequenceGeneratorTest extends AbstractSpringGeneratorTe
 //	@Test
 	public void testGenerate() {
 		System.out.println(counterCacheSequenceGenerator.generate());
-		System.out.println(counterCacheSequenceGenerator.generate());
-		System.out.println(counterCacheSequenceGenerator.generate());
+		System.out.println(counterCacheSequenceGenerator.generateByKey("test"));
 	}
 	
-//	@Test
+	@Test
 	public void testBatchGenerate() {
 		System.out.println(counterCacheSequenceGenerator.batchGenerate(1));
-		System.out.println(counterCacheSequenceGenerator.batchGenerate(2));
+		System.out.println(counterCacheSequenceGenerator.batchGenerateByKey("test",2));
 	}
 
 }

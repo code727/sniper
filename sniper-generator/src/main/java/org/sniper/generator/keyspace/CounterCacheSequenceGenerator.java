@@ -53,7 +53,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 	}
 	
 	public CounterCacheSequenceGenerator(KeyspaceLock<Object> keyLock, KeyspaceTrendSequence<Object, Long> keyspaceTrendSequence, boolean fixCounterCache) {
-		super(keyLock, keyspaceTrendSequence.getDefaultKeyspace());
+		super(keyLock, keyspaceTrendSequence.getDefaultSpaceId());
 		this.keyspaceTrendSequence = keyspaceTrendSequence;
 		this.cacheableCounter = (fixCounterCache ? new FixedCacheCounter() : new UnfixedCacheCounter());
 	}

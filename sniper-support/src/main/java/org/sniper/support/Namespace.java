@@ -16,20 +16,20 @@
  * Create Date : 2018-11-1
  */
 
-package org.sniper.generator.keyspace;
+package org.sniper.support;
 
 /**
- * 键空间标识接口
+ * 命名空间标识接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface Keyspace<K> {
+public interface Namespace<K> {
 	
 	/**
-	 * 获取全局默认的键空间
+	 * 获取全局默认的空间ID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public K getDefaultKeyspace();
-	
+	public K getDefaultSpaceId();
+		
 }

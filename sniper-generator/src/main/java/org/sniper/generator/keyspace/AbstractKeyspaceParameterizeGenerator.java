@@ -27,11 +27,11 @@ import java.util.List;
  */
 public abstract class AbstractKeyspaceParameterizeGenerator<K, P, V> extends AbstractKeyspaceGenerator<K, V>
 		implements KeyspaceParameterizeGenerator<K, P, V> {
-
-	protected AbstractKeyspaceParameterizeGenerator(K defaultKeyspace) {
-		super(defaultKeyspace);
+	
+	protected AbstractKeyspaceParameterizeGenerator(K defaultSpaceId) {
+		super(defaultSpaceId);
 	}
-		
+
 	@Override
 	public V generateByKey(K key) {
 		return generate(key, null);
@@ -44,23 +44,23 @@ public abstract class AbstractKeyspaceParameterizeGenerator<K, P, V> extends Abs
 	
 	@Override
 	public V generateByParameter(P parameter) {
-		return generate(defaultKeyspace, parameter);
+		return generate(this.defaultSpaceId, parameter);
 	}
 
 	@Override
 	public List<V> batchGenerateByParameter(P parameter, int count) {
-		return batchGenerate(defaultKeyspace, parameter, count);
+		return batchGenerate(this.defaultSpaceId, parameter, count);
 	}
 	
 	@Override
 	public V generate(K key, P parameter) {
-		checkKeyspace(key);
+		checkSpace(key);
 		return doGenerate(key, parameter);
 	}
 
 	@Override
 	public List<V> batchGenerate(K key, P parameter, int count) {
-		checkKeyspace(key);
+		checkSpace(key);
 		checkBatchCount(count);
 		return doBatchGenerate(key, parameter, count);
 	}

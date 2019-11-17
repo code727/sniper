@@ -35,7 +35,7 @@ public class RedisSequenceGenerator extends AbstractKeyspaceGenerator<Object, Lo
 	private final RedisTrendSequence redisTrendSequence;
 	
 	public RedisSequenceGenerator(RedisTrendSequence redisTrendSequence) {
-		super(redisTrendSequence.getDefaultKeyspace());
+		super(redisTrendSequence.getDefaultSpaceId());
 		this.redisTrendSequence = redisTrendSequence;
 	}
 	

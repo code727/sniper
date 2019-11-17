@@ -54,6 +54,7 @@ public class RedisDistributedLock<K> implements KeyspaceLock<K> {
 		
 	@Override
 	public boolean tryLock(K key) {
+		
 //		ReentrantLock lock = new ReentrantLock();
 		// TODO Auto-generated method stub
 		return false;
@@ -79,6 +80,9 @@ public class RedisDistributedLock<K> implements KeyspaceLock<K> {
 	@Override
 	public boolean isLocked(K key) {
 		return redisCommands.exists(key);
+	}
+	
+	public static void main(String[] args) {
 	}
 
 }

@@ -36,7 +36,7 @@ public abstract class AbstractKeyspaceTrendSequence<K, V> extends AbstractTrendS
 	}
 	
 	@Override
-	public K getDefaultKeyspace() {
+	public K getDefaultSpaceId() {
 		return defaultKeyspace;
 	}
 	

@@ -21,59 +21,51 @@ package org.sniper.generator.keyspace;
 import java.util.List;
 
 import org.sniper.commons.util.AssertUtils;
-import org.sniper.generator.AbstractGenerator;
+import org.sniper.support.AbstractNamespace;
 
 /**
  * 基于键空间的生成器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractKeyspaceGenerator<K, V> extends AbstractGenerator<V>
+public abstract class AbstractKeyspaceGenerator<K, V> extends AbstractNamespace<K>
 		implements KeyspaceGenerator<K, V> {
-		
-	/** 全局默认的键空间 */
-	protected final K defaultKeyspace;
 	
-	protected AbstractKeyspaceGenerator(K defaultKeyspace) {
-		checkKeyspace(defaultKeyspace);
-		this.defaultKeyspace = defaultKeyspace;
+	protected AbstractKeyspaceGenerator(K defaultSpaceId) {
+		super(defaultSpaceId);
 	}
-
-	@Override
-	public K getDefaultKeyspace() {
-		return defaultKeyspace;
-	}
-
+		
 	@Override
 	public V generate() {
-		return generateByKey(this.defaultKeyspace);
+		return generateByKey(this.defaultSpaceId);
 	}
 	
 	@Override
 	public V generateByKey(K key) {
-		checkKeyspace(key);
+		checkSpace(key);
 		return doGenerateByKey(key);
 	}
 	
 	@Override
 	public List<V> batchGenerate(int count) {
-		return batchGenerateByKey(this.defaultKeyspace, count);
+		return batchGenerateByKey(this.defaultSpaceId, count);
 	}
 	
 	@Override
 	public List<V> batchGenerateByKey(K key, int count) {
-		checkKeyspace(key);
+		checkSpace(key);
 		checkBatchCount(count);
 		return doBatchGenerateByKey(key, count);
 	}
 	
 	/**
-	 * 检查键空间的合法性
+	 * 检查批量生成的个数是否合法
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param keyspace
+	 * @param count
 	 */
-	protected void checkKeyspace(Object keyspace) {
-		AssertUtils.assertNotNull(keyspace, "Keyspace must not be null");
+	protected void checkBatchCount(int count) {
+		AssertUtils.assertTrue(count > 0, String.format(
+				"%s batch generation count '%d' must greater than 0", this.getClass().getName(), count));
 	}
 	
 	/** 

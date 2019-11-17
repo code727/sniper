@@ -18,14 +18,14 @@
 
 package org.sniper.generator.sequence;
 
-import org.sniper.generator.keyspace.Keyspace;
+import org.sniper.support.Namespace;
 
 /**
  * 键空间趋势序列接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface KeyspaceTrendSequence<K, V> extends TrendSequence<V>, Keyspace<K> {
+public interface KeyspaceTrendSequence<K, V> extends TrendSequence<V>, Namespace<K> {
 	
 	/**
 	 * 根据指定的键更新序列
