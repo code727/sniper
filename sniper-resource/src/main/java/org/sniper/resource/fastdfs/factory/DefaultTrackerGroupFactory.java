@@ -140,11 +140,11 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 	}
 	
 	/**
-	 * 将TrackerCluster这个逻辑集群族作为Group成员来注册，通过使用在Tracker高可用的环境中。</P>
+	 * 将TrackerCluster这个逻辑集群族作为Group成员来注册，通常使用在Tracker高可用的环境中。</P>
 	 * 例如：为保证Tracker的高可用，常用的做法是在多个Tracker节点之上再搭载一层中间件(Nginx+Keepalived/LVS等)，
 	 * 负责整个集群环境下Tracker的负载均衡、监控和故障转移等。</P>
 	 * 这类中间件的host和port对应的就是API中TrackerCluster对象中的同名属性。
-	 * 因此在高可用的集群环境中，如果配置了中间件的host和port，推荐选择方式来注册TrackerGroup。
+	 * 因此在高可用的集群环境中，如果配置了中间件的host和port，推荐选择此方式来注册TrackerGroup。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

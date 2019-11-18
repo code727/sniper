@@ -28,7 +28,7 @@ import org.csource.fastdfs.TrackerGroup;
  */
 public abstract class AbstractConnectionFactory implements ConnectionFactory {
 	
-	protected TrackerClient trackerClient;
+	protected final TrackerClient trackerClient;
 	
 	protected AbstractConnectionFactory() {
 		this(null);

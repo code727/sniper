@@ -34,7 +34,7 @@ public abstract class AbstractAccessor extends AccessorSupport {
 	 * @param path
 	 * @return
 	 */
-	protected String getAccessabeURL(String url, String path) {
+	protected String getAccessibleURL(String url, String path) {
 		return new StringBuffer(url).append(
 				(!StringUtils.endsWith(url, "/") && !StringUtils.startsWith(path, "/")) ? 
 						"/" : StringUtils.EMPTY).append(path).toString();

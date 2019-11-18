@@ -28,8 +28,8 @@ import org.sniper.resource.fastdfs.cluster.Cluster;
 public class TrackerClusterIntranetAccessor extends AbstractAccessor {
 
 	@Override
-	public String getAccessableURL(Cluster cluster, String path) {
-		return getAccessabeURL(cluster.getTrackerClusterIntranetAccessURL(), path);
+	public String getAccessibleURL(Cluster cluster, String path) {
+		return getAccessibleURL(cluster.getTrackerClusterIntranetAccessURL(), path);
 	}
 
 }

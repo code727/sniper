@@ -28,7 +28,7 @@ import org.sniper.resource.fastdfs.cluster.Cluster;
 public class DefaultAccessor extends AccessorSupport {
 
 	@Override
-	public String getAccessableURL(Cluster cluster, String path) {
+	public String getAccessibleURL(Cluster cluster, String path) {
 		// 按传入的路径直接返回，严格的说此实现类返回的结果不是一个可直接访问的完整URL
 		return path;
 	}

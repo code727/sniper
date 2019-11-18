@@ -33,12 +33,12 @@ import org.sniper.resource.fastdfs.cluster.StorageGroup;
 public class StorageGroupIntranetAccessor extends AbstractAccessor {
 
 	@Override
-	public String getAccessableURL(Cluster cluster, String path) {
+	public String getAccessibleURL(Cluster cluster, String path) {
 		Iterator<Entry<String, StorageGroup>> iterator = cluster.getStorageGroups().entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<String, StorageGroup> groupEntry = iterator.next();
 			if (StringUtils.startsWith(path, groupEntry.getKey()))
-				return getAccessabeURL(cluster.getStorageGroupIntranetAccessURL(groupEntry.getKey()), path);
+				return getAccessibleURL(cluster.getStorageGroupIntranetAccessURL(groupEntry.getKey()), path);
 		}
 		return null;
 	}

@@ -96,7 +96,7 @@ public class FastTemplate extends FastSupport implements FastOperations {
 				String targetGroupName = StringUtils.trimToEmpty(groupName);
 				String path = storageClient.upload_file1(targetGroupName, source.getBytes(), source.getExtName(),
 						CollectionUtils.toArray(source.getNameValuePaires(), NameValuePair.class));
-				return accessor.getAccessableURL(cluster, path);
+				return accessor.getAccessibleURL(cluster, path);
 			}
 		});
 	}
@@ -122,13 +122,14 @@ public class FastTemplate extends FastSupport implements FastOperations {
 					if (source != null) {
 						path = storageClient.upload_file1(targetGroupName, source.getBytes(), source.getExtName(),
 								CollectionUtils.toArray(source.getNameValuePaires(), NameValuePair.class));
-						result.put(source, accessor.getAccessableURL(cluster, path));
+						result.put(source, accessor.getAccessibleURL(cluster, path));
 					}
 				}
 				return result;
 			}
 		});
 	}
+	
 	@Override
 	public byte[] download(final String path) throws Exception {
 		AssertUtils.assertNotBlank(path, "Source path must not be blank");
@@ -146,8 +147,8 @@ public class FastTemplate extends FastSupport implements FastOperations {
 	public String download(final String path, final String fileName) throws Exception {
 		AssertUtils.assertNotBlank(path, "Source path must not be blank");
 		AssertUtils.assertNotBlank(fileName, "Local file name must not be blank");
-		
 		return this.execute(new FastCallback<String>() {
+			
 			@Override
 			public String doIn(StorageClient1 storageClient) throws Exception {
 				String storagePath = accessor.getStoragePath(cluster, path);
@@ -217,4 +218,5 @@ public class FastTemplate extends FastSupport implements FastOperations {
 			}
 		});
 	}
+	
 }
