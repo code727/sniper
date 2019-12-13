@@ -89,10 +89,10 @@ public abstract class AbstractConstant<K, V> implements Constant<K, V> {
 				value instanceof CharSequence ? StringUtils.appendDoubleQuotes(value.toString()) : value);
 	}
 	
-	@Override
-	protected final Object clone() throws CloneNotSupportedException {
-		 throw new CloneNotSupportedException();
-	}
+//	@Override
+//	protected final Object clone() throws CloneNotSupportedException {
+//		 throw new CloneNotSupportedException();
+//	}
 	
 	/**
 	 * 创建常量映射集
@@ -110,7 +110,7 @@ public abstract class AbstractConstant<K, V> implements Constant<K, V> {
 			try {
 				for (Field field : fields) {
 					int modifiers = field.getModifiers();
-					/* 将同时具备public static final三个修饰符的成员对象才能被加入常量映射集 */
+					/* 将同时具备public static final三个修饰符的成员对象加入到常量映射集 */
 					if (Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)) {
 						Constant<K, V> constant = (Constant<K, V>) field.get(constantType);
 						mappings.put(constant.getKey(), (C) constant);

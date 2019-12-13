@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.util.StdDateFormat;
 import org.junit.Test;
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
@@ -38,7 +40,10 @@ public class CodehausJacksonSerializerTest extends AbstractSerializerTest {
 	private CodehausJacksonSerializer codehausJacksonSerializer;
 	
 	public CodehausJacksonSerializerTest() {
-		this.codehausJacksonSerializer = new CodehausJacksonSerializer();
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.setDateFormat(new StdDateFormat());
+		this.codehausJacksonSerializer = new CodehausJacksonSerializer(mapper);
+		
 	}
 	
 	/**

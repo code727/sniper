@@ -18,14 +18,13 @@
 
 package org.sniper.commons.util;
 
+import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import org.sniper.commons.constant.date.DatePattern;
@@ -46,10 +45,16 @@ public class DateUtils {
 			"EEE MMM dd HH:mm:ss yyyy"
 	};
 	
-	/** 全局键与日期时间格式关系映射集 */
-	private static final Map<String, SimpleDateFormat> DATE_FORMATES = MapUtils.newConcurrentHashMap();
-	
 	private DateUtils() {}
+	
+	/**
+	 * 获取日期格式对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static DateFormat getDateFormat() {
+		return getDateFormat(null);
+	}
 	
 	/**
 	 * 根据指定的模式获取日期格式对象
@@ -57,21 +62,8 @@ public class DateUtils {
 	 * @param pattern
 	 * @return
 	 */
-	public static SimpleDateFormat getDateFormat(String pattern) {
-		if (StringUtils.isBlank(pattern)) 
-			pattern = DatePattern.DATETIME.getKey();
-		
-		SimpleDateFormat dateFormat = DATE_FORMATES.get(pattern);
-		if (dateFormat == null) {
-			synchronized (DATE_FORMATES) {
-				if ((dateFormat = DATE_FORMATES.get(pattern)) == null) {
-					dateFormat = new SimpleDateFormat(pattern);
-					DATE_FORMATES.put(pattern, dateFormat);
-				}
-			}
-		}
-		
-		return dateFormat;
+	public static DateFormat getDateFormat(String pattern) {
+		return new SimpleDateFormat(StringUtils.isNotBlank(pattern) ? pattern : DatePattern.DATETIME.getKey());
 	}
 		
 	/**
@@ -79,7 +71,7 @@ public class DateUtils {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public static SimpleDateFormat getGMTDateFormat() {
+	public static DateFormat getGMTDateFormat() {
 		return getGMTDateFormat(0);
 	}
 	
@@ -89,7 +81,7 @@ public class DateUtils {
 	 * @param index
 	 * @return
 	 */
-	public static SimpleDateFormat getGMTDateFormat(int index) {
+	public static DateFormat getGMTDateFormat(int index) {
 		return getGMTDateFormat(index, null);
 	}
 	
@@ -99,7 +91,7 @@ public class DateUtils {
 	 * @param locale
 	 * @return
 	 */
-	public static SimpleDateFormat getGMTDateFormat(Locale locale) {
+	public static DateFormat getGMTDateFormat(Locale locale) {
 		return getGMTDateFormat(0, locale);
 	}
 		
@@ -110,25 +102,9 @@ public class DateUtils {
 	 * @param locale
 	 * @return
 	 */
-	public static SimpleDateFormat getGMTDateFormat(int index, Locale locale) {
-		if (locale == null)
-			locale = Locale.US;
-		
+	public static DateFormat getGMTDateFormat(int index, Locale locale) {
 		String pattern = GMT_DATETIME_FORMATS[NumberUtils.rangeLimit(index, 0, GMT_DATETIME_FORMATS.length - 1)];
-		String key = new StringBuilder(pattern).append(StringUtils.UNDER_LINE).append(locale).toString();
-		
-		SimpleDateFormat dateFormat = DATE_FORMATES.get(key);
-		if (dateFormat == null) {
-			synchronized (DATE_FORMATES) {
-				if ((dateFormat = DATE_FORMATES.get(pattern)) == null) {
-					dateFormat = new SimpleDateFormat(pattern, locale);
-					dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-					DATE_FORMATES.put(key, dateFormat);
-				}
-			}
-		}
-		
-		return dateFormat;
+		return new SimpleDateFormat(pattern, locale != null ? locale : Locale.US);
 	}
 	
 	/**
@@ -1302,5 +1278,4 @@ public class DateUtils {
 		return getIntervalDays(when, then) / 7;
 	}
 		
-			
 }

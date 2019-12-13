@@ -127,6 +127,7 @@
 		<module>sniper-context</module>
 		<module>sniper-concurrent</module>
 		<module>sniper-resource</module>
+		<module>sniper-streaming</module>
 	</modules>
 	
 	

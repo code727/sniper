@@ -43,20 +43,12 @@ public class SystemUtils {
 	static {
 		GLOBAL_PROPERTIES = new Properties();
 		String osName = ObjectUtils.toString(getSystemProperties().get("os.name"));
-		if (StringUtils.indexOfIgnoreCase(osName, "Unix") > -1
-				|| StringUtils.indexOfIgnoreCase(osName, "Linux") > -1)
+		if (StringUtils.indexOfIgnoreCase(osName, "Unix") > -1 || StringUtils.indexOfIgnoreCase(osName, "Linux") > -1)
 			GLOBAL_PROPERTIES.put("sys.text.newline", UNIX_TEXT_NEWLINE);
 		else if (StringUtils.indexOfIgnoreCase(osName, "Mac") > -1)
 			GLOBAL_PROPERTIES.put("sys.text.newline", MAC_TEXT_NEWLINE);
 		else
 			GLOBAL_PROPERTIES.put("sys.text.newline", WINDOWS_TEXT_NEWLINE);
-//		try {
-//			// 加载全局配置
-//			PropertiesUtils.append(GLOBAL_PROPERTIES, PropertiesUtils.create(
-//					ClassLoader.getSystemResourceAsStream("commons.properties")));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 	private SystemUtils() {}
