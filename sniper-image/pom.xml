@@ -8,10 +8,6 @@
 	</parent>
 	<artifactId>sniper-image</artifactId>
 	
-	<properties>
-		<zxing.version>3.2.1</zxing.version>
-	</properties>
-	
 	<dependencies>
 		<dependency>
 		    <groupId>com.google.zxing</groupId>
@@ -28,12 +24,12 @@
     	<dependency>
     		<groupId>QRCode</groupId>
     		<artifactId>QRCode</artifactId>
-    		<version>3.0.0</version>
+    		<version>${QRCode.version}</version>
 		</dependency>
 		<dependency>
     		<groupId>QRCode</groupId>
     		<artifactId>QRCode_swetake</artifactId>
-    		<version>3.0.0</version>
+    		<version>${QRCode_swetake.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>

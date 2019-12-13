@@ -8,12 +8,46 @@
 	<packaging>pom</packaging>
 	
 	<properties>
+		<commons-fileupload.version>1.3.3</commons-fileupload.version>
+		<commons-logging.version>1.2</commons-logging.version>
+		<commons-pool.version>1.6</commons-pool.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
+		<cglib-nodep.version>3.1</cglib-nodep.version>
+		<kaptcha.version>0.0.9</kaptcha.version>
+		<httpclient.version>4.3.1</httpclient.version>
+		<httpmime.version>4.3.1</httpmime.version>
+		<mail.version>1.4.7</mail.version>
 		<jackson.version>1.9.12</jackson.version>
+		<jackson-databind.version>2.8.7</jackson-databind.version>
 		<json-lib.version>2.4</json-lib.version>
+		<fastjson.version>1.2.4</fastjson.version>
+		<bson.version>3.2.2</bson.version>
+		<hessian.version>4.0.51</hessian.version>
+		<geronimo-jms.version>1.1.1</geronimo-jms.version>
+		<zxing.version>3.2.1</zxing.version>
+		<QRCode.version>3.0.0</QRCode.version>
+		<QRCode_swetake.version>3.0.0</QRCode_swetake.version>
+		<velocity.version>1.7</velocity.version>
+		<fastdfs-client-java.version>1.27</fastdfs-client-java.version>
 		<servlet.version>2.5</servlet.version>
+		<jedis.version>2.10.2</jedis.version>
+		<morphia.version>1.0.1</morphia.version>
+		<shiro.version>1.3.2</shiro.version>
+		<kafka-clients.version>2.3.1</kafka-clients.version>
 		<spring.version>4.3.7.RELEASE</spring.version>
+		<spring-security.version>4.2.2.RELEASE</spring-security.version>
+		<spring-orm.version>3.2.2.RELEASE</spring-orm.version>
+		<spring-data-redis.version>1.8.18.RELEASE</spring-data-redis.version>
+		<spring-data-mongodb.version>1.9.2.RELEASE</spring-data-mongodb.version>
+		<spring-kafka.version>2.3.4.RELEASE</spring-kafka.version>
+		<hibernate.version>4.3.11.Final</hibernate.version>
+		<hibernate-jpa.version>1.0.1.Final</hibernate-jpa.version>
+		<ibatis.version>2.3.0</ibatis.version>
+		<mybatis.version>3.2.2</mybatis.version>
+		<mybatis-spring.version>1.2.0</mybatis-spring.version>
+		<unitils-core.version>3.2</unitils-core.version>
+		<junit.version>4.12</junit.version>
 		<sniper.version>1.0.0</sniper.version>
 	</properties>
 	
@@ -129,6 +163,5 @@
 		<module>sniper-resource</module>
 		<module>sniper-streaming</module>
 	</modules>
-	
 	
 </project>

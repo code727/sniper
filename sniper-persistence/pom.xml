@@ -8,15 +8,6 @@
 	</parent>
 	<artifactId>sniper-persistence</artifactId>
 	
-	<properties>
-		<spring-orm.version>3.2.2.RELEASE</spring-orm.version>
-		<hibernate.version>4.3.11.Final</hibernate.version>
-		<hibernate-jpa.version>1.0.1.Final</hibernate-jpa.version>
-		<ibatis.version>2.3.0</ibatis.version>
-		<mybatis.version>3.2.2</mybatis.version>
-		<mybatis-spring.version>1.2.0</mybatis-spring.version>
-	</properties>
-	
 	<dependencies>
 		<dependency>
   			<groupId>org.slf4j</groupId>

@@ -22,7 +22,7 @@
 		<dependency>  
 		    <groupId>org.unitils</groupId>  
 		    <artifactId>unitils-core</artifactId>  
-		    <version>3.2</version>
+		    <version>${unitils-core.version}</version>
 		    <optional>true</optional>
 		</dependency>  
 		<dependency>
@@ -38,7 +38,7 @@
 		<dependency>
 		    <groupId>junit</groupId>
 		    <artifactId>junit</artifactId>
-		    <version>4.12</version>
+		    <version>${junit.version}</version>
 		</dependency>
 	</dependencies>
 	
