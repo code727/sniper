@@ -20,7 +20,6 @@ package org.sniper.kafka.producer.spring.listener;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
-import org.springframework.kafka.support.ProducerListenerAdapter;
 import org.sniper.kafka.exception.ProducerException;
 import org.sniper.kafka.producer.behavior.DefaultProducerBehavior;
 import org.sniper.kafka.producer.behavior.ProducerBehavior;
@@ -28,13 +27,14 @@ import org.sniper.kafka.producer.service.ProducerService;
 import org.sniper.kafka.support.MQFactory;
 import org.sniper.kafka.support.ProduceRecord;
 import org.sniper.kafka.support.ProduceResult;
+import org.springframework.kafka.support.ProducerListener;
 
 /**
  * 生产者监听器抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractProducerListener<K,V> extends ProducerListenerAdapter<K,V> implements ProducerService<K, V> {
+public abstract class AbstractProducerListener<K,V> implements ProducerListener<K, V>, ProducerService<K, V> {
 	
 	protected ProducerBehavior producerBehavior = new DefaultProducerBehavior(getClass());
 	

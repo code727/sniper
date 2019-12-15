@@ -15,13 +15,13 @@
 		<log4j.version>1.2.17</log4j.version>
 		<cglib-nodep.version>3.1</cglib-nodep.version>
 		<kaptcha.version>0.0.9</kaptcha.version>
-		<httpclient.version>4.3.1</httpclient.version>
-		<httpmime.version>4.3.1</httpmime.version>
+		<httpclient.version>4.3.6</httpclient.version>
+		<httpmime.version>4.3.6</httpmime.version>
 		<mail.version>1.4.7</mail.version>
 		<jackson.version>1.9.12</jackson.version>
 		<jackson-databind.version>2.8.7</jackson-databind.version>
 		<json-lib.version>2.4</json-lib.version>
-		<fastjson.version>1.2.4</fastjson.version>
+		<fastjson.version>1.2.25</fastjson.version>
 		<bson.version>3.2.2</bson.version>
 		<hessian.version>4.0.51</hessian.version>
 		<geronimo-jms.version>1.1.1</geronimo-jms.version>

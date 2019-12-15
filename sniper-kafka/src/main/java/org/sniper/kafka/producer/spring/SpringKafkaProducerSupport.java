@@ -120,7 +120,7 @@ public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
 				try {
 					if (exception == null) {
 						future.set(MQFactory.buildProduceResult(producerRecord, metadata));
-						if (producerListener != null && producerListener.isInterestedInSuccess()) {
+						if (producerListener != null) {
 							// 触发生产者对发送成功（Success）后的监听
 							((ProducerListener<K, V>) producerListener).onSuccess(producerRecord.topic(),
 									producerRecord.partition(), producerRecord.key(), producerRecord.value(), metadata);

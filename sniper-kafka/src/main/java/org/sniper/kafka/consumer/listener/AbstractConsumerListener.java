@@ -52,7 +52,7 @@ public abstract class AbstractConsumerListener<K, V> implements ConsumerListener
 
 	@Override
 	public void onMessage(ConsumerRecord<K, V> record) {
-		onMessage(record, null);
+		onMessage(record, (Acknowledgment) null);
 	}
 	
 	@Override
