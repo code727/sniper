@@ -28,7 +28,7 @@ public class BooleanUtils {
 	private BooleanUtils() {}
 	
 	/**
-	 * 判断包装类布尔值是否为"真"
+	 * 判断包装类布尔值是否为true
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @return
@@ -38,7 +38,7 @@ public class BooleanUtils {
 	}
 	
 	/**
-	 * 判断包装类布尔值是否为"假"
+	 * 判断包装类布尔值是否为false
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param value
 	 * @return

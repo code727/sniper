@@ -38,5 +38,7 @@ public interface Deletable {
 	 * @param deleted
 	 */
 	public void setDeleted(int deleted); 
+	
+	
 
 }

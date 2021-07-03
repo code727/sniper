@@ -449,5 +449,19 @@ public class ClassUtils {
 		
 		return pkg.getName();
 	}
+	
+	/**
+	 * 获取默认的ClassLoader
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public static ClassLoader getDefaultClassLoader() {
+		ClassLoader classLoader = null;
+		try {
+			classLoader = Thread.currentThread().getContextClassLoader();
+		} catch (Throwable ex) { }
+		
+		return classLoader != null ? classLoader : ClassUtils.class.getClassLoader();
+	}
 		
 }

@@ -40,50 +40,26 @@ public interface GenericResponse<C> extends Serializable {
 	 * @param code
 	 */
 	public void setCode(C code);
-	
+		
 	/**
 	 * 判断响应是否成功。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return 如果默认的状态码与当前状态码匹配，则表明响应成功，否则未成功。
 	 */
 	public boolean wasSuccess();
-	
-	/**
-	 * 判断响应是否成功。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param code 指定的状态码
-	 * @return 如果指定的状态码与当前状态码匹配，则表明响应成功，否则未成功。
-	 */
-	public boolean wasSuccess(C code);
-	
+			
 	/**
 	 * 判断响应是否失败。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return 如果默认的状态码与当前状态码匹配，则表明响应失败，否则未失败。
 	 */
 	public boolean wasFailed();
-	
-	/**
-	 * 判断响应是否失败。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param code 指定的状态码
-	 * @return 如果指定的状态码与当前状态码匹配，则表明响应失败，否则未失败。
-	 */
-	public boolean wasFailed(C code);
-	
+		
 	/**
 	 * 判断响应是否出现异常。
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return 如果默认的状态码与当前状态码匹配，则表明响应出现异常，否则未出现异常。
 	 */
 	public boolean wasException();
-	
-	/**
-	 * 判断响应是否出现异常。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param code 指定的状态码
-	 * @return 如果指定的状态码与当前状态码匹配，则表明响应出现异常，否则未出现异常。
-	 */
-	public boolean wasException(C code);
-			
+				
 }

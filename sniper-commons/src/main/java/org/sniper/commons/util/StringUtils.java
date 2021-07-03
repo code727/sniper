@@ -2158,5 +2158,5 @@ public class StringUtils {
 				? str.substring(NumberUtils.minLimit(beginIndex, 0), NumberUtils.rangeLimit(endIndex, 0, str.length()))
 				: str.substring(NumberUtils.minLimit(endIndex, 0), NumberUtils.rangeLimit(beginIndex, 0, str.length()));
 	}
-				
+					
 }

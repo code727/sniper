@@ -19,13 +19,12 @@
 package org.sniper.spring.context;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.Lifecycle;
-import org.sniper.spring.beans.CheckableInitializingBeanAdapter;
 
-public class ApplicationContextHolder extends CheckableInitializingBeanAdapter
-		implements ApplicationContextAware {
+public class ApplicationContextHolder implements ApplicationContextAware, InitializingBean {
 	
 	private static ApplicationContext applicationContext;
 	
@@ -35,11 +34,11 @@ public class ApplicationContextHolder extends CheckableInitializingBeanAdapter
 	}
 	
 	@Override
-	protected void checkProperties() {
+	public void afterPropertiesSet() throws Exception {
 		if (applicationContext == null)
 			throw new IllegalArgumentException("Property 'applicationContext' is required");
 	}
-	
+		
 	public static ApplicationContext getApplicationContext() {
 		return applicationContext;
 	}
@@ -63,5 +62,7 @@ public class ApplicationContextHolder extends CheckableInitializingBeanAdapter
 		if (applicationContext instanceof Lifecycle)
 			((Lifecycle) applicationContext).stop();
 	}
+
+	
 
 }

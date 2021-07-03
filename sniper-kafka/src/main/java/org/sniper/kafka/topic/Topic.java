@@ -18,13 +18,17 @@
 
 package org.sniper.kafka.topic;
 
+import java.io.Serializable;
+
 /**
  * Topic实例
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class Topic {
+public class Topic implements Serializable {
 	
+	private static final long serialVersionUID = 1026615007246974615L;
+
 	/** Topic实例名称 */
 	private String name;
 	

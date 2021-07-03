@@ -18,22 +18,23 @@
 
 package org.sniper.commons.response;
 
+import org.sniper.commons.util.ObjectUtils;
+
 /**
- * 响应抽象类
+ * 抽象响应类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractResponse<C> implements GenericResponse<C> {
+public abstract class AbstractResponse<C> implements MessagingResponse<C> {
 		
 	private static final long serialVersionUID = 8451538043375748612L;
 	
-	/** 状态码 */
-	private C code;
+	/** 响应码 */
+	protected C code;
 	
-	protected AbstractResponse(C code) {
-		this.code = code;
-	}
-		
+	/** 响应消息 */
+	protected String message;
+	
 	@Override
 	public C getCode() {
 		return code;
@@ -45,26 +46,23 @@ public abstract class AbstractResponse<C> implements GenericResponse<C> {
 	}
 	
 	@Override
-	public boolean wasSuccess(C code) {
-		return matches(code);
+	public void setMessage(String message) {
+		this.message = message;
 	}
-
+	
 	@Override
-	public boolean wasFailed(C code) {
-		return matches(code);
+	public String getMessage() {
+		return message;
 	}
-
-	@Override
-	public boolean wasException(C code) {
-		return matches(code);
-	}
-		
+	
 	/**
 	 * 判断指定的状态码是否与当前状态码匹配
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param code
 	 * @return
 	 */
-	protected abstract boolean matches(C code); 
+	protected boolean matches(C code) {
+		return ObjectUtils.equals(this.code, code);
+	}
 	
 }

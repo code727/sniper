@@ -27,6 +27,8 @@ import org.apache.kafka.clients.producer.Callback;
  */
 public class TopicNode extends Topic {
 	
+	private static final long serialVersionUID = -4586638992526633431L;
+	
 	/** 当前Topic实例中注册的生产回调事件 */
 	private Callback callback;
 	

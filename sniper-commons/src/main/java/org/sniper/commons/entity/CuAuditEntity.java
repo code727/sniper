@@ -19,7 +19,7 @@
 package org.sniper.commons.entity;
 
 /**
- * 可进行新增/修改审核的实体抽象类
+ * 可对新增/修改审核的实体抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

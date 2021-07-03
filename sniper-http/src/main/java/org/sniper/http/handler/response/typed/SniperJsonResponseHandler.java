@@ -20,7 +20,6 @@ package org.sniper.http.handler.response.typed;
 
 
 import org.sniper.commons.response.DatamationResponse;
-import org.sniper.commons.response.MessagingResponse;
 import org.sniper.commons.util.ReflectionUtils;
 
 /**
@@ -44,16 +43,13 @@ public class SniperJsonResponseHandler extends AbstractJsonNestedResponseHandler
 	protected <T> T doResponse(T response, Class<?> nestedType) throws Exception {
 		
 		if (nestedType != null && response instanceof DatamationResponse) {
-			Object data = ((DatamationResponse<Object, Object>) response).getData();
+			Object data = ((DatamationResponse<?, ?>) response).getData();
 			
 			//  data值的类型与指定的嵌套类型不一致时，需转换成嵌套类型
 			if (data != null && !data.getClass().equals(nestedType)) {
-				DatamationResponse<Object, Object> dataResponse = (DatamationResponse<Object, Object>) ReflectionUtils.newInstance(response.getClass());
-				dataResponse.setCode(((DatamationResponse<Object, Object>) response).getCode());
-				
-				if (dataResponse instanceof MessagingResponse && response instanceof MessagingResponse)
-					((MessagingResponse<Object>) dataResponse).setMessage(((MessagingResponse<Object>) response).getMessage());
-				
+				DatamationResponse<Object, Object> dataResponse = (DatamationResponse<Object, Object>) 
+						ReflectionUtils.newInstance(response.getClass());
+				dataResponse.setCode(((DatamationResponse<Object, Object>) response).getCode());				
 				dataResponse.setData(typedSerializer.deserialize(typedSerializer.serialize(data), nestedType));
 				return (T) dataResponse;
 			}

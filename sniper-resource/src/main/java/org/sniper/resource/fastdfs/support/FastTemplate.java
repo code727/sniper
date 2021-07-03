@@ -96,6 +96,7 @@ public class FastTemplate extends FastSupport implements FastOperations {
 				String targetGroupName = StringUtils.trimToEmpty(groupName);
 				String path = storageClient.upload_file1(targetGroupName, source.getBytes(), source.getExtName(),
 						CollectionUtils.toArray(source.getNameValuePaires(), NameValuePair.class));
+				
 				return accessor.getAccessibleURL(cluster, path);
 			}
 		});

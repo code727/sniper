@@ -81,11 +81,6 @@ public class PoolConnectionFactory extends AbstractConnectionFactory implements 
 		return this.trackerServerPool.borrowObject();
 	}
 
-//	@Override
-//	public TrackerServer getTrackerServer(int index) throws Exception {
-//		return this.trackerServerPool.borrowObject();
-//	}
-
 	@Override
 	public StorageServer getStorageServer(TrackerServer trackerServer) throws Exception {
 		return getStorageServer(trackerServer, null);

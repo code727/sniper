@@ -23,45 +23,40 @@ import java.util.Map;
 import org.sniper.commons.constant.AbstractLocaleConstant;
 
 /**
- * 业务状态常量类
+ * 响应状态常量类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public final class BizStatus extends AbstractLocaleConstant<String> {
+public final class ResponseStatus extends AbstractLocaleConstant<Integer> {
 	
 	private static final long serialVersionUID = -2847353128385702823L;
+	
+	/** 异常，系统故障和未知错误等 */
+	public static final ResponseStatus EXCEPTION = new ResponseStatus(-1, "response.status.exception");
 		
-	/** 业务执行成功 */
-	public static final BizStatus SUCCESS = new BizStatus("success", "biz.status.success");
+	/** 成功 */
+	public static final ResponseStatus SUCCESS = new ResponseStatus(0, "response.status.success");
 	
-	/** 业务执行失败，业务逻辑之类引起的 */
-	public static final BizStatus FAILED = new BizStatus("failed", "biz.status.failed");
+	/** 失败，业务逻辑错误 */
+	public static final ResponseStatus FAILED = new ResponseStatus(1, "response.status.failed");
 	
-	/** 异常，系统故障之类引起的 */
-	public static final BizStatus EXCEPTION = new BizStatus("exception", "biz.status.exception");
-	
-	private static final Map<String, BizStatus> mappings;
+	private static final Map<Integer, ResponseStatus> mappings;
 	
 	static {
-		mappings = createMapping(BizStatus.class);
+		mappings = createMapping(ResponseStatus.class);
 	}
 		
-	protected BizStatus(String key, String value) {
+	protected ResponseStatus(Integer key, String value) {
 		super(key, value);
 	}
-	
-	@Override
-	public boolean matches(String key) {
-		return this.key.equalsIgnoreCase(key);
-	}
-	
+		
 	/**
-	 * 将指定的键解析成BizStatus对象
+	 * 将指定的键解析成ResponseStatus常量
 	 * @param key
 	 * @return
 	 */
-	public static BizStatus resolve(String key) {
-		return (key != null ? mappings.get(key.toLowerCase()) : null);
+	public static ResponseStatus resolve(Integer key) {
+		return mappings.get(key);
 	}
-			
+				
 }

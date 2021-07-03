@@ -37,7 +37,7 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="keyDeserializer" class="org.apache.kafka.common.serialization.IntegerDeserializer" />
+	<bean id="keyDeserializer" class="org.apache.kafka.common.serialization.StringDeserializer" />
 	<bean id="valueDeserializer" class="org.apache.kafka.common.serialization.StringDeserializer" />
 	
 	<!-- 
@@ -53,14 +53,14 @@
 	</bean>
 	
 	<!-- 消费者容器配置信息 -->
-	<bean id="containerProperties" class="org.springframework.kafka.listener.config.ContainerProperties">
+	<bean id="containerProperties" class="org.springframework.kafka.listener.ContainerProperties ">
 		<!-- 需要监听消费的topic名称 -->
-		<constructor-arg value="test" />
+		<constructor-arg value="demo" />
 		<!-- 接收到消息后调用的消费服务 -->
 		<property name="messageListener" >
 			<bean class="org.sniper.kafka.consumer.listener.LoggingConsumerListener" />
 		</property> 
-		<property name="ackOnError" value="false"></property>
+		<property name="ackOnError" value="false" />
 	</bean>
 
 	<!-- 消费者监听容器，初始化调用doStart，然后调用ContainerProperties里配置的自定义消费服务 -->

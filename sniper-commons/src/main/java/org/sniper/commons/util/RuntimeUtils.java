@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-6-29
+ * Create Date : 2019-11-17
  */
 
-package org.sniper.trace.service;
+package org.sniper.commons.util;
 
-import org.sniper.trace.domain.BehaviorPerformance;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 
 /**
- * 性能采集服务接口
+ * 运行时工具类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface BehaviorPerformanceService {
+public class RuntimeUtils {
+	
+	public static final RuntimeMXBean RUNTIME_MXBEAN;
+	
+	static {
+		RUNTIME_MXBEAN = ManagementFactory.getRuntimeMXBean();
+	}
+	
+	private RuntimeUtils(){}
 	
 	/**
-	 * 存储性能记录
+	 * 获取本机JVM运行时的PID
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param behaviorPerformance
+	 * @return
 	 */
-	public void store(BehaviorPerformance behaviorPerformance);
-
+	public static int jvmPid() {
+		String name = RUNTIME_MXBEAN.getName();
+		try {
+			return Integer.valueOf(name.split("@")[0]);
+		} catch (Exception e) {
+			return -1;
+		}
+	}
+				
 }

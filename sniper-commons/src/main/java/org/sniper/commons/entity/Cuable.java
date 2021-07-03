@@ -21,7 +21,7 @@ package org.sniper.commons.entity;
 import java.util.Date;
 
 /**
- * 可记录创建/更新时间的实体接口
+ * 可新增/更新的实体接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -29,8 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.sniper.commons.LinkedMultiValueMap;
 import org.sniper.commons.MultiValueMap;
-import org.sniper.commons.response.FullResponse;
-import org.sniper.commons.response.MessageResponse;
+import org.sniper.commons.response.Response;
 import org.sniper.commons.util.DateUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.http.MappedHttpSender;
@@ -69,7 +68,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 	
 //	@Test
 	public void testGetBean() throws Exception {
-		FullResponse<Developer> response = mappedHttpSender.request("getBean", parameters);
+		Response<Developer> response = mappedHttpSender.request("getBean", parameters);
 		System.out.println(response.getCode());
 		System.out.println(response.getData().getId());
 		System.out.println(response.getData().getName());
@@ -78,7 +77,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 	
 	@Test
 	public void testPostBean() throws Exception {
-		FullResponse<Developer> response = mappedHttpSender.request("postBean", parameters);
+		Response<Developer> response = mappedHttpSender.request("postBean", parameters);
 		System.out.println(response.getCode());
 		System.out.println(response.getData().getId());
 		System.out.println(response.getData().getName());
@@ -112,7 +111,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 //		requestBody.put("name", "杜斌");
 //		requestBody.put("loginName", null);
 		
-		MessageResponse response = mappedHttpSender.requestByBody("postUpload", multiValueMap);
+		Response<Object> response = mappedHttpSender.requestByBody("postUpload", multiValueMap);
 		System.out.println(response.wasSuccess());
 	}
 	
@@ -127,7 +126,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 		
 		File[] files = new File[] { new File("C:/Users/Daniele/Desktop/新建.txt") };
 		
-		FullResponse<Developer> response = mappedHttpSender.requestByBody("postUploads", files);
+		Response<Developer> response = mappedHttpSender.requestByBody("postUploads", files);
 		if (response.wasSuccess()) {
 			Developer developer = response.getData();
 			System.out.println(developer.getId());
@@ -140,7 +139,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 	
 //	@Test
 	public void testPostBodyBean() throws Exception {
-		FullResponse<Developer> response = mappedHttpSender.requestByBody("postBodyBean", requestBody);
+		Response<Developer> response = mappedHttpSender.requestByBody("postBodyBean", requestBody);
 		System.out.println(response.getCode());
 		System.out.println(response.getData().getId());
 		System.out.println(response.getData().getName());

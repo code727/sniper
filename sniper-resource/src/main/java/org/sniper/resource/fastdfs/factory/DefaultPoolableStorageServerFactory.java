@@ -24,8 +24,6 @@ import java.net.Socket;
 import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerClient;
-import org.csource.fastdfs.TrackerServer;
-import org.sniper.context.ThreadLocalHolder;
 
 /**
  * 可池化的StorageServer对象工厂默认实现类
@@ -48,9 +46,7 @@ public class DefaultPoolableStorageServerFactory implements PoolableStorageServe
 
 	@Override
 	public StorageServer makeObject() throws Exception {
-		TrackerServer trackerServer = (TrackerServer) ThreadLocalHolder.getAttribute("CURRENT_TRACKERSERVER");
-		String groupName = (String) ThreadLocalHolder.getAttribute("CURRENT_STORAGE_GROUPNAME");
-		return trackerClient.getStoreStorage(trackerServer, groupName);
+		return trackerClient.getStoreStorage(ClientGlobal.g_tracker_group.getConnection(), null);
 	}
 
 	@Override

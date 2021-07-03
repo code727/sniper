@@ -53,10 +53,9 @@ public class DefaultConnectionFactory extends AbstractConnectionFactory {
 		return ClientGlobal.g_tracker_group.getConnection(serverIndex);
 	}
 
-//	@Override
-//	public TrackerServer getTrackerServer(int index) throws IOException {
-//		return ClientGlobal.g_tracker_group.getConnection(index);
-//	}
+	public TrackerServer getTrackerServer(int index) throws IOException {
+		return ClientGlobal.g_tracker_group.getConnection(index);
+	}
 
 	@Override
 	public StorageServer getStorageServer(TrackerServer trackerServer) throws IOException {

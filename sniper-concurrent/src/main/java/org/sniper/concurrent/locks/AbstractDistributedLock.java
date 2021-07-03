@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 the original author or authors.
+ * Copyright 2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,36 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-3-16
+ * Create Date : 2019年11月17日
  */
 
-package org.sniper.commons.response;
+package org.sniper.concurrent.locks;
 
-import java.io.Serializable;
+import org.sniper.commons.util.StringUtils;
 
 /**
- * 数据响应实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class DataResponse<T> extends AbstractDatamationResponse<T> implements Serializable {
+public abstract class AbstractDistributedLock<K> implements KeyspaceLock<K> {
 	
-	private static final long serialVersionUID = 7831515870882940776L;
+	/** 锁对象实例ID */
+	protected final String instanceId;
 	
-	public DataResponse() {
-		this((T) null);
-	}
-		
-	public DataResponse(T data) {
-		this(DEFAULT_SUCCESS_CODE, data);
+	protected AbstractDistributedLock(String instanceId) {
+		this.instanceId = (StringUtils.isNotBlank(instanceId) ? instanceId : StringUtils.unsignedUUID());
 	}
 	
-	public DataResponse(DatamationResponse<Integer, T> response) {
-		super(response);
-	}
-		
-	public DataResponse(Integer code, T data) {
-		super(code, data);
-	}
-	
+//	protected 
+
 }

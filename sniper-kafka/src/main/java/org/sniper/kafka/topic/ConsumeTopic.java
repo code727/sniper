@@ -27,6 +27,8 @@ import org.apache.kafka.common.record.TimestampType;
  */
 public class ConsumeTopic extends Topic {
 	
+	private static final long serialVersionUID = -2057391162831745875L;
+
 	/** 消费某条消息后当前Topic的偏移量 */
 	private long offset;
 	

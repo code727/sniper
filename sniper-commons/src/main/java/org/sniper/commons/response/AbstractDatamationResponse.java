@@ -23,19 +23,15 @@ package org.sniper.commons.response;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractDatamationResponse<T> extends BaseResponse implements DatamationResponse<Integer, T> {
+public abstract class AbstractDatamationResponse<C, T> extends AbstractResponse<C> implements DatamationResponse<C, T> {
 	
-	private static final long serialVersionUID = 4108877402467845840L;
+	private static final long serialVersionUID = 3520505219697443564L;
 	
 	/** 响应数据 */
-	private T data;
-			
-	protected AbstractDatamationResponse(DatamationResponse<Integer, T> response) {
-		this(response.getCode(), response.getData());
-	}
-		
-	protected AbstractDatamationResponse(Integer code, T data) {
-		super(code);
+	protected T data;
+	
+	@Override
+	public void setData(T data) {
 		this.data = data;
 	}
 	
@@ -44,9 +40,4 @@ public abstract class AbstractDatamationResponse<T> extends BaseResponse impleme
 		return data;
 	}
 
-	@Override
-	public void setData(T data) {
-		this.data = data;
-	}
-	
 }

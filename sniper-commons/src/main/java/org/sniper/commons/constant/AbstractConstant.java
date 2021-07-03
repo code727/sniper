@@ -88,12 +88,7 @@ public abstract class AbstractConstant<K, V> implements Constant<K, V> {
 				key instanceof CharSequence ? StringUtils.appendDoubleQuotes(key.toString()) : key,
 				value instanceof CharSequence ? StringUtils.appendDoubleQuotes(value.toString()) : value);
 	}
-	
-//	@Override
-//	protected final Object clone() throws CloneNotSupportedException {
-//		 throw new CloneNotSupportedException();
-//	}
-	
+		
 	/**
 	 * 创建常量映射集
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 

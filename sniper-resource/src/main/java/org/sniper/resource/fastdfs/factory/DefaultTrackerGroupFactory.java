@@ -117,6 +117,7 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 				break;
 		}
 		this.trackerGroup = new TrackerGroup(trackerServerAddresses);
+		
 		ClientGlobal.g_tracker_group = trackerGroup;
 	}
 	

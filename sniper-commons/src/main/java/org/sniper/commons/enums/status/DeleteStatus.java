@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2015-11-20
+ * Create Date : 2021年7月4日
  */
 
 package org.sniper.commons.enums.status;
@@ -24,21 +24,21 @@ import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
 /**
- * 在线离线/线上线下状态枚举类
+ * 删除状态
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum O2OStatus {
+public enum DeleteStatus {
 	
-	/** 线下/离线 */
-	OFFLINE("o2o.status.offline"),
-	/** 线上/在线 */
-	ONLINE("o2o.status.online");
+	/** 未删除 */
+	UNDELETE("delete.status.undelete"),
+	/** 已删除 */
+	DELETED("delete.status.deleted");
 	
-	private static final Map<Integer, O2OStatus> mappings = MapUtils.newHashMap(2);
+	private static final Map<Integer, DeleteStatus> mappings = MapUtils.newHashMap(2);
 	
 	static {
-		for (O2OStatus status : values()) {
+		for (DeleteStatus status : values()) {
 			mappings.put(status.ordinal(), status);
 		}
 	}
@@ -49,7 +49,7 @@ public enum O2OStatus {
 	/** 值 */
 	private final String value;
 
-	private O2OStatus(String value) {
+	private DeleteStatus(String value) {
 		this.key = ordinal();
 		this.value = value;
 	}
@@ -67,7 +67,7 @@ public enum O2OStatus {
 	}
 	
 	/**
-	 * 判断指定的键是否匹配一个O2OStatus对象
+	 * 判断指定的键是否匹配一个EntityStatus对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -77,13 +77,13 @@ public enum O2OStatus {
 	}
 	
 	/**
-	 * 将指定的键解析成O2OStatus对象
+	 * 将指定的键解析成EntityStatus对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
 	 */
-	public static O2OStatus resolve(int key) {
+	public static DeleteStatus resolve(int key) {
 		return mappings.get(key);
 	}
-	
+
 }

@@ -19,7 +19,7 @@
 package org.sniper.commons.entity;
 
 /**
- * 可记录新增/修改审核的实体接口
+ * 可对新增/修改审计的实体接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
