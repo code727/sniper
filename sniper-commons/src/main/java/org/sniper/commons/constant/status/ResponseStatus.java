@@ -31,14 +31,14 @@ public final class ResponseStatus extends AbstractLocaleConstant<Integer> {
 	
 	private static final long serialVersionUID = -2847353128385702823L;
 	
-	/** 异常，系统故障和未知错误等 */
-	public static final ResponseStatus EXCEPTION = new ResponseStatus(-1, "response.status.exception");
-		
 	/** 成功 */
 	public static final ResponseStatus SUCCESS = new ResponseStatus(0, "response.status.success");
 	
-	/** 失败，业务逻辑错误 */
-	public static final ResponseStatus FAILED = new ResponseStatus(1, "response.status.failed");
+	/** 错误，包括业务逻辑错误和系统异常等 */
+	public static final ResponseStatus ERROR = new ResponseStatus(1, "response.status.error");
+	
+	/** 未知错误，作为系统兜底的错误码 */
+	public static final ResponseStatus UNKNOWN_ERROR = new ResponseStatus(-1, "response.status.error.unknown");
 	
 	private static final Map<Integer, ResponseStatus> mappings;
 	
@@ -55,8 +55,8 @@ public final class ResponseStatus extends AbstractLocaleConstant<Integer> {
 	 * @param key
 	 * @return
 	 */
-	public static ResponseStatus resolve(Integer key) {
+	public static ResponseStatus resolve(int key) {
 		return mappings.get(key);
 	}
-				
+					
 }

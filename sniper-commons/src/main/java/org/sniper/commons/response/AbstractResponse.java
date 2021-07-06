@@ -18,8 +18,6 @@
 
 package org.sniper.commons.response;
 
-import org.sniper.commons.util.ObjectUtils;
-
 /**
  * 抽象响应类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
@@ -54,15 +52,5 @@ public abstract class AbstractResponse<C> implements MessagingResponse<C> {
 	public String getMessage() {
 		return message;
 	}
-	
-	/**
-	 * 判断指定的状态码是否与当前状态码匹配
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param code
-	 * @return
-	 */
-	protected boolean matches(C code) {
-		return ObjectUtils.equals(this.code, code);
-	}
-	
+			
 }

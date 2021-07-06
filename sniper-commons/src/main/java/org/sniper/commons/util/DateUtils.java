@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import org.sniper.commons.constant.date.DatePattern;
+import org.sniper.commons.constant.expression.DatePattern;
 import org.sniper.commons.enums.astrology.HoroscopeEnum;
 import org.sniper.commons.enums.date.WeekEnum;
 

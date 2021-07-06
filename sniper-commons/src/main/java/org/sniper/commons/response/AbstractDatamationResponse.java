@@ -39,5 +39,9 @@ public abstract class AbstractDatamationResponse<C, T> extends AbstractResponse<
 	public T getData() {
 		return data;
 	}
+	
+	public String toString() {
+		return String.format("{code:%s,message:%s,data:%s}", code, message, data);
+	}
 
 }

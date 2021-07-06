@@ -42,24 +42,17 @@ public interface GenericResponse<C> extends Serializable {
 	public void setCode(C code);
 		
 	/**
-	 * 判断响应是否成功。
+	 * 判断响应是否成功
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return 如果默认的状态码与当前状态码匹配，则表明响应成功，否则未成功。
+	 * @return 
 	 */
-	public boolean wasSuccess();
-			
+	public boolean successed();
+	
 	/**
-	 * 判断响应是否失败。
+	 * 判断响应是否错误
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return 如果默认的状态码与当前状态码匹配，则表明响应失败，否则未失败。
+	 * @return 
 	 */
-	public boolean wasFailed();
-		
-	/**
-	 * 判断响应是否出现异常。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return 如果默认的状态码与当前状态码匹配，则表明响应出现异常，否则未出现异常。
-	 */
-	public boolean wasException();
-				
+	public boolean errored();
+	
 }

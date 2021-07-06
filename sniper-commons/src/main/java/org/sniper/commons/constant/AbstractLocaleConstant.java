@@ -31,7 +31,7 @@ public abstract class AbstractLocaleConstant<K> extends AbstractConstant<K, Stri
 		implements LocaleConstant<K, String> {
 
 	private static final long serialVersionUID = -1988017355814487635L;
-
+	
 	protected AbstractLocaleConstant(K key, String value) {
 		super(key, value);
 	}

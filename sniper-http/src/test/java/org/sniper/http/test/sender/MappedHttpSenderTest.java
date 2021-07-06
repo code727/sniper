@@ -112,7 +112,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 //		requestBody.put("loginName", null);
 		
 		Response<Object> response = mappedHttpSender.requestByBody("postUpload", multiValueMap);
-		System.out.println(response.wasSuccess());
+		System.out.println(response.successed());
 	}
 	
 //	@Test
@@ -127,7 +127,7 @@ public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {
 		File[] files = new File[] { new File("C:/Users/Daniele/Desktop/新建.txt") };
 		
 		Response<Developer> response = mappedHttpSender.requestByBody("postUploads", files);
-		if (response.wasSuccess()) {
+		if (response.successed()) {
 			Developer developer = response.getData();
 			System.out.println(developer.getId());
 			System.out.println(developer.getName());

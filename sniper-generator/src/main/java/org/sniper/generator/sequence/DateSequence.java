@@ -21,7 +21,7 @@ package org.sniper.generator.sequence;
 import java.text.DateFormat;
 import java.util.Date;
 
-import org.sniper.commons.constant.date.DatePattern;
+import org.sniper.commons.constant.expression.DatePattern;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.DateUtils;
 

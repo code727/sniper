@@ -47,6 +47,7 @@ public class TimestampInternalSequence implements DimensionSequence<TimestampInt
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
+	@Override
 	public TimestampInternalSequence update() {
 		long currentTimestamp = this.timestampSequence.update();
 		
@@ -116,5 +117,10 @@ public class TimestampInternalSequence implements DimensionSequence<TimestampInt
         }
         return timestamp;
     }
+	
+	public static void main(String[] args) {
+		TimestampInternalSequence sequence = new TimestampInternalSequence(10);
+		System.out.println(sequence.getSequence());
+	}
 		
 }

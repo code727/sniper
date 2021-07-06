@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2021年7月3日
+ * Create Date : 2021-7-3
  */
 
 package org.sniper.commons.response;
@@ -21,45 +21,68 @@ package org.sniper.commons.response;
 import org.sniper.commons.constant.status.ResponseStatus;
 
 /**
- * 基础响应对象
+ * 响应对象
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
 public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	
-	private static final long serialVersionUID = 4441492052857555509L;
+	private static final long serialVersionUID = -2728403977784339577L;
 
 	/** 默认成功响应码 */
 	protected static final int DEFAULT_SUCCESS_CODE = ResponseStatus.SUCCESS.getKey();
 	
-	/** 默认失败响应码  */
-	protected static final int DEFAULT_FAILED_CODE = ResponseStatus.FAILED.getKey();
-	
-	/** 默认异常响应码  */
-	protected static final int DEFAULT_EXCEPTION_CODE = ResponseStatus.EXCEPTION.getKey();
+	/** 默认错误响应码  */
+	protected static final int DEFAULT_ERROR_CODE = ResponseStatus.ERROR.getKey();
 	
 	public Response() {
-		this(DEFAULT_SUCCESS_CODE, DEFAULT_SUCCESS_MESSAGE);
+		this(null);
+	}
+	
+	public Response(T data) {
+		this(DEFAULT_SUCCESS_CODE, DEFAULT_SUCCESS_MESSAGE, data);
 	}
 	
 	public Response(int code, String message) {
+		this(code, message, null);
+	}
+	
+	public Response(int code, String message, T data) {
 		this.code = code;
 		this.message = message;
+		this.data = data;
 	}
 
 	@Override
-	public boolean wasSuccess() {
-		return matches(DEFAULT_SUCCESS_CODE);
+	public boolean successed() {
+		return successed(this.code);
+	}
+		
+	@Override
+	public boolean errored() {
+		return errored(this.code);
 	}
 	
-	@Override
-	public boolean wasFailed() {
-		return this.code > DEFAULT_SUCCESS_CODE;
+	/**
+	 * 判断是否为success码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param code
+	 * @return
+	 */
+	static boolean successed(int code) {
+		// 自定义成功码必须等于默认值
+		return code == DEFAULT_SUCCESS_CODE;
 	}
-	
-	@Override
-	public boolean wasException() {
-		return this.code < DEFAULT_SUCCESS_CODE;
+		
+	/**
+	 * 判断是否为error码
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param code
+	 * @return
+	 */
+	static boolean errored(int code) {
+		// 自定义错误码不能等于成功码默认值
+		return code != DEFAULT_SUCCESS_CODE;
 	}
 	
 }

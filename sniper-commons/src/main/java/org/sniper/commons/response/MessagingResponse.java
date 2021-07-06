@@ -29,12 +29,9 @@ public interface MessagingResponse<C> extends GenericResponse<C> {
 	
 	/** 默认成功消息 */
 	public static final String DEFAULT_SUCCESS_MESSAGE = ResponseStatus.SUCCESS.getMessage();
-	
-	/** 默认失败消息 */
-	public static final String DEFAULT_FAILED_MESSAGE = ResponseStatus.FAILED.getMessage();
-	
-	/** 默认异常消息 */
-	public static final String DEFAULT_EXCEPTION_MESSAGE = ResponseStatus.EXCEPTION.getMessage();
+		
+	/** 默认错误消息 */
+	public static final String DEFAULT_ERROR_MESSAGE = ResponseStatus.ERROR.getMessage();
 	
 	/**
 	 * 获取响应消息

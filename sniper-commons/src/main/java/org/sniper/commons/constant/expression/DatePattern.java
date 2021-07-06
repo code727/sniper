@@ -16,7 +16,7 @@
  * Create Date : 2018-11-27
  */
 
-package org.sniper.commons.constant.date;
+package org.sniper.commons.constant.expression;
 
 import org.sniper.commons.constant.AbstractConstant;
 
