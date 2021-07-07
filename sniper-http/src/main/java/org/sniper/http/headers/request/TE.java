@@ -18,7 +18,7 @@
 
 package org.sniper.http.headers.request;
 
-import org.sniper.commons.enums.http.TEAlgorithmEnum;
+import org.sniper.commons.enums.http.TEEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.http.headers.AbstractQualityFactor;
 
@@ -31,24 +31,24 @@ public class TE extends AbstractQualityFactor {
 
 	private static final long serialVersionUID = 8993761533716387260L;
 	
-	private TEAlgorithmEnum algorithm;
+	private TEEnum teEnum;
 	
-	public TE(TEAlgorithmEnum algorithm) {
-		this(algorithm, MAX_DEFAULT_VALUE);
+	public TE(TEEnum teEnum) {
+		this(teEnum, MAX_DEFAULT_VALUE);
 	}
 	
-	public TE(TEAlgorithmEnum algorithm, double qualityValue) {
-		setAlgorithm(algorithm);
+	public TE(TEEnum teEnum, double qualityValue) {
+		setTeEnum(teEnum);
 		setQualityValue(qualityValue);
 	}
-
-	public void setAlgorithm(TEAlgorithmEnum algorithm) {
-		AssertUtils.assertNotNull(algorithm, "Transfer encoding algorithm must not be null");
-		this.algorithm = algorithm;
+	
+	public TEEnum getTeEnum() {
+		return teEnum;
 	}
 
-	public TEAlgorithmEnum getAlgorithm() {
-		return algorithm;
+	public void setTeEnum(TEEnum teEnum) {
+		AssertUtils.assertNotNull(teEnum, "TE must not be null");
+		this.teEnum = teEnum;
 	}
 	
 	@Override
@@ -56,9 +56,9 @@ public class TE extends AbstractQualityFactor {
 		String qualityValue = super.toString();
 		
 		if (qualityValue.length() > 0) 
-			return this.algorithm.getMode() + qualityValue;
+			return this.teEnum.getAlgorithm() + qualityValue;
 		
-		return this.algorithm.getMode();
+		return this.teEnum.getAlgorithm();
 	}
 		
 }

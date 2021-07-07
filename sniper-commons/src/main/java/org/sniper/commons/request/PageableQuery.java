@@ -16,18 +16,16 @@
  * Create Date : 2015-1-13
  */
 
-package org.sniper.commons.pagination;
-
-import java.io.Serializable;
+package org.sniper.commons.request;
 
 /**
- * 分页查询条件接口
+ * 可分页查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface PagingQuery extends Serializable {
+public interface PageableQuery extends SortableRequest {
 	
-	/** 执行查询的默认起始位置 */
+	/** 查询前的默认起始位置 */
 	public static final long START_POS = 0;
 	
 	/** 默认的当前页数 */
@@ -63,20 +61,34 @@ public interface PagingQuery extends Serializable {
 	 * @param currentPage
 	 */
 	public void setCurrentPage(int currentPage);
+	
+	/**
+	 * 判断是否需要查询总数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean isQueryCount();
+	
+	/**
+	 * 设置是否需要查询总数
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param queryCount
+	 */
+	public void setQueryCount(boolean queryCount);
 			
 	/**
 	 * 获取执行查询的起始位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public long getBegin();
+	public long getStart();
 
 	/**
 	 * 设置执行查询的起始位置
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param begin
+	 * @param start
 	 */
-	public void setBegin(long begin);
+	public void setStart(long start);
 	
 	/**
 	 * 获取执行查询的结束位置

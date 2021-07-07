@@ -18,7 +18,6 @@
 
 package org.sniper.persistence.jpa.dao;
 
-import org.sniper.commons.pagination.PagingQuery;
 import org.sniper.commons.pagination.PagingResult;
 
 /**

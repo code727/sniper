@@ -33,7 +33,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
-import org.sniper.commons.pagination.PagingQuery;
 import org.sniper.commons.pagination.PagingResult;
 import org.sniper.commons.pagination.result.SimplePagingResult;
 import org.sniper.commons.util.ArrayUtils;

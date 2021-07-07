@@ -66,9 +66,13 @@ public enum WeekEnum {
 	/** 值 */
 	private final String value;
 	
+	/** 消息 */
+	private final String message;
+	
 	private WeekEnum(int key, String value) {
 		this.key = key;
 		this.value = value;
+		this.message = MessageUtils.getClassMessage(getClass(), value);
 	}
 	
 	public int getKey() {
@@ -80,11 +84,11 @@ public enum WeekEnum {
 	}
 
 	public String getMessage() {
-		return MessageUtils.getClassMessage(this.getClass(), this.value);
+		return message;
 	}
 	
 	/**
-	 * 判断指定的键是否匹配一个Week对象
+	 * 判断指定的键是否匹配
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -102,5 +106,5 @@ public enum WeekEnum {
 	public static WeekEnum resolve(int key) {
 		return mappings.get(key);
 	}
-	
+		
 }

@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.sniper.commons.mysql.pagination">
+<mapper namespace="org.sniper.persistence.mysql.pagination">
 
 	<!-- MySQL基本分页片段 -->
-	<sql id="limit" >
-		LIMIT #{begin},#{pageSize}
-	</sql>
-	
-	<sql id="beginAndLimit" >
-		> #{begin} LIMIT #{pageSize}
-	</sql>
-	
-	<sql id="begin" >
-		> #{begin}
-	</sql>
-	
-	<sql id="end">
-		<![CDATA[
-			<= #{end}
+	<sql id="limit">
+		<![CDATA[ 
+			LIMIT #{start},#{pageSize}
 		]]>
 	</sql>
+	
+	<sql id="offSetAndLimit">
+		<![CDATA[ 
+		  id > #{start} LIMIT #{pageSize}
+		]]>
+	</sql>
+	
+	<sql id="endAndLimit">
+		<![CDATA[ 
+			 id < #{end} LIMIT #{pageSize} 
+		]]>
+	</sql>
+	
+	<sql id="startAndEnd">
+		<![CDATA[
+			> #{start} AND #{end} >= 
+		]]>
+	</sql>
+	
 </mapper>

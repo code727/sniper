@@ -40,7 +40,7 @@ public enum HttpMethodEnum {
 	}
 	
 	/**
-	 * 判断指定的方法名称是否匹配一个HttpMethodEnum方法对象
+	 * 判断指定的方法名称是否匹配当前枚举
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -50,13 +50,13 @@ public enum HttpMethodEnum {
 	}
 
 	/**
-	 * 将指定的方法名称解析成HttpMethodEnum方法对象
+	 * 将指定的方法名称解析成枚举对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
 	 */
 	public static HttpMethodEnum resolve(String name) {
-		return (name != null ? mappings.get(name.toUpperCase()) : null);
+		return name != null ? mappings.get(name.toUpperCase()) : null;
 	}
 
 }

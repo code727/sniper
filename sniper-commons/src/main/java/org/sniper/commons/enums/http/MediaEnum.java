@@ -119,7 +119,7 @@ public enum MediaEnum {
 	
 	static {
 		for (MediaEnum media : values()) {
-			mappings.put(media.type, media);
+			mappings.put(media.type.toLowerCase(), media);
 		}
 	}
 	
@@ -132,7 +132,7 @@ public enum MediaEnum {
 	}
 	
 	/**
-	 * 判断指定的类型是否匹配一个MediaEnum对象
+	 * 判断指定的类型是否匹配当前枚举
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 * @return
@@ -142,13 +142,13 @@ public enum MediaEnum {
 	}
 
 	/**
-	 * 将指定的算法模式解析成MediaEnum对象
+	 * 将指定的算法模式解析成枚举对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 * @return
 	 */
 	public static MediaEnum resolve(String type) {
-		return (type != null ? mappings.get(type.toLowerCase()) : null);
+		return type != null ? mappings.get(type.toLowerCase()) : null;
 	}
-	
+		
 }

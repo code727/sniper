@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,55 +12,55 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Create Date : 2015-1-14
+ * 
+ * Create Date : 2016-7-28
  */
 
-package org.sniper.commons.pagination.pager;
+package org.sniper.commons.request;
+
+import java.io.Serializable;
 
 /**
- * JQuery EasyUI分页器实现类
+ * 可排序的请求
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class JQueryEasyUIPager extends SimplePager {
-	
-	private static final long serialVersionUID = -4724476082340689425L;
+public interface SortableRequest extends Serializable {
 	
 	/**
-	 * 获取JQuery EasyUI分页器每页条数
+	 * 获取需要排序的字段名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public int getRows() {
-		return super.getPageSize();
-	}
+	public String getSortName();
 
 	/**
-	 * 设置JQuery EasyUI分页器每页条数
+	 * 设置需要排序的字段名称
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param rows
+	 * @param sortName
 	 */
-	public void setRows(int rows) {
-		super.setPageSize(rows);
-	}
-
+	public void setSortName(String sortName);
+	
 	/**
-	 * 获取JQuery EasyUI分页器当前页数
+	 * 设置排序模式
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param sortMode
+	 * @return
+	 */
+	public void setSortMode(int sortMode);
+	
+	/**
+	 * 获取排序模式
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public int getPage() {
-		return super.getCurrentPage();
-	}
+	public int getSortMode();
 
 	/**
-	 * 设置JQuery EasyUI分页器当前页数
+	 * 获取排序方案
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param page
+	 * @return
 	 */
-	public void setPage(int page) {
-		super.setCurrentPage(page);
-	}
-	
+	public String getSortSchema();
+
 }

@@ -21,7 +21,7 @@ package org.sniper.generator.sequence;
 import java.text.DateFormat;
 import java.util.Date;
 
-import org.sniper.commons.constant.expression.DatePattern;
+import org.sniper.commons.enums.date.DatePatternEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.DateUtils;
 
@@ -36,12 +36,12 @@ public class DateSequence implements DimensionSequence<String> {
 		
 	public DateSequence() {
 		// 默认以"日"的维度
-		this(DatePattern.DAY); 
+		this(DatePatternEnum.DAY); 
 	}
 	
-	public DateSequence(DatePattern datePattern) {
+	public DateSequence(DatePatternEnum datePattern) {
 		AssertUtils.assertNotNull(datePattern, "Date pattern must not be null");
-		this.format = DateUtils.getDateFormat(datePattern.getValue());
+		this.format = DateUtils.getDateFormat(datePattern.getSequencePattern());
 	}
 
 	@Override

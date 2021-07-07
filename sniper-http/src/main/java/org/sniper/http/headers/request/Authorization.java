@@ -20,7 +20,7 @@ package org.sniper.http.headers.request;
 
 import java.io.Serializable;
 
-import org.sniper.commons.enums.http.AuthenticationTypeEnum;
+import org.sniper.commons.enums.http.AuthenticationEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.StringUtils;
 
@@ -34,21 +34,21 @@ public class Authorization implements Serializable {
 	private static final long serialVersionUID = -892657955289586836L;
 
 	/** 认证类型 */
-	private final AuthenticationTypeEnum type;
+	private final AuthenticationEnum authEnum;
 	
 	/** 凭证 */
 	private final String credentials;
 	
-	public Authorization(AuthenticationTypeEnum type, String credentials) {
-		AssertUtils.assertNotNull(type, "HTTP authentication type must not be null");
+	public Authorization(AuthenticationEnum authEnum, String credentials) {
+		AssertUtils.assertNotNull(authEnum, "HTTP authentication type must not be null");
 		AssertUtils.assertNotBlank(credentials, "HTTP authentication credentials must not be null or blank");
 		
-		this.type = type;
+		this.authEnum = authEnum;
 		this.credentials = credentials;
 	}
 
-	public AuthenticationTypeEnum getType() {
-		return type;
+	public AuthenticationEnum getAuthEnum() {
+		return authEnum;
 	}
 
 	public String getCredentials() {
@@ -57,7 +57,8 @@ public class Authorization implements Serializable {
 	
 	@Override
 	public String toString() {
-		return new StringBuilder(type.getSchemeName()).append(StringUtils.SPACE).append(credentials).toString();
+		return new StringBuilder(authEnum.getType())
+				.append(StringUtils.SPACE).append(credentials).toString();
 	}
 
 }

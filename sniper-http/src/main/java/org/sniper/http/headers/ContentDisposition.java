@@ -20,7 +20,7 @@ package org.sniper.http.headers;
 
 import java.io.Serializable;
 
-import org.sniper.commons.enums.http.ContentDispositionTypeEnum;
+import org.sniper.commons.enums.http.ContentDispositionEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.StringUtils;
 
@@ -34,7 +34,7 @@ public class ContentDisposition implements Serializable {
 	private static final long serialVersionUID = 6265208558861975843L;
 
 	/** Content-Disposition类型枚举  */
-	private ContentDispositionTypeEnum type;
+	private ContentDispositionEnum dispositionType;
 	
 	/** 表单字段名 */
 	private String name;
@@ -46,8 +46,8 @@ public class ContentDisposition implements Serializable {
 		this((String) null);
 	}
 	
-	public ContentDisposition(ContentDispositionTypeEnum type) {
-		this(type, null);
+	public ContentDisposition(ContentDispositionEnum dispositionType) {
+		this(dispositionType, null);
 	}
 	
 	public ContentDisposition(String filename) {
@@ -55,26 +55,26 @@ public class ContentDisposition implements Serializable {
 	}
 	
 	public ContentDisposition(String name, String filename) {
-		this(ContentDispositionTypeEnum.INLINE, name, filename);
+		this(ContentDispositionEnum.INLINE, name, filename);
 	}
 	
-	public ContentDisposition(ContentDispositionTypeEnum type, String filename) {
-		this(type, null, filename);
+	public ContentDisposition(ContentDispositionEnum dispositionType, String filename) {
+		this(dispositionType, null, filename);
 	}
 	
-	public ContentDisposition(ContentDispositionTypeEnum type, String name, String filename) {
-		setType(type);
+	public ContentDisposition(ContentDispositionEnum dispositionType, String name, String filename) {
+		setDispositionType(dispositionType);
 		setName(filename);
 		setFilename(filename);
 	}
 
-	public ContentDispositionTypeEnum getType() {
-		return type;
+	public ContentDispositionEnum getDispositionType() {
+		return dispositionType;
 	}
 
-	public void setType(ContentDispositionTypeEnum type) {
-		AssertUtils.assertNotNull(type, "Content disposition type must not be null");
-		this.type = type;
+	public void setDispositionType(ContentDispositionEnum dispositionType) {
+		AssertUtils.assertNotNull(dispositionType, "Content disposition type must not be null");
+		this.dispositionType = dispositionType;
 	}
 
 	public String getName() {
@@ -95,7 +95,7 @@ public class ContentDisposition implements Serializable {
 	
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder(type.getMode());
+		StringBuilder builder = new StringBuilder(dispositionType.getType());
 		
 		if (StringUtils.isNotBlank(name)) 
 			builder.append(";name=").append(StringUtils.DOUBLE_QUOTES).append(name).append(StringUtils.DOUBLE_QUOTES);

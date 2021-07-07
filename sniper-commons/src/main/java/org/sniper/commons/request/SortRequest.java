@@ -18,37 +18,43 @@
 
 package org.sniper.commons.request;
 
-import java.io.Serializable;
-
 /**
  * 排序请求
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SortRequest implements Serializable {
+public class SortRequest implements SortableRequest {
 
 	private static final long serialVersionUID = -3569581291289010870L;
 
 	/** 需要排序的字段名称 */
-	private String name;
+	private String sortName;
 	
-	/** 排序方式，例如RDMS的ASC和DESC关键字，MongoDB的0和1等 */
-	private String order;
+	/** 排序模式 */
+	private int sortMode;
 	
-	public String getName() {
-		return name;
+	@Override
+	public String getSortName() {
+		return sortName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSortName(String sortName) {
+		this.sortName = sortName;
+	}
+	
+	@Override
+	public int getSortMode() {
+		return sortMode;
 	}
 
-	public String getOrder() {
-		return order;
+	@Override
+	public void setSortMode(int sortMode) {
+		this.sortMode = sortMode;
 	}
 
-	public void setOrder(String order) {
-		this.order = order;
+	@Override
+	public String getSortSchema() {
+		return null;
 	}
 	
 }

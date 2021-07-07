@@ -27,7 +27,7 @@ import org.sniper.commons.util.MapUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum AuthenticationTypeEnum {
+public enum AuthenticationEnum {
 
 	BASIC("Basic"),
 	BEARER("Bearer"),
@@ -37,45 +37,51 @@ public enum AuthenticationTypeEnum {
 	NEGOTIATE("Negotiate"),
 	OAUTH("OAuth"),
 	SCRAM_SHA_1("SCRAM-SHA-1"),
-	SCRAM_SHA_256("SCRAM-SHA-256");
+	SCRAM_SHA_256("SCRAM-SHA-256")
+	;
 	
-	private static final Map<String, AuthenticationTypeEnum> mappings = MapUtils.newHashMap(9);
+	private static final Map<String, AuthenticationEnum> mappings = MapUtils.newHashMap(9);
 	
 	/** 方案名称 */
-	private final String schemeName ;
+	private final String type ;
 	
 	static {
-		for (AuthenticationTypeEnum type : values()) {
-			mappings.put(type.schemeName, type);
+		for (AuthenticationEnum auth : values()) {
+			mappings.put(auth.type.toLowerCase(), auth);
 		}
 	}
 		
-	private AuthenticationTypeEnum(String schemeName) {
-		this.schemeName = schemeName;
+	private AuthenticationEnum(String type) {
+		this.type = type;
 	}
 	
-	public String getSchemeName() {
-		return schemeName;
+	public String getType() {
+		return type;
 	}
 
 	/**
-	 * 判断指定的方案名称是否匹配一个AuthenticationTypeEnum对象
+	 * 判断指定的类型是否匹配当前枚举
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param schemeName
+	 * @param type
 	 * @return
 	 */
-	public boolean matches(String schemeName) {
-		return this.schemeName.equals(schemeName);
+	public boolean matches(String type) {
+		return this.type.equalsIgnoreCase(type);
 	}
 
 	/**
-	 * 将指定的方案名称解析成AuthenticationTypeEnum对象
+	 * 将指定的类型解析成枚举对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param schemeName
+	 * @param type
 	 * @return
 	 */
-	public static AuthenticationTypeEnum resolve(String schemeName) {
-		return (schemeName != null ? mappings.get(schemeName) : null);
+	public static AuthenticationEnum resolve(String type) {
+		return type != null ? mappings.get(type.toLowerCase()) : null;
+	}
+	
+	
+	public static void main(String[] args) {
+		System.out.println(AuthenticationEnum.resolve("bearer").getType());
 	}
 
 }

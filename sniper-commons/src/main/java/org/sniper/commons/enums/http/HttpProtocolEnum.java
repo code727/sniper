@@ -40,7 +40,7 @@ public enum HttpProtocolEnum {
 	}
 	
 	/**
-	 * 判断指定的协议名称是否匹配一个HttpProtocol对象
+	 * 判断指定的协议名称是否匹配当前枚举
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
@@ -50,13 +50,13 @@ public enum HttpProtocolEnum {
 	}
 	
 	/**
-	 * 将指定的协议名称解析成HttpProtocol对象
+	 * 将指定的协议名称解析成枚举对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param name
 	 * @return
 	 */
 	public static HttpProtocolEnum resolve(String name) {
-		return (name != null ? mappings.get(name.toUpperCase()) : null);
+		return name != null ? mappings.get(name.toUpperCase()) : null;
 	}
-
+	
 }

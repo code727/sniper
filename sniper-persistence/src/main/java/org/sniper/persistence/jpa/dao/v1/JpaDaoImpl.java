@@ -35,9 +35,9 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.stereotype.Repository;
-import org.sniper.commons.pagination.PagingQuery;
 import org.sniper.commons.pagination.PagingResult;
 import org.sniper.commons.pagination.result.SimplePagingResult;
+import org.sniper.commons.request.pagination.PagingQuery;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;

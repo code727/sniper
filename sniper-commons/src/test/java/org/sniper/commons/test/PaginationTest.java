@@ -19,9 +19,10 @@
 package org.sniper.commons.test;
 
 import org.junit.Test;
-import org.sniper.commons.pagination.pager.JQueryEasyUIPager;
-import org.sniper.commons.pagination.pager.SimplePager;
+import org.sniper.commons.request.PageableQuery;
+import org.sniper.commons.request.PagingRequest;
 import org.sniper.test.junit.BaseTestCase;
+
 
 /**
  * 分页查询单元测试类
@@ -30,45 +31,47 @@ import org.sniper.test.junit.BaseTestCase;
  */
 public class PaginationTest extends BaseTestCase {
 	
-	@Test
+	/**
+	 * 常规分页查询测试
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 */
+//	@Test
 	public void testSimplePager() {
-		SimplePager pager = new SimplePager();
-		/* 进行常规分页时，传入currentPage和pageSize，再根据begin和pageSize来分页 */
-//		pager.setCurrentPage(2);
-//		pager.setPageSize(10);
-//		System.out.println("begin:" + pager.getBegin());
-//		System.out.println("end:" + pager.getEnd());
-//		System.out.println("pageSize" + pager.getPageSize());
+		PagingRequest pager = new PagingRequest();
+		assertSame(pager.getCurrentPage(), PageableQuery.DEFAULT_CURRENT_PAGE);
+		assertSame(pager.getPageSize(), PageableQuery.DEFAULT_PAGE_SIZE);
 		
-		/* 进行ID半偏移分页时，传入begin和pageSize，再根据begin和pageSize来分页 */
-		pager.setBegin(-1);
-		pager.setPageSize(20);
-		System.out.println("begin:" + pager.getBegin());
-		System.out.println("end:" + pager.getEnd());
-		System.out.println("pageSize:" + pager.getPageSize());
-		
-		/* 进行ID全偏移分页时，传入begin和end或pageSize，再根据begin和end来分页 */
-//		pager.setBegin(15);
-//		pager.setEnd(100);
-//		System.out.println("begin:" + pager.getBegin());
-//		System.out.println("end:" + pager.getEnd());
+		/* 常规分页传入当前页数(currentPage)和每页条数(pageSize) */
+		int currentPage = 2;
+		int pageSize = 20;
+		pager.setCurrentPage(currentPage);
+		pager.setPageSize(pageSize);
+		System.out.println(pager);
 	}
 	
-//	@Test
-	public void testJQueryEasyUIPager() {
-		JQueryEasyUIPager pager = new JQueryEasyUIPager();
-		/* 进行JQueryEasyUI分页时，传入page(当前页数)和rows(每页条数)，再根据begin和pageSize来分页 */
-		pager.setPage(1);
-		pager.setRows(20);
+	@Test
+	public void testOffsetPager() {
+		PagingRequest pager = new PagingRequest();
+		assertSame(pager.getCurrentPage(), PageableQuery.DEFAULT_CURRENT_PAGE);
+		assertSame(pager.getPageSize(), PageableQuery.DEFAULT_PAGE_SIZE);
 		
-		System.out.println("page:" + pager.getPage());
-		System.out.println("currentPage:" + pager.getCurrentPage());
+		int pageSize = 20;
+		long minId = 9507;
+		long maxId = minId + pageSize;
 		
-		System.out.println("rows:" + pager.getRows());
-		System.out.println("pageSize" + pager.getPageSize());
+		/* 按偏移量分页查询下一页时传入每页条数(pageSize)，并将当前页的最大值(例如ID)作为下一页的起始位置(start)传入 */
+		pager.setStart(maxId);
+		pager.setPageSize(pageSize);
 		
-		System.out.println("begin:" + pager.getBegin());
-		System.out.println("end:" + pager.getEnd());
+		assertSame(pager.getCurrentPage(), PageableQuery.DEFAULT_CURRENT_PAGE);
+		assertEquals(pager.getStart(), maxId);
+		assertEquals(pager.getPageSize(), pageSize);
+		System.out.println(pager);
+		
+//		/* 按偏移量分页查询上一页时传入每页条数(pageSize)，并将当前页的最小值(例如ID)作为上一页的结束位置(end)传入 */
+		pager.setEnd(minId);
+		pager.setPageSize(pageSize);
+		System.out.println(pager);
 	}
-
+	
 }

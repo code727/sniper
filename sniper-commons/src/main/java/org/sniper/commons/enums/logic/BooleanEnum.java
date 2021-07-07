@@ -24,12 +24,8 @@ package org.sniper.commons.enums.logic;
  * @version 1.0
  */
 public enum BooleanEnum {
-	FALSE,
-	TRUE,
-	N,
-	Y,
-	NO,
-	YES;
+	
+	FALSE, TRUE, N, Y, NO, YES;
 	
 	/**
 	 * 根据字符串值解析出布尔值
@@ -42,5 +38,5 @@ public enum BooleanEnum {
 				|| BooleanEnum.YES.name().equalsIgnoreCase(value)
 				|| String.valueOf(BooleanEnum.TRUE.ordinal()).equals(value);
 	}
-		
+			
 }

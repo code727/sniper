@@ -16,18 +16,16 @@
  * Create Date : 2015-1-14
  */
 
-package org.sniper.commons.pagination.pager;
+package org.sniper.commons.request;
 
-import org.sniper.commons.pagination.SortablePagingQuery;
-import org.sniper.commons.request.SortRequest;
 import org.sniper.commons.util.NumberUtils;
 
 /**
- * 简单的分页器实现类
+ * 分页查询请求
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SimplePager extends SortRequest implements SortablePagingQuery {
+public class PagingRequest extends SortRequest implements PageableQuery {
 	
 	private static final long serialVersionUID = -3075094595070319133L;
 
@@ -37,8 +35,11 @@ public class SimplePager extends SortRequest implements SortablePagingQuery {
 	/** 当前页数 */
 	private int currentPage = DEFAULT_CURRENT_PAGE;
 	
+	/** 是否需要查询总数 */
+	private boolean queryCount = true;
+	
 	/** 开始查询的位置 */
-	private long begin = START_POS;
+	private long start = START_POS;
 	
 	/** 结束查询的位置 */
 	private long end = START_POS;
@@ -62,37 +63,63 @@ public class SimplePager extends SortRequest implements SortablePagingQuery {
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = NumberUtils.minLimit(currentPage, 1);
 	}
+	
+	@Override
+	public boolean isQueryCount() {
+		return queryCount;
+	}
 
 	@Override
-	public long getBegin() {
-		// 开始位置不为默认起始位置时(例如按ID偏移进行分页时，设置此值为起始ID)，则直接返回。
-		if (this.begin != START_POS)
-			return this.begin;
+	public void setQueryCount(boolean queryCount) {
+		this.queryCount = queryCount;
+	}
+
+	@Override
+	public long getStart() {
+		// 开始位置不为默认起始位置时直接返回。
+		if (this.start != START_POS) {
+			return this.start;
+		}
 
 		// 根据当前页数和每页条数计算后返回
 		return (this.currentPage -1) * this.pageSize;
 	}
 
 	@Override
-	public void setBegin(long begin) {
-		this.begin = begin;
+	public void setStart(long start) {
+		this.start = start;
 	}
 
 	@Override
 	public long getEnd() {
-		// 结束位置不为默认起始位置时(例如按ID偏移进行分页时，设置此值为结束ID)，则直接返回。
+		// 结束位置不为默认起始位置时直接返回
 		if (this.end != START_POS) {
-			long begin = this.getBegin();
-			return this.end > begin ? this.end : begin;
+//			long begin = this.getStart();
+//			return this.end > begin ? this.end : begin;
+			return this.end;
 		}
 			
 		// 根据起始位置和每页条数计算后返回
-		return this.getBegin() + this.pageSize;
+		return this.getStart() + this.pageSize;
 	}			
 
 	@Override
 	public void setEnd(long end) {
 		this.end = end;
+	}
+	
+	/**
+	 * 判断是否在查询上一页
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @return
+	 */
+	public boolean isQueryPreviousPage() {
+		return getEnd() <= getStart();
+	}
+	
+	public String toString() {
+		return String.format("{currentPage:%s,pageSize:%s,start:%s,end:%s}", 
+				currentPage, pageSize, getStart(), getEnd());
 	}
 			
 }

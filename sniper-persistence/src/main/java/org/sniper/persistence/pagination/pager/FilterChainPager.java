@@ -18,7 +18,7 @@
 
 package org.sniper.persistence.pagination.pager;
 
-import org.sniper.commons.pagination.pager.SimplePager;
+import org.sniper.commons.request.PagingRequest;
 import org.sniper.persistence.pagination.FilterChainPagingQuery;
 import org.sniper.persistence.util.PersistencePropertyFilterChain;
 
@@ -27,7 +27,7 @@ import org.sniper.persistence.util.PersistencePropertyFilterChain;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FilterChainPager extends SimplePager implements FilterChainPagingQuery {
+public class FilterChainPager extends PagingRequest implements FilterChainPagingQuery {
 	
 	private static final long serialVersionUID = -4124566718222297577L;
 	

@@ -67,7 +67,7 @@ public enum MonthEnum {
 	/** 十二月 */
 	DECEMBER(Calendar.DECEMBER, "month.december");
 	
-	public static final Map<Integer, MonthEnum> mappings = MapUtils.newHashMap(12);
+	private static final Map<Integer, MonthEnum> mappings = MapUtils.newHashMap(12);
 	
 	static {
 		for (MonthEnum month : values()) {
@@ -80,10 +80,14 @@ public enum MonthEnum {
 	
 	/** 值 */
 	private final String value;
-
+	
+	/** 消息 */
+	private final String message;
+	
 	private MonthEnum(int key, String value) {
 		this.key = key;
 		this.value = value;
+		this.message = MessageUtils.getClassMessage(getClass(), value);
 	}
 	
 	public int getKey() {
@@ -95,11 +99,11 @@ public enum MonthEnum {
 	}
 
 	public String getMessage() {
-		return MessageUtils.getClassMessage(this.getClass(), this.value);
+		return message;
 	}
 	
 	/**
-	 * 判断指定的键是否匹配一个Month对象
+	 * 判断指定的键是否匹配
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -109,7 +113,7 @@ public enum MonthEnum {
 	}
 	
 	/**
-	 * 将指定的键解析成Month对象
+	 * 将指定的键解析成枚举对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return

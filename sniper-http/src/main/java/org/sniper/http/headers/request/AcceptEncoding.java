@@ -18,7 +18,7 @@
 
 package org.sniper.http.headers.request;
 
-import org.sniper.commons.enums.http.AcceptEncodingAlgorithmEnum;
+import org.sniper.commons.enums.http.AcceptEncodingEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.http.headers.AbstractQualityFactor;
 
@@ -32,32 +32,32 @@ public class AcceptEncoding extends AbstractQualityFactor {
 	private static final long serialVersionUID = 7600312994109431769L;
 	
 	/** 编码枚举 */
-	private AcceptEncodingAlgorithmEnum algorithm;
+	private AcceptEncodingEnum encodingEnum;
 	
 	public AcceptEncoding() {
-		this(AcceptEncodingAlgorithmEnum.ANY);
+		this(AcceptEncodingEnum.ANY);
 	}
 	
-	public AcceptEncoding(AcceptEncodingAlgorithmEnum algorithm) {
-		this(algorithm, MAX_DEFAULT_VALUE);
+	public AcceptEncoding(AcceptEncodingEnum encodingEnum) {
+		this(encodingEnum, MAX_DEFAULT_VALUE);
 	}
 	
 	public AcceptEncoding(double qualityValue) {
-		this(AcceptEncodingAlgorithmEnum.ANY, qualityValue);
+		this(AcceptEncodingEnum.ANY, qualityValue);
 	}
 	
-	public AcceptEncoding(AcceptEncodingAlgorithmEnum algorithm, double qualityValue) {
-		setAlgorithm(algorithm);
+	public AcceptEncoding(AcceptEncodingEnum encodingEnum, double qualityValue) {
+		setEncodingEnum(encodingEnum);
 		setQualityValue(qualityValue);
 	}
 	
-	public AcceptEncodingAlgorithmEnum getAlgorithm() {
-		return algorithm;
+	public AcceptEncodingEnum getEncodingEnum() {
+		return encodingEnum;
 	}
 
-	public void setAlgorithm(AcceptEncodingAlgorithmEnum algorithm) {
-		AssertUtils.assertNotNull(algorithm, "Accept encoding algorithm must not be null");
-		this.algorithm = algorithm;
+	public void setEncodingEnum(AcceptEncodingEnum encodingEnum) {
+		AssertUtils.assertNotNull(encodingEnum, "Accept encoding algorithm must not be null");
+		this.encodingEnum = encodingEnum;
 	}
 		
 	@Override
@@ -65,10 +65,10 @@ public class AcceptEncoding extends AbstractQualityFactor {
 		String qualityValue = super.toString();
 		
 		if (qualityValue.length() > 0) {
-			return this.algorithm.getMode() + qualityValue;
+			return this.encodingEnum.getAlgorithm() + qualityValue;
 		}
 		
-		return this.algorithm.getMode();
+		return this.encodingEnum.getAlgorithm();
 	}
 				
 }

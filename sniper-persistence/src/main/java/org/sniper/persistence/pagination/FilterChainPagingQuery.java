@@ -18,7 +18,7 @@
 
 package org.sniper.persistence.pagination;
 
-import org.sniper.commons.pagination.PagingQuery;
+import org.sniper.commons.request.pagination.PagingQuery;
 import org.sniper.persistence.util.PersistencePropertyFilterChain;
 
 /**

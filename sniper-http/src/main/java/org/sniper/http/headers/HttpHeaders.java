@@ -26,8 +26,8 @@ import java.util.Set;
 
 import org.sniper.commons.LinkedMultiValueMap;
 import org.sniper.commons.constant.http.HttpHeader;
-import org.sniper.commons.enums.http.ContentDispositionTypeEnum;
-import org.sniper.commons.enums.http.ContentEncodingAlgorithmEnum;
+import org.sniper.commons.enums.http.ContentDispositionEnum;
+import org.sniper.commons.enums.http.ContentEncodingEnum;
 import org.sniper.commons.enums.http.HttpConnectionEnum;
 import org.sniper.commons.enums.http.HttpMethodEnum;
 import org.sniper.commons.util.ArrayUtils;
@@ -154,7 +154,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 		String first = getFirst(HttpHeader.CONTENT_DISPOSITION.getKey());
 		String[] values = StringUtils.split(first, StringUtils.SEMICOLON);
 		
-		ContentDispositionTypeEnum type = ContentDispositionTypeEnum.resolve(ArrayUtils.get(values, 0));
+		ContentDispositionEnum type = ContentDispositionEnum.resolve(ArrayUtils.get(values, 0));
 		if (type != null) {
 			ContentDisposition disposition = new ContentDisposition(type);
 			
@@ -185,7 +185,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param algorithm
 	 */
-	public void setContentEncoding(Set<ContentEncodingAlgorithmEnum> algorithms) {
+	public void setContentEncoding(Set<ContentEncodingEnum> algorithms) {
 		set(HttpHeader.CONTENT_ENCODING.getKey(), CollectionUtils.join(algorithms, VALUE_SEPARATOR));
 	}
 	
@@ -194,16 +194,14 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Set<ContentEncodingAlgorithmEnum> getContentEncoding() {
+	public Set<ContentEncodingEnum> getContentEncoding() {
 		String first = getFirst(HttpHeader.CONTENT_ENCODING.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
-			Set<ContentEncodingAlgorithmEnum> algorithms = CollectionUtils.newLinkedHashSet();
-			ContentEncodingAlgorithmEnum algorithm;
-			
+			Set<ContentEncodingEnum> algorithms = CollectionUtils.newLinkedHashSet();
 			for (String value : values) {
-				algorithm = ContentEncodingAlgorithmEnum.resolve(value);
+				ContentEncodingEnum algorithm = ContentEncodingEnum.resolve(value);
 				if (algorithm != null) {
 					algorithms.add(algorithm);
 				}

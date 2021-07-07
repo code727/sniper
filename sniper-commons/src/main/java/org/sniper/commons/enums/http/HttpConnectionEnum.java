@@ -55,7 +55,7 @@ public enum HttpConnectionEnum {
 	}
 	
 	/**
-	 * 判断指定的状态是否匹配一个HttpConnection对象
+	 * 判断指定的状态是否匹配当前枚举
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param status
 	 * @return
@@ -65,13 +65,13 @@ public enum HttpConnectionEnum {
 	}
 
 	/**
-	 * 将指定的状态解析成HttpConnection对象
+	 * 将指定的状态解析成枚举对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param status
 	 * @return
 	 */
 	public static HttpConnectionEnum resolve(String status) {
-		return (status != null ? mappings.get(status.toLowerCase()) : null);
+		return status != null ? mappings.get(status.toLowerCase()) : null;
 	}
 	
 }

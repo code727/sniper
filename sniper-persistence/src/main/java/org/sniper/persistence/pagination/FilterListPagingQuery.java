@@ -20,7 +20,7 @@ package org.sniper.persistence.pagination;
 
 import java.util.List;
 
-import org.sniper.commons.pagination.PagingQuery;
+import org.sniper.commons.request.pagination.PagingQuery;
 import org.sniper.persistence.util.PersistencePropertyFilter;
 
 /**

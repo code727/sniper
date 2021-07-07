@@ -29,11 +29,11 @@ import org.sniper.beans.parameter.DefaultParameters;
 import org.sniper.beans.parameter.Parameters;
 import org.sniper.commons.KeyValuePair;
 import org.sniper.commons.constant.http.HttpRequestHeader;
-import org.sniper.commons.enums.http.AcceptEncodingAlgorithmEnum;
-import org.sniper.commons.enums.http.AuthenticationTypeEnum;
+import org.sniper.commons.enums.http.AcceptEncodingEnum;
+import org.sniper.commons.enums.http.AuthenticationEnum;
 import org.sniper.commons.enums.http.HttpMethodEnum;
 import org.sniper.commons.enums.http.HttpProtocolEnum;
-import org.sniper.commons.enums.http.TEAlgorithmEnum;
+import org.sniper.commons.enums.http.TEEnum;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
@@ -155,11 +155,11 @@ public class HttpRequestHeaders extends HttpHeaders {
 				String encoding = StringUtils.afterLast(value, StringUtils.ASSIGNMENT);
 				String weight = StringUtils.beforeFrist(value, StringUtils.SEMICOLON);
 				
-				AcceptEncodingAlgorithmEnum encodingEnum;
+				AcceptEncodingEnum encodingEnum;
 				if (StringUtils.isNotEmpty(encoding)) {
-					encodingEnum = AcceptEncodingAlgorithmEnum.resolve(encoding);
+					encodingEnum = AcceptEncodingEnum.resolve(encoding);
 				} else {
-					encodingEnum = AcceptEncodingAlgorithmEnum.resolve(value);
+					encodingEnum = AcceptEncodingEnum.resolve(value);
 				}
 				
 				if (encodingEnum != null) {
@@ -251,7 +251,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 		String credentials = StringUtils.afterFrist(first, StringUtils.SPACE);
 		
 		if (StringUtils.isNotBlank(type) && StringUtils.isNotBlank(credentials)) {
-			AuthenticationTypeEnum authenticationType = AuthenticationTypeEnum.resolve(type);
+			AuthenticationEnum authenticationType = AuthenticationEnum.resolve(type);
 			if (authenticationType != null) {
 				return new Authorization(authenticationType, credentials);
 			}
@@ -589,7 +589,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 		String credentials = StringUtils.afterFrist(first, StringUtils.SPACE);
 		
 		if (StringUtils.isNotBlank(type) && StringUtils.isNotBlank(credentials)) {
-			AuthenticationTypeEnum authenticationType = AuthenticationTypeEnum.resolve(type);
+			AuthenticationEnum authenticationType = AuthenticationEnum.resolve(type);
 			if (authenticationType != null) {
 				return new Authorization(authenticationType, credentials);
 			}
@@ -676,16 +676,16 @@ public class HttpRequestHeaders extends HttpHeaders {
 			List<TE> list = CollectionUtils.newArrayList();
 			String weight;
 			String encoding;
-			TEAlgorithmEnum algorithm;
+			TEEnum algorithm;
 			
 			for (String value : values) {
 				weight = StringUtils.afterLast(value, StringUtils.ASSIGNMENT);
 				encoding = StringUtils.beforeFrist(value, StringUtils.SEMICOLON);
 
 				if (StringUtils.isNotEmpty(encoding)) {
-					algorithm = TEAlgorithmEnum.resolve(encoding);
+					algorithm = TEEnum.resolve(encoding);
 				} else {
-					algorithm = TEAlgorithmEnum.resolve(value);
+					algorithm = TEEnum.resolve(value);
 				}
 
 				if (algorithm != null) {

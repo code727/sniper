@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.sniper.commons.pagination.pager.DetailPager;
-import org.sniper.commons.pagination.pager.SimplePager;
+import org.sniper.commons.request.PagingRequest;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.test.junit.BaseTestCase;
 
@@ -40,15 +40,15 @@ public class PaginationTest extends BaseTestCase {
 	 */
 	@Test
 	public void testGeneralPagination() {
-		SimplePager pager = new SimplePager();
+		PagingRequest pager = new PagingRequest();
 		
 		assertEquals(pager.getPageSize(), 10);
 		pager.setCurrentPage(1);
-		assertEquals(pager.getBegin(), 0);
+		assertEquals(pager.getStart(), 0);
 		assertEquals(pager.getEnd(), 10);
 		
 		pager.setCurrentPage(2);
-		assertEquals(pager.getBegin(), 10);
+		assertEquals(pager.getStart(), 10);
 		assertEquals(pager.getEnd(), 20);
 		
 	}
@@ -61,13 +61,13 @@ public class PaginationTest extends BaseTestCase {
 	 */
 	@Test
 	public void testHalfOffsetPagination() {
-		SimplePager pager = new SimplePager();
+		PagingRequest pager = new PagingRequest();
 		
 		int startId = 1;
 		int endId = startId + pager.getPageSize();
-		pager.setBegin(startId);
+		pager.setStart(startId);
 		assertEquals(pager.getPageSize(), 10);
-		assertEquals(pager.getBegin(), startId);
+		assertEquals(pager.getStart(), startId);
 		assertEquals(pager.getEnd(), endId);
 	}
 	

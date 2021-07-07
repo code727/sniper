@@ -18,6 +18,7 @@
 
 package org.sniper.commons.enums.financial;
 
+import java.util.Currency;
 import java.util.Map;
 
 import org.sniper.commons.util.ArrayUtils;
@@ -136,11 +137,15 @@ public enum CurrencyEnum {
 	/** 模式 */
 	private final String pattern;
 	
+	/** 消息 */
+	private final String message;
+	
 	private CurrencyEnum(String abbreviation, String value, String pattern) {
 		this.key = ordinal();
 		this.abbreviation = abbreviation;
 		this.value = value;
 		this.pattern = pattern;
+		this.message = MessageUtils.getClassMessage(getClass(), value);
 	}
 	
 	public int getKey() {
@@ -160,7 +165,7 @@ public enum CurrencyEnum {
 	}
 	
 	public String getMessage() {
-		return MessageUtils.getClassMessage(this.getClass(), this.value);
+		return message;
 	}
 	
 	/**
@@ -201,6 +206,14 @@ public enum CurrencyEnum {
 	 */
 	public static CurrencyEnum resolve(String abbreviation) {
 		return abbreviation != null ? mappings.get(abbreviation.toUpperCase()) : null;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(Currency.getAvailableCurrencies().size());;
+		
+		Currency currency = Currency.getInstance("CNY");
+		System.out.println(currency.getDisplayName());
+		System.out.println(currency.getSymbol());
 	}
 	
 }

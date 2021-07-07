@@ -20,7 +20,7 @@ package org.sniper.persistence.pagination.pager;
 
 import java.util.List;
 
-import org.sniper.commons.pagination.pager.SimplePager;
+import org.sniper.commons.request.PagingRequest;
 import org.sniper.persistence.pagination.FilterListPagingQuery;
 import org.sniper.persistence.util.PersistencePropertyFilter;
 
@@ -29,7 +29,7 @@ import org.sniper.persistence.util.PersistencePropertyFilter;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class FilterListPager extends SimplePager implements FilterListPagingQuery {
+public class FilterListPager extends PagingRequest implements FilterListPagingQuery {
 	
 	private static final long serialVersionUID = -8143607622421839319L;
 	

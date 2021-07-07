@@ -30,9 +30,9 @@ import org.sniper.commons.util.MessageUtils;
  */
 public enum O2OStatus {
 	
-	/** 线下/离线 */
+	/** 线下 */
 	OFFLINE("o2o.status.offline"),
-	/** 线上/在线 */
+	/** 线上 */
 	ONLINE("o2o.status.online");
 	
 	private static final Map<Integer, O2OStatus> mappings = MapUtils.newHashMap(2);
@@ -48,10 +48,14 @@ public enum O2OStatus {
 	
 	/** 值 */
 	private final String value;
+	
+	/** 消息 */
+	private final String message;
 
 	private O2OStatus(String value) {
 		this.key = ordinal();
 		this.value = value;
+		this.message = MessageUtils.getClassMessage(getClass(), value);
 	}
 	
 	public int getKey() {
@@ -63,7 +67,7 @@ public enum O2OStatus {
 	}
 
 	public String getMessage() {
-		return MessageUtils.getClassMessage(this.getClass(), this.value);
+		return message;
 	}
 	
 	/**
@@ -84,6 +88,10 @@ public enum O2OStatus {
 	 */
 	public static O2OStatus resolve(int key) {
 		return mappings.get(key);
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(O2OStatus.OFFLINE.getMessage());
 	}
 	
 }

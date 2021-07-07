@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
 /**
- * 十二生肖枚举类
+ * 属相枚举类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
@@ -68,10 +68,14 @@ public enum ZodiacEnum {
 	
 	/** 值 */
 	private final String value;
+	
+	/** 消息 */
+	private final String message;
 
 	private ZodiacEnum(String value) {
 		this.key = ordinal();
 		this.value = value;
+		this.message = MessageUtils.getClassMessage(getClass(), value);
 	}
 	
 	public int getKey() {
@@ -83,11 +87,11 @@ public enum ZodiacEnum {
 	}
 
 	public String getMessage() {
-		return MessageUtils.getClassMessage(this.getClass(), this.value);
+		return message;
 	}
 	
 	/**
-	 * 判断指定的键是否匹配一个Zodiac对象
+	 * 判断指定的键是否匹配
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -97,7 +101,7 @@ public enum ZodiacEnum {
 	}
 	
 	/**
-	 * 将指定的键解析成Zodiac对象
+	 * 将指定的键解析成枚举对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return

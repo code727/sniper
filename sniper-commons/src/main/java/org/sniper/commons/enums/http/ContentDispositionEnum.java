@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017年9月13日
+ * Create Date : 2017-8-22
  */
 
 package org.sniper.commons.enums.http;
@@ -23,54 +23,58 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * 传输编码算法枚举
+ * Content-Disposition消息头类型枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum TEAlgorithmEnum {
+public enum ContentDispositionEnum {
 	
-	COMPRESS("compress"),
-	DEFLATE("deflate"),
-	GZIP("gzip"),
-	TRAILERS("trailers");
+	/** 内联形式 */
+	INLINE("inline"),
 	
-	private static final Map<String, TEAlgorithmEnum> mappings = MapUtils.newHashMap(4);
+	/** 附件形式 */
+	ATTACHMENT("attachment"),
 	
-	/** 算法模式 */
-	private final String mode;
+	/** 表单数据 */
+	FORM_DATA("form-data");
+	
+	private static final Map<String, ContentDispositionEnum> mappings = MapUtils.newHashMap(3);
+	
+	/** 类型 */
+	private final String type;
 	
 	static {
-		for (TEAlgorithmEnum algorithm : values()) {
-			mappings.put(algorithm.mode, algorithm);
+		for (ContentDispositionEnum disposition : values()) {
+			mappings.put(disposition.type, disposition);
 		}
 	}
 	
-	private TEAlgorithmEnum(String mode) {
-		this.mode = mode;
+	private ContentDispositionEnum(String type) {
+		this.type = type;
 	}
 	
-	public String getMode() {
-		return mode;
+	public String getType() {
+		return type;
 	}
 
 	/**
-	 * 将指定的算法模式解析成TEAlgorithm对象
+	 * 判断指定的类型是否匹配当前枚举
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param mode
+	 * @param type
 	 * @return
 	 */
-	public static TEAlgorithmEnum resolve(String mode) {
-		return (mode != null ? mappings.get(mode.toLowerCase()) : null);
+	public boolean matches(String type) {
+		return this.type.equalsIgnoreCase(type);
 	}
 
 	/**
-	 * 判断指定的算法模式是否匹配一个TEAlgorithm对象
+	 * 将指定的类型解析成枚举对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param encoding
+	 * @param type
 	 * @return
 	 */
-	public boolean matches(String mode) {
-		return this.mode.equalsIgnoreCase(mode);
+	public static ContentDispositionEnum resolve(String type) {
+		return type != null ? mappings.get(type.toLowerCase()) : null;
 	}
 
 }

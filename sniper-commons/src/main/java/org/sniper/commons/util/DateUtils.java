@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import org.sniper.commons.constant.expression.DatePattern;
 import org.sniper.commons.enums.astrology.HoroscopeEnum;
+import org.sniper.commons.enums.date.DatePatternEnum;
 import org.sniper.commons.enums.date.WeekEnum;
 
 /**
@@ -63,7 +63,8 @@ public class DateUtils {
 	 * @return
 	 */
 	public static DateFormat getDateFormat(String pattern) {
-		return new SimpleDateFormat(StringUtils.isNotBlank(pattern) ? pattern : DatePattern.DATETIME.getKey());
+		return new SimpleDateFormat(StringUtils.isNotBlank(pattern) ? 
+				pattern : DatePatternEnum.DATETIME.getPattern());
 	}
 		
 	/**
@@ -114,7 +115,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Date stringToDate(String dateString){
-		return stringToDate(dateString, DatePattern.DATETIME.getKey());
+		return stringToDate(dateString, DatePatternEnum.DATETIME.getPattern());
 	}
 	
 	/**
@@ -126,23 +127,22 @@ public class DateUtils {
 	 */
 	public static Date stringToDate(String dateString, String pattern) {
 		AssertUtils.assertNotBlank(dateString, "Date string must not be null or blank");
-		
 		return getDateFormat(pattern).parse(dateString, new ParsePosition(0));
 	}
 	
 	/**
 	 * 以默认格式将日期转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @return 
 	 */
 	public static String dateToString(Date date) {
-		return dateToString(date, DatePattern.DATETIME.getKey());
+		return dateToString(date, DatePatternEnum.DATETIME.getPattern());
 	}
 	
 	/**
 	 * 以指定格式将日期转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @param pattern
 	 * @return 
@@ -156,17 +156,17 @@ public class DateUtils {
 	
 	/**
 	 * 以默认格式将时间数字转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param time
 	 * @return 
 	 */
 	public static String timeToString(long time) {
-		return timeToString(time, DatePattern.DATETIME.getKey());
+		return timeToString(time, DatePatternEnum.DATETIME.getPattern());
 	}
 	
 	/**
 	 * 以指定格式将时间数字转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param time
 	 * @param pattern
 	 * @return 
@@ -253,17 +253,17 @@ public class DateUtils {
 	
 	/**
 	 * 以默认格式将字符串转换成时间毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dateString
 	 * @return 
 	 */
 	public static long stringToMillis(String dateString) {
-		return stringToMillis(dateString, DatePattern.DATETIME.getKey());
+		return stringToMillis(dateString, DatePatternEnum.DATETIME.getPattern());
 	}
 	
 	/**
 	 * 以指定格式将字符串转换成时间毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param dateString
 	 * @param pattern
 	 * @return 
@@ -280,7 +280,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static long stringToUnixTimestamp(String dateString) {
-		return stringToUnixTimestamp(dateString, DatePattern.DATETIME.getKey());
+		return stringToUnixTimestamp(dateString, DatePatternEnum.DATETIME.getPattern());
 	}
 	
 	/**
@@ -301,7 +301,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static String unixTimestampToString(long unixTimestamp) {
-		return unixTimestampToString(unixTimestamp, DatePattern.DATETIME.getKey());
+		return unixTimestampToString(unixTimestamp, DatePatternEnum.DATETIME.getPattern());
 	}
 	
 	/**
@@ -344,7 +344,7 @@ public class DateUtils {
 	
 	/**
 	 * 判断两个日期是否为同一天
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param now
 	 * @param then
 	 * @return 
@@ -362,7 +362,7 @@ public class DateUtils {
 	
 	/**
 	 * 判断指定的日期是否为今天
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param date
 	 * @return 
 	 */
@@ -454,7 +454,7 @@ public class DateUtils {
 		if (d >= 1.20 && d <= 2.18) 
 			return HoroscopeEnum.AQUARIUS;
 		
-//		if (d >= 2.19 && d <= 3.20) 
+		// if (d >= 2.19 && d <= 3.20) 
 		return HoroscopeEnum.PISCES;
 	}
 	
@@ -1213,7 +1213,7 @@ public class DateUtils {
 	
 	/**
 	 * 计算两日期间隔的毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param when
 	 * @param then
 	 * @return 

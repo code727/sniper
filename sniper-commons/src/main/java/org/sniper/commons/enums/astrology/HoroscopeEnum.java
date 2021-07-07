@@ -79,10 +79,14 @@ public enum HoroscopeEnum {
 	
 	/** 值 */
 	private final String value;
+	
+	/** 消息 */
+	private final String message;  
 
 	private HoroscopeEnum(String value) {
 		this.key = ordinal();
 		this.value = value;
+		this.message = MessageUtils.getClassMessage(getClass(), value);
 	}
 	
 	public int getKey() {
@@ -94,11 +98,11 @@ public enum HoroscopeEnum {
 	}
 
 	public String getMessage() {
-		return MessageUtils.getClassMessage(this.getClass(), this.value);
+		return message;
 	}
 	
 	/**
-	 * 判断指定的键是否匹配一个Horoscope对象
+	 * 判断指定的键是否匹配
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -108,7 +112,7 @@ public enum HoroscopeEnum {
 	}
 	
 	/**
-	 * 将指定的键解析成Horoscope对象
+	 * 将指定的键解析成枚举对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param type
 	 * @return

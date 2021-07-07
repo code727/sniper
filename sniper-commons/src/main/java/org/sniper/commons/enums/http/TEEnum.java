@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-8-22
+ * Create Date : 2017年9月13日
  */
 
 package org.sniper.commons.enums.http;
@@ -23,58 +23,54 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * Content-Disposition消息头类型枚举
+ * 传输编码(TE)算法枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum ContentDispositionTypeEnum {
+public enum TEEnum {
 	
-	/** 内联形式 */
-	INLINE("inline"),
+	COMPRESS("compress"),
+	DEFLATE("deflate"),
+	GZIP("gzip"),
+	TRAILERS("trailers");
 	
-	/** 附件形式 */
-	ATTACHMENT("attachment"),
+	private static final Map<String, TEEnum> mappings = MapUtils.newHashMap(4);
 	
-	/** 表单数据 */
-	FORM_DATA("form-data");
-	
-	private static final Map<String, ContentDispositionTypeEnum> mappings = MapUtils.newHashMap(3);
-	
-	/** 类型模式 */
-	private final String mode;
+	/** 算法 */
+	private final String algorithm;
 	
 	static {
-		for (ContentDispositionTypeEnum dispositionType : values()) {
-			mappings.put(dispositionType.mode, dispositionType);
+		for (TEEnum te : values()) {
+			mappings.put(te.algorithm, te);
 		}
 	}
 	
-	private ContentDispositionTypeEnum(String mode) {
-		this.mode = mode;
+	private TEEnum(String algorithm) {
+		this.algorithm = algorithm;
 	}
 	
-	public String getMode() {
-		return mode;
-	}
-	
-	/**
-	 * 判断指定的类型模式是否匹配一个DispositionType对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param name
-	 * @return
-	 */
-	public boolean matches(String name) {
-		return this.mode.equalsIgnoreCase(name);
+	public String getAlgorithm() {
+		return algorithm;
 	}
 
 	/**
-	 * 将指定的类型模式解析成ContentDispositionTypeEnum对象
+	 * 判断指定的算法是否匹配当前枚举
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param mode
+	 * @param algorithm
 	 * @return
 	 */
-	public static ContentDispositionTypeEnum resolve(String mode) {
-		return (mode != null ? mappings.get(mode.toLowerCase()) : null);
+	public boolean matches(String algorithm) {
+		return this.algorithm.equalsIgnoreCase(algorithm);
+	}
+	
+	/**
+	 * 将指定的算法模式解析成枚举对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param algorithm
+	 * @return
+	 */
+	public static TEEnum resolve(String algorithm) {
+		return algorithm != null ? mappings.get(algorithm.toLowerCase()) : null;
 	}
 
 }

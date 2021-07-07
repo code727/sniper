@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2017-8-23
+ * Create Date : 2017-8-15
  */
 
 package org.sniper.commons.enums.http;
@@ -23,63 +23,64 @@ import java.util.Map;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * Content-Encoding实体头内容编码转换算法枚举
+ * Accept-Encoding请求头编码算法枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum ContentEncodingAlgorithmEnum {
+public enum AcceptEncodingEnum {
 	
-	/** Lempel-Ziv coding (LZ77) 压缩算法 */
-	GZIP("gzip"),
-	
-	/** Lempel-Ziv-Welch (LZW) 压缩算法 */
+	AES128GCM("aes128gcm"),
+	BR("br"),
+	BZIP("bzip"), 
+	BZIP2("bzip2"),
 	COMPRESS("compress"),
-	
-	/** zlib结构和deflate压缩算法 */
 	DEFLATE("deflate"),
-	
+	EXI("exi"),
+	GZIP("gzip"),
 	IDENTITY("identity"),
+	PACK200_GZIP("pack200-gzip"),
+	X_COMPRESS("x-compress"),
+	X_GZIP("x-gzip"),
+	ANY("*")
+	;
 	
-	/** Brotli算法 */
-	BR("br");
+	private static final Map<String, AcceptEncodingEnum> mappings = MapUtils.newHashMap(13);
 	
-	private static final Map<String, ContentEncodingAlgorithmEnum> mappings = MapUtils.newHashMap(5);
-	
-	/** 算法模式 */
-	private final String mode;
+	/** 算法 */
+	private final String algorithm;
 	
 	static {
-		for (ContentEncodingAlgorithmEnum algorithm : values()) {
-			mappings.put(algorithm.mode, algorithm);
+		for (AcceptEncodingEnum acceptEncoding : values()) {
+			mappings.put(acceptEncoding.algorithm, acceptEncoding);
 		}
 	}
 	
-	private ContentEncodingAlgorithmEnum(String mode) {
-		this.mode = mode;
+	private AcceptEncodingEnum(String algorithm) {
+		this.algorithm = algorithm;
 	}
 	
-	public String getMode() {
-		return mode;
-	}
-	
-	/**
-	 * 判断指定的算法模式是否匹配一个ContentEncodingAlgorithmEnum对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param mode
-	 * @return
-	 */
-	public boolean matches(String mode) {
-		return this.mode.equalsIgnoreCase(mode);
+	public String getAlgorithm() {
+		return algorithm;
 	}
 
 	/**
-	 * 将指定的算法模式解析成ContentEncodingAlgorithmEnum对象
+	 * 判断指定的算法是否匹配当前枚举
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param mode
+	 * @param algorithm
 	 * @return
 	 */
-	public static ContentEncodingAlgorithmEnum resolve(String mode) {
-		return (mode != null ? mappings.get(mode.toLowerCase()) : null);
+	public boolean matches(String algorithm) {
+		return this.algorithm.equalsIgnoreCase(algorithm);
 	}
 
+	/**
+	 * 将指定的算法解析成枚举对象
+	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @param algorithm
+	 * @return
+	 */
+	public static AcceptEncodingEnum resolve(String algorithm) {
+		return algorithm != null ? mappings.get(algorithm.toLowerCase()) : null;
+	}
+		
 }

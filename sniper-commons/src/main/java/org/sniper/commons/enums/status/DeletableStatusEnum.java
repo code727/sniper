@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2021年7月4日
+ * Create Date : 2021-7-4
  */
 
 package org.sniper.commons.enums.status;
@@ -24,21 +24,21 @@ import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
 /**
- * 删除状态
+ * 可删除的状态枚举
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public enum DeleteStatus {
+public enum DeletableStatusEnum {
 	
 	/** 未删除 */
-	UNDELETE("delete.status.undelete"),
+	UNDELETE("deletable.status.undelete"),
 	/** 已删除 */
-	DELETED("delete.status.deleted");
+	DELETED("deletable.status.deleted");
 	
-	private static final Map<Integer, DeleteStatus> mappings = MapUtils.newHashMap(2);
+	private static final Map<Integer, DeletableStatusEnum> mappings = MapUtils.newHashMap(2);
 	
 	static {
-		for (DeleteStatus status : values()) {
+		for (DeletableStatusEnum status : values()) {
 			mappings.put(status.ordinal(), status);
 		}
 	}
@@ -48,10 +48,14 @@ public enum DeleteStatus {
 	
 	/** 值 */
 	private final String value;
+	
+	/** 消息 */
+	private final String message;
 
-	private DeleteStatus(String value) {
+	private DeletableStatusEnum(String value) {
 		this.key = ordinal();
 		this.value = value;
+		this.message = MessageUtils.getClassMessage(getClass(), value);
 	}
 	
 	public int getKey() {
@@ -63,11 +67,11 @@ public enum DeleteStatus {
 	}
 
 	public String getMessage() {
-		return MessageUtils.getClassMessage(this.getClass(), this.value);
+		return message;
 	}
 	
 	/**
-	 * 判断指定的键是否匹配一个EntityStatus对象
+	 * 判断指定的键是否匹配
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
@@ -77,13 +81,13 @@ public enum DeleteStatus {
 	}
 	
 	/**
-	 * 将指定的键解析成EntityStatus对象
+	 * 将指定的键解析成枚举对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param key
 	 * @return
 	 */
-	public static DeleteStatus resolve(int key) {
+	public static DeletableStatusEnum resolve(int key) {
 		return mappings.get(key);
 	}
-
+	
 }
