@@ -21,7 +21,7 @@ package org.sniper.orm.hibernate.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import org.sniper.persistence.orm.jpa.dao.JpaPersistence;
+import org.sniper.orm.jpa.dao.JpaPersistence;
 
 /**
  * Hibernate持久化接口

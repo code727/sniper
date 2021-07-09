@@ -22,9 +22,9 @@ import java.io.Serializable;
 
 import org.sniper.beans.GenericBean;
 import org.sniper.persistence.FilterQuery;
-import org.sniper.persistence.orm.jpa.dao.JpaNamedQuery;
-import org.sniper.persistence.orm.jpa.dao.JpaNativePersistence;
-import org.sniper.persistence.orm.jpa.dao.JpaNativeQuery;
+import org.sniper.orm.jpa.dao.JpaNamedQuery;
+import org.sniper.orm.jpa.dao.JpaNativePersistence;
+import org.sniper.orm.jpa.dao.JpaNativeQuery;
 
 /**
  * Hibernate持久化数据访问接口

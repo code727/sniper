@@ -23,7 +23,7 @@ import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.sniper.beans.GenericBean;
 import org.sniper.commons.util.ClassUtils;
-import org.sniper.persistence.orm.hibernate.HibernateUtils;
+import org.sniper.orm.hibernate.HibernateUtils;
 
 /**
  * Hibernate3 DAO支持抽象类

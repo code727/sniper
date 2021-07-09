@@ -24,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.orm.hibernate.dao.HibernateDao;
-import org.sniper.persistence.sqlmap.dao.SqlMapQuery;
 import org.sniper.spring.beans.CheckableInitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 

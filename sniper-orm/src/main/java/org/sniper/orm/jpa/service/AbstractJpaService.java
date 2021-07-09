@@ -25,8 +25,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.orm.jpa.dao.JpaDao;
-import org.sniper.persistence.sqlmap.dao.SqlMapQuery;
 import org.sniper.spring.beans.CheckableInitializingBean;
+import org.sniper.sqlmap.dao.SqlMapQuery;
 
 /**
  * JPA持久化服务抽象类

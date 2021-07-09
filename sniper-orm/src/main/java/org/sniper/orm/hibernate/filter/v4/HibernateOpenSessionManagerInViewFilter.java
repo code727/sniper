@@ -25,7 +25,7 @@ import org.sniper.commons.util.ReflectionUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.persistence.OpenEntitySessionManagerInViewFilter;
 import org.sniper.persistence.OpenEntitySessionManagerInViewFilterProxy;
-import org.springframework.orm.hibernate5.support.OpenSessionInViewFilter;
+import org.springframework.orm.hibernate4.support.OpenSessionInViewFilter;
 
 /**
  * Hibernate4实体视图管理过滤器。此类的作用在于防止当实体启用了延迟加载策略后，

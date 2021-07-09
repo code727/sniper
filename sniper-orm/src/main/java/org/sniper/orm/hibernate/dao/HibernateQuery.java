@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
-import org.sniper.persistence.orm.jpa.dao.JpaQuery;
+import org.sniper.orm.jpa.dao.JpaQuery;
 
 /**
  * Hibernate查询接口

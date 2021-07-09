@@ -27,8 +27,8 @@ import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.persistence.orm.hibernate.HibernateCacheConfiguration;
-import org.sniper.persistence.orm.hibernate.HibernateUtils;
+import org.sniper.orm.hibernate.HibernateCacheConfiguration;
+import org.sniper.orm.hibernate.HibernateUtils;
 import org.sniper.spring.beans.AbstractGenricBean;
 
 /**

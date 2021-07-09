@@ -23,7 +23,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.sniper.persistence.orm.jpa.entity.CuAuditEntity;
+import org.sniper.orm.jpa.entity.CuAuditEntity;
 
 /**
  * UUID2主键类型的新增/更新审核实体对象抽象类

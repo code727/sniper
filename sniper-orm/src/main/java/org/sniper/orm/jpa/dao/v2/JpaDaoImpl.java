@@ -32,22 +32,22 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.springframework.stereotype.Repository;
-import org.sniper.commons.model.PagingResult;
 import org.sniper.commons.model.PagingModel;
+import org.sniper.commons.model.PagingResult;
 import org.sniper.commons.request.PagingQuery;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.persistence.orm.jpa.JpaUtils;
-import org.sniper.persistence.orm.jpa.dao.JpaCriteriaQueryCallback;
-import org.sniper.persistence.orm.jpa.dao.JpaCriteriaQueryCallbackDao;
-import org.sniper.persistence.orm.jpa.dao.JpaDao;
+import org.sniper.orm.jpa.JpaUtils;
+import org.sniper.orm.jpa.dao.JpaCriteriaQueryCallback;
+import org.sniper.orm.jpa.dao.JpaCriteriaQueryCallbackDao;
+import org.sniper.orm.jpa.dao.JpaDao;
 import org.sniper.persistence.util.FilterChainPagingQuery;
 import org.sniper.persistence.util.FilterListPagingQuery;
 import org.sniper.persistence.util.PersistencePropertyFilter;
 import org.sniper.persistence.util.PersistencePropertyFilterChain;
 import org.sniper.persistence.util.PersistenceUtils;
+import org.springframework.stereotype.Repository;
 
 /**
  * JPA2标准的DAO实现类

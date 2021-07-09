@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
-import org.sniper.persistence.orm.jpa.service.JpaCrudService;
+import org.sniper.orm.jpa.service.JpaCrudService;
 
 /**
  * 具备基本增删改查功能的Hibernate持久化服务接口
