@@ -189,7 +189,7 @@ public class PersistenceUtils {
 			PropertyFilterChain chain = new PropertyFilterChain();
 			for (PersistencePropertyFilter filter : filterList) {
 				if (filter != null)
-					chain.add("worin_property_filter_group", filter);
+					chain.add("property_filter_group", filter);
 			}
 			String queryString = chain.toQueryString();
 			if (StringUtils.isNotBlank(queryString))

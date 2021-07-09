@@ -19,7 +19,7 @@
 package org.sniper.commons.test;
 
 import org.junit.Test;
-import org.sniper.commons.request.PageableQuery;
+import org.sniper.commons.request.PagingQuery;
 import org.sniper.commons.request.PagingRequest;
 import org.sniper.test.junit.BaseTestCase;
 
@@ -38,8 +38,8 @@ public class PaginationTest extends BaseTestCase {
 //	@Test
 	public void testSimplePager() {
 		PagingRequest pager = new PagingRequest();
-		assertSame(pager.getCurrentPage(), PageableQuery.DEFAULT_CURRENT_PAGE);
-		assertSame(pager.getPageSize(), PageableQuery.DEFAULT_PAGE_SIZE);
+		assertSame(pager.getCurrentPage(), PagingQuery.DEFAULT_CURRENT_PAGE);
+		assertSame(pager.getPageSize(), PagingQuery.DEFAULT_PAGE_SIZE);
 		
 		/* 常规分页传入当前页数(currentPage)和每页条数(pageSize) */
 		int currentPage = 2;
@@ -52,8 +52,8 @@ public class PaginationTest extends BaseTestCase {
 	@Test
 	public void testOffsetPager() {
 		PagingRequest pager = new PagingRequest();
-		assertSame(pager.getCurrentPage(), PageableQuery.DEFAULT_CURRENT_PAGE);
-		assertSame(pager.getPageSize(), PageableQuery.DEFAULT_PAGE_SIZE);
+		assertSame(pager.getCurrentPage(), PagingQuery.DEFAULT_CURRENT_PAGE);
+		assertSame(pager.getPageSize(), PagingQuery.DEFAULT_PAGE_SIZE);
 		
 		int pageSize = 20;
 		long minId = 9507;
@@ -63,7 +63,7 @@ public class PaginationTest extends BaseTestCase {
 		pager.setStart(maxId);
 		pager.setPageSize(pageSize);
 		
-		assertSame(pager.getCurrentPage(), PageableQuery.DEFAULT_CURRENT_PAGE);
+		assertSame(pager.getCurrentPage(), PagingQuery.DEFAULT_CURRENT_PAGE);
 		assertEquals(pager.getStart(), maxId);
 		assertEquals(pager.getPageSize(), pageSize);
 		System.out.println(pager);

@@ -87,7 +87,7 @@ public class MapperTest extends BaseTestCase {
 		source.setId(123L);
 		source.setName("CMGE");
 		
-		System.out.println(mapper.mapping(source).getParameterItems());
+		System.out.println(mapper.mapping(source).getItems());
 	}
 	
 //	@Test

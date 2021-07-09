@@ -33,7 +33,7 @@ public interface Parameters<K, V> extends UnmodifiableParameters<K, V> {
 	 * @param parameterItems
 	 * @return
 	 */
-	public void setParameterItems(Map<K, V> parameterItems);
+	public void setItems(Map<K, V> items);
 	
 	/**
 	 * 新增参数

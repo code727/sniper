@@ -26,9 +26,9 @@ import org.sniper.codec.Base64Codec;
 import org.sniper.codec.Codec;
 import org.sniper.codec.CompositeCodec;
 import org.sniper.commons.util.CollectionUtils;
-import org.sniper.security.algorithm.symmetric.impl.AESAlgorithm;
-import org.sniper.security.algorithm.symmetric.impl.BlowfishAlgorithm;
-import org.sniper.security.algorithm.symmetric.impl.DESAlgorithm;
+import org.sniper.security.algorithm.symmetric.AESAlgorithm;
+import org.sniper.security.algorithm.symmetric.BlowfishAlgorithm;
+import org.sniper.security.algorithm.symmetric.DESAlgorithm;
 import org.sniper.test.junit.BaseTestCase;
 
 /**

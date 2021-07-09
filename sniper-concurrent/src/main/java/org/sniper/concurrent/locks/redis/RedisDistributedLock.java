@@ -82,7 +82,4 @@ public class RedisDistributedLock<K> implements KeyspaceLock<K> {
 		return redisCommands.exists(key);
 	}
 	
-	public static void main(String[] args) {
-	}
-
 }

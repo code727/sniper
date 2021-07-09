@@ -36,13 +36,7 @@ public class NumberUtils {
 	
 	/** 百分比格式 */
 	public static final String PERCENT_FORMAT = "#%";
-	
-	/** 数值为0的BigInteger */
-	public static final BigInteger ZERO_BIGINTEGER = new BigInteger("0");
-	
-	/** 数值为0的BigDecimal */
-	public static final BigDecimal ZERO_BIGDECIMAL = new BigDecimal(ZERO_BIGINTEGER);
-		
+				
 	/** 全局模式与格式对象关系映射集 */
 	private static final Map<String, DecimalFormat> PATTERN_DECIMAL_FORMATS = MapUtils.newConcurrentHashMap();
 	
@@ -73,14 +67,14 @@ public class NumberUtils {
 	}
 	
 	private NumberUtils() {}
-		
+	
 	/**
 	 * 根据指定的模式获取已定义的数字格式对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @return
 	 */
-	public static DecimalFormat getDecimalFormat(String pattern) {
+	private static DecimalFormat getDecimalFormat(String pattern) {
 		DecimalFormat decimalFormat = PATTERN_DECIMAL_FORMATS.get(pattern);
 		
 		if (decimalFormat == null) {
@@ -91,17 +85,16 @@ public class NumberUtils {
 				}
 			}
 		}
-		
 		return decimalFormat;
 	}
 	
 	/**
-	 * 根据指定的长度获取已定义的数字格式对象
+	 * 获取指定长度的数字格式化对象
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param pattern
 	 * @return
 	 */
-	public static DecimalFormat getDecimalFormat(int length) {
+	private static DecimalFormat getDecimalFormat(int length) {
 		if (length < 1)
 			return null;
 		
@@ -126,7 +119,7 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static double safeDouble(Double value) {
-		return safeDouble(value, 0);
+		return safeDouble(value, 0d);
 	}
 	
 	/**
@@ -147,7 +140,7 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static float safeFloat(Float value) {
-		return safeFloat(value, 0);
+		return safeFloat(value, 0f);
 	}
 	
 	/**
@@ -189,7 +182,7 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static long safeLong(Long value) {
-		return safeLong(value, 0);
+		return safeLong(value, 0L);
 	}
 	
 	/**
@@ -252,11 +245,11 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static BigDecimal safeBigDecimal(BigDecimal decimal) {
-		return safeBigDecimal(decimal, ZERO_BIGDECIMAL);
+		return safeBigDecimal(decimal, new BigDecimal(0));
 	}
 	
 	/**
-	 * 获取不为空的BigDecimal，否则返回指定不为空的默认值
+	 * 返回不为空BigDecimal
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param decimal
 	 * @param defaultValue
@@ -275,7 +268,7 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static BigInteger safeBigInteger(BigInteger integer) {
-		return safeBigInteger(integer, ZERO_BIGINTEGER);
+		return safeBigInteger(integer, new BigInteger("0"));
 	}
 	
 	/**
@@ -648,7 +641,7 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static BigInteger toBigIntegerValue(Object obj) {
-		return toBigIntegerValue(obj, ZERO_BIGINTEGER);
+		return toBigIntegerValue(obj, new BigInteger("0"));
 	}
 	
 	/**
@@ -704,7 +697,7 @@ public class NumberUtils {
 	 * @return
 	 */
 	public static BigDecimal toBigDecimalValue(Object obj) {
-		return toBigDecimalValue(obj, ZERO_BIGDECIMAL);
+		return toBigDecimalValue(obj, new BigDecimal(0));
 	}
 	
 	/**
@@ -820,248 +813,248 @@ public class NumberUtils {
 	}
 		
 	/**
-	 * 将指定值限定在最小范围内
+	 * 将指定值限定在[limit,+∞)区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param d
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static double minLimit(double d, double limit) {
-		return d < limit ? limit : d;
+	public static double minLimit(double value, double limit) {
+		return Math.max(value, limit);
 	}
 	
 	/**
-	 * 将指定值限定在最小范围内
+	 * 将指定值限定在[limit,+∞)区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param f
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static float minLimit(float f, float limit) {
-		return f < limit ? limit : f;
+	public static float minLimit(float value, float limit) {
+		return Math.max(value, limit);
 	}
 	
 	/**
-	 * 将指定值限定在最小范围内
+	 * 将指定值限定在最小范围外
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param i
-	 * @param limit
+	 * @param value
 	 * @return
 	 */
-	public static int minLimit(int i, int limit) {
-		return i < limit ? limit : i;
+	public static int minLimit(int value, int limit) {
+		return Math.max(value, limit);
 	}
 	
 	/**
-	 * 将指定值限定在最小范围内
+	 * 将指定值限定在[limit,+∞)区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param l
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static long minLimit(long l, long limit) {
-		return l < limit ? limit : l;
+	public static long minLimit(long value, long limit) {
+		return Math.max(value, limit);
 	}
 	
 	/**
-	 * 将指定值限定在最小范围内
+	 * 将指定值限定在[limit,+∞)区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param s
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static short minLimit(short s, short limit) {
-		return s < limit ? limit : s;
+	public static short minLimit(short value, short limit) {
+		return value < limit ? limit : value;
 	}
 	
 	/**
-	 * 将指定值限定在最小范围内
+	 * 将指定值限定在[limit,+∞)区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param b
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static byte minLimit(byte b, byte limit) {
-		return b < limit ? limit : b;
+	public static byte minLimit(byte value, byte limit) {
+		return value < limit ? limit : value;
 	}
 	
 	/**
-	 * 将指定值限定在最小范围内
+	 * 将指定值限定在[limit,+∞)区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param c
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static char minLimit(char c, char limit) {
-		return c < limit ? limit : c;
+	public static char minLimit(char value, char limit) {
+		return value < limit ? limit : value;
 	}
 	
 	/**
-	 * 将指定值限定在最大范围内
+	 * 将指定值限定在(-∞,limit]区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param d
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static double maxLimit(double d, double limit) {
-		return d > limit ? limit : d;
+	public static double maxLimit(double value, double limit) {
+		return Math.min(value, limit);
 	}
 	
 	/**
-	 * 将指定值限定在最大范围内
+	 * 将指定值限定在(-∞,limit]区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param f
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static float maxLimit(float f, float limit) {
-		return f > limit ? limit : f;
+	public static float maxLimit(float value, float limit) {
+		return Math.min(value, limit);
 	}
 	
 	/**
-	 * 将指定值限定在最大范围内
+	 * 将指定值限定在(-∞,limit]区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param i
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static int maxLimit(int i, int limit) {
-		return i > limit ? limit : i;
+	public static int maxLimit(int value, int limit) {
+		return Math.min(value, limit);
 	}
 	
 	/**
-	 * 将指定值限定在最大范围内
+	 * 将指定值限定在(-∞,limit]区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param l
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static long maxLimit(long l, long limit) {
-		return l > limit ? limit : l;
+	public static long maxLimit(long value, long limit) {
+		return Math.min(value, limit);
 	}
 	
 	/**
-	 * 将指定值限定在最大范围内
+	 * 将指定值限定在(-∞,limit]区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param s
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static short maxLimit(short s, short limit) {
-		return s > limit ? limit : s;
+	public static short maxLimit(short value, short limit) {
+		return value > limit ? limit : value;
 	}
 	
 	/**
-	 * 将指定值限定在最大范围内
+	 * 将指定值限定在(-∞,limit]区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param b
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static byte maxLimit(byte b, byte limit) {
-		return b > limit ? limit : b;
+	public static byte maxLimit(byte value, byte limit) {
+		return value > limit ? limit : value;
 	}
 	
 	/**
-	 * 将指定值限定在最大范围内
+	 * 将指定值限定在(-∞,limit]区间
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param c
+	 * @param value
 	 * @param limit
 	 * @return
 	 */
-	public static char maxLimit(char c, char limit) {
-		return c > limit ? limit : c;
+	public static char maxLimit(char value, char limit) {
+		return value > limit ? limit : value;
 	}
 	
 	/**
-	 * 将指定值限定在最小/最大范围内
+	 * 将指定值限定在[minLimit,maxLimit]区间内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param d
+	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
 	 * @return
 	 */
-	public static double rangeLimit(double d, double minLimit, double maxLimit) {
-		return !(minLimit > maxLimit) ? minLimit(maxLimit(d, maxLimit), minLimit)
-				: minLimit(maxLimit(d, minLimit), maxLimit);
+	public static double rangeLimit(double value, double minLimit, double maxLimit) {
+		return minLimit > maxLimit ? minLimit(maxLimit(value, minLimit), maxLimit)
+				:minLimit(maxLimit(value, maxLimit), minLimit);
 	}
 	
 	/**
-	 * 将指定值限定在最小/最大范围内
+	 * 将指定值限定在[minLimit,maxLimit]区间内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param f
+	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
 	 * @return
 	 */
-	public static float rangeLimit(float f, float minLimit, float maxLimit) {
-		return !(minLimit > maxLimit) ? minLimit(maxLimit(f, maxLimit), minLimit)
-				: minLimit(maxLimit(f, minLimit), maxLimit);
+	public static float rangeLimit(float value, float minLimit, float maxLimit) {
+		return minLimit > maxLimit ? minLimit(maxLimit(value, minLimit), maxLimit)
+				:minLimit(maxLimit(value, maxLimit), minLimit);
 	}
 	
 	/**
-	 * 将指定值限定在最小/最大范围内
+	 * 将指定值限定在[minLimit,maxLimit]区间内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param i
+	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
 	 * @return
 	 */
-	public static int rangeLimit(int i, int minLimit, int maxLimit) {
-		return !(minLimit > maxLimit) ? minLimit(maxLimit(i, maxLimit), minLimit)
-				: minLimit(maxLimit(i, minLimit), maxLimit);
+	public static int rangeLimit(int value, int minLimit, int maxLimit) {
+		return minLimit > maxLimit ? minLimit(maxLimit(value, minLimit), maxLimit)
+				:minLimit(maxLimit(value, maxLimit), minLimit);
 	}
 	
 	/**
-	 * 将指定值限定在最小/最大范围内
+	 * 将指定值限定在[minLimit,maxLimit]区间内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param l
+	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
 	 * @return
 	 */
-	public static long rangeLimit(long l, long minLimit, long maxLimit) {
-		return !(minLimit > maxLimit) ? minLimit(maxLimit(l, maxLimit), minLimit)
-				: minLimit(maxLimit(l, minLimit), maxLimit);
+	public static long rangeLimit(long value, long minLimit, long maxLimit) {
+		return minLimit > maxLimit ? minLimit(maxLimit(value, minLimit), maxLimit)
+				:minLimit(maxLimit(value, maxLimit), minLimit);
 	}
 	
 	/**
-	 * 将指定值限定在最小/最大范围内
+	 * 将指定值限定在[minLimit,maxLimit]区间内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param s
+	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
 	 * @return
 	 */
-	public static short rangeLimit(short s, short minLimit, short maxLimit) {
-		return !(minLimit > maxLimit) ? minLimit(maxLimit(s, maxLimit), minLimit)
-				: minLimit(maxLimit(s, minLimit), maxLimit);
+	public static short rangeLimit(short value, short minLimit, short maxLimit) {
+		return minLimit > maxLimit ? minLimit(maxLimit(value, minLimit), maxLimit)
+				:minLimit(maxLimit(value, maxLimit), minLimit);
 	}
 	
 	/**
-	 * 将指定值限定在最小/最大范围内
+	 * 将指定值限定在[minLimit,maxLimit]区间内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param b
+	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
 	 * @return
 	 */
-	public static byte rangeLimit(byte b, byte minLimit, byte maxLimit) {
-		return !(minLimit > maxLimit) ? minLimit(maxLimit(b, maxLimit), minLimit)
-				: minLimit(maxLimit(b, minLimit), maxLimit);
+	public static byte rangeLimit(byte value, byte minLimit, byte maxLimit) {
+		return minLimit > maxLimit ? minLimit(maxLimit(value, minLimit), maxLimit)
+				:minLimit(maxLimit(value, maxLimit), minLimit);
 	}
 	
 	/**
-	 * 将指定值限定在最小/最大范围内
+	 * 将指定值限定在[minLimit,maxLimit]区间内
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param c
+	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
 	 * @return
 	 */
-	public static char rangeLimit(char c, char minLimit, char maxLimit) {
-		return !(minLimit > maxLimit) ? minLimit(maxLimit(c, maxLimit), minLimit)
-				: minLimit(maxLimit(c, minLimit), maxLimit);
+	public static char rangeLimit(char value, char minLimit, char maxLimit) {
+		return minLimit > maxLimit ? minLimit(maxLimit(value, minLimit), maxLimit)
+				:minLimit(maxLimit(value, maxLimit), minLimit);
 	}
 		
 	/**
@@ -1365,7 +1358,7 @@ public class NumberUtils {
 	}
 		 
 	/**
-	 * 计算number1 ÷  number2的值，返回整数结果
+	 * 计算number1 ÷ number2的值，返回整数结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number1
 	 * @param number2
@@ -1376,7 +1369,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 计算number1 ÷  number2的值，并保留scale位小数后返回最终结果
+	 * 计算number1 ÷ number2的值，并保留scale位小数后返回最终结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number1
 	 * @param number2
@@ -1388,7 +1381,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 计算number1 ÷  number2的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
+	 * 计算number1 ÷ number2的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number1
 	 * @param number2
@@ -1400,7 +1393,7 @@ public class NumberUtils {
 	}
 	
 	/**
-	 * 计算number1 ÷  number2的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
+	 * 计算number1 ÷ number2的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number1
 	 * @param number2

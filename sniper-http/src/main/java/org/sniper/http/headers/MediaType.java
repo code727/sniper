@@ -447,7 +447,7 @@ public class MediaType extends MimeType implements Serializable {
 		
 		Map<String, Object> parameters;
 		if (mediaType != null) {
-			parameters = MapUtils.newLinkedHashMap(mediaType.getParameterItems());
+			parameters = MapUtils.newLinkedHashMap(mediaType.getItems());
 		} else {
 			parameters = MapUtils.newLinkedHashMap();
 		}

@@ -286,7 +286,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 */
 	public void setCookie(Parameters<String, Object> cookies) {
 		set(HttpRequestHeader.COOKIE.getKey(), cookies != null
-				? MapUtils.join(cookies.getParameterItems(), StringUtils.ASSIGNMENT, NAME_VALUE_PAIR_SEPARATOR) : null);
+				? MapUtils.join(cookies.getItems(), StringUtils.ASSIGNMENT, NAME_VALUE_PAIR_SEPARATOR) : null);
 	}
 	
 	/**

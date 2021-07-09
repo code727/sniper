@@ -1931,7 +1931,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * 从原数字的左侧（开头）增补若干个字符0，生成具有指定最小长度的新字符串
+	 * 从数字左侧（开头）增补若干个字符0，生成具有指定最小长度的新字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param number
 	 * @param minLength
@@ -1977,7 +1977,10 @@ public class StringUtils {
 	}
 	
 	/**
-	 * 从原字符串的左侧（开头）增补若干个指定的字符，生成具有指定最小长度的新字符串
+	 * 从字符串的左侧追加若干个指定的字符，生成
+	 * 
+	 * 
+	 * 增补若干个指定的字符，具有指定最小长度的新字符串
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param str
 	 * @param c
@@ -1986,6 +1989,8 @@ public class StringUtils {
 	 */
 	public static String leftSupplement(String str, char c, int minLength) {
 		if (str == null)
+			
+			
 			str = EMPTY;
 		
 		int length = str.length();

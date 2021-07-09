@@ -44,7 +44,7 @@ public class ApplicationContextParameterTest extends BaseTestCase {
 		Map<String, Object> parameterItems = MapUtils.newHashMap();
 		parameterItems.put("name", "dubin");
 		parameterItems.put("age", "33");
-		parameter.setParameterItems(parameterItems);
+		parameter.setItems(parameterItems);
 		
 		/* 预加载其余参数，例如从数据库中获取系统全局的配置参数 */
 		parameter.setParameterService(new ParametersService() {

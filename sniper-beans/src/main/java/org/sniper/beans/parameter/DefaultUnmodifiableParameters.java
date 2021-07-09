@@ -42,7 +42,7 @@ public class DefaultUnmodifiableParameters<K, V> implements UnmodifiableParamete
 	}
 		
 	public DefaultUnmodifiableParameters(Parameters<K, V> parameters) {
-		this(parameters != null ? parameters.getParameterItems() : null);
+		this(parameters != null ? parameters.getItems() : null);
 	}
 	
 	public DefaultUnmodifiableParameters(Map<K, V> parameters) {
@@ -60,8 +60,8 @@ public class DefaultUnmodifiableParameters<K, V> implements UnmodifiableParamete
 	}
 	
 	@Override
-	public Map<K, V> getParameterItems() {
-		return parameters.getParameterItems();
+	public Map<K, V> getItems() {
+		return parameters.getItems();
 	}
 
 	@Override

@@ -16,20 +16,19 @@
  * Create Date : 2015-1-14
  */
 
-package org.sniper.commons.pagination.result;
+package org.sniper.commons.model;
 
 import java.util.List;
 
-import org.sniper.commons.pagination.PagingResult;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.NumberUtils;
 
 /**
- * 简单的分页结果实现类
+ * 基本的分页结果模型
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class SimplePagingResult<T> implements PagingResult<T> {
+public class PagingModel<T> implements PagingResult<T> {
 	
 	private static final long serialVersionUID = -5209318203792180797L;
 
@@ -37,7 +36,7 @@ public class SimplePagingResult<T> implements PagingResult<T> {
 	private List<T> data;
 	
 	/** 符合分页条件的记录总数 */
-	private long total;
+	private long count;
 
 	@Override
 	public List<T> getData() {
@@ -48,16 +47,19 @@ public class SimplePagingResult<T> implements PagingResult<T> {
 	public void setData(List<T> data) {
 		this.data = data;
 	}
-
+	
 	@Override
-	public long getTotal() {
-		int dataSize = CollectionUtils.size(data);
-		return this.total > dataSize ? this.total : dataSize;
+	public long getCount() {
+		return NumberUtils.minLimit(count, CollectionUtils.size(data));
 	}
 
 	@Override
-	public void setTotal(long total) {
-		this.total = NumberUtils.minLimit(total, 0);
+	public void setCount(long count) {
+		// 如果count小于data列表长度，说明count值不符合逻辑，例如：
+		// 1.上层应用只查询数据而不查询记录总数时，count=0，显然实际的记录总数应该是data列表长度；
+		// 2.上层应用设置的count值小于data列表长度时，说明count设置有误，因为符合分页查询条件的记录总数只可能大于或等于data列表长度
+		// 因此针对上述两种情况，这里要限制count值不能小于data列表长度
+		this.count = NumberUtils.minLimit(count, CollectionUtils.size(data));
 	}
 		
 }

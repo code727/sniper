@@ -21,7 +21,7 @@ package org.sniper.commons.entity;
 import java.io.Serializable;
 
 /**
- * 主键ID实体抽象类
+ * 主键ID实体类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

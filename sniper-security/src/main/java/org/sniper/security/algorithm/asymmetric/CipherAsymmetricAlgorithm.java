@@ -21,7 +21,7 @@ package org.sniper.security.algorithm.asymmetric;
 import javax.crypto.Cipher;
 
 /**
- * 密码器非对称算法抽象类
+ * 基于密码器的非对称算法抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */

@@ -34,7 +34,6 @@ import org.sniper.test.junit.BaseTestCase;
  */
 public class DateUtilsTest extends BaseTestCase {
 	
-	
 	@Test
 	public void multiThreadFormat() {
 		ExecutorService executor = Executors.newCachedThreadPool();

@@ -44,7 +44,6 @@ public interface Signature<T> {
 	 * 执行签名处理，并返回结果
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameters
-	 * @param secretKey
 	 * @return
 	 */
 	public String excute(T parameters);

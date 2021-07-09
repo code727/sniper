@@ -58,7 +58,7 @@ public interface UnmodifiableParameters<K, V> {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public Map<K, V> getParameterItems();
+	public Map<K, V> getItems();
 	
 	/**
 	 * 获取所有的参数名

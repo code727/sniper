@@ -147,7 +147,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 		
 		Map<String, Object> parameters;
 		if (mimeType != null)
-			parameters = MapUtils.newLinkedHashMap(mimeType.getParameterItems());
+			parameters = MapUtils.newLinkedHashMap(mimeType.getItems());
 		else
 			parameters = MapUtils.newLinkedHashMap(1);
 		
@@ -363,7 +363,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 		StringBuilder builder = new StringBuilder(getType());
 		
 		String attribute;
-		for (Map.Entry<String, Object> entry : getParameterItems().entrySet()) {
+		for (Map.Entry<String, Object> entry : getItems().entrySet()) {
 			// 质量价值等于默认的1.0时不予以显示
 			if (QualityFactor.PARAM_QUALITY_FACTOR.equals(attribute = entry.getKey())
 					&& NumberUtils.equals(entry.getValue(), QualityFactor.MAX_DEFAULT_VALUE)) {

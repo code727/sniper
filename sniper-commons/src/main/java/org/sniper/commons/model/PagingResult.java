@@ -16,7 +16,7 @@
  * Create Date : 2015-1-14
  */
 
-package org.sniper.commons.pagination;
+package org.sniper.commons.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -47,13 +47,13 @@ public interface PagingResult<T> extends Serializable {
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */
-	public long getTotal();
+	public long getCount();
 	
 	/**
 	 * 设置符合分页条件的结果总数 
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param total
+	 * @param count
 	 */
-	public void setTotal(long total);
+	public void setCount(long count);
 	
 }

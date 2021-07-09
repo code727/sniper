@@ -16,14 +16,16 @@
  * Create Date : 2015-1-14
  */
 
-package org.sniper.commons.pagination;
+package org.sniper.commons.model;
+
+import org.sniper.commons.request.Pageable;
 
 /**
- * 分页详情结果类
+ * 分页明细结果接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface PagingDetailResult<T> extends PagingResult<T> {
+public interface PagingDetailResult<T> extends Pageable, PagingResult<T> {
 	
 	/**
 	 * 获取当前分页结果的总页数

@@ -42,13 +42,13 @@ public class ConcurrentParameters<K, V> extends DefaultParameters<K, V> {
 	}
 	
 	/**
-	 * 重写父类方法，将parameterItems强制设置为ConcurrentHashMap
+	 * 重写父类方法，强制将参数项存储到ConcurrentHashMap中
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param parameterItems
 	 */
 	@Override
-	public void setParameterItems(Map<K, V> parameterItems) {
-		this.parameterItems = MapUtils.newConcurrentHashMap(parameterItems);
+	public void setItems(Map<K, V> items) {
+		this.items = MapUtils.newConcurrentHashMap(items);
 	}
 						
 }

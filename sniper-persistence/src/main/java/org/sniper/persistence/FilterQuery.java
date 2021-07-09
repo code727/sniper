@@ -20,9 +20,9 @@ package org.sniper.persistence;
 
 import java.util.List;
 
-import org.sniper.commons.pagination.PagingResult;
-import org.sniper.persistence.pagination.FilterChainPagingQuery;
-import org.sniper.persistence.pagination.FilterListPagingQuery;
+import org.sniper.commons.model.PagingResult;
+import org.sniper.persistence.util.FilterChainPagingQuery;
+import org.sniper.persistence.util.FilterListPagingQuery;
 import org.sniper.persistence.util.PersistencePropertyFilter;
 import org.sniper.persistence.util.PersistencePropertyFilterChain;
 

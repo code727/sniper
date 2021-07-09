@@ -19,48 +19,14 @@
 package org.sniper.commons.request;
 
 /**
- * 可分页查询接口
+ * 分页查询接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface PageableQuery extends SortableRequest {
+public interface PagingQuery extends Pageable, SortableRequest {
 	
 	/** 查询前的默认起始位置 */
 	public static final long START_POS = 0;
-	
-	/** 默认的当前页数 */
-	public static final int DEFAULT_CURRENT_PAGE = 1;
-	
-	/** 默认的每页条数 */
-	public static final int DEFAULT_PAGE_SIZE = 10;
-	
-	/**
-	 * 获取每页条数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public int getPageSize();
-	
-	/**
-	 * 设置每页条数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param pageSize
-	 */
-	public void setPageSize(int pageSize);
-	
-	/**
-	 * 获取当前页数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @return
-	 */
-	public int getCurrentPage();
-	
-	/**
-	 * 设置当前页数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param currentPage
-	 */
-	public void setCurrentPage(int currentPage);
 	
 	/**
 	 * 判断是否需要查询总数

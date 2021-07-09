@@ -22,30 +22,24 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.util.Destroyable;
-import org.springframework.beans.factory.InitializingBean;
+import org.sniper.commons.util.AssertUtils;
 
 /**
  * 自定义Cache管理实现类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class CustomCacheManager implements CacheManager, Destroyable, InitializingBean {
+public class CustomCacheManager implements CacheManager, Destroyable {
 	
-	private CacheRepository cacheRepository;
+	protected final CacheRepository cacheRepository;
 	
-	public CacheRepository getCacheRepository() {
-		return cacheRepository;
-	}
-
-	public void setCacheRepository(CacheRepository cacheRepository) {
+	public CustomCacheManager(CacheRepository cacheRepository) {
+		AssertUtils.assertNotNull(cacheRepository, "Property 'cacheRepository' is required");
 		this.cacheRepository = cacheRepository;
 	}
 	
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		if (this.cacheRepository == null)
-			throw new IllegalArgumentException("Property 'cacheRepository' is required");
-		
+	public CacheRepository getCacheRepository() {
+		return cacheRepository;
 	}
 
 	@Override

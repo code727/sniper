@@ -30,7 +30,6 @@ import org.sniper.commons.enums.logic.BooleanEnum;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;
-import org.sniper.commons.util.NumberUtils;
 import org.sniper.commons.util.ObjectUtils;
 import org.sniper.commons.util.StringUtils;
 
@@ -41,72 +40,72 @@ import org.sniper.commons.util.StringUtils;
  */
 public class DefaultParameters<K, V> implements Parameters<K, V> {
 	
-	protected Map<K, V> parameterItems;
+	protected Map<K, V> items;
 	
 	public DefaultParameters() {
 		this((Map<K, V>) null);
 	}
 	
 	public DefaultParameters(Parameters<K, V> parameters) {
-		this(parameters != null ? parameters.getParameterItems() : null);
+		this(parameters != null ? parameters.getItems() : null);
 	}
 	
-	public DefaultParameters(Map<K, V> parameterItems) {
-		setParameterItems(parameterItems);
+	public DefaultParameters(Map<K, V> items) {
+		setItems(items);
 	}
 	
 	@Override
-	public void setParameterItems(Map<K, V> parameterItems) {
-		if (parameterItems != null)
-			this.parameterItems = parameterItems;
+	public void setItems(Map<K, V> items) {
+		if (items != null)
+			this.items = items;
 		else
-			this.parameterItems = new LinkedHashMap<K,V>();
+			this.items = new LinkedHashMap<K,V>();
 	}
 	
 	@Override
 	public void add(K name, V value) {
-		parameterItems.put(name, value);
+		items.put(name, value);
 	}
 	
 	@Override
-	public void addAll(Map<K, V> parameterItems) {
-		if (parameterItems != null)
-			parameterItems.putAll(parameterItems);
+	public void addAll(Map<K, V> items) {
+		if (items != null)
+			this.items.putAll(items);
 	}
 	
 	@Override
 	public V remove(K name) {
-		return parameterItems.remove(name);
+		return items.remove(name);
 	}
 
 	@Override
 	public void clear() {
-		parameterItems.clear();
+		items.clear();
 	}
 	
 	@Override
-	public Map<K, V> getParameterItems() {
-		return parameterItems;
+	public Map<K, V> getItems() {
+		return items;
 	}
 
 	@Override
 	public V getValue(K name) {
-		return parameterItems.get(name);
+		return items.get(name);
 	}
 
 	@Override
 	public Set<K> getNames() {
-		return parameterItems.keySet();
+		return items.keySet();
 	}
 
 	@Override
 	public List<V> getValues() {
-		return CollectionUtils.newArrayList(this.parameterItems.values());
+		return CollectionUtils.newArrayList(items.values());
 	}
 
 	@Override
 	public int size() {
-		return parameterItems.size();
+		return items.size();
 	}
 
 	@Override
@@ -121,7 +120,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 	
 	@Override
 	public String toString() {
-		return parameterItems.toString();
+		return items.toString();
 	}
 
 	@Override
@@ -131,7 +130,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public String getString(K name, String defaultValue) {
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 		return value != null ? value.toString() : defaultValue;
 	}
 	
@@ -142,7 +141,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public String getNotEmptyStringt(K name, String defaultValue) {
-		String value = ObjectUtils.toString(parameterItems.get(name));
+		String value = ObjectUtils.toString(items.get(name));
 		return StringUtils.isNotEmpty(value) ? value : (StringUtils.isNotEmpty(defaultValue) ? defaultValue : StringUtils.NULL);
 	}
 
@@ -153,7 +152,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public String getNotBlankStringt(K name, String defaultValue) {
-		String value = ObjectUtils.toString(parameterItems.get(name));
+		String value = ObjectUtils.toString(items.get(name));
 		return StringUtils.isNotBlank(value) ? value : (StringUtils.isNotBlank(defaultValue) ? defaultValue : StringUtils.NULL);
 	}
 	
@@ -164,7 +163,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Boolean getBoolean(K name, Boolean defaultValue) {
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 		
 		if (value instanceof Boolean)
 			return (Boolean) value;
@@ -193,7 +192,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Byte getByte(K name, Byte defaultValue) {
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 		
 		if (value instanceof Number)
 			return ((Number) value).byteValue();
@@ -229,7 +228,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Short getShort(K name, Short defaultValue) {
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 				
 		if (value instanceof Number)
 			return ((Number) value).shortValue();
@@ -262,7 +261,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Integer getInteger(K name, Integer defaultValue) {
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 				
 		if (value instanceof Number)
 			return ((Number) value).intValue();
@@ -295,7 +294,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Long getLong(K name, Long defaultValue) {
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 		
 		if (value instanceof Number)
 			return ((Number) value).longValue();
@@ -328,7 +327,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Float getFloat(K name, Float defaultValue) {
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 		
 		if (value instanceof Number)
 			return ((Number) value).floatValue();
@@ -361,7 +360,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Double getDouble(K name, Double defaultValue) {
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 		
 		if (value instanceof Number)
 			return ((Number) value).doubleValue();
@@ -394,7 +393,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public BigInteger getBigInteger(K name, BigInteger defaultValue) {
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 		
 		if (value instanceof BigInteger)
 			 return (BigInteger) value;
@@ -415,7 +414,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public BigInteger getBigIntegerValue(K name) {
-		return getBigIntegerValue(name, NumberUtils.ZERO_BIGINTEGER);
+		return getBigIntegerValue(name, new BigInteger("0"));
 	}
 	
 	@Override
@@ -431,7 +430,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public BigDecimal getBigDecimal(K name, BigDecimal defaultValue) {
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 		
 		if (value instanceof BigDecimal)
 			return (BigDecimal) value;
@@ -452,7 +451,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public BigDecimal getBigDecimalValue(K name) {
-		return getBigDecimalValue(name, NumberUtils.ZERO_BIGDECIMAL);
+		return getBigDecimalValue(name, new BigDecimal(0));
 	}
 
 	@Override
@@ -478,7 +477,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 
 	@Override
 	public Date getDate(K name, String pattern, Date defaultValue) {
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 		Date date = DateUtils.objectToDate(value, pattern);
 		return date != null ? date : defaultValue;
 	}
@@ -502,7 +501,7 @@ public class DefaultParameters<K, V> implements Parameters<K, V> {
 	public Date getDateValue(K name, String pattern, Date defaultValue) {
 		AssertUtils.assertNotNull(defaultValue, "Default big decimal must not be null");
 		
-		V value = parameterItems.get(name);
+		V value = items.get(name);
 		Date date = DateUtils.objectToDate(value, pattern);
 		return date != null ? date : defaultValue;
 	}

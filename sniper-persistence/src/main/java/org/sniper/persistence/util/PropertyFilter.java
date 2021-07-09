@@ -41,9 +41,9 @@ public class PropertyFilter implements PersistencePropertyFilter {
 	private Predicate predicate = Predicate.AND;
 		
 	public PropertyFilter(String name, Object value, Operator operator) {
-		this.operator = operator;
 		this.name = name;
 		this.value = value;
+		this.operator = operator;
 	}
 	
 	@Override

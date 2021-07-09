@@ -71,7 +71,7 @@ public class ApplicationContextParameters<K, V> extends ConcurrentParameters<K, 
 		if (this.parametersService != null) {
 			Date start = new Date();
 			logger.info("Starting preloading application context parameters");
-			this.setParameterItems((Map<K, V>) this.parametersService.preloading());
+			this.setItems((Map<K, V>) this.parametersService.preloading());
 			logger.info("End preloading application context parameters in {} ms", DateUtils.getIntervalMillis(start, new Date()));
 		}
 	}
@@ -84,7 +84,7 @@ public class ApplicationContextParameters<K, V> extends ConcurrentParameters<K, 
 	 */
 	@Override
 	public void add(K name, V value) {
-		keyHandler.put(this.parameterItems, name, value);
+		keyHandler.put(this.items, name, value);
 	}
 	
 	/**
@@ -94,7 +94,7 @@ public class ApplicationContextParameters<K, V> extends ConcurrentParameters<K, 
 	 */
 	@Override
 	public void addAll(Map<K, V> parameterItems) {
-		keyHandler.putAll(this.parameterItems, parameterItems);
+		keyHandler.putAll(this.items, parameterItems);
 	}
 			
 }

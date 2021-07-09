@@ -25,7 +25,7 @@ import org.sniper.commons.util.NumberUtils;
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public class PagingRequest extends SortRequest implements PageableQuery {
+public class PagingRequest extends SortRequest implements PagingQuery {
 	
 	private static final long serialVersionUID = -3075094595070319133L;
 
