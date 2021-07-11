@@ -19,53 +19,46 @@
 package org.sniper.orm.jpa.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.orm.jpa.dao.JpaDao;
 import org.sniper.spring.beans.CheckableInitializingBean;
-import org.sniper.sqlmap.dao.SqlMapQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * JPA持久化服务抽象类
+ * 具备基本增删改查功能的JPA服务抽象类
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public abstract class AbstractJpaService<T, PK extends Serializable> extends
-		CheckableInitializingBean implements JpaBeanService<T, PK> {
-		
-	private static final Logger logger = LoggerFactory.getLogger(AbstractJpaService.class);
+public abstract class AbstractJpaService<T, PK extends Serializable> 
+	extends CheckableInitializingBean implements JpaBeanService<T, PK>, JpaService<T, PK> {
+	
+	protected final Logger logger;
 	
 	@Autowired
 	protected JpaDao<T, PK> jpaDao;
 	
-	@Autowired(required = false)
-	protected SqlMapQuery<T> sqlMapQuery;
+	public AbstractJpaService() {
+		this.logger = LoggerFactory.getLogger(getClass());
+	}
+
+	@Override
+	public JpaDao<T, PK> getJpaDao() {
+		return jpaDao;
+	}
 
 	@Override
 	public void setJpaDao(JpaDao<T, PK> jpaDao) {
 		this.jpaDao = jpaDao;
 	}
-	
-	@Override
-	public JpaDao<T, PK> getJpaDao() {
-		return this.jpaDao;
-	}
-	
-	public SqlMapQuery<T> getSqlMapQuery() {
-		return sqlMapQuery;
-	}
 
-	public void setSqlMapQuery(SqlMapQuery<T> sqlMapQuery) {
-		this.sqlMapQuery = sqlMapQuery;
-	}
-	
 	@Override
 	protected void checkProperties() {
-		if (this.jpaDao == null)
-			throw new IllegalArgumentException("Property 'jpaDao' is required");
+		AssertUtils.assertNotNull(this.jpaDao, "Property 'jpaDao' is required");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -74,15 +67,56 @@ public abstract class AbstractJpaService<T, PK extends Serializable> extends
 		Class<T> entityType = (Class<T>) ClassUtils.getSuperclassGenricType(getClass());
 		// 将当前服务类管理的实体类型传递给持久化DAO，使DAO接口的方法能正常工作
 		this.jpaDao.setTargetType(entityType);
+	}
 		
-		/* 开启ibatis/mybatis的查询接口，弥补JPA针对复杂查询难以处理的问题 */
-		if (sqlMapQuery != null) {
-			sqlMapQuery.setTargetType(entityType);
-			
-			logger.info("Success enable SqlMapQuery interface,implements class is:"
-					+ sqlMapQuery.getClass().getName());
-		}
-		
+	@Override
+	public void persist(T entity) {
+		this.jpaDao.persist(entity);
+	}
+
+	@Override
+	public void batchPersist(List<T> entityList) {
+		this.jpaDao.batchPersist(entityList);
+	}
+
+	@Override
+	public T merge(T entity) {
+		return this.jpaDao.merge(entity);
+	}
+
+	@Override
+	public List<T> batchMerge(List<T> entityList) {
+		return this.jpaDao.batchMerge(entityList);
+	}
+
+	@Override
+	public void remove(T entity) {
+		this.jpaDao.remove(entity);
+	}
+
+	@Override
+	public void remove(PK id) {
+		this.jpaDao.remove(id);
+	}
+
+	@Override
+	public void batchRemove(List<T> entityList) {
+		this.jpaDao.batchRemove(entityList);
+	}
+
+	@Override
+	public T findById(PK id) {
+		return this.jpaDao.findById(id);
+	}
+
+	@Override
+	public List<T> findAll() {
+		return this.jpaDao.findAll();
+	}
+
+	@Override
+	public List<T> findAllDistinct() {
+		return this.jpaDao.findAllDistinct();
 	}
 
 }

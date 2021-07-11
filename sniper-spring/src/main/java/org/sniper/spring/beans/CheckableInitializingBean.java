@@ -27,6 +27,7 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public abstract class CheckableInitializingBean implements InitializingBean {
 	
+	@Override
 	public final void afterPropertiesSet() throws Exception {
 		checkProperties();
 		init();
@@ -36,13 +37,12 @@ public abstract class CheckableInitializingBean implements InitializingBean {
 	 * 检测当前Bean对象属性
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 */
-	protected abstract void checkProperties();
-	
+	protected void checkProperties() {}
+		
 	/**
 	 * 初始化操作
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @throws Exception
 	 */
-	protected abstract void init() throws Exception;
-	
+	protected void init() throws Exception {}
 }

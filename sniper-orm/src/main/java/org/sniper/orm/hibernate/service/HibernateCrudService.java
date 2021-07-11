@@ -23,14 +23,14 @@ import java.util.List;
 
 import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
-import org.sniper.orm.jpa.service.JpaCrudService;
+import org.sniper.orm.jpa.service.JpaService;
 
 /**
  * 具备基本增删改查功能的Hibernate持久化服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface HibernateCrudService<T, PK extends Serializable> extends JpaCrudService<T, PK> {
+public interface HibernateCrudService<T, PK extends Serializable> extends JpaService<T, PK> {
 	
 	/**
 	 * 根据名称持久化指定的实体

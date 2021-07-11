@@ -42,17 +42,18 @@
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
-			<artifactId>sniper-persistence</artifactId>
-			<version>${sniper.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.sniper</groupId>
 			<artifactId>sniper-commons</artifactId>
 			<version>${sniper.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-sqlmap</artifactId>
+			<version>${sniper.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.sniper</groupId>
+			<artifactId>sniper-persistence</artifactId>
 			<version>${sniper.version}</version>
 			<optional>true</optional>
 		</dependency>

@@ -30,14 +30,14 @@ import org.sniper.orm.jpa.dao.JpaDao;
 public interface JpaBeanService<T, PK extends Serializable> {
 	
 	/**
-	 * 设置持久化DAO接口
+	 * 设置JAP数据访问接口(DAO)
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @param jpaDao
 	 */
 	public void setJpaDao(JpaDao<T, PK> jpaDao);
 	
 	/**
-	 * 获取持久化DAO接口
+	 * 获取JAP数据访问接口(DAO)
 	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
 	 * @return
 	 */

@@ -21,7 +21,7 @@ package org.sniper.sqlmap.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.sniper.persistence.sqlmap.SqlMapOperations;
+import org.sniper.sqlmap.SqlMapOperations;
 
 /**
  * SQL映射查询接口

@@ -22,11 +22,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 具备基本增删改查功能的JPA持久化服务接口
+ * 具备基本增删改查功能的JPA服务接口
  * @author  <a href="mailto:code727@gmail.com">杜斌</a>
  * @version 1.0
  */
-public interface JpaCrudService<T, PK extends Serializable> {
+public interface JpaService<T, PK extends Serializable> {
 	
 	/**
 	 * 新增持久化实体对象
