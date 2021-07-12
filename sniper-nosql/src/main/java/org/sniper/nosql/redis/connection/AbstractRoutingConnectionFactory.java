@@ -29,7 +29,7 @@ import org.springframework.data.redis.connection.RedisSentinelConnection;
 
 /**
  * 多路由RedisConnectionFactory抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractRoutingConnectionFactory extends CheckableInitializingBeanAdapter
@@ -93,7 +93,7 @@ public abstract class AbstractRoutingConnectionFactory extends CheckableInitiali
 	
 	/**
 	 * 确定RedisConnectionFactory对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected RedisConnectionFactory determineConnectionFactory() {
@@ -112,7 +112,7 @@ public abstract class AbstractRoutingConnectionFactory extends CheckableInitiali
 	
 	/** 
 	 * 查找RedisConnectionFactory对象的标识键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected abstract Object determineCurrentLookupKey();

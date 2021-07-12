@@ -20,14 +20,14 @@ package org.sniper.persistence.handler;
 
 /**
  * 审核者处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface AuditorHandler {
 	
 	/**
 	 * 获取当前审核人名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getAuditorName();

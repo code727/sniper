@@ -26,7 +26,7 @@ import java.util.Map;
 
 /**
  * 数字工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class NumberUtils {
@@ -70,7 +70,7 @@ public class NumberUtils {
 	
 	/**
 	 * 根据指定的模式获取已定义的数字格式对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pattern
 	 * @return
 	 */
@@ -90,7 +90,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取指定长度的数字格式化对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pattern
 	 * @return
 	 */
@@ -114,7 +114,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的双精度数值，否则返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -124,7 +124,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的双精度数值，否则返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param defaultValue
 	 * @return
@@ -135,7 +135,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的单精度数值，否则返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -145,7 +145,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的双精度数值，否则返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param defaultValue
 	 * @return
@@ -156,7 +156,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的整数值，否则返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return 
 	 */
@@ -166,7 +166,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的整数值，否则返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param defaultValue
 	 * @return 
@@ -177,7 +177,7 @@ public class NumberUtils {
 	
 	/** 
 	 * 获取不为空的长整型数值，否则返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -187,7 +187,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的长整型数值，否则返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param defaultValue
 	 * @return
@@ -198,7 +198,7 @@ public class NumberUtils {
 	
 	/** 
 	 * 获取不为空的短整数值，否则返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -208,7 +208,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的短整数值，否则返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param defaultValue
 	 * @return
@@ -219,7 +219,7 @@ public class NumberUtils {
 	
 	/** 
 	 * 获取不为空的比特数，否则返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -229,7 +229,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的比特数，否则返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param defaultValue
 	 * @return
@@ -240,7 +240,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的BigDecimal，否则返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @return
 	 */
@@ -250,7 +250,7 @@ public class NumberUtils {
 	
 	/**
 	 * 返回不为空BigDecimal
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @param defaultValue
 	 * @return
@@ -263,7 +263,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的BigInteger，否则返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param integer
 	 * @return
 	 */
@@ -273,7 +273,7 @@ public class NumberUtils {
 	
 	/**
 	 * 获取不为空的BigInteger，否则返回指定不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @param defaultValue
 	 * @return
@@ -286,7 +286,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为双精度数值，当对象为空或转换失败时返回空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -296,7 +296,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为双精度数值，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -317,7 +317,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为双精度数值，当对象为空或转换失败时返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -327,7 +327,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为双精度数值，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -338,7 +338,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为单精度数值，当对象为空或转换失败时返回空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -348,7 +348,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为单精度数值，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -369,7 +369,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为单精度数值，当对象为空或转换失败时返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -379,7 +379,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为单精度数值，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -390,7 +390,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为整数值，当对象为空或转换失败时返回空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -400,7 +400,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为整数值，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -425,7 +425,7 @@ public class NumberUtils {
 	
 	/** 
 	 * 将对象转换为整数值，当对象为空或转换失败时返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -435,7 +435,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为整数值，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -446,7 +446,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为长整型数值，当对象为空或转换失败时返回空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -456,7 +456,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为长整型数值，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -477,7 +477,7 @@ public class NumberUtils {
 	
 	/** 
 	 * 将对象转换为长整型数值，当对象为空或转换失败时返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -487,7 +487,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为长整型数值，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -498,7 +498,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为短整型数值，当对象为空或转换失败时返回空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -508,7 +508,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为短整型数值，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -529,7 +529,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为短整型数值，当对象为空或转换失败时返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -539,7 +539,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为短整型数值，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -550,7 +550,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为比特数，当对象为空或转换失败时返回空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -560,7 +560,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为比特数，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -581,7 +581,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为比特数，当对象为空或转换失败时返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -591,7 +591,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为比特数，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -602,7 +602,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为BigInteger，当对象为空或转换失败时返回空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -612,7 +612,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为BigInteger，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -636,7 +636,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为BigInteger，当对象为空或转换失败时返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -646,7 +646,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为BigInteger，当对象为空或转换失败时返回指定不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -658,7 +658,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为BigDecimal，当对象为空或转换失败时返回空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -668,7 +668,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为BigDecimal，当对象为空或转换失败时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -692,7 +692,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为BigDecimal，当对象为空或转换失败时返回0
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -702,7 +702,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将对象转换为BigDecimal，当对象为空或转换失败时返回指定不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param defaultValue
 	 * @return
@@ -714,7 +714,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将数字对象统一转换为BigDecimal
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @return
 	 */
@@ -732,7 +732,7 @@ public class NumberUtils {
 		
 	/**
 	 * 生成指定值之内的随机双精度浮点数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @return
 	 */
@@ -742,7 +742,7 @@ public class NumberUtils {
 	
 	/**
 	 * 生成指定值之内的随机浮点数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @return
 	 */
@@ -752,7 +752,7 @@ public class NumberUtils {
 	
 	/**
 	 * 生成指定值之内的随机整数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @return
 	 */
@@ -762,7 +762,7 @@ public class NumberUtils {
 	
 	/**
 	 * 生成指定值之内的随机长整数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @return
 	 */
@@ -772,7 +772,7 @@ public class NumberUtils {
 	
 	/**
 	 * 生成指定值之内的随机短整数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @return
 	 */
@@ -782,7 +782,7 @@ public class NumberUtils {
 	
 	/**
 	 * 生成指定值之内的随机比特数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @return
 	 */
@@ -792,7 +792,7 @@ public class NumberUtils {
 		
 	/**
 	 * 产生[min,max]区间内的随机整数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param min
 	 * @param max
 	 * @return
@@ -803,7 +803,7 @@ public class NumberUtils {
 	
 	/**
 	 * 产生[min,max]区间内的随机长整数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param min
 	 * @param max
 	 * @return
@@ -814,7 +814,7 @@ public class NumberUtils {
 		
 	/**
 	 * 将指定值限定在[limit,+∞)区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -825,7 +825,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[limit,+∞)区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -836,7 +836,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在最小范围外
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param i
 	 * @param value
 	 * @return
@@ -847,7 +847,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[limit,+∞)区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -858,7 +858,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[limit,+∞)区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -869,7 +869,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[limit,+∞)区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -880,7 +880,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[limit,+∞)区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -891,7 +891,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在(-∞,limit]区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -902,7 +902,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在(-∞,limit]区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -913,7 +913,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在(-∞,limit]区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -924,7 +924,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在(-∞,limit]区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -935,7 +935,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在(-∞,limit]区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -946,7 +946,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在(-∞,limit]区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -957,7 +957,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在(-∞,limit]区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param limit
 	 * @return
@@ -968,7 +968,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[minLimit,maxLimit]区间内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
@@ -981,7 +981,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[minLimit,maxLimit]区间内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
@@ -994,7 +994,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[minLimit,maxLimit]区间内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
@@ -1007,7 +1007,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[minLimit,maxLimit]区间内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
@@ -1020,7 +1020,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[minLimit,maxLimit]区间内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
@@ -1033,7 +1033,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[minLimit,maxLimit]区间内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
@@ -1046,7 +1046,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将指定值限定在[minLimit,maxLimit]区间内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param minLimit
 	 * @param maxLimit
@@ -1059,7 +1059,7 @@ public class NumberUtils {
 		
 	/**
 	 * 判断数字是否大于指定的字符ASCII码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @param c
 	 * @return
@@ -1070,7 +1070,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断number1是否大于number2
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @return
@@ -1084,7 +1084,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断obj1代表的数字是否大于obj2代表的数字
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj1
 	 * @param obj2
 	 * @return
@@ -1095,7 +1095,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断数字是否大于等于指定的字符ASCII码值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @param c
 	 * @return
@@ -1106,7 +1106,7 @@ public class NumberUtils {
 		
 	/**
 	 * 判断number1是否大于等于number2
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @return
@@ -1120,7 +1120,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断obj1代表的数字是否大于等于obj2代表的数字
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj1
 	 * @param obj2
 	 * @return
@@ -1131,7 +1131,7 @@ public class NumberUtils {
 		
 	/**
 	 * 判断数字是否小于等于指定的字符ASCII码值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @param c
 	 * @return
@@ -1142,7 +1142,7 @@ public class NumberUtils {
 		
 	/**
 	 * 判断number1是否小于等于number2
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @return
@@ -1156,7 +1156,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断obj1代表的数字是否小于等于obj2代表的数字
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj1
 	 * @param obj2
 	 * @return
@@ -1167,7 +1167,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断数字是否小于指定的字符ASCII码值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @param c
 	 * @return
@@ -1178,7 +1178,7 @@ public class NumberUtils {
 		
 	/**
 	 * 判断number1是否小于number2
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @return
@@ -1192,7 +1192,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断obj1代表的数字是否小于obj2代表的数字
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj1
 	 * @param obj2
 	 * @return
@@ -1203,7 +1203,7 @@ public class NumberUtils {
 			
 	/**
 	 * 判断数字是否等于指定的字符ASCII码值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @param c
 	 * @return
@@ -1214,7 +1214,7 @@ public class NumberUtils {
 		
 	/**
 	 * 判断number1是否等于number2
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @return
@@ -1228,7 +1228,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断两个对象代表的数字是否相等
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj1
 	 * @param obj2
 	 * @return
@@ -1239,7 +1239,7 @@ public class NumberUtils {
 	
 	/**
 	 * 计算decimal + number的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @param number
 	 * @return
@@ -1250,7 +1250,7 @@ public class NumberUtils {
 			
 	/**
 	 * 计算number1 + number2的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @return
@@ -1263,7 +1263,7 @@ public class NumberUtils {
 		
 	/**
 	 * 计算decimal - number的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @param number
 	 * @return
@@ -1274,7 +1274,7 @@ public class NumberUtils {
 		
 	/**
 	 * 计算number1 - number2的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @return
@@ -1287,7 +1287,7 @@ public class NumberUtils {
 		
 	/**
 	 * 计算decimal * number的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @param number
 	 * @return
@@ -1298,7 +1298,7 @@ public class NumberUtils {
 		
 	/**
 	 * 计算number1 * number2的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @return
@@ -1311,7 +1311,7 @@ public class NumberUtils {
 		
 	/**
 	 * 计算decimal ÷ number的值，返回整数结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @param number
 	 * @return
@@ -1322,7 +1322,7 @@ public class NumberUtils {
 	
 	/**
 	 * 计算decimal ÷ number的值，并保留scale位小数后返回最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @param number
 	 * @param scale
@@ -1334,7 +1334,7 @@ public class NumberUtils {
 	
 	/**
 	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @param number
 	 * @param roundingMode
@@ -1346,7 +1346,7 @@ public class NumberUtils {
 	
 	/**
 	 * 计算decimal ÷ number的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param decimal
 	 * @param number
 	 * @param scale
@@ -1359,7 +1359,7 @@ public class NumberUtils {
 		 
 	/**
 	 * 计算number1 ÷ number2的值，返回整数结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @return
@@ -1370,7 +1370,7 @@ public class NumberUtils {
 	
 	/**
 	 * 计算number1 ÷ number2的值，并保留scale位小数后返回最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @param scale
@@ -1382,7 +1382,7 @@ public class NumberUtils {
 	
 	/**
 	 * 计算number1 ÷ number2的值，并以roundingMode指定的四舍五入除不尽的小数后返回最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @param roundingMode
@@ -1394,7 +1394,7 @@ public class NumberUtils {
 	
 	/**
 	 * 计算number1 ÷ number2的值，并以roundingMode指定的四舍五入的形式保留scale位小数后返回最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number1
 	 * @param number2
 	 * @param scale
@@ -1409,7 +1409,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将字符ASCII码转化为指定格式的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @param pattern
 	 * @return
@@ -1420,7 +1420,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将字符ASCII码转化为固定长度的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @param length
 	 * @return
@@ -1431,7 +1431,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将数字转化为指定格式的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @param pattern
 	 * @return
@@ -1448,7 +1448,7 @@ public class NumberUtils {
 	
 	/**
 	 * 将数字转化为固定长度的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @param length
 	 * @return
@@ -1463,7 +1463,7 @@ public class NumberUtils {
 			
 	/**
 	 * 绝对值取反
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param a
 	 * @return
 	 */
@@ -1473,7 +1473,7 @@ public class NumberUtils {
 	
 	/**
 	 * 绝对值取反
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param a
 	 * @return
 	 */
@@ -1483,7 +1483,7 @@ public class NumberUtils {
 	
 	/**
 	 * 绝对值取反
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param a
 	 * @return
 	 */
@@ -1493,7 +1493,7 @@ public class NumberUtils {
 	
 	/**
 	 * 绝对值取反
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param a
 	 * @return
 	 */
@@ -1503,7 +1503,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断是否为一个奇数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @return
 	 */
@@ -1513,7 +1513,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断字符串表示的数字是否为一个奇数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @return
 	 */
@@ -1523,7 +1523,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断是否为一个偶数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @return
 	 */
@@ -1533,7 +1533,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断字符串表示的数字是否为一个偶数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @return
 	 */
@@ -1543,7 +1543,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断字符串表示的数字是否为一个奇数，并且选择在判断前是否校验数字的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @param validation
 	 * @return
@@ -1558,7 +1558,7 @@ public class NumberUtils {
 	
 	/**
 	 * 判断字符串表示的数字是否为一个偶数，并且选择在判断前是否校验数字的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @param validation
 	 * @return

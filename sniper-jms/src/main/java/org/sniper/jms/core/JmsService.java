@@ -20,7 +20,7 @@ package org.sniper.jms.core;
 
 /**
  * JMS生产/消费服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface JmsService extends ProducerService, ConsumerService {

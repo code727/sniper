@@ -24,28 +24,28 @@ import org.sniper.jms.core.strategy.ConsumeStrategy;
 
 /**
  * JMS消费策略管理接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ConsumeStrategiesManager {
 	
 	/**
 	 * 设置消费策略映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param strategies
 	 */
 	public void setStrategies(Map<String, ConsumeStrategy> strategies);
 	
 	/**
 	 * 设置消费策略映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<String, ConsumeStrategy> getStrategies();
 	
 	/**
 	 * 获取指定名称的消费策略
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */

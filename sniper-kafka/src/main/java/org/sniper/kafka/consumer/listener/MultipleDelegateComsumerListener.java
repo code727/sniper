@@ -27,7 +27,7 @@ import org.sniper.kafka.support.ConsumeResult;
 
 /**
  * 多委派消费者监听实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MultipleDelegateComsumerListener<K, V> extends DelegateComsumerListener<K, V> {
@@ -64,7 +64,7 @@ public class MultipleDelegateComsumerListener<K, V> extends DelegateComsumerList
 	
 	/**
 	 * 根据实际消费结果选择对应的委派代表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param consumeResult
 	 * @return
 	 */

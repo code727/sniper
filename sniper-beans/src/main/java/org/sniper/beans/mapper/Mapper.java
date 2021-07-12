@@ -22,14 +22,14 @@ import java.util.Set;
 
 /**
  * 参数映射器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Mapper<S, T> extends ConfigurableMapper {
 	
 	/**
 	 * 将源对象进行映射处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @return
 	 * @throws Exception
@@ -38,7 +38,7 @@ public interface Mapper<S, T> extends ConfigurableMapper {
 	
 	/**
 	 * 将源对象按照指定规则进行映射处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @param mapperRules
 	 * @return

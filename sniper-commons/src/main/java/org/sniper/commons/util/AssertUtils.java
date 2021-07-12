@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * 断言工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0.0
  */
 public class AssertUtils {
@@ -131,7 +131,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言不全为空白字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param str
 	 */
 	public static void assertNotBlank(String str) {
@@ -140,7 +140,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言不全为空白字符串，否则抛出自定义的异常信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param str
 	 * @param message 
 	 */
@@ -150,7 +150,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言数组不为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param array
 	 */
 	public static <T> void assertNotEmpty(T[] array) {
@@ -159,7 +159,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言数组不为空，否则抛出自定义的异常信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param array
 	 * @param message
 	 */
@@ -169,7 +169,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言集合不为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 */
 	public static <T> void assertNotEmpty(Collection<T> collection) {
@@ -178,7 +178,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言集合不为空，否则抛出自定义的异常信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param message
 	 */
@@ -188,7 +188,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言集合不为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param map
 	 */
 	public static <K, V> void assertNotEmpty(Map<K, V> map) {
@@ -197,7 +197,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言集合不为空，否则抛出自定义的异常信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param map
 	 * @param message
 	 */

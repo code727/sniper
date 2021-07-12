@@ -34,7 +34,7 @@ import org.sniper.spring.beans.CheckableInitializingBean;
 
 /**
  * 默认的FastDFS集群族实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultCluster extends CheckableInitializingBean implements Cluster {
@@ -231,7 +231,7 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	
 	/**
 	 * 构建Tracker集群族可访问的内网URL 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	private void buildTrackerClusterIntranetAccessURL() {
 		this.trackerClusterIntranetAccessURL = NetUtils.toURL(this.protocol,
@@ -240,7 +240,7 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	
 	/**
 	 * 构建Tracker集群族可访问的外网URL 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	private void buildTrackerClusterInternetAccessURL() {
 		this.trackerClusterInternetAccessURL = NetUtils.toURL(this.protocol,
@@ -249,7 +249,7 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	
 	/**
 	 * 构建Tracker节点可访问的内网URL映射集 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	private void buildTrackerIntranetAccessURLMap() {
 		this.trackerIntranetAccessURLMap = MapUtils.newHashMap();
@@ -265,7 +265,7 @@ public class DefaultCluster extends CheckableInitializingBean implements Cluster
 	
 	/**
 	 * 构建StorageGroup集群组以及组内各节点可访问的URL映射集 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	private void buildStorageGroupAndNodeAccessURLMap() {
 		this.storageGroupIntranetAccessURLMap = MapUtils.newHashMap();

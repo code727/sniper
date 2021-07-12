@@ -22,7 +22,7 @@ import java.io.Serializable;
 
 /**
  * Q因子接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface QualityFactor extends Serializable {
@@ -38,14 +38,14 @@ public interface QualityFactor extends Serializable {
 	
 	/**
 	 * 获取质量价值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public double getQualityValue();
 	
 	/**
 	 * 设置质量价值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param qualityValue
 	 */
 	public void setQualityValue(double qualityValue);

@@ -23,7 +23,7 @@ import java.nio.channels.Channel;
 
 /**
  * NIO工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class NIOUtils {
@@ -32,7 +32,7 @@ public class NIOUtils {
 	
 	/**
 	 * 关闭通道
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param channel
 	 * @throws IOException
 	 */

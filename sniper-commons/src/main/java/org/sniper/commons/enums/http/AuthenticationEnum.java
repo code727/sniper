@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * 身份认证类型枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum AuthenticationEnum {
@@ -61,7 +61,7 @@ public enum AuthenticationEnum {
 
 	/**
 	 * 判断指定的类型是否匹配当前枚举
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public enum AuthenticationEnum {
 
 	/**
 	 * 将指定的类型解析成枚举对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 * @return
 	 */

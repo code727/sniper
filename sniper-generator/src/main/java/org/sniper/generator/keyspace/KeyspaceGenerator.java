@@ -25,14 +25,14 @@ import org.sniper.support.Namespace;
 
 /**
  * 基于键空间的生成器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface KeyspaceGenerator<K, V> extends Generator<V>, Namespace<K> {
 	
 	/**
 	 * 根据指定的键生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -40,7 +40,7 @@ public interface KeyspaceGenerator<K, V> extends Generator<V>, Namespace<K> {
 	
 	/**
 	 * 根据指定的键批量生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param count
 	 * @return

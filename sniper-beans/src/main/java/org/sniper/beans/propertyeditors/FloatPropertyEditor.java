@@ -20,7 +20,7 @@ package org.sniper.beans.propertyeditors;
 
 /**
  * 单精度浮点数属性编辑器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class FloatPropertyEditor extends AbstractNumberPropertyEditor {

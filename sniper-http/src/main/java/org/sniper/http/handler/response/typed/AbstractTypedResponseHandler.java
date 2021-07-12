@@ -23,7 +23,7 @@ import org.sniper.serialization.TypedSerializer;
 
 /**
  * 类型化响应处理器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractTypedResponseHandler implements TypedResponseHandler {
@@ -45,7 +45,7 @@ public abstract class AbstractTypedResponseHandler implements TypedResponseHandl
 	
 	/**
 	 * 构建默认的类型化序列器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected abstract TypedSerializer buildDefaultTypedSerializer();

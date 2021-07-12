@@ -22,14 +22,14 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * FastDFS访问器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractAccessor extends AccessorSupport {
 	
 	/**
 	 * 根据URL和路径包装后返回完整可访问的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url
 	 * @param path
 	 * @return

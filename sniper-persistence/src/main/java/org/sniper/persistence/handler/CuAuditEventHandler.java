@@ -24,7 +24,7 @@ import org.sniper.commons.entity.CuAuditable;
 
 /**
  * 新增更新审核事件处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class CuAuditEventHandler extends AbstractAuditEventHandler<CuAuditable> {

@@ -24,105 +24,105 @@ import org.springframework.jms.support.converter.MessageConverter;
 
 /**
  * JMS会话访问策略接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SharedStrategy {
 	
 	/**
 	 * 设置是否采用发布/订阅方式发送或接收消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pubSubDomain
 	 */
 	public void setPubSubDomain(boolean pubSubDomain);
 	
 	/**
 	 * 判断是否采用发布/订阅方式发送或接收消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isPubSubDomain();
 	
 	/**
 	 * 设置是否使用事务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sessionTransacted
 	 */
 	public void setSessionTransacted(boolean sessionTransacted);
 	
 	/**
 	 * 判断是否使用了事务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isSessionTransacted();
 	
 	/**
 	 * 设置会话确认模式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sessionAcknowledgeMode
 	 */
 	public void setSessionAcknowledgeMode(int sessionAcknowledgeMode);
 	
 	/**
 	 * 获取会话确认模式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getSessionAcknowledgeMode();
 	
 	 /**
      * 设置消息的目的地
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param destination
      */
     public void setDestination(Destination destination);
 
     /**
      * 获取消息的目的地
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @return
      */
     public Destination getDestination();
     
     /**
      * 设置消息转换器
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param messageConverter
      */
     public void setMessageConverter(MessageConverter messageConverter);
 
     /**
      * 获取消息转换器
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @return
      */
 	public MessageConverter getMessageConverter();
 
 	/**
      * 设置消息的转发模式
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param deliveryMode
      */
     public void setDeliveryMode(int deliveryMode);
 
     /**
      * 获取消息的转发模式
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @return
      */
     public int getDeliveryMode();
 
 	/** 
 	 * 设置当抛出异常时，是否自动回滚事务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param autoRollback 
 	 */
     public void setAutoRollback(boolean autoRollback);
 
 	/** 
 	 * 判断当抛出异常时，是否自动回滚事务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return 
 	 */
     public boolean isAutoRollback();

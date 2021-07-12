@@ -20,14 +20,14 @@ package org.sniper.resource.fastdfs.support;
 
 /**
  * FastDFS操作接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FastOperations extends FastUploader, FastDownloader, FastDeleter {
 	
 	/**
 	 * 执行回调操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param action
 	 * @return
 	 * @throws Exception
@@ -36,7 +36,7 @@ public interface FastOperations extends FastUploader, FastDownloader, FastDelete
 	
 	/**
 	 * 在指定组上执行回调操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param groupName
 	 * @param action
 	 * @return
@@ -46,7 +46,7 @@ public interface FastOperations extends FastUploader, FastDownloader, FastDelete
 	
 	/**
 	 * 在指定组上执行回调操作，并指定完成操作后是否自动释放连接
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param groupName
 	 * @param action
 	 * @param autoRelease

@@ -20,14 +20,14 @@ package org.sniper.support.operation.logic;
 
 /**
  * 逻辑运算接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface LogicOperation<T1, T2> {
 	
 	/**
 	 * 执行两对象之间的逻辑运算，并返回逻辑结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj1
 	 * @param obj2
 	 * @return

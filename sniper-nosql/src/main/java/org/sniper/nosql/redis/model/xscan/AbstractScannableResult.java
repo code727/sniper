@@ -20,7 +20,7 @@ package org.sniper.nosql.redis.model.xscan;
 
 /**
  * 可扫描的结果抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractScannableResult<T> implements ScannableResult<T> {

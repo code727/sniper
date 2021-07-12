@@ -24,7 +24,7 @@ import org.sniper.kafka.topic.ConsumeTopic;
 
 /**
  * 消费结果
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ConsumeResult<K, V> implements Serializable {

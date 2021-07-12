@@ -27,7 +27,7 @@ import org.sniper.http.headers.MediaType;
 
 /**
  * HttpClient消息构建器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractHttpClientMessageBuilder extends AbstractHttpMessageBuilder<HttpEntity> {
@@ -38,7 +38,7 @@ public abstract class AbstractHttpClientMessageBuilder extends AbstractHttpMessa
 	
 	/**
 	 * 创建HttpClient ContentType对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mediaType
 	 * @param encoding
 	 * @return

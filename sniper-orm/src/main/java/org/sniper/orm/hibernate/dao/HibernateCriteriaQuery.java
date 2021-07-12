@@ -24,14 +24,14 @@ import org.hibernate.criterion.DetachedCriteria;
 
 /**
  * Hibernate标准化查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface HibernateCriteriaQuery<T> {
 	
 	/**
 	 * 执行标准化查询后返回当前类型的唯一实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter 条件参数对象
 	 * @param callback 查询回调
 	 * @return
@@ -40,7 +40,7 @@ public interface HibernateCriteriaQuery<T> {
 	
 	/**
 	 * 执行标准化查询后返回当前类型的唯一实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param criteria
 	 * @return
 	 */
@@ -48,7 +48,7 @@ public interface HibernateCriteriaQuery<T> {
 	
 	/**
 	 * 执行标准化查询后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter 条件参数对象
 	 * @param callback 查询回调
 	 * @return
@@ -57,7 +57,7 @@ public interface HibernateCriteriaQuery<T> {
 	
 	/**
 	 * 从起始位置开始 执行标准化查询后返回最大行数当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter 条件参数对象
 	 * @param start
 	 * @param maxRows
@@ -68,7 +68,7 @@ public interface HibernateCriteriaQuery<T> {
 	
 	/**
 	 * 执行标准化查询后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param criteria
 	 * @return
 	 */
@@ -76,7 +76,7 @@ public interface HibernateCriteriaQuery<T> {
 	
 	/**
 	 * 从起始位置开始 执行标准化查询后返回最大行数当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param criteria
 	 * @param start
 	 * @param maxRows
@@ -86,7 +86,7 @@ public interface HibernateCriteriaQuery<T> {
 	
 	/**
 	 * 查询出当前类型并满足参数条件的实体对象总数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter 条件参数对象
 	 * @param callback 查询回调
 	 * @return
@@ -95,7 +95,7 @@ public interface HibernateCriteriaQuery<T> {
 	
 	/**
 	 * 查询出当前类型并满足参数条件的实体对象总数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter 条件参数对象
 	 * @param distinct 是否加上distinct关键字查询
 	 * @param callback 查询回调
@@ -105,7 +105,7 @@ public interface HibernateCriteriaQuery<T> {
 	
 	/**
 	 * 查询出当前类型并满足参数条件的实体对象总数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param criteria
 	 * @return
 	 */
@@ -113,7 +113,7 @@ public interface HibernateCriteriaQuery<T> {
 	
 	/**
 	 * 查询出当前类型并满足参数条件的实体对象总数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param criteria
 	 * @param distinct 是否加上distinct关键字查询
 	 * @return

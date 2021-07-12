@@ -49,7 +49,7 @@ import org.sniper.serialization.jdk.StringSerializer;
 
 /**
  * Redis支持类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class RedisSupport extends RedisAccessor {
@@ -222,7 +222,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 初始化全局序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	protected void initializeGlobalSerializers() {
 		if (this.defaultSerializer == null)
@@ -231,14 +231,14 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 初始化默认连接库索引
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws Exception
 	 */
 	protected abstract void initializeDefaultDbIndex() throws Exception;
 	
 	/**
 	 * 获取默认连接库的索引
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected int getDefaultDbIndex() {
@@ -247,7 +247,7 @@ public abstract class RedisSupport extends RedisAccessor {
 		
 	/**
 	 * 获取过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param expireSeconds
 	 * @param repository
 	 * @return
@@ -261,7 +261,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 获取过期毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param expireMillis
 	 * @param repository
 	 * @return
@@ -275,7 +275,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 获取过期毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param expireTime
 	 * @param timeUnit
 	 * @param repository
@@ -293,7 +293,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 选择指定库的键序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @return 
 	 */
@@ -311,7 +311,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 选择指定库的值序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @return
 	 */
@@ -329,7 +329,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 选择指定库的哈希键序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @return
 	 */
@@ -347,7 +347,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 选择指定库的哈希值序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @return
 	 */
@@ -365,7 +365,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的键字节序列化到Byte类型的数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -376,7 +376,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个键字节序列化到Byte类型的二维数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -394,7 +394,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的值字节序列化到Byte类型的数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param value
 	 * @return
@@ -405,7 +405,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个值字节序列化到Byte类型的二维数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param values
 	 * @return
@@ -423,7 +423,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/** 
 	 * 将指定库的键值映射集序列化成Byte类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param kValues
 	 * @return 
@@ -444,7 +444,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的哈希键序列化到字节数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param hashKey
 	 * @return
@@ -455,7 +455,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个哈希键序列化到Byte类型的二维数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param hashKeys 哈希键数组
 	 * @return
@@ -473,7 +473,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的哈希值序列化到字节数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param hashValue
 	 * @return
@@ -484,7 +484,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的哈希键值对进行序列化
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param hashKeyValues
 	 * @return
@@ -505,7 +505,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个键字节反序列化到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keyByte
 	 * @param keyType
@@ -524,7 +524,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个键字节反序列化到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keyBytes
 	 * @param keyType
@@ -561,7 +561,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个键字节反序列化到列表中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keyBytes
 	 * @param keyType
@@ -598,7 +598,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的值字节反序列后返回
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param valueByte
 	 * @param valueType
@@ -615,7 +615,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个值字节反序列化到列表中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param valueBytes
 	 * @param valueType
@@ -651,7 +651,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个值字节反序列化到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param valueBytes
 	 * @param valueType
@@ -687,7 +687,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个域字节反序列化到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param hashKeyBytes
 	 * @param hashKeyBytes
@@ -725,7 +725,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个哈希键值对字节反序列化到映射集中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param hashKeyValueBytes
 	 * @param hashKeyType
@@ -810,7 +810,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的哈希键值对列表反序列化到映射集中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param hashKeyValueBytes
 	 * @param hashKeyType
@@ -899,7 +899,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的哈希值字节反序列后返回
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param hashValueByte
 	 * @param hashValueType
@@ -916,7 +916,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个哈希值字节反序列化到列表中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param hashValueBytes
 	 * @param hashValueType
@@ -953,7 +953,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将指定库的多个排名成员字节反序列化到映射集中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param scoreMemberBytes
 	 * @param valueType
@@ -993,7 +993,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将已扫描得到的列表转换为键增量迭代结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param scanned
 	 * @param keyType
@@ -1008,7 +1008,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将已扫描得到的列表转换为集合增量迭代结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param scanned
 	 * @param valueType
@@ -1023,7 +1023,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将已扫描得到的列表转换为哈希增量迭代结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param scanned
 	 * @param hashKeyType
@@ -1041,7 +1041,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将已扫描得到的列表转换为有序集合增量迭代结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param scanned
 	 * @param valueType
@@ -1056,7 +1056,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将游标ID和增量迭代选项转换为命令行参数列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param cursorId
 	 * @param option
 	 * @return
@@ -1072,7 +1072,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将键、游标ID和增量迭代选项转换为命令行参数列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -1091,7 +1091,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将已序列化的键添加到命令行参数列表中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param commandArgs
 	 * @param dbName
 	 * @param key
@@ -1102,7 +1102,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将已序列化的游标ID添加到命令行参数列表中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param commandArgs
 	 * @param cursorId
 	 */
@@ -1112,7 +1112,7 @@ public abstract class RedisSupport extends RedisAccessor {
 	
 	/**
 	 * 将已序列化的增量迭代选项添加到命令行参数列表中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param commandArgs
 	 * @param option
 	 */

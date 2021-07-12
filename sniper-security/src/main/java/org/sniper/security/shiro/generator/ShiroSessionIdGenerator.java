@@ -22,35 +22,35 @@ import org.apache.shiro.session.mgt.eis.SessionIdGenerator;
 
 /**
  * Shiro SessionID生成器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ShiroSessionIdGenerator extends SessionIdGenerator {
 	
 	/**
 	 * 设置前缀
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param prefix
 	 */
 	public void setPrefix(String prefix);
 	
 	/**
 	 * 获取前缀
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getPrefix();
 	
 	/**
 	 * 设置后缀
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param suffix
 	 */
 	public void setSuffix(String suffix);
 	
 	/**
 	 * 获取后缀
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getSuffix();

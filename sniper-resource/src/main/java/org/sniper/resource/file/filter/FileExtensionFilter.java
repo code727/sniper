@@ -24,54 +24,54 @@ import java.util.List;
 
 /**
  * 文件扩展过滤器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FileExtensionFilter extends FileFilter {
 	
 	/**
 	 * 判断过滤操作是否包含根文件/目录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isContainsRoot();
 	
 	/** 
 	 * 设置过滤操作是否包含根文件/目录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param containsRoot
 	 */
 	public void setContainsRoot(boolean containsRoot);
 		
 	/**
 	 * 设置开始过滤的根目录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param root
 	 */
 	public void setRoot(File root);
 	
 	/**
 	 * 获取开始过滤的根目录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public File getRoot();
 	
 	/**
 	 * 执行过滤操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	public void execute();
 	
 	/**
 	 * 清空结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	public void clear();
 	
 	/**
 	 * 获取满足过滤条件的结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<File> list();

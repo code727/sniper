@@ -20,35 +20,35 @@ package org.sniper.resource.file.filter;
 
 /**
  * 本地文件字符串值过滤器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FileStringFilter extends FileExtensionFilter {
 	
 	/**
 	 * 获取字符串过滤值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getFilterValue();
 	
 	/**
 	 * 设置字符串过滤值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param filterValue
 	 */
 	public void setFilterValue(String filterValue);
 	
 	/**
 	 * 是否忽略大小写
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 * @return 
 	 */
 	public boolean isIgnoreCase();
 	
 	/**
 	 * 设置是否忽略大小写
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 * @param ignoreCase 
 	 */
 	public void setIgnoreCase(boolean ignoreCase);

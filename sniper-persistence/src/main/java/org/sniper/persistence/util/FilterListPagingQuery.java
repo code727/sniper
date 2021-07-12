@@ -24,21 +24,21 @@ import org.sniper.commons.request.PagingQuery;
 
 /**
  * 带属性过滤器列表的分页查询对象
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FilterListPagingQuery extends PagingQuery {
 	
 	/**
 	 * 设置属性过滤器列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param filterList
 	 */
 	public void setFilterList(List<PersistencePropertyFilter> filterList);
 	
 	/**
 	 * 获取属性过滤器列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<PersistencePropertyFilter> getFilterList();

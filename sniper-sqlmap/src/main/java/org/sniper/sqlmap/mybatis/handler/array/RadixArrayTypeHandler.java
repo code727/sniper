@@ -20,7 +20,7 @@ package org.sniper.sqlmap.mybatis.handler.array;
 
 /**
  * 有进制要求的数组类型处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class RadixArrayTypeHandler<T> extends ArrayTypeHandler<T> {

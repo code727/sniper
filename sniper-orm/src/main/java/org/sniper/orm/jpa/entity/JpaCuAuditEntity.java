@@ -25,11 +25,11 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
 import org.sniper.commons.entity.CuAuditEntity;
-import org.sniper.persistence.CuAuditEventListener;
+import org.sniper.persistence.listener.CuAuditEventListener;
 
 /**
  * JPA可进行新增修改审核的实体抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @MappedSuperclass

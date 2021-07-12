@@ -22,28 +22,28 @@ import java.io.Serializable;
 
 /**
  * 可排序的请求
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SortableRequest extends Serializable {
 	
 	/**
 	 * 获取需要排序的字段名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getSortName();
 
 	/**
 	 * 设置需要排序的字段名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sortName
 	 */
 	public void setSortName(String sortName);
 	
 	/**
 	 * 设置排序模式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sortMode
 	 * @return
 	 */
@@ -51,14 +51,14 @@ public interface SortableRequest extends Serializable {
 	
 	/**
 	 * 获取排序模式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getSortMode();
 
 	/**
 	 * 获取排序方案
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getSortSchema();

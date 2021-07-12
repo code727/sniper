@@ -24,7 +24,7 @@ import org.sniper.nosql.redis.enums.GeoDistanceUnit;
 
 /**
  * GEO距离对象
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class GeoDistance implements Serializable {
@@ -56,7 +56,7 @@ public class GeoDistance implements Serializable {
 	
 	/**
 	 * 将当前值转换为单位为"米"的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public double toMeters() {
@@ -65,7 +65,7 @@ public class GeoDistance implements Serializable {
 	
 	/**
 	 * 将当前值转换为单位为"千米"的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public double toKilometers() {
@@ -74,7 +74,7 @@ public class GeoDistance implements Serializable {
 	
 	/**
 	 * 当前值转换为单位为"英里"的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public double toMiles() {
@@ -83,7 +83,7 @@ public class GeoDistance implements Serializable {
 	
 	/**
 	 * 当前值转换为单位为"英尺"的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public double toFeet() {

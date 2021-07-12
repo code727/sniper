@@ -35,7 +35,7 @@ import org.sniper.kafka.topic.TopicNode;
 
 /**
  * Kafka生产者支持抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
@@ -89,7 +89,7 @@ public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
 	
 	/**
 	 * 根据名称获取Topic节点上注册的生产回调事件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -103,7 +103,7 @@ public abstract class SpringKafkaProducerSupport extends KafkaProducerSupport {
 	/**
 	 * 创建生产回调，此方法和KafkaTemplate doSend方法内部创建callback的逻辑基本一致
 	 * 只是在生产成功时将自定义的ProduceResult对象设置到future中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param future
 	 * @param producer
 	 * @param producerRecord

@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * Content-Disposition消息头类型枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum ContentDispositionEnum {
@@ -59,7 +59,7 @@ public enum ContentDispositionEnum {
 
 	/**
 	 * 判断指定的类型是否匹配当前枚举
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public enum ContentDispositionEnum {
 
 	/**
 	 * 将指定的类型解析成枚举对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 * @return
 	 */

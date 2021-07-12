@@ -23,14 +23,14 @@ import org.sniper.resource.fastdfs.node.Tracker;
 
 /**
  * 集群访问接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ClusterAccessor {
 	
 	/**
 	 * 根据名称获取集群族内的Tracker
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -38,7 +38,7 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 根据路径前缀获取StorageGroup
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathPrefix
 	 * @return
 	 */
@@ -46,7 +46,7 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 根据路径前缀获取StorageGroup内指定索引位的Storage
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathPrefix
 	 * @param index
 	 * @return
@@ -55,7 +55,7 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 根据路径前缀获取StorageGroup内第一个Storage
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathPrefix
 	 * @return
 	 */
@@ -63,7 +63,7 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 根据路径前缀获取StorageGroup内最后一个Storage
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathPrefix
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 根据路径前缀获取StorageGroup内随机的一个Storage
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathPrefix
 	 * @return
 	 */
@@ -79,21 +79,21 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 获取整个Tracker族提供的内网访问URL地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getTrackerClusterIntranetAccessURL();
 	
 	/**
 	 * 获取整个Tracker族提供的外网访问URL地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getTrackerClusterInternetAccessURL();
 	
 	/**
 	 * 根据路径前缀获取StorageGroup提供的内网访问URL地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathPrefix
 	 * @return
 	 */
@@ -101,7 +101,7 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 根据路径前缀获取StorageGroup提供的外网访问URL地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathPrefix
 	 * @return
 	 */
@@ -109,7 +109,7 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 根据名称获取Tracker节点提供的内网访问URL地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -117,7 +117,7 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 根据路径前缀获取StorageGroup内指定索引位Storage节点提供的内网访问URL地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathPrefix
 	 * @param index
 	 * @return
@@ -126,7 +126,7 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 根据路径前缀获取StorageGroup内第一个Storage节点提供的内网访问URL地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathPrefix
 	 * @return
 	 */
@@ -134,7 +134,7 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 根据路径前缀获取StorageGroup内最后一个Storage节点提供的内网访问URL地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathPrefix
 	 * @return
 	 */
@@ -142,7 +142,7 @@ public interface ClusterAccessor {
 	
 	/**
 	 * 根据路径前缀获取StorageGroup内随机的一个Storage节点提供的内网访问URL地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathPrefix
 	 * @return
 	 */

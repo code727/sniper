@@ -22,7 +22,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 同时采用"登录名[用户名]"格式作为审核者名称的处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class LUPrincipalAuditorHandler extends AbstractPrincipalAuditorHandler {

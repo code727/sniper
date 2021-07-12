@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * 覆盖重复键处理器，当put键出现重复时则直接覆盖对应的原值
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class CoverageDulicateKeyHandler implements KeyHandler {

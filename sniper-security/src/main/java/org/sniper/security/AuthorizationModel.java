@@ -20,7 +20,7 @@ package org.sniper.security;
 
 /**
  * 授权规则模型对象
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class AuthorizationModel {

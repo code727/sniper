@@ -25,7 +25,7 @@ import org.sniper.spring.beans.CheckableInitializingBeanAdapter;
 
 /**
  * 方法前置型拦截切面抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractMethodBeforeAdvice extends CheckableInitializingBeanAdapter
@@ -38,7 +38,7 @@ public abstract class AbstractMethodBeforeAdvice extends CheckableInitializingBe
 	
 	/**
 	 * 执行前置拦截任务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 * @param args
 	 * @param target

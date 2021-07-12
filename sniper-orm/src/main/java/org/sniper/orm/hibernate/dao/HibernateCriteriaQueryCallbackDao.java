@@ -22,7 +22,7 @@ package org.sniper.orm.hibernate.dao;
  * Hibernate标准查询回调DAO抽象类。</P>
  * 它在HibernateCriteriaQueryCallback的基础上可以设置上层对象(如Service)传入的查询参数，
  * 可以真正完全独立的在DAO中处理属于JPA的业务，而不必混杂在上层对象中来处理。
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class HibernateCriteriaQueryCallbackDao<P> implements HibernateCriteriaQueryCallback {
@@ -32,7 +32,7 @@ public abstract class HibernateCriteriaQueryCallbackDao<P> implements HibernateC
 	
 	/**
 	 * 设置查询参数对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter
 	 */
 	public void setParameter(P parameter) {
@@ -41,7 +41,7 @@ public abstract class HibernateCriteriaQueryCallbackDao<P> implements HibernateC
 	
 	/**
 	 * 获取查询参数对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public P getParameter() {

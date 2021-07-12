@@ -28,7 +28,7 @@ import javax.crypto.Cipher;
 
 /**
  * RSA加解密算法实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>	
+ * @author  Daniele	
  * @version 1.0
  */
 public class RSAAlgorithm extends CipherAsymmetricAlgorithm {
@@ -52,7 +52,7 @@ public class RSAAlgorithm extends CipherAsymmetricAlgorithm {
 	
 	/**
 	 * 构建公钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keyPair
 	 * @param keyFactory
 	 * @throws Exception
@@ -73,7 +73,7 @@ public class RSAAlgorithm extends CipherAsymmetricAlgorithm {
 	
 	/**
 	 * 构建私钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keyPair
 	 * @param keyFactory
 	 * @throws Exception

@@ -24,20 +24,20 @@ import org.sniper.security.AuthorizationModel;
 
 /**
  * 授权服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface AuthorizationService {
 
 	/** 
 	 * 加载角色授权规则列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>  
+	 * @author Daniele  
 	 */
 	public List<AuthorizationModel> loadRoleRules();
 	
 	/**
 	 * 加载权限授权规则列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<AuthorizationModel> loadPermissionRules();

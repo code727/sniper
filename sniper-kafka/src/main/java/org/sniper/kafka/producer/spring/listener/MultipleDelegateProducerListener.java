@@ -28,7 +28,7 @@ import org.sniper.kafka.support.ProduceResult;
 
 /**
  * 多委派生产者监听实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MultipleDelegateProducerListener<K,V> extends DelegateProducerListener<K,V> {
@@ -65,7 +65,7 @@ public class MultipleDelegateProducerListener<K,V> extends DelegateProducerListe
 	
 	/**
 	 * 根据生产记录选择对应的委派代表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param produceRecord
 	 * @return
 	 */

@@ -22,7 +22,7 @@ import org.sniper.serialization.TypedSerializer;
 
 /**
  * 类型化嵌套响应处理器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractTypedNestedResponseHandler extends AbstractTypedResponseHandler
@@ -48,7 +48,7 @@ public abstract class AbstractTypedNestedResponseHandler extends AbstractTypedRe
 	
 	/**
 	 * 处理响应实体后返回最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 * @param nestedType 响应实体内部嵌套类型
 	 * @return

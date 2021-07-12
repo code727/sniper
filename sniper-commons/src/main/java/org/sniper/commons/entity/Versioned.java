@@ -22,21 +22,21 @@ import java.io.Serializable;
 
 /**
  * 版本化实体接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Versioned extends Serializable {
 	
 	/**
 	 * 获取当前版本号
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getVersion();
 
 	/**
 	 * 设置当前版本号
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param version
 	 */
 	public void setVersion(long version);

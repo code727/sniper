@@ -20,7 +20,7 @@ package org.sniper.kafka.consumer;
 
 /**
  * 消费者委派策略枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum ConsumerDelegatePolicy {

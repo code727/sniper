@@ -20,39 +20,39 @@ package org.sniper.sqlmap.dao;
 
 /**
  * SQL映射DAO接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SqlMapDao<T> extends SqlMapQuery<T> {
 	
 	/**
-	 * 执行statement对应的insert语句后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 执行statement对应的insert语句后返回受插入影响的行数
+	 * @author Daniele 
 	 * @param statement
 	 * @return
 	 */
-	public Object insert(String statement);
+	public int insert(String statement);
 	
 	/**
-	 * 执行statement对应的insert语句后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 执行statement对应的insert语句后返回受插入影响的行数
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
 	 */
-	public Object insert(String statement, Object parameter);
+	public int insert(String statement, Object parameter);
 	
 	/**
-	 * 执行statement对应的update语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 执行statement对应的update语句后返回受更新影响的行数
+	 * @author Daniele 
 	 * @param statement
 	 * @return
 	 */
 	public int update(String statement);
 	
 	/**
-	 * 执行statement对应的update语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 执行statement对应的update语句后返回受更新影响的行数
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
@@ -60,15 +60,15 @@ public interface SqlMapDao<T> extends SqlMapQuery<T> {
 	public int update(String statement, Object parameter);
 	
 	/**
-	 * 执行statement对应的delete语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 执行statement对应的delete语句后返回受删除影响的行数
+	 * @author Daniele 
 	 * @param statement
 	 */
 	public int delete(String statement);
 	
 	/**
-	 * 执行statement对应的delete语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 执行statement对应的delete语句后返回受删除影响的行数
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 */

@@ -22,7 +22,7 @@ import org.sniper.commons.util.AssertUtils;
 
 /**
  * Geo空间元素集默认实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultGeoLocations<M> extends AbstractGeoLocations<M> {

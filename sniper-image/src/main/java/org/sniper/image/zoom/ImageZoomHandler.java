@@ -22,35 +22,35 @@ import org.sniper.image.ImageHandler;
 
 /**
  * 图像缩放处理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ImageZoomHandler extends ImageHandler {
 	
 	/**
 	 * 设置目标高度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param targetWidth
 	 */
 	public void setTargetWidth(int targetWidth);
 	
 	/**
 	 * 获取目标高度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getTargetWidth();
 	
 	/**
 	 * 设置目标高度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param targetHeight
 	 */
 	public void setTargetHeight(int targetHeight);
 	
 	/**
 	 * 获取目标高度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getTargetHeight();

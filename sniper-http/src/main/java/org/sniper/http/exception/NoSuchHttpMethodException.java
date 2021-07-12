@@ -20,7 +20,7 @@ package org.sniper.http.exception;
 
 /**
  * "不匹配的HTTP方法"强制异常类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class NoSuchHttpMethodException extends NoSuchMethodException {

@@ -22,7 +22,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 属性处理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface PropertyHandler<T> {
@@ -35,7 +35,7 @@ public interface PropertyHandler<T> {
 	
 	/**
 	 * 判断当前处理器是否支持对指定对象和属性的处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param propertyName
 	 * @return
@@ -44,7 +44,7 @@ public interface PropertyHandler<T> {
 	
 	/**
 	 * 在指定对象中获取属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean
 	 * @param propertyName
 	 * @return
@@ -54,7 +54,7 @@ public interface PropertyHandler<T> {
 	
 	/**
 	 * 在指定对象中获取已构建的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param propertyName
 	 * @return
@@ -64,7 +64,7 @@ public interface PropertyHandler<T> {
 	
 	/**
 	 * 在指定对象中设置属性成员的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param propertyName
 	 * @param propertyType

@@ -22,21 +22,21 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 键空间锁接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface KeyspaceLock<K> {
 	
 	/**
 	 * 对键进行加锁操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 */
 	public void lock(K key);
 	
 	/**
 	 * 尝试对键进行加锁操作后返回是否加锁成功
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -46,7 +46,7 @@ public interface KeyspaceLock<K> {
 	 * 在单位时间范围内尝试加锁操作：</P>
 	 * 1.如果成功加锁立即返回true</P>
 	 * 2.如果超时后未成功加锁，则返回false</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param acquireTime
 	 * @param unit
@@ -56,14 +56,14 @@ public interface KeyspaceLock<K> {
 	
 	/**
 	 * 对键进行解锁操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 */
 	public void unlock(K key);
 		
 	/**
 	 * 判断键是否被锁定
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */

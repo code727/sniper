@@ -29,7 +29,7 @@ import org.sniper.generator.sequence.DimensionSequence;
 
 /**
  * 基于维度的流水号生成器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DimensionSerialNumberGenerator extends SerialNumberGenerator {
@@ -97,7 +97,7 @@ public class DimensionSerialNumberGenerator extends SerialNumberGenerator {
 			
 	/**
 	 * 根据维度值和自定义的键创建键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dimension
 	 * @param key
 	 * @return
@@ -113,7 +113,7 @@ public class DimensionSerialNumberGenerator extends SerialNumberGenerator {
 	
 	/**
 	 * 根据维度值、预生成结果和参数生成最终的序列
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dimension
 	 * @param generated
 	 * @param safeParameter

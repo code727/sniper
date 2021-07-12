@@ -22,21 +22,21 @@ import java.util.List;
 
 /**
  * 无参数的生成器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Generator<T> {
 	
 	/**
 	 * 生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public T generate();
 	
 	/**
 	 * 批量生成指定数量的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param count
 	 * @return
 	 */

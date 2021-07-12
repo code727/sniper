@@ -26,14 +26,14 @@ import org.sniper.nosql.redis.option.ScanOption;
 
 /**
  * Redis集合命令接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sAdd命令，将成员值加入到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @return
@@ -42,7 +42,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sAdd命令，将成员值加入到集合中并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @param expireSeconds
@@ -52,7 +52,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sAdd命令，将成员值加入到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -62,7 +62,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sAdd命令，将成员值加入到集合中并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -73,7 +73,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sAdd命令，将多个成员值加入到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @return
@@ -82,7 +82,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sAdd命令，将多个成员值加入到集合中并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @param expireSeconds
@@ -92,7 +92,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sAdd命令，将多个成员值加入到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -102,7 +102,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sAdd命令，将多个成员值加入到集合中并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -113,7 +113,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sAdd命令，将多个成员值加入到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param memberss
 	 * @return
@@ -122,7 +122,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sAdd命令，将多个成员值加入到集合中并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @param expireSeconds
@@ -132,7 +132,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sAdd命令，将多个成员值加入到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -142,7 +142,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sAdd命令，将多个成员值加入到集合中并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -153,7 +153,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sCard命令，获取集合键对应的元素个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -161,7 +161,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sCard命令，获取集合键对应的元素个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -170,7 +170,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sDiff命令，获取多个键集之间的值差集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -178,7 +178,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sDiff命令，获取多个键集之间的值差集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @param valueType
 	 * @return
@@ -187,7 +187,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sDiff命令，获取多个键集之间的值差集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -196,7 +196,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sDiff命令，获取多个键集之间的值差集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @param valueType
@@ -206,7 +206,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sDiff命令，获取多个键集之间的值差集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -214,7 +214,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sDiff命令，获取多个键集之间的值差集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @param valueType
 	 * @return
@@ -223,7 +223,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sDiff命令，获取多个键集之间的值差集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -232,7 +232,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sDiff命令，获取多个键集之间的值差集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @param valueType
@@ -242,7 +242,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sDiffStore命令，将返回的值差集存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @return
@@ -251,7 +251,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sDiffStore命令，将返回的值差集存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
@@ -261,7 +261,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sDiffStore命令，将返回的值差集存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -271,7 +271,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sDiffStore命令，将返回的值差集存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -282,7 +282,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sDiffStore命令，将返回的值差集存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @return
@@ -291,7 +291,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sDiffStore命令，将返回的值差集存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
@@ -301,7 +301,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sDiffStore命令，将返回的值差集存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -311,7 +311,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sDiffStore命令，将返回的值差集存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -322,7 +322,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sInter命令，获取多个键集之间的交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -330,7 +330,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sInter命令，获取多个键集之间的交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @param valueType
 	 * @return
@@ -339,7 +339,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sInter命令，获取多个键集之间的交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -348,7 +348,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sInter命令，获取多个键集之间的交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @param valueType
@@ -358,7 +358,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sInter命令，获取多个键集之间的值交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -366,7 +366,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sInter命令，获取多个键集之间的值交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @param valueType
 	 * @return
@@ -375,7 +375,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sInter命令，获取多个键集之间的值交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -384,7 +384,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sInter命令，获取多个键集之间的值交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @param valueType
@@ -394,7 +394,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sInterStore命令，将返回的值交集存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @return
@@ -403,7 +403,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sInterStore命令，将返回的值交集存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
@@ -413,7 +413,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sInterStore命令，将返回的值交集存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -423,7 +423,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sInterStore命令，将返回的值交集存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -434,7 +434,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sInterStore命令，将返回的值交集存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @return
@@ -443,7 +443,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sInterStore命令，将返回的值交集存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
@@ -453,7 +453,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sInterStore命令，将返回的值交集存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -463,7 +463,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sInterStore命令，将返回的值交集存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -474,7 +474,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sUnion命令，获取多个键集之间的值并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -482,7 +482,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sUnion命令，获取多个键集之间的值并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @param valueType
 	 * @return
@@ -491,7 +491,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sUnion命令，获取多个键集之间的值并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -500,7 +500,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sUnion命令，获取多个键集之间的值并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @param valueType
@@ -510,7 +510,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sUnion命令，获取多个键集之间的值并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -518,7 +518,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sUnion命令，获取多个键集之间的值并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @param valueType
 	 * @return
@@ -527,7 +527,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sUnion命令，获取多个键集之间的值并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -536,7 +536,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sUnion命令，获取多个键集之间的值并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @param valueType
@@ -546,7 +546,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sUnionStore命令，将返回的并集值存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @return
@@ -555,7 +555,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sUnionStore命令，将返回的并集值存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
@@ -565,7 +565,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sUnionStore命令，将返回的并集值存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -575,7 +575,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sUnionStore命令，将返回的并集值存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -586,7 +586,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sUnionStore命令，将返回的并集值存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @return
@@ -595,7 +595,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sUnionStore命令，将返回的并集值存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
@@ -605,7 +605,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sUnionStore命令，将返回的并集值存入指定的目标键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -615,7 +615,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sUnionStore命令，将返回的并集值存入指定的目标键，并设置过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -626,7 +626,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sIsMember命令，判断集合键中是否存在指定的成员元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @return
@@ -635,7 +635,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sIsMember命令，判断集合键中是否存在指定的成员元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -645,7 +645,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sMembers命令，获取集合键对应的所有成员元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -653,7 +653,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sMembers命令，获取集合键对应的所有指定类型的成员元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -662,7 +662,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sMembers命令，获取集合键对应的所有成员元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -671,7 +671,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sMembers命令，获取集合键对应的所有指定类型的成员元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -681,7 +681,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sMove命令，将源集合键指定的成员移到目标集合键中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param srcKey
 	 * @param destKey
 	 * @param member
@@ -691,7 +691,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sMove命令，将源集合键指定的成员移到目标集合键中，并设置目标键的过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param srcKey
 	 * @param destKey
 	 * @param member
@@ -702,7 +702,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sMove命令，将源集合键指定的成员移到目标集合键中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param srcKey
 	 * @param destKey
@@ -713,7 +713,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sMove命令，将源集合键指定的成员移到目标集合键中，并设置目标键的过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param srcKey
 	 * @param destKey
@@ -725,7 +725,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sPop命令，随机出列指定键集合中的一个成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -733,7 +733,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sPop命令，随机出列指定键集合中的一个成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -742,7 +742,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sPop命令，随机出列指定键集合中的一个成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -751,7 +751,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sPop命令，随机出列指定键集合中的一个成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -761,7 +761,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sRandMember命令，随机获取键集合中的一个成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -769,7 +769,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sRandMember命令，随机获取键集合中的一个成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -778,7 +778,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sRandMember命令，随机获取键集合中的一个成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -787,7 +787,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sRandMember命令，随机获取键集合中的一个成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -797,7 +797,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sRem命令，删除集合键中指定的一个成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @return
@@ -806,7 +806,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sRem命令，删除集合键中指定的一个成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -816,7 +816,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sRem命令，删除集合键中指定的多个成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @return
@@ -825,7 +825,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sRem命令，删除集合键中指定的多个成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -835,7 +835,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sRem命令，删除集合键中指定的多个成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @return
@@ -844,7 +844,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sRem命令，删除集合键中指定的多个成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -854,7 +854,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sscan命令行，以增量迭代的方式获取所有的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -862,7 +862,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sscan命令行，以增量迭代的方式获取所有指定类型的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -871,7 +871,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @return
@@ -880,7 +880,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有指定类型的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @param valueType
@@ -890,7 +890,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sscan命令行，以增量迭代的方式获取所有的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param option
 	 * @return
@@ -899,7 +899,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sscan命令行，以增量迭代的方式获取所有指定类型的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param option
 	 * @param valueType
@@ -909,7 +909,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @param option
@@ -919,7 +919,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在当前库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有指定类型的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @param option
@@ -930,7 +930,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sscan命令行，以增量迭代的方式获取所有的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -939,7 +939,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sscan命令行，以增量迭代的方式获取所有指定类型的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -949,7 +949,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -959,7 +959,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有指定类型的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -970,7 +970,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sscan命令行，以增量迭代的方式获取所有的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param option
@@ -980,7 +980,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sscan命令行，以增量迭代的方式获取所有指定类型的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param option
@@ -991,7 +991,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -1002,7 +1002,7 @@ public interface RedisSetCommands {
 	
 	/**
 	 * 在指定库中执行sscan命令行，从指定的游标处开始，以增量迭代的方式获取所有指定类型的成员结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId

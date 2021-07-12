@@ -26,7 +26,7 @@ import org.sniper.kafka.support.ConsumeResult;
 
 /**
  * 委派消费者监听实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DelegateComsumerListener<K, V> extends
@@ -58,7 +58,7 @@ public class DelegateComsumerListener<K, V> extends
 	
 	/**
 	 * 日志记录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param delegate
 	 * @param consumeResult
 	 */

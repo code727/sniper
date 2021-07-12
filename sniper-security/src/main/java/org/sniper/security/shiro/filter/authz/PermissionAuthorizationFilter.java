@@ -27,7 +27,7 @@ import org.sniper.commons.util.ArrayUtils;
 
 /**
  * 自定义权限授权过滤器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class PermissionAuthorizationFilter extends AuthorizationFilter {

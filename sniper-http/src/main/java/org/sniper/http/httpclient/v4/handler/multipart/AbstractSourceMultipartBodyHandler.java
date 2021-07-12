@@ -20,7 +20,7 @@ package org.sniper.http.httpclient.v4.handler.multipart;
 
 /**
  * 资源类型的Multipart请求体处理器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractSourceMultipartBodyHandler extends AbstractMultipartBodyHandler {

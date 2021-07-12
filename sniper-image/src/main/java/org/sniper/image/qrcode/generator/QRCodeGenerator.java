@@ -24,14 +24,14 @@ import org.sniper.image.qrcode.QRCode;
 
 /**
  * 二维码生成器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface QRCodeGenerator {
 		
 	/**
 	 * 生成二维码图片对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param qrCode
 	 * @return
 	 * @throws Exception

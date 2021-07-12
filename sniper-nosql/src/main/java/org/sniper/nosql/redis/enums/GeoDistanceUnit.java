@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * GEO距离单位枚举类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum GeoDistanceUnit {
@@ -126,7 +126,7 @@ public enum GeoDistanceUnit {
 	
 	/**
 	 * 将指定的值转换为单位为"米"的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -136,7 +136,7 @@ public enum GeoDistanceUnit {
 	
 	/**
 	 * 将指定的值转换为单位为"千米"的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -146,7 +146,7 @@ public enum GeoDistanceUnit {
 	
 	/**
 	 * 将指定的值转换为单位为"英里"的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -156,7 +156,7 @@ public enum GeoDistanceUnit {
 	
 	/**
 	 * 将指定的值转换为单位为"英尺"的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -166,7 +166,7 @@ public enum GeoDistanceUnit {
 	
 	/**
 	 * 判断指定的缩写是否匹配一个DistanceUnit对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param abbreviation
 	 * @return
 	 */
@@ -176,7 +176,7 @@ public enum GeoDistanceUnit {
 	
 	/**
 	 * 将指定的缩写解析成DistanceUnit对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param abbreviation
 	 * @return
 	 */

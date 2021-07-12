@@ -24,14 +24,14 @@ import org.sniper.commons.util.ReflectionUtils;
 
 /**
  * Sniper JSON响应处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SniperJsonResponseHandler extends AbstractJsonNestedResponseHandler {
 		
 	/**
 	 * 实现父类方法，主要是解决当父类处理的响应结果为一个DataResponse对象时，其内部的data值转换问题
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 * @param nestedMapperRules
 	 * @param nestedType

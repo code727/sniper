@@ -28,7 +28,7 @@ import org.sniper.orm.jpa.dao.JpaNativeQuery;
 
 /**
  * Hibernate持久化数据访问接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface HibernateDao<T, Pk extends Serializable> extends

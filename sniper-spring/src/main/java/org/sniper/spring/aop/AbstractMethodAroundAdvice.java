@@ -24,7 +24,7 @@ import org.springframework.aop.MethodBeforeAdvice;
 
 /**
  * 环绕型方法拦截切面抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractMethodAroundAdvice extends AbstractMethodAfterAdvice implements MethodBeforeAdvice {
@@ -36,7 +36,7 @@ public abstract class AbstractMethodAroundAdvice extends AbstractMethodAfterAdvi
 	
 	/**
 	 * 执行前置拦截任务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 * @param args
 	 * @param target

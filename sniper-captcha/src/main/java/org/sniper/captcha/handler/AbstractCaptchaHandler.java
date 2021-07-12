@@ -26,7 +26,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 验证码处理器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractCaptchaHandler implements CaptchaHandler, InitializingBean {
@@ -106,7 +106,7 @@ public abstract class AbstractCaptchaHandler implements CaptchaHandler, Initiali
 	
 	/**
 	 * 执行验证码文本新增操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @param text
 	 */
@@ -114,7 +114,7 @@ public abstract class AbstractCaptchaHandler implements CaptchaHandler, Initiali
 	
 	/**
 	 * 执行验证码文本更新操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @param text
 	 */

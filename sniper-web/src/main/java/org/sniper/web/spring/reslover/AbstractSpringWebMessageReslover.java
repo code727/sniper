@@ -33,7 +33,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 /**
  * Spring Web应用消息解析器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractSpringWebMessageReslover extends AbstractWebMessageResolver

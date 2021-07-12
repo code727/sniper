@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Spring MultipartFile资源实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SpringMultipartFileSource extends AbstaractFileSource<MultipartFile> {
@@ -53,7 +53,7 @@ public class SpringMultipartFileSource extends AbstaractFileSource<MultipartFile
 	/**
 	 * 重写父类方法，当创建内容字节数组时，如果需要及时读取内容(delayedReading=false)，
 	 * 则不会像父类方法那样直接从input对象中读取，而是根据MultipartFile间接的从input对象中读取。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param file
 	 * @param input
 	 * @param delayedReading
@@ -68,7 +68,7 @@ public class SpringMultipartFileSource extends AbstaractFileSource<MultipartFile
 	/**
 	 * 重写父类方法，如果delayedReading为true，则获取之前要先将文件内容读取到字节数组中，
 	 * 但读取方式像父类方法那样直接从input对象中读取，而是根据MultipartFile间接的从input对象中读取。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 * @throws IOException
 	 */

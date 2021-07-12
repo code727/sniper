@@ -24,7 +24,7 @@ import org.sniper.test.junit.BaseTestCase;
 
 /**
  * 数字工具类单元测试
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class NumberUtilsTest extends BaseTestCase {

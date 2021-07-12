@@ -49,7 +49,7 @@ import org.sniper.spring.beans.CheckableInitializingBean;
 
 /**
  * Redis访问器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class RedisAccessor extends CheckableInitializingBean implements RedisCommands {

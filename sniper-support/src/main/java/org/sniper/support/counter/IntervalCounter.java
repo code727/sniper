@@ -20,49 +20,49 @@ package org.sniper.support.counter;
 
 /**
  * 区间计数器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface IntervalCounter<V> extends Counter<V> {
 	
 	/**
 	 * 设置区间步长
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param stepSize
 	 */
 	public void setStepSize(long stepSize);
 	
 	/**
 	 * 获取区间步长
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getStepSize();
 	
 	/**
 	 * 获取区间内的最小值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public V getMinimal();
 	
 	/**
 	 * 获取区间内的最大值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public V getMaximum();
 	
 	/**
 	 * 获取在有效区间内可进行累加的长度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long incrementSize();
 	
 	/**
 	 * 获取在有效区间内可进行累减的长度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long decrementSize();

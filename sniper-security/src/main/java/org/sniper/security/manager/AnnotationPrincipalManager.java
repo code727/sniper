@@ -29,7 +29,7 @@ import org.sniper.security.annotation.UserName;
 
 /**
  * 注解方式的Principal管理器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AnnotationPrincipalManager extends AbstractPrincipalManager {
@@ -57,7 +57,7 @@ public abstract class AnnotationPrincipalManager extends AbstractPrincipalManage
 	
 	/**
 	 * 根据注解描述设置PrincipalMeta对象的loginNameField值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param principalMeta
 	 */
 	private void setLoginNameField(PrincipalMeta principalMeta) {
@@ -68,7 +68,7 @@ public abstract class AnnotationPrincipalManager extends AbstractPrincipalManage
 	
 	/**
 	 * 根据注解描述设置PrincipalMeta对象的userNameField值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param principalMeta
 	 */
 	private void setUserNameField(PrincipalMeta principalMeta) {

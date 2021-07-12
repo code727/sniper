@@ -22,7 +22,7 @@ import org.sniper.commons.util.AssertUtils;
 
 /**
  * 趋势序列抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractTrendSequence<T> implements TrendSequence<T> {
@@ -46,7 +46,7 @@ public abstract class AbstractTrendSequence<T> implements TrendSequence<T> {
 	
 	/**
 	 * 检查趋势步长的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param stepSize
 	 */
 	protected void checkStepSize(int stepSize) {

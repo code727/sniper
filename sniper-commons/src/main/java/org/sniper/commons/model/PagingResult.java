@@ -23,35 +23,35 @@ import java.util.List;
 
 /**
  * 分页结果接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface PagingResult<T> extends Serializable {
 	
 	/**
 	 * 获取分页结果列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<T> getData();
 	
 	/**
 	 * 设置分页结果列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param data
 	 */
 	public void setData(List<T> data);
 	
 	/**
 	 * 获取符合分页条件的结果总数 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getCount();
 	
 	/**
 	 * 设置符合分页条件的结果总数 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param count
 	 */
 	public void setCount(long count);

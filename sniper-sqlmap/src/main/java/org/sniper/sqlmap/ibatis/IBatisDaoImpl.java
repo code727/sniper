@@ -29,26 +29,24 @@ import com.ibatis.sqlmap.client.SqlMapExecutor;
 
 /**
  * IBatis DAO实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
 @Repository
-public class IBatisDaoImpl<T> extends IBatisQueryDaoImpl<T>
-		implements SqlMapDao<T> {
-	
+public class IBatisDaoImpl<T> extends IBatisQueryDaoImpl<T> implements SqlMapDao<T> {
+		
 	@Override
-	public T insert(String statement) {
+	public int insert(String statement) {
 		return insert(statement, null);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public T insert(String statement, Object parameter) {
+	public int insert(String statement, Object parameter) {
 		SqlMapClientTemplate template = getSqlMapClientTemplate();
-		return (T) (parameter != null ? template.insert(namespace + statement,
-				parameter) : template.insert(namespace + statement));
-				
+		// TODO insert方法可能返回的不是受插入影响的行数，需测试
+		return parameter != null ? (Integer) template.insert(namespace + statement, parameter)
+				: (Integer) template.insert(namespace + statement);
 	}
 
 	@Override
@@ -61,7 +59,6 @@ public class IBatisDaoImpl<T> extends IBatisQueryDaoImpl<T>
 		SqlMapClientTemplate template = getSqlMapClientTemplate();
 		return parameter != null ? template.update(namespace + statement,
 				parameter) : template.update(namespace + statement);
-				
 	}
 
 	@Override

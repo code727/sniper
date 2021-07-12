@@ -26,21 +26,16 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 实体/会话视图管理过滤器代理实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class OpenEntitySessionManagerInViewFilter implements OpenEntitySessionManagerInViewFilterProxy {
 	
 	/** 默认需要过滤的资源后缀名称组 */
-	private static final String[] DEFAULT_INCLUDE_SUFFIXS = { ".action", ".do",
-			".jsf", ".jsp" };
-	
+	private static final String[] DEFAULT_INCLUDE_SUFFIXS = {".action", ".do", ".jsf", ".jsp"};
+			
 	/** 默认不需要过滤的资源后缀名称组 */
-	private static final String[] DEFAULT_EXCLUDE_SUFFIXS = { ".js", ".css",
-			".jpg", ".gif", ".png", ".icon" };
-	
-	/** 通配符 */
-	private static final String WILDCARD = "*";
+	private static final String[] DEFAULT_EXCLUDE_SUFFIXS = {".js", ".css", ".jpg", ".gif", ".png", ".icon"};
 	
 	/** 最终需要过滤的资源后缀名称组 */
 	private static String[] includeSuffixs = DEFAULT_INCLUDE_SUFFIXS;
@@ -48,9 +43,12 @@ public class OpenEntitySessionManagerInViewFilter implements OpenEntitySessionMa
 	/** 最终不需要过滤的资源后缀名称组 */
 	private static String[] excludeSuffixs = DEFAULT_EXCLUDE_SUFFIXS;
 	
+	/** 通配符 */
+	private static String WILDCARD = StringUtils.ANY;
+	
 	/**
 	 * 初始化过滤器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws ServletException
 	 */
 	public void initFilterBean(String excludeSuffix, String includeSuffix) throws ServletException {
@@ -75,22 +73,22 @@ public class OpenEntitySessionManagerInViewFilter implements OpenEntitySessionMa
 				throw new ServletException("Inclusion suffixs can not be blank.");
 			
 			// include组存在通配符时，则忽略掉其它配置
-			if (ArrayUtils.contains(includeSuffixs, WILDCARD) && includeSuffixs.length > 1)
-				includeSuffixs = new String[] { WILDCARD };
+			if (ArrayUtils.contains(includeSuffixs, StringUtils.ANY) && includeSuffixs.length > 1)
+				includeSuffixs = new String[] { StringUtils.ANY };
 		} else 
 			includeSuffixs = DEFAULT_INCLUDE_SUFFIXS;	
 		
 		for (String include : includeSuffixs) {
 			// 任意一个后缀只能存在于其中一个组中，否则抛出异常
 			if (ArrayUtils.contains(excludeSuffixs, include))
-				throw new ServletException("Duplicate suffix:" + include + 
-						",can not has same suffix value in includeSuffixs and excludeSuffixs.");
+				throw new ServletException(String.format(
+						"Duplicate suffix '%s',can not has same suffix value in includeSuffixs and excludeSuffixs", include));
 		}
 	}
 	
 	/**
 	 * 排除不需要过滤的资源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @return
 	 */
@@ -111,7 +109,7 @@ public class OpenEntitySessionManagerInViewFilter implements OpenEntitySessionMa
 					
 	/**
 	 * 检测指定的路径是否属于exclude组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param path
 	 * @return
 	 */
@@ -125,7 +123,7 @@ public class OpenEntitySessionManagerInViewFilter implements OpenEntitySessionMa
 	
 	/**
 	 * 检测指定的路径是否属于include组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param path
 	 * @return
 	 */

@@ -27,7 +27,7 @@ import org.sniper.test.annotation.Testable;
 
 /**
  * 用户测试对象
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class User extends Person implements Cloneable {

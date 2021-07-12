@@ -28,7 +28,7 @@ import org.sniper.http.headers.HttpHeaders;
 
 /**
  * HTTP文件范围
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class Range {

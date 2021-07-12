@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * 传输编码(TE)算法枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum TEEnum {
@@ -55,7 +55,7 @@ public enum TEEnum {
 
 	/**
 	 * 判断指定的算法是否匹配当前枚举
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param algorithm
 	 * @return
 	 */
@@ -65,7 +65,7 @@ public enum TEEnum {
 	
 	/**
 	 * 将指定的算法模式解析成枚举对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param algorithm
 	 * @return
 	 */

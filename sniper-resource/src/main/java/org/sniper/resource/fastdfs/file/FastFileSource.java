@@ -25,56 +25,56 @@ import org.sniper.resource.file.FileSource;
 
 /**
  * FastDFS文件资源接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FastFileSource<T> extends FileSource<T> {
 	
 	/**
 	 * 设置原有的资源标识
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param originalId
 	 */
 	public void setOriginalId(String originalId);
 	
 	/**
 	 * 获取原有的资源标识
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getOriginalId();
 	
 	/**
 	 * 添加目标文件元数据名值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param nameValuePair
 	 */
 	public void addNameValuePair(NameValuePair nameValuePair);
 	
 	/**
 	 * 批量添加目标文件元数据名值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param NameValuePairs
 	 */
 	public void addNameValuePaires(NameValuePair[] nameValuePairs);
 	
 	/**
 	 * 批量添加目标文件元数据名值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param nameValuePairs
 	 */
 	public void addNameValuePaires(List<NameValuePair> nameValuePairs);
 	
 	/**
 	 * 获取所有的元数据名值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<NameValuePair> getNameValuePaires();
 	
 	/**
 	 * 获取指定索引位上的元数据名值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param index
 	 * @return
 	 */
@@ -82,21 +82,21 @@ public interface FastFileSource<T> extends FileSource<T> {
 	
 	/**
 	 * 获取第一个元数据名值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public NameValuePair getFirstNameValuePair();
 	
 	/**
 	 * 获取最后一个元数据名值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public NameValuePair getLastNameValuePair();
 	
 	/**
 	 * 获取匹配名称对应的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -104,7 +104,7 @@ public interface FastFileSource<T> extends FileSource<T> {
 	
 	/**
 	 * 按忽略大小写的方式获取匹配名称对应的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */

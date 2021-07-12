@@ -22,28 +22,28 @@ import org.sniper.commons.request.Pageable;
 
 /**
  * 分页明细结果接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface PagingDetailResult<T> extends Pageable, PagingResult<T> {
 	
 	/**
 	 * 获取当前分页结果的总页数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getPages();
 	
 	/**
 	 * 获取当前分页结果从第几条记录开始
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getFrom();
 	
 	/**
 	 * 获取当前分页结果从第几条记录结束
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getTo();

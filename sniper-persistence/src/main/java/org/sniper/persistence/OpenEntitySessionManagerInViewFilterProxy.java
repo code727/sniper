@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 会话/实体视图管理过滤器代理接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface OpenEntitySessionManagerInViewFilterProxy {
@@ -36,7 +36,7 @@ public interface OpenEntitySessionManagerInViewFilterProxy {
 	
 	/**
 	 * 根据后缀名称组初始化过滤器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param excludeSuffix 不需要过滤的资源后缀名称组
 	 * @param includeSuffix 需要过滤的资源后缀名称组
 	 * @throws ServletException
@@ -45,7 +45,7 @@ public interface OpenEntitySessionManagerInViewFilterProxy {
 	
 	/**
 	 * 排除不需要过滤的资源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @return true:不需要过滤 , false:需要过滤
 	 * @throws ServletException

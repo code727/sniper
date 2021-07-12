@@ -30,7 +30,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 持久化实体属性过滤器链
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class PropertyFilterChain implements PersistencePropertyFilterChain {
@@ -118,7 +118,7 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 	
 	/**
 	 * 按顺序将整条链中所有组内过滤器中的属性-值拼接成查询字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String toQueryString() {
@@ -133,7 +133,7 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 		
 	/**
 	 * 根据名称列表构建出组内所有过滤器成员的查询字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param names
 	 * @return
 	 */
@@ -165,7 +165,7 @@ public class PropertyFilterChain implements PersistencePropertyFilterChain {
 	
 	/**
 	 * 构建名称列表中对应的最后一组的查询字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param names
 	 * @return
 	 */

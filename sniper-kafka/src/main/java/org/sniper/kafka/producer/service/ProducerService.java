@@ -23,21 +23,21 @@ import org.sniper.kafka.support.ProduceResult;
 
 /**
  * 生产者服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ProducerService<K, V> {
 	
 	/**
 	 * 生产者成功生产消息后的服务处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param produceResult
 	 */
 	public void afterSuccess(ProduceResult<K, V> produceResult);
 	
 	/**
 	 * 生产者生产消息失败后的服务处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param produceRecord
 	 * @param ex
 	 */

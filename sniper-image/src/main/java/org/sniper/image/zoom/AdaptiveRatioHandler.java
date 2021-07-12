@@ -26,7 +26,7 @@ import org.sniper.image.Pixel;
 
 /**
  * 自适应图片等比缩放处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
@@ -36,7 +36,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	
 	/**
 	 * 判断是否只用于压缩处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isCompressOnly() {
@@ -45,7 +45,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 
 	/**
 	 * 设置是否只用于压缩处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param compressOnly
 	 */
 	public void setCompressOnly(boolean compressOnly) {
@@ -65,7 +65,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	
 	/**
 	 * 按原图片自身的属性为基准创建目标像素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sourceImage
 	 * @return
 	 */
@@ -84,7 +84,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	
 	/**
 	 * 以宽度为优先基准创建目标像素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param width
 	 * @param height
 	 * @return
@@ -105,7 +105,7 @@ public class AdaptiveRatioHandler extends AbstractStandardZoomHandler {
 	
 	/**
 	 * 以高度为优先基准创建目标像素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param width
 	 * @param height
 	 * @return

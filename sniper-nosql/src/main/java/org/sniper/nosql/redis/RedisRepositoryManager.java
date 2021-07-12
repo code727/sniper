@@ -22,28 +22,28 @@ import java.util.Map;
 
 /**
  * Redis库管理接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RedisRepositoryManager {
 	
 	/**
 	 * 设置库配置映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param repositories
 	 */
 	public void setRepositories(Map<String, RedisRepository> repositories);
 	
 	/**
 	 * 获取所有库的配置映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<String, RedisRepository> getRepositories();
 	
 	/**
 	 * 根据库名称获取映射集合里的库配置项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @return
 	 */

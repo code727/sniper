@@ -22,14 +22,14 @@ import javax.jms.Destination;
 
 /**
  * JMS消费者服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ConsumerService {
 	
 	/**
 	 * 按指定名称的消费策略接收消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param strategyName 消费策略名称
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface ConsumerService {
 	
 	/**
 	 * 按指定名称的消费策略接收来自目的地的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param strategyName
 	 * @param destinationName
 	 * @return
@@ -46,7 +46,7 @@ public interface ConsumerService {
 	
 	/**
 	 * 按指定名称的消费策略接收来自目的地的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param strategyName
 	 * @param destination
 	 * @return
@@ -55,7 +55,7 @@ public interface ConsumerService {
 	
 	/**
 	 * 按指定名称的消费策略选择接收消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param strategyName
 	 * @param messageSelector
 	 * @return
@@ -64,7 +64,7 @@ public interface ConsumerService {
 	
 	/**
 	 * 按指定名称的消费策略选择接收来自目的地的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param strategyName
 	 * @param destinationName
 	 * @param messageSelector
@@ -74,7 +74,7 @@ public interface ConsumerService {
 	
 	/**
 	 * 按指定名称的消费策略选择接收来自目的地的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param strategyName
 	 * @param destination
 	 * @param messageSelector

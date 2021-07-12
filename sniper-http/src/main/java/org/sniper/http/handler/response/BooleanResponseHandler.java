@@ -22,7 +22,7 @@ import org.sniper.commons.enums.logic.BooleanEnum;
 
 /**
  * 布尔型响应处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class BooleanResponseHandler extends StringResponseHandler {

@@ -25,7 +25,7 @@ import org.sniper.serialization.SerializationException;
 
 /**
  * 字符串序列化器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class StringSerializer extends AbstractSerializer {

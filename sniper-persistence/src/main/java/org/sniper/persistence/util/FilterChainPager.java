@@ -22,7 +22,7 @@ import org.sniper.commons.request.PagingRequest;
 
 /**
  * 带属性过滤器链的分页器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class FilterChainPager extends PagingRequest implements FilterChainPagingQuery {

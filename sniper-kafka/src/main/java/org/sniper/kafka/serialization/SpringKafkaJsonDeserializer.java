@@ -23,7 +23,7 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 /**
  * SpringKafka JSON反序列化解析器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SpringKafkaJsonDeserializer<T> extends JsonDeserializer<T> implements Deserializer<T> {

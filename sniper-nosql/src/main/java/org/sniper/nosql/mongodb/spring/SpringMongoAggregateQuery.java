@@ -28,7 +28,7 @@ import org.sniper.nosql.mongodb.dao.MongoAggregateQuery;
 
 /**
  * Spring MongoDB聚合查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
@@ -37,7 +37,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	/**
 	 * 聚合查询出满足条件的唯一记录<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{matchOperation}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param matchOperation match操作对象
 	 * @return
 	 */
@@ -46,7 +46,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中聚合查询出满足条件的唯一记录<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{matchOperation}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合 
 	 * @param matchOperation match操作对象
 	 * @return
@@ -60,7 +60,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({
 	 * "$match":{matchOperation}},{$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param matchOperation match操作对象
 	 * @param resultClass 返回的数据类型
 	 * @return
@@ -74,7 +74,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({
 	 * "$match":{matchOperation}},{$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param matchOperation match操作对象
 	 * @param resultClass 返回的数据类型
@@ -85,7 +85,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	/**
 	 * 聚合分页查询出记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{}},{"$skip":skipOperation},{"$limit":limitOperation});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param skipOperation 起始分割操作
 	 * @param limitOperation 最大行数截取操作
 	 * @return
@@ -95,7 +95,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中聚合分页查询出记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{}},{"$skip":skipOperation},{"$limit":limitOperation});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param skipOperation 起始分割操作
 	 * @param limitOperation 最大行数截取操作
@@ -110,7 +110,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{}},
 	 * {"$skip":skipOperation},{"$limit":skipOperation},{$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param skipOperation 起始分割操作
 	 * @param limitOperation 最大行数截取操作
 	 * @param resultClass 返回的数据类型
@@ -125,7 +125,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{}},
 	 * {"$skip":skipOperation},{"$limit":skipOperation},{$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param skipOperation 起始分割操作
 	 * @param limitOperation 最大行数截取操作
@@ -137,7 +137,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	/**
 	 * 聚合查询出记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{matchOperation}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param matchOperation match操作对象
 	 * @return
 	 */
@@ -146,7 +146,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中聚合查询出记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{matchOperation}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param matchOperation match操作对象
 	 * @return
@@ -159,7 +159,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{matchOperation}},
 	 * {$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param matchOperation match操作对象
 	 * @param resultClass 返回的数据类型
 	 * @return
@@ -172,7 +172,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{matchOperation}},
 	 * {$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param matchOperation match操作对象
 	 * @param resultClass 返回的数据类型
@@ -183,7 +183,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	/**
 	 * 聚合分页查询出记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{matchOperation}},{"$skip":skipOperation},{"$limit":skipOperation});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param matchOperation match操作对象
 	 * @param skipOperation 起始分割操作
 	 * @param limitOperation 最大行数截取操作
@@ -194,7 +194,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中聚合分页查询出记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{matchOperation}},{"$skip":skipOperation},{"$limit":skipOperation});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param matchOperation match操作对象
 	 * @param skipOperation 起始分割操作
@@ -210,7 +210,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{matchOperation}},
 	 * {"$skip":skipOperation},{"$limit":skipOperation},{$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param matchOperation match操作对象
 	 * @param skipOperation 起始分割操作
 	 * @param limitOperation 最大行数截取操作
@@ -226,7 +226,7 @@ public interface SpringMongoAggregateQuery<T, PK extends Serializable> extends
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{matchOperation}},
 	 * {"$skip":skipOperation},{"$limit":skipOperation},{$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param matchOperation match操作对象
 	 * @param skipOperation 起始分割操作

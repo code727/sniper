@@ -27,7 +27,7 @@ import org.sniper.web.WebUtils;
 
 /**
  * 基于Web应用上下文的资源拦截器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class WebApplicationContextInvocation extends HandlerInterceptorAdapter {

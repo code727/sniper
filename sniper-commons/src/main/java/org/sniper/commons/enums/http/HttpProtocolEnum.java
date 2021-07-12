@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * HTTP协议枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum HttpProtocolEnum {
@@ -41,7 +41,7 @@ public enum HttpProtocolEnum {
 	
 	/**
 	 * 判断指定的协议名称是否匹配当前枚举
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -51,7 +51,7 @@ public enum HttpProtocolEnum {
 	
 	/**
 	 * 将指定的协议名称解析成枚举对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */

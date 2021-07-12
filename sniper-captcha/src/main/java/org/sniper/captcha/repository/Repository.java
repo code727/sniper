@@ -20,21 +20,21 @@ package org.sniper.captcha.repository;
 
 /**
  * 文本库接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Repository {
 	
 	/**
 	 * 设置库内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param content
 	 */
 	public void setContent(String content);
 	
 	/**
 	 * 获取库内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getContent();

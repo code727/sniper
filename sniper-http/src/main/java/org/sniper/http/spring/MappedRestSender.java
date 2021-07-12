@@ -26,7 +26,7 @@ import org.sniper.http.form.HttpForm;
 
 /**
  * 已映射的Spring Rest发送器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public final class MappedRestSender extends MappedHttpAccessor {

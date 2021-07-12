@@ -27,7 +27,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 对称算法抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, InitializingBean {
@@ -42,6 +42,17 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	
 	/** 加密/解密结果的编解码器 */
 	private Codec resultCodec;
+	
+	public AbstractSymmetricAlgorithm() {
+		this(null);
+	}
+	
+	public AbstractSymmetricAlgorithm(String algorithm) {
+		if (StringUtils.isNotBlank(algorithm))
+			this.algorithm = algorithm.trim();
+		else
+			this.algorithm = StringUtils.beforeFrist(this.getClass().getSimpleName(), "Algorithm");
+	}
 	
 	@Override
 	public void setEncoding(String encoding) {
@@ -71,17 +82,6 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 		return this.privateKey;
 	}
 	
-	public AbstractSymmetricAlgorithm() {
-		this(null);
-	}
-	
-	public AbstractSymmetricAlgorithm(String algorithm) {
-		if (StringUtils.isNotBlank(algorithm))
-			this.algorithm = algorithm.trim();
-		else
-			this.algorithm = StringUtils.beforeFrist(this.getClass().getSimpleName(), "Algorithm");
-	}
-	
 	public String getAlgorithm() {
 		return algorithm;
 	}
@@ -95,7 +95,7 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	
 	/**
 	 * 初始化加密/解密结果的编解码器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws Exception
 	 */
 	protected void initCodec() throws Exception {
@@ -144,7 +144,7 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	
 	/**
 	 * 获取密钥的字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected byte[] getPrivateKeyBytes() {
@@ -156,7 +156,7 @@ public abstract class AbstractSymmetricAlgorithm implements SymmetricAlgorithm, 
 	
 	/**
 	 * 初始化操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws Exception
 	 */
 	protected abstract void init() throws Exception;

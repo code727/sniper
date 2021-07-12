@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * HTTP网络连接枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum HttpConnectionEnum {
@@ -56,7 +56,7 @@ public enum HttpConnectionEnum {
 	
 	/**
 	 * 判断指定的状态是否匹配当前枚举
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param status
 	 * @return
 	 */
@@ -66,7 +66,7 @@ public enum HttpConnectionEnum {
 
 	/**
 	 * 将指定的状态解析成枚举对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param status
 	 * @return
 	 */

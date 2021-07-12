@@ -20,14 +20,14 @@ package org.sniper.templet.message.resolver;
 
 /**
  * 消息解析器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface MessageResolver {
 	
 	/**
 	 * 根据键获取对应的资源信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 资源项的键
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public interface MessageResolver {
 	
 	/**
 	 * 根据键获取对应的资源信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 资源项的键
 	 * @param defaultMessage 默认信息
 	 * @return
@@ -44,7 +44,7 @@ public interface MessageResolver {
 	
 	/**
 	 * 根据键获取具有参数的资源信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 资源信息的键
 	 * @param param 参数值
 	 * @param defaultMessage 默认信息
@@ -54,7 +54,7 @@ public interface MessageResolver {
 	
 	/**
 	 * 根据键获取具有参数的资源信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 资源项的键
 	 * @param param 参数值
 	 * @return
@@ -63,7 +63,7 @@ public interface MessageResolver {
 	
 	/**
 	 * 根据键获取具有参数的资源信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 资源项的键
 	 * @param params 参数值组
 	 * @return
@@ -72,7 +72,7 @@ public interface MessageResolver {
 	
 	/**
 	 * 根据键获取具有参数的资源信息，未获取到时返回默认的信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 资源项的键
 	 * @param params 参数值组
 	 * @param defaultMessage 默认信息

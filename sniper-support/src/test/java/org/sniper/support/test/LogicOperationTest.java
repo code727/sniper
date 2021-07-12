@@ -13,7 +13,7 @@
 //
 ///**
 // * 逻辑运算单元测试
-// * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+// * @author  Daniele
 // * @version 1.0, 2015-1-20
 // */
 //public class LogicOperationTest extends BaseTestCase {

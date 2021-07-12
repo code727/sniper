@@ -23,7 +23,7 @@ import org.sniper.serialization.json.JsonSerializer;
 
 /**
  * JsonLib类型处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class JsonLibTypeHandler<T> extends AbstractJsonTypeHandler<T> {

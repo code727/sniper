@@ -28,42 +28,42 @@ import org.sniper.image.writer.ImageWriter;
 
 /**
  * 图片处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ImageHandler {
 	
 	/**
 	 * 设置图片读取器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param imageReader
 	 */
 	public void setImageReader(ImageReader imageReader);
 	
 	/**
 	 * 获取图片读取器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public ImageReader getImageReader();
 	
 	/**
 	 * 设置图片写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param imageWriter
 	 */
 	public void setImageWriter(ImageWriter imageWriter);
 	
 	/**
 	 * 获取图片写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public ImageWriter getImageWriter();
 	
 	/**
 	 * 将本地的图片资源文件进行处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 本地资源文件
 	 * @throws Exception 
 	 */
@@ -71,7 +71,7 @@ public interface ImageHandler {
 	
 	/**
 	 * 将本地的资源文件按照指定的格式进行处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 本地资源文件
 	 * @throws Exception 
 	 */
@@ -79,7 +79,7 @@ public interface ImageHandler {
 	
 	/**
 	 * 将本地的资源文件进行处理后写入目标本地文件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @param dest
 	 * @throws Exception 
@@ -88,7 +88,7 @@ public interface ImageHandler {
 	
 	/**
 	 * 将本地的资源文件按照指定的格式进行处理后写入目标本地文件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 本地资源文件
 	 * @param formatName 格式
 	 * @param dest 目标本地文件
@@ -98,7 +98,7 @@ public interface ImageHandler {
 	
 	/**
 	 * 将本地的资源文件进行处理后写入目标输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 本地资源文件
 	 * @param dest 目标输出流
 	 * @throws IOException 
@@ -107,7 +107,7 @@ public interface ImageHandler {
 	
 	/**
 	 * 将本地的资源文件按照指定的格式进行处理后写入目标输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 本地资源文件
 	 * @param formatName 格式
 	 * @param dest 目标输出流
@@ -117,7 +117,7 @@ public interface ImageHandler {
 	
 	/**
 	 * 将资源流进行处理后写入目标本地文件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 资源流
 	 * @param dest 目标本地文件
 	 * @throws IOException 
@@ -126,7 +126,7 @@ public interface ImageHandler {
 	
 	/**
 	 * 将资源流进行处理后写入目标输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 资源流
 	 * @param dest 目标输出流
 	 * @throws IOException 
@@ -135,7 +135,7 @@ public interface ImageHandler {
 	
 	/**
 	 * 将资源流按照指定格式进行处理后写入目标本地文件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @param formatName
 	 * @param dest
@@ -145,7 +145,7 @@ public interface ImageHandler {
 	
 	/**
 	 * 将资源流按照指定格式进行处理后写入到目标输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 图片资源流
 	 * @param formatName 格式
 	 * @param dest 目标输出流

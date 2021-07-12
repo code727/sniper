@@ -30,7 +30,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * Media类型
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MediaType extends MimeType implements Serializable {
@@ -426,7 +426,7 @@ public class MediaType extends MimeType implements Serializable {
 		
 	/**
 	 * 构建字符集编码和质量价值参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param charset
 	 * @param qualityValue
 	 * @return
@@ -437,7 +437,7 @@ public class MediaType extends MimeType implements Serializable {
 	
 	/**
 	 * 构建字符集编码和质量价值参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mediaType
 	 * @param charset
 	 * @param qualityValue
@@ -464,7 +464,7 @@ public class MediaType extends MimeType implements Serializable {
 		
 	/**
 	 * 获取质量价值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public double getQualityValue() {
@@ -473,7 +473,7 @@ public class MediaType extends MimeType implements Serializable {
 		
 	/**
 	 * 重写父类方法，追加对质量价值合法性的检查
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param attribute
 	 * @param value
 	 */
@@ -494,7 +494,7 @@ public class MediaType extends MimeType implements Serializable {
 	
 	/**
 	 * 检查质量价值的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param qualityValue
 	 */
 	protected void checkQualityValue(double qualityValue) {		
@@ -505,7 +505,7 @@ public class MediaType extends MimeType implements Serializable {
 	
 	/**
 	 * 将字符串解析成MediaType对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mediaType
 	 * @return
 	 */

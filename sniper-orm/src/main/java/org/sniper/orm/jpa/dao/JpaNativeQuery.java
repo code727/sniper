@@ -23,14 +23,14 @@ import java.util.Map;
 
 /**
  * JPA本地查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 执行SQL查询语句后返回当前类型的唯一实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @return
 	 */
@@ -38,7 +38,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 执行SQL查询语句后返回指定类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param sql
 	 * @return
@@ -47,7 +47,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 执行带占位符(?)参数的SQL查询语句后返回当前类型的唯一实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @param values
 	 * @return
@@ -56,7 +56,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 执行带占位符(?)参数的SQL查询语句后返回指定类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param sql
 	 * @param values
@@ -66,7 +66,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 执行带命名(=:name)参数的SQL查询语句后返回当前类型的唯一实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @param paramMap
 	 * @return
@@ -75,7 +75,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 执行带命名(=:name)参数的SQL查询语句后返回指定类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param sql
 	 * @param paramMap
@@ -85,7 +85,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 执行SQL查询语句后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @return 
 	 */
@@ -93,7 +93,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 执行SQL查询语句后返回指定类型的结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param sql
 	 * @return
@@ -102,7 +102,7 @@ public interface JpaNativeQuery<T> {
 
 	/**
 	 * 执行带占位符(?)参数的SQL查询语句后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @param values
 	 * @return 
@@ -111,7 +111,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 执行带占位符(?)参数的SQL查询语句后返回指定类型的结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param sql
 	 * @param values
@@ -121,7 +121,7 @@ public interface JpaNativeQuery<T> {
 
 	/**
 	 * 执行带命名(=:name)参数的SQL查询语句后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @param paramMap
 	 * @return 
@@ -130,7 +130,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 执行带命名(=:name)参数的SQL查询语句后返回指定类型的结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param sql
 	 * @param paramMap
@@ -140,7 +140,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 从起始位置开始执行SQL查询语句后返回最大行数当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @param start
 	 * @param maxRows
@@ -150,7 +150,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 从起始位置开始执行SQL查询语句后返回最大行数指定类型的结果列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param sql
 	 * @param start
@@ -161,7 +161,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 从起始位置开始执行带占位符(?)参数的SQL查询语句后返回最大行数当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @param values
 	 * @param start
@@ -172,7 +172,7 @@ public interface JpaNativeQuery<T> {
 	
 	/**
 	 * 从起始位置开始执行带占位符(?)参数的SQL查询语句后返回最大行数指定类型的结果列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param sql
 	 * @param values
@@ -184,7 +184,7 @@ public interface JpaNativeQuery<T> {
 
 	/**
 	 * 从起始位置开始执行带命名(=:name)参数的SQL查询语句后返回最大行数当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @param paramMap
 	 * @param start
@@ -195,7 +195,7 @@ public interface JpaNativeQuery<T> {
 
 	/**
 	 * 从起始位置开始执行带命名(=:name)参数的SQL查询语句后返回指定类型的结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param sql
 	 * @param paramMap

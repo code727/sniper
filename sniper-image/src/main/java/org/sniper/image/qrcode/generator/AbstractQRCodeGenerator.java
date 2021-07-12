@@ -29,7 +29,7 @@ import org.sniper.image.qrcode.QRCode;
 
 /**
  * 二维码生成器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
@@ -68,7 +68,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 
 	/**
 	 * 创建二维码原图
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param qrCode
 	 * @return
 	 * @throws Exception
@@ -77,7 +77,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 
 	/**
 	 * 等比缩放二维码原图
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param qrcodeImage
 	 */
 	protected BufferedImage ratioSourceImage(BufferedImage qrcodeImage, QRCode qrCode) {
@@ -127,7 +127,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 
 	/**
 	 * 等比缩放二维码logo图
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param qrcodeImage
 	 * @param logo
 	 * @param layout
@@ -159,7 +159,7 @@ public abstract class AbstractQRCodeGenerator implements QRCodeGenerator {
 
 	/**
 	 * 在二维码原图内绘制logo
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param qrcodeImage
 	 * @param logo
 	 * @param layout

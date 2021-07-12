@@ -16,14 +16,14 @@
  * Create Date : 2015-1-27
  */
 
-package org.sniper.persistence;
+package org.sniper.persistence.listener;
 
 import org.sniper.commons.entity.CuAuditable;
 import org.sniper.persistence.handler.AuditEventHandler;
 
 /**
  * 新增/更新审核事件监听器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class CuAuditEventListener implements PersistenceEventListener<CuAuditable> {

@@ -34,7 +34,7 @@ import org.sniper.commons.util.DateUtils;
 import org.sniper.test.spring.JUnit4SpringContextTestCase;
 
 /**
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractSpringGeneratorTest<T> extends JUnit4SpringContextTestCase {
@@ -73,7 +73,7 @@ public abstract class AbstractSpringGeneratorTest<T> extends JUnit4SpringContext
 	
 	/**
 	 * 执行唯一性测试
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws Exception
 	 */
 	protected void uniquenessTest() throws Exception {
@@ -106,7 +106,7 @@ public abstract class AbstractSpringGeneratorTest<T> extends JUnit4SpringContext
 	
 	/**
 	 * 执行性能测试
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	protected void performanceTest() {
 		Date start = new Date();
@@ -119,7 +119,7 @@ public abstract class AbstractSpringGeneratorTest<T> extends JUnit4SpringContext
 	
 	/**
 	 * 生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected abstract T generate();

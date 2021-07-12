@@ -22,7 +22,7 @@ import org.sniper.captcha.repository.Repository;
 
 /**
  * 验证码管理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface CaptchaManager {
@@ -32,28 +32,28 @@ public interface CaptchaManager {
 	
 	/**
 	 * 设置文本库
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param repository
 	 */
 	public void setRepository(Repository repository);
 	
 	/**
 	 * 获取文本库
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Repository getRepository();
 	
 	/**
 	 * 设置生成的文本内容长度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param length
 	 */
 	public void setLength(int length);
 	
 	/**
 	 * 获取生成的文本内容长度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getLength();

@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * GeoRadius命令行返回的空间元素集实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class GeoRadiusResult<M> {
@@ -53,7 +53,7 @@ public class GeoRadiusResult<M> {
 	
 	/**
 	 * 获取指定成员位置与中心点之间的距离
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param member
 	 * @return
 	 */
@@ -64,7 +64,7 @@ public class GeoRadiusResult<M> {
 	
 	/**
 	 * 获取指定成员位置经过原始 geohash编码后的有序集合分值(52位有符号整数形式)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param member
 	 * @return
 	 */
@@ -75,7 +75,7 @@ public class GeoRadiusResult<M> {
 	
 	/**
 	 * 获取指定成员位置的经维度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param member
 	 * @return
 	 */

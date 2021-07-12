@@ -26,7 +26,7 @@ import org.sniper.nosql.redis.enums.ZStoreAggregate;
 
 /**
  * 有序集合存储选项
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public final class ZStoreOption implements ZStoreOptional {
@@ -60,7 +60,7 @@ public final class ZStoreOption implements ZStoreOptional {
 
 	/**
 	 * 根据键来构建有序集合的存储选项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -70,7 +70,7 @@ public final class ZStoreOption implements ZStoreOptional {
 
 	/**
 	 * 根据键和聚合方式枚举来构建有序集合的存储选项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @param aggregate
 	 * @return
@@ -81,7 +81,7 @@ public final class ZStoreOption implements ZStoreOptional {
 
 	/**
 	 * 根据键和乘法因子数组来构建有序集合的存储选项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @param weights
 	 * @return
@@ -92,7 +92,7 @@ public final class ZStoreOption implements ZStoreOptional {
 
 	/**
 	 * 根据键、乘法因子数组和聚合方式枚举来构建有序集合的存储选项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @param weights
 	 * @param aggregate

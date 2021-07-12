@@ -20,7 +20,7 @@ package org.sniper.generator.sequence;
 
 /**
  * 时间戳内序列实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class TimestampInternalSequence implements DimensionSequence<TimestampInternalSequence> {
@@ -44,7 +44,7 @@ public class TimestampInternalSequence implements DimensionSequence<TimestampInt
 	
 	/**
 	 * 更新当前时间序列
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	@Override
@@ -84,7 +84,7 @@ public class TimestampInternalSequence implements DimensionSequence<TimestampInt
 	
 	/**
 	 * 生成时间戳内的下一序列
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected long nextSequence() {
@@ -93,7 +93,7 @@ public class TimestampInternalSequence implements DimensionSequence<TimestampInt
 	
 	/**
 	 * 重置时间戳内的序列计数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected long resetSequence() {
@@ -106,7 +106,7 @@ public class TimestampInternalSequence implements DimensionSequence<TimestampInt
 
 	/**
 	 * 生成下一个毫秒时间刻度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param lastTimestamp
 	 * @return
 	 */

@@ -25,7 +25,7 @@ import org.sniper.commons.entity.Versioned;
 
 /**
  * 版本化的UUID主键类型实体抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @SuppressWarnings("serial")

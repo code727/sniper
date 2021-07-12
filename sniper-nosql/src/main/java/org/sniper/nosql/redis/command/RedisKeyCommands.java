@@ -30,21 +30,21 @@ import org.sniper.nosql.redis.option.SortOptional;
 
 /**
  * Redis键命令接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行keys命令，获取所有的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public <K> Set<K> keys();
 	
 	/**
 	 * 在当前库中执行keys命令，获取所有指定类型的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keyType
 	 * @return
 	 */
@@ -52,7 +52,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行keys命令，获取所有的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @return
 	 */
@@ -60,7 +60,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行keys命令，获取所有指定类型的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keyType
 	 * @return
@@ -69,7 +69,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行keys命令，获取所有指定模式的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pattern
 	 * @return
 	 */
@@ -77,7 +77,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行keys命令，获取所有指定模式和类型的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pattern
 	 * @param keyType
 	 * @return
@@ -86,7 +86,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行keys命令，获取所有指定模式的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param pattern
 	 * @return
@@ -95,7 +95,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行keys命令，获取所有指定模式和类型的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param pattern
 	 * @param keyType
@@ -105,14 +105,14 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中随机获取一个键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public <K> K randomKey();
 	
 	/**
 	 * 在当前库中随机获取一个指定类型的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keyType
 	 * @return
 	 */
@@ -120,7 +120,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中随机获取一个键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @return
 	 */
@@ -128,7 +128,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中随机获取一个指定类型的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keyType
 	 * @return
@@ -137,7 +137,7 @@ public interface RedisKeyCommands {
 		
 	/**
 	 * 删除当前库指定的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -145,7 +145,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 删除指定库的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -154,7 +154,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 删除当前库指定的多个键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -162,7 +162,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 删除指定库多个键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -171,7 +171,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 删除当前库指定的多个键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -179,7 +179,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 删除指定库多个键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -188,7 +188,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 判断当前库中指定键是否存在
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -196,7 +196,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 判断指定库中的键是否存在
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -205,7 +205,7 @@ public interface RedisKeyCommands {
 			
 	/**
 	 * 设置当前库中指定键的过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param seconds
 	 * @return
@@ -214,7 +214,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 设置指定库中键的过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param seconds
@@ -226,7 +226,7 @@ public interface RedisKeyCommands {
 	 * 设置当前库中指定键的过期时间戳</P>
 	 * 注意：参数unixTimestamp为Unix时间戳，即"毫秒时间戳/1000"后的值，
 	 * 因此该命令只能达到"秒级过期"控制。如果要进行"毫秒级过期"控制，请使用pExpireAt命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param unixTimestamp Unix时间戳
 	 * @return
@@ -237,7 +237,7 @@ public interface RedisKeyCommands {
 	 * 设置指定库中键的过期时间戳</P>
 	 * 注意：参数unixTimestamp为Unix时间戳，即"毫秒时间戳/1000"后的值，
 	 * 因此该命令只能满足"秒级过期"控制。如果要进行"毫秒级过期"控制，请使用pExpireAt命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param unixTimestamp Unix时间戳
@@ -247,7 +247,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 设置当前库中指定键的过期日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param date
 	 * @return
@@ -256,7 +256,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 设置指定库中键的过期日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param date
@@ -266,7 +266,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 设置当前库中指定键的过期毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param millis
 	 * @return
@@ -275,7 +275,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 设置指定库中键的过期毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param millis
@@ -285,7 +285,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 设置当前库中指定键的过期时间戳
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param timestamp
 	 * @return
@@ -294,7 +294,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 设置指定库中键的过期时间戳
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param timestamp
@@ -304,7 +304,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 设置当前库中指定键的过期日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param date
 	 * @return
@@ -313,7 +313,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 设置指定库中键的过期时间日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param date
@@ -323,7 +323,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中清除键的过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -331,7 +331,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中清除键的过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -340,7 +340,7 @@ public interface RedisKeyCommands {
 		
 	/**
 	 * 将当前库的键移动到目标库
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param dbIndex 目标库索引
 	 * @return
@@ -349,7 +349,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 将指定库中的键移动到目标库
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param dbIndex 目标库索引
@@ -359,7 +359,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 获取当前库的指定键的剩余秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -367,7 +367,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 获取指定库中的键的剩余秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -376,7 +376,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 获取当前库的指定键的剩余毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -384,7 +384,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 获取指定库中的键的剩余毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -393,14 +393,14 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 获取当前库中所有键对应的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public <V> List<V> values();
 	
 	/**
 	 * 获取当前库中所有键对应类型的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param valueType
 	 * @return
 	 */
@@ -408,7 +408,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 获取指定库中所有键对应的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @return
 	 */
@@ -416,7 +416,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 获取指定库中所有键对应类型的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param valueType
 	 * @return
@@ -425,7 +425,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 获取当前库中匹配模式键对应的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pattern
 	 * @return
 	 */
@@ -433,7 +433,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 获取当前库中匹配模式键对应类型的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pattern
 	 * @param valueType
 	 * @return
@@ -442,7 +442,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 获取指定库中匹配模式键对应的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param pattern
 	 * @return
@@ -451,7 +451,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 获取指定库中匹配模式键对应类型的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param pattern
 	 * @param valueType
@@ -461,7 +461,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中获取键的数据类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -469,7 +469,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中获取键的数据类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -478,7 +478,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行sort命令，将键按默认规则进行排序后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -486,7 +486,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行sort命令，将键按默认规则进行排序后返回指定类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -495,7 +495,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行sort命令，将键按默认规则进行排序后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -504,7 +504,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行sort命令，将键按默认规则进行排序后返回指定类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -514,7 +514,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行sort命令，将键按可选规则进行排序后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param optional
 	 * @return
@@ -523,7 +523,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行sort命令，将键按可选规则进行排序后返回指定类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param optional
 	 * @param valueType
@@ -533,7 +533,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行sort命令，将键按可选规则进行排序后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbNames
 	 * @param key
 	 * @param optional
@@ -543,7 +543,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行sort命令，将键按可选规则进行排序后返回指定类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param optional
@@ -555,7 +555,7 @@ public interface RedisKeyCommands {
 	/**
 	 * 在当前库中执行sort命令，将键按默认规则进行排序，将排序结果存入目标键后返回结果个数</p>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param destKey
 	 * @return
@@ -565,7 +565,7 @@ public interface RedisKeyCommands {
 	/**
 	 * 在当前库中执行sort命令，将键按默认规则进行排序，将排序结果存入目标键并设置过期时间后返回结果个数</p>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param destKey
 	 * @param expireSeconds
@@ -576,7 +576,7 @@ public interface RedisKeyCommands {
 	/**
 	 * 在指定库中执行sort命令，将键按默认规则进行排序，将排序结果存入目标键后返回结果个数</p>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param destKey
@@ -587,7 +587,7 @@ public interface RedisKeyCommands {
 	/**
 	 * 在指定库中执行sort命令，将键按默认规则进行排序，将排序结果存入目标键并设置过期时间后返回结果个数</p>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param destKey
@@ -599,7 +599,7 @@ public interface RedisKeyCommands {
 	/**
 	 * 在当前库中执行sort命令，将键按可选规则进行排序，将排序结果存入目标键后返回结果个数</p>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param optional
 	 * @param destKey
@@ -610,7 +610,7 @@ public interface RedisKeyCommands {
 	/**
 	 * 在当前库中执行sort命令，将键按可选规则进行排序，将排序结果存入目标键并设置过期时间后返回结果个数</p>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param optional
 	 * @param destKey
@@ -622,7 +622,7 @@ public interface RedisKeyCommands {
 	/**
 	 * 在指定库中执行sort命令，将键按可选规则进行排序，将排序结果存入目标键后返回结果个数</p>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param optional
@@ -634,7 +634,7 @@ public interface RedisKeyCommands {
 	/**
 	 * 在当前库中执行sort命令，将键按可选规则进行排序，将排序结果存入目标键并设置过期时间后返回结果个数</p>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param optional
@@ -646,14 +646,14 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行scan命令，以增量迭代的方式获取所有的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public <K> IndexedScanResult<K> scan();
 	
 	/**
 	 * 在当前库中执行scan命令，以增量迭代的方式获取所有指定类型的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keyType
 	 * @return
 	 */
@@ -661,7 +661,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行scan命令，以增量迭代的方式获取所有的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param option
 	 * @return
 	 */
@@ -669,7 +669,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行scan命令，以增量迭代的方式获取所有指定类型的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param option
 	 * @param keyType
 	 * @return
@@ -678,7 +678,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param cursorId
 	 * @return
 	 */
@@ -686,7 +686,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param cursorId
 	 * @param keyType
 	 * @return
@@ -695,7 +695,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param cursorId
 	 * @param option
 	 * @return
@@ -704,7 +704,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在当前库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param cursorId
 	 * @param option
 	 * @param keyType
@@ -714,7 +714,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行scan命令，以增量迭代的方式获取所有的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @return
 	 */
@@ -722,7 +722,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行scan命令，以增量迭代的方式获取所有指定类型的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keyType
 	 * @return
@@ -731,7 +731,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行scan命令，以增量迭代的方式获取所有的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param option
 	 * @return
@@ -740,7 +740,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行scan命令，以增量迭代的方式获取所有指定类型的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param option
 	 * @param keyType
@@ -750,7 +750,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param cursorId
 	 * @return
@@ -759,7 +759,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param cursorId
 	 * @param keyType
@@ -769,7 +769,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取到所有的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param cursorId
 	 * @param option
@@ -779,7 +779,7 @@ public interface RedisKeyCommands {
 	
 	/**
 	 * 在指定库中执行scan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的键结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param cursorId
 	 * @param option

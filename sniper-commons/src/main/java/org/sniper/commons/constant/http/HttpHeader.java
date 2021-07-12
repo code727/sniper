@@ -22,7 +22,7 @@ import org.sniper.commons.constant.AbstractLocaleConstant;
 
 /**
  * HTTP头常量类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class HttpHeader extends AbstractLocaleConstant<String> {

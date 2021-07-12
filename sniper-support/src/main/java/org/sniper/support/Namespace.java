@@ -20,14 +20,14 @@ package org.sniper.support;
 
 /**
  * 命名空间标识接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Namespace<K> {
 	
 	/**
 	 * 获取全局默认的空间ID
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public K getDefaultSpaceId();

@@ -46,7 +46,7 @@ import org.sniper.spring.beans.AbstractGenricBean;
 
 /**
  * Spring MongoDB数据访问支持类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
@@ -73,7 +73,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 获取当前实体对象类型对应的集合名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected String getCollectionName() {
@@ -82,7 +82,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 获取转换器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected MongoConverter getConverter() {
@@ -91,7 +91,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 获取映射上下文
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected MappingContext<?, ?> getMappingContext() {
@@ -100,7 +100,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 获取当前实体对象类型对应的MongoDB持久化实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected MongoPersistentEntity<?> getMongoPersistentEntity() {
@@ -109,7 +109,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 		
 	/**
 	 * 获取当前实体对象对应的MongoDB ID键名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected String getIdKeyName() {		
@@ -122,7 +122,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 获取当前实体对象属性对应的MongoDB键名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName 属性名称
 	 * @return
 	 */
@@ -138,7 +138,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 构建ID查询对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @return
 	 */
@@ -148,7 +148,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 构建具备分段能力的查询对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param start
 	 * @param maxRows
 	 * @return
@@ -161,7 +161,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 构建属性查询对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
 	 * @return
@@ -172,7 +172,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 构建具备分段能力的属性查询对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
 	 * @param start 起始位置
@@ -188,7 +188,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 构建属性映射组"逻辑与"查询对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap 属性映射组
 	 * @return
 	 */
@@ -198,7 +198,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 构建具备分段能力的属性映射组"逻辑与"查询对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap 属性映射组
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
@@ -213,7 +213,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 构建属性映射组"逻辑或"查询对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap 属性映射组
 	 * @return
 	 */
@@ -223,7 +223,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 构建具备分段能力的属性映射组"逻辑或"查询对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap 属性映射组
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
@@ -238,7 +238,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 		
 	/**
 	 * 将属性名和属性值构建成where-is条件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName
 	 * @param propertyValue
 	 * @return
@@ -251,7 +251,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 将属性映射组构建成多个where-is"逻辑与"条件列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap
 	 * @return
 	 */
@@ -272,7 +272,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 将属性映射组构建成多个where-is"逻辑或"条件列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap
 	 * @return
 	 */
@@ -293,7 +293,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 将属性映射组构建成多个where-is条件列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap 属性映射组
 	 * @return
 	 */
@@ -319,7 +319,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 设置分段查询参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询对象
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
@@ -334,7 +334,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 将ID值构建成where-is条件的MatchOperation对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @return
 	 */
@@ -352,7 +352,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 将属性名和属性值构建成where-is条件的MatchOperation对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName
 	 * @param propertyValue
 	 * @return
@@ -363,7 +363,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 将属性映射组构建成多个where-is"逻辑与"条件的MatchOperation对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap
 	 * @return
 	 */
@@ -373,7 +373,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 根据起始位置构建SkipOperation对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param start
 	 * @return
 	 */
@@ -383,7 +383,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 根据最大行数构建LimitOperation对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param maxRows
 	 * @return
 	 */
@@ -393,7 +393,7 @@ public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
 	
 	/**
 	 * 根据结果类型构建ProjectionOperation对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @return
 	 */

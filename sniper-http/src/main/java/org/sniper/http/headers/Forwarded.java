@@ -27,7 +27,7 @@ import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
 
 /**
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class Forwarded implements Serializable {

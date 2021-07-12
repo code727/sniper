@@ -20,14 +20,14 @@ package org.sniper.persistence.datasource.selector;
 
 /**
  * 多数据源选择器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface MultipleDataSourceSelector {
 	
 	/**
 	 * 从指定的多个源数组中选择并返回一个元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sources
 	 * @return
 	 */

@@ -20,7 +20,7 @@ package org.sniper.commons.response;
 
 /**
  * 抽象响应类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractResponse<C> implements MessagingResponse<C> {

@@ -22,21 +22,21 @@ import java.util.Locale;
 
 /**
  * 本地化常量接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface LocaleConstant<K, V> extends Constant<K, V> {
 	
 	/**
 	 * 获取当前枚举对象值的本地化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getMessage();
 	
 	/**
 	 * 获取当前枚举对象值的本地化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param locale
 	 * @return
 	 */
@@ -44,7 +44,7 @@ public interface LocaleConstant<K, V> extends Constant<K, V> {
 	
 	/**
 	 * 获取当前枚举对象值的本地化消息，未获取到时返回默认的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param defaultMessage
 	 * @return
 	 */
@@ -52,7 +52,7 @@ public interface LocaleConstant<K, V> extends Constant<K, V> {
 	
 	/**
 	 * 获取当前枚举对象值的本地化消息，未获取到时返回默认的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param locale
 	 * @param defaultMessage
 	 * @return
@@ -61,7 +61,7 @@ public interface LocaleConstant<K, V> extends Constant<K, V> {
 	
 	/**
 	 * 获取当前枚举对象值的本地参数化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param params
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public interface LocaleConstant<K, V> extends Constant<K, V> {
 	
 	/**
 	 * 获取当前枚举对象值的本地参数化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param locale
 	 * @param params
 	 * @return
@@ -78,7 +78,7 @@ public interface LocaleConstant<K, V> extends Constant<K, V> {
 	
 	/**
 	 * 获取当前枚举对象值的本地参数化消息，未获取到时返回默认的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param params
 	 * @param defaultMessage
 	 * @return
@@ -87,7 +87,7 @@ public interface LocaleConstant<K, V> extends Constant<K, V> {
 	
 	/**
 	 * 获取当前枚举对象值的本地参数化消息，未获取到时返回默认的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param locale
 	 * @param params
 	 * @param defaultMessage

@@ -24,7 +24,7 @@ import org.sniper.commons.util.CollectionUtils;
 
 /**
  * 分页明细结果模型
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DetailPagingModel<T> extends PagingModel<T> implements PagingDetailResult<T> {

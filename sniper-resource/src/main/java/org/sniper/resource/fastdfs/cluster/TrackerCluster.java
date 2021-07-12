@@ -25,91 +25,91 @@ import org.sniper.resource.server.InternetServer;
 
 /**
  * Tracker集群族接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface TrackerCluster extends InternetServer {
 		
 	/**
 	 * 设置集群族内的TrackerServer映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param trackers
 	 */
 	public void setTrackers(Map<String, Tracker> trackers);
 	
 	/**
 	 * 获取集群族内的TrackerServer映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<String, Tracker> getTrackers();
 	
 	/**
 	 * 设置Tracker集群族连接超时时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param connectTimeout
 	 */
 	public void setConnectTimeout(int connectTimeout);
 	
 	/**
 	 * 获取Tracker集群族连接超时时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getConnectTimeout();
 	
 	/**
 	 * 设置Tracker集群族网络超时时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param networkTimeout
 	 */
 	public void setNetworkTimeout(int networkTimeout);
 	
 	/**
 	 * 设置Tracker集群族网络超时时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getNetworkTimeout();
 	
 	/**
 	 * 设置字符集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param charset
 	 */
 	public void setCharset(String charset);
 	
 	/**
 	 * 获取字符集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getCharset();
 		
 	/**
 	 * 是否设置HTTP安全秘钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param httpAntiStealToken
 	 */
 	public void setHttpAntiStealToken(boolean httpAntiStealToken);
 
 	/**
 	 * 判断是否设置HTTP安全秘钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isHttpAntiStealToken();
 	
 	/**
 	 * 设置HTTP安全秘钥 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param httpSecretKey
 	 */
 	public void setHttpSecretKey(String httpSecretKey);
 
 	/**
 	 * 获取HTTP安全秘钥 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getHttpSecretKey();

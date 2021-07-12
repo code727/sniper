@@ -23,14 +23,14 @@ import java.util.Set;
 
 /**
  * FastDFS文件删除器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FastDeleter {
 	
 	/**
 	 * 删除指定路径的资源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param path
 	 * @return
 	 * @throws Exception
@@ -39,7 +39,7 @@ public interface FastDeleter {
 	
 	/**
 	 * 批量删除指定路径的资源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param paths
 	 * @throws Exception
 	 */

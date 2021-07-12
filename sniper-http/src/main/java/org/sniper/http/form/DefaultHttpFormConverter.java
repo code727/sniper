@@ -27,7 +27,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 默认HTTP表单转换器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultHttpFormConverter implements HttpFormConverter {
@@ -58,7 +58,7 @@ public class DefaultHttpFormConverter implements HttpFormConverter {
 		
 	/**
 	 * 拼接表单中的请求地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url
 	 * @param form
 	 */
@@ -70,7 +70,7 @@ public class DefaultHttpFormConverter implements HttpFormConverter {
 	
 	/**
 	 * 拼接表单中的Action请求路径
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url
 	 * @param form
 	 */
@@ -89,7 +89,7 @@ public class DefaultHttpFormConverter implements HttpFormConverter {
 	
 	/**
 	 * 检查表单URL的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param url
 	 */

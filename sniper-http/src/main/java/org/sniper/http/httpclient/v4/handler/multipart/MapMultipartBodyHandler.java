@@ -27,7 +27,7 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 
 /**
  * Map类型的Multipart请求体处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MapMultipartBodyHandler extends AbstractCompositeMultipartBodyHandler<Map<String, Object>> {

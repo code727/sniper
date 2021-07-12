@@ -20,21 +20,21 @@ package org.sniper.beans;
 
 /**
  * 泛型Bean接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface GenericBean<T> {
 	
 	/**
 	 * 设置当前泛型类所管理的目标类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param targetType
 	 */
 	public void setTargetType(Class<T> targetType);
 	
 	/**
 	 * 获取当前泛型类所管理的目标类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Class<T> getTargetType();

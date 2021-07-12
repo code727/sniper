@@ -22,7 +22,7 @@ import org.sniper.commons.util.Base64Utils;
 
 /**
  * Base64编解码处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class Base64Codec extends AbstractCodec {

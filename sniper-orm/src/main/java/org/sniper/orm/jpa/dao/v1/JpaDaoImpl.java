@@ -53,7 +53,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * JPA标准的DAO实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @SuppressWarnings("deprecation")

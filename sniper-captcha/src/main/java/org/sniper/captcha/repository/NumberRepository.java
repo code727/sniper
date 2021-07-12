@@ -20,7 +20,7 @@ package org.sniper.captcha.repository;
 
 /**
  * 数字文本库
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class NumberRepository extends TextRepository {

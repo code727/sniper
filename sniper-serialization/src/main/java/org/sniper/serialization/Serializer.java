@@ -20,14 +20,14 @@ package org.sniper.serialization;
 
 /**
  * 序列器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Serializer {
 	
 	/**
 	 * 将对象序列化为字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param t
 	 * @return
 	 * @throws SerializationException
@@ -36,7 +36,7 @@ public interface Serializer {
 	
 	/**
 	 * 将对象序列化为字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param t
 	 * @return
 	 * @throws SerializationException
@@ -45,7 +45,7 @@ public interface Serializer {
 		
 	/**
 	 * 将字节数组反序列化成全局目标类型的对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bytes
 	 * @return
 	 * @throws SerializationException
@@ -54,7 +54,7 @@ public interface Serializer {
 	
 	/**
 	 * 判断是否为类型化序列器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isTypedSerializer();

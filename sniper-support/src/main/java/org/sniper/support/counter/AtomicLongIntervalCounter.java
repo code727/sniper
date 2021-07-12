@@ -24,7 +24,7 @@ import org.sniper.commons.util.AssertUtils;
 
 /**
  * 原子长整型区间计数器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class AtomicLongIntervalCounter extends AbstractIntervalCounter<Long> {
@@ -59,7 +59,7 @@ public class AtomicLongIntervalCounter extends AbstractIntervalCounter<Long> {
 	
 	/**
 	 * 区间分配，当起始值发生变更时，需要调用此方法重置当前值并且重新计算区间范围
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	private void allocate() {
 		if (this.atomicValue == null || this.atomicValue.get() != this.start) {
@@ -71,7 +71,7 @@ public class AtomicLongIntervalCounter extends AbstractIntervalCounter<Long> {
 	
 	/**
 	 * 调整区间范围，当起始值或区间步长发生变更时，需要调用此方法重新计算区间范围
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	private void adjustRange() {
 		/* 以Start元素作为中间点，计算出有效区间的最小值和最大值 */

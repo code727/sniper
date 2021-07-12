@@ -27,7 +27,7 @@ import org.sniper.generator.sequence.TimestampInternalSequence;
 
 /**
  * 推特Snowflake算法生成器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T> {
@@ -86,14 +86,14 @@ public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T>
         
 	/**
 	 * 序列生成器接口
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author  Daniele
 	 * @version 1.0
 	 */
 	protected interface SequenceGenerator<T> {
 
 		/** 
 		 * 根据时间序列生成结果
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param timeSequence
 		 * @return 
 		 */
@@ -108,7 +108,7 @@ public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T>
 	 * 1)由于有数据中心和服务器ID的参与，因此能保证生成的数字是全局唯一的；</P>
 	 * 2)在单节点环境中，由于共用的是同一时钟，因此当多个线程交替执行时，也能保证生成的数字是趋势递增的，即后执行的线程生成的数字一定比先执行的线程生成的数字大</P>
 	 * 3)在分布式环境中，由于多个节点之间很难保证有一个全局同步的时钟，因此不能保证先后生成的数字是趋势递增的</P>
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author  Daniele
 	 * @version 1.0
 	 */
 	class DefaultSequenceGenerator implements SequenceGenerator<Long> {
@@ -132,7 +132,7 @@ public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T>
 	 * 此时A和B的结果中时间差值部分是相同的，而毫秒内的序列号取决于两个节点的执行时刻，因此有可能重复。
 	 * 最极端情况下，A和B节点在同一毫秒内都生成了超过2048个结果，则必然会有重复。
 	 * 3)同理，由于分布式环境时钟同步问题，并不能保证多个节点先后生成的数字是趋势递增的。</P>
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author  Daniele
 	 * @version 1.0
 	 */
 	class CustomizeSequenceGenerator implements SequenceGenerator<String> {

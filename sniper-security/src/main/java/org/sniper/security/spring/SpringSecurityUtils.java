@@ -23,14 +23,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * SpringSecurity工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SpringSecurityUtils {
 
 	/**
 	 * 获取上下文对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static SecurityContext getContext() {
@@ -39,7 +39,7 @@ public class SpringSecurityUtils {
 	
 	/**
 	 * 获取当前用户
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")

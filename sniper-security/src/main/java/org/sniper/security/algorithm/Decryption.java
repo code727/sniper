@@ -22,14 +22,14 @@ import org.sniper.codec.Codecable;
 
 /**
  * 解密算法接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Decryption extends Codecable {
 	
 	/**
 	 * 将密文解密为明文
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param ciphertext
 	 * @return
 	 * @throws Exception
@@ -38,7 +38,7 @@ public interface Decryption extends Codecable {
 	
 	/**
 	 * 将密文字节数组解密成明文
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param ciphertextBytes
 	 * @return
 	 * @throws Exception
@@ -47,7 +47,7 @@ public interface Decryption extends Codecable {
 	
 	/**
 	 * 将密文解密为明文字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param ciphertext
 	 * @return
 	 * @throws Exception
@@ -56,7 +56,7 @@ public interface Decryption extends Codecable {
 	
 	/**
 	 * 将密文字节数组解密为明文字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param ciphertextBytes
 	 * @return
 	 * @throws Exception

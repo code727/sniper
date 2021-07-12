@@ -30,7 +30,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 颜色管理器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractColorManager implements ColorManager, InitializingBean {
@@ -81,7 +81,7 @@ public abstract class AbstractColorManager implements ColorManager, Initializing
 
 	/**
 	 * 获取颜色名称组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected String[] getColorNames() {
@@ -90,7 +90,7 @@ public abstract class AbstractColorManager implements ColorManager, Initializing
 	
 	/**
 	 * 根据备选颜色对象映射设置颜色名称组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param colors
 	 */
 	protected void setTextColorNames(Map<String, Color> colors) {
@@ -99,7 +99,7 @@ public abstract class AbstractColorManager implements ColorManager, Initializing
 	
 	/**
 	 * 构建默认支持的颜色映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected abstract Map<String, Color> buildDefaultColors();

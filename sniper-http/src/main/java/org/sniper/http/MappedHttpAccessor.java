@@ -39,7 +39,7 @@ import org.sniper.templet.message.formatter.MessageFormatter;
 
 /**
  * 已映射的HTTP访问器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapter implements MappedHttpSender {
@@ -108,7 +108,7 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 		
 	/**
 	 * 将指定名称对应的表单对象加上请求参数后格式化成完整的URL
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param param
 	 * @return
@@ -151,7 +151,7 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 	
 	/**
 	 * 执行指定名称对应的表单的请求方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param requestBody
 	 * @param param
@@ -184,7 +184,7 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 	
 	/**
 	 * 根据表单所绑定的响应处理器处理字符串响应后返回最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param form
 	 * @param response
 	 * @return
@@ -211,7 +211,7 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 	
 	/**
 	 * 执行HTTP GET方法后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param requestBody
 	 * @param param
@@ -225,7 +225,7 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 	
 	/**
 	 * 执行HTTP DELETE方法后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param requestBody
 	 * @param param
@@ -239,7 +239,7 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 		
 	/**
 	 * 执行HTTP GET方法后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param param
 	 * @return
@@ -249,7 +249,7 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 	
 	/**
 	 * 执行HTTP POST方法后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param requestBody
 	 * @param param
@@ -260,7 +260,7 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 	
 	/**
 	 * 执行HTTP PUT方法后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param requestBody
 	 * @param param
@@ -271,7 +271,7 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 	
 	/**
 	 * 执行HTTP DELETE方法后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param param
 	 * @return

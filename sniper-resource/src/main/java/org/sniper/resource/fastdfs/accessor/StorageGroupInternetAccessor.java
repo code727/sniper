@@ -27,7 +27,7 @@ import org.sniper.resource.fastdfs.cluster.StorageGroup;
 
 /**
  * Storage组外网访问器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class StorageGroupInternetAccessor extends AbstractAccessor {

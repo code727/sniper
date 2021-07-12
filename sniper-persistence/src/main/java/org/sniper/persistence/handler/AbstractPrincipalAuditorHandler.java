@@ -23,7 +23,7 @@ import org.sniper.security.manager.PrincipalManager;
 
 /**
  * 关联Principal对象的审核者处理器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractPrincipalAuditorHandler implements AuditorHandler, InitializingBean {

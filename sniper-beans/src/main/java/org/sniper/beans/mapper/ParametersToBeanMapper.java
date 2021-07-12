@@ -29,7 +29,7 @@ import org.sniper.commons.util.ObjectUtils;
 
 /**
  * org.sniper.beans.parameter.Parameters对象与Java Bean对象之间的映射转换
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ParametersToBeanMapper<V> extends AbstractBeanMapper<Parameters<String, V>> {
@@ -74,7 +74,7 @@ public class ParametersToBeanMapper<V> extends AbstractBeanMapper<Parameters<Str
 	
 	/**
 	 * 规则内映射处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @param mappedBean
 	 * @param rule

@@ -24,28 +24,28 @@ import org.sniper.http.headers.MediaType;
 
 /**
  * HTTP消息构建器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface HttpMessageBuilder<T> {
 		
 	/**
 	 * 获取当前构建器支持的所有Media类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<MediaType> getSupportedMediaTypes();
 	
 	/**
 	 * 获取当前构建器支持的默认Media类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public MediaType getDefaultMediaType();
 	
 	/**
 	 * 判断当前构建器是否支持指定请求体和Media类型的处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param requestBody
 	 * @return
 	 */
@@ -53,7 +53,7 @@ public interface HttpMessageBuilder<T> {
 	
 	/**
 	 * 构建消息结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url
 	 * @param requestBody
 	 * @param mediaType

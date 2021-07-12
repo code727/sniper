@@ -23,7 +23,7 @@ import org.sniper.kafka.support.ProduceResult;
 
 /**
  * 可记录日志的生产者监听器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class LoggingProducerListener<K, V> extends AbstractProducerListener<K, V> {

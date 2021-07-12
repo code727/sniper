@@ -20,35 +20,35 @@ package org.sniper.resource.server;
 
 /**
  * 互联网服务器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface InternetServer extends IntranetServer {
 		
 	/**
 	 * 设置互联网服务地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param internetHost
 	 */
     public void setInternetHost(String internetHost);
 	
     /**
      * 获取互联网服务地址
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @return
      */
 	public String getInternetHost();
 
 	/**
 	 * 设置互联网服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param internetPort
 	 */
 	public void setInternetPort(int internetPort);
 	
 	/**
 	 * 获取互联网服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param extPort
 	 * @return
 	 */

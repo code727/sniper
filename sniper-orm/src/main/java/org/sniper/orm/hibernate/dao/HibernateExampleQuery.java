@@ -22,14 +22,14 @@ import java.util.List;
 
 /**
  * Hibernate示例查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface HibernateExampleQuery<T> {
 	
 	/**
 	 * 以实体为查询条件查询出实体结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface HibernateExampleQuery<T> {
 	
 	/**
 	 * 以实体为查询条件查询出实体结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param entity
 	 * @return
@@ -46,7 +46,7 @@ public interface HibernateExampleQuery<T> {
 	
 	/**
 	 * 以实体为查询条件分段查询出实体结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 * @param start
 	 * @param maxRows
@@ -56,7 +56,7 @@ public interface HibernateExampleQuery<T> {
 	
 	/**
 	 * 以实体为查询条件分段查询出实体结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param entity
 	 * @param start

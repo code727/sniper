@@ -27,7 +27,7 @@ import org.sniper.orm.jpa.entity.CuAuditEntity;
 
 /**
  * UUID主键类型的新增/更新审核实体对象抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @SuppressWarnings("serial")

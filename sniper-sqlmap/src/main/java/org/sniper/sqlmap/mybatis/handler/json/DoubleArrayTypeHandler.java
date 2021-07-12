@@ -22,7 +22,7 @@ import org.sniper.sqlmap.mybatis.handler.array.ArrayTypeHandler;
 
 /**
  * 双精度浮点型数组类型处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DoubleArrayTypeHandler extends ArrayTypeHandler<Double> {

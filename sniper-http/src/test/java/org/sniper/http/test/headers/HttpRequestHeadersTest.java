@@ -41,7 +41,7 @@ import org.sniper.test.junit.BaseTestCase;
 
 /**
  * HTTP请求头单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class HttpRequestHeadersTest extends BaseTestCase {

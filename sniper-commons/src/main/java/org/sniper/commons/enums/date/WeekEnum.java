@@ -26,7 +26,7 @@ import org.sniper.commons.util.MessageUtils;
 
 /**
  * 星期枚举类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum WeekEnum {
@@ -89,7 +89,7 @@ public enum WeekEnum {
 	
 	/**
 	 * 判断指定的键是否匹配
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -99,7 +99,7 @@ public enum WeekEnum {
 	
 	/**
 	 * 将指定的键解析成Week对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */

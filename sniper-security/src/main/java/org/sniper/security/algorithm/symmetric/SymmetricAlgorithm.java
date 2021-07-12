@@ -22,28 +22,28 @@ import org.sniper.security.algorithm.SecurityAlgorithm;
 
 /**
  * 对称算法接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SymmetricAlgorithm extends SecurityAlgorithm {
 	
 	/**
 	 * 获取算法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getAlgorithm();
 	
 	/**
 	 * 设置私钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param privateKey
 	 */
 	public void setPrivateKey(String privateKey);
 	
 	/**
 	 * 获取私钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getPrivateKey();

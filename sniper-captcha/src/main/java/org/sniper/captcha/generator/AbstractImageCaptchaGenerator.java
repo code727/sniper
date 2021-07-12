@@ -34,7 +34,7 @@ import org.sniper.image.layout.CaptchaLayout;
 
 /**
  * 图片验证码生成器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
@@ -143,7 +143,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	
 	/**
 	 * 构建默认样式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected CaptchaLayout buildDefaultLayout() {
@@ -162,7 +162,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	
 	/**
 	 * 构建默认的背景颜色管理器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 * @throws Exception
 	 */
@@ -174,7 +174,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	
 	/**
 	 * 构建默认的边框颜色管理器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 * @throws Exception
 	 */
@@ -186,7 +186,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	
 	/**
 	 * 构建默认的干扰项颜色管理器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 * @throws Exception
 	 */
@@ -198,7 +198,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	
 	/** 
 	 * 构建默认的文本颜色管理器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 * @throws Exception
 	 */
@@ -210,7 +210,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 	
 	/** 
 	 * 构建默认的文本字体管理器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return 
 	 * @throws Exception 
 	 */
@@ -222,7 +222,7 @@ public abstract class AbstractImageCaptchaGenerator extends TextCaptchaGenerator
 		
 	/**
 	 * 初始化布局
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	private void initializeLayout() {
 		

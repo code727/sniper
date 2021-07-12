@@ -22,91 +22,91 @@ import org.sniper.nosql.redis.enums.Order;
 
 /**
  * 排序可选项接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SortOptional {
 	
 	/**
 	 * 获取by模式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public byte[] getBy();
 	
 	/**
 	 * 设置by模式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param by
 	 */
 	public void setBy(byte[] by);
 	
 	/**
 	 * 设置by模式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pattern
 	 */
 	public void setBy(String pattern);
 
 	/**
 	 * 获取分段限制
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Limit getLimit();
 
 	/**
 	 * 设置分段限制
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param limit
 	 */
 	public void setLimit(Limit limit);
 
 	/**
 	 * 获取get模式组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public byte[][] getGets();
 	
 	/**
 	 * 设置get模式组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param gets
 	 */
 	public void setGets(byte[]... gets);
 
 	/**
 	 * 设置get模式组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param patterns
 	 */
 	public void setGets(String... patterns);
 	
 	/**
 	 * 获取排序方式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Order getOrder();
 
 	/**
 	 * 设置排序方式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param order
 	 */
 	public void setOrder(Order order);
 
 	/**
 	 * 判断是否使用alpha修饰符对字符串进行排序
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isAlpha();
 
 	/**
 	 * 设置是否使用alpha修饰符对字符串进行排序
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param alpha
 	 */
 	public void setAlpha(boolean alpha);

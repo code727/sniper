@@ -20,7 +20,7 @@ package org.sniper.context;
 
 /**
  * 应用上下文工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ThreadLocalHolder {
@@ -29,7 +29,7 @@ public class ThreadLocalHolder {
 	
 	/**
 	 * 清除上下文
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	public static void clear() {
 		holder.clear();
@@ -37,7 +37,7 @@ public class ThreadLocalHolder {
 	
 	/**
 	 * 根据名称获取线程局部变量的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -47,7 +47,7 @@ public class ThreadLocalHolder {
 	
 	/**
 	 * 设置线程局部变量的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param value
 	 */
@@ -57,7 +57,7 @@ public class ThreadLocalHolder {
 	
 	/**
 	 * 根据名称删除对应的局部变量属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -67,7 +67,7 @@ public class ThreadLocalHolder {
 		
 	/**
 	 * 创建基于Map类型的线程局部变量上下文对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static MapThreadLocalContext newMapThreadLocalContext() {

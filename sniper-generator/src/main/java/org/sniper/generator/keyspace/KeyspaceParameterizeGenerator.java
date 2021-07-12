@@ -24,14 +24,14 @@ import org.sniper.generator.ParameterizeGenerator;
 
 /**
  * 基于键空间的参数化生成器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface KeyspaceParameterizeGenerator<K, P, V> extends KeyspaceGenerator<K, V>, ParameterizeGenerator<P, V> {
 	
 	/**
 	 * 根据键和参数生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param parameter
 	 * @return
@@ -40,7 +40,7 @@ public interface KeyspaceParameterizeGenerator<K, P, V> extends KeyspaceGenerato
 	
 	/**
 	 * 根据键和参数批量生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param parameter
 	 * @param count

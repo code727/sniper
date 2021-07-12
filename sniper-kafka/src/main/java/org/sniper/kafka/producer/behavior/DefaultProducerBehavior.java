@@ -28,7 +28,7 @@ import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerialize
 
 /**
  * 生产者默认行为实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultProducerBehavior implements ProducerBehavior {

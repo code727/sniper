@@ -25,7 +25,7 @@ import org.sniper.commons.entity.IdEntity;
 
 /**
  * 
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class Developer extends IdEntity<Long> implements Serializable {

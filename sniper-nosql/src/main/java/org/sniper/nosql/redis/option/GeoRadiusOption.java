@@ -27,7 +27,7 @@ import org.sniper.nosql.redis.enums.Order;
 
 /**
  * GeoRadius命令行选项
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class GeoRadiusOption implements Serializable {
@@ -36,7 +36,7 @@ public class GeoRadiusOption implements Serializable {
 
 	/**
 	 * 附加信息枚举类
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author  Daniele
 	 * @version 1.0
 	 */
 	public enum Attach {
@@ -63,7 +63,7 @@ public class GeoRadiusOption implements Serializable {
 	
 	/**
 	 * 添加WITHDIST附加信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public GeoRadiusOption withDist() {
@@ -73,7 +73,7 @@ public class GeoRadiusOption implements Serializable {
 	
 	/**
 	 * 添加WITHCOORD附加信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public GeoRadiusOption withCoord() {
@@ -83,7 +83,7 @@ public class GeoRadiusOption implements Serializable {
 	
 	/**
 	 * 添加WITHHASH附加信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public GeoRadiusOption withHash() {
@@ -93,7 +93,7 @@ public class GeoRadiusOption implements Serializable {
 	
 	/**
 	 * 判断是否包含有WITHCOORD选项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean includeCoordinates() {
@@ -102,7 +102,7 @@ public class GeoRadiusOption implements Serializable {
 	
 	/**
 	 * 判断是否包含有WITHDIST选项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean includeDistance() {
@@ -111,7 +111,7 @@ public class GeoRadiusOption implements Serializable {
 	
 	/**
 	 * 判断是否包含有WITHHASH选项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean includeHash() {

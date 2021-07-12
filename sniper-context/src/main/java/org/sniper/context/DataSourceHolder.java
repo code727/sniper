@@ -20,7 +20,7 @@ package org.sniper.context;
 
 /**
  * 数据源上下文工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DataSourceHolder extends ThreadLocalHolder {
@@ -29,7 +29,7 @@ public class DataSourceHolder extends ThreadLocalHolder {
 	
 	/**
 	 * 设置数据源到线程上下文变量中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 */
     public static void setDataSource(Object source){  
@@ -38,7 +38,7 @@ public class DataSourceHolder extends ThreadLocalHolder {
       
     /**
      * 从线程上下文变量中获取数据源
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @return
      */
     public static Object getDataSource() {  
@@ -47,7 +47,7 @@ public class DataSourceHolder extends ThreadLocalHolder {
     
     /**
      * 删除线程上下文变量中存储的数据源名称
-     * @author <a href="mailto:code727@gmail.com">杜斌</a>
+     * @author Daniele
      */
     public static Object removeDataSource() {
     	return removeAttribute(DATASOURCE_CONTEXT_ATTRIBUTE_NAME);

@@ -20,7 +20,7 @@ import org.sniper.test.junit.BaseTestCase;
 
 /**
  * JAVA Bean工具测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0, 2015-2-26
  */
 public class BeanUtilsTest extends BaseTestCase {

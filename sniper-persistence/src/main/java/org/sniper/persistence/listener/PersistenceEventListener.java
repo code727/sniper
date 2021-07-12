@@ -16,39 +16,39 @@
  * Create Date : 2015-1-27
  */
 
-package org.sniper.persistence;
+package org.sniper.persistence.listener;
 
 /**
  * 持久化事件监听器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface PersistenceEventListener<T> {
 	
 	/**
-	 * 实体准备进行新增操作之前触发
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 新增实体之前触发onPrePersist方法
+	 * @author Daniele 
 	 * @param entity
 	 */
 	public void onPrePersist(T entity);
 	
 	/**
-	 * 实体准备进行更新操作之前触发
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 更新实体之前触发onPreUpdate方法
+	 * @author Daniele 
 	 * @param entity
 	 */
 	public void onPreUpdate(T entity);
 	
 	/**
-	 * 实体准备进行删除操作之前触发
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 删除实体之前触发onPreRemove方法
+	 * @author Daniele 
 	 * @param entity
 	 */
 	public void onPreRemove(T entity); 
 	
 	/**
-	 * 准备进行销毁之前触发
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * 销毁实体之前触发onPreDestroy方法
+	 * @author Daniele
 	 */
 	public void onPreDestroy();
 

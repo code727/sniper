@@ -20,35 +20,35 @@ package org.sniper.support.counter;
 
 /**
  * 计数器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Counter<V> {
 	
 	/**
 	 * 获取起始值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public V getStart();
 	
 	/**
 	 * 设置起始值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param start
 	 */
 	public void setStart(V start);
 	
 	/**
 	 * 累加默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public V increment();
 	
 	/**
 	 * 累加指定值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -56,14 +56,14 @@ public interface Counter<V> {
 	
 	/**
 	 * 累减默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public V decrement();
 	
 	/**
 	 * 累减指定值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public interface Counter<V> {
 	
 	/**
 	 * 获取当前计数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public V get();

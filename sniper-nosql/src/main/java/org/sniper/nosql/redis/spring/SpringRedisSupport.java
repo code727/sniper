@@ -73,7 +73,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 
 /**
  * SpringRedis支持类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class SpringRedisSupport extends RedisSupport {
@@ -135,7 +135,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 选择并连接库
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param connection
 	 * @param dbName
 	 * @return
@@ -157,7 +157,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 			
 	/**
 	 * 设置键的过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param connection
 	 * @param keyByte
 	 * @param expireTime
@@ -172,7 +172,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 批量设置多个键的过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param connection
 	 * @param keyBytes
 	 * @param expireTime
@@ -189,7 +189,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将ListPosition枚举转换为Spring的列表位置枚举
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param position
 	 * @return
 	 */
@@ -199,7 +199,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将有序集合聚合方式枚举转换为Spring的Aggregate对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param aggregate
 	 * @return
 	 */
@@ -209,7 +209,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将地理位置坐标点转换为Spring的Point对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param point
 	 * @return
 	 */
@@ -219,7 +219,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将Spring的Point对象转换为地理位置坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param point
 	 * @return
 	 */
@@ -229,7 +229,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将多个成员对应的Point对象转换为地理位置坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param members
 	 * @param points
 	 * @return
@@ -251,7 +251,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将排序可选项转换为Spring的SortParameters对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param optional
 	 */
 	protected SortParameters toSortParameters(SortOptional optional) {
@@ -268,7 +268,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将Geo空间元素集转换为Spring坐标点与成员之间的映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param locations
 	 * @return
 	 */
@@ -288,7 +288,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将GEO距离单位枚举对象转换为Spring的度量(Metric)对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param unit
 	 * @return
 	 */
@@ -303,7 +303,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将Spring的度量(Metric)对象转换为GEO距离单位枚举
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param metric
 	 * @return
 	 */
@@ -313,7 +313,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将地理位置坐标环转换为Spring的Circle对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param geocircle
 	 * @return
 	 */
@@ -323,7 +323,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 
 	/**
 	 * 将距离对象转换为Spring的Distance对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param geoDistance
 	 * @return
 	 */
@@ -333,7 +333,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将指定单位的距离值字节数组转换为GEO距离对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param distanceByte
 	 * @param unit
 	 * @return
@@ -345,7 +345,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将指定的Spring距离对象转换为GEO距离对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param distance
 	 * @return
 	 */
@@ -358,7 +358,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将GeoRadius命令行选项转换为Spring的GeoRadiusCommandArgs对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param option
 	 * @return
 	 */
@@ -389,7 +389,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 将Spring的GEO结果转换为GeoRadius命令行返回的空间元素集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param geoResults
 	 * @return
@@ -417,7 +417,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 序列化带排名值的成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param scoreMembers
 	 * @return
@@ -439,7 +439,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 反序列Spring的元组结果集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param tuples
 	 * @param valueType
@@ -478,7 +478,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 打开管道
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param connection
 	 */
 	private void openPipeline(RedisConnection connection) {
@@ -488,7 +488,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	
 	/**
 	 * 发送管道命令后关闭，返回管道连接期间若干命令执行后一系列的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param connection
 	 */
 	private List<Object> closePipeline(RedisConnection connection) {

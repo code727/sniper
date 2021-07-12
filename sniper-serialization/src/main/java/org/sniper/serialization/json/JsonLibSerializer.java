@@ -56,7 +56,7 @@ import net.sf.json.util.JSONUtils;
 
 /**
  * JsonLib序列器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class JsonLibSerializer extends AbstractJsonSerializer {
@@ -91,7 +91,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	
 	/**
 	 * 构建默认的MorpherRegistry对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	private MorpherRegistry buildDefaultMorpherRegistry() {
@@ -106,7 +106,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	
 	/**
 	 * 构建默认的JsonConfig对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	private JsonConfig buildDefaultJsonConfig() {
@@ -131,7 +131,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 		
 	/**
 	 * 注册指定类型的DateMorpher
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dateFormat
 	 */
 	private void registerDateMorpher(String dateFormat) {
@@ -140,7 +140,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	
 	/**
 	 * 注册指定类型的JSON Date值的处理过程
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dateFormat
 	 */
 	private void registerJsonDateProcessor(final String dateFormat) {
@@ -197,7 +197,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	 * 2)如果调用方传入的目标对象类型为Object，则默认反序列化结果的类型为net.sf.json.JSONObject<P>
 	 * 因此，为达到保持与CodehausJacksonSerializer和FasterxmlJacksonSerializer实现类在反序列化默认行为上的一致性，以及向调用方屏蔽掉第三方专用API的目的，
 	 * 针对于上述两种情况，可以在反序列化执行之前，调用此方法将目标对象类型统一返回为具体的实现类对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 * @return
 	 */
@@ -274,7 +274,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	
 	/**
 	 * 将原集合转换为指定类型的集合，目的与safeDeserializeType方法的一致
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sourceSollection
 	 * @param collectionType
 	 * @return
@@ -302,7 +302,7 @@ public class JsonLibSerializer extends AbstractJsonSerializer {
 	
 	/**
 	 * DateBeanMorpher实现类
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author  Daniele
 	 * @version 1.0
 	 */
 	class DateBeanMorpher implements ObjectMorpher {

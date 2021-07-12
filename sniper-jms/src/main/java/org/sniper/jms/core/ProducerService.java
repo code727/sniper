@@ -22,14 +22,14 @@ import javax.jms.Destination;
 
 /**
  * JMS生产者服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ProducerService {
 		
 	/**
 	 * 按指定名称的生产策略发送消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param strategyName 生产策略名称
 	 * @param message 消息数据
 	 */
@@ -37,7 +37,7 @@ public interface ProducerService {
 	
 	/**
 	 * 按指定的生产策略将消息发送到目的地
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param strategyName
 	 * @param destinationName
 	 * @param message
@@ -46,7 +46,7 @@ public interface ProducerService {
 	
 	/**
 	 * 按指定的生产策略将消息发送到目的地
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param strategyName
 	 * @param destination
 	 * @param message

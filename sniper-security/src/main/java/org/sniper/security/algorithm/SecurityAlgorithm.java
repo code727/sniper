@@ -20,7 +20,7 @@ package org.sniper.security.algorithm;
 
 /**
  * 安全算法标识接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SecurityAlgorithm extends Encryption, Decryption {

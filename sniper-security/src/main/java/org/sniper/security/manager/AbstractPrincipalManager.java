@@ -27,7 +27,7 @@ import org.sniper.security.PrincipalMeta;
 
 /**
  * Principal管理器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractPrincipalManager implements PrincipalManager, InitializingBean {
@@ -98,7 +98,7 @@ public abstract class AbstractPrincipalManager implements PrincipalManager, Init
 	
 	/**
 	 * 检测当前用户是否登录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws SecurityException
 	 */
 	protected void check() throws SecurityException {

@@ -23,14 +23,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * FastDFS文件下载器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FastDownloader {
 	
 	/**
 	 * 从指定的Storage路径下载
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param path
 	 * @return
 	 * @throws Exception
@@ -39,7 +39,7 @@ public interface FastDownloader {
 	
 	/**
 	 * 从指定的Storage路径下载到指定名称的本地文件中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param path
 	 * @param fileName
 	 * @return
@@ -49,7 +49,7 @@ public interface FastDownloader {
 	
 	/**
 	 * 从指定的Storage路径下载资源，并写入HttpServletResponse对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param path
 	 * @param request
 	 * @param response
@@ -59,7 +59,7 @@ public interface FastDownloader {
 	
 	/**
 	 * 从指定的Storage路径下载资源，并写入HttpServletResponse对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param path
 	 * @param attachmentName
 	 * @param request

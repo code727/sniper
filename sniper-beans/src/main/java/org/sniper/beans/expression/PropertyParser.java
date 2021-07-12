@@ -22,7 +22,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 属性解析器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface PropertyParser {
@@ -31,7 +31,7 @@ public interface PropertyParser {
 	
 	/**
 	 * 从指定的表达式中判断出是否有嵌套属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param expression
 	 * @return
 	 */
@@ -39,7 +39,7 @@ public interface PropertyParser {
 	
 	/**
 	 * 从指定的表达式中解析出属性名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param expression
 	 * @return
 	 */
@@ -47,7 +47,7 @@ public interface PropertyParser {
 	
 	/**
 	 * 从当前表达式中获取到下一条表达式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param expression
 	 * @return
 	 */

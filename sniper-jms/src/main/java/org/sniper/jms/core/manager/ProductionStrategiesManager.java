@@ -24,28 +24,28 @@ import org.sniper.jms.core.strategy.ProductionStrategy;
 
 /**
  * Jms生产策略管理接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ProductionStrategiesManager {
 	
 	/**
 	 * 设置生产策略映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param productionStrategies
 	 */
 	public void setStrategies(Map<String, ProductionStrategy> productionStrategies);
 	
 	/**
 	 * 获取生产策略映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<String, ProductionStrategy> getStrategies();
 	
 	/**
 	 * 获取指定名称的生产策略
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */

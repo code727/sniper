@@ -20,7 +20,7 @@ package org.sniper.generator.sequence;
 
 /**
  * 纳秒序列实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class NanoTimeSequence implements DimensionSequence<Long> {

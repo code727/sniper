@@ -34,7 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 自定义的Spring Web应用消息解析器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class CustomizeSpringWebMessageReslover extends AbstractSpringWebMessageReslover {
@@ -112,7 +112,7 @@ public class CustomizeSpringWebMessageReslover extends AbstractSpringWebMessageR
 	
 	/**
 	 * 从与指定类所属包同名的配置文件中获取
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @return
@@ -128,7 +128,7 @@ public class CustomizeSpringWebMessageReslover extends AbstractSpringWebMessageR
 	
 	/**
 	 * 从与指定类同名的配置文件中获取
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @return

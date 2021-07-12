@@ -28,7 +28,7 @@ import org.sniper.commons.util.ObjectUtils;
 
 /**
  * Java Bean对象与Java Bean对象之间的映射转换
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
@@ -71,7 +71,7 @@ public class BeanToBeanMapper extends AbstractBeanMapper<Object>  {
 	
 	/**
 	 * 规则内映射处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @param mappedBean
 	 * @param rule

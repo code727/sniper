@@ -20,7 +20,7 @@ package org.sniper.security.shiro.generator;
 
 /**
  * Shiro SessionID生成器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractShiroSessionIdGenerator implements ShiroSessionIdGenerator {

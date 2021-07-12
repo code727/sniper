@@ -31,7 +31,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 持久化辅助工具类
- * @author <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author Daniele
  * @version 1.0
  */
 public class PersistenceUtils {
@@ -40,7 +40,7 @@ public class PersistenceUtils {
 	
 	/**
 	 * 构建指定类型的查询语句
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
 	 * @return
@@ -62,7 +62,7 @@ public class PersistenceUtils {
 	
 	/**
 	 * 构建指定类型带属性占位符(?)条件的查询语句，属性条件之间为AND关系
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
 	 * @param propertyNames 属性名称组
@@ -89,7 +89,7 @@ public class PersistenceUtils {
 	
 	/**
 	 * 构建指定类型带属性命名(=:name)条件的查询语句，属性条件之间为AND关系
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
 	 * @param propertyNames 属性名称组
@@ -117,7 +117,7 @@ public class PersistenceUtils {
 	
 	/**
 	 * 构建指定类型带属性命名(=:name)条件的查询语句，属性条件之间为AND关系
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
 	 * @param propertyNames 属性名称集
@@ -145,7 +145,7 @@ public class PersistenceUtils {
 	
 	/**
 	 * 构建指定类型带属性命名(=:name)条件的查询语句，属性条件之间为AND关系
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
 	 * @param paramMap 带属性名称的参数映射集
@@ -159,7 +159,7 @@ public class PersistenceUtils {
 	
 	/**
 	 * 根据属性过滤器链来构建指定类型的查询语句
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
 	 * @param chain 过滤器链
@@ -176,7 +176,7 @@ public class PersistenceUtils {
 	
 	/**
 	 * 根据属性过滤器列表来构建指定类型的查询语句
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryCount 是否构建count查询语句
 	 * @param clazz 实体类型
 	 * @param filterList 过滤器列表

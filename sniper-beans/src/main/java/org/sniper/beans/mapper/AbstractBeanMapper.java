@@ -26,7 +26,7 @@ import org.sniper.commons.util.ReflectionUtils;
 
 /**
  * Java Bean映射器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractBeanMapper<S> extends AbstractGenricBean<S> implements BeanMapper<S> {
@@ -79,7 +79,7 @@ public abstract class AbstractBeanMapper<S> extends AbstractGenricBean<S> implem
 		
 	/**
 	 * 执行映射处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @param mapperRules
 	 * @param targetType
@@ -90,7 +90,7 @@ public abstract class AbstractBeanMapper<S> extends AbstractGenricBean<S> implem
 
 	/**
 	 * 映射出指定类型的目标Bean对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected <T> T createMappedBean(Class<T> beanType) throws Exception {

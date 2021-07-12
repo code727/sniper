@@ -29,7 +29,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * 链表结构的多值Map实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class LinkedMultiValueMap<K, V> implements MultiValueMap<K, V> {

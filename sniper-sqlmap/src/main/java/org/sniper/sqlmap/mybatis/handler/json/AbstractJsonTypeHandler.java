@@ -33,7 +33,7 @@ import org.sniper.serialization.json.JsonSerializer;
 
 /**
  * JSON类型处理器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractJsonTypeHandler<T> extends BaseTypeHandler<T> {
@@ -46,14 +46,14 @@ public abstract class AbstractJsonTypeHandler<T> extends BaseTypeHandler<T> {
 	@SuppressWarnings("unchecked")
 	public AbstractJsonTypeHandler() {
 		this.jsonSerializer = initJsonSerializer();
-		AssertUtils.assertNotNull(jsonSerializer, "Json serializer must not be null.");
+		AssertUtils.assertNotNull(jsonSerializer, "Json serializer must not be null");
 		
 		this.type = (Class<T>) ClassUtils.getSuperclassGenricType(this.getClass());
 	}
 	
 	/**
 	 * 初始化JSON序列化器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected abstract JsonSerializer initJsonSerializer();

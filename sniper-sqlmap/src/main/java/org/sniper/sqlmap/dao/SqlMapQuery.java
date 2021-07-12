@@ -25,7 +25,7 @@ import org.sniper.sqlmap.SqlMapOperations;
 
 /**
  * SQL映射查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SqlMapQuery<T> extends SqlMapOperations<T> {
@@ -35,7 +35,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的count语句后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @return
 	 */
@@ -43,7 +43,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的count语句后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
@@ -52,7 +52,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回当前类型唯一的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @return
 	 */
@@ -60,7 +60,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
@@ -69,7 +69,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回指定类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param statement
 	 * @return
@@ -78,7 +78,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回指定类型的唯一结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param statement
 	 * @param parameter
@@ -88,7 +88,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @return
 	 */
@@ -96,7 +96,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
@@ -105,7 +105,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 		
 	/**
 	 * 执行statement对应的查询语句后返回指定类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param statement
 	 * @return
@@ -114,7 +114,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回指定类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param statement
 	 * @param parameter
@@ -124,7 +124,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回结果映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement 
 	 * @return
 	 */
@@ -132,7 +132,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回结果映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
@@ -141,7 +141,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回结果映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param keyProperty 结果集的键值
 	 * @return
@@ -150,7 +150,7 @@ public interface SqlMapQuery<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回结果映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @param keyProperty 结果集的键值

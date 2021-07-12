@@ -20,14 +20,14 @@ package org.sniper.support.operation.logic;
 
 /**
  * 引用相等逻辑运算操作
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ReferenceEqualsLogicOperation implements LogicOperation<Object, Object> {
 	
 	/**
 	 * 执行引用相等逻辑判断
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj1
 	 * @param obj2
 	 * @return

@@ -22,14 +22,14 @@ import java.util.Collection;
 
 /**
  * Redis HyperLogLog命令行接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在当前库中执行PFADD命令，将元素添加到HyperLogLog后返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param element
 	 * @return 1:表示HyperLogLog的内部储存被修改了</P> 0:表示HyperLogLog的内部储存未被修改
@@ -38,7 +38,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在当前库中执行PFADD命令，将元素添加到HyperLogLog后设置过期时间并返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param element
 	 * @param expireSeconds 1:表示HyperLogLog的内部储存被修改了</P> 0:表示HyperLogLog的内部储存未被修改
@@ -48,7 +48,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在指定库中执行PFADD命令，将元素添加到HyperLogLog后返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param element
@@ -58,7 +58,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在指定库中执行PFADD命令，将元素添加到HyperLogLog后设置过期时间并返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param element
@@ -69,7 +69,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在当前库中执行PFADD命令，将多个元素添加到HyperLogLog后返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param elements
 	 * @return 1:表示HyperLogLog的内部储存被修改了</P> 0:表示HyperLogLog的内部储存未被修改
@@ -78,7 +78,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在当前库中执行PFADD命令，将多个元素添加到HyperLogLog后设置过期时间并返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param elements
 	 * @param expireSeconds
@@ -88,7 +88,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在指定库中执行PFADD命令，将多个元素添加到HyperLogLog后返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param elements
@@ -98,7 +98,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在指定库中执行PFADD命令，将多个元素添加到HyperLogLog后设置过期时间并返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param elements
@@ -109,7 +109,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在当前库中执行PFADD命令，将多个元素添加到HyperLogLog后返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param elements
 	 * @return 1:表示HyperLogLog的内部储存被修改了</P> 0:表示HyperLogLog的内部储存未被修改
@@ -118,7 +118,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在指定库中执行PFADD命令，将多个元素添加到HyperLogLog后设置过期时间并返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param elements
 	 * @param expireSeconds
@@ -128,7 +128,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在指定库中执行PFADD命令，将多个元素添加到HyperLogLog后返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param elements
@@ -138,7 +138,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在指定库中执行PFADD命令，将多个元素添加到HyperLogLog后设置过期时间并返回出现的变化结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param elements
@@ -149,7 +149,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在当前库中获取指定键的HyperLogLog近似基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -157,7 +157,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在指定库中获取指定键的HyperLogLog近似基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -166,7 +166,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在当前库中获取多个键的 HyperLogLog的并集近似基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -174,7 +174,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在当前库中获取多个键的 HyperLogLog的并集近似基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -183,7 +183,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在当前库中获取多个键的HyperLogLog的并集近似基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -191,7 +191,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在指定库中获取多个键的 HyperLogLog的并集近似基数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -200,7 +200,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在当前库中将源键的HyperLogLog合并到目标键的HyperLogLog
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param sourceKey
 	 * @return
@@ -209,7 +209,7 @@ public interface RedisHyperLogLogCommands {
 		
 	/**
 	 * 在指定库中将源键的HyperLogLog合并到目标键的HyperLogLog
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param sourceKey
@@ -218,7 +218,7 @@ public interface RedisHyperLogLogCommands {
 		
 	/**
 	 * 在当前库中将多个源键的HyperLogLog合并到目标键的HyperLogLog
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param sourceKeys
 	 */
@@ -226,7 +226,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在指定库中将多个源键的HyperLogLog合并到目标键的HyperLogLog
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param sourceKeys
@@ -235,7 +235,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在当前库中将多个源键的HyperLogLog合并到目标键的HyperLogLog
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param sourceKeys
 	 */
@@ -243,7 +243,7 @@ public interface RedisHyperLogLogCommands {
 	
 	/**
 	 * 在指定库中将多个源键的HyperLogLog合并到目标键的HyperLogLog
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param sourceKeys

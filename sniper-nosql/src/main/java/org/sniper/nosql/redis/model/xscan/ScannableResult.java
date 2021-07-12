@@ -20,42 +20,42 @@ package org.sniper.nosql.redis.model.xscan;
 
 /**
  * 可扫描迭代的结果接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ScannableResult<T> extends Iterable<T> {
 	
 	/**
 	 * 获取当前游标ID
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getCursorId();
 	
 	/**
 	 * 判断扫描是否完成
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean completed();
 	
 	/**
 	 * 获取结果个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int size();
 	
 	/**
 	 * 判断结果是否为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isEmpty();
 	
 	/**
 	 * 判断结果是否不为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isNotEmpty();

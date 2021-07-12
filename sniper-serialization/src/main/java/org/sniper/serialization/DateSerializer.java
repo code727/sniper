@@ -20,21 +20,21 @@ package org.sniper.serialization;
 
 /**
  * 日期序列器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface DateSerializer extends Serializer {
 	
 	/**
 	 * 获取日期格式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getDateFormat();
 	
 	/**
 	 * 设置日期格式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dateFormat
 	 */
 	public void setDateFormat(String dateFormat);

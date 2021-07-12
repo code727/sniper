@@ -26,14 +26,14 @@ import org.sniper.test.junit.BaseTestCase;
 
 /**
  * 分页查询单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class PaginationTest extends BaseTestCase {
 	
 	/**
 	 * 常规分页查询测试
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 //	@Test
 	public void testSimplePager() {

@@ -22,14 +22,14 @@ import org.sniper.beans.Typed;
 
 /**
  * 类型化序列器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface TypedSerializer extends Typed, Serializer {
 	
 	/**
 	 * 将字节数据反序列化成指定目标类型的对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bytes
 	 * @param targetType
 	 * @return
@@ -39,7 +39,7 @@ public interface TypedSerializer extends Typed, Serializer {
 	
 	/**
 	 * 将字符串反序列化成指定目标类型的对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param text
 	 * @param targetType
 	 * @return
@@ -49,7 +49,7 @@ public interface TypedSerializer extends Typed, Serializer {
 	
 	/**
 	 * 将字符串文本反序列化成全局目标类型的对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param text
 	 * @return
 	 * @throws SerializationException

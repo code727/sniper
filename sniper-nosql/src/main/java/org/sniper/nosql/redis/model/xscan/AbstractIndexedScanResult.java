@@ -26,7 +26,7 @@ import org.sniper.commons.util.CollectionUtils;
 
 /**
  * 已索引的扫描结果抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractIndexedScanResult<T> extends AbstractScannableResult<T> implements IndexedScanResult<T> {

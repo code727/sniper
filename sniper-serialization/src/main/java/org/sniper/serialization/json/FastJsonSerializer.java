@@ -44,7 +44,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 /**
  * 阿里FastJson序列化器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class FastJsonSerializer extends AbstractJsonSerializer {
@@ -96,7 +96,7 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	
 	/**
 	 * 创建一个JSON解析器对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param text
 	 * @return
 	 */
@@ -115,7 +115,7 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	 * 2)如果调用方传入的目标对象类型为java.util.Map接口类型，则默认反序列化结果的类型为java.util.HashMap<P>
 	 * 因此，为达到保持与CodehausJacksonSerializer和FasterxmlJacksonSerializer实现类在反序列化默认行为上的一致性，以及向调用方屏蔽掉第三方专用API的目的，
 	 * 针对于上述两种情况，可以在反序列化执行之前，调用此方法将目标对象类型统一返回为java.util.LinkedHashMap
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 * @return
 	 */
@@ -175,7 +175,7 @@ public class FastJsonSerializer extends AbstractJsonSerializer {
 	/**
 	 * 将com.alibaba.fastjson.JSONObject元素类型的集合转换为原生Map元素类型的集合，
 	 * 目的与safeDeserializeType方法的一致
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 * @throws Exception

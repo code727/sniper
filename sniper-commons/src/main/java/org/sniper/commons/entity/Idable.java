@@ -22,21 +22,21 @@ import java.io.Serializable;
 
 /**
  * 主键ID接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Idable<PK extends Serializable> extends Serializable {
 	
 	/**
 	 * 获取ID
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public PK getId();
 	
 	/**
 	 * 设置ID
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 */
 	public void setId(PK id); 

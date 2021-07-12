@@ -24,21 +24,21 @@ import org.sniper.orm.jpa.dao.JpaDao;
 
 /**
  * JPA对象服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface JpaBeanService<T, PK extends Serializable> {
 	
 	/**
 	 * 设置JAP数据访问接口(DAO)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param jpaDao
 	 */
 	public void setJpaDao(JpaDao<T, PK> jpaDao);
 	
 	/**
 	 * 获取JAP数据访问接口(DAO)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public JpaDao<T, PK> getJpaDao();

@@ -20,14 +20,14 @@ package org.sniper.concurrent.locks;
 
 /**
  * 锁接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Lock extends java.util.concurrent.locks.Lock {
 	
 	/**
 	 * 判断是否处于锁定状态
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isLocked();

@@ -30,7 +30,7 @@ import org.sniper.nosql.redis.command.RedisCommands;
 
 /**
  * Redis缓存共享库实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class RedisCacheRepository<K, V> implements CacheRepository, Cache<K, V>, InitializingBean {

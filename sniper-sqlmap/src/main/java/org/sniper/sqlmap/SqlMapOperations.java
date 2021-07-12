@@ -22,35 +22,35 @@ import org.sniper.beans.GenericBean;
 
 /**
  * SQL映射操作接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SqlMapOperations<T> extends GenericBean<T> {
 	
 	/**
 	 * 设置是否自动构建命名空间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param autoBuildNamespace
 	 */
 	public void setAutoBuildNamespace(boolean autoBuildNamespace);
 	
 	/**
 	 * 判断是否自动构建命名空间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isAutoBuildNamespace();
 	
 	/**
 	 * 设置命名空间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param namespace
 	 */
 	public void setNamespace(String namespace);
 	
 	/**
 	 * 获取命名空间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getNamespace();

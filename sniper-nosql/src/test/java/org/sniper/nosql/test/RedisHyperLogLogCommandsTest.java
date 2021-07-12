@@ -22,7 +22,7 @@ import org.junit.Test;
 
 /**
  * Redis HyperLogLog命令行单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class RedisHyperLogLogCommandsTest extends AbstractRedisTest {

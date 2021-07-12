@@ -28,7 +28,7 @@ import org.sniper.kafka.support.ProduceResult;
 
 /**
  * 多委派生产者回调实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MultipleDelegateProducerFutureCallback<K,V> extends DelegateProducerFutureCallback<K, V> {
@@ -65,7 +65,7 @@ public class MultipleDelegateProducerFutureCallback<K,V> extends DelegateProduce
 	
 	/**
 	 * 根据生产记录选择对应的委派代表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param topicName
 	 * @return
 	 */

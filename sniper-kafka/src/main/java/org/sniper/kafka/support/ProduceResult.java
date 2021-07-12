@@ -22,7 +22,7 @@ import org.sniper.kafka.topic.Topic;
 
 /**
  * 生产结果实例
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ProduceResult<K, V> extends ProduceRecord<K, V> {

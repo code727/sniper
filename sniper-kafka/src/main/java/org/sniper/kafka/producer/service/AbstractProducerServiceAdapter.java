@@ -23,7 +23,7 @@ import org.sniper.kafka.support.ProduceResult;
 
 /**
  * 抽象生产者服务适配器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractProducerServiceAdapter<K, V> implements ProducerService<K, V> {

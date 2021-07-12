@@ -27,7 +27,7 @@ import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerialize
 
 /**
  * JSON表单消息构建器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class JsonFormMessageBuilder extends AbstractHttpClientMessageBuilder {

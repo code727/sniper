@@ -22,42 +22,42 @@ import org.slf4j.Logger;
 
 /**
  * 生产者行为接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ProducerBehavior extends ProducerLogger {
 	
 	/**
 	 * 判断是否关注Success事件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isInterestedInSuccess();
 
 	/**
 	 * 设置是否关注Success事件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param interestedInSuccess
 	 */
 	public void setInterestedInSuccess(boolean interestedInSuccess);
 	
 	/**
 	 * 判断生产者异常后是否抛出这个异常
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isThrowExceptionOnError();
 
 	/**
 	 * 设置生产者异常后是否抛出这个异常
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param throwExceptionOnError
 	 */
 	public void setThrowExceptionOnError(boolean throwExceptionOnError);
 	
 	/**
 	 * 获取日志
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Logger getLogger();

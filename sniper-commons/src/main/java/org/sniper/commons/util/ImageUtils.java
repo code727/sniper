@@ -22,7 +22,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * 图片工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ImageUtils {
@@ -31,7 +31,7 @@ public class ImageUtils {
 	
 	/**
 	 * 判断是否为横向图
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param image
 	 * @return
 	 */
@@ -41,7 +41,7 @@ public class ImageUtils {
 	
 	/**
 	 * 判断是否为纵向图
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param image
 	 * @return
 	 */
@@ -51,7 +51,7 @@ public class ImageUtils {
 	
 	/**
 	 * 判断是否为正方形图
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param image
 	 * @return
 	 */
@@ -61,7 +61,7 @@ public class ImageUtils {
 	
 	/**
 	 * 判断是否为横向图
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param width
 	 * @param height
 	 * @return
@@ -72,7 +72,7 @@ public class ImageUtils {
 	
 	/**
 	 * 判断是否为纵向图
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param width
 	 * @param height
 	 * @return
@@ -83,7 +83,7 @@ public class ImageUtils {
 	
 	/**
 	 * 判断是否为正方形图
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param width
 	 * @param height
 	 * @return

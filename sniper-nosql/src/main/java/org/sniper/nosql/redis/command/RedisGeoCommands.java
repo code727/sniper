@@ -31,14 +31,14 @@ import org.sniper.nosql.redis.option.GeoRadiusOption;
 
 /**
  * Redis地理位置命令行接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoAdd命令，添加一个空间元素(坐标点+成员名称)后返回添加成功的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @param point
@@ -48,7 +48,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoAdd命令，添加一个空间元素(坐标点+成员名称)并设置键的过期时间后返回添加成功的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @param point
@@ -59,7 +59,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoAdd命令，添加一个空间元素(坐标点+成员名称)后返回添加成功的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -70,7 +70,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoAdd命令，添加一个空间元素(坐标点+成员名称)并设置键的过期时间后返回添加成功的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -82,7 +82,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoAdd命令，添加多个空间元素(坐标点+成员名称)后返回添加成功的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locations
 	 * @return
@@ -91,7 +91,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoAdd命令，添加多个空间元素(坐标点+成员名称)并设置键的过期时间后返回添加成功的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locations
 	 * @param expireSeconds
@@ -101,7 +101,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoAdd命令，添加多个空间元素(坐标点+成员名称)后返回添加成功的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param locations
@@ -111,7 +111,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoAdd命令，添加多个空间元素(坐标点+成员名称)并设置键的过期时间后返回添加成功的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param locations
@@ -122,7 +122,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoPos命令，获取指定键成员的地理位置坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @return
@@ -131,7 +131,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoPos命令，获取指定键成员的地理位置坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -141,7 +141,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoPos命令，获取指定键多个成员的地理位置坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @return
@@ -150,7 +150,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoPos命令，获取指定键多个成员的地理位置坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -160,7 +160,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoPos命令，获取指定键多个成员的地理位置坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @return
@@ -169,7 +169,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoPos命令，获取指定键多个成员的地理位置坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -179,7 +179,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoDist命令，获取两个成员位置之间的距离
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member1
 	 * @param member2
@@ -189,7 +189,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoDist命令，获取两个成员位置之间的距离
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member1
 	 * @param member2
@@ -200,7 +200,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoDist命令，获取两个成员位置之间的距离
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member1
@@ -211,7 +211,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoDist命令，获取两个成员位置之间的距离
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member1
@@ -223,7 +223,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoRadius命令，获取与中心距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param circle
 	 * @return
@@ -232,7 +232,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoRadius命令，获取与中心距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param circle
 	 * @param option
@@ -242,7 +242,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoRadius命令，获取与中心距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param circle
@@ -252,7 +252,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoRadius命令，获取与中心距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param circle
@@ -263,7 +263,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoRadiusByMember命令，获取与成员距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @param radius
@@ -273,7 +273,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoRadiusByMember命令，获取与成员距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @param radius
@@ -283,7 +283,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoRadiusByMember命令，获取与成员距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @param radius
@@ -294,7 +294,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoRadiusByMember命令，获取与成员距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @param radius
@@ -305,7 +305,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoRadiusByMember命令，获取与成员距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -316,7 +316,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoRadiusByMember命令，获取与成员距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -327,7 +327,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoRadiusByMember命令，获取与成员距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -339,7 +339,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoRadiusByMember命令，获取与成员距离不超过给定最大距离的所有位置元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -351,7 +351,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoHash命令，获取单个成员的地理信息哈希值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @return
@@ -360,7 +360,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoHash命令，获取单个成员的地理信息哈希值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -370,7 +370,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoHash命令，获取多个成员的地理信息哈希值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @return
@@ -379,7 +379,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoHash命令，获取多个成员的地理信息哈希值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -389,7 +389,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoHash命令，获取多个成员的地理信息哈希值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @return
@@ -398,7 +398,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoHash命令，获取多个成员的地理信息哈希值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -408,7 +408,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoRemove命令，删除指定成员后返回被删除的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @return
@@ -417,7 +417,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoRemove命令，删除指定成员后返回被删除的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -427,7 +427,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoRemove命令，删除指定成员后返回被删除的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @return
@@ -436,7 +436,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoRemove命令，删除指定成员后返回被删除的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -446,7 +446,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在当前库中执行geoRemove命令，删除指定成员后返回被删除的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @return
@@ -455,7 +455,7 @@ public interface RedisGeoCommands {
 	
 	/**
 	 * 在指定库中执行geoRemove命令，删除指定成员后返回被删除的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members

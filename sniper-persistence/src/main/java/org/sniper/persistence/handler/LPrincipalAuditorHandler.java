@@ -20,7 +20,7 @@ package org.sniper.persistence.handler;
 
 /**
  * 采用登录名作为审核者名称的处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class LPrincipalAuditorHandler extends AbstractPrincipalAuditorHandler {

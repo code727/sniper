@@ -28,7 +28,7 @@ import org.sniper.security.algorithm.symmetric.AbstractSymmetricAlgorithm;
 
 /**
  * 非对称算法抽象类
- * @author <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author Daniele
  * @version 1.0
  */
 public abstract class AbstractAsymmetricAlgorithm extends
@@ -84,7 +84,7 @@ public abstract class AbstractAsymmetricAlgorithm extends
 
 	/**
 	 * 获取公钥的字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 * @return
 	 */
 	protected byte[] getPublicKeyBytes() {

@@ -20,28 +20,28 @@ package org.sniper.resource.file.filter;
 
 /**
  * 本地文件数字属性值过滤器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FileNumberFilter extends FileExtensionFilter {
 	
 	/**
 	 * 获取字符串过滤值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Number getFilterValue();
 	
 	/**
 	 * 设置字符串过滤值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param filterValue
 	 */
 	public void setFilterValue(Number filterValue);
 	
 	/**
 	 * 设置逻辑运算
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param logicOperation
 	 */
 	public void setLogicOperation(String logicOperation);

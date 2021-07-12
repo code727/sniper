@@ -31,7 +31,7 @@ import org.sniper.commons.util.ObjectUtils;
 
 /**
  * Map对象与Java Bean对象之间的映射转换
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MapToBeanMapper<V> extends AbstractBeanMapper<Map<String, V>> {
@@ -77,7 +77,7 @@ public class MapToBeanMapper<V> extends AbstractBeanMapper<Map<String, V>> {
 	
 	/**
 	 * 规则内映射处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @param mappedBean
 	 * @param rule

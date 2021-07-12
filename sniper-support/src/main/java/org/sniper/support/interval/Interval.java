@@ -20,84 +20,84 @@ package org.sniper.support.interval;
 
 /**
  * 区间接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Interval<T> {
 	
 	/**
 	 * 获取区间最小值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public T getMinimal();
 	
 	/**
 	 * 获取区间最大值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public T getMaximum();
 	
 	/**
 	 * 是否为左闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isLeftClose();
 	
 	/**
 	 * 是否为右闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isRightClose();
 	
 	/**
 	 * 是否为全闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isClose();
 	
 	/**
 	 * 是否为左开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isLeftOpen();
 	
 	/**
 	 * 是否为右开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isRightOpen();
 	
 	/**
 	 * 是否是否为全开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isOpen();
 	
 	/**
 	 * 是否为负无穷大
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isMinusInfinity();
 	
 	/**
 	 * 是否为正无穷大
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isPositiveInfinity();
 	
 	/**
 	 * 判断指定的值是否包含在当前区间内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param number
 	 * @return
 	 */
@@ -105,7 +105,7 @@ public interface Interval<T> {
 	
 	/**
 	 * 判断指定区间是否完全包含在当前区间内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param interval
 	 * @return
 	 */
@@ -113,7 +113,7 @@ public interface Interval<T> {
 		
 	/**
 	 * 将整个区间进行指定值的偏移
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param offset
 	 * @return
 	 */
@@ -121,7 +121,7 @@ public interface Interval<T> {
 	
 	/**
 	 * 将当前区间进行指定区间的偏移
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param interval
 	 * @return
 	 */

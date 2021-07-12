@@ -30,7 +30,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 /**
  * 自定义的Shiro会话DAO实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class CustomSessionDAO extends AbstractSessionDAO implements CacheManagerAware, InitializingBean {

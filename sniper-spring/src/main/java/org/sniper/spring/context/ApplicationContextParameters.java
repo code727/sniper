@@ -32,7 +32,7 @@ import org.sniper.commons.util.DateUtils;
 
 /**
  * 应用上下文参数实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ApplicationContextParameters<K, V> extends ConcurrentParameters<K, V> implements InitializingBean {
@@ -78,7 +78,7 @@ public class ApplicationContextParameters<K, V> extends ConcurrentParameters<K, 
 	
 	/**
 	 * 重写父类方法，将新增参数的行为交由KeyHandler对象来处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param value
 	 */
@@ -89,7 +89,7 @@ public class ApplicationContextParameters<K, V> extends ConcurrentParameters<K, 
 	
 	/**
 	 * 重写父类方法，将新增多个参数的行为交由KeyHandler对象来处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameterItems 
 	 */
 	@Override

@@ -26,14 +26,14 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * Google 验证码文本颜色管理实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class GoogleCaptchaTextColorManager extends TextColorManager {
 	
 	/**
 	 * 重写父类方法，重构建GoogleKaptcha默认支持的颜色映射组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return 
 	 */
 	@Override

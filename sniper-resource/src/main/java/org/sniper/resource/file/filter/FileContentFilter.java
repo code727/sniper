@@ -20,21 +20,21 @@ package org.sniper.resource.file.filter;
 
 /**
  * 本地文件内容过滤器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FileContentFilter extends FileStringFilter {
 	
 	/**
 	 * 设置文本内容编码集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param encoding
 	 */
 	public void setEncoding(String encoding);
 	
 	/**
 	 * 获取文本内容编码集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getEncoding();

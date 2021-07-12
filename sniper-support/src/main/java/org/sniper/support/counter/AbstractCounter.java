@@ -22,7 +22,7 @@ import org.sniper.commons.util.AssertUtils;
 
 /**
  * 计算器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractCounter<V> implements Counter<V> {
@@ -48,7 +48,7 @@ public abstract class AbstractCounter<V> implements Counter<V> {
 	
 	/**
 	 * 检查起始值的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param start
 	 */
 	private void checkStart(V start) {

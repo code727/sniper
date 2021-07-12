@@ -28,7 +28,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * java.util.ResourceBundle消息源实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ResourceBundleMessageSource implements MessageSource {
@@ -44,7 +44,7 @@ public class ResourceBundleMessageSource implements MessageSource {
 
 	/**
 	 * 设置资源的基础名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName
 	 */
 	public void setBaseName(String baseName) {
@@ -53,7 +53,7 @@ public class ResourceBundleMessageSource implements MessageSource {
 	
 	/**
 	 * 获取资源的基础名称组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String[] getBaseNames() {
@@ -81,7 +81,7 @@ public class ResourceBundleMessageSource implements MessageSource {
 	
 	/**
 	 * 根据基础名称和本地化对象获取对应的java.util.ResourceBundle对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName
 	 * @param locale
 	 * @return

@@ -24,7 +24,7 @@ import org.sniper.commons.util.CollectionUtils;
 
 /**
  * 自适应参数对象消息格式化实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @SuppressWarnings("rawtypes")

@@ -22,14 +22,14 @@ import java.util.Map;
 
 /**
  * 泛型参数接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Parameters<K, V> extends UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 设置参数映射项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameterItems
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface Parameters<K, V> extends UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 新增参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param value
 	 */
@@ -45,21 +45,21 @@ public interface Parameters<K, V> extends UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 新增多个参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameterItems
 	 */
 	public void addAll(Map<K, V> parameterItems);
 	
 	/**
 	 * 删除指定名称的参数项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 */
 	public V remove(K name);
 	
 	/**
 	 * 清除所有参数项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	public void clear();
 

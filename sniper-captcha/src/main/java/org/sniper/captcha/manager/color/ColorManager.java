@@ -23,42 +23,42 @@ import java.util.Map;
 
 /**
  * 颜色管理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ColorManager {
 	
 	/**
 	 * 设置"名称-颜色"映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param colors
 	 */
 	public void setColors(Map<String, Color> colors);
 	
 	/**
 	 * 获取"名称-颜色"映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<String, Color> getColors();
 	
 	/**
 	 * 选择一个颜色名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String selectColorName();
 	
 	/**
 	 * 选择一个颜色对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Color selectColor();
 	
 	/**
 	 * 获取指定名称的颜色对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */

@@ -24,7 +24,7 @@ import org.sniper.concurrent.locks.KeyspaceLock;
 
 /**
  * Zookeeper分布式锁实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ZookeeperDistributedLock<P> implements KeyspaceLock<P> {

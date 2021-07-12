@@ -20,14 +20,14 @@ package org.sniper.persistence.util;
 
 /**
  * 持久化属性过滤器链接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface PersistencePropertyFilterChain {
 	
 	/**
 	 * 将过滤器加入到指定名称的组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name 组名
 	 * @param filter 属性过滤器
 	 * @return
@@ -36,7 +36,7 @@ public interface PersistencePropertyFilterChain {
 	
 	/**
 	 * 删除指定名称的组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name 组名
 	 * @return
 	 */
@@ -44,7 +44,7 @@ public interface PersistencePropertyFilterChain {
 	
 	/**
 	 * 删除所有组内指定的属性过滤器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param filter 属性过滤器
 	 * @return
 	 */
@@ -52,7 +52,7 @@ public interface PersistencePropertyFilterChain {
 	
 	/**
 	 * 删除指定名称的组内的某一个属性过滤器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name 组名
 	 * @param filter 属性过滤器
 	 * @return
@@ -61,7 +61,7 @@ public interface PersistencePropertyFilterChain {
 		
 	/**
 	 * 设置指定组的与下一组之间的谓词
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name 组名
 	 * @param predicate 关系谓词枚举
 	 * @return
@@ -70,7 +70,7 @@ public interface PersistencePropertyFilterChain {
 	
 	/**
 	 * 获取指定组的谓词
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name 组名
 	 * @return
 	 */
@@ -78,7 +78,7 @@ public interface PersistencePropertyFilterChain {
 	
 	/**
 	 * 删除指定组的谓词
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name 组名
 	 * @return
 	 */
@@ -86,7 +86,7 @@ public interface PersistencePropertyFilterChain {
 	
 	/**
 	 * 将所有组内过滤器中的属性-值拼接成查询字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String toQueryString();

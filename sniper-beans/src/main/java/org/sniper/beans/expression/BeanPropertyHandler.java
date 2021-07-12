@@ -32,7 +32,7 @@ import org.sniper.commons.util.ReflectionUtils;
 
 /**
  * JavaBean属性处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class BeanPropertyHandler implements PropertyHandler<Object> {

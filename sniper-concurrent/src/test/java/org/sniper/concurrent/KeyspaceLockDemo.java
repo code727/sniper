@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2019Äê11ÔÂ16ÈÕ
+ * Create Date : 2019ï¿½ï¿½11ï¿½ï¿½16ï¿½ï¿½
  */
 
 package org.sniper.concurrent;
@@ -22,8 +22,8 @@ import org.sniper.concurrent.locks.KeyspaceLock;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * ¼ü¿Õ¼äËø¶ÔÏóÊ¾Àı
- * @author  <a href="mailto:code727@gmail.com">¶Å±ó</a>
+ * ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½
+ * Danielem">ï¿½Å±ï¿½</a>
  * @version 1.0
  */
 public class KeyspaceLockDemo {

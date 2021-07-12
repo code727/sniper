@@ -37,7 +37,7 @@ import org.sniper.test.domain.User;
 import org.sniper.test.junit.BaseTestCase;
 
 /**
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MapperTest extends BaseTestCase {

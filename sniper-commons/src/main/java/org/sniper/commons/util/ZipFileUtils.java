@@ -33,7 +33,7 @@ import java.util.zip.ZipOutputStream;
 
 /**
  * ZIP文件工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ZipFileUtils {
@@ -48,7 +48,7 @@ public class ZipFileUtils {
 		
 	/**
 	 * 创建一个ZIP文件。若先前存在则直接返回
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathname
 	 * @return
 	 */
@@ -59,7 +59,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 创建一个ZIP文件。若先前存在则直接返回
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param file
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 创建一个指定字符集的ZIP文件。若先前存在则直接返回。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param file
 	 * @param chatset
 	 * @return
@@ -105,7 +105,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 创建ZIP文件内的实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param zipFile
 	 * @param name
 	 * @throws IOException
@@ -131,7 +131,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 创建ZIP输出流的实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param out
 	 * @param name
 	 */
@@ -145,7 +145,7 @@ public class ZipFileUtils {
 			
 	/**
 	 * 获取ZIP文件的名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param zipFile
 	 * @return
 	 */
@@ -158,7 +158,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 获取ZIP压缩文件的主名（不包含扩展名的名称）
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param zipFile
 	 * @return
 	 */
@@ -170,7 +170,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 获取ZIP文件的扩展名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param zipFile
 	 * @return
 	 */
@@ -180,7 +180,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 获取ZIP文件所在的上一级文件/目录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param zipFile
 	 * @return
 	 */
@@ -193,7 +193,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 将源文件压缩到同目录同名的ZIP文件中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param src
 	 * @return
 	 * @throws IOException
@@ -204,7 +204,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 将源文件压缩到指定ZIP文件/目录中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param src
 	 * @param destPath
 	 * @throws IOException
@@ -219,7 +219,7 @@ public class ZipFileUtils {
 		
 	/**
 	 * 将源文件压缩到指定的ZIP文件/目录中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param src
 	 * @param dest
 	 * @return
@@ -259,7 +259,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 将源文件压缩到指定的ZIP文件中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param src
 	 * @param dest
 	 * @param append
@@ -279,7 +279,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 将源文件/目录压缩写入到目标ZIP的输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param src
 	 * @param out
 	 * @throws IOException
@@ -297,7 +297,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 将源文件/目录压缩写入到目标ZIP的输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param src
 	 * @param destZipName 目标ZIP的名称。
 	 * @param out
@@ -317,7 +317,7 @@ public class ZipFileUtils {
 	
 	/** 
 	 * 将源文件按照指定的名称写入ZipOutputStream对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param src
 	 * @param name 实体名称
 	 * @param out
@@ -338,7 +338,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 将源文件目录按照指定的名称写入ZipOutputStream对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dir
 	 * @param out
 	 * @param destZipName 目标ZIP文件的名称
@@ -372,7 +372,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 将ZIP文件解压到当前所在的父目录内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param zipFile
 	 * @return 目标目录的第一级子目录/文件
 	 * @throws IOException
@@ -383,7 +383,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 选择是否按追加的方式将ZIP文件解压到当前所在的父目录内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param zipFile
 	 * @param append
 	 * @return 解压后的资源根目录/文件
@@ -395,7 +395,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 将ZIP文件解压到指定的目录内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param zipFile
 	 * @param dir
 	 * @return 目标目录的第一级子目录/文件
@@ -407,7 +407,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 选择是否按追加的方式将ZIP文件解压到指定的目录内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param zipFile
 	 * @param dir
 	 * @param append
@@ -421,7 +421,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 将ZIP文件解压到指定的目录内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param zipFile
 	 * @param dest
 	 * @return 目标目录的第一级子目录/文件
@@ -433,7 +433,7 @@ public class ZipFileUtils {
 	
 	/**
 	 * 选择是否按追加的方式将ZIP文件解压到指定的目录内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param zipFile
 	 * @param dest
 	 * @param append

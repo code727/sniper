@@ -25,7 +25,7 @@ import org.sniper.persistence.FilterQuery;
 
 /**
  * JPA持久化数据访问接口
- * @author <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author Daniele
  * @version 1.0
  */
 public interface JpaDao<T, PK extends Serializable> extends GenericBean<T>,

@@ -23,7 +23,7 @@ import java.util.Set;
 
 /**
  * 系统工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SystemUtils {
@@ -55,7 +55,7 @@ public class SystemUtils {
 	
 	/**
 	 * 获取所用的系统属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static Properties getSystemProperties() {
@@ -64,7 +64,7 @@ public class SystemUtils {
 	
 	/**
 	 * 获取所用的系统属性名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static Set<Object> getSystemPropertyNames() {
@@ -73,7 +73,7 @@ public class SystemUtils {
 	
 	/**
 	 * 根据名称获取Worin Jar包定义的全局属性对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -83,7 +83,7 @@ public class SystemUtils {
 	
 	/**
 	 * 判断是否为系统属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 */
 	public static boolean isSystemProperty(String name) {
@@ -95,7 +95,7 @@ public class SystemUtils {
 	
 	/**
 	 * 获取当前操作系统的文本换行符
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static String getTextNewline() {
@@ -104,7 +104,7 @@ public class SystemUtils {
 	
 	/**
 	 * 获取文件系统编码集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static String getFileEncoding() {
@@ -113,7 +113,7 @@ public class SystemUtils {
 	
 	/**
 	 * 获取当前操作系统的临时目录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static String getTempDir() {

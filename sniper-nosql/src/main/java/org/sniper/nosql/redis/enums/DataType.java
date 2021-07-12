@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * 数据类型枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum DataType {
@@ -63,7 +63,7 @@ public enum DataType {
 	
 	/**
 	 * 判断指定的编码是否匹配一个数据类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param code
 	 * @return
 	 */
@@ -73,7 +73,7 @@ public enum DataType {
 
 	/**
 	 * 根据编码解析出数据类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param code
 	 * @return
 	 */

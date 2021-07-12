@@ -24,7 +24,7 @@ import org.sniper.commons.constant.AbstractLocaleConstant;
 
 /**
  * 响应状态常量类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public final class ResponseStatus extends AbstractLocaleConstant<Integer> {

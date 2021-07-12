@@ -27,7 +27,7 @@ import org.sniper.resource.fastdfs.cluster.StorageGroup;
 
 /**
  * FastDFS访问器支持类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AccessorSupport implements Accessor {

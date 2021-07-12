@@ -33,14 +33,14 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * Hibernate工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class HibernateUtils {
 	
 	/**
 	 * 设置分段标准化查询参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param criteria 标准化查询接口
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
@@ -55,7 +55,7 @@ public class HibernateUtils {
 	
 	/**
 	 * 设置分段查询参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询接口
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
@@ -70,7 +70,7 @@ public class HibernateUtils {
 		
 	/**
 	 * 设置占位符形式的查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询接口
 	 * @param values 查询参数值顺序组
 	 */
@@ -84,7 +84,7 @@ public class HibernateUtils {
 	
 	/**
 	 * 设置占位符形式的分段查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询接口
 	 * @param values 查询参数值顺序组
 	 * @param start 起始位置
@@ -97,7 +97,7 @@ public class HibernateUtils {
 	
 	/**
 	 * 设置命名形式的查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query
 	 * @param paramName 查询参数名
 	 * @param paramValue 查询参数值
@@ -109,7 +109,7 @@ public class HibernateUtils {
 	
 	/**
 	 * 设置命名形式的分段查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询接口
 	 * @param paramName 查询参数名
 	 * @param paramValue 查询参数值
@@ -123,7 +123,7 @@ public class HibernateUtils {
 	
 	/**
 	 * 设置命名形式的多个查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询接口
 	 * @param paramMap 查询参数名-值映射集
 	 */
@@ -144,7 +144,7 @@ public class HibernateUtils {
 	
 	/**
 	 * 设置命名形式的多个分段查询参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询接口
 	 * @param paramMap 查询参数名-值映射集
 	 * @param start 起始位置
@@ -157,7 +157,7 @@ public class HibernateUtils {
 	
 	/**
 	 * 获取实体类型对应的元数据对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sessionFactory
 	 * @param entityClass
 	 * @return
@@ -168,7 +168,7 @@ public class HibernateUtils {
 	
 	/**
 	 * 获取实体类型对应的名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sessionFactory
 	 * @param entityClass
 	 * @return
@@ -179,7 +179,7 @@ public class HibernateUtils {
 	
 	/**
 	 * 获取实体类型对应的表名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sessionFactory
 	 * @param entityClass
 	 * @return
@@ -190,7 +190,7 @@ public class HibernateUtils {
 			
 	/**
 	 * 获取实体类型对应的表的主键名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 * @param sessionFactory 
 	 * @param entityClass
 	 * @return

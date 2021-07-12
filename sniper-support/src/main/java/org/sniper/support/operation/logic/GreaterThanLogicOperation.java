@@ -20,7 +20,7 @@ package org.sniper.support.operation.logic;
 
 /**
  * 大于逻辑运算操作
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class GreaterThanLogicOperation extends AbstractLogicOperation<Object, Object> {

@@ -38,7 +38,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * HTTP头
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class HttpHeaders extends LinkedMultiValueMap<String, String> {
@@ -53,7 +53,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置资源所支持的HTTP方法的集合(Allow)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param allowedMethods
 	 */
 	public void setAllow(Set<HttpMethodEnum> allowedMethods) {
@@ -62,7 +62,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取资源所支持的HTTP方法的集合(Allow)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Set<HttpMethodEnum> getAllow() {
@@ -88,7 +88,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置HTTP请求和响应中通过指定指令来实现的缓存机制
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param list
 	 */
 	public void setCacheControl(List<String> list) {
@@ -97,7 +97,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取HTTP请求和响应中通过指定指令来实现的缓存机制
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<String> getCacheControl() {
@@ -120,7 +120,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置是否关闭HTTP网络连接
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param connection
 	 */
 	public void setConnection(HttpConnectionEnum connection) {
@@ -129,7 +129,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取是否关闭HTTP网络连接
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public HttpConnectionEnum getConnection() {
@@ -138,7 +138,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置回复的内容该以何种形式展示(Content-Disposition)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param contentDisposition
 	 */
 	public void setContentDisposition(ContentDisposition contentDisposition) {
@@ -147,7 +147,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取回复的内容该以何种形式展示(Content-Disposition)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public ContentDisposition getContentDisposition() {
@@ -182,7 +182,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置对特定媒体类型的数据进行压缩的算法(Content-Encoding)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param algorithm
 	 */
 	public void setContentEncoding(Set<ContentEncodingEnum> algorithms) {
@@ -191,7 +191,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取对特定媒体类型的数据进行压缩的算法(Content-Encoding)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Set<ContentEncodingEnum> getContentEncoding() {
@@ -215,7 +215,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置访问者希望采用的语言或语言组合(Content-Language)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param languages
 	 */
 	public void setContentLanguage(Set<String> languages) {
@@ -224,7 +224,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取访问者希望采用的语言或语言组合(Content-Language)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Set<String> getContentLanguage() {
@@ -246,7 +246,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置发送给接收方的消息的大小(Content-Length)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param contentLength
 	 */
 	public void setContentLength(long contentLength) {
@@ -255,7 +255,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 
 	/**
 	 * 获取发送给接收方的消息的大小(Content-Length)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getContentLength() {
@@ -265,7 +265,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置要返回的数据的地址选项(Content-Location)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url
 	 */
 	public void setContentLocation(String url) {
@@ -274,7 +274,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取要返回的数据的地址选项(Content-Location)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getContentLocation() {
@@ -283,7 +283,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置用于指示资源的MIME类型(MediaType)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mediaType
 	 */
 	public void setContentType(MediaType mediaType) {
@@ -292,7 +292,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取用于指示资源的MIME类型(MediaType)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public MediaType getContentType() {
@@ -301,7 +301,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置消息生成的日期和时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 */
 	public void setDate(Date date) {
@@ -310,7 +310,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取消息生成的日期和时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Date getDate() {
@@ -320,7 +320,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置Keep-Alive消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keepAlive
 	 */
 	public void setKeepAlive(KeepAlive keepAlive) {
@@ -329,7 +329,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取Keep-Alive消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public KeepAlive getKeepAlive() {
@@ -358,7 +358,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置Pragma通用消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pragma
 	 */
 	public void setPragma(String pragma) {
@@ -367,7 +367,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取Pragma通用消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getPragma() {
@@ -376,7 +376,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置Via通用消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param via
 	 */
 	public void setVia(String via) {
@@ -385,7 +385,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取Via通用消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getVia() {
@@ -394,7 +394,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置当前消息状态可能存在的问题
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param warning
 	 */
 	public void setWarning(String warning) {
@@ -403,7 +403,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 获取当前消息状态可能存在的问题
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getWarning() {
@@ -412,7 +412,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置HTTP Content-Disposition消息头对象的表单名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param disposition
 	 * @param name
 	 */
@@ -423,7 +423,7 @@ public class HttpHeaders extends LinkedMultiValueMap<String, String> {
 	
 	/**
 	 * 设置HTTP Content-Disposition消息头对象的文件名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param disposition
 	 * @param name
 	 */

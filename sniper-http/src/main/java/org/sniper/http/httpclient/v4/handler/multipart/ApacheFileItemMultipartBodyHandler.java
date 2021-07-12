@@ -27,7 +27,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * org.apache.commons.fileupload.FileItem资源类型的Multipart请求体处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ApacheFileItemMultipartBodyHandler extends AbstractSourceMultipartBodyHandler {
@@ -46,7 +46,7 @@ public class ApacheFileItemMultipartBodyHandler extends AbstractSourceMultipartB
 	
 	/**
 	 * 添加org.apache.commons.fileupload.FileItem请求体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param builder
 	 * @param name
 	 * @param fileItem
@@ -68,7 +68,7 @@ public class ApacheFileItemMultipartBodyHandler extends AbstractSourceMultipartB
 	
 	/**
 	 * 添加多个org.apache.commons.fileupload.FileItem请求体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param builder
 	 * @param name
 	 * @param fileItems

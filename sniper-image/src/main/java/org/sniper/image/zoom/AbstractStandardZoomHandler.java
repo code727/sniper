@@ -22,7 +22,7 @@ import org.sniper.image.AbstractImageHandler;
 
 /**
  * 标准缩放处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractStandardZoomHandler extends AbstractImageHandler
@@ -54,7 +54,7 @@ public abstract class AbstractStandardZoomHandler extends AbstractImageHandler
 
 	/**
 	 * 判断是否超宽
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param width
 	 * @return
 	 */
@@ -64,7 +64,7 @@ public abstract class AbstractStandardZoomHandler extends AbstractImageHandler
 	
 	/**
 	 * 判断是否超高
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param height
 	 * @return
 	 */
@@ -74,7 +74,7 @@ public abstract class AbstractStandardZoomHandler extends AbstractImageHandler
 	
 	/**
 	 * 判断指定的宽高是否在目标范围区间内
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param width
 	 * @param height
 	 * @return

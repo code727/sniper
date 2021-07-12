@@ -23,7 +23,7 @@ import org.sniper.serialization.json.JsonSerializer;
 
 /**
  * 阿里FastJson类型处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class FastJsonTypeHandler<T> extends AbstractJsonTypeHandler<T> {

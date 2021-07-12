@@ -22,14 +22,14 @@ import java.util.Map;
 
 /**
  * HTTP表单转换器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface HttpFormConverter {
 	
 	/**
 	 * 将表单映射集转换成URL字符串映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param formMap
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface HttpFormConverter {
 
 	/** 
 	 * 将单个表单转换成URL字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param form
 	 * @return 

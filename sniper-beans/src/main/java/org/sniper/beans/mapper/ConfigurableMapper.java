@@ -22,35 +22,35 @@ import java.util.Set;
 
 /**
  * 可配置的映射器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ConfigurableMapper {
 	
 	/**
 	 * 设置映射器规则集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapperRules
 	 */
 	public void setMapperRules(Set<MapperRule> mapperRules);
 	
 	/**
 	 * 获取映射器规则集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Set<MapperRule> getMapperRules();
 
 	/** 
 	 * 判断是否自动进行规则以外的映射处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return 
 	 */
 	public boolean isAutoMapping();
 
 	/** 
 	 * 设置是否自动进行规则以外的映射处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param autoMapping 
 	 */
 	public void setAutoMapping(boolean autoMapping);

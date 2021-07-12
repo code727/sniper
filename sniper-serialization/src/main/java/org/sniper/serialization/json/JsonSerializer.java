@@ -23,14 +23,14 @@ import org.sniper.serialization.TypedSerializer;
 
 /**
  * JSON序列器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface JsonSerializer extends TypedSerializer, DateSerializer {
 	
 	/**
 	 * 判断对象是否可以被序列化
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -38,7 +38,7 @@ public interface JsonSerializer extends TypedSerializer, DateSerializer {
 	
 	/**
 	 * 判断对象是否可以被反序列化
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */

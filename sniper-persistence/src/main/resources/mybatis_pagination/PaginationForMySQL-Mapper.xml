@@ -11,13 +11,13 @@
 	
 	<sql id="offSetAndLimit">
 		<![CDATA[ 
-		  id > #{start} LIMIT #{pageSize}
+			> #{start} LIMIT #{pageSize}
 		]]>
 	</sql>
 	
 	<sql id="endAndLimit">
 		<![CDATA[ 
-			 id < #{end} LIMIT #{pageSize} 
+			 < #{end} LIMIT #{pageSize} 
 		]]>
 	</sql>
 	

@@ -33,7 +33,7 @@ import org.sniper.nosql.redis.option.GeoRadiusOption;
 
 /**
  * Redis地理信息命令行单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class RedisGeoCommandsTest extends AbstractRedisTest {

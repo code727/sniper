@@ -25,7 +25,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * 逻辑运算枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum LogicOperationEnum {
@@ -77,7 +77,7 @@ public enum LogicOperationEnum {
 	
 	/**
 	 * 判断指定的运算符号是否匹配一个LogicOperationEnum对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sign
 	 * @return
 	 */
@@ -87,7 +87,7 @@ public enum LogicOperationEnum {
 
 	/**
 	 * 将指定的运算符号解析成LogicOperationEnum对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sign
 	 * @return
 	 */

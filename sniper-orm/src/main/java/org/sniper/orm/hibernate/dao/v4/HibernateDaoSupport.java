@@ -33,7 +33,7 @@ import org.sniper.spring.beans.AbstractGenricBean;
 
 /**
  * Hibernate4 DAO支持抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class HibernateDaoSupport<T> extends AbstractGenricBean<T> {
@@ -83,7 +83,7 @@ public abstract class HibernateDaoSupport<T> extends AbstractGenricBean<T> {
 	
 	/**
 	 * 获取当前实体类型对应的元数据对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityClass
 	 * @return
 	 */
@@ -93,7 +93,7 @@ public abstract class HibernateDaoSupport<T> extends AbstractGenricBean<T> {
 	
 	/**
 	 * 获取当前实体类型对应的名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityClass
 	 * @return
 	 */
@@ -103,7 +103,7 @@ public abstract class HibernateDaoSupport<T> extends AbstractGenricBean<T> {
 	
 	/**
 	 * 获取当前实体类型对应的表名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityClass
 	 * @return
 	 */
@@ -113,7 +113,7 @@ public abstract class HibernateDaoSupport<T> extends AbstractGenricBean<T> {
 			
 	/**
 	 * 获取当前实体类型对应的ID属性名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -123,7 +123,7 @@ public abstract class HibernateDaoSupport<T> extends AbstractGenricBean<T> {
 		
 	/**
 	 * 根据缓存配置项设置Criteria对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param criteria
 	 */
 	protected void prepareCriteria(Criteria criteria) {
@@ -145,7 +145,7 @@ public abstract class HibernateDaoSupport<T> extends AbstractGenricBean<T> {
 	
 	/**
 	 * 根据缓存配置项设置Query对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query
 	 */
 	protected void prepareQuery(Query query) {

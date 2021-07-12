@@ -21,12 +21,13 @@ package org.sniper.sqlmap.ibatis;
 import java.util.List;
 import java.util.Map;
 
+import org.sniper.commons.util.StringUtils;
 import org.sniper.sqlmap.dao.SqlMapQuery;
 import org.springframework.stereotype.Repository;
 
 /**
  * IBatis查询DAO实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
@@ -92,7 +93,7 @@ public class IBatisQueryDaoImpl<T> extends IBatisDaoSupport<T> implements SqlMap
 	
 	@Override
 	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter) {
-		return queryMapBySqlMap(statement, parameter, DEFAULT_KEY_PROPERTY);
+		return queryMapBySqlMap(statement, parameter, null);
 	}
 
 	@Override
@@ -103,7 +104,8 @@ public class IBatisQueryDaoImpl<T> extends IBatisDaoSupport<T> implements SqlMap
 	@SuppressWarnings("unchecked")
 	@Override
 	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter, String keyProperty) {
-		return getSqlMapClientTemplate().queryForMap(namespace + statement, parameter, keyProperty);
+		return getSqlMapClientTemplate().queryForMap(namespace + statement, parameter,
+				StringUtils.isNotBlank(keyProperty) ? keyProperty : DEFAULT_KEY_PROPERTY);
 	}
 
 }

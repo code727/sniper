@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * 媒介类型枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum MediaEnum {
@@ -133,7 +133,7 @@ public enum MediaEnum {
 	
 	/**
 	 * 判断指定的类型是否匹配当前枚举
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 * @return
 	 */
@@ -143,7 +143,7 @@ public enum MediaEnum {
 
 	/**
 	 * 将指定的算法模式解析成枚举对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 * @return
 	 */

@@ -29,7 +29,7 @@ import org.sniper.jms.core.strategy.SharedStrategy;
 
 /**
  * JMS目的地访问器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class JmsDestinationAccessor extends JmsAccessor {
@@ -48,7 +48,7 @@ public abstract class JmsDestinationAccessor extends JmsAccessor {
 	
 	/**
 	 * 根据名称是否解析出一个发布/订阅域(topic)目的地对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param destinationName
 	 * @param pubSubDomain
@@ -62,7 +62,7 @@ public abstract class JmsDestinationAccessor extends JmsAccessor {
 	
 	/**
 	 * 获取必要的目的地对象，否则抛出IllegalArgumentException
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param strategy
 	 * @param destination
 	 * @return

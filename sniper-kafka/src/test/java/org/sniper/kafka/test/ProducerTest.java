@@ -30,7 +30,7 @@ import org.sniper.test.spring.JUnit4SpringTestCase;
 
 /**
  * 生产者测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @ContextConfiguration(locations = { "/applicationContext-producer.xml" })

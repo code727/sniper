@@ -24,7 +24,7 @@ import org.apache.http.impl.client.HttpClients;
 
 /**
  * HttpClient4.x工厂对象实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class HttpClientFactoryBean implements HttpClientFactory {

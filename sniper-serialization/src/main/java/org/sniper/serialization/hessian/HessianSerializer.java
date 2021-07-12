@@ -33,7 +33,7 @@ import com.caucho.hessian.io.HessianOutput;
 
 /**
  * Hessian序列化器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class HessianSerializer extends AbstractTypedSerializer {

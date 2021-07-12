@@ -22,14 +22,14 @@ import org.sniper.commons.util.ObjectUtils;
 
 /**
  * 值相等逻辑运算操作
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class EqualsLogicOperation implements LogicOperation<Object, Object> {
 
 	/**
 	 * 执行对象的equals方法进行值比较
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj1
 	 * @param obj2
 	 * @return

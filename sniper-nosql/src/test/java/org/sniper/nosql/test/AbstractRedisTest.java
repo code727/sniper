@@ -29,7 +29,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 /**
  * Redis单元测试抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @ContextConfiguration(locations = { "/applicationContext-redis.xml" })

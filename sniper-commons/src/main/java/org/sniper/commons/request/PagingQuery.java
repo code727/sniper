@@ -20,7 +20,7 @@ package org.sniper.commons.request;
 
 /**
  * 分页查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface PagingQuery extends Pageable, SortableRequest {
@@ -30,42 +30,42 @@ public interface PagingQuery extends Pageable, SortableRequest {
 	
 	/**
 	 * 判断是否需要查询总数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isQueryCount();
 	
 	/**
 	 * 设置是否需要查询总数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryCount
 	 */
 	public void setQueryCount(boolean queryCount);
 			
 	/**
 	 * 获取执行查询的起始位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getStart();
 
 	/**
 	 * 设置执行查询的起始位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param start
 	 */
 	public void setStart(long start);
 	
 	/**
 	 * 获取执行查询的结束位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getEnd();
 
 	/**
 	 * 设置执行查询的结束位置
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param end
 	 */
 	public void setEnd(long end);

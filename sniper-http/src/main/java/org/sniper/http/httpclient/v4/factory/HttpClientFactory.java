@@ -22,14 +22,14 @@ import org.apache.http.client.HttpClient;
 
 /**
  * HttpClient4.x CloseableHttpClient对象工厂接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface HttpClientFactory {
 			
 	/**
 	 * 创建HttpClient实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public HttpClient create();

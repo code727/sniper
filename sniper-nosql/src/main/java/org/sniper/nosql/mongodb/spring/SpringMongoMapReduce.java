@@ -27,7 +27,7 @@ import org.sniper.nosql.mongodb.MapReduceResultModel;
 
 /**
  * Spring MongoDB的MapReduce接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SpringMongoMapReduce {
@@ -35,7 +35,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 执行mapReduce，并将临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,out:{inline:1});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapFunction
 	 * @param reduceFunction
 	 * @return
@@ -45,7 +45,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 在目标集合中执行mapReduce，并将临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,out:{inline:1});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction
@@ -57,7 +57,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 执行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"limit":limit,out:{inline:1}}
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapFunction
 	 * @param reduceFunction
 	 * @param limit
@@ -69,7 +69,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 在目标集合中执行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"limit":limit,out:{inline:1}}
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction
@@ -83,7 +83,7 @@ public interface SpringMongoMapReduce {
 	 * 根据属性查询出文档后对其进行mapReduce，并将临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,
 	 * {"query":{"propertyKey":propertyValue},out:{inline:1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapFunction
 	 * @param reduceFunction
 	 * @param queryPropertyName
@@ -97,7 +97,7 @@ public interface SpringMongoMapReduce {
 	 * 在目标集合中根据属性查询出文档后对其进行mapReduce，并将临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,
 	 * {"query":{"propertyKey":propertyValue},out:{inline:1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction
@@ -112,7 +112,7 @@ public interface SpringMongoMapReduce {
 	 * 根据属性查询出文档后对其进行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,
 	 * {"query":{"propertyKey":propertyValue},"limit":limit,out:{inline:1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapFunction
 	 * @param reduceFunction
 	 * @param queryPropertyName
@@ -127,7 +127,7 @@ public interface SpringMongoMapReduce {
 	 * 在目标集合中根据属性查询出最大行数的文档后对其进行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,
 	 * {"query":{"propertyKey":propertyValue},"limit":maxRows,out:{inline:1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction
@@ -143,7 +143,7 @@ public interface SpringMongoMapReduce {
 	 * 根据属性组查询出文档后对其进行mapReduce，并将临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},out:{inline:1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapFunction
 	 * @param reduceFunction
 	 * @param queryProperties
@@ -156,7 +156,7 @@ public interface SpringMongoMapReduce {
 	 * 在目标集合中根据属性组查询出文档后对其进行mapReduce，并将临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},out:{inline:1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction
@@ -168,7 +168,7 @@ public interface SpringMongoMapReduce {
 	
 	/**
 	 * 根据属性组查询出文档后对其进行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapFunction
 	 * @param reduceFunction
 	 * @param queryProperties
@@ -182,7 +182,7 @@ public interface SpringMongoMapReduce {
 	 * 在目标集合中根据属性组查询出文档后对其进行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},"limit":limit,out:{inline:1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction
@@ -196,7 +196,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 查询出文档后对其进行mapReduce，并将临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{query},out:{inline:1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapFunction
 	 * @param reduceFunction
 	 * @param query
@@ -208,7 +208,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 在目标集合中查询出文档后对其进行mapReduce，并将临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{query},out:{inline:1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction
@@ -221,7 +221,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 查询出文档后对其进行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{query},"limit":limit,out:{inline:1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapFunction
 	 * @param reduceFunction
 	 * @param query
@@ -234,7 +234,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 在目标集合中查询出文档后对其进行mapReduce，并将返回的前limit个临时结果集保存在内存中<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{query},"limit":limit,out:{inline:1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction
@@ -248,7 +248,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 执行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{mapReduceOptions});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapFunction
 	 * @param reduceFunction
 	 * @param mapReduceOptions
@@ -260,7 +260,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 在目标集合中执行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{mapReduceOptions});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction
@@ -273,7 +273,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 根据属性查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"propertyKey":propertyValue},mapReduceOptions});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapFunction
 	 * @param reduceFunction
 	 * @param queryPropertyName
@@ -287,7 +287,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 在目标集合中根据属性查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"propertyKey":propertyValue},mapReduceOptions});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction
@@ -303,7 +303,7 @@ public interface SpringMongoMapReduce {
 	 * 根据属性组查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},mapReduceOptions});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mapFunction
 	 * @param reduceFunction
 	 * @param queryProperties
@@ -317,7 +317,7 @@ public interface SpringMongoMapReduce {
 	 * 在目标集合中根据属性组查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":{"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},mapReduceOptions});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction
@@ -331,7 +331,7 @@ public interface SpringMongoMapReduce {
     /**
      * 查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
      * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":query,mapReduceOptions});
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param mapFunction
      * @param reduceFunction
      * @param query
@@ -344,7 +344,7 @@ public interface SpringMongoMapReduce {
 	/**
 	 * 在目标集合中查询出文档后对其进行mapReduce，并由mapReduceOptions参数指定的方式返回结果<P>
 	 * 实际执行的语句为:db.collection.mapReduce(mapFunction,reduceFunction,{"query":query,mapReduceOptions});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param mapFunction
 	 * @param reduceFunction

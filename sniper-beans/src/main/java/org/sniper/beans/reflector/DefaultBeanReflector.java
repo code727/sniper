@@ -43,7 +43,7 @@ import org.sniper.commons.util.ReflectionUtils;
 
 /**
  * Bean映射器默认实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultBeanReflector implements BeanReflector {
@@ -199,7 +199,7 @@ public class DefaultBeanReflector implements BeanReflector {
 	
 	/**
 	 * 获取指定对象的成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param propertyName
 	 * @return
@@ -218,7 +218,7 @@ public class DefaultBeanReflector implements BeanReflector {
 	
 	/**
 	 * 获取指定对象中已构建的成员值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param memberName
 	 * @param propertyName
@@ -243,7 +243,7 @@ public class DefaultBeanReflector implements BeanReflector {
 	
 	/**
 	 * 在指定对象中设置指定属性成员的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param propertyName
 	 * @param parameterType

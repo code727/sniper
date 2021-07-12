@@ -29,7 +29,7 @@ import org.codehaus.jackson.map.SerializerProvider;
 
 /**
  * CodehausJackson BigDecimal类型序列化器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class CodehausJacksonBigDecimalSerializer extends JsonSerializer<BigDecimal> {

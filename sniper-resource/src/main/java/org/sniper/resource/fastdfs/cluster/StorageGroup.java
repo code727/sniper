@@ -25,21 +25,21 @@ import org.sniper.resource.server.InternetServer;
 
 /**
  * StorageGroup接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface StorageGroup extends InternetServer {
 	
 	/**
 	 * 设置当前组包含的Storage
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param storages
 	 */
 	public void setStorages(List<Storage> storages);
 	
 	/**
 	 * 获取当前组包含的所有Storage
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<Storage> getStorages();

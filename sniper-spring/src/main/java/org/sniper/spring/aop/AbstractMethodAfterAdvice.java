@@ -24,7 +24,7 @@ import org.springframework.aop.AfterReturningAdvice;
 
 /**
  * 后置型方法拦截切面抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractMethodAfterAdvice extends AbstractThrowableMethodAdvice implements AfterReturningAdvice {
@@ -38,7 +38,7 @@ public abstract class AbstractMethodAfterAdvice extends AbstractThrowableMethodA
 
 	/**
 	 * 执行后置拦截任务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param returnValue
 	 * @param method
 	 * @param args

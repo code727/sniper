@@ -21,12 +21,13 @@ package org.sniper.sqlmap.mybatis;
 import java.util.List;
 import java.util.Map;
 
+import org.sniper.commons.util.StringUtils;
 import org.sniper.sqlmap.dao.SqlMapQuery;
 import org.springframework.stereotype.Repository;
 
 /**
  * MyBatis查询DAO实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @Repository
@@ -84,12 +85,12 @@ public class MyBatisQueryDaoImpl<T> extends MyBatisDaoSupport<T> implements SqlM
 
 	@Override
 	public <K,V> Map<K, V> queryMapBySqlMap(String statement) {
-		return queryMapBySqlMap(statement, DEFAULT_KEY_PROPERTY);
+		return queryMapBySqlMap(statement, (Object) null);
 	}
 
 	@Override
 	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter) {
-		return queryMapBySqlMap(statement, parameter, DEFAULT_KEY_PROPERTY);
+		return queryMapBySqlMap(statement, parameter, null);
 	}
 
 	@Override
@@ -99,7 +100,8 @@ public class MyBatisQueryDaoImpl<T> extends MyBatisDaoSupport<T> implements SqlM
 
 	@Override
 	public <K,V> Map<K, V> queryMapBySqlMap(String statement, Object parameter, String keyProperty) {
-		return getSqlSession().selectMap(namespace + statement, parameter, keyProperty);
+		return getSqlSession().selectMap(namespace + statement, parameter,
+				StringUtils.isNotBlank(keyProperty) ? keyProperty : DEFAULT_KEY_PROPERTY);
 	}
 
 }

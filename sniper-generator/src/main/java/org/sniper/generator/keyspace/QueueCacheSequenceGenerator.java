@@ -28,7 +28,7 @@ import org.sniper.concurrent.locks.KeyspaceLock;
 
 /**
  * 基于队列的缓存序列生成器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<Object, Queue<V>, V> {
@@ -125,7 +125,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 	 * 优点：由于生成器生成的个数不会受消费方影响，因此这种方式在宕机和重启恢复的情况下，比方式1造成的丢失范围要小。另外可以很方便的根据生成器已生成的个数和cacheStepSize推算出缓存批次。</P>
 	 * 缺点：可能会使本地队列缓存失效， 例如：消费方如果每次要求生成的个数都大于cacheStepSize，则每次在返回出列结果之前，都会使生成器重新新生新元素并进行缓存入列，性能将急剧下降。
 	 * 极端情况当cacheStepSize=1或cacheStepSize=count时，队列实际上是没有缓存任何元素的，这会导致缓存失去意义。</P>
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author  Daniele
 	 * @version 1.0
 	 */
 	protected abstract class AbstractCacheableQueue {
@@ -138,7 +138,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		
 		/**
 		 * 缓存并出列一个结果
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param queue
 		 * @param key
 		 * @return
@@ -151,7 +151,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		
 		/**
 		 * 更新队列并出列一个结果
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param queue
 		 * @param key
 		 * @return
@@ -168,7 +168,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		
 		/**
 		 * 缓存并批量出列count个结果
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param queue
 		 * @param key
 		 * @param count
@@ -182,7 +182,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		
 		/**
 		 * 更新队列并批量出列count个结果
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param queue
 		 * @param key
 		 * @param count
@@ -203,7 +203,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		 * 更新队列并批量出列。当队列的剩余个数小于批量出列个数(queueRemain<count)时被调用，其实现方式如下：</P>
 		 * 1.如果queueRemain==0，表明队列已经没有剩余元素了，缓存并出列count个结果；</P>
 		 * 2.如果queueRemain!=0，表明队列还剩余有元素未出列，缓存并批量出列包括剩余的queueRemain个元素在内的count(总计)个结果。</P>
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param queue
 		 * @param key
 		 * @param queueRemain
@@ -245,7 +245,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		
 		/**
 		 * 从队列中批量出列count个结果
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param queue
 		 * @param key
 		 * @param count
@@ -262,14 +262,14 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 		
 		/**
 		 * 计算出实际需要批量生成的个数
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @return
 		 */
 		protected abstract int calculateBatchCount();
 		
 		/**
 		 * 根据指定的个数计算出生成器实际要批量生成的个数
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param count
 		 * @return
 		 */
@@ -278,7 +278,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 	
 	/**
 	 * 固定步长队列缓存轮询器实现类
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author  Daniele
 	 * @version 1.0
 	 */
 	private class FixedCacheQueue extends AbstractCacheableQueue {
@@ -297,7 +297,7 @@ public class QueueCacheSequenceGenerator<V> extends AbstractCacheableGenerator<O
 	
 	/**
 	 * 无固定步长队列缓存轮询器实现类
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author  Daniele
 	 * @version 1.0
 	 */
 	private class UnfixedCacheQueue extends AbstractCacheableQueue {

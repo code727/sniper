@@ -24,21 +24,21 @@ import org.sniper.orm.hibernate.dao.HibernateDao;
 
 /**
  * Hibernate对象服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface HibernateBeanService<T, PK extends Serializable> {
 	
 	/**
-	 * 设置Hibernate持久化数据访问接口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 设置Hibernate数据访问接口(DAO)
+	 * @author Daniele 
 	 * @param hibernateDao
 	 */
 	public void setHibernateDao(HibernateDao<T, PK> hibernateDao);
 	
 	/**
-	 * 获取Hibernate持久化数据访问接口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 获取Hibernate数据访问接口(DAO)
+	 * @author Daniele 
 	 * @return
 	 */
 	public HibernateDao<T, PK> getHibernateDao();

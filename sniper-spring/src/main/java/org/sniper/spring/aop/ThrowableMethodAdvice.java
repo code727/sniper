@@ -23,14 +23,14 @@ import org.springframework.beans.factory.InitializingBean;
 
 /**
  * 可抛出异常的方法可拦截切面接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ThrowableMethodAdvice extends ThrowsAdvice, InitializingBean {
 		
 	/**
 	 * 目标方法执行出现异常后被拦截时执行
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param e
 	 * @throws Throwable
 	 */

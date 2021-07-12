@@ -22,7 +22,7 @@ import org.sniper.nosql.redis.enums.ZStoreAggregate;
 
 /**
  * 有序集合存储可选项接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ZStoreOptional {
@@ -35,14 +35,14 @@ public interface ZStoreOptional {
 	
 	/**
 	 * 获取乘法因子数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int[] getWeights();
 
 	/**
 	 * 有序集合聚合方式枚举
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public ZStoreAggregate getAggregate();

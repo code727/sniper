@@ -32,7 +32,7 @@ import org.sniper.http.httpclient.v4.builder.MultipartFormMessageBuilder;
 
 /**
  * 请求处理器默认实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefualtRequestHandler implements RequestHandler {

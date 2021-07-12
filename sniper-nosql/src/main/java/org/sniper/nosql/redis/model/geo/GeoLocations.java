@@ -23,14 +23,14 @@ import java.util.Map;
 
 /**
  * Geo空间元素集接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface GeoLocations<M> extends Serializable {
 	
 	/**
 	 * 添加地理位置坐标点成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param member
 	 * @param point
 	 */
@@ -38,7 +38,7 @@ public interface GeoLocations<M> extends Serializable {
 	
 	/**
 	 * 根据成员名获取地理位置坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param member
 	 * @return
 	 */
@@ -46,14 +46,14 @@ public interface GeoLocations<M> extends Serializable {
 
 	/**
 	 * 获取所有成员的地理位置坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<M, GeoPoint> getMemberLocations();
 	
 	/**
 	 * 根据成员名删除对应的地理位置坐标点，并返回已删除的坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param member
 	 * @return
 	 */
@@ -61,14 +61,14 @@ public interface GeoLocations<M> extends Serializable {
 	
 	/**
 	 * 获取空间元素的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int size();
 	
 	/**
 	 * 判断是否为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isEmpty();

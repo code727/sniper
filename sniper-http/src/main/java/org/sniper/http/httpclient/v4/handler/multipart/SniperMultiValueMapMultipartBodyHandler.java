@@ -28,7 +28,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * org.sniper.commons.MultiValueMap类型的Multipart请求体处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SniperMultiValueMapMultipartBodyHandler extends AbstractCompositeMultipartBodyHandler<MultiValueMap<String, Object>> {
@@ -43,7 +43,7 @@ public class SniperMultiValueMapMultipartBodyHandler extends AbstractCompositeMu
 
 	/**
 	 * 重写父类方法，兼容org.springframework.http.converter.FormHttpMessageConverter类中isMultipart方法实现逻辑
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param requestBody
 	 * @return
 	 */

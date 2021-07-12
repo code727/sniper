@@ -22,14 +22,14 @@ import org.sniper.resource.fastdfs.cluster.Cluster;
 
 /**
  * FastDFS访问器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Accessor {
 	
 	/**
 	 * 根据FastDFS集群族和路径获取最终可访问的URL
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param cluster
 	 * @param path
 	 * @return
@@ -38,7 +38,7 @@ public interface Accessor {
 	
 	/**
 	 * 根据FastDFS集群族和路径获取存储路径
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param cluster
 	 * @param url
 	 * @return

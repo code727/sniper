@@ -25,7 +25,7 @@ import org.sniper.commons.util.MessageUtils;
 
 /**
  * 在线离线/线上线下状态枚举类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum O2OStatus {
@@ -72,7 +72,7 @@ public enum O2OStatus {
 	
 	/**
 	 * 判断指定的键是否匹配一个O2OStatus对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -82,7 +82,7 @@ public enum O2OStatus {
 	
 	/**
 	 * 将指定的键解析成O2OStatus对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */

@@ -29,7 +29,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 
 /**
  * 基于Spring Web应用的消息解析器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SpringWebMessageReslover extends AbstractSpringWebMessageReslover {

@@ -22,14 +22,14 @@ import java.util.Collection;
 
 /**
  * 已索引的扫描结果
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface IndexedScanResult<T> extends ScannableResult<T> {
 	
 	/**
 	 * 获取指定下标位的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param index
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface IndexedScanResult<T> extends ScannableResult<T> {
 	
 	/**
 	 * 判断指定的对象是否存在于结果中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -45,7 +45,7 @@ public interface IndexedScanResult<T> extends ScannableResult<T> {
 	
 	/**
 	 * 判断指定的集合是否存在于结果中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param c
 	 * @return
 	 */

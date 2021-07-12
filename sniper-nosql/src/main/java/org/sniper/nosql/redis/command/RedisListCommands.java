@@ -26,14 +26,14 @@ import org.sniper.nosql.redis.enums.ListPosition;
 
 /**
  * Redis列表命令接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lInsert命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param where
 	 * @param pivot 位置值
@@ -44,7 +44,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lInsert命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param where
 	 * @param pivot
@@ -56,7 +56,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定索引库中执行lInsert命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param where
@@ -68,7 +68,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定索引库中执行lInsert命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param where
@@ -81,7 +81,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lSet命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param posttion
 	 * @param value
@@ -90,7 +90,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lSet命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param posttion
 	 * @param value
@@ -100,7 +100,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lSet命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param posttion
@@ -110,7 +110,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lSet命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param posttion
@@ -121,7 +121,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lPush命令，入栈到键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @return
@@ -130,7 +130,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lPush命令，入栈到键值列表的顶部并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
@@ -140,7 +140,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lPush命令，入栈到键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -150,7 +150,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lPushX命令，入栈到键值列表的顶部并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -161,7 +161,7 @@ public interface RedisListCommands {
 		
 	/**
 	 * 在当前库中批量执行lPush命令，入栈到键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param values
 	 * @return
@@ -170,7 +170,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中批量执行lPush命令，入栈到键值列表的顶部并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param values
 	 * @param expireSeconds
@@ -180,7 +180,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中批量执行lPush命令，入栈到键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param values
@@ -190,7 +190,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中批量执行lPush命令，入栈到键值列表的顶部并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param values
@@ -201,7 +201,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中批量执行lPush命令，入栈到键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param values
 	 * @return
@@ -210,7 +210,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中批量执行lPush命令，入栈到键值列表的顶部并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param values
 	 * @param expireSeconds
@@ -220,7 +220,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中批量执行lPush命令，入栈到键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param values
@@ -230,7 +230,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中批量执行lPush命令，入栈到键值列表的顶部并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param values
@@ -241,7 +241,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lPushX命令，当键存在时入栈到键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @return
@@ -250,7 +250,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lPushX命令，当键存在时入栈到键值列表的顶部并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
@@ -260,7 +260,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lPushX命令，当键存在时入栈到键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -270,7 +270,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lPushX命令，当键存在时入栈到键值列表的顶部并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -281,7 +281,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lIndex命令，获取指定下标位对应的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param index
 	 * @return
@@ -290,7 +290,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lIndex命令，获取指定下标位对应类型的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param index
 	 * @param valueType
@@ -300,7 +300,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lIndex命令，获取下标位对应的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param index
@@ -310,7 +310,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lIndex命令，获取下标位对应类型的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param index
@@ -321,7 +321,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lLen命令，获取指定键的元素合数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -329,7 +329,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lLen命令，获取指定键的元素合数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -338,7 +338,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lPop命令，出栈指定键顶部的一个值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -346,7 +346,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lPop命令，出栈指定键顶部的一个值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -355,7 +355,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lPop命令，出栈指定键顶部的一个值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -364,7 +364,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lPop命令，出栈指定键顶部的一个值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -374,7 +374,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lRange命令，获取指定键列表下标在区间范围内的所有元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -384,7 +384,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lRange命令，获取指定键列表下标在区间范围内的所有元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -395,7 +395,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lRange命令，获取指定键列表下标在区间范围内的所有元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -406,7 +406,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lRange命令，获取指定键列表下标在区间范围内的所有元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -418,7 +418,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lRange命令，获取指定键列表中的所有元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -428,7 +428,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lRange命令，获取指定键列表中的所有元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -437,7 +437,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lRange命令，获取指定键列表中的所有元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -448,7 +448,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lRange命令，获取指定键列表中的所有元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -458,7 +458,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lRem命令，删除键列表中count个与指定值相等的元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param count
 	 * @param value
@@ -468,7 +468,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lRem命令，删除键列表中count个与指定值相等的元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param count
@@ -479,7 +479,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lRem命令，删除键列表中所有与指定相等的元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @return
@@ -488,7 +488,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lRem命令，删除键列表中所有与指定相等的元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -498,7 +498,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行lTrim命令，删除键列表下标在区间范围外的所有子元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -507,7 +507,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lTrim命令，删除键列表下标在区间范围外的所有子元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -517,7 +517,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行rPush命令，入栈到键值列表的末尾
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @return
@@ -526,7 +526,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行rPush命令，入栈到键值列表的末尾并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
@@ -536,7 +536,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行lPush命令，入栈到键值列表的末尾
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -546,7 +546,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行rPush命令，入栈到键值列表的末尾并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -557,7 +557,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中批量执行rPush命令，入栈到键值列表的末尾
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param values
 	 * @return
@@ -566,7 +566,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中批量执行rPush命令，入栈到键值列表的末尾并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param values
 	 * @param expireSeconds
@@ -576,7 +576,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中批量执行rPush命令，入栈到键值列表的末尾
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param values
@@ -586,7 +586,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中批量执行rPush命令，入栈到键值列表的末尾并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param values
@@ -597,7 +597,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中批量执行rPush命令，入栈到键值列表的末尾
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param values
 	 * @return
@@ -606,7 +606,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中批量执行rPush命令，入栈到键值列表的末尾并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param values
 	 * @param expireSeconds
@@ -616,7 +616,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中批量执行rPush命令，入栈到键值列表的末尾
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param values
@@ -626,7 +626,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中批量执行rPush命令，入栈到键值列表的末尾并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param values
@@ -637,7 +637,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行rPushX命令，入栈到键值列表的末尾
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @return
@@ -646,7 +646,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行rPushX命令，入栈到键值列表的末尾并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
@@ -656,7 +656,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行rPushX命令，入栈到键值列表的末尾
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -666,7 +666,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行rPushX命令，入栈到键值列表的末尾并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -677,7 +677,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param srcKey
 	 * @param destKey
 	 * @return
@@ -686,7 +686,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param srcKey
 	 * @param destKey
 	 * @param valueType
@@ -696,7 +696,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param srcKey
 	 * @param destKey
 	 * @param expireSeconds
@@ -706,7 +706,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param srcKey
 	 * @param destKey
 	 * @param expireSeconds
@@ -717,7 +717,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param srcKey
 	 * @param destKey
@@ -727,7 +727,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 指定库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param srcKey
 	 * @param destKey
@@ -738,7 +738,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param srcKey
 	 * @param destKey
@@ -749,7 +749,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行rPopLPush命令，从源键值列表末尾出栈一个值后又重新入栈到目标键值列表的顶部，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param srcKey
 	 * @param destKey
@@ -761,7 +761,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行rPop命令，出栈指定键尾部的一个值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -769,7 +769,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在当前库中执行rPop命令，出栈指定键尾部的一个值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -778,7 +778,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行rPop命令，出栈指定键尾部的一个值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -787,7 +787,7 @@ public interface RedisListCommands {
 	
 	/**
 	 * 在指定库中执行rPop命令，出栈指定键尾部的一个值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType

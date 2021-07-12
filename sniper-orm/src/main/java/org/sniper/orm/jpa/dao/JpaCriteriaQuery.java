@@ -22,14 +22,14 @@ import java.util.List;
 
 /**
  * JPA标准化查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface JpaCriteriaQuery<T> {
 		
 	/**
 	 * 查询出当前类型并满足参数条件的唯一实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter 条件参数对象
 	 * @param callback 查询回调
 	 * @return
@@ -38,7 +38,7 @@ public interface JpaCriteriaQuery<T> {
 	
 	/**
 	 * 查询出当前类型并满足参数条件的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter 条件参数对象
 	 * @param callback 查询回调
 	 * @return
@@ -47,7 +47,7 @@ public interface JpaCriteriaQuery<T> {
 	
 	/**
 	 * 从起始位置开始查询出当前类型最大行数并满足参数条件的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter 条件参数对象
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
@@ -58,7 +58,7 @@ public interface JpaCriteriaQuery<T> {
 	
 	/**
 	 * 查询出当前类型并满足参数条件的实体对象总数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter 条件参数对象
 	 * @param callback 查询回调
 	 * @return
@@ -67,7 +67,7 @@ public interface JpaCriteriaQuery<T> {
 	
 	/**
 	 * 查询出当前类型并满足参数条件的实体对象总数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter 条件参数对象
 	 * @param distinct 是否加上distinct关键字查询
 	 * @param callback 查询回调

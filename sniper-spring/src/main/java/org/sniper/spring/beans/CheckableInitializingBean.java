@@ -22,7 +22,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 /**
  * 可检测的初始化Bean抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class CheckableInitializingBean implements InitializingBean {
@@ -35,13 +35,13 @@ public abstract class CheckableInitializingBean implements InitializingBean {
 	
 	/**
 	 * 检测当前Bean对象属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 */
 	protected void checkProperties() {}
 		
 	/**
 	 * 初始化操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws Exception
 	 */
 	protected void init() throws Exception {}

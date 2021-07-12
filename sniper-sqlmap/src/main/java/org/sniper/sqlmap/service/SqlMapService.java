@@ -21,43 +21,43 @@ package org.sniper.sqlmap.service;
 import java.util.List;
 import java.util.Map;
 
-import org.sniper.persistence.sqlmap.SqlMapOperations;
+import org.sniper.sqlmap.SqlMapOperations;
 
 /**
  * SQL映射持久化服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
-	 * 执行statement对应的insert语句后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * 执行statement对应的insert语句后返回受插入影响的行数
+	 * @author Daniele 
+	 * @param statement
 	 * @return
 	 */
-	public Object insert(String statement);
+	public int insert(String statement);
 	
 	/**
-	 * 执行statement对应的insert语句后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 执行statement对应的insert语句后返回受插入影响的行数
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
 	 */
-	public Object insert(String statement, Object parameter);
+	public int insert(String statement, Object parameter);
 	
 	/**
-	 * 执行statement对应的update语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
-	 * @param id
+	 * 执行statement对应的update语句后返回受更新影响的行数
+	 * @author Daniele 
+	 * @param statement
 	 * @return
 	 */
 	public int update(String statement);
 	
 	/**
-	 * 执行statement对应的update语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 执行statement对应的update语句后返回受更新影响的行数
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
@@ -65,23 +65,23 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	public int update(String statement, Object parameter);
 	
 	/**
-	 * 执行statement对应的delete语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 执行statement对应的delete语句后返回受删除影响的行数
+	 * @author Daniele 
 	 * @param statement
 	 */
 	public int delete(String statement);
 	
 	/**
-	 * 执行statement对应的delete语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 执行statement对应的delete语句后返回受删除影响的行数
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 */
 	public int delete(String statement, Object parameter);
 	
 	/**
-	 * 执行id对应的count语句后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * 执行statement对应的count语句后返回结果
+	 * @author Daniele 
 	 * @param statement
 	 * @return
 	 */
@@ -89,7 +89,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的count语句后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
@@ -98,7 +98,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回当前类型唯一的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @return
 	 */
@@ -106,7 +106,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
@@ -115,7 +115,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回指定类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param statement
 	 * @return
@@ -124,7 +124,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回指定类型的唯一结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param statement
 	 * @param parameter
@@ -134,7 +134,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @return
 	 */
@@ -142,7 +142,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
@@ -151,7 +151,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 		
 	/**
 	 * 执行statement对应的查询语句后返回指定类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param statement
 	 * @return
@@ -160,7 +160,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回指定类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param statement
 	 * @param parameter
@@ -170,7 +170,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回结果映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement 
 	 * @return
 	 */
@@ -178,7 +178,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回结果映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @return
@@ -187,7 +187,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回结果映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param keyProperty 结果集的键值
 	 * @return
@@ -196,7 +196,7 @@ public interface SqlMapService<T> extends SqlMapOperations<T> {
 	
 	/**
 	 * 执行statement对应的查询语句后返回结果映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param statement
 	 * @param parameter
 	 * @param keyProperty 结果集的键值

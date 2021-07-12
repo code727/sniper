@@ -43,7 +43,7 @@ import org.sniper.generator.sequence.TimestampInternalSequence;
  * 2)"4050":"当前毫秒内的序列号"；</p>
  * 3)"42":业务参数的值经过ParameterizeGenerator处理后截取的值。</p>
  * 5.具体生成规则和结果特点与内部使用的CustomizeSequenceGenerator一致。</p>
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SnowflakeParameterizeGenerator extends AbstractSnowflakeGenerator<Long>
@@ -104,7 +104,7 @@ public class SnowflakeParameterizeGenerator extends AbstractSnowflakeGenerator<L
 		
 	/**
 	 * 生成参数结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter
 	 * @return
 	 */

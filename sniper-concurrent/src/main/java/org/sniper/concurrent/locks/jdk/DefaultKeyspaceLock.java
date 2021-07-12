@@ -27,7 +27,7 @@ import org.sniper.concurrent.locks.KeyspaceLock;
 
 /**
  * 键空间锁默认实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public final class DefaultKeyspaceLock<K> implements KeyspaceLock<K> {
@@ -93,7 +93,7 @@ public final class DefaultKeyspaceLock<K> implements KeyspaceLock<K> {
 	
 	/**
 	 * 获取键对应的锁对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */

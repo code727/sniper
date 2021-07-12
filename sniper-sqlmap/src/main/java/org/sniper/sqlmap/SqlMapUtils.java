@@ -24,14 +24,14 @@ import org.sniper.sqlmap.dao.SqlMapQuery;
 
 /**
  * SqlMap工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SqlMapUtils {
 	
 	/**
 	 * 根据指定的类型获取自定义的DAO接口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -44,7 +44,6 @@ public class SqlMapUtils {
 			}
 		}
 		return null;
-		
 	}
 
 }

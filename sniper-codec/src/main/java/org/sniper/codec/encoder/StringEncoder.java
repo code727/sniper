@@ -22,14 +22,14 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * 消息编码器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface StringEncoder {
 	
 	/**
 	 * 将消息按照全局默认的字符集进行编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param message
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface StringEncoder {
 	
 	/**
 	 * 将消息按照指定的字符集进行解码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param message
 	 * @param encoding
 	 * @return

@@ -28,7 +28,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * Map对象与org.sniper.beans.parameter.Parameters对象之间的映射转换
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MapToParametersMapper<V> extends AbstractMapper<Map<String, V>, Parameters<String, V>> {

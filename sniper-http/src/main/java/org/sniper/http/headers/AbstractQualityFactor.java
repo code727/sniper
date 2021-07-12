@@ -23,7 +23,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * Q因子抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractQualityFactor implements QualityFactor {

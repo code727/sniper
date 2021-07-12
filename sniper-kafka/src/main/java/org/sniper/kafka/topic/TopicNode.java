@@ -22,7 +22,7 @@ import org.apache.kafka.clients.producer.Callback;
 
 /**
  * Topic节点
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class TopicNode extends Topic {

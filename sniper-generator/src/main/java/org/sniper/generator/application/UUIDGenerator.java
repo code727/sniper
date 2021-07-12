@@ -26,7 +26,7 @@ import org.sniper.generator.AbstractGenerator;
 
 /**
  * UUID生成器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class UUIDGenerator extends AbstractGenerator<String> {

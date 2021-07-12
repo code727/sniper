@@ -22,7 +22,7 @@ import org.sniper.resource.server.IntranetServer;
 
 /**
  * Storage接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Storage extends IntranetServer {

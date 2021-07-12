@@ -27,7 +27,7 @@ import org.sniper.spring.beans.CheckableInitializingBean;
 
 /**
  * 生产者支持抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class KafkaProducerSupport extends CheckableInitializingBean {
@@ -64,7 +64,7 @@ public abstract class KafkaProducerSupport extends CheckableInitializingBean {
 	
 	/**
 	 * 根据注册名称获取Topic节点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -74,7 +74,7 @@ public abstract class KafkaProducerSupport extends CheckableInitializingBean {
 	
 	/**
 	 * 获取Topic节点名称，节点为空时返回指定的名称，若指定的名称也为空，返回全局默认的名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param topicNode
 	 * @param name
 	 * @return
@@ -90,7 +90,7 @@ public abstract class KafkaProducerSupport extends CheckableInitializingBean {
 		
 	/**
 	 * 根据名称获取Topic节点上注册的生产回调事件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -103,7 +103,7 @@ public abstract class KafkaProducerSupport extends CheckableInitializingBean {
 	
 	/**
 	 * 根据注册名称获取Topic节点上注册的各项生产数据指标后创建出原生Kafka生产记录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name Topic注册名
 	 * @param key
 	 * @param value
@@ -115,7 +115,7 @@ public abstract class KafkaProducerSupport extends CheckableInitializingBean {
 	
 	/**
 	 * 根据注册名称获取Topic节点上注册的各项生产数据指标后创建出原生Kafka生产记录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name Topic注册名
 	 * @param key
 	 * @param value
@@ -128,7 +128,7 @@ public abstract class KafkaProducerSupport extends CheckableInitializingBean {
 	
 	/**
 	 * 根据注册名称获取Topic节点上注册的各项生产数据指标后创建出原生Kafka生产记录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param packet
 	 * @return
@@ -139,7 +139,7 @@ public abstract class KafkaProducerSupport extends CheckableInitializingBean {
 	
 	/**
 	 * 根据注册名称获取Topic节点上注册的各项生产数据指标后创建出原生Kafka生产记录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name Topic注册名
 	 * @param key
 	 * @param value

@@ -22,14 +22,14 @@ import java.util.Map;
 
 /**
  * JPA本地持久化接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface JpaNativePersistence {
 	
 	/**
 	 * 执行本地持久化SQL语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface JpaNativePersistence {
 	
 	/**
 	 * 执行带占位符(?)参数的本地持久化SQL语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @param values
 	 * @return
@@ -46,7 +46,7 @@ public interface JpaNativePersistence {
 
 	/**
 	 * 执行带命名(=:name)参数的本地持久化SQL语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sql
 	 * @param paramMap
 	 * @return

@@ -20,14 +20,14 @@ package org.sniper.http.handler.response;
 
 /**
  * 响应处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ResponseHandler {
 	
 	/**
 	 * 处理字符串响应数据后返回最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 * @return
 	 * @throws Exception

@@ -24,14 +24,14 @@ import org.apache.shiro.subject.Subject;
 
 /**
  * Shiro工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ShiroUtils {
 	
 	/**
 	 * 获取当前认证主题
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static Subject getCurrentSubject() {
@@ -40,7 +40,7 @@ public class ShiroUtils {
 	
 	/**
 	 * 获取当前认证通过后的会话对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static Session getCurrentSession() {
@@ -49,7 +49,7 @@ public class ShiroUtils {
 	
 	/**
 	 * 在当前认证通过后的会话对象中设置属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 */
@@ -59,7 +59,7 @@ public class ShiroUtils {
 	
 	/**
 	 * 获取当前用户
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	
@@ -70,7 +70,7 @@ public class ShiroUtils {
 	
 	/**
 	 * 获取当前用户
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param userType
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public class ShiroUtils {
 	
 	/**
 	 * 注销
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	public static void logout() {
 		Subject subject = ShiroUtils.getCurrentSubject();

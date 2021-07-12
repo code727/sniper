@@ -20,21 +20,21 @@ package org.sniper.codec;
 
 /**
  * 可编解码的标识接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Codecable {
 	
 	/**
 	 * 设置编解码字符集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param encoding
 	 */
 	public void setEncoding(String encoding);
 	
 	/**
 	 * 获取编解码字符集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getEncoding();

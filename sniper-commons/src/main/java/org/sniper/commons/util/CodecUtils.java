@@ -25,7 +25,7 @@ import java.nio.charset.Charset;
 
 /**
  * 编解码工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class CodecUtils {
@@ -58,7 +58,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将URL字符串按默认编码集进行编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url URL字符
 	 * @return
 	 */
@@ -68,7 +68,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将URL字符串按指定的编码集进行编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url URL字符
 	 * @param encoding 编码集
 	 * @return
@@ -85,7 +85,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将URL字符串按默认编码集进行解码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param URL URL字符
 	 * @return
 	 */
@@ -95,7 +95,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将URL字符串按指定的编码集进行解码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url URL字符
 	 * @param encoding 编码集
 	 * @return
@@ -111,7 +111,7 @@ public class CodecUtils {
 	
 	/**
 	 * UNICODE编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param text
 	 * @return
 	 */
@@ -121,7 +121,7 @@ public class CodecUtils {
 	
 	/**
 	 * UNICODE编码，并选择是否以全大写的方式返回编码结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param text
 	 * @param upperCase
 	 * @return
@@ -156,7 +156,7 @@ public class CodecUtils {
 		
 	/**
 	 * 将文本进行UNICODE解码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param str
 	 * @return
 	 */
@@ -186,7 +186,7 @@ public class CodecUtils {
 	
 	/**
 	 * 获取字符串的字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param str
 	 * @return
 	 */
@@ -196,7 +196,7 @@ public class CodecUtils {
 	
 	/**
 	 * 获取字符串按指定编码集编码后的字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param str
 	 * @param encoding
 	 * @return
@@ -214,7 +214,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将字节数组还原成源字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bytes
 	 * @return
 	 */
@@ -224,7 +224,7 @@ public class CodecUtils {
 	
 	/**
 	 * 按指定编码集将字节数组还原成源字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param textBytes
 	 * @param encoding
 	 * @return
@@ -242,7 +242,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将字符串转换为16进制表现形式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param str
 	 * @return
 	 */
@@ -252,7 +252,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将字符串转换为按指定编码集编码后的16进制表现形式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param str
 	 * @param encoding
 	 * @return
@@ -263,7 +263,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将字节数组转换为16进制全大写的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bytes
 	 * @return
 	 */
@@ -273,7 +273,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将字节数组转换为16进制的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bytes
 	 * @return
 	 */
@@ -299,7 +299,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将16进制的字符串转换为字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param hexString
 	 * @return
 	 */
@@ -314,7 +314,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将16进制的字符串还原成原文
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param hexString
 	 * @return
 	 */
@@ -324,7 +324,7 @@ public class CodecUtils {
 	
 	/**
 	 * 将16进制的字符串按指定的字符集编码还原成原文
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param hexString
 	 * @param encoding
 	 * @return

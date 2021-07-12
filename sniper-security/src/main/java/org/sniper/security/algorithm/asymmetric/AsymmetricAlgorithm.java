@@ -25,35 +25,35 @@ import org.sniper.security.algorithm.symmetric.SymmetricAlgorithm;
 
 /**
  * 非对称算法接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface AsymmetricAlgorithm extends SymmetricAlgorithm {
 	
 	/**
 	 * 设置公钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param publicKey
 	 */
 	public void setPublicKey(String publicKey);
 	
 	/**
 	 * 获取公钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getPublicKey();
 	
 	/**
 	 * 获取公钥接口对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public PublicKey getPublicKeyInterface();
 	
 	/**
 	 * 获取私钥接口对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public PrivateKey getPrivateKeyInterface();

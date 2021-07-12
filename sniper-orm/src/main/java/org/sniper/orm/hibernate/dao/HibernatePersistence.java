@@ -25,7 +25,7 @@ import org.sniper.orm.jpa.dao.JpaPersistence;
 
 /**
  * Hibernate持久化接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface HibernatePersistence<T, PK extends Serializable> extends
@@ -33,7 +33,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	
 	/**
 	 * 根据名称持久化指定的实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param entity
 	 */
@@ -41,7 +41,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	
 	/**
 	 * 根据名称持久化指定的实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param entityList
 	 */
@@ -49,7 +49,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	
 	/**
 	 * 根据名称合并指定的实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param entity
 	 * @return
@@ -58,7 +58,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	
 	/**
 	 * 根据名称批量合并指定的实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param entityList
 	 * @return
@@ -67,7 +67,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	
 	/**
 	 * 根据名称删除指定的实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param entity
 	 */
@@ -75,7 +75,7 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 
 	/** 
 	 * 根据名称批量删除指定的实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param entityList 
 	 */
@@ -83,14 +83,14 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	
 	/**
 	 * 新增保存实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 */
 	public PK save(T entity);
 	
 	/**
 	 * 根据名称新增保存实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param entity
 	 */
@@ -98,14 +98,14 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	
 	/**
 	 * 更新保存实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 */
 	public void update(T entity);
 	
 	/**
 	 * 根据名称更新保存实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param entity
 	 */
@@ -113,14 +113,14 @@ public interface HibernatePersistence<T, PK extends Serializable> extends
 	
 	/**
 	 * 新增/更新保存实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 */
 	public void saveOrUpdate(T entity);
 	
 	/**
 	 * 根据名称新增/更新保存实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param entity
 	 */

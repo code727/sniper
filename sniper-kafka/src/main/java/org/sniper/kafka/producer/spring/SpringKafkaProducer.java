@@ -37,7 +37,7 @@ import org.sniper.kafka.support.ProduceResult;
 
 /**
  * SpringKafka生产者实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SpringKafkaProducer extends SpringKafkaProducerSupport implements KafkaProducer {

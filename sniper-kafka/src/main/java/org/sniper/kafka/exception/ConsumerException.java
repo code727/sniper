@@ -20,7 +20,7 @@ package org.sniper.kafka.exception;
 
 /**
  * 消费者运行时异常类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ConsumerException extends RuntimeException {

@@ -23,7 +23,7 @@ import java.util.Locale;
 
 /**
  * 地理位置坐标点
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class GeoPoint implements Serializable {
@@ -40,7 +40,7 @@ public class GeoPoint implements Serializable {
 	
 	/**
 	 * 构造地理位置坐标点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param longitude 经度(x)
 	 * @param latitude 维度(y)
 	 */
@@ -51,7 +51,7 @@ public class GeoPoint implements Serializable {
 
 	/**
 	 * 获取经度(x)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public double getLongitude() {
@@ -60,7 +60,7 @@ public class GeoPoint implements Serializable {
 
 	/**
 	 * 设置经度(x)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param longitude
 	 */
 	public void setLongitude(double longitude) {
@@ -69,7 +69,7 @@ public class GeoPoint implements Serializable {
 
 	/**
 	 * 获取维度(y)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public double getLatitude() {
@@ -78,7 +78,7 @@ public class GeoPoint implements Serializable {
 
 	/**
 	 * 设置维度(y)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param latitude
 	 */
 	public void setLatitude(double latitude) {

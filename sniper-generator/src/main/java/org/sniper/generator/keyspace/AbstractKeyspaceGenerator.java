@@ -25,7 +25,7 @@ import org.sniper.support.AbstractNamespace;
 
 /**
  * 基于键空间的生成器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractKeyspaceGenerator<K, V> extends AbstractNamespace<K>
@@ -60,7 +60,7 @@ public abstract class AbstractKeyspaceGenerator<K, V> extends AbstractNamespace<
 	
 	/**
 	 * 检查批量生成的个数是否合法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param count
 	 */
 	protected void checkBatchCount(int count) {
@@ -70,7 +70,7 @@ public abstract class AbstractKeyspaceGenerator<K, V> extends AbstractNamespace<
 	
 	/** 
 	 * 根据指定的键执行生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return 
 	 */
@@ -78,7 +78,7 @@ public abstract class AbstractKeyspaceGenerator<K, V> extends AbstractNamespace<
 	
 	/**
 	 * 根据指定的键执行批量生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param count
 	 * @return

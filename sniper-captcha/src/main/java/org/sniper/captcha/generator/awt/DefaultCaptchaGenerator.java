@@ -30,7 +30,7 @@ import org.sniper.image.layout.CaptchaLayout;
 
 /**
  * 默认的图片验证码生成器实现类
- * @author <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author Daniele
  * @version 1.0
  */
 public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
@@ -52,7 +52,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 
 	/**
 	 * 绘制背景
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param graphics
 	 */
 	protected void drawBackground(Graphics graphics) {
@@ -64,7 +64,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 
 	/**
 	 * 绘制边框
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param graphics
 	 */
 	protected void drawBorder(Graphics graphics) {
@@ -78,7 +78,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 
 	/**
 	 * 绘制干扰项
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param graphics
 	 * @param text
 	 */
@@ -103,7 +103,7 @@ public class DefaultCaptchaGenerator extends AWTImageCaptchaGenerator {
 
 	/** 
 	 * 绘制验证码文本
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param graphics
 	 * @param text 
 	 */

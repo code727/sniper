@@ -20,28 +20,28 @@ package org.sniper.generator.sequence;
 
 /**
  * 趋势序列接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface TrendSequence<T> extends DimensionSequence<T> {
 	
 	/**
 	 * 获取趋势步长
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getStepSize();
 
 	/**
 	 * 设置趋势步长
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param stepSize
 	 */
 	public void setStepSize(int stepSize);
 	
 	/**
 	 * 根据指定的趋势步长更新序列
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param stepSize
 	 * @return
 	 */

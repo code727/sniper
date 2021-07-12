@@ -20,7 +20,7 @@ package org.sniper.beans.propertyeditors;
 
 /**
  * 字符串属性编辑器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class StringPropertyEditor extends AbstractPropertyEditor {
@@ -43,7 +43,7 @@ public class StringPropertyEditor extends AbstractPropertyEditor {
 		
 	/**
 	 * 非空文本的处理方法，返回处理后的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param text
 	 * @return
 	 */

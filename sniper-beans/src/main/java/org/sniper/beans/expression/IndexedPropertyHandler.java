@@ -29,7 +29,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 已被索引的属性处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class IndexedPropertyHandler implements PropertyHandler<Object> {
@@ -105,7 +105,7 @@ public class IndexedPropertyHandler implements PropertyHandler<Object> {
 	
 	/**
 	 * 从被索引的对象中获取到指定属性的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param indexedObject
 	 * @param propertyName
 	 * @return

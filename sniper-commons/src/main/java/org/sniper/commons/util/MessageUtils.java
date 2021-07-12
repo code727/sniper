@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 
 /**
  * 消息工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MessageUtils {
@@ -38,7 +38,7 @@ public class MessageUtils {
 		
 	/**
 	 * 根据基础名称和Locale对象获取java.util.ResourceBundle对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName
 	 * @param locale
 	 * @return
@@ -64,7 +64,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取包级别资源文件内的信息， 未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @return
@@ -75,7 +75,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取包级别资源文件内的信息， 未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @param defaultMessage 默认信息
@@ -87,7 +87,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取包级别资源文件内的参数化信息， 未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @param param 参数
@@ -99,7 +99,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取包级别资源文件内的参数化信息， 未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @param params 参数组
@@ -111,7 +111,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取包级别资源文件内的参数化信息， 未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @param param 参数
@@ -124,7 +124,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取包级别资源文件内的参数化信息， 未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @param params 参数组
@@ -137,7 +137,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取包级别资源文件内的本地信息， 未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -149,7 +149,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取包级别资源文件内的本地信息， 未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -162,7 +162,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取包级别资源文件内的参数化本地信息， 未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -175,7 +175,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取包级别资源文件内的参数化本地信息， 未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -190,7 +190,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取包级别资源文件内的参数化本地信息，  未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -220,7 +220,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取类级别资源文件内的信息， 未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @return
@@ -231,7 +231,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取类级别资源文件内的信息，未获取到时返回的指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @param defaultMessage 默认信息
@@ -243,7 +243,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取类级别资源文件内的参数化信息， 未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @param param 参数
@@ -255,7 +255,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取类级别资源文件内的参数化信息， 未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @param params 参数组
@@ -267,7 +267,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取类级别资源文件内的参数化信息， 未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @param param 参数
@@ -280,7 +280,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取类级别资源文件内的参数化信息， 未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param key 资源项的键
 	 * @param params 参数
@@ -293,7 +293,7 @@ public class MessageUtils {
 	
 	/** 
 	 * 获取类级别资源文件内的本地信息，未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -305,7 +305,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取类级别资源文件内的本地信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -318,7 +318,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取类级别资源文件内的参数化本地信息，未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -331,7 +331,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取类级别资源文件内的参数化本地信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -345,7 +345,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取类级别资源文件内的参数化本地信息，未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -358,7 +358,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取类级别资源文件内的参数化本地信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz 类型的Class对象
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -374,7 +374,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取指定基名资源文件内的信息，未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param key 资源项的键
 	 * @return
@@ -385,7 +385,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取指定基名资源文件内的信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param key 资源项的键
 	 * @param defaultMessage 默认信息
@@ -397,7 +397,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取指定基名资源文件内的参数化信息，未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param key 资源项的键
 	 * @param param 参数
@@ -409,7 +409,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取指定基名资源文件内的参数化信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param key 资源项的键
 	 * @param param 参数
@@ -422,7 +422,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取指定基名资源文件内的参数化信息，未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param key 资源项的键
 	 * @param params 参数组
@@ -434,7 +434,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取指定基名资源文件内的参数化信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param key 资源项的键
 	 * @param params 参数组
@@ -447,7 +447,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取指定基名资源文件内的本地信息，未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -459,7 +459,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取指定基名资源文件内的参数化本地信息，未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -472,7 +472,7 @@ public class MessageUtils {
 	
 	/** 
 	 * 获取指定基名资源文件内的本地信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -485,7 +485,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取指定基名资源文件内的参数化本地信息，未获取到时返回资源项的键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -498,7 +498,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取指定基名资源文件内的参数化本地信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -513,7 +513,7 @@ public class MessageUtils {
 	
 	/**
 	 * 获取指定基名资源文件内的参数化本地信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param baseName 基名
 	 * @param locale 本地化对象
 	 * @param key 资源项的键
@@ -538,7 +538,7 @@ public class MessageUtils {
 	
 	/**
 	 * 根据键值获取属性资源消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param properties
 	 * @param key
 	 * @return
@@ -549,7 +549,7 @@ public class MessageUtils {
 	
 	/**
 	 * 根据键值获取属性资源消息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param properties
 	 * @param key
 	 * @param defaultMessage
@@ -561,7 +561,7 @@ public class MessageUtils {
 	
 	/**
 	 * 根据键值获取属性资源参数化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param properties
 	 * @param key
 	 * @param params
@@ -573,7 +573,7 @@ public class MessageUtils {
 	
 	/**
 	 * 根据键值获取属性资源参数化消息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param properties
 	 * @param key
 	 * @param params

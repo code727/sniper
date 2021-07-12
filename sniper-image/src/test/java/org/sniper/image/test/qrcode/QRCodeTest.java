@@ -40,7 +40,7 @@ import org.sniper.test.junit.BaseTestCase;
 
 /**
  * 二维码单元测试
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class QRCodeTest extends BaseTestCase {

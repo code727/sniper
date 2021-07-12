@@ -23,14 +23,14 @@ import java.util.Map;
 
 /**
  * JPA命名空间查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的查询语句后返回当前类型的唯一实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @return
 	 */
@@ -38,7 +38,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的查询语句后返回指定类型的唯一结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass 
 	 * @param queryName
 	 * @return
@@ -47,7 +47,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的带占位符(?)参数的查询语句后返回当前类型的唯一实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @param values
 	 * @return
@@ -56,7 +56,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的带占位符(?)参数的查询语句后返回指定类型的唯一结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param queryName
 	 * @param values
@@ -66,7 +66,7 @@ public interface JpaNamedQuery<T> {
 
 	/**
 	 * 执行空间名称对应的带命名(=:name)参数的查询语句后返回当前类型的唯一实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @param paramMap
 	 * @return
@@ -75,7 +75,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的带命名(=:name)参数的查询语句后返回指定类型的唯一结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass 
 	 * @param queryName
 	 * @param paramMap
@@ -85,7 +85,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的查询语句后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @return 
 	 */
@@ -93,7 +93,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的查询语句后返回指定类型的结果列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param queryName
 	 * @return
@@ -102,7 +102,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 从起始位置开始执行空间名称对应的查询语句后， 得到最大行数当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @param start
 	 * @param maxRows
@@ -112,7 +112,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 从起始位置开始执行空间名称对应的查询语句后， 得到最大行数指定类型的结果列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param queryName
 	 * @param start
@@ -123,7 +123,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的带占位符(?)参数的查询语句后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @param values
 	 * @return 
@@ -132,7 +132,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的带占位符(?)参数的查询语句后返回指定类型的结果列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param queryName
 	 * @param values
@@ -142,7 +142,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 从起始位置开始执行空间名称对应的带占位符(?)参数的查询语句后，得到最大行数当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @param values
 	 * @param start
@@ -153,7 +153,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 从起始位置开始执行空间名称对应的带占位符(?)参数的查询语句后，得到最大行数指定类型的结果列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param queryName
 	 * @param values
@@ -165,7 +165,7 @@ public interface JpaNamedQuery<T> {
 
 	/**
 	 * 执行空间名称对应的带命名(=:name)参数的查询语句后返回当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @param paramMap
 	 * @return 。
@@ -174,7 +174,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的带命名(=:name)参数的查询语句后返回指定类型的结果列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param queryName
 	 * @param paramMap
@@ -184,7 +184,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 从起始位置开始执行空间名称对应的带命名(=:name)参数的查询语句后，得到最大行数当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @param paramMap
 	 * @param start
@@ -195,7 +195,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 从起始位置开始执行空间名称对应的带命名(=:name)参数的查询语句后，得到最大行数指定类型的结果列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultClass
 	 * @param queryName
 	 * @param paramMap
@@ -207,7 +207,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @return
 	 */
@@ -215,7 +215,7 @@ public interface JpaNamedQuery<T> {
 
 	/**
 	 * 执行空间名称对应的带占位符(?)参数语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @param values
 	 * @return
@@ -224,7 +224,7 @@ public interface JpaNamedQuery<T> {
 
 	/**
 	 * 执行空间名称对应的带命名(=:name)参数语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @param paramMap
 	 * @return
@@ -233,7 +233,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的总计查询语句后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @return
 	 */
@@ -241,7 +241,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的带占位符(?)参数的总计查询语句后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @param values
 	 * @return
@@ -250,7 +250,7 @@ public interface JpaNamedQuery<T> {
 	
 	/**
 	 * 执行空间名称对应的带命名(=:name)参数的总计查询语句后返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param queryName
 	 * @param paramMap
 	 * @return

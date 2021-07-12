@@ -22,28 +22,28 @@ import java.util.Map;
 
 /**
  * HTTP表单注册器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface HttpFormRegister {
 		
 	/**
 	 * 设置表单映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param formMap
 	 */
 	public void setFormMap(Map<String, HttpForm> formMap);
 	
 	/**
 	 * 获取表单映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<String, HttpForm> getFormMap();
 	
 	/**
 	 * 根据名称查找到对应的表单对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -51,7 +51,7 @@ public interface HttpFormRegister {
 	
 	/**
 	 * 根据名称查找到对应表单的URL
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */

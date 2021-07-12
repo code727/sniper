@@ -26,7 +26,7 @@ import org.sniper.commons.util.FileUtils;
 
 /**
  * 本地文件列表清理任务
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class FilesDeleteTask implements Runnable {

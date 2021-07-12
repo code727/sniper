@@ -22,14 +22,14 @@ import org.sniper.support.Namespace;
 
 /**
  * 键空间趋势序列接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface KeyspaceTrendSequence<K, V> extends TrendSequence<V>, Namespace<K> {
 	
 	/**
 	 * 根据指定的键更新序列
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface KeyspaceTrendSequence<K, V> extends TrendSequence<V>, Namespace
 	
 	/**
 	 * 根据指定的键和趋势步长更新序列
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param stepSize
 	 * @return

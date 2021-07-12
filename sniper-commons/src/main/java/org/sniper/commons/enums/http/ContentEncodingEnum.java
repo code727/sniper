@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * Content-Encoding编码转换算法枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum ContentEncodingEnum {
@@ -65,7 +65,7 @@ public enum ContentEncodingEnum {
 
 	/**
 	 * 判断指定的算法是否匹配当前枚举
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param algorithm
 	 * @return
 	 */
@@ -75,7 +75,7 @@ public enum ContentEncodingEnum {
 
 	/**
 	 * 将指定的算法解析成枚举对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param algorithm
 	 * @return
 	 */

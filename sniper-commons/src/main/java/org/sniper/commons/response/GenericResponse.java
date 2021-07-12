@@ -22,35 +22,35 @@ import java.io.Serializable;
 
 /**
  * 泛型响应对象接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface GenericResponse<C> extends Serializable {
 	
 	/**
 	 * 获取响应码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public C getCode();
 	
 	/**
 	 * 设置响应码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param code
 	 */
 	public void setCode(C code);
 		
 	/**
 	 * 判断响应是否成功
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return 
 	 */
 	public boolean successed();
 	
 	/**
 	 * 判断响应是否错误
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return 
 	 */
 	public boolean errored();

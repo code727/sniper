@@ -20,7 +20,7 @@ package org.sniper.security.signature;
 
 /**
  * 非对称签名抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AsymmetricSignature<T> extends SymmetricSignature<T> {
@@ -30,7 +30,7 @@ public abstract class AsymmetricSignature<T> extends SymmetricSignature<T> {
 	
 	/**
 	 * 设置公钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param publicKey
 	 */
 	public void setPublicKey(String publicKey) {
@@ -39,7 +39,7 @@ public abstract class AsymmetricSignature<T> extends SymmetricSignature<T> {
 	
 	/**
 	 * 获取公钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getPublicKey() {

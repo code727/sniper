@@ -20,7 +20,7 @@ package org.sniper.nosql.redis.command;
 
 /**
  * Redis命令行接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RedisCommands extends RedisKeyCommands, RedisStringCommands, RedisHashCommands, RedisListCommands,

@@ -27,14 +27,14 @@ import org.sniper.jms.core.strategy.SharedStrategy;
 
 /**
  * JMS工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class JmsUtils {
 	
 	/**
 	 * 判断是否为客户端回复会话模式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @return
 	 * @throws JMSException
@@ -45,7 +45,7 @@ public class JmsUtils {
 	
 	/**
 	 * 回滚当前会话的事务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @throws JMSException
 	 */
@@ -56,7 +56,7 @@ public class JmsUtils {
 	
 	/**
 	 * 自动回滚当前会话的事务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @throws JMSException
 	 */
@@ -67,7 +67,7 @@ public class JmsUtils {
 	
 	/**
 	 * 判断当前会话是否具备本地事务特性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param strategy
 	 * @param connectionFactory
@@ -79,7 +79,7 @@ public class JmsUtils {
 
 	/**
 	 * 判断会话是否具有事务性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param strategy
 	 * @param connectionFactory

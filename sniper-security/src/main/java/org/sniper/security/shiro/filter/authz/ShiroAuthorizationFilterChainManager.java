@@ -36,7 +36,7 @@ import org.sniper.security.manager.AuthorizationFilterChainManager;
 
 /**
  * Shiro认证/授权过滤器链管理抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ShiroAuthorizationFilterChainManager implements

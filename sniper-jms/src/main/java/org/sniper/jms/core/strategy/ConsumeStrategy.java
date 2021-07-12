@@ -22,63 +22,63 @@ import javax.jms.MessageListener;
 
 /**
  * JMS消费策略接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ConsumeStrategy extends SharedStrategy {
 	
 	/**
 	 * 设置消息选择器字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param messageSelector
 	 */
 	public void setMessageSelector(String messageSelector);
 	
 	/**
 	 * 获取消息选择器字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getMessageSelector();
 	
 	/**
 	 * 设置是否不接收来自同一个连接的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pubSubNoLocal
 	 */
 	public void setPubSubNoLocal(boolean pubSubNoLocal);
 
 	/**
 	 * 判断是否不接收来自同一个连接的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isPubSubNoLocal();
 	
 	/**
 	 * 设置消息接收时的超时时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param receiveTimeout
 	 */
 	public void setReceiveTimeout(long receiveTimeout);
 
 	/**
 	 * 获取消息接收时的超时时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getReceiveTimeout();
 	
 	/**
 	 * 设置接收消息时所用的监听器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param messageListener
 	 */
 	public void setMessageListener(MessageListener messageListener);
 	
 	/**
 	 * 获取接收消息时所用的监听器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public MessageListener getMessageListener();

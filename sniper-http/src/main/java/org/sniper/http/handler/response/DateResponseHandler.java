@@ -26,7 +26,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * Date类型响应处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0j
  */
 public class DateResponseHandler extends StringResponseHandler {
@@ -61,7 +61,7 @@ public class DateResponseHandler extends StringResponseHandler {
 
 	/**
 	 * 由于字符串的日期要求不能为空白，因此重写父类方法，覆盖掉父类中的判空方式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 * @return
 	 * @throws Exception

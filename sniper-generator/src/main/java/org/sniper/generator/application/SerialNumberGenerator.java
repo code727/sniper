@@ -30,7 +30,7 @@ import org.sniper.generator.keyspace.KeyspaceGenerator;
 
 /**
  * 流水号生成器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SerialNumberGenerator extends AbstractKeyspaceParameterizeGenerator<Object, Object, String> {
@@ -109,7 +109,7 @@ public class SerialNumberGenerator extends AbstractKeyspaceParameterizeGenerator
 
 	/**
 	 * 补偿生成字符串的结果，使其长度最小为minLength
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param generated
 	 * @param minLength
 	 * @return
@@ -121,7 +121,7 @@ public class SerialNumberGenerator extends AbstractKeyspaceParameterizeGenerator
 		
 	/**
 	 * 根据预生成结果和参数生成最终的序列
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param generated
 	 * @param safeParameter
 	 * @return

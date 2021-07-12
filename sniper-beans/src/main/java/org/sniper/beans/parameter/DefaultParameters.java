@@ -35,7 +35,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 泛型参数默认实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultParameters<K, V> implements Parameters<K, V> {

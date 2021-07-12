@@ -20,35 +20,35 @@ package org.sniper.persistence.handler;
 
 /**
  * 审核事件处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface AuditEventHandler<T> {
 	
 	/**
 	 * 实体准备进行新增操作之前触发审核操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param auditEntity
 	 */
 	public abstract void auditOnPrePersist(T auditEntity);
 
 	/**
 	 * 实体准备进行更新操作之前触发审核操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param auditEntity
 	 */
 	public abstract void auditOnPreUpdate(T auditEntity);
 
 	/**
 	 * 实体准备进行删除操作之前触发审核操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param auditEntity
 	 */
 	public abstract void auditOnPreRemove(T auditEntity);
 
 	/**
 	 * 准备进行销毁之前触发审核操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	public abstract void auditOnDestroy();
 

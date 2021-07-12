@@ -28,7 +28,7 @@ import org.sniper.commons.util.NumberUtils;
 
 /**
  * 货币枚举类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum CurrencyEnum {
@@ -170,7 +170,7 @@ public enum CurrencyEnum {
 	
 	/**
 	 * 判断指定的键是否匹配一个Currency对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -180,7 +180,7 @@ public enum CurrencyEnum {
 	
 	/**
 	 * 判断指定的缩写/简称是否匹配一个Currency对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param abbreviation
 	 * @return
 	 */
@@ -190,7 +190,7 @@ public enum CurrencyEnum {
 	
 	/**
 	 * 将指定的键解析成Currency对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -200,7 +200,7 @@ public enum CurrencyEnum {
 	
 	/**
 	 * 将指定的缩写/简称解析成Currency对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param abbreviation
 	 * @return
 	 */

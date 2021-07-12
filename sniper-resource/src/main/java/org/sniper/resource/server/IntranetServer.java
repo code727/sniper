@@ -20,35 +20,35 @@ package org.sniper.resource.server;
 
 /**
  * 内网服务器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface IntranetServer {
 	
 	/**
 	 * 设置内网主机服务地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param host
 	 */
 	public void setHost(String host);
 	
 	/**
 	 * 获取内网主机服务地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getHost();
 	
 	/**
 	 * 设置内网主机服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param port
 	 */
 	public void setPort(int port);
 	
 	/**
 	 * 获取内网主机服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getPort();

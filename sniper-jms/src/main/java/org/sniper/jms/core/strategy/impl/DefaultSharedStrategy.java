@@ -28,7 +28,7 @@ import org.sniper.jms.core.strategy.SharedStrategy;
 
 /**
  * 默认JMS共享策略实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultSharedStrategy implements SharedStrategy {

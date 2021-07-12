@@ -20,21 +20,21 @@ package org.sniper.commons.entity;
 
 /**
  * 可删除的实体接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Deletable {
 	
 	/**
 	 * 获取"是否已删除"状态标识
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getDeleted();
 	
 	/**
 	 * 设置"是否已删除"状态标识
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param deleted
 	 */
 	public void setDeleted(int deleted); 

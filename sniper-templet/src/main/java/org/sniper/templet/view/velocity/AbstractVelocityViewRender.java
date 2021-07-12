@@ -30,7 +30,7 @@ import org.sniper.templet.view.AbstractViewRender;
 
 /**
  * Velocity视图渲染器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractVelocityViewRender extends AbstractViewRender {
@@ -60,7 +60,7 @@ public abstract class AbstractVelocityViewRender extends AbstractViewRender {
 	
 	/**
 	 * 构建Velocity模板引擎
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 * @throws IOException
 	 */

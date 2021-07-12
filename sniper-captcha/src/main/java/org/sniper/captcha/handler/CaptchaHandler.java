@@ -22,14 +22,14 @@ import java.io.Serializable;
 
 /**
  * 验证码处理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface CaptchaHandler {
 	
 	/**
 	 * 创建验证码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface CaptchaHandler {
 	
 	/**
 	 * 更新验证码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @return
 	 */
@@ -45,7 +45,7 @@ public interface CaptchaHandler {
 	
 	/**
 	 * 获取验证码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @return
 	 */
@@ -53,7 +53,7 @@ public interface CaptchaHandler {
 	
 	/**
 	 * 删除验证码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @return
 	 */
@@ -61,21 +61,21 @@ public interface CaptchaHandler {
 	
 	/**
 	 * 是否按忽略大小写的方式进行验证
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isIgnoreCaseValidation();
 
 	/**
 	 * 设置是否按忽略大小写的方式进行验证
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param ignoreCaseValidation
 	 */
 	public void setIgnoreCaseValidation(boolean ignoreCaseValidation);
 	
 	/**
 	 * 校验验证码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @param captcha
 	 * @return
@@ -84,14 +84,14 @@ public interface CaptchaHandler {
 
 	/**
 	 * 当验证失败时是否删除已保存的验证码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isDeleteWhenValidationFailed();
 
 	/**
 	 * 设置当验证失败时是否删除已保存的验证码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param deleteWhenValidationFailed
 	 */
 	public void setDeleteWhenValidationFailed(boolean deleteWhenValidationFailed);

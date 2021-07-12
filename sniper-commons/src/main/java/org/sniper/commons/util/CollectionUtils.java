@@ -44,7 +44,7 @@ import org.sniper.commons.exception.ListIndexOutOfBoundsException;
 
 /**
  * 集合工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0.0
  */
 public class CollectionUtils {
@@ -73,7 +73,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个ArrayList对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> ArrayList<T> newArrayList() {
@@ -82,7 +82,7 @@ public class CollectionUtils {
 		
 	/**
 	 * 根据指定的集合实例化一个ArrayList对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -92,7 +92,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的ArrayList对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @return
 	 */
@@ -102,7 +102,7 @@ public class CollectionUtils {
 		
 	/**
 	 * 实例化一个LinkedList对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> LinkedList<T> newLinkedList() {
@@ -111,7 +111,7 @@ public class CollectionUtils {
 		
 	/**
 	 * 根据指定的集合实例化一个LinkedList对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -121,7 +121,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个HashSet对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> HashSet<T> newHashSet() {
@@ -130,7 +130,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个HashSet对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -140,7 +140,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的HashSet对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @return
 	 */
@@ -150,7 +150,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个LinkedHashSet对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> LinkedHashSet<T> newLinkedHashSet() {
@@ -159,7 +159,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个LinkedHashSet对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -169,7 +169,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的LinkedHashSet对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @return
 	 */
@@ -179,7 +179,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个Vector对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> Vector<T> newVector() {
@@ -188,7 +188,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个Vector对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -198,7 +198,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的Vector对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @return
 	 */
@@ -208,7 +208,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量和增长系数的Vector对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @param capacityIncrement
 	 * @return
@@ -219,7 +219,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个ArrayDeque对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> ArrayDeque<T> newArrayDeque() {
@@ -228,7 +228,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个ArrayDeque对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -238,7 +238,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的ArrayDeque对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @return
 	 */
@@ -248,7 +248,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个PriorityQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> PriorityQueue<T> newPriorityQueue() {
@@ -257,7 +257,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个PriorityQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -267,7 +267,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的PriorityQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @return
 	 */
@@ -277,7 +277,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个DelayQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T extends Delayed> DelayQueue<T> newDelayQueue() {
@@ -286,7 +286,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个DelayQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -296,7 +296,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个ArrayBlockingQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> ArrayBlockingQueue<T> newArrayBlockingQueue() {
@@ -305,7 +305,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个ArrayBlockingQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 加入阻塞队列的集合
 	 * @return
 	 */
@@ -315,7 +315,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的ArrayBlockingQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @return
 	 */
@@ -325,7 +325,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个ArrayBlockingQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param fair 如果为true则阻塞线程的队列访问，插入或删除，按FIFO顺序处理。否则访问顺序不固定
 	 * @return
 	 */
@@ -335,7 +335,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个ArrayBlockingQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param fair 如果为true则阻塞线程的队列访问，插入或删除，按FIFO顺序处理。否则访问顺序不固定
 	 * @param collection 加入阻塞队列的集合
 	 * @return
@@ -346,7 +346,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的ArrayBlockingQueue对象，但实际容量不会小于指定集合的容量
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @param collection 加入阻塞队列的集合
 	 * @return
@@ -357,7 +357,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的ArrayBlockingQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @param fair 如果为true则阻塞线程的队列访问，插入或删除，按FIFO顺序处理。否则访问顺序不固定
 	 * @return
@@ -368,7 +368,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的ArrayBlockingQueue对象，但实际容量不会小于指定集合的容量
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @param fair 如果为true则阻塞线程的队列访问，插入或删除，按FIFO顺序处理。否则访问顺序不固定
 	 * @param collection 加入阻塞队列的集合
@@ -381,7 +381,7 @@ public class CollectionUtils {
 		
 	/**
 	 * 实例化一个LinkedBlockingQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> LinkedBlockingQueue<T> newLinkedBlockingQueue() {
@@ -390,7 +390,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个LinkedBlockingQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -400,7 +400,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个LinkedBlockingDeque对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> LinkedBlockingDeque<T> newLinkedBlockingDeque() {
@@ -409,7 +409,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个LinkedBlockingDeque对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -419,7 +419,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的LinkedBlockingDeque对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @return
 	 */
@@ -429,7 +429,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个PriorityBlockingQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> PriorityBlockingQueue<T> newPriorityBlockingQueue() {
@@ -438,7 +438,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个PriorityBlockingQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -448,7 +448,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个具备指定初始容量的PriorityBlockingQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param initialCapacity
 	 * @return
 	 */
@@ -458,7 +458,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个SynchronousQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> SynchronousQueue<T> newSynchronousQueue() {
@@ -467,7 +467,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个SynchronousQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param fair
 	 * @return
 	 */
@@ -477,7 +477,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个ConcurrentLinkedQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> ConcurrentLinkedQueue<T> newConcurrentLinkedQueue() {
@@ -486,7 +486,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个ConcurrentLinkedQueue对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -496,7 +496,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 实例化一个ConcurrentLinkedDeque对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> ConcurrentLinkedDeque<T> newConcurrentLinkedDeque() {
@@ -505,7 +505,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 根据指定的集合实例化一个ConcurrentLinkedDeque对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -515,7 +515,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 清空集合中所有的空元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 */
 	public static void trimNull(Collection<?> collection) {
@@ -524,7 +524,7 @@ public class CollectionUtils {
 		
 	/**
 	 * 删除集合中所有指定的元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param element
 	 */
@@ -542,7 +542,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 删除集合中所有重复的元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 */
 	public static void removeDuplication(Collection<?> collection) {
@@ -566,7 +566,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 求两集合的并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param s1
 	 * @param s2
 	 * @return s1∪s2
@@ -587,7 +587,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 求两集合的并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param c1
 	 * @param c2
 	 * @return c1∪c2
@@ -609,7 +609,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 求两集合的唯一元素并集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param c1
 	 * @param c2
 	 * @return c1∪c2
@@ -631,7 +631,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 求两集合的交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param s1
 	 * @param s2
 	 * @return s1∩s2
@@ -649,7 +649,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 求两集合的交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param c1
 	 * @param c2
 	 * @return c1∩c2
@@ -667,7 +667,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 求两集合唯一元素的交集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param c1
 	 * @param c2
 	 * @return c1∩c2
@@ -680,7 +680,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 求两集合的差集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param s1
 	 * @param s2
 	 * @return
@@ -697,7 +697,7 @@ public class CollectionUtils {
 		
 	/**
 	 * 求两集合的差集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param c1
 	 * @param c2
 	 * @return c1 - c2
@@ -714,7 +714,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 求两集合唯一元素的差集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param c1
 	 * @param c2
 	 * @return
@@ -727,7 +727,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 求两集合的补集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param s1
 	 * @param s2
 	 * @return s1相对于s2的补集，等价于s2与s1的差集(s2-s1)
@@ -738,7 +738,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 求两集合的补集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param c1
 	 * @param c2
 	 * @return c1相对于c2的补集，等价于c2与c1的差集(c2-c1)
@@ -749,7 +749,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 求两集合唯一元素的补集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param c1
 	 * @param c2
 	 * @return c1相对于c2的补集，等价于c2与c1的差集(c2-c1)
@@ -760,7 +760,7 @@ public class CollectionUtils {
 		
 	/**
 	 * 获取集合元素的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -770,7 +770,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 将集合转换成Object类型的数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -781,7 +781,7 @@ public class CollectionUtils {
 	/**
 	 * 将集合转换成具有共同元素类型的数组。
 	 * 				此方法要求集合中至少有一个不为null的元素，否则方法将抛出NullPointerException。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -797,7 +797,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 将集合转换成指定类型的数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param componentType
 	 * @return
@@ -813,7 +813,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 判断执行对象是否为Collection接口实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -823,7 +823,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 获取索引位对应的元素值，未获取到时默认返回null
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param list
 	 * @param index
 	 * @return
@@ -834,7 +834,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 获取索引位对应的元素值，未获取到时返回指定的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param list
 	 * @param index
 	 * @param defaultValue
@@ -850,7 +850,7 @@ public class CollectionUtils {
 		
 	/**
 	 * 获取列表中的第一个元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param list
 	 * @return
 	 */
@@ -860,7 +860,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 获取列表中的第一个元素，未获取到时返回指定的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param list
 	 * @param defaultValue
 	 * @return
@@ -874,7 +874,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 获取列表中的最后一个元素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param list
 	 * @return
 	 */
@@ -884,7 +884,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 获取列表中的最后一个元素，未获取到时返回指定的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param list
 	 * @param defaultValue
 	 * @return
@@ -898,7 +898,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 将指定索引位的值合并到列表中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param list
 	 * @param index
 	 * @param value
@@ -922,7 +922,7 @@ public class CollectionUtils {
 		
 	/**
 	 * 按默认的逗号分隔符将集合中各元素连接成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -932,7 +932,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 按指定的分隔符将集合中各元素连接成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @param separator
 	 * @return

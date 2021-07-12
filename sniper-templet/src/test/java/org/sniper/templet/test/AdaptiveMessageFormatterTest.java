@@ -29,7 +29,7 @@ import org.sniper.test.junit.BaseTestCase;
 
 /**
  * 自适应参数对象消息格式化单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class AdaptiveMessageFormatterTest extends BaseTestCase {

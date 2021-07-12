@@ -22,7 +22,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 数字属性编辑器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractNumberPropertyEditor extends AbstractPropertyEditor {
@@ -47,7 +47,7 @@ public abstract class AbstractNumberPropertyEditor extends AbstractPropertyEdito
 	
 	/**
 	 * 由于字符串的数字要求不能为空白，因此重写父类方法，覆盖掉父类中的检查方式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param defaultValue
 	 * @throws IllegalArgumentException
 	 */
@@ -59,7 +59,7 @@ public abstract class AbstractNumberPropertyEditor extends AbstractPropertyEdito
 	
 	/**
 	 * 由于字符串的数字要求不能为空白，因此重写父类方法，覆盖掉父类中的判空方式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param text
 	 * @throws IllegalArgumentException
 	 */

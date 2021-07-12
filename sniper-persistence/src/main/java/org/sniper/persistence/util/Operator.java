@@ -25,7 +25,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * 运算符常量
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public final class Operator extends AbstractConstant<String, String> {
@@ -74,7 +74,7 @@ public final class Operator extends AbstractConstant<String, String> {
 	
 	/**
 	 * 根据键解析出一个运算符
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */

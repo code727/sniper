@@ -30,7 +30,7 @@ import org.sniper.jms.util.JmsUtils;
 
 /**
  * JMS访问器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class JmsAccessor implements InitializingBean {
@@ -54,7 +54,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	
 	/**
 	 * 创建连接
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 * @throws JMSException
 	 */
@@ -64,7 +64,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	
 	/**
 	 * 根据连接和策略创建会话对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param connection
 	 * @param strategy
 	 * @return
@@ -76,7 +76,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	
 	/**
 	 * 根据连接和策略创建会话对象，并选择是否启动连接
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param connection
 	 * @param strategy
 	 * @param startConnection
@@ -93,7 +93,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	
 	/**
 	 * 根据连接和指定名称对应的策略创建会话对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param connection
 	 * @param strategyName
 	 * @return
@@ -103,7 +103,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	
 	/**
 	 * 根据连接和指定名称对应的策略创建会话对象，并选择是否启动连接
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param connection
 	 * @param strategyName
 	 * @param startConnection
@@ -114,7 +114,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	
 	/**
 	 * 判断当前会话是否具备本地事务特性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param strategy
 	 * @return
@@ -126,7 +126,7 @@ public abstract class JmsAccessor implements InitializingBean {
 
 	/**
 	 * 判断会话是否具有事务性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @return
 	 */
@@ -140,7 +140,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	
 	/**
 	 * 自动回滚事务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param strategy
 	 * @throws JMSException

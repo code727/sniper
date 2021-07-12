@@ -27,7 +27,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * IO输入流资源类型的Multipart请求体处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class InputStreamMultipartBodyHandler extends AbstractSourceMultipartBodyHandler {
@@ -46,7 +46,7 @@ public class InputStreamMultipartBodyHandler extends AbstractSourceMultipartBody
 	
 	/**
 	 * 添加本地文件请求体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param builder
 	 * @param name
 	 * @param file
@@ -62,7 +62,7 @@ public class InputStreamMultipartBodyHandler extends AbstractSourceMultipartBody
 	
 	/**
 	 * 添加多个本地文件请求体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param builder
 	 * @param name
 	 * @param files

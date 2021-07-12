@@ -25,7 +25,7 @@ import org.sniper.serialization.SerializationException;
 
 /**
  * Spring Redis序列化器代理
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @SuppressWarnings("rawtypes")

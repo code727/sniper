@@ -29,7 +29,7 @@ import org.sniper.serialization.test.AbstractSerializerTest;
 import org.sniper.test.domain.User;
 
 /**
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class FasterxmlJacksonSerializerTest extends AbstractSerializerTest {
@@ -42,7 +42,7 @@ public class FasterxmlJacksonSerializerTest extends AbstractSerializerTest {
 	
 	/**
 	 * 单值测试
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws Exception
 	 */
 //	@Test

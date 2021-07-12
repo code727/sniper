@@ -27,7 +27,7 @@ import org.csource.fastdfs.TrackerClient;
 
 /**
  * 可池化的StorageServer对象工厂默认实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultPoolableStorageServerFactory implements PoolableStorageServerFactory {

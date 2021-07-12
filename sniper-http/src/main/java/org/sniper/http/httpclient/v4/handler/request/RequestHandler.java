@@ -23,14 +23,14 @@ import org.sniper.http.headers.request.HttpRequestHeaders;
 
 /**
  * 请求处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RequestHandler {
 	
 	/**
 	 * 根据URL、请求体和字符集编码处理HttpEntityEnclosingRequestBase对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param httpRequest
 	 * @param url
 	 * @param requestBody

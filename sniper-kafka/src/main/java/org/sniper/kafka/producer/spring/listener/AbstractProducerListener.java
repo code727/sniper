@@ -31,7 +31,7 @@ import org.springframework.kafka.support.ProducerListener;
 
 /**
  * 生产者监听器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractProducerListener<K,V> implements ProducerListener<K, V>, ProducerService<K, V> {
@@ -48,7 +48,7 @@ public abstract class AbstractProducerListener<K,V> implements ProducerListener<
 
 	/**
 	 * 重写父类方法，修改为根据配置的属性来判断
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	@Override
@@ -75,7 +75,7 @@ public abstract class AbstractProducerListener<K,V> implements ProducerListener<
 	
 	/**
 	 * 发送成功以后的监听处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param produceResult
 	 */
 	@Override
@@ -85,7 +85,7 @@ public abstract class AbstractProducerListener<K,V> implements ProducerListener<
 	
 	/**
 	 * 发送错失败以后的监听处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param produceRecord
 	 * @param ex
 	 */

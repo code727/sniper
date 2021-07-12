@@ -22,14 +22,14 @@ import java.util.List;
 
 /**
  * 参数化生成器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ParameterizeGenerator<P, T> extends Generator<T> {
 	
 	/**
 	 * 根据指定的参数生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface ParameterizeGenerator<P, T> extends Generator<T> {
 	
 	/**
 	 * 根据参数批量生成指定数量的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter
 	 * @param count
 	 * @return

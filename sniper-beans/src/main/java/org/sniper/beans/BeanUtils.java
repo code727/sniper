@@ -34,7 +34,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * JAVA Bean工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class BeanUtils {
@@ -43,7 +43,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索当前对象所有的getter方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索当前对象所有的getter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @return
 	 */
@@ -99,7 +99,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索成员属性对应的getter方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @param propertyName 属性名称
 	 * @return
@@ -129,7 +129,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索成员属性对应的getter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @return
@@ -141,7 +141,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索当前对象所有的setter方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @return
 	 */
@@ -169,7 +169,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索当前对象所有的setter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @return
 	 */
@@ -197,7 +197,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索成员属性对应的setter方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @return
@@ -208,7 +208,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索成员属性对应的setter方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean bean对象或class类型
 	 * @param propertyName 属性名称
 	 * @param parameterType 方法参数类型
@@ -249,7 +249,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索成员属性对应的setter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @return
@@ -260,7 +260,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索成员属性对应的setter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @param parameterType
@@ -273,7 +273,7 @@ public class BeanUtils {
 	
 	/**
 	 * 根据属性名称或对应的Getter方法检索出属性类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param memberName
 	 * @return
@@ -290,7 +290,7 @@ public class BeanUtils {
 	
 	/**
 	 * 根据属性名称或对应的Setter方法检索出属性类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param propertyName
 	 * @return
@@ -307,7 +307,7 @@ public class BeanUtils {
 	
 	/**
 	 * 根据当前Bean的getter方法检索出对应的属性名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean
 	 * @return
 	 */
@@ -317,7 +317,7 @@ public class BeanUtils {
 	
 	/**
 	 * 根据当前Bean的getter方法检索出对应的属性名，其中excludeNames数组内罗列的属性名称将排除在检索范围外
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean
 	 * @param excludeNames
 	 * @return
@@ -338,7 +338,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索嵌套成员属性对应的getter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @param propertyName 属性名
 	 * @return
@@ -349,7 +349,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索嵌套成员属性对应的setter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @param propertyName 属性名
 	 * @return
@@ -360,7 +360,7 @@ public class BeanUtils {
 	
 	/**
 	 * 检索嵌套成员属性对应的setter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @param propertyName 属性名
 	 * @param parameterType 方法的参数类型
@@ -372,7 +372,7 @@ public class BeanUtils {
 	
 	/**
 	 * 获取当前Bean对象属性的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean bean对象
 	 * @param propertyName 属性名
 	 * @return
@@ -384,7 +384,7 @@ public class BeanUtils {
 		
 	/**
 	 * 设置当前Bean对象属性的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean bean对象
 	 * @param propertyName 属性名
 	 * @param parameterValue 参数值
@@ -396,7 +396,7 @@ public class BeanUtils {
 	
 	/**
 	 * 调用当前Bean对象属性的setter方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean bean对象
 	 * @param parameterType 方法的参数类型
 	 * @param parameterValue 参数值
@@ -408,7 +408,7 @@ public class BeanUtils {
 	
 	/**
 	 * 调用全限定名对应类的构造函数创建Bean实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param beanClassName Bean对象全限定名
 	 * @return
 	 * @throws Exception
@@ -420,7 +420,7 @@ public class BeanUtils {
 	
 	/**
 	 * 调用全限定名对应类的构造函数创建Bean实例，并将映射集内的各属性值赋予Bean实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param beanClassName Bean对象全限定名
 	 * @param properties 属性-值映射集
 	 * @return
@@ -435,7 +435,7 @@ public class BeanUtils {
 	
 	/**
 	 * 创建Bean实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param beanType Bean对象类型
 	 * @return
 	 * @throws Exception
@@ -446,7 +446,7 @@ public class BeanUtils {
 	
 	/**
 	 * 创建Bean实例，并将映射集内的各属性值赋予Bean实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param beanType Bean对象对象
 	 * @param properties 属性-值映射集
 	 * @return
@@ -458,7 +458,7 @@ public class BeanUtils {
 	
 	/**
 	 * 根据当前Bean对象创建一个Map，其键值对就是bean的每一个属性名和值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean Bean对象
 	 * @return
 	 * @throws Exception
@@ -469,7 +469,7 @@ public class BeanUtils {
 	
 	/**
 	 * 根据当前Bean对象创建一个Map，在创建的过程中可以指定哪些属性不设置给Map对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean Bean对象
 	 * @param excludeNames
 	 * @return
@@ -493,7 +493,7 @@ public class BeanUtils {
 	
 	/**
 	 * 将Getter方法转换为对应的属性名称，其中excludeNames数组内罗列的属性名称将排除在转换范围外
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param getter
 	 * @param excludeNames
 	 * @return
@@ -510,7 +510,7 @@ public class BeanUtils {
 	
 	/**
 	 * 根据属性名称和指定的类型构建对应的Getter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName
 	 * @param type
 	 * @return
@@ -521,7 +521,7 @@ public class BeanUtils {
 		
 	/**
 	 * 根据属性名称构建对应的Getter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName
 	 * @return
 	 */
@@ -531,7 +531,7 @@ public class BeanUtils {
 	
 	/**
 	 * 根据属性名称构建对应的布尔Getter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName
 	 * @return
 	 */
@@ -541,7 +541,7 @@ public class BeanUtils {
 	
 	/**
 	 * 根据属性名称构建对应的Setter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName
 	 * @return
 	 */
@@ -554,7 +554,7 @@ public class BeanUtils {
 	 * 1.方法自身不能有参数</P>
 	 * 2.方法必须有返回</P>
 	 * 3.方法名称必须与指定的Getter方法名称或布尔Getter方法名称匹配</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 * @param getterName Getter方法名称
 	 * @param booleanGetterName 布尔Getter方法名称
@@ -574,7 +574,7 @@ public class BeanUtils {
 	 * 判断方法对象是否与指定的Setter方法相匹配，匹配要求如下：</P>
 	 * 1.方法自身有且只有一个参数</P>
 	 * 2.方法名称必须与指定的Setter方法名称匹配</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 * @param getterName Getter方法名称
 	 * @param booleanGetterName 布尔Getter方法名称
@@ -592,7 +592,7 @@ public class BeanUtils {
 	 * 1.方法自身有且只有一个参数</P>
 	 * 2.方法名称必须与指定的Setter方法名称匹配</P>
 	 * 3.方法中唯一的参数类型必须与指定的类型匹配</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 * @param setterName
 	 * @param parameterType

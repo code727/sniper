@@ -33,7 +33,7 @@ import org.sniper.jms.support.ProducerServiceSupport;
 
 /**
  * 生产者服务模板
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ProducerTemplate extends ProducerServiceSupport implements ProducerService {

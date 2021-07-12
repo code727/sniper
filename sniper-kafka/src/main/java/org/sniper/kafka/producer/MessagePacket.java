@@ -22,7 +22,7 @@ import org.sniper.commons.KeyValuePair;
 
 /**
  * 生产者消息数据包
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MessagePacket<K, V> extends KeyValuePair<K, V> {

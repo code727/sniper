@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * 键增量迭代结果实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ScanResult<K> extends AbstractIndexedScanResult<K>{

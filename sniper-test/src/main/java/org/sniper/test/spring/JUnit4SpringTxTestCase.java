@@ -29,7 +29,7 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
 /**
  * 基于JUnit4的Spring事务性单元测试类，通常用于数据库访问层(DAO)的测试。
  * 				由于可配置每个测试方法的事务性，因此可以在保证测试结果出来后，回滚测试数据
- * @author <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author Daniele
  * @version 1.0
  */
 public class JUnit4SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTests {

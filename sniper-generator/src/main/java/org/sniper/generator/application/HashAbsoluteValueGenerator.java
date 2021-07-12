@@ -26,7 +26,7 @@ import org.sniper.generator.AbstractParameterizeGenerator;
 
 /**
  * 哈希绝对值生成器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class HashAbsoluteValueGenerator extends AbstractParameterizeGenerator<Object, Integer> {

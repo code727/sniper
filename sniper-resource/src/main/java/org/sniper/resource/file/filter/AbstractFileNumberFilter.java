@@ -26,7 +26,7 @@ import org.sniper.support.operation.logic.LogicOperationEnum;
 
 /**
  * 本地文件数字属性值过滤器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractFileNumberFilter extends AbstractFileFilter implements FileNumberFilter {

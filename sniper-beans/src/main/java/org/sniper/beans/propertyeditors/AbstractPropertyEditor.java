@@ -26,7 +26,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 属性编辑器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractPropertyEditor extends PropertyEditorSupport implements PropertyEditor {
@@ -73,7 +73,7 @@ public abstract class AbstractPropertyEditor extends PropertyEditorSupport imple
 	
 	/**
 	 * 检查默认值的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param defaultValue
 	 * @throws IllegalArgumentException
 	 */
@@ -95,7 +95,7 @@ public abstract class AbstractPropertyEditor extends PropertyEditorSupport imple
 	
 	/**
 	 * 非空文本的处理方法，返回处理后的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param text
 	 * @return
 	 */

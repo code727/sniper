@@ -21,7 +21,7 @@ package org.sniper.resource.file.filter;
 
 /**
  * 本地文件内容过滤器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractFileContentFilter extends AbstractFileStringFilter implements FileContentFilter {

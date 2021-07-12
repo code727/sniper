@@ -22,28 +22,28 @@ import java.util.Map;
 
 /**
  * Topic管理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface TopicManager {
 	
 	/**
 	 * 设置Topic映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param topicNodes
 	 */
 	public void setTopics(Map<String, TopicNode> topicNodes);
 	
 	/**
 	 * 获取Topic映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<String, TopicNode> getTopicNodes();
 	
 	/**
 	 * 根据键名称获取Topic实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */

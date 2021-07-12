@@ -26,14 +26,14 @@ import org.sniper.kafka.support.ProduceResult;
 
 /**
  * 生产者接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将消息值发送到默认topic
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value	
 	 * @return
 	 */
@@ -41,7 +41,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将消息键值发送到默认topic
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @return
@@ -50,7 +50,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将键值对消息发送到默认Topic
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pair
 	 * @return
 	 */
@@ -58,7 +58,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将数据包发送到默认Topic
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param packet
 	 * @return
 	 */
@@ -66,7 +66,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将消息值发送到默认topic后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
 	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
@@ -75,7 +75,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将消息键值发送到默认Topic后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 
 	 * @param value
 	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
@@ -85,7 +85,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将键值对消息发送到默认Topic后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pair
 	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
 	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
@@ -94,7 +94,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将数据包发送到默认Topic后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param packet
 	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
 	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常
@@ -103,7 +103,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将消息值发送到指定的Topic
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name Topic注册名称
 	 * @param value
 	 * @return
@@ -112,7 +112,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将消息键值发送到指定的Topic
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name Topic注册名称
 	 * @param key
 	 * @param value
@@ -122,7 +122,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将键值对消息发送到指定的Topic
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param pair
 	 * @return
@@ -131,7 +131,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将数据包发送到指定的Topic
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param packet
 	 * @return
@@ -140,7 +140,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将消息值发送到指定的Topic实例后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name Topic注册名称
 	 * @param value
 	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
@@ -150,7 +150,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将消息键值发送到指定的Topic实例后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name Topic注册名称
 	 * @param key
 	 * @param value
@@ -161,7 +161,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将键值对消息发送到指定的Topic实例后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param pair
 	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
@@ -171,7 +171,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 将数据包发送到指定的Topic实例后等待返回生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param packet
 	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
@@ -181,7 +181,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 	
 	/**
 	 * 发送生产记录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param producerRecord
 	 * @return
 	 */
@@ -189,7 +189,7 @@ public interface KafkaProducer extends KafkaProducerOperations {
 		
 	/**
 	 * 发送生产记录后等待返回生产结果    并指定在生产过程中的回调行为
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param producerRecord
 	 * @return 超时时间(metadata.fetch.timeout.ms)内等待返回生产结果实例
 	 * @throws Exception 当获取生产结果出现超时或内部异常而导致中断时，将统一抛出此异常

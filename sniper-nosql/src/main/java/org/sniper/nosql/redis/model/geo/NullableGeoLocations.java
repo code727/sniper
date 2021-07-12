@@ -20,7 +20,7 @@ package org.sniper.nosql.redis.model.geo;
 
 /**
  * 可为空的Geo空间元素集实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class NullableGeoLocations<M> extends AbstractGeoLocations<M> {

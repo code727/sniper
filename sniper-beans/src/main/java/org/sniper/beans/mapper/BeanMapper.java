@@ -24,14 +24,14 @@ import org.sniper.beans.GenericBean;
 
 /**
  * Java Bean映射器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface BeanMapper<S> extends ConfigurableMapper, GenericBean<S> {
 	
 	/**
 	 * 将源对象映射成一个全局类型的JavaBean
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 源对象
 	 * @return
 	 * @throws Exception
@@ -40,7 +40,7 @@ public interface BeanMapper<S> extends ConfigurableMapper, GenericBean<S> {
 	
 	/**
 	 * 将源对象映射成一个指定目标类型的JavaBean
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 源对象
 	 * @param targetType 目标JavaBean类型
 	 * @return
@@ -50,7 +50,7 @@ public interface BeanMapper<S> extends ConfigurableMapper, GenericBean<S> {
 	
 	/**
 	 * 将源对象按照指定规则映射成一个全局类型的JavaBean
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 源对象
 	 * @param mapperRules 映射规则集
 	 * @return
@@ -60,7 +60,7 @@ public interface BeanMapper<S> extends ConfigurableMapper, GenericBean<S> {
 	
 	/**
 	 *  将源对象按照指定规则映射成一个指定目标类型的JavaBean
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source 源对象
 	 * @param mapperRules 映射规则集
 	 * @param targetType 目标JavaBean类型

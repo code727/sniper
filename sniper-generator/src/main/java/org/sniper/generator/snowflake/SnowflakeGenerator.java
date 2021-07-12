@@ -33,7 +33,7 @@ import org.sniper.generator.sequence.TimestampInternalSequence;
  * 4.具体实现原理请参考<a>https://segmentfault.com/a/1190000011282426</a></P>
  * 5.具体生成规则和结果特点与内部使用的DefaultSequenceGenerator一致。</p>
  * 
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SnowflakeGenerator extends AbstractSnowflakeGenerator<Long> {

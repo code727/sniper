@@ -22,14 +22,14 @@ import org.sniper.commons.util.AssertUtils;
 
 /**
  * 生成器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractGenerator<T> implements Generator<T> {
 	
 	/**
 	 * 检查批量生成的个数是否合法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param count
 	 */
 	protected void checkBatchCount(int count) {

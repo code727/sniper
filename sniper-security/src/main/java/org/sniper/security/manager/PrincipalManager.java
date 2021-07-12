@@ -20,28 +20,28 @@ package org.sniper.security.manager;
 
 /**
  * Principal管理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface PrincipalManager {
 	
 	/**
 	 * 获取当前用户登录名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getCurrentLoginName();
 		
 	/**
 	 * 获取当前用户姓名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getCurrentUserName();
 	
 	/**
 	 * 获取当前用户信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public <T> T getCurrentUser();

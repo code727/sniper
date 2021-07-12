@@ -27,9 +27,9 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-            <optional>true</optional>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring-orm.version}</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
@@ -38,18 +38,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
-            <artifactId>sniper-context</artifactId>
-            <version>${sniper.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.sniper</groupId>
             <artifactId>sniper-spring</artifactId>
-            <version>${sniper.version}</version>
-            <optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.sniper</groupId>
-            <artifactId>sniper-security</artifactId>
             <version>${sniper.version}</version>
             <optional>true</optional>
 		</dependency>

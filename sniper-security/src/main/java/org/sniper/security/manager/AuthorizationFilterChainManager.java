@@ -20,21 +20,21 @@ package org.sniper.security.manager;
 
 /**
  * 自定义授权过滤器链管理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface AuthorizationFilterChainManager {
 	
 	/**
 	 * 加载过滤链中配置的认证/授权规则信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String loadFilterChainDefinitions();
 	
 	/**
 	 * 重新加载过滤链中配置的认证/授权规则信息。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	public void reloadFilterChainDefinitions();
 

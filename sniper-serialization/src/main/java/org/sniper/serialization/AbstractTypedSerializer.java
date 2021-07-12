@@ -25,7 +25,7 @@ import org.sniper.commons.util.CodecUtils;
 
 /**
  * 类型化序列器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractTypedSerializer extends AbstractSerializer implements TypedSerializer, Codecable {
@@ -61,7 +61,7 @@ public abstract class AbstractTypedSerializer extends AbstractSerializer impleme
 	
 	/**
 	 * 获取一个安全的反序列化类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 * @return
 	 */

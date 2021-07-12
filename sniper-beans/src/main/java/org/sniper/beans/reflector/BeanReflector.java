@@ -22,14 +22,14 @@ import java.util.Map;
 
 /**
  * Bean反射器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface BeanReflector {
 	
 	/**
 	 * 检索对象内指定属性对应的getter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @return
@@ -38,7 +38,7 @@ public interface BeanReflector {
 	
 	/**
 	 * 检索对象内指定属性对应的setter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @return
@@ -47,7 +47,7 @@ public interface BeanReflector {
 	
 	/**
 	 * 检索对象内指定属性和参数类型对应的setter方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj bean对象或class类型
 	 * @param propertyName
 	 * @param parameterType setter方法参数类型
@@ -57,7 +57,7 @@ public interface BeanReflector {
 	
 	/**
 	 * 获取对象内指定的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean
 	 * @param propertyName
 	 * @return
@@ -67,7 +67,7 @@ public interface BeanReflector {
 	
 	/**
 	 * 设置对象内指定的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean
 	 * @param propertyName
 	 * @param propertyValue
@@ -76,7 +76,7 @@ public interface BeanReflector {
 	
 	/**
 	 * 设置对象内指定的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bean
 	 * @param propertyName
 	 * @param propertyType
@@ -86,7 +86,7 @@ public interface BeanReflector {
 	
 	/**
 	 * 调用全限定名对应类的构造函数创建Bean实例，并在创建时设置Bean实例的各个属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param className
 	 * @param properties 
 	 * @return
@@ -96,7 +96,7 @@ public interface BeanReflector {
 	
 	/**
 	 * 创建Bean实例，并在创建时设置Bean实例的各个属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @param properties
 	 * @return

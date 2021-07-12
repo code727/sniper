@@ -31,11 +31,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 具备基本增删改查功能的JPA服务抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
-public abstract class AbstractJpaService<T, PK extends Serializable> 
-	extends CheckableInitializingBean implements JpaBeanService<T, PK>, JpaService<T, PK> {
+public abstract class AbstractJpaService<T, PK extends Serializable> extends CheckableInitializingBean
+		implements JpaBeanService<T, PK>, JpaService<T, PK> {
 	
 	protected final Logger logger;
 	

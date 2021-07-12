@@ -23,14 +23,14 @@ import org.apache.shiro.cache.CacheException;
 
 /**
  * Shiro缓存库接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface CacheRepository {
 	
 	/**
 	 * 根据名称获取缓存对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 * @throws CacheException
@@ -39,7 +39,7 @@ public interface CacheRepository {
 	
 	/**
 	 * 销毁缓存库
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws Exception
 	 */
 	public void destroy() throws Exception;

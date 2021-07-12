@@ -30,7 +30,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 文本字体管理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class TextFontManager implements FontManager, InitializingBean {
@@ -111,7 +111,7 @@ public class TextFontManager implements FontManager, InitializingBean {
 	
 	/**
 	 * 构建默认支持的字体样式映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected Map<String, Integer> buildDefaultFontStyles() {
@@ -124,7 +124,7 @@ public class TextFontManager implements FontManager, InitializingBean {
 	
 	/**
 	 * 设置字体名称组 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param fontName
 	 */
 	protected void setFontNames(String fontName) {
@@ -133,7 +133,7 @@ public class TextFontManager implements FontManager, InitializingBean {
 	
 	/**
 	 * 获取字体名称组 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected String[] getFontNames() {
@@ -142,7 +142,7 @@ public class TextFontManager implements FontManager, InitializingBean {
 	
 	/**
 	 * 设置字体样式名称组 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param fontStyles
 	 */
 	protected void setFontStyleNames(Map<String, Integer> fontStyles) {
@@ -151,7 +151,7 @@ public class TextFontManager implements FontManager, InitializingBean {
 	
 	/**
 	 * 获取字体样式名称组 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected String[] getFontStyleNames() {

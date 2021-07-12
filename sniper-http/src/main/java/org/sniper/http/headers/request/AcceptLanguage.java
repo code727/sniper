@@ -26,7 +26,7 @@ import org.sniper.http.headers.AbstractQualityFactor;
 
 /**
  * 客户端声明的可以理解的自然语言
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class AcceptLanguage extends AbstractQualityFactor {

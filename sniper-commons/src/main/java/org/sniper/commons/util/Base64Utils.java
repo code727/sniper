@@ -22,7 +22,7 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * Base64编解码工具
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class Base64Utils {
@@ -84,7 +84,7 @@ public class Base64Utils {
     
     /**
      * 将原文本按默认字符集进行编码处理
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param text
      * @return
      */
@@ -94,7 +94,7 @@ public class Base64Utils {
     
     /**
      * 将原文本按指定字符集格式进行编码处理
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param text
      * @param charsetName
      * @return
@@ -111,7 +111,7 @@ public class Base64Utils {
     
     /**
      * 对字节数组进行编码处理
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param bytes
      * @return
      */
@@ -178,7 +178,7 @@ public class Base64Utils {
     
     /**
      * 将被编码的文本内容按默认字符集进行解码处理
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param encodedText
      * @return
      */
@@ -188,7 +188,7 @@ public class Base64Utils {
     
     /**
      * 将被编码的文本内容按指定字符集进行解码处理
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param encodedText
      * @param charsetName
      * @return
@@ -204,7 +204,7 @@ public class Base64Utils {
         
     /**
      * 将被编码的文本内容解码成字节数组
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param encodedText
      * @return
      */

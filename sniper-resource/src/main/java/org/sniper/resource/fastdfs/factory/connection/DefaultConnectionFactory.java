@@ -28,7 +28,7 @@ import org.sniper.commons.util.NumberUtils;
 
 /**
  * 默认原生API实现的连接工厂
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultConnectionFactory extends AbstractConnectionFactory {

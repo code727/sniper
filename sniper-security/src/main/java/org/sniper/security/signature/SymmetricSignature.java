@@ -20,7 +20,7 @@ package org.sniper.security.signature;
 
 /**
  * 对称签名抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class SymmetricSignature<T> implements Signature<T> {
@@ -43,7 +43,7 @@ public abstract class SymmetricSignature<T> implements Signature<T> {
 	
 	/**
 	 * 设置私钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param privateKey
 	 */
 	public void setPrivateKey(String privateKey) {
@@ -52,7 +52,7 @@ public abstract class SymmetricSignature<T> implements Signature<T> {
 	
 	/**
 	 * 获取私钥
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getPrivateKey() {

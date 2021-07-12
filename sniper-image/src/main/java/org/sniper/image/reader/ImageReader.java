@@ -29,14 +29,14 @@ import javax.imageio.stream.ImageInputStream;
 
 /**
  * 图片读取器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ImageReader {
 	
 	/**
 	 * 读取本地图片
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @return
 	 * @throws IOException
@@ -45,7 +45,7 @@ public interface ImageReader {
 	
 	/**
 	 * 读取输入流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @return
 	 * @throws IOException
@@ -54,7 +54,7 @@ public interface ImageReader {
 	
 	/**
 	 * 读取图片输入流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @return
 	 * @throws IOException
@@ -63,7 +63,7 @@ public interface ImageReader {
 	
 	/**
 	 * 读取URL图片
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url
 	 * @return
 	 * @throws IOException
@@ -72,7 +72,7 @@ public interface ImageReader {
 	
 	/**
 	 * 读取URI图片
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param uri
 	 * @return
 	 */

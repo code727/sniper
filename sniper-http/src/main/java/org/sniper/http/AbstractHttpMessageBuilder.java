@@ -27,7 +27,7 @@ import org.sniper.http.headers.MediaType;
 
 /**
  * HTTP消息构建器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractHttpMessageBuilder<T> implements HttpMessageBuilder<T> {

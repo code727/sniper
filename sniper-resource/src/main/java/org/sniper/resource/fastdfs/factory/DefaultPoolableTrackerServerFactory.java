@@ -28,7 +28,7 @@ import org.sniper.commons.util.NumberUtils;
 
 /**
  * 可池化的TrackerServer对象工厂默认实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultPoolableTrackerServerFactory implements PoolableObjectFactory<TrackerServer> {

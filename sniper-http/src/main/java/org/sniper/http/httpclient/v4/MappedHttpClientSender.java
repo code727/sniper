@@ -34,7 +34,7 @@ import org.sniper.http.httpclient.v4.handler.response.DefaultResponseHandler;
 
 /**
  * 已映射的 HttpClient4.x发送器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public final class MappedHttpClientSender extends MappedHttpAccessor {
@@ -75,7 +75,7 @@ public final class MappedHttpClientSender extends MappedHttpAccessor {
 		
 	/**
 	 * 执行指定名称对应的表单GET请求，并返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param param
 	 * @return
@@ -101,7 +101,7 @@ public final class MappedHttpClientSender extends MappedHttpAccessor {
 	
 	/**
 	 * 执行指定名称对应的表单POST请求，并返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param param
 	 * @return
@@ -128,7 +128,7 @@ public final class MappedHttpClientSender extends MappedHttpAccessor {
 		
 	/**
 	 * 执行指定名称对应的表单PUT请求，并返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param param
 	 * @return
@@ -155,7 +155,7 @@ public final class MappedHttpClientSender extends MappedHttpAccessor {
 	
 	/**
 	 * 执行指定名称对应的表单DELETE请求，并返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param param
 	 * @return

@@ -20,21 +20,21 @@ package org.sniper.context;
 
 /**
  * 上下文接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Context extends ConfigurableContext {
 	
 	/**
 	 * 获取上下文默认属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public <V> V getAttribute();
 	
 	/**
 	 * 根据名称获取上下文属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -42,14 +42,14 @@ public interface Context extends ConfigurableContext {
 	
 	/**
 	 * 设置上下文默认属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 */
 	public <V> void setAttribute(V value);
 	
 	/**
 	 * 设置上下文属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param value
 	 */
@@ -57,14 +57,14 @@ public interface Context extends ConfigurableContext {
 	
 	/**
 	 * 删除上下文默认属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public <V> V removeAttribute();
 	
 	/**
 	 * 根据名称删除上下文属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -72,7 +72,7 @@ public interface Context extends ConfigurableContext {
 	
 	/**
 	 * 清除上下文
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	public void clear();
 

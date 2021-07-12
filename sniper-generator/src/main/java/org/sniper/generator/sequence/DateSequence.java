@@ -27,7 +27,7 @@ import org.sniper.commons.util.DateUtils;
 
 /**
  * 日期序列实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DateSequence implements DimensionSequence<String> {

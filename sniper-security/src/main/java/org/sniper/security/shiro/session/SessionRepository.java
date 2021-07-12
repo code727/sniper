@@ -25,28 +25,28 @@ import org.apache.shiro.session.Session;
 
 /**
  * Shiro会话库接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SessionRepository {
 	
 	/**
 	 * 保存会话
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 */
 	public void saveSession(Session session);  
 	
 	/**
 	 * 删除一个指定标识的会话
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sessionId
 	 */
 	public void deleteSession(Serializable sessionId);  
 	
 	/**
 	 * 获取一个指定标识的会话
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sessionId
 	 * @return
 	 */
@@ -54,7 +54,7 @@ public interface SessionRepository {
 	
 	/**
 	 * 获取所有的会话
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Collection<Session> getAllSessions();  

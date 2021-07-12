@@ -20,14 +20,14 @@ package org.sniper.codec;
 
 /**
  * 编解码处理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Codec {
 	
 	/**
 	 * 对字节数组进行编码处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bytes
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public interface Codec {
 	
 	/**
 	 * 将原文本按默认字符集进行编码处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param text
 	 * @return
 	 */
@@ -43,7 +43,7 @@ public interface Codec {
 	
 	/**
 	 * 将原文本按指定字符集格式进行编码处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param text
 	 * @param charsetName
 	 * @return
@@ -52,7 +52,7 @@ public interface Codec {
 	
 	/**
 	 * 将被编码的文本内容按默认字符集进行解码处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param encodedText
 	 * @return
 	 */
@@ -60,7 +60,7 @@ public interface Codec {
 	
 	/**
 	 * 将被编码的文本内容按指定字符集进行解码处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param encodedText
 	 * @param charsetName
 	 * @return
@@ -69,7 +69,7 @@ public interface Codec {
 	
 	/**
 	 * 将被编码的文本内容解码成字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param encodedText
 	 * @return
 	 */

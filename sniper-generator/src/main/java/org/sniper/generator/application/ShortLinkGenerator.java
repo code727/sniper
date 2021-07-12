@@ -35,7 +35,7 @@ import org.sniper.generator.AbstractParameterizeGenerator;
  * 6.依次取出L的每一段（5位），进行位操作(&0x0000003D)得到一个<=61的数字，来当做index。
  *   再根据index去预定义的字符表里面去取一个字符， 最后能取出6个字符，此时就能用这6个字符拼接成一个字符串，作为短链接；</p>
  * 7.根据2重复3、4、5、6，总共能得到6个第六步生成的字符串，取其中任意一个字符串当作短链接都是可以的。
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, String> {
@@ -84,7 +84,7 @@ public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, St
 
 	/**
 	 * 由于短链接生成器是针对参数生成的，因此针对于同一个参数批量生成的结果都是一样的，将生成count个相同的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter
 	 * @param count
 	 * @return

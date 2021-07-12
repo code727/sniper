@@ -31,7 +31,7 @@ import org.sniper.codec.CodecSupport;
 
 /**
  * 响应处理器默认实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultResponseHandler extends CodecSupport implements ResponseHandler<String> {

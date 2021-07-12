@@ -22,14 +22,14 @@ import org.hibernate.Criteria;
 
 /**
  * Hibernate标准查询回调接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface HibernateCriteriaQueryCallback {
 		
 	/**
 	 * 执行标准化查询业务处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param criteria
 	 */
 	public void execute(Criteria criteria);

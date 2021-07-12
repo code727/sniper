@@ -22,7 +22,7 @@ import java.io.Serializable;
 
 /**
  * 基本布局对象
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class BaseLayout implements Serializable {

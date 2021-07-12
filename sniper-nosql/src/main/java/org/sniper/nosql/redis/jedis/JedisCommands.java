@@ -23,7 +23,7 @@ package org.sniper.nosql.redis.jedis;
 //
 ///**
 // * Jedis命令行实现类
-// * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+// * @author  Daniele
 // * @version 1.0
 // */
 //public class JedisCommandsImpl implements RedisCommands {

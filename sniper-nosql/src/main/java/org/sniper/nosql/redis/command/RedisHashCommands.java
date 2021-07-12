@@ -28,14 +28,14 @@ import org.sniper.nosql.redis.option.ScanOption;
 
 /**
  * Redis哈希命令接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hSet命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKey 哈希键
 	 * @param value 值
@@ -45,7 +45,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hSet命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKey 哈希键
 	 * @param value 值
@@ -56,7 +56,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hSet命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKey 哈希键
@@ -67,7 +67,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hSet命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKey 哈希键
@@ -79,7 +79,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hSetNX命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKey 哈希键
 	 * @param value 值
@@ -89,7 +89,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hSetNX命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param hashKey 哈希键
 	 * @param value
@@ -100,7 +100,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hSetNX命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKey 哈希键
@@ -111,7 +111,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hSetNX命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKey 哈希键
@@ -123,7 +123,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hMSet命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKeyValues 哈希键值映射集
 	 */
@@ -131,7 +131,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hMSet命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKeyValues 哈希键值映射集
 	 * @param expireSeconds
@@ -140,7 +140,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hMSet命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKeyValues 哈希键值映射集
@@ -149,7 +149,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hMSet命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKeyValues 哈希键值映射集
@@ -159,7 +159,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 删除当前库指定键对应的哈希键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKey 哈希键
 	 * @return
@@ -168,7 +168,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库删除键对应的哈希键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKey 哈希键
@@ -178,7 +178,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 删除当前库指定键对应的多个哈希键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKeys 哈希键数组
 	 * @return
@@ -187,7 +187,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 删除指定库键对应的多个哈希键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKeys 哈希键数组
@@ -197,7 +197,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 删除当前库指定键对应的多个哈希键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKeys 哈希键集合
 	 * @return
@@ -206,7 +206,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 删除指定库键对应的多个域值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKeys 哈希键集合
@@ -216,7 +216,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 判断在当前库中的哈希键是否存在
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKey 哈希键
 	 * @return
@@ -225,7 +225,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 判断在指定库中的哈希键是否存在
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKey 哈希键
@@ -235,7 +235,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hGet命令，获取键中指定的哈希键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKey 哈希键
 	 * @return
@@ -244,7 +244,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hGet命令，获取哈希键中指定类型的哈希键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKey 哈希键
 	 * @param valueType
@@ -254,7 +254,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hGet命令，获取哈希键中指定的哈希键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKey 哈希键
@@ -264,7 +264,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hGet命令，获取哈希键中指定类型的哈希键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKey 哈希键
@@ -275,7 +275,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hGetAll命令，获取键中所有的哈希键值映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @return 
 	 */
@@ -283,7 +283,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hGetAll命令，获取键中所有指定类型的哈希键值映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param valueType 哈希值类型
 	 * @return
@@ -292,7 +292,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hGetAll命令，获取键中所有指定类型的哈希键值映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKeyType 哈希键类型
 	 * @param valueType 哈希值类型
@@ -302,7 +302,7 @@ public interface RedisHashCommands {
 	
 	/** 
 	 * 在指定库中执行hGetAll命令，获取键中所有的哈希键值映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @return
@@ -311,7 +311,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hGetAll命令，获取键中所有指定类型的哈希键值映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param valueType 哈希值类型
@@ -321,7 +321,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hGetAll命令，获取键中所有指定类型的哈希键值映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKeyType 哈希键类型
@@ -332,7 +332,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hKeys命令，获取键对应的所有哈希键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @return
 	 */
@@ -340,7 +340,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hKeys命令，获取键对应的所有哈希键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKeyType 哈希键类型
 	 * @return
@@ -349,7 +349,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hKeys命令，获取键对应的所有哈希键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @return
@@ -358,7 +358,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hKeys命令，获取键对应的所有哈希键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKeyType 哈希键类型
@@ -368,7 +368,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hLen命令，获取键对应的域个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -376,7 +376,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hLen命令，获取键对应的域个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -385,7 +385,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hMGet命令，获取键中多个哈希键的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKeys 哈希键集合
 	 * @return
@@ -394,7 +394,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hMGet命令，获取键中多个哈希键的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKeys 哈希键集合
 	 * @param valueType 哈希值的类型
@@ -404,7 +404,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hMGet命令，获取键中多个哈希键的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKeys 哈希键集合
@@ -414,7 +414,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hMGet命令，获取键中多个哈希键的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKeys 哈希键集合
@@ -425,7 +425,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hMGet命令，获取键中多个哈希键的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKeys 哈希键数组
 	 * @return
@@ -434,7 +434,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hMGet命令，获取键中多个哈希键的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param hashKeys 哈希键数组
 	 * @param valueType 哈希值类型
@@ -444,7 +444,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hMGet命令，获取键中多个哈希键的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKeys 哈希键数组
@@ -454,7 +454,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hMGet命令，获取键中多个域的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param hashKeys 哈希键数组
@@ -465,7 +465,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hVals命令，获取键中所有域的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -473,7 +473,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hVals命令，获取键中所有域的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -482,7 +482,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hMGet命令，获取键中所有域的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -491,7 +491,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hMGet命令，获取键中所有域的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -501,7 +501,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hIncr命令，将哈希键储存的数字值加一
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param hashKey
 	 * @return
@@ -510,7 +510,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hIncr命令，将哈希键储存的数字值加一
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param hashKey
@@ -520,7 +520,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hIncrBy命令，将哈希键储存的数字值加上指定的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param hashKey
 	 * @param value
@@ -530,7 +530,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hIncrBy命令，将哈希键储存的数字值加上指定的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param hashKey
@@ -541,7 +541,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hDecr命令，将哈希键储存的数字值减一
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param hashKey
 	 * @return
@@ -550,7 +550,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hDecr命令，将哈希键储存的数字值加一
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param hashKey
@@ -560,7 +560,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hDecrBy命令，将哈希键储存的数字值减去指定的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param hashKey
 	 * @param value
@@ -570,7 +570,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hDecrBy命令，将哈希键储存的数字值减去指定的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param hashKey
@@ -581,7 +581,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -589,7 +589,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有指定值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -598,7 +598,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有指定键值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param hashKeyType
 	 * @param valueType
@@ -608,7 +608,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @return
@@ -617,7 +617,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @param valueType
@@ -627,7 +627,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定键值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @param hashKeyType
@@ -638,7 +638,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param option
 	 * @return
@@ -647,7 +647,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有指定值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param option
 	 * @param valueType
@@ -657,7 +657,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在当前库中执行hScan命令，以增量迭代的方式获取所有指定键值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param option
 	 * @param hashKeyType
@@ -668,7 +668,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @param option
@@ -678,7 +678,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @param option
@@ -689,7 +689,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在当前库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定键值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @param option
@@ -701,7 +701,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -710,7 +710,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有指定值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -720,7 +720,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有指定键值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param hashKeyType
@@ -731,7 +731,7 @@ public interface RedisHashCommands {
 	
 	/**
 	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -741,7 +741,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -752,7 +752,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定键值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -764,7 +764,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param option
@@ -774,7 +774,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有指定值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param option
@@ -785,7 +785,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在指定库中执行hScan命令，以增量迭代的方式获取所有指定键值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param option
@@ -797,7 +797,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -808,7 +808,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -820,7 +820,7 @@ public interface RedisHashCommands {
 
 	/**
 	 * 在指定库中执行hScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定键值类型的哈希键值对
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId

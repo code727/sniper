@@ -23,7 +23,7 @@ import org.springframework.kafka.listener.MessageListener;
 
 /**
  * 消费者监听接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ConsumerListener<K, V> extends MessageListener<K, V>, AcknowledgingMessageListener<K, V> {

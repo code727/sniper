@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
 
 /**
  * 测试注释
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @Target(value = {ElementType.TYPE, ElementType.FIELD, ElementType.METHOD})

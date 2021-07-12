@@ -33,7 +33,7 @@ import org.sniper.templet.message.source.ResourceBundleMessageSource;
 
 /**
  * 本地化消息解析器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractLocaleMessageResolver extends
@@ -118,7 +118,7 @@ public abstract class AbstractLocaleMessageResolver extends
 	 * 2.再从与当前类所属包同名的配置文件中获取，未获取到时进入第3步，否则进入第4步；</P>
 	 * 3.再从与当前类同名的配置文件中获取；</P>
 	 * 4.统一判断消息是否为空，不为空时进行格式化，否则返回指定的默认值。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @param param
@@ -143,7 +143,7 @@ public abstract class AbstractLocaleMessageResolver extends
 	
 	/**
 	 * 从与当前类所属包同名的配置文件中获取
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @return
@@ -159,7 +159,7 @@ public abstract class AbstractLocaleMessageResolver extends
 	
 	/**
 	 * 从与当前类同名的配置文件中获取
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @return

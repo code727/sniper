@@ -20,7 +20,7 @@ package org.sniper.commons.util;
 
 /**
  * 布尔工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class BooleanUtils {
@@ -29,7 +29,7 @@ public class BooleanUtils {
 	
 	/**
 	 * 判断包装类布尔值是否为true
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */
@@ -39,7 +39,7 @@ public class BooleanUtils {
 	
 	/**
 	 * 判断包装类布尔值是否为false
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */

@@ -23,28 +23,28 @@ import java.util.List;
 
 /**
  * 具备基本增删改查功能的JPA服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface JpaService<T, PK extends Serializable> {
 	
 	/**
 	 * 新增持久化实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 */
 	public void persist(T entity);
 	
 	/**
 	 * 批量新增持久化实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityList
 	 */
 	public void batchPersist(List<T> entityList);
 	
 	/**
 	 * 合并(新增/更新)实体对象 - 实体与数据库同步
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 * @return
 	 */
@@ -52,7 +52,7 @@ public interface JpaService<T, PK extends Serializable> {
 	
 	/**
 	 * 批量合并(新增/更新)实体对象  - 实体与数据库同步
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityList
 	 * @return
 	 */
@@ -60,28 +60,28 @@ public interface JpaService<T, PK extends Serializable> {
 	
 	/**
 	 * 删除实体对象 - 实体游离
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 */
 	public void remove(T entity);
 	
 	/**
 	 * 删除指定主键ID对应的实体对象 - 实体游离
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 */
 	public void remove(PK id);
 	
 	/**
 	 * 批量删除实体对象 - 实体游离
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityList
 	 */
 	public void batchRemove(List<T> entityList);
 	
 	/**
 	 * 根据主键ID查询当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @return
 	 */
@@ -89,14 +89,14 @@ public interface JpaService<T, PK extends Serializable> {
 
 	/**
 	 * 查询当前类型的所有实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<T> findAll();
 
 	/**
 	 * 查询当前类型所有不重复的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<T> findAllDistinct();

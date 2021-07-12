@@ -24,7 +24,7 @@ import org.sniper.commons.util.AssertUtils;
 
 /**
  * 增量迭代选项
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ScanOption implements Serializable {

@@ -31,7 +31,7 @@ import org.sniper.test.domain.User;
 
 /**
  * JDK原生序列器单元测试类O
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class JdkSerializerTest extends AbstractSerializerTest {

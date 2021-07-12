@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * 生产者服务管理实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ProducerServiceManagerImpl implements ProducerServiceManager {

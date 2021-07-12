@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * MongoDB聚合查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface MongoAggregateQuery<T, PK extends Serializable> {
@@ -32,7 +32,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 根据主键聚合查询数据对象<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"_id":id}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id 主键ID
 	 * @return
 	 */
@@ -41,7 +41,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 在目标集合中根据主键聚合查询数据对象<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"_id":id}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param id 主键ID
 	 * @return
@@ -55,7 +55,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({
 	 * "$match":{"_id":id}},{$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 * @param id 主键ID
 	 * @param resultClass 返回的数据类型
 	 * @return
@@ -69,7 +69,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({
 	 * "$match":{"_id":id}},{$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 * @param collection 目标集合
 	 * @param id 主键ID
 	 * @param resultClass 返回的数据类型
@@ -80,7 +80,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 根据属性聚合查询出满足条件的唯一记录<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"propertyKey":propertyValue}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
 	 * @return
@@ -90,7 +90,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 在目标集合中根据属性聚合查询出满足条件的唯一记录<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"propertyKey":propertyValue}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
@@ -106,7 +106,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({
 	 * "$match":{"propertyKey":propertyValue}},{$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,
 	 * "beanPropertyKeyNameN":1}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
 	 * @param resultClass 返回的数据类型
@@ -122,7 +122,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({
 	 * "$match":{"propertyKey":propertyValue}},{$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,
 	 * "beanPropertyKeyNameN":1}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
@@ -135,7 +135,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 根据属性映射组聚合查询出满足条件的唯一记录<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap 属性映射组
 	 * @return
 	 */
@@ -145,7 +145,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 在目标集合中根据属性映射组聚合查询出满足条件的唯一记录<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyMap 属性映射组
 	 * @return
@@ -160,7 +160,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({
 	 * "$match":{"$and":[{"propertyKey1":propertyValue1},{"propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]}},
 	 * {$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 * @param propertyMap 属性映射组
 	 * @param resultClass 返回的数据类型
 	 * @return
@@ -175,7 +175,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({
 	 * "$match":{"$and":[{"propertyKey1":propertyValue1},{"propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]}},
 	 * {$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyMap 属性映射组
 	 * @param resultClass 返回的数据类型
@@ -186,7 +186,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 聚合查询出所有数据对象<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<T> aggregateFindAll();
@@ -194,7 +194,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 聚合查询出所有数据对象<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @return
 	 */
@@ -206,7 +206,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{}},
 	 * {$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 * @param resultClass 返回的数据类型
 	 * @return
 	 */
@@ -218,7 +218,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{}},
 	 * {$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param resultClass 返回的数据类型
 	 * @return 
@@ -228,7 +228,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 聚合分页查询出记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{}},{"$skip":start},{"$limit":maxRows});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
 	 * @return
@@ -238,7 +238,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 在目标集合中聚合分页查询出记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{}},{"$skip":start},{"$limit":maxRows});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
@@ -252,7 +252,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{}},{"$skip":start},{"$limit":maxRows},
 	 * {$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
 	 * @param resultClass 返回的数据类型
@@ -266,7 +266,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{}},{"$skip":start},{"$limit":maxRows},
 	 * {$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
@@ -278,7 +278,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 根据属性聚合查询出满足条件的记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"propertyKey":propertyValue}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
 	 * @return
@@ -288,7 +288,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 在目标集合中根据聚合属性查询出满足条件的记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"propertyKey":propertyValue}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
@@ -299,7 +299,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 根据属性聚合分页查询出满足条件的记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"propertyKey":propertyValue}},{"$skip":start},{"$limit":maxRows});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
 	 * @param start 起始位置
@@ -311,7 +311,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	/**
 	 * 在目标集合中根据属性聚合分页查询出满足条件的记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"propertyKey":propertyValue}},{"$skip":start},{"$limit":maxRows});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
@@ -327,7 +327,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{"propertyKey":propertyValue}},
 	 * {$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
 	 * @param resultClass 返回的数据类型
@@ -341,7 +341,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{"propertyKey":propertyValue}},
 	 * {$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
@@ -357,7 +357,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * <P>
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$match":{"propertyKey":propertyValue}},
 	 * {"$skip":start},{"$limit":maxRows},{$project:{"beanPropertyKeyName1":1,"beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
 	 * @param start 起始位置
@@ -369,7 +369,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	
 	/**
 	 * 在目标集合中根据属性聚合分页查询出满足条件的指定类型的记录列表<P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyName 属性名称
 	 * @param propertyValue 属性值
@@ -384,7 +384,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 根据属性映射组聚合查询出满足条件的记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap 属性映射组
 	 * @return
 	 */
@@ -394,7 +394,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 在目标集合中根据属性映射组聚合查询出满足条件的记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyMap 属性映射组
 	 * @return
@@ -405,7 +405,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 根据属性映射组聚合分页查询出满足条件的记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]}},{"$skip":start},{"$limit":maxRows})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap 属性映射组
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
@@ -417,7 +417,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 在目标集合中根据属性映射组聚合分页查询出满足条件的记录列表<P>
 	 * 实际执行的语句为:db.collection.aggregate({"$match":{"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]}},{"$skip":start},{"$limit":maxRows})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyMap 属性映射组
 	 * @param start 起始位置
@@ -434,7 +434,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},{$project:{"beanPropertyKeyName1":1,
 	 * "beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap 属性映射组
 	 * @param resultClass 返回的数据类型
 	 * @return
@@ -449,7 +449,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},{$project:{"beanPropertyKeyName1":1,
 	 * "beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyMap 属性映射组
 	 * @param resultClass 返回的数据类型
@@ -465,7 +465,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},{"$skip":start},{"$limit":maxRows},{$project:{"beanPropertyKeyName1":1,
 	 * "beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyMap 属性映射组
 	 * @param start 起始位置
 	 * @param maxRows 最大行数
@@ -482,7 +482,7 @@ public interface MongoAggregateQuery<T, PK extends Serializable> {
 	 * 2)当resultClass与当前泛型类管理的实体类型<T>不相等，实际执行的语句为:db.collection.aggregate({"$and":[{"propertyKey1":propertyValue1},{
 	 * "propertyKey2":propertyValue2},{"propertyKeyN":propertyValueN}]},{"$skip":start},{"$limit":maxRows},{$project:{"beanPropertyKeyName1":1,
 	 * "beanPropertyKeyName2":1,"beanPropertyKeyNameN":1}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyMap 属性映射组
 	 * @param start 起始位置

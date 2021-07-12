@@ -22,14 +22,14 @@ import org.sniper.templet.message.resolver.AbstractMessageResolver;
 
 /**
  * Web消息解析器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractWebMessageResolver extends AbstractMessageResolver implements WebMessageResolver {
 	
 	/**
 	 * 获取指定类对应的参数化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @param key
 	 * @param param
@@ -40,7 +40,7 @@ public abstract class AbstractWebMessageResolver extends AbstractMessageResolver
 	
 	/**
 	 * 获取指定类对应的参数化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @param key
 	 * @param params

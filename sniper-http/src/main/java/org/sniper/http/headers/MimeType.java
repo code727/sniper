@@ -32,7 +32,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * MIME类型
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
@@ -126,7 +126,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 				
 	/**
 	 * 构建字符集编码参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param charset
 	 * @return
 	 */
@@ -136,7 +136,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 	
 	/**
 	 * 构建字符集编码参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mimeType
 	 * @param charset
 	 * @return
@@ -158,7 +158,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 		
 	/**
 	 * 构建主类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mainType
 	 * @return
 	 */
@@ -173,7 +173,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 	
 	/**
 	 * 构建子类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param subType
 	 * @return
 	 */
@@ -188,7 +188,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 	
 	/**
 	 * 重写父类构建参数方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameters
 	 * @return
 	 */
@@ -212,7 +212,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 	
 	/**
 	 * 标记检查
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param token
 	 */
 	private void checkToken(String token) {
@@ -224,7 +224,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 	
 	/**
 	 * 检查类型的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 * @param subtype
 	 */
@@ -236,7 +236,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 	
 	/**
 	 * 检查参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param attribute
 	 * @param value
 	 */
@@ -254,7 +254,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 
 	/**
 	 * 获取主类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getMainType() {
@@ -263,7 +263,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 
 	/**
 	 * 获取子类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getSubType() {
@@ -272,7 +272,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 
 	/**
 	 * 获取类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getType() {
@@ -281,7 +281,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 		
 	/**
 	 * 获取MIME类型的字符集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Charset getCharset() {
@@ -296,7 +296,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 	
 	/**
 	 * 是否为通配符主类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isWildcardMainType() {
@@ -305,7 +305,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 	
 	/**
 	 * 是否为通配符子类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isWildcardSubType() {
@@ -314,7 +314,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 	
 	/**
 	 * 是否为通配符类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isWildcardType() {
@@ -323,7 +323,7 @@ public class MimeType extends DefaultUnmodifiableParameters<String, Object> {
 	
 	/**
 	 * 判断是否包含指定的MimeType对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param other
 	 * @return
 	 */

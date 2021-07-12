@@ -23,7 +23,7 @@ import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerialize
 
 /**
  * Kafka JSON序列化解析器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class KafkaJsonSerializer<T> extends AbstractSerializer<T> {

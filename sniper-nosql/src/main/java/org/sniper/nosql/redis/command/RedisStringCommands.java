@@ -25,14 +25,14 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Redis字符串命令接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行set命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param value 值
 	 */
@@ -40,7 +40,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行set命令并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
@@ -49,7 +49,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行set命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param value 值
@@ -58,7 +58,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行set命令并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -68,7 +68,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行setNX命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key 键
 	 * @param value 值
 	 */
@@ -76,7 +76,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行setNX命令并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @param expireMillis
@@ -86,7 +86,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行setNX命令并设置指定单位的过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @param expireTime
@@ -97,7 +97,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行setNX命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key 键
 	 * @param value 值
@@ -106,7 +106,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行setNX命令并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -117,7 +117,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行setNX命令并设置指定单位的过期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -129,7 +129,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行setEx命令，设置键值对的同时赋予键全局的过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 */
@@ -137,7 +137,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行setEx命令，设置键值对的同时赋予键指定的过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param seconds
 	 * @param value
@@ -146,7 +146,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行setEx命令，设置键值对的同时赋予键全局的过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -155,7 +155,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行setEx命令，设置键值对的同时赋予键指定的过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param seconds
@@ -165,7 +165,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行pSetEx命令，设置键值对的同时赋予键全局的过期毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 */
@@ -173,7 +173,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行setEx命令，设置键值对的同时赋予键指定的过期毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param millis
 	 * @param value
@@ -182,7 +182,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行setEx命令，设置键值对的同时赋予键全局的过期毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -191,7 +191,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行setEx命令，设置键值对的同时赋予键指定的过期毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param millis
@@ -201,14 +201,14 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行mSet命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keyValues
 	 */
 	public <K, V> void mSet(Map<K, V> keyValues);
 	
 	/**
 	 * 在当前库中执行mSet命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keyValues
 	 * @param expireSeconds
 	 */
@@ -216,7 +216,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行mSet命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keyValues
 	 */
@@ -224,7 +224,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行mSet命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keyValues
 	 * @param expireSeconds
@@ -233,7 +233,7 @@ public interface RedisStringCommands {
 
 	/**
 	 * 在当前库中执行mSetNX命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keyValues
 	 * @return
 	 */
@@ -241,7 +241,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行mSetNX命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keyValues
 	 * @param expireSeconds
 	 * @return
@@ -250,7 +250,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行mSetNX命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keyValues
 	 * @return
@@ -259,7 +259,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行mSetNX命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keyValues
 	 * @param expireSeconds
@@ -269,7 +269,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行setRange命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param offset
 	 * @param value
@@ -278,7 +278,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行setRange命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param offset
 	 * @param value
@@ -288,7 +288,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行setRange命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param offset
@@ -298,7 +298,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行setRange命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param offset
@@ -309,7 +309,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 将值追加到当前库键的原值后面
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @return
@@ -318,7 +318,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 将值追加到当前库键的原值后面，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
@@ -328,7 +328,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 将值追加到指定库键的原值后面
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -338,7 +338,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 将值追加到指定库键的原值后面，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -349,7 +349,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行get命令，获取指定键对应的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -357,7 +357,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行get命令，获取指定键对应类型的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -366,7 +366,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行get命令，获取指定键对应的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -375,7 +375,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行get命令，获取指定键对应类型的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -385,7 +385,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行getRange命令，获取begin至end之间的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -395,7 +395,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行getRange命令，获取begin至end之间的类型值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -406,7 +406,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行getRange命令，获取begin至end之间的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -417,7 +417,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行getRange命令，获取begin至end之间的类型值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -429,7 +429,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行getSet命令，设置键值对后返回键对应的旧值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @return 
@@ -438,7 +438,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行getSet命令，设置键值对后返回键对应类型的旧值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @param oldValueType
@@ -448,7 +448,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行getSet命令，设置具有时效的键值对后返回键对应的旧值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
@@ -458,7 +458,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行getSet命令，设置具有时效的键值对后返回键对应类型的旧值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @param expireSeconds
@@ -469,7 +469,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行getSet命令，设置键值对后返回键对应的旧值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -479,7 +479,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行getSet命令，设置键值对后返回键对应类型的旧值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -490,7 +490,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行getSet命令，设置具有时效的键值对后返回键对应的旧值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -501,7 +501,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行getSet命令，设置具有时效的键值对后返回键对应类型的旧值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -513,7 +513,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行mGet命令，批量获取多个键对应的值列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -521,7 +521,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行mGet命令，批量获取多个键对应类型的值列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @param valueType
 	 * @return
@@ -530,7 +530,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行mGet命令，批量获取多个键对应的值列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -539,7 +539,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行mGet命令，批量获取多个键对应的值列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @param valueType
@@ -549,7 +549,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行mGet命令，批量获取多个键对应的值列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @return
 	 */
@@ -557,7 +557,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行mGet命令，批量获取多个键对应类型的值列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keys
 	 * @param valueType
 	 * @return
@@ -566,7 +566,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行mGet命令，批量获取多个键对应的值列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @return
@@ -575,7 +575,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行mGet命令，批量获取多个键对应类型的值列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param keys
 	 * @param valueType
@@ -585,7 +585,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行strLen命令，获取键对应的字符串值的长度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -593,7 +593,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行getSet命令，获取键对应的字符串值的长度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -602,7 +602,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行decr命令，将键储存的数字值减一
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -610,7 +610,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行decr命令，将键储存的数字值减一
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -619,7 +619,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行decrBy命令，将键储存的数字值减去指定的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @return
@@ -628,7 +628,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行decrBy命令，将键储存的数字值减去指定的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value
@@ -638,7 +638,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行incr命令，将键储存的数字值加一
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -646,7 +646,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行incr命令，将键储存的数字值加一
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -655,7 +655,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在当前库中执行incrBy命令，将键储存的数字值加上指定的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 * @return
@@ -664,7 +664,7 @@ public interface RedisStringCommands {
 	
 	/**
 	 * 在指定库中执行incrBy命令，将键储存的数字值加上指定的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param value

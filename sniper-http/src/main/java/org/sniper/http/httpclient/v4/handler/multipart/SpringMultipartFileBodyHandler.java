@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * org.springframework.web.multipart.MultipartFile资源类型的Multipart请求体处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SpringMultipartFileBodyHandler extends AbstractSourceMultipartBodyHandler {
@@ -46,7 +46,7 @@ public class SpringMultipartFileBodyHandler extends AbstractSourceMultipartBodyH
 	
 	/**
 	 * 添加org.springframework.web.multipart.MultipartFile请求体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param builder
 	 * @param name
 	 * @param multipartFile
@@ -68,7 +68,7 @@ public class SpringMultipartFileBodyHandler extends AbstractSourceMultipartBodyH
 	
 	/**
 	 * 添加多个org.springframework.web.multipart.MultipartFile请求体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param builder
 	 * @param name
 	 * @param multipartFiles

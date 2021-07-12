@@ -22,14 +22,14 @@ import java.util.Locale;
 
 /**
  * 消息源服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface MessageSource {
 	
 	/**
 	 * 根据键获取对应的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface MessageSource {
 	
 	/**
 	 * 根据键获取对应的本地化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @return

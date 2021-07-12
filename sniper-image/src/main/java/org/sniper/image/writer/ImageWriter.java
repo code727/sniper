@@ -25,14 +25,14 @@ import java.io.OutputStream;
 
 /**
  * 图片写入器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ImageWriter {
 	
 	/**
 	 * 将图片写入输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param image
 	 * @param dest
 	 * @throws IOException
@@ -41,7 +41,7 @@ public interface ImageWriter {
 	
 	/**
 	 * 将图片按指定格式写入输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param image
 	 * @param formatName
 	 * @param dest
@@ -51,7 +51,7 @@ public interface ImageWriter {
 	
 	/**
 	 * 将图片写入指定文件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param image
 	 * @param dest
 	 * @throws IOException
@@ -60,7 +60,7 @@ public interface ImageWriter {
 	
 	/**
 	 * 将图片按指定格式写入文件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param image
 	 * @param formatName
 	 * @param dest

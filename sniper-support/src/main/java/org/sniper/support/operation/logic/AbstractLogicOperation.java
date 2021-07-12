@@ -22,14 +22,14 @@ import java.math.BigDecimal;
 
 /**
  * 逻辑运算抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractLogicOperation<T1, T2> implements LogicOperation<T1, T2> {
 	
 	/**
 	 * 将指定的值转换为BigDecimal
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */

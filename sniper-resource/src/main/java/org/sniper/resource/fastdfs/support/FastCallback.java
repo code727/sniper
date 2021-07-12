@@ -22,14 +22,14 @@ import org.csource.fastdfs.StorageClient1;
 
 /**
  * FastDFS回调接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FastCallback<T> {
 	
 	/**
 	 * 执行FastDFS回调
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param storageClient
 	 * @return
 	 * @throws Exception

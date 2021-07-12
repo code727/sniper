@@ -22,14 +22,14 @@ import org.sniper.http.handler.response.ResponseHandler;
 
 /**
  * 类型化响应处理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface TypedResponseHandler extends ResponseHandler {
 	
 	/**
 	 * 处理字符串响应数据后返回指定类型的最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 * @param targetType 最终结果的类型
 	 * @return

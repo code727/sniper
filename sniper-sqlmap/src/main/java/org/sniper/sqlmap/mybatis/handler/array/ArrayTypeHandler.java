@@ -30,7 +30,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 数组类型处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  * @param <T>
  */
@@ -66,7 +66,7 @@ public class ArrayTypeHandler<T> extends BaseTypeHandler<T[]> {
 	
 	/**
 	 * @description 将字符串的结果处理转换为数组对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param resultArray
 	 * @return
 	 */

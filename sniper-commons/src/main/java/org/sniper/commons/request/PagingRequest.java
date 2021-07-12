@@ -22,7 +22,7 @@ import org.sniper.commons.util.NumberUtils;
 
 /**
  * 分页查询请求
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class PagingRequest extends SortRequest implements PagingQuery {
@@ -110,7 +110,7 @@ public class PagingRequest extends SortRequest implements PagingQuery {
 	
 	/**
 	 * 判断是否在查询上一页
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isQueryPreviousPage() {

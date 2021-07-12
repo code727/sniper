@@ -27,14 +27,14 @@ import org.sniper.orm.jpa.dao.JpaQuery;
 
 /**
  * Hibernate查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, PK> {
 	
 	/**
 	 * 根据主键ID加载当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @return
 	 */
@@ -42,7 +42,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	
 	/**
 	 * 根据主键ID按指定的锁模式锁住并加载当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @param lockMode
 	 * @return
@@ -51,7 +51,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	
 	/**
 	 * 根据主键ID按指定的锁选项锁住并加载当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @param lockOptions
 	 * @return
@@ -60,7 +60,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	
 	/**
 	 * 根据名称和主键ID加载当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param id
 	 * @return
@@ -69,7 +69,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	
 	/**
 	 * 根据名称和主键ID按指定的锁模式锁住并加载当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param id
 	 * @param lockMode
@@ -79,7 +79,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	
 	/**
 	 * 根据名称和主键ID按指定的锁选项锁住并加载当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param id
 	 * @param lockOptions
@@ -89,21 +89,21 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	
 	/**
 	 * 加载当前类型的所有实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<T> loadAll();
 	
 	/**
 	 * 加载当前类型所有不重复的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<T> loadAllDistinct();
 	
 	/**
 	 * 根据主键ID获取当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @return
 	 */
@@ -111,7 +111,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	
 	/**
 	 * 根据主键ID按指定的锁模式锁住并获取当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @param lockMode
 	 * @return
@@ -120,7 +120,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	
 	/**
 	 * 根据主键ID按指定的锁选项锁住并获取当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @param lockOptions
 	 * @return
@@ -129,7 +129,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	
 	/**
 	 * 根据名称和主键ID获取当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param id
 	 * @return
@@ -138,7 +138,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	
 	/**
 	 * 根据名称和主键ID按指定的锁模式锁住并获取当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param id
 	 * @param lockMode
@@ -148,7 +148,7 @@ public interface HibernateQuery<T, PK extends Serializable> extends JpaQuery<T, 
 	
 	/**
 	 * 根据名称和主键ID按指定的锁选项锁住并获取当前类型的实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityName
 	 * @param id
 	 * @param lockOptions

@@ -21,28 +21,28 @@ package org.sniper.security.signature;
 
 /**
  * 签名接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Signature<T> {
 	
 	/**
 	 * 设置类型标识
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 */
 	public void setType(String type);
 	
 	/**
 	 * 获取类型标识
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getType();
 	
 	/**
 	 * 执行签名处理，并返回结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameters
 	 * @return
 	 */

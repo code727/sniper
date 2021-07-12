@@ -18,22 +18,21 @@
 
 package org.sniper.sqlmap.ibatis;
 
-import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.FileUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.persistence.sqlmap.SqlMapOperations;
-import org.sniper.persistence.sqlmap.SqlMapUtils;
+import org.sniper.sqlmap.SqlMapOperations;
+import org.sniper.sqlmap.SqlMapUtils;
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 /**
  * IBatis DAO支持类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
-public abstract class IBatisDaoSupport<T> extends SqlMapClientDaoSupport
-		implements SqlMapOperations<T> {
-	
+public abstract class IBatisDaoSupport<T> extends SqlMapClientDaoSupport implements SqlMapOperations<T> {
+		
 	/** 当前DAO所关联的实体类型 */
 	private Class<T> targetType;
 	
@@ -87,7 +86,7 @@ public abstract class IBatisDaoSupport<T> extends SqlMapClientDaoSupport
 	
 	/**
 	 * 初始化命名空间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	protected void initNamespace() {
 		if (autoBuildNamespace && StringUtils.isBlank(namespace)) {

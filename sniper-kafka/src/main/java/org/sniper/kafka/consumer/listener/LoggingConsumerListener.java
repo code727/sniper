@@ -23,7 +23,7 @@ import org.sniper.kafka.support.ConsumeResult;
 
 /**
  * 可记录日志的消费者监听实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class LoggingConsumerListener<K, V> extends AbstractConsumerListener<K, V> {

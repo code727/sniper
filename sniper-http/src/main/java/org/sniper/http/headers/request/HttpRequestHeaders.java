@@ -46,7 +46,7 @@ import org.sniper.http.headers.MediaType;
 
 /**
  * HTTP请求头
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class HttpRequestHeaders extends HttpHeaders {
@@ -55,7 +55,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置Accept
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param mediaTypes
 	 */
 	public void setAccept(List<MediaType> mediaTypes) {
@@ -64,7 +64,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取Accept
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<MediaType> getAccept() {
@@ -88,7 +88,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 			
 	/**
 	 * 设置客户端可以处理的字符集类型(Accept-Charset)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param charsets
 	 */
 	public void setAcceptCharset(List<AcceptCharset> charsets) {
@@ -97,7 +97,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取客户端可以处理的字符集类型(Accept-Charset)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<AcceptCharset> getAcceptCharset() {
@@ -131,7 +131,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置客户端能够理解的内容编码方式(Accept-Encoding)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param acceptEncoding
 	 */
 	public void setAcceptEncoding(List<AcceptEncoding> encodings) {
@@ -140,7 +140,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取设置客户端能够理解的内容编码方式(Accept-Encoding)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<AcceptEncoding> getAcceptEncoding() {
@@ -178,7 +178,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 		
 	/**
 	 * 设置客户端可以理解的自然语言(Accept-Language)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param acceptLanguages
 	 */
 	public void setAcceptLanguage(AcceptLanguage acceptLanguage) {
@@ -187,7 +187,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取客户端可以理解的自然语言(Accept-Language)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getAcceptLanguage() {
@@ -196,7 +196,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置通知服务器在真正的请求中采用的请求头列表(Access-Control-Request-Headers)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param requestHeaders
 	 */
 	public void setAccessControlRequestHeaders(List<String> requestHeaders) {
@@ -205,7 +205,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取通知服务器在真正的请求中采用的请求头列表(Access-Control-Request-Headers)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<String> getAccessControlRequestHeaders() {
@@ -215,7 +215,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置服务器在真正的请求中会采用的HTTP方法(Access-Control-Request-Method)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 */
 	public void setAccessControlRequestMethod(HttpMethodEnum method) {
@@ -224,7 +224,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取服务器在真正的请求中会采用的HTTP方法(Access-Control-Request-Method)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public HttpMethodEnum getAccessControlRequestMethod() {
@@ -233,7 +233,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 		
 	/**
 	 * 设置服务器用于验证用户代理身份的凭证(Authorization)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param authorization
 	 */
 	public void setAuthorization(Authorization authorization) {
@@ -242,7 +242,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取服务器用于验证用户代理身份的凭证(Authorization)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Authorization getAuthorization() {
@@ -262,7 +262,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 		
 	/**
 	 * 设置Content-Length
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param contentLength
 	 */
 	public void setContentLength(long contentLength) {
@@ -271,7 +271,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取Content-Length
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long getContentLength() {
@@ -281,7 +281,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 		
 	/**
 	 * 设置Cookie
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param cookies
 	 */
 	public void setCookie(Parameters<String, Object> cookies) {
@@ -291,7 +291,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置Cookie
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Parameters<String, Object> getCookie() {
@@ -316,7 +316,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置是否禁止目标站点对个人信息进行追踪(更注重个人隐私还是定制化内容)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dnt 0:允许, 1:禁止
 	 */
 	public void setDNT(int dnt) {
@@ -325,7 +325,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置是否禁止目标站点对个人信息进行追踪(更注重个人隐私还是定制化内容)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getDNT() {
@@ -334,7 +334,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置期望条件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param expect
 	 */
 	public void setExpect(String expect) {
@@ -343,7 +343,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取期望条件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getExpect() {
@@ -352,7 +352,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置代理转发信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param forwarded
 	 */
 	public void setForwarded(Forwarded forwarded) {
@@ -361,7 +361,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取代理转发信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Forwarded getForwarded() {
@@ -403,7 +403,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置来源(属于发送请求的用户电子邮箱地址)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param expect
 	 */
 	public void setFrom(String from) {
@@ -412,7 +412,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取来源(属于发送请求的用户电子邮箱地址)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getFrom() {
@@ -421,7 +421,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置服务器域名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param host
 	 */
 	public void setHost(String host) {
@@ -430,7 +430,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取服务器域名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String gethost() {
@@ -439,7 +439,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置条件请求(当资源的eTag属性值与列表中的值相匹配时返回该资源)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param eTagValues
 	 */
 	public void setIfMatch(List<String> eTagValues) {
@@ -448,7 +448,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取条件请求(当资源的eTag属性值与列表中的值相匹配时返回该资源)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<String> getIfMatch() {
@@ -458,7 +458,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置资源返回的日期时间条件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 */
 	public void setIfModifiedSince(Date date) {
@@ -467,7 +467,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取资源返回的日期时间条件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Date getIfModifiedSince() {
@@ -477,7 +477,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置条件请求(当资源的eTag属性值与列表中的任何值不匹配时返回该资源)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param eTagValues
 	 */
 	public void setIfNoneMatch(List<String> eTagValues) {
@@ -486,7 +486,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取条件请求(当资源的eTag属性值与列表中的任何值不匹配时返回该资源)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<String> getIfNoneMatch() {
@@ -497,7 +497,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	/**
 	 * 设置条件请求(当字段值中的条件得到满足时，Range头字段才会起作用，同时服务器回复206 部分内容状态码，以及Range头字段请求的相应部分；
 	 * 如果字段值中的条件没有得到满足，服务器将会返回 200 OK 状态码，并返回完整的请求资源)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param range
 	 */
 	public void setIfRange(Object range) {
@@ -511,7 +511,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	/**
 	 * 获取条件请求(当字段值中的条件得到满足时，Range头字段才会起作用，同时服务器回复206 部分内容状态码，以及Range 头字段请求的相应部分；
 	 * 如果字段值中的条件没有得到满足，服务器将会返回 200 OK 状态码，并返回完整的请求资源)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Object getIfRange() {
@@ -528,7 +528,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置条件请求(只有当资源在指定的时间之后没有进行过修改的情况下，服务器才会返回请求的资源，或是接受 POST或其他non-safe方法的请求)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 */
 	public void setIfUnmodifiedSince(Date date) {
@@ -538,7 +538,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取条件请求(只有当资源在指定的时间之后没有进行过修改的情况下，服务器才会返回请求的资源，或是接受 POST或其他non-safe方法的请求)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Date getIfUnmodifiedSince() {
@@ -548,7 +548,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置请求来自于哪个站点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url
 	 */
 	public void setOrigin(URL url) {
@@ -557,7 +557,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取请求来自于哪个站点
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public URL getOrigin() {
@@ -571,7 +571,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置提供给代理服务器的用于验证用户身份的凭证(Proxy-Authorization)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param authorization
 	 */
 	public void setProxyAuthorization(Authorization authorization) {
@@ -580,7 +580,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 		
 	/**
 	 * 获取提供给代理服务器的用于验证用户身份的凭证(Proxy-Authorization)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Authorization getProxyAuthorization() {
@@ -600,7 +600,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置服务器返回的文件范围
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param range
 	 */
 	public void setRange(Range range) {
@@ -609,7 +609,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取服务器返回的文件范围
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Range getRange() {
@@ -633,7 +633,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置当前页面的来源页面的地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url
 	 */
 	public void setReferer(URL url) {
@@ -642,7 +642,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取当前页面的来源页面的地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public URL getReferer() {
@@ -656,7 +656,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置用户代理希望使用的传输编码类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param te
 	 */
 	public void setTE(List<TE> tes) {
@@ -665,7 +665,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取用户代理希望使用的传输编码类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<TE> getTE() {
@@ -704,7 +704,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 		
 	/**
 	 * 设置客户端优先选择加密及带有身份验证的响应(Upgrade-Insecure-Requests)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 */
 	public void setUpgradeInsecureRequests(String value) {
@@ -713,7 +713,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取客户端优先选择加密及带有身份验证的响应(Upgrade-Insecure-Requests)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getUpgradeInsecureRequests() {
@@ -722,7 +722,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置用户代理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param userAgent
 	 */
 	public void setUserAgent(String userAgent) {
@@ -731,7 +731,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取用户代理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getUserAgent() {
@@ -740,7 +740,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置X-Forwarded-For请求消息头 
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param ips
 	 */
 	public void setXForwardedFor(List<String> ips) {
@@ -749,7 +749,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取X-Forwarded-For请求消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<String> getXForwardedFor() {
@@ -770,7 +770,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置X-Forwarded-Host请求消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param host
 	 */
 	public void setXForwardedHost(String host) {
@@ -779,7 +779,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取X-Forwarded-Host请求消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getXForwardedHost() {
@@ -788,7 +788,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 设置X-Forwarded-Proto请求消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param protocol
 	 */
 	public void setXForwardedProto(HttpProtocolEnum protocol) {
@@ -797,7 +797,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	
 	/**
 	 * 获取X-Forwarded-Proto请求消息头
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public HttpProtocolEnum getXForwardedProto() {

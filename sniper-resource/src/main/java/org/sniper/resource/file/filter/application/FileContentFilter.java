@@ -29,7 +29,7 @@ import org.sniper.resource.file.filter.AbstractFileContentFilter;
 
 /**
  * 文件内容过滤器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class FileContentFilter extends AbstractFileContentFilter {

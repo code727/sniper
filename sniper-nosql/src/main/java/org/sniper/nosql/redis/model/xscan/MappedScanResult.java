@@ -24,14 +24,14 @@ import java.util.Set;
 
 /**
  * 已映射的扫描结果
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface MappedScanResult<T, V> extends ScannableResult<Entry<T, V>> {
 	
 	/**
 	 * 获取指定键对应的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -39,21 +39,21 @@ public interface MappedScanResult<T, V> extends ScannableResult<Entry<T, V>> {
 	
 	/**
 	 * 获取已映射的键集合
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Set<T> keySet();
 	
 	/**
 	 * 获取已映射的值集合
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Collection<V> values();
 	
 	/**
 	 * 判断指定的键是否存在于结果中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -61,7 +61,7 @@ public interface MappedScanResult<T, V> extends ScannableResult<Entry<T, V>> {
 	
 	/**
 	 * 判断指定的值是否存在于结果中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */

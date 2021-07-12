@@ -22,7 +22,7 @@ import org.sniper.commons.util.SystemUtils;
 
 /**
  * 授权处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface AuthorizationHandler {
@@ -32,28 +32,28 @@ public interface AuthorizationHandler {
 	
 	/**
 	 * 创建角色授权规则字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String createRoleRule();
 	
 	/**
 	 * 创建角色授权规则字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String createPermissionRule();
 	
 	/**
 	 * 设置固定规则字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param fixRule
 	 */
 	public void setFixRule(String fixRule);
 	
 	/**
 	 * 获取固定规则字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getFixRule();

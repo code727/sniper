@@ -28,7 +28,7 @@ import org.sniper.nosql.redis.command.RedisCommands;
  * 2.同一个键维度内生成的数字在单节点和分布式环境中的连续性取决于设置的步长(stepSize)大小：</P>
  *   1)stepSize=1，则生成的数字是连续递增的；
  *   2)stepSize>1，则生成的数字是趋势递增的；
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class RedisTrendSequence extends AbstractKeyspaceTrendSequence<Object, Long> {

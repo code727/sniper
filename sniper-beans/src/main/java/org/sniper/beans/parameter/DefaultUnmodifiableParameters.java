@@ -29,7 +29,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * 默认不可修改的泛型参数实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultUnmodifiableParameters<K, V> implements UnmodifiableParameters<K, V> {
@@ -51,7 +51,7 @@ public class DefaultUnmodifiableParameters<K, V> implements UnmodifiableParamete
 	
 	/**
 	 * 构建参数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameters
 	 * @return
 	 */

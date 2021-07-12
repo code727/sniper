@@ -30,7 +30,7 @@ import org.sniper.security.shiro.ShiroWebUtils;
 
 /**
  * Shiro 重定向认证过滤器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ShiroRedirectAuthenticationFilter extends

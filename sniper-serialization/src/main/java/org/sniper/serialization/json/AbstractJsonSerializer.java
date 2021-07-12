@@ -26,7 +26,7 @@ import org.sniper.serialization.SerializationException;
 
 /**
  * JSON序列器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractJsonSerializer extends AbstractTypedSerializer implements JsonSerializer {
@@ -46,7 +46,7 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	
 	/**
 	 * 重写父类方法，将对象序列化成二进制数组后再进行最基本的字符串转换即可得到JSON字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param t
 	 * @return
 	 * @throws SerializationException
@@ -89,7 +89,7 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 		
 	/**
 	 * 判断字符串是否为一个JSON数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param jsonString
 	 * @return
 	 */
@@ -99,7 +99,7 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 		
 	/**
 	 * 将JSON字符串反序列化为指定类型的对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param json JSON字符串
 	 * @param type 目标对象类型
 	 * @return
@@ -109,7 +109,7 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	
 	/**
 	 * 将JSON字符串反序列化到指定类型的数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param json JSON字符串
 	 * @param arrayType 数组类型
 	 * @return
@@ -119,7 +119,7 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	
 	/**
 	 * 将JSON字符串反序列化到集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param json
 	 * @param collectionType
 	 * @return
@@ -129,7 +129,7 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	
 	/**
 	 * 将JSON数组字符串反序列化到指定元素类型的集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param jsonArray JSON数组字符串
 	 * @param elementType 集合元素的类型
 	 * @return
@@ -139,7 +139,7 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	
 	/**
 	 * 将JSON数组字符串反序列化到指定类型的数组中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param jsonArray JSON数组字符串
 	 * @param arrayType 数组类型
 	 * @return 
@@ -149,7 +149,7 @@ public abstract class AbstractJsonSerializer extends AbstractTypedSerializer imp
 	
 	/**
 	 * 将JSON数组字符串反序列化到指定类型的集合中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param jsonArray JSON数组字符串
 	 * @param collectionType 集合类型
 	 * @return

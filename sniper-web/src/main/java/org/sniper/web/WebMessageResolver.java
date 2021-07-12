@@ -26,21 +26,21 @@ import org.sniper.templet.message.resolver.MessageResolver;
 
 /**
  * 基于Web应用的消息解析器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface WebMessageResolver extends MessageResolver {
 	
 	/**
 	 * 获取当前HttpServletRequest对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public HttpServletRequest getHttpServletRequest();
 	
 	/**
 	 * 获取当前Locale对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Locale getLocale();

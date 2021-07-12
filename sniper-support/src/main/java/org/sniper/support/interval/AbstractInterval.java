@@ -20,7 +20,7 @@ package org.sniper.support.interval;
 
 /**
  * 抽象区间
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractInterval<T> implements Interval<T> {
@@ -39,7 +39,7 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 		
 	/**
 	 * 构建正负无穷的开区间(-∞,+∞)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	protected AbstractInterval() {
 		this(null, null, false, false);
@@ -47,7 +47,7 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 		
 	/**
 	 * 构建闭合区间[minimal,maximum]
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param minimal
 	 * @param maximum
 	 */
@@ -57,7 +57,7 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 			
 	/**
 	 * 构建区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param minimal
 	 * @param maximum
 	 * @param leftClose
@@ -91,7 +91,7 @@ public abstract class AbstractInterval<T> implements Interval<T> {
 	
 	/**
 	 * 构造时执行的初始化方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param minimal
 	 * @param maximum
 	 * @param leftClose

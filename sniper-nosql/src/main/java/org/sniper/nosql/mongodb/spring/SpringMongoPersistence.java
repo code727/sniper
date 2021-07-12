@@ -29,7 +29,7 @@ import com.mongodb.WriteResult;
 
 /**
  * Spring MongoDB持久化接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SpringMongoPersistence<T, PK extends Serializable> extends
@@ -38,7 +38,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 更新主键对应的记录<p>
 	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},false,false})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id ID主键值
 	 * @param update 更新操作和数据
 	 * @return
@@ -48,7 +48,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中更新主键对应的记录<p>
 	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},false,false})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param id ID主键值
 	 * @param update 更新操作和数据
@@ -59,7 +59,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 更新查询结果集返回的第一条记录<p>
 	 * 实际执行的语句为:db.collection.update({查询},{更新},false,false})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
 	 * @return
@@ -69,7 +69,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中更新查询结果集返回的第一条记录<p>
 	 * 实际执行的语句为:db.collection.update({查询},{更新},false,false})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
@@ -80,7 +80,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 更新查询结果集返回的所有记录<p>
 	 * 实际执行的语句为:db.collection.update({查询},{更新},false,true})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
 	 * @return
@@ -90,7 +90,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中更新查询结果集返回的所有记录<p>
 	 * 实际执行的语句为:db.collection.update({查询},{更新},false,true})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
@@ -103,7 +103,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 1.如果根据ID查找到符合条件的结果集，则修改结果集中第一条记录<p>
 	 * 2.如果根据ID未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
 	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},true,false})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id ID主键值
 	 * @param update 更新操作和数据
 	 * @return
@@ -115,7 +115,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 1.如果根据ID查找到符合条件的结果集，则修改结果集中第一条记录<p>
 	 * 2.如果根据ID未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
 	 * 实际执行的语句为:db.collection.update({"_id":id},{更新},true,false})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param id ID主键值
 	 * @param update 更新操作和数据
@@ -128,7 +128,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 1.query如果查找到符合条件的结果集，则修改结果集中第一条记录<p>
 	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
 	 * 实际执行的语句为:db.collection.update({查询},{更新},true,false})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
 	 * @return
@@ -140,7 +140,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	 * 1.query如果查找到符合条件的结果集，则修改结果集中第一条记录<p>
 	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
 	 * 实际执行的语句为:db.collection.update({查询},{更新},true,false})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
@@ -153,7 +153,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 //	 * 1.query如果查找到符合条件的结果集，则修改结果集中所有记录<p>
 //	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
 //	 * 实际执行的语句为:db.collection.update({查询},{更新},true,true})
-//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @author Daniele 
 //	 * @param query
 //	 * @param update
 //	 * @return
@@ -165,7 +165,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 //	 * 1.query如果查找到符合条件的结果集，则修改结果集中所有记录<p>
 //	 * 2.query如果未找到符合条件的结果集，则连同update中的数据键值组合成新的一行记录插入到集合中<p>
 //	 * 实际执行的语句为:db.collection.update({查询},{更新},true,true})
-//	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+//	 * @author Daniele 
 //	 * @param query 查询条件
 //	 * @param update 更新操作和数据
 //	 * @param collection 目标集合名称
@@ -176,7 +176,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 根据ID更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"_id":id,"update":{更新}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id ID主键值
 	 * @param update 更新操作和数据
 	 * @return
@@ -186,7 +186,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 根据ID在目标集合中更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"_id":id,"update":{更新}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param id ID主键值
 	 * @param update 更新操作和数据
@@ -197,7 +197,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"update":{更新}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
 	 * @return
@@ -207,7 +207,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中更新查询结果集返回的第一条记录，并返回更新前的数据对象<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"update":{更新}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param query 查询条件
 	 * @param update 更新操作和数据
@@ -218,7 +218,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询条件
 	 * @return
 	 */
@@ -227,7 +227,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中删除查询结果集返回的第一条记录，并返回删除前的数据对象<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param query 查询条件
 	 * @return
@@ -237,7 +237,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询条件
 	 * @return
 	 */
@@ -246,7 +246,7 @@ public interface SpringMongoPersistence<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中删除查询结果集返回的所有记录，并返回删除前的数据对象列表<p>
 	 * 实际执行的语句为:db.collection.findAndModify({"query":{查询},"remove":true})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param query 查询条件
 	 * @return

@@ -32,7 +32,7 @@ import org.sniper.resource.file.FileSource;
 
 /**
  * FastDFS代理文件资源实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class FastProxyFileSource<T> implements FastFileSource<T> {
@@ -155,7 +155,7 @@ public class FastProxyFileSource<T> implements FastFileSource<T> {
 	
 	/**
 	 * 选择是否按忽略大小写的方式获取匹配名称对应的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param ignoreCase
 	 * @return

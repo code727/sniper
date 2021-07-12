@@ -24,7 +24,7 @@ import org.sniper.resource.file.filter.AbstractFileNumberFilter;
 
 /**
  * 文件大小过滤器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class FileSizeFilter extends AbstractFileNumberFilter {

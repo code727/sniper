@@ -20,14 +20,14 @@ package org.sniper.http.handler.response.typed;
 
 /**
  * 类型化嵌套响应处理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface TypedNestedResponseHandler extends TypedResponseHandler {
 	
 	/**
 	 * 处理字符串响应数据后返回全局类型的最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 * @param nestedType 最终结果的内部嵌套类型
 	 * @return
@@ -37,7 +37,7 @@ public interface TypedNestedResponseHandler extends TypedResponseHandler {
 	
 	/**
 	 * 处理字符串响应数据后返回指定类型的最终结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 * @param targetType 最终结果的类型
 	 * @param nestedType 最终结果的内部嵌套类型

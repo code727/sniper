@@ -27,7 +27,7 @@ import org.sniper.image.layout.CaptchaLayout;
 
 /**
  * AWT图片验证码生成器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AWTImageCaptchaGenerator extends AbstractImageCaptchaGenerator {
@@ -46,7 +46,7 @@ public abstract class AWTImageCaptchaGenerator extends AbstractImageCaptchaGener
 	
 	/**
 	 * 绘制验证码文本
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param graphics
 	 * @param text
 	 */

@@ -20,7 +20,7 @@ package org.sniper.http.handler.response;
 
 /**
  * 双精度响应处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DoubleResponseHandler extends AbstractNumberResponseHandler {

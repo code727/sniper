@@ -26,7 +26,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * Map对象与Map对象之间的映射转换
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MapToMapMapper<V> extends AbstractMapper<Map<String, V>, Map<String, V>> {

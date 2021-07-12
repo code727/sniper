@@ -24,7 +24,7 @@ import org.sniper.nosql.mongodb.dao.MongoDao;
 
 /**
  * Spring MongDB持久化数据访问接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SpringMongoDao<T, PK extends Serializable> extends

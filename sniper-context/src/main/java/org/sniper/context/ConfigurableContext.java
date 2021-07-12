@@ -20,21 +20,21 @@ package org.sniper.context;
 
 /**
  * 可配置的上下文接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ConfigurableContext {
 		
 	/**
 	 * 设置上下文默认属性名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param attributeName
 	 */
 	public void setAttributeName(Object attributeName);
 	
 	/**
 	 * 获取上下文默认属性名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Object getAttributeName();

@@ -24,14 +24,14 @@ import java.util.Map;
 
 /**
  * JPA持久化接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface JpaPersistence<T, PK extends Serializable> {
 	
 	/**
 	 * 新增实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 * @return
 	 */
@@ -39,14 +39,14 @@ public interface JpaPersistence<T, PK extends Serializable> {
 			
 	/**
 	 * 批量新增实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityList
 	 */
 	public void batchPersist(List<T> entityList);
 	
 	/**
 	 * 合并(新增/更新)实体对象 - 实体与数据库同步
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 * @return
 	 */
@@ -54,54 +54,54 @@ public interface JpaPersistence<T, PK extends Serializable> {
 	
 	/**
 	 * 批量合并(新增/更新)实体对象  - 实体与数据库同步
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityList
 	 */
 	public List<T> batchMerge(List<T> entityList);
 	
 	/**
 	 * 删除实体对象 - 实体游离
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 */
 	public void remove(T entity);
 	
 	/**
 	 * 删除指定主键ID对应的实体对象 - 实体游离
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 */
 	public void remove(PK id);
 	
 	/**
 	 * 批量删除实体对象 - 实体游离
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityList
 	 */
 	public void batchRemove(List<T> entityList);
 	
 	/**
 	 * 同步实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 */
 	public void refresh(T entity);
 	
 	/**
 	 * 同步所有当前正在被托管的实体到数据库
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	public void flush();
 
 	/**
 	 * 分离所有当前正在被托管的实体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	public void clear();
 	
 	/**
 	 * 判断实体当前是否被管理中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entity
 	 * @return
 	 */
@@ -109,7 +109,7 @@ public interface JpaPersistence<T, PK extends Serializable> {
 	
 	/**
 	 * 判断ID对应的实体当前是否被管理中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @return
 	 */
@@ -117,7 +117,7 @@ public interface JpaPersistence<T, PK extends Serializable> {
 	
 	/**
 	 * 执行指定的语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param ql
 	 * @return
 	 */
@@ -125,7 +125,7 @@ public interface JpaPersistence<T, PK extends Serializable> {
 
 	/**
 	 * 执行指定带占位符(?)参数的语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param ql
 	 * @param values 参数值组
 	 * @return
@@ -134,7 +134,7 @@ public interface JpaPersistence<T, PK extends Serializable> {
 
 	/**
 	 * 执行指定带命名(=:name)参数的语句后返回受影响的行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param ql
 	 * @param paramMap
 	 * @return

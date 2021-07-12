@@ -22,7 +22,7 @@ import java.io.Serializable;
 
 /**
  * MongoDB持久化数据访问接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface MongoDao<T, PK extends Serializable> extends

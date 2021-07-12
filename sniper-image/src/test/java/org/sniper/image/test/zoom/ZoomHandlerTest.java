@@ -34,7 +34,7 @@ import org.sniper.test.junit.BaseTestCase;
 
 /**
  * 缩放处理器单元测试
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ZoomHandlerTest extends BaseTestCase {

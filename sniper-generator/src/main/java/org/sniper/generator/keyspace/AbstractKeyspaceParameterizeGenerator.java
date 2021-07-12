@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * 基于键空间的参数化生成器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractKeyspaceParameterizeGenerator<K, P, V> extends AbstractKeyspaceGenerator<K, V>
@@ -77,7 +77,7 @@ public abstract class AbstractKeyspaceParameterizeGenerator<K, P, V> extends Abs
 	
 	/** 
 	 * 根据键和参数执行生成操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param parameter
 	 * @return 
@@ -86,7 +86,7 @@ public abstract class AbstractKeyspaceParameterizeGenerator<K, P, V> extends Abs
 
 	/** 
 	 * 根据键和参数执行批量生成操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param parameter
 	 * @param count

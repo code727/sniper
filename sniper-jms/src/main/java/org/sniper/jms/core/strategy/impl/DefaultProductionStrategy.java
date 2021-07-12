@@ -24,7 +24,7 @@ import org.sniper.jms.core.strategy.ProductionStrategy;
 
 /**
  * 默认的生产策略实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultProductionStrategy extends

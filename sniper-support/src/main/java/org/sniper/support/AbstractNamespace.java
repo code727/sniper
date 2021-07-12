@@ -22,7 +22,7 @@ import org.sniper.commons.util.AssertUtils;
 
 /**
  * 命名空间标识抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  * @param <K>
  */
@@ -43,7 +43,7 @@ public abstract class AbstractNamespace<K> implements Namespace<K> {
 	
 	/**
 	 * 检查空间的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param spaceId
 	 */
 	protected void checkSpace(K spaceId) {

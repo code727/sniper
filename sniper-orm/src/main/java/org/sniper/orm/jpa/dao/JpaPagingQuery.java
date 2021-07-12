@@ -23,14 +23,14 @@ import org.sniper.commons.request.PagingQuery;
 
 /**
  * Jpa分页查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface JpaPagingQuery<T> {
 	
 	/**
 	 * 针对于当前实体类型的分页查询
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 分页查询条件对象
 	 * @param callback 查询回调
 	 * @return

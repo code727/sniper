@@ -26,7 +26,7 @@ import org.sniper.nosql.mongodb.dao.MongoQuery;
 
 /**
  * Spring MongoDB查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SpringMongoQuery<T, PK extends Serializable> extends
@@ -35,7 +35,7 @@ public interface SpringMongoQuery<T, PK extends Serializable> extends
 	/**
 	 * 查询出满足条件的唯一记录<p>
 	 * 实际执行的语句为:db.collection.findOne({查询}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询条件
 	 * @return
 	 */
@@ -44,7 +44,7 @@ public interface SpringMongoQuery<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中查询出满足条件的唯一记录<p>
 	 * 实际执行的语句为:db.collection.findOne({查询}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param query 查询条件
 	 * @return
@@ -54,7 +54,7 @@ public interface SpringMongoQuery<T, PK extends Serializable> extends
 	/**
 	 * 查询出满足条件的记录列表<p>
 	 * 实际执行的语句为:db.collection.find({查询}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询条件
 	 * @return
 	 */
@@ -63,7 +63,7 @@ public interface SpringMongoQuery<T, PK extends Serializable> extends
 	/**
 	 * 在目标集合中查询出满足条件的记录列表<p>
 	 * 实际执行的语句为:db.collection.find({查询}})
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query 查询条件
 	 * @param collection 目标集合
 	 * @return

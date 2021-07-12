@@ -23,21 +23,21 @@ import org.sniper.kafka.support.ProduceResult;
 
 /**
  * 生产者日志接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ProducerLogger {
 	
 	/**
 	 * 打印成功事件发生时的生产日志
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param produceResult
 	 */
 	public <K, V> void successLog(ProduceResult<K, V> produceResult);
 	
 	/**
 	 * 打印错误事件发生时的日志
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param produceRecord
 	 * @param ex
 	 */

@@ -36,7 +36,7 @@ import org.sniper.jms.support.ConsumerServiceSupport;
 
 /**
  * 消费者服务模板
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ConsumerTemplate extends ConsumerServiceSupport implements ConsumerService {

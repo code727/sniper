@@ -24,7 +24,7 @@ import org.sniper.generator.test.AbstractGeneratorTest;
 
 /**
  * Snowflake参数化序列生成器单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SnowflakeParameterizeGeneratorTest extends AbstractGeneratorTest<Long> {

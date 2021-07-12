@@ -24,7 +24,7 @@ import redis.clients.jedis.JedisPool;
 
 /**
  * Jedis支持类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class JedisSupport extends RedisSupport {

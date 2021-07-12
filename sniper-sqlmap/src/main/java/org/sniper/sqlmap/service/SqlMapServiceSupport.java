@@ -18,22 +18,23 @@
 
 package org.sniper.sqlmap.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.FileUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.persistence.sqlmap.SqlMapOperations;
 import org.sniper.spring.beans.CheckableInitializingBeanAdapter;
+import org.sniper.sqlmap.SqlMapOperations;
 import org.sniper.sqlmap.dao.SqlMapDao;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * SQL映射持久化服务支持类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SqlMapServiceSupport<T> extends CheckableInitializingBeanAdapter
 		implements SqlMapBeanService<T>, SqlMapOperations<T> {
-	
+		
 	@Autowired
 	protected SqlMapDao<T> sqlMapDao;
 	
@@ -88,8 +89,7 @@ public class SqlMapServiceSupport<T> extends CheckableInitializingBeanAdapter
 	
 	@Override
 	protected void checkProperties() {
-		if (this.sqlMapDao == null)
-			throw new IllegalArgumentException("Property 'sqlMapDao' is required");
+		AssertUtils.assertNotNull(this.sqlMapDao, "Property 'sqlMapDao' is required");
 	}
 	
 	@Override
@@ -106,10 +106,10 @@ public class SqlMapServiceSupport<T> extends CheckableInitializingBeanAdapter
 	
 	/**
 	 * 初始化命名空间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	protected void initNamespace() {
-		/* 如果DAO设置有命名空间，则以DAO的为准 */
+		/* 如果DAO设置有命名空间，则以DAO的命名空间为准 */
 		if (StringUtils.isNotBlank(sqlMapDao.getNamespace())) {
 			namespace = "";
 			return;

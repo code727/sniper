@@ -21,77 +21,77 @@ package org.sniper.jms.core.strategy;
 
 /**
  * JMS生产策略接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ProductionStrategy extends SharedStrategy {
 	
 	/**
 	 * 设置是否启用唯一标识来区分提供商发送的每个消息的功能
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param messageIDEnabled
 	 */
 	public void setMessageIDEnabled(boolean messageIDEnabled);
 
 	/**
 	 * 判断是否启用了唯一标识来区分提供商发送的每个消息的功能
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
     public boolean isMessageIdEnabled();
 
     /**
      * 设置是否启用消息中包含发送时间的功能
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param messageTimestampEnabled
      */
     public void setMessageTimestampEnabled(boolean messageTimestampEnabled);
 
     /**
      * 判断是否禁用了消息中包含发送时间的功能
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @return
      */
     public boolean isMessageTimestampEnabled();
 
     /**
      * 设置消息的优先级
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param priority
      */
     public void setPriority(int priority);
 
     /**
      * 获取消息的优先级
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @return
      */
     public int getPriority();
 
     /**
      * 设置消息的存活时间(毫秒)
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param timeToLive
      */
     public void setTimeToLive(long timeToLive);
 
     /**
      * 获取消息的存活时间(毫秒)
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @return
      */
     public long getTimeToLive();
     
     /**
      * 设置发送消息时是否需要使用指定的发送模式，优先级和存活时间
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @param explicitQosEnabled
      */
     public void setExplicitQosEnabled(boolean explicitQosEnabled);
     
     /**
      * 判断发送消息时是否需要使用指定的发送模式，优先级和存活时间
-     * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+     * @author Daniele 
      * @return
      */
     public boolean isExplicitQosEnabled();

@@ -32,7 +32,7 @@ import org.sniper.test.domain.User;
 
 /**
  * Jackson序列化器单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class CodehausJacksonSerializerTest extends AbstractSerializerTest {
@@ -48,7 +48,7 @@ public class CodehausJacksonSerializerTest extends AbstractSerializerTest {
 	
 	/**
 	 * 单值测试
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws Exception
 	 */
 //	@Test

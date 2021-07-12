@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * 类型工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ClassUtils {
@@ -64,7 +64,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取对象的类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -74,7 +74,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取对象的当前类型。如果对象本身属于Class实例，则直接返回，否则返回对象的Class实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -87,7 +87,7 @@ public class ClassUtils {
 				
 	/**
 	 * 获取指定类型的包装类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -100,7 +100,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取指定类型的基本类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -113,7 +113,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取两个类型对象共同的类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz1
 	 * @param clazz2
 	 * @return
@@ -141,7 +141,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取两个对象共同的类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj1
 	 * @param obj2
 	 * @return
@@ -163,7 +163,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取集合元素共同的类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection
 	 * @return
 	 */
@@ -190,7 +190,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取指定类型的超类签名中第1个泛型类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -200,7 +200,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取指定类型的超类签名中第index+1个泛型类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @param index
 	 * @return
@@ -225,7 +225,7 @@ public class ClassUtils {
 			
 	/**
 	 * 判断指定的对象是否定义有ClassLoader
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -236,7 +236,7 @@ public class ClassUtils {
 	
 	/**
 	 * 判断指定的类型对象是否为包装类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -246,7 +246,7 @@ public class ClassUtils {
 	
 	/**
 	 * 判断指定的类型对象是否为基本类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -256,7 +256,7 @@ public class ClassUtils {
 	
 	/**
 	 * 判断指定的类型是否为顶级类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -266,7 +266,7 @@ public class ClassUtils {
 	
 	/**
 	 * 判断指定的类型是否不为顶级类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -276,7 +276,7 @@ public class ClassUtils {
 				
 	/**
 	 * 判断是否为一个接口类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -286,7 +286,7 @@ public class ClassUtils {
 	
 	/**
 	 * 判断是否为一个数组类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -296,7 +296,7 @@ public class ClassUtils {
 	
 	/**
 	 * 判断是否为一个数组类型对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -306,7 +306,7 @@ public class ClassUtils {
 	
 	/**
 	 * 判断是否为一个列表类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -316,7 +316,7 @@ public class ClassUtils {
 		
 	/**
 	 * 判断是否为一个列表类型对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -326,7 +326,7 @@ public class ClassUtils {
 				
 	/**
 	 * 判断是否为为一个集合类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -336,7 +336,7 @@ public class ClassUtils {
 	
 	/**
 	 * 判断是否为一个集合类型对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -346,7 +346,7 @@ public class ClassUtils {
 	
 	/**
 	 * 判断是否为为一个Map类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -356,7 +356,7 @@ public class ClassUtils {
 	
 	/**
 	 * 判断是否为为一个Map类型对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -366,7 +366,7 @@ public class ClassUtils {
 	
 	/**
 	 * 判断clazz1是否包含在clazz2中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz1
 	 * @param clazz2
 	 * @return
@@ -380,7 +380,7 @@ public class ClassUtils {
 		
 	/**
 	 * 判断clazz1是否为clazz2的子类
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz1
 	 * @param clazz2
 	 * @return
@@ -394,7 +394,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取指定类所属包的基础名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -419,7 +419,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取指定类的基础名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -438,7 +438,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取指定类的包名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */
@@ -452,7 +452,7 @@ public class ClassUtils {
 	
 	/**
 	 * 获取默认的ClassLoader
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static ClassLoader getDefaultClassLoader() {

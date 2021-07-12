@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * 并发参数实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ConcurrentParameters<K, V> extends DefaultParameters<K, V> {
@@ -43,7 +43,7 @@ public class ConcurrentParameters<K, V> extends DefaultParameters<K, V> {
 	
 	/**
 	 * 重写父类方法，强制将参数项存储到ConcurrentHashMap中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameterItems
 	 */
 	@Override

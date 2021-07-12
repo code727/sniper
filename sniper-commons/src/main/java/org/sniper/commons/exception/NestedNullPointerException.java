@@ -20,7 +20,7 @@ package org.sniper.commons.exception;
 
 /**
  * 嵌套空指针异常
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class NestedNullPointerException extends NullPointerException {

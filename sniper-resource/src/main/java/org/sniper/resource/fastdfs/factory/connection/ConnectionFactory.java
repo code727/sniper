@@ -23,14 +23,14 @@ import org.csource.fastdfs.TrackerServer;
 
 /**
  * 连接工厂接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ConnectionFactory {
 	
 	/**
 	 * 获取TrackerServer实例对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 * @throws Exception
 	 */
@@ -38,7 +38,7 @@ public interface ConnectionFactory {
 	
 	/**
 	 * 获取指定索引位的TrackerServer实例对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param index
 	 * @return
 	 * @throws Exception
@@ -47,7 +47,7 @@ public interface ConnectionFactory {
 	
 	/**
 	 * 根据TrackerServer获取StorageServer实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param trackerServer
 	 * @return
 	 * @throws Exception
@@ -56,7 +56,7 @@ public interface ConnectionFactory {
 	
 	/**
 	 * 根据TrackerServer获取指定组的StorageServer实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param trackerServer
 	 * @param groupName
 	 * @return
@@ -66,7 +66,7 @@ public interface ConnectionFactory {
 		
 	/**
 	 * 释放TrackerServer和StorageServer对象的连接
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws Exception
 	 */
 	public void release(TrackerServer trackerServer, StorageServer storageServer) throws Exception;

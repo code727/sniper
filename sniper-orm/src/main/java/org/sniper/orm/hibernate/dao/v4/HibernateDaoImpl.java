@@ -50,7 +50,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Hibernate3持久化实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @Repository

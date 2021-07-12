@@ -22,14 +22,14 @@ import java.util.Map;
 
 /**
  * 参数服务接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ParametersService {
 	
 	/**
 	 * 预加载
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public <K, V> Map<K, V> preloading();

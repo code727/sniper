@@ -22,7 +22,7 @@ import java.util.Date;
 
 /**
  * 可新增/更新的实体接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Cuable {
@@ -32,28 +32,28 @@ public interface Cuable {
 	
 	/**
 	 * 获取创建时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Date getCreateTime();
 
 	/**
 	 * 设置创建时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param createTime
 	 */
 	public void setCreateTime(Date createTime);
 	
 	/**
 	 * 获取更新时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Date getUpdateTime();
 
 	/**
 	 * 设置更新时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param updateTime
 	 */
 	public void setUpdateTime(Date updateTime);

@@ -24,21 +24,21 @@ import org.apache.kafka.common.PartitionInfo;
 
 /**
  * 生产者操作接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface KafkaProducerOperations {
 	
 	/**
 	 * 获取默认topic分区信息列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<PartitionInfo> partitionsFor();
 	
 	/**
 	 * 获取指定的topic分区信息列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -46,7 +46,7 @@ public interface KafkaProducerOperations {
 	
 	/**
 	 * 发送生产者缓存的消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	public void flush();
 

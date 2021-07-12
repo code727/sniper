@@ -36,7 +36,7 @@ import java.util.List;
 
 /**
  * IO工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class IOUtils {
@@ -48,7 +48,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建指定大小的字节缓存区
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bufferSize
 	 * @return
 	 */
@@ -58,7 +58,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建指定大小的字符缓存区
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bufferSize
 	 * @return
 	 */
@@ -68,7 +68,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有默认缓冲区大小的BufferedInputStream对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @return
 	 * @throws IOException
@@ -79,7 +79,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有指定缓冲区大小的BufferedInputStream对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param bufferSize
 	 * @return
@@ -94,7 +94,7 @@ public class IOUtils {
 	
 	/** 
 	 * 创建有默认缓冲区大小的BufferedOutputStream对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param out
 	 * @return
 	 * @throws IOException
@@ -105,7 +105,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有指定缓冲区大小的BufferedOutputStream对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param out
 	 * @param bufferSize
 	 * @return
@@ -119,7 +119,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有默认字符串编码格式和缓冲区大小的BufferedReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @return
 	 * @throws IOException
@@ -130,7 +130,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有指定的字符串编码格式和默认缓冲区大小的BufferedReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param encoding
 	 * @return
@@ -142,7 +142,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有默认字符串编码格式和指定缓冲区大小的BufferedReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param bufferSize
 	 * @return
@@ -154,7 +154,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有指定的字符串编码格式和缓冲区大小的BufferedReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param encoding
 	 * @param bufferSize
@@ -171,7 +171,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有默认缓冲区大小的BufferedReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @return
 	 * @throws IOException
@@ -182,7 +182,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有指定缓冲区大小的BufferedReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @param bufferSize 缓冲区大小，仅当Reader参数不是BufferedReader的实例时有效
 	 * @return
@@ -199,7 +199,7 @@ public class IOUtils {
 	
 	/**
 	 * 以默认的字符集编码和缓存区大小创建文件的BufferedReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param file
 	 * @return
 	 * @throws IOException
@@ -210,7 +210,7 @@ public class IOUtils {
 	
 	/**
 	 * 以指定的字符集编码和默认的缓存区大小创建文件的BufferedReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param file
 	 * @param encoding
 	 * @return
@@ -222,7 +222,7 @@ public class IOUtils {
 	
 	/**
 	 * 以默认的字符集编码和指定的缓存区大小创建文件的BufferedReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param file
 	 * @param bufferSize
 	 * @return
@@ -234,7 +234,7 @@ public class IOUtils {
 	
 	/**
 	 * 以指定的字符集编码和缓存区大小创建文件的BufferedReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param file
 	 * @param encoding
 	 * @param bufferSize
@@ -247,7 +247,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有默认字符串编码格式和缓冲区大小的BufferedWriter对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param out
 	 * @return
 	 * @throws IOException
@@ -258,7 +258,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有指定字符串编码格式和默认缓冲区大小的BufferedWriter对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param out
 	 * @param encoding
 	 * @return
@@ -270,7 +270,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有默认字符串编码格式和指定缓冲区大小的BufferedWriter对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param out
 	 * @param bufferSize
 	 * @return
@@ -282,7 +282,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有指定字符串编码格式和缓冲区大小的BufferedWriter对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param out
 	 * @param encoding
 	 * @param bufferSize
@@ -299,7 +299,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有默认缓冲区大小的BufferedWriter对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param writer
 	 * @return
 	 * @throws IOException
@@ -310,7 +310,7 @@ public class IOUtils {
 	
 	/**
 	 * 创建有指定缓冲区大小的BufferedWriter对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param writer
 	 * @param bufferSize 缓冲区大小，仅当Writer参数不是BufferedWriter的实例时有效
 	 * @return
@@ -327,7 +327,7 @@ public class IOUtils {
 	
 	/**
 	 * 根据输入流创建有默认字符集编码和缓冲区大小的LineNumberReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @return
 	 * @throws IOException
@@ -338,7 +338,7 @@ public class IOUtils {
 	
 	/**
 	 * 根据输入流创建有指定字符集编码和默认缓冲区大小的LineNumberReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param encoding
 	 * @return
@@ -350,7 +350,7 @@ public class IOUtils {
 	
 	/**
 	 * 根据输入流创建有默认字符集编码和指定缓冲区大小的LineNumberReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param bufferSize
 	 * @return
@@ -362,7 +362,7 @@ public class IOUtils {
 	
 	/**
 	 * 根据输入流创建有指定字符集编码和缓冲区大小的LineNumberReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param encoding
 	 * @param bufferSize
@@ -380,7 +380,7 @@ public class IOUtils {
 	
 	/**
 	 * 根据读取器创建LineNumberReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @return
 	 * @throws IOException
@@ -391,7 +391,7 @@ public class IOUtils {
 	
 	/**
 	 * 根据读取器创建有指定缓冲区大小的LineNumberReader对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @param bufferSize 缓冲区大小，只针对读取器参数不是LineNumberReader和BufferedReader的实例时有效
 	 * @return
@@ -412,7 +412,7 @@ public class IOUtils {
 	
 	/**
 	 * 读取出输入流的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @return
 	 * @throws IOException
@@ -423,7 +423,7 @@ public class IOUtils {
 	
 	/**
 	 * 按指定的字符集编码格式读取出输入流的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param encoding
 	 * @return
@@ -435,7 +435,7 @@ public class IOUtils {
 	
 	/**
 	 * 按指定的缓存区大小读取出输入流的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param bufferSize
 	 * @return
@@ -447,7 +447,7 @@ public class IOUtils {
 	
 	/**
 	 * 按指定的字符集编码格式和缓存区大小读取出输入流的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param encoding
 	 * @param bufferSize
@@ -460,7 +460,7 @@ public class IOUtils {
 	
 	/**
 	 * 读出读取器的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @return
 	 * @throws IOException
@@ -471,7 +471,7 @@ public class IOUtils {
 	
 	/**
 	 * 按指定的缓存区大小读出读取器的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @param bufferSize
 	 * @return
@@ -493,7 +493,7 @@ public class IOUtils {
 	
 	/**
 	 * 按行读取出输入流的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @return
 	 * @throws IOException
@@ -504,7 +504,7 @@ public class IOUtils {
 	
 	/**
 	 * 以指定的字符集编码格式按行读取输入流的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param encoding
 	 * @return
@@ -516,7 +516,7 @@ public class IOUtils {
 	
 	/**
 	 * 以指定的缓存区大小按行读取输入流的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param bufferSize
 	 * @return
@@ -528,7 +528,7 @@ public class IOUtils {
 	
 	/**
 	 * 以指定的字符集编码格式和缓存区大小按行读取输入流的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param encoding
 	 * @param bufferSize
@@ -544,7 +544,7 @@ public class IOUtils {
 	
 	/**
 	 * 按行读出读取器的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @return
 	 * @throws IOException
@@ -555,7 +555,7 @@ public class IOUtils {
 	
 	/**
 	 * 以指定的缓存区大小按行读出读取器的内容
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @param bufferSize 缓存区大小，仅当Reader参数不是BufferedReader实例时有效
 	 * @return
@@ -573,7 +573,7 @@ public class IOUtils {
 	
 	/**
 	 * 将字节数组写入到输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param out
 	 * @param bytes
 	 * @throws IOException
@@ -585,7 +585,7 @@ public class IOUtils {
 	
 	/**
 	 * 将字符串写入到输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param out
 	 * @param content
 	 * @throws IOException
@@ -596,7 +596,7 @@ public class IOUtils {
 	
 	/**
 	 * 将字符串按指定的编码格式写入到输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param out
 	 * @param content
 	 * @param encoding
@@ -611,7 +611,7 @@ public class IOUtils {
 	
 	/**
 	 * 将字符数组输出到写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param writer
 	 * @param charArray
 	 * @throws IOException
@@ -623,7 +623,7 @@ public class IOUtils {
 	
 	/**
 	 * 将字符串输出到写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param writer
 	 * @param content
 	 * @throws IOException
@@ -635,7 +635,7 @@ public class IOUtils {
 	
 	/**
 	 * 将字节数组按默认字符集编码输出到写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param writer
 	 * @param bytes
 	 * @throws IOException
@@ -646,7 +646,7 @@ public class IOUtils {
 	
 	/**
 	 * 将字节数组按指定字符集编码输出到写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param writer
 	 * @param bytes
 	 * @param encoding
@@ -661,7 +661,7 @@ public class IOUtils {
 	
 	/**
 	 * 将输入流的字节写入到输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param out
 	 * @throws IOException
@@ -672,7 +672,7 @@ public class IOUtils {
 	
 	/**
 	 * 将输入流的字节按指定的缓存区大小读出后写入到输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param out
 	 * @param bufferSize
@@ -689,7 +689,7 @@ public class IOUtils {
 
 	/**
 	 * 将输入流的字节按默认的字符集编码格式和缓存区大小读出后输出到写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param writer
 	 * @throws IOException
@@ -700,7 +700,7 @@ public class IOUtils {
 	
 	/**
 	 * 将输入流的字节按指定的字符集编码格式和默认的缓存区大小读出后输出到写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param writer
 	 * @param encoding 字符集编码，只针对输入流(InputStream)参数有效
@@ -712,7 +712,7 @@ public class IOUtils {
 	
 	/**
 	 * 将输入流的字节按默认的字符集编码格式和指定的缓存区大小读出后输出到写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param writer
 	 * @param bufferSize 缓存区大小，对输入流(InputStream)和非缓冲写入流(BufferedWriter)参数有效
@@ -724,7 +724,7 @@ public class IOUtils {
 	
 	/**
 	 * 将输入流的字节按指定的字符集编码格式和缓存区大小读出后输出到写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param writer
 	 * @param encoding 字符集编码，只针对输入流(InputStream)参数有效
@@ -737,7 +737,7 @@ public class IOUtils {
 	
 	/**
 	 * 将读取器的字符按默认的字符集编码格式和缓存区大小写入到输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @param out
 	 * @throws IOException
@@ -748,7 +748,7 @@ public class IOUtils {
 	
 	/**
 	 * 将读取器的字符按指定的字符集编码格式和默认的缓存区大小写入到输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @param out
 	 * @param encoding 
@@ -760,7 +760,7 @@ public class IOUtils {
 	
 	/**
 	 * 将读取器的字符按默认的字符集编码格式和指定的缓存区大小写入到输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @param out
 	 * @param bufferSize 缓存区大小，对非缓冲读取器(BufferedReader)和写入流(OutputStream)参数有效
@@ -772,7 +772,7 @@ public class IOUtils {
 	
 	/**
 	 * 将读取器的字符按指定的字符集编码格式和缓存区大小写入到输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @param out
 	 * @param encoding 字符集编码，只针对输出流(OutputStream)参数有效
@@ -785,7 +785,7 @@ public class IOUtils {
 	
 	/**
 	 * 将读取器的字符按默认的缓冲区大小读出后再输出到写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @param writer
 	 * @throws IOException
@@ -796,7 +796,7 @@ public class IOUtils {
 	
 	/**
 	 * 将读取器的字符按指定的缓冲区大小读出后再输出到写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @param writer
 	 * @param bufferSize 
@@ -816,7 +816,7 @@ public class IOUtils {
 	
 	/**
 	 * 获取BufferedReader对象的总行数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @return
 	 * @throws IOException
@@ -834,7 +834,7 @@ public class IOUtils {
 	
 	/**
 	 * 关闭输入流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @throws IOException
 	 */
@@ -845,7 +845,7 @@ public class IOUtils {
 	
 	/**
 	 * 关闭输出流
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param out
 	 * @throws IOException
 	 */
@@ -856,7 +856,7 @@ public class IOUtils {
 	
 	/**
 	 * 关闭读取器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param reader
 	 * @throws IOException
 	 */
@@ -867,7 +867,7 @@ public class IOUtils {
 	
 	/**
 	 * 关闭写入器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param writer
 	 * @throws IOException
 	 */

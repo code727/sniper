@@ -23,56 +23,56 @@ import java.io.InputStream;
 
 /**
  * 文件资源接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FileSource<T> {
 	
 	/**
 	 * 获取文件体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public T getFile();
 	
 	/**
 	 * 获取文件源名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getName();
 	
 	/**
 	 * 获取文件源主名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getMainName();
 	
 	/**
 	 * 获取文件源扩展名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getExtName();
 	
 	/**
 	 * 获取文件源的输入流对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public InputStream getInputStream() throws IOException;
 	
 	/**
 	 * 获取文件源的字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public byte[] getBytes() throws IOException;
 	
 	/**
 	 * 关闭
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws IOException
 	 */
 	public void close() throws IOException;

@@ -30,14 +30,14 @@ import org.sniper.nosql.redis.option.ZStoreOptional;
 
 /**
  * Redis有序集合命令接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zAdd命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param score
 	 * @param member
@@ -47,7 +47,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zAdd命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param score
 	 * @param member
@@ -58,7 +58,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zAdd命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param score
@@ -69,7 +69,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zAdd命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param score
@@ -81,7 +81,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行批量zAdd命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param scoreMembers
 	 * @return
@@ -90,7 +90,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行批量zAdd命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param scoreMembers
 	 * @param expireSeconds
@@ -100,7 +100,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行批量zAdd命令
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param scoreMembers
@@ -110,7 +110,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行批量zAdd命令，并设置过期秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param scoreMembers
@@ -121,7 +121,7 @@ public interface RedisSortedSetCommands {
 		
 	/**
 	 * 在当前库中执行zCard命令，获取有序集合键对应的元素个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -129,7 +129,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行sCard命令，获取有序集合键对应的元素个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -138,7 +138,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zCount命令，获取有序集合在 (minScore, maxScore]区间范围内的成员数量
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -148,7 +148,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zCount命令，获取有序集合在 (minScore, maxScore]区间范围内的成员数量。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -159,7 +159,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRange命令，以score值升序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -169,7 +169,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRange命令，以score值升序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -180,7 +180,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRange命令，以score值升序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -191,7 +191,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRange命令，以score值升序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -203,7 +203,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRange命令，以score值升序的方式获取集合内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -213,7 +213,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRange命令，以score值升序的方式获取集合内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -222,7 +222,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRange命令，以score值升序的方式获取集合内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -233,7 +233,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRange命令，以score值升序的方式获取集合内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -243,7 +243,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -253,7 +253,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -264,7 +264,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -275,7 +275,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -287,7 +287,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -298,7 +298,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -310,7 +310,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -322,7 +322,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -335,7 +335,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -345,7 +345,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -356,7 +356,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -368,7 +368,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -380,7 +380,7 @@ public interface RedisSortedSetCommands {
 			
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -391,7 +391,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRangeByScore命令，按score升序方式获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -403,7 +403,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -414,7 +414,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRangeByScore命令，按score升序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -427,7 +427,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -437,7 +437,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -448,7 +448,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -459,7 +459,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRevRange命令，以score值降序的方式获取集合下标区间范围内的所有元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -471,7 +471,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -479,7 +479,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRevRange命令，以score值降序的方式获取集合内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -488,7 +488,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRevRange命令，按score值降序的方式获取集合内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -497,7 +497,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRevRange命令，按score值降序的方式获取集合内所有指定类型的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -507,7 +507,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRevRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -517,7 +517,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRevRangeByScore命令，按score降序的方式获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -528,7 +528,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRevRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -539,7 +539,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRevRangeByScore命令，按score降序的方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -551,7 +551,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRevRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -562,7 +562,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRevRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -574,7 +574,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRevRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -586,7 +586,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRevRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定类型的元素值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -599,7 +599,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -609,7 +609,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -620,7 +620,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -632,7 +632,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -644,7 +644,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -655,7 +655,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRangeByScore命令，按score降序方式获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -667,7 +667,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -678,7 +678,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRangeByScore命令，按score降序方式限制获取有序集合在[minScore, maxScore]区间范围内所有指定值类型的元组集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -691,7 +691,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRank命令，获取有序键集中指定成员按score升序排列后的下标值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @return
@@ -700,7 +700,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRank命令，获取有序键集中指定成员按score升序排列后的下标值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -710,7 +710,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRevRank命令，获取有序键集中指定成员按score降序排列后的下标值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @return
@@ -719,7 +719,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRevRank命令，获取有序键集中指定成员按score降序排列后的下标值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -729,7 +729,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRem命令，删除指定键集中的成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @return
@@ -738,7 +738,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRem命令，删除指定键集中的成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -748,7 +748,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRem命令，删除指定键集中的多个成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @return
@@ -757,7 +757,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRem命令，删除指定键集中的多个成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -767,7 +767,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRem命令，删除指定键集中的多个成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param members
 	 * @return
@@ -776,7 +776,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRem命令，删除指定键集中的多个成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param members
@@ -786,7 +786,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRem命令，删除指定键集中的所有成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -794,7 +794,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRem命令，删除指定键集中的所有成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -803,7 +803,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRemRangeByRank命令，删除指定下标范围内所有升序排列后的成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param begin
 	 * @param end
@@ -813,7 +813,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRemRangeByRank命令，删除指定下标范围内所有升序排列后的成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param begin
@@ -824,7 +824,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zRemRangeByScore命令，删除指定排名范围内的所有成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param minScore
 	 * @param maxScore
@@ -834,7 +834,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zRemRangeByRank命令，删除指定排名范围内的所有成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param minScore
@@ -845,7 +845,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zScore命令，获取有序键集中指定成员的score值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param member
 	 * @return
@@ -854,7 +854,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zScore命令，获取有序键集中指定成员的score值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param member
@@ -865,7 +865,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zUnionStore命令，将单个键的并集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param key
 	 * @return
@@ -875,7 +875,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zUnionStore命令，将单个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param key
 	 * @param expireSeconds
@@ -886,7 +886,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zUnionStore命令，将单个键的并集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param key
@@ -897,7 +897,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当指定库中执行zUnionStore命令，将单个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param key
@@ -909,7 +909,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @return
@@ -919,7 +919,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
@@ -930,7 +930,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -940,7 +940,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -952,7 +952,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @return
@@ -962,7 +962,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
@@ -973,7 +973,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -984,7 +984,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -996,7 +996,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param option
@@ -1007,7 +1007,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param option
@@ -1019,7 +1019,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1031,7 +1031,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1044,7 +1044,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param option
@@ -1055,7 +1055,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param option
@@ -1067,7 +1067,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1079,7 +1079,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zUnionStore命令，将多个键的并集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1092,7 +1092,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zInterStore命令，将单个键的交集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param srcKey
 	 * @return
@@ -1102,7 +1102,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zInterStore命令，将单个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param srcKey
 	 * @param expireSeconds
@@ -1113,7 +1113,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zInterStore命令，将单个键的交集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param srcKey
@@ -1124,7 +1124,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zInterStore命令，将单个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param srcKey
@@ -1136,7 +1136,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @return
@@ -1146,7 +1146,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
@@ -1157,7 +1157,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1168,7 +1168,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1180,7 +1180,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @return
@@ -1190,7 +1190,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param expireSeconds
@@ -1201,7 +1201,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1212,7 +1212,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1224,7 +1224,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param option
@@ -1235,7 +1235,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param option
@@ -1247,7 +1247,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1259,7 +1259,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1272,7 +1272,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param option
@@ -1283,7 +1283,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在当前库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param destKey
 	 * @param keys
 	 * @param option
@@ -1295,7 +1295,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1307,7 +1307,7 @@ public interface RedisSortedSetCommands {
 	/**
 	 * 在指定库中执行zInterStore命令，将多个键的交集存入到目标键中，并设置过期秒数后返回存入的个数返回存入的个数</P>
 	 * 注意：此命令执行成功后，目标键中原有的值将全部会被覆盖掉
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param destKey
 	 * @param keys
@@ -1319,7 +1319,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zIncrBy命令，为指定键集成员的socre值加上(increment>0)/减去(increment<0)增量
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param increment
 	 * @param member
@@ -1329,7 +1329,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zIncrBy命令，为指定键集成员的socre值加上(increment>0)/减去(increment<0)增量
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param increment
@@ -1340,7 +1340,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zScan命令，以增量迭代的方式获取所有的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -1348,7 +1348,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zScan命令，以增量迭代的方式获取所有指定类型的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param valueType
 	 * @return
@@ -1357,7 +1357,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @return
@@ -1366,7 +1366,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @param valueType
@@ -1376,7 +1376,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zScan命令，以增量迭代的方式获取所有的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param option
 	 * @return
@@ -1385,7 +1385,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zScan命令，以增量迭代的方式获取所有指定类型的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param option
 	 * @param valueType
@@ -1395,7 +1395,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @param option
@@ -1405,7 +1405,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在当前库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param cursorId
 	 * @param option
@@ -1416,7 +1416,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zScan命令，以增量迭代的方式获取所有的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @return
@@ -1425,7 +1425,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zScan命令，以增量迭代的方式获取所有指定类型的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param valueType
@@ -1435,7 +1435,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -1445,7 +1445,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -1456,7 +1456,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zScan命令，以增量迭代的方式获取所有的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param option
@@ -1466,7 +1466,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zScan命令，以增量迭代的方式获取所有指定类型的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param option
@@ -1477,7 +1477,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId
@@ -1488,7 +1488,7 @@ public interface RedisSortedSetCommands {
 	
 	/**
 	 * 在指定库中执行zScan命令，从指定的游标处开始，以增量迭代的方式获取所有指定类型的有序成员
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dbName
 	 * @param key
 	 * @param cursorId

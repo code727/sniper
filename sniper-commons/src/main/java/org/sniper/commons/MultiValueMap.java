@@ -24,14 +24,14 @@ import java.util.Map;
 
 /**
  * 多值Map接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface MultiValueMap<K, V> extends Map<K, List<V>>, Serializable, Cloneable {
 	
 	/**
 	 * 获取指定键对应的值的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -39,7 +39,7 @@ public interface MultiValueMap<K, V> extends Map<K, List<V>>, Serializable, Clon
 	
 	/**
 	 * 获取指定键对应的值是否为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -47,7 +47,7 @@ public interface MultiValueMap<K, V> extends Map<K, List<V>>, Serializable, Clon
 	
 	/**
 	 * 获取指定键对应的值是否不为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -55,7 +55,7 @@ public interface MultiValueMap<K, V> extends Map<K, List<V>>, Serializable, Clon
 	
 	/**
 	 * 获取指定键对应的第一个值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -63,7 +63,7 @@ public interface MultiValueMap<K, V> extends Map<K, List<V>>, Serializable, Clon
 	
 	/**
 	 * 获取指定键对应的最后一个键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public interface MultiValueMap<K, V> extends Map<K, List<V>>, Serializable, Clon
 
 	/**
 	 * 添加键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 */
@@ -79,14 +79,14 @@ public interface MultiValueMap<K, V> extends Map<K, List<V>>, Serializable, Clon
 	
 	/**
 	 * 添加多个键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param values
 	 */
 	public void add(Map<K, V> values);
 
 	/**
 	 * 覆盖设置键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param value
 	 */
@@ -94,14 +94,14 @@ public interface MultiValueMap<K, V> extends Map<K, List<V>>, Serializable, Clon
 
 	/**
 	 * 覆盖设置多个键值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param values
 	 */
 	public void set(Map<K, V> values);
 
 	/**
 	 * 转换成普通的Map对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<K, V> toSingleValueMap();

@@ -31,7 +31,7 @@ import org.sniper.web.WebUtils;
 
 /**
  * javax.servlet.ServletRequest对象与Java Bean对象之间的映射转换
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ServletRequestToBeanMapper extends AbstractBeanMapper<ServletRequest> {

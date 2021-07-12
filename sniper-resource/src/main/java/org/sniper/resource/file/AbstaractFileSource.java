@@ -26,7 +26,7 @@ import org.sniper.commons.util.IOUtils;
 
 /**
  * 文件资源抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstaractFileSource<T> implements FileSource<T> {
@@ -85,7 +85,7 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	 * 根据输入流对象创建相关的内容字节数组：</P>
 	 * 1.如果delayedReading参数为true，则创建时不及时读取输入流的内容</P>
 	 * 2.如果delayedReading参数为false，则创建时及时读取输入流的内容。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param file
 	 * @param input
 	 * @param delayedReading
@@ -108,7 +108,7 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	 * 获取文件源的字节数组：</P>
 	 * 1.如果delayedReading为true，则获取之前要先将文件内容读取到字节数组中；</P>
 	 * 2.如果delayedReading为false，则说明在创建文件资源时已经将文件内容读取到字节数组中，直接返回即可。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 * @throws IOException
 	 */
@@ -163,7 +163,7 @@ public abstract class AbstaractFileSource<T> implements FileSource<T> {
 	
 	/**
 	 * 文件条目实现类
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author  Daniele
 	 * @version 1.0
 	 */
 	protected class FileEntry {

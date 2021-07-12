@@ -29,7 +29,7 @@ import java.util.Set;
 
 /**
  * 反射工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ReflectionUtils {
@@ -47,7 +47,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取对象内所有公有的构造方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -57,7 +57,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取对象内所有已声明的构造方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -67,7 +67,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取对象内公有的无参构造方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -77,7 +77,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 根据参数类型获取对象内公有的构造方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param pTypes
 	 * @return
@@ -88,7 +88,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取对象内已声明的无参构造方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -98,7 +98,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 根据参数类型获取对象内已声明的构造方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param pTypes 构造函数中各参数对应的类型
 	 * @return
@@ -109,7 +109,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 判断对象中是否存在无参公有构造方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -119,7 +119,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 判断对象中是否存在指定参数类型的公有构造方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param pTypes
 	 * @return
@@ -130,7 +130,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 判断对象中是否存在无参构造方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -140,7 +140,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 判断对象中是否存在指定参数类型的构造方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param pTypes
 	 * @return
@@ -151,7 +151,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取对象内所有公有的方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -161,7 +161,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取对象内所有已声明的方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -171,7 +171,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取对象内所有公有的方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -181,7 +181,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取对象内所有已声明的方法名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -191,7 +191,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 根据名称获取对象内公有的无参方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param methodName 方法名称
 	 * @return
@@ -202,7 +202,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 根据名称和参数类型获取对象内公有的方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param methodName 方法名称
 	 * @param pTypes 方法中各参数对应的类型
@@ -214,7 +214,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 根据名称获取对象内已声明的无参方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param methodName 方法名称
 	 * @return
@@ -225,7 +225,7 @@ public class ReflectionUtils {
 		
 	/**
 	 * 根据名称和参数类型获取对象内已声明的方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param methodName 方法名称
 	 * @param pTypes 方法中各参数对应的类型
@@ -237,7 +237,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 判断对象中是否存在指定名称的无参公有方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param methodName
 	 * @return
@@ -248,7 +248,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 判断对象中是否存在指定名称和参数类型的公有方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param methodName
 	 * @param pTypes
@@ -260,7 +260,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 判断对象中是否存在指定名称的无参方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param methodName
 	 * @return
@@ -271,7 +271,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 判断对象中是否存在指定名称和参数类型的方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param methodName 方法名称
 	 * @param pTypes 方法中各参数对应的类型
@@ -283,7 +283,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取对象内所有公有的域
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -293,7 +293,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取对象内所有已声明的域
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -303,7 +303,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取对象内所有公有的域名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -313,7 +313,7 @@ public class ReflectionUtils {
 		
 	/**
 	 * 获取对象内所有已声明的域名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -323,7 +323,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 根据名称获取对象内公有的域
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param fieldName
 	 * @return
@@ -334,7 +334,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 根据名称获取对象内已声明的域
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param fieldName
 	 * @return
@@ -345,7 +345,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 判断对象中是否存在指定名称的公有域
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param fieldName
 	 * @return
@@ -356,7 +356,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 判断对象中是否存在指定名称的无参方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param fieldName
 	 * @return
@@ -367,7 +367,7 @@ public class ReflectionUtils {
 		
 	/**
 	 * 获取指定对象某个域的类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param fieldName
 	 * @return
@@ -379,7 +379,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取指定对象某个域的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param fieldName
 	 * @return
@@ -395,7 +395,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取当前对象某个属性的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param field
 	 * @return
@@ -410,7 +410,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 设置当前对象的某个属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param target
 	 * @param fieldName
 	 * @param value
@@ -426,7 +426,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 设置当前对象的某个属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param field
 	 * @param value
@@ -441,7 +441,7 @@ public class ReflectionUtils {
 	
 	/** 
 	 * 批量设置指定对象的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param fieldValues
 	 * @throws Exception 
@@ -457,7 +457,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 根据全限定名对应类的默认构造函数创建实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param className
 	 * @return
 	 * @throws Exception 
@@ -468,7 +468,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 根据全限定名对应类的构造函数创建实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param className
 	 * @param pTypes 构造函数中各参数对应的类型
 	 * @param pValues 构造函数中各参数对应的值
@@ -482,7 +482,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 调用指定类的默认构造函数生成一个实例对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 * @throws Exception 
@@ -496,7 +496,7 @@ public class ReflectionUtils {
 	 * 1.方法中不能有参数</P>
 	 * 2.方法必须有返回</P>
 	 * 3.方法名称必须以"get"开头且长度大于3或以"is"开头且长度大于2</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 * @return
 	 */
@@ -515,7 +515,7 @@ public class ReflectionUtils {
 	 * 1.方法中有且只有一个参数</P>
 	 * 2.方法名称必须以"set"开头且长度大于3</P>
 	 * 注意：Setter方法是否有返回这里不做要求</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 * @return
 	 */
@@ -529,7 +529,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 调用指定类的构造函数生成一个该类的实例对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @param pTypes 构造函数中各参数对应的类型
 	 * @param pValues 构造函数中各参数对应的值
@@ -547,7 +547,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 调用目标对象无参方法后返回执行结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param target 目标对象
 	 * @param methodName 方法名称
 	 * @return
@@ -559,7 +559,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 调用目标对象方法后返回执行结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param target 目标对象
 	 * @param methodName 方法名称
 	 * @param pTypes 方法中各参数对应的类型
@@ -579,7 +579,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 调用目标对象无参方法后返回执行结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param target
 	 * @param method
 	 * @return
@@ -591,7 +591,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 调用目标对象方法后返回执行结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param target
 	 * @param method
 	 * @param pTypes
@@ -608,7 +608,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 获取指定对象某个被强制设置为可访问的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param field
 	 * @return
@@ -624,7 +624,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 设置指定对象某个被强制设置为可访问的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param field
 	 * @param value
@@ -639,7 +639,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 调用目标对象某个被强制设置为可访问的方法后返回调用结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param target
 	 * @param method
 	 * @param pTypes
@@ -671,7 +671,7 @@ public class ReflectionUtils {
 	 * 选择性获取对象内的构造方法列表</P>
 	 * 1.declared==true，获取所有已声明的构造方法</P>
 	 * 2.declared==false，只获取所有公有的构造方法</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param declared
 	 * @return
@@ -699,7 +699,7 @@ public class ReflectionUtils {
 	 * 根据参数类型选择性获取对象内的构造方法</P>
 	 * 1.declared==true，获取已声明的构造方法</P>
 	 * 2.declared==false，只获取公有的构造方法</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param pTypes
 	 * @param declared
@@ -721,7 +721,7 @@ public class ReflectionUtils {
 	 * 选择性获取对象内的方法列表</P>
 	 * 1.declared==true，获取所有已声明的方法</P>
 	 * 2.declared==false，只获取所有公有的方法</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param declared
 	 * @return
@@ -757,7 +757,7 @@ public class ReflectionUtils {
 	 * 选择性获取对象内的方法名称列表</P>
 	 * 1.declared==true，获取所有已声明的方法名称</P>
 	 * 2.declared==false，只获取所有公有的方法名称</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param declared
 	 * @return
@@ -799,7 +799,7 @@ public class ReflectionUtils {
 	 * 根据名称和参数类型选择性获取对象内的方法</P>
 	 * 1.declared==true，获取已声明的方法</P>
 	 * 2.declared==false，只获取公有的方法</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param methodName
 	 * @param pTypes
@@ -836,7 +836,7 @@ public class ReflectionUtils {
 	 * 选择性获取对象内的域列表</P>
 	 * 1.declared==true，获取已声明的域</P>
 	 * 2.declared==false，只获取公有的域</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param declared
 	 * @return
@@ -872,7 +872,7 @@ public class ReflectionUtils {
 	 * 选择性获取对象内的域名称列表</P>
 	 * 1.declared==true，获取已声明的域名称</P>
 	 * 2.declared==false，只获取公有的域名称</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param declared
 	 * @return
@@ -914,7 +914,7 @@ public class ReflectionUtils {
 	 * 根据名称选择性获取对象内的域</P>
 	 * 1.declared==true，获取已声明的域</P>
 	 * 2.declared==false，只获取公有的域</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param fieldName
 	 * @param declared
@@ -948,7 +948,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 根据指定对象和域名称抛出NoSuchFieldException
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param fieldName
 	 * @throws NoSuchFieldException
@@ -960,7 +960,7 @@ public class ReflectionUtils {
 	
 	/**
 	 * 根据指定对象、方法名称和参数类型抛出NoSuchMethodException
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param methodName
 	 * @param pTypes

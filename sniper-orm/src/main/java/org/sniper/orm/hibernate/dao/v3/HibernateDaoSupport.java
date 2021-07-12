@@ -27,7 +27,7 @@ import org.sniper.orm.hibernate.HibernateUtils;
 
 /**
  * Hibernate3 DAO支持抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class HibernateDaoSupport<T> extends
@@ -55,7 +55,7 @@ public abstract class HibernateDaoSupport<T> extends
 	
 	/**
 	 * 打开一个新会话
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Session openSession() {
@@ -64,7 +64,7 @@ public abstract class HibernateDaoSupport<T> extends
 	
 	/**
 	 * 获取当前会话
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Session getCurrentSession() {
@@ -73,7 +73,7 @@ public abstract class HibernateDaoSupport<T> extends
 	
 	/**
 	 * 获取当前实体类型对应的元数据对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityClass
 	 * @return
 	 */
@@ -83,7 +83,7 @@ public abstract class HibernateDaoSupport<T> extends
 	
 	/**
 	 * 获取当前实体类型对应的名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityClass
 	 * @return
 	 */
@@ -93,7 +93,7 @@ public abstract class HibernateDaoSupport<T> extends
 	
 	/**
 	 * 获取当前实体类型对应的表名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param entityClass
 	 * @return
 	 */
@@ -103,7 +103,7 @@ public abstract class HibernateDaoSupport<T> extends
 			
 	/**
 	 * 获取当前实体类型对应的ID属性名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param clazz
 	 * @return
 	 */

@@ -30,7 +30,7 @@ import org.sniper.support.counter.IntervalCounter;
 
 /**
  * 基于计数器的缓存序列生成器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Object, IntervalCounter<Long>, Long> {
@@ -132,7 +132,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 	 * 优点：由于趋势序列生成的种子计数不会受消费方影响，因此这种方式在宕机和重启恢复的情况下，比方式1造成的丢失范围要小。另外可以很方便的根据趋势序列生成的种子计数和cacheStepSize推算出缓存批次。</P>
 	 * 缺点：可能会使本地缓存的计数器失效， 例如：消费方如果每次要求生成的个数都大于cacheStepSize，则每次在返回结果之前，都会使计数器更新区间初始值和步长，性能将急剧下降。
 	 * 极端情况当cacheStepSize=1或cacheStepSize=count时，缓存的计数器实际上并不能进行累加操作，这会导致缓存失去意义。</P>
-	 * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author  Daniele
 	 * @version 1.0
 	 */
 	protected abstract class AbstractCacheableCounter {
@@ -145,7 +145,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		
 		/**
 		 * 缓存并累加出一个结果
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param key
 		 * @return
 		 */
@@ -162,7 +162,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		
 		/**
 		 * 更新计数器并累加出一个结果
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param counter
 		 * @param key
 		 * @return
@@ -180,7 +180,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		
 		/**
 		 * 缓存计数器并批量累加出count个结果
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param key
 		 * @param count
 		 * @return
@@ -200,7 +200,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		 * 更新计数器并批量累加出结果。当计数器的剩余个数小于批量个数(counterRemain<count)时被调用，其实现方式如下：</P>
 		 * 1.如果counterRemain==0，表明计数器已经没有剩余元素了，更新计数器后累加出count个结果；</P>
 		 * 2.如果counterRemain!=0，表明计数器还剩余有元素未出列，累加出包括剩余的counterRemain个元素在内的count(总计)个结果。</P>
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param counter
 		 * @param key
 		 * @param counterRemain
@@ -247,7 +247,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		
 		/**
 		 * 从计数器中出列count个结果
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param counter
 		 * @param count
 		 * @return
@@ -263,7 +263,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		
 		/**
 		 * 根据键创建计数器
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param key
 		 * @return
 		 */
@@ -274,7 +274,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		
 		/**
 		 * 根据键和生成个数创建计数器
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param key
 		 * @param count
 		 * @return
@@ -286,7 +286,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		
 		/**
 		 * 根据键计算出计数器的起始值
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param key
 		 * @return
 		 */
@@ -298,7 +298,7 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 		
 		/**
 		 * 根据键和生成的个数，计算出计数器的起始值
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param key
 		 * @param count
 		 * @return
@@ -311,14 +311,14 @@ public class CounterCacheSequenceGenerator extends AbstractCacheableGenerator<Ob
 				
 		/**
 		 * 计算出计数器的步长
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @return
 		 */
 		protected abstract int calculateStepSize();
 		
 		/**
 		 * 根据生成个数计算出计数器的步长
-		 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+		 * @author Daniele 
 		 * @param count
 		 * @return
 		 */

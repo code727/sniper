@@ -41,7 +41,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MappedHttpSenderTest extends JUnit4SpringContextTestCase {

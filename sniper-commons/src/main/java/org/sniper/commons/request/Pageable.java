@@ -20,7 +20,7 @@ package org.sniper.commons.request;
 
 /**
  * 可分页的接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Pageable {
@@ -33,28 +33,28 @@ public interface Pageable {
 	
 	/**
 	 * 获取每页条数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getPageSize();
 	
 	/**
 	 * 设置每页条数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pageSize
 	 */
 	public void setPageSize(int pageSize);
 	
 	/**
 	 * 获取当前页数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getCurrentPage();
 	
 	/**
 	 * 设置当前页数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param currentPage
 	 */
 	public void setCurrentPage(int currentPage);

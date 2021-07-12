@@ -29,7 +29,7 @@ import org.sniper.templet.message.formatter.AdaptiveMessageFormatter;
 
 /**
  * 自适应URL格式化处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class AdaptiveURLFormatter extends AdaptiveMessageFormatter {

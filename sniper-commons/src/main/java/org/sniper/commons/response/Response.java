@@ -22,7 +22,7 @@ import org.sniper.commons.constant.status.ResponseStatus;
 
 /**
  * 响应对象
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class Response<T> extends AbstractDatamationResponse<Integer, T> {
@@ -65,7 +65,7 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	
 	/**
 	 * 判断是否为success码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param code
 	 * @return
 	 */
@@ -76,7 +76,7 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 		
 	/**
 	 * 判断是否为error码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param code
 	 * @return
 	 */

@@ -22,21 +22,21 @@ import java.io.Serializable;
 
 /**
  * 常量接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Constant<K, V> extends Serializable {
 	
 	/**
 	 * 获取键
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public K getKey();
 		
 	/**
 	 * 获取值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public V getValue();

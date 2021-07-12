@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 /**
  * SpringMVC控制器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractController implements WebMessageResolver, ServletAware {
@@ -116,7 +116,7 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	
 	/**
 	 * 设置消息响应对象中的本地化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 */
 	protected void setLocaleMessage(MessagingResponse<?> response) {
@@ -125,7 +125,7 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	
 	/**
 	 * 设置消息响应对象中的本地参数化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 * @param param
 	 */
@@ -138,7 +138,7 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	
 	/**
 	 * 设置消息响应对象中的本地参数化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 * @param params
 	 */
@@ -151,7 +151,7 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	
 	/**
 	 * 设置响应对象中的本地消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 */
 	protected void setLocaleMessage(GenericResponse<?> response) {
@@ -160,7 +160,7 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	
 	/**
 	 * 设置响应对象中的本地参数化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 * @param param
 	 */
@@ -172,7 +172,7 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	
 	/**
 	 * 设置响应对象中的本地参数化消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param response
 	 * @param params
 	 */
@@ -184,7 +184,7 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	
 	/**
 	 * 在绑定表单之前，统一的进行初始化绑定操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param binder
 	 * @throws Exception
@@ -199,7 +199,7 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	
 	/**
 	 * 覆盖默认的初始化绑定操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param binder
 	 */

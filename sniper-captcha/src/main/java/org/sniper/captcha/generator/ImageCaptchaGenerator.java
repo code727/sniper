@@ -23,7 +23,7 @@ import org.sniper.image.layout.CaptchaLayout;
 
 /**
  * 图片验证码生成器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ImageCaptchaGenerator extends CaptchaGenerator {
@@ -42,21 +42,21 @@ public interface ImageCaptchaGenerator extends CaptchaGenerator {
 	
 	/**
 	 * 获取图片验证码布局
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public CaptchaLayout getLayout();
 	
 	/**
 	 * 设置图片验证码布局
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param layout
 	 */
 	public void setLayout(CaptchaLayout layout);
 		
 	/**
 	 * 创建图片验证码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public ImageCaptcha create();

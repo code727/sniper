@@ -23,7 +23,7 @@ import org.sniper.security.service.AuthorizationService;
 
 /**
  * 授权处理适配器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class AuthorizationHandlerAdapter implements AuthorizationHandler {

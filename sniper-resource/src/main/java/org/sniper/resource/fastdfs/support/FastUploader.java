@@ -25,14 +25,14 @@ import org.sniper.resource.fastdfs.file.FastFileSource;
 
 /**
  * FastDFS文件上传器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FastUploader {
 	
 	/**
 	 * 上传文件资源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @return
 	 */
@@ -40,7 +40,7 @@ public interface FastUploader {
 	
 	/**
 	 * 上传文件资源到指定组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param groupName
 	 * @param source
 	 * @return
@@ -49,7 +49,7 @@ public interface FastUploader {
 		
 	/**
 	 * 批量上传文件资源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sources
 	 * @return 上传结果列表
 	 */
@@ -57,7 +57,7 @@ public interface FastUploader {
 	
 	/**
 	 * 批量上传文件资源到指定组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param groupName
 	 * @param sources
 	 * @return

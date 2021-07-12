@@ -24,7 +24,7 @@ import org.sniper.context.DataSourceHolder;
 
 /**
  * 多路由RedisConnectionFactory实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class RedisMultipleConnectionFactory extends AbstractRoutingConnectionFactory {

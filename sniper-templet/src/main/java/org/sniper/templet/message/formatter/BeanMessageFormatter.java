@@ -27,7 +27,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * Java Bean对象消息格式化处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class BeanMessageFormatter extends PlaceholderMessageFormatter<Object> {

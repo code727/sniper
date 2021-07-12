@@ -25,7 +25,7 @@ import org.sniper.commons.util.CollectionUtils;
 
 /**
  * 本地文件过滤器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractFileFilter implements FileExtensionFilter {
@@ -79,7 +79,7 @@ public abstract class AbstractFileFilter implements FileExtensionFilter {
 	
 	/**
 	 * 过滤下级文件/目录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param file
 	 */
 	private void doFileter(File file) {

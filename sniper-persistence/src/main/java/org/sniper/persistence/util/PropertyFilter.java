@@ -23,7 +23,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 持久化实体属性过滤器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class PropertyFilter implements PersistencePropertyFilter {

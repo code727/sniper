@@ -32,7 +32,7 @@ import org.sniper.commons.exception.NoSuchAnnotatedSetterException;
 
 /**
  * 注解工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class AnnotationUtils {
@@ -43,7 +43,7 @@ public class AnnotationUtils {
 	 * 判断当前对象是否已被注解。</P>
 	 * 1.此方法的实现原理为：在当前对象类型的层次结构中获取注解组，直到在某一层次中获取到的注解组不为空时，表明当前对象已被注解。</P>
 	 * 2.即使当前对象的父类所使用的注解没有用@Inherited标注为"可继承"时，调用此方法仍然可得出"当前对象已被父类注解所标识"的结论</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -66,7 +66,7 @@ public class AnnotationUtils {
 	 * 判断当前对象是否已被指定的注解所标识。</P>
 	 * 1.此方法的实现原理为：在当前对象类型的层次结构中获取指定的注解，直到在某一层次中获取到的注解不为空时，表明当前对象已被指定的注解所标识。</P>
 	 * 2.即使当前对象的父类所使用的注解没有用@Inherited标注为"可继承"时，调用此方法仍然可得出"当前对象已被父类注解所标识"的结论</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -88,7 +88,7 @@ public class AnnotationUtils {
 	
 	/**
 	 * 判断域对象是否已被注解
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param field
 	 * @return
 	 */
@@ -98,7 +98,7 @@ public class AnnotationUtils {
 	
 	/**
 	 * 判断域对象是否已被指定的注解所标识
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param field
 	 * @param annotationClass
 	 * @return
@@ -112,7 +112,7 @@ public class AnnotationUtils {
 	
 	/**
 	 * 判断方法对象是否已被注解
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 * @return
 	 */
@@ -122,7 +122,7 @@ public class AnnotationUtils {
 	
 	/**
 	 * 判断方法对象是否已被指定的注解所标识
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 * @param annotationClass
 	 * @return
@@ -138,7 +138,7 @@ public class AnnotationUtils {
 	 * 获取当前对象类型上被标识的注解。</P>
 	 * 1.此方法的实现原理为：在当前对象类型的层次结构中获取注解，直到父类不为空或不为顶级类型(Object)为止。</P>
 	 * 2.即使当前对象的父类所使用的注解没有用@Inherited标注为"可继承"时，调用此方法仍然可得到这个注解，是对原生getDeclaredAnnotations方法的扩展实现</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -164,7 +164,7 @@ public class AnnotationUtils {
 	 * 获取当前对象类型上被指定标识的注解。</P>
 	 * 1.此方法的实现原理为：在当前对象类型的层次结构中获取注解，直到获取到指定标识、父类不为空或不为顶级类型(Object)为止。</P>
 	 * 2.即使当前对象的父类所使用的注解没有用@Inherited标注为"可继承"时，调用此方法仍然可得到这个注解，是对原生getAnnotation方法的扩展实现</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -187,7 +187,7 @@ public class AnnotationUtils {
 	
 	/**
 	 * 获取对象内被注解的所有域
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -215,7 +215,7 @@ public class AnnotationUtils {
 	
 	/**
 	 * 获取对象内被指定注解标识的所有域
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -246,7 +246,7 @@ public class AnnotationUtils {
 	 * 获取对象内被指定注解标识的域</P>
 	 * 注意：由于内部实现使用的getDeclaredFields方法并不一定是按照声明的顺序返回的。
 	 * 当同一个注解作用在当前对象的多个域上时，此方法多次执行后并不能保证每次返回的都是同一个域对象</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 */
@@ -276,7 +276,7 @@ public class AnnotationUtils {
 	 * 获取对象内被指定注解标识的域名称和相应的值</P>
 	 * 注意：由于内部实现使用的getAnnotatedField方法结果的不确定性，
 	 * 当同一个annotation作用在当前对象的多个域上时，此方法并不能保证每次获取到的值都来自于同一个目标域</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -295,7 +295,7 @@ public class AnnotationUtils {
 	 * 设置对象内被指定注解标识的域值后返回被设置的域对象</P>
 	 * 注意：由于内部实现使用的getAnnotatedField方法结果的不确定性，
 	 * 当同一个annotation作用在当前对象的多个域上时，此方法并不能保证每次被设置的域都是同一个</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @param value
@@ -313,7 +313,7 @@ public class AnnotationUtils {
 	
 	/**
 	 * 获取对象内被注解标识的所有方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -341,7 +341,7 @@ public class AnnotationUtils {
 			
 	/**
 	 * 获取对象内被指定注解标识的所有方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -372,7 +372,7 @@ public class AnnotationUtils {
 	 * 获取对象内被指定注解标识的方法</P>
 	 * 注意：由于内部实现使用的getDeclaredMethods方法并不一定是按照声明的顺序返回的。
 	 * 当同一个注解作用在当前对象的多个方法上时，此方法多次执行后并不能保证每次返回的都是同一个方法对象</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -401,7 +401,7 @@ public class AnnotationUtils {
 	
 	/**
 	 * 查找对象内被指定注解标识的所有getter方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -432,7 +432,7 @@ public class AnnotationUtils {
 	 * 查找对象内被指定注解标识的getter方法</P>
 	 * 注意：由于内部实现使用的getDeclaredMethods方法并不一定是按照声明的顺序返回的。
 	 * 当同一个注解作用在当前对象的多个方法上时，此方法多次执行后并不能保证每次返回的都是同一个方法对象</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -460,7 +460,7 @@ public class AnnotationUtils {
 		
 	/**
 	 * 查找对象内被指定注解标识的所有setter方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -491,7 +491,7 @@ public class AnnotationUtils {
 	 * 查找对象内被指定注解标识的setter方法</P>
 	 * 注意：由于内部实现使用的getDeclaredMethods方法并不一定是按照声明的顺序返回的。
 	 * 当同一个注解作用在当前对象的多个方法上时，此方法多次执行后并不能保证每次返回的都是同一个方法对象</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -521,7 +521,7 @@ public class AnnotationUtils {
 	 * 调用对象内被指定注解标识的无参方法后返回被调方法名称和执行结果</P>
 	 * 注意：由于内部实现使用的getAnnotatedMethod方法结果的不确定性，
 	 * 当同一个annotation作用在当前对象的多个方法上时，此方法并不能保证每次都调用的是同一个目标方法。</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -535,7 +535,7 @@ public class AnnotationUtils {
 	 * 调用对象内被指定注解标识的方法后返回被调方法名称和执行结果</P>
 	 * 注意：由于内部实现使用的getAnnotatedMethod方法结果的不确定性，
 	 * 当同一个annotation作用在当前对象的多个方法上时，此方法并不能保证每次都调用的是同一个目标方法</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @param pValues
@@ -557,7 +557,7 @@ public class AnnotationUtils {
 	 * 调用对象内被指定注解标识的getter方法后返回被调方法名称和执行结果</P>
 	 * 注意：由于内部实现使用的findAnnotatedGetter方法结果的不确定性，
 	 * 当同一个annotation作用在当前对象的多个Getter方法上时，此方法并不能保证每次都调用的是同一个目标方法。</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return
@@ -577,7 +577,7 @@ public class AnnotationUtils {
 	 * 调用对象内被指定注解标识的setter方法返回被调方法对象</P>
 	 * 注意：由于内部实现使用的findAnnotatedSetter方法结果的不确定性，
 	 * 当同一个annotation作用在当前对象的多个Setter方法上时，此方法并不能保证每次都调用的是同一个目标方法。</P>
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @param pValue
@@ -594,7 +594,7 @@ public class AnnotationUtils {
 	
 	/**
 	 * 判断是否为一个被指定注解标识的getter方法对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 * @param annotationClass
 	 * @return
@@ -605,7 +605,7 @@ public class AnnotationUtils {
 	
 	/**
 	 * 判断是否为一个被指定注解标识的setter方法对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param method
 	 * @param annotationClass
 	 * @return

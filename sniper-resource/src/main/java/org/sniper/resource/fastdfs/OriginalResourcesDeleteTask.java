@@ -28,7 +28,7 @@
 //
 ///**
 // * FastDFS旧资源清理信息
-// * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+// * @author  Daniele
 // * @version 1.0
 // */
 //public class OriginalResourcesDeleteTask<T> implements Runnable {

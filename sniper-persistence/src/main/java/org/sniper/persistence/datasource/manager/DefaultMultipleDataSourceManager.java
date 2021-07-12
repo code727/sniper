@@ -34,7 +34,7 @@ import org.sniper.spring.beans.CheckableInitializingBeanAdapter;
 
 /**
  * 多数据源管理默认实现类，主要维护模式与多个数据源之间的关系
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultMultipleDataSourceManager extends CheckableInitializingBeanAdapter
@@ -106,7 +106,7 @@ public class DefaultMultipleDataSourceManager extends CheckableInitializingBeanA
 	
 	/**
 	 * 打印初始化log
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	protected void initializeLog(Date start) {
 		StringBuilder message = new StringBuilder();
@@ -119,7 +119,7 @@ public class DefaultMultipleDataSourceManager extends CheckableInitializingBeanA
 	
 	/**
 	 * 根据参数匹配模式后获取对应的数据源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter
 	 * @return
 	 */

@@ -20,14 +20,14 @@ package org.sniper.beans.parameter;
 
 /**
  * 泛型参数工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ParametersUtils {
 	
 	/**
 	 * 判断参数对象是否为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameters
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public class ParametersUtils {
 	
 	/**
 	 * 判断参数对象是否不为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameters
 	 * @return
 	 */

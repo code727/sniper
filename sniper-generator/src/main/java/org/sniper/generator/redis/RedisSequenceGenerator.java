@@ -27,7 +27,7 @@ import org.sniper.generator.keyspace.AbstractKeyspaceGenerator;
  * 基于Redis实现的序列生成器，生成的结果具备的特点：</P>
  * 1.同一个键维度内生成的数字是唯一的；</P>
  * 2.同一个键维度内生成的数字在单节点以及整个分布式环境中都是连续递增的。</P>
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class RedisSequenceGenerator extends AbstractKeyspaceGenerator<Object, Long> {

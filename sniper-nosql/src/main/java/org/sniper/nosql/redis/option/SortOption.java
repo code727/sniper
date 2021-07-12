@@ -27,7 +27,7 @@ import org.sniper.nosql.redis.enums.Order;
 
 /**
  * 排序可选项
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public final class SortOption implements SortOptional {
@@ -148,7 +148,7 @@ public final class SortOption implements SortOptional {
 	
 	/**
 	 * 将字符串选项拼接到builder对象中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param builder
 	 * @param option
 	 */
@@ -163,7 +163,7 @@ public final class SortOption implements SortOptional {
 	
 	/**
 	 * 将BY模式字节数组转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	private String toByString() {
@@ -175,7 +175,7 @@ public final class SortOption implements SortOptional {
 	
 	/**
 	 * 将分段限制转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	private String toLimitString() {
@@ -184,7 +184,7 @@ public final class SortOption implements SortOptional {
 	
 	/**
 	 * 将GET模式字节组转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	private String toGetsString() {
@@ -206,7 +206,7 @@ public final class SortOption implements SortOptional {
 	
 	/**
 	 * 将排序方式转换为字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	private String toOrderString() {
@@ -215,7 +215,7 @@ public final class SortOption implements SortOptional {
 	
 	/**
 	 * 将alpha转换为字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	private String toAlphaString() {
@@ -224,7 +224,7 @@ public final class SortOption implements SortOptional {
 	
 	/**
 	 * 将指定的模式转换成BY模式字节数组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pattern
 	 * @return
 	 */
@@ -234,7 +234,7 @@ public final class SortOption implements SortOptional {
 	
 	/**
 	 * 将指定的多个模式转换成GET模式字节组
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param patterns
 	 * @return
 	 */

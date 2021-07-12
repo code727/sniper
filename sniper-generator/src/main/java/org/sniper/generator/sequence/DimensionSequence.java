@@ -20,14 +20,14 @@ package org.sniper.generator.sequence;
 
 /**
  * 维度序列接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface DimensionSequence<T> {
 		
 	/**
 	 * 更新序列
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public T update();

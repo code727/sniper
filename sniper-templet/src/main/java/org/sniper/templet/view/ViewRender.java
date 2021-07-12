@@ -24,14 +24,14 @@ import java.util.Map;
 
 /**
  * 视图渲染器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ViewRender {
 		
 	/**
 	 * 将数据渲染到指定视图模板后再由写入器输出
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param templetName
 	 * @param context
 	 * @param writer

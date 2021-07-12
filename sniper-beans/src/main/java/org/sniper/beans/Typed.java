@@ -20,21 +20,21 @@ package org.sniper.beans;
 
 /**
  * 类型化接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Typed {
 	
 	/**
 	 * 设置目标类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 */
 	public void setTargetType(Class<?> targetType);
 	
 	/**
 	 * 获取目标类型
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Class<?> getTargetType();

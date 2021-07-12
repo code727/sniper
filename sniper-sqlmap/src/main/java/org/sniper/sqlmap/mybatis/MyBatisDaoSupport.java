@@ -22,16 +22,15 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.FileUtils;
 import org.sniper.commons.util.StringUtils;
-import org.sniper.persistence.sqlmap.SqlMapOperations;
-import org.sniper.persistence.sqlmap.SqlMapUtils;
+import org.sniper.sqlmap.SqlMapOperations;
+import org.sniper.sqlmap.SqlMapUtils;
 
 /**
  * MyBatis DAO支持类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
-public abstract class MyBatisDaoSupport<T> extends SqlSessionDaoSupport
-		implements SqlMapOperations<T> {
+public abstract class MyBatisDaoSupport<T> extends SqlSessionDaoSupport implements SqlMapOperations<T> {
 	
 	/** 当前DAO所关联的实体类型 */
 	private Class<T> targetType;
@@ -86,7 +85,7 @@ public abstract class MyBatisDaoSupport<T> extends SqlSessionDaoSupport
 	
 	/**
 	 * 初始化命名空间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	protected void initNamespace() {
 		if (autoBuildNamespace && StringUtils.isBlank(namespace)) {

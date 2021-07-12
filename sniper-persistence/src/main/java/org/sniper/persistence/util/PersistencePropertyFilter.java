@@ -20,63 +20,63 @@ package org.sniper.persistence.util;
 
 /**
  * 持久化属性过滤器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface PersistencePropertyFilter {
 	
 	/**
 	 * 获取属性名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getName();
 	
 	/**
 	 * 设置属性名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name 属性名
 	 */
 	public void setName(String name);
 	
 	/**
 	 * 获取属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Object getValue();
 	
 	/**
 	 * 设置属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value 属性值
 	 */
 	public void setValue(Object value);
 	
 	/**
 	 * 获取当前属性与值之间的运算符
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Operator getOperator();
 		
 	/**
 	 * 设置当前属性与值之间的运算符
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param operator 运算符枚举
 	 */
 	public void setOperator(Operator operator);
 	
 	/**
 	 * 获取当前属性与下一个属性间的关系谓词
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Predicate getPredicate();
 	
 	/**
 	 * 设置当前属性与下一个属性间的关系谓词
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param predicate 谓词枚举
 	 */
 	public void setPredicate(Predicate predicate);

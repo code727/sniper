@@ -22,14 +22,14 @@ import java.awt.image.BufferedImage;
 
 /**
  * 二维码解析器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface QRCodeParser {
 	
 	/**
 	 * 解析出二维码图片
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param qrCodeImage
 	 * @return
 	 * @throws Exception
@@ -38,7 +38,7 @@ public interface QRCodeParser {
 	
 	/**
 	 * 按指定的字符集编码解析出二维码图片
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param qrCodeImage
 	 * @param encoding
 	 * @return

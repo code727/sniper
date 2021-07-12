@@ -18,9 +18,11 @@
 
 package org.sniper.sqlmap.mybatis.handler.array;
 
+import org.sniper.commons.enums.logic.BooleanEnum;
+
 /**
  * 布尔数组类型处理器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class BooleanArrayTypeHandler extends ArrayTypeHandler<Boolean> {
@@ -30,10 +32,8 @@ public class BooleanArrayTypeHandler extends ArrayTypeHandler<Boolean> {
 		int length = resultArray.length;
 		Boolean[] result = new Boolean[length];
 		
-		String element;
 		for (int i = 0; i < length; i++) {
-			element = resultArray[i];
-			result[i] = ("true".equalsIgnoreCase(element) || "Y".equalsIgnoreCase(element) || "1".equals(element));
+			result[i] = BooleanEnum.parse(resultArray[i]);
 		}
 			
 		return result;

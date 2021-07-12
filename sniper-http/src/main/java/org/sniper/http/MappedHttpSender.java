@@ -23,14 +23,14 @@ import java.util.Map;
 
 /**
  * 已映射的HTTP请求发送器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface MappedHttpSender {
 	
 	/**
 	 * 执行指定名称且未带参数的HTTP表单请求，并返回响应处理结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 * @throws Exception
@@ -39,7 +39,7 @@ public interface MappedHttpSender {
 	
 	/**
 	 * 执行指定名称且带参数的HTTP表单请求，并返回响应处理结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param parameters
 	 * @return
@@ -49,7 +49,7 @@ public interface MappedHttpSender {
 	
 	/**
 	 * 执行指定名称且带参数的HTTP表单请求，并返回响应处理结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param parameter
 	 * @return
@@ -59,7 +59,7 @@ public interface MappedHttpSender {
 	
 	/**
 	 * 执行指定名称且带RequestBody的HTTP表单请求，并返回响应处理结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param requestBody
 	 * @return
@@ -69,7 +69,7 @@ public interface MappedHttpSender {
 	
 	/**
 	 * 执行指定名称且带RequestBody和参数的HTTP表单请求，并返回响应处理结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param requestBody
 	 * @param parameters
@@ -80,7 +80,7 @@ public interface MappedHttpSender {
 	
 	/**
 	 * 执行指定名称且带RequestBody和参数的HTTP表单请求，并返回响应处理结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param requestBody
 	 * @param parameter

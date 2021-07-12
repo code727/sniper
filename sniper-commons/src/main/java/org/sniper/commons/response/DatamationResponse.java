@@ -20,21 +20,21 @@ package org.sniper.commons.response;
 
 /**
  * 数据化响应对象接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface DatamationResponse<C, T> extends GenericResponse<C> {
 	
 	/**
 	 * 获取数据
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public T getData();
 	
 	/**
 	 * 设置数据
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param data
 	 */
 	public void setData(T data);

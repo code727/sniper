@@ -26,7 +26,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 
 /**
  * Spring MongoDB分组接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SpringMongoGroup<T> {
@@ -34,7 +34,7 @@ public interface SpringMongoGroup<T> {
 	/**
 	 * 按指定的方式进行分组<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param groupBy 分组方式
 	 * @return
 	 */
@@ -43,7 +43,7 @@ public interface SpringMongoGroup<T> {
 	/**
 	 * 在目标集合中按指定的方式进行分组<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param groupBy 分组方式
 	 * @return
@@ -53,7 +53,7 @@ public interface SpringMongoGroup<T> {
 	/**
 	 * 按指定的方式进行分组，并以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param groupBy 分组方式
 	 * @param resultClass 分组结果数据类型
 	 * @return
@@ -63,7 +63,7 @@ public interface SpringMongoGroup<T> {
 	/**
 	 * 在目标集合中按指定的方式进行分组，并以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param groupBy 分组方式
 	 * @param resultClass 分组结果数据类型
@@ -74,7 +74,7 @@ public interface SpringMongoGroup<T> {
 	/**
 	 * 根据属性查询出文档后按指定的方式进行分组<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{"propertyKey":propertyValue}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName 属性名
 	 * @param propertyValue 属性值
 	 * @param groupBy 分组方式
@@ -85,7 +85,7 @@ public interface SpringMongoGroup<T> {
 	/**
 	 * 在目标集合中根据属性查询出文档后按指定的方式进行分组<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{"propertyKey":propertyValue}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param propertyName 属性名
 	 * @param propertyValue 属性值
@@ -98,7 +98,7 @@ public interface SpringMongoGroup<T> {
 	/**
 	 * 根据属性查询出文档后按指定的方式进行分组，并以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{"propertyKey":propertyValue}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyName 属性名
 	 * @param propertyValue 属性值
 	 * @param groupBy 分组方式
@@ -112,7 +112,7 @@ public interface SpringMongoGroup<T> {
 	 * 在目标集合中根据属性查询出文档后按指定的方式进行分组，并以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{"$and":[{
 	 * "propertyKey1":propertyValue1,"propertyKey2":propertyValue2,"propertyKeyN":propertyValueN}]}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 * @param collection 目标集合
 	 * @param propertyName 属性名
 	 * @param propertyValue 属性值
@@ -127,7 +127,7 @@ public interface SpringMongoGroup<T> {
 	 * 根据属性组查询出文档后按指定的方式进行分组<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{"$and":[{
 	 * "propertyKey1":propertyValue1,"propertyKey2":propertyValue2,"propertyKeyN":propertyValueN}]}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param properties 属性组
 	 * @param groupBy 分组方式
 	 * @return
@@ -138,7 +138,7 @@ public interface SpringMongoGroup<T> {
 	 * 在目标集合中根据属性组查询出文档后按指定的方式进行分组<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{"$and":[{
 	 * "propertyKey1":propertyValue1,"propertyKey2":propertyValue2,"propertyKeyN":propertyValueN}]}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param properties 属性组
 	 * @param groupBy 分组方式
@@ -151,7 +151,7 @@ public interface SpringMongoGroup<T> {
 	 * 根据属性组查询出文档后按指定的方式进行分组，并以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{"$and":[{
 	 * "propertyKey1":propertyValue1,"propertyKey2":propertyValue2,"propertyKeyN":propertyValueN}]}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param properties 属性组
 	 * @param groupBy 分组方式
 	 * @param resultClass 分组结果数据类型
@@ -164,7 +164,7 @@ public interface SpringMongoGroup<T> {
 	 * 在目标集合中根据属性组查询出文档后按指定的方式进行分组，并以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{"$and":[{
 	 * "propertyKey1":propertyValue1,"propertyKey2":propertyValue2,"propertyKeyN":propertyValueN}]}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param properties 属性组
 	 * @param groupBy 分组方式
@@ -177,7 +177,7 @@ public interface SpringMongoGroup<T> {
 	/**
 	 * 根据条件查询出文档后按指定的方式进行分组<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{criteria}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param criteria 查询条件
 	 * @param groupBy 分组方式
 	 * @return
@@ -187,7 +187,7 @@ public interface SpringMongoGroup<T> {
 	/**
 	 * 在目标集合中根据条件查询出文档后按指定的方式进行分组<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{criteria}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param criteria 查询条件
 	 * @param groupBy 分组方式
@@ -198,7 +198,7 @@ public interface SpringMongoGroup<T> {
 	/**
 	 * 根据条件查询出文档后按指定的方式进行分组，并以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{criteria}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param criteria 查询条件
 	 * @param groupBy 分组方式
 	 * @param resultClass 分组结果数据类型
@@ -209,7 +209,7 @@ public interface SpringMongoGroup<T> {
 	/**
 	 * 在目标集合中根据条件查询出文档后按指定的方式进行分组，并以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.group({groupBy:groupBy,"cond":{criteria}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param criteria 查询条件
 	 * @param groupBy 分组方式

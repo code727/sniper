@@ -27,7 +27,7 @@ import org.sniper.nosql.redis.command.RedisCommands;
 
 /**
  * Redis分布式锁实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class RedisDistributedLock<K> implements KeyspaceLock<K> {

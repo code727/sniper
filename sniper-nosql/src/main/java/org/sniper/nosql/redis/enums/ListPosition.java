@@ -20,7 +20,7 @@ package org.sniper.nosql.redis.enums;
 
 /**
  * 列表位置枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum ListPosition {

@@ -29,7 +29,7 @@ import org.sniper.serialization.json.jackson.fasterxml.FasterxmlJacksonSerialize
 
 /**
  * 消费者监听抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractConsumerListener<K, V> implements ConsumerListener<K, V> {
@@ -66,7 +66,7 @@ public abstract class AbstractConsumerListener<K, V> implements ConsumerListener
 	
 	/**
 	 * 处理接收到的消费结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param consumeResult
 	 */
 	protected abstract void receive(ConsumeResult<K, V> consumeResult);

@@ -23,7 +23,7 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 
 /**
  * 二进制Multipart请求体处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 class BinaryMultipartBodyHandler extends AbstractMultipartBodyHandler {

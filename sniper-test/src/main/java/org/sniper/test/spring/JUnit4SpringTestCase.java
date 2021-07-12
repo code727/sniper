@@ -26,7 +26,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 /**
  * 基于JUnit4的Spring单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class JUnit4SpringTestCase extends AbstractJUnit4SpringContextTests {

@@ -25,28 +25,28 @@ import java.io.Serializable;
 
 /**
  * 图片验证码处理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ImageCaptchaHandler extends CaptchaHandler {
 	
 	/**
 	 * 设置图片格式名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param formatName
 	 */
 	public void setFormatName(String formatName);
 	
 	/**
 	 * 获取图片格式名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getFormatName();
 	
 	/**
 	 * 创建图片验证码，并写入指定的输出对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param id
 	 * @param output
 	 * @return

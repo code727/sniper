@@ -22,7 +22,7 @@ import org.sniper.commons.exception.SniperException;
 
 /**
  * "表单未找到"运行时异常
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class HttpFormNotFoundException extends SniperException {

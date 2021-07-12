@@ -27,7 +27,7 @@ import org.sniper.commons.util.NumberUtils;
 
 /**
  * 日期区间
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DateInterval extends AbstractInterval<Date> {
@@ -192,7 +192,7 @@ public class DateInterval extends AbstractInterval<Date> {
 		
 	/**
 	 * 创建一个左开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param minimal
 	 * @param maximum
 	 * @return
@@ -203,7 +203,7 @@ public class DateInterval extends AbstractInterval<Date> {
 		
 	/**
 	 * 创建一个右开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param minimal
 	 * @param maximum
 	 * @return
@@ -214,7 +214,7 @@ public class DateInterval extends AbstractInterval<Date> {
 		
 	/**
 	 * 创建一个开区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param minimal
 	 * @param maximum
 	 * @return
@@ -225,7 +225,7 @@ public class DateInterval extends AbstractInterval<Date> {
 		
 	/**
 	 * 创建一个左闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param minimal
 	 * @param maximum
 	 * @return
@@ -237,7 +237,7 @@ public class DateInterval extends AbstractInterval<Date> {
 		
 	/**
 	 * 创建一个右闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param minimal
 	 * @param maximum
 	 * @return
@@ -249,7 +249,7 @@ public class DateInterval extends AbstractInterval<Date> {
 		
 	/**
 	 * 创建一个闭合区间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param minimal
 	 * @param maximum
 	 * @return

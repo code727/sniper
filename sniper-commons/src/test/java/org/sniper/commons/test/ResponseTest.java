@@ -27,7 +27,7 @@ import org.sniper.test.junit.BaseTestCase;
 
 /**
  * 响应对象单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ResponseTest extends BaseTestCase {

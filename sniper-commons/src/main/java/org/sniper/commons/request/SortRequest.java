@@ -20,7 +20,7 @@ package org.sniper.commons.request;
 
 /**
  * 排序请求
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SortRequest implements SortableRequest {

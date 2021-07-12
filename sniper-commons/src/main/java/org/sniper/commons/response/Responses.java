@@ -23,7 +23,7 @@ import org.sniper.commons.util.AssertUtils;
 
 /**
  * Response工厂类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public final class Responses {
@@ -32,7 +32,7 @@ public final class Responses {
 	
 	/**
 	 * 构造success响应对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> Response<T> success() {
@@ -41,7 +41,7 @@ public final class Responses {
 	
 	/**
 	 * 构造带数据的success响应对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param data
 	 * @return
 	 */
@@ -51,7 +51,7 @@ public final class Responses {
 		
 	/**
 	 * 构造带自定义消息和数据的success响应对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param message
 	 * @param data
 	 * @return
@@ -62,7 +62,7 @@ public final class Responses {
 		
 	/**
 	 * 构造error响应对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static <T> Response<T> error() {
@@ -71,7 +71,7 @@ public final class Responses {
 	
 	/**
 	 * 构造带数据的error响应对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param data
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public final class Responses {
 	
 	/**
 	 * 构造带消息的自定义error响应对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param errorCode
 	 * @param message
 	 * @return
@@ -92,7 +92,7 @@ public final class Responses {
 	
 	/**
 	 * 构造带自定义消息和数据的error响应对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param message
 	 * @param data
 	 * @return
@@ -103,7 +103,7 @@ public final class Responses {
 	
 	/**
 	 * 构造带消息和数据的自定义error响应对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param errorCode
 	 * @param data
 	 * @return
@@ -116,7 +116,7 @@ public final class Responses {
 	
 	/**
 	 * 根据指定的响应状态构建响应对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param status
 	 * @return
 	 */
@@ -126,7 +126,7 @@ public final class Responses {
 	
 	/**
 	 * 根据指定的响应状态构建带数据的响应对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param status
 	 * @param data
 	 * @return

@@ -20,7 +20,7 @@ package org.sniper.commons.exception;
 
 /**
  * 自定义Sniper包异常类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SniperException extends RuntimeException {

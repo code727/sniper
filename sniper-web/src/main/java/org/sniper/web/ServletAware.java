@@ -24,35 +24,35 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ServletAware {
 	
 	/**
 	 * 获取HttpServletRequest对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public HttpServletRequest getHttpServletRequest();
 	
 	/**
 	 * 获取HttpServletResponse对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public HttpServletResponse getHttpServletResponse();
 	
 	/**
 	 * 获取HttpSession对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public HttpSession getHttpSession();
 	
 	/**
 	 * 获取HttpSession对象，并制定为空时是否创建一个新的对象后再返回
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param create
 	 * @return
 	 */

@@ -16,7 +16,7 @@
  * Create Date : 2015-3-10
  */
 
-package org.sniper.orm.jpa.service;
+package org.sniper.orm.hibernate.service;
 
 import java.io.Serializable;
 
@@ -25,13 +25,14 @@ import org.sniper.sqlmap.dao.SqlMapQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * JPA+Sqlmap混合服务抽象类，作用如下：</P>
- * 通过注入SqlMapQuery接口实例后开启ibatis/mybatis的查询功能，以弥补JPA针对动态查询时需拼接SQL的问题，改用ibatis/mybatis的XML配置方式实现 
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * Hibernate+SqlMap混合服务抽象类，作用如下：</P>
+ * 通过注入SqlMapQuery接口实例后开启ibatis/mybatis的查询功能，以弥补Hibernate针对动态查询时需拼接SQL的问题，改用ibatis/mybatis的XML配置方式实现
+ * @author  Daniele
  * @version 1.0
  */
-public abstract class AbstractJpaSqlmapService<T, PK extends Serializable> extends AbstractJpaService<T, PK> {
-			
+public abstract class AbstractHibernateSqlMapService<T, PK extends Serializable>
+		extends AbstractHibernateService<T, PK> {
+		
 	@Autowired
 	protected SqlMapQuery<T> sqlMapQuery;
 	
@@ -52,7 +53,7 @@ public abstract class AbstractJpaSqlmapService<T, PK extends Serializable> exten
 	@Override
 	protected void init() throws Exception {
 		super.init();
-		sqlMapQuery.setTargetType(jpaDao.getTargetType());
+		sqlMapQuery.setTargetType(hibernateDao.getTargetType());
 		logger.info("Success enable sqlMapQuery:{}", sqlMapQuery.getClass().getName());
 	}
 

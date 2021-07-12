@@ -22,28 +22,28 @@ import java.util.Map;
 
 /**
  * 消费者服务管理接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ConsumerServiceManager {
 	
 	/**
 	 * 设置消费者服务映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param consumerSevices
 	 */
 	public void setConsumerServices(Map<String, ConsumerService<?, ?>> consumerSevices);
 	
 	/**
 	 * 获取消费者服务映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<String, ConsumerService<?, ?>> getConsumerServices();
 	
 	/**
 	 * 根据键获取映射集里的某个消费者服务
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */

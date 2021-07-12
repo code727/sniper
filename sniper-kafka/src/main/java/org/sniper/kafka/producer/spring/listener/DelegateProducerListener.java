@@ -27,7 +27,7 @@ import org.sniper.kafka.support.ProduceResult;
 
 /**
  * 委派生产者监听实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DelegateProducerListener<K, V> extends
@@ -64,7 +64,7 @@ public class DelegateProducerListener<K, V> extends
 	
 	/**
 	 * 打印生产者发送成功后的日志
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param delegate
 	 * @param produceResult
 	 */
@@ -77,7 +77,7 @@ public class DelegateProducerListener<K, V> extends
 	
 	/**
 	 * 打印生产者发送失败后的日志
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param delegate
 	 * @param produceRecord
 	 * @param ex

@@ -24,7 +24,7 @@ import org.sniper.templet.message.source.MessageSource;
 
 /**
  * 模板消息解析器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class TempletMessageResolver extends AbstractLocaleMessageResolver {
@@ -39,7 +39,7 @@ public class TempletMessageResolver extends AbstractLocaleMessageResolver {
 	
 	/**
 	 * 重写父类方法，只从消息源中获取消息，未获取到时返回指定的默认消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @param param

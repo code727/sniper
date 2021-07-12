@@ -26,7 +26,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 键值对
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class KeyValuePair<K, V> implements Serializable {
@@ -72,7 +72,7 @@ public class KeyValuePair<K, V> implements Serializable {
 	
 	/**
 	 * 检查键的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 */
 	protected void checkKey(K key) {

@@ -22,14 +22,14 @@ import java.util.Locale;
 
 /**
  * 本地化消息解析器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface LocaleMessageResolver extends MessageResolver {
 	
 	/**
 	 * 根据键获取对应的本地化资源信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @return
@@ -38,7 +38,7 @@ public interface LocaleMessageResolver extends MessageResolver {
 	
 	/**
 	 * 根据键获取对应的本地化资源信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @param defaultMessage
@@ -48,7 +48,7 @@ public interface LocaleMessageResolver extends MessageResolver {
 	
 	/**
 	 * 根据键获取具有参数的本地化资源信息，未获取到时返回指定的默认信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @param param
@@ -59,7 +59,7 @@ public interface LocaleMessageResolver extends MessageResolver {
 	
 	/**
 	 * 根据键获取具有参数的本地化资源信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @param param
@@ -69,7 +69,7 @@ public interface LocaleMessageResolver extends MessageResolver {
 	
 	/**
 	 * 根据键获取具有参数的本地化资源信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @param params
@@ -79,7 +79,7 @@ public interface LocaleMessageResolver extends MessageResolver {
 	
 	/**
 	 * 根据键获取具有多个不同参数的本地化资源信息，未获取到时返回默认的信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param locale
 	 * @param params

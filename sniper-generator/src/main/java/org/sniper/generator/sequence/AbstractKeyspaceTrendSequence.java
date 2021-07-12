@@ -22,7 +22,7 @@ import org.sniper.commons.util.AssertUtils;
 
 /**
  * 键空间趋势序列抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractKeyspaceTrendSequence<K, V> extends AbstractTrendSequence<V>
@@ -59,7 +59,7 @@ public abstract class AbstractKeyspaceTrendSequence<K, V> extends AbstractTrendS
 	
 	/**
 	 * 检查键空间的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param keyspace
 	 */
 	protected void checkKeyspace(Object keyspace) {
@@ -68,7 +68,7 @@ public abstract class AbstractKeyspaceTrendSequence<K, V> extends AbstractTrendS
 	
 	/** 
 	 * 根据指定的键和步长更新序列
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @param stepSize
 	 * @return 

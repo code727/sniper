@@ -25,7 +25,7 @@ import org.sniper.commons.util.CollectionUtils;
 
 /**
  * 复合Multipart请求体处理器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractCompositeMultipartBodyHandler<T> extends AbstractMultipartBodyHandler {
@@ -59,7 +59,7 @@ public abstract class AbstractCompositeMultipartBodyHandler<T> extends AbstractM
 
 	/**
 	 * 获取默认的Multipart请求体处理器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public MultipartBodyHandler getDefaultMultipartBodyHandler() {
@@ -68,7 +68,7 @@ public abstract class AbstractCompositeMultipartBodyHandler<T> extends AbstractM
 
 	/**
 	 * 获取默认的Multipart请求体处理器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param defaultMultipartBodyHandler
 	 */
 	public void setDefaultMultipartBodyHandler(MultipartBodyHandler defaultMultipartBodyHandler) {
@@ -78,7 +78,7 @@ public abstract class AbstractCompositeMultipartBodyHandler<T> extends AbstractM
 	
 	/**
 	 * 获取匹配与指定请求体的Multipart处理器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param requestBody
 	 * @return
 	 */

@@ -25,7 +25,7 @@ import org.sniper.commons.entity.Versioned;
 
 /**
  * Sequence主键类型版本化的新增修改审核实体抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @SuppressWarnings("serial")

@@ -36,7 +36,7 @@ import org.sniper.security.service.AuthorizationService;
 
 /**
  * Shiro授权处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class AuthorizationHandler extends AuthorizationHandlerAdapter implements InitializingBean {
@@ -118,7 +118,7 @@ public class AuthorizationHandler extends AuthorizationHandlerAdapter implements
 	
 	/**
 	 * 根据规则列表创建授权映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param rules
 	 * @return
 	 */
@@ -146,7 +146,7 @@ public class AuthorizationHandler extends AuthorizationHandlerAdapter implements
 	
 	/**
 	 * 根据授权映射集合和与之关联的过滤器名称，构建出最终的授权规则字符串结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param authMap
 	 * @param filterName
 	 * @return

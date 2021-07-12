@@ -25,7 +25,7 @@ import org.sniper.commons.util.NumberUtils;
 
 /**
  * 普通文本验证码生成器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class TextCaptchaGenerator implements CaptchaGenerator {

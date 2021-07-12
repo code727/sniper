@@ -33,7 +33,7 @@ import org.sniper.web.spring.invocation.WebApplicationContextInvocation;
 
 /**
  * Spring Web应用上下文帮助类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class WebContextHelper {
@@ -44,7 +44,7 @@ public class WebContextHelper {
 	 * 获取HttpServletRequest对象。
 	 * 需要配置org.springframework.web.context.request.RequestContextListener过滤器或
 	 * org.sniper.web.spring.invocation.WebApplicationContextInvocation拦截器后才能获取到不为空的对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static HttpServletRequest getHttpServletRequest() {
@@ -66,7 +66,7 @@ public class WebContextHelper {
 	/**
 	 * 获取HttpServletResponse对象。
 	 * 需要配置org.sniper.web.spring.invocation.WebApplicationContextInvocation拦截器后才能获取到不为空的对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static HttpServletResponse getHttpServletResponse() {
@@ -87,7 +87,7 @@ public class WebContextHelper {
 	
 	/**
 	 * 获取HttpSession对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static HttpSession getHttpSession() {
@@ -96,7 +96,7 @@ public class WebContextHelper {
 	
 	/**
 	 * 获取HttpSession对象，为空时选择是否自动创建一个新对象后返回。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param create
 	 * @return
 	 */

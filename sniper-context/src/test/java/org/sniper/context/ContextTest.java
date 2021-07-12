@@ -11,7 +11,7 @@ import org.sniper.test.junit.BaseTestCase;
 
 /**
  * 上下文单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0, 2015-1-26
  */
 public class ContextTest extends BaseTestCase {

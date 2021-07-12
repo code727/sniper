@@ -22,63 +22,63 @@ import java.util.Map;
 
 /**
  * 字体管理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FontManager {
 	
 	/**
 	 * 设置字体名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param fontName
 	 */
 	public void setFontName(String fontName);
 	
 	/**
 	 * 获取字体名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getFontName();
 	
 	/**
 	 * 选择一个字体名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String selectFontName();
 	
 	/**
 	 * 设置"名称 - 字体样式大小"映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param fontStyles
 	 */
 	public void setFontStyles(Map<String, Integer> fontStyles);
 	
 	/**
 	 * 获取"名称 - 字体样式大小"映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<String, Integer> getFontStyles();
 	
 	/**
 	 * 选择一个字体样式大小名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String selectFontStyleName();
 	
 	/**
 	 * 选择一个字体样式大小
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int selectFontStyle();
 	
 	/**
 	 * 获取指定名称对应的字体样式大小
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */

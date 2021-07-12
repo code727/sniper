@@ -24,19 +24,19 @@ import org.springframework.stereotype.Repository;
 
 /**
  * MyBatis DAO实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @Repository
 public class MyBatisDaoImpl<T> extends MyBatisQueryDaoImpl<T> implements SqlMapDao<T> {
 		
 	@Override
-	public Integer insert(String statement) {
+	public int insert(String statement) {
 		return insert(statement, null);
 	}
 
 	@Override
-	public Integer insert(String statement, Object parameter) {
+	public int insert(String statement, Object parameter) {
 		SqlSession sqlSession = getSqlSession();
 		return parameter != null ? sqlSession.insert(namespace + statement,
 				parameter) : sqlSession.insert(namespace + statement);

@@ -33,7 +33,7 @@ import org.sniper.commons.enums.date.WeekEnum;
 
 /**
  * 日期时间工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0.0
  */
 public class DateUtils {
@@ -49,7 +49,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取日期格式对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static DateFormat getDateFormat() {
@@ -58,7 +58,7 @@ public class DateUtils {
 	
 	/**
 	 * 根据指定的模式获取日期格式对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pattern
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public class DateUtils {
 		
 	/**
 	 * 获取工具默认支持的格林尼治日期时间格式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static DateFormat getGMTDateFormat() {
@@ -78,7 +78,7 @@ public class DateUtils {
 	
 	/**
 	 * 根据索引获取工具所支持的格林尼治日期时间
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param index
 	 * @return
 	 */
@@ -88,7 +88,7 @@ public class DateUtils {
 	
 	/**
 	 * 根据Locale对象获取工具默认支持的格林尼治日期时间格式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param locale
 	 * @return
 	 */
@@ -98,7 +98,7 @@ public class DateUtils {
 		
 	/**
 	 * 根据索引和Locale对象获取工具所支持的格林尼治日期时间格式
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param index
 	 * @param locale
 	 * @return
@@ -110,7 +110,7 @@ public class DateUtils {
 	
 	/**
 	 * 以默认格式将字符串转换成Date对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dateString
 	 * @return
 	 */
@@ -120,7 +120,7 @@ public class DateUtils {
 	
 	/**
 	 * 以指定的格式将字符串转换成Date对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dateString
 	 * @param pattern
 	 * @return
@@ -132,7 +132,7 @@ public class DateUtils {
 	
 	/**
 	 * 以默认格式将日期转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return 
 	 */
@@ -142,7 +142,7 @@ public class DateUtils {
 	
 	/**
 	 * 以指定格式将日期转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param pattern
 	 * @return 
@@ -156,7 +156,7 @@ public class DateUtils {
 	
 	/**
 	 * 以默认格式将时间数字转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param time
 	 * @return 
 	 */
@@ -166,7 +166,7 @@ public class DateUtils {
 	
 	/**
 	 * 以指定格式将时间数字转换成字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param time
 	 * @param pattern
 	 * @return 
@@ -179,7 +179,7 @@ public class DateUtils {
 	
 	/**
 	 * 将时间数字转换成日期对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param time
 	 * @return
 	 */
@@ -191,7 +191,7 @@ public class DateUtils {
 	
 	/**
 	 * 将Object对象转换成日期对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @return
 	 */
@@ -201,7 +201,7 @@ public class DateUtils {
 	
 	/**
 	 * 将Object对象转换成日期对象，当Object对象为字符串时，将以指定格式转换
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param object
 	 * @param pattern
 	 * @return
@@ -229,7 +229,7 @@ public class DateUtils {
 			
 	/**
 	 * 以默认格式将对象转换成日期字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -239,7 +239,7 @@ public class DateUtils {
 	
 	/**
 	 * 以指定格式将对象转换成日期字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param pattern
 	 * @return
@@ -253,7 +253,7 @@ public class DateUtils {
 	
 	/**
 	 * 以默认格式将字符串转换成时间毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dateString
 	 * @return 
 	 */
@@ -263,7 +263,7 @@ public class DateUtils {
 	
 	/**
 	 * 以指定格式将字符串转换成时间毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dateString
 	 * @param pattern
 	 * @return 
@@ -275,7 +275,7 @@ public class DateUtils {
 	
 	/**
 	 * 以默认格式将字符串转换成Unix时间戳
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dateString
 	 * @return
 	 */
@@ -285,7 +285,7 @@ public class DateUtils {
 	
 	/**
 	 * 以指定格式将字符串转换成Unix时间戳
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dateString
 	 * @param pattern
 	 * @return
@@ -296,7 +296,7 @@ public class DateUtils {
 	
 	/**
 	 * 以默认格式将Unix时间戳转换为字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param unixTimestamp
 	 * @return
 	 */
@@ -306,7 +306,7 @@ public class DateUtils {
 	
 	/**
 	 * 以指定格式将Unix时间戳转换为字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param unixTimestamp
 	 * @param pattern
 	 * @return
@@ -317,7 +317,7 @@ public class DateUtils {
 	
 	/**
 	 * 将指定日期转换成Unix时间戳
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -328,7 +328,7 @@ public class DateUtils {
 		
 	/**
 	 * 判断是否为同一天
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param c1
 	 * @param c2
 	 * @return
@@ -344,7 +344,7 @@ public class DateUtils {
 	
 	/**
 	 * 判断两个日期是否为同一天
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param now
 	 * @param then
 	 * @return 
@@ -362,7 +362,7 @@ public class DateUtils {
 	
 	/**
 	 * 判断指定的日期是否为今天
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return 
 	 */
@@ -372,7 +372,7 @@ public class DateUtils {
 	
 	/**
 	 * 根据生日计算出距今的年龄
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param birthday
 	 * @return
 	 */
@@ -405,7 +405,7 @@ public class DateUtils {
 	
 	/**
 	 * 根据指定的日期获取对应的星座
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param birthday
 	 * @return
 	 */
@@ -460,7 +460,7 @@ public class DateUtils {
 	
 	/**
 	 * 判断指定的日期是否为一个周末(每周最后一天)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -470,7 +470,7 @@ public class DateUtils {
 	
 	/**
 	 * 判断指定的日期是否为一个周末(每周最后一天)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param firstDayOfWeek 周的星期几为第一天
 	 * @return
@@ -490,7 +490,7 @@ public class DateUtils {
 				
 	/**
 	 * 累加到指定日期第几年以前或以后的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param amount 距离指定日期之前(负数)或之后(正数)的年数
 	 * @return
@@ -501,7 +501,7 @@ public class DateUtils {
 	
 	/**
 	 * 累加到指定日期第几个月以前或以后的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param amount 距离指定日期之前(负数)或之后(正数)的月数
 	 * @return
@@ -512,7 +512,7 @@ public class DateUtils {
 	
 	/**
 	 * 累加到指定日期第几天以前或以后的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param amount 距离指定日期之前(负数)或之后(正数)的天数
 	 * @return
@@ -523,7 +523,7 @@ public class DateUtils {
 	
 	/**
 	 * 累加到指定日期第几小时以前或以后的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param amount 距离指定日期之前(负数)或之后(正数)的小时数
 	 * @return
@@ -534,7 +534,7 @@ public class DateUtils {
 	
 	/**
 	 * 累加到指定日期第几分钟以前或以后的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param amount 距离指定日期之前(负数)或之后(正数)的分钟数
 	 * @return
@@ -545,7 +545,7 @@ public class DateUtils {
 	
 	/**
 	 * 累加到指定日期第几秒以前或以后的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param amount 距离指定日期之前(负数)或之后(正数)的秒数
 	 * @return
@@ -556,7 +556,7 @@ public class DateUtils {
 	
 	/**
 	 * 累加到指定日期第几毫秒以前或以后的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param amount 距离指定日期之前(负数)或之后(正数)的毫秒数
 	 * @return
@@ -567,7 +567,7 @@ public class DateUtils {
 	
 	/**
 	 * 在calendarField范围内将date增加amount个偏移
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param calendarField
 	 * @param amount 距离指定日期之前(负数)或之后(正数)的偏移量
@@ -584,7 +584,7 @@ public class DateUtils {
 	
 	/**
 	 * 昨天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static Date yesterday() {
@@ -593,7 +593,7 @@ public class DateUtils {
 	
 	/**
 	 * 明天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static Date tomorrow() {
@@ -602,7 +602,7 @@ public class DateUtils {
 	
 	/**
 	 * 判断指定日期是否为闰年
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -617,7 +617,7 @@ public class DateUtils {
 	
 	/**
 	 * 判断指定数字是否为闰年
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -627,7 +627,7 @@ public class DateUtils {
 	
 	/**
 	 * 计算两日期间有多少个闰年
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param start
 	 * @param end
 	 * @return
@@ -665,7 +665,7 @@ public class DateUtils {
 		
 	/**
 	 * 获取两日期间经历的所有闰年
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param start
 	 * @param end
 	 * @return
@@ -725,7 +725,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期这周内的每一天
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static List<Date> everyDayOfWeek() {
@@ -734,7 +734,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期这周内的每一天
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param firstDayOfWeek 星期几为每周第一天
 	 * @return
 	 */
@@ -744,7 +744,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取指定日期这周内的每一天
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param now
 	 * @return
 	 */
@@ -754,7 +754,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取指定日期这周内的每一天
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param firstDayOfWeek 星期几为每周第一天
 	 * @return
@@ -780,7 +780,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期是星期几
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static String dayOfWeek() {
@@ -789,7 +789,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取指定的日期是星期几
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param now
 	 * @return
 	 */
@@ -801,7 +801,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在周内第一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static Date firstDayOfWeek() {
@@ -810,7 +810,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在周内第一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param firstDayOfWeek 星期几为每周第一天
 	 * @return
 	 */
@@ -820,7 +820,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在周内第一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -830,7 +830,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在周内第一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param firstDayOfWeek
 	 * @return
@@ -841,7 +841,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在周内最后一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static Date lastDayOfWeek() {
@@ -850,7 +850,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在周内最后一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param firstDayOfWeek 星期几为每周第一天
 	 * @return
 	 */
@@ -860,7 +860,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在周内最后一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -870,7 +870,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在周内最后一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param firstDayOfWeek
 	 * @return
@@ -881,7 +881,7 @@ public class DateUtils {
 		
 	/**
 	 * 获取当前日期所在周内第几天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param day
 	 * @return
 	 */
@@ -891,7 +891,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在周内第几天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param day
 	 * @param firstDayOfWeek 星期几为每周第一天
 	 * @return
@@ -902,7 +902,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取指定日期所在周内第几天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param day
 	 * @return
@@ -913,7 +913,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取指定日期所在周内第几天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param day
 	 * @param firstDayOfWeek 星期几为每周第一天
@@ -935,7 +935,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在月内第一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static Date firstDayOfMonth() {
@@ -944,7 +944,7 @@ public class DateUtils {
 		
 	/**
 	 * 获取当前日期所在月内第一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -954,7 +954,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在月内最后一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -964,7 +964,7 @@ public class DateUtils {
 		
 	/**
 	 * 获取指定日期所在月内最后一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -974,7 +974,7 @@ public class DateUtils {
 		
 	/**
 	 * 获取当前日期所在月内第几天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param day
 	 * @return
 	 */
@@ -984,7 +984,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取指定日期所在月内第几天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param day
 	 * @return
@@ -1002,7 +1002,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当年日期所在年内第一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static Date firstDayOfYear() {
@@ -1011,7 +1011,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取指定日期所在年内第一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -1021,7 +1021,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当年日期所在年内最后一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static Date lastDayOfYear() {
@@ -1030,7 +1030,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取指定日期所在年内最后一天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -1040,7 +1040,7 @@ public class DateUtils {
 		
 	/**
 	 * 获取当前日期所在年内第几天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param day
 	 * @return
 	 */
@@ -1050,7 +1050,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取指定日期所在年内第几天的日期
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @param day
 	 * @return
@@ -1067,7 +1067,7 @@ public class DateUtils {
 		
 	/**
 	 * 获取当前日期所在月的总天数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static int daysOfMonth() {
@@ -1076,7 +1076,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取指定日期所在月的总天数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -1094,7 +1094,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取当前日期所在年的总天数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static int daysOfYear() {
@@ -1103,7 +1103,7 @@ public class DateUtils {
 	
 	/**
 	 * 获取指定日期所在年的总天数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param date
 	 * @return
 	 */
@@ -1114,7 +1114,7 @@ public class DateUtils {
 	
 	/**
 	 * 将单位时间换算成纳秒
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param time 时间
 	 * @param timeUnit 时间单位
 	 * @return
@@ -1125,7 +1125,7 @@ public class DateUtils {
 	
 	/**
 	 * 将单位时间换算成微秒
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param time
 	 * @param timeUnit
 	 * @return
@@ -1136,7 +1136,7 @@ public class DateUtils {
 	
 	/**
 	 * 将单位时间换算成毫秒
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param time 时间
 	 * @param timeUnit 时间单位
 	 * @return
@@ -1147,7 +1147,7 @@ public class DateUtils {
 	
 	/**
 	 * 将单位时间换算成秒
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param time 时间
 	 * @param timeUnit 时间单位
 	 * @return
@@ -1158,7 +1158,7 @@ public class DateUtils {
 	
 	/**
 	 * 将单位时间换算成分钟
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param time 时间
 	 * @param timeUnit 时间单位
 	 * @return
@@ -1169,7 +1169,7 @@ public class DateUtils {
 	
 	/**
 	 * 将单位时间换算成小时
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param time 时间
 	 * @param timeUnit 时间单位
 	 * @return
@@ -1180,7 +1180,7 @@ public class DateUtils {
 	
 	/**
 	 * 将单位时间转换成天
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param time 时间
 	 * @param timeUnit 时间单位
 	 * @return
@@ -1191,7 +1191,7 @@ public class DateUtils {
 	
 	/**
 	 * 计算两日期间隔的纳秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param when
 	 * @param then
 	 * @return
@@ -1202,7 +1202,7 @@ public class DateUtils {
 	
 	/**
 	 * 计算两日期间隔的微秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param when
 	 * @param then
 	 * @return
@@ -1213,7 +1213,7 @@ public class DateUtils {
 	
 	/**
 	 * 计算两日期间隔的毫秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param when
 	 * @param then
 	 * @return 
@@ -1225,7 +1225,7 @@ public class DateUtils {
 	
 	/**
 	 * 计算两日期间隔的秒数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param when
 	 * @param then
 	 * @return
@@ -1236,7 +1236,7 @@ public class DateUtils {
 	
 	/**
 	 * 计算两日期间隔的分钟数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param when
 	 * @param then
 	 * @return
@@ -1247,7 +1247,7 @@ public class DateUtils {
 	
 	/**
 	 * 计算两日期间隔的小时数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param when
 	 * @param then
 	 * @return
@@ -1258,7 +1258,7 @@ public class DateUtils {
 	
 	/**
 	 * 计算两日期间隔的天数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param when
 	 * @param then
 	 * @return
@@ -1269,7 +1269,7 @@ public class DateUtils {
 	
 	/**
 	 * 计算两日期间隔的周数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param when
 	 * @param then
 	 * @return

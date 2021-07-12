@@ -20,14 +20,14 @@ package org.sniper.nosql.redis.command;
 
 /**
  * Redis连接命令行接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface RedisConnectionCommands {
 	
 	/**
 	 * 打印一个指定的信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param message
 	 * @return
 	 */
@@ -35,14 +35,14 @@ public interface RedisConnectionCommands {
 	
 	/**
 	 * 向 Redis服务器发送一段默认消息 ，如果服务器运作正常，则返回一个PONG
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String ping();
 	
 	/**
 	 * 向 Redis服务器发送一段消息 ，如果服务器运作正常，则返回这段消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param message
 	 * @return
 	 */

@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * 对象工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ObjectUtils {
@@ -33,7 +33,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 判断指定的对象是否为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -58,7 +58,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 判断指定的对象是否不为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -68,7 +68,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 判断对象是否为空白
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -93,7 +93,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 判断对象是否不为空白
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -103,7 +103,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 判断两个对象是否相等
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj1
 	 * @param obj2
 	 * @return
@@ -117,7 +117,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 判断两个对象的字符串是否相等
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj1
 	 * @param obj2
 	 * @return
@@ -131,7 +131,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 调用对象的toString()方法
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -141,7 +141,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 调用对象的toString()方法，若对象为Null，则返回空字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -151,7 +151,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 调用对象的toString()方法，若对象为Null，则返回字符串"null"
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -161,7 +161,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 获取对象元素的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -181,7 +181,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 获取对象的容量/长度
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */
@@ -206,7 +206,7 @@ public class ObjectUtils {
 	
 	/**
 	 * 获取对象的哈希值，如果对象为null则结果等于0，等价于空字符串的值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @return
 	 */

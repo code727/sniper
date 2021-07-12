@@ -32,7 +32,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 图片写入器默认实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultImageWriter implements ImageWriter {
@@ -89,7 +89,7 @@ public class DefaultImageWriter implements ImageWriter {
 	
 	/**
 	 * 检查目标图片
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dest
 	 * @throws IOException
 	 */

@@ -34,7 +34,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 
 /**
  * FasterxmlJackson 序列器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class FasterxmlJacksonSerializer extends AbstractJsonSerializer {

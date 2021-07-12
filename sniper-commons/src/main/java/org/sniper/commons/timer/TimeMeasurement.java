@@ -22,70 +22,70 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 时间度量接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface TimeMeasurement {
 	
 	/**
 	 * 获取计时单位
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public TimeUnit getTimeUnit();
 	
 	/**
 	 * 设置计时单位
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param timeUnit
 	 */
 	public void setTimeUnit(TimeUnit timeUnit);
 	
 	/**
 	 * 将当前时间计数转换成纳秒
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long toNanos();
 	
 	/**
 	 * 将当前时间计数转换成微秒
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long toMicros();
 	
 	/**
 	 * 将当前时间计数转换成毫秒
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long toMillis();
 	
 	/**
 	 * 将当前时间计数转换成秒
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long toSeconds();
 	
 	/**
 	 * 将当前时间计数转换成分钟
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long toMinutes();
 	
 	/**
 	 * 将当前时间计数转换成小时
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long toHours();
 	
 	/**
 	 * 将当前时间计数转换成天计数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public long toDays();

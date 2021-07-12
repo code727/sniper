@@ -28,9 +28,9 @@ import org.sniper.persistence.OpenEntitySessionManagerInViewFilterProxy;
 import org.springframework.orm.hibernate3.support.OpenSessionInViewFilter;
 
 /**
- * Hibernate3实体视图管理过滤器。此类的作用在于防止当实体启用了延迟加载策略后，
- * 				加载的数据返回给view层的时候Session已经关闭而导致的访问异常。
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * Hibernate3实体视图管理过滤器，作用如下：</P>
+ * 当实体启用延迟加载策略后，防止加载的数据返回给view层时Session因关闭而导致访问异常。
+ * @author  Daniele
  * @version 1.0
  */
 public class HibernateOpenSessionManagerInViewFilter extends OpenSessionInViewFilter {

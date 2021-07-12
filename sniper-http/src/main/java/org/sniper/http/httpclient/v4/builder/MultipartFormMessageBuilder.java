@@ -39,7 +39,7 @@ import org.sniper.http.httpclient.v4.handler.multipart.SpringResourceMultipartBo
 
 /**
  * multipart/form-data表单消息构建器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MultipartFormMessageBuilder extends AbstractHttpClientMessageBuilder {
@@ -86,7 +86,7 @@ public class MultipartFormMessageBuilder extends AbstractHttpClientMessageBuilde
 	
 	/**
 	 * 判断是否为Multipart请求体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param requestBody
 	 * @return
 	 */
@@ -100,7 +100,7 @@ public class MultipartFormMessageBuilder extends AbstractHttpClientMessageBuilde
 	
 	/**
 	 * 根据请求体获取能匹配处理的Multipart处理器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param requestBody
 	 * @return
 	 */

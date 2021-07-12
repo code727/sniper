@@ -25,7 +25,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * "未匹配有已注解的域"异常
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class NoSuchAnnotatedFieldException extends NoSuchFieldException {
@@ -38,7 +38,7 @@ public class NoSuchAnnotatedFieldException extends NoSuchFieldException {
 	
 	/**
 	 * 构建异常消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param annotationClass
 	 * @return

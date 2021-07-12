@@ -22,7 +22,7 @@ import java.io.Serializable;
 
 /**
  * 主键ID实体类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 @SuppressWarnings("serial")

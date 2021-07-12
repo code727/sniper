@@ -27,7 +27,7 @@ import org.springframework.core.io.Resource;
 
 /**
  * org.springframework.core.io.Resource资源类型的Multipart请求体处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SpringResourceMultipartBodyHandler extends AbstractSourceMultipartBodyHandler {
@@ -46,7 +46,7 @@ public class SpringResourceMultipartBodyHandler extends AbstractSourceMultipartB
 	
 	/**
 	 * 添加org.springframework.core.io.Resource请求体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param builder
 	 * @param name
 	 * @param resource
@@ -65,7 +65,7 @@ public class SpringResourceMultipartBodyHandler extends AbstractSourceMultipartB
 	
 	/**
 	 * 添加多个org.springframework.core.io.Resource请求体
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param builder
 	 * @param name
 	 * @param resources

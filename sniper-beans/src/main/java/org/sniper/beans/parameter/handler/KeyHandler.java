@@ -22,14 +22,14 @@ import java.util.Map;
 
 /**
  * 键处理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface KeyHandler {
 	
 	/**
 	 * 将指定的键-值对PUT到映射集中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param map
 	 * @param key
 	 * @param value
@@ -38,7 +38,7 @@ public interface KeyHandler {
 	
 	/**
 	 * 批量PUT到源映射集中
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param map
 	 * @param puted
 	 */

@@ -38,7 +38,7 @@ import org.sniper.image.writer.ImageWriter;
 
 /**
  * 图片处理器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractImageHandler implements ImageHandler {
@@ -166,7 +166,7 @@ public abstract class AbstractImageHandler implements ImageHandler {
 	
 	/**
 	 * 检查原图片
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @throws IOException
 	 */
@@ -183,7 +183,7 @@ public abstract class AbstractImageHandler implements ImageHandler {
 	
 	/**
 	 * 检查目标图片
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param dest
 	 * @throws IOException
 	 */
@@ -197,7 +197,7 @@ public abstract class AbstractImageHandler implements ImageHandler {
 	
 	/**
 	 * 图像资源绘制处理
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param source
 	 * @return
 	 * @throws IOException
@@ -218,7 +218,7 @@ public abstract class AbstractImageHandler implements ImageHandler {
 	
 	/**
 	 * 根据原图片创建目标图片的像素
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sourceImage
 	 * @return
 	 */
@@ -226,7 +226,7 @@ public abstract class AbstractImageHandler implements ImageHandler {
 	
 	/**
 	 * 处理原图资源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param sourceImage
 	 * @param pixel
 	 * @return

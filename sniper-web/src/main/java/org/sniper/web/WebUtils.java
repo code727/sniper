@@ -44,7 +44,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * Web工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class WebUtils {
@@ -65,7 +65,7 @@ public class WebUtils {
 	
 	/**
 	 * 设置HttpServletRequest对象的字符集编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param encoding
 	 * @throws UnsupportedEncodingException
@@ -80,7 +80,7 @@ public class WebUtils {
 	
 	/**
 	 * 设置ServletRequest对象的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param name
 	 * @param value
@@ -92,7 +92,7 @@ public class WebUtils {
 	
 	/**
 	 * 设置HttpSession对象的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param name
 	 * @param value
@@ -104,7 +104,7 @@ public class WebUtils {
 	
 	/**
 	 * 设置HttpServletRequest对象相关Session的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param name
 	 * @param value
@@ -115,7 +115,7 @@ public class WebUtils {
 	
 	/**
 	 * 设置HttpServletRequest对象相关Session的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param name
 	 * @param value
@@ -129,7 +129,7 @@ public class WebUtils {
 	
 	/**
 	 * 设置当前会话在多少秒无操作后处于失效状态
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param sec
 	 */
@@ -139,7 +139,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取ServletRequest对象里的参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param name
 	 * @return
@@ -150,7 +150,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取ServletRequest对象里的参数值，为空时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param name
 	 * @param defaultValue
@@ -163,7 +163,7 @@ public class WebUtils {
 			
 	/**
 	 * 获取ServletRequest对象里所有的参数"名-值"字符串对映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @return
 	 */
@@ -180,7 +180,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取ServletRequest对象里的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param name
 	 * @return
@@ -191,7 +191,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取ServletRequest对象里的属性值，为空时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param name
 	 * @param defaultValue
@@ -205,7 +205,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取HttpSession对象里的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param name
 	 * @return
@@ -216,7 +216,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取HttpSession对象里的属性值，为空时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param name
 	 * @param defaultValue
@@ -230,7 +230,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取HttpServletRequest对象相关Session的属性值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param name
 	 * @return
@@ -241,7 +241,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取HttpServletRequest对象相关Session的属性值，当Session或属性值为空时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param name
 	 * @param defaultValue
@@ -257,7 +257,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取HttpSession对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @return
 	 */
@@ -267,7 +267,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取HttpSession对象，为空时选择是否自动创建一个新对象后返回。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param create
 	 * @return
@@ -278,7 +278,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取会话ID
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @return
 	 */
@@ -288,7 +288,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取会话ID，当Session为空时选择是否自动创建一个新对象后再返回值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param create
 	 * @return
@@ -299,7 +299,7 @@ public class WebUtils {
 	
 	/**
 	 * 删除ServletRequest对象里的属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param name
 	 */
@@ -309,7 +309,7 @@ public class WebUtils {
 	
 	/**
 	 * 删除HttpSession对象里指定的属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param name
 	 */
@@ -319,7 +319,7 @@ public class WebUtils {
 	
 	/**
 	 * 删除HttpServletRequest对象相关Session的属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param name
 	 */
@@ -331,7 +331,7 @@ public class WebUtils {
 	
 	/**
 	 * 删除ServletRequest对象里所有的属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 */
 	@SuppressWarnings("unchecked")
@@ -344,7 +344,7 @@ public class WebUtils {
 	
 	/**
 	 * 删除HttpSession对象里所有的属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 */
 	@SuppressWarnings("unchecked")
@@ -357,7 +357,7 @@ public class WebUtils {
 	
 	/**
 	 * 删除ServletRequest对象里所有的属性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param session
 	 */
@@ -372,7 +372,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取客户端不带参数的请求地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @return
 	 */
@@ -382,7 +382,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取客户端查询参数部分的字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @return
 	 */
@@ -392,7 +392,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取客户端带查询参数完整的请求地址
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @return
 	 */
@@ -405,7 +405,7 @@ public class WebUtils {
 	
 	/**
 	 * 获取Servlet路径(相对于当前工程下资源的路径)
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @return
 	 */
@@ -415,7 +415,7 @@ public class WebUtils {
 	
 	/**
 	 * 根据HttpServletRequest对象的头信息进行字符串编码
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param str
 	 * @return
@@ -431,7 +431,7 @@ public class WebUtils {
 	
 	/**
 	 * 下载指定URL目标的资源，写入HttpServletResponse对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url
 	 * @param request
 	 * @param response
@@ -443,7 +443,7 @@ public class WebUtils {
 	
 	/**
 	 * 下载指定URL目标的资源，写入HttpServletResponse对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param url
 	 * @param attachmentName
 	 * @param request
@@ -464,7 +464,7 @@ public class WebUtils {
 	
 	/**
 	 * 下载InputStream资源，写入HttpServletResponse对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param request
 	 * @param response
@@ -476,7 +476,7 @@ public class WebUtils {
 	
 	/**
 	 * 下载InputStream资源，写入HttpServletResponse对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param in
 	 * @param attachmentName
 	 * @param request
@@ -510,7 +510,7 @@ public class WebUtils {
 	
 	/**
 	 * 下载字节数组资源，写入HttpServletResponse对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bytes
 	 * @param request
 	 * @param response
@@ -522,7 +522,7 @@ public class WebUtils {
 	
 	/**
 	 * 下载字节数组资源，写入HttpServletResponse对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param bytes
 	 * @param attachmentName
 	 * @param request

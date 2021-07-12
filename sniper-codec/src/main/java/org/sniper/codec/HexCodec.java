@@ -22,7 +22,7 @@ import org.sniper.commons.util.CodecUtils;
 
 /**
  * 十六进制编解码器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class HexCodec extends AbstractCodec {

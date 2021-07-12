@@ -21,14 +21,14 @@ import org.sniper.test.junit.BaseTestCase;
 
 /**
  * 文件过滤器测试
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0, 2015-1-16
  */
 public class FileFilterTest extends BaseTestCase {
 	
 	/**
 	 * 测试文件名称过滤器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	@Test
 	public void testFileNameFilter() {
@@ -47,7 +47,7 @@ public class FileFilterTest extends BaseTestCase {
 	
 	/**
 	 * 测试文件类型过滤器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	@Test
 	public void testFileTypeFilter() {
@@ -69,7 +69,7 @@ public class FileFilterTest extends BaseTestCase {
 	
 	/**
 	 * 测试文件大小过滤器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	@Test
 	public void testFileSizeFilter() {
@@ -94,7 +94,7 @@ public class FileFilterTest extends BaseTestCase {
 	
 	/**
 	 * 测试文件最后修改时间过滤器过滤器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	@Test
 	public void testFileLastModifiedTimeFilter() {

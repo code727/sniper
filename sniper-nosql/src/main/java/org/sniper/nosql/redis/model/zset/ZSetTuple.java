@@ -20,7 +20,7 @@ package org.sniper.nosql.redis.model.zset;
 
 /**
  * 有序集合元组接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface ZSetTuple<V> extends Comparable<Double> {

@@ -24,7 +24,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * 安全工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class SecurityUtils {
@@ -45,7 +45,7 @@ public class SecurityUtils {
 	
 	/**
 	 * 按指定算法生成明文的摘要
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param plaintext 明文
 	 * @param algorithm 摘要算法名称
 	 * @return
@@ -56,7 +56,7 @@ public class SecurityUtils {
 	
 	/**
 	 * 按指定的字符集编码和算法生成明文的摘要
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param plaintext
 	 * @param algorithm
 	 * @param charsetName
@@ -90,7 +90,7 @@ public class SecurityUtils {
 	
 	/**
 	 * 生成32位全小写MD5摘要信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param plaintext 明文
 	 * @return
 	 */
@@ -100,7 +100,7 @@ public class SecurityUtils {
 	
 	/**
 	 * 生成32位全小写并按指定字符集编码后的MD5摘要信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param plaintext
 	 * @param charsetName
 	 * @return
@@ -111,7 +111,7 @@ public class SecurityUtils {
 	
 	/**
 	 * 生成32位全大写MD5摘要信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param plaintext
 	 * @return
 	 */
@@ -121,7 +121,7 @@ public class SecurityUtils {
 	
 	/**
 	 * 生成32位全大写并按指定字符集编码后的MD5摘要信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param plaintext
 	 * @param charsetName
 	 * @return
@@ -132,7 +132,7 @@ public class SecurityUtils {
 	
 	/**
 	 * 选择是否按全大写的方式生成32位MD5摘要信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param plaintext
 	 * @param upperCase
 	 * @return
@@ -143,7 +143,7 @@ public class SecurityUtils {
 	
 	/**
 	 * 选择是否按全大写的方式生成指定字符集编码后的32位MD5摘要信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param plaintext
 	 * @param charsetName
 	 * @param upperCase

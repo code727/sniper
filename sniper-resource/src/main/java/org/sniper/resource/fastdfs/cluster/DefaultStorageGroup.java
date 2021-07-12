@@ -28,7 +28,7 @@ import org.sniper.spring.beans.CheckableInitializingBean;
 
 /**
  * 默认的StorageGroup集群族实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultStorageGroup extends CheckableInitializingBean implements StorageGroup {

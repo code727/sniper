@@ -22,63 +22,63 @@ import java.util.Map;
 
 /**
  * FastDFS集群族接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface Cluster extends ClusterAccessor {
 	
 	/**
 	 * 设置Tracker和Storage集群族统一提供的服务协议
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param protocol
 	 */
 	public void setProtocol(String protocol);
 	
 	/**
 	 * 获取Tracker和Storage集群族统一提供的服务协议
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getProtocol();
 	
 	/**
 	 * 设置Tracker和Storage集群族统一提供的访问服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param accessPort
 	 */
 	public void setAccessPort(int accessPort);
 	
 	/**
 	 * 获取Tracker和Storage集群族统一提供的访问服务端口
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int getAccessPort();
 	
 	/**
 	 * 设置Tracker集群族
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param trackerCluster
 	 */
 	public void setTrackerCluster(TrackerCluster trackerCluster);
 	
 	/**
 	 * 获取Tracker集群族
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public TrackerCluster getTrackerCluster();
 	
 	/**
 	 * 设置StorageGroup映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param storageGroups：StorageGroup映射集，其中K表示请求路径前缀，V表示StorageGroup实例
 	 */
 	public void setStorageGroups(Map<String, StorageGroup> storageGroups);
 	
 	/**
 	 * 获取StorageGroup映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<String, StorageGroup> getStorageGroups();

@@ -30,7 +30,7 @@ import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 
 /**
  * JPA实体视图管理过滤器。此类的作用在于防止当实体启用了延迟加载策略后，加载的数据返回给view层的时候Session已经关闭而导致的访问异常。
- * @author <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author Daniele
  * @version 1.0
  */
 public class JpaOpenEntityManagerInViewFilter extends OpenEntityManagerInViewFilter {

@@ -24,7 +24,7 @@ import org.sniper.jms.core.strategy.ConsumeStrategy;
 
 /**
  * 默认的JMS消费策略实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultConsumeStrategy extends DefaultSharedStrategy

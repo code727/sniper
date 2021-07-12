@@ -25,7 +25,7 @@ import org.sniper.commons.util.MessageUtils;
 
 /**
  * 性别枚举
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum GenderEnum {
@@ -72,7 +72,7 @@ public enum GenderEnum {
 	
 	/**
 	 * 判断指定的键是否匹配
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -82,7 +82,7 @@ public enum GenderEnum {
 	
 	/**
 	 * 将指定的键解析成枚举对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param type
 	 * @return
 	 */

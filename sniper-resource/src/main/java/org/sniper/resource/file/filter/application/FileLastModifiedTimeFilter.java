@@ -24,14 +24,14 @@ import org.sniper.resource.file.filter.AbstractFileNumberFilter;
 
 /**
  * 文件最后修改时间过滤器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class FileLastModifiedTimeFilter extends AbstractFileNumberFilter {
 
 	/**
 	 * 判断目标文件/目录的最后修改时间是否满足逻辑运算条件
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param pathname
 	 * @return 
 	 */

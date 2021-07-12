@@ -22,7 +22,7 @@ import org.sniper.commons.constant.status.ResponseStatus;
 
 /**
  * 消息化响应对象接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface MessagingResponse<C> extends GenericResponse<C> {
@@ -35,14 +35,14 @@ public interface MessagingResponse<C> extends GenericResponse<C> {
 	
 	/**
 	 * 获取响应消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getMessage();
 	
 	/**
 	 * 设置响应消息
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param message
 	 */
 	public void setMessage(String message);

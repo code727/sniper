@@ -35,7 +35,7 @@ import org.sniper.test.junit.BaseTestCase;
 
 /**
  * 生成器单元测试类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractGeneratorTest<T> extends BaseTestCase {
@@ -74,7 +74,7 @@ public abstract class AbstractGeneratorTest<T> extends BaseTestCase {
 	
 	/**
 	 * 执行唯一性测试
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws Exception
 	 */
 	protected void uniquenessTest() throws Exception {
@@ -107,7 +107,7 @@ public abstract class AbstractGeneratorTest<T> extends BaseTestCase {
 	
 	/**
 	 * 执行性能测试
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	protected void performanceTest() {
 		Date start = new Date();
@@ -120,7 +120,7 @@ public abstract class AbstractGeneratorTest<T> extends BaseTestCase {
 	
 	/**
 	 * 生成结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	protected abstract T generate();

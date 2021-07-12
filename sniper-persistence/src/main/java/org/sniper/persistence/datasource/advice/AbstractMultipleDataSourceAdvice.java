@@ -23,7 +23,7 @@ import org.sniper.spring.aop.AbstractMethodAroundAdvice;
 
 /**
  * 多数据源切面抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractMultipleDataSourceAdvice extends AbstractMethodAroundAdvice {

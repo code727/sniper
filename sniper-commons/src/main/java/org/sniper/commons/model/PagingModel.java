@@ -25,7 +25,7 @@ import org.sniper.commons.util.NumberUtils;
 
 /**
  * 基本的分页结果模型
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class PagingModel<T> implements PagingResult<T> {

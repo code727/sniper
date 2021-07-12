@@ -21,7 +21,7 @@ package org.sniper.image.layout;
 
 /**
  * 文本框布局
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class TextBoxLayout extends BaseLayout {

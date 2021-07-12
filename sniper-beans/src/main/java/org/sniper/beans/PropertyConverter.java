@@ -39,7 +39,7 @@ import org.sniper.commons.util.MapUtils;
 
 /**
  * Property转换器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class PropertyConverter {
@@ -87,7 +87,7 @@ public class PropertyConverter {
 	
 	/**
 	 * 根据目标类型查找对应的属性编辑器
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param targetType
 	 * @return
 	 */
@@ -97,7 +97,7 @@ public class PropertyConverter {
 	
 	/**
 	 * 将一个值转化成目标类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @param targetType
 	 * @return
@@ -110,7 +110,7 @@ public class PropertyConverter {
 	
 	/**
 	 * 使用指定的属性编辑器将一个值转化成目标类型的结果，当属性编辑器为空时，则直接抛出空指针异常
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyEditor
 	 * @param value
 	 * @return
@@ -127,7 +127,7 @@ public class PropertyConverter {
 	
 	/**
 	 * 使用指定的属性编辑器将一个值转化成目标类型的结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param propertyEditor
 	 * @param value
 	 * @param targetType

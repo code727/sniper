@@ -20,7 +20,7 @@ package org.sniper.commons.entity;
 
 /**
  * 可对新增/修改审计的实体接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface CuAuditable extends Cuable {
@@ -30,28 +30,28 @@ public interface CuAuditable extends Cuable {
 	
 	/**
 	 * 获取创建者名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getCreateBy();
 
 	/**
 	 * 设置创建者名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param createBy
 	 */
 	public void setCreateBy(String createBy);
 
 	/**
 	 * 获取更新者名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public String getUpdateBy();
 
 	/**
 	 * 设置更新者名称
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param updateBy
 	 */
 	public void setUpdateBy(String updateBy);

@@ -32,7 +32,7 @@ import org.sniper.jms.core.strategy.ProductionStrategy;
 
 /**
  * 生产者服务抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class ProducerServiceSupport extends JmsDestinationAccessor
@@ -76,7 +76,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 		
 	/**
 	 * 根据会话和指定名称的生产策略创建生产者
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param strategyName 
 	 * @return
@@ -87,7 +87,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	
 	/**
 	 * 根据会话和生产策略创建生产者
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param strategy
 	 * @return
@@ -99,7 +99,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	
 	/**
 	 * 根据会话、策略名称和目的地名称创建生产者
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param strategyName
 	 * @param destinationName
@@ -112,7 +112,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	
 	/**
 	 * 根据会话、策略名称和目的地创建生产者
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param strategyName
 	 * @param destination
@@ -125,7 +125,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	
 	/**
 	 * 根据会话、生产策略和目的地名称创建生产者
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param strategy
 	 * @param destinationName
@@ -138,7 +138,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	
 	/**
 	 * 根据会话、生产策略和目的地创建生产者
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param strategy
 	 * @param destination
@@ -151,7 +151,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	
 	/**
 	 * 准备生产
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param producer
 	 * @param strategy
 	 * @throws JMSException
@@ -163,7 +163,7 @@ public abstract class ProducerServiceSupport extends JmsDestinationAccessor
 	
 	/**
 	 * 执行发送操作
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param session
 	 * @param producer
 	 * @param message

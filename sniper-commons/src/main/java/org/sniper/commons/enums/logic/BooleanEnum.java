@@ -20,7 +20,7 @@ package org.sniper.commons.enums.logic;
 
 /**
  * 布尔枚举类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public enum BooleanEnum {
@@ -29,7 +29,7 @@ public enum BooleanEnum {
 	
 	/**
 	 * 根据字符串值解析出布尔值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param value
 	 * @return
 	 */

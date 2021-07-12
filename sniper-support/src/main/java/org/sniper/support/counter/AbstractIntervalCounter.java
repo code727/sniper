@@ -22,7 +22,7 @@ import org.sniper.commons.util.AssertUtils;
 
 /**
  * 区间计数器抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractIntervalCounter<V> extends AbstractCounter<V> implements IntervalCounter<V> {
@@ -68,7 +68,7 @@ public abstract class AbstractIntervalCounter<V> extends AbstractCounter<V> impl
 	
 	/**
 	 * 检查区间步长的合法性
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param stepSize
 	 */
 	private void checkStepSize(long stepSize) {

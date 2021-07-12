@@ -37,7 +37,7 @@ import org.sniper.spring.beans.CheckableInitializingBean;
 
 /**
  * 默认的TrackerGroup实例工厂实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class DefaultTrackerGroupFactory extends CheckableInitializingBean implements TrackerGroupFactory {
@@ -77,7 +77,7 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 
 	/**
 	 * 初始化全局配置
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 */
 	protected void init() throws Exception {
 		logger.info("Starting init FastDFS client global configuration");
@@ -104,7 +104,7 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 	
 	/** 
 	 * 创建TrackerGroup实例
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>  
+	 * @author Daniele  
 	 */
 	private void createTrackerGroup() {
 		InetSocketAddress[] trackerServerAddresses = null;
@@ -123,7 +123,7 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 	
 	/**
 	 * 将TrackerCluster内的每个Tracker节点作为Group成员来注册
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	private InetSocketAddress[] registerByNode() {
@@ -146,7 +146,7 @@ public class DefaultTrackerGroupFactory extends CheckableInitializingBean implem
 	 * 负责整个集群环境下Tracker的负载均衡、监控和故障转移等。</P>
 	 * 这类中间件的host和port对应的就是API中TrackerCluster对象中的同名属性。
 	 * 因此在高可用的集群环境中，如果配置了中间件的host和port，推荐选择此方式来注册TrackerGroup。
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	private InetSocketAddress[] registerByCluster() {

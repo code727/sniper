@@ -24,7 +24,7 @@ import org.sniper.http.headers.AbstractQualityFactor;
 
 /**
  * 客户端能够理解的内容编码方式
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class AcceptEncoding extends AbstractQualityFactor {

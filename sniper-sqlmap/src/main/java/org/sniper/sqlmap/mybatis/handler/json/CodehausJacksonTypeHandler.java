@@ -23,7 +23,7 @@ import org.sniper.serialization.json.jackson.codehaus.CodehausJacksonSerializer;
 
 /**
  * CodehausJackson类型处理器实现类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class CodehausJacksonTypeHandler<T> extends AbstractJsonTypeHandler<T> {

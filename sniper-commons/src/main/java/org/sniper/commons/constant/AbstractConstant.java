@@ -31,7 +31,7 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * 常量抽象类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public abstract class AbstractConstant<K, V> implements Constant<K, V> {
@@ -64,7 +64,7 @@ public abstract class AbstractConstant<K, V> implements Constant<K, V> {
 	
 	/**
 	 * 判断指定的键是否与当前常量对象匹配
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
@@ -91,7 +91,7 @@ public abstract class AbstractConstant<K, V> implements Constant<K, V> {
 		
 	/**
 	 * 创建常量映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param constantType
 	 * @return
 	 */

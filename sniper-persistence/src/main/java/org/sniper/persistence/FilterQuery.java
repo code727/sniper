@@ -28,14 +28,14 @@ import org.sniper.persistence.util.PersistencePropertyFilterChain;
 
 /**
  * 过滤器查询接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface FilterQuery<T> {
 	
 	/**
 	 * 根据过滤器列表查询出当前类型的唯一实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param filterList
 	 * @return
 	 */
@@ -43,7 +43,7 @@ public interface FilterQuery<T> {
 	
 	/**
 	 * 根据过滤器链查询出当前类型的唯一实体对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param chain
 	 * @return
 	 */
@@ -51,7 +51,7 @@ public interface FilterQuery<T> {
 	
 	/**
 	 * 根据过滤器列表查询出当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param filterList
 	 * @return
 	 */
@@ -59,7 +59,7 @@ public interface FilterQuery<T> {
 	
 	/**
 	 * 根据过滤器列表分段查询出当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param filterList
 	 * @param start
 	 * @param maxRows
@@ -69,7 +69,7 @@ public interface FilterQuery<T> {
 	
 	/**
 	 * 根据过滤器链查询出当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param chain
 	 * @return
 	 */
@@ -77,7 +77,7 @@ public interface FilterQuery<T> {
 	
 	/**
 	 * 根据过滤器链分段查询出当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param chain
 	 * @param start
 	 * @param maxRows
@@ -87,7 +87,7 @@ public interface FilterQuery<T> {
 			
 	/**
 	 * 根据过滤器列表查询出当前类型的实体对象个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param filterList
 	 * @return
 	 */
@@ -95,7 +95,7 @@ public interface FilterQuery<T> {
 	
 	/**
 	 * 根据过滤器链查询出当前类型的实体对象个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param chain
 	 * @return
 	 */
@@ -103,7 +103,7 @@ public interface FilterQuery<T> {
 	
 	/**
 	 * 根据带属性过滤器列表的对象分页查询出当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query
 	 * @return
 	 */
@@ -111,7 +111,7 @@ public interface FilterQuery<T> {
 	
 	/**
 	 * 根据带属性过滤器链的对象分页查询出当前类型的实体对象列表
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param query
 	 * @return
 	 */

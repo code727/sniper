@@ -23,7 +23,7 @@ import java.lang.management.RuntimeMXBean;
 
 /**
  * 运行时工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class RuntimeUtils {
@@ -38,7 +38,7 @@ public class RuntimeUtils {
 	
 	/**
 	 * 获取本机JVM运行时的PID
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static int jvmPid() {

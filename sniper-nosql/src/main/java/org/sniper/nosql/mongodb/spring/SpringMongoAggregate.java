@@ -27,7 +27,7 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 
 /**
  * Spring MongoDB聚合接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface SpringMongoAggregate<T, PK extends Serializable> extends
@@ -37,7 +37,7 @@ public interface SpringMongoAggregate<T, PK extends Serializable> extends
 	 * 按列表中的操作进行聚合运算后返回结果<P>
 	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
 	 * "operationName2":{operation2},"operationNameN":{operationN}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a>
+	 * @author Daniele
 	 * @param operations 聚合操作列表
 	 * @return
 	 */
@@ -47,7 +47,7 @@ public interface SpringMongoAggregate<T, PK extends Serializable> extends
 	 * 在目标集合中按列表中的操作进行聚合运算后返回结果<P>
 	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
 	 * "operationName2":{operation2},"operationNameN":{operationN}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param operations 聚合操作列表
 	 * @return
@@ -58,7 +58,7 @@ public interface SpringMongoAggregate<T, PK extends Serializable> extends
 	 * 按列表中的操作进行聚合运算后以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
 	 * "operationName2":{operation2},"operationNameN":{operationN}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param operations 聚合操作列表
 	 * @param resultClass 聚合结果数据类型
 	 * @return
@@ -69,7 +69,7 @@ public interface SpringMongoAggregate<T, PK extends Serializable> extends
 	 * 在目标集合中按列表中的操作进行聚合运算后以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
 	 * "operationName2":{operation2},"operationNameN":{operationN}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param operations 聚合操作列表
 	 * @param resultClass 聚合结果数据类型
@@ -81,7 +81,7 @@ public interface SpringMongoAggregate<T, PK extends Serializable> extends
 	 * 执行聚合运算P>
 	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
 	 * "operationName2":{operation2},"operationNameN":{operationN}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param aggregation 聚合运算
 	 * @return
 	 */
@@ -91,7 +91,7 @@ public interface SpringMongoAggregate<T, PK extends Serializable> extends
 	 * 在目标集合中执行聚合运算P>
 	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
 	 * "operationName2":{operation2},"operationNameN":{operationN}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param aggregation 聚合运算
 	 * @return
@@ -102,7 +102,7 @@ public interface SpringMongoAggregate<T, PK extends Serializable> extends
 	 * 执行聚合运算后以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
 	 * "operationName2":{operation2},"operationNameN":{operationN}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param aggregation 聚合运算
 	 * @param resultClass 聚合结果数据类型
 	 * @return
@@ -113,7 +113,7 @@ public interface SpringMongoAggregate<T, PK extends Serializable> extends
 	 * 在目标集合中执行聚合运算后以指定的数据类型返回结果<P>
 	 * 实际执行的语句为:db.collection.aggregate({"operationName1":{operation1},
 	 * "operationName2":{operation2},"operationNameN":{operationN}});
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param collection 目标集合
 	 * @param aggregation 聚合运算
 	 * @param resultClass 聚合结果数据类型

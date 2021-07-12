@@ -25,7 +25,7 @@ import org.junit.Assert;
 
 /**
  * 基础单元测试类
- * @author <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author Daniele
  * @version 1.0
  */
 public abstract class BaseTestCase extends Assert {

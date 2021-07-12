@@ -27,56 +27,56 @@ import java.util.Set;
 
 /**
  * 不可修改的泛型参数接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取参数的个数
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public int size();
 	
 	/**
 	 * 判断是否为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isEmpty();
 	
 	/**
 	 * 判断是否不为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public boolean isNotEmpty();
 	
 	/**
 	 * 获取所有的参数映射集
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Map<K, V> getItems();
 	
 	/**
 	 * 获取所有的参数名
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public Set<K> getNames();
 	
 	/**
 	 * 获取所有的参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public List<V> getValues();
 	
 	/**
 	 * 获取指定名称的参数值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -84,7 +84,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取字符串参数值，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -92,7 +92,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取字符串参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -101,7 +101,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 根据名称获取不为空的字符串值，未获取到时返回不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -109,7 +109,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 根据名称获取不为空的字符串值，未获取到时返回指定不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -118,7 +118,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 根据名称获取不为空白的字符串值，未获取到时返回不为空白的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -126,7 +126,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 根据名称获取不为空白的字符串值，未获取到时返回指定不为空白的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -135,7 +135,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类布尔参数值，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -143,7 +143,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类布尔参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -152,7 +152,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取布尔参数值，未获取到时返回不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -160,7 +160,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类布尔参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -169,7 +169,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类比特参数值，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -177,7 +177,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类比特参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -186,7 +186,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取比特参数值，未获取到时返回不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -194,7 +194,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取比特参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -203,7 +203,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类短整型参数值，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -211,7 +211,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类短整型参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -220,7 +220,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取短整型参数值，未获取到时返回不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -228,7 +228,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取短整型参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -237,7 +237,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类整型参数值，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -245,7 +245,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类整型参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -254,7 +254,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取整型参数值，未获取到时返回不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -262,7 +262,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取整型参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -271,7 +271,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类长整型参数值，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -279,7 +279,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类长整型参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -288,7 +288,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取长整型参数值，未获取到时返回不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -296,7 +296,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取长整型参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -305,7 +305,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类单精度浮点参数值，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -313,7 +313,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类单精度浮点参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -322,7 +322,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取单精度浮点参数值，未获取到时返回不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -330,7 +330,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取单精度浮点参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -339,7 +339,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类双精度浮点参数值，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -347,7 +347,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取包装类双精度浮点参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -356,7 +356,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取双精度浮点参数值，未获取到时返回不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -364,7 +364,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取双精度浮点参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -373,7 +373,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取BigInteger参数值，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -381,7 +381,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取BigInteger参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -390,7 +390,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取BigInteger参数值，未获取到时返回不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -398,7 +398,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取BigInteger参数值，未获取到时返回指定不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -407,7 +407,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取BigDecimal参数值，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -415,7 +415,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取BigDecimal参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -424,7 +424,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取BigDecimal参数值，未获取到时返回不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -432,7 +432,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取BigDecimal参数值，未获取到时返回指定不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -441,7 +441,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取Date参数值，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -449,7 +449,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取Date参数值，如果获取到的值为字符串，则按指定的格式转换成目标值后返回。否则，未获取到时返回默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param pattern
 	 * @return
@@ -458,7 +458,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取Date参数值，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -467,7 +467,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取Date参数值，如果获取到的值为字符串，则按指定的格式转换成目标值后返回。否则，未获取到时返回指定的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param pattern
 	 * @param defaultValue
@@ -477,7 +477,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取Date参数值，未获取到时返回指定不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
@@ -485,7 +485,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取Date参数值，如果获取到的值为字符串，则按指定的格式转换成目标值后返回。否则，未获取到时返回不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param pattern
 	 * @return
@@ -494,7 +494,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取Date参数值，未获取到时返回指定不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -503,7 +503,7 @@ public interface UnmodifiableParameters<K, V> {
 	
 	/**
 	 * 获取Date参数值，如果获取到的值为字符串，则按指定的格式转换成目标值后返回。否则，未获取到时返回指定不为空的默认值
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param name
 	 * @param pattern
 	 * @param defaultValue

@@ -27,7 +27,7 @@ import org.sniper.http.headers.AbstractQualityFactor;
 
 /**
  * 客户端可以处理的字符集类型
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class AcceptCharset extends AbstractQualityFactor {

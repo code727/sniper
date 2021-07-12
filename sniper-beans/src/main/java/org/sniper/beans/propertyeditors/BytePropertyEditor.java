@@ -20,7 +20,7 @@ package org.sniper.beans.propertyeditors;
 
 /**
  * 比特数属性编辑器
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class BytePropertyEditor extends AbstractNumberPropertyEditor {

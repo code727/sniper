@@ -20,14 +20,14 @@ package org.sniper.persistence.datasource.manager;
 
 /**
  * 多数据源管理器接口
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public interface MultipleDataSourceManager {
 	
 	/**
 	 * 根据参数获取对应的数据源
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param parameter
 	 * @return
 	 */

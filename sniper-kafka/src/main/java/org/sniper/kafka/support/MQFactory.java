@@ -28,14 +28,14 @@ import org.sniper.kafka.topic.Topic;
 
 /**
  * 消息队列工厂
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class MQFactory {
 	
 	/**
 	 * 根据topic名称、分区和消息的键值构建出Kafka生产记录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param topic
 	 * @param partition
 	 * @param key
@@ -48,7 +48,7 @@ public class MQFactory {
 	
 	/**
 	 * 根据topic名称、分区和消息的键值构建出可序列化的生产记录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param topic
 	 * @param partition
 	 * @param key
@@ -66,7 +66,7 @@ public class MQFactory {
 	
 	/**
 	 * 根据Kafka ProducerRecord对象构建出可序列化的生产记录
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param record
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public class MQFactory {
 	
 	/**
 	 * 根据生产者发送结果构建出可序列化的生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param result
 	 * @return
 	 */
@@ -92,7 +92,7 @@ public class MQFactory {
 	
 	/**
 	 * 根据生产者记录和元数据构建出可序列化的生产结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param record
 	 * @return
 	 */
@@ -109,7 +109,7 @@ public class MQFactory {
 	
 	/**
 	 * 根据消费者记录构建出可序列化的消费结果
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param record
 	 * @return
 	 */

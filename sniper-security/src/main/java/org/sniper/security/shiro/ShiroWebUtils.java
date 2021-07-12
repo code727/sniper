@@ -31,14 +31,14 @@ import org.sniper.commons.util.StringUtils;
 
 /**
  * Shiro Web工具类
- * @author  <a href="mailto:code727@gmail.com">杜斌</a>
+ * @author  Daniele
  * @version 1.0
  */
 public class ShiroWebUtils extends ShiroUtils {
 	
 	/**
 	 * 获取已保存的请求URL
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static String getSavedRequestUrl() {
@@ -47,7 +47,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	
 	/**
 	 * 获取已保存的请求URL，否则返回默认指定的URL
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param fallbackUrl
 	 * @return
 	 */
@@ -57,7 +57,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	
 	/**
 	 * 获取已保存的请求URL
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @return
 	 */
@@ -67,7 +67,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	
 	/**
 	 * 获取已保存的请求URL，否则返回默认指定的URL
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param fallbackUrl
 	 * @return
@@ -98,7 +98,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	
 	/**
 	 * 重定向到已保存的请求URL
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @throws IOException
 	 */
 	public static void redirectToSavedRequest() throws IOException {
@@ -107,7 +107,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	
 	/**
 	 * 重定向到已保存的请求URL
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param fallbackUrl
 	 * @throws IOException
 	 */
@@ -117,7 +117,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	
 	/**
 	 * 重定向到已保存的请求URL
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param response
 	 * @throws IOException
@@ -128,7 +128,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	
 	/**
 	 * 重定向到已保存的请求URL，否则重定向默认指定的URL
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @param request
 	 * @param response
 	 * @param fallbackUrl
@@ -140,7 +140,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	
 	/**
 	 * 获取javax.servlet.ServletRequest对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static ServletRequest getServletRequest() {
@@ -149,7 +149,7 @@ public class ShiroWebUtils extends ShiroUtils {
 	
 	/**
 	 * 获取javax.servlet.ServletResponse对象
-	 * @author <a href="mailto:code727@gmail.com">杜斌</a> 
+	 * @author Daniele 
 	 * @return
 	 */
 	public static ServletResponse getServletResponse() {
