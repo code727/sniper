@@ -20,7 +20,7 @@ package org.sniper.commons.test;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.sniper.commons.constant.status.ResponseStatus;
+import org.sniper.commons.enums.status.ResponseStatusEnum;
 import org.sniper.commons.response.Response;
 import org.sniper.commons.response.Responses;
 import org.sniper.test.junit.BaseTestCase;
@@ -64,9 +64,9 @@ public class ResponseTest extends BaseTestCase {
 	
 	@Test
 	public void buildResponse() {
-		Response<Object> response1 = Responses.buildResponse(ResponseStatus.SUCCESS);
-		Response<Object> response2 = Responses.buildResponse(ResponseStatus.ERROR);
-		Response<Object> response3 = Responses.buildResponse(ResponseStatus.UNKNOWN_ERROR);
+		Response<Object> response1 = Responses.buildResponse(ResponseStatusEnum.SUCCESS);
+		Response<Object> response2 = Responses.buildResponse(ResponseStatusEnum.ERROR);
+		Response<Object> response3 = Responses.buildResponse(ResponseStatusEnum.UNKNOWN_ERROR);
 		
 		Assert.assertTrue(response1.successed());
 		Assert.assertTrue(response2.errored());

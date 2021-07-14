@@ -49,9 +49,8 @@ import org.sniper.spring.beans.AbstractGenricBean;
  * @author  Daniele
  * @version 1.0
  */
-public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends
-		AbstractGenricBean<T> {
-	
+public abstract class SpringMongoDaoSupport<T, PK extends Serializable> extends AbstractGenricBean<T> {
+		
 	public static final String ID_KEY_NAME = "_id";
 	
 	@Autowired

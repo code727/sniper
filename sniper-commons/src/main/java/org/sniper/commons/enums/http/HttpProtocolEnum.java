@@ -20,43 +20,80 @@ package org.sniper.commons.enums.http;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.commons.util.MessageUtils;
 
 /**
  * HTTP协议枚举
  * @author  Daniele
  * @version 1.0
  */
-public enum HttpProtocolEnum {
+public enum HttpProtocolEnum implements Enumerable<Integer> {
 	
-	HTTP, HTTPS;
+	HTTP("http.protocol.http"), 
 	
-	private static final Map<String, HttpProtocolEnum> mappings = MapUtils.newHashMap(2);
+	HTTPS("http.protocol.https");
+	
+	private static final Map<Integer, HttpProtocolEnum> KEY_MAPPINGS = MapUtils.newHashMap(2);
+	private static final Map<String, HttpProtocolEnum> NAME_MAPPINGS = MapUtils.newHashMap(2);
 	
 	static {
 		for (HttpProtocolEnum httpProtocol : values()) {
-			mappings.put(httpProtocol.name(), httpProtocol);
+			KEY_MAPPINGS.put(httpProtocol.key, httpProtocol);
+			NAME_MAPPINGS.put(httpProtocol.name(), httpProtocol);
 		}
 	}
 	
-	/**
-	 * 判断指定的协议名称是否匹配当前枚举
-	 * @author Daniele 
-	 * @param name
-	 * @return
-	 */
+	/** 键 */
+	private final int key;
+		
+	/** 消息 */
+	private final String message;
+	
+	private HttpProtocolEnum(String message) {
+		this.key = ordinal();
+		this.message = MessageUtils.getClassMessage(getClass(), message);
+	}
+	
+	@Override
+	public Integer getKey() {
+		return key;
+	}
+		
+	@Override
+	public String getMessage() {
+		return message;
+	}
+	
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
+	}
+	
+	@Override
 	public boolean matches(String name) {
 		return this.name().equalsIgnoreCase(name);
 	}
 	
 	/**
-	 * 将指定的协议名称解析成枚举对象
+	 * 将指定的键解析成枚举对象
+	 * @author Daniele 
+	 * @param key
+	 * @return
+	 */
+	public static HttpProtocolEnum resolve(int key) {
+		return KEY_MAPPINGS.get(key);
+	}
+	
+	/**
+	 * 将指定的名称解析成枚举对象
 	 * @author Daniele 
 	 * @param name
 	 * @return
 	 */
 	public static HttpProtocolEnum resolve(String name) {
-		return name != null ? mappings.get(name.toUpperCase()) : null;
+		return name != null ? NAME_MAPPINGS.get(name.toUpperCase()) : null;
 	}
 	
 }

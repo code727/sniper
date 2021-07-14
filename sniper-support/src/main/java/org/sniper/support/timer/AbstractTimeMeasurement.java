@@ -16,7 +16,7 @@
  * Create Date : 2018-12-28
  */
 
-package org.sniper.commons.timer;
+package org.sniper.support.timer;
 
 import java.util.concurrent.TimeUnit;
 

@@ -19,14 +19,14 @@
 package org.sniper.commons.exception;
 
 /**
- * 数据访问异常
+ * 数据访问层异常
  * @author  Daniele
  * @version 1.0
  */
-public class DaoException extends SniperException {
+public class DaoException extends RuntimeException {
 
-	private static final long serialVersionUID = -8402858625186149979L;
-	
+	private static final long serialVersionUID = 6844398043682514353L;
+
 	public DaoException() {
 		super();
 	}

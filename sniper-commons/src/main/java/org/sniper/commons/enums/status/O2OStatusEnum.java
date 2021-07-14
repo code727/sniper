@@ -20,78 +20,81 @@ package org.sniper.commons.enums.status;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
 /**
- * 在线离线/线上线下状态枚举类
+ * 离线/在线状态枚举类
  * @author  Daniele
  * @version 1.0
  */
-public enum O2OStatus {
+public enum O2OStatusEnum implements Enumerable<Integer> {
 	
 	/** 线下 */
 	OFFLINE("o2o.status.offline"),
 	/** 线上 */
 	ONLINE("o2o.status.online");
 	
-	private static final Map<Integer, O2OStatus> mappings = MapUtils.newHashMap(2);
+	private static final Map<Integer, O2OStatusEnum> KEY_MAPPINGS = MapUtils.newHashMap(2);
+	private static final Map<String, O2OStatusEnum> NAME_MAPPINGS = MapUtils.newHashMap(2);
 	
 	static {
-		for (O2OStatus status : values()) {
-			mappings.put(status.ordinal(), status);
+		for (O2OStatusEnum status : values()) {
+			KEY_MAPPINGS.put(status.key, status);
+			NAME_MAPPINGS.put(status.name(), status);
 		}
 	}
 	
 	/** 键 */
 	private final int key;
 	
-	/** 值 */
-	private final String value;
-	
 	/** 消息 */
 	private final String message;
 
-	private O2OStatus(String value) {
+	private O2OStatusEnum(String message) {
 		this.key = ordinal();
-		this.value = value;
-		this.message = MessageUtils.getClassMessage(getClass(), value);
+		this.message = MessageUtils.getClassMessage(getClass(), message);
 	}
 	
-	public int getKey() {
+	@Override
+	public Integer getKey() {
 		return key;
 	}
-
-	public String getValue() {
-		return value;
-	}
-
+	
+	@Override
 	public String getMessage() {
 		return message;
 	}
 	
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
+	}
+
+	@Override
+	public boolean matches(String name) {
+		return this.name().equalsIgnoreCase(name);
+	}
+	
 	/**
-	 * 判断指定的键是否匹配一个O2OStatus对象
+	 * 将指定的键解析成枚举对象
 	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
-	public boolean matches(int key) {
-		return this.key == key;
+	public static O2OStatusEnum resolve(int key) {
+		return KEY_MAPPINGS.get(key);
 	}
 	
 	/**
-	 * 将指定的键解析成O2OStatus对象
+	 * 将指定的名称解析成枚举对象
 	 * @author Daniele 
-	 * @param key
+	 * @param name
 	 * @return
 	 */
-	public static O2OStatus resolve(int key) {
-		return mappings.get(key);
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(O2OStatus.OFFLINE.getMessage());
+	public static O2OStatusEnum resolve(String name) {
+		return name != null ? NAME_MAPPINGS.get(name.toUpperCase()) : null;
 	}
 	
 }

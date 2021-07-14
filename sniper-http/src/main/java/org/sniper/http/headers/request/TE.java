@@ -56,9 +56,9 @@ public class TE extends AbstractQualityFactor {
 		String qualityValue = super.toString();
 		
 		if (qualityValue.length() > 0) 
-			return this.teEnum.getAlgorithm() + qualityValue;
+			return this.teEnum.getType() + qualityValue;
 		
-		return this.teEnum.getAlgorithm();
+		return this.teEnum.getType();
 	}
 		
 }

@@ -126,7 +126,7 @@ public class ObjectUtils {
 		if (obj1 == null || obj2 == null)
 			return obj1 == obj2;
 		
-		return StringUtils.equals(obj1.toString(), obj2.toString());
+		return obj1.toString().equals(obj2.toString());
 	}
 	
 	/**

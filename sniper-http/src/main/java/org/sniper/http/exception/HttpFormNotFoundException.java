@@ -18,14 +18,12 @@
 
 package org.sniper.http.exception;
 
-import org.sniper.commons.exception.SniperException;
-
 /**
  * "表单未找到"运行时异常
  * @author  Daniele
  * @version 1.0
  */
-public class HttpFormNotFoundException extends SniperException {
+public class HttpFormNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = -2895027098437321733L;
 	

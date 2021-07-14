@@ -30,9 +30,8 @@ import org.sniper.commons.entity.Versioned;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class SequenceVersionedIdEntity extends SequenceIdEntity
-		implements Versioned {
-	
+public abstract class SequenceVersionedIdEntity extends SequenceIdEntity implements Versioned {
+		
 	/** 版本号 */
 	private long version;
 	

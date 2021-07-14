@@ -20,14 +20,15 @@ package org.sniper.commons.enums.http;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
 
 /**
- * 媒介类型枚举
+ * HTTP媒介类型枚举
  * @author  Daniele
  * @version 1.0
  */
-public enum MediaEnum {
+public enum MediaEnum implements Enumerable<Integer> {
 	
 	ALL("*/*"),
 	APPLICATION_ATOM_XML("application/atom+xml"),
@@ -112,43 +113,80 @@ public enum MediaEnum {
 	VIDEO_X_MSVIDEO("video/x-msvideo")
 	;
 	
-	private static final Map<String, MediaEnum> mappings = MapUtils.newHashMap(81);
+	private static final Map<Integer, MediaEnum> KEY_MAPPINGS = MapUtils.newHashMap(81);
+	private static final Map<String, MediaEnum> TYPE_AND_NAME_MAPPINGS = MapUtils.newHashMap(81);
+	
+	/** 键 */
+	private final int key;
 	
 	/** 类型 */
 	private final String type;
+		
+	/** 消息 */
+	private final String message;
 	
 	static {
 		for (MediaEnum media : values()) {
-			mappings.put(media.type.toLowerCase(), media);
+			KEY_MAPPINGS.put(media.key, media);
+			TYPE_AND_NAME_MAPPINGS.put(media.type.toUpperCase(), media);
+			TYPE_AND_NAME_MAPPINGS.put(media.name(), media);
 		}
 	}
 	
 	private MediaEnum(String type) {
+		this.key = ordinal();
 		this.type = type;
+		this.message = type;
 	}
-
+	
+	@Override
+	public Integer getKey() {
+		return key;
+	}
+		
 	public String getType() {
 		return type;
 	}
 	
+	@Override
+	public String getMessage() {
+		return message;
+	}
+	
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
+	}
+	
 	/**
-	 * 判断指定的类型是否匹配当前枚举
-	 * @author Daniele 
-	 * @param type
+	 * 判断指定的类型或名称是否匹配当前枚举对象
+	 * @author Daniele
+	 * @param typeOrName
 	 * @return
 	 */
-	public boolean matches(String type) {
-		return this.type.equalsIgnoreCase(type);
+	@Override
+	public boolean matches(String typeOrName) {
+		return this.type.equalsIgnoreCase(typeOrName) || this.name().equalsIgnoreCase(typeOrName);
 	}
 
 	/**
-	 * 将指定的算法模式解析成枚举对象
+	 * 将指定的键解析成枚举对象
 	 * @author Daniele 
-	 * @param type
+	 * @param key
 	 * @return
 	 */
-	public static MediaEnum resolve(String type) {
-		return type != null ? mappings.get(type.toLowerCase()) : null;
+	public static MediaEnum resolve(int key) {
+		return KEY_MAPPINGS.get(key);
+	}
+	
+	/**
+	 * 将指定的类型或名称解析成枚举对象
+	 * @author Daniele 
+	 * @param typeOrName
+	 * @return
+	 */
+	public static MediaEnum resolve(String typeOrName) {
+		return typeOrName != null ? TYPE_AND_NAME_MAPPINGS.get(typeOrName.toUpperCase()) : null;
 	}
 		
 }

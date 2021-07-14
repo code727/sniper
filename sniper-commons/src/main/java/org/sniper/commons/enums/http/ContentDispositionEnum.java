@@ -20,61 +20,100 @@ package org.sniper.commons.enums.http;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.commons.util.MessageUtils;
 
 /**
- * Content-Disposition消息头类型枚举
+ * HTTP Content-Disposition消息头类型枚举
  * @author  Daniele
  * @version 1.0
  */
-public enum ContentDispositionEnum {
+public enum ContentDispositionEnum implements Enumerable<Integer> {
 	
-	/** 内联形式 */
-	INLINE("inline"),
+	/** 内联类型 */
+	INLINE("inline", "http.content-disposition.inline"),
 	
-	/** 附件形式 */
-	ATTACHMENT("attachment"),
+	/** 附件类型 */
+	ATTACHMENT("attachment", "http.content-disposition.attachment"),
 	
 	/** 表单数据 */
-	FORM_DATA("form-data");
+	FORM_DATA("form-data", "http.content-disposition.form-data");
 	
-	private static final Map<String, ContentDispositionEnum> mappings = MapUtils.newHashMap(3);
+	private static final Map<Integer, ContentDispositionEnum> KEY_MAPPINGS = MapUtils.newHashMap(9);
+	private static final Map<String, ContentDispositionEnum> TYPE_AND_NAME_MAPPINGS = MapUtils.newHashMap(11);
 	
-	/** 类型 */
+	/** 键 */
+	private final int key;
+	
+	/** 编码类型 */
 	private final String type;
 	
+	/** 消息 */
+	private final String message;
+	
 	static {
-		for (ContentDispositionEnum disposition : values()) {
-			mappings.put(disposition.type, disposition);
+		for (ContentDispositionEnum contentDisposition : values()) {
+			KEY_MAPPINGS.put(contentDisposition.key, contentDisposition);
+			TYPE_AND_NAME_MAPPINGS.put(contentDisposition.type.toUpperCase(), contentDisposition);
+			TYPE_AND_NAME_MAPPINGS.put(contentDisposition.name(), contentDisposition);
 		}
 	}
-	
-	private ContentDispositionEnum(String type) {
+		
+	private ContentDispositionEnum(String type, String message) {
+		this.key = ordinal();
 		this.type = type;
+		this.message = MessageUtils.getClassMessage(getClass(), message);
+	}
+	
+	@Override
+	public Integer getKey() {
+		return key;
 	}
 	
 	public String getType() {
 		return type;
 	}
-
-	/**
-	 * 判断指定的类型是否匹配当前枚举
-	 * @author Daniele 
-	 * @param type
-	 * @return
-	 */
-	public boolean matches(String type) {
-		return this.type.equalsIgnoreCase(type);
+	
+	@Override
+	public String getMessage() {
+		return message;
+	}
+	
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
 	}
 
 	/**
-	 * 将指定的类型解析成枚举对象
+	 * 判断指定的类型或名称是否匹配当前枚举
 	 * @author Daniele 
-	 * @param type
+	 * @param typeOrName
 	 * @return
 	 */
-	public static ContentDispositionEnum resolve(String type) {
-		return type != null ? mappings.get(type.toLowerCase()) : null;
+	@Override
+	public boolean matches(String typeOrName) {
+		return this.type.equalsIgnoreCase(typeOrName) || this.name().equalsIgnoreCase(typeOrName);
 	}
-
+	
+	/**
+	 * 将指定的键解析成枚举对象
+	 * @author Daniele 
+	 * @param key
+	 * @return
+	 */
+	public static ContentDispositionEnum resolve(int key) {
+		return KEY_MAPPINGS.get(key);
+	}
+	
+	/**
+	 * 将指定的类型或名称解析成枚举对象
+	 * @author Daniele 
+	 * @param typeOrName
+	 * @return
+	 */
+	public static ContentDispositionEnum resolve(String typeOrName) {
+		return typeOrName != null ? TYPE_AND_NAME_MAPPINGS.get(typeOrName.toUpperCase()) : null;
+	}
+			
 }

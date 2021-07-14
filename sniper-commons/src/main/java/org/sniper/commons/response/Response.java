@@ -18,7 +18,7 @@
 
 package org.sniper.commons.response;
 
-import org.sniper.commons.constant.status.ResponseStatus;
+import org.sniper.commons.enums.status.ResponseStatusEnum;
 
 /**
  * 响应对象
@@ -30,10 +30,10 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	private static final long serialVersionUID = -2728403977784339577L;
 
 	/** 默认成功响应码 */
-	protected static final int DEFAULT_SUCCESS_CODE = ResponseStatus.SUCCESS.getKey();
+	protected static final int DEFAULT_SUCCESS_CODE = ResponseStatusEnum.SUCCESS.getKey();
 	
 	/** 默认错误响应码  */
-	protected static final int DEFAULT_ERROR_CODE = ResponseStatus.ERROR.getKey();
+	protected static final int DEFAULT_ERROR_CODE = ResponseStatusEnum.ERROR.getKey();
 	
 	public Response() {
 		this(null);

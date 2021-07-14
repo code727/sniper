@@ -18,7 +18,7 @@
 
 package org.sniper.commons.response;
 
-import org.sniper.commons.constant.status.ResponseStatus;
+import org.sniper.commons.enums.status.ResponseStatusEnum;
 
 /**
  * 消息化响应对象接口
@@ -28,10 +28,10 @@ import org.sniper.commons.constant.status.ResponseStatus;
 public interface MessagingResponse<C> extends GenericResponse<C> {
 	
 	/** 默认成功消息 */
-	public static final String DEFAULT_SUCCESS_MESSAGE = ResponseStatus.SUCCESS.getMessage();
+	public static final String DEFAULT_SUCCESS_MESSAGE = ResponseStatusEnum.SUCCESS.getMessage();
 		
 	/** 默认错误消息 */
-	public static final String DEFAULT_ERROR_MESSAGE = ResponseStatus.ERROR.getMessage();
+	public static final String DEFAULT_ERROR_MESSAGE = ResponseStatusEnum.ERROR.getMessage();
 	
 	/**
 	 * 获取响应消息

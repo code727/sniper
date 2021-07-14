@@ -40,8 +40,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 
-import org.sniper.commons.exception.ListIndexOutOfBoundsException;
-
 /**
  * 集合工具类
  * @author  Daniele
@@ -905,7 +903,7 @@ public class CollectionUtils {
 	 */
 	public static <T> void merge(List<T> list, int index, T value) {
 		AssertUtils.assertNotNull(list, "Merged list must not be null");
-		if (index < 0) throw new ListIndexOutOfBoundsException(index);
+		if (index < 0) throw new IndexOutOfBoundsException(String.format("List index out of range:%d", index));
 			
 		if (index < list.size())
 			list.set(index, value);

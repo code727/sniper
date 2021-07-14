@@ -18,17 +18,91 @@
 
 package org.sniper.commons.enums.biology;
 
+import java.util.Map;
+
+import org.sniper.commons.enums.Enumerable;
+import org.sniper.commons.util.MapUtils;
+import org.sniper.commons.util.MessageUtils;
+
 /**
  * 血型枚举
  * @author  Daniele
  * @version 1.0
  */
-public enum BloodTypeEnum {
+public enum BloodTypeEnum implements Enumerable<Integer> {
 	
-	A,
-	B,
-	AB,
-	O,
-	/** 其它血型，预留 */
-	OTHER;
+	/** A型 */
+	A("blood.type.a"),
+	/** B型 */
+	B("blood.type.b"),
+	/** O型 */
+	O("blood.type.o"),
+	/** AB型 */
+	AB("blood.type.ab"),
+	/** Rh型 */
+	RH("blood.type.rh"),
+	/** 预留，其它（包括MN型、Ss型和Qg型等） */
+	OTHER("blood.type.other");
+	
+	private static final Map<Integer, BloodTypeEnum> KEY_MAPPINGS = MapUtils.newHashMap(6);
+	
+	private static final Map<String, BloodTypeEnum> NAME_MAPPINGS = MapUtils.newHashMap(6);
+	
+	static {
+		for (BloodTypeEnum bloodType: values()) {
+			KEY_MAPPINGS.put(bloodType.key, bloodType);
+			NAME_MAPPINGS.put(bloodType.name(), bloodType);
+		}
+	}
+	
+	/** 键 */
+	private final int key;
+	
+	/** 消息 */
+	private final String message;  
+	
+	private BloodTypeEnum(String message) {
+		this.key = ordinal();
+		this.message = MessageUtils.getClassMessage(getClass(), message);
+	}
+	
+	@Override
+	public Integer getKey() {
+		return key;
+	}
+
+	@Override
+	public String getMessage() {
+		return message;
+	}
+
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
+	}
+	
+	@Override
+	public boolean matches(String name) {
+		return this.name().equalsIgnoreCase(name);
+	}
+	
+	/**
+	 * 将指定的键解析成枚举对象
+	 * @author Daniele 
+	 * @param type
+	 * @return
+	 */
+	public static BloodTypeEnum resolve(int key) {
+		return KEY_MAPPINGS.get(key);
+	}
+	
+	/**
+	 * 将指定的名称解析成枚举对象
+	 * @author Daniele 
+	 * @param name
+	 * @return
+	 */
+	public static BloodTypeEnum resolve(String name) {
+		return name != null ? NAME_MAPPINGS.get(name.toUpperCase()) : null;
+	}
 }

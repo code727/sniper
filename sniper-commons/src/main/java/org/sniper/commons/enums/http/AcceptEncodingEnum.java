@@ -20,67 +20,106 @@ package org.sniper.commons.enums.http;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.commons.util.MessageUtils;
 
 /**
- * Accept-Encoding请求头编码算法枚举
+ * HTTP Accept-Encoding请求头编码类型枚举
  * @author  Daniele
  * @version 1.0
  */
-public enum AcceptEncodingEnum {
+public enum AcceptEncodingEnum implements Enumerable<Integer> {
 	
-	AES128GCM("aes128gcm"),
-	BR("br"),
-	BZIP("bzip"), 
-	BZIP2("bzip2"),
-	COMPRESS("compress"),
-	DEFLATE("deflate"),
-	EXI("exi"),
-	GZIP("gzip"),
-	IDENTITY("identity"),
-	PACK200_GZIP("pack200-gzip"),
-	X_COMPRESS("x-compress"),
-	X_GZIP("x-gzip"),
-	ANY("*")
+	AES128GCM("aes128gcm", "http.accept-encoding.aes128gcm"),
+	BR("br", "http.accept-encoding.br"),
+	BZIP("bzip", "http.accept-encoding.bzip"), 
+	BZIP2("bzip2", "http.accept-encoding.bzip2"),
+	COMPRESS("compress", "http.accept-encoding.compress"),
+	DEFLATE("deflate", "http.accept-encoding.deflate"),
+	EXI("exi", "http.accept-encoding.exi"),
+	GZIP("gzip", "http.accept-encoding.encoding.gzip"),
+	IDENTITY("identity", "http.accept-encoding.identity"),
+	PACK200_GZIP("pack200-gzip", "http.accept-encoding.pack200-gzip"),
+	X_COMPRESS("x-compress", "http.accept-encoding.x-compress"),
+	X_GZIP("x-gzip", "http.accept-encoding.x-gzip"),
+	ANY("*", "http.accept-encoding.*")
 	;
 	
-	private static final Map<String, AcceptEncodingEnum> mappings = MapUtils.newHashMap(13);
+	private static final Map<Integer, AcceptEncodingEnum> KEY_MAPPINGS = MapUtils.newHashMap(13);
+	private static final Map<String, AcceptEncodingEnum> TYPE_AND_NAME_MAPPINGS = MapUtils.newHashMap(17);
 	
-	/** 算法 */
-	private final String algorithm;
+	/** 键 */
+	private final int key;
+	
+	/** 编码类型 */
+	private final String type;
+	
+	/** 消息 */
+	private final String message;
 	
 	static {
-		for (AcceptEncodingEnum acceptEncoding : values()) {
-			mappings.put(acceptEncoding.algorithm, acceptEncoding);
+		for (AcceptEncodingEnum encoding : values()) {
+			KEY_MAPPINGS.put(encoding.key, encoding);
+			TYPE_AND_NAME_MAPPINGS.put(encoding.type.toUpperCase(), encoding);
+			TYPE_AND_NAME_MAPPINGS.put(encoding.name(), encoding);
 		}
 	}
 	
-	private AcceptEncodingEnum(String algorithm) {
-		this.algorithm = algorithm;
+	private AcceptEncodingEnum(String type, String message) {
+		this.key = ordinal();
+		this.type = type;
+		this.message = MessageUtils.getClassMessage(getClass(), message);
 	}
 	
-	public String getAlgorithm() {
-		return algorithm;
+	@Override
+	public Integer getKey() {
+		return key;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	@Override
+	public String getMessage() {
+		return message;
+	}
+	
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
 	}
 
 	/**
-	 * 判断指定的算法是否匹配当前枚举
+	 * 判断指定的类型或名称是否匹配当前枚举
 	 * @author Daniele 
-	 * @param algorithm
+	 * @param typeOrName
 	 * @return
 	 */
-	public boolean matches(String algorithm) {
-		return this.algorithm.equalsIgnoreCase(algorithm);
+	@Override
+	public boolean matches(String typeOrName) {
+		return this.type.equalsIgnoreCase(typeOrName) || this.name().equalsIgnoreCase(typeOrName);
 	}
-
+	
 	/**
-	 * 将指定的算法解析成枚举对象
+	 * 将指定的键解析成枚举对象
 	 * @author Daniele 
-	 * @param algorithm
+	 * @param key
 	 * @return
 	 */
-	public static AcceptEncodingEnum resolve(String algorithm) {
-		return algorithm != null ? mappings.get(algorithm.toLowerCase()) : null;
+	public static AcceptEncodingEnum resolve(int key) {
+		return KEY_MAPPINGS.get(key);
+	}
+	
+	/**
+	 * 将指定的类型或名称解析成枚举对象
+	 * @author Daniele 
+	 * @param typeOrName
+	 * @return
+	 */
+	public static AcceptEncodingEnum resolve(String typeOrName) {
+		return typeOrName != null ? TYPE_AND_NAME_MAPPINGS.get(typeOrName.toUpperCase()) : null;
 	}
 		
 }

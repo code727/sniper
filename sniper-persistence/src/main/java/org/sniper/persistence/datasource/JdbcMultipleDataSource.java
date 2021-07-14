@@ -20,8 +20,8 @@ package org.sniper.persistence.datasource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.sniper.context.DataSourceHolder;
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
  * JDBC多数据源实现类

@@ -18,7 +18,7 @@
 
 package org.sniper.commons.response;
 
-import org.sniper.commons.constant.status.ResponseStatus;
+import org.sniper.commons.enums.status.ResponseStatusEnum;
 import org.sniper.commons.util.AssertUtils;
 
 /**
@@ -120,7 +120,7 @@ public final class Responses {
 	 * @param status
 	 * @return
 	 */
-	public static <T> Response<T> buildResponse(ResponseStatus status) {
+	public static <T> Response<T> buildResponse(ResponseStatusEnum status) {
 		return buildResponse(status, null);
 	}
 	
@@ -131,7 +131,7 @@ public final class Responses {
 	 * @param data
 	 * @return
 	 */
-	public static <T> Response<T> buildResponse(ResponseStatus status, T data) {
+	public static <T> Response<T> buildResponse(ResponseStatusEnum status, T data) {
 		AssertUtils.assertNotNull(status, "Response status must not be null");
 		return new Response<T>(status.getKey(), status.getMessage(), data);
 	}

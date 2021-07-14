@@ -26,9 +26,7 @@ import java.util.List;
 
 import org.sniper.commons.KeyValuePair;
 import org.sniper.commons.exception.NoSuchAnnotatedFieldException;
-import org.sniper.commons.exception.NoSuchAnnotatedGetterException;
 import org.sniper.commons.exception.NoSuchAnnotatedMethodException;
-import org.sniper.commons.exception.NoSuchAnnotatedSetterException;
 
 /**
  * 注解工具类
@@ -567,7 +565,7 @@ public class AnnotationUtils {
 	public static <A extends Annotation, V> KeyValuePair<String, V> invokeAnnotatedGetter(Object obj, Class<A> annotationClass) throws Exception {
 		Method annotatedGetter = findAnnotatedGetter(obj, annotationClass);
 		if (annotatedGetter == null) 
-			throw new NoSuchAnnotatedGetterException(obj, annotationClass);
+			throw new NoSuchAnnotatedMethodException(obj, annotationClass);
 		
 		V value = (V) ReflectionUtils.invokeAccessibleMethod(obj, annotatedGetter, null, null);
 		return new KeyValuePair<String, V>(annotatedGetter.getName(), value);
@@ -586,7 +584,7 @@ public class AnnotationUtils {
 	public static <A extends Annotation, V> Method invokeAnnotatedSetter(Object obj, Class<A> annotationClass, V pValue) throws Exception {
 		Method annotatedSetter = findAnnotatedSetter(obj, annotationClass);
 		if (annotatedSetter == null)
-			throw new NoSuchAnnotatedSetterException(obj, annotationClass);
+			throw new NoSuchAnnotatedMethodException(obj, annotationClass);
 		
 		ReflectionUtils.invokeAccessibleMethod(obj, annotatedSetter, annotatedSetter.getParameterTypes(), new Object[]{pValue});
 		return annotatedSetter;

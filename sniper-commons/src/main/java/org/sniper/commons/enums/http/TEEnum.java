@@ -20,57 +20,104 @@ package org.sniper.commons.enums.http;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.commons.util.MessageUtils;
 
 /**
- * 传输编码(TE)算法枚举
+ * 传输编码(TE)类型枚举
  * @author  Daniele
  * @version 1.0
  */
-public enum TEEnum {
+public enum TEEnum implements Enumerable<Integer> {
 	
-	COMPRESS("compress"),
-	DEFLATE("deflate"),
-	GZIP("gzip"),
-	TRAILERS("trailers");
+	/** compress编码 */
+	COMPRESS("http.te.compress"),
 	
-	private static final Map<String, TEEnum> mappings = MapUtils.newHashMap(4);
+	/** deflate编码 */
+	DEFLATE("http.te.deflate"),
 	
-	/** 算法 */
-	private final String algorithm;
+	/** gzip编码 */
+	GZIP("http.te.gzip"),
+	
+	/** trailers编码 */
+	TRAILERS("http.te.trailers")
+	;
+	
+	private static final Map<Integer, TEEnum> KEY_MAPPINGS = MapUtils.newHashMap(4);
+	private static final Map<String, TEEnum> NAME_MAPPINGS = MapUtils.newHashMap(4);
+	
+	/** 键 */
+	private final int key;
+	
+	/** 编码类型 */
+	private final String type;
+	
+	/** 消息 */
+	private final String message;
 	
 	static {
 		for (TEEnum te : values()) {
-			mappings.put(te.algorithm, te);
+			KEY_MAPPINGS.put(te.key, te);
+			NAME_MAPPINGS.put(te.name(), te);
 		}
 	}
 	
-	private TEEnum(String algorithm) {
-		this.algorithm = algorithm;
+	private TEEnum(String message) {
+		this.key = ordinal();
+		// 编码类型即为枚举对象名称的小写字符串
+		this.type = name().toLowerCase();
+		this.message = MessageUtils.getClassMessage(getClass(), message);
 	}
 	
-	public String getAlgorithm() {
-		return algorithm;
+	@Override
+	public Integer getKey() {
+		return key;
 	}
-
-	/**
-	 * 判断指定的算法是否匹配当前枚举
-	 * @author Daniele 
-	 * @param algorithm
-	 * @return
-	 */
-	public boolean matches(String algorithm) {
-		return this.algorithm.equalsIgnoreCase(algorithm);
+	
+	public String getType() {
+		return type;
+	}
+	
+	@Override
+	public String getMessage() {
+		return message;
+	}
+	
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
 	}
 	
 	/**
-	 * 将指定的算法模式解析成枚举对象
+	 * 判断指定的类型或名称是否匹配当前枚举
 	 * @author Daniele 
-	 * @param algorithm
+	 * @param typeOrName
 	 * @return
 	 */
-	public static TEEnum resolve(String algorithm) {
-		return algorithm != null ? mappings.get(algorithm.toLowerCase()) : null;
+	public boolean matches(String typeOrName) {
+		// 由于编码类型即为枚举对象名称的小写字符串，因此这里只用type字段比较即可
+		return this.type.equalsIgnoreCase(typeOrName);
 	}
-
+	
+	/**
+	 * 将指定的键解析成枚举对象
+	 * @author Daniele 
+	 * @param key
+	 * @return
+	 */
+	public static TEEnum resolve(int key) {
+		return KEY_MAPPINGS.get(key);
+	}
+	
+	/**
+	 * 将指定的类型或名称解析成枚举对象
+	 * @author Daniele 
+	 * @param typeOrName
+	 * @return
+	 */
+	public static TEEnum resolve(String typeOrName) {
+		return typeOrName != null ? NAME_MAPPINGS.get(typeOrName.toUpperCase()) : null;
+	}
+	
 }

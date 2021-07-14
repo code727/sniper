@@ -20,6 +20,7 @@ package org.sniper.commons.enums.astrology;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
@@ -28,7 +29,7 @@ import org.sniper.commons.util.MessageUtils;
  * @author  Daniele
  * @version 1.0
  */
-public enum ZodiacEnum {
+public enum ZodiacEnum implements Enumerable<Integer> {
 	
 	/** 鼠 */
 	MOUSE("zodiac.mouse"),
@@ -55,59 +56,66 @@ public enum ZodiacEnum {
 	/** 猪 */
 	PIG("zodiac.pig");
 	
-	private static final Map<Integer, ZodiacEnum> mappings = MapUtils.newHashMap(12);
+	private static final Map<Integer, ZodiacEnum> KEY_MAPPINGS = MapUtils.newHashMap(12);
+	
+	private static final Map<String, ZodiacEnum> NAME_MAPPINGS = MapUtils.newHashMap(12);
 	
 	static {
 		for (ZodiacEnum zodiac : values()) {
-			mappings.put(zodiac.ordinal(), zodiac);
+			KEY_MAPPINGS.put(zodiac.key, zodiac);
+			NAME_MAPPINGS.put(zodiac.name(), zodiac);
 		}
 	}
 	
 	/** 键 */
 	private final int key;
 	
-	/** 值 */
-	private final String value;
-	
 	/** 消息 */
-	private final String message;
+	private final String message;  
 
-	private ZodiacEnum(String value) {
+	private ZodiacEnum(String message) {
 		this.key = ordinal();
-		this.value = value;
-		this.message = MessageUtils.getClassMessage(getClass(), value);
+		this.message = MessageUtils.getClassMessage(getClass(), message);
 	}
 	
-	public int getKey() {
+	@Override
+	public Integer getKey() {
 		return key;
 	}
 
-	public String getValue() {
-		return value;
-	}
-
+	@Override
 	public String getMessage() {
 		return message;
 	}
+
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
+	}
 	
-	/**
-	 * 判断指定的键是否匹配
-	 * @author Daniele 
-	 * @param key
-	 * @return
-	 */
-	public boolean matches(int key) {
-		return this.key == key;
+	@Override
+	public boolean matches(String name) {
+		return this.name().equalsIgnoreCase(name);
 	}
 	
 	/**
 	 * 将指定的键解析成枚举对象
 	 * @author Daniele 
-	 * @param key
+	 * @param type
 	 * @return
 	 */
 	public static ZodiacEnum resolve(int key) {
-		return mappings.get(key);
+		return KEY_MAPPINGS.get(key);
+	}
+	
+	/**
+	 * 将指定的名称解析成枚举对象
+	 * @author Daniele 
+	 * @param name
+	 * @return
+	 */
+	public static ZodiacEnum resolve(String name) {
+		return name != null ? NAME_MAPPINGS.get(name.toUpperCase()) : null;
 	}
 	
 }

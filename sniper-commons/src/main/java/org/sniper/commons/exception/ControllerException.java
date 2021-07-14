@@ -19,11 +19,11 @@
 package org.sniper.commons.exception;
 
 /**
- * 控制器异常
+ * 控制器层异常
  * @author  Daniele
  * @version 1.0
  */
-public class ControllerException extends SniperException {
+public class ControllerException extends RuntimeException {
 
 	private static final long serialVersionUID = -3379279724023769167L;
 	

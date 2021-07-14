@@ -18,6 +18,8 @@
 
 package org.sniper.context;
 
+import org.sniper.commons.util.StringUtils;
+
 /**
  * 数据源上下文工具类
  * @author  Daniele
@@ -25,7 +27,12 @@ package org.sniper.context;
  */
 public class DataSourceHolder extends ThreadLocalHolder {
 	
-	public static final String DATASOURCE_CONTEXT_ATTRIBUTE_NAME = "sniper_datasource_name";
+	/** 数据源上下文属性名 */
+	public static final String DATASOURCE_CONTEXT_ATTRIBUTE_NAME;
+	
+	static {
+		DATASOURCE_CONTEXT_ATTRIBUTE_NAME = "datasource_name_" + StringUtils.unsignedUUID();
+	}
 	
 	/**
 	 * 设置数据源到线程上下文变量中

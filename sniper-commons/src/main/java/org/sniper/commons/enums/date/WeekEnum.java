@@ -21,6 +21,7 @@ package org.sniper.commons.enums.date;
 import java.util.Calendar;
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
@@ -29,82 +30,105 @@ import org.sniper.commons.util.MessageUtils;
  * @author  Daniele
  * @version 1.0
  */
-public enum WeekEnum {
+public enum WeekEnum implements Enumerable<Integer> {
 	
 	/** 星期天 */
-	SUNDAY(Calendar.SUNDAY, "week.sunday"),
+	SUNDAY(Calendar.SUNDAY, "SUN", "week.sunday"),
 	
 	/** 星期一 */
-	MONDAY(Calendar.MONDAY, "week.monday"),
+	MONDAY(Calendar.MONDAY, "MON", "week.monday"),
 	
 	/** 星期二 */
-	TUESDAY(Calendar.TUESDAY, "week.tuesday"),
+	TUESDAY(Calendar.TUESDAY, "TUE", "week.tuesday"),
 	
 	/** 星期三 */
-	WEDNESDAY(Calendar.WEDNESDAY, "week.wednesday"),
+	WEDNESDAY(Calendar.WEDNESDAY, "WED", "week.wednesday"),
 	
 	/** 星期四 */
-	THURSDAY(Calendar.THURSDAY, "week.thursday"),
+	THURSDAY(Calendar.THURSDAY, "THU", "week.thursday"),
 	
 	/** 星期五 */
-	FRIDAY(Calendar.FRIDAY, "week.friday"),
+	FRIDAY(Calendar.FRIDAY, "FRI", "week.friday"),
 	
 	/** 星期六 */
-	SATURDAY(Calendar.SATURDAY, "week.saturday");
+	SATURDAY(Calendar.SATURDAY, "SAT", "week.saturday");
 	
-	private static final Map<Integer, WeekEnum> mappings = MapUtils.newHashMap(7);
+	private static final Map<Integer, WeekEnum> KEY_MAPPINGS = MapUtils.newHashMap(7);
+	private static final Map<String, WeekEnum> ABBREVIATION_AND_NAME_MAPPINGS = MapUtils.newHashMap(14);
 	
 	static {
 		for (WeekEnum week : values()) {
-			mappings.put(week.key, week);
+			KEY_MAPPINGS.put(week.key, week);
+			ABBREVIATION_AND_NAME_MAPPINGS.put(week.abbreviation, week);
+			ABBREVIATION_AND_NAME_MAPPINGS.put(week.name(), week);
 		}
 	}
 	
 	/** 键 */
 	private final int key;
 	
-	/** 值 */
-	private final String value;
-	
+	/** 缩写/简称 */
+	private final String abbreviation;
+		
 	/** 消息 */
 	private final String message;
 	
-	private WeekEnum(int key, String value) {
+	private WeekEnum(int key, String abbreviation, String message) {
 		this.key = key;
-		this.value = value;
-		this.message = MessageUtils.getClassMessage(getClass(), value);
+		this.abbreviation = abbreviation;
+		this.message = MessageUtils.getClassMessage(getClass(), message);
 	}
 	
-	public int getKey() {
+	@Override
+	public Integer getKey() {
 		return key;
 	}
-
-	public String getValue() {
-		return value;
+	
+	public String getAbbreviation() {
+		return abbreviation;
 	}
 
+	@Override
 	public String getMessage() {
 		return message;
 	}
 	
-	/**
-	 * 判断指定的键是否匹配
-	 * @author Daniele 
-	 * @param key
-	 * @return
-	 */
-	public boolean matches(int key) {
-		return this.key == key;
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
 	}
 	
 	/**
-	 * 将指定的键解析成Week对象
+	 * 判断指定的缩写或名称是否匹配当前枚举对象
+	 * @author Daniele
+	 * @param abbreviationOrName
+	 * @return
+	 */
+	@Override
+	public boolean matches(String abbreviationOrName) {
+		return this.abbreviation.equalsIgnoreCase(abbreviationOrName)
+				|| this.name().equalsIgnoreCase(abbreviationOrName);
+	}
+	
+	/**
+	 * 将指定的键解析成枚举对象
 	 * @author Daniele 
 	 * @param key
 	 * @return
 	 */
 	public static WeekEnum resolve(int key) {
-		return mappings.get(key);
+		return KEY_MAPPINGS.get(key);
 	}
-		
+	
+	/**
+	 * 将指定的缩写或名称解析成枚举对象
+	 * @author Daniele 
+	 * @param abbreviationOrName
+	 * @return
+	 */
+	public static WeekEnum resolve(String abbreviationOrName) {
+		return abbreviationOrName != null ? ABBREVIATION_AND_NAME_MAPPINGS.get(
+				abbreviationOrName.toUpperCase()) : null;
+	}
+			
 }

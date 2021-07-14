@@ -76,33 +76,6 @@
 			</exclusions>
 		</dependency> 
 		<dependency>
-			<groupId>org.sniper</groupId>
-			<artifactId>sniper-serialization</artifactId>
-			<version>${sniper.version}</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.sniper</groupId>
-			<artifactId>sniper-spring</artifactId>
-			<version>${sniper.version}</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.sniper</groupId>
-            <artifactId>sniper-commons</artifactId>
-            <version>${sniper.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.sniper</groupId>
-            <artifactId>sniper-beans</artifactId>
-            <version>${sniper.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.sniper</groupId>
-            <artifactId>sniper-context</artifactId>
-            <version>${sniper.version}</version>
-		</dependency>
-		<dependency>
     		<groupId>com.caucho</groupId>
     		<artifactId>hessian</artifactId>
     		<version>${hessian.version}</version>
@@ -113,6 +86,26 @@
 			<artifactId>commons-pool</artifactId>
 			<version>${commons-pool.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.sniper</groupId>
+			<artifactId>sniper-context</artifactId>
+			<version>${sniper.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sniper</groupId>
+			<artifactId>sniper-serialization</artifactId>
+			<version>${sniper.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sniper</groupId>
+			<artifactId>sniper-spring</artifactId>
+			<version>${sniper.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sniper</groupId>
+			<artifactId>sniper-support</artifactId>
+			<version>${sniper.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>

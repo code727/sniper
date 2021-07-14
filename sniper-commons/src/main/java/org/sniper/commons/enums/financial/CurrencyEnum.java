@@ -210,10 +210,13 @@ public enum CurrencyEnum {
 	
 	public static void main(String[] args) {
 		System.out.println(Currency.getAvailableCurrencies().size());;
+		System.out.println(Currency.getAvailableCurrencies());;
 		
-		Currency currency = Currency.getInstance("CNY");
+		Currency currency = Currency.getInstance("AFN");
 		System.out.println(currency.getDisplayName());
 		System.out.println(currency.getSymbol());
+		System.out.println(currency.getCurrencyCode());
+		System.out.println(currency.getNumericCode());
 	}
 	
 }

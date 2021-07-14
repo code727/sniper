@@ -93,7 +93,7 @@ public class BeanUtilsTest extends BaseTestCase {
 		System.out.println(String.format("Property '%s' value is:%s", propertyName, result));
 	}
 	
-//	@Test
+	@Test
 	public void testArrayPropertyOperations() throws Exception {	
 		int index = 0;
 		String propertyName = String.format("keywords.%s", index);

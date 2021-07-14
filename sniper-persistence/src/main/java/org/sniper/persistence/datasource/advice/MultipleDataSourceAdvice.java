@@ -22,7 +22,6 @@ import java.lang.reflect.Method;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sniper.commons.exception.SniperException;
 import org.sniper.context.DataSourceHolder;
 
 /**
@@ -40,7 +39,7 @@ public class MultipleDataSourceAdvice extends AbstractMultipleDataSourceAdvice {
 		// 根据方法名称来获取对应的数据源
 		Object dataSource = multipleDataSourceManager.getDataSource(methodName);
 		if (dataSource == null)
-			throw new SniperException("Target method [" + methodName + "] not found correlative data source"); 
+			throw new RuntimeException("Target method [" + methodName + "] not found correlative data source"); 
 		
 		DataSourceHolder.setDataSource(dataSource);
 		logger.debug("Data source will be switch to [{}] before invoke [{}] method [{}]", dataSource,

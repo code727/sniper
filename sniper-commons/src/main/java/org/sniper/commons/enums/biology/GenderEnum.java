@@ -20,6 +20,7 @@ package org.sniper.commons.enums.biology;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
@@ -28,56 +29,53 @@ import org.sniper.commons.util.MessageUtils;
  * @author  Daniele
  * @version 1.0
  */
-public enum GenderEnum {
+public enum GenderEnum implements Enumerable<Integer> {
 	
 	/** 女性 */
 	FEMALE("gender.female"),
 	/** 男性 */
 	MALE("gender.male");
 	
-	private static final Map<Integer, GenderEnum> mappings = MapUtils.newHashMap(2);
+	private static final Map<Integer, GenderEnum> KEY_MAPPINGS = MapUtils.newHashMap(2);
+	
+	private static final Map<String, GenderEnum> NAME_MAPPINGS = MapUtils.newHashMap(2);
 	
 	static {
 		for (GenderEnum gender: values()) {
-			mappings.put(gender.ordinal(), gender);
+			KEY_MAPPINGS.put(gender.key, gender);
+			NAME_MAPPINGS.put(gender.name(), gender);
 		}
 	}
 	
 	/** 键 */
 	private final int key;
 	
-	/** 值 */
-	private final String value;
-	
 	/** 消息 */
 	private final String message;  
 	
-	private GenderEnum(String value) {
+	private GenderEnum(String message) {
 		this.key = ordinal();
-		this.value = value;
-		this.message = MessageUtils.getClassMessage(getClass(), value);
+		this.message = MessageUtils.getClassMessage(getClass(), message);
 	}
 	
-	public int getKey() {
+	@Override
+	public Integer getKey() {
 		return key;
 	}
 
-	public String getValue() {
-		return value;
-	}
-
+	@Override
 	public String getMessage() {
 		return message;
 	}
 	
-	/**
-	 * 判断指定的键是否匹配
-	 * @author Daniele 
-	 * @param key
-	 * @return
-	 */
-	public boolean matches(int key) {
-		return this.key == key;
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
+	}
+	
+	@Override
+	public boolean matches(String name) {
+		return this.name().equalsIgnoreCase(name);
 	}
 	
 	/**
@@ -87,7 +85,17 @@ public enum GenderEnum {
 	 * @return
 	 */
 	public static GenderEnum resolve(int key) {
-		return mappings.get(key);
+		return KEY_MAPPINGS.get(key);
+	}
+	
+	/**
+	 * 将指定的名称解析成枚举对象
+	 * @author Daniele 
+	 * @param name
+	 * @return
+	 */
+	public static GenderEnum resolve(String name) {
+		return name != null ? NAME_MAPPINGS.get(name.toUpperCase()) : null;
 	}
 
 }

@@ -589,7 +589,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * 选择是否按忽略大小写方式获取前缀之后的字符串
+	 * 选择是否按忽略大小写的方式获取前缀之后的字符串
 	 * @author Daniele 
 	 * @param str
 	 * @param prefix
@@ -626,7 +626,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * 选择是否按按忽略大小写的方式获取第一个标记之后的字符串
+	 * 选择是否按忽略大小写的方式获取第一个标记之后的字符串
 	 * @author Daniele 
 	 * @param str
 	 * @param mark
@@ -1259,7 +1259,7 @@ public class StringUtils {
 		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 		return upperCase ? uuid.toUpperCase() : uuid;
 	}
-		
+			
 	/**
 	 * 判断指定的标记是否存在
 	 * @author Daniele 
@@ -1989,8 +1989,6 @@ public class StringUtils {
 	 */
 	public static String leftSupplement(String str, char c, int minLength) {
 		if (str == null)
-			
-			
 			str = EMPTY;
 		
 		int length = str.length();

@@ -42,30 +42,7 @@ public class NumberUtils {
 	
 	/** 全局长度与格式对象关系映射集 */
 	private static final Map<Integer, DecimalFormat> LENGTH_DECIMAL_FORMATS = MapUtils.newConcurrentHashMap();
-	
-	/** 奇数映射组 */
-	private static Map<Character, Integer> ODD_NUMBERS;
-	
-	/** 偶数映射组 */
-	private static Map<Character, Integer> EVEN_NUMBERS;
-	
-	static {
-		ODD_NUMBERS = MapUtils.newHashMap();
-		EVEN_NUMBERS = MapUtils.newHashMap();
 		
-		ODD_NUMBERS.put('1', 1);
-		ODD_NUMBERS.put('3', 3);
-		ODD_NUMBERS.put('5', 5);
-		ODD_NUMBERS.put('7', 7);
-		ODD_NUMBERS.put('9', 9);
-		
-		EVEN_NUMBERS.put('0', 0);
-		EVEN_NUMBERS.put('2', 2);
-		EVEN_NUMBERS.put('4', 4);
-		EVEN_NUMBERS.put('6', 6);
-		EVEN_NUMBERS.put('8', 8);
-	}
-	
 	private NumberUtils() {}
 	
 	/**
@@ -1404,7 +1381,7 @@ public class NumberUtils {
 	public static BigDecimal divide(Number number1, Number number2, int scale, RoundingMode roundingMode) {
 		BigDecimal decimal1 = toBigDecimal(number1);
 		BigDecimal decimal2 = toBigDecimal(number2);
-		return decimal1.divide(decimal2, scale, roundingMode != null ? roundingMode : RoundingMode.DOWN);
+		return decimal1.divide(decimal2, scale, roundingMode != null ? roundingMode : RoundingMode.HALF_EVEN);
 	}
 	
 	/**
@@ -1500,75 +1477,5 @@ public class NumberUtils {
 	public static double unAbs(double a) {
         return (a > 0.0D) ? -a : a;
     }
-	
-	/**
-	 * 判断是否为一个奇数
-	 * @author Daniele 
-	 * @param number
-	 * @return
-	 */
-	public static boolean isOddNumber(Number number) {
-		return number != null && isOddNumber(number.toString(), false);
-	}
-	
-	/**
-	 * 判断字符串表示的数字是否为一个奇数
-	 * @author Daniele 
-	 * @param number
-	 * @return
-	 */
-	public static boolean isOddNumber(String number) {
-		return isOddNumber(number, true);
-	}
-	
-	/**
-	 * 判断是否为一个偶数
-	 * @author Daniele 
-	 * @param number
-	 * @return
-	 */
-	public static boolean isEvenNumber(Number number) {
-		return number != null && isEvenNumber(number.toString(), false);
-	}
-	
-	/**
-	 * 判断字符串表示的数字是否为一个偶数
-	 * @author Daniele 
-	 * @param number
-	 * @return
-	 */
-	public static boolean isEvenNumber(String number) {
-		return isEvenNumber(number, true);
-	}
-	
-	/**
-	 * 判断字符串表示的数字是否为一个奇数，并且选择在判断前是否校验数字的合法性
-	 * @author Daniele 
-	 * @param number
-	 * @param validation
-	 * @return
-	 */
-	private static boolean isOddNumber(String number, boolean validation) {
-		if (validation && !RegexUtils.isNumber(number))
-			return false;
-		
-		char lastNumber = number.charAt(number.length() - 1);
-		return ODD_NUMBERS.containsKey(lastNumber);
-	}
-	
-	/**
-	 * 判断字符串表示的数字是否为一个偶数，并且选择在判断前是否校验数字的合法性
-	 * @author Daniele 
-	 * @param number
-	 * @param validation
-	 * @return
-	 */
-	private static boolean isEvenNumber(String number, boolean validation) {
-		if (validation && !RegexUtils.isNumber(number))
-			return false;
-		
-		char lastNumber = number.charAt(number.length() - 1);
-		return EVEN_NUMBERS.containsKey(lastNumber);
-	}
-			
+				
 }

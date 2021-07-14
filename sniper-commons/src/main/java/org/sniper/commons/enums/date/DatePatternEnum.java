@@ -20,44 +20,56 @@ package org.sniper.commons.enums.date;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.commons.util.MessageUtils;
 
 /**
  * 日期模式枚举
  * @author  Daniele
  * @version 1.0
  */
-public enum DatePatternEnum {
+public enum DatePatternEnum implements Enumerable<Integer> {
 
 	/** 年 */
-	YEAR("yyyy","yyyy"),
+	YEAR("yyyy", "yyyy", "date.pattern.year"),
 			
 	/** 月 */
-	MONTH("yyyy-MM", "yyyyMM"),
+	MONTH("yyyy-MM", "yyyyMM", "date.pattern.month"),
 			
 	/** 日 */
-	DAY("yyyy-MM-dd", "yyyyMMdd"),
+	DAY("yyyy-MM-dd", "yyyyMMdd", "date.pattern.day"),
 			
 	/** 时 */
-	HOUR("yyyy-MM-dd HH", "yyyyMMddHH"),
+	HOUR("yyyy-MM-dd HH", "yyyyMMddHH", "date.pattern.hour"),
 	
 	/** 分 */
-	MINUTE("yyyy-MM-dd HH:mm", "yyyyMMddHHmm"),
+	MINUTE("yyyy-MM-dd HH:mm", "yyyyMMddHHmm", "date.pattern.minute"),
 	
 	/** 日期+精确到秒的时间 */
-	DATETIME("yyyy-MM-dd HH:mm:ss", "yyyyMMddHHmmss"),
+	DATETIME("yyyy-MM-dd HH:mm:ss", "yyyyMMddHHmmss", "date.pattern.datetime"),
 			
 	/** 日期+精确到毫秒的时间 */
-	DATETIME_PLUS("yyyy-MM-dd HH:mm:ss:SSS", "yyyyMMddHHmmssSSS");
+	DATETIME_PLUS("yyyy-MM-dd HH:mm:ss:SSS", "yyyyMMddHHmmssSSS", "date.pattern.datetime.plus");
 	
-	private static final Map<String, DatePatternEnum> mappings = MapUtils.newHashMap(14);
+	private static final Map<Integer, DatePatternEnum> KEY_MAPPINGS = MapUtils.newHashMap(7);
+	
+	private static final Map<String, DatePatternEnum> NAME_MAPPINGS = MapUtils.newHashMap(7);
+	
+	private static final Map<String, DatePatternEnum> PATTERN_MAPPINGS = MapUtils.newHashMap(14);
 	
 	static {
 		for (DatePatternEnum patternEnum : values()) {
-			mappings.put(patternEnum.pattern, patternEnum);
-			mappings.put(patternEnum.sequencePattern, patternEnum);
+			KEY_MAPPINGS.put(patternEnum.key, patternEnum);
+			NAME_MAPPINGS.put(patternEnum.name(), patternEnum);
+			
+			PATTERN_MAPPINGS.put(patternEnum.pattern, patternEnum);
+			PATTERN_MAPPINGS.put(patternEnum.sequencePattern, patternEnum);
 		}
 	}
+	
+	/** 键 */
+	private final int key;
 	
 	/** 模式 */
 	private final String pattern;
@@ -65,9 +77,19 @@ public enum DatePatternEnum {
 	/** 序列模式 */
 	private final String sequencePattern;
 	
-	private DatePatternEnum(String pattern, String sequencePattern) {
+	/** 消息 */
+	private final String message;
+	
+	private DatePatternEnum(String pattern, String sequencePattern, String message) {
+		this.key = ordinal();
 		this.pattern = pattern;
 		this.sequencePattern = sequencePattern;
+		this.message = MessageUtils.getClassMessage(getClass(), message);
+	}
+	
+	@Override
+	public Integer getKey() {
+		return key;
 	}
 
 	public String getPattern() {
@@ -78,24 +100,53 @@ public enum DatePatternEnum {
 		return sequencePattern;
 	}
 	
+	@Override
+	public String getMessage() {
+		return message;
+	}
+	
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
+	}
+	
 	/**
-	 * 判断指定的键是否匹配
+	 * 判断指定的模式或名称是否匹配当前枚举对象
 	 * @author Daniele 
-	 * @param pattern
+	 * @param patternOrName
 	 * @return
 	 */
-	public boolean matches(String pattern) {
-		return this.pattern.equals(pattern) || this.sequencePattern.equals(pattern);
+	@Override
+	public boolean matches(String patternOrName) {
+		return this.pattern.equals(patternOrName) || this.sequencePattern.equals(patternOrName)
+				|| this.name().equalsIgnoreCase(patternOrName);
 	}
 	
 	/**
 	 * 将指定的键解析成枚举对象
 	 * @author Daniele 
-	 * @param pattern
+	 * @param key
 	 * @return
 	 */
-	public static DatePatternEnum resolve(String pattern) {
-		return mappings.get(pattern);
+	public static DatePatternEnum resolve(int key) {
+		return KEY_MAPPINGS.get(key);
+	}
+	
+	/**
+	 * 将指定的模式或名称解析成枚举对象
+	 * @author Daniele 
+	 * @param patternOrName
+	 * @return
+	 */
+	public static DatePatternEnum resolve(String patternOrName) {
+		if (patternOrName == null)
+			return null;
+		
+		DatePatternEnum patternEnum = PATTERN_MAPPINGS.get(patternOrName);
+		if (patternEnum == null)
+			patternEnum = NAME_MAPPINGS.get(patternOrName.toUpperCase());
+		
+		return patternEnum;
 	}
 	
 }

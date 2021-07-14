@@ -17,31 +17,18 @@
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
-            <artifactId>sniper-commons</artifactId>
-            <version>${sniper.version}</version>
+			<artifactId>sniper-context</artifactId>
+			<version>${sniper.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
-            <artifactId>sniper-context</artifactId>
-            <version>${sniper.version}</version>
+			<artifactId>sniper-security</artifactId>
+			<version>${sniper.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
-            <artifactId>sniper-spring</artifactId>
-            <version>${sniper.version}</version>
-            <optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.sniper</groupId>
-            <artifactId>sniper-security</artifactId>
-            <version>${sniper.version}</version>
-            <optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.sniper</groupId>
-            <artifactId>sniper-serialization</artifactId>
-            <version>${sniper.version}</version>
-            <optional>true</optional>
+			<artifactId>sniper-spring</artifactId>
+			<version>${sniper.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>

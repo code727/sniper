@@ -32,7 +32,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言对象为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele 
 	 * @param obj 
 	 */
 	public static void assertNull(Object obj) {
@@ -41,7 +41,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言对象为空，否则抛出自定义异常信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param message 
 	 */
@@ -52,7 +52,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言对象不为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele 
 	 * @param obj 
 	 */
 	public static void assertNotNull(Object obj) {
@@ -61,7 +61,7 @@ public class AssertUtils {
 
 	/**
 	 * 断言对象不为空，否则抛出自定义异常信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele 
 	 * @param obj
 	 * @param message 
 	 */
@@ -72,7 +72,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言表达式为true
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele 
 	 * @param express 
 	 */
 	public static void assertTrue(boolean express) {
@@ -81,7 +81,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言表达式为true,否则抛出自定义异常信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele 
 	 * @param express
 	 * @param message 
 	 */
@@ -92,7 +92,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言表达式为false
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele 
 	 * @param express 
 	 */
 	public static void assertFalse(boolean express) {
@@ -101,7 +101,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言表达式为false，否则抛出自定义异常信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele 
 	 * @param express
 	 * @param message 
 	 */
@@ -112,7 +112,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言不为空字符串
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele 
 	 * @param str 
 	 */
 	public static void assertNotEmpty(String str) {
@@ -121,7 +121,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言不为空字符串，否则抛出自定义的异常信息
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele 
 	 * @param str
 	 * @param message 
 	 */
@@ -131,7 +131,7 @@ public class AssertUtils {
 	
 	/**
 	 * 断言不全为空白字符串
-	 * @author Daniele 
+	 * @author Daniele
 	 * @param str
 	 */
 	public static void assertNotBlank(String str) {

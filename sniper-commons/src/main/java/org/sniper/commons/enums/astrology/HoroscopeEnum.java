@@ -20,6 +20,7 @@ package org.sniper.commons.enums.astrology;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
@@ -28,7 +29,7 @@ import org.sniper.commons.util.MessageUtils;
  * @author  Daniele
  * @version 1.0
  */
-public enum HoroscopeEnum {
+public enum HoroscopeEnum implements Enumerable<Integer> {
 	
 	/** 白羊座 */
 	ARIES("horoscope.aries"),
@@ -66,49 +67,46 @@ public enum HoroscopeEnum {
 	/** 双鱼座 */
 	PISCES("horoscope.pisces");
 	
-	private static final Map<Integer, HoroscopeEnum> mappings = MapUtils.newHashMap(12);
+	private static final Map<Integer, HoroscopeEnum> KEY_MAPPINGS = MapUtils.newHashMap(12);
+	
+	private static final Map<String, HoroscopeEnum> NAME_MAPPINGS = MapUtils.newHashMap(12);
 	
 	static {
 		for (HoroscopeEnum horoscope : values()) {
-			mappings.put(horoscope.ordinal(), horoscope);
+			KEY_MAPPINGS.put(horoscope.key, horoscope);
+			NAME_MAPPINGS.put(horoscope.name(), horoscope);
 		}
 	}
 	
 	/** 键 */
 	private final int key;
 	
-	/** 值 */
-	private final String value;
-	
 	/** 消息 */
 	private final String message;  
 
-	private HoroscopeEnum(String value) {
+	private HoroscopeEnum(String message) {
 		this.key = ordinal();
-		this.value = value;
-		this.message = MessageUtils.getClassMessage(getClass(), value);
+		this.message = MessageUtils.getClassMessage(getClass(), message);
 	}
 	
-	public int getKey() {
+	@Override
+	public Integer getKey() {
 		return key;
 	}
 
-	public String getValue() {
-		return value;
-	}
-
+	@Override
 	public String getMessage() {
 		return message;
 	}
 	
-	/**
-	 * 判断指定的键是否匹配
-	 * @author Daniele 
-	 * @param key
-	 * @return
-	 */
-	public boolean matches(int key) {
-		return this.key == key;
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
+	}
+	
+	@Override
+	public boolean matches(String name) {
+		return this.name().equalsIgnoreCase(name);
 	}
 	
 	/**
@@ -118,7 +116,17 @@ public enum HoroscopeEnum {
 	 * @return
 	 */
 	public static HoroscopeEnum resolve(int key) {
-		return mappings.get(key);
+		return KEY_MAPPINGS.get(key);
 	}
-		
+	
+	/**
+	 * 将指定的名称解析成枚举对象
+	 * @author Daniele 
+	 * @param name
+	 * @return
+	 */
+	public static HoroscopeEnum resolve(String name) {
+		return name != null ? NAME_MAPPINGS.get(name.toUpperCase()) : null;
+	}
+	
 }

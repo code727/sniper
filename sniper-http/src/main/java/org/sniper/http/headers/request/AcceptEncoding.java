@@ -56,7 +56,7 @@ public class AcceptEncoding extends AbstractQualityFactor {
 	}
 
 	public void setEncodingEnum(AcceptEncodingEnum encodingEnum) {
-		AssertUtils.assertNotNull(encodingEnum, "Accept encoding algorithm must not be null");
+		AssertUtils.assertNotNull(encodingEnum, "Accept encoding type must not be null");
 		this.encodingEnum = encodingEnum;
 	}
 		
@@ -65,10 +65,10 @@ public class AcceptEncoding extends AbstractQualityFactor {
 		String qualityValue = super.toString();
 		
 		if (qualityValue.length() > 0) {
-			return this.encodingEnum.getAlgorithm() + qualityValue;
+			return this.encodingEnum.getType() + qualityValue;
 		}
 		
-		return this.encodingEnum.getAlgorithm();
+		return this.encodingEnum.getType();
 	}
-				
+					
 }

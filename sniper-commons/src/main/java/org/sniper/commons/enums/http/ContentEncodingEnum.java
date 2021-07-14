@@ -20,67 +20,107 @@ package org.sniper.commons.enums.http;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.commons.util.MessageUtils;
 
 /**
- * Content-Encoding编码转换算法枚举
+ * HTTP Content-Encoding编码类型枚举
  * @author  Daniele
  * @version 1.0
  */
-public enum ContentEncodingEnum {
-	
-	/** gzip压缩算法 */
-	GZIP("gzip"),
-	
-	/** compress压缩算法 */
-	COMPRESS("compress"),
-	
-	/** deflate压缩算法（zlib结构）*/
-	DEFLATE("deflate"),
-	
-	/** 不对实体进行编码 */
-	IDENTITY("identity"),
+public enum ContentEncodingEnum implements Enumerable<Integer> {
 	
 	/** Brotli压缩算法  */
-	BR("br");
+	BR("br", "http.content-encoding.br"),
 	
-	private static final Map<String, ContentEncodingEnum> mappings = MapUtils.newHashMap(5);
+	/** compress压缩算法 */
+	COMPRESS("compress", "http.content-encoding.compress"),
 	
-	/** 算法名称 */
-	private final String algorithm;
+	/** deflate压缩算法（zlib结构）*/
+	DEFLATE("deflate", "http.content-encoding.deflate"),
+	
+	/** gzip压缩算法 */
+	GZIP("gzip", "http.content-encoding.gzip"),
+	
+	/** 不对实体进行编码 */
+	IDENTITY("identity", "http.content-encoding.identity")
+	;
+	
+	private static final Map<Integer, ContentEncodingEnum> KEY_MAPPINGS = MapUtils.newHashMap(5);
+	private static final Map<String, ContentEncodingEnum> TYPE_AND_NAME_MAPPINGS = MapUtils.newHashMap(5);
+	
+	/** 键 */
+	private final int key;
+	
+	/** 编码类型 */
+	private final String type;
+	
+	/** 消息 */
+	private final String message;
 	
 	static {
 		for (ContentEncodingEnum encoding : values()) {
-			mappings.put(encoding.algorithm, encoding);
+			KEY_MAPPINGS.put(encoding.key, encoding);
+			TYPE_AND_NAME_MAPPINGS.put(encoding.type.toUpperCase(), encoding);
+			TYPE_AND_NAME_MAPPINGS.put(encoding.name(), encoding);
 		}
 	}
-	
-	private ContentEncodingEnum(String algorithm) {
-		this.algorithm = algorithm;
+		
+	private ContentEncodingEnum(String type, String message) {
+		this.key = ordinal();
+		this.type = type;
+		this.message = MessageUtils.getClassMessage(getClass(), message);
 	}
 	
-	public String getAlgorithm() {
-		return algorithm;
+	@Override
+	public Integer getKey() {
+		return key;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	@Override
+	public String getMessage() {
+		return message;
+	}
+	
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
 	}
 
 	/**
-	 * 判断指定的算法是否匹配当前枚举
+	 * 判断指定的类型或名称是否匹配当前枚举
 	 * @author Daniele 
-	 * @param algorithm
+	 * @param typeOrName
 	 * @return
 	 */
-	public boolean matches(String algorithm) {
-		return this.algorithm.equalsIgnoreCase(algorithm);
+	@Override
+	public boolean matches(String typeOrName) {
+		return this.type.equalsIgnoreCase(typeOrName) || this.name().equalsIgnoreCase(typeOrName);
 	}
-
+	
 	/**
-	 * 将指定的算法解析成枚举对象
+	 * 将指定的键解析成枚举对象
 	 * @author Daniele 
-	 * @param algorithm
+	 * @param key
 	 * @return
 	 */
-	public static ContentEncodingEnum resolve(String algorithm) {
-		return algorithm != null ? mappings.get(algorithm.toLowerCase()) : null;
+	public static ContentEncodingEnum resolve(int key) {
+		return KEY_MAPPINGS.get(key);
+	}
+	
+	/**
+	 * 将指定的类型或名称解析成枚举对象
+	 * @author Daniele 
+	 * @param typeOrName
+	 * @return
+	 */
+	public static ContentEncodingEnum resolve(String typeOrName) {
+		return typeOrName != null ? TYPE_AND_NAME_MAPPINGS.get(typeOrName.toUpperCase()) : null;
 	}
 
 }

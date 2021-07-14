@@ -43,7 +43,6 @@ public class CodehausJacksonSerializerTest extends AbstractSerializerTest {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setDateFormat(new StdDateFormat());
 		this.codehausJacksonSerializer = new CodehausJacksonSerializer(mapper);
-		
 	}
 	
 	/**

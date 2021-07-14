@@ -18,8 +18,8 @@
 
 package org.sniper.nosql.redis;
 
-import org.sniper.commons.timer.ExpirableBean;
 import org.sniper.serialization.Serializer;
+import org.sniper.support.timer.ExpirableBean;
 
 /**
  * Redis库配置对象

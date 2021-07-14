@@ -47,4 +47,40 @@ public class BooleanUtils {
 		return !isTrue(value);
 	}
 	
+	/**
+	 * 将布尔值转换为byte类型的数值
+	 * @author Daniele
+	 * @param value
+	 * @return
+	 */
+	public static byte toByteValue(Boolean value) {
+		return toByteValue(value, (byte)1, (byte)0);
+	}
+	
+	/**
+	 * 将布尔值转换为byte类型的数值
+	 * @author Daniele
+	 * @param value
+	 * @param valueOfTrue 布尔值为true时返回的值
+	 * @param falseOrNullValue 布尔值为null和false时返回的值
+	 * @return
+	 */
+	public static byte toByteValue(Boolean value, byte trueValue, byte falseOrNullValue) {
+		return isTrue(value) ? trueValue : falseOrNullValue;
+	}
+	
+	/**
+	 * 将布尔值转换为byte类型的数值
+	 * @author Daniele
+	 * @param value
+	 * @return
+	 */
+	public short toShortValue(Boolean value) {
+		return toShortValue(value, (short) 1, (short) 0);
+	}
+	
+	public short toShortValue(Boolean value, short trueValue, short falseOrNullValue) {
+		return isTrue(value) ? trueValue : falseOrNullValue;
+	}
+	
 }

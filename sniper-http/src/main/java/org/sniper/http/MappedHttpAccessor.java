@@ -172,7 +172,8 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 		if (StringUtils.isNotBlank(methodName)) {
 			try {
 				return (T) ReflectionUtils.invokeMethod(this, executedMethod,
-						new Class<?>[] { String.class, Object.class, Object.class }, new Object[] { name, requestBody, param });
+						new Class<?>[] { String.class, Object.class, Object.class },
+						new Object[] { name, requestBody, param });
 			} catch (NoSuchMethodException e) {
 				throw new NoSuchHttpMethodException("No such http method ["
 						+ methodName + "] in current version of sniper-http framework");

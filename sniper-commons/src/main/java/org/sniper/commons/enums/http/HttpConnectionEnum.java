@@ -20,58 +20,96 @@ package org.sniper.commons.enums.http;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.commons.util.MessageUtils;
 
 /**
- * HTTP网络连接枚举
+ * HTTP网络连接状态枚举
  * @author  Daniele
  * @version 1.0
  */
-public enum HttpConnectionEnum {
+public enum HttpConnectionEnum implements Enumerable<Integer> {
 	
 	/** 关闭状态 */
-	CLOSE("close"),
+	CLOSE("close", "http.connection.close"),
 	
 	/** 保持连接状态 */
-	KEEP_ALIVE("keep-alive");
+	KEEP_ALIVE("keep-alive", "http.connection.keep-alive");
 	
-	private static final Map<String, HttpConnectionEnum> mappings = MapUtils.newHashMap(2);
+	private static final Map<Integer, HttpConnectionEnum> KEY_MAPPINGS = MapUtils.newHashMap(2);
+	private static final Map<String, HttpConnectionEnum> STATUS_AND_NAME_MAPPINGS = MapUtils.newHashMap(3);
+	
+	/** 键 */
+	private final int key;
 	
 	/** 状态 */
 	private final String status;
 	
+	/** 消息 */
+	private final String message;
+	
 	static {
 		for (HttpConnectionEnum connection : values()) {
-			mappings.put(connection.status, connection);
+			KEY_MAPPINGS.put(connection.key, connection);
+			STATUS_AND_NAME_MAPPINGS.put(connection.status.toUpperCase(), connection);
+			STATUS_AND_NAME_MAPPINGS.put(connection.name(), connection);
 		}
 	}
 	
-	private HttpConnectionEnum(String status) {
+	private HttpConnectionEnum(String status, String message) {
+		this.key = ordinal();
 		this.status = status;
+		this.message = MessageUtils.getClassMessage(getClass(), message);
+	}
+	
+	@Override
+	public Integer getKey() {
+		return key;
 	}
 	
 	public String getStatus() {
 		return status;
 	}
 	
+	@Override
+	public String getMessage() {
+		return message;
+	}
+	
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
+	}
+	
 	/**
-	 * 判断指定的状态是否匹配当前枚举
+	 * 判断指定的状态或名称是否匹配当前枚举
 	 * @author Daniele 
-	 * @param status
+	 * @param statusOrName
 	 * @return
 	 */
-	public boolean matches(String status) {
-		return this.status.equalsIgnoreCase(status);
+	public boolean matches(String statusOrName) {
+		return this.status.equalsIgnoreCase(statusOrName) || this.name().equalsIgnoreCase(statusOrName);
 	}
 
 	/**
-	 * 将指定的状态解析成枚举对象
+	 * 将指定的键解析成枚举对象
 	 * @author Daniele 
-	 * @param status
+	 * @param key
 	 * @return
 	 */
-	public static HttpConnectionEnum resolve(String status) {
-		return status != null ? mappings.get(status.toLowerCase()) : null;
+	public static HttpConnectionEnum resolve(int key) {
+		return KEY_MAPPINGS.get(key);
+	}
+	
+	/**
+	 * 将指定的状态或名称解析成枚举对象
+	 * @author Daniele 
+	 * @param statusOrName
+	 * @return
+	 */
+	public static HttpConnectionEnum resolve(String statusOrName) {
+		return statusOrName != null ? STATUS_AND_NAME_MAPPINGS.get(statusOrName.toUpperCase()) : null;
 	}
 	
 }
