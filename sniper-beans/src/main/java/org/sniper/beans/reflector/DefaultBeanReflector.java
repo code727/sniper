@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.sniper.beans.BeanUtils;
+import org.sniper.beans.exception.NestedNullPointerException;
 import org.sniper.beans.expression.ArrayPropertyHandler;
 import org.sniper.beans.expression.BeanPropertyHandler;
 import org.sniper.beans.expression.DefaultPropertyParser;
@@ -34,7 +35,6 @@ import org.sniper.beans.expression.MappedPropertyHandler;
 import org.sniper.beans.expression.ParametersPropertyHandler;
 import org.sniper.beans.expression.PropertyHandler;
 import org.sniper.beans.expression.PropertyParser;
-import org.sniper.commons.exception.NestedNullPointerException;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CollectionUtils;

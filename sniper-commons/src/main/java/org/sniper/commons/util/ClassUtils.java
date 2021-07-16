@@ -73,7 +73,7 @@ public class ClassUtils {
 	}
 	
 	/**
-	 * 获取对象的当前类型。如果对象本身属于Class实例，则直接返回，否则返回对象的Class实例
+	 * 获取对象的当前类型。如果对象本身属于Class实例则直接返回，否则返回对象的Class实例
 	 * @author Daniele 
 	 * @param obj
 	 * @return

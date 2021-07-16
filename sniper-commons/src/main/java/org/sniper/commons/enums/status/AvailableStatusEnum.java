@@ -31,10 +31,11 @@ import org.sniper.commons.util.MessageUtils;
  */
 public enum AvailableStatusEnum implements Enumerable<Integer> {
 	
-	/** 启用 */
-	ENABLE("available.status.enable"),
 	/** 禁用 */
-	DISABLE("available.status.disable");
+	DISABLE("available.status.disable"),
+	
+	/** 启用 */
+	ENABLE("available.status.enable");
 	
 	private static final Map<Integer, AvailableStatusEnum> KEY_MAPPINGS = MapUtils.newHashMap(2);
 	private static final Map<String, AvailableStatusEnum> NAME_MAPPINGS = MapUtils.newHashMap(2);

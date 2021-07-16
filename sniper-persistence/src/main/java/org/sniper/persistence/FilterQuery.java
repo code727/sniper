@@ -20,7 +20,7 @@ package org.sniper.persistence;
 
 import java.util.List;
 
-import org.sniper.commons.model.PagingResult;
+import org.sniper.commons.model.PageResult;
 import org.sniper.persistence.util.FilterChainPagingQuery;
 import org.sniper.persistence.util.FilterListPagingQuery;
 import org.sniper.persistence.util.PersistencePropertyFilter;
@@ -107,7 +107,7 @@ public interface FilterQuery<T> {
 	 * @param query
 	 * @return
 	 */
-	public PagingResult<T> pagingQuery(FilterListPagingQuery query);
+	public PageResult<T> pagingQuery(FilterListPagingQuery query);
 	
 	/**
 	 * 根据带属性过滤器链的对象分页查询出当前类型的实体对象列表
@@ -115,6 +115,6 @@ public interface FilterQuery<T> {
 	 * @param query
 	 * @return
 	 */
-	public PagingResult<T> pagingQuery(FilterChainPagingQuery query);
+	public PageResult<T> pagingQuery(FilterChainPagingQuery query);
 
 }

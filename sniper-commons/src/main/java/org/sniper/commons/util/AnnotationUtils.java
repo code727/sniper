@@ -24,9 +24,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
-import org.sniper.commons.KeyValuePair;
-import org.sniper.commons.exception.NoSuchAnnotatedFieldException;
-import org.sniper.commons.exception.NoSuchAnnotatedMethodException;
+import org.sniper.commons.kv.KeyValuePair;
 
 /**
  * 注解工具类
@@ -283,7 +281,7 @@ public class AnnotationUtils {
 	public static <A extends Annotation, V> KeyValuePair<String, V> getAnnotatedFieldValue(Object obj, Class<A> annotationClass) throws Exception {
 		Field annotatedField = getAnnotatedField(obj, annotationClass);
 		if (annotatedField == null)
-			throw new NoSuchAnnotatedFieldException(obj, annotationClass);
+			throw new NoSuchFieldException(buildNoSuchAnnotatedFieldExceptionMessage(obj, annotationClass));
 		
 		V value = ReflectionUtils.getAccessibleFieldValue(obj, annotatedField);
 		return new KeyValuePair<String, V>(annotatedField.getName(), value);
@@ -303,7 +301,7 @@ public class AnnotationUtils {
 	public static <A extends Annotation, V> Field setAnnotatedFieldValue(Object obj, Class<A> annotationClass, V value) throws Exception {
 		Field annotatedField = getAnnotatedField(obj, annotationClass);
 		if (annotatedField == null)
-			throw new NoSuchAnnotatedFieldException(obj, annotationClass);
+			throw new NoSuchFieldException(buildNoSuchAnnotatedFieldExceptionMessage(obj, annotationClass));
 		
 		ReflectionUtils.setAccessibleFieldValue(obj, annotatedField, value);
 		return annotatedField;
@@ -544,7 +542,7 @@ public class AnnotationUtils {
 	public static <A extends Annotation, V> KeyValuePair<String, V> invokeAnnotatedMethod(Object obj, Class<A> annotationClass, Object[] pValues) throws Exception {
 		Method annotatedMethod = getAnnotatedMethod(obj, annotationClass);
 		if (annotatedMethod == null)
-			throw new NoSuchAnnotatedMethodException(obj, annotationClass);
+			throw new NoSuchMethodException(buildNoSuchAnnotatedMethodExceptionMessage(obj, annotationClass));
 		
 		V value = (V) ReflectionUtils.invokeAccessibleMethod(obj, 
 				annotatedMethod, annotatedMethod.getParameterTypes(), pValues);
@@ -564,8 +562,8 @@ public class AnnotationUtils {
 	@SuppressWarnings("unchecked")
 	public static <A extends Annotation, V> KeyValuePair<String, V> invokeAnnotatedGetter(Object obj, Class<A> annotationClass) throws Exception {
 		Method annotatedGetter = findAnnotatedGetter(obj, annotationClass);
-		if (annotatedGetter == null) 
-			throw new NoSuchAnnotatedMethodException(obj, annotationClass);
+		if (annotatedGetter == null)
+			throw new NoSuchMethodException(buildNoSuchAnnotatedMethodExceptionMessage(obj, annotationClass));
 		
 		V value = (V) ReflectionUtils.invokeAccessibleMethod(obj, annotatedGetter, null, null);
 		return new KeyValuePair<String, V>(annotatedGetter.getName(), value);
@@ -584,7 +582,7 @@ public class AnnotationUtils {
 	public static <A extends Annotation, V> Method invokeAnnotatedSetter(Object obj, Class<A> annotationClass, V pValue) throws Exception {
 		Method annotatedSetter = findAnnotatedSetter(obj, annotationClass);
 		if (annotatedSetter == null)
-			throw new NoSuchAnnotatedMethodException(obj, annotationClass);
+			throw new NoSuchMethodException(buildNoSuchAnnotatedMethodExceptionMessage(obj, annotationClass));
 		
 		ReflectionUtils.invokeAccessibleMethod(obj, annotatedSetter, annotatedSetter.getParameterTypes(), new Object[]{pValue});
 		return annotatedSetter;
@@ -610,6 +608,34 @@ public class AnnotationUtils {
 	 */
 	private static <A extends Annotation> boolean annotatedSetter(Method method, Class<A> annotationClass) {
 		return ReflectionUtils.isSetter(method) && method.getAnnotation(annotationClass) != null;
+	}
+	
+	/**
+	 * 构建目标方法没有被注解的异常消息
+	 * @author Daniele
+	 * @param obj
+	 * @param annotationClass
+	 * @return
+	 */
+	private static <A extends Annotation> String buildNoSuchAnnotatedMethodExceptionMessage(Object obj, Class<A> annotationClass) {
+		Class<?> currentType = ClassUtils.getCurrentType(obj);
+		return String.format("{\"currentType\":%s,\"annotationClass\":%s}", 
+				(currentType != null ? StringUtils.appendDoubleQuotes(currentType.getName()) : currentType),
+				(annotationClass != null ? StringUtils.appendDoubleQuotes(annotationClass.getName()) : annotationClass));
+	}
+	
+	/**
+	 * 构建目标属性域没有被注解的异常消息
+	 * @author Daniele 
+	 * @param obj
+	 * @param annotationClass
+	 * @return
+	 */
+	private static <A extends Annotation> String buildNoSuchAnnotatedFieldExceptionMessage(Object obj, Class<A> annotationClass) {
+		Class<?> currentType = ClassUtils.getCurrentType(obj);
+		return String.format("{\"currentType\":%s,\"annotationClass\":%s}", 
+				(currentType != null ? StringUtils.appendDoubleQuotes(currentType.getName()) : currentType),
+				(annotationClass != null ? StringUtils.appendDoubleQuotes(annotationClass.getName()) : annotationClass));
 	}
 		
 }

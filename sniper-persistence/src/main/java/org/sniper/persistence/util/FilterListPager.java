@@ -20,14 +20,14 @@ package org.sniper.persistence.util;
 
 import java.util.List;
 
-import org.sniper.commons.request.PagingRequest;
+import org.sniper.commons.request.PageRequest;
 
 /**
  * 带属性过滤器列表的分页器实现类
  * @author  Daniele
  * @version 1.0
  */
-public class FilterListPager extends PagingRequest implements FilterListPagingQuery {
+public class FilterListPager extends PageRequest implements FilterListPagingQuery {
 	
 	private static final long serialVersionUID = -8143607622421839319L;
 	

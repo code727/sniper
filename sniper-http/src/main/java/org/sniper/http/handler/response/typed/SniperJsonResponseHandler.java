@@ -30,7 +30,7 @@ import org.sniper.commons.util.ReflectionUtils;
 public class SniperJsonResponseHandler extends AbstractJsonNestedResponseHandler {
 		
 	/**
-	 * 实现父类方法，主要是解决当父类处理的响应结果为一个DataResponse对象时，其内部的data值转换问题
+	 * 实现父类方法，主要是解决父类处理的响应结果为一个DataResponse对象时其内部data值转换问题
 	 * @author Daniele 
 	 * @param response
 	 * @param nestedMapperRules

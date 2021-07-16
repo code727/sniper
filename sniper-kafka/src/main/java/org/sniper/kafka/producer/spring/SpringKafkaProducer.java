@@ -29,7 +29,7 @@ import org.springframework.kafka.core.KafkaOperations.ProducerCallback;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.util.concurrent.SettableListenableFuture;
-import org.sniper.commons.KeyValuePair;
+import org.sniper.commons.kv.KeyValuePair;
 import org.sniper.kafka.exception.ProducerException;
 import org.sniper.kafka.producer.KafkaProducer;
 import org.sniper.kafka.producer.MessagePacket;

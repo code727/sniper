@@ -17,11 +17,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
-			<artifactId>sniper-commons</artifactId>
-			<version>${sniper.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.sniper</groupId>
 			<artifactId>sniper-beans</artifactId>
 			<version>${sniper.version}</version>
 		</dependency>

@@ -18,7 +18,7 @@
 
 package org.sniper.kafka.producer;
 
-import org.sniper.commons.KeyValuePair;
+import org.sniper.commons.kv.KeyValuePair;
 
 /**
  * 生产者消息数据包

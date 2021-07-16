@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sniper.commons.KeyValuePair;
+import org.sniper.commons.kv.KeyValuePair;
 import org.sniper.commons.util.AnnotationUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.test.annotation.Testable;

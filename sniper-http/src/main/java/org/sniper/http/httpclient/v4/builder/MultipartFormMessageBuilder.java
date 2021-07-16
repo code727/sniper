@@ -32,7 +32,7 @@ import org.sniper.http.httpclient.v4.handler.multipart.FileMultipartBodyHandler;
 import org.sniper.http.httpclient.v4.handler.multipart.InputStreamMultipartBodyHandler;
 import org.sniper.http.httpclient.v4.handler.multipart.MapMultipartBodyHandler;
 import org.sniper.http.httpclient.v4.handler.multipart.MultipartBodyHandler;
-import org.sniper.http.httpclient.v4.handler.multipart.SniperMultiValueMapMultipartBodyHandler;
+import org.sniper.http.httpclient.v4.handler.multipart.MultiValueMapMultipartBodyHandler;
 import org.sniper.http.httpclient.v4.handler.multipart.SpringMultiValueMapMultipartBodyHandler;
 import org.sniper.http.httpclient.v4.handler.multipart.SpringMultipartFileBodyHandler;
 import org.sniper.http.httpclient.v4.handler.multipart.SpringResourceMultipartBodyHandler;
@@ -65,7 +65,7 @@ public class MultipartFormMessageBuilder extends AbstractHttpClientMessageBuilde
 			this.multipartBodyHandlers.add(new SpringMultipartFileBodyHandler());
 			this.multipartBodyHandlers.add(new MapMultipartBodyHandler());
 			this.multipartBodyHandlers.add(new SpringMultiValueMapMultipartBodyHandler());
-			this.multipartBodyHandlers.add(new SniperMultiValueMapMultipartBodyHandler());
+			this.multipartBodyHandlers.add(new MultiValueMapMultipartBodyHandler());
 		}
 	}
 	

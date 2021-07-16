@@ -20,8 +20,8 @@ package org.sniper.beans.expression;
 
 import java.util.Map;
 
+import org.sniper.beans.exception.NestedNullPointerException;
 import org.sniper.beans.parameter.Parameters;
-import org.sniper.commons.exception.NestedNullPointerException;
 import org.sniper.commons.util.StringUtils;
 
 /**

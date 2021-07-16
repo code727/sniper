@@ -21,7 +21,7 @@ package org.sniper.kafka.producer;
 import java.util.concurrent.Future;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.sniper.commons.KeyValuePair;
+import org.sniper.commons.kv.KeyValuePair;
 import org.sniper.kafka.support.ProduceResult;
 
 /**

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.sniper.persistence.mysql.pagination">
+<mapper namespace="org.sniper.sqlmap.mysql.pagination">
 
-	<!-- MySQL基本分页片段 -->
+	<!-- 基本分页片段 -->
 	<sql id="limit">
 		<![CDATA[ 
 			LIMIT #{start},#{pageSize}
 		]]>
 	</sql>
 	
+	<!-- 偏移量分页片段 -->
 	<sql id="offSetAndLimit">
+		
 		<![CDATA[ 
 			> #{start} LIMIT #{pageSize}
 		]]>
@@ -23,7 +25,7 @@
 	
 	<sql id="startAndEnd">
 		<![CDATA[
-			> #{start} AND #{end} >= 
+			BETWEEN #{start} AND #{end}
 		]]>
 	</sql>
 	

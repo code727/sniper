@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 the original author or authors.
+ * Copyright 2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,50 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Create Date : 2021-7-8
+ * Create Date : 2016-7-28
  */
 
 package org.sniper.commons.request;
 
+import java.io.Serializable;
+import java.util.LinkedHashSet;
+
 /**
- * 可分页排序的接口
+ * 多值排序请求接口
  * @author  Daniele
  * @version 1.0
  */
-public interface Pageable {
-	
-	/** 默认的当前页数 */
-	public static final int DEFAULT_CURRENT_PAGE = 1;
-	
-	/** 默认的每页条数 */
-	public static final int DEFAULT_PAGE_SIZE = 10;
+public interface MultiSortRequest extends Serializable {
 	
 	/**
-	 * 获取每页条数
-	 * @author Daniele 
+	 * 获取排序请求集
+	 * @author Daniele
 	 * @return
 	 */
-	public int getPageSize();
+	public LinkedHashSet<SortRequest> getSorts();
 	
 	/**
-	 * 设置每页条数
-	 * @author Daniele 
-	 * @param pageSize
+	 * 设置排序请求集
+	 * @author Daniele
+	 * @param sorts
 	 */
-	public void setPageSize(int pageSize);
+	public void setSorts(LinkedHashSet<SortRequest> sorts);
 	
 	/**
-	 * 获取当前页数
-	 * @author Daniele 
+	 * 添加排序请求
+	 * @author Daniele
+	 * @param request
+	 */
+	public MultiSortRequest add(SortRequest request);
+	
+	/**
+	 * 清除所有的排序请求
+	 * @author Daniele
 	 * @return
 	 */
-	public int getCurrentPage();
+	public MultiSortRequest clear();
 	
-	/**
-	 * 设置当前页数
-	 * @author Daniele 
-	 * @param currentPage
-	 */
-	public void setCurrentPage(int currentPage);
-
 }

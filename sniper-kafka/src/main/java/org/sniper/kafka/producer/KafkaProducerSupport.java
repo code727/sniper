@@ -134,7 +134,8 @@ public abstract class KafkaProducerSupport extends CheckableInitializingBean {
 	 * @return
 	 */
 	protected <K, V> ProducerRecord<K, V> createProducerRecord(String name, MessagePacket<K, V> packet) {
-		return createProducerRecord(name, packet.getKey(), packet.getValue(), packet.getPartition(), packet.getTimestamp());
+		return createProducerRecord(name, packet.getKey(), packet.getValue(), 
+				packet.getPartition(), packet.getTimestamp());
 	}
 	
 	/**

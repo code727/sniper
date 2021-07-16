@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 the original author or authors.
+ * Copyright 2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,51 +12,40 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- * Create Date : 2021-7-8
+ *
+ * Create Date : 2015-1-14
  */
 
-package org.sniper.commons.request;
+package org.sniper.commons.model;
+
+import org.sniper.commons.request.Pageable;
 
 /**
- * 可分页排序的接口
+ * 分页明细结果接口
  * @author  Daniele
  * @version 1.0
  */
-public interface Pageable {
-	
-	/** 默认的当前页数 */
-	public static final int DEFAULT_CURRENT_PAGE = 1;
-	
-	/** 默认的每页条数 */
-	public static final int DEFAULT_PAGE_SIZE = 10;
+public interface DetailPageResult<T> extends Pageable, PageResult<T> {
 	
 	/**
-	 * 获取每页条数
+	 * 获取当前分页结果的总页数
 	 * @author Daniele 
 	 * @return
 	 */
-	public int getPageSize();
+	public long getPages();
 	
 	/**
-	 * 设置每页条数
-	 * @author Daniele 
-	 * @param pageSize
-	 */
-	public void setPageSize(int pageSize);
-	
-	/**
-	 * 获取当前页数
+	 * 获取当前分页结果从第几条记录开始
 	 * @author Daniele 
 	 * @return
 	 */
-	public int getCurrentPage();
+	public long getFrom();
 	
 	/**
-	 * 设置当前页数
+	 * 获取当前分页结果从第几条记录结束
 	 * @author Daniele 
-	 * @param currentPage
+	 * @return
 	 */
-	public void setCurrentPage(int currentPage);
+	public long getTo();
 
 }

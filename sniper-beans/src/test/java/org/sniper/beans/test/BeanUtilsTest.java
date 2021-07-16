@@ -12,7 +12,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import org.sniper.beans.BeanUtils;
-import org.sniper.commons.exception.NestedNullPointerException;
+import org.sniper.beans.exception.NestedNullPointerException;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.test.domain.User;

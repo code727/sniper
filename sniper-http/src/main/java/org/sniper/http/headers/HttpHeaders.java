@@ -24,12 +24,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import org.sniper.commons.LinkedMultiValueMap;
 import org.sniper.commons.constant.http.HttpHeader;
 import org.sniper.commons.enums.http.ContentDispositionEnum;
 import org.sniper.commons.enums.http.ContentEncodingEnum;
 import org.sniper.commons.enums.http.HttpConnectionEnum;
 import org.sniper.commons.enums.http.HttpMethodEnum;
+import org.sniper.commons.kv.LinkedMultiValueMap;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;

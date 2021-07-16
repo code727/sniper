@@ -18,43 +18,77 @@
 
 package org.sniper.commons.request;
 
+import java.io.Serializable;
+
+import org.sniper.commons.enums.logic.OrderEnum;
+import org.sniper.commons.util.AssertUtils;
+import org.sniper.commons.util.ObjectUtils;
+import org.sniper.commons.util.StringUtils;
+
 /**
  * 排序请求
  * @author  Daniele
  * @version 1.0
  */
-public class SortRequest implements SortableRequest {
-
+public class SortRequest implements Serializable {
+	
 	private static final long serialVersionUID = -3569581291289010870L;
-
-	/** 需要排序的字段名称 */
-	private String sortName;
 	
+	private static final OrderEnum DEFAULT_MODE = OrderEnum.ASC;
+	
+	/** 需排序的属性名称 */
+	private String property;
+
 	/** 排序模式 */
-	private int sortMode;
+	private OrderEnum order = DEFAULT_MODE;
+	
+	/**
+	 * 默认构造函数保持为空，目的是让JSON反序列化时能找到此构造函数
+	 * @author Daniele
+	 */
+	SortRequest() {}
+	
+	public SortRequest(String property, OrderEnum order) {
+		setProperty(property);
+		setOrder(order);
+	}
+	
+	public String getProperty() {
+		return property;
+	}
+
+	public void setProperty(String property) {
+		AssertUtils.assertNotBlank(property, "Sort property must not be null or blank");
+		this.property = property;
+	}
+	
+	public OrderEnum getOrder() {
+		return order;
+	}
+
+	public void setOrder(OrderEnum order) {
+		this.order = (order != null ? order : DEFAULT_MODE);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		
+		if (obj instanceof SortRequest) 
+			return StringUtils.equals(this.property, ((SortRequest) obj).getProperty());
+		
+		return false;
+	}
 	
 	@Override
-	public String getSortName() {
-		return sortName;
-	}
-
-	public void setSortName(String sortName) {
-		this.sortName = sortName;
+	public int hashCode() {
+		return ObjectUtils.hashCode(this.property);
 	}
 	
 	@Override
-	public int getSortMode() {
-		return sortMode;
-	}
-
-	@Override
-	public void setSortMode(int sortMode) {
-		this.sortMode = sortMode;
-	}
-
-	@Override
-	public String getSortSchema() {
-		return null;
+	public String toString() {
+		return String.format("{\"property\":\"%s\",\"order\":\"%s\"}", property, order);
 	}
 	
 }

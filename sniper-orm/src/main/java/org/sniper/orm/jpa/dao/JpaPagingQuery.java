@@ -18,8 +18,8 @@
 
 package org.sniper.orm.jpa.dao;
 
-import org.sniper.commons.model.PagingResult;
-import org.sniper.commons.request.PagingQuery;
+import org.sniper.commons.model.PageResult;
+import org.sniper.commons.request.PageQuery;
 
 /**
  * Jpa分页查询接口
@@ -35,6 +35,6 @@ public interface JpaPagingQuery<T> {
 	 * @param callback 查询回调
 	 * @return
 	 */
-	public PagingResult<T> pagingQuery(PagingQuery query, JpaCriteriaQueryCallback<T> callback);
+	public PageResult<T> pagingQuery(PageQuery query, JpaCriteriaQueryCallback<T> callback);
 
 }

@@ -32,9 +32,9 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.sniper.commons.model.PagingModel;
-import org.sniper.commons.model.PagingResult;
-import org.sniper.commons.request.PagingQuery;
+import org.sniper.commons.model.PageModel;
+import org.sniper.commons.model.PageResult;
+import org.sniper.commons.request.PageQuery;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
@@ -699,16 +699,16 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public PagingResult<T> pagingQuery(PagingQuery query, JpaCriteriaQueryCallback<T> callback) {
+	public PageResult<T> pagingQuery(PageQuery query, JpaCriteriaQueryCallback<T> callback) {
 		AssertUtils.assertNotNull(callback, "JpaCriteriaQueryCallback object can not be null.");
 		if (callback instanceof JpaCriteriaQueryCallbackDao) 
-			((JpaCriteriaQueryCallbackDao<T, PagingQuery>) callback).setParameter(query);
+			((JpaCriteriaQueryCallbackDao<T, PageQuery>) callback).setParameter(query);
 			
-		PagingResult<T> pagingResult = new PagingModel<T>();
+		PageResult<T> pagingResult = new PageModel<T>();
 		/* 依次在结果对象中查询并设置符合当前条件的记录和总数 */
 		pagingResult.setData(findByCriteria(query, 
 				new Long(query.getStart()).intValue(), query.getPageSize(), callback));
-		if (query.isQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
+		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
 			pagingResult.setCount(countByCriteria(query, callback));
 		}
 				
@@ -762,11 +762,11 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	}
 
 	@Override
-	public PagingResult<T> pagingQuery(FilterListPagingQuery query) {
-		PagingResult<T> pagingResult = new PagingModel<T>();
+	public PageResult<T> pagingQuery(FilterListPagingQuery query) {
+		PageResult<T> pagingResult = new PageModel<T>();
 		pagingResult.setData(findByFilterList(query.getFilterList(), 
 				new Long(query.getStart()).intValue(), query.getPageSize()));
-		if (query.isQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
+		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
 			pagingResult.setCount(countByFilterList(query.getFilterList()));
 		}
 		
@@ -774,11 +774,11 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	}
 
 	@Override
-	public PagingResult<T> pagingQuery(FilterChainPagingQuery query) {
-		PagingResult<T> pagingResult = new PagingModel<T>();
+	public PageResult<T> pagingQuery(FilterChainPagingQuery query) {
+		PageResult<T> pagingResult = new PageModel<T>();
 		pagingResult.setData(findByFilterChain(query.getFilterChain(), 
 				new Long(query.getStart()).intValue(), query.getPageSize()));
-		if (query.isQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
+		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
 			pagingResult.setCount(countByFilterChain(query.getFilterChain()));
 		}
 		

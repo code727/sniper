@@ -14,7 +14,7 @@
   			<artifactId>ibatis-sqlmap</artifactId>
   			<version>${ibatis.version}</version>
 		    <optional>true</optional>
-		</dependency>
+		</dependency>		
 		<dependency>
   			<groupId>org.mybatis</groupId>
   			<artifactId>mybatis</artifactId>

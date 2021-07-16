@@ -27,13 +27,13 @@ import java.util.Locale;
 
 import org.sniper.beans.parameter.DefaultParameters;
 import org.sniper.beans.parameter.Parameters;
-import org.sniper.commons.KeyValuePair;
 import org.sniper.commons.constant.http.HttpRequestHeader;
 import org.sniper.commons.enums.http.AcceptEncodingEnum;
 import org.sniper.commons.enums.http.AuthenticationEnum;
 import org.sniper.commons.enums.http.HttpMethodEnum;
 import org.sniper.commons.enums.http.HttpProtocolEnum;
 import org.sniper.commons.enums.http.TEEnum;
+import org.sniper.commons.kv.KeyValuePair;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.DateUtils;

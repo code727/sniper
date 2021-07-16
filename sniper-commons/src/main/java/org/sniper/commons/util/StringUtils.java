@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
-import org.sniper.commons.KeyValuePair;
+import org.sniper.commons.kv.KeyValuePair;
 
 /**
  * 字符串工具类

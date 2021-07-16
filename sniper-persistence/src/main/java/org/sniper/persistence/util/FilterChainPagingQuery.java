@@ -18,14 +18,14 @@
 
 package org.sniper.persistence.util;
 
-import org.sniper.commons.request.PagingQuery;
+import org.sniper.commons.request.PageQuery;
 
 /**
  * 带属性过滤器链的分页查询对象
  * @author  Daniele
  * @version 1.0
  */
-public interface FilterChainPagingQuery extends PagingQuery {
+public interface FilterChainPagingQuery extends PageQuery {
 	
 	/**
 	 * 设置属性过滤器链

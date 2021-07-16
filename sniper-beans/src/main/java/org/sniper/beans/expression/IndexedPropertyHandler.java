@@ -21,7 +21,7 @@ package org.sniper.beans.expression;
 import java.lang.reflect.Array;
 import java.util.List;
 
-import org.sniper.commons.exception.NestedNullPointerException;
+import org.sniper.beans.exception.NestedNullPointerException;
 import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.ClassUtils;
 import org.sniper.commons.util.CollectionUtils;

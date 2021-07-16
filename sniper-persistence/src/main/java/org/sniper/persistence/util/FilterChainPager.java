@@ -18,14 +18,14 @@
 
 package org.sniper.persistence.util;
 
-import org.sniper.commons.request.PagingRequest;
+import org.sniper.commons.request.PageRequest;
 
 /**
  * 带属性过滤器链的分页器实现类
  * @author  Daniele
  * @version 1.0
  */
-public class FilterChainPager extends PagingRequest implements FilterChainPagingQuery {
+public class FilterChainPager extends PageRequest implements FilterChainPagingQuery {
 	
 	private static final long serialVersionUID = -4124566718222297577L;
 	
