@@ -47,4 +47,12 @@ public interface MessagingResponse<C> extends GenericResponse<C> {
 	 */
 	public void setMessage(String message);
 	
+	/**
+	 * 格式化响应消息
+	 * @author Daniele
+	 * @param args
+	 * @return
+	 */
+	public MessagingResponse<C> format(Object... args);
+	
 }

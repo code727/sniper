@@ -19,6 +19,7 @@
 package org.sniper.commons.response;
 
 import org.sniper.commons.enums.status.ResponseStatusEnum;
+import org.sniper.commons.util.StringUtils;
 
 /**
  * 响应对象
@@ -84,5 +85,21 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 		// 自定义错误码不能等于成功码默认值
 		return code != DEFAULT_SUCCESS_CODE;
 	}
+
+	/**
+	 * 格式化响应消息
+	 * @author Daniele
+	 * @param args
+	 * @return 
+	 */
+	@Override
+	public MessagingResponse<Integer> format(Object... args) {
+		if (StringUtils.isNotBlank(message)) {
+			this.message = String.format(this.message, args);
+		}
+		return this;
+	}
+	
+	
 	
 }
