@@ -25,7 +25,7 @@ import org.sniper.commons.request.Pageable;
  * @author  Daniele
  * @version 1.0
  */
-public interface DetailPageResult<T> extends Pageable, PageResult<T> {
+public interface PageDetailResult<T> extends Pageable, PageResult<T> {
 	
 	/**
 	 * 获取当前分页结果的总页数

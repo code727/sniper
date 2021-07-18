@@ -27,21 +27,21 @@ import org.sniper.commons.util.CollectionUtils;
  * @author  Daniele
  * @version 1.0
  */
-public class DetailPageModel<T> extends PageModel<T> implements DetailPageResult<T> {
+public class PageDetailModel<T> extends PageModel<T> implements PageDetailResult<T> {
 
 	private static final long serialVersionUID = -6132358308660100965L;
 	
 	private final PageQuery pageableQuery = new PageRequest();
 	
-	public DetailPageModel() {
+	public PageDetailModel() {
 		
 	}
 	
-	public DetailPageModel(PageQuery pageQuery) {
+	public PageDetailModel(PageQuery pageQuery) {
 		this(pageQuery.getCurrentPage(), pageQuery.getPageSize());
 	}
 	
-	public DetailPageModel(int currentPage, int pageSize) {
+	public PageDetailModel(int currentPage, int pageSize) {
 		setCurrentPage(currentPage);
 		setPageSize(pageSize);
 	}

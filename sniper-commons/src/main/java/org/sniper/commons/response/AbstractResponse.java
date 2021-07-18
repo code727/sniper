@@ -18,6 +18,8 @@
 
 package org.sniper.commons.response;
 
+import org.sniper.commons.util.StringUtils;
+
 /**
  * 抽象响应类
  * @author  Daniele
@@ -51,6 +53,14 @@ public abstract class AbstractResponse<C> implements MessagingResponse<C> {
 	@Override
 	public String getMessage() {
 		return message;
+	}
+	
+	@Override
+	public MessagingResponse<C> format(Object... args) {
+		if (StringUtils.isNotBlank(message)) {
+			this.message = String.format(this.message, args);
+		}
+		return this;
 	}
 			
 }

@@ -19,6 +19,7 @@
 package org.sniper.commons.enums.financial;
 
 import java.util.Currency;
+import java.util.Locale;
 import java.util.Map;
 
 import org.sniper.commons.util.ArrayUtils;
@@ -27,7 +28,7 @@ import org.sniper.commons.util.MessageUtils;
 import org.sniper.commons.util.NumberUtils;
 
 /**
- * 货币枚举类
+ * 国际货币枚举类
  * @author  Daniele
  * @version 1.0
  */
@@ -209,14 +210,12 @@ public enum CurrencyEnum {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(Currency.getAvailableCurrencies().size());;
-		System.out.println(Currency.getAvailableCurrencies());;
+//		System.out.println(Currency.getAvailableCurrencies().size());;
+//		System.out.println(Currency.getAvailableCurrencies());;
 		
-		Currency currency = Currency.getInstance("AFN");
+		Currency currency = Currency.getInstance("USD");
 		System.out.println(currency.getDisplayName());
-		System.out.println(currency.getSymbol());
-		System.out.println(currency.getCurrencyCode());
-		System.out.println(currency.getNumericCode());
+		System.out.println(currency.getSymbol(Locale.US));
 	}
 	
 }
