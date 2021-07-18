@@ -121,5 +121,5 @@ public enum AcceptEncodingEnum implements Enumerable<Integer> {
 	public static AcceptEncodingEnum resolve(String typeOrName) {
 		return typeOrName != null ? TYPE_AND_NAME_MAPPINGS.get(typeOrName.toUpperCase()) : null;
 	}
-		
+			
 }

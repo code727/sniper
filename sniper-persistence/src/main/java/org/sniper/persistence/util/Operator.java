@@ -20,8 +20,8 @@ package org.sniper.persistence.util;
 
 import java.util.Map;
 
-import org.sniper.commons.constant.AbstractConstant;
 import org.sniper.commons.util.MapUtils;
+import org.sniper.support.constant.AbstractConstant;
 
 /**
  * 运算符常量

@@ -27,11 +27,12 @@ import java.util.Locale;
 
 import org.sniper.beans.parameter.DefaultParameters;
 import org.sniper.beans.parameter.Parameters;
-import org.sniper.commons.constant.http.HttpRequestHeader;
 import org.sniper.commons.enums.http.AcceptEncodingEnum;
 import org.sniper.commons.enums.http.AuthenticationEnum;
+import org.sniper.commons.enums.http.HttpHeaderEnum;
 import org.sniper.commons.enums.http.HttpMethodEnum;
 import org.sniper.commons.enums.http.HttpProtocolEnum;
+import org.sniper.commons.enums.http.HttpRequestHeaderEnum;
 import org.sniper.commons.enums.http.TEEnum;
 import org.sniper.commons.kv.KeyValuePair;
 import org.sniper.commons.util.ArrayUtils;
@@ -59,7 +60,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param mediaTypes
 	 */
 	public void setAccept(List<MediaType> mediaTypes) {
-		set(HttpRequestHeader.ACCEPT.getKey(), CollectionUtils.join(mediaTypes, VALUE_SEPARATOR));
+		set(HttpRequestHeaderEnum.ACCEPT.getKey(), CollectionUtils.join(mediaTypes, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -68,7 +69,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public List<MediaType> getAccept() {
-		String first = getFirst(HttpRequestHeader.ACCEPT.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.ACCEPT.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
@@ -92,7 +93,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param charsets
 	 */
 	public void setAcceptCharset(List<AcceptCharset> charsets) {
-		set(HttpRequestHeader.ACCEPT_CHARSET.getKey(), CollectionUtils.join(charsets, VALUE_SEPARATOR));
+		set(HttpRequestHeaderEnum.ACCEPT_CHARSET.getKey(), CollectionUtils.join(charsets, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -101,7 +102,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public List<AcceptCharset> getAcceptCharset() {
-		String first = getFirst(HttpRequestHeader.ACCEPT_CHARSET.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.ACCEPT_CHARSET.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
@@ -135,7 +136,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param acceptEncoding
 	 */
 	public void setAcceptEncoding(List<AcceptEncoding> encodings) {
-		set(HttpRequestHeader.ACCEPT_ENCODING.getKey(), CollectionUtils.join(encodings, VALUE_SEPARATOR));
+		set(HttpRequestHeaderEnum.ACCEPT_ENCODING.getKey(), CollectionUtils.join(encodings, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -144,7 +145,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public List<AcceptEncoding> getAcceptEncoding() {
-		String first = getFirst(HttpRequestHeader.ACCEPT_ENCODING.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.ACCEPT_ENCODING.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(values)) {
@@ -182,7 +183,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param acceptLanguages
 	 */
 	public void setAcceptLanguage(AcceptLanguage acceptLanguage) {
-		set(HttpRequestHeader.ACCEPT_LANGUAGE.getKey(), acceptLanguage != null ? acceptLanguage.toString() : null);
+		set(HttpRequestHeaderEnum.ACCEPT_LANGUAGE.getKey(), acceptLanguage != null ? acceptLanguage.toString() : null);
 	}
 	
 	/**
@@ -191,7 +192,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public String getAcceptLanguage() {
-		return getFirst(HttpRequestHeader.ACCEPT_LANGUAGE.getKey());
+		return getFirst(HttpRequestHeaderEnum.ACCEPT_LANGUAGE.getKey());
 	}
 	
 	/**
@@ -200,7 +201,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param requestHeaders
 	 */
 	public void setAccessControlRequestHeaders(List<String> requestHeaders) {
-		set(HttpRequestHeader.ACCESS_CONTROL_REQUEST_HEADERS.getKey(), CollectionUtils.join(requestHeaders, VALUE_SEPARATOR));
+		set(HttpRequestHeaderEnum.ACCESS_CONTROL_REQUEST_HEADERS.getKey(), CollectionUtils.join(requestHeaders, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -209,7 +210,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public List<String> getAccessControlRequestHeaders() {
-		String first = getFirst(HttpRequestHeader.ACCESS_CONTROL_REQUEST_HEADERS.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.ACCESS_CONTROL_REQUEST_HEADERS.getKey());
 		return ArrayUtils.toList(StringUtils.split(first, VALUE_SEPARATOR));
 	}
 	
@@ -219,7 +220,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param method
 	 */
 	public void setAccessControlRequestMethod(HttpMethodEnum method) {
-		set(HttpRequestHeader.ACCESS_CONTROL_REQUEST_METHOD.getKey(), method != null ? method.name() : null);
+		set(HttpRequestHeaderEnum.ACCESS_CONTROL_REQUEST_METHOD.getKey(), method != null ? method.name() : null);
 	}
 	
 	/**
@@ -228,7 +229,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public HttpMethodEnum getAccessControlRequestMethod() {
-		return HttpMethodEnum.resolve(getFirst(HttpRequestHeader.ACCESS_CONTROL_REQUEST_METHOD.getKey()));
+		return HttpMethodEnum.resolve(getFirst(HttpRequestHeaderEnum.ACCESS_CONTROL_REQUEST_METHOD.getKey()));
 	}
 		
 	/**
@@ -237,7 +238,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param authorization
 	 */
 	public void setAuthorization(Authorization authorization) {
-		set(HttpRequestHeader.AUTHORIZATION.getKey(), authorization != null ? authorization.toString() : null);
+		set(HttpRequestHeaderEnum.AUTHORIZATION.getKey(), authorization != null ? authorization.toString() : null);
 	}
 	
 	/**
@@ -246,7 +247,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public Authorization getAuthorization() {
-		String first = getFirst(HttpRequestHeader.AUTHORIZATION.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.AUTHORIZATION.getKey());
 		String type = StringUtils.beforeFrist(first, StringUtils.SPACE);
 		String credentials = StringUtils.afterFrist(first, StringUtils.SPACE);
 		
@@ -266,7 +267,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param contentLength
 	 */
 	public void setContentLength(long contentLength) {
-		set(HttpRequestHeader.CONTENT_LENGTH.getKey(), Long.toString(contentLength));
+		set(HttpHeaderEnum.CONTENT_LENGTH.getKey(), Long.toString(contentLength));
 	}
 	
 	/**
@@ -275,7 +276,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public long getContentLength() {
-		String value = getFirst(HttpRequestHeader.CONTENT_LENGTH.getKey());
+		String value = getFirst(HttpHeaderEnum.CONTENT_LENGTH.getKey());
 		return value != null ? Long.parseLong(value) : -1;
 	}
 		
@@ -285,7 +286,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param cookies
 	 */
 	public void setCookie(Parameters<String, Object> cookies) {
-		set(HttpRequestHeader.COOKIE.getKey(), cookies != null
+		set(HttpRequestHeaderEnum.COOKIE.getKey(), cookies != null
 				? MapUtils.join(cookies.getItems(), StringUtils.ASSIGNMENT, NAME_VALUE_PAIR_SEPARATOR) : null);
 	}
 	
@@ -295,7 +296,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public Parameters<String, Object> getCookie() {
-		String first = getFirst(HttpRequestHeader.COOKIE.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.COOKIE.getKey());
 		String[] nameValuePairs = StringUtils.split(first, NAME_VALUE_PAIR_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(nameValuePairs)) {
@@ -320,7 +321,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param dnt 0:允许, 1:禁止
 	 */
 	public void setDNT(int dnt) {
-		set(HttpRequestHeader.DNT.getKey(), String.valueOf(NumberUtils.rangeLimit(dnt, 0, 1)));
+		set(HttpRequestHeaderEnum.DNT.getKey(), String.valueOf(NumberUtils.rangeLimit(dnt, 0, 1)));
 	}
 	
 	/**
@@ -329,7 +330,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public int getDNT() {
-		return NumberUtils.rangeLimit(NumberUtils.toIntegerValue(getFirst(HttpRequestHeader.DNT.getKey())), 0, 1)  ;
+		return NumberUtils.rangeLimit(NumberUtils.toIntegerValue(getFirst(HttpRequestHeaderEnum.DNT.getKey())), 0, 1)  ;
 	}
 	
 	/**
@@ -338,7 +339,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param expect
 	 */
 	public void setExpect(String expect) {
-		set(HttpRequestHeader.EXPECT.getKey(), expect);
+		set(HttpRequestHeaderEnum.EXPECT.getKey(), expect);
 	}
 	
 	/**
@@ -347,7 +348,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public String getExpect() {
-		return getFirst(HttpRequestHeader.EXPECT.getKey());
+		return getFirst(HttpRequestHeaderEnum.EXPECT.getKey());
 	}
 	
 	/**
@@ -356,7 +357,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param forwarded
 	 */
 	public void setForwarded(Forwarded forwarded) {
-		set(HttpRequestHeader.FORWARDED.getKey(), forwarded != null ? forwarded.toString() : null);
+		set(HttpRequestHeaderEnum.FORWARDED.getKey(), forwarded != null ? forwarded.toString() : null);
 	}
 	
 	/**
@@ -365,7 +366,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public Forwarded getForwarded() {
-		String first = getFirst(HttpRequestHeader.FORWARDED.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.FORWARDED.getKey());
 		String[] nameValuePairs = StringUtils.split(first, NAME_VALUE_PAIR_SEPARATOR);
 		
 		if (ArrayUtils.isNotEmpty(nameValuePairs)) {
@@ -407,7 +408,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param expect
 	 */
 	public void setFrom(String from) {
-		set(HttpRequestHeader.FROM.getKey(), from);
+		set(HttpRequestHeaderEnum.FROM.getKey(), from);
 	}
 	
 	/**
@@ -416,7 +417,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public String getFrom() {
-		return getFirst(HttpRequestHeader.FROM.getKey());
+		return getFirst(HttpRequestHeaderEnum.FROM.getKey());
 	}
 	
 	/**
@@ -425,7 +426,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param host
 	 */
 	public void setHost(String host) {
-		set(HttpRequestHeader.HOST.getKey(), host);
+		set(HttpRequestHeaderEnum.HOST.getKey(), host);
 	}
 	
 	/**
@@ -434,7 +435,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public String gethost() {
-		return getFirst(HttpRequestHeader.HOST.getKey());
+		return getFirst(HttpRequestHeaderEnum.HOST.getKey());
 	}
 	
 	/**
@@ -443,7 +444,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param eTagValues
 	 */
 	public void setIfMatch(List<String> eTagValues) {
-		set(HttpRequestHeader.IF_MATCH.getKey(), CollectionUtils.join(eTagValues, VALUE_SEPARATOR));
+		set(HttpRequestHeaderEnum.IF_MATCH.getKey(), CollectionUtils.join(eTagValues, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -452,7 +453,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public List<String> getIfMatch() {
-		String first = getFirst(HttpRequestHeader.IF_MATCH.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.IF_MATCH.getKey());
 		return ArrayUtils.toList(StringUtils.split(first, VALUE_SEPARATOR));
 	}
 	
@@ -462,7 +463,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param date
 	 */
 	public void setIfModifiedSince(Date date) {
-		set(HttpRequestHeader.IF_MODIFIED_SINCE.getKey(), date != null ? DateUtils.getGMTDateFormat(Locale.US).format(date) : null);
+		set(HttpRequestHeaderEnum.IF_MODIFIED_SINCE.getKey(), date != null ? DateUtils.getGMTDateFormat(Locale.US).format(date) : null);
 	}
 	
 	/**
@@ -471,7 +472,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public Date getIfModifiedSince() {
-		String first = getFirst(HttpRequestHeader.IF_MODIFIED_SINCE.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.IF_MODIFIED_SINCE.getKey());
 		return StringUtils.isNotBlank(first) ? DateUtils.getGMTDateFormat(Locale.US).parse(first, new ParsePosition(0)) : null;
 	}
 	
@@ -481,7 +482,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param eTagValues
 	 */
 	public void setIfNoneMatch(List<String> eTagValues) {
-		set(HttpRequestHeader.IF_NONE_MATCH.getKey(), CollectionUtils.join(eTagValues, VALUE_SEPARATOR));
+		set(HttpRequestHeaderEnum.IF_NONE_MATCH.getKey(), CollectionUtils.join(eTagValues, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -490,7 +491,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public List<String> getIfNoneMatch() {
-		String first = getFirst(HttpRequestHeader.IF_NONE_MATCH.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.IF_NONE_MATCH.getKey());
 		return ArrayUtils.toList(StringUtils.split(first, VALUE_SEPARATOR));
 	}
 	
@@ -502,9 +503,9 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 */
 	public void setIfRange(Object range) {
 		if (range instanceof Date) {
-			set(HttpRequestHeader.IF_RANGE.getKey(), DateUtils.getGMTDateFormat(Locale.US).format(range));
+			set(HttpRequestHeaderEnum.IF_RANGE.getKey(), DateUtils.getGMTDateFormat(Locale.US).format(range));
 		} else {
-			set(HttpRequestHeader.IF_RANGE.getKey(), range != null ? range.toString() : null);
+			set(HttpRequestHeaderEnum.IF_RANGE.getKey(), range != null ? range.toString() : null);
 		}
 	}
 	
@@ -515,7 +516,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public Object getIfRange() {
-		String first = getFirst(HttpRequestHeader.IF_RANGE.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.IF_RANGE.getKey());
 		if (StringUtils.isNotBlank(first)) {
 			Date date = DateUtils.getGMTDateFormat(Locale.US).parse(first, new ParsePosition(0));
 			if (date != null) {
@@ -532,7 +533,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param date
 	 */
 	public void setIfUnmodifiedSince(Date date) {
-		set(HttpRequestHeader.IF_UNMODIFIED_SINCE.getKey(),
+		set(HttpRequestHeaderEnum.IF_UNMODIFIED_SINCE.getKey(),
 				date != null ? DateUtils.getGMTDateFormat(Locale.US).format(date) : null);
 	}
 	
@@ -542,7 +543,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public Date getIfUnmodifiedSince() {
-		String first = getFirst(HttpRequestHeader.IF_UNMODIFIED_SINCE.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.IF_UNMODIFIED_SINCE.getKey());
 		return StringUtils.isNotBlank(first) ? DateUtils.getGMTDateFormat(Locale.US).parse(first, new ParsePosition(0)) : null;
 	}
 	
@@ -552,7 +553,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param url
 	 */
 	public void setOrigin(URL url) {
-		set(HttpRequestHeader.ORIGIN.getKey(), url != null ? url.toString() : null);
+		set(HttpRequestHeaderEnum.ORIGIN.getKey(), url != null ? url.toString() : null);
 	}
 	
 	/**
@@ -561,7 +562,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public URL getOrigin() {
-		String first = getFirst(HttpRequestHeader.ORIGIN.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.ORIGIN.getKey());
 		try {
 			return StringUtils.isNotBlank(first) ? new URL(first) : null;
 		} catch (MalformedURLException e) {
@@ -575,7 +576,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param authorization
 	 */
 	public void setProxyAuthorization(Authorization authorization) {
-		set(HttpRequestHeader.PROXY_AUTHORIZATION.getKey(), authorization != null ? authorization.toString() : null);
+		set(HttpRequestHeaderEnum.PROXY_AUTHORIZATION.getKey(), authorization != null ? authorization.toString() : null);
 	}
 		
 	/**
@@ -584,7 +585,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public Authorization getProxyAuthorization() {
-		String first = getFirst(HttpRequestHeader.PROXY_AUTHORIZATION.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.PROXY_AUTHORIZATION.getKey());
 		String type = StringUtils.beforeFrist(first, StringUtils.SPACE);
 		String credentials = StringUtils.afterFrist(first, StringUtils.SPACE);
 		
@@ -604,7 +605,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param range
 	 */
 	public void setRange(Range range) {
-		set(HttpRequestHeader.RANGE.getKey(), range != null ? range.toString() : null);
+		set(HttpRequestHeaderEnum.RANGE.getKey(), range != null ? range.toString() : null);
 	}
 	
 	/**
@@ -613,7 +614,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public Range getRange() {
-		String first = getFirst(HttpRequestHeader.RANGE.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.RANGE.getKey());
 		String unit = StringUtils.beforeFrist(first, StringUtils.ASSIGNMENT);
 		String[] rangeItems = StringUtils.split(StringUtils.afterFrist(first, StringUtils.ASSIGNMENT), VALUE_SEPARATOR);  
 		
@@ -637,7 +638,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param url
 	 */
 	public void setReferer(URL url) {
-		set(HttpRequestHeader.REFERER.getKey(), url != null ? url.toString() : null);
+		set(HttpRequestHeaderEnum.REFERER.getKey(), url != null ? url.toString() : null);
 	}
 	
 	/**
@@ -646,7 +647,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public URL getReferer() {
-		String first = getFirst(HttpRequestHeader.REFERER.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.REFERER.getKey());
 		try {
 			return StringUtils.isNotBlank(first) ? new URL(first) : null;
 		} catch (MalformedURLException e) {
@@ -660,7 +661,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param te
 	 */
 	public void setTE(List<TE> tes) {
-		set(HttpRequestHeader.TE.getKey(), CollectionUtils.join(tes, VALUE_SEPARATOR));
+		set(HttpRequestHeaderEnum.TE.getKey(), CollectionUtils.join(tes, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -669,7 +670,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public List<TE> getTE() {
-		String first = getFirst(HttpRequestHeader.TE.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.TE.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 
 		if (ArrayUtils.isNotEmpty(values)) {
@@ -708,7 +709,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param value
 	 */
 	public void setUpgradeInsecureRequests(String value) {
-		set(HttpRequestHeader.UPGRADE_INSECURE_REQUESTS.getKey(), value);
+		set(HttpRequestHeaderEnum.UPGRADE_INSECURE_REQUESTS.getKey(), value);
 	}
 	
 	/**
@@ -717,7 +718,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public String getUpgradeInsecureRequests() {
-		return getFirst(HttpRequestHeader.UPGRADE_INSECURE_REQUESTS.getKey());
+		return getFirst(HttpRequestHeaderEnum.UPGRADE_INSECURE_REQUESTS.getKey());
 	}
 	
 	/**
@@ -726,7 +727,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param userAgent
 	 */
 	public void setUserAgent(String userAgent) {
-		set(HttpRequestHeader.USER_AGENT.getKey(), userAgent);
+		set(HttpRequestHeaderEnum.USER_AGENT.getKey(), userAgent);
 	}
 	
 	/**
@@ -735,7 +736,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public String getUserAgent() {
-		return getFirst(HttpRequestHeader.USER_AGENT.getKey());
+		return getFirst(HttpRequestHeaderEnum.USER_AGENT.getKey());
 	}
 	
 	/**
@@ -744,7 +745,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param ips
 	 */
 	public void setXForwardedFor(List<String> ips) {
-		set(HttpRequestHeader.X_FORWARDED_FOR.getKey(), CollectionUtils.join(ips, VALUE_SEPARATOR));
+		set(HttpRequestHeaderEnum.X_FORWARDED_FOR.getKey(), CollectionUtils.join(ips, VALUE_SEPARATOR));
 	}
 	
 	/**
@@ -753,7 +754,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public List<String> getXForwardedFor() {
-		String first = getFirst(HttpRequestHeader.X_FORWARDED_FOR.getKey());
+		String first = getFirst(HttpRequestHeaderEnum.X_FORWARDED_FOR.getKey());
 		String[] values = StringUtils.split(first, VALUE_SEPARATOR);
 
 		if (ArrayUtils.isNotEmpty(values)) {
@@ -774,7 +775,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param host
 	 */
 	public void setXForwardedHost(String host) {
-		set(HttpRequestHeader.X_FORWARDED_HOST.getKey(), host);
+		set(HttpRequestHeaderEnum.X_FORWARDED_HOST.getKey(), host);
 	}
 	
 	/**
@@ -783,7 +784,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public String getXForwardedHost() {
-		return getFirst(HttpRequestHeader.X_FORWARDED_HOST.getKey());
+		return getFirst(HttpRequestHeaderEnum.X_FORWARDED_HOST.getKey());
 	}
 	
 	/**
@@ -792,7 +793,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @param protocol
 	 */
 	public void setXForwardedProto(HttpProtocolEnum protocol) {
-		set(HttpRequestHeader.X_FORWARDED_PROTO.getKey(), protocol != null ? protocol.name().toLowerCase() : null);
+		set(HttpRequestHeaderEnum.X_FORWARDED_PROTO.getKey(), protocol != null ? protocol.name().toLowerCase() : null);
 	}
 	
 	/**
@@ -801,7 +802,7 @@ public class HttpRequestHeaders extends HttpHeaders {
 	 * @return
 	 */
 	public HttpProtocolEnum getXForwardedProto() {
-		return HttpProtocolEnum.resolve(getFirst(HttpRequestHeader.X_FORWARDED_PROTO.getKey()));
+		return HttpProtocolEnum.resolve(getFirst(HttpRequestHeaderEnum.X_FORWARDED_PROTO.getKey()));
 	}
 	
 }
