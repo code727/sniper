@@ -20,31 +20,44 @@
 //
 ///**
 // * 业务异常处理类
-// * @author  Daniele
+// * 
+// * @author Daniele
 // * @version 1.0
 // */
 //public class BizException extends RuntimeException {
-//	
+//
 //	private static final long serialVersionUID = -7058119064602809131L;
-//	
+//
 //	/** 异常码 */
 //	private final int code;
-//	
-//	public BizException(int code) {
-//		this(code, null);
+//
+//	public BizException() {
+//
 //	}
-//	
-//	public BizException(int code, String messgae) {
-//		super(messgae);
+//
+//	public int getCode() {
+//		return code;
 //	}
-//	
-//	public BizException(int code, Throwable throwable) {
-//		super(throwable);
-//	}
-//		
-//	public BizException(int code, String messgae, Throwable throwable) {
-//		super(messgae, throwable);
-//		
-//	}
-//		
+//
+////	public BizException(String message) {
+////		
+////	}
+////		
+////	public BizException(int code) {
+////		this(code, null);
+////	}
+////	
+////	public BizException(int code, String messgae) {
+////		super(messgae);
+////	}
+////	
+////	public BizException(int code, Throwable throwable) {
+////		super(throwable);
+////	}
+////		
+////	public BizException(int code, String messgae, Throwable throwable) {
+////		super(messgae, throwable);
+////		
+////	}
+//
 //}

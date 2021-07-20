@@ -24,11 +24,10 @@ import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
 /**
- * HTTP状态码枚举
+ * HTTP状态枚举
  * @author  Daniele
  * @version 1.0
  */
-//
 public enum HttpStatusEnum {
 	
 	/** 继续 */
@@ -166,6 +165,8 @@ public enum HttpStatusEnum {
 	/** 需要网络验证 */
 	NETWORK_AUTHENTICATION_REQUIRED(511);
 	
+	private static final String MESSAGE_PREFIX = "http.status.";
+	
 	private static final Map<Integer, HttpStatusEnum> CODE_MAPPINGS = MapUtils.newHashMap(63);
 	
 	static {
@@ -182,13 +183,23 @@ public enum HttpStatusEnum {
 	
 	private HttpStatusEnum(int code) {
 		this.code = code;
-		this.message = MessageUtils.getClassMessage(getClass(), "http.status." + code);
+		this.message = MessageUtils.getClassMessage(getClass(), MESSAGE_PREFIX + code);
 	}
 	
+	/**
+	 * 获取状态码
+	 * @author Daniele
+	 * @return
+	 */
 	public int getCode() {
 		return code;
 	}
 
+	/**
+	 * 获取消息
+	 * @author Daniele
+	 * @return
+	 */
 	public String getMessage() {
 		return message;
 	}
@@ -212,23 +223,26 @@ public enum HttpStatusEnum {
 	}
 	
 	/**
-	 * 判断是否为1xx消息状态
+	 * 判断当前枚举是否为1xx状态消息
+	 * @author Daniele
 	 * @return
 	 */
-	public boolean is1xxInformational() {
+	public boolean is1xxInformation() {
 		return this.code >= 100 && this.code <= 199;
 	}
 	
 	/**
-	 * 判断是否为2xx成功状态
+	 * 判断当前枚举是否为2xx成功状态
+	 * @author Daniele
 	 * @return
 	 */
-	public boolean is2xxSuccessful() {
+	public boolean is2xxSuccessed() {
 		return this.code >= 200 && this.code <= 299;
 	}
 	
 	/**
-	 * 判断是否为3xx重定向状态
+	 * 判断当前枚举是否为3xx重定向状态
+	 * @author Daniele
 	 * @return
 	 */
 	public boolean is3xxRedirection() {
@@ -236,23 +250,41 @@ public enum HttpStatusEnum {
 	}
 	
 	/**
-	 * 判断是否为4xx客户端请求错误状态
+	 * 判断当前枚举是否为4xx客户端请求错误状态
+	 * @author Daniele
 	 * @return
 	 */
-	public boolean is4xxRequestError() {
+	public boolean is4xxClientError() {
 		return this.code >= 400 && this.code <= 499;
 	}
 	
 	/**
-	 * 判断是否为5xx请求错误状态
+	 * 判断当前枚举是否为5xx服务端错误状态
+	 * @author Daniele
 	 * @return
 	 */
 	public boolean is5xxServerError() {
 		return this.code >= 500 && this.code <= 599;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(HttpStatusEnum.resolve(200).getMessage());
+	/**
+	 * 判断当前枚举代表的HTTP请求是否已成功
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean requestSuccess() {
+		// 状态码在[100,399]区间内表示请求成功
+		return is1xxInformation() || is2xxSuccessed() || is3xxRedirection();
 	}
 	
+	/**
+	 * 判断当前枚举代表的HTTP请求是否发生错误
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean requestError() {
+		// 状态码在[400,599]区间内表示请求错误
+		return is4xxClientError() || is5xxServerError();
+	}
+		
 }

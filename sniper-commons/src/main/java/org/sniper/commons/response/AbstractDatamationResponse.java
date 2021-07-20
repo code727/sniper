@@ -41,7 +41,7 @@ public abstract class AbstractDatamationResponse<C, T> extends AbstractResponse<
 	}
 	
 	public String toString() {
-		return String.format("{code:%s,message:%s,data:%s}", code, message, data);
+		return String.format("{\"code\":%s,\"message\":%s,\"data\":%s}", code, message, data);
 	}
 
 }

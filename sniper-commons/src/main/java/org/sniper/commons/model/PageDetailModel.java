@@ -31,11 +31,13 @@ public class PageDetailModel<T> extends PageModel<T> implements PageDetailResult
 
 	private static final long serialVersionUID = -6132358308660100965L;
 	
-	private final PageQuery pageableQuery = new PageRequest();
+	private final PageQuery pageQuery = new PageRequest();
 	
-	public PageDetailModel() {
-		
-	}
+	/**
+	 * 默认构造函数保持为空，目的是让JSON反序列化时能找到此构造函数
+	 * @author Daniele
+	 */
+	PageDetailModel() {}
 	
 	public PageDetailModel(PageQuery pageQuery) {
 		this(pageQuery.getCurrentPage(), pageQuery.getPageSize());
@@ -64,22 +66,22 @@ public class PageDetailModel<T> extends PageModel<T> implements PageDetailResult
 
 	@Override
 	public int getPageSize() {
-		return this.pageableQuery.getPageSize();
+		return this.pageQuery.getPageSize();
 	}
 
 	@Override
 	public void setPageSize(int pageSize) {
-		this.pageableQuery.setPageSize(pageSize);
+		this.pageQuery.setPageSize(pageSize);
 	}
 
 	@Override
 	public int getCurrentPage() {
-		return this.pageableQuery.getCurrentPage();
+		return this.pageQuery.getCurrentPage();
 	}
 
 	@Override
 	public void setCurrentPage(int currentPage) {
-		this.pageableQuery.setCurrentPage(currentPage);
+		this.pageQuery.setCurrentPage(currentPage);
 	}
 
 }

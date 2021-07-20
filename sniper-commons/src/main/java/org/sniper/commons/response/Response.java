@@ -18,6 +18,7 @@
 
 package org.sniper.commons.response;
 
+import org.sniper.commons.enums.http.HttpStatusEnum;
 import org.sniper.commons.enums.status.ResponseStatusEnum;
 
 /**
@@ -30,10 +31,10 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	private static final long serialVersionUID = -2728403977784339577L;
 
 	/** 默认成功响应码 */
-	protected static final int DEFAULT_SUCCESS_CODE = ResponseStatusEnum.SUCCESS.getKey();
+	public static final int DEFAULT_SUCCESS_CODE = ResponseStatusEnum.SUCCESS.getKey();
 	
 	/** 默认错误响应码  */
-	protected static final int DEFAULT_ERROR_CODE = ResponseStatusEnum.ERROR.getKey();
+	public static final int DEFAULT_ERROR_CODE = ResponseStatusEnum.ERROR.getKey();
 	
 	public Response() {
 		this(null);
@@ -70,10 +71,15 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	 * @return
 	 */
 	static boolean successed(int code) {
-		// 自定义成功码必须等于默认值
-		return code == DEFAULT_SUCCESS_CODE;
-	}
+		boolean defaultSuccessed = (code == DEFAULT_SUCCESS_CODE);
+		if (!defaultSuccessed) {
+			HttpStatusEnum httpStatus = HttpStatusEnum.resolve(code);
+			return httpStatus != null && httpStatus.requestSuccess();
+		}
 		
+		return defaultSuccessed;
+	}
+			
 	/**
 	 * 判断是否为error码
 	 * @author Daniele 

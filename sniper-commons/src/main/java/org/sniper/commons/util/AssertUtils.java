@@ -46,8 +46,7 @@ public class AssertUtils {
 	 * @param message 
 	 */
 	public static void assertNull(Object obj, String message) {
-		if (obj != null)
-			throw new IllegalArgumentException(message);
+		if (obj != null) throw new IllegalArgumentException(message);
 	}
 	
 	/**
@@ -66,8 +65,7 @@ public class AssertUtils {
 	 * @param message 
 	 */
 	public static void assertNotNull(Object obj, String message) {
-		if (obj == null)
-			throw new IllegalArgumentException(message);
+		if (obj == null) throw new IllegalArgumentException(message);
 	}
 	
 	/**
@@ -86,8 +84,7 @@ public class AssertUtils {
 	 * @param message 
 	 */
 	public static void assertTrue(boolean express, String message) {
-		if (!express)
-			throw new IllegalArgumentException(message);
+		if (!express) throw new IllegalArgumentException(message);
 	}
 	
 	/**
@@ -106,8 +103,7 @@ public class AssertUtils {
 	 * @param message 
 	 */
 	public static void assertFalse(boolean express, String message) {
-		if (express)
-			throw new IllegalArgumentException(message);
+		if (express) throw new IllegalArgumentException(message);
 	}
 	
 	/**
@@ -187,16 +183,16 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * 断言集合不为空
+	 * 断言映射集不为空
 	 * @author Daniele 
 	 * @param map
 	 */
 	public static <K, V> void assertNotEmpty(Map<K, V> map) {
-		assertNotEmpty(map, "[Assertion failed] - This collection argument must not be null or empty");
+		assertNotEmpty(map, "[Assertion failed] - This map argument must not be null or empty");
 	}
 	
 	/**
-	 * 断言集合不为空，否则抛出自定义的异常信息
+	 * 断言映射集不为空，否则抛出自定义的异常信息
 	 * @author Daniele 
 	 * @param map
 	 * @param message
