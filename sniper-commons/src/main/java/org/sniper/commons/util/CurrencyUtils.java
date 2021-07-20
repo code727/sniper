@@ -24,11 +24,14 @@ import java.math.BigInteger;
 import org.sniper.commons.enums.financial.CurrencyEnum;
 
 /**
- * 货币工具类
+ * 货币金融工具类
  * @author  Daniele
  * @version 1.0
  */
 public class CurrencyUtils {
+	
+	/** 国际货币格式 */
+	public static final String CURRENCY_FORMAT = "#,##0.00";
 	
 	/** 元角分货币格式 */
 	public static final String YUANJIAOFEN_FORMAT = "0.00";
@@ -36,7 +39,7 @@ public class CurrencyUtils {
 	private CurrencyUtils() {}
 	
 	/**
-	 * 将字符ASCII码转化为指定货币格式的字符串
+	 * 将字符的ASCII码转化为指定货币格式的字符串
 	 * @author Daniele 
 	 * @param number
 	 * @param currency
@@ -58,7 +61,7 @@ public class CurrencyUtils {
 	}
 	
 	/**
-	 * 将字符ASCII码转化为人民币字符串
+	 * 将字符的ASCII码转化为人民币字符串
 	 * @author Daniele 
 	 * @param number
 	 * @return

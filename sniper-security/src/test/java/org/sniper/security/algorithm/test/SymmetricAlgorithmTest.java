@@ -97,5 +97,5 @@ public class SymmetricAlgorithmTest extends BaseTestCase {
 		System.out.println("Blowfish密文:" + ciphertext);
 		System.out.println("Blowfish明文:" + decryptedPlaintext);
 	}
-
+	
 }

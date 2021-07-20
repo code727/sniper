@@ -637,5 +637,5 @@ public class AnnotationUtils {
 				(currentType != null ? StringUtils.appendDoubleQuotes(currentType.getName()) : currentType),
 				(annotationClass != null ? StringUtils.appendDoubleQuotes(annotationClass.getName()) : annotationClass));
 	}
-		
+	
 }

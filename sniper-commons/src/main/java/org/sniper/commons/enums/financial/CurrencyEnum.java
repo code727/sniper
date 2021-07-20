@@ -19,203 +19,194 @@
 package org.sniper.commons.enums.financial;
 
 import java.util.Currency;
-import java.util.Locale;
 import java.util.Map;
 
-import org.sniper.commons.util.ArrayUtils;
+import org.sniper.commons.enums.Enumerable;
+import org.sniper.commons.util.CurrencyUtils;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
-import org.sniper.commons.util.NumberUtils;
 
 /**
  * 国际货币枚举类
  * @author  Daniele
  * @version 1.0
  */
-public enum CurrencyEnum {
+public enum CurrencyEnum implements Enumerable<Integer> {
 	
 	/** 人民币  */	
-	CNY("CNY", "currency.cny", String.format("¥%s", NumberUtils.CURRENCY_FORMAT)),
+	CNY("¥"),
 	
 	/** 美元 */  
-	USD("USD", "currency.usd", String.format("$%s", NumberUtils.CURRENCY_FORMAT)),
+	USD("$"),
 	
 	/** 日元 */  
-	JPY("JPY", "currency.jpy", String.format("¥%s", NumberUtils.CURRENCY_FORMAT)),
+	JPY("¥"),
 	
 	/** 韩元 */  	
-	KRW("KRW", "currency.krw", String.format("₩%s", NumberUtils.CURRENCY_FORMAT)),
+	KRW("₩"),
 	
 	/** 港币 */  
-	HKD("HKD", "currency.hkd", String.format("HK$%s", NumberUtils.CURRENCY_FORMAT)),
+	HKD("HK$"),
+	
+	/** 澳门元 */
+	MOP("MOP$"),
+	
+	/** 新台币 */
+	TWD("NT$"),
 	
 	/** 欧元 */  
-	EUR("EUR", "currency.eur", String.format("€%s", NumberUtils.CURRENCY_FORMAT)),
+	EUR("€"),
 	
-	/** 英镑	*/  
-	GBP("GBP", "currency.gbp", String.format("￡%s", NumberUtils.CURRENCY_FORMAT)),
+	/** 英镑 */  
+	GBP("￡"),
 	
-	/** 德国马克	*/  
-	DEM("DEM", "currency.dem", String.format("DM%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 瑞士法郎	*/  
-	CHF("CHF", "currency.chf", String.format("S₣%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 法国法郎	*/  
-	FRF("FRF", "currency.frf", String.format("F₣%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 俄罗斯卢布 */  	
-	SUR("SUR", "currency.sur", String.format("РУБ%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 加拿大元	*/  
-	CAD("CAD", "currency.cad", String.format("CAN$%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 澳大利亚元 */  
-	AUD("AUD", "currency.aud", String.format("A$%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 新西兰元 */  	
-	NZD("NZD", "currency.nzd", String.format("NZ$%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 奥地利先令 */  
-	ATS("ATS", "currency.ats", String.format("ASCH%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 芬兰马克 */  
-	FIM("FIM", "currency.fim", String.format("FMK%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 瑞典克朗 */
-	SEK("SEK", "currency.sek", String.format("SKR%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 丹麦克朗 */
-	DKR("DKK", "currency.dkk", String.format("DKR%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 挪威克朗 */
-	NOK("NOK", "currency.nok", String.format("DKK%s", NumberUtils.CURRENCY_FORMAT)),
-	
-	/** 比利时法郎 */  
-	BEF("BEF", "currency.bef", String.format("B₣%s", NumberUtils.CURRENCY_FORMAT)),
+	/** 德国马克 */  
+	DEM("DM"),
 	
 	/** 意大利里拉 */  
-	ITL("ITL", "currency.itl", String.format("₤%s", NumberUtils.CURRENCY_FORMAT)),
+	ITL("₤"),
 	
 	/** 荷兰盾 */ 	
-	NLG("NLG", "currency.nlg", String.format("F%s", NumberUtils.CURRENCY_FORMAT)),
+	NLG("F"),
+	
+	/** 俄罗斯卢布 */  	
+	RUB("₽"),
+	
+	/** 瑞士法郎 */  
+	CHF("S₣"),
+	
+	/** 法国法郎 */  
+	FRF("F₣"),
+	
+	/** 比利时法郎 */  
+	BEF(null),
+	
+	/** 奥地利先令 */  
+	ATS(null),
+	
+	/** 芬兰马克 */  
+	FIM(null),
+	
+	/** 瑞典克朗 */
+	SEK(null),
+	
+	/** 丹麦克朗 */
+	DKK(null),
+	
+	/** 挪威克朗 */
+	NOK(null),
+	
+	/** 加拿大元 */  
+	CAD("C$"),
+	
+	/** 澳大利亚元 */  
+	AUD("A$"),
+	
+	/** 新西兰元 */  	
+	NZD("NZ$"),
 	
 	/** 印度卢比 */ 	
-	INR("INR", "currency.inr", String.format("RS%s", NumberUtils.CURRENCY_FORMAT)),
+	INR("₹"),
 	
 	/** 缅甸元 */ 	
-	BUK("BUK", "currency.buk", String.format("K%s", NumberUtils.CURRENCY_FORMAT)),
+	MMK(null),
 	
 	/** 印尼盾 */  
-	IDR	("IDR", "currency.idr", String.format("RP%s", NumberUtils.CURRENCY_FORMAT)),
+	IDR("Rp"),
 	
 	/** 新加坡元 */  		
-	SGD("SGD", "currency.sgd", String.format("S$%s", NumberUtils.CURRENCY_FORMAT)),
+	SGD("S$"),
 	
-	/** 泰铢	*/  	
-	THB("THB", "currency.thb", String.format("฿%s", NumberUtils.CURRENCY_FORMAT)),
+	/** 泰铢 */  	
+	THB(null),
 	
 	/** 菲律宾比索 */  	
-	PHP("PHP", "currency.php", String.format("₱%s", NumberUtils.CURRENCY_FORMAT));
+	PHP(null)
+	;
 	
-	private static final Map<String, CurrencyEnum> mappings = MapUtils.newHashMap(233);
+	private static final Map<Integer, CurrencyEnum> KEY_MAPPINGS = MapUtils.newHashMap(30);
+	
+	private static final Map<String, CurrencyEnum> NAME_MAPPINGS = MapUtils.newHashMap(30);
 	
 	static {
 		for (CurrencyEnum currency : values()) {
-			mappings.put(currency.abbreviation, currency);
+			KEY_MAPPINGS.put(currency.key, currency);
+			NAME_MAPPINGS.put(currency.name(), currency);
 		}
 	}
 		
 	/** 键 */
 	private final int key;
 	
-	/** 缩写/简称 */
-	private final String abbreviation;
+	/** Currency实例 */
+	private final Currency instance;
 	
-	/** 值 */
-	private final String value;
+	/** 符号 */
+	private final String symbol;
 	
-	/** 模式 */
+	/** 格式化模式 */
 	private final String pattern;
 	
 	/** 消息 */
 	private final String message;
 	
-	private CurrencyEnum(String abbreviation, String value, String pattern) {
+	private CurrencyEnum(String symbol) {
 		this.key = ordinal();
-		this.abbreviation = abbreviation;
-		this.value = value;
-		this.pattern = pattern;
-		this.message = MessageUtils.getClassMessage(getClass(), value);
+		this.instance = Currency.getInstance(name());
+		this.symbol = (symbol != null ? symbol : this.instance.getSymbol());
+		this.pattern = this.symbol + CurrencyUtils.CURRENCY_FORMAT;
+		this.message = this.instance.getDisplayName();
 	}
 	
-	public int getKey() {
+	@Override
+	public Integer getKey() {
 		return key;
 	}
-
-	public String getAbbreviation() {
-		return abbreviation;
+	
+	@Override
+	public String getMessage() {
+		return message;
 	}
 
-	public String getValue() {
-		return value;
+	public Currency getInstance() {
+		return instance;
+	}
+
+	public String getSymbol() {
+		return symbol;
 	}
 
 	public String getPattern() {
 		return pattern;
 	}
-	
-	public String getMessage() {
-		return message;
+
+	@Override
+	public boolean matches(Integer key) {
+		return key != null && this.key == key.intValue();
+	}
+
+	@Override
+	public boolean matches(String name) {
+		return this.name().equalsIgnoreCase(name);
 	}
 	
 	/**
-	 * 判断指定的键是否匹配一个Currency对象
+	 * 将指定的键解析成枚举对象
 	 * @author Daniele 
-	 * @param key
-	 * @return
-	 */
-	public boolean matches(int key) {
-		return this.key == key;
-	}
-	
-	/**
-	 * 判断指定的缩写/简称是否匹配一个Currency对象
-	 * @author Daniele 
-	 * @param abbreviation
-	 * @return
-	 */
-	public boolean matches(String abbreviation) {
-		return this.abbreviation.equalsIgnoreCase(abbreviation);
-	}
-	
-	/**
-	 * 将指定的键解析成Currency对象
-	 * @author Daniele 
-	 * @param key
+	 * @param type
 	 * @return
 	 */
 	public static CurrencyEnum resolve(int key) {
-		return ArrayUtils.get(values(), key);
+		return KEY_MAPPINGS.get(key);
 	}
 	
 	/**
-	 * 将指定的缩写/简称解析成Currency对象
+	 * 将指定的名称解析成枚举对象
 	 * @author Daniele 
-	 * @param abbreviation
+	 * @param name
 	 * @return
 	 */
-	public static CurrencyEnum resolve(String abbreviation) {
-		return abbreviation != null ? mappings.get(abbreviation.toUpperCase()) : null;
+	public static CurrencyEnum resolve(String name) {
+		return name != null ? NAME_MAPPINGS.get(name.toUpperCase()) : null;
 	}
-	
-	public static void main(String[] args) {
-//		System.out.println(Currency.getAvailableCurrencies().size());;
-//		System.out.println(Currency.getAvailableCurrencies());;
 		
-		Currency currency = Currency.getInstance("USD");
-		System.out.println(currency.getDisplayName());
-		System.out.println(currency.getSymbol(Locale.US));
-	}
-	
 }

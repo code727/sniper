@@ -78,11 +78,12 @@ public class GoogleQRCodeGenerator extends AbstractQRCodeGenerator {
 	}
 
 	/**
-	 * 获取com.google.zxing.EncodeHintType映射配置
+	 *  获取com.google.zxing.EncodeHintType映射配置 
 	 * @author Daniele
 	 * @param qrCode
 	 * @return
 	 */
+	@SuppressWarnings("unlikely-arg-type")
 	protected Map<EncodeHintType, Object> getHints(QRCode qrCode) {
 		ErrorCorrectionLevel ecl = ErrorCorrectionLevel.valueOf(qrCode.getErrorCorrectionLevel().toUpperCase());
 		QRCodeLayout layout = qrCode.getLayout();

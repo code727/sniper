@@ -31,9 +31,6 @@ import java.util.Map;
  */
 public class NumberUtils {
 		
-	/** 国际货币格式 */
-	public static final String CURRENCY_FORMAT = "#,##0.00";
-	
 	/** 百分比格式 */
 	public static final String PERCENT_FORMAT = "#%";
 				

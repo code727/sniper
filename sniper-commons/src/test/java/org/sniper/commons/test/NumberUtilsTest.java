@@ -127,5 +127,5 @@ public class NumberUtilsTest extends BaseTestCase {
 		assertTrue(result == min + 1);
 		System.out.println(result);
 	}
-
+	
 }
