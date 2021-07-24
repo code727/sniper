@@ -31,35 +31,48 @@ import org.sniper.commons.util.NumberUtils;
 public class PageModel<T> implements PageResult<T> {
 	
 	private static final long serialVersionUID = -5209318203792180797L;
-
-	/** 返回的数据列表 */
-	private List<T> data;
 	
+	/** 分页结果列表 */
+	private List<T> pageList;
+
 	/** 符合分页条件的记录总数 */
 	private long count;
-
-	@Override
-	public List<T> getData() {
-		return this.data;
+	
+	public PageModel() { 
+		this(null);
 	}
-
-	@Override
-	public void setData(List<T> data) {
-		this.data = data;
+	
+	public PageModel(List<T> pageList) {
+		this(pageList, 0);
+	}
+	
+	public PageModel(List<T> pageList, long count) {
+		setPageList(pageList);
+		setCount(count);
 	}
 	
 	@Override
+	public List<T> getPageList() {
+		return pageList;
+	}
+
+	@Override
+	public void setPageList(List<T> pageList) {
+		this.pageList = pageList;
+	}
+
+	@Override
 	public long getCount() {
-		return NumberUtils.minLimit(count, CollectionUtils.size(data));
+		return NumberUtils.minLimit(count, CollectionUtils.size(pageList));
 	}
 
 	@Override
 	public void setCount(long count) {
 		// 如果count小于data列表长度，说明count值不符合逻辑，例如：
 		// 1.上层应用只查询数据而不查询记录总数则count=0，此时实际的记录总数应该是data列表长度；
-		// 2.上层应用设置的count值小于data列表长度时，说明count设置有误，因为符合分页查询条件的记录总数只可能大于或等于data列表长度
-		// 因此针对上述两种情况，这里要限制count值不能小于data列表长度
-		this.count = NumberUtils.minLimit(count, CollectionUtils.size(data));
+		// 2.上层应用设置的count值小于pageList长度时，说明count设置有误，因为符合分页查询条件的记录总数只可能大于或等于pageList列表长度
+		// 因此针对上述两种情况，这里要限制count值不能小于pageList长度
+		this.count = NumberUtils.minLimit(count, CollectionUtils.size(pageList));
 	}
-			
+
 }

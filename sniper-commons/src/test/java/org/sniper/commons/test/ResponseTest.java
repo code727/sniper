@@ -20,7 +20,7 @@ package org.sniper.commons.test;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.sniper.commons.enums.http.HttpStatusEnum;
+import org.sniper.commons.enums.status.HttpStatusEnum;
 import org.sniper.commons.enums.status.ResponseStatusEnum;
 import org.sniper.commons.response.Response;
 import org.sniper.commons.response.Responses;
@@ -89,11 +89,11 @@ public class ResponseTest extends BaseTestCase {
 		Assert.assertTrue(response3.errored());
 		System.out.println(response3);
 		
-		Response<Object> response4 = Responses.error(5, "响应错误");
+		Response<Object> response4 = Responses.error(400, "响应错误");
 		Assert.assertTrue(response4.errored());
 		System.out.println(response4);
 		
-		Response<Object> response5 = Responses.error(5, "响应错误", TEST_ERROR_DATA);
+		Response<Object> response5 = Responses.error(401, "响应错误", TEST_ERROR_DATA);
 		Assert.assertTrue(response5.errored());
 		System.out.println(response5);
 		

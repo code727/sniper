@@ -18,6 +18,8 @@
 
 package org.sniper.commons.model;
 
+import java.util.List;
+
 import org.sniper.commons.request.PageQuery;
 import org.sniper.commons.request.PageRequest;
 import org.sniper.commons.util.CollectionUtils;
@@ -33,55 +35,63 @@ public class PageDetailModel<T> extends PageModel<T> implements PageDetailResult
 	
 	private final PageQuery pageQuery = new PageRequest();
 	
-	/**
-	 * 默认构造函数保持为空，目的是让JSON反序列化时能找到此构造函数
-	 * @author Daniele
-	 */
-	PageDetailModel() {}
-	
-	public PageDetailModel(PageQuery pageQuery) {
-		this(pageQuery.getCurrentPage(), pageQuery.getPageSize());
+	public PageDetailModel() {
+		this(null);
 	}
 	
-	public PageDetailModel(int currentPage, int pageSize) {
-		setCurrentPage(currentPage);
-		setPageSize(pageSize);
+	public PageDetailModel(PageQuery pageQuery) {
+		this(pageQuery, null, 0);
+	}
+	
+	public PageDetailModel(List<T> pageList, long count) {
+		this(null, pageList, 0);
+	}
+	
+	public PageDetailModel(PageQuery pageQuery, List<T> pageList, long count) {
+		super(pageList, count);
+		if (pageQuery != null) {
+			setCurrentPage(pageQuery.getCurrentPage());
+			setPageSize(pageQuery.getPageSize());
+		}
+	}
+		
+	@Override
+	public long getPages() {
+		long count = getCount();
+		int pageSize = getPageSize();
+		return count / pageSize + (count % pageSize == 0 ? 0 : 1);
 	}
 	
 	@Override
 	public long getFrom() {
-		return getCount() > 0 ? (getCurrentPage() - 1) * getPageSize() + 1 : 0;
+		return getCount() > 0 && CollectionUtils.isNotEmpty(getPageList()) ? 
+				(getCurrentPage() - 1) * getPageSize() + 1 : 0;
 	}
 
 	@Override
 	public long getTo() {
-		long from = this.getFrom();
-		return from > 0 ? from + CollectionUtils.size(this.getData()) - 1 : from;
-	}
-
-	@Override
-	public long getPages() {
-		return getCount() / getPageSize() + (getCount() % getPageSize() != 0 ? 1 : 0);
+		long from = getFrom();
+		return from > 0 ? from + CollectionUtils.size(getPageList()) - 1 : from;
 	}
 
 	@Override
 	public int getPageSize() {
-		return this.pageQuery.getPageSize();
+		return pageQuery.getPageSize();
 	}
 
 	@Override
 	public void setPageSize(int pageSize) {
-		this.pageQuery.setPageSize(pageSize);
+		pageQuery.setPageSize(pageSize);
 	}
 
 	@Override
 	public int getCurrentPage() {
-		return this.pageQuery.getCurrentPage();
+		return pageQuery.getCurrentPage();
 	}
 
 	@Override
 	public void setCurrentPage(int currentPage) {
-		this.pageQuery.setCurrentPage(currentPage);
+		pageQuery.setCurrentPage(currentPage);
 	}
 
 }

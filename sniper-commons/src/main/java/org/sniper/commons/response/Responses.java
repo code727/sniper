@@ -18,7 +18,7 @@
 
 package org.sniper.commons.response;
 
-import org.sniper.commons.enums.http.HttpStatusEnum;
+import org.sniper.commons.enums.status.HttpStatusEnum;
 import org.sniper.commons.enums.status.ResponseStatusEnum;
 import org.sniper.commons.util.AssertUtils;
 
@@ -189,7 +189,7 @@ public final class Responses {
 	 */
 	public static <T> Response<T> error(ResponseStatusEnum status, T data) {
 		AssertUtils.assertNotNull(status, "Response status must not be null");
-		return error(status.getKey(), status.getMessage(), data);
+		return error(status.getCode(), status.getMessage(), data);
 	}
 	
 	/**
@@ -252,7 +252,7 @@ public final class Responses {
 	 */
 	public static <T> Response<T> build(ResponseStatusEnum status, T data) {
 		AssertUtils.assertNotNull(status, "Response status must not be null");
-		return build(status.getKey(), status.getMessage(), data);
+		return build(status.getCode(), status.getMessage(), data);
 	}
 	
 	/**

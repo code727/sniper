@@ -50,9 +50,9 @@ public interface MessagingResponse<C> extends GenericResponse<C> {
 	/**
 	 * 格式化响应消息
 	 * @author Daniele
-	 * @param args
+	 * @param params 格式化参数
 	 * @return
 	 */
-	public MessagingResponse<C> format(Object... args);
+	public MessagingResponse<C> format(Object... params);
 	
 }

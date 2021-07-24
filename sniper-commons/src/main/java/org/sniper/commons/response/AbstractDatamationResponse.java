@@ -40,6 +40,7 @@ public abstract class AbstractDatamationResponse<C, T> extends AbstractResponse<
 		return data;
 	}
 	
+	@Override
 	public String toString() {
 		return String.format("{\"code\":%s,\"message\":%s,\"data\":%s}", code, message, data);
 	}

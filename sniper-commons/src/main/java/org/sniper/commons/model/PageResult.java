@@ -33,14 +33,14 @@ public interface PageResult<T> extends Serializable {
 	 * @author Daniele 
 	 * @return
 	 */
-	public List<T> getData();
+	public List<T> getPageList();
 	
 	/**
 	 * 设置分页结果列表
 	 * @author Daniele 
-	 * @param data
+	 * @param pageList
 	 */
-	public void setData(List<T> data);
+	public void setPageList(List<T> pageList);
 	
 	/**
 	 * 获取符合分页条件的结果总数 

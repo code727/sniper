@@ -41,12 +41,6 @@ public class PageRequest implements PageQuery, MultiSortRequest {
 	/** 当前页数 */
 	private int currentPage = DEFAULT_CURRENT_PAGE;
 	
-	/** 是否附带查询总数 */
-	private boolean attachQueryCount = true;
-	
-	/** 是否开启偏移量查询 */
-	private boolean enableOffsetQuery;
-	
 	/** 开始查询的位置 */
 	private long start = DEFAULT_START_POS;
 	
@@ -56,24 +50,12 @@ public class PageRequest implements PageQuery, MultiSortRequest {
 	/** 排序请求集 */
 	private LinkedHashSet<SortRequest> sorts;
 	
-	public boolean isEnableOffsetQuery() {
-		return enableOffsetQuery;
-	}
-
-	public void setEnableOffsetQuery(boolean enableOffsetQuery) {
-		this.enableOffsetQuery = enableOffsetQuery;
-	}
+	/** 是否附带查询总数 */
+	private boolean attachQueryCount = true;
 	
-	@Override
-	public boolean isAttachQueryCount() {
-		return attachQueryCount;
-	}
-
-	@Override
-	public void setAttachQueryCount(boolean attachQueryCount) {
-		this.attachQueryCount = attachQueryCount;
-	}
-
+	/** 是否开启偏移量查询 */
+	private boolean enableOffsetQuery;
+	
 	@Override
 	public int getPageSize() {
 		return this.pageSize;
@@ -139,6 +121,34 @@ public class PageRequest implements PageQuery, MultiSortRequest {
 	}
 	
 	@Override
+	public boolean isAttachQueryCount() {
+		return attachQueryCount;
+	}
+
+	@Override
+	public void setAttachQueryCount(boolean attachQueryCount) {
+		this.attachQueryCount = attachQueryCount;
+	}
+	
+	/**
+	 * 判断是否开启偏移量查询
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean isEnableOffsetQuery() {
+		return enableOffsetQuery;
+	}
+
+	/**
+	 * 设置是否开启偏移量查询
+	 * @author Daniele
+	 * @param enableOffsetQuery
+	 */
+	public void setEnableOffsetQuery(boolean enableOffsetQuery) {
+		this.enableOffsetQuery = enableOffsetQuery;
+	}
+	
+	@Override
 	public MultiSortRequest add(SortRequest request) {
 		AssertUtils.assertNotNull(request, "Sort request must not be null");
 		if (this.sorts == null)
@@ -150,7 +160,9 @@ public class PageRequest implements PageQuery, MultiSortRequest {
 	
 	@Override
 	public MultiSortRequest clear() {
-		this.sorts.clear();
+		if (this.sorts != null)
+			this.sorts.clear();
+		
 		return this;
 	}
 	

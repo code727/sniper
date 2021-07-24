@@ -1238,6 +1238,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 		});
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	@Override
 	public <S, T, V> V rPopLPush(final String dbName, final S srcKey, final T destKey, final long expireSeconds, final Class<V> valueType) {
 		AssertUtils.assertNotNull(srcKey, "Source key must not be null for command [rPopLPush]");
@@ -1482,6 +1483,7 @@ public class SpringRedisCommands extends SpringRedisSupport {
 		return deserializeValueBytes(dbName, memberBytes, valueType);
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	public <K, T, V> Boolean sMove(final String dbName, final K srcKey, final T destKey, final V member, final long expireSeconds) {
 		if (srcKey == null || destKey == null || member == null)
 			return false;

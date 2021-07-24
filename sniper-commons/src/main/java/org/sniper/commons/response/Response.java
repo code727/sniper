@@ -18,7 +18,6 @@
 
 package org.sniper.commons.response;
 
-import org.sniper.commons.enums.http.HttpStatusEnum;
 import org.sniper.commons.enums.status.ResponseStatusEnum;
 
 /**
@@ -31,10 +30,10 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	private static final long serialVersionUID = -2728403977784339577L;
 
 	/** 默认成功响应码 */
-	public static final int DEFAULT_SUCCESS_CODE = ResponseStatusEnum.SUCCESS.getKey();
+	public static final int DEFAULT_SUCCESS_CODE = ResponseStatusEnum.SUCCESS.getCode();
 	
 	/** 默认错误响应码  */
-	public static final int DEFAULT_ERROR_CODE = ResponseStatusEnum.ERROR.getKey();
+	public static final int DEFAULT_ERROR_CODE = ResponseStatusEnum.ERROR.getCode();
 	
 	public Response() {
 		this(null);
@@ -70,14 +69,8 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	 * @param code
 	 * @return
 	 */
-	static boolean successed(int code) {
-		boolean defaultSuccessed = (code == DEFAULT_SUCCESS_CODE);
-		if (!defaultSuccessed) {
-			HttpStatusEnum httpStatus = HttpStatusEnum.resolve(code);
-			return httpStatus != null && httpStatus.requestSuccess();
-		}
-		
-		return defaultSuccessed;
+	public static boolean successed(int code) {
+		return code >= DEFAULT_SUCCESS_CODE && code < DEFAULT_ERROR_CODE;
 	}
 			
 	/**
@@ -86,8 +79,8 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	 * @param code
 	 * @return
 	 */
-	static boolean errored(int code) {
+	public static boolean errored(int code) {
 		return !successed(code);
 	}
-	
+		
 }

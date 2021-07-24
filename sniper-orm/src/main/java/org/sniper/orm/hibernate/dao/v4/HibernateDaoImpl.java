@@ -1021,9 +1021,9 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public PageResult<T> pagingQuery(FilterListPagingQuery query) {
 		PageResult<T> pagingResult = new PageModel<T>();
-		pagingResult.setData(findByFilterList(query.getFilterList(), 
+		pagingResult.setPageList(findByFilterList(query.getFilterList(), 
 				new Long(query.getStart()).intValue(), query.getPageSize()));
-		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
+		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getPageList())) {
 			pagingResult.setCount(countByFilterList(query.getFilterList()));
 		}
 		
@@ -1033,9 +1033,9 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public PageResult<T> pagingQuery(FilterChainPagingQuery query) {
 		PageResult<T> pagingResult = new PageModel<T>();
-		pagingResult.setData(findByFilterChain(query.getFilterChain(), 
+		pagingResult.setPageList(findByFilterChain(query.getFilterChain(), 
 				new Long(query.getStart()).intValue(), query.getPageSize()));
-		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
+		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getPageList())) {
 			pagingResult.setCount(this.countByFilterChain(query.getFilterChain()));
 		}
 				

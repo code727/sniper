@@ -18,6 +18,8 @@
 
 package org.sniper.commons.response;
 
+import java.text.MessageFormat;
+
 import org.sniper.commons.util.StringUtils;
 
 /**
@@ -56,9 +58,10 @@ public abstract class AbstractResponse<C> implements MessagingResponse<C> {
 	}
 	
 	@Override
-	public MessagingResponse<C> format(Object... args) {
+	public MessagingResponse<C> format(Object... params) {
 		if (StringUtils.isNotBlank(message)) {
-			this.message = String.format(this.message, args);
+//			this.message = String.format(this.message, params);
+			this.message = MessageFormat.format(message, params);
 		}
 		return this;
 	}

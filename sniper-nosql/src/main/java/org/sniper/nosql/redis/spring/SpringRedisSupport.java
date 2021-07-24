@@ -362,6 +362,7 @@ public abstract class SpringRedisSupport extends RedisSupport {
 	 * @param option
 	 * @return
 	 */
+	@SuppressWarnings("unlikely-arg-type")
 	protected GeoRadiusCommandArgs toGeoRadiusCommandArgs(GeoRadiusOption option) {
 		GeoRadiusCommandArgs args = GeoRadiusCommandArgs.newGeoRadiusArgs(); 
 		

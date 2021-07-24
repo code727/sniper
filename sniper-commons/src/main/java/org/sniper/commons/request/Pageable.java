@@ -19,7 +19,7 @@
 package org.sniper.commons.request;
 
 /**
- * 可分页排序的接口
+ * 可分页的接口
  * @author  Daniele
  * @version 1.0
  */

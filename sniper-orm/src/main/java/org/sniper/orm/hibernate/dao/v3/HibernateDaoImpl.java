@@ -35,8 +35,8 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Repository;
-import org.sniper.commons.model.PageResult;
 import org.sniper.commons.model.PageModel;
+import org.sniper.commons.model.PageResult;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.StringUtils;
@@ -1255,9 +1255,9 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public PageResult<T> pagingQuery(FilterListPagingQuery query) {
 		PageResult<T> pagingResult = new PageModel<T>();
-		pagingResult.setData(findByFilterList(query.getFilterList(), 
+		pagingResult.setPageList(findByFilterList(query.getFilterList(), 
 				new Long(query.getStart()).intValue(), query.getPageSize()));
-		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
+		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getPageList())) {
 			pagingResult.setCount(this.countByFilterList(query.getFilterList()));
 		}
 		
@@ -1267,9 +1267,9 @@ public class HibernateDaoImpl<T, PK extends Serializable> extends
 	@Override
 	public PageResult<T> pagingQuery(FilterChainPagingQuery query) {
 		PageResult<T> pagingResult = new PageModel<T>();
-		pagingResult.setData(findByFilterChain(query.getFilterChain(), new Long(
+		pagingResult.setPageList(findByFilterChain(query.getFilterChain(), new Long(
 				query.getStart()).intValue(), query.getPageSize()));
-		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
+		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getPageList())) {
 			pagingResult.setCount(countByFilterChain(query.getFilterChain()));
 		}
 		

@@ -706,9 +706,9 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 			
 		PageResult<T> pagingResult = new PageModel<T>();
 		/* 依次在结果对象中查询并设置符合当前条件的记录和总数 */
-		pagingResult.setData(findByCriteria(query, 
+		pagingResult.setPageList(findByCriteria(query, 
 				new Long(query.getStart()).intValue(), query.getPageSize(), callback));
-		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
+		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getPageList())) {
 			pagingResult.setCount(countByCriteria(query, callback));
 		}
 				
@@ -764,9 +764,9 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public PageResult<T> pagingQuery(FilterListPagingQuery query) {
 		PageResult<T> pagingResult = new PageModel<T>();
-		pagingResult.setData(findByFilterList(query.getFilterList(), 
+		pagingResult.setPageList(findByFilterList(query.getFilterList(), 
 				new Long(query.getStart()).intValue(), query.getPageSize()));
-		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
+		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getPageList())) {
 			pagingResult.setCount(countByFilterList(query.getFilterList()));
 		}
 		
@@ -776,9 +776,9 @@ public class JpaDaoImpl<T, PK extends Serializable> extends JpaDaoSupport<T>
 	@Override
 	public PageResult<T> pagingQuery(FilterChainPagingQuery query) {
 		PageResult<T> pagingResult = new PageModel<T>();
-		pagingResult.setData(findByFilterChain(query.getFilterChain(), 
+		pagingResult.setPageList(findByFilterChain(query.getFilterChain(), 
 				new Long(query.getStart()).intValue(), query.getPageSize()));
-		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getData())) {
+		if (query.isAttachQueryCount() && CollectionUtils.isNotEmpty(pagingResult.getPageList())) {
 			pagingResult.setCount(countByFilterChain(query.getFilterChain()));
 		}
 		
