@@ -36,7 +36,6 @@ import sun.security.action.GetPropertyAction;
  * @author  Daniele
  * @version 1.0
  */
-@SuppressWarnings("restriction")
 public class RawURLEncoder extends CodecSupport implements StringEncoder {
 	
 	/** 不需要参与编码的字符集 */

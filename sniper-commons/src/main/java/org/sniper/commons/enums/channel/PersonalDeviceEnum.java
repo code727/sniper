@@ -24,7 +24,7 @@ import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
 /**
- * 个人设备枚举
+ * 客户端类型枚举
  * @author  Daniele
  * @version 1.0
  */
@@ -54,24 +54,16 @@ public enum PersonalDeviceEnum {
 	/** 键 */
 	private final int key;
 	
-	/** 值 */
-	private final String value;
-	
 	/** 消息 */
 	private final String message;  
 
 	private PersonalDeviceEnum(String value) {
 		this.key = ordinal();
-		this.value = value;
 		this.message = MessageUtils.getClassMessage(getClass(), value);
 	}
 	
 	public int getKey() {
 		return key;
-	}
-
-	public String getValue() {
-		return value;
 	}
 
 	public String getMessage() {

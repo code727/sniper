@@ -16,7 +16,7 @@
  * Create Date : 2021-7-19
  */
 
-package org.sniper.commons.enums.status;
+package org.sniper.commons.enums.http;
 
 import java.util.Map;
 
@@ -112,7 +112,7 @@ public enum HttpStatusEnum {
 	URI_TOO_LONG(414),
 	/** 不支持的媒体类型(415) */
 	UNSUPPORTED_MEDIA_TYPE(415),
-	/** 范围请求无法满足(416) */
+	/** 请求范围无法满足(416) */
 	REQUESTED_RANGE_NOT_SATISFIABLE(416),
 	/** 预期失败(417) */
 	EXPECTATION_FAILED(417),
@@ -165,6 +165,7 @@ public enum HttpStatusEnum {
 	/** 需要网络验证(511) */
 	NETWORK_AUTHENTICATION_REQUIRED(511);
 	
+	
 	private static final String MESSAGE_PREFIX = "http.status.";	
 	private static final Map<Integer, HttpStatusEnum> CODE_MAPPINGS = MapUtils.newHashMap(63);
 	
@@ -213,6 +214,78 @@ public enum HttpStatusEnum {
 	}
 	
 	/**
+	 * 判断当前枚举是否为1xx状态消息
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean is1xxInformational() {
+		return HttpStatusSeriesEnum.INFORMATIONAL.equals(toSeries());
+	}
+	
+	/**
+	 * 判断当前枚举是否为2xx成功状态
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean is2xxSuccessful() {
+		return HttpStatusSeriesEnum.SUCCESSFUL.equals(toSeries());
+	}
+	
+	/**
+	 * 判断当前枚举是否为3xx重定向状态
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean is3xxRedirection() {
+		return HttpStatusSeriesEnum.REDIRECTION.equals(toSeries());
+	}
+	
+	/**
+	 * 判断当前枚举是否为4xx客户端错误状态
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean is4xxClientError() {
+		return HttpStatusSeriesEnum.CLIENT_ERROR.equals(toSeries());
+	}
+	
+	/**
+	 * 判断当前枚举是否为5xx服务端错误状态
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean is5xxServerError() {
+		return HttpStatusSeriesEnum.SERVER_ERROR.equals(toSeries());
+	}
+	
+	/**
+	 * 判断当前枚举是否为成功的HTTP响应
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean isSuccessfulResponse() {
+		return isSuccessfulResponse(code);
+	}
+	
+	/**
+	 * 判断当前枚举是否为错误的HTTP响应
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean isIncorrectResponse() {
+		return isIncorrectResponse(code);
+	}
+	
+	/**
+	 * 将当前枚举换成HTTP状态系列枚举
+	 * @author Daniele
+	 * @return
+	 */
+	public HttpStatusSeriesEnum toSeries() {
+		return toSeries(code);
+	}
+	
+	/**
 	 * 将指定的状态码解析成枚举对象
 	 * @param code
 	 * @return
@@ -222,68 +295,41 @@ public enum HttpStatusEnum {
 	}
 	
 	/**
-	 * 判断当前枚举是否为1xx状态消息
+	 * 将指定的状态码转换成HTTP状态系列枚举
 	 * @author Daniele
+	 * @param code
 	 * @return
 	 */
-	public boolean is1xxInformation() {
-		return (this.code / CONTINUE.getCode()) == 1;
+	public static HttpStatusSeriesEnum toSeries(int code) {
+		return HttpStatusSeriesEnum.resolve(code / 100);
 	}
 	
 	/**
-	 * 判断当前枚举是否为2xx成功状态
+	 * 判断指定的状态码是否为成功的HTTP响应
 	 * @author Daniele
+	 * @param code
 	 * @return
 	 */
-	public boolean is2xxSuccess() {
-		return (this.code / OK.getCode()) == 1;
+	public static boolean isSuccessfulResponse(int code) {
+		HttpStatusSeriesEnum series = toSeries(code);
+		if (series != null) {
+			int key = series.getKey();
+			// [100,399]区间内的状态码表示HTTP响应成功
+			return key >= HttpStatusSeriesEnum.INFORMATIONAL.getKey()
+					&& key <= HttpStatusSeriesEnum.REDIRECTION.getKey();
+		}
+		return false;
 	}
 	
 	/**
-	 * 判断当前枚举是否为3xx重定向状态
+	 * 判断指定的状态码是否为错误的HTTP响应
 	 * @author Daniele
+	 * @param code
 	 * @return
 	 */
-	public boolean is3xxRedirection() {
-		return (this.code / MULTIPLE_CHOICES.getCode()) == 1;
-	}
-	
-	/**
-	 * 判断当前枚举是否为4xx请求错误状态
-	 * @author Daniele
-	 * @return
-	 */
-	public boolean is4xxRequestError() {
-		return (this.code / BAD_REQUEST.getCode()) == 1;
-	}
-	
-	/**
-	 * 判断当前枚举是否为5xx服务端错误状态
-	 * @author Daniele
-	 * @return
-	 */
-	public boolean is5xxServerError() {
-		return (this.code / INTERNAL_SERVER_ERROR.getCode()) == 1;
-	}
-	
-	/**
-	 * 验证当前枚举是否为成功状态
-	 * @author Daniele
-	 * @return
-	 */
-	public boolean validateRequestSuccess() {
-		// 状态码在[100,399]区间内表示请求成功
-		return is1xxInformation() || is2xxSuccess() || is3xxRedirection();
-	}
-	
-	/**
-	 * 验证当前枚举是否为错误状态
-	 * @author Daniele
-	 * @return
-	 */
-	public boolean validateRequestError() {
-		// 状态码在[400,599]区间内表示响应错误
-		return is4xxRequestError() || is5xxServerError();
+	public static boolean isIncorrectResponse(int code) {
+		// (-∞,99]和[400,+∞)区间内的状态码表示HTTP响应错误
+		return !isSuccessfulResponse(code);
 	}
 			
 }

@@ -20,7 +20,7 @@ package org.sniper.commons.test;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.sniper.commons.enums.status.HttpStatusEnum;
+import org.sniper.commons.enums.http.HttpStatusEnum;
 import org.sniper.commons.enums.status.ResponseStatusEnum;
 import org.sniper.commons.response.Response;
 import org.sniper.commons.response.Responses;
@@ -38,7 +38,7 @@ public class ResponseTest extends BaseTestCase {
 	private static final String TEST_ERROR_DATA = "test_error_data";
 	
 	@Test
-	public void testSuccess() {
+	public void testSuccessResponse() {
 		Response<Object> response1 = Responses.success(); 
 		Assert.assertTrue(response1.successed());
 		System.out.println(response1);
@@ -51,21 +51,37 @@ public class ResponseTest extends BaseTestCase {
 		Assert.assertTrue(response3.successed());
 		System.out.println(response3);
 		
-		Response<Object> response4 = Responses.success(HttpStatusEnum.OK);
+		Response<Object> response4 = Responses.success(399, "响应成功");
 		Assert.assertTrue(response4.successed());
 		System.out.println(response4);
 		
-		Response<Object> response5 = Responses.success(HttpStatusEnum.CREATED, TEST_DATA);
+		Response<Object> response5 = Responses.success(399, "响应成功", TEST_DATA);
 		Assert.assertTrue(response5.successed());
 		System.out.println(response5);
 		
-		Response<Object> response6 = Responses.httpSuccess();
+		Response<Object> response6 = Responses.success(ResponseStatusEnum.CIRCUIT_BREAKER_FALLBACK);
 		Assert.assertTrue(response6.successed());
 		System.out.println(response6);
 		
-		Response<Object> response7 = Responses.httpSuccess(TEST_DATA);
+		Response<Object> response7 = Responses.success(ResponseStatusEnum.CIRCUIT_BREAKER_FALLBACK, TEST_DATA);
 		Assert.assertTrue(response7.successed());
 		System.out.println(response7);
+		
+		Response<Object> response8 = Responses.success(HttpStatusEnum.OK);
+		Assert.assertTrue(response8.successed());
+		System.out.println(response8);
+		
+		Response<Object> response9 = Responses.success(HttpStatusEnum.CREATED, TEST_DATA);
+		Assert.assertTrue(response9.successed());
+		System.out.println(response9);
+		
+		Response<Object> response10 = Responses.httpSuccess();
+		Assert.assertTrue(response10.successed());
+		System.out.println(response10);
+		
+		Response<Object> response11 = Responses.httpSuccess(TEST_DATA);
+		Assert.assertTrue(response11.successed());
+		System.out.println(response11);
 		
 		try {
 			Responses.success(HttpStatusEnum.NOT_FOUND);
@@ -137,7 +153,7 @@ public class ResponseTest extends BaseTestCase {
 	}
 	
 	@Test
-	public void buildResponse() {
+	public void testBuildResponse() {
 		Response<Object> response1 = Responses.build(ResponseStatusEnum.SUCCESS);
 		Assert.assertTrue(response1.successed());
 		System.out.println(response1);

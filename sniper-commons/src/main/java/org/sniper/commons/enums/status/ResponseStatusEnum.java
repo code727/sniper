@@ -18,9 +18,9 @@
 
 package org.sniper.commons.enums.status;
 
-import java.text.MessageFormat;
 import java.util.Map;
 
+import org.sniper.commons.enums.http.HttpStatusEnum;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.MessageUtils;
 
@@ -36,10 +36,13 @@ public enum ResponseStatusEnum {
 	UNKNOWN_ERROR(-1),
 	
 	/** 
-	 * 成功(0)</P> 
+	 * 成功(0)</P>
 	 * 可用作{@link org.sniper.commons.response.Response}表示"响应成功"时的默认状态
 	 */
 	SUCCESS(0),
+	
+	/** 断路器返回 */
+	CIRCUIT_BREAKER_FALLBACK(1),
 	
 	/* 
 	 * 注意：
@@ -63,8 +66,6 @@ public enum ResponseStatusEnum {
 	
 	// 定义状态码在1000以上的"错误"枚举项
 	
-	
-	
 	/** 参数缺失 */
 	PARAM_MISSING(1000),
 	/** 参数必填 */
@@ -80,8 +81,8 @@ public enum ResponseStatusEnum {
 	;
 		
 	private static final String MESSAGE_PREFIX = "response.status.";
-	private static final Map<Integer, ResponseStatusEnum> KEY_MAPPINGS = MapUtils.newHashMap(3);
-	private static final Map<String, ResponseStatusEnum> NAME_MAPPINGS = MapUtils.newHashMap(3);
+	private static final Map<Integer, ResponseStatusEnum> KEY_MAPPINGS = MapUtils.newHashMap(values().length);
+	private static final Map<String, ResponseStatusEnum> NAME_MAPPINGS = MapUtils.newHashMap(values().length);
 	
 	static {
 		for (ResponseStatusEnum status : values()) {
@@ -118,17 +119,7 @@ public enum ResponseStatusEnum {
 	public String getMessage() {
 		return message;
 	}
-	
-	/**
-	 * 获取格式化处理后的枚举消息
-	 * @author Daniele
-	 * @param params
-	 * @return
-	 */
-	public String getMessage(Object... params) {
-		return MessageFormat.format(message, params);
-	}
-		
+			
 	/**
 	 * 判断指定的状态码是否匹配当前枚举对象
 	 * @author Daniele
@@ -150,6 +141,24 @@ public enum ResponseStatusEnum {
 	}
 	
 	/**
+	 * 判断当前枚举是否为成功的响应
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean isSuccessful() {
+		return isSuccessful(code);
+	}
+	
+	/**
+	 * 判断当前枚举是否为错误的响应
+	 * @author Daniele
+	 * @return
+	 */
+	public boolean isIncorrect() {
+		return isIncorrect(code);
+	}
+	
+	/**
 	 * 将指定的键解析成枚举对象
 	 * @author Daniele 
 	 * @param key
@@ -168,5 +177,25 @@ public enum ResponseStatusEnum {
 	public static ResponseStatusEnum resolve(String name) {
 		return name != null ? NAME_MAPPINGS.get(name.toUpperCase()) : null;
 	}
-				
+	
+	/**
+	 * 判断指定的状态码是否为成功的响应
+	 * @author Daniele
+	 * @param code
+	 * @return
+	 */
+	public static boolean isSuccessful(int code) {
+		return (code >= SUCCESS.code && code < ERROR.code) || HttpStatusEnum.isSuccessfulResponse(code);
+	}
+	
+	/**
+	 * 判断指定的状态码是否为错误的响应
+	 * @author Daniele
+	 * @param code
+	 * @return
+	 */
+	public static boolean isIncorrect(int code) {
+		return !isSuccessful(code);
+	}
+		
 }

@@ -55,12 +55,12 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 
 	@Override
 	public boolean successed() {
-		return successed(this.code);
+		return isSuccessCode(code);
 	}
 		
 	@Override
 	public boolean errored() {
-		return errored(this.code);
+		return isErrorCode(code);
 	}
 	
 	/**
@@ -69,8 +69,8 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	 * @param code
 	 * @return
 	 */
-	public static boolean successed(int code) {
-		return code >= DEFAULT_SUCCESS_CODE && code < DEFAULT_ERROR_CODE;
+	public static boolean isSuccessCode(int code) {
+		return ResponseStatusEnum.isSuccessful(code);
 	}
 			
 	/**
@@ -79,8 +79,8 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	 * @param code
 	 * @return
 	 */
-	public static boolean errored(int code) {
-		return !successed(code);
+	public static boolean isErrorCode(int code) {
+		return !isSuccessCode(code);
 	}
 		
 }

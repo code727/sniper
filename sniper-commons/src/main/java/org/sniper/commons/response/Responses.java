@@ -18,7 +18,7 @@
 
 package org.sniper.commons.response;
 
-import org.sniper.commons.enums.status.HttpStatusEnum;
+import org.sniper.commons.enums.http.HttpStatusEnum;
 import org.sniper.commons.enums.status.ResponseStatusEnum;
 import org.sniper.commons.util.AssertUtils;
 
@@ -60,6 +60,52 @@ public final class Responses {
 	public static <T> Response<T> success(String message, T data) {
 		return build(Response.DEFAULT_SUCCESS_CODE, message, data);
 	}
+	
+	/**
+	 * 根据成功码和消息构造Success响应对象
+	 * @author Daniele 
+	 * @param errorCode
+	 * @param successCode
+	 * @return
+	 */
+	public static <T> Response<T> success(int successCode, String message) {
+		return success(successCode, message, null);
+	}
+	
+	/**
+	 * 根据响应状态枚举构造Success响应对象
+	 * @author Daniele
+	 * @param status
+	 * @return
+	 */
+	public static <T> Response<T> success(ResponseStatusEnum status) {
+		return success(status, null);
+	}
+	
+	/**
+	 * 根据响应状态枚举和数据构造Success响应对象
+	 * @author Daniele
+	 * @param status
+	 * @param data
+	 * @return
+	 */
+	public static <T> Response<T> success(ResponseStatusEnum status, T data) {
+		AssertUtils.assertNotNull(status, "Response status must not be null");
+		return success(status.getCode(), status.getMessage(), data);
+	}
+	
+	/**
+	 * 根据成功码、消息和数据构造Success响应对象
+	 * @author Daniele
+	 * @param successCode
+	 * @param message
+	 * @param data
+	 * @return
+	 */
+	public static <T> Response<T> success(int successCode, String message, T data) {
+		AssertUtils.assertTrue(Response.isSuccessCode(successCode), String.format("Invalid successCode '%s'", successCode));
+		return build(successCode, message, data);
+	}
 		
 	/**
 	 * 根据HTTP状态枚举构造Success响应对象
@@ -81,39 +127,6 @@ public final class Responses {
 	public static <T> Response<T> success(HttpStatusEnum status, T data) {
 		AssertUtils.assertNotNull(status, "HTTP response status must not be null");
 		return success(status.getCode(), status.getMessage(), data);
-	}
-	
-	/**
-	 * 根据成功码、消息和数据构造Success响应对象
-	 * @author Daniele
-	 * @param successCode
-	 * @param message
-	 * @param data
-	 * @return
-	 */
-	private static <T> Response<T> success(int successCode, String message, T data) {
-		AssertUtils.assertTrue(Response.successed(successCode), String.format(
-				"Invalid response success code '%s'", successCode));
-		return build(successCode, message, data);
-	}
-	
-	/**
-	 * 构造HTTP默认的Success响应对象
-	 * @author Daniele 
-	 * @return
-	 */
-	public static <T> Response<T> httpSuccess() {
-		return httpSuccess(null);
-	}
-	
-	/**
-	 * 构造带数据的HTTP默认Success响应对象
-	 * @author Daniele 
-	 * @param data
-	 * @return
-	 */
-	public static <T> Response<T> httpSuccess(T data) {
-		return build(HttpStatusEnum.OK.getCode(), HttpStatusEnum.OK.getMessage(), data);
 	}
 	
 	/**
@@ -165,8 +178,7 @@ public final class Responses {
 	 * @return
 	 */
 	public static <T> Response<T> error(int errorCode, String message, T data) {
-		AssertUtils.assertTrue(Response.errored(errorCode), String.format(
-				"Invalid response errorCode '%s'", errorCode));
+		AssertUtils.assertTrue(Response.isErrorCode(errorCode), String.format("Invalid errorCode '%s'", errorCode));
 		return build(errorCode, message, data);
 	}
 	
@@ -212,6 +224,25 @@ public final class Responses {
 	public static <T> Response<T> error(HttpStatusEnum status, T data) {
 		AssertUtils.assertNotNull(status, "HTTP response status must not be null");
 		return error(status.getCode(), status.getMessage(), data);
+	}
+	
+	/**
+	 * 构造HTTP默认的Success响应对象
+	 * @author Daniele 
+	 * @return
+	 */
+	public static <T> Response<T> httpSuccess() {
+		return httpSuccess(null);
+	}
+	
+	/**
+	 * 构造带数据的HTTP默认Success响应对象
+	 * @author Daniele 
+	 * @param data
+	 * @return
+	 */
+	public static <T> Response<T> httpSuccess(T data) {
+		return build(HttpStatusEnum.OK.getCode(), HttpStatusEnum.OK.getMessage(), data);
 	}
 	
 	/**
