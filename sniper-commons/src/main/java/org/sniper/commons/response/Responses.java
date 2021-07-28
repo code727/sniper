@@ -64,8 +64,8 @@ public final class Responses {
 	/**
 	 * 根据成功码和消息构造Success响应对象
 	 * @author Daniele 
-	 * @param errorCode
 	 * @param successCode
+	 * @param message
 	 * @return
 	 */
 	public static <T> Response<T> success(int successCode, String message) {

@@ -32,6 +32,12 @@ import java.util.ResourceBundle;
  */
 public class MessageUtils {
 	
+	/** 默认的i18n资源路径 */
+	public static final String DEFAULT_I18N_PATH = "i18n/";
+	
+	/** 默认的i18n资源基础名称 */
+	public static final String DEFAULT_I18N_BASENAME = "i18n/i18n";
+	
 	private static final Map<String, ResourceBundle> RESOURCE_BUNDLES = MapUtils.newConcurrentHashMap();
 	
 	private MessageUtils() {}

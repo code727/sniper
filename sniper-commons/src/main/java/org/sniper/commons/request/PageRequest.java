@@ -19,9 +19,7 @@
 package org.sniper.commons.request;
 
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 
-import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.CollectionUtils;
 import org.sniper.commons.util.NumberUtils;
 import org.sniper.commons.util.StringUtils;
@@ -31,7 +29,7 @@ import org.sniper.commons.util.StringUtils;
  * @author  Daniele
  * @version 1.0
  */
-public class PageRequest implements PageQuery, MultiSortRequest {
+public class PageRequest extends MultiSortRequest implements PageQuery {
 	
 	private static final long serialVersionUID = -3075094595070319133L;
 
@@ -46,9 +44,6 @@ public class PageRequest implements PageQuery, MultiSortRequest {
 	
 	/** 结束查询的位置 */
 	private long end = DEFAULT_START_POS;
-	
-	/** 排序请求集 */
-	private LinkedHashSet<SortRequest> sorts;
 	
 	/** 是否附带查询总数 */
 	private boolean attachQueryCount = true;
@@ -111,16 +106,6 @@ public class PageRequest implements PageQuery, MultiSortRequest {
 	}			
 
 	@Override
-	public LinkedHashSet<SortRequest> getSorts() {
-		return sorts;
-	}
-
-	@Override
-	public void setSorts(LinkedHashSet<SortRequest> sorts) {
-		this.sorts = sorts;
-	}
-	
-	@Override
 	public boolean isAttachQueryCount() {
 		return attachQueryCount;
 	}
@@ -149,32 +134,6 @@ public class PageRequest implements PageQuery, MultiSortRequest {
 	}
 	
 	@Override
-	public MultiSortRequest add(SortRequest request) {
-		AssertUtils.assertNotNull(request, "Sort request must not be null");
-		if (this.sorts == null)
-			this.sorts = CollectionUtils.newLinkedHashSet();
-		
-		this.sorts.add(request);
-		return this;
-	}
-	
-	@Override
-	public MultiSortRequest clear() {
-		if (this.sorts != null)
-			this.sorts.clear();
-		
-		return this;
-	}
-	
-//	/**
-//	 * 判断是否在查询上一页
-//	 * @author Daniele 
-//	 * @return
-//	 */
-//	public boolean isQueryPreviousPage() {
-//		return getEnd() < getStart();
-//	}
-	
 	public String toString() {
 		return String.format("{\"currentPage\":%d,\"pageSize\":%d,\"start\":%d,\"end\":%d%s}", 
 				currentPage, pageSize, getStart(), getEnd(), buildSortsMessage());
@@ -186,9 +145,9 @@ public class PageRequest implements PageQuery, MultiSortRequest {
 	 * @return
 	 */
 	private String buildSortsMessage() {
-		if (CollectionUtils.isNotEmpty(sorts)) {
+		if (CollectionUtils.isNotEmpty(getSorts())) {
 			StringBuilder builder = new StringBuilder(", ORDER BY ");
-			Iterator<SortRequest> sortRequests = sorts.iterator();
+			Iterator<SortRequest> sortRequests = getSorts().iterator();
 			while(sortRequests.hasNext()) {
 				SortRequest sortRequest = sortRequests.next();
 				builder.append(sortRequest.getProperty()).append(" ").append(sortRequest.getOrder());

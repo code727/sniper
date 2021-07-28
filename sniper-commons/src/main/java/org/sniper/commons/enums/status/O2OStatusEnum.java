@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * 离线/在线状态枚举类
@@ -54,7 +53,7 @@ public enum O2OStatusEnum implements Enumerable<Integer> {
 
 	private O2OStatusEnum(String message) {
 		this.key = ordinal();
-		this.message = MessageUtils.getClassMessage(getClass(), message);
+		this.message = message;
 	}
 	
 	@Override
@@ -68,12 +67,12 @@ public enum O2OStatusEnum implements Enumerable<Integer> {
 	}
 	
 	@Override
-	public boolean matches(Integer key) {
+	public boolean match(Integer key) {
 		return key != null && this.key == key.intValue();
 	}
 
 	@Override
-	public boolean matches(String name) {
+	public boolean match(String name) {
 		return this.name().equalsIgnoreCase(name);
 	}
 	

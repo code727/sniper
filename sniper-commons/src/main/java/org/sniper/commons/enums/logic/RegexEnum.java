@@ -21,7 +21,6 @@ package org.sniper.commons.enums.logic;
 import java.util.Map;
 
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * 正则表达式枚举
@@ -82,19 +81,19 @@ public enum RegexEnum {
 		}
 	}
 		
-	/** 表达式值 */
-	private final String value;
+	/** 表达式 */
+	private final String expression;
 	
 	/** 消息 */
 	private final String message;
 
-	private RegexEnum(String value) {
-		this.value = value;
-		this.message = MessageUtils.getClassMessage(getClass(), name());
+	private RegexEnum(String expression) {
+		this.expression = expression;
+		this.message = name();
 	}
 	
-	public String getValue() {
-		return value;
+	public String getExpression() {
+		return expression;
 	}
 
 	public String getMessage() {

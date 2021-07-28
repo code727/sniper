@@ -154,7 +154,7 @@ public enum MediaEnum implements Enumerable<Integer> {
 	}
 	
 	@Override
-	public boolean matches(Integer key) {
+	public boolean match(Integer key) {
 		return key != null && this.key == key.intValue();
 	}
 	
@@ -165,7 +165,7 @@ public enum MediaEnum implements Enumerable<Integer> {
 	 * @return
 	 */
 	@Override
-	public boolean matches(String typeOrName) {
+	public boolean match(String typeOrName) {
 		return this.type.equalsIgnoreCase(typeOrName) || this.name().equalsIgnoreCase(typeOrName);
 	}
 

@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * 星座枚举类
@@ -86,7 +85,7 @@ public enum HoroscopeEnum implements Enumerable<Integer> {
 
 	private HoroscopeEnum(String message) {
 		this.key = ordinal();
-		this.message = MessageUtils.getClassMessage(getClass(), message);
+		this.message = message;
 	}
 	
 	@Override
@@ -98,14 +97,14 @@ public enum HoroscopeEnum implements Enumerable<Integer> {
 	public String getMessage() {
 		return message;
 	}
-	
+			
 	@Override
-	public boolean matches(Integer key) {
+	public boolean match(Integer key) {
 		return key != null && this.key == key.intValue();
 	}
 	
 	@Override
-	public boolean matches(String name) {
+	public boolean match(String name) {
 		return this.name().equalsIgnoreCase(name);
 	}
 	
@@ -128,5 +127,5 @@ public enum HoroscopeEnum implements Enumerable<Integer> {
 	public static HoroscopeEnum resolve(String name) {
 		return name != null ? NAME_MAPPINGS.get(name.toUpperCase()) : null;
 	}
-	
+		
 }

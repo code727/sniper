@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * HTTP请求头枚举
@@ -108,7 +107,7 @@ public enum HttpRequestHeaderEnum implements Enumerable<String> {
 	
 	private HttpRequestHeaderEnum(String key, String message) {
 		this.key = key;
-		this.message = MessageUtils.getClassMessage(getClass(), message);
+		this.message = message;
 	}
 
 	@Override
@@ -128,7 +127,7 @@ public enum HttpRequestHeaderEnum implements Enumerable<String> {
 	 * @return
 	 */
 	@Override
-	public boolean matches(String keyOrName) {
+	public boolean match(String keyOrName) {
 		return this.key.equalsIgnoreCase(key) || this.name().equalsIgnoreCase(key);
 	}
 	

@@ -23,7 +23,7 @@ package org.sniper.commons.request;
  * @author  Daniele
  * @version 1.0
  */
-public interface PageQuery extends Pageable, MultiSortRequest {
+public interface PageQuery extends Pageable, MultiSort {
 	
 	/** 查询前的默认起始位置 */
 	public static final long DEFAULT_START_POS = 0;

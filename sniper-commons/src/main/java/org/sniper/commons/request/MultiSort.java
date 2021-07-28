@@ -22,11 +22,11 @@ import java.io.Serializable;
 import java.util.LinkedHashSet;
 
 /**
- * 多值排序请求接口
+ * 多值排序接口
  * @author  Daniele
  * @version 1.0
  */
-public interface MultiSortRequest extends Serializable {
+public interface MultiSort extends Serializable {
 	
 	/**
 	 * 获取排序请求集
@@ -47,13 +47,13 @@ public interface MultiSortRequest extends Serializable {
 	 * @author Daniele
 	 * @param request
 	 */
-	public MultiSortRequest add(SortRequest request);
+	public MultiSort add(SortRequest request);
 	
 	/**
 	 * 清除所有的排序请求
 	 * @author Daniele
 	 * @return
 	 */
-	public MultiSortRequest clear();
+	public MultiSort clear();
 	
 }

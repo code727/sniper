@@ -156,7 +156,7 @@ public enum CurrencyEnum implements Enumerable<Integer> {
 		this.pattern = this.symbol + CurrencyUtils.CURRENCY_FORMAT;
 		this.message = this.instance.getDisplayName();
 	}
-	
+		
 	@Override
 	public Integer getKey() {
 		return key;
@@ -180,12 +180,12 @@ public enum CurrencyEnum implements Enumerable<Integer> {
 	}
 
 	@Override
-	public boolean matches(Integer key) {
+	public boolean match(Integer key) {
 		return key != null && this.key == key.intValue();
 	}
 
 	@Override
-	public boolean matches(String name) {
+	public boolean match(String name) {
 		return this.name().equalsIgnoreCase(name);
 	}
 	

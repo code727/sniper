@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.sniper</groupId>
 		<artifactId>sniper</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>sniper-web</artifactId>
 	
@@ -24,32 +24,32 @@
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-commons</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-support</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-context</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-templet</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-serialization</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-spring</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

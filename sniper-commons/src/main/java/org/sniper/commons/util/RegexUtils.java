@@ -104,7 +104,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isInteger(String str) {
-		return is(str, RegexEnum.INTEGER.getValue());
+		return is(str, RegexEnum.INTEGER.getExpression());
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasInteger(String str) {
-		return has(str, RegexEnum.INTEGER.getValue());
+		return has(str, RegexEnum.INTEGER.getExpression());
 	}
 		
 	/**
@@ -124,7 +124,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isDecimal(String str) {
-		return is(str, RegexEnum.DECIMAL.getValue());
+		return is(str, RegexEnum.DECIMAL.getExpression());
 	}
 	
 	/**
@@ -134,7 +134,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasDecimal(String str) {
-		return has(str, RegexEnum.DECIMAL.getValue());
+		return has(str, RegexEnum.DECIMAL.getExpression());
 	}
 	
 	/**
@@ -144,7 +144,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isNumber(String str) {
-		return is(str, RegexEnum.NUMBER.getValue());
+		return is(str, RegexEnum.NUMBER.getExpression());
 	}
 	
 	/**
@@ -154,7 +154,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasNumber(String str) {
-		return has(str, RegexEnum.NUMBER.getValue());
+		return has(str, RegexEnum.NUMBER.getExpression());
 	}
 	
 	/**
@@ -164,7 +164,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isIPV4(String str) {
-		return is(str, RegexEnum.IPV4.getValue());
+		return is(str, RegexEnum.IPV4.getExpression());
 	}
 	
 	/**
@@ -174,7 +174,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasIPV4(String str) {
-		return has(str, RegexEnum.IPV4.getValue());
+		return has(str, RegexEnum.IPV4.getExpression());
 	}
 	
 	/**
@@ -184,7 +184,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isIPV6(String str) {
-		return is(str, RegexEnum.IPV6.getValue());
+		return is(str, RegexEnum.IPV6.getExpression());
 	}
 	
 	/**
@@ -194,7 +194,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasIPV6(String str) {
-		return has(str, RegexEnum.IPV6.getValue());
+		return has(str, RegexEnum.IPV6.getExpression());
 	}
 	
 	/**
@@ -204,7 +204,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isEmail(String str) {
-		return is(str, RegexEnum.EMAIL.getValue());
+		return is(str, RegexEnum.EMAIL.getExpression());
 	}
 	
 	/**
@@ -214,7 +214,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasEmail(String str) {
-		return has(str, RegexEnum.EMAIL.getValue());
+		return has(str, RegexEnum.EMAIL.getExpression());
 	}
 	
 	/**
@@ -224,7 +224,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isMobile(String str) {
-		return is(str, RegexEnum.MOBILE.getValue());
+		return is(str, RegexEnum.MOBILE.getExpression());
 	}
 	
 	/**
@@ -234,7 +234,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasMobile(String str) {
-		return has(str, RegexEnum.MOBILE.getValue());
+		return has(str, RegexEnum.MOBILE.getExpression());
 	}
 	
 	/**
@@ -244,7 +244,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isAscii(String str) {
-		return is(str, RegexEnum.ASCII.getValue());
+		return is(str, RegexEnum.ASCII.getExpression());
 	}
 	
 	/**
@@ -254,7 +254,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasAscii(String str) {
-		return has(str, RegexEnum.ASCII.getValue());
+		return has(str, RegexEnum.ASCII.getExpression());
 	}
 	
 	/**
@@ -264,7 +264,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isDoubleByte(String str) {
-		return is(str, RegexEnum.DOUBLE_BYTE.getValue());
+		return is(str, RegexEnum.DOUBLE_BYTE.getExpression());
 	}
 	
 	/**
@@ -274,7 +274,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasDoubleByte(String str) {
-		return has(str, RegexEnum.DOUBLE_BYTE.getValue());
+		return has(str, RegexEnum.DOUBLE_BYTE.getExpression());
 	}
 		
 	/**
@@ -284,7 +284,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isChinese(String str) {
-		return is(str, RegexEnum.CHINESE.getValue());
+		return is(str, RegexEnum.CHINESE.getExpression());
 	}
 	
 	/**
@@ -294,7 +294,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasChinese(String str) {
-		return has(str, RegexEnum.CHINESE.getValue());
+		return has(str, RegexEnum.CHINESE.getExpression());
 	}
 	
 	/**
@@ -304,7 +304,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isURLQueryString(String str) {
-		return is(str, RegexEnum.URL_QUERY_STRING.getValue());
+		return is(str, RegexEnum.URL_QUERY_STRING.getExpression());
 	}
 	
 	/**
@@ -314,7 +314,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasURLQueryString(String str) {
-		return has(str, RegexEnum.URL_QUERY_STRING.getValue());
+		return has(str, RegexEnum.URL_QUERY_STRING.getExpression());
 	}
 	
 	/**
@@ -324,7 +324,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isURL(String str) {
-		return is(str, RegexEnum.URL.getValue());
+		return is(str, RegexEnum.URL.getExpression());
 	}
 	
 	/**
@@ -334,7 +334,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasURL(String str) {
-		return has(str, RegexEnum.URL.getValue());
+		return has(str, RegexEnum.URL.getExpression());
 	}
 	
 	/**
@@ -344,7 +344,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isMessageFormatPlaceholder(String str) {
-		return is(str, RegexEnum.MESSAGE_FORMAT_PLACEHOLDER.getValue());
+		return is(str, RegexEnum.MESSAGE_FORMAT_PLACEHOLDER.getExpression());
 	}
 	
 	/**
@@ -354,7 +354,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasMessageFormatPlaceholder(String str) {
-		return has(str, RegexEnum.MESSAGE_FORMAT_PLACEHOLDER.getValue());
+		return has(str, RegexEnum.MESSAGE_FORMAT_PLACEHOLDER.getExpression());
 	}
 	
 	/**
@@ -364,7 +364,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean isStringFormatPlaceholder(String str) {
-		return is(str, RegexEnum.STRING_FORMAT_PLACEHOLDER.getValue());
+		return is(str, RegexEnum.STRING_FORMAT_PLACEHOLDER.getExpression());
 	}
 	
 	/**
@@ -374,7 +374,7 @@ public class RegexUtils {
 	 * @return
 	 */
 	public static boolean hasStringFormatPlaceholder(String str) {
-		return has(str, RegexEnum.STRING_FORMAT_PLACEHOLDER.getValue());
+		return has(str, RegexEnum.STRING_FORMAT_PLACEHOLDER.getExpression());
 	}
 		
 	/**

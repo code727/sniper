@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * 日期模式枚举
@@ -84,7 +83,7 @@ public enum DatePatternEnum implements Enumerable<Integer> {
 		this.key = ordinal();
 		this.pattern = pattern;
 		this.sequencePattern = sequencePattern;
-		this.message = MessageUtils.getClassMessage(getClass(), message);
+		this.message = message;
 	}
 	
 	@Override
@@ -106,7 +105,7 @@ public enum DatePatternEnum implements Enumerable<Integer> {
 	}
 	
 	@Override
-	public boolean matches(Integer key) {
+	public boolean match(Integer key) {
 		return key != null && this.key == key.intValue();
 	}
 	
@@ -117,7 +116,7 @@ public enum DatePatternEnum implements Enumerable<Integer> {
 	 * @return
 	 */
 	@Override
-	public boolean matches(String patternOrName) {
+	public boolean match(String patternOrName) {
 		return this.pattern.equals(patternOrName) || this.sequencePattern.equals(patternOrName)
 				|| this.name().equalsIgnoreCase(patternOrName);
 	}

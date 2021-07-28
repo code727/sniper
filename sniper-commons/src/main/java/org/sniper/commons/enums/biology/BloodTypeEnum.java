@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * 血型枚举
@@ -63,7 +62,7 @@ public enum BloodTypeEnum implements Enumerable<Integer> {
 	
 	private BloodTypeEnum(String message) {
 		this.key = ordinal();
-		this.message = MessageUtils.getClassMessage(getClass(), message);
+		this.message = message;
 	}
 	
 	@Override
@@ -77,12 +76,12 @@ public enum BloodTypeEnum implements Enumerable<Integer> {
 	}
 
 	@Override
-	public boolean matches(Integer key) {
+	public boolean match(Integer key) {
 		return key != null && this.key == key.intValue();
 	}
 	
 	@Override
-	public boolean matches(String name) {
+	public boolean match(String name) {
 		return this.name().equalsIgnoreCase(name);
 	}
 	

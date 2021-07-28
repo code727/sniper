@@ -18,14 +18,12 @@
 
 package org.sniper.commons.enums;
 
-import java.io.Serializable;
-
 /**
  * 可枚举的接口
  * @author  Daniele
  * @version 1.0
  */
-public interface Enumerable<K> extends Serializable {
+public interface Enumerable<K> extends MatchableEnum<K> {
 		
 	/** 
 	 * 获取枚举键
@@ -35,26 +33,10 @@ public interface Enumerable<K> extends Serializable {
 	public K getKey();
 	
 	/**
-	 * 获取枚举信息
+	 * 获取枚举消息
 	 * @author Daniele 
 	 * @return
 	 */
 	public String getMessage();
 	
-	/**
-	 * 判断指定的键是否匹配当前枚举对象
-	 * @author Daniele 
-	 * @param key
-	 * @return
-	 */
-	public boolean matches(K key);
-
-	/**
-	 * 判断指定的名称是否匹配当前枚举对象
-	 * @author Daniele 
-	 * @param name
-	 * @return 
-	 */
-	public boolean matches(String name);
-
 }

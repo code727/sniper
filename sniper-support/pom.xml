@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.sniper</groupId>
 		<artifactId>sniper</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>sniper-support</artifactId>
 	
@@ -12,12 +12,12 @@
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-commons</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-test</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

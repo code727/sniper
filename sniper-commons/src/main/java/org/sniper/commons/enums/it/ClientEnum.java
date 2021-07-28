@@ -16,38 +16,37 @@
  * Create Date : 2021-7-12
  */
 
-package org.sniper.commons.enums.channel;
+package org.sniper.commons.enums.it;
 
 import java.util.Map;
 
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * 客户端类型枚举
  * @author  Daniele
  * @version 1.0
  */
-public enum PersonalDeviceEnum {
+public enum ClientEnum {
 	
 	/** PC */
-	PC("personal.device.pc"),
+	PC("client.type.pc"),
 	
 	/** Android */
-	ANDROID("personal.device.android"),
+	ANDROID("client.type.android"),
 	
 	/** IOS */
-	IOS("personal.device.ios"),
+	IOS("client.type.ios"),
 	
 	/** WINPHONE */
-	WINPHONE("personal.device.winphone")
+	WINPHONE("client.type.winphone")
 	;
 	
-	private static final Map<Integer, PersonalDeviceEnum> mappings = MapUtils.newHashMap(12);
+	private static final Map<Integer, ClientEnum> mappings = MapUtils.newHashMap(4);
 	
 	static {
-		for (PersonalDeviceEnum personalDevice : values()) {
-			mappings.put(personalDevice.ordinal(), personalDevice);
+		for (ClientEnum client : values()) {
+			mappings.put(client.ordinal(), client);
 		}
 	}
 	
@@ -57,9 +56,9 @@ public enum PersonalDeviceEnum {
 	/** 消息 */
 	private final String message;  
 
-	private PersonalDeviceEnum(String value) {
+	private ClientEnum(String message) {
 		this.key = ordinal();
-		this.message = MessageUtils.getClassMessage(getClass(), value);
+		this.message = message;
 	}
 	
 	public int getKey() {
@@ -86,7 +85,7 @@ public enum PersonalDeviceEnum {
 	 * @param type
 	 * @return
 	 */
-	public static PersonalDeviceEnum resolve(int key) {
+	public static ClientEnum resolve(int key) {
 		return mappings.get(key);
 	}
 	

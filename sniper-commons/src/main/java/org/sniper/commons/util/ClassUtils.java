@@ -416,7 +416,7 @@ public class ClassUtils {
 		// 如果当前类所属包的路径只有一级，则最终结果为"packageName/packageName"
 		return new StringBuilder(packageName).append(StringUtils.FORWARD_SLASH).append(packageName).toString();
 	}
-	
+		
 	/**
 	 * 获取指定类的基础名称
 	 * @author Daniele 
@@ -449,7 +449,7 @@ public class ClassUtils {
 		
 		return pkg.getName();
 	}
-	
+		
 	/**
 	 * 获取默认的ClassLoader
 	 * @author Daniele 

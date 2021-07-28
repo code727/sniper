@@ -4,56 +4,50 @@
 	<parent>
 		<groupId>org.sniper</groupId>
 		<artifactId>sniper</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>sniper-generator</artifactId>
 	
 	<dependencies>
 		<dependency>
-  			<groupId>org.slf4j</groupId>
-  			<artifactId>slf4j-api</artifactId>
-  			<version>${slf4j.version}</version>
-  			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-commons</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-support</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-nosql</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-concurrent</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-serialization</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-spring</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.sniper</groupId>
 			<artifactId>sniper-test</artifactId>
-			<version>${sniper.version}</version>
+			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

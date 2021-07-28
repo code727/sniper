@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.sniper</groupId>
 		<artifactId>sniper</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>sniper-test</artifactId>
 	

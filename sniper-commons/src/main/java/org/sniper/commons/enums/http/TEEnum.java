@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * 传输编码(TE)类型枚举
@@ -67,7 +66,7 @@ public enum TEEnum implements Enumerable<Integer> {
 		this.key = ordinal();
 		// 编码类型即为枚举对象名称的小写字符串
 		this.type = name().toLowerCase();
-		this.message = MessageUtils.getClassMessage(getClass(), message);
+		this.message = message;
 	}
 	
 	@Override
@@ -85,7 +84,7 @@ public enum TEEnum implements Enumerable<Integer> {
 	}
 	
 	@Override
-	public boolean matches(Integer key) {
+	public boolean match(Integer key) {
 		return key != null && this.key == key.intValue();
 	}
 	
@@ -95,7 +94,7 @@ public enum TEEnum implements Enumerable<Integer> {
 	 * @param typeOrName
 	 * @return
 	 */
-	public boolean matches(String typeOrName) {
+	public boolean match(String typeOrName) {
 		// 由于编码类型即为枚举对象名称的小写字符串，因此这里只用type字段比较即可
 		return this.type.equalsIgnoreCase(typeOrName);
 	}

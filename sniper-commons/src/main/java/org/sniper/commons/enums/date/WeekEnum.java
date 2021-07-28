@@ -23,7 +23,6 @@ import java.util.Map;
 
 import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * 星期枚举类
@@ -76,7 +75,7 @@ public enum WeekEnum implements Enumerable<Integer> {
 	private WeekEnum(int key, String abbreviation, String message) {
 		this.key = key;
 		this.abbreviation = abbreviation;
-		this.message = MessageUtils.getClassMessage(getClass(), message);
+		this.message = message;
 	}
 	
 	@Override
@@ -94,7 +93,7 @@ public enum WeekEnum implements Enumerable<Integer> {
 	}
 	
 	@Override
-	public boolean matches(Integer key) {
+	public boolean match(Integer key) {
 		return key != null && this.key == key.intValue();
 	}
 	
@@ -105,7 +104,7 @@ public enum WeekEnum implements Enumerable<Integer> {
 	 * @return
 	 */
 	@Override
-	public boolean matches(String abbreviationOrName) {
+	public boolean match(String abbreviationOrName) {
 		return this.abbreviation.equalsIgnoreCase(abbreviationOrName)
 				|| this.name().equalsIgnoreCase(abbreviationOrName);
 	}

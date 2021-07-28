@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * HTTP网络连接状态枚举
@@ -60,7 +59,7 @@ public enum HttpConnectionEnum implements Enumerable<Integer> {
 	private HttpConnectionEnum(String status, String message) {
 		this.key = ordinal();
 		this.status = status;
-		this.message = MessageUtils.getClassMessage(getClass(), message);
+		this.message = message;
 	}
 	
 	@Override
@@ -78,7 +77,7 @@ public enum HttpConnectionEnum implements Enumerable<Integer> {
 	}
 	
 	@Override
-	public boolean matches(Integer key) {
+	public boolean match(Integer key) {
 		return key != null && this.key == key.intValue();
 	}
 	
@@ -88,7 +87,7 @@ public enum HttpConnectionEnum implements Enumerable<Integer> {
 	 * @param statusOrName
 	 * @return
 	 */
-	public boolean matches(String statusOrName) {
+	public boolean match(String statusOrName) {
 		return this.status.equalsIgnoreCase(statusOrName) || this.name().equalsIgnoreCase(statusOrName);
 	}
 

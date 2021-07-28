@@ -80,7 +80,7 @@ public class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	 * @return
 	 */
 	public static boolean isErrorCode(int code) {
-		return !isSuccessCode(code);
+		return ResponseStatusEnum.isIncorrect(code);
 	}
 		
 }

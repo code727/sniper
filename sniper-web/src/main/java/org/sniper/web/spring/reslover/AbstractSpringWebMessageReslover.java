@@ -65,6 +65,7 @@ public abstract class AbstractSpringWebMessageReslover extends AbstractWebMessag
 
 	@Override
 	public Locale getLocale() {
+//		LocaleContextHolder.getLocale()
 		HttpServletRequest request = getHttpServletRequest();
 		return request != null ? localeResolver.resolveLocale(request) : Locale.getDefault();
 	}

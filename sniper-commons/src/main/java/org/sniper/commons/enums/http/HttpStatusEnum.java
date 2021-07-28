@@ -20,15 +20,16 @@ package org.sniper.commons.enums.http;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.EnumerableStatus;
+import org.sniper.commons.enums.MatchableEnum;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * HTTP状态枚举
  * @author  Daniele
  * @version 1.0
  */
-public enum HttpStatusEnum {
+public enum HttpStatusEnum implements EnumerableStatus<Integer>, MatchableEnum<Integer> {
 	
 	/** 继续(100) */
 	CONTINUE(100),
@@ -168,10 +169,12 @@ public enum HttpStatusEnum {
 	
 	private static final String MESSAGE_PREFIX = "http.status.";	
 	private static final Map<Integer, HttpStatusEnum> CODE_MAPPINGS = MapUtils.newHashMap(63);
+	private static final Map<String, HttpStatusEnum> NAME_MAPPINGS = MapUtils.newHashMap(63);
 	
 	static {
-		for (HttpStatusEnum httpStatus : values()) {
-			CODE_MAPPINGS.put(httpStatus.code, httpStatus);
+		for (HttpStatusEnum status : values()) {
+			CODE_MAPPINGS.put(status.code, status);
+			NAME_MAPPINGS.put(status.name(), status);
 		}
 	}
 	
@@ -183,34 +186,33 @@ public enum HttpStatusEnum {
 	
 	private HttpStatusEnum(int code) {
 		this.code = code;
-		this.message = MessageUtils.getClassMessage(getClass(), MESSAGE_PREFIX + code);
+		this.message = MESSAGE_PREFIX + code;
 	}
 	
-	/**
-	 * 获取状态码
-	 * @author Daniele
-	 * @return
-	 */
-	public int getCode() {
+	@Override
+	public Integer getCode() {
 		return code;
 	}
 
-	/**
-	 * 获取消息
-	 * @author Daniele
-	 * @return
-	 */
+	@Override
 	public String getMessage() {
 		return message;
 	}
 	
 	/**
 	 * 判断指定的状态码是否匹配当前枚举对象
+	 * @author Daniele
 	 * @param code
 	 * @return
 	 */
-	public boolean matches(int code) {
-		return this.code == code;
+	@Override
+	public boolean match(Integer code) {
+		return code != null && this.code == code.intValue();
+	}
+	
+	@Override
+	public boolean match(String name) {
+		return this.name().equalsIgnoreCase(name);
 	}
 	
 	/**
@@ -292,6 +294,16 @@ public enum HttpStatusEnum {
 	 */
 	public static HttpStatusEnum resolve(int code) {
 		return CODE_MAPPINGS.get(code);
+	}
+	
+	/**
+	 * 将指定的名称解析成枚举对象
+	 * @author Daniele 
+	 * @param name
+	 * @return
+	 */
+	public static HttpStatusEnum resolve(String name) {
+		return name != null ? NAME_MAPPINGS.get(name.toUpperCase()) : null;
 	}
 	
 	/**

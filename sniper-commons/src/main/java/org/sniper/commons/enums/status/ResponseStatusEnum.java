@@ -20,9 +20,10 @@ package org.sniper.commons.enums.status;
 
 import java.util.Map;
 
+import org.sniper.commons.enums.EnumerableStatus;
+import org.sniper.commons.enums.MatchableEnum;
 import org.sniper.commons.enums.http.HttpStatusEnum;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 
 /**
@@ -30,7 +31,7 @@ import org.sniper.commons.util.MessageUtils;
  * @author  Daniele
  * @version 1.0
  */
-public enum ResponseStatusEnum {
+public enum ResponseStatusEnum implements EnumerableStatus<Integer>, MatchableEnum<Integer> {
 	
 	/** 未知错误(-1)，作为系统兜底的错误码 */
 	UNKNOWN_ERROR(-1),
@@ -41,15 +42,14 @@ public enum ResponseStatusEnum {
 	 */
 	SUCCESS(0),
 	
-	/** 断路器返回 */
-	CIRCUIT_BREAKER_FALLBACK(1),
-	
 	/* 
 	 * 注意：
 	 * 1.状态码在[1,99]区间内的"成功"枚举项预留给后续版本扩展；
 	 * 2.状态码在[100,399]区间内的"成功"枚举项直接使用{@link org.sniper.commons.enums.http.HttpStatusEnum}
 	 *   的等值枚举项，不再在{@link org.sniper.commons.enums.status.ResponseStatusEnum}中定义。 
 	 */
+	/** 断路器返回 */
+	CIRCUIT_BREAKER_FALLBACK(1),
 	 
 	/** 
 	 * 错误(400)，状态码等价于{@link org.sniper.commons.enums.http.HttpStatusEnum#BAD_REQUEST}</P> 
@@ -64,22 +64,80 @@ public enum ResponseStatusEnum {
 	 * 2.状态码在[600,999]区间内的"错误"枚举项预留给后续版本扩展。
 	 */
 	
-	// 定义状态码在1000以上的"错误"枚举项
+	// 系统类错误(1xxx)
 	
-	/** 参数缺失 */
-	PARAM_MISSING(1000),
-	/** 参数必填 */
-	PARAM_NEEDED(1001),
-	/** 参数不合法 */
-	PARAM_ILLEGAL(1002),
-	/** 参数类型不匹配 */
-	PARAM_TYPE_MISMATCH(1003),
-	/** 参数格式错误 */
-	PARAM_PATTERN_ERROR(1004),
-	/** 参数校验错误 */
-	PARAM_VALIDATE_ERROR(1005)
+	/** 系统错误(1000) */
+	SYSTEM_ERROR(1000),
+	/** 系统繁忙(1001) */
+	SYSTEM_BUSY(1001),
+	
+	// 网络类错误(2xxx)
+	
+	/** 网络异常(2000) */
+	NETWORK_ERROR(2000),
+	/** 网络不可用(2001) */
+	NETWORK_UNAVAILABLE(2001),
+	/** 网络超时(2002) */
+	NETWORK_TIMEOUT(2002),
+	
+	// 异常类错误(3xxx)
+	
+	/** 调用异常(3000) */
+	CALL_EXCEPTION(3000),
+	/** 本地调用异常(3001) */
+	LOCAL_CALL_EXCEPTION(3001),
+	/** 远程调用异常(3002) */
+	REMOTE_CALL_EXCEPTION(3002),
+	/** 远程调用超时(3003) */
+	REMOTE_CALL_TIMEOUT(3003),
+	/** 断路器异常返回(3004) */
+	CIRCUIT_BREAKER_EXCEPTION(3004),
+	/** 业务异常(3005) */
+	BIZ_EXCEPTION(3005),
+	
+	// 请求类错误(4xxx)
+	
+	/** 请求错误 */
+	REQUEST_ERROR(4000),
+	/** 请求的正文长度超过限制(4001) */
+	REQUEST_BODY_LENGTH_OVER_LIMIT(4001),
+	/** IP限制不能请求该资源(4002) */
+	IP_REQUEST_LIMIT(4002),
+	/** 请求频次超过上限(4003) */
+	REQUEST_OUT_OF_RATE_LIMIT(4003),
+	/** IP请求频次超过上限(4004) */
+	IP_REQUEST_OUT_OF_RATE_LIMIT(4004),
+	/** 用户请求频次超过上限(4005) */
+	USER_REQUEST_OUT_OF_RATE_LIMIT(4005),
+	
+	
+	// 参数类错误(5xxx)
+
+	/** 参数错误(5000) */
+	PARAM_ERROR(5000),
+
+	/** 参数校验错误(5006) */
+	PARAM_VALIDATE_ERROR(5006),
+	
+	/** 参数缺失(5001) */
+	PARAM_MISSING(5001),
+	/** 参数必填(5002) */
+	PARAM_NEEDED(5002),
+	/** 参数不合法(5003) */
+	PARAM_ILLEGAL(5003),
+	/** 参数类型不匹配(5004) */
+	PARAM_TYPE_MISMATCH(5004),
+	/** 参数格式错误(5005) */
+	PARAM_PATTERN_ERROR(5005),
+	
+	/** 参数长度超出最大限制(5007) */
+	PARAM_LENGTH_OUT_OF_MAX_LIMIT(5007),
+	/** 参数长度未满足最小限制(5008) */
+	PARAM_LENGTH_NOT_REACHED_MIN_LIMIT(5008),
+	/** 参数长度未满足区间限制(5009) */
+	PARAM_LENGTH_NOT_REACHED_INTERVAL_LIMIT(5009),
 	;
-		
+			
 	private static final String MESSAGE_PREFIX = "response.status.";
 	private static final Map<Integer, ResponseStatusEnum> KEY_MAPPINGS = MapUtils.newHashMap(values().length);
 	private static final Map<String, ResponseStatusEnum> NAME_MAPPINGS = MapUtils.newHashMap(values().length);
@@ -99,44 +157,26 @@ public enum ResponseStatusEnum {
 
 	private ResponseStatusEnum(int code) {
 		this.code = code;
-		this.message = MessageUtils.getClassMessage(getClass(), MESSAGE_PREFIX + code);
+		this.message = MESSAGE_PREFIX + code;
 	}
 	
-	/**
-	 * 获取状态码
-	 * @author Daniele
-	 * @return
-	 */
-	public int getCode() {
+	@Override
+	public Integer getCode() {
 		return code;
 	}
 
-	/**
-	 * 获取枚举信息
-	 * @author Daniele
-	 * @return
-	 */
+	@Override
 	public String getMessage() {
 		return message;
 	}
-			
-	/**
-	 * 判断指定的状态码是否匹配当前枚举对象
-	 * @author Daniele
-	 * @param code
-	 * @return
-	 */
-	public boolean matches(int code) {
+		
+	@Override
+	public boolean match(Integer code) {
 		return this.code == code;
 	}
 
-	/**
-	 * 判断指定的名称是否匹配当前枚举对象
-	 * @author Daniele
-	 * @param name
-	 * @return
-	 */
-	public boolean matches(String name) {
+	@Override
+	public boolean match(String name) {
 		return this.name().equalsIgnoreCase(name);
 	}
 	

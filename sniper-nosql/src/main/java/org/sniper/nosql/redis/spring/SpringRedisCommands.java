@@ -28,6 +28,7 @@ import org.sniper.commons.util.ArrayUtils;
 import org.sniper.commons.util.AssertUtils;
 import org.sniper.commons.util.BooleanUtils;
 import org.sniper.commons.util.CollectionUtils;
+import org.sniper.commons.util.PropertiesUtils;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.nosql.redis.RedisRepository;
 import org.sniper.nosql.redis.enums.DataType;
@@ -2303,21 +2304,13 @@ public class SpringRedisCommands extends SpringRedisSupport {
 	
 	@Override
 	public Properties configGet(final String pattern) {
-		List<String> configs = getRedisTemplate().execute(new RedisCallback<List<String>>() {
+		Properties properties = getRedisTemplate().execute(new RedisCallback<Properties>() {
 
 			@Override
-			public List<String> doInRedis(RedisConnection connection) throws DataAccessException {
+			public Properties doInRedis(RedisConnection connection) throws DataAccessException {
 				return connection.getConfig(StringUtils.isNotEmpty(pattern) ? pattern : StringUtils.ANY);
 			}
 		});
-		
-		if (CollectionUtils.isEmpty(configs))
-			return null;
-		
-		Properties properties = new Properties();
-		for (int i = 0; i < configs.size(); i++) {
-			properties.put(configs.get(i), configs.get(++i));
-		}
 		return properties;
 	}
 	
@@ -2326,20 +2319,20 @@ public class SpringRedisCommands extends SpringRedisSupport {
 		if (StringUtils.isBlank(parameter))
 			return null;
 		
-		List<String> configs = getRedisTemplate().execute(new RedisCallback<List<String>>() {
+		Properties properties = getRedisTemplate().execute(new RedisCallback<Properties>() {
 
 			@Override
-			public List<String> doInRedis(RedisConnection connection) throws DataAccessException {
+			public Properties doInRedis(RedisConnection connection) throws DataAccessException {
 				return connection.getConfig(parameter);
 			}
 		});
 		
-		if (CollectionUtils.isEmpty(configs))
+		if (PropertiesUtils.isEmpty(properties))
 			return null;
 		
-		AssertUtils.assertTrue(configs.size() == 2, String.format(
+		AssertUtils.assertTrue(properties.size() == 2, String.format(
 				"Not get a single config by parameter '%s'", parameter));
-		return getPropertyConverter().converte(configs.get(1), valueType);
+		return getPropertyConverter().converte(properties.get(parameter), valueType);
 	}
 	
 	@Override

@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * HTTP Content-Encoding编码类型枚举
@@ -70,7 +69,7 @@ public enum ContentEncodingEnum implements Enumerable<Integer> {
 	private ContentEncodingEnum(String type, String message) {
 		this.key = ordinal();
 		this.type = type;
-		this.message = MessageUtils.getClassMessage(getClass(), message);
+		this.message = message;
 	}
 	
 	@Override
@@ -88,7 +87,7 @@ public enum ContentEncodingEnum implements Enumerable<Integer> {
 	}
 	
 	@Override
-	public boolean matches(Integer key) {
+	public boolean match(Integer key) {
 		return key != null && this.key == key.intValue();
 	}
 
@@ -99,7 +98,7 @@ public enum ContentEncodingEnum implements Enumerable<Integer> {
 	 * @return
 	 */
 	@Override
-	public boolean matches(String typeOrName) {
+	public boolean match(String typeOrName) {
 		return this.type.equalsIgnoreCase(typeOrName) || this.name().equalsIgnoreCase(typeOrName);
 	}
 	

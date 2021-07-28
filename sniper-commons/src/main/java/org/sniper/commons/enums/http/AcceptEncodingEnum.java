@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.sniper.commons.enums.Enumerable;
 import org.sniper.commons.util.MapUtils;
-import org.sniper.commons.util.MessageUtils;
 
 /**
  * HTTP Accept-Encoding请求头编码类型枚举
@@ -69,7 +68,7 @@ public enum AcceptEncodingEnum implements Enumerable<Integer> {
 	private AcceptEncodingEnum(String type, String message) {
 		this.key = ordinal();
 		this.type = type;
-		this.message = MessageUtils.getClassMessage(getClass(), message);
+		this.message = message;
 	}
 	
 	@Override
@@ -77,6 +76,11 @@ public enum AcceptEncodingEnum implements Enumerable<Integer> {
 		return key;
 	}
 	
+	/**
+	 * 获取编码类型
+	 * @author Daniele
+	 * @return
+	 */
 	public String getType() {
 		return type;
 	}
@@ -87,7 +91,7 @@ public enum AcceptEncodingEnum implements Enumerable<Integer> {
 	}
 	
 	@Override
-	public boolean matches(Integer key) {
+	public boolean match(Integer key) {
 		return key != null && this.key == key.intValue();
 	}
 
@@ -98,7 +102,7 @@ public enum AcceptEncodingEnum implements Enumerable<Integer> {
 	 * @return
 	 */
 	@Override
-	public boolean matches(String typeOrName) {
+	public boolean match(String typeOrName) {
 		return this.type.equalsIgnoreCase(typeOrName) || this.name().equalsIgnoreCase(typeOrName);
 	}
 	
