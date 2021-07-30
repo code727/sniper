@@ -27,7 +27,7 @@ import org.sniper.commons.util.StringUtils;
  * @author  Daniele
  * @version 1.0
  */
-public abstract class AbstractResponse<C> implements MessagingResponse<C> {
+public abstract class AbstractResponse<C> implements GenericResponse<C> {
 		
 	private static final long serialVersionUID = 8451538043375748612L;
 	
@@ -56,14 +56,13 @@ public abstract class AbstractResponse<C> implements MessagingResponse<C> {
 	public String getMessage() {
 		return message;
 	}
-	
+
 	@Override
-	public MessagingResponse<C> format(Object... params) {
+	public GenericResponse<C> format(Object... params) {
 		if (StringUtils.isNotBlank(message)) {
-//			this.message = String.format(this.message, params);
 			this.message = MessageFormat.format(message, params);
 		}
 		return this;
 	}
-			
+	
 }

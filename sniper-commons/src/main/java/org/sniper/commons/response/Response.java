@@ -25,7 +25,7 @@ import org.sniper.commons.enums.status.ResponseStatusEnum;
  * @author  Daniele
  * @version 1.0
  */
-public class Response<T> extends AbstractDatamationResponse<Integer, T> {
+public final class Response<T> extends AbstractDatamationResponse<Integer, T> {
 	
 	private static final long serialVersionUID = -2728403977784339577L;
 

@@ -26,9 +26,8 @@ import org.sniper.commons.util.ClassUtils;
  * @author  Daniele
  * @version 1.0
  */
-public abstract class AbstractGenricBean<T> extends CheckableInitializingBeanAdapter
-		implements GenericBean<T> {
-	
+public abstract class AbstractGenricBean<T> extends CheckableInitializingBeanAdapter implements GenericBean<T> {
+		
 	/** 当前泛型类所管理的Bean类型 */
 	private Class<T> targetType;
 

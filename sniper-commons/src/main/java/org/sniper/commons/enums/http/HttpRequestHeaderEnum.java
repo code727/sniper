@@ -123,7 +123,7 @@ public enum HttpRequestHeaderEnum implements Enumerable<String> {
 	/**
 	 * 判断指定的键或名称是否匹配当前枚举对象
 	 * @author Daniele 
-	 * @param patternOrName
+	 * @param keyOrName
 	 * @return
 	 */
 	@Override

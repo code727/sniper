@@ -25,6 +25,7 @@ import org.sniper.commons.util.MessageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
 /**
@@ -32,6 +33,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
  * @author  Daniele
  * @version 1.0
  */
+@Configuration
 public class SpringWebMessageReslover extends AbstractSpringWebMessageReslover {
 		
 	@Autowired(required = false)
@@ -52,8 +54,7 @@ public class SpringWebMessageReslover extends AbstractSpringWebMessageReslover {
 		
 		if(this.messageSource == null) {
 			ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-			source.setBasename(org.sniper.templet.message.source
-					.ResourceBundleMessageSource.DEFAULT_BASENAME);
+			source.setBasename(MessageUtils.DEFAULT_I18N_BASENAME);
 			this.messageSource = source;
 		}
 	}

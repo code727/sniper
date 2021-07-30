@@ -20,7 +20,7 @@ package org.sniper.commons.enums.http;
 
 import java.util.Map;
 
-import org.sniper.commons.enums.EnumerableStatus;
+import org.sniper.commons.base.Responsible;
 import org.sniper.commons.enums.MatchableEnum;
 import org.sniper.commons.util.MapUtils;
 
@@ -29,7 +29,7 @@ import org.sniper.commons.util.MapUtils;
  * @author  Daniele
  * @version 1.0
  */
-public enum HttpStatusEnum implements EnumerableStatus<Integer>, MatchableEnum<Integer> {
+public enum HttpStatusEnum implements Responsible<Integer>, MatchableEnum<Integer> {
 	
 	/** 继续(100) */
 	CONTINUE(100),

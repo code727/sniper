@@ -23,13 +23,13 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
-import java.security.AccessController;
+//import java.security.AccessController;
 import java.util.BitSet;
 
 import org.sniper.codec.CodecSupport;
 import org.sniper.commons.util.StringUtils;
 
-import sun.security.action.GetPropertyAction;
+//import sun.security.action.GetPropertyAction;
 
 /**
  * RFC-2396标准的URL编码器实现类
@@ -78,7 +78,7 @@ public class RawURLEncoder extends CodecSupport implements StringEncoder {
         dontNeedEncoding.set('?');
         dontNeedEncoding.set('@');
 
-        dfltEncName = AccessController.doPrivileged(new GetPropertyAction("file.encoding"));
+//        dfltEncName = AccessController.doPrivileged(new GetPropertyAction("file.encoding"));
     }
 
 	@Override

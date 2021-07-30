@@ -18,8 +18,8 @@
 
 package org.sniper.commons.response;
 
+import org.sniper.commons.base.Responsible;
 import org.sniper.commons.enums.http.HttpStatusEnum;
-import org.sniper.commons.enums.status.ResponseStatusEnum;
 import org.sniper.commons.util.AssertUtils;
 
 /**
@@ -73,28 +73,6 @@ public final class Responses {
 	}
 	
 	/**
-	 * 根据响应状态枚举构造Success响应对象
-	 * @author Daniele
-	 * @param status
-	 * @return
-	 */
-	public static <T> Response<T> success(ResponseStatusEnum status) {
-		return success(status, null);
-	}
-	
-	/**
-	 * 根据响应状态枚举和数据构造Success响应对象
-	 * @author Daniele
-	 * @param status
-	 * @param data
-	 * @return
-	 */
-	public static <T> Response<T> success(ResponseStatusEnum status, T data) {
-		AssertUtils.assertNotNull(status, "Response status must not be null");
-		return success(status.getCode(), status.getMessage(), data);
-	}
-	
-	/**
 	 * 根据成功码、消息和数据构造Success响应对象
 	 * @author Daniele
 	 * @param successCode
@@ -106,26 +84,26 @@ public final class Responses {
 		AssertUtils.assertTrue(Response.isSuccessCode(successCode), String.format("Invalid successCode '%s'", successCode));
 		return build(successCode, message, data);
 	}
-		
+	
 	/**
-	 * 根据HTTP状态枚举构造Success响应对象
+	 * 根据响应状态构造Success响应对象
 	 * @author Daniele
 	 * @param status
 	 * @return
 	 */
-	public static <T> Response<T> success(HttpStatusEnum status) {
+	public static <T> Response<T> success(Responsible<Integer> status) {
 		return success(status, null);
 	}
 	
 	/**
-	 * 根据HTTP状态枚举和数据构造Success响应对象
+	 * 根据响应状态和数据构造Success响应对象
 	 * @author Daniele
 	 * @param status
 	 * @param data
 	 * @return
 	 */
-	public static <T> Response<T> success(HttpStatusEnum status, T data) {
-		AssertUtils.assertNotNull(status, "HTTP response status must not be null");
+	public static <T> Response<T> success(Responsible<Integer> status, T data) {
+		AssertUtils.assertNotNull(status, "Response status must not be null");
 		return success(status.getCode(), status.getMessage(), data);
 	}
 	
@@ -181,36 +159,14 @@ public final class Responses {
 		AssertUtils.assertTrue(Response.isErrorCode(errorCode), String.format("Invalid errorCode '%s'", errorCode));
 		return build(errorCode, message, data);
 	}
-	
-	/**
-	 * 根据响应状态枚举构造Error响应对象
-	 * @author Daniele
-	 * @param status
-	 * @return
-	 */
-	public static <T> Response<T> error(ResponseStatusEnum status) {
-		return error(status, null);
-	}
-	
-	/**
-	 * 根据响应状态枚举和数据构造Error响应对象
-	 * @author Daniele
-	 * @param status
-	 * @param data
-	 * @return
-	 */
-	public static <T> Response<T> error(ResponseStatusEnum status, T data) {
-		AssertUtils.assertNotNull(status, "Response status must not be null");
-		return error(status.getCode(), status.getMessage(), data);
-	}
-	
+		
 	/**
 	 * 根据HTTP状态枚举构造Error响应对象
 	 * @author Daniele
 	 * @param status
 	 * @return
 	 */
-	public static <T> Response<T> error(HttpStatusEnum status) {
+	public static <T> Response<T> error(Responsible<Integer> status) {
 		return error(status, null);
 	}
 	
@@ -221,7 +177,7 @@ public final class Responses {
 	 * @param data
 	 * @return
 	 */
-	public static <T> Response<T> error(HttpStatusEnum status, T data) {
+	public static <T> Response<T> error(Responsible<Integer> status, T data) {
 		AssertUtils.assertNotNull(status, "HTTP response status must not be null");
 		return error(status.getCode(), status.getMessage(), data);
 	}
@@ -265,49 +221,27 @@ public final class Responses {
 	}
 	
 	/**
-	 * 根据响应状态枚举构造响应对象
+	 * 根据响应状态构造响应对象
 	 * @author Daniele 
 	 * @param status
 	 * @return
 	 */
-	public static <T> Response<T> build(ResponseStatusEnum status) {
+	public static <T> Response<T> build(Responsible<Integer> status) {
 		return build(status, null);
 	}
 	
 	/**
-	 * 根据响应状态枚举和数据构造响应对象
+	 * 根据响应状态和数据构造响应对象
 	 * @author Daniele 
 	 * @param status
 	 * @param data
 	 * @return
 	 */
-	public static <T> Response<T> build(ResponseStatusEnum status, T data) {
+	public static <T> Response<T> build(Responsible<Integer> status, T data) {
 		AssertUtils.assertNotNull(status, "Response status must not be null");
 		return build(status.getCode(), status.getMessage(), data);
 	}
-	
-	/**
-	 * 根据HTTP状态枚举构造响应对象
-	 * @author Daniele
-	 * @param status
-	 * @return
-	 */
-	public static <T> Response<T> build(HttpStatusEnum status) {
-		return build(status, null);
-	}
-	
-	/**
-	 * 根据HTTP状态枚举和数据构造响应对象
-	 * @author Daniele
-	 * @param status
-	 * @param data
-	 * @return
-	 */
-	public static <T> Response<T> build(HttpStatusEnum status, T data) {
-		AssertUtils.assertNotNull(status, "HTTP response status must not be null");
-		return build(status.getCode(), status.getMessage(), data);
-	}
-	
+		
 	/**
 	 * 根据响应码和消息构造响应对象
 	 * @author Daniele

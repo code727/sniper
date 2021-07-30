@@ -158,6 +158,26 @@ public class RegexUtils {
 	}
 	
 	/**
+	 * 判断字符串是否为IP
+	 * @author Daniele
+	 * @param str
+	 * @return
+	 */
+	public static boolean isIP(String str) {
+		return isIPV4(str) || isIPV6(str);
+	}
+	
+	/**
+	 * 判断字符串中是否有IP
+	 * @author Daniele
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasIP(String str) {
+		return hasIPV4(str) || hasIPV6(str);
+	}
+	
+	/**
 	 * 判断字符串是否为IPV4
 	 * @author Daniele 
 	 * @param str

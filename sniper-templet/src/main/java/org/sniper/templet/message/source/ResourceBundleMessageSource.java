@@ -27,7 +27,7 @@ import org.sniper.commons.util.MessageUtils;
 import org.sniper.commons.util.StringUtils;
 
 /**
- * java.util.ResourceBundle消息源实现类
+ * 基于{@link java.util.ResourceBundle}的消息源实现类
  * @author  Daniele
  * @version 1.0
  */
@@ -35,11 +35,9 @@ public class ResourceBundleMessageSource implements MessageSource {
 	
 	/** 资源的基础名称组 */
 	private String[] baseNames;
-	
-	public static final String DEFAULT_BASENAME = "i18n/i18n";
-	
+		
 	public ResourceBundleMessageSource() {
-		this.baseNames = new String[] { DEFAULT_BASENAME };
+		this.baseNames = new String[] { MessageUtils.DEFAULT_I18N_BASENAME };
 	}
 
 	/**
@@ -80,7 +78,7 @@ public class ResourceBundleMessageSource implements MessageSource {
 	}
 	
 	/**
-	 * 根据基础名称和本地化对象获取对应的java.util.ResourceBundle对象
+	 * 根据基础名称和本地化对象获取对应的{@link java.util.ResourceBundle}对象
 	 * @author Daniele 
 	 * @param baseName
 	 * @param locale

@@ -47,7 +47,7 @@ public abstract class AbstractTypedNestedResponseHandler extends AbstractTypedRe
 	}
 	
 	/**
-	 * 处理响应实体后返回最终结果
+	 * 处理响应实体返回的最终结果
 	 * @author Daniele 
 	 * @param response
 	 * @param nestedType 响应实体内部嵌套类型

@@ -18,12 +18,14 @@
 
 package org.sniper.commons.enums;
 
+import org.sniper.commons.base.Messenger;
+
 /**
  * 可枚举的接口
  * @author  Daniele
  * @version 1.0
  */
-public interface Enumerable<K> extends MatchableEnum<K> {
+public interface Enumerable<K> extends Messenger, MatchableEnum<K> {
 		
 	/** 
 	 * 获取枚举键
@@ -31,12 +33,5 @@ public interface Enumerable<K> extends MatchableEnum<K> {
 	 * @return
 	 */
 	public K getKey();
-	
-	/**
-	 * 获取枚举消息
-	 * @author Daniele 
-	 * @return
-	 */
-	public String getMessage();
 	
 }

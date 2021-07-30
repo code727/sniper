@@ -23,17 +23,16 @@ import org.sniper.commons.response.DatamationResponse;
 import org.sniper.commons.util.ReflectionUtils;
 
 /**
- * Sniper JSON响应处理器实现类
+ * 默认的JSON嵌套响应处理器实现类
  * @author  Daniele
  * @version 1.0
  */
-public class SniperJsonResponseHandler extends AbstractJsonNestedResponseHandler {
+public class DefaultJsonNestedResponseHandler extends AbstractJsonNestedResponseHandler {
 		
 	/**
-	 * 实现父类方法，主要是解决父类处理的响应结果为一个DataResponse对象时其内部data值转换问题
+	 * 实现父类方法，处理响应结果为一个DataResponse对象时其内部data值转换问题
 	 * @author Daniele 
 	 * @param response
-	 * @param nestedMapperRules
 	 * @param nestedType
 	 * @return
 	 * @throws Exception
@@ -49,7 +48,8 @@ public class SniperJsonResponseHandler extends AbstractJsonNestedResponseHandler
 			if (data != null && !data.getClass().equals(nestedType)) {
 				DatamationResponse<Object, Object> dataResponse = (DatamationResponse<Object, Object>) 
 						ReflectionUtils.newInstance(response.getClass());
-				dataResponse.setCode(((DatamationResponse<Object, Object>) response).getCode());				
+				dataResponse.setCode(((DatamationResponse<Object, Object>) response).getCode());	
+				dataResponse.setMessage(((DatamationResponse<Object, Object>) response).getMessage());
 				dataResponse.setData(typedSerializer.deserialize(typedSerializer.serialize(data), nestedType));
 				return (T) dataResponse;
 			}

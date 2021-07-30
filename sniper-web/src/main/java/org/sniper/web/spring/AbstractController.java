@@ -30,7 +30,6 @@ import org.sniper.beans.propertyeditors.StringBufferPropertyEditor;
 import org.sniper.beans.propertyeditors.StringBuilderPropertyEditor;
 import org.sniper.commons.enums.date.DatePatternEnum;
 import org.sniper.commons.response.GenericResponse;
-import org.sniper.commons.response.MessagingResponse;
 import org.sniper.commons.util.StringUtils;
 import org.sniper.web.AbstractWebMessageResolver;
 import org.sniper.web.ServletAware;
@@ -115,41 +114,6 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	}
 	
 	/**
-	 * 设置消息响应对象中的本地化消息
-	 * @author Daniele 
-	 * @param response
-	 */
-	protected void setLocaleMessage(MessagingResponse<?> response) {
-		setLocaleMessage(response, null);
-	}
-	
-	/**
-	 * 设置消息响应对象中的本地参数化消息
-	 * @author Daniele 
-	 * @param response
-	 * @param param
-	 */
-	protected void setLocaleMessage(MessagingResponse<?> response, Object param) {
-		String message = response.getMessage();
-		if (StringUtils.isNotBlank(message)) {
-			response.setMessage(getMessage(message, param));
-		}
-	}
-	
-	/**
-	 * 设置消息响应对象中的本地参数化消息
-	 * @author Daniele 
-	 * @param response
-	 * @param params
-	 */
-	protected void setLocaleMessage(MessagingResponse<?> response, Object[] params) {
-		String message = response.getMessage();
-		if (StringUtils.isNotBlank(message)) {
-			response.setMessage(getMessage(message, params));
-		}
-	}
-	
-	/**
 	 * 设置响应对象中的本地消息
 	 * @author Daniele 
 	 * @param response
@@ -165,9 +129,7 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	 * @param param
 	 */
 	protected void setLocaleMessage(GenericResponse<?> response, Object param) {
-		if (response instanceof MessagingResponse) {
-			setLocaleMessage((MessagingResponse<?>) response, param);
-		}
+		setLocaleMessage(response, param);
 	}
 	
 	/**
@@ -177,8 +139,9 @@ public abstract class AbstractController implements WebMessageResolver, ServletA
 	 * @param params
 	 */
 	protected void setLocaleMessage(GenericResponse<?> response, Object[] params) {
-		if (response instanceof MessagingResponse) {
-			setLocaleMessage((MessagingResponse<?>) response, params);
+		String message = response.getMessage();
+		if (StringUtils.isNotBlank(message)) {
+			response.setMessage(getMessage(message, params));
 		}
 	}
 	

@@ -16,27 +16,20 @@
  * Create Date : 2021-7-27
  */
 
-package org.sniper.commons.enums;
+package org.sniper.commons.base;
 
 /**
- * 可枚举的状态接口
+ * 可响应的接口
  * @author  Daniele
  * @version 1.0
  */
-public interface EnumerableStatus<C> {
+public interface Responsible<C> extends Messenger {
 	
 	/**
-	 * 获取状态码
+	 * 获取响应码
 	 * @author Daniele
 	 * @return
 	 */
 	public C getCode();
-	
-	/**
-	 * 获取状态消息
-	 * @author Daniele
-	 * @return
-	 */
-	public String getMessage();
 	
 }

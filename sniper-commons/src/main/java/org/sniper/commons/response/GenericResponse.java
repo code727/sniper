@@ -18,21 +18,21 @@
 
 package org.sniper.commons.response;
 
-import java.io.Serializable;
+import org.sniper.commons.base.Responsible;
+import org.sniper.commons.enums.status.ResponseStatusEnum;
 
 /**
- * 泛型响应对象接口
+ * 泛化响应接口
  * @author  Daniele
  * @version 1.0
  */
-public interface GenericResponse<C> extends Serializable {
+public interface GenericResponse<C> extends Responsible<C> {
 	
-	/**
-	 * 获取响应码
-	 * @author Daniele 
-	 * @return
-	 */
-	public C getCode();
+	/** 默认成功消息 */
+	public static final String DEFAULT_SUCCESS_MESSAGE = ResponseStatusEnum.SUCCESS.getMessage();
+		
+	/** 默认错误消息 */
+	public static final String DEFAULT_ERROR_MESSAGE = ResponseStatusEnum.ERROR.getMessage();
 	
 	/**
 	 * 设置响应码
@@ -40,6 +40,13 @@ public interface GenericResponse<C> extends Serializable {
 	 * @param code
 	 */
 	public void setCode(C code);
+	
+	/**
+	 * 设置响应消息
+	 * @author Daniele 
+	 * @param message
+	 */
+	public void setMessage(String message);
 		
 	/**
 	 * 判断响应是否成功
@@ -54,5 +61,13 @@ public interface GenericResponse<C> extends Serializable {
 	 * @return 
 	 */
 	public boolean errored();
+	
+	/**
+	 * 格式化响应消息
+	 * @author Daniele
+	 * @param params 格式化参数
+	 * @return
+	 */
+	public GenericResponse<C> format(Object... params);
 	
 }
