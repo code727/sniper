@@ -36,7 +36,7 @@ import org.sniper.commons.enums.date.WeekEnum;
  * @author  Daniele
  * @version 1.0.0
  */
-public class DateUtils {
+public abstract class DateUtils {
 			
 	/** 格林尼治日期时间格式组 */
 	public static final String[] GMT_DATETIME_FORMATS = new String[] {
@@ -44,8 +44,6 @@ public class DateUtils {
 			"EEE, dd-MMM-yy HH:mm:ss zzz",
 			"EEE MMM dd HH:mm:ss yyyy"
 	};
-	
-	private DateUtils() {}
 	
 	/**
 	 * 获取日期格式对象

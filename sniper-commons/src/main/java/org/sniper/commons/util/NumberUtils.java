@@ -29,7 +29,7 @@ import java.util.Map;
  * @author  Daniele
  * @version 1.0
  */
-public class NumberUtils {
+public abstract class NumberUtils {
 		
 	/** 百分比格式 */
 	public static final String PERCENT_FORMAT = "#%";
@@ -40,8 +40,6 @@ public class NumberUtils {
 	/** 全局长度与格式对象关系映射集 */
 	private static final Map<Integer, DecimalFormat> LENGTH_DECIMAL_FORMATS = MapUtils.newConcurrentHashMap();
 		
-	private NumberUtils() {}
-	
 	/**
 	 * 根据指定的模式获取已定义的数字格式对象
 	 * @author Daniele 

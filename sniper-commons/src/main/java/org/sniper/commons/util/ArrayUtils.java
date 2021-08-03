@@ -27,7 +27,7 @@ import java.util.List;
  * @author  Daniele
  * @version 1.0.0
  */
-public class ArrayUtils {
+public abstract class ArrayUtils {
 	
 	private ArrayUtils() {}
 	
@@ -193,7 +193,7 @@ public class ArrayUtils {
 	
 	/**
 	 * 判断数组是否为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele
 	 * @param array
 	 * @return 
 	 */
@@ -203,7 +203,7 @@ public class ArrayUtils {
 	
 	/**
 	 * 判断数组是否不为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele
 	 * @param array
 	 * @return 
 	 */
@@ -213,7 +213,7 @@ public class ArrayUtils {
 	
 	/**
 	 * 获取数组的长度
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele
 	 * @param array
 	 * @return 
 	 */

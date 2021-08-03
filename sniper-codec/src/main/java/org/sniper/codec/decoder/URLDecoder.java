@@ -31,7 +31,7 @@ public class URLDecoder extends CodecSupport implements StringDecoder {
 
 	@Override
 	public String decode(String message) throws UnsupportedEncodingException{
-		return this.decode(message, super.getEncoding());
+		return decode(message, super.getEncoding());
 	}
 
 	@Override

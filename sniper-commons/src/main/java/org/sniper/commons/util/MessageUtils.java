@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
  * @author  Daniele
  * @version 1.0
  */
-public class MessageUtils {
+public abstract class MessageUtils {
 	
 	/** 默认的i18n资源路径 */
 	public static final String DEFAULT_I18N_PATH = "i18n/";
@@ -40,8 +40,6 @@ public class MessageUtils {
 	
 	private static final Map<String, ResourceBundle> RESOURCE_BUNDLES = MapUtils.newConcurrentHashMap();
 	
-	private MessageUtils() {}
-		
 	/**
 	 * 根据基础名称和Locale对象获取java.util.ResourceBundle对象
 	 * @author Daniele 

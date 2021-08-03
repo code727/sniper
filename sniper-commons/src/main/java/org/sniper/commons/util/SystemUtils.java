@@ -26,7 +26,7 @@ import java.util.Set;
  * @author  Daniele
  * @version 1.0
  */
-public class SystemUtils {
+public abstract class SystemUtils {
 	
 	/** 全局固定的系统变量 */
 	public static final Properties GLOBAL_PROPERTIES;
@@ -50,8 +50,6 @@ public class SystemUtils {
 		else
 			GLOBAL_PROPERTIES.put("sys.text.newline", WINDOWS_TEXT_NEWLINE);
 	}
-	
-	private SystemUtils() {}
 	
 	/**
 	 * 获取所用的系统属性

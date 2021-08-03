@@ -27,9 +27,7 @@ import java.util.Map;
  * @author  Daniele
  * @version 1.0
  */
-public class ObjectUtils {
-	
-	private ObjectUtils() {}
+public abstract class ObjectUtils {
 	
 	/**
 	 * 判断指定的对象是否为空

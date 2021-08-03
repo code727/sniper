@@ -57,7 +57,7 @@ public class MultiSortRequest implements MultiSort {
 	
 	@Override
 	public MultiSort clear() {
-		if (this.sorts != null)
+		if (CollectionUtils.isNotEmpty(this.sorts))
 			this.sorts.clear();
 		
 		return this;

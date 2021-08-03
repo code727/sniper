@@ -20,9 +20,6 @@ package org.sniper.codec.encoder;
 
 import java.io.CharArrayWriter;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.nio.charset.IllegalCharsetNameException;
-import java.nio.charset.UnsupportedCharsetException;
 //import java.security.AccessController;
 import java.util.BitSet;
 
@@ -90,19 +87,10 @@ public class RawURLEncoder extends CodecSupport implements StringEncoder {
 	public String encode(String message, String encoding) throws UnsupportedEncodingException {
 		boolean needToChange = false;
         StringBuffer out = new StringBuffer(message.length());
-        Charset charset;
         CharArrayWriter charArrayWriter = new CharArrayWriter();
 
         if (StringUtils.isBlank(encoding))
         	encoding = getEncoding();
-
-        try {
-            charset = Charset.forName(encoding);
-        } catch (IllegalCharsetNameException e) {
-            throw new UnsupportedEncodingException(encoding);
-        } catch (UnsupportedCharsetException e) {
-            throw new UnsupportedEncodingException(encoding);
-        }
 
         for (int i = 0; i < message.length();) {
             int c = (int) message.charAt(i);
@@ -130,7 +118,7 @@ public class RawURLEncoder extends CodecSupport implements StringEncoder {
 
                 charArrayWriter.flush();
                 String str = new String(charArrayWriter.toCharArray());
-                byte[] ba = str.getBytes(charset);
+                byte[] ba = str.getBytes(encoding);
                 for (int j = 0; j < ba.length; j++) {
                     out.append('%');
                     char ch = Character.forDigit((ba[j] >> 4) & 0xF, 16);

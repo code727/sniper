@@ -30,7 +30,9 @@ import java.util.Map;
  * @author  Daniele
  * @version 1.0
  */
-public class ClassUtils {
+public abstract class ClassUtils {
+	
+	private ClassUtils() {}
 	
 	/** 基本类型集(K:基本类型对象,V:包装类型对象)*/
 	public static final Map<Class<?>, Class<?>> BASE_TYPES = MapUtils.newHashMap(8);
@@ -59,8 +61,6 @@ public class ClassUtils {
 	    WRAPPER_TYPES.put(Short.class, Short.TYPE);
 	    
 	}
-	
-	private ClassUtils() {}
 	
 	/**
 	 * 获取对象的类型

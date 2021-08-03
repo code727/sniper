@@ -37,13 +37,11 @@ import java.nio.channels.FileChannel;
  * @author  Daniele
  * @version 1.0
  */
-public class FileUtils {
+public abstract class FileUtils {
 	
 	/** 文件名扩展标识 */
 	public static final String EXTENSION_SEPERATOR = ".";
 	
-	private FileUtils() {}
-		
 	/**
 	 * 获取指定路径下的文件名
 	 * @author Daniele 

@@ -32,7 +32,7 @@ import org.sniper.commons.kv.KeyValuePair;
  * @author Daniele
  * @version 1.0.0
  */
-public class StringUtils {
+public abstract class StringUtils {
 	
 	/** null字符串 */
 	public static final String NULL = "null";
@@ -102,8 +102,6 @@ public class StringUtils {
 	
 	/** 通配符字符 */
 	public static final char ANY_CHAR = '*';
-	
-	private StringUtils() {}
 	
 	/**
 	 * 判断是否为空字符串

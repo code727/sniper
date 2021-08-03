@@ -23,7 +23,7 @@ package org.sniper.commons.util;
  * @author  Daniele
  * @version 1.0
  */
-public class BooleanUtils {
+public abstract class BooleanUtils {
 	
 	private BooleanUtils() {}
 	

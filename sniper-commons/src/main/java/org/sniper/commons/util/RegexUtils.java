@@ -30,13 +30,11 @@ import org.sniper.commons.enums.logic.RegexEnum;
  * @author  Daniele
  * @version 1.0
  */
-public class RegexUtils {
+public abstract class RegexUtils {
 	
 	/** 表达式与模式关系映射集 */
 	private static final Map<String, Pattern> PATTERNS = MapUtils.newConcurrentHashMap();
 		
-	private RegexUtils() {}
-	
 	/**
 	 * 根据正则表达式获取对应的模式对象
 	 * @author Daniele 

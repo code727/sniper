@@ -26,7 +26,7 @@ import java.util.Map;
  * @author  Daniele
  * @version 1.0.0
  */
-public class AssertUtils {
+public abstract class AssertUtils {
 	
 	private AssertUtils() {}
 	

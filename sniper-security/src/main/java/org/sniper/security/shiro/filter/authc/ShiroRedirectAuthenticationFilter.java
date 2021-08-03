@@ -29,7 +29,7 @@ import org.sniper.security.filter.RedirectAuthenticationFilter;
 import org.sniper.security.shiro.ShiroWebUtils;
 
 /**
- * Shiro 重定向认证过滤器实现类
+ * Shiro重定向认证过滤器实现类
  * @author  Daniele
  * @version 1.0
  */

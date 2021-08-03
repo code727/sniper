@@ -25,9 +25,7 @@ import java.awt.image.BufferedImage;
  * @author  Daniele
  * @version 1.0
  */
-public class ImageUtils {
-	
-	private ImageUtils() {}
+public abstract class ImageUtils {
 	
 	/**
 	 * 判断是否为横向图

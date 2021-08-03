@@ -37,9 +37,7 @@ import java.util.Set;
  * @author  Daniele
  * @version 1.0
  */
-public class PropertiesUtils {
-	
-	private PropertiesUtils() {}
+public abstract class PropertiesUtils {
 	
 	/**
 	 * 判断属性对象是否为空

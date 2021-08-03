@@ -34,7 +34,7 @@ public interface Codec {
 	public String encode(byte[] bytes);
 	
 	/**
-	 * 将原文本按默认字符集进行编码处理
+	 * 将原文本按默认字符集进行编码
 	 * @author Daniele 
 	 * @param text
 	 * @return
@@ -51,7 +51,7 @@ public interface Codec {
 	public String encode(String text, String charsetName);
 	
 	/**
-	 * 将被编码的文本内容按默认字符集进行解码处理
+	 * 将已编码的文本内容按默认字符集进行解码
 	 * @author Daniele 
 	 * @param encodedText
 	 * @return
@@ -59,7 +59,7 @@ public interface Codec {
 	public String decode(String encodedText);
 	
 	/**
-	 * 将被编码的文本内容按指定字符集进行解码处理
+	 * 将已编码的文本内容按指定字符集进行解码
 	 * @author Daniele 
 	 * @param encodedText
 	 * @param charsetName
@@ -68,7 +68,7 @@ public interface Codec {
 	public String decode(String encodedText, String charsetName);
 	
 	/**
-	 * 将被编码的文本内容解码成字节数组
+	 * 将已编码的文本内容解码成字节数组
 	 * @author Daniele 
 	 * @param encodedText
 	 * @return

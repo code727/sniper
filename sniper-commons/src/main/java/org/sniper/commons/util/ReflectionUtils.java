@@ -32,7 +32,7 @@ import java.util.Set;
  * @author  Daniele
  * @version 1.0
  */
-public class ReflectionUtils {
+public abstract class ReflectionUtils {
 	
 	/** Setter方法前缀 */
 	public static final String SETTER_PREFIX = "set";
@@ -42,8 +42,6 @@ public class ReflectionUtils {
 	
 	/** 布尔Getter方法前缀 */
 	public static final String BOOLEAN_GETTER_PREFIX = "is";
-	
-	private ReflectionUtils() {}
 	
 	/**
 	 * 获取对象内所有公有的构造方法

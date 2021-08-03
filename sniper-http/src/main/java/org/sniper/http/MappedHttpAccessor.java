@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sniper.codec.encoder.RawURLEncoder;
 import org.sniper.codec.encoder.StringEncoder;
+import org.sniper.commons.enums.http.HttpMethodEnum;
 import org.sniper.commons.util.MapUtils;
 import org.sniper.commons.util.ReflectionUtils;
 import org.sniper.commons.util.StringUtils;
@@ -166,7 +167,7 @@ public abstract class MappedHttpAccessor extends CheckableInitializingBeanAdapte
 		
 		String methodName = form.getMethod().name();
 		if (StringUtils.isBlank(methodName))
-			methodName = "get";
+			methodName = HttpMethodEnum.GET.name().toLowerCase();
 		
 		String executedMethod = SUPPORT_REQUEST_METHOD.get(methodName.trim().toLowerCase());
 		if (StringUtils.isNotBlank(methodName)) {

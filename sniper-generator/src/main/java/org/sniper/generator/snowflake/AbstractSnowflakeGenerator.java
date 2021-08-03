@@ -32,7 +32,7 @@ import org.sniper.generator.sequence.TimestampInternalSequence;
  */
 public abstract class AbstractSnowflakeGenerator<T> extends AbstractGenerator<T> {
 	
-	/** 相对的开始时间截，一旦投入使用，不要再修改此值 */
+	/** 相对的开始时间截，一旦投入使用，不能再修改此值 */
 	protected final long twepoch = DateUtils.stringToMillis("2018-10-01 00:00:00");
 	
     /** 机器id所占的位数 */

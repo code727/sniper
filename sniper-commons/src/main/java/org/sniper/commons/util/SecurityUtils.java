@@ -27,7 +27,7 @@ import java.security.NoSuchAlgorithmException;
  * @author  Daniele
  * @version 1.0
  */
-public class SecurityUtils {
+public abstract class SecurityUtils {
 	
 	/** MD5算法名称 */
 	public static final String MD5_ALGORITHM_NAME = "MD5";
@@ -40,8 +40,6 @@ public class SecurityUtils {
 	
 	/** RSA算法名称 */
 	public static final String RSA_ALGORITHM_NAME = "RSA";
-	
-	private SecurityUtils() {}
 	
 	/**
 	 * 按指定算法生成明文的摘要

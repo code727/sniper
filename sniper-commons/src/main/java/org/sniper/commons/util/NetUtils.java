@@ -37,16 +37,18 @@ import java.util.StringTokenizer;
  */
 public class NetUtils {
 	
+	private NetUtils() {}
+	
 	/** HTTP协议 */
 	public static final String HTTP_PROTOCOL = "http";
 	
 	/** HTTPS协议 */
 	public static final String HTTPS_PROTOCOL = "https";
 	
-	/** 默认HTTP协议80端口 */
+	/** 默认HTTP协议端口号(80) */
 	public static final int DEFAULT_HTTP_PORT = 80;
 	
-	/** 默认HTTPS协议443端口 */
+	/** 默认HTTPS协议端口号(443) */
 	public static final int DEFAULT_HTTPS_PORT = 443;
 	
 	/** 最小端口号 */
@@ -64,8 +66,6 @@ public class NetUtils {
 	/** 回送地址 */
 	public static final String LOOPBACK_ADDRESS = "127.0.0.1";
 	 
-	private NetUtils() {}
-	
 	/**
 	 * 获取本机的IP地址
 	 * @author Daniele 

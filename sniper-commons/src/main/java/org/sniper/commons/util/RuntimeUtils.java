@@ -26,15 +26,13 @@ import java.lang.management.RuntimeMXBean;
  * @author  Daniele
  * @version 1.0
  */
-public class RuntimeUtils {
+public abstract class RuntimeUtils {
 	
 	public static final RuntimeMXBean RUNTIME_MXBEAN;
 	
 	static {
 		RUNTIME_MXBEAN = ManagementFactory.getRuntimeMXBean();
 	}
-	
-	private RuntimeUtils(){}
 	
 	/**
 	 * 获取本机JVM运行时的PID

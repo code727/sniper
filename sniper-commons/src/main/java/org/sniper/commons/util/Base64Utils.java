@@ -25,7 +25,9 @@ import java.io.UnsupportedEncodingException;
  * @author  Daniele
  * @version 1.0
  */
-public class Base64Utils {
+public abstract class Base64Utils {
+	
+	private Base64Utils() {}
 	
 	static private final int BASELENGTH = 128;
 	static private final int LOOKUPLENGTH = 64;
@@ -80,10 +82,8 @@ public class Base64Utils {
         return (octect < BASELENGTH && base64Alphabet[octect] != -1);
     }
     
-    private Base64Utils() {}
-    
     /**
-     * 将原文本按默认字符集进行编码处理
+     * 将原文本按默认字符集进行编码
      * @author Daniele 
      * @param text
      * @return
@@ -93,7 +93,7 @@ public class Base64Utils {
     }
     
     /**
-     * 将原文本按指定字符集格式进行编码处理
+     * 将原文本按指定字符集格式进行编码
      * @author Daniele 
      * @param text
      * @param charsetName
@@ -110,7 +110,7 @@ public class Base64Utils {
     }
     
     /**
-     * 对字节数组进行编码处理
+     * 对字节数组进行编码
      * @author Daniele 
      * @param bytes
      * @return
@@ -177,7 +177,7 @@ public class Base64Utils {
     }
     
     /**
-     * 将被编码的文本内容按默认字符集进行解码处理
+     * 将已编码的文本内容按默认字符集进行解码
      * @author Daniele 
      * @param encodedText
      * @return
@@ -187,7 +187,7 @@ public class Base64Utils {
     }
     
     /**
-     * 将被编码的文本内容按指定字符集进行解码处理
+     * 将已编码的文本内容按指定字符集进行解码
      * @author Daniele 
      * @param encodedText
      * @param charsetName
@@ -203,7 +203,7 @@ public class Base64Utils {
     }
         
     /**
-     * 将被编码的文本内容解码成字节数组
+     * 将已编码的文本内容解码成字节数组
      * @author Daniele 
      * @param encodedText
      * @return

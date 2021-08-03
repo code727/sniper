@@ -26,9 +26,7 @@ import java.nio.channels.Channel;
  * @author  Daniele
  * @version 1.0
  */
-public class NIOUtils {
-	
-	private NIOUtils() {}
+public abstract class NIOUtils {
 	
 	/**
 	 * 关闭通道

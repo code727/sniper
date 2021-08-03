@@ -32,7 +32,7 @@ public class URLEncoder extends CodecSupport implements StringEncoder {
 
 	@Override
 	public String encode(String message) throws UnsupportedEncodingException {
-		return this.encode(message, null);
+		return encode(message, null);
 	}
 
 	@Override

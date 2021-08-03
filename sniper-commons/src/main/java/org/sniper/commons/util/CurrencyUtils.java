@@ -28,15 +28,13 @@ import org.sniper.commons.enums.financial.CurrencyEnum;
  * @author  Daniele
  * @version 1.0
  */
-public class CurrencyUtils {
+public abstract class CurrencyUtils {
 	
 	/** 国际货币格式 */
 	public static final String CURRENCY_FORMAT = "#,##0.00";
 	
 	/** 元角分货币格式 */
 	public static final String YUANJIAOFEN_FORMAT = "0.00";
-	
-	private CurrencyUtils() {}
 	
 	/**
 	 * 将字符的ASCII码转化为指定货币格式的字符串

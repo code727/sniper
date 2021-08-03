@@ -31,7 +31,7 @@
 		</property>
     </bean>
     
-    <bean id="jsonResponseHandler" class="org.sniper.http.handler.response.typed.SniperJsonResponseHandler" />
+    <bean id="jsonResponseHandler" class="org.sniper.http.handler.response.typed.JsonResponseHandler" />
 	
 	<bean id="formRegister" class="org.sniper.http.form.DefaultHttpFormRegister">
 		<property name="formMap">
@@ -56,7 +56,7 @@
 		<property name="address" value="http://localhost:8080/snipersite" />
 		<property name="action" value="/test/get/{id}/{name}/{birthday}" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
-		<property name="targetType" value="org.sniper.commons.response.FullResponse" />
+		<property name="targetType" value="org.sniper.commons.response.Response" />
 		<property name="nestedType" value="org.snipersite.domain.Developer" />
 	</bean>
 	
@@ -65,7 +65,7 @@
 		<property name="address" value="http://localhost:8080/snipersite" />
 		<property name="action" value="/test/post/bean" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
-		<property name="targetType" value="org.sniper.commons.response.FullResponse" />
+		<property name="targetType" value="org.sniper.commons.response.Response" />
 		<property name="nestedType" value="org.snipersite.domain.Developer" /> 
 	</bean>
 	
@@ -74,7 +74,7 @@
 		<property name="address" value="http://localhost:8080/snipersite" />
 		<property name="action" value="/test/post/list/bean" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
-		<property name="targetType" value="org.sniper.commons.response.FullResponse" />
+		<property name="targetType" value="org.sniper.commons.response.Response" />
 		<property name="nestedType" value="org.snipersite.domain.Developer" /> 
 	</bean>
 	
@@ -83,7 +83,7 @@
 		<property name="address" value="http://localhost:8080/snipersite" />
 		<property name="action" value="/test/post/array/bean" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
-		<property name="targetType" value="org.sniper.commons.response.FullResponse" />
+		<property name="targetType" value="org.sniper.commons.response.Response" />
 		<property name="nestedType" value="[Lorg.snipersite.domain.Developer;" /> 
 	</bean>
 	
@@ -92,7 +92,7 @@
 		<property name="address" value="org.sniper.http.form.SimpleHttpForm" />
 		<property name="action" value="/test/post/list" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
-		<property name="targetType" value="org.sniper.commons.response.FullResponse" />
+		<property name="targetType" value="org.sniper.commons.response.Response" />
 	</bean>
 	
 	<bean id="postArray" class="org.sniper.http.form.SimpleHttpForm">
@@ -100,7 +100,7 @@
 		<property name="address" value="http://localhost:8080/snipersite" />
 		<property name="action" value="/test/post/array" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
-		<property name="targetType" value="org.sniper.commons.response.FullResponse" />
+		<property name="targetType" value="org.sniper.commons.response.Response" />
 		<property name="nestedType" value="[Ljava.lang.String;" /> 
 	</bean>
 	
@@ -109,7 +109,7 @@
 		<property name="address" value="http://localhost:8080/snipersite" />
 		<property name="action" value="/test/post/body/bean" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
-		<property name="targetType" value="org.sniper.commons.response.FullResponse" />
+		<property name="targetType" value="org.sniper.commons.response.Response" />
 		<property name="nestedType" value="org.snipersite.domain.Developer" /> 
 	</bean>
 	
@@ -118,7 +118,7 @@
 		<property name="address" value="http://localhost:8080/snipersite" />
 		<property name="action" value="/test/post/upload" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
-		<property name="targetType" value="org.sniper.commons.response.MessageResponse" />
+		<property name="targetType" value="org.sniper.commons.response.Response" />
 	</bean>
 	
 	<bean id="postUploads" class="org.sniper.http.form.SimpleHttpForm">
@@ -126,7 +126,7 @@
 		<property name="address" value="http://localhost:8080/snipersite" />
 		<property name="action" value="/test/post/uploads" />
 		<property name="responseHandler" ref="jsonResponseHandler" />
-		<property name="targetType" value="org.sniper.commons.response.FullResponse" />
+		<property name="targetType" value="org.sniper.commons.response.Response" />
 		<property name="nestedType" value="org.snipersite.domain.Developer" />
 	</bean>
 		

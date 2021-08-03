@@ -29,6 +29,7 @@ import org.sniper.generator.AbstractParameterizeGenerator;
  * 短链接生成器实现类，算法思路：</p>
  * 1.将给定的字符串（长链接）先转换为32位的一个MD5字符串；</p>
  * 2.将上面的MD5字符串分为4段处理，每段的长度为8，4段分别为M、N、O、P；</p>
+ * 
  * 3.可以将M字符串当作一个16进制格式的数字来处理，将其转换为一个Long类型。比如转换为L；</p>
  * 4.此时L的二进制有效长度为32位，需要将前面两位去掉，留下30位，可以进行位操作(&0x3fffffff)得到想要的结果；</p>
  * 5.此时L的二进制有效长度为30位，分为6段处理，每段的长度为5；</p>
@@ -101,5 +102,5 @@ public class ShortLinkGenerator extends AbstractParameterizeGenerator<Object, St
 		
 		return results;
 	}
-		
+			
 }

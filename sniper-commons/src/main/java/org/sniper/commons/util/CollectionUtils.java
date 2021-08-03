@@ -45,13 +45,13 @@ import java.util.concurrent.SynchronousQueue;
  * @author  Daniele
  * @version 1.0.0
  */
-public class CollectionUtils {
+public abstract class CollectionUtils {
 	
 	private CollectionUtils() {}
 	
 	/**
 	 * 判断集合是否为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele
 	 * @param collection
 	 * @return 
 	 */
@@ -61,7 +61,7 @@ public class CollectionUtils {
 	
 	/**
 	 * 判断集合是否不为空
-	 * @author <a href="mailto:code727@gmail.com">杜斌(sniper)</a> 
+	 * @author Daniele
 	 * @param collection
 	 * @return 
 	 */
@@ -543,9 +543,9 @@ public class CollectionUtils {
 	 * @author Daniele 
 	 * @param collection
 	 */
-	public static void removeDuplication(Collection<?> collection) {
+	public static void removeDuplicated(Collection<?> collection) {
 		if (isNotEmpty(collection) && !(collection instanceof Set)) {
-			
+//			collection.stream().distinct().collect(Collectors.toList());
 			// 记录已被迭代过的集合元素
 			LinkedHashSet<Object> iterated = newLinkedHashSet();
 			Object element;
@@ -561,7 +561,7 @@ public class CollectionUtils {
 			}
 		}
 	}
-	
+		
 	/**
 	 * 求两集合的并集
 	 * @author Daniele 
@@ -672,7 +672,7 @@ public class CollectionUtils {
 	 */
 	public static List<?> intersectionUnique(Collection<?> c1, Collection<?> c2) {
 		List<?> list = intersection(c1, c2);
-		removeDuplication(list);
+		removeDuplicated(list);
 		return list;
 	}
 	
@@ -719,7 +719,7 @@ public class CollectionUtils {
 	 */
 	public static List<?> subtractUnique(Collection<?> c1, Collection<?> c2) {
 		List<?> list = subtract(c1, c2);
-		removeDuplication(list);
+		removeDuplicated(list);
 		return list;
 	}
 	

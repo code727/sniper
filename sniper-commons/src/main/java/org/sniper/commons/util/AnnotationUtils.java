@@ -31,10 +31,10 @@ import org.sniper.commons.kv.KeyValuePair;
  * @author  Daniele
  * @version 1.0
  */
-public class AnnotationUtils {
+public abstract class AnnotationUtils {
 	
 	private AnnotationUtils() {}
-	
+		
 	/**
 	 * 判断当前对象是否已被注解。</P>
 	 * 1.此方法的实现原理为：在当前对象类型的层次结构中获取注解组，直到在某一层次中获取到的注解组不为空时，表明当前对象已被注解。</P>

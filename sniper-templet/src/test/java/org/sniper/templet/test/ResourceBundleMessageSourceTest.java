@@ -64,11 +64,11 @@ public class ResourceBundleMessageSourceTest extends BaseTestCase {
 	
 	@Test
 	public void test() {
-		testResponseStatusEnum();
+//		testResponseStatusEnum();
 //		testHttpStatusEnum();
 		
-//		testResponseStatusEnum(ResponseStatusEnum.PARAM_NOT_EMPTY, "用户名");
-//		testResponseStatusEnum(ResponseStatusEnum.PARAM_MUST_LESS_THAN_EQUALS_EXPECTED, "开始时间", "结束时间");
+		testResponseStatusEnum(ResponseStatusEnum.PARAM_NOT_EMPTY, "用户名");
+		testResponseStatusEnum(ResponseStatusEnum.PARAM_MUST_LESS_THAN_EQUALS_EXPECTED, "开始时间", "结束时间");
 	}
 	
 	protected void testResponseStatusEnum(Responsible<?> responsive, Object... params) {

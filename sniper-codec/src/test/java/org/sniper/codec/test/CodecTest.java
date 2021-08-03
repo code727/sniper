@@ -30,7 +30,7 @@ import org.sniper.commons.util.CollectionUtils;
 import org.sniper.test.junit.BaseTestCase;
 
 /**
- * @description
+ * 编码/解码器单元测试类
  * @author  Daniele
  * @version 1.0
  */
@@ -38,7 +38,7 @@ public class CodecTest extends BaseTestCase {
 	
 	private Codec codec;
 	
-	private String text = "dub727@163.com";
+	private String text = "Daniele.De.Rossi";
 	
 	@Test
 	public void testBase64Codec() {
@@ -47,15 +47,15 @@ public class CodecTest extends BaseTestCase {
 		String decodedText = codec.decode(encodedText);
 		
 		assertEquals(text, decodedText);
-		System.out.println("Base编码:" + encodedText);
-		System.out.println("Base解码:" + decodedText);
+		System.out.println("Base64编码:" + encodedText);
+		System.out.println("Base64解码:" + decodedText);
 	}
 	
 	@Test
 	public void testHexCodec() {
 		codec = new HexCodec();
 		String encodedText = codec.encode(text, CodecUtils.GBK_ENCODING);
-		String decodedText = codec.decode(encodedText,CodecUtils.GBK_ENCODING);
+		String decodedText = codec.decode(encodedText, CodecUtils.GBK_ENCODING);
 		
 		assertEquals(text, decodedText);
 		System.out.println("16进制编码:" + encodedText);
@@ -77,5 +77,5 @@ public class CodecTest extends BaseTestCase {
 		System.out.println("复合编码:" + encodedText);
 		System.out.println("复合解码:" + decodedText);
 	}
-	
+		
 }
